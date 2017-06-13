@@ -34,10 +34,10 @@ The second one will release the packages
 
 ## How to configure your project
 
-First you need to install the commit-release-manager package in your  project
+First you need to install the @sui/mono package in your  project
 
 ```
-npm i --save-dev @schibstedspain/commit-release-manager
+npm i --save-dev @sui/mono
 ```
 
 Then, configure your package.json
@@ -50,7 +50,7 @@ Here's a full example of the options
 
 ```
 "config": {
-  "commit-release-manager": {
+  "sui-mono": {
     "access": "public",
     "packagesFolder": "test/components",
     "deepLevel": 2,
@@ -61,7 +61,7 @@ Here's a full example of the options
     ]
   },
   "validate-commit-msg": {
-    "types": "../../@schibstedspain/commit-release-manager/src/types.json"
+    "types": "../../@sui/mono/src/types.json"
   },
   "validate-commit-msg": {
     "types": "../../../src/types.json"

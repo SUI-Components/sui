@@ -10,10 +10,6 @@
     "build": "echo \"building...\"",
     "phoenix": "rm -Rf node_modules && npm it"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SUI-Components/commit-release-manager.git"
-  },
   "keywords": [
     "schibsted",
     "commitizen",
@@ -21,10 +17,6 @@
   ],
   "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SUI-Components/commit-release-manager/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/commit-release-manager/crm#readme",
   "devDependencies": {},
   "dependencies": {
     "commander": "2.9.0",
@@ -36,7 +28,7 @@
     "validate-commit-msg": "2.12.1"
   },
   "config": {
-    "commit-release-manager": {
+    "sui-mono": {
       "customScopes": [
         "check",
         "commit",
