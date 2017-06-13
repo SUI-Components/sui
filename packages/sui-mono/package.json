@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/commit-release-manager",
+  "name": "@sui/mono",
   "version": "0.6.0",
   "description": "Commit and release manager",
   "main": "index.js",

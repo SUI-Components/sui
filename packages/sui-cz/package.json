@@ -1,5 +1,5 @@
 {
-  "name": "cz-crm",
+  "name": "@sui/cz",
   "version": "0.3.0",
   "description": "Commitizen adapter for commit-release-manager",
   "main": "index.js",
