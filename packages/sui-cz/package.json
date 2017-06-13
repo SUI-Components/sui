@@ -1,15 +1,11 @@
 {
   "name": "@sui/cz",
   "version": "0.3.0",
-  "description": "Commitizen adapter for commit-release-manager",
+  "description": "Commitizen adapter for sui packages",
   "main": "index.js",
   "scripts": {
     "build": "echo \"building...\"",
     "phoenix": "rm -Rf node_modules && npm it"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SUI-Components/commit-release-manager.git"
   },
   "keywords": [
     "schibsted",
@@ -18,10 +14,6 @@
   ],
   "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SUI-Components/commit-release-manager/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/commit-release-manager/cz-crm#readme",
   "devDependencies": {},
   "dependencies": {
     "editor": "1.0.0",

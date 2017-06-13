@@ -8,8 +8,8 @@ const package = require(path.join(basePath, 'package.json'))
 function getOrDefault(key, defaultValue) {
   return (
     package.config &&
-    package.config['commit-release-manager'] &&
-    package.config['commit-release-manager'][key]
+    package.config['sui-mono'] &&
+    package.config['sui-mono'][key]
   ) || defaultValue
 }
 
