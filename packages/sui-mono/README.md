@@ -15,7 +15,7 @@ It also provides two tools for checking if any release is required or to perform
 You do your normal git workflow, but when commiting you should use:
 
 ```
-crm commit
+sui-mono commit
 ```
 
 ### Release
@@ -23,9 +23,9 @@ crm commit
 In order to release the steps normally are:
 
 ```
-crm check
+sui-mono check
 
-crm release
+sui-mono release
 ```
 
 The first one will provide information if anything requires a release.

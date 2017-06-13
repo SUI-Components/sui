@@ -4,7 +4,7 @@
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
-    "crm": "./bin/crm.js"
+    "sui-mono": "./bin/sui-mono.js"
   },
   "scripts": {
     "build": "echo \"building...\"",
