@@ -1,8 +1,7 @@
 {
   "name": "@sui/sui",
   "version": "1.0.0",
-  "description": "SUI (Schibsted User Interface) related packages monorepo.",
-  "main": "index.js",
+  "description": "Monorepo for SUI (Schibsted User Interface) related packages .",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
