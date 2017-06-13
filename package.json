@@ -7,7 +7,9 @@
     "monorepo",
     "sui"
   ],
-  "scripts": {},
+  "scripts": {
+    "co": "./packages/sui-mono/bin/sui-mono.js commit"
+  },
   "author": "David Almeida <davidbarna@gmail.com>",
   "repository": {
     "type": "git",
