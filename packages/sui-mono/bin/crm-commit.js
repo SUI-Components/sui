@@ -6,6 +6,6 @@ bootstrap({
   debug: false,
   cliPath: path.join(process.cwd(), 'node_modules/commitizen'),
   config: {
-    path: 'cz-crm'
+    path: './node_modules/@sui/cz'
   }
 });
