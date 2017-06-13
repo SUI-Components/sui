@@ -1,10 +1,21 @@
 {
-  "name": "@sui/sui",
-  "version": "1.0.0",
-  "description": "Monorepo for SUI (Schibsted User Interface) related packages .",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@schibstedspain/sui",
+  "version": "0.0.0",
+  "description": "Monorepo for SUI (Schibsted User Interface) packages.",
+  "keywords": [
+    "schibsted",
+    "monorepo",
+    "sui"
+  ],
+  "scripts": {},
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github.com/SUI-Components/sui.git"
   },
-  "author": "",
+  "bugs": {
+    "url": "https://github.com/github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/github.com/SUI-Components/sui/cz-crm#readme",
   "license": "ISC"
 }
