@@ -23,5 +23,5 @@ This repo should be migrated to https://github.com/sui/sui as well.
 | @sui/mono-cz | @schibstedspain/sui-mono-cz | cz-crm |
 | @sui/rosetta or @sui/i18n | N/A | @schibstedspain/rosetta |
 | @sui/ssr | N/A | @schibstedspain/ssr |
-| @sui/decorator-cache or @sui/decorator-streamify | N/A | @schibstedspain/cv-decorators |
+| @sui/decorator-cache and @sui/decorator-streamify | N/A | @schibstedspain/cv-decorators |
 | @sui/react-domain-connector | N/A | @schibstedspain/ddd-react-redux |
