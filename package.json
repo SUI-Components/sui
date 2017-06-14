@@ -11,11 +11,11 @@
   "author": "David Almeida <davidbarna@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github.com/SUI-Components/sui.git"
+    "url": "git+https://github.com/SUI-Components/sui.git"
   },
   "bugs": {
-    "url": "https://github.com/github.com/SUI-Components/sui/issues"
+    "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/github.com/SUI-Components/sui/cz-crm#readme",
+  "homepage": "https://github.com/SUI-Components/sui/#readme",
   "license": "ISC"
 }
