@@ -1,6 +1,6 @@
 {
-  "name": "@sui/mono",
-  "version": "0.6.0",
+  "name": "@schibstedspain/sui-mono",
+  "version": "1.0.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
@@ -41,5 +41,13 @@
     "validate-commit-msg": {
       "types": "../../../src/types.json"
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mono#readme"
 }
