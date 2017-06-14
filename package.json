@@ -8,7 +8,18 @@
     "sui"
   ],
   "scripts": {
-    "co": "./packages/sui-mono/bin/sui-mono.js commit"
+    "commit": "sui-mono commit",
+    "release": "sui-mono release",
+    "release:check": "sui-mono check"
+  },
+  "devDependencies": {
+    "@schibstedspain/sui-mono": "1.0"
+  },
+  "config": {
+    "sui-mono": {
+      "access": "public",
+      "packagesFolder": "./packages"
+    }
   },
   "author": "David Almeida <davidbarna@gmail.com>",
   "repository": {
