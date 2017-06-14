@@ -19,7 +19,7 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "@sui/cz": "0.0.2",
+    "@schibstedspain/sui-cz": "1.0",
     "commander": "2.9.0",
     "commitizen": "2.8.6",
     "conventional-changelog": "1.1.0",
