@@ -7,8 +7,7 @@
     "sui-mono": "./bin/sui-mono.js"
   },
   "scripts": {
-    "build": "echo \"building...\"",
-    "phoenix": "rm -Rf node_modules && npm it"
+    "phoenix": "rm -Rf node_modules && npm i"
   },
   "keywords": [
     "schibsted",
@@ -22,25 +21,7 @@
     "@schibstedspain/sui-cz": "1.0",
     "commander": "2.9.0",
     "commitizen": "2.8.6",
-    "conventional-changelog": "1.1.0",
-    "cz-conventional-changelog": "1.2.0",
-    "ghooks": "1.3.2",
-    "validate-commit-msg": "2.12.1"
-  },
-  "config": {
-    "sui-mono": {
-      "customScopes": [
-        "check",
-        "commit",
-        "release"
-      ]
-    },
-    "ghooks": {
-      "commit-msg": "validate-commit-msg"
-    },
-    "validate-commit-msg": {
-      "types": "../../../src/types.json"
-    }
+    "conventional-changelog": "1.1.0"
   },
   "repository": {
     "type": "git",
