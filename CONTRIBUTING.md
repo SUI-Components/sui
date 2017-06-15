@@ -69,7 +69,7 @@ Some fields are mandatory in every `package.json`:
 
 ### Reporting A Bug
 
-Bugs are tracked as [GitHub issues](https://github.com/SUI-Components/sui/issues/). An [issue template](ISSUE_TEMPLATE.md) is already configured to guide you.
+Bugs are tracked as [GitHub issues](https://github.com/SUI-Components/sui/issues/). An [issue template](.github/ISSUE_TEMPLATE.md) is already configured to guide you.
 
 **Please add name of the package into brackets in the title**.
 
@@ -78,7 +78,7 @@ Example: "[sui-mono] Add run-all command"
 ### Suggesting Enhancements
 
 Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com/features/issues/).
-Same [issue template](ISSUE_TEMPLATE.md) is used. Adapt it if necessary.
+Same [issue template](.github/ISSUE_TEMPLATE.md) is used. Adapt it if necessary.
 
 
 ## Additional Notes
