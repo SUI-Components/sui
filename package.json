@@ -10,15 +10,21 @@
   "scripts": {
     "commit": "sui-mono commit",
     "release": "sui-mono release",
-    "release:check": "sui-mono check"
+    "release:check": "sui-mono check",
+    "commitmsg": "validate-commit-msg"
   },
   "devDependencies": {
-    "@schibstedspain/sui-mono": "1.0"
+    "@schibstedspain/sui-mono": "1.1",
+    "husky": "0.13.4",
+    "validate-commit-msg": "2.12.2"
   },
   "config": {
     "sui-mono": {
       "access": "public",
       "packagesFolder": "./packages"
+    },
+    "validate-commit-msg": {
+      "types": "@schibstedspain/sui-mono/src/types"
     }
   },
   "author": "David Almeida <davidbarna@gmail.com>",
