@@ -61,11 +61,8 @@ Here's a full example of the options
     ]
   },
   "validate-commit-msg": {
-    "types": "../../@sui/mono/src/types.json"
+    "types": "@schibstedspain/sui-mono/src/types"
   },
-  "validate-commit-msg": {
-    "types": "../../../src/types.json"
-  }
 }
 ```
 
