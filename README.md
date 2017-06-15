@@ -12,16 +12,15 @@ This repo should be migrated to https://github.com/sui/sui as well.
 
 | Final name | Temporary name | Origin |
 | -- | -- | -- |
-| @sui/dependencies| N/A | @schibstedspain/suistudio-fatigue-deps |
-| @sui/dev-dependencies | N/A | @schibstedspain/suistudio-fatigue-dev |
-| @sui/babel-preset | N/A | babel-preset-schibsted-spain |
+| @sui/component-dependencies| N/A | @schibstedspain/suistudio-fatigue-deps |
+| @sui/babel-preset-sui | N/A | babel-preset-schibsted-spain |
 | @sui/lint | N/A | @schibstedspain/linting-rules |
 | @sui/precommit | N/A | @schibstedspain/frontend-pre-commit-rules |
-| @sui/components-studio | N/A | @schibstedspain/sui-studio |
-| @sui/webpack-build | N/A | @schibstedspain/suistudio-webpack |
+| @sui/studio | N/A | @schibstedspain/sui-studio |
+| @sui/bundler | N/A | @schibstedspain/suistudio-webpack |
 | @sui/mono | @schibstedspain/sui-mono | @schibstedspain/commit-release-manager |
-| @sui/mono-cz | @schibstedspain/sui-mono-cz | cz-crm |
-| @sui/rosetta or @sui/i18n | N/A | @schibstedspain/rosetta |
+| @sui/cz | @schibstedspain/sui-cz | cz-crm |
+| @sui/i18n | N/A | @schibstedspain/rosetta |
 | @sui/ssr | N/A | @schibstedspain/ssr |
-| @sui/decorator-cache and @sui/decorator-streamify | N/A | @schibstedspain/cv-decorators |
+| @sui/decorators | N/A | @schibstedspain/cv-decorators |
 | @sui/react-domain-connector | N/A | @schibstedspain/ddd-react-redux |
