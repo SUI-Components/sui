@@ -1,0 +1,31 @@
+{
+  "name": "@schibstedspain/sui-cz",
+  "version": "1.0.0",
+  "description": "Commitizen adapter for sui packages",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo \"building...\"",
+    "phoenix": "rm -Rf node_modules && npm it"
+  },
+  "keywords": [
+    "schibsted",
+    "commitizen",
+    "adapter"
+  ],
+  "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "editor": "1.0.0",
+    "temp": "0.8.3",
+    "word-wrap": "1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-cz#readme"
+}
