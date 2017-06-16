@@ -7,7 +7,7 @@ const CONFIG_PATH = resolve(__dirname, '..', 'sass-lint.yml')
 
 const [node, bin, ...args] = process.argv
 if(args.find(arg => arg === '-c')) {
-  console.log('[linting-rules-sass] Dont use your own config file. Remove `-c` flag')
+  console.log('[sui-lint-sass] Dont use your own config file. Remove `-c` flag')
   process.exit(1)
 }
 

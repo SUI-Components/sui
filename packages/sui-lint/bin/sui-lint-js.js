@@ -7,7 +7,7 @@ const CONFIG_PATH = resolve(__dirname, '..', 'eslintrc.js')
 
 const [node, bin, ...args] = process.argv
 if(args.find(arg => arg === '-c')) {
-  console.log('[linting-rules-js] Dont use your own config file. Remove `-c` flag')
+  console.log('[sui-lint-js] Dont use your own config file. Remove `-c` flag')
   process.exit(1)
 }
 
