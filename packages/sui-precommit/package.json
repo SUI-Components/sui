@@ -4,6 +4,7 @@
   "description": "Installs a git hook that executes sui commit rules",
   "main": "index.js",
   "scripts": {
+    "build": "echo \"building...\"",
     "install": "./install.js"
   },
   "keywords": [],
