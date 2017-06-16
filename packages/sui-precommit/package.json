@@ -1,16 +1,16 @@
 {
-  "name": "@schibstedspain/frontend-pre-commit-rules",
-  "version": "8.0.0",
-  "description": "",
+  "name": "@schibstedspain/sui-precommit",
+  "version": "1.0.0",
+  "description": "Installs a git hook that executes sui commit rules",
   "main": "index.js",
   "scripts": {
     "install": "./install.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@schibstedspain/linting-rules": "1",
+    "@schibstedspain/sui-lint": "1",
     "git-validate": "2.2.2"
   }
 }
