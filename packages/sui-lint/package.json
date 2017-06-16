@@ -4,6 +4,7 @@
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
+    "build": "echo \"building...\"",
     "sui-lint": "./bin/sui-lint.js"
   },
   "scripts": {
