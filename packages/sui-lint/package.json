@@ -1,0 +1,26 @@
+{
+  "name": "@schibstedspain/linting-rules",
+  "version": "1.6.0",
+  "description": "",
+  "main": "./bin/linting-rules.js",
+  "bin": {
+    "linting-rules": "./bin/linting-rules.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-eslint": "7.1.1",
+    "commander": "2.9.0",
+    "eslint": "3.16.1",
+    "eslint-config-standard": "7.0.0",
+    "eslint-config-standard-react": "4.2.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-react": "6.10.0",
+    "eslint-plugin-standard": "2.0.1",
+    "sass-lint": "1.10.2"
+  }
+}
