@@ -6,7 +6,6 @@ const checker = require('../src/check')
 const executer = require('../src/execute')
 
 const BASE_DIR = process.cwd()
-const packagesWithChangelog = config.getScopes()
 
 const packages = config.getScopes()
 const packagesFolder = config.getPackagesFolder()
@@ -28,7 +27,6 @@ const releasesByPackages = (pkg) => {
 const releasesStatus = packages.map(releasesByPackages)
 
 const releaseEachPkg = ({pkg, code} = {}) => {
-
   return new Promise((resolve, reject) => {
     if (code === 0) { return resolve() }
 

@@ -58,4 +58,3 @@ module.exports = {
   check,
   isCommitBreakingChange
 }
-

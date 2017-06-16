@@ -1,6 +1,6 @@
 /* eslint no-console:0 */
-const path = require('path');
-const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap;
+const path = require('path')
+const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
 
 bootstrap({
   debug: false,
@@ -8,4 +8,4 @@ bootstrap({
   config: {
     path: './node_modules/@schibstedspain/sui-cz'
   }
-});
+})

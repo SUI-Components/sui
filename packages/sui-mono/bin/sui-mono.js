@@ -17,6 +17,4 @@ program
 program
   .command('release', 'Release whatever need to be release')
 
-
-
 program.parse(process.argv)

@@ -24,8 +24,8 @@ const serialExecution = (options) => (commands) => seq(commands.map((cmd) => () 
  * Executes the given command in a child process
  */
 const exec = (cmd, options) => new Promise((resolve, reject) => {
-  const child_process = require('child_process')
-  const proc = child_process.spawn(cmd[0], cmd[1], options)
+  const childProcess = require('child_process')
+  const proc = childProcess.spawn(cmd[0], cmd[1], options)
   proc.on('exit', (code) => {
     if (code) {
       reject(new Error('command "' + cmd.join(' ') + '" exited with wrong status code "' + code + '"'))
