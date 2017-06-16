@@ -1,0 +1,16 @@
+{
+  "name": "@schibstedspain/frontend-pre-commit-rules",
+  "version": "8.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "./install.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@schibstedspain/linting-rules": "1",
+    "git-validate": "2.2.2"
+  }
+}
