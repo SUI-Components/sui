@@ -8,7 +8,7 @@
     "sui"
   ],
   "scripts": {
-    "commit": "sui-mono commit",
+    "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
     "commitmsg": "validate-commit-msg"
