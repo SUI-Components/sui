@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@schibstedspain/sui-mono": "1.1",
-    "@schibstedspain/sui-lint": "1.1",
+    "@schibstedspain/sui-lint": "2.0",
     "husky": "0.13.4",
     "validate-commit-msg": "2.12.2"
   },
