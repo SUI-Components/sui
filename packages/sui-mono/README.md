@@ -1,6 +1,6 @@
-# Commmit Release Manager
+# sui-mono
 
-Commit Release manager is our tool in charge of... releases and.. commits...
+A tool in charge of... releases and.. commits...
 
 It will help you release a mono-repo multi-package project.
 We use ComVer as our versioning system
