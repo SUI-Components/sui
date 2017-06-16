@@ -4,10 +4,10 @@
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
-    "build": "echo \"building...\"",
     "sui-mono": "./bin/sui-mono.js"
   },
   "scripts": {
+    "build": "echo \"building...\"",
     "phoenix": "rm -Rf node_modules && npm i"
   },
   "keywords": [
