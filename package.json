@@ -11,10 +11,13 @@
     "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
-    "commitmsg": "validate-commit-msg"
+    "lint": "sui-lint js",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "npm run lint"
   },
   "devDependencies": {
     "@schibstedspain/sui-mono": "1.1",
+    "@schibstedspain/sui-lint": "1.1",
     "husky": "0.13.4",
     "validate-commit-msg": "2.12.2"
   },
@@ -36,5 +39,5 @@
     "url": "https://github.com/SUI-Components/sui/issues"
   },
   "homepage": "https://github.com/SUI-Components/sui/#readme",
-  "license": "ISC"
+  "license": "MIT"
 }
