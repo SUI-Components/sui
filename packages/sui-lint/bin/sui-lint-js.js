@@ -2,7 +2,7 @@
 const {execFile} = require('child_process')
 const {resolve} = require('path')
 
-const ESLINT_PATH = resolve(__dirname, '..', '..', '..', '.bin', 'eslint')
+const ESLINT_PATH = require.resolve('eslint/bin/eslint')
 const CONFIG_PATH = resolve(__dirname, '..', 'eslintrc.js')
 
 const [node, bin, ...args] = process.argv
