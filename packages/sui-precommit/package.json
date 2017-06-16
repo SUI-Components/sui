@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-precommit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Installs a git hook that executes sui commit rules",
   "main": "index.js",
   "scripts": {
