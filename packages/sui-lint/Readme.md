@@ -1,18 +1,34 @@
 # sui-lint
 
-## CLI
-Al instalar este paquete tienes un nuevo comando para poder aplicar las reglas de linting a tus ficheros JS/Sass según el convenio de Schibsted Spain.
+> CLI to lint your code and make it compliant.
 
-Para ficheros JS:
 
+It provides:
+* Same js and sass style of code accross all company
+* Linting rules a reference package, not every  project
+* Implemented as a reusable CLI
+
+
+## Installation
+
+```sh
+$ npm install sui-lint --save-dev
 ```
+
+## CLI
+
+When installed, a new CLI `sui-lint` is automatically available to lint your files according to SUI conventions.
+
+Lint JS files:
+
+```sh
 $ sui-lint js [options]
 ```
 
 Puedes pasarle más misma opciones que acepta `eslint`. Con la única diferencia que no puedes pasar una nueva configuración ya que está fijada a la nuestra.
 Por defecto va a buscar todos los ficheros `js|jsx` desde el root de tu proyecto excluyendo las carpetas `lib|dist`
 
-Para ficheros Sass:
+Lint SASS files:
 
 ```
 $ sui-lint sass [options]
