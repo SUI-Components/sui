@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "echo \"building...\"",
-    "install": "./install.js"
+    "install": "node ./install.js"
   },
   "keywords": [],
   "author": "",
