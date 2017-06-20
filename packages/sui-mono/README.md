@@ -1,6 +1,5 @@
 # sui-mono
-
-A tool in charge of... releases and.. commits...
+> Simple CLI for monorepo/multipackage.
 
 It will help you release a mono-repo multi-package project.
 We use ComVer as our versioning system
@@ -8,7 +7,13 @@ We use ComVer as our versioning system
 It uses comitizen to provide a standard template of commit messages.
 It also provides two tools for checking if any release is required or to perform a release.
 
-## How to use it
+It provides:
+* CLI monorepo multipackages
+* Release manager (parses commits to publish packages according to their changes)
+
+![](./assets/sui-mono-demo.gif)
+
+## Usage
 
 ### Commit
 
