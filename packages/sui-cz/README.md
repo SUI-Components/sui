@@ -1,10 +1,20 @@
 # sui-cz
+> A commitizen adapter for semantic commits.
 
-This is a commitizen adapter for the sui-mono tool and any other packages of sui family
+It provides
+* CLI commit prompt to guide developer on commit messages.
+* Enforcement of semantic commits human-readable and machine- parsable.
+* Parseable commits are used for releases by [sui-mono](../sui-mono)
 
-Is highly inspired in `cz-customizable` adapter. In fact, we would be still using it if commitizen allowed to send configuration in the boostrap.
+It's highly inspired in `cz-customizable` adapter.
 
-## Use sui-cz types with [validate-commit-msg](https://www.npmjs.com/package/validate-commit-msg)
+![](./assets/sui-cz-demo.gif)
+
+
+## Installation/Usage
+
+
+### Use sui-cz types with [validate-commit-msg](https://www.npmjs.com/package/validate-commit-msg)
 
 ```shell
 npm install --save-dev validate-commit-msg
