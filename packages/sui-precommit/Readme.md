@@ -1,24 +1,33 @@
 # sui-precommit
+> Effortless SUI precommit rules integration in your project
 
-Este paquete instala un precommit (GIT) que pasa las tareas de linting para JS y para Sass. Además agrega tres nuevas tareas al paquete de NPM.
+Installs commit hook to ensure quality rules are executed before any commit (test, linting, consistent commit, etc)
+It provides:
+* Assurance that all code is compliant with schibsted's standards
+* Centralize precommit rules;  quality rules can be  improved and seemlessly inherited by all projects.
 
-El paquete de NPM de tu proyecto una vez instalado quedará así:
 
+## Installation
+
+
+```sh
+$ npm install @schibstedspain/sui-precommit --save-dev
 ```
+
+
+## Usage
+
+Once installed, 3 new tasks are added to your project:
+
+```json
 {
-  "name": "test1",
+  "name": "my-package",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint:js": "sui-lint js",
     "lint:sass": "sui-lint sass",
     "lint": "npm run lint:js && npm run lint:sass"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "pre-commit": [
     "lint",
     "test"
