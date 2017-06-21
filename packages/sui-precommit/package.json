@@ -6,9 +6,6 @@
   "bin": {
     "sui-precommit": "./bin/sui-precommit.js"
   },
-  "scripts": {
-    "build": "echo \"building...\""
-  },
   "keywords": [],
   "author": "",
   "license": "MIT",
