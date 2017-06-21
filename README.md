@@ -1,26 +1,27 @@
 # SUI (Schibsted User Interface)
 
-Monorepo to group SUI family packages altogether.
+Monorepo of SUI packages.
 
-## Migration of multiple repositories
+SUI is a set of packages which goal to ease development of sui based components and web packs, providing:
+* Unified stack (and workflow) easily updateable accross all sui based projects.
+* Minification of boilerplate. Boilerplate is tedious and copied code. Hardest to update...
+* Differents tools and services that solve only one problem each.
+* Transparency for developer (changes and improvements have no impact on DX)
+* Facilitates tooling development as asumptions can be made on the stack of each package.
 
-This monorepo was built to migrate current packages in separated repos.
-The current npm scope is `@schibstedspain`, but should be migrated to `@sui`.
-This repo should be migrated to https://github.com/sui/sui as well.
 
-### Migration status of sui packages migration
-
-| Final name | Temporary name | Origin |
-| -- | -- | -- |
-| @sui/component-dependencies| N/A | @schibstedspain/suistudio-fatigue-deps |
-| @sui/babel-preset-sui | N/A | babel-preset-schibsted-spain |
-| @sui/lint | N/A | @schibstedspain/linting-rules |
-| @sui/precommit | N/A | @schibstedspain/frontend-pre-commit-rules |
-| @sui/studio | N/A | @schibstedspain/sui-studio |
-| @sui/bundler | N/A | @schibstedspain/suistudio-webpack |
-| @sui/mono | @schibstedspain/sui-mono | @schibstedspain/commit-release-manager |
-| @sui/cz | @schibstedspain/sui-cz | cz-crm |
-| @sui/i18n | N/A | @schibstedspain/rosetta |
-| @sui/ssr | N/A | @schibstedspain/ssr |
-| @sui/decorators | N/A | @schibstedspain/cv-decorators |
-| @sui/react-domain-connector | N/A | @schibstedspain/ddd-react-redux |
+## Available packages
+| Name | Description |
+| -- | -- |
+| [sui-babel-preset](./packages/sui-babel-preset/README.md) | Develop, maintain and publish your SUI components |
+| [sui-lint](./packages/sui-lint/README.md) | CLI to lint your code and make it compliant |
+| [sui-precommit](./packages/sui-precommit/README.md) | Effortless SUI precommit rules integration in your project |
+| [sui-component-dependencies](./packages/sui-component-dependencies/README.md) | A set of dependencies of all SUI components |
+| [sui-cz](./packages/sui-cz/README.md) | A commitizen adapter for semantic commits |
+| [sui-mono](./packages/sui-mono/README.md) | Simple CLI for monorepo/multipackage |
+| [sui-studio](./packages/sui-studio/README.md) | Develop, maintain and publish your SUI components |
+| [sui-bundler](./packages/sui-bundler/README.md) | Config-free bundler for ES6 React apps |
+| [sui-i18n](./packages/sui-i18n/README.md) | Isomorphic i18n service for browser and node |
+| [sui-react-domain-conector](./packages/sui-react-domain-conector/README.md) | Connect any React component to your domain use cases |
+| [sui-ssr](./packages/sui-ssr/README.md) | Plug SSR to you SUI SPA |
+| [sui-decorators](./packages/sui-decorators/README.md) | Develop, maintain and publish your SUI components |
