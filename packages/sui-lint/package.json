@@ -1,0 +1,28 @@
+{
+  "name": "@schibstedspain/sui-lint",
+  "version": "2.0.0",
+  "description": "Linting CLI for sui packages",
+  "main": "./bin/sui-lint.js",
+  "bin": {
+    "sui-lint": "./bin/sui-lint.js"
+  },
+  "scripts": {
+    "build": "echo \"building...\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "sui-lint js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "babel-eslint": "7.1.1",
+    "commander": "2.9.0",
+    "eslint": "3.16.1",
+    "eslint-config-standard": "7.0.0",
+    "eslint-config-standard-react": "4.2.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-react": "6.10.0",
+    "eslint-plugin-standard": "2.0.1",
+    "sass-lint": "1.10.2"
+  }
+}

@@ -1,24 +1,24 @@
 var wrap = require('word-wrap')
 
-module.exports = function buildCommit(answers) {
+module.exports = function buildCommit (answers) {
   var maxLineWidth = 100
   var wrapOptions = {
     trim: true,
     newline: '\n',
-    indent:'',
+    indent: '',
     width: maxLineWidth
   }
 
-  function addScope(scope) {
+  function addScope (scope) {
     return '(' + scope.trim() + '): '
   }
 
-  function addSubject(subject) {
+  function addSubject (subject) {
     return subject.trim()
   }
 
-  function escapeSpecialChars(result) {
-    var specialChars = ['\`']
+  function escapeSpecialChars (result) {
+    var specialChars = ['`']
 
     specialChars.map(function (item) {
       // For some strange reason, we have to pass additional '\' slash to commitizen. Total slashes are 4.
