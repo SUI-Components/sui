@@ -31,15 +31,18 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     if (code === 0) { return resolve() }
 
     const cwd = path.join(BASE_DIR, packagesFolder, pkg)
+    const scripts = require(path.join(cwd, 'package.json')).scripts || {}
 
-    executer.serialExecution({cwd, stdio: 'inherit'})([
+    let commands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
-      ['npm', ['run', 'build']],
       ['git', ['add', cwd]],
       ['sh', ['-c', `VERSION=$(node -p -e "require('./package.json').version") && git commit -m "release(${pkg}): v$VERSION"`]],
       ['git', ['push', 'origin', 'master']],
       ['npm', ['publish', `--access=${publishAccess}`]]
-    ])
+    ]
+    scripts['build'] && commands.unshift(['npm', ['run', 'build']])
+
+    executer.serialExecution({cwd, stdio: 'inherit'})(commands)
       .then(resolve)
       .catch(reject)
   })
