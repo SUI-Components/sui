@@ -14,7 +14,10 @@ installHuskyIfNotInstalled()
   })
 
 /* eslint-disable no-console */
-function log (...args) { args[0] = '[sui-precommit] ' + args[0]; console.log(...args) }
+function log (...args) {
+  args[0] = '[sui-precommit] ' + args[0]
+  console.log(...args)
+}
 
 /**
  * Installs script on package.json where command was executed
