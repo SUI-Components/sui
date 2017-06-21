@@ -7,8 +7,7 @@
     "sui-mono": "./bin/sui-mono.js"
   },
   "scripts": {
-    "build": "echo \"building...\"",
-    "phoenix": "rm -Rf node_modules && npm i"
+    "build": "echo \"building...\""
   },
   "keywords": [
     "schibsted",
