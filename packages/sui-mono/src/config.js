@@ -7,9 +7,9 @@ const packageConfig = require(path.join(basePath, 'package.json')).config
 
 function getOrDefault (key, defaultValue) {
   return (
-    packageConfig.config &&
-    packageConfig.config['sui-mono'] &&
-    packageConfig.config['sui-mono'][key]
+    packageConfig &&
+    packageConfig['sui-mono'] &&
+    packageConfig['sui-mono'][key]
   ) || defaultValue
 }
 
