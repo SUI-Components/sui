@@ -6,9 +6,6 @@
   "bin": {
     "sui-mono": "./bin/sui-mono.js"
   },
-  "scripts": {
-    "build": "echo \"building...\""
-  },
   "keywords": [
     "schibsted",
     "commitizen",
