@@ -16,8 +16,8 @@
     "precommit": "npm run lint"
   },
   "devDependencies": {
-    "@schibstedspain/sui-mono": "1.1",
-    "@schibstedspain/sui-lint": "2.0",
+    "@schibstedspain/sui-mono": "1",
+    "@schibstedspain/sui-lint": "2",
     "husky": "0.13.4",
     "validate-commit-msg": "2.12.2"
   },
