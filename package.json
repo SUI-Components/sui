@@ -11,13 +11,14 @@
     "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
-    "lint": "sui-lint js",
+    "lint": "sui-lint js && sui-lint sass",
     "commitmsg": "validate-commit-msg",
-    "precommit": "npm run lint"
+    "precommit": "sui-precommit run"
   },
   "devDependencies": {
-    "@schibstedspain/sui-mono": "1",
     "@schibstedspain/sui-lint": "2",
+    "@schibstedspain/sui-mono": "1",
+    "@schibstedspain/sui-precommit": "2",
     "husky": "0.13.4",
     "validate-commit-msg": "2.12.2"
   },

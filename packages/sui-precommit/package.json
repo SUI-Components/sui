@@ -1,17 +1,20 @@
 {
   "name": "@schibstedspain/sui-precommit",
   "version": "1.1.0",
-  "description": "Installs a git hook that executes sui commit rules",
+  "description": "Effortless SUI precommit rules integration in your project",
   "main": "index.js",
+  "bin": {
+    "sui-precommit": "./bin/sui-precommit.js"
+  },
   "scripts": {
-    "build": "echo \"building...\"",
-    "install": "node ./install.js"
+    "build": "echo \"building...\""
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@schibstedspain/sui-lint": "1",
+    "@schibstedspain/sui-lint": "2",
+    "commander": "2.9.0",
     "git-validate": "2.2.2"
   }
 }
