@@ -9,10 +9,10 @@ program
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
-    console.log('    $ suistudio init <project-name>')
-    console.log('    $ suistudio init sui-studio')
-    console.log('    $ suistudio init --help')
-    console.log('    $ suistudio init -h')
+    console.log('    $ sui-studio init <project-name>')
+    console.log('    $ sui-studio init sui-studio')
+    console.log('    $ sui-studio init --help')
+    console.log('    $ sui-studio init -h')
     console.log('')
   })
   .parse(process.argv)
@@ -62,7 +62,7 @@ writeFile(
   "private": true,
   "scripts": {
     "phoenix": "rm -Rf node_modules && npm it",
-    "deploy": "suistudio build && surge public/ -d ${PROJECT_NAME}.surge.sh",
+    "deploy": "sui-studio build && surge public/ -d ${PROJECT_NAME}.surge.sh",
     "co": "git-cz",
     "lint:js": "node_modules/.bin/eslint --ext .js,.jsx src/",
     "lint:sass": "node_modules/.bin/sass-lint src/**/*.scss -c -v",
