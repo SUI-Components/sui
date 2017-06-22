@@ -1,0 +1,31 @@
+{
+  "name": "babel-preset-schibsted-spain",
+  "version": "2.4.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/babel-preset-schibsted-spain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SUI-Components/babel-preset-schibsted-spain/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/babel-preset-schibsted-spain#readme",
+  "dependencies": {
+    "babel-plugin-syntax-dynamic-import": "6.18.0",
+    "babel-plugin-syntax-trailing-function-commas": "6.22.0",
+    "babel-plugin-transform-async-generator-functions": "6.22.0",
+    "babel-plugin-transform-async-to-generator": "6.22.0",
+    "babel-plugin-transform-class-properties": "6.23.0",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.6",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "6.23.0",
+    "react-hot-loader": "3.0.0-beta.6"
+  }
+}
