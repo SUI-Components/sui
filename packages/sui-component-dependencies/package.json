@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-component-dependencies",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A set of dependencies of all SUI components.",
   "keywords": [
     "fatigue",
