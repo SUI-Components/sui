@@ -1,0 +1,31 @@
+.sui-StudioProps {
+  td {
+    padding-bottom: 8px;
+    padding-right: 32px;
+    padding-top: 8px;
+  }
+
+  &-head {
+    color: $c-gray;
+    font-size: $fz-l;
+    font-weight: 100;
+  }
+
+  &-property {
+    color: $c-gray-dark;
+    font-size: $fz-m;
+  }
+
+  &-type {
+    font-family: monospace;
+  }
+
+  &-required {
+    background-color: $c-gray-lightest;
+    color: $c-black;
+    font-size: $fz-s;
+    font-weight: 600;
+    padding: 4px;
+    vertical-align: top;
+  }
+}

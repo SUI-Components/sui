@@ -1,0 +1,48 @@
+.sui-StudioDemo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  &-codeButton {
+    @include floating-button($c-primary, 56px, 72px);
+    @include breakpoint-from(s) {
+      bottom: auto;
+      top: 8px;
+    };
+  }
+
+  &-code {
+    display: none;
+    height: 100vh;
+    max-width: 576px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99998;
+
+    &--open {
+      display: block;
+    }
+  }
+
+  .codeMirror {
+    font-size: 12px;
+    height: 100%;
+
+    pre {
+      white-space: pre-wrap;
+    }
+
+    &-scroll {
+      width: 100%;
+    }
+
+    &-sizer {
+      border-right-width: 0 !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+    }
+  }
+}

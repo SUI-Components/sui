@@ -1,0 +1,17 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $ff-sans-serif;
+  font-size: $fz-body;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}

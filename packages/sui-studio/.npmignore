@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+COMMANDS
+TODOs
+npm-debug.log
+client/public
+.editorconfig
+.eslintrc
+.sass-lint.yml
+.scss-lint.yml

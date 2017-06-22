@@ -1,0 +1,77 @@
+.sui-StudioNav {
+  &-header {
+    align-items: center;
+    display: flex;
+    height: 65px;
+    padding: 16px;
+    text-decoration: none;
+    transition: opacity .3s ease;
+
+    &:hover {
+      opacity: .75;
+    }
+
+    &Title {
+      color: #333;
+      font-size: 18px;
+      font-weight: 100;
+      letter-spacing: -1px;
+      margin: 0;
+      padding-left: 8px;
+    }
+  }
+
+  &-searchInput {
+    @include icon-search($fgc-navbar);
+    background-color: $c-white-light;
+    background-position: 8px 6px;
+    background-size: auto 1em;
+    border: 1px solid $c-gray-lightest;
+    border-radius: 15px;
+    color: #666;
+    font-size: 12px;
+    margin: 0 5%;
+    outline: none;
+    padding: 4px 4px 4px 32px;
+    width: 90%;
+
+    &:focus {
+      @include icon-search($c-gray-light);
+      background-color: $c-white;
+      border: 1px solid $c-gray-light;
+    }
+  }
+
+  &-menu {
+    list-style: none;
+    padding-left: 16px;
+
+    &Link {
+      border-left: 1px solid #e4e4e4;
+      color: $c-gray-dark;
+      display: block;
+      padding: 5px 16px;
+      text-decoration: none;
+      transition: all .3s ease;
+      &:hover {
+        background-color: rgba($c-primary, .05);
+        border-left-color: $c-primary;
+        color: $c-primary;
+      }
+      &--active {
+        background-color: rgba($c-primary, .1);
+        border-left-color: darken($c-primary, 10%);
+        color: darken($c-primary, 10%);
+        pointer-events: none;
+      }
+    }
+
+    &Title {
+      color: $c-gray;
+      font-weight: 100;
+      padding-bottom: 10px;
+      padding-top: 20px;
+      text-transform: uppercase;
+    }
+  }
+}

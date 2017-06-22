@@ -1,0 +1,70 @@
+.sui-Studio {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  &-logo {
+    & > svg {
+      height: auto;
+      width: 32px;
+    }
+  }
+
+  &-sidebar {
+    @include breakpoint-from(s) {
+      flex: 0 0 $w-sidebar;
+      position: relative;
+      transform: translate3d(0, 0, 0);
+    }
+
+    background-color: $c-white;
+    border-right: 1px solid $c-gray-lightest;
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    transform: translate3d(-100%, 0, 0);
+    transition: transform .5s ease-in-out;
+    width: 100%;
+    z-index: 999998;
+
+    &Body {
+      transition: width .25s ease-out;
+      width: $w-sidebar;
+    }
+
+    &--open {
+      display: block;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &-main {
+    background-color: $bgc-main;
+    overflow: auto;
+    width: 100%;
+  }
+}
+
+.sui-StudioNavBar-secondary {
+  background: $c-white;
+  display: flex;
+  flex-direction: row;
+  padding: 0 16px;
+}
+
+.sui-StudioPreview,
+.sui-StudioDocumentation,
+.sui-Studio-readme {
+  padding: 16px;
+}
+
+.sui-Studio-navMenu {
+  @include floating-button($c-primary, 56px, 8px);
+  @include breakpoint-from(s) {
+    display: none;
+  }
+  z-index: 999999;
+}
