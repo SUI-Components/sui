@@ -9,7 +9,6 @@
   },
   "scripts": {
     "phoenix": "rm -Rf node_modules && npm it",
-    "co": "git-cz",
     "up": "updtr --test-stdout --save-exact",
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
