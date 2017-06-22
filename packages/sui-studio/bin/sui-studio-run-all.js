@@ -12,7 +12,8 @@ program
 
 const doTask = (cwd) => {
   const [component, category] = cwd.split('/').reverse()
-  const [command, ...args] = program.args
+  const [command] = program.args
+  const args = process.argv.slice(process.argv.indexOf(command)+1)
   const prefix = `${category}/${component}`
   return new Promise((resolve, reject) => {
     const running = spawn(command, args, {cwd})
