@@ -12,7 +12,7 @@ It provides:
 ## Installation
 
 ```sh
-$ npm install sui-lint --save-dev
+$ npm install @schibstedspain/sui-lint --save-dev
 ```
 
 ## CLI
