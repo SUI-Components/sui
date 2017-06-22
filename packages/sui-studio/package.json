@@ -30,11 +30,6 @@
     "url": "https://github.com/SUI-Components/SUIStudio/issues"
   },
   "homepage": "https://github.com/SUI-Components/SUIStudio#readme",
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
-  },
   "devDependencies": {
     "updtr": "0.2.0"
   },
@@ -62,18 +57,5 @@
       "react",
       "react-dom"
     ]
-  },
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
-  "commit-msg": [
-    "validate-commit-msg"
-  ],
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@schibstedspain/linting-rules/eslintrc.js"
-    ]
-  },
-  "sasslintConfig": "./node_modules/@schibstedspain/linting-rules/sass-lint.yml"
+  }
 }
