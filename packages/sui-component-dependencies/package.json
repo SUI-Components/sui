@@ -1,0 +1,25 @@
+{
+  "name": "@schibstedspain/sui-component-dependencies",
+  "private": true,
+  "version": "1.1.0",
+  "description": "A set of dependencies of all SUI components.",
+  "keywords": [
+    "fatigue",
+    "bundle"
+  ],
+  "author": "Carlos Villuendas <carlosvillu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@schibstedspain/rosetta": "3",
+    "@schibstedspain/theme-basic": "7",
+    "classnames": "2.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-component-dependencies#readme"
+}
