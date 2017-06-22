@@ -1,0 +1,30 @@
+{
+  "name": "babel-preset-sui",
+  "version": "1.1.0",
+  "description": "A preset for all babel-transpiled javascript of the SUI family.",
+  "main": "lib/index.js",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "babel-plugin-syntax-dynamic-import": "6.18.0",
+    "babel-plugin-syntax-trailing-function-commas": "6.22.0",
+    "babel-plugin-transform-async-generator-functions": "6.22.0",
+    "babel-plugin-transform-async-to-generator": "6.22.0",
+    "babel-plugin-transform-class-properties": "6.23.0",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.6",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "6.23.0",
+    "react-hot-loader": "3.0.0-beta.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/babel-preset-sui#readme"
+}

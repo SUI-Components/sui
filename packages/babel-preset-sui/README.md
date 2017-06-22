@@ -1,5 +1,5 @@
 # sui-babel-preset
-> A preset for all babel-trnaspiled JS files.
+> A preset for all babel-transpiled javascript of the SUI family.
 
 It provides:
 * Unified syntax rules.
@@ -8,7 +8,7 @@ It provides:
 ## Installation
 
 ```sh
-$ npm install @schibstedspain/sui-babel-preset --save-dev
+$ npm install babel-preset-sui --save-dev
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ $ npm install @schibstedspain/sui-babel-preset --save-dev
   "name": "my-awesome-package",
   "version": "1.0.0",
   "babel": {
-    "presets": ["schibsted-spain"]
+    "presets": ["sui"]
   }
 }
 ```
@@ -33,7 +33,7 @@ $ npm install @schibstedspain/sui-babel-preset --save-dev
 
 ```json
 {
-  "presets": ["schibsted-spain"]
+  "presets": ["sui"]
 }
 ```
 
