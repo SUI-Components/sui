@@ -5,7 +5,7 @@
   "main": "index.js",
   "preferGlobal": true,
   "bin": {
-    "suistudio": "./bin/suistudio.js"
+    "sui-studio": "./bin/sui-studio.js"
   },
   "scripts": {
     "phoenix": "rm -Rf node_modules && npm it",
