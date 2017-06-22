@@ -34,6 +34,7 @@
     "updtr": "0.2.0"
   },
   "dependencies": {
+    "@schibstedspain/sui-mono": "1",
     "@schibstedspain/suistudio-fatigue-dev": "github:SUI-Components/suistudio-fatigue-dev",
     "babel-standalone": "6.12.0",
     "bundle-loader": "0.5.4",
@@ -57,5 +58,11 @@
       "react",
       "react-dom"
     ]
+  },
+  "config": {
+    "sui-mono": {
+      "access": "public",
+      "packagesFolder": "./components"
+    }
   }
 }
