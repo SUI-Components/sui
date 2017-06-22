@@ -1,6 +1,7 @@
 const path = require('path')
 const readdirSync = require('fs').readdirSync
 const statSync = require('fs').statSync
+const argv = require('yargs').argv
 
 const basePath = process.cwd()
 const packageConfig = require(path.join(basePath, 'package.json')).config
@@ -13,10 +14,10 @@ function getOrDefault (key, defaultValue) {
   ) || defaultValue
 }
 
-const packagesFolder = getOrDefault('packagesFolder', 'src')
-const deepLevel = getOrDefault('deepLevel', 1)
-const customScopes = getOrDefault('customScopes', [])
-const publishAccess = getOrDefault('access', 'private')
+const packagesFolder = getOrDefault('packagesFolder', argv.packagesFolder || 'src')
+const deepLevel = getOrDefault('deepLevel', argv.deepLevel || 1)
+const customScopes = getOrDefault('customScopes', (argv.customScopes && argv.customScopes.split(',')) || [])
+const publishAccess = getOrDefault('access', argv.access || 'private')
 
 module.exports = {
   getScopes: function () {
