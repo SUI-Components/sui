@@ -1,13 +1,12 @@
 {
   "name": "@schibstedspain/sui-lint",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
     "sui-lint": "./bin/sui-lint.js"
   },
   "scripts": {
-    "build": "echo \"building...\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "sui-lint js"
   },

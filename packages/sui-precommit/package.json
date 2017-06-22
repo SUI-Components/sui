@@ -1,13 +1,10 @@
 {
   "name": "@schibstedspain/sui-precommit",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Effortless SUI precommit rules integration in your project",
   "main": "index.js",
   "bin": {
     "sui-precommit": "./bin/sui-precommit.js"
-  },
-  "scripts": {
-    "build": "echo \"building...\""
   },
   "keywords": [],
   "author": "",
