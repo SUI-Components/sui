@@ -1,0 +1,60 @@
+{
+  "name": "@schibstedspain/sui-studio",
+  "version": "4.0.0",
+  "description": "SUIComponents studio",
+  "main": "index.js",
+  "bin": {
+    "sui-studio": "./bin/sui-studio.js"
+  },
+  "scripts": {
+    "phoenix": "rm -Rf node_modules && npm it",
+    "up": "updtr --test-stdout --save-exact",
+    "lint:js": "linting-rules js",
+    "lint:sass": "linting-rules sass",
+    "lint": "npm run lint:js && npm run lint:sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/SUIStudio.git"
+  },
+  "keywords": [
+    "SUIComponents",
+    "schibsted",
+    "reactjs"
+  ],
+  "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SUI-Components/SUIStudio/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/SUIStudio#readme",
+  "devDependencies": {
+    "updtr": "0.2.0"
+  },
+  "dependencies": {
+    "@schibstedspain/sui-mono": "1",
+    "@schibstedspain/suistudio-fatigue-dev": "github:SUI-Components/suistudio-fatigue-dev",
+    "babel-standalone": "6.12.0",
+    "bundle-loader": "0.5.4",
+    "codemirror": "5.16.0",
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "css-content-loader": "1.0.0",
+    "deepmerge": "0.2.10",
+    "fs-extra": "0.30.0",
+    "fs.realpath": "1.0.0",
+    "normalize.css": "4.1.1",
+    "pascal-case": "2.0.0",
+    "pmx": "0.6.2",
+    "react-codemirror": "0.2.6",
+    "react-docgen": "2.9.1",
+    "react-markdown": "2.3.0",
+    "react-router": "2.5.1"
+  },
+  "suistudio-webpack": {
+    "vendor": [
+      "react",
+      "react-dom"
+    ]
+  }
+}

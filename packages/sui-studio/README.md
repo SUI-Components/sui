@@ -20,15 +20,15 @@ npm install sui-studio -g
 
 ## Getting Started
 
-First install suistudio:
+First install sui-studio:
 
 ```sh
 npm i -g @schibstedspain/sui-studio
-suistudio init <project_name>
+sui-studio init <project_name>
 cd <project_name>
 ```
 
-Once you're in the new project, you can execute `suistudio start` in order to start the development browser and start working on your components.
+Once you're in the new project, you can execute `sui-studio start` in order to start the development browser and start working on your components.
 
 # Workflows
 
@@ -36,13 +36,13 @@ Once you're in the new project, you can execute `suistudio start` in order to st
 ### 1) Create a component
 
 ```sh
-$ suistudio generate house window
+$ sui-studio generate house window
 ```
 
 ### 2) Install component dependencies
 
 ```sh
-$ suistudio run-all npm install
+$ sui-studio run-all npm install
 ```
 
 ### 3) Commit changes using the appropiate command
@@ -63,11 +63,11 @@ Then just push your changes using ```git push``` and merge them into master afte
 
 Select master branch. First, check that the release will be properly built by executing:
 ```
-$ suistudio check-release
+$ sui-studio check-release
 ```
 If the output is the expected then run:
 ```
-$ suistudio release
+$ sui-studio release
 ```
 
 # Conventions

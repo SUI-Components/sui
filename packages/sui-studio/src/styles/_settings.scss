@@ -1,0 +1,110 @@
+// --- Colors --- //
+$c-primary: #09f !default;
+
+$c-white: #ffffff !default;
+$c-white-light: lighten($c-white, 33%) !default;
+
+$c-black: #000000 !default;
+
+$c-gray: #777777 !default;
+$c-gray-dark: darken($c-gray, 20%) !default;
+$c-gray-light: lighten($c-gray, 33%) !default;
+$c-gray-lightest: lighten($c-gray-light, 15%) !default;
+
+$c-font-base: $c-gray-dark !default;
+$c-font-accent: $c-primary !default;
+$c-font-link: $c-font-accent !default;
+
+// --- Fonts --- //
+
+// Font family
+$ff-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+
+// Font weights
+$fw-light: 300 !default;
+$fw-regular: 400 !default;
+$fw-semi-bold: 600 !default;
+$fw-bold: 700 !default;
+
+// Font sizes
+$fz-base: 14 !default;
+$fz-body: $fz-base * 1px !default;
+$fz-s: ceil($fz-base * .666) * 1px !default;
+$fz-m: $fz-base * 1px !default;
+$fz-l: ceil(($fz-base * 1.25)) * 1px !default;
+$fz-xl: ceil($fz-base * 1.5) * 1px !default;
+
+// --- Layout --- //
+
+// Margins
+$m-base: 10px !default;
+$m-v: ceil($m-base / 2) !default;
+$m-h: $m-base !default;
+$m-v-small: $m-v / 2 !default;
+$m-h-small: $m-h / 2 !default;
+$m-v-large: $m-v * 2 !default;
+$m-h-large: $m-h * 2 !default;
+
+// Paddings
+$p-base: 10px !default;
+$p-v: $p-base / 1.5 !default;
+$p-h: $p-base !default;
+$p-v-small: $p-v / 2 !default;
+$p-h-small: $p-h / 2 !default;
+$p-v-large: $p-v * 2 !default;
+$p-h-large: $p-h * 2 !default;
+
+// Lineheight
+$lh-safe-tab: 44px !default; // Save tab size for links
+
+// Breakpoints
+$breakpoints: (
+  xxs: 0,
+  xs: 350px,
+  s: 576px,
+  m: 768px,
+  l: 992px,
+  xl: 1200px
+) !default;
+
+$bgc-main: #f5f5f5;
+
+$fgc-navbar: #999;
+$fgc-navbar--active: $c-white;
+
+$w-sidebar: 220px;
+$w-sidebar-collapsed: 48px;
+
+@mixin breakpoint-from($floor) {
+  $breakpoint: map-get($breakpoints, $floor);
+  @if $breakpoint {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin floating-button($background, $size, $bottom) {
+  align-items: center;
+  background: $background;
+  border: 1px solid $c-white;
+  border-radius: 100%;
+  bottom: $bottom;
+  cursor: pointer;
+  display: flex;
+  height: $size;
+  justify-content: center;
+  outline: none;
+  position: absolute;
+  right: 16px;
+  width: $size;
+  z-index: 99999;
+
+  svg {
+    fill: $c-white;
+    height: 32px;
+    width: 32px;
+  }
+}

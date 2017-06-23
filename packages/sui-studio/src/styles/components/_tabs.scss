@@ -1,0 +1,82 @@
+.sui-StudioTabs {
+  $parent: &;
+
+  margin: 0;
+  padding: 0;
+
+  &--small {
+    font-size: 80%;
+    margin-right: 16px;
+
+    #{$parent}-title {
+      padding-right: 8px;
+    }
+  }
+
+  &-tab,
+  &-title {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-title {
+    color: $c-gray-dark;
+    font-weight: 100;
+    padding-bottom: 10px;
+    padding-right: 16px;
+    text-transform: uppercase;
+  }
+
+  &-button {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid $c-gray-lightest;
+    color: $c-gray-dark;
+    cursor: pointer;
+    display: inline-block;
+    outline: 0;
+
+    &:hover {
+      border-bottom-color: $c-primary;
+    }
+
+    &--active {
+      border-bottom-color: darken($c-primary, 10%);
+      pointer-events: none;
+    }
+
+    & + &::before {
+      content: '|';
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
+  &-link {
+    border-bottom: 1px solid $c-gray-light;
+    color: $c-gray-dark;
+    cursor: pointer;
+    display: inline-block;
+    outline: none;
+    padding: 8px 32px;
+    text-decoration: none;
+    text-transform: lowercase;
+    transition: all .3s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: rgba($c-primary, .05);
+      border-bottom-color: $c-primary;
+      color: $c-primary;
+    }
+
+    &--active {
+      background-color: rgba($c-primary, .1);
+      border-bottom-color: darken($c-primary, 10%);
+      color: darken($c-primary, 10%);
+      pointer-events: none;
+    }
+  }
+}

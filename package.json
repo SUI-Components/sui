@@ -31,6 +31,12 @@
       "types": "@schibstedspain/sui-mono/src/types"
     }
   },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@schibstedspain/sui-lint/eslintrc.js"
+    ]
+  },
+  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml",
   "author": "David Almeida <davidbarna@gmail.com>",
   "repository": {
     "type": "git",
