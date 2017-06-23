@@ -18,8 +18,7 @@
     "@schibstedspain/sui-cz": "1.1",
     "commander": "2.9.0",
     "commitizen": "2.8.6",
-    "conventional-changelog": "1.1.0",
-    "yargs": "8.0.2"
+    "conventional-changelog": "1.1.0"
   },
   "repository": {
     "type": "git",

@@ -138,14 +138,3 @@ Take in care that this scopes **will not be relevant for the release**, and if y
 Custom scopes are for a very rare cases and you may not need it most of the times.
 
 Use `customScopes` in this cases like in the example. The scopes will be added to the automatic ones.
-
-### Configuration by CLI options
-
-You can also pass any of configuration properties by command line.
-
-Example:
-```sh
-$ sui-mono --packagesFolder ./components --access public
-```
-
-> **Caution:** If an property is already set in package.json, the CLI option value will be overriden by it.
