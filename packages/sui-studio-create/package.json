@@ -1,7 +1,7 @@
 {
   "name": "@schibstedspain/sui-studio-create",
-  "version": "1.0.0",
-  "description": "Create studios for sui components development.",
+  "version": "4.0.0",
+  "description": " CLI to create studios for sui components development.",
   "main": "src/index.js",
   "bin": {
     "sui-studio-create": "./src/index.js"
@@ -14,6 +14,11 @@
   ],
   "author": "David Almeida <davidbarna@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "fs-extra": "0.30.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SUI-Components/sui.git"
