@@ -60,8 +60,7 @@
   "config": {
     "sui-mono": {
       "access": "public",
-      "packagesFolder": "./components",
-      "deepLevel": 2
+      "packagesFolder": "./components"
     }
   }
 }
