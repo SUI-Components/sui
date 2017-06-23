@@ -56,11 +56,5 @@
       "react",
       "react-dom"
     ]
-  },
-  "config": {
-    "sui-mono": {
-      "access": "public",
-      "packagesFolder": "./components"
-    }
   }
 }

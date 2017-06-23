@@ -6,23 +6,7 @@
  */
 function callSuiMonoCommand (command) {
   const BIN_PATH = require.resolve('@schibstedspain/sui-mono/bin/sui-mono')
-  callCommand(BIN_PATH, [ command,
-    ...getSuiMonoOptions()
-  ])
-}
-
-/**
- * Parses sui-mono config in package.json and returns corresponding CLI options
- * @return {Array<String>} CLI options
- */
-function getSuiMonoOptions () {
-  const path = require('path')
-  const pkg = require(path.join(__dirname, '..', '..', 'package.json'))
-  const conf = pkg && pkg.config && pkg.config['sui-mono']
-  if (conf) {
-    return Object.keys(conf).map(key => '--' + key + '=' + conf[key])
-  }
-  return []
+  callCommand(BIN_PATH, [command])
 }
 
 /**
