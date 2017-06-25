@@ -6,7 +6,9 @@
  */
 function callSuiMonoCommand (command) {
   const BIN_PATH = require.resolve('@schibstedspain/sui-mono/bin/sui-mono')
-  callCommand(BIN_PATH, [command])
+  const [,, ...args] = process.argv
+
+  callCommand(BIN_PATH, [command, ...args])
 }
 
 /**
