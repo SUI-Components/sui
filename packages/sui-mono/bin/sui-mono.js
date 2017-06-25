@@ -17,4 +17,7 @@ program
 program
   .command('release', 'Release whatever need to be release')
 
+program
+  .command('run', 'Run a command on each package')
+
 program.parse(process.argv)
