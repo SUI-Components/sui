@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
 exports.register = ({first, renovate}) => () => {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      const swUrl = '/service-worker.js';
+      const swUrl = '/service-worker.js'
       navigator.serviceWorker
         .register(swUrl)
         .then(registration => {
           registration.onupdatefound = () => {
-            const installingWorker = registration.installing;
+            const installingWorker = registration.installing
             installingWorker.onstatechange = () => {
               if (installingWorker.state === 'installed') {
                 if (navigator.serviceWorker.controller) {
@@ -14,28 +15,28 @@ exports.register = ({first, renovate}) => () => {
                   // the fresh content will have been added to the cache.
                   // It's the perfect time to display a "New content is
                   // available; please refresh." message in your web app.
-                  renovate();
+                  renovate()
                 } else {
                   // At this point, everything has been precached.
                   // It's the perfect time to display a
                   // "Content is cached for offline use." message.
-                  first();
+                  first()
                 }
               }
-            };
-          };
+            }
+          }
         })
         .catch(error => {
-          console.error('Error during service worker registration:', error);
-        });
-    });
+          console.error('Error during service worker registration:', error)
+        })
+    })
   }
 }
 
 exports.unregister = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
-      registration.unregister();
-    });
+      registration.unregister()
+    })
   }
 }

@@ -13,12 +13,12 @@ exports.whenInstalled = (check, string) => {
 }
 
 exports.when = (check, value) => {
-  return Boolean(check) ? value : false
+  return check ? value : false
 }
 
 exports.cleanList = list => list.filter(Boolean)
 
-exports.envVars = (env=[]) =>
+exports.envVars = (env = []) =>
   env.reduce(
     (acc, variable) => {
       if (Array.isArray(variable)) {
@@ -31,4 +31,3 @@ exports.envVars = (env=[]) =>
     },
     { NODE_ENV: 'development', DEBUG: false }
   )
-

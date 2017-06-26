@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 // https://github.com/coryhouse/react-slingshot/blob/master/tools/build.js
 const program = require('commander')
 const rimraf = require('rimraf')
@@ -79,4 +80,3 @@ webpack(config).run((error, stats) => {
 
   return 0
 })
-

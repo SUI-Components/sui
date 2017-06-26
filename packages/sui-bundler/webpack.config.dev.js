@@ -44,7 +44,7 @@ module.exports = {
       noInfo: true,
       options: {
         sassLoader: {
-          importer: jsonImporter,
+          importer: jsonImporter
         },
         context: '/',
         postcss: () => [autoprefixer]

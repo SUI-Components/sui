@@ -1,5 +1,5 @@
-const values = require('object.values');
+const values = require('object.values')
 
 if (!Object.values) {
-  values.shim();
-} 
+  values.shim()
+}

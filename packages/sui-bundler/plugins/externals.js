@@ -10,7 +10,7 @@ const safeAddToHeadAndBody = htmlPluginData => url => {
   const link = `<link rel="preload" href="${url}" as="script">` // TODO: always is a script ?! I dont think so
   htmlPluginData.html = htmlPluginData.html
                           .replace('<head>', `<head>\n${link}\n`)
-                          .replace('</body>', `${script}\n</body>`);
+                          .replace('</body>', `${script}\n</body>`)
 }
 
 const generateHashFromFile = uri =>
@@ -29,8 +29,8 @@ const copy = (uris, outputPath) => (hash, index) => {
 }
 
 class Externals {
-  constructor(options) {
-    this.options = Object.assign({}, {files: {}}, options);
+  constructor (options) {
+    this.options = Object.assign({}, {files: {}}, options)
   }
   apply (compiler) {
     const {files} = this.options

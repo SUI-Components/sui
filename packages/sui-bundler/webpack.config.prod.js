@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -16,7 +17,7 @@ require('./shared/shims')
 // hack for Windows, as process.env.PWD is undefined in that environment
 // https://github.com/mrblueblue/gettext-loader/issues/18
 if (process.env.PWD === undefined) {
-  process.env.PWD = process.cwd();
+  process.env.PWD = process.cwd()
 }
 
 module.exports = {
@@ -39,7 +40,7 @@ module.exports = {
   },
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({ 
+    new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'runtime'],
       minChunks: 'Infinity'
     }),
@@ -63,8 +64,8 @@ module.exports = {
         removeEmptyAttributes: true,
         removeRedundantAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true,
-      },
+        useShortDoctype: true
+      }
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer',
@@ -72,17 +73,17 @@ module.exports = {
     }),
     new PreloadWebpackPlugin(),
     new ManifestPlugin({
-      fileName: 'asset-manifest.json',
+      fileName: 'asset-manifest.json'
     }),
     when(config.offline, new SWPrecacheWebpackPlugin({
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       filename: 'service-worker.js',
-      logger(message) {
+      logger (message) {
         if (message.indexOf('Total precache size is') === 0) {
           // This message occurs for every build and is a bit too noisy.
-          return;
+          return
         }
-        console.log(message);
+        console.log(message)
       },
       // minify: true,
       navigateFallback: '/index.html',
@@ -99,7 +100,7 @@ module.exports = {
         comparisons: false
       },
       output: {
-        comments: false,
+        comments: false
       },
       sourceMap: true
     }),
@@ -110,7 +111,7 @@ module.exports = {
       noInfo: true,
       options: {
         sassLoader: {
-          importer: jsonImporter,
+          importer: jsonImporter
         },
         context: '/',
         postcss: () => [autoprefixer]

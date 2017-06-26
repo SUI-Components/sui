@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 // https://github.com/coryhouse/react-slingshot/blob/master/tools/srcServer.js
 const path = require('path')
 const bs = require('browser-sync').create()
@@ -21,6 +22,7 @@ process.noDeprecation = true
 function getPortAvailable ({ port }) {
   const spinner = ora(`Checking if port ${port} is available...`).start()
   return new Promise((resolve, reject) => {
+    /* eslint-disable prefer-promise-reject-errors */
     detect(port, (err, suggestedPort) => {
       if (err) {
         return reject({ err })
@@ -89,7 +91,7 @@ function initializeDevServer ({ port }) {
       middleware: [
         historyApiFallback(),
         webpackDevMiddlewareInstance,
-        webpackHotMiddlewareInstance,
+        webpackHotMiddlewareInstance
       ]
     },
 
