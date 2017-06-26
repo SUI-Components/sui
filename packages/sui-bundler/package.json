@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/suistudio-webpack",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "highly opinionated webpack config",
   "bin": {
     "suistudio-webpack": "./bin/suistudio-webpack.js"
