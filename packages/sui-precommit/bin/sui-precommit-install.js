@@ -1,36 +1,42 @@
 #!/usr/bin/env node
 
 const {spawn} = require('child_process')
-const Validate = require('git-validate')
+const path = require('path')
+const fs = require('fs')
 
 installHuskyIfNotInstalled()
   .then(function () {
     installScript('lint', 'sui-lint js && sui-lint sass')
     installScript('precommit', 'sui-precommit run')
   })
-  .catch(function () {
-    log('sui-precommit could not be properly installed')
+  .catch(function (err) {
+    log(err.message)
+    log('sui-precommit installation has FAILED.')
     process.exit(1)
   })
 
-/* eslint-disable no-console */
 function log (...args) {
+  /* eslint-disable no-console */
   args[0] = '[sui-precommit] ' + args[0]
   console.log(...args)
 }
 
 /**
- * Installs script on package.json where command was executed
- * @param  {String} key   script name
- * @param  {String} value command to execute
+ * Install script on package.json where command was executed
+ * @param  {String} name   script name
+ * @param  {String} script command to execute
  */
-function installScript (key, value) {
-  log('Installing "' + value + '" npm script on "' + key + '".')
-  Validate.installScript(key, value, { overwrite: 1 }, process.cwd())
+function installScript (name, script) {
+  const pkgPath = path.join(process.cwd(), 'package.json');
+  let pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }));
+  pkg.scripts = pkg.scripts || {}
+  pkg.scripts[name] && log('Script "' + name + '" already set. Overwritting...')
+  pkg.scripts[name] = script
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), { encoding: 'utf8' })
 }
 
 /**
- * Installs husky on project
+ * Install husky on project
  * @return {Promise}
  */
 function installHuskyIfNotInstalled () {
