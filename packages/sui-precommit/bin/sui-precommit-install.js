@@ -27,8 +27,8 @@ function log (...args) {
  * @param  {String} script command to execute
  */
 function installScript (name, script) {
-  const pkgPath = path.join(process.cwd(), 'package.json');
-  let pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }));
+  const pkgPath = path.join(process.cwd(), 'package.json')
+  let pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }))
   pkg.scripts = pkg.scripts || {}
   pkg.scripts[name] && log('Script "' + name + '" already set. Overwritting...')
   pkg.scripts[name] = script
