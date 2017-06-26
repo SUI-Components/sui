@@ -1,25 +1,25 @@
 {
-  "name": "@schibstedspain/suistudio-webpack",
-  "version": "3.4.0",
-  "description": "highly opinionated webpack config",
+  "name": "@schibstedspain/sui-bundler",
+  "version": "0.0.0",
+  "description": "Config-free bundler for ES6 React apps.",
   "bin": {
-    "suistudio-webpack": "./bin/suistudio-webpack.js"
+    "sui-bundler": "./bin/sui-bundler.js"
   },
-  "main": "./bin/suistudio-webpack.js",
+  "main": "./bin/sui-bundler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SUI-Components/suistudio-webpack.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SUI-Components/suistudio-webpack/issues"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
   },
-  "homepage": "https://github.com/SUI-Components/suistudio-webpack#readme",
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
     "autoprefixer": "6.5.4",
     "babel-cli": "6.24.1",

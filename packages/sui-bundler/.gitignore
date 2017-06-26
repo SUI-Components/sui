@@ -1,5 +1,1 @@
-.DS_Store
-.TODO
-node_modules/
 example/public/
-npm-debug.log

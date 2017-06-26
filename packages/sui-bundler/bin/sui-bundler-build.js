@@ -21,9 +21,9 @@ program
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
-    console.log('    $ suistudio-webpack build -S')
-    console.log('    $ suistudio-webpack build -SC')
-    console.log('    $ suistudio-webpack build --help')
+    console.log('    $ sui-bundler build -S')
+    console.log('    $ sui-bundler build -SC')
+    console.log('    $ sui-bundler build --help')
     console.log('')
   })
   .parse(process.argv)

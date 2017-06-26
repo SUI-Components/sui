@@ -1,4 +1,4 @@
-const {'suistudio-webpack': config = {}} = require(`${process.cwd()}/package.json`)
+const {'sui-bundler': config = {}} = require(`${process.cwd()}/package.json`)
 
 exports.config = config
 exports.MAIN_ENTRY_POINT = './app.js'

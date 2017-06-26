@@ -50,14 +50,14 @@ With `index.html` as app home and`app.js` as entry point.
 ### Desarrollo
 Durante el desarrollo de la aplicación tendrás hot module reload y browserstack. Podrás encontrarlo en `localhost:3000`
 ```
-$ suistudio-webpack dev
+$ sui-bundler dev
 ```
 
 ### Producción
 Dentro de la carpeta `public` están los estáticos listos para ser deployados a producción.
 
 ```
-$ suistudio-webpack build
+$ sui-bundler build
 ```
 
 Si deseas borrar la carpeta public antes de generar los nuevos estáticos, usa el flag `--clean | -C`
@@ -68,7 +68,7 @@ Si no quieres no tienes por que usar ninguna configuración, pero si deseas opti
 
 ```json
 {
-  "suistudio-webpack": {
+  "sui-bundler": {
     "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
     "vendor": ["react", "react-dom"],
     "cdn": "https://url_to_me_cdn.com/",
@@ -90,12 +90,12 @@ Cualquier variable de entorno, la tendrás disponible en tu fichero index.html m
 ```
 ## Offline
 
-Esta desactivado por defecto. Para activarlo, tienes que poner `offline: true` en la configuración del suistudio-webpack de tu proyecto.
+Esta desactivado por defecto. Para activarlo, tienes que poner `offline: true` en la configuración del sui-bundler de tu proyecto.
 
 En el punto de entrada de tu apliación debes registrar el serviceWorker con el siguiente snippet:
 
 ```js
-import {register, unregister} from '@schibstedspain/suistudio-webpack/registerServiceWorker'
+import {register, unregister} from '@schibstedspain/sui-bundler/registerServiceWorker'
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => window.alert('New content is available; please refresh.')
