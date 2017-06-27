@@ -15,8 +15,7 @@ export const getComponentsList = () => {
 
 export const getSuiStudioConfig = () => {
   const { config = {} } = require(`${__BASE_DIR__}/package.json`)
-  const { suistudio = {} } = config
-  return suistudio
+  return config['sui-studio'] || {}
 }
 
 export const getStudioName = () => {
