@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-const {spawn} = require('child_process')
+const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
 const path = require('path')
 const fs = require('fs')
+const pkgPath = path.join(process.cwd(), 'package.json')
+
 
 installHuskyIfNotInstalled()
   .then(function () {
@@ -27,7 +29,6 @@ function log (...args) {
  * @param  {String} script command to execute
  */
 function installScript (name, script) {
-  const pkgPath = path.join(process.cwd(), 'package.json')
   let pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }))
   pkg.scripts = pkg.scripts || {}
   pkg.scripts[name] && log('Script "' + name + '" already set. Overwritting...')
@@ -40,15 +41,12 @@ function installScript (name, script) {
  * @return {Promise}
  */
 function installHuskyIfNotInstalled () {
-  return new Promise(function (resolve, reject) {
-    if (!isHuskyInstalled()) {
-      log('husky will be installed as git hook integration with node')
-      spawn('npm', ['install', 'husky@0.13.4', '--save-dev'], { shell: true, stdio: 'inherit' })
-        .on('exit', code => { !code ? resolve(code) : reject(code) })
-    } else {
-      resolve(0)
-    }
-  })
+  if (!isHuskyInstalled()) {
+    log('husky will be installed to allow git hook integration with node')
+    return getSpawnPromise('npm', ['install', 'husky@0.13.4', '--save-dev', '--save-exact'])
+  } else {
+    return Promise.resolve(0)
+  }
 }
 
 /**
@@ -56,10 +54,6 @@ function installHuskyIfNotInstalled () {
  * @return {Boolean}
  */
 function isHuskyInstalled () {
-  try {
-    require.resolve('husky')
-    return true
-  } catch (e) {
-    return false
-  }
+  let pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }))
+  return pkg.devDependencies && pkg.devDependencies['husky']
 }
