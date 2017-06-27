@@ -1,0 +1,30 @@
+{
+  "name": "@schibstedspain/sui-studio-create",
+  "version": "4.1.0",
+  "description": " CLI to create studios for sui components development.",
+  "main": "src/index.js",
+  "bin": {
+    "sui-studio-create": "./src/index.js"
+  },
+  "preferGlobal": true,
+  "keywords": [
+    "SUIComponents",
+    "schibsted",
+    "reactjs"
+  ],
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "fs-extra": "0.30.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-studio-create#readme"
+}

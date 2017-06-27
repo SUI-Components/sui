@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-mono",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
@@ -16,6 +16,7 @@
   "devDependencies": {},
   "dependencies": {
     "@schibstedspain/sui-cz": "1.1",
+    "colors": "1.1.2",
     "commander": "2.9.0",
     "commitizen": "2.8.6",
     "conventional-changelog": "1.1.0"

@@ -1,7 +1,7 @@
 {
   "name": "@schibstedspain/sui-studio",
-  "version": "4.0.0",
-  "description": "SUIComponents studio",
+  "version": "4.1.0",
+  "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
     "sui-studio": "./bin/sui-studio.js"
@@ -13,10 +13,6 @@
     "lint:sass": "linting-rules sass",
     "lint": "npm run lint:js && npm run lint:sass"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SUI-Components/SUIStudio.git"
-  },
   "keywords": [
     "SUIComponents",
     "schibsted",
@@ -24,14 +20,11 @@
   ],
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SUI-Components/SUIStudio/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/SUIStudio#readme",
   "devDependencies": {
     "updtr": "0.2.0"
   },
   "dependencies": {
+    "@schibstedspain/sui-component-peer-dependencies": "latest",
     "@schibstedspain/sui-mono": "1",
     "@schibstedspain/suistudio-fatigue-dev": "github:SUI-Components/suistudio-fatigue-dev",
     "babel-standalone": "6.12.0",
@@ -56,5 +49,13 @@
       "react",
       "react-dom"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-studio#readme"
 }

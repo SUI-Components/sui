@@ -55,6 +55,16 @@ DO NOT use ```git commit``` directly. Instead, use:
 $ npm run co
 ```
 
+Add the script to your package.json
+
+```json
+{
+  "scripts": {
+    "co": "sui-studio commit"
+  }
+}
+```
+
 It will prompt a question form. The way you answer to this question form affects the way the commit's comment is built. Comments will be used later, after merging to master in order to decide what kind of change (release) is going to be done (minor or major).
 
 Then just push your changes using ```git push``` and merge them into master after review.

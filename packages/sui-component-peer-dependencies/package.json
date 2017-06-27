@@ -1,0 +1,26 @@
+{
+  "name": "@schibstedspain/sui-component-peer-dependencies",
+  "version": "1.1.0",
+  "description": "A set of dependencies for hosts of sui components.",
+  "keywords": [
+    "bundle",
+    "react",
+    "component"
+  ],
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "15.4",
+    "react-dom": "15.4",
+    "react-router": "2",
+    "react-transmit": "3.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-component-peer-dependencies#readme"
+}

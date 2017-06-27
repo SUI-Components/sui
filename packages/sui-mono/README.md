@@ -15,6 +15,16 @@ It provides:
 
 ## Usage
 
+### Run command on all packages
+
+You can run a single command on each package of the monorepo
+
+```
+$ sui-mono run <command>
+$ sui-mono run rm -Rf node_modules
+$ sui-mono run npm install
+```
+
 ### Commit
 
 You do your normal git workflow, but when commiting you should use:

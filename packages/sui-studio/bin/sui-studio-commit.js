@@ -2,4 +2,4 @@
 
 const {callSuiMonoCommand} = require('./helpers/cli')
 
-callSuiMonoCommand('run')
+callSuiMonoCommand('commit')

@@ -35,6 +35,9 @@ program
   .command('build', 'Generate a static versión ready to be deploy to surge.sh or GH-Pages').alias('b')
 
 program
+  .command('commit', 'Commit with semantic messages.').alias('co')
+
+program
   .command('release', 'Release whatever need to be release').alias('r')
 
 program
