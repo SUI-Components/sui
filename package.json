@@ -8,6 +8,7 @@
     "sui"
   ],
   "scripts": {
+    "phoenix": "rm -Rf node_modules && npm i && sui-mono run rm -Rf node_modules && sui-mono run npm i",
     "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
