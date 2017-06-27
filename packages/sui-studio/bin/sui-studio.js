@@ -4,7 +4,7 @@
 require('fs.realpath').monkeypatch()
 
 const program = require('commander')
-const {execFile} = require('child_process')
+const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
 const {join} = require('path')
 const pkg = require('../package.json')
 
@@ -17,15 +17,9 @@ program
   .command('start').alias('s')
   .option('-d, --dir-base [dir]', 'Setup base dir where live src and demo folders', '.')
   .action(({dirBase}) => {
-    const devServerExec = join(__dirname, '..', 'node_modules', '@schibstedspain', 'suistudio-webpack', 'bin', 'suistudio-webpack-dev.js')
-    const child = execFile(
-      devServerExec,
-      [],
-      {cwd: join(__dirname, '..'), maxBuffer: 1024 * 500, env: process.env},
-      console.log.bind(console)
-    )
-    child.stdout.pipe(process.stdout)
-    child.stderr.pipe(process.stderr)
+    const devServerExec = require.resolve('@schibstedspain/sui-bundler/bin/sui-bundler-dev')
+    getSpawnPromise(devServerExec, [], {shell: false, cwd: join(__dirname, '..'), env: process.env})
+      .then(process.exit, process.exit)
   })
 
 program
