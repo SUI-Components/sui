@@ -63,7 +63,7 @@ writeFile(
   "description": "",
   "private": true,
   "scripts": {
-    "phoenix": "rm -Rf node_modules && npm i",
+    "phoenix": "rm -Rf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
     "deploy": "sui-studio build && surge public/ -d ${PROJECT_NAME}.surge.sh",
     "co": "sui-studio commit",
     "lint:js": "sui-lint js",
