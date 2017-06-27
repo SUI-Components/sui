@@ -77,10 +77,8 @@ writeFile(
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@schibstedspain/sui-component-peer-dependencies": "1",
     "@schibstedspain/sui-precommit": "2",
     "@schibstedspain/sui-studio": "4",
-    "@schibstedspain/suistudio-fatigue-dev": "github:SUI-Components/suistudio-fatigue-dev",
     "husky": "0.13.4",
     "validate-commit-msg": "2.12.2"
   },
