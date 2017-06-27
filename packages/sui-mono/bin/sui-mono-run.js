@@ -1,7 +1,7 @@
 const path = require('path')
 const program = require('commander')
 const config = require('../src/config')
-const serialSpawn = require('../src/spawn').serialSpawn
+const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
 const PACKAGES_DIR = path.join(process.cwd(), config.getPackagesFolder())
 const cwds = config.getScopes().map(pkg => path.join(PACKAGES_DIR, pkg))
 

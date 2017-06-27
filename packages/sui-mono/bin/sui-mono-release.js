@@ -3,7 +3,7 @@
 const path = require('path')
 const config = require('../src/config')
 const checker = require('../src/check')
-const executer = require('../src/execute')
+const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
 
 const BASE_DIR = process.cwd()
 
@@ -42,7 +42,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     ]
     scripts['build'] && commands.unshift(['npm', ['run', 'build']])
 
-    executer.serialExecution({cwd, stdio: 'inherit'})(commands)
+    serialSpawn(commands, {cwd})
       .then(resolve)
       .catch(reject)
   })

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const serialSpawn = require('../lib/spawn').serialSpawn
+const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
 const BIN_PATH = require.resolve('@schibstedspain/sui-lint/bin/sui-lint')
 
 serialSpawn([

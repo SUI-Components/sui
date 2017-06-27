@@ -6,11 +6,12 @@ const CODE_OK = 0
 /**
  * Spawn several commands in children processes
  * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
+ * @param  {Object} options Default options for given commands
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
-function serialSpawn (commands) {
+function serialSpawn (commands, options = {}) {
   return commands.reduce(function (promise, args) {
-    return promise.then(getSpawnPromiseFactory(...args))
+    return promise.then(getSpawnPromiseFactory(...args, options))
   }, Promise.resolve())
 }
 
@@ -35,11 +36,10 @@ function getSpawnPromiseFactory (bin, args, options) {
  * @return {Promise<Number>} Process exit code
  */
 function getSpawnPromise (bin, args, options = {}) {
-  const folder = options.cwd ? options.cwd.split('/').slice(-2).join('/') : ''
+  const folder = options.cwd ? '@' + options.cwd.split('/').slice(-2).join('/') : ''
   const command = bin.split('/').pop() + ' ' + args.join(' ')
   options = Object.assign({shell: true, stdio: 'inherit', cwd: process.cwd()}, options)
   console.log(`\n${command.magenta} ${folder.grey}`)
-
   return new Promise(function (resolve, reject) {
     spawn(bin, args, options)
       .on('exit', (code) => {
