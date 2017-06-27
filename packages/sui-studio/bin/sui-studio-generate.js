@@ -97,16 +97,11 @@ COMPONENT_PACKAGE_JSON_FILE,
     "build": "rm -Rf ./lib && mkdir -p ./lib && npm run babel && npm run sass",
     "babel": "../../../node_modules/.bin/babel --presets schibsted-spain ./src --out-dir ./lib",
     "sass": "../../../node_modules/.bin/cpx \\"./src/**/*.scss\\" ./lib",
-    "preversion": "echo \\"preversion\\"",
-    "version": "npm run build",
-    "postversion": "git add \${PWD} && git commit -m \\"release(${category}/${component}): v$(node -p -e \\"require('./package.json').version\\")\\" && git push origin master && npm publish"
+    "version": "npm run build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@schibstedspain/suistudio-fatigue-deps": "github:SUI-Components/suistudio-fatigue-deps"
-  }
+  "license": "MIT"
 }
 `
 )
