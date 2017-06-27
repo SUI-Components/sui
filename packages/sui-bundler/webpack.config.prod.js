@@ -23,8 +23,7 @@ if (process.env.PWD === undefined) {
 module.exports = {
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json'],
-    alias: Object.assign({}, {'react': path.resolve(process.cwd(), 'node_modules', 'react')}, config.alias)
+    extensions: ['*', '.js', '.jsx', '.json']
   },
   devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
   entry: config.vendor ? {

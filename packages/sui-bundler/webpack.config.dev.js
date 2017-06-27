@@ -10,8 +10,7 @@ const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('.
 module.exports = {
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json'],
-    alias: Object.assign({}, {'react': path.resolve(process.cwd(), 'node_modules', 'react')}, config.alias)
+    extensions: ['*', '.js', '.jsx', '.json']
   },
   devtool: 'eval-source-map',
   entry: cleanList([
