@@ -1,0 +1,19 @@
+{
+  "name": "@schibstedspain/sui-helpers",
+  "version": "1.0.0",
+  "description": "A set of internal helpers used by sui-related packages.",
+  "keywords": [],
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "dependencies": {
+    "colors": "1.1.2"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-helpers#readme"
+}
