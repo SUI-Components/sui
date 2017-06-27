@@ -7,11 +7,9 @@ const cwds = config.getScopes().map(pkg => path.join(PACKAGES_DIR, pkg))
 
 program.parse(process.argv)
 
-const tasks = cwds.map(cwd => getTaskArray(cwd))
-
-serialSpawn(tasks)
-.then(code => process.exit(code))
-.catch(code => process.exit(code))
+serialSpawn(cwds.map(getTaskArray))
+  .then(code => process.exit(code))
+  .catch(code => process.exit(code))
 
 function getTaskArray (cwd) {
   const [command] = program.args
