@@ -171,7 +171,8 @@ $ npm install @schibstedspain/sui-component-dependencies@latest --save
 > :warning: **Caution!**
 >
 >  **Make sure latest tag is save for the dependency**
-> ```js
+
+```js
 {
   "dependencies": {
     "@schibstedspain/sui-component-dependencies": "latest"
