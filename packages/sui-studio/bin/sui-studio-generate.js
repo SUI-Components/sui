@@ -95,9 +95,11 @@ COMPONENT_PACKAGE_JSON_FILE,
   "main": "lib/index.js",
   "scripts": {
     "build": "rm -Rf ./lib && mkdir -p ./lib && npm run babel && npm run sass",
-    "babel": "../../../node_modules/.bin/babel --presets schibsted-spain ./src --out-dir ./lib",
-    "sass": "../../../node_modules/.bin/cpx \\"./src/**/*.scss\\" ./lib",
-    "version": "npm run build"
+    "babel": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "sass": "../../../node_modules/.bin/cpx \\"./src/**/*.scss\\" ./lib"
+  },
+  "dependencies": {
+    "@schibstedspain/sui-component-dependencies": "latest"
   },
   "keywords": [],
   "author": "",
