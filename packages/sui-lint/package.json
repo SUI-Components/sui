@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-lint",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
