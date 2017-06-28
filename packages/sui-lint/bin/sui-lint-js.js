@@ -10,6 +10,7 @@ executeLintingCommand(BIN_PATH, [
   '--ext', 'jsx',
   '--ignore-pattern', 'lib',
   '--ignore-pattern', 'dist',
+  '--ignore-pattern', 'public',
   '--ignore-pattern', 'node_modules',
   './'
 ])
