@@ -47,7 +47,7 @@ Your package.json might be altered like that:
     "precommit": "sui-precommit run"
   },
   "devDependencies": {
-    "husky": "^0.13.4",
+    "husky": "0.13.4",
   }
 }
 

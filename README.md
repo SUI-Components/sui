@@ -22,6 +22,6 @@ SUI is a set of packages which goal to ease development of sui based components 
 | [sui-studio](./packages/sui-studio/README.md) | Develop, maintain and publish your SUI components |
 | [sui-bundler](./packages/sui-bundler/README.md) | Config-free bundler for ES6 React apps |
 | [sui-i18n](./packages/sui-i18n/README.md) | Isomorphic i18n service for browser and node |
-| [sui-react-domain-conector](./packages/sui-react-domain-conector/README.md) | Connect any React component to your domain use cases |
+| [sui-react-domain-connector](./packages/sui-react-domain-connector/README.md) | Connect any React component to your domain use cases |
 | [sui-ssr](./packages/sui-ssr/README.md) | Plug SSR to you SUI SPA |
 | [sui-decorators](./packages/sui-decorators/README.md) | Develop, maintain and publish your SUI components |

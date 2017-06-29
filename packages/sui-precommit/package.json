@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-precommit",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "Effortless SUI precommit rules integration in your project",
   "main": "index.js",
   "bin": {
@@ -8,11 +8,18 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
   "dependencies": {
     "@schibstedspain/sui-lint": "2",
     "@schibstedspain/sui-helpers": "1",
-    "commander": "2.9.0",
-    "git-validate": "2.2.2"
-  }
+    "commander": "2.9.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-precommit#readme"
 }

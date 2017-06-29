@@ -1,0 +1,24 @@
+{
+  "name": "sui-bundler-test-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "sui-bundler build -C",
+    "start": "sui-bundler dev",
+    "phoenix": "rm -Rf node_modules && npm i --cache-min=999999"
+  },
+  "dependencies": {
+    "react": "15.4.2",
+    "react-dom": "15.4.2"
+  },
+  "devDependencies": {
+    "@schibstedspain/sui-bundler": "2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "sui-bundler": {
+    "vendor": ["react", "react-dom"]
+  }
+}
