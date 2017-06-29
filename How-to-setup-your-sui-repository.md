@@ -46,7 +46,14 @@ Now, `sui-precommit run` will be executed prior every commit.
 
 [sui-mono] provides [commitizen](https://www.npmjs.com/package/commitizen) implementation to ensure commits follow the global "SUI's commit message format".
 
-### 2.1 Delegate your commits to `sui-mono`
+
+### 2.1 Install `sui-mono`
+
+```sh
+$ npm install @schibstedspain/sui-mono --save-dev --save-exact
+```
+
+### 2.2 Delegate your commits to `sui-mono`
 
 Create a "co" script and now only use `npm run co` for your commits.
 
@@ -55,13 +62,16 @@ Create a "co" script and now only use `npm run co` for your commits.
 {
   "scripts": {
     "co": "sui-mono commit"
+  },
+  "devDependencies": {
+    "@schibstedspain/sui-mono": "1"
   }
 }
 ```
 
 If your repo is a monorepo, sui-mono will add each package as a scope.
 
-### 2.2 Add a `commit-msg` hook 
+### 2.3 Add a `commit-msg` hook
 
 For those commits who will directly use `git commit` command, we need to ensure they follow our format.
 
