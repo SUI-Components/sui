@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-studio",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
