@@ -1,38 +1,40 @@
-/* global __BASE_DIR__ */
 import React, {PropTypes} from 'react'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
-const reqFixturesDemo =
-  require.context(`${__BASE_DIR__}`, true, /\/demo\/fixtures\/.*\.js/)
-
 const executeUseCase = ({domain, useCase, params}) => {
-  const base = reqFixturesDemo(`./demo/fixtures/${useCase}.js`).default
-  domain.get(useCase).execute({
-    ...base,
-    ...params
+  return domain.get(useCase).execute(params)
+}
+
+const dispatchEvent = ({store, domain, useCase, params}) => {
+  executeUseCase({domain, useCase, params}).then(result => {
+    store.dispatch({
+      type: useCase,
+      payload: {params, result}
+    })
   })
 }
 
-const EventsButtons = ({events, domain}) => {
-  if (!domain) { return null }
+const EventsButtons = ({events, store, domain}) => {
+  if (!store && !domain) { return null }
 
   return (
     <Tabs title='Events'>
       {
-          Object.keys(events).map(
-            useCase => Object.keys(events[useCase]).map(
-              event => (
-                <Tab
-                  handleClick={evt => {
-                    executeUseCase({domain, useCase, params: events[useCase][event]})
-                  }}
-                  key={`${useCase}#${event}`}
-                  literal={event}
-                />
-              )
+        Object.keys(events).map(
+          useCase => Object.keys(events[useCase]).map(
+            event => (
+              <Tab
+                handleClick={evt => {
+                  store ? dispatchEvent({store, domain, useCase, params: events[useCase][event]})
+                        : executeUseCase({domain, useCase, params: events[useCase][event]})
+                }}
+                key={`${useCase}#${event}`}
+                literal={event}
+              />
             )
           )
+        )
       }
     </Tabs>
   )
@@ -40,6 +42,7 @@ const EventsButtons = ({events, domain}) => {
 
 EventsButtons.displayName = 'EventsButtons'
 EventsButtons.propTypes = {
+  store: PropTypes.object,
   domain: PropTypes.object,
   events: PropTypes.object
 }
