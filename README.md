@@ -9,7 +9,17 @@ SUI is a set of packages which goal to ease development of sui based components 
 * Transparency for developer (changes and improvements have no impact on DX)
 * Facilitates tooling development as asumptions can be made on the stack of each package.
 
-migrated pending
+## Requirements
+
+### Add `./node_modules/.bin/` to your $PATH
+Many SUI packages provide a CLI as a service. The binaries are declared in the package.json `bin` key.
+
+To make all npm binaries available in your command line, you should add bin directory to your $PATH:
+
+```sh
+$ export PATH="$PATH:./node_modules/.bin"
+```
+
 ## Available packages
 | Name | Description | Status |
 | -- | -- | -- |
