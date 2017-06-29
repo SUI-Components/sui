@@ -31,12 +31,13 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     if (code === 0) { return resolve() }
 
     const cwd = path.join(BASE_DIR, packagesFolder, pkg)
-    const scripts = require(path.join(cwd, 'package.json')).scripts || {}
+    const pkgInfo = require(path.join(cwd, 'package.json'))
+    const scripts = pkgInfo.scripts || {}
 
     let commands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
-      ['sh', ['-c', `VERSION=$(node -p -e "require('./package.json').version") && git commit -m "release(${pkg}): v$VERSION"`]],
+      ['git', [`commit -m "release(${pkg}): v${pkgInfo.version}"`]],
       ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', 'origin', 'HEAD']]
     ]

@@ -10,54 +10,36 @@ import stylesFor, {themesFor} from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
 import EventsButtons from './EventsButtons'
-import RoutesButtons from './RoutesButtons'
 import ThemesButtons from './ThemesButtons'
-import contextify from '../contextify'
-import {matchPattern, compilePattern} from 'react-router/lib/PatternUtils' // Thx for that!
+import withContext from './HoC/withContext'
+import withProvider from './HoC/withProvider'
 import deepmerge from 'deepmerge'
+
+import {createStore} from '@schibstedspain/ddd-react-redux'
 
 const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
+const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
 
 const contextByType = (ctxt, type) => deepmerge(ctxt[DEFAULT_CONTEXT], ctxt[type])
 const isFunction = (fnc) => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
+const cleanDisplayName = displayName => {
+  const [fallback, name] = displayName.split(/\w+\((\w+)\)/)
+  return name !== undefined ? name : fallback
+}
+const pipe = (...funcs) => arg => funcs.reduce((value, func) => func(value), arg)
 
 export default class Demo extends Component {
   static bootstrapWith (demo, {category, component, style, themes}) {
-    tryRequire({category, component}).then(([Component, playground, ctxt, routes, events]) => {
-      if (routes) { compilePattern(routes.pattern) }
+    tryRequire({category, component}).then(([Base, playground, ctxt, routes, events, pkg]) => {
       if (isFunction(ctxt)) {
         return ctxt().then(context => {
-          demo.setState({playground, Component, ctxt: context, routes, style, themes, events})
+          demo.setState({playground, Base, ctxt: context, routes, style, themes, events, pkg})
         })
       }
 
-      demo.setState({playground, Component, ctxt, routes, style, themes, events})
+      demo.setState({playground, Base, ctxt, routes, style, themes, events, pkg})
     })
-  }
-
-  static propsWithParams (demo) {
-    if (demo.state.routes && demo.props.params && demo.props.params.splat) {
-      const matches = matchPattern(demo.state.routes.pattern, `/${demo.props.params.splat}`)
-      const params = matches.paramNames.reduce((params, name, index) => {
-        params[name] = matches.paramValues[index]
-        return params
-      }, {})
-      return Object.assign(
-        {},
-        {'__v': Math.random()},
-        demo.props,
-        {
-          routeParams: params,
-          params: Object.assign(
-            {},
-            demo.props.params,
-            params
-          )
-        }
-      )
-    }
-    return demo.props
   }
 
   static propTypes = {
@@ -70,7 +52,7 @@ export default class Demo extends Component {
   }
 
   state = {
-    Component: (<div />),
+    Base: false,
     isCodeOpen: false,
     ctxt: false,
     ctxtSelectedIndex: 0,
@@ -78,6 +60,7 @@ export default class Demo extends Component {
     playground: undefined,
     routes: false,
     theme: 'default',
+    pkg: false,
     themeSelectedIndex: 0,
     themes: []
   }
@@ -98,39 +81,34 @@ export default class Demo extends Component {
   }
 
   render () {
-    const {category, component} = this.props.params
     let {
-      Component,
+      Base,
       ctxt,
       ctxtSelectedIndex,
       ctxtType,
       events,
       isCodeOpen,
+      pkg,
       playground,
-      routes,
       style,
       themeSelectedIndex,
       themes
     } = this.state
 
-    let domain
+    if (!Base) { return <h1>Loading...</h1> }
 
-    if (Component.contextTypes && ctxt) {
-      Component = contextify(Component.contextTypes, contextByType(ctxt, ctxtType))(Component)
-    }
+    const contextTypes = Base.contextTypes || Base.originalContextTypes
+    const context = contextTypes && contextByType(ctxt, ctxtType)
+    const {domain} = context || {}
+    const hasProvider = pkg && pkg.dependencies && pkg.dependencies[DDD_REACT_REDUX]
+    const store = domain && hasProvider && createStore(domain)
 
-    if (events && ctxt && ctxtType) {
-      domain = contextByType(ctxt, ctxtType).domain
-    }
+    const Enhance = pipe(
+      withContext(contextTypes && context, context),
+      withProvider(hasProvider, store)
+    )(Base)
 
-    /* Begin Black Magic */
-    // We want pass the routering props to the component in the demo
-    const self = this
-    const HOCComponent = class HOCComponent extends React.Component {
-      render () { return (<Component {...Demo.propsWithParams(self)} {...this.props} />) }
-    }
-    HOCComponent.displayName = Component.displayName
-    /* END Black Magic */
+    console.log(Enhance.displayName, cleanDisplayName(Enhance.displayName))
 
     return (
       <div className='sui-StudioDemo'>
@@ -144,8 +122,7 @@ export default class Demo extends Component {
             themes={themes}
             selected={themeSelectedIndex}
             onThemeChange={this.handleThemeChange} />
-          <RoutesButtons routes={routes || {}} category={category} component={component} />
-          <EventsButtons events={events || {}} domain={domain} />
+          <EventsButtons events={events || {}} store={store} domain={domain} />
         </div>
 
         <button className='sui-StudioDemo-codeButton' onClick={this.handleCode}>
@@ -160,7 +137,7 @@ export default class Demo extends Component {
 
         <Preview
           code={playground}
-          scope={{React, [`${Component.displayName || Component.name}`]: HOCComponent}}
+          scope={{React, [`${cleanDisplayName(Enhance.displayName || Enhance.name)}`]: Enhance}}
         />
       </div>
     )
