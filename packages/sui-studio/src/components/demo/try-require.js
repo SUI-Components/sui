@@ -2,6 +2,8 @@
 
 const reqComponentsSrc =
   require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/src\/index\.jsx?/)
+const reqComponentsPkg =
+  require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/package\.json?/)
 const reqComponentsPlayGround =
   require.context(`bundle-loader?lazy!raw-loader!${__BASE_DIR__}/demo`, true, /^.*\/playground/)
 const reqContextPlayGround =
@@ -21,6 +23,17 @@ const tryRequire = ({category, component}) => {
         bundler = reqComponentsSrc(`./${category}/${component}/src/index.jsx`)
       }
       bundler(bundle => resolve(bundle.default))
+    })
+  })
+
+  const pkg = new Promise(resolve => {
+    require.ensure([], () => {
+      try {
+        const bundler = reqComponentsPkg(`./${category}/${component}/package.json`)
+        bundler(pkg => resolve(pkg))
+      } catch (e) {
+        return resolve({dependencies: {}})
+      }
     })
   })
 
@@ -85,7 +98,7 @@ const tryRequire = ({category, component}) => {
   //   System.import(`${__BASE_DIR__}/demo/${category}/${component}/routes.js`)
   //     .catch(e => false)
 
-  return Promise.all([Component, playground, context, routes, events])
+  return Promise.all([Component, playground, context, routes, events, pkg])
 }
 
 export default tryRequire
