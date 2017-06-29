@@ -1,4 +1,4 @@
-> These document will guide you to migrate your studio to version 4.
+> Th¡s document will guide you to migrate your studio to version 4.
 >
 > `sui-studio@4` works now **locally**, not globally. So its migration requires
 > multiple changes.
