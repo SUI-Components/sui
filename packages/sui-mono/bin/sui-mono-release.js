@@ -37,7 +37,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     let commands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
-      ['git', [`commit -m "release(${pkg}): v${pkgInfo.version}"`]],
+      ['git', ['commit -m "release(' + pkg + '): v$(node -p -e "require(\'./package.json\')".version)"']],
       ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', 'origin', 'HEAD']]
     ]
