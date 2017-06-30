@@ -23,9 +23,9 @@ $ export PATH="$PATH:./node_modules/.bin"
 ## Available packages
 | Name | Description | Status |
 | -- | -- | -- |
-| [sui-babel-preset](./packages/sui-babel-preset/README.md) | Develop, maintain and publish your SUI components | :white_check_mark: |
-| [sui-lint](./packages/sui-lint/README.md) | CLI to lint your code and make it compliant | :white_check_mark: |
-| [sui-precommit](./packages/sui-precommit/README.md) | Effortless SUI precommit rules integration in your project | :white_check_mark: |
+| [babel-preset-sui](./packages/babel-preset-sui/README.md) | Develop, maintain and publish your SUI components | :white_check_mark: |
+| [sui-lint](./packages/sui-lint/Readme.md) | CLI to lint your code and make it compliant | :white_check_mark: |
+| [sui-precommit](./packages/sui-precommit/Readme.md) | Effortless SUI precommit rules integration in your project | :white_check_mark: |
 | [sui-component-dependencies](./packages/sui-component-dependencies/README.md) | A set of dependencies of all SUI components | :white_check_mark: |
 | [sui-cz](./packages/sui-cz/README.md) | A commitizen adapter for semantic commits | :white_check_mark: |
 | [sui-mono](./packages/sui-mono/README.md) | Simple CLI for monorepo/multipackage | :white_check_mark: |
