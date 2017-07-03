@@ -52,3 +52,8 @@ Your package.json might be altered like that:
 }
 
 ```
+
+> :warning: **Caution!**
+>
+>  **Make sure you first remove the pre-commit and commit-msg hooks from the
+`.git/hooks` directory if already set. `sui-precommit install` will not overwrite them.**
