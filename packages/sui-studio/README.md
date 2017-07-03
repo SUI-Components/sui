@@ -30,22 +30,25 @@ cd <project_name>
 
 Once you're in the new project, you can execute `sui-studio start` in order to start the development browser and start working on your components.
 
-# Workflows
 
-## Creating a new component
-### 1) Create a component
+
+
+## Common Workflow
+
+### Creating a new component
+#### 1) Create a component
 
 ```sh
 $ sui-studio generate house window
 ```
 
-### 2) Install component dependencies
+#### 2) Install component dependencies
 
 ```sh
 $ sui-studio run-all npm install
 ```
 
-### 3) Commit changes using the appropiate command
+#### 3) Commit changes using the appropiate command
 
 First of all, stage you changes for commit with ```git add``` or whatever you use.
 
@@ -69,7 +72,7 @@ It will prompt a question form. The way you answer to this question form affects
 
 Then just push your changes using ```git push``` and merge them into master after review.
 
-### 4) Release
+#### 4) Release
 
 Select master branch. First, check that the release will be properly built by executing:
 ```
@@ -80,7 +83,15 @@ If the output is the expected then run:
 $ sui-studio release
 ```
 
+## CLI
+
+### `$ sui-studio link-all`
+
+Executes internally `$ sui-mono link`, that links all components to each other.
+
+
 # Conventions
+
 ## Naming
 lowerCamelCase is the choice for directories and files.
 ```
