@@ -16,7 +16,7 @@ function getOrDefault (key, defaultValue) {
 const packagesFolder = getOrDefault('packagesFolder', 'src')
 const deepLevel = getOrDefault('deepLevel', 1)
 const customScopes = getOrDefault('customScopes', [])
-const publishAccess = getOrDefault('access', 'private')
+const publishAccess = getOrDefault('access', 'restricted')
 
 module.exports = {
   getScopes: function () {
