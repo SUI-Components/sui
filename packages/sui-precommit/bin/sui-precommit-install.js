@@ -5,7 +5,6 @@ const path = require('path')
 const fs = require('fs')
 const pkgPath = path.join(process.cwd(), 'package.json')
 
-
 installHuskyIfNotInstalled()
   .then(function () {
     installScript('lint', 'sui-lint js && sui-lint sass')
