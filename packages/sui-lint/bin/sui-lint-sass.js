@@ -6,7 +6,7 @@ const CONFIG_PATH = require.resolve('../sass-lint.yml')
 
 executeLintingCommand(BIN_PATH, [
   '-c', CONFIG_PATH,
-  '-i', "'**/node_modules/**/*.scss, **/lib/**/*.scss, **/dist/**/*.scss'",
+  '-i', "'**/node_modules/**, **/lib/**, **/dist/**'",
   '-v',
   '**/src/**/*.scss'
 ])
