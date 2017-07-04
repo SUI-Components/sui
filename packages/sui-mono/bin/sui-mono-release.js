@@ -38,9 +38,9 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
       ['git', ['commit -m "release(' + pkg + '): v$(node -p -e "require(\'./package.json\')".version)"']],
-      ['npm', ['publish', `--access=${publishAccess}`]],
+      !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', 'origin', 'HEAD']]
-    ]
+    ].filter(Boolean)
     scripts['build'] && commands.unshift(['npm', ['run', 'build']])
 
     serialSpawn(commands, {cwd})
