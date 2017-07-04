@@ -1,4 +1,5 @@
-/* eslint react/no-multi-comp:0 */
+/* eslint react/no-multi-comp:0, no-console:0 */
+
 import React, {Component, PropTypes} from 'react'
 
 import { iconClose, iconCode } from '../icons'
