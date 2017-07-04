@@ -5,9 +5,11 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
+const fs = require('fs-extra')
 const browserSync = require('browser-sync')
 const historyApiFallback = require('connect-history-api-fallback')
 const config = require('../webpack.config.prod')
+const {config: projectConfig} = require('../shared')
 
 // TODO: Extract this
 const chalk = require('chalk')
@@ -58,13 +60,21 @@ webpack(config).run((error, stats) => {
 
   console.log(`Webpack stats: ${stats}`)
 
+  if (projectConfig.offline && projectConfig.offline.whitelist) {
+    fs.copySync(
+      path.resolve(process.cwd(), 'public', 'index.html'),
+      path.resolve(process.cwd(), 'public', '200.html')
+    )
+    console.log(chalkSuccess('200.html create to be used in your Offline App'))
+  }
+
   console.log(chalkSuccess('Your app is compiled in production mode in /public. It\'s ready to roll!'))
   if (server) {
     console.log(chalkProcessing('Opening production build...'))
     browserSync({
-      port: 4000,
+      port: process.env.PORT || 4000,
       ui: {
-        port: 4001
+        port: (parseInt(process.env.PORT, 10) + 1) || 4001
       },
       server: {
         baseDir: path.resolve(process.env.PWD, 'public')

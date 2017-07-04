@@ -1,14 +1,16 @@
+'use strict'
 /* eslint-disable no-console */
-exports.register = ({first, renovate}) => () => {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      const swUrl = '/service-worker.js'
-      navigator.serviceWorker
-        .register(swUrl)
-        .then(registration => {
-          registration.onupdatefound = () => {
-            const installingWorker = registration.installing
-            installingWorker.onstatechange = () => {
+exports.register = function (_ref) {
+  var first = _ref.first
+  var renovate = _ref.renovate
+  return function () {
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        var swUrl = '/service-worker.js'
+        navigator.serviceWorker.register(swUrl).then(function (registration) {
+          registration.onupdatefound = function () {
+            var installingWorker = registration.installing
+            installingWorker.onstatechange = function () {
               if (installingWorker.state === 'installed') {
                 if (navigator.serviceWorker.controller) {
                   // At this point, the old content will have been purged and
@@ -25,17 +27,17 @@ exports.register = ({first, renovate}) => () => {
               }
             }
           }
-        })
-        .catch(error => {
+        }).catch(function (error) {
           console.error('Error during service worker registration:', error)
         })
-    })
+      })
+    }
   }
 }
 
-exports.unregister = () => {
+exports.unregister = function () {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(registration => {
+    navigator.serviceWorker.ready.then(function (registration) {
       registration.unregister()
     })
   }

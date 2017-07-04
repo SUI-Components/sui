@@ -12,8 +12,8 @@ exports.whenInstalled = (check, string) => {
   return isInstalled ? string : false
 }
 
-exports.when = (check, value) => {
-  return check ? value : false
+exports.when = (check, getValue) => {
+  return check ? getValue() : false
 }
 
 exports.cleanList = list => list.filter(Boolean)

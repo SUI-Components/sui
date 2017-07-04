@@ -122,6 +122,37 @@ Si estas usando Firebase, es recomendable no cachear en absoluto el fichero serv
 
 Si deseas dar de baja tu service worker solo tienes que reemplazar tu llamada a register por `unregister`
 
+### Caching
+
+Puedes configurar que quieres cachear para ser usado offline:
+
+```js
+"offline": {
+  whitelist: ["::all::"]
+  "runtime": [{
+    "urlPattern": "ms-mt--api-web\\.spain\\.schibsted\\.io",
+    "handler": "networkFirst"
+  },{
+    "urlPattern": "fonts\\.googleapis\\.com",
+    "handler": "fastest"
+  },{
+    "urlPattern": "prea\\.ccdn\\.es\/cnet\/contents\/media",
+    "handler": "cacheFirst",
+    "options": {
+      "cache": {
+        "name": "image-cache",
+        "maxEntries": 50
+      }
+  }}]
+}
+```
+
+runtime usa la mismo API que (sw-toolbox)[https://googlechrome.github.io/sw-toolbox/]
+
+además whitelist es un listado de regexp que indican que páginas son seguras para hacer solo CSR. Puedes usar el string `::all::` para indicar que siempre quieres usar CSR.
+
+Si no defines un listado whitelist. Siempre se hará SSR
+
 ## Externals
 
 Cumple la función de subir una librería external a tu proyecto que normalmente lo pondrías a mano con su propio tag script, a tu cdn, y colocar una referencia a el en index.html y con un hash que representa el contenido del fichero.

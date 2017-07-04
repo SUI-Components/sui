@@ -12,6 +12,7 @@ const autoprefixer = require('autoprefixer')
 const path = require('path')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {navigateFallbackWhitelist, navigateFallback, runtimeCaching, directoryIndex} = require('./shared/precache')
 require('./shared/shims')
 
 // hack for Windows, as process.env.PWD is undefined in that environment
@@ -74,7 +75,7 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
-    when(config.offline, new SWPrecacheWebpackPlugin({
+    when(config.offline, () => new SWPrecacheWebpackPlugin({
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       filename: 'service-worker.js',
       logger (message) {
@@ -84,9 +85,23 @@ module.exports = {
         }
         console.log(message)
       },
-      // minify: true,
-      navigateFallback: '/index.html',
-      navigateFallbackWhitelist: [/^(?!\/__).*/],
+      minify: true,
+      directoryIndex: (
+        console.log('directoryIndex', directoryIndex(config.offline.whitelist)),
+        directoryIndex(config.offline.whitelist)
+      ),
+      navigateFallback: (
+        console.log('navigateFallback', navigateFallback(config.offline.whitelist)),
+        navigateFallback(config.offline.whitelist)
+      ),
+      navigateFallbackWhitelist: (
+        console.log('navigateFallbackWhitelist', navigateFallbackWhitelist(config.offline.whitelist)),
+        navigateFallbackWhitelist(config.offline.whitelist)
+      ),
+      runtimeCaching: (
+        console.log('runtimeCaching', runtimeCaching(config.offline.runtime)),
+        runtimeCaching(config.offline.runtime)
+      ),
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
     })),
     new webpack.optimize.UglifyJsPlugin({
@@ -103,7 +118,7 @@ module.exports = {
       },
       sourceMap: true
     }),
-    when(config.externals, new Externals({files: config.externals})),
+    when(config.externals, () => new Externals({files: config.externals})),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
