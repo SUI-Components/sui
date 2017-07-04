@@ -63,7 +63,7 @@ const mapNameToPath = (cwds) => (packages) => (name) => cwds[packages.indexOf(na
  * @param  {String} pkgPath Path to browse
  * @return {Array<Array>} index[0] is a path, index[1] re found dependencies
  */
-const mapDepedencies = (dependencies) => (pkgPath) => {
+const getDependenciesBeingUsed = (dependencies) => (pkgPath) => {
   var deps = getPackageDependencies(pkgPath)
   return deps.filter(name => dependencies.indexOf(name) !== -1)
 }
@@ -75,7 +75,7 @@ const mapDepedencies = (dependencies) => (pkgPath) => {
  * @return {Array<Array>} index[0] is a path, index[1] re found dependencies
  */
 const getDependencyMap = (cwds) => (dependencies) => {
-  const getLocalDependencies = mapDepedencies(dependencies)
+  const getLocalDependencies = getDependenciesBeingUsed(dependencies)
   return cwds
     .map((cwd) => [cwd, getLocalDependencies(cwd)])
 }
@@ -107,7 +107,7 @@ const getUsedInternalDependencies = (cwds) => (dependencies) => {
 module.exports = {
   getPackageJson,
   getPackageDependencies,
-  mapDepedencies,
+  getDependenciesBeingUsed,
   getPackagesPaths,
   getPackagesNames,
   getDependencyMap,
