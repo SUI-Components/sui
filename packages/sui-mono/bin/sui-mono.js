@@ -9,6 +9,9 @@ program
   .version(version, '    --version')
 
 program
+  .command('link', 'Link packages to each other')
+
+program
   .command('commit', 'Commits the current stashed work')
 
 program

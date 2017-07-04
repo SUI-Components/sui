@@ -6,6 +6,8 @@ const fs = require('fs-extra')
 const program = require('commander')
 const BASE_DIR = process.cwd()
 
+console.log(colors.yellow('sui-studio link is deprecated. Use "sui-studio link-all" instead.'))
+
 program
   .parse(process.argv)
 

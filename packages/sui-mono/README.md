@@ -25,6 +25,21 @@ $ sui-mono run rm -Rf node_modules
 $ sui-mono run npm install
 ```
 
+
+### Link
+
+Is you want to link all packages between each other, to ease development:
+
+```
+sui-mono link
+```
+
+Note that:
+* The monorepo will also be linked to the packages it contains if it uses them.
+* Packages that are not used locally will not be linked at all
+
+
+
 ### Commit
 
 You do your normal git workflow, but when commiting you should use:

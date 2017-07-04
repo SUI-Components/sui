@@ -41,6 +41,9 @@ program
   .command('run-all <command>', 'Run the same command in each component').alias('ra')
 
 program
+  .command('link-all <command>', 'Link all components between each other').alias('la')
+
+program
   .command('link <origin> <destination>', 'Link components between them').alias('l')
 
 program
