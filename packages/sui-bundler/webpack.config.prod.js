@@ -71,7 +71,7 @@ module.exports = {
       defaultAttribute: 'defer',
       inline: 'runtime'
     }),
-    new PreloadWebpackPlugin(),
+    new PreloadWebpackPlugin({ rel: 'prefetch' }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
