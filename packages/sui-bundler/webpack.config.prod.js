@@ -49,7 +49,7 @@ module.exports = {
       __DEV__: false,
       __BASE_DIR__: JSON.stringify(process.env.PWD)
     }),
-    new ExtractTextPlugin('styles.[name].[chunkhash:8].css'),
+    new ExtractTextPlugin('styles.[name].[contenthash:8].css'),
     new HtmlWebpackPlugin({
       env: process.env,
       inject: 'head',
