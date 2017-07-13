@@ -1,0 +1,31 @@
+{
+  "name": "@schibstedspain/sui-perf",
+  "version": "1.0.0",
+  "description": "Utilities to measure and monitor perf of your isomorphic apps.",
+  "main": "lib/index.js",
+  "scripts": {
+
+    "lib": "rm -Rf lib && babel ./src -d lib --presets sui",
+    "examples": "node examples",
+    "prepublish": "npm run lib"
+  },
+  "keywords": [],
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "dependencies": {
+    "colors": "1.1.2",
+    "marky": "1.2.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-perf#readme",
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-preset-sui": "1"
+  }
+}
