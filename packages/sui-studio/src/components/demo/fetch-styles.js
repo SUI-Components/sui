@@ -12,23 +12,24 @@ export const themesFor = ({category, component}) =>
 
 export default /* stylesFor */ ({category, component, withTheme = 'default'} = {}) =>
   new Promise(resolve => {
-    let style
     require.ensure([], () => {
+      const componentPath = `${category}/${component}`
       try {
-        if (withTheme === 'default') {
-          style = reqComponentsSCSS(`./${category}/${component}/src/index.scss`)
-          console.groupCollapsed()
-          console.info(`ADD styles ./${category}/${component}/src/index.scss`)
-          console.log(style)
-          console.groupEnd()
-        } else {
-          style = reqThemePlayGround(`./${category}/${component}/themes/${withTheme}.scss`)
-          console.groupCollapsed()
-          console.info(`ADD styles ./${category}/${component}/themes/${withTheme}.scss`)
-          console.log(style)
-          console.groupEnd()
-        }
-        console.log(withTheme)
+        console.groupCollapsed(`Applying new styles for ${componentPath}`)
+        console.info('withTheme: ', withTheme)
+
+        const stylePath = withTheme === 'default'
+                           ? `./${componentPath}/src/index.scss`
+                           : `./${componentPath}/themes/${withTheme}.scss`
+
+        const style = withTheme === 'default'
+                              ? reqComponentsSCSS(stylePath)
+                              : reqThemePlayGround(stylePath)
+
+        console.info('style path: ', stylePath)
+        console.info('style to inject: ', style)
+        console.groupEnd()
+
         resolve(style)
       } catch (e) { console.warn(`No styles for ${category}/${component}`) }
     })
