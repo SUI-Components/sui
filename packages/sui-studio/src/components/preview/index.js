@@ -75,6 +75,7 @@ export default class Preview extends Component {
         this.setState({error: undefined})
       }
     } catch (err) {
+      console.error(err)
       this.setTimeout(() => {
         this.setState({error: err.toString()})
       }, ERROR_TIMEOUT)
