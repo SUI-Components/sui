@@ -22,7 +22,14 @@ const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
 
-const contextByType = (ctxt, type) => deepmerge(ctxt[DEFAULT_CONTEXT], ctxt[type])
+const createContextByType = (ctxt, type) => {
+  // check if the user has created a context.js with the needed contextTypes
+  if (typeof ctxt !== 'object' || ctxt === null) {
+    console.warn('[Studio] You\'re trying to use a contextType in your component but it seems that you haven\'t created a context.js in the playground folder. This will likely make your component won\'t work as expected or it might have an useless context.')
+  }
+  return deepmerge(ctxt[DEFAULT_CONTEXT], ctxt[type])
+}
+
 const isFunction = (fnc) => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
 const cleanDisplayName = displayName => {
   const [fallback, name] = displayName.split(/\w+\((\w+)\)/)
@@ -99,7 +106,7 @@ export default class Demo extends Component {
     if (!Base) { return <h1>Loading...</h1> }
 
     const contextTypes = Base.contextTypes || Base.originalContextTypes
-    const context = contextTypes && contextByType(ctxt, ctxtType)
+    const context = contextTypes && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
     const hasProvider = pkg && pkg.dependencies && pkg.dependencies[DDD_REACT_REDUX]
     const store = domain && hasProvider && createStore(domain)
@@ -108,8 +115,6 @@ export default class Demo extends Component {
       withContext(contextTypes && context, context),
       withProvider(hasProvider, store)
     )(Base)
-
-    console.log(Enhance.displayName, cleanDisplayName(Enhance.displayName))
 
     return (
       <div className='sui-StudioDemo'>
