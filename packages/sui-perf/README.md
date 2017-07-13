@@ -82,6 +82,21 @@ Measure the execution of given function and return what the function returns.
 
 **In case a instance of `Promise` is returned, the measurement will measure the actual promise.**
 
+Original:
+```js
+fetch('api.domain.com/user/58')
+  .then(response => response.json())
+  .then(console.log)
+```
+
+Measuring fetch:
+```js
+perf.measure('Fetch user')
+  (() => fetch('api.domain.com/user/58') )
+  .then(response => response.json())
+  .then(console.log)
+```
+
 ### Charts
 
 `@schibstedspain/sui-perf/lib/charts` has no dependency of and can be imported separately.
