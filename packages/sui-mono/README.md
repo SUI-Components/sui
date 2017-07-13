@@ -61,7 +61,9 @@ sui-mono release
 The first one will provide information if anything requires a release.
 The second one will release the packages
 
-> Your packages must implement script `npm run build` that will be executed before any release.
+> Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
+
+**sui-mono only creates releases for packages that contain `fix`, `perf` or `feat` commits. Otherwise, nothing will be done or outputted.**
 
 ## How to configure your project
 
