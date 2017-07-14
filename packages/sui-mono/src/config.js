@@ -3,7 +3,8 @@ const readdirSync = require('fs').readdirSync
 const statSync = require('fs').statSync
 
 const basePath = process.cwd()
-const packageConfig = require(path.join(basePath, 'package.json')).config
+const projectPackage = require(path.join(basePath, 'package.json'))
+const packageConfig = projectPackage.config
 
 function getOrDefault (key, defaultValue) {
   return (
@@ -35,6 +36,15 @@ module.exports = {
   },
   getPublishAccess: function () {
     return publishAccess
+  },
+  getProjectName: function () {
+    return projectPackage.name
+  },
+  isMonoPackage: function () {
+    const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
+    const scopePath = folders.pop()
+
+    return !getPackageConfig(scopePath)
   }
 }
 
@@ -50,4 +60,12 @@ const cwds = (rootDir, deep) => {
   return baseFolders.reduce((acc) => {
     return acc.map(getFolders).reduce(flatten)
   }, [rootDir])
+}
+
+const getPackageConfig = packagePath => {
+  try {
+    return require(path.join(packagePath, 'package.json'))
+  } catch (e) {
+    return null
+  }
 }
