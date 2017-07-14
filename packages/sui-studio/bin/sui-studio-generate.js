@@ -86,6 +86,7 @@ const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${category}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${component}`
 
+/* eslint-disable no-useless-escape */
 writeFile(
 COMPONENT_PACKAGE_JSON_FILE,
 `{
@@ -107,6 +108,7 @@ COMPONENT_PACKAGE_JSON_FILE,
 }
 `
 )
+/* eslint-enable no-useless-escape */
 
 writeFile(
 COMPONENT_ENTRY_JS_POINT_FILE,
