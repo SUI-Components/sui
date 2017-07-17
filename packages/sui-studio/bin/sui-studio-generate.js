@@ -96,7 +96,7 @@ COMPONENT_PACKAGE_JSON_FILE,
   "scripts": {
     "build": "rm -Rf ./lib && mkdir -p ./lib && npm run build:js && npm run build:styles",
     "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-    "build:styles": "../../../node_modules/.bin/cpx \"./src/**/*.scss\" ./lib"
+    "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },
   "dependencies": {
     "@schibstedspain/sui-component-dependencies": "latest"
