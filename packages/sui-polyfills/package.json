@@ -1,0 +1,21 @@
+{
+  "name": "@schibstedspain/sui-polyfills",
+  "version": "1.0.0",
+  "description": "Polyfills for your project",
+  "main": "src/index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Miguel Angel Duran <miduga@gmail.com>",
+  "dependencies": {
+    "core-js": "2.4.1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-polyfills#readme"
+}
