@@ -39,6 +39,7 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   plugins: cleanList([
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'runtime'],
