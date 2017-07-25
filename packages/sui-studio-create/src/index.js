@@ -71,7 +71,7 @@ writeFile(
     "lint": "npm run lint:js && npm run lint:sass",
     "commitmsg": "validate-commit-msg",
     "precommit": "sui-precommit run",
-    "generate": "sui-studio generate -P re -S schibstedspain",
+    "generate": "sui-studio generate -P re -S schibstedspain"
   },
   "repository": {},
   "keywords": [],

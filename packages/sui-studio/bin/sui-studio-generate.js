@@ -2,8 +2,10 @@
 
 const program = require('commander')
 const colors = require('colors')
+const fs = require('fs')
 const fse = require('fs-extra')
 const pascalCase = require('pascal-case')
+const spawn = require('child_process').spawn
 
 program
   .option('-R, --router', 'add routering for this component')
@@ -55,126 +57,140 @@ const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}playground`
 const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 const COMPONENT_ROUTES_FILE = `${DEMO_DIR}routes.js`
 
-const writeFile = (path, body) => {
-  fse.outputFile(
-    path,
-    body,
-    err => {
-      if (err) { showError(`Fail creating ${path}`) }
-      console.log(colors.gray(`Created ${path}`))
-    }
-  )
-}
-
-writeFile(
-COMPONENT_PACKAGE_GITIGNORE_FILE,
-`
-lib
-node_modules
-`
-)
-
-writeFile(
-COMPONENT_PACKAGE_NPMIGNORE_FILE,
-`
-src
-`
-)
-
 const {context, router, scope, prefix = 'sui'} = program
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${category}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${component}`
 
-/* eslint-disable no-useless-escape */
-writeFile(
-COMPONENT_PACKAGE_JSON_FILE,
-`{
-  "name": "${packageName}",
-  "version": "1.0.0",
-  "description": "",
-  "main": "lib/index.js",
-  "scripts": {
-    "build": "rm -Rf ./lib && mkdir -p ./lib && npm run build:js && npm run build:styles",
-    "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-    "build:styles": "../../../node_modules/.bin/cpx \"./src/**/*.scss\" ./lib"
-  },
-  "dependencies": {
-    "@schibstedspain/sui-component-dependencies": "latest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+// Check if the component already exist before continuing
+if (fs.existsSync(COMPONENT_DIR)) {
+  console.log(colors.red(`[${packageName}] This component already exist in the path:
+  ${COMPONENT_DIR}`))
+  process.exit(1)
 }
-`
-)
-/* eslint-enable no-useless-escape */
 
-writeFile(
-COMPONENT_ENTRY_JS_POINT_FILE,
-`import React, {Component} from 'react'
+const writeFile = (path, body) => {
+  return fse.outputFile(path, body).then(() => {
+    console.log(colors.gray(`Created ${path}`))
+  })
+  .catch(err => {
+    showError(`Fail creating ${path}`)
+    throw new Error(err)
+  })
+}
 
-class ${componentInPascal} extends Component {
-  render () {
-    return (
-      <div className='${prefix}-${componentInPascal}'>
-        <h1>${componentInPascal}</h1>
-      </div>
-    )
+Promise.all([
+  writeFile(
+  COMPONENT_PACKAGE_GITIGNORE_FILE,
+  `lib
+  node_modules
+  `
+  ),
+
+  writeFile(
+  COMPONENT_PACKAGE_NPMIGNORE_FILE,
+  `src
+  `
+  ),
+
+  writeFile(
+  COMPONENT_PACKAGE_JSON_FILE,
+  `{
+    "name": "${packageName}",
+    "version": "1.0.0",
+    "description": "",
+    "main": "lib/index.js",
+    "scripts": {
+      "build": "rm -Rf ./lib && mkdir -p ./lib && npm run build:js && npm run build:styles",
+      "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+      "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
+    },
+    "dependencies": {
+      "@schibstedspain/sui-component-dependencies": "latest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT"
   }
-}
+  `
+  ),
 
-${componentInPascal}.displayName = '${componentInPascal}'
+  writeFile(
+  COMPONENT_ENTRY_JS_POINT_FILE,
+  `import React, {Component} from 'react'
 
-// Remove these comments if you need
-// ${componentInPascal}.contextTypes = {i18n: React.PropTypes.object}
-// ${componentInPascal}.propTypes = {}
-// ${componentInPascal}.defaultProps = {}
-
-export default ${componentInPascal}
-`
-)
-
-writeFile(
-COMPONENT_ENTRY_SCSS_POINT_FILE,
-`@import '~@schibstedspain/theme-basic/lib/index';
-
-.${prefix}-${componentInPascal} {
-  // Do your magic
-}
-`
-)
-
-writeFile(
-COMPONENT_README_FILE,
-`
-### ${componentInPascal}
-Dont forget write a README
-`
-)
-
-writeFile(
-  COMPONENT_PLAYGROUND_FILE,
-  `return (<${componentInPascal} />)`
-)
-
-router && writeFile(
-COMPONENT_ROUTES_FILE,
-`module.exports = {
-  pattern: '/:lang',
-  'default': '/es',
-  'en': '/en',
-  'de': '/de'
-}
-`
-)
-
-context && writeFile(
-COMPONENT_CONTEXT_FILE,
-`module.exports = {
-  'default': {
-    i18n: {t (s) { return s.split('').reverse().join('') }}
+  class ${componentInPascal} extends Component {
+    render () {
+      return (
+        <div className='${prefix}-${componentInPascal}'>
+          <h1>${componentInPascal}</h1>
+        </div>
+      )
+    }
   }
-}
-`
-)
+
+  ${componentInPascal}.displayName = '${componentInPascal}'
+
+  // Remove these comments if you need
+  // ${componentInPascal}.contextTypes = {i18n: React.PropTypes.object}
+  // ${componentInPascal}.propTypes = {}
+  // ${componentInPascal}.defaultProps = {}
+
+  export default ${componentInPascal}
+  `
+  ),
+
+  writeFile(
+  COMPONENT_ENTRY_SCSS_POINT_FILE,
+  `@import '~@schibstedspain/theme-basic/lib/index';
+
+  .${prefix}-${componentInPascal} {
+    // Do your magic
+  }
+  `
+  ),
+
+  writeFile(
+  COMPONENT_README_FILE,
+  `### ${componentInPascal}
+  Dont forget write a README
+  `
+  ),
+
+  writeFile(
+    COMPONENT_PLAYGROUND_FILE,
+    `return (<${componentInPascal} />)`
+  ),
+
+  router && writeFile(
+  COMPONENT_ROUTES_FILE,
+  `module.exports = {
+    pattern: '/:lang',
+    'default': '/es',
+    'en': '/en',
+    'de': '/de'
+  }
+  `
+  ),
+
+  context && writeFile(
+  COMPONENT_CONTEXT_FILE,
+  `module.exports = {
+    'default': {
+      i18n: {t (s) { return s.split('').reverse().join('') }}
+    }
+  }
+  `
+  )
+])
+.then(() => {
+  console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
+  const install = spawn('npm', ['install'], {cwd: COMPONENT_DIR})
+
+  install.stdout.on('data',
+    data => console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
+  )
+  install.stderr.on('data',
+    data => console.log(colors.red(`[${packageName}]: ${data.toString()}`))
+  )
+})

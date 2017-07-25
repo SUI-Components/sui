@@ -28,7 +28,7 @@
     transform: translate3d(-100%, 0, 0);
     transition: transform .5s ease-in-out;
     width: 100%;
-    z-index: 999998;
+    z-index: 9998;
 
     &Body {
       transition: width .25s ease-out;
@@ -66,5 +66,5 @@
   @include breakpoint-from(s) {
     display: none;
   }
-  z-index: 999999;
+  z-index: 9999;
 }
