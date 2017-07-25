@@ -104,7 +104,8 @@ perf.measure('Fetch user')
 
 
 #### getTimelineChart(timelineOptions)(entries)
-Get a text-based timeline chart from given entries
+Get a text-based timeline chart from given entries.
+Check [timelineOptions](#timelineOptions).
 
 ```js
 import {getTimelineChart} from '@schibstedspain/sui-perf/lib/charts'
@@ -122,6 +123,7 @@ timeline        start  time   %    label
 #### printTimelineChart(timelineOptions)(entries)
 
 A shorthand to directly print the chart with `console.log`.
+Check [timelineOptions](#timelineOptions).
 
 ```js
 import {printTimelineChart} from '@schibstedspain/sui-perf/lib/charts'
@@ -133,6 +135,17 @@ timeline        start  time   %    label
     ███████████ 33ms   105ms  76%  Example 2 - asyncTask(200)
  */
 ```
+
+#### timelineOptions
+
+##### `width`=15
+Length of the chart. The number stands for number of chars width, as its a text-based char.
+
+##### `timeRange`
+Time range, in milliseconds. By default it's the longest measurement. But, if can be usefull to set a fix timeRange to compare 2 different sets of data. For instance if you want to component different response times on the same url.
+
+##### `minPercent`=0
+Filters times than are less than given percent. For instance, is `minPercent` is set to 5, request than are less than 5% of time range will not be displayed.
 
 
 ### Special measurements
