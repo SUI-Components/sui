@@ -49,7 +49,7 @@ Get an instance of `perf` which measurements are scoped to this instance.
 ```js
 import getPerf from '@schibstedspain/sui-perf'
 
-const perf = getPerf(req.reqId)
+const perf = getPerf('my-request-unique-id')
 perf.mark('Request')
 /* ... */
 perf.stop('Request')
@@ -158,7 +158,7 @@ import superagent from 'superagent'
 import getPerf from '@schibstedspain/sui-perf'
 import measureSuperagent from '@schibstedspain/sui-perf/lib/measure-superagent'
 
-const perf = getPerf(req.reqId)
+const perf = getPerf('my-request-unique-id')
 const clearMeasureSuperAgent =  measureSuperagent(superagent, perf)
 
 /* ... */
@@ -166,6 +166,20 @@ console.log(perf.getEntries())
 clearMeasureSuperAgent()
 ```
 
+#### measureReact(perf)
+Measure mounting of all React components, either on client or server.
+
+```js
+import getPerf from '@schibstedspain/sui-perf'
+import measureReact from '@schibstedspain/sui-perf/lib/measure-react'
+
+const perf = getPerf('my-request-unique-id')
+const clearMeasureReact =  measureReact(perf)
+
+/* ... */
+console.log(perf.getEntries())
+clearMeasureReact()
+```
 
 ## Contributing
 

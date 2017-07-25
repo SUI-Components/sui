@@ -26,5 +26,9 @@
   "devDependencies": {
     "babel-cli": "6.18.0",
     "babel-preset-sui": "1"
+  },
+  "peerDependencies": {
+    "react": "15",
+    "react-dom": "15"
   }
 }
