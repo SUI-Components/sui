@@ -4,7 +4,7 @@ const jsonImporter = require('node-sass-json-importer')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 
-const happypack = require('happypack')
+const Happypack = require('happypack')
 
 require('./shared/shims')
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
@@ -27,7 +27,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new happypack({
+    new Happypack({
       threads: 4,
       loaders: ['babel-loader?presets=sui']
     }),
