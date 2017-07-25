@@ -5,6 +5,8 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
+## Motivation
+
 One to two paragraph statement about  **why** the project exists and what it does:
 * Feature 1
 * Feature 2
@@ -22,7 +24,7 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 ## Installation
 
 ```sh
-npm install my-crazy-module --save
+npm install @schibstedspain/my-package --save
 ```
 
 ## API Reference

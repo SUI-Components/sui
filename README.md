@@ -35,3 +35,4 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-react-domain-connector](./packages/sui-react-domain-connector/README.md) | Connect any React component to your domain use cases | :hourglass: |
 | [sui-ssr](./packages/sui-ssr/README.md) | Plug SSR to you SUI SPA | :hourglass: |
 | [sui-decorators](./packages/sui-decorators/README.md) | Develop, maintain and publish your SUI components | :hourglass: |
+| [sui-polyfills](./packages/sui-polyfills/README.md) | Polyfills to load on our projects | :hourglass: |

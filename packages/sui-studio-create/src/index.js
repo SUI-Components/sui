@@ -70,7 +70,8 @@ writeFile(
     "lint:sass": "sui-lint sass",
     "lint": "npm run lint:js && npm run lint:sass",
     "commitmsg": "validate-commit-msg",
-    "precommit": "sui-precommit run"
+    "precommit": "sui-precommit run",
+    "generate": "sui-studio generate -P re -S schibstedspain"
   },
   "repository": {},
   "keywords": [],
@@ -91,7 +92,7 @@ writeFile(
     "validate-commit-msg": {
       "types": "@schibstedspain/sui-mono/src/types"
     }
-  },
+  }
 }
 `
 )

@@ -44,6 +44,6 @@ const cwds = (rootDir, deep) => {
   const baseFolders = Array.apply(null, Array(deep)).map(Number.prototype.valueOf, 0)
 
   return baseFolders.reduce((acc) => {
-    return acc.map(getFolders).reduce(flatten)
+    return acc.map(getFolders).reduce(flatten, [])
   }, [rootDir])
 }
