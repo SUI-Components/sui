@@ -68,7 +68,8 @@ const getTextTable = (layout) => {
   return (rows) => rows.map(getTextTableRow).join('\n')
 }
 
-const getTimelineChart = ({width = 15, timeRange = 0} = {}) => {
+const getTimelineChart = ({width = 15, timeRange = 0, minPercent = 0} = {}) => {
+  minPercent = minPercent / 100
   const getChartTable = getTextTable([width, 6, 6, 4, 0])
   return (entries) => {
     if (entries.length < 1) return ''
@@ -76,6 +77,7 @@ const getTimelineChart = ({width = 15, timeRange = 0} = {}) => {
     const duration = getEndTime(entries) - startTime
     const timeRangeRef = timeRange > duration ? timeRange : duration
     const rows = rewindEntriesBy(entries, -startTime)
+      .filter((entry) => entry.duration / duration >= minPercent)
       .map(getRowValues(duration, timeRangeRef, width))
     return getChartTable([['timeline', 'start', 'time', '%', 'label']]).grey +
       '\n' + getChartTable(rows)
