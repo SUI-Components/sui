@@ -4,6 +4,8 @@ const jsonImporter = require('node-sass-json-importer')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 
+const happypack = require('happypack')
+
 require('./shared/shims')
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
 
@@ -25,6 +27,10 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new happypack({
+      threads: 4,
+      loaders: ['babel-loader?presets=sui']
+    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     new webpack.DefinePlugin({
       __DEV__: true,
@@ -52,7 +58,8 @@ module.exports = {
   ],
   module: {
     rules: [
-      {test: /\.jsx?$/, exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/, loader: 'babel-loader', query: {presets: ['sui']}},
+      // {test: /\.jsx?$/, exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/, loader: 'babel-loader', query: {presets: ['sui']}},
+      {test: /\.jsx?$/, exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/, loaders: ['happypack/loader']},
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
       {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
       {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
