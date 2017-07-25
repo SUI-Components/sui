@@ -42,9 +42,8 @@ module.exports = {
   },
   isMonoPackage: function () {
     const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
-    const scopePath = folders.pop()
 
-    return !getPackageConfig(scopePath)
+    return folders.filter(getPackageConfig).length === 0
   }
 }
 
