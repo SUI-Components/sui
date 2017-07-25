@@ -18,7 +18,7 @@ const flatten = status =>
   Object.keys(status).reduce((acc, scope) => {
     const scopeStatus = status[scope]
     acc.increment = Math.max(scopeStatus.increment, acc.increment)
-    acc.commits = Object.assign(acc.commits, scopeStatus.commits)
+    acc.commits = acc.commits.concat(scopeStatus.commits)
 
     return acc
   }, { increment: 0, commits: [] })
