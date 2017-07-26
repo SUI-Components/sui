@@ -11,5 +11,5 @@
 ## Installation
 
 ```sh
-npm install @schisbtedspain/sui-polyfills --save
+npm install @schibstedspain/sui-polyfills --save
 ```
