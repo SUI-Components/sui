@@ -8,6 +8,21 @@ const isCommitBreakingChange = (commit) => {
           commit.footer.indexOf('BREAKING CHANGE') !== -1)
 }
 
+const flattenForMonopackage = status => {
+  return config.isMonoPackage()
+    ? {[config.getProjectName()]: flatten(status)}
+    : status
+}
+
+const flatten = status =>
+  Object.keys(status).reduce((acc, scope) => {
+    const scopeStatus = status[scope]
+    acc.increment = Math.max(scopeStatus.increment, acc.increment)
+    acc.commits = acc.commits.concat(scopeStatus.commits)
+
+    return acc
+  }, { increment: 0, commits: [] })
+
 const check = () =>
   new Promise((resolve, reject) => {
     const packagesWithChangelog = config.getScopes()
@@ -50,7 +65,7 @@ const check = () =>
         cb()
       }
     }, {}, {reverse: true}).on('end', () => {
-      resolve(status)
+      resolve(flattenForMonopackage(status))
     }).resume()
   })
 
