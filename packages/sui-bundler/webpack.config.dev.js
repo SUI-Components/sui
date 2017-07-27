@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const jsonImporter = require('node-sass-json-importer')
-const autoprefixer = require('autoprefixer')
 const path = require('path')
 
 require('./shared/shims')
@@ -45,21 +44,56 @@ module.exports = {
         sassLoader: {
           importer: jsonImporter
         },
-        context: '/',
-        postcss: () => [autoprefixer]
+        context: '/'
       }
     })
   ],
   module: {
     rules: [
-      {test: /\.jsx?$/, exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/, loader: 'babel-loader', query: {presets: ['sui']}},
-      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
-      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-      {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'},
-      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
-      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
-      {test: /(\.css|\.scss)$/, loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader', 'sass-loader?sourceMap']}
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['sui']
+        }
+      },
+      {
+        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
+        loader: 'file-loader'},
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader?name=[name].[ext]'
+      },
+      {
+        test: /\.ico$/,
+        loader: 'file-loader?name=[name].[ext]'
+      },
+      {
+        test: /(\.css|\.scss)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [require('autoprefixer')()]
+            }
+          },
+          'sass-loader'
+        ]}
     ]
   }
 }
