@@ -19,8 +19,12 @@ export default class Style extends Component {
     this._linkElement = createLinkElement()
   }
 
+  componentWillUnmount () {
+    const lastIndex = document.styleSheets.length - 1
+    document.styleSheets[lastIndex].disabled = true
+  }
+
   render () {
-    // https://github.com/webpack-contrib/style-loader/blob/master/addStyles.js#L238
     const blob = new window.Blob([this.props.children], {type: 'text/css'})
     const oldSrc = this._linkElement.href
     this._linkElement.href = window.URL.createObjectURL(blob)
