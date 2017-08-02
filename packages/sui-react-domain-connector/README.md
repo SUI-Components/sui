@@ -35,7 +35,7 @@ render(
 )
 ```
 
-O pasando directamente el store, si necesitas usarlo fuera del arbol de componentes de react:
+Or passing directly the store, if you need it outside
 
 ```js
 // entry.js
@@ -197,7 +197,7 @@ export default compose(
 
 ```
 
-Comunicación entre componentes:
+Comonication between components:
 
 ```
 import { withLocalService, withStreamService, compose } from '@schibstedspain/ddd-react-redux'
