@@ -7,7 +7,6 @@ const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
 
 const BASE_DIR = process.cwd()
 
-const packages = config.getScopes()
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
 
@@ -18,26 +17,34 @@ const RELEASE_CODES = {
   3: 'major'
 }
 
-const releasesByPackages = (pkg) => {
-  return checker.check().then((status) => {
-    return {pkg, code: status[pkg].increment}
-  })
-}
-
-const releasesStatus = packages.map(releasesByPackages)
+const releasesByPackages = () =>
+  checker.check().then((status) =>
+    Object.keys(status).map(scope => ({
+      pkg: scope,
+      code: status[scope].increment
+    }))
+  )
 
 const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
     if (code === 0) { return resolve() }
 
-    const cwd = path.join(BASE_DIR, packagesFolder, pkg)
+    const isMonoPackage = config.isMonoPackage()
+
+    const packageName = isMonoPackage
+      ? 'META'
+      : pkg
+
+    const cwd = isMonoPackage
+      ? BASE_DIR
+      : path.join(BASE_DIR, packagesFolder, packageName)
     const pkgInfo = require(path.join(cwd, 'package.json'))
     const scripts = pkgInfo.scripts || {}
 
     let commands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
-      ['git', ['commit -m "release(' + pkg + '): v$(node -p -e "require(\'./package.json\')".version)"']],
+      ['git', ['commit -m "release(' + packageName + '): v$(node -p -e "require(\'./package.json\')".version)"']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', 'origin', 'HEAD']]
     ].filter(Boolean)
@@ -49,7 +56,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
   })
 }
 
-Promise.all(releasesStatus)
+releasesByPackages()
        .then(releases =>
           releases
             .filter(({code}) => code !== 0)
