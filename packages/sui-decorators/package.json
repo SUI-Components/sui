@@ -1,0 +1,13 @@
+{
+  "name": "@schibstedspain/sui-decorators",
+  "private": true,
+  "version": "1.0.0",
+  "description": "> Set of ES6 decorators to improve your apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
