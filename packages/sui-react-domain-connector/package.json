@@ -1,13 +1,33 @@
 {
   "name": "@schibstedspain/sui-react-domain-connector",
-  "private": true,
-  "version": "1.1.0",
-  "description": "> Connect any React component to your domain use cases'",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Connect any React component to your domain use cases",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lib": "rm -Rf lib && babel ./src -d lib",
+    "prepublish": "npm run lib"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@schibstedspain/sui-lint": "2",
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1",
+    "react": "15"
+  },
+  "babel": {
+    "presets": [
+      "sui"
+    ]
+  },
+  "peerDependencie": {
+    "react": "15"
+  },
+  "dependencies": {
+    "react-redux": "5.0.4",
+    "redux": "3.6.0"
+  },
+  "eslintConfig": { "extends": ["./node_modules/@schibstedspain/sui-lint/eslintrc.js"]},
+  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml"
 }
