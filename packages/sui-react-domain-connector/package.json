@@ -1,0 +1,12 @@
+{
+  "name": "@schibstedspain/sui-react-domain-connector",
+  "version": "1.0.0",
+  "description": "> Connect any React component to your domain use cases'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
