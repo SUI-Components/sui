@@ -1,15 +1,16 @@
 # sui-mono
 > Simple CLI for monorepo/multipackage.
 
-It will help you release a mono-repo multi-package project.
+Sui-mono is a tool that aims to simplify managment for monorepo/mutlipackage projects but it also works with monopackage projects.
+
+It provides a standard template for commit messages and is able to decide what needs to be released for you
 We use ComVer as our versioning system
 
-It uses comitizen to provide a standard template of commit messages.
-It also provides two tools for checking if any release is required or to perform a release.
-
 It provides:
-* CLI monorepo multipackages
+* Commit template
 * Release manager (parses commits to publish packages according to their changes)
+* Run commands inside each package
+* Link all packages that have dependencies between each other
 
 ![](./assets/sui-mono-demo.gif)
 
@@ -48,29 +49,34 @@ You do your normal git workflow, but when commiting you should use:
 sui-mono commit
 ```
 
+It will prompt you with questions regarding your changes and will generate a standard commit message for you
+
 ### Release
 
-In order to release the steps normally are:
+In order to release the steps are:
 
 ```
 sui-mono check
+```
 
+To get a preview of what will be released.
+
+```
 sui-mono release
 ```
 
-The first one will provide information if anything requires a release.
-The second one will release the packages
+To release all the packages
 
 > Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
 
-**sui-mono only creates releases for packages that contain `fix`, `perf` or `feat` commits. Otherwise, nothing will be done or outputted.**
+> sui-mono only changes a minor for `fix`, `perf` or `feat` and a major when it founds BREAKING CHANGES. Otherwise, nothing will be released
 
 ## How to configure your project
 
-First you need to install the @sui/mono package in your  project
+First you need to install the `@schibstedspain/sui-mono` package in your project
 
 ```
-npm i --save-dev @sui/mono
+npm i --save-dev @schibstedspain/sui-mono
 ```
 
 Then, configure your package.json
@@ -82,6 +88,7 @@ The tool allows you to configure some parts of it, but it also defines a few def
 Here's a full example of the options
 
 ```
+"private": true,
 "config": {
   "sui-mono": {
     "access": "public",
@@ -99,9 +106,13 @@ Here's a full example of the options
 }
 ```
 
+### Private
+
+If you specify that your package is private, it will not get pushed to npm repository
+
 ### Access
 
-By default packages will be published as private in npm. If you want them to be public you will need to set `access` to `public`
+By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `access` to `public`
 
 ### Automatic scopes
 
@@ -159,7 +170,7 @@ card/normal
 
 ### Manual scopes
 
-There may be cases that you may want to add scopes for informative purposes but not related in any way with the releases (for example, this project does not have a way to retrieve automatic scopes)
+There may be cases that you may want to add scopes for informative purposes but not related in any way with the releases
 
 Take in care that this scopes **will not be relevant for the release**, and if you commit to one package that has his own scope, but you use a custom scope, a release will not be generated.
 Custom scopes are for a very rare cases and you may not need it most of the times.
