@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-react-domain-connector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Connect any React component to your domain use cases",
   "main": "lib/index.js",
   "scripts": {
@@ -28,6 +28,10 @@
     "react-redux": "5.0.4",
     "redux": "3.6.0"
   },
-  "eslintConfig": { "extends": ["./node_modules/@schibstedspain/sui-lint/eslintrc.js"]},
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@schibstedspain/sui-lint/eslintrc.js"
+    ]
+  },
   "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml"
 }
