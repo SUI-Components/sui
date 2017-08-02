@@ -1,5 +1,6 @@
 {
   "name": "@schibstedspain/sui-react-domain-connector",
+  "private": true,
   "version": "1.0.0",
   "description": "> Connect any React component to your domain use cases'",
   "main": "index.js",
