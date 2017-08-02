@@ -1,19 +1,8 @@
-# sui-react-domain-conector
-> Connect any React component to your domain use cases'
+# DDD React Redux
 
-Features:
-* Decoupled from domain
-* Event sourced domain
-* Global state layer
-* Avoidance of business rules into reducers
+## Install
 
-
-
-## Installation
-
-```sh
-npm install @schibstedspain/sui-react-domain-conector --save-dev
-```
+`$ npm install @schibstedspain/ddd-react-redux`
 
 ## Usage
 
@@ -46,7 +35,7 @@ render(
 )
 ```
 
-Or passing store directly, if you need to use it outside the tree:
+Or passing directly the store, if you need it outside
 
 ```js
 // entry.js
@@ -79,41 +68,7 @@ render(
 )
 ```
 
-```js
-// page/Home.js
-
-import React from 'react'
-import PropTypes from 'prop-types'
-import {calls, services, pipe} from 'ddd-react-redux'
-
-const Home = ({
-  listStudents,
-  listStudentsParams,
-  listStudentsUseCase
-}) => {
-  listStudents === undefined && listStudentsUseCase()
-  return (
-    <div className='Home'>
-      <Search />
-      <Grid images={listStudents} />
-      <LoadingOverlay display={listStudents === undefined} />
-    </div>
-  )
-}
-
-Home.displayName = 'Home'
-Home.propTypes = {
-  listStudents: PropTypes.array,
-  listStudentsParams: PropTypes.object,
-  listStudentsUseCase: PropTypes.func
-}
-
-export default pipe(
-  calls('list_students_use_case'),
-  services('list_students_use_case')
-)(Home)
-
-```
+Passing Config to your components
 
 ```js
 // components/Search.js
@@ -121,7 +76,7 @@ export default pipe(
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import {services, pipe, configs} from 'ddd-react-redux'
+import {compose, mapConfigToProps} from 'ddd-react-redux'
 
 class Search extends Component {
   const {gradesConfig} = this.props
@@ -144,16 +99,15 @@ class Search extends Component {
   }
 }
 
-export default pipe(
-  services('list_students_use_case'),
-  configs('grades')
+export default compose(
+  mapConfigToProps('grades')
 )(Search)
 ```
 
 Or Using locals HoC to avoid use the global state when you dont need it
 
 ```js
-import {locals, services, calls, pipe} from '@schibstedspain/ddd-react-redux'
+import {withLocalService, mapServiceToProps, mapResponseToProps, compose} from '@schibstedspain/ddd-react-redux'
 
 const Home = ({
   history,
@@ -195,11 +149,123 @@ Home.propTypes = {
   })
 }
 
-export default pipe(
-  locals('list_studients_use_case')
+export default withLocalService('list_studients_use_case')(Home)
+```
+
+Using UI HoC to manage not relative Domain updates
+
+```js
+
+import {mapUIServiceToProps, mapUIResponseToProps, compose} from '@schibstedspain/ddd-react-redux'
+
+const Home = ({
+  history,
+  setOfflineUI,
+  offlineUI
+}, {i18n}) => {
+
+  setTimeout(() => {
+    setOfflineUI(true)
+  }, 3000)
+
+
+  // no info yet, call the use case now!
+  return (
+    <div className='Home'>
+      {offlineUI ? 'We are Offline' : 'We are Online'}
+    </div>
+  )
+}
+
+Home.displayName = 'Home'
+Home.contextTypes = {
+  i18n: PropTypes.object
+}
+Home.propTypes = {
+  offlineUI: PropTypes.bool,
+  setOfflineUI: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
+}
+
+export default compose(
+  mapUIResponseToProps('offline')
+  mapUIServiceToProps('offline')
+)('list_studients_use_case')(Home)
+
+
+```
+
+Comonication between components:
+
+```
+import { withLocalService, withStreamService, compose } from '@schibstedspain/ddd-react-redux'
+
+class Home extends PureComponent {
+  static displayName = 'Home'
+  static contextTypes = {
+    i18n: PropTypes.object
+  }
+  static propTypes = {
+    listStudients$: PropTypes.array,
+    listStudients$Error: PropTypes.object,
+    listStudients: PropTypes.array,
+    listStudientsLoading: PropTypes.bool,
+    listStudientsCalled: PropTypes.bool,
+    listStudientsUseCase: PropTypes.func,
+    history: PropTypes.shape({
+      push: PropTypes.func
+    })
+  }
+
+  componentDidMount () {
+    const {
+      listStudientsCalled,
+      listStudientsUseCase
+    } = this.props
+
+    !listStudientsCalled &&
+    listStudientsUseCase()
+  }
+
+  render () {
+    const {
+      history,
+      listStudients$,
+      listStudients$Error
+    } = this.props
+    const {i18n} = this.context
+
+    if (listStudients$Error !== undefined) {
+      return <h1>Ey! I got this error:<br />{listStudients$Error.toString()}</h1>
+    }
+
+    return (
+      <div className='Home'>
+        <AppCanvas scrollingTechniques>
+          <AppBar title={i18n.t('TITLE')} showMenuIconButton={false} />
+          <Content>
+            <div className='Home-SearchWrapper'><Search /></div>
+            <div className='Home-GridWrapper'><Grid images={listStudients$} /></div>
+            <div className='Home-FAVWrapper'><FAVMenu onClickItem={({item}) => {
+              const path = item === FAVMenu.ITEMS.SINGLE ? '/create/single' : '/create/multiples'
+              history.push(path)
+            }} /></div>
+          </Content>
+        </AppCanvas>
+        <LoadingOverlay display={listStudients$ === undefined} />
+      </div>
+    )
+  }
+}
+
+export default compose(
+  withLocalService('list_studients_use_case'),
+  withStreamService('list_studients_use_case')
 )(Home)
 ```
 
 ## TODO
-- [ ] Gestionar adecuadamente los errores en los [casos de uso](https://github.com/SUI-Components/ddd-react-redux/blob/master/src/store/actions.js#L3)
+- [x] Gestionar adecuadamente los errores en los [casos de uso](https://github.com/SUI-Components/ddd-react-redux/blob/master/src/store/actions.js#L3)
 - [x] Obtener la configuración usando otro HoC. del tipo `export default config('provinces', 'courses')(Search)`
