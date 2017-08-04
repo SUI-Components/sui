@@ -1,0 +1,22 @@
+{
+  "name": "@schibstedspain/sui-hoc",
+  "version": "1.2.0",
+  "description": "Set of HoC useful for react",
+  "scripts": {
+    "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "prepublish": "npm run lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "15"
+  },
+  "dependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1"
+  },
+  "devDependencies": {
+    "@schibstedspain/sui-component-peer-dependencies": "1"
+  }
+}

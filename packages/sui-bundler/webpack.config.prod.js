@@ -8,7 +8,6 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const jsonImporter = require('node-sass-json-importer')
 const Externals = require('./plugins/externals')
-const autoprefixer = require('autoprefixer')
 const path = require('path')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
@@ -39,6 +38,7 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   plugins: cleanList([
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'runtime'],
@@ -127,21 +127,57 @@ module.exports = {
         sassLoader: {
           importer: jsonImporter
         },
-        context: '/',
-        postcss: () => [autoprefixer]
+        context: '/'
       }
     })
   ]),
   module: {
     rules: [
-      {test: /\.jsx?$/, exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/, loader: 'babel-loader', query: {presets: ['sui']}},
-      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?name=[name].[ext]'},
-      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]'},
-      {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]'},
-      {test: /\.svg(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]'},
-      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[hash:6].[ext]'},
-      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
-      {test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract('css-loader!postcss-loader!sass-loader')}
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['sui']
+        }
+      },
+      {
+        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?name=[name].[ext]'
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]'
+      },
+      {
+        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]'
+      },
+      {
+        test: /\.svg(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]'
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader?name=[name].[hash:6].[ext]'
+      },
+      {
+        test: /\.ico$/,
+        loader: 'file-loader?name=[name].[ext]'
+      },
+      {
+        test: /(\.css|\.scss)$/,
+        use: ExtractTextPlugin.extract([
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [require('autoprefixer')()]
+            }
+          },
+          'sass-loader'
+        ])
+      }
     ]
   },
   node: {

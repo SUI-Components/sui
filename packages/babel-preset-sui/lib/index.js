@@ -15,6 +15,7 @@ module.exports = {
     require('babel-plugin-transform-object-rest-spread'),
     require('babel-plugin-transform-runtime'),
     require('babel-plugin-syntax-dynamic-import'),
+    require('babel-plugin-transform-export-extensions'),
     [require('babel-plugin-transform-react-remove-prop-types').default, {
       mode: 'wrap'
     }]

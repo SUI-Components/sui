@@ -143,7 +143,7 @@ export default class Demo extends Component {
 
         <Preview
           code={playground}
-          scope={{React, [`${cleanDisplayName(Enhance.displayName || Enhance.name)}`]: Enhance}}
+          scope={{React, [`${cleanDisplayName(Enhance.displayName || Enhance.name)}`]: Enhance, domain}}
         />
       </div>
     )
