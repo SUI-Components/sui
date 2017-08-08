@@ -12,11 +12,9 @@
   "peerDependencies": {
     "react": "15"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@schibstedspain/sui-component-peer-dependencies": "1",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1"
-  },
-  "devDependencies": {
-    "@schibstedspain/sui-component-peer-dependencies": "1"
   }
 }
