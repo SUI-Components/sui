@@ -29,7 +29,6 @@ const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
     if (code === 0) { return resolve() }
 
-    console.log(pkg)
     const isMonoPackage = config.isMonoPackage()
 
     const tagPrefix = isMonoPackage
