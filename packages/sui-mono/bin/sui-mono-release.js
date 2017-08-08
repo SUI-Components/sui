@@ -29,7 +29,13 @@ const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
     if (code === 0) { return resolve() }
 
+    console.log(pkg)
     const isMonoPackage = config.isMonoPackage()
+
+    const tagPrefix = isMonoPackage
+      ? ''
+      : `${pkg}-`
+
     const packageScope = isMonoPackage
       ? 'META'
       : pkg
@@ -44,7 +50,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
       ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']],
-      ['git', ['tag -a $(node -p -e "require(\'./package.json\')".version)" -m "v$(node -p -e \"require(\'./package.json\')".version)\""']], // eslint-disable-line no-useless-escape
+      ['echo', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version)" -m "v$(node -p -e \"require(\'./package.json\')".version)\""']], // eslint-disable-line no-useless-escape
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', 'origin', 'HEAD']]
     ].filter(Boolean)
