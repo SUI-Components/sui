@@ -1,9 +1,32 @@
 /* eslint no-console:0 */
 
+const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
 const checker = require('../src/check')
 const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
+
+program
+  .on('--help', () => {
+    console.log('  Description:')
+    console.log('')
+    console.log('    Release your packages based on the version check output')
+    console.log('')
+    console.log('    Its adviced that you inspect the output on sui-mono check before releasing')
+    console.log('    Release is the process of:')
+    console.log('     - Build your projcet (with build or prepublish npm script')
+    console.log('     - Updating package.json version')
+    console.log('     - Creating a release commit type')
+    console.log('     - Pushing the package to npm (in case its not private)')
+    console.log('')
+    console.log('  Examples:')
+    console.log('')
+    console.log('    $ sui-mono release')
+    console.log('    $ sui-mono --help')
+    console.log('    $ sui-mono -h')
+    console.log('')
+  })
+  .parse(process.argv)
 
 const BASE_DIR = process.cwd()
 
