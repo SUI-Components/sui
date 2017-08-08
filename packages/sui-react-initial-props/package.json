@@ -1,0 +1,20 @@
+{
+  "name": "@schibstedspain/sui-react-initial-props",
+  "version": "1.0.0",
+  "description": "Provide a way to get initial props for async pages",
+  "scripts": {
+    "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "prepublish": "npm run lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "15"
+  },
+  "devDependencies": {
+    "@schibstedspain/sui-component-peer-dependencies": "1",
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1"
+  }
+}
