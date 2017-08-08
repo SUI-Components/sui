@@ -110,7 +110,8 @@ Check [timelineOptions](#timelineOptions).
 ```js
 import {getTimelineChart} from '@schibstedspain/sui-perf/lib/charts'
 
-const timeline = getTimelineChart(perf.getEntries())
+const options = {/* your custom options */}
+const timeline = getTimelineChart(options)(perf.getEntries())
 console.log(timeline)
 /*
 timeline        start  time   %    label
@@ -127,7 +128,8 @@ Check [timelineOptions](#timelineOptions).
 
 ```js
 import {printTimelineChart} from '@schibstedspain/sui-perf/lib/charts'
-printTimelineChart(perf.getEntries())
+const options = {/* your custom options */}
+printTimelineChart(options)(perf.getEntries())
 /*
 timeline        start  time   %    label
 ███████████████ 0ms    138ms  100% Example 2
