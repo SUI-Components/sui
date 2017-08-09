@@ -16,5 +16,8 @@
     "@schibstedspain/sui-component-peer-dependencies": "1",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1"
+  },
+  "dependencies": {
+    "@schibstedspain/sui-hoc": "1"
   }
 }

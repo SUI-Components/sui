@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 
-// This method creates the PageComponent prepared for the Client Side Rendering
+// This HoC creates the PageComponent prepared for the Client Side Rendering
 // It renders a placeholder, if any specified as `renderLoading` on the PageComponent
 // Also, executes the getInitialProps to retrieve the initialProps and then
 // Renders the component with the initialProps, hiding the placeholder
-export default ({ Page, context, routeInfo }) => (
+export default ({ context, routeInfo }) => Page => (
   class ClientPage extends Component {
+    static displayName = `ClientPage(${Page.displayName})`
+
     state = { initialProps: {}, isLoading: true }
 
     _renderLoading () {
