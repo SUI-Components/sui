@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import createClientPageComponent from './createClientPageComponent'
+import withInitialProps from './withInitialProps'
 import createClientContextFactoryParams from './createClientContextFactoryParams'
 
 const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
@@ -25,7 +25,7 @@ const createUniversalPage = (contextFactory, routeInfo) => ({ default: Page }) =
     // TODO: Maybe this is no needed as we already have created it?
     return contextFactory(createClientContextFactoryParams())
       // now, we have to create the Page to be rendered on the client with all the info
-    .then(context => createClientPageComponent({ Page, context, routeInfo }))
+    .then(context => withInitialProps({ context, routeInfo })(Page))
   }
   // we're in the server, so return just the component and pass the initialProps from the context
   const ServerPage = (props, { initialProps = {} }) =>
