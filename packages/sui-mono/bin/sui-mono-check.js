@@ -1,5 +1,25 @@
 /* eslint no-console:0 */
+const program = require('commander')
 const checker = require('../src/check')
+
+program
+  .on('--help', () => {
+    console.log('  Description:')
+    console.log('')
+    console.log('    Reports if any package should be released based on ComVer')
+    console.log('')
+    console.log('    It will create a MAJOR only if there are BREAKING CHANGES in the commit description')
+    console.log('    The types fix, perf and feat will generate a MINOR')
+    console.log('    All other commit types will not generate a version change')
+    console.log('')
+    console.log('  Examples:')
+    console.log('')
+    console.log('    $ sui-mono check')
+    console.log('    $ sui-mono --help')
+    console.log('    $ sui-mono -h')
+    console.log('')
+  })
+  .parse(process.argv)
 
 const incrementName = (code) => {
   if (code === 1) {
