@@ -31,20 +31,25 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 
     const isMonoPackage = config.isMonoPackage()
 
-    const packageName = isMonoPackage
+    const tagPrefix = isMonoPackage
+      ? ''
+      : `${pkg}-`
+
+    const packageScope = isMonoPackage
       ? 'META'
       : pkg
 
     const cwd = isMonoPackage
       ? BASE_DIR
-      : path.join(BASE_DIR, packagesFolder, packageName)
+      : path.join(BASE_DIR, packagesFolder, pkg)
     const pkgInfo = require(path.join(cwd, 'package.json'))
     const scripts = pkgInfo.scripts || {}
 
     let commands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
-      ['git', ['commit -m "release(' + packageName + '): v$(node -p -e "require(\'./package.json\')".version)"']],
+      ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']],
+      ['git', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version)" -m "v$(node -p -e \"require(\'./package.json\')".version)\""']], // eslint-disable-line no-useless-escape
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', 'origin', 'HEAD']]
     ].filter(Boolean)
