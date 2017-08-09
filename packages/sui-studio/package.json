@@ -26,7 +26,7 @@
   "dependencies": {
     "@schibstedspain/sui-component-peer-dependencies": "latest",
     "@schibstedspain/sui-mono": "1",
-    "@schibstedspain/sui-bundler": "1",
+    "@schibstedspain/sui-bundler": "2",
     "@schibstedspain/sui-helpers": "1",
     "@schibstedspain/ddd-react-redux": "2",
     "babel-standalone": "6.12.0",
