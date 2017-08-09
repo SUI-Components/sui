@@ -135,7 +135,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/,
         loader: 'babel-loader',
         query: {
           presets: ['sui']
