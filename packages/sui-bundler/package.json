@@ -28,6 +28,7 @@
     "babel-preset-sui": "1",
     "browser-sync": "2.18.13",
     "bundle-loader": "0.5.5",
+    "cache-loader": "1.0.3",
     "chalk": "1.1.3",
     "commander": "2.9.0",
     "connect-history-api-fallback": "1.3.0",

@@ -84,6 +84,7 @@ module.exports = {
       {
         test: /(\.css|\.scss)$/,
         use: [
+          'cache-loader',
           'style-loader',
           'css-loader',
           {
