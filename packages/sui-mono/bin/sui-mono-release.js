@@ -74,7 +74,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']],
       ['git', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version) -m \"v$(node -p -e "require(\'./package.json\')".version)\"']], // eslint-disable-line no-useless-escape
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
-      ['git', ['push', 'origin', 'HEAD']]
+      ['git', ['push', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
     scripts['build'] && commands.unshift(['npm', ['run', 'build']])
 
