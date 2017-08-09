@@ -1,7 +1,7 @@
 {
-  "name": "@schibstedspain/sui-hoc",
-  "version": "1.2.0",
-  "description": "Set of HoC useful for react",
+  "name": "@schibstedspain/sui-react-initial-props",
+  "version": "1.0.0",
+  "description": "Provide a way to get initial props for async pages",
   "scripts": {
     "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
     "prepublish": "npm run lib"
@@ -16,5 +16,8 @@
     "@schibstedspain/sui-component-peer-dependencies": "1",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1"
+  },
+  "dependencies": {
+    "@schibstedspain/sui-hoc": "1"
   }
 }
