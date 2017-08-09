@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/sui-react-initial-props",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
     "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
