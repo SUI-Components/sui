@@ -99,7 +99,7 @@ perf.measure('Fetch user')
 
 ### Charts
 
-`@schibstedspain/sui-perf/lib/charts` has no dependency of and can be imported separately.
+`@schibstedspain/sui-perf/lib/chart` has no dependency of and can be imported separately.
 
 
 
