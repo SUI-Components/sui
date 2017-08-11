@@ -32,6 +32,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-studio](./packages/sui-studio/README.md) | Develop, maintain and publish your SUI components | :white_check_mark: |
 | [sui-hoc](./packages/sui-hoc/README.md) | React utility belt for function components and higher-order components | :white_check_mark: |
 | [sui-bundler](./packages/sui-bundler/README.md) | Config-free bundler for ES6 React apps | :white_check_mark: |
+| [sui-react-initial-props](./packages/sui-react-initial-props/README.md) | Initial data fetching for your react app | :white_check_mark: |
 | [sui-i18n](./packages/sui-i18n/README.md) | Isomorphic i18n service for browser and node | :hourglass: |
 | [sui-react-domain-connector](./packages/sui-react-domain-connector/README.md) | Connect any React component to your domain use cases | :hourglass: |
 | [sui-ssr](./packages/sui-ssr/README.md) | Plug SSR to you SUI SPA | :hourglass: |
