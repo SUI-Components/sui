@@ -30,6 +30,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-cz](./packages/sui-cz/README.md) | A commitizen adapter for semantic commits | :white_check_mark: |
 | [sui-mono](./packages/sui-mono/README.md) | Simple CLI for monorepo/multipackage | :white_check_mark: |
 | [sui-studio](./packages/sui-studio/README.md) | Develop, maintain and publish your SUI components | :white_check_mark: |
+| [sui-hoc](./packages/sui-hoc/README.md) | React utility belt for function components and higher-order components | :white_check_mark: |
 | [sui-bundler](./packages/sui-bundler/README.md) | Config-free bundler for ES6 React apps | :white_check_mark: |
 | [sui-i18n](./packages/sui-i18n/README.md) | Isomorphic i18n service for browser and node | :hourglass: |
 | [sui-react-domain-connector](./packages/sui-react-domain-connector/README.md) | Connect any React component to your domain use cases | :hourglass: |
