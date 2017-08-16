@@ -15,7 +15,6 @@ $ npm install -g @schibstedspain/sui-studio-create
 ```sh
 $ sui-studio-create my-awesome-studio
 $ cd my-awesome-studio
-$ npm i
 $ sui-studio start
 ```
 
