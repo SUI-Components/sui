@@ -18,6 +18,9 @@ program
   .command('check', 'Gives information if something should be updated')
 
 program
+  .command('changelog', 'Generate CHANGELOG.md files')
+
+program
   .command('release', 'Release whatever need to be release')
 
 program
