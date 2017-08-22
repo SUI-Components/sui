@@ -22,6 +22,7 @@ export default class Workbench extends Component {
             <Tab name='Demo' path='demo' />
             <Tab name='Api' path='documentation/api' />
             <Tab name='Readme' path='documentation/readme' />
+            <Tab name='Changelog' path='documentation/changelog' />
             { /* TODO: https://github.com/SUI-Components/SUIStudio/issues/51 <Tab name='Tests' path='tests' /> */ }
           </ul>
         </nav>
