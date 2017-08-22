@@ -72,6 +72,9 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
       ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']],
+      ['sui-mono', ['changelog', cwd]],
+      ['git', ['add', cwd]],
+      ['git', ['commit --amend --no-verify --no-edit']],
       ['git', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version) -m \"v$(node -p -e "require(\'./package.json\')".version)\"']], // eslint-disable-line no-useless-escape
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '--tags', 'origin', 'HEAD']]
