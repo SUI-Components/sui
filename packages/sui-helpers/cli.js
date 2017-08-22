@@ -29,7 +29,7 @@ function getSpawnPromiseFactory (bin, args, options) {
 }
 
 /**
- * Spawn fiven command and return a promise of the exit code value
+ * Spawn given command and return a promise of the exit code value
  * @param  {String} bin     Binary path or alias
  * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
  * @param  {Object} [options={shell: true, stdio: 'inherit'}] Options to pass to child_process.spawn call
