@@ -2,14 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.19.0"></a>
+# 1.19.0 (2017-08-23)
+
+
+### Bug Fixes
+
+* **sui-mono:** make changelog take into account monopackage repos ([4e6e1cb](https://github.com/SUI-Components/sui/commit/4e6e1cb))
+
+
+
 <a name="1.18.0"></a>
 # 1.18.0 (2017-08-22)
 
 
 ### Features
 
-* add command to generate changelog in markdown format ([bb62c38](https://github.com/SUI-Components/sui/commit/bb62c38))
-* update CHANGELOG.md as part of every release ([9a64254](https://github.com/SUI-Components/sui/commit/9a64254))
+* **sui-mono:** add command to generate changelog in markdown format ([bb62c38](https://github.com/SUI-Components/sui/commit/bb62c38))
+* **sui-mono:** update CHANGELOG.md as part of every release ([9a64254](https://github.com/SUI-Components/sui/commit/9a64254))
 
 
 
@@ -19,7 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* push tags to the repo ([92a1a7c](https://github.com/SUI-Components/sui/commit/92a1a7c))
+* **sui-mono:** push tags to the repo ([92a1a7c](https://github.com/SUI-Components/sui/commit/92a1a7c))
 
 
 
@@ -29,17 +39,17 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* add help command for check ([866a1a3](https://github.com/SUI-Components/sui/commit/866a1a3))
-* add release command help ([ce61a89](https://github.com/SUI-Components/sui/commit/ce61a89))
-* remove console.log left there, bad boy! ([6037ea8](https://github.com/SUI-Components/sui/commit/6037ea8))
-* use git command instead the debugging one ([23030fe](https://github.com/SUI-Components/sui/commit/23030fe))
+* **sui-mono:** add help command for check ([866a1a3](https://github.com/SUI-Components/sui/commit/866a1a3))
+* **sui-mono:** add release command help ([ce61a89](https://github.com/SUI-Components/sui/commit/ce61a89))
+* **sui-mono:** remove console.log left there, bad boy! ([6037ea8](https://github.com/SUI-Components/sui/commit/6037ea8))
+* **sui-mono:** use git command instead the debugging one ([23030fe](https://github.com/SUI-Components/sui/commit/23030fe))
 
 
 ### Features
 
-* add commands for link and run ([c774e23](https://github.com/SUI-Components/sui/commit/c774e23))
-* tag releases ([bb75071](https://github.com/SUI-Components/sui/commit/bb75071))
-* tag releases ([95d213b](https://github.com/SUI-Components/sui/commit/95d213b))
+* **sui-mono:** add commands for link and run ([c774e23](https://github.com/SUI-Components/sui/commit/c774e23))
+* **sui-mono:** tag releases ([bb75071](https://github.com/SUI-Components/sui/commit/bb75071))
+* **sui-mono:** tag releases ([95d213b](https://github.com/SUI-Components/sui/commit/95d213b))
 
 
 
@@ -49,14 +59,14 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fix condition for mono package ([2621031](https://github.com/SUI-Components/sui/commit/2621031))
-* fix how scope commits are flatten ([a180d3c](https://github.com/SUI-Components/sui/commit/a180d3c))
+* **sui-mono:** fix condition for mono package ([2621031](https://github.com/SUI-Components/sui/commit/2621031))
+* **sui-mono:** fix how scope commits are flatten ([a180d3c](https://github.com/SUI-Components/sui/commit/a180d3c))
 
 
 ### Features
 
-* check and release working for mono package mono repo projects ([493fcc9](https://github.com/SUI-Components/sui/commit/493fcc9))
-* if a package has no package.json the project is monopackage ([0f6276c](https://github.com/SUI-Components/sui/commit/0f6276c))
+* **sui-mono:** check and release working for mono package mono repo projects ([493fcc9](https://github.com/SUI-Components/sui/commit/493fcc9))
+* **sui-mono:** if a package has no package.json the project is monopackage ([0f6276c](https://github.com/SUI-Components/sui/commit/0f6276c))
 
 
 
@@ -66,7 +76,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* dont publish private packages ([55c35ce](https://github.com/SUI-Components/sui/commit/55c35ce))
+* **sui-mono:** dont publish private packages ([55c35ce](https://github.com/SUI-Components/sui/commit/55c35ce))
 
 
 
@@ -76,7 +86,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* sui-mono link command ([db9596a](https://github.com/SUI-Components/sui/commit/db9596a))
+* **sui-mono:** sui-mono link command ([db9596a](https://github.com/SUI-Components/sui/commit/db9596a))
 
 
 
@@ -86,7 +96,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fix to use default restrict access type instead private ([6a566a7](https://github.com/SUI-Components/sui/commit/6a566a7))
+* **sui-mono:** fix to use default restrict access type instead private ([6a566a7](https://github.com/SUI-Components/sui/commit/6a566a7))
 
 
 
@@ -96,7 +106,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* version tag nos set properly ([fc740ff](https://github.com/SUI-Components/sui/commit/fc740ff)), closes [#3c00cec1d5e3138bf2095b70200b9e8d447f0de1](https://github.com/SUI-Components/sui/issues/3c00cec1d5e3138bf2095b70200b9e8d447f0de1)
+* **sui-mono:** version tag nos set properly ([fc740ff](https://github.com/SUI-Components/sui/commit/fc740ff)), closes [#3c00cec1d5e3138bf2095b70200b9e8d447f0de1](https://github.com/SUI-Components/sui/issues/3c00cec1d5e3138bf2095b70200b9e8d447f0de1)
 
 
 
@@ -106,12 +116,12 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* release version commit is empty ([3c00cec](https://github.com/SUI-Components/sui/commit/3c00cec))
+* **sui-mono:** release version commit is empty ([3c00cec](https://github.com/SUI-Components/sui/commit/3c00cec))
 
 
 ### Features
 
-* migrate commands executions to sui-helpers/cli ([e6341bf](https://github.com/SUI-Components/sui/commit/e6341bf))
+* **sui-mono:** migrate commands executions to sui-helpers/cli ([e6341bf](https://github.com/SUI-Components/sui/commit/e6341bf))
 
 
 
@@ -121,7 +131,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* change release to avoid race conditions ([cb65029](https://github.com/SUI-Components/sui/commit/cb65029))
+* **sui-mono:** change release to avoid race conditions ([cb65029](https://github.com/SUI-Components/sui/commit/cb65029))
 
 
 
@@ -131,7 +141,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add "sui-mono run" for multiple executions ([c14b66c](https://github.com/SUI-Components/sui/commit/c14b66c))
+* **sui-mono:** add "sui-mono run" for multiple executions ([c14b66c](https://github.com/SUI-Components/sui/commit/c14b66c))
 
 
 
@@ -141,7 +151,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add config by CLI options ([3bec4ef](https://github.com/SUI-Components/sui/commit/3bec4ef))
+* **sui-mono:** add config by CLI options ([3bec4ef](https://github.com/SUI-Components/sui/commit/3bec4ef))
 
 
 
@@ -151,7 +161,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* remove unused scripts ([d7dd39b](https://github.com/SUI-Components/sui/commit/d7dd39b))
+* **sui-mono:** remove unused scripts ([d7dd39b](https://github.com/SUI-Components/sui/commit/d7dd39b))
 
 
 
@@ -161,7 +171,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* remove unused script phoenix ([3b2b249](https://github.com/SUI-Components/sui/commit/3b2b249))
+* **sui-mono:** remove unused script phoenix ([3b2b249](https://github.com/SUI-Components/sui/commit/3b2b249))
 
 
 
@@ -171,7 +181,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* not throw error on release if build script is absent ([f8d91dc](https://github.com/SUI-Components/sui/commit/f8d91dc))
+* **sui-mono:** not throw error on release if build script is absent ([f8d91dc](https://github.com/SUI-Components/sui/commit/f8d91dc))
 
 
 
@@ -181,7 +191,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fix refactor error. packageConfig has no config prop ([d2312a3](https://github.com/SUI-Components/sui/commit/d2312a3))
+* **sui-mono:** fix refactor error. packageConfig has no config prop ([d2312a3](https://github.com/SUI-Components/sui/commit/d2312a3))
 
 
 
@@ -191,15 +201,15 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* add build script which is mandatory ([8ce1de8](https://github.com/SUI-Components/sui/commit/8ce1de8))
-* move build script to scripts, instead of bin ([baa86d0](https://github.com/SUI-Components/sui/commit/baa86d0))
-* sui-mono/src/types does not work ([2f73f25](https://github.com/SUI-Components/sui/commit/2f73f25))
-* switch use of cz-crm to sui-cz ([9036614](https://github.com/SUI-Components/sui/commit/9036614))
+* **sui-mono:** add build script which is mandatory ([8ce1de8](https://github.com/SUI-Components/sui/commit/8ce1de8))
+* **sui-mono:** move build script to scripts, instead of bin ([baa86d0](https://github.com/SUI-Components/sui/commit/baa86d0))
+* **sui-mono:** sui-mono/src/types does not work ([2f73f25](https://github.com/SUI-Components/sui/commit/2f73f25))
+* **sui-mono:** switch use of cz-crm to sui-cz ([9036614](https://github.com/SUI-Components/sui/commit/9036614))
 
 
 ### Features
 
-* set package name to [@schibstedspain](https://github.com/schibstedspain)/sui-mono ([98255d4](https://github.com/SUI-Components/sui/commit/98255d4))
+* **sui-mono:** set package name to [@schibstedspain](https://github.com/schibstedspain)/sui-mono ([98255d4](https://github.com/SUI-Components/sui/commit/98255d4))
 
 
 
