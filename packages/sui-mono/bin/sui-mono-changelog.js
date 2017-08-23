@@ -24,16 +24,18 @@ program
 
 const CHANGELOG_NAME = 'CHANGELOG.md'
 const cwd = path.join(process.cwd(), getPackagesFolder())
-const isMulpiPackage = !isMonoPackage()
-const folders = program.args.length ? program.args : getPackagesPaths(cwd)(getScopes())
+const getRepoFolders = () => !isMonoPackage() ? getPackagesPaths(cwd)(getScopes()) : ['.']
+const folders = program.args.length ? program.args : getRepoFolders()
 const changelogOptions = {
   preset: 'angular',
   append: false,
+  releaseCount: 0,
+  outputUnreleased: false,
   transform: function (commit, cb) {
     if (commit.type === 'release') { // Identifies commits that set a version as tags are not set
       commit.version = commit.subject.replace('v', '')
     }
-    if (isMulpiPackage) { // Remove repeated scope for multipackage
+    if (!isMonoPackage()) { // Remove repeated scope for multipackage
       commit.scope = ''
     }
     commit.committerDate = commit.committerDate.substring(0, 10) // simple date format
@@ -47,6 +49,7 @@ const changelogOptions = {
  * @return {Promise<String>} Promise resolve with path of generated file
  */
 function generateChangelog (folder) {
+  folder = path.resolve(folder)
   return new Promise((resolve, reject) => {
     let gitRawCommitsOpts = { path: folder }
     let outputFile = path.join(folder, CHANGELOG_NAME)
@@ -58,9 +61,8 @@ function generateChangelog (folder) {
           output.write('# Change Log\n\n' +
             'All notable changes to this project will be documented in this file.\n\n'
           )
-        } else {
-          output.write(chunk)
         }
+        output.write(chunk)
       })
       .on('end', () => resolve(outputFile))
       .on('error', reject)
