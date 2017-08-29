@@ -32,6 +32,7 @@ const BASE_DIR = process.cwd()
 
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
+const suiMonoBinPath = require.resolve('@schibstedspain/sui-mono/bin/sui-mono')
 
 const RELEASE_CODES = {
   0: 'clean',
@@ -72,7 +73,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
       ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']],
-      ['sui-mono', ['changelog', cwd]],
+      [suiMonoBinPath, ['changelog', cwd]],
       ['git', ['add', cwd]],
       ['git', ['commit --amend --no-verify --no-edit']],
       ['git', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version) -m \"v$(node -p -e "require(\'./package.json\')".version)\"']], // eslint-disable-line no-useless-escape
