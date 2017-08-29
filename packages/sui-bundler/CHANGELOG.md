@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.5.0"></a>
+# 2.5.0 (2017-08-29)
+
+
+### Bug Fixes
+
+* fix build broken in windows ([2b6441e](https://github.com/SUI-Components/sui/commit/2b6441e))
+
+
+
+<a name="1.20.0"></a>
+# 1.20.0 (2017-08-29)
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2017-08-29)
 
