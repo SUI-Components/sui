@@ -1,3 +1,5 @@
+const path = require('path')
+
 /**
  * Simple plugin that guarantees loaders to be loaded with the given options
  * in any context.
@@ -17,7 +19,7 @@ LoaderUniversalOptionsPlugin.prototype.apply = function (compiler, compilation) 
       for (let idx in module.loaders) {
         let obj = module.loaders[idx]
         for (let pkg in options) {
-          if (obj.loader.includes(`/${pkg}/`)) {
+          if (obj.loader.includes(`${path.sep}${pkg}${path.sep}`)) {
             obj.options = options[pkg]
             break
           }
