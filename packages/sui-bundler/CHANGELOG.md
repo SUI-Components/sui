@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.4.0"></a>
+# 2.4.0 (2017-08-29)
+
+
+### Bug Fixes
+
+* fix json files not loading in sass imports ([02677c1](https://github.com/SUI-Components/sui/commit/02677c1))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2017-08-09)
 
@@ -85,16 +95,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
