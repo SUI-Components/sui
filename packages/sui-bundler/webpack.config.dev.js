@@ -1,12 +1,13 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const jsonImporter = require('node-sass-json-importer')
+const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const path = require('path')
 
 require('./shared/shims')
+
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
 
-module.exports = {
+let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
@@ -41,12 +42,10 @@ module.exports = {
       debug: true,
       noInfo: true,
       options: {
-        sassLoader: {
-          importer: jsonImporter
-        },
         context: '/'
       }
-    })
+    }),
+    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
   module: {
     rules: [
@@ -86,14 +85,12 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: (loader) => [require('autoprefixer')()]
-            }
-          },
+          'postcss-loader',
           'sass-loader'
-        ]}
+        ]
+      }
     ]
   }
 }
+
+module.exports = webpackConfig
