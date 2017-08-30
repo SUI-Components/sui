@@ -26,7 +26,10 @@ program
   .command('generate <category> <component>', 'Create a component and her demo files').alias('g')
 
 program
-  .command('build', 'Generate a static versión ready to be deploy to surge.sh or GH-Pages').alias('b')
+  .command('build', 'Generate a static version ready to be deploy to now.sh or GH-Pages').alias('b')
+
+program
+  .command('deploy', 'Generate a static version and deploys it to now.sh').alias('d')
 
 program
   .command('commit', 'Commit with semantic messages.').alias('co')
