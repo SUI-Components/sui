@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.19.0"></a>
+# 4.19.0 (2017-08-30)
+
+
+### Bug Fixes
+
+* hotfix :ambulance: : NOW_TOKEN variable reference in js syntax instead of shell ([469378e](https://github.com/SUI-Components/sui/commit/469378e))
+
+
+
 <a name="4.18.0"></a>
 # 4.18.0 (2017-08-30)
 
