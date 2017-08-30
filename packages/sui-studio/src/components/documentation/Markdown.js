@@ -1,33 +1,24 @@
 import React, {Component, PropTypes} from 'react'
-import ReactMarkdown from 'react-markdown'
+import showdown from 'showdown'
+import renderHTML from 'react-render-html'
 
-import tryRequire from './try-require'
+const converter = new showdown.Converter()
+converter.setOption('tables', true)
+converter.setOption('simpleLineBreaks', true)
+converter.setOption('ghCompatibleHeaderId', true)
+converter.setFlavor('github')
 
 export default class Markdown extends Component {
   propTypes = {
-    params: PropTypes.object,
-    file: PropTypes.string
-  }
-
-  state = {
-    content: false
-  }
-
-  componentDidMount () {
-    const {file} = this.props
-    tryRequire(this.props.params).then(([_, readme, changelog]) => {
-      this.setState({content: file === 'CHANGELOG' ? changelog : readme})
-    })
+    content: PropTypes.string
   }
 
   render () {
-    const { content } = this.state
-    return (
-      content &&
-        <ReactMarkdown
-          className='sui-StudioMarkdown-body markdown-body'
-          source={content}
-        />
+    const {content} = this.props
+    return (content &&
+      <div className='markdown-body'>
+        {renderHTML(converter.makeHtml(content))}
+      </div>
     )
   }
 }

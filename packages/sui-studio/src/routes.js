@@ -7,7 +7,7 @@ import Demo from './components/demo'
 import Tests from './components/tests'
 import Documentation from './components/documentation'
 import ReactDocGen from './components/documentation/ReactDocGen'
-import Markdown from './components/documentation/Markdown'
+import MarkdownFile from './components/documentation/MarkdownFile'
 
 export default (
   <Route>
@@ -17,8 +17,8 @@ export default (
         <Route path='demo' component={Demo} />
         <Route path='documentation' component={Documentation}>
           <Route path='api' component={ReactDocGen} />
-          <Route path='readme' component={(props) => <Markdown {...props} file='README' />} />
-          <Route path='changelog' component={(props) => <Markdown {...props} file='CHANGELOG' />} />
+          <Route path='readme' component={(props) => <MarkdownFile {...props} file='README' />} />
+          <Route path='changelog' component={(props) => <MarkdownFile {...props} file='CHANGELOG' />} />
         </Route>
         <Route path='tests' component={Tests} />
       </Route>
