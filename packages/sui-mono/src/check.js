@@ -2,6 +2,7 @@
 
 const conventionalChangelog = require('conventional-changelog')
 const config = require('./config')
+const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
 const isCommitBreakingChange = (commit) => {
   return (typeof commit.footer === 'string' &&
@@ -64,7 +65,7 @@ const check = () =>
         }
         cb()
       }
-    }, {}, {reverse: true}).on('end', () => {
+    }, {}, gitRawCommitsOpts).on('end', () => {
       resolve(flattenForMonopackage(status))
     }).resume()
   })
