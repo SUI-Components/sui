@@ -1,6 +1,6 @@
 /* global __BASE_DIR__ */
 import React, {Component, PropTypes} from 'react'
-import ReactMarkdown from 'react-markdown'
+import Markdown from '../documentation/Markdown'
 import cx from 'classnames'
 
 import { iconClose, iconMenu } from '../icons'
@@ -26,7 +26,7 @@ export default class Layout extends Component {
   _renderReadme () {
     return (
       <div className='sui-Studio-readme'>
-        <ReactMarkdown source={readme} />
+        <Markdown content={readme} />
       </div>
     )
   }
