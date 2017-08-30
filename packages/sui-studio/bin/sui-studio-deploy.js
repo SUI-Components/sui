@@ -33,10 +33,10 @@ if (typeof program.name !== 'string') {
 
 const deployName = program.name
 
-getSpawnPromise('now', ['rm', deployName, '--yes', '-t ${NOW_TOKEN}'])
+getSpawnPromise('now', ['rm', deployName, '--yes', '-t $NOW_TOKEN'])
   .catch(() => {}) // To bypass now rm error on the first deploy
   .then(() => getSpawnPromise(
-    'now', ['./public', '--name=' + deployName, '--static', '-t ${NOW_TOKEN}']
+    'now', ['./public', '--name=' + deployName, '--static', '-t $NOW_TOKEN']
   ))
   // Obtain deployment url copied to clipboard by now
   .then(res => clipboardy.read())
@@ -45,7 +45,7 @@ getSpawnPromise('now', ['rm', deployName, '--yes', '-t ${NOW_TOKEN}'])
     let deployId = getDeployId(deployUrl, deployName)
     if (deployId) {
       return getSpawnPromise(
-        'now', ['alias', deployId, deployName, '-t ${NOW_TOKEN}']
+        'now', ['alias', deployId, deployName, '-t $NOW_TOKEN']
       )
     } else {
       console.error('Deploy crashed for ' + deployName)
