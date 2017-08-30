@@ -69,20 +69,26 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     const pkgInfo = require(path.join(cwd, 'package.json'))
     const scripts = pkgInfo.scripts || {}
 
-    let commands = [
+    let releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
-      ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']],
+      ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']]
+    ]
+    let docCommands = [
       [suiMonoBinPath, ['changelog', cwd]],
       ['git', ['add', cwd]],
-      ['git', ['commit --amend --no-verify --no-edit']],
+      ['git', ['commit --amend --no-verify --no-edit']]
+    ]
+    let publishCommands = [
       ['git', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version) -m \"v$(node -p -e "require(\'./package.json\')".version)\"']], // eslint-disable-line no-useless-escape
+      scripts['build'] && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
-    scripts['build'] && commands.unshift(['npm', ['run', 'build']])
 
-    serialSpawn(commands, {cwd})
+    serialSpawn(releaseCommands, {cwd})
+      .then(() => serialSpawn(docCommands))
+      .then(() => serialSpawn(publishCommands, {cwd}))
       .then(resolve)
       .catch(reject)
   })
