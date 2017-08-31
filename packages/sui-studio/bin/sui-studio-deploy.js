@@ -2,13 +2,8 @@
 /* eslint no-console:0 no-template-curly-in-string:0 */
 
 const program = require('commander')
-const clipboardy = require('clipboardy')
+const NowClient = require('now-client')
 const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
-const getDeployId = function (deployUrl, name) {
-  let re = new RegExp(`https?://(${name}-[A-Za-z0-9]+).now.sh`, 'g')
-  let result = re.exec(deployUrl)
-  return result && result[1]
-}
 
 program
   .usage('-n my-components')
@@ -31,26 +26,27 @@ if (typeof program.name !== 'string') {
   process.exit(1)
 }
 
+if (!process.env.NOW_TOKEN) {
+  console.log('ERR: NOW_TOKEN env variable is missing')
+  process.exit(1)
+}
+
 const deployName = program.name
+const now = new NowClient(process.env.NOW_TOKEN)
 
 getSpawnPromise('now', ['rm', deployName, '--yes', '-t $NOW_TOKEN'])
   .catch(() => {}) // To bypass now rm error on the first deploy
   .then(() => getSpawnPromise(
     'now', ['./public', '--name=' + deployName, '--static', '-t $NOW_TOKEN']
   ))
-  // Obtain deployment url copied to clipboard by now
-  .then(res => clipboardy.read())
+  .then(() => now.getDeployments())
+  .then(deployments => deployments[0].url)
   // Parse deployment name to make the alias point to it
-  .then((deployUrl) => {
-    let deployId = getDeployId(deployUrl, deployName)
-    if (deployId) {
-      return getSpawnPromise(
-        'now', ['alias', deployId, deployName, '-t $NOW_TOKEN']
-      )
-    } else {
-      console.error('Deploy crashed for ' + deployName)
-      return 1
-    }
+  .then((deployId) => deployId
+    ? getSpawnPromise('now', ['alias', deployId, deployName, '-t $NOW_TOKEN'])
+    : Promise.reject(new Error('Deploy crashed for ' + deployName))
+  )
+  .catch(err => {
+    console.log(err.message)
+    process.exit(1)
   })
-  .then(code => process.exit(code))
-  .catch(code => process.exit(code))
