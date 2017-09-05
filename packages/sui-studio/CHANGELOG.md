@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.20.0"></a>
+# 4.20.0 (2017-08-31)
+
+
+### Bug Fixes
+
+* don't rely on the clipboard to set deployment alias ([9a001d3](https://github.com/SUI-Components/sui/commit/9a001d3))
+
+
+
 <a name="4.19.0"></a>
 # 4.19.0 (2017-08-30)
 
