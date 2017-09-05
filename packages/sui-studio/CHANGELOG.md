@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.21.0"></a>
+# 4.21.0 (2017-09-05)
+
+
+### Bug Fixes
+
+* fix: SPA links don't work in deployments ([cfa7662](https://github.com/SUI-Components/sui/commit/cfa7662))
+
+
+
 <a name="4.20.0"></a>
 # 4.20.0 (2017-08-31)
 
@@ -192,22 +202,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
-
-
-
-<a name="4.0.0"></a>
-# 4.0.0 (2017-06-22)
-
-
-### Features
-
-* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
-* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
-
-
-### BREAKING CHANGES
-
-* API is now named sui-studio instead of suistudio
 
 
 
