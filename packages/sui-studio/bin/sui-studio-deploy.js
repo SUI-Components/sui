@@ -4,6 +4,18 @@
 const program = require('commander')
 const NowClient = require('now-client')
 const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
+const {writeFile, removeFile} = require('./helpers/file')
+const BUILD_FOLDER = './public'
+const PKG_FILE = BUILD_FOLDER + '/package.json'
+const writePackageJson = (name) => writeFile(PKG_FILE, `{
+  "name": "@sui-studio/${name}",
+  "scripts": {
+    "start": "serve . --single"
+  },
+  "dependencies": {
+    "serve": "latest"
+  }
+}`)
 
 program
   .usage('-n my-components')
@@ -36,9 +48,11 @@ const now = new NowClient(process.env.NOW_TOKEN)
 
 getSpawnPromise('now', ['rm', deployName, '--yes', '-t $NOW_TOKEN'])
   .catch(() => {}) // To bypass now rm error on the first deploy
+  .then(() => writePackageJson(deployName)) // Add package.json for SPA server
   .then(() => getSpawnPromise(
-    'now', ['./public', '--name=' + deployName, '--static', '-t $NOW_TOKEN']
+    'now', [BUILD_FOLDER, '--name=' + deployName, '--npm', '-t $NOW_TOKEN']
   ))
+  .then(() => removeFile(PKG_FILE)) // Remove package.json only used by now.sh
   .then(() => now.getDeployments())
   .then(deployments => deployments[0].url)
   // Parse deployment name to make the alias point to it

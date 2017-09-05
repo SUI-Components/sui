@@ -3,9 +3,10 @@
 const program = require('commander')
 const colors = require('colors')
 const fs = require('fs')
-const fse = require('fs-extra')
 const pascalCase = require('pascal-case')
 const spawn = require('child_process').spawn
+const {showError} = require('./helpers/cli')
+const {writeFile} = require('./helpers/file')
 
 program
   .option('-R, --router', 'add routering for this component')
@@ -27,12 +28,6 @@ program
 
 const BASE_DIR = process.cwd()
 const [category, component] = program.args
-
-const showError = (msg) => {
-  program.outputHelp(txt => colors.red(txt))
-  console.error(colors.red(msg))
-  process.exit(1)
-}
 
 if (!component) { showError('component must be defined') }
 if (!category) { showError('category must be defined') }
@@ -64,19 +59,8 @@ const packageName = `${packageScope}${prefix}-${packageCategory}${component}`
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_DIR)) {
-  console.log(colors.red(`[${packageName}] This component already exist in the path:
-  ${COMPONENT_DIR}`))
-  process.exit(1)
-}
-
-const writeFile = (path, body) => {
-  return fse.outputFile(path, body).then(() => {
-    console.log(colors.gray(`Created ${path}`))
-  })
-  .catch(err => {
-    showError(`Fail creating ${path}`)
-    throw new Error(err)
-  })
+  showError(`[${packageName}] This component already exist in the path:
+  ${COMPONENT_DIR}`)
 }
 
 Promise.all([
