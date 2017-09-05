@@ -13,9 +13,24 @@ const writeFile = (path, content) => {
     console.log(colors.gray(`Created ${path}`)) // eslint-disable-line no-console
   })
   .catch(err => {
-    showError(`Fail creating ${path}`)
+    showError(`Failed creating ${path}`)
     throw new Error(err)
   })
 }
 
-module.exports = { writeFile }
+/**
+ * Remove a file
+ * @param  {String} path Path of file to remove
+ * @return {Promise}
+ */
+const removeFile = (path) => {
+  return fse.remove(path).then(() => {
+    console.log(colors.gray(`Removed ${path}`)) // eslint-disable-line no-console
+  })
+  .catch(err => {
+    showError(`Failed removing ${path}`)
+    throw new Error(err)
+  })
+}
+
+module.exports = { writeFile, removeFile }
