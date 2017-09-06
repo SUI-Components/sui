@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-sui",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A preset for all babel-transpiled javascript of the SUI family.",
   "main": "lib/index.js",
   "keywords": [],
