@@ -5,8 +5,8 @@ const colors = require('colors')
 const fs = require('fs')
 const pascalCase = require('pascal-case')
 const spawn = require('child_process').spawn
-const {showError} = require('./helpers/cli')
-const {writeFile} = require('./helpers/file')
+const {showError} = require('@schibstedspain/sui-helpers/cli')
+const {writeFile} = require('@schibstedspain/sui-helpers/file')
 
 program
   .option('-R, --router', 'add routering for this component')

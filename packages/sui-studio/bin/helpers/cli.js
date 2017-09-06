@@ -1,6 +1,3 @@
-const program = require('commander')
-const colors = require('colors')
-
 /**
  * Calls sui-mono comman with sui-studio default config
  * @param  {String} command Name of the command
@@ -25,15 +22,4 @@ function callCommand (binPath, args) {
     .on('exit', code => { code && process.exit(code) })
 }
 
-/**
- * Shows an error in the command line and exits process
- * @param  {String} msg
- * @return
- */
-const showError = (msg) => {
-  program.outputHelp(txt => colors.red(txt))
-  console.error(colors.red(msg)) // eslint-disable-line no-console
-  process.exit(1)
-}
-
-module.exports = { callCommand, callSuiMonoCommand, showError }
+module.exports = { callCommand, callSuiMonoCommand }
