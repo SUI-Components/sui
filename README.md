@@ -34,7 +34,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-bundler](./packages/sui-bundler/README.md) | Config-free bundler for ES6 React apps | :white_check_mark: |
 | [sui-react-initial-props](./packages/sui-react-initial-props/README.md) | Initial data fetching for your react app | :white_check_mark: |
 | [sui-i18n](./packages/sui-i18n/README.md) | Isomorphic i18n service for browser and node | :hourglass: |
-| [sui-react-domain-connector](./packages/sui-react-domain-connector/README.md) | Connect any React component to your domain use cases | :hourglass: |
+| [sui-react-domain-connector](./packages/sui-react-domain-connector/README.md) | Connect any React component to your domain use cases | :white_check_mark: |
 | [sui-ssr](./packages/sui-ssr/README.md) | Plug SSR to you SUI SPA | :hourglass: |
 | [sui-decorators](./packages/sui-decorators/README.md) | Develop, maintain and publish your SUI components | :hourglass: |
 | [sui-polyfills](./packages/sui-polyfills/README.md) | Polyfills to load on our projects | :hourglass: |
