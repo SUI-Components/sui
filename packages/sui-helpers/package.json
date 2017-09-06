@@ -5,7 +5,9 @@
   "keywords": [],
   "author": "David Almeida <davidbarna@gmail.com>",
   "dependencies": {
-    "colors": "1.1.2"
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "fs-extra": "4.0.1"
   },
   "license": "MIT",
   "repository": {
