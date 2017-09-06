@@ -2,20 +2,9 @@
 /* eslint no-console:0 no-template-curly-in-string:0 */
 
 const program = require('commander')
-const NowClient = require('now-client')
-const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
-const {writeFile, removeFile} = require('./helpers/file')
+const { getSpawnPromise, showError } = require('@schibstedspain/sui-helpers/cli')
 const BUILD_FOLDER = './public'
-const PKG_FILE = BUILD_FOLDER + '/package.json'
-const writePackageJson = (name) => writeFile(PKG_FILE, `{
-  "name": "@sui-studio/${name}",
-  "scripts": {
-    "start": "serve . --single"
-  },
-  "dependencies": {
-    "serve": "latest"
-  }
-}`)
+const DEPLOY_PATH = require.resolve('@s-ui/sui-deploy/bin/sui-deploy')
 
 program
   .usage('-n my-components')
@@ -43,24 +32,7 @@ if (!process.env.NOW_TOKEN) {
   process.exit(1)
 }
 
-const deployName = program.name
-const now = new NowClient(process.env.NOW_TOKEN)
-
-getSpawnPromise('now', ['rm', deployName, '--yes', '-t $NOW_TOKEN'])
-  .catch(() => {}) // To bypass now rm error on the first deploy
-  .then(() => writePackageJson(deployName)) // Add package.json for SPA server
-  .then(() => getSpawnPromise(
-    'now', [BUILD_FOLDER, '--name=' + deployName, '--npm', '-t $NOW_TOKEN']
-  ))
-  .then(() => removeFile(PKG_FILE)) // Remove package.json only used by now.sh
-  .then(() => now.getDeployments())
-  .then(deployments => deployments[0].url)
-  // Parse deployment name to make the alias point to it
-  .then((deployId) => deployId
-    ? getSpawnPromise('now', ['alias', deployId, deployName, '-t $NOW_TOKEN'])
-    : Promise.reject(new Error('Deploy crashed for ' + deployName))
-  )
+getSpawnPromise(DEPLOY_PATH, ['spa', program.name, BUILD_FOLDER])
   .catch(err => {
-    console.log(err.message)
-    process.exit(1)
+    showError(err.message)
   })
