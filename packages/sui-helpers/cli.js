@@ -1,6 +1,7 @@
 /* eslint no-console:0 */
 require('colors')
 const processSpawn = require('child_process').spawn
+const program = require('commander')
 const CODE_OK = 0
 const log = console.log
 
@@ -101,9 +102,22 @@ function getCommandCallMessage (bin, args, options = {}) {
   return `\n${command.magenta} ${folder.grey}`
 }
 
+/*
+ * Shows an error in the command line and exits process
+ * It also outputs help content of the command
+ * @param  {String} msg
+ * @return
+ */
+const showError = (msg) => {
+  program.outputHelp(txt => txt.red)
+  console.log(msg.red) // eslint-disable-line no-console
+  process.exit(1)
+}
+
 module.exports = {
   serialSpawn,
   parallelSpawn,
   getSpawnPromiseFactory,
-  getSpawnPromise
+  getSpawnPromise,
+  showError
 }
