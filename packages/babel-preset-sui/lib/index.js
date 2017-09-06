@@ -1,10 +1,11 @@
-var isInstalled = require('./is-installed')
-var cleanList = require('./clean-list')
+const isInstalled = require('./is-installed')
+const cleanList = require('./clean-list')
 
 module.exports = {
   'presets': cleanList([
     require('babel-preset-es2015'),
-    isInstalled('react', 'babel-preset-react')
+    isInstalled(['preact', 'react'], 'babel-preset-react'),
+    isInstalled('flow-bin', 'babel-preset-flow')
   ]),
   'plugins': [
     require('babel-plugin-syntax-trailing-function-commas'),
@@ -23,7 +24,7 @@ module.exports = {
   'env': {
     'development': {
       'plugins': cleanList([
-        isInstalled('react', 'react-hot-loader/babel')
+        isInstalled(['preact', 'react'], 'react-hot-loader/babel')
       ])
     }
   }
