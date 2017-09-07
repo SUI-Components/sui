@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.4.0"></a>
+# 1.4.0 (2017-09-07)
+
+
+### Features
+
+* rename to [@s-ui](https://github.com/s-ui)/deploy ([668a999](https://github.com/SUI-Components/sui/commit/668a999))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2017-09-07)
 
