@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2017-09-07)
+
+
+### Bug Fixes
+
+* avoid race conditions for deployments aliases ([7485dce](https://github.com/SUI-Components/sui/commit/7485dce))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-09-07)
 
