@@ -8,6 +8,8 @@ program
   .version(version, '    --version')
 
 program
-  .command('spa <name> [build-folder]', 'deploy single-page application')
+  .command(
+    'spa <name> [folder]', 'deploy a single-page application', {isDefault: true}
+  )
 
 program.parse(process.argv)

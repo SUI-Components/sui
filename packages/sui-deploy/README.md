@@ -5,7 +5,7 @@
 
 It provides:
 * Common way to deploy our projects
-* SPA deployment in now.sh
+* SPA deployments
 
 
 ## Installation
@@ -21,12 +21,17 @@ When installed, a new CLI `sui-deploy` (node_modules/.bin/sui-deploy) is automat
 Deploy a folder as an static SPA:
 
 ```sh
-$ sui-deploy spa <name-of-project> <build-folder>
+$ sui-deploy spa <name-of-project> [build-folder] [--now]
+```
+
+As spa is the default command, you can also:
+```sh
+$ sui-deploy <name-of-project> [build-folder] [--now]
 ```
 
 ## Authentification
 
-`sui-deploy` needs a now token to deploy files. The token is obtain from the env variable `NOW_TOKEN`
+**When --now option is set**, `sui-deploy` needs a now token to deploy files. The token is obtain from the env variable `NOW_TOKEN`
 
 You can set your token once with a simple command.
 
@@ -55,7 +60,7 @@ $ sui-deploy spa --help
   "version": "1.0.0",
   "scripts": {
     "build": "sui-bundler build -C",
-    "deploy": "sui-deploy spa test-project ./build"
+    "deploy": "sui-deploy test-project --now"
   },
   "devDependencies": {
     "@s-ui/sui-deploy": "1"
