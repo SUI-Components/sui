@@ -51,7 +51,7 @@ getSpawnPromise('now', ['rm', deployName, '--yes', nowTokenOption])
   ))
   .then(() => removeFile(pkgFilePath)) // Remove package.json only used by now.sh
   .then(() => now.getDeployments())
-  .then(deployments => deployments[0].url)
+  .then(deployments => deployments.filter(d => d.name === deployName)[0].url)
   // Parse deployment name to make the alias point to it
   .then((deployId) => deployId
     ? getSpawnPromise('now', ['alias', deployId, deployName, nowTokenOption])
