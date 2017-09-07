@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/sui-deploy",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": " CLI to deploy of sui-based projects",
   "main": "./bin/sui-deploy.js",
   "bin": {
