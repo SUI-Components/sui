@@ -5,7 +5,7 @@ const program = require('commander')
 const NowClient = require('now-client')
 const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
 const {writeFile, removeFile} = require('@schibstedspain/sui-helpers/file')
-const BUILD_FOLDER = './public'
+const DEFAULT_FOLDER = './public'
 const writePackageJson = (name) => writeFile(pkgFilePath, `{
   "name": "@sui-deploy/${name}",
   "scripts": {
@@ -17,48 +17,47 @@ const writePackageJson = (name) => writeFile(pkgFilePath, `{
 }`)
 
 program
-  .command('sui-deploy spa <name> <folder>')
+  .usage(`[options] <name> [folder]`)
+  .option('-n, --now', 'Deploy to now.sh')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
     console.log('  Deploy build folder to now.sh')
+    console.log('  [folder] defaults to ./public')
     console.log('')
     console.log('  Examples:')
     console.log('')
-    console.log('    $ sui-deploy spa my-app-name ./public')
-    console.log('    $ NOW_TOKEN=my-token; sui-deploy spa my-app-name ./public')
+    console.log('    $ sui-deploy spa my-app-name ./dist')
+    console.log('    $ NOW_TOKEN=my-token; sui-deploy spa my-app-name ./dist')
     console.log('')
   })
   .parse(process.argv)
 
-if (!process.argv.slice(2).length) {
-  program.outputHelp()
-}
-
-if (!process.env.NOW_TOKEN) {
-  console.log('ERR: NOW_TOKEN env variable is missing')
+if (!program.now) {
+  console.log('ERR: --now is the only option avaiblable')
   process.exit(1)
 }
 
-const [,, deployName, folder = BUILD_FOLDER] = process.argv
+const [deployName, buildFolder = DEFAULT_FOLDER] = program.args
+const nowTokenOption = '-t $NOW_TOKEN'
 const now = new NowClient(process.env.NOW_TOKEN)
-const pkgFilePath = folder + '/package.json'
+const pkgFilePath = buildFolder + '/package.json'
 
-getSpawnPromise('now', ['rm', deployName, '--yes', '-t $NOW_TOKEN'])
+getSpawnPromise('now', ['rm', deployName, '--yes', nowTokenOption])
   .catch(() => {}) // To bypass now rm error on the first deploy
   .then(() => writePackageJson(deployName)) // Add package.json for SPA server
   .then(() => getSpawnPromise(
-    'now', [BUILD_FOLDER, '--name=' + deployName, '--npm', '-t $NOW_TOKEN']
+    'now', [DEFAULT_FOLDER, '--name=' + deployName, '--npm', nowTokenOption]
   ))
   .then(() => removeFile(pkgFilePath)) // Remove package.json only used by now.sh
   .then(() => now.getDeployments())
   .then(deployments => deployments[0].url)
   // Parse deployment name to make the alias point to it
   .then((deployId) => deployId
-    ? getSpawnPromise('now', ['alias', deployId, deployName, '-t $NOW_TOKEN'])
+    ? getSpawnPromise('now', ['alias', deployId, deployName, nowTokenOption])
     : Promise.reject(new Error('Deploy crashed for ' + deployName))
   )
   .catch(err => {
-    console.log(err.message)
+    console.log(err.message || err)
     process.exit(1)
   })
