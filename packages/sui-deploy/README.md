@@ -11,7 +11,7 @@ It provides:
 ## Installation
 
 ```sh
-$ npm install @s-ui/sui-deploy --save-dev
+$ npm install @s-ui/deploy --save-dev
 ```
 
 ## CLI
@@ -63,7 +63,7 @@ $ sui-deploy spa --help
     "deploy": "sui-deploy test-project --now"
   },
   "devDependencies": {
-    "@s-ui/sui-deploy": "1"
+    "@s-ui/deploy": "1"
   }
 }
 ```
