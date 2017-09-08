@@ -18,7 +18,7 @@ It provides:
 
 ### Run command on all packages
 
-You can run a single command on each package of the monorepo
+You can run a single command on each package of the monorepo, **in series**
 
 ```
 $ sui-mono run <command>
@@ -26,6 +26,13 @@ $ sui-mono run rm -Rf node_modules
 $ sui-mono run npm install
 ```
 
+You can also run them **in parallel**
+
+```
+$ sui-mono run-parallel <command>
+$ sui-mono run-parallel rm -Rf node_modules
+$ sui-mono run-parallel npm install
+```
 
 ### Link
 

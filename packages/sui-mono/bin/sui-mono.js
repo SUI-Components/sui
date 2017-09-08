@@ -24,6 +24,9 @@ program
   .command('release', 'Release whatever need to be release')
 
 program
-  .command('run', 'Run a command on each package')
+  .command('run', 'Run a command on each package, in series')
+
+program
+  .command('run-parallel', 'Run a command on each package, in parallel')
 
 program.parse(process.argv)
