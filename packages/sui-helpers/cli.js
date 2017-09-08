@@ -1,10 +1,11 @@
 /* eslint no-console:0 */
 require('colors')
-const spawn = require('child_process').spawn
+const processSpawn = require('child_process').spawn
 const CODE_OK = 0
+const log = console.log
 
 /**
- * Spawn several commands in children processes
+ * Spawn several commands in children processes, in series
  * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
  * @param  {Object} options Default options for given commands
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
@@ -13,6 +14,36 @@ function serialSpawn (commands, options = {}) {
   return commands.reduce(function (promise, args) {
     return promise.then(getSpawnPromiseFactory(...args, options))
   }, Promise.resolve())
+}
+
+/**
+ * Spawn several commands in children processes, in parallel
+ * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
+ * @param  {Object} options Default options for given commands
+ * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
+ */
+function parallelSpawn (commands, options = {}) {
+  options.stdio = 'pipe'
+  log(`Running ${commands.length} commands in parallel. Please wait...`.cyan)
+  const promises = commands.map(command => new Promise((resolve, reject) => {
+    let [bin, args, opts] = command
+    let stdout = ''
+    let stderr = ''
+    opts = {...opts, ...options}
+
+    let child = getSpawnProcess(bin, args, opts)
+    child.stdout.on('data', (data) => { stdout += data.toString() })
+    child.stderr.on('data', (data) => { stderr += data.toString() })
+    child.on('exit', (code) => {
+      log(getCommandCallMessage(bin, args, opts))
+      log(stdout)
+      log(stderr)
+      code === CODE_OK ? resolve(code) : reject(code)
+    })
+  })
+  )
+  return Promise.all(promises)
+    .then(() => log(`${commands.length} commands run successfully.`.cyan))
 }
 
 /**
@@ -32,24 +63,47 @@ function getSpawnPromiseFactory (bin, args, options) {
  * Spawn given command and return a promise of the exit code value
  * @param  {String} bin     Binary path or alias
  * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
- * @param  {Object} [options={shell: true, stdio: 'inherit'}] Options to pass to child_process.spawn call
+ * @param  {Object} options Options to pass to child_process.spawn call
  * @return {Promise<Number>} Process exit code
  */
 function getSpawnPromise (bin, args, options = {}) {
-  const folder = options.cwd ? '@' + options.cwd.split('/').slice(-2).join('/') : ''
-  const command = bin.split('/').pop() + ' ' + args.join(' ')
-  options = Object.assign({shell: true, stdio: 'inherit', cwd: process.cwd()}, options)
-  console.log(`\n${command.magenta} ${folder.grey}`)
   return new Promise(function (resolve, reject) {
-    spawn(bin, args, options)
+    log(getCommandCallMessage(bin, args, options))
+    getSpawnProcess(bin, args, options)
       .on('exit', (code) => {
         code === CODE_OK ? resolve(code) : reject(code)
       })
   })
 }
 
+/**
+ * Spawn given command and return a promise of the exit code value
+ * @param  {String} bin     Binary path or alias
+ * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
+ * @param  {Object} [options={shell: true, stdio: 'inherit'}] Options to pass to child_process.spawn call
+ * @return {ChildProcess}
+ */
+function getSpawnProcess (bin, args, options = {}) {
+  options = Object.assign({shell: true, stdio: 'inherit', cwd: process.cwd()}, options)
+  return processSpawn(bin, args, options)
+}
+
+/**
+ * Get caption presenting comman execution in a folder
+ * @param  {String} bin     Binary path or alias
+ * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
+ * @param  {Object} Options to pass to child_process.spawn call
+ * @return {Striog}
+ */
+function getCommandCallMessage (bin, args, options = {}) {
+  const folder = options.cwd ? '@' + options.cwd.split('/').slice(-2).join('/') : ''
+  const command = bin.split('/').pop() + ' ' + args.join(' ')
+  return `\n${command.magenta} ${folder.grey}`
+}
+
 module.exports = {
   serialSpawn,
+  parallelSpawn,
   getSpawnPromiseFactory,
   getSpawnPromise
 }
