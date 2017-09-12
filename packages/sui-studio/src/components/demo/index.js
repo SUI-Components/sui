@@ -21,6 +21,7 @@ import {createStore} from '@schibstedspain/ddd-react-redux'
 const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
+const REACT_DOMAIN_CONNECTOR = '@schibstedspain/sui-react-domain-connector'
 
 const createContextByType = (ctxt, type) => {
   // check if the user has created a context.js with the needed contextTypes
@@ -108,7 +109,9 @@ export default class Demo extends Component {
     const contextTypes = Base.contextTypes || Base.originalContextTypes
     const context = contextTypes && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
-    const hasProvider = pkg && pkg.dependencies && pkg.dependencies[DDD_REACT_REDUX]
+    const hasProvider = pkg &&
+                        pkg.dependencies &&
+                        (pkg.dependencies[DDD_REACT_REDUX] || pkg.dependencies[REACT_DOMAIN_CONNECTOR])
     const store = domain && hasProvider && createStore(domain)
 
     const Enhance = pipe(
