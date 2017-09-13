@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.22.0"></a>
+# 1.22.0 (2017-09-13)
+
+
+### Features
+
+* new command sui-mono run-parallel ([589f955](https://github.com/SUI-Components/sui/commit/589f955))
+
+
+
 <a name="1.21.0"></a>
 # 1.21.0 (2017-08-30)
 
