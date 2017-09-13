@@ -1,0 +1,25 @@
+{
+  "name": "@s-ui/deploy",
+  "version": "1.5.0",
+  "description": " CLI to deploy of sui-based projects",
+  "main": "./bin/sui-deploy.js",
+  "bin": {
+    "sui-deploy": "./bin/sui-deploy.js"
+  },
+  "keywords": [],
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@schibstedspain/sui-helpers": "1",
+    "commander": "2.9.0",
+    "now-client": "1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-deploy#readme"
+}
