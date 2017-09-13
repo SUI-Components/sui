@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2017-09-13)
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2017-08-29)
 
