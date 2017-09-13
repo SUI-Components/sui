@@ -183,6 +183,25 @@ console.log(perf.getEntries())
 clearMeasureReact()
 ```
 
+#### measureAxios(perf)(axios)
+Measure all axios requests.
+
+```js
+import axios from 'axios'
+import getPerf from '@schibstedspain/sui-perf'
+import measureAxios from '@schibstedspain/sui-perf/lib/measure-axios'
+
+/* ... */
+
+const axiosInstance = axios.create()
+const perf = getPerf('my-request-unique-id')
+const clearMeasureAxios = measureAxios(perf)(axiosInstance)
+
+/* ... */
+console.log(perf.getEntries())
+clearMeasureAxios()
+```
+
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).
