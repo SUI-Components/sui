@@ -119,6 +119,8 @@ export default class Demo extends Component {
       withProvider(hasProvider, store)
     )(Base)
 
+    !Enhance.displayName && console.error(new Error('Component.displayName must be defined.'))
+    
     return (
       <div className='sui-StudioDemo'>
         <Style>{style}</Style>
@@ -146,7 +148,7 @@ export default class Demo extends Component {
 
         <Preview
           code={playground}
-          scope={{React, [`${cleanDisplayName(Enhance.displayName || Enhance.name)}`]: Enhance, domain}}
+          scope={{React, [`${cleanDisplayName(Enhance.displayName)}`]: Enhance, domain}}
         />
       </div>
     )
