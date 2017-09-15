@@ -30,7 +30,7 @@ Packages must be properly named. 3 name are
 
 **Example for package `my-example-package`**
 * Folder: `./packages/sui-my-example-package`
-* NPM name: `@schibstedspain/sui-my-example-package`
+* NPM name: `@s-ui/my-example-package`
 
 ### Versionning
 
@@ -52,7 +52,7 @@ Some fields are mandatory in every `package.json`:
 
 {
   /* ... */
-  "name": "@schibstedspain/sui-my-example-package",
+  "name": "@s-ui/my-example-package",
   "version": "1.0.0",
   /* ... */
   "repository": {
@@ -100,7 +100,7 @@ This way, you warranty that the original owner can review the changes you've mad
 Use [npm deprecate](https://docs.npmjs.com/cli/deprecate) to warn developers that the component was migrated when they install it.
 
 ```
-npm deprecate @scope/origin-package "@scope/origin-package is deprecated. Use @schibstedspain/sui-my-example-package instead."
+npm deprecate @scope/origin-package "@scope/origin-package is deprecated. Use @s-ui/my-example-package instead."
 ```
 
 ##### 2. Update README with deprecation warning
@@ -109,7 +109,7 @@ Add this (modified) snippet on top of your package README.md file.
 ```markdown
 ![deprecated](https://img.shields.io/badge/stability-deprecated-red.svg) THIS PACKAGE IS **DEPRECATED!**
 
-**Use [@schibstedspain/sui-my-example-package](https://www.npmjs.com/package/@schibstedspain/sui-my-example-package) instead.**
+**Use [@s-ui/my-example-package](https://www.npmjs.com/package/@s-ui/my-example-package) instead.**
 
 ```
 
