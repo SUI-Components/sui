@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.6.0"></a>
+# 4.6.0 (2017-09-15)
+
+
+### Features
+
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([95eb003](https://github.com/SUI-Components/sui/commit/95eb003))
+
+
+
 <a name="4.5.0"></a>
 # 4.5.0 (2017-08-17)
 
@@ -30,16 +40,6 @@ All notable changes to this project will be documented in this file.
 
 * improve phoenix scripts for generated pacakge.json ([dfd35e6](https://github.com/SUI-Components/sui/commit/dfd35e6))
 * wrong package.json generation ([16b7269](https://github.com/SUI-Components/sui/commit/16b7269))
-
-
-
-<a name="4.1.0"></a>
-# 4.1.0 (2017-06-25)
-
-
-### Features
-
-* add updated sui-studio-create behavior ([ec6677f](https://github.com/SUI-Components/sui/commit/ec6677f))
 
 
 
