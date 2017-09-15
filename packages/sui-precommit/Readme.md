@@ -13,7 +13,7 @@ It provides:
 
 
 ```sh
-$ npm install @schibstedspain/sui-precommit --save-dev
+$ npm install @s-ui/precommit --save-dev
 ```
 
 ## CLI
