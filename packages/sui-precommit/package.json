@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-precommit",
+  "name": "@s-ui/precommit",
   "version": "2.3.0",
   "description": "Effortless SUI precommit rules integration in your project",
   "main": "index.js",
@@ -9,8 +9,8 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@schibstedspain/sui-lint": "2",
-    "@schibstedspain/sui-helpers": "1",
+    "@s-ui/lint": "2",
+    "@s-ui/helpers": "1",
     "commander": "2.9.0"
   },
   "license": "MIT",
