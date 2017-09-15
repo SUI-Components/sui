@@ -3,8 +3,8 @@
 
 const program = require('commander')
 const NowClient = require('now-client')
-const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
-const {writeFile, removeFile} = require('@schibstedspain/sui-helpers/file')
+const { getSpawnPromise } = require('@s-ui/helpers/cli')
+const {writeFile, removeFile} = require('@s-ui/helpers/file')
 const DEFAULT_FOLDER = './public'
 const writePackageJson = (name) => writeFile(pkgFilePath, `{
   "name": "@sui-deploy/${name}",
