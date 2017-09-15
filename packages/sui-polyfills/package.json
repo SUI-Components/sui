@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-polyfills",
+  "name": "@s-ui/polyfills",
   "version": "1.4.0",
   "description": "Polyfills for your project",
   "main": "src/index.js",
