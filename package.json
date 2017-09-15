@@ -19,9 +19,9 @@
     "precommit": "sui-precommit run"
   },
   "devDependencies": {
-    "@schibstedspain/sui-lint": "2",
-    "@schibstedspain/sui-mono": "1",
-    "@schibstedspain/sui-precommit": "2",
+    "@s-ui/lint": "2",
+    "@s-ui/mono": "1",
+    "@s-ui/precommit": "2",
     "husky": "0.13.4",
     "validate-commit-msg": "2.12.2"
   },
@@ -31,15 +31,15 @@
       "packagesFolder": "./packages"
     },
     "validate-commit-msg": {
-      "types": "@schibstedspain/sui-mono/src/types"
+      "types": "@s-ui/mono/src/types"
     }
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/@schibstedspain/sui-lint/eslintrc.js"
+      "./node_modules/@s-ui/lint/eslintrc.js"
     ]
   },
-  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml",
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml",
   "author": "David Almeida <davidbarna@gmail.com>",
   "repository": {
     "type": "git",

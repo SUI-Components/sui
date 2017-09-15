@@ -11,7 +11,7 @@
 ### 1.1 Install `sui-precommit`
 
 ```sh
-$ npm install @schibstedspain/sui-precommit --save-dev --save-exact
+$ npm install @s-ui/precommit --save-dev --save-exact
 ```
 
 ### 1.2 Install `sui-precommit` scripts and hooks
@@ -34,7 +34,7 @@ Now your package.json to have the following changes
     "precommit": "sui-precommit run"
   },
   "devDependencies": {
-    "@schibstedspain/sui-precommit": "2",
+    "@s-ui/precommit": "2",
     "husky": "0.13.4"
   }
 }
@@ -50,7 +50,7 @@ Now, `sui-precommit run` will be executed prior every commit.
 ### 2.1 Install `sui-mono`
 
 ```sh
-$ npm install @schibstedspain/sui-mono --save-dev --save-exact
+$ npm install @s-ui/mono --save-dev --save-exact
 ```
 
 ### 2.2 Delegate your commits to `sui-mono`
@@ -64,7 +64,7 @@ Create a "co" script and now only use `npm run co` for your commits.
     "co": "sui-mono commit"
   },
   "devDependencies": {
-    "@schibstedspain/sui-mono": "1"
+    "@s-ui/mono": "1"
   }
 }
 ```
@@ -89,7 +89,7 @@ And configure commit-msg hook to sui-mono's commitizen types. Your package.json 
   },
   "config": {
     "validate-commit-msg": {
-      "types": "@schibstedspain/sui-mono/src/types"
+      "types": "@s-ui/mono/src/types"
     }
   },
   "devDependencies": {
@@ -98,5 +98,5 @@ And configure commit-msg hook to sui-mono's commitizen types. Your package.json 
 }
 ```
 
-[sui-mono]: https://www.npmjs.com/package/@schibstedspain/sui-mono
-[sui-precommit]: https://www.npmjs.com/package/@schibstedspain/sui-precommit
+[sui-mono]: https://www.npmjs.com/package/@s-ui/mono
+[sui-precommit]: https://www.npmjs.com/package/@s-ui/precommit
