@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-lint",
+  "name": "@s-ui/lint",
   "version": "2.3.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",

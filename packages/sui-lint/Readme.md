@@ -12,7 +12,7 @@ It provides:
 ## Installation
 
 ```sh
-$ npm install @schibstedspain/sui-lint --save-dev
+$ npm install @s-ui/lint --save-dev
 ```
 
 ## CLI
@@ -45,8 +45,8 @@ Al igual que en el caso anterior no puedes pasar una nueva configuración, y las
 ```json
 {
   "eslintConfig": {
-     "extends": ["./node_modules/@schibstedspain/sui-lint/eslintrc.js"]},
-  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml"
+     "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]},
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
 ```
 
@@ -62,9 +62,9 @@ Al igual que en el caso anterior no puedes pasar una nueva configuración, y las
     "lint:sass": "sui-lint sass"
   },
   "devDependencies": {
-    "@schibstedspain/sui-lint": "1.0.0-beta.1"
+    "@s-ui/lint": "1.0.0-beta.1"
   },
-  "eslintConfig": { "extends": ["./node_modules/@schibstedspain/sui-lint/eslintrc.js"]},
-  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml"
+  "eslintConfig": { "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]},
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
 ```
