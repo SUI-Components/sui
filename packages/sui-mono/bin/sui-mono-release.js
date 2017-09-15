@@ -4,7 +4,7 @@ const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
 const checker = require('../src/check')
-const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
+const { serialSpawn } = require('@s-ui/helpers/cli')
 
 program
   .on('--help', () => {
@@ -32,7 +32,7 @@ const BASE_DIR = process.cwd()
 
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
-const suiMonoBinPath = require.resolve('@schibstedspain/sui-mono/bin/sui-mono')
+const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
 
 const RELEASE_CODES = {
   0: 'clean',
