@@ -6,6 +6,6 @@ bootstrap({
   debug: false,
   cliPath: path.join(process.cwd(), 'node_modules/commitizen'),
   config: {
-    path: './node_modules/@schibstedspain/sui-cz'
+    path: './node_modules/@s-ui/cz'
   }
 })

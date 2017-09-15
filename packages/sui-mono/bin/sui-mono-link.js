@@ -4,11 +4,11 @@
 const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
-const { serialSpawn } = require('@schibstedspain/sui-helpers/cli')
+const { serialSpawn } = require('@s-ui/helpers/cli')
 const {
   getPackagesPaths, getPackagesNames,
   getInternalDependencyMap, getUsedInternalDependencies
-} = require('@schibstedspain/sui-helpers/packages')
+} = require('@s-ui/helpers/packages')
 
 program
   .on('--help', () => {

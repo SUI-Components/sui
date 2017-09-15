@@ -2,7 +2,7 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const {getAllTaskArrays} = require('../src/run')
-const {serialSpawn} = require('@schibstedspain/sui-helpers/cli')
+const {serialSpawn} = require('@s-ui/helpers/cli')
 
 program
   .on('--help', () => {
