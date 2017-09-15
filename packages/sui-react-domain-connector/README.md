@@ -2,7 +2,7 @@
 
 ## Install
 
-`$ npm install @schibstedspain/sui-react-domain-connector`
+`$ npm install @s-ui/react-domain-connector`
 
 ## Usage
 
@@ -11,7 +11,7 @@
 
 import React from 'react'
 import {render} from 'react-dom'
-import {Provider} from '@schibstedspain/sui-react-domain-connector'
+import {Provider} from '@s-ui/react-domain-connector'
 
 import Domain from '@schibstedspain/domain'
 import Rosetta from '@schibstedspain/rosetta'
@@ -42,7 +42,7 @@ Or passing directly the store, if you need it outside
 
 import React from 'react'
 import {render} from 'react-dom'
-import {Provider, createStore} from '@schibstedspain/sui-react-domain-connector'
+import {Provider, createStore} from '@s-ui/react-domain-connector'
 
 import Domain from '@schibstedspain/domain'
 import Rosetta from '@schibstedspain/rosetta'
@@ -76,7 +76,7 @@ Passing Config to your components
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import {compose, mapConfigToProps} from '@schibstedspain/sui-react-domain-connector'
+import {compose, mapConfigToProps} from '@s-ui/react-domain-connector'
 
 class Search extends Component {
   const {gradesConfig} = this.props
@@ -107,7 +107,7 @@ export default compose(
 Or Using locals HoC to avoid use the global state when you dont need it
 
 ```js
-import {withLocalService, mapServiceToProps, mapResponseToProps, compose} from '@schibstedspain/sui-react-domain-connector'
+import {withLocalService, mapServiceToProps, mapResponseToProps, compose} from '@s-ui/react-domain-connector'
 
 const Home = ({
   history,
@@ -156,7 +156,7 @@ Using UI HoC to manage not relative Domain updates
 
 ```js
 
-import {mapUIServiceToProps, mapUIResponseToProps, compose} from '@schibstedspain/sui-react-domain-connector'
+import {mapUIServiceToProps, mapUIResponseToProps, compose} from '@s-ui/react-domain-connector'
 
 const Home = ({
   history,
@@ -200,7 +200,7 @@ export default compose(
 Comonication between components:
 
 ```
-import { withLocalService, withStreamService, compose } from '@schibstedspain/sui-react-domain-connector'
+import { withLocalService, withStreamService, compose } from '@s-ui/react-domain-connector'
 
 class Home extends PureComponent {
   static displayName = 'Home'
