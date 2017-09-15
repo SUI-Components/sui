@@ -6,7 +6,7 @@
 ## Installation
 
 ```sh
-$ npm install -g @schibstedspain/sui-studio-create
+$ npm install -g @s-ui/studio-create
 ```
 
 ## Usage
