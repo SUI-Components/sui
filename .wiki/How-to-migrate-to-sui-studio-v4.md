@@ -9,7 +9,7 @@ The only "global command" `suistudio init` was migrated to [sui-studio-create].
 
 ### 1.1 Install sui-studio
 ```sh
-$ npm install @schibstedspain/sui-studio@4 --save-exact --save-dev
+$ npm install @s-ui/studio@4 --save-exact --save-dev
 ```
 
 ### 1.2 Add sui-mono config
@@ -67,7 +67,7 @@ Now linting is reponsibility of [sui-lint] (through [sui-precommit]).
 ### 3.1 Install sui-precommit
 
 ```sh
-$ npm install @schibstedspain/sui-precommit@2 --save-dev --save-exact
+$ npm install @s-ui/precommit@2 --save-dev --save-exact
 ```
 
 ### 3.2 Install precommit hooks (linting)
@@ -115,7 +115,7 @@ And configure commit-msg hook to sui-mono cz-types.
   },
   "config": {
     "validate-commit-msg": {
-      "types": "@schibstedspain/sui-mono/src/types"
+      "types": "@s-ui/mono/src/types"
     }
   },
   "devDependencies": {
@@ -165,7 +165,7 @@ after:
 You need to replace one dep by the new one:
 ```sh
 $ sui-studio run-all npm uninstall @schibstedspain/suistudio-fatigue-deps --save
-$ npm install @schibstedspain/sui-component-dependencies@latest --save
+$ npm install @s-ui/component-dependencies@latest --save
 ```
 
 > :warning: **Caution!**
@@ -175,17 +175,17 @@ $ npm install @schibstedspain/sui-component-dependencies@latest --save
 ```js
 {
   "dependencies": {
-    "@schibstedspain/sui-component-dependencies": "latest"
+    "@s-ui/component-dependencies": "latest"
   }
 }
 ```
 
 
-[sui-studio-create]: https://www.npmjs.com/package/@schibstedspain/sui-studio-create
-[sui-component-peer-dependencies]: https://www.npmjs.com/package/@schibstedspain/sui-component-peer-dependencies
-[sui-mono]: https://www.npmjs.com/package/@schibstedspain/sui-mono
+[sui-studio-create]: https://www.npmjs.com/package/@s-ui/studio-create
+[sui-component-peer-dependencies]: https://www.npmjs.com/package/@s-ui/component-peer-dependencies
+[sui-mono]: https://www.npmjs.com/package/@s-ui/mono
 [suistudio-fatigue-deps]: https://www.npmjs.com/package/@schibstedspain/suistudio-fatigue-deps
 [linting-rules]: https://www.npmjs.com/package/@schibstedspain/linting-rules
-[sui-precommit]: https://www.npmjs.com/package/@schibstedspain/sui-precommit
-[sui-lint]: https://www.npmjs.com/package/@schibstedspain/sui-lint
-[sui-component-dependencies]: https://www.npmjs.com/package/@schibstedspain/sui-component-dependencies
+[sui-precommit]: https://www.npmjs.com/package/@s-ui/precommit
+[sui-lint]: https://www.npmjs.com/package/@s-ui/lint
+[sui-component-dependencies]: https://www.npmjs.com/package/@s-ui/component-dependencies
