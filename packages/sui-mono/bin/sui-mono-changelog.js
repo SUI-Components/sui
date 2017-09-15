@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
 const {getScopes, getPackagesFolder, isMonoPackage} = require('../src/config')
-const { getPackagesPaths } = require('@schibstedspain/sui-helpers/packages')
+const { getPackagesPaths } = require('@s-ui/helpers/packages')
 
 program
   .usage('<folder1> <folder2> <etc>')

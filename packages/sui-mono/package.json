@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-mono",
+  "name": "@s-ui/mono",
   "version": "1.22.0",
   "description": "Commit and release manager",
   "main": "index.js",
@@ -15,8 +15,8 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "@schibstedspain/sui-cz": "1.1",
-    "@schibstedspain/sui-helpers": "1",
+    "@s-ui/cz": "1.1",
+    "@s-ui/helpers": "1",
     "commander": "2.9.0",
     "commitizen": "2.8.6",
     "conventional-changelog": "1.1.0"
