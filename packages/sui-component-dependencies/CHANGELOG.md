@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.3.0"></a>
+# 1.3.0 (2017-09-15)
+
+
+### Features
+
+* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([cf48bd2](https://github.com/SUI-Components/sui/commit/cf48bd2))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2017-06-22)
 
@@ -9,17 +19,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * make package public ([08b503b](https://github.com/SUI-Components/sui/commit/08b503b))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-06-22)
-
-
-### Features
-
-* first release 1.0 ([54e5ff6](https://github.com/SUI-Components/sui/commit/54e5ff6))
-* migrate from [@schibstedspain](https://github.com/schibstedspain)/suistudio-fatigue-deps ([b0474f8](https://github.com/SUI-Components/sui/commit/b0474f8))
 
 
 
