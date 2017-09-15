@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-react-initial-props",
+  "name": "@s-ui/react-initial-props",
   "version": "1.2.0",
   "main": "lib/index.js",
   "description": "Provide a way to get initial props for async pages",
@@ -14,11 +14,11 @@
     "react": "15"
   },
   "devDependencies": {
-    "@schibstedspain/sui-component-peer-dependencies": "1",
+    "@s-ui/component-peer-dependencies": "1",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1"
   },
   "dependencies": {
-    "@schibstedspain/sui-hoc": "1"
+    "@s-ui/hoc": "1"
   }
 }
