@@ -7,5 +7,5 @@ When hosting components, this package is its single source of truth.
 ## Installation
 
 ```sh
-$ npm install @schibstedspain/sui-component-peer-dependencies --save-dev
+$ npm install @s-ui/component-peer-dependencies --save-dev
 ```
