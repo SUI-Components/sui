@@ -30,7 +30,7 @@ function parallelSpawn (commands, options = {}) {
     let [bin, args, opts] = command
     let stdout = ''
     let stderr = ''
-    opts = {...opts, ...options}
+    opts = Object.assign({}, opts, options)
 
     let child = getSpawnProcess(bin, args, opts)
     child.stdout.on('data', (data) => { stdout += data.toString() })
