@@ -23,7 +23,7 @@ npm install sui-studio -g
 First install sui-studio:
 
 ```sh
-npm i -g @schibstedspain/sui-studio
+npm i -g @s-ui/studio
 sui-studio init <project_name>
 cd <project_name>
 ```

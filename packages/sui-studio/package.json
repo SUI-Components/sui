@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-studio",
+  "name": "@s-ui/studio",
   "version": "4.26.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
@@ -26,10 +26,10 @@
   "dependencies": {
     "@s-ui/sui-deploy": "1",
     "@schibstedspain/ddd-react-redux": "2",
-    "@schibstedspain/sui-bundler": "2",
-    "@schibstedspain/sui-component-peer-dependencies": "latest",
-    "@schibstedspain/sui-helpers": "1",
-    "@schibstedspain/sui-mono": "1",
+    "@s-ui/bundler": "2",
+    "@s-ui/component-peer-dependencies": "latest",
+    "@s-ui/helpers": "1",
+    "@s-ui/mono": "1",
     "babel-standalone": "6.12.0",
     "bundle-loader": "0.5.4",
     "codemirror": "5.16.0",
