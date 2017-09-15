@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-cz",
+  "name": "@s-ui/cz",
   "version": "1.3.0",
   "description": "Commitizen adapter for sui packages",
   "main": "index.js",
