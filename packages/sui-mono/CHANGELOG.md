@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.23.0"></a>
+# 1.23.0 (2017-09-15)
+
+
+### Features
+
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([0d70fc3](https://github.com/SUI-Components/sui/commit/0d70fc3))
+
+
+
 <a name="1.22.0"></a>
 # 1.22.0 (2017-09-13)
 
