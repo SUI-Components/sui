@@ -11,5 +11,5 @@ SSR can be tought to configure and maintain. SSR handles that for you providing:
 ## Installation
 
 ```sh
-npm install @schibstedspain/sui-ssr --save
+npm install @s-ui/ssr --save
 ```
