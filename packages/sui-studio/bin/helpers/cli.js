@@ -4,7 +4,7 @@
  * @return {ChildProcess}
  */
 function callSuiMonoCommand (command) {
-  const BIN_PATH = require.resolve('@schibstedspain/sui-mono/bin/sui-mono')
+  const BIN_PATH = require.resolve('@s-ui/mono/bin/sui-mono')
   const [,, ...args] = process.argv
 
   callCommand(BIN_PATH, [command, ...args])

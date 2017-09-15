@@ -4,7 +4,7 @@
 require('fs.realpath').monkeypatch()
 
 const program = require('commander')
-const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
+const { getSpawnPromise } = require('@s-ui/helpers/cli')
 const {join} = require('path')
 const pkg = require('../package.json')
 
@@ -17,7 +17,7 @@ program
   .command('start').alias('s')
   .option('-d, --dir-base [dir]', 'Setup base dir where live src and demo folders', '.')
   .action(({dirBase}) => {
-    const devServerExec = require.resolve('@schibstedspain/sui-bundler/bin/sui-bundler-dev')
+    const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
     getSpawnPromise(devServerExec, [], {shell: false, cwd: join(__dirname, '..'), env: process.env})
       .then(process.exit, process.exit)
   })
