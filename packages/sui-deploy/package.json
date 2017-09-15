@@ -10,7 +10,7 @@
   "author": "David Almeida <davidbarna@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@schibstedspain/sui-helpers": "1",
+    "@s-ui/helpers": "1",
     "commander": "2.9.0",
     "now-client": "1.1.1"
   },
