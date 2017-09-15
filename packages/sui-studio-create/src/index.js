@@ -5,7 +5,7 @@ const colors = require('colors')
 const program = require('commander')
 const BASE_DIR = process.cwd()
 const fse = require('fs-extra')
-const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
+const { getSpawnPromise } = require('@s-ui/helpers/cli')
 
 program
   .on('--help', () => {
@@ -94,8 +94,8 @@ Promise.all([
       "author": "",
       "license": "MIT",
       "devDependencies": {
-        "@schibstedspain/sui-precommit": "2",
-        "@schibstedspain/sui-studio": "4",
+        "@s-ui/precommit": "2",
+        "@s-ui/studio": "4",
         "husky": "0.13.4",
         "validate-commit-msg": "2.12.2"
       },
@@ -106,7 +106,7 @@ Promise.all([
           "deepLevel": 2
         },
         "validate-commit-msg": {
-          "types": "@schibstedspain/sui-mono/src/types"
+          "types": "@s-ui/mono/src/types"
         }
       }
     }

@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-studio-create",
+  "name": "@s-ui/studio-create",
   "version": "4.5.0",
   "description": " CLI to create studios for sui components development.",
   "main": "src/index.js",
