@@ -10,7 +10,7 @@ xw
 ## Installation
 
 ```sh
-$ npm install @schibstedspain/sui-bundler --save-dev
+$ npm install @s-ui/bundler --save-dev
 ```
 
 ## Usage
@@ -95,7 +95,7 @@ Esta desactivado por defecto. Para activarlo, tienes que poner `offline: true` e
 En el punto de entrada de tu apliación debes registrar el serviceWorker con el siguiente snippet:
 
 ```js
-import {register, unregister} from '@schibstedspain/sui-bundler/registerServiceWorker'
+import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => window.alert('New content is available; please refresh.')

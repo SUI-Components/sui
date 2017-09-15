@@ -13,7 +13,7 @@
     "react-dom": "15.4.2"
   },
   "devDependencies": {
-    "@schibstedspain/sui-bundler": "2"
+    "@s-ui/bundler": "2"
   },
   "keywords": [],
   "author": "",
