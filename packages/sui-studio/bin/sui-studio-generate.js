@@ -5,8 +5,8 @@ const colors = require('colors')
 const fs = require('fs')
 const pascalCase = require('pascal-case')
 const spawn = require('child_process').spawn
-const {showError} = require('@schibstedspain/sui-helpers/cli')
-const {writeFile} = require('@schibstedspain/sui-helpers/file')
+const {showError} = require('@s-ui/helpers/cli')
+const {writeFile} = require('@s-ui/helpers/file')
 
 program
   .option('-R, --router', 'add routering for this component')
@@ -90,7 +90,7 @@ Promise.all([
       "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
     },
     "dependencies": {
-      "@schibstedspain/sui-component-dependencies": "latest"
+      "@s-ui/component-dependencies": "latest"
     },
     "keywords": [],
     "author": "",

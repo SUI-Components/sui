@@ -21,7 +21,7 @@ import {createStore} from '@schibstedspain/ddd-react-redux'
 const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
-const REACT_DOMAIN_CONNECTOR = '@schibstedspain/sui-react-domain-connector'
+const REACT_DOMAIN_CONNECTOR = '@s-ui/react-domain-connector'
 
 const createContextByType = (ctxt, type) => {
   // check if the user has created a context.js with the needed contextTypes
@@ -120,7 +120,7 @@ export default class Demo extends Component {
     )(Base)
 
     !Enhance.displayName && console.error(new Error('Component.displayName must be defined.'))
-    
+
     return (
       <div className='sui-StudioDemo'>
         <Style>{style}</Style>
