@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { getSpawnPromise } = require('@schibstedspain/sui-helpers/cli')
+const { getSpawnPromise } = require('@s-ui/helpers/cli')
 const path = require('path')
 const fs = require('fs')
 const pkgPath = path.join(process.cwd(), 'package.json')
