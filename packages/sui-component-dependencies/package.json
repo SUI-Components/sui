@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/sui-component-dependencies",
+  "name": "@s-ui/component-dependencies",
   "version": "1.2.0",
   "description": "A set of dependencies of all SUI components.",
   "keywords": [
