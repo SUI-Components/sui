@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.24.0"></a>
+# 1.24.0 (2017-09-18)
+
+
+### Bug Fixes
+
+* point to correct version of [@s-ui](https://github.com/s-ui)/cz ([718e943](https://github.com/SUI-Components/sui/commit/718e943))
+
+
+
 <a name="1.23.0"></a>
 # 1.23.0 (2017-09-15)
 
