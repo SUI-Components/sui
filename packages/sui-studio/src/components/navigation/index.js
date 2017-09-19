@@ -1,11 +1,15 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Logo from './Logo'
+import {iconStart} from '../icons'
 
-import { getComponentsList, getStudioName } from '../utils'
+import { getComponentsList, getStudioName, getStudioCompliant } from '../utils'
 
 const componentsList = getComponentsList()
 const studioName = getStudioName()
+const compliant = getStudioCompliant()
+
+const SEARCH_BY_COMPLIANT = '*'
 
 export default class Navigation extends Component {
   state = { search: '' }
@@ -19,11 +23,20 @@ export default class Navigation extends Component {
   }
 
   _filterComponentsFromSearch ({ search }) {
+    if (search === SEARCH_BY_COMPLIANT) {
+      return componentsList
+               .filter(({category, component}) => this._isCompliant({category, component}))
+    }
+
     return componentsList
             .filter(
               ({category, component}) =>
                 category.includes(search) || component.includes(search)
             )
+  }
+
+  _isCompliant ({category, component}) {
+    return compliant.includes(`${category}/${component}`)
   }
 
   _renderListFilteredBySearch ({ handleClick, search }) {
@@ -53,7 +66,13 @@ export default class Navigation extends Component {
                     onClick={handleClick}
                     to={`/workbench/${category}/${component}`}
                   >
-                    {component}
+                    <div className='sui-StudioNav-menuLinkItem'>
+                      <span>{component}</span>
+                      {
+                        this._isCompliant({category, component}) &&
+                        <i className='sui-StudioNav-menuLinkItemStart'>{iconStart}</i>
+                      }
+                    </div>
                   </Link>
                 </li>
               )
