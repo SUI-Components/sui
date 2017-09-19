@@ -64,6 +64,10 @@
         color: darken($c-primary, 10%);
         pointer-events: none;
       }
+
+      &Item {
+        display: flex;
+      }
     }
 
     &Title {
