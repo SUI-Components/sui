@@ -26,7 +26,7 @@ Packages must be properly named. 3 name are
 
 2 simple rules:
 * `sui` prefix for all packages
-* `@schibstedspain` scope for publish
+* `@s-ui` scope for publish
 
 **Example for package `my-example-package`**
 * Folder: `./packages/sui-my-example-package`
