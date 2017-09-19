@@ -24,7 +24,7 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 ## Installation
 
 ```sh
-npm install @schibstedspain/my-package --save
+npm install @s-ui/my-package --save
 ```
 
 ## API Reference
