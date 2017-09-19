@@ -24,7 +24,7 @@
     "updtr": "0.2.0"
   },
   "dependencies": {
-    "@s-ui/sui-deploy": "1",
+    "@s-ui/deploy": "1",
     "@schibstedspain/ddd-react-redux": "2",
     "@s-ui/bundler": "2",
     "@s-ui/component-peer-dependencies": "latest",
