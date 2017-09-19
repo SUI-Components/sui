@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.25.0"></a>
+# 4.25.0 (2017-09-19)
+
+
+### Features
+
+* mark and search by compliant ([c28f6dd](https://github.com/SUI-Components/sui/commit/c28f6dd))
+
+
+
+<a name="4.24.0"></a>
+# 4.24.0 (2017-09-18)
+
+
+### Bug Fixes
+
+* enforce displayName for all components ([8638d01](https://github.com/SUI-Components/sui/commit/8638d01))
+* fix lint error for trailing spaces ([4245067](https://github.com/SUI-Components/sui/commit/4245067))
+
+
+
+<a name="4.22.0"></a>
+# 4.22.0 (2017-09-12)
+
+
+### Features
+
+* make compatible with [@schibstedspain](https://github.com/schibstedspain)/sui-react-domain-connector ([90f82f1](https://github.com/SUI-Components/sui/commit/90f82f1))
+
+
+
 <a name="4.21.0"></a>
 # 4.21.0 (2017-09-05)
 
@@ -202,6 +233,22 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
+
+
+
+<a name="4.0.0"></a>
+# 4.0.0 (2017-06-22)
+
+
+### Features
+
+* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
+* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
+
+
+### BREAKING CHANGES
+
+* API is now named sui-studio instead of suistudio
 
 
 
