@@ -14,8 +14,8 @@ export default /* stylesFor */ ({category, component, withTheme = 'default'} = {
   new Promise(resolve => {
     require.ensure([], () => {
       const componentPath = `${category}/${component}`
+      console.groupCollapsed(`[sui-studio] Applying new styles for ${componentPath}`)
       try {
-        console.groupCollapsed(`Applying new styles for ${componentPath}`)
         console.info('withTheme: ', withTheme)
 
         const stylePath = withTheme === 'default'
@@ -28,9 +28,9 @@ export default /* stylesFor */ ({category, component, withTheme = 'default'} = {
 
         console.info('style path: ', stylePath)
         console.info('style to inject: ', style)
-        console.groupEnd()
 
         resolve(style)
       } catch (e) { console.warn(`No styles for ${category}/${component}`) }
+      console.groupEnd()
     })
   })
