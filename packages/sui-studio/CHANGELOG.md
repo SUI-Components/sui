@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 * fix: grouped logs break when an error happens ([a8adfb8](https://github.com/SUI-Components/sui/commit/a8adfb8))
 * log errors in fetching of styles ([029dd8f](https://github.com/SUI-Components/sui/commit/029dd8f))
 
+### Features
+
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([46fef87](https://github.com/SUI-Components/sui/commit/46fef87))
 
 
 <a name="4.26.0"></a>
@@ -275,6 +278,3 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * API is now named sui-studio instead of suistudio
-
-
-
