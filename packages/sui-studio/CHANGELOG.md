@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.26.0"></a>
+# 4.26.0 (2017-09-20)
+
+
+### Bug Fixes
+
+* register run-parallel in the main bin file ([b7bac46](https://github.com/SUI-Components/sui/commit/b7bac46))
+
+
+### Features
+
+* command sui-studio run-parallel ([3dbba2d](https://github.com/SUI-Components/sui/commit/3dbba2d))
+
+
+
 <a name="4.25.0"></a>
 # 4.25.0 (2017-09-19)
 
