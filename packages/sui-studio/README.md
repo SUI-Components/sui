@@ -90,6 +90,14 @@ $ sui-studio release
 Executes internally `$ sui-mono link`, that links all components to each other.
 
 
+### `$ sui-studio run-all`
+
+Executes internally `$ sui-mono run`, that executed a command **in series** on each package folder.
+
+### `$ sui-studio run-parallel`
+
+Executes internally `$ sui-mono run-parallel`, that executed a command **in parallel** on each package folder.
+
 # Conventions
 
 ## Naming
