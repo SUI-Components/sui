@@ -30,7 +30,10 @@ export default /* stylesFor */ ({category, component, withTheme = 'default'} = {
         console.info('style to inject: ', style)
 
         resolve(style)
-      } catch (e) { console.warn(`No styles for ${category}/${component}`) }
+      } catch (e) {
+        console.error(e)
+        console.warn(`No styles for ${category}/${component}`)
+      }
       console.groupEnd()
     })
   })
