@@ -41,7 +41,10 @@ program
   .command('check-release', 'Which packages must be updates').alias('cr')
 
 program
-  .command('run-all <command>', 'Run the same command in each component').alias('ra')
+  .command('run-all <command>', 'Run, in series, the same command in each component').alias('ra')
+
+program
+  .command('run-parallel <command>', 'Run, in parallel, the same command in each component').alias('rp')
 
 program
   .command('link-all <command>', 'Link all components between each other').alias('la')
