@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2017-09-20)
+
+
+### Bug Fixes
+
+* replace references to sui-studio by s-ui/studio ([86bae2d](https://github.com/SUI-Components/sui/commit/86bae2d))
+
+
+
 <a name="2.8.0"></a>
 # 2.8.0 (2017-09-19)
 
