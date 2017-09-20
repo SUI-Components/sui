@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.24.0"></a>
+# 4.24.0 (2017-09-20)
+
+
+### Features
+
+* command sui-studio run-parallel ([bafd8db](https://github.com/SUI-Components/sui/commit/bafd8db))
+
+
+
 <a name="4.23.0"></a>
 # 4.23.0 (2017-09-15)
 
