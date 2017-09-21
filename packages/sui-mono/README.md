@@ -80,10 +80,10 @@ To release all the packages
 
 ## How to configure your project
 
-First you need to install the `@schibstedspain/sui-mono` package in your project
+First you need to install the `@s-ui/mono` package in your project
 
 ```
-npm i --save-dev @schibstedspain/sui-mono
+npm i --save-dev @s-ui/mono
 ```
 
 Then, configure your package.json
@@ -108,7 +108,7 @@ Here's a full example of the options
     ]
   },
   "validate-commit-msg": {
-    "types": "@schibstedspain/sui-mono/src/types"
+    "types": "@s-ui/mono/src/types"
   },
 }
 ```

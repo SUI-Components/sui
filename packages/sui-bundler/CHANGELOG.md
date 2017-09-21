@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2017-09-20)
+
+
+### Bug Fixes
+
+* replace references to sui-studio by s-ui/studio ([86bae2d](https://github.com/SUI-Components/sui/commit/86bae2d))
+
+
+
+<a name="2.8.0"></a>
+# 2.8.0 (2017-09-19)
+
+
+### Bug Fixes
+
+* replace references to schibstedspain ([2c6b633](https://github.com/SUI-Components/sui/commit/2c6b633))
+
+
+
+<a name="2.7.0"></a>
+# 2.7.0 (2017-09-15)
+
+
+### Features
+
+* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([4ade47e](https://github.com/SUI-Components/sui/commit/4ade47e))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2017-09-13)
 
@@ -115,6 +145,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 

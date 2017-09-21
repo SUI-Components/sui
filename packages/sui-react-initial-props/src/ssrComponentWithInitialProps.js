@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import withContext from '@schibstedspain/sui-hoc/lib/withContext'
+import withContext from '@s-ui/hoc/lib/withContext'
 
 export default function ssrComponentWithInitialProps ({ Target, context, renderProps }) {
   // get the page with the initialProps

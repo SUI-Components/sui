@@ -6,7 +6,7 @@
 ## Usage
 
 ```js
-import {serialSpawn} from '@schibstedspain/sui-helpers/cli'
+import {serialSpawn} from '@s-ui/helpers/cli'
 
 serialSpawn([
     ['sui-lint', ['js']],

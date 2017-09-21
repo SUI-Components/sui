@@ -34,7 +34,7 @@ Charts can get as complex as needed to find out the blockers of your code. Check
 ## Installation
 
 ```sh
-npm install @schibstedspain/sui-perf --save
+npm install @s-ui/perf --save
 ```
 
 ## API Reference
@@ -47,7 +47,7 @@ npm install @schibstedspain/sui-perf --save
 Get an instance of `perf` which measurements are scoped to this instance.
 
 ```js
-import getPerf from '@schibstedspain/sui-perf'
+import getPerf from '@s-ui/perf'
 
 const perf = getPerf('my-request-unique-id')
 perf.mark('Request')
@@ -99,7 +99,7 @@ perf.measure('Fetch user')
 
 ### Charts
 
-`@schibstedspain/sui-perf/lib/chart` has no dependency of and can be imported separately.
+`@s-ui/perf/lib/chart` has no dependency of and can be imported separately.
 
 
 
@@ -108,7 +108,7 @@ Get a text-based timeline chart from given entries.
 Check [timelineOptions](#timelineOptions).
 
 ```js
-import {getTimelineChart} from '@schibstedspain/sui-perf/lib/charts'
+import {getTimelineChart} from '@s-ui/perf/lib/charts'
 
 const options = {/* your custom options */}
 const timeline = getTimelineChart(options)(perf.getEntries())
@@ -127,7 +127,7 @@ A shorthand to directly print the chart with `console.log`.
 Check [timelineOptions](#timelineOptions).
 
 ```js
-import {printTimelineChart} from '@schibstedspain/sui-perf/lib/charts'
+import {printTimelineChart} from '@s-ui/perf/lib/charts'
 const options = {/* your custom options */}
 printTimelineChart(options)(perf.getEntries())
 /*
@@ -157,8 +157,8 @@ Measure all requests made with the given instance of [superagent](https://www.np
 
 ```js
 import superagent from 'superagent'
-import getPerf from '@schibstedspain/sui-perf'
-import measureSuperagent from '@schibstedspain/sui-perf/lib/measure-superagent'
+import getPerf from '@s-ui/perf'
+import measureSuperagent from '@s-ui/perf/lib/measure-superagent'
 
 const perf = getPerf('my-request-unique-id')
 const clearMeasureSuperAgent =  measureSuperagent(superagent, perf)
@@ -172,8 +172,8 @@ clearMeasureSuperAgent()
 Measure mounting of all React components, either on client or server.
 
 ```js
-import getPerf from '@schibstedspain/sui-perf'
-import measureReact from '@schibstedspain/sui-perf/lib/measure-react'
+import getPerf from '@s-ui/perf'
+import measureReact from '@s-ui/perf/lib/measure-react'
 
 const perf = getPerf('my-request-unique-id')
 const clearMeasureReact =  measureReact(perf)
@@ -188,8 +188,8 @@ Measure all axios requests.
 
 ```js
 import axios from 'axios'
-import getPerf from '@schibstedspain/sui-perf'
-import measureAxios from '@schibstedspain/sui-perf/lib/measure-axios'
+import getPerf from '@s-ui/perf'
+import measureAxios from '@s-ui/perf/lib/measure-axios'
 
 /* ... */
 

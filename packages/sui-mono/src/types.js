@@ -1,1 +1,1 @@
-module.exports = require('@schibstedspain/sui-cz/types')
+module.exports = require('@s-ui/cz/types')

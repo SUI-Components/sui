@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.4.0"></a>
+# 1.4.0 (2017-09-15)
+
+
+### Features
+
+* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([12a4baf](https://github.com/SUI-Components/sui/commit/12a4baf))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2017-07-13)
 
@@ -19,22 +29,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * remove unused scripts ([2c77b71](https://github.com/SUI-Components/sui/commit/2c77b71))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-06-16)
-
-
-### Bug Fixes
-
-* description have change since types implementation ([e490849](https://github.com/SUI-Components/sui/commit/e490849))
-
-
-### Features
-
-* add cz types to allow consitent integration with githooks ([296f8bb](https://github.com/SUI-Components/sui/commit/296f8bb))
-* set package name to [@schibstedspain](https://github.com/schibstedspain)/sui-cz ([b797042](https://github.com/SUI-Components/sui/commit/b797042))
 
 
 

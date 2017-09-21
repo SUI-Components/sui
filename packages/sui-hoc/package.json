@@ -1,6 +1,6 @@
 {
-  "name": "@schibstedspain/sui-hoc",
-  "version": "1.3.0",
+  "name": "@s-ui/hoc",
+  "version": "1.4.0",
   "description": "Set of HoC useful for react",
   "scripts": {
     "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
@@ -13,7 +13,7 @@
     "react": "15"
   },
   "devDependencies": {
-    "@schibstedspain/sui-component-peer-dependencies": "1",
+    "@s-ui/component-peer-dependencies": "1",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1"
   }

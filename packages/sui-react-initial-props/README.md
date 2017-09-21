@@ -14,7 +14,7 @@
 
 ```js
 // React Router routes
-import loadPage from '@schibstedspain/sui-react-initial-props/lib/loadPage'
+import loadPage from '@s-ui/react-initial-props/lib/loadPage'
 
 // context factory has to return a promise and it will be passed to the context of your components
 // as well as a param to the getInitialProps
@@ -40,7 +40,7 @@ export default (
 
 ```js
 // universal - React Router routes
-import loadPage from '@schibstedspain/sui-react-initial-props/lib/loadPage'
+import loadPage from '@s-ui/react-initial-props/lib/loadPage'
 
 // context factory has to return a promise and it will be passed to the context of your components
 // as well as a param to the getInitialProps
@@ -70,7 +70,7 @@ export default (
 import {
   createServerContextFactoryParams,
   ssrComponentWithInitialProps
-} from '@schibstedspain/sui-react-initial-props'
+} from '@s-ui/react-initial-props'
 
 function isomorphic (req, res, next) {
 contextFactory(

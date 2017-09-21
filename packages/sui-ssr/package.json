@@ -1,7 +1,7 @@
 {
-  "name": "@schibstedspain/sui-ssr",
+  "name": "@s-ui/ssr",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "scripts": {

@@ -8,5 +8,5 @@ It provides:
 ## Installation
 
 ```sh
-$ npm install @schibstedspain/sui-component-dependencies --save-dev
+$ npm install @s-ui/component-dependencies --save-dev
 ```

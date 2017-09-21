@@ -51,7 +51,7 @@ let webpackConfig = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules(?!\/@schibstedspain\/sui-studio\/src)/,
+        exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
         loader: 'babel-loader',
         query: {
           presets: ['sui']

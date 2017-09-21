@@ -2,9 +2,9 @@
 /* eslint no-console:0 no-template-curly-in-string:0 */
 
 const program = require('commander')
-const { getSpawnPromise, showError } = require('@schibstedspain/sui-helpers/cli')
+const { getSpawnPromise, showError } = require('@s-ui/helpers/cli')
 const BUILD_FOLDER = './public'
-const DEPLOY_PATH = require.resolve('@s-ui/sui-deploy/bin/sui-deploy')
+const DEPLOY_PATH = require.resolve('@s-ui/deploy/bin/sui-deploy')
 
 program
   .usage('-n my-components')

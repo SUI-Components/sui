@@ -18,7 +18,7 @@ It's highly inspired in `cz-customizable` adapter.
 
 ```shell
 npm install --save-dev validate-commit-msg
-npm install --save-dev @schibstedspain/sui-cz
+npm install --save-dev @s-ui/cz
 ```
 
 in `package.json`
@@ -27,7 +27,7 @@ in `package.json`
 {
   "config": {
     "validate-commit-msg": {
-      "types": "@schibstedspain/sui-cz/types"
+      "types": "@s-ui/cz/types"
       /* rest of your config here */
     }
   }
@@ -45,7 +45,7 @@ npm install husky --save-dev
 
 ```shell
 npm install --save-dev validate-commit-msg
-npm install --save-dev @schibstedspain/sui-cz
+npm install --save-dev @s-ui/cz
 ```
 
 in `package.json`
