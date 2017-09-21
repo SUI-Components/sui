@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.27.0"></a>
+# 4.27.0 (2017-09-20)
+
+
+### Bug Fixes
+
+* fix: grouped logs break when an error happens ([a8adfb8](https://github.com/SUI-Components/sui/commit/a8adfb8))
+* log errors in fetching of styles ([029dd8f](https://github.com/SUI-Components/sui/commit/029dd8f))
+
+
+
 <a name="4.26.0"></a>
 # 4.26.0 (2017-09-20)
 
