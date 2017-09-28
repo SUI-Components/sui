@@ -14,7 +14,7 @@
     "@s-ui/lint": "2",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1",
-    "react": "15"
+    "react": "15.6"
   },
   "babel": {
     "presets": [
@@ -22,7 +22,8 @@
     ]
   },
   "peerDependencie": {
-    "react": "15"
+    "react": "15",
+    "prop-types": "15"
   },
   "dependencies": {
     "react-redux": "5.0.4",
