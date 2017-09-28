@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "4.28.0",
+  "version": "4.29.0-beta.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -27,7 +27,7 @@
     "@s-ui/deploy": "1",
     "@schibstedspain/ddd-react-redux": "2",
     "@s-ui/bundler": "2",
-    "@s-ui/component-peer-dependencies": "latest",
+    "@s-ui/component-peer-dependencies": "beta",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "babel-standalone": "6.12.0",
