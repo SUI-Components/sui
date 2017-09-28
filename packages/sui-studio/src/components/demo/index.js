@@ -1,6 +1,8 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import React, {Component, PropTypes} from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 
 import { iconClose, iconCode } from '../icons'
 import Preview from '../preview'

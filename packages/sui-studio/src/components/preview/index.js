@@ -1,5 +1,7 @@
 /* eslint no-console: 0 */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { transform } from 'babel-standalone'
 
