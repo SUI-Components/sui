@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@s-ui/deploy": "1",
-    "@schibstedspain/ddd-react-redux": "2",
+    "@s-ui/react-domain-connector": "1",
     "@s-ui/bundler": "2",
     "@s-ui/component-peer-dependencies": "beta",
     "@s-ui/helpers": "1",
