@@ -128,8 +128,29 @@ export default ${componentInPascal}`
 
   writeFile(
   COMPONENT_README_FILE,
-  `### ${componentInPascal}
-Dont forget write a README`),
+  `# ${componentInPascal}
+
+> Description
+
+<!-- ![](./assets/preview.png) -->
+
+## Installation
+
+\`\`\`sh
+$ npm install ${packageName} --save
+\`\`\`
+
+## Usage
+
+### Basic usage
+\`\`\`js
+import ${componentInPascal} from '${packageName}'
+
+return (<${componentInPascal} />)
+\`\`\`
+
+
+> **Find full description and more examples in the [demo page](#).**`),
 
   writeFile(
     COMPONENT_PLAYGROUND_FILE,
