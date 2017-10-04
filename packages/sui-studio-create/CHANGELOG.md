@@ -2,13 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.8.0"></a>
+# 4.8.0 (2017-10-04)
+
+
+### Bug Fixes
+
+* add missing dependency ([22813f4](https://github.com/SUI-Components/sui/commit/22813f4))
+
+
+
 <a name="4.6.0"></a>
-# 4.6.0 (2017-09-15)
+# 4.6.0 (2017-09-21)
 
 
 ### Features
 
-* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([95eb003](https://github.com/SUI-Components/sui/commit/95eb003))
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([2469e1a](https://github.com/SUI-Components/sui/commit/2469e1a))
 
 
 
