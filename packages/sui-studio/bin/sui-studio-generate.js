@@ -67,79 +67,69 @@ Promise.all([
   writeFile(
   COMPONENT_PACKAGE_GITIGNORE_FILE,
   `lib
-  node_modules
-  `
-  ),
+node_modules`),
 
   writeFile(
   COMPONENT_PACKAGE_NPMIGNORE_FILE,
-  `src
-  `
-  ),
+  `src`),
 
   writeFile(
   COMPONENT_PACKAGE_JSON_FILE,
   `{
-    "name": "${packageName}",
-    "version": "1.0.0",
-    "description": "",
-    "main": "lib/index.js",
-    "scripts": {
-      "build": "rm -Rf ./lib && mkdir -p ./lib && npm run build:js && npm run build:styles",
-      "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-      "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
-    },
-    "dependencies": {
-      "@s-ui/component-dependencies": "latest"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "MIT"
-  }
-  `
+  "name": "${packageName}",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -Rf ./lib && mkdir -p ./lib && npm run build:js && npm run build:styles",
+    "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
+  },
+  "dependencies": {
+    "@s-ui/component-dependencies": "latest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}`
   ),
 
   writeFile(
   COMPONENT_ENTRY_JS_POINT_FILE,
   `import React, {Component} from 'react'
 
-  class ${componentInPascal} extends Component {
-    render () {
-      return (
-        <div className='${prefix}-${componentInPascal}'>
-          <h1>${componentInPascal}</h1>
-        </div>
-      )
-    }
+class ${componentInPascal} extends Component {
+  render () {
+    return (
+      <div className='${prefix}-${componentInPascal}'>
+        <h1>${componentInPascal}</h1>
+      </div>
+    )
   }
+}
 
-  ${componentInPascal}.displayName = '${componentInPascal}'
+${componentInPascal}.displayName = '${componentInPascal}'
 
-  // Remove these comments if you need
-  // ${componentInPascal}.contextTypes = {i18n: React.PropTypes.object}
-  // ${componentInPascal}.propTypes = {}
-  // ${componentInPascal}.defaultProps = {}
+// Remove these comments if you need
+// ${componentInPascal}.contextTypes = {i18n: React.PropTypes.object}
+// ${componentInPascal}.propTypes = {}
+// ${componentInPascal}.defaultProps = {}
 
-  export default ${componentInPascal}
-  `
-  ),
+export default ${componentInPascal}`
+),
 
   writeFile(
   COMPONENT_ENTRY_SCSS_POINT_FILE,
   `@import '~@schibstedspain/theme-basic/lib/index';
 
-  .${prefix}-${componentInPascal} {
-    // Do your magic
-  }
-  `
-  ),
+.${prefix}-${componentInPascal} {
+  // Do your magic
+}`),
 
   writeFile(
   COMPONENT_README_FILE,
   `### ${componentInPascal}
-  Dont forget write a README
-  `
-  ),
+Dont forget write a README`),
 
   writeFile(
     COMPONENT_PLAYGROUND_FILE,
@@ -149,23 +139,19 @@ Promise.all([
   router && writeFile(
   COMPONENT_ROUTES_FILE,
   `module.exports = {
-    pattern: '/:lang',
-    'default': '/es',
-    'en': '/en',
-    'de': '/de'
-  }
-  `
-  ),
+  pattern: '/:lang',
+  'default': '/es',
+  'en': '/en',
+  'de': '/de'
+}`),
 
   context && writeFile(
   COMPONENT_CONTEXT_FILE,
   `module.exports = {
-    'default': {
-      i18n: {t (s) { return s.split('').reverse().join('') }}
-    }
+  'default': {
+    i18n: {t (s) { return s.split('').reverse().join('') }}
   }
-  `
-  )
+}`)
 ])
 .then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
