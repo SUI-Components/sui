@@ -3,6 +3,7 @@
 const program = require('commander')
 const colors = require('colors')
 const fs = require('fs')
+const path = require('path')
 const pascalCase = require('pascal-case')
 const spawn = require('child_process').spawn
 const {showError} = require('@s-ui/helpers/cli')
@@ -39,13 +40,14 @@ if (!wordsOnlyRegex.test(category)) { showError('category name must contain lett
 
 const componentInPascal = pascalCase(`${category.replace(/s$/, '')} ${component}`)
 
-const COMPONENT_DIR = `${BASE_DIR}/components/${category}/${component}/`
-const COMPONENT_ENTRY_JS_POINT_FILE = `${COMPONENT_DIR}src/index.js`
-const COMPONENT_PACKAGE_JSON_FILE = `${COMPONENT_DIR}package.json`
-const COMPONENT_PACKAGE_GITIGNORE_FILE = `${COMPONENT_DIR}.gitignore`
-const COMPONENT_PACKAGE_NPMIGNORE_FILE = `${COMPONENT_DIR}.npmignore`
-const COMPONENT_ENTRY_SCSS_POINT_FILE = `${COMPONENT_DIR}src/index.scss`
-const COMPONENT_README_FILE = `${COMPONENT_DIR}README.md`
+const COMPONENT_DIR = `/components/${category}/${component}/`
+const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
+const COMPONENT_ENTRY_JS_POINT_FILE = `${COMPONENT_PATH}src/index.js`
+const COMPONENT_PACKAGE_JSON_FILE = `${COMPONENT_PATH}package.json`
+const COMPONENT_PACKAGE_GITIGNORE_FILE = `${COMPONENT_PATH}.gitignore`
+const COMPONENT_PACKAGE_NPMIGNORE_FILE = `${COMPONENT_PATH}.npmignore`
+const COMPONENT_ENTRY_SCSS_POINT_FILE = `${COMPONENT_PATH}src/index.scss`
+const COMPONENT_README_FILE = `${COMPONENT_PATH}README.md`
 
 const DEMO_DIR = `${BASE_DIR}/demo/${category}/${component}/`
 const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}playground`
@@ -56,11 +58,18 @@ const {context, router, scope, prefix = 'sui'} = program
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${category}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${component}`
+const packageInfo = require(path.join(process.cwd(), 'package.json'))
+const {repository, homepage} = packageInfo
 
 // Check if the component already exist before continuing
-if (fs.existsSync(COMPONENT_DIR)) {
+if (fs.existsSync(COMPONENT_PATH)) {
   showError(`[${packageName}] This component already exist in the path:
-  ${COMPONENT_DIR}`)
+  ${COMPONENT_PATH}`)
+}
+
+if (!repository.url || !homepage) {
+  console.log(`Missing repository and/or homepage field in monorepo package.json
+Component is created without those fields.`.yellow)
 }
 
 Promise.all([
@@ -87,7 +96,18 @@ node_modules`),
   },
   "dependencies": {
     "@s-ui/component-dependencies": "latest"
-  },
+  },${repository.url
+    ? `
+  "repository": {
+    "type": "${repository.type}",
+    "url": "${repository.url}"
+  },`
+    : ''
+  }${homepage
+    ? `
+    "homepage": "${homepage.replace('/master', `/master${COMPONENT_DIR}`)}",`
+    : ''
+  }
   "keywords": [],
   "author": "",
   "license": "MIT"
@@ -176,7 +196,7 @@ return (<${componentInPascal} />)
 ])
 .then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
-  const install = spawn('npm', ['install'], {cwd: COMPONENT_DIR})
+  const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
 
   install.stdout.on('data',
     data => console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
