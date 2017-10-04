@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@schibstedspain/rosetta": "3",
-    "@schibstedspain/theme-basic": "7",
+    "@schibstedspain/sui-theme": "8",
     "classnames": "2.2.5"
   },
   "repository": {
