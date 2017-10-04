@@ -15,6 +15,7 @@
   "author": "David Almeida <davidbarna@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@s-ui/helpers": "1",
     "colors": "1.1.2",
     "commander": "2.9.0",
     "fs-extra": "0.30.0"
