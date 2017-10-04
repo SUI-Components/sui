@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.29.0"></a>
+# 4.29.0 (2017-10-04)
+
+
+### Bug Fixes
+
+* fix studio not working in IE browsers ([e352c36](https://github.com/SUI-Components/sui/commit/e352c36))
+
+
+
 <a name="4.28.0"></a>
 # 4.28.0 (2017-09-21)
 
