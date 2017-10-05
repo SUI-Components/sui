@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2017-10-05)
+
+
+### Bug Fixes
+
+* add theme-basic back fro compatibility ([a940d09](https://github.com/SUI-Components/sui/commit/a940d09))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-10-04)
 
