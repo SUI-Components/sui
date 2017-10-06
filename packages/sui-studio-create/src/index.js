@@ -80,7 +80,7 @@ Promise.all([
   "private": true,
   "scripts": {
     "phoenix": "rm -Rf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
-    "deploy": "sui-studio build && surge public/ -d ${PROJECT_NAME}.surge.sh",
+    "deploy": "sui-deploy ${PROJECT_NAME} --now",
     "co": "sui-studio commit",
     "lint:js": "sui-lint js",
     "lint:sass": "sui-lint sass",
@@ -94,6 +94,7 @@ Promise.all([
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@s-ui/deploy": "1",
     "@s-ui/precommit": "2",
     "@s-ui/studio": "4",
     "husky": "0.13.4",
