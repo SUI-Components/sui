@@ -58,6 +58,17 @@ sui-mono commit
 
 It will prompt you with questions regarding your changes and will generate a standard commit message for you
 
+### Commit for all contained packages
+
+You can commit the same message for all packages that actually contained stageable
+files.
+
+```
+sui-mono commit-all -t "feat" -m "Refactor of dependencies"
+```
+
+The precommit will be executed only for the first commit.
+
 ### Release
 
 In order to release the steps are:
