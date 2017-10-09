@@ -95,7 +95,7 @@ node_modules`),
     "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },
   "dependencies": {
-    "@s-ui/component-dependencies": "latest"
+    "@s-ui/component-dependencies": "1"
   },${repository.url
     ? `
   "repository": {

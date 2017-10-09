@@ -74,43 +74,44 @@ Promise.all([
   .then(() => writeFile(
     `${PROJECT_PATH}/package.json`,
     `{
-      "name": "${PROJECT_NAME}",
-      "version": "1.0.0",
-      "description": "",
-      "private": true,
-      "scripts": {
-        "phoenix": "rm -Rf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
-        "deploy": "sui-studio build && surge public/ -d ${PROJECT_NAME}.surge.sh",
-        "co": "sui-studio commit",
-        "lint:js": "sui-lint js",
-        "lint:sass": "sui-lint sass",
-        "lint": "npm run lint:js && npm run lint:sass",
-        "commitmsg": "validate-commit-msg",
-        "precommit": "sui-precommit run",
-        "generate": "sui-studio generate -P re -S schibstedspain"
-      },
-      "repository": {},
-      "keywords": [],
-      "author": "",
-      "license": "MIT",
-      "devDependencies": {
-        "@s-ui/precommit": "2",
-        "@s-ui/studio": "4",
-        "husky": "0.13.4",
-        "validate-commit-msg": "2.12.2"
-      },
-      "dependencies": {},
-      "config": {
-        "sui-mono": {
-          "packagesFolder": "./components",
-          "deepLevel": 2
-        },
-        "validate-commit-msg": {
-          "types": "@s-ui/mono/src/types"
-        }
-      }
+  "name": "${PROJECT_NAME}",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "phoenix": "rm -Rf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
+    "deploy": "sui-deploy ${PROJECT_NAME} --now",
+    "co": "sui-studio commit",
+    "lint:js": "sui-lint js",
+    "lint:sass": "sui-lint sass",
+    "lint": "npm run lint:js && npm run lint:sass",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "sui-precommit run",
+    "generate": "sui-studio generate --prefix sui --scope ${PROJECT_NAME}"
+  },
+  "repository": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@s-ui/deploy": "1",
+    "@s-ui/precommit": "2",
+    "@s-ui/studio": "4",
+    "husky": "0.13.4",
+    "validate-commit-msg": "2.12.2"
+  },
+  "dependencies": {},
+  "config": {
+    "sui-mono": {
+      "packagesFolder": "./components",
+      "deepLevel": 2
+    },
+    "validate-commit-msg": {
+      "types": "@s-ui/mono/src/types"
     }
-  `))
+  }
+}
+`))
   .then(() => getSpawnPromise('npm', ['i'], {cwd: PROJECT_PATH}))
   .then(process.exit)
   .catch(process.exit)
