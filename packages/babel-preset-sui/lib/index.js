@@ -3,14 +3,25 @@ const cleanList = require('./clean-list')
 
 module.exports = {
   'presets': cleanList([
-    require('babel-preset-es2015'),
+    ["env", {
+      "debug": false,
+      "targets": {
+        "node": "6.0.0",
+        "browsers": [
+          "> 1%",
+          "last 4 versions",
+          "Firefox ESR",
+          "Safari >= 6",
+          "iOS >= 7",
+          "not ie < 11"
+        ]
+      }
+    }],
     isInstalled(['preact', 'react'], 'babel-preset-react'),
     isInstalled('flow-bin', 'babel-preset-flow')
   ]),
   'plugins': [
-    require('babel-plugin-syntax-trailing-function-commas'),
     require('babel-plugin-transform-async-generator-functions'),
-    require('babel-plugin-transform-async-to-generator'),
     require('babel-plugin-transform-decorators-legacy').default,
     require('babel-plugin-transform-class-properties'),
     require('babel-plugin-transform-object-rest-spread'),
