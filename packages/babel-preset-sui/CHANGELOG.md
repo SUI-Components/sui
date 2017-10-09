@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2017-10-09)
+
+
+### Features
+
+* replace es2015 preset by env ([7ed7634](https://github.com/SUI-Components/sui/commit/7ed7634))
+
+
+
+<a name="1.4.0"></a>
+# 1.4.0 (2017-09-06)
+
+
+### Features
+
+* add preact and flow support ([e043d02](https://github.com/SUI-Components/sui/commit/e043d02))
+
+
+### Performance Improvements
+
+* remove not needed dependency ([46256a8](https://github.com/SUI-Components/sui/commit/46256a8))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2017-08-01)
 
