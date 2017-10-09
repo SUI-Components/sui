@@ -1,12 +1,28 @@
 /* eslint-disable no-console */
 
 const fs = require('fs')
+const path = require('path')
+const { exec } = require('child_process')
 const editor = require('editor')
 const temp = require('temp').track()
 const buildCommit = require('./buildCommit')
 const config = require('./config')
 
+const packagesDir = path.join(process.cwd(), config.getPackagesFolder())
 const scopes = config.getScopes().sort().map(name => ({name}))
+
+/**
+ * Check if modified files are present
+ * @param  {[type]}  path Folder to check
+ * @return {Promise<Boolean>}
+ */
+const hasChangedFiles = (path) => {
+  return new Promise((resolve, reject) => {
+    exec(`git status ${path}`, {cwd: path}, (err, output) => {
+      err ? reject(err) : resolve(!output.includes('nothing to commit'))
+    })
+  })
+}
 
 function getTypes () {
   var types = require('./types').types
@@ -45,11 +61,17 @@ module.exports = {
             return [{name: 'META'}]
           }
 
-          if (typesWithOtherScopes.indexOf(answers.type) > -1) {
-            return scopes.concat(otherScopes)
-          }
-
-          return scopes
+          return Promise.all(scopes.map(pkg => (
+            hasChangedFiles(path.join(packagesDir, pkg.name))
+              .then(hasFiles => hasFiles && pkg)
+          )))
+          .then(result => result.filter(Boolean))
+          .then((result) => {
+            if (typesWithOtherScopes.indexOf(answers.type) > -1) {
+              return result.concat(otherScopes)
+            }
+            return result
+          })
         }
       },
       {

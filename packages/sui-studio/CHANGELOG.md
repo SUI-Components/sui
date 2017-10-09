@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.30.0"></a>
+# 4.30.0 (2017-10-09)
+
+
+### Bug Fixes
+
+* fix indentatio in generate command ([ed87db0](https://github.com/SUI-Components/sui/commit/ed87db0))
+* generate deps without "latest" ([1bca514](https://github.com/SUI-Components/sui/commit/1bca514))
+
+
+### Features
+
+* generate repository and homepage fields in package.json ([7ddcc79](https://github.com/SUI-Components/sui/commit/7ddcc79))
+* improve README template for generate command ([ff0f314](https://github.com/SUI-Components/sui/commit/ff0f314))
+
+
+
 <a name="4.29.0"></a>
 # 4.29.0 (2017-10-04)
 

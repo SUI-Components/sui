@@ -15,6 +15,9 @@ program
   .command('commit', 'Commits the current stashed work')
 
 program
+  .command('commit-all', 'Do same commit for all packages')
+
+program
   .command('check', 'Gives information if something should be updated')
 
 program

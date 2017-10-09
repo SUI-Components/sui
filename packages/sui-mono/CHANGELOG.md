@@ -2,23 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="1.24.0"></a>
-# 1.24.0 (2017-09-18)
-
-
-### Bug Fixes
-
-* point to correct version of [@s-ui](https://github.com/s-ui)/cz ([718e943](https://github.com/SUI-Components/sui/commit/718e943))
-
-
-
-<a name="1.23.0"></a>
-# 1.23.0 (2017-09-15)
+<a name="1.25.0"></a>
+# 1.25.0 (2017-10-09)
 
 
 ### Features
 
-* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([0d70fc3](https://github.com/SUI-Components/sui/commit/0d70fc3))
+* commit-all command ([4bf8429](https://github.com/SUI-Components/sui/commit/4bf8429))
+
+
+
+<a name="1.24.0"></a>
+# 1.24.0 (2017-09-21)
+
+
+### Bug Fixes
+
+* point to correct version of [@s-ui](https://github.com/s-ui)/cz ([27bd99f](https://github.com/SUI-Components/sui/commit/27bd99f))
+
+
+
+<a name="1.23.0"></a>
+# 1.23.0 (2017-09-21)
+
+
+### Features
+
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([90c97e6](https://github.com/SUI-Components/sui/commit/90c97e6))
 
 
 
