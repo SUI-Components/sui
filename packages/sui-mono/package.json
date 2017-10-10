@@ -15,7 +15,7 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "@s-ui/cz": "1.4",
+    "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
     "commander": "2.9.0",
     "commitizen": "2.8.6",
