@@ -33,7 +33,7 @@ function getTypes () {
 const types = getTypes()
 
 // This types will also have otherScopes added to them
-const typesWithOtherScopes = ['feat', 'fix', 'release', 'test']
+const typesWithOtherScopes = ['feat', 'fix', 'release', 'test', 'docs', 'chore']
 const otherScopes = [
   {name: 'META'},
   {name: 'examples'}
@@ -57,10 +57,6 @@ module.exports = {
         name: 'scope',
         message: '\nDenote the SCOPE of this change:',
         choices: function (answers) {
-          if (answers.type === 'chore') {
-            return [{name: 'META'}]
-          }
-
           return Promise.all(scopes.map(pkg => (
             hasChangedFiles(path.join(packagesDir, pkg.name))
               .then(hasFiles => hasFiles && pkg)
