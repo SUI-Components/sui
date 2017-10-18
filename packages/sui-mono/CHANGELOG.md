@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.26.0"></a>
+# 1.26.0 (2017-10-10)
+
+
+### Features
+
+* assign sui-cz@1 to get new features ([fb45595](https://github.com/SUI-Components/sui/commit/fb45595))
+
+
+
 <a name="1.25.0"></a>
 # 1.25.0 (2017-10-09)
 
