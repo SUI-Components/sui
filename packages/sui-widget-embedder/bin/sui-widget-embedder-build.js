@@ -2,7 +2,8 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const rimraf = require('rimraf')
-const path = require('path')
+const {resolve} = require('path')
+const {readdirSync, statSync} = require('fs')
 const compilerFactory = require('../compiler/production')
 
 const exitWithMsg = msg => { console.log(msg); process.exit(1) }
@@ -22,7 +23,7 @@ program
 
 if (program.clean) {
   console.log('Removing previous build...')
-  rimraf.sync(path.resolve(process.cwd(), 'public'))
+  rimraf.sync(resolve(process.cwd(), 'public'))
 }
 
 const build = ({page}) => {
@@ -48,7 +49,11 @@ const build = ({page}) => {
   })
 }
 
-Promise.all([
-  build({page: 'detail'}),
-  build({page: 'list'})
-]).catch(err => exitWithMsg(err))
+const pagesFor = ({path}) =>
+  readdirSync(path)
+    .filter(file => statSync(resolve(path, file)).isDirectory())
+
+Promise.all(
+  pagesFor({path: resolve(process.cwd(), 'widgets')})
+    .map(page => build({page}))
+).catch(exitWithMsg)
