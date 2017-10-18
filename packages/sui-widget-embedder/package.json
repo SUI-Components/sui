@@ -1,0 +1,32 @@
+{
+  "name": "@s-ui/widget-embedder",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "sui-widget-embedder": "./bin/sui-widget-embedder.js"
+  },
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@s-ui/bundler": "2",
+    "@s-ui/lint": "2"
+  },
+  "dependencies": {
+    "commander": "2.11.0",
+    "express": "4.16.2",
+    "http-proxy": "1.16.2",
+    "rimraf": "2.6.2",
+    "webpack": "3.7.1",
+    "webpack-dev-middleware": "1.12.0",
+    "webpack-hot-middleware": "2.19.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+}
