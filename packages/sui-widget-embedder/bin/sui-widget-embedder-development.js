@@ -9,7 +9,7 @@ const exitWithMsg = msg => {
 const config = require(`${process.cwd()}/package.json`)['sui-widget-embedder'] ||
                exitWithMsg(`Missing sui-widget-embedder config at ${process.cwd()}/package.json`)
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || config.devPort || 3000
 
 program
   .usage('-p detail')
