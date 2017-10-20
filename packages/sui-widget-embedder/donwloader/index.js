@@ -82,7 +82,7 @@
     var baseUrl = cdn + '/' + page + '/'
     var manifest = manifests[page]
     var loadStyle = function () {
-      return manifests['app.css'] ? load.css(baseUrl + manifests['app.css']) : Promise.resolve()
+      return manifest['app.css'] ? load.css(baseUrl + manifest['app.css']) : Promise.resolve()
     }
     var loadScripts =
       [manifest['runtime.js'], manifest['main.js'], manifest['vendor.js'], manifest['app.js']]
