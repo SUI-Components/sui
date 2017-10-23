@@ -102,5 +102,5 @@
       page = key
     }
   }
-  loadAssetsFor(page)
+  page && loadAssetsFor(page)
 }())
