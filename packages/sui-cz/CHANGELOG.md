@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2017-10-22)
+
+
+### Features
+
+* add META scope on more types ([fa756fb](https://github.com/SUI-Components/sui/commit/fa756fb))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2017-10-09)
 
