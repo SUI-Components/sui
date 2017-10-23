@@ -102,5 +102,5 @@
       page = key
     }
   }
-  page && loadAssetsFor(page)
+  page && !window.location.host.match(/localhost/) && loadAssetsFor(page)
 }())
