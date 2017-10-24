@@ -13,11 +13,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@s-ui/bundler": "2",
     "@s-ui/lint": "2",
     "babel-cli": "6.26.0"
   },
   "dependencies": {
+    "@s-ui/bundler": "2",
     "@s-ui/component-peer-dependencies": "1",
     "@s-ui/helpers": "1.5.0",
     "@s-ui/react-domain-connector": "1",
