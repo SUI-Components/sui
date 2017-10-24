@@ -10,7 +10,7 @@ program
   .version(version, '    --version')
 
 program
-  .command('development', 'Start a development server for a page').alias('d')
+  .command('dev', 'Start a development server for a page').alias('d')
 
 program
   .command('build', 'Build all statics by page').alias('b')

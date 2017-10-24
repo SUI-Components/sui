@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 const program = require('commander')
+const {showError} = require('@s-ui/helpers/cli')
+
 const appFactory = require('../development')
-const exitWithMsg = msg => {
-  console.log(msg)
-  process.exit(1)
-}
-const config = require(`${process.cwd()}/package.json`)['sui-widget-embedder'] ||
-               exitWithMsg(`Missing sui-widget-embedder config at ${process.cwd()}/package.json`)
+const config = require(`${process.cwd()}/package.json`)['config']['sui-widget-embedder'] ||
+               showError(`Missing sui-widget-embedder config at ${process.cwd()}/package.json`)
 
 const PORT = process.env.PORT || config.devPort || 3000
 

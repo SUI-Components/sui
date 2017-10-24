@@ -6,13 +6,13 @@ const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
 const {resolve} = require('path')
 const {readdirSync, statSync, createReadStream, createWriteStream} = require('fs')
+const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
 const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
-const config = require(resolve(process.cwd(), 'package.json'))['sui-widget-embedder']
-const exitWithMsg = msg => { console.log(msg); process.exit(1) }
+const config = require(resolve(process.cwd(), 'package.json'))['config']['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -70,7 +70,7 @@ const createDownloader = () => {
     return acc
   }, {})
 
-  createReadStream(resolve(__dirname, '..', 'donwloader', 'index.js'))
+  createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
     .pipe(
       staticModule({
         'static-manifests': () => JSON.stringify(manifests),
@@ -88,4 +88,4 @@ Promise.all(
     .map(page => build({page}))
 )
 .then(createDownloader)
-.catch(exitWithMsg)
+.catch(showError)

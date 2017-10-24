@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@s-ui/component-peer-dependencies": "1",
+    "@s-ui/helpers": "1.5.0",
     "@s-ui/react-domain-connector": "1",
     "commander": "2.11.0",
     "express": "4.16.2",
