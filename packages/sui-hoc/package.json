@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "react": "15"
+    "prop-types": "15",
+    "react": "15 || 16"
   },
   "devDependencies": {
     "@s-ui/component-peer-dependencies": "1",

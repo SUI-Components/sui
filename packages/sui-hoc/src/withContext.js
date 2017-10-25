@@ -1,9 +1,10 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 export default context => Target => class extends Component {
   static displayName = `withContext(${Target.displayName})`
   static childContextTypes = Object.keys(context).reduce((acc, key) => {
-    acc[key] = PropTypes.object
+    acc[key] = PropTypes.any
     return acc
   }, {})
 
