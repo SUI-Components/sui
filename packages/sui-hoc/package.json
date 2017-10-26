@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/hoc",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Set of HoC useful for react",
   "scripts": {
     "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
