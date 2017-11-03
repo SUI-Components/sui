@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 const program = require('commander')
+const ncp = require('copy-paste')
 const {showError} = require('@s-ui/helpers/cli')
 
 const appFactory = require('../development')
@@ -10,6 +11,7 @@ const config = require(`${process.cwd()}/package.json`)['config']['sui-widget-em
 const PORT = process.env.PORT || config.devPort || 3000
 
 program
+  .arguments('<pathname>')
   .usage('-p detail')
   .option('-p, --page <name>', 'Name of the page')
   .on('--help', () => {
@@ -24,4 +26,15 @@ program
   })
   .parse(process.argv)
 
-appFactory({page: program.page, config}).listen(PORT, () => console.log(`Server Up and Running port ${PORT}`))
+const [pathname] = program.args
+
+if (!pathname) { showError('Provide a pathname where start the server') }
+
+appFactory({
+  page: program.page,
+  pathnameStatic: pathname,
+  config
+}).listen(PORT, () => {
+  ncp.copy(`http://localhost:${PORT}`)
+  console.log(`Copied url to clipboard: http://localhost:${PORT}`)
+})
