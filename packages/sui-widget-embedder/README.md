@@ -55,6 +55,7 @@ Inside each page you must create a packe.json file.
 ```
 {
   "pathnameRegExp": "/d\\w+\\.html",
+  "pathnameStatic": "/vivienda/malaga-capital/aire-acondicionado-terraza-trastero-ascensor-el-ejido-la-merced-la-victoria-144577108",
   "vendor": [
     "react",
     "react-dom"
@@ -64,6 +65,7 @@ Inside each page you must create a packe.json file.
 
 * pathnameRegExp [REQUIRED]: RegExp to identify the pathname of the page where this list of widgets must work
 * vendor [OPTIONAL]: In case you want to have a vendor file for this page only.
+* pathnameStatic: You can avoid pass the pathname to the cli is you use this key in your page widget
 
 # Working with React
 
@@ -85,6 +87,12 @@ import render from '@s-ui/widget-embedder/react/render'
 
 ```sh
 npm install @s-ui/widget-embedder --save
+```
+
+# CLI
+
+```
+$ sui-widget-embedder dev -p detail /vivienda/malaga-capital/aire-acondicionado-terraza-trastero-ascensor-el-ejido-la-merced-la-victoria-144577108
 ```
 
 ## Contributing
