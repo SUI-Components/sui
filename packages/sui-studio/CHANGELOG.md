@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.31.0"></a>
+# 4.31.0 (2017-11-06)
+
+
+### Bug Fixes
+
+* use PropTypes in the component generator ([2ce0b62](https://github.com/SUI-Components/sui/commit/2ce0b62))
+
+
+
 <a name="4.30.0"></a>
 # 4.30.0 (2017-10-09)
 
