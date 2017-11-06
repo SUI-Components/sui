@@ -117,6 +117,7 @@ node_modules`),
   writeFile(
   COMPONENT_ENTRY_JS_POINT_FILE,
   `import React, {Component} from 'react'
+   import PropTypes from 'prop-types'
 
 class ${componentInPascal} extends Component {
   render () {
@@ -131,7 +132,7 @@ class ${componentInPascal} extends Component {
 ${componentInPascal}.displayName = '${componentInPascal}'
 
 // Remove these comments if you need
-// ${componentInPascal}.contextTypes = {i18n: React.PropTypes.object}
+// ${componentInPascal}.contextTypes = {i18n: PropTypes.object}
 // ${componentInPascal}.propTypes = {}
 // ${componentInPascal}.defaultProps = {}
 

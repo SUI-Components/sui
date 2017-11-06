@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.3.0"></a>
+# 1.3.0 (2017-11-03)
+
+
+### Features
+
+* pass a static pathname to the cli to avoid the reverse proxy ([0166111](https://github.com/SUI-Components/sui/commit/0166111))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2017-10-24)
 
