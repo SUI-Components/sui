@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.34.0"></a>
+# 4.34.0 (2017-11-07)
+
+
+### Features
+
+* polyfills as vendor ([1b7561b](https://github.com/SUI-Components/sui/commit/1b7561b))
+
+
+
 <a name="4.31.0"></a>
 # 4.31.0 (2017-11-06)
 
