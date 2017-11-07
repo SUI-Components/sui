@@ -21,7 +21,7 @@
       "sui"
     ]
   },
-  "peerDependencie": {
+  "peerDependencies": {
     "react": "15",
     "prop-types": "15"
   },
