@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-domain-connector",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Connect any React component to your domain use cases",
   "main": "lib/index.js",
   "scripts": {
