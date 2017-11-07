@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2017-11-07)
+
+
+### Features
+
+* bump version ([be44e62](https://github.com/SUI-Components/sui/commit/be44e62))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-11-07)
 
