@@ -2,13 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="1.2.0"></a>
-# 1.2.0 (2017-09-15)
+<a name="1.4.0"></a>
+# 1.4.0 (2017-11-07)
 
 
 ### Features
 
-* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([0370d1f](https://github.com/SUI-Components/sui/commit/0370d1f))
+* use prop-types package ([2806433](https://github.com/SUI-Components/sui/commit/2806433))
+
+
+
+<a name="1.2.0"></a>
+# 1.2.0 (2017-09-21)
+
+
+### Features
+
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([d7424de](https://github.com/SUI-Components/sui/commit/d7424de))
 
 
 
