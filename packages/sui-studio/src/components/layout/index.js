@@ -1,5 +1,7 @@
 /* global __BASE_DIR__ */
-import React, {Component, PropTypes} from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 import Markdown from '../documentation/Markdown'
 import cx from 'classnames'
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Provider} from '@schibstedspain/ddd-react-redux'
+import {Provider} from '@s-ui/react-domain-connector'
 
 const withProvider = (flag, store) => Target => {
   if (!flag) { return Target }

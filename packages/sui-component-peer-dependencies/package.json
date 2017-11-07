@@ -13,8 +13,7 @@
     "prop-types": "15.6",
     "react": "15.4",
     "react-dom": "15.4",
-    "react-router": "2",
-    "react-transmit": "3.2.0"
+    "react-router": "2"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,8 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import React, {Component, PropTypes} from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 
 import { iconClose, iconCode } from '../icons'
 import Preview from '../preview'
@@ -16,7 +18,7 @@ import withContext from './HoC/withContext'
 import withProvider from './HoC/withProvider'
 import deepmerge from 'deepmerge'
 
-import {createStore} from '@schibstedspain/ddd-react-redux'
+import {createStore} from '@s-ui/react-domain-connector'
 
 const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '

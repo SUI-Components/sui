@@ -1,5 +1,7 @@
 /* eslint no-console: 0 */
-import React, { Component, PropTypes, Children } from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component, Children } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 
 import createStore from './store'
