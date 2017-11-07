@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "4.29.0-beta.2",
+  "version": "4.34.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -27,7 +27,7 @@
     "@s-ui/deploy": "1",
     "@s-ui/react-domain-connector": "1",
     "@s-ui/bundler": "2",
-    "@s-ui/component-peer-dependencies": "beta",
+    "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "@s-ui/polyfills": "1",
