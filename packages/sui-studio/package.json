@@ -57,7 +57,8 @@
   "suistudio-webpack": {
     "vendor": [
       "react",
-      "react-dom"
+      "react-dom",
+      "@s-ui/polyfills"
     ]
   },
   "repository": {
