@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.35.0"></a>
+# 4.35.0 (2017-11-07)
+
+
+### Features
+
+* use a stable version of peer-deps ([7c97193](https://github.com/SUI-Components/sui/commit/7c97193))
+
+
+
 <a name="4.34.0"></a>
 # 4.34.0 (2017-11-07)
 
@@ -46,6 +56,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix studio not working in IE browsers ([e352c36](https://github.com/SUI-Components/sui/commit/e352c36))
+
+
+### Features
+
+* migrate to [@s-ui](https://github.com/s-ui)/react-domain-connector ([bfdb226](https://github.com/SUI-Components/sui/commit/bfdb226))
 
 
 
