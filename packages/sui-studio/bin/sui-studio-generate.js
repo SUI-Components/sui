@@ -117,7 +117,7 @@ node_modules`),
   writeFile(
   COMPONENT_ENTRY_JS_POINT_FILE,
   `import React, {Component} from 'react'
-   import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 class ${componentInPascal} extends Component {
   render () {
