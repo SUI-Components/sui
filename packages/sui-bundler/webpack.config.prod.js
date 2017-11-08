@@ -9,6 +9,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const Externals = require('./plugins/externals')
 const path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {navigateFallbackWhitelist, navigateFallback, runtimeCaching, directoryIndex} = require('./shared/precache')
@@ -104,19 +105,10 @@ module.exports = {
       ),
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
     })),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        // Disabled because of an issue with Uglify breaking seemingly valid code:
-        // https://github.com/facebookincubator/create-react-app/issues/2376
-        // Pending further investigation:
-        // https://github.com/mishoo/UglifyJS2/issues/2011
-        comparisons: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: true
+    new UglifyJsPlugin({
+      cache: true,
+      parallel: true,
+      sourceMap: false
     }),
     when(config.externals, () => new Externals({files: config.externals})),
     new webpack.LoaderOptionsPlugin({
