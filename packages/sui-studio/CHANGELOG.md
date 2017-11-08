@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.36.0"></a>
+# 4.36.0 (2017-11-08)
+
+
+### Bug Fixes
+
+* fix linting error with new import when generating a component ([d497261](https://github.com/SUI-Components/sui/commit/d497261))
+
+
+
 <a name="4.35.0"></a>
 # 4.35.0 (2017-11-07)
 
