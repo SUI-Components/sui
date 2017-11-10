@@ -2,33 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="2.9.0"></a>
-# 2.9.0 (2017-09-20)
-
-
-### Bug Fixes
-
-* replace references to sui-studio by s-ui/studio ([86bae2d](https://github.com/SUI-Components/sui/commit/86bae2d))
-
-
-
-<a name="2.8.0"></a>
-# 2.8.0 (2017-09-19)
-
-
-### Bug Fixes
-
-* replace references to schibstedspain ([2c6b633](https://github.com/SUI-Components/sui/commit/2c6b633))
-
-
-
-<a name="2.7.0"></a>
-# 2.7.0 (2017-09-15)
+<a name="2.10.0"></a>
+# 2.10.0 (2017-11-10)
 
 
 ### Features
 
-* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([4ade47e](https://github.com/SUI-Components/sui/commit/4ade47e))
+* update to latest webpack version ([5efa34f](https://github.com/SUI-Components/sui/commit/5efa34f))
+* use new uglifyJSPlugin version ([ae6830e](https://github.com/SUI-Components/sui/commit/ae6830e))
+
+
+
+<a name="2.9.0"></a>
+# 2.9.0 (2017-09-21)
+
+
+### Bug Fixes
+
+* replace references to sui-studio by s-ui/studio ([4dfffb9](https://github.com/SUI-Components/sui/commit/4dfffb9))
+
+
+
+<a name="2.8.0"></a>
+# 2.8.0 (2017-09-21)
+
+
+### Bug Fixes
+
+* replace references to schibstedspain ([cd17403](https://github.com/SUI-Components/sui/commit/cd17403))
+
+
+
+<a name="2.7.0"></a>
+# 2.7.0 (2017-09-21)
+
+
+### Features
+
+* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([2687a1f](https://github.com/SUI-Components/sui/commit/2687a1f))
 
 
 
