@@ -13,7 +13,8 @@
     "prop-types": "15.6",
     "react": "16",
     "react-dom": "16",
-    "react-router": "5"
+    "react-router": "5",
+    "react-helmet": "5"
   },
   "repository": {
     "type": "git",
