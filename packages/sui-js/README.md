@@ -7,7 +7,7 @@ $ npm install @s-ui/js --save-dev
 
 ## browser
 A browser detector (device, browser, OS...).
-Imports `https://github.com/lancedikson/bowser`.
+Imports [https://github.com/lancedikson/bowser](https://github.com/lancedikson/bowser).
 
 
 ```js
