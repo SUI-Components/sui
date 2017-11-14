@@ -9,9 +9,9 @@ $ npm install @s-ui/js --save
 A browser detector (device, browser, OS...).
 Imports [https://github.com/lancedikson/bowser](https://github.com/lancedikson/bowser).
 
-
 ```js
 import browser from '@s-ui/js/lib/browser'
-const ua = browser(userAgent)
-domain.config('isMobile', ua.mobile) // bool
+const {isMobile, osName} = browser(userAgent)
+domain.config('isMobile', isMobile) // bool
+domain.config('osName', osName) // string
 ```
