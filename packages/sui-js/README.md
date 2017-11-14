@@ -2,7 +2,7 @@
 > Set of useful js utilities
 
 ```sh
-$ npm install @s-ui/js --save-dev
+$ npm install @s-ui/js --save
 ```
 
 ## browser
