@@ -1,6 +1,5 @@
 {
   "name": "@s-ui/decorators",
-  "private": true,
   "version": "1.3.0",
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
