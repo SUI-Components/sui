@@ -6,7 +6,7 @@ $ npm install @s-ui/js --save
 ```
 
 ## ua-parser
-A browser detector (isMobile, osName). Imports [https://github.com/lancedikson/bowser](https://github.com/lancedikson/bowser).
+A user agent parser. Returns an object `stats` with `isMobile` and `osName`.
 
 ```js
 import {stats} from '@s-ui/js/lib/ua-parser'
