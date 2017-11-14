@@ -10,8 +10,8 @@ A browser detector (device, browser, OS...).
 Imports [https://github.com/lancedikson/bowser](https://github.com/lancedikson/bowser).
 
 ```js
-import browser from '@s-ui/js/lib/browser'
-const {isMobile, osName} = browser(userAgent)
+import {stats} from '@s-ui/js/lib/browser'
+const {isMobile, osName} = stats(userAgent)
 domain.config('isMobile', isMobile) // bool
 domain.config('osName', osName) // string
 ```
