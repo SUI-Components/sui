@@ -1,0 +1,27 @@
+{
+  "name": "@s-ui/js",
+  "version": "1.0.0",
+  "description": "Set of JS utilities",
+  "scripts": {
+    "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "prepublish": "npm run lib"
+  },
+  "keywords": [],
+  "author": "Joan Claret <dpam23@gmail.com>",
+  "dependencies": {
+    "bowser": "1.8.1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
+}

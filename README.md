@@ -38,3 +38,4 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-ssr](./packages/sui-ssr/README.md) | Plug SSR to you SUI SPA | :hourglass: |
 | [sui-decorators](./packages/sui-decorators/README.md) | Develop, maintain and publish your SUI components | :hourglass: |
 | [sui-polyfills](./packages/sui-polyfills/README.md) | Polyfills to load on our projects | :hourglass: |
+| [sui-js](./packages/sui-js/README.md) | Javascript utilities | :white_check_mark: |
