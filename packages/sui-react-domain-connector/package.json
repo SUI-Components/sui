@@ -22,7 +22,7 @@
     ]
   },
   "peerDependencies": {
-    "react": "15",
+    "react": "15 || 16",
     "prop-types": "15"
   },
   "dependencies": {
