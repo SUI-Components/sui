@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2017-11-15)
+
+
+### Features
+
+* bump peer deps ([c549d19](https://github.com/SUI-Components/sui/commit/c549d19))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2017-11-07)
 
@@ -39,6 +49,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * 🌈 Migrate package ([a02f295](https://github.com/SUI-Components/sui/commit/a02f295))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* add package.json ([541f16d](https://github.com/SUI-Components/sui/commit/541f16d))
 
 
 
