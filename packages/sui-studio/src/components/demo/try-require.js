@@ -14,7 +14,7 @@ const reqEventsPlayGround =
   require.context(`bundle-loader?lazy-loader!${__BASE_DIR__}/demo`, true, /^.*\/events\.js/)
 
 const tryRequire = ({category, component}) => {
-  const Component = new Promise(resolve => {
+  const exports = new Promise(resolve => {
     require.ensure([], () => {
       let bundler
       try {
@@ -22,7 +22,7 @@ const tryRequire = ({category, component}) => {
       } catch (e) {
         bundler = reqComponentsSrc(`./${category}/${component}/src/index.jsx`)
       }
-      bundler(bundle => resolve(bundle.default))
+      bundler(resolve)
     })
   })
 
@@ -43,6 +43,7 @@ const tryRequire = ({category, component}) => {
         const bundler = reqComponentsPlayGround(`./${category}/${component}/playground`)
         bundler(playground => resolve(playground))
       } catch (e) {
+        const Component = exports.default
         return resolve(`return (<${Component.displayName || Component.name} />)`)
       }
     })
@@ -98,7 +99,7 @@ const tryRequire = ({category, component}) => {
   //   System.import(`${__BASE_DIR__}/demo/${category}/${component}/routes.js`)
   //     .catch(e => false)
 
-  return Promise.all([Component, playground, context, routes, events, pkg])
+  return Promise.all([exports, playground, context, routes, events, pkg])
 }
 
 export default tryRequire
