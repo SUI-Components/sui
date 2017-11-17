@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
@@ -9,7 +9,9 @@
   "keywords": [],
   "author": "Joan Claret <dpam23@gmail.com>",
   "dependencies": {
-    "bowser": "1.8.1"
+    "bowser": "1.8.1",
+    "js-cookie": "2.1.4",
+    "cookie": "0.3.1"
   },
   "license": "MIT",
   "repository": {
