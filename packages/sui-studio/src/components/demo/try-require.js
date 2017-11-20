@@ -37,14 +37,13 @@ const tryRequire = ({category, component}) => {
     })
   })
 
-  const playground = new Promise(resolve => {
+  const playground = new Promise((resolve, reject) => {
     require.ensure([], () => {
       try {
         const bundler = reqComponentsPlayGround(`./${category}/${component}/playground`)
         bundler(playground => resolve(playground))
       } catch (e) {
-        const Component = exports.default
-        return resolve(`return (<${Component.displayName || Component.name} />)`)
+        return reject(e)
       }
     })
   })
