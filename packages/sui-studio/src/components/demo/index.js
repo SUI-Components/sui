@@ -39,17 +39,24 @@ const cleanDisplayName = displayName => {
   return name !== undefined ? name : fallback
 }
 const pipe = (...funcs) => arg => funcs.reduce((value, func) => func(value), arg)
+const removeDefaultContext = exports =>
+  Object.keys(exports)
+  .filter(key => key !== DEFAULT_CONTEXT)
+  .reduce((acc, key) => {
+    acc[key] = exports[key]
+    return acc
+  }, {})
 
 export default class Demo extends Component {
   static bootstrapWith (demo, {category, component, style, themes}) {
-    tryRequire({category, component}).then(([Base, playground, ctxt, routes, events, pkg]) => {
+    tryRequire({category, component}).then(([exports, playground, ctxt, routes, events, pkg]) => {
       if (isFunction(ctxt)) {
         return ctxt().then(context => {
-          demo.setState({playground, Base, ctxt: context, routes, style, themes, events, pkg})
+          demo.setState({playground, exports, ctxt: context, routes, style, themes, events, pkg})
         })
       }
 
-      demo.setState({playground, Base, ctxt, routes, style, themes, events, pkg})
+      demo.setState({playground, exports, ctxt, routes, style, themes, events, pkg})
     })
   }
 
@@ -63,7 +70,7 @@ export default class Demo extends Component {
   }
 
   state = {
-    Base: false,
+    exports: false,
     isCodeOpen: false,
     ctxt: false,
     ctxtSelectedIndex: 0,
@@ -93,7 +100,7 @@ export default class Demo extends Component {
 
   render () {
     let {
-      Base,
+      exports,
       ctxt,
       ctxtSelectedIndex,
       ctxtType,
@@ -106,8 +113,10 @@ export default class Demo extends Component {
       themes
     } = this.state
 
+    const Base = exports.default
     if (!Base) { return <h1>Loading...</h1> }
 
+    const nonDefaultExports = removeDefaultContext(exports)
     const contextTypes = Base.contextTypes || Base.originalContextTypes
     const context = contextTypes && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
@@ -150,7 +159,7 @@ export default class Demo extends Component {
 
         <Preview
           code={playground}
-          scope={{React, [`${cleanDisplayName(Enhance.displayName)}`]: Enhance, domain}}
+          scope={{React, [`${cleanDisplayName(Enhance.displayName)}`]: Enhance, domain, ...nonDefaultExports}}
         />
       </div>
     )
