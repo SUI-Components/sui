@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.37.0"></a>
+# 4.37.0 (2017-11-21)
+
+
+### Bug Fixes
+
+* reject when error loading playground ([fd46db4](https://github.com/SUI-Components/sui/commit/fd46db4))
+
+
+### Features
+
+* exported data accesible from playground ([301ff7d](https://github.com/SUI-Components/sui/commit/301ff7d))
+
+
+
 <a name="4.36.0"></a>
 # 4.36.0 (2017-11-08)
 
