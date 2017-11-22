@@ -41,8 +41,8 @@ const setSmartBannerCookie = setCookie('smartbanner', 1)
 A bunch of string utilities: remove accents, ...
 
 ```js
-import { removeAccents } from '@s-ui/js/lib/string'
+import { removeAccents, hasAccents } from '@s-ui/js/lib/string'
 
-console.log(removeAccents('París')) // Paris
-console.log(removeAccents('Árbol')) // Arbol
+console.log(removeAccents('París')) // "Paris"
+console.log(hasAccents('Árbol')) // true
 ```
