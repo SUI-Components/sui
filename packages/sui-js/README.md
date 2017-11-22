@@ -36,3 +36,13 @@ const smartBannerCookie = getCookie('smartbanner')
 const {set: setCookie} = cookie
 const setSmartBannerCookie = setCookie('smartbanner', 1)
 ```
+
+## string
+A bunch of string utilities: remove accents, ...
+
+```js
+import { removeAccents } from '@s-ui/js/lib/string'
+
+console.log(removeAccents('París')) // Paris
+console.log(removeAccents('Árbol')) // Arbol
+```
