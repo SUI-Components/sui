@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
