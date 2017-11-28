@@ -53,7 +53,6 @@ class ServerMock extends Mock {
 
     mock.reply(statusCode, JSON.stringify(response))
   }
-
 }
 
 export default ServerMocker
