@@ -94,19 +94,3 @@ export default class CurrentUserService extends Service {
   }
 }
 ```
-
-## Example package.json
-
-```json
-{
-  "name": "@schibstedspain/vertical-domain",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "sui-bundler build -C",
-    "deploy": "sui-deploy test-project --now"
-  },
-  "devDependencies": {
-    "@s-ui/deploy": "1"
-  }
-}
-```
