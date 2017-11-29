@@ -13,8 +13,11 @@ export default class Widget extends Component {
   }
 
   componentDidMount () {
-    const node = document.querySelector(this.props.node)
-    const {children, i18n, domain} = this.props
+    const {node: selector, children, i18n, domain} = this.props
+    const node = document.querySelector(selector)
+
+    if (!node) { return console.warn(`[Widget] unable find the selector ${selector}`) } // eslint-disable-line
+
     ReactDOM.render(
       <Provider i18n={i18n} domain={domain}>
         {children}
