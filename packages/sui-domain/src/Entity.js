@@ -1,5 +1,5 @@
-export default class UserEntity {
+export default class Entity {
   toJSON () {
-    throw new Error('[UserEntity#toJSON] must be implemented')
+    throw new Error('[Entity#toJSON] must be implemented')
   }
 }
