@@ -49,6 +49,14 @@ export default class EntryPoint {
             }
   }
 
+  /**
+   * Set a value to a key in the config
+   * @example
+   * const configuration = domain.config('new_config', 'new value')
+   * @param {String} key
+   * @param {String} value
+   * @return {Config}
+   */
   config (key, value) {
     this._config.set(key, value)
     return this
