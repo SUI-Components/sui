@@ -81,7 +81,7 @@ import render from '@s-ui/widget-embedder/react/render'
 * Widget: React component that renders the children as a new React tree in another place of the page.
 ** i18n: I18n library
 ** domain: Domain library for your widgets
-** node: css path that indicates where you want create the new React tree
+** node: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
 
 ## Installation
 
@@ -92,8 +92,18 @@ npm install @s-ui/widget-embedder --save
 # CLI
 
 ```
+$ sui-widget-embedder dev -p detail
+```
+
+Now you can go to `localhost:[port_setting]` and navegate inside the page with a proxy enabled
+
+```
 $ sui-widget-embedder dev -p detail /vivienda/malaga-capital/aire-acondicionado-terraza-trastero-ascensor-el-ejido-la-merced-la-victoria-144577108
 ```
+When you provide a path like last argument to the CLI you must go to `localhost:[port_setting]/static` to have a static version of the page
+
+
+
 
 ## Contributing
 

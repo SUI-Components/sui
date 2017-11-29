@@ -28,8 +28,6 @@ program
 
 const [pathname] = program.args
 
-if (!pathname) { showError('Provide a pathname where start the server') }
-
 appFactory({
   page: program.page,
   pathnameStatic: pathname,
