@@ -1,0 +1,20 @@
+{
+  "name": "@s-ui/domain",
+  "version": "0.0.0",
+  "description": "SDK for creating domains",
+  "main": "/lib",
+  "scripts": {
+    "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib"
+  },
+  "keywords": [],
+  "author": "Enablers Frontend",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.17.1"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1",
+    "fs-extra": "4.0.2"
+  }
+}
