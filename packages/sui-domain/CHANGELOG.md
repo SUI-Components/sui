@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.3.0"></a>
+# 1.3.0 (2017-12-01)
+
+
+### Bug Fixes
+
+* fix being able to instantiate domain outside the domain package ([7d42e00](https://github.com/SUI-Components/sui/commit/7d42e00))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2017-11-30)
 
