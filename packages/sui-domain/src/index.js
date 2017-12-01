@@ -1,5 +1,5 @@
 export Entity from './Entity'
-export EntryPoint from './EntryPoint'
+export EntryPointFactory from './EntryPointFactory'
 export FetcherFactory from './fetcher/factory'
 export Mapper from './Mapper'
 export Repository from './Repository'

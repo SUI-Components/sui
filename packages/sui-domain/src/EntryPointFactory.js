@@ -1,7 +1,7 @@
 import NotImplementedUseCase from './NotImplementedUseCase'
 
-export default class EntryPoint {
-  constructor ({ config, useCases }) {
+export default ({useCases, config}) => class EntryPoint {
+  constructor () {
     this._config = config
     this._useCases = useCases
   }
