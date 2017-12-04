@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2017-12-04)
+
+
+### Bug Fixes
+
+* force new package version for sui-domain ([671d80b](https://github.com/SUI-Components/sui/commit/671d80b))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-12-04)
 
