@@ -20,7 +20,7 @@ $ npm install @s-ui/domain --save
 ## Using EntryPoint
 
 ```javascript
-import { EntryPoint } from '@s-ui/domain'
+import { EntryPointFactory } from '@s-ui/domain'
 
 // useCases is an object with a key with the name of the use case
 // and the value is the factory of the useCase
@@ -36,8 +36,15 @@ const config = {
   DETAIL_ENDPOINT: 'http://api.url.com/detail'
 }
 
-const domain = new EntryPoint({ config, useCases })
+// that returns you an instantiable EntryPoint class
+const EntryPoint = EntryPointFactory({ config, useCases })
+const domain = new EntryPoint()
 
+// if you don't want to share the config between instances
+// you could pass the config directly to the constructor
+// useful if you're mutating the config for storing values
+const EntryPoint = EntryPointFactory({ useCases })
+const domain = new EntryPoint({ config })
 ```
 
 ## Using Fetcher
