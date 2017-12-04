@@ -1,8 +1,10 @@
 import NotImplementedUseCase from './NotImplementedUseCase'
 
 export default ({useCases, config}) => class EntryPoint {
-  constructor () {
-    this._config = config
+  constructor (params = { config: {} }) {
+    // decide to use a static config from the factory
+    // or use a config passed to the constructor that could be mutated
+    this._config = config || params.config
     this._useCases = useCases
   }
 
