@@ -25,28 +25,29 @@ export default ({useCases, config}) => class EntryPoint {
     const [loader, method] = this._useCases[key] || []
     // if loader is undefined then is not implemented, otherwhise load async the useCase
     return loader === undefined
-            ? new NotImplementedUseCase(key)
-            : {
-              execute: (params) => {
-                // load async the factory, execute use case and return the promise
-                return loader().then(factory => factory.default[method]().execute(params))
-              },
-              $: {
-                execute: {
-                  subscribe: (fn) => {
-                    // creating an object here without an empty dispose function
-                    let ret = { dispose: function () {} }
-                    loader().then(factory => {
-                      // black magic: mutate the object, very small memory leak but that
-                      // makes dispose working async and we need it
-                      ret.dispose = factory.default[method]().$.execute.subscribe(fn).dispose
-                    })
-                    // return the object that will be mutated async
-                    return ret
-                  }
-                }
-              }
+      ? new NotImplementedUseCase(key)
+      : {
+        execute: params => {
+          // load async the factory, execute use case and return the promise
+          return loader()
+                  .then(factory => factory.default[method]({ config: this._config }).execute(params))
+        },
+        $: {
+          execute: {
+            subscribe: fn => {
+              // creating an object here that will have a dispose method
+              let ret = { dispose: function () {} }
+              loader().then(factory => {
+                // black magic: mutate the object, very small memory leak but that
+                // makes dispose working async and we need it
+                ret.dispose = factory.default[method]({ config: this._config }).$.execute.subscribe(fn).dispose
+              })
+              // return the object that will be mutated async
+              return ret
             }
+          }
+        }
+      }
   }
 
   /**
