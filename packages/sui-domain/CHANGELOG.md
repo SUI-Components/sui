@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2017-12-05)
+
+
+### Features
+
+* make config instatiable and mutable ([dda7d94](https://github.com/SUI-Components/sui/commit/dda7d94))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2017-12-04)
 
