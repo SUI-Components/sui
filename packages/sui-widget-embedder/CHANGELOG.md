@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2017-12-11)
+
+
+### Features
+
+* Changed innerHTML by appendChild to avoid selector childs to be rewritted and event ([c35a4d8](https://github.com/SUI-Components/sui/commit/c35a4d8))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-11-29)
 
