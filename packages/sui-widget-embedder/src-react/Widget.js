@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import {Provider} from '@s-ui/react-domain-connector'
+import { Provider } from '@s-ui/react-domain-connector'
 
 export default class Widget extends Component {
   static propTypes = {
@@ -13,10 +13,12 @@ export default class Widget extends Component {
   }
 
   componentDidMount () {
-    const {node: selector, children, i18n, domain} = this.props
+    const { node: selector, children, i18n, domain } = this.props
     const node = document.querySelector(selector)
 
-    if (!node) { return console.warn(`[Widget] unable find the selector ${selector}`) } // eslint-disable-line
+    if (!node) {
+      return console.warn(`[Widget] unable find the selector ${selector}`) // eslint-disable-line
+    }
 
     ReactDOM.render(
       <Provider i18n={i18n} domain={domain}>
@@ -26,5 +28,7 @@ export default class Widget extends Component {
     )
   }
 
-  render () { return null }
+  render () {
+    return null
+  }
 }

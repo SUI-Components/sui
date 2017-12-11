@@ -1,4 +1,4 @@
-(function () {
+;(function () {
   'use strict'
   var manifests = require('static-manifests')()
   var pathnamesRegExp = require('static-pathnamesRegExp')()
@@ -12,8 +12,12 @@
           var parent = 'body'
           var attr = 'src'
 
-          element.onload = function () { resolve(url) }
-          element.onerror = function () { reject(url) }
+          element.onload = function () {
+            resolve(url)
+          }
+          element.onerror = function () {
+            reject(url)
+          }
 
           switch (tag) {
             case 'script':
@@ -82,25 +86,40 @@
     var baseUrl = cdn + '/' + page + '/'
     var manifest = manifests[page]
     var loadStyle = function () {
-      return manifest['app.css'] ? load.css(baseUrl + manifest['app.css']) : Promise.resolve()
+      var css = manifest['app.css'] || manifest['main.css']
+      return css ? load.css(baseUrl + css) : Promise.resolve()
     }
-    var loadScripts =
-      [manifest['runtime.js'], manifest['main.js'], manifest['vendor.js'], manifest['app.js']]
-        .filter(Boolean)
-        .map(function (script) {
-          return function () { return load.js(baseUrl + script) }
-        })
+    var loadScripts = [
+      manifest['runtime.js'],
+      manifest['main.js'],
+      manifest['vendor.js'],
+      manifest['app.js']
+    ]
+      .filter(Boolean)
+      .map(function (script) {
+        return function () {
+          return load.js(baseUrl + script)
+        }
+      })
 
-    promiseInSerie([loadStyle].concat(loadScripts)).then(function () {
-      console.log('All widgets loads') // eslint-disable-line
+    return promiseInSerie([loadStyle].concat(loadScripts)).then(function () {
+      console.log('All widgets for ' + page + ' loads') // eslint-disable-line
     })
   }
 
-  var page
+  var pages = []
   for (var key in pathnamesRegExp) {
     if (window.location.pathname.match(new RegExp(pathnamesRegExp[key]))) {
-      page = key
+      pages.push(key)
     }
   }
-  page && !window.location.host.match(/localhost/) && loadAssetsFor(page)
-}())
+  pages.length !== 0 &&
+    // !window.location.host.match(/localhost/) &&
+    promiseInSerie(
+      pages.map(function (page) {
+        return function () {
+          return loadAssetsFor(page)
+        }
+      })
+    )
+})()

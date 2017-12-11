@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const rootElement = document.createElement('div')
-rootElement.setAttribute('id', 'root')
-document.body.appendChild(rootElement)
+export default function render (root, id = 'root') {
+  if (!document.getElementById(id)) {
+    const element = document.createElement('div')
+    element.setAttribute('id', id)
+    document.body.appendChild(element)
+  }
 
-export default function render (root) {
-  ReactDOM.render(<div>{root}</div>, document.querySelector('#root'))
+  ReactDOM.render(<div>{root}</div>, document.getElementById(id))
 }

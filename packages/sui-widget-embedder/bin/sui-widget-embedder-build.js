@@ -4,15 +4,21 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
-const {resolve} = require('path')
-const {readdirSync, statSync, createReadStream, createWriteStream} = require('fs')
-const {showError} = require('@s-ui/helpers/cli')
+const { resolve } = require('path')
+const {
+  readdirSync,
+  statSync,
+  createReadStream,
+  createWriteStream
+} = require('fs')
+const { showError } = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
 const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
-const config = require(resolve(process.cwd(), 'package.json'))['config']['sui-widget-embedder']
+const pkg = require(resolve(process.cwd(), 'package.json'))
+const config = pkg['config']['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -33,11 +39,13 @@ if (program.clean) {
   rimraf.sync(PUBLIC_PATH)
 }
 
-const build = ({page}) => {
-  const compiler = compilerFactory({page})
+const build = ({ page }) => {
+  const compiler = compilerFactory({ page })
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
-      if (error) { reject(error) }
+      if (error) {
+        reject(error)
+      }
 
       const jsonStats = stats.toJson()
 
@@ -56,19 +64,31 @@ const build = ({page}) => {
   })
 }
 
-const pagesFor = ({path}) =>
-  readdirSync(path)
-    .filter(file => statSync(resolve(path, file)).isDirectory())
+const pagesFor = ({ path }) =>
+  readdirSync(path).filter(file => statSync(resolve(path, file)).isDirectory())
 
 const createDownloader = () => {
-  const manifests = pagesFor({path: PUBLIC_PATH}).reduce((acc, page) => {
-    acc[page] = require(resolve(process.cwd(), 'public', page, 'asset-manifest.json'))
+  const manifests = pagesFor({ path: PUBLIC_PATH }).reduce((acc, page) => {
+    acc[page] = require(resolve(
+      process.cwd(),
+      'public',
+      page,
+      'asset-manifest.json'
+    ))
     return acc
   }, {})
-  const pathnamesRegExp = pagesFor({path: WIDGETS_PATH}).reduce((acc, page) => {
-    acc[page] = require(resolve(process.cwd(), 'widgets', page, 'package.json')).pathnameRegExp
-    return acc
-  }, {})
+  const pathnamesRegExp = pagesFor({ path: WIDGETS_PATH }).reduce(
+    (acc, page) => {
+      acc[page] = require(resolve(
+        process.cwd(),
+        'widgets',
+        page,
+        'package.json'
+      )).pathnameRegExp
+      return acc
+    },
+    {}
+  )
 
   createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
     .pipe(
@@ -78,14 +98,11 @@ const createDownloader = () => {
         'static-cdn': () => JSON.stringify(config.cdn)
       })
     )
-    .pipe(minifyStream({sourceMap: false}))
+    .pipe(minifyStream({ sourceMap: false }))
     .pipe(createWriteStream(resolve(process.cwd(), 'public', 'downloader.js')))
   console.log('Create a new downloader.js file')
 }
 
-Promise.all(
-  pagesFor({path: WIDGETS_PATH})
-    .map(page => build({page}))
-)
-.then(createDownloader)
-.catch(showError)
+Promise.all(pagesFor({ path: WIDGETS_PATH }).map(page => build({ page })))
+  .then(createDownloader)
+  .catch(showError)
