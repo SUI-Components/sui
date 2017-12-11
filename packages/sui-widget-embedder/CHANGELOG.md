@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2017-12-11)
+
+
+### Bug Fixes
+
+* downloader doesnt load in localhost ([b0209a9](https://github.com/SUI-Components/sui/commit/b0209a9))
+
+
+### Features
+
+* use several pages at the same time ([0f6ab67](https://github.com/SUI-Components/sui/commit/0f6ab67))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2017-12-11)
 
