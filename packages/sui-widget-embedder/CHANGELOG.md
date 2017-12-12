@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2017-12-12)
+
+
+### Features
+
+* add sw to precache assets ([4b7909e](https://github.com/SUI-Components/sui/commit/4b7909e))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2017-12-11)
 
