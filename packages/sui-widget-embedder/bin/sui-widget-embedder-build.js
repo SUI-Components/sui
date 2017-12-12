@@ -4,6 +4,7 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
+const flatten = require('just-flatten-it')
 const { resolve } = require('path')
 const {
   readdirSync,
@@ -67,8 +68,8 @@ const build = ({ page }) => {
 const pagesFor = ({ path }) =>
   readdirSync(path).filter(file => statSync(resolve(path, file)).isDirectory())
 
-const createDownloader = () => {
-  const manifests = pagesFor({ path: PUBLIC_PATH }).reduce((acc, page) => {
+const manifests = () =>
+  pagesFor({ path: PUBLIC_PATH }).reduce((acc, page) => {
     acc[page] = require(resolve(
       process.cwd(),
       'public',
@@ -77,32 +78,88 @@ const createDownloader = () => {
     ))
     return acc
   }, {})
-  const pathnamesRegExp = pagesFor({ path: WIDGETS_PATH }).reduce(
-    (acc, page) => {
-      acc[page] = require(resolve(
-        process.cwd(),
-        'widgets',
-        page,
-        'package.json'
-      )).pathnameRegExp
-      return acc
-    },
-    {}
-  )
 
-  createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
-    .pipe(
-      staticModule({
-        'static-manifests': () => JSON.stringify(manifests),
-        'static-pathnamesRegExp': () => JSON.stringify(pathnamesRegExp),
-        'static-cdn': () => JSON.stringify(config.cdn)
+const pathnamesRegExp = () =>
+  pagesFor({ path: WIDGETS_PATH }).reduce((acc, page) => {
+    acc[page] = require(resolve(
+      process.cwd(),
+      'widgets',
+      page,
+      'package.json'
+    )).pathnameRegExp
+    return acc
+  }, {})
+
+const createDownloader = () =>
+  // eslint-disable-next-line
+  new Promise((res, rej) => {
+    const staticManifests = manifests()
+    const staticPathnamesRegExp = pathnamesRegExp()
+    createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
+      .pipe(
+        staticModule({
+          'static-manifests': () => JSON.stringify(staticManifests),
+          'static-pathnamesRegExp': () => JSON.stringify(staticPathnamesRegExp),
+          'static-cdn': () => JSON.stringify(config.cdn)
+        })
+      )
+      .pipe(minifyStream({ sourceMap: false }))
+      .pipe(
+        createWriteStream(resolve(process.cwd(), 'public', 'downloader.js'))
+          .on('finish', () => {
+            console.log('Create a new downloader.js file')
+            res()
+          })
+          .on('error', rej)
+      )
+      .on('error', rej)
+  })
+
+const createSW = () =>
+  // eslint-disable-next-line
+  new Promise((res, rej) => {
+    const filename = 'workbox-sw.prod.v2.1.2'
+    const staticManifests = manifests()
+    const staticCache = flatten(
+      Object.keys(staticManifests).map(page => {
+        const manifest = staticManifests[page]
+        return Object.keys(manifest)
+          .map(entry => `${config.cdn}/${page}/${manifest[entry]}`)
+          .filter(url => !url.endsWith('.map'))
       })
     )
-    .pipe(minifyStream({ sourceMap: false }))
-    .pipe(createWriteStream(resolve(process.cwd(), 'public', 'downloader.js')))
-  console.log('Create a new downloader.js file')
-}
+    const workboxImportPath = require.resolve(
+      `workbox-sw/build/importScripts/${filename}`
+    )
+
+    createReadStream(resolve(__dirname, '..', 'downloader', 'sw.js'))
+      .pipe(
+        staticModule({
+          'static-cache': () => JSON.stringify(staticCache),
+          'static-cdn': () => JSON.stringify(config.cdn)
+        })
+      )
+      .pipe(minifyStream({ sourceMap: false }))
+      .pipe(
+        createWriteStream(resolve(process.cwd(), 'public', 'sw.js')).on(
+          'finish',
+          () => {
+            createReadStream(workboxImportPath).pipe(
+              createWriteStream(resolve(process.cwd(), 'public', filename)).on(
+                'finish',
+                () => {
+                  console.log('Create a new sw.js file')
+                  res()
+                }
+              )
+            )
+          }
+        )
+      )
+      .on('error', rej)
+  })
 
 Promise.all(pagesFor({ path: WIDGETS_PATH }).map(page => build({ page })))
   .then(createDownloader)
+  .then(createSW)
   .catch(showError)
