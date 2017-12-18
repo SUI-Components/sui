@@ -23,6 +23,7 @@ const config = pkg['config']['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
+  .option('-R --remoteCdn <url>', 'Remote url where the downloader will be placed')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -32,8 +33,13 @@ program
     console.log('')
     console.log('    $ sui-widget-embedder build')
     console.log('')
+    console.log(' You can even choose where should the downloader going to get the files:')
+    console.log('    $ sui-widget-embedder build -remoteCdn http://mysourcedomain.com')
+    console.log('')
   })
   .parse(process.argv)
+
+const remoteCdn = program.remoteCdn || config.remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
@@ -100,7 +106,7 @@ const createDownloader = () =>
         staticModule({
           'static-manifests': () => JSON.stringify(staticManifests),
           'static-pathnamesRegExp': () => JSON.stringify(staticPathnamesRegExp),
-          'static-cdn': () => JSON.stringify(config.cdn)
+          'static-cdn': () => JSON.stringify(remoteCdn)
         })
       )
       .pipe(minifyStream({ sourceMap: false }))
@@ -124,7 +130,7 @@ const createSW = () =>
       Object.keys(staticManifests).map(page => {
         const manifest = staticManifests[page]
         return Object.keys(manifest)
-          .map(entry => `${config.cdn}/${page}/${manifest[entry]}`)
+          .map(entry => `${remoteCdn}/${page}/${manifest[entry]}`)
           .filter(url => !url.endsWith('.map'))
       })
     )
@@ -136,7 +142,7 @@ const createSW = () =>
       .pipe(
         staticModule({
           'static-cache': () => JSON.stringify(staticCache),
-          'static-cdn': () => JSON.stringify(config.cdn)
+          'static-cdn': () => JSON.stringify(remoteCdn)
         })
       )
       .pipe(minifyStream({ sourceMap: false }))
