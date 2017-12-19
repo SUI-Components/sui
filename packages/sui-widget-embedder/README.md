@@ -35,7 +35,7 @@ Your project must follow the following folder structure:
 ```
 "config": {
   "sui-widget-embedder": {
-    "cdn": "http://cdn-widgets-vibbo.surge.sh",
+    "remoteCdn": "http://cdn-widgets-vibbo-pro.surge.sh",
     "devPort": "2017",
     "target": "https://vibbo.com"
   }
@@ -44,8 +44,8 @@ Your project must follow the following folder structure:
 
 Inside your project-level package.json, you must config the library,
 
-* cdn [REQUIRED]: the base path of the cdn where your assets will be located
-* devPor [OPTIONAL] (DEFAULT=3000): Port where your development server will be listening
+* remoteCdn [REQUIRED]: the base path of the cdn where your assets will be located
+* devPort [OPTIONAL] (DEFAULT=3000): Port where your development server will be listening
 * target [REQUIRED]: protocol and host from the site that you want to develop
 
 ### page config
@@ -102,8 +102,19 @@ $ sui-widget-embedder dev -p detail /vivienda/malaga-capital/aire-acondicionado-
 ```
 When you provide a path like last argument to the CLI you must go to `localhost:[port_setting]/static` to have a static version of the page
 
+# How to build
 
+If you want to get the remoteCdn from package config you just need to do that:
 
+```
+$ sui-widget-embedder build
+```
+
+If you want to define the remoteCdn by command option you can pass it using the param -R or --remoteCdn
+
+```
+$ sui-widget-embedder build -R http://mycdn.com
+```
 
 ## Contributing
 
