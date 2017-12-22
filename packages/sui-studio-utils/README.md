@@ -1,48 +1,46 @@
-# sui-js
-> Set of useful js utilities
+# sui-studio-tools
+> A set of sui-studio usable tools.
 
 ```sh
-$ npm install @s-ui/js --save
+$ npm install @s-ui/sui-studio-tools --save
 ```
 
-## ua-parser
-A user agent parser. Returns an object `stats` with `isMobile` and `osName`.
+# Domain builder
+
+> Domain builder have the purpose of give to you the possibility of mock some of non implemented domain use cases meanwhile your team are developing them.
+
+# How it works
+
+### Base initialization:
 
 ```js
-import {stats} from '@s-ui/js/lib/ua-parser'
-const {isMobile, osName} = stats(userAgent)
-domain.config('isMobile', isMobile) // bool
-domain.config('osName', osName) // string
+import { DomainBuilder } from '@s-ui/sui-studio-tools'
+import myDomain from '@schibstedspain/myDomain'
+
+
+const domain = DomainBuilder.extend({ myDomain }).build()
+
 ```
 
+### Mocking use cases
 
-## cookie
-Parse, get and set cookies. Returns an object `cookie` with `parse`, `get` and `set` methods.
-
-**Note:** `set` method does not work on server side.
+> To mock use case you need to call two functions: 'for' and 'respondWith'
+>
+> Lets supose that we want to mock a use case that isn't already implemented. It's name is 'get_products':
 
 ```js
-import cookie from '@s-ui/js/lib/cookie'
+import { DomainBuilder } from '@s-ui/sui-studio-tools'
+import myDomain from '@schibstedspain/myDomain'
 
-// Parse
-const {parse} = cookie
-domain.config('cookie', parse(cookies))
+const getProductsResponse = ['pineapple', 'apple', 'strawberry', 'coffee']
+const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWith(getProductsResponse).build()
 
-// Get
-const {get: getCookie} = cookie
-const smartBannerCookie = getCookie('smartbanner')
-
-// Set
-const {set: setCookie} = cookie
-const setSmartBannerCookie = setCookie('smartbanner', 1)
+domain.get('current_user_use_case').execute().then((products) => {
+  console.log(products) // ['pineapple', 'apple', 'strawberry', 'coffee']
+})
 ```
 
-## string
-A bunch of string utilities: remove accents, ...
+> THINGS TO KEEP IN MIND: 
 
-```js
-import { removeAccents, hasAccents } from '@s-ui/js/lib/string'
+> You CAN'T mock a use case if already exists on the domain. This means that we can ONLY mock use cases that doesn't exist on the domain 
 
-console.log(removeAccents('París')) // "Paris"
-console.log(hasAccents('Árbol')) // true
-```
