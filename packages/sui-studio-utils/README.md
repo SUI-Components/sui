@@ -51,7 +51,7 @@ domain.get('current_user_use_case').execute().then((products) => {
 import { DomainBuilder } from '@s-ui/sui-studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 
-const getProductsResponse = {
+const getProductsError = {
   fail: 'Unexpected error :('
 }
 const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWith(getProductsError).build()
@@ -59,7 +59,7 @@ const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWit
 
 // Execute the use case and check if everything works
 domain.get('current_user_use_case').execute().then((products) => {
-  console.log(products) // ['pineapple', 'apple', 'strawberry', 'coffee']
+  // Never will be fired
 }).catch((e) => {
   console.log(e) // Unexpected error :(
 })
