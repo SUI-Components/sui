@@ -15,4 +15,4 @@ const initRosseta = (literals, config = {}) => {
 
 export default ({ literalsUseCase, dictionary, config }) =>
   literalsUseCase ? literalsUseCase.execute().then(literals => initRosseta(literals, config))
-    : initRosseta(dictionary, config)
+    : new Promise((resolve) => resolve(initRosseta(dictionary, config)))
