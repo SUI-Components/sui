@@ -7,6 +7,7 @@ const snakeToCamel = str => str.replace(/(_\w)/g, match => match[1].toUpperCase(
 const withLocalService = (...services) => Target => {
   class DDDLocalServicesInjector extends Component {
     static displayName = `withLocalService(${Target.displayName})`
+    static getInitialProps = Target.getInitialProps
     static originalContextTypes = Target.originalContextTypes || Target.contextTypes
     static contextTypes = {
       domain: PropTypes.object.isRequired
