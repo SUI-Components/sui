@@ -32,7 +32,9 @@ const domain = DomainBuilder.extend({ myDomain }).build()
 import { DomainBuilder } from '@s-ui/sui-studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 
-const getProductsResponse = ['pineapple', 'apple', 'strawberry', 'coffee']
+const getProductsResponse = {
+  success: ['pineapple', 'apple', 'strawberry', 'coffee']
+}
 const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWith(getProductsResponse).build()
 
 
@@ -41,6 +43,29 @@ domain.get('current_user_use_case').execute().then((products) => {
   console.log(products) // ['pineapple', 'apple', 'strawberry', 'coffee']
 })
 ```
+
+
+### Forcing an error throw
+
+```js
+import { DomainBuilder } from '@s-ui/sui-studio-tools'
+import myDomain from '@schibstedspain/myDomain'
+
+const getProductsResponse = {
+  fail: 'Unexpected error :('
+}
+const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWith(getProductsError).build()
+
+
+// Execute the use case and check if everything works
+domain.get('current_user_use_case').execute().then((products) => {
+  console.log(products) // ['pineapple', 'apple', 'strawberry', 'coffee']
+}).catch((e) => {
+  console.log(e) // Unexpected error :(
+})
+```
+
+
 
 > THINGS TO KEEP IN MIND: 
 
