@@ -10,6 +10,7 @@ const mapUIResponseToProps = (...paths) => Target => {
 
   Enhance.originalContextTypes = Target.originalContextTypes || Target.contextTypes
   Enhance.displayName = `mapUIResponseToProps(${Target.displayName})`
+  Enhance.getInitialProps = Target.getInitialProps
   return Enhance
 }
 

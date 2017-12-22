@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 const mapConfigToProps = (...configs) => Target => {
   class DDDConfigInjector extends Component {
     static displayName = `mapConfigToProps(${Target.displayName})`
+    static getInitialProps = Target.getInitialProps
     static contextTypes = {
       domain: PropTypes.object.isRequired
     }

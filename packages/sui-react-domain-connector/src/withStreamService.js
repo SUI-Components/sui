@@ -6,6 +6,7 @@ const snakeToCamel = str => str.replace(/(_\w)/g, match => match[1].toUpperCase(
 
 const withStreamService = (...services) => Target => class DDDStreamServicesInjector extends Component {
   static displayName = `withStreamService(${Target.displayName})`
+  static getInitialProps = Target.getInitialProps
   static originalContextTypes = Target.originalContextTypes || Target.contextTypes
   static contextTypes = {
     domain: PropTypes.object.isRequired
