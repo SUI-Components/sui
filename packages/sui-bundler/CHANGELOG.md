@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.11.0"></a>
+# 2.11.0 (2017-12-28)
+
+
+### Features
+
+* remove browser-sync as not being used anywhere and adding building time ([ad513a2](https://github.com/SUI-Components/sui/commit/ad513a2))
+
+
+
 <a name="2.10.0"></a>
 # 2.10.0 (2017-11-10)
 
