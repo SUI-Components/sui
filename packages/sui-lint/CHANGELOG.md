@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2018-01-03)
+
+
+### Features
+
+* warning for non used props instead error ([4865503](https://github.com/SUI-Components/sui/commit/4865503))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2018-01-03)
 
