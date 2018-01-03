@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2018-01-03)
+
+
+### Features
+
+* allow shortCircuit and ternaries for non unused expressions ([31879e4](https://github.com/SUI-Components/sui/commit/31879e4))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2018-01-03)
 
