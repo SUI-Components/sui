@@ -11,7 +11,7 @@ module.exports = {
     'chai-friendly'
   ],
   'rules': {
-    'chai-friendly/no-unused-expressions': 2,
+    'chai-friendly/no-unused-expressions': ['error', { 'allowShortCircuit': true, 'allowTernary': true }],
     'no-console': 'warn',
     'no-debugger': 'error',
     'no-nested-ternary': 'warn',
