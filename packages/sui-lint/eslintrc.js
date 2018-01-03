@@ -29,6 +29,7 @@ module.exports = {
     'react/no-direct-mutation-state': 'warn',
     'react/no-is-mounted': 'warn',
     'react/no-multi-comp': ['warn', { 'ignoreStateless': true }],
+    'react/no-unused-prop-types': 1,
     'react/react-in-jsx-scope': 'warn',
     'react/require-render-return': 'warn',
     'strict': 0
