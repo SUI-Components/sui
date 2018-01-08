@@ -103,6 +103,15 @@ i18n({ literalsUseCase: myDomain.get('get_literals_from_backend') }).then((rosse
  
 The locales are getted by an object argument. No call is done to any use case.
 
+Dictionary should be formed with this format:
+
+```js
+    'es-ES': { // Or your iso language
+      'LOGIN': 'INICIAR SESIÓN', // your locale names
+      'SIGNUP': 'CREAR UNA CUENTA'
+    }
+```
+
 ```js
 import { i18n } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
