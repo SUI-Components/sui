@@ -1,20 +1,20 @@
-# sui-studio-tools
+# studio-tools
 > A set of sui-studio usable tools.
 
 ```sh
-$ npm install @s-ui/sui-studio-tools --save
+$ npm install @s-ui/studio-tools --save
 ```
 
 # Domain builder
 
-> Domain builder have the purpose of give to you the possibility of mock some of non implemented domain use cases meanwhile your team are developing them.
+> Domain builder has the purpose of giving to you the possibility of mocking some of non implemented domain use cases meanwhile your team are developing them.
 
 # How it works
 
 ### Base initialization:
 
 ```js
-import { DomainBuilder } from '@s-ui/sui-studio-tools'
+import { DomainBuilder } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 
 
@@ -26,10 +26,10 @@ const domain = DomainBuilder.extend({ myDomain }).build()
 
 > To mock use case you need to call two functions: 'for' and 'respondWith'
 >
-> Lets supose that we want to mock a use case that isn't already implemented. It's name is 'get_products':
+> Let's suppose that we want to mock an use case that isn't already implemented. Its name is 'get_products':
 
 ```js
-import { DomainBuilder } from '@s-ui/sui-studio-tools'
+import { DomainBuilder } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 
 const getProductsResponse = {
@@ -48,7 +48,7 @@ domain.get('current_user_use_case').execute().then((products) => {
 ### Forcing an error throw
 
 ```js
-import { DomainBuilder } from '@s-ui/sui-studio-tools'
+import { DomainBuilder } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 
 const getProductsError = {
@@ -87,7 +87,7 @@ The library accepts two types of flow
 The locales are getted using a usecase of a domain. You pass the usecase not the domain.
 
 ```js
-import { i18n } from '@s-ui/sui-studio-tools'
+import { i18n } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 
 
@@ -104,7 +104,7 @@ i18n({ literalsUseCase: myDomain.get('get_literals_from_backend') }).then((rosse
 The locales are getted by an object argument. No call is done to any use case.
 
 ```js
-import { i18n } from '@s-ui/sui-studio-tools'
+import { i18n } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 import myLocalesDictionary from '../../utils/dictionary' // Or wherever you have your locales object.
 
@@ -127,7 +127,7 @@ The function comes with a little customization feature. You can customizate:
 Send custom config is as easy as put a config property on your object arguments:
 
 ```js
-import { i18n } from '@s-ui/sui-studio-tools'
+import { i18n } from '@s-ui/studio-tools'
 import myDomain from '@schibstedspain/myDomain'
 import myLocalesDictionary from '../../utils/dictionary' // Or wherever you have your locales object.
 

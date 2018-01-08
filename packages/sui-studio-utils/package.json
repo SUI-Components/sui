@@ -1,5 +1,5 @@
 {
-  "name": "@s-ui/sui-studio-utils",
+  "name": "@s-ui/studio-utils",
   "version": "1.0.0",
   "description": "Set of utils made to be used on the desired studios",
   "main": "lib/index.js",
