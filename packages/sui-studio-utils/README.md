@@ -24,7 +24,7 @@ const domain = DomainBuilder.extend({ myDomain }).build()
 
 ### Mocking use cases
 
-> To mock use case you need to call two functions: 'for' and 'respondWith'
+> To mock an use case you need to call two functions: 'for' and 'respondWith'
 >
 > Let's suppose that we want to mock an use case that isn't already implemented. Its name is 'get_products':
 
