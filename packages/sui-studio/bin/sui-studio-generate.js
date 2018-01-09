@@ -141,7 +141,7 @@ export default ${componentInPascal}`
 
   writeFile(
   COMPONENT_ENTRY_SCSS_POINT_FILE,
-  `@import '~@schibstedspain/theme-basic/lib/index';
+  `@import '~@schibstedspain/sui-theme/lib/index';
 
 .${prefix}-${componentInPascal} {
   // Do your magic
