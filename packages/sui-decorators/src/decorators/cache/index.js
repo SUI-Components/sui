@@ -1,5 +1,5 @@
 import isNode from '../../helpers/isNode'
-import md5 from '../../helpers/md5'
+import { createHash } from '@s-ui/js/lib/hash'
 import stringOrIntToMs from '../../helpers/stringOrIntToMs'
 
 import LRU from './algorithms/LRU'
@@ -24,7 +24,7 @@ const _cache = ({ttl, target, fnName, instance, original, server, algorithm, hos
   const tracker = new Tracker({algorithm, host, port, fnName, segmentation})
 
   return (...args) => {
-    const key = `${target.constructor.name}::${fnName}::${md5.hash(JSON.stringify(args))}`
+    const key = `${target.constructor.name}::${fnName}::${createHash(JSON.stringify(args))}`
     const now = Date.now()
     if (cache.get(key) === undefined) {
       tracker._updateStats({action: Tracker.ACTION_MISSING})

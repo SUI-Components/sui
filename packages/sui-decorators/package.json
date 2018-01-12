@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "guild": "1.2.2",
-    "lru-cache": "4.0.2"
+    "lru-cache": "4.0.2",
+    "@s-ui/js": "1"
   },
   "browser": {
     "http": false,
