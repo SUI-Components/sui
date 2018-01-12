@@ -11,9 +11,9 @@
   "license": "MIT",
   "dependencies": {
     "prop-types": "15.6",
-    "react": "15.4",
-    "react-dom": "15.4",
-    "react-router": "2"
+    "react": "16.2",
+    "react-dom": "16.2",
+    "react-router": "3"
   },
   "repository": {
     "type": "git",
