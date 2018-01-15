@@ -19,15 +19,15 @@ export default ({ context, routeInfo }) => Page => (
       // get the initialProps by executing the provided method on the page
       // when got the results, update the state to re-render the page hiding the placeholder
       Page.getInitialProps({ context, routeInfo })
-          .then(initialProps => {
-            this.setState({ initialProps, isLoading: false })
-          })
+        .then(initialProps => {
+          this.setState({ initialProps, isLoading: false })
+        })
     }
 
     render () {
       return this.state.isLoading
-              ? this._renderLoading()
-              : <Page {...this.state.initialProps} {...this.props} />
+        ? this._renderLoading()
+        : <Page {...this.state.initialProps} {...this.props} />
     }
   }
 )
