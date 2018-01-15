@@ -12,7 +12,7 @@
     "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
-    "lint": "sui-lint js && sui-lint sass",
+    "lint": "sui-lint js --fix && sui-lint sass",
     "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
     "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
     "commitmsg": "validate-commit-msg",
