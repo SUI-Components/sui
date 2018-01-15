@@ -9,16 +9,19 @@ const buildCommit = require('./buildCommit')
 const config = require('./config')
 
 const packagesDir = path.join(process.cwd(), config.getPackagesFolder())
-const scopes = config.getScopes().sort().map(name => ({name}))
+const scopes = config
+  .getScopes()
+  .sort()
+  .map(name => ({ name }))
 
 /**
  * Check if modified files are present
  * @param  {[type]}  path Folder to check
  * @return {Promise<Boolean>}
  */
-const hasChangedFiles = (path) => {
+const hasChangedFiles = path => {
   return new Promise((resolve, reject) => {
-    exec(`git status ${path}`, {cwd: path}, (err, output) => {
+    exec(`git status ${path}`, { cwd: path }, (err, output) => {
       err ? reject(err) : resolve(!output.includes('nothing to commit'))
     })
   })
@@ -34,108 +37,124 @@ const types = getTypes()
 
 // This types will also have otherScopes added to them
 const typesWithOtherScopes = ['feat', 'fix', 'release', 'test', 'docs', 'chore']
-const otherScopes = [
-  {name: 'META'},
-  {name: 'examples'}
-]
+const otherScopes = [{ name: 'META' }, { name: 'examples' }]
 
 const allowBreakingChanges = ['feat', 'fix']
 
 module.exports = {
   prompter: function (cz, commit) {
-    console.log('\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n')
+    console.log(
+      '\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n'
+    )
 
-    cz.prompt([
-      {
-        type: 'list',
-        name: 'type',
-        message: 'Select the type of change that you\'re committing:',
-        choices: types
-      },
-      {
-        type: 'list',
-        name: 'scope',
-        message: '\nDenote the SCOPE of this change:',
-        choices: function (answers) {
-          return Promise.all(scopes.map(pkg => (
-            hasChangedFiles(path.join(packagesDir, pkg.name))
-              .then(hasFiles => hasFiles && pkg)
-          )))
-          .then(result => result.filter(Boolean))
-          .then((result) => {
-            if (typesWithOtherScopes.indexOf(answers.type) > -1) {
-              return result.concat(otherScopes)
-            }
-            return result
-          })
-        }
-      },
-      {
-        type: 'input',
-        name: 'subject',
-        message: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
-        validate: function (value) {
-          return !!value
+    cz
+      .prompt([
+        {
+          type: 'list',
+          name: 'type',
+          message: "Select the type of change that you're committing:",
+          choices: types
         },
-        filter: function (value) {
-          return value.charAt(0).toLowerCase() + value.slice(1)
+        {
+          type: 'list',
+          name: 'scope',
+          message: '\nDenote the SCOPE of this change:',
+          choices: function (answers) {
+            return Promise.all(
+              scopes.map(pkg =>
+                hasChangedFiles(path.join(packagesDir, pkg.name)).then(
+                  hasFiles => hasFiles && pkg
+                )
+              )
+            )
+              .then(result => result.filter(Boolean))
+              .then(result => {
+                if (typesWithOtherScopes.indexOf(answers.type) > -1) {
+                  return result.concat(otherScopes)
+                }
+                return result
+              })
+          }
+        },
+        {
+          type: 'input',
+          name: 'subject',
+          message:
+            'Write a SHORT, IMPERATIVE tense description of the change:\n',
+          validate: function (value) {
+            return !!value
+          },
+          filter: function (value) {
+            return value.charAt(0).toLowerCase() + value.slice(1)
+          }
+        },
+        {
+          type: 'input',
+          name: 'body',
+          message:
+            'Provide a LONGER description of the change (optional). Use "|" to break new line:\n'
+        },
+        {
+          type: 'input',
+          name: 'breaking',
+          message: 'List any BREAKING CHANGES (optional):\n',
+          when: function (answers) {
+            return allowBreakingChanges.indexOf(answers.type.toLowerCase()) > -1
+          }
+        },
+        {
+          type: 'input',
+          name: 'footer',
+          message:
+            'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n'
+        },
+        {
+          type: 'expand',
+          name: 'confirmCommit',
+          choices: [
+            { key: 'y', name: 'Yes', value: 'yes' },
+            { key: 'n', name: 'Abort commit', value: 'no' },
+            { key: 'e', name: 'Edit message', value: 'edit' }
+          ],
+          message: function (answers) {
+            var SEP =
+              '###--------------------------------------------------------###'
+            console.log(
+              '\n' + SEP + '\n' + buildCommit(answers) + '\n' + SEP + '\n'
+            )
+            return 'Are you sure you want to proceed with the commit above?'
+          }
         }
-      },
-      {
-        type: 'input',
-        name: 'body',
-        message: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n'
-      },
-      {
-        type: 'input',
-        name: 'breaking',
-        message: 'List any BREAKING CHANGES (optional):\n',
-        when: function (answers) {
-          return allowBreakingChanges.indexOf(answers.type.toLowerCase()) > -1
-        }
-      },
-      {
-        type: 'input',
-        name: 'footer',
-        message: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n'
-      },
-      {
-        type: 'expand',
-        name: 'confirmCommit',
-        choices: [
-          { key: 'y', name: 'Yes', value: 'yes' },
-          { key: 'n', name: 'Abort commit', value: 'no' },
-          { key: 'e', name: 'Edit message', value: 'edit' }
-        ],
-        message: function (answers) {
-          var SEP = '###--------------------------------------------------------###'
-          console.log('\n' + SEP + '\n' + buildCommit(answers) + '\n' + SEP + '\n')
-          return 'Are you sure you want to proceed with the commit above?'
-        }
-      }
-    ])
-    .then(function (answers) {
-      if (answers.confirmCommit === 'edit') {
-        temp.open(null, function (err, info) {
-          if (err) { return }
+      ])
+      .then(function (answers) {
+        if (answers.confirmCommit === 'edit') {
+          temp.open(null, function (err, info) {
+            if (err) {
+              return
+            }
 
-          fs.write(info.fd, buildCommit(answers))
-          fs.close(info.fd, function () {
-            editor(info.path, function (code, sig) {
-              if (code === 0) {
-                var commitStr = fs.readFileSync(info.path, { encoding: 'utf8' })
-                commit(commitStr)
-              } else {
-                console.log('Editor returned non zero value. Commit message was:\n' + buildCommit(answers))
-              }
+            fs.write(info.fd, buildCommit(answers))
+            fs.close(info.fd, function () {
+              editor(info.path, function (code, sig) {
+                if (code === 0) {
+                  var commitStr = fs.readFileSync(info.path, {
+                    encoding: 'utf8'
+                  })
+                  commit(commitStr)
+                } else {
+                  console.log(
+                    'Editor returned non zero value. Commit message was:\n' +
+                      buildCommit(answers)
+                  )
+                }
+              })
             })
           })
-        })
-      } else if (answers.confirmCommit === 'yes') {
-        commit(buildCommit(answers))
-      } else {
-        console.log('Commit has been canceled.')
-      }
-    })
+        } else if (answers.confirmCommit === 'yes') {
+          commit(buildCommit(answers))
+        } else {
+          console.log('Commit has been canceled.')
+        }
+      })
   }
 }
