@@ -9,8 +9,8 @@ const safeAddToHeadAndBody = htmlPluginData => url => {
   const script = `<script src="${url}"></script>`
   const link = `<link rel="preload" href="${url}" as="script">` // TODO: always is a script ?! I dont think so
   htmlPluginData.html = htmlPluginData.html
-                          .replace('<head>', `<head>\n${link}\n`)
-                          .replace('</body>', `${script}\n</body>`)
+    .replace('<head>', `<head>\n${link}\n`)
+    .replace('</body>', `${script}\n</body>`)
 }
 
 const generateHashFromFile = uri =>
@@ -24,7 +24,7 @@ const generateHashFromFile = uri =>
 const copy = (uris, outputPath) => (hash, index) => {
   const from = path.resolve(process.cwd(), uris[index])
   const to = path.resolve(process.cwd(), `${outputPath}/${path.basename(uris[index])}`
-               .replace(/\.(js|css|json)/, match => `.${hash}${match}`))
+    .replace(/\.(js|css|json)/, match => `.${hash}${match}`))
   fs.createReadStream(from).pipe(fs.createWriteStream(to))
 }
 
