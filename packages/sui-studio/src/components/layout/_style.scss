@@ -39,6 +39,7 @@
       display: block;
       transform: translate3d(0, 0, 0);
     }
+    &.hidden { display: none }
   }
 
   &-main {
@@ -49,6 +50,7 @@
 }
 
 .sui-StudioNavBar-secondary {
+  &.hidden {display: none;}
   background: $c-white;
   display: flex;
   flex-direction: row;

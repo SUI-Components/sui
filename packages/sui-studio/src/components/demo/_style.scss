@@ -11,6 +11,14 @@
     };
   }
 
+  &-fullScreenButton {
+    @include floating-button($c-primary, 56px, 72px);
+    @include breakpoint-from(s) {
+      bottom: auto;
+      top: 65px;
+    };
+  }
+
   &-code {
     display: none;
     height: 100vh;
