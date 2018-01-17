@@ -1,7 +1,6 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
 import PropTypes from 'prop-types'
-
 import React, { Component } from 'react'
 
 import {
@@ -29,6 +28,8 @@ const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
 const REACT_DOMAIN_CONNECTOR = '@s-ui/react-domain-connector'
+const CONTAINER_CLASS = 'sui-Studio'
+const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
 const createContextByType = (ctxt, type) => {
   // check if the user has created a context.js with the needed contextTypes
@@ -125,6 +126,10 @@ export default class Demo extends Component {
 
   componentWillReceiveProps (nextProps) {
     this._loadStyles(nextProps.params)
+  }
+
+  componentWillUnmount () {
+    this.containerClassList && this.containerClassList.remove(FULLSCREEN_CLASS)
   }
 
   render () {
@@ -225,21 +230,11 @@ export default class Demo extends Component {
   handleFullScreen = () => {
     this.setState({ isFullScreen: !this.state.isFullScreen }, () => {
       const { isFullScreen } = this.state
-      const aside = document.querySelector('.sui-Studio-sidebar')
-      const toolBar = document.querySelector('.sui-StudioWorkbench-navigation')
-      const secundaryToolBar = document.querySelector(
-        '.sui-StudioNavBar-secondary'
-      )
+      this.containerClassList = this.containerClassList || document.getElementsByClassName(CONTAINER_CLASS)[0].classList
 
-      if (isFullScreen) {
-        aside.classList.add('hidden')
-        toolBar.classList.add('hidden')
-        secundaryToolBar.classList.add('hidden')
-      } else {
-        aside.classList.remove('hidden')
-        toolBar.classList.remove('hidden')
-        secundaryToolBar.classList.remove('hidden')
-      }
+      isFullScreen
+        ? this.containerClassList.add(FULLSCREEN_CLASS)
+        : this.containerClassList.remove(FULLSCREEN_CLASS)
     })
   }
 

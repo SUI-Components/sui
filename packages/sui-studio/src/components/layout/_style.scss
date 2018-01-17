@@ -39,7 +39,6 @@
       display: block;
       transform: translate3d(0, 0, 0);
     }
-    &.hidden { display: none }
   }
 
   &-main {
@@ -47,10 +46,17 @@
     overflow: auto;
     width: 100%;
   }
+
+  &.sui-Studio--fullscreen {
+    .sui-Studio-sidebar,
+    .sui-StudioWorkbench-navigation,
+    .sui-StudioNavBar-secondary {
+      display: none;
+    }
+  }
 }
 
 .sui-StudioNavBar-secondary {
-  &.hidden {display: none;}
   background: $c-white;
   display: flex;
   flex-direction: row;
