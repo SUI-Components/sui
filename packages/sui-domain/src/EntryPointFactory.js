@@ -32,7 +32,7 @@ export default ({useCases, config}) => class EntryPoint {
         execute: params => {
           // load async the factory, execute use case and return the promise
           return loader()
-                  .then(factory => factory.default[method]({ config: this._config }).execute(params))
+            .then(factory => factory.default[method]({ config: this._config }).execute(params))
         },
         $: {
           execute: {
