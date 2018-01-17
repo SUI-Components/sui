@@ -73,7 +73,7 @@ describe('Cache', () => {
         @cache()
         asyncRndNumber (num) {
           const prms = !fail ? new Promise((resolve, reject) => setTimeout(resolve, 100, Math.random()))
-                             : new Promise((resolve, reject) => setTimeout(reject, 100, Math.random()))
+            : new Promise((resolve, reject) => setTimeout(reject, 100, Math.random()))
           fail = !fail
           return prms
         }
