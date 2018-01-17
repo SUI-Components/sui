@@ -19,8 +19,8 @@ const build = () => {
   return new Promise((resolve, reject) => {
     fs.removeSync(`${destination}/node_modules/${originPackageName}`)
     const build = spawn('npm', ['run', 'build'], {cwd: origin})
-                    .on('error', reject)
-                    .on('close', resolve)
+      .on('error', reject)
+      .on('close', resolve)
     build.stdout.on('data', data => console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`)))
     build.stderr.on('data', data => console.log(colors.red(`[${originPackageName}]: ${data.toString()}`)))
   })
@@ -29,8 +29,8 @@ const build = () => {
 const createLink = () => {
   return new Promise((resolve, reject) => {
     const link = spawn('ln', ['-s', `${origin}`, `${destination}/node_modules/${originPackageName}`])
-                  .on('error', reject)
-                  .on('close', resolve)
+      .on('error', reject)
+      .on('close', resolve)
     link.stdout.on('data', data => console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`)))
     link.stderr.on('data', data => console.log(colors.red(`[${originPackageName}]: ${data.toString()}`)))
   })

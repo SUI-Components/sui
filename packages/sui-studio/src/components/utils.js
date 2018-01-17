@@ -6,13 +6,13 @@ const DEFAULT_COMPLIANT = []
 export const getComponentsList = () => {
   const reqPackages = require.context(`${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/package\.json/)
   return reqPackages
-          .keys()
-          .map(k => k.replace(/\.\//, '')
-          .replace(/\/package\.json/, ''))
-          .map(k => {
-            const [category, component] = k.split('/')
-            return {category, component}
-          }) || []
+    .keys()
+    .map(k => k.replace(/\.\//, '')
+      .replace(/\/package\.json/, ''))
+    .map(k => {
+      const [category, component] = k.split('/')
+      return {category, component}
+    }) || []
 }
 
 export const getSuiStudioConfig = () => {

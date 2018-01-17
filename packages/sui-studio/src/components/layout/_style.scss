@@ -46,6 +46,14 @@
     overflow: auto;
     width: 100%;
   }
+
+  &.sui-Studio--fullscreen {
+    .sui-Studio-sidebar,
+    .sui-StudioWorkbench-navigation,
+    .sui-StudioNavBar-secondary {
+      display: none;
+    }
+  }
 }
 
 .sui-StudioNavBar-secondary {

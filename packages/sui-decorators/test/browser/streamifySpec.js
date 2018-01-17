@@ -127,7 +127,7 @@ describe('Streamify', () => {
 
       dummyDecorate.dummyMethod(10, 2)
 
-        // clean subscriptions
+      // clean subscriptions
       sub1.dispose()
       sub2.dispose()
       sub3.dispose()

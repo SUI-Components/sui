@@ -51,14 +51,15 @@ export default class Preview extends Component {
   }
 
   buildScope (mountNode) {
-    return Object
-            .keys(this.props.scope)
-            .map(key => this.props.scope[key])
-            .concat(mountNode)
+    return Object.keys(this.props.scope)
+      .map(key => this.props.scope[key])
+      .concat(mountNode)
   }
 
   executeCode () {
-    if (this.props.code === undefined) { return }
+    if (this.props.code === undefined) {
+      return
+    }
     const mountNode = this.refs.mount
     const scope = this.buildScope(mountNode)
 
@@ -74,12 +75,12 @@ export default class Preview extends Component {
       const Component = eval(compiledCode)(...scope)
       ReactDOM.render(Component, mountNode)
       if (this.state.error) {
-        this.setState({error: undefined})
+        this.setState({ error: undefined })
       }
     } catch (err) {
       console.error(err)
       this.setTimeout(() => {
-        this.setState({error: err.toString()})
+        this.setState({ error: err.toString() })
       }, ERROR_TIMEOUT)
     }
   }
@@ -99,7 +100,10 @@ export default class Preview extends Component {
     return (
       <div className='sui-StudioPreview'>
         {error !== undefined && this._renderError({ error })}
-        <div ref='mount' className='sui-StudioPreview-content sui-StudioDemo-preview' />
+        <div
+          ref='mount'
+          className='sui-StudioPreview-content sui-StudioDemo-preview'
+        />
       </div>
     )
   }
