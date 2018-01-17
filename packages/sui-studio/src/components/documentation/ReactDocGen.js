@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import Markdown from './Markdown'
 import tryRequire from './try-require'
 import docsToMarkdown from 'react-docs-markdown'
 const reactDocs = require('react-docgen')
-import Markdown from './Markdown'
 
 class ReactDocGen extends Component {
   static propTypes = {

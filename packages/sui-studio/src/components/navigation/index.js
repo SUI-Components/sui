@@ -26,14 +26,14 @@ export default class Navigation extends Component {
   _filterComponentsFromSearch ({ search }) {
     if (search === SEARCH_BY_COMPLIANT) {
       return componentsList
-               .filter(({category, component}) => this._isCompliant({category, component}))
+        .filter(({category, component}) => this._isCompliant({category, component}))
     }
 
     return componentsList
-            .filter(
-              ({category, component}) =>
-                category.includes(search) || component.includes(search)
-            )
+      .filter(
+        ({category, component}) =>
+          category.includes(search) || component.includes(search)
+      )
   }
 
   _isCompliant ({category, component}) {
@@ -45,41 +45,41 @@ export default class Navigation extends Component {
     let previousCategory = ''
 
     return filtered
-            .reduce((acc, link) => {
-              const {category, component} = link
-              if (previousCategory !== category) {
-                previousCategory = category
-                acc.push(
-                  <li
-                    className='sui-StudioNav-menuTitle'
-                    key={category}>
-                    {category}
-                  </li>
-                )
-              }
+      .reduce((acc, link) => {
+        const {category, component} = link
+        if (previousCategory !== category) {
+          previousCategory = category
+          acc.push(
+            <li
+              className='sui-StudioNav-menuTitle'
+              key={category}>
+              {category}
+            </li>
+          )
+        }
 
-              acc.push(
-                <li
-                  key={`${category}${component}`}>
-                  <Link
-                    activeClassName='sui-StudioNav-menuLink--active'
-                    className='sui-StudioNav-menuLink'
-                    onClick={handleClick}
-                    to={`/workbench/${category}/${component}`}
-                  >
-                    <div className='sui-StudioNav-menuLinkItem'>
-                      <span>{component}</span>
-                      {
-                        this._isCompliant({category, component}) &&
-                        <i className='sui-StudioNav-menuLinkItemStart'>{iconStart}</i>
-                      }
-                    </div>
-                  </Link>
-                </li>
-              )
+        acc.push(
+          <li
+            key={`${category}${component}`}>
+            <Link
+              activeClassName='sui-StudioNav-menuLink--active'
+              className='sui-StudioNav-menuLink'
+              onClick={handleClick}
+              to={`/workbench/${category}/${component}`}
+            >
+              <div className='sui-StudioNav-menuLinkItem'>
+                <span>{component}</span>
+                {
+                  this._isCompliant({category, component}) &&
+                  <i className='sui-StudioNav-menuLinkItemStart'>{iconStart}</i>
+                }
+              </div>
+            </Link>
+          </li>
+        )
 
-              return acc
-            }, [])
+        return acc
+      }, [])
   }
 
   shouldComponentUpdate (nextProps, nextState) {

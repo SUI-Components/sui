@@ -41,11 +41,11 @@ const cleanDisplayName = displayName => {
 const pipe = (...funcs) => arg => funcs.reduce((value, func) => func(value), arg)
 const removeDefaultContext = exports =>
   Object.keys(exports)
-  .filter(key => key !== DEFAULT_CONTEXT)
-  .reduce((acc, key) => {
-    acc[key] = exports[key]
-    return acc
-  }, {})
+    .filter(key => key !== DEFAULT_CONTEXT)
+    .reduce((acc, key) => {
+      acc[key] = exports[key]
+      return acc
+    }, {})
 
 export default class Demo extends Component {
   static bootstrapWith (demo, {category, component, style, themes}) {
