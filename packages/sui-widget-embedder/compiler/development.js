@@ -3,8 +3,8 @@ const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
 
 const htmlPluginPosition = devConfig.plugins
-    .map(p => p.constructor.toString())
-    .findIndex(string => string.match(/HtmlWebpackPlugin/))
+  .map(p => p.constructor.toString())
+  .findIndex(string => string.match(/HtmlWebpackPlugin/))
 
 module.exports = ({page}) => webpack({
   ...devConfig,

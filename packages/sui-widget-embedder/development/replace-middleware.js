@@ -37,8 +37,8 @@ module.exports = (req, res, next) => {
 
   res.write = (buff) => {
     !res.isHtml ? _write.call(res, buff)
-                : res.isGziped ? gunzip.write(buff)
-                               : _write.call(res, replace(buff))
+      : res.isGziped ? gunzip.write(buff)
+        : _write.call(res, replace(buff))
   }
 
   res.end = (buff) => {
