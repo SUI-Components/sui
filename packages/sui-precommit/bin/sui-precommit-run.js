@@ -8,5 +8,5 @@ serialSpawn([
   [BIN_PATH, ['sass']],
   ['npm', ['run', 'test']]
 ])
-.then(code => process.exit(code))
-.catch(code => process.exit(code))
+  .then(code => process.exit(code))
+  .catch(code => process.exit(code))
