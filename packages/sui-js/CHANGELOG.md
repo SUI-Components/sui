@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-01-17)
+
+
+### Bug Fixes
+
+* fixed linting errors ([e98f05f](https://github.com/SUI-Components/sui/commit/e98f05f))
+
+
+### Features
+
+* created the function fromSnakeToCamelCase and fromCamelToSnakeCase and made a little r ([64c4dee](https://github.com/SUI-Components/sui/commit/64c4dee))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-01-12)
 
