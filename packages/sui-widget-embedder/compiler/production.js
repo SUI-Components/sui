@@ -7,7 +7,7 @@ const MAIN_ENTRY_POINT = './index.js'
 const pipe = (...funcs) => arg => funcs.reduce((value, func) => func(value), arg)
 const removePlugin = name => plugins => {
   const pos = plugins.map(p => p.constructor.toString())
-                     .findIndex(string => string.match(name))
+    .findIndex(string => string.match(name))
   return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
 }
 

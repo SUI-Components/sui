@@ -13,5 +13,5 @@ serialSpawn([
   [devServerExec, ['-C'], {shell: false, cwd: join(__dirname, '..')}],
   ['cp', ['public/index.html', 'public/200.html']]
 ])
-.then(code => process.exit(code))
-.catch(code => process.exit(code))
+  .then(code => process.exit(code))
+  .catch(code => process.exit(code))

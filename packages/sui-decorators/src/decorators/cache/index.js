@@ -17,8 +17,8 @@ let caches = {}
 const _cache = ({ttl, target, fnName, instance, original, server, algorithm, host, port, segmentation, size} = {}) => {
   caches[fnName] = caches[fnName] ||
                 (algorithm === 'lru' ? new LRU({size})
-                : algorithm === 'lfu' ? new LFU({size})
-                : new Error(`[cv-decorators::cache] unknow algorithm: ${algorithm}`))
+                  : algorithm === 'lfu' ? new LFU({size})
+                    : new Error(`[cv-decorators::cache] unknow algorithm: ${algorithm}`))
 
   const cache = caches[fnName]
   const tracker = new Tracker({algorithm, host, port, fnName, segmentation})
@@ -44,7 +44,7 @@ const _cache = ({ttl, target, fnName, instance, original, server, algorithm, hos
     }
 
     return cache.get(key) !== undefined ? cache.get(key).returns
-                                        : original.apply(instance, args)
+      : original.apply(instance, args)
   }
 }
 

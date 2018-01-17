@@ -61,13 +61,13 @@ module.exports = {
             hasChangedFiles(path.join(packagesDir, pkg.name))
               .then(hasFiles => hasFiles && pkg)
           )))
-          .then(result => result.filter(Boolean))
-          .then((result) => {
-            if (typesWithOtherScopes.indexOf(answers.type) > -1) {
-              return result.concat(otherScopes)
-            }
-            return result
-          })
+            .then(result => result.filter(Boolean))
+            .then((result) => {
+              if (typesWithOtherScopes.indexOf(answers.type) > -1) {
+                return result.concat(otherScopes)
+              }
+              return result
+            })
         }
       },
       {
@@ -114,28 +114,28 @@ module.exports = {
         }
       }
     ])
-    .then(function (answers) {
-      if (answers.confirmCommit === 'edit') {
-        temp.open(null, function (err, info) {
-          if (err) { return }
+      .then(function (answers) {
+        if (answers.confirmCommit === 'edit') {
+          temp.open(null, function (err, info) {
+            if (err) { return }
 
-          fs.write(info.fd, buildCommit(answers))
-          fs.close(info.fd, function () {
-            editor(info.path, function (code, sig) {
-              if (code === 0) {
-                var commitStr = fs.readFileSync(info.path, { encoding: 'utf8' })
-                commit(commitStr)
-              } else {
-                console.log('Editor returned non zero value. Commit message was:\n' + buildCommit(answers))
-              }
+            fs.write(info.fd, buildCommit(answers))
+            fs.close(info.fd, function () {
+              editor(info.path, function (code, sig) {
+                if (code === 0) {
+                  var commitStr = fs.readFileSync(info.path, { encoding: 'utf8' })
+                  commit(commitStr)
+                } else {
+                  console.log('Editor returned non zero value. Commit message was:\n' + buildCommit(answers))
+                }
+              })
             })
           })
-        })
-      } else if (answers.confirmCommit === 'yes') {
-        commit(buildCommit(answers))
-      } else {
-        console.log('Commit has been canceled.')
-      }
-    })
+        } else if (answers.confirmCommit === 'yes') {
+          commit(buildCommit(answers))
+        } else {
+          console.log('Commit has been canceled.')
+        }
+      })
   }
 }

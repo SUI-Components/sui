@@ -19,12 +19,12 @@ export default /* stylesFor */ ({category, component, withTheme = 'default'} = {
         console.info('withTheme: ', withTheme)
 
         const stylePath = withTheme === 'default'
-                           ? `./${componentPath}/src/index.scss`
-                           : `./${componentPath}/themes/${withTheme}.scss`
+          ? `./${componentPath}/src/index.scss`
+          : `./${componentPath}/themes/${withTheme}.scss`
 
         const style = withTheme === 'default'
-                              ? reqComponentsSCSS(stylePath)
-                              : reqThemePlayGround(stylePath)
+          ? reqComponentsSCSS(stylePath)
+          : reqThemePlayGround(stylePath)
 
         console.info('style path: ', stylePath)
         console.info('style to inject: ', style)

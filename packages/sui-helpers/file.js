@@ -12,10 +12,10 @@ const writeFile = (path, content) => {
   return fse.outputFile(path, content).then(() => {
     console.log(colors.gray(`Created ${path}`)) // eslint-disable-line no-console
   })
-  .catch(err => {
-    showError(`Failed creating ${path}`)
-    throw new Error(err)
-  })
+    .catch(err => {
+      showError(`Failed creating ${path}`)
+      throw new Error(err)
+    })
 }
 
 /**
@@ -27,10 +27,10 @@ const removeFile = (path) => {
   return fse.remove(path).then(() => {
     console.log(colors.gray(`Removed ${path}`)) // eslint-disable-line no-console
   })
-  .catch(err => {
-    showError(`Failed removing ${path}`)
-    throw new Error(err)
-  })
+    .catch(err => {
+      showError(`Failed removing ${path}`)
+      throw new Error(err)
+    })
 }
 
 module.exports = { writeFile, removeFile }

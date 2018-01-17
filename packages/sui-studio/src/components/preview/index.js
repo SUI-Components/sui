@@ -52,9 +52,9 @@ export default class Preview extends Component {
 
   buildScope (mountNode) {
     return Object
-            .keys(this.props.scope)
-            .map(key => this.props.scope[key])
-            .concat(mountNode)
+      .keys(this.props.scope)
+      .map(key => this.props.scope[key])
+      .concat(mountNode)
   }
 
   executeCode () {

@@ -28,7 +28,7 @@ const EventsButtons = ({events, store, domain}) => {
               <Tab
                 handleClick={evt => {
                   store ? dispatchEvent({store, domain, useCase, params: events[useCase][event]})
-                        : executeUseCase({domain, useCase, params: events[useCase][event]})
+                    : executeUseCase({domain, useCase, params: events[useCase][event]})
                 }}
                 key={`${useCase}#${event}`}
                 literal={event}

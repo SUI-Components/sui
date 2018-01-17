@@ -9,8 +9,8 @@ const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
 const createUniversalPage = (contextFactory, routeInfo) => ({ default: Page }) => {
   // check if the Page page has a getInitialProps, if not put a resolve with an empty object
   Page.getInitialProps = typeof Page.getInitialProps === 'function'
-                                ? Page.getInitialProps
-                                : EMPTY_GET_INITIAL_PROPS
+    ? Page.getInitialProps
+    : EMPTY_GET_INITIAL_PROPS
   // check if we're on the client
   if (typeof window !== 'undefined') {
     // check if we have already data for this component on the window
@@ -26,7 +26,7 @@ const createUniversalPage = (contextFactory, routeInfo) => ({ default: Page }) =
     // TODO: Maybe this is no needed as we already have created it?
     return contextFactory(createClientContextFactoryParams())
       // now, we have to create the Page to be rendered on the client with all the info
-    .then(context => withInitialProps({ context, routeInfo })(Page))
+      .then(context => withInitialProps({ context, routeInfo })(Page))
   }
   // we're in the server, so return just the component and pass the initialProps from the context
   const ServerPage = (props, { initialProps = {} }) =>
