@@ -30,8 +30,13 @@ class ReactDocGen extends Component {
       const { defaultValue = {}, required, type, description } = propsApi[propName]
       const { value = undefined } = defaultValue
 
+      if (typeof type === 'undefined') {
+        console.warn('It seem that you might have a prop with a defaultValue but it does not exist as propType')
+        return
+      }
+
       return (
-        <div className='sui-StudioProps-prop' key='propName'>
+        <div className='sui-StudioProps-prop' key={propName}>
           <h3>{propName}</h3>
           <div className='sui-StudioProps-tags'>
             <div className='sui-StudioProps-tag sui-StudioProps-required'>
