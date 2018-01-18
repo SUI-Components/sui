@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.40.0"></a>
+# 4.40.0 (2018-01-18)
+
+
+### Bug Fixes
+
+* improve the separation if the tags are in more than one line ([827d91b](https://github.com/SUI-Components/sui/commit/827d91b))
+
+
+### Features
+
+* create neww variables for new layout ([4920565](https://github.com/SUI-Components/sui/commit/4920565))
+* remove old dependencies and add new ones needed ([2ce8572](https://github.com/SUI-Components/sui/commit/2ce8572))
+* tell the user that a prop has a defaultValue but not a propType and fix key ([e410bd9](https://github.com/SUI-Components/sui/commit/e410bd9))
+* use React components instead Markdown for Api page with new layout ([a00a0bf](https://github.com/SUI-Components/sui/commit/a00a0bf))
+* use snarkdown instead showdown and remove react-render-html dependency ([0ac37c7](https://github.com/SUI-Components/sui/commit/0ac37c7))
+
+
+
 <a name="4.39.0"></a>
 # 4.39.0 (2018-01-18)
 
