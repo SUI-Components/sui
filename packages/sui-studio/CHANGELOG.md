@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.39.0"></a>
+# 4.39.0 (2018-01-18)
+
+
+### Features
+
+* apply fullscreen mode ([4306a36](https://github.com/SUI-Components/sui/commit/4306a36))
+* force new release ([dc6f400](https://github.com/SUI-Components/sui/commit/dc6f400))
+
+
+
 <a name="4.37.0"></a>
 # 4.37.0 (2017-11-21)
 
