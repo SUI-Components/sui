@@ -15,9 +15,9 @@
     "lint": "sui-lint js && sui-lint sass",
     "test": "NODE_ENV=test npm run test:client && NODE_ENV=test npm run test:server",
     "test:ci": "NODE_ENV=test ./node_modules/.bin/karma start --single-run --browsers Firefox",
-    "test:client": "NODE_ENV=test karma start",
+    "test:client": "NODE_ENV=test karma start --single-run",
     "test:client:watch": "npm run test:client -- --no-single-run",
-    "test:server": "NODE_ENV=test mocha ./packages/*/test --require babel-core/register --recursive",
+    "test:server": "NODE_ENV=test mocha './packages/*/test/!(browser)/*.js' --require babel-core/register --recursive",
     "test:server:watch": "npm run test:server -- --watch",
     "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
     "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
@@ -46,7 +46,8 @@
     "karma-spec-reporter": "0.0.31",
     "mocha": "^4.0.1",
     "validate-commit-msg": "2.12.2",
-    "watchify": "3.9.0"
+    "sinon": "1.17.7",
+    "watchify": "3.8.0"
   },
   "config": {
     "sui-mono": {

@@ -7,7 +7,7 @@ import cache from '../../src/decorators/cache'
 import NodeTracker from '../../src/decorators/cache/tracker/NodeTracker'
 
 describe('Cache', () => {
-  xit('should ignore the cache in Node by default', () => {
+  it('should ignore the cache in Node by default', () => {
     class Buz {
       constructor () {
         this.rnd = () => Math.random()
@@ -75,7 +75,7 @@ describe('Cache', () => {
       expect(_sendSpy.notCalled).to.be.ok
     })
 
-    xit('NodeTracker must track to the server pass 20 seconds from the last track', () => {
+    it('NodeTracker must track to the server pass 20 seconds from the last track', () => {
       class Biz {
         constructor () {
           this.rnd = () => Math.random()
