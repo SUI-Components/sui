@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-01-26)
+
+
+### Features
+
+* created anemicModel to avoid unuseful code on our entities and valueobject ([c1ce9dc](https://github.com/SUI-Components/sui/commit/c1ce9dc))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2017-12-05)
 
