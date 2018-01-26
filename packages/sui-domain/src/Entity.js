@@ -1,5 +1,3 @@
-export default class Entity {
-  toJSON () {
-    throw new Error('[Entity#toJSON] must be implemented')
-  }
-}
+import AnemicModel from './AnemicModel'
+
+export default class Entity extends AnemicModel {}
