@@ -7,7 +7,7 @@ import cache from '../../src/decorators/cache'
 import NodeTracker from '../../src/decorators/cache/tracker/NodeTracker'
 
 describe('Cache', () => {
-  xit('should ignore the cache in Node by default', () => {
+  it('should ignore the cache in Node by default', () => {
     class Buz {
       constructor () {
         this.rnd = () => Math.random()

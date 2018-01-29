@@ -92,10 +92,11 @@ describe('Streamify', () => {
       } catch (e) {}
     })
 
-    xit('Notify Async errors', (done) => {
+    it('Notify Async errors', (done) => {
       const onError = ({params, error}) => {
         expect(params).to.be.eql([])
-        expect(error).to.be.eql('asyncThrowError')
+
+        expect(error).to.be.eql(new Error('throwError'))
         done()
       }
 

@@ -1,6 +1,5 @@
 var TARGET = process.env.npm_lifecycle_event
 var config = {
-  singleRun: true,
 
   basePath: '',
 
@@ -9,6 +8,10 @@ var config = {
   files: [
     'node_modules/babel-polyfill/browser.js',
     'packages/*/test/**/*Spec.js'
+  ],
+
+  exclude: [
+    'packages/*/test/server/*Spec.js'
   ],
 
   reporters: ['spec'],
@@ -21,7 +24,7 @@ var config = {
 
   // browserify configuration
   browserify: {
-    debug: true,
+    debug: false,
     transform: [
       ['babelify', {
         presets: ['sui']
