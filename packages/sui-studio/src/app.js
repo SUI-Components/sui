@@ -1,4 +1,3 @@
-import '@s-ui/polyfills'
 import React from 'react'
 import reactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
