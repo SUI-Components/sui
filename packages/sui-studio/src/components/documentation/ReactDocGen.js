@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component, Fragment } from 'react'
 import tryRequire from './try-require'
-const reactDocs = require('react-docgen')
 
 class ReactDocGen extends Component {
   static propTypes = {
@@ -11,12 +10,15 @@ class ReactDocGen extends Component {
     })
   }
 
-  state = { docs: false }
+  state = { docs: false, isReady: false }
 
   componentDidMount () {
-    tryRequire(this.props.params).then(([src, _]) =>
-      this.setState({ docs: reactDocs.parse(src) })
-    )
+    require.ensure([], (require) => {
+      const reactDocs = require('react-docgen')
+      tryRequire(this.props.params).then(src => {
+        this.setState({ docs: reactDocs.parse(src) })
+      })
+    }, 'ReactDocs')
   }
 
   _renderPropsApi ({ propsApi = {} }) {

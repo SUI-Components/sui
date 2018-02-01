@@ -15,9 +15,13 @@ export default class MarkdownFile extends Component {
 
   componentDidMount () {
     const {file} = this.props
-    tryRequire(this.props.params).then(([_, readme, changelog]) => {
-      this.setState({content: file === 'CHANGELOG' ? changelog : readme})
-    })
+    const section = file === 'CHANGELOG' ? 'changelog' : 'readme'
+
+    tryRequire({...this.props.params, section})
+      .then(content => {
+        console.log(content)
+        this.setState({ content })
+      })
   }
 
   render () {

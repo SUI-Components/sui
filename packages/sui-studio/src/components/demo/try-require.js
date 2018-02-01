@@ -16,12 +16,7 @@ const reqEventsPlayGround =
 const tryRequire = ({category, component}) => {
   const exports = new Promise(resolve => {
     require.ensure([], () => {
-      let bundler
-      try {
-        bundler = reqComponentsSrc(`./${category}/${component}/src/index.js`)
-      } catch (e) {
-        bundler = reqComponentsSrc(`./${category}/${component}/src/index.jsx`)
-      }
+      let bundler = reqComponentsSrc(`./${category}/${component}/src/index.js`)
       bundler(resolve)
     })
   })
@@ -41,7 +36,7 @@ const tryRequire = ({category, component}) => {
     require.ensure([], () => {
       try {
         const bundler = reqComponentsPlayGround(`./${category}/${component}/playground`)
-        bundler(playground => resolve(playground))
+        bundler(resolve)
       } catch (e) {
         return reject(e)
       }
@@ -52,7 +47,7 @@ const tryRequire = ({category, component}) => {
     require.ensure([], () => {
       try {
         const bundler = reqContextPlayGround(`./${category}/${component}/context.js`)
-        bundler(context => resolve(context))
+        bundler(resolve)
       } catch (e) {
         return resolve(false)
       }
@@ -63,7 +58,7 @@ const tryRequire = ({category, component}) => {
     require.ensure([], () => {
       try {
         const bundler = reqRouterPlayGround(`./${category}/${component}/routes.js`)
-        bundler(routes => resolve(routes))
+        bundler(resolve)
       } catch (e) {
         return resolve(false)
       }
@@ -74,29 +69,12 @@ const tryRequire = ({category, component}) => {
     require.ensure([], () => {
       try {
         const bundler = reqEventsPlayGround(`./${category}/${component}/events.js`)
-        bundler(events => resolve(events))
+        bundler(resolve)
       } catch (e) {
         return resolve(false)
       }
     })
   })
-
-  // const Component =
-  //   System.import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`)
-  //     .then(component => component.default)
-  //     .catch(e => System.import(`${__BASE_DIR__}/components/${category}/${component}/src/index.jsx`))
-
-  // const playground =
-  //   System.import(`raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`)
-  //     .catch(e => `return (<${Component.displayName || Component.name} />)`)
-
-  // const context =
-  //   System.import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-  //     .catch(e => false)
-
-  // const routes =
-  //   System.import(`${__BASE_DIR__}/demo/${category}/${component}/routes.js`)
-  //     .catch(e => false)
 
   return Promise.all([exports, playground, context, routes, events, pkg])
 }
