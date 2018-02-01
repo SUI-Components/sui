@@ -48,6 +48,7 @@ const cleanDisplayName = displayName => {
 }
 const pipe = (...funcs) => arg =>
   funcs.reduce((value, func) => func(value), arg)
+
 const removeDefaultContext = exports =>
   Object.keys(exports)
     .filter(key => key !== DEFAULT_CONTEXT)

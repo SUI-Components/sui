@@ -29,7 +29,6 @@
     "@s-ui/deploy": "1",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
-    "@s-ui/polyfills": "1",
     "@s-ui/react-domain-connector": "1",
     "@schibstedspain/ddd-react-redux": "2",
     "bundle-loader": "0.5.4",
@@ -55,8 +54,7 @@
   "suistudio-webpack": {
     "vendor": [
       "react",
-      "react-dom",
-      "@s-ui/polyfills"
+      "react-dom"
     ]
   },
   "repository": {
