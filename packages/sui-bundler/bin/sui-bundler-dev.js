@@ -14,7 +14,6 @@ const config = require('../webpack.config.dev')
 const bundler = webpack(config)
 
 console.log('📦  Bundler Dev Server')
-
 // Don't show ugly deprecation warnings that mess with the logging
 process.noDeprecation = true
 
@@ -39,18 +38,22 @@ function getPortAvailable ({ port }) {
 }
 
 function listenBundlerEvents ({ bundler, spinner }) {
-  bundler.plugin('compile', _ => spinner.start(`Building bundle with Webpack`))
+  bundler.plugin('compile', _ => {
+    spinner.start(`Building bundle with Webpack`)
+  })
+
   bundler.plugin('done', stats => {
     const info = stats.toJson()
+    const { time } = info
 
     if (stats.hasErrors()) {
       spinner.fail('Build failed')
       info.errors.forEach(console.error)
     } else if (stats.hasWarnings()) {
-      spinner.info('Build succeeded with warnings')
+      spinner.info(`Build succeeded with warnings in ${time}ms`)
       info.warnings.forEach(console.warn)
     } else {
-      spinner.succeed('Build succeed!')
+      spinner.succeed(`Build succeed in ${time}ms`)
     }
 
     spinner.info('Waiting for new changes...')
