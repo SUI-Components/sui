@@ -1,4 +1,5 @@
-const { readdirSync, statSync } = require('fs')
+const readdirSync = require('fs').readdirSync
+const statSync = require('fs').statSync
 const path = require('path')
 
 const onlyFolders = (filePath) => statSync(filePath).isDirectory()
