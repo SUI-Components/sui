@@ -18,7 +18,7 @@ class ReactDocGen extends Component {
       tryRequire(this.props.params).then(([src, _]) =>
         this.setState({ docs: reactDocs.parse(src) })
       )
-    })
+    }, 'ReactDocgen')
   }
 
   _renderPropsApi ({ propsApi = {} }) {
