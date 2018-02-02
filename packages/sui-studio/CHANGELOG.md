@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.43.0"></a>
+# 4.43.0 (2018-02-02)
+
+
+### Bug Fixes
+
+* fix released package version for studio ([79bd317](https://github.com/SUI-Components/sui/commit/79bd317))
+* fix wrong releasse for sui-studio ([2abb541](https://github.com/SUI-Components/sui/commit/2abb541))
+
+
+
+<a name="4.42.0"></a>
+# 4.42.0 (2018-02-01)
+
+
+### Features
+
+* add babel-polyfill from cdn as well ([a2a9de1](https://github.com/SUI-Components/sui/commit/a2a9de1))
+* use babel-polyfill instead [@s-ui](https://github.com/s-ui)/polyfill for supporting IE11 ([13ae558](https://github.com/SUI-Components/sui/commit/13ae558))
+
+
+### Performance Improvements
+
+* preloadd babel-polyfill ([f9cdab5](https://github.com/SUI-Components/sui/commit/f9cdab5))
+
+
+
 <a name="4.41.0"></a>
 # 4.41.0 (2018-01-26)
 
@@ -83,7 +110,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* polyfills as vendor ([1b7561b](https://github.com/SUI-Components/sui/commit/1b7561b)), closes [#134](https://github.com/SUI-Components/sui/issues/134)
+* polyfills as vendor ([1b7561b](https://github.com/SUI-Components/sui/commit/1b7561b))
 
 
 
@@ -103,7 +130,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fix indentatio in generate command ([ed87db0](https://github.com/SUI-Components/sui/commit/ed87db0)), closes [#114](https://github.com/SUI-Components/sui/issues/114)
+* fix indentatio in generate command ([ed87db0](https://github.com/SUI-Components/sui/commit/ed87db0))
 * generate deps without "latest" ([1bca514](https://github.com/SUI-Components/sui/commit/1bca514))
 
 
@@ -222,7 +249,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* don't rely on the clipboard to set deployment alias ([9a001d3](https://github.com/SUI-Components/sui/commit/9a001d3)), closes [#29](https://github.com/SUI-Components/sui/issues/29)
+* don't rely on the clipboard to set deployment alias ([9a001d3](https://github.com/SUI-Components/sui/commit/9a001d3))
 
 
 
@@ -247,9 +274,9 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add alias set to now deploys ([3c82722](https://github.com/SUI-Components/sui/commit/3c82722)), closes [#92](https://github.com/SUI-Components/sui/issues/92)
-* add deploy command using now.sh service ([2927bc0](https://github.com/SUI-Components/sui/commit/2927bc0)), closes [#92](https://github.com/SUI-Components/sui/issues/92)
-* add detailed props description in documentation ([94c120a](https://github.com/SUI-Components/sui/commit/94c120a)), closes [#29](https://github.com/SUI-Components/sui/issues/29)
+* add alias set to now deploys ([3c82722](https://github.com/SUI-Components/sui/commit/3c82722))
+* add deploy command using now.sh service ([2927bc0](https://github.com/SUI-Components/sui/commit/2927bc0))
+* add detailed props description in documentation ([94c120a](https://github.com/SUI-Components/sui/commit/94c120a))
 * add table support to mardown views ([cf7596c](https://github.com/SUI-Components/sui/commit/cf7596c))
 * build: create 200.html for PWA ([e68d772](https://github.com/SUI-Components/sui/commit/e68d772))
 
@@ -261,7 +288,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add CHANGELOG tab ([dafe396](https://github.com/SUI-Components/sui/commit/dafe396)), closes [#27](https://github.com/SUI-Components/sui/issues/27)
+* add CHANGELOG tab ([dafe396](https://github.com/SUI-Components/sui/commit/dafe396))
 
 
 
@@ -283,7 +310,7 @@ All notable changes to this project will be documented in this file.
 
 * disabling on the fly loaded style ([acf766a](https://github.com/SUI-Components/sui/commit/acf766a))
 * easier disabling, link update ([ada8bc6](https://github.com/SUI-Components/sui/commit/ada8bc6))
-* search for component.js just in case ([8b2b78e](https://github.com/SUI-Components/sui/commit/8b2b78e)), closes [#76](https://github.com/SUI-Components/sui/issues/76)
+* search for component.js just in case ([8b2b78e](https://github.com/SUI-Components/sui/commit/8b2b78e))
 
 
 ### Features
@@ -298,7 +325,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* update elements z-index ([6a2b16e](https://github.com/SUI-Components/sui/commit/6a2b16e)), closes [#56](https://github.com/SUI-Components/sui/issues/56)
+* update elements z-index ([6a2b16e](https://github.com/SUI-Components/sui/commit/6a2b16e))
 
 
 ### Features
@@ -350,7 +377,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* command: sui-studio run-all ([cbff577](https://github.com/SUI-Components/sui/commit/cbff577)), closes [#21](https://github.com/SUI-Components/sui/issues/21)
+* command: sui-studio run-all ([cbff577](https://github.com/SUI-Components/sui/commit/cbff577))
 
 
 
@@ -377,7 +404,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * migrate to sui-bundler ([1abc9a3](https://github.com/SUI-Components/sui/commit/1abc9a3))
-* update from origin repo ([5b5f1be](https://github.com/SUI-Components/sui/commit/5b5f1be)), closes [#62](https://github.com/SUI-Components/sui/issues/62) [#63](https://github.com/SUI-Components/sui/issues/63)
+* update from origin repo ([5b5f1be](https://github.com/SUI-Components/sui/commit/5b5f1be))
 
 
 
