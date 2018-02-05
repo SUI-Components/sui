@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.44.0"></a>
+# 4.44.0 (2018-02-05)
+
+
+### Features
+
+* name chunk for reactdocgen ([425ed27](https://github.com/SUI-Components/sui/commit/425ed27))
+
+
+### Performance Improvements
+
+* load chunk of React Doc Gen only when needed ([e191517](https://github.com/SUI-Components/sui/commit/e191517))
+
+
+
 <a name="4.43.0"></a>
 # 4.43.0 (2018-02-02)
 
