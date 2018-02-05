@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.12.0"></a>
+# 2.12.0 (2018-02-05)
+
+
+### Features
+
+* show the time used for dev bundling ([5ffb110](https://github.com/SUI-Components/sui/commit/5ffb110))
+* use new modules use rules ([cafb5bb](https://github.com/SUI-Components/sui/commit/cafb5bb))
+
+
+
 <a name="2.11.0"></a>
 # 2.11.0 (2017-12-28)
 
