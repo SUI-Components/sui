@@ -6,8 +6,6 @@ const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
 const fs = require('fs-extra')
-const browserSync = require('browser-sync')
-const historyApiFallback = require('connect-history-api-fallback')
 const config = require('../webpack.config.prod')
 const {config: projectConfig} = require('../shared')
 
@@ -19,7 +17,6 @@ const chalkWarning = chalk.yellow
 const chalkProcessing = chalk.blue
 
 program
-  .option('-S, --server', 'server in local your production ready assets')
   .option('-C, --clean', 'Remove public folder before create a new one')
   .on('--help', () => {
     console.log('  Examples:')
@@ -31,7 +28,7 @@ program
   })
   .parse(process.argv)
 
-const {server = false, clean = false} = program
+const {clean = false} = program
 
 process.env.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
 
@@ -69,24 +66,6 @@ webpack(config).run((error, stats) => {
   }
 
   console.log(chalkSuccess('Your app is compiled in production mode in /public. It\'s ready to roll!'))
-  if (server) {
-    console.log(chalkProcessing('Opening production build...'))
-    browserSync({
-      port: process.env.PORT || 4000,
-      ui: {
-        port: (parseInt(process.env.PORT, 10) + 1) || 4001
-      },
-      server: {
-        baseDir: path.resolve(process.env.PWD, 'public')
-      },
-
-      files: [
-        'src/*.html'
-      ],
-
-      middleware: [historyApiFallback()]
-    })
-  }
 
   return 0
 })

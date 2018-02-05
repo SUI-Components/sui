@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/component-peer-dependencies",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A set of dependencies for hosts of sui components.",
   "keywords": [
     "bundle",
@@ -11,9 +11,10 @@
   "license": "MIT",
   "dependencies": {
     "prop-types": "15.6",
-    "react": "15.4",
-    "react-dom": "15.4",
-    "react-router": "2"
+    "react": "16",
+    "react-dom": "16",
+    "react-router": "3",
+    "react-helmet": "5"
   },
   "repository": {
     "type": "git",

@@ -1,31 +1,55 @@
 .sui-StudioProps {
-  td {
-    padding-bottom: 8px;
-    padding-right: 32px;
-    padding-top: 8px;
+  &-prop {
+    padding-left: 16px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $c-gray-light;
+      padding-bottom: 16px;
+    }
   }
 
-  &-head {
+  &-tag {
+    display: inline-flex;
+    margin-bottom: 8px;
+    margin-right: 16px;
+  }
+
+  &-tag span {
+    background: $bgc-tag;
+    border-radius: 3px;
     color: $c-gray;
-    font-size: $fz-l;
-    font-weight: 100;
-  }
-
-  &-property {
-    color: $c-gray-dark;
-    font-size: $fz-m;
-  }
-
-  &-type {
-    font-family: monospace;
-  }
-
-  &-required {
-    background-color: $c-gray-lightest;
-    color: $c-black;
     font-size: $fz-s;
-    font-weight: 600;
-    padding: 4px;
-    vertical-align: top;
+    font-weight: $fw-ultra-light;
+    padding: 4px 8px;
+
+    &:not(:last-child) {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  &-required span:last-child {
+    background: $c-green;
+    color: $c-white;
+
+    &.is-required {
+      background: $c-accent;
+    }
+  }
+
+  &-default span:last-child {
+    background: $c-green;
+    color: $c-white;
+  }
+
+  &-type span:last-child {
+    background: $c-primary;
+    color: $c-white;
+    font-family: monospace;
   }
 }

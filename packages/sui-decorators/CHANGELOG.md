@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2018-01-12)
+
+
+### Features
+
+* use new md5 sui-js library in sui-decorators ([426d6f9](https://github.com/SUI-Components/sui/commit/426d6f9))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-11-14)
 
@@ -29,6 +39,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([1980877](https://github.com/SUI-Components/sui/commit/1980877))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* add package.json ([63e3529](https://github.com/SUI-Components/sui/commit/63e3529))
 
 
 

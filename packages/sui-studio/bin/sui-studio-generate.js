@@ -74,17 +74,17 @@ Component is created without those fields.`.yellow)
 
 Promise.all([
   writeFile(
-  COMPONENT_PACKAGE_GITIGNORE_FILE,
-  `lib
+    COMPONENT_PACKAGE_GITIGNORE_FILE,
+    `lib
 node_modules`),
 
   writeFile(
-  COMPONENT_PACKAGE_NPMIGNORE_FILE,
-  `src`),
+    COMPONENT_PACKAGE_NPMIGNORE_FILE,
+    `src`),
 
   writeFile(
-  COMPONENT_PACKAGE_JSON_FILE,
-  `{
+    COMPONENT_PACKAGE_JSON_FILE,
+    `{
   "name": "${packageName}",
   "version": "1.0.0",
   "description": "",
@@ -103,11 +103,11 @@ node_modules`),
     "url": "${repository.url}"
   },`
     : ''
-  }${homepage
-    ? `
+}${homepage
+  ? `
     "homepage": "${homepage.replace('/master', `/master${COMPONENT_DIR}`)}",`
-    : ''
-  }
+  : ''
+}
   "keywords": [],
   "author": "",
   "license": "MIT"
@@ -115,8 +115,8 @@ node_modules`),
   ),
 
   writeFile(
-  COMPONENT_ENTRY_JS_POINT_FILE,
-  `import React, {Component} from 'react'
+    COMPONENT_ENTRY_JS_POINT_FILE,
+    `import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 class ${componentInPascal} extends Component {
@@ -137,19 +137,19 @@ ${componentInPascal}.displayName = '${componentInPascal}'
 // ${componentInPascal}.defaultProps = {}
 
 export default ${componentInPascal}`
-),
+  ),
 
   writeFile(
-  COMPONENT_ENTRY_SCSS_POINT_FILE,
-  `@import '~@schibstedspain/theme-basic/lib/index';
+    COMPONENT_ENTRY_SCSS_POINT_FILE,
+    `@import '~@schibstedspain/sui-theme/lib/index';
 
 .${prefix}-${componentInPascal} {
   // Do your magic
 }`),
 
   writeFile(
-  COMPONENT_README_FILE,
-  `# ${componentInPascal}
+    COMPONENT_README_FILE,
+    `# ${componentInPascal}
 
 > Description
 
@@ -179,8 +179,8 @@ return (<${componentInPascal} />)
   ),
 
   router && writeFile(
-  COMPONENT_ROUTES_FILE,
-  `module.exports = {
+    COMPONENT_ROUTES_FILE,
+    `module.exports = {
   pattern: '/:lang',
   'default': '/es',
   'en': '/en',
@@ -188,21 +188,21 @@ return (<${componentInPascal} />)
 }`),
 
   context && writeFile(
-  COMPONENT_CONTEXT_FILE,
-  `module.exports = {
+    COMPONENT_CONTEXT_FILE,
+    `module.exports = {
   'default': {
     i18n: {t (s) { return s.split('').reverse().join('') }}
   }
 }`)
 ])
-.then(() => {
-  console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
-  const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
+  .then(() => {
+    console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
+    const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
 
-  install.stdout.on('data',
-    data => console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
-  )
-  install.stderr.on('data',
-    data => console.log(colors.red(`[${packageName}]: ${data.toString()}`))
-  )
-})
+    install.stdout.on('data',
+      data => console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
+    )
+    install.stderr.on('data',
+      data => console.log(colors.red(`[${packageName}]: ${data.toString()}`))
+    )
+  })

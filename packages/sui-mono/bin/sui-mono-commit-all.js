@@ -7,9 +7,9 @@ const config = require('../src/config')
 const { getSpawnPromise, showError } = require('@s-ui/helpers/cli')
 
 program
-.usage('-m "My commit message"')
-.option('-m, --message "<message>"', 'Commit message')
-.option('-t, --type "<commit-type>"', 'Commit type')
+  .usage('-m "My commit message"')
+  .option('-m, --message "<message>"', 'Commit message')
+  .option('-t, --type "<commit-type>"', 'Commit type')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')

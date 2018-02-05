@@ -95,11 +95,11 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 }
 
 releasesByPackages()
-       .then(releases =>
-          releases
-            .filter(({code}) => code !== 0)
-            .map(release => () => releaseEachPkg(release))
-            // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
-            .reduce((m, p) => m.then(v => Promise.all([...v, p()])), Promise.resolve([]))
-        )
-       .catch(console.log.bind(console))
+  .then(releases =>
+    releases
+      .filter(({code}) => code !== 0)
+      .map(release => () => releaseEachPkg(release))
+    // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
+      .reduce((m, p) => m.then(v => Promise.all([...v, p()])), Promise.resolve([]))
+  )
+  .catch(console.log.bind(console))

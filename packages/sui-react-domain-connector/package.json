@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/react-domain-connector",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Connect any React component to your domain use cases",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "rm -Rf lib && babel ./src -d lib",
+    "lib": "rm -Rf lib && babel --presets sui ./src --out-dir ./lib",
     "prepublish": "npm run lib"
   },
   "keywords": [],
@@ -15,11 +15,6 @@
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1",
     "react": "15.6"
-  },
-  "babel": {
-    "presets": [
-      "sui"
-    ]
   },
   "peerDependencies": {
     "react": "15 || 16",

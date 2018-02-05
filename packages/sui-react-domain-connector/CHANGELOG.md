@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2017-12-03)
+
+
+### Bug Fixes
+
+* avoid using preset on package.json to fix problems with React Nativ ([09cd01d](https://github.com/SUI-Components/sui/commit/09cd01d))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2017-11-15)
 
@@ -49,16 +59,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * 🌈 Migrate package ([a02f295](https://github.com/SUI-Components/sui/commit/a02f295))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* add package.json ([541f16d](https://github.com/SUI-Components/sui/commit/541f16d))
 
 
 

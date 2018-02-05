@@ -14,7 +14,7 @@ const getMarkdownFile = (category, component, fileName) => new Promise(resolve =
   require.ensure([], () => {
     try {
       const bundler = reqComponentsMarkdown(`./${category}/${component}/${fileName}.md`)
-      bundler(src => resolve(src))
+      bundler(resolve)
     } catch (e) {
       return resolve(`### ${category}/${component} does not contain any ${fileName}.md file`)
     }
@@ -39,7 +39,7 @@ const tryRequire = ({category, component}) => {
         bundler = reqComponentsSrcIndex(`./${category}/${component}/src/index.jsx`)
       }
 
-      bundler(src => resolve(src))
+      bundler(resolve)
     })
   })
 

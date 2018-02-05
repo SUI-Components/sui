@@ -14,7 +14,7 @@ const render = Component =>
   ReactDOM.render(
     <AppContainer>
       <Component />
-    </ AppContainer>,
+    </AppContainer>,
     document.getElementById('root')
   )
 render(Hello)

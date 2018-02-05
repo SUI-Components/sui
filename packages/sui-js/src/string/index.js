@@ -1,4 +1,2 @@
-import accents from 'remove-accents'
-
-export const hasAccents = accents.has
-export const removeAccents = accents.remove
+export { fromSnakeToCamelCase, fromCamelToSnakeCase } from './snake-case'
+export { has as hasAccents, remove as removeAccents } from 'remove-accents'

@@ -2,6 +2,88 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.44.0"></a>
+# 4.44.0 (2018-02-05)
+
+
+### Features
+
+* name chunk for reactdocgen ([425ed27](https://github.com/SUI-Components/sui/commit/425ed27))
+
+
+### Performance Improvements
+
+* load chunk of React Doc Gen only when needed ([e191517](https://github.com/SUI-Components/sui/commit/e191517))
+
+
+
+<a name="4.43.0"></a>
+# 4.43.0 (2018-02-02)
+
+
+### Bug Fixes
+
+* fix released package version for studio ([79bd317](https://github.com/SUI-Components/sui/commit/79bd317))
+* fix wrong releasse for sui-studio ([2abb541](https://github.com/SUI-Components/sui/commit/2abb541))
+
+
+
+<a name="4.42.0"></a>
+# 4.42.0 (2018-02-01)
+
+
+### Features
+
+* add babel-polyfill from cdn as well ([a2a9de1](https://github.com/SUI-Components/sui/commit/a2a9de1))
+* use babel-polyfill instead [@s-ui](https://github.com/s-ui)/polyfill for supporting IE11 ([13ae558](https://github.com/SUI-Components/sui/commit/13ae558))
+
+
+### Performance Improvements
+
+* preloadd babel-polyfill ([f9cdab5](https://github.com/SUI-Components/sui/commit/f9cdab5))
+
+
+
+<a name="4.41.0"></a>
+# 4.41.0 (2018-01-26)
+
+
+### Performance Improvements
+
+* use babel-standalone from cdn instead as package dependency ([2c2dc9d](https://github.com/SUI-Components/sui/commit/2c2dc9d))
+
+
+
+<a name="4.40.0"></a>
+# 4.40.0 (2018-01-18)
+
+
+### Bug Fixes
+
+* improve the separation if the tags are in more than one line ([827d91b](https://github.com/SUI-Components/sui/commit/827d91b))
+
+
+### Features
+
+* create neww variables for new layout ([4920565](https://github.com/SUI-Components/sui/commit/4920565))
+* remove old dependencies and add new ones needed ([2ce8572](https://github.com/SUI-Components/sui/commit/2ce8572))
+* tell the user that a prop has a defaultValue but not a propType and fix key ([e410bd9](https://github.com/SUI-Components/sui/commit/e410bd9))
+* use React components instead Markdown for Api page with new layout ([a00a0bf](https://github.com/SUI-Components/sui/commit/a00a0bf))
+* use snarkdown instead showdown and remove react-render-html dependency ([0ac37c7](https://github.com/SUI-Components/sui/commit/0ac37c7))
+
+
+
+<a name="4.39.0"></a>
+# 4.39.0 (2018-01-18)
+
+
+### Features
+
+* apply fullscreen mode ([4306a36](https://github.com/SUI-Components/sui/commit/4306a36))
+* force new release ([dc6f400](https://github.com/SUI-Components/sui/commit/dc6f400))
+
+
+
 <a name="4.37.0"></a>
 # 4.37.0 (2017-11-21)
 

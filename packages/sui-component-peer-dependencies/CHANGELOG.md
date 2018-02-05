@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2018-01-15)
+
+
+### Features
+
+* force new release ([dc6f400](https://github.com/SUI-Components/sui/commit/dc6f400))
+
+
+
+<a name="1.4.0"></a>
+# 1.4.0 (2018-01-15)
+
+
+### Bug Fixes
+
+* react-Routerv3 ([bff9688](https://github.com/SUI-Components/sui/commit/bff9688))
+
+
+### Features
+
+* bump 1.4.0-beta.1 ([3c11fd5](https://github.com/SUI-Components/sui/commit/3c11fd5))
+* bump react-helmet to 5 ([64757ca](https://github.com/SUI-Components/sui/commit/64757ca))
+* bump to React 16 ([233cde3](https://github.com/SUI-Components/sui/commit/233cde3))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-11-07)
 

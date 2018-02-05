@@ -1,7 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-document.body.innerHTML += '<div id="root"></div>'
-export default function render (root) {
-  ReactDOM.render(<div>{root}</div>, document.querySelector('#root'))
+export default function render (root, id = 'root') {
+  if (!document.getElementById(id)) {
+    const element = document.createElement('div')
+    element.setAttribute('id', id)
+    document.body.appendChild(element)
+  }
+
+  ReactDOM.render(<div>{root}</div>, document.getElementById(id))
 }

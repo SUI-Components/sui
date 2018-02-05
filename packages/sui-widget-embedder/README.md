@@ -35,7 +35,7 @@ Your project must follow the following folder structure:
 ```
 "config": {
   "sui-widget-embedder": {
-    "cdn": "http://cdn-widgets-vibbo.surge.sh",
+    "remoteCdn": "http://cdn-widgets-vibbo-pro.surge.sh",
     "devPort": "2017",
     "target": "https://vibbo.com"
   }
@@ -44,8 +44,8 @@ Your project must follow the following folder structure:
 
 Inside your project-level package.json, you must config the library,
 
-* cdn [REQUIRED]: the base path of the cdn where your assets will be located
-* devPor [OPTIONAL] (DEFAULT=3000): Port where your development server will be listening
+* remoteCdn [REQUIRED]: the base path of the cdn where your assets will be located
+* devPort [OPTIONAL] (DEFAULT=3000): Port where your development server will be listening
 * target [REQUIRED]: protocol and host from the site that you want to develop
 
 ### page config
@@ -81,7 +81,7 @@ import render from '@s-ui/widget-embedder/react/render'
 * Widget: React component that renders the children as a new React tree in another place of the page.
 ** i18n: I18n library
 ** domain: Domain library for your widgets
-** node: css path that indicates where you want create the new React tree
+** node: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
 
 ## Installation
 
@@ -92,7 +92,28 @@ npm install @s-ui/widget-embedder --save
 # CLI
 
 ```
+$ sui-widget-embedder dev -p detail
+```
+
+Now you can go to `localhost:[port_setting]` and navegate inside the page with a proxy enabled
+
+```
 $ sui-widget-embedder dev -p detail /vivienda/malaga-capital/aire-acondicionado-terraza-trastero-ascensor-el-ejido-la-merced-la-victoria-144577108
+```
+When you provide a path like last argument to the CLI you must go to `localhost:[port_setting]/static` to have a static version of the page
+
+# How to build
+
+If you want to get the remoteCdn from package config you just need to do that:
+
+```
+$ sui-widget-embedder build
+```
+
+If you want to define the remoteCdn by command option you can pass it using the param -R or --remoteCdn
+
+```
+$ sui-widget-embedder build -R http://mycdn.com
 ```
 
 ## Contributing

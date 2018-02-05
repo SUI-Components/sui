@@ -1,6 +1,6 @@
 // --- Colors --- //
 $c-primary: #09f !default;
-
+$c-accent: #ff3860 !default;
 $c-white: #ffffff !default;
 $c-white-light: lighten($c-white, 33%) !default;
 
@@ -11,9 +11,13 @@ $c-gray-dark: darken($c-gray, 20%) !default;
 $c-gray-light: lighten($c-gray, 33%) !default;
 $c-gray-lightest: lighten($c-gray-light, 15%) !default;
 
+$c-green: #23d160  !default;
+
 $c-font-base: $c-gray-dark !default;
 $c-font-accent: $c-primary !default;
 $c-font-link: $c-font-accent !default;
+
+$bgc-tag: #eeeeee;
 
 // --- Fonts --- //
 
@@ -21,6 +25,7 @@ $c-font-link: $c-font-accent !default;
 $ff-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 
 // Font weights
+$fw-ultra-light: 100 !default;
 $fw-light: 300 !default;
 $fw-regular: 400 !default;
 $fw-semi-bold: 600 !default;

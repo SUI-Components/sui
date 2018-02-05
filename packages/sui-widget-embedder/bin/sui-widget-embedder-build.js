@@ -4,18 +4,26 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
-const {resolve} = require('path')
-const {readdirSync, statSync, createReadStream, createWriteStream} = require('fs')
-const {showError} = require('@s-ui/helpers/cli')
+const flatten = require('just-flatten-it')
+const { resolve } = require('path')
+const {
+  readdirSync,
+  statSync,
+  createReadStream,
+  createWriteStream
+} = require('fs')
+const { showError } = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
 const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
-const config = require(resolve(process.cwd(), 'package.json'))['config']['sui-widget-embedder']
+const pkg = require(resolve(process.cwd(), 'package.json'))
+const config = pkg['config']['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
+  .option('-R --remoteCdn <url>', 'Remote url where the downloader will be placed')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -25,19 +33,26 @@ program
     console.log('')
     console.log('    $ sui-widget-embedder build')
     console.log('')
+    console.log(' You can even choose where should the downloader going to get the files:')
+    console.log('    $ sui-widget-embedder build -remoteCdn http://mysourcedomain.com')
+    console.log('')
   })
   .parse(process.argv)
+
+const remoteCdn = program.remoteCdn || config.remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
   rimraf.sync(PUBLIC_PATH)
 }
 
-const build = ({page}) => {
-  const compiler = compilerFactory({page})
+const build = ({ page }) => {
+  const compiler = compilerFactory({ page })
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
-      if (error) { reject(error) }
+      if (error) {
+        reject(error)
+      }
 
       const jsonStats = stats.toJson()
 
@@ -56,36 +71,101 @@ const build = ({page}) => {
   })
 }
 
-const pagesFor = ({path}) =>
-  readdirSync(path)
-    .filter(file => statSync(resolve(path, file)).isDirectory())
+const pagesFor = ({ path }) =>
+  readdirSync(path).filter(file => statSync(resolve(path, file)).isDirectory())
 
-const createDownloader = () => {
-  const manifests = pagesFor({path: PUBLIC_PATH}).reduce((acc, page) => {
-    acc[page] = require(resolve(process.cwd(), 'public', page, 'asset-manifest.json'))
+const manifests = () =>
+  pagesFor({ path: PUBLIC_PATH }).reduce((acc, page) => {
+    acc[page] = require(resolve(
+      process.cwd(),
+      'public',
+      page,
+      'asset-manifest.json'
+    ))
     return acc
   }, {})
-  const pathnamesRegExp = pagesFor({path: WIDGETS_PATH}).reduce((acc, page) => {
-    acc[page] = require(resolve(process.cwd(), 'widgets', page, 'package.json')).pathnameRegExp
+
+const pathnamesRegExp = () =>
+  pagesFor({ path: WIDGETS_PATH }).reduce((acc, page) => {
+    acc[page] = require(resolve(
+      process.cwd(),
+      'widgets',
+      page,
+      'package.json'
+    )).pathnameRegExp
     return acc
   }, {})
 
-  createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
-    .pipe(
-      staticModule({
-        'static-manifests': () => JSON.stringify(manifests),
-        'static-pathnamesRegExp': () => JSON.stringify(pathnamesRegExp),
-        'static-cdn': () => JSON.stringify(config.cdn)
+const createDownloader = () =>
+  // eslint-disable-next-line
+  new Promise((res, rej) => {
+    const staticManifests = manifests()
+    const staticPathnamesRegExp = pathnamesRegExp()
+    createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
+      .pipe(
+        staticModule({
+          'static-manifests': () => JSON.stringify(staticManifests),
+          'static-pathnamesRegExp': () => JSON.stringify(staticPathnamesRegExp),
+          'static-cdn': () => JSON.stringify(remoteCdn)
+        })
+      )
+      .pipe(minifyStream({ sourceMap: false }))
+      .pipe(
+        createWriteStream(resolve(process.cwd(), 'public', 'downloader.js'))
+          .on('finish', () => {
+            console.log('Create a new downloader.js file')
+            res()
+          })
+          .on('error', rej)
+      )
+      .on('error', rej)
+  })
+
+const createSW = () =>
+  // eslint-disable-next-line
+  new Promise((res, rej) => {
+    const filename = 'workbox-sw.prod.v2.1.2'
+    const staticManifests = manifests()
+    const staticCache = flatten(
+      Object.keys(staticManifests).map(page => {
+        const manifest = staticManifests[page]
+        return Object.keys(manifest)
+          .map(entry => `${remoteCdn}/${page}/${manifest[entry]}`)
+          .filter(url => !url.endsWith('.map'))
       })
     )
-    .pipe(minifyStream({sourceMap: false}))
-    .pipe(createWriteStream(resolve(process.cwd(), 'public', 'downloader.js')))
-  console.log('Create a new downloader.js file')
-}
+    const workboxImportPath = require.resolve(
+      `workbox-sw/build/importScripts/${filename}`
+    )
 
-Promise.all(
-  pagesFor({path: WIDGETS_PATH})
-    .map(page => build({page}))
-)
-.then(createDownloader)
-.catch(showError)
+    createReadStream(resolve(__dirname, '..', 'downloader', 'sw.js'))
+      .pipe(
+        staticModule({
+          'static-cache': () => JSON.stringify(staticCache),
+          'static-cdn': () => JSON.stringify(remoteCdn)
+        })
+      )
+      .pipe(minifyStream({ sourceMap: false }))
+      .pipe(
+        createWriteStream(resolve(process.cwd(), 'public', 'sw.js')).on(
+          'finish',
+          () => {
+            createReadStream(workboxImportPath).pipe(
+              createWriteStream(resolve(process.cwd(), 'public', filename)).on(
+                'finish',
+                () => {
+                  console.log('Create a new sw.js file')
+                  res()
+                }
+              )
+            )
+          }
+        )
+      )
+      .on('error', rej)
+  })
+
+Promise.all(pagesFor({ path: WIDGETS_PATH }).map(page => build({ page })))
+  .then(createDownloader)
+  .then(createSW)
+  .catch(showError)

@@ -75,7 +75,7 @@ describe('Cache', () => {
       expect(_sendSpy.notCalled).to.be.ok
     })
 
-    it('NodeTracker must track to the server pass 20 seconds from the last track', () => {
+    xit('NodeTracker must track to the server pass 20 seconds from the last track', () => {
       class Biz {
         constructor () {
           this.rnd = () => Math.random()

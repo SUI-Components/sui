@@ -52,9 +52,11 @@ let webpackConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['sui']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['sui']
+          }
         }
       },
       {

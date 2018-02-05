@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 // https://github.com/coryhouse/react-slingshot/blob/master/tools/srcServer.js
-const path = require('path')
-const bs = require('browser-sync').create()
 const historyApiFallback = require('connect-history-api-fallback')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -10,12 +8,12 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const ncp = require('copy-paste')
 const detect = require('detect-port')
 const ora = require('ora')
+const app = require('express')()
 
 const config = require('../webpack.config.dev')
 const bundler = webpack(config)
 
 console.log('📦  Bundler Dev Server')
-
 // Don't show ugly deprecation warnings that mess with the logging
 process.noDeprecation = true
 
@@ -40,18 +38,22 @@ function getPortAvailable ({ port }) {
 }
 
 function listenBundlerEvents ({ bundler, spinner }) {
-  bundler.plugin('compile', _ => spinner.start(`Building bundle with Webpack`))
+  bundler.plugin('compile', _ => {
+    spinner.start(`Building bundle with Webpack`)
+  })
+
   bundler.plugin('done', stats => {
     const info = stats.toJson()
+    const { time } = info
 
     if (stats.hasErrors()) {
       spinner.fail('Build failed')
       info.errors.forEach(console.error)
     } else if (stats.hasWarnings()) {
-      spinner.info('Build succeeded with warnings')
+      spinner.info(`Build succeeded with warnings in ${time}ms`)
       info.warnings.forEach(console.warn)
     } else {
-      spinner.succeed('Build succeed!')
+      spinner.succeed(`Build succeed in ${time}ms`)
     }
 
     spinner.info('Waiting for new changes...')
@@ -76,35 +78,21 @@ function initializeDevServer ({ port }) {
     quiet: true
   })
 
-  listenBundlerEvents({ bundler, spinner })
+  app.use(
+    historyApiFallback(),
+    webpackDevMiddlewareInstance,
+    webpackHotMiddlewareInstance
+  )
 
-  bs.init({
-    logLevel: 'silent',
-    open: false,
-    port,
-    ui: {
-      port: (parseInt(port) + 1)
-    },
-    server: {
-      baseDir: path.resolve(process.cwd(), 'src'),
-
-      middleware: [
-        historyApiFallback(),
-        webpackDevMiddlewareInstance,
-        webpackHotMiddlewareInstance
-      ]
-    },
-
-    files: [
-      'src/*.html'
-    ]
-  }, () => {
+  app.listen(port, () => {
     ncp.copy(`http://localhost:${port}`)
     spinner
       .succeed(`Server started successfully`)
       .info(`Copied url to clipboard: http://localhost:${port}`)
       .start(`Building bundle with Webpack`)
   })
+
+  listenBundlerEvents({ bundler, spinner })
 }
 
 const port = process.env.PORT || 3000

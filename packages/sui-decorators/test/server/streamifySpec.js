@@ -95,7 +95,8 @@ describe('Streamify', () => {
     it('Notify Async errors', (done) => {
       const onError = ({params, error}) => {
         expect(params).to.be.eql([])
-        expect(error).to.be.eql('asyncThrowError')
+
+        expect(error).to.be.eql(new Error('throwError'))
         done()
       }
 
@@ -127,7 +128,7 @@ describe('Streamify', () => {
 
       dummyDecorate.dummyMethod(10, 2)
 
-        // clean subscriptions
+      // clean subscriptions
       sub1.dispose()
       sub2.dispose()
       sub3.dispose()

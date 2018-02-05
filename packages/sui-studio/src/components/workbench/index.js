@@ -12,7 +12,13 @@ export default class Workbench extends Component {
 
     const Tab = ({ name, path }) => (
       <li className={TAB_CLASS}>
-        <Link to={`/workbench/${category}/${component}/${path}`} className={LINK_CLASS} activeClassName={ACTIVE_CLASS} >{name}</Link>
+        <Link
+          activeClassName={ACTIVE_CLASS}
+          className={LINK_CLASS}
+          to={`/workbench/${category}/${component}/${path}`}
+        >
+          {name}
+        </Link>
       </li>
     )
 
