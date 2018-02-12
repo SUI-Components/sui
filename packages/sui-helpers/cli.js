@@ -1,9 +1,9 @@
 /* eslint no-console:0 */
-require('colors')
 const processSpawn = require('child_process').spawn
-const program = require('commander')
 const CODE_OK = 0
 const log = console.log
+const colors = require('colors')
+
 
 /**
  * Spawn several commands in children processes, in series
@@ -105,12 +105,14 @@ function getCommandCallMessage (bin, args, options = {}) {
 /*
  * Shows an error in the command line and exits process
  * It also outputs help content of the command
+ * The program param will have commander instance to output the help command
  * @param  {String} msg
+ * @param  {Object} program
  * @return
  */
-const showError = (msg) => {
-  program.outputHelp(txt => txt.red)
-  console.log(msg.red) // eslint-disable-line no-console
+const showError = (msg, program) => {
+  program.outputHelp(txt => colors.red(txt))
+  console.error(colors.red(msg))// eslint-disable-line no-console
   process.exit(1)
 }
 
