@@ -24,6 +24,7 @@ const config = pkg['config']['sui-widget-embedder']
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
   .option('-R --remoteCdn <url>', 'Remote url where the downloader will be placed')
+  .option('-D --serviceWorkerCdn <url>', 'Remote url where the browser will register the sw')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -40,6 +41,7 @@ program
   .parse(process.argv)
 
 const remoteCdn = program.remoteCdn || config.remoteCdn
+const serviceWorkerCdn = program.serviceWorkerCdn || remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
@@ -106,7 +108,8 @@ const createDownloader = () =>
         staticModule({
           'static-manifests': () => JSON.stringify(staticManifests),
           'static-pathnamesRegExp': () => JSON.stringify(staticPathnamesRegExp),
-          'static-cdn': () => JSON.stringify(remoteCdn)
+          'static-cdn': () => JSON.stringify(remoteCdn),
+          'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
         })
       )
       .pipe(minifyStream({ sourceMap: false }))
@@ -142,7 +145,8 @@ const createSW = () =>
       .pipe(
         staticModule({
           'static-cache': () => JSON.stringify(staticCache),
-          'static-cdn': () => JSON.stringify(remoteCdn)
+          'static-cdn': () => JSON.stringify(remoteCdn),
+          'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
         })
       )
       .pipe(minifyStream({ sourceMap: false }))
