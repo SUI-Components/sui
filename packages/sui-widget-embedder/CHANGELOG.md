@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-02-14)
+
+
+### Features
+
+* added service worker cdn ([d329378](https://github.com/SUI-Components/sui/commit/d329378))
+* changed fallback to remoteCDN instead to config.remotecdn ([65d7c9e](https://github.com/SUI-Components/sui/commit/65d7c9e))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2017-12-22)
 
