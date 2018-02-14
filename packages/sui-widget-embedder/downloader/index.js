@@ -23,7 +23,7 @@
           switch (tag) {
             case 'script':
               element.async = true
-              element.charset="UTF-8"
+              element.charset = 'UTF-8'
               break
             case 'link':
               element.type = 'text/css'
