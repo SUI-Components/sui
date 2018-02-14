@@ -41,7 +41,7 @@ program
   .parse(process.argv)
 
 const remoteCdn = program.remoteCdn || config.remoteCdn
-const serviceWorkerCdn = program.serviceWorkerCdn || config.remoteCdn
+const serviceWorkerCdn = program.serviceWorkerCdn || remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
