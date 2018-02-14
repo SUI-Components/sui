@@ -15,7 +15,7 @@ Sui Studio helps you to develop and document isolated UI components for your pro
 ## Installation
 
 ```sh
-npm install sui-studio -g
+npm install @s-ui/studio
 ```
 
 ## Getting Started
@@ -23,7 +23,7 @@ npm install sui-studio -g
 First install sui-studio:
 
 ```sh
-npm i -g @s-ui/studio
+npm i @s-ui/studio
 sui-studio init <project_name>
 cd <project_name>
 ```
