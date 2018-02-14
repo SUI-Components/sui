@@ -3,6 +3,7 @@
   var manifests = require('static-manifests')()
   var pathnamesRegExp = require('static-pathnamesRegExp')()
   var cdn = require('static-cdn')()
+  var serviceWorkerCdn = require('service-worker-cdn')()
   // https://davidwalsh.name/javascript-loader
   var load = (function () {
     function loaderFor (tag) {
@@ -125,7 +126,7 @@
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register(cdn + '/sw.js')
+      .register(serviceWorkerCdn + '/sw.js')
       .then(function (registration) {
         console.log(
           'Service Worker registration successful with scope: ',
