@@ -5,7 +5,6 @@ const log = console.log
 const colors = require('colors')
 const program = require('commander')
 
-
 /**
  * Spawn several commands in children processes, in series
  * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
