@@ -3,6 +3,7 @@ const processSpawn = require('child_process').spawn
 const CODE_OK = 0
 const log = console.log
 const colors = require('colors')
+const program = require('commander')
 
 
 /**
@@ -107,11 +108,11 @@ function getCommandCallMessage (bin, args, options = {}) {
  * It also outputs help content of the command
  * The program param will have commander instance to output the help command
  * @param  {String} msg
- * @param  {Object} program
+ * @param  {Object} foreignProgram
  * @return
  */
-const showError = (msg, program) => {
-  program.outputHelp(txt => colors.red(txt))
+const showError = (msg, foreignProgram) => {
+  foreignProgram ? foreignProgram.outputHelp(txt => colors.red(txt)) : program.outputHelp(txt => colors.red(txt))
   console.error(colors.red(msg))// eslint-disable-line no-console
   process.exit(1)
 }
