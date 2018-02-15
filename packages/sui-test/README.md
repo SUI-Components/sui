@@ -78,14 +78,14 @@ npm install @s-ui/test
     Options:
 
         -W, --watch  Run in watch mode
-				-h, --help   output usage information
-		Description:
+        -h, --help   output usage information
+    Description:
 
-		Run tests in node
+    Run tests in node
 
-		Examples:
+    Examples:
 
-			$ sui-test-domain server
+      $ sui-test-domain server
 ```
 
 
