@@ -52,7 +52,7 @@ npm install @s-ui/test
 
 ```sh
 
-  Usage: sui-test-browser [options]
+  Usage: sui-test browser [options]
 
 
   Options:
@@ -66,13 +66,13 @@ npm install @s-ui/test
 
   Examples:
 
-    $ sui-test-domain browser
+    $ sui-test browser
 ```
 
 ## Server options
 
 ```sh
-  Usage: sui-test-server [options]
+  Usage: sui-test server [options]
 
 
     Options:
@@ -85,7 +85,7 @@ npm install @s-ui/test
 
     Examples:
 
-      $ sui-test-domain server
+      $ sui-test server -W
 ```
 
 

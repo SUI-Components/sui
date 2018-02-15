@@ -14,7 +14,7 @@ program
     console.log('')
     console.log('  Examples:')
     console.log('')
-    console.log('    $ sui-test-domain server')
+    console.log('    $ sui-test server')
     console.log('')
   })
   .parse(process.argv)
