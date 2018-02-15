@@ -10,11 +10,11 @@ program
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
-    console.log('  Run tests in chorme')
+    console.log('  Run tests in node')
     console.log('')
     console.log('  Examples:')
     console.log('')
-    console.log('    $ sui-test-domain browser')
+    console.log('    $ sui-test-domain server')
     console.log('')
   })
   .parse(process.argv)
