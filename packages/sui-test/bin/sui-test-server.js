@@ -2,8 +2,8 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
-const {serialSpawn} = require('@s-ui/helpers/cli')
-const karmaBin = require.resolve('karma/bin/karma')
+const path = require('path')
+const { serialSpawn } = require('@s-ui/helpers/cli')
 
 program
   .option('-W, --watch', 'Run in watch mode')
@@ -20,5 +20,13 @@ program
   .parse(process.argv)
 
 serialSpawn([
-  [karmaBin, ['start', require.resolve(`${__dirname}/../lib/karma.conf.js`)]]
-], {env: {NODE_ENV: 'test'}}).catch(err => console.log(err))
+  [
+    require.resolve('mocha/bin/mocha'),
+    [
+      `${process.cwd()}/test`,
+      `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
+      '--recursive',
+      program.watch && '--watch'
+    ].filter(Boolean)
+  ]
+]).catch(err => console.log(err))

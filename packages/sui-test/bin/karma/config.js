@@ -26,9 +26,12 @@ var config = {
   browserify: {
     debug: true,
     transform: [
-      ['babelify', {
-        presets: ['sui']
-      }],
+      [
+        'babelify',
+        {
+          presets: ['sui']
+        }
+      ],
       'envify'
     ]
   },
@@ -38,12 +41,13 @@ var config = {
       reporter: 'html'
     }
   }
-
 }
 
 if (TARGET === 'test:ci') {
   config.reporters = ['coverage'].concat(config.reporters)
-  config.browserify.transform = [require('browserify-babel-istanbul')].concat(config.browserify.transform)
+  config.browserify.transform = [require('browserify-babel-istanbul')].concat(
+    config.browserify.transform
+  )
   config.coverageReporter = {
     dir: `${CWD}/coverage`,
     reporters: [
@@ -58,6 +62,4 @@ if (TARGET === 'test:watch') {
   config.reporters = ['clear-screen'].concat(config.reporters)
 }
 
-module.exports = function (karma) {
-  karma.set(config)
-}
+module.exports = config
