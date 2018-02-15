@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.10.0"></a>
+# 1.10.0 (2018-02-15)
+
+
+### Features
+
+* enforcin utf-8 enconding to dismiss encoding errors on some sites. ([5bd9a09](https://github.com/SUI-Components/sui/commit/5bd9a09))
+* enforcin utf-8 enconding to dismiss encoding errors on some sites. ([c827d9d](https://github.com/SUI-Components/sui/commit/c827d9d))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2018-02-14)
 
