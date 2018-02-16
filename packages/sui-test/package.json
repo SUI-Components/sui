@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@s-ui/helpers": "1.5.0",
+    "@s-ui/helpers": "1",
     "babel-core": "6.26.0",
     "babel-polyfill": "6.26.0",
-    "babel-preset-sui": "1.5.0",
+    "babel-preset-sui": "1",
     "babelify": "8.0.0",
     "browserify": "14.5.0",
     "browserify-babel-istanbul": "0.4.0",

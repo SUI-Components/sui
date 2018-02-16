@@ -1,6 +1,6 @@
-var TARGET = process.env.npm_lifecycle_event
-var CWD = process.cwd()
-var config = {
+const TARGET = process.env.npm_lifecycle_event
+const CWD = process.cwd()
+const config = {
   singleRun: true,
 
   basePath: '',
