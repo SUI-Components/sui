@@ -3,3 +3,4 @@ lib/
 .DS_Store
 npm-debug.log
 .tern-port
+package-lock.json
