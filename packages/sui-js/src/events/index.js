@@ -1,8 +1,8 @@
 /**
  * This function creates an event and dispatches it
  * @param {Object} dispatchEventParams
- * @param {string} eventName
- * @param {Object} detail
+ * @param {string} dispatchEventParams.eventName
+ * @param {Object} dispatchEventParams.detail
 **/
 export function dispatchEvent ({ eventName, detail = {} }) {
   let event
