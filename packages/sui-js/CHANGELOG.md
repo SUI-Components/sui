@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-02-21)
+
+
+### Features
+
+* add new events to create a reusable dispatchEvent method ([236635c](https://github.com/SUI-Components/sui/commit/236635c))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-01-17)
 
