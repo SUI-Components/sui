@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# 2.8.0 (2018-02-22)
+
+
+### Features
+
+* update dependencies and add new rules ([ffcb650](https://github.com/SUI-Components/sui/commit/ffcb650))
+
+
+
 <a name="2.7.0"></a>
 # 2.7.0 (2018-01-03)
 
@@ -28,7 +38,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* upgrade dependencies and support unused expression on chai ([8cfc795](https://github.com/SUI-Components/sui/commit/8cfc795))
+* upgrade dependencies and support unused expression on chai ([8cfc795](https://github.com/SUI-Components/sui/commit/8cfc795)), closes [#175](https://github.com/SUI-Components/sui/issues/175)
 
 
 
