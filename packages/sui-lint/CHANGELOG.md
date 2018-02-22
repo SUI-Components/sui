@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2018-02-22)
+
+
+### Bug Fixes
+
+* tell type of error for comma-dangle ([aa610b0](https://github.com/SUI-Components/sui/commit/aa610b0))
+
+
+
 <a name="2.8.0"></a>
 # 2.8.0 (2018-02-22)
 
