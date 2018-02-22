@@ -66,6 +66,8 @@ It will build a deployable folder `public` where you can find all your statics. 
 
 This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside the package.json of your project.
 
+`scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
+
 ```json
 {
   "sui-bundler": {
@@ -77,7 +79,7 @@ This tool works with zero configuration out the box but you could use some confi
     "externals": {
       "jquery": "./node_modules/jquery/jquery.min.js"
     },
-    "scripts": { // ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
+    "scripts": {
        "prefetch": "low-priority-chunk.js",
        "preload": [ "page1.js", "page2.js" ]
      }
