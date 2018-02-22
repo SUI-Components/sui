@@ -11,7 +11,7 @@ module.exports = {
     'chai-friendly'
   ],
   'rules': {
-    'comma-dangle': 'only-multiline',
+    'comma-dangle': ['error', 'only-multiline'],
     'chai-friendly/no-unused-expressions': ['error', { 'allowShortCircuit': true, 'allowTernary': true }],
     'no-console': 'warn',
     'no-debugger': 'error',
