@@ -5,7 +5,6 @@ Features:
 * Simple CLI for prod and dev environment
 * Unique solution for bundling; no boilerplate, no config.
 * Remote improvements inherited transparently (ej: monitoring, PWA, etc)
-xw
 
 ## Installation
 
@@ -30,7 +29,7 @@ Add bundling scripts to your **package.json**
 
 ## Requirements
 
-### Use node v6
+node 6+ version is required.
 
 ### Folder structure
 
@@ -47,24 +46,27 @@ With `index.html` as app home and`app.js` as entry point.
 
 ## CLI
 
-### Desarrollo
-Durante el desarrollo de la aplicación tendrás hot module reload y browserstack. Podrás encontrarlo en `localhost:3000`
+### Development
+
 ```
 $ sui-bundler dev
 ```
 
-### Producción
-Dentro de la carpeta `public` están los estáticos listos para ser deployados a producción.
+While developing your app, you will have HMR (Hot Module Reloading). Default port for your website is 3000, but it will assign automatically a free port for you if this one is busy.
+
+### Production
 
 ```
 $ sui-bundler build
 ```
 
-Si deseas borrar la carpeta public antes de generar los nuevos estáticos, usa el flag `--clean | -C`
+It will build a deployable folder `public` where you can find all your statics. If you wish to remove the content of the folder before generating new files, just use the flag `--clean | -C`
 
-## Vendors / Envs
+## Configuration
 
-Si no quieres no tienes por que usar ninguna configuración, pero si deseas optimizar tus estáticos, puedes usar la siguiente configuración dentro de tu package.json
+This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside the package.json of your project.
+
+`scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
 
 ```json
 {
@@ -76,12 +78,16 @@ Si no quieres no tienes por que usar ninguna configuración, pero si deseas opti
     "offline": true,
     "externals": {
       "jquery": "./node_modules/jquery/jquery.min.js"
-    }
+    },
+    "scripts": {
+       "prefetch": "low-priority-chunk.js",
+       "preload": [ "page1.js", "page2.js" ]
+     }
   }
 }
 ```
 
-> La url al CDN **DEBE** acabar con un `/` final
+> The URL to the CDN **MUST** end with a slash `/`
 
 Cualquier variable de entorno, la tendrás disponible en tu fichero index.html mediante en `htmlWebpackPlugin.options.env`
 
@@ -102,7 +108,7 @@ register({
 })()
 ```
 
-debes propocionar un hadler para cuando se cachea por primera vez contenido y otro para cuando hay nuevo contenido cacheado y tienes que refrescar la página para poder disfrutarlo.
+Debes propocionar un handler para cuando se cachea por primera vez contenido y otro para cuando hay nuevo contenido cacheado y tienes que refrescar la página para poder disfrutarlo.
 
 Si estas usando Firebase, es recomendable no cachear en absoluto el fichero serviceWorker.js agregando esta configuración al fichero `firebase.json`
 
