@@ -70,7 +70,8 @@ module.exports = {
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer',
-      inline: 'runtime'
+      inline: 'runtime',
+      ...config.scripts
     }),
     new PreloadWebpackPlugin({ rel: 'prefetch' }),
     new ManifestPlugin({
