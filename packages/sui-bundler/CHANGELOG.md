@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.13.0"></a>
+# 2.13.0 (2018-02-22)
+
+
+### Features
+
+* add a way to modify the config for Webpack's scriptsExtPlugin ([51cdfac](https://github.com/SUI-Components/sui/commit/51cdfac))
+
+
+
 <a name="2.12.0"></a>
 # 2.12.0 (2018-02-05)
 
@@ -155,7 +165,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* use prefetch instead preload to avoid blocking requests ([582d59e](https://github.com/SUI-Components/sui/commit/582d59e))
+* use prefetch instead preload to avoid blocking requests ([582d59e](https://github.com/SUI-Components/sui/commit/582d59e)), closes [#41](https://github.com/SUI-Components/sui/issues/41)
 
 
 
