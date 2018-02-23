@@ -3,7 +3,7 @@
 const { write: writeLegacy, close: closeLegacy, readFileSync } = require('fs')
 const { open } = require('temp').track()
 const path = require('path')
-const util = require('util');
+const util = require('util')
 const editorLegacy = require('editor')
 const { exec: execNative } = require('child_process')
 const exec = util.promisify(execNative)
@@ -35,7 +35,7 @@ class PrompterManager {
    * The edit flow will save our commit on a temporally file, open it on an editor and wait expecting for changes.
    * @return {undefined}
    */
-  static async startEditFlow(answers) {
+  static async startEditFlow (answers) {
     const {path, fd} = await openTempFile(null)
     await write(fd, buildCommit(answers))
     await close(fd)
@@ -54,12 +54,12 @@ class PrompterManager {
    * @param  {[type]}  path Folder to check
    * @return {Promise<Boolean>}
    */
-  static async checkIfHasChangedFiles(path) {
+  static async checkIfHasChangedFiles (path) {
     const output = await exec(`git status ${path}`, { cwd: path })
     return !output.stdout.includes('nothing to commit')
   }
 
-  /**`
+  /**
    * The doCommit method will init an error listener, start the git commit flow, and if all goes ok discard the old commit if was saved before.
    * @param {string} commitString
    */
@@ -91,8 +91,7 @@ class PrompterManager {
             scopes.map(pkg => this.checkIfHasChangedFiles(path.join(packagesDir, pkg.name)).then(hasFiles => hasFiles && pkg))
           )
             .then(result => result.filter(Boolean))
-            .then(result => ((typesWithOtherScopes.indexOf(answers.type) > -1) ? result.concat(otherScopes): result))
-
+            .then(result => ((typesWithOtherScopes.indexOf(answers.type) > -1) ? result.concat(otherScopes) : result))
         }
       },
       {

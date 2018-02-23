@@ -2,8 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const os = require('os');
-
+const os = require('os')
 
 /**
  * ErrorCommitSaver is the module that have the ownership of save and retrieve old commit messages if there was an exception on the operation.
