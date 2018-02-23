@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
-//Promisify polyfill to add copatibility on node < 8 versions.
-require('util.promisify/shim')();
+// Promisify polyfill to add copatibility on node < 8 versions.
+require('util.promisify/shim')()
 const { write: writeLegacy, close: closeLegacy, readFileSync } = require('fs')
 const { open } = require('temp').track()
 const path = require('path')
