@@ -136,15 +136,15 @@ class PrompterManager {
 
   static startRecoverOldCommitFlow (cz, commit, commitString) {
     const HR = '\n ******************************************************************\n'
-    console.log(colors.yellow(`${HR} ${commitString} ${HR} -> We founded that you haved problems with the last commit and we saved the message for you 😇.`))
+    console.log(colors.yellow(`${HR} ${commitString} ${HR} -> We found that you had problems with the last commit and we saved the message for you 😇.`))
     cz.prompt([
       {
         type: 'confirm',
-        name: 'foundedOldCommit',
+        name: 'foundOldCommit',
         message: '- Would you like to commit with this message?'
       }
     ]).then((answers) => {
-      if (answers.foundedOldCommit) {
+      if (answers.foundOldCommit) {
         ErrorCommitSaver.initErrorListener(commitString)
         commit(commitString)
         ErrorCommitSaver.discardOldCommit()

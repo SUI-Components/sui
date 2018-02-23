@@ -12,10 +12,10 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "colors": "^1.1.2",
-    "editor": "1.0.0",
+    "colors": "1",
+    "editor": "1",
     "temp": "0.8.3",
-    "word-wrap": "1.1.0"
+    "word-wrap": "1"
   },
   "repository": {
     "type": "git",
