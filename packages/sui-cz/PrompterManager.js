@@ -1,11 +1,18 @@
 /* eslint-disable no-console */
 
-const fs = require('fs')
+const { write: writeLegacy, close: closeLegacy, readFileSync } = require('fs')
+const { open } = require('temp').track()
 const path = require('path')
-const { exec } = require('child_process')
+const util = require('util');
+const editorLegacy = require('editor')
+const { exec: execNative } = require('child_process')
+const exec = util.promisify(execNative)
+const write = util.promisify(writeLegacy)
+const close = util.promisify(closeLegacy)
+const editor = util.promisify(editorLegacy)
+const openTempFile = util.promisify(open)
+
 const colors = require('colors')
-const editor = require('editor')
-const temp = require('temp').track()
 const ErrorCommitSaver = require('./ErrorCommitSaver')
 const buildCommit = require('./buildCommit')
 const config = require('./config')
@@ -28,24 +35,18 @@ class PrompterManager {
    * The edit flow will save our commit on a temporally file, open it on an editor and wait expecting for changes.
    * @return {undefined}
    */
-  static startEditFlow (answers) {
-    temp.open(null, (err, info) => {
-      if (!err) {
-        fs.write(info.fd, buildCommit(answers), () => {})
-        fs.close(info.fd, () => {
-          editor(info.path, (code) => {
-            if (!code) {
-              var commitStr = fs.readFileSync(info.path, {
-                encoding: 'utf8'
-              }, () => {})
-              this.doCommit(commitStr)
-            } else {
-              console.log(`Editor returned non zero value. Commit message was:\n ${buildCommit(answers)}`)
-            }
-          })
-        })
-      }
-    })
+  static async startEditFlow(answers) {
+    const {path, fd} = await openTempFile(null)
+    await write(fd, buildCommit(answers))
+    await close(fd)
+    const editorReturnValue = await editor(path)
+
+    if (!editorReturnValue) {
+      const commitStr = readFileSync(path, {encoding: 'utf8'}, () => {})
+      this.doCommit(commitStr)
+    } else {
+      console.log(`Editor returned non zero value. Commit message was:\n ${buildCommit(answers)}`)
+    }
   }
 
   /**
@@ -53,15 +54,12 @@ class PrompterManager {
    * @param  {[type]}  path Folder to check
    * @return {Promise<Boolean>}
    */
-  static checkIfHasChangedFiles (path) {
-    return new Promise((resolve, reject) => {
-      exec(`git status ${path}`, { cwd: path }, (err, output) => {
-        err ? reject(err) : resolve(!output.includes('nothing to commit'))
-      })
-    })
+  static async checkIfHasChangedFiles(path) {
+    const output = await exec(`git status ${path}`, { cwd: path })
+    return !output.stdout.includes('nothing to commit')
   }
 
-  /**
+  /**`
    * The doCommit method will init an error listener, start the git commit flow, and if all goes ok discard the old commit if was saved before.
    * @param {string} commitString
    */
@@ -74,7 +72,7 @@ class PrompterManager {
   /**
    * The get commmit steps method will return an array of objects that corresponds to the different steps of our commit promptet.
    * [Step1, ...2, ...3, ...4, ...5, ...6, ...7]
-   * @returns {[Object,Object,Object,Object,Object,Object,Object]}
+   * @returns {Object[]}
    */
   static getCommitSteps () {
     return [
@@ -93,12 +91,8 @@ class PrompterManager {
             scopes.map(pkg => this.checkIfHasChangedFiles(path.join(packagesDir, pkg.name)).then(hasFiles => hasFiles && pkg))
           )
             .then(result => result.filter(Boolean))
-            .then(result => {
-              if (typesWithOtherScopes.indexOf(answers.type) > -1) {
-                return result.concat(otherScopes)
-              }
-              return result
-            })
+            .then(result => ((typesWithOtherScopes.indexOf(answers.type) > -1) ? result.concat(otherScopes): result))
+
         }
       },
       {
