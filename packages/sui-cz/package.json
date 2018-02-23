@@ -12,10 +12,11 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "colors": "1",
-    "editor": "1",
+    "colors": "1.1.2",
+    "editor": "1.0.0",
     "temp": "0.8.3",
-    "word-wrap": "1"
+    "util.promisify": "1.0.0",
+    "word-wrap": "1.1.0"
   },
   "repository": {
     "type": "git",
