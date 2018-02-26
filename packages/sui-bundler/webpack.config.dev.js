@@ -5,9 +5,11 @@ const path = require('path')
 
 require('./shared/shims')
 
+console.log('👋  from Webpack 4')
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
 
 let webpackConfig = {
+  mode: 'development',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']

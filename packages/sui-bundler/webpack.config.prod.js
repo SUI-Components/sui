@@ -22,6 +22,7 @@ if (process.env.PWD === undefined) {
 }
 
 module.exports = {
+  mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
@@ -39,12 +40,7 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   plugins: cleanList([
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.HashedModuleIdsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'runtime'],
-      minChunks: 'Infinity'
-    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     new webpack.DefinePlugin({
       __DEV__: false,
