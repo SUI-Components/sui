@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-02-27)
+
+
+### Bug Fixes
+
+* pr changes ([2db4e14](https://github.com/SUI-Components/sui/commit/2db4e14))
+* pr changes ([d1f3beb](https://github.com/SUI-Components/sui/commit/d1f3beb))
+* pR CHANGES - tmpcommit path exported to const ([301365d](https://github.com/SUI-Components/sui/commit/301365d))
+
+
+### Features
+
+* added promesify polyfill and pr changes ([2a63322](https://github.com/SUI-Components/sui/commit/2a63322))
+* added promesify polyfill and pr changes ([3b1e0d4](https://github.com/SUI-Components/sui/commit/3b1e0d4))
+* made the main refactor and added the new commit saver ([657cd70](https://github.com/SUI-Components/sui/commit/657cd70))
+* pr changes ([882a791](https://github.com/SUI-Components/sui/commit/882a791))
+* removed tmp file added due to an error ([62cd262](https://github.com/SUI-Components/sui/commit/62cd262))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2017-10-22)
 
@@ -48,7 +69,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* remove unused scripts ([2c77b71](https://github.com/SUI-Components/sui/commit/2c77b71))
+* remove unused scripts ([2c77b71](https://github.com/SUI-Components/sui/commit/2c77b71)), closes [#13](https://github.com/SUI-Components/sui/issues/13)
 
 
 
