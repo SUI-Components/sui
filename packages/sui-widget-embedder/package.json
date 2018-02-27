@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@s-ui/lint": "2",
     "babel-cli": "6.26.0"
   },
   "dependencies": {
@@ -36,11 +35,5 @@
     "webpack-dev-middleware": "1.12.0",
     "webpack-hot-middleware": "2.19.1",
     "workbox-sw": "2.1.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  }
 }
