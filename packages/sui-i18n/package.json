@@ -1,13 +1,21 @@
 {
   "name": "@s-ui/i18n",
-  "private": true,
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "> Isomorphic i18n service for browser and node.",
-  "main": "index.js",
+  "main": "lib/",
   "scripts": {
+    "lib": "npm run lib:js",
+    "lib:js": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Enablers Frontend",
+  "license": "ISC",
+  "dependencies": {
+    "node-polyglot": "0.4.3"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1"
+  }
 }
