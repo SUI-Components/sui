@@ -3,6 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
+const tmpCommitPath = path.join(os.tmpdir(), 'tmpCommitMessage.txt')
 
 /**
  * ErrorCommitSaver is the module that have the ownership of save and retrieve old commit messages if there was an exception on the operation.
@@ -16,7 +17,7 @@ class ErrorCommitSaver {
    */
   static initErrorListener (commitMessage) {
     process.on('uncaughtException', function (err) {
-      fs.writeFile(path.join(os.tmpdir(), 'tmpCommitMessage.txt'), commitMessage, function () {
+      fs.writeFile(tmpCommitPath, commitMessage, function () {
         console.log(err)
       })
     })
@@ -27,7 +28,7 @@ class ErrorCommitSaver {
    * @param {function} callback
    */
   static retrievePreviousCommit (callback) {
-    fs.readFile(path.join(os.tmpdir(), 'tmpCommitMessage.txt'), 'utf8', (err, commitMessage) => {
+    fs.readFile(tmpCommitPath, 'utf8', (err, commitMessage) => {
       callback(err ? false : commitMessage)
     })
   }
@@ -36,7 +37,7 @@ class ErrorCommitSaver {
    * discardOldCommit will check for the oldCommit file and will remove it
    */
   static discardOldCommit () {
-    fs.unlink(path.join(os.tmpdir(), 'tmpCommitMessage.txt'), () => {})
+    fs.unlink(tmpCommitPath, () => {})
   }
 }
 module.exports = ErrorCommitSaver
