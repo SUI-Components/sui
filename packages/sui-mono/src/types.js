@@ -1,1 +1,1 @@
-module.exports = require('@s-ui/cz/types')
+module.exports = require('@s-ui/cz/commitTypes')
