@@ -89,16 +89,9 @@ This tool works with zero configuration out the box but you could use some confi
 
 > The URL to the CDN **MUST** end with a slash `/`
 
-Cualquier variable de entorno, la tendrás disponible en tu fichero index.html mediante en `htmlWebpackPlugin.options.env`
-
-```
-<html data-env="<%= htmlWebpackPlugin.options.env.NODE_ENV || 'development' %>">
-```
 ## Offline
 
-Esta desactivado por defecto. Para activarlo, tienes que poner `offline: true` en la configuración del sui-bundler de tu proyecto.
-
-En el punto de entrada de tu apliación debes registrar el serviceWorker con el siguiente snippet:
+Offline feature is deactivated by default. If you want to activate, you should put `offline: true` in the sui-bundler configuration in your package.json. Also, you need to configure a serviceWorker in the entry point of your app:
 
 ```js
 import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
@@ -108,9 +101,9 @@ register({
 })()
 ```
 
-Debes propocionar un handler para cuando se cachea por primera vez contenido y otro para cuando hay nuevo contenido cacheado y tienes que refrescar la página para poder disfrutarlo.
+You should pass a handler in order to handle when it gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
 
-Si estas usando Firebase, es recomendable no cachear en absoluto el fichero serviceWorker.js agregando esta configuración al fichero `firebase.json`
+If you're using Firebase, it's recommendable to not cache the file serviceWorker.js, adding this config to your `firebase.json`
 
 ```json
 {
@@ -126,11 +119,11 @@ Si estas usando Firebase, es recomendable no cachear en absoluto el fichero serv
 }
 ```
 
-Si deseas dar de baja tu service worker solo tienes que reemplazar tu llamada a register por `unregister`
+If you want to remove your ServiceWorker, you need to use the method `unregister`, the same way you used the `register` method before.
 
 ### Caching
 
-Puedes configurar que quieres cachear para ser usado offline:
+You could use it to be used offline:
 
 ```js
 "offline": {
@@ -153,19 +146,14 @@ Puedes configurar que quieres cachear para ser usado offline:
 }
 ```
 
-runtime usa la mismo API que (sw-toolbox)[https://googlechrome.github.io/sw-toolbox/]
-
-además whitelist es un listado de regexp que indican que páginas son seguras para hacer solo CSR. Puedes usar el string `::all::` para indicar que siempre quieres usar CSR.
-
-Si no defines un listado whitelist. Siempre se hará SSR
+Runtime follows the (API of sw-toolbox)[https://googlechrome.github.io/sw-toolbox/]. Also, the whitelist is a list of regexp that indicates which pages are secure to use only Client Server Rendering. You could use the `::all::` string for indicating that you always want to use Client Side Rendering.
 
 ## Externals
 
-Cumple la función de subir una librería external a tu proyecto que normalmente lo pondrías a mano con su propio tag script, a tu cdn, y colocar una referencia a el en index.html y con un hash que representa el contenido del fichero.
+It offers you a way to upload an external library to your project that you normally will put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
 
 ## Hot Module Replacement - React
-Lo tienes todo preparado para poder usarlo en tus proyectos de react.
-Solo tienes que aplicar estas instrucciones en tu `app.js` https://webpack.js.org/guides/hmr-react/#code
+It offers Hot Module Replacement out-of-the-box, you only has to follow these instructions for your project: https://webpack.js.org/guides/hmr-react/#code
 
 ## Contributing
 
