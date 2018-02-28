@@ -14,7 +14,6 @@ let webpackConfig = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
-  devtool: 'eval-source-map',
   entry: cleanList([
     whenInstalled('react', 'react-hot-loader/patch'),
     'webpack-hot-middleware/client?reload=true',
@@ -22,9 +21,7 @@ let webpackConfig = {
   ]),
   target: 'web',
   output: {
-    path: path.resolve(process.env.PWD, 'public'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    publicPath: '/'
   },
   plugins: [
     new webpack.EnvironmentPlugin(envVars(config.env)),
