@@ -1,6 +1,5 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const path = require('path')
 
 require('./shared/shims')
@@ -35,16 +34,7 @@ let webpackConfig = {
       template: './index.html',
       inject: true,
       env: process.env
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: false,
-      debug: true,
-      noInfo: true,
-      options: {
-        context: '/'
-      }
-    }),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
+    })
   ],
   module: {
     rules: [
@@ -86,8 +76,22 @@ let webpackConfig = {
         use: [
           'style-loader',
           'css-loader',
-          'postcss-loader',
-          'sass-loader'
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => {
+                return [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              importer: require('node-sass-json-importer')
+            }
+          }
         ]
       }
     ]
