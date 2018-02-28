@@ -7,13 +7,17 @@ const path = require('path')
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
 
+const indexJS =  require('../file-templates/_index.js.js')
+const packageJSON =  require('../file-templates/_package.json.js')
+const indexSCSS =  require('../file-templates/_index.scss.js')
+
 program
-  .option('-R, --widgetRegExpIdentifier', 'Identifier to inject the widget regarding on if the path match with the regexp')
+  .option('-E, --widgetRegExpIdentifier <regExp>', 'Identifier to inject the widget regarding on if the path match with the regexp')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
-    console.log('    $ sui-widget-embeder generate <widget>')
-    console.log('    $ sui-widget-embeder generate alfa')
+    console.log('    $ sui-widget-embedder generate <widget>')
+    console.log('    $ sui-widget-embedder generate alfa')
     console.log('    $ custom-help --help')
     console.log('    $ custom-help -h')
     console.log('')
@@ -31,12 +35,13 @@ if (!wordsOnlyRegex.test(widget)) { showError('Widget name must contain letters 
 const BASE_DIR = process.cwd()
 const WIDGET_DIR = `/widgets/${widget}/`
 const WIDGET_PATH = `${BASE_DIR}${WIDGET_DIR}`
-const WIDGET_ENTRY_JS_POINT_FILE = `${WIDGET_PATH}src/index.js`
+const WIDGET_ENTRY_JS_POINT_FILE = `${WIDGET_PATH}index.js`
 const WIDGET_PACKAGE_JSON_FILE = `${WIDGET_PATH}package.json`
-const WIDGET_ENTRY_SCSS_POINT_FILE = `${WIDGET_PATH}src/index.scss`
+const WIDGET_ENTRY_SCSS_POINT_FILE = `${WIDGET_PATH}index.scss`
 
 const {widgetRegExpIdentifier} = program
-const { config: { sitePrefix } } = require(path.join(process.cwd(), 'package.json'))
+const packageInfo = require(path.join(process.cwd(), 'package.json'))
+const sitePrefix = packageInfo.config['sui-widget-embedder'].sitePrefix
 // Check if the widget already exist before continuing
 if (fs.existsSync(WIDGET_PATH)) {
   showError(`[${widget}] This widget already exist in the path:
@@ -45,40 +50,12 @@ if (fs.existsSync(WIDGET_PATH)) {
 
 Promise.all([
   writeFile(
-    WIDGET_PACKAGE_JSON_FILE,
-    `{
-      "version": "1.0.0",
-      "private": true,
-      "pathnameRegExp": "${widgetRegExpIdentifier || '*'}"
-      }
-    `),
-  writeFile(
-    WIDGET_ENTRY_JS_POINT_FILE,
-    `
-      import React from 'react'
-      import Widget from '@s-ui/widget-embedder/react/Widget'
-      import Widgets from '@s-ui/widget-embedder/react/Widgets'
-      import render from '@s-ui/widget-embedder/react/render'
-      import './index.scss'
-      
-      const bootstrap = async () => {
-        render(
-          <Widgets>
-            <Widget node='<node-name>'>
-              {/*YOUR COMPONENT GOES HERE*/}
-            </Widget>
-          </Widgets>,
-          'global'
-        )
-      }
-      
-      bootstrap()
-`),
+    WIDGET_PACKAGE_JSON_FILE, packageJSON(widgetRegExpIdentifier)),
+  writeFile(WIDGET_ENTRY_JS_POINT_FILE, indexJS()),
 
   writeFile(
-    WIDGET_ENTRY_SCSS_POINT_FILE,
-    `@import '~@schibstedspain/${sitePrefix}-theme/lib/index.scss';`)
+    WIDGET_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix))
 ])
   .then(() => {
-    console.log(colors.gray(`[${widget}]: Installing the dependencies`))
+    console.log(colors.green(`➜ [${widget}]: Your widget files have been generated successfully`))
   })
