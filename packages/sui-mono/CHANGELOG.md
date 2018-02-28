@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.27.0"></a>
+# 1.27.0 (2018-02-28)
+
+
+### Bug Fixes
+
+* fixed a bug related with the imort of cz types on sui mono ([15b9b59](https://github.com/SUI-Components/sui/commit/15b9b59))
+
+
+
 <a name="1.26.0"></a>
 # 1.26.0 (2017-10-10)
 
@@ -59,7 +69,7 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix changelog to generate log in right context ([122cec5](https://github.com/SUI-Components/sui/commit/122cec5))
-* fix: release not detected with overlapped commits in merges ([fa72601](https://github.com/SUI-Components/sui/commit/fa72601))
+* fix: release not detected with overlapped commits in merges ([fa72601](https://github.com/SUI-Components/sui/commit/fa72601)), closes [#100](https://github.com/SUI-Components/sui/issues/100)
 
 
 
@@ -79,7 +89,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* make changelog take into account monopackage repos ([4e6e1cb](https://github.com/SUI-Components/sui/commit/4e6e1cb))
+* make changelog take into account monopackage repos ([4e6e1cb](https://github.com/SUI-Components/sui/commit/4e6e1cb)), closes [#27](https://github.com/SUI-Components/sui/issues/27)
 
 
 
@@ -110,8 +120,8 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* add help command for check ([866a1a3](https://github.com/SUI-Components/sui/commit/866a1a3))
-* add release command help ([ce61a89](https://github.com/SUI-Components/sui/commit/ce61a89))
+* add help command for check ([866a1a3](https://github.com/SUI-Components/sui/commit/866a1a3)), closes [#53](https://github.com/SUI-Components/sui/issues/53)
+* add release command help ([ce61a89](https://github.com/SUI-Components/sui/commit/ce61a89)), closes [#53](https://github.com/SUI-Components/sui/issues/53)
 * remove console.log left there, bad boy! ([6037ea8](https://github.com/SUI-Components/sui/commit/6037ea8))
 * use git command instead the debugging one ([23030fe](https://github.com/SUI-Components/sui/commit/23030fe))
 
@@ -119,7 +129,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commands for link and run ([c774e23](https://github.com/SUI-Components/sui/commit/c774e23))
-* tag releases ([bb75071](https://github.com/SUI-Components/sui/commit/bb75071))
+* tag releases ([bb75071](https://github.com/SUI-Components/sui/commit/bb75071)), closes [#68](https://github.com/SUI-Components/sui/issues/68)
 * tag releases ([95d213b](https://github.com/SUI-Components/sui/commit/95d213b))
 
 
@@ -147,7 +157,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* dont publish private packages ([55c35ce](https://github.com/SUI-Components/sui/commit/55c35ce))
+* dont publish private packages ([55c35ce](https://github.com/SUI-Components/sui/commit/55c35ce)), closes [#37](https://github.com/SUI-Components/sui/issues/37)
 
 
 
@@ -157,7 +167,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* sui-mono link command ([db9596a](https://github.com/SUI-Components/sui/commit/db9596a))
+* sui-mono link command ([db9596a](https://github.com/SUI-Components/sui/commit/db9596a)), closes [#21](https://github.com/SUI-Components/sui/issues/21)
 
 
 
@@ -167,7 +177,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fix to use default restrict access type instead private ([6a566a7](https://github.com/SUI-Components/sui/commit/6a566a7))
+* fix to use default restrict access type instead private ([6a566a7](https://github.com/SUI-Components/sui/commit/6a566a7)), closes [#32](https://github.com/SUI-Components/sui/issues/32)
 
 
 
@@ -252,7 +262,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* not throw error on release if build script is absent ([f8d91dc](https://github.com/SUI-Components/sui/commit/f8d91dc))
+* not throw error on release if build script is absent ([f8d91dc](https://github.com/SUI-Components/sui/commit/f8d91dc)), closes [#13](https://github.com/SUI-Components/sui/issues/13)
 
 
 
