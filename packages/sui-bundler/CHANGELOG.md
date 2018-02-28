@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.14.0"></a>
+# 2.14.0 (2018-02-28)
+
+
+### Features
+
+* translate to english ([d8d812f](https://github.com/SUI-Components/sui/commit/d8d812f))
+
+
+
 <a name="2.13.0"></a>
 # 2.13.0 (2018-02-22)
 
