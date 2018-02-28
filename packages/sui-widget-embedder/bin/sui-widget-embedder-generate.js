@@ -4,7 +4,6 @@ const program = require('commander')
 const colors = require('colors')
 const fs = require('fs')
 const path = require('path')
-const spawn = require('child_process').spawn
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
 
@@ -23,7 +22,7 @@ program
 
 const [widget] = program.args
 
-if (!component) { showError('widget name must be defined') }
+if (!widget) { showError('widget name must be defined') }
 
 const wordsOnlyRegex = /^[\w]+$/
 
@@ -37,7 +36,7 @@ const WIDGET_PACKAGE_JSON_FILE = `${WIDGET_PATH}package.json`
 const WIDGET_ENTRY_SCSS_POINT_FILE = `${WIDGET_PATH}src/index.scss`
 
 const {widgetRegExpIdentifier} = program
-const { config: { sitePrefix }} = require(path.join(process.cwd(), 'package.json'))
+const { config: { sitePrefix } } = require(path.join(process.cwd(), 'package.json'))
 // Check if the widget already exist before continuing
 if (fs.existsSync(WIDGET_PATH)) {
   showError(`[${widget}] This widget already exist in the path:
