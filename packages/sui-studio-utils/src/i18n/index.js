@@ -1,5 +1,5 @@
-import Rosetta from '@schibstedspain/rosetta'
-import Polyglot from '@schibstedspain/rosetta/lib/adapters/polyglot'
+import Rosetta from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
 
 const DEFAULT_CULTURE = 'es-ES'
 const DEFAULT_CURRENCY = 'EUR'
