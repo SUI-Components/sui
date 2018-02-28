@@ -15,6 +15,6 @@
     "babel-preset-sui": "1"
   },
   "dependencies": {
-    "@schibstedspain/rosetta": "3"
+    "@s-ui/i18n": "1"
   }
 }
