@@ -41,9 +41,10 @@ const WIDGET_PATH = `${BASE_DIR}${WIDGET_DIR}`
 const WIDGET_ENTRY_JS_POINT_FILE = `${WIDGET_PATH}index.js`
 const WIDGET_PACKAGE_JSON_FILE = `${WIDGET_PATH}package.json`
 const WIDGET_ENTRY_SCSS_POINT_FILE = `${WIDGET_PATH}index.scss`
-
+const WIDGET_BASE_PROJECT_JSON_POINT_FILE = path.join(process.cwd(), 'package.json')
 const {widgetRegExpIdentifier} = program
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
+packageInfo.scripts[`start:${widget}`] = `sui-widget-embedder dev -p ${widget}`
 const sitePrefix = packageInfo.config['sui-widget-embedder'].sitePrefix
 
 // Check if the widget already exist before continuing
@@ -57,7 +58,9 @@ Promise.all([
     WIDGET_PACKAGE_JSON_FILE, packageJSON(widgetRegExpIdentifier)),
   writeFile(WIDGET_ENTRY_JS_POINT_FILE, indexJS()),
   writeFile(
-    WIDGET_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix))
+    WIDGET_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix)),
+  writeFile(
+    WIDGET_BASE_PROJECT_JSON_POINT_FILE, JSON.stringify(packageInfo,null,'  '))
 ])
   .then(() => {
     console.log(colors.green(`➜ [${widget}]: Your widget files have been generated successfully`))
