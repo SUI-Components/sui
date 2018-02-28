@@ -101,7 +101,7 @@ register({
 })()
 ```
 
-You should pass a handler in order to handle when it gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
+You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
 
 If you're using Firebase, it's recommendable to not cache the file serviceWorker.js, adding this config to your `firebase.json`
 
@@ -146,14 +146,14 @@ You could use it to be used offline:
 }
 ```
 
-Runtime follows the (API of sw-toolbox)[https://googlechrome.github.io/sw-toolbox/]. Also, the whitelist is a list of regexp that indicates which pages are secure to use only Client Server Rendering. You could use the `::all::` string for indicating that you always want to use Client Side Rendering.
+Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-toolbox]. Also, the whitelist is a list of regexp that indicates which pages are secure to use only Client Server Rendering. You could use the `::all::` string to indicate that you always want to use Client Side Rendering.
 
 ## Externals
 
-It offers you a way to upload an external library to your project that you normally will put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
+It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
 
 ## Hot Module Replacement - React
-It offers Hot Module Replacement out-of-the-box, you only has to follow these instructions for your project: https://webpack.js.org/guides/hmr-react/#code
+It offers Hot Module Replacement out-of-the-box, you only have to follow these instructions for your project: https://webpack.js.org/guides/hmr-react/#code
 
 ## Contributing
 
