@@ -60,7 +60,7 @@ Promise.all([
   writeFile(
     WIDGET_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix)),
   writeFile(
-    WIDGET_BASE_PROJECT_JSON_POINT_FILE, JSON.stringify(packageInfo,null,'  '))
+    WIDGET_BASE_PROJECT_JSON_POINT_FILE, JSON.stringify(packageInfo, null, '  '))
 ])
   .then(() => {
     console.log(colors.green(`➜ [${widget}]: Your widget files have been generated successfully`))
