@@ -24,20 +24,20 @@ $ export PATH="$PATH:./node_modules/.bin"
 | Name | Description |
 | -- | -- |
 | [babel-preset-sui](./packages/babel-preset-sui) | A babel preset for SUI components common syntax |
-| [sui-lint](./packages/sui-lint) | CLI to lint your code and make it compliant to SUI official rules |
-| [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
+| [sui-bundler](./packages/sui-bundler) | Config-free bundler for ES6 React apps |
 | [sui-component-dependencies](./packages/sui-component-dependencies) | A set of common dependencies for all SUI components |
 | [sui-cz](./packages/sui-cz) | A commitizen adapter for semantic commits |
-| [sui-mono](./packages/sui-mono) | Simple CLI for monorepo/multipackage commits, releases, etc. |
-| [sui-studio](./packages/sui-studio) | Develop, maintain and publish your SUI components catalog. |
-| [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |
-| [sui-bundler](./packages/sui-bundler) | Config-free bundler for ES6 React apps |
-| [sui-perf](./packages/sui-perf) | React performance graphs in terminal (SSR support) |
-| [sui-widget-embedder](./packages/sui-widget-embedder) | Widget development server and build for production |
-| [sui-i18n](./packages/sui-i18n) | Isomorphic i18n service for browser and node |
-| [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
-| [sui-js](./packages/sui-js) | Javascript utilities |
-| [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA (pending) |
-| [sui-react-domain-connector](./packages/sui-react-domain-connector) | Connect any React component to your domain use cases | 
 | [sui-hoc](./packages/sui-hoc) | React utility belt for function components and higher-order components |
+| [sui-i18n](./packages/sui-i18n) | Isomorphic i18n service for browser and node |
+| [sui-js](./packages/sui-js) | Javascript utilities |
+| [sui-lint](./packages/sui-lint) | CLI to lint your code and make it compliant to SUI official rules |
+| [sui-mono](./packages/sui-mono) | Simple CLI for monorepo/multipackage commits, releases, etc. |
+| [sui-perf](./packages/sui-perf) | React performance graphs in terminal (SSR support) |
+| [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
+| [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
+| [sui-react-domain-connector](./packages/sui-react-domain-connector) | Connect any React component to your domain use cases | 
 | [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your react app |
+| [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA (pending) |
+| [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |
+| [sui-studio](./packages/sui-studio) | Develop, maintain and publish your SUI components catalog. |
+| [sui-widget-embedder](./packages/sui-widget-embedder) | Widget development server and build for production |
