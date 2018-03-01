@@ -2,7 +2,6 @@
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
@@ -107,16 +106,7 @@ module.exports = {
       parallel: true,
       sourceMap: false
     }),
-    when(config.externals, () => new Externals({files: config.externals})),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-      noInfo: true,
-      options: {
-        context: '/'
-      }
-    }),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
+    when(config.externals, () => new Externals({files: config.externals}))
   ]),
   module: {
     rules: [
@@ -156,8 +146,22 @@ module.exports = {
         test: /(\.css|\.scss)$/,
         use: ExtractTextPlugin.extract([
           'css-loader',
-          'postcss-loader',
-          'sass-loader'
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => {
+                return [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              importer: require('node-sass-json-importer')
+            }
+          }
         ])
       }
     ]
