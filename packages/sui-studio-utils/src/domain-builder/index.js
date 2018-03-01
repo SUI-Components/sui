@@ -13,8 +13,8 @@ export default class DomainBuilder {
   for ({useCase} = {}) {
     if (this._useCase) {
       throw new Error(
-        `[DomainBuilder#for] An useCase was setting with value ${this._useCases}.
-         setup a response with DomainBuilder#respondWith until setup other use case`
+        `[DomainBuilder#for] There is already an use case ${this._useCases}.
+         Set up a response with DomainBuilder#respondWith before setting up another use case`
       )
     }
 
@@ -24,16 +24,16 @@ export default class DomainBuilder {
 
   respondWith ({success, fail} = {}) {
     if (success !== undefined && fail !== undefined) {
-      throw new Error('[DomainBuilder#respondWith] The respond must be success or failer but not both')
+      throw new Error('[DomainBuilder#respondWith] The response must set an object with success or fail prop, but not both')
     }
 
     if (success === undefined && fail === undefined) {
-      throw new Error('[DomainBuilder#respondWith] success or fail are undefined')
+      throw new Error('[DomainBuilder#respondWith] Neither success nor fail are set')
     }
 
     if (!this._useCase) {
       throw new Error(
-        '[DomainBuilder#respondWith] before setting a response must setting a usecase with DomainBuilder#for'
+        '[DomainBuilder#respondWith] before setting a response you must set up a use case using the DomainBuilder#for function'
       )
     }
 
@@ -59,7 +59,7 @@ export default class DomainBuilder {
           }
         } : self._domain.get(useCase)
       },
-      _map: Object.assign(self._domain._map, self._useCases),
+      _map: Object.assign(self._domain._map || {}, self._useCases),
       useCases: Object.assign((self._domain.useCases || {}), self._useCases)
     }
   }

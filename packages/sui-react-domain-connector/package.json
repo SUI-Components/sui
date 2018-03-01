@@ -11,7 +11,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@s-ui/lint": "2",
     "babel-cli": "6.24.1",
     "babel-preset-sui": "1",
     "react": "15.6"
@@ -23,11 +22,5 @@
   "dependencies": {
     "react-redux": "5.0.4",
     "redux": "3.6.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  }
 }

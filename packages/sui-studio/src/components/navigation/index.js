@@ -117,5 +117,6 @@ export default class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  search: PropTypes.string
 }
