@@ -14,10 +14,7 @@ export default class AxiosFetcher extends Fetcher {
   constructor ({config}) {
     super({config})
 
-    this._config = config
-    this._axios = axios
-
-    // this._axios = axios.create()
+    this._axios = axios.create(config)
     // const perf = getPerf(config.get('serverRequestId') || 'default')
     // measureAxios(perf)(this._axios)
   }
