@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-03-01)
+
+
+### Bug Fixes
+
+* make use of provided config in fetcher ([7bd2a62](https://github.com/SUI-Components/sui/commit/7bd2a62))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-01-26)
 
