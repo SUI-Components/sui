@@ -60,9 +60,9 @@
     "uglifyjs-webpack-plugin": "1.2.2",
     "url-loader": "0.6.2",
     "webpack": "4.0.1",
-    "webpack-bundle-analyzer": "2.11.0",
-    "webpack-dev-middleware": "2.0.6",
-    "webpack-hot-middleware": "2.21.0",
+    "webpack-bundle-analyzer": "2.11.1",
+    "webpack-dev-middleware": "3.0.0",
+    "webpack-hot-middleware": "2.21.1",
     "webpack-manifest-plugin": "github:danethurber/webpack-manifest-plugin"
   }
 }
