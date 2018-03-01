@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2018-03-01)
+
+
+### Bug Fixes
+
+* fix lint errors ([0f25954](https://github.com/SUI-Components/sui/commit/0f25954))
+* linting errors ([f0b7411](https://github.com/SUI-Components/sui/commit/f0b7411))
+
+
+### Features
+
+* add help texts, splitted file templates and added some explanations to th ([9102bae](https://github.com/SUI-Components/sui/commit/9102bae)), closes [#213](https://github.com/SUI-Components/sui/issues/213)
+* added first file ([1f1085f](https://github.com/SUI-Components/sui/commit/1f1085f))
+* added package-json modifier to add a new start script ([123a8a1](https://github.com/SUI-Components/sui/commit/123a8a1))
+* added some docs to the readme ([9787d0f](https://github.com/SUI-Components/sui/commit/9787d0f))
+* added sui widget embedder main file ([ef3b169](https://github.com/SUI-Components/sui/commit/ef3b169))
+* core files created and tested successfully ([6ddd44a](https://github.com/SUI-Components/sui/commit/6ddd44a))
+* created base generator code taking as an example the sui-studio-generate ([c0fbca7](https://github.com/SUI-Components/sui/commit/c0fbca7))
+* pr changes, created const variable ([25f86e5](https://github.com/SUI-Components/sui/commit/25f86e5))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2018-02-15)
 
