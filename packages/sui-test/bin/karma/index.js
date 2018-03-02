@@ -1,6 +1,7 @@
 // https://github.com/developit/karmatic/blob/master/src/index.js
 const { Server } = require('karma')
 const configure = require('./config')
+const CWD = process.cwd()
 
 const createServer = config => {
   let resolve, reject
@@ -24,9 +25,20 @@ const createServer = config => {
   return server
 }
 
-module.exports = async ({ watch = false, ci = false }) => {
+module.exports = async ({ watch, ci, pattern, ignorePattern }) => {
   if (watch) configure.singleRun = false
   if (ci) configure.browsers = ['Firefox']
+  if (ignorePattern) configure.exclude = [ignorePattern]
+
+  configure.files = [
+    `${CWD}/node_modules/babel-polyfill/browser.js`,
+    `${CWD}/src/**/*.js`,
+    `${CWD}/${pattern}`
+  ]
+  configure.preprocessors = {
+    [pattern]: ['browserify'],
+    'src/**/*.js': ['browserify']
+  }
 
   let server = createServer(configure)
 
