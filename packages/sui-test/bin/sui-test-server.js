@@ -7,7 +7,7 @@ const { serialSpawn } = require('@s-ui/helpers/cli')
 
 program
   .option('-W, --watch', 'Run in watch mode')
-  .option('-P, --pattern <pattern>', 'Path pattern to include', '/test')
+  .option('-P, --pattern <pattern>', 'Path pattern to include', 'test')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -26,7 +26,7 @@ serialSpawn([
   [
     require.resolve('mocha/bin/mocha'),
     [
-      `'${process.cwd()}${pattern}'`,
+      `'${process.cwd()}/${pattern}'`,
       `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
       '--recursive',
       watch && '--watch'
