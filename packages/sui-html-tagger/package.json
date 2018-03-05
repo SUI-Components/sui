@@ -1,0 +1,22 @@
+{
+  "name": "@s-ui/html-tagger",
+  "version": "1.0.0",
+  "description": "Tool to tag HTML elements",
+  "main": "lib/",
+  "scripts": {
+    "lib": "npm run lib:js",
+    "lib:js": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "prepublish": "npm run lint && npm run test && npm run lib"
+  },
+  "keywords": [
+    "data-rel",
+    "tags",
+    "service"
+  ],
+  "author": "Enablers frontend",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1"
+  }
+}
