@@ -3,7 +3,7 @@
 
 ## Motivation
 
-(1) Setup properly a testing env in JS is hard. There is a lot deps and is easy for us install differents setups in differents project. To avoid that now to run a test suit over your code you need install only one tool. 
+(1) Setup properly a testing env in JS is hard. There is a lot deps and is easy for us install differents setups in differents project. To avoid that now to run a test suit over your code you need install only one tool.
 
 
 ## Folder Structure
@@ -59,10 +59,12 @@ npm install @s-ui/test
 
     -W, --watch  Run in watch mode
     -C, --ci     Run a Firefox headless for CI testing
+    -P, --pattern <pattern>               Path pattern to include (default: test/**/*Spec.js)
+    -I, --ignore-pattern <ignorePattern>  Path pattern to ignore for testing (default: false)
     -h, --help   output usage information
   Description:
 
-  Run tests in chorme
+  Run tests in Chorme
 
   Examples:
 
@@ -78,6 +80,7 @@ npm install @s-ui/test
     Options:
 
         -W, --watch  Run in watch mode
+        -P, --pattern <pattern>  Path pattern to include (default: test)
         -h, --help   output usage information
     Description:
 
