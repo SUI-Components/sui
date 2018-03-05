@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import { Tagger } from '../src/index'
+import { tagHTML } from '../src/index'
 
 describe('Tagger', () => {
   before(() => {
@@ -33,7 +33,7 @@ describe('Tagger', () => {
   `
     document.body.insertAdjacentHTML('afterbegin', fixture)
 
-    Tagger(tags)
+    tagHTML({tags})
   })
 
   it('should tag correctly a div specified in the tags list', done => {
