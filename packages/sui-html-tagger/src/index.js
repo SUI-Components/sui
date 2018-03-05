@@ -53,7 +53,7 @@ function onIdle (cb) {
   }
 }
 
-export function Tagger (tags) {
+export function tagHTML ({tags}) {
   const fireTagging = debounce(() => onIdle(searchTagsToTrackOnDocument), 500, true)
 
   // check if the DOMContentLoaded has been already fired
