@@ -38,6 +38,18 @@ module.exports = {
     chunkFilename: '[name].[chunkhash:8].js',
     filename: '[name].[chunkhash:8].js'
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        }
+      }
+    }
+  },
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
