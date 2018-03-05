@@ -36,6 +36,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-i18n](./packages/sui-i18n) | Isomorphic i18n service for browser and node |
 | [sui-js](./packages/sui-js) | Javascript utilities |
 | [sui-lint](./packages/sui-lint) | CLI to lint your code and make it compliant to SUI official rules |
+| [sui-mockmock](./packages/sui-mockmock) | Mocking utilities for testing. |
 | [sui-mono](./packages/sui-mono) | Simple CLI for monorepo/multipackage commits, releases, etc. |
 | [sui-perf](./packages/sui-perf) | React performance graphs in terminal (SSR support) |
 | [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |

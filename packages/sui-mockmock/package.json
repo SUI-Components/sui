@@ -1,0 +1,32 @@
+{
+  "name": "@s-ui/mockmock",
+  "version": "1.0.0",
+  "description": "Mocking utilities for testing.",
+  "main": "lib/index.js",
+  "scripts": {
+    "lib": "rm -Rf lib && babel ./src -d lib --presets sui",
+    "prepublish": "npm run lib"
+  },
+  "keywords": [],
+  "author": "David Almeida <davidbarna@gmail.com>",
+  "browser": {
+    "./lib/http/serverMocker.js": false
+  },
+  "dependencies": {
+    "nock": "9.1.6",
+    "sinon": "1.17.6"
+  },
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-preset-sui": "1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mockmock#readme"
+}
