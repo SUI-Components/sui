@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "David Almeida <davidbarna@gmail.com>",
   "browser": {
-    "./lib/http/index.js": "./lib/http/clientMocker.js"
+    "./lib/http/serverMocker.js": false
   },
   "dependencies": {
     "nock": "9.1.6",

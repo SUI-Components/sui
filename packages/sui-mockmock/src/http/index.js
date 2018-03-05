@@ -1,3 +1,6 @@
 import ServerMocker from './serverMocker'
+import ClientMocker from './clientMocker'
 
-export default ServerMocker
+const isNode = Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]';
+
+export default isNode ? ServerMocker : ClientMocker
