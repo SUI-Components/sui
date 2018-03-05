@@ -1,10 +1,33 @@
 # @s-ui/html-tagger
-Tool to tagger the HTML of your webpage from a service.
+> Tool to tag the HTML of your webpage from a service.
+
+It provides:
+* A way to tag HTML elements, perfect for add tracking on SPAs.
+* Performance focused in order to avoid jank and heavy script load.
 
 # Use:
 
-* Load the script with the tagger `tagger.umd.min.js`. That script expose the global object `window.SCM.Tagger`
-* Load After the first script other script with the tag´s object. And call to `window.SCM.Tagger()` [example](https://github.com/scm-spain/html-tagger/blob/master/docs/tags.js)
+```js
+import { tagHTML } from '@s-ui/html-tagger'
+// create an object like this
+const tags = {
+  'CSS_SELECTOR_OF_THE_ELEMENT_TO_TAG': {
+    'DATA_TAG_NAME_TO_ADD': 'DATA_TAG_VALUE_TO_ADD'
+  },
+  '.simple-div': {
+    'tracking-tag': 'c_tracking_tag'
+  },
+  '.button': {
+    'tracking-tag': 'c_tracking_button'
+  },
+  '.added-later': {
+    'tracking-tag': 'c_tracking_dynamic'
+  }
+}
+
+// execute the method and use the created tags
+tagHTML({ tags })
+```
 
 # Performance:
 
@@ -13,10 +36,10 @@ Tool to tagger the HTML of your webpage from a service.
 
 ### Debugger:
 
-You can use this command in the console to check the tagging:
+You can use this command in the console to check if the tagging has worked correctly.
 
 ```js
 console.table(
-  Array.from(document.querySelectorAll('[data-tealium-tag]'))
+  Array.from(document.querySelectorAll('[data-tracking-tag]'))
 )
 ```
