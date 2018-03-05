@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2018-03-05)
+
+
+### Features
+
+* clean testing packages and config on specific package ([96424aa](https://github.com/SUI-Components/sui/commit/96424aa))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2018-01-12)
 
@@ -48,7 +58,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add package.json ([63e3529](https://github.com/SUI-Components/sui/commit/63e3529))
+* add package.json ([63e3529](https://github.com/SUI-Components/sui/commit/63e3529)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 
