@@ -1,3 +1,5 @@
+import debounce from 'just-debounce-it'
+
 const hasWindow = typeof window !== 'undefined'
 const hasIdle = hasWindow && window.requestIdleCallback
 const hasRAF = hasWindow && window.requestAnimationFrame
@@ -9,29 +11,6 @@ const MUTATION_OBSERVER_CONFIG = {
   characterData: false,
   childList: true,
   subtree: true,
-}
-
-function debounce (fn, wait, callFirst) {
-  let timeout
-  return function () {
-    if (!wait) {
-      return fn.apply(this, arguments)
-    }
-    const context = this
-    const args = arguments
-    const callNow = callFirst && !timeout
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
-      timeout = null
-      if (!callNow) {
-        return fn.apply(context, args)
-      }
-    }, wait)
-
-    if (callNow) {
-      return fn.apply(this, arguments)
-    }
-  }
 }
 
 function onIdle (cb) {
