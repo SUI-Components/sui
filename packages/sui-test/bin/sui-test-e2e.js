@@ -24,7 +24,7 @@ const objectToCommaString = obj => Object.keys(obj)
 program
   .option('-B, --baseUrl <baseUrl>', 'URL of the site to execute tests (in ./test/e2e/) on.')
   .option('-S, --screenshotsOnError', 'Take screenshots of page on any failure.')
-  .option('-U, --userAgentAppend <userAgentAppend>', 'Append string to USerAgent header.')
+  .option('-U, --userAgentAppend <userAgentAppend>', 'Append string to UserAgent header.')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
