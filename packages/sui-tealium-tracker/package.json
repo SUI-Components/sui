@@ -21,6 +21,6 @@
     "sinon": "^4.4.2"
   },
   "dependencies": {
-    "@s-ui/js": "^1.8.0"
+    "@s-ui/js": "1"
   }
 }
