@@ -1,45 +1,52 @@
-# @s-ui/html-tagger
-> Tool to tag the HTML of your webpage from a service.
+# @s-ui/tealium-tracker
+> Tool to track events like click or change and, if a tag is present on the element dispatch a link event to tealium.
 
-It provides:
-* A way to tag HTML elements, perfect for add tracking on SPAs.
-* Performance focused in order to avoid jank and heavy script load.
+This tool is thinked to be used with the `@s-ui/html-tagger` tool but you can define your own tags and it will work asswell.
 
 # Use:
 
-```js
-import { tagHTML } from '@s-ui/html-tagger'
-// create an object like this
-const tags = {
-  'CSS_SELECTOR_OF_THE_ELEMENT_TO_TAG': {
-    'DATA_TAG_NAME_TO_ADD': 'DATA_TAG_VALUE_TO_ADD'
-  },
-  '.simple-div': {
-    'tracking-tag': 'c_tracking_tag'
-  },
-  '.button': {
-    'tracking-tag': 'c_tracking_button'
-  },
-  '.added-later': {
-    'tracking-tag': 'c_tracking_dynamic'
-  }
-}
+## Basic usage: 
 
-// execute the method and use the created tags
-tagHTML({ tags })
+To use it require it from the desired file as this:
+```javascript
+require('@s-ui/tealium-tracker')
+```
+The package will: 
+#### 1. Init listeners:
+
+This will add a document listener watching for:
+- 1. `click` event
+- 2. `input` change event
+
+Once we click on any `'A', 'BUTTON', 'DIV', 'INPUT', 'SVG'` the listener callback will act and check if we or any of our parents with that whitelisted types have the tag `data-tealium-tag`
+
+If the tag exists it will call a throttle function that will call utag.link function. If there's no utag present on the site the package will warn you with a console message.
+
+
+## Custom event dispatcher usage: 
+
+
+```javascript
+require('@s-ui/tealium-tracker')('MyCustomEventName')
 ```
 
-# Performance:
+The package will:
 
-* It uses requestIdleCallback if supported, in order to only tag when the browser is idle. If not available, it tries to use requestAnimationFrame in order to tag elements smoothly.
-* It uses MutationObserver if supported in order to only tag elements when these are added.
+#### 1. Init listeners:
 
-### Debugger:
+This will add a document listener watching for:
+- 1. `click` event
+- 2. `input` change event
+- 3. `customEvent` trigger
 
-You can use this command in the console to check if the tagging has worked correctly.
+Once we click on any `'A', 'BUTTON', 'DIV', 'INPUT', 'SVG'` the listener callback will act and check if we or any of our parents with that whitelisted types have the tag `data-tealium-tag`
 
-```js
-console.table(
-  Array.from(document.querySelectorAll('[data-tracking-tag]'))
-)
+If the tag exists it will call a throttle function that will call utag.link function. If there's no utag present on the site the package will warn you with a console message.
+
+#### 2. Populate window.dispatchCustomEvent function
+
+For retro-compatibility reasons we populate this function to the window so the sites could dispatch their own custom event without problem.
+
+```javascript
+    window.dispatchCustomEvent = (detail) => dispatchEvent({ eventName: this.customEventName, detail })
 ```

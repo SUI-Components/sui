@@ -15,10 +15,10 @@ export class SuiTealiumTracker {
   }
 
   init () {
-    this.promoteDispatchCustomEventToWindow()
     this.initClickListener()
     this.initChangeListener()
-    this.initCustomEventListener()
+    this.customEventName && this.promoteDispatchCustomEventToWindow()
+    this.customEventName && this.initCustomEventListener()
   }
 
   initClickListener () {
