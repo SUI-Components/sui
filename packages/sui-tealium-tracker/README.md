@@ -1,8 +1,8 @@
 # @s-ui/tealium-tracker
 > Tool to track events like click or change and, if a tag is present on the element dispatch a link event to tealium.
 
-This tool is thinked to be used with the `@s-ui/html-tagger` tool but you can define your own tags and it will work asswell.
-
+This tool is thinked to be used with the [@s-ui/html-tagger](https://github.com/SUI-Components/sui/tree/master/packages/sui-html-tagger) tool but you can define your own tags and it will work asswell.ls
+cd
 # Use:
 
 ## Basic usage: 
