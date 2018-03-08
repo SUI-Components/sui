@@ -97,7 +97,7 @@ npm install @s-ui/test
 sui-test e2e [options]
 ```
 
-**`sui-test e2e` assumes that your e2e tests are located in the `./test/e2e/` folder of your project.**
+**`sui-test e2e` assumes that your e2e tests are located in the `./test-e2e/` folder of your project.**
 
 
 ### Options
@@ -130,7 +130,7 @@ Cypress can be detected as a robot if your server has that kind of protection or
 
 #### `sui-test e2e --screenshotsOnError`
 
-If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/e2e/screenshots` folder of your project.
+If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/test-e2e/screenshots` folder of your project.
 
 ## Contributing
 

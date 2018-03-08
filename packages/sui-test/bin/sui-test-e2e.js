@@ -6,8 +6,8 @@ const program = require('commander')
 const { getSpawnPromise, showError } = require('@s-ui/helpers/cli')
 
 const CYPRESS_FOLDER_PATH = path.resolve(__dirname, 'cypress')
-const TESTS_FOLDER = process.cwd() + '/test/e2e'
-const SCREENSHOTS_FOLDER = process.cwd() + '/.tmp/e2e/screenshots'
+const TESTS_FOLDER = process.cwd() + '/test-e2e'
+const SCREENSHOTS_FOLDER = process.cwd() + '/.tmp/test-e2e/screenshots'
 const DEFAULT_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 Chrome/65.0.3325.146 Safari/537.36'
 const HELP_MESSAGE = `
   Description:
@@ -22,7 +22,7 @@ const objectToCommaString = obj => Object.keys(obj)
   .join(',')
 
 program
-  .option('-B, --baseUrl <baseUrl>', 'URL of the site to execute tests (in ./test/e2e/) on.')
+  .option('-B, --baseUrl <baseUrl>', 'URL of the site to execute tests (in ./test-e2e/) on.')
   .option('-S, --screenshotsOnError', 'Take screenshots of page on any failure.')
   .option('-U, --userAgentAppend <userAgentAppend>', 'Append string to UserAgent header.')
   .option('-G, --gui', 'Run the tests in GUI mode.')
