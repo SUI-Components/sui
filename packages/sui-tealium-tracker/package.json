@@ -1,0 +1,26 @@
+{
+  "name": "@s-ui/tealium-tracker",
+  "version": "1.1.0",
+  "description": "Tool to track tealium tags and handle events with tealium",
+  "main": "lib/",
+  "scripts": {
+    "lib": "npm run lib:js",
+    "lib:js": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib"
+  },
+  "keywords": [
+    "data-rel",
+    "track",
+    "service",
+    "tealium"
+  ],
+  "author": "Enablers frontend",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1",
+    "sinon": "^4.4.2"
+  },
+  "dependencies": {
+    "@s-ui/js": "1"
+  }
+}
