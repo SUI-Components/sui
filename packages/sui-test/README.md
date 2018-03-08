@@ -91,7 +91,46 @@ npm install @s-ui/test
       $ sui-test server -W
 ```
 
+## e2e tests
 
+```
+sui-test e2e [options]
+```
+
+**`sui-test e2e` assumes that your e2e tests are located in the `./test-e2e/` folder of your project.**
+
+
+### Options
+
+```sh
+  Usage: sui-test-e2e [options]
+
+
+  Options:
+
+    -B, --baseUrl <baseUrl>                  URL of the site to execute tests (in ./test/e2e/) on.
+    -S, --screenshotsOnError                 Take screenshots of page on any failure.
+    -U, --userAgentAppend <userAgentAppend>  Append string to UserAgent header.
+    -G, --gui                                Run the tests in GUI mode.
+    -h, --help                               output usage information
+```
+
+#### `sui-test e2e --gui`
+
+Tests are executed with [cypress](https://www.cypress.io/). It provides a special GUI to help you write your tests with a totally new experiences.
+
+![cypress](https://docs.cypress.io/img/guides/first-test-click-revert.516ad69d.png)
+
+[Check the docs for more info](https://docs.cypress.io/guides/overview/why-cypress.html#).
+
+#### `sui-test e2e --userAgentAppend='My custom string'`
+
+Cypress can be detected as a robot if your server has that kind of protection or firewall. In this case, if your server allows an exception by header, you can append to the `UserAgent` header a string that cypress will add when opening your site with the browser.
+
+
+#### `sui-test e2e --screenshotsOnError`
+
+If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/test-e2e/screenshots` folder of your project.
 
 ## Contributing
 
