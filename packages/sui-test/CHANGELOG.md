@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.2.0"></a>
+# 1.2.0 (2018-03-08)
+
+
+### Bug Fixes
+
+* move e2e test to an exclusive folder ([4aa9f69](https://github.com/SUI-Components/sui/commit/4aa9f69))
+
+
+### Features
+
+* sui-test e2e command ([4b48cb6](https://github.com/SUI-Components/sui/commit/4b48cb6))
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2018-03-05)
 
