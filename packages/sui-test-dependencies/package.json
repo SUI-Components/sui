@@ -1,5 +1,5 @@
 {
-  "name": "sui-test-dependencies",
+  "name": "@s-ui/sui-test-dependencies",
   "version": "1.0.0",
   "description": "A set of dependencies commonly used with our sui-test package",
   "main": "index.js",
