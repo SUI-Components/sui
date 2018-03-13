@@ -48,8 +48,8 @@ if (program.clean) {
   rimraf.sync(PUBLIC_PATH)
 }
 
-const build = ({ page }) => {
-  const compiler = compilerFactory({ page })
+const build = ({ page, remoteCdn }) => {
+  const compiler = compilerFactory({ page, remoteCdn })
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
       if (error) {
@@ -169,7 +169,7 @@ const createSW = () =>
       .on('error', rej)
   })
 
-Promise.all(pagesFor({ path: WIDGETS_PATH }).map(page => build({ page })))
+Promise.all(pagesFor({ path: WIDGETS_PATH }).map(page => build({ page, remoteCdn })))
   .then(createDownloader)
   .then(createSW)
   .catch(showError)
