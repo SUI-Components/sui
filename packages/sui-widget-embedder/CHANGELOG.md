@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.13.0"></a>
+# 1.13.0 (2018-03-15)
+
+
+### Features
+
+* implement the remoteCDN on publicPath for chunking purposes. ([dab1a2e](https://github.com/SUI-Components/sui/commit/dab1a2e)), closes [#228](https://github.com/SUI-Components/sui/issues/228)
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2018-03-01)
 
