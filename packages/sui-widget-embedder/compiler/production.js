@@ -31,7 +31,7 @@ module.exports = ({page, remoteCdn}) => {
     output: {
       ...prodConfig.output,
       path: path.resolve(process.cwd(), 'public', page),
-      publicPath: remoteCdn ? `${remoteCdn}/${page}` : prodConfig.output.publicPath
+      publicPath: remoteCdn ? `${remoteCdn}/${page}/` : prodConfig.output.publicPath
     },
     plugins: pipe(
       removePlugin('HtmlWebpackPlugin'),
