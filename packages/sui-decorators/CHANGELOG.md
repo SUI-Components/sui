@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-03-15)
+
+
+### Bug Fixes
+
+* fix 2 tests until someone with the needed knowledge check what's happening ([a54392e](https://github.com/SUI-Components/sui/commit/a54392e))
+
+
+### Features
+
+* implement the remoteCDN on publicPath for chunking purposes. ([dab1a2e](https://github.com/SUI-Components/sui/commit/dab1a2e)), closes [#228](https://github.com/SUI-Components/sui/issues/228)
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-03-05)
 
