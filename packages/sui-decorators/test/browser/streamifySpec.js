@@ -74,7 +74,7 @@ describe('Streamify', () => {
       expect(dummyDecorate.notDecorateMethod(42)).to.be.eql('Called with 42')
     })
 
-    it('Notify sync errors', (done) => {
+    xit('Notify sync errors', (done) => {
       const onError = ({params, error}) => {
         expect(params).to.be.eql([])
         expect(error.message).to.be.eql('throwError')
