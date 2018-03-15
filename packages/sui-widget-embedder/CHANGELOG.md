@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.14.0"></a>
+# 1.14.0 (2018-03-15)
+
+
+### Bug Fixes
+
+* ad a / on the remoteCDN publicPath to avoid import errors ([985d742](https://github.com/SUI-Components/sui/commit/985d742))
+
+
+
 <a name="1.13.0"></a>
 # 1.13.0 (2018-03-15)
 
