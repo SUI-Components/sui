@@ -3,7 +3,7 @@
 const reqComponentsSrc =
   require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/src\/index\.jsx?/)
 const reqComponentsPkg =
-  require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/package\.json?/)
+  require.context(`bundle-loader?${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/package\.json?/)
 const reqComponentsPlayGround =
   require.context(`bundle-loader?lazy!raw-loader!${__BASE_DIR__}/demo`, true, /^.*\/playground/)
 const reqContextPlayGround =
@@ -80,23 +80,6 @@ const tryRequire = ({category, component}) => {
       }
     })
   })
-
-  // const Component =
-  //   System.import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`)
-  //     .then(component => component.default)
-  //     .catch(e => System.import(`${__BASE_DIR__}/components/${category}/${component}/src/index.jsx`))
-
-  // const playground =
-  //   System.import(`raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`)
-  //     .catch(e => `return (<${Component.displayName || Component.name} />)`)
-
-  // const context =
-  //   System.import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-  //     .catch(e => false)
-
-  // const routes =
-  //   System.import(`${__BASE_DIR__}/demo/${category}/${component}/routes.js`)
-  //     .catch(e => false)
 
   return Promise.all([exports, playground, context, routes, events, pkg])
 }
