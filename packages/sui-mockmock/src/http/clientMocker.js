@@ -1,9 +1,6 @@
 import {Mocker, Mock} from './mockerInterface'
 import sinon from 'sinon'
 
-const rawResponseResolver = (response, statusCode, headers = {'Content-Type': 'application/json'}) =>
-  [statusCode, headers, JSON.stringify(response)]
-
 class ClientMocker extends Mocker {
   _server = null
 
@@ -30,6 +27,13 @@ class ClientMocker extends Mocker {
 }
 
 class ClientMock extends Mock {
+  _responseResolver = (
+    response,
+    statusCode,
+    headers = {'Content-Type': 'application/json'}
+  ) =>
+    [statusCode, headers, JSON.stringify(response)]
+
   constructor (server, baseUrl) {
     super()
     this._server = server
@@ -38,13 +42,11 @@ class ClientMock extends Mock {
     this._method = null
     this._query = ''
     this._path = null
-    this._responseResolver = identity => identity
   }
 
   get (path) {
     this._method = 'GET'
     this._path = path
-    this._responseResolver = response => JSON.stringify(response)
 
     return this
   }
@@ -59,7 +61,6 @@ class ClientMock extends Mock {
   post (path) {
     this._method = 'POST'
     this._path = path
-    this._responseResolver = rawResponseResolver
 
     return this
   }
@@ -67,7 +68,6 @@ class ClientMock extends Mock {
   put (path) {
     this._method = 'PUT'
     this._path = path
-    this._responseResolver = rawResponseResolver
 
     return this
   }
@@ -75,7 +75,6 @@ class ClientMock extends Mock {
   delete (path) {
     this._method = 'DELETE'
     this._path = path
-    this._responseResolver = rawResponseResolver
 
     return this
   }
