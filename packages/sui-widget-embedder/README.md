@@ -116,6 +116,24 @@ If you want to define the remoteCdn by command option you can pass it using the 
 $ sui-widget-embedder build -R http://mycdn.com
 ```
 
+# Generator
+
+If you don't want to take care about base code and folder creation of a new widget you can use the sui-widget-embedder-generator
+
+```
+$ sui-widget-embedder generate <widgetName>
+```
+
+This will create the base files to make your widget work.
+
+You can also define the regExp that should match to load your widget into the page doing the follow:
+
+```
+$ sui-widget-embedder generate <widgetName> -E 'expression'
+```
+
+Note that the quotes here are not 'optional' you can add an expresion without quotes off course but you'll need to escape all the chars that are interpretable by the terminal.
+
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).

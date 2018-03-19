@@ -1,5 +1,6 @@
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
+
 const config = {
   singleRun: true,
 
@@ -7,18 +8,7 @@ const config = {
 
   frameworks: ['browserify', 'mocha'],
 
-  files: [
-    `${CWD}/node_modules/babel-polyfill/browser.js`,
-    `${CWD}/src/**/*.js`,
-    `${CWD}/test/**/*Spec.js`
-  ],
-
   reporters: ['spec'],
-
-  preprocessors: {
-    'test/**/*.js': ['browserify'],
-    'src/**/*.js': ['browserify']
-  },
 
   browsers: ['Chrome'],
 
