@@ -18,7 +18,6 @@
     "browserify-babel-istanbul": "0.4.0",
     "chalk": "2.3.0",
     "commander": "2.12.1",
-    "cypress": "2.1.0",
     "envify": "4.1.0",
     "karma": "1.7.1",
     "karma-browserify": "5.1.2",
