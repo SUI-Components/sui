@@ -40,10 +40,12 @@ let webpackConfig = {
     rules: [
       {
         test: /\.jsx?$/,
+        include: /src/,
         exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
         use: {
           loader: 'babel-loader',
           options: {
+            babelrc: false,
             presets: ['sui']
           }
         }
