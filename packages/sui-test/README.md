@@ -121,7 +121,7 @@ Tests are executed with [cypress](https://www.cypress.io/). It provides a specia
 
 [Check the docs for more info](https://docs.cypress.io/guides/overview/why-cypress.html#).
 
-**Important:** Cypress is not installed as dependnency of `@s-ui/test`. It will be auto-installed only on first `sui-test e2e` execution.
+**Important:** Cypress is not installed as dependency of `@s-ui/test`. It will be auto-installed only on first `sui-test e2e` execution.
 
 #### `sui-test e2e --userAgentAppend='My custom string'`
 
