@@ -14,6 +14,7 @@ import qs from 'querystring'
 import path from 'path'
 import fs from 'fs'
 import util from 'util'
+import withContext from '@s-ui/hoc/lib/withContext'
 
 const readFile = util.promisify(fs.readFile)
 
@@ -51,7 +52,7 @@ export default (req, res, next) => {
       const { initialProps, reactString } = await ssrComponentWithInitialProps({
         context,
         renderProps,
-        Target: RouterContext
+        Target: withContext(context)(RouterContext)
       })
       res.send(
         html
