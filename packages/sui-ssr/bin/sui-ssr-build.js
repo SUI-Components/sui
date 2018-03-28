@@ -7,7 +7,7 @@ const ncp = require('copy-paste')
 
 const serverCompilerFactory = require('../compiler/server')
 
-const BUILD_SERVER_PATH = path.join(process.cwd(), '.server')
+const BUILD_SERVER_PATH = path.join(process.cwd(), 'server')
 
 program
   .option('-C, --clean', 'Remove build folder before create a new one')
@@ -43,14 +43,13 @@ const build = () =>
           return jsonStats.errors.map(error => console.log(error))
         }
 
-        if (stats.hasWarnings()) {
+        if (program.verbose && stats.hasWarnings()) {
           console.log('Webpack generated the following warnings: ')
           jsonStats.warnings.map(warning => console.log(warning))
         }
 
         const SERVER_ENTRY_POINT = path.join(
-          process.cwd(),
-          '.server',
+          BUILD_SERVER_PATH,
           jsonStats.assetsByChunkName.main
         )
 
