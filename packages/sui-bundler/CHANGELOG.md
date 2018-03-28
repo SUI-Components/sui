@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.15.0"></a>
+# 2.15.0 (2018-03-28)
+
+
+### Features
+
+* add node-externals dep ([bd09441](https://github.com/SUI-Components/sui/commit/bd09441))
+* add server config ([cbc8a01](https://github.com/SUI-Components/sui/commit/cbc8a01))
+
+
+
 <a name="2.14.0"></a>
 # 2.14.0 (2018-02-28)
 
