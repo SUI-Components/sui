@@ -1,14 +1,16 @@
 /* eslint-disable no-console */
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
 const Externals = require('./plugins/externals')
 const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {navigateFallbackWhitelist, navigateFallback, runtimeCaching, directoryIndex} = require('./shared/precache')
@@ -20,13 +22,14 @@ if (process.env.PWD === undefined) {
   process.env.PWD = process.cwd()
 }
 
+console.log('👋  from Webpack 4')
+
 module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
-  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
   entry: config.vendor ? {
     app: MAIN_ENTRY_POINT,
     vendor: config.vendor
@@ -39,6 +42,14 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ],
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -57,7 +68,10 @@ module.exports = {
       __DEV__: false,
       __BASE_DIR__: JSON.stringify(process.env.PWD)
     }),
-    new ExtractTextPlugin('styles.[name].[contenthash:8].css'),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
+      chunkFilename: '[id].[contenthash:8].css'
+    }),
     new HtmlWebpackPlugin({
       env: process.env,
       inject: 'head',
@@ -67,7 +81,6 @@ module.exports = {
         collapseWhitespace: true,
         keepClosingSlash: true,
         minifyCSS: true,
-        minifyJS: true,
         minifyURLs: true,
         removeEmptyAttributes: true,
         removeRedundantAttributes: true,
@@ -113,11 +126,6 @@ module.exports = {
       ),
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
     })),
-    new UglifyJsPlugin({
-      cache: true,
-      parallel: true,
-      sourceMap: false
-    }),
     when(config.externals, () => new Externals({files: config.externals}))
   ]),
   module: {
@@ -156,7 +164,8 @@ module.exports = {
       },
       {
         test: /(\.css|\.scss)$/,
-        use: ExtractTextPlugin.extract([
+        use: [
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -174,7 +183,7 @@ module.exports = {
               importer: require('node-sass-json-importer')
             }
           }
-        ])
+        ]
       }
     ]
   },
