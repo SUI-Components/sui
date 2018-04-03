@@ -1,10 +1,10 @@
 # sui-test
+
 > Zero config testing tool
 
 ## Motivation
 
 (1) Setup properly a testing env in JS is hard. There is a lot deps and is easy for us install differents setups in differents project. To avoid that now to run a test suit over your code you need install only one tool.
-
 
 ## Folder Structure
 
@@ -51,7 +51,6 @@ npm install @s-ui/test
 ## Browser options
 
 ```sh
-
   Usage: sui-test browser [options]
 
 
@@ -99,7 +98,6 @@ sui-test e2e [options]
 
 **`sui-test e2e` assumes that your e2e tests are located in the `./test-e2e/` folder of your project.**
 
-
 ### Options
 
 ```sh
@@ -123,10 +121,11 @@ Tests are executed with [cypress](https://www.cypress.io/). It provides a specia
 
 [Check the docs for more info](https://docs.cypress.io/guides/overview/why-cypress.html#).
 
+**Important:** Cypress is not installed as dependency of `@s-ui/test`. It will be auto-installed only on first `sui-test e2e` execution.
+
 #### `sui-test e2e --userAgentAppend='My custom string'`
 
 Cypress can be detected as a robot if your server has that kind of protection or firewall. In this case, if your server allows an exception by header, you can append to the `UserAgent` header a string that cypress will add when opening your site with the browser.
-
 
 #### `sui-test e2e --screenshotsOnError`
 
@@ -135,4 +134,3 @@ If defined, any error on your tests will create a screenshot of that moment in t
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).
-

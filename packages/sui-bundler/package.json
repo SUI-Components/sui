@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "2.14.0",
+  "version": "2.15.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -59,10 +59,11 @@
     "sw-precache-webpack-plugin": "0.11.5",
     "uglifyjs-webpack-plugin": "1.2.4",
     "url-loader": "1.0.1",
-    "webpack": "4.1.1",
     "webpack-bundle-analyzer": "2.11.1",
     "webpack-dev-middleware": "3.0.1",
+    "webpack-node-externals": "1.6.0",
+    "webpack": "4.1.1",
     "webpack-hot-middleware": "2.21.2",
-    "webpack-manifest-plugin": "github:danethurber/webpack-manifest-plugin"
+    "webpack-manifest-plugin": "1.2.1"
   }
 }
