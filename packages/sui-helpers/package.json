@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/helpers",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A set of internal helpers used by sui-related packages.",
   "keywords": [],
   "author": "David Almeida <davidbarna@gmail.com>",
@@ -20,6 +20,5 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage":
-    "https://github.com/SUI-Components/sui/tree/master/packages/sui-helpers#readme"
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-helpers#readme"
 }
