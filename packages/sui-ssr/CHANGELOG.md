@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.4.0"></a>
+# 1.4.0 (2018-04-04)
+
+
+### Features
+
+* contextFactory now is optional ([d7633be](https://github.com/SUI-Components/sui/commit/d7633be))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2018-04-04)
 
