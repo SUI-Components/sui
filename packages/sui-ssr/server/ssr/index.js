@@ -1,7 +1,6 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
 import routes from 'routes'
-import contextFactory from 'contextFactory'
 import { RouterContext, match } from 'react-router'
 // import Helmet from 'react-helmet'
 import {
@@ -16,12 +15,21 @@ import fs from 'fs'
 import util from 'util'
 import withContext from '@s-ui/hoc/lib/withContext'
 
+// __MAGIC IMPORTS__
+let contextFactory
+try {
+  contextFactory = require('contextFactory').default
+} catch (e) {
+  contextFactory = async () => ({})
+}
+// END __MAGIC IMPORTS__
+
 const readFile = util.promisify(fs.readFile)
 
 const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const APP_PLACEHOLDER = '<!-- APP -->'
-const injectDataHydratation = data => {
+const injectDataHydratation = (data = {}) => {
   const escapedJson = JSON.stringify(data).replace(/<\//g, '<\\/')
   return `<script>window.__INITIAL_PROPS__=${escapedJson}</script>`
 }
