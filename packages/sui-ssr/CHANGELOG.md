@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.3.0"></a>
+# 1.3.0 (2018-04-04)
+
+
+### Features
+
+* bump version ([374270b](https://github.com/SUI-Components/sui/commit/374270b))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2018-04-04)
 
