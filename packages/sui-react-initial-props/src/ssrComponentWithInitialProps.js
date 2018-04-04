@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import withContext from '@s-ui/hoc/lib/withContext'
 
-const EMPTY_FUNC = async () => ({})
+const EMPTY_FUNC = () => Promise.resolve({})
 
 export default function ssrComponentWithInitialProps ({
   Target,
