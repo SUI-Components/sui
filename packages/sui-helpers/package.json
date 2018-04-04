@@ -7,7 +7,10 @@
   "dependencies": {
     "colors": "1.1.2",
     "commander": "2.9.0",
-    "fs-extra": "4.0.1"
+    "execa": "0.10.0",
+    "figures": "2.0.0",
+    "fs-extra": "4.0.1",
+    "listr": "0.13.0"
   },
   "license": "MIT",
   "repository": {
@@ -17,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-helpers#readme"
+  "homepage":
+    "https://github.com/SUI-Components/sui/tree/master/packages/sui-helpers#readme"
 }
