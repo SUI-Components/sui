@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-04-04)
+
+
+### Features
+
+* improve parallelSpawn output ([0321974](https://github.com/SUI-Components/sui/commit/0321974))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-02-14)
 
