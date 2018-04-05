@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.10.0"></a>
+# 2.10.0 (2018-04-05)
+
+
+### Bug Fixes
+
+* update critical dependencies of eslint ([329daa2](https://github.com/SUI-Components/sui/commit/329daa2))
+
+
+
 <a name="2.9.0"></a>
 # 2.9.0 (2018-02-22)
 
