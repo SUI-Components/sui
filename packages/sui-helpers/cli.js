@@ -4,6 +4,10 @@ const CODE_OK = 0
 const log = console.log
 const colors = require('colors')
 const program = require('commander')
+const execa = require('execa')
+const Listr = require('listr')
+const figures = require('figures')
+const { splitArray } = require('./array')
 
 /**
  * Spawn several commands in children processes, in series
@@ -24,27 +28,40 @@ function serialSpawn (commands, options = {}) {
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function parallelSpawn (commands, options = {}) {
-  options.stdio = 'pipe'
-  log(`Running ${commands.length} commands in parallel. Please wait...`.cyan)
-  const promises = commands.map(command => new Promise((resolve, reject) => {
-    let [bin, args, opts] = command
-    let stdout = ''
-    let stderr = ''
-    opts = Object.assign({}, opts, options)
+  const symbol = figures.pointer + figures.pointer
+  commands = commands.map(([bin, args, opts]) => [
+    bin,
+    args,
+    Object.assign({}, opts, options)
+  ])
 
-    let child = getSpawnProcess(bin, args, opts)
-    child.stdout.on('data', (data) => { stdout += data.toString() })
-    child.stderr.on('data', (data) => { stderr += data.toString() })
-    child.on('exit', (code) => {
-      log(getCommandCallMessage(bin, args, opts))
-      log(stdout)
-      log(stderr)
-      code === CODE_OK ? resolve(code) : reject(code)
-    })
-  })
-  )
-  return Promise.all(promises)
-    .then(() => log(`${commands.length} commands run successfully.`.cyan))
+  log(`${symbol} Running ${commands.length} commands in parallel.`.cyan)
+  return spawnList(commands, { concurrent: true })
+    .then(() => log(`${commands.length} commands run successfully.`.green))
+    .catch(showError)
+}
+
+/**
+ * Executes n commands as an updating list in the command line
+ * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
+ * @param {Object} listrOptions Options for listr npm package
+ * @param {Number} chunks Number of chunks of tasks to split by to avoid too long output
+ */
+function spawnList (commands, listrOptions = {}, chunks = false) {
+  let taskList = commands.map(([bin, args, opts, title]) => ({
+    title: title || getCommandCallMessage(bin, args, opts),
+    task: () => execa(bin, args, opts)
+  }))
+
+  if (!listrOptions.concurrent && taskList.length > chunks) {
+    taskList = splitArray(taskList, chunks).map((chunk, i) => ({
+      title: `#${i + 1} group of ${chunk.length} commands...`,
+      task: () => new Listr(chunk, listrOptions)
+    }))
+  }
+
+  const tasks = new Listr(taskList, listrOptions)
+  return tasks.run()
 }
 
 /**
@@ -69,11 +86,11 @@ function getSpawnPromiseFactory (bin, args, options) {
  */
 function getSpawnPromise (bin, args, options = {}) {
   return new Promise(function (resolve, reject) {
+    log('')
     log(getCommandCallMessage(bin, args, options))
-    getSpawnProcess(bin, args, options)
-      .on('exit', (code) => {
-        code === CODE_OK ? resolve(code) : reject(code)
-      })
+    getSpawnProcess(bin, args, options).on('exit', code => {
+      code === CODE_OK ? resolve(code) : reject(code)
+    })
   })
 }
 
@@ -85,7 +102,10 @@ function getSpawnPromise (bin, args, options = {}) {
  * @return {ChildProcess}
  */
 function getSpawnProcess (bin, args, options = {}) {
-  options = Object.assign({shell: true, stdio: 'inherit', cwd: process.cwd()}, options)
+  options = Object.assign(
+    { shell: true, stdio: 'inherit', cwd: process.cwd() },
+    options
+  )
   return processSpawn(bin, args, options)
 }
 
@@ -97,9 +117,15 @@ function getSpawnProcess (bin, args, options = {}) {
  * @return {Striog}
  */
 function getCommandCallMessage (bin, args, options = {}) {
-  const folder = options.cwd ? '@' + options.cwd.split('/').slice(-2).join('/') : ''
+  const folder = options.cwd
+    ? '@' +
+      options.cwd
+        .split('/')
+        .slice(-2)
+        .join('/')
+    : ''
   const command = bin.split('/').pop() + ' ' + args.join(' ')
-  return `\n${command.magenta} ${folder.grey}`
+  return `${command} ${folder.grey}`
 }
 
 /*
@@ -111,14 +137,22 @@ function getCommandCallMessage (bin, args, options = {}) {
  * @return
  */
 const showError = (msg, foreignProgram) => {
-  foreignProgram ? foreignProgram.outputHelp(txt => colors.red(txt)) : program.outputHelp(txt => colors.red(txt))
-  console.error(colors.red(msg))// eslint-disable-line no-console
+  const logRed = txt => console.log(colors.red(txt))
+  logRed(
+    `\n${figures.cross} An error occurred during command execution. Info:\n`
+  )
+  logRed(colors.red(msg)) // eslint-disable-line no-console
+  foreignProgram
+    ? foreignProgram.outputHelp(txt => txt)
+    : program.outputHelp(txt => txt)
+
   process.exit(1)
 }
 
 module.exports = {
   serialSpawn,
   parallelSpawn,
+  spawnList,
   getSpawnPromiseFactory,
   getSpawnPromise,
   showError

@@ -1,13 +1,26 @@
 {
   "name": "@s-ui/ssr",
-  "private": true,
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
+  "bin": {
+    "sui-ssr": "./bin/sui-ssr.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@s-ui/bundler": "2"
+  },
+  "dependencies": {
+    "@s-ui/hoc": "1.5.0",
+    "archiver": "2.1.1",
+    "commander": "2.15.1",
+    "copy-paste": "1.3.0",
+    "express": "4.16.3",
+    "rimraf": "2.6.2"
+  }
 }
