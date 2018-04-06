@@ -1,5 +1,17 @@
 /* eslint-disable no-console */
 
+const OPTIONS = {
+  staged: '--staged'
+}
+const optionFlags = Object.values(OPTIONS)
+
+/**
+ * Get args removing given args
+ * @param {Array<String>} args process.argv
+ * @returns {Array<String>}
+ */
+const filterOptionFlags = args => args.filter(arg => !optionFlags.includes(arg))
+
 /**
  * Execute bin as lint command. If -c is defined, process will be exited.
  * @param  {String} binPath Absolute path of binary
@@ -8,13 +20,12 @@
  */
 function executeLintingCommand (binPath, args) {
   const { spawn } = require('child_process')
-  const [, , ...processArgs] = process.argv
+  const [, , ...processArgs] = filterOptionFlags(process.argv)
 
   if (processArgs.find(arg => arg === '-c')) {
     console.log('[sui-lint] Dont use your own config file. Remove `-c` flag')
     process.exit(1)
   }
-
   return spawn(binPath, args.concat(processArgs), {
     shell: true,
     stdio: 'inherit'
@@ -37,14 +48,47 @@ const getFileLinesAsArray = path => {
 }
 
 /**
- * Get eslint --ignore-pattern patterns options
- * @param {Array<String>} patterns
+ * Get multiple value arg
+ * @param {String} arg Ex: '--my-option'
+ * @param {Array<String>} values
  * @returns {Array<String>} ['--ignore-pattern', 'folder/', ...]
  */
-const getIgnorePatterns = patterns => {
-  return patterns.filter(Boolean).map(pattern => `--ignore-pattern ${pattern}`)
+const getArrayArgs = (arg, values) => {
+  return values.filter(Boolean).map(pattern => `${arg} ${pattern}`)
 }
+
+/**
+ * Get from git status name of staged files
+ * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
+ * @returns {Array<String>} Array of file paths
+ */
+const getGitStatusFiles = async extensions => {
+  const { extname } = require('path')
+  return new Promise((resolve, reject) => {
+    require('simple-git')().diff(
+      ['--cached', '--name-only', '--diff-filter=d'], // Delete files as excluded
+      function (err, summary) {
+        err && reject(err)
+        const files = summary
+          ? summary
+            .split('\n')
+            .filter(file => extensions.includes(extname(file).substr(1)))
+          : []
+        resolve(files)
+      }
+    )
+  })
+}
+
+/**
+ * Get files to lint according to command options
+ * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
+ * @returns {Array<String>} Array of file patterns
+ */
+const getFilesToLint = async extensions =>
+  process.argv.includes(OPTIONS.staged) ? getGitStatusFiles(extensions) : ['./']
 
 exports.executeLintingCommand = executeLintingCommand
 exports.getFileLinesAsArray = getFileLinesAsArray
-exports.getIgnorePatterns = getIgnorePatterns
+exports.getArrayArgs = getArrayArgs
+exports.getFilesToLint = getFilesToLint

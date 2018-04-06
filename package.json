@@ -32,7 +32,8 @@
     "@s-ui/test": "1",
     "chai": "3.5.0",
     "husky": "0.13.4",
-    "validate-commit-msg": "2.12.2"
+    "validate-commit-msg": "2.12.2",
+    "simple-git": "1.92.0"
   },
   "config": {
     "sui-mono": {
