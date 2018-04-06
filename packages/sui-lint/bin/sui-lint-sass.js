@@ -1,12 +1,27 @@
 #!/usr/bin/env node
-
-const {executeLintingCommand} = require('../src/helpers')
+/* eslint-disable no-console */
+const {
+  executeLintingCommand,
+  getGitIgnoredFiles,
+  getFilesToLint
+} = require('../src/helpers')
 const BIN_PATH = require.resolve('sass-lint/bin/sass-lint')
 const CONFIG_PATH = require.resolve('../sass-lint.yml')
+const EXTENSIONS = ['scss']
+const IGNORE_PATTERNS = ['**/node_modules/**', '**/lib/**', '**/dist/**']
 
-executeLintingCommand(BIN_PATH, [
-  '-c', CONFIG_PATH,
-  '-i', "'**/node_modules/**, **/lib/**, **/dist/**'",
-  '-v',
-  '**/src/**/*.scss'
-])
+const patterns = IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+
+getFilesToLint(EXTENSIONS, '**/src/**/*.scss').then(
+  files =>
+    (files.length &&
+      executeLintingCommand(BIN_PATH, [
+        '-c',
+        CONFIG_PATH,
+        '-i',
+        `'${patterns.join(', ')}'`,
+        '-v',
+        `'${files.join(', ')}'`
+      ])) ||
+    console.log('[sui-lint sass] No sass files to lint.')
+)
