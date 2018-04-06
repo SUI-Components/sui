@@ -2,12 +2,11 @@
 
 > CLI to lint your code and make it compliant.
 
-
 It provides:
-* Same js and sass style of code accross all company
-* Linting rules a reference package, not every  project
-* Implemented as a reusable CLI
 
+* Same js and sass style of code accross all company.
+* Linting rules a reference package, not duplicated linting config in every project.
+* Implemented as a reusable CLI.
 
 ## Installation
 
@@ -19,33 +18,50 @@ $ npm install @s-ui/lint --save-dev
 
 When installed, a new CLI `sui-lint` is automatically available to lint your files according to SUI conventions.
 
-Lint JS files:
+### Lint JS files
 
 ```sh
 $ sui-lint js [options]
 ```
 
-Puedes pasarle más misma opciones que acepta `eslint`. Con la única diferencia que no puedes pasar una nueva configuración ya que está fijada a la nuestra.
-Por defecto va a buscar todos los ficheros `js|jsx` desde el root de tu proyecto excluyendo las carpetas `lib|dist`
+It lints all `js|jsx` files in your project, excluding `.eslintignore` and `.gitignore` file patterns.
 
-Lint SASS files:
+Same options available in [eslint](https://eslint.org/docs/user-guide/command-line-interface) except one: `-c, --config`. If you try to use this option, an exception will be thrown.
+
+Then, you can do this:
+
+```sh
+$ sui-lint js --fix
+```
+
+#### Lint only staged JS files
+
+```sh
+$ sui-lint js --staged
+```
+
+Same command but applied only on staged files (obtained with `git diff --cached --name-only --diff-filter=d` command).
+
+### Lint SASS files
 
 ```
 $ sui-lint sass [options]
 ```
 
-Al igual que en el caso anterior no puedes pasar una nueva configuración, y las carpetas ignoradas son también `lib|dist`
+Lints all `**/src/**/*.scss` files in the project.
 
-## Como hago funcionar mi editor con estas reglas:
+## IDE integration:
 
-1.- Instala el plugin de eslint/sassLint adecuado para tu editor.
+Steps to integrate sui-lint with an IDE:
 
-2.- Agregar a tu package json estas lineas:
+1.  Install (if needed) eslint/sassLint plugin in your IDE.
+2.  Add these lines to `package.json`:
 
 ```json
 {
   "eslintConfig": {
-     "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]},
+    "extends": ["@s-ui/lint/eslintrc.js"]
+  },
   "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
 ```
@@ -64,7 +80,7 @@ Al igual que en el caso anterior no puedes pasar una nueva configuración, y las
   "devDependencies": {
     "@s-ui/lint": "1.0.0-beta.1"
   },
-  "eslintConfig": { "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]},
+  "eslintConfig": { "extends": ["./node_modules/@s-ui/lint/eslintrc.js"] },
   "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
 ```
