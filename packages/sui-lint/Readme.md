@@ -4,7 +4,7 @@
 
 It provides:
 
-* Same js and sass style of code accross all company.
+* Same js and sass style of code across all company.
 * Linting rules a reference package, not duplicated linting config in every project.
 * Implemented as a reusable CLI.
 
