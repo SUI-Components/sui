@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
   staged: '--staged'
 }
@@ -48,6 +49,12 @@ const getFileLinesAsArray = path => {
 }
 
 /**
+ * Get as array .gitignore files
+ * @returns {Array<String>}
+ */
+const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH)
+
+/**
  * Get multiple value arg
  * @param {String} arg Ex: '--my-option'
  * @param {Array<String>} values
@@ -92,3 +99,4 @@ exports.executeLintingCommand = executeLintingCommand
 exports.getFileLinesAsArray = getFileLinesAsArray
 exports.getArrayArgs = getArrayArgs
 exports.getFilesToLint = getFilesToLint
+exports.getGitIgnoredFiles = getGitIgnoredFiles

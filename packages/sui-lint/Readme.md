@@ -48,7 +48,9 @@ Same command but applied only on staged files (obtained with `git diff --cached 
 $ sui-lint sass [options]
 ```
 
-Lints all `**/src/**/*.scss` files in the project.
+Lints all `**/src/**/*.scss` files in the project, excluding `node_modules`, `lib`, `dist`.
+
+> **`.gitignore` file patterns are also excluded but interpretation may differ as only glob patterns are understood**
 
 ## IDE integration:
 
