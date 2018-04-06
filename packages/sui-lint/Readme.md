@@ -34,13 +34,13 @@ Then, you can do this:
 $ sui-lint js --fix
 ```
 
-#### Lint only staged JS files
+### Format JS files
 
 ```sh
-$ sui-lint js --staged
+$ sui-lint format-js [options]
 ```
 
-Same command but applied only on staged files (obtained with `git diff --cached --name-only --diff-filter=d` command).
+It uses prettier to format your files. As prettier config may differ to linting ones, `sui-lint js --fix` is also executed.
 
 ### Lint SASS files
 
@@ -51,6 +51,22 @@ $ sui-lint sass [options]
 Lints all `**/src/**/*.scss` files in the project, excluding `node_modules`, `lib`, `dist`.
 
 > **`.gitignore` file patterns are also excluded but interpretation may differ as only glob patterns are understood**
+
+
+### Scope commands to staged files
+
+```sh
+$ sui-lint js --staged
+$ sui-lint sass --staged
+$ sui-lint format-js --staged
+```
+
+Same command but applied only on staged files (obtained with `git diff --cached --name-only --diff-filter=d` command).
+
+> **In write mode like with `sui-lint js --fix` or `sui-lint format-js`, the `--staged` option will stage the files again (`git add <file...>`)**
+
+For integrations, prettier config is located in `@s-ui/lint/.prettierrc.js`.
+
 
 ## IDE integration:
 
