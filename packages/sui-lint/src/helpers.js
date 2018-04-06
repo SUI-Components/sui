@@ -95,10 +95,31 @@ const getFilesToLint = async (extensions, defaultFiles = './') =>
     ? getGitStatusFiles(extensions)
     : [defaultFiles]
 
+/**
+ * If --staged option is on, it will staged made changes
+ * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
+ * @returns {Promise}
+ */
+const stageFilesIfRequired = async extensions => {
+  if (process.argv.includes(OPTIONS.staged)) {
+    const {getSpawnPromise} = require('@s-ui/helpers/cli')
+    const files = await getGitStatusFiles(extensions)
+    return getSpawnPromise('git', ['add', ...files])
+  }
+}
+
+/**
+ * Get if current process has option set
+ * @param {String} option
+ */
+const isOptionSet = option => process.argv.includes(option)
+
 exports.executeLintingCommand = executeLintingCommand
 exports.getFileLinesAsArray = getFileLinesAsArray
 exports.getArrayArgs = getArrayArgs
 exports.getFilesToLint = getFilesToLint
 exports.getGitIgnoredFiles = getGitIgnoredFiles
+exports.stageFilesIfRequired = stageFilesIfRequired
+exports.isOptionSet = isOptionSet
 exports.GIT_IGNORE_PATH = GIT_IGNORE_PATH
 exports.OPTIONS = OPTIONS

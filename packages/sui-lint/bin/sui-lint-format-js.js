@@ -3,6 +3,8 @@
 const {
   executeLintingCommand,
   getFilesToLint,
+  stageFilesIfRequired,
+  isOptionSet,
   GIT_IGNORE_PATH,
   OPTIONS: {staged}
 } = require('../src/helpers')
@@ -23,9 +25,10 @@ getFilesToLint(EXTENSIONS, defaultPattern).then(
         `--write`,
         files.length === 1 ? files[0] : `"{${files.join(',')}}"`
       ])
+        .then(() => stageFilesIfRequired(EXTENSIONS))
         .then(() => {
           const lintArgs = ['js', '--fix']
-          process.argv.includes(staged) && lintArgs.push(staged)
+          isOptionSet(staged) && lintArgs.push(staged)
           return getSpawnPromise('sui-lint', lintArgs)
         })
         .catch(showError)) ||
