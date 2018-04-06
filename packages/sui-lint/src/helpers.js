@@ -67,7 +67,7 @@ const getArrayArgs = (arg, values) => {
 /**
  * Get from git status name of staged files
  * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
- * @returns {Array<String>} Array of file paths
+ * @returns {Promise<Array>} Array of file paths
  */
 const getGitStatusFiles = async extensions => {
   const { extname } = require('path')
@@ -90,10 +90,13 @@ const getGitStatusFiles = async extensions => {
 /**
  * Get files to lint according to command options
  * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
- * @returns {Array<String>} Array of file patterns
+ * @param {String} defaultFiles Defaults to './'
+ * @returns {Promise<Array>} Array of file patterns
  */
-const getFilesToLint = async extensions =>
-  process.argv.includes(OPTIONS.staged) ? getGitStatusFiles(extensions) : ['./']
+const getFilesToLint = async (extensions, defaultFiles = './') =>
+  process.argv.includes(OPTIONS.staged)
+    ? getGitStatusFiles(extensions)
+    : [defaultFiles]
 
 exports.executeLintingCommand = executeLintingCommand
 exports.getFileLinesAsArray = getFileLinesAsArray
