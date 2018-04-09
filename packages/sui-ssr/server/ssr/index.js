@@ -2,7 +2,7 @@
 // They came from {SPA}/node_modules or {SPA}/src
 import routes from 'routes'
 import { RouterContext, match } from 'react-router'
-// import Helmet from 'react-helmet'
+import Helmet from 'react-helmet'
 import {
   createServerContextFactoryParams,
   ssrComponentWithInitialProps
@@ -12,7 +12,6 @@ import {
 import qs from 'querystring'
 import path from 'path'
 import fs from 'fs'
-import util from 'util'
 import withContext from '@s-ui/hoc/lib/withContext'
 
 // __MAGIC IMPORTS__
@@ -24,10 +23,9 @@ try {
 }
 // END __MAGIC IMPORTS__
 
-const readFile = util.promisify(fs.readFile)
-
 const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
+const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
 const APP_PLACEHOLDER = '<!-- APP -->'
 const injectDataHydratation = (data = {}) => {
   const escapedJson = JSON.stringify(data).replace(/<\//g, '<\\/')
@@ -40,7 +38,7 @@ export default (req, res, next) => {
     { routes, location: url },
     async (error, redirectLocation, renderProps) => {
       if (error || !renderProps) {
-        return next(error || new Error('No renderProps'))
+        return next(error || new Error(`No renderProps for ${url}`))
       }
 
       if (redirectLocation) {
@@ -50,10 +48,13 @@ export default (req, res, next) => {
         const destination = `${redirectLocation.pathname}${queryString}`
         return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
       }
-      // eslint-disable-next-line
-      // debugger
 
-      const html = await readFile(INDEX_HTML_PATH, 'utf8')
+      const [criticalHTML, bodyHTML] = html.split('</head>')
+
+      res.type('html')
+      res.write(criticalHTML)
+      res.flush()
+
       const context = await contextFactory(
         createServerContextFactoryParams(req)
       )
@@ -62,8 +63,20 @@ export default (req, res, next) => {
         renderProps,
         Target: withContext(context)(RouterContext)
       })
-      res.send(
-        html
+
+      const head = Helmet.renderStatic()
+      res.write(
+        Object.keys(head)
+          .map(section => head[section].toString())
+          .join('')
+      )
+      res.flush()
+
+      // eslint-disable-next-line
+      // debugger
+
+      res.end(
+        `</head>${bodyHTML}`
           .replace(APP_PLACEHOLDER, reactString)
           .replace('</body>', `${injectDataHydratation(initialProps)}</body>`)
       )
