@@ -2,7 +2,8 @@
 
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
-  staged: '--staged'
+  staged: '--staged',
+  addFixes: '--add-fixes'
 }
 const optionFlags = Object.values(OPTIONS)
 
@@ -101,7 +102,8 @@ const getFilesToLint = async (extensions, defaultFiles = './') =>
  * @returns {Promise}
  */
 const stageFilesIfRequired = async extensions => {
-  if (process.argv.includes(OPTIONS.staged)) {
+  const {argv} = process
+  if (argv.includes(OPTIONS.staged) && argv.includes(OPTIONS.addFixes)) {
     const {getSpawnPromise} = require('@s-ui/helpers/cli')
     const files = await getGitStatusFiles(extensions)
     return getSpawnPromise('git', ['add', ...files])

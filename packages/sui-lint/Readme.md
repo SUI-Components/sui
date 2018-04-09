@@ -63,10 +63,20 @@ $ sui-lint format-js --staged
 
 Same command but applied only on staged files (obtained with `git diff --cached --name-only --diff-filter=d` command).
 
-> **In write mode like with `sui-lint js --fix` or `sui-lint format-js`, the `--staged` option will stage the files again (`git add <file...>`)**
-
 For integrations, prettier config is located in `@s-ui/lint/.prettierrc.js`.
 
+### Add fixes to the stage
+
+```sh
+$ sui-lint js --staged --add-fixes
+$ sui-lint format-js --staged --add-fixes
+```
+
+This option can only be used with `--staged`.
+
+In write mode like with `sui-lint js --fix` or `sui-lint format-js`, the `--add-fixes` option will stage the files again (`git add <file...>`)
+
+It's usefull to make your code autoformat before any commit.
 
 ## IDE integration:
 

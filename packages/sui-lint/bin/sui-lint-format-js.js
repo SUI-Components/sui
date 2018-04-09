@@ -6,7 +6,7 @@ const {
   stageFilesIfRequired,
   isOptionSet,
   GIT_IGNORE_PATH,
-  OPTIONS: {staged}
+  OPTIONS: {staged, addFixes}
 } = require('../src/helpers')
 const {showError, getSpawnPromise} = require('@s-ui/helpers/cli')
 
@@ -29,6 +29,7 @@ getFilesToLint(EXTENSIONS, defaultPattern).then(
         .then(() => {
           const lintArgs = ['js', '--fix']
           isOptionSet(staged) && lintArgs.push(staged)
+          isOptionSet(addFixes) && lintArgs.push(addFixes)
           return getSpawnPromise('sui-lint', lintArgs)
         })
         .catch(showError)) ||
