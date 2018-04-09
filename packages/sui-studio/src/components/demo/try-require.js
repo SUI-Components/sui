@@ -13,7 +13,7 @@ const reqRouterPlayGround =
 const reqEventsPlayGround =
   require.context(`bundle-loader?lazy-loader!${__BASE_DIR__}/demo`, true, /^.*\/events\.js/)
 
-const tryRequire = ({category, component}) => {
+const tryRequire = async ({category, component}) => {
   const exports = new Promise(resolve => {
     require.ensure([], () => {
       let bundler
@@ -48,16 +48,18 @@ const tryRequire = ({category, component}) => {
     })
   })
 
-  const context = new Promise(resolve => {
-    require.ensure([], () => {
-      try {
-        const bundler = reqContextPlayGround(`./${category}/${component}/context.js`)
-        bundler(context => resolve(context))
-      } catch (e) {
-        return resolve(false)
-      }
-    })
-  })
+  // const context = new Promise(resolve => {
+  //   require.ensure([], () => {
+  //     try {
+  //       const bundler = reqContextPlayGround(`./${category}/${component}/context.js`)
+  //       bundler(context => resolve(context))
+  //     } catch (e) {
+  //       return resolve(false)
+  //     }
+  //   })
+  // })
+
+  const context = (await import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)).default
 
   const routes = new Promise(resolve => {
     require.ensure([], () => {
