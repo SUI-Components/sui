@@ -43,7 +43,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
 | [sui-react-domain-connector](./packages/sui-react-domain-connector) | Connect any React component to your domain use cases |
 | [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your react app |
-| [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA (pending) |
+| [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA |
 | [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |
 | [sui-studio-utils](./packages/sui-studio-utils) | A set of sui-studio usable tools. |
 | [sui-studio](./packages/sui-studio) | Develop, maintain and publish your SUI components catalog. |
