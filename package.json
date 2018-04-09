@@ -3,27 +3,29 @@
   "version": "0.0.0",
   "private": true,
   "description": "Monorepo for SUI (Schibsted User Interface) packages.",
-  "keywords": [
-    "schibsted",
-    "monorepo",
-    "sui"
-  ],
+  "keywords": ["schibsted", "monorepo", "sui"],
   "scripts": {
-    "phoenix": "rm -Rf node_modules && npm i && sui-mono run-parallel rm -Rf node_modules && sui-mono run-parallel npm i",
+    "phoenix":
+      "rm -Rf node_modules && npm i && sui-mono run-parallel rm -Rf node_modules && sui-mono run-parallel npm i",
     "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
     "lint": "sui-lint js && sui-lint sass",
-    "test": "NODE_ENV=test npm run test:client && NODE_ENV=test npm run test:server",
+    "test":
+      "NODE_ENV=test npm run test:client && NODE_ENV=test npm run test:server",
     "test:ci": "npm run test:client -- --ci",
-    "test:client": "NODE_ENV=test sui-test browser -P 'packages/*/test/**/*Spec.js' -I 'packages/*/test/server/*Spec.js'",
+    "test:client":
+      "NODE_ENV=test sui-test browser -P 'packages/*/test/**/*Spec.js' -I 'packages/*/test/server/*Spec.js'",
     "test:client:watch": "npm run test:client -- --watch",
-    "test:server": "NODE_ENV=test sui-test server -P './packages/*/test/!(browser)/*.js'",
+    "test:server":
+      "NODE_ENV=test sui-test server -P './packages/*/test/!(browser)/*.js'",
     "test:server:watch": "npm run test:server -- --watch",
-    "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
-    "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
+    "wiki:pull":
+      "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
+    "wiki:push":
+      "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
     "commitmsg": "validate-commit-msg",
-    "precommit": "sui-lint format-js --staged && sui-precommit run"
+    "precommit": "sui-precommit run"
   },
   "devDependencies": {
     "@s-ui/lint": "2",
@@ -45,14 +47,10 @@
     }
   },
   "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
+    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
   "babel": {
-    "presets": [
-      "sui"
-    ]
+    "presets": ["sui"]
   },
   "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml",
   "author": "David Almeida <davidbarna@gmail.com>",
