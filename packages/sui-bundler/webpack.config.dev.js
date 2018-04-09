@@ -85,6 +85,7 @@ let webpackConfig = {
       {
         test: /(\.css|\.scss)$/,
         use: [
+          'cache-loader',
           'style-loader',
           'css-loader',
           'postcss-loader',
