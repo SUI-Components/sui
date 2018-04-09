@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.11.0"></a>
+# 2.11.0 (2018-04-09)
+
+
+### Features
+
+* add --staged option for scss files ([25403c8](https://github.com/SUI-Components/sui/commit/25403c8))
+* add --staged option to lint only staged files ([e4bcb3c](https://github.com/SUI-Components/sui/commit/e4bcb3c))
+* exlude git ignored files in sass linting ([ccb3703](https://github.com/SUI-Components/sui/commit/ccb3703))
+* ignore by default .gitignore file patterns ([052b4de](https://github.com/SUI-Components/sui/commit/052b4de))
+
+
+
 <a name="2.10.0"></a>
 # 2.10.0 (2018-04-05)
 
