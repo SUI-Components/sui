@@ -7,6 +7,7 @@ const path = require('path')
 const archive = require('../archive')
 
 const OUTPUT_ZIP_PATH = path.join(process.cwd(), 'server.zip')
+const pkg = require(path.join(process.cwd(), 'package.json'))
 
 program
   .option('-C, --clean', 'Remove previous zip')
@@ -28,5 +29,5 @@ if (program.clean) {
 }
 
 ;(async () => {
-  await archive(OUTPUT_ZIP_PATH)
+  await archive({ outputZipPath: OUTPUT_ZIP_PATH, pkg })
 })()
