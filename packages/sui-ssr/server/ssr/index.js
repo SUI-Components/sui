@@ -12,7 +12,6 @@ import {
 import qs from 'querystring'
 import path from 'path'
 import fs from 'fs'
-import util from 'util'
 import withContext from '@s-ui/hoc/lib/withContext'
 
 // __MAGIC IMPORTS__
@@ -24,10 +23,9 @@ try {
 }
 // END __MAGIC IMPORTS__
 
-const readFile = util.promisify(fs.readFile)
-
 const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
+const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
 const APP_PLACEHOLDER = '<!-- APP -->'
 const injectDataHydratation = (data = {}) => {
   const escapedJson = JSON.stringify(data).replace(/<\//g, '<\\/')
@@ -51,7 +49,6 @@ export default (req, res, next) => {
         return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
       }
 
-      const html = await readFile(INDEX_HTML_PATH, 'utf8')
       const [criticalHTML, bodyHTML] = html.split('</head>')
 
       res.type('html')
