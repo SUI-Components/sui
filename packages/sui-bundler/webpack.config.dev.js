@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const path = require('path')
 
+const Happypack = require('happypack')
+
 require('./shared/shims')
 
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
@@ -25,6 +27,10 @@ let webpackConfig = {
     filename: 'bundle.js'
   },
   plugins: [
+    new Happypack({
+      threads: 4,
+      loaders: ['babel-loader?presets=sui']
+    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     new webpack.DefinePlugin({
       __DEV__: true,
