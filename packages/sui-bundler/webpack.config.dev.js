@@ -1,7 +1,7 @@
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-
+const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
 console.log('👋  from Webpack 4')
@@ -34,7 +34,8 @@ let webpackConfig = {
       template: './index.html',
       inject: true,
       env: process.env
-    })
+    }),
+    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
   module: {
     rules: [
@@ -51,49 +52,12 @@ let webpackConfig = {
         }
       },
       {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        loader: 'file-loader'},
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'file-loader?name=[name].[ext]'
-      },
-      {
-        test: /\.ico$/,
-        loader: 'file-loader?name=[name].[ext]'
-      },
-      {
         test: /(\.css|\.scss)$/,
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => {
-                return [
-                  require('autoprefixer')
-                ]
-              }
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              importer: require('node-sass-json-importer')
-            }
-          }
+          'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
