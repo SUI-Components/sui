@@ -49,45 +49,26 @@ const cleanDisplayName = displayName => {
 const pipe = (...funcs) => arg =>
   funcs.reduce((value, func) => func(value), arg)
 
-const removeDefaultContext = exports =>
-  Object.keys(exports)
-    .filter(key => key !== DEFAULT_CONTEXT)
-    .reduce((acc, key) => {
-      acc[key] = exports[key]
-      return acc
-    }, {})
+const removeDefaultContext = exports => {
+  const { [DEFAULT_CONTEXT]: toOmit, ...restOfExports } = exports
+  return restOfExports
+}
 
 export default class Demo extends Component {
-  static bootstrapWith (demo, { category, component, style, themes }) {
-    tryRequire({ category, component }).then(
-      ([exports, playground, ctxt, routes, events, pkg]) => {
-        if (isFunction(ctxt)) {
-          return ctxt().then(context => {
-            demo.setState({
-              playground,
-              exports,
-              ctxt: context,
-              routes,
-              style,
-              themes,
-              events,
-              pkg
-            })
-          })
-        }
+  static async bootstrapWith (demo, { category, component, style, themes }) {
+    const [exports, playground, ctxt, routes, events, pkg] = await tryRequire({ category, component })
+    const context = isFunction(ctxt) ? await ctxt() : ctxt
 
-        demo.setState({
-          playground,
-          exports,
-          ctxt,
-          routes,
-          style,
-          themes,
-          events,
-          pkg
-        })
-      }
-    )
+    demo.setState({
+      events,
+      exports,
+      pkg,
+      playground,
+      routes,
+      style,
+      themes,
+      ctxt: context,
+    })
   }
 
   static propTypes = {
@@ -100,18 +81,18 @@ export default class Demo extends Component {
   }
 
   state = {
-    exports: false,
-    isCodeOpen: false,
-    isFullScreen: false,
     ctxt: false,
     ctxtSelectedIndex: 0,
     ctxtType: 'default',
+    exports: false,
+    isCodeOpen: false,
+    isFullScreen: false,
+    pkg: false,
     playground: undefined,
     routes: false,
     theme: 'default',
-    pkg: false,
+    themes: [],
     themeSelectedIndex: 0,
-    themes: []
   }
 
   _loadStyles ({ category, component }) {
@@ -119,6 +100,13 @@ export default class Demo extends Component {
       const themes = themesFor({ category, component })
       Demo.bootstrapWith(this, { category, component, style, themes })
     })
+  }
+
+  _checkIfPackageHasProvider ({ pkg }) {
+    return pkg &&
+    pkg.dependencies &&
+    (pkg.dependencies[DDD_REACT_REDUX] ||
+      pkg.dependencies[REACT_DOMAIN_CONNECTOR])
   }
 
   componentDidMount () {
@@ -135,18 +123,18 @@ export default class Demo extends Component {
 
   render () {
     let {
-      exports,
       ctxt,
       ctxtSelectedIndex,
       ctxtType,
       events,
+      exports,
       isCodeOpen,
       isFullScreen,
       pkg,
       playground,
       style,
+      themes,
       themeSelectedIndex,
-      themes
     } = this.state
 
     const Base = exports.default
@@ -158,11 +146,7 @@ export default class Demo extends Component {
     const contextTypes = Base.contextTypes || Base.originalContextTypes
     const context = contextTypes && createContextByType(ctxt, ctxtType)
     const { domain } = context || {}
-    const hasProvider =
-      pkg &&
-      pkg.dependencies &&
-      (pkg.dependencies[DDD_REACT_REDUX] ||
-        pkg.dependencies[REACT_DOMAIN_CONNECTOR])
+    const hasProvider = this._checkIfPackageHasProvider({ pkg })
     const store = domain && hasProvider && createStore(domain)
 
     const Enhance = pipe(
