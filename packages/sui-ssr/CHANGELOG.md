@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2018-04-09)
+
+
+### Features
+
+* add Docker to archive ([c4ba159](https://github.com/SUI-Components/sui/commit/c4ba159))
+* improve TTFB ([4b49c47](https://github.com/SUI-Components/sui/commit/4b49c47))
+
+
+### Performance Improvements
+
+* reade the index.html just on boot time ([e07bf68](https://github.com/SUI-Components/sui/commit/e07bf68))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2018-04-04)
 
