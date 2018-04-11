@@ -81,8 +81,8 @@ contextFactory(
     ssrComponentWithInitialProps({ context, renderProps, Target })
       .then(({ initialProps, reactString, performance }) => {
         // you have here the initialProps retrieved from the page in case you need it
-        console.log('Time spended resolving the getInitialProps method', performance.getInitialProps)
-        console.log('Time spended rendering the react tree', performance.renderToString)
+        console.log('Time spent resolving the getInitialProps method', performance.getInitialProps)
+        console.log('Time spent rendering the react tree', performance.renderToString)
         res.send(reactString)
       })
   }
