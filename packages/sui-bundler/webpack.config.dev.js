@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
-console.log('👋  from Webpack 4')
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
 
 let webpackConfig = {

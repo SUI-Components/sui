@@ -22,8 +22,6 @@ if (process.env.PWD === undefined) {
   process.env.PWD = process.cwd()
 }
 
-console.log('👋  from Webpack 4')
-
 module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
