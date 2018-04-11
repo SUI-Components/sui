@@ -56,7 +56,7 @@ const removeDefaultContext = exports => {
 
 export default class Demo extends Component {
   static async bootstrapWith (demo, { category, component, style, themes }) {
-    const [exports, playground, ctxt, routes, events, pkg] = await tryRequire({ category, component })
+    const [exports, playground, ctxt, events, pkg] = await tryRequire({ category, component })
     const context = isFunction(ctxt) ? await ctxt() : ctxt
 
     demo.setState({
@@ -64,7 +64,6 @@ export default class Demo extends Component {
       exports,
       pkg,
       playground,
-      routes,
       style,
       themes,
       ctxt: context,
@@ -89,7 +88,6 @@ export default class Demo extends Component {
     isFullScreen: false,
     pkg: false,
     playground: undefined,
-    routes: false,
     theme: 'default',
     themes: [],
     themeSelectedIndex: 0,
@@ -119,6 +117,40 @@ export default class Demo extends Component {
 
   componentWillUnmount () {
     this.containerClassList && this.containerClassList.remove(FULLSCREEN_CLASS)
+  }
+
+  handleCode = () => {
+    this.setState({ isCodeOpen: !this.state.isCodeOpen })
+  }
+
+  handleFullScreen = () => {
+    this.setState({ isFullScreen: !this.state.isFullScreen }, () => {
+      const { isFullScreen } = this.state
+      this.containerClassList = this.containerClassList || document.getElementsByClassName(CONTAINER_CLASS)[0].classList
+
+      isFullScreen
+        ? this.containerClassList.add(FULLSCREEN_CLASS)
+        : this.containerClassList.remove(FULLSCREEN_CLASS)
+    })
+  }
+
+  handleContextChange = (ctxtType, index) => {
+    this.setState({
+      ctxtType,
+      ctxtSelectedIndex: index,
+      playground: this.state.playground + EVIL_HACK_TO_RERENDER_AFTER_CHANGE
+    })
+  }
+
+  handleThemeChange = (theme, index) => {
+    const { category, component } = this.props.params
+    stylesFor({ category, component, withTheme: theme }).then(style => {
+      this.setState({
+        style,
+        theme,
+        themeSelectedIndex: index
+      })
+    })
   }
 
   render () {
@@ -206,45 +238,5 @@ export default class Demo extends Component {
         />
       </div>
     )
-  }
-
-  handleCode = () => {
-    this.setState({ isCodeOpen: !this.state.isCodeOpen })
-  }
-
-  handleFullScreen = () => {
-    this.setState({ isFullScreen: !this.state.isFullScreen }, () => {
-      const { isFullScreen } = this.state
-      this.containerClassList = this.containerClassList || document.getElementsByClassName(CONTAINER_CLASS)[0].classList
-
-      isFullScreen
-        ? this.containerClassList.add(FULLSCREEN_CLASS)
-        : this.containerClassList.remove(FULLSCREEN_CLASS)
-    })
-  }
-
-  handleContextChange = (ctxtType, index) => {
-    this.setState({
-      ctxtType,
-      ctxtSelectedIndex: index,
-      playground: this.state.playground + EVIL_HACK_TO_RERENDER_AFTER_CHANGE
-    })
-  }
-
-  handleThemeChange = (theme, index) => {
-    const { category, component } = this.props.params
-    stylesFor({ category, component, withTheme: theme }).then(style => {
-      this.setState({
-        style,
-        theme,
-        themeSelectedIndex: index
-      })
-    })
-  }
-
-  handleRoutering () {
-    this.setState({
-      playground: this.state.playground + EVIL_HACK_TO_RERENDER_AFTER_CHANGE
-    })
   }
 }
