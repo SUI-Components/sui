@@ -79,8 +79,10 @@ contextFactory(
   match({routes, location: req.url}, function (error, redirectLocation, renderProps = false) {
     const Target = (props) => <div>{props.fromInitialProps}</div>
     ssrComponentWithInitialProps({ context, renderProps, Target })
-      .then(({ initialProps, reactString }) => {
+      .then(({ initialProps, reactString, performance }) => {
         // you have here the initialProps retrieved from the page in case you need it
+        console.log('Time spent resolving the getInitialProps method', performance.getInitialProps)
+        console.log('Time spent rendering the react tree', performance.renderToString)
         res.send(reactString)
       })
   }

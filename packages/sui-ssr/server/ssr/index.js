@@ -23,14 +23,24 @@ try {
 }
 // END __MAGIC IMPORTS__
 
+// const SERVER_TIMING_HEADER = 'Server-Timing'
 const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
 const APP_PLACEHOLDER = '<!-- APP -->'
-const injectDataHydratation = (data = {}) => {
-  const escapedJson = JSON.stringify(data).replace(/<\//g, '<\\/')
-  return `<script>window.__INITIAL_PROPS__=${escapedJson}</script>`
-}
+const injectDataHydratation = (data = {}) =>
+  `<script>window.__INITIAL_PROPS__ = ${JSON.stringify(data).replace(
+    /<\//g,
+    '<\\/'
+  )}</script>`
+
+const injectDataPerformance = (
+  { getInitialProps: server, renderToString: render } = {}
+) =>
+  `<script>window.__PERFORMANCE_METRICS__ = ${JSON.stringify({
+    server,
+    render
+  })}</script>`
 
 export default (req, res, next) => {
   const { url, query } = req
@@ -58,11 +68,25 @@ export default (req, res, next) => {
       const context = await contextFactory(
         createServerContextFactoryParams(req)
       )
-      const { initialProps, reactString } = await ssrComponentWithInitialProps({
+      const {
+        initialProps,
+        reactString,
+        performance
+      } = await ssrComponentWithInitialProps({
         context,
         renderProps,
         Target: withContext(context)(RouterContext)
       })
+
+      // eslint-disable-next-line
+      // debugger
+
+      // res.set({
+      //   'Server-Timing': `
+      //   getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
+      //   renderToString;desc=renderToString;dur=${performance.renderToString}
+      // `.replace(/\n/g, '')
+      // })
 
       const head = Helmet.renderStatic()
       res.write(
@@ -72,13 +96,11 @@ export default (req, res, next) => {
       )
       res.flush()
 
-      // eslint-disable-next-line
-      // debugger
-
       res.end(
         `</head>${bodyHTML}`
           .replace(APP_PLACEHOLDER, reactString)
           .replace('</body>', `${injectDataHydratation(initialProps)}</body>`)
+          .replace('</body>', `${injectDataPerformance(performance)}</body>`)
       )
     }
   )
