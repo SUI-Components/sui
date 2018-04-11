@@ -3,8 +3,6 @@
 const reqComponentsSrc =
   require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/src\/index\.jsx?/)
 
-console.log(__BASE_DIR__)
-
 const requireFile = async ({ defaultValue, importFile }) => {
   const file = await importFile().catch(_ => defaultValue)
   return typeof file === 'undefined'
