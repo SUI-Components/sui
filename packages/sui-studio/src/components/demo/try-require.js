@@ -3,6 +3,8 @@
 const reqComponentsSrc =
   require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/src\/index\.jsx?/)
 
+console.log(__BASE_DIR__)
+
 const requireFile = async ({ defaultValue, importFile }) => {
   const file = await importFile().catch(_ => defaultValue)
   return typeof file === 'undefined'
@@ -37,17 +39,12 @@ const tryRequire = async ({category, component}) => {
     importFile: () => import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
   })
 
-  const routes = requireFile({
-    defaultValue: false,
-    importFile: () => import(`${__BASE_DIR__}/demo/${category}/${component}/routes.js`)
-  })
-
   const events = requireFile({
     defaultValue: false,
     importFile: () => import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
   })
 
-  return Promise.all([exports, playground, context, routes, events, pkg])
+  return Promise.all([exports, playground, context, events, pkg])
 }
 
 export default tryRequire
