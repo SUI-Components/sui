@@ -11,7 +11,7 @@ const isNode = typeof process === 'object' && process.toString() === '[object pr
 export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironmentPatcher () {
   /**
    * This function is the one with the purpose of handle and return the function that should be attached to our only{client | server} patch.
-   * @param {Function} descriptor Is the function that will be returned to be called if all is okay, usually will be it, describe etc...
+   * @param {Object} descriptor Is the object that contains the name of the descriptor base function and in the cases that we have nested function calls the nested name too
    * @param {String} env Can be one of the constants defined in the environments object - {SERVER, CLIENT}
    * @param {Boolean} isOnly A boolean function to know if we are trying to run a descriptor with the .only Function
    */
