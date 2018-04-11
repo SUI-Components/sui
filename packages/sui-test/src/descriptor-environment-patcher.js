@@ -59,7 +59,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
   /**
    * Patch base functions will
-   * @param {String} baseFnName is a string with the name of the function to be patched.
+   * @param {String} descriptorName is a string with the name of the function to be patched.
    */
   function patchBaseFunctions (descriptorName) {
     const environmentsKeys = Object.keys(environments)
@@ -72,7 +72,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
   /**
    * patchFunction is the entry method that will handle with the logic to know if is a depth descriptor patch or a baseDescriptor patch. Regarding on that will call one or another patching function
-   * @param {String} is a string with the name of the function to be patched.
+   * @param {String} fnName is a string with the name of the function to be patched.
    */
   function patchFunction (fnName) {
     const functionChainNames = fnName.split('.')
