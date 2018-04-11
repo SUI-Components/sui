@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2018-04-11)
+
+
+### Features
+
+* add to the footer a performance object ([3bfe877](https://github.com/SUI-Components/sui/commit/3bfe877))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2018-04-09)
 
