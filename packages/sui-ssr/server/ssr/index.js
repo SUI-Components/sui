@@ -28,16 +28,19 @@ const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
 const APP_PLACEHOLDER = '<!-- APP -->'
-const injectDataHydratation = (data = {}) => {
-  const escapedJson = JSON.stringify(data).replace(/<\//g, '<\\/')
-  return `<script>window.__INITIAL_PROPS__=${escapedJson}</script>`
-}
+const injectDataHydratation = (data = {}) =>
+  `<script>window.__INITIAL_PROPS__ = ${JSON.stringify(data).replace(
+    /<\//g,
+    '<\\/'
+  )}</script>`
+
 const injectDataPerformance = (
   { getInitialProps: server, renderToString: render } = {}
-) => {
-  const escapedJson = JSON.stringify({ server, render }).replace(/<\//g, '<\\/')
-  return `<script>window.__PERFORMANCE_METRICS__=${escapedJson}</script>`
-}
+) =>
+  `<script>window.__PERFORMANCE_METRICS__ = ${JSON.stringify({
+    server,
+    render
+  })}</script>`
 
 export default (req, res, next) => {
   const { url, query } = req
