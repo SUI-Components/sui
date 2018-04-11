@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-
+const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const Externals = require('./plugins/externals')
 const path = require('path')
 
@@ -124,7 +124,8 @@ module.exports = {
       ),
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
     })),
-    when(config.externals, () => new Externals({files: config.externals}))
+    when(config.externals, () => new Externals({files: config.externals})),
+    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ]),
   module: {
     rules: [
