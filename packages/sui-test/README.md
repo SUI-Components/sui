@@ -190,11 +190,7 @@ What about if you want to run only one describe but only for client? You can use
 
 ```javascript
 describe.onlyClient.only('Another use case', () => {
-  it.onlyClient('should....', () => {
-    // ...
-  })
-
-  it.onlyServer('should....', () => {
+  it('should....', () => {
     // ...
   })
 })
