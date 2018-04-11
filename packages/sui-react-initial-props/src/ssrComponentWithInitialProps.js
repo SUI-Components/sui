@@ -4,6 +4,8 @@ import withContext from '@s-ui/hoc/lib/withContext'
 
 const EMPTY_FUNC = () => Promise.resolve({})
 
+const hrTimeToMs = diff => diff[0] * 1E3 + diff[1] * 1e-6
+
 export default function ssrComponentWithInitialProps ({
   Target,
   context,
@@ -17,8 +19,6 @@ export default function ssrComponentWithInitialProps ({
   const getInitialProps = pageComponent.getInitialProps || EMPTY_FUNC
   return getInitialProps(context).then(initialProps => {
     const diffGetInitialProps = process.hrtime(startGetInitialProps)
-    const timeGetInitialProps =
-      diffGetInitialProps[0] * 1E3 + diffGetInitialProps[1] * 1e-6
 
     const startRenderToString = process.hrtime()
     // create the App component with the context, the initialProps and the Target Component
@@ -28,14 +28,12 @@ export default function ssrComponentWithInitialProps ({
       <App {...renderProps} initialProps={initialProps} />
     )
     const diffRenderToString = process.hrtime(startRenderToString)
-    const timeRenderToString =
-      diffRenderToString[0] * 1E3 + diffRenderToString[1] * 1e-6
     return {
       initialProps,
       reactString,
       performance: {
-        getInitialProps: timeGetInitialProps,
-        renderToString: timeRenderToString
+        getInitialProps: hrTimeToMs(diffGetInitialProps),
+        renderToString: hrTimeToMs(diffRenderToString)
       }
     }
   })
