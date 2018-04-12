@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 const mapUIResponseToProps = (...paths) => Target => {
   const Enhance = connect(state => {
@@ -8,7 +8,8 @@ const mapUIResponseToProps = (...paths) => Target => {
     }, {})
   })(Target)
 
-  Enhance.originalContextTypes = Target.originalContextTypes || Target.contextTypes
+  Enhance.originalContextTypes =
+    Target.originalContextTypes || Target.contextTypes
   Enhance.displayName = `mapUIResponseToProps(${Target.displayName})`
   return Enhance
 }

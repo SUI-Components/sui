@@ -10,7 +10,9 @@ class Dummy {
     this._name = name
   }
 
-  get name () { return this._name }
+  get name () {
+    return this._name
+  }
 
   throwError () {
     throw new Error('throwError')
@@ -27,7 +29,7 @@ class Dummy {
   }
 
   dummyMethodPromise (number, multiplicity) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => resolve(number * multiplicity), 0)
     })
   }
@@ -47,7 +49,12 @@ describe('Streamify', () => {
     let subscription
 
     beforeEach(() => {
-      const DummyDecorate = streamify('dummyMethod', 'dummyMethodPromise', 'throwError', 'asyncThrowError')(Dummy)
+      const DummyDecorate = streamify(
+        'dummyMethod',
+        'dummyMethodPromise',
+        'throwError',
+        'asyncThrowError'
+      )(Dummy)
       dummyDecorate = new DummyDecorate('Carlos')
     })
 
@@ -59,7 +66,7 @@ describe('Streamify', () => {
       subscription = null
     })
 
-    it('subscribe to calls and results for sync method', (done) => {
+    it('subscribe to calls and results for sync method', done => {
       const onNext = ({params, result}) => {
         expect(params).to.be.eql([5, 2])
         expect(result).to.be.eql(10)
@@ -74,7 +81,7 @@ describe('Streamify', () => {
       expect(dummyDecorate.notDecorateMethod(42)).to.be.eql('Called with 42')
     })
 
-    it('Notify sync errors', (done) => {
+    it('Notify sync errors', done => {
       const onError = ({params, error}) => {
         expect(params).to.be.eql([])
         expect(error.message).to.be.eql('throwError')
@@ -92,7 +99,7 @@ describe('Streamify', () => {
       } catch (e) {}
     })
 
-    xit('Notify Async errors', (done) => {
+    xit('Notify Async errors', done => {
       const onError = ({params, error}) => {
         expect(params).to.be.eql([])
         expect(error).to.be.eql(new Error('asyncThrowError'))
@@ -108,7 +115,7 @@ describe('Streamify', () => {
       dummyDecorate.asyncThrowError()
     })
 
-    it('subscribe to calls and results for Async method', (done) => {
+    it('subscribe to calls and results for Async method', done => {
       const onNext = ({params, result}) => {
         expect(params).to.be.eql([10, 2])
         expect(result).to.be.eql(20)
@@ -119,7 +126,7 @@ describe('Streamify', () => {
       dummyDecorate.dummyMethodPromise(10, 2)
     })
 
-    it('deal with more than one subscription to sync method', (done) => {
+    it('deal with more than one subscription to sync method', done => {
       const onNext = sinon.spy()
       const sub1 = dummyDecorate.$.dummyMethod.subscribe(onNext)
       const sub2 = dummyDecorate.$.dummyMethod.subscribe(onNext)
@@ -136,7 +143,7 @@ describe('Streamify', () => {
       done()
     })
 
-    it('deal with more than one subscription to async method', (done) => {
+    it('deal with more than one subscription to async method', done => {
       const onNext = sinon.spy()
       const sub1 = dummyDecorate.$.dummyMethodPromise.subscribe(onNext)
       const sub2 = dummyDecorate.$.dummyMethodPromise.subscribe(onNext)
@@ -153,7 +160,7 @@ describe('Streamify', () => {
       })
     })
 
-    it('by default onError call console.error', (done) => {
+    it('by default onError call console.error', done => {
       const consoleSpy = sinon.spy(console, 'error')
       const subscription = dummyDecorate.$.throwError.subscribe()
 
@@ -168,9 +175,11 @@ describe('Streamify', () => {
     })
 
     describe('dispose', () => {
-      it('unsubscribe to calls and results for Async method', (done) => {
+      it('unsubscribe to calls and results for Async method', done => {
         const onNext = sinon.spy()
-        const subscription = dummyDecorate.$.dummyMethodPromise.subscribe(onNext)
+        const subscription = dummyDecorate.$.dummyMethodPromise.subscribe(
+          onNext
+        )
         // unsubscribe immediately to check onNext is not called
         subscription.dispose()
 
@@ -180,7 +189,7 @@ describe('Streamify', () => {
         })
       })
 
-      it('unsubscribe to calls and results for sync method', (done) => {
+      it('unsubscribe to calls and results for sync method', done => {
         const onNext = sinon.spy()
         const subscription = dummyDecorate.$.dummyMethod.subscribe(onNext)
         subscription.dispose()

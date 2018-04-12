@@ -1,6 +1,6 @@
 /* eslint-env mocha */
-import { expect } from 'chai'
-import { tagHTML } from '../src/index'
+import {expect} from 'chai'
+import {tagHTML} from '../src/index'
 
 describe('Tagger', () => {
   before(() => {
@@ -38,16 +38,18 @@ describe('Tagger', () => {
 
   it('should tag correctly a div specified in the tags list', done => {
     setTimeout(() => {
-      expect(document.querySelector('.simple-div').getAttribute('data-tracking-tag'))
-        .to.equal('c_tracking_tag')
+      expect(
+        document.querySelector('.simple-div').getAttribute('data-tracking-tag')
+      ).to.equal('c_tracking_tag')
       done()
     }, 200)
   })
 
   it('should tag correctly elements specified in the tags list', done => {
     setTimeout(() => {
-      expect(document.querySelector('.button').getAttribute('data-tracking-tag'))
-        .to.equal('c_tracking_button')
+      expect(
+        document.querySelector('.button').getAttribute('data-tracking-tag')
+      ).to.equal('c_tracking_button')
       done()
     }, 200)
   })
@@ -55,11 +57,14 @@ describe('Tagger', () => {
   it('should tag correctly elements added later in the dom', done => {
     const dynamicHTML = `<div class='added-later'>Dynamic content FTW!</div>`
 
-    document.getElementById('fixture').insertAdjacentHTML('afterbegin', dynamicHTML)
+    document
+      .getElementById('fixture')
+      .insertAdjacentHTML('afterbegin', dynamicHTML)
 
     setTimeout(() => {
-      expect(document.querySelector('.added-later').getAttribute('data-tracking-tag'))
-        .to.equal('c_tracking_dynamic')
+      expect(
+        document.querySelector('.added-later').getAttribute('data-tracking-tag')
+      ).to.equal('c_tracking_dynamic')
       done()
     }, 1000)
   })

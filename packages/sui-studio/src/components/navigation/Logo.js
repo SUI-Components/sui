@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { getStudioLogo } from '../utils'
+import React, {Component} from 'react'
+import {getStudioLogo} from '../utils'
 
 export default class Logo extends Component {
   shouldComponentUpdate () {
@@ -10,7 +10,7 @@ export default class Logo extends Component {
     return (
       <picture
         className='sui-Studio-logo'
-        dangerouslySetInnerHTML={{ __html: getStudioLogo() }}
+        dangerouslySetInnerHTML={{__html: getStudioLogo()}}
       />
     )
   }

@@ -7,7 +7,13 @@ export default class LRU extends Cache {
     this._lru = new LRUCache(size)
   }
 
-  get (key) { return this._lru.get(key) }
-  set (key, value) { return this._lru.set(key, value) }
-  del (key) { this.set(key, undefined) }
+  get (key) {
+    return this._lru.get(key)
+  }
+  set (key, value) {
+    return this._lru.set(key, value)
+  }
+  del (key) {
+    this.set(key, undefined)
+  }
 }

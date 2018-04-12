@@ -5,7 +5,7 @@ const colors = require('colors')
 const program = require('commander')
 const BASE_DIR = process.cwd()
 const fse = require('fs-extra')
-const { getSpawnPromise } = require('@s-ui/helpers/cli')
+const {getSpawnPromise} = require('@s-ui/helpers/cli')
 
 program
   .on('--help', () => {
@@ -22,7 +22,7 @@ program
 const [PROJECT_NAME] = program.args
 const PROJECT_PATH = `${BASE_DIR}/${PROJECT_NAME}`
 
-const showError = (msg) => {
+const showError = msg => {
   program.outputHelp(txt => colors.red(txt))
   console.error(colors.red(msg))
   process.exit(1)
@@ -30,23 +30,19 @@ const showError = (msg) => {
 
 const writeFile = (path, body) => {
   return new Promise((resolve, reject) => {
-    fse.outputFile(
-      path,
-      body,
-      err => {
-        if (err) {
-          showError(`Fail modifying ${path}`)
-          reject(err)
-        } else {
-          console.log(colors.gray(`Modified ${path}`))
-          resolve()
-        }
+    fse.outputFile(path, body, err => {
+      if (err) {
+        showError(`Fail modifying ${path}`)
+        reject(err)
+      } else {
+        console.log(colors.gray(`Modified ${path}`))
+        resolve()
       }
-    )
+    })
   })
 }
 
-const createDir = (path) => {
+const createDir = path => {
   return new Promise((resolve, reject) => {
     fse.mkdirp(path, err => {
       if (err) {
@@ -60,20 +56,25 @@ const createDir = (path) => {
   })
 }
 
-if (!PROJECT_NAME) { showError('the project name must be defined') }
+if (!PROJECT_NAME) {
+  showError('the project name must be defined')
+}
 
 Promise.all([
   createDir(`${PROJECT_PATH}/components`),
   createDir(`${PROJECT_PATH}/demo`)
 ])
-  .then(() => writeFile(
-    `${PROJECT_PATH}/components/README.md`,
-    `# ${PROJECT_NAME} components
+  .then(() =>
+    writeFile(
+      `${PROJECT_PATH}/components/README.md`,
+      `# ${PROJECT_NAME} components
     <!-- Here put a description about your project -->`
-  ))
-  .then(() => writeFile(
-    `${PROJECT_PATH}/package.json`,
-    `{
+    )
+  )
+  .then(() =>
+    writeFile(
+      `${PROJECT_PATH}/package.json`,
+      `{
   "name": "${PROJECT_NAME}",
   "version": "1.0.0",
   "description": "",
@@ -111,7 +112,9 @@ Promise.all([
     }
   }
 }
-`))
+`
+    )
+  )
   .then(() => getSpawnPromise('npm', ['i'], {cwd: PROJECT_PATH}))
   .then(process.exit)
   .catch(process.exit)

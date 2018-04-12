@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 
 const withContext = (flag, context) => Target => {
-  if (!flag) { return Target }
+  if (!flag) {
+    return Target
+  }
 
   class Contextify extends Component {
     static displayName = `Contextify(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes || Target.contextTypes
+    static originalContextTypes = Target.originalContextTypes ||
+      Target.contextTypes
     static get childContextTypes () {
       return Target.originalContextTypes || Target.contextTypes
     }
@@ -15,7 +18,7 @@ const withContext = (flag, context) => Target => {
     }
 
     render () {
-      return (<Target {...this.props} />)
+      return <Target {...this.props} />
     }
   }
 

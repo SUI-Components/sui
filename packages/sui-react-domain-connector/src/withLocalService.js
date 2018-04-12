@@ -2,12 +2,14 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 const clean = str => str.replace('_use_case', '')
-const snakeToCamel = str => str.replace(/(_\w)/g, match => match[1].toUpperCase())
+const snakeToCamel = str =>
+  str.replace(/(_\w)/g, match => match[1].toUpperCase())
 
 const withLocalService = (...services) => Target => {
   class DDDLocalServicesInjector extends Component {
     static displayName = `withLocalService(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes || Target.contextTypes
+    static originalContextTypes = Target.originalContextTypes ||
+      Target.contextTypes
     static contextTypes = {
       domain: PropTypes.object.isRequired
     }
@@ -33,7 +35,9 @@ const withLocalService = (...services) => Target => {
             [loading]: true,
             [called]: true
           })
-          context.domain.get(service).execute(p)
+          context.domain
+            .get(service)
+            .execute(p)
             .then(result => {
               this.setState({
                 [response]: result,

@@ -2,7 +2,7 @@ import DefaultAdapter from './adapters/default'
 import {slugify} from './slugify'
 
 export default class Rosetta {
-  constructor ({ adapter = new DefaultAdapter() } = {}) {
+  constructor ({adapter = new DefaultAdapter()} = {}) {
     this._culture = null
     this._currency = null
     this._languages = null
@@ -55,7 +55,7 @@ export default class Rosetta {
       throw new Error('i18n.n should receive a number.')
     }
 
-    return (typeof Intl !== 'undefined')
+    return typeof Intl !== 'undefined'
       ? new Intl.NumberFormat(this._culture, options).format(number)
       : number
   }

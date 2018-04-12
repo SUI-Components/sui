@@ -33,7 +33,10 @@ export default class AnemicModel {
       }
 
       if (this._properties[replacedKey] instanceof AnemicModel) {
-        return {...resultObject, [replacedKey]: this._properties[replacedKey].toJSON()}
+        return {
+          ...resultObject,
+          [replacedKey]: this._properties[replacedKey].toJSON()
+        }
       }
 
       if (Array.isArray(this._properties[replacedKey])) {

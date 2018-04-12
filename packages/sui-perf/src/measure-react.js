@@ -12,19 +12,23 @@ class SuiPerfHook {
   }
 
   getMarkName (debugID) {
-    return '<' + (ReactComponentTreeHook.getDisplayName(debugID) || 'Unknown') + '>'
+    return (
+      '<' + (ReactComponentTreeHook.getDisplayName(debugID) || 'Unknown') + '>'
+    )
   }
 
   onBeforeMountComponent (debugID, element, parentDebugID) {
-    !this.isNativeComponent(debugID) && this.perf.mark(this.getMarkName(debugID))
+    !this.isNativeComponent(debugID) &&
+      this.perf.mark(this.getMarkName(debugID))
   }
 
   onMountComponent (debugID, element, parentDebugID) {
-    !this.isNativeComponent(debugID) && this.perf.stop(this.getMarkName(debugID))
+    !this.isNativeComponent(debugID) &&
+      this.perf.stop(this.getMarkName(debugID))
   }
 }
 
-const measureReact = (perf) => {
+const measureReact = perf => {
   let perfHook = new SuiPerfHook(perf)
   ReactDebug.addHook(perfHook)
   return ReactDebug.removeHook.bind(ReactDebug, perfHook)

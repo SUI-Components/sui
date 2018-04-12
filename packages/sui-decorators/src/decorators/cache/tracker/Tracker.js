@@ -1,8 +1,16 @@
 export default class Tracker {
-  static get ACTION_HIT () { return 'hits' }
-  static get ACTION_MISSING () { return 'misses' }
-  static get ENV_SERVER () { return 'server' }
-  static get ENV_BROWSER () { return 'browser' }
+  static get ACTION_HIT () {
+    return 'hits'
+  }
+  static get ACTION_MISSING () {
+    return 'misses'
+  }
+  static get ENV_SERVER () {
+    return 'server'
+  }
+  static get ENV_BROWSER () {
+    return 'browser'
+  }
 
   constructor ({
     algorithm,
@@ -25,16 +33,20 @@ export default class Tracker {
   }
 
   track ({action} = {}) {
-    if (!this._host || !this._segmentation) { return }
+    if (!this._host || !this._segmentation) {
+      return
+    }
 
     if (this._shouldSend()) {
       this._send({
-        headers: {'x-payload': JSON.stringify({
-          algorithm: this._algorithm,
-          env: this._env,
-          fnName: this._fnName,
-          ...this._stats
-        })},
+        headers: {
+          'x-payload': JSON.stringify({
+            algorithm: this._algorithm,
+            env: this._env,
+            fnName: this._fnName,
+            ...this._stats
+          })
+        },
         hostname: this._host.replace(/(https?)?:?\/\//g, ''),
         path: '/__tracking/cache/event/stats',
         port: this._port

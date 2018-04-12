@@ -1,15 +1,15 @@
-const isPromise = (obj) => typeof obj !== 'undefined' &&
-  typeof obj.then === 'function'
+const isPromise = obj =>
+  typeof obj !== 'undefined' && typeof obj.then === 'function'
 
-const defaultErrorHandler = (err) => {
+const defaultErrorHandler = err => {
   console.error(err)
 }
 
 const dispatchToListeners = ({onError, onNext, params, result}) => {
   if (isPromise(result)) {
     result
-      .then(value => onNext({ params, result: value }))
-      .catch(error => onError({ params, error }))
+      .then(value => onNext({params, result: value}))
+      .catch(error => onError({params, error}))
   } else if (result) {
     onNext({params, result})
   }
@@ -51,7 +51,7 @@ const createSubscription = (proto, method, originalMethod) => {
     }
   }
 
-  return { subscribe }
+  return {subscribe}
 }
 
 const reducer = (Target, proto, method) => {
@@ -62,7 +62,7 @@ const reducer = (Target, proto, method) => {
 }
 
 export default (...methods) => {
-  return (Target) => {
+  return Target => {
     Object.assign(
       Target.prototype,
       methods

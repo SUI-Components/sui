@@ -10,7 +10,7 @@ const MUTATION_OBSERVER_CONFIG = {
   attributes: false,
   characterData: false,
   childList: true,
-  subtree: true,
+  subtree: true
 }
 
 function onIdle (cb) {
@@ -33,7 +33,11 @@ function onIdle (cb) {
 }
 
 export function tagHTML ({tags}) {
-  const fireTagging = debounce(() => onIdle(searchTagsToTrackOnDocument), 500, true)
+  const fireTagging = debounce(
+    () => onIdle(searchTagsToTrackOnDocument),
+    500,
+    true
+  )
 
   // check if the DOMContentLoaded has been already fired
   if (/comp|inter|loaded/.test(document.readyState)) {
@@ -98,7 +102,9 @@ export function tagHTML ({tags}) {
 
   function searchTagsToTrackOnDocument () {
     for (var key in tags) {
-      const arrayDOMElements = Array.prototype.slice.call(document.querySelectorAll(key))
+      const arrayDOMElements = Array.prototype.slice.call(
+        document.querySelectorAll(key)
+      )
       for (var i = 0; i < arrayDOMElements.length; i++) {
         addTrackingTagsToElement(arrayDOMElements[i], tags[key])
       }
