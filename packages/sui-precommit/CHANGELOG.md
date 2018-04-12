@@ -2,8 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.5.0"></a>
+# 2.5.0 (2018-04-12)
+
+
+### Features
+
+* make sui-precommit to only lint staged files ([8552487](https://github.com/SUI-Components/sui/commit/8552487))
+
+
+
 <a name="2.4.0"></a>
-# 2.4.0 (2017-09-15)
+# 2.4.0 (2017-09-21)
 
 
 ### Bug Fixes
@@ -14,7 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([11bf0c1](https://github.com/SUI-Components/sui/commit/11bf0c1))
+* Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([7fa72e1](https://github.com/SUI-Components/sui/commit/7fa72e1))
 
 
 
@@ -55,6 +65,22 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * API has changed... now it's sui-lint instead of linting-rules
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-06-16)
+
+
+### Bug Fixes
+
+* add build script to be compatible with sui-mono releases ([0cd7d4b](https://github.com/SUI-Components/sui/commit/0cd7d4b))
+
+
+### Features
+
+* first commit of frontend-commit-rules migration to sui-precommit ([6f77134](https://github.com/SUI-Components/sui/commit/6f77134))
+* rename package to [@schibstedspain](https://github.com/schibstedspain)/sui-precommit ([b9a0a1d](https://github.com/SUI-Components/sui/commit/b9a0a1d))
 
 
 
