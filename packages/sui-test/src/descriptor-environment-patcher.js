@@ -1,12 +1,12 @@
 const colors = require('colors')
 // List of test describers to be patched.
 const functionsToPatch = ['describe', 'describe.only', 'it', 'it.only']
-// List of environments
+// List of environments, the environment define the function name. describe.client, describe.server
 const environments = {
-  CLIENT: 'Client',
-  SERVER: 'Server',
+  CLIENT: 'client',
+  SERVER: 'server',
 }
-const functionPatchPrefix = 'runOn'
+
 const isNode = typeof process === 'object' && process.toString() === '[object process]'
 
 export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironmentPatcher () {
@@ -27,7 +27,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     } else if (isOnlyClientButRunningAsServer || isOnlyServerButRunningAsClient) {
       return () => {
         throw new Error(
-          colors.red(`Seems that you are doing a ${descriptorName}.${functionPatchPrefix}${env}.only but you are running the tests for the ${isNode ? environments.SERVER : environments.CLIENT}\n\n`)
+          colors.red(`Seems that you are doing a ${descriptorName}.${env}.only but you are running the tests for the ${isNode ? environments.SERVER : environments.CLIENT}\n\n`)
         )
       }
     } else {
@@ -47,7 +47,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
     environmentsKeys.forEach((key) => {
       const env = environments[key]
-      baseFn[`${functionPatchPrefix}${env}`][firstLevelFnName] = buildFunctionForEnv(
+      baseFn[`${env}`][firstLevelFnName] = buildFunctionForEnv(
         {
           descriptorName,
           firstLevelFnName,
@@ -66,7 +66,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
     environmentsKeys.forEach((key) => {
       const env = environments[key]
-      global[descriptorName][`${functionPatchPrefix}${env}`] = buildFunctionForEnv({ descriptorName, env })
+      global[descriptorName][`${env}`] = buildFunctionForEnv({ descriptorName, env })
     })
   }
 

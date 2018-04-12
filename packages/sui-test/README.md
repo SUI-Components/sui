@@ -147,25 +147,25 @@ import { descriptorsByEnvironmentPatcher } from '@s-ui/test/lib/descriptor-envir
 descriptorsByEnvironmentPatcher()
 ```
 And that's it, from that line you will have the next methods added to the base of the mocha lib:
-- describe.runOnClient
-- describe.runOnServer
-- describe.runOnClient.only
-- describe.runOnServer.only
-- it.runOnClient
-- it.runOnServer
-- it.runOnClient.only
-- it.runOnServer.only
+- describe.client
+- describe.server
+- describe.client.only
+- describe.server.only
+- it.client
+- it.server
+- it.client.only
+- it.server.only
 ### How can I use it?
 Just in the same way as you have been using the describe or it functions earlier:
 
 ```javascript
-describe.runOnClient('Users use case', () => {
+describe.client('Users use case', () => {
   it('should....', () => {
     // ...
   })
 })
 
-describe.runOnServer('Users use case', () => {
+describe.server('Users use case', () => {
   it('should....', () => {
     // ...
   })
@@ -176,11 +176,11 @@ You can also have `it()` by environment:
 
 ```javascript
 describe('Another use case', () => {
-  it.runOnClient('should....', () => {
+  it.client('should....', () => {
     // ...
   })
 
-  it.runOnServer('should....', () => {
+  it.server('should....', () => {
     // ...
   })
 })
@@ -189,7 +189,7 @@ describe('Another use case', () => {
 What about if you want to run only one describe but only for client? You can use the `.only` function in the same way as you've been using earlier.
 
 ```javascript
-describe.runOnClient.only('Another use case', () => {
+describe.client.only('Another use case', () => {
   it('should....', () => {
     // ...
   })
