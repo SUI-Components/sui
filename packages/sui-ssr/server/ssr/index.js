@@ -88,7 +88,10 @@ export default (req, res, next) => {
       // `.replace(/\n/g, '')
       // })
 
-      const head = Helmet.renderStatic()
+      const helmet = Helmet.renderStatic()
+
+      const { bodyAttributes, htmlAttributes, ...head } = helmet
+
       res.write(
         Object.keys(head)
           .map(section => head[section].toString())
@@ -98,6 +101,7 @@ export default (req, res, next) => {
 
       res.end(
         `</head>${bodyHTML}`
+          .replace('<body>', `<body ${bodyAttributes.toString()}>`)
           .replace(APP_PLACEHOLDER, reactString)
           .replace('</body>', `${injectDataHydratation(initialProps)}</body>`)
           .replace('</body>', `${injectDataPerformance(performance)}</body>`)
