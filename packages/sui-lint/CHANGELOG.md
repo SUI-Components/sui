@@ -2,8 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.12.0"></a>
+# 2.12.0 (2018-04-12)
+
+
+### Bug Fixes
+
+* add missing dependency ([0d65356](https://github.com/SUI-Components/sui/commit/0d65356))
+
+
+
 <a name="2.11.0"></a>
 # 2.11.0 (2018-04-09)
+
+
+### Bug Fixes
+
+* make auto stage of changes an option: --add-fixes ([6e63189](https://github.com/SUI-Components/sui/commit/6e63189))
 
 
 ### Features
@@ -12,6 +27,8 @@ All notable changes to this project will be documented in this file.
 * add --staged option to lint only staged files ([e4bcb3c](https://github.com/SUI-Components/sui/commit/e4bcb3c))
 * exlude git ignored files in sass linting ([ccb3703](https://github.com/SUI-Components/sui/commit/ccb3703))
 * ignore by default .gitignore file patterns ([052b4de](https://github.com/SUI-Components/sui/commit/052b4de))
+* stage modifications for staged files ([cf02bda](https://github.com/SUI-Components/sui/commit/cf02bda))
+* sui-lint format-js command ([4c40ad7](https://github.com/SUI-Components/sui/commit/4c40ad7))
 
 
 
