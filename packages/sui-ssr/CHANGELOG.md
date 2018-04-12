@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-04-12)
+
+
+### Features
+
+* add very basic health check end point ([ce6b2c3](https://github.com/SUI-Components/sui/commit/ce6b2c3))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-04-11)
 
