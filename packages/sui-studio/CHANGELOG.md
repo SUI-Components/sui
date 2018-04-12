@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.1.0"></a>
+# 5.1.0 (2018-04-12)
+
+
+### Bug Fixes
+
+* use new [@s-ui](https://github.com/s-ui)/bundler to make it work ([6a98a34](https://github.com/SUI-Components/sui/commit/6a98a34))
+
+
+
 <a name="5.0.0"></a>
 # 5.0.0 (2018-04-12)
 
