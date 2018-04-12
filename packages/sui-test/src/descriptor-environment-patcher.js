@@ -6,7 +6,7 @@ const environments = {
   CLIENT: 'Client',
   SERVER: 'Server',
 }
-const functionPrefix = 'runOn'
+const functionPatchPrefix = 'runOn'
 const isNode = typeof process === 'object' && process.toString() === '[object process]'
 
 export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironmentPatcher () {
@@ -16,10 +16,10 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
    * @param {String} env Can be one of the constants defined in the environments object - {SERVER, CLIENT}
    * @param {Boolean} isOnly A boolean function to know if we are trying to run a descriptor with the .only Function
    */
-  function buildFunctionForEnv ({descriptorName, firstLevelFnName} = {}, env, isOnly) {
+  function buildFunctionForEnv ({ descriptorName, firstLevelFnName, env }) {
     const shouldReturnDescriber = (isNode && env === environments.SERVER) || (!isNode && env === environments.CLIENT)
-    const isOnlyServerButRunningAsClient = !isNode && env === environments.SERVER && isOnly
-    const isOnlyClientButRunningAsServer = isNode && env === environments.CLIENT && isOnly
+    const isOnlyServerButRunningAsClient = !isNode && env === environments.SERVER && firstLevelFnName
+    const isOnlyClientButRunningAsServer = isNode && env === environments.CLIENT && firstLevelFnName
     if (shouldReturnDescriber) {
       return function () {
         firstLevelFnName ? global[descriptorName][firstLevelFnName](...arguments) : global[descriptorName](...arguments)
@@ -27,7 +27,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     } else if (isOnlyClientButRunningAsServer || isOnlyServerButRunningAsClient) {
       return () => {
         throw new Error(
-          colors.red(`Seems that you are doing a ${descriptorName}.${functionPrefix}${env}.only but you are running the tests for the ${isNode ? environments.SERVER : environments.CLIENT}\n\n`)
+          colors.red(`Seems that you are doing a ${descriptorName}.${functionPatchPrefix}${env}.only but you are running the tests for the ${isNode ? environments.SERVER : environments.CLIENT}\n\n`)
         )
       }
     } else {
@@ -46,14 +46,13 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     const environmentsKeys = Object.keys(environments)
 
     environmentsKeys.forEach((key) => {
-      const environmentName = environments[key]
-      baseFn[`${functionPrefix}${environmentName}`][firstLevelFnName] = buildFunctionForEnv(
+      const env = environments[key]
+      baseFn[`${functionPatchPrefix}${env}`][firstLevelFnName] = buildFunctionForEnv(
         {
           descriptorName,
-          firstLevelFnName
-        },
-        environmentName,
-        true
+          firstLevelFnName,
+          env
+        }
       )
     })
   }
@@ -66,8 +65,8 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     const environmentsKeys = Object.keys(environments)
 
     environmentsKeys.forEach((key) => {
-      const environmentName = environments[key]
-      global[descriptorName][`${functionPrefix}${environmentName}`] = buildFunctionForEnv({ descriptorName }, environmentName)
+      const env = environments[key]
+      global[descriptorName][`${functionPatchPrefix}${env}`] = buildFunctionForEnv({ descriptorName, env })
     })
   }
 
