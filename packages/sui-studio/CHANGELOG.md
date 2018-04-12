@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.0.0"></a>
+# 5.0.0 (2018-04-12)
+
+
+### Bug Fixes
+
+* add head and body elements to index.html ([8fc11e5](https://github.com/SUI-Components/sui/commit/8fc11e5))
+* fix sui-studio to work with latest webpack version ([8081687](https://github.com/SUI-Components/sui/commit/8081687))
+
+
+### Features
+
+* get the context from export default instead module.exports ([832590f](https://github.com/SUI-Components/sui/commit/832590f))
+* remove not used libraries, update codeMirror and load theme ([04b481a](https://github.com/SUI-Components/sui/commit/04b481a))
+* remove not used right now module.hot ([0df0d1e](https://github.com/SUI-Components/sui/commit/0df0d1e))
+* remove routes feature ([862fdda](https://github.com/SUI-Components/sui/commit/862fdda))
+* remove undefined events for playground and sort code ([ea2358f](https://github.com/SUI-Components/sui/commit/ea2358f))
+* use new dynamic import and remove old require.context ([8b881f3](https://github.com/SUI-Components/sui/commit/8b881f3))
+
+
+### BREAKING CHANGES
+
+* Removed routes support for playground
+* Now context.js of studios should export default instead using module.exports
+
+
+
 <a name="4.44.0"></a>
 # 4.44.0 (2018-02-05)
 
@@ -125,7 +152,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* polyfills as vendor ([1b7561b](https://github.com/SUI-Components/sui/commit/1b7561b))
+* polyfills as vendor ([1b7561b](https://github.com/SUI-Components/sui/commit/1b7561b)), closes [#134](https://github.com/SUI-Components/sui/issues/134)
 
 
 
@@ -145,7 +172,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fix indentatio in generate command ([ed87db0](https://github.com/SUI-Components/sui/commit/ed87db0))
+* fix indentatio in generate command ([ed87db0](https://github.com/SUI-Components/sui/commit/ed87db0)), closes [#114](https://github.com/SUI-Components/sui/issues/114)
 * generate deps without "latest" ([1bca514](https://github.com/SUI-Components/sui/commit/1bca514))
 
 
@@ -264,7 +291,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* don't rely on the clipboard to set deployment alias ([9a001d3](https://github.com/SUI-Components/sui/commit/9a001d3))
+* don't rely on the clipboard to set deployment alias ([9a001d3](https://github.com/SUI-Components/sui/commit/9a001d3)), closes [#29](https://github.com/SUI-Components/sui/issues/29)
 
 
 
@@ -289,9 +316,9 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add alias set to now deploys ([3c82722](https://github.com/SUI-Components/sui/commit/3c82722))
-* add deploy command using now.sh service ([2927bc0](https://github.com/SUI-Components/sui/commit/2927bc0))
-* add detailed props description in documentation ([94c120a](https://github.com/SUI-Components/sui/commit/94c120a))
+* add alias set to now deploys ([3c82722](https://github.com/SUI-Components/sui/commit/3c82722)), closes [#92](https://github.com/SUI-Components/sui/issues/92)
+* add deploy command using now.sh service ([2927bc0](https://github.com/SUI-Components/sui/commit/2927bc0)), closes [#92](https://github.com/SUI-Components/sui/issues/92)
+* add detailed props description in documentation ([94c120a](https://github.com/SUI-Components/sui/commit/94c120a)), closes [#29](https://github.com/SUI-Components/sui/issues/29)
 * add table support to mardown views ([cf7596c](https://github.com/SUI-Components/sui/commit/cf7596c))
 * build: create 200.html for PWA ([e68d772](https://github.com/SUI-Components/sui/commit/e68d772))
 
@@ -303,7 +330,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add CHANGELOG tab ([dafe396](https://github.com/SUI-Components/sui/commit/dafe396))
+* add CHANGELOG tab ([dafe396](https://github.com/SUI-Components/sui/commit/dafe396)), closes [#27](https://github.com/SUI-Components/sui/issues/27)
 
 
 
@@ -325,7 +352,7 @@ All notable changes to this project will be documented in this file.
 
 * disabling on the fly loaded style ([acf766a](https://github.com/SUI-Components/sui/commit/acf766a))
 * easier disabling, link update ([ada8bc6](https://github.com/SUI-Components/sui/commit/ada8bc6))
-* search for component.js just in case ([8b2b78e](https://github.com/SUI-Components/sui/commit/8b2b78e))
+* search for component.js just in case ([8b2b78e](https://github.com/SUI-Components/sui/commit/8b2b78e)), closes [#76](https://github.com/SUI-Components/sui/issues/76)
 
 
 ### Features
@@ -340,7 +367,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* update elements z-index ([6a2b16e](https://github.com/SUI-Components/sui/commit/6a2b16e))
+* update elements z-index ([6a2b16e](https://github.com/SUI-Components/sui/commit/6a2b16e)), closes [#56](https://github.com/SUI-Components/sui/issues/56)
 
 
 ### Features
@@ -392,7 +419,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* command: sui-studio run-all ([cbff577](https://github.com/SUI-Components/sui/commit/cbff577))
+* command: sui-studio run-all ([cbff577](https://github.com/SUI-Components/sui/commit/cbff577)), closes [#21](https://github.com/SUI-Components/sui/issues/21)
 
 
 
@@ -419,7 +446,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * migrate to sui-bundler ([1abc9a3](https://github.com/SUI-Components/sui/commit/1abc9a3))
-* update from origin repo ([5b5f1be](https://github.com/SUI-Components/sui/commit/5b5f1be))
+* update from origin repo ([5b5f1be](https://github.com/SUI-Components/sui/commit/5b5f1be)), closes [#62](https://github.com/SUI-Components/sui/issues/62) [#63](https://github.com/SUI-Components/sui/issues/63)
 
 
 
@@ -448,22 +475,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
-
-
-
-<a name="4.0.0"></a>
-# 4.0.0 (2017-06-22)
-
-
-### Features
-
-* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
-* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
-
-
-### BREAKING CHANGES
-
-* API is now named sui-studio instead of suistudio
 
 
 
