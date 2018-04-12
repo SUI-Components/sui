@@ -7,12 +7,20 @@ const requireFile = async ({ defaultValue, extractDefault = true, importFile }) 
   return extractDefault ? file.default : file
 }
 
+const reqComponentsSrc =
+  require.context(`bundle-loader?lazy!${__BASE_DIR__}/components`, true, /^\.\/\w+\/\w+\/src\/index\.jsx?/)
+
 const tryRequire = async ({category, component}) => {
-  const exports = requireFile({
-    extractDefault: false,
-    importFile: () => import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`).catch(_ =>
-      import(`${__BASE_DIR__}/components/${category}/${component}/src/index.jsx`)
-    )
+  const exports = new Promise(resolve => {
+    require.ensure([], () => {
+      let bundler
+      try {
+        bundler = reqComponentsSrc(`./${category}/${component}/src/index.js`)
+      } catch (e) {
+        bundler = reqComponentsSrc(`./${category}/${component}/src/index.jsx`)
+      }
+      bundler(resolve)
+    })
   })
 
   const pkg = requireFile({
