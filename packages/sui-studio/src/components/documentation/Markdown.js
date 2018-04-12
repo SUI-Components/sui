@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import snarkdown from 'snarkdown'
 
 export default class Markdown extends Component {
@@ -9,10 +9,13 @@ export default class Markdown extends Component {
 
   render () {
     const {content} = this.props
-    return (content &&
-      <div
-        className='markdown-body'
-        dangerouslySetInnerHTML={{ __html: snarkdown(content) }} />
+    return (
+      content && (
+        <div
+          className='markdown-body'
+          dangerouslySetInnerHTML={{__html: snarkdown(content)}}
+        />
+      )
     )
   }
 }

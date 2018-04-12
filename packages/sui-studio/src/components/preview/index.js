@@ -1,7 +1,7 @@
 /* eslint no-console: 0 */
 import PropTypes from 'prop-types'
 
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
 const ERROR_TIMEOUT = 500
@@ -15,7 +15,7 @@ export default class Preview extends Component {
 
   static defaultProps = {
     className: '',
-    scope: { React }
+    scope: {React}
   }
 
   state = {
@@ -74,17 +74,17 @@ export default class Preview extends Component {
       const Component = eval(compiledCode)(...scope)
       ReactDOM.render(Component, mountNode)
       if (this.state.error) {
-        this.setState({ error: undefined })
+        this.setState({error: undefined})
       }
     } catch (err) {
       console.error(err)
       this.setTimeout(() => {
-        this.setState({ error: err.toString() })
+        this.setState({error: err.toString()})
       }, ERROR_TIMEOUT)
     }
   }
 
-  _renderError ({ error }) {
+  _renderError ({error}) {
     return (
       <pre className='sui-StudioPreview-error'>
         <h3>Your playground has an error, please check:</h3>
@@ -94,11 +94,11 @@ export default class Preview extends Component {
   }
 
   render () {
-    const { error } = this.state
+    const {error} = this.state
 
     return (
       <div className='sui-StudioPreview'>
-        {error !== undefined && this._renderError({ error })}
+        {error !== undefined && this._renderError({error})}
         <div
           ref='mount'
           className='sui-StudioPreview-content sui-StudioDemo-preview'

@@ -18,33 +18,33 @@ describe('#ClientMocker', () => {
 
     describe('when mocking without status code', () => {
       beforeEach(() => {
-        mocker.httpMock(fakeUrl)
+        mocker
+          .httpMock(fakeUrl)
           .get(fakePath)
           .reply({})
       })
 
-      it('should resolve statusCode 200', (done) => {
-        axios.get(`${fakeUrl}${fakePath}`)
-          .then(({status}) => {
-            expect(status).to.be.eq(200)
-            done()
-          })
+      it('should resolve statusCode 200', done => {
+        axios.get(`${fakeUrl}${fakePath}`).then(({status}) => {
+          expect(status).to.be.eq(200)
+          done()
+        })
       })
     })
 
     describe('when mocking statusCode 500', () => {
       beforeEach(() => {
-        mocker.httpMock(fakeUrl)
+        mocker
+          .httpMock(fakeUrl)
           .get(fakePath)
           .reply({}, 500)
       })
 
-      it('should reject statusCode 500', (done) => {
-        axios.get(`${fakeUrl}${fakePath}`)
-          .catch(({response}) => {
-            expect(response.status).to.be.eq(500)
-            done()
-          })
+      it('should reject statusCode 500', done => {
+        axios.get(`${fakeUrl}${fakePath}`).catch(({response}) => {
+          expect(response.status).to.be.eq(500)
+          done()
+        })
       })
     })
   })

@@ -18,7 +18,7 @@ process.stdout.write = msg => {
   }
 
   // Ignore total output since we only have one browser:
-  if (msg.match(/\u001b\[32mTOTAL: /)) return
+  if (msg.match(/\u001b\[32mTOTAL: /)) return // eslint-disable-line
 
   return write.call(process.stdout, msg)
 }

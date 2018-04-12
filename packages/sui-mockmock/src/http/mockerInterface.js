@@ -18,4 +18,4 @@ class Mocker {
   httpMock (baseUrl) {}
 }
 
-export { Mocker, Mock }
+export {Mocker, Mock}

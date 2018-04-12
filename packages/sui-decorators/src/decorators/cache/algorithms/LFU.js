@@ -7,7 +7,13 @@ export default class LFU extends Cache {
     this._lfu = Guild.cacheWithSize(size)
   }
 
-  get (key) { return this._lfu.get(key) }
-  set (key, value) { return this._lfu.put(key, value) }
-  del (key) { this._lfu.remove(key) }
+  get (key) {
+    return this._lfu.get(key)
+  }
+  set (key, value) {
+    return this._lfu.put(key, value)
+  }
+  del (key) {
+    this._lfu.remove(key)
+  }
 }

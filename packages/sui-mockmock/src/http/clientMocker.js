@@ -31,8 +31,7 @@ class ClientMock extends Mock {
     response,
     statusCode,
     headers = {'Content-Type': 'application/json'}
-  ) =>
-    [statusCode, headers, JSON.stringify(response)]
+  ) => [statusCode, headers, JSON.stringify(response)]
 
   constructor (server, baseUrl) {
     super()
@@ -80,12 +79,16 @@ class ClientMock extends Mock {
   }
 
   query (queryObject) {
-    this._query = '?' + Object.keys(queryObject).reduce((acc, param) => {
-      const value = queryObject[param]
-      acc.push(`${param}=${value}`)
+    this._query =
+      '?' +
+      Object.keys(queryObject)
+        .reduce((acc, param) => {
+          const value = queryObject[param]
+          acc.push(`${param}=${value}`)
 
-      return acc
-    }, []).join('&')
+          return acc
+        }, [])
+        .join('&')
 
     return this
   }
@@ -95,8 +98,7 @@ class ClientMock extends Mock {
       this._method,
       this._isRegexp
         ? RegExp(`${this._baseUrl}${this._path}${this._query}`)
-        : `${this._baseUrl}${this._path}${this._query}`
-      ,
+        : `${this._baseUrl}${this._path}${this._query}`,
       this._responseResolver(response, statusCode, headers)
     )
   }

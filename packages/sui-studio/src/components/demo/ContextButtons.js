@@ -3,23 +3,23 @@ import React from 'react'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
-import { isEmptyObject } from '../utils'
+import {isEmptyObject} from '../utils'
 
 const ContextButtons = ({ctxt, onContextChange, selected}) => {
-  if (isEmptyObject(ctxt)) { return null }
+  if (isEmptyObject(ctxt)) {
+    return null
+  }
 
   return (
     <Tabs title='Context'>
-      {
-        Object.keys(ctxt).map((ctxtType, index) => (
-          <Tab
-            handleClick={(evt) => onContextChange(ctxtType, index)}
-            isActive={index === selected}
-            key={`${ctxtType}${index}`}
-            literal={ctxtType}
-          />
-        ))
-      }
+      {Object.keys(ctxt).map((ctxtType, index) => (
+        <Tab
+          handleClick={evt => onContextChange(ctxtType, index)}
+          isActive={index === selected}
+          key={`${ctxtType}${index}`}
+          literal={ctxtType}
+        />
+      ))}
     </Tabs>
   )
 }

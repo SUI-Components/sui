@@ -23,4 +23,4 @@ function getTaskArray (folder) {
   return [command, args, {cwd: folder}]
 }
 
-module.exports = { getAllTaskArrays }
+module.exports = {getAllTaskArrays}

@@ -17,8 +17,14 @@ export default (
         <Route path='demo' component={Demo} />
         <Route path='documentation' component={Documentation}>
           <Route path='api' component={ReactDocGen} />
-          <Route path='readme' component={(props) => <MarkdownFile {...props} file='README' />} />
-          <Route path='changelog' component={(props) => <MarkdownFile {...props} file='CHANGELOG' />} />
+          <Route
+            path='readme'
+            component={props => <MarkdownFile {...props} file='README' />}
+          />
+          <Route
+            path='changelog'
+            component={props => <MarkdownFile {...props} file='CHANGELOG' />}
+          />
         </Route>
         <Route path='tests' component={Tests} />
       </Route>
