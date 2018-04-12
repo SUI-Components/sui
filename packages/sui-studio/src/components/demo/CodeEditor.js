@@ -1,22 +1,36 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import cx from 'classnames'
+import debounce from 'just-debounce-it'
 
 // load needed scripts and styles for codemirror
-import Codemirror from 'react-codemirror'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/material.css'
+import CodeMirror from 'codemirror'
+require('codemirror/mode/javascript/javascript')
 
 const CODE_MIRROR_OPTIONS = {
   lineNumbers: true,
   mode: 'javascript',
   theme: 'material'
 }
+const DEBOUNCE_TIME = 500
 
-export default class CodeEditor extends Component {
+export default class CodeEditor extends PureComponent {
+  _createOnChangeDebounced = () => {
+    return debounce((codeMirrorDocument, change) => {
+      if (change !== 'setValue') {
+        this.props.onChange(codeMirrorDocument.getValue())
+      }
+    }, DEBOUNCE_TIME)
+  }
+
+  componentDidMount () {
+    this.codeMirror = CodeMirror.fromTextArea(this.textareaNode, CODE_MIRROR_OPTIONS)
+    this.codeMirror.setValue(this.props.playground)
+    this.codeMirror.on('change', this._createOnChangeDebounced())
+  }
+
   render () {
-    const { isOpen, onChange, playground } = this.props
+    const { isOpen } = this.props
 
     const codeClassName = cx('sui-StudioDemo-code', {
       'sui-StudioDemo-code--open': isOpen
@@ -24,10 +38,9 @@ export default class CodeEditor extends Component {
 
     return (
       <div className={codeClassName}>
-        <Codemirror
-          onChange={onChange}
-          options={CODE_MIRROR_OPTIONS}
-          value={playground}
+        <textarea
+          autoComplete='off'
+          ref={ref => { this.textareaNode = ref }}
         />
       </div>
     )

@@ -1,18 +1,17 @@
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
-const path = require('path')
-
 require('./shared/shims')
 
 const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
 
 let webpackConfig = {
+  mode: 'development',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
-  devtool: 'eval-source-map',
   entry: cleanList([
     whenInstalled('react', 'react-hot-loader/patch'),
     'webpack-hot-middleware/client?reload=true',
@@ -20,9 +19,7 @@ let webpackConfig = {
   ]),
   target: 'web',
   output: {
-    path: path.resolve(process.env.PWD, 'public'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    publicPath: '/'
   },
   plugins: [
     new webpack.EnvironmentPlugin(envVars(config.env)),
@@ -37,50 +34,21 @@ let webpackConfig = {
       inject: true,
       env: process.env
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: false,
-      debug: true,
-      noInfo: true,
-      options: {
-        context: '/'
-      }
-    }),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
+        include: /src/,
         exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
         use: {
           loader: 'babel-loader',
           options: {
+            babelrc: false,
             presets: ['sui']
           }
         }
-      },
-      {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        loader: 'file-loader'},
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'file-loader?name=[name].[ext]'
-      },
-      {
-        test: /\.ico$/,
-        loader: 'file-loader?name=[name].[ext]'
       },
       {
         test: /(\.css|\.scss)$/,

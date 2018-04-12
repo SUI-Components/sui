@@ -1,3 +1,6 @@
+@import '~codemirror/lib/codemirror.css';
+@import '~codemirror/theme/material.css';
+
 .sui-StudioDemo {
   display: flex;
   flex: 1;
@@ -35,13 +38,9 @@
     }
   }
 
-  .codeMirror {
+  .CodeMirror {
     font-size: 12px;
     height: 100%;
-
-    pre {
-      white-space: pre-wrap;
-    }
 
     &-scroll {
       width: 100%;
