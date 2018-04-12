@@ -2,7 +2,8 @@
 
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
-  staged: '--staged'
+  staged: '--staged',
+  addFixes: '--add-fixes'
 }
 const optionFlags = Object.values(OPTIONS)
 
@@ -20,17 +21,14 @@ const filterOptionFlags = args => args.filter(arg => !optionFlags.includes(arg))
  * @return {ChildProcess}
  */
 function executeLintingCommand (binPath, args) {
-  const { spawn } = require('child_process')
+  const {showError, getSpawnPromise} = require('@s-ui/helpers/cli')
   const [, , ...processArgs] = filterOptionFlags(process.argv)
 
   if (processArgs.find(arg => arg === '-c')) {
     console.log('[sui-lint] Dont use your own config file. Remove `-c` flag')
     process.exit(1)
   }
-  return spawn(binPath, args.concat(processArgs), {
-    shell: true,
-    stdio: 'inherit'
-  }).on('exit', code => process.exit(code))
+  return getSpawnPromise(binPath, args.concat(processArgs)).catch(showError)
 }
 
 /**
@@ -39,7 +37,7 @@ function executeLintingCommand (binPath, args) {
  * @returns {Array<String>}
  */
 const getFileLinesAsArray = path => {
-  const { existsSync, readFileSync } = require('fs')
+  const {existsSync, readFileSync} = require('fs')
   return existsSync(path)
     ? readFileSync(path, 'utf8')
       .toString()
@@ -70,7 +68,7 @@ const getArrayArgs = (arg, values) => {
  * @returns {Promise<Array>} Array of file paths
  */
 const getGitStatusFiles = async extensions => {
-  const { extname } = require('path')
+  const {extname} = require('path')
   return new Promise((resolve, reject) => {
     require('simple-git')().diff(
       ['--cached', '--name-only', '--diff-filter=d'], // Delete files as excluded
@@ -98,8 +96,32 @@ const getFilesToLint = async (extensions, defaultFiles = './') =>
     ? getGitStatusFiles(extensions)
     : [defaultFiles]
 
+/**
+ * If --staged option is on, it will staged made changes
+ * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
+ * @returns {Promise}
+ */
+const stageFilesIfRequired = async extensions => {
+  const {argv} = process
+  if (argv.includes(OPTIONS.staged) && argv.includes(OPTIONS.addFixes)) {
+    const {getSpawnPromise} = require('@s-ui/helpers/cli')
+    const files = await getGitStatusFiles(extensions)
+    return getSpawnPromise('git', ['add', ...files])
+  }
+}
+
+/**
+ * Get if current process has option set
+ * @param {String} option
+ */
+const isOptionSet = option => process.argv.includes(option)
+
 exports.executeLintingCommand = executeLintingCommand
 exports.getFileLinesAsArray = getFileLinesAsArray
 exports.getArrayArgs = getArrayArgs
 exports.getFilesToLint = getFilesToLint
 exports.getGitIgnoredFiles = getGitIgnoredFiles
+exports.stageFilesIfRequired = stageFilesIfRequired
+exports.isOptionSet = isOptionSet
+exports.GIT_IGNORE_PATH = GIT_IGNORE_PATH
+exports.OPTIONS = OPTIONS

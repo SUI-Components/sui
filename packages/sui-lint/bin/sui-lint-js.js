@@ -4,7 +4,9 @@ const {
   executeLintingCommand,
   getArrayArgs,
   getFilesToLint,
-  getGitIgnoredFiles
+  getGitIgnoredFiles,
+  isOptionSet,
+  stageFilesIfRequired
 } = require('../src/helpers')
 
 const BIN_PATH = require.resolve('eslint/bin/eslint')
@@ -22,6 +24,8 @@ getFilesToLint(EXTENSIONS).then(
         ...getArrayArgs('--ext', EXTENSIONS),
         ...getArrayArgs('--ignore-pattern', patterns),
         ...files
-      ])) ||
+      ]).then(
+        () => isOptionSet('--fix') && stageFilesIfRequired(EXTENSIONS)
+      )) ||
     console.log('[sui-lint js] No javascript files to lint.')
 )

@@ -14,6 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@s-ui/helpers": "1",
     "babel-eslint": "8.2.2",
     "commander": "2.15.1",
     "eslint": "4.19.1",
@@ -25,6 +26,8 @@
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-react": "7.7.0",
     "eslint-plugin-standard": "3.0.1",
-    "sass-lint": "1.12.1"
+    "prettier": "1.11.1",
+    "sass-lint": "1.12.1",
+    "simple-git": "1.92.0"
   }
 }
