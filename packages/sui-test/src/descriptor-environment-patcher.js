@@ -6,11 +6,12 @@ const environments = {
   CLIENT: 'Client',
   SERVER: 'Server',
 }
+const functionPrefix = 'runOn'
 const isNode = typeof process === 'object' && process.toString() === '[object process]'
 
 export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironmentPatcher () {
   /**
-   * This function is the one with the purpose of handle and return the function that should be attached to our only{client | server} patch.
+   * This function is the one with the purpose of handle and return the function that should be attached to our runOn{client | server} patch.
    * @param {Object} descriptor Is the object that contains the name of the descriptor base function and in the cases that we have nested function calls the nested name too
    * @param {String} env Can be one of the constants defined in the environments object - {SERVER, CLIENT}
    * @param {Boolean} isOnly A boolean function to know if we are trying to run a descriptor with the .only Function
@@ -26,7 +27,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     } else if (isOnlyClientButRunningAsServer || isOnlyServerButRunningAsClient) {
       return () => {
         throw new Error(
-          colors.red(`Seems that you are doing a ${descriptorName}.only${env}.only but you are running the tests for the ${isNode ? environments.SERVER : environments.CLIENT}\n\n`)
+          colors.red(`Seems that you are doing a ${descriptorName}.${functionPrefix}${env}.only but you are running the tests for the ${isNode ? environments.SERVER : environments.CLIENT}\n\n`)
         )
       }
     } else {
@@ -46,7 +47,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
     environmentsKeys.forEach((key) => {
       const environmentName = environments[key]
-      baseFn[`only${environmentName}`][firstLevelFnName] = buildFunctionForEnv(
+      baseFn[`${functionPrefix}${environmentName}`][firstLevelFnName] = buildFunctionForEnv(
         {
           descriptorName,
           firstLevelFnName
@@ -66,7 +67,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
     environmentsKeys.forEach((key) => {
       const environmentName = environments[key]
-      global[descriptorName][`only${environmentName}`] = buildFunctionForEnv({ descriptorName }, environmentName)
+      global[descriptorName][`${functionPrefix}${environmentName}`] = buildFunctionForEnv({ descriptorName }, environmentName)
     })
   }
 
