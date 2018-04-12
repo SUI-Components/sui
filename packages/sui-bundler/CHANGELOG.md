@@ -2,14 +2,60 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.0.0"></a>
+# 3.0.0 (2018-04-12)
+
+
+### Bug Fixes
+
+* loadUniversalOptionsPlugin in pro as well ([b069576](https://github.com/SUI-Components/sui/commit/b069576))
+
+
+### Features
+
+* adapt production configuration to be as development ([216fa61](https://github.com/SUI-Components/sui/commit/216fa61))
+* adapt production configuration to new versions ([d6474d5](https://github.com/SUI-Components/sui/commit/d6474d5))
+* merge ([6a3f18d](https://github.com/SUI-Components/sui/commit/6a3f18d))
+* remove json-loader and use native instead ([a8d939f](https://github.com/SUI-Components/sui/commit/a8d939f))
+* remove not needed loaders for some files and rollback to loader ([dd6a81a](https://github.com/SUI-Components/sui/commit/dd6a81a))
+* return loaderOptionsPlugin to be used ([5b6c358](https://github.com/SUI-Components/sui/commit/5b6c358))
+* update dependencies ([bbe43b1](https://github.com/SUI-Components/sui/commit/bbe43b1))
+* update dependencies ([6788838](https://github.com/SUI-Components/sui/commit/6788838))
+* update dependencies ([55217aa](https://github.com/SUI-Components/sui/commit/55217aa))
+* update html-webpack-plugin version ([389f546](https://github.com/SUI-Components/sui/commit/389f546))
+
+
+### BREAKING CHANGES
+
+* Stop supporting a way to load fonts, images and other files on your code
+* No support for loading fonts, svg and images from your project anymore
+
+
+
 <a name="2.15.0"></a>
 # 2.15.0 (2018-03-28)
+
+
+### Bug Fixes
+
+* specify include and avoid getting others babelrc than the one we want ([12f60af](https://github.com/SUI-Components/sui/commit/12f60af))
+* update dependencies to fix some problems ([e2f8370](https://github.com/SUI-Components/sui/commit/e2f8370))
 
 
 ### Features
 
 * add node-externals dep ([bd09441](https://github.com/SUI-Components/sui/commit/bd09441))
 * add server config ([cbc8a01](https://github.com/SUI-Components/sui/commit/cbc8a01))
+* relay more on default values ([99694b2](https://github.com/SUI-Components/sui/commit/99694b2))
+* remove deprecated way to add to the loader the config on PRO ([b9fb841](https://github.com/SUI-Components/sui/commit/b9fb841))
+* stop using old loader for webpack 2 and kiss ([0a83817](https://github.com/SUI-Components/sui/commit/0a83817))
+* update dependencies ([e448b94](https://github.com/SUI-Components/sui/commit/e448b94))
+* update dependencies ([988eb62](https://github.com/SUI-Components/sui/commit/988eb62))
+* update dependencies to latest versions and ensure Webpack 4 compatibility ([9771c45](https://github.com/SUI-Components/sui/commit/9771c45))
+* update node-sass-json-importer ([9da5273](https://github.com/SUI-Components/sui/commit/9da5273))
+* update to latest dependencies con hotfixes and webpack 4 support ([8ef23f7](https://github.com/SUI-Components/sui/commit/8ef23f7))
+* use latest versions of dependencies ([2237dfe](https://github.com/SUI-Components/sui/commit/2237dfe))
+* use manual vendor ([b03e2f6](https://github.com/SUI-Components/sui/commit/b03e2f6))
 
 
 
@@ -20,6 +66,9 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * translate to english ([d8d812f](https://github.com/SUI-Components/sui/commit/d8d812f))
+* update dependencies ([3b3c74a](https://github.com/SUI-Components/sui/commit/3b3c74a))
+* update dependencies ([bda676d](https://github.com/SUI-Components/sui/commit/bda676d))
+* use babel-loader new version compatible with webpack 4 ([e7defdf](https://github.com/SUI-Components/sui/commit/e7defdf))
 
 
 
@@ -208,16 +257,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
