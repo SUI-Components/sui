@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.2.0"></a>
+# 5.2.0 (2018-04-13)
+
+
+### Bug Fixes
+
+* rollback import context as it's causing to import wrong files ([e9247ca](https://github.com/SUI-Components/sui/commit/e9247ca))
+
+
+
 <a name="5.1.0"></a>
 # 5.1.0 (2018-04-12)
 
