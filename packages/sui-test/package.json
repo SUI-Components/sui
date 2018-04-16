@@ -5,6 +5,11 @@
   "bin": {
     "sui-test": "./bin/sui-test.js"
   },
+  "scripts": {
+    "lib:js": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib": "npm run lib:js",
+    "prepublish": "npm run lib"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,6 +17,7 @@
     "@s-ui/helpers": "1",
     "babel-core": "6.26.0",
     "babel-polyfill": "6.26.0",
+    "babel-cli": "6.24.1",
     "babel-preset-sui": "1",
     "babelify": "8.0.0",
     "browserify": "14.5.0",

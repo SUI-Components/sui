@@ -131,6 +131,69 @@ Cypress can be detected as a robot if your server has that kind of protection or
 
 If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/test-e2e/screenshots` folder of your project.
 
+
+# Tools
+
+## Descriptor by environment patcher
+The descriptor by environment is a patch with the purpose of add some extra functionality to our mocha describe and it methods.
+
+### How to import it?
+
+First of all, the patcher MUST BE APPLIED on each test that we want to have the extra methods so at the top of `ourExampleSpec.js` we will add the next code:
+
+```javascript
+import { descriptorsByEnvironmentPatcher } from '@s-ui/test/lib/descriptor-environment-patcher'
+descriptorsByEnvironmentPatcher()
+```
+And that's it, from that line you will have the next methods added to the base of the mocha lib:
+- describe.client
+- describe.server
+- describe.client.only
+- describe.server.only
+- it.client
+- it.server
+- it.client.only
+- it.server.only
+### How can I use it?
+Just in the same way as you have been using the describe or it functions earlier:
+
+```javascript
+describe.client('Users use case', () => {
+  it('should....', () => {
+    // ...
+  })
+})
+
+describe.server('Users use case', () => {
+  it('should....', () => {
+    // ...
+  })
+})
+```
+
+You can also have `it()` by environment:
+
+```javascript
+describe('Another use case', () => {
+  it.client('should....', () => {
+    // ...
+  })
+
+  it.server('should....', () => {
+    // ...
+  })
+})
+```
+
+What about if you want to run only one describe but only for client? You can use the `.only` function in the same way as you've been using earlier.
+
+```javascript
+describe.client.only('Another use case', () => {
+  it('should....', () => {
+    // ...
+  })
+})
+```
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).
