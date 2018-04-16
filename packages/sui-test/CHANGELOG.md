@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2018-04-16)
+
+
+### Features
+
+* changed api name to .client and .server ([033b43f](https://github.com/SUI-Components/sui/commit/033b43f))
+* changed some naming parameters to positional ([f99ab91](https://github.com/SUI-Components/sui/commit/f99ab91))
+* create the base of the patcher and add some dependencies for bundling ([bf561d2](https://github.com/SUI-Components/sui/commit/bf561d2))
+* rename function to avoid collision with .only mocha function name ([c99e40a](https://github.com/SUI-Components/sui/commit/c99e40a))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2018-03-20)
 
