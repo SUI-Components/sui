@@ -22,9 +22,15 @@ export default ({useCases, config}) => class EntryPoint {
     if (key === 'config') {
       return this._config
     }
-
+    // get the useCase using the key passed by the user
+    const useCase = this._useCases[key]
+    // if the useCase doesn't exist, then let developer know that the useCase is not implemented
+    if (typeof useCase === 'undefined') { return new NotImplementedUseCase(key) }
+    // if the useCase is not an array
+    if (useCase instanceof Array === false) { return useCase }
+    // at this point, the developer is using webpack dynamic import for getting the useCases
     // get the loader and the method from the useCases
-    const [loader, method] = this._useCases[key] || []
+    const [loader, method] = useCase
     // if loader is undefined then is not implemented, otherwhise load async the useCase
     return loader === undefined
       ? new NotImplementedUseCase(key)
