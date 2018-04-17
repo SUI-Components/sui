@@ -30,7 +30,7 @@ export default ({useCases, config}) => class EntryPoint {
     if (useCase instanceof Array === false) { return useCase }
     // at this point, the developer is using webpack dynamic import for getting the useCases
     // get the loader and the method from the useCases
-    const [loader, method] = this._useCases[key] || []
+    const [loader, method] = useCase
     // if loader is undefined then is not implemented, otherwhise load async the useCase
     return loader === undefined
       ? new NotImplementedUseCase(key)
