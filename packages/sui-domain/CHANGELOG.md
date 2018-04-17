@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.10.0"></a>
+# 1.10.0 (2018-04-17)
+
+
+### Bug Fixes
+
+* just check if the instanceof is an Array ([2197e24](https://github.com/SUI-Components/sui/commit/2197e24))
+
+
+### Features
+
+* return different things depending on how are we loading useCases ([a8e6919](https://github.com/SUI-Components/sui/commit/a8e6919))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2018-03-01)
 
