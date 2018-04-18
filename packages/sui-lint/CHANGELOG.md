@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.13.0"></a>
+# 2.13.0 (2018-04-18)
+
+
+### Bug Fixes
+
+* ignore comments on .gitignore files to avoid putting them in the .gitignore file ([0c1a26e](https://github.com/SUI-Components/sui/commit/0c1a26e))
+
+
+
 <a name="2.12.0"></a>
 # 2.12.0 (2018-04-12)
 
