@@ -47,10 +47,10 @@ const getFileLinesAsArray = path => {
 }
 
 /**
- * Get as array .gitignore files
+ * Get as array .gitignore files and filter lines that are comments
  * @returns {Array<String>}
  */
-const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH)
+const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
 
 /**
  * Get multiple value arg
