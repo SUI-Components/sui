@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-04-25)
+
+
+### Features
+
+* add default chunks number to spawnlist ([27398ec](https://github.com/SUI-Components/sui/commit/27398ec))
+* remove dep filter getInternalDependencyMap ([2439ada](https://github.com/SUI-Components/sui/commit/2439ada))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-04-04)
 
