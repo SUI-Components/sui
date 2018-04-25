@@ -88,7 +88,6 @@ const getDependencyMap = (cwds) => (dependencies) => {
  */
 const getInternalDependencyMap = (cwds) => (dependencies) => {
   return getDependencyMap(cwds)(dependencies)
-    .filter(([pkgPath, dependencies]) => dependencies.length)
 }
 
 /**

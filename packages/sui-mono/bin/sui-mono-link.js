@@ -4,7 +4,7 @@
 const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
-const { serialSpawn } = require('@s-ui/helpers/cli')
+const { spawnList } = require('@s-ui/helpers/cli')
 const {
   getPackagesPaths, getPackagesNames,
   getInternalDependencyMap, getUsedInternalDependencies
@@ -34,16 +34,43 @@ const packagesNames = [...getPackagesNames(cwd)(packages), null]
 
 const dependenciesMap = getInternalDependencyMap(packagesPaths)(packagesNames)
 const usedDependenciesPaths = getUsedInternalDependencies(packagesPaths)(packagesNames)
+const createCommands = linkingMap => {
+  const linkedPackages = []
+  const createCommandsForMap = pkg => {
+    const { name, path, deps } = pkg
+    const commands = []
+    if (deps.length) {
+      deps.forEach(dep =>
+        commands.push(...createCommandsForMap(linkingMap[dep]))
+      )
+      commands.push(['npm', ['link', ...deps], { cwd: path }])
+    }
+    if (
+      usedDependenciesPaths.includes(path) &&
+      !linkedPackages.includes(name)
+    ) {
+      commands.push(['npm', ['link'], { cwd: path }])
+      linkedPackages.push(name)
+    }
+    return commands
+  }
+  return createCommandsForMap
+}
+const linkingMap = dependenciesMap.reduce((obj, [path, deps]) => {
+  const name = packagesNames[packagesPaths.indexOf(path)]
+  if (name) {
+    obj[name] = { name, path, deps }
+  }
+  return obj
+}, {})
 
-// Generate commands for local packages that are actually used internally used
-const linkCommands = usedDependenciesPaths
-  .map((cwd) => ['npm', ['link'], {cwd}])
-
-// Generate commands to link packages between each other when used
-const linkBetweenCommands = dependenciesMap
-  .map(([path, deps]) => ['npm', ['link', ...deps], {cwd: path}])
+const createCommandsForMap = createCommands(linkingMap)
+const commands = Object.values(linkingMap).reduce(
+  (res, pkg) => [...res, ...createCommandsForMap(pkg)],
+  []
+)
 
 // Execute commands
-serialSpawn([...linkCommands, ...linkBetweenCommands])
+spawnList(commands, {}, 10)
   .then(process.exit)
   .catch(process.exit)
