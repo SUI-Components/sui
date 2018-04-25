@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.28.0"></a>
+# 1.28.0 (2018-04-25)
+
+
+### Bug Fixes
+
+* fix race condition of linking components betweeen each other ([8de265e](https://github.com/SUI-Components/sui/commit/8de265e))
+
+
+
 <a name="1.27.0"></a>
 # 1.27.0 (2018-02-28)
 
