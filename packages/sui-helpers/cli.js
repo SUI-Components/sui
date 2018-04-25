@@ -47,13 +47,13 @@ function parallelSpawn (commands, options = {}) {
  * @param {Object} listrOptions Options for listr npm package
  * @param {Number} chunks Number of chunks of tasks to split by to avoid too long output
  */
-function spawnList (commands, listrOptions = {}, chunks = false) {
+function spawnList (commands, listrOptions = {}, chunks = 15) {
   let taskList = commands.map(([bin, args, opts, title]) => ({
     title: title || getCommandCallMessage(bin, args, opts),
     task: () => execa(bin, args, opts)
   }))
 
-  if (!listrOptions.concurrent && taskList.length > chunks) {
+  if (!listrOptions.concurrent && chunks && taskList.length > chunks) {
     taskList = splitArray(taskList, chunks).map((chunk, i) => ({
       title: `#${i + 1} group of ${chunk.length} commands...`,
       task: () => new Listr(chunk, listrOptions)
