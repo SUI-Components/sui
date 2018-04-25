@@ -52,5 +52,8 @@ Creates an event and dispatches it
 
 ```js
 import { dispatchEvent } from '@s-ui/js/lib/events'
-dispatchEvent({ eventName: 'NAME_OF_THE_EVENT_TO_DISPATCH', detail: { parameter_one: 'one', anotherParameter: 2 })
+dispatchEvent({ eventName: 'NAME_OF_THE_EVENT_TO_DISPATCH', detail: {
+  parameter_one: 'one',
+  anotherParameter: 2
+})
 ```
