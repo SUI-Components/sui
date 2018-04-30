@@ -4,7 +4,7 @@ const {exec} = require('child_process')
 const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
 
 /**
- * Get a list of the modified files by the user
+ * Get the list of modified files by the user
  * @param {boolean} checkIfStaged Determine if we should change if the modified file is staged
  */
 function getDiffedFiles ({ checkIfStaged = false } = {}) {
@@ -24,7 +24,7 @@ function getDiffedFiles ({ checkIfStaged = false } = {}) {
 }
 
 /**
- * Start the commiting process, making some verifications to avoid further problems for the user
+ * Start the commiting process, doing some verifications to avoid further problems
  */
 async function initCommit () {
   const { hasFiles: hasStagedFiles } = await getDiffedFiles({ checkIfStaged: true })
