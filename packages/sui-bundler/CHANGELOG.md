@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2018-04-30)
+
+
+### Bug Fixes
+
+* use Object.assign for compatibility withh node 6 ([424da99](https://github.com/SUI-Components/sui/commit/424da99))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2018-04-12)
 
