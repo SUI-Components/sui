@@ -1,19 +1,18 @@
 /* eslint-disable no-console */
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const PreloadWebpackPlugin = require('preload-webpack-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const path = require('path')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
-const Externals = require('./plugins/externals')
-const path = require('path')
+const webpack = require('webpack')
 
-const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {navigateFallbackWhitelist, navigateFallback, runtimeCaching, directoryIndex} = require('./shared/precache')
+const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const Externals = require('./plugins/externals')
+const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
 // hack for Windows, as process.env.PWD is undefined in that environment
@@ -86,12 +85,14 @@ module.exports = {
         useShortDoctype: true
       }
     }),
-    new ScriptExtHtmlWebpackPlugin({
+    new ScriptExtHtmlWebpackPlugin(Object.assign({
       defaultAttribute: 'defer',
       inline: 'runtime',
-      ...config.scripts
-    }),
-    new PreloadWebpackPlugin({ rel: 'prefetch' }),
+      prefetch: {
+        test: /\.js$/,
+        chunks: 'all'
+      }
+    }, config.scripts)),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
