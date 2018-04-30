@@ -24,19 +24,11 @@ function getDiffedFiles ({ checkIfStaged = false } = {}) {
 }
 
 /**
- * Check if the user has stagged files
- */
-async function checkHasStagedFiles () {
-  const staged = await getDiffedFiles({ checkIfStaged: true })
-  return staged.hasFiles
-}
-
-/**
  * Start the commiting process, making some verifications to avoid further problems for the user
  */
 async function initCommit () {
-  const hasFiles = await checkHasStagedFiles()
-  if (hasFiles === false) {
+  const { hasFiles: hasStagedFiles } = await getDiffedFiles({ checkIfStaged: true })
+  if (hasStagedFiles === false) {
     console.log('No files added to staging! Did you forget to run git add?\n')
     const modified = await getDiffedFiles()
     if (modified.hasFiles) {
