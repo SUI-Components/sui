@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.29.0"></a>
+# 1.29.0 (2018-04-30)
+
+
+### Features
+
+* better error handling when no files staged for commiting ([0157d0f](https://github.com/SUI-Components/sui/commit/0157d0f))
+
+
+
 <a name="1.28.0"></a>
 # 1.28.0 (2018-04-25)
 
