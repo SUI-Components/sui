@@ -85,7 +85,7 @@ module.exports = {
         useShortDoctype: true
       }
     }),
-    new ScriptExtHtmlWebpackPlugin(Object.assign({}, {
+    new ScriptExtHtmlWebpackPlugin(Object.assign({
       defaultAttribute: 'defer',
       inline: 'runtime',
       prefetch: {
