@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.3.0"></a>
+# 5.3.0 (2018-05-03)
+
+
+### Features
+
+* move ReactDocGen to API component naming ([f82edfc](https://github.com/SUI-Components/sui/commit/f82edfc))
+* use new tryRequire file to rule them all ([9464a70](https://github.com/SUI-Components/sui/commit/9464a70))
+
+
+### Performance Improvements
+
+* async loading of snarkdown as a chunk ([893ecef](https://github.com/SUI-Components/sui/commit/893ecef))
+
+
+
 <a name="5.2.0"></a>
 # 5.2.0 (2018-04-13)
 
