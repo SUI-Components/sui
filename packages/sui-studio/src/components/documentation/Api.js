@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { Component, Fragment } from 'react'
-import tryRequire from './try-require'
+import {tryRequireRawSrc} from '../tryRequire'
 
-class ReactDocGen extends Component {
+class Api extends Component {
   static propTypes = {
     params: PropTypes.shape({
       category: PropTypes.string,
@@ -12,13 +12,13 @@ class ReactDocGen extends Component {
 
   state = { docs: false }
 
-  componentDidMount () {
-    require.ensure([], require => {
-      const reactDocs = require('react-docgen')
-      tryRequire(this.props.params).then(([src, _]) =>
-        this.setState({ docs: reactDocs.parse(src) })
-      )
-    }, 'ReactDocgen')
+  async componentDidMount () {
+    const reactDocs = await import('react-docgen')
+    const src = await tryRequireRawSrc(this.props.params)
+    console.log(src)
+    const docs = reactDocs.parse(src)
+
+    this.setState({ docs })
   }
 
   _renderPropsApi ({ propsApi = {} }) {
@@ -67,6 +67,7 @@ class ReactDocGen extends Component {
 
   render () {
     const { docs } = this.state
+
     if (docs) {
       const { params: { category, component } } = this.props
       const componentTitle = `${docs.displayName} (${category}/${component})`
@@ -79,10 +80,11 @@ class ReactDocGen extends Component {
         </Fragment>
       )
     }
+
     return null
   }
 }
 
-ReactDocGen.displayName = 'ReactDocGen'
+Api.displayName = 'Api'
 
-export default ReactDocGen
+export default Api
