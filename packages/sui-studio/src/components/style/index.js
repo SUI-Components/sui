@@ -14,11 +14,7 @@ export default class Style extends Component {
     children: PropTypes.string
   }
 
-  constructor (props, ctxt) {
-    super(props, ctxt)
-
-    this._linkElement = createLinkElement()
-  }
+  _linkElement = createLinkElement()
 
   componentWillUnmount () {
     this._linkElement.disabled = true

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import Markdown from './Markdown'
-import tryRequire from './try-require'
+import {tryRequireMarkdown} from '../tryRequire'
 
 export default class MarkdownFile extends Component {
   propTypes = {
@@ -13,11 +13,10 @@ export default class MarkdownFile extends Component {
     content: false
   }
 
-  componentDidMount () {
-    const {file} = this.props
-    tryRequire(this.props.params).then(([_, readme, changelog]) => {
-      this.setState({content: file === 'CHANGELOG' ? changelog : readme})
-    })
+  async componentDidMount () {
+    const {file, params} = this.props
+    const content = await tryRequireMarkdown({ ...params, file })
+    this.setState({content})
   }
 
   render () {
