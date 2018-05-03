@@ -15,7 +15,6 @@ class Api extends Component {
   async componentDidMount () {
     const reactDocs = await import('react-docgen')
     const src = await tryRequireRawSrc(this.props.params)
-    console.log(src)
     const docs = reactDocs.parse(src)
 
     this.setState({ docs })
