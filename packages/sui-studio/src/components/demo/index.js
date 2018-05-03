@@ -12,7 +12,7 @@ import {
 import Preview from '../preview'
 import Style from '../style'
 
-import tryRequire from './try-require'
+import { tryRequireCore as tryRequire } from '../tryRequire'
 import stylesFor, { themesFor } from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
