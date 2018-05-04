@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.2.0"></a>
+# 3.2.0 (2018-05-04)
+
+
+### Bug Fixes
+
+* avoid use Gently in the server config ([8d79955](https://github.com/SUI-Components/sui/commit/8d79955))
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2018-04-30)
 
@@ -267,6 +277,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
