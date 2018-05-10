@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.3.0"></a>
+# 3.3.0 (2018-05-10)
+
+
+### Bug Fixes
+
+* fix regression that runtime has not been created ([90994ff](https://github.com/SUI-Components/sui/commit/90994ff))
+
+
+
 <a name="3.2.0"></a>
 # 3.2.0 (2018-05-04)
 
@@ -277,16 +287,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
