@@ -47,6 +47,7 @@ module.exports = {
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
+    runtimeChunk: true,
     splitChunks: {
       cacheGroups: {
         vendor: {
