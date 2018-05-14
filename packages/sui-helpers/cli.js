@@ -51,7 +51,7 @@ function parallelSpawn (commands, options = {}) {
 function spawnList (commands, listrOptions = {}, chunks = 15) {
   let taskList = commands.map(([bin, args, opts, title]) => ({
     title: title || getCommandCallMessage(bin, args, opts),
-    task: () => execa(bin, args, opts)
+    task: () => execa(...getArrangedCommand(bin, args, opts))
   }))
 
   if (!listrOptions.concurrent && chunks && taskList.length > chunks) {
@@ -107,9 +107,20 @@ function getSpawnProcess (bin, args, options = {}) {
     { shell: true, stdio: 'inherit', cwd: process.cwd() },
     options
   )
+  return processSpawn(...getArrangedCommand(bin, args, options))
+}
+
+/**
+ * Returns modified command to work on linux, osx and windows
+ * @param  {String} bin     Binary path or alias
+ * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
+ * @param  {Object} opts to pass to child_process.spawn call
+ * @returns {Object} {bin, args, options}
+ */
+function getArrangedCommand (bin, args, opts) {
   return path.isAbsolute(bin) // check if it's a file or an alias
-    ? processSpawn('node', [bin, ...args], options)
-    : processSpawn(bin, ...args, options)
+    ? ['node', [bin, ...args], opts]
+    : [bin, args, opts]
 }
 
 /**
