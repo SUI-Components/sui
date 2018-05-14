@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-const processSpawn = require('cross-spawn')
+const processSpawn = require('child_process').spawn
 const CODE_OK = 0
 const log = console.log
 const colors = require('colors')
@@ -7,6 +7,7 @@ const program = require('commander')
 const execa = require('execa')
 const Listr = require('listr')
 const figures = require('figures')
+const path = require('path')
 const { splitArray } = require('./array')
 
 /**
@@ -106,8 +107,9 @@ function getSpawnProcess (bin, args, options = {}) {
     { shell: true, stdio: 'inherit', cwd: process.cwd() },
     options
   )
-
-  return processSpawn(bin, args, options)
+  return path.isAbsolute(bin) // check if it's a file or an alias
+    ? processSpawn('node', [bin, ...args], options)
+    : processSpawn(bin, ...args, options)
 }
 
 /**
