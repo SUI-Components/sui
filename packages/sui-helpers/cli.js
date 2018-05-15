@@ -111,7 +111,10 @@ function getSpawnProcess (bin, args, options = {}) {
 }
 
 /**
- * Returns modified command to work on linux, osx and windows
+ * Returns modified command to work on linux, osx and windows.
+ * The flag '#!/usr/bin/env node' is ignored by Windows. So the scripts must
+ * be executed by node explicitely.
+ * We assume that if `bin` is an abolsute path, it's always a js file to execute.
  * @param  {String} bin     Binary path or alias
  * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
  * @param  {Object} opts to pass to child_process.spawn call
