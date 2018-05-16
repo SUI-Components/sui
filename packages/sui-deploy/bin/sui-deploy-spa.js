@@ -3,26 +3,45 @@
 
 const program = require('commander')
 const NowClient = require('now-client')
-const { getSpawnPromise, showWarning } = require('@s-ui/helpers/cli')
+const { getSpawnPromise, showError, showWarning } = require('@s-ui/helpers/cli')
 const { writeFile, removeFile } = require('@s-ui/helpers/file')
 const DEFAULT_FOLDER = './public'
-const writePackageJson = name =>
-  writeFile(
-    pkgFilePath,
-    `{
-  "name": "@sui-deploy/${name}",
-  "scripts": {
-    "start": "serve . --single"
-  },
-  "dependencies": {
-    "serve": "latest"
+
+// Write package.json file with serve dependency for an SPA deployment
+const writePackageJson = ({ name, path, auth } = {}) => {
+  const serveCommand = ['serve', '.', '--single', auth ? '--auth' : undefined]
+  const packageJson = {
+    name: `@sui-deploy/${name}`,
+    scripts: {
+      start: serveCommand.join(' ')
+    },
+    dependencies: {
+      serve: 'latest'
+    }
   }
-}`
-  )
+  return writeFile(path, JSON.stringify(packageJson))
+}
+
+// Get args of `now` command according to params
+const getNowCommandArgs = ({ deployName, nowTokenOption, auth }) => {
+  const args = [DEFAULT_FOLDER, '--name=' + deployName, '--npm', nowTokenOption]
+  if (auth) {
+    const [user, password] = auth.split(':')
+    user &&
+      password &&
+      args.push(`-e SERVE_USER='${user}'`, `-e SERVE_PASSWORD='${password}'`)
+  }
+  return args
+}
 
 program
   .usage(`[options] <name> [folder]`)
   .option('-n, --now', 'Deploy to now.sh')
+  .option(
+    '-a, --auth <user:password>',
+    "HTTP authentication user and pass separated by ':' ( -a 'my-user:my-password' )"
+  )
+  .option('-p, --public', 'Skip HTTP authentication')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -32,38 +51,52 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-deploy spa my-app-name ./dist')
-    console.log('    $ NOW_TOKEN=my-token; sui-deploy spa my-app-name ./dist')
+    console.log(
+      "    $ NOW_TOKEN=my-token; sui-deploy spa my-app-name ./dist -a 'my-user:my-password'"
+    )
     console.log('')
   })
   .parse(process.argv)
 
 if (!program.now) {
-  console.log('ERR: --now is the only option avaiblable')
+  console.log('ERR: --now is the only hosting service available')
   process.exit(1)
 }
 
 const [deployName, buildFolder = DEFAULT_FOLDER] = program.args
+const { auth, public: publicDeploy } = program
 const nowTokenOption = '-t $NOW_TOKEN'
 const now = new NowClient(process.env.NOW_TOKEN)
-const pkgFilePath = buildFolder + '/package.json'
+const buildPackageJsonPath = buildFolder + '/package.json'
 
-showWarning(`Your are currently using a deprecated version of sui-deploy.`)
-showWarning(
-  `Please upgrade to version 2 or superior as soon as possible for SECURE deployments.`
-)
+if (!auth && !publicDeploy) {
+  showError(
+    new Error(`Deploy crashed for ${deployName}
+  Deploys must be protected with '--auth' by default.
+  Or, you can explicitely disabled it with '--public'.
+  If '--public' is used, your deploy will be ACCESSIBLE and INDEXABLE.`),
+    program
+  )
+}
+
+if (publicDeploy) {
+  showWarning(
+    `'--public' option found. ${deployName} will be ACCESSIBLE and INDEXABLE.`
+  )
+}
 
 getSpawnPromise('now', ['rm', deployName, '--yes', nowTokenOption])
   .catch(() => {}) // To bypass now rm error on the first deploy
-  .then(() => writePackageJson(deployName)) // Add package.json for SPA server
   .then(() =>
-    getSpawnPromise('now', [
-      DEFAULT_FOLDER,
-      '--name=' + deployName,
-      '--npm',
-      nowTokenOption
-    ])
+    writePackageJson({ name: deployName, path: buildPackageJsonPath, auth })
+  ) // Add package.json for SPA server
+  .then(() =>
+    getSpawnPromise(
+      'now',
+      getNowCommandArgs({ nowTokenOption, deployName, auth })
+    )
   )
-  .then(() => removeFile(pkgFilePath)) // Remove package.json only used by now.sh
+  .then(() => removeFile(buildPackageJsonPath)) // Remove package.json only used by now.sh
   .then(() => now.getDeployments())
   .then(deployments => deployments.filter(d => d.name === deployName)[0].url)
   // Parse deployment name to make the alias point to it
