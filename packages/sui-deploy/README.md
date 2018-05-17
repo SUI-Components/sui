@@ -20,13 +20,13 @@ When installed, a new CLI `sui-deploy` (node_modules/.bin/sui-deploy) is automat
 Deploy a folder as an static SPA:
 
 ```sh
-$ sui-deploy spa <name-of-project> [build-folder] --now
+$ sui-deploy spa <name-of-project> [build-folder=./public] --now
 ```
 
 As spa is the default command, you can also:
 
 ```sh
-$ sui-deploy <name-of-project> [build-folder] --now
+$ sui-deploy <name-of-project> [build-folder=./public] --now
 ```
 
 ### Options
