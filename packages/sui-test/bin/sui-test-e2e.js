@@ -22,7 +22,7 @@ const HELP_MESSAGE = `
 
 const objectToCommaString = obj =>
   Object.keys(obj)
-    .map(key => `${key}='${obj[key]}'`)
+    .map(key => `${key}=${obj[key]}`)
     .join(',')
 
 program
