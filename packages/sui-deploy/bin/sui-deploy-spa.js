@@ -3,9 +3,11 @@
 
 const program = require('commander')
 const NowClient = require('now-client')
+const getBranch = require('git-branch')
 const { getSpawnPromise, showError, showWarning } = require('@s-ui/helpers/cli')
 const { writeFile, removeFile } = require('@s-ui/helpers/file')
 const DEFAULT_FOLDER = './public'
+const NOW_TOKEN_OPTION = '-t $NOW_TOKEN'
 
 // Write package.json file with serve dependency for an SPA deployment
 const writePackageJson = ({ name, path, auth } = {}) => {
@@ -23,8 +25,8 @@ const writePackageJson = ({ name, path, auth } = {}) => {
 }
 
 // Get args of `now` command according to params
-const getNowCommandArgs = ({ deployName, nowTokenOption, auth }) => {
-  const args = [DEFAULT_FOLDER, '--name=' + deployName, '--npm', nowTokenOption]
+const getNowCommandArgs = ({ deployName, auth, buildFolder }) => {
+  const args = [buildFolder, '--name=' + deployName, '--npm', NOW_TOKEN_OPTION]
   if (auth) {
     const [user, password] = auth.split(':')
     user &&
@@ -37,6 +39,7 @@ const getNowCommandArgs = ({ deployName, nowTokenOption, auth }) => {
 program
   .usage(`[options] <name> [folder]`)
   .option('-n, --now', 'Deploy to now.sh')
+  .option('-b, --branch', 'append name of the current branch to name')
   .option(
     '-a, --auth <user:password>',
     "HTTP authentication user and pass separated by ':' ( -a 'my-user:my-password' )"
@@ -64,8 +67,7 @@ if (!program.now) {
 }
 
 const [deployName, buildFolder = DEFAULT_FOLDER] = program.args
-const { auth, public: publicDeploy } = program
-const nowTokenOption = '-t $NOW_TOKEN'
+const { auth, public: publicDeploy, branch } = program
 const now = new NowClient(process.env.NOW_TOKEN)
 const buildPackageJsonPath = buildFolder + '/package.json'
 
@@ -85,33 +87,42 @@ if (publicDeploy) {
   )
 }
 
-getSpawnPromise('now', ['rm', deployName, '--yes', nowTokenOption])
-  .catch(() => {}) // To bypass now rm error on the first deploy
-  .then(() =>
-    writePackageJson({ name: deployName, path: buildPackageJsonPath, auth })
-  ) // Add package.json for SPA server
-  .then(() =>
-    getSpawnPromise(
-      'now',
-      getNowCommandArgs({ nowTokenOption, deployName, auth })
-    )
+const executeDeploy = async ({ deployName, buildFolder, branch }) => {
+  deployName += branch ? '-' + (await getBranch()) : ''
+
+  return (
+    getSpawnPromise('now', ['rm', deployName, '--yes', NOW_TOKEN_OPTION])
+      .catch(() => {}) // To bypass now rm error on the first deploy
+      .then(() =>
+        writePackageJson({ name: deployName, path: buildPackageJsonPath, auth })
+      ) // Add package.json for SPA server
+      .then(() =>
+        getSpawnPromise(
+          'now',
+          getNowCommandArgs({ deployName, buildFolder, auth })
+        )
+      )
+      .then(() => removeFile(buildPackageJsonPath)) // Remove package.json only used by now.sh
+      .then(() => now.getDeployments())
+      .then(
+        deployments => deployments.filter(d => d.name === deployName)[0].url
+      )
+      // Parse deployment name to make the alias point to it
+      .then(
+        deployId =>
+          deployId
+            ? getSpawnPromise('now', [
+              'alias',
+              deployId,
+              deployName,
+              NOW_TOKEN_OPTION
+            ])
+            : Promise.reject(new Error('Deploy crashed for ' + deployName))
+      )
+      .catch(err => {
+        showError(err, program)
+      })
   )
-  .then(() => removeFile(buildPackageJsonPath)) // Remove package.json only used by now.sh
-  .then(() => now.getDeployments())
-  .then(deployments => deployments.filter(d => d.name === deployName)[0].url)
-  // Parse deployment name to make the alias point to it
-  .then(
-    deployId =>
-      deployId
-        ? getSpawnPromise('now', [
-          'alias',
-          deployId,
-          deployName,
-          nowTokenOption
-        ])
-        : Promise.reject(new Error('Deploy crashed for ' + deployName))
-  )
-  .catch(err => {
-    console.log(err.message || err)
-    process.exit(1)
-  })
+}
+
+executeDeploy({ deployName, buildFolder, branch })
