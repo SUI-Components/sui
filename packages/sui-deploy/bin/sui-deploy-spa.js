@@ -39,7 +39,7 @@ const getNowCommandArgs = ({ deployName, auth, buildFolder }) => {
 program
   .usage(`[options] <name> [folder]`)
   .option('-n, --now', 'Deploy to now.sh')
-  .option('-b, --branch', 'append name of the current branch to name')
+  .option('-b, --branch', 'Append name of the current branch to name')
   .option(
     '-a, --auth <user:password>',
     "HTTP authentication user and pass separated by ':' ( -a 'my-user:my-password' )"
