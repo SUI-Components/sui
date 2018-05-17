@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-05-17)
+
+
+### Bug Fixes
+
+* execute node scripts as node for windows cmd execution ([2de741d](https://github.com/SUI-Components/sui/commit/2de741d))
+* revert use of cross-spawn ([ad94899](https://github.com/SUI-Components/sui/commit/ad94899))
+
+
+### Features
+
+* better solution for cross-spawn. Use the same as execa ([b26ee1a](https://github.com/SUI-Components/sui/commit/b26ee1a))
+* make commands to work in windows in spawnList too ([c4e03a1](https://github.com/SUI-Components/sui/commit/c4e03a1))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-04-25)
 
