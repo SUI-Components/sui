@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2018-05-17)
+
+
+### Bug Fixes
+
+* cypress config format broken in windows ([723cd44](https://github.com/SUI-Components/sui/commit/723cd44))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2018-04-16)
 
