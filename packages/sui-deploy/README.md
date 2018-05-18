@@ -23,12 +23,6 @@ Deploy a folder as an static SPA:
 $ sui-deploy spa <name-of-project> [build-folder=./public] --now
 ```
 
-As spa is the default command, you can also:
-
-```sh
-$ sui-deploy <name-of-project> [build-folder=./public] --now
-```
-
 ### Options
 
 #### `--now`
@@ -36,7 +30,7 @@ $ sui-deploy <name-of-project> [build-folder=./public] --now
 Only hosting service available. Deploys to now.sh
 
 ```sh
-$ sui-deploy 'test-project' --now -p
+$ sui-deploy spa 'test-project' --now -p
 ```
 
 Deploys to test-project.now.sh
@@ -46,7 +40,7 @@ Deploys to test-project.now.sh
 HTTP authentication user and pass separated by `:`.
 
 ```sh
-$ sui-deploy test-project --now -a 'my-user:my-password'
+$ sui-deploy spa test-project --now -a 'my-user:my-password'
 ```
 
 #### `-p, --public`
@@ -56,7 +50,7 @@ Force skipping auth to make your deployment public.
 **CAUTION:** if your deployment is public, it's also indexable by search engines.
 
 ```sh
-$ sui-deploy test-project --now -p
+$ sui-deploy spa test-project --now -p
 ```
 
 #### `-b, --branch`
@@ -64,7 +58,7 @@ $ sui-deploy test-project --now -p
 Append git branch name to deploy name.
 
 ```sh
-$ sui-deploy test-project --now -b -a 'my-user:my-password'
+$ sui-deploy spa test-project --now -b -a 'my-user:my-password'
 ```
 
 If your branch is `my-feature`, your code will be deployed to test-project-my-feature.now.sh
@@ -101,7 +95,7 @@ $ sui-deploy spa --help
   "version": "1.0.0",
   "scripts": {
     "build": "sui-bundler build -C",
-    "deploy": "sui-deploy test-project --now -a 'my-user:my-password'"
+    "deploy": "sui-deploy spa test-project --now -a 'my-user:my-password'"
   },
   "devDependencies": {
     "@s-ui/deploy": "2"
