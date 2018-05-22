@@ -42,7 +42,7 @@ dispatchEvent({
 ```
 
 ## hash
-Creates an insecure, but with pretty low collisions, hash based on MD5.
+Creates an insecure, but with pretty low collisions, hash based on MD5. Returns a string with the hash.
 
 ```js
 import { createHash } from '@s-ui/js/lib/hash'
