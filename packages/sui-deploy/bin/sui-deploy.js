@@ -9,7 +9,7 @@ program
 
 program
   .command(
-    'spa <name> [folder]', 'deploy a single-page application', {isDefault: true}
+    'spa <name> [folder]', 'deploy a single-page application'
   )
 
 program.parse(process.argv)

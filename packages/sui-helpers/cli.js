@@ -166,11 +166,23 @@ const showError = (msg, foreignProgram) => {
   process.exit(1)
 }
 
+/*
+ * Shows a visible warning message the command line.
+ * @param  {String} msg
+ * @return
+ */
+const showWarning = msg => {
+  const logYellow = txt =>
+    console.log(colors.black.bgYellow(`${figures.warning} ${txt}`)) // eslint-disable-line no-console
+  logYellow(msg)
+}
+
 module.exports = {
   serialSpawn,
   parallelSpawn,
   spawnList,
   getSpawnPromiseFactory,
   getSpawnPromise,
-  showError
+  showError,
+  showWarning
 }

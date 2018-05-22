@@ -12,6 +12,7 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "2.9.0",
+    "git-branch": "2.0.1",
     "now-client": "1.1.1"
   },
   "repository": {
