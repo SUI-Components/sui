@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.10.0"></a>
+# 1.10.0 (2018-05-22)
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2018-05-17)
 
@@ -16,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 * better solution for cross-spawn. Use the same as execa ([b26ee1a](https://github.com/SUI-Components/sui/commit/b26ee1a))
 * make commands to work in windows in spawnList too ([c4e03a1](https://github.com/SUI-Components/sui/commit/c4e03a1))
+* showWarning helper for CLIs ([39c5368](https://github.com/SUI-Components/sui/commit/39c5368))
 
 
 
