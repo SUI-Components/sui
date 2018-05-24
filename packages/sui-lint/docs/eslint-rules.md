@@ -712,7 +712,8 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "promise",
     "standard",
     "react",
-    "chai-friendly"
+    "chai-friendly",
+    "prettier"
   ],
   "extends": [
     "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/eslint-config-standard-jsx/index.js",
@@ -720,8 +721,8 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "standard-react",
     "./node_modules/@s-ui/lint/eslintrc.js",
     "prettier",
-    "prettier/react",
-    "prettier/standard"
+    "prettier/standard",
+    "prettier/react"
   ],
   "parser": "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/babel-eslint/lib/index.js"
 }

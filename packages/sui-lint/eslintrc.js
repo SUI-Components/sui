@@ -8,12 +8,13 @@ module.exports = {
     'standard',
     'standard-react',
     'prettier',
-    'prettier/react',
-    'prettier/standard'
+    'prettier/standard',
+    'prettier/react'
   ],
   'parser': 'babel-eslint',
   'plugins': [
-    'chai-friendly'
+    'chai-friendly',
+    'prettier'
   ],
   'rules': {
     'chai-friendly/no-unused-expressions': ['error', { 'allowShortCircuit': true, 'allowTernary': true }],
