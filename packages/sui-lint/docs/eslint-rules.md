@@ -141,8 +141,14 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "comma-dangle": [
-      "error",
-      "only-multiline"
+      "off",
+      {
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
     ],
     "comma-spacing": [
       "off",
@@ -564,7 +570,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
       "never"
     ],
     "react/jsx-equals-spacing": [
-      "warn",
+      "off",
       "never"
     ],
     "react/jsx-indent": [
@@ -731,11 +737,7 @@ $ npm run eslint:print-rules
 
 ## Rules conflicting with prettier
 
-The following rules are unnecessary or might conflict with Prettier:
-
-- comma-dangle
-- react/jsx-equals-spacing
-
+No rules that are unnecessary or conflict with Prettier were found.
 
 ---
 
