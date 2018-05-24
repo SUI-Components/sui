@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "sui-lint js",
-    "eslint:print-rules": "./node_modules/.bin/eslint --print-config ./eslintrc.js"
+    "eslint:print-rules": "./node_modules/.bin/eslint --print-config ./eslintrc.js",
+    "eslint:prettier-check": "./node_modules/.bin/eslint --print-config ./eslintrc.js | ./node_modules/.bin/eslint-config-prettier-check"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "babel-eslint": "8.2.2",
     "commander": "2.15.1",
     "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
     "eslint-config-standard": "11.0.0",
     "eslint-config-standard-react": "6.0.0",
     "eslint-plugin-chai-friendly": "0.4.1",

@@ -1,5 +1,7 @@
 # Eslint detailed rules
 
+## Rules used by eslint
+
 These are the rules resulting of current configuration in `eslintrc.js`
 
 ```json
@@ -658,9 +660,84 @@ These are the rules resulting of current configuration in `eslintrc.js`
 }
 ```
 
+---
 
 This output was obtained executing:
 
 ```sh
 $ npm run eslint:print-rules
 ```
+
+## Rules conflicting with prettier
+
+The following rules are unnecessary or might conflict with Prettier:
+
+- arrow-spacing
+- block-spacing
+- brace-style
+- comma-dangle
+- comma-spacing
+- comma-style
+- dot-location
+- eol-last
+- func-call-spacing
+- generator-star-spacing
+- indent
+- jsx-quotes
+- key-spacing
+- keyword-spacing
+- new-parens
+- no-extra-parens
+- no-floating-decimal
+- no-mixed-spaces-and-tabs
+- no-multi-spaces
+- no-multiple-empty-lines
+- no-trailing-spaces
+- no-whitespace-before-property
+- object-property-newline
+- operator-linebreak
+- padded-blocks
+- react/jsx-curly-spacing
+- react/jsx-equals-spacing
+- react/jsx-indent
+- react/jsx-indent-props
+- react/jsx-tag-spacing
+- rest-spread-spacing
+- semi
+- semi-spacing
+- space-before-blocks
+- space-before-function-paren
+- space-in-parens
+- space-infix-ops
+- space-unary-ops
+- standard/array-bracket-even-spacing
+- standard/computed-property-even-spacing
+- standard/object-curly-even-spacing
+- template-curly-spacing
+- template-tag-spacing
+- unicode-bom
+- wrap-iife
+- yield-star-spacing
+
+The following rules are enabled with options that might conflict with Prettier. See:
+https://github.com/prettier/eslint-config-prettier#special-rules
+
+- curly
+- quotes
+
+The following rules are enabled but cannot be automatically checked. See:
+https://github.com/prettier/eslint-config-prettier#special-rules
+
+- no-mixed-operators
+- no-tabs
+- no-unexpected-multiline
+
+
+---
+
+This output was obtained executing:
+
+```sh
+$ npm run eslint:prettier-check
+```
+
