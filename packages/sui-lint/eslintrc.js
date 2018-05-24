@@ -7,7 +7,9 @@ module.exports = {
   'extends': [
     'standard',
     'standard-react',
-    'prettier'
+    'prettier',
+    'prettier/react',
+    'prettier/standard'
   ],
   'parser': 'babel-eslint',
   'plugins': [

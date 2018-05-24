@@ -542,16 +542,16 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "node/process-exit-as-throw": "error",
     "promise/param-names": "error",
     "standard/array-bracket-even-spacing": [
-      "error",
+      "off",
       "either"
     ],
     "standard/computed-property-even-spacing": [
-      "error",
+      "off",
       "even"
     ],
     "standard/no-callback-literal": "error",
     "standard/object-curly-even-spacing": [
-      "error",
+      "off",
       "either"
     ],
     "jsx-quotes": [
@@ -560,7 +560,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
     ],
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-spacing": [
-      "error",
+      "off",
       "never"
     ],
     "react/jsx-equals-spacing": [
@@ -568,11 +568,11 @@ These are the rules resulting of current configuration in `eslintrc.js`
       "never"
     ],
     "react/jsx-indent": [
-      "error",
+      "off",
       2
     ],
     "react/jsx-indent-props": [
-      "error",
+      "off",
       2
     ],
     "react/jsx-no-duplicate-props": [
@@ -583,7 +583,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
     ],
     "react/jsx-no-undef": "warn",
     "react/jsx-tag-spacing": [
-      "error",
+      "off",
       {
         "beforeSelfClosing": "always"
       }
@@ -668,6 +668,13 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "space-unary-word-ops": "off",
     "switch-colon-spacing": "off",
     "wrap-regex": "off",
+    "react/jsx-closing-bracket-location": "off",
+    "react/jsx-closing-tag-location": "off",
+    "react/jsx-first-prop-new-line": "off",
+    "react/jsx-max-props-per-line": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-space-before-closing": "off",
+    "react/jsx-wrap-multilines": "off",
     "prettier/prettier": [
       "error",
       {
@@ -706,7 +713,9 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "standard",
     "standard-react",
     "./node_modules/@s-ui/lint/eslintrc.js",
-    "prettier"
+    "prettier",
+    "prettier/react",
+    "prettier/standard"
   ],
   "parser": "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/babel-eslint/lib/index.js"
 }
@@ -725,14 +734,7 @@ $ npm run eslint:print-rules
 The following rules are unnecessary or might conflict with Prettier:
 
 - comma-dangle
-- react/jsx-curly-spacing
 - react/jsx-equals-spacing
-- react/jsx-indent
-- react/jsx-indent-props
-- react/jsx-tag-spacing
-- standard/array-bracket-even-spacing
-- standard/computed-property-even-spacing
-- standard/object-curly-even-spacing
 
 
 ---
