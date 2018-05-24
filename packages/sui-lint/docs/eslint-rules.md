@@ -117,18 +117,18 @@ These are the rules resulting of current configuration in `eslintrc.js`
   "rules": {
     "accessor-pairs": "error",
     "arrow-spacing": [
-      "error",
+      "off",
       {
         "before": true,
         "after": true
       }
     ],
     "block-spacing": [
-      "error",
+      "off",
       "always"
     ],
     "brace-style": [
-      "error",
+      "off",
       "1tbs",
       {
         "allowSingleLine": true
@@ -145,26 +145,26 @@ These are the rules resulting of current configuration in `eslintrc.js`
       "only-multiline"
     ],
     "comma-spacing": [
-      "error",
+      "off",
       {
         "before": false,
         "after": true
       }
     ],
     "comma-style": [
-      "error",
+      "off",
       "last"
     ],
     "constructor-super": "error",
     "curly": [
-      "error",
+      0,
       "multi-line"
     ],
     "dot-location": [
-      "error",
+      "off",
       "property"
     ],
-    "eol-last": "error",
+    "eol-last": "off",
     "eqeqeq": [
       "error",
       "always",
@@ -173,11 +173,11 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "func-call-spacing": [
-      "error",
+      "off",
       "never"
     ],
     "generator-star-spacing": [
-      "error",
+      "off",
       {
         "before": true,
         "after": true
@@ -188,7 +188,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
       "^(err|error)$"
     ],
     "indent": [
-      "error",
+      "off",
       2,
       {
         "SwitchCase": 1,
@@ -214,14 +214,14 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "key-spacing": [
-      "error",
+      "off",
       {
         "beforeColon": false,
         "afterColon": true
       }
     ],
     "keyword-spacing": [
-      "error",
+      "off",
       {
         "before": true,
         "after": true
@@ -234,7 +234,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
         "capIsNew": false
       }
     ],
-    "new-parens": "error",
+    "new-parens": "off",
     "no-array-constructor": "error",
     "no-caller": "error",
     "no-class-assign": "error",
@@ -262,11 +262,11 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "no-extra-bind": "error",
     "no-extra-boolean-cast": "error",
     "no-extra-parens": [
-      "error",
+      "off",
       "functions"
     ],
     "no-fallthrough": "error",
-    "no-floating-decimal": "error",
+    "no-floating-decimal": "off",
     "no-func-assign": "error",
     "no-global-assign": "error",
     "no-implied-eval": "error",
@@ -287,7 +287,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
     ],
     "no-lone-blocks": "error",
     "no-mixed-operators": [
-      "error",
+      0,
       {
         "groups": [
           [
@@ -312,11 +312,11 @@ These are the rules resulting of current configuration in `eslintrc.js`
         "allowSamePrecedence": true
       }
     ],
-    "no-mixed-spaces-and-tabs": "error",
-    "no-multi-spaces": "error",
+    "no-mixed-spaces-and-tabs": "off",
+    "no-multi-spaces": "off",
     "no-multi-str": "error",
     "no-multiple-empty-lines": [
-      "error",
+      "off",
       {
         "max": 1,
         "maxEOF": 0
@@ -346,14 +346,14 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "no-sequences": "error",
     "no-shadow-restricted-names": "error",
     "no-sparse-arrays": "error",
-    "no-tabs": "error",
+    "no-tabs": 0,
     "no-template-curly-in-string": "error",
     "no-this-before-super": "error",
     "no-throw-literal": "error",
-    "no-trailing-spaces": "error",
+    "no-trailing-spaces": "off",
     "no-undef": "error",
     "no-undef-init": "error",
-    "no-unexpected-multiline": "error",
+    "no-unexpected-multiline": 0,
     "no-unmodified-loop-condition": "error",
     "no-unneeded-ternary": [
       "error",
@@ -394,10 +394,10 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "no-useless-escape": "error",
     "no-useless-rename": "error",
     "no-useless-return": "error",
-    "no-whitespace-before-property": "error",
+    "no-whitespace-before-property": "off",
     "no-with": "error",
     "object-property-newline": [
-      "error",
+      "off",
       {
         "allowMultiplePropertiesPerLine": true
       }
@@ -409,7 +409,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "operator-linebreak": [
-      "error",
+      "off",
       "after",
       {
         "overrides": {
@@ -419,7 +419,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "padded-blocks": [
-      "error",
+      "off",
       {
         "blocks": "never",
         "switches": "never",
@@ -428,7 +428,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
     ],
     "prefer-promise-reject-errors": "error",
     "quotes": [
-      "error",
+      0,
       "single",
       {
         "avoidEscape": true,
@@ -436,35 +436,35 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "rest-spread-spacing": [
-      "error",
+      "off",
       "never"
     ],
     "semi": [
-      "error",
+      "off",
       "never"
     ],
     "semi-spacing": [
-      "error",
+      "off",
       {
         "before": false,
         "after": true
       }
     ],
     "space-before-blocks": [
-      "error",
+      "off",
       "always"
     ],
     "space-before-function-paren": [
-      "error",
+      "off",
       "always"
     ],
     "space-in-parens": [
-      "error",
+      "off",
       "never"
     ],
-    "space-infix-ops": "error",
+    "space-infix-ops": "off",
     "space-unary-ops": [
-      "error",
+      "off",
       {
         "words": true,
         "nonwords": false
@@ -501,15 +501,15 @@ These are the rules resulting of current configuration in `eslintrc.js`
     ],
     "symbol-description": "error",
     "template-curly-spacing": [
-      "error",
+      "off",
       "never"
     ],
     "template-tag-spacing": [
-      "error",
+      "off",
       "never"
     ],
     "unicode-bom": [
-      "error",
+      "off",
       "never"
     ],
     "use-isnan": "error",
@@ -520,14 +520,14 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "wrap-iife": [
-      "error",
+      "off",
       "any",
       {
         "functionPrototypeMethods": true
       }
     ],
     "yield-star-spacing": [
-      "error",
+      "off",
       "both"
     ],
     "yoda": [
@@ -555,7 +555,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
       "either"
     ],
     "jsx-quotes": [
-      "error",
+      "off",
       "prefer-single"
     ],
     "react/jsx-boolean-value": "error",
@@ -631,7 +631,58 @@ These are the rules resulting of current configuration in `eslintrc.js`
       }
     ],
     "react/require-render-return": "warn",
-    "strict": 0
+    "strict": 0,
+    "lines-around-comment": 0,
+    "max-len": 0,
+    "no-confusing-arrow": 0,
+    "array-bracket-newline": "off",
+    "array-bracket-spacing": "off",
+    "array-element-newline": "off",
+    "arrow-parens": "off",
+    "computed-property-spacing": "off",
+    "function-paren-newline": "off",
+    "generator-star": "off",
+    "implicit-arrow-linebreak": "off",
+    "indent-legacy": "off",
+    "multiline-ternary": "off",
+    "newline-per-chained-call": "off",
+    "no-arrow-condition": "off",
+    "no-comma-dangle": "off",
+    "no-extra-semi": "off",
+    "no-reserved-keys": "off",
+    "no-space-before-semi": "off",
+    "no-spaced-func": "off",
+    "no-wrap-func": "off",
+    "nonblock-statement-body-position": "off",
+    "object-curly-newline": "off",
+    "object-curly-spacing": "off",
+    "one-var-declaration-per-line": "off",
+    "quote-props": "off",
+    "semi-style": "off",
+    "space-after-function-name": "off",
+    "space-after-keywords": "off",
+    "space-before-function-parentheses": "off",
+    "space-before-keywords": "off",
+    "space-in-brackets": "off",
+    "space-return-throw-case": "off",
+    "space-unary-word-ops": "off",
+    "switch-colon-spacing": "off",
+    "wrap-regex": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80,
+        "tabWidth": 2,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "bracketSpacing": false,
+        "semi": false,
+        "useTabs": false,
+        "parser": "babylon",
+        "jsxBracketSameLine": false,
+        "arrowParens": "avoid"
+      }
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 8,
@@ -654,7 +705,8 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/eslint-config-standard-jsx/index.js",
     "standard",
     "standard-react",
-    "./node_modules/@s-ui/lint/eslintrc.js"
+    "./node_modules/@s-ui/lint/eslintrc.js",
+    "prettier"
   ],
   "parser": "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/babel-eslint/lib/index.js"
 }
@@ -672,65 +724,15 @@ $ npm run eslint:print-rules
 
 The following rules are unnecessary or might conflict with Prettier:
 
-- arrow-spacing
-- block-spacing
-- brace-style
 - comma-dangle
-- comma-spacing
-- comma-style
-- dot-location
-- eol-last
-- func-call-spacing
-- generator-star-spacing
-- indent
-- jsx-quotes
-- key-spacing
-- keyword-spacing
-- new-parens
-- no-extra-parens
-- no-floating-decimal
-- no-mixed-spaces-and-tabs
-- no-multi-spaces
-- no-multiple-empty-lines
-- no-trailing-spaces
-- no-whitespace-before-property
-- object-property-newline
-- operator-linebreak
-- padded-blocks
 - react/jsx-curly-spacing
 - react/jsx-equals-spacing
 - react/jsx-indent
 - react/jsx-indent-props
 - react/jsx-tag-spacing
-- rest-spread-spacing
-- semi
-- semi-spacing
-- space-before-blocks
-- space-before-function-paren
-- space-in-parens
-- space-infix-ops
-- space-unary-ops
 - standard/array-bracket-even-spacing
 - standard/computed-property-even-spacing
 - standard/object-curly-even-spacing
-- template-curly-spacing
-- template-tag-spacing
-- unicode-bom
-- wrap-iife
-- yield-star-spacing
-
-The following rules are enabled with options that might conflict with Prettier. See:
-https://github.com/prettier/eslint-config-prettier#special-rules
-
-- curly
-- quotes
-
-The following rules are enabled but cannot be automatically checked. See:
-https://github.com/prettier/eslint-config-prettier#special-rules
-
-- no-mixed-operators
-- no-tabs
-- no-unexpected-multiline
 
 
 ---

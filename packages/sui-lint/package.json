@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "sui-lint js",
-    "eslint:print-rules": "./node_modules/.bin/eslint --print-config ./eslintrc.js",
-    "eslint:prettier-check": "./node_modules/.bin/eslint --print-config ./eslintrc.js | ./node_modules/.bin/eslint-config-prettier-check"
+    "eslint:print-rules": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config .",
+    "eslint:prettier-check": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config . | ./node_modules/.bin/eslint-config-prettier-check"
   },
   "keywords": [],
   "author": "",

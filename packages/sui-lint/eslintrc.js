@@ -1,10 +1,13 @@
+const prettierOptions = require('./.prettierrc.js')
+
 module.exports = {
   'env': {
     'mocha': true
   },
   'extends': [
     'standard',
-    'standard-react'
+    'standard-react',
+    'prettier'
   ],
   'parser': 'babel-eslint',
   'plugins': [
@@ -34,6 +37,7 @@ module.exports = {
     'react/no-unused-prop-types': 1,
     'react/react-in-jsx-scope': 'warn',
     'react/require-render-return': 'warn',
-    'strict': 0
+    'strict': 0,
+    'prettier/prettier': ['error', prettierOptions]
   }
 }
