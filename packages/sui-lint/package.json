@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "sui-lint js"
+    "lint": "sui-lint js",
+    "eslint:print-rules": "./node_modules/.bin/eslint --print-config ./eslintrc.js"
   },
   "keywords": [],
   "author": "",
