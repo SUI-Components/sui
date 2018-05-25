@@ -87,8 +87,10 @@ function getSpawnPromiseFactory (bin, args, options) {
  */
 function getSpawnPromise (bin, args, options = {}) {
   return new Promise(function (resolve, reject) {
-    log('')
-    log(getCommandCallMessage(bin, args, options))
+    if (options.stdio !== 'ignore') {
+      log('')
+      log(getCommandCallMessage(bin, args, options))
+    }
     getSpawnProcess(bin, args, options).on('exit', code => {
       code === CODE_OK ? resolve(code) : reject(code)
     })
