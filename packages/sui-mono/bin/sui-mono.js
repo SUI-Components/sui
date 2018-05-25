@@ -32,4 +32,7 @@ program
 program
   .command('run-parallel', 'Run a command on each package, in parallel')
 
+program
+  .command('phoenix', 'Reset project and packages reinstalling all dependencies')
+
 program.parse(process.argv)

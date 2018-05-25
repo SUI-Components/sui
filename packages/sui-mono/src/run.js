@@ -1,14 +1,12 @@
-const path = require('path')
 const program = require('commander')
 const config = require('../src/config')
-const PACKAGES_DIR = path.join(process.cwd(), config.getPackagesFolder())
 
 /**
  * Get array of commands to execute on all folders
  * @return {Array<Array>}
  */
 function getAllTaskArrays () {
-  const cwds = config.getScopes().map(pkg => path.join(PACKAGES_DIR, pkg))
+  const cwds = config.getScopesPaths()
   return cwds.map(getTaskArray)
 }
 

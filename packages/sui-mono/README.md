@@ -34,6 +34,17 @@ $ sui-mono run-parallel rm -Rf node_modules
 $ sui-mono run-parallel npm install
 ```
 
+### Phoenix
+
+To reset your project and all its contained packages.
+
+```sh
+sui-mono phoenix
+```
+
+Equivalent to 'rm -Rf node_modules && npm i' but works on any environment and
+executes it concurrently on each package (and/or on your project root folder).
+
 ### Link
 
 Is you want to link all packages between each other, to ease development:
