@@ -22,7 +22,7 @@
     "sinon": "1.17.6"
   },
   "devDependencies": {
-    "@s-ui/test": "1.2.0",
+    "@s-ui/test": "1",
     "axios": "0.18.0",
     "babel-cli": "6.18.0",
     "babel-preset-sui": "1"
