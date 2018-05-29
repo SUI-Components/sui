@@ -31,6 +31,10 @@ module.exports = {
 
     return flatten(scopes, customScopes)
   },
+  getScopesPaths: function () {
+    const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
+    return this.getScopes().map(pkg => path.join(packagesDir, pkg))
+  },
   getPackagesFolder: function () {
     return packagesFolder
   },
