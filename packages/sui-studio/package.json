@@ -7,7 +7,7 @@
     "sui-studio": "./bin/sui-studio.js"
   },
   "scripts": {
-    "phoenix": "rm -Rf node_modules && npm it",
+    "phoenix": "npx rimraf node_modules && npm it",
     "up": "updtr --test-stdout --save-exact",
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
