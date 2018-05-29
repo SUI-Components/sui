@@ -10,7 +10,7 @@ export const getComponentsList = () => {
     .map(k => k.replace(/\.\//, '')
       .replace(/\/package\.json/, ''))
     .map(k => {
-      const [category, component] = k.split('/')
+      const [category, component] = k.split(path.sep)
       return {category, component}
     }) || []
 }

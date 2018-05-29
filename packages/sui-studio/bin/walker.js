@@ -21,7 +21,7 @@ module.exports = {
   componentsFullPath: cwds,
   componentsName: (baseDir) => {
     return cwds(baseDir).map(folder => {
-      const [component, category] = folder.split('/').reverse()
+      const [component, category] = folder.split(path.sep).reverse()
       return `${category}/${component}`
     })
   }
