@@ -5,7 +5,7 @@
   "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib"
+    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib"
   },
   "keywords": [
     "data-rel",
