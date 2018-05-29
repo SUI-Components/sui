@@ -36,7 +36,7 @@ before:
 // package.json
 {
   "scripts": {
-    "phoenix": "rm -Rf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
+    "phoenix": "npx rimraf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
     "start": "NODE_ENV=development sui-studio start"
   }
 }
@@ -47,7 +47,7 @@ after:
 // package.json
 {
   "scripts": {
-    "phoenix": "rm -Rf node_modules && npm i && suistudio clean-modules && suistudio run-all npm i",
+    "phoenix": "npx rimraf node_modules && npm i && suistudio clean-modules && suistudio run-all npm i",
     "start": "NODE_ENV=development suistudio start"
   },
   "config": {
