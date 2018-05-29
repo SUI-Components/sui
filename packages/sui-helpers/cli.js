@@ -139,11 +139,11 @@ function getCommandCallMessage (bin, args, options = {}) {
   const folder = options.cwd
     ? '@' +
       options.cwd
-        .split('/')
+        .split(path.sep)
         .slice(-2)
-        .join('/')
+        .join(path.sep)
     : ''
-  const command = bin.split('/').pop() + ' ' + args.join(' ')
+  const command = bin.split(path.sep).pop() + ' ' + args.join(' ')
   return `${command} ${folder.grey}`
 }
 
