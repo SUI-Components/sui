@@ -6,7 +6,7 @@
     "sui-test": "./bin/sui-test.js"
   },
   "scripts": {
-    "lib:js": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
     "prepublish": "npm run lib"
   },
