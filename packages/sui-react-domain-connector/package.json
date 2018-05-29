@@ -4,7 +4,7 @@
   "description": "Connect any React component to your domain use cases",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "rm -Rf lib && babel --presets sui ./src --out-dir ./lib",
+    "lib": "npx rimraf lib && babel --presets sui ./src --out-dir ./lib",
     "prepublish": "npm run lib"
   },
   "keywords": [],
