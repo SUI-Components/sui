@@ -21,10 +21,10 @@ module.exports = {
   getScopes: function () {
     const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
     const scopes = folders.map(folder => {
-      const reversedPath = folder.split('/')
+      const reversedPath = folder.split(path.sep)
       const scope = Array.apply(null, Array(deepLevel)).map(Number.prototype.valueOf, 0)
 
-      return scope.map(() => reversedPath.pop()).reverse().join('/')
+      return scope.map(() => reversedPath.pop()).reverse().join(path.sep)
     })
 
     return flatten(scopes, customScopes)
