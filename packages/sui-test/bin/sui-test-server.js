@@ -26,7 +26,7 @@ serialSpawn([
   [
     require.resolve('mocha/bin/mocha'),
     [
-      path.join(process.cwd(),path.sep,pattern),
+      path.join(process.cwd(), path.sep, pattern),
       `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
       '--recursive',
       watch && '--watch'
