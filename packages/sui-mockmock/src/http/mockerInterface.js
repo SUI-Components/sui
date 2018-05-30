@@ -2,20 +2,20 @@
  * @interface
  */
 class Mock {
-  get (path) {}
-  getRegexp (path) {}
-  post (path) {}
-  query (queryObject) {}
-  reply (response, statusCode) {}
+  get(path) {}
+  getRegexp(path) {}
+  post(path) {}
+  query(queryObject) {}
+  reply(response, statusCode) {}
 }
 
 /**
  * @interface
  */
 class Mocker {
-  create () {}
-  restore () {}
-  httpMock (baseUrl) {}
+  create() {}
+  restore() {}
+  httpMock(baseUrl) {}
 }
 
-export { Mocker, Mock }
+export {Mocker, Mock}
