@@ -8,7 +8,9 @@ program
     console.log('')
     console.log('    Reports if any package should be released based on ComVer')
     console.log('')
-    console.log('    It will create a MAJOR only if there are BREAKING CHANGES in the commit description')
+    console.log(
+      '    It will create a MAJOR only if there are BREAKING CHANGES in the commit description'
+    )
     console.log('    The types fix, perf and feat will generate a MINOR')
     console.log('    All other commit types will not generate a version change')
     console.log('')
@@ -21,7 +23,7 @@ program
   })
   .parse(process.argv)
 
-const incrementName = (code) => {
+const incrementName = code => {
   if (code === 1) {
     return 'patch'
   } else if (code === 2) {
@@ -36,19 +38,21 @@ const incrementName = (code) => {
 const showReportHeaderPositive = () => {
   console.log(
     'RELEASES TO DO\n\n' +
-    'We checked all packages and recent commits, and discovered that\n' +
-    'according to ComVer https://github.com/staltz/comver you should\n' +
-    'release new versions for the following packages.\n')
+      'We checked all packages and recent commits, and discovered that\n' +
+      'according to ComVer https://github.com/staltz/comver you should\n' +
+      'release new versions for the following packages.\n'
+  )
 }
 
 const showReportHeaderNegative = () => {
   console.log(
     'Nothing to release.\n\n' +
-    'We checked all packages and recent commits, and discovered that\n' +
-    'you do not need to release any new version, according to ComVer.')
+      'We checked all packages and recent commits, and discovered that\n' +
+      'you do not need to release any new version, according to ComVer.'
+  )
 }
 
-const showReport = (status) => {
+const showReport = status => {
   var headerShown = false
   for (var pkg in status) {
     if (status.hasOwnProperty(pkg) && status[pkg].increment > 0) {
@@ -57,10 +61,14 @@ const showReport = (status) => {
         headerShown = true
       }
 
-      console.log('`' + pkg + '` needs a new ' +
-        incrementName(status[pkg].increment).toUpperCase() +
-        ' version released because:')
-      status[pkg].commits.forEach(function (commit) {
+      console.log(
+        '`' +
+          pkg +
+          '` needs a new ' +
+          incrementName(status[pkg].increment).toUpperCase() +
+          ' version released because:'
+      )
+      status[pkg].commits.forEach(function(commit) {
         console.log('  . ' + commit.header)
         if (checker.isCommitBreakingChange(commit)) {
           console.log('    BREAKING CHANGE')

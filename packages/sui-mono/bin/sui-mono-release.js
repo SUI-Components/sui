@@ -4,7 +4,7 @@ const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
 const checker = require('../src/check')
-const { serialSpawn } = require('@s-ui/helpers/cli')
+const {serialSpawn} = require('@s-ui/helpers/cli')
 
 program
   .on('--help', () => {
@@ -12,9 +12,13 @@ program
     console.log('')
     console.log('    Release your packages based on the version check output')
     console.log('')
-    console.log('    Its adviced that you inspect the output on sui-mono check before releasing')
+    console.log(
+      '    Its adviced that you inspect the output on sui-mono check before releasing'
+    )
     console.log('    Release is the process of:')
-    console.log('     - Build your projcet (with build or prepublish npm script')
+    console.log(
+      '     - Build your projcet (with build or prepublish npm script'
+    )
     console.log('     - Updating package.json version')
     console.log('     - Creating a release commit type')
     console.log('     - Pushing the package to npm (in case its not private)')
@@ -42,7 +46,7 @@ const RELEASE_CODES = {
 }
 
 const releasesByPackages = () =>
-  checker.check().then((status) =>
+  checker.check().then(status =>
     Object.keys(status).map(scope => ({
       pkg: scope,
       code: status[scope].increment
@@ -51,17 +55,15 @@ const releasesByPackages = () =>
 
 const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
-    if (code === 0) { return resolve() }
+    if (code === 0) {
+      return resolve()
+    }
 
     const isMonoPackage = config.isMonoPackage()
 
-    const tagPrefix = isMonoPackage
-      ? ''
-      : `${pkg}-`
+    const tagPrefix = isMonoPackage ? '' : `${pkg}-`
 
-    const packageScope = isMonoPackage
-      ? 'META'
-      : pkg
+    const packageScope = isMonoPackage ? 'META' : pkg
 
     const cwd = isMonoPackage
       ? BASE_DIR
@@ -72,7 +74,14 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     let releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', cwd]],
-      ['git', ['commit -m "release(' + packageScope + '): v$(node -p -e "require(\'./package.json\')".version)"']]
+      [
+        'git',
+        [
+          'commit -m "release(' +
+            packageScope +
+            '): v$(node -p -e "require(\'./package.json\')".version)"'
+        ]
+      ]
     ]
     let docCommands = [
       [suiMonoBinPath, ['changelog', cwd]],
@@ -80,7 +89,14 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['git', ['commit --amend --no-verify --no-edit']]
     ]
     let publishCommands = [
-      ['git', ['tag -a ' + tagPrefix + '$(node -p -e "require(\'./package.json\')".version) -m \"v$(node -p -e "require(\'./package.json\')".version)\"']], // eslint-disable-line no-useless-escape
+      [
+        'git',
+        [
+          'tag -a ' +
+            tagPrefix +
+            '$(node -p -e "require(\'./package.json\')".version) -m "v$(node -p -e "require(\'./package.json\')".version)"'
+        ]
+      ], // eslint-disable-line no-useless-escape
       scripts['build'] && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '--tags', 'origin', 'HEAD']]
@@ -99,7 +115,10 @@ releasesByPackages()
     releases
       .filter(({code}) => code !== 0)
       .map(release => () => releaseEachPkg(release))
-    // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
-      .reduce((m, p) => m.then(v => Promise.all([...v, p()])), Promise.resolve([]))
+      // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
+      .reduce(
+        (m, p) => m.then(v => Promise.all([...v, p()])),
+        Promise.resolve([])
+      )
   )
   .catch(console.log.bind(console))

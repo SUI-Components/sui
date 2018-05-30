@@ -5,7 +5,7 @@ const config = require('../src/config')
  * Get array of commands to execute on all folders
  * @return {Array<Array>}
  */
-function getAllTaskArrays () {
+function getAllTaskArrays() {
   const cwds = config.getScopesPaths()
   return cwds.map(getTaskArray)
 }
@@ -15,10 +15,10 @@ function getAllTaskArrays () {
  * @param  {String} folder
  * @return {Array<Array>}
  */
-function getTaskArray (folder) {
+function getTaskArray(folder) {
   const [command] = program.args
   const args = process.argv.slice(process.argv.indexOf(command) + 1)
   return [command, args, {cwd: folder}]
 }
 
-module.exports = { getAllTaskArrays }
+module.exports = {getAllTaskArrays}

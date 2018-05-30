@@ -2,9 +2,9 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const path = require('path')
-const { exec } = require('child_process')
+const {exec} = require('child_process')
 const config = require('../src/config')
-const { getSpawnPromise, showError } = require('@s-ui/helpers/cli')
+const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 
 program
   .usage('-m "My commit message"')
@@ -19,7 +19,9 @@ program
     console.log('')
     console.log('  Examples:')
     console.log('')
-    console.log('    $ sui-mono commit-all --type=fix -m "bump dependency to major version"')
+    console.log(
+      '    $ sui-mono commit-all --type=fix -m "bump dependency to major version"'
+    )
     console.log('    $ sui-mono --help')
     console.log('    $ sui-mono -h')
     console.log('')
@@ -38,7 +40,7 @@ const packagesDir = path.join(process.cwd(), config.getPackagesFolder())
  * @param  {String}  path Folder to check
  * @return {Promise<Boolean>}
  */
-const hasChangedFiles = (path) => {
+const hasChangedFiles = path => {
   return new Promise((resolve, reject) => {
     exec(`git add . && git status ${path}`, {cwd: path}, (err, output) => {
       err ? reject(err) : resolve(!output.includes('nothing to commit'))
@@ -56,10 +58,10 @@ let commitsCount = 0
  * Functions that executes the commit for each package
  * @type {Array<Function>}
  */
-const checkStageFuncs = config.getScopes().map((pkg) => {
+const checkStageFuncs = config.getScopes().map(pkg => {
   const pkgPath = path.join(packagesDir, pkg)
-  return () => hasChangedFiles(pkgPath)
-    .then(hasChanges => {
+  return () =>
+    hasChangedFiles(pkgPath).then(hasChanges => {
       if (hasChanges) {
         let args = ['commit', `-m "${type}(${pkg}): ${message}"`]
         commitsCount++ && args.push('--no-verify') // precommit only once
@@ -69,7 +71,10 @@ const checkStageFuncs = config.getScopes().map((pkg) => {
 })
 
 getSpawnPromise('git', ['reset']) // Unstage all prossible staged files
-  .then(() => checkStageFuncs
-    .reduce((promise, func) => promise.then(func), Promise.resolve())
+  .then(() =>
+    checkStageFuncs.reduce(
+      (promise, func) => promise.then(func),
+      Promise.resolve()
+    )
   )
   .catch(showError)
