@@ -4,9 +4,9 @@ import withContext from '@s-ui/hoc/lib/withContext'
 
 const EMPTY_FUNC = () => Promise.resolve({})
 
-const hrTimeToMs = diff => diff[0] * 1E3 + diff[1] * 1e-6
+const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
 
-export default function ssrComponentWithInitialProps ({
+export default function ssrComponentWithInitialProps({
   Target,
   context,
   renderProps
@@ -22,7 +22,7 @@ export default function ssrComponentWithInitialProps ({
 
     const startRenderToString = process.hrtime()
     // create the App component with the context, the initialProps and the Target Component
-    const App = withContext({ ...context, initialProps })(Target)
+    const App = withContext({...context, initialProps})(Target)
     // render our whole application with the needed props and get the html string
     const reactString = ReactDOMServer.renderToString(
       <App {...renderProps} initialProps={initialProps} />
