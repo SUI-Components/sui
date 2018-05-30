@@ -14,7 +14,7 @@ export default class NotImplementedUseCase extends UseCase {
   /**
    * @param {string} key The requested use case not being implemented
    */
-  constructor (key) {
+  constructor(key) {
     super()
     this._key = key
   }
@@ -22,7 +22,13 @@ export default class NotImplementedUseCase extends UseCase {
   /**
    * @override
    */
-  execute () {
-    return Promise.resolve(console.warn(`Service ${this._key} is not implemented in the current version of the domain`))
+  execute() {
+    return Promise.resolve(
+      console.warn(
+        `Service ${
+          this._key
+        } is not implemented in the current version of the domain`
+      )
+    )
   }
 }

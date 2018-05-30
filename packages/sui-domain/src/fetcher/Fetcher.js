@@ -6,7 +6,7 @@ export default class Fetcher {
    * @method
    * @return {Error}
    */
-  get () {
+  get() {
     throw new Error('[Fetcher#get] must be implemented')
   }
 
@@ -14,7 +14,7 @@ export default class Fetcher {
    * @method
    * @return {Error}
    */
-  post () {
+  post() {
     throw new Error('[Fetcher#post] must be implemented')
   }
 
@@ -22,7 +22,7 @@ export default class Fetcher {
    * @method
    * @return {Error}
    */
-  put () {
+  put() {
     throw new Error('[Fetcher#put] must be implemented')
   }
 
@@ -30,7 +30,7 @@ export default class Fetcher {
    * @method
    * @return {Error}
    */
-  delete () {
+  delete() {
     throw new Error('[Fetcher#delete] must be implemented')
   }
 }
