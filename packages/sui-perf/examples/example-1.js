@@ -1,7 +1,10 @@
 /* eslint no-console:0 */
 // Generate scoped entries on node
-const task = (i) => { i *= 1000000; while (i > 0) i-- }
-const asyncTask = (time) => new Promise(resolve => setTimeout(resolve, time))
+const task = i => {
+  i *= 1000000
+  while (i > 0) i--
+}
+const asyncTask = time => new Promise(resolve => setTimeout(resolve, time))
 
 export default ({mark, stop, measure, getEntries}) => {
   mark('Example 1 - async')

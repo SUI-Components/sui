@@ -3,7 +3,7 @@ import 'colors'
 
 const {round} = Math
 
-const pad = (padChar = ' ') => (length) => (text = '') => {
+const pad = (padChar = ' ') => length => (text = '') => {
   length = round(length)
   while (text.length < length) text += padChar
   return text
@@ -13,25 +13,27 @@ const padEmpty = pad(' ')
 
 const padRectangle = pad('█')
 
-const getStartTime = (entries) => {
-  return entries.reduce((time, {startTime}) => (
-    getLowest(time, startTime)
-  ), entries[0].startTime)
+const getStartTime = entries => {
+  return entries.reduce(
+    (time, {startTime}) => getLowest(time, startTime),
+    entries[0].startTime
+  )
 }
 
-const getLowest = (num1, num2) => num1 < num2 ? num1 : num2
+const getLowest = (num1, num2) => (num1 < num2 ? num1 : num2)
 
-const getEndTime = (entries) => {
-  return entries.reduce((time, {startTime, duration}) => (
-    getHighest(time, startTime + duration)
-  ), 0)
+const getEndTime = entries => {
+  return entries.reduce(
+    (time, {startTime, duration}) => getHighest(time, startTime + duration),
+    0
+  )
 }
 
-const getHighest = (num1, num2) => num1 > num2 ? num1 : num2
+const getHighest = (num1, num2) => (num1 > num2 ? num1 : num2)
 
-const getTextRow = (layout) => {
-  var pads = layout.map((num) => padEmpty(num))
-  return (cells) => {
+const getTextRow = layout => {
+  var pads = layout.map(num => padEmpty(num))
+  return cells => {
     return cells.map((cell, idx) => pads[idx](cell)).join(' ')
   }
 }
@@ -39,8 +41,8 @@ const getTextRow = (layout) => {
 const getBarForPeriod = (periodTime, width) => {
   const padWidth = padEmpty(width)
   return (startTime, duration) => {
-    let startPad = padEmpty((startTime / periodTime) * width)()
-    let durationPad = padRectangle((duration / periodTime) * width)() || '⸠'
+    let startPad = padEmpty(startTime / periodTime * width)()
+    let durationPad = padRectangle(duration / periodTime * width)() || '⸠'
     return padWidth(startPad + durationPad)
   }
 }
@@ -57,34 +59,37 @@ const getRowValues = (fullDuration, timeRange, width) => {
 }
 
 const rewindEntriesBy = (entries, time) => {
-  return entries.map((entry) => {
+  return entries.map(entry => {
     entry.startTime += time
     return entry
   })
 }
 
-const getTextTable = (layout) => {
+const getTextTable = layout => {
   const getTextTableRow = getTextRow(layout)
-  return (rows) => rows.map(getTextTableRow).join('\n')
+  return rows => rows.map(getTextTableRow).join('\n')
 }
 
 const getTimelineChart = ({width = 15, timeRange = 0, minPercent = 0} = {}) => {
   minPercent = minPercent / 100
   const getChartTable = getTextTable([width, 6, 6, 4, 0])
-  return (entries) => {
+  return entries => {
     if (entries.length < 1) return ''
     const startTime = getStartTime(entries)
     const duration = getEndTime(entries) - startTime
     const timeRangeRef = timeRange > duration ? timeRange : duration
     const rows = rewindEntriesBy(entries, -startTime)
-      .filter((entry) => entry.duration / duration >= minPercent)
+      .filter(entry => entry.duration / duration >= minPercent)
       .map(getRowValues(duration, timeRangeRef, width))
-    return getChartTable([['timeline', 'start', 'time', '%', 'label']]).grey +
-      '\n' + getChartTable(rows)
+    return (
+      getChartTable([['timeline', 'start', 'time', '%', 'label']]).grey +
+      '\n' +
+      getChartTable(rows)
+    )
   }
 }
 
-const printTimelineChart = (opts) => {
+const printTimelineChart = opts => {
   const getTimeline = getTimelineChart(opts)
   return entries => console.log(getTimeline(entries))
 }
