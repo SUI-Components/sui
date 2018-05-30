@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* make paths to work in windows ([39b2983](https://github.com/SUI-Components/sui/commit/39b2983))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-02-27)
 
