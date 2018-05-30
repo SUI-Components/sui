@@ -1,7 +1,7 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
 import routes from 'routes'
-import { RouterContext, match } from 'react-router'
+import {RouterContext, match} from 'react-router'
 import Helmet from 'react-helmet'
 import {
   createServerContextFactoryParams,
@@ -34,18 +34,19 @@ const injectDataHydratation = (data = {}) =>
     '<\\/'
   )}</script>`
 
-const injectDataPerformance = (
-  { getInitialProps: server, renderToString: render } = {}
-) =>
+const injectDataPerformance = ({
+  getInitialProps: server,
+  renderToString: render
+} = {}) =>
   `<script>window.__PERFORMANCE_METRICS__ = ${JSON.stringify({
     server,
     render
   })}</script>`
 
 export default (req, res, next) => {
-  const { url, query } = req
+  const {url, query} = req
   match(
-    { routes, location: url },
+    {routes, location: url},
     async (error, redirectLocation, renderProps) => {
       if (error || !renderProps) {
         return next(error || new Error(`No renderProps for ${url}`))
@@ -90,7 +91,7 @@ export default (req, res, next) => {
 
       const helmet = Helmet.renderStatic()
 
-      const { bodyAttributes, htmlAttributes, ...head } = helmet
+      const {bodyAttributes, htmlAttributes, ...head} = helmet
 
       res.write(
         Object.keys(head)
