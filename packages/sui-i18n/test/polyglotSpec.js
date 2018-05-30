@@ -10,20 +10,20 @@ import Polyglot from '../src/adapters/polyglot'
 
 const phrases = {
   'en-GB': {
-    'hello': 'Hello',
-    'hi_name_welcome_to_place': 'Hi, %{name}, welcome to %{place}!',
-    'name_your_name_is_name': '%{name}, your name is %{name}!',
-    'empty_string': ''
+    hello: 'Hello',
+    hi_name_welcome_to_place: 'Hi, %{name}, welcome to %{place}!',
+    name_your_name_is_name: '%{name}, your name is %{name}!',
+    empty_string: ''
   }
 }
 
 const nestedPhrases = {
   'en-GB': {
-    'nav': {
-      'presentations': 'Presentations',
-      'hi_user': 'Hi, %{user}.',
-      'cta': {
-        'join_now': 'Join now!'
+    nav: {
+      presentations: 'Presentations',
+      hi_user: 'Hi, %{user}.',
+      cta: {
+        join_now: 'Join now!'
       }
     },
     'header.sign_in': 'Sign In'
@@ -32,22 +32,26 @@ const nestedPhrases = {
 
 const pluralizePhrases = {
   'en-GB': {
-    'count_name': '%{smart_count} Name |||| %{smart_count} Names'
+    count_name: '%{smart_count} Name |||| %{smart_count} Names'
   }
 }
 
 const urlTokens = {
   'es-ES': {
-    'rent': 'Alquiler',
-    'house': 'Casa',
-    'elevator': 'ascensor'
+    rent: 'Alquiler',
+    house: 'Casa',
+    elevator: 'ascensor'
   }
 }
 
 describe('I18N with polyglot adapter', () => {
   let i18n
-  beforeEach(() => { i18n = new Rosetta({adapter: new Polyglot()}) })
-  afterEach(() => { i18n = null })
+  beforeEach(() => {
+    i18n = new Rosetta({adapter: new Polyglot()})
+  })
+  afterEach(() => {
+    i18n = null
+  })
 
   describe('translate', () => {
     beforeEach(() => {
@@ -55,36 +59,50 @@ describe('I18N with polyglot adapter', () => {
       i18n.culture = 'en-GB'
     })
 
-    it('should translate a simple string', () => expect(i18n.t('hello')).to.eql('Hello'))
+    it('should translate a simple string', () =>
+      expect(i18n.t('hello')).to.eql('Hello'))
 
-    it('should return the key if translation not found', () => expect(i18n.t('bogus_key')).to.eql('bogus_key'))
+    it('should return the key if translation not found', () =>
+      expect(i18n.t('bogus_key')).to.eql('bogus_key'))
 
     it('should interpolate', () => {
-      expect(i18n.t('hi_name_welcome_to_place', {name: 'Spike', place: 'the webz'}))
-        .to.eql('Hi, Spike, welcome to the webz!')
+      expect(
+        i18n.t('hi_name_welcome_to_place', {name: 'Spike', place: 'the webz'})
+      ).to.eql('Hi, Spike, welcome to the webz!')
     })
 
     it('should interpolate the same placeholder multiple times', () => {
-      expect(i18n.t('name_your_name_is_name', {name: 'Spike'}))
-        .to.eql('Spike, your name is Spike!')
+      expect(i18n.t('name_your_name_is_name', {name: 'Spike'})).to.eql(
+        'Spike, your name is Spike!'
+      )
     })
 
     it('should allow you to supply default values', () => {
-      expect(i18n.t('can_i_call_you_name', {_: 'Can I call you %{name}?', name: 'Robert'}))
-        .to.eql('Can I call you Robert?')
+      expect(
+        i18n.t('can_i_call_you_name', {
+          _: 'Can I call you %{name}?',
+          name: 'Robert'
+        })
+      ).to.eql('Can I call you Robert?')
     })
 
     it('should return the non-interpolated key if not initialized with allowMissing and translation not found', () => {
-      expect(i18n.t('Welcome %{name}', {name: 'Robert'}))
-        .to.eql('Welcome %{name}')
+      expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql(
+        'Welcome %{name}'
+      )
     })
 
     describe('setting allowMissing', () => {
-      beforeEach(() => { i18n.adapter.instance.allowMissing = true })
-      afterEach(() => { i18n.adapter.instance.allowMissing = false })
+      beforeEach(() => {
+        i18n.adapter.instance.allowMissing = true
+      })
+      afterEach(() => {
+        i18n.adapter.instance.allowMissing = false
+      })
       it('should return an interpolated key if initialized with allowMissing and translation not found', () => {
-        expect(i18n.t('Welcome %{name}', {name: 'Robert'}))
-          .to.eql('Welcome Robert')
+        expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql(
+          'Welcome Robert'
+        )
       })
     })
 

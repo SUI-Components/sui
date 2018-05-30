@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions:0 */
 /* eslint-env mocha */
-import { expect } from 'chai'
+import {expect} from 'chai'
 
 import Rosetta from '../src'
 import Polyglot from '../src/adapters/polyglot'
@@ -8,8 +8,12 @@ import Polyglot from '../src/adapters/polyglot'
 describe('I18N', () => {
   let i18n
 
-  beforeEach(() => { i18n = new Rosetta() })
-  afterEach(() => { i18n = null })
+  beforeEach(() => {
+    i18n = new Rosetta()
+  })
+  afterEach(() => {
+    i18n = null
+  })
 
   it('is an instantiable class', () => {
     expect(Rosetta).to.not.be.undefined
@@ -26,20 +30,22 @@ describe('I18N', () => {
     let i18n
 
     beforeEach(() => {
-      i18n = new Rosetta({ adapter: new Polyglot() })
+      i18n = new Rosetta({adapter: new Polyglot()})
       i18n.languages = {
         'es-ES': {
-          'literalOne': 'TranslateOneEsES'
+          literalOne: 'TranslateOneEsES'
         },
         'en-GB': {
-          'literalOne': 'TranslateOneEnGB'
+          literalOne: 'TranslateOneEnGB'
         },
         'es-CA': {
-          'literalOne': 'TranslateOneEsCA'
+          literalOne: 'TranslateOneEsCA'
         }
       }
     })
-    afterEach(() => { i18n = null })
+    afterEach(() => {
+      i18n = null
+    })
 
     describe('locale', () => {
       it('is "en" by default', () => {
@@ -53,8 +59,12 @@ describe('I18N', () => {
     })
 
     describe('culture "en-GB"', () => {
-      beforeEach(() => { i18n.culture = 'en-GB' })
-      afterEach(() => { i18n.culture = '' })
+      beforeEach(() => {
+        i18n.culture = 'en-GB'
+      })
+      afterEach(() => {
+        i18n.culture = ''
+      })
 
       it('is set properly', () => {
         expect(i18n.culture).to.eql('en-GB')
@@ -73,8 +83,12 @@ describe('I18N', () => {
       })
 
       describe('with pound sterling (GBP) as currency type', () => {
-        beforeEach(() => { i18n.currency = 'GBP' })
-        afterEach(() => { i18n.currency = '' })
+        beforeEach(() => {
+          i18n.currency = 'GBP'
+        })
+        afterEach(() => {
+          i18n.currency = ''
+        })
 
         it('formats number 10000 properly', () => {
           expect(i18n.c(10000)).to.eql('£10,000')
@@ -86,8 +100,12 @@ describe('I18N', () => {
       })
 
       describe('with euro (EUR) as currency type', () => {
-        beforeEach(() => { i18n.currency = 'EUR' })
-        afterEach(() => { i18n.currency = '' })
+        beforeEach(() => {
+          i18n.currency = 'EUR'
+        })
+        afterEach(() => {
+          i18n.currency = ''
+        })
 
         it('formats number 10000 properly', () => {
           expect(i18n.c(10000)).to.eql('€10,000')
@@ -100,8 +118,12 @@ describe('I18N', () => {
     })
 
     describe('culture "es-ES"', () => {
-      beforeEach(() => { i18n.culture = 'es-ES' })
-      afterEach(() => { i18n.culture = '' })
+      beforeEach(() => {
+        i18n.culture = 'es-ES'
+      })
+      afterEach(() => {
+        i18n.culture = ''
+      })
 
       it('is set properly', () => {
         expect(i18n.culture).to.eql('es-ES')
