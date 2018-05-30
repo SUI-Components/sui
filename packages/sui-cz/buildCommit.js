@@ -1,6 +1,6 @@
 var wrap = require('word-wrap')
 
-module.exports = function buildCommit (answers) {
+module.exports = function buildCommit(answers) {
   var maxLineWidth = 100
   var wrapOptions = {
     trim: true,
@@ -9,18 +9,18 @@ module.exports = function buildCommit (answers) {
     width: maxLineWidth
   }
 
-  function addScope (scope) {
+  function addScope(scope) {
     return '(' + scope.trim() + '): '
   }
 
-  function addSubject (subject) {
+  function addSubject(subject) {
     return subject.trim()
   }
 
-  function escapeSpecialChars (result) {
+  function escapeSpecialChars(result) {
     var specialChars = ['`']
 
-    specialChars.map(function (item) {
+    specialChars.map(function(item) {
       // For some strange reason, we have to pass additional '\' slash to commitizen. Total slashes are 4.
       // If user types "feat: `string`", the commit preview should show "feat: `\\string\\`".
       // Don't worry. The git log will be "feat: `string`"
@@ -31,7 +31,11 @@ module.exports = function buildCommit (answers) {
   }
 
   // Hard limit this line
-  var head = (answers.type + addScope(answers.scope) + addSubject(answers.subject)).slice(0, maxLineWidth)
+  var head = (
+    answers.type +
+    addScope(answers.scope) +
+    addSubject(answers.subject)
+  ).slice(0, maxLineWidth)
 
   // Wrap these lines at 100 characters
   var body = wrap(answers.body, wrapOptions) || ''

@@ -15,9 +15,9 @@ class ErrorCommitSaver {
    *
    * @param {string} commitMessage The commit message string well formatted.
    */
-  static initErrorListener (commitMessage) {
-    process.on('uncaughtException', function (err) {
-      fs.writeFile(tmpCommitPath, commitMessage, function () {
+  static initErrorListener(commitMessage) {
+    process.on('uncaughtException', function(err) {
+      fs.writeFile(tmpCommitPath, commitMessage, function() {
         console.log(err)
       })
     })
@@ -27,7 +27,7 @@ class ErrorCommitSaver {
    * retrievePreviousCommit will check if there's an existing old commit file and will get it's content calling a callback with the commitMessage.
    * @param {function} callback
    */
-  static retrievePreviousCommit (callback) {
+  static retrievePreviousCommit(callback) {
     fs.readFile(tmpCommitPath, 'utf8', (err, commitMessage) => {
       callback(err ? false : commitMessage)
     })
@@ -36,7 +36,7 @@ class ErrorCommitSaver {
   /**
    * discardOldCommit will check for the oldCommit file and will remove it
    */
-  static discardOldCommit () {
+  static discardOldCommit() {
     fs.unlink(tmpCommitPath, () => {})
   }
 }
