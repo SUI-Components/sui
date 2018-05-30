@@ -2,8 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.12.0"></a>
+# 1.12.0 (2018-05-30)
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* make cli helpers to work in windows ([373277f](https://github.com/SUI-Components/sui/commit/373277f))
 
 
 ### Features
