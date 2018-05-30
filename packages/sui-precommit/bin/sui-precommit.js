@@ -3,8 +3,7 @@ const program = require('commander')
 const pkg = require('../package.json')
 const version = pkg.version
 
-program
-  .version(version, '    --version')
+program.version(version, '    --version')
 
 program
   .command('run', 'run precommit rules')
