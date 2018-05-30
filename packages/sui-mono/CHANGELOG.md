@@ -2,8 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.31.0"></a>
+# 1.31.0 (2018-05-30)
+
+
+
 <a name="1.30.0"></a>
 # 1.30.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* arrange paths for windows ([8467388](https://github.com/SUI-Components/sui/commit/8467388))
 
 
 ### Features
