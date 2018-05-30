@@ -8,6 +8,6 @@ module.exports = {
     importer: jsonImporter
   },
   'postcss-loader': {
-    plugins: (loader) => [require('autoprefixer')()]
+    plugins: loader => [require('autoprefixer')()]
   }
 }

@@ -29,5 +29,5 @@ exports.envVars = (env = []) =>
       }
       return acc
     },
-    { NODE_ENV: 'development', DEBUG: false }
+    {NODE_ENV: 'development', DEBUG: false}
   )

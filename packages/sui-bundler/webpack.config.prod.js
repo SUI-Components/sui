@@ -9,7 +9,12 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
-const {navigateFallbackWhitelist, navigateFallback, runtimeCaching, directoryIndex} = require('./shared/precache')
+const {
+  navigateFallbackWhitelist,
+  navigateFallback,
+  runtimeCaching,
+  directoryIndex
+} = require('./shared/precache')
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
@@ -27,10 +32,12 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
-  entry: config.vendor ? {
-    app: MAIN_ENTRY_POINT,
-    vendor: config.vendor
-  } : MAIN_ENTRY_POINT,
+  entry: config.vendor
+    ? {
+        app: MAIN_ENTRY_POINT,
+        vendor: config.vendor
+      }
+    : MAIN_ENTRY_POINT,
   target: 'web',
   output: {
     path: path.resolve(process.env.PWD, 'public'),
@@ -86,46 +93,59 @@ module.exports = {
         useShortDoctype: true
       }
     }),
-    new ScriptExtHtmlWebpackPlugin(Object.assign({
-      defaultAttribute: 'defer',
-      inline: 'runtime',
-      prefetch: {
-        test: /\.js$/,
-        chunks: 'all'
-      }
-    }, config.scripts)),
+    new ScriptExtHtmlWebpackPlugin(
+      Object.assign(
+        {
+          defaultAttribute: 'defer',
+          inline: 'runtime',
+          prefetch: {
+            test: /\.js$/,
+            chunks: 'all'
+          }
+        },
+        config.scripts
+      )
+    ),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
-    when(config.offline, () => new SWPrecacheWebpackPlugin({
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'service-worker.js',
-      logger (message) {
-        if (message.indexOf('Total precache size is') === 0) {
-          // This message occurs for every build and is a bit too noisy.
-          return
-        }
-        console.log(message)
-      },
-      minify: true,
-      directoryIndex: (
-        console.log('directoryIndex', directoryIndex(config.offline.whitelist)),
-        directoryIndex(config.offline.whitelist)
-      ),
-      navigateFallback: (
-        console.log('navigateFallback', navigateFallback(config.offline.whitelist)),
-        navigateFallback(config.offline.whitelist)
-      ),
-      navigateFallbackWhitelist: (
-        console.log('navigateFallbackWhitelist', navigateFallbackWhitelist(config.offline.whitelist)),
-        navigateFallbackWhitelist(config.offline.whitelist)
-      ),
-      runtimeCaching: (
-        console.log('runtimeCaching', runtimeCaching(config.offline.runtime)),
-        runtimeCaching(config.offline.runtime)
-      ),
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
-    })),
+    when(
+      config.offline,
+      () =>
+        new SWPrecacheWebpackPlugin({
+          dontCacheBustUrlsMatching: /\.\w{8}\./,
+          filename: 'service-worker.js',
+          logger(message) {
+            if (message.indexOf('Total precache size is') === 0) {
+              // This message occurs for every build and is a bit too noisy.
+              return
+            }
+            console.log(message)
+          },
+          minify: true,
+          directoryIndex: (console.log(
+            'directoryIndex',
+            directoryIndex(config.offline.whitelist)
+          ),
+          directoryIndex(config.offline.whitelist)),
+          navigateFallback: (console.log(
+            'navigateFallback',
+            navigateFallback(config.offline.whitelist)
+          ),
+          navigateFallback(config.offline.whitelist)),
+          navigateFallbackWhitelist: (console.log(
+            'navigateFallbackWhitelist',
+            navigateFallbackWhitelist(config.offline.whitelist)
+          ),
+          navigateFallbackWhitelist(config.offline.whitelist)),
+          runtimeCaching: (console.log(
+            'runtimeCaching',
+            runtimeCaching(config.offline.runtime)
+          ),
+          runtimeCaching(config.offline.runtime)),
+          staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
+        })
+    ),
     when(config.externals, () => new Externals({files: config.externals})),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ]),

@@ -4,7 +4,7 @@ const path = require('path')
 
 let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
-  resolve: { extensions: ['*', '.js', '.jsx', '.json'] },
+  resolve: {extensions: ['*', '.js', '.jsx', '.json']},
   entry: './server.js',
   target: 'node',
   output: {
@@ -13,9 +13,7 @@ let webpackConfig = {
     filename: '[name].[chunkhash:8].js'
   },
   externals: [webpackNodeExternals()],
-  plugins: [
-    new webpack.DefinePlugin({ 'global.GENTLY': false })
-  ],
+  plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
     rules: [
       {

@@ -17,34 +17,36 @@ console.log('📦  Bundler Dev Server')
 // Don't show ugly deprecation warnings that mess with the logging
 process.noDeprecation = true
 
-function getPortAvailable ({ port }) {
+function getPortAvailable({port}) {
   const spinner = ora(`Checking if port ${port} is available...`).start()
   return new Promise((resolve, reject) => {
     /* eslint-disable prefer-promise-reject-errors */
     detect(port, (err, suggestedPort) => {
       if (err) {
-        return reject({ err })
+        return reject({err})
       }
 
       if (port === suggestedPort) {
         spinner.succeed(`Port ${port} is free for using it`)
-        return resolve({ port })
+        return resolve({port})
       }
 
-      spinner.warn(`Port ${port} is busy, using available port: ${suggestedPort}`)
-      return resolve({ port: suggestedPort })
+      spinner.warn(
+        `Port ${port} is busy, using available port: ${suggestedPort}`
+      )
+      return resolve({port: suggestedPort})
     })
   })
 }
 
-function listenBundlerEvents ({ bundler, spinner }) {
+function listenBundlerEvents({bundler, spinner}) {
   bundler.plugin('compile', _ => {
     spinner.start(`Building bundle with Webpack`)
   })
 
   bundler.plugin('done', stats => {
     const info = stats.toJson()
-    const { time } = info
+    const {time} = info
 
     if (stats.hasErrors()) {
       spinner.fail('Build failed')
@@ -60,7 +62,7 @@ function listenBundlerEvents ({ bundler, spinner }) {
   })
 }
 
-function initializeDevServer ({ port }) {
+function initializeDevServer({port}) {
   const spinner = ora(`Initialize Dev Server on port ${port}`).start()
   const webpackDevMiddlewareInstance = webpackDevMiddleware(bundler, {
     hot: true,
@@ -92,10 +94,10 @@ function initializeDevServer ({ port }) {
       .start(`Building bundle with Webpack`)
   })
 
-  listenBundlerEvents({ bundler, spinner })
+  listenBundlerEvents({bundler, spinner})
 }
 
 const port = process.env.PORT || 3000
-getPortAvailable({ port })
+getPortAvailable({port})
   .then(initializeDevServer)
   .catch(err => console.error(err))

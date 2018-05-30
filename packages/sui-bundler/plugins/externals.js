@@ -17,40 +17,53 @@ const generateHashFromFile = uri =>
   new Promise((resolve, reject) => {
     md5File(
       path.resolve(process.cwd(), uri),
-      (err, hash) => hash !== undefined ? resolve(hash.slice(0, HASH_LENGTH)) : reject(err)
+      (err, hash) =>
+        hash !== undefined ? resolve(hash.slice(0, HASH_LENGTH)) : reject(err)
     )
   })
 
 const copy = (uris, outputPath) => (hash, index) => {
   const from = path.resolve(process.cwd(), uris[index])
-  const to = path.resolve(process.cwd(), `${outputPath}/${path.basename(uris[index])}`
-    .replace(/\.(js|css|json)/, match => `.${hash}${match}`))
+  const to = path.resolve(
+    process.cwd(),
+    `${outputPath}/${path.basename(uris[index])}`.replace(
+      /\.(js|css|json)/,
+      match => `.${hash}${match}`
+    )
+  )
   fs.createReadStream(from).pipe(fs.createWriteStream(to))
 }
 
 class Externals {
-  constructor (options) {
+  constructor(options) {
     this.options = Object.assign({}, {files: {}}, options)
   }
-  apply (compiler) {
+  apply(compiler) {
     const {files} = this.options
     const uris = (Object.values(files) || []).map(envVars) // TODO: Remove this when merge with the version 3
     const hashsPromises = Promise.all(uris.map(generateHashFromFile))
     const {publicPath, path: outputPath} = compiler.options.output
 
     compiler.plugin('compilation', compilation => {
-      compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, cb) => {
-        const safeAddToHeadAndBodyAtHtmlPlugin = safeAddToHeadAndBody(htmlPluginData)
-        hashsPromises.then(hashs => {
-          hashs.forEach((hash, index) =>
-            safeAddToHeadAndBodyAtHtmlPlugin(
-              `${publicPath}${path.basename(uris[index])}`
-                .replace(/\.(js|css|json)/, match => `.${hash}${match}`)
-            )
+      compilation.plugin(
+        'html-webpack-plugin-before-html-processing',
+        (htmlPluginData, cb) => {
+          const safeAddToHeadAndBodyAtHtmlPlugin = safeAddToHeadAndBody(
+            htmlPluginData
           )
-          cb(null, htmlPluginData)
-        })
-      })
+          hashsPromises.then(hashs => {
+            hashs.forEach((hash, index) =>
+              safeAddToHeadAndBodyAtHtmlPlugin(
+                `${publicPath}${path.basename(uris[index])}`.replace(
+                  /\.(js|css|json)/,
+                  match => `.${hash}${match}`
+                )
+              )
+            )
+            cb(null, htmlPluginData)
+          })
+        }
+      )
     })
 
     compiler.plugin('after-emit', (_, cb) =>
