@@ -4,13 +4,13 @@
 const program = require('commander')
 const NowClient = require('now-client')
 const getBranch = require('git-branch')
-const { getSpawnPromise, showError, showWarning } = require('@s-ui/helpers/cli')
-const { writeFile, removeFile } = require('@s-ui/helpers/file')
+const {getSpawnPromise, showError, showWarning} = require('@s-ui/helpers/cli')
+const {writeFile, removeFile} = require('@s-ui/helpers/file')
 const DEFAULT_FOLDER = './public'
 const NOW_TOKEN_OPTION = '-t $NOW_TOKEN'
 
 // Write package.json file with serve dependency for an SPA deployment
-const writePackageJson = ({ name, path, auth } = {}) => {
+const writePackageJson = ({name, path, auth} = {}) => {
   const serveCommand = ['serve', '.', '--single', auth ? '--auth' : undefined]
   const packageJson = {
     name: `@sui-deploy/${name}`,
@@ -25,7 +25,7 @@ const writePackageJson = ({ name, path, auth } = {}) => {
 }
 
 // Get args of `now` command according to params
-const getNowCommandArgs = ({ deployName, auth, buildFolder }) => {
+const getNowCommandArgs = ({deployName, auth, buildFolder}) => {
   const args = [buildFolder, '--name=' + deployName, '--npm', NOW_TOKEN_OPTION]
   if (auth) {
     const [user, password] = auth.split(':')
@@ -67,7 +67,7 @@ if (!program.now) {
 }
 
 const [deployName, buildFolder = DEFAULT_FOLDER] = program.args
-const { auth, public: publicDeploy, branch } = program
+const {auth, public: publicDeploy, branch} = program
 const now = new NowClient(process.env.NOW_TOKEN)
 const buildPackageJsonPath = buildFolder + '/package.json'
 
@@ -87,19 +87,19 @@ if (publicDeploy) {
   )
 }
 
-const executeDeploy = async ({ deployName, buildFolder, branch }) => {
+const executeDeploy = async ({deployName, buildFolder, branch}) => {
   deployName += branch ? '-' + (await getBranch()) : ''
 
   return (
     getSpawnPromise('now', ['rm', deployName, '--yes', NOW_TOKEN_OPTION])
       .catch(() => {}) // To bypass now rm error on the first deploy
       .then(() =>
-        writePackageJson({ name: deployName, path: buildPackageJsonPath, auth })
+        writePackageJson({name: deployName, path: buildPackageJsonPath, auth})
       ) // Add package.json for SPA server
       .then(() =>
         getSpawnPromise(
           'now',
-          getNowCommandArgs({ deployName, buildFolder, auth })
+          getNowCommandArgs({deployName, buildFolder, auth})
         )
       )
       .then(() => removeFile(buildPackageJsonPath)) // Remove package.json only used by now.sh
@@ -112,11 +112,11 @@ const executeDeploy = async ({ deployName, buildFolder, branch }) => {
         deployId =>
           deployId
             ? getSpawnPromise('now', [
-              'alias',
-              deployId,
-              deployName,
-              NOW_TOKEN_OPTION
-            ])
+                'alias',
+                deployId,
+                deployName,
+                NOW_TOKEN_OPTION
+              ])
             : Promise.reject(new Error('Deploy crashed for ' + deployName))
       )
       .catch(err => {
@@ -125,4 +125,4 @@ const executeDeploy = async ({ deployName, buildFolder, branch }) => {
   )
 }
 
-executeDeploy({ deployName, buildFolder, branch })
+executeDeploy({deployName, buildFolder, branch})
