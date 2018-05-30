@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "description": "Monorepo for SUI (Schibsted User Interface) packages.",
-  "keywords": ["schibsted", "monorepo", "sui"],
+  "keywords": [
+    "schibsted",
+    "monorepo",
+    "sui"
+  ],
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix",
     "co": "sui-mono commit",
@@ -16,10 +20,8 @@
     "test:client:watch": "npm run test:client -- --watch",
     "test:server": "cross-env NODE_ENV=test & sui-test server -P \"./packages/*/!(browser)/server/*.js\"",
     "test:server:watch": "npm run test:server -- --watch",
-    "wiki:pull":
-      "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
-    "wiki:push":
-      "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
+    "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
+    "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
     "commitmsg": "validate-commit-msg",
     "precommit": "sui-precommit run"
   },
@@ -43,10 +45,14 @@
     }
   },
   "eslintConfig": {
-    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
   },
   "babel": {
-    "presets": ["sui"]
+    "presets": [
+      "sui"
+    ]
   },
   "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml",
   "author": "David Almeida <davidbarna@gmail.com>",
