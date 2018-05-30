@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* add require(path) where needed ([4df4b5c](https://github.com/SUI-Components/sui/commit/4df4b5c))
+* arrange paths for windows ([1274b7c](https://github.com/SUI-Components/sui/commit/1274b7c))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-05-17)
 
