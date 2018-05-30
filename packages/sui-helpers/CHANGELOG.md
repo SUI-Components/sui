@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2018-05-30)
+
+
+### Features
+
+* don't log cli messages when output is set to 'ignore' ([60ca69d](https://github.com/SUI-Components/sui/commit/60ca69d))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2018-05-22)
 
