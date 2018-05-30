@@ -20,7 +20,7 @@ const filterOptionFlags = args => args.filter(arg => !optionFlags.includes(arg))
  * @param  {Array} args    Arguments to pass to child process
  * @return {ChildProcess}
  */
-function executeLintingCommand (binPath, args) {
+function executeLintingCommand(binPath, args) {
   const {showError, getSpawnPromise} = require('@s-ui/helpers/cli')
   const [, , ...processArgs] = filterOptionFlags(process.argv)
 
@@ -40,9 +40,9 @@ const getFileLinesAsArray = path => {
   const {existsSync, readFileSync} = require('fs')
   return existsSync(path)
     ? readFileSync(path, 'utf8')
-      .toString()
-      .split('\n')
-      .filter(Boolean)
+        .toString()
+        .split('\n')
+        .filter(Boolean)
     : []
 }
 
@@ -50,7 +50,8 @@ const getFileLinesAsArray = path => {
  * Get as array .gitignore files and filter lines that are comments
  * @returns {Array<String>}
  */
-const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
+const getGitIgnoredFiles = () =>
+  getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
 
 /**
  * Get multiple value arg
@@ -72,12 +73,12 @@ const getGitStatusFiles = async extensions => {
   return new Promise((resolve, reject) => {
     require('simple-git')().diff(
       ['--cached', '--name-only', '--diff-filter=d'], // Delete files as excluded
-      function (err, summary) {
+      function(err, summary) {
         err && reject(err)
         const files = summary
           ? summary
-            .split('\n')
-            .filter(file => extensions.includes(extname(file).substr(1)))
+              .split('\n')
+              .filter(file => extensions.includes(extname(file).substr(1)))
           : []
         resolve(files)
       }
