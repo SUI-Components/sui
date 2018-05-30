@@ -3,7 +3,7 @@ import http from 'http'
 import https from 'https'
 
 export default class NodeTracker extends Tracker {
-  constructor ({
+  constructor({
     algorithm,
     fnName,
     host,
@@ -15,7 +15,7 @@ export default class NodeTracker extends Tracker {
     super({algorithm, fnName, host, port, protocol, segmentation, env})
   }
 
-  _send ({headers, hostname, path, port} = {}) {
+  _send({headers, hostname, path, port} = {}) {
     const client = this._protocol === 'http' ? http : https
     const request = client.get({
       hostname,

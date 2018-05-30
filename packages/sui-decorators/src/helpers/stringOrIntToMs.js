@@ -1,12 +1,16 @@
 const stringOrIntToMs = ({ttl}) => {
   const RADIX = 10
 
-  if (typeof ttl === 'number') { return ttl }
+  if (typeof ttl === 'number') {
+    return ttl
+  }
 
   let [unit, amount] = ttl.split(' ')
   try {
     unit = parseInt(unit, RADIX)
-  } catch (e) { return false }
+  } catch (e) {
+    return false
+  }
 
   switch (amount) {
     case 'second':

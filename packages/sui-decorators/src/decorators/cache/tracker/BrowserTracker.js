@@ -1,7 +1,7 @@
 import Tracker from './Tracker'
 
 export default class BrowserTracker extends Tracker {
-  constructor ({
+  constructor({
     algorithm,
     fnName,
     host,
@@ -13,7 +13,7 @@ export default class BrowserTracker extends Tracker {
     super({algorithm, fnName, host, port, protocol, segmentation, env})
   }
 
-  _send ({headers, hostname, path, port} = {}) {
+  _send({headers, hostname, path, port} = {}) {
     const request = new window.XMLHttpRequest()
 
     request.open('GET', `${this._protocol}://${hostname}:${port}${path}`)
