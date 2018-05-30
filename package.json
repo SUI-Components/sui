@@ -5,7 +5,7 @@
   "description": "Monorepo for SUI (Schibsted User Interface) packages.",
   "keywords": ["schibsted", "monorepo", "sui"],
   "scripts": {
-    "phoenix": "npx rimraf node_modules && npm i && sui-mono run-parallel npx rimraf node_modules && sui-mono run-parallel npm i",
+    "phoenix": "npx @s-ui/mono phoenix",
     "co": "sui-mono commit",
     "release": "sui-mono release",
     "release:check": "sui-mono check",
