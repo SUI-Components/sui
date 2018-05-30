@@ -28,19 +28,13 @@ It lints all `js|jsx` files in your project, excluding `.eslintignore` and `.git
 
 Same options available in [eslint](https://eslint.org/docs/user-guide/command-line-interface) except one: `-c, --config`. If you try to use this option, an exception will be thrown.
 
-Then, you can do this:
 
-```sh
-$ sui-lint js --fix
-```
 
 ### Format JS files
 
 ```sh
-$ sui-lint format-js [options]
+$ sui-lint js --fix [options]
 ```
-
-It uses prettier to format your files. As prettier config may differ to linting ones, `sui-lint js --fix` is also executed.
 
 ### Lint SASS files
 
@@ -57,8 +51,8 @@ Lints all `**/src/**/*.scss` files in the project, excluding `node_modules`, `li
 
 ```sh
 $ sui-lint js --staged
+$ sui-lint js --fix --staged
 $ sui-lint sass --staged
-$ sui-lint format-js --staged
 ```
 
 Same command but applied only on staged files (obtained with `git diff --cached --name-only --diff-filter=d` command).
@@ -69,16 +63,16 @@ For integrations, prettier config is located in `@s-ui/lint/.prettierrc.js`.
 
 ```sh
 $ sui-lint js --staged --add-fixes
-$ sui-lint format-js --staged --add-fixes
+$ sui-lint js --fix --staged --add-fixes
 ```
 
 This option can only be used with `--staged`.
 
-In write mode like with `sui-lint js --fix` or `sui-lint format-js`, the `--add-fixes` option will stage the files again (`git add <file...>`)
+In fix mode like with `sui-lint js --fix`, the `--add-fixes` option will stage the files again (`git add <file...>`)
 
 It's usefull to make your code autoformat before any commit.
 
-## IDE integration:
+## IDE integration
 
 Steps to integrate sui-lint with an IDE:
 
@@ -94,7 +88,7 @@ Steps to integrate sui-lint with an IDE:
 }
 ```
 
-## Example package.json
+### Example package.json
 
 ```json
 {
@@ -110,5 +104,34 @@ Steps to integrate sui-lint with an IDE:
   },
   "eslintConfig": { "extends": ["./node_modules/@s-ui/lint/eslintrc.js"] },
   "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+}
+```
+
+### VSCode and prettier
+
+Prettier is integrated in sui-lint thanks to specific eslint rules.
+If you want VSCode to format your code exactly as `sui-lint js --fix` would do, you need specific config.+
+
+#### eslint extension
+Install [VSCode ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and set `eslint.autoFixOnSave` to true:
+
+```json
+{
+  "eslint.autoFixOnSave": true
+}
+```
+
+#### Conflict with `formatOnSave`
+
+
+
+If you have prettier enabled, or the default VSCode formatter activated with `editor.formatOnSave` to true, it may conflict with the `eslint.autoFixOnSave` option.
+
+```json
+{
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false,
+  },
 }
 ```

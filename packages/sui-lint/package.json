@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "sui-lint js"
+    "lint": "sui-lint js",
+    "eslint:print-rules": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config .",
+    "eslint:prettier-check": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config . | ./node_modules/.bin/eslint-config-prettier-check"
   },
   "keywords": [],
   "author": "",
@@ -18,15 +20,16 @@
     "babel-eslint": "8.2.2",
     "commander": "2.15.1",
     "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
     "eslint-config-standard": "11.0.0",
     "eslint-config-standard-react": "6.0.0",
     "eslint-plugin-chai-friendly": "0.4.1",
     "eslint-plugin-import": "2.10.0",
     "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-react": "7.7.0",
     "eslint-plugin-standard": "3.0.1",
-    "prettier": "1.11.1",
     "sass-lint": "1.12.1",
     "simple-git": "1.92.0"
   }
