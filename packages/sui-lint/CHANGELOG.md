@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.15.0"></a>
+# 2.15.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* add missing dep ([62296b0](https://github.com/SUI-Components/sui/commit/62296b0))
+
+
+
 <a name="2.14.0"></a>
 # 2.14.0 (2018-05-30)
 
