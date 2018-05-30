@@ -6,9 +6,9 @@ const path = require('path')
  * @param  {Array} packages
  * @return {Array}
  */
-const getPackagesPaths = (cwd) => {
+const getPackagesPaths = cwd => {
   const getPath = path.join.bind(this, cwd)
-  return (packages) => packages.map((pkg) => getPath(pkg))
+  return packages => packages.map(pkg => getPath(pkg))
 }
 
 /**
@@ -16,7 +16,7 @@ const getPackagesPaths = (cwd) => {
  * @param  {String} packagePath Absolute pathç
  * @return {Object} {} in case of error
  */
-const getPackageJson = (packagePath) => {
+const getPackageJson = packagePath => {
   try {
     return require(path.join(packagePath, 'package.json'))
   } catch (e) {
@@ -29,9 +29,12 @@ const getPackageJson = (packagePath) => {
  * @param  {String} packagePath Absolute pathç
  * @return {Array} Both prod and dev deps are returned
  */
-const getPackageDependencies = (packagePath) => {
+const getPackageDependencies = packagePath => {
   const pkg = getPackageJson(packagePath)
-  return [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.devDependencies || {})]
+  return [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.devDependencies || {})
+  ]
 }
 
 /**
@@ -40,11 +43,10 @@ const getPackageDependencies = (packagePath) => {
  * @param  {Array} packages
  * @return {Array}
  */
-const getPackagesNames = (cwd) => {
+const getPackagesNames = cwd => {
   const getPaths = getPackagesPaths(cwd)
-  return (packages) => {
-    return getPaths(packages)
-      .map((pkgPath) => getPackageJson(pkgPath).name)
+  return packages => {
+    return getPaths(packages).map(pkgPath => getPackageJson(pkgPath).name)
   }
 }
 
@@ -55,7 +57,7 @@ const getPackagesNames = (cwd) => {
  * @param  {String} name Package name
  * @return {String}
  */
-const mapNameToPath = (cwds) => (packages) => (name) => cwds[packages.indexOf(name)]
+const mapNameToPath = cwds => packages => name => cwds[packages.indexOf(name)]
 
 /**
  * Get which dependencies are included in provided path
@@ -63,7 +65,7 @@ const mapNameToPath = (cwds) => (packages) => (name) => cwds[packages.indexOf(na
  * @param  {String} pkgPath Path to browse
  * @return {Array<Array>} index[0] is a path, index[1] re found dependencies
  */
-const getDependenciesBeingUsed = (dependencies) => (pkgPath) => {
+const getDependenciesBeingUsed = dependencies => pkgPath => {
   var deps = getPackageDependencies(pkgPath)
   return deps.filter(name => dependencies.indexOf(name) !== -1)
 }
@@ -74,10 +76,9 @@ const getDependenciesBeingUsed = (dependencies) => (pkgPath) => {
  * @param  {Array<String>} dependencies NPM names of packages
  * @return {Array<Array>} index[0] is a path, index[1] re found dependencies
  */
-const getDependencyMap = (cwds) => (dependencies) => {
+const getDependencyMap = cwds => dependencies => {
   const getLocalDependencies = getDependenciesBeingUsed(dependencies)
-  return cwds
-    .map((cwd) => [cwd, getLocalDependencies(cwd)])
+  return cwds.map(cwd => [cwd, getLocalDependencies(cwd)])
 }
 
 /**
@@ -86,7 +87,7 @@ const getDependencyMap = (cwds) => (dependencies) => {
  * @param  {Array<String>} dependencies NPM names of packages
  * @return {Array<String>}
  */
-const getInternalDependencyMap = (cwds) => (dependencies) => {
+const getInternalDependencyMap = cwds => dependencies => {
   return getDependencyMap(cwds)(dependencies)
 }
 
@@ -96,7 +97,7 @@ const getInternalDependencyMap = (cwds) => (dependencies) => {
  * @param  {Array<String>} dependencies NPM names of packages
  * @return {Array<String>} NPM names of packages
  */
-const getUsedInternalDependencies = (cwds) => (dependencies) => {
+const getUsedInternalDependencies = cwds => dependencies => {
   return getInternalDependencyMap(cwds)(dependencies)
     .reduce((result, [, dependencies]) => [...result, ...dependencies], []) // Reduce to array of dependencies
     .filter((dep, idx, dependencies) => dependencies.indexOf(dep) === idx) // Remove duplicated
