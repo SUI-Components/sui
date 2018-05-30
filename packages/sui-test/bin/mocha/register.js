@@ -1,1 +1,1 @@
-require('babel-core/register')({ presets: ['sui'] })
+require('babel-core/register')({presets: ['sui']})

@@ -3,7 +3,7 @@
 
 const program = require('commander')
 const path = require('path')
-const { serialSpawn } = require('@s-ui/helpers/cli')
+const {serialSpawn} = require('@s-ui/helpers/cli')
 
 program
   .option('-W, --watch', 'Run in watch mode')
@@ -20,7 +20,7 @@ program
   })
   .parse(process.argv)
 
-const { pattern, watch } = program
+const {pattern, watch} = program
 
 serialSpawn([
   [

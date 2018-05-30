@@ -1,5 +1,5 @@
 // https://github.com/developit/karmatic/blob/master/src/index.js
-const { Server } = require('karma')
+const {Server} = require('karma')
 const configure = require('./config')
 const CWD = process.cwd()
 
@@ -25,7 +25,7 @@ const createServer = config => {
   return server
 }
 
-module.exports = async ({ watch, ci, pattern, ignorePattern }) => {
+module.exports = async ({watch, ci, pattern, ignorePattern}) => {
   if (watch) configure.singleRun = false
   if (ci) configure.browsers = ['Firefox']
   if (ignorePattern) configure.exclude = [ignorePattern]

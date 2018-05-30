@@ -5,13 +5,21 @@ require('./karma/patch')
 const program = require('commander')
 const chalk = require('chalk')
 const runner = require('./karma')
-const { cleanStack } = require('./karma/util')
+const {cleanStack} = require('./karma/util')
 
 program
   .option('-W, --watch', 'Run in watch mode')
   .option('-C, --ci', 'Run a Firefox headless for CI testing')
-  .option('-P, --pattern <pattern>', 'Path pattern to include', 'test/**/*Spec.js')
-  .option('-I, --ignore-pattern <ignorePattern>', 'Path pattern to ignore for testing', false)
+  .option(
+    '-P, --pattern <pattern>',
+    'Path pattern to include',
+    'test/**/*Spec.js'
+  )
+  .option(
+    '-I, --ignore-pattern <ignorePattern>',
+    'Path pattern to ignore for testing',
+    false
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -24,8 +32,8 @@ program
   })
   .parse(process.argv)
 
-const { watch, ci, pattern, ignorePattern } = program
-runner({ watch, ci, pattern, ignorePattern })
+const {watch, ci, pattern, ignorePattern} = program
+runner({watch, ci, pattern, ignorePattern})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
@@ -33,8 +41,7 @@ runner({ watch, ci, pattern, ignorePattern })
   .catch(err => {
     if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
       process.stderr.write(
-        chalk.red(cleanStack((err && (err.stack || err.message)) || err)) +
-          '\n'
+        chalk.red(cleanStack((err && (err.stack || err.message)) || err)) + '\n'
       )
     }
     process.exit(err.code || 1)

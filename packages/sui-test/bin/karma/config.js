@@ -41,9 +41,9 @@ if (TARGET === 'test:ci') {
   config.coverageReporter = {
     dir: `${CWD}/coverage`,
     reporters: [
-      { type: 'cobertura', subdir: '.', file: 'coverage.xml' },
-      { type: 'html', subdir: 'report-html' },
-      { type: 'text-summary' }
+      {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
+      {type: 'html', subdir: 'report-html'},
+      {type: 'text-summary'}
     ]
   }
 }

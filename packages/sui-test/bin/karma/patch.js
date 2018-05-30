@@ -1,6 +1,6 @@
 const chalk = require('chalk')
 
-let { write } = process.stdout
+let {write} = process.stdout
 process.stdout.write = msg => {
   // Strip + prettify console forwarded output:
   let matches = msg.match(/^LOG ([A-Z]+): ([\s\S]*)$/)
