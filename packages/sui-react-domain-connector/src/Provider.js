@@ -1,23 +1,23 @@
 /* eslint no-console: 0 */
 import PropTypes from 'prop-types'
 
-import React, { Component, Children } from 'react'
-import { Provider as ReduxProvider } from 'react-redux'
+import React, {Component, Children} from 'react'
+import {Provider as ReduxProvider} from 'react-redux'
 
 import createStore from './store'
 
 export default class Provider extends Component {
-  constructor (...args) {
+  constructor(...args) {
     super(...args)
 
-    const { i18n, domain, store } = this.props
+    const {i18n, domain, store} = this.props
 
     this.i18n = i18n
     this.domain = domain
     this.store = store || createStore()
   }
 
-  getChildContext () {
+  getChildContext() {
     return {
       i18n: this.i18n,
       domain: this.domain,
@@ -25,9 +25,9 @@ export default class Provider extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { i18n, domain, store } = this
-    const { i18n: nextI18n, domain: nextDomain, store: nextStore } = nextProps
+  componentWillReceiveProps(nextProps) {
+    const {i18n, domain, store} = this
+    const {i18n: nextI18n, domain: nextDomain, store: nextStore} = nextProps
 
     if (i18n !== nextI18n) {
       console.warn('<Provider> does not support changing `i18n` on the fly.')
@@ -42,7 +42,7 @@ export default class Provider extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <ReduxProvider store={this.store}>
         {Children.only(this.props.children)}

@@ -8,7 +8,7 @@ const mapConfigToProps = (...configs) => Target => {
       domain: PropTypes.object.isRequired
     }
 
-    render () {
+    render() {
       const {domain} = this.context
       const values = configs.reduce((values, config) => {
         values[`${config}Config`] = domain.get('config').get(config)

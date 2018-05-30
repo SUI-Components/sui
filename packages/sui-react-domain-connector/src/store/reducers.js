@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 
 const ui = (state = {}, action) => {
   if (action.type === 'UI') {
