@@ -1,19 +1,14 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
-import {
-  iconClose,
-  iconCode,
-  iconFullScreen,
-  iconFullScreenExit
-} from '../icons'
+import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
 
-import { tryRequireCore as tryRequire } from '../tryRequire'
-import stylesFor, { themesFor } from './fetch-styles'
+import {tryRequireCore as tryRequire} from '../tryRequire'
+import stylesFor, {themesFor} from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
 import EventsButtons from './EventsButtons'
@@ -22,7 +17,7 @@ import withContext from './HoC/withContext'
 import withProvider from './HoC/withProvider'
 import deepmerge from 'deepmerge'
 
-import { createStore } from '@s-ui/react-domain-connector'
+import {createStore} from '@s-ui/react-domain-connector'
 
 const DEFAULT_CONTEXT = 'default'
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
@@ -50,13 +45,16 @@ const pipe = (...funcs) => arg =>
   funcs.reduce((value, func) => func(value), arg)
 
 const removeDefaultContext = exports => {
-  const { [DEFAULT_CONTEXT]: toOmit, ...restOfExports } = exports
+  const {[DEFAULT_CONTEXT]: toOmit, ...restOfExports} = exports
   return restOfExports
 }
 
 export default class Demo extends Component {
-  static async bootstrapWith (demo, { category, component, style, themes }) {
-    const [exports, playground, ctxt, events, pkg] = await tryRequire({ category, component })
+  static async bootstrapWith(demo, {category, component, style, themes}) {
+    const [exports, playground, ctxt, events, pkg] = await tryRequire({
+      category,
+      component
+    })
     const context = isFunction(ctxt) ? await ctxt() : ctxt
 
     demo.setState({
@@ -66,7 +64,7 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      ctxt: context,
+      ctxt: context
     })
   }
 
@@ -90,43 +88,47 @@ export default class Demo extends Component {
     playground: undefined,
     theme: 'default',
     themes: [],
-    themeSelectedIndex: 0,
+    themeSelectedIndex: 0
   }
 
-  _loadStyles ({ category, component }) {
-    stylesFor({ category, component }).then(style => {
-      const themes = themesFor({ category, component })
-      Demo.bootstrapWith(this, { category, component, style, themes })
+  _loadStyles({category, component}) {
+    stylesFor({category, component}).then(style => {
+      const themes = themesFor({category, component})
+      Demo.bootstrapWith(this, {category, component, style, themes})
     })
   }
 
-  _checkIfPackageHasProvider ({ pkg }) {
-    return pkg &&
-    pkg.dependencies &&
-    (pkg.dependencies[DDD_REACT_REDUX] ||
-      pkg.dependencies[REACT_DOMAIN_CONNECTOR])
+  _checkIfPackageHasProvider({pkg}) {
+    return (
+      pkg &&
+      pkg.dependencies &&
+      (pkg.dependencies[DDD_REACT_REDUX] ||
+        pkg.dependencies[REACT_DOMAIN_CONNECTOR])
+    )
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this._loadStyles(this.props.params)
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this._loadStyles(nextProps.params)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.containerClassList && this.containerClassList.remove(FULLSCREEN_CLASS)
   }
 
   handleCode = () => {
-    this.setState({ isCodeOpen: !this.state.isCodeOpen })
+    this.setState({isCodeOpen: !this.state.isCodeOpen})
   }
 
   handleFullScreen = () => {
-    this.setState({ isFullScreen: !this.state.isFullScreen }, () => {
-      const { isFullScreen } = this.state
-      this.containerClassList = this.containerClassList || document.getElementsByClassName(CONTAINER_CLASS)[0].classList
+    this.setState({isFullScreen: !this.state.isFullScreen}, () => {
+      const {isFullScreen} = this.state
+      this.containerClassList =
+        this.containerClassList ||
+        document.getElementsByClassName(CONTAINER_CLASS)[0].classList
 
       isFullScreen
         ? this.containerClassList.add(FULLSCREEN_CLASS)
@@ -143,8 +145,8 @@ export default class Demo extends Component {
   }
 
   handleThemeChange = (theme, index) => {
-    const { category, component } = this.props.params
-    stylesFor({ category, component, withTheme: theme }).then(style => {
+    const {category, component} = this.props.params
+    stylesFor({category, component, withTheme: theme}).then(style => {
       this.setState({
         style,
         theme,
@@ -153,7 +155,7 @@ export default class Demo extends Component {
     })
   }
 
-  render () {
+  render() {
     let {
       ctxt,
       ctxtSelectedIndex,
@@ -166,7 +168,7 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      themeSelectedIndex,
+      themeSelectedIndex
     } = this.state
 
     const Base = exports.default
@@ -177,8 +179,8 @@ export default class Demo extends Component {
     const nonDefaultExports = removeDefaultContext(exports)
     const contextTypes = Base.contextTypes || Base.originalContextTypes
     const context = contextTypes && createContextByType(ctxt, ctxtType)
-    const { domain } = context || {}
-    const hasProvider = this._checkIfPackageHasProvider({ pkg })
+    const {domain} = context || {}
+    const hasProvider = this._checkIfPackageHasProvider({pkg})
     const store = domain && hasProvider && createStore(domain)
 
     const Enhance = pipe(
@@ -190,9 +192,9 @@ export default class Demo extends Component {
       console.error(new Error('Component.displayName must be defined.'))
 
     return (
-      <div className='sui-StudioDemo'>
+      <div className="sui-StudioDemo">
         <Style>{style}</Style>
-        <div className='sui-StudioNavBar-secondary'>
+        <div className="sui-StudioNavBar-secondary">
           <ContextButtons
             ctxt={ctxt || {}}
             selected={ctxtSelectedIndex}
@@ -206,12 +208,12 @@ export default class Demo extends Component {
           <EventsButtons events={events || {}} store={store} domain={domain} />
         </div>
 
-        <button className='sui-StudioDemo-codeButton' onClick={this.handleCode}>
+        <button className="sui-StudioDemo-codeButton" onClick={this.handleCode}>
           {isCodeOpen ? iconClose : iconCode}
         </button>
 
         <button
-          className='sui-StudioDemo-fullScreenButton'
+          className="sui-StudioDemo-fullScreenButton"
           onClick={this.handleFullScreen}
         >
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
@@ -221,7 +223,7 @@ export default class Demo extends Component {
           <CodeEditor
             isOpen={isCodeOpen}
             onChange={playground => {
-              this.setState({ playground })
+              this.setState({playground})
             }}
             playground={playground}
           />

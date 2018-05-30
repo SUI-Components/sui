@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { PureComponent } from 'react'
+import React, {PureComponent} from 'react'
 import cx from 'classnames'
 import debounce from 'just-debounce-it'
 
@@ -23,14 +23,17 @@ export default class CodeEditor extends PureComponent {
     }, DEBOUNCE_TIME)
   }
 
-  componentDidMount () {
-    this.codeMirror = CodeMirror.fromTextArea(this.textareaNode, CODE_MIRROR_OPTIONS)
+  componentDidMount() {
+    this.codeMirror = CodeMirror.fromTextArea(
+      this.textareaNode,
+      CODE_MIRROR_OPTIONS
+    )
     this.codeMirror.setValue(this.props.playground)
     this.codeMirror.on('change', this._createOnChangeDebounced())
   }
 
-  render () {
-    const { isOpen } = this.props
+  render() {
+    const {isOpen} = this.props
 
     const codeClassName = cx('sui-StudioDemo-code', {
       'sui-StudioDemo-code--open': isOpen
@@ -39,8 +42,10 @@ export default class CodeEditor extends PureComponent {
     return (
       <div className={codeClassName}>
         <textarea
-          autoComplete='off'
-          ref={ref => { this.textareaNode = ref }}
+          autoComplete="off"
+          ref={ref => {
+            this.textareaNode = ref
+          }}
         />
       </div>
     )

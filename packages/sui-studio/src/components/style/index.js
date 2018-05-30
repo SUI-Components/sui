@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Component } from 'react'
+import {Component} from 'react'
 
 const createLinkElement = () => {
   const linkElement = document.createElement('link')
@@ -16,11 +16,11 @@ export default class Style extends Component {
 
   _linkElement = createLinkElement()
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._linkElement.disabled = true
   }
 
-  render () {
+  render() {
     // https://github.com/webpack-contrib/style-loader/blob/master/lib/addStyles.js
     const blob = new window.Blob([this.props.children], {type: 'text/css'})
     const oldSrc = this._linkElement.href

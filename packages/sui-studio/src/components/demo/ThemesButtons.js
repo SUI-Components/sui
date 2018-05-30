@@ -4,20 +4,20 @@ import Tabs from './Tabs'
 import Tab from './Tab'
 
 const ThemesButtons = ({themes, onThemeChange, selected}) => {
-  if (themes.length === 0) { return null }
+  if (themes.length === 0) {
+    return null
+  }
 
   return (
-    <Tabs title='Theme'>
-      {
-        ['default', ...themes].map((theme, index) => (
-          <Tab
-            handleClick={(evt) => onThemeChange(theme, index)}
-            key={`${theme}${index}`}
-            isActive={index === selected}
-            literal={theme}
-          />
-        ))
-      }
+    <Tabs title="Theme">
+      {['default', ...themes].map((theme, index) => (
+        <Tab
+          handleClick={evt => onThemeChange(theme, index)}
+          key={`${theme}${index}`}
+          isActive={index === selected}
+          literal={theme}
+        />
+      ))}
     </Tabs>
   )
 }
