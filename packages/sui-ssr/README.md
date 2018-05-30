@@ -62,7 +62,7 @@ Maybe you want to use a config like this:
   "profile": "[YOUR AWS PROFILE]",
   "hooks": {
     "prebuild": "rm ./node || true && wget https://s3.eu-west-3.amazonaws.com/nodejs-8.9.4/node && chmod a+x ./node",
-    "clean": "rm -Rf ./{server,public,node}"
+    "clean": "npx rimraf ./{server,public,node}"
   },
   "stages": {
     "development": {

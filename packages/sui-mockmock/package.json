@@ -4,7 +4,7 @@
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "rm -Rf lib && babel ./src -d lib --presets sui",
+    "lib": "npx rimraf lib && babel ./src -d lib --presets sui",
     "prepublish": "npm run lib",
     "test": "npm run test:client && npm run test:server",
     "test:client": "sui-test browser",
@@ -22,7 +22,7 @@
     "sinon": "1.17.6"
   },
   "devDependencies": {
-    "@s-ui/test": "1.2.0",
+    "@s-ui/test": "1",
     "axios": "0.18.0",
     "babel-cli": "6.18.0",
     "babel-preset-sui": "1"

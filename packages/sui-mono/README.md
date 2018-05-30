@@ -22,7 +22,7 @@ You can run a single command on each package of the monorepo, **in series**
 
 ```
 $ sui-mono run <command>
-$ sui-mono run rm -Rf node_modules
+$ sui-mono run npx rimraf node_modules
 $ sui-mono run npm install
 ```
 
@@ -30,7 +30,7 @@ You can also run them **in parallel**
 
 ```
 $ sui-mono run-parallel <command>
-$ sui-mono run-parallel rm -Rf node_modules
+$ sui-mono run-parallel npx rimraf node_modules
 $ sui-mono run-parallel npm install
 ```
 
@@ -42,7 +42,7 @@ To reset your project and all its contained packages.
 sui-mono phoenix
 ```
 
-Equivalent to 'rm -Rf node_modules && npm i' but works on any environment and
+Equivalent to 'npx rimraf node_modules && npm i' but works on any environment and
 executes it concurrently on each package (and/or on your project root folder).
 
 ### Link

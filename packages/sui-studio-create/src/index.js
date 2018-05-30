@@ -79,7 +79,7 @@ Promise.all([
   "description": "",
   "private": true,
   "scripts": {
-    "phoenix": "rm -Rf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
+    "phoenix": "npx rimraf node_modules && npm i && sui-studio clean-modules && sui-studio run-all npm i",
     "deploy": "sui-deploy ${PROJECT_NAME} --now",
     "co": "sui-studio commit",
     "lint:js": "sui-lint js",

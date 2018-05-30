@@ -3,7 +3,7 @@
   "version": "1.5.0",
   "description": "Set of HoC useful for react",
   "scripts": {
-    "lib": "rm -Rf ./lib && mkdir -p ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui --out-dir ./lib  ./src",
     "prepublish": "npm run lib"
   },
   "keywords": [],

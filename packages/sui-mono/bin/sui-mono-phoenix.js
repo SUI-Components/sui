@@ -13,7 +13,7 @@ program
   Description:
     Removes node_modules folder and reinstalls dependencies
     in all packages.
-    Equivalent to 'rm -Rf node_modules && npm i' but works on any environment and
+    Equivalent to 'npx rimraf node_modules && npm i' but works on any environment and
     executes it concurrently on each package (and/or on your project root folder).
 
   Examples:
