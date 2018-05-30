@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.4.0"></a>
+# 5.4.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* add require(path) where needed ([295bd9b](https://github.com/SUI-Components/sui/commit/295bd9b))
+* make paths to work in windows ([b6bd8fe](https://github.com/SUI-Components/sui/commit/b6bd8fe))
+
+
+
 <a name="5.3.0"></a>
 # 5.3.0 (2018-05-03)
 
