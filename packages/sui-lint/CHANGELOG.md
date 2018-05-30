@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.14.0"></a>
+# 2.14.0 (2018-05-30)
+
+
+### Bug Fixes
+
+* remove rules conflicting with prettier ([07997dc](https://github.com/SUI-Components/sui/commit/07997dc))
+
+
+### Features
+
+* change rules to comply with prettier ([61dda2f](https://github.com/SUI-Components/sui/commit/61dda2f))
+* change rules to comply with prettier ([0f3c014](https://github.com/SUI-Components/sui/commit/0f3c014))
+* remove useless format-js command ([2b7ac68](https://github.com/SUI-Components/sui/commit/2b7ac68))
+
+
+### Performance Improvements
+
+* remove unused dep prettier ([17db9be](https://github.com/SUI-Components/sui/commit/17db9be))
+
+
+
 <a name="2.13.0"></a>
 # 2.13.0 (2018-04-18)
 
