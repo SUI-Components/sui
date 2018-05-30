@@ -5,8 +5,11 @@ const ncp = require('copy-paste')
 const {showError} = require('@s-ui/helpers/cli')
 
 const appFactory = require('../development')
-const config = require(`${process.cwd()}/package.json`)['config']['sui-widget-embedder'] ||
-               showError(`Missing sui-widget-embedder config at ${process.cwd()}/package.json`)
+const config =
+  require(`${process.cwd()}/package.json`)['config']['sui-widget-embedder'] ||
+  showError(
+    `Missing sui-widget-embedder config at ${process.cwd()}/package.json`
+  )
 
 const PORT = process.env.PORT || config.devPort || 3000
 

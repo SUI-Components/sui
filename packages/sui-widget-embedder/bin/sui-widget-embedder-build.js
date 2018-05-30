@@ -5,14 +5,14 @@ const rimraf = require('rimraf')
 const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
 const flatten = require('just-flatten-it')
-const { resolve } = require('path')
+const {resolve} = require('path')
 const {
   readdirSync,
   statSync,
   createReadStream,
   createWriteStream
 } = require('fs')
-const { showError } = require('@s-ui/helpers/cli')
+const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
 const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
@@ -23,8 +23,14 @@ const config = pkg['config']['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
-  .option('-R --remoteCdn <url>', 'Remote url where the downloader will be placed')
-  .option('-D --serviceWorkerCdn <url>', 'Remote url where the browser will register the sw')
+  .option(
+    '-R --remoteCdn <url>',
+    'Remote url where the downloader will be placed'
+  )
+  .option(
+    '-D --serviceWorkerCdn <url>',
+    'Remote url where the browser will register the sw'
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -34,8 +40,12 @@ program
     console.log('')
     console.log('    $ sui-widget-embedder build')
     console.log('')
-    console.log(' You can even choose where should the downloader going to get the files:')
-    console.log('    $ sui-widget-embedder build -remoteCdn http://mysourcedomain.com')
+    console.log(
+      ' You can even choose where should the downloader going to get the files:'
+    )
+    console.log(
+      '    $ sui-widget-embedder build -remoteCdn http://mysourcedomain.com'
+    )
     console.log('')
   })
   .parse(process.argv)
@@ -48,8 +58,8 @@ if (program.clean) {
   rimraf.sync(PUBLIC_PATH)
 }
 
-const build = ({ page, remoteCdn }) => {
-  const compiler = compilerFactory({ page, remoteCdn })
+const build = ({page, remoteCdn}) => {
+  const compiler = compilerFactory({page, remoteCdn})
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
       if (error) {
@@ -73,11 +83,11 @@ const build = ({ page, remoteCdn }) => {
   })
 }
 
-const pagesFor = ({ path }) =>
+const pagesFor = ({path}) =>
   readdirSync(path).filter(file => statSync(resolve(path, file)).isDirectory())
 
 const manifests = () =>
-  pagesFor({ path: PUBLIC_PATH }).reduce((acc, page) => {
+  pagesFor({path: PUBLIC_PATH}).reduce((acc, page) => {
     acc[page] = require(resolve(
       process.cwd(),
       'public',
@@ -88,7 +98,7 @@ const manifests = () =>
   }, {})
 
 const pathnamesRegExp = () =>
-  pagesFor({ path: WIDGETS_PATH }).reduce((acc, page) => {
+  pagesFor({path: WIDGETS_PATH}).reduce((acc, page) => {
     acc[page] = require(resolve(
       process.cwd(),
       'widgets',
@@ -112,7 +122,7 @@ const createDownloader = () =>
           'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
         })
       )
-      .pipe(minifyStream({ sourceMap: false }))
+      .pipe(minifyStream({sourceMap: false}))
       .pipe(
         createWriteStream(resolve(process.cwd(), 'public', 'downloader.js'))
           .on('finish', () => {
@@ -149,7 +159,7 @@ const createSW = () =>
           'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
         })
       )
-      .pipe(minifyStream({ sourceMap: false }))
+      .pipe(minifyStream({sourceMap: false}))
       .pipe(
         createWriteStream(resolve(process.cwd(), 'public', 'sw.js')).on(
           'finish',
@@ -169,7 +179,9 @@ const createSW = () =>
       .on('error', rej)
   })
 
-Promise.all(pagesFor({ path: WIDGETS_PATH }).map(page => build({ page, remoteCdn })))
+Promise.all(
+  pagesFor({path: WIDGETS_PATH}).map(page => build({page, remoteCdn}))
+)
   .then(createDownloader)
   .then(createSW)
   .catch(showError)

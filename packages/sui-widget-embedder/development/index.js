@@ -10,13 +10,18 @@ module.exports = ({page, pathnameStatic, config}) => {
   app.use(webpackMiddleware(compiler, {serverSideRender: true}))
   app.use(webpackHotMiddleware(compiler, {path: '/__ping'}))
 
-  pathnameStatic ? app.get('/static', (req, res) => {
-    const request = require('request')
-    const replace = require('stream-replace')
-    request({uri: `${config.target}${pathnameStatic}`, headers: config.headers})
+  pathnameStatic
+    ? app.get('/static', (req, res) => {
+        const request = require('request')
+        const replace = require('stream-replace')
+        request({
+          uri: `${config.target}${pathnameStatic}`,
+          headers: config.headers
+        })
       .pipe(replace(/\<\/body\>/, '<script async src="/bundle.js"></script></body>')) // eslint-disable-line
-      .pipe(res)
-  }) : app.use(require('./harmon'))
+          .pipe(res)
+      })
+    : app.use(require('./harmon'))
 
   app.use((req, res) => {
     proxy.web(req, res, {target: config.target})

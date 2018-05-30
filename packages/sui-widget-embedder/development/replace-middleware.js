@@ -7,7 +7,7 @@ const GZIP_ENCODING = /gzip/i
 /**
  * Where the magic happen!
  * */
-const replace = (buff) => {
+const replace = buff => {
   const tag = 'body'
   const snippet = `
     <script async src="/bundle.js"></script>
@@ -23,8 +23,12 @@ module.exports = (req, res, next) => {
   const _writeHead = res.writeHead
 
   res.writeHead = (code, headers) => {
-    res.isGziped = !!(res.getHeader('content-encoding') || '').match(GZIP_ENCODING)
-    res.isHtml = !!(res.getHeader('content-type') || '').match(CONTENT_TYPE_HTML)
+    res.isGziped = !!(res.getHeader('content-encoding') || '').match(
+      GZIP_ENCODING
+    )
+    res.isHtml = !!(res.getHeader('content-type') || '').match(
+      CONTENT_TYPE_HTML
+    )
 
     res.removeHeader('Content-Length')
     headers && delete headers['content-length']
@@ -35,13 +39,15 @@ module.exports = (req, res, next) => {
     _writeHead.call(res, code, headers)
   }
 
-  res.write = (buff) => {
-    !res.isHtml ? _write.call(res, buff)
-      : res.isGziped ? gunzip.write(buff)
+  res.write = buff => {
+    !res.isHtml
+      ? _write.call(res, buff)
+      : res.isGziped
+        ? gunzip.write(buff)
         : _write.call(res, replace(buff))
   }
 
-  res.end = (buff) => {
+  res.end = buff => {
     res.isGziped ? gunzip.end(buff) : _end.call(res, buff)
   }
 
