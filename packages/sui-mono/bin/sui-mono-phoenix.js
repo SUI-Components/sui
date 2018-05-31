@@ -37,8 +37,6 @@ const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) {
     return
   }
-
-  const withChunks = !!chunk
   let taskList = config
     .getScopesPaths()
     .map(cwd => [
@@ -52,6 +50,7 @@ const executePhoenixOnPackages = () => {
       task: () => serialSpawn(commands)
     }))
 
+  const withChunks = !!chunk && taskList.length > chunk
   if (withChunks) {
     taskList = splitArray(taskList, chunk).map((group, i) => ({
       title: `#${i + 1} group of ${group.length} packages...`,
