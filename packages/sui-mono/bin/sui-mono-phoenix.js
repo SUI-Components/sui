@@ -5,9 +5,16 @@ const program = require('commander')
 const {basename} = require('path')
 const config = require('../src/config')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
+const {splitArray} = require('@s-ui/helpers/array')
 const Listr = require('listr')
 
+const DEFAULT_CHUNK = 20
+
 program
+  .option(
+    '-c, --chunk <number>',
+    `Execute by chunks of N packages (defaults to ${DEFAULT_CHUNK})`
+  )
   .on('--help', () => {
     console.log(`
   Description:
@@ -23,12 +30,14 @@ program
 
 const RIMRAF_CMD = [require.resolve('rimraf/bin'), ['node_modules']]
 const NPM_CMD = ['npm', ['install']]
+let {chunk = DEFAULT_CHUNK} = program
+chunk = Number(chunk)
 
 const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) {
     return
   }
-  const taskList = config
+  let taskList = config
     .getScopesPaths()
     .map(cwd => [
       [...RIMRAF_CMD, {cwd, stdio: 'ignore'}],
@@ -38,14 +47,18 @@ const executePhoenixOnPackages = () => {
       title:
         'rimraf node_modules && npm i ' +
         ('@' + basename(commands[0][2].cwd)).grey,
-      task: () =>
-        new Promise(resolve => {
-          serialSpawn(commands)
-            .then(resolve)
-            .catch(error => console.log(error))
-        })
+      task: () => serialSpawn(commands)
     }))
-  const tasks = new Listr(taskList, {concurrent: true})
+
+  const withChunks = !!chunk && taskList.length > chunk
+  if (withChunks) {
+    taskList = splitArray(taskList, chunk).map((group, i) => ({
+      title: `#${i + 1} group of ${group.length} packages...`,
+      task: () => new Listr(group, {concurrent: true})
+    }))
+  }
+
+  const tasks = new Listr(taskList, {concurrent: !withChunks})
   return tasks.run()
 }
 
