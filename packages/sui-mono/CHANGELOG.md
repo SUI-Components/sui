@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.32.0"></a>
+# 1.32.0 (2018-05-31)
+
+
+### Bug Fixes
+
+* don't execute chunks when not needed ([1348e44](https://github.com/SUI-Components/sui/commit/1348e44))
+
+
+### Features
+
+* phoenix execution by chunks ([7a8761e](https://github.com/SUI-Components/sui/commit/7a8761e))
+
+
+
 <a name="1.31.0"></a>
 # 1.31.0 (2018-05-30)
 
