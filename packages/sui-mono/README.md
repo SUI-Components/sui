@@ -45,6 +45,20 @@ sui-mono phoenix
 Equivalent to 'npx rimraf node_modules && npm i' but works on any environment and
 executes it concurrently on each package (and/or on your project root folder).
 
+By default commands will be executed on chunks of 20 packages, but you can change it with `-c, --chunk` option:
+
+```sh
+sui-mono phoenix -c 5
+```
+
+So, if executing many commands as the same time in your machine is too heavy, you can adjust it.
+You can also disable the chunks with 0 value and always execute all commands in parallel:
+
+```sh
+sui-mono phoenix -c 0
+```
+
+
 ### Link
 
 Is you want to link all packages between each other, to ease development:
