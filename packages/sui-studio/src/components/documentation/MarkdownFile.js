@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Markdown from './Markdown'
 import {tryRequireMarkdown} from '../tryRequire'
 
@@ -13,15 +13,15 @@ export default class MarkdownFile extends Component {
     content: false
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     const {file, params} = this.props
-    const content = await tryRequireMarkdown({ ...params, file })
+    const content = await tryRequireMarkdown({...params, file})
     this.setState({content})
   }
 
-  render () {
-    const { content } = this.state
-    return (content && <Markdown content={content} />)
+  render() {
+    const {content} = this.state
+    return content && <Markdown content={content} />
   }
 }
 

@@ -10,13 +10,13 @@ const MUTATION_OBSERVER_CONFIG = {
   attributes: false,
   characterData: false,
   childList: true,
-  subtree: true,
+  subtree: true
 }
 
-function onIdle (cb) {
+function onIdle(cb) {
   let timerId
   if (hasIdle) {
-    timerId = window.requestIdleCallback(function (idleDeadline) {
+    timerId = window.requestIdleCallback(function(idleDeadline) {
       // reschedule if there's less than 1ms remaining on the tick
       // and a timer did not expire
       return idleDeadline.timeRemaining() <= 1 && !idleDeadline.didTimeout
@@ -32,8 +32,12 @@ function onIdle (cb) {
   }
 }
 
-export function tagHTML ({tags}) {
-  const fireTagging = debounce(() => onIdle(searchTagsToTrackOnDocument), 500, true)
+export function tagHTML({tags}) {
+  const fireTagging = debounce(
+    () => onIdle(searchTagsToTrackOnDocument),
+    500,
+    true
+  )
 
   // check if the DOMContentLoaded has been already fired
   if (/comp|inter|loaded/.test(document.readyState)) {
@@ -43,16 +47,16 @@ export function tagHTML ({tags}) {
     document.addEventListener('DOMContentLoaded', startTagger, false)
   }
 
-  function startTagger () {
+  function startTagger() {
     fireTagging()
     return !window.MutationObserver
       ? useManualIntervalTracking()
       : useMutationObserverTracking()
   }
 
-  function useMutationObserverTracking () {
+  function useMutationObserverTracking() {
     // create an observer instance
-    const observer = new window.MutationObserver(function (mutations) {
+    const observer = new window.MutationObserver(function(mutations) {
       const numberOfMutations = mutations.length
       for (var i = 0; i < numberOfMutations; i++) {
         var mutation = mutations[i]
@@ -68,11 +72,11 @@ export function tagHTML ({tags}) {
     observer.observe(document.body, MUTATION_OBSERVER_CONFIG)
   }
 
-  function useManualIntervalTracking () {
+  function useManualIntervalTracking() {
     let start = Date.now()
     let finish = Date.now()
 
-    function step () {
+    function step() {
       if (finish - start > MANUAL_INTERVAL) {
         fireTagging()
         start = finish
@@ -84,7 +88,7 @@ export function tagHTML ({tags}) {
     onIdle(step)
   }
 
-  function addTrackingTagsToElement (el, trackingTags) {
+  function addTrackingTagsToElement(el, trackingTags) {
     for (var tag in trackingTags) {
       const attrName = PREFIX_TAG + tag
       const trackingTagValue = trackingTags[tag]
@@ -96,9 +100,11 @@ export function tagHTML ({tags}) {
     }
   }
 
-  function searchTagsToTrackOnDocument () {
+  function searchTagsToTrackOnDocument() {
     for (var key in tags) {
-      const arrayDOMElements = Array.prototype.slice.call(document.querySelectorAll(key))
+      const arrayDOMElements = Array.prototype.slice.call(
+        document.querySelectorAll(key)
+      )
       for (var i = 0; i < arrayDOMElements.length; i++) {
         addTrackingTagsToElement(arrayDOMElements[i], tags[key])
       }

@@ -3,19 +3,19 @@ import {Entity, ValueObject} from '../src'
 import {expect} from 'chai'
 
 class TestValueObject extends ValueObject {
-  testMethodVO () {
+  testMethodVO() {
     return this._property1 + ' ' + this._property2
   }
 }
 
 class TestEntity extends Entity {
-  testMethodEntity () {
+  testMethodEntity() {
     return this._property1 + ' ' + this._property2
   }
 }
 
 class TestEntityRetroCompatibilityWithSuperAndProps extends Entity {
-  constructor (properties) {
+  constructor(properties) {
     super(properties)
     this._property12 = properties.property12
     this._property13 = properties.property13
@@ -23,7 +23,7 @@ class TestEntityRetroCompatibilityWithSuperAndProps extends Entity {
 }
 
 class TestEntityRetroCompatibilityWithEmptySuper extends Entity {
-  constructor (properties) {
+  constructor(properties) {
     super()
     this._property12 = properties.property12
     this._property13 = properties.property13

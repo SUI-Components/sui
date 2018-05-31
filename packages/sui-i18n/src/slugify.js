@@ -2,12 +2,12 @@
 const from = 'ąàáäâãåæăćčĉęèéëêĝĥìíïîĵłľńňòóöőôõðøśșşšŝťțţŭùúüűûñÿýçżźž'
 const to = 'aaaaaaaaaccceeeeeghiiiijllnnoooooooossssstttuuuuuunyyczzz'.split('')
 
-function replaceCharIfNeeded (char) {
+function replaceCharIfNeeded(char) {
   const index = from.indexOf(char)
   return index === -1 ? char : to[index]
 }
 
-export function slugify (str) {
+export function slugify(str) {
   return str
     .toLowerCase()
     .replace(/.{1}/g, replaceCharIfNeeded)

@@ -29,5 +29,5 @@ if (program.clean) {
 }
 
 ;(async () => {
-  await archive({ outputZipPath: OUTPUT_ZIP_PATH, pkg })
+  await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg})
 })()

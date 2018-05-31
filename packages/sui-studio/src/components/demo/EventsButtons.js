@@ -17,26 +17,34 @@ const dispatchEvent = ({store, domain, useCase, params}) => {
 }
 
 const EventsButtons = ({events, store, domain}) => {
-  if (!store && !domain) { return null }
+  if (!store && !domain) {
+    return null
+  }
 
   return (
-    <Tabs title='Events'>
-      {
-        Object.keys(events).map(
-          useCase => Object.keys(events[useCase]).map(
-            event => (
-              <Tab
-                handleClick={evt => {
-                  store ? dispatchEvent({store, domain, useCase, params: events[useCase][event]})
-                    : executeUseCase({domain, useCase, params: events[useCase][event]})
-                }}
-                key={`${useCase}#${event}`}
-                literal={event}
-              />
-            )
-          )
-        )
-      }
+    <Tabs title="Events">
+      {Object.keys(events).map(useCase =>
+        Object.keys(events[useCase]).map(event => (
+          <Tab
+            handleClick={evt => {
+              store
+                ? dispatchEvent({
+                    store,
+                    domain,
+                    useCase,
+                    params: events[useCase][event]
+                  })
+                : executeUseCase({
+                    domain,
+                    useCase,
+                    params: events[useCase][event]
+                  })
+            }}
+            key={`${useCase}#${event}`}
+            literal={event}
+          />
+        ))
+      )}
     </Tabs>
   )
 }

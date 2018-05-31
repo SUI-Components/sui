@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { Provider } from '@s-ui/react-domain-connector'
+import {Provider} from '@s-ui/react-domain-connector'
 
 export default class Widget extends Component {
   static propTypes = {
@@ -12,8 +12,8 @@ export default class Widget extends Component {
     domain: PropTypes.object
   }
 
-  componentDidMount () {
-    const { node: selector, children, i18n, domain } = this.props
+  componentDidMount() {
+    const {node: selector, children, i18n, domain} = this.props
     const node = document.querySelector(selector)
 
     if (!node) {
@@ -28,7 +28,7 @@ export default class Widget extends Component {
     )
   }
 
-  render () {
+  render() {
     return null
   }
 }

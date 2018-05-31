@@ -7,7 +7,7 @@ const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
  * Get the list of modified files by the user
  * @param {boolean} checkIfStaged Determine if we should change if the modified file is staged
  */
-function getDiffedFiles ({ checkIfStaged = false } = {}) {
+function getDiffedFiles({checkIfStaged = false} = {}) {
   return new Promise((resolve, reject) => {
     let command = 'git diff --name-only'
     if (checkIfStaged) command += ' --cached'
@@ -26,8 +26,8 @@ function getDiffedFiles ({ checkIfStaged = false } = {}) {
 /**
  * Start the commiting process, doing some verifications to avoid further problems
  */
-async function initCommit () {
-  const { hasFiles: hasStagedFiles } = await getDiffedFiles({ checkIfStaged: true })
+async function initCommit() {
+  const {hasFiles: hasStagedFiles} = await getDiffedFiles({checkIfStaged: true})
   if (hasStagedFiles === false) {
     console.log('No files added to staging! Did you forget to run git add?\n')
     const modified = await getDiffedFiles()

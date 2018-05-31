@@ -3,7 +3,7 @@
  * code routines and make it transparent to our consumer.
  */
 export default class AnemicModel {
-  constructor (properties = {}) {
+  constructor(properties = {}) {
     Object.keys(properties).forEach(key => (this[`_${key}`] = properties[key]))
     Object.defineProperty(this, '_properties', {
       value: properties,
@@ -24,7 +24,7 @@ export default class AnemicModel {
    *
    * @returns {*}
    */
-  toJSON () {
+  toJSON() {
     return Object.keys(this).reduce((resultObject, key) => {
       const replacedKey = key.replace('_', '')
 
@@ -33,7 +33,10 @@ export default class AnemicModel {
       }
 
       if (this._properties[replacedKey] instanceof AnemicModel) {
-        return {...resultObject, [replacedKey]: this._properties[replacedKey].toJSON()}
+        return {
+          ...resultObject,
+          [replacedKey]: this._properties[replacedKey].toJSON()
+        }
       }
 
       if (Array.isArray(this._properties[replacedKey])) {

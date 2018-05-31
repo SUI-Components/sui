@@ -2,19 +2,19 @@
 import {warn} from '../console'
 
 export default class DefaultAdapter {
-  get instance () {
+  get instance() {
     warn()
   }
 
-  set locale (locale) {
+  set locale(locale) {
     // warn('DefaultAdapter#setLocale', locale);
   }
 
-  set translations (translations) {
+  set translations(translations) {
     // warn('DefaultAdapter#setTranslations', translations);
   }
 
-  translate (key, values) {
+  translate(key, values) {
     warn(undefined, key, values)
     return key
   }

@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { getStudioLogo } from '../utils'
+import React, {Component} from 'react'
+import {getStudioLogo} from '../utils'
 
 export default class Logo extends Component {
-  shouldComponentUpdate () {
+  shouldComponentUpdate() {
     return false
   }
 
-  render () {
+  render() {
     return (
       <picture
-        className='sui-Studio-logo'
-        dangerouslySetInnerHTML={{ __html: getStudioLogo() }}
+        className="sui-Studio-logo"
+        dangerouslySetInnerHTML={{__html: getStudioLogo()}}
       />
     )
   }

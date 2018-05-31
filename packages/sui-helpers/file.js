@@ -1,6 +1,6 @@
 const fse = require('fs-extra')
 const colors = require('colors')
-const { showError } = require('./cli')
+const {showError} = require('./cli')
 
 /**
  * Write a file with given content
@@ -37,4 +37,4 @@ const removeFile = path => {
     })
 }
 
-module.exports = { writeFile, removeFile }
+module.exports = {writeFile, removeFile}

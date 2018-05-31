@@ -1,27 +1,27 @@
 import Polyglot from 'node-polyglot'
 
 export default class PolyglotAdapter {
-  constructor () {
+  constructor() {
     this.polyglot = new Polyglot()
   }
 
-  get instance () {
+  get instance() {
     return this.polyglot
   }
 
-  set locale (locale) {
+  set locale(locale) {
     return this.polyglot.locale(locale)
   }
 
-  get locale () {
+  get locale() {
     return this.polyglot.locale()
   }
 
-  set translations (translations) {
+  set translations(translations) {
     this.polyglot.extend(translations)
   }
 
-  translate (key, values) {
+  translate(key, values) {
     return this.polyglot.t(key, values)
   }
 }

@@ -8,13 +8,13 @@ const path = require('path')
  *
  * @param {Object} [options={}] key = loader name, value = loader options
  */
-function LoaderUniversalOptionsPlugin (options = {}) {
+function LoaderUniversalOptionsPlugin(options = {}) {
   this.loaderOptions = options
 }
 
-LoaderUniversalOptionsPlugin.prototype.apply = function (compiler, compilation) {
+LoaderUniversalOptionsPlugin.prototype.apply = function(compiler, compilation) {
   var options = this.loaderOptions
-  compiler.plugin('compilation', (compilation) => {
+  compiler.plugin('compilation', compilation => {
     compilation.plugin('normal-module-loader', (loaderContext, module) => {
       for (let idx in module.loaders) {
         let obj = module.loaders[idx]

@@ -30,15 +30,25 @@ program
 const BASE_DIR = process.cwd()
 const [category, component] = program.args
 
-if (!component) { showError('component must be defined') }
-if (!category) { showError('category must be defined') }
+if (!component) {
+  showError('component must be defined')
+}
+if (!category) {
+  showError('category must be defined')
+}
 
 const wordsOnlyRegex = /^[\w]+$/
 
-if (!wordsOnlyRegex.test(component)) { showError('component name must contain letters or underscore only') }
-if (!wordsOnlyRegex.test(category)) { showError('category name must contain letters or underscore only') }
+if (!wordsOnlyRegex.test(component)) {
+  showError('component name must contain letters or underscore only')
+}
+if (!wordsOnlyRegex.test(category)) {
+  showError('category name must contain letters or underscore only')
+}
 
-const componentInPascal = pascalCase(`${category.replace(/s$/, '')} ${component}`)
+const componentInPascal = pascalCase(
+  `${category.replace(/s$/, '')} ${component}`
+)
 
 const COMPONENT_DIR = `/components/${category}/${component}/`
 const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
@@ -68,19 +78,20 @@ if (fs.existsSync(COMPONENT_PATH)) {
 }
 
 if (!repository.url || !homepage) {
-  console.log(`Missing repository and/or homepage field in monorepo package.json
-Component is created without those fields.`.yellow)
+  console.log(
+    `Missing repository and/or homepage field in monorepo package.json
+Component is created without those fields.`.yellow
+  )
 }
 
 Promise.all([
   writeFile(
     COMPONENT_PACKAGE_GITIGNORE_FILE,
     `lib
-node_modules`),
+node_modules`
+  ),
 
-  writeFile(
-    COMPONENT_PACKAGE_NPMIGNORE_FILE,
-    `src`),
+  writeFile(COMPONENT_PACKAGE_NPMIGNORE_FILE, `src`),
 
   writeFile(
     COMPONENT_PACKAGE_JSON_FILE,
@@ -96,18 +107,20 @@ node_modules`),
   },
   "dependencies": {
     "@s-ui/component-dependencies": "1"
-  },${repository.url
-    ? `
+  },${
+    repository.url
+      ? `
   "repository": {
     "type": "${repository.type}",
     "url": "${repository.url}"
   },`
-    : ''
-}${homepage
-  ? `
+      : ''
+  }${
+      homepage
+        ? `
     "homepage": "${homepage.replace('/master', `/master${COMPONENT_DIR}`)}",`
-  : ''
-}
+        : ''
+    }
   "keywords": [],
   "author": "",
   "license": "MIT"
@@ -145,7 +158,8 @@ export default ${componentInPascal}`
 
 .${prefix}-${componentInPascal} {
   // Do your magic
-}`),
+}`
+  ),
 
   writeFile(
     COMPONENT_README_FILE,
@@ -171,38 +185,39 @@ return (<${componentInPascal} />)
 \`\`\`
 
 
-> **Find full description and more examples in the [demo page](#).**`),
-
-  writeFile(
-    COMPONENT_PLAYGROUND_FILE,
-    `return (<${componentInPascal} />)`
+> **Find full description and more examples in the [demo page](#).**`
   ),
 
-  router && writeFile(
-    COMPONENT_ROUTES_FILE,
-    `module.exports = {
+  writeFile(COMPONENT_PLAYGROUND_FILE, `return (<${componentInPascal} />)`),
+
+  router &&
+    writeFile(
+      COMPONENT_ROUTES_FILE,
+      `module.exports = {
   pattern: '/:lang',
   'default': '/es',
   'en': '/en',
   'de': '/de'
-}`),
+}`
+    ),
 
-  context && writeFile(
-    COMPONENT_CONTEXT_FILE,
-    `module.exports = {
+  context &&
+    writeFile(
+      COMPONENT_CONTEXT_FILE,
+      `module.exports = {
   'default': {
     i18n: {t (s) { return s.split('').reverse().join('') }}
   }
-}`)
-])
-  .then(() => {
-    console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
-    const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
+}`
+    )
+]).then(() => {
+  console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
+  const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
 
-    install.stdout.on('data',
-      data => console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
-    )
-    install.stderr.on('data',
-      data => console.log(colors.red(`[${packageName}]: ${data.toString()}`))
-    )
-  })
+  install.stdout.on('data', data =>
+    console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
+  )
+  install.stderr.on('data', data =>
+    console.log(colors.red(`[${packageName}]: ${data.toString()}`))
+  )
+})

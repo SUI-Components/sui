@@ -1,6 +1,6 @@
 import bowser from 'bowser'
 
-export const stats = (userAgent) => {
+export const stats = userAgent => {
   const ua = bowser._detect(userAgent)
   return {
     isMobile: !!ua.mobile,

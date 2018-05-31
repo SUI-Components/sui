@@ -9,12 +9,14 @@ import NodeTracker from '../../src/decorators/cache/tracker/NodeTracker'
 describe('Cache', () => {
   it('should ignore the cache in Node by default', () => {
     class Buz {
-      constructor () {
+      constructor() {
         this.rnd = () => Math.random()
       }
 
       @cache()
-      syncRndNumber (num) { return this.rnd() }
+      syncRndNumber(num) {
+        return this.rnd()
+      }
     }
     const buz = new Buz()
     expect(buz.syncRndNumber()).to.be.not.eql(buz.syncRndNumber())
@@ -22,28 +24,33 @@ describe('Cache', () => {
 
   it('should have a cache if the force the cache in node', () => {
     class Buz {
-      constructor () {
+      constructor() {
         this.rnd = () => Math.random()
       }
 
       @cache({server: true})
-      syncRndNumber (num) { return this.rnd() }
+      syncRndNumber(num) {
+        return this.rnd()
+      }
     }
     const buz = new Buz()
     expect(buz.syncRndNumber()).to.be.eql(buz.syncRndNumber())
   })
 
-  it('return twice the same random number without params', (done) => {
+  it('return twice the same random number without params', done => {
     class Dummy {
       @cache({server: true})
-      asyncRndNumber (num) { return new Promise(resolve => setTimeout(resolve, 100, Math.random())) }
+      asyncRndNumber(num) {
+        return new Promise(resolve => setTimeout(resolve, 100, Math.random()))
+      }
     }
     const dummy = new Dummy()
-    Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()])
-      .then(([firstCall, secondCall]) => {
+    Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(
+      ([firstCall, secondCall]) => {
         expect(firstCall).to.be.eql(secondCall)
         done()
-      })
+      }
+    )
   })
 
   describe('Tracking hit and miss in the server', () => {
@@ -60,12 +67,14 @@ describe('Cache', () => {
 
     it('NodeTracker must NOT track to the server pass 10 seconds from the last track', () => {
       class Biz {
-        constructor () {
+        constructor() {
           this.rnd = () => Math.random()
         }
 
         @cache({server: true, trackTo: 'localhost'})
-        syncRndNumber (num) { return this.rnd() }
+        syncRndNumber(num) {
+          return this.rnd()
+        }
       }
 
       const biz = new Biz()
@@ -77,12 +86,14 @@ describe('Cache', () => {
 
     xit('NodeTracker must track to the server pass 20 seconds from the last track', () => {
       class Biz {
-        constructor () {
+        constructor() {
           this.rnd = () => Math.random()
         }
 
         @cache({server: true, trackTo: 'localhost'})
-        syncRndNumber (num) { return this.rnd() }
+        syncRndNumber(num) {
+          return this.rnd()
+        }
       }
 
       const biz = new Biz()
@@ -93,8 +104,12 @@ describe('Cache', () => {
       expect(arg).to.contain.all.keys({
         path: '/__tracking/cache/event/stats'
       })
-      expect(JSON.parse(arg.headers['x-payload']))
-        .to.contain.all.keys({hits: 1, misses: 1, env: 'browser', algorithm: 'lfu'})
+      expect(JSON.parse(arg.headers['x-payload'])).to.contain.all.keys({
+        hits: 1,
+        misses: 1,
+        env: 'browser',
+        algorithm: 'lfu'
+      })
     })
   })
 })

@@ -5,20 +5,28 @@ exports.directoryIndex = whitelist => {
 }
 
 exports.navigateFallbackWhitelist = whitelist => {
-  if (!whitelist || whitelist[0] === ALL) { return [] }
+  if (!whitelist || whitelist[0] === ALL) {
+    return []
+  }
   return whitelist.map(exp => new RegExp(exp))
 }
 
 exports.navigateFallback = whitelist => {
-  if (!whitelist) { return '' }
+  if (!whitelist) {
+    return ''
+  }
   return '200.html'
 }
 
 exports.runtimeCaching = runtime => {
-  if (!runtime) { return [] }
+  if (!runtime) {
+    return []
+  }
 
   return runtime.map(entry => {
-    if (entry.default) { return entry }
+    if (entry.default) {
+      return entry
+    }
     return Object.assign({}, entry, {urlPattern: new RegExp(entry.urlPattern)})
   })
 }

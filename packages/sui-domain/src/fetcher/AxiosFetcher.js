@@ -11,7 +11,7 @@ export default class AxiosFetcher extends Fetcher {
    * @param {Object} deps
    * @param {Config} deps.config
    */
-  constructor ({config}) {
+  constructor({config}) {
     super({config})
 
     this._axios = axios.create(config)
@@ -25,7 +25,7 @@ export default class AxiosFetcher extends Fetcher {
    * @param {Object} options
    * @return {Object}
    */
-  get (url, options) {
+  get(url, options) {
     return this._axios.get(url, options)
   }
 
@@ -37,7 +37,7 @@ export default class AxiosFetcher extends Fetcher {
    * @param {Object} options
    * @return {Object}
    */
-  post (url, body, options) {
+  post(url, body, options) {
     return this._axios.post(url, body, options)
   }
 
@@ -49,7 +49,7 @@ export default class AxiosFetcher extends Fetcher {
    * @param {Object} options
    * @return {Object}
    */
-  put (url, body, options) {
+  put(url, body, options) {
     return this._axios.put(url, body, options)
   }
 
@@ -59,7 +59,7 @@ export default class AxiosFetcher extends Fetcher {
    * @param {String} url
    * @return {Object}
    */
-  delete (url) {
+  delete(url) {
     return this._axios.delete(url)
   }
 }

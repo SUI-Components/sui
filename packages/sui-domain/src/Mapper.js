@@ -1,5 +1,5 @@
 export default class Mapper {
-  map () {
+  map() {
     throw new Error('Mapper#map must be implemented')
   }
 }

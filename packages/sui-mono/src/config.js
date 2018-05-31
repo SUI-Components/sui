@@ -6,12 +6,13 @@ const basePath = process.cwd()
 const projectPackage = require(path.join(basePath, 'package.json'))
 const packageConfig = projectPackage.config
 
-function getOrDefault (key, defaultValue) {
+function getOrDefault(key, defaultValue) {
   return (
-    packageConfig &&
-    packageConfig['sui-mono'] &&
-    packageConfig['sui-mono'][key]
-  ) || defaultValue
+    (packageConfig &&
+      packageConfig['sui-mono'] &&
+      packageConfig['sui-mono'][key]) ||
+    defaultValue
+  )
 }
 
 const packagesFolder = getOrDefault('packagesFolder', 'src')
@@ -20,49 +21,62 @@ const customScopes = getOrDefault('customScopes', [])
 const publishAccess = getOrDefault('access', 'restricted')
 
 module.exports = {
-  getScopes: function () {
+  getScopes: function() {
     const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
     const scopes = folders.map(folder => {
       const reversedPath = folder.split(path.sep)
-      const scope = Array.apply(null, Array(deepLevel)).map(Number.prototype.valueOf, 0)
+      const scope = Array.apply(null, Array(deepLevel)).map(
+        Number.prototype.valueOf,
+        0
+      )
 
-      return scope.map(() => reversedPath.pop()).reverse().join(path.sep)
+      return scope
+        .map(() => reversedPath.pop())
+        .reverse()
+        .join(path.sep)
     })
 
     return flatten(scopes, customScopes)
   },
-  getScopesPaths: function () {
+  getScopesPaths: function() {
     const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
     return this.getScopes().map(pkg => path.join(packagesDir, pkg))
   },
-  getPackagesFolder: function () {
+  getPackagesFolder: function() {
     return packagesFolder
   },
-  getPublishAccess: function () {
+  getPublishAccess: function() {
     return publishAccess
   },
-  getProjectName: function () {
+  getProjectName: function() {
     return projectPackage.name
   },
-  isMonoPackage: function () {
+  isMonoPackage: function() {
     const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
     const pkgFolders = folders.filter(getPackageConfig)
     return !pkgFolders.length
   }
 }
 
-const getFolders = (dir) => readdirSync(dir)
-  .map(file => path.join(dir, file))
-  .filter(onlyFolders)
-const onlyFolders = (filePath) => statSync(filePath).isDirectory()
+const getFolders = dir =>
+  readdirSync(dir)
+    .map(file => path.join(dir, file))
+    .filter(onlyFolders)
+const onlyFolders = filePath => statSync(filePath).isDirectory()
 const flatten = (x, y) => x.concat(y)
 
 const cwds = (rootDir, deep) => {
-  const baseFolders = Array.apply(null, Array(deep)).map(Number.prototype.valueOf, 0)
+  const baseFolders = Array.apply(null, Array(deep)).map(
+    Number.prototype.valueOf,
+    0
+  )
 
-  return baseFolders.reduce((acc) => {
-    return acc.map(getFolders).reduce(flatten)
-  }, [rootDir])
+  return baseFolders.reduce(
+    acc => {
+      return acc.map(getFolders).reduce(flatten)
+    },
+    [rootDir]
+  )
 }
 
 const getPackageConfig = packagePath => {

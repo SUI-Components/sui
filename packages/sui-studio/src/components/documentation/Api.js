@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component, Fragment } from 'react'
+import React, {Component, Fragment} from 'react'
 import {tryRequireRawSrc} from '../tryRequire'
 
 class Api extends Component {
@@ -10,17 +10,17 @@ class Api extends Component {
     })
   }
 
-  state = { docs: false }
+  state = {docs: false}
 
-  async componentDidMount () {
+  async componentDidMount() {
     const reactDocs = await import('react-docgen')
     const src = await tryRequireRawSrc(this.props.params)
     const docs = reactDocs.parse(src)
 
-    this.setState({ docs })
+    this.setState({docs})
   }
 
-  _renderPropsApi ({ propsApi = {} }) {
+  _renderPropsApi({propsApi = {}}) {
     const keysOfProps = Object.keys(propsApi)
     // if the component doesn't have props, show a message
     if (keysOfProps.length === 0) {
@@ -28,49 +28,56 @@ class Api extends Component {
     }
     // if we have props, render all of them using React
     const renderedProps = keysOfProps.map(propName => {
-      const { defaultValue = {}, required, type, description } = propsApi[propName]
-      const { value = undefined } = defaultValue
+      const {defaultValue = {}, required, type, description} = propsApi[
+        propName
+      ]
+      const {value = undefined} = defaultValue
 
       if (typeof type === 'undefined') {
-        console.warn('It seem that you might have a prop with a defaultValue but it does not exist as propType')
+        console.warn(
+          'It seem that you might have a prop with a defaultValue but it does not exist as propType'
+        )
         return
       }
 
       return (
-        <div className='sui-StudioProps-prop' key={propName}>
+        <div className="sui-StudioProps-prop" key={propName}>
           <h3>{propName}</h3>
-          <div className='sui-StudioProps-tags'>
-            <div className='sui-StudioProps-tag sui-StudioProps-required'>
+          <div className="sui-StudioProps-tags">
+            <div className="sui-StudioProps-tag sui-StudioProps-required">
               <span>required</span>
-              <span className={required ? 'is-required' : ''}>{required ? 'yes' : 'no'}</span>
+              <span className={required ? 'is-required' : ''}>
+                {required ? 'yes' : 'no'}
+              </span>
             </div>
-            <div className='sui-StudioProps-tag sui-StudioProps-type'>
+            <div className="sui-StudioProps-tag sui-StudioProps-type">
               <span>type</span>
               <span>{type.name}</span>
             </div>
-            {value && <div className='sui-StudioProps-tag sui-StudioProps-default'>
-              <span>defaultValue</span>
-              <span>{value}</span>
-            </div>}
+            {value && (
+              <div className="sui-StudioProps-tag sui-StudioProps-default">
+                <span>defaultValue</span>
+                <span>{value}</span>
+              </div>
+            )}
           </div>
           {description && <p>{description}</p>}
         </div>
       )
     })
     // return all the rendered props with a title
-    return [
-      <h2 key='propTitles'>Props</h2>,
-      ...renderedProps
-    ]
+    return [<h2 key="propTitles">Props</h2>, ...renderedProps]
   }
 
-  render () {
-    const { docs } = this.state
+  render() {
+    const {docs} = this.state
 
     if (docs) {
-      const { params: { category, component } } = this.props
+      const {
+        params: {category, component}
+      } = this.props
       const componentTitle = `${docs.displayName} (${category}/${component})`
-      const { props } = docs
+      const {props} = docs
 
       return (
         <Fragment>

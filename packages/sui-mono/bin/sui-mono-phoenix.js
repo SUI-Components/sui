@@ -28,25 +28,27 @@ const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) {
     return
   }
-  const taskList = config.getScopesPaths()
+  const taskList = config
+    .getScopesPaths()
     .map(cwd => [
       [...RIMRAF_CMD, {cwd, stdio: 'ignore'}],
       [...NPM_CMD, {cwd, stdio: 'ignore'}]
     ])
-    .map((commands) => ({
-      title: 'rimraf node_modules && npm i ' + ('@' + basename(commands[0][2].cwd)).grey,
-      task: () => new Promise(resolve => {
-        serialSpawn(commands).then(resolve)
-          .catch(error => console.log(error))
-      })
+    .map(commands => ({
+      title:
+        'rimraf node_modules && npm i ' +
+        ('@' + basename(commands[0][2].cwd)).grey,
+      task: () =>
+        new Promise(resolve => {
+          serialSpawn(commands)
+            .then(resolve)
+            .catch(error => console.log(error))
+        })
     }))
   const tasks = new Listr(taskList, {concurrent: true})
   return tasks.run()
 }
 
-serialSpawn([
-  RIMRAF_CMD,
-  NPM_CMD
-])
+serialSpawn([RIMRAF_CMD, NPM_CMD])
   .then(executePhoenixOnPackages)
   .catch(showError)

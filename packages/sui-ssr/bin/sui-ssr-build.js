@@ -31,7 +31,7 @@ if (program.clean) {
 
 const build = () =>
   new Promise((resolve, reject) => {
-    serverCompilerFactory({ outputPath: BUILD_SERVER_PATH }).run(
+    serverCompilerFactory({outputPath: BUILD_SERVER_PATH}).run(
       (error, stats) => {
         if (error) {
           reject(error)

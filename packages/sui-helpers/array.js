@@ -3,7 +3,7 @@
  * @param {Array} array Array to split
  * @param {Number} chunk Number of elements by chunk
  */
-function splitArray (array, chunk = 10) {
+function splitArray(array, chunk = 10) {
   const j = array.length
   const temparray = []
   let i = 0
@@ -13,4 +13,4 @@ function splitArray (array, chunk = 10) {
   return temparray
 }
 
-module.exports = { splitArray }
+module.exports = {splitArray}

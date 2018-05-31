@@ -7,7 +7,7 @@ let requestCount = 0
  * @param  {Object} config.url
  * @return {String}
  */
-const getRequestLabel = ({ method, url }) => {
+const getRequestLabel = ({method, url}) => {
   return `🌎  ${method.toUpperCase()} /${url} #${++requestCount}`
 }
 
@@ -20,8 +20,8 @@ const getRequestLabel = ({ method, url }) => {
  * @param  {Object} axios Instance of axios
  * @return {Function} Function to unregister performance hooks
  */
-const measureAxios = (perf) => (axios) => {
-  const interceptor = axios.interceptors.request.use((config) => {
+const measureAxios = perf => axios => {
+  const interceptor = axios.interceptors.request.use(config => {
     const axiosRequestId = getRequestLabel(config)
     perf.mark(axiosRequestId)
     config.transformResponse.axiosPerformanceTransform = (data, headers) => {

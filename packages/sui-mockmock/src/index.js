@@ -1,5 +1,3 @@
 import HttpMocker from './http'
 
-export {
-  HttpMocker
-}
+export {HttpMocker}

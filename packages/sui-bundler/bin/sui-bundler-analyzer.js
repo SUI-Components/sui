@@ -14,12 +14,14 @@ console.log('🔎  Bundler Analyzer')
 process.noDeprecation = true
 
 config.plugins.push(new BundleAnalyzerPlugin())
-config.plugins.push(new DuplicatePackageCheckerPlugin({
-  // Also show module that is requiring each duplicate package
-  verbose: true,
-  // Emit errors instead of warnings
-  emitError: false
-}))
+config.plugins.push(
+  new DuplicatePackageCheckerPlugin({
+    // Also show module that is requiring each duplicate package
+    verbose: true,
+    // Emit errors instead of warnings
+    emitError: false
+  })
+)
 
 const spinner = ora(`Building and analyzing...`).start()
 webpack(config).run((error, stats) => {

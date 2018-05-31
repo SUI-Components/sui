@@ -1,4 +1,4 @@
-export default function createClientContextFactoryParams () {
+export default function createClientContextFactoryParams() {
   return {
     cookies: document.cookie,
     isClient: true,

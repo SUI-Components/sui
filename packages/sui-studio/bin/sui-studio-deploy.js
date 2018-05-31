@@ -2,7 +2,7 @@
 /* eslint no-console:0 no-template-curly-in-string:0 */
 
 const program = require('commander')
-const { getSpawnPromise, showError } = require('@s-ui/helpers/cli')
+const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 const BUILD_FOLDER = './public'
 const DEPLOY_PATH = require.resolve('@s-ui/deploy/bin/sui-deploy')
 
@@ -32,7 +32,6 @@ if (!process.env.NOW_TOKEN) {
   process.exit(1)
 }
 
-getSpawnPromise(DEPLOY_PATH, ['spa', program.name, BUILD_FOLDER])
-  .catch(err => {
-    showError(err.message)
-  })
+getSpawnPromise(DEPLOY_PATH, ['spa', program.name, BUILD_FOLDER]).catch(err => {
+  showError(err.message)
+})

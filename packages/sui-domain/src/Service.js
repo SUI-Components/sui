@@ -1,5 +1,5 @@
 export default class Service {
-  execute () {
+  execute() {
     throw new Error('[Service#execute] must be implemented')
   }
 }

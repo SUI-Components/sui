@@ -1,22 +1,22 @@
-;(function () {
+;(function() {
   'use strict'
   var manifests = require('static-manifests')()
   var pathnamesRegExp = require('static-pathnamesRegExp')()
   var cdn = require('static-cdn')()
   var serviceWorkerCdn = require('service-worker-cdn')()
   // https://davidwalsh.name/javascript-loader
-  var load = (function () {
-    function loaderFor (tag) {
-      return function (url) {
-        return new Promise(function (resolve, reject) {
+  var load = (function() {
+    function loaderFor(tag) {
+      return function(url) {
+        return new Promise(function(resolve, reject) {
           var element = document.createElement(tag)
           var parent = 'body'
           var attr = 'src'
 
-          element.onload = function () {
+          element.onload = function() {
             resolve(url)
           }
-          element.onerror = function () {
+          element.onerror = function() {
             reject(url)
           }
 
@@ -44,18 +44,18 @@
   })()
 
   // https://github.com/CacheControl/promise-series/blob/master/index.js
-  function promiseInSerie (array, haltCallback) {
+  function promiseInSerie(array, haltCallback) {
     if (!(haltCallback instanceof Function)) {
-      haltCallback = function () {
+      haltCallback = function() {
         return true
       }
     }
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       var i = 0
       var len = array.length
       var results = []
 
-      function processPromise (result) {
+      function processPromise(result) {
         results[i] = result
         if (!haltCallback(result)) {
           return resolve(results)
@@ -64,7 +64,7 @@
         next()
       }
 
-      function next () {
+      function next() {
         if (i >= len) return resolve(results)
 
         var method = array[i]
@@ -84,10 +84,10 @@
     })
   }
 
-  function loadAssetsFor (page) {
+  function loadAssetsFor(page) {
     var baseUrl = cdn + '/' + page + '/'
     var manifest = manifests[page]
-    var loadStyle = function () {
+    var loadStyle = function() {
       var css = manifest['app.css'] || manifest['main.css']
       return css ? load.css(baseUrl + css) : Promise.resolve()
     }
@@ -98,13 +98,13 @@
       manifest['app.js']
     ]
       .filter(Boolean)
-      .map(function (script) {
-        return function () {
+      .map(function(script) {
+        return function() {
           return load.js(baseUrl + script)
         }
       })
 
-    return promiseInSerie([loadStyle].concat(loadScripts)).then(function () {
+    return promiseInSerie([loadStyle].concat(loadScripts)).then(function() {
       console.log('All widgets for ' + page + ' loads') // eslint-disable-line
     })
   }
@@ -118,8 +118,8 @@
   pages.length !== 0 &&
     !window.location.host.match(/localhost/) &&
     promiseInSerie(
-      pages.map(function (page) {
-        return function () {
+      pages.map(function(page) {
+        return function() {
           return loadAssetsFor(page)
         }
       })
@@ -128,13 +128,13 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register(serviceWorkerCdn + '/sw.js')
-      .then(function (registration) {
+      .then(function(registration) {
         console.log(
           'Service Worker registration successful with scope: ',
           registration.scope
         )
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.log('Service Worker registration failed: ', err)
       })
   }

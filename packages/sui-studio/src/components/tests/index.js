@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Tests = () => (
-  <div className='sui-StudioTests'>
+  <div className="sui-StudioTests">
     <h1>Tests</h1>
   </div>
 )

@@ -12,28 +12,41 @@ const packageJSON = require('../file-templates/_package.json.js')
 const indexSCSS = require('../file-templates/_index.scss.js')
 
 program
-  .option('-E, --widgetRegExpIdentifier <regExp>', 'Identifier to inject the widget regarding on if the path match with the regexp')
+  .option(
+    '-E, --widgetRegExpIdentifier <regExp>',
+    'Identifier to inject the widget regarding on if the path match with the regexp'
+  )
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-widget-embedder generate <widget>')
     console.log('    $ sui-widget-embedder generate alfa')
-    console.log('    $ sui-widget-embedder generate alfa -E \'/d\\\\w+\\\\.html\'')
+    console.log(
+      "    $ sui-widget-embedder generate alfa -E '/d\\\\w+\\\\.html'"
+    )
     console.log('    $ custom-help --help')
     console.log('    $ custom-help -h')
     console.log('')
-    console.log(colors.magenta('    IMPORTANT - Regexp (-E) must be with commas ALWAYS to avoid terminal escape or interpretation'))
+    console.log(
+      colors.magenta(
+        '    IMPORTANT - Regexp (-E) must be with commas ALWAYS to avoid terminal escape or interpretation'
+      )
+    )
     console.log('')
   })
   .parse(process.argv)
 
 const [widget] = program.args
 
-if (!widget) { showError('widget name must be defined') }
+if (!widget) {
+  showError('widget name must be defined')
+}
 
 const wordsOnlyRegex = /^[\w]+$/
 
-if (!wordsOnlyRegex.test(widget)) { showError('Widget name must contain letters or underscore only') }
+if (!wordsOnlyRegex.test(widget)) {
+  showError('Widget name must contain letters or underscore only')
+}
 
 const BASE_DIR = process.cwd()
 const WIDGET_DIR = `/widgets/${widget}/`
@@ -54,14 +67,17 @@ if (fs.existsSync(WIDGET_PATH)) {
 }
 
 Promise.all([
-  writeFile(
-    WIDGET_PACKAGE_JSON_FILE, packageJSON(widgetRegExpIdentifier)),
+  writeFile(WIDGET_PACKAGE_JSON_FILE, packageJSON(widgetRegExpIdentifier)),
   writeFile(WIDGET_ENTRY_JS_POINT_FILE, indexJS()),
+  writeFile(WIDGET_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix)),
   writeFile(
-    WIDGET_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix)),
-  writeFile(
-    WIDGET_BASE_PROJECT_JSON_FILE, JSON.stringify(packageInfo, null, '  '))
-])
-  .then(() => {
-    console.log(colors.green(`➜ [${widget}]: Your widget files have been generated successfully`))
-  })
+    WIDGET_BASE_PROJECT_JSON_FILE,
+    JSON.stringify(packageInfo, null, '  ')
+  )
+]).then(() => {
+  console.log(
+    colors.green(
+      `➜ [${widget}]: Your widget files have been generated successfully`
+    )
+  )
+})

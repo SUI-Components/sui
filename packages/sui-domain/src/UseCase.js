@@ -1,5 +1,5 @@
 export default class UseCase {
-  execute () {
+  execute() {
     throw new Error('[UseCase#execute] must be implemented')
   }
 }

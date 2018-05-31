@@ -4,7 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
-const {envVars, MAIN_ENTRY_POINT, config, whenInstalled, cleanList} = require('./shared')
+const {
+  envVars,
+  MAIN_ENTRY_POINT,
+  config,
+  whenInstalled,
+  cleanList
+} = require('./shared')
 
 let webpackConfig = {
   mode: 'development',
@@ -52,12 +58,7 @@ let webpackConfig = {
       },
       {
         test: /(\.css|\.scss)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       }
     ]
   }

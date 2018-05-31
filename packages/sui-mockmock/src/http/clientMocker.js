@@ -10,17 +10,17 @@ class ClientMocker extends Mocker {
     }
   }
 
-  create () {
+  create() {
     this._server = sinon.fakeServer.create()
     this._server.respondImmediately = true
   }
 
-  restore () {
+  restore() {
     this._failIfServerWasNotCreated()
     this._server.restore()
   }
 
-  httpMock (baseUrl) {
+  httpMock(baseUrl) {
     this._failIfServerWasNotCreated()
     return new ClientMock(this._server, baseUrl)
   }
@@ -31,10 +31,9 @@ class ClientMock extends Mock {
     response,
     statusCode,
     headers = {'Content-Type': 'application/json'}
-  ) =>
-    [statusCode, headers, JSON.stringify(response)]
+  ) => [statusCode, headers, JSON.stringify(response)]
 
-  constructor (server, baseUrl) {
+  constructor(server, baseUrl) {
     super()
     this._server = server
     this._isRegexp = false
@@ -44,59 +43,62 @@ class ClientMock extends Mock {
     this._path = null
   }
 
-  get (path) {
+  get(path) {
     this._method = 'GET'
     this._path = path
 
     return this
   }
 
-  getRegexp (path) {
+  getRegexp(path) {
     this.get(path)
     this._isRegexp = true
 
     return this
   }
 
-  post (path) {
+  post(path) {
     this._method = 'POST'
     this._path = path
 
     return this
   }
 
-  put (path) {
+  put(path) {
     this._method = 'PUT'
     this._path = path
 
     return this
   }
 
-  delete (path) {
+  delete(path) {
     this._method = 'DELETE'
     this._path = path
 
     return this
   }
 
-  query (queryObject) {
-    this._query = '?' + Object.keys(queryObject).reduce((acc, param) => {
-      const value = queryObject[param]
-      acc.push(`${param}=${value}`)
+  query(queryObject) {
+    this._query =
+      '?' +
+      Object.keys(queryObject)
+        .reduce((acc, param) => {
+          const value = queryObject[param]
+          acc.push(`${param}=${value}`)
 
-      return acc
-    }, []).join('&')
+          return acc
+        }, [])
+        .join('&')
 
     return this
   }
 
-  reply (response, statusCode = 200, headers) {
+  reply(response, statusCode = 200, headers) {
     this._server.respondWith(
       this._method,
       this._isRegexp
         ? RegExp(`${this._baseUrl}${this._path}${this._query}`)
-        : `${this._baseUrl}${this._path}${this._query}`
-      ,
+        : `${this._baseUrl}${this._path}${this._query}`,
       this._responseResolver(response, statusCode, headers)
     )
   }

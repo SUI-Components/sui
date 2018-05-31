@@ -1,7 +1,7 @@
 /* eslint no-console: 0 */
 import PropTypes from 'prop-types'
 
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
 const ERROR_TIMEOUT = 500
@@ -15,30 +15,30 @@ export default class Preview extends Component {
 
   static defaultProps = {
     className: '',
-    scope: { React }
+    scope: {React}
   }
 
   state = {
     error: undefined
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.executeCode()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     clearTimeout(this.timeoutID)
     if (this.props.code !== prevProps.code) {
       this.executeCode()
     }
   }
 
-  setTimeout () {
+  setTimeout() {
     clearTimeout(this.timeoutID)
     this.timeoutID = setTimeout(...arguments)
   }
 
-  compileCode () {
+  compileCode() {
     const code = `
       (function (${Object.keys(this.props.scope).join(', ')}, mountNode) {
         ${this.props.code}
@@ -49,13 +49,13 @@ export default class Preview extends Component {
     }).code
   }
 
-  buildScope (mountNode) {
+  buildScope(mountNode) {
     return Object.keys(this.props.scope)
       .map(key => this.props.scope[key])
       .concat(mountNode)
   }
 
-  executeCode () {
+  executeCode() {
     if (this.props.code === undefined) {
       return
     }
@@ -74,34 +74,34 @@ export default class Preview extends Component {
       const Component = eval(compiledCode)(...scope)
       ReactDOM.render(Component, mountNode)
       if (this.state.error) {
-        this.setState({ error: undefined })
+        this.setState({error: undefined})
       }
     } catch (err) {
       console.error(err)
       this.setTimeout(() => {
-        this.setState({ error: err.toString() })
+        this.setState({error: err.toString()})
       }, ERROR_TIMEOUT)
     }
   }
 
-  _renderError ({ error }) {
+  _renderError({error}) {
     return (
-      <pre className='sui-StudioPreview-error'>
+      <pre className="sui-StudioPreview-error">
         <h3>Your playground has an error, please check:</h3>
         {error}
       </pre>
     )
   }
 
-  render () {
-    const { error } = this.state
+  render() {
+    const {error} = this.state
 
     return (
-      <div className='sui-StudioPreview'>
-        {error !== undefined && this._renderError({ error })}
+      <div className="sui-StudioPreview">
+        {error !== undefined && this._renderError({error})}
         <div
-          ref='mount'
-          className='sui-StudioPreview-content sui-StudioDemo-preview'
+          ref="mount"
+          className="sui-StudioPreview-content sui-StudioDemo-preview"
         />
       </div>
     )

@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const serverConfig = require('@s-ui/bundler/webpack.config.server')
 
-module.exports = ({ outputPath }) =>
+module.exports = ({outputPath}) =>
   webpack({
     ...serverConfig,
     entry: path.join(__dirname, '..', 'server'),

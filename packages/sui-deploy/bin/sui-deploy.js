@@ -4,12 +4,8 @@ const program = require('commander')
 const pkg = require('../package.json')
 const version = pkg.version
 
-program
-  .version(version, '    --version')
+program.version(version, '    --version')
 
-program
-  .command(
-    'spa <name> [folder]', 'deploy a single-page application'
-  )
+program.command('spa <name> [folder]', 'deploy a single-page application')
 
 program.parse(process.argv)

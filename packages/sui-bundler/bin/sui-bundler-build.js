@@ -30,13 +30,17 @@ program
 
 const {clean = false} = program
 
-process.env.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
+process.env.NODE_ENV = process.env.NODE_ENV
+  ? process.env.NODE_ENV
+  : 'production'
 
 if (clean) {
   console.log(chalkProcessing('Removing previous build...'))
   rimraf.sync(path.resolve(process.env.PWD, 'public'))
 }
-console.log(chalkProcessing('Generating minified bundle. This will take a moment...'))
+console.log(
+  chalkProcessing('Generating minified bundle. This will take a moment...')
+)
 
 webpack(config).run((error, stats) => {
   if (error) {
@@ -65,7 +69,11 @@ webpack(config).run((error, stats) => {
     console.log(chalkSuccess('200.html create to be used in your Offline App'))
   }
 
-  console.log(chalkSuccess('Your app is compiled in production mode in /public. It\'s ready to roll!'))
+  console.log(
+    chalkSuccess(
+      "Your app is compiled in production mode in /public. It's ready to roll!"
+    )
+  )
 
   return 0
 })

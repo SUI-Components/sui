@@ -4,7 +4,7 @@
 const path = require('path')
 const program = require('commander')
 const chalk = require('chalk')
-const { getSpawnPromise, showError } = require('@s-ui/helpers/cli')
+const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 
 const CYPRESS_VERSION = '2.1.0'
 const CYPRESS_FOLDER_PATH = path.resolve(__dirname, 'cypress')
@@ -42,8 +42,8 @@ program
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
 
-const { baseUrl, userAgentAppend, gui, screenshotsOnError } = program
-const cypressConfig = { integrationFolder: TESTS_FOLDER, baseUrl }
+const {baseUrl, userAgentAppend, gui, screenshotsOnError} = program
+const cypressConfig = {integrationFolder: TESTS_FOLDER, baseUrl}
 
 if (userAgentAppend) {
   cypressConfig.userAgent = `${DEFAULT_USER_AGENT} ${userAgentAppend}`
