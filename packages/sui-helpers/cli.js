@@ -9,6 +9,7 @@ const Listr = require('listr')
 const figures = require('figures')
 const path = require('path')
 const {splitArray} = require('./array')
+const isWin = process.platform === 'win32'
 
 /**
  * Spawn several commands in children processes, in series
@@ -123,7 +124,7 @@ function getSpawnProcess(bin, args, options = {}) {
  * @returns {Object} {bin, args, options}
  */
 function getArrangedCommand(bin, args, opts) {
-  return path.isAbsolute(bin) // check if it's a file or an alias
+  return path.isAbsolute(bin) && isWin // check if it's a file or an alias
     ? ['node', [bin, ...args], opts]
     : [bin, args, opts]
 }
