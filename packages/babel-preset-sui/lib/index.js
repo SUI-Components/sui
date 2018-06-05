@@ -3,17 +3,17 @@ const cleanList = require('./clean-list')
 
 module.exports = {
   'presets': cleanList([
-    ["env", {
-      "debug": false,
-      "targets": {
-        "node": "6.0.0",
-        "browsers": [
-          "> 1%",
-          "last 4 versions",
-          "Firefox ESR",
-          "Safari >= 6",
-          "iOS >= 7",
-          "not ie < 11"
+    ['env', {
+      'debug': false,
+      'targets': {
+        'node': '6.0.0',
+        'browsers': [
+          '> 0.25%',
+          'Firefox ESR',
+          'Safari >= 8',
+          'iOS >= 8',
+          'ie >= 11',
+          'not op_mini all'
         ]
       }
     }],
