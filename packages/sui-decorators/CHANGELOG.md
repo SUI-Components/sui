@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-06-05)
+
+
+### Features
+
+* remove cache tracking functionality ([054a0da](https://github.com/SUI-Components/sui/commit/054a0da))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-03-15)
 
