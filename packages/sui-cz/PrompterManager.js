@@ -168,24 +168,22 @@ class PrompterManager {
         `${HR} ${commitString} ${HR} -> We found that you had problems with the last commit and we saved the message for you 😇.`
       )
     )
-    cz
-      .prompt([
-        {
-          type: 'confirm',
-          name: 'foundOldCommit',
-          message: '- Would you like to commit with this message?'
-        }
-      ])
-      .then(answers => {
-        if (answers.foundOldCommit) {
-          ErrorCommitSaver.initErrorListener(commitString)
-          commit(commitString)
-          ErrorCommitSaver.discardOldCommit()
-        } else {
-          ErrorCommitSaver.discardOldCommit()
-          PrompterManager.startMainCommitFlow(cz, commit)
-        }
-      })
+    cz.prompt([
+      {
+        type: 'confirm',
+        name: 'foundOldCommit',
+        message: '- Would you like to commit with this message?'
+      }
+    ]).then(answers => {
+      if (answers.foundOldCommit) {
+        ErrorCommitSaver.initErrorListener(commitString)
+        commit(commitString)
+        ErrorCommitSaver.discardOldCommit()
+      } else {
+        ErrorCommitSaver.discardOldCommit()
+        PrompterManager.startMainCommitFlow(cz, commit)
+      }
+    })
   }
 
   /**

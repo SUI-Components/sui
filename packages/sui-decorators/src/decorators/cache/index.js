@@ -5,8 +5,6 @@ import stringOrIntToMs from '../../helpers/stringOrIntToMs'
 import LRU from './algorithms/LRU'
 import LFU from './algorithms/LFU'
 
-import Tracker from './tracker'
-
 const DEFAULT_TTL = 500
 
 const isPromise = obj =>
@@ -36,7 +34,6 @@ const _cache = ({
         : new Error(`[cv-decorators::cache] unknow algorithm: ${algorithm}`))
 
   const cache = caches[fnName]
-  const tracker = new Tracker({algorithm, host, port, fnName, segmentation})
 
   return (...args) => {
     const key = `${target.constructor.name}::${fnName}::${createHash(
@@ -44,13 +41,8 @@ const _cache = ({
     )}`
     const now = Date.now()
     if (cache.get(key) === undefined) {
-      tracker._updateStats({action: Tracker.ACTION_MISSING})
       cache.set(key, {createdAt: now, returns: original.apply(instance, args)})
-    } else {
-      tracker._updateStats({action: Tracker.ACTION_HIT})
     }
-
-    tracker.track()
 
     if (isPromise(cache.get(key).returns)) {
       cache.get(key).returns.catch(() => cache.del(key))

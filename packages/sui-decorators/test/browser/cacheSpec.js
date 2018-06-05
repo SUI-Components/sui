@@ -3,7 +3,6 @@ import sinon from 'sinon'
 import {expect} from 'chai'
 
 import cache from '../../src/decorators/cache'
-import BrowserTracker from '../../src/decorators/cache/tracker/BrowserTracker'
 
 describe('Cache', () => {
   it('Should exist', () => {
@@ -201,7 +200,7 @@ describe('Cache', () => {
           expect(biz.syncRndNumber(1234)).to.be.eql(firstCall)
         })
 
-        it('use the default TTL for unkonw string', () => {
+        it('use the default TTL for unknown string', () => {
           class Biz {
             constructor() {
               this.rnd = () => Math.random()
@@ -218,38 +217,6 @@ describe('Cache', () => {
           clock.tick(1000 * 60) // 1 minute
           expect(biz.syncRndNumber(12)).to.be.not.eql(firstCall)
         })
-      })
-    })
-
-    describe('Tracking hit and miss in the browser', () => {
-      let _sendSpy, clock
-      before(() => {
-        _sendSpy = sinon.spy(BrowserTracker.prototype, '_send')
-        clock = sinon.useFakeTimers()
-      })
-
-      after(() => {
-        _sendSpy.reset()
-        clock.restore()
-      })
-
-      it('BrowserTracker must NOT track to the browser', () => {
-        class Biz {
-          constructor() {
-            this.rnd = () => Math.random()
-          }
-
-          @cache({trackTo: 'localhost'})
-          syncRndNumber(num) {
-            return this.rnd()
-          }
-        }
-
-        const biz = new Biz()
-        biz.syncRndNumber(12)
-        clock.tick(1000 * 21) // 21 seconds
-        biz.syncRndNumber(12)
-        expect(_sendSpy.notCalled).to.be.ok
       })
     })
   })
