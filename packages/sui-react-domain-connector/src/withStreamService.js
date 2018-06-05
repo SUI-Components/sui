@@ -8,8 +8,8 @@ const snakeToCamel = str =>
 const withStreamService = (...services) => Target =>
   class DDDStreamServicesInjector extends Component {
     static displayName = `withStreamService(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes ||
-    Target.contextTypes
+    static originalContextTypes =
+      Target.originalContextTypes || Target.contextTypes
     static contextTypes = {
       domain: PropTypes.object.isRequired
     }

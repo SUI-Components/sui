@@ -8,8 +8,8 @@ const snakeToCamel = str =>
 const withLocalService = (...services) => Target => {
   class DDDLocalServicesInjector extends Component {
     static displayName = `withLocalService(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes ||
-    Target.contextTypes
+    static originalContextTypes =
+      Target.originalContextTypes || Target.contextTypes
     static contextTypes = {
       domain: PropTypes.object.isRequired
     }

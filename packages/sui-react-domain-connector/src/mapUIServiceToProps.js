@@ -9,8 +9,8 @@ const toTitle = str => {
 const mapUIServiceToProps = (...paths) => Target =>
   class Enhance extends Component {
     static displayName = `mapUIServiceToProps(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes ||
-    Target.contextTypes
+    static originalContextTypes =
+      Target.originalContextTypes || Target.contextTypes
     static contextTypes = {
       store: PropTypes.object.isRequired
     }
