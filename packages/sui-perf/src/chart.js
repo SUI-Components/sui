@@ -41,8 +41,8 @@ const getTextRow = layout => {
 const getBarForPeriod = (periodTime, width) => {
   const padWidth = padEmpty(width)
   return (startTime, duration) => {
-    let startPad = padEmpty(startTime / periodTime * width)()
-    let durationPad = padRectangle(duration / periodTime * width)() || '⸠'
+    let startPad = padEmpty((startTime / periodTime) * width)()
+    let durationPad = padRectangle((duration / periodTime) * width)() || '⸠'
     return padWidth(startPad + durationPad)
   }
 }
@@ -53,7 +53,7 @@ const getRowValues = (fullDuration, timeRange, width) => {
     getBar(startTime, duration).cyan,
     round(startTime) + 'ms',
     round(duration) + 'ms',
-    round(duration / fullDuration * 100) + '%',
+    round((duration / fullDuration) * 100) + '%',
     name.grey
   ]
 }
