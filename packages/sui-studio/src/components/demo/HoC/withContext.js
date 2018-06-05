@@ -7,8 +7,8 @@ const withContext = (flag, context) => Target => {
 
   class Contextify extends Component {
     static displayName = `Contextify(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes ||
-    Target.contextTypes
+    static originalContextTypes =
+      Target.originalContextTypes || Target.contextTypes
     static get childContextTypes() {
       return Target.originalContextTypes || Target.contextTypes
     }

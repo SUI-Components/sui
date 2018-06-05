@@ -8,8 +8,8 @@ const withProvider = (flag, store) => Target => {
 
   class WithProvider extends Component {
     static displayName = `WithProvider(${Target.displayName})`
-    static originalContextTypes = Target.originalContextTypes ||
-    Target.contextTypes
+    static originalContextTypes =
+      Target.originalContextTypes || Target.contextTypes
 
     render() {
       return (
