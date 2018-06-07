@@ -12,7 +12,7 @@ Features:
 $ npm install @s-ui/bundler --save-dev
 ```
 
-## Usage
+## Usage for web app bundling
 
 Add bundling scripts to your **package.json**
 
@@ -27,7 +27,7 @@ Add bundling scripts to your **package.json**
 }
 ```
 
-## Requirements
+## Requirements for web app bundling
 
 node 6+ version is required.
 
@@ -61,6 +61,32 @@ $ sui-bundler build
 ```
 
 It will build a deployable folder `public` where you can find all your statics. If you wish to remove the content of the folder before generating new files, just use the flag `--clean | -C`
+
+### Library
+
+You can use sui-bundler to bundle a package as a library that can be injected with a simple script tag.
+
+```
+$ sui-bundler lib
+```
+
+You should create an entry file that assigns your lib to your desired namespace:
+
+```js
+// umd.js
+import MyFancyModule from '/src/index.js'
+window.namespace.fancy = MyFancyModule
+```
+
+And then execute `sui-bundler lib` with your destination config:
+
+```
+sui-bundler lib umd/index.js -o lib/fancy -p http://my-cdn.com/fancy
+```
+
+`sui-bundler lib` will add your package version as subfolder:
+* `-o lib/fancy` outputs to `./lib/fancy/0.0.0/`
+* `-p http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy/0.0.0`  as public path for chunks loading.
 
 ## Configuration
 
