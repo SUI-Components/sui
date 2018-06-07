@@ -6,8 +6,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const uglifyJsPlugin = require('./shared/uglify')
 const webpack = require('webpack')
+const definePlugin = require('./shared/define')
 
 const {
   navigateFallbackWhitelist,
@@ -19,12 +20,6 @@ const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
-
-// hack for Windows, as process.env.PWD is undefined in that environment
-// https://github.com/mrblueblue/gettext-loader/issues/18
-if (process.env.PWD === undefined) {
-  process.env.PWD = process.cwd()
-}
 
 module.exports = {
   mode: 'production',
@@ -46,14 +41,7 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false // set to true if you want JS source maps
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ],
+    minimizer: [uglifyJsPlugin, new OptimizeCSSAssetsPlugin({})],
     runtimeChunk: true,
     splitChunks: {
       cacheGroups: {
@@ -69,10 +57,7 @@ module.exports = {
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
-    new webpack.DefinePlugin({
-      __DEV__: false,
-      __BASE_DIR__: JSON.stringify(process.env.PWD)
-    }),
+    definePlugin,
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:8].css',
       chunkFilename: '[id].[contenthash:8].css'
