@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2018-06-07)
+
+
+### Features
+
+* add Array.fill polyfill ([4d6370c](https://github.com/SUI-Components/sui/commit/4d6370c))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2017-09-21)
 
@@ -49,6 +59,16 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * add module.exports ([944e204](https://github.com/SUI-Components/sui/commit/944e204))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-07-19)
+
+
+### Features
+
+* create sui-polyfills to be reused on all our projects ([df2086e](https://github.com/SUI-Components/sui/commit/df2086e))
 
 
 
