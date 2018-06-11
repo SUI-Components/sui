@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-06-11)
+
+
+### Bug Fixes
+
+* fix format problems in user-agent option ([48e9d90](https://github.com/SUI-Components/sui/commit/48e9d90))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-05-30)
 
@@ -75,17 +85,6 @@ All notable changes to this project will be documented in this file.
 * add pattern and ignorePattern parameters for sui-test browser ([fa8515a](https://github.com/SUI-Components/sui/commit/fa8515a))
 * add pattern parameters for sui-test server ([546536a](https://github.com/SUI-Components/sui/commit/546536a))
 * use the new parameter in order to add an exclude param and create files to test ([c5b034c](https://github.com/SUI-Components/sui/commit/c5b034c))
-
-
-
-<a name="1.0.0"></a>
-# 1.0.0 (2018-02-16)
-
-
-### Features
-
-* bump beta version ([9dc81af](https://github.com/SUI-Components/sui/commit/9dc81af))
-* first full functional version ([93f786e](https://github.com/SUI-Components/sui/commit/93f786e))
 
 
 
