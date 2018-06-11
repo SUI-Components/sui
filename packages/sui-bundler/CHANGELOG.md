@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.4.0"></a>
+# 3.4.0 (2018-06-11)
+
+
+### Features
+
+* sui-bundler lib to bundle libraries ([4df41ac](https://github.com/SUI-Components/sui/commit/4df41ac))
+
+
+
 <a name="3.3.0"></a>
 # 3.3.0 (2018-05-10)
 
@@ -287,6 +297,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
