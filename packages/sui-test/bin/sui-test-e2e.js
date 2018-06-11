@@ -46,7 +46,7 @@ const {baseUrl, userAgentAppend, gui, screenshotsOnError} = program
 const cypressConfig = {integrationFolder: TESTS_FOLDER, baseUrl}
 
 if (userAgentAppend) {
-  cypressConfig.userAgent = `${DEFAULT_USER_AGENT} ${userAgentAppend}`
+  cypressConfig.userAgent = `"${DEFAULT_USER_AGENT} ${userAgentAppend}"`
 }
 
 if (screenshotsOnError) {
