@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.5.0"></a>
+# 3.5.0 (2018-06-13)
+
+
+### Bug Fixes
+
+* sui-bundler dev not using babel-preset-sui ([d0ca7ef](https://github.com/SUI-Components/sui/commit/d0ca7ef))
+
+
+
 <a name="3.4.0"></a>
 # 3.4.0 (2018-06-11)
 
