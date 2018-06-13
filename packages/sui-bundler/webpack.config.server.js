@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
+const babelRules = require('./shared/module-rules-babel')
 
 let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
@@ -15,18 +16,7 @@ let webpackConfig = {
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['sui']
-          }
-        }
-      }
-    ]
+    rules: [babelRules]
   }
 }
 

@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
+const babelRules = require('./shared/module-rules-babel')
 require('./shared/shims')
 
 const {
@@ -44,18 +45,7 @@ let webpackConfig = {
   ],
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        include: /src/,
-        exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            babelrc: false,
-            presets: ['sui']
-          }
-        }
-      },
+      babelRules,
       {
         test: /(\.css|\.scss)$/,
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
