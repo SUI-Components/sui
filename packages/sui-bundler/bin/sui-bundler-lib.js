@@ -25,7 +25,8 @@ program
     console.log(`Examples:
       $ sui-bundler lib src/index.js -o umd/my-lib -p http://my-cdn.com/my-lib -C'
       $ sui-bundler lib --help'
-  `))
+  `)
+  )
   .parse(process.argv)
 
 const {

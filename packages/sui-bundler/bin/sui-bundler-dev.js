@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 // https://github.com/coryhouse/react-slingshot/blob/master/tools/srcServer.js
+const program = require('commander')
 const historyApiFallback = require('connect-history-api-fallback')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -8,9 +9,22 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const ncp = require('copy-paste')
 const detect = require('detect-port')
 const ora = require('ora')
-const app = require('express')()
 
+program
+  .option('-c, --context [folder]', 'Context folder (cwd by default)')
+  .on('--help', () => {
+    console.log('  Examples:')
+    console.log('')
+    console.log('    $ sui-bundler dev')
+    console.log('    $ sui-bundler dev --context /my/app/folder')
+    console.log('')
+  })
+  .parse(process.argv)
+
+const {context} = program
+const app = require('express')()
 const config = require('../webpack.config.dev')
+config.context = context || config.context
 const bundler = webpack(config)
 
 console.log('📦  Bundler Dev Server')
