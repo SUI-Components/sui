@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.16.0"></a>
+# 2.16.0 (2018-06-18)
+
+
+### Bug Fixes
+
+* upgrade babel-eslint version and fix problems with decorators ([7623e37](https://github.com/SUI-Components/sui/commit/7623e37))
+
+
+
 <a name="2.15.0"></a>
 # 2.15.0 (2018-05-30)
 
