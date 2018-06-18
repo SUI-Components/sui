@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2018-06-18)
+
+
+### Features
+
+* fix an error that was causing a false no renderProps error on our ssr server ([0a5c4c7](https://github.com/SUI-Components/sui/commit/0a5c4c7))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-04-12)
 
