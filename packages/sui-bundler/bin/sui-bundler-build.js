@@ -18,6 +18,7 @@ const chalkProcessing = chalk.blue
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
+  .option('-c, --context [folder]', 'Context folder (cwd by default)')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -28,7 +29,8 @@ program
   })
   .parse(process.argv)
 
-const {clean = false} = program
+const {clean = false, context} = program
+config.context = context || config.context
 
 process.env.NODE_ENV = process.env.NODE_ENV
   ? process.env.NODE_ENV
