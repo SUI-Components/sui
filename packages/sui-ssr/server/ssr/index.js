@@ -48,16 +48,16 @@ export default (req, res, next) => {
   match(
     {routes, location: url},
     async (error, redirectLocation, renderProps) => {
-      if (error || !renderProps) {
-        return next(error || new Error(`No renderProps for ${url}`))
-      }
-
-      if (redirectLocation) {
+      if (!error && redirectLocation) {
         const queryString = Object.keys(query).length
           ? `?${qs.stringify(query)}`
           : ''
         const destination = `${redirectLocation.pathname}${queryString}`
         return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
+      }
+
+      if (error || !renderProps) {
+        return next(error || new Error(`No renderProps for ${url}`))
       }
 
       const [criticalHTML, bodyHTML] = html.split('</head>')
