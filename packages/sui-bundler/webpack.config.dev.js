@@ -3,18 +3,8 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const babelRules = require('./shared/module-rules-babel')
+const definePlugin = require('./shared/define')
 require('./shared/shims')
-
-let pwd = process.cwd()
-
-// hack for Windows, as process.env.PWD is undefined in that environment
-// https://github.com/mrblueblue/gettext-loader/issues/18
-// Moreover, to have same caseing we need to map it.
-if (process.platform === 'win32') {
-  const [driveLetter, path] = pwd.split(':')
-  pwd = [driveLetter.toLowerCase(), path].join(':')
-  process.env.PWD = pwd
-}
 
 const {
   envVars,
@@ -26,7 +16,7 @@ const {
 
 let webpackConfig = {
   mode: 'development',
-  context: path.resolve(pwd, 'src'),
+  context: path.resolve(process.env.PWD, 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
@@ -41,10 +31,7 @@ let webpackConfig = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(envVars(config.env)),
-    new webpack.DefinePlugin({
-      __DEV__: true,
-      __BASE_DIR__: JSON.stringify(process.env.PWD)
-    }),
+    definePlugin({__DEV__: true}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
