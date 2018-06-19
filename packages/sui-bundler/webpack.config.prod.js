@@ -32,9 +32,9 @@ module.exports = {
   },
   entry: config.vendor
     ? {
-      app: MAIN_ENTRY_POINT,
-      vendor: config.vendor
-    }
+        app: MAIN_ENTRY_POINT,
+        vendor: config.vendor
+      }
     : MAIN_ENTRY_POINT,
   target: 'web',
   output: {
@@ -103,7 +103,7 @@ module.exports = {
         new SWPrecacheWebpackPlugin({
           dontCacheBustUrlsMatching: /\.\w{8}\./,
           filename: 'service-worker.js',
-          logger (message) {
+          logger(message) {
             if (message.indexOf('Total precache size is') === 0) {
               // This message occurs for every build and is a bit too noisy.
               return
@@ -115,22 +115,22 @@ module.exports = {
             'directoryIndex',
             directoryIndex(config.offline.whitelist)
           ),
-            directoryIndex(config.offline.whitelist)),
+          directoryIndex(config.offline.whitelist)),
           navigateFallback: (console.log(
             'navigateFallback',
             PUBLIC_PATH + navigateFallback(config.offline.whitelist)
           ),
-            PUBLIC_PATH + navigateFallback(config.offline.whitelist)),
+          PUBLIC_PATH + navigateFallback(config.offline.whitelist)),
           navigateFallbackWhitelist: (console.log(
             'navigateFallbackWhitelist',
             navigateFallbackWhitelist(config.offline.whitelist)
           ),
-            navigateFallbackWhitelist(config.offline.whitelist)),
+          navigateFallbackWhitelist(config.offline.whitelist)),
           runtimeCaching: (console.log(
             'runtimeCaching',
             runtimeCaching(config.offline.runtime)
           ),
-            runtimeCaching(config.offline.runtime)),
+          runtimeCaching(config.offline.runtime)),
           staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
         })
     ),
