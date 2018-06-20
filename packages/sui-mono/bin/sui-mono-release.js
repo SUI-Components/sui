@@ -64,7 +64,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 
     const tagPrefix = isMonoPackage ? '' : `${pkg}-`
 
-    const packageScope = isMonoPackage ? 'META' : pkg
+    const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
 
     const cwd = isMonoPackage
       ? BASE_DIR
