@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const babelRules = require('./shared/module-rules-babel')
+const definePlugin = require('./shared/define')
 require('./shared/shims')
 
 const {
@@ -15,7 +16,7 @@ const {
 
 let webpackConfig = {
   mode: 'development',
-  context: path.resolve(process.cwd(), 'src'),
+  context: path.resolve(process.env.PWD, 'src'),
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
@@ -30,10 +31,7 @@ let webpackConfig = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(envVars(config.env)),
-    new webpack.DefinePlugin({
-      __DEV__: true,
-      __BASE_DIR__: JSON.stringify(process.env.PWD)
-    }),
+    definePlugin({__DEV__: true}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({

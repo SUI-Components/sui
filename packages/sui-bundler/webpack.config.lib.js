@@ -27,7 +27,7 @@ module.exports = {
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
-    definePlugin
+    definePlugin()
   ]),
   module: {
     rules: [babelRules]
