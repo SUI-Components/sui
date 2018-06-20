@@ -4,8 +4,8 @@
 require('fs.realpath').monkeypatch()
 
 const program = require('commander')
+const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
-const {join} = require('path')
 const pkg = require('../package.json')
 
 const version = pkg.version
@@ -22,9 +22,8 @@ program
   )
   .action(({dirBase}) => {
     const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
-    getSpawnPromise(devServerExec, [], {
+    getSpawnPromise(devServerExec, ['-c', path.join(__dirname, '..', 'src')], {
       shell: false,
-      cwd: join(__dirname, '..'),
       env: process.env
     }).then(process.exit, process.exit)
   })

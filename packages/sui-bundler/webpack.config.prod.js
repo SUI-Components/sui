@@ -58,7 +58,7 @@ module.exports = {
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
-    definePlugin,
+    definePlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:8].css',
       chunkFilename: '[id].[contenthash:8].css'
