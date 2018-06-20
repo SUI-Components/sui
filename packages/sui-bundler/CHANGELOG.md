@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.7.0"></a>
+# 3.7.0 (2018-06-20)
+
+
+### Features
+
+* bump version ([c4d2567](https://github.com/SUI-Components/sui/commit/c4d2567))
+
+
+
 <a name="3.6.0"></a>
 # 3.6.0 (2018-06-20)
 
@@ -14,6 +24,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add context option to build ([49285e5](https://github.com/SUI-Components/sui/commit/49285e5))
+* use index.html like fallback ([b84e916](https://github.com/SUI-Components/sui/commit/b84e916))
 
 
 
@@ -322,6 +333,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
