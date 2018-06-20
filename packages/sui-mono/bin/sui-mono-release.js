@@ -5,6 +5,7 @@ const path = require('path')
 const config = require('../src/config')
 const checker = require('../src/check')
 const {serialSpawn} = require('@s-ui/helpers/cli')
+const {getPackageJson} = require('@s-ui/helpers/packages')
 
 program
   .on('--help', () => {
@@ -89,14 +90,6 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       ['git', ['commit --amend --no-verify --no-edit']]
     ]
     let publishCommands = [
-      [
-        'git',
-        [
-          'tag -a ' +
-            tagPrefix +
-            '$(node -p -e "require(\'./package.json\')".version) -m "v$(node -p -e "require(\'./package.json\')".version)"'
-        ]
-      ], // eslint-disable-line no-useless-escape
       scripts['build'] && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '--tags', 'origin', 'HEAD']]
@@ -104,6 +97,13 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 
     serialSpawn(releaseCommands, {cwd})
       .then(() => serialSpawn(docCommands))
+      .then(() => {
+        const {version} = getPackageJson(BASE_DIR)
+        return serialSpawn(
+          [['git', [`tag -a ${tagPrefix}${version} -m "v${version}"`]]],
+          {cwd}
+        )
+      })
       .then(() => serialSpawn(publishCommands, {cwd}))
       .then(resolve)
       .catch(reject)
