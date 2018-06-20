@@ -22,6 +22,8 @@ const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
+const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
+
 module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
@@ -37,7 +39,7 @@ module.exports = {
   target: 'web',
   output: {
     path: path.resolve(process.env.PWD, 'public'),
-    publicPath: process.env.CDN || config.cdn || '/',
+    publicPath: PUBLIC_PATH,
     chunkFilename: '[name].[chunkhash:8].js',
     filename: '[name].[chunkhash:8].js'
   },
@@ -116,9 +118,9 @@ module.exports = {
           directoryIndex(config.offline.whitelist)),
           navigateFallback: (console.log(
             'navigateFallback',
-            navigateFallback(config.offline.whitelist)
+            PUBLIC_PATH + navigateFallback(config.offline.whitelist)
           ),
-          navigateFallback(config.offline.whitelist)),
+          PUBLIC_PATH + navigateFallback(config.offline.whitelist)),
           navigateFallbackWhitelist: (console.log(
             'navigateFallbackWhitelist',
             navigateFallbackWhitelist(config.offline.whitelist)

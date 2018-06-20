@@ -15,7 +15,7 @@ exports.navigateFallback = whitelist => {
   if (!whitelist) {
     return ''
   }
-  return '200.html'
+  return 'index.html'
 }
 
 exports.runtimeCaching = runtime => {
