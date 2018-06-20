@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.6.0"></a>
+# 3.6.0 (2018-06-20)
+
+
+### Bug Fixes
+
+* prepare for windows ([3dd607a](https://github.com/SUI-Components/sui/commit/3dd607a))
+
+
+### Features
+
+* add context option to build ([49285e5](https://github.com/SUI-Components/sui/commit/49285e5))
+
+
+
 <a name="3.5.0"></a>
 # 3.5.0 (2018-06-13)
 
@@ -307,16 +322,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
