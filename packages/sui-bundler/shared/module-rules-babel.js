@@ -1,6 +1,8 @@
+const {sep} = require('path')
+
 module.exports = {
   test: /\.jsx?$/,
-  exclude: /node_modules(?!\/@s-ui\/studio\/src)/,
+  exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
   loader: 'babel-loader',
   query: {
     babelrc: false,
