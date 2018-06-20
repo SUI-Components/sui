@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.33.0"></a>
+# 1.33.0 (2018-06-20)
+
+
+### Bug Fixes
+
+* make releases work in windows ([9e837c1](https://github.com/SUI-Components/sui/commit/9e837c1))
+
+
+
 <a name="1.32.0"></a>
 # 1.32.0 (2018-05-31)
 
