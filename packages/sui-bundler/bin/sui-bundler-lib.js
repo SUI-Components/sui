@@ -48,7 +48,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const version = getPackageJson(process.cwd()).version
 const outputFolder = path.join(process.cwd(), output, path.sep, version)
-const webpackConfig = {...config, entry: path.resolve(process.cwd(), entry)}
+const webpackConfig = Object.assign({}, config, {
+  entry: path.resolve(process.cwd(), entry)
+})
 webpackConfig.output.publicPath = publicPath + version + '/'
 webpackConfig.output.path = outputFolder
 

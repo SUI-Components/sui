@@ -16,4 +16,5 @@ const defaults = {
   __BASE_DIR__: JSON.stringify(process.env.PWD)
 }
 
-module.exports = (vars = {}) => new webpack.DefinePlugin({...defaults, ...vars})
+module.exports = (vars = {}) =>
+  new webpack.DefinePlugin(Object.assign({}, defaults, vars))
