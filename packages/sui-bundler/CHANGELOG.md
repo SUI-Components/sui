@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.8.0"></a>
+# 3.8.0 (2018-06-21)
+
+
+### Bug Fixes
+
+* use Object.assign instead spread operator ([4bab0f8](https://github.com/SUI-Components/sui/commit/4bab0f8))
+* use Object.assign instead spread operator ([ecb8ac9](https://github.com/SUI-Components/sui/commit/ecb8ac9))
+
+
+
 <a name="3.7.0"></a>
 # 3.7.0 (2018-06-20)
 
