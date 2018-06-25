@@ -39,7 +39,8 @@ export const tryRequireMarkdown = async ({category, component, file}) => {
   return requireFile({
     defaultValue: '',
     importFile: () =>
-      import(`!raw-loader!${__BASE_DIR__}/components/${category}/${component}/${file}.md`)
+      import(/* webpackExclude: /\/node_modules\/(.*)\/(\w+).md$/ */
+      `!raw-loader!${__BASE_DIR__}/components/${category}/${component}/${file}.md`)
   })
 }
 
@@ -61,7 +62,8 @@ export const tryRequireCore = async ({category, component}) => {
   const pkg = requireFile({
     defaultValue: {dependencies: {}},
     importFile: () =>
-      import(`${__BASE_DIR__}/components/${category}/${component}/package.json`)
+      import(/* webpackExclude: /\/node_modules\/(.*)\/package.json$/ */
+      `${__BASE_DIR__}/components/${category}/${component}/package.json`)
   })
 
   const playground = requireFile({
