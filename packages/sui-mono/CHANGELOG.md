@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.34.0"></a>
+# 1.34.0 (2018-06-25)
+
+
+### Bug Fixes
+
+* avoid relase commits to be different in windows ([b1df7eb](https://github.com/SUI-Components/sui/commit/b1df7eb))
+* fix wrong release messages in windows ([1fbb54d](https://github.com/SUI-Components/sui/commit/1fbb54d))
+
+
+
 <a name="1.33.0"></a>
 # 1.33.0 (2018-06-20)
 
@@ -338,6 +349,24 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix refactor error. packageConfig has no config prop ([d2312a3](https://github.com/SUI-Components/sui/commit/d2312a3))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-06-16)
+
+
+### Bug Fixes
+
+* add build script which is mandatory ([8ce1de8](https://github.com/SUI-Components/sui/commit/8ce1de8))
+* move build script to scripts, instead of bin ([baa86d0](https://github.com/SUI-Components/sui/commit/baa86d0))
+* sui-mono/src/types does not work ([2f73f25](https://github.com/SUI-Components/sui/commit/2f73f25))
+* switch use of cz-crm to sui-cz ([9036614](https://github.com/SUI-Components/sui/commit/9036614))
+
+
+### Features
+
+* set package name to [@schibstedspain](https://github.com/schibstedspain)/sui-mono ([98255d4](https://github.com/SUI-Components/sui/commit/98255d4))
 
 
 
