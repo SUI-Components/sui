@@ -64,7 +64,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 
     const tagPrefix = isMonoPackage ? '' : `${pkg}-`
 
-    const packageScope = isMonoPackage ? 'META' : pkg
+    const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
 
     const cwd = isMonoPackage
       ? BASE_DIR
@@ -74,15 +74,7 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 
     let releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
-      ['git', ['add', cwd]],
-      [
-        'git',
-        [
-          'commit -m "release(' +
-            packageScope +
-            '): v$(node -p -e "require(\'./package.json\')".version)"'
-        ]
-      ]
+      ['git', ['add', cwd]]
     ]
     let docCommands = [
       [suiMonoBinPath, ['changelog', cwd]],
@@ -96,9 +88,18 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     ].filter(Boolean)
 
     serialSpawn(releaseCommands, {cwd})
+      .then(() => {
+        // Create release commit
+        const {version} = getPackageJson(cwd, true)
+        return serialSpawn(
+          [['git', [`commit -m "release(${packageScope}): v${version}"`]]],
+          {cwd}
+        )
+      })
       .then(() => serialSpawn(docCommands))
       .then(() => {
-        const {version} = getPackageJson(BASE_DIR)
+        // Create release tag
+        const {version} = getPackageJson(cwd)
         return serialSpawn(
           [['git', [`tag -a ${tagPrefix}${version} -m "v${version}"`]]],
           {cwd}

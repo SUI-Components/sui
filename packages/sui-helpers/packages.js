@@ -13,12 +13,17 @@ const getPackagesPaths = cwd => {
 
 /**
  * Get Package JSON info
- * @param  {String} packagePath Absolute pathç
+ * @param  {String} packagePath Absolute path
+ * @param  {Boolean} disableCache Disable to require.cache to ensure package.json is re-read
  * @return {Object} {} in case of error
  */
-const getPackageJson = packagePath => {
+const getPackageJson = (packagePath, disableCache = false) => {
   try {
-    return require(path.join(packagePath, 'package.json'))
+    const filePath = require.resolve(path.join(packagePath, 'package.json'))
+    if (disableCache) {
+      delete require.cache[filePath]
+    }
+    return require(filePath)
   } catch (e) {
     return {}
   }
