@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.6.0"></a>
+# 5.6.0 (2018-06-25)
+
+
+### Bug Fixes
+
+* avoid importing not needed files on node_modules and improve bundle time ([e6d3534](https://github.com/SUI-Components/sui/commit/e6d3534))
+
+
+
 <a name="5.5.0"></a>
 # 5.5.0 (2018-06-20)
 
