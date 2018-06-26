@@ -28,7 +28,10 @@ program
   })
   .parse(process.argv)
 
-const RIMRAF_CMD = [require.resolve('rimraf/bin'), ['node_modules']]
+const RIMRAF_CMD = [
+  require.resolve('rimraf/bin'),
+  ['package-lock.json', 'node_modules']
+]
 const NPM_CMD = ['npm', ['install']]
 let {chunk = DEFAULT_CHUNK} = program
 chunk = Number(chunk)
