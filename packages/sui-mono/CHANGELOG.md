@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.35.0"></a>
+# 1.35.0 (2018-06-26)
+
+
+### Features
+
+* add npm 6 support for phoenix ([31b3c7f](https://github.com/SUI-Components/sui/commit/31b3c7f))
+
+
+
 <a name="1.34.0"></a>
 # 1.34.0 (2018-06-25)
 
@@ -349,24 +359,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix refactor error. packageConfig has no config prop ([d2312a3](https://github.com/SUI-Components/sui/commit/d2312a3))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-06-16)
-
-
-### Bug Fixes
-
-* add build script which is mandatory ([8ce1de8](https://github.com/SUI-Components/sui/commit/8ce1de8))
-* move build script to scripts, instead of bin ([baa86d0](https://github.com/SUI-Components/sui/commit/baa86d0))
-* sui-mono/src/types does not work ([2f73f25](https://github.com/SUI-Components/sui/commit/2f73f25))
-* switch use of cz-crm to sui-cz ([9036614](https://github.com/SUI-Components/sui/commit/9036614))
-
-
-### Features
-
-* set package name to [@schibstedspain](https://github.com/schibstedspain)/sui-mono ([98255d4](https://github.com/SUI-Components/sui/commit/98255d4))
 
 
 
