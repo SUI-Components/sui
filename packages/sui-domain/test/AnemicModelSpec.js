@@ -44,14 +44,26 @@ describe('AnemicModelSpec', () => {
     const testVO = new TestValueObject({
       property1: 'John',
       property2: 'Doe',
+      property3: {
+        entities: [
+          new TestEntity({entityProp1: 'David', entityProp2: 'Smith'}),
+          new TestValueObject({entityProp1: 'Michael', entityProp2: 'Johnson'})
+        ]
+      },
       entity: new TestEntity({entityProp1: 'Jeremy', entityProp2: 'Johns'})
     })
-    const expectedVO = JSON.stringify({
+    const expectedJSON = {
       property1: 'John',
       property2: 'Doe',
+      property3: {
+        entities: [
+          {entityProp1: 'David', entityProp2: 'Smith'},
+          {entityProp1: 'Michael', entityProp2: 'Johnson'}
+        ]
+      },
       entity: {entityProp1: 'Jeremy', entityProp2: 'Johns'}
-    })
-    expect(JSON.stringify(testVO.toJSON())).to.be.equal(expectedVO)
+    }
+    expect(testVO.toJSON()).to.deep.equal(expectedJSON)
   })
 
   it('should not add methods to our ValueObject just properties.', () => {

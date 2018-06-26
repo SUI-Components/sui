@@ -1,4 +1,29 @@
 /**
+ * Recursively calls toJSON on each member
+ * @param {Object} obj
+ */
+const toJSON = obj => {
+  Object.keys(obj).forEach(key => {
+    obj[key] = obj[key] instanceof AnemicModel ? obj[key].toJSON() : obj[key]
+    obj[key] = obj[key] instanceof Object ? toJSON(obj[key]) : obj[key]
+  })
+  return obj
+}
+
+/**
+ * Converts anemic instance to an object with public props
+ * @param {AnemicModel} obj
+ */
+const anemicInstanceToObject = obj =>
+  Object.keys(obj)
+    .map(key => key.replace('_', ''))
+    .filter(key => obj._properties.hasOwnProperty(key))
+    .reduce((result, key) => {
+      result[key] = obj._properties[key]
+      return result
+    }, {})
+
+/**
  * Class AnemicModel have the responsibility of implement the common constructor and toJSON
  * code routines and make it transparent to our consumer.
  */
@@ -25,34 +50,6 @@ export default class AnemicModel {
    * @returns {*}
    */
   toJSON() {
-    return Object.keys(this).reduce((resultObject, key) => {
-      const replacedKey = key.replace('_', '')
-
-      if (!this._properties.hasOwnProperty(replacedKey)) {
-        return resultObject
-      }
-
-      if (this._properties[replacedKey] instanceof AnemicModel) {
-        return {
-          ...resultObject,
-          [replacedKey]: this._properties[replacedKey].toJSON()
-        }
-      }
-
-      if (Array.isArray(this._properties[replacedKey])) {
-        resultObject[replacedKey] = this._properties[replacedKey].map(obj => {
-          if (obj instanceof AnemicModel) {
-            return obj.toJSON()
-          }
-
-          return obj
-        })
-
-        return resultObject
-      }
-
-      resultObject[replacedKey] = this._properties[replacedKey]
-      return resultObject
-    }, {})
+    return toJSON(anemicInstanceToObject(this))
   }
 }
