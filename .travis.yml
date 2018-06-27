@@ -1,0 +1,15 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+node_js:
+  - '8'
+before_install:
+  - npm i -g npm@3
+  - npm i -g npx
+install:
+  - npm run phoenix
+script:
+  - npm run lint
+  - npm run test:ci
