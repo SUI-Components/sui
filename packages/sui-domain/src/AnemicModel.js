@@ -2,13 +2,13 @@
  * Recursively calls toJSON on each member
  * @param {Object} obj
  */
-const toJSON = obj => {
-  Object.keys(obj).forEach(key => {
-    obj[key] = obj[key] instanceof AnemicModel ? obj[key].toJSON() : obj[key]
-    obj[key] = obj[key] instanceof Object ? toJSON(obj[key]) : obj[key]
-  })
-  return obj
-}
+const mapValuesToPlainObjects = obj =>
+  Object.keys(obj).reduce((o, key) => {
+    o[key] = obj[key]
+    if (o[key] instanceof AnemicModel) o[key] = o[key].toJSON()
+    if (o[key] instanceof Object) o[key] = mapValuesToPlainObjects(o[key])
+    return o
+  }, obj instanceof Array ? [] : {})
 
 /**
  * Converts anemic instance to an object with public props
@@ -50,6 +50,6 @@ export default class AnemicModel {
    * @returns {*}
    */
   toJSON() {
-    return toJSON(anemicInstanceToObject(this))
+    return mapValuesToPlainObjects(anemicInstanceToObject(this))
   }
 }
