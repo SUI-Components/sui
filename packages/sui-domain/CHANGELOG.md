@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2018-06-27)
+
+
+### Bug Fixes
+
+* fix: anemic models toJSON not recursive ([d8dc699](https://github.com/SUI-Components/sui/commit/d8dc699))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2018-04-17)
 
