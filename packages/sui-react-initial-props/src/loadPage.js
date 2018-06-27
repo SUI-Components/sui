@@ -3,8 +3,18 @@ import PropTypes from 'prop-types'
 
 import withInitialProps from './withInitialProps'
 import createClientContextFactoryParams from './createClientContextFactoryParams'
+// object to store pages already created with the needed context
+let pagesMemoization = {}
 
 const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
+
+const createPageOnClientWithContext = ({Page, contextFactory, routeInfo}) => {
+  return contextFactory(createClientContextFactoryParams()).then(context => {
+    const PageWithContext = withInitialProps({context, routeInfo})(Page)
+    pagesMemoization[Page.name] = PageWithContext
+    return PageWithContext
+  })
+}
 
 const createUniversalPage = (contextFactory, routeInfo) => ({
   default: Page
@@ -25,13 +35,10 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
       // resolve the promise with the initialProps passed to the client
       return Promise.resolve(props => <Page {...initialProps} {...props} />)
     }
-    // create the context to be used as param on the getInitialProps
-    // TODO: Maybe this is no needed as we already have created it?
-    return (
-      contextFactory(createClientContextFactoryParams())
-        // now, we have to create the Page to be rendered on the client with all the info
-        .then(context => withInitialProps({context, routeInfo})(Page))
-    )
+    // check if we have the page in memory already or create a new one
+    return typeof pagesMemoization[Page.name] !== 'undefined'
+      ? pagesMemoization[Page.name]
+      : createPageOnClientWithContext({Page, contextFactory, routeInfo})
   }
   // we're in the server, so return just the component and pass the initialProps from the context
   const ServerPage = (props, {initialProps = {}}) => (
