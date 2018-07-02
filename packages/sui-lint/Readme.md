@@ -82,7 +82,7 @@ Steps to integrate sui-lint with an IDE:
 ```json
 {
   "eslintConfig": {
-    "extends": ["@s-ui/lint/eslintrc.js"]
+    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
   "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
