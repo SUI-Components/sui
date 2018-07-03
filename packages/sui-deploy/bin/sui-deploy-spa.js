@@ -4,6 +4,7 @@
 const program = require('commander')
 const NowClient = require('now-client')
 const getBranch = require('git-branch')
+const {toKebabCase} = require('@s-ui/js/lib/string')
 const {getSpawnPromise, showError, showWarning} = require('@s-ui/helpers/cli')
 const {writeFile, removeFile} = require('@s-ui/helpers/file')
 const DEFAULT_FOLDER = './public'
@@ -89,6 +90,7 @@ if (publicDeploy) {
 
 const executeDeploy = async ({deployName, buildFolder, branch}) => {
   deployName += branch ? '-' + (await getBranch()) : ''
+  deployName = toKebabCase(deployName)
 
   return (
     getSpawnPromise('now', ['rm', deployName, '--yes', NOW_TOKEN_OPTION])
