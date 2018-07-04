@@ -49,9 +49,11 @@ let webpackConfig = {
           },
           {
             loader: 'babel-loader',
-            query: {
+            options: {
               babelrc: false,
-              presets: ['sui']
+              presets: ['sui'],
+              cacheDirectory: true,
+              highlightCode: true
             }
           }
         ]
