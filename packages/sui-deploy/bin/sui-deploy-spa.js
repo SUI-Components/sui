@@ -19,7 +19,7 @@ const writePackageJson = ({name, path, auth} = {}) => {
       start: serveCommand.join(' ')
     },
     dependencies: {
-      serve: 'latest'
+      serve: '6'
     }
   }
   return writeFile(path, JSON.stringify(packageJson))
