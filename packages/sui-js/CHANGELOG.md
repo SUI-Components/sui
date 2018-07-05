@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-07-05)
+
+
+### Features
+
+* string - toKebabCase function ([258d72d](https://github.com/SUI-Components/sui/commit/258d72d))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-02-21)
 
