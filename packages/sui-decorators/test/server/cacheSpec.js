@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-
+/* eslint-disable no-unused-vars */
 import {expect} from 'chai'
 
 import cache from '../../src/decorators/cache'
