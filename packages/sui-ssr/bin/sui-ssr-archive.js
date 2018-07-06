@@ -7,7 +7,7 @@ const archive = require('../archive')
 require('colors')
 
 const pkg = require(path.join(process.cwd(), 'package.json'))
-const REMOVE_ZIP_PATH = path.join(process.cwd(), '*.zip')
+const REMOVE_ZIP_PATH = path.join(process.cwd(), '*-sui-ssr.zip')
 program
   .option('-C, --clean', 'Remove previous zip')
   .option(
@@ -36,7 +36,7 @@ if (program.clean) {
   console.log(' -> Removed! ✅'.green.bold)
 }
 
-const OUTPUT_ZIP_PATH = path.join(process.cwd(), 'server.zip')
+const OUTPUT_ZIP_PATH = path.join(process.cwd(), 'server-sui-ssr.zip')
 ;(async () => {
   console.log(' -> Compressing files... 🗄'.yellow)
   await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg})
