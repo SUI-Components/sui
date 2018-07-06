@@ -8,11 +8,16 @@ require('colors')
 
 const pkg = require(path.join(process.cwd(), 'package.json'))
 const REMOVE_ZIP_PATH = path.join(process.cwd(), '*-sui-ssr.zip')
+
 program
   .option('-C, --clean', 'Remove previous zip')
   .option(
     '-A, --auth <auth>',
     'A string based on username:password that will be used in order to log-in inside our website'
+  )
+  .option(
+    '-N, --outputFileName <outputFileName>',
+    'A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip'
   )
   .on('--help', () => {
     console.log('  Description:')
@@ -35,8 +40,11 @@ if (program.clean) {
   rimraf.sync(REMOVE_ZIP_PATH)
   console.log(' -> Removed! ✅'.green.bold)
 }
-
-const OUTPUT_ZIP_PATH = path.join(process.cwd(), 'server-sui-ssr.zip')
+const outputFileName = program.outputFileName
+const OUTPUT_ZIP_PATH = path.join(
+  process.cwd(),
+  `${outputFileName}-sui-ssr.zip`
+)
 ;(async () => {
   console.log(' -> Compressing files... 🗄'.yellow)
   await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg})
