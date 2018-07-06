@@ -37,6 +37,8 @@ Generate a static version of the server w/out dependencies in the server folder.
 
 Create a zip file with all assets needed to run the server in any infra.
 
+It will, over parameter, make that the express server run over a username and password in a htpasswd way.
+
 ```
   Usage: sui-ssr-archive [options]
 
@@ -44,6 +46,7 @@ Create a zip file with all assets needed to run the server in any infra.
 
     -C, --clean  Remove previous zip
     -h, --help   output usage information
+    -A, --auth <username:password> Will build the express definition under authentication htpassword like.
   Description:
 
   Examples:
