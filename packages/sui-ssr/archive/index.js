@@ -14,6 +14,10 @@ module.exports = ({outputZipPath, pkg}) =>
     })
 
     output.on('close', () => {
+      console.log(
+        ' -> Zip was created: ',
+        Math.round(archive.pointer() / 1024).toString().blue + ' kb'.blue
+      )
       console.log(' -> Success ✅'.green)
       resolve()
     })
