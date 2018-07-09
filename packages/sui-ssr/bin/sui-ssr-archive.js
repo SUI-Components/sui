@@ -3,14 +3,22 @@
 const program = require('commander')
 const rimraf = require('rimraf')
 const path = require('path')
-
 const archive = require('../archive')
+require('colors')
 
-const OUTPUT_ZIP_PATH = path.join(process.cwd(), 'server.zip')
 const pkg = require(path.join(process.cwd(), 'package.json'))
+const REMOVE_ZIP_PATH = path.join(process.cwd(), '*-sui-ssr.zip')
 
 program
   .option('-C, --clean', 'Remove previous zip')
+  .option(
+    '-A, --auth <auth>',
+    'A string based on username:password that will be used in order to log-in inside our website'
+  )
+  .option(
+    '-O, --outputFileName <outputFileName>',
+    'A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip'
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -20,14 +28,24 @@ program
     console.log('')
     console.log('    $ sui-ssr archive')
     console.log('')
+    console.log('')
+    console.log('')
+    console.log('    $ sui-ssr archive --auth="foo:bar"')
+    console.log('')
   })
   .parse(process.argv)
 
 if (program.clean) {
-  console.log('Removing previous zip...')
-  rimraf.sync(OUTPUT_ZIP_PATH)
+  console.log(' -> Removing ALL previous zip files 🗑 ...'.yellow.bold)
+  rimraf.sync(REMOVE_ZIP_PATH)
+  console.log(' -> Removed! ✅'.green.bold)
 }
-
+const outputFileName = program.outputFileName
+const OUTPUT_ZIP_PATH = path.join(
+  process.cwd(),
+  `${outputFileName}-sui-ssr.zip`
+)
 ;(async () => {
+  console.log(' -> Compressing files... 🗄'.yellow)
   await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg})
 })()
