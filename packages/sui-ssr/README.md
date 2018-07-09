@@ -1,9 +1,11 @@
 # sui-ssr
+
 > Plug SSR to you SUI SPA.
 
 SSR can be tought to configure and maintain. SSR handles that for you providing:
-* SSRaS Server-Side Rendering as a Service
-* Server improvements shared accross projects
+
+- SSRaS Server-Side Rendering as a Service
+- Server improvements shared accross projects
 
 ## Installation
 
@@ -16,7 +18,6 @@ npm install @s-ui/ssr --save
 Generate a static version of the server w/out dependencies in the server folder.
 
 ```
-
   Usage: sui-ssr-build [options]
 
   Options:
@@ -47,11 +48,26 @@ It will, over parameter, make that the express server run over a username and pa
     -C, --clean  Remove previous zip
     -h, --help   output usage information
     -A, --auth <username:password> Will build the express definition under authentication htpassword like.
+    -O, --outputFileName <outputFileName> A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
   Description:
 
   Examples:
 
     $ sui-ssr archive
+
+    $ sui-ssr archive --outputFileName=myFile // output: myFile-sui-ssr.zip
+```
+
+### IMPORTANT!!
+
+If no outputFileName is provided it will pipe the standard output stream `process.stdout`
+
+## User the ssr output as stream
+
+It use the stdout stream so you can do things like:
+
+```ssh
+  $ sui-ssr archive > ./myFileNameOrWhatever.zip
 ```
 
 ## Use the ssr in a lambda function

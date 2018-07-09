@@ -8,17 +8,23 @@ module.exports = ({outputZipPath, pkg}) =>
     let authVariableDefinition = program.auth
       ? authDefinitionBuilder(program.auth.split(':'))
       : ''
-    const output = fs.createWriteStream(outputZipPath)
+    const output = program.outputFileName
+      ? fs.createWriteStream(outputZipPath)
+      : process.stdout
     const archive = archiver('zip', {
       zlib: {level: 9}
     })
 
     output.on('close', () => {
       console.log(
-        ' -> Zip was created: ',
-        Math.round(archive.pointer() / 1024).toString().blue + ' kb'.blue
+        '-> File',
+        program.outputFileName.magenta.bold + '.zip'.magenta.bold,
+        ' was created - size ',
+        Math.round(archive.pointer() / 1024).toString().blue.bold +
+          ' kb'.blue.bold
       )
       console.log(' -> Success ✅'.green)
+
       resolve()
     })
     archive.on('error', reject)
