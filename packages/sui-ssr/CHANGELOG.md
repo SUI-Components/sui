@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.0.0"></a>
+# 2.0.0 (2018-07-09)
+
+
+### Features
+
+* added auth system to our express build. ([52cfb66](https://github.com/SUI-Components/sui/commit/52cfb66))
+* added custom name feature ([4aae7fc](https://github.com/SUI-Components/sui/commit/4aae7fc))
+* added descriptive logs ([c6f97a0](https://github.com/SUI-Components/sui/commit/c6f97a0))
+* added kb info on zip ([9472cc9](https://github.com/SUI-Components/sui/commit/9472cc9))
+* added KB to sui-ssr ([78f8202](https://github.com/SUI-Components/sui/commit/78f8202))
+* bump version to major. ([db9bd4a](https://github.com/SUI-Components/sui/commit/db9bd4a))
+* changed the way that we create files. Now we create the files with a name -sui-ssr su ([1a2fcd4](https://github.com/SUI-Components/sui/commit/1a2fcd4))
+* improved readme for the archive command ([fbaf1b2](https://github.com/SUI-Components/sui/commit/fbaf1b2))
+* increase a minor in order to change version to 2.0 ([87875f5](https://github.com/SUI-Components/sui/commit/87875f5))
+
+
+### BREAKING CHANGES
+
+* - We've change the way in what the output of the file works
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-06-18)
 

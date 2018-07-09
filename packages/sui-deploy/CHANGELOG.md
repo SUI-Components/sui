@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.3.0"></a>
+# 2.3.0 (2018-07-09)
+
+
+### Bug Fixes
+
+* fix path for default public path ([396acf1](https://github.com/SUI-Components/sui/commit/396acf1))
+
+
+### Features
+
+* rename /lib to /src to avoid gitignore ([1c24853](https://github.com/SUI-Components/sui/commit/1c24853))
+
+
+
+<a name="2.2.0"></a>
+# 2.2.0 (2018-07-09)
+
+
+### Bug Fixes
+
+* add missing package to dependencies ([9e714f7](https://github.com/SUI-Components/sui/commit/9e714f7))
+* fix serve version for spas ([2c0c542](https://github.com/SUI-Components/sui/commit/2c0c542))
+
+
+### Features
+
+* add deploy commands for folders (with docker) ([0055cfc](https://github.com/SUI-Components/sui/commit/0055cfc))
+
+
+
+<a name="2.1.0"></a>
+# 2.1.0 (2018-07-05)
+
+
+### Bug Fixes
+
+* force kebab case for deploy names ([ebb2411](https://github.com/SUI-Components/sui/commit/ebb2411))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-05-22)
 
