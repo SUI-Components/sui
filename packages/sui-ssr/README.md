@@ -64,7 +64,7 @@ If no outputFileName is provided it will pipe the standard output stream `proces
 
 ## User the ssr output as stream
 
-It use the stdout strema so you can do things like:
+It use the stdout stream so you can do things like:
 
 ```ssh
   $ sui-ssr archive > ./myFileNameOrWhatever.zip
