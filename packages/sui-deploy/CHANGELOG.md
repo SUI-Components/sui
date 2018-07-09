@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.2.0"></a>
+# 2.2.0 (2018-07-09)
+
+
+### Bug Fixes
+
+* add missing package to dependencies ([9e714f7](https://github.com/SUI-Components/sui/commit/9e714f7))
+* fix serve version for spas ([2c0c542](https://github.com/SUI-Components/sui/commit/2c0c542))
+
+
+### Features
+
+* add deploy commands for folders (with docker) ([0055cfc](https://github.com/SUI-Components/sui/commit/0055cfc))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2018-07-05)
 
