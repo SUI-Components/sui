@@ -1,5 +1,7 @@
 const NowClient = require('now-client')
+const {join} = require('path')
 const {writeFile, removeFile} = require('@s-ui/helpers/file')
+const DEFAULT_DIR = join(process.cwd(), 'public')
 
 // Get args of `now` command according to params
 const getNowCommandArgs = ({name, dir, auth, token}) => {
@@ -59,7 +61,7 @@ class NowDeployClient {
     )
   }
 
-  async deploy(dir = './public', {auth} = {}) {
+  async deploy(dir = DEFAULT_DIR, {auth} = {}) {
     const {getSpawnPromise} = require('@s-ui/helpers/cli')
     const {deployName: name, nowToken: token} = this
 
@@ -68,7 +70,7 @@ class NowDeployClient {
     return setAliasToLastDeploy(this.now, this.deployName)
   }
 
-  async deployAsSPA(dir, {auth}) {
+  async deployAsSPA(dir = DEFAULT_DIR, {auth}) {
     const {deployName: name} = this
     const path = dir + '/package.json'
 
