@@ -3,7 +3,7 @@
 
 const program = require('commander')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
-const {getDeployClientFromProgram} = require('../lib/utils')
+const {getDeployClientFromProgram} = require('../src/utils')
 
 program
   .usage(`[options] <name> [folder]`)

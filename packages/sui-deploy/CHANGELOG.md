@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.3.0"></a>
+# 2.3.0 (2018-07-09)
+
+
+### Bug Fixes
+
+* fix path for default public path ([396acf1](https://github.com/SUI-Components/sui/commit/396acf1))
+
+
+### Features
+
+* rename /lib to /src to avoid gitignore ([1c24853](https://github.com/SUI-Components/sui/commit/1c24853))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2018-07-09)
 
@@ -97,6 +112,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * prepare CLI api tu future targets ([96311ed](https://github.com/SUI-Components/sui/commit/96311ed))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-09-13)
+
+
+### Features
+
+* "sui-deploy spa" command to deploy SPAs ([b3aa044](https://github.com/SUI-Components/sui/commit/b3aa044))
 
 
 
