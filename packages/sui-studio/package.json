@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "5.6.0",
+  "version": "5.7.0-beta.6",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -24,9 +24,10 @@
     "updtr": "0.2.0"
   },
   "dependencies": {
-    "@s-ui/bundler": "3",
+    "@compositor/kit": "1.0.47",
+    "@s-ui/bundler": "beta",
     "@s-ui/component-peer-dependencies": "latest",
-    "@s-ui/deploy": "1",
+    "@s-ui/deploy": "2",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "@s-ui/react-domain-connector": "1",
@@ -49,6 +50,7 @@
     "pascal-case": "2.0.0",
     "pmx": "0.6.2",
     "react-docgen": "2.20.0",
+    "react-live": "1.10.1",
     "snarkdown": "1.2.2"
   },
   "suistudio-webpack": {

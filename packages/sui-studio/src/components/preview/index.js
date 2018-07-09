@@ -28,9 +28,7 @@ export default class Preview extends Component {
 
   componentDidUpdate(prevProps) {
     clearTimeout(this.timeoutID)
-    if (this.props.code !== prevProps.code) {
-      this.executeCode()
-    }
+    this.executeCode()
   }
 
   setTimeout() {
