@@ -48,7 +48,7 @@ It will, over parameter, make that the express server run over a username and pa
     -C, --clean  Remove previous zip
     -h, --help   output usage information
     -A, --auth <username:password> Will build the express definition under authentication htpassword like.
-    -N, --outputFileName <outputFileName> A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
+    -O, --outputFileName <outputFileName> A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
   Description:
 
   Examples:
