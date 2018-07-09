@@ -17,7 +17,10 @@ const getDeployNameFromProgram = async program => {
   const {toKebabCase} = require('@s-ui/js/lib/string')
   const [deployBaseName] = program.args
   const deployName =
-    deployBaseName + (program.branch ? '-' + (await getGitBranch()) : '')
+    deployBaseName +
+    (program.branch
+      ? '-' + (process.env.TRAVIS_BRANCH || (await getGitBranch()))
+      : '')
   return toKebabCase(deployName)
 }
 

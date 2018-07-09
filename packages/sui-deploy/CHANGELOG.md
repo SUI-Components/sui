@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.4.0"></a>
+# 2.4.0 (2018-07-09)
+
+
+### Bug Fixes
+
+* use brach name in travis env ([87051ee](https://github.com/SUI-Components/sui/commit/87051ee))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2018-07-09)
 
