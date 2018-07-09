@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
+const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
 require('./shared/shims')
 
@@ -36,9 +37,36 @@ let webpackConfig = {
   module: {
     rules: [
       {
+        test: /\.(js|jsx|mjs)$/,
+        enforce: 'pre',
+        use: [
+          {
+            options: {
+              formatter: eslintFormatter,
+              eslintPath: require.resolve('eslint'),
+              baseConfig: {
+                extends: [require.resolve('@s-ui/lint/eslintrc.js')]
+              },
+              // @remove-on-eject-begin
+              ignore: false,
+              useEslintrc: false
+              // @remove-on-eject-end
+            },
+            loader: require.resolve('eslint-loader')
+          }
+        ],
+        exclude: new RegExp(
+          `node_modules(?!${path.sep}@s-ui${path.sep}studio(${
+            path.sep
+          }workbench)?${path.sep}src)`
+        )
+      },
+      {
         test: /\.jsx?$/,
         exclude: new RegExp(
-          `node_modules(?!${path.sep}@s-ui${path.sep}studio${path.sep}src)`
+          `node_modules(?!${path.sep}@s-ui${path.sep}studio(${
+            path.sep
+          }workbench)?${path.sep}src)`
         ),
         use: [
           {

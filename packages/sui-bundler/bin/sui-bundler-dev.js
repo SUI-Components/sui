@@ -23,7 +23,6 @@ const createCompiler = require('../factories/createCompiler')
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
-const {PWD} = process.env
 let update = null
 
 program
@@ -43,18 +42,17 @@ webpackConfig.context = context || webpackConfig.context
 // Don't show ugly deprecation warnings that mess with the logging
 process.noDeprecation = true
 
-// Warn and crash if required files are missing
-if (
-  !checkRequiredFiles([
-    path.join(PWD, 'src', 'index.html'),
-    path.join(PWD, 'src', 'app.js')
-  ])
-) {
-  process.exit(1)
-}
-
 const start = async (config = webpackConfig) => {
   clearConsole()
+  // Warn and crash if required files are missing
+  if (
+    !checkRequiredFiles([
+      path.join(config.context, 'index.html'),
+      path.join(config.context, 'app.js')
+    ])
+  ) {
+    process.exit(1)
+  }
   const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)

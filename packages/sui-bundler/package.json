@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "3.9.0",
+  "version": "3.10.0-beta.2",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
-    "@s-ui/helpers": "1.13.0",
+    "@s-ui/helpers": "1",
+    "@s-ui/lint": "2",
     "autoprefixer": "8.2.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
@@ -34,6 +35,7 @@
     "css-content-loader": "1.0.0",
     "css-loader": "0.28.11",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
+    "eslint-loader": "2.0.0",
     "express": "4.16.3",
     "file-loader": "1.1.11",
     "fs-extra": "3.0.1",

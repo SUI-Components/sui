@@ -47,7 +47,6 @@ module.exports = (config, urls) => {
     }
 
     if (isSuccessful && isInteractive && isFirstCompile) {
-      debugger // eslint-disable-line
       printInstructions(urls)
     }
 
