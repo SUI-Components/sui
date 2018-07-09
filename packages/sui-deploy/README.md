@@ -20,8 +20,24 @@ When installed, a new CLI `sui-deploy` (node_modules/.bin/sui-deploy) is automat
 Deploy a folder as an static SPA:
 
 ```sh
+$ sui-deploy <name-of-project> [build-folder=./public] --now
 $ sui-deploy spa <name-of-project> [build-folder=./public] --now
 ```
+
+### `sui-deploy <name> [folder]`
+
+Deploys given folder.
+Handles:
+* `docker run` if DockerFile is found.
+* `npm run start` if package.json is found.
+* `serve .` otherwise.
+
+
+### `sui-deploy spa <name> [folder]`
+
+Same as previous but deploys app as an SPA, adding the option of auth.
+A static server is run but not found routes point to index.html to make SPAs routing to work.
+
 
 ### Options
 
@@ -35,7 +51,7 @@ $ sui-deploy spa 'test-project' --now -p
 
 Deploys to test-project.now.sh
 
-#### `-a, --auth <user:password>`
+#### `-a, --auth <user:password>` (only for spa)
 
 HTTP authentication user and pass separated by `:`.
 
