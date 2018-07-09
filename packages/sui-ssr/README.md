@@ -58,7 +58,7 @@ It will, over parameter, make that the express server run over a username and pa
     $ sui-ssr archive --outputFileName=myFile // output: myFile-sui-ssr.zip
 ```
 
-### IMPORTANT!
+### IMPORTANT!!
 
 If no outputFileName is provided it will pipe the standard output stream `process.stdout`
 
