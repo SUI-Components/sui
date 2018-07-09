@@ -16,7 +16,7 @@ program
     'A string based on username:password that will be used in order to log-in inside our website'
   )
   .option(
-    '-N, --outputFileName <outputFileName>',
+    '-O, --outputFileName <outputFileName>',
     'A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip'
   )
   .on('--help', () => {
