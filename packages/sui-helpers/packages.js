@@ -137,7 +137,9 @@ const resolveLazyNPMBin = async (binPath, pkg) => {
       `It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`
         .cyan
     )
-    return getSpawnPromise('npm', ['install', `${pkg}`]).then(resolvePkgBin)
+    return getSpawnPromise('npm', ['install', `${pkg}`, '--no-save']).then(
+      resolvePkgBin
+    )
   }
 }
 
