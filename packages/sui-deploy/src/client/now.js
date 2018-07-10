@@ -1,7 +1,10 @@
 const NowClient = require('now-client')
 const {join} = require('path')
 const {writeFile, removeFile} = require('@s-ui/helpers/file')
+const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
+const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const DEFAULT_DIR = join(process.cwd(), 'public')
+const NOW_VERSION = '11.2.8'
 
 // Get args of `now` command according to params
 const getNowCommandArgs = ({name, dir, auth, token}) => {
@@ -63,10 +66,12 @@ class NowDeployClient {
   }
 
   async deploy(dir = DEFAULT_DIR, {auth} = {}) {
-    const {getSpawnPromise} = require('@s-ui/helpers/cli')
     const {deployName: name, nowToken: token} = this
-
-    await getSpawnPromise('now', getNowCommandArgs({name, token, dir, auth}))
+    const nowBinPath = await resolveLazyNPMBin('.bin/now', `now@${NOW_VERSION}`)
+    await getSpawnPromise(
+      nowBinPath,
+      getNowCommandArgs({name, token, dir, auth})
+    )
     this.deletePreviousDeployments(1)
     return setAliasToLastDeploy(this.now, this.deployName)
   }
