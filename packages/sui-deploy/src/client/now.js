@@ -17,7 +17,9 @@ const getNowCommandArgs = ({name, dir, auth, token}) => {
 
 const getDeploymentsByName = async (now, name) => {
   const deployments = await now.getDeployments()
-  return deployments.filter(d => d.name === name)
+  return deployments
+    .filter(d => d.name === name)
+    .sort((a, b) => b.created - a.created)
 }
 
 const setAliasToLastDeploy = async (now, name) => {
@@ -55,7 +57,6 @@ class NowDeployClient {
     const deployments = await getDeploymentsByName(this.now, this.deployName)
     return Promise.all(
       deployments
-        .sort((a, b) => b.created - a.created)
         .slice(deploysToMaintain)
         .map(({uid}) => this.now.deleteDeployment(uid))
     )
