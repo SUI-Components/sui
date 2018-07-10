@@ -1,4 +1,5 @@
 # sui-mono
+
 > Simple CLI for monorepo/multipackage.
 
 Sui-mono is a tool that aims to simplify managment for monorepo/mutlipackage projects but it also works with monopackage projects.
@@ -7,6 +8,7 @@ It provides a standard template for commit messages and is able to decide what n
 We use ComVer as our versioning system
 
 It provides:
+
 * Commit template
 * Release manager (parses commits to publish packages according to their changes)
 * Run commands inside each package
@@ -20,7 +22,7 @@ It provides:
 
 You can run a single command on each package of the monorepo, **in series**
 
-```
+```sh
 $ sui-mono run <command>
 $ sui-mono run npx rimraf node_modules
 $ sui-mono run npm install
@@ -28,7 +30,7 @@ $ sui-mono run npm install
 
 You can also run them **in parallel**
 
-```
+```sh
 $ sui-mono run-parallel <command>
 $ sui-mono run-parallel npx rimraf node_modules
 $ sui-mono run-parallel npm install
@@ -58,12 +60,11 @@ You can also disable the chunks with 0 value and always execute all commands in 
 sui-mono phoenix -c 0
 ```
 
-
 ### Link
 
 Is you want to link all packages between each other, to ease development:
 
-```
+```sh
 sui-mono link
 ```
 
@@ -77,7 +78,7 @@ Note that:
 
 You do your normal git workflow, but when commiting you should use:
 
-```
+```sh
 sui-mono commit
 ```
 
@@ -88,7 +89,7 @@ It will prompt you with questions regarding your changes and will generate a sta
 You can commit the same message for all packages that actually contained stageable
 files.
 
-```
+```sh
 sui-mono commit-all -t "feat" -m "Refactor of dependencies"
 ```
 
@@ -98,17 +99,23 @@ The precommit will be executed only for the first commit.
 
 In order to release the steps are:
 
-```
+Preview what will be released
+
+```sh
 sui-mono check
 ```
 
-To get a preview of what will be released.
+Release all the packages
 
-```
+```sh
 sui-mono release
 ```
 
-To release all the packages
+In case you want to release a **single package** add package category and package name as args
+
+```sh
+sui-mono release [package category] [package name]
+```
 
 > Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
 
@@ -118,7 +125,7 @@ To release all the packages
 
 First you need to install the `@s-ui/mono` package in your project
 
-```
+```sh
 npm i --save-dev @s-ui/mono
 ```
 
@@ -130,7 +137,7 @@ The tool allows you to configure some parts of it, but it also defines a few def
 
 Here's a full example of the options
 
-```
+```json
 "private": true,
 "config": {
   "sui-mono": {
@@ -168,7 +175,7 @@ By default we check only 1 level inside the main folder, but if you have categor
 
 This information will be used for releases and commitizen scopes. If you have a project like this:
 
-```
+```text
 src/
   i18n/
   users/
@@ -178,7 +185,7 @@ src/
 
 The default options will give you a list of scopes like this one for your commit:
 
-```
+```text
 i18n
 users
 search
@@ -186,7 +193,7 @@ search
 
 In the case of suistudio, that generates a folder like this one:
 
-```
+```text
 components/
  ads/
   big/
@@ -197,14 +204,15 @@ components/
 ```
 
 If you set the configuration of your project like this:
-```
+
+```json
 "packagesFolder": "components"
 "deepLevel": 2
 ```
 
 You will have a list of scopes like this one when performing a commit:
 
-```
+```text
 ads/big
 ads/small
 card/featured
