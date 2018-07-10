@@ -8,6 +8,7 @@ const {serialSpawn} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 
 program
+  .option('-S, --scope <scope>', 'release a single scope')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -27,7 +28,7 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-mono release')
-    console.log('    $ sui-mono release [pkgCategory] [pkgName]')
+    console.log('    $ sui-mono release --scope packages/sui-test')
     console.log('    $ sui-mono --help')
     console.log('    $ sui-mono -h')
     console.log('')
@@ -35,7 +36,6 @@ program
   .parse(process.argv)
 
 const BASE_DIR = process.cwd()
-const [pkgCategory, pkgName] = program.args
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
@@ -55,9 +55,9 @@ const scopeMapper = ({scope, status}) => ({
 const releasesByPackages = ({status}) =>
   Object.keys(status).map(scope => scopeMapper({scope, status}))
 
-const singlePackageRelease = ({status, pkgCategory, pkgName}) =>
+const singlePackageRelease = ({status, packageScope}) =>
   Object.keys(status)
-    .filter(scope => scope === `${pkgCategory}/${pkgName}`)
+    .filter(scope => scope === packageScope)
     .map(scope => scopeMapper({scope, status}))
 
 const releaseEachPkg = ({pkg, code} = {}) => {
@@ -117,12 +117,12 @@ const releaseEachPkg = ({pkg, code} = {}) => {
   })
 }
 
-const releaseMode =
-  pkgCategory && pkgName ? singlePackageRelease : releasesByPackages
+const packageScope = program.scope
+const releaseMode = packageScope ? singlePackageRelease : releasesByPackages
 
 checker
   .check()
-  .then(status => releaseMode({status, pkgCategory, pkgName}))
+  .then(status => releaseMode({status, packageScope}))
   .then(releases =>
     releases
       .filter(({code}) => code !== 0)
