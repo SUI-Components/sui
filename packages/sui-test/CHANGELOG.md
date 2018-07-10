@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-07-10)
+
+
+### Features
+
+* upgrade cypress ([055c88a](https://github.com/SUI-Components/sui/commit/055c88a))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-06-11)
 
