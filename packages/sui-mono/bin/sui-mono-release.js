@@ -18,7 +18,7 @@ program
     )
     console.log('    Release is the process of:')
     console.log(
-      '     - Build your projcet (with build or prepublish npm script'
+      '     - Build your project (with build or prepublish npm script)'
     )
     console.log('     - Updating package.json version')
     console.log('     - Creating a release commit type')
@@ -27,6 +27,7 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-mono release')
+    console.log('    $ sui-mono release [pkgCategory] [pkgName]')
     console.log('    $ sui-mono --help')
     console.log('    $ sui-mono -h')
     console.log('')
@@ -34,7 +35,7 @@ program
   .parse(process.argv)
 
 const BASE_DIR = process.cwd()
-
+const [pkgCategory, pkgName] = program.args
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
@@ -46,13 +47,18 @@ const RELEASE_CODES = {
   3: 'major'
 }
 
-const releasesByPackages = () =>
-  checker.check().then(status =>
-    Object.keys(status).map(scope => ({
-      pkg: scope,
-      code: status[scope].increment
-    }))
-  )
+const scopeMapper = ({scope, status}) => ({
+  pkg: scope,
+  code: status[scope].increment
+})
+
+const releasesByPackages = ({status}) =>
+  Object.keys(status).map(scope => scopeMapper({scope, status}))
+
+const singlePackageRelease = ({status, pkgCategory, pkgName}) =>
+  Object.keys(status)
+    .filter(scope => scope === `${pkgCategory}/${pkgName}`)
+    .map(scope => scopeMapper({scope, status}))
 
 const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
@@ -111,7 +117,12 @@ const releaseEachPkg = ({pkg, code} = {}) => {
   })
 }
 
-releasesByPackages()
+const releaseMode =
+  pkgCategory && pkgName ? singlePackageRelease : releasesByPackages
+
+checker
+  .check()
+  .then(status => releaseMode({status, pkgCategory, pkgName}))
   .then(releases =>
     releases
       .filter(({code}) => code !== 0)
