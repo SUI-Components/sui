@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.5.0"></a>
+# 2.5.0 (2018-07-10)
+
+
+### Bug Fixes
+
+* always get deployments ordered by day desc ([6daa1e4](https://github.com/SUI-Components/sui/commit/6daa1e4))
+
+
+### Features
+
+* lazy loading of now CLI only on first deploy ([73573c0](https://github.com/SUI-Components/sui/commit/73573c0))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2018-07-09)
 
