@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.15.0"></a>
+# 1.15.0 (2018-07-10)
+
+
+### Bug Fixes
+
+* avoid npm@5 ti modify package.json on lazy installs ([619db04](https://github.com/SUI-Components/sui/commit/619db04))
+* show laszy install as info, not warning ([8ed1e8c](https://github.com/SUI-Components/sui/commit/8ed1e8c))
+
+
+### Features
+
+* add utility for lazy package bin loading ([fe03bbe](https://github.com/SUI-Components/sui/commit/fe03bbe))
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2018-06-25)
 
