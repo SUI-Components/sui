@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 const path = require('path')
 
 /**
@@ -130,9 +131,11 @@ const resolveLazyNPMBin = async (binPath, pkg) => {
   try {
     return resolvePkgBin()
   } catch (e) {
-    const {getSpawnPromise, showWarning} = require('./cli')
-    showWarning(
+    const {getSpawnPromise} = require('./cli')
+    require('colors')
+    console.log(
       `It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`
+        .cyan
     )
     return getSpawnPromise('npm', ['install', `${pkg}`]).then(resolvePkgBin)
   }
