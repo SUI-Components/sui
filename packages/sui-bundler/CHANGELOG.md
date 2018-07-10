@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.10.0"></a>
+# 3.10.0 (2018-07-10)
+
+
+### Bug Fixes
+
+* allow last versions of sui-helpers ([3ec95d1](https://github.com/SUI-Components/sui/commit/3ec95d1))
+
+
+
 <a name="3.9.0"></a>
 # 3.9.0 (2018-06-25)
 
@@ -350,16 +360,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
