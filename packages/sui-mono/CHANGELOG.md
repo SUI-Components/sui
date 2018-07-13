@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.36.0"></a>
+# 1.36.0 (2018-07-13)
+
+
+### Features
+
+* add scope instead of category/name and add scope option ([f947262](https://github.com/SUI-Components/sui/commit/f947262))
+* release single package only ([cedff2c](https://github.com/SUI-Components/sui/commit/cedff2c)), closes [#152](https://github.com/SUI-Components/sui/issues/152)
+
+
+
 <a name="1.35.0"></a>
 # 1.35.0 (2018-06-26)
 
