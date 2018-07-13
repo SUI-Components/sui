@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.11.0"></a>
+# 3.11.0 (2018-07-13)
+
+
+### Bug Fixes
+
+* fix Travis CI broken when used node 10 ([735fafa](https://github.com/SUI-Components/sui/commit/735fafa))
+
+
+
 <a name="3.10.0"></a>
 # 3.10.0 (2018-07-10)
 
@@ -360,6 +370,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
