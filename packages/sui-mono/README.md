@@ -111,10 +111,10 @@ Release all the packages
 sui-mono release
 ```
 
-In case you want to release a **single package** add package category and package name as args
+In case you want to release a **single package** use the `--scope` param
 
 ```sh
-sui-mono release [package category] [package name]
+sui-mono release --scope "packages/sui-test"
 ```
 
 > Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
