@@ -42,7 +42,7 @@
     "html-webpack-plugin": "3.2.0",
     "md5-file": "3.2.3",
     "mini-css-extract-plugin": "0.4.0",
-    "node-sass": "4.8.3",
+    "node-sass": "4.9.2",
     "node-sass-json-importer": "3.1.6",
     "npm-run-all": "3.1.2",
     "object.values": "1.0.4",
