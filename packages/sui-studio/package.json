@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "5.7.0-beta.6",
+  "version": "5.7.0-beta.7",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -50,7 +50,6 @@
     "pascal-case": "2.0.0",
     "pmx": "0.6.2",
     "react-docgen": "2.20.0",
-    "react-live": "1.10.1",
     "snarkdown": "1.2.2"
   },
   "suistudio-webpack": {
