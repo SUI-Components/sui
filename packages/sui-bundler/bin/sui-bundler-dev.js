@@ -25,19 +25,20 @@ const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
 let update = null
 
-program
-  .option('-c, --context [folder]', 'Context folder (cwd by default)')
-  .on('--help', () => {
-    console.log('  Examples:')
-    console.log('')
-    console.log('    $ sui-bundler dev')
-    console.log('    $ sui-bundler dev --context /my/app/folder')
-    console.log('')
-  })
-  .parse(process.argv)
-
-const {context} = program
-webpackConfig.context = context || webpackConfig.context
+if (!module.parent) {
+  program
+    .option('-c, --context [folder]', 'Context folder (cwd by default)')
+    .on('--help', () => {
+      console.log('  Examples:')
+      console.log('')
+      console.log('    $ sui-bundler dev')
+      console.log('    $ sui-bundler dev --context /my/app/folder')
+      console.log('')
+    })
+    .parse(process.argv)
+  const {context} = program
+  webpackConfig.context = context || webpackConfig.context
+}
 
 // Don't show ugly deprecation warnings that mess with the logging
 process.noDeprecation = true
