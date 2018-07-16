@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.11.0"></a>
+# 3.11.0 (2018-07-13)
+
+
+### Bug Fixes
+
+* fix Travis CI broken when used node 10 ([735fafa](https://github.com/SUI-Components/sui/commit/735fafa))
+
+
+
+<a name="3.10.0"></a>
+# 3.10.0 (2018-07-10)
+
+
+### Bug Fixes
+
+* allow last versions of sui-helpers ([3ec95d1](https://github.com/SUI-Components/sui/commit/3ec95d1))
+
+
+
 <a name="3.9.0"></a>
 # 3.9.0 (2018-06-25)
 

@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 const path = require('path')
 
 /**
@@ -109,6 +110,39 @@ const getUsedInternalDependencies = cwds => dependencies => {
     .map(mapNameToPath(cwds)(dependencies))
 }
 
+/**
+ * Resolve path in local ./node_modules folder
+ * @param {String} binPath  Relative path to file.
+ * @return {String} Absolute path of the file
+ */
+const resolveLocalNPMBin = binPath => () =>
+  require.resolve(binPath, {
+    paths: [path.resolve(process.cwd(), 'node_modules')]
+  })
+
+/**
+ * Resolve bin path. If not present, installs package prior return.
+ * @param {*} binPath Relative path to bin or node file.
+ * @param {*} pkg Name of package to install in case of absence. ex: `my-package@8.5`
+ * @return {Promise<String>} Absolute path of the file
+ */
+const resolveLazyNPMBin = async (binPath, pkg) => {
+  const resolvePkgBin = resolveLocalNPMBin(binPath)
+  try {
+    return resolvePkgBin()
+  } catch (e) {
+    const {getSpawnPromise} = require('./cli')
+    require('colors')
+    console.log(
+      `It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`
+        .cyan
+    )
+    return getSpawnPromise('npm', ['install', `${pkg}`, '--no-save']).then(
+      resolvePkgBin
+    )
+  }
+}
+
 module.exports = {
   getPackageJson,
   getPackageDependencies,
@@ -117,5 +151,6 @@ module.exports = {
   getPackagesNames,
   getDependencyMap,
   getInternalDependencyMap,
-  getUsedInternalDependencies
+  getUsedInternalDependencies,
+  resolveLazyNPMBin
 }

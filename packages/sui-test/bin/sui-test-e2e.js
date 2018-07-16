@@ -3,10 +3,9 @@
 
 const path = require('path')
 const program = require('commander')
-const chalk = require('chalk')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
-
-const CYPRESS_VERSION = '2.1.0'
+const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
+const CYPRESS_VERSION = '3.0.2'
 const CYPRESS_FOLDER_PATH = path.resolve(__dirname, 'cypress')
 const TESTS_FOLDER = process.cwd() + '/test-e2e'
 const SCREENSHOTS_FOLDER = process.cwd() + '/.tmp/test-e2e/screenshots'
@@ -54,31 +53,7 @@ if (screenshotsOnError) {
   cypressConfig.screenshotsFolder = SCREENSHOTS_FOLDER
 }
 
-// Resolve path for cypress in current working directory
-const resolveCypressBin = () =>
-  require.resolve('cypress/bin/cypress', {
-    paths: [path.resolve(process.cwd(), 'node_modules')]
-  })
-
-// Get cypress bin path. If not found, install cypress and then return its path
-const getCypressBinPath = async () => {
-  try {
-    return Promise.resolve(resolveCypressBin())
-  } catch (e) {
-    console.log(
-      chalk.magenta(
-        'It looks like this is your first time using sui-test e2e.' +
-          '\nCypress will be installed to setup your project for end-to-end testing.'
-      )
-    )
-    return getSpawnPromise('npm', [
-      'install',
-      `cypress@${CYPRESS_VERSION}`
-    ]).then(resolveCypressBin)
-  }
-}
-
-getCypressBinPath()
+resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
   .then(cypressBinPath =>
     getSpawnPromise(cypressBinPath, [
       gui ? 'open' : 'run',

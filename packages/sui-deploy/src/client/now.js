@@ -1,7 +1,10 @@
 const NowClient = require('now-client')
 const {join} = require('path')
 const {writeFile, removeFile} = require('@s-ui/helpers/file')
+const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
+const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const DEFAULT_DIR = join(process.cwd(), 'public')
+const NOW_VERSION = '11.2.8'
 
 // Get args of `now` command according to params
 const getNowCommandArgs = ({name, dir, auth, token}) => {
@@ -17,7 +20,9 @@ const getNowCommandArgs = ({name, dir, auth, token}) => {
 
 const getDeploymentsByName = async (now, name) => {
   const deployments = await now.getDeployments()
-  return deployments.filter(d => d.name === name)
+  return deployments
+    .filter(d => d.name === name)
+    .sort((a, b) => b.created - a.created)
 }
 
 const setAliasToLastDeploy = async (now, name) => {
@@ -55,18 +60,19 @@ class NowDeployClient {
     const deployments = await getDeploymentsByName(this.now, this.deployName)
     return Promise.all(
       deployments
-        .sort((a, b) => b.created - a.created)
         .slice(deploysToMaintain)
         .map(({uid}) => this.now.deleteDeployment(uid))
     )
   }
 
   async deploy(dir = DEFAULT_DIR, {auth} = {}) {
-    const {getSpawnPromise} = require('@s-ui/helpers/cli')
     const {deployName: name, nowToken: token} = this
-
-    await getSpawnPromise('now', getNowCommandArgs({name, token, dir, auth}))
-    this.deletePreviousDeployments(1)
+    const nowBinPath = await resolveLazyNPMBin('.bin/now', `now@${NOW_VERSION}`)
+    await getSpawnPromise(
+      nowBinPath,
+      getNowCommandArgs({name, token, dir, auth})
+    )
+    await this.deletePreviousDeployments(1)
     return setAliasToLastDeploy(this.now, this.deployName)
   }
 

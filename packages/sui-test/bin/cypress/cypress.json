@@ -2,9 +2,9 @@
     "fixturesFolder": false,
     "pluginsFile": false,
     "supportFile": false,
-    "videoRecording": false,
-    "screenshotOnHeadlessFailure": false,
-    "trashAssetsBeforeHeadlessRuns": true,
+    "video": false,
+    "screenshotOnRunFailure": false,
+    "trashAssetsBeforeRuns": true,
     "viewportWidth": 1240,
     "viewportHeight": 960
 }

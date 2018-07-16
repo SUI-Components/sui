@@ -8,6 +8,7 @@ const {serialSpawn} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 
 program
+  .option('-S, --scope <scope>', 'release a single scope')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -18,7 +19,7 @@ program
     )
     console.log('    Release is the process of:')
     console.log(
-      '     - Build your projcet (with build or prepublish npm script'
+      '     - Build your project (with build or prepublish npm script)'
     )
     console.log('     - Updating package.json version')
     console.log('     - Creating a release commit type')
@@ -27,6 +28,7 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-mono release')
+    console.log('    $ sui-mono release --scope packages/sui-test')
     console.log('    $ sui-mono --help')
     console.log('    $ sui-mono -h')
     console.log('')
@@ -34,7 +36,6 @@ program
   .parse(process.argv)
 
 const BASE_DIR = process.cwd()
-
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
@@ -46,13 +47,18 @@ const RELEASE_CODES = {
   3: 'major'
 }
 
-const releasesByPackages = () =>
-  checker.check().then(status =>
-    Object.keys(status).map(scope => ({
-      pkg: scope,
-      code: status[scope].increment
-    }))
-  )
+const scopeMapper = ({scope, status}) => ({
+  pkg: scope,
+  code: status[scope].increment
+})
+
+const releasesByPackages = ({status}) =>
+  Object.keys(status).map(scope => scopeMapper({scope, status}))
+
+const singlePackageRelease = ({status, packageScope}) =>
+  Object.keys(status)
+    .filter(scope => scope === packageScope)
+    .map(scope => scopeMapper({scope, status}))
 
 const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
@@ -111,7 +117,12 @@ const releaseEachPkg = ({pkg, code} = {}) => {
   })
 }
 
-releasesByPackages()
+const packageScope = program.scope
+const releaseMode = packageScope ? singlePackageRelease : releasesByPackages
+
+checker
+  .check()
+  .then(status => releaseMode({status, packageScope}))
   .then(releases =>
     releases
       .filter(({code}) => code !== 0)
