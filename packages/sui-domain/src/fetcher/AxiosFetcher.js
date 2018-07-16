@@ -57,9 +57,10 @@ export default class AxiosFetcher extends Fetcher {
    * Delete method
    * @method delete
    * @param {String} url
+   * @param {Object} options
    * @return {Object}
    */
-  delete(url) {
-    return this._axios.delete(url)
+  delete(url, options) {
+    return this._axios.delete(url, options)
   }
 }
