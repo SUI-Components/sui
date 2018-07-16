@@ -72,7 +72,7 @@ class NowDeployClient {
       nowBinPath,
       getNowCommandArgs({name, token, dir, auth})
     )
-    this.deletePreviousDeployments(1)
+    await this.deletePreviousDeployments(1)
     return setAliasToLastDeploy(this.now, this.deployName)
   }
 
