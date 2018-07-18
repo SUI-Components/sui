@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.12.0"></a>
+# 1.12.0 (2018-07-16)
+
+
+### Features
+
+* add options parameter to delete method ([0d7a286](https://github.com/SUI-Components/sui/commit/0d7a286))
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2018-06-27)
 
