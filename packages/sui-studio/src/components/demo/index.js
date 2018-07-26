@@ -51,7 +51,14 @@ const removeDefaultContext = exports => {
 
 export default class Demo extends Component {
   static async bootstrapWith(demo, {category, component, style, themes}) {
-    const [exports, playground, ctxt, events, pkg] = await tryRequire({
+    const [
+      exports,
+      playground,
+      ctxt,
+      events,
+      pkg,
+      DemoComponent
+    ] = await tryRequire({
       category,
       component
     })
@@ -64,7 +71,8 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      ctxt: context
+      ctxt: context,
+      DemoComponent
     })
   }
 
@@ -168,7 +176,8 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      themeSelectedIndex
+      themeSelectedIndex,
+      DemoComponent
     } = this.state
 
     const Base = exports.default
@@ -187,6 +196,12 @@ export default class Demo extends Component {
       withContext(contextTypes && context, context),
       withProvider(hasProvider, store)
     )(Base)
+
+    debugger // eslint-disable-line
+    const EnhanceDemoComponent = pipe(
+      withContext(contextTypes && context, context, contextTypes),
+      withProvider(hasProvider, store)
+    )(DemoComponent)
 
     !Enhance.displayName &&
       console.error(new Error('Component.displayName must be defined.'))
@@ -229,15 +244,19 @@ export default class Demo extends Component {
           />
         )}
 
-        <Preview
-          code={playground}
-          scope={{
-            React,
-            [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-            domain,
-            ...nonDefaultExports
-          }}
-        />
+        <EnhanceDemoComponent />
+
+        {false && (
+          <Preview
+            code={playground}
+            scope={{
+              React,
+              [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+              domain,
+              ...nonDefaultExports
+            }}
+          />
+        )}
       </div>
     )
   }
