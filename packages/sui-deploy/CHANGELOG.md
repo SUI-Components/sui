@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2018-07-26)
+
+
+### Bug Fixes
+
+* don't try to alias when alias is present ([e780919](https://github.com/SUI-Components/sui/commit/e780919))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2018-07-16)
 
