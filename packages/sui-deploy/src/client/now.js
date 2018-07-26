@@ -29,7 +29,12 @@ const setAliasToLastDeploy = async (now, name) => {
   const deployments = await getDeploymentsByName(now, name)
   if (deployments.length) {
     const lastDeployId = deployments.pop().uid
-    await now.createAlias(lastDeployId, name)
+    const aliases = await now.getAliases(lastDeployId)
+    if (!aliases.length) {
+      await now.createAlias(lastDeployId, name)
+    } else {
+      return `https://${aliases[0].alias}`
+    }
   }
   return `https://${name}.now.sh`
 }
