@@ -8,13 +8,11 @@ const ERROR_TIMEOUT = 500
 
 export default class Preview extends Component {
   static propTypes = {
-    className: PropTypes.string,
     code: PropTypes.string,
     scope: PropTypes.object
   }
 
   static defaultProps = {
-    className: '',
     scope: {React}
   }
 

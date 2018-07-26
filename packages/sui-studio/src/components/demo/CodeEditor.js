@@ -24,12 +24,17 @@ export default class CodeEditor extends PureComponent {
   }
 
   componentDidMount() {
+    this._createOnChangeDebouncedFn = this._createOnChangeDebounced()
     this.codeMirror = CodeMirror.fromTextArea(
       this.textareaNode,
       CODE_MIRROR_OPTIONS
     )
     this.codeMirror.setValue(this.props.playground)
-    this.codeMirror.on('change', this._createOnChangeDebounced())
+    this.codeMirror.on('change', this._createOnChangeDebouncedFn)
+  }
+
+  componentWillUnmount() {
+    this.codeMirror.off('change', this._createOnChangeDebouncedFn)
   }
 
   render() {

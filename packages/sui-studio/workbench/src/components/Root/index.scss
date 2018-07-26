@@ -1,19 +1,20 @@
 .Root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 24em;
-  justify-content: center;
-
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas: 
+    "header"
+    "content"
+    "footer";
   &-top {
-    flex: 1;
+    box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+    grid-area: header;
   }
 
   &-center {
-    flex: 1;
+    grid-area: content;
   }
 
   &-bottom {
-    flex: 1;
+    grid-area: footer;
   }
 }

@@ -62,6 +62,13 @@ const studioDevConfig = {
   resolve: {
     alias: {
       component: path.join(PWD, 'components', category, component, 'src'),
+      package: path.join(
+        PWD,
+        'components',
+        category,
+        component,
+        'package.json'
+      ),
       demo: path.join(PWD, 'demo', category, component)
     }
   },

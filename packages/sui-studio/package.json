@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "5.7.0-beta.7",
+  "version": "5.7.0-beta.9",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -24,7 +24,6 @@
     "updtr": "0.2.0"
   },
   "dependencies": {
-    "@compositor/kit": "1.0.47",
     "@s-ui/bundler": "beta",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/deploy": "2",
