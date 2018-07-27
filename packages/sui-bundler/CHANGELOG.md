@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.12.0"></a>
+# 3.12.0 (2018-07-27)
+
+
+### Features
+
+* option to not use version directory ([deb58bf](https://github.com/SUI-Components/sui/commit/deb58bf))
+
+
+
 <a name="3.11.0"></a>
 # 3.11.0 (2018-07-13)
 
