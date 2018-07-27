@@ -87,6 +87,7 @@ sui-bundler lib umd/index.js -o lib/fancy -p http://my-cdn.com/fancy
 `sui-bundler lib` will add your package version as subfolder:
 * `-o lib/fancy` outputs to `./lib/fancy/0.0.0/`
 * `-p http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy/0.0.0`  as public path for chunks loading.
+* `-r http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy`  as public path for chunks loading, discarded the version subdirectory.
 
 ## Configuration
 

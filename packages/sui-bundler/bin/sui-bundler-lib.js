@@ -17,6 +17,7 @@ program
   .usage('[options] <entry>')
   .option('-C, --clean', 'Remove previous build folder before create a new one')
   .option('-o, --output [output]', 'Bundle folder path')
+  .option('-r, --root', 'Create build in root dir instead of version subdir')
   .option(
     '-p, --path [path]',
     'Absolute public path where files will be located.'
@@ -33,7 +34,8 @@ const {
   clean = false,
   output,
   path: publicPath,
-  args: [entry]
+  args: [entry],
+  root = false
 } = program
 
 if (!output) {
@@ -47,7 +49,12 @@ if (!entry) {
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const version = getPackageJson(process.cwd()).version
-const outputFolder = path.join(process.cwd(), output, path.sep, version)
+const outputFolder = path.join(
+  process.cwd(),
+  output,
+  path.sep,
+  root ? '' : version
+)
 const webpackConfig = Object.assign({}, config, {
   entry: path.resolve(process.cwd(), entry)
 })
