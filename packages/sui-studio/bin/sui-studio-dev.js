@@ -48,6 +48,7 @@ const studioDevConfig = {
     new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID)})
   ],
   resolve: {
+    ...config.resolve,
     alias: {
       component: path.join(PWD, 'components', category, component, 'src'),
       package: path.join(
