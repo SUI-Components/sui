@@ -31,33 +31,6 @@ const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const CONTAINER_CLASS = 'sui-Studio'
 const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
-// import deepmerge from 'deepmerge'
-// const DEFAULT_CONTEXT = 'default'
-// const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
-// const REACT_DOMAIN_CONNECTOR = '@s-ui/react-domain-connector'
-// const createContextByType = (ctxt, type) => {
-//   // check if the user has created a context.js with the needed contextTypes
-//   if (typeof ctxt !== 'object' || ctxt === null) {
-//     console.warn(
-//       "[Studio] You're trying to use a contextType in your component but it seems that you haven't created a context.js in the playground folder. This will likely make your component won't work as expected or it might have an useless context."
-//     )
-//   }
-//   return deepmerge(ctxt[DEFAULT_CONTEXT], ctxt[type])
-// }
-//
-// const isFunction = fnc => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
-// const cleanDisplayName = displayName => {
-//   const [fallback, name] = displayName.split(/\w+\((\w+)\)/)
-//   return name !== undefined ? name : fallback
-// }
-// const pipe = (...funcs) => arg =>
-//   funcs.reduce((value, func) => func(value), arg)
-//
-// const removeDefaultContext = exports => {
-//   const {[DEFAULT_CONTEXT]: toOmit, ...restOfExports} = exports
-//   return restOfExports
-// }
-
 export default class Demo extends Component {
   static async bootstrapWith(demo, {category, component, style, themes}) {
     const [exports, playground, ctxt, events, pkg] = await tryRequire({
@@ -106,15 +79,6 @@ export default class Demo extends Component {
       Demo.bootstrapWith(this, {category, component, style, themes})
     })
   }
-
-  // _checkIfPackageHasProvider({pkg}) {
-  //   return (
-  //     pkg &&
-  //     pkg.dependencies &&
-  //     (pkg.dependencies[DDD_REACT_REDUX] ||
-  //       pkg.dependencies[REACT_DOMAIN_CONNECTOR])
-  //   )
-  // }
 
   componentDidMount() {
     this._loadStyles(this.props.params)
