@@ -8,7 +8,6 @@ function linkLoader(source) {
     )
   }, source)
 
-  console.log(source, linkedSource)
   return linkedSource
 }
 

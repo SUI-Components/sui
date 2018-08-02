@@ -59,7 +59,6 @@ const start = async ({
   config = webpackConfig,
   packagesToLink = program.linkPackage || []
 }) => {
-  debugger // eslint-disable-line
   clearConsole()
   // Warn and crash if required files are missing
   if (
