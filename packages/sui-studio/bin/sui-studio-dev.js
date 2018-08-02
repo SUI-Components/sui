@@ -2,6 +2,7 @@
 
 const program = require('commander')
 const path = require('path')
+const webpack = require('webpack')
 
 const config = require('@s-ui/bundler/webpack.config.dev')
 const startDevServer = require('@s-ui/bundler/bin/sui-bundler-dev')
@@ -12,6 +13,15 @@ const {PWD} = process.env
 
 program
   .option('--link-all', 'Link all component inside the studio')
+  .option(
+    '--link-package [package]',
+    'Link all component inside the studio',
+    (v, m) => {
+      m.push(v)
+      return m
+    },
+    []
+  )
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -21,13 +31,7 @@ program
   })
   .parse(process.argv)
 
-const entryPointsComponents = !program.linkAll
-  ? {}
-  : componentsFullPath(PWD).reduce((acc, componentPath) => {
-      const pkg = require(path.join(componentPath, 'package.json'))
-      acc[pkg.name] = path.join(componentPath, 'src')
-      return acc
-    }, {})
+const entryPointsComponents = program.linkAll ? componentsFullPath(PWD) : []
 
 const [componentID] = program.args
 const [category, component] = componentID.split('/')
@@ -39,26 +43,10 @@ if (!category || !component) {
 const studioDevConfig = {
   ...config,
   context: path.join(__dirname, '..', 'workbench', 'src'),
-  module: {
-    ...config.module,
-    rules: [
-      ...config.module.rules,
-      {
-        test: /(\.css|\.scss)$/,
-        use: {loader: 'link-loader', options: {entryPointsComponents}}
-      },
-      {
-        test: /\.jsx?$/,
-        // TODO: That is crap, I need better options
-        exclude: new RegExp(
-          `node_modules(?!${path.sep}@s-ui${path.sep}studio(${
-            path.sep
-          }workbench)?${path.sep}src)`
-        ),
-        use: {loader: 'link-loader', options: {entryPointsComponents}}
-      }
-    ]
-  },
+  plugins: [
+    ...config.plugins,
+    new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID)})
+  ],
   resolve: {
     alias: {
       component: path.join(PWD, 'components', category, component, 'src'),
@@ -71,12 +59,10 @@ const studioDevConfig = {
       ),
       demo: path.join(PWD, 'demo', category, component)
     }
-  },
-  resolveLoader: {
-    alias: {
-      'link-loader': require.resolve('./helpers/LinkLoader')
-    }
   }
 }
 
-startDevServer(studioDevConfig)
+startDevServer({
+  config: studioDevConfig,
+  packagesToLink: [...entryPointsComponents, ...program.linkPackage]
+})

@@ -4,14 +4,15 @@ import PropTypes from 'prop-types'
 import {hot} from 'react-hot-loader'
 
 import Header from '../Header'
+import Select from '../Select'
 import Preview from '../../../../src/components/preview'
 import CodeMirror from '../CodeMirror'
 
 import {createStore} from '@s-ui/react-domain-connector'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
+import Style from '../../../../src/components/style'
 import {
-  DEFAULT_CONTEXT,
   createContextByType,
   checkIfPackageHasProvider,
   cleanDisplayName,
@@ -20,7 +21,6 @@ import {
 } from '../../../../src/components/demo/utilities'
 
 import playground from '!raw-loader!demo/playground'
-import 'component/index.scss'
 
 import Component, * as named from 'component'
 import pkg from 'package'
@@ -29,13 +29,17 @@ const nonDefault = removeDefaultContext(named)
 const hasProvider = checkIfPackageHasProvider(pkg)
 
 class Root extends React.PureComponent {
-  static propTypes = {contexts: PropTypes.object}
+  static propTypes = {
+    contexts: PropTypes.object,
+    themes: PropTypes.object,
+    componentID: PropTypes.string
+  }
 
-  state = {playground, actualContext: DEFAULT_CONTEXT}
+  state = {playground, actualContext: 'default', actualStyle: 'default'}
 
   render() {
-    const {playground, actualContext} = this.state
-    const {contexts} = this.props
+    const {playground, actualContext, actualStyle} = this.state
+    const {contexts, themes, componentID} = this.props
 
     const contextTypes =
       Component.contextTypes || Component.originalContextTypes
@@ -46,11 +50,25 @@ class Root extends React.PureComponent {
       withContext(contextTypes && context, context),
       withProvider(hasProvider, store)
     )(Component)
-
     return (
       <div className="Root">
+        <Style>{themes[actualStyle]}</Style>
+
         <div className="Root-top">
-          <Header />
+          <Header componentID={componentID}>
+            <Select
+              label={'Contexts'}
+              options={contexts}
+              initValue={'default'}
+              onChange={nextValue => this.setState({actualContext: nextValue})}
+            />
+            <Select
+              label={'Themes'}
+              options={themes}
+              initValue={'default'}
+              onChange={nextValue => this.setState({actualStyle: nextValue})}
+            />
+          </Header>
         </div>
         <div className="Root-center">
           <CodeMirror
