@@ -9,13 +9,15 @@ import {isFunction} from '../../src/components/demo/utilities'
 const importAll = requireContext => requireContext.keys().map(requireContext)
 ;(async () => {
   const defaultStyle = await import('!css-content-loader!css-loader!sass-loader!component/index.scss')
-  const requireContextThemes = require.context(
-    '!css-content-loader!css-loader!sass-loader!demo/themes',
-    false,
-    /\.scss$/
-  )
   let styles = []
+  let requireContextThemesKeys = []
   try {
+    const requireContextThemes = require.context(
+      '!css-content-loader!css-loader!sass-loader!demo/themes',
+      false,
+      /\.scss$/
+    )
+    requireContextThemesKeys = requireContextThemes.keys()
     styles = importAll(requireContextThemes)
   } catch (e) {}
 
@@ -26,7 +28,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
   } catch (e) {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
-  const themes = requireContextThemes.keys().reduce((acc, path, index) => {
+  const themes = requireContextThemesKeys.reduce((acc, path, index) => {
     acc[path.replace('./', '').replace('.scss', '')] = styles[index]
     return acc
   }, {})
