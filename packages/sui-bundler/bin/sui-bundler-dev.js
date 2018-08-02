@@ -21,6 +21,8 @@ const webpackConfig = require('../webpack.config.dev')
 const createDevServerConfig = require('../factories/createDevServerConfig')
 const createCompiler = require('../factories/createCompiler')
 
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
+
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
 let update = null
@@ -28,11 +30,21 @@ let update = null
 if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
+    .option(
+      '--link-package [package]',
+      'Replace eachi ocurrencie of this package with a abosule path to this folder',
+      (v, m) => {
+        m.push(v)
+        return m
+      },
+      []
+    )
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
       console.log('    $ sui-bundler dev')
       console.log('    $ sui-bundler dev --context /my/app/folder')
+      console.log('    $ sui-bundler dev --link-package /my/domain/folder')
       console.log('')
     })
     .parse(process.argv)
@@ -43,7 +55,11 @@ if (!module.parent) {
 // Don't show ugly deprecation warnings that mess with the logging
 process.noDeprecation = true
 
-const start = async (config = webpackConfig) => {
+const start = async ({
+  config = webpackConfig,
+  packagesToLink = program.linkPackage || []
+}) => {
+  debugger // eslint-disable-line
   clearConsole()
   // Warn and crash if required files are missing
   if (
@@ -57,8 +73,9 @@ const start = async (config = webpackConfig) => {
   const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
-  const compiler = createCompiler(config, urls)
-  const serverConfig = createDevServerConfig(config, urls.lanUrlForConfig)
+  const nextConfig = linkLoaderConfigBuilder({config, packagesToLink})
+  const compiler = createCompiler(nextConfig, urls)
+  const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
   const devServer = new WebpackDevServer(compiler, serverConfig)
   console.log(chalk.cyan('Starting the development server...\n'))
   devServer.listen(port, HOST, err => {
@@ -81,7 +98,11 @@ const start = async (config = webpackConfig) => {
 
   if (update) {
     console.log(
-      chalk.gray(`The latest version is ${update.latest}. Please update!`)
+      chalk.gray(
+        `The latest version of ${require('../package.json').name} is ${
+          update.latest
+        }. Please update!`
+      )
     )
   }
 }

@@ -47,10 +47,8 @@ let webpackConfig = {
               baseConfig: {
                 extends: [require.resolve('@s-ui/lint/eslintrc.js')]
               },
-              // @remove-on-eject-begin
               ignore: false,
               useEslintrc: false
-              // @remove-on-eject-end
             },
             loader: require.resolve('eslint-loader')
           }
