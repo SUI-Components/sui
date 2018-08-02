@@ -32,7 +32,7 @@ if (!module.parent) {
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
     .option(
       '--link-package [package]',
-      'Replace eachi ocurrencie of this package with a abosule path to this folder',
+      'Replace each occurrence of this package with an absolute path to this folder',
       (v, m) => {
         m.push(v)
         return m
@@ -67,6 +67,9 @@ const start = async ({
       path.join(config.context, 'app.js')
     ])
   ) {
+    console.error(
+      `Required files are missing, create and index.html and app.js inside your src folder.`
+    )
     process.exit(1)
   }
   const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
