@@ -58,7 +58,7 @@ process.noDeprecation = true
 const start = async ({
   config = webpackConfig,
   packagesToLink = program.linkPackage || []
-}) => {
+} = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
   if (
