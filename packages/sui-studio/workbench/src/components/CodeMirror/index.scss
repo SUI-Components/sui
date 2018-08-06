@@ -1,0 +1,42 @@
+@import '~codemirror/lib/codemirror.css';
+@import '~codemirror/theme/material.css';
+
+.sui-StudioDemo {
+  &-codeButton {
+    @include floating-button($c-primary, 56px, 72px);
+    @include breakpoint-from(s) {
+      bottom: auto;
+      top: 8px;
+    };
+  }
+
+  &-code {
+    display: none;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    z-index: 9998;
+
+    &--open {
+      display: block;
+    }
+  }
+}
+
+.CodeMirror {
+  font-size: 12px;
+  height: 100%;
+
+  &-scroll {
+    width: 100%;
+  }
+
+  &-sizer {
+    border-right-width: 0 !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+}
