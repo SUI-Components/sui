@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.7.0"></a>
+# 5.7.0 (2018-08-06)
+
+
+### Bug Fixes
+
+* avoid compile error when there is not themes folder ([f216afd](https://github.com/SUI-Components/sui/commit/f216afd))
+* preserve the resolver extesion config ([e10b6fd](https://github.com/SUI-Components/sui/commit/e10b6fd))
+
+
+### Features
+
+* bump beta version ([f15dc76](https://github.com/SUI-Components/sui/commit/f15dc76))
+* contextify working component ([9a3bee3](https://github.com/SUI-Components/sui/commit/9a3bee3))
+* create dev command ([d27de0a](https://github.com/SUI-Components/sui/commit/d27de0a))
+* create LinkLoader to be used in the --link-all flag ([fbe7f0d](https://github.com/SUI-Components/sui/commit/fbe7f0d))
+* improve workbench UI ([673ef5d](https://github.com/SUI-Components/sui/commit/673ef5d))
+* use version 3 of sui-bundler ([881698c](https://github.com/SUI-Components/sui/commit/881698c))
+
+
+
 <a name="5.6.0"></a>
 # 5.6.0 (2018-06-25)
 

@@ -28,6 +28,8 @@ program
     }).then(process.exit, process.exit)
   })
 
+program.command('dev <component>', 'Develop an isolate component').alias('d')
+
 program
   .command(
     'generate <category> <component>',

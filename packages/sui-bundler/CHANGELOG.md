@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.14.0"></a>
+# 3.14.0 (2018-08-06)
+
+
+### Features
+
+* bump version ([7d629cf](https://github.com/SUI-Components/sui/commit/7d629cf))
+
+
+
+<a name="3.12.0"></a>
+# 3.12.0 (2018-08-06)
+
+
+### Bug Fixes
+
+* fix error with default parameters ([05ef733](https://github.com/SUI-Components/sui/commit/05ef733))
+
+
+### Features
+
+* add link-loader ([8590edb](https://github.com/SUI-Components/sui/commit/8590edb))
+* improve console output ([ce10da8](https://github.com/SUI-Components/sui/commit/ce10da8))
+
+
+
+<a name="3.12.0"></a>
+# 3.12.0 (2018-07-27)
+
+
+### Features
+
+* export a start function ([c5cc60b](https://github.com/SUI-Components/sui/commit/c5cc60b))
+* option to not use version directory ([deb58bf](https://github.com/SUI-Components/sui/commit/deb58bf))
+
+
+
 <a name="3.11.0"></a>
 # 3.11.0 (2018-07-13)
 
@@ -19,6 +56,13 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * allow last versions of sui-helpers ([3ec95d1](https://github.com/SUI-Components/sui/commit/3ec95d1))
+
+
+### Features
+
+* improve dev with eslint loader ([fe74597](https://github.com/SUI-Components/sui/commit/fe74597))
+* use cacheBabel compiled ([00ba04c](https://github.com/SUI-Components/sui/commit/00ba04c))
+* use react-dev-tools for dev command ([fc43780](https://github.com/SUI-Components/sui/commit/fc43780))
 
 
 
