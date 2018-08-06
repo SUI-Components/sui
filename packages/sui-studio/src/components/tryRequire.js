@@ -67,6 +67,7 @@ export const tryRequireCore = async ({category, component}) => {
   })
 
   const playground = requireFile({
+    defaultValue: false,
     importFile: () =>
       import(`!raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`)
   })

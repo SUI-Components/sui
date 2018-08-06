@@ -12,6 +12,7 @@ import {createStore} from '@s-ui/react-domain-connector'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
 import Style from '../../../../src/components/style'
+import When from '../../../../src/components/when'
 import {
   createContextByType,
   checkIfPackageHasProvider,
@@ -20,36 +21,48 @@ import {
   removeDefaultContext
 } from '../../../../src/components/demo/utilities'
 
-import playground from '!raw-loader!demo/playground'
-
 import Component, * as named from 'component'
 import pkg from 'package'
+
+let playground
+try {
+  playground = require('!raw-loader!demo/playground')
+} catch (e) {}
 
 const nonDefault = removeDefaultContext(named)
 const hasProvider = checkIfPackageHasProvider(pkg)
 
 class Root extends React.PureComponent {
   static propTypes = {
+    componentID: PropTypes.string,
     contexts: PropTypes.object,
-    themes: PropTypes.object,
-    componentID: PropTypes.string
+    demo: PropTypes.node,
+    themes: PropTypes.object
   }
 
   state = {playground, actualContext: 'default', actualStyle: 'default'}
 
   render() {
     const {playground, actualContext, actualStyle} = this.state
-    const {contexts, themes, componentID} = this.props
+    const {contexts, themes, componentID, demo: DemoComponent} = this.props
 
     const contextTypes =
       Component.contextTypes || Component.originalContextTypes
     const context = contextTypes && createContextByType(contexts, actualContext)
     const {domain} = context || {}
     const store = domain && hasProvider && createStore(domain)
+
     const Enhance = pipe(
       withContext(contextTypes && context, context),
       withProvider(hasProvider, store)
     )(Component)
+
+    const EnhanceDemoComponent =
+      DemoComponent &&
+      pipe(
+        withContext(contextTypes && context, context, contextTypes),
+        withProvider(hasProvider, store)
+      )(DemoComponent)
     return (
       <div className="Root">
         <Style>{themes[actualStyle]}</Style>
@@ -71,18 +84,23 @@ class Root extends React.PureComponent {
           </Header>
         </div>
         <div className="Root-center">
-          <CodeMirror
-            onChange={this.handleChangeCodeMirror}
-            playground={playground}
-          />
-          <Preview
-            scope={{
-              React,
-              [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-              ...nonDefault
-            }}
-            code={playground}
-          />
+          <When value={!EnhanceDemoComponent && playground}>
+            <CodeMirror
+              onChange={this.handleChangeCodeMirror}
+              playground={playground}
+            />
+            <Preview
+              scope={{
+                React,
+                [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                ...nonDefault
+              }}
+              code={playground}
+            />
+          </When>
+          <When value={EnhanceDemoComponent}>
+            <EnhanceDemoComponent />
+          </When>
         </div>
         <div className="Root-bottom" />
       </div>

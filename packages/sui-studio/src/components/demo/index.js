@@ -6,6 +6,7 @@ import React, {Component} from 'react'
 import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
+import When from '../when'
 
 import {tryRequireCore as tryRequire} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
@@ -171,10 +172,12 @@ export default class Demo extends Component {
     )(Base)
 
     debugger // eslint-disable-line
-    const EnhanceDemoComponent = pipe(
-      withContext(contextTypes && context, context, contextTypes),
-      withProvider(hasProvider, store)
-    )(DemoComponent)
+    const EnhanceDemoComponent =
+      DemoComponent &&
+      pipe(
+        withContext(contextTypes && context, context, contextTypes),
+        withProvider(hasProvider, store)
+      )(DemoComponent)
 
     !Enhance.displayName &&
       console.error(new Error('Component.displayName must be defined.'))
@@ -196,10 +199,6 @@ export default class Demo extends Component {
           <EventsButtons events={events || {}} store={store} domain={domain} />
         </div>
 
-        <button className="sui-StudioDemo-codeButton" onClick={this.handleCode}>
-          {isCodeOpen ? iconClose : iconCode}
-        </button>
-
         <button
           className="sui-StudioDemo-fullScreenButton"
           onClick={this.handleFullScreen}
@@ -207,19 +206,24 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        {isCodeOpen && (
-          <CodeEditor
-            isOpen={isCodeOpen}
-            onChange={playground => {
-              this.setState({playground})
-            }}
-            playground={playground}
-          />
-        )}
+        <When value={!EnhanceDemoComponent && playground}>
+          <button
+            className="sui-StudioDemo-codeButton"
+            onClick={this.handleCode}
+          >
+            {isCodeOpen ? iconClose : iconCode}
+          </button>
 
-        <EnhanceDemoComponent />
+          {isCodeOpen && (
+            <CodeEditor
+              isOpen={isCodeOpen}
+              onChange={playground => {
+                this.setState({playground})
+              }}
+              playground={playground}
+            />
+          )}
 
-        {false && (
           <Preview
             code={playground}
             scope={{
@@ -229,7 +233,11 @@ export default class Demo extends Component {
               ...nonDefaultExports
             }}
           />
-        )}
+        </When>
+
+        <When value={EnhanceDemoComponent}>
+          <EnhanceDemoComponent />
+        </When>
       </div>
     )
   }

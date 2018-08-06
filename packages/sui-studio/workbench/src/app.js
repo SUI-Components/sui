@@ -27,6 +27,12 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
     ctxt = resp.default || resp
   } catch (e) {}
 
+  let DemoComponent
+  try {
+    const comp = require('demo/demo')
+    DemoComponent = comp.default || comp
+  } catch (e) {}
+
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
   const themes = requireContextThemesKeys.reduce((acc, path, index) => {
     acc[path.replace('./', '').replace('.scss', '')] = styles[index]
@@ -38,6 +44,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
       contexts={contexts}
       themes={{...themes, default: defaultStyle.default}}
       componentID={__COMPONENT_ID__}
+      demo={DemoComponent}
     />,
     document.getElementById('app')
   )
