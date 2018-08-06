@@ -2,10 +2,9 @@
 /* eslint-disable no-console */
 
 const webpack = require('webpack')
-const ora = require('ora')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-
+const chalk = require('chalk')
 const config = require('../webpack.config.prod')
 
 console.log('🔎  Bundler Analyzer')
@@ -23,15 +22,16 @@ config.plugins.push(
   })
 )
 
-const spinner = ora(`Building and analyzing...`).start()
+console.log(chalk.cyan('Building and analyzing...\n'))
 webpack(config).run((error, stats) => {
   if (error) {
-    spinner.fail('Error analyzing the build')
+    console.log(chalk.red('Error analyzing the build'))
     throw new Error(error)
   }
 
-  spinner.succeed('Bundle analyzed successfully')
+  console.log(chalk.green('Bundle analyzed successfully'))
   const jsonStats = stats.toJson()
+
   if (stats.hasErrors()) {
     return jsonStats.errors.map(error => console.error(error))
   }
