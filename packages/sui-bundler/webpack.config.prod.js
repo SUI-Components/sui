@@ -44,7 +44,12 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   optimization: {
-    minimizer: [uglifyJsPlugin, new OptimizeCSSAssetsPlugin({})],
+    minimizer: [
+      uglifyJsPlugin,
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {discardComments: {removeAll: true}}
+      })
+    ],
     runtimeChunk: true,
     splitChunks: {
       cacheGroups: {
