@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.17.0"></a>
+# 3.17.0 (2018-08-07)
+
+
+### Bug Fixes
+
+* let autoprefixer comments to avoid problems ([be99f15](https://github.com/SUI-Components/sui/commit/be99f15))
+
+
+
 <a name="3.16.0"></a>
 # 3.16.0 (2018-08-07)
 
