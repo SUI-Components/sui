@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.16.0"></a>
+# 3.16.0 (2018-08-07)
+
+
+### Features
+
+* remove all comments on CSS after building it ([d76cfa9](https://github.com/SUI-Components/sui/commit/d76cfa9))
+* update all dependencies to latest and remove not used ones ([6576422](https://github.com/SUI-Components/sui/commit/6576422))
+
+
+
 <a name="3.15.0"></a>
 # 3.15.0 (2018-08-06)
 
@@ -424,6 +435,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
