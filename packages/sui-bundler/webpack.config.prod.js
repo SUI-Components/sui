@@ -47,7 +47,7 @@ module.exports = {
     minimizer: [
       uglifyJsPlugin,
       new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {discardComments: {removeAll: true}}
+        cssProcessorOptions: {}
       })
     ],
     runtimeChunk: true,
