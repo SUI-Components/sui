@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-08-08)
+
+
+### Features
+
+* use latest core-js to use same version as latest babel-polyfill used ([f6ea42f](https://github.com/SUI-Components/sui/commit/f6ea42f))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-06-07)
 
@@ -59,16 +69,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * add module.exports ([944e204](https://github.com/SUI-Components/sui/commit/944e204))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-07-19)
-
-
-### Features
-
-* create sui-polyfills to be reused on all our projects ([df2086e](https://github.com/SUI-Components/sui/commit/df2086e))
 
 
 
