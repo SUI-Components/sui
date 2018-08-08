@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.17.0"></a>
+# 3.17.0 (2018-08-07)
+
+
+### Bug Fixes
+
+* let autoprefixer comments to avoid problems ([be99f15](https://github.com/SUI-Components/sui/commit/be99f15))
+
+
+
+<a name="3.16.0"></a>
+# 3.16.0 (2018-08-07)
+
+
+### Features
+
+* remove all comments on CSS after building it ([d76cfa9](https://github.com/SUI-Components/sui/commit/d76cfa9))
+* update all dependencies to latest and remove not used ones ([6576422](https://github.com/SUI-Components/sui/commit/6576422))
+
+
+
+<a name="3.15.0"></a>
+# 3.15.0 (2018-08-06)
+
+
+### Bug Fixes
+
+* use sui-bundler analyze wihout removed dependency ([b19a233](https://github.com/SUI-Components/sui/commit/b19a233))
+
+
+
 <a name="3.14.0"></a>
 # 3.14.0 (2018-08-06)
 
