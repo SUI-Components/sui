@@ -67,8 +67,16 @@ export const tryRequireCore = async ({category, component}) => {
   })
 
   const playground = requireFile({
+    defaultValue: false,
     importFile: () =>
       import(`!raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`)
+  })
+
+  const demo = requireFile({
+    defaultValue: false,
+    importFile: () =>
+      import(/* webpackExclude: /\/node_modules\/(.*)\/demo/index.js$/ */
+      `${__BASE_DIR__}/demo/${category}/${component}/demo/index.js`)
   })
 
   const context = requireFile({
@@ -83,5 +91,5 @@ export const tryRequireCore = async ({category, component}) => {
       import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
   })
 
-  return Promise.all([exports, playground, context, events, pkg])
+  return Promise.all([exports, playground, context, events, pkg, demo])
 }

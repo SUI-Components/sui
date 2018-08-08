@@ -6,6 +6,7 @@ import React, {Component} from 'react'
 import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
+import When from '../when'
 
 import {tryRequireCore as tryRequire} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
@@ -33,7 +34,14 @@ const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
 export default class Demo extends Component {
   static async bootstrapWith(demo, {category, component, style, themes}) {
-    const [exports, playground, ctxt, events, pkg] = await tryRequire({
+    const [
+      exports,
+      playground,
+      ctxt,
+      events,
+      pkg,
+      DemoComponent
+    ] = await tryRequire({
       category,
       component
     })
@@ -46,7 +54,8 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      ctxt: context
+      ctxt: context,
+      DemoComponent
     })
   }
 
@@ -141,7 +150,8 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      themeSelectedIndex
+      themeSelectedIndex,
+      DemoComponent
     } = this.state
 
     const Base = exports.default
@@ -160,6 +170,13 @@ export default class Demo extends Component {
       withContext(contextTypes && context, context),
       withProvider(hasProvider, store)
     )(Base)
+
+    const EnhanceDemoComponent =
+      DemoComponent &&
+      pipe(
+        withContext(contextTypes && context, context, contextTypes),
+        withProvider(hasProvider, store)
+      )(DemoComponent)
 
     !Enhance.displayName &&
       console.error(new Error('Component.displayName must be defined.'))
@@ -181,10 +198,6 @@ export default class Demo extends Component {
           <EventsButtons events={events || {}} store={store} domain={domain} />
         </div>
 
-        <button className="sui-StudioDemo-codeButton" onClick={this.handleCode}>
-          {isCodeOpen ? iconClose : iconCode}
-        </button>
-
         <button
           className="sui-StudioDemo-fullScreenButton"
           onClick={this.handleFullScreen}
@@ -192,25 +205,38 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        {isCodeOpen && (
-          <CodeEditor
-            isOpen={isCodeOpen}
-            onChange={playground => {
-              this.setState({playground})
-            }}
-            playground={playground}
-          />
-        )}
+        <When value={!EnhanceDemoComponent && playground}>
+          <button
+            className="sui-StudioDemo-codeButton"
+            onClick={this.handleCode}
+          >
+            {isCodeOpen ? iconClose : iconCode}
+          </button>
 
-        <Preview
-          code={playground}
-          scope={{
-            React,
-            [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-            domain,
-            ...nonDefaultExports
-          }}
-        />
+          {isCodeOpen && (
+            <CodeEditor
+              isOpen={isCodeOpen}
+              onChange={playground => {
+                this.setState({playground})
+              }}
+              playground={playground}
+            />
+          )}
+
+          <Preview
+            code={playground}
+            scope={{
+              React,
+              [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+              domain,
+              ...nonDefaultExports
+            }}
+          />
+        </When>
+
+        <When value={EnhanceDemoComponent}>
+          <EnhanceDemoComponent />
+        </When>
       </div>
     )
   }
