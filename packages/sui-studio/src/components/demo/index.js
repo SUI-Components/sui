@@ -171,7 +171,6 @@ export default class Demo extends Component {
       withProvider(hasProvider, store)
     )(Base)
 
-    debugger // eslint-disable-line
     const EnhanceDemoComponent =
       DemoComponent &&
       pipe(
