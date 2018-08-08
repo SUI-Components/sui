@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.8.0"></a>
+# 5.8.0 (2018-08-08)
+
+
+### Features
+
+* allow create Entry Point to make a demo page ([64e9979](https://github.com/SUI-Components/sui/commit/64e9979))
+
+
+
 <a name="5.7.0"></a>
 # 5.7.0 (2018-08-06)
 
@@ -18,6 +28,7 @@ All notable changes to this project will be documented in this file.
 * contextify working component ([9a3bee3](https://github.com/SUI-Components/sui/commit/9a3bee3))
 * create dev command ([d27de0a](https://github.com/SUI-Components/sui/commit/d27de0a))
 * create LinkLoader to be used in the --link-all flag ([fbe7f0d](https://github.com/SUI-Components/sui/commit/fbe7f0d))
+* first commit ([6b69575](https://github.com/SUI-Components/sui/commit/6b69575))
 * improve workbench UI ([673ef5d](https://github.com/SUI-Components/sui/commit/673ef5d))
 * use version 3 of sui-bundler ([881698c](https://github.com/SUI-Components/sui/commit/881698c))
 
@@ -564,22 +575,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
-
-
-
-<a name="4.0.0"></a>
-# 4.0.0 (2017-06-22)
-
-
-### Features
-
-* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
-* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
-
-
-### BREAKING CHANGES
-
-* API is now named sui-studio instead of suistudio
 
 
 
