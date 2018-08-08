@@ -7,7 +7,7 @@
   "keywords": [],
   "author": "Miguel Angel Duran <miduga@gmail.com>",
   "dependencies": {
-    "core-js": "2.5.0"
+    "core-js": "2.5.7"
   },
   "license": "MIT",
   "repository": {
