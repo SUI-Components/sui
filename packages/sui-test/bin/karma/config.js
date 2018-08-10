@@ -19,7 +19,8 @@ const config = {
       [
         'babelify',
         {
-          presets: ['sui']
+          presets: ['sui'],
+          plugins: ['dynamic-import-node']
         }
       ],
       'envify'
