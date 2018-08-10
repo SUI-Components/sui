@@ -125,6 +125,9 @@ Tests are executed with [cypress](https://www.cypress.io/). It provides a specia
 
 **Important:** Cypress is not installed as dependency of `@s-ui/test`. It will be auto-installed only on first `sui-test e2e` execution.
 
+#### `sui-test e2e --scope='sub/folder'`
+
+You can execute only a subset of tests in `./test-e2e/`. The example above would only execute tests in `./test-e2e/sub/folder`.
 
 #### `sui-test e2e --userAgentAppend='My custom string'`
 
