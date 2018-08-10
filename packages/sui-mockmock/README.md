@@ -91,3 +91,6 @@ domain
   ...
   ...
 ```
+
+[correct]:https://img.shields.io/badge/-OK-green.svg
+[incorrect]:https://img.shields.io/badge/-KO-red.svg
