@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.18.0"></a>
+# 3.18.0 (2018-08-10)
+
+
+### Bug Fixes
+
+* now sass is linked too ([ed30901](https://github.com/SUI-Components/sui/commit/ed30901))
+
+
+
 <a name="3.17.0"></a>
 # 3.17.0 (2018-08-07)
 
@@ -445,16 +455,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
