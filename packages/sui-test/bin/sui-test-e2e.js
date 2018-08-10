@@ -42,7 +42,11 @@ program
   .parse(process.argv)
 
 const {baseUrl, userAgentAppend, gui, screenshotsOnError} = program
-const cypressConfig = {integrationFolder: TESTS_FOLDER, baseUrl}
+const cypressConfig = {
+  integrationFolder: TESTS_FOLDER,
+  baseUrl,
+  fixturesFolder: path.join(TESTS_FOLDER, 'fixtures')
+}
 
 if (userAgentAppend) {
   cypressConfig.userAgent = `"${DEFAULT_USER_AGENT} ${userAgentAppend}"`
