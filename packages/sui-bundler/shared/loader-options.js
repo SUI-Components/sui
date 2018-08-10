@@ -5,7 +5,7 @@ const jsonImporter = require('node-sass-json-importer')
 
 module.exports = {
   'sass-loader': {
-    importer: jsonImporter
+    importer: [jsonImporter]
   },
   'postcss-loader': {
     plugins: loader => [require('autoprefixer')()]
