@@ -5,7 +5,7 @@ const path = require('path')
 const program = require('commander')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
-const CYPRESS_VERSION = '3.0.2'
+const CYPRESS_VERSION = '3.0.3'
 const CYPRESS_FOLDER_PATH = path.resolve(__dirname, 'cypress')
 const TESTS_FOLDER = process.cwd() + '/test-e2e'
 const SCREENSHOTS_FOLDER = process.cwd() + '/.tmp/test-e2e/screenshots'
@@ -37,12 +37,17 @@ program
     '-U, --userAgentAppend <userAgentAppend>',
     'Append string to UserAgent header.'
   )
+  .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
 
-const {baseUrl, userAgentAppend, gui, screenshotsOnError} = program
-const cypressConfig = {integrationFolder: TESTS_FOLDER, baseUrl}
+const {baseUrl, userAgentAppend, gui, screenshotsOnError, scope} = program
+const cypressConfig = {
+  integrationFolder: path.join(TESTS_FOLDER, scope || ''),
+  baseUrl,
+  fixturesFolder: path.join(TESTS_FOLDER, 'fixtures')
+}
 
 if (userAgentAppend) {
   cypressConfig.userAgent = `"${DEFAULT_USER_AGENT} ${userAgentAppend}"`

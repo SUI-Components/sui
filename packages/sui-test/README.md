@@ -98,6 +98,8 @@ sui-test e2e [options]
 
 **`sui-test e2e` assumes that your e2e tests are located in the `./test-e2e/` folder of your project.**
 
+**Important:** If you need to have fixtures files (or helpers), put them in the `./test-e2e/fixtures` so they aren't executed as spec files.
+
 ### Options
 
 ```sh
@@ -123,6 +125,10 @@ Tests are executed with [cypress](https://www.cypress.io/). It provides a specia
 
 **Important:** Cypress is not installed as dependency of `@s-ui/test`. It will be auto-installed only on first `sui-test e2e` execution.
 
+#### `sui-test e2e --scope='sub/folder'`
+
+You can execute only a subset of tests in `./test-e2e/`. The example above would only execute tests in `./test-e2e/sub/folder`.
+
 #### `sui-test e2e --userAgentAppend='My custom string'`
 
 Cypress can be detected as a robot if your server has that kind of protection or firewall. In this case, if your server allows an exception by header, you can append to the `UserAgent` header a string that cypress will add when opening your site with the browser.
@@ -130,6 +136,7 @@ Cypress can be detected as a robot if your server has that kind of protection or
 #### `sui-test e2e --screenshotsOnError`
 
 If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/test-e2e/screenshots` folder of your project.
+
 
 
 # Tools
