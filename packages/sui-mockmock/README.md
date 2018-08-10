@@ -42,3 +42,53 @@ Also available for import
 ```js
 import HttpMocker from '@s-ui/mockmock/lib/http'
 ```
+
+## Details
+
+Since this library internally constructs the url of the original and the mocked request and then compares them,
+it's needed to create the mock request with the same parameter order than the original, if not, it will throw a 404.
+
+![incorrect] The parameters of both petitions (original and mocked) don't have the same parameter order (err 404 thrown)
+
+```js
+mocker
+  .httpMock(...)
+  .get('/urlToAttack')
+  .query({
+    param1: value1,
+    param2: value2,
+  })
+  ...
+  ...
+
+domain
+  .get('attacks_the_same_url_use_case')
+  .execute({
+    param2: value2,
+    param1: value1,
+  })
+  ...
+  ...
+```
+
+![correcet] The mocke
+```js
+mocker
+  .httpMock(...)
+  .get('/urlToAttack')
+  .query({
+    param1: value1,
+    param2: value2,
+  })
+  ...
+  ...
+
+domain
+  .get('attacks_the_same_url_use_case')
+  .execute({
+    param1: value1,
+    param2: value2,
+  })
+  ...
+  ...
+```
