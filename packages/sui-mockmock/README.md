@@ -49,14 +49,13 @@ Since this library internally constructs the url of the original and the mocked 
 it's needed to create the mock request with the same parameter order than the original, if not, it will throw a 404.
 
 ![incorrect] The parameters of both petitions (original and mocked) don't have the same parameter order (err 404 thrown)
-
 ```js
 mocker
   .httpMock(...)
   .get('/urlToAttack')
   .query({
-    param1: value1,
-    param2: value2,
+    search: 'value of the search',
+    working: false,
   })
   ...
   ...
@@ -64,21 +63,21 @@ mocker
 domain
   .get('attacks_the_same_url_use_case')
   .execute({
-    param2: value2,
-    param1: value1,
+    working: false,
+    search: 'value of the search',
   })
   ...
   ...
 ```
 
-![correcet] The mocke
+![correct] The mocked and the original HTTP requests have to same parameter order
 ```js
 mocker
   .httpMock(...)
   .get('/urlToAttack')
   .query({
-    param1: value1,
-    param2: value2,
+    search: 'value of the search',
+    working: true,
   })
   ...
   ...
@@ -86,8 +85,8 @@ mocker
 domain
   .get('attacks_the_same_url_use_case')
   .execute({
-    param1: value1,
-    param2: value2,
+    search: 'value of the search',
+    working: true,
   })
   ...
   ...
