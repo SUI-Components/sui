@@ -75,7 +75,7 @@ export const tryRequireCore = async ({category, component}) => {
   const demo = requireFile({
     defaultValue: false,
     importFile: () =>
-      import(/* webpackExclude: /\/node_modules\/(.*)\/demo/index.js$/ */
+      import(/* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
       `${__BASE_DIR__}/demo/${category}/${component}/demo/index.js`)
   })
 
