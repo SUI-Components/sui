@@ -17,6 +17,7 @@ program
   .usage('[options] <entry>')
   .option('-C, --clean', 'Remove previous build folder before create a new one')
   .option('-o, --output [output]', 'Bundle folder path')
+  .option('-u, --umd [libraryName]', 'Whether to output library as umb')
   .option('-r, --root', 'Create build in root dir instead of version subdir')
   .option(
     '-p, --path [path]',
@@ -33,6 +34,7 @@ program
 const {
   clean = false,
   output,
+  umd = false,
   path: publicPath,
   args: [entry],
   root = false
@@ -64,6 +66,11 @@ const webpackConfig = Object.assign({}, config, {
 })
 webpackConfig.output.publicPath = publicPath + version + '/'
 webpackConfig.output.path = outputFolder
+
+if (umd) {
+  webpackConfig.output.library = umd
+  webpackConfig.output.libraryTarget = 'umd'
+}
 
 if (clean) {
   showInfo(`Removing previous build in ${output}...`)

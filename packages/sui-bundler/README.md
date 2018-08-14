@@ -78,6 +78,8 @@ import MyFancyModule from '/src/index.js'
 window.namespace.fancy = MyFancyModule
 ```
 
+You should create an entry file that assigns your lib to your desired namespace:
+
 And then execute `sui-bundler lib` with your destination config:
 
 ```
@@ -88,6 +90,17 @@ sui-bundler lib umd/index.js -o lib/fancy -p http://my-cdn.com/fancy
 * `-o lib/fancy` outputs to `./lib/fancy/0.0.0/`
 * `-p http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy/0.0.0`  as public path for chunks loading.
 * `-r http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy`  as public path for chunks loading, discarded the version subdirectory.
+
+#### Automatic UMD
+
+You can use `--umd` option to publish directly from your original entry file:
+
+```
+$ sui-bundler lib src/index.js -o umd/fancy -p http://my-cdn.com/fancy --umd="MyFancyLibraryNamespace"
+```
+
+Then you can find your library directly in the provided namespace variable: `window.MyFancyLibraryNamespace` or `window.MyFancyLibraryNamespace.default` for ES6 exports.
+
 
 ## Configuration
 
