@@ -46,6 +46,10 @@ if (!entry) {
   showError(new Error('Please provide an entry file path.'), program)
 }
 
+if (!publicPath) {
+  showWarning('--path option is required for the chuncks to work.', program)
+}
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const version = getPackageJson(process.cwd()).version
