@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.9.0"></a>
+# 5.9.0 (2018-08-14)
+
+
+### Bug Fixes
+
+* unescape path separator in regex to avoid error importing demo page. ([5809e1d](https://github.com/SUI-Components/sui/commit/5809e1d))
+
+
+
 <a name="5.8.0"></a>
 # 5.8.0 (2018-08-08)
 
@@ -575,6 +585,22 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
+
+
+
+<a name="4.0.0"></a>
+# 4.0.0 (2017-06-22)
+
+
+### Features
+
+* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
+* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
+
+
+### BREAKING CHANGES
+
+* API is now named sui-studio instead of suistudio
 
 
 
