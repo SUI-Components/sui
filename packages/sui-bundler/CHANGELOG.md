@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.19.0"></a>
+# 3.19.0 (2018-08-16)
+
+
+### Bug Fixes
+
+* adjust public path on root=true ([0698bc5](https://github.com/SUI-Components/sui/commit/0698bc5))
+* warn when library path is not provided ([c94490e](https://github.com/SUI-Components/sui/commit/c94490e))
+
+
+### Features
+
+* sui-bundler lib --umd option ([6e76e57](https://github.com/SUI-Components/sui/commit/6e76e57))
+
+
+
 <a name="3.18.0"></a>
 # 3.18.0 (2018-08-10)
 
@@ -455,6 +471,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
