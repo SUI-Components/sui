@@ -14,11 +14,13 @@ module.exports = ({config, packagesToLink}) => {
     return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
   }
 
-  const entryPoints = packagesToLink.reduce((acc, packagePath) => {
-    const pkg = require(path.join(packagePath, 'package.json'))
-    acc[pkg.name] = path.join(packagePath, 'src')
-    return acc
-  }, {})
+  const entryPoints = packagesToLink
+    .map(p => path.resolve(p))
+    .reduce((acc, packagePath) => {
+      const pkg = require(path.join(packagePath, 'package.json'))
+      acc[pkg.name] = path.join(packagePath, 'src')
+      return acc
+    }, {})
 
   const nextConfig = {
     ...config,
