@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.20.0"></a>
+# 3.20.0 (2018-08-20)
+
+
+
 <a name="3.19.0"></a>
 # 3.19.0 (2018-08-16)
 
@@ -14,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+* adds relative to absolute path conversion ([64785a2](https://github.com/SUI-Components/sui/commit/64785a2))
 * sui-bundler lib --umd option ([6e76e57](https://github.com/SUI-Components/sui/commit/6e76e57))
 
 
