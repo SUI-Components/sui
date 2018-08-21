@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2018-08-21)
+
+
+### Bug Fixes
+
+* avoid prompt user and pass in the health check ([fdb96ac](https://github.com/SUI-Components/sui/commit/fdb96ac))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-07-09)
 
