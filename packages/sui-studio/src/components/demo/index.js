@@ -205,37 +205,41 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        <When value={!EnhanceDemoComponent && playground}>
-          <button
-            className="sui-StudioDemo-codeButton"
-            onClick={this.handleCode}
-          >
-            {isCodeOpen ? iconClose : iconCode}
-          </button>
+        <When value={!!(!EnhanceDemoComponent && playground)}>
+          {() => (
+            <React.Fragment>
+              <button
+                className="sui-StudioDemo-codeButton"
+                onClick={this.handleCode}
+              >
+                {isCodeOpen ? iconClose : iconCode}
+              </button>
 
-          {isCodeOpen && (
-            <CodeEditor
-              isOpen={isCodeOpen}
-              onChange={playground => {
-                this.setState({playground})
-              }}
-              playground={playground}
-            />
+              {isCodeOpen && (
+                <CodeEditor
+                  isOpen={isCodeOpen}
+                  onChange={playground => {
+                    this.setState({playground})
+                  }}
+                  playground={playground}
+                />
+              )}
+
+              <Preview
+                code={playground}
+                scope={{
+                  React,
+                  [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                  domain,
+                  ...nonDefaultExports
+                }}
+              />
+            </React.Fragment>
           )}
-
-          <Preview
-            code={playground}
-            scope={{
-              React,
-              [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-              domain,
-              ...nonDefaultExports
-            }}
-          />
         </When>
 
         <When value={!!EnhanceDemoComponent}>
-          <EnhanceDemoComponent />
+          {() => <EnhanceDemoComponent />}
         </When>
       </div>
     )
