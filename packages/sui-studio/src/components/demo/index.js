@@ -234,7 +234,7 @@ export default class Demo extends Component {
           />
         </When>
 
-        <When value={EnhanceDemoComponent}>
+        <When value={!!EnhanceDemoComponent}>
           <EnhanceDemoComponent />
         </When>
       </div>
