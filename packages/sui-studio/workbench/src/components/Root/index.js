@@ -85,21 +85,25 @@ class Root extends React.PureComponent {
         </div>
         <div className="Root-center">
           <When value={!EnhanceDemoComponent && playground}>
-            <CodeMirror
-              onChange={this.handleChangeCodeMirror}
-              playground={playground}
-            />
-            <Preview
-              scope={{
-                React,
-                [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-                ...nonDefault
-              }}
-              code={playground}
-            />
+            {() => (
+              <React.Fragment>
+                <CodeMirror
+                  onChange={this.handleChangeCodeMirror}
+                  playground={playground}
+                />
+                <Preview
+                  scope={{
+                    React,
+                    [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                    ...nonDefault
+                  }}
+                  code={playground}
+                />
+              </React.Fragment>
+            )}
           </When>
           <When value={EnhanceDemoComponent}>
-            <EnhanceDemoComponent />
+            {() => <EnhanceDemoComponent />}
           </When>
         </div>
         <div className="Root-bottom" />
