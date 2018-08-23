@@ -84,7 +84,7 @@ class Root extends React.PureComponent {
           </Header>
         </div>
         <div className="Root-center">
-          <When value={!EnhanceDemoComponent && playground}>
+          <When value={!!(!EnhanceDemoComponent && playground)}>
             {() => (
               <React.Fragment>
                 <CodeMirror
@@ -102,7 +102,7 @@ class Root extends React.PureComponent {
               </React.Fragment>
             )}
           </When>
-          <When value={EnhanceDemoComponent}>
+          <When value={!!EnhanceDemoComponent}>
             {() => <EnhanceDemoComponent />}
           </When>
         </div>

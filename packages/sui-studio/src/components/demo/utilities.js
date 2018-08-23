@@ -13,7 +13,7 @@ export const checkIfPackageHasProvider = pkg =>
 export const createContextByType = (ctxt, type) => {
   // check if the user has created a context.js with the needed contextTypes
   if (typeof ctxt !== 'object' || ctxt === null) {
-    console.warn(
+    console.warn( // eslint-disable-line
       "[Studio] You're trying to use a contextType in your component but it seems that you haven't created a context.js in the playground folder. This will likely make your component won't work as expected or it might have an useless context."
     )
   }
