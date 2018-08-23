@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const serverConfig = require('@s-ui/bundler/webpack.config.server')
 
 module.exports = ({outputPath}) =>
@@ -13,6 +14,14 @@ module.exports = ({outputPath}) =>
       filename: 'index.js'
     },
     externals: undefined,
+    plugins: [
+      ...(serverConfig.plugins || []),
+      new CopyWebpackPlugin([
+        {from: '404.html', to: '../public'},
+        {from: '500.html', to: '../public'},
+        {from: '200.html', to: '../public'}
+      ])
+    ],
     resolve: {
       ...serverConfig.resolve,
       modules: [
@@ -22,5 +31,9 @@ module.exports = ({outputPath}) =>
         path.join(process.cwd(), 'node_modules'),
         'node_modules'
       ]
+    },
+    node: {
+      __filename: true,
+      __dirname: true
     }
   })

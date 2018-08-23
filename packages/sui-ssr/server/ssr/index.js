@@ -56,8 +56,12 @@ export default (req, res, next) => {
         return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
       }
 
-      if (error || !renderProps) {
-        return next(error || new Error(`No renderProps for ${url}`))
+      if (error) {
+        return next(error)
+      }
+
+      if (!renderProps) {
+        return next() // We asume that is a 404 page
       }
 
       const [criticalHTML, bodyHTML] = html.split('</head>')
