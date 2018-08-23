@@ -35,7 +35,7 @@ import myDomain from '@schibstedspain/myDomain'
 const getProductsResponse = {
   success: ['pineapple', 'apple', 'strawberry', 'coffee']
 }
-const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWith(getProductsResponse).build()
+const domain = DomainBuilder.extend({ myDomain }).for({useCase: 'get_products'}).respondWith(getProductsResponse).build()
 
 
 // Execute the use case and check if everything works
@@ -54,7 +54,7 @@ import myDomain from '@schibstedspain/myDomain'
 const getProductsError = {
   fail: 'Unexpected error :('
 }
-const domain = DomainBuilder.extend({ myDomain }).for('get_products').respondWith(getProductsError).build()
+const domain = DomainBuilder.extend({ myDomain }).for({useCase: 'get_products'}).respondWith(getProductsError).build()
 
 
 // Execute the use case and check if everything works
