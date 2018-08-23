@@ -87,11 +87,11 @@ export default {
 }
 ```
 
-Here we are define a logger to the console directly. Each hook type could be or a middleware function or an array of middlewares functions.
+Here we implement a direct log into the console. Each hook type could be or a middleware function or an array of middlewares functions.
 
-You can checks with hooks there is avalible in the hooks-types.js file.
+You can checks with hooks there are available in the hooks-types.js file.
 
-There is two default hooks for 404 and 500 errors. both will look for a 404.html or 500.html file in the src folder and show this file. If you dont define this files, you will get an generic error page.
+There are two default hooks for 404 and 500 errors. both will look for a 404.html or 500.html file in the src folder and show this file. If you dont define this files, you will get a generic error page.
 
 ## Use the ssr in a lambda function
 

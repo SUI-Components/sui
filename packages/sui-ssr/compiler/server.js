@@ -18,8 +18,7 @@ module.exports = ({outputPath}) =>
       ...(serverConfig.plugins || []),
       new CopyWebpackPlugin([
         {from: '404.html', to: '../public'},
-        {from: '500.html', to: '../public'},
-        {from: '200.html', to: '../public'}
+        {from: '500.html', to: '../public'}
       ])
     ],
     resolve: {
