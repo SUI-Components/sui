@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.2.0"></a>
+# 2.2.0 (2018-08-27)
+
+
+### Features
+
+* add hooks feature ([1790a2c](https://github.com/SUI-Components/sui/commit/1790a2c))
+* remove 200.html and fix readme ([8d989eb](https://github.com/SUI-Components/sui/commit/8d989eb))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2018-08-21)
 
