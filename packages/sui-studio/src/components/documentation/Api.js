@@ -34,7 +34,7 @@ class Api extends Component {
       const {value = undefined} = defaultValue
 
       if (typeof type === 'undefined') {
-        console.warn(
+        console.warn( // eslint-disable-line
           'It seem that you might have a prop with a defaultValue but it does not exist as propType'
         )
         return
