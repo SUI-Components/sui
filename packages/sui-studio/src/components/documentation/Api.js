@@ -21,7 +21,7 @@ class Api extends Component {
   }
 
   _renderPropsApi({propsApi = {}}) {
-    const keysOfProps = Object.keys(propsApi)
+    const keysOfProps = Object.keys(propsApi).sort((a, b) => a.localeCompare(b))
     // if the component doesn't have props, show a message
     if (keysOfProps.length === 0) {
       return <p>This component doesn't have props</p>
