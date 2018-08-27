@@ -44,11 +44,11 @@
     "fs.realpath": "1.0.0",
     "gh-pages": "0.4.0",
     "just-debounce-it": "1.0.1",
-    "normalize.css": "4.1.1",
+    "normalize.css": "8.0.0",
     "now-client": "1.1.1",
     "pascal-case": "2.0.0",
     "pmx": "0.6.2",
-    "react-docgen": "2.20.0",
+    "react-docgen": "2.21.0",
     "snarkdown": "1.2.2"
   },
   "suistudio-webpack": {
