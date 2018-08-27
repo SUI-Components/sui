@@ -21,11 +21,22 @@ program
     '.'
   )
   .action(({dirBase}) => {
-    const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
-    getSpawnPromise(devServerExec, ['-c', path.join(__dirname, '..', 'src')], {
-      shell: false,
-      env: process.env
-    }).then(process.exit, process.exit)
+    console.clear()
+    require('terminal-banner').terminalBanner(
+      'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
+    )
+
+    setTimeout(() => {
+      const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
+      getSpawnPromise(
+        devServerExec,
+        ['-c', path.join(__dirname, '..', 'src')],
+        {
+          shell: false,
+          env: process.env
+        }
+      ).then(process.exit, process.exit)
+    }, 3000)
   })
 
 program.command('dev <component>', 'Develop an isolate component').alias('d')
