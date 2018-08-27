@@ -16,12 +16,12 @@ class Api extends Component {
     const reactDocs = await import('react-docgen')
     const src = await tryRequireRawSrc(this.props.params)
     const docs = reactDocs.parse(src)
-
+    console.log(docs)
     this.setState({docs})
   }
 
   _renderPropsApi({propsApi = {}}) {
-    const keysOfProps = Object.keys(propsApi)
+    const keysOfProps = Object.keys(propsApi).sort((a, b) => a.localeCompare(b))
     // if the component doesn't have props, show a message
     if (keysOfProps.length === 0) {
       return <p>This component doesn't have props</p>
