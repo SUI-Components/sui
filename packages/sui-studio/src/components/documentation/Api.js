@@ -16,7 +16,7 @@ class Api extends Component {
     const reactDocs = await import('react-docgen')
     const src = await tryRequireRawSrc(this.props.params)
     const docs = reactDocs.parse(src)
-    console.log(docs)
+
     this.setState({docs})
   }
 
