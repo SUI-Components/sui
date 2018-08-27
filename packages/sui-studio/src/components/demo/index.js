@@ -205,7 +205,7 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        <When value={!!(!EnhanceDemoComponent && playground)}>
+        <When value={!EnhanceDemoComponent && playground}>
           {() => (
             <React.Fragment>
               <button
@@ -238,7 +238,7 @@ export default class Demo extends Component {
           )}
         </When>
 
-        <When value={!!EnhanceDemoComponent}>
+        <When value={EnhanceDemoComponent}>
           {() => <EnhanceDemoComponent />}
         </When>
       </div>
