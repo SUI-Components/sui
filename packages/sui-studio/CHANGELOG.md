@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.13.0"></a>
+# 5.13.0 (2018-08-27)
+
+
+### Features
+
+* sort alphabetically props on docs ([e3a1f70](https://github.com/SUI-Components/sui/commit/e3a1f70))
+
+
+
 <a name="5.12.0"></a>
 # 5.12.0 (2018-08-21)
 
