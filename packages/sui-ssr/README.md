@@ -70,6 +70,29 @@ It use the stdout stream so you can do things like:
   $ sui-ssr archive > ./myFileNameOrWhatever.zip
 ```
 
+## Hooks
+
+If you want change the server´s behavior for very specific business operation like handler error or logging. You must to use the hooks concept.
+
+To do that define a file `src/hooks.js` this file must be something like this:
+
+```
+import TYPES from '@s-ui/ssr/hooks-types'
+
+export default {
+  [TYPES.LOGGING]: (req, res, next) => {
+    console.log(req.url)
+    next()
+  }
+}
+```
+
+Here we implement a direct log into the console. Each hook type could be or a middleware function or an array of middlewares functions.
+
+You can checks with hooks there are available in the hooks-types.js file.
+
+There are two default hooks for 404 and 500 errors. both will look for a 404.html or 500.html file in the src folder and show this file. If you dont define this files, you will get a generic error page.
+
 ## Use the ssr in a lambda function
 
 If you want, you can use the output of build inside a aws lambda function. To to that we recomend use [UP](https://up.docs.apex.sh)
