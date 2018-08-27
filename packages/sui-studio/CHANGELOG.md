@@ -2,8 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.14.0"></a>
+# 5.14.0 (2018-08-27)
+
+
+### Features
+
+* add deprecated warning in sui-studio start command ([5e62055](https://github.com/SUI-Components/sui/commit/5e62055))
+* bump version ([14b8030](https://github.com/SUI-Components/sui/commit/14b8030))
+
+
+
 <a name="5.13.0"></a>
 # 5.13.0 (2018-08-27)
+
+
+### Bug Fixes
+
+* warning in dev mode ([e986a82](https://github.com/SUI-Components/sui/commit/e986a82))
 
 
 ### Features
