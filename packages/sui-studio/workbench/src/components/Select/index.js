@@ -5,8 +5,8 @@ class Select extends React.PureComponent {
   static propTypes = {
     initValue: PropTypes.string,
     label: PropTypes.string,
-    onChange: PropTypes.func.required,
-    options: PropTypes.object.required
+    onChange: PropTypes.func.isRequired,
+    options: PropTypes.object.isRequired
   }
 
   state = {value: this.props.initValue}
