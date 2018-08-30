@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.17.0"></a>
+# 2.17.0 (2018-08-30)
+
+
+### Features
+
+* make sass linter great again ([ce7b6b3](https://github.com/SUI-Components/sui/commit/ce7b6b3))
+
+
+
 <a name="2.16.0"></a>
 # 2.16.0 (2018-06-18)
 
