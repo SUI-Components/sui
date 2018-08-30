@@ -149,7 +149,8 @@ ${componentInPascal}.displayName = '${componentInPascal}'
 // ${componentInPascal}.propTypes = {}
 // ${componentInPascal}.defaultProps = {}
 
-export default ${componentInPascal}`
+export default ${componentInPascal}
+`
   ),
 
   writeFile(
@@ -158,7 +159,8 @@ export default ${componentInPascal}`
 
 .${prefix}-${componentInPascal} {
   // Do your magic
-}`
+}
+`
   ),
 
   writeFile(
