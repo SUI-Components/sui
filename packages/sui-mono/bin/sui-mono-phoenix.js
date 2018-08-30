@@ -15,6 +15,10 @@ program
     '-c, --chunk <number>',
     `Execute by chunks of N packages (defaults to ${DEFAULT_CHUNK})`
   )
+  .option(
+    '--no-progress',
+    'Force to not show progress of tasks (not loading icons)'
+  )
   .on('--help', () => {
     console.log(`
   Description:
@@ -33,7 +37,7 @@ const RIMRAF_CMD = [
   ['package-lock.json', 'node_modules']
 ]
 const NPM_CMD = ['npm', ['install']]
-let {chunk = DEFAULT_CHUNK} = program
+let {chunk = DEFAULT_CHUNK, progress} = program
 chunk = Number(chunk)
 
 const executePhoenixOnPackages = () => {
@@ -55,14 +59,47 @@ const executePhoenixOnPackages = () => {
 
   const withChunks = !!chunk && taskList.length > chunk
   if (withChunks) {
-    taskList = splitArray(taskList, chunk).map((group, i) => ({
-      title: `#${i + 1} group of ${group.length} packages...`,
-      task: () => new Listr(group, {concurrent: true})
-    }))
+    taskList = splitArray(taskList, chunk).map((group, i) => {
+      const subTitle = progress
+        ? ''
+        : '\n' + group.map(task => task.title).join('\n')
+
+      return {
+        title: `#${i + 1} group of ${group.length} packages...` + subTitle,
+        task: () => new Listr(group, {concurrent: true})
+      }
+    })
   }
 
-  const tasks = new Listr(taskList, {concurrent: !withChunks})
+  const tasks = new Listr(taskList, {
+    concurrent: !withChunks,
+    renderer: !progress ? PlainTextRenderer : null
+  })
   return tasks.run()
+}
+
+class PlainTextRenderer {
+  constructor(tasks, options) {
+    this._tasks = tasks
+  }
+
+  render() {
+    this._tasks.forEach(task =>
+      task.subscribe(event => {
+        if (event.type === 'STATE') {
+          console.log(
+            task.isPending()
+              ? task.title + '\n' + '... work in progress ...'.yellow
+              : '... completed successfully!'.green + '\n'
+          )
+        }
+      })
+    )
+  }
+
+  end(err) {
+    err && showError(err, program)
+  }
 }
 
 serialSpawn([RIMRAF_CMD, NPM_CMD])
