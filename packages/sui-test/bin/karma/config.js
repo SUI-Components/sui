@@ -36,9 +36,10 @@ const config = {
 
 if (TARGET === 'test:ci') {
   config.reporters = ['coverage'].concat(config.reporters)
-  config.browserify.transform = [require('browserify-babel-istanbul')].concat(
-    config.browserify.transform
-  )
+  config.browserify.transform = [
+    ...config.browserify.transform,
+    require('browserify-babel-istanbul')
+  ]
   config.coverageReporter = {
     dir: `${CWD}/coverage`,
     reporters: [
