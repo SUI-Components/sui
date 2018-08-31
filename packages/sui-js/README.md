@@ -54,13 +54,16 @@ console.log(md5Hash) // f97ed77ff4770b7d8f0a018223823d3b
 ```
 
 ## string
-A bunch of string utilities: remove accents, ...
+A bunch of string utilities: remove accents and uri friendly string Normalizer.
+`uriNormalizer` uses [slugify](https://www.npmjs.com/package/slugify) to replace characters based on its own charmap.
+It might be extended adding more keys to `customCharMap` const.
 
 ```js
-import { removeAccents, hasAccents } from '@s-ui/js/lib/string'
+import { removeAccents, hasAccents, uriNormalizer } from '@s-ui/js/lib/string'
 
 console.log(removeAccents('París')) // "Paris"
 console.log(hasAccents('Árbol')) // true
+console.log(uriNormalizer("España y L'Hóspitalët")) // espana-y-l-hospitalet
 ```
 
 ## ua-parser
