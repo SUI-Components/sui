@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.37.0"></a>
+# 1.37.0 (2018-08-31)
+
+
+### Features
+
+* phoenix with --no-progress output ([00b0bfd](https://github.com/SUI-Components/sui/commit/00b0bfd))
+
+
+
 <a name="1.36.0"></a>
 # 1.36.0 (2018-07-13)
 
