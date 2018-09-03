@@ -13,11 +13,15 @@ app.set('x-powered-by', false)
 
 // Read public env vars from public-env.yml file and make them available for
 // middlewares by adding them to app.locals
-const publicEnvFile = fs.readFileSync(
-  path.join(process.cwd(), 'public-env.yml'),
-  'utf8'
-)
-app.locals.publicEnvConfig = jsYaml.safeLoad(publicEnvFile)
+try {
+  const publicEnvFile = fs.readFileSync(
+    path.join(process.cwd(), 'public-env.yml'),
+    'utf8'
+  )
+  app.locals.publicEnvConfig = jsYaml.safeLoad(publicEnvFile)
+} catch (err) {
+  app.locals.publicEnvConfig = {}
+}
 
 const {PORT = 3000, AUTH_USERNAME, AUTH_PASSWORD} = process.env
 const runningUnderAuth = AUTH_USERNAME && AUTH_PASSWORD
