@@ -29,8 +29,18 @@ const responsePageByStatus = async code => {
   return html
 }
 
+// Build app config and attach it to the request.
+const builAppConfig = (req, res, next) => {
+  req.appConfig = {
+    envs: req.app.locals.publicEnvConfig,
+    hostname: req.hostname
+  }
+  next()
+}
+
 export default {
   [TYPES.LOGGING]: NULL_MDWL,
+  [TYPES.APP_CONFIG_SETUP]: builAppConfig,
   [TYPES.NOT_FOUND]: async (req, res, next) => {
     res.status(404).send(await responsePageByStatus(404))
   },
