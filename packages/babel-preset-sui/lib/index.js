@@ -29,7 +29,6 @@ module.exports = {
     require('babel-plugin-transform-class-properties'),
     require('babel-plugin-transform-object-rest-spread'),
     require('babel-plugin-transform-runtime'),
-    require('babel-plugin-dynamic-import-webpack').default,
     require('babel-plugin-syntax-dynamic-import'),
     require('babel-plugin-transform-export-extensions'),
     [
