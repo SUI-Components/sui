@@ -11,7 +11,7 @@ export function slugify(str) {
   return str
     .toLowerCase()
     .replace(/.{1}/g, replaceCharIfNeeded)
-    .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/[^a-z0-9 - .]/g, '') // remove invalid chars only letters numbers, dashes and dots
     .replace(/\s+/g, '-') // collapse whitespace and replace by -
     .replace(/-+/g, '-') // collapse dashes
 }
