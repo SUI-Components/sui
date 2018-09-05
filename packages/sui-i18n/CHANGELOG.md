@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2018-09-05)
+
+
+### Bug Fixes
+
+* fixed lib version ([6bbb7ab](https://github.com/SUI-Components/sui/commit/6bbb7ab))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2018-09-05)
 
