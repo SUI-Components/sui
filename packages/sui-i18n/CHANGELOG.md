@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.4.0"></a>
+# 1.4.0 (2018-09-05)
+
+
+### Bug Fixes
+
+* add a dot in order to avoid all strings ([d121bba](https://github.com/SUI-Components/sui/commit/d121bba))
+* fixed a bug related with regex ([e244aa1](https://github.com/SUI-Components/sui/commit/e244aa1))
+
+
+
+<a name="1.3.0"></a>
+# 1.3.0 (2018-09-04)
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2018-09-04)
 
