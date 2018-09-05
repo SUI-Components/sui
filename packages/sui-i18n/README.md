@@ -1,6 +1,6 @@
 # sui-i18n
 > Isomorphic i18n service for browser and node.
-
+ 
 The goal is to link your own I18N solution to SUI-* components.
 
 It provides:
