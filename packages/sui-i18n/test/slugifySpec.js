@@ -4,7 +4,7 @@ import {expect} from 'chai'
 
 import {slugify} from '../src/slugify'
 
-describe.only('I18N', () => {
+describe('I18N', () => {
   describe('Given a string with leters and numbers', () => {
     it('string must remain without changes', () => {
       const inputString = 'helloworld98765432'
