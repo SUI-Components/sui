@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2018-09-06)
+
+
+### Features
+
+* add email regex ([a219d1f](https://github.com/SUI-Components/sui/commit/a219d1f))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2018-07-05)
 
