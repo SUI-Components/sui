@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.13.0"></a>
+# 1.13.0 (2018-08-31)
+
+
+### Features
+
+* added support dynamic import when we run ci test ([5666f82](https://github.com/SUI-Components/sui/commit/5666f82))
+
+
+
 <a name="1.12.0"></a>
 # 1.12.0 (2018-08-29)
 

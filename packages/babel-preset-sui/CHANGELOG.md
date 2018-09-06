@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-09-03)
+
+
+### Bug Fixes
+
+* rollback dynamic import webpack ([af0e68e](https://github.com/SUI-Components/sui/commit/af0e68e))
+
+
+
+<a name="1.8.0"></a>
+# 1.8.0 (2018-08-31)
+
+
+### Bug Fixes
+
+* fix imported plugin ([622d75b](https://github.com/SUI-Components/sui/commit/622d75b))
+
+
+### Features
+
+* transpile Webpack Dynamic Imports ([e7087cc](https://github.com/SUI-Components/sui/commit/e7087cc))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-07-04)
 

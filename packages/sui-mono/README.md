@@ -60,6 +60,12 @@ You can also disable the chunks with 0 value and always execute all commands in 
 sui-mono phoenix -c 0
 ```
 
+If you don't want a fancy progress output (for instance in CI env), you can force a plain text output :
+
+```sh
+sui-mono phoenix --no-progress
+```
+
 ### Link
 
 Is you want to link all packages between each other, to ease development:
