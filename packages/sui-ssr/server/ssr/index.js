@@ -14,6 +14,8 @@ import path from 'path'
 import fs from 'fs'
 import withContext from '@s-ui/hoc/lib/withContext'
 
+import {buildDeviceFrom} from '../../build-device'
+
 // __MAGIC IMPORTS__
 let contextFactory
 try {
@@ -64,6 +66,7 @@ export default (req, res, next) => {
         return next() // We asume that is a 404 page
       }
 
+      const device = buildDeviceFrom({request: req})
       const [criticalHTML, bodyHTML] = html.split('</head>')
 
       res.type('html')
@@ -78,13 +81,10 @@ export default (req, res, next) => {
         reactString,
         performance
       } = await ssrComponentWithInitialProps({
-        context,
+        context: {...context, device},
         renderProps,
         Target: withContext(context)(RouterContext)
       })
-
-      // eslint-disable-next-line
-      // debugger
 
       // res.set({
       //   'Server-Timing': `
