@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.3.0"></a>
+# 2.3.0 (2018-09-14)
+
+
+### Features
+
+* add Device to context ([ff5cd66](https://github.com/SUI-Components/sui/commit/ff5cd66))
+* change device API ([5f8e3ba](https://github.com/SUI-Components/sui/commit/5f8e3ba))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2018-08-27)
 
