@@ -101,11 +101,11 @@ Promise.all([
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/deploy": "1",
+    "@s-ui/deploy": "2",
     "@s-ui/precommit": "2",
-    "@s-ui/studio": "4",
-    "husky": "0.13.4",
-    "validate-commit-msg": "2.12.2"
+    "@s-ui/studio": "5",
+    "husky": "0.14.3",
+    "validate-commit-msg": "2.14.0"
   },
   "dependencies": {},
   "config": {
