@@ -20,13 +20,7 @@ npm install @s-ui/studio
 
 ## Getting Started
 
-First install sui-studio:
-
-```sh
-npm i @s-ui/studio
-sui-studio init <project_name>
-cd <project_name>
-```
+In case you want to create a new studio, checkout out [sui-studio-create](https://github.com/SUI-Components/sui/tree/master/packages/sui-studio-create)
 
 Once you're in the new project, you can execute `sui-studio start` in order to start the development browser and start working on your components.
 
