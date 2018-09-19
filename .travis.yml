@@ -6,7 +6,7 @@ before_install:
   - npm i -g npm@3
   - npm i -g npx
 install:
-  - npm run phoenix npm run phoenix -- --no-progress
+  - npm run phoenix -- --no-progress
 script:
   - npm run lint
   - npm run test:ci

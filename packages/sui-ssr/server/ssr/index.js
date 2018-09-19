@@ -30,11 +30,12 @@ const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
 const APP_PLACEHOLDER = '<!-- APP -->'
-const injectDataHydratation = (data = {}) =>
-  `<script>window.__INITIAL_PROPS__ = ${JSON.stringify(data).replace(
+
+const injectDataHydration = ({windowPropertyName, data = {}}) =>
+  `<script>window.${windowPropertyName} = ${JSON.stringify(data).replace(
     /<\//g,
     '<\\/'
-  )}</script>`
+  )};</script>`
 
 const injectDataPerformance = ({
   getInitialProps: server,
@@ -108,7 +109,17 @@ export default (req, res, next) => {
         `</head>${bodyHTML}`
           .replace('<body>', `<body ${bodyAttributes.toString()}>`)
           .replace(APP_PLACEHOLDER, reactString)
-          .replace('</body>', `${injectDataHydratation(initialProps)}</body>`)
+          .replace(
+            '</body>',
+            `${injectDataHydration({
+              windowPropertyName: '__APP_CONFIG__',
+              data: req.appConfig
+            })}
+            ${injectDataHydration({
+              windowPropertyName: '__INITIAL_PROPS__',
+              data: initialProps
+            })}</body>`
+          )
           .replace('</body>', `${injectDataPerformance(performance)}</body>`)
       )
     }

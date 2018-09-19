@@ -62,9 +62,9 @@ It will, over parameter, make that the express server run over a username and pa
 
 If no outputFileName is provided it will pipe the standard output stream `process.stdout`
 
-## User the ssr output as stream
+## Use the ssr output as stream
 
-It use the stdout stream so you can do things like:
+It uses the stdout stream so you can do things like:
 
 ```ssh
   $ sui-ssr archive > ./myFileNameOrWhatever.zip
@@ -72,9 +72,9 @@ It use the stdout stream so you can do things like:
 
 ## Hooks
 
-If you want change the server´s behavior for very specific business operation like handler error or logging. You must to use the hooks concept.
+If you want to change the server´s behavior for very specific business operation like handling errors or logging you must use hooks.
 
-To do that define a file `src/hooks.js` this file must be something like this:
+To do that define a file `src/hooks.js` which will look as follows:
 
 ```
 import TYPES from '@s-ui/ssr/hooks-types'
@@ -87,11 +87,24 @@ export default {
 }
 ```
 
-Here we implement a direct log into the console. Each hook type could be or a middleware function or an array of middlewares functions.
+Here we implement a direct log into the console. Each hook type could be a middleware function or an array of middlewares functions.
 
-You can checks with hooks there are available in the hooks-types.js file.
+You can check which hooks are available in the hooks-types.js file.
 
 There are two default hooks for 404 and 500 errors. both will look for a 404.html or 500.html file in the src folder and show this file. If you dont define this files, you will get a generic error page.
+
+## Environment variables
+
+You can define environment variables by creating a yml file called `public-env.yml` in your SPA root directory:
+
+```
+API_ENDPOINT: https://api.pre.somedomain.com
+SOME_OTHER_ENV_VAR: https://pre.somedomain.com/contact
+```
+
+- Whatever you add in this file will be available in your context factory as `appConfig.envs` param.
+- This file must not contain secrets as it is meant to be available in both server and client side.
+- :warning: And of course, this file is not meant to be versioned.
 
 ## Use the ssr in a lambda function
 
