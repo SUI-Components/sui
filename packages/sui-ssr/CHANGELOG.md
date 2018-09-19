@@ -2,14 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.4.0"></a>
+# 2.4.0 (2018-09-19)
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2018-09-14)
 
 
 ### Features
 
+* add comments ([6bbe58d](https://github.com/SUI-Components/sui/commit/6bbe58d))
 * add Device to context ([ff5cd66](https://github.com/SUI-Components/sui/commit/ff5cd66))
 * change device API ([5f8e3ba](https://github.com/SUI-Components/sui/commit/5f8e3ba))
+* keep backward compatibility by adding a try-catch when reading envs file so that it d ([e63ce1b](https://github.com/SUI-Components/sui/commit/e63ce1b))
+* read public env config from public-env.yml file. Build app config object and attach i ([567eb84](https://github.com/SUI-Components/sui/commit/567eb84))
 
 
 
