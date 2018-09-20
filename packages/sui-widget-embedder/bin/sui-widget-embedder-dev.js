@@ -37,6 +37,6 @@ appFactory({
   pathnameStatic: pathname,
   config
 }).listen(PORT, () => {
-  ncp.copy(`http://localhost:${config.port}`)
+  ncp.copy(`http://localhost:${PORT}`)
   console.log(`Copied url to clipboard: http://localhost:${PORT}`)
 })
