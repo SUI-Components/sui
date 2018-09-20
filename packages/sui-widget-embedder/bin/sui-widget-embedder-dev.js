@@ -5,13 +5,14 @@ const ncp = require('copy-paste')
 const {showError} = require('@s-ui/helpers/cli')
 
 const appFactory = require('../development')
-const config =
+let config =
   require(`${process.cwd()}/package.json`)['config']['sui-widget-embedder'] ||
   showError(
     `Missing sui-widget-embedder config at ${process.cwd()}/package.json`
   )
 
 const PORT = process.env.PORT || config.devPort || 3000
+config.port = PORT
 
 program
   .arguments('<pathname>')
@@ -36,6 +37,6 @@ appFactory({
   pathnameStatic: pathname,
   config
 }).listen(PORT, () => {
-  ncp.copy(`http://localhost:${PORT}`)
+  ncp.copy(`http://localhost:${config.port}`)
   console.log(`Copied url to clipboard: http://localhost:${PORT}`)
 })

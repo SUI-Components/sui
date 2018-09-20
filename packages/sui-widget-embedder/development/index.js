@@ -5,7 +5,7 @@ const express = require('express')
 const app = express()
 
 module.exports = ({page, pathnameStatic, config}) => {
-  const compiler = require('../compiler/development')({page})
+  const compiler = require('../compiler/development')({page, port: config.port})
   const proxy = require('./proxy')(config)
   app.use(webpackMiddleware(compiler, {serverSideRender: true}))
   app.use(webpackHotMiddleware(compiler, {path: '/__ping'}))
