@@ -16,7 +16,7 @@ module.exports = ({page, port}) =>
     ],
     output: {
       path: '/',
-      publicPath: `http://localhost:${port}`,
+      publicPath: `http://localhost:${port}/`,
       filename: 'bundle.js'
     },
     plugins: [
