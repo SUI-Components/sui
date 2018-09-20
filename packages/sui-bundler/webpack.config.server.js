@@ -5,6 +5,7 @@ const babelRules = require('./shared/module-rules-babel')
 
 let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {extensions: ['*', '.js', '.jsx', '.json']},
   entry: './server.js',
   target: 'node',
