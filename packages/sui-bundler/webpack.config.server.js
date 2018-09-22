@@ -14,6 +14,9 @@ let webpackConfig = {
     chunkFilename: '[name].[chunkhash:8].js',
     filename: '[name].[chunkhash:8].js'
   },
+  optimization: {
+    nodeEnv: false
+  },
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
