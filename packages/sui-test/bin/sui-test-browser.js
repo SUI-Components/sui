@@ -20,6 +20,11 @@ program
     'Path pattern to ignore for testing',
     false
   )
+  .option(
+    '--force-pattern',
+    'Force use patter over the default /src/**/*.js',
+    true
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -32,8 +37,8 @@ program
   })
   .parse(process.argv)
 
-const {watch, ci, pattern, ignorePattern} = program
-runner({watch, ci, pattern, ignorePattern})
+const {watch, ci, pattern, ignorePattern, forcePattern} = program
+runner({watch, ci, pattern, ignorePattern, forcePattern})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
