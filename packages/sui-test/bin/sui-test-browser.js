@@ -21,9 +21,9 @@ program
     false
   )
   .option(
-    '--force-pattern',
-    'Force use patter over the default /src/**/*.js',
-    true
+    '--src-pattern <srcPattern>',
+    'Define the source directory',
+    'src/**/*.js'
   )
   .on('--help', () => {
     console.log('  Description:')
@@ -37,8 +37,8 @@ program
   })
   .parse(process.argv)
 
-const {watch, ci, pattern, ignorePattern, forcePattern} = program
-runner({watch, ci, pattern, ignorePattern, forcePattern})
+const {watch, ci, pattern, ignorePattern, srcPattern} = program
+runner({watch, ci, pattern, ignorePattern, srcPattern})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)

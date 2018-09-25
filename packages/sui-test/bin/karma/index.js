@@ -25,16 +25,17 @@ const createServer = config => {
   return server
 }
 
-module.exports = async ({watch, ci, pattern, ignorePattern, forcePattern}) => {
+module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
   if (watch) configure.singleRun = false
   if (ci) configure.browsers = ['Firefox']
   if (ignorePattern) configure.exclude = [ignorePattern]
 
+  console.log(srcPattern)
   configure.files = [
     `${CWD}/node_modules/babel-polyfill/browser.js`,
-    !forcePattern && `${CWD}/src/**/*.js`,
+    `${CWD}/${srcPattern}`,
     `${CWD}/${pattern}`
-  ].filter(Boolean)
+  ]
   configure.preprocessors = {
     [pattern]: ['browserify'],
     'src/**/*.js': ['browserify']
