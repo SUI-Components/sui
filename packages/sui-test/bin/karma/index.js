@@ -30,7 +30,6 @@ module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
   if (ci) configure.browsers = ['Firefox']
   if (ignorePattern) configure.exclude = [ignorePattern]
 
-  console.log(srcPattern)
   configure.files = [
     `${CWD}/node_modules/babel-polyfill/browser.js`,
     `${CWD}/${srcPattern}`,
