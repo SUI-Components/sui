@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.14.0"></a>
+# 1.14.0 (2018-09-26)
+
+
+### Features
+
+* add force pattern to use sui-test in a webapp like repository ([527e5d2](https://github.com/SUI-Components/sui/commit/527e5d2))
+* define the src directory to override the default one ([3cb7307](https://github.com/SUI-Components/sui/commit/3cb7307))
+* Remove console.log ([6532569](https://github.com/SUI-Components/sui/commit/6532569))
+
+
+
 <a name="1.13.0"></a>
 # 1.13.0 (2018-08-31)
 
