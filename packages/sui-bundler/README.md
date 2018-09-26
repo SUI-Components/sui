@@ -193,7 +193,7 @@ Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-t
 It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
 
 ## Hot Module Replacement - React
-It offers Hot Module Replacement out-of-the-box, you only have to follow these instructions for your project: https://webpack.js.org/guides/hmr-react/#code
+It offers Hot Module Replacement out-of-the-box, you only have to follow [these instructions](https://webpack.js.org/guides/hot-module-replacement/#enabling-hmr) for your project.
 
 ## Contributing
 
