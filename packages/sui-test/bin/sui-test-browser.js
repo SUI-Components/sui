@@ -20,6 +20,11 @@ program
     'Path pattern to ignore for testing',
     false
   )
+  .option(
+    '--src-pattern <srcPattern>',
+    'Define the source directory',
+    'src/**/*.js'
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -32,8 +37,8 @@ program
   })
   .parse(process.argv)
 
-const {watch, ci, pattern, ignorePattern} = program
-runner({watch, ci, pattern, ignorePattern})
+const {watch, ci, pattern, ignorePattern, srcPattern} = program
+runner({watch, ci, pattern, ignorePattern, srcPattern})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
