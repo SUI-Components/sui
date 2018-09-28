@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.5.0"></a>
+# 2.5.0 (2018-09-28)
+
+
+### Bug Fixes
+
+* use max number of cpus ([f53cb3d](https://github.com/SUI-Components/sui/commit/f53cb3d))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2018-09-19)
 
