@@ -5,10 +5,21 @@ const program = require('commander')
 const {showError} = require('@s-ui/helpers/cli')
 const {getDeployClientFromProgram} = require('../src/utils')
 
+function collect(value, variables) {
+  variables.push(value)
+  return variables
+}
+
 program
   .usage(`[options] <name> <folder>`)
   .option('-n, --now', 'Deploy to now.sh')
   .option('-b, --branch', 'Append name of the current branch to name')
+  .option(
+    '-e, --environmentVars [environmentVars]',
+    'One or more enviornment variables that will be passed to the deployer command',
+    collect,
+    []
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -25,9 +36,10 @@ program
 
 const executeDeploy = async program => {
   const [, buildFolder] = program.args
+  const environmentVars = program.environmentVars
   const deployer = await getDeployClientFromProgram(program)
-  const deploytUrl = await deployer.deploy(buildFolder)
-  console.log(`Deployment URL: ${deploytUrl}`)
+  const deployUrl = await deployer.deploy(buildFolder, {environmentVars})
+  console.log(`Deployment URL: ${deployUrl}`)
 }
 
 executeDeploy(program).catch(err => {
