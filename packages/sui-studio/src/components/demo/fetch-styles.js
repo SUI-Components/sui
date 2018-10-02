@@ -12,6 +12,14 @@ const reqComponentsSCSS = require.context(
   /^\.\/\w+\/\w+\/src\/index\.scss/
 )
 
+const reqRootThemes = require.context(
+  `!css-content-loader!css-loader!sass-loader!${__BASE_DIR__}/themes`,
+  true,
+  /^\.\/.*\.scss/
+)
+
+console.log(reqRootThemes.keys())
+
 export const themesFor = ({category, component}) =>
   reqThemePlayGround
     .keys()
