@@ -73,7 +73,9 @@ webpack(config).run((error, stats) => {
 
   console.log(
     chalkSuccess(
-      "Your app is compiled in production mode in /public. It's ready to roll!"
+      `Your app is compiled in ${
+        process.env.NODE_ENV
+      } mode in /public. It's ready to roll!`
     )
   )
 
