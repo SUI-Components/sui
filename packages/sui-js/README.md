@@ -63,9 +63,9 @@ console.log(removeAccents('París')) // "Paris"
 console.log(hasAccents('Árbol')) // true
 
 
-import {queryStringUtility} from '@s-ui/js/lib/string'
+import {parseQueryString} from '@s-ui/js/lib/string'
 
-console.log(queryStringUtility.parse('?targetPage=pta')) // {targetPage: "pta"}
+console.log(parseQueryString('?targetPage=pta')) // {targetPage: "pta"}
 ```
 
 ## ua-parser
