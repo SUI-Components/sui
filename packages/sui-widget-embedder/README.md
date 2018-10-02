@@ -157,10 +157,10 @@ In case you want to load your widget in a site, you need to follow these steps:
 javascript:(function(i,s,o,g,r,a,m){a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','http://localhost:3000/bundle.js','ga');
 ```
 
-Check that the snippet is setting using the **port** to your widget server. The default port is 3000
+Check that the snippet is setting the right **port** to your widget server. The default port is 3000
 
 3. Open the site in which you want to run your widgets
-4. Run the bookmarklet, the will render themself within the element set
+4. Run the bookmarklet, the widget will render itself within the element set
 
 ## Contributing
 
