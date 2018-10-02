@@ -54,13 +54,18 @@ console.log(md5Hash) // f97ed77ff4770b7d8f0a018223823d3b
 ```
 
 ## string
-A bunch of string utilities: remove accents, ...
+A bunch of string utilities: remove accents, parse query strings...
 
 ```js
 import { removeAccents, hasAccents } from '@s-ui/js/lib/string'
 
 console.log(removeAccents('París')) // "Paris"
 console.log(hasAccents('Árbol')) // true
+
+
+import {queryStringUtility} from '@s-ui/js/lib/string'
+
+console.log(queryStringUtility.parse('?targetPage=pta')) // {targetPage: "pta"}
 ```
 
 ## ua-parser
