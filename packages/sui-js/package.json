@@ -13,6 +13,7 @@
     "cookie": "0.3.1",
     "js-cookie": "2.1.4",
     "lodash.kebabcase": "4.1.1",
+    "query-string": "6.1.0",
     "remove-accents": "0.4.2"
   },
   "license": "MIT",
