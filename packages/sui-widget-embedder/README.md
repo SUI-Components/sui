@@ -134,9 +134,9 @@ $ sui-widget-embedder generate <widgetName> -E 'expression'
 
 Note that the quotes here are not 'optional' you can add an expresion without quotes off course but you'll need to escape all the chars that are interpretable by the terminal.
 
-## Hot reloading
+## Hot module replacement
 
-In order to be able to use webpack's hot reloading feature, you'll need to use the hot reloader module inside your widget.js like this:
+In order to be able to use webpack's hot module replacement feature, you'll need to use the hot loader module inside your widget.js like this:
 
 ```js
 import {hot} from 'react-hot-loader'
