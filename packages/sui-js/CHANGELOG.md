@@ -2,13 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.12.0"></a>
+# 1.12.0 (2018-10-03)
+
+
+### Features
+
+* **string:** adding query string utility ([1e69772](https://github.com/SUI-Components/sui/commit/1e69772))
+* **string:** code refactor, export parseQueryString instead of parseQueryUtility ([7741019](https://github.com/SUI-Components/sui/commit/7741019))
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2018-09-06)
 
 
 ### Features
 
-* add email regex ([a219d1f](https://github.com/SUI-Components/sui/commit/a219d1f))
+* **sui-js:** add email regex ([a219d1f](https://github.com/SUI-Components/sui/commit/a219d1f))
 
 
 
@@ -18,7 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* string - toKebabCase function ([258d72d](https://github.com/SUI-Components/sui/commit/258d72d))
+* **sui-js:** string - toKebabCase function ([258d72d](https://github.com/SUI-Components/sui/commit/258d72d))
 
 
 
@@ -28,7 +39,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add new events to create a reusable dispatchEvent method ([236635c](https://github.com/SUI-Components/sui/commit/236635c))
+* **sui-js:** add new events to create a reusable dispatchEvent method ([236635c](https://github.com/SUI-Components/sui/commit/236635c))
 
 
 
@@ -38,12 +49,12 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-* fixed linting errors ([e98f05f](https://github.com/SUI-Components/sui/commit/e98f05f))
+* **sui-js:** fixed linting errors ([e98f05f](https://github.com/SUI-Components/sui/commit/e98f05f))
 
 
 ### Features
 
-* created the function fromSnakeToCamelCase and fromCamelToSnakeCase and made a little r ([64c4dee](https://github.com/SUI-Components/sui/commit/64c4dee))
+* **sui-js:** created the function fromSnakeToCamelCase and fromCamelToSnakeCase and made a little r ([64c4dee](https://github.com/SUI-Components/sui/commit/64c4dee))
 
 
 
@@ -58,10 +69,10 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add getjson method ([f50f39a](https://github.com/SUI-Components/sui/commit/f50f39a))
-* add remove method ([4b84c61](https://github.com/SUI-Components/sui/commit/4b84c61))
-* avoid loop on code and inline result ([d257926](https://github.com/SUI-Components/sui/commit/d257926))
-* create new hash sui-js library ([8694033](https://github.com/SUI-Components/sui/commit/8694033))
+* **sui-js:** add getjson method ([f50f39a](https://github.com/SUI-Components/sui/commit/f50f39a))
+* **sui-js:** add remove method ([4b84c61](https://github.com/SUI-Components/sui/commit/4b84c61))
+* **sui-js:** avoid loop on code and inline result ([d257926](https://github.com/SUI-Components/sui/commit/d257926))
+* **sui-js:** create new hash sui-js library ([8694033](https://github.com/SUI-Components/sui/commit/8694033))
 
 
 
@@ -71,8 +82,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add string utilities ([9bd2997](https://github.com/SUI-Components/sui/commit/9bd2997))
-* update readme ([1d994a8](https://github.com/SUI-Components/sui/commit/1d994a8))
+* **sui-js:** add string utilities ([9bd2997](https://github.com/SUI-Components/sui/commit/9bd2997))
+* **sui-js:** update readme ([1d994a8](https://github.com/SUI-Components/sui/commit/1d994a8))
 
 
 
@@ -82,8 +93,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* insert js-cookie ([4ce212f](https://github.com/SUI-Components/sui/commit/4ce212f))
-* upgrade version ([4b06aba](https://github.com/SUI-Components/sui/commit/4b06aba))
+* **sui-js:** insert js-cookie ([4ce212f](https://github.com/SUI-Components/sui/commit/4ce212f))
+* **sui-js:** upgrade version ([4b06aba](https://github.com/SUI-Components/sui/commit/4b06aba))
 
 
 
@@ -93,11 +104,11 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* export an object instead of a function ([3d55caf](https://github.com/SUI-Components/sui/commit/3d55caf))
-* init sui-js package ([84719ae](https://github.com/SUI-Components/sui/commit/84719ae))
-* insert a façade ([8380efb](https://github.com/SUI-Components/sui/commit/8380efb))
-* remove unused dependencies ([4bc24c2](https://github.com/SUI-Components/sui/commit/4bc24c2))
-* rename browser in to ua-parser ([dda6032](https://github.com/SUI-Components/sui/commit/dda6032))
+* **sui-js:** export an object instead of a function ([3d55caf](https://github.com/SUI-Components/sui/commit/3d55caf))
+* **sui-js:** init sui-js package ([84719ae](https://github.com/SUI-Components/sui/commit/84719ae))
+* **sui-js:** insert a façade ([8380efb](https://github.com/SUI-Components/sui/commit/8380efb))
+* **sui-js:** remove unused dependencies ([4bc24c2](https://github.com/SUI-Components/sui/commit/4bc24c2))
+* **sui-js:** rename browser in to ua-parser ([dda6032](https://github.com/SUI-Components/sui/commit/dda6032))
 
 
 
