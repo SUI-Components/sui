@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "1.11.0",
+  "version": "1.14.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
@@ -13,6 +13,7 @@
     "cookie": "0.3.1",
     "js-cookie": "2.1.4",
     "lodash.kebabcase": "4.1.1",
+    "query-string": "6.1.0",
     "remove-accents": "0.4.2"
   },
   "license": "MIT",

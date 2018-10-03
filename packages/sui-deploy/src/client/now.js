@@ -7,13 +7,18 @@ const DEFAULT_DIR = join(process.cwd(), 'public')
 const NOW_VERSION = '11.2.8'
 
 // Get args of `now` command according to params
-const getNowCommandArgs = ({name, dir, auth, token}) => {
+const getNowCommandArgs = ({name, dir, auth, token, environmentVars}) => {
   const args = [dir, '--name=' + name, `-t "${token}"`]
   if (auth) {
     const [user, password] = auth.split(':')
     user &&
       password &&
       args.push(`-e SERVE_USER='${user}'`, `-e SERVE_PASSWORD='${password}'`)
+  }
+  if (environmentVars) {
+    environmentVars.forEach(ENVIRONMENT_VAR =>
+      args.push(`-e ${ENVIRONMENT_VAR}`)
+    )
   }
   return args
 }
@@ -70,23 +75,23 @@ class NowDeployClient {
     )
   }
 
-  async deploy(dir = DEFAULT_DIR, {auth} = {}) {
+  async deploy(dir = DEFAULT_DIR, {auth, environmentVars} = {}) {
     const {deployName: name, nowToken: token} = this
     const nowBinPath = await resolveLazyNPMBin('.bin/now', `now@${NOW_VERSION}`)
     await getSpawnPromise(
       nowBinPath,
-      getNowCommandArgs({name, token, dir, auth})
+      getNowCommandArgs({name, token, dir, auth, environmentVars})
     )
     await this.deletePreviousDeployments(1)
     return setAliasToLastDeploy(this.now, this.deployName)
   }
 
-  async deployAsSPA(dir = DEFAULT_DIR, {auth}) {
+  async deployAsSPA(dir = DEFAULT_DIR, {auth, environmentVars}) {
     const {deployName: name} = this
     const path = dir + '/package.json'
 
     await writePackageJson({name, path, auth})
-    const deployUrl = await this.deploy(dir, {auth})
+    const deployUrl = await this.deploy(dir, {auth, environmentVars})
     await removeFile(path)
     return deployUrl
   }
