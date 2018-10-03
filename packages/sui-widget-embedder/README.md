@@ -134,6 +134,36 @@ $ sui-widget-embedder generate <widgetName> -E 'expression'
 
 Note that the quotes here are not 'optional' you can add an expresion without quotes off course but you'll need to escape all the chars that are interpretable by the terminal.
 
+## Hot module replacement
+
+In order to be able to use webpack's hot module replacement feature, you'll need to use the hot loader module inside your widget.js like this:
+
+```js
+import {hot} from 'react-hot-loader'
+
+const YourAwesomeWidget = () => ...
+
+export default hot(module)(YourAwesomeWidget) // don't worry about "module", it will work thanks to webpack
+```
+
+## Load widget on the fly without proxy
+
+>Useful for pages that require to be authenticated
+
+In case you want to load your widget in a site, you need to follow these steps:
+
+1. Launch your widget server
+2. Create a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) with this snippet
+
+```js
+javascript:(function(i,s,o,g,r,a,m){a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','http://localhost:3000/bundle.js','ga');
+```
+
+Check that the snippet is setting the right **port** to your widget server. The default port is 3000
+
+3. Open the site in which you want to run your widgets
+4. Run the bookmarklet, the widget will render itself within the element set
+
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).

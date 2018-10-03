@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2018-10-03)
+
+
+### Features
+
+* hook user could be an async func ([afb112a](https://github.com/SUI-Components/sui/commit/afb112a))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2018-09-28)
 

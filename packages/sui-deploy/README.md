@@ -79,6 +79,14 @@ $ sui-deploy spa test-project --now -b -a 'my-user:my-password'
 
 If your branch is `my-feature`, your code will be deployed to test-project-my-feature.now.sh
 
+### `-e, --environmentVars`
+
+Append multiple env vars that will be passed to our deployer
+
+```sh
+$ sui-deploy spa test-project --now -b -a 'my-user:my-password' -e NODE_ENV=preproduction -e GH_AUTH_TOKEN=secret
+```
+
 ## Authentification
 
 **When --now option is set**, `sui-deploy` needs a now token to deploy files. The token is obtain from the env variable `NOW_TOKEN`

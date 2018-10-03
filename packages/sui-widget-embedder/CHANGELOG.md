@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.15.0"></a>
+# 1.15.0 (2018-10-03)
+
+
+### Bug Fixes
+
+* add ending slash to path ([c136698](https://github.com/SUI-Components/sui/commit/c136698))
+* added CORS header for dev server ([e3bdbed](https://github.com/SUI-Components/sui/commit/e3bdbed))
+
+
+### Features
+
+* update dev widget server path ([c8f3836](https://github.com/SUI-Components/sui/commit/c8f3836))
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2018-03-15)
 
