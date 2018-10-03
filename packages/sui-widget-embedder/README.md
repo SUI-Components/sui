@@ -148,6 +148,8 @@ export default hot(module)(YourAwesomeWidget) // don't worry about "module", it 
 
 ## Load widget on the fly without proxy
 
+>Useful for pages that require to be authenticated
+
 In case you want to load your widget in a site, you need to follow these steps:
 
 1. Launch your widget server
