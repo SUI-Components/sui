@@ -28,7 +28,7 @@
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/deploy": "2",
     "@s-ui/helpers": "1",
-    "@s-ui/js": "1.14.0",
+    "@s-ui/js": "1",
     "@s-ui/mono": "1",
     "@s-ui/react-domain-connector": "1",
     "@schibstedspain/ddd-react-redux": "2",
