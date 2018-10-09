@@ -31,11 +31,12 @@ const AUTH_DEFINITION = {
 }
 ;(async () => {
   const hooks = await hooksFactory()
-  app.use(hooks[TYPES.LOGGING])
 
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
   )
+
+  app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
   app.use(express.static('public', {index: false}))
