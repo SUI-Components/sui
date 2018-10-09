@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2018-10-09)
+
+
+### Features
+
+* avoid logging health check ([2999e79](https://github.com/SUI-Components/sui/commit/2999e79))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2018-10-03)
 
