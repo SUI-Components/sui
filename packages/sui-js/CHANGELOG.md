@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.15.0"></a>
+# 1.15.0 (2018-10-10)
+
+
+### Features
+
+* add an string method to convert objects to query strings ([6659641](https://github.com/SUI-Components/sui/commit/6659641))
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2018-10-03)
 
@@ -14,7 +24,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.12.0"></a>
-# [1.12.0](https://github.com/SUI-Components/sui/compare/4.13.0...1.12.0) (2018-10-03)
+# [1.12.0](https://github.com/SUI-Components/sui/compare/v2.17.1...1.12.0) (2018-10-03)
 
 
 ### Features
