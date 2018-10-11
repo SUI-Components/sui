@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.24.0"></a>
+# 3.24.0 (2018-10-09)
+
+
+### Bug Fixes
+
+* avoid collision of multiple webpack runtimes ([d6f627c](https://github.com/SUI-Components/sui/commit/d6f627c))
+* avoid collision of multiple webpack runtimes ([6e65145](https://github.com/SUI-Components/sui/commit/6e65145))
+
+
+
 <a name="3.23.0"></a>
 # 3.23.0 (2018-10-02)
 
