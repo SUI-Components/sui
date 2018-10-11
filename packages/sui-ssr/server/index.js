@@ -1,6 +1,6 @@
 import express from 'express'
 import ssr from './ssr'
-import dinamycRendering from './dinamycRendering'
+import dynamicRendering from './dynamicRendering'
 import {hooksFactory} from './hooksFactory'
 import TYPES from '../hooks-types'
 import basicAuth from 'express-basic-auth'
@@ -44,7 +44,7 @@ const AUTH_DEFINITION = {
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
 
-  app.get('*', dinamycRendering(ssr))
+  app.get('*', dynamicRendering(ssr))
 
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
