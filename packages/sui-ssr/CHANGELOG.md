@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2018-10-11)
+
+
+### Features
+
+* bump version ([72d5aec](https://github.com/SUI-Components/sui/commit/72d5aec))
+
+
+
 <a name="2.8.0"></a>
 # 2.8.0 (2018-10-11)
 
@@ -10,6 +20,7 @@ All notable changes to this project will be documented in this file.
 
 * add dinamyc rendering ([51b1139](https://github.com/SUI-Components/sui/commit/51b1139))
 * fix typo ([ec86fcb](https://github.com/SUI-Components/sui/commit/ec86fcb))
+* redirect from site.com to www.site.com ([8e846b1](https://github.com/SUI-Components/sui/commit/8e846b1))
 
 
 
