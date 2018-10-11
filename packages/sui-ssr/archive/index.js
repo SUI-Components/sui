@@ -30,6 +30,12 @@ module.exports = ({outputZipPath, pkg}) =>
     archive.on('error', reject)
     archive.pipe(output)
     archive.append(
+      fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'),
+      {
+        name: 'package.json'
+      }
+    )
+    archive.append(
       fs
         .readFileSync(path.join(__dirname, 'pm2.tpl'), 'utf8')
         .replace('{{name}}', pkg.name),

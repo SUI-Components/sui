@@ -93,6 +93,24 @@ You can check which hooks are available in the hooks-types.js file.
 
 There are two default hooks for 404 and 500 errors. both will look for a 404.html or 500.html file in the src folder and show this file. If you dont define this files, you will get a generic error page.
 
+## Config server
+
+If you need it, you will be able to config several aspects of your server. All your customs config must live under "config.sui-ssr" key in the package.json of your SPA.
+
+For example:
+
+```js
+"config": {
+  "sui-ssr": {
+    "forceWWW": "true"
+  }
+}
+```
+
+Configs accepted:
+
+* forceWWW (false): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
+
 ## Dynamic Rendering
 
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up a `DYNAMIC_RENDERING=true` environment variable when you run your the server.
