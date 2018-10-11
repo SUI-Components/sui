@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# 2.8.0 (2018-10-11)
+
+
+### Features
+
+* add dinamyc rendering ([51b1139](https://github.com/SUI-Components/sui/commit/51b1139))
+* fix typo ([ec86fcb](https://github.com/SUI-Components/sui/commit/ec86fcb))
+
+
+
 <a name="2.7.0"></a>
 # 2.7.0 (2018-10-09)
 
