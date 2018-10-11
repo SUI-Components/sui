@@ -6,6 +6,18 @@ import basicAuth from 'express-basic-auth'
 import path from 'path'
 import fs from 'fs'
 import jsYaml from 'js-yaml'
+import parseDomain from 'parse-domain'
+
+let ssrConf
+try {
+  const spaConfig = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
+  )
+  const {config = {}} = spaConfig
+  ssrConf = config['sui-ssr'] || {}
+} catch (e) {
+  ssrConf = {}
+}
 
 const app = express()
 
@@ -42,6 +54,21 @@ const AUTH_DEFINITION = {
   app.use(express.static('public', {index: false}))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
+
+  ssrConf.forceWWW &&
+    app.use((req, res, next) => {
+      const parsedUrl = parseDomain(req.hostname, {
+        customTlds: /localhost|\.local/
+      })
+      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
+        ? next()
+        : parsedUrl.subdomain
+          ? next()
+          : res.redirect(
+              `${req.protocol}://www.` + req.headers.host + req.url,
+              301
+            )
+    })
 
   app.get('*', ssr)
 

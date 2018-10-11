@@ -36,9 +36,9 @@ program
   .parse(process.argv)
 
 if (program.clean) {
-  console.log(' -> Removing ALL previous zip files 🗑 ...'.yellow.bold)
+  // console.log(' -> Removing ALL previous zip files 🗑 ...'.yellow.bold)
   rimraf.sync(REMOVE_ZIP_PATH)
-  console.log(' -> Removed! ✅'.green.bold)
+  // console.log(' -> Removed! ✅'.green.bold)
 }
 const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
@@ -46,6 +46,6 @@ const OUTPUT_ZIP_PATH = path.join(
   `${outputFileName}-sui-ssr.zip`
 )
 ;(async () => {
-  console.log(' -> Compressing files... 🗄'.yellow)
+  // console.log(' -> Compressing files... 🗄'.yellow)
   await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg})
 })()
