@@ -95,7 +95,7 @@ There are two default hooks for 404 and 500 errors. both will look for a 404.htm
 
 ## Dynamic Rendering
 
-If you want to apply this new technique proposal by Google to improve your SEO and your site`s performance you have to set up a `DYNAMIC_RENDERING=true` environment variable when you run your the server.
+If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up a `DYNAMIC_RENDERING=true` environment variable when you run your the server.
 
 More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
 
