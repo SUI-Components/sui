@@ -111,6 +111,12 @@ Configs accepted:
 
 * forceWWW (false): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
 
+## Dynamic Rendering
+
+If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up a `DYNAMIC_RENDERING=true` environment variable when you run your the server.
+
+More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
+
 ## Environment variables
 
 You can define environment variables by creating a yml file called `public-env.yml` in your SPA root directory:
