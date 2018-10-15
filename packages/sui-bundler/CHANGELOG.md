@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.25.0"></a>
+# 3.25.0 (2018-10-15)
+
+
+### Features
+
+* update bundle analyzer to latest version ([9604fcd](https://github.com/SUI-Components/sui/commit/9604fcd))
+
+
+
 <a name="3.24.0"></a>
 # 3.24.0 (2018-10-09)
 
