@@ -58,15 +58,22 @@ While developing your app, you will have HMR (Hot Module Reloading). Default por
 
 #### How to link packages
 
-**Only available in dev mode**. `sui-bundler` give us the oportunity to link `npm` packages with `--link-package`. This argument accepts relative and absolute paths.
+`sui-bundler` give us the oportunity to link `npm` packages with `--link-package`. This argument accepts relative and absolute paths.
 The `npm link` is cancelled as soon as we stop/cancel the terminal process.
+
+**Requeriments**
+
+- Only available in DEV mode.
+- A `src/index.js` have to exist in the path proviuded
+
+**Example:**
 
 ```
 $ sui-bundler dev --link-package=/absolute_path/to/npm_package
 $ sui-bundler dev --link-package=../relative_path/to/npm_package
 ```
 
-We can link more than one package at time passing as many times as desired the argument.
+To link more than one package at time, use as many times as desired the argument.
 
 ```
 $ sui-bundler dev --link-package=/absolute_path/to/npm_package --link-package=/absolute_path2/to/npm_package
