@@ -20,8 +20,7 @@ module.exports = {
         }
       }
     ],
-    isInstalled(['preact', 'react'], 'babel-preset-react'),
-    isInstalled('flow-bin', 'babel-preset-flow')
+    isInstalled(['preact', 'react'], 'babel-preset-react')
   ]),
   plugins: [
     require('babel-plugin-transform-async-generator-functions'),
