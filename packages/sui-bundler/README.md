@@ -61,10 +61,10 @@ While developing your app, you will have HMR (Hot Module Reloading). Default por
 `sui-bundler` give us the oportunity to link `npm` packages with `--link-package`. This argument accepts relative and absolute paths.
 The `npm link` is cancelled as soon as we stop/cancel the terminal process.
 
-**Requeriments**
+**Requirements**
 
 - Only available in DEV mode.
-- A `src/index.js` have to exist in the path proviuded
+- A `src/index.js` have to exist in the path provided
 
 **Example:**
 
@@ -99,8 +99,8 @@ You should create an entry file that assigns your lib to your desired namespace:
 
 ```js
 // umd.js
-import MyFancyModule from "/src/index.js";
-window.namespace.fancy = MyFancyModule;
+import MyFancyModule from '/src/index.js'
+window.namespace.fancy = MyFancyModule
 ```
 
 You should create an entry file that assigns your lib to your desired namespace:
@@ -112,7 +112,6 @@ sui-bundler lib umd/index.js -o lib/fancy -p http://my-cdn.com/fancy
 ```
 
 `sui-bundler lib` will add your package version as subfolder:
-
 - `-o lib/fancy` outputs to `./lib/fancy/0.0.0/`
 - `-p http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy/0.0.0` as public path for chunks loading.
 - `-r http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy` as public path for chunks loading, discarded the version subdirectory.
@@ -139,7 +138,7 @@ This tool works with zero configuration out the box but you could use some confi
     "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
     "vendor": ["react", "react-dom"],
     "cdn": "https://url_to_me_cdn.com/",
-    "alias": { "react": "preact" },
+    "alias": {"react": "preact"},
     "offline": true,
     "externals": {
       "jquery": "./node_modules/jquery/jquery.min.js"
@@ -159,10 +158,10 @@ This tool works with zero configuration out the box but you could use some confi
 Offline feature is deactivated by default. If you want to activate, you should put `offline: true` in the sui-bundler configuration in your package.json. Also, you need to configure a serviceWorker in the entry point of your app:
 
 ```js
-import { register, unregister } from "@s-ui/bundler/registerServiceWorker";
+import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
 register({
-  first: () => window.alert("Content is cached for offline use."),
-  renovate: () => window.alert("New content is available; please refresh.")
+  first: () => window.alert('Content is cached for offline use.'),
+  renovate: () => window.alert('New content is available; please refresh.')
 })();
 ```
 
@@ -173,17 +172,13 @@ If you're using Firebase, it's recommendable to not cache the file serviceWorker
 ```json
 {
   "hosting": {
-    "headers": [
-      {
-        "source": "/service-worker.js",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache"
-          }
-        ]
-      }
-    ]
+    "headers": [{
+       "source" : "/service-worker.js",
+       "headers" : [ {
+          "key" : "Cache-Control",
+          "value" : "no-cache"
+          }]
+        }]
   }
 }
 ```
