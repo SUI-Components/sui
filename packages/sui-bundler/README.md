@@ -59,7 +59,9 @@ While developing your app, you will have HMR (Hot Module Reloading). Default por
 #### How to link packages
 
 `sui-bundler` give us the oportunity to link `npm` packages with `--link-package`. This argument accepts relative and absolute paths.
-The `npm link` is cancelled as soon as we stop/cancel the terminal process.
+`sui-bundler` internally will change the path of the files to use. So it goes directly to our local files.
+The reason we use `link-package` instead of `npm link` is because it gives a plus of performance when we are linking packages.
+The **link is cancelled as soon as we stop/cancel the terminal process**.
 
 **Requirements**
 
