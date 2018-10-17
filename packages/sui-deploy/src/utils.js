@@ -19,10 +19,7 @@ const getDeployNameFromProgram = async program => {
   const deployName =
     deployBaseName +
     (program.branch
-      ? '-' +
-        (process.env.TRAVIS_PULL_REQUEST_BRANCH ||
-          process.env.TRAVIS_BRANCH ||
-          (await getGitBranch()))
+      ? '-' + (process.env.TRAVIS_BRANCH || (await getGitBranch()))
       : '')
   return toKebabCase(deployName)
 }
