@@ -12,6 +12,8 @@
     "bowser": "1.8.1",
     "cookie": "0.3.1",
     "js-cookie": "2.1.4",
+    "lodash.camelcase": "4.3.0",
+    "lodash.capitalize": "4.2.1",
     "lodash.kebabcase": "4.1.1",
     "remove-accents": "0.4.2"
   },
