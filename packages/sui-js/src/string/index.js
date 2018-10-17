@@ -1,5 +1,5 @@
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
 export {default as toCamelCase} from 'lodash.camelcase'
-export {toCapitalCase} from 'lodash.capitalize'
+export {default as toCapitalCase} from 'lodash.capitalize'
 export {has as hasAccents, remove as removeAccents} from 'remove-accents'
 export {default as toKebabCase} from 'lodash.kebabcase'
