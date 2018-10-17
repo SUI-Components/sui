@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.16.0"></a>
+# 1.16.0 (2018-10-17)
+
+
+### Features
+
+* created capital case and camelcase util ([672143d](https://github.com/SUI-Components/sui/commit/672143d))
+* export utils ([73ab118](https://github.com/SUI-Components/sui/commit/73ab118))
+
+
+
 <a name="1.15.0"></a>
 # 1.15.0 (2018-10-10)
 
