@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.17.0"></a>
+# 1.17.0 (2018-10-18)
+
+
+### Features
+
+* dom-selection helpers for react components (backToTop, sticky...) ([8fba808](https://github.com/SUI-Components/sui/commit/8fba808))
+
+
+
 <a name="1.16.0"></a>
 # 1.16.0 (2018-10-17)
 
