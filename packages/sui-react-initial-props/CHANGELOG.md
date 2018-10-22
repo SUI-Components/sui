@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2018-09-19)
+
+
+### Features
+
+* add appConfig to context factory params ([7617c7c](https://github.com/SUI-Components/sui/commit/7617c7c))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-04-11)
 
@@ -54,6 +64,23 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * add missing main on package.json ([d5abe46](https://github.com/SUI-Components/sui/commit/d5abe46))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-09)
+
+
+### Bug Fixes
+
+* use new syntax as a HoC and add README ([1754b78](https://github.com/SUI-Components/sui/commit/1754b78))
+
+
+### Features
+
+* add some useful params and improve readability ([1e0d658](https://github.com/SUI-Components/sui/commit/1e0d658))
+* create sui-react-initial-props first version ([1201321](https://github.com/SUI-Components/sui/commit/1201321))
+* redefine the HoC and add missing dependency ([8ec10d7](https://github.com/SUI-Components/sui/commit/8ec10d7))
 
 
 

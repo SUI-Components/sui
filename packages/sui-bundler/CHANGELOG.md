@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.25.0"></a>
+# 3.25.0 (2018-10-15)
+
+
+### Features
+
+* update bundle analyzer to latest version ([9604fcd](https://github.com/SUI-Components/sui/commit/9604fcd))
+
+
+
+<a name="3.24.0"></a>
+# 3.24.0 (2018-10-09)
+
+
+### Bug Fixes
+
+* avoid collision of multiple webpack runtimes ([d6f627c](https://github.com/SUI-Components/sui/commit/d6f627c))
+* avoid collision of multiple webpack runtimes ([6e65145](https://github.com/SUI-Components/sui/commit/6e65145))
+
+
+
+<a name="3.23.0"></a>
+# 3.23.0 (2018-10-02)
+
+
+### Bug Fixes
+
+* let our bundler notice us about our bundle environment ([8f92953](https://github.com/SUI-Components/sui/commit/8f92953))
+
+
+
+<a name="3.22.0"></a>
+# 3.22.0 (2018-09-26)
+
+
+### Bug Fixes
+
+* add optimization node env overwrite to false in order to avoid side effects on ser ([888d34d](https://github.com/SUI-Components/sui/commit/888d34d))
+
+
+
+<a name="3.21.0"></a>
+# 3.21.0 (2018-09-20)
+
+
+### Bug Fixes
+
+* fix webpack mode when compile a server ([e2bec1c](https://github.com/SUI-Components/sui/commit/e2bec1c))
+
+
+
 <a name="3.20.0"></a>
 # 3.20.0 (2018-08-20)
 
@@ -477,16 +528,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 

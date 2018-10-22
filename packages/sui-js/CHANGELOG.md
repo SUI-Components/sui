@@ -2,6 +2,69 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.17.0"></a>
+# 1.17.0 (2018-10-18)
+
+
+### Features
+
+* dom-selection helpers for react components (backToTop, sticky...) ([8fba808](https://github.com/SUI-Components/sui/commit/8fba808))
+
+
+
+<a name="1.16.0"></a>
+# 1.16.0 (2018-10-17)
+
+
+### Features
+
+* created capital case and camelcase util ([672143d](https://github.com/SUI-Components/sui/commit/672143d))
+* export utils ([73ab118](https://github.com/SUI-Components/sui/commit/73ab118))
+
+
+
+<a name="1.15.0"></a>
+# 1.15.0 (2018-10-10)
+
+
+### Features
+
+* add an string method to convert objects to query strings ([6659641](https://github.com/SUI-Components/sui/commit/6659641))
+
+
+
+<a name="1.14.0"></a>
+# 1.14.0 (2018-10-03)
+
+
+### Features
+
+* bump version ([cf1f140](https://github.com/SUI-Components/sui/commit/cf1f140))
+* upgrade version ([dd235a6](https://github.com/SUI-Components/sui/commit/dd235a6))
+
+
+
+<a name="1.12.0"></a>
+# [1.12.0](https://github.com/SUI-Components/sui/compare/v2.17.1...1.12.0) (2018-10-03)
+
+
+### Features
+
+* adding query string utility ([1e69772](https://github.com/SUI-Components/sui/commit/1e69772))
+* code refactor, export parseQueryString instead of parseQueryUtility ([7741019](https://github.com/SUI-Components/sui/commit/7741019))
+
+
+
+<a name="1.11.0"></a>
+# 1.11.0 (2018-09-06)
+
+
+### Features
+
+* add email regex ([a219d1f](https://github.com/SUI-Components/sui/commit/a219d1f))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2018-07-05)
 

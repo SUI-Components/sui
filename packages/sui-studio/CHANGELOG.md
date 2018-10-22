@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.17.0"></a>
+# 5.17.0 (2018-10-15)
+
+
+### Features
+
+* generate kebab case package name ([953e411](https://github.com/SUI-Components/sui/commit/953e411))
+
+
+
+<a name="5.16.0"></a>
+# 5.16.0 (2018-08-30)
+
+
+### Bug Fixes
+
+* generate components without linter errors nor warnings ([248b686](https://github.com/SUI-Components/sui/commit/248b686))
+
+
+
 <a name="5.15.0"></a>
 # 5.15.0 (2018-08-28)
 

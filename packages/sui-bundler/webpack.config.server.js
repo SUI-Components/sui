@@ -5,6 +5,7 @@ const babelRules = require('./shared/module-rules-babel')
 
 let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {extensions: ['*', '.js', '.jsx', '.json']},
   entry: './server.js',
   target: 'node',
@@ -12,6 +13,9 @@ let webpackConfig = {
     path: path.resolve(process.cwd(), 'build'),
     chunkFilename: '[name].[chunkhash:8].js',
     filename: '[name].[chunkhash:8].js'
+  },
+  optimization: {
+    nodeEnv: false
   },
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "2.16.0",
+  "version": "2.19.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -25,6 +25,7 @@
     "eslint-config-standard-react": "6.0.0",
     "eslint-plugin-chai-friendly": "0.4.1",
     "eslint-plugin-import": "2.10.0",
+    "eslint-plugin-no-only-tests": "2.0.1",
     "eslint-plugin-node": "6.0.1",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-promise": "3.7.0",

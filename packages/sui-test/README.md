@@ -60,6 +60,7 @@ npm install @s-ui/test
     -C, --ci     Run a Firefox headless for CI testing
     -P, --pattern <pattern>               Path pattern to include (default: test/**/*Spec.js)
     -I, --ignore-pattern <ignorePattern>  Path pattern to ignore for testing (default: false)
+    --src-pattern <srcPattern>  Define the source directory (default: src/**/*.js)
     -h, --help   output usage information
   Description:
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "3.20.0",
+  "version": "3.25.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -57,7 +57,7 @@
     "uglifyjs-webpack-plugin": "1.2.7",
     "update-check": "1.5.2",
     "webpack": "4.16.5",
-    "webpack-bundle-analyzer": "2.13.1",
+    "webpack-bundle-analyzer": "3.0.2",
     "webpack-dev-server": "3.1.5",
     "webpack-manifest-plugin": "2.0.3",
     "webpack-node-externals": "1.7.2"

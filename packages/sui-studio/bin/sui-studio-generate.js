@@ -8,6 +8,7 @@ const pascalCase = require('pascal-case')
 const spawn = require('child_process').spawn
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
+const {toKebabCase} = require('@s-ui/js/lib/string')
 
 program
   .option('-R, --router', 'add routering for this component')
@@ -66,8 +67,10 @@ const COMPONENT_ROUTES_FILE = `${DEMO_DIR}routes.js`
 
 const {context, router, scope, prefix = 'sui'} = program
 const packageScope = scope ? `@${scope}/` : ''
-const packageCategory = category ? `${category}-` : ''
-const packageName = `${packageScope}${prefix}-${packageCategory}${component}`
+const packageCategory = category ? `${toKebabCase(category)}-` : ''
+const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
+  component
+)}`
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
 const {repository, homepage} = packageInfo
 
@@ -149,7 +152,8 @@ ${componentInPascal}.displayName = '${componentInPascal}'
 // ${componentInPascal}.propTypes = {}
 // ${componentInPascal}.defaultProps = {}
 
-export default ${componentInPascal}`
+export default ${componentInPascal}
+`
   ),
 
   writeFile(
@@ -158,7 +162,8 @@ export default ${componentInPascal}`
 
 .${prefix}-${componentInPascal} {
   // Do your magic
-}`
+}
+`
   ),
 
   writeFile(

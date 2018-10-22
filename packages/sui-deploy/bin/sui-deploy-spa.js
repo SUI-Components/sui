@@ -5,6 +5,11 @@ const program = require('commander')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
 const {getDeployClientFromProgram} = require('../src/utils')
 
+function collect(value, variables) {
+  variables.push(value)
+  return variables
+}
+
 program
   .usage(`[options] <name> [folder]`)
   .option('-n, --now', 'Deploy to now.sh')
@@ -12,6 +17,12 @@ program
   .option(
     '-a, --auth <user:password>',
     "HTTP authentication user and pass separated by ':' ( -a 'my-user:my-password' )"
+  )
+  .option(
+    '-e, --environmentVars [environmentVars]',
+    'One or more enviornment variables that will be passed to the deployer command',
+    collect,
+    []
   )
   .option('-p, --public', 'Skip HTTP authentication')
   .on('--help', () => {
@@ -53,8 +64,12 @@ if (forcePublic) {
 
 const executeDeploy = async program => {
   const [, buildFolder] = program.args
+  const environmentVars = program.environmentVars
   const deployer = await getDeployClientFromProgram(program)
-  const deploytUrl = await deployer.deployAsSPA(buildFolder, {auth})
+  const deploytUrl = await deployer.deployAsSPA(buildFolder, {
+    auth,
+    environmentVars
+  })
 
   console.log(`Deployment URL: ${deploytUrl}`)
 }

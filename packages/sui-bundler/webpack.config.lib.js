@@ -13,6 +13,7 @@ module.exports = {
   entry: config.vendor
     ? {
         app: MAIN_ENTRY_POINT,
+        jsonpFunction: 'suiWebpackJsonp',
         vendor: config.vendor
       }
     : MAIN_ENTRY_POINT,

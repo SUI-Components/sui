@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.14.0"></a>
+# 1.14.0 (2018-09-26)
+
+
+### Features
+
+* add force pattern to use sui-test in a webapp like repository ([527e5d2](https://github.com/SUI-Components/sui/commit/527e5d2))
+* define the src directory to override the default one ([3cb7307](https://github.com/SUI-Components/sui/commit/3cb7307))
+* Remove console.log ([6532569](https://github.com/SUI-Components/sui/commit/6532569))
+
+
+
+<a name="1.13.0"></a>
+# 1.13.0 (2018-08-31)
+
+
+### Features
+
+* added support dynamic import when we run ci test ([5666f82](https://github.com/SUI-Components/sui/commit/5666f82))
+
+
+
+<a name="1.12.0"></a>
+# 1.12.0 (2018-08-29)
+
+
+### Features
+
+* added support to dynamic imports in server side ([77f4ac2](https://github.com/SUI-Components/sui/commit/77f4ac2))
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2018-08-10)
 
@@ -121,6 +153,17 @@ All notable changes to this project will be documented in this file.
 * add pattern and ignorePattern parameters for sui-test browser ([fa8515a](https://github.com/SUI-Components/sui/commit/fa8515a))
 * add pattern parameters for sui-test server ([546536a](https://github.com/SUI-Components/sui/commit/546536a))
 * use the new parameter in order to add an exclude param and create files to test ([c5b034c](https://github.com/SUI-Components/sui/commit/c5b034c))
+
+
+
+<a name="1.0.0"></a>
+# 1.0.0 (2018-02-16)
+
+
+### Features
+
+* bump beta version ([9dc81af](https://github.com/SUI-Components/sui/commit/9dc81af))
+* first full functional version ([93f786e](https://github.com/SUI-Components/sui/commit/93f786e))
 
 
 

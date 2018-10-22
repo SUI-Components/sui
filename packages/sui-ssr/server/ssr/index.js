@@ -14,6 +14,8 @@ import path from 'path'
 import fs from 'fs'
 import withContext from '@s-ui/hoc/lib/withContext'
 
+import {buildDeviceFrom} from '../../build-device'
+
 // __MAGIC IMPORTS__
 let contextFactory
 try {
@@ -28,11 +30,12 @@ const HTTP_PERMANENT_REDIRECT = 301
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
 const APP_PLACEHOLDER = '<!-- APP -->'
-const injectDataHydratation = (data = {}) =>
-  `<script>window.__INITIAL_PROPS__ = ${JSON.stringify(data).replace(
+
+const injectDataHydration = ({windowPropertyName, data = {}}) =>
+  `<script>window.${windowPropertyName} = ${JSON.stringify(data).replace(
     /<\//g,
     '<\\/'
-  )}</script>`
+  )};</script>`
 
 const injectDataPerformance = ({
   getInitialProps: server,
@@ -64,6 +67,7 @@ export default (req, res, next) => {
         return next() // We asume that is a 404 page
       }
 
+      const device = buildDeviceFrom({request: req})
       const [criticalHTML, bodyHTML] = html.split('</head>')
 
       res.type('html')
@@ -78,13 +82,10 @@ export default (req, res, next) => {
         reactString,
         performance
       } = await ssrComponentWithInitialProps({
-        context,
+        context: {...context, device},
         renderProps,
         Target: withContext(context)(RouterContext)
       })
-
-      // eslint-disable-next-line
-      // debugger
 
       // res.set({
       //   'Server-Timing': `
@@ -108,7 +109,17 @@ export default (req, res, next) => {
         `</head>${bodyHTML}`
           .replace('<body>', `<body ${bodyAttributes.toString()}>`)
           .replace(APP_PLACEHOLDER, reactString)
-          .replace('</body>', `${injectDataHydratation(initialProps)}</body>`)
+          .replace(
+            '</body>',
+            `${injectDataHydration({
+              windowPropertyName: '__APP_CONFIG__',
+              data: req.appConfig
+            })}
+            ${injectDataHydration({
+              windowPropertyName: '__INITIAL_PROPS__',
+              data: initialProps
+            })}</body>`
+          )
           .replace('</body>', `${injectDataPerformance(performance)}</body>`)
       )
     }

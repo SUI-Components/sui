@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.38.0"></a>
+# 1.38.0 (2018-09-06)
+
+
+### Bug Fixes
+
+* update commitizen to force warnings display ([de1d815](https://github.com/SUI-Components/sui/commit/de1d815))
+
+
+
+<a name="1.37.0"></a>
+# 1.37.0 (2018-08-31)
+
+
+### Features
+
+* phoenix with --no-progress output ([00b0bfd](https://github.com/SUI-Components/sui/commit/00b0bfd))
+
+
+
 <a name="1.36.0"></a>
 # 1.36.0 (2018-07-13)
 

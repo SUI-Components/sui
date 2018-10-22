@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2018-10-17)
+
+
+
+<a name="2.8.0"></a>
+# 2.8.0 (2018-10-02)
+
+
+### Features
+
+* add readme improvement ([f01fb9a](https://github.com/SUI-Components/sui/commit/f01fb9a))
+* added env vars option to NOW ([c1b98e0](https://github.com/SUI-Components/sui/commit/c1b98e0))
+
+
+
 <a name="2.7.0"></a>
 # 2.7.0 (2018-07-26)
 
@@ -157,6 +173,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * prepare CLI api tu future targets ([96311ed](https://github.com/SUI-Components/sui/commit/96311ed))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-09-13)
+
+
+### Features
+
+* "sui-deploy spa" command to deploy SPAs ([b3aa044](https://github.com/SUI-Components/sui/commit/b3aa044))
 
 
 

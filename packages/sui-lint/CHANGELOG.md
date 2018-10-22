@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.19.0"></a>
+# 2.19.0 (2018-09-12)
+
+
+### Bug Fixes
+
+* remove caret ([fadb289](https://github.com/SUI-Components/sui/commit/fadb289))
+
+
+### Features
+
+* throw error if only in tests and use a const for rule values ([8113e8e](https://github.com/SUI-Components/sui/commit/8113e8e))
+
+
+
+<a name="2.17.0"></a>
+# 2.17.0 (2018-08-30)
+
+
+### Features
+
+* make sass linter great again ([ce7b6b3](https://github.com/SUI-Components/sui/commit/ce7b6b3))
+
+
+
 <a name="2.16.0"></a>
 # 2.16.0 (2018-06-18)
 

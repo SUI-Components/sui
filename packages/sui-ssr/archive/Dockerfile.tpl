@@ -6,6 +6,7 @@ COPY pm2.json .
 COPY ./public ./public
 COPY ./server ./server
 COPY ./statics ./statics
+COPY ./package.json ./package.json
 
 # HERE BEGIN THE AUTH ENV VARIABLES
 {{AUTH_VARIABLES}}

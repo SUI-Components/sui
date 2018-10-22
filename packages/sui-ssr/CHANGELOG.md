@@ -2,6 +2,87 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.10.0"></a>
+# 2.10.0 (2018-10-15)
+
+
+### Bug Fixes
+
+* fix copy of package.json inside Dockerfile ([454dd2f](https://github.com/SUI-Components/sui/commit/454dd2f))
+
+
+
+<a name="2.9.0"></a>
+# 2.9.0 (2018-10-11)
+
+
+### Features
+
+* bump version ([72d5aec](https://github.com/SUI-Components/sui/commit/72d5aec))
+
+
+
+<a name="2.8.0"></a>
+# 2.8.0 (2018-10-11)
+
+
+### Features
+
+* add dinamyc rendering ([51b1139](https://github.com/SUI-Components/sui/commit/51b1139))
+* fix typo ([ec86fcb](https://github.com/SUI-Components/sui/commit/ec86fcb))
+* redirect from site.com to www.site.com ([8e846b1](https://github.com/SUI-Components/sui/commit/8e846b1))
+
+
+
+<a name="2.7.0"></a>
+# 2.7.0 (2018-10-09)
+
+
+### Features
+
+* avoid logging health check ([2999e79](https://github.com/SUI-Components/sui/commit/2999e79))
+
+
+
+<a name="2.6.0"></a>
+# 2.6.0 (2018-10-03)
+
+
+### Features
+
+* hook user could be an async func ([afb112a](https://github.com/SUI-Components/sui/commit/afb112a))
+
+
+
+<a name="2.5.0"></a>
+# 2.5.0 (2018-09-28)
+
+
+### Bug Fixes
+
+* use max number of cpus ([f53cb3d](https://github.com/SUI-Components/sui/commit/f53cb3d))
+
+
+
+<a name="2.4.0"></a>
+# 2.4.0 (2018-09-19)
+
+
+
+<a name="2.3.0"></a>
+# 2.3.0 (2018-09-14)
+
+
+### Features
+
+* add comments ([6bbe58d](https://github.com/SUI-Components/sui/commit/6bbe58d))
+* add Device to context ([ff5cd66](https://github.com/SUI-Components/sui/commit/ff5cd66))
+* change device API ([5f8e3ba](https://github.com/SUI-Components/sui/commit/5f8e3ba))
+* keep backward compatibility by adding a try-catch when reading envs file so that it d ([e63ce1b](https://github.com/SUI-Components/sui/commit/e63ce1b))
+* read public env config from public-env.yml file. Build app config object and attach i ([567eb84](https://github.com/SUI-Components/sui/commit/567eb84))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2018-08-27)
 

@@ -12,7 +12,7 @@ It provides:
 $ npm install babel-preset-sui --save-dev
 ```
 
-## Presets and plugins 
+## Presets and plugins
 
 This preset always includes the following plugins and presets:
 - [babel-preset-env](https://www.npmjs.com/package/babel-preset-env)
@@ -28,9 +28,6 @@ This preset always includes the following plugins and presets:
 If `react` or `preact` is installed:
   - [babel-preset-react](https://www.npmjs.com/package/babel-preset-react)
   - [react-hot-loader/babel](https://www.npmjs.com/package/react-hot-loader)
-  
-If `flow-bin` is installed:
-  - [babel-preset-flow](https://www.npmjs.com/package/babel-preset-flow)
 
 ## Usage
 

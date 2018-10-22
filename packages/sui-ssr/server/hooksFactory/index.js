@@ -14,6 +14,7 @@ try {
 }
 // END __MAGIC IMPORTS__
 
+const isFunction = fnc => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
 const NULL_MDWL = (req, res, next) => next()
 const __STATUS_PAGES__ = {}
 const responsePageByStatus = async code => {
@@ -29,14 +30,30 @@ const responsePageByStatus = async code => {
   return html
 }
 
-export default {
-  [TYPES.LOGGING]: NULL_MDWL,
-  [TYPES.NOT_FOUND]: async (req, res, next) => {
-    res.status(404).send(await responsePageByStatus(404))
-  },
-  [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
-    const status = err.status || 500
-    res.status(status).send(await responsePageByStatus(status))
-  },
-  ...(userHooks.default || userHooks)
+// Build app config and attach it to the request.
+const builAppConfig = (req, res, next) => {
+  req.appConfig = {
+    envs: req.app.locals.publicEnvConfig,
+    hostname: req.hostname
+  }
+  next()
+}
+
+export const hooksFactory = async () => {
+  const _userHooksInterOP = userHooks.default || userHooks
+  const _userHooks = isFunction(_userHooksInterOP)
+    ? await _userHooksInterOP()
+    : _userHooksInterOP
+  return {
+    [TYPES.LOGGING]: NULL_MDWL,
+    [TYPES.APP_CONFIG_SETUP]: builAppConfig,
+    [TYPES.NOT_FOUND]: async (req, res, next) => {
+      res.status(404).send(await responsePageByStatus(404))
+    },
+    [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
+      const status = err.status || 500
+      res.status(status).send(await responsePageByStatus(status))
+    },
+    ..._userHooks
+  }
 }
