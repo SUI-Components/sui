@@ -1,8 +1,13 @@
-export const buildDeviceFrom = ({request = {}, window = {}}) => {
+export var buildDeviceFrom = function(params) {
+  var win = params.window
+  var request = params.request
+  request = request === undefined ? {} : request
+  win = win === undefined ? {} : win
+
   return {
     // https://tc39.github.io/proposal-optional-chaining/
     userAgent:
       (request.headers && request.headers['user-agent']) ||
-      (window.navigator && window.navigator.userAgent)
+      (win.navigator && win.navigator.userAgent)
   }
 }
