@@ -16,7 +16,7 @@
     "babel-cli": "6.26.0"
   },
   "dependencies": {
-    "@s-ui/bundler": "3",
+    "@s-ui/bundler": "2",
     "@s-ui/component-peer-dependencies": "1",
     "@s-ui/helpers": "1",
     "@s-ui/react-domain-connector": "1",
