@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.26.0"></a>
+# 3.26.0 (2018-10-24)
+
+
+### Bug Fixes
+
+* fix jsonp function param in webpack lib config ([28b3749](https://github.com/SUI-Components/sui/commit/28b3749))
+
+
+
 <a name="3.25.0"></a>
 # 3.25.0 (2018-10-15)
 
