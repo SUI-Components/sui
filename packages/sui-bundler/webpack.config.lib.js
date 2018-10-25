@@ -8,6 +8,7 @@ require('./shared/shims')
 module.exports = {
   mode: 'production',
   resolve: {
+    alias: config.alias,
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: config.vendor
