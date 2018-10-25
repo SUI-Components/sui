@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.16.0"></a>
+# 1.16.0 (2018-10-25)
+
+
+### Bug Fixes
+
+* update bundler version in order to avoid multiple webpack runtimes collisi ([975e0df](https://github.com/SUI-Components/sui/commit/975e0df))
+
+
+
 <a name="1.15.0"></a>
 # 1.15.0 (2018-10-03)
 
