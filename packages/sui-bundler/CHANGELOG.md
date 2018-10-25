@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.27.0"></a>
+# 3.27.0 (2018-10-25)
+
+
+
 <a name="3.26.0"></a>
 # 3.26.0 (2018-10-24)
 
@@ -9,6 +14,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix jsonp function param in webpack lib config ([28b3749](https://github.com/SUI-Components/sui/commit/28b3749))
+
+
+### Features
+
+* add resolve.alias to be passed as config param ([9ac79ba](https://github.com/SUI-Components/sui/commit/9ac79ba))
 
 
 
@@ -538,6 +548,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
