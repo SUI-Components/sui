@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.17.0"></a>
+# 1.17.0 (2018-10-31)
+
+
+### Features
+
+* update bundler version and remove webpack dependency ([79c8077](https://github.com/SUI-Components/sui/commit/79c8077))
+
+
+
 <a name="1.16.0"></a>
 # 1.16.0 (2018-10-25)
 
