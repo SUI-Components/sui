@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.18.0"></a>
+# 5.18.0 (2018-10-31)
+
+
+
 <a name="5.17.0"></a>
 # 5.17.0 (2018-10-15)
 
@@ -9,6 +14,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * generate kebab case package name ([953e411](https://github.com/SUI-Components/sui/commit/953e411))
+* remove all about compliant in sui-studio as not longer necessary ([2ea6397](https://github.com/SUI-Components/sui/commit/2ea6397))
 
 
 
