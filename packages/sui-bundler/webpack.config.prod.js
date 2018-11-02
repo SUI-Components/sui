@@ -150,9 +150,9 @@ module.exports = {
         test: /(\.css|\.scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
+          require.resolve('css-loader'),
+          require.resolve('postcss-loader'),
+          require.resolve('sass-loader')
         ]
       }
     ]

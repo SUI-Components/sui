@@ -74,10 +74,10 @@ let webpackConfig = {
             }
           },
           {
-            loader: 'babel-loader',
+            loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
-              presets: ['sui'],
+              presets: [require.resolve('babel-preset-sui')],
               cacheDirectory: true,
               highlightCode: true
             }
