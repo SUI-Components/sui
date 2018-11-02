@@ -20,7 +20,7 @@
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.1.2",
     "babel-plugin-transform-react-remove-prop-types": "0.4.19",
-    "react-hot-loader": "4.3.11"
+    "react-hot-loader": "4.3.12"
   },
   "repository": {
     "type": "git",

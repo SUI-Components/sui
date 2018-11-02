@@ -1,13 +1,40 @@
-const isInstalled = require('./is-installed')
-const cleanList = require('./clean-list')
-
-module.exports = () => ({
-  presets: cleanList([
+function plugins(api, opts) {
+  return [
+    require('@babel/plugin-syntax-dynamic-import').default,
+    [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
     [
-      '@babel/preset-env',
+      require('babel-plugin-transform-react-remove-prop-types').default,
+      {
+        removeImport: true,
+        wrap: true
+      }
+    ],
+    [
+      require('@babel/plugin-proposal-object-rest-spread').default,
+      {useBuiltIns: true} // asume Object.assign is available by browser or polyfill
+    ],
+    [
+      require('@babel/plugin-transform-runtime').default,
+      {
+        corejs: false,
+        regenerator: true,
+        absoluteRuntime: require.resolve('@babel/runtime/package.json')
+      }
+    ]
+  ]
+}
+
+function presets(api, opts) {
+  return [
+    [
+      require('@babel/preset-env').default,
       {
         debug: false,
+        ignoreBrowserslistConfig: true,
         loose: true,
+        modules: false,
+        // Exclude transforms that make all code slower
+        exclude: ['transform-typeof-symbol'],
         targets: {
           node: '6.0.0',
           browsers: [
@@ -16,37 +43,18 @@ module.exports = () => ({
             'Safari >= 8',
             'iOS >= 8',
             'ie >= 11',
-            'not op_mini all'
+            'not op_mini all',
+            'not dead'
           ]
-        }
+        },
+        useBuiltIns: false
       }
     ],
-    isInstalled(['preact', 'react'], '@babel/preset-react')
-  ]),
-  plugins: [
-    require('@babel/plugin-proposal-async-generator-functions'),
-    [require('@babel/plugin-proposal-decorators'), {legacy: true}],
-    [require('@babel/plugin-proposal-class-properties'), {loose: true}],
-    [
-      require('@babel/plugin-proposal-object-rest-spread'),
-      {loose: true, useBuiltIns: true}
-    ],
-    require('@babel/plugin-transform-runtime'),
-    require('@babel/plugin-syntax-dynamic-import'),
-    require('@babel/plugin-proposal-export-default-from'),
-    require('@babel/plugin-proposal-export-namespace-from'),
-    [
-      require('babel-plugin-transform-react-remove-prop-types').default,
-      {
-        mode: 'wrap'
-      }
-    ]
-  ],
-  env: {
-    development: {
-      plugins: cleanList([
-        isInstalled(['preact', 'react'], 'react-hot-loader/babel')
-      ])
-    }
-  }
+    [require('@babel/preset-react').default, {useBuiltIns: true}]
+  ]
+}
+
+module.exports = (api, opts) => ({
+  presets: presets(api, opts),
+  plugins: plugins(api, opts)
 })
