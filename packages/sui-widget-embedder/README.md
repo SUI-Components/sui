@@ -164,6 +164,19 @@ Check that the snippet is setting the right **port** to your widget server. The 
 3. Open the site in which you want to run your widgets
 4. Run the bookmarklet, the widget will render itself within the element set
 
+## Propagate webpack's resolve.alias config
+
+In case you need this feature of webpack (e.g to not load faker in prod environment) you have to add an `alias` to your `sui-widget-embedder's` option within your package.json like so:
+
+```
+  "sui-widget-embedder": {
+    ...
+    "alias": {
+      "moduleToLoad": "path/to/file/to/load"
+    }
+  }
+```
+
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).

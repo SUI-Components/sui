@@ -59,7 +59,7 @@ if (program.clean) {
 }
 
 const build = ({page, remoteCdn}) => {
-  const compiler = compilerFactory({page, remoteCdn})
+  const compiler = compilerFactory({page, remoteCdn, globalConfig: config})
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
       if (error) {

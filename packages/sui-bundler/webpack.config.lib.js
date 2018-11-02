@@ -8,17 +8,18 @@ require('./shared/shims')
 module.exports = {
   mode: 'production',
   resolve: {
+    alias: config.alias,
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: config.vendor
     ? {
         app: MAIN_ENTRY_POINT,
-        jsonpFunction: 'suiWebpackJsonp',
         vendor: config.vendor
       }
     : MAIN_ENTRY_POINT,
   target: 'web',
   output: {
+    jsonpFunction: 'suiWebpackJsonp',
     chunkFilename: '[name].[chunkhash:8].js',
     filename: 'index.js'
   },

@@ -2,11 +2,15 @@ const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
 const babelRules = require('./shared/module-rules-babel')
+const {config} = require('./shared')
 
 let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  resolve: {extensions: ['*', '.js', '.jsx', '.json']},
+  resolve: {
+    alias: config.alias,
+    extensions: ['*', '.js', '.jsx', '.json']
+  },
   entry: './server.js',
   target: 'node',
   output: {

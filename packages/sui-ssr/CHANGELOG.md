@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.11.0"></a>
+# 2.11.0 (2018-10-24)
+
+
+### Bug Fixes
+
+* build device haven\'t been transpiled in web app and was generating a bundle error in ([f1ca65a](https://github.com/SUI-Components/sui/commit/f1ca65a))
+* from es6 to es5, haven't been transpiled in web app ([6452c02](https://github.com/SUI-Components/sui/commit/6452c02))
+
+
+
 <a name="2.10.0"></a>
 # 2.10.0 (2018-10-15)
 

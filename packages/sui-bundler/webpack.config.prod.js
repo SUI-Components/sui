@@ -28,6 +28,7 @@ module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
+    alias: config.alias,
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: config.vendor
