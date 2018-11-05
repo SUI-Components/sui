@@ -128,7 +128,7 @@ when you do `CMD + Shift + P -> Format Document` the format tool will use [`pret
 
 So this shortcut will format our files ( w/ _prettier_) according to our `sui-lint` rules
 
-> you will need the `eslintConfig` and `sasslintConfig` properties added to the `package.json` as explained before
+> you will need the `eslintConfig` and `sasslintConfig` properties added to the `package.json` as explained above
 
 #### eslint extension
 Install [VSCode ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and set `eslint.autoFixOnSave` to true:
