@@ -10,7 +10,6 @@
     "sui-svg": "./bin/sui-svg.js"
   },
   "dependencies": {
-    "@s-ui/component-dependencies": "1",
     "@s-ui/js": "1",
     "commander": "2.19.0",
     "walker": "1.0.7"
