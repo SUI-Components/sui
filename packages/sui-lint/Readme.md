@@ -120,7 +120,7 @@ By adding this line to your settings
 
 ```json
 {
-  "prettier.eslintIntegration": true //uses eslint-prettier as parser
+  "prettier.eslintIntegration": true
 }
 ```
 
