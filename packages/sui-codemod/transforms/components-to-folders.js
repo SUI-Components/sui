@@ -8,6 +8,7 @@ const path = require('path')
 const inRootFolder = file => file.path.match(/\/src\/\w+\.js$/)
 const insideFolder = file => file.path.match(/\/src\/\w+\/index\.js$/)
 const notEntryComponent = file => !file.path.match(/\/src\/index\.js$/)
+const filenameComponent = file => !file.path.match(/component\.js$/)
 const importReact = file =>
   file.ast.program.body.some(
     node => node.type === 'ImportDeclaration' && node.source.value === 'react'
@@ -128,6 +129,7 @@ module.exports = {
     const filesToMove = files
       .filter(importReact)
       .filter(notEntryComponent)
+      .filter(filenameComponent)
       .map(file => ({
         ...file,
         name: componentName(file),
