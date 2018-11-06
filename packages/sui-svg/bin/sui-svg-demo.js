@@ -16,7 +16,7 @@ program
 const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
 getSpawnPromise(
   devServerExec,
-  ['-c', path.join(__dirname, '..', 'src'), '--no-lint'],
+  ['-c', path.join(__dirname, '..', 'src'), '--no-pre-loader'],
   {
     shell: false,
     env: process.env
