@@ -47,5 +47,6 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |
 | [sui-studio-utils](./packages/sui-studio-utils) | A set of sui-studio usable tools. |
 | [sui-studio](./packages/sui-studio) | Develop, maintain and publish your SUI components catalog. |
+| [sui-svg](./packages/sui-svg) | Converts your SVG files into React Components |
 | [sui-test](./packages/sui-test) | Zero config testing tool. |
 | [sui-widget-embedder](./packages/sui-widget-embedder) | Widget development server and build for production |
