@@ -20,6 +20,7 @@ const {
 const webpackConfig = require('../webpack.config.dev')
 const createDevServerConfig = require('../factories/createDevServerConfig')
 const createCompiler = require('../factories/createCompiler')
+const preloadRemover = require('../loaders/preLoadRemover')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 
@@ -39,12 +40,17 @@ if (!module.parent) {
       },
       []
     )
+    .option(
+      '--no-pre-loader',
+      'Does not apply linting rules if set while bundling'
+    )
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
       console.log('    $ sui-bundler dev')
       console.log('    $ sui-bundler dev --context /my/app/folder')
       console.log('    $ sui-bundler dev --link-package /my/domain/folder')
+      console.log('    $ sui-bundler dev --no-pre-loader')
       console.log('')
     })
     .parse(process.argv)
@@ -75,7 +81,10 @@ const start = async ({
   const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
-  const nextConfig = linkLoaderConfigBuilder({config, packagesToLink})
+  const nextConfig = linkLoaderConfigBuilder({
+    config: preloadRemover({config, preLoader: program.preLoader}),
+    packagesToLink
+  })
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
   const devServer = new WebpackDevServer(compiler, serverConfig)
