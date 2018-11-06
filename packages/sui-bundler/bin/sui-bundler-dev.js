@@ -40,10 +40,7 @@ if (!module.parent) {
       },
       []
     )
-    .option(
-      '--no-pre-loader',
-      'Does not apply linting rules if set while bundling'
-    )
+    .option('--no-pre-loader', 'Does not execute any pre enforced loaded')
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')

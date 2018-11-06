@@ -223,6 +223,14 @@ It offers you a way to upload an external library to your project that you would
 
 It offers Hot Module Replacement out-of-the-box, you only have to follow [these instructions](https://webpack.js.org/guides/hot-module-replacement/#enabling-hmr) for your project.
 
+## Ignoring pre enforced loaders
+
+Use in case of generated code, for example
+
+```sh
+> sui-bundler dev --no-pre-loader
+```
+
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).
