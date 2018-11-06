@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint no-console:0 */
 const Walker = require('walker')
 const svgr = require('@svgr/core').default
