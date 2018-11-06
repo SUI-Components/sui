@@ -6,16 +6,36 @@ const fs = require('fs')
 const path = require('path')
 
 const inRootFolder = file => file.path.match(/\/src\/\w+\.js$/)
-const insideFolder = file => file.path.match(/\/src\/\w+\/index\.js$/)
+const insideFolder = file => file.path.match(/\/src\/\w+\/\w+\.js$/)
 const notEntryComponent = file => !file.path.match(/\/src\/index\.js$/)
 const filenameComponent = file => !file.path.match(/component\.js$/)
 const importReact = file =>
   file.ast.program.body.some(
     node => node.type === 'ImportDeclaration' && node.source.value === 'react'
   )
-const componentName = file =>
-  file.ast.program.body.find(node => node.type === 'ExportDefaultDeclaration')
-    .declaration.name || path.basename(file.path, '.js')
+const componentName = file => {
+  // Export Default
+  const exportDefaultDeclaration = file.ast.program.body.find(
+    node => node.type === 'ExportDefaultDeclaration'
+  )
+  if (exportDefaultDeclaration) {
+    return exportDefaultDeclaration.declaration.name
+  }
+
+  // DisplayName value
+  const displayNameDeclaration = file.ast.program.body.find(
+    node =>
+      node.type === 'ExpressionStatement' &&
+      node.expression.type === 'AssignmentExpression' &&
+      node.expression.left.property.name === 'displayName'
+  )
+  if (displayNameDeclaration) {
+    return displayNameDeclaration.expression.right.value
+  }
+
+  // Nombre del fichero
+  return path.basename(file.path, '.js')
+}
 const hasContext = file =>
   Boolean(
     file.ast.program.body.find(
@@ -90,6 +110,7 @@ Processed ${file.path}`)
 }
 
 const applyIndexComponentPattern = ({dry}) => file => {
+  const isIndexFile = path.basename(file.path, '.js') === 'index'
   const destinationComponentFilePath = path.join(
     path.dirname(file.path),
     'component.js'
@@ -99,32 +120,49 @@ const applyIndexComponentPattern = ({dry}) => file => {
   if (dry) {
     console.log(pathPseudoRelative(process.cwd())`
 Processed ${file.path}`)
-    console.log(pathPseudoRelative(process.cwd())`\
+    if (isIndexFile) {
+      console.log(pathPseudoRelative(process.cwd())`\
       -> copied ${file.path} to ${destinationComponentFilePath}
       -> Wrote template file in ${templateFilePath}
     `)
+    } else {
+      console.log(pathPseudoRelative(process.cwd())`\
+      -> TODO: WORKING IN PROGRESS
+      -> Tiene que crear la carpeta con el nombre del fichero y meter in index/component dentro
+    `)
+    }
     return
   }
 
-  fs.copyFileSync(file.path, destinationComponentFilePath)
-  fs.writeFileSync(templateFilePath, indexTemplate(file))
+  if (isIndexFile) {
+    fs.copyFileSync(file.path, destinationComponentFilePath)
+    fs.writeFileSync(templateFilePath, indexTemplate(file))
+  }
 }
 
 module.exports = {
-  run: ({dry}) => {
+  run: ({dry, path: components}) => {
+    const [lastCharacter] = components
+      .split()
+      .reverse()
+      .join()
+
     const entries = fg.sync([
-      'components/**/**/src/**/*.js',
+      components + (lastCharacter === '/' ? '' : '/') + '**',
       '!**/node_modules/**',
       '!**/lib/**'
     ])
 
-    const files = entries.map(p => path.resolve(p)).map(p => {
-      const ast = babelParser.parse(fs.readFileSync(p, {encoding: 'utf8'}), {
-        allowImportExportEverywhere: true,
-        plugins: ['jsx', 'classProperties', 'objectRestSpread']
+    const files = entries
+      .filter(p => p.match(/\.js$/))
+      .map(p => path.resolve(p))
+      .map(p => {
+        const ast = babelParser.parse(fs.readFileSync(p, {encoding: 'utf8'}), {
+          allowImportExportEverywhere: true,
+          plugins: ['jsx', 'classProperties', 'objectRestSpread']
+        })
+        return {path: p, ast}
       })
-      return {path: p, ast}
-    })
 
     const filesToMove = files
       .filter(importReact)
@@ -143,7 +181,8 @@ module.exports = {
 
     filesToMove
       .filter(insideFolder)
-      .filter(file => file.hasContext)
+      // TODO: DESCOMENTA ESTO!!!!!!!!
+      // .filter(file => file.hasContext)
       // .filter((_, index) => index === 1)
       .forEach(applyIndexComponentPattern({dry}))
   }

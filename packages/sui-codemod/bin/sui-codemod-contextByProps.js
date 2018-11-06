@@ -12,6 +12,11 @@ const JSCodeShift = require('jscodeshift/src/Runner')
 
 program
   .option('-d, --dry', 'Dont apply changs but logs which changes will be mades')
+  .option(
+    '-p, --path <pattern>',
+    'root path to locate the component',
+    'components'
+  )
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -33,11 +38,11 @@ program
   })
   .parse(process.argv)
 
-componentToFolders.run({dry: Boolean(program.dry)})
+componentToFolders.run({dry: Boolean(program.dry), path: program.path})
 
 JSCodeShift.run(
   path.resolve(path.join(__dirname, '..', 'transforms', 'context-to-props.js')),
-  [path.join(process.cwd(), 'components')],
+  [program.path],
   {
     dry: Boolean(program.dry),
     ignorePattern: ['**/node_modules/**', '**/lib/**'],
