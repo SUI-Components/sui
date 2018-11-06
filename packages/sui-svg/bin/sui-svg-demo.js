@@ -1,7 +1,6 @@
 const program = require('commander')
 const path = require('path')
-const config = require('@s-ui/bundler/webpack.config.dev')
-const startDevServer = require('@s-ui/bundler/bin/sui-bundler-dev')
+const {getSpawnPromise} = require('@s-ui/helpers/cli')
 
 program
   .on('--help', () => {
@@ -12,17 +11,12 @@ program
   })
   .parse(process.argv)
 
-const studioDevConfig = {
-  ...config,
-  context: path.resolve(__dirname, '../src'),
-  module: {
-    ...config.module,
-    rules: [...config.module.rules.slice(1)]
+const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
+getSpawnPromise(
+  devServerExec,
+  ['-c', path.join(__dirname, '..', 'src'), '--no-lint'],
+  {
+    shell: false,
+    env: process.env
   }
-}
-
-console.log(studioDevConfig.module.rules)
-
-startDevServer({
-  config: studioDevConfig
-})
+).then(process.exit, process.exit)

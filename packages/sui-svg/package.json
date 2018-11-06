@@ -10,19 +10,19 @@
     "sui-svg": "./bin/sui-svg.js"
   },
   "dependencies": {
+    "@s-ui/component-peer-dependencies": "latest",
+    "@compositor/kit": "1.0.47",
+    "@s-ui/bundler": "3",
+    "@s-ui/helpers": "1",
     "@s-ui/js": "1",
+    "@svgr/core": "3.1.0",
     "commander": "2.19.0",
+    "styled-components": "4.0.2",
     "walker": "1.0.7"
   },
   "devDependencies": {
-    "@compositor/kit": "1.0.47",
-    "@s-ui/bundler": "3",
-    "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/lint": "2",
     "@s-ui/mono": "1",
-    "@svgr/core": "3.1.0",
-    "rimraf": "2.5.4",
-    "styled-components": "4.0.2",
     "validate-commit-msg": "2.14.0"
   },
   "keywords": [],
