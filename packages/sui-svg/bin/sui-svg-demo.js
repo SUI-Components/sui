@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 const program = require('commander')
 const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')

@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 const Walker = require('walker')
 const svgr = require('@svgr/core').default
 const fs = require('fs')
