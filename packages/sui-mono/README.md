@@ -2,25 +2,51 @@
 
 > Simple CLI for monorepo/multipackage.
 
-Sui-mono is a tool that aims to simplify managment for monorepo/mutlipackage projects but it also works with monopackage projects.
+[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/mutlipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but *it also works with monopackage projects*.
 
-It provides a standard template for commit messages and is able to decide what needs to be released for you
-We use ComVer as our versioning system
+`sui-mono` provides:
 
-It provides:
+* Commit template → `sui-mono commit`
+* Release manager (parses commits to publish packages according to their changes)  → `sui-mono check`, `sui-mono release`
+* Run commands inside each package → `sui-mono run npm install`, `sui-mono run-parallel npm install`
+* Link all packages that have dependencies between each other → sui-mono link
 
-* Commit template
-* Release manager (parses commits to publish packages according to their changes)
-* Run commands inside each package
-* Link all packages that have dependencies between each other
+We use:
+-  [ComVer](https://github.com/staltz/comver) as our versioning system
+-  [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#commit-message-conventions) as our standard for commit messages
+
+`sui-mono` provides, among other things, a standard template for commit messages (`sui-mono commit`) and is able to decide what needs to be released for you (`sui-mono check` & `sui-mono release`). 
+
 
 ![](./assets/sui-mono-demo.gif)
 
+
+<!-- TOC -->
+
+- [sui-mono](#sui-mono)
+  - [Usage](#usage)
+    - [`run` command on all packages](#run-command-on-all-packages)
+    - [`phoenix`](#phoenix)
+    - [`link`](#link)
+    - [`commit`](#commit)
+    - [`commit-all` commit for all contained packages](#commit-all-commit-for-all-contained-packages)
+    - [`check` & `release`](#check--release)
+  - [How to configure your project](#how-to-configure-your-project)
+    - [`private`](#private)
+    - [`access`](#access)
+    - [Scope (`packagesFolder`, `deepLevel`, `customScopes`)](#scope-packagesfolder-deeplevel-customscopes)
+      - [Examples](#examples)
+          - [Project Example](#project-example)
+          - [Case `sui-studio`](#case-sui-studio)
+      - [Manual scopes](#manual-scopes)
+
+<!-- /TOC -->
+
 ## Usage
 
-### Run command on all packages
+### `run` command on all packages
 
-You can run a single command on each package of the monorepo, **in series**
+You can run a single command on each package of the monorepo (each subfolder with its own `package.json`), **in series**
 
 ```sh
 $ sui-mono run <command>
@@ -36,7 +62,7 @@ $ sui-mono run-parallel npx rimraf node_modules
 $ sui-mono run-parallel npm install
 ```
 
-### Phoenix
+### `phoenix`
 
 To reset your project and all its contained packages.
 
@@ -44,8 +70,7 @@ To reset your project and all its contained packages.
 sui-mono phoenix
 ```
 
-Equivalent to 'npx rimraf node_modules && npm i' but works on any environment and
-executes it concurrently on each package (and/or on your project root folder).
+Equivalent to `npx rimraf node_modules && npm i` but it works on any environment and `sui-mono phoenix` executes it concurrently on each package (and/or on your project root folder).
 
 By default commands will be executed on chunks of 20 packages, but you can change it with `-c, --chunk` option:
 
@@ -66,7 +91,7 @@ If you don't want a fancy progress output (for instance in CI env), you can forc
 sui-mono phoenix --no-progress
 ```
 
-### Link
+### `link`
 
 Is you want to link all packages between each other, to ease development:
 
@@ -80,7 +105,7 @@ Note that:
 
 
 
-### Commit
+### `commit`
 
 You do your normal git workflow, but when commiting you should use:
 
@@ -90,7 +115,7 @@ sui-mono commit
 
 It will prompt you with questions regarding your changes and will generate a standard commit message for you
 
-### Commit for all contained packages
+### `commit-all` commit for all contained packages
 
 You can commit the same message for all packages that actually contained stageable
 files.
@@ -101,7 +126,7 @@ sui-mono commit-all -t "feat" -m "Refactor of dependencies"
 
 The precommit will be executed only for the first commit.
 
-### Release
+### `check` & `release`
 
 In order to release the steps are:
 
@@ -125,7 +150,9 @@ sui-mono release --scope "packages/sui-test"
 
 > Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
 
-> sui-mono only changes a minor for `fix`, `perf` or `feat` and a major when it founds BREAKING CHANGES. Otherwise, nothing will be released
+![important]
+
+> `sui-mono` only changes a minor for `fix`, `perf` or `feat` and a major when it founds `BREAKING CHANGES`. Otherwise, nothing will be released
 
 ## How to configure your project
 
@@ -135,11 +162,9 @@ First you need to install the `@s-ui/mono` package in your project
 npm i --save-dev @s-ui/mono
 ```
 
-Then, configure your package.json
+Then, you can configure your `package.json` to suit your needs
 
-### Tool configuration
-
-The tool allows you to configure some parts of it, but it also defines a few defaults for convenience.
+`sui-mono` allows you to configure some parts of its functioning, but it also defines a few defaults for convenience.
 
 Here's a full example of the options
 
@@ -162,24 +187,39 @@ Here's a full example of the options
 }
 ```
 
-### Private
+### `private`
 
-If you specify that your package is private, it will not get pushed to npm repository
+If you specify that your package is private (`"private": true,`), it will not get pushed to npm repository
 
-### Access
+### `access`
 
-By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `access` to `public`
+By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `"access": "public"`
 
-### Automatic scopes
+### Scope (`packagesFolder`, `deepLevel`, `customScopes`)
 
-We provide a simple tool to automate the way the scopes are retrieved.
-If you follow a structure where do you have a main folder and inside this folder you have all the packages (scopes) this configuration will work for you
+![important]
+
+> Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
+
+
+We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
+If you follow a structure where do you have:
+- a main folder and
+- inside this folder you have all the packages (subfolders, each one of them with its own `package.json` → *scopes*) 
+
+...this configuration will work for you
 
 In order to specify the main folder you need to provide `packagesFolder` by default its value is `src`
 By default we check only 1 level inside the main folder, but if you have categories for each package and inside the packages you can configure `deepLevel`
 
 
-This information will be used for releases and commitizen scopes. If you have a project like this:
+This information will be used for releases and [`commitizen`](https://commitizen.github.io/cz-cli/) scopes. 
+
+#### Examples
+
+###### Project Example
+
+So, if you have a project like this:
 
 ```text
 src/
@@ -197,7 +237,9 @@ users
 search
 ```
 
-In the case of suistudio, that generates a folder like this one:
+###### Case `sui-studio`
+
+In the case of [`sui-studio`](https://github.com/SUI-Components/sui/tree/master/packages/sui-studio), which generates a folder like this one:
 
 ```text
 components/
@@ -225,11 +267,11 @@ card/featured
 card/normal
 ```
 
-### Manual scopes
+#### Manual scopes
 
 There may be cases that you may want to add scopes for informative purposes but not related in any way with the releases
 
 Take in care that this scopes **will not be relevant for the release**, and if you commit to one package that has his own scope, but you use a custom scope, a release will not be generated.
 Custom scopes are for a very rare cases and you may not need it most of the times.
 
-Use `customScopes` in this cases like in the example. The scopes will be added to the automatic ones.
+Use `customScopes` in this cases like in the example. The scopes will be added to the automatically generated  ones.
