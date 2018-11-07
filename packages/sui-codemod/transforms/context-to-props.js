@@ -15,6 +15,7 @@ module.exports = (file, api, options) => {
   }
 
   // cambiamos todas los usos de this.context por this.props
+  // TODO: Avisar si el nombre de una prop colisiona con el nombre de un contexto
   root.find(j.Identifier).forEach(path => {
     if (path.node.name === 'context') {
       j(path).replaceWith(j.identifier('props'))
