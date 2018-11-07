@@ -150,9 +150,7 @@ sui-mono release --scope "packages/sui-test"
 
 > Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
 
-![important]
-
-> `sui-mono` only changes a minor for `fix`, `perf` or `feat` and a major when it founds `BREAKING CHANGES`. Otherwise, nothing will be released
+> 👉 `sui-mono` creates a new `MINOR` version for the package only when `fix`, `perf` or `feat` commits are detected, and a new `MAJOR` version if there is some commit marked as `BREAKING CHANGES`. Otherwise (any other types of commits detected), no new version will be generated and nothing will be released
 
 ## How to configure your project
 
@@ -197,9 +195,7 @@ By default packages will be published as `restricted` in npm. If you want them t
 
 ### Scope (`packagesFolder`, `deepLevel`, `customScopes`)
 
-![important]
-
-> Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
+> 👉  ` ` Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
 
 
 We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
