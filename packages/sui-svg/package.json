@@ -1,0 +1,36 @@
+{
+  "name": "@s-ui/svg",
+  "version": "1.0.0",
+  "description": "Converts svg files into React Components",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "bin": {
+    "sui-svg": "./bin/sui-svg.js"
+  },
+  "dependencies": {
+    "@s-ui/component-peer-dependencies": "latest",
+    "@compositor/kit": "1.0.47",
+    "@s-ui/bundler": "3",
+    "@s-ui/helpers": "1",
+    "@s-ui/js": "1",
+    "@svgr/core": "3.1.0",
+    "commander": "2.19.0",
+    "styled-components": "4.0.2",
+    "walker": "1.0.7"
+  },
+  "devDependencies": {
+    "@s-ui/lint": "2",
+    "validate-commit-msg": "2.14.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+}
