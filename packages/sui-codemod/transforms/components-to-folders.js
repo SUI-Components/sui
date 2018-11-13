@@ -4,9 +4,10 @@ const fg = require('fast-glob')
 const babelParser = require('@babel/parser')
 const fs = require('fs')
 const path = require('path')
+const toPascalCase = require('pascal-case')
 
 const inRootFolder = file => file.path.match(/\/src\/\w+\.js$/)
-const insideFolder = file => file.path.match(/\/src\/\w+\/\w+\.js$/)
+const insideFolder = file => file.path.match(/\/src\/.*\/\w+\.js$/)
 const notEntryComponent = file => !file.path.match(/\/src\/index\.js$/)
 const filenameComponent = file => !file.path.match(/component\.js$/)
 const isRootComponent = file => file.path.match(/\/src\/index\.js$/)
@@ -27,6 +28,31 @@ const componentName = file => {
     return exportDefaultDeclaration.declaration.name
   }
 
+  // export default class or function
+  if (
+    exportDefaultDeclaration &&
+    exportDefaultDeclaration.declaration &&
+    (exportDefaultDeclaration.declaration.type === 'ClassDeclaration' ||
+      exportDefaultDeclaration.declaration.type === 'FunctionDeclaration') &&
+    exportDefaultDeclaration.declaration.id
+  ) {
+    return exportDefaultDeclaration.declaration.id.name
+  }
+
+  // Export Named declaration
+  const exportNamedDeclaration = file.ast.program.body.find(
+    node => node.type === 'ExportNamedDeclaration'
+  )
+  if (
+    exportNamedDeclaration &&
+    exportNamedDeclaration.declaration &&
+    exportNamedDeclaration.declaration &&
+    exportNamedDeclaration.declaration.declarations &&
+    exportNamedDeclaration.declaration.declarations[0].id
+  ) {
+    return exportNamedDeclaration.declaration.declarations[0].id.name
+  }
+
   // DisplayName value
   const displayNameDeclaration = file.ast.program.body.find(
     node =>
@@ -44,15 +70,28 @@ const componentName = file => {
   return filename !== 'index' ? filename : folder
 }
 
-const hasContext = file =>
-  Boolean(
+const hasContext = file => {
+  return Boolean(
     file.ast.program.body.find(
       node =>
-        node.type === 'ExpressionStatement' &&
-        node.expression.type === 'AssignmentExpression' &&
-        node.expression.left.property.name === 'contextTypes'
+        // O una asignación sobre el contructor
+        // Component.contextType = {}
+        (node.type === 'ExpressionStatement' &&
+          node.expression.type === 'AssignmentExpression' &&
+          node.expression.left.property.name === 'contextTypes') ||
+        // O una definición estática sobre la clase
+        // class Component extends Component {
+        //  static contextTypes = {}
+        // }
+        (node.type === 'ExportDefaultDeclaration' &&
+          node.declaration.type === 'ClassDeclaration' &&
+          node.declaration.body.type === 'ClassBody' &&
+          node.declaration.body.body.some(
+            classProperty => classProperty.key.name === 'contextTypes'
+          ))
     )
   )
+}
 
 const indexTemplate = file =>
   `
@@ -61,15 +100,15 @@ import SUIContext from '@s-ui/context'
 
 import Component from './component'
 
-const ${file.name} = props => (
+const ${toPascalCase(file.name)} = props => (
   <SUIContext.Consumer>
     {context => <Component {...context} {...this.props} />}
   </SUIContext.Consumer>
 )
 
-${file.name}.displayName = '${file.name}'
+${toPascalCase(file.name)}.displayName = '${toPascalCase(file.name)}'
 
-export default ${file.name}
+export default ${toPascalCase(file.name)}
 `.trim()
 
 const pathPseudoRelative = base => (literals, ...values) => {

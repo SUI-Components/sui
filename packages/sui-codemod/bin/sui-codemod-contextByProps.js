@@ -46,7 +46,7 @@ JSCodeShift.run(
   {
     dry: Boolean(program.dry),
     ignorePattern: ['**/node_modules/**', '**/lib/**'],
-    verbose: 0,
+    verbose: 2,
     babel: true,
     extensions: 'js',
     runInBand: false,

@@ -9,7 +9,11 @@ module.exports = (file, api, options) => {
     left: {property: {name: 'contextTypes'}}
   })
 
-  if (contextTypes.length === EMPTY) {
+  const contextTypesStatics = root.find(j.ClassProperty, {
+    key: {name: 'contextTypes'}
+  })
+
+  if (contextTypes.length === EMPTY && contextTypesStatics.length === EMPTY) {
     // Si no se usa el contexto no hay nada que hacer aquí
     return null
   }
@@ -26,6 +30,12 @@ module.exports = (file, api, options) => {
     left: {property: {name: 'propTypes'}}
   })
 
+  const propTypesStatics = root.find(j.ClassProperty, {
+    key: {name: 'propTypes'}
+  })
+
+  // Component.propTypes = {}
+  // Component.contextTypes = {}
   if (propTypes.length !== EMPTY && contextTypes.length !== EMPTY) {
     // los propsTypes ahora incluyen también las antiguas contextTypes
     propTypes.get().value.right.properties = [
@@ -38,7 +48,36 @@ module.exports = (file, api, options) => {
 
   // Que pasa si no tenemos propTypes pero si contextTypes ?!?!
   // Que renombramos contextTypes -> propTypes
+  // Component.contextTypes = {}
   if (propTypes.length === EMPTY && contextTypes.length !== EMPTY) {
+    root.find(j.Identifier).forEach(path => {
+      if (path.node.name === 'contextTypes') {
+        j(path).replaceWith(j.identifier('propTypes'))
+      }
+    })
+  }
+
+  // propiedades y contexto definidos como miembros estáticos de la clase
+  // static propTypes = {}
+  // static contextTypes = {}
+  if (
+    propTypesStatics.length !== EMPTY &&
+    contextTypesStatics.length !== EMPTY
+  ) {
+    propTypesStatics.get().node.value.properties = [
+      ...propTypesStatics.get().node.value.properties,
+      ...contextTypesStatics.get().node.value.properties
+    ]
+    // Borrar la definicion the contextTypesStatics por que es legacy
+    contextTypesStatics.forEach(path => j(path).remove())
+  }
+
+  // SOLO contexto definido como miembro estático de la clase
+  // static contextTypes = {}
+  if (
+    propTypesStatics.length === EMPTY &&
+    contextTypesStatics.length !== EMPTY
+  ) {
     root.find(j.Identifier).forEach(path => {
       if (path.node.name === 'contextTypes') {
         j(path).replaceWith(j.identifier('propTypes'))
@@ -48,17 +87,45 @@ module.exports = (file, api, options) => {
 
   // en las declaraciones de componentes funcionales
   // mover el contexto a la props
-  const exportDefaultDeclaration = root.find(j.ExportDefaultDeclaration).get()
+  // Podemos exportar por defecto una arrow function
+  const exportDefaultDeclarationNodes = root.find(j.ExportDefaultDeclaration)
+  const exportDefaultArrowDeclarationName =
+    exportDefaultDeclarationNodes.length &&
+    exportDefaultDeclarationNodes.get().value.declaration.name
+
+  // Podeos exportar por defecto una funcion es5
+  const exportDefaultFunctionDeclarationName =
+    exportDefaultDeclarationNodes.length &&
+    exportDefaultDeclarationNodes.get().value.declaration.id &&
+    exportDefaultDeclarationNodes.get().value.declaration.id.name
+
+  // podemos exportar nombrada una arrow function
+  const exportNamedDeclarationNodes = root.find(j.ExportNamedDeclaration)
+  const exportNamedDeclarationName =
+    !exportDefaultArrowDeclarationName &&
+    exportNamedDeclarationNodes.length &&
+    ((exportNamedDeclarationNodes.get().value.declaration.id &&
+      exportNamedDeclarationNodes.get().value.declaration.id.name) ||
+      exportNamedDeclarationNodes.get().value.declaration.declarations[0].id
+        .name)
+
   const componentDeclarationArrowFunction = root.find(j.VariableDeclarator, {
-    id: {name: exportDefaultDeclaration.get().value.declaration.name},
+    id: {name: exportDefaultArrowDeclarationName || exportNamedDeclarationName},
     init: {type: 'ArrowFunctionExpression'}
   })
 
-  if (componentDeclarationArrowFunction.length !== EMPTY) {
-    const [
-      propsParams,
-      contextParams
-    ] = componentDeclarationArrowFunction.get().value.init.params
+  const componentDeclarationES5Function = root.find(j.FunctionDeclaration, {
+    id: {name: exportDefaultFunctionDeclarationName}
+  })
+
+  if (
+    componentDeclarationArrowFunction.length !== EMPTY ||
+    componentDeclarationES5Function.length !== EMPTY
+  ) {
+    const [propsParams, contextParams] =
+      componentDeclarationArrowFunction.length !== EMPTY
+        ? componentDeclarationArrowFunction.get().value.init.params
+        : componentDeclarationES5Function.get().value.params
 
     // Si está definido el objeto de propiedades, mergearlo con el de context
     if (
@@ -72,21 +139,39 @@ module.exports = (file, api, options) => {
         ...contextParams.properties
       ]
       contextParams.properties = []
-      componentDeclarationArrowFunction.get().value.init.params = [propsParams]
+      componentDeclarationArrowFunction.length &&
+        (componentDeclarationArrowFunction.get().value.init.params = [
+          propsParams
+        ])
+      componentDeclarationES5Function.length &&
+        (componentDeclarationES5Function.get().value.params = [propsParams])
     }
 
-    // Si no está defino y solo hay un placeholder (_, {domain}) => {} , reemplazar el placeholder por el contexto
-    // ({i18n}) => {}
+    // Si no está defino y solo hay un placeholder (_, {domain, i18n}) => {} , crear una deconstrucción incluyendo el contexto
+    // ({domain, i18n, ..._}) => {}
     if (
       propsParams &&
       propsParams.type === 'Identifier' &&
       contextParams &&
       contextParams.type === 'ObjectPattern'
     ) {
-      componentDeclarationArrowFunction.get().value.init.params = [
-        contextParams
+      contextParams.properties = [
+        ...contextParams.properties,
+        {
+          type: 'RestElement',
+          argument: {type: 'Identifier', name: propsParams.name}
+        }
       ]
+      componentDeclarationArrowFunction.length &&
+        (componentDeclarationArrowFunction.get().value.init.params = [
+          contextParams
+        ])
+      componentDeclarationES5Function.length &&
+        (componentDeclarationES5Function.get().value.params = [contextParams])
     }
+
+    // Si ambos son una Identificar:
+    // (props, context) => {}
   }
 
   return root.toSource()
