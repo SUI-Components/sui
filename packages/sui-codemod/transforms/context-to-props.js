@@ -1,7 +1,5 @@
 const EMPTY = 0
 
-// TODO: ESTO NO FUNCIONA CON LAS DEFINICIONES ESTATICAS DE PROPS Y CONTEXT
-
 module.exports = (file, api, options) => {
   const j = api.jscodeshift
   const root = j(file.source)

@@ -1,5 +1,3 @@
-// TODO: ESTO NO FUNCIONA CON LAS DEFINICIONES ESTATICAS DE PROPS Y CONTEXT
-
 const fg = require('fast-glob')
 const babelParser = require('@babel/parser')
 const fs = require('fs')
