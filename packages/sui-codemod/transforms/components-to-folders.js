@@ -253,14 +253,12 @@ module.exports = {
     filesToMove
       .filter(notEntryComponent)
       .filter(inRootFolder)
-      // .filter((_, index) => index === 1)
       .forEach(moveFileToFolder({dry}))
 
     filesToMove
       .filter(notEntryComponent)
       .filter(insideFolder)
       .filter(file => file.hasContext)
-      // .filter((_, index) => index === 1)
       .forEach(applyIndexComponentPattern({dry}))
 
     filesToMove
