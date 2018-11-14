@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const Walker = require('walker')
+const fg = require('fast-glob')
 const svgr = require('@svgr/core').default
-const fs = require('fs')
+const fs = require('fs-extra')
 const program = require('commander')
 const {join} = require('path')
 const template = require('../templates/pure-component')
 const toCamelCase = require('@s-ui/js/lib/string').toCamelCase
+const babel = require('babel-core')
 
 const BASE_DIR = process.cwd()
-const COMPONENT_EXTENSION = 'js'
-const ENCODING = 'utf-8'
 const LIB_FOLDER = join(BASE_DIR, '.', 'lib')
 const SVG_FOLDER = join(BASE_DIR, '.', 'src')
 
@@ -27,14 +26,16 @@ program
   })
   .parse(process.argv)
 
-const convertFileName = function(fileName) {
+const camelCase = function(fileName) {
   const camelFile = toCamelCase(fileName)
   return `${camelFile[0].toUpperCase()}${camelFile.slice(1)}`
 }
 
 const getLibFile = function(file) {
-  const fileName = file.match('^.*/(.*).svg$')[1]
-  return `${LIB_FOLDER}/${convertFileName(fileName)}.${COMPONENT_EXTENSION}`
+  const [, rawPath, rawfileName] = file.match('^.*/src/(.+/)*(.*).svg$')
+  const fileName = camelCase(rawfileName)
+  const path = rawPath || ''
+  return `${LIB_FOLDER}/${path}${fileName}.js`
 }
 
 function directoryExists(path) {
@@ -53,23 +54,40 @@ function ensureDirectoryExistence(dirname) {
 }
 
 ensureDirectoryExistence(LIB_FOLDER)
-Walker(SVG_FOLDER).on('file', function(file) {
-  console.log(`Converting ${file}`)
-  fs.readFile(file, (err, data) => {
-    if (err) throw err
-    svgr(
-      data,
-      {
-        template,
-        expandProps: false
-      },
-      {componentName: 'SVGComponent'}
-    ).then(jsCode => {
-      fs.writeFile(getLibFile(file), jsCode, ENCODING, function(error) {
-        if (error) {
-          throw error
-        }
-      })
+
+fg([`${SVG_FOLDER}/**/*.svg`]).then(entries =>
+  entries.forEach(file => {
+    console.log(`Converting ${file}`)
+    fs.readFile(file, (err, data) => {
+      if (err) throw err
+      svgr(
+        data,
+        {
+          template,
+          expandProps: false
+        },
+        {componentName: 'SVGComponent'}
+      )
+        .then(
+          jsCode =>
+            new Promise(resolve =>
+              resolve(
+                babel.transform(jsCode, {
+                  presets: 'sui'
+                })
+              )
+            )
+        )
+        .then(result => {
+          fs.outputFile(getLibFile(file), result.code, function(error) {
+            if (error) {
+              throw error
+            }
+          })
+        })
+        .catch(error => {
+          console.error(error)
+        })
     })
   })
-})
+)

@@ -10,15 +10,16 @@
     "sui-svg": "./bin/sui-svg.js"
   },
   "dependencies": {
-    "@s-ui/component-peer-dependencies": "latest",
     "@compositor/kit": "1.0.47",
     "@s-ui/bundler": "3",
+    "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
     "@s-ui/js": "1",
     "@svgr/core": "3.1.0",
+    "babel-core": "6.26.3",
     "commander": "2.19.0",
-    "styled-components": "4.0.2",
-    "walker": "1.0.7"
+    "fast-glob": "2.2.4",
+    "styled-components": "4.1.1"
   },
   "devDependencies": {
     "@s-ui/lint": "2",
