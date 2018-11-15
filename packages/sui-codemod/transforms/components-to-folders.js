@@ -94,7 +94,7 @@ const hasContext = file => {
 const indexTemplate = file =>
   `
 import React from 'react'
-import SUIContext from '@s-ui/context'
+import SUIContext from '@s-ui/react-context'
 
 import Component from './component'
 
