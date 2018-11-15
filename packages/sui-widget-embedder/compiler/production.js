@@ -25,6 +25,7 @@ module.exports = ({page, remoteCdn, globalConfig}) => {
   const config = requireOrDefault(
     path.resolve(process.cwd(), 'widgets', page, 'package')
   )
+
   return webpack({
     ...prodConfig,
     context: path.resolve(process.cwd(), 'widgets', page),
@@ -32,12 +33,10 @@ module.exports = ({page, remoteCdn, globalConfig}) => {
       ...prodConfig.resolve,
       alias: globalConfig.alias
     },
-    entry: config.vendor
-      ? {
-          app: MAIN_ENTRY_POINT,
-          vendor: config.vendor
-        }
-      : MAIN_ENTRY_POINT,
+    entry: {
+      app: MAIN_ENTRY_POINT,
+      vendor: config.vendor
+    },
     output: {
       ...prodConfig.output,
       path: path.resolve(process.cwd(), 'public', page),

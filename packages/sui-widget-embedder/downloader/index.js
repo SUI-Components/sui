@@ -2,7 +2,6 @@
   'use strict'
   var manifests = require('static-manifests')()
   var pathnamesRegExp = require('static-pathnamesRegExp')()
-  var cdn = require('static-cdn')()
   var serviceWorkerCdn = require('service-worker-cdn')()
   // https://davidwalsh.name/javascript-loader
   var load = (function() {
@@ -85,14 +84,13 @@
   }
 
   function loadAssetsFor(page) {
-    var baseUrl = cdn + '/' + page + '/'
     var manifest = manifests[page]
     var loadStyle = function() {
       var css = manifest['app.css'] || manifest['main.css']
-      return css ? load.css(baseUrl + css) : Promise.resolve()
+      return css ? load.css(css) : Promise.resolve()
     }
     var loadScripts = [
-      manifest['runtime.js'],
+      manifest['runtime~app.js'],
       manifest['main.js'],
       manifest['vendor.js'],
       manifest['app.js']
@@ -100,7 +98,7 @@
       .filter(Boolean)
       .map(function(script) {
         return function() {
-          return load.js(baseUrl + script)
+          return load.js(script)
         }
       })
 
