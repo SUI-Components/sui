@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.19.0"></a>
+# 1.19.0 (2018-11-15)
+
+
+### Bug Fixes
+
+* update files to load ([2586020](https://github.com/SUI-Components/sui/commit/2586020))
+
+
+### Features
+
+* update entry point to always be app ([7c688b2](https://github.com/SUI-Components/sui/commit/7c688b2))
+
+
+
+<a name="1.18.0"></a>
+# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
+
+
+
 <a name="1.17.0"></a>
 # 1.17.0 (2018-10-31)
 
