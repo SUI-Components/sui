@@ -36,4 +36,18 @@ A `src` folder with all the `.svg` files to be converted inside
 
 A `lib` folder with the generated components will be created/overridden
 
-**Advice:** no `index.js` will be generated inside the lib folder, each component should be imported independently for performance reasons
+**⚠️ Advice:** no `index.js` will be generated inside the lib folder, each component should be imported independently for performance reasons
+
+## How to use the generated lib
+
+```jsx
+import SUIComponent from '@s-ui/react-atom-component'
+import YourIcon from 'your-svg-repo/lib/Icons/YourIcon'
+
+const YourAwesomeComponent = () =>
+  <SUIComponent icon={<YourIcon />} />
+```
+
+## Template
+
+Check out the component template in order to check its features [here](templates/)
