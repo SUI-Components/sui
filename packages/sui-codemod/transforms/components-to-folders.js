@@ -100,11 +100,13 @@ import Component from './component'
 
 const ${toPascalCase(file.name)} = props => (
   <SUIContext.Consumer>
-    {context => <Component {...context} {...this.props} />}
+    {context => <Component {...context} {...props} />}
   </SUIContext.Consumer>
 )
 
-${toPascalCase(file.name)}.displayName = '${toPascalCase(file.name)}'
+${toPascalCase(
+    file.name
+  )}.displayName = Component.displayName || '${toPascalCase(file.name)}'
 
 export default ${toPascalCase(file.name)}
 `.trim()
