@@ -16,13 +16,14 @@ function getOrDefault(key, defaultValue) {
 }
 
 const packagesFolder = getOrDefault('packagesFolder', 'src')
+const rootPath = path.join(basePath, packagesFolder)
 const deepLevel = getOrDefault('deepLevel', 1)
-const customScopes = getOrDefault('customScopes', [])
+const configCustomScopes = getOrDefault('customScopes', [])
 const publishAccess = getOrDefault('access', 'restricted')
 
 module.exports = {
   getScopes: function() {
-    const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
+    const folders = cwds(rootPath, deepLevel)
     const scopes = folders.map(folder => {
       const reversedPath = folder.split(path.sep)
       const scope = Array.apply(null, Array(deepLevel)).map(
@@ -36,6 +37,10 @@ module.exports = {
         .join(path.sep)
     })
 
+    const customScopes =
+      hasRootFiles() && this.isMonoPackage()
+        ? [...configCustomScopes, 'Root']
+        : configCustomScopes
     return flatten(scopes, customScopes)
   },
   getScopesPaths: function() {
@@ -52,7 +57,7 @@ module.exports = {
     return projectPackage.name
   },
   isMonoPackage: function() {
-    const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
+    const folders = cwds(rootPath, deepLevel)
     const pkgFolders = folders.filter(getPackageConfig)
     return !pkgFolders.length
   }
@@ -86,3 +91,10 @@ const getPackageConfig = packagePath => {
     return null
   }
 }
+
+const hasRootFiles = () =>
+  Boolean(
+    readdirSync(rootPath)
+      .map(file => path.join(rootPath, file))
+      .find(filePath => statSync(filePath).isFile())
+  )
