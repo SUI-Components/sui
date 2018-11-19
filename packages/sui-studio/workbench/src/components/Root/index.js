@@ -8,6 +8,7 @@ import Select from '../Select'
 import Preview from '../../../../src/components/preview'
 import CodeMirror from '../CodeMirror'
 
+import SUIContext from '@s-ui/react-context'
 import {createStore} from '@s-ui/react-domain-connector'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
@@ -91,14 +92,16 @@ class Root extends React.PureComponent {
                   onChange={this.handleChangeCodeMirror}
                   playground={playground}
                 />
-                <Preview
-                  scope={{
-                    React,
-                    [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-                    ...nonDefault
-                  }}
-                  code={playground}
-                />
+                <SUIContext.Provider value={context}>
+                  <Preview
+                    scope={{
+                      React,
+                      [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                      ...nonDefault
+                    }}
+                    code={playground}
+                  />
+                </SUIContext.Provider>
               </React.Fragment>
             )}
           </When>

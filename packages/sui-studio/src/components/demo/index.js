@@ -18,6 +18,7 @@ import withContext from './HoC/withContext'
 import withProvider from './HoC/withProvider'
 
 import {createStore} from '@s-ui/react-domain-connector'
+import SUIContext from '@s-ui/react-context'
 
 import {
   createContextByType,
@@ -225,15 +226,17 @@ export default class Demo extends Component {
                 />
               )}
 
-              <Preview
-                code={playground}
-                scope={{
-                  React,
-                  [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-                  domain,
-                  ...nonDefaultExports
-                }}
-              />
+              <SUIContext.Provider value={context}>
+                <Preview
+                  code={playground}
+                  scope={{
+                    React,
+                    [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                    domain,
+                    ...nonDefaultExports
+                  }}
+                />
+              </SUIContext.Provider>
             </React.Fragment>
           )}
         </When>
