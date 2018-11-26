@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.24.0"></a>
+# 1.24.0 (2018-11-19)
+
+
+### Bug Fixes
+
+* remove undefined vendor from webpack's config ([1040d4c](https://github.com/SUI-Components/sui/commit/1040d4c))
+
+
+
 <a name="1.19.0"></a>
 # 1.19.0 (2018-11-15)
 

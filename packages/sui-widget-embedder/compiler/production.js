@@ -26,6 +26,10 @@ module.exports = ({page, remoteCdn, globalConfig}) => {
     path.resolve(process.cwd(), 'widgets', page, 'package')
   )
 
+  const entry = {app: MAIN_ENTRY_POINT}
+  if (config.vendor) {
+    entry['vendor'] = config.vendor
+  }
   return webpack({
     ...prodConfig,
     context: path.resolve(process.cwd(), 'widgets', page),
@@ -33,10 +37,7 @@ module.exports = ({page, remoteCdn, globalConfig}) => {
       ...prodConfig.resolve,
       alias: globalConfig.alias
     },
-    entry: {
-      app: MAIN_ENTRY_POINT,
-      vendor: config.vendor
-    },
+    entry,
     output: {
       ...prodConfig.output,
       path: path.resolve(process.cwd(), 'public', page),
