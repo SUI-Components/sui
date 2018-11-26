@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
-const babelRules = require('./shared/module-rules-babel')
+const createBabelRules = require('./shared/module-rules-babel')
 const {config} = require('./shared')
 
 let webpackConfig = {
@@ -24,7 +24,7 @@ let webpackConfig = {
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
-    rules: [babelRules]
+    rules: [createBabelRules({isServer: true})]
   }
 }
 

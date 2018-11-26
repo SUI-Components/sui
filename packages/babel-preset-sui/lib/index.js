@@ -1,3 +1,5 @@
+console.log('new babel')
+
 function plugins(api, opts) {
   return [
     require('@babel/plugin-syntax-dynamic-import').default,
@@ -17,8 +19,7 @@ function plugins(api, opts) {
       require('@babel/plugin-transform-runtime').default,
       {
         corejs: false,
-        regenerator: true,
-        absoluteRuntime: require.resolve('@babel/runtime/package.json')
+        regenerator: true
       }
     ]
   ]

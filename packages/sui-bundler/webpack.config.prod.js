@@ -9,7 +9,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const uglifyJsPlugin = require('./shared/uglify')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
-const babelRules = require('./shared/module-rules-babel')
+const createBabelRules = require('./shared/module-rules-babel')
 
 const {
   navigateFallbackWhitelist,
@@ -145,7 +145,7 @@ module.exports = {
   ]),
   module: {
     rules: [
-      babelRules,
+      createBabelRules(),
       {
         test: /(\.css|\.scss)$/,
         use: [
