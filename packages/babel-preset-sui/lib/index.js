@@ -21,7 +21,8 @@ function plugins(api, opts) {
         corejs: false,
         regenerator: true
       }
-    ]
+    ],
+    require('react-hot-loader/babel')
   ]
 }
 
