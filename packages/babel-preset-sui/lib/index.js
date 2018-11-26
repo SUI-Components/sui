@@ -6,7 +6,6 @@ function plugins(api, opts) {
     [
       require('babel-plugin-transform-react-remove-prop-types').default,
       {
-        removeImport: true,
         wrap: true
       }
     ],
