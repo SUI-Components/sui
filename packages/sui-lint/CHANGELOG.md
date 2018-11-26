@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.20.0"></a>
+# 2.20.0 (2018-11-08)
+
+
+### Features
+
+* improved writing ([bb1fc7b](https://github.com/SUI-Components/sui/commit/bb1fc7b))
+
+
+
 <a name="2.19.0"></a>
 # 2.19.0 (2018-09-12)
 

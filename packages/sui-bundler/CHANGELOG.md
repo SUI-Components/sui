@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.28.0"></a>
+# 3.28.0 (2018-11-08)
+
+
+### Features
+
+* add option to make no pre loaders run ([d0d240b](https://github.com/SUI-Components/sui/commit/d0d240b))
+
+
+
 <a name="3.27.0"></a>
 # 3.27.0 (2018-10-25)
 
@@ -548,16 +558,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
