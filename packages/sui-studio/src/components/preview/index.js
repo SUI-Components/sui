@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
+import SUIContext from '@s-ui/react-context'
+
 const ERROR_TIMEOUT = 500
 
 export default class Preview extends Component {
@@ -71,7 +73,12 @@ export default class Preview extends Component {
       const compiledCode = this.compileCode()
       /* eslint-disable no-eval */
       const Component = eval(compiledCode)(...scope)
-      ReactDOM.render(Component, mountNode)
+      ReactDOM.render(
+        <SUIContext.Provider value={this.props.scope.context}>
+          {Component}
+        </SUIContext.Provider>,
+        mountNode
+      )
       if (this.state.error) {
         this.setState({error: undefined})
       }
