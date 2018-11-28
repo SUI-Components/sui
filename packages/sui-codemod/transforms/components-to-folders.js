@@ -105,6 +105,10 @@ const ${toPascalCase(file.name)} = props => (
   </SUIContext.Consumer>
 )
 
+${toPascalCase(
+    file.name
+  )}.displayName = Component.displayName || '${toPascalCase(file.name)}'
+
 export default hoistNonReactStatics(${toPascalCase(file.name)}, Component)
 `.trim()
 
