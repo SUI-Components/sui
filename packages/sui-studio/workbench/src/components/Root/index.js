@@ -8,7 +8,7 @@ import Select from '../Select'
 import Preview from '../../../../src/components/preview'
 import CodeMirror from '../CodeMirror'
 
-// import SUIContext from '@s-ui/react-context'
+import SUIContext from '@s-ui/react-context'
 import {createStore} from '@s-ui/react-domain-connector'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
@@ -106,7 +106,11 @@ class Root extends React.PureComponent {
             )}
           </When>
           <When value={EnhanceDemoComponent}>
-            {() => <EnhanceDemoComponent />}
+            {() => (
+              <SUIContext.Provider value={contextProvider}>
+                <EnhanceDemoComponent />
+              </SUIContext.Provider>
+            )}
           </When>
         </div>
         <div className="Root-bottom" />
