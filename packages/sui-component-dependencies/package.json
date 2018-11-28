@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/component-dependencies",
-  "version": "1.5.0",
+  "version": "1.5.0-beta.0",
   "description": "A set of dependencies of all SUI components.",
   "keywords": [
     "fatigue",
@@ -12,6 +12,7 @@
     "@schibstedspain/rosetta": "3",
     "@schibstedspain/sui-theme": "8",
     "@schibstedspain/theme-basic": "7",
+    "hoist-non-react-statics": "3.2.0",
     "classnames": "2.2.5"
   },
   "repository": {
