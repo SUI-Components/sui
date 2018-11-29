@@ -242,7 +242,11 @@ export default class Demo extends Component {
         </When>
 
         <When value={EnhanceDemoComponent}>
-          {() => <EnhanceDemoComponent />}
+          {() => (
+            <SUIContext.Provider value={context}>
+              <EnhanceDemoComponent />
+            </SUIContext.Provider>
+          )}
         </When>
       </div>
     )
