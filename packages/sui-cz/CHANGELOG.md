@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2018-11-29)
+
+
+### Features
+
+* adds root scope on root file changes ([cc9792b](https://github.com/SUI-Components/sui/commit/cc9792b))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-05-30)
 
