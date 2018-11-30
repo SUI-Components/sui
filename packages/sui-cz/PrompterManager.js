@@ -26,7 +26,10 @@ const scopes = config
 const commitTypes = require('./commitTypes').types
 
 const typesWithOtherScopes = ['feat', 'fix', 'release', 'test', 'docs', 'chore']
-const otherScopes = [{name: 'META'}, {name: 'examples'}]
+const defaultScopes = [{name: 'META'}, {name: 'examples'}]
+const otherScopes = config.hasRootFiles()
+  ? [{name: 'Root'}, ...defaultScopes]
+  : defaultScopes
 const allowedBreakingChanges = ['feat', 'fix']
 const getCommitTypesMapped = () =>
   Object.keys(commitTypes).map(value => ({

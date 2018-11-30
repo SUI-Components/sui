@@ -17,10 +17,11 @@ function getOrDefault(key, defaultValue) {
 const packagesFolder = getOrDefault('packagesFolder', 'src')
 const deepLevel = getOrDefault('deepLevel', 1)
 const customScopes = getOrDefault('customScopes', [])
+const rootPath = path.join(basePath, packagesFolder)
 
 module.exports = {
   getScopes: function() {
-    const folders = cwds(path.join(basePath, packagesFolder), deepLevel)
+    const folders = cwds(rootPath, deepLevel)
     const scopes = folders.map(folder => {
       const reversedPath = folder.split(path.sep)
       const scope = Array.apply(null, Array(deepLevel)).map(
@@ -38,7 +39,13 @@ module.exports = {
   },
   getPackagesFolder: function() {
     return packagesFolder
-  }
+  },
+  hasRootFiles: () =>
+    Boolean(
+      readdirSync(rootPath)
+        .map(file => path.join(rootPath, file))
+        .find(filePath => statSync(filePath).isFile())
+    )
 }
 
 const getFolders = dir =>
