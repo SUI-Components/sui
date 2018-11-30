@@ -29,6 +29,7 @@ import {
   removeDefaultContext
 } from './utilities'
 
+const EMPTY = 0
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const CONTAINER_CLASS = 'sui-Studio'
 const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
@@ -140,7 +141,7 @@ export default class Demo extends Component {
 
   render() {
     let {
-      ctxt,
+      ctxt = {},
       ctxtSelectedIndex,
       ctxtType,
       events,
@@ -161,21 +162,21 @@ export default class Demo extends Component {
     }
 
     const nonDefaultExports = removeDefaultContext(exports)
-    const contextTypes = Base.contextTypes || Base.originalContextTypes
-    const context = contextTypes && createContextByType(ctxt, ctxtType)
+    const context =
+      Object.keys(ctxt).length !== EMPTY && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
     const hasProvider = checkIfPackageHasProvider(pkg)
     const store = domain && hasProvider && createStore(domain)
 
     const Enhance = pipe(
-      withContext(contextTypes && context, context),
+      withContext(context, context),
       withProvider(hasProvider, store)
     )(Base)
 
     const EnhanceDemoComponent =
       DemoComponent &&
       pipe(
-        withContext(contextTypes && context, context, contextTypes),
+        withContext(context, context),
         withProvider(hasProvider, store)
       )(DemoComponent)
 
@@ -226,17 +227,16 @@ export default class Demo extends Component {
                 />
               )}
 
-              <SUIContext.Provider value={context}>
-                <Preview
-                  code={playground}
-                  scope={{
-                    React,
-                    [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-                    domain,
-                    ...nonDefaultExports
-                  }}
-                />
-              </SUIContext.Provider>
+              <Preview
+                code={playground}
+                scope={{
+                  context,
+                  React,
+                  [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                  domain,
+                  ...nonDefaultExports
+                }}
+              />
             </React.Fragment>
           )}
         </When>
