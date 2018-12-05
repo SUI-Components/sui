@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const prodConfig = require('@s-ui/bundler/webpack.config.prod')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const uglifyJsPlugin = require('@s-ui/bundler/shared/uglify')
 
 const MAIN_ENTRY_POINT = './index.js'
 
@@ -44,6 +46,17 @@ module.exports = ({page, remoteCdn, globalConfig}) => {
       publicPath: remoteCdn
         ? `${remoteCdn}/${page}/`
         : prodConfig.output.publicPath
+    },
+    optimization: {
+      ...prodConfig.optimization,
+      minimizer: [
+        uglifyJsPlugin,
+        new OptimizeCSSAssetsPlugin({
+          cssProcessorOptions: {
+            zindex: false
+          }
+        })
+      ]
     },
     plugins: pipe(
       removePlugin('HtmlWebpackPlugin'),
