@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 const withStateValue = BaseComponent => {
+  const displayName = BaseComponent.displayName
+
   return class BaseComponentWithState extends Component {
-    state = {
-      value: this.props.value
-    }
+    static displayName = `withStateValue(${displayName})`
 
     static propTypes = {
       /** value */
@@ -18,6 +18,10 @@ const withStateValue = BaseComponent => {
     static defaultProps = {
       value: '',
       onChange: () => {}
+    }
+
+    state = {
+      value: this.props.value
     }
 
     onChange = (e, {value}) => {
