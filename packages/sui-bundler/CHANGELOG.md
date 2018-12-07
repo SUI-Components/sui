@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.29.0"></a>
+# 3.29.0 (2018-12-04)
+
+
+### Bug Fixes
+
+* ignore scss import files in server ([e41163e](https://github.com/SUI-Components/sui/commit/e41163e))
+
+
+
 <a name="3.28.0"></a>
 # 3.28.0 (2018-11-08)
 
@@ -558,6 +568,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 

@@ -2,6 +2,7 @@
   "name": "@s-ui/hoc",
   "version": "1.5.0",
   "description": "Set of HoC useful for react",
+  "main": "lib/index.js",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui --out-dir ./lib  ./src",
     "prepublish": "npm run lib"

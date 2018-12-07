@@ -24,7 +24,14 @@ let webpackConfig = {
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
-    rules: [babelRules]
+    rules: [
+      babelRules,
+      {
+        // ignore scss require/imports files in the server
+        test: /\.scss$/,
+        use: ['null-loader']
+      }
+    ]
   }
 }
 

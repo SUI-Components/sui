@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.25.0"></a>
+# 1.25.0 (2018-12-05)
+
+
+### Bug Fixes
+
+* disable zindex optimization on cssnano ([d5edd36](https://github.com/SUI-Components/sui/commit/d5edd36))
+
+
+
 <a name="1.24.0"></a>
 # 1.24.0 (2018-11-19)
 
@@ -28,7 +38,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.18.0"></a>
-# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
+# 1.18.0 (2018-10-31)
 
 
 
