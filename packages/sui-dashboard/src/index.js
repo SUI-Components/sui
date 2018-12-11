@@ -24,12 +24,7 @@ module.exports.stats = async ({repositories, root, dry}) => {
     (acc, component) => {
       acc[component] = dirs
         .filter(dir => dir.includes(component))
-        .map(dir =>
-          dir.replace(
-            /tmp\/\d+\/(?<repo>[a-z|-]+)\/.*/,
-            '$<repo>'.replace('/', '')
-          )
-        )
+        .map(dir => dir.replace(/tmp\/\d+\/(?<repo>[a-z|-]+)\/.*/, '$<repo>'))
         .map(repo => repo.replace('/', ''))
       return acc
     },
