@@ -4,7 +4,7 @@
 const path = require('path')
 const program = require('commander')
 const {parallelSpawn} = require('@s-ui/helpers/cli')
-const {stats} = require('../src')
+const {stats, excel} = require('../src')
 
 program
   .option(
@@ -83,6 +83,14 @@ const installCommands = repositories.map(repo => [
   await parallelSpawn(cloneSUIComponentsCommand)
   await parallelSpawn(cloneCommands)
   await parallelSpawn(installCommands)
-  await stats({repositories, root: `/tmp/${WORK_DIRECTORY}`})
-  // await stats({repositories, root: `/tmp/1544457748852`})
+  const {
+    statsSUIComponentUsedByProjects,
+    statsSUIComponentUsedInProjects
+    // } = await stats({repositories, root: `/tmp/${WORK_DIRECTORY}`})
+  } = await stats({repositories, root: `/tmp/1544459415649`})
+  !program.dry &&
+    (await excel({
+      statsSUIComponentUsedByProjects,
+      statsSUIComponentUsedInProjects
+    }))
 })()

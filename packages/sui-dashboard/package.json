@@ -15,6 +15,7 @@
     "chalk": "2.4.1",
     "commander": "2.19.0",
     "fast-glob": "2.2.4",
+    "google-spreadsheet": "2.0.6",
     "update-check": "1.5.2"
   }
 }
