@@ -43,7 +43,6 @@
     "mini-css-extract-plugin": "0.4.1",
     "node-sass": "4.9.2",
     "node-sass-json-importer": "3.1.6",
-    "npm-run-all": "3.1.2",
     "null-loader": "0.1.1",
     "object.values": "1.0.4",
     "optimize-css-assets-webpack-plugin": "4.0.0",
