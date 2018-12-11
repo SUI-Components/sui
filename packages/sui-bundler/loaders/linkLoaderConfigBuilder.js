@@ -57,9 +57,9 @@ module.exports = ({config, packagesToLink}) => {
           test: /\.jsx?$/,
           // TODO: This is crappy, I need better options
           exclude: new RegExp(
-            `node_modules(?!${path.sep}@s-ui${path.sep}(svg|studio)(${
+            `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${
               path.sep
-            }workbench)?${path.sep}src)`
+            }studio)(${path.sep}workbench)?${path.sep}src)`
           ),
           use: {
             loader: 'link-loader',
