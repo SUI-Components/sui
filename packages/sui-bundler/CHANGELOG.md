@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.31.0"></a>
+# 3.31.0 (2018-12-11)
+
+
+### Bug Fixes
+
+* new release with fix for npm-run-all ([8431bca](https://github.com/SUI-Components/sui/commit/8431bca))
+
+
+
 <a name="3.30.0"></a>
 # 3.30.0 (2018-12-11)
 
