@@ -45,7 +45,8 @@ module.exports = ({page, remoteCdn, globalConfig}) => {
       path: path.resolve(process.cwd(), 'public', page),
       publicPath: remoteCdn
         ? `${remoteCdn}/${page}/`
-        : prodConfig.output.publicPath
+        : prodConfig.output.publicPath,
+      jsonpFunction: `webpackJsonp-${page}`
     },
     optimization: {
       ...prodConfig.optimization,
