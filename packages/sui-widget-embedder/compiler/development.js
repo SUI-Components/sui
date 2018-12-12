@@ -1,10 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
-
-const htmlPluginPosition = devConfig.plugins
-  .map(p => p.constructor.toString())
-  .findIndex(string => string.match(/HtmlWebpackPlugin/))
+const {pipe, removePlugin} = require('./utils')
 
 module.exports = ({page, port}) =>
   webpack({
@@ -19,8 +16,5 @@ module.exports = ({page, port}) =>
       publicPath: `http://localhost:${port}/`,
       filename: 'bundle.js'
     },
-    plugins: [
-      ...devConfig.plugins.slice(0, htmlPluginPosition),
-      ...devConfig.plugins.slice(htmlPluginPosition + 1)
-    ]
+    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(devConfig.plugins)
   })

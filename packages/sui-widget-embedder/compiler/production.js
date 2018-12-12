@@ -3,17 +3,8 @@ const webpack = require('webpack')
 const prodConfig = require('@s-ui/bundler/webpack.config.prod')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const uglifyJsPlugin = require('@s-ui/bundler/shared/uglify')
-
+const {pipe, removePlugin} = require('./utils')
 const MAIN_ENTRY_POINT = './index.js'
-
-const pipe = (...funcs) => arg =>
-  funcs.reduce((value, func) => func(value), arg)
-const removePlugin = name => plugins => {
-  const pos = plugins
-    .map(p => p.constructor.toString())
-    .findIndex(string => string.match(name))
-  return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
-}
 
 const requireOrDefault = path => {
   try {
@@ -23,7 +14,7 @@ const requireOrDefault = path => {
   }
 }
 
-module.exports = ({page, remoteCdn, globalConfig}) => {
+module.exports = ({page, remoteCdn, globalConfig = {}}) => {
   const config = requireOrDefault(
     path.resolve(process.cwd(), 'widgets', page, 'package')
   )
