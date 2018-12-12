@@ -1,29 +1,25 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
+const os = require('os')
 const path = require('path')
 const program = require('commander')
 const {parallelSpawn} = require('@s-ui/helpers/cli')
 const {stats, excel} = require('../src')
 
 program
-  .option(
-    '--dry',
-    'just print the info in console, Dont update the remote excel'
-  )
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-dashboard components')
-    console.log('    $ sui-dashboard components --dry')
     console.log('')
   })
   .parse(process.argv)
 
-const WORK_DIRECTORY = Date.now()
+const WORK_DIRECTORY = path.join(os.tmpdir(), Date.now().toString())
 const FLAGS_INSTALL = [
   // Setting cache is required for concurrent `npm install`s to work
-  `cache=${path.join(`/tmp/${WORK_DIRECTORY}`, 'cache')}`,
+  `cache=${path.join(WORK_DIRECTORY, 'cache')}`,
   'no-package-lock',
   'no-shrinkwrap',
   'no-optional',
@@ -60,7 +56,7 @@ const cloneSUIComponentsCommand = [
     [
       'clone',
       'https://github.com/SUI-Components/sui-components',
-      `/tmp/${WORK_DIRECTORY}/sui-components`
+      path.join(WORK_DIRECTORY, 'sui-components')
     ]
   ]
 ]
@@ -70,27 +66,20 @@ const cloneCommands = repositories.map(repo => [
   [
     'clone',
     `git@github.schibsted.io:scmspain/${repo}.git`,
-    `/tmp/${WORK_DIRECTORY}/${repo}`
+    path.join(WORK_DIRECTORY, repo)
   ]
 ])
 
 const installCommands = repositories.map(repo => [
   'npm',
   ['install', ...FLAGS_INSTALL.map(f => `--${f}`)],
-  {cwd: `/tmp/${WORK_DIRECTORY}/${repo}`}
+  {cwd: path.join(WORK_DIRECTORY, repo)}
 ])
 ;(async () => {
   await parallelSpawn(cloneSUIComponentsCommand)
   await parallelSpawn(cloneCommands)
   await parallelSpawn(installCommands)
-  const {
-    statsSUIComponentUsedByProjects,
-    statsSUIComponentUsedInProjects
-    // } = await stats({repositories, root: `/tmp/${WORK_DIRECTORY}`})
-  } = await stats({repositories, root: `/tmp/1544459415649`})
-  !program.dry &&
-    (await excel({
-      statsSUIComponentUsedByProjects,
-      statsSUIComponentUsedInProjects
-    }))
+  const statsComponents = await stats({repositories, root: WORK_DIRECTORY})
+
+  console.log(statsComponents)
 })()

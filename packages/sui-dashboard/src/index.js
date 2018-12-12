@@ -20,12 +20,14 @@ module.exports.stats = async ({repositories, root, dry}) => {
   )
 
   const dirs = fg.sync(componentsInstalled, {onlyDirectories: true})
+
   const statsSUIComponentUsedInProjects = suiComponents.reduce(
     (acc, component) => {
       acc[component] = dirs
         .filter(dir => dir.includes(component))
-        .map(dir => dir.replace(/tmp\/\d+\/(?<repo>[a-z|-]+)\/.*/, '$<repo>'))
-        .map(repo => repo.replace('/', ''))
+        .map(dir =>
+          dir.replace(root, '').replace(/(?<repo>[a-z|-]+)\/.*/, '$<repo>')
+        )
       return acc
     },
     {}
@@ -38,12 +40,35 @@ module.exports.stats = async ({repositories, root, dry}) => {
       .map(dir => dir.replace(/^.+(?<comp>@[a-z|-]+\/[a-z|-]+$)/, '$<comp>'))
     return acc
   }, {})
-  console.log({
+
+  const partialStats = {
     statsSUIComponentUsedInProjects,
-    statsSUIComponentUsedByProjects
-  })
+    statsSUIComponentUsedByProjects,
+    suiStats: {
+      totalSUIComponents: Object.keys(statsSUIComponentUsedInProjects).length,
+      totalReusedSUIComponents: Object.values(
+        statsSUIComponentUsedInProjects
+      ).reduce((acc, list) => (acc += list.length), 0),
+      maxPossible:
+        Object.keys(statsSUIComponentUsedInProjects).length *
+        repositories.length
+    }
+  }
+
+  return {
+    ...partialStats,
+    suiStats: {
+      ...partialStats.suiStats,
+      percentage:
+        Math.ceil(
+          (partialStats.suiStats.totalSUIComponents * 100) /
+            partialStats.suiStats.maxPossible
+        ) + '%'
+    }
+  }
 }
 
+// Dead code, but I dont want to remove
 module.exports.excel = async ({
   statsSUIComponentUsedByProjects,
   statsSUIComponentUsedInProjects
@@ -51,9 +76,22 @@ module.exports.excel = async ({
   const doc = new GoogleSpreadsheet(
     '1ClA-1wmFFG97fvQZHmSz_6Py_CWkqpFlJOHxXbx9hqM'
   )
-  await promisify(doc.useServiceAccountAuth)(
+  // Promises for president
+  const useServiceAccountAuth = promisify(doc.useServiceAccountAuth)
+  const getInfo = promisify(doc.getInfo)
+  const getRows = promisify(doc.getRows)
+  const getCells = promisify(doc.getCells)
+
+  await useServiceAccountAuth(
     require('../sui-components-dashboard-9350df448fcd.json')
   )
-  const info = await promisify(doc.getInfo)()
-  console.log(info)
+  const spreadsheet = await getInfo()
+  const suiComponentWorksheetID = spreadsheet.worksheets.find(
+    w => w.title === 'SUIComponents in projects'
+  ).id
+
+  const rows = await getRows(suiComponentWorksheetID)
+  const cells = await getCells(suiComponentWorksheetID)
+
+  console.log(rows, cells)
 }
