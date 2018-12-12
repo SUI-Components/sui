@@ -14,4 +14,5 @@ program.command('build', 'Build all statics by page').alias('b')
 program
   .command('generate', 'Generate a new widget folder and main files')
   .alias('g')
+
 program.parse(process.argv)

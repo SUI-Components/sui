@@ -15,7 +15,8 @@ const {
 const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
-const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
+const PAGES_FOLDER = 'pages'
+const PAGES_PATH = resolve(process.cwd(), PAGES_FOLDER)
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
 const pkg = require(resolve(process.cwd(), 'package.json'))
@@ -103,10 +104,10 @@ const manifests = () =>
   }, {})
 
 const pathnamesRegExp = () =>
-  pagesFor({path: WIDGETS_PATH}).reduce((acc, page) => {
+  pagesFor({path: PAGES_PATH}).reduce((acc, page) => {
     acc[page] = require(resolve(
       process.cwd(),
-      'widgets',
+      PAGES_FOLDER,
       page,
       'package.json'
     )).pathnameRegExp
@@ -185,7 +186,7 @@ const createSW = () =>
   })
 
 Promise.all(
-  pagesFor({path: WIDGETS_PATH}).map(page => build({page, remoteCdn}))
+  pagesFor({path: PAGES_FOLDER}).map(page => build({page, remoteCdn}))
 )
   .then(createDownloader)
   .then(createSW)

@@ -6,7 +6,7 @@ const {pipe, removePlugin} = require('./utils')
 module.exports = ({page, port}) =>
   webpack({
     ...devConfig,
-    context: path.resolve(process.cwd(), 'widgets', page),
+    context: path.resolve(process.cwd(), 'pages', page),
     entry: [
       `webpack-hot-middleware/client?path=http://localhost:${port}/__ping`,
       `./index.js`

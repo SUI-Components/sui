@@ -16,7 +16,7 @@ const requireOrDefault = path => {
 
 module.exports = ({page, remoteCdn, globalConfig = {}}) => {
   const config = requireOrDefault(
-    path.resolve(process.cwd(), 'widgets', page, 'package')
+    path.resolve(process.cwd(), 'pages', page, 'package')
   )
 
   const entry = {app: MAIN_ENTRY_POINT}
@@ -25,7 +25,7 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
   }
   return webpack({
     ...prodConfig,
-    context: path.resolve(process.cwd(), 'widgets', page),
+    context: path.resolve(process.cwd(), 'pages', page),
     resolve: {
       ...prodConfig.resolve,
       alias: globalConfig.alias
