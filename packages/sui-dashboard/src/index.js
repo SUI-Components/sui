@@ -1,4 +1,3 @@
-const GoogleSpreadsheet = require('google-spreadsheet')
 const fg = require('fast-glob')
 const {promisify} = require('util')
 
