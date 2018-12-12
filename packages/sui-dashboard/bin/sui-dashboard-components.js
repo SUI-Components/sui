@@ -5,7 +5,7 @@ const os = require('os')
 const path = require('path')
 const program = require('commander')
 const {parallelSpawn} = require('@s-ui/helpers/cli')
-const {stats, excel} = require('../src')
+const {stats} = require('../src')
 
 program
   .on('--help', () => {
