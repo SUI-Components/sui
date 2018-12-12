@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/dashboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "bin": {
     "sui-dasboard": "./bin/sui-dashboard.js"
