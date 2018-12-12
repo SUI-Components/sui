@@ -1,0 +1,21 @@
+{
+  "name": "@s-ui/dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "sui-dasboard": "./bin/sui-dashboard.js"
+  },
+  "main": "src/index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@s-ui/helpers": "1",
+    "chalk": "2.4.1",
+    "commander": "2.19.0",
+    "fast-glob": "2.2.4",
+    "google-spreadsheet": "2.0.6",
+    "update-check": "1.5.2"
+  }
+}
