@@ -7,13 +7,12 @@ import './index.scss'
 const bootstrap = async () => {
   render(
     <Widgets>
-      <Widget node='<node-name>'>
-        {/*YOUR COMPONENT GOES HERE*/}
-      </Widget>
+      <Widget node="<node-name>">{/* YOUR COMPONENT GOES HERE */}</Widget>
     </Widgets>,
     'global'
   )
 }
 
 bootstrap()
+
 `

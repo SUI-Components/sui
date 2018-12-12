@@ -1,5 +1,5 @@
-module.exports = regExp => `{
-  "version": "1.0.0",
+module.exports = (regExp = '') => `{
+  "pathnameRegExp": "${regExp}",
   "private": true,
-  "pathnameRegExp": "${regExp}"
+  "version": "1.0.0"
 }`
