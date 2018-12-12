@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.26.0"></a>
+# 1.26.0 (2018-12-12)
+
+
+### Bug Fixes
+
+* set unique jsonpFunction to avoid collisions ([0b33d8e](https://github.com/SUI-Components/sui/commit/0b33d8e))
+
+
+
 <a name="1.25.0"></a>
 # 1.25.0 (2018-12-05)
 
@@ -38,7 +48,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.18.0"></a>
-# 1.18.0 (2018-10-31)
+# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
 
 
 
