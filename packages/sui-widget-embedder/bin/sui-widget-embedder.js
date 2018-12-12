@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-// const colors = require('colors')
 
 const pkg = require('../package.json')
 const version = pkg.version
