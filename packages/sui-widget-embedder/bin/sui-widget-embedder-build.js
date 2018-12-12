@@ -19,7 +19,8 @@ const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
 const pkg = require(resolve(process.cwd(), 'package.json'))
-const config = pkg['config']['sui-widget-embedder']
+const {config = {}} = pkg['config'] || {}
+const suiWidgetEmbedderConfig = config['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -50,7 +51,7 @@ program
   })
   .parse(process.argv)
 
-const remoteCdn = program.remoteCdn || config.remoteCdn
+const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
 const serviceWorkerCdn = program.serviceWorkerCdn || remoteCdn
 
 if (program.clean) {
@@ -59,7 +60,11 @@ if (program.clean) {
 }
 
 const build = ({page, remoteCdn}) => {
-  const compiler = compilerFactory({page, remoteCdn, globalConfig: config})
+  const compiler = compilerFactory({
+    page,
+    remoteCdn,
+    globalConfig: suiWidgetEmbedderConfig
+  })
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
       if (error) {
