@@ -30,8 +30,6 @@ const FLAGS_INSTALL = [
   'ignore-scripts',
   'save-exact',
   'production',
-  // "fetch-retry-factor 0",
-  // "fetch-retries 0",
   'json'
 ]
 const repositories = [
