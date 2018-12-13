@@ -20,11 +20,11 @@ Your project must follow the following folder structure:
 ```
 .
 ├── package.json <- Project package.json
-└── widgets
-    ├── detail
-    │   ├── Gallery.js
-    │   ├── ContactForm.js
-    │   ├── index.js
+└── pages
+    ├── detail <- Name of the page where widgets will be
+    │   ├── Gallery.js <- Widget
+    │   ├── ContactForm.js <- Widget
+    │   ├── index.js <- Bootstrap widgets
     │   ├── index.scss
     │   └── package.json <- Page package.json
     └── list
@@ -34,20 +34,20 @@ Your project must follow the following folder structure:
         └── package.json <- Page package.json
 ```
 
-### Generating widgets
+### Generating pages where widgets will live
 
-If you don't want to take care about base code and folder creation of a new widget you can use the `generate` functionality of the `sui-widget-embedder`:
+If you don't want to take care about base code and folder creation of a new page for widgets you can use the `generate` functionality of the `sui-widget-embedder`:
 
 ```
-$ sui-widget-embedder generate <widgetName>
+$ sui-widget-embedder generate <pageName>
 ```
 
-This will create the base files to make your widget work.
+This will create the base files to make your first widget work.
 
 You can also define the regExp that should match to load your widget into the page doing the follow:
 
 ```
-$ sui-widget-embedder generate <widgetName> -E 'expression'
+$ sui-widget-embedder generate <pageName> -E 'expression'
 ```
 
 Note that the quotes here are not 'optional' you can add an expresion without quotes off course but you'll need to escape all the chars that are interpretable by the terminal.
@@ -65,10 +65,11 @@ Note that the quotes here are not 'optional' you can add an expresion without qu
 }
 ```
 
-Inside your project-level package.json, you must config the library,
+Inside your project-level package.json, you could config the library,
 
-* remoteCdn [OPTIONAL]: the base path of the cdn where your assets will be located.
-* devPort [OPTIONAL] (DEFAULT=3000): Port where your development server will be listening.
+* alias [OPTIONAL]: create aliases to `import` certain modules more easily or to avoid importing them in production.
+* remoteCdn [OPTIONAL] (default: `'/'`): the base path of the cdn where your assets will be located.
+* devPort [OPTIONAL] (default: `3000`): Port where your development server will be listening.
 
 ### Page config
 
@@ -96,6 +97,7 @@ import Widget from '@s-ui/widget-embedder/react/Widget'
 import Widgets from '@s-ui/widget-embedder/react/Widgets'
 import render from '@s-ui/widget-embedder/react/render'
 ```
+
 * render: A method that expects a tree of React components starting with a Widgets root
 * Widgets: React component that encapsules all your widgets
 * Widget: React component that renders the children as a new React tree in another place of the page.
@@ -108,16 +110,16 @@ import render from '@s-ui/widget-embedder/react/render'
 For start developing your widget, you should use the `sui-widget-embeeder` like this:
 
 ```
-$ sui-widget-embedder dev -p <widgetName>
+$ sui-widget-embedder dev -p <pageName>
 ```
 
-This will create a bundle with your widget that you could add in your sites in order to test it.
+This will create a bundle with all the widgets for the page that you could add in your sites in order to test it.
 
-It will copy to your clipboard a Javascript code snippet. Open the site in which you want to run your widgets, open the Developer Tools and run the Javascript snippet in the console to load the widget.
+Also, it will copy to your clipboard a Javascript code snippet. Open the page in which you want to run your widgets, open the Developer Tools and run the Javascript snippet in the console to load the widget.
 
 💡 You could create a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) with the snippet. For that, just add `javascript:` before the snippet provided in order to improve your DX. Be aware as the PORT provided could change.
 
-# How to build
+## How to build
 
 If you want to get the remoteCdn from package config you just need to do that:
 
