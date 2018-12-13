@@ -1,5 +1,4 @@
 const fg = require('fast-glob')
-const {promisify} = require('util')
 
 const flat = arr => [].concat(...arr)
 
@@ -65,32 +64,4 @@ module.exports.stats = async ({repositories, root, dry}) => {
         ) + '%'
     }
   }
-}
-
-// Dead code, but I dont want to remove
-module.exports.excel = async ({
-  statsSUIComponentUsedByProjects,
-  statsSUIComponentUsedInProjects
-}) => {
-  const doc = new GoogleSpreadsheet(
-    '1ClA-1wmFFG97fvQZHmSz_6Py_CWkqpFlJOHxXbx9hqM'
-  )
-  // Promises for president
-  const useServiceAccountAuth = promisify(doc.useServiceAccountAuth)
-  const getInfo = promisify(doc.getInfo)
-  const getRows = promisify(doc.getRows)
-  const getCells = promisify(doc.getCells)
-
-  await useServiceAccountAuth(
-    require('../sui-components-dashboard-9350df448fcd.json')
-  )
-  const spreadsheet = await getInfo()
-  const suiComponentWorksheetID = spreadsheet.worksheets.find(
-    w => w.title === 'SUIComponents in projects'
-  ).id
-
-  const rows = await getRows(suiComponentWorksheetID)
-  const cells = await getCells(suiComponentWorksheetID)
-
-  console.log(rows, cells)
 }
