@@ -9,6 +9,10 @@ If you want to add or remove project, you have to edit the bin/sui-dashboard-com
 
 `$ npm install @s-ui/dashboard`
 
+## Docker:
+
+`docker run -v ~/.ssh:/root/.ssh:ro -v ~/.npmrc:/root/.npmrc:ro node npx @s-ui/dashboard components`
+
 ## CLI:
 
 ```
