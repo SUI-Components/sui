@@ -4,8 +4,12 @@ const express = require('express')
 
 const app = express()
 
-module.exports = ({page, config}) => {
-  const compiler = require('../compiler/development')({page, port: config.port})
+module.exports = ({address, page, config}) => {
+  const compiler = require('../compiler/development')({
+    address,
+    page,
+    port: config.port
+  })
 
   app.use(
     webpackMiddleware(compiler, {

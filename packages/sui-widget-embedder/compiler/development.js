@@ -3,17 +3,17 @@ const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
 const {pipe, removePlugin} = require('./utils')
 
-module.exports = ({page, port}) =>
+module.exports = ({address, page, port}) =>
   webpack({
     ...devConfig,
     context: path.resolve(process.cwd(), 'pages', page),
     entry: [
-      `webpack-hot-middleware/client?path=http://localhost:${port}/__ping`,
+      `webpack-hot-middleware/client?path=http://${address}:${port}/__ping`,
       `./index.js`
     ],
     output: {
       path: '/',
-      publicPath: `http://localhost:${port}/`,
+      publicPath: `http://${address}:${port}/`,
       filename: 'bundle.js',
       jsonpFunction: `webpackJsonp-${page}`
     },
