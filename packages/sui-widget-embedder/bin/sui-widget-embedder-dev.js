@@ -16,7 +16,7 @@ program
   .option('-p, --page <name>', 'Name of the page')
   .option(
     '-a, --address <ip-address>',
-    'Local ip address to lookup statics, useful fort virtual machines',
+    'Local ip address to lookup statics, useful for virtual machines',
     'localhost'
   )
   .on('--help', () => {
