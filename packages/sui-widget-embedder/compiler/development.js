@@ -1,27 +1,21 @@
 const path = require('path')
 const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
+const {pipe, removePlugin} = require('./utils')
 
-const htmlPluginPosition = devConfig.plugins
-  .map(p => p.constructor.toString())
-  .findIndex(string => string.match(/HtmlWebpackPlugin/))
-
-module.exports = ({page, port}) =>
+module.exports = ({address, page, port}) =>
   webpack({
     ...devConfig,
-    context: path.resolve(process.cwd(), 'widgets', page),
+    context: path.resolve(process.cwd(), 'pages', page),
     entry: [
-      `webpack-hot-middleware/client?path=http://localhost:${port}/__ping`,
+      `webpack-hot-middleware/client?path=http://${address}:${port}/__ping`,
       `./index.js`
     ],
     output: {
       path: '/',
-      publicPath: `http://localhost:${port}/`,
+      publicPath: `http://${address}:${port}/`,
       filename: 'bundle.js',
       jsonpFunction: `webpackJsonp-${page}`
     },
-    plugins: [
-      ...devConfig.plugins.slice(0, htmlPluginPosition),
-      ...devConfig.plugins.slice(htmlPluginPosition + 1)
-    ]
+    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(devConfig.plugins)
   })
