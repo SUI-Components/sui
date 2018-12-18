@@ -6,9 +6,9 @@ The following is a set of guidelines for contributing to SUI's packages.
 
 ### Environment
 
-To develop new packages, you only need to install Node with NPM. Fin below the default versions this repo was built with:
-* Node: `v6`
-* NPM: `v3`
+To develop new packages, you only need to install `node` and `npm`. Find below the default versions this repo was built with:
+* node: `10`
+* npm: `6`
 
 ### Monorepo
 
@@ -85,11 +85,10 @@ Same [issue template](.github/ISSUE_TEMPLATE.md) is used. Adapt it if necessary.
 
 ### How to migrate an existing repo to this monorepo ?
 
-
 #### First commit: copy paste
 The first commit of the package should be a plain copy of the original package.
 
-This way, you warranty that the original owner can review the changes you've made for the migration.
+This way, you guarantee that the original owner can review the changes you've made for the migration.
 
 
 #### Deprecate origin package
@@ -119,6 +118,6 @@ Add this (modified) snippet on top of your package README.md file.
 Publish the README change as patch. This way, developers that point to a minor or major version will be informed of the deprecation.
 
 ```
-npm vertion patch
+npm version patch
 npm publish
 ```

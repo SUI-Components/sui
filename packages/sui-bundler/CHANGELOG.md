@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.32.0"></a>
+# 3.32.0 (2018-12-11)
+
+
+
+<a name="3.31.0"></a>
+# 3.31.0 (2018-12-11)
+
+
+### Bug Fixes
+
+* fix Windows RegExp syntax in LoaderConfigBuilder ([e626c3c](https://github.com/SUI-Components/sui/commit/e626c3c))
+* new release with fix for npm-run-all ([8431bca](https://github.com/SUI-Components/sui/commit/8431bca))
+
+
+
+<a name="3.30.0"></a>
+# 3.30.0 (2018-12-11)
+
+
+### Bug Fixes
+
+* fix windows bug with Regex rules ([d1dffa7](https://github.com/SUI-Components/sui/commit/d1dffa7))
+
+
+
 <a name="3.29.0"></a>
 # 3.29.0 (2018-12-04)
 

@@ -15,11 +15,13 @@ const {
 const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
-const WIDGETS_PATH = resolve(process.cwd(), 'widgets')
+const PAGES_FOLDER = 'pages'
+const PAGES_PATH = resolve(process.cwd(), PAGES_FOLDER)
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
 const pkg = require(resolve(process.cwd(), 'package.json'))
-const config = pkg['config']['sui-widget-embedder']
+const {config = {}} = pkg['config'] || {}
+const suiWidgetEmbedderConfig = config['sui-widget-embedder']
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -50,7 +52,7 @@ program
   })
   .parse(process.argv)
 
-const remoteCdn = program.remoteCdn || config.remoteCdn
+const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
 const serviceWorkerCdn = program.serviceWorkerCdn || remoteCdn
 
 if (program.clean) {
@@ -59,7 +61,11 @@ if (program.clean) {
 }
 
 const build = ({page, remoteCdn}) => {
-  const compiler = compilerFactory({page, remoteCdn, globalConfig: config})
+  const compiler = compilerFactory({
+    page,
+    remoteCdn,
+    globalConfig: suiWidgetEmbedderConfig
+  })
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
       if (error) {
@@ -98,10 +104,10 @@ const manifests = () =>
   }, {})
 
 const pathnamesRegExp = () =>
-  pagesFor({path: WIDGETS_PATH}).reduce((acc, page) => {
+  pagesFor({path: PAGES_PATH}).reduce((acc, page) => {
     acc[page] = require(resolve(
       process.cwd(),
-      'widgets',
+      PAGES_FOLDER,
       page,
       'package.json'
     )).pathnameRegExp
@@ -180,7 +186,7 @@ const createSW = () =>
   })
 
 Promise.all(
-  pagesFor({path: WIDGETS_PATH}).map(page => build({page, remoteCdn}))
+  pagesFor({path: PAGES_FOLDER}).map(page => build({page, remoteCdn}))
 )
   .then(createDownloader)
   .then(createSW)

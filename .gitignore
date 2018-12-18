@@ -7,3 +7,4 @@ package-lock.json
 .python-version
 jsconfig.json
 packages/sui-codemod/COMMANDS
+sui-components-dashboard-9350df448fcd.json
