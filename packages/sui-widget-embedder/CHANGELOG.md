@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.0.0"></a>
+# 2.0.0 (2018-12-18)
+
+
+### Bug Fixes
+
+* avoid forcing config and make it optional ([10d3290](https://github.com/SUI-Components/sui/commit/10d3290))
+* by default, aim all the pages if no regExp is provided ([7d23a7a](https://github.com/SUI-Components/sui/commit/7d23a7a))
+* fix blank space ([14d1fb0](https://github.com/SUI-Components/sui/commit/14d1fb0))
+* fix missing phrase ([ab3bb64](https://github.com/SUI-Components/sui/commit/ab3bb64))
+* fix templates to generate widgets ([41cc665](https://github.com/SUI-Components/sui/commit/41cc665))
+* fix typo ([dd0bafd](https://github.com/SUI-Components/sui/commit/dd0bafd))
+* fix wrong comment for CLI ([a5013ea](https://github.com/SUI-Components/sui/commit/a5013ea))
+* more resilient removing of plugin and reuse functionality ([fc2b9d7](https://github.com/SUI-Components/sui/commit/fc2b9d7))
+
+
+### Features
+
+* add address parameter ([07bfe40](https://github.com/SUI-Components/sui/commit/07bfe40))
+* remove not needed packages ([e769ce9](https://github.com/SUI-Components/sui/commit/e769ce9))
+* remove proxy functionality ([2566af0](https://github.com/SUI-Components/sui/commit/2566af0))
+* show better console output to use widgets and fix no config ([af7b8d1](https://github.com/SUI-Components/sui/commit/af7b8d1))
+* use new pages folder instead widgets ([930c648](https://github.com/SUI-Components/sui/commit/930c648))
+* use pages instead widgets folder name ([3cb0b98](https://github.com/SUI-Components/sui/commit/3cb0b98))
+
+
+### BREAKING CHANGES
+
+* Now, the expected folder is pages instead widgets, as the widgets are inside pages.
+* Proxy functionality removed to simplify development process and lifecycle
+
+
+
 <a name="1.26.0"></a>
 # 1.26.0 (2018-12-12)
 
