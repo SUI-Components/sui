@@ -45,7 +45,7 @@ appFactory({address, page, config}).listen(PORT, () => {
 
 Steps to use it:
 
-1️⃣  Open the url where you want to
+1️⃣  Open the url where you want to inject the widget
 2️⃣  Paste the next javascript code in your console and press Enter (it's already in your clipboard 📋):
 
 ${scriptToExecute}
