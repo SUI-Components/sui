@@ -1,7 +1,4 @@
-export {
-  parse as parseQueryString,
-  stringify as toQueryString
-} from 'query-string'
+export {parse as parseQueryString, stringify as toQueryString} from 'qs'
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
 export {default as toCamelCase} from 'lodash.camelcase'
 export {default as toCapitalCase} from 'lodash.capitalize'
