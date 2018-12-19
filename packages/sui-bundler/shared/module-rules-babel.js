@@ -1,6 +1,6 @@
 const {sep} = require('path')
 
-module.exports = ({isServer = false} = {}) => ({
+module.exports = {
   test: /\.jsx?$/,
   exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
   use: {
@@ -12,4 +12,4 @@ module.exports = ({isServer = false} = {}) => ({
       presets: [require.resolve('babel-preset-sui')]
     }
   }
-})
+}

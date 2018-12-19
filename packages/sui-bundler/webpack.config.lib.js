@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const uglifyJsPlugin = require('./shared/uglify')
 const definePlugin = require('./shared/define')
-const createBabelRules = require('./shared/module-rules-babel')
+const babelRules = require('./shared/module-rules-babel')
 require('./shared/shims')
 
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [createBabelRules()]
+    rules: [babelRules]
   },
   node: {
     fs: 'empty',
