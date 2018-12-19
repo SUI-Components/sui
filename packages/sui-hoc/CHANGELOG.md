@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2018-12-07)
+
+
+### Features
+
+* displayName added ([fdb9ab3](https://github.com/SUI-Components/sui/commit/fdb9ab3))
+* index added ([1865e67](https://github.com/SUI-Components/sui/commit/1865e67))
+* withStateValue hoc ([840e095](https://github.com/SUI-Components/sui/commit/840e095))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2017-10-26)
 
@@ -40,6 +52,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add Readme ([bff8988](https://github.com/SUI-Components/sui/commit/bff8988))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* 🌈 First Commit ([b09a168](https://github.com/SUI-Components/sui/commit/b09a168)), closes [#71](https://github.com/SUI-Components/sui/issues/71)
 
 
 

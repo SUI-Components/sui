@@ -9,12 +9,7 @@ module.exports = ({isServer = false} = {}) => ({
       babelrc: false,
       cacheDirectory: false,
       compact: true,
-      presets: [
-        require.resolve('babel-preset-sui'),
-        isServer
-          ? require.resolve('babel-plugin-dynamic-import-node').default
-          : false
-      ].filter(Boolean)
+      presets: [require.resolve('babel-preset-sui')]
     }
   }
 })

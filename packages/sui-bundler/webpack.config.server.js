@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
-const createBabelRules = require('./shared/module-rules-babel')
+const babelRules = require('./shared/module-rules-babel')
 const {config} = require('./shared')
 
 let webpackConfig = {
@@ -24,7 +24,14 @@ let webpackConfig = {
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
-    rules: [createBabelRules({isServer: true})]
+    rules: [
+      babelRules,
+      {
+        // ignore scss require/imports files in the server
+        test: /\.scss$/,
+        use: ['null-loader']
+      }
+    ]
   }
 }
 

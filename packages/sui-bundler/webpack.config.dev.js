@@ -54,7 +54,7 @@ let webpackConfig = {
           }
         ],
         exclude: new RegExp(
-          `node_modules(?!${path.sep}@s-ui${path.sep}(svg|studio)(${
+          `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${
             path.sep
           }workbench)?${path.sep}src)`
         )
@@ -62,7 +62,7 @@ let webpackConfig = {
       {
         test: /\.jsx?$/,
         exclude: new RegExp(
-          `node_modules(?!${path.sep}@s-ui${path.sep}(svg|studio)(${
+          `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${
             path.sep
           }workbench)?${path.sep}src)`
         ),
