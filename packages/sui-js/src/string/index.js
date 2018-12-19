@@ -1,4 +1,6 @@
-export {parse as parseQueryString, stringify as toQueryString} from 'qs'
+import {parse} from 'qs'
+export const parseQueryString = query => parse(query, {ignoreQueryPrefix: true})
+export {stringify as toQueryString} from 'qs'
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
 export {default as toCamelCase} from 'lodash.camelcase'
 export {default as toCapitalCase} from 'lodash.capitalize'
