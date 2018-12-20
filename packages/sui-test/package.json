@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.2",
   "description": "",
   "bin": {
     "sui-test": "./bin/sui-test.js"
@@ -14,11 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@s-ui/helpers": "1",
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "7.2.0",
+    "@s-ui/helpers": "1",
     "babel-plugin-dynamic-import-node": "2.2.0",
-    "babel-polyfill": "6.26.0",
+    "@babel/polyfill": "7.2.3",
+    "@babel/register": "7.0.0",
     "babel-preset-sui": "^2.0.0-beta.1",
     "babelify": "10.0.0",
     "browserify": "14.5.0",
