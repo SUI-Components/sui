@@ -15,7 +15,7 @@
     "lodash.camelcase": "4.3.0",
     "lodash.capitalize": "4.2.1",
     "lodash.kebabcase": "4.1.1",
-    "query-string": "6.1.0",
+    "qs": "6.6.0",
     "remove-accents": "0.4.2"
   },
   "license": "MIT",
