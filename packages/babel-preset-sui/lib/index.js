@@ -1,4 +1,4 @@
-console.log('new babel')
+console.log('@babel/7 preset')
 
 function plugins(api, opts) {
   return [
@@ -21,8 +21,7 @@ function plugins(api, opts) {
         corejs: false,
         regenerator: true
       }
-    ],
-    require('react-hot-loader/babel')
+    ]
   ]
 }
 
