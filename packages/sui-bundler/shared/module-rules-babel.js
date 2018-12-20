@@ -7,7 +7,6 @@ module.exports = {
     loader: require.resolve('babel-loader'),
     options: {
       babelrc: false,
-      cacheDirectory: false,
       compact: true,
       presets: [require.resolve('babel-preset-sui')]
     }
