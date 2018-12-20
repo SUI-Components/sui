@@ -77,9 +77,10 @@ let webpackConfig = {
             loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
-              presets: [require.resolve('babel-preset-sui')],
               cacheDirectory: true,
-              highlightCode: true
+              highlightCode: true,
+              presets: [require.resolve('babel-preset-sui')],
+              plugins: [require.resolve('react-hot-loader/babel')]
             }
           }
         ]
