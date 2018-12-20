@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.18.0"></a>
+# 1.18.0 (2018-12-20)
+
+
+### Bug Fixes
+
+* replace query string dep ([206e166](https://github.com/SUI-Components/sui/commit/206e166))
+
+
+### Features
+
+* add ignore prefix by default ([9d5b712](https://github.com/SUI-Components/sui/commit/9d5b712))
+
+
+
 <a name="1.17.0"></a>
 # 1.17.0 (2018-10-18)
 
