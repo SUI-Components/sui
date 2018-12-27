@@ -5,6 +5,22 @@
 $ npm install @s-ui/js --save
 ```
 
+## pipe
+Consist of a chain of processing functions, where the output of each element is the input of next
+
+```js
+import pipe from @s-ui/js/lib/pipe
+
+execute = async search => {
+  const pageName = await this.pipe(
+    this._fromQueryStringToQueryParamsPageMapper.map,
+    this._fromQueryParamsToTargetPageValueObjectPageMapper.map
+  )(search)
+
+  return pageName
+}
+```
+
 ## cookie
 Parse, get and set cookies. Returns an object `cookie` with `parse`, `get` and `set` methods.
 
