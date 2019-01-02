@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2019-01-02)
+
+
+### Features
+
+* no default value ([92cda0e](https://github.com/SUI-Components/sui/commit/92cda0e))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-12-07)
 
@@ -52,16 +62,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add Readme ([bff8988](https://github.com/SUI-Components/sui/commit/bff8988))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* 🌈 First Commit ([b09a168](https://github.com/SUI-Components/sui/commit/b09a168)), closes [#71](https://github.com/SUI-Components/sui/issues/71)
 
 
 
