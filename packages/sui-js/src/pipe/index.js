@@ -1,4 +1,3 @@
-const pipe = (...funcs) => arg =>
-  funcs.reduce((value, func) => func(value), arg)
+const pipe = (...funcs) => arg => funcs.reduce((acc, value) => value(acc), arg)
 
 export default pipe

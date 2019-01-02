@@ -11,14 +11,11 @@ Consist of a chain of processing functions, where the output of each element is 
 ```js
 import pipe from @s-ui/js/lib/pipe
 
-execute = async search => {
-  const pageName = await this.pipe(
-    this._fromQueryStringToQueryParamsPageMapper.map,
-    this._fromQueryParamsToTargetPageValueObjectPageMapper.map
-  )(search)
+const textToUpperCase = text => text.toUpperCase()
+const textToArray = text => [...text]
+const title = 'Schibsted'
 
-  return pageName
-}
+console.log(pipe(textToUpperCase, textToArray)(title)) // ["S", "C", "H", "I", "B", "S", "T", "E", "D"]
 ```
 
 ## cookie
