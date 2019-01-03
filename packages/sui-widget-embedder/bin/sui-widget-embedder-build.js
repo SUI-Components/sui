@@ -70,12 +70,14 @@ const build = ({page, remoteCdn}) => {
     compiler.run((error, stats) => {
       if (error) {
         reject(error)
+        return
       }
 
       const jsonStats = stats.toJson()
 
       if (stats.hasErrors()) {
-        return jsonStats.errors.map(error => console.log(error))
+        reject(jsonStats.errors)
+        return
       }
 
       if (stats.hasWarnings()) {
@@ -185,8 +187,11 @@ const createSW = () =>
       .on('error', rej)
   })
 
-Promise.all(
-  pagesFor({path: PAGES_FOLDER}).map(page => build({page, remoteCdn}))
+const serialPromiseExecution = promises =>
+  promises.reduce((acc, func) => acc.then(() => func()), Promise.resolve([]))
+
+serialPromiseExecution(
+  pagesFor({path: PAGES_FOLDER}).map(page => () => build({page, remoteCdn}))
 )
   .then(createDownloader)
   .then(createSW)
