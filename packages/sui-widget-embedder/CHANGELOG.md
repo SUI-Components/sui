@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2019-01-03)
+
+
+### Bug Fixes
+
+* add serial build error handling ([e31d6f7](https://github.com/SUI-Components/sui/commit/e31d6f7))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-12-18)
 
@@ -258,27 +268,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * move [@s-ui](https://github.com/s-ui)/bundler to pro deps ([8c8cffc](https://github.com/SUI-Components/sui/commit/8c8cffc))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-10-24)
-
-
-### Bug Fixes
-
-* apply PR comments ([ef9e955](https://github.com/SUI-Components/sui/commit/ef9e955))
-* donwloader avoid load assets in localhost ([e1d5ca1](https://github.com/SUI-Components/sui/commit/e1d5ca1))
-* fix css load ([019420e](https://github.com/SUI-Components/sui/commit/019420e))
-* load assets only when there is a match ([5a38d47](https://github.com/SUI-Components/sui/commit/5a38d47))
-
-
-### Features
-
-* build all pages automagicaly ([daf3ddc](https://github.com/SUI-Components/sui/commit/daf3ddc))
-* create donwloader.js with the manifests of the assets ([856eae3](https://github.com/SUI-Components/sui/commit/856eae3))
-* created Widgets components ([2a929fd](https://github.com/SUI-Components/sui/commit/2a929fd))
-* first commit ([447917f](https://github.com/SUI-Components/sui/commit/447917f))
 
 
 
