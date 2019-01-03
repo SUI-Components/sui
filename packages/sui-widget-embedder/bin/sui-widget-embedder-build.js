@@ -20,7 +20,7 @@ const PAGES_PATH = resolve(process.cwd(), PAGES_FOLDER)
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
 
 const pkg = require(resolve(process.cwd(), 'package.json'))
-const {config = {}} = pkg['config'] || {}
+const config = pkg['config'] || {}
 const suiWidgetEmbedderConfig = config['sui-widget-embedder']
 
 program
