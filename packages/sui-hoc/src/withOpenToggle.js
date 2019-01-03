@@ -4,25 +4,23 @@ export default BaseComponent => {
   const displayName = BaseComponent.displayName
 
   return class WithOpenToggle extends Component {
-    static displayName = `WithOpenToggle(${displayName})`
-
     state = {
-      open: false
+      isOpen: false
     }
 
-    handleToggle = (_, {open} = {}) => {
+    static displayName = `WithOpenToggle(${displayName})`
+
+    handleToggle = (_, {isOpen} = {}) => {
       this.setState(prevState => ({
-        open: open !== undefined ? open : !prevState.open
+        isOpen: isOpen !== undefined ? isOpen : !prevState.isOpen
       }))
     }
 
     render() {
+      const {handleToggle, props} = this
+      const {isOpen} = this.state
       return (
-        <BaseComponent
-          {...this.props}
-          isOpen={this.state.open}
-          onToggle={this.handleToggle}
-        />
+        <BaseComponent {...props} isOpen={isOpen} onToggle={handleToggle} />
       )
     }
   }
