@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2019-01-04)
+
+
+### Features
+
+* withOpenToggle ([17e7a43](https://github.com/SUI-Components/sui/commit/17e7a43))
+* withOpenToggle ([71c8710](https://github.com/SUI-Components/sui/commit/71c8710))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2019-01-02)
 
@@ -62,6 +73,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add Readme ([bff8988](https://github.com/SUI-Components/sui/commit/bff8988))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* 🌈 First Commit ([b09a168](https://github.com/SUI-Components/sui/commit/b09a168)), closes [#71](https://github.com/SUI-Components/sui/issues/71)
 
 
 
