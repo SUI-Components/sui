@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2019-01-07)
+
+
+### Features
+
+* withStateValueTags ([2022657](https://github.com/SUI-Components/sui/commit/2022657))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2019-01-04)
 
