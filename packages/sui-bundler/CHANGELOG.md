@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.34.0"></a>
+# 3.34.0 (2019-01-07)
+
+
+### Bug Fixes
+
+* fix security issues with compromised dependencies ([46e450f](https://github.com/SUI-Components/sui/commit/46e450f))
+
+
+
 <a name="3.32.0"></a>
 # 3.32.0 (2018-12-11)
 
@@ -594,16 +604,6 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
