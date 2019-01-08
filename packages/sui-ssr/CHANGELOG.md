@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.12.0"></a>
+# 2.12.0 (2019-01-07)
+
+
+### Features
+
+* use latest features and force docker type deployment ([0dd97d0](https://github.com/SUI-Components/sui/commit/0dd97d0))
+
+
+
 <a name="2.11.0"></a>
 # 2.11.0 (2018-10-24)
 

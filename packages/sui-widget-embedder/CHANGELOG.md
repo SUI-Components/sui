@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.2.0"></a>
+# 2.2.0 (2019-01-03)
+
+
+### Bug Fixes
+
+* change the way the config is loaded ([3fb04d2](https://github.com/SUI-Components/sui/commit/3fb04d2))
+
+
+
+<a name="2.1.0"></a>
+# 2.1.0 (2019-01-03)
+
+
+### Bug Fixes
+
+* add serial build error handling ([e31d6f7](https://github.com/SUI-Components/sui/commit/e31d6f7))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-12-18)
 

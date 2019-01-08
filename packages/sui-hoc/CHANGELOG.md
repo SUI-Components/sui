@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2019-01-07)
+
+
+### Features
+
+* withStateValueTags ([2022657](https://github.com/SUI-Components/sui/commit/2022657))
+
+
+
+<a name="1.8.0"></a>
+# 1.8.0 (2019-01-04)
+
+
+### Features
+
+* withOpenToggle ([17e7a43](https://github.com/SUI-Components/sui/commit/17e7a43))
+* withOpenToggle ([71c8710](https://github.com/SUI-Components/sui/commit/71c8710))
+
+
+
+<a name="1.7.0"></a>
+# 1.7.0 (2019-01-02)
+
+
+### Features
+
+* no default value ([92cda0e](https://github.com/SUI-Components/sui/commit/92cda0e))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2018-12-07)
 

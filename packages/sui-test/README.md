@@ -112,6 +112,7 @@ sui-test e2e [options]
     -B, --baseUrl <baseUrl>                  URL of the site to execute tests (in ./test/e2e/) on.
     -S, --screenshotsOnError                 Take screenshots of page on any failure.
     -U, --userAgentAppend <userAgentAppend>  Append string to UserAgent header.
+    -UA, --userAgent <userAgent>             Overwrite string to UserAgent header.
     -G, --gui                                Run the tests in GUI mode.
     -h, --help                               output usage information
 ```
@@ -129,6 +130,10 @@ Tests are executed with [cypress](https://www.cypress.io/). It provides a specia
 #### `sui-test e2e --scope='sub/folder'`
 
 You can execute only a subset of tests in `./test-e2e/`. The example above would only execute tests in `./test-e2e/sub/folder`.
+
+#### `sui-test e2e --userAgent='My custom string'`
+
+Cypress can be detected as a robot if your server has that kind of protection or firewall. In this case, if your server allows an exception by header, you can overwrite the `UserAgent` header a string that cypress will set when opening your site with the browser.
 
 #### `sui-test e2e --userAgentAppend='My custom string'`
 

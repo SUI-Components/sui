@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.16.0"></a>
+# 1.16.0 (2019-01-03)
+
+
+### Features
+
+* add overwrite user agent option ([869425b](https://github.com/SUI-Components/sui/commit/869425b)), closes [#446](https://github.com/SUI-Components/sui/issues/446)
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2018-09-26)
 
@@ -15,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.13.0"></a>
-# 1.13.0 (2018-08-31)
+# [1.13.0](https://github.com/SUI-Components/sui/compare/4.13.0...v2.17.1) (2018-08-31)
 
 
 ### Features

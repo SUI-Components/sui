@@ -24,6 +24,7 @@ We use:
 <!-- TOC -->
 
 - [sui-mono](#sui-mono)
+  - [Installation](#installation)
   - [Usage](#usage)
     - [`run` command on all packages](#run-command-on-all-packages)
     - [`phoenix`](#phoenix)
@@ -41,6 +42,13 @@ We use:
       - [Manual scopes](#manual-scopes)
 
 <!-- /TOC -->
+
+## Installation
+
+```bash
+$ npm install @s-ui/mono --save-dev
+```
+
 
 ## Usage
 
