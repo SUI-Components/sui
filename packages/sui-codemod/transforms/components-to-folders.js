@@ -93,23 +93,11 @@ const hasContext = file => {
 
 const indexTemplate = file =>
   `
-import React from 'react'
-import hoistNonReactStatics from 'hoist-non-react-statics'
+import Component from './component'
 import SUIContext from '@s-ui/react-context'
 
-import Component from './component'
+export default SUIContext.wrapper(Component, '${toPascalCase(file.name)}')
 
-const ${toPascalCase(file.name)} = props => (
-  <SUIContext.Consumer>
-    {context => <Component {...context} {...props} />}
-  </SUIContext.Consumer>
-)
-
-${toPascalCase(
-    file.name
-  )}.displayName = Component.displayName || '${toPascalCase(file.name)}'
-
-export default hoistNonReactStatics(${toPascalCase(file.name)}, Component)
 `.trim()
 
 const pathPseudoRelative = base => (literals, ...values) => {
