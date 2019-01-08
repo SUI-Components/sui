@@ -12,7 +12,6 @@
     "@schibstedspain/rosetta": "3",
     "@schibstedspain/sui-theme": "8",
     "@schibstedspain/theme-basic": "7",
-    "hoist-non-react-statics": "3.2.0",
     "classnames": "2.2.5"
   },
   "repository": {
