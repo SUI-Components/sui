@@ -5,6 +5,19 @@
 $ npm install @s-ui/js --save
 ```
 
+## pipe
+Consist of a chain of processing functions, where the output of each element is the input of next
+
+```js
+import pipe from @s-ui/js/lib/pipe
+
+const textToUpperCase = text => text.toUpperCase()
+const textToArray = text => [...text]
+const title = 'Schibsted'
+
+console.log(pipe(textToUpperCase, textToArray)(title)) // ["S", "C", "H", "I", "B", "S", "T", "E", "D"]
+```
+
 ## cookie
 Parse, get and set cookies. Returns an object `cookie` with `parse`, `get` and `set` methods.
 
