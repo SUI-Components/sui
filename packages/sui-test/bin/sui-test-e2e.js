@@ -37,19 +37,32 @@ program
     '-U, --userAgentAppend <userAgentAppend>',
     'Append string to UserAgent header.'
   )
+  .option(
+    '-UA, --userAgent <userAgent>',
+    'Overwrite string to UserAgent header.'
+  )
   .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
 
-const {baseUrl, userAgentAppend, gui, screenshotsOnError, scope} = program
+const {
+  baseUrl,
+  userAgentAppend,
+  userAgent,
+  gui,
+  screenshotsOnError,
+  scope
+} = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
   baseUrl,
   fixturesFolder: path.join(TESTS_FOLDER, 'fixtures')
 }
 
-if (userAgentAppend) {
+if (userAgent) {
+  cypressConfig.userAgent = `"${userAgent}"`
+} else if (userAgentAppend) {
   cypressConfig.userAgent = `"${DEFAULT_USER_AGENT} ${userAgentAppend}"`
 }
 
