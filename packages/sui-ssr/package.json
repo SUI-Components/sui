@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "2.11.0",
+  "version": "3.0.0-beta.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@s-ui/bundler": "2"
+    "@s-ui/bundler": "beta"
   },
   "dependencies": {
     "@s-ui/hoc": "1.5.0",
