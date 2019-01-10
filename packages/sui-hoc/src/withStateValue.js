@@ -9,14 +9,13 @@ const withStateValue = BaseComponent => {
 
     static propTypes = {
       /** value */
-      value: PropTypes.string,
+      value: PropTypes.any,
 
       /** onChange callback  */
       onChange: PropTypes.func
     }
 
     static defaultProps = {
-      value: '',
       onChange: () => {}
     }
 
