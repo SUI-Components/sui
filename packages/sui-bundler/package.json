@@ -47,7 +47,7 @@
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "postcss-loader": "2.1.6",
     "raw-loader": "0.5.1",
-    "react-dev-utils": "5.0.1",
+    "react-dev-utils": ">=5.0.2",
     "react-hot-loader": "4.6.3",
     "rimraf": "2.6.2",
     "sass-loader": "6.0.7",
