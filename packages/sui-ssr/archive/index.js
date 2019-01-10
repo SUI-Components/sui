@@ -3,6 +3,29 @@ const fs = require('fs')
 const archiver = require('archiver')
 const program = require('commander')
 const authDefinitionBuilder = require('./authDefinitionBuilder')
+
+const NOW_CONFIG = {
+  type: 'docker',
+  features: {
+    cloud: 'v2'
+  }
+}
+
+function retrievePackageJSON() {
+  // retrieve the original package.json file from the project
+  const packageJSON = require(path.join(process.cwd(), 'package.json'))
+  // extract the now config, if any
+  const {now = {}} = packageJSON
+  // merge the previous now config with ours, to force docker deployment and use latest features
+  const mergedNowConfig = Object.assign({}, now, NOW_CONFIG)
+  // create the new packageJSON with the new now config merged
+  const packageJSONWithNowConfig = Object.assign({}, packageJSON, {
+    now: mergedNowConfig
+  })
+  // return the package.json and prettify it for readability
+  return JSON.stringify(packageJSONWithNowConfig, null, '\t')
+}
+
 module.exports = ({outputZipPath, pkg}) =>
   new Promise((resolve, reject) => {
     let authVariableDefinition = program.auth
@@ -29,12 +52,7 @@ module.exports = ({outputZipPath, pkg}) =>
     })
     archive.on('error', reject)
     archive.pipe(output)
-    archive.append(
-      fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'),
-      {
-        name: 'package.json'
-      }
-    )
+    archive.append(retrievePackageJSON(), {name: 'package.json'})
     archive.append(
       fs
         .readFileSync(path.join(__dirname, 'pm2.tpl'), 'utf8')
