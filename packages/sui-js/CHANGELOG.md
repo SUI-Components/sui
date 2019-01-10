@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.19.0"></a>
+# 1.19.0 (2019-01-10)
+
+
+### Bug Fixes
+
+* fix sui-js pipe linter error ([0df9ffc](https://github.com/SUI-Components/sui/commit/0df9ffc))
+
+
+### Features
+
+* added pipe method ([ea4b977](https://github.com/SUI-Components/sui/commit/ea4b977))
+* added tests for the pipe method and applied some suggestions received about syntax ([5454378](https://github.com/SUI-Components/sui/commit/5454378))
+
+
+
 <a name="1.18.0"></a>
 # 1.18.0 (2018-12-20)
 
