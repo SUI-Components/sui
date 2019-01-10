@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "4.0.0-beta.4",
+  "version": "4.0.0-beta.5",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
     "@babel/core": "7.2.2",
+    "@babel/cli": "7.2.3",
     "@s-ui/helpers": "1",
     "@s-ui/lint": "2",
     "autoprefixer": "9.4.3",
