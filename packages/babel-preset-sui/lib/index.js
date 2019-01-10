@@ -1,5 +1,3 @@
-console.log('@babel/7 preset')
-
 function plugins(api, opts) {
   return [
     require('@babel/plugin-syntax-dynamic-import').default,
