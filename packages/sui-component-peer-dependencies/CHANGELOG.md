@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2019-01-07)
+
+
+### Bug Fixes
+
+* force react-dom version to avoid security issues ([92a650d](https://github.com/SUI-Components/sui/commit/92a650d))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2018-01-15)
 
@@ -56,16 +66,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([06b003d](https://github.com/SUI-Components/sui/commit/06b003d))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-06-25)
-
-
-### Features
-
-* add dependencies to be used with all sui-components ([77fded5](https://github.com/SUI-Components/sui/commit/77fded5))
 
 
 
