@@ -5,6 +5,6 @@ export const getFocusedItemIndex = domItems => {
   return domItems.reduce(
     (focusedItemIndex, item, index) =>
       item === currentElementFocused ? index : focusedItemIndex,
-    0
+    null
   )
 }
