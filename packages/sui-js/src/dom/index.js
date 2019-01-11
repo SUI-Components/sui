@@ -1,4 +1,4 @@
-const getCurrentElementFocused = () => document.activeElement
+export const getCurrentElementFocused = () => document.activeElement
 
 export const getFocusedItemIndex = domItems => {
   const currentElementFocused = getCurrentElementFocused()
