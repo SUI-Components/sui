@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.20.0"></a>
+# 1.20.0 (2019-01-14)
+
+
+### Bug Fixes
+
+* remove unused file-system dependency ([3c46016](https://github.com/SUI-Components/sui/commit/3c46016))
+
+
+### Features
+
+* support file option added to e2e tests ([2f95361](https://github.com/SUI-Components/sui/commit/2f95361)), closes [#459](https://github.com/SUI-Components/sui/issues/459)
+
+
+
 <a name="1.16.0"></a>
 # 1.16.0 (2019-01-03)
 
