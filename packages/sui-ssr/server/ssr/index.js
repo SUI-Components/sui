@@ -70,22 +70,35 @@ export default (req, res, next) => {
       const device = buildDeviceFrom({request: req})
       const [criticalHTML, bodyHTML] = html.split('</head>')
 
-      res.type('html')
-      res.write(criticalHTML)
-      res.flush()
-
       const context = await contextFactory(
         createServerContextFactoryParams(req)
       )
-      const {
-        initialProps,
-        reactString,
-        performance
-      } = await ssrComponentWithInitialProps({
-        context: {...context, device},
-        renderProps,
-        Target: withContext(context)(RouterContext)
-      })
+
+      let initialData
+
+      try {
+        initialData = await ssrComponentWithInitialProps({
+          context: {...context, device},
+          renderProps,
+          Target: withContext(context)(RouterContext)
+        })
+      } catch (err) {
+        // Managing 500 exception
+        return next(err)
+      }
+
+      const {initialProps, reactString, performance} = initialData
+
+      if (initialProps.error) {
+        // getInitialProps may return an error as property
+        // This error can be handled by the default hook or by a custom hook
+        return next(initialProps.error)
+      }
+
+      // Early flush
+      res.type('html')
+      res.write(criticalHTML)
+      res.flush()
 
       // res.set({
       //   'Server-Timing': `
