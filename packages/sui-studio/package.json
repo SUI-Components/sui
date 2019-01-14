@@ -24,7 +24,7 @@
     "updtr": "0.2.0"
   },
   "dependencies": {
-    "@s-ui/bundler": "3",
+    "@s-ui/bundler": "4",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/deploy": "2",
     "@s-ui/helpers": "1",

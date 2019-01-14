@@ -12,8 +12,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@s-ui/bundler": "2"
+  "peerDependencies": {
+    "@s-ui/bundler": "4"
   },
   "dependencies": {
     "@s-ui/hoc": "1.5.0",

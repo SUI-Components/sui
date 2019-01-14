@@ -3,9 +3,12 @@ const {sep} = require('path')
 module.exports = {
   test: /\.jsx?$/,
   exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
-  loader: 'babel-loader',
-  query: {
-    babelrc: false,
-    presets: ['sui']
+  use: {
+    loader: require.resolve('babel-loader'),
+    options: {
+      babelrc: false,
+      compact: true,
+      presets: [require.resolve('babel-preset-sui')]
+    }
   }
 }
