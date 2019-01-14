@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.0.0"></a>
+# 6.0.0 (2019-01-14)
+
+
+### Features
+
+* use new sui-bundler ([5e17274](https://github.com/SUI-Components/sui/commit/5e17274))
+* use new sui-bundler version ([7f6627d](https://github.com/SUI-Components/sui/commit/7f6627d))
+
+
+### BREAKING CHANGES
+
+* As we're using babel 7 in new sui-bundler, things could be broken
+* Using new sui-bundler might break some component and some changes might be needed
+
+
+
 <a name="5.18.0"></a>
 # 5.18.0 (2018-10-31)
 
@@ -673,22 +690,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
-
-
-
-<a name="4.0.0"></a>
-# 4.0.0 (2017-06-22)
-
-
-### Features
-
-* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
-* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
-
-
-### BREAKING CHANGES
-
-* API is now named sui-studio instead of suistudio
 
 
 
