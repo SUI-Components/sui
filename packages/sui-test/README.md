@@ -107,6 +107,19 @@ If you need to have support files, then create a `./test-e2e/support` directory,
 
 Support files runs before every single spec file and you don't have to import it in spec file.
 
+Example: 
+
+`./test-e2e/support/index.js`
+
+```js
+/* globals Cypress, cy */
+Cypress.Commands.add('login', () => {
+  // Here the command code
+})
+```
+
+Then you can use in your specs `cy.login()`
+
 ### Options
 
 ```sh
