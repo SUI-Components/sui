@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2019-01-14)
+
+
+### Bug Fixes
+
+* add new polyfill from babel@7 instead using old one ([f5f8024](https://github.com/SUI-Components/sui/commit/f5f8024))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2019-01-14)
 
