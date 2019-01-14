@@ -1,10 +1,9 @@
 export const getCurrentElementFocused = () => document.activeElement
 
-export const getFocusedItemIndex = domItems => {
+export const getFocusedItemIndex = items => {
   const currentElementFocused = getCurrentElementFocused()
-  return domItems.reduce(
-    (focusedItemIndex, item, index) =>
-      item === currentElementFocused ? index : focusedItemIndex,
-    null
+  const index = Array.from(items).findIndex(
+    item => item === currentElementFocused
   )
+  return index === -1 ? null : index
 }
