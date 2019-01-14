@@ -26,6 +26,7 @@
     "chalk": "2.3.0",
     "commander": "2.12.1",
     "envify": "4.1.0",
+    "file-system": "^2.2.2",
     "karma": "1.7.1",
     "karma-browserify": "5.1.2",
     "karma-chrome-launcher": "2.2.0",

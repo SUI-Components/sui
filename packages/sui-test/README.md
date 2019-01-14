@@ -101,6 +101,12 @@ sui-test e2e [options]
 
 **Important:** If you need to have fixtures files (or helpers), put them in the `./test-e2e/fixtures` so they aren't executed as spec files.
 
+### Support files
+
+If you need to have support files, then create a `./test-e2e/support` directory, it will be detected and added to the `cypress.json` configuration.
+
+Support files runs before every single spec file and you don't have to import it in spec file.
+
 ### Options
 
 ```sh
