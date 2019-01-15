@@ -2,8 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="4.0.0"></a>
-# 4.0.0 (2019-01-14)
+<a name="4.1.0"></a>
+# 4.1.0 (2019-01-15)
+
+
+### Features
+
+* add sourcemaps section to README documentation ([f497cd5](https://github.com/SUI-Components/sui/commit/f497cd5))
+* add sourcemaps support to improve integration with sentry ([2ee87ff](https://github.com/SUI-Components/sui/commit/2ee87ff))
+* remove unnecessary comment from uglifyjs config ([61aea8c](https://github.com/SUI-Components/sui/commit/61aea8c))
+
+
+
+<a name="5.0.0"></a>
+# 5.0.0 (2019-01-14)
 
 
 ### Bug Fixes
@@ -660,16 +672,6 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
