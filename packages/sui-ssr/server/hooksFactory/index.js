@@ -16,17 +16,21 @@ try {
 
 const isFunction = fnc => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
 const NULL_MDWL = (req, res, next) => next()
-const __STATUS_PAGES__ = {}
-const responsePageByStatus = async code => {
-  if (__STATUS_PAGES__[code]) {
-    return __STATUS_PAGES__[code]
+const INDEX_PAGE_NAME = 'index'
+const __PAGES__ = {}
+const NOT_FOUND_CODE = 404
+const INTERNAL_ERROR_CODE = 500
+
+const getPageContent = async pageName => {
+  if (__PAGES__[pageName]) {
+    return __PAGES__[pageName]
   }
 
   const html = await promisify(readFile)(
-    resolve(process.cwd(), 'public', `${code}.html`),
+    resolve(process.cwd(), 'public', `${pageName}.html`),
     'utf8'
-  ).catch(e => `Generic Error Page: ${code}`)
-  __STATUS_PAGES__[code] = html
+  ).catch(e => `Generic Error Page: ${pageName}`)
+  __PAGES__[pageName] = html
   return html
 }
 
@@ -48,11 +52,26 @@ export const hooksFactory = async () => {
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
     [TYPES.NOT_FOUND]: async (req, res, next) => {
-      res.status(404).send(await responsePageByStatus(404))
+      res.status(NOT_FOUND_CODE).send(await getPageContent(NOT_FOUND_CODE))
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
-      const status = err.status || 500
-      res.status(status).send(await responsePageByStatus(status))
+      // getInitialProps could throw a 404 error or any other error
+      const status =
+        err.message && err.message.includes(NOT_FOUND_CODE)
+          ? NOT_FOUND_CODE
+          : err.status || INTERNAL_ERROR_CODE
+
+      // Prevents from trying to send headers twice (fatal error) when earlyFlush is enabled
+      if (!res.headersSent) {
+        res.status(status)
+      }
+
+      const pageName =
+        req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE
+          ? INDEX_PAGE_NAME
+          : status
+
+      res.end(await getPageContent(pageName))
     },
     ..._userHooks
   }

@@ -46,6 +46,11 @@ const injectDataPerformance = ({
     render
   })}</script>`
 
+const initialFlush = res => {
+  res.type('html')
+  res.flush()
+}
+
 export default (req, res, next) => {
   const {url, query} = req
   match(
@@ -64,11 +69,19 @@ export default (req, res, next) => {
       }
 
       if (!renderProps) {
+        // This case will never happen if a "*" path is implemented for not-found pages.
+        // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`, the app won't work either
+        // so the same result is obtained with the following line (best performance) than explicitly
+        // passing an error using `next(new Error(404))`
         return next() // We asume that is a 404 page
       }
 
       const device = buildDeviceFrom({request: req})
-      const [criticalHTML, bodyHTML] = html.split('</head>')
+
+      // Flush if early-flush is enabled
+      if (req.app.locals.earlyFlush) {
+        initialFlush(res)
+      }
 
       const context = await contextFactory(
         createServerContextFactoryParams(req)
@@ -83,20 +96,20 @@ export default (req, res, next) => {
           Target: withContext(context)(RouterContext)
         })
       } catch (err) {
-        // Managing 500 exception
         return next(err)
       }
 
       const {initialProps, reactString, performance} = initialData
 
-      if (initialProps.error) {
-        // getInitialProps may return an error as property
-        // This error can be handled by the default hook or by a custom hook
-        return next(initialProps.error)
+      // Flush now if early-flush is disabled
+      if (!req.app.locals.earlyFlush) {
+        initialFlush(res)
       }
 
-      // Early flush
-      res.type('html')
+      const [criticalHTML, bodyHTML] = html.split('</head>')
+      // The first html content has the be set after any possible call to next().
+      // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
+      // no matter the error page strategy set (loadSPAOnNotFound: true|false)
       res.write(criticalHTML)
       res.flush()
 
