@@ -25,6 +25,10 @@ require('./shared/shims')
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
 module.exports = {
+  devtool:
+    config.sourcemaps && config.sourcemaps.prod
+      ? config.sourcemaps.prod
+      : 'none',
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
