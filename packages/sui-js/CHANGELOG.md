@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.20.0"></a>
+# 1.20.0 (2019-01-15)
+
+
+### Features
+
+* added helpers needed for several sui-components ([dc4fce1](https://github.com/SUI-Components/sui/commit/dc4fce1))
+* also export getCurrentElementFocused ([bd71eb7](https://github.com/SUI-Components/sui/commit/bd71eb7))
+* better implementation w/ findIndex ([d8a0496](https://github.com/SUI-Components/sui/commit/d8a0496))
+* null as default index value ([d1f3e90](https://github.com/SUI-Components/sui/commit/d1f3e90))
+* tests added ([aea0554](https://github.com/SUI-Components/sui/commit/aea0554))
+
+
+
 <a name="1.19.0"></a>
 # 1.19.0 (2019-01-10)
 
