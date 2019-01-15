@@ -148,6 +148,10 @@ This tool works with zero configuration out the box but you could use some confi
     "scripts": {
       "prefetch": "low-priority-chunk.js",
       "preload": ["page1.js", "page2.js"]
+    },
+    "sourcemaps": {
+      "dev": "cheap-module-eval-source-map",
+      "prod": "hidden-source-map"
     }
   }
 }
@@ -230,6 +234,25 @@ Use in case of generated code, for example
 ```sh
 > sui-bundler dev --no-pre-loader
 ```
+
+## Configuring source map generation
+
+SUI-bundler generates no sourcemaps by default but you can change this behaviour and configure them in the sui-bundler section of your package.json. 
+Different values can be configured for development (`dev`) and production (`prod`) webpack configs.
+
+```json
+{
+  "sui-bundler": {
+    "sourcemaps": {
+      "dev": "cheap-module-eval-source-map",
+      "prod": "hidden-source-map"
+    }
+  }
+}
+```
+
+
+Check all possible values accepted by webpack in the [devtool webpack docs](https://webpack.js.org/configuration/devtool/#devtool)   
 
 ## Contributing
 
