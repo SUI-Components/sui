@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2019-01-16)
+
+
+### Bug Fixes
+
+* add babel runtime 7 for compatibility ([ffc8c11](https://github.com/SUI-Components/sui/commit/ffc8c11))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2018-10-16)
 
@@ -109,21 +119,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix first version to 1.0.0 ([4b4a9b3](https://github.com/SUI-Components/sui/commit/4b4a9b3))
-
-
-
-<a name="0.1.0"></a>
-# 0.1.0 (2017-06-22)
-
-
-### Bug Fixes
-
-* rename preset from schibsted-spain to sui ([e5a385f](https://github.com/SUI-Components/sui/commit/e5a385f))
-
-
-### Features
-
-* migration from babel-preset-schibsted-spain ([ef602e6](https://github.com/SUI-Components/sui/commit/ef602e6))
 
 
 
