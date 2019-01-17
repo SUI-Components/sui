@@ -2,17 +2,20 @@ import path from 'path'
 import fs from 'fs'
 import seoBotDetect from './seoBotDetect'
 
-const {DYNAMIC_RENDERING = false} = process.env
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 
-export default function dinamycRendering(fallback) {
+export default function dynamicRendering(fallback, dynamicsURLS = []) {
   return function middleware(req, resp, next) {
-    if (!DYNAMIC_RENDERING) {
+    if (!dynamicsURLS.length || seoBotDetect(req)) {
       return fallback.call(this, req, resp, next)
     }
 
-    return seoBotDetect(req)
-      ? fallback.call(this, req, resp, next)
-      : fs.createReadStream(INDEX_HTML_PATH).pipe(resp)
+    const enabledDynamicRendering = dynamicsURLS.some(url =>
+      req.url.match(new RegExp(url))
+    )
+
+    return enabledDynamicRendering
+      ? fs.createReadStream(INDEX_HTML_PATH).pipe(resp)
+      : fallback.call(this, req, resp, next)
   }
 }
