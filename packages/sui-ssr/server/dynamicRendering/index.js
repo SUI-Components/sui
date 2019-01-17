@@ -4,7 +4,7 @@ import seoBotDetect from './seoBotDetect'
 
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 
-export default function dinamycRendering(fallback, dynamicsURLS = []) {
+export default function dynamicRendering(fallback, dynamicsURLS = []) {
   return function middleware(req, resp, next) {
     if (!dynamicsURLS.length) {
       return fallback.call(this, req, resp, next)
