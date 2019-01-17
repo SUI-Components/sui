@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-01-17)
+
+
+### Features
+
+* add Dynamic Rendering by pages ([18aa35a](https://github.com/SUI-Components/sui/commit/18aa35a))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2019-01-14)
 
