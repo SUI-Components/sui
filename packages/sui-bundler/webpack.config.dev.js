@@ -90,7 +90,9 @@ let webpackConfig = {
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       }
     ]
-  }
+  },
+  devtool:
+    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
 }
 
 module.exports = webpackConfig
