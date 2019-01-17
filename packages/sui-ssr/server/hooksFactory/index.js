@@ -2,6 +2,7 @@ import TYPES from '../../hooks-types'
 import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
+import {getTplParts, HtmlBuilder} from '../template'
 
 // __MAGIC IMPORTS__
 // They came from {SPA}/src
@@ -16,22 +17,30 @@ try {
 
 const isFunction = fnc => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
 const NULL_MDWL = (req, res, next) => next()
-const INDEX_PAGE_NAME = 'index'
 const __PAGES__ = {}
 const NOT_FOUND_CODE = 404
 const INTERNAL_ERROR_CODE = 500
 
-const getPageContent = async pageName => {
-  if (__PAGES__[pageName]) {
-    return __PAGES__[pageName]
+const getStaticErrorPageContent = async status => {
+  if (__PAGES__[status]) {
+    return __PAGES__[status]
   }
-
   const html = await promisify(readFile)(
-    resolve(process.cwd(), 'public', `${pageName}.html`),
+    resolve(process.cwd(), 'public', `${status}.html`),
     'utf8'
-  ).catch(e => `Generic Error Page: ${pageName}`)
-  __PAGES__[pageName] = html
+  ).catch(e => `Generic Error Page: ${status}`)
+  __PAGES__[status] = html
   return html
+}
+
+const getSpaWithErroredContent = (req, err) => {
+  const [headTplPart, bodyTplPart] = getTplParts()
+  return `${HtmlBuilder.buildHead({headTplPart})}
+    ${HtmlBuilder.buildBody({
+      bodyTplPart,
+      appConfig: req.appConfig,
+      initialProps: {error: {message: err.message}}
+    })}`
 }
 
 // Build app config and attach it to the request.
@@ -52,7 +61,9 @@ export const hooksFactory = async () => {
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
     [TYPES.NOT_FOUND]: async (req, res, next) => {
-      res.status(NOT_FOUND_CODE).send(await getPageContent(NOT_FOUND_CODE))
+      res
+        .status(NOT_FOUND_CODE)
+        .send(await getStaticErrorPageContent(NOT_FOUND_CODE))
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
       // getInitialProps could throw a 404 error or any other error
@@ -66,12 +77,11 @@ export const hooksFactory = async () => {
         res.status(status)
       }
 
-      const pageName =
-        req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE
-          ? INDEX_PAGE_NAME
-          : status
-
-      res.end(await getPageContent(pageName))
+      if (req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE) {
+        res.end(getSpaWithErroredContent(req, err))
+      } else {
+        res.end(await getStaticErrorPageContent(status))
+      }
     },
     ..._userHooks
   }

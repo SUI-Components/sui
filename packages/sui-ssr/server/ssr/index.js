@@ -10,8 +10,7 @@ import {
 // END __MAGIC IMPORTS__
 
 import qs from 'querystring'
-import path from 'path'
-import fs from 'fs'
+import {getTplParts, HtmlBuilder} from '../template'
 import withContext from '@s-ui/hoc/lib/withContext'
 
 import {buildDeviceFrom} from '../../build-device'
@@ -27,24 +26,8 @@ try {
 
 // const SERVER_TIMING_HEADER = 'Server-Timing'
 const HTTP_PERMANENT_REDIRECT = 301
-const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
-const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8')
-const APP_PLACEHOLDER = '<!-- APP -->'
 
-const injectDataHydration = ({windowPropertyName, data = {}}) =>
-  `<script>window.${windowPropertyName} = ${JSON.stringify(data).replace(
-    /<\//g,
-    '<\\/'
-  )};</script>`
-
-const injectDataPerformance = ({
-  getInitialProps: server,
-  renderToString: render
-} = {}) =>
-  `<script>window.__PERFORMANCE_METRICS__ = ${JSON.stringify({
-    server,
-    render
-  })}</script>`
+const [headTplPart, bodyTplPart] = getTplParts()
 
 const initialFlush = res => {
   res.type('html')
@@ -70,7 +53,7 @@ export default (req, res, next) => {
 
       if (!renderProps) {
         // This case will never happen if a "*" path is implemented for not-found pages.
-        // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`, the app won't work either
+        // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`, the app (client side) won't respond either
         // so the same result is obtained with the following line (best performance) than explicitly
         // passing an error using `next(new Error(404))`
         return next() // We asume that is a 404 page
@@ -99,18 +82,19 @@ export default (req, res, next) => {
         return next(err)
       }
 
-      const {initialProps, reactString, performance} = initialData
-
       // Flush now if early-flush is disabled
       if (!req.app.locals.earlyFlush) {
         initialFlush(res)
       }
 
-      const [criticalHTML, bodyHTML] = html.split('</head>')
+      const {initialProps, reactString, performance} = initialData
+
       // The first html content has the be set after any possible call to next().
       // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
       // no matter the error page strategy set (loadSPAOnNotFound: true|false)
-      res.write(criticalHTML)
+      const helmet = Helmet.renderStatic()
+      const {bodyAttributes, htmlAttributes, ...helmetHead} = helmet
+      res.write(HtmlBuilder.buildHead({headTplPart, helmetHead}))
       res.flush()
 
       // res.set({
@@ -120,33 +104,15 @@ export default (req, res, next) => {
       // `.replace(/\n/g, '')
       // })
 
-      const helmet = Helmet.renderStatic()
-
-      const {bodyAttributes, htmlAttributes, ...head} = helmet
-
-      res.write(
-        Object.keys(head)
-          .map(section => head[section].toString())
-          .join('')
-      )
-      res.flush()
-
       res.end(
-        `</head>${bodyHTML}`
-          .replace('<body>', `<body ${bodyAttributes.toString()}>`)
-          .replace(APP_PLACEHOLDER, reactString)
-          .replace(
-            '</body>',
-            `${injectDataHydration({
-              windowPropertyName: '__APP_CONFIG__',
-              data: req.appConfig
-            })}
-            ${injectDataHydration({
-              windowPropertyName: '__INITIAL_PROPS__',
-              data: initialProps
-            })}</body>`
-          )
-          .replace('</body>', `${injectDataPerformance(performance)}</body>`)
+        HtmlBuilder.buildBody({
+          bodyAttributes,
+          bodyTplPart,
+          reactString,
+          appConfig: req.appConfig,
+          initialProps,
+          performance
+        })
       )
     }
   )
