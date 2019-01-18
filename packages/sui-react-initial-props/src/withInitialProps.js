@@ -23,6 +23,7 @@ export default ({context, routeInfo}) => Page =>
           this.setState({initialProps, isLoading: false})
         })
         .catch(err => {
+          // pass error as prop
           this.setState({initialProps: {error: err}, isLoading: false})
         })
     }
