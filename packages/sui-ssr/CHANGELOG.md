@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.1.0"></a>
+# 5.1.0 (2019-01-18)
+
+
+### Bug Fixes
+
+* fix babel preset issue by removing static instruction ([d4c3618](https://github.com/SUI-Components/sui/commit/d4c3618))
+
+
+
 <a name="5.0.0"></a>
 # 5.0.0 (2019-01-18)
 
