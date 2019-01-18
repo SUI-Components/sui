@@ -1,11 +1,14 @@
 /* eslint no-console:0 */
-
+require('util.promisify/shim')()
 const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
 const checker = require('../src/check')
-const {serialSpawn} = require('@s-ui/helpers/cli')
+const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
+const {exec: execNative} = require('child_process')
+const util = require('util')
+const exec = util.promisify(execNative)
 
 program
   .option('-S, --scope <scope>', 'release a single scope')
@@ -120,8 +123,29 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 const packageScope = program.scope
 const releaseMode = packageScope ? singlePackageRelease : releasesByPackages
 
+const checkIsMasterBranchActive = async ({status, cwd}) => {
+  try {
+    const output = await exec(`git rev-parse --abbrev-ref HEAD`, {
+      cwd
+    })
+
+    if (output.stdout.trim() === 'master') {
+      return Promise.resolve(status)
+    } else {
+      throw new Error(
+        'Active branch is not master, please make releases only in master branch'
+      )
+    }
+  } catch (error) {
+    showError(error)
+
+    return Promise.reject(error)
+  }
+}
+
 checker
   .check()
+  .then(status => checkIsMasterBranchActive({status, cwd: process.cwd()}))
   .then(status => releaseMode({status, packageScope}))
   .then(releases =>
     releases
