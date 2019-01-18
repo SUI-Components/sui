@@ -89,7 +89,7 @@ const AUTH_DEFINITION = {
             )
     })
 
-  app.get('*', dynamicRendering(ssr))
+  app.get('*', dynamicRendering(ssr, ssrConf.dynamicsURLS))
 
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])

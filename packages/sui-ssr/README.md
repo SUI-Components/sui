@@ -102,7 +102,8 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
-    "forceWWW": "true"
+    "forceWWW": "true",
+    "dynamicsURLS": ["\/legal/*"]
   }
 }
 ```
@@ -117,7 +118,7 @@ Configs accepted:
 
 ## Dynamic Rendering
 
-If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up a `DYNAMIC_RENDERING=true` environment variable when you run your the server.
+If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry *dynamicsURLS* in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
 
 More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
 

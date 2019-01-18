@@ -3,6 +3,7 @@
 
 const path = require('path')
 const program = require('commander')
+const fs = require('fs')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
 const CYPRESS_VERSION = '3.0.3'
@@ -23,6 +24,8 @@ const objectToCommaString = obj =>
   Object.keys(obj)
     .map(key => `${key}=${obj[key]}`)
     .join(',')
+
+const supportFilesFolderPath = path.join(TESTS_FOLDER, 'support')
 
 program
   .option(
@@ -58,6 +61,10 @@ const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
   baseUrl,
   fixturesFolder: path.join(TESTS_FOLDER, 'fixtures')
+}
+
+if (fs.existsSync(supportFilesFolderPath)) {
+  cypressConfig.supportFile = supportFilesFolderPath
 }
 
 if (userAgent) {

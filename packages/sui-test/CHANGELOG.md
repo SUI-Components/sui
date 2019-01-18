@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2019-01-14)
+
+
+### Bug Fixes
+
+* add new polyfill from babel@7 instead using old one ([f5f8024](https://github.com/SUI-Components/sui/commit/f5f8024))
+
+
+
+<a name="2.0.0"></a>
+# 2.0.0 (2019-01-14)
+
+
+### Features
+
+* use babel@7 ([91f54a2](https://github.com/SUI-Components/sui/commit/91f54a2))
+* use latest babel-preset-sui ([bb4347f](https://github.com/SUI-Components/sui/commit/bb4347f))
+
+
+### BREAKING CHANGES
+
+* Using babel@7
+* Old code might be needed to be adapted in order to get it working as we are moving to babel 7
+
+
+
+<a name="1.20.0"></a>
+# 1.20.0 (2019-01-14)
+
+
+### Bug Fixes
+
+* remove unused file-system dependency ([3c46016](https://github.com/SUI-Components/sui/commit/3c46016))
+
+
+### Features
+
+* support file option added to e2e tests ([2f95361](https://github.com/SUI-Components/sui/commit/2f95361)), closes [#459](https://github.com/SUI-Components/sui/issues/459)
+
+
+
 <a name="1.16.0"></a>
 # 1.16.0 (2019-01-03)
 
@@ -9,6 +51,13 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add overwrite user agent option ([869425b](https://github.com/SUI-Components/sui/commit/869425b)), closes [#446](https://github.com/SUI-Components/sui/issues/446)
+* support new babel@7 ([f6270f2](https://github.com/SUI-Components/sui/commit/f6270f2))
+* upgrade to [@babel](https://github.com/babel)/7 ([f107b2f](https://github.com/SUI-Components/sui/commit/f107b2f))
+
+
+### BREAKING CHANGES
+
+* Use new @babel/7 and and upgrade dependencies, so not compatible with babel@6 packages
 
 
 

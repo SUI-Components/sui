@@ -33,24 +33,20 @@ module.exports = (config, urls) => {
     console.log('Compiling...')
   })
 
-  let isFirstCompile = true
-
   compiler.hooks.done.tap('done', stats => {
     if (isInteractive) {
       clearConsole()
     }
 
     const messages = formatWebpackMessages(stats.toJson({}, true))
-    const isSuccessful = !messages.errors.length && !messages.warnings.length
+    const isSuccessful = !messages.errors.length
     if (isSuccessful) {
       console.log(chalk.green('Compiled successfully!'))
     }
 
-    if (isSuccessful && isInteractive && isFirstCompile) {
+    if (isSuccessful && isInteractive) {
       printInstructions(urls)
     }
-
-    isFirstCompile = false
 
     if (messages.errors.length) {
       // Only keep the first error. Others are often indicative
@@ -63,20 +59,8 @@ module.exports = (config, urls) => {
     }
 
     if (messages.warnings.length) {
-      console.log(chalk.yellow('Compiled with warnings.\n'))
+      console.log(chalk.yellow('Compiled with warnings:\n'))
       console.log(messages.warnings.join('\n\n'))
-
-      // Teach some ESLint tricks.
-      console.log(
-        '\nSearch for the ' +
-          chalk.underline(chalk.yellow('keywords')) +
-          ' to learn more about each warning.'
-      )
-      console.log(
-        'To ignore, add ' +
-          chalk.cyan('// eslint-disable-next-line') +
-          ' to the line before.\n'
-      )
     }
   })
   return compiler

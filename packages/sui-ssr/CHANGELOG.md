@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-01-17)
+
+
+### Features
+
+* add Dynamic Rendering by pages ([18aa35a](https://github.com/SUI-Components/sui/commit/18aa35a))
+
+
+
+<a name="3.0.0"></a>
+# 3.0.0 (2019-01-14)
+
+
+### Features
+
+* use as peerDependency latest sui-bundler ([bb9e616](https://github.com/SUI-Components/sui/commit/bb9e616))
+* use new sui-bundler beta ([825733c](https://github.com/SUI-Components/sui/commit/825733c))
+
+
+### BREAKING CHANGES
+
+* Use new sui-bundler that uses latest babel@7, so some breaking could happen
+* Using new sui-bundler version with breaking changes
+
+
+
 <a name="2.12.0"></a>
 # 2.12.0 (2019-01-07)
 

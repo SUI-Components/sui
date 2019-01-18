@@ -31,7 +31,7 @@ module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
   if (ignorePattern) configure.exclude = [ignorePattern]
 
   configure.files = [
-    `${CWD}/node_modules/babel-polyfill/browser.js`,
+    `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
     `${CWD}/${srcPattern}`,
     `${CWD}/${pattern}`
   ]

@@ -74,12 +74,13 @@ let webpackConfig = {
             }
           },
           {
-            loader: 'babel-loader',
+            loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
-              presets: ['sui'],
               cacheDirectory: true,
-              highlightCode: true
+              highlightCode: true,
+              presets: [require.resolve('babel-preset-sui')],
+              plugins: [require.resolve('react-hot-loader/babel')]
             }
           }
         ]
@@ -89,7 +90,9 @@ let webpackConfig = {
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       }
     ]
-  }
+  },
+  devtool:
+    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
 }
 
 module.exports = webpackConfig
