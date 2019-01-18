@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.0.0"></a>
+# 5.0.0 (2019-01-18)
+
+
+### Features
+
+* add dummy commit to force release after merge master ([5ba5a73](https://github.com/SUI-Components/sui/commit/5ba5a73))
+
+
+### BREAKING CHANGES
+
+* default hook behaviour has changed
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2019-01-17)
 
@@ -9,6 +24,13 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add Dynamic Rendering by pages ([18aa35a](https://github.com/SUI-Components/sui/commit/18aa35a))
+* add flags for enabling/disbaling early-flush and load-spa-on-not-found ([c0f3272](https://github.com/SUI-Components/sui/commit/c0f3272))
+* be able to return spa on 404 error including appConfig and error message. Centralize ([4e6a91b](https://github.com/SUI-Components/sui/commit/4e6a91b))
+
+
+### BREAKING CHANGES
+
+* default hook behaviuor has been modified
 
 
 
@@ -18,6 +40,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+* delay early flush in order to properly handle getInitialProps exception ([3eb5022](https://github.com/SUI-Components/sui/commit/3eb5022))
 * use as peerDependency latest sui-bundler ([bb9e616](https://github.com/SUI-Components/sui/commit/bb9e616))
 * use new sui-bundler beta ([825733c](https://github.com/SUI-Components/sui/commit/825733c))
 
