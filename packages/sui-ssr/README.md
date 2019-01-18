@@ -70,7 +70,7 @@ It uses the stdout stream so you can do things like:
   $ sui-ssr archive > ./myFileNameOrWhatever.zip
 ```
 
-## Hooks
+## Hooks
 
 If you want to change the server´s behavior for very specific business operation like handling errors or logging you must use hooks.
 
@@ -93,7 +93,7 @@ You can check which hooks are available in the hooks-types.js file.
 
 There are two default hooks for 404 and 500 errors. both will look for a 404.html or 500.html file in the src folder and show this file. If you dont define this files, you will get a generic error page.
 
-## Config server
+## Config server
 
 If you need it, you will be able to config several aspects of your server. All your customs config must live under "config.sui-ssr" key in the package.json of your SPA.
 
@@ -112,13 +112,17 @@ Configs accepted:
 
 * forceWWW (false): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
 
+* earlyFlush (true): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
+
+* loadSPAOnNotFound (false): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
+
 ## Dynamic Rendering
 
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry *dynamicsURLS* in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
 
 More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
 
-## Environment variables
+## Environment variables
 
 You can define environment variables by creating a yml file called `public-env.yml` in your SPA root directory:
 

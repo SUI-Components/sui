@@ -2,6 +2,7 @@ import TYPES from '../../hooks-types'
 import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
+import {getTplParts, HtmlBuilder} from '../template'
 
 // __MAGIC IMPORTS__
 // They came from {SPA}/src
@@ -16,18 +17,30 @@ try {
 
 const isFunction = fnc => !!(fnc && fnc.constructor && fnc.call && fnc.apply)
 const NULL_MDWL = (req, res, next) => next()
-const __STATUS_PAGES__ = {}
-const responsePageByStatus = async code => {
-  if (__STATUS_PAGES__[code]) {
-    return __STATUS_PAGES__[code]
-  }
+const __PAGES__ = {}
+const NOT_FOUND_CODE = 404
+const INTERNAL_ERROR_CODE = 500
 
+const getStaticErrorPageContent = async status => {
+  if (__PAGES__[status]) {
+    return __PAGES__[status]
+  }
   const html = await promisify(readFile)(
-    resolve(process.cwd(), 'public', `${code}.html`),
+    resolve(process.cwd(), 'public', `${status}.html`),
     'utf8'
-  ).catch(e => `Generic Error Page: ${code}`)
-  __STATUS_PAGES__[code] = html
+  ).catch(e => `Generic Error Page: ${status}`)
+  __PAGES__[status] = html
   return html
+}
+
+const getSpaWithErroredContent = (req, err) => {
+  const [headTplPart, bodyTplPart] = getTplParts()
+  return `${HtmlBuilder.buildHead({headTplPart})}
+    ${HtmlBuilder.buildBody({
+      bodyTplPart,
+      appConfig: req.appConfig,
+      initialProps: {error: {message: err.message}}
+    })}`
 }
 
 // Build app config and attach it to the request.
@@ -48,11 +61,27 @@ export const hooksFactory = async () => {
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
     [TYPES.NOT_FOUND]: async (req, res, next) => {
-      res.status(404).send(await responsePageByStatus(404))
+      res
+        .status(NOT_FOUND_CODE)
+        .send(await getStaticErrorPageContent(NOT_FOUND_CODE))
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
-      const status = err.status || 500
-      res.status(status).send(await responsePageByStatus(status))
+      // getInitialProps could throw a 404 error or any other error
+      const status =
+        err.message && err.message.includes(NOT_FOUND_CODE)
+          ? NOT_FOUND_CODE
+          : err.status || INTERNAL_ERROR_CODE
+
+      // Prevents from trying to send headers twice (fatal error) when earlyFlush is enabled
+      if (!res.headersSent) {
+        res.status(status)
+      }
+
+      if (req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE) {
+        res.end(getSpaWithErroredContent(req, err))
+      } else {
+        res.end(await getStaticErrorPageContent(status))
+      }
     },
     ..._userHooks
   }
