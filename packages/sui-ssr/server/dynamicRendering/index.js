@@ -14,6 +14,8 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
       req.url.match(new RegExp(url))
     )
 
+    enabledDynamicRendering && resp.type('html')
+
     return enabledDynamicRendering
       ? fs.createReadStream(INDEX_HTML_PATH).pipe(resp)
       : fallback.call(this, req, resp, next)
