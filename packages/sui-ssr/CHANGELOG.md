@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.2.0"></a>
+# 5.2.0 (2019-01-18)
+
+
+
 <a name="5.1.0"></a>
 # 5.1.0 (2019-01-18)
 
@@ -9,6 +14,7 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix babel preset issue by removing static instruction ([d4c3618](https://github.com/SUI-Components/sui/commit/d4c3618))
+* send Content-Type header setup to HTML when respond with SPA option ([4c7f3d5](https://github.com/SUI-Components/sui/commit/4c7f3d5))
 
 
 
