@@ -5,7 +5,7 @@ if (typeof window !== 'undefined' && window.document) {
   require('intersection-observer')
 }
 
-export default BaseComponent => {
+export default (options = {}) => BaseComponent => {
   const displayName = BaseComponent.displayName
 
   return class WithIntersectionObserver extends Component {
@@ -31,7 +31,7 @@ export default BaseComponent => {
         this.setState({isIntersecting: true})
         return
       }
-      new IntersectionObserver(this.handleChange).observe(target)
+      new IntersectionObserver(this.handleChange).observe(target, options)
     }
 
     render() {
