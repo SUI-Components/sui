@@ -1,7 +1,7 @@
 ;(function() {
   'use strict'
   var manifests = require('static-manifests')()
-  var pathnamesRegExp = require('static-pathnamesRegExp')()
+  var pageConfigs = require('static-pageConfigs')()
   var serviceWorkerCdn = require('service-worker-cdn')()
   // https://davidwalsh.name/javascript-loader
   var load = (function() {
@@ -108,11 +108,22 @@
   }
 
   var pages = []
-  for (var key in pathnamesRegExp) {
-    if (window.location.pathname.match(new RegExp(pathnamesRegExp[key]))) {
-      pages.push(key)
+  for (var page in pageConfigs) {
+    var blacklistedRegExps = pageConfigs[page].blacklistedRegExps
+    var pathnameRegExp = pageConfigs[page].pathnameRegExp
+
+    if (
+      blacklistedRegExps &&
+      !blacklistedRegExps.some(regExp =>
+        window.location.pathname.match(new RegExp(regExp))
+      )
+    ) {
+      pages.push(page)
+    } else if (window.location.pathname.match(new RegExp(pathnameRegExp))) {
+      pages.push(page)
     }
   }
+
   pages.length !== 0 &&
     !window.location.host.match(/localhost/) &&
     promiseInSerie(

@@ -1,4 +1,5 @@
 # sui-widget-embedder
+
 > Widget development server and build for production
 
 ## Motivation
@@ -67,9 +68,9 @@ Note that the quotes here are not 'optional' you can add an expresion without qu
 
 Inside your project-level package.json, you could config the library,
 
-* alias [OPTIONAL]: create aliases to `import` certain modules more easily or to avoid importing them in production.
-* remoteCdn [OPTIONAL] (default: `'/'`): the base path of the cdn where your assets will be located.
-* devPort [OPTIONAL] (default: `3000`): Port where your development server will be listening.
+- alias [OPTIONAL]: create aliases to `import` certain modules more easily or to avoid importing them in production.
+- remoteCdn [OPTIONAL] (default: `'/'`): the base path of the cdn where your assets will be located.
+- devPort [OPTIONAL] (default: `3000`): Port where your development server will be listening.
 
 ### Page config
 
@@ -78,6 +79,10 @@ Inside each page you must create a package.json file.
 ```
 {
   "pathnameRegExp": "/d\\w+\\.html",
+  "blacklistedRegExps": [
+    "about.html",
+    "contact.html"
+  ],
   "vendor": [
     "react",
     "react-dom"
@@ -85,8 +90,9 @@ Inside each page you must create a package.json file.
 }
 ```
 
-* pathnameRegExp [REQUIRED]: RegExp to identify the pathname of the page where this list of widgets must work
-* vendor [OPTIONAL]: In case you want to have a vendor file for this page only.
+- pathnameRegExp [REQUIRED]: RegExp to identify the pathname of the page where this list of widgets must work.
+- blacklistedRegExps [OPTIONAL]: List of RegExps to identify the pathname of the pages where the widgets don't need to work at.
+- vendor [OPTIONAL]: In case you want to have a vendor file for this page only.
 
 ## Working with React
 
@@ -98,12 +104,12 @@ import Widgets from '@s-ui/widget-embedder/react/Widgets'
 import render from '@s-ui/widget-embedder/react/render'
 ```
 
-* render: A method that expects a tree of React components starting with a Widgets root
-* Widgets: React component that encapsules all your widgets
-* Widget: React component that renders the children as a new React tree in another place of the page.
-** i18n: I18n library
-** domain: Domain library for your widgets
-** node: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
+- render: A method that expects a tree of React components starting with a Widgets root
+- Widgets: React component that encapsules all your widgets
+- Widget: React component that renders the children as a new React tree in another place of the page.
+  ** i18n: I18n library
+  ** domain: Domain library for your widgets
+  \*\* node: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
 
 ## How to develop
 

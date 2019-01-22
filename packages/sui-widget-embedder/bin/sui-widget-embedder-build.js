@@ -105,27 +105,30 @@ const manifests = () =>
     return acc
   }, {})
 
-const pathnamesRegExp = () =>
-  pagesFor({path: PAGES_PATH}).reduce((acc, page) => {
-    acc[page] = require(resolve(
-      process.cwd(),
-      PAGES_FOLDER,
-      page,
-      'package.json'
-    )).pathnameRegExp
-    return acc
-  }, {})
+const pageConfigs = () =>
+  pagesFor({path: PAGES_PATH}).reduce(
+    (acc, page) => ({
+      ...acc,
+      [page]: require(resolve(
+        process.cwd(),
+        PAGES_FOLDER,
+        page,
+        'package.json'
+      ))
+    }),
+    {}
+  )
 
 const createDownloader = () =>
   // eslint-disable-next-line
   new Promise((res, rej) => {
     const staticManifests = manifests()
-    const staticPathnamesRegExp = pathnamesRegExp()
+    const staticPageConfigs = pageConfigs()
     createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
       .pipe(
         staticModule({
           'static-manifests': () => JSON.stringify(staticManifests),
-          'static-pathnamesRegExp': () => JSON.stringify(staticPathnamesRegExp),
+          'static-pageConfigs': () => JSON.stringify(staticPageConfigs),
           'static-cdn': () => JSON.stringify(remoteCdn),
           'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
         })
