@@ -91,7 +91,7 @@ Inside each page you must create a package.json file.
 ```
 
 - pathnameRegExp [REQUIRED]: RegExp to identify the pathname of the page where this list of widgets must work.
-- blacklistedRegExps [OPTIONAL]: List of RegExps to identify the pathname of the pages where the widgets don't need to work at.
+- blacklistedRegExps [OPTIONAL]: List of RegExps to identify the pathname of the pages where the widgets don't have to work at.
 - vendor [OPTIONAL]: In case you want to have a vendor file for this page only.
 
 ## Working with React

@@ -107,20 +107,17 @@
     })
   }
 
+  function matchPathnameWithRegExp(regExp) {
+    return window.location.pathname.match(new RegExp(regExp))
+  }
+
   var pages = []
   for (var page in pageConfigs) {
-    var blacklistedRegExps = pageConfigs[page].blacklistedRegExps
+    var blacklistedRegExps = pageConfigs[page].blacklistedRegExps || []
     var pathnameRegExp = pageConfigs[page].pathnameRegExp
+    var isBlacklisted = blacklistedRegExps.some(matchPathnameWithRegExp)
 
-    if (
-      blacklistedRegExps &&
-      blacklistedRegExps.length > 0 &&
-      !blacklistedRegExps.some(function(regExp) {
-        return window.location.pathname.match(new RegExp(regExp))
-      })
-    ) {
-      pages.push(page)
-    } else if (window.location.pathname.match(new RegExp(pathnameRegExp))) {
+    if (!isBlacklisted && matchPathnameWithRegExp(pathnameRegExp)) {
       pages.push(page)
     }
   }
