@@ -114,6 +114,7 @@
 
     if (
       blacklistedRegExps &&
+      blacklistedRegExps.length > 0 &&
       !blacklistedRegExps.some(regExp =>
         window.location.pathname.match(new RegExp(regExp))
       )
