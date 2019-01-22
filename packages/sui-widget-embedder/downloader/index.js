@@ -115,9 +115,9 @@
     if (
       blacklistedRegExps &&
       blacklistedRegExps.length > 0 &&
-      !blacklistedRegExps.some(regExp =>
-        window.location.pathname.match(new RegExp(regExp))
-      )
+      !blacklistedRegExps.some(function(regExp) {
+        return window.location.pathname.match(new RegExp(regExp))
+      })
     ) {
       pages.push(page)
     } else if (window.location.pathname.match(new RegExp(pathnameRegExp))) {
