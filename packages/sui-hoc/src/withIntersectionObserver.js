@@ -5,7 +5,9 @@ if (typeof window !== 'undefined' && window.document) {
   require('intersection-observer')
 }
 
-export const hocIntersectionObserver = (options = {}) => BaseComponent => {
+export const hocIntersectionObserverWithOptions = (
+  options = {}
+) => BaseComponent => {
   const displayName = BaseComponent.displayName
 
   return class WithIntersectionObserver extends Component {
@@ -47,4 +49,4 @@ export const hocIntersectionObserver = (options = {}) => BaseComponent => {
   }
 }
 
-export default hocIntersectionObserver()
+export default hocIntersectionObserverWithOptions()
