@@ -1,5 +1,9 @@
+const isInstalled = require('./is-installed')
+
 function plugins(api, opts) {
-  return [
+  const {isDevelopment} = opts
+
+  return cleanList([
     require('@babel/plugin-syntax-dynamic-import').default,
     [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
     [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
@@ -19,8 +23,9 @@ function plugins(api, opts) {
         corejs: false,
         regenerator: true
       }
-    ]
-  ]
+    ],
+    isDevelopment && isInstalled(['preact', 'react'], 'react-hot-loader/babel')
+  ])
 }
 
 function presets(api, opts) {
