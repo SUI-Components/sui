@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2019-01-25)
+
+
+### Bug Fixes
+
+* Fix react-hot-loader on linked packages ([42529de](https://github.com/SUI-Components/sui/commit/42529de))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2019-01-14)
 
