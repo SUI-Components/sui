@@ -1,4 +1,5 @@
 const isInstalled = require('./is-installed')
+const cleanList = require('./clean-list')
 
 function plugins(api, opts) {
   const {isDevelopment} = opts
