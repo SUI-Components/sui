@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.2.0"></a>
+# 4.2.0 (2019-01-25)
+
+
+### Bug Fixes
+
+* Fix react-hot-loader on linked packages ([1aaf396](https://github.com/SUI-Components/sui/commit/1aaf396))
+
+
+
 <a name="4.1.0"></a>
 # 4.1.0 (2019-01-15)
 
@@ -672,6 +682,16 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
