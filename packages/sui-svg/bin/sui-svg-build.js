@@ -64,7 +64,8 @@ fg([`${SVG_FOLDER}/**/*.svg`]).then(entries =>
         data,
         {
           template,
-          expandProps: false
+          expandProps: false,
+          removeTitle: true
         },
         {componentName: 'SVGComponent'}
       )
