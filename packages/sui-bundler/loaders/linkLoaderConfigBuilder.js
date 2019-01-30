@@ -1,28 +1,38 @@
 const path = require('path')
 const LoaderUniversalOptionsPlugin = require('../plugins/loader-options')
 const loadersOptions = require('../shared/loader-options')
+const createSassLinkLoader = require('./sassLinkLoader')
+
+const removePlugin = name => plugins => {
+  const pos = plugins
+    .map(p => p.constructor.toString())
+    .findIndex(string => string.match(name))
+  return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
+}
 
 module.exports = ({config, packagesToLink}) => {
   if (packagesToLink.length === 0) {
     return config
   }
 
-  const removePlugin = name => plugins => {
-    const pos = plugins
-      .map(p => p.constructor.toString())
-      .findIndex(string => string.match(name))
-    return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
-  }
+  console.log('🔗 Linking packages:')
 
-  const entryPoints = packagesToLink
-    .map(p => path.resolve(p))
-    .reduce((acc, packagePath) => {
+  const entryPoints = packagesToLink.reduce((acc, pkg) => {
+    const packagePath = path.resolve(pkg)
+    try {
       const pkg = require(path.join(packagePath, 'package.json'))
       acc[pkg.name] = path.join(packagePath, 'src')
+      console.log(`\t✅  ${pkg.name} from path "${packagePath}"`)
       return acc
-    }, {})
+    } catch (e) {
+      console.log(
+        `\t⚠️  Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`
+      )
+      return acc
+    }
+  }, {})
 
-  const nextConfig = {
+  return {
     ...config,
     plugins: [
       ...removePlugin('LoaderUniversalOptionsPlugin')(config.plugins),
@@ -32,19 +42,7 @@ module.exports = ({config, packagesToLink}) => {
           ...loadersOptions['sass-loader'],
           importer: [
             ...loadersOptions['sass-loader'].importer,
-            (url, prev) => {
-              if (Object.keys(entryPoints).find(pkg => url.match(pkg))) {
-                let [org, name] = url.split(/\//)
-                const pkg = [org.replace('~', ''), name].join('/')
-
-                const absoluteUrl = url.replace(
-                  new RegExp(`~?${pkg}(\\/lib)?`, 'g'),
-                  entryPoints[pkg]
-                )
-                return {file: absoluteUrl}
-              }
-              return null
-            }
+            createSassLinkLoader(entryPoints)
           ]
         }
       })
@@ -55,12 +53,6 @@ module.exports = ({config, packagesToLink}) => {
         ...config.module.rules,
         {
           test: /\.jsx?$/,
-          // TODO: This is crappy, I need better options
-          exclude: new RegExp(
-            `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${
-              path.sep
-            }studio)(${path.sep}workbench)?${path.sep}src)`
-          ),
           use: {
             loader: 'link-loader',
             options: {
@@ -72,9 +64,8 @@ module.exports = ({config, packagesToLink}) => {
     },
     resolveLoader: {
       alias: {
-        'link-loader': require.resolve('./LinkLoader')
+        'link-loader': require.resolve('./linkLoader')
       }
     }
   }
-  return nextConfig
 }
