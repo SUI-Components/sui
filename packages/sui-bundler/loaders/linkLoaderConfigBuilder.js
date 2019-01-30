@@ -64,7 +64,7 @@ module.exports = ({config, packagesToLink}) => {
     },
     resolveLoader: {
       alias: {
-        'link-loader': require.resolve('./linkLoader')
+        'link-loader': require.resolve('./LinkLoader')
       }
     }
   }
