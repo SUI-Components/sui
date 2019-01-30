@@ -1,9 +1,8 @@
 /* global IntersectionObserver */
 import React, {Component} from 'react'
 
-if (typeof window !== 'undefined' && window.document) {
-  require('intersection-observer')
-}
+if (typeof window !== 'undefined' && window.document)
+  import('intersection-observer')
 
 export const hocIntersectionObserverWithOptions = (
   options = {}
