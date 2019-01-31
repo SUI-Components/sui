@@ -18,6 +18,12 @@ let webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
   resolve: {
+    alias: {
+      // this alias is needed so react-hot-loader works with linked packages on dev mode
+      'react-hot-loader': path.resolve(
+        path.join(process.env.PWD, './node_modules/react-hot-loader')
+      )
+    },
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: cleanList([

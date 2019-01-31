@@ -7,8 +7,8 @@ const ncp = require('copy-paste')
 const isInteractive = process.stdout.isTTY
 let compiler
 
-const printInstructions = urls => {
-  ncp.copy(urls.localUrlForBrowser)
+const printInstructions = ({urls, copyToClipboard}) => {
+  copyToClipboard && ncp.copy(urls.localUrlForBrowser)
   console.log(`
   ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}
   ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}
@@ -33,6 +33,8 @@ module.exports = (config, urls) => {
     console.log('Compiling...')
   })
 
+  let isFirstCompile = true
+
   compiler.hooks.done.tap('done', stats => {
     if (isInteractive) {
       clearConsole()
@@ -40,12 +42,13 @@ module.exports = (config, urls) => {
 
     const messages = formatWebpackMessages(stats.toJson({}, true))
     const isSuccessful = !messages.errors.length
+
     if (isSuccessful) {
       console.log(chalk.green('Compiled successfully!'))
     }
 
     if (isSuccessful && isInteractive) {
-      printInstructions(urls)
+      printInstructions({urls, copyToClipboard: isFirstCompile})
     }
 
     if (messages.errors.length) {
@@ -62,6 +65,8 @@ module.exports = (config, urls) => {
       console.log(chalk.yellow('Compiled with warnings:\n'))
       console.log(messages.warnings.join('\n\n'))
     }
+
+    isFirstCompile = false
   })
   return compiler
 }
