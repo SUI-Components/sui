@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.10.0"></a>
+# 1.10.0 (2019-01-31)
+
+
+### Features
+
+* better name for hoc w/ options ([8477c01](https://github.com/SUI-Components/sui/commit/8477c01))
+* exact version ([84dd8e7](https://github.com/SUI-Components/sui/commit/84dd8e7))
+* intersection observer lazy loading ([3256f94](https://github.com/SUI-Components/sui/commit/3256f94))
+* intersection-observer hoc ([1ebc8a0](https://github.com/SUI-Components/sui/commit/1ebc8a0))
+* options added ([d82bb95](https://github.com/SUI-Components/sui/commit/d82bb95))
+* options to intersection observer in hoc ([9517c48](https://github.com/SUI-Components/sui/commit/9517c48))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2019-01-07)
 
