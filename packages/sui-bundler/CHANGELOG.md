@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.3.0"></a>
+# 4.3.0 (2019-01-31)
+
+
+### Bug Fixes
+
+* alias react-hot-loader to avoid problems when linking a package ([102e28f](https://github.com/SUI-Components/sui/commit/102e28f))
+* copy dev server url only in first compile ([08a1981](https://github.com/SUI-Components/sui/commit/08a1981))
+* fix javascript link loader becasue wrong regex, add bunch of comments and prepare ([751842d](https://github.com/SUI-Components/sui/commit/751842d))
+* fix linking subdependencies, better separation and useful logging ([ec4981c](https://github.com/SUI-Components/sui/commit/ec4981c))
+* fix problems with capitalcase ([0dce3ba](https://github.com/SUI-Components/sui/commit/0dce3ba))
+
+
+### Features
+
+* separate sassLinkLoader ([06abb73](https://github.com/SUI-Components/sui/commit/06abb73))
+
+
+
 <a name="4.2.0"></a>
 # 4.2.0 (2019-01-25)
 
@@ -682,16 +701,6 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
