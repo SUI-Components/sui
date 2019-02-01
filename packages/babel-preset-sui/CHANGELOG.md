@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.4.0"></a>
+# 2.4.0 (2019-02-01)
+
+
+### Bug Fixes
+
+* add default value for opts ([528e9c9](https://github.com/SUI-Components/sui/commit/528e9c9))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2019-01-25)
 
