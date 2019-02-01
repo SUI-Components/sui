@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.2.0"></a>
+# 2.2.0 (2019-02-01)
+
+
+### Bug Fixes
+
+* export using commonjs ([0041a36](https://github.com/SUI-Components/sui/commit/0041a36))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2019-01-14)
 
@@ -74,7 +84,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.13.0"></a>
-# [1.13.0](https://github.com/SUI-Components/sui/compare/4.13.0...v2.17.1) (2018-08-31)
+# 1.13.0 (2018-08-31)
 
 
 ### Features
