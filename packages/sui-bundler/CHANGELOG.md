@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.6.0"></a>
+# 4.6.0 (2019-02-04)
+
+
+### Bug Fixes
+
+* force terser version to avoid problems with webpack ([6c3351b](https://github.com/SUI-Components/sui/commit/6c3351b))
+
+
+
 <a name="4.3.0"></a>
 # 4.3.0 (2019-01-31)
 
@@ -701,6 +711,16 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
