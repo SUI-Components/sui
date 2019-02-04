@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.3.0"></a>
+# 2.3.0 (2019-02-04)
+
+
+### Features
+
+* remove browserify babel instanbul ([b150398](https://github.com/SUI-Components/sui/commit/b150398))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2019-02-01)
 
