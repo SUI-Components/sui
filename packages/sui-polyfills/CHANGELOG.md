@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2019-02-04)
+
+
+### Performance Improvements
+
+* use same core-js as [@babel](https://github.com/babel)/runtime to avoid packing twice same library ([00ef2e0](https://github.com/SUI-Components/sui/commit/00ef2e0))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-08-08)
 
