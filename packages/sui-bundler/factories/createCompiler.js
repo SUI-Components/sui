@@ -7,8 +7,8 @@ const ncp = require('copy-paste')
 const isInteractive = process.stdout.isTTY
 let compiler
 
-const printInstructions = urls => {
-  ncp.copy(urls.localUrlForBrowser)
+const printInstructions = ({urls, copyToClipboard}) => {
+  copyToClipboard && ncp.copy(urls.localUrlForBrowser)
   console.log(`
   ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}
   ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}
@@ -41,16 +41,15 @@ module.exports = (config, urls) => {
     }
 
     const messages = formatWebpackMessages(stats.toJson({}, true))
-    const isSuccessful = !messages.errors.length && !messages.warnings.length
+    const isSuccessful = !messages.errors.length
+
     if (isSuccessful) {
       console.log(chalk.green('Compiled successfully!'))
     }
 
-    if (isSuccessful && isInteractive && isFirstCompile) {
-      printInstructions(urls)
+    if (isSuccessful && isInteractive) {
+      printInstructions({urls, copyToClipboard: isFirstCompile})
     }
-
-    isFirstCompile = false
 
     if (messages.errors.length) {
       // Only keep the first error. Others are often indicative
@@ -63,21 +62,11 @@ module.exports = (config, urls) => {
     }
 
     if (messages.warnings.length) {
-      console.log(chalk.yellow('Compiled with warnings.\n'))
+      console.log(chalk.yellow('Compiled with warnings:\n'))
       console.log(messages.warnings.join('\n\n'))
-
-      // Teach some ESLint tricks.
-      console.log(
-        '\nSearch for the ' +
-          chalk.underline(chalk.yellow('keywords')) +
-          ' to learn more about each warning.'
-      )
-      console.log(
-        'To ignore, add ' +
-          chalk.cyan('// eslint-disable-next-line') +
-          ' to the line before.\n'
-      )
     }
+
+    isFirstCompile = false
   })
   return compiler
 }

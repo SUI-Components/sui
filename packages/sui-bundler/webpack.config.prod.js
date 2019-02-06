@@ -25,6 +25,10 @@ require('./shared/shims')
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
 module.exports = {
+  devtool:
+    config.sourcemaps && config.sourcemaps.prod
+      ? config.sourcemaps.prod
+      : 'none',
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
@@ -150,9 +154,9 @@ module.exports = {
         test: /(\.css|\.scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
+          require.resolve('css-loader'),
+          require.resolve('postcss-loader'),
+          require.resolve('sass-loader')
         ]
       }
     ]

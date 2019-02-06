@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.1.0"></a>
+# 6.1.0 (2019-02-01)
+
+
+### Bug Fixes
+
+* fix problems with react-hot-loader when linking studio because missing alias in con ([c64d3a0](https://github.com/SUI-Components/sui/commit/c64d3a0))
+
+
+
+<a name="6.0.0"></a>
+# 6.0.0 (2019-01-14)
+
+
+### Features
+
+* use new sui-bundler ([5e17274](https://github.com/SUI-Components/sui/commit/5e17274))
+* use new sui-bundler version ([7f6627d](https://github.com/SUI-Components/sui/commit/7f6627d))
+
+
+### BREAKING CHANGES
+
+* As we're using babel 7 in new sui-bundler, things could be broken
+* Using new sui-bundler might break some component and some changes might be needed
+
+
+
 <a name="5.18.0"></a>
 # 5.18.0 (2018-10-31)
 

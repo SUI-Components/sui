@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.3.0"></a>
+# 2.3.0 (2019-01-22)
+
+
+### Bug Fixes
+
+* add some improvements ([8335a3a](https://github.com/SUI-Components/sui/commit/8335a3a))
+* avoid to define empty array ([45820d5](https://github.com/SUI-Components/sui/commit/45820d5))
+* use normal function instead of arrow function ([4f76645](https://github.com/SUI-Components/sui/commit/4f76645))
+
+
+### Features
+
+* allow to add a blacklist of reg exps ([cd38682](https://github.com/SUI-Components/sui/commit/cd38682))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2019-01-03)
 

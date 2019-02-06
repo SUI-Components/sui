@@ -19,8 +19,12 @@ const config = {
       [
         'babelify',
         {
-          presets: ['sui'],
-          plugins: ['dynamic-import-node']
+          presets: ['babel-preset-sui'],
+          plugins: [
+            'babel-plugin-dynamic-import-node',
+            '@babel/plugin-transform-modules-commonjs',
+            TARGET === 'test:ci' && 'babel-plugin-istanbul'
+          ].filter(Boolean)
         }
       ],
       'envify'
@@ -36,10 +40,6 @@ const config = {
 
 if (TARGET === 'test:ci') {
   config.reporters = ['coverage'].concat(config.reporters)
-  config.browserify.transform = [
-    ...config.browserify.transform,
-    require('browserify-babel-istanbul')
-  ]
   config.coverageReporter = {
     dir: `${CWD}/coverage`,
     reporters: [

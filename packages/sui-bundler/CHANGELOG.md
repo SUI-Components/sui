@@ -2,6 +2,77 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.6.0"></a>
+# 4.6.0 (2019-02-04)
+
+
+### Bug Fixes
+
+* force terser version to avoid problems with webpack ([6c3351b](https://github.com/SUI-Components/sui/commit/6c3351b))
+
+
+
+<a name="4.3.0"></a>
+# 4.3.0 (2019-01-31)
+
+
+### Bug Fixes
+
+* alias react-hot-loader to avoid problems when linking a package ([102e28f](https://github.com/SUI-Components/sui/commit/102e28f))
+* copy dev server url only in first compile ([08a1981](https://github.com/SUI-Components/sui/commit/08a1981))
+* fix javascript link loader becasue wrong regex, add bunch of comments and prepare ([751842d](https://github.com/SUI-Components/sui/commit/751842d))
+* fix linking subdependencies, better separation and useful logging ([ec4981c](https://github.com/SUI-Components/sui/commit/ec4981c))
+* fix problems with capitalcase ([0dce3ba](https://github.com/SUI-Components/sui/commit/0dce3ba))
+
+
+### Features
+
+* separate sassLinkLoader ([06abb73](https://github.com/SUI-Components/sui/commit/06abb73))
+
+
+
+<a name="4.2.0"></a>
+# 4.2.0 (2019-01-25)
+
+
+### Bug Fixes
+
+* Fix react-hot-loader on linked packages ([1aaf396](https://github.com/SUI-Components/sui/commit/1aaf396))
+
+
+
+<a name="4.1.0"></a>
+# 4.1.0 (2019-01-15)
+
+
+### Features
+
+* add sourcemaps section to README documentation ([f497cd5](https://github.com/SUI-Components/sui/commit/f497cd5))
+* add sourcemaps support to improve integration with sentry ([2ee87ff](https://github.com/SUI-Components/sui/commit/2ee87ff))
+* remove unnecessary comment from uglifyjs config ([61aea8c](https://github.com/SUI-Components/sui/commit/61aea8c))
+
+
+
+<a name="5.0.0"></a>
+# 5.0.0 (2019-01-14)
+
+
+### Bug Fixes
+
+* add missing babel-cli ([24b7307](https://github.com/SUI-Components/sui/commit/24b7307))
+
+
+### Features
+
+* use new babel-preset-sui ([97ee9b3](https://github.com/SUI-Components/sui/commit/97ee9b3))
+
+
+### BREAKING CHANGES
+
+* Load new babel-preset-sui, stop using old babel-runtime and use @babel/runtime
+
+
+
 <a name="3.34.0"></a>
 # 3.34.0 (2019-01-07)
 
@@ -9,6 +80,23 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix security issues with compromised dependencies ([46e450f](https://github.com/SUI-Components/sui/commit/46e450f))
+* remove default value not needed ([e3b9cf0](https://github.com/SUI-Components/sui/commit/e3b9cf0))
+
+
+### Features
+
+* add react-hot-loader for dev webpack usage with babel preset sui ([a226993](https://github.com/SUI-Components/sui/commit/a226993))
+* add react-hot-loader/babel for webpack dev ([385d9ca](https://github.com/SUI-Components/sui/commit/385d9ca))
+* back to simple object instead function ([f88e3d2](https://github.com/SUI-Components/sui/commit/f88e3d2))
+* bump to MAJOR version to publish beta ([4d43fff](https://github.com/SUI-Components/sui/commit/4d43fff))
+* new beta ([2aafa25](https://github.com/SUI-Components/sui/commit/2aafa25))
+* upgrade dependencies ([5e5976e](https://github.com/SUI-Components/sui/commit/5e5976e))
+
+
+### BREAKING CHANGES
+
+* Uses new babel-preset-sui major version and need to use latest babel/core version not compatible
+with the old one
 
 
 
@@ -47,14 +135,26 @@ All notable changes to this project will be documented in this file.
 * ignore scss import files in server ([e41163e](https://github.com/SUI-Components/sui/commit/e41163e))
 
 
+### Features
+
+* add server support for dynamic import and keep chunkNames for client ([6698cd1](https://github.com/SUI-Components/sui/commit/6698cd1))
+
+
 
 <a name="3.28.0"></a>
 # 3.28.0 (2018-11-08)
 
 
+### Bug Fixes
+
+* fix resolves to better linking and be sure we use own versions ([d21e581](https://github.com/SUI-Components/sui/commit/d21e581))
+
+
 ### Features
 
 * add option to make no pre loaders run ([d0d240b](https://github.com/SUI-Components/sui/commit/d0d240b))
+* show port when compilation is not broken, only a warning ([5be259d](https://github.com/SUI-Components/sui/commit/5be259d))
+* upgrade dependencies ([823cc94](https://github.com/SUI-Components/sui/commit/823cc94))
 
 
 
@@ -75,6 +175,8 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add resolve.alias to be passed as config param ([9ac79ba](https://github.com/SUI-Components/sui/commit/9ac79ba))
+* update to new options from babel-loader ([6a152d8](https://github.com/SUI-Components/sui/commit/6a152d8))
+* upgrade dependencies from babel7 ([8f85757](https://github.com/SUI-Components/sui/commit/8f85757))
 
 
 
@@ -126,6 +228,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * fix webpack mode when compile a server ([e2bec1c](https://github.com/SUI-Components/sui/commit/e2bec1c))
+
+
+### Features
+
+* use new babel-loader with Babel@7 ([4b42854](https://github.com/SUI-Components/sui/commit/4b42854))
 
 
 
@@ -604,6 +711,16 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 

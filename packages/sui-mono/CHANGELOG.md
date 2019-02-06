@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.40.0"></a>
+# 1.40.0 (2019-01-18)
+
+
+### Features
+
+* check branch master is active when releasing a package ([e65aaaa](https://github.com/SUI-Components/sui/commit/e65aaaa))
+
+
+
 <a name="1.39.0"></a>
 # 1.39.0 (2018-11-29)
 

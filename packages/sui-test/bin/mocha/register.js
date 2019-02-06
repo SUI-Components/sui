@@ -1,4 +1,7 @@
-require('babel-core/register')({
-  presets: ['sui'],
-  plugins: ['dynamic-import-node']
+require('@babel/register')({
+  presets: ['babel-preset-sui'],
+  plugins: [
+    'babel-plugin-dynamic-import-node',
+    '@babel/plugin-transform-modules-commonjs'
+  ]
 })

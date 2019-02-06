@@ -39,6 +39,8 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
   )
   // recover the initialProps if in the server we have retrieved them
   ServerPage.contextTypes = {initialProps: PropTypes.object}
+  // recover the displayName from the original page
+  ServerPage.displayName = Page.displayName
   // detect if the page has getInitialProps and wrap it with the routeInfo
   // if we don't have any getInitialProps, just use a empty function returning an empty object
   ServerPage.getInitialProps = context =>

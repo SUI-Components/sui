@@ -18,9 +18,14 @@ export default ({context, routeInfo}) => Page =>
     componentDidMount() {
       // get the initialProps by executing the provided method on the page
       // when got the results, update the state to re-render the page hiding the placeholder
-      Page.getInitialProps({context, routeInfo}).then(initialProps => {
-        this.setState({initialProps, isLoading: false})
-      })
+      Page.getInitialProps({context, routeInfo})
+        .then(initialProps => {
+          this.setState({initialProps, isLoading: false})
+        })
+        .catch(err => {
+          // pass error as prop
+          this.setState({initialProps: {error: err}, isLoading: false})
+        })
     }
 
     render() {

@@ -2,6 +2,72 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.2.0"></a>
+# 5.2.0 (2019-01-18)
+
+
+
+<a name="5.1.0"></a>
+# 5.1.0 (2019-01-18)
+
+
+### Bug Fixes
+
+* fix babel preset issue by removing static instruction ([d4c3618](https://github.com/SUI-Components/sui/commit/d4c3618))
+* send Content-Type header setup to HTML when respond with SPA option ([4c7f3d5](https://github.com/SUI-Components/sui/commit/4c7f3d5))
+
+
+
+<a name="5.0.0"></a>
+# 5.0.0 (2019-01-18)
+
+
+### Features
+
+* add dummy commit to force release after merge master ([5ba5a73](https://github.com/SUI-Components/sui/commit/5ba5a73))
+
+
+### BREAKING CHANGES
+
+* default hook behaviour has changed
+
+
+
+<a name="3.1.0"></a>
+# 3.1.0 (2019-01-17)
+
+
+### Features
+
+* add Dynamic Rendering by pages ([18aa35a](https://github.com/SUI-Components/sui/commit/18aa35a))
+* add flags for enabling/disbaling early-flush and load-spa-on-not-found ([c0f3272](https://github.com/SUI-Components/sui/commit/c0f3272))
+* be able to return spa on 404 error including appConfig and error message. Centralize ([4e6a91b](https://github.com/SUI-Components/sui/commit/4e6a91b))
+
+
+### BREAKING CHANGES
+
+* default hook behaviuor has been modified
+
+
+
+<a name="3.0.0"></a>
+# 3.0.0 (2019-01-14)
+
+
+### Features
+
+* delay early flush in order to properly handle getInitialProps exception ([3eb5022](https://github.com/SUI-Components/sui/commit/3eb5022))
+* use as peerDependency latest sui-bundler ([bb9e616](https://github.com/SUI-Components/sui/commit/bb9e616))
+* use new sui-bundler beta ([825733c](https://github.com/SUI-Components/sui/commit/825733c))
+
+
+### BREAKING CHANGES
+
+* Use new sui-bundler that uses latest babel@7, so some breaking could happen
+* Using new sui-bundler version with breaking changes
+
+
+
 <a name="2.12.0"></a>
 # 2.12.0 (2019-01-07)
 

@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.0.0"></a>
+# 2.0.0 (2019-01-18)
+
+
+### Features
+
+* catch getInitialProps error and add it to initialProps as property ([fc80084](https://github.com/SUI-Components/sui/commit/fc80084))
+* force release after merge master with minor change ([1f754ec](https://github.com/SUI-Components/sui/commit/1f754ec))
+
+
+### BREAKING CHANGES
+
+* change behaviour of withInitialProps
+
+
+
+<a name="1.8.0"></a>
+# 1.8.0 (2019-01-10)
+
+
+### Features
+
+* add displayName for server component ([3cae6b3](https://github.com/SUI-Components/sui/commit/3cae6b3))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2018-09-19)
 

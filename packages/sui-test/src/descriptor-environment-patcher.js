@@ -10,7 +10,7 @@ const environments = {
 const isNode =
   typeof process === 'object' && process.toString() === '[object process]'
 
-export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironmentPatcher() {
+exports.descriptorsByEnvironmentPatcher = function descriptorsByEnvironmentPatcher() {
   /**
    * This function is the one with the purpose of handle and return the function that should be attached to our runOn{client | server} patch.
    * @param {Object} descriptor Is the object that contains the name of the descriptor base function and in the cases that we have nested function calls the nested name too
