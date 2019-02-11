@@ -14,44 +14,42 @@ const _runner = ({instance, original} = {}) => {
   }
 }
 
-export default () => {
-  return (target, fnName, descriptor) => {
-    const {value: fn, configurable, enumerable} = descriptor
+export default (target, fnName, descriptor) => {
+  const {value: fn, configurable, enumerable} = descriptor
 
-    // https://github.com/jayphelps/core-decorators.js/blob/master/src/autobind.js
-    return Object.assign(
-      {},
-      {
-        configurable,
-        enumerable,
-        get() {
-          if (this === target) {
-            return fn
-          }
-          const _fnRunner = _runner({
-            instance: this,
-            original: fn
-          })
-
-          Object.defineProperty(this, fnName, {
-            configurable: true,
-            writable: true,
-            enumerable: false,
-            value: _fnRunner
-          })
-          return _fnRunner
-        },
-        set(newValue) {
-          Object.defineProperty(this, fnName, {
-            configurable: true,
-            writable: true,
-            enumerable: true,
-            value: newValue
-          })
-
-          return newValue
+  // https://github.com/jayphelps/core-decorators.js/blob/master/src/autobind.js
+  return Object.assign(
+    {},
+    {
+      configurable,
+      enumerable,
+      get() {
+        if (this === target) {
+          return fn
         }
+        const _fnRunner = _runner({
+          instance: this,
+          original: fn
+        })
+
+        Object.defineProperty(this, fnName, {
+          configurable: true,
+          writable: true,
+          enumerable: false,
+          value: _fnRunner
+        })
+        return _fnRunner
+      },
+      set(newValue) {
+        Object.defineProperty(this, fnName, {
+          configurable: true,
+          writable: true,
+          enumerable: true,
+          value: newValue
+        })
+
+        return newValue
       }
-    )
-  }
+    }
+  )
 }

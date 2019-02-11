@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-expressions */
 import {expect} from 'chai'
 
-import {error} from '../../src'
+import {inlineError} from '../../src'
 
 describe.only('Error', () => {
-  it('Should return an array [null, resp] when the promise es resolved', async () => {
+  it('Should return an array [null, resp] when the promise is resolved', async () => {
     class Buzz {
-      @error()
+      @inlineError
       returnASuccessPromise() {
         return Promise.resolve(true)
       }
@@ -15,13 +15,13 @@ describe.only('Error', () => {
     expect(await buzz.returnASuccessPromise()).to.be.eql([null, true])
   })
 
-  it('Should return an array [Error, null] when the promise es rejected', async () => {
+  it('Should return an array [Error, null] when the promise is rejected', async () => {
     class Buzz {
-      @error()
+      @inlineError
       returnAFailedPromise() {
         return Promise.reject(new Error('Error Rejected'))
       }
-      @error()
+      @inlineError
       throwAnException() {
         throw new Error('Error exception')
       }
@@ -42,7 +42,7 @@ describe.only('Error', () => {
   it('Should preserv the context', async () => {
     class Buzz {
       name = 'Carlos'
-      @error()
+      @inlineError
       returnASuccessPromise() {
         return Promise.resolve(this.name)
       }
@@ -54,7 +54,7 @@ describe.only('Error', () => {
   it('Should works with sync method', async () => {
     class Buzz {
       name = 'Carlos'
-      @error()
+      @inlineError
       isASyncMethodSuccess() {
         return this.name
       }
@@ -66,7 +66,7 @@ describe.only('Error', () => {
   it('Should works with sync method thowing an Error', async () => {
     class Buzz {
       name = 'Carlos'
-      @error()
+      @inlineError
       isASyncMethodFailed() {
         throw new Error(this.name)
       }
@@ -76,5 +76,30 @@ describe.only('Error', () => {
     expect(resp).to.be.eql(null)
     expect(err).to.be.an.instanceof(Error)
     expect(err.message).to.be.eql('Carlos')
+  })
+
+  it('Should works with an Error subclass', async () => {
+    class CustomError extends Error {}
+    class Buzz {
+      @inlineError
+      returnAFailedPromise() {
+        return Promise.reject(new CustomError('Error Rejected'))
+      }
+      @inlineError
+      throwAnException() {
+        throw new CustomError('Error exception')
+      }
+    }
+    const buzz = new Buzz()
+
+    const [err, resp] = await buzz.returnAFailedPromise()
+    expect(resp).to.be.eql(null)
+    expect(err).to.be.an.instanceof(CustomError)
+    expect(err.message).to.be.eql('Error Rejected')
+
+    const [errEx, respEx] = await buzz.throwAnException()
+    expect(respEx).to.be.eql(null)
+    expect(errEx).to.be.an.instanceof(CustomError)
+    expect(errEx.message).to.be.eql('Error exception')
   })
 })
