@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2019-02-11)
+
+
+### Features
+
+* added auth system to our express build. ([52cfb66](https://github.com/SUI-Components/sui/commit/52cfb66))
+* create new decorator Error ([3923344](https://github.com/SUI-Components/sui/commit/3923344))
+* rename decorator de \[@inline](https://github.com/inline)Error ([867cfef](https://github.com/SUI-Components/sui/commit/867cfef))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-06-05)
 
