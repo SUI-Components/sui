@@ -9,7 +9,8 @@ const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
 export default function ssrComponentWithInitialProps({
   Target,
   context,
-  renderProps
+  renderProps,
+  useStream = false
 }) {
   const startGetInitialProps = process.hrtime()
   // get the page with the initialProps
@@ -19,21 +20,34 @@ export default function ssrComponentWithInitialProps({
   const getInitialProps = pageComponent.getInitialProps || EMPTY_FUNC
   return getInitialProps(context).then(initialProps => {
     const diffGetInitialProps = process.hrtime(startGetInitialProps)
-
-    const startRenderToString = process.hrtime()
     // create the App component with the context, the initialProps and the Target Component
     const App = withContext({...context, initialProps})(Target)
-    // render our whole application with the needed props and get the html string
-    const reactString = ReactDOMServer.renderToString(
-      <App {...renderProps} initialProps={initialProps} />
-    )
-    const diffRenderToString = process.hrtime(startRenderToString)
-    return {
-      initialProps,
-      reactString,
-      performance: {
-        getInitialProps: hrTimeToMs(diffGetInitialProps),
-        renderToString: hrTimeToMs(diffRenderToString)
+    if (useStream) {
+      const reactStream = ReactDOMServer.renderToNodeStream(
+        <App {...renderProps} initialProps={initialProps} />
+      )
+      return {
+        initialProps,
+        reactStream,
+        performance: {
+          getInitialProps: hrTimeToMs(diffGetInitialProps)
+        }
+      }
+    } else {
+      // start to calculate renderToString
+      const startRenderToString = process.hrtime()
+      // render our whole application with the needed props and get the html string
+      const reactString = ReactDOMServer.renderToString(
+        <App {...renderProps} initialProps={initialProps} />
+      )
+      const diffRenderToString = process.hrtime(startRenderToString)
+      return {
+        initialProps,
+        reactString,
+        performance: {
+          getInitialProps: hrTimeToMs(diffGetInitialProps),
+          renderToString: hrTimeToMs(diffRenderToString)
+        }
       }
     }
   })
