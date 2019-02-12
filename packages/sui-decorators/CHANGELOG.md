@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.0.0"></a>
+# 2.0.0 (2019-02-12)
+
+
+### Features
+
+* add new Error decorator ([1b43581](https://github.com/SUI-Components/sui/commit/1b43581))
+* add new Error decorator and change babel preset ([8ffb30e](https://github.com/SUI-Components/sui/commit/8ffb30e))
+
+
+### BREAKING CHANGES
+
+* Using new Babel Preset so new sui-bundler is needed
+* Using new babel preset so only can be used with latest sui-bundler
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2019-02-12)
 
