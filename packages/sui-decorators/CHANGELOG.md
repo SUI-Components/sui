@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.10.0"></a>
+# 1.10.0 (2019-02-12)
+
+
+### Bug Fixes
+
+* force releaese without new babel version ([77b00ce](https://github.com/SUI-Components/sui/commit/77b00ce))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2019-02-11)
 
