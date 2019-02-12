@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2019-02-12)
+
+
+### Features
+
+* support React Stream ([a84968b](https://github.com/SUI-Components/sui/commit/a84968b))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2019-01-18)
 
