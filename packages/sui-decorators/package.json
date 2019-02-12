@@ -11,13 +11,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "7",
-    "babel-preset-sui": "2",
+    "babel-cli": "6.24.1",
+    "babel-preset-sui": "1",
     "sinon": "1.17.7"
   },
   "dependencies": {
-    "@s-ui/js": "1",
     "guild": "1.2.2",
-    "lru-cache": "4.0.2"
+    "lru-cache": "4.0.2",
+    "@s-ui/js": "1"
   }
 }
