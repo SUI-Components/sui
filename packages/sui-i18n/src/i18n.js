@@ -79,9 +79,9 @@ export default class Rosetta {
    */
   f(type, value, options = {}) {
     if (typeof type !== 'string')
-      throw new Error('i18n.f should receive a string as a first argument.')
+      throw new Error('i18n.f should receive a string as a first argument')
     if (typeof value === 'undefined')
-      throw new Error('i18n.f should receive any value as a second argument.')
+      throw new Error('i18n.f should receive any value as a second argument')
 
     switch (type) {
       case 'phone': {
@@ -93,7 +93,7 @@ export default class Rosetta {
       }
     }
 
-    return value
+    throw new Error(`Invalid type '${type}' passed to i18n.f`)
   }
 
   url(urlPattern) {
