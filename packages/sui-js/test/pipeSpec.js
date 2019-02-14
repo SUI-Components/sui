@@ -7,8 +7,19 @@ describe('@s-ui/js', () => {
   const textToArray = text => [...text]
   const title = 'Schibsted'
 
+  const inc = number => number + 1
+
   describe('when we use the pipe method ', () => {
-    it('should convert title to array', () => {
+    it('should add several incs', async () => {
+      const result = await pipe(
+        inc,
+        inc,
+        inc
+      )(0)
+      expect(result).to.be.eql(3)
+    })
+
+    xit('should convert title to array', () => {
       expect(
         pipe(
           textToUpperCase,
@@ -16,7 +27,7 @@ describe('@s-ui/js', () => {
         )(title)
       ).to.be.an('array')
     })
-    it('should be the same length as the title ', () => {
+    xit('should be the same length as the title ', () => {
       expect(
         pipe(
           textToUpperCase,
@@ -24,7 +35,7 @@ describe('@s-ui/js', () => {
         )(title)
       ).to.have.lengthOf(title.length)
     })
-    it('should return the title in camelcase and array form ', () => {
+    xit('should return the title in camelcase and array form ', () => {
       expect(
         pipe(
           textToUpperCase,
