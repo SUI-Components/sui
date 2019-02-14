@@ -103,7 +103,7 @@
       })
 
     return promiseInSerie([loadStyle].concat(loadScripts)).then(function() {
-      console.log('All widgets for ' + page + ' loads') // eslint-disable-line
+      console.log('All ' + page + ' widgets loaded') // eslint-disable-line
     })
   }
 
