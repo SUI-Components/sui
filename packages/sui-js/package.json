@@ -27,8 +27,8 @@
     "url": "https://github.com/SUI-Components/sui/issues"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7",
+    "babel-preset-sui": "2"
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
 }
