@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.5.0"></a>
+# 2.5.0 (2019-02-14)
+
+
+### Features
+
+* add [@babel](https://github.com/babel)/plugin-proposal-export-default-from plugin ([e7dcc90](https://github.com/SUI-Components/sui/commit/e7dcc90))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2019-02-01)
 
