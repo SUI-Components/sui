@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.21.0"></a>
+# 1.21.0 (2019-02-14)
+
+
+### Features
+
+* add async pipe fn ([6e811b3](https://github.com/SUI-Components/sui/commit/6e811b3)), closes [#488](https://github.com/SUI-Components/sui/issues/488)
+* add async pipe fn ([4f0a3f3](https://github.com/SUI-Components/sui/commit/4f0a3f3))
+
+
+
 <a name="1.20.0"></a>
 # 1.20.0 (2019-01-15)
 
@@ -90,7 +101,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.12.0"></a>
-# [1.12.0](https://github.com/SUI-Components/sui/compare/v2.17.1...1.12.0) (2018-10-03)
+# 1.12.0 (2018-10-03)
 
 
 ### Features
