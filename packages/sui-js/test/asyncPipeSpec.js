@@ -3,7 +3,7 @@ import {expect} from 'chai'
 import {asyncPipe} from '../src/pipe/index'
 
 describe('@s-ui/js', () => {
-  const textToUpperCase = text => text.toUpperCase()
+  const textToUpperCase = async text => text.toUpperCase()
   const textToArray = text => [...text]
   const title = 'Schibsted'
 
