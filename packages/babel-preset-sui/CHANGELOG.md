@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2019-02-14)
+
+
+### Bug Fixes
+
+* add missing files and rename /lib to /src folder ([f91d830](https://github.com/SUI-Components/sui/commit/f91d830))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2019-02-14)
 
