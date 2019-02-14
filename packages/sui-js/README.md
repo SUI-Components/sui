@@ -18,6 +18,21 @@ const title = 'Schibsted'
 console.log(pipe(textToUpperCase, textToArray)(title)) // ["S", "C", "H", "I", "B", "S", "T", "E", "D"]
 ```
 
+## asyncPipe
+Consist of a chain of processing async and sync functions, where the output of each element is the input of next. The result is a promise.
+
+```js
+import {asyncPipe} from @s-ui/js/lib/pipe
+
+const textToUpperCase = async text => text.toUpperCase()
+const textToArray = async text => [...text]
+const title = 'Schibsted'
+
+asyncPipe(textToUpperCase, textToArray)(title).then(result => {
+  console.log(result) // ["S", "C", "H", "I", "B", "S", "T", "E", "D"]
+})
+```
+
 ## cookie
 Parse, get and set cookies. Returns an object `cookie` with `parse`, `get` and `set` methods.
 
