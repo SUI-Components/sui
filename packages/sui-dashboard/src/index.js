@@ -59,7 +59,7 @@ module.exports.stats = async ({repositories, root, dry}) => {
       ...partialStats.suiStats,
       percentage:
         Math.ceil(
-          (partialStats.suiStats.totalSUIComponents * 100) /
+          (partialStats.suiStats.totalReusedSUIComponents * 100) /
             partialStats.suiStats.maxPossible
         ) + '%'
     }
