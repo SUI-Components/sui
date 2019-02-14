@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.4.0"></a>
+# 2.4.0 (2019-02-14)
+
+
+### Bug Fixes
+
+* update load message ([119495b](https://github.com/SUI-Components/sui/commit/119495b))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2019-01-22)
 
@@ -118,7 +128,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.18.0"></a>
-# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
+# 1.18.0 (2018-10-31)
 
 
 
