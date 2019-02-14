@@ -132,6 +132,18 @@ describe('I18N', () => {
       it('translates "literalOne" properly', () => {
         expect(i18n.t('literalOne')).to.eql('TranslateOneEsES')
       })
+
+      describe('properly formats minor types like', () => {
+        describe('phone', () => {
+          it('from agglomerated digits', () => {
+            expect(i18n.f('phone', '123123123')).to.eql('123 123 123')
+          })
+
+          it('from wrong spaced groups', () => {
+            expect(i18n.f('phone', '1 23 12312 3')).to.eql('123 123 123')
+          })
+        })
+      })
     })
   })
 })
