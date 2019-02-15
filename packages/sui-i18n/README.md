@@ -49,6 +49,7 @@ i18n.culture = 'es-ES';
 i18n.t('HELLO_WORLD') //=> ¡Hola mundo!
 i18n.n(1000) //=> 1.000
 i18n.n(1000000) //=> 1.000.000
+i18n.f('phone', '123123123') //=> '123 123 123'
 ```
 
 From now on, the library will use Polyglot to translate your literals anywhere in your app.
@@ -135,6 +136,17 @@ i18n.culture = 'en-GB';
 i18n.currency = 'GBP';
 i18n.c(1000) //=> £1,000
 i18n.c(1000000) //=> £1,000,000
+```
+
+### Formatting minor types
+
+`i18n.f` provides some formatting functionality for less frequent but still useful needs.
+
+```js
+// phone
+i18n.f('phone', '123123123') //=> '123 123 123'
+i18n.f('phone', '1 23 12312 3') //=> '123 123 123'
+i18n.f('phone', '123123123', {separator: '-'}) //=> '123-123-123'
 ```
 
 ### Use with ReactJS
