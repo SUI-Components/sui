@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2019-02-15)
+
+
+### Features
+
+* add extra validation to f method ([7286418](https://github.com/SUI-Components/sui/commit/7286418))
+* add format method for minor types, add tests ([894a5e2](https://github.com/SUI-Components/sui/commit/894a5e2))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2018-09-05)
 
