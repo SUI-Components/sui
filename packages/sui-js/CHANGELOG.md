@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.22.0"></a>
+# 1.22.0 (2019-02-15)
+
+
+### Features
+
+* update deps ([a773db5](https://github.com/SUI-Components/sui/commit/a773db5))
+
+
+
 <a name="1.21.0"></a>
 # 1.21.0 (2019-02-14)
 
