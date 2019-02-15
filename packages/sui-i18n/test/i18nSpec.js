@@ -142,6 +142,12 @@ describe('I18N', () => {
           it('from wrong spaced groups', () => {
             expect(i18n.f('phone', '1 23 12312 3')).to.eql('123 123 123')
           })
+
+          it('with custom separator', () => {
+            expect(i18n.f('phone', '123123123', {separator: '-'})).to.eql(
+              '123-123-123'
+            )
+          })
         })
       })
     })
