@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# 2.8.0 (2019-02-15)
+
+
+### Bug Fixes
+
+* add content to empty file ([4dc9228](https://github.com/SUI-Components/sui/commit/4dc9228))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2019-02-14)
 
