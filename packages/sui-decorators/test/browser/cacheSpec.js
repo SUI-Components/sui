@@ -17,7 +17,7 @@ describe('Cache', () => {
         }
 
         @cache()
-        syncRndNumber(num) {
+        syncRndNumber() {
           return this.rnd()
         }
       }
@@ -34,14 +34,14 @@ describe('Cache', () => {
     it('return same value for long TTL and different for short TTL', () => {
       class Foo {
         @cache()
-        syncRndNumber(num) {
+        syncRndNumber() {
           return Math.random()
         }
       }
 
       class Bar {
         @cache({ttl: 700})
-        syncRndNumber(num) {
+        syncRndNumber() {
           return Math.random()
         }
       }
