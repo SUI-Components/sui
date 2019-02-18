@@ -4,7 +4,7 @@ import pipe from '../src/pipe/index'
 
 describe('@s-ui/js', () => {
   const textToUpperCase = text => text.toUpperCase()
-  const textToArray = text => [...text]
+  const textToArray = text => text.split('')
   const title = 'Schibsted'
 
   describe('when we use the pipe method ', () => {
