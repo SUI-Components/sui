@@ -3,7 +3,9 @@ language: node_js
 node_js:
   - '10'
 install:
-  - npm run phoenix -- --no-progress
+  - npm run phoenix -- --no-progress || true
+after_install:
+  - cat /home/travis/.npm/_logs/*-debug.log
 script:
   - npm run lint
   - npm run test:ci
