@@ -32,12 +32,10 @@ module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
 
   configure.files = [
     `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
-    `${CWD}/${srcPattern}`,
     `${CWD}/${pattern}`
   ]
   configure.preprocessors = {
-    [pattern]: ['browserify'],
-    'src/**/*.js': ['browserify']
+    [pattern]: ['webpack']
   }
 
   let server = createServer(configure)
