@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.8.0"></a>
+# 1.8.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* Use local babel-preset-sui for each project ([ded5b13](https://github.com/SUI-Components/sui/commit/ded5b13))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2017-12-03)
 
@@ -58,7 +68,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* 🌈 Migrate package ([a02f295](https://github.com/SUI-Components/sui/commit/a02f295))
+* 🌈 Migrate package ([a02f295](https://github.com/SUI-Components/sui/commit/a02f295)), closes [#60](https://github.com/SUI-Components/sui/issues/60)
 
 
 

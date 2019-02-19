@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.9.0"></a>
+# 1.9.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* Use local babel-preset-sui for each project ([f1c24f9](https://github.com/SUI-Components/sui/commit/f1c24f9))
+
+
+
+<a name="1.8.0"></a>
+# 1.8.0 (2019-02-15)
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2019-02-15)
 

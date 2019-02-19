@@ -7,6 +7,7 @@ function plugins(api, opts = {}) {
   return cleanList([
     require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-proposal-export-default-from').default,
+    require('@babel/plugin-syntax-export-namespace-from').default,
     [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
     [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
     [

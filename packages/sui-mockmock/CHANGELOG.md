@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.3.0"></a>
+# 1.3.0 (2019-02-19)
+
+
+### Features
+
+* update dependencies ([c7fc439](https://github.com/SUI-Components/sui/commit/c7fc439))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2018-03-22)
 

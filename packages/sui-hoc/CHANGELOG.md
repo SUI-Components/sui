@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* Use local babel-preset-sui for each project ([9600ba9](https://github.com/SUI-Components/sui/commit/9600ba9))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2019-01-31)
 
@@ -98,16 +108,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add Readme ([bff8988](https://github.com/SUI-Components/sui/commit/bff8988))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* 🌈 First Commit ([b09a168](https://github.com/SUI-Components/sui/commit/b09a168)), closes [#71](https://github.com/SUI-Components/sui/issues/71)
 
 
 
