@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.13.0"></a>
+# 2.13.0 (2019-02-19)
+
+
+### Features
+
+* change proposal for syntax ([942cae3](https://github.com/SUI-Components/sui/commit/942cae3))
+
+
+
 <a name="2.11.0"></a>
 # 2.11.0 (2019-02-19)
 
