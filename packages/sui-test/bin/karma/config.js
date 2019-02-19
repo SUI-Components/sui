@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
 
@@ -17,6 +19,7 @@ const config = {
     node: {
       fs: 'empty'
     },
+    plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
     module: {
       rules: [
         {
