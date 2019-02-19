@@ -105,3 +105,14 @@ const {isMobile, osName} = stats(userAgent)
 domain.config('isMobile', isMobile) // bool
 domain.config('osName', osName) // string
 ```
+
+## classes
+Utilities to easily format classNames following the current convention for component-{children}-element--modifier
+
+```js
+import {suitClass} from '@s-ui/js/lib/classes'
+const baseComponent = suitClass('baseComponent')
+const childrenComponent = baseComponent({children: 'childrenComponent'})
+
+const className = childrenComponent({element: 'element', modifier: 'modifier'}) // outputs: baseComponent-childrenComponent-element--modifier
+```
