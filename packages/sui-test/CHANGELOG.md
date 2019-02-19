@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* add NODE_ENV to be injected ([05fd3ca](https://github.com/SUI-Components/sui/commit/05fd3ca))
+* transform dynamic import as karma-webpack doesnt support it for now ([8223bae](https://github.com/SUI-Components/sui/commit/8223bae))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2019-02-19)
 
