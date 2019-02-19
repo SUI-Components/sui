@@ -4,7 +4,7 @@
   "description": "Utilities to measure and monitor perf of your isomorphic apps.",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf lib && babel ./src -d lib --presets sui",
+    "lib": "npx rimraf lib && babel ./src -d lib",
     "examples": "node examples",
     "prepublish": "npm run lib"
   },
