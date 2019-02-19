@@ -35,7 +35,8 @@ const config = {
                       isDevelopment: true
                     }
                   ]
-                ]
+                ],
+                plugins: [require.resolve('babel-plugin-dynamic-import-node')]
               }
             }
           ]
