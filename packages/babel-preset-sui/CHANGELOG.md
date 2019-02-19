@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.11.0"></a>
+# 2.11.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* add [@babel](https://github.com/babel)/plugin-syntax-export-namespace-from ([3f2a733](https://github.com/SUI-Components/sui/commit/3f2a733))
+
+
+
 <a name="2.8.0"></a>
 # 2.8.0 (2019-02-15)
 
