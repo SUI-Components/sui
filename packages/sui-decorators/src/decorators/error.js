@@ -1,5 +1,4 @@
-const isPromise = obj =>
-  typeof obj !== 'undefined' && typeof obj.then === 'function'
+import isPromise from '../helpers/isPromise'
 
 const _runner = ({instance, original} = {}) => {
   return (...args) => {
