@@ -14,6 +14,9 @@ const config = {
 
   webpack: {
     mode: 'development',
+    node: {
+      fs: 'empty'
+    },
     module: {
       rules: [
         {
