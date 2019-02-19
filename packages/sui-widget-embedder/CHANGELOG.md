@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.5.0"></a>
+# 2.5.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* force babelrc for widget-embedder ([e3e3cc9](https://github.com/SUI-Components/sui/commit/e3e3cc9))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2019-02-14)
 
@@ -128,7 +138,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.18.0"></a>
-# 1.18.0 (2018-10-31)
+# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
 
 
 
