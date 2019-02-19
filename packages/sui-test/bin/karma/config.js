@@ -6,29 +6,39 @@ const config = {
 
   basePath: '',
 
-  frameworks: ['browserify', 'mocha'],
+  frameworks: ['mocha'],
 
   reporters: ['spec'],
 
   browsers: ['Chrome'],
 
-  // browserify configuration
-  browserify: {
-    debug: true,
-    transform: [
-      [
-        'babelify',
+  webpack: {
+    mode: 'development',
+    module: {
+      rules: [
         {
-          presets: ['babel-preset-sui'],
-          plugins: [
-            'babel-plugin-dynamic-import-node',
-            '@babel/plugin-transform-modules-commonjs',
-            TARGET === 'test:ci' && 'babel-plugin-istanbul'
-          ].filter(Boolean)
+          test: /\.jsx?$/,
+          use: [
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                babelrc: false,
+                cacheDirectory: true,
+                highlightCode: true,
+                presets: [
+                  [
+                    require.resolve('babel-preset-sui'),
+                    {
+                      isDevelopment: true
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
         }
-      ],
-      'envify'
-    ]
+      ]
+    }
   },
 
   client: {
