@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.13.0"></a>
+# 1.13.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* rollback babel dependencies for sui-domain ([5ad5604](https://github.com/SUI-Components/sui/commit/5ad5604))
+* Use local babel-preset-sui for each project ([4e2bd76](https://github.com/SUI-Components/sui/commit/4e2bd76))
+
+
+
 <a name="1.12.0"></a>
 # 1.12.0 (2018-07-16)
 
