@@ -1,5 +1,6 @@
 import express from 'express'
 import ssr from './ssr'
+import criticalCss from './criticalCss'
 import dynamicRendering from './dynamicRendering'
 import {hooksFactory} from './hooksFactory'
 import TYPES from '../hooks-types'
@@ -89,7 +90,7 @@ const AUTH_DEFINITION = {
             )
     })
 
-  app.get('*', dynamicRendering(ssr, ssrConf.dynamicsURLS))
+  app.get('*', [criticalCss, dynamicRendering(ssr, ssrConf.dynamicsURLS)])
 
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
