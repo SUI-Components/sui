@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.13.0"></a>
+# 2.13.0 (2019-02-19)
+
+
+### Features
+
+* change proposal for syntax ([942cae3](https://github.com/SUI-Components/sui/commit/942cae3))
+
+
+
+<a name="2.11.0"></a>
+# 2.11.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* add [@babel](https://github.com/babel)/plugin-syntax-export-namespace-from ([3f2a733](https://github.com/SUI-Components/sui/commit/3f2a733))
+
+
+
+<a name="2.8.0"></a>
+# 2.8.0 (2019-02-15)
+
+
+### Bug Fixes
+
+* add content to empty file ([4dc9228](https://github.com/SUI-Components/sui/commit/4dc9228))
+
+
+
+<a name="2.6.0"></a>
+# 2.6.0 (2019-02-14)
+
+
+### Bug Fixes
+
+* add missing files and rename /lib to /src folder ([f91d830](https://github.com/SUI-Components/sui/commit/f91d830))
+
+
+
+<a name="2.5.0"></a>
+# 2.5.0 (2019-02-14)
+
+
+### Features
+
+* add [@babel](https://github.com/babel)/plugin-proposal-export-default-from plugin ([e7dcc90](https://github.com/SUI-Components/sui/commit/e7dcc90))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2019-02-01)
 

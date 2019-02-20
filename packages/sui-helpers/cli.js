@@ -93,7 +93,16 @@ function getSpawnPromise(bin, args, options = {}) {
       log(getCommandCallMessage(bin, args, options))
     }
     getSpawnProcess(bin, args, options).on('exit', code => {
-      code === CODE_OK ? resolve(code) : reject(code)
+      code === CODE_OK
+        ? resolve(code)
+        : reject(
+            new Error(
+              args
+                .toString()
+                .split(',')
+                .join(' ')
+            )
+          )
     })
   })
 }

@@ -69,6 +69,33 @@ export default class Rosetta {
     })
   }
 
+  /**
+   * Format minor types.
+   *
+   * @param {String} type The kind of value to be formatted:
+   *                        - phone
+   * @param {} value The value to be formatted
+   * @param {Object} options Specific options for the specified type
+   */
+  f(type, value, options = {}) {
+    if (typeof type !== 'string')
+      throw new Error('i18n.f should receive a string as a first argument')
+    if (typeof value === 'undefined')
+      throw new Error('i18n.f should receive any value as a second argument')
+
+    switch (type) {
+      case 'phone': {
+        const {separator = ' '} = options
+        return value
+          .replace(/ /g, '') // reset all spaces
+          .match(/.{1,3}/g) // group by chunks of 3
+          .join(separator)
+      }
+    }
+
+    throw new Error(`Invalid type '${type}' passed to i18n.f`)
+  }
+
   url(urlPattern) {
     return urlPattern
       .split('/')

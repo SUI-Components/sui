@@ -18,6 +18,21 @@ const title = 'Schibsted'
 console.log(pipe(textToUpperCase, textToArray)(title)) // ["S", "C", "H", "I", "B", "S", "T", "E", "D"]
 ```
 
+## asyncPipe
+Consist of a chain of processing async and sync functions, where the output of each element is the input of next. The result is a promise.
+
+```js
+import {asyncPipe} from @s-ui/js/lib/pipe
+
+const textToUpperCase = async text => text.toUpperCase()
+const textToArray = async text => [...text]
+const title = 'Schibsted'
+
+asyncPipe(textToUpperCase, textToArray)(title).then(result => {
+  console.log(result) // ["S", "C", "H", "I", "B", "S", "T", "E", "D"]
+})
+```
+
 ## cookie
 Parse, get and set cookies. Returns an object `cookie` with `parse`, `get` and `set` methods.
 
@@ -89,4 +104,15 @@ import {stats} from '@s-ui/js/lib/ua-parser'
 const {isMobile, osName} = stats(userAgent)
 domain.config('isMobile', isMobile) // bool
 domain.config('osName', osName) // string
+```
+
+## classes
+Utilities to easily format classNames following the current convention for component-{children}-element--modifier
+
+```js
+import {suitClass} from '@s-ui/js/lib/classes'
+const baseComponent = suitClass('baseComponent')
+const childrenComponent = baseComponent({children: 'childrenComponent'})
+
+const className = childrenComponent({element: 'element', modifier: 'modifier'}) // outputs: baseComponent-childrenComponent-element--modifier
 ```

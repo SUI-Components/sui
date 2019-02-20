@@ -2,6 +2,80 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-02-20)
+
+
+### Bug Fixes
+
+* use sinon 2 for test so is compatible with new sui-test ([4478c77](https://github.com/SUI-Components/sui/commit/4478c77))
+
+
+
+<a name="7.0.0"></a>
+# 7.0.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* fix release version ([f443343](https://github.com/SUI-Components/sui/commit/f443343))
+
+
+### Features
+
+* remove LFU cache ([0c9a97c](https://github.com/SUI-Components/sui/commit/0c9a97c))
+
+
+### Performance Improvements
+
+* use tiny-lru with 0 deps instead lru-cache ([5c564dc](https://github.com/SUI-Components/sui/commit/5c564dc))
+
+
+### BREAKING CHANGES
+
+* LFU cache will stop working after this, so update to use LRU cache only
+
+
+
+<a name="2.0.0"></a>
+# 2.0.0 (2019-02-12)
+
+
+### Features
+
+* add new Error decorator ([1b43581](https://github.com/SUI-Components/sui/commit/1b43581))
+* add new Error decorator and change babel preset ([8ffb30e](https://github.com/SUI-Components/sui/commit/8ffb30e))
+
+
+### BREAKING CHANGES
+
+* Using new Babel Preset so new sui-bundler is needed
+* Using new babel preset so only can be used with latest sui-bundler
+
+
+
+<a name="1.10.0"></a>
+# 1.10.0 (2019-02-12)
+
+
+### Bug Fixes
+
+* force releaese without new babel version ([77b00ce](https://github.com/SUI-Components/sui/commit/77b00ce))
+
+
+
+<a name="1.9.0"></a>
+# 1.9.0 (2019-02-11)
+
+
+### Features
+
+* added auth system to our express build. ([52cfb66](https://github.com/SUI-Components/sui/commit/52cfb66))
+* create new decorator Error ([3923344](https://github.com/SUI-Components/sui/commit/3923344))
+* rename decorator de \[@inline](https://github.com/inline)Error ([867cfef](https://github.com/SUI-Components/sui/commit/867cfef))
+
+
+
 <a name="1.8.0"></a>
 # 1.8.0 (2018-06-05)
 

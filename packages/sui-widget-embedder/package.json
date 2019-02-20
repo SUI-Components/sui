@@ -1,13 +1,13 @@
 {
   "name": "@s-ui/widget-embedder",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "description": "",
   "bin": {
     "sui-widget-embedder": "./bin/sui-widget-embedder.js"
   },
   "main": "index.js",
   "scripts": {
-    "prepublish": "babel --presets sui ./src-react --out-dir ./react"
+    "prepublish": "babel ./src-react --out-dir ./react"
   },
   "keywords": [],
   "author": "",

@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.23.0"></a>
+# 1.23.0 (2019-02-20)
+
+
+### Features
+
+* added readme ([4ea7f12](https://github.com/SUI-Components/sui/commit/4ea7f12))
+* added utils to suit class names ([541ce2d](https://github.com/SUI-Components/sui/commit/541ce2d))
+
+
+
+<a name="1.22.0"></a>
+# 1.22.0 (2019-02-15)
+
+
+### Features
+
+* update deps ([a773db5](https://github.com/SUI-Components/sui/commit/a773db5))
+
+
+
+<a name="1.21.0"></a>
+# 1.21.0 (2019-02-14)
+
+
+### Features
+
+* add async pipe fn ([6e811b3](https://github.com/SUI-Components/sui/commit/6e811b3)), closes [#488](https://github.com/SUI-Components/sui/issues/488)
+* add async pipe fn ([4f0a3f3](https://github.com/SUI-Components/sui/commit/4f0a3f3))
+
+
+
 <a name="1.20.0"></a>
 # 1.20.0 (2019-01-15)
 

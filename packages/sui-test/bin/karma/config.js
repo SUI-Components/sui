@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
 
@@ -6,29 +8,47 @@ const config = {
 
   basePath: '',
 
-  frameworks: ['browserify', 'mocha'],
+  frameworks: ['mocha'],
 
   reporters: ['spec'],
 
   browsers: ['Chrome'],
 
-  // browserify configuration
-  browserify: {
-    debug: true,
-    transform: [
-      [
-        'babelify',
+  webpack: {
+    mode: 'development',
+    node: {
+      fs: 'empty'
+    },
+    plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
+    module: {
+      rules: [
         {
-          presets: ['babel-preset-sui'],
-          plugins: [
-            'babel-plugin-dynamic-import-node',
-            '@babel/plugin-transform-modules-commonjs',
-            TARGET === 'test:ci' && 'babel-plugin-istanbul'
-          ].filter(Boolean)
+          test: /\.jsx?$/,
+          use: [
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                babelrc: false,
+                cacheDirectory: true,
+                highlightCode: true,
+                presets: [
+                  [
+                    require.resolve('babel-preset-sui'),
+                    {
+                      isDevelopment: true
+                    }
+                  ]
+                ],
+                plugins: [
+                  require.resolve('babel-plugin-dynamic-import-node'),
+                  require.resolve('@babel/plugin-proposal-export-default-from')
+                ]
+              }
+            }
+          ]
         }
-      ],
-      'envify'
-    ]
+      ]
+    }
   },
 
   client: {

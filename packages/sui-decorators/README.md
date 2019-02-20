@@ -9,12 +9,46 @@ npm install @schibstedspain/decorators --save
 
 ## Reference
 
+### Error
+
+Wrapper any function and handle the errors for you:
+
+If the function return a promise:
+
+- When is resolved return [null, resp]
+- When is rejected return [err, null]
+- When throw an exception return [err, null]
+
+If the function is a sync function:
+
+- When is execute return [null, resp]
+- When throw an exception return [err, null]
+
+
+```javascript
+import {inlineError} from '@s-ui/decorators';
+
+class Buzz {
+  @inlineError
+  method() {
+    return Promise.reject(new Error('KO'))
+  }
+
+}
+
+const buzz = new Buzz()
+const [err, resp] = buzz.method()
+
+console.log(typeof err) // ==> Error
+```
+
+
 ### @streamify
 
 Creates a stream of calls to any method of a class. *Dependency of RxJS*
 
 ```javascript
-import {streamify} from 'cv-decorators';
+import {streamify} from '@s-ui/decorators';
 
 @streamify('greeting', 'greetingAsync')
 class Person {

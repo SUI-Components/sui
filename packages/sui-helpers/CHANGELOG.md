@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.16.0"></a>
+# 1.16.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* improve Error msg ([9a60223](https://github.com/SUI-Components/sui/commit/9a60223))
+
+
+### Features
+
+* send args to error msg ([42271cc](https://github.com/SUI-Components/sui/commit/42271cc))
+
+
+
 <a name="1.15.0"></a>
 # 1.15.0 (2018-07-10)
 

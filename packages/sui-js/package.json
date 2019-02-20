@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "1.20.0",
+  "version": "1.23.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
@@ -27,8 +27,8 @@
     "url": "https://github.com/SUI-Components/sui/issues"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7",
+    "babel-preset-sui": "2"
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
 }

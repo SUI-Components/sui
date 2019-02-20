@@ -1,11 +1,11 @@
 {
   "name": "@s-ui/i18n",
-  "version": "1.5.0",
+  "version": "1.9.0",
   "description": "> Isomorphic i18n service for browser and node.",
   "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib"
+    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib"
   },
   "keywords": [],
   "author": "Enablers Frontend",
