@@ -30,7 +30,7 @@
     "@s-ui/helpers": "1",
     "@s-ui/js": "1",
     "@s-ui/mono": "1",
-    "@s-ui/react-context": "beta",
+    "@s-ui/react-context": "1",
     "@s-ui/react-domain-connector": "1",
     "@schibstedspain/ddd-react-redux": "2",
     "bundle-loader": "0.5.4",
