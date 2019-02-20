@@ -54,8 +54,6 @@ exports.cleanStack = (str, cwd = process.cwd()) => {
     if (line) {
       let read
       try {
-        // eslint-disable-next-line
-        debugger
         read = fs.readFileSync(path.resolve(cwd, filename), 'utf8')
       } catch (e) {}
       if (read) {
