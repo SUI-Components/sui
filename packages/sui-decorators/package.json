@@ -13,7 +13,7 @@
   "devDependencies": {
     "@babel/cli": "7",
     "babel-preset-sui": "2",
-    "sinon": "1.17.7"
+    "sinon": "2"
   },
   "dependencies": {
     "@s-ui/js": "1",
