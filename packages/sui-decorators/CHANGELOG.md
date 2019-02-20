@@ -2,8 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="7.0.0"></a>
-# 7.0.0 (2019-02-19)
+<a name="3.0.0"></a>
+# 3.0.0 (2019-02-19)
 
 
 ### Bug Fixes
