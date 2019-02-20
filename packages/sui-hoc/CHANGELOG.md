@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.12.0"></a>
+# 1.12.0 (2019-02-20)
+
+
+### Bug Fixes
+
+* use same version of the package as other libraries to avoid having twice the same ([ea69031](https://github.com/SUI-Components/sui/commit/ea69031))
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2019-02-19)
 
