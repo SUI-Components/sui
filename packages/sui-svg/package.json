@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@compositor/kit": "1.0.47",
-    "@s-ui/bundler": "3",
+    "@s-ui/bundler": "4",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
     "@s-ui/js": "1",
     "@svgr/core": "3.1.0",
-    "babel-core": "6.26.3",
+    "@babel/core": "7.3.3",
     "commander": "2.19.0",
     "fast-glob": "2.2.4",
     "styled-components": "4.1.1"
