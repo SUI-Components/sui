@@ -2,8 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="3.0.0"></a>
-# 3.0.0 (2019-02-19)
+<a name="3.1.0"></a>
+# 3.1.0 (2019-02-20)
+
+
+### Bug Fixes
+
+* use sinon 2 for test so is compatible with new sui-test ([4478c77](https://github.com/SUI-Components/sui/commit/4478c77))
+
+
+
+<a name="7.0.0"></a>
+# 7.0.0 (2019-02-19)
 
 
 ### Bug Fixes
