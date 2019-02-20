@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2019-02-20)
+
+
+### Bug Fixes
+
+* remove not needed caret ([99515eb](https://github.com/SUI-Components/sui/commit/99515eb))
+* transform export default from for sui-test and karma-webpack ([99b11f2](https://github.com/SUI-Components/sui/commit/99b11f2))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2019-02-19)
 
