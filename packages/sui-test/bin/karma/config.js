@@ -39,7 +39,10 @@ const config = {
                     }
                   ]
                 ],
-                plugins: [require.resolve('babel-plugin-dynamic-import-node')]
+                plugins: [
+                  require.resolve('babel-plugin-dynamic-import-node'),
+                  require.resolve('@babel/plugin-proposal-export-default-from')
+                ]
               }
             }
           ]
