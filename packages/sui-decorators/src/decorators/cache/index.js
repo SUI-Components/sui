@@ -1,37 +1,34 @@
-import isNode from '../../helpers/isNode'
 import {createHash} from '@s-ui/js/lib/hash'
+
+import isNode from '../../helpers/isNode'
+import isPromise from '../../helpers/isPromise'
 import stringOrIntToMs from '../../helpers/stringOrIntToMs'
 
 import LRU from './algorithms/LRU'
-import LFU from './algorithms/LFU'
 
+const ALGORITHMS = {LRU: 'lru'}
 const DEFAULT_TTL = 500
-
-const isPromise = obj =>
-  typeof obj !== 'undefined' && typeof obj.then === 'function'
 
 let caches = {}
 
 const _cache = ({
-  ttl,
-  target,
+  algorithm,
   fnName,
+  host,
   instance,
   original,
-  server,
-  algorithm,
-  host,
   port,
   segmentation,
-  size
+  server,
+  size,
+  target,
+  ttl
 } = {}) => {
   caches[fnName] =
     caches[fnName] ||
-    (algorithm === 'lru'
+    (algorithm === ALGORITHMS.LRU
       ? new LRU({size})
-      : algorithm === 'lfu'
-        ? new LFU({size})
-        : new Error(`[cv-decorators::cache] unknow algorithm: ${algorithm}`))
+      : new Error(`[sui-decorators::cache] unknow algorithm: ${algorithm}`))
 
   const cache = caches[fnName]
 
@@ -61,7 +58,7 @@ const _cache = ({
 export default ({
   ttl = DEFAULT_TTL,
   server = false,
-  algorithm = 'lru',
+  algorithm = ALGORITHMS.LRU,
   trackTo: host,
   port,
   segmentation,

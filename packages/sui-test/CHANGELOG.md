@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2019-02-20)
+
+
+### Bug Fixes
+
+* remove not needed caret ([99515eb](https://github.com/SUI-Components/sui/commit/99515eb))
+* transform export default from for sui-test and karma-webpack ([99b11f2](https://github.com/SUI-Components/sui/commit/99b11f2))
+
+
+
+<a name="2.6.0"></a>
+# 2.6.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* add NODE_ENV to be injected ([05fd3ca](https://github.com/SUI-Components/sui/commit/05fd3ca))
+* transform dynamic import as karma-webpack doesnt support it for now ([8223bae](https://github.com/SUI-Components/sui/commit/8223bae))
+
+
+
+<a name="2.5.0"></a>
+# 2.5.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* mock fs dependency on browser ([8db361b](https://github.com/SUI-Components/sui/commit/8db361b))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2019-02-19)
 
@@ -104,7 +136,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.13.0"></a>
-# 1.13.0 (2018-08-31)
+# [1.13.0](https://github.com/SUI-Components/sui/compare/4.13.0...v2.17.1) (2018-08-31)
 
 
 ### Features

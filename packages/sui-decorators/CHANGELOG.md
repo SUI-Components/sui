@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-02-20)
+
+
+### Bug Fixes
+
+* use sinon 2 for test so is compatible with new sui-test ([4478c77](https://github.com/SUI-Components/sui/commit/4478c77))
+
+
+
+<a name="7.0.0"></a>
+# 7.0.0 (2019-02-19)
+
+
+### Bug Fixes
+
+* fix release version ([f443343](https://github.com/SUI-Components/sui/commit/f443343))
+
+
+### Features
+
+* remove LFU cache ([0c9a97c](https://github.com/SUI-Components/sui/commit/0c9a97c))
+
+
+### Performance Improvements
+
+* use tiny-lru with 0 deps instead lru-cache ([5c564dc](https://github.com/SUI-Components/sui/commit/5c564dc))
+
+
+### BREAKING CHANGES
+
+* LFU cache will stop working after this, so update to use LRU cache only
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2019-02-12)
 

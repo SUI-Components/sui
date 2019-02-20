@@ -12,7 +12,7 @@ describe('Cache', () => {
       }
 
       @cache()
-      syncRndNumber(num) {
+      syncRndNumber() {
         return this.rnd()
       }
     }
@@ -27,7 +27,7 @@ describe('Cache', () => {
       }
 
       @cache({server: true})
-      syncRndNumber(num) {
+      syncRndNumber() {
         return this.rnd()
       }
     }
@@ -38,7 +38,7 @@ describe('Cache', () => {
   it('return twice the same random number without params', done => {
     class Dummy {
       @cache({server: true})
-      asyncRndNumber(num) {
+      asyncRndNumber() {
         return new Promise(resolve => setTimeout(resolve, 100, Math.random()))
       }
     }

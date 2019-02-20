@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/decorators",
-  "version": "2.0.0",
+  "version": "3.1.0",
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
@@ -13,11 +13,10 @@
   "devDependencies": {
     "@babel/cli": "7",
     "babel-preset-sui": "2",
-    "sinon": "1.17.7"
+    "sinon": "2"
   },
   "dependencies": {
     "@s-ui/js": "1",
-    "guild": "1.2.2",
-    "lru-cache": "4.0.2"
+    "tiny-lru": "6.0.1"
   }
 }

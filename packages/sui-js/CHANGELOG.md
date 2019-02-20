@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.23.0"></a>
+# 1.23.0 (2019-02-20)
+
+
+### Features
+
+* added readme ([4ea7f12](https://github.com/SUI-Components/sui/commit/4ea7f12))
+* added utils to suit class names ([541ce2d](https://github.com/SUI-Components/sui/commit/541ce2d))
+
+
+
 <a name="1.22.0"></a>
 # 1.22.0 (2019-02-15)
 
@@ -111,7 +122,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.12.0"></a>
-# 1.12.0 (2018-10-03)
+# [1.12.0](https://github.com/SUI-Components/sui/compare/v2.17.1...1.12.0) (2018-10-03)
 
 
 ### Features

@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
 
@@ -14,6 +16,10 @@ const config = {
 
   webpack: {
     mode: 'development',
+    node: {
+      fs: 'empty'
+    },
+    plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
     module: {
       rules: [
         {
@@ -32,6 +38,10 @@ const config = {
                       isDevelopment: true
                     }
                   ]
+                ],
+                plugins: [
+                  require.resolve('babel-plugin-dynamic-import-node'),
+                  require.resolve('@babel/plugin-proposal-export-default-from')
                 ]
               }
             }
