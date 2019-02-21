@@ -21,7 +21,7 @@
     "@babel/runtime": "7.2.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.21",
     "babel-runtime": "6.26.0",
-    "react-hot-loader": "4.6.3"
+    "react-hot-loader": "4.7.1"
   },
   "repository": {
     "type": "git",
