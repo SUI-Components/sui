@@ -19,6 +19,9 @@ let webpackConfig = {
   context: path.resolve(process.env.PWD, 'src'),
   resolve: {
     alias: {
+      // this alias is needed so react-hot-loader works with all the React 16.6+ features
+      'react-dom': '@hot-loader/react-dom',
+
       // this alias is needed so react-hot-loader works with linked packages on dev mode
       'react-hot-loader': path.resolve(
         path.join(process.env.PWD, './node_modules/react-hot-loader')
