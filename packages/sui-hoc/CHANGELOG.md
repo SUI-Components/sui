@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.15.0"></a>
+# 1.15.0 (2019-02-21)
+
+
+### Bug Fixes
+
+* force release ([754b156](https://github.com/SUI-Components/sui/commit/754b156))
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2019-02-21)
 
