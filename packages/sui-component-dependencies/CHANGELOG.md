@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 <a name="1.5.0"></a>
+# 1.5.0 (2019-02-21)
+
+
+### Features
+
+* add hoist-non-react-statics dependencie ([c8eca80](https://github.com/SUI-Components/sui/commit/c8eca80))
+* remove hoist-non-react-statics dep ([c5f4abc](https://github.com/SUI-Components/sui/commit/c5f4abc))
+
+
+
+<a name="1.5.0"></a>
 # 1.5.0 (2017-10-05)
 
 
@@ -39,17 +50,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * make package public ([08b503b](https://github.com/SUI-Components/sui/commit/08b503b))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-06-22)
-
-
-### Features
-
-* first release 1.0 ([54e5ff6](https://github.com/SUI-Components/sui/commit/54e5ff6))
-* migrate from [@schibstedspain](https://github.com/schibstedspain)/suistudio-fatigue-deps ([b0474f8](https://github.com/SUI-Components/sui/commit/b0474f8))
 
 
 
