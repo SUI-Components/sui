@@ -1,8 +1,10 @@
 /* global IntersectionObserver */
 import React, {Component} from 'react'
 
-if (typeof window !== 'undefined' && window.document)
-  import('intersection-observer')
+const shouldLoadIntersectionObserver = () =>
+  !('IntersectionObserver' in window) ||
+  !('IntersectionObserverEntry' in window) ||
+  !('intersectionRatio' in window.IntersectionObserverEntry.prototype)
 
 export const hocIntersectionObserverWithOptions = (
   options = {}
@@ -25,12 +27,10 @@ export const hocIntersectionObserverWithOptions = (
       this.refTarget = elem
     }
 
-    componentDidMount() {
+    async componentDidMount() {
       const target = this.refTarget
-      // check we support IntersectionObserver
-      if (!('IntersectionObserver' in window)) {
-        this.setState({isIntersecting: true})
-        return
+      if (shouldLoadIntersectionObserver()) {
+        await import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer')
       }
       new IntersectionObserver(this.handleChange).observe(target, options)
     }
