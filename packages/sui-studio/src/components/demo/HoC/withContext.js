@@ -1,9 +1,15 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-const withContext = (flag, context, types) => Target => {
+const withContext = (flag, context) => Target => {
   if (!flag) {
     return Target
   }
+
+  const types = Object.keys(context).reduce((ctxtTypes, key) => {
+    ctxtTypes[key] = PropTypes.object
+    return ctxtTypes
+  }, {})
 
   class Contextify extends Component {
     static displayName = `Contextify(${Target.displayName})`
