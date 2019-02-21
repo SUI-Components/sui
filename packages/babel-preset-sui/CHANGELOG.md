@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.14.0"></a>
+# 2.14.0 (2019-02-21)
+
+
+### Features
+
+* upgrade react-hot-loader for hooks ([f09ce83](https://github.com/SUI-Components/sui/commit/f09ce83))
+
+
+
 <a name="2.13.0"></a>
 # 2.13.0 (2019-02-19)
 
