@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.3.0"></a>
+# 6.3.0 (2019-02-21)
+
+
+### Features
+
+* bump version ([95bf440](https://github.com/SUI-Components/sui/commit/95bf440))
+* using sui-react-context@1 ([8914163](https://github.com/SUI-Components/sui/commit/8914163))
+
+
+
 <a name="6.1.0"></a>
 # 6.1.0 (2019-02-01)
 
@@ -18,6 +29,12 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+* add context provider to demo components in the gallery ([4836c88](https://github.com/SUI-Components/sui/commit/4836c88))
+* add context to the demo components ([3e66e28](https://github.com/SUI-Components/sui/commit/3e66e28))
+* add Provider context to playground ([f66c60e](https://github.com/SUI-Components/sui/commit/f66c60e))
+* apply sui-react-context package ([c895e50](https://github.com/SUI-Components/sui/commit/c895e50))
+* legacy and new context API works together ([a955a33](https://github.com/SUI-Components/sui/commit/a955a33))
+* new beta version ([7d46299](https://github.com/SUI-Components/sui/commit/7d46299))
 * use new sui-bundler ([5e17274](https://github.com/SUI-Components/sui/commit/5e17274))
 * use new sui-bundler version ([7f6627d](https://github.com/SUI-Components/sui/commit/7f6627d))
 
