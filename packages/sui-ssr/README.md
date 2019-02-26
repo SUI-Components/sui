@@ -102,6 +102,7 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
+    "criticalCSS": "true",
     "forceWWW": "true",
     "dynamicsURLS": ["\/legal/*"]
   }
@@ -123,6 +124,11 @@ Configs accepted:
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry *dynamicsURLS* in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
 
 More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
+
+
+## Critical CSS
+
+For development you will need start the server with env var `CRITICAL_CSS_HOST` to allow to the external service request your current page.
 
 ## Environment variables
 
