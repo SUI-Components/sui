@@ -8,6 +8,7 @@ import Select from '../Select'
 import Preview from '../../../../src/components/preview'
 import CodeMirror from '../CodeMirror'
 
+import SUIContext from '@s-ui/react-context'
 import {createStore} from '@s-ui/react-domain-connector'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
@@ -29,6 +30,7 @@ try {
   playground = require('!raw-loader!demo/playground')
 } catch (e) {}
 
+const EMPTY = 0
 const nonDefault = removeDefaultContext(named)
 const hasProvider = checkIfPackageHasProvider(pkg)
 
@@ -44,23 +46,23 @@ class Root extends React.PureComponent {
 
   render() {
     const {playground, actualContext, actualStyle} = this.state
-    const {contexts, themes, componentID, demo: DemoComponent} = this.props
+    const {contexts = {}, themes, componentID, demo: DemoComponent} = this.props
 
-    const contextTypes =
-      Component.contextTypes || Component.originalContextTypes
-    const context = contextTypes && createContextByType(contexts, actualContext)
+    const context =
+      Object.keys(contexts).length !== EMPTY &&
+      createContextByType(contexts, actualContext)
     const {domain} = context || {}
     const store = domain && hasProvider && createStore(domain)
 
     const Enhance = pipe(
-      withContext(contextTypes && context, context),
+      withContext(context, context),
       withProvider(hasProvider, store)
     )(Component)
 
     const EnhanceDemoComponent =
       DemoComponent &&
       pipe(
-        withContext(contextTypes && context, context, contextTypes),
+        withContext(context, context),
         withProvider(hasProvider, store)
       )(DemoComponent)
     return (
@@ -93,6 +95,7 @@ class Root extends React.PureComponent {
                 />
                 <Preview
                   scope={{
+                    context,
                     React,
                     [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
                     ...nonDefault
@@ -103,7 +106,11 @@ class Root extends React.PureComponent {
             )}
           </When>
           <When value={EnhanceDemoComponent}>
-            {() => <EnhanceDemoComponent />}
+            {() => (
+              <SUIContext.Provider value={context}>
+                <EnhanceDemoComponent />
+              </SUIContext.Provider>
+            )}
           </When>
         </div>
         <div className="Root-bottom" />

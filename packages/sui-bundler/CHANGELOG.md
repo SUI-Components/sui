@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.8.0"></a>
+# 4.8.0 (2019-02-21)
+
+
+### Features
+
+* patch in development mode react-dom for get working with hooks and other features ([cf25e42](https://github.com/SUI-Components/sui/commit/cf25e42))
+
+
+
 <a name="4.7.0"></a>
 # 4.7.0 (2019-02-11)
 
@@ -721,6 +731,16 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 

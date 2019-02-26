@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "6.1.0",
+  "version": "6.3.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -30,6 +30,7 @@
     "@s-ui/helpers": "1",
     "@s-ui/js": "1",
     "@s-ui/mono": "1",
+    "@s-ui/react-context": "1",
     "@s-ui/react-domain-connector": "1",
     "@schibstedspain/ddd-react-redux": "2",
     "bundle-loader": "0.5.4",

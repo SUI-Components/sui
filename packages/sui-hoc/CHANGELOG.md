@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.15.0"></a>
+# 1.15.0 (2019-02-21)
+
+
+### Bug Fixes
+
+* force release ([754b156](https://github.com/SUI-Components/sui/commit/754b156))
+
+
+
+<a name="1.14.0"></a>
+# 1.14.0 (2019-02-21)
+
+
+### Bug Fixes
+
+* fix import export modules ([f363402](https://github.com/SUI-Components/sui/commit/f363402))
+
+
+
+<a name="1.13.0"></a>
+# 1.13.0 (2019-02-21)
+
+
+### Features
+
+* migrate to babel 7 ([a4404e0](https://github.com/SUI-Components/sui/commit/a4404e0))
+
+
+
 <a name="1.12.0"></a>
 # 1.12.0 (2019-02-20)
 
@@ -118,6 +148,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add Readme ([bff8988](https://github.com/SUI-Components/sui/commit/bff8988))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* 🌈 First Commit ([b09a168](https://github.com/SUI-Components/sui/commit/b09a168)), closes [#71](https://github.com/SUI-Components/sui/issues/71)
 
 
 

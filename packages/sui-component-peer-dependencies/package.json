@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/component-peer-dependencies",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A set of dependencies for hosts of sui components.",
   "keywords": [
     "bundle",
@@ -10,6 +10,7 @@
   "author": "David Almeida <davidbarna@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@s-ui/react-context": "1",
     "prop-types": "15.6",
     "react": "16",
     "react-dom": ">=16.4.2",

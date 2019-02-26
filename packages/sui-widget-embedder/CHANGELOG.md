@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2019-02-22)
+
+
+### Bug Fixes
+
+* update generated script ([d66142c](https://github.com/SUI-Components/sui/commit/d66142c))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2019-02-19)
 

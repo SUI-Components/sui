@@ -7,7 +7,7 @@ const program = require('commander')
 const {join} = require('path')
 const template = require('../templates/pure-component')
 const toCamelCase = require('@s-ui/js/lib/string').toCamelCase
-const babel = require('babel-core')
+const babel = require('@babel/core')
 
 const BASE_DIR = process.cwd()
 const LIB_FOLDER = join(BASE_DIR, '.', 'lib')
@@ -69,15 +69,10 @@ fg([`${SVG_FOLDER}/**/*.svg`]).then(entries =>
         },
         {componentName: 'SVGComponent'}
       )
-        .then(
-          jsCode =>
-            new Promise(resolve =>
-              resolve(
-                babel.transform(jsCode, {
-                  presets: 'sui'
-                })
-              )
-            )
+        .then(jsCode =>
+          babel.transformAsync(jsCode, {
+            presets: ['sui']
+          })
         )
         .then(result => {
           fs.outputFile(getLibFile(file), result.code, function(error) {
