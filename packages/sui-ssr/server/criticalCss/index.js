@@ -1,26 +1,71 @@
 import routes from 'routes'
+import {match} from 'react-router'
 import https from 'https'
 import parser from 'ua-parser-js'
 
-export default (req, res, next) => {
+const __CACHE__ = {}
+
+const generateMinimalCSSHash = routes => {
+  return routes.reduce((acc, route) => {
+    route.path && (acc += route.path)
+    return acc
+  }, '')
+}
+
+export default withCriticalCSS => (req, res, next) => {
+  if (!withCriticalCSS) {
+    return next()
+  }
+
   const ua = parser(req.headers['user-agent'])
   const urlRequest =
-    req.protocol + '://' + ('milanuncios.com' || req.get('host')) + req.url // TODO: Remove milanuncios!!!!
+    req.protocol +
+    '://' +
+    (process.env.CRITICAL_CSS_HOST || req.get('host')) +
+    req.url
+
   const type = ua.device.type
   const device = type === 'mobile' ? 'm' : type === 'tablet' ? 't' : 'd'
 
-  console.log(routes)
+  const {url} = req
+  match(
+    {routes, location: url},
+    async (error, redirectLocation, renderProps) => {
+      if (error) {
+        return next(error)
+      }
 
-  https.get(
-    `https://minimal-css-service.now.sh/${device}/${urlRequest}`,
-    res => {
-      let css = ''
-      res.on('data', data => (css += data))
-      res.on('end', () => {
-        debugger // eslint-disable-line
-        console.log(routes)
-      })
+      if (!renderProps) {
+        return next()
+      }
+
+      const hash = generateMinimalCSSHash(renderProps.routes)
+      const criticalCSS = __CACHE__[hash]
+
+      if (!criticalCSS) {
+        console.log(
+          'Generation Critical CSS for -> ',
+          urlRequest,
+          'whith hash: ',
+          hash
+        )
+
+        const serviceRequestURL = `https://minimal-css-service.now.sh/${device}/${urlRequest}`
+        https.get(serviceRequestURL, res => {
+          let css = ''
+          res.on('data', data => {
+            css += data
+          })
+          res.on('end', () => {
+            console.log(`Add cache entry for ${hash}`)
+            __CACHE__[hash] = css
+          })
+        })
+      }
+
+      criticalCSS && (req.criticalCSS = criticalCSS)
+
+      next()
     }
   )
-  next()
 }
