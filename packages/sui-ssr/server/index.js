@@ -8,6 +8,7 @@ import path from 'path'
 import fs from 'fs'
 import jsYaml from 'js-yaml'
 import parseDomain from 'parse-domain'
+import compression from 'compression'
 
 let ssrConf
 try {
@@ -67,6 +68,7 @@ const AUTH_DEFINITION = {
     res.status(200).json({uptime: process.uptime()})
   )
 
+  app.use(compression())
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
