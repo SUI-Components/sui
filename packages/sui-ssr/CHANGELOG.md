@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.3.0"></a>
+# 5.3.0 (2019-02-28)
+
+
+### Bug Fixes
+
+* add device to the hash ([266b967](https://github.com/SUI-Components/sui/commit/266b967))
+
+
+### Features
+
+* add criticalCSS feature ([7a77098](https://github.com/SUI-Components/sui/commit/7a77098))
+* first version of critical css ([4af2f87](https://github.com/SUI-Components/sui/commit/4af2f87))
+
+
+
 <a name="5.2.0"></a>
 # 5.2.0 (2019-01-18)
 
