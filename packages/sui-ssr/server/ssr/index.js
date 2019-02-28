@@ -26,8 +26,7 @@ try {
 
 // const SERVER_TIMING_HEADER = 'Server-Timing'
 const HTTP_PERMANENT_REDIRECT = 301
-
-const [headTplPart, bodyTplPart] = getTplParts()
+const HEAD_OPENING_TAG = '<head>'
 
 const initialFlush = res => {
   res.type('html')
@@ -36,6 +35,21 @@ const initialFlush = res => {
 
 export default (req, res, next) => {
   const {url, query} = req
+  let [headTplPart, bodyTplPart] = getTplParts(req.criticalCSS)
+  const criticalCSS = req.criticalCSS
+
+  if (criticalCSS) {
+    headTplPart = headTplPart
+      .replace(
+        HEAD_OPENING_TAG,
+        `${HEAD_OPENING_TAG}<style>${criticalCSS}</style>`
+      )
+      .replace(
+        'rel="stylesheet"',
+        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
+      )
+  }
+
   match(
     {routes, location: url},
     async (error, redirectLocation, renderProps) => {

@@ -102,6 +102,7 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
+    "criticalCSS": "true",
     "forceWWW": "true",
     "dynamicsURLS": ["\/legal/*"]
   }
@@ -116,11 +117,18 @@ Configs accepted:
 
 * loadSPAOnNotFound (false): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
 
+* criticalCSS (false): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/)
+
 ## Dynamic Rendering
 
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry *dynamicsURLS* in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
 
 More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
+
+
+## Critical CSS
+
+For development you will need start the server with env var `CRITICAL_CSS_HOST` to allow to the external service request your current page.
 
 ## Environment variables
 
