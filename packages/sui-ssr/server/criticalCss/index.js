@@ -25,7 +25,13 @@ export default withCriticalCSS => (req, res, next) => {
     req.url
 
   const type = ua.device.type
-  const device = type === 'mobile' ? 'm' : type === 'tablet' ? 't' : 'd'
+  const deviceTypes = {
+    desktop: 'd',
+    tablet: 't',
+    mobile: 'm'
+  }
+
+  const device = deviceTypes[type] || deviceTypes.desktop
 
   const {url} = req
   match(
@@ -39,7 +45,7 @@ export default withCriticalCSS => (req, res, next) => {
         return next()
       }
 
-      const hash = generateMinimalCSSHash(renderProps.routes)
+      const hash = generateMinimalCSSHash(renderProps.routes) + '|' + device
       const criticalCSS = __CACHE__[hash]
 
       if (!criticalCSS) {
