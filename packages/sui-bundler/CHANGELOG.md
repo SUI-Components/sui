@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="4.9.0"></a>
+# 4.9.0 (2019-02-28)
+
+
+### Bug Fixes
+
+* add alias to get linked packages with react hooks working ([1f7ace4](https://github.com/SUI-Components/sui/commit/1f7ace4))
+
+
+
 <a name="4.8.0"></a>
 # 4.8.0 (2019-02-21)
 
