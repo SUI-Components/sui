@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.4.0"></a>
+# 5.4.0 (2019-03-01)
+
+
+
 <a name="5.3.0"></a>
 # 5.3.0 (2019-02-28)
 
@@ -14,6 +19,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add criticalCSS feature ([7a77098](https://github.com/SUI-Components/sui/commit/7a77098))
+* add GZip compression to the responses ([9de19e5](https://github.com/SUI-Components/sui/commit/9de19e5))
 * first version of critical css ([4af2f87](https://github.com/SUI-Components/sui/commit/4af2f87))
 
 
