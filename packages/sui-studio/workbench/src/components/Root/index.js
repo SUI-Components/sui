@@ -42,7 +42,11 @@ class Root extends React.PureComponent {
     themes: PropTypes.object
   }
 
-  state = {playground, actualContext: 'default', actualStyle: 'default'}
+  state = {
+    playground,
+    actualContext: window.sessionStorage.actualContext || 'default',
+    actualStyle: window.sessionStorage.actualStyle || 'default'
+  }
 
   render() {
     const {playground, actualContext, actualStyle} = this.state
@@ -74,14 +78,20 @@ class Root extends React.PureComponent {
             <Select
               label={'Contexts'}
               options={contexts}
-              initValue={'default'}
-              onChange={nextValue => this.setState({actualContext: nextValue})}
+              initValue={actualContext}
+              onChange={nextValue => {
+                window.sessionStorage.setItem('actualContext', nextValue)
+                this.setState({actualContext: nextValue})
+              }}
             />
             <Select
               label={'Themes'}
               options={themes}
-              initValue={'default'}
-              onChange={nextValue => this.setState({actualStyle: nextValue})}
+              initValue={actualStyle}
+              onChange={nextValue => {
+                window.sessionStorage.setItem('actualStyle', nextValue)
+                this.setState({actualStyle: nextValue})
+              }}
             />
           </Header>
         </div>
