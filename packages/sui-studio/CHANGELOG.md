@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.4.0"></a>
+# 6.4.0 (2019-03-01)
+
+
+### Features
+
+* preserve selects values after reload the pages ([4a4a915](https://github.com/SUI-Components/sui/commit/4a4a915))
+
+
+
 <a name="6.3.0"></a>
 # 6.3.0 (2019-02-21)
 
