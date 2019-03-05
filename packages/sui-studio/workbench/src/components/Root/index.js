@@ -75,12 +75,11 @@ class Root extends React.PureComponent {
         <div className="Root-center">
           <iframe
             style={{
-              position: 'absolute',
               width: DEVICES[actualDevice].width,
               height: DEVICES[actualDevice].height,
               zoom: 1,
               display: 'block',
-              margin: 0,
+              margin: '10px auto',
               overflow: 'scroll',
               backgroundColor: '#fff',
               border: 0
