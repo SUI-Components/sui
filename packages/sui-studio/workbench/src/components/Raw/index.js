@@ -22,6 +22,8 @@ import {
 import Component, * as named from 'component'
 import pkg from 'package'
 
+import './index.scss'
+
 let playground
 try {
   playground = require('!raw-loader!demo/playground')
