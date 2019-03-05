@@ -14,6 +14,7 @@ import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
 import Style from '../../../../src/components/style'
 import When from '../../../../src/components/when'
+import Frame from '../../../../src/components/Frame'
 import {
   createContextByType,
   checkIfPackageHasProvider,
@@ -34,6 +35,21 @@ const EMPTY = 0
 const nonDefault = removeDefaultContext(named)
 const hasProvider = checkIfPackageHasProvider(pkg)
 
+const DEVICES = {
+  mobile: {
+    width: 360,
+    height: 640
+  },
+  tablet: {
+    width: 768,
+    height: 1024
+  },
+  desktop: {
+    width: '100%',
+    height: '100%'
+  }
+}
+
 class Root extends React.PureComponent {
   static propTypes = {
     componentID: PropTypes.string,
@@ -45,11 +61,12 @@ class Root extends React.PureComponent {
   state = {
     playground,
     actualContext: window.sessionStorage.actualContext || 'default',
-    actualStyle: window.sessionStorage.actualStyle || 'default'
+    actualStyle: window.sessionStorage.actualStyle || 'default',
+    actualDevice: window.sessionStorage.actualDevice || 'mobile'
   }
 
   render() {
-    const {playground, actualContext, actualStyle} = this.state
+    const {playground, actualContext, actualStyle, actualDevice} = this.state
     const {contexts = {}, themes, componentID, demo: DemoComponent} = this.props
 
     const context =
@@ -93,6 +110,15 @@ class Root extends React.PureComponent {
                 this.setState({actualStyle: nextValue})
               }}
             />
+            <Select
+              label={'Devices'}
+              options={DEVICES}
+              initValue={actualDevice}
+              onChange={nextValue => {
+                window.sessionStorage.setItem('actualDevice', nextValue)
+                this.setState({actualDevice: nextValue})
+              }}
+            />
           </Header>
         </div>
         <div className="Root-center">
@@ -103,22 +129,36 @@ class Root extends React.PureComponent {
                   onChange={this.handleChangeCodeMirror}
                   playground={playground}
                 />
-                <Preview
-                  scope={{
-                    context,
-                    React,
-                    [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-                    ...nonDefault
-                  }}
-                  code={playground}
-                />
+                <Frame
+                  css={themes[actualStyle]}
+                  key={playground}
+                  width={DEVICES[actualDevice].width}
+                  height={DEVICES[actualDevice].height}
+                >
+                  <Preview
+                    scope={{
+                      context,
+                      React,
+                      [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                      ...nonDefault
+                    }}
+                    code={playground}
+                  />
+                </Frame>
               </React.Fragment>
             )}
           </When>
           <When value={EnhanceDemoComponent}>
             {() => (
               <SUIContext.Provider value={context}>
-                <EnhanceDemoComponent />
+                <Frame
+                  css={themes[actualStyle]}
+                  key={playground}
+                  width={DEVICES[actualDevice].width}
+                  height={DEVICES[actualDevice].height}
+                >
+                  <EnhanceDemoComponent />
+                </Frame>
               </SUIContext.Provider>
             )}
           </When>
