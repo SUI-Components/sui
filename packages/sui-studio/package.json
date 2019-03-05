@@ -51,6 +51,7 @@
     "pascal-case": "2.0.0",
     "pmx": "0.6.2",
     "react-docgen": "2.21.0",
+    "react-shadow": "16.3.2",
     "snarkdown": "1.2.2",
     "terminal-banner": "1.1.0"
   },

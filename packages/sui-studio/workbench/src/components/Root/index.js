@@ -14,6 +14,8 @@ import withContext from '../../../../src/components/demo/HoC/withContext'
 import withProvider from '../../../../src/components/demo/HoC/withProvider'
 import Style from '../../../../src/components/style'
 import When from '../../../../src/components/when'
+import ShadowDOM from 'react-shadow'
+
 import {
   createContextByType,
   checkIfPackageHasProvider,
@@ -103,22 +105,32 @@ class Root extends React.PureComponent {
                   onChange={this.handleChangeCodeMirror}
                   playground={playground}
                 />
-                <Preview
-                  scope={{
-                    context,
-                    React,
-                    [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
-                    ...nonDefault
-                  }}
-                  code={playground}
-                />
+                <ShadowDOM nodeName="div" key={playground}>
+                  <div>
+                    <style type="text/css">{themes[actualStyle]}</style>
+                    <Preview
+                      scope={{
+                        context,
+                        React,
+                        [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                        ...nonDefault
+                      }}
+                      code={playground}
+                    />
+                  </div>
+                </ShadowDOM>
               </React.Fragment>
             )}
           </When>
           <When value={EnhanceDemoComponent}>
             {() => (
               <SUIContext.Provider value={context}>
-                <EnhanceDemoComponent />
+                <ShadowDOM nodeName="div" key={playground}>
+                  <div>
+                    <style type="text/css">{themes[actualStyle]}</style>
+                    <EnhanceDemoComponent />
+                  </div>
+                </ShadowDOM>
               </SUIContext.Provider>
             )}
           </When>
