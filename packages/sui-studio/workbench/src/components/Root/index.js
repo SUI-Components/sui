@@ -125,10 +125,6 @@ class Root extends React.PureComponent {
           <When value={!EnhanceDemoComponent && playground}>
             {() => (
               <React.Fragment>
-                <CodeMirror
-                  onChange={this.handleChangeCodeMirror}
-                  playground={playground}
-                />
                 <Frame
                   css={themes[actualStyle]}
                   key={playground}
