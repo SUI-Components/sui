@@ -56,7 +56,7 @@ export default withCriticalCSS => (req, res, next) => {
           hash
         )
 
-        const serviceRequestURL = `https://minimal-css-service.now.sh/${device}/${urlRequest}`
+        const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
         https.get(serviceRequestURL, res => {
           let css = ''
           res.on('data', data => {
