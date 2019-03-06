@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.21.0"></a>
+# 2.21.0 (2019-03-06)
+
+
+### Features
+
+* exclude meadia queries from mixins-before-declarations sass lint rule ([1c2e2df](https://github.com/SUI-Components/sui/commit/1c2e2df))
+
+
+
 <a name="2.20.0"></a>
 # 2.20.0 (2018-11-08)
 
