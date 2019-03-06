@@ -130,7 +130,8 @@ More info about Dynamic Rendering here: https://developers.google.com/search/doc
 
 For development you will need start the server with env var `CRITICAL_CSS_HOST` to allow to the external service request your current page.
 
-If you have in your package.json the flag `criticalCSS = true` by in development you want to disable it. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server. 
+
+If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
 
 ## Environment variables
 
