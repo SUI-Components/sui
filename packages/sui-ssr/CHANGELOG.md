@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.5.0"></a>
+# 5.5.0 (2019-03-06)
+
+
+### Features
+
+* move polyfill to function generator ([3142761](https://github.com/SUI-Components/sui/commit/3142761))
+* remove polyfill file ([57a655b](https://github.com/SUI-Components/sui/commit/57a655b))
+* using the new critical css service and prefetch polyfill ([1f3d806](https://github.com/SUI-Components/sui/commit/1f3d806))
+
+
+
 <a name="5.4.0"></a>
 # 5.4.0 (2019-03-01)
 
@@ -322,16 +334,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([1491650](https://github.com/SUI-Components/sui/commit/1491650))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* add package.json ([d1495ce](https://github.com/SUI-Components/sui/commit/d1495ce)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 
