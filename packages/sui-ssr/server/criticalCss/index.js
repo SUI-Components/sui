@@ -13,7 +13,7 @@ const generateMinimalCSSHash = routes => {
 }
 
 export default withCriticalCSS => (req, res, next) => {
-  if (!withCriticalCSS) {
+  if (!withCriticalCSS || process.env.DISABLE_CRITICAL_CSS === 'true') {
     return next()
   }
 
