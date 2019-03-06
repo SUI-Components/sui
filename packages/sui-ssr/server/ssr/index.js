@@ -11,6 +11,7 @@ import {
 
 import qs from 'querystring'
 import {getTplParts, HtmlBuilder} from '../template'
+import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
 import withContext from '@s-ui/hoc/lib/withContext'
 
 import {buildDeviceFrom} from '../../build-device'
@@ -27,6 +28,7 @@ try {
 // const SERVER_TIMING_HEADER = 'Server-Timing'
 const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
+const HEAD_CLOSING_TAG = '</head>'
 
 const initialFlush = res => {
   res.type('html')
@@ -48,6 +50,7 @@ export default (req, res, next) => {
         'rel="stylesheet"',
         'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
       )
+      .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
 
   match(

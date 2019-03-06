@@ -3,8 +3,11 @@ import fs from 'fs'
 import seoBotDetect from './seoBotDetect'
 import replace from 'stream-replace'
 
+import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
+
 const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const HEAD_OPENING_TAG = '<head>'
+const HEAD_CLOSING_TAG = '</head>'
 
 export default function dynamicRendering(fallback, dynamicsURLS = []) {
   return function middleware(req, resp, next) {
@@ -34,6 +37,12 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
           replace(
             'rel="stylesheet"',
             'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
+          )
+        )
+        .pipe(
+          replace(
+            HEAD_CLOSING_TAG,
+            replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)
           )
         )
     } else {

@@ -100,5 +100,5 @@ const AUTH_DEFINITION = {
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-  app.listen(PORT, () => console.log(`Server up & runnig port ${PORT}`)) // eslint-disable-line
+  app.listen(PORT, () => console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)) // eslint-disable-line
 })()
