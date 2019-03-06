@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.5.0"></a>
+# 6.5.0 (2019-03-06)
+
+
+### Features
+
+* add overflow: auto to the body ([a686dd3](https://github.com/SUI-Components/sui/commit/a686dd3))
+* create Raw canvas ([33e8ac3](https://github.com/SUI-Components/sui/commit/33e8ac3))
+* improve canvas styles ([810a8c6](https://github.com/SUI-Components/sui/commit/810a8c6))
+* remove the playground live edit ([68d5cc0](https://github.com/SUI-Components/sui/commit/68d5cc0))
+* render component inside iFrames and Device selector ([e44ea03](https://github.com/SUI-Components/sui/commit/e44ea03))
+
+
+
 <a name="6.4.0"></a>
 # 6.4.0 (2019-03-01)
 
