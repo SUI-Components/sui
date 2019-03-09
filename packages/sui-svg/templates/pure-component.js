@@ -1,32 +1,26 @@
 const template = (code, config, state) => {
-  return `import React, {PureComponent} from 'react'
+  return `import React, {memo, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 
-export default class ${state.componentName} extends PureComponent {
-  state = {render: this.props.ssr}
+const  ${state.componentName} = ({ssr = false}) => {
+  const [render, setRender] = useState(ssr)
 
-  componentDidMount() {
-    if (this.state.render === false) {
-      this.setState({render: true})
+  useEffect(function() {
+    if (render === false) {
+      setRender(true)
     }
-  }
+  }, [])
 
-  render() {
-    if (this.state.render === false) return null
-
-    return (
-      ${code}
-    )
-  }
+  return render === false
+    ? null
+    : ${code}
 }
 
 ${state.componentName}.propTypes = {
   ssr: PropTypes.bool
 }
 
-${state.componentName}.defaultProps = {
-  ssr: false
-}
+export default memo(${state.componentName})
 `
 }
 
