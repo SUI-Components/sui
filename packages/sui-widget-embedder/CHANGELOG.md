@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2019-03-11)
+
+
+### Features
+
+* add support for the new react context ([8d5a624](https://github.com/SUI-Components/sui/commit/8d5a624))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2019-02-22)
 
