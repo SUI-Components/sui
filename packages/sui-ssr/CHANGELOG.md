@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.8.0"></a>
+# 5.8.0 (2019-03-11)
+
+
+### Features
+
+* console errors in non production env ([59eea5f](https://github.com/SUI-Components/sui/commit/59eea5f))
+
+
+
 <a name="5.7.0"></a>
 # 5.7.0 (2019-03-11)
 
