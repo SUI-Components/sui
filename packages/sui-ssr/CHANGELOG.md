@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.7.0"></a>
+# 5.7.0 (2019-03-11)
+
+
+### Features
+
+* dont cache errors ([815bf3f](https://github.com/SUI-Components/sui/commit/815bf3f))
+
+
+
 <a name="5.6.0"></a>
 # 5.6.0 (2019-03-06)
 
