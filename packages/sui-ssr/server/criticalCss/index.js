@@ -49,16 +49,19 @@ export default withCriticalCSS => (req, res, next) => {
       const criticalCSS = __CACHE__[hash]
 
       if (!criticalCSS) {
-        console.log(
-          'Generation Critical CSS for -> ',
-          urlRequest,
-          'whith hash: ',
-          hash
-        )
+        // console.log(
+        //   'Generation Critical CSS for -> ',
+        //   urlRequest,
+        //   'with hash: ',
+        //   hash
+        // )
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
         https.get(serviceRequestURL, res => {
           let css = ''
+          if (res.statusCode !== 200) {
+            return
+          }
           res.on('data', data => {
             css += data
           })
