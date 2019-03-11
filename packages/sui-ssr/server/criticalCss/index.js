@@ -3,6 +3,8 @@ import {match} from 'react-router'
 import https from 'https'
 import parser from 'ua-parser-js'
 
+const PRODUCTION = 'production'
+const {NODE_ENV = PRODUCTION} = process.env
 const __CACHE__ = {}
 
 const generateMinimalCSSHash = routes => {
@@ -49,24 +51,28 @@ export default withCriticalCSS => (req, res, next) => {
       const criticalCSS = __CACHE__[hash]
 
       if (!criticalCSS) {
-        // console.log(
-        //   'Generation Critical CSS for -> ',
-        //   urlRequest,
-        //   'with hash: ',
-        //   hash
-        // )
+        NODE_ENV !== PRODUCTION &&
+          console.log(
+            'Generation Critical CSS for -> ',
+            urlRequest,
+            'with hash: ',
+            hash
+          )
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
         https.get(serviceRequestURL, res => {
           let css = ''
           if (res.statusCode !== 200) {
+            NODE_ENV !== PRODUCTION &&
+              console.log('No 200 request, statusCode:', res.statusCode)
             return
           }
           res.on('data', data => {
             css += data
           })
           res.on('end', () => {
-            console.log(`Add cache entry for ${hash}`)
+            NODE_ENV !== PRODUCTION &&
+              console.log(`Add cache entry for ${hash}`)
             __CACHE__[hash] = css
           })
         })
