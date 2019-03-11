@@ -2,8 +2,6 @@ const isInstalled = require('./is-installed')
 const cleanList = require('./clean-list')
 
 function plugins(api, opts = {}) {
-  const {isDevelopment} = opts
-
   return cleanList([
     require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-syntax-export-default-from').default,
@@ -26,8 +24,7 @@ function plugins(api, opts = {}) {
         corejs: false,
         regenerator: true
       }
-    ],
-    isDevelopment && isInstalled(['preact', 'react'], 'react-hot-loader/babel')
+    ]
   ])
 }
 
