@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# 2.8.0 (2019-03-11)
+
+
+### Features
+
+* add support for some proposal export babel plugins ([4294717](https://github.com/SUI-Components/sui/commit/4294717))
+
+
+
 <a name="2.7.0"></a>
 # 2.7.0 (2019-02-20)
 
