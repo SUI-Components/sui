@@ -1,7 +1,6 @@
 /* eslint import/no-webpack-loader-syntax:0 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import {hot} from 'react-hot-loader'
 
 import Preview from '../../../../src/components/preview'
 
@@ -59,10 +58,12 @@ class Raw extends React.PureComponent {
     const {domain} = context || {}
     const store = domain && hasProvider && createStore(domain)
 
+    // check if is a normal component or it's wrapped with a React.memo method
+    const ComponentToRender = Component.type ? Component.type : Component
     const Enhance = pipe(
       withContext(context, context),
       withProvider(hasProvider, store)
-    )(Component)
+    )(ComponentToRender)
 
     const EnhanceDemoComponent =
       DemoComponent &&
@@ -70,6 +71,7 @@ class Raw extends React.PureComponent {
         withContext(context, context),
         withProvider(hasProvider, store)
       )(DemoComponent)
+
     return (
       <div className="Raw">
         <Style>{themes[actualStyle]}</Style>
@@ -106,4 +108,4 @@ class Raw extends React.PureComponent {
   handleChangeCodeMirror = playground => this.setState({playground})
 }
 
-export default hot(module)(Raw)
+export default Raw
