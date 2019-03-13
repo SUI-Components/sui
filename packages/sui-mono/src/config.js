@@ -7,12 +7,11 @@ const projectPackage = require(path.join(basePath, 'package.json'))
 const packageConfig = projectPackage.config
 
 function getOrDefault(key, defaultValue) {
-  return (
-    (packageConfig &&
-      packageConfig['sui-mono'] &&
-      packageConfig['sui-mono'][key]) ||
-    defaultValue
-  )
+  return packageConfig &&
+    packageConfig['sui-mono'] &&
+    typeof packageConfig['sui-mono'][key] !== 'undefined'
+    ? packageConfig['sui-mono'][key]
+    : defaultValue
 }
 
 const packagesFolder = getOrDefault('packagesFolder', 'src')
@@ -20,6 +19,7 @@ const rootPath = path.join(basePath, packagesFolder)
 const deepLevel = getOrDefault('deepLevel', 1)
 const configCustomScopes = getOrDefault('customScopes', [])
 const publishAccess = getOrDefault('access', 'restricted')
+const addRootScope = getOrDefault('addRootScope', true)
 
 module.exports = {
   getScopes: function() {
@@ -38,7 +38,7 @@ module.exports = {
     })
 
     const customScopes =
-      hasRootFiles() && this.isMonoPackage()
+      addRootScope && hasRootFiles() && this.isMonoPackage()
         ? [...configCustomScopes, 'Root']
         : configCustomScopes
     return flatten(scopes, customScopes)
