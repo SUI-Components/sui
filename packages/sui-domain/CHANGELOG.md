@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.14.0"></a>
+# 1.14.0 (2019-03-13)
+
+
+### Bug Fixes
+
+* avoid using not supported export from webpack ([566abb5](https://github.com/SUI-Components/sui/commit/566abb5))
+
+
+
 <a name="1.13.0"></a>
 # 1.13.0 (2019-02-19)
 
