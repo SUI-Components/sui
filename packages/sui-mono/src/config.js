@@ -5,13 +5,15 @@ const statSync = require('fs').statSync
 const basePath = process.cwd()
 const projectPackage = require(path.join(basePath, 'package.json'))
 const packageConfig = projectPackage.config
+const ROOT_SCOPE = 'Root'
 
 function getOrDefault(key, defaultValue) {
-  return packageConfig &&
-    packageConfig['sui-mono'] &&
-    typeof packageConfig['sui-mono'][key] !== 'undefined'
-    ? packageConfig['sui-mono'][key]
-    : defaultValue
+  return (
+    (packageConfig &&
+      packageConfig['sui-mono'] &&
+      packageConfig['sui-mono'][key]) ||
+    defaultValue
+  )
 }
 
 const packagesFolder = getOrDefault('packagesFolder', 'src')
@@ -19,7 +21,6 @@ const rootPath = path.join(basePath, packagesFolder)
 const deepLevel = getOrDefault('deepLevel', 1)
 const configCustomScopes = getOrDefault('customScopes', [])
 const publishAccess = getOrDefault('access', 'restricted')
-const addRootScope = getOrDefault('addRootScope', true)
 
 module.exports = {
   getScopes: function() {
@@ -38,14 +39,16 @@ module.exports = {
     })
 
     const customScopes =
-      addRootScope && hasRootFiles() && this.isMonoPackage()
-        ? [...configCustomScopes, 'Root']
+      hasRootFiles() && this.isMonoPackage()
+        ? [...configCustomScopes, ROOT_SCOPE]
         : configCustomScopes
     return flatten(scopes, customScopes)
   },
   getScopesPaths: function() {
     const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
-    return this.getScopes().map(pkg => path.join(packagesDir, pkg))
+    return this.getScopes()
+      .filter(scope => scope !== ROOT_SCOPE)
+      .map(pkg => path.join(packagesDir, pkg))
   },
   getPackagesFolder: function() {
     return packagesFolder
