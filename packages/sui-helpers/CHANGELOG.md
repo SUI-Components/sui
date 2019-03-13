@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.17.0"></a>
+# 1.17.0 (2019-03-13)
+
+
+### Features
+
+* upgrade dependency listr that fixes problem with peer dependency ([4db231b](https://github.com/SUI-Components/sui/commit/4db231b))
+
+
+
 <a name="1.16.0"></a>
 # 1.16.0 (2019-02-19)
 
