@@ -59,10 +59,12 @@ class Raw extends React.PureComponent {
     const {domain} = context || {}
     const store = domain && hasProvider && createStore(domain)
 
+    // check if is a normal component or it's wrapped with a React.memo method
+    const ComponentToRender = Component.type ? Component.type : Component
     const Enhance = pipe(
       withContext(context, context),
       withProvider(hasProvider, store)
-    )(Component)
+    )(ComponentToRender)
 
     const EnhanceDemoComponent =
       DemoComponent &&
@@ -70,6 +72,7 @@ class Raw extends React.PureComponent {
         withContext(context, context),
         withProvider(hasProvider, store)
       )(DemoComponent)
+
     return (
       <div className="Raw">
         <Style>{themes[actualStyle]}</Style>
