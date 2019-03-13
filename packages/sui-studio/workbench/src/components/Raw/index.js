@@ -1,7 +1,6 @@
 /* eslint import/no-webpack-loader-syntax:0 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import {hot} from 'react-hot-loader'
 
 import Preview from '../../../../src/components/preview'
 
@@ -109,4 +108,4 @@ class Raw extends React.PureComponent {
   handleChangeCodeMirror = playground => this.setState({playground})
 }
 
-export default hot(module)(Raw)
+export default Raw
