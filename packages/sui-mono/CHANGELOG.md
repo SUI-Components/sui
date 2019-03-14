@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.41.0"></a>
+# 1.41.0 (2019-03-14)
+
+
+### Bug Fixes
+
+* avoid creating Root scope path because it doesnt exist ([7524b3f](https://github.com/SUI-Components/sui/commit/7524b3f))
+
+
+### Features
+
+* let rootScope to be avoided even when root files are present ([6949402](https://github.com/SUI-Components/sui/commit/6949402))
+
+
+
 <a name="1.40.0"></a>
 # 1.40.0 (2019-01-18)
 
