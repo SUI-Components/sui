@@ -5,6 +5,7 @@ const statSync = require('fs').statSync
 const basePath = process.cwd()
 const projectPackage = require(path.join(basePath, 'package.json'))
 const packageConfig = projectPackage.config
+const ROOT_SCOPE = 'Root'
 
 function getOrDefault(key, defaultValue) {
   return (
@@ -39,13 +40,15 @@ module.exports = {
 
     const customScopes =
       hasRootFiles() && this.isMonoPackage()
-        ? [...configCustomScopes, 'Root']
+        ? [...configCustomScopes, ROOT_SCOPE]
         : configCustomScopes
     return flatten(scopes, customScopes)
   },
   getScopesPaths: function() {
     const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
-    return this.getScopes().map(pkg => path.join(packagesDir, pkg))
+    return this.getScopes()
+      .filter(scope => scope !== ROOT_SCOPE)
+      .map(pkg => path.join(packagesDir, pkg))
   },
   getPackagesFolder: function() {
     return packagesFolder
