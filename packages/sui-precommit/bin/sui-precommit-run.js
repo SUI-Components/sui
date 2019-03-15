@@ -9,4 +9,8 @@ serialSpawn([
   ['npm', ['run', 'test']]
 ])
   .then(code => process.exit(code))
-  .catch(code => process.exit(code))
+  .catch(error => {
+    // eslint-disable-next-line no-console
+    console.error(error)
+    process.exit(1)
+  })
