@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.16.0"></a>
+# 1.16.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([17db36e](https://github.com/SUI-Components/sui/commit/17db36e))
+
+
+
 <a name="1.15.0"></a>
 # 1.15.0 (2019-02-21)
 
