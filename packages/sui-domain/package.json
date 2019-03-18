@@ -14,8 +14,8 @@
     "axios": "0.17.1"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1",
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3",
     "fs-extra": "4.0.2"
   }
 }
