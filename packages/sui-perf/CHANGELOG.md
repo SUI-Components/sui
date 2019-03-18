@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* Release library with correct babel-preset-sui installed ([d4b16d7](https://github.com/SUI-Components/sui/commit/d4b16d7))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2019-03-18)
 
