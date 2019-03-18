@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.0.0"></a>
+# 3.0.0 (2019-03-18)
+
+
+### Features
+
+* bump Major ([8fe5a36](https://github.com/SUI-Components/sui/commit/8fe5a36))
+* remove react-hot-loader ([aadc4da](https://github.com/SUI-Components/sui/commit/aadc4da))
+
+
+### BREAKING CHANGES
+
+* Remove react-hot-loader package
+
+
+
 <a name="2.14.0"></a>
 # 2.14.0 (2019-02-21)
 
