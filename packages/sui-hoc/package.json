@@ -20,6 +20,6 @@
   "devDependencies": {
     "@s-ui/component-peer-dependencies": "1",
     "@babel/cli": "7",
-    "babel-preset-sui": "2"
+    "babel-preset-sui": "3"
   }
 }
