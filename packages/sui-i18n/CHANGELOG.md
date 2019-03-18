@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* fix missing lib ([15267a5](https://github.com/SUI-Components/sui/commit/15267a5))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2019-03-18)
 
