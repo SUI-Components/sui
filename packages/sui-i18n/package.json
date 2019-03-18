@@ -14,7 +14,7 @@
     "node-polyglot": "0.4.3"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3"
   }
 }
