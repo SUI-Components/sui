@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.1.0"></a>
+# 5.1.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* force release of new package and tags ([bd0a45b](https://github.com/SUI-Components/sui/commit/bd0a45b))
+
+
+
 <a name="5.0.0"></a>
 # 5.0.0 (2019-03-18)
 
@@ -757,16 +767,6 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
