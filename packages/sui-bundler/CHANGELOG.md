@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.0.0"></a>
+# 5.0.0 (2019-03-18)
+
+
+### Features
+
+* bump major ([4cd98df](https://github.com/SUI-Components/sui/commit/4cd98df))
+* remove react-hot-loader ([a742871](https://github.com/SUI-Components/sui/commit/a742871))
+
+
+### BREAKING CHANGES
+
+* Remove @hot/loader package
+
+
+
 <a name="4.9.0"></a>
 # 4.9.0 (2019-02-28)
 
