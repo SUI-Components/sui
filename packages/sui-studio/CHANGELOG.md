@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.7.0"></a>
+# 6.7.0 (2019-03-18)
+
+
+### Features
+
+* use latest sui-bundler on studio ([04aec4e](https://github.com/SUI-Components/sui/commit/04aec4e))
+
+
+
 <a name="6.6.0"></a>
 # 6.6.0 (2019-03-13)
 
