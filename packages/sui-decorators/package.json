@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "7",
-    "babel-preset-sui": "2",
+    "babel-preset-sui": "3",
     "sinon": "2"
   },
   "dependencies": {
