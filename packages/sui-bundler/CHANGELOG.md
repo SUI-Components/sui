@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.2.0"></a>
+# 5.2.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([ac080bf](https://github.com/SUI-Components/sui/commit/ac080bf))
+
+
+
 <a name="5.1.0"></a>
 # 5.1.0 (2019-03-18)
 
@@ -767,6 +777,16 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
