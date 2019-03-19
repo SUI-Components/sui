@@ -48,6 +48,8 @@ module.exports = {
     'react/no-unused-prop-types': RULES.WARNING,
     'react/react-in-jsx-scope': RULES.WARNING,
     'react/require-render-return': RULES.WARNING,
+    'react-hooks/rules-of-hooks': RULES.ERROR, // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': RULES.WARNING, // Checks effect dependencies
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   }
