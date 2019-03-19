@@ -13,6 +13,6 @@ script:
 jobs:
   include:
     - stage: Release packages
-      if: type = pull_request
+      if: branch = master AND NOT type = pull_request
       script:
         - sh .travis-release.sh
