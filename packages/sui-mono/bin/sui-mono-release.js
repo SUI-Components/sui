@@ -12,6 +12,7 @@ const exec = util.promisify(execNative)
 
 program
   .option('-S, --scope <scope>', 'release a single scope')
+  .option('--no-branch-check', 'disable checking if branch active is master')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -145,7 +146,12 @@ const checkIsMasterBranchActive = async ({status, cwd}) => {
 
 checker
   .check()
-  .then(status => checkIsMasterBranchActive({status, cwd: process.cwd()}))
+  .then(
+    status =>
+      program.branchCheck
+        ? checkIsMasterBranchActive({status, cwd: process.cwd()})
+        : true // ignore the branch check as say it's ok
+  )
   .then(status => releaseMode({status, packageScope}))
   .then(releases =>
     releases
