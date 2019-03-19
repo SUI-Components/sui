@@ -1,3 +1,5 @@
+dist: xenial
+
 sudo: false
 language: node_js
 node_js:
@@ -7,3 +9,10 @@ install:
 script:
   - npm run lint
   - npm run test:ci
+
+jobs:
+  include:
+    - stage: Release
+      if: type = pull_request
+      script:
+        - sh .travis-release.sh
