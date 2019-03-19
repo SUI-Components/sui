@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.11.0"></a>
+# 2.11.0 (2019-03-19)
+
+
+### Bug Fixes
+
+* fix unsupported import from not compiled package ([c2eb5b0](https://github.com/SUI-Components/sui/commit/c2eb5b0))
+
+
+
 <a name="2.9.0"></a>
 # 2.9.0 (2018-10-17)
 
