@@ -12,7 +12,7 @@ script:
 
 jobs:
   include:
-    - stage: Release
+    - stage: Release packages
       if: type = pull_request
       script:
         - sh .travis-release.sh
