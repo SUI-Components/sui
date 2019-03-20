@@ -18,7 +18,7 @@ module.exports = {
     'prettier/react'
   ],
   parser: 'babel-eslint',
-  plugins: ['chai-friendly', 'no-only-tests', 'prettier'],
+  plugins: ['chai-friendly', 'no-only-tests', 'prettier', 'react-hooks'],
   rules: {
     'chai-friendly/no-unused-expressions': [
       RULES.ERROR,
