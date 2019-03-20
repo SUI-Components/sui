@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "5.8.0",
+  "version": "5.8.0-beta.31",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@s-ui/hoc": "1.5.0",
+    "@tunnckocore/execa": "2.2.1",
     "archiver": "2.1.1",
     "commander": "2.15.1",
     "compression": "1.7.3",
@@ -24,6 +25,7 @@
     "copy-webpack-plugin": "4.5.2",
     "express": "4.16.3",
     "express-basic-auth": "1.1.5",
+    "git-url-parse": "11.1.2",
     "js-yaml": "3.12.0",
     "parse-domain": "2.1.2",
     "rimraf": "2.6.2",
