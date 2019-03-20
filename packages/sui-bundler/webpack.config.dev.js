@@ -23,7 +23,10 @@ let webpackConfig = {
       // Why? The reason is that as hooks stores references of components
       // you should use the exact same imported file from node_modules, and the linked package
       // was trying to use another diferent from its own node_modules
-      react: path.resolve(path.join(process.env.PWD, './node_modules/react'))
+      react: path.resolve(path.join(process.env.PWD, './node_modules/react')),
+      '@s-ui/react-context': path.resolve(
+        path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+      )
     },
     extensions: ['*', '.js', '.jsx', '.json']
   },
