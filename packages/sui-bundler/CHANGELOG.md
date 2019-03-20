@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.3.0"></a>
+# 5.3.0 (2019-03-20)
+
+
+### Bug Fixes
+
+* fix linking packages not working with the react context package ([e908d4e](https://github.com/SUI-Components/sui/commit/e908d4e))
+
+
+
 <a name="5.2.0"></a>
 # 5.2.0 (2019-03-18)
 
@@ -777,16 +787,6 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
