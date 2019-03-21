@@ -21,15 +21,15 @@
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
   "devDependencies": {
+    "@s-ui/deploy": "2",
+    "@s-ui/mono": "1",
     "updtr": "0.2.0"
   },
   "dependencies": {
     "@s-ui/bundler": "5",
     "@s-ui/component-peer-dependencies": "latest",
-    "@s-ui/deploy": "2",
     "@s-ui/helpers": "1",
     "@s-ui/js": "1",
-    "@s-ui/mono": "1",
     "@s-ui/react-context": "1",
     "@s-ui/react-domain-connector": "1",
     "@schibstedspain/ddd-react-redux": "2",
@@ -47,9 +47,7 @@
     "gh-pages": "0.4.0",
     "just-debounce-it": "1.0.1",
     "normalize.css": "8.0.0",
-    "now-client": "1.1.1",
     "pascal-case": "2.0.0",
-    "pmx": "0.6.2",
     "react-docgen": "2.21.0",
     "snarkdown": "1.2.2",
     "terminal-banner": "1.1.0"
