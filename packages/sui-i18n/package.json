@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/i18n",
-  "version": "1.9.0",
+  "version": "1.12.0",
   "description": "> Isomorphic i18n service for browser and node.",
   "main": "lib/",
   "scripts": {
@@ -14,7 +14,7 @@
     "node-polyglot": "0.4.3"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3"
   }
 }

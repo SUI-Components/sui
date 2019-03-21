@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([b32c0eb](https://github.com/SUI-Components/sui/commit/b32c0eb))
+
+
+
 <a name="2.8.0"></a>
 # 2.8.0 (2019-03-11)
 

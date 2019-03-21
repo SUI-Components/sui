@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/html-tagger",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "Tool to tag HTML elements",
   "main": "lib/",
   "scripts": {
@@ -15,8 +15,8 @@
   "author": "Enablers frontend",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3"
   },
   "dependencies": {
     "just-debounce-it": "1.0.1"

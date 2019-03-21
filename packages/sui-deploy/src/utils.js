@@ -14,7 +14,7 @@ const getDeployClientFromProgram = async program => {
 
 const getDeployNameFromProgram = async program => {
   const getGitBranch = require('git-branch')
-  const {toKebabCase} = require('@s-ui/js/lib/string')
+  const toKebabCase = require('lodash.kebabcase')
   const [deployBaseName] = program.args
   const deployName =
     deployBaseName +

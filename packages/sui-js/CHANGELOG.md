@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.26.0"></a>
+# 1.26.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* Release library with correct babel-preset-sui installed ([3076de8](https://github.com/SUI-Components/sui/commit/3076de8))
+
+
+
+<a name="1.25.0"></a>
+# 1.25.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* switch proposal export for supported syntax one ([d84b4e1](https://github.com/SUI-Components/sui/commit/d84b4e1))
+
+
+
+<a name="1.24.0"></a>
+# 1.24.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([c8988d5](https://github.com/SUI-Components/sui/commit/c8988d5))
+
+
+
 <a name="1.23.0"></a>
 # 1.23.0 (2019-02-20)
 

@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* Release library with correct babel-preset-sui installed ([d4b16d7](https://github.com/SUI-Components/sui/commit/d4b16d7))
+
+
+
+<a name="1.6.0"></a>
+# 1.6.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([bec3d0a](https://github.com/SUI-Components/sui/commit/bec3d0a))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2019-02-19)
 
@@ -40,6 +60,16 @@ All notable changes to this project will be documented in this file.
 
 * add minPercent option on charts to filter minor data ([4a258bb](https://github.com/SUI-Components/sui/commit/4a258bb))
 * add React components mount measurement ([2b93cd7](https://github.com/SUI-Components/sui/commit/2b93cd7))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-07-13)
+
+
+### Features
+
+* new service for performance logging ([2df910c](https://github.com/SUI-Components/sui/commit/2df910c))
 
 
 

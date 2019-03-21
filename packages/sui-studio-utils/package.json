@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio-utils",
-  "version": "1.3.0",
+  "version": "1.6.0",
   "description": "Set of utils made to be used on the desired studios",
   "main": "lib/index.js",
   "scripts": {
@@ -11,8 +11,8 @@
   "author": "Enablers Frontend",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3"
   },
   "dependencies": {
     "@s-ui/i18n": "1"

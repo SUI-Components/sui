@@ -157,9 +157,13 @@ export default class Demo extends Component {
     } = this.state
 
     const Base = exports.default
+
     if (!Base) {
       return <h1>Loading...</h1>
     }
+
+    // check if is a normal component or it's wrapped with a React.memo method
+    const ComponentToRender = Base.type ? Base.type : Base
 
     const nonDefaultExports = removeDefaultContext(exports)
     const context =
@@ -171,7 +175,7 @@ export default class Demo extends Component {
     const Enhance = pipe(
       withContext(context, context),
       withProvider(hasProvider, store)
-    )(Base)
+    )(ComponentToRender)
 
     const EnhanceDemoComponent =
       DemoComponent &&

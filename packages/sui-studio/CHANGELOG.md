@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="6.7.0"></a>
+# 6.7.0 (2019-03-18)
+
+
+### Features
+
+* use latest sui-bundler on studio ([04aec4e](https://github.com/SUI-Components/sui/commit/04aec4e))
+
+
+
+<a name="6.6.0"></a>
+# 6.6.0 (2019-03-13)
+
+
+### Bug Fixes
+
+* add supported for exported React.memo components in catalogue ([535fd25](https://github.com/SUI-Components/sui/commit/535fd25))
+* support React.memo exported components in development mode ([27f4ae5](https://github.com/SUI-Components/sui/commit/27f4ae5))
+
+
+### Features
+
+* remove react hot loader from studio ([a9aa163](https://github.com/SUI-Components/sui/commit/a9aa163))
+
+
+
 <a name="6.5.0"></a>
 # 6.5.0 (2019-03-06)
 
@@ -741,22 +767,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
-
-
-
-<a name="4.0.0"></a>
-# 4.0.0 (2017-06-22)
-
-
-### Features
-
-* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
-* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
-
-
-### BREAKING CHANGES
-
-* API is now named sui-studio instead of suistudio
 
 
 

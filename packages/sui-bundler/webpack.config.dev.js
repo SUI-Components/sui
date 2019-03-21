@@ -19,19 +19,14 @@ let webpackConfig = {
   context: path.resolve(process.env.PWD, 'src'),
   resolve: {
     alias: {
-      // this alias is needed so react-hot-loader works with all the React 16.6+ features
-      'react-dom': '@hot-loader/react-dom',
-
-      // this alias is needed so react-hot-loader works with linked packages on dev mode
-      'react-hot-loader': path.resolve(
-        path.join(process.env.PWD, './node_modules/react-hot-loader')
-      ),
-
       // this alias is needed so react hooks work as expected with linked packages
       // Why? The reason is that as hooks stores references of components
       // you should use the exact same imported file from node_modules, and the linked package
       // was trying to use another diferent from its own node_modules
-      react: path.resolve(path.join(process.env.PWD, './node_modules/react'))
+      react: path.resolve(path.join(process.env.PWD, './node_modules/react')),
+      '@s-ui/react-context': path.resolve(
+        path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+      )
     },
     extensions: ['*', '.js', '.jsx', '.json']
   },
@@ -46,7 +41,6 @@ let webpackConfig = {
   plugins: [
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin({__DEV__: true}),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',
@@ -92,14 +86,7 @@ let webpackConfig = {
               babelrc: false,
               cacheDirectory: true,
               highlightCode: true,
-              presets: [
-                [
-                  require.resolve('babel-preset-sui'),
-                  {
-                    isDevelopment: true
-                  }
-                ]
-              ]
+              presets: [require.resolve('babel-preset-sui')]
             }
           }
         ]

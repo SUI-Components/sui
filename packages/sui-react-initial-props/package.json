@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-initial-props",
-  "version": "2.3.0",
+  "version": "2.6.0",
   "main": "lib/index.js",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
@@ -12,12 +12,12 @@
   "license": "ISC",
   "peerDependencies": {
     "prop-types": "15",
-    "react": "15 || 16"
+    "react": "16"
   },
   "devDependencies": {
     "@s-ui/component-peer-dependencies": "1",
-    "babel-cli": "6.24.1",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3"
   },
   "dependencies": {
     "@s-ui/hoc": "1"

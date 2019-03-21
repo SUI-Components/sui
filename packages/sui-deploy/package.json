@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/deploy",
-  "version": "2.9.0",
+  "version": "2.11.0",
   "description": " CLI to deploy of sui-based projects",
   "main": "./bin/sui-deploy.js",
   "bin": {
@@ -10,7 +10,7 @@
   "author": "David Almeida <davidbarna@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@s-ui/js": "1",
+    "lodash.kebabcase": "4.1.1",
     "@s-ui/helpers": "1",
     "commander": "2.9.0",
     "git-branch": "2.0.1",

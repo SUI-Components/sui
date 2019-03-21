@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.12.0"></a>
+# 1.12.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* Release library with correct babel-preset-sui installed ([ddb9d23](https://github.com/SUI-Components/sui/commit/ddb9d23))
+
+
+
+<a name="1.11.0"></a>
+# 1.11.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* fix missing lib ([15267a5](https://github.com/SUI-Components/sui/commit/15267a5))
+
+
+
+<a name="1.10.0"></a>
+# 1.10.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([c9ab9a7](https://github.com/SUI-Components/sui/commit/c9ab9a7))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2019-02-19)
 
@@ -81,6 +111,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([0a5d6d7](https://github.com/SUI-Components/sui/commit/0a5d6d7))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* add package.json ([b5b25a7](https://github.com/SUI-Components/sui/commit/b5b25a7)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 

@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.3.0"></a>
+# 5.3.0 (2019-03-20)
+
+
+### Bug Fixes
+
+* fix linking packages not working with the react context package ([e908d4e](https://github.com/SUI-Components/sui/commit/e908d4e))
+
+
+
+<a name="5.2.0"></a>
+# 5.2.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([ac080bf](https://github.com/SUI-Components/sui/commit/ac080bf))
+
+
+
+<a name="5.1.0"></a>
+# 5.1.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* force release of new package and tags ([bd0a45b](https://github.com/SUI-Components/sui/commit/bd0a45b))
+
+
+
+<a name="5.0.0"></a>
+# 5.0.0 (2019-03-18)
+
+
+### Features
+
+* bump major ([4cd98df](https://github.com/SUI-Components/sui/commit/4cd98df))
+* remove react-hot-loader ([a742871](https://github.com/SUI-Components/sui/commit/a742871))
+
+
+### BREAKING CHANGES
+
+* Remove @hot/loader package
+
+
+
 <a name="4.9.0"></a>
 # 4.9.0 (2019-02-28)
 
@@ -741,16 +787,6 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 

@@ -18,7 +18,7 @@ module.exports = {
     'prettier/react'
   ],
   parser: 'babel-eslint',
-  plugins: ['chai-friendly', 'no-only-tests', 'prettier'],
+  plugins: ['chai-friendly', 'no-only-tests', 'prettier', 'react-hooks'],
   rules: {
     'chai-friendly/no-unused-expressions': [
       RULES.ERROR,
@@ -48,6 +48,8 @@ module.exports = {
     'react/no-unused-prop-types': RULES.WARNING,
     'react/react-in-jsx-scope': RULES.WARNING,
     'react/require-render-return': RULES.WARNING,
+    'react-hooks/rules-of-hooks': RULES.ERROR, // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': RULES.WARNING, // Checks effect dependencies
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   }

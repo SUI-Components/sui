@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.3.0"></a>
+# 3.3.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* Release library with correct babel-preset-sui installed ([529a405](https://github.com/SUI-Components/sui/commit/529a405))
+
+
+
+<a name="3.2.0"></a>
+# 3.2.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([9df3814](https://github.com/SUI-Components/sui/commit/9df3814))
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2019-02-20)
 

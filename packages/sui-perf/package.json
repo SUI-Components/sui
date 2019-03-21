@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/perf",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "description": "Utilities to measure and monitor perf of your isomorphic apps.",
   "main": "lib/index.js",
   "scripts": {
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-perf#readme",
   "devDependencies": {
-    "babel-cli": "6.18.0",
-    "babel-preset-sui": "1"
+    "@babel/cli": "7.2.3",
+    "babel-preset-sui": "3"
   },
   "peerDependencies": {
     "react": "15",
