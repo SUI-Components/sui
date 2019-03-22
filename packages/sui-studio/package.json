@@ -22,10 +22,10 @@
   "license": "MIT",
   "devDependencies": {
     "@s-ui/deploy": "2",
-    "@s-ui/mono": "1",
     "updtr": "0.2.0"
   },
   "dependencies": {
+    "@s-ui/mono": "1",
     "@s-ui/bundler": "5",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
