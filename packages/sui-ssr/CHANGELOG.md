@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 <a name="5.8.0"></a>
+# 5.8.0 (2019-03-25)
+
+
+### Features
+
+* add release task ([a71b6ca](https://github.com/SUI-Components/sui/commit/a71b6ca))
+* create Release task ([e5833a5](https://github.com/SUI-Components/sui/commit/e5833a5))
+
+
+
+<a name="5.8.0"></a>
 # 5.8.0 (2019-03-11)
 
 
@@ -364,16 +375,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([1491650](https://github.com/SUI-Components/sui/commit/1491650))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* add package.json ([d1495ce](https://github.com/SUI-Components/sui/commit/d1495ce)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 
