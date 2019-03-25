@@ -4,7 +4,7 @@
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
-    "prepublish": "npm run lib"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "Joan Claret <dpam23@gmail.com>",
