@@ -50,8 +50,8 @@ export function tagHTML({tags}) {
   function startTagger() {
     fireTagging()
     return !window.MutationObserver
-      ? useManualIntervalTracking()
-      : useMutationObserverTracking()
+      ? useManualIntervalTracking() // eslint-disable-line
+      : useMutationObserverTracking() // eslint-disable-line
   }
 
   function useMutationObserverTracking() {
