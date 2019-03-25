@@ -5,7 +5,8 @@
   "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib"
+    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
+    "prepublish": "npm run lib"
   },
   "keywords": [
     "data-rel",
