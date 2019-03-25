@@ -21,9 +21,7 @@ program
       '    Its adviced that you inspect the output on sui-mono check before releasing'
     )
     console.log('    Release is the process of:')
-    console.log(
-      '     - Build your project (with build or prepublish npm script)'
-    )
+    console.log('     - Build your project (with build or prepare npm script)')
     console.log('     - Updating package.json version')
     console.log('     - Creating a release commit type')
     console.log('     - Pushing the package to npm (in case its not private)')
