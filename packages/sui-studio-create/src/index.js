@@ -116,7 +116,11 @@ Promise.all([
     "validate-commit-msg": {
       "types": "@s-ui/mono/src/types"
     }
-  }
+  },
+  "eslintConfig": {
+    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
+  },
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
 `
     )
