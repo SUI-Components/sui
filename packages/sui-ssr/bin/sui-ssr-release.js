@@ -27,6 +27,20 @@ program
   .parse(process.argv)
 
 const {branch = 'master', email, name} = program
+
+const execute = async (cmd, full) => {
+  try {
+    console.log('--->', cmd)
+    const [resp] = await shell(cmd)
+    const output = full ? resp : resp.stdout
+    console.log(output)
+    return output
+  } catch (e) {
+    const output = full ? e : e.stderr
+    console.log(output)
+    return e
+  }
+}
 ;(async () => {
   const cwd = process.cwd()
   const {GH_TOKEN} = process.env
@@ -36,29 +50,41 @@ const {branch = 'master', email, name} = program
   }
 
   try {
-    const [{stdout: repoURL}] = await shell(
-      'git config --get remote.origin.url'
-    )
+    await execute(`git checkout ${branch}`)
+    await execute(`git pull origin ${branch}`)
+    const lastCommitHash = await execute('git rev-parse HEAD')
+    const hasTag = await execute(`git tag --points-at ${lastCommitHash}`)
+
+    if (hasTag) {
+      console.log('We are going to release the current tag:', hasTag)
+      return await execute('npm run release')
+    }
+
+    const repoURL = await execute('git config --get remote.origin.url')
     const gitURL = GitUrlParse(repoURL).toString('https')
     const authURL = new URL(gitURL)
     authURL.username = GH_TOKEN
 
-    // const output = await shell(
-    //   [
-    //     `git remote add origin-release ${authURL.href}`,
-    //     `git config --global user.email "${email}"`,
-    //     `git config --global user.name "${name}"`,
-    //     `git checkout -b ${branch}`,
-    //     `rm ${path.join(cwd, 'package-lock.json')}`,
-    //     `git pull origin ${branch} || true`,
-    //     `sed -i '/package-lock.json/d' ${path.join(cwd, '.gitignore')}`,
-    //     'npm install --package-lock-only',
-    //     'npm version minor -m "release(META):v%s"',
-    //     `git push --force --quiet --set-upstream --tags origin-release ${branch}`
-    //   ],
-    //   {cwd}
-    // )
-    // console.log(output)
+    await execute(`git config --global user.email "${email}"`)
+    await execute(`git config --global user.name "${name}"`)
+    await execute('git remote rm origin')
+    await execute(`git remote add origin ${authURL} > /dev/null 2>&1`)
+
+    await execute('npm version minor --no-git-tag-version')
+    const nextVersion = require(path.join(cwd, 'package.json')).version
+    await execute(
+      `git add ${path.join(cwd, 'package.json')} ${path.join(
+        cwd,
+        'package-lock.json'
+      )}`
+    )
+
+    await execute(`git commit -m "Setting version to ${nextVersion}"`)
+    await execute(
+      `git tag v${nextVersion} -a -m "Tagging version v${nextVersion}"`
+    )
+    await execute('git status')
+    await execute(`git push --set-upstream --tags origin ${branch}`)
   } catch (err) {
     console.log(err)
   }
