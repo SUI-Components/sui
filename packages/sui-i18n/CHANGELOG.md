@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.17.0"></a>
+# 1.17.0 (2019-03-25)
+
+
+### Bug Fixes
+
+* add prepublish script ([e7e9806](https://github.com/SUI-Components/sui/commit/e7e9806))
+
+
+### Features
+
+* bump version ([f418112](https://github.com/SUI-Components/sui/commit/f418112))
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2019-03-25)
 
