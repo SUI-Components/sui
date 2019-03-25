@@ -101,6 +101,7 @@ Promise.all([
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@s-ui/deploy": "2",
     "@s-ui/precommit": "2",
     "@s-ui/studio": "6",
     "husky": "0.14.3",
