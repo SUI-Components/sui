@@ -6,7 +6,7 @@
   "scripts": {
     "lib": "npx rimraf lib && babel ./src -d lib",
     "examples": "node examples",
-    "prepublish": "npm run lib"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "David Almeida <davidbarna@gmail.com>",
