@@ -62,6 +62,16 @@ It will, over parameter, make that the express server run over a username and pa
 
 If no outputFileName is provided it will pipe the standard output stream `process.stdout`
 
+## Release
+
+If you want release your server to a branch (generate a clean package-lock file and tag) you can use this command:
+
+```
+$ npx sui-ssr release --email bot@email.com --name BotName
+```
+
+To use this command you have to define a `GH_TOKEN` env var in your CI server. This token must be associate to the user and email passing by flags to the command
+
 ## Use the ssr output as stream
 
 It uses the stdout stream so you can do things like:
