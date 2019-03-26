@@ -17,14 +17,27 @@ const {
   runtimeCaching,
   directoryIndex
 } = require('./shared/precache')
-const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {
+  when,
+  cleanList,
+  envVars,
+  MAIN_ENTRY_POINT,
+  config
+} = require('./shared/index')
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
-module.exports = {
+const changePlugin = (name, instance) => plugins => {
+  const pos = plugins
+    .map(p => p.constructor.toString())
+    .findIndex(string => string.match(name))
+  return [...plugins.slice(0, pos), instance, ...plugins.slice(pos + 1)]
+}
+
+const prodConfig = {
   devtool:
     config.sourcemaps && config.sourcemaps.prod
       ? config.sourcemaps.prod
@@ -81,7 +94,7 @@ module.exports = {
       template: './index.html',
       trackJSToken: '',
       minify: {
-        collapseWhitespace: true,
+        collapseWhitespace: false,
         keepClosingSlash: true,
         minifyCSS: true,
         minifyURLs: true,
@@ -91,19 +104,15 @@ module.exports = {
         useShortDoctype: true
       }
     }),
-    new ScriptExtHtmlWebpackPlugin(
-      Object.assign(
-        {
-          defaultAttribute: 'defer',
-          inline: 'runtime',
-          prefetch: {
-            test: /\.js$/,
-            chunks: 'all'
-          }
-        },
-        config.scripts
-      )
-    ),
+    new ScriptExtHtmlWebpackPlugin({
+      ...config.scripts,
+      module: 'es6',
+      defaultAttribute: 'defer',
+      prefetch: {
+        test: /\.js$/,
+        chunks: 'all'
+      }
+    }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
@@ -147,23 +156,79 @@ module.exports = {
     when(config.externals, () => new Externals({files: config.externals})),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ]),
-  module: {
-    rules: [
-      babelRules,
-      {
-        test: /(\.css|\.scss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          require.resolve('css-loader'),
-          require.resolve('postcss-loader'),
-          require.resolve('sass-loader')
-        ]
-      }
-    ]
-  },
   node: {
     fs: 'empty',
     net: 'empty',
     tls: 'empty'
   }
 }
+
+module.exports = [
+  {
+    ...prodConfig,
+    name: 'es5',
+    output: {
+      ...prodConfig.output,
+      path: path.resolve(process.env.PWD, 'public', 'es5'),
+      publicPath: `${prodConfig.output.publicPath}es5/`
+    },
+    plugins: changePlugin(
+      'ScriptExtHtmlWebpackPlugin',
+      new ScriptExtHtmlWebpackPlugin({
+        ...config.scripts,
+        module: 'es6',
+        defaultAttribute: 'defer',
+        prefetch: {
+          test: /\.js$/,
+          chunks: 'all'
+        },
+        custom: [
+          {
+            test: /\.js$/,
+            attribute: 'nomodule',
+            value: 'true'
+          }
+        ]
+      })
+    )(prodConfig.plugins),
+    module: {
+      rules: [
+        babelRules(),
+        {
+          test: /(\.css|\.scss)$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            require.resolve('css-loader'),
+            require.resolve('postcss-loader'),
+            require.resolve('sass-loader')
+          ]
+        }
+      ]
+    }
+  },
+  {
+    ...prodConfig,
+    name: 'es6',
+    output: {
+      ...prodConfig.output,
+      path: path.resolve(process.env.PWD, 'public', 'es6'),
+      publicPath: `${prodConfig.output.publicPath}es6/`,
+      chunkFilename: '[name].[chunkhash:8].es6.js',
+      filename: '[name].[chunkhash:8].es6.js'
+    },
+    module: {
+      rules: [
+        babelRules({es6: true}),
+        {
+          test: /(\.css|\.scss)$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            require.resolve('css-loader'),
+            require.resolve('postcss-loader'),
+            require.resolve('sass-loader')
+          ]
+        }
+      ]
+    }
+  }
+]

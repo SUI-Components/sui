@@ -1,6 +1,6 @@
 const {sep} = require('path')
 
-module.exports = {
+module.exports = ({es6 = false} = {}) => ({
   test: /\.jsx?$/,
   exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
   use: [
@@ -9,9 +9,9 @@ module.exports = {
       options: {
         babelrc: false,
         compact: true,
-        presets: [require.resolve('babel-preset-sui')]
+        presets: [[require.resolve('babel-preset-sui'), {es6}]]
       }
     },
     'source-map-loader'
   ]
-}
+})

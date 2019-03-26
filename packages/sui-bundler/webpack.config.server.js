@@ -25,7 +25,7 @@ let webpackConfig = {
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
     rules: [
-      babelRules,
+      babelRules(),
       {
         // ignore scss require/imports files in the server
         test: /\.scss$/,
