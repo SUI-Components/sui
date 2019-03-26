@@ -5,7 +5,7 @@
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
-    "prepublish": "npm run lib"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
