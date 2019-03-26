@@ -8,7 +8,7 @@ const pascalCase = require('pascal-case')
 const spawn = require('child_process').spawn
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
-const {toKebabCase} = require('@s-ui/js/lib/string')
+const toKebabCase = require('lodash.kebabcase')
 
 program
   .option('-R, --router', 'add routering for this component')
