@@ -6,7 +6,7 @@ const fs = require('fs-extra')
 const program = require('commander')
 const {join} = require('path')
 const template = require('../templates/pure-component')
-const toCamelCase = require('@s-ui/js/lib/string').toCamelCase
+const toCamelCase = require('lodash.camelcase')
 const babel = require('@babel/core')
 
 const BASE_DIR = process.cwd()
