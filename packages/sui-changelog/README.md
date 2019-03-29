@@ -34,7 +34,7 @@ By default, `sui-changelog` works only with `@s-ui` scoped packages, so if you w
 
 ### Retrieving data from private repositories
 
-If you know you have some private respositories inside your set of dependencies, you might add a GitHub access token in order to make it work. Such token has to be added like the following example:
+If you know you have some private respositories inside your set of dependencies, you should add a GitHub access token in order to make it work. Such token has to be added like the following example:
 
 ```js
 {
@@ -45,3 +45,19 @@ If you know you have some private respositories inside your set of dependencies,
 ```
 
 You can get more information in this link to get the token: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line. If it's not provided, the changelog data for such package will be ignored.
+
+## Output
+
+After triggering the CLI command `sui-changelog` we'll get new changes in our project. Firstly, current package version (`package.json` file) will be updated. Then, if it's the first time a new file named `CHANGELOG.md` will be added to your project, but if you already got it, a new hunk of changes will be added at the top of your file.
+
+```cs
+├── node_modules
+    ├── @my-awesome-scope
+    │   └── my-awesome-package // Package last changes will be retrieved from.
+    ├── @another-scope
+    │   └── another-scope-package // Other package last changes will be retrieved from.
+    ├── eslint
+    └── react
+├── package.json // Modified with the new package version.
+└── CHANGELOG.md // New or modified with the last changes.
+```
