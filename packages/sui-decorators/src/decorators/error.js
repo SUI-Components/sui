@@ -1,5 +1,9 @@
 import isPromise from '../helpers/isPromise'
 
+const formatErrorMessage = e => {
+  const msg = e.message
+}
+
 const _runner = ({instance, original} = {}) => {
   return (...args) => {
     try {

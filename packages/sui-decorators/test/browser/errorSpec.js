@@ -15,7 +15,7 @@ describe('Error', () => {
     expect(await buzz.returnASuccessPromise()).to.be.eql([null, true])
   })
 
-  it('Should return an array [Error, null] when the promise is rejected', async () => {
+  it.only('Should return an array [Error, null] when the promise is rejected', async () => {
     class Buzz {
       @inlineError
       returnAFailedPromise() {
@@ -31,7 +31,7 @@ describe('Error', () => {
     const [err, resp] = await buzz.returnAFailedPromise()
     expect(resp).to.be.eql(null)
     expect(err).to.be.an.instanceof(Error)
-    expect(err.message).to.be.eql('Error Rejected')
+    expect(err.message).to.be.eql('ERROR_Buzz_Error_Rejected')
 
     const [errEx, respEx] = await buzz.throwAnException()
     expect(respEx).to.be.eql(null)
