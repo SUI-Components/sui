@@ -1,0 +1,52 @@
+{
+  "name": "@s-ui/changelog",
+  "version": "1.0.0",
+  "description": "CLI to retrieve a changelog from a set of dependencies",
+  "main": "./bin/index.js",
+  "bin": {
+    "sui-changelog": "./bin/index.js"
+  },
+  "scripts": {
+    "phoenix": "npx @s-ui/mono phoenix",
+    "co": "sui-mono commit",
+    "lint": "sui-lint js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-changelog#readme",
+  "dependencies": {
+    "@s-ui/helpers": "1",
+    "commander": "2.19.0",
+    "edit-json-file": "1.2.1",
+    "git-url-parse": "11.1.2",
+    "json2md": "1.6.3",
+    "node-fetch": "2.3.0",
+    "what-the-diff": "0.6.0"
+  },
+  "devDependencies": {
+    "@s-ui/lint": "2",
+    "@s-ui/mono": "1",
+    "@s-ui/precommit": "2",
+    "husky": "0.13.4",
+    "validate-commit-msg": "2.14.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "config": {
+    "sui-mono": {
+      "packagesFolder": "bin"
+    },
+    "validate-commit-msg": {
+      "types": "@s-ui/mono/src/types"
+    }
+  }
+}
