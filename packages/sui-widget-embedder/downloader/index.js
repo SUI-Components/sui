@@ -108,6 +108,10 @@
   }
 
   function matchPathnameWithRegExp(regExp) {
+    if (Array.isArray(regExp)) {
+      return regExp.some(re => window.location.pathname.match(new RegExp(re)))
+    }
+
     return window.location.pathname.match(new RegExp(regExp))
   }
 
