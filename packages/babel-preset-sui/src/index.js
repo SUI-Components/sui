@@ -1,6 +1,7 @@
 const cleanList = require('./clean-list')
 
 function plugins(api, opts = {}) {
+  const {es6} = opts
   return cleanList([
     require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-syntax-export-default-from').default,
@@ -13,51 +14,51 @@ function plugins(api, opts = {}) {
         wrap: true
       }
     ],
-    [
+    !es6 && [
       require('@babel/plugin-proposal-object-rest-spread').default,
       {useBuiltIns: true} // asume Object.assign is available by browser or polyfill
     ],
-    [
-      require('@babel/plugin-transform-runtime').default,
-      {
-        corejs: false,
-        regenerator: true
-      }
-    ]
+    !es6 && require('@babel/plugin-transform-runtime').default
   ])
 }
 
 function presets(api, opts) {
+  const {es6} = opts
+  const es5Target = {
+    node: '6.0.0',
+    browsers: [
+      '> 0.25%',
+      'Firefox ESR',
+      'Safari >= 8',
+      'iOS >= 8',
+      'ie >= 11',
+      'not op_mini all',
+      'not dead'
+    ]
+  }
+  const es6Target = {
+    esmodules: true
+  }
   return [
     [
       require('@babel/preset-env').default,
       {
-        debug: false,
+        debug: true,
         ignoreBrowserslistConfig: true,
         loose: true,
         modules: false,
         // Exclude transforms that make all code slower
         exclude: ['transform-typeof-symbol'],
-        targets: {
-          node: '6.0.0',
-          browsers: [
-            '> 0.25%',
-            'Firefox ESR',
-            'Safari >= 8',
-            'iOS >= 8',
-            'ie >= 11',
-            'not op_mini all',
-            'not dead'
-          ]
-        },
-        useBuiltIns: false
+        targets: es6 ? es6Target : es5Target,
+        useBuiltIns: 'entry'
       }
     ],
     [require('@babel/preset-react').default, {useBuiltIns: true}]
   ]
 }
 
-module.exports = (api, opts) => ({
-  presets: presets(api, opts),
-  plugins: plugins(api, opts)
-})
+module.exports = (api, opts) =>
+  console.log('*******************', opts) || {
+    presets: presets(api, opts),
+    plugins: plugins(api, opts)
+  }
