@@ -14,17 +14,11 @@ function plugins(api, opts = {}) {
         wrap: true
       }
     ],
-    es6 && [
+    !es6 && [
       require('@babel/plugin-proposal-object-rest-spread').default,
       {useBuiltIns: true} // asume Object.assign is available by browser or polyfill
     ],
-    es6 && [
-      require('@babel/plugin-transform-runtime').default,
-      {
-        corejs: false,
-        regenerator: true
-      }
-    ]
+    !es6 && require('@babel/plugin-transform-runtime').default
   ])
 }
 
@@ -56,7 +50,7 @@ function presets(api, opts) {
         // Exclude transforms that make all code slower
         exclude: ['transform-typeof-symbol'],
         targets: es6 ? es6Target : es5Target,
-        useBuiltIns: false
+        useBuiltIns: 'entry'
       }
     ],
     [require('@babel/preset-react').default, {useBuiltIns: true}]
