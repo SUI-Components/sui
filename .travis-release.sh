@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# get all the commits log for creating the correct Changelog
+git pull --unshallow
 # define names
 git config --global user.email "cloud-accounts@scmspain.com"
 git config --global user.name "sui-bot"
