@@ -14,9 +14,10 @@ Install `node@11` with `npm@6` in your env and run the following CLI command:
 $ npx @s-ui/changelog
 ```
 
-Or, if you already have it installed:
+Or, if you want to save it in your project development dependencies:
 
 ```sh
+$ npm install @s-ui/changelog --save-dev
 $ sui-changelog
 ```
 
@@ -26,22 +27,20 @@ By default, `sui-changelog` works only with `@s-ui` scoped packages, so if you w
 
 ```js
 {
-  "sui-changelog": {
-    "scopes": ["@my-awesome-scope", "@another-scope"]
+  "config": {
+    "sui-changelog": {
+      "scopes": ["@my-awesome-scope", "@another-scope"]
+    }
   }
 }
 ```
 
 ### Retrieving data from private repositories
 
-If you know you have some private respositories inside your set of dependencies, you should add a GitHub access token in order to make it work. Such token has to be added like the following example:
+If you know you have some private respositories inside your set of dependencies, you should add a GitHub access token as an environment variable (as `GITHUB_TOKEN`) to make it work. Such token has to be added into your `~/.bash_profile` file (or `~/.profile`, or `~/.bashrc`) like the following example:
 
-```js
-{
-  "sui-changelog": {
-    "githubToken": "MY_AWESOME_GITHUB_PERSONAL_ACCESS_TOKEN"
-  }
-}
+```cs
+export GITHUB_TOKEN="MY_AWESOME_GITHUB_PERSONAL_ACCESS_TOKEN"
 ```
 
 You can get more information in this link to get the token: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line. If it's not provided, the changelog data for such package will be ignored.

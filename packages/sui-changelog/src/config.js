@@ -2,7 +2,8 @@ const path = require('path')
 const basePath = process.cwd()
 const packageJson = require(path.join(basePath, 'package.json'))
 const version = packageJson.version
-const {scopes, githubToken} = packageJson['sui-changelog'] || {}
+const {scopes} =
+  (packageJson.config && packageJson.config['sui-changelog']) || {}
 
 const DEFAULT_SCOPES = ['@s-ui']
 
@@ -35,7 +36,6 @@ module.exports = {
   LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE,
   version,
   scopes,
-  githubToken,
   monoRepoRegExp,
   versionRegExp,
   oldVersionRegExp,
