@@ -108,7 +108,14 @@
   }
 
   function matchPathnameWithRegExp(regExp) {
-    return window.location.pathname.match(new RegExp(regExp))
+    var match = window.location.pathname.match
+    if (Array.isArray(regExp)) {
+      return regExp.some(function(re) {
+        match(new RegExp(re))
+      })
+    }
+
+    return match(new RegExp(regExp))
   }
 
   var pages = []
