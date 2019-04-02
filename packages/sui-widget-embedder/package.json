@@ -13,10 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "6.26.0"
+    "@babel/cli": "7"
   },
   "dependencies": {
-    "@s-ui/bundler": "3",
+    "@s-ui/bundler": "5",
     "@s-ui/component-peer-dependencies": "1",
     "@s-ui/helpers": "1",
     "@s-ui/react-context": "1",
@@ -29,7 +29,6 @@
     "rimraf": "2.6.2",
     "static-module": "1.5.0",
     "webpack-dev-middleware": "1.12.0",
-    "webpack-hot-middleware": "2.19.1",
     "workbox-sw": "2.1.2"
   }
 }

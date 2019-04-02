@@ -7,10 +7,7 @@ module.exports = ({address, page, port}) =>
   webpack({
     ...devConfig,
     context: path.resolve(process.cwd(), 'pages', page),
-    entry: [
-      `webpack-hot-middleware/client?path=http://${address}:${port}/__ping`,
-      `./index.js`
-    ],
+    entry: [`./index.js`],
     output: {
       path: '/',
       publicPath: `http://${address}:${port}/`,
