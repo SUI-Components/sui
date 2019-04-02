@@ -32,7 +32,7 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [babelRules]
+    rules: [babelRules()]
   },
   node: {
     fs: 'empty',

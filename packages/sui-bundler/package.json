@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
-    "@babel/core": "7.2.2",
     "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
     "@s-ui/helpers": "1",
     "@s-ui/lint": "2",
     "autoprefixer": "9.4.3",
@@ -46,6 +46,7 @@
     "null-loader": "0.1.1",
     "object.values": "1.0.4",
     "optimize-css-assets-webpack-plugin": "5.0.1",
+    "parse5": "5.1.0",
     "postcss-loader": "2.1.6",
     "raw-loader": "0.5.1",
     "react-dev-utils": "5.0.3",
