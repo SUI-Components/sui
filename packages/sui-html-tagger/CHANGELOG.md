@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2019-03-25)
+
+
+### Bug Fixes
+
+* add prepublish script ([86f8912](https://github.com/SUI-Components/sui/commit/86f8912))
+
+
+
+<a name="1.6.0"></a>
+# 1.6.0 (2019-03-25)
+
+
+### Features
+
+* bump version ([28db748](https://github.com/SUI-Components/sui/commit/28db748))
+
+
+
+<a name="1.5.0"></a>
+# 1.5.0 (2019-03-25)
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2019-03-18)
 

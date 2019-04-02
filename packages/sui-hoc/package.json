@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --out-dir ./lib  ./src",
-    "prepublish": "npm run lib"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",

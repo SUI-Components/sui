@@ -27,7 +27,6 @@ This preset always includes the following plugins and presets:
 
 If `react` or `preact` is installed:
   - [babel-preset-react](https://www.npmjs.com/package/babel-preset-react)
-  - [react-hot-loader/babel](https://www.npmjs.com/package/react-hot-loader)
 
 ## Usage
 

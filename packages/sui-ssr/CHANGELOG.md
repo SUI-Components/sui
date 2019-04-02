@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.9.0"></a>
+# 5.9.0 (2019-03-25)
+
+
+### Features
+
+* bump version ([d30a85e](https://github.com/SUI-Components/sui/commit/d30a85e))
+
+
+
+<a name="5.8.0"></a>
+# 5.8.0 (2019-03-25)
+
+
+### Features
+
+* add release task ([a71b6ca](https://github.com/SUI-Components/sui/commit/a71b6ca))
+* create Release task ([e5833a5](https://github.com/SUI-Components/sui/commit/e5833a5))
+
+
+
 <a name="5.8.0"></a>
 # 5.8.0 (2019-03-11)
 

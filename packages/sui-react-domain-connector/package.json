@@ -1,11 +1,11 @@
 {
   "name": "@s-ui/react-domain-connector",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Connect any React component to your domain use cases",
   "main": "lib/index.js",
   "scripts": {
     "lib": "npx rimraf lib && babel ./src --out-dir ./lib",
-    "prepublish": "npm run lib"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
