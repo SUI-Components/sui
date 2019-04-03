@@ -1,4 +1,5 @@
 const webpackMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
 const express = require('express')
 
 const app = express()
@@ -19,6 +20,8 @@ module.exports = ({address, page, config}) => {
       noInfo: true
     })
   )
+
+  app.use(webpackHotMiddleware(compiler, {path: '/__ping'}))
 
   return app
 }
