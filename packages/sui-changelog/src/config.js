@@ -6,7 +6,7 @@ const {scopes} =
   (packageJson.config && packageJson.config['sui-changelog']) || {}
 
 const DEFAULT_SCOPES = ['@s-ui']
-
+const LOCK_FILE_NAME = 'npm-shrinkwrap.json'
 const MAX_GITHUB_API_RESULTS = 100
 const PUBLIC_GITHUB_HOST = 'github.com'
 const PUBLIC_GITHUB_API_URL_PATTERN =
@@ -26,6 +26,7 @@ const forbiddenExpressionsInCommitRegExp = /^Merge pull request|^Merge branch 'm
 
 module.exports = {
   DEFAULT_SCOPES,
+  LOCK_FILE_NAME,
   MAX_GITHUB_API_RESULTS,
   PUBLIC_GITHUB_HOST,
   PUBLIC_GITHUB_API_URL_PATTERN,

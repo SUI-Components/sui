@@ -12,6 +12,7 @@ const exit = process.exit
 const date = new Date()
 const {
   DEFAULT_SCOPES,
+  LOCK_FILE_NAME,
   PACKAGE_FILES,
   MAX_BUFFER,
   version,
@@ -32,8 +33,6 @@ const {
 let newPackageVersion = version
 let modifiedPackages = []
 let changelogData = []
-
-program.version(version).parse(process.argv)
 
 const pushModifiedPackage = lines => oldVersionLine => {
   const oldVersionIndex = lines.indexOf(oldVersionLine)
@@ -131,6 +130,21 @@ const writeChangelogFile = repositories => {
   })
 }
 
+// Set bin version and parse options.
+program
+  .version(version)
+  .option('-p, --phoenix', 'Run a phoenix before building the changelog.')
+  .parse(process.argv)
+
+const {phoenix} = program
+
+if (phoenix) {
+  execSync(
+    `npx rimraf node_modules && npx rimraf ${LOCK_FILE_NAME} && npm install --prefer-online && npm shrinkwrap`
+  )
+} else {
+  execSync(`npx rimraf ${LOCK_FILE_NAME} && npm shrinkwrap`)
+}
 // Retrieve modified packages info from npm shrinkwrap.
 exec('git diff npm-shrinkwrap.json', {maxBuffer: MAX_BUFFER}, (err, stdout) => {
   if (err) error(err)

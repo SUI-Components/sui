@@ -6,7 +6,11 @@
 
 The main aim of this package is to build a changelog file with all the last changes you get in your last installation within your project. Dependencies are retrieved by its scope in the `node_modules` folder, so you can customize the scopes to get the changelog data from.
 
+Moreover, `sui-changelog` package runs a `npm shrinkwrap` in order to get the differences in the dependencies, and you can optionally run a `phoenix` command if you want to have a clean install before building your changelog.
+
 ## Usage
+
+### Basic usage
 
 Install `node@11` with `npm@6` in your env and run the following CLI command:
 
@@ -19,6 +23,14 @@ Or, if you want to save it in your project development dependencies:
 ```sh
 $ npm install @s-ui/changelog --save-dev
 $ sui-changelog
+```
+
+### Optionally running a phoenix
+
+If you feel more confortable having a clean install of your dependencies before retrieving the changelog, just set the `-p, --phoenix` option:
+
+```sh
+$ sui-changelog -p
 ```
 
 ### Adding more scopes

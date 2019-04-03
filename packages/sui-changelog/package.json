@@ -27,6 +27,7 @@
     "git-url-parse": "11.1.2",
     "json2md": "1.6.3",
     "node-fetch": "2.3.0",
+    "rimraf": "2.6.3",
     "what-the-diff": "0.6.0"
   },
   "devDependencies": {
