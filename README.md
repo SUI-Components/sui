@@ -25,6 +25,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | -- | -- |
 | [babel-preset-sui](./packages/babel-preset-sui) | A babel preset for SUI components common syntax |
 | [sui-bundler](./packages/sui-bundler) | Config-free bundler for ES6 React apps |
+| [sui-changelog](./packages/sui-changelog) | CLI to retrieve a changelog from a set of dependencies |
 | [sui-component-dependencies](./packages/sui-component-dependencies) | A set of common dependencies for all SUI components |
 | [sui-component-peer-dependencies](./packages/sui-component-peer-dependencies) | A set of peer dependencies for all SUI components. |
 | [sui-cz](./packages/sui-cz) | A commitizen adapter for semantic commits |
