@@ -2,6 +2,7 @@
 const fetch = require('node-fetch')
 const editJsonFile = require('edit-json-file')
 const gitUrlParse = require('git-url-parse')
+const warn = console.warn
 const {
   MAX_GITHUB_API_RESULTS,
   PUBLIC_GITHUB_HOST,
@@ -9,7 +10,6 @@ const {
   PRIVATE_GITHUB_API_URL_PATTERN,
   INVALID_GITHUB_REPOSITORY_MESSAGE,
   LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE,
-  githubToken,
   monoRepoRegExp
 } = require('./config')
 
@@ -48,12 +48,16 @@ const getModifiedRepository = ({packageScope, packageName}) => {
   const gitUrl = getRepositoryUrl({packageScope, packageName})
   if (!gitUrl) return
   const isPublic = gitUrl.includes(PUBLIC_GITHUB_HOST)
+  const {GITHUB_TOKEN} = process.env
   let githubApiUrl
   if (isPublic) {
     githubApiUrl = buildPublicGithubApiUrl(gitUrl)
-  } else if (githubToken) {
-    githubApiUrl = buildPrivateGithubApiUrl({gitUrl, token: githubToken})
+  } else if (GITHUB_TOKEN) {
+    githubApiUrl = buildPrivateGithubApiUrl({gitUrl, token: GITHUB_TOKEN})
   } else {
+    warn(
+      'You should set the environment variable `GITHUB_TOKEN` if you want to get the data from a private repository.'
+    )
     return
   }
 
