@@ -146,7 +146,7 @@ if (phoenix) {
   execSync(`npx rimraf ${LOCK_FILE_NAME} && npm shrinkwrap`)
 }
 // Retrieve modified packages info from npm shrinkwrap.
-exec('git diff npm-shrinkwrap.json', {maxBuffer: MAX_BUFFER}, (err, stdout) => {
+exec(`git diff ${LOCK_FILE_NAME}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
   if (err) error(err)
   const [diff = {}] = parseDiff(stdout)
   const {hunks} = diff
