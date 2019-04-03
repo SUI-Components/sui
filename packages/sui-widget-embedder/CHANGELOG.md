@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.9.0"></a>
+# 2.9.0 (2019-04-03)
+
+
+### Bug Fixes
+
+* fix wrong context on using pathname.match ([78dcb95](https://github.com/SUI-Components/sui/commit/78dcb95))
+
+
+
 <a name="2.8.0"></a>
 # 2.8.0 (2019-04-02)
 
