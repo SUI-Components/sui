@@ -23,7 +23,7 @@ const {
   forbiddenExpressionsInCommitRegExp
 } = require('../src/config')
 const {
-  updateFileVersion,
+  updateAndGetFileVersion,
   getModifiedRepository,
   getRepositoryUrl,
   isMonoRepo,
@@ -166,9 +166,9 @@ exec(`git diff ${LOCK_FILE_NAME}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
   })
 
   if (!oldPackageVersionParts)
-    PACKAGE_FILES.forEach(filePath =>
-      updateFileVersion({filePath, newPackageVersion})
-    )
+    PACKAGE_FILES.forEach(filePath => {
+      newPackageVersion = updateAndGetFileVersion(filePath)
+    })
 
   changelogData.push({
     h2: `${newPackageVersion} (${date.getDate()}/${date.getMonth() +

@@ -66,16 +66,18 @@ const getModifiedRepository = ({packageScope, packageName}) => {
 
 const isMonoRepo = url => url.match(monoRepoRegExp)
 
-const updateFileVersion = ({filePath, newPackageVersion}) => {
+const updateAndGetFileVersion = filePath => {
   let file = editJsonFile(filePath)
   const version = file.get('version')
-  newPackageVersion = version.replace(
+  const newPackageVersion = version.replace(
     /(\w+).(\w+).(\w+)/,
     (version, major, minor, bugfix) => `${major}.${++minor}.${bugfix}`
   )
 
   file.set('version', newPackageVersion)
   file.save()
+
+  return newPackageVersion
 }
 
 const hasApiError = ({message} = {}) =>
@@ -91,6 +93,6 @@ module.exports = {
   getRepositoryUrl,
   getModifiedRepository,
   isMonoRepo,
-  updateFileVersion,
+  updateAndGetFileVersion,
   hasApiError
 }
