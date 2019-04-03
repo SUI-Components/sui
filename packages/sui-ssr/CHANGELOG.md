@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.10.0"></a>
+# 5.10.0 (2019-04-03)
+
+
+### Features
+
+* change release msg ([6c9e50d](https://github.com/SUI-Components/sui/commit/6c9e50d))
+
+
+
 <a name="5.9.0"></a>
 # 5.9.0 (2019-03-25)
 
@@ -385,16 +395,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([1491650](https://github.com/SUI-Components/sui/commit/1491650))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* add package.json ([d1495ce](https://github.com/SUI-Components/sui/commit/d1495ce)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 
