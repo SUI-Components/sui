@@ -79,7 +79,7 @@ const execute = async (cmd, full) => {
       )}`
     )
 
-    await execute(`git commit -m "Setting version to ${nextVersion}"`)
+    await execute(`git commit -m "release(META): ${nextVersion}"`)
     await execute(
       `git tag v${nextVersion} -a -m "Tagging version v${nextVersion}"`
     )
