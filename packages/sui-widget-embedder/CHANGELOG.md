@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.0.0"></a>
+# 3.0.0 (2019-04-04)
+
+
+### Bug Fixes
+
+* disable linter and avoid problems on sui-bundler linter ([f286b24](https://github.com/SUI-Components/sui/commit/f286b24))
+* get back hot reloading ([d683c0f](https://github.com/SUI-Components/sui/commit/d683c0f))
+
+
+### Features
+
+* move to hooks and disable linter to avoid problems on dev ([e32ca9f](https://github.com/SUI-Components/sui/commit/e32ca9f))
+* remove not needed express dependency and upgrade some ([fd0de22](https://github.com/SUI-Components/sui/commit/fd0de22))
+* use new sui-bundler version and some tweaks ([703d1e9](https://github.com/SUI-Components/sui/commit/703d1e9))
+
+
+### BREAKING CHANGES
+
+* Yes! require cannot be mixed with imports, thus some rewriting might be needed. Also, latest
+sui-bundler is using babel-preset-sui that doesn't transform import/export and also some deprecated
+export sintaxis is not used anymore. If you're using it, check it in order to get it working.
+
+
+
 <a name="2.9.0"></a>
 # 2.9.0 (2019-04-03)
 
@@ -19,6 +44,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add array of regex to check valid pathname ([f7fccaa](https://github.com/SUI-Components/sui/commit/f7fccaa))
+* update to latest sui-bundler version ([9fecbce](https://github.com/SUI-Components/sui/commit/9fecbce))
 
 
 
