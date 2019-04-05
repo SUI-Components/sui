@@ -72,6 +72,73 @@ $ npx sui-ssr release --email bot@email.com --name BotName
 
 To use this command you have to define a `GH_TOKEN` env var in your CI server. This token must be associate to the user and email passing by flags to the command
 
+Example of a `.travis.yml`:
+
+- Avoid jobs for branch with the format `vX.Y.Z`
+- Avoid execute the release job if the commit has a tag associate
+- Avoid execute the deploy jobs if the commit has not a tag associate
+- Avoid a global install
+
+```
+sudo: required
+
+language: node_js
+
+dist: xenial
+
+node_js:
+    - '10'
+
+before_install:
+  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+
+install:
+  - true
+
+branches:
+  except:
+  - /^v\d+\.\d+\.0$/
+
+jobs:
+  include:
+    - stage: release
+      if: branch = master AND NOT type = pull_request
+      env:
+        NODE_ENV=production
+      before_install:
+        - set -e
+        - 'if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      script:
+        - npx @s-ui/ssr release --email srv.scms.jarvis@schibsted.com --name J.A.R.V.I.S
+    - stage: deploy
+      if: branch = master AND NOT type = pull_request
+      env:
+        NODE_ENV=development
+      before_install:
+        - set -e
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: "Deploy dev"
+      script:
+        - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
+        - npm install surge
+        - npm install --only pro
+        - npm install --only dev
+        - npm run ssr:deploy:development
+    - #stage: deploy pro
+      env:
+        NODE_ENV=production
+      before_install:
+        - set -e
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: "Deploy pro"
+      script:
+        - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
+        - npm install surge
+        - npm install --only pro
+        - npm install --only dev
+        - npm run ssr:deploy:production
+```
+
 ## Use the ssr output as stream
 
 It uses the stdout stream so you can do things like:
