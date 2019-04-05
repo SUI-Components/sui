@@ -75,11 +75,11 @@ To use this command you have to define a `GH_TOKEN` env var in your CI server. T
 Example of a `.travis.yml`:
 
 - Avoid jobs for branch with the format `vX.Y.Z`
-- Avoid execute the release job if the commit has a tag associate
-- Avoid execute the deploy jobs if the commit has not a tag associate
+- Avoid execute the release job if the commit has a tag associated
+- Avoid execute the deploy jobs if the commit has not a tag associated
 - Avoid a global install
 
-```
+```yml
 sudo: required
 
 language: node_js
