@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.12.0"></a>
+# 5.12.0 (2019-04-05)
+
+
+### Features
+
+* bump version ([ef7d72f](https://github.com/SUI-Components/sui/commit/ef7d72f))
+* force to recreate package-lock in each release ([97ac118](https://github.com/SUI-Components/sui/commit/97ac118))
+
+
+
 <a name="5.10.0"></a>
 # 5.10.0 (2019-04-03)
 
@@ -395,6 +406,16 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([1491650](https://github.com/SUI-Components/sui/commit/1491650))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-08-02)
+
+
+### Features
+
+* add package.json ([d1495ce](https://github.com/SUI-Components/sui/commit/d1495ce)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 
