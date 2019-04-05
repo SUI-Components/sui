@@ -70,6 +70,15 @@ const execute = async (cmd, full) => {
     await execute('git remote rm origin')
     await execute(`git remote add origin ${authURL} > /dev/null 2>&1`)
 
+    await execute(`rm -Rf ${path.join(cwd, 'package-lock.json')}`)
+
+    await execute(
+      'npm install --only pro --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
+    )
+    await execute(
+      'npm install --only=dev --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
+    )
+
     await execute('npm version minor --no-git-tag-version')
     const nextVersion = require(path.join(cwd, 'package.json')).version
     await execute(
@@ -80,9 +89,7 @@ const execute = async (cmd, full) => {
     )
 
     await execute(`git commit -m "release(META): ${nextVersion}"`)
-    await execute(
-      `git tag v${nextVersion} -a -m "Tagging version v${nextVersion}"`
-    )
+    await execute(`git tag -a "v${nextVersion}" -m "v${nextVersion}"`)
     await execute('git status')
     await execute(`git push --set-upstream --tags origin ${branch}`)
   } catch (err) {
