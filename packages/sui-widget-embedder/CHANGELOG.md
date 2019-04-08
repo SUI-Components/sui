@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-04-08)
+
+
+### Bug Fixes
+
+* add missing dependency ([1db8e6a](https://github.com/SUI-Components/sui/commit/1db8e6a))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2019-04-04)
 
