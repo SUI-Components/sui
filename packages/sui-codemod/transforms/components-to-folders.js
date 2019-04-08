@@ -227,7 +227,12 @@ module.exports = {
       .map(p => {
         const ast = babelParser.parse(fs.readFileSync(p, {encoding: 'utf8'}), {
           allowImportExportEverywhere: true,
-          plugins: ['jsx', 'classProperties', 'objectRestSpread']
+          plugins: [
+            'jsx',
+            'classProperties',
+            'objectRestSpread',
+            'dynamicImport'
+          ]
         })
         return {path: p, ast}
       })
