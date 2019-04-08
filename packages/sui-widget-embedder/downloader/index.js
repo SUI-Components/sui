@@ -130,7 +130,6 @@
   }
 
   pages.length !== 0 &&
-    !window.location.host.match(/localhost/) &&
     promiseInSerie(
       pages.map(function(page) {
         return function() {
