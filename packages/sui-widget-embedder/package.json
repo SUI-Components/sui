@@ -28,6 +28,7 @@
     "rimraf": "2.6.3",
     "static-module": "1.5.0",
     "webpack-dev-middleware": "1.12.0",
+    "webpack-hot-middleware": "2.19.1",
     "workbox-sw": "2.1.2"
   }
 }
