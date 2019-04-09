@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-04-08)
+
+
+### Bug Fixes
+
+* add missing dependency ([1db8e6a](https://github.com/SUI-Components/sui/commit/1db8e6a))
+
+
+
+<a name="3.0.0"></a>
+# 3.0.0 (2019-04-04)
+
+
+### Bug Fixes
+
+* disable linter and avoid problems on sui-bundler linter ([f286b24](https://github.com/SUI-Components/sui/commit/f286b24))
+* get back hot reloading ([d683c0f](https://github.com/SUI-Components/sui/commit/d683c0f))
+
+
+### Features
+
+* move to hooks and disable linter to avoid problems on dev ([e32ca9f](https://github.com/SUI-Components/sui/commit/e32ca9f))
+* remove not needed express dependency and upgrade some ([fd0de22](https://github.com/SUI-Components/sui/commit/fd0de22))
+* use new sui-bundler version and some tweaks ([703d1e9](https://github.com/SUI-Components/sui/commit/703d1e9))
+
+
+### BREAKING CHANGES
+
+* Yes! require cannot be mixed with imports, thus some rewriting might be needed. Also, latest
+sui-bundler is using babel-preset-sui that doesn't transform import/export and also some deprecated
+export sintaxis is not used anymore. If you're using it, check it in order to get it working.
+
+
+
+<a name="2.9.0"></a>
+# 2.9.0 (2019-04-03)
+
+
+### Bug Fixes
+
+* fix wrong context on using pathname.match ([78dcb95](https://github.com/SUI-Components/sui/commit/78dcb95))
+
+
+
+<a name="2.8.0"></a>
+# 2.8.0 (2019-04-02)
+
+
+### Features
+
+* add array of regex to check valid pathname ([f7fccaa](https://github.com/SUI-Components/sui/commit/f7fccaa))
+* update to latest sui-bundler version ([9fecbce](https://github.com/SUI-Components/sui/commit/9fecbce))
+
+
+
 <a name="2.7.0"></a>
 # 2.7.0 (2019-03-11)
 
@@ -158,7 +214,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="1.18.0"></a>
-# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
+# 1.18.0 (2018-10-31)
 
 
 
@@ -335,27 +391,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * move [@s-ui](https://github.com/s-ui)/bundler to pro deps ([8c8cffc](https://github.com/SUI-Components/sui/commit/8c8cffc))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-10-24)
-
-
-### Bug Fixes
-
-* apply PR comments ([ef9e955](https://github.com/SUI-Components/sui/commit/ef9e955))
-* donwloader avoid load assets in localhost ([e1d5ca1](https://github.com/SUI-Components/sui/commit/e1d5ca1))
-* fix css load ([019420e](https://github.com/SUI-Components/sui/commit/019420e))
-* load assets only when there is a match ([5a38d47](https://github.com/SUI-Components/sui/commit/5a38d47))
-
-
-### Features
-
-* build all pages automagicaly ([daf3ddc](https://github.com/SUI-Components/sui/commit/daf3ddc))
-* create donwloader.js with the manifests of the assets ([856eae3](https://github.com/SUI-Components/sui/commit/856eae3))
-* created Widgets components ([2a929fd](https://github.com/SUI-Components/sui/commit/2a929fd))
-* first commit ([447917f](https://github.com/SUI-Components/sui/commit/447917f))
 
 
 

@@ -20,6 +20,7 @@ module.exports = ({address, page, config}) => {
       noInfo: true
     })
   )
+
   app.use(webpackHotMiddleware(compiler, {path: '/__ping'}))
 
   return app

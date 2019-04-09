@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.12.0"></a>
+# 5.12.0 (2019-04-05)
+
+
+### Features
+
+* bump version ([ef7d72f](https://github.com/SUI-Components/sui/commit/ef7d72f))
+* force to recreate package-lock in each release ([97ac118](https://github.com/SUI-Components/sui/commit/97ac118))
+
+
+
+<a name="5.10.0"></a>
+# 5.10.0 (2019-04-03)
+
+
+### Features
+
+* change release msg ([6c9e50d](https://github.com/SUI-Components/sui/commit/6c9e50d))
+
+
+
 <a name="5.9.0"></a>
 # 5.9.0 (2019-03-25)
 

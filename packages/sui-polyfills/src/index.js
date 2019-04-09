@@ -9,6 +9,7 @@ require('core-js/fn/array/of')
 require('core-js/fn/object/assign')
 require('core-js/fn/object/keys')
 require('core-js/fn/object/values')
+require('core-js/fn/object/entries')
 
 require('core-js/fn/promise')
 
