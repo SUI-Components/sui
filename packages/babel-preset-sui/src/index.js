@@ -1,5 +1,7 @@
 const cleanList = require('./clean-list')
 
+console.log('new babel preset sui!')
+
 function plugins(api, opts = {}) {
   const {es6} = opts
   return cleanList([
@@ -18,7 +20,12 @@ function plugins(api, opts = {}) {
       require('@babel/plugin-proposal-object-rest-spread').default,
       {useBuiltIns: true} // asume Object.assign is available by browser or polyfill
     ],
-    !es6 && require('@babel/plugin-transform-runtime').default
+    [
+      require('@babel/plugin-transform-runtime').default,
+      {
+        useESModules: es6
+      }
+    ]
   ])
 }
 
