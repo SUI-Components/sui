@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -10,6 +11,9 @@ const uglifyJsPlugin = require('./shared/uglify')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
+
+const zlib = require('zlib')
+const hasBrotliSupport = Boolean(zlib.brotliCompress)
 
 const {
   navigateFallbackWhitelist,
@@ -145,7 +149,23 @@ module.exports = {
         })
     ),
     when(config.externals, () => new Externals({files: config.externals})),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
+    new LoaderUniversalOptionsPlugin(require('./shared/loader-options')),
+    new CompressionPlugin({
+      filename: '[path].gzip',
+      test: /\.(js|css)$/i,
+      minRatio: 1
+    }),
+    when(
+      hasBrotliSupport,
+      () =>
+        new CompressionPlugin({
+          filename: '[path].br',
+          algorithm: 'brotliCompress',
+          test: /\.(js|css)$/i,
+          minRatio: 1,
+          compressionOptions: {level: 11}
+        })
+    )
   ]),
   module: {
     rules: [
