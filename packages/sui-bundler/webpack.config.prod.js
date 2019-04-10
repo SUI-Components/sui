@@ -11,6 +11,8 @@ const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 
+console.log('new bundler')
+
 const {
   navigateFallbackWhitelist,
   navigateFallback,
@@ -107,11 +109,7 @@ const prodConfig = {
     new ScriptExtHtmlWebpackPlugin({
       ...config.scripts,
       module: 'es6',
-      defaultAttribute: 'defer',
-      prefetch: {
-        test: /\.js$/,
-        chunks: 'all'
-      }
+      defaultAttribute: 'defer'
     }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
@@ -178,15 +176,11 @@ module.exports = [
         ...config.scripts,
         module: 'es6',
         defaultAttribute: 'defer',
-        prefetch: {
-          test: /\.js$/,
-          chunks: 'all'
-        },
         custom: [
           {
             test: /\.js$/,
             attribute: 'nomodule',
-            value: 'true'
+            value: ''
           }
         ]
       })
@@ -209,6 +203,10 @@ module.exports = [
   {
     ...prodConfig,
     name: 'es6',
+    resolve: {
+      ...prodConfig.resolve,
+      mainFields: ['rawsrc', 'browser', 'module', 'main']
+    },
     output: {
       ...prodConfig.output,
       path: path.resolve(process.env.PWD, 'public', 'es6'),

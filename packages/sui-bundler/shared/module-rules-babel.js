@@ -2,7 +2,9 @@ const {sep} = require('path')
 
 module.exports = ({es6 = false} = {}) => ({
   test: /\.jsx?$/,
-  exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
+  exclude: es6
+    ? undefined
+    : new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
   use: [
     {
       loader: require.resolve('babel-loader'),
