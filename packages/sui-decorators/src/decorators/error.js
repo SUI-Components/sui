@@ -2,13 +2,35 @@ import isPromise from '../helpers/isPromise'
 
 const _runner = ({instance, original} = {}) => {
   return (...args) => {
+    const response = []
+    Object.defineProperty(response, '__INLINE_ERROR__', {
+      enumerable: false,
+      writable: true,
+      value: true
+    })
     try {
       const returns = original.apply(instance, args)
-      return isPromise(returns)
-        ? returns.then(r => [null, r]).catch(e => [e, null])
-        : [null, returns]
+      if (isPromise(returns)) {
+        return returns
+          .then(r => {
+            response[0] = null
+            response[1] = r
+            return response
+          })
+          .catch(e => {
+            response[0] = e
+            response[1] = null
+            return response
+          })
+      } else {
+        response[0] = null
+        response[1] = returns
+        return response
+      }
     } catch (e) {
-      return [e, null]
+      response[0] = e
+      response[1] = null
+      return response
     }
   }
 }
@@ -23,9 +45,6 @@ export default (target, fnName, descriptor) => {
       configurable,
       enumerable,
       get() {
-        if (this === target) {
-          return fn
-        }
         const _fnRunner = _runner({
           instance: this,
           original: fn
