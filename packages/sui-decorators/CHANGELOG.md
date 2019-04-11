@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.4.0"></a>
+# 3.4.0 (2019-04-11)
+
+
+### Bug Fixes
+
+* streamify and inlineError are good friend again ([d3b444f](https://github.com/SUI-Components/sui/commit/d3b444f))
+
+
+
 <a name="3.3.0"></a>
 # 3.3.0 (2019-03-18)
 
@@ -168,16 +178,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([1980877](https://github.com/SUI-Components/sui/commit/1980877))
-
-
-
-<a name="1.1.0"></a>
-# 1.1.0 (2017-08-02)
-
-
-### Features
-
-* add package.json ([63e3529](https://github.com/SUI-Components/sui/commit/63e3529)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
 
 
 
