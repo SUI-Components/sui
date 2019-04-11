@@ -7,9 +7,21 @@ const defaultErrorHandler = err => {
 const dispatchToListeners = ({onError, onNext, params, result}) => {
   if (isPromise(result)) {
     result
-      .then(value => onNext({params, result: value}))
+      .then(value => {
+        if (value.__INLINE_ERROR__) {
+          const [error, val] = value
+          return !error
+            ? onNext({params, result: val})
+            : onError({params, error})
+        }
+        onNext({params, result: value})
+      })
       .catch(error => onError({params, error}))
   } else if (result) {
+    if (result.__INLINE_ERROR__) {
+      const [error, val] = result
+      return !error ? onNext({params, result: val}) : onError({params, error})
+    }
     onNext({params, result})
   }
 }

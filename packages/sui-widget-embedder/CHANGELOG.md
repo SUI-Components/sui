@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.3.0"></a>
+# 3.3.0 (2019-04-10)
+
+
+### Bug Fixes
+
+* problem with React Hooks ([af0c609](https://github.com/SUI-Components/sui/commit/af0c609))
+* unresolved problem with React hooks ([8ed3cd3](https://github.com/SUI-Components/sui/commit/8ed3cd3))
+
+
+
+<a name="3.2.0"></a>
+# 3.2.0 (2019-04-10)
+
+
+### Bug Fixes
+
+* avoid problems with not used HMR on using widget ([b26be4f](https://github.com/SUI-Components/sui/commit/b26be4f))
+* remove localhost check for sui-widget-embedder ([406a781](https://github.com/SUI-Components/sui/commit/406a781))
+* remove not needed dependency ([55a5ee7](https://github.com/SUI-Components/sui/commit/55a5ee7))
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2019-04-08)
 
@@ -214,7 +237,7 @@ export sintaxis is not used anymore. If you're using it, check it in order to ge
 
 
 <a name="1.18.0"></a>
-# 1.18.0 (2018-10-31)
+# [1.18.0](https://github.com/SUI-Components/sui/compare/1.12.0...1.18.0) (2018-10-31)
 
 
 
@@ -391,6 +414,27 @@ export sintaxis is not used anymore. If you're using it, check it in order to ge
 ### Bug Fixes
 
 * move [@s-ui](https://github.com/s-ui)/bundler to pro deps ([8c8cffc](https://github.com/SUI-Components/sui/commit/8c8cffc))
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-10-24)
+
+
+### Bug Fixes
+
+* apply PR comments ([ef9e955](https://github.com/SUI-Components/sui/commit/ef9e955))
+* donwloader avoid load assets in localhost ([e1d5ca1](https://github.com/SUI-Components/sui/commit/e1d5ca1))
+* fix css load ([019420e](https://github.com/SUI-Components/sui/commit/019420e))
+* load assets only when there is a match ([5a38d47](https://github.com/SUI-Components/sui/commit/5a38d47))
+
+
+### Features
+
+* build all pages automagicaly ([daf3ddc](https://github.com/SUI-Components/sui/commit/daf3ddc))
+* create donwloader.js with the manifests of the assets ([856eae3](https://github.com/SUI-Components/sui/commit/856eae3))
+* created Widgets components ([2a929fd](https://github.com/SUI-Components/sui/commit/2a929fd))
+* first commit ([447917f](https://github.com/SUI-Components/sui/commit/447917f))
 
 
 

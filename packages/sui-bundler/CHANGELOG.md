@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.4.0"></a>
+# 5.4.0 (2019-04-11)
+
+
+### Features
+
+* add -M flag for activating manual compression with the binary ([8afaf98](https://github.com/SUI-Components/sui/commit/8afaf98))
+* add gzip and brotli comprssion ([924adb3](https://github.com/SUI-Components/sui/commit/924adb3))
+* add manualCompression behind a flag ([69a1cf4](https://github.com/SUI-Components/sui/commit/69a1cf4))
+
+
+
 <a name="5.3.0"></a>
 # 5.3.0 (2019-03-20)
 

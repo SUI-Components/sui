@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/widget-embedder",
-  "version": "3.1.0",
+  "version": "3.3.0",
   "description": "",
   "bin": {
     "sui-widget-embedder": "./bin/sui-widget-embedder.js"
@@ -28,7 +28,6 @@
     "rimraf": "2.6.3",
     "static-module": "1.5.0",
     "webpack-dev-middleware": "1.12.0",
-    "webpack-hot-middleware": "2.19.1",
     "workbox-sw": "2.1.2"
   }
 }

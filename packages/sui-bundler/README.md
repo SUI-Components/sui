@@ -134,6 +134,8 @@ This tool works with zero configuration out the box but you could use some confi
 
 `scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
 
+`manualCompression`: Compress files manually to gzip and brotli (if supported). Useful to use along with a S3 and Lambda@Edge in order to send the best content for the userAgent. (default: `false`)
+
 ```json
 {
   "sui-bundler": {
@@ -142,6 +144,7 @@ This tool works with zero configuration out the box but you could use some confi
     "cdn": "https://url_to_me_cdn.com/",
     "alias": {"react": "preact"},
     "offline": true,
+    "manualCompression": true,
     "externals": {
       "jquery": "./node_modules/jquery/jquery.min.js"
     },
