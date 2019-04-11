@@ -150,13 +150,17 @@ module.exports = {
     ),
     when(config.externals, () => new Externals({files: config.externals})),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options')),
-    new CompressionPlugin({
-      filename: '[path].gzip',
-      test: /\.(js|css)$/i,
-      minRatio: 1
-    }),
     when(
-      hasBrotliSupport,
+      config.manualCompression,
+      () =>
+        new CompressionPlugin({
+          filename: '[path].gzip',
+          test: /\.(js|css)$/i,
+          minRatio: 1
+        })
+    ),
+    when(
+      config.manualCompression && hasBrotliSupport,
       () =>
         new CompressionPlugin({
           filename: '[path].br',
