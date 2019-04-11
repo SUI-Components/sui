@@ -8,7 +8,6 @@ before_install:
 
 install:
   - sudo start-docker-daemon
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - npm run phoenix -- --no-progress
 script:
   - npm run lint
