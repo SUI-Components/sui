@@ -33,9 +33,9 @@ program
   })
   .parse(process.argv)
 
-const {clean = false, context, manualCompression} = program
+const {clean = false, context} = program
 config.context = context || config.context
-config.manualCompression = manualCompression || config.manualCompression
+// config.manualCompression = manualCompression || config.manualCompression
 
 process.env.NODE_ENV = process.env.NODE_ENV
   ? process.env.NODE_ENV
