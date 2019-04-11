@@ -1,6 +1,7 @@
 {
   "name": "@s-ui/test",
   "version": "2.9.0",
+  "cypressVersion": "3.0.3",
   "description": "",
   "bin": {
     "sui-test": "./bin/sui-test.js"
@@ -9,7 +10,7 @@
     "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
     "prepare": "npm run lib",
-    "postpublish": "export VERSION=$(node -e \"console.log(require('./package.json').version)\") && docker build --no-cache -t suitools/test:$VERSION . && docker tag  suitools/test:$VERSION suitools/test:latest && docker push suitools/test"
+    "postpublish": "make build"
   },
   "keywords": [],
   "author": "",
