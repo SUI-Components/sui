@@ -19,6 +19,10 @@ const chalkProcessing = chalk.blue
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
   .option('-c, --context [folder]', 'Context folder (cwd by default)')
+  .option(
+    '-M, --manual-compression',
+    'Compress files with gzip and brotli (if available) manually'
+  )
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -29,8 +33,9 @@ program
   })
   .parse(process.argv)
 
-const {clean = false, context} = program
+const {clean = false, context, manualCompression} = program
 config.context = context || config.context
+config.manualCompression = manualCompression || config.manualCompression
 
 process.env.NODE_ENV = process.env.NODE_ENV
   ? process.env.NODE_ENV
