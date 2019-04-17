@@ -10,17 +10,7 @@ import fs from 'fs'
 import jsYaml from 'js-yaml'
 import parseDomain from 'parse-domain'
 import compression from 'compression'
-
-let ssrConf
-try {
-  const spaConfig = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
-  )
-  const {config = {}} = spaConfig
-  ssrConf = config['sui-ssr'] || {}
-} catch (e) {
-  ssrConf = {}
-}
+import ssrConf from './config'
 
 const app = express()
 

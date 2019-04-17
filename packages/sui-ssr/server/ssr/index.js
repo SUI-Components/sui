@@ -12,9 +12,10 @@ import {
 import qs from 'querystring'
 import {getTplParts, HtmlBuilder} from '../template'
 import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
-import withContext from '@s-ui/hoc/lib/withContext'
-
+import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
+import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
+import ssrConfig from '../config'
 
 // __MAGIC IMPORTS__
 let contextFactory
@@ -29,6 +30,11 @@ try {
 const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
+
+const useLegacyContext =
+  typeof ssrConfig.useLegacyContext !== 'undefined'
+    ? ssrConfig.useLegacyContext
+    : true
 
 const initialFlush = res => {
   res.type('html')
@@ -94,7 +100,9 @@ export default (req, res, next) => {
         initialData = await ssrComponentWithInitialProps({
           context: {...context, device},
           renderProps,
-          Target: withContext(context)(RouterContext)
+          Target: useLegacyContext
+            ? withAllContexts(context)(RouterContext)
+            : withSUIContext(context)(RouterContext)
         })
       } catch (err) {
         return next(err)
