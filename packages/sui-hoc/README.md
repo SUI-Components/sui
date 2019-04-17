@@ -1,9 +1,18 @@
 # sui-hoc
+
 > Set of useful HoCs
 
 ## withContext
 
-Provide the context at the tree of components
+Provide the legacy context to the tree of components.
+
+## withSUIContext
+
+Provide the new React API Context to the tree of components.
+
+## withAllContexts
+
+Provide both contexts to the tree of components.
 
 ## avoidSSRRender
 
