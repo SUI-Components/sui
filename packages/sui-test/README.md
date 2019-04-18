@@ -26,7 +26,7 @@ Your tests must be in a `test` folder in your project root. Each test file shoul
 ## Installation
 
 ```sh
-npm install @s-ui/test
+npm install @s-ui/test --save-dev
 ```
 
 # CLI Options
