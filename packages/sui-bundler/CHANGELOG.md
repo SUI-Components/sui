@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.7.0"></a>
+# 5.7.0 (2019-04-24)
+
+
+### Bug Fixes
+
+* use standard extension for gzip files ([ba540cd](https://github.com/SUI-Components/sui/commit/ba540cd))
+
+
+
 <a name="5.5.0"></a>
 # 5.5.0 (2019-04-11)
 
