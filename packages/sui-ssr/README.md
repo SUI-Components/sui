@@ -87,7 +87,7 @@ language: node_js
 dist: xenial
 
 node_js:
-    - '10'
+  - "10"
 
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
@@ -97,26 +97,24 @@ install:
 
 branches:
   except:
-  - /^v\d+\.\d+\.0$/
+    - /^v\d+\.\d+\.0$/
 
 jobs:
   include:
     - stage: release
       if: branch = master AND NOT type = pull_request
-      env:
-        NODE_ENV=production
+      env: NODE_ENV=production
       before_install:
         - set -e
-        - 'if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+        - "if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
       script:
         - npx @s-ui/ssr release --email srv.scms.jarvis@schibsted.com --name J.A.R.V.I.S
     - stage: deploy
       if: branch = master AND NOT type = pull_request
-      env:
-        NODE_ENV=development
+      env: NODE_ENV=development
       before_install:
         - set -e
-        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
       name: "Deploy dev"
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
@@ -125,11 +123,10 @@ jobs:
         - npm install --only dev
         - npm run ssr:deploy:development
     - #stage: deploy pro
-      env:
-        NODE_ENV=production
+      env: NODE_ENV=production
       before_install:
         - set -e
-        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
       name: "Deploy pro"
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
@@ -179,8 +176,8 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
-    "criticalCSS": "true",
-    "forceWWW": "true",
+    "criticalCSS": true,
+    "forceWWW": true,
     "dynamicsURLS": ["\/legal/*"]
   }
 }
@@ -188,25 +185,25 @@ For example:
 
 Configs accepted:
 
-* forceWWW (false): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
+- **`forceWWW`** (`false`): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
 
-* earlyFlush (true): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
+- **`earlyFlush`** (`true`): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
 
-* loadSPAOnNotFound (false): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
+- **`loadSPAOnNotFound`** (`false`): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
 
-* criticalCSS (false): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/)
+- **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/)
+
+- **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
 ## Dynamic Rendering
 
-If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry *dynamicsURLS* in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
+If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry _dynamicsURLS_ in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
 
 More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
-
 
 ## Critical CSS
 
 For development you will need start the server with env var `CRITICAL_CSS_HOST` to allow to the external service request your current page.
-
 
 If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
 

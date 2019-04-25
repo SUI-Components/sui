@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.7.0"></a>
+# 5.7.0 (2019-04-24)
+
+
+### Bug Fixes
+
+* use standard extension for gzip files ([ba540cd](https://github.com/SUI-Components/sui/commit/ba540cd))
+
+
+
+<a name="5.5.0"></a>
+# 5.5.0 (2019-04-11)
+
+
+### Bug Fixes
+
+* fix sui-bundler ([e604d32](https://github.com/SUI-Components/sui/commit/e604d32))
+* remove param for manual compression, use config instead ([7b9facf](https://github.com/SUI-Components/sui/commit/7b9facf))
+
+
+
 <a name="5.4.0"></a>
 # 5.4.0 (2019-04-11)
 

@@ -154,7 +154,7 @@ module.exports = {
       config.manualCompression,
       () =>
         new CompressionPlugin({
-          filename: '[path].gzip',
+          filename: '[path].gz',
           test: /\.(js|css)$/i,
           minRatio: 1
         })

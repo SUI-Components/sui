@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "2.23.0",
+  "version": "2.24.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -34,6 +34,7 @@
     "eslint-plugin-standard": "3.0.1",
     "prettier": "1.13.2",
     "sass-lint": "1.12.1",
+    "merge": ">=1.2.1",
     "simple-git": "1.92.0"
   }
 }
