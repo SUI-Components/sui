@@ -156,7 +156,7 @@ module.exports = {
         new CompressionPlugin({
           filename: '[path].gz',
           threshold: 0,
-          minRatio: 0,
+          minRatio: 2,
           test: /\.(js|css)$/i
         })
     ),
@@ -167,7 +167,7 @@ module.exports = {
           filename: '[path].br',
           algorithm: 'brotliCompress',
           threshold: 0,
-          minRatio: 0,
+          minRatio: 2,
           test: /\.(js|css)$/i,
           compressionOptions: {level: 11}
         })
