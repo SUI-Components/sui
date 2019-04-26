@@ -1,12 +1,13 @@
 dist: xenial
 
-sudo: false
 language: node_js
 node_js:
   - '10'
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+
 install:
+  - sudo start-docker-daemon
   - npm run phoenix -- --no-progress
 script:
   - npm run lint

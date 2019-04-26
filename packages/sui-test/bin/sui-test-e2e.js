@@ -6,7 +6,8 @@ const program = require('commander')
 const fs = require('fs')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
-const CYPRESS_VERSION = '3.2.0'
+const CYPRESS_VERSION =
+  require(path.join(__dirname, '..', 'package.json')).cypressVersion || '3.2.0'
 const CYPRESS_FOLDER_PATH = path.resolve(__dirname, 'cypress')
 const TESTS_FOLDER = process.cwd() + '/test-e2e'
 const SCREENSHOTS_FOLDER = process.cwd() + '/.tmp/test-e2e/screenshots'
