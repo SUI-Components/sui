@@ -3,7 +3,7 @@ OWNER=Carlos Villuendas <carlos.villuendas@schibsted.com>
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 VERSION=`grep version package.json | cut -c 15- | rev | cut -c 3- | rev`
-CYPRESS_VERSION=`grep cypressVersion package.json | cut -c 22- | rev | cut -c 3- | rev`
+export CYPRESS_VERSION=`grep cypressVersion package.json | cut -c 22- | rev | cut -c 3- | rev`
 
 DOCKER_IMAGE=suitools/test
 DOCKER_IMAGE_VERSION=$(DOCKER_IMAGE):$(VERSION)
