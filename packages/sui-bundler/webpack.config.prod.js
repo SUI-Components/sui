@@ -155,8 +155,9 @@ module.exports = {
       () =>
         new CompressionPlugin({
           filename: '[path].gz',
-          test: /\.(js|css)$/i,
-          minRatio: 1
+          threshold: 0,
+          minRatio: 0,
+          test: /\.(js|css)$/i
         })
     ),
     when(
@@ -165,8 +166,9 @@ module.exports = {
         new CompressionPlugin({
           filename: '[path].br',
           algorithm: 'brotliCompress',
+          threshold: 0,
+          minRatio: 0,
           test: /\.(js|css)$/i,
-          minRatio: 1,
           compressionOptions: {level: 11}
         })
     )
