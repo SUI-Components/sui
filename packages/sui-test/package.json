@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/test",
-  "version": "2.10.0",
-  "cypressVersion": "3.0.3",
+  "version": "2.11.0",
+  "cypressVersion": "3.2.0",
   "description": "",
   "bin": {
     "sui-test": "./bin/sui-test.js"
