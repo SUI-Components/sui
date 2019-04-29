@@ -1,0 +1,23 @@
+{
+  "name": "sui-analytics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@s-ui/js": "1.26.0",
+    "@s-ui/polyfills": "1.9.0",
+    "axios": "0.18.0",
+    "uuid": "3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "sinon": "7.3.2"
+  }
+}
