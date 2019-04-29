@@ -7,10 +7,6 @@ const FAKE_WRITE_KEY = 'FAKE_WRITE_KEY'
 const AUTH_HEADER = window.btoa(`${FAKE_WRITE_KEY}:`)
 const SEGMENT_API = 'https://api.segment.io/v1'
 
-// what if click before lib loaded?
-// retries?
-// split if size too big, Segment’s API will respond with 400 Bad Request if these limits are exceeded.
-
 describe('#Analytics', () => {
   const analytics = suiAnalytics(FAKE_WRITE_KEY)
 

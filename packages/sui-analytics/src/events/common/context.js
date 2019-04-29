@@ -1,7 +1,7 @@
 export default {
   library: {
     name: 'sui-analytics',
-    version: 1 // how do we load the package.json version?
+    version: 1
   },
   page: {
     path: window.location.pathname,
