@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.8.0"></a>
+# 5.8.0 (2019-04-26)
+
+
+### Bug Fixes
+
+* force a weird minRatio to force all files to be compressed ([dd68737](https://github.com/SUI-Components/sui/commit/dd68737))
+* force compress all the files no matter the weird length could have the result ([2a9d844](https://github.com/SUI-Components/sui/commit/2a9d844))
+
+
+
 <a name="5.7.0"></a>
 # 5.7.0 (2019-04-24)
 
