@@ -63,6 +63,8 @@ const AUTH_DEFINITION = {
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
+
+  app.use(hooks[TYPES.PRE_STATIC_PUBLIC])
   app.use(express.static('public', {index: false}))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
