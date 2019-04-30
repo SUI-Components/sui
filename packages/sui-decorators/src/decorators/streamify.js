@@ -74,6 +74,7 @@ const reducer = (Target, proto, method) => {
 
 export default (...methods) => {
   return Target => {
+    Target.prototype.__STREAMIFY__ = true
     Object.assign(
       Target.prototype,
       methods

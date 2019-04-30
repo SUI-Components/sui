@@ -1,7 +1,7 @@
 import isPromise from '../helpers/isPromise'
 
 const _runner = ({instance, original} = {}) => {
-  return (...args) => {
+  return function(...args) {
     const response = []
     Object.defineProperty(response, '__INLINE_ERROR__', {
       enumerable: false,
@@ -9,7 +9,10 @@ const _runner = ({instance, original} = {}) => {
       value: true
     })
     try {
-      const returns = original.apply(instance, args)
+      const returns = original.apply(
+        instance.__STREAMIFY__ ? this : instance,
+        args
+      )
       if (isPromise(returns)) {
         return returns
           .then(r => {
@@ -20,7 +23,7 @@ const _runner = ({instance, original} = {}) => {
           .catch(e => {
             response[0] = e
             response[1] = null
-            return response
+            return Promise.resolve(response)
           })
       } else {
         response[0] = null
@@ -49,6 +52,10 @@ export default (target, fnName, descriptor) => {
           instance: this,
           original: fn
         })
+
+        if (this === target && !target.__STREAMIFY__) {
+          return fn
+        }
 
         Object.defineProperty(this, fnName, {
           configurable: true,
