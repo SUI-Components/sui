@@ -6,7 +6,7 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 
 ## Usage
 
-After adding your Segment script into your html ([SPA](https://github.com/segmentio/analytics-react#%EF%B8%8F-step-1-copy-the-snippet) / [Monolith](https://segment.com/docs/sources/website/analytics.js/quickstart/) docs), sui analytics will wait for it to completely load calling the `suiAnalytics.ready` function. Once Segment's library is wrapped, the ready function will resolve as an object with the tracking API described [here](#methods)
+After adding your Segment script into your html ([SPA](https://github.com/segmentio/analytics-react#%EF%B8%8F-step-1-copy-the-snippet) / [Monolith](https://segment.com/docs/sources/website/analytics.js/quickstart/) docs), sui analytics will wait for it to completely load calling the `suiAnalytics.ready` promise. Once Segment's library is wrapped, the ready promise will resolve as an object with the tracking API described [here](#methods)
 
 ```js
 import suiAnalytics from '@s-ui/sui-analytics'
