@@ -15,14 +15,11 @@ import ContextButtons from './ContextButtons'
 import EventsButtons from './EventsButtons'
 import ThemesButtons from './ThemesButtons'
 import withContext from './HoC/withContext'
-import withProvider from './HoC/withProvider'
 
-import {createStore} from '@s-ui/react-domain-connector'
 import SUIContext from '@s-ui/react-context'
 
 import {
   createContextByType,
-  checkIfPackageHasProvider,
   isFunction,
   cleanDisplayName,
   pipe,
@@ -148,7 +145,6 @@ export default class Demo extends Component {
       exports,
       isCodeOpen,
       isFullScreen,
-      pkg,
       playground,
       style,
       themes,
@@ -169,20 +165,11 @@ export default class Demo extends Component {
     const context =
       Object.keys(ctxt).length !== EMPTY && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
-    const hasProvider = checkIfPackageHasProvider(pkg)
-    const store = domain && hasProvider && createStore(domain)
 
-    const Enhance = pipe(
-      withContext(context, context),
-      withProvider(hasProvider, store)
-    )(ComponentToRender)
+    const Enhance = pipe(withContext(context, context))(ComponentToRender)
 
     const EnhanceDemoComponent =
-      DemoComponent &&
-      pipe(
-        withContext(context, context),
-        withProvider(hasProvider, store)
-      )(DemoComponent)
+      DemoComponent && pipe(withContext(context, context))(DemoComponent)
 
     !Enhance.displayName &&
       console.error(new Error('Component.displayName must be defined.'))
@@ -201,7 +188,7 @@ export default class Demo extends Component {
             selected={themeSelectedIndex}
             onThemeChange={this.handleThemeChange}
           />
-          <EventsButtons events={events || {}} store={store} domain={domain} />
+          <EventsButtons events={events || {}} domain={domain} />
         </div>
 
         <button

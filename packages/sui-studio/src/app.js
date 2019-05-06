@@ -1,6 +1,6 @@
 import React from 'react'
-import reactDOM from 'react-dom'
+import ReactDOM from 'react-dom'
 
 import Root from './components/root'
 
-reactDOM.render(<Root />, document.getElementById('root'))
+ReactDOM.render(<Root />, document.getElementById('root'))
