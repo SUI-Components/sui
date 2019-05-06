@@ -5,21 +5,17 @@ import PropTypes from 'prop-types'
 import Preview from '../../../../src/components/preview'
 
 import SUIContext from '@s-ui/react-context'
-import {createStore} from '@s-ui/react-domain-connector'
 import withContext from '../../../../src/components/demo/HoC/withContext'
-import withProvider from '../../../../src/components/demo/HoC/withProvider'
 import Style from '../../../../src/components/style'
 import When from '../../../../src/components/when'
 import {
   createContextByType,
-  checkIfPackageHasProvider,
   cleanDisplayName,
   pipe,
   removeDefaultContext
 } from '../../../../src/components/demo/utilities'
 
 import Component, * as named from 'component'
-import pkg from 'package'
 
 import './index.scss'
 
@@ -30,7 +26,6 @@ try {
 
 const EMPTY = 0
 const nonDefault = removeDefaultContext(named)
-const hasProvider = checkIfPackageHasProvider(pkg)
 
 class Raw extends React.PureComponent {
   static propTypes = {
@@ -55,22 +50,13 @@ class Raw extends React.PureComponent {
     const context =
       Object.keys(contexts).length !== EMPTY &&
       createContextByType(contexts, actualContext)
-    const {domain} = context || {}
-    const store = domain && hasProvider && createStore(domain)
 
     // check if is a normal component or it's wrapped with a React.memo method
     const ComponentToRender = Component.type ? Component.type : Component
-    const Enhance = pipe(
-      withContext(context, context),
-      withProvider(hasProvider, store)
-    )(ComponentToRender)
+    const Enhance = pipe(withContext(context, context))(ComponentToRender)
 
     const EnhanceDemoComponent =
-      DemoComponent &&
-      pipe(
-        withContext(context, context),
-        withProvider(hasProvider, store)
-      )(DemoComponent)
+      DemoComponent && pipe(withContext(context, context))(DemoComponent)
 
     return (
       <div className="Raw">

@@ -1,20 +1,16 @@
 import PropTypes from 'prop-types'
-import React, {Component} from 'react'
+import React from 'react'
 
-export default class Tabs extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    title: PropTypes.string
-  }
+export default function Tabs({children, title}) {
+  return (
+    <ul className="sui-StudioTabs sui-StudioTabs--small">
+      <li className="sui-StudioTabs-title">{title}</li>
+      {children}
+    </ul>
+  )
+}
 
-  render() {
-    const {title} = this.props
-
-    return (
-      <ul className="sui-StudioTabs sui-StudioTabs--small">
-        <li className="sui-StudioTabs-title">{title}</li>
-        {this.props.children}
-      </ul>
-    )
-  }
+Tabs.propTypes = {
+  children: PropTypes.any,
+  title: PropTypes.string
 }

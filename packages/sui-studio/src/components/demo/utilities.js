@@ -1,14 +1,6 @@
 import deepmerge from 'deepmerge'
 
 export const DEFAULT_CONTEXT = 'default'
-const DDD_REACT_REDUX = '@schibstedspain/ddd-react-redux'
-const REACT_DOMAIN_CONNECTOR = '@s-ui/react-domain-connector'
-
-export const checkIfPackageHasProvider = pkg =>
-  pkg &&
-  pkg.dependencies &&
-  (pkg.dependencies[DDD_REACT_REDUX] ||
-    pkg.dependencies[REACT_DOMAIN_CONNECTOR])
 
 export const createContextByType = (ctxt, type) => {
   // check if the user has created a context.js with the needed contextTypes
