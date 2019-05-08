@@ -28,7 +28,8 @@
   },
   "devDependencies": {
     "@babel/cli": "7",
-    "babel-preset-sui": "3"
+    "babel-preset-sui": "3",
+    "htmr": "^0.7.0"
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
 }
