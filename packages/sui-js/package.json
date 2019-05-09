@@ -11,6 +11,7 @@
   "dependencies": {
     "bowser": "1.8.1",
     "cookie": "0.3.1",
+    "htmr": "0.7.0",
     "js-cookie": "2.1.4",
     "lodash.camelcase": "4.3.0",
     "lodash.capitalize": "4.2.1",
@@ -28,8 +29,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7",
-    "babel-preset-sui": "3",
-    "htmr": "0.7.0"
+    "babel-preset-sui": "3"
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
 }
