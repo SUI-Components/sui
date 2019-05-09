@@ -1,14 +1,11 @@
 export default {
-  ready: function() {
-    return new Promise(resolve => {
-      window.analytics.ready(function() {
-        resolve({
-          track: window.analytics.track,
-          page: window.analytics.page,
-          identify: window.analytics.identify,
-          reset: window.analytics.reset
-        })
-      })
-    })
+  identify: args => {
+    window.analytics.identify(args)
+  },
+  reset: args => {
+    window.analytics.reset(args)
+  },
+  track: args => {
+    window.analytics.track(args)
   }
 }
