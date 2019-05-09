@@ -94,6 +94,11 @@ console.log(hasAccents('Árbol')) // true
 import {parseQueryString} from '@s-ui/js/lib/string'
 
 console.log(parseQueryString('?targetPage=pta')) // {targetPage: "pta"}
+
+
+import {htmlStringToReactElement} from '@s-ui/js/lib/string'
+
+htmlStringToReactElement('<p>No more dangerouslySetInnerHTML</p>')
 ```
 
 ## ua-parser
