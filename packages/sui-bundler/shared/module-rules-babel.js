@@ -12,6 +12,6 @@ module.exports = {
         presets: [require.resolve('babel-preset-sui')]
       }
     },
-    'source-map-loader'
+    require.resolve('source-map-loader')
   ]
 }
