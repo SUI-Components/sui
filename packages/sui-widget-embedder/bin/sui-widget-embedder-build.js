@@ -5,7 +5,13 @@ const rimraf = require('rimraf')
 const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
 const flatten = require('just-flatten-it')
-const {resolve} = require('path')
+const zlib = require('zlib')
+
+const gzip = zlib.createGzip()
+const brotli = require('iltorb').compressStream
+
+const path = require('path')
+const {resolve} = path
 const {
   readdirSync,
   statSync,
@@ -15,6 +21,9 @@ const {
 const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production')
 
+const FILE_DOWNLOADER = 'downloader.js'
+const FILE_SW = 'sw.js'
+
 const PAGES_FOLDER = 'pages'
 const PAGES_PATH = resolve(process.cwd(), PAGES_FOLDER)
 const PUBLIC_PATH = resolve(process.cwd(), 'public')
@@ -22,6 +31,7 @@ const PUBLIC_PATH = resolve(process.cwd(), 'public')
 const pkg = require(resolve(process.cwd(), 'package.json'))
 const config = pkg['config'] || {}
 const suiWidgetEmbedderConfig = config['sui-widget-embedder']
+const {manualCompression} = suiWidgetEmbedderConfig
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -119,6 +129,28 @@ const pageConfigs = () =>
     {}
   )
 
+const createBrotli = file =>
+  new Promise((resolve, reject) => {
+    createReadStream(path.resolve(process.cwd(), 'public', file))
+      .pipe(brotli())
+      .pipe(
+        createWriteStream(
+          path.resolve(process.cwd(), 'public', `${file}.br`)
+        ).on('finish', resolve)
+      )
+  })
+
+const createGzip = file =>
+  new Promise((resolve, reject) => {
+    createReadStream(path.resolve(process.cwd(), 'public', file))
+      .pipe(gzip)
+      .pipe(
+        createWriteStream(
+          path.resolve(process.cwd(), 'public', `${file}.gz`)
+        ).on('finish', resolve)
+      )
+  })
+
 const createDownloader = () =>
   // eslint-disable-next-line
   new Promise((res, rej) => {
@@ -135,10 +167,21 @@ const createDownloader = () =>
       )
       .pipe(minifyStream({sourceMap: false}))
       .pipe(
-        createWriteStream(resolve(process.cwd(), 'public', 'downloader.js'))
+        createWriteStream(resolve(process.cwd(), 'public', FILE_DOWNLOADER))
           .on('finish', () => {
-            console.log('Create a new downloader.js file')
-            res()
+            console.log(`Created a new ${FILE_DOWNLOADER} file`)
+
+            if (manualCompression) {
+              Promise.all([
+                createBrotli(FILE_DOWNLOADER),
+                createGzip(FILE_DOWNLOADER)
+              ]).then(() => {
+                console.log('Manually compressed downloader done!')
+                res()
+              })
+            } else {
+              res()
+            }
           })
           .on('error', rej)
       )
@@ -146,8 +189,7 @@ const createDownloader = () =>
   })
 
 const createSW = () =>
-  // eslint-disable-next-line
-  new Promise((res, rej) => {
+  new Promise((res, rej) => { // eslint-disable-line
     const filename = 'workbox-sw.prod.v2.1.2'
     const staticManifests = manifests()
     const staticCache = flatten(
@@ -162,7 +204,7 @@ const createSW = () =>
       `workbox-sw/build/importScripts/${filename}`
     )
 
-    createReadStream(resolve(__dirname, '..', 'downloader', 'sw.js'))
+    createReadStream(resolve(__dirname, '..', 'downloader', FILE_SW))
       .pipe(
         staticModule({
           'static-cache': () => JSON.stringify(staticCache),
@@ -172,7 +214,7 @@ const createSW = () =>
       )
       .pipe(minifyStream({sourceMap: false}))
       .pipe(
-        createWriteStream(resolve(process.cwd(), 'public', 'sw.js')).on(
+        createWriteStream(resolve(process.cwd(), 'public', FILE_SW)).on(
           'finish',
           () => {
             createReadStream(workboxImportPath).pipe(
