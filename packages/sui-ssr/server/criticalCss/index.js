@@ -14,8 +14,17 @@ const generateMinimalCSSHash = routes => {
   }, '')
 }
 
-export default withCriticalCSS => (req, res, next) => {
-  if (!withCriticalCSS || process.env.DISABLE_CRITICAL_CSS === 'true') {
+export default criticalCSS => (req, res, next) => {
+  if (!criticalCSS || process.env.DISABLE_CRITICAL_CSS === 'true') {
+    return next()
+  }
+
+  if (
+    criticalCSS &&
+    criticalCSS.blackListURLs &&
+    Array.isArray(criticalCSS.blackListURLs) &&
+    criticalCSS.blackListURLs.some(regex => req.url.match(regex))
+  ) {
     return next()
   }
 
