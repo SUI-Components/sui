@@ -2,12 +2,14 @@ import path from 'path'
 import fs from 'fs'
 import seoBotDetect from './seoBotDetect'
 import replace from 'stream-replace'
-
 import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
+import {publicFolderByHost} from '../utils'
 
-const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
+
+const indexHtmlPath = reqHeaders =>
+  path.join(process.cwd(), publicFolderByHost(reqHeaders), 'index.html')
 
 export default function dynamicRendering(fallback, dynamicsURLS = []) {
   return function middleware(req, resp, next) {
@@ -24,9 +26,10 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
     enabledDynamicRendering && resp.type('html')
 
     let indexHTMLStream
+
     if (criticalCSS) {
       indexHTMLStream = fs
-        .createReadStream(INDEX_HTML_PATH)
+        .createReadStream(indexHtmlPath(req.headers))
         .pipe(
           replace(
             HEAD_OPENING_TAG,
@@ -46,7 +49,7 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
           )
         )
     } else {
-      indexHTMLStream = fs.createReadStream(INDEX_HTML_PATH)
+      indexHTMLStream = fs.createReadStream(indexHtmlPath(req.headers))
     }
 
     return enabledDynamicRendering

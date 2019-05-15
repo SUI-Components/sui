@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import {publicFolderByHost} from '../utils'
 
 const APP_FILE = 'index.html'
 const APP_PLACEHOLDER = '<!-- APP -->'
@@ -11,11 +12,15 @@ let _memoizedAppParts = null
  * one for the head and one for the body. Html opening and closing tag will be present respectively on each part.
  * @return {array}
  */
-export const getTplParts = () => {
+export const getTplParts = reqHeaders => {
   if (_memoizedAppParts) {
     return _memoizedAppParts
   }
-  const filePath = path.join(process.cwd(), 'public', APP_FILE)
+  const filePath = path.join(
+    process.cwd(),
+    publicFolderByHost(reqHeaders),
+    APP_FILE
+  )
   const htmlTemplate = fs.readFileSync(filePath, 'utf8')
 
   _memoizedAppParts = htmlTemplate.split(HEAD_CLOSING_TAG)

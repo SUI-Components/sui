@@ -11,6 +11,7 @@ import jsYaml from 'js-yaml'
 import parseDomain from 'parse-domain'
 import compression from 'compression'
 import ssrConf from './config'
+import {useStaticsByHost} from './utils'
 
 const app = express()
 
@@ -65,7 +66,7 @@ const AUTH_DEFINITION = {
   app.use(express.static('statics'))
 
   app.use(hooks[TYPES.PRE_STATIC_PUBLIC])
-  app.use(express.static('public', {index: false}))
+  app.use(useStaticsByHost(express.static))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
 
