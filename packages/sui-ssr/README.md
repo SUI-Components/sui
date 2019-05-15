@@ -176,7 +176,7 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
-    "criticalCSS": true,
+    "criticalCSS": true, // or a config object something like {blackListURLs: ["mis-anuncios", "legacy-url\\.(html)?"]}
     "forceWWW": true,
     "dynamicsURLS": ["\/legal/*"]
   }
@@ -191,7 +191,8 @@ Configs accepted:
 
 - **`loadSPAOnNotFound`** (`false`): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
 
-- **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/)
+- **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
+  - ** `criticalCSS.blackListURLs` (undefined): Array of RegEx of urls. If some of this URLs match with the current page url. this feature will be disabled for the page. That is usefull the enabled CriticalCSS in your  site but not in one or two pages.
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
