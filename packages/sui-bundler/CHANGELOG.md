@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.9.0"></a>
+# 5.9.0 (2019-05-16)
+
+
+### Bug Fixes
+
+* use require.resolve in order to make compatible with linking ([abf7f21](https://github.com/SUI-Components/sui/commit/abf7f21))
+
+
+
 <a name="5.8.0"></a>
 # 5.8.0 (2019-04-26)
 
