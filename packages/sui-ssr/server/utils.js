@@ -1,4 +1,3 @@
-/* eslint operator-linebreak:0 */
 import ssrConf from './config'
 
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
