@@ -22,12 +22,12 @@ const __PAGES__ = {}
 const NOT_FOUND_CODE = 404
 const INTERNAL_ERROR_CODE = 500
 
-const getStaticErrorPageContent = async (status, reqHeaders) => {
+const getStaticErrorPageContent = async (status, req) => {
   if (__PAGES__[status]) {
     return __PAGES__[status]
   }
   const html = await promisify(readFile)(
-    resolve(process.cwd(), publicFolderByHost(reqHeaders), `${status}.html`),
+    resolve(process.cwd(), publicFolderByHost(req), `${status}.html`),
     'utf8'
   ).catch(e => `Generic Error Page: ${status}`)
   __PAGES__[status] = html
@@ -35,7 +35,7 @@ const getStaticErrorPageContent = async (status, reqHeaders) => {
 }
 
 const getSpaWithErroredContent = (req, err) => {
-  const [headTplPart, bodyTplPart] = getTplParts(req.headers)
+  const [headTplPart, bodyTplPart] = getTplParts(req)
   return `${HtmlBuilder.buildHead({headTplPart})}
     ${HtmlBuilder.buildBody({
       bodyTplPart,
@@ -65,7 +65,7 @@ export const hooksFactory = async () => {
     [TYPES.NOT_FOUND]: async (req, res, next) => {
       res
         .status(NOT_FOUND_CODE)
-        .send(await getStaticErrorPageContent(NOT_FOUND_CODE, req.headers))
+        .send(await getStaticErrorPageContent(NOT_FOUND_CODE, req))
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
       // getInitialProps could throw a 404 error or any other error
@@ -83,7 +83,7 @@ export const hooksFactory = async () => {
       if (req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE) {
         res.end(getSpaWithErroredContent(req, err))
       } else {
-        res.end(await getStaticErrorPageContent(status, req.headers))
+        res.end(await getStaticErrorPageContent(status, req))
       }
     },
     ..._userHooks

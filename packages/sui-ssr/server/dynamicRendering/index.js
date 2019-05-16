@@ -8,8 +8,8 @@ import {publicFolderByHost} from '../utils'
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const indexHtmlPath = reqHeaders =>
-  path.join(process.cwd(), publicFolderByHost(reqHeaders), 'index.html')
+const indexHtmlPath = req =>
+  path.join(process.cwd(), publicFolderByHost(req), 'index.html')
 
 export default function dynamicRendering(fallback, dynamicsURLS = []) {
   return function middleware(req, resp, next) {
@@ -29,7 +29,7 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
 
     if (criticalCSS) {
       indexHTMLStream = fs
-        .createReadStream(indexHtmlPath(req.headers))
+        .createReadStream(indexHtmlPath(req))
         .pipe(
           replace(
             HEAD_OPENING_TAG,
@@ -49,7 +49,7 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
           )
         )
     } else {
-      indexHTMLStream = fs.createReadStream(indexHtmlPath(req.headers))
+      indexHTMLStream = fs.createReadStream(indexHtmlPath(req))
     }
 
     return enabledDynamicRendering

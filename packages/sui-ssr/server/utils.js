@@ -1,29 +1,27 @@
 /* eslint operator-linebreak:0 */
 import ssrConf from './config'
 
+const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
 const EXPRESS_STATIC_CONFIG = {index: false}
-const APP_NAME = process.env.APP_NAME
-const multiSite = ssrConf.multiSite
-const {defaultDomainPattern, foldersMapping} = multiSite || {}
-const isMultiSite = foldersMapping && Object.keys(foldersMapping).length > 0
+const multiSiteMapping = ssrConf.multiSite
+const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
+const isMultiSite =
+  multiSiteKeys && multiSiteKeys.length > 0 && multiSiteKeys.includes('default')
 
-const siteFromReq = (reqHeaders, header = 'x-serve-site') =>
-  reqHeaders[header] ||
-  (reqHeaders.host.match(/localhost/) && defaultDomainPattern && APP_NAME
-    ? defaultDomainPattern.replace('%APP_NAME%', APP_NAME)
-    : reqHeaders.host)
+const siteFromReq = (req, header = DEFAULT_SITE_HEADER) =>
+  req.get(header) || req.hostname
 
-const publicFolderByHost = reqHeaders =>
+export const publicFolderByHost = req =>
   isMultiSite
-    ? foldersMapping[siteFromReq(reqHeaders)] || foldersMapping.default
+    ? multiSiteMapping[siteFromReq(req)] || multiSiteMapping.default
     : DEFAULT_PUBLIC_FOLDER
 
-const useStaticsByHost = expressStatic => {
-  const middlewares = Object.keys(foldersMapping).reduce(
+export const useStaticsByHost = expressStatic => {
+  const middlewares = Object.keys(multiSiteMapping).reduce(
     (acc, site) => ({
       ...acc,
-      site: expressStatic(foldersMapping[site], EXPRESS_STATIC_CONFIG)
+      [site]: expressStatic(multiSiteMapping[site], EXPRESS_STATIC_CONFIG)
     }),
     {}
   )
@@ -36,9 +34,4 @@ const useStaticsByHost = expressStatic => {
 
     middleware(req, res, next)
   }
-}
-
-exports = {
-  publicFolderByHost,
-  useStaticsByHost
 }

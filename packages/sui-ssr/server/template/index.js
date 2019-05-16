@@ -12,15 +12,11 @@ let _memoizedAppParts = null
  * one for the head and one for the body. Html opening and closing tag will be present respectively on each part.
  * @return {array}
  */
-export const getTplParts = reqHeaders => {
+export const getTplParts = req => {
   if (_memoizedAppParts) {
     return _memoizedAppParts
   }
-  const filePath = path.join(
-    process.cwd(),
-    publicFolderByHost(reqHeaders),
-    APP_FILE
-  )
+  const filePath = path.join(process.cwd(), publicFolderByHost(req), APP_FILE)
   const htmlTemplate = fs.readFileSync(filePath, 'utf8')
 
   _memoizedAppParts = htmlTemplate.split(HEAD_CLOSING_TAG)
