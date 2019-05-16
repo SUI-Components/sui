@@ -1,3 +1,5 @@
+export {default as htmlStringToReactElement} from 'htmr'
+
 const isReactRefObj = target => {
   if (target && typeof target === 'object') {
     return 'current' in target
