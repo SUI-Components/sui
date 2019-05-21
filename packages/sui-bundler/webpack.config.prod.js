@@ -184,8 +184,26 @@ module.exports = {
           require.resolve('postcss-loader'),
           require.resolve('sass-loader')
         ]
+      },
+      {
+        test: /(\.css|\.scss|\.js)$/,
+        use: [
+          {
+            loader: 'externals-manifest-loader',
+            options: {
+              manifestURL: config['externals-manifest']
+            }
+          }
+        ]
       }
     ]
+  },
+  resolveLoader: {
+    alias: {
+      'externals-manifest-loader': require.resolve(
+        './loaders/ExternalsManifestLoader'
+      )
+    }
   },
   node: {
     fs: 'empty',

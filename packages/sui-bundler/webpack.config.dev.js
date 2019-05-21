@@ -49,6 +49,13 @@ let webpackConfig = {
     }),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
+  resolveLoader: {
+    alias: {
+      'externals-manifest-loader': require.resolve(
+        './loaders/ExternalsManifestLoader'
+      )
+    }
+  },
   module: {
     rules: [
       {
@@ -94,6 +101,17 @@ let webpackConfig = {
       {
         test: /(\.css|\.scss)$/,
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+      },
+      {
+        test: /(\.css|\.scss|\.js)$/,
+        use: [
+          {
+            loader: 'externals-manifest-loader',
+            options: {
+              manifestURL: config['externals-manifest']
+            }
+          }
+        ]
       }
     ]
   },

@@ -142,6 +142,7 @@ This tool works with zero configuration out the box but you could use some confi
     "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
     "vendor": ["react", "react-dom"],
     "cdn": "https://url_to_me_cdn.com/",
+    "externals-manifest": "https://url_to_me_cdn/manifest.json",
     "alias": {"react": "preact"},
     "offline": true,
     "manualCompression": true,
@@ -222,6 +223,51 @@ You could use it to be used offline:
 
 Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-toolbox]. Also, the whitelist is a list of regexp that indicates which pages are secure to use only Client Server Rendering. You could use the `::all::` string to indicate that you always want to use Client Side Rendering.
 
+## Externals Manifest
+If your are using an external CDN to statics assets that are now manage by WebPack, like SVG or IMGs. You can create and `manifest.json` file in the root of your CDN
+something like: `https://spa-mock-statics.surge.sh/manifest.json`
+
+If you define the `externals-manifest` key in the config pointing to this link, sui-bundler will replace any ocurrence of each each key for the value
+
+if in your CSS you have:
+
+```
+#app { 
+  color: blue;
+  background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png') no-repeat scroll;
+}
+```
+
+after compile you will get:
+
+```
+#app{color:#00f;background:url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png) no-repeat scroll}
+```
+
+Or if in your JS you have:
+
+```
+<img
+  src={'https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.gif'}
+/>
+```
+
+after compile will be:
+
+```
+<img src="https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.5daef216ab.gif">
+```
+
+The main idea is have a long term caching strategy for the hashed files. But you **NEVER** must cache the `manifest.json` file.
+
+Create the manifest file it is up to you, but your file must follow this schema.
+```
+{
+  /images/favicon.ico: "/images/favicon.23f4ccc7ca.ico",
+  /images/common/arrow-down.png: "/images/common/arrow-down.2d12edfb00.png",
+  /images/common/icons-spritesheet.png: "/images/common/icons-spritesheet.9498fa3745.png",
+}
+```
 ## Externals
 
 It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
