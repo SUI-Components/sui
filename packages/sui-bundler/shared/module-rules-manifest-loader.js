@@ -1,4 +1,4 @@
-export default manifestURL => ({
+module.exports = manifestURL => ({
   test: /(\.css|\.scss|\.js)$/,
   use: [
     {
