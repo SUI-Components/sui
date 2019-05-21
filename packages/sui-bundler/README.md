@@ -227,7 +227,7 @@ Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-t
 If your are using an external CDN to statics assets that are now manage by WebPack, like SVG or IMGs. You can create and `manifest.json` file in the root of your CDN
 something like: `https://spa-mock-statics.surge.sh/manifest.json`
 
-If you define the `externals-manifest` key in the config pointing to this link, sui-bundler will replace any ocurrence of each each key for the value
+If you define the `externals-manifest` key in the config pointing to this link, sui-bundler will replace any ocurrence of each key for the value
 
 if in your CSS you have:
 
