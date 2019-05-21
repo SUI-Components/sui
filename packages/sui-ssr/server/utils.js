@@ -1,14 +1,19 @@
+import path from 'path'
+import fs from 'fs'
 import ssrConf from './config'
 
+const INDEX_FILE = 'index.html'
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
 const EXPRESS_STATIC_CONFIG = {index: false}
+
 const multiSiteMapping = ssrConf.multiSite
 const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
-const isMultiSite =
+
+export const isMultiSite =
   multiSiteKeys && multiSiteKeys.length > 0 && multiSiteKeys.includes('default')
 
-const siteFromReq = (req, header = DEFAULT_SITE_HEADER) =>
+export const siteFromReq = (req, header = DEFAULT_SITE_HEADER) =>
   req.get(header) || req.hostname
 
 export const publicFolderByHost = req =>
@@ -33,4 +38,10 @@ export const useStaticsByHost = expressStatic => {
 
     middleware(req, res, next)
   }
+}
+
+export const readHtmlTemplate = req => {
+  const filePath = path.join(process.cwd(), publicFolderByHost(req), INDEX_FILE)
+
+  return fs.readFileSync(filePath, 'utf8')
 }
