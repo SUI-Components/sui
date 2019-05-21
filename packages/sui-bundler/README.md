@@ -224,12 +224,11 @@ You could use it to be used offline:
 Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-toolbox]. Also, the whitelist is a list of regexp that indicates which pages are secure to use only Client Server Rendering. You could use the `::all::` string to indicate that you always want to use Client Side Rendering.
 
 ## Externals Manifest
-If your are using an external CDN to statics assets that are now manage by WebPack, like SVG or IMGs. You can create and `manifest.json` file in the root of your CDN
-something like: `https://spa-mock-statics.surge.sh/manifest.json`
+If your are using an external CDN to store statics assets that are now managed by Webpack, like SVG or IMGs, you can create a manifest.json file in the root of your CDN (likehttps://spa-mock-statics.surge.sh/manifest.json`).
 
 If you define the `externals-manifest` key in the config pointing to this link, sui-bundler will replace any ocurrence of each key for the value
 
-if in your CSS you have:
+If in your CSS you have:
 
 ```
 #app { 
@@ -238,7 +237,7 @@ if in your CSS you have:
 }
 ```
 
-after compile you will get:
+After compile you will get:
 
 ```
 #app{color:#00f;background:url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png) no-repeat scroll}
@@ -252,7 +251,7 @@ Or if in your JS you have:
 />
 ```
 
-after compile will be:
+After compile will be:
 
 ```
 <img src="https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.5daef216ab.gif">
@@ -260,7 +259,7 @@ after compile will be:
 
 The main idea is have a long term caching strategy for the hashed files. But you **NEVER** must cache the `manifest.json` file.
 
-Create the manifest file it is up to you, but your file must follow this schema.
+Create the manifest file is up to you, but your file must follow this schema.
 ```
 {
   /images/favicon.ico: "/images/favicon.23f4ccc7ca.ico",

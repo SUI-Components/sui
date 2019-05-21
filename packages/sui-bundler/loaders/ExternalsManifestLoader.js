@@ -1,6 +1,6 @@
 const path = require('path')
 const https = require('https')
-const MANIFEST = false
+let MANIFEST = false
 
 const getRemoteManifest = url =>
   new Promise((resolve, reject) => {
@@ -16,7 +16,8 @@ const getRemoteManifest = url =>
           data += chunk
         })
         resp.on('end', () => {
-          resolve(JSON.parse(data))
+          MANIFEST = JSON.parse(data)
+          resolve(MANIFEST)
         })
       })
       .on('error', err => {
