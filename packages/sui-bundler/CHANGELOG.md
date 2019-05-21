@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.10.0"></a>
+# 5.10.0 (2019-05-21)
+
+
+### Features
+
+* add externals-manifest feature ([0809229](https://github.com/SUI-Components/sui/commit/0809229))
+* fix cache manifest and Readme typos ([14b67cd](https://github.com/SUI-Components/sui/commit/14b67cd))
+* fix export module ([b6c83a5](https://github.com/SUI-Components/sui/commit/b6c83a5))
+* reuse logic to load the loader ([47dc435](https://github.com/SUI-Components/sui/commit/47dc435))
+
+
+
 <a name="5.9.0"></a>
 # 5.9.0 (2019-05-16)
 
