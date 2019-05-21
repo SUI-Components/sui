@@ -11,6 +11,7 @@ const uglifyJsPlugin = require('./shared/uglify')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 
 const zlib = require('zlib')
 const hasBrotliSupport = Boolean(zlib.brotliCompress)
@@ -174,7 +175,7 @@ module.exports = {
     )
   ]),
   module: {
-    rules: [
+    rules: cleanList([
       babelRules,
       {
         test: /(\.css|\.scss)$/,
@@ -184,8 +185,18 @@ module.exports = {
           require.resolve('postcss-loader'),
           require.resolve('sass-loader')
         ]
-      }
-    ]
+      },
+      when(config['externals-manifest'], () =>
+        manifestLoaderRules(config['externals-manifest'])
+      )
+    ])
+  },
+  resolveLoader: {
+    alias: {
+      'externals-manifest-loader': require.resolve(
+        './loaders/ExternalsManifestLoader'
+      )
+    }
   },
   node: {
     fs: 'empty',
