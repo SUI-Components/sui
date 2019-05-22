@@ -47,6 +47,7 @@
     "null-loader": "2.0.0",
     "object.values": "1.1.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
+    "parse5": "5.1.0",
     "postcss-loader": "3.0.0",
     "raw-loader": "2.0.0",
     "react-dev-utils": "9.0.1",
