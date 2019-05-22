@@ -1,4 +1,5 @@
-const {'sui-bundler': config = {}} = require(`${process.cwd()}/package.json`)
+const {config: packageConfig = {}} = require(`${process.cwd()}/package.json`)
+const {'sui-bundler': config = {}} = packageConfig
 
 exports.config = config
 exports.MAIN_ENTRY_POINT = './app.js'
