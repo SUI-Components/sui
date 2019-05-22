@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const {GenerateSW} = require('workbox-webpack-plugin')
-const uglifyJsPlugin = require('./shared/uglify')
+const JsMinimizer = require('./shared/js-minimizer')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
@@ -22,18 +22,41 @@ const {
   runtimeCaching,
   directoryIndex
 } = require('./shared/precache')
-const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {MAIN_ENTRY_POINT, when, cleanList, envVars, config} = require('./shared')
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
+const ENABLED_SOURCE_MAPS = config.sourcemaps && config.sourcemaps.prod
 
-module.exports = {
-  devtool:
-    config.sourcemaps && config.sourcemaps.prod
-      ? config.sourcemaps.prod
-      : 'none',
+const changePlugin = (name, instance) => plugins => {
+  const pos = plugins
+    .map(p => p.constructor.toString())
+    .findIndex(string => string.match(name))
+  return [...plugins.slice(0, pos), instance, ...plugins.slice(pos + 1)]
+}
+
+const createModuleConfig = ({isModern, isServer} = {}) => ({
+  rules: cleanList([
+    babelRules({isModern, isServer}),
+    {
+      test: /(\.css|\.scss)$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        require.resolve('css-loader'),
+        require.resolve('postcss-loader'),
+        require.resolve('sass-loader')
+      ]
+    },
+    when(config['externals-manifest'], () =>
+      manifestLoaderRules(config['externals-manifest'])
+    )
+  ])
+})
+
+const prodConfig = {
+  devtool: ENABLED_SOURCE_MAPS ? config.sourcemaps.prod : 'none',
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
@@ -55,7 +78,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      uglifyJsPlugin,
+      JsMinimizer({sourceMap: ENABLED_SOURCE_MAPS}),
       new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: {}
       })
@@ -86,7 +109,7 @@ module.exports = {
       template: './index.html',
       trackJSToken: '',
       minify: {
-        collapseWhitespace: true,
+        collapseWhitespace: false,
         keepClosingSlash: true,
         minifyCSS: true,
         minifyURLs: true,
@@ -96,19 +119,11 @@ module.exports = {
         useShortDoctype: true
       }
     }),
-    new ScriptExtHtmlWebpackPlugin(
-      Object.assign(
-        {
-          defaultAttribute: 'defer',
-          inline: 'runtime',
-          prefetch: {
-            test: /\.js$/,
-            chunks: 'all'
-          }
-        },
-        config.scripts
-      )
-    ),
+    new ScriptExtHtmlWebpackPlugin({
+      ...config.scripts,
+      module: 'es6',
+      defaultAttribute: 'defer'
+    }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
@@ -153,7 +168,7 @@ module.exports = {
   ]),
   module: {
     rules: cleanList([
-      babelRules,
+      babelRules(),
       {
         test: /(\.css|\.scss)$/,
         use: [
@@ -181,3 +196,48 @@ module.exports = {
     tls: 'empty'
   }
 }
+
+const legacyConfig = {
+  ...prodConfig,
+  name: 'es5',
+  output: {
+    ...prodConfig.output,
+    path: path.resolve(process.env.PWD, 'public', 'es5'),
+    publicPath: `${prodConfig.output.publicPath}es5/`
+  },
+  plugins: changePlugin(
+    'ScriptExtHtmlWebpackPlugin',
+    new ScriptExtHtmlWebpackPlugin({
+      ...config.scripts,
+      module: 'es6',
+      defaultAttribute: 'defer',
+      custom: [
+        {
+          test: /\.js$/,
+          attribute: 'nomodule',
+          value: ''
+        }
+      ]
+    })
+  )(prodConfig.plugins),
+  module: createModuleConfig()
+}
+
+const modernConfig = {
+  ...prodConfig,
+  name: 'es6',
+  resolve: {
+    ...prodConfig.resolve,
+    mainFields: ['rawsrc', 'browser', 'module', 'main']
+  },
+  output: {
+    ...prodConfig.output,
+    path: path.resolve(process.env.PWD, 'public', 'es6'),
+    publicPath: `${prodConfig.output.publicPath}es6/`,
+    chunkFilename: '[name].[chunkhash:8].es6.js',
+    filename: '[name].[chunkhash:8].es6.js'
+  },
+  module: createModuleConfig({isModern: true})
+}
+
+module.exports = [legacyConfig, modernConfig]

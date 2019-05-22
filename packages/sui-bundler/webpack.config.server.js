@@ -4,7 +4,7 @@ const path = require('path')
 const babelRules = require('./shared/module-rules-babel')
 const {config} = require('./shared')
 
-let webpackConfig = {
+module.exports = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
@@ -25,7 +25,7 @@ let webpackConfig = {
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   module: {
     rules: [
-      babelRules,
+      babelRules({isServer: true}),
       {
         // ignore scss require/imports files in the server
         test: /\.scss$/,
@@ -34,5 +34,3 @@ let webpackConfig = {
     ]
   }
 }
-
-module.exports = webpackConfig
