@@ -8,6 +8,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const config = require('../webpack.config.prod')
 const {config: projectConfig} = require('../shared')
+const joinParsedHtmlVersions = require('../shared/joinParsedHtmlVersions')
 
 // TODO: Extract this
 const chalk = require('chalk')
@@ -62,6 +63,9 @@ webpack(config).run((error, stats) => {
   }
 
   console.log(`Webpack stats: ${stats}`)
+
+  // Join both es5 and es6 html versions from the webpack build.
+  joinParsedHtmlVersions()
 
   if (projectConfig.offline && projectConfig.offline.whitelist) {
     fs.copySync(
