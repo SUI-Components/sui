@@ -4,9 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 require('./shared/shims')
 
-const {envVars, MAIN_ENTRY_POINT, config, cleanList} = require('./shared')
+const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${
@@ -49,8 +50,15 @@ let webpackConfig = {
     }),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
+  resolveLoader: {
+    alias: {
+      'externals-manifest-loader': require.resolve(
+        './loaders/ExternalsManifestLoader'
+      )
+    }
+  },
   module: {
-    rules: [
+    rules: cleanList([
       {
         test: /\.(js|jsx|mjs)$/,
         enforce: 'pre',
@@ -94,8 +102,11 @@ let webpackConfig = {
       {
         test: /(\.css|\.scss)$/,
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-      }
-    ]
+      },
+      when(config['externals-manifest'], () =>
+        manifestLoaderRules(config['externals-manifest'])
+      )
+    ])
   },
   devtool:
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'

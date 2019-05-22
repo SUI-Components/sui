@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/decorators",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
@@ -16,7 +16,7 @@
     "sinon": "2"
   },
   "dependencies": {
-    "@s-ui/js": "1",
+    "@s-ui/js": "2",
     "tiny-lru": "6.0.1"
   }
 }

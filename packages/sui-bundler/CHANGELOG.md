@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.11.0"></a>
+# 5.11.0 (2019-05-22)
+
+
+### Bug Fixes
+
+* avoid ssr missmatch ([211df3d](https://github.com/SUI-Components/sui/commit/211df3d))
+
+
+
+<a name="5.10.0"></a>
+# 5.10.0 (2019-05-21)
+
+
+### Features
+
+* add externals-manifest feature ([0809229](https://github.com/SUI-Components/sui/commit/0809229))
+* fix cache manifest and Readme typos ([14b67cd](https://github.com/SUI-Components/sui/commit/14b67cd))
+* fix export module ([b6c83a5](https://github.com/SUI-Components/sui/commit/b6c83a5))
+* reuse logic to load the loader ([47dc435](https://github.com/SUI-Components/sui/commit/47dc435))
+
+
+
+<a name="5.9.0"></a>
+# 5.9.0 (2019-05-16)
+
+
+### Bug Fixes
+
+* use require.resolve in order to make compatible with linking ([abf7f21](https://github.com/SUI-Components/sui/commit/abf7f21))
+
+
+
 <a name="5.8.0"></a>
 # 5.8.0 (2019-04-26)
 

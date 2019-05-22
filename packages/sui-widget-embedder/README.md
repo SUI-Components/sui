@@ -71,6 +71,7 @@ Inside your project-level package.json, you could config the library,
 - alias [OPTIONAL]: create aliases to `import` certain modules more easily or to avoid importing them in production.
 - remoteCdn [OPTIONAL] (default: `'/'`): the base path of the cdn where your assets will be located.
 - devPort [OPTIONAL] (default: `3000`): Port where your development server will be listening.
+- manualCompression [OPTIONAL] (default: false): Compress files manually with gzip and brotli to be served via CDN
 
 ### Page config
 
