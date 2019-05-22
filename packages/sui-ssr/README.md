@@ -209,7 +209,7 @@ Configs accepted:
     }
   }
   ```
-  Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
+  Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
 ## Dynamic Rendering
 
