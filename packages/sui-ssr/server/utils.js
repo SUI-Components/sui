@@ -22,13 +22,16 @@ export const publicFolderByHost = req =>
     : DEFAULT_PUBLIC_FOLDER
 
 export const useStaticsByHost = expressStatic => {
-  const middlewares = Object.keys(multiSiteMapping).reduce(
-    (acc, site) => ({
-      ...acc,
-      [site]: expressStatic(multiSiteMapping[site], EXPRESS_STATIC_CONFIG)
-    }),
-    {}
-  )
+  let middlewares
+  if (isMultiSite) {
+    middlewares = Object.keys(multiSiteMapping).reduce(
+      (acc, site) => ({
+        ...acc,
+        [site]: expressStatic(multiSiteMapping[site], EXPRESS_STATIC_CONFIG)
+      }),
+      {}
+    )
+  }
 
   return function serveStaticByHost(req, res, next) {
     const site = siteFromReq(req)
