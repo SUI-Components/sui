@@ -138,24 +138,26 @@ This tool works with zero configuration out the box but you could use some confi
 
 ```json
 {
-  "sui-bundler": {
-    "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
-    "vendor": ["react", "react-dom"],
-    "cdn": "https://url_to_me_cdn.com/",
-    "externals-manifest": "https://url_to_me_cdn/manifest.json",
-    "alias": {"react": "preact"},
-    "offline": true,
-    "manualCompression": true,
-    "externals": {
-      "jquery": "./node_modules/jquery/jquery.min.js"
-    },
-    "scripts": {
-      "prefetch": "low-priority-chunk.js",
-      "preload": ["page1.js", "page2.js"]
-    },
-    "sourcemaps": {
-      "dev": "cheap-module-eval-source-map",
-      "prod": "hidden-source-map"
+  "config": {
+    "sui-bundler": {
+      "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
+      "vendor": ["react", "react-dom"],
+      "cdn": "https://url_to_me_cdn.com/",
+      "externals-manifest": "https://url_to_me_cdn/manifest.json",
+      "alias": {"react": "preact"},
+      "offline": true,
+      "manualCompression": true,
+      "externals": {
+        "jquery": "./node_modules/jquery/jquery.min.js"
+      },
+      "scripts": {
+        "prefetch": "low-priority-chunk.js",
+        "preload": ["page1.js", "page2.js"]
+      },
+      "sourcemaps": {
+        "dev": "cheap-module-eval-source-map",
+        "prod": "hidden-source-map"
+      }
     }
   }
 }
@@ -290,10 +292,12 @@ Different values can be configured for development (`dev`) and production (`prod
 
 ```json
 {
-  "sui-bundler": {
-    "sourcemaps": {
-      "dev": "cheap-module-eval-source-map",
-      "prod": "hidden-source-map"
+  "config": {
+    "sui-bundler": {
+      "sourcemaps": {
+        "dev": "cheap-module-eval-source-map",
+        "prod": "hidden-source-map"
+      }
     }
   }
 }
