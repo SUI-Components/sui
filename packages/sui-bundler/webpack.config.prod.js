@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const {GenerateSW} = require('workbox-webpack-plugin')
 const uglifyJsPlugin = require('./shared/uglify')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
@@ -115,37 +115,14 @@ module.exports = {
     when(
       config.offline,
       () =>
-        new SWPrecacheWebpackPlugin({
-          dontCacheBustUrlsMatching: /\.\w{8}\./,
-          filename: 'service-worker.js',
-          logger(message) {
-            if (message.indexOf('Total precache size is') === 0) {
-              // This message occurs for every build and is a bit too noisy.
-              return
-            }
-            console.log(message)
-          },
-          minify: true,
-          directoryIndex: (console.log(
-            'directoryIndex',
-            directoryIndex(config.offline.whitelist)
+        new GenerateSW({
+          directoryIndex: directoryIndex(config.offline.whitelist),
+          navigateFallback:
+            PUBLIC_PATH + navigateFallback(config.offline.whitelist),
+          navigateFallbackWhitelist: navigateFallbackWhitelist(
+            config.offline.whitelist
           ),
-          directoryIndex(config.offline.whitelist)),
-          navigateFallback: (console.log(
-            'navigateFallback',
-            PUBLIC_PATH + navigateFallback(config.offline.whitelist)
-          ),
-          PUBLIC_PATH + navigateFallback(config.offline.whitelist)),
-          navigateFallbackWhitelist: (console.log(
-            'navigateFallbackWhitelist',
-            navigateFallbackWhitelist(config.offline.whitelist)
-          ),
-          navigateFallbackWhitelist(config.offline.whitelist)),
-          runtimeCaching: (console.log(
-            'runtimeCaching',
-            runtimeCaching(config.offline.runtime)
-          ),
-          runtimeCaching(config.offline.runtime)),
+          runtimeCaching: runtimeCaching(config.offline.runtime),
           staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
         })
     ),
