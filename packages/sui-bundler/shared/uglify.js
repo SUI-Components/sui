@@ -1,7 +1,8 @@
-const TerserPlugin = require('terser-webpack-plugin')
+const Terser = require('terser-webpack-plugin')
 
-module.exports = new TerserPlugin({
+module.exports = new Terser({
   terserOptions: {
+    test: /\.m?js$/,
     parse: {
       // we want terser to parse ecma 8 code. However, we don't want it
       // to apply any minfication steps that turns valid ecma 5 code
