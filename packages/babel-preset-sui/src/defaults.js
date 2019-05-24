@@ -1,9 +1,9 @@
 module.exports = {
   DEFAULT_LEGACY_TARGETS: {
-    chrome: '41',
+    chrome: '41', // previous googlebot version
     ie: '11',
     safari: '8',
-    firefox: 'esr',
+    firefox: '60', // esr
     ios: '8'
   },
   DEFAULT_MODERN_TARGETS: {
