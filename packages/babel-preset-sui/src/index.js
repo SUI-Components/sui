@@ -6,7 +6,7 @@ const {
   SELECTIVE_LOOSE_REACT_HOOKS
 } = require('./defaults')
 
-function getTargets({isModern, isServer, targets}) {
+function getTargets({isModern, isServer, targets = {}}) {
   const {
     legacy = DEFAULT_LEGACY_TARGETS,
     modern = DEFAULT_MODERN_TARGETS,
@@ -62,7 +62,7 @@ function presets(api, opts) {
       require('@babel/preset-env').default,
       {
         corejs: 3,
-        debug: true, // remove true here
+        debug: true, // remove true here, only for dev
         ignoreBrowserslistConfig: true,
         loose: true,
         modules: false,
