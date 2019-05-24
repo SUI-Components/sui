@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.2.0"></a>
+# 7.2.0 (2019-05-24)
+
+
+### Bug Fixes
+
+* fixed messed linting ([771408c](https://github.com/SUI-Components/sui/commit/771408c))
+
+
+### Features
+
+* adds a mobile device representation just to make it look cooler ([7cde325](https://github.com/SUI-Components/sui/commit/7cde325))
+
+
+
+<a name="7.1.0"></a>
+# 7.1.0 (2019-05-22)
+
+
+### Bug Fixes
+
+* remove gone tests components ([1a1346b](https://github.com/SUI-Components/sui/commit/1a1346b))
+
+
+
 <a name="7.0.0"></a>
 # 7.0.0 (2019-05-06)
 

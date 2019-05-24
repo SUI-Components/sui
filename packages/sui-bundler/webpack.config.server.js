@@ -2,7 +2,8 @@ const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
 const babelRules = require('./shared/module-rules-babel')
-const {config} = require('./shared')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
+const {config, when, cleanList} = require('./shared')
 
 module.exports = {
   context: path.resolve(process.cwd(), 'src'),
@@ -23,14 +24,24 @@ module.exports = {
   },
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
+  resolveLoader: {
+    alias: {
+      'externals-manifest-loader': require.resolve(
+        './loaders/ExternalsManifestLoader'
+      )
+    }
+  },
   module: {
     rules: [
       babelRules({isServer: true}),
       {
-        // ignore scss require/imports files in the server
-        test: /\.scss$/,
+        // ignore css/scss require/imports files in the server
+        test: /\.s?css$/,
         use: ['null-loader']
-      }
-    ]
+      },
+      when(config['externals-manifest'], () =>
+        manifestLoaderRules(config['externals-manifest'])
+      )
+    ])
   }
 }

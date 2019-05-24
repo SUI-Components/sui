@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.12.0"></a>
+# 5.12.0 (2019-05-24)
+
+
+### Bug Fixes
+
+* avoid css causing problems ([1871e80](https://github.com/SUI-Components/sui/commit/1871e80))
+
+
+
+<a name="5.11.0"></a>
+# 5.11.0 (2019-05-22)
+
+
+### Bug Fixes
+
+* avoid ssr missmatch ([211df3d](https://github.com/SUI-Components/sui/commit/211df3d))
+
+
+
 <a name="5.10.0"></a>
 # 5.10.0 (2019-05-21)
 
