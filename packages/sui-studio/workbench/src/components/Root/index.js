@@ -1,24 +1,24 @@
 /* eslint import/no-webpack-loader-syntax:0 */
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import Header from '../Header'
-import Select from '../Select'
+import Header from "../Header";
+import Select from "../Select";
 
 const DEVICES = {
   mobile: {
-    width: 360,
-    height: 640
+    width: 362,
+    height: 642
   },
   tablet: {
     width: 768,
     height: 1024
   },
   desktop: {
-    width: '100%',
-    height: '100%'
+    width: "100%",
+    height: "100%"
   }
-}
+};
 
 class Root extends React.PureComponent {
   static propTypes = {
@@ -27,61 +27,64 @@ class Root extends React.PureComponent {
     demo: PropTypes.node,
     demoStyles: PropTypes.string,
     themes: PropTypes.object
-  }
+  };
 
   state = {
-    actualContext: window.sessionStorage.actualContext || 'default',
-    actualStyle: window.sessionStorage.actualStyle || 'default',
-    actualDevice: window.sessionStorage.actualDevice || 'mobile'
-  }
+    actualContext: window.sessionStorage.actualContext || "default",
+    actualStyle: window.sessionStorage.actualStyle || "default",
+    actualDevice: window.sessionStorage.actualDevice || "mobile"
+  };
 
   render() {
-    const {actualContext, actualStyle, actualDevice} = this.state
-    const {contexts = {}, themes, componentID} = this.props
+    const { actualContext, actualStyle, actualDevice } = this.state;
+    const { contexts = {}, themes, componentID } = this.props;
     return (
       <div className="Root">
         <div className="Root-top">
           <Header componentID={componentID}>
             <Select
-              label={'Contexts'}
+              label={"Contexts"}
               options={contexts}
               initValue={actualContext}
               onChange={nextValue => {
-                window.sessionStorage.setItem('actualContext', nextValue)
-                this.setState({actualContext: nextValue})
+                window.sessionStorage.setItem("actualContext", nextValue);
+                this.setState({ actualContext: nextValue });
               }}
             />
             <Select
-              label={'Themes'}
+              label={"Themes"}
               options={themes}
               initValue={actualStyle}
               onChange={nextValue => {
-                window.sessionStorage.setItem('actualStyle', nextValue)
-                this.setState({actualStyle: nextValue})
+                window.sessionStorage.setItem("actualStyle", nextValue);
+                this.setState({ actualStyle: nextValue });
               }}
             />
             <Select
-              label={'Devices'}
+              label={"Devices"}
               options={DEVICES}
               initValue={actualDevice}
               onChange={nextValue => {
-                window.sessionStorage.setItem('actualDevice', nextValue)
-                this.setState({actualDevice: nextValue})
+                window.sessionStorage.setItem("actualDevice", nextValue);
+                this.setState({ actualDevice: nextValue });
               }}
             />
           </Header>
         </div>
-        <div className="Root-center">
+        <div className={`Root-center Root-${actualDevice}`}>
+          <span className={`Root-${actualDevice}-camera`} />
+          <span className={`Root-${actualDevice}-speaker`} />
+          <span className={`Root-${actualDevice}-button`} />
           <iframe
             style={{
               width: DEVICES[actualDevice].width,
               height: DEVICES[actualDevice].height,
               zoom: 1,
-              display: 'block',
-              margin: '10px auto',
-              overflow: 'scroll',
-              backgroundColor: '#fff',
-              border: 0
+              display: "block",
+              margin: "10px auto",
+              overflow: "scroll",
+              backgroundColor: "#fff",
+              border: "1px solid gray"
             }}
             src={`/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`}
             scrolling="yes"
@@ -89,8 +92,8 @@ class Root extends React.PureComponent {
         </div>
         <div className="Root-bottom" />
       </div>
-    )
+    );
   }
 }
 
-export default Root
+export default Root;
