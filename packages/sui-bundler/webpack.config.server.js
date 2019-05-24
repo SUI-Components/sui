@@ -35,7 +35,7 @@ let webpackConfig = {
     rules: cleanList([
       babelRules,
       {
-        // ignore scss require/imports files in the server
+        // ignore css/scss require/imports files in the server
         test: /\.s?css$/,
         use: ['null-loader']
       },
