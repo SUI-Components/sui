@@ -36,7 +36,7 @@ let webpackConfig = {
       babelRules,
       {
         // ignore scss require/imports files in the server
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: ['null-loader']
       },
       when(config['externals-manifest'], () =>
