@@ -179,12 +179,18 @@ module.exports = {
       babelRules,
       {
         test: /(\.css|\.scss)$/,
-        use: [
+        use: cleanList([
           MiniCssExtractPlugin.loader,
           require.resolve('css-loader'),
+          when(config['externals-manifest'], () => ({
+            loader: 'externals-manifest-loader',
+            options: {
+              manifestURL: config['externals-manifest']
+            }
+          })),
           require.resolve('postcss-loader'),
           require.resolve('sass-loader')
-        ]
+        ])
       },
       when(config['externals-manifest'], () =>
         manifestLoaderRules(config['externals-manifest'])
