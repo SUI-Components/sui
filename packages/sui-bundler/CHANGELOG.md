@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.13.0"></a>
+# 5.13.0 (2019-05-27)
+
+
+### Bug Fixes
+
+* fix incompatibility issue when use link-loader ([c2d76f7](https://github.com/SUI-Components/sui/commit/c2d76f7))
+* upgrade to not unsecure dependency ([bafcaff](https://github.com/SUI-Components/sui/commit/bafcaff))
+
+
+
 <a name="5.12.0"></a>
 # 5.12.0 (2019-05-24)
 
