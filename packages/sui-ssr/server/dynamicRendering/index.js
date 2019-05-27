@@ -1,11 +1,6 @@
-import path from 'path'
-import fs from 'fs'
 import seoBotDetect from './seoBotDetect'
-import replace from 'stream-replace'
-
 import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
 
-const INDEX_HTML_PATH = path.join(process.cwd(), 'public', 'index.html')
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
@@ -23,34 +18,23 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
 
     enabledDynamicRendering && resp.type('html')
 
-    let indexHTMLStream
+    let htmlTemplateResponse = req.htmlTemplate
+
     if (criticalCSS) {
-      indexHTMLStream = fs
-        .createReadStream(INDEX_HTML_PATH)
-        .pipe(
-          replace(
-            HEAD_OPENING_TAG,
-            `${HEAD_OPENING_TAG}<style>${criticalCSS}</style>`
-          )
+      htmlTemplateResponse = htmlTemplateResponse
+        .replace(
+          HEAD_OPENING_TAG,
+          `${HEAD_OPENING_TAG}<style>${criticalCSS}</style>`
         )
-        .pipe(
-          replace(
-            'rel="stylesheet"',
-            'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
-          )
+        .replace(
+          'rel="stylesheet"',
+          'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
         )
-        .pipe(
-          replace(
-            HEAD_CLOSING_TAG,
-            replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)
-          )
-        )
-    } else {
-      indexHTMLStream = fs.createReadStream(INDEX_HTML_PATH)
+        .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
     }
 
     return enabledDynamicRendering
-      ? indexHTMLStream.pipe(resp)
+      ? resp.send(htmlTemplateResponse)
       : fallback.call(this, req, resp, next)
   }
 }

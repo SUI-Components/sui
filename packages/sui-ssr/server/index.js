@@ -11,6 +11,12 @@ import jsYaml from 'js-yaml'
 import parseDomain from 'parse-domain'
 import compression from 'compression'
 import ssrConf from './config'
+import {
+  isMultiSite,
+  siteFromReq,
+  useStaticsByHost,
+  readHtmlTemplate
+} from './utils'
 
 const app = express()
 
@@ -52,6 +58,7 @@ const AUTH_DEFINITION = {
   users: {[AUTH_USERNAME]: AUTH_PASSWORD},
   challenge: true
 }
+let _memoizedHtmlTemplate
 ;(async () => {
   const hooks = await hooksFactory()
 
@@ -65,7 +72,7 @@ const AUTH_DEFINITION = {
   app.use(express.static('statics'))
 
   app.use(hooks[TYPES.PRE_STATIC_PUBLIC])
-  app.use(express.static('public', {index: false}))
+  app.use(useStaticsByHost(express.static))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
 
@@ -83,6 +90,28 @@ const AUTH_DEFINITION = {
               301
             )
     })
+
+  app.use((req, res, next) => {
+    const site = siteFromReq(req)
+    // We check if our current cached template is actually multisite or not.
+    const multiSiteMemoizedHtmlTemplate =
+      _memoizedHtmlTemplate && _memoizedHtmlTemplate[site]
+    const memoizedHtmlTemplate =
+      multiSiteMemoizedHtmlTemplate || _memoizedHtmlTemplate
+
+    if (memoizedHtmlTemplate) {
+      req.htmlTemplate = memoizedHtmlTemplate
+    } else {
+      const htmlTemplate = readHtmlTemplate(req)
+
+      req.htmlTemplate = htmlTemplate
+      _memoizedHtmlTemplate = isMultiSite
+        ? {[site]: htmlTemplate}
+        : htmlTemplate
+    }
+
+    next()
+  })
 
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),
