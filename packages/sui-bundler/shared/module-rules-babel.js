@@ -1,11 +1,7 @@
-const {sep} = require('path')
-const {config} = require('./shared')
+const {config} = require('./index')
 
-module.exports = ({isModern, isServer} = {}) => ({
+module.exports = ({isServer} = {}) => ({
   test: /\.jsx?$/,
-  exclude: isModern
-    ? undefined
-    : new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
   use: [
     {
       loader: require.resolve('babel-loader'),
@@ -13,12 +9,13 @@ module.exports = ({isModern, isServer} = {}) => ({
         babelrc: false,
         compact: true,
         presets: [
-          [require.resolve('babel-preset-sui')],
-          {
-            isModern,
-            isServer,
-            targets: config.targets
-          }
+          [
+            require.resolve('babel-preset-sui'),
+            {
+              isServer,
+              targets: config.targets
+            }
+          ]
         ]
       }
     },
