@@ -62,6 +62,7 @@ let _memoizedHtmlTemplate
 ;(async () => {
   const hooks = await hooksFactory()
 
+  app.use(hooks[TYPES.PRE_HEALTH])
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
   )
