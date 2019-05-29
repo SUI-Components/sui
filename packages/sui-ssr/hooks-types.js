@@ -1,4 +1,5 @@
 export default {
+  PRE_HEALTH: 'pre_health',
   LOGGING: 'logging',
   INTERNAL_ERROR: 'internal_error',
   NOT_FOUND: 'not_found',

@@ -58,7 +58,9 @@ export const hooksFactory = async () => {
   const _userHooks = isFunction(_userHooksInterOP)
     ? await _userHooksInterOP()
     : _userHooksInterOP
+
   return {
+    [TYPES.PRE_HEALTH]: NULL_MDWL,
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
