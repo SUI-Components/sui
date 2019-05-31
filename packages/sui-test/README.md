@@ -79,6 +79,7 @@ npm install @s-ui/test --save-dev
 
     Options:
 
+        -I, --inspect Inspect node process
         -W, --watch  Run in watch mode
         -P, --pattern <pattern>  Path pattern to include (default: test)
         -h, --help   output usage information
