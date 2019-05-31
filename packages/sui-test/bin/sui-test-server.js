@@ -6,6 +6,7 @@ const path = require('path')
 const {serialSpawn} = require('@s-ui/helpers/cli')
 
 program
+  .option('-I, --inspect', 'Inspect node process')
   .option('-W, --watch', 'Run in watch mode')
   .option('-P, --pattern <pattern>', 'Path pattern to include', 'test')
   .on('--help', () => {
@@ -20,7 +21,7 @@ program
   })
   .parse(process.argv)
 
-const {pattern, watch} = program
+const {pattern, watch, inspect} = program
 
 serialSpawn([
   [
@@ -29,6 +30,7 @@ serialSpawn([
       path.join(process.cwd(), path.sep, pattern),
       `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
       '--recursive',
+      inspect && '--inspect-brk',
       watch && '--watch'
     ].filter(Boolean)
   ]
