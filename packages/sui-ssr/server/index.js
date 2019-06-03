@@ -58,7 +58,9 @@ const AUTH_DEFINITION = {
   users: {[AUTH_USERNAME]: AUTH_PASSWORD},
   challenge: true
 }
-let _memoizedHtmlTemplate
+// Global object within the server context containing the
+// cached HTML templates for each site.
+let _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
@@ -82,6 +84,7 @@ let _memoizedHtmlTemplate
       const parsedUrl = parseDomain(req.hostname, {
         customTlds: /localhost|\.local/
       })
+
       !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
@@ -93,12 +96,12 @@ let _memoizedHtmlTemplate
     })
 
   app.use((req, res, next) => {
-    const site = siteFromReq(req)
-    // We check if our current cached template is actually multisite or not.
-    const multiSiteMemoizedHtmlTemplate =
-      _memoizedHtmlTemplate && _memoizedHtmlTemplate[site]
+    // Since `_memoizedHtmlTemplatesMapping` will be always an object
+    // we need to define a key for each multisite and one default
+    // for single sites too.
+    const site = isMultiSite ? siteFromReq(req) : 'default'
     const memoizedHtmlTemplate =
-      multiSiteMemoizedHtmlTemplate || _memoizedHtmlTemplate
+      _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
 
     if (memoizedHtmlTemplate) {
       req.htmlTemplate = memoizedHtmlTemplate
@@ -106,9 +109,7 @@ let _memoizedHtmlTemplate
       const htmlTemplate = readHtmlTemplate(req)
 
       req.htmlTemplate = htmlTemplate
-      _memoizedHtmlTemplate = isMultiSite
-        ? {[site]: htmlTemplate}
-        : htmlTemplate
+      _memoizedHtmlTemplatesMapping[site] = htmlTemplate
     }
 
     next()
