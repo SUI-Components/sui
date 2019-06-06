@@ -9,12 +9,6 @@ require('./shared/shims')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 
-const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${
-    path.sep
-  }workbench)?${path.sep}src)`
-)
-
 let webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
@@ -76,11 +70,11 @@ let webpackConfig = {
             loader: require.resolve('eslint-loader')
           }
         ],
-        exclude: EXCLUDED_FOLDERS_REGEXP
+        exclude: new RegExp(`node_modules`)
       },
       {
         test: /\.jsx?$/,
-        exclude: EXCLUDED_FOLDERS_REGEXP,
+        exclude: new RegExp(`node_modules/react-dev-utils`),
         use: [
           {
             loader: require.resolve('thread-loader'),
