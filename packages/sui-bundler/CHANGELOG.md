@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.14.0"></a>
+# 5.14.0 (2019-06-06)
+
+
+### Features
+
+* add onlyHash config ([ebad99b](https://github.com/SUI-Components/sui/commit/ebad99b))
+
+
+
 <a name="5.13.0"></a>
 # 5.13.0 (2019-05-27)
 
