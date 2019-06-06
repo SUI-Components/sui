@@ -1,25 +1,21 @@
 const cleanList = require('./clean-list')
 const {
-  DEFAULT_LEGACY_TARGETS,
-  DEFAULT_MODERN_TARGETS,
+  DEFAULT_BROWSER_TARGETS,
   DEFAULT_SERVER_TARGETS,
   SELECTIVE_LOOSE_REACT_HOOKS
 } = require('./defaults')
 
-function getTargets({isModern, isServer, targets = {}}) {
+function getTargets({isServer, targets = {}}) {
   const {
-    legacy = DEFAULT_LEGACY_TARGETS,
-    modern = DEFAULT_MODERN_TARGETS,
+    browser = DEFAULT_BROWSER_TARGETS,
     server = DEFAULT_SERVER_TARGETS
   } = targets
 
   if (isServer) return server
-  if (isModern) return modern
-  return legacy
+  return browser
 }
 
 function plugins(api, opts = {}) {
-  const {isModern} = opts
   return cleanList([
     require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-syntax-export-default-from').default,
@@ -32,7 +28,7 @@ function plugins(api, opts = {}) {
         removeImport: true
       }
     ],
-    !isModern && [
+    [
       require('@babel/plugin-proposal-object-rest-spread').default,
       {useBuiltIns: true} // asume Object.assign is available by browser or polyfill
     ],
@@ -40,7 +36,7 @@ function plugins(api, opts = {}) {
       require('@babel/plugin-transform-runtime').default,
       {
         corejs: false,
-        useESModules: isModern
+        useESModules: true
       }
     ],
     [
@@ -55,20 +51,20 @@ function plugins(api, opts = {}) {
 }
 
 function presets(api, opts) {
-  const {isModern, isServer, targets} = opts
+  const {isServer, targets} = opts
 
   return [
     [
       require('@babel/preset-env').default,
       {
         corejs: 3,
-        debug: true, // remove true here, only for dev
+        debug: false,
         ignoreBrowserslistConfig: true,
         loose: true,
         modules: false,
         // Exclude transforms that make all code slower
         exclude: ['transform-typeof-symbol'],
-        targets: getTargets({isModern, isServer, targets}),
+        targets: getTargets({isServer, targets}),
         useBuiltIns: 'entry'
       }
     ],
@@ -76,8 +72,7 @@ function presets(api, opts) {
   ]
 }
 
-module.exports = (api, opts) =>
-  console.log('*******************', opts) || {
-    presets: presets(api, opts),
-    plugins: plugins(api, opts)
-  }
+module.exports = (api, opts) => ({
+  presets: presets(api, opts),
+  plugins: plugins(api, opts)
+})
