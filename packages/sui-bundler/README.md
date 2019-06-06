@@ -136,6 +136,8 @@ This tool works with zero configuration out the box but you could use some confi
 
 `manualCompression`: Compress files manually to gzip and brotli (if supported). Useful to use along with a S3 and Lambda@Edge in order to send the best content for the userAgent. (default: `false`)
 
+`targets`: Object with information about the browser and version supported. (default: `see the next example`)
+
 ```json
 {
   "sui-bundler": {
@@ -147,6 +149,13 @@ This tool works with zero configuration out the box but you could use some confi
     "alias": {"react": "preact"},
     "offline": true,
     "manualCompression": true,
+    "targets": {
+      "chrome": "41",
+      "ie": "11",
+      "safari": "8",
+      "firefox": "60",
+      "ios": "8"
+    },
     "externals": {
       "jquery": "./node_modules/jquery/jquery.min.js"
     },
