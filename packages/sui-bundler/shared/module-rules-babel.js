@@ -1,4 +1,5 @@
 const {sep} = require('path')
+const {config} = require('./')
 
 module.exports = {
   test: /\.jsx?$/,
@@ -9,7 +10,12 @@ module.exports = {
       options: {
         babelrc: false,
         compact: true,
-        presets: [require.resolve('babel-preset-sui')]
+        presets: [
+          require.resolve('babel-preset-sui'),
+          {
+            targets: config.targets
+          }
+        ]
       }
     },
     require.resolve('source-map-loader')
