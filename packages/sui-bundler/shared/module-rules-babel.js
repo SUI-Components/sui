@@ -11,10 +11,12 @@ module.exports = {
         babelrc: false,
         compact: true,
         presets: [
-          require.resolve('babel-preset-sui'),
-          {
-            targets: config.targets
-          }
+          [
+            require.resolve('babel-preset-sui'),
+            {
+              targets: config.targets
+            }
+          ]
         ]
       }
     },
