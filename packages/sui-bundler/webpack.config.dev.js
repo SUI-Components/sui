@@ -27,6 +27,9 @@ let webpackConfig = {
       react: path.resolve(path.join(process.env.PWD, './node_modules/react')),
       '@s-ui/react-context': path.resolve(
         path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+      ),
+      'react-router-dom': path.resolve(
+        path.join(process.env.PWD, './node_modules/react-router-dom')
       )
     },
     extensions: ['*', '.js', '.jsx', '.json']
