@@ -139,6 +139,7 @@ This tool works with zero configuration out the box but you could use some confi
 ```json
 {
   "sui-bundler": {
+    "onlyHash": "true",
     "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
     "vendor": ["react", "react-dom"],
     "cdn": "https://url_to_me_cdn.com/",
@@ -163,6 +164,10 @@ This tool works with zero configuration out the box but you could use some confi
 
 **advice:** the alias option will not work for dev environment
 > The URL to the CDN **MUST** end with a slash `/`
+
+## OnlyHash
+
+In windows system filenames with `~` could produces errors. To avoid that you can use the flag `onlyHash` in your configurarion to go form names like `Home.123.js` to `123.js`. And that sould solve the issue.
 
 ## Offline
 
