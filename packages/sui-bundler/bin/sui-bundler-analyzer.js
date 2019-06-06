@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const chalk = require('chalk')
-const configs = require('../webpack.config.prod')
+const config = require('../webpack.config.prod')
 
 console.log('🔎  Bundler Analyzer')
 
@@ -14,20 +14,18 @@ process.noDeprecation = true
 
 let analyzerPort = 8888
 
-configs.forEach(config => {
-  config.plugins.push(new BundleAnalyzerPlugin({analyzerPort: ++analyzerPort}))
-  config.plugins.push(
-    new DuplicatePackageCheckerPlugin({
-      // Also show module that is requiring each duplicate package
-      verbose: true,
-      // Emit errors instead of warnings
-      emitError: false
-    })
-  )
-})
+config.plugins.push(new BundleAnalyzerPlugin({analyzerPort: ++analyzerPort}))
+config.plugins.push(
+  new DuplicatePackageCheckerPlugin({
+    // Also show module that is requiring each duplicate package
+    verbose: true,
+    // Emit errors instead of warnings
+    emitError: false
+  })
+)
 
 console.log(chalk.cyan('Building and analyzing...\n'))
-webpack(configs).run((error, stats) => {
+webpack(config).run((error, stats) => {
   if (error) {
     console.log(chalk.red('Error analyzing the build'))
     throw new Error(error)
