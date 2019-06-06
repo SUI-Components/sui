@@ -167,7 +167,7 @@ This tool works with zero configuration out the box but you could use some confi
 
 ## OnlyHash
 
-In windows system filenames with `~` could produces errors. To avoid that you can use the flag `onlyHash` in your configurarion to go form names like `Home.123.js` to `123.js`. And that sould solve the issue.
+In windows system filenames with `~` could produce errors. To avoid that you can use the flag `onlyHash` in your configuration to go form names like `Home.123.js` to `123.js`. And that should solve the issue.
 
 ## Offline
 
