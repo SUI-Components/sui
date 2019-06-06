@@ -20,6 +20,7 @@ module.exports = {
     filename: '[name].[chunkhash:8].js'
   },
   optimization: {
+    minimize: false,
     nodeEnv: false
   },
   externals: [webpackNodeExternals()],
@@ -32,7 +33,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [
+    rules: cleanList([
       babelRules({isServer: true}),
       {
         // ignore css/scss require/imports files in the server
