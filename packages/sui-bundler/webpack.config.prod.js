@@ -16,12 +16,15 @@ const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const zlib = require('zlib')
 const hasBrotliSupport = Boolean(zlib.brotliCompress)
 
+console.log('new bundler')
+
 const {
   navigateFallbackWhitelist,
   navigateFallback,
   runtimeCaching,
   directoryIndex
 } = require('./shared/precache')
+
 const {MAIN_ENTRY_POINT, when, cleanList, envVars, config} = require('./shared')
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
@@ -30,16 +33,29 @@ require('./shared/shims')
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 const ENABLED_SOURCE_MAPS = config.sourcemaps && config.sourcemaps.prod
 
-const changePlugin = (name, instance) => plugins => {
-  const pos = plugins
-    .map(p => p.constructor.toString())
-    .findIndex(string => string.match(name))
-  return [...plugins.slice(0, pos), instance, ...plugins.slice(pos + 1)]
-}
+const createOptimizationConfig = () => ({
+  minimizer: [
+    JsMinimizer({sourceMap: ENABLED_SOURCE_MAPS}),
+    new OptimizeCSSAssetsPlugin({
+      cssProcessorOptions: {}
+    })
+  ],
+  runtimeChunk: true,
+  splitChunks: {
+    cacheGroups: {
+      vendor: {
+        chunks: 'initial',
+        name: 'vendor',
+        test: 'vendor',
+        enforce: true
+      }
+    }
+  }
+})
 
-const createModuleConfig = ({isModern, isServer} = {}) => ({
+const createModuleConfig = ({isServer} = {}) => ({
   rules: cleanList([
-    babelRules({isModern, isServer}),
+    babelRules({isServer}),
     {
       test: /(\.css|\.scss)$/,
       use: [
@@ -55,13 +71,14 @@ const createModuleConfig = ({isModern, isServer} = {}) => ({
   ])
 })
 
-const prodConfig = {
+module.exports = {
   devtool: ENABLED_SOURCE_MAPS ? config.sourcemaps.prod : 'none',
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: config.alias,
-    extensions: ['*', '.js', '.jsx', '.json']
+    extensions: ['*', '.js', '.jsx', '.json'],
+    mainFields: ['rawsrc', 'browser', 'module', 'main']
   },
   entry: config.vendor
     ? {
@@ -75,25 +92,6 @@ const prodConfig = {
     publicPath: PUBLIC_PATH,
     chunkFilename: '[name].[chunkhash:8].js',
     filename: '[name].[chunkhash:8].js'
-  },
-  optimization: {
-    minimizer: [
-      JsMinimizer({sourceMap: ENABLED_SOURCE_MAPS}),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {}
-      })
-    ],
-    runtimeChunk: true,
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: 'initial',
-          name: 'vendor',
-          test: 'vendor',
-          enforce: true
-        }
-      }
-    }
   },
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
@@ -109,7 +107,7 @@ const prodConfig = {
       template: './index.html',
       trackJSToken: '',
       minify: {
-        collapseWhitespace: false,
+        collapseWhitespace: true,
         keepClosingSlash: true,
         minifyCSS: true,
         minifyURLs: true,
@@ -119,11 +117,19 @@ const prodConfig = {
         useShortDoctype: true
       }
     }),
-    new ScriptExtHtmlWebpackPlugin({
-      ...config.scripts,
-      module: 'es6',
-      defaultAttribute: 'defer'
-    }),
+    new ScriptExtHtmlWebpackPlugin(
+      Object.assign(
+        {
+          defaultAttribute: 'defer',
+          inline: 'runtime',
+          prefetch: {
+            test: /\.js$/,
+            chunks: 'all'
+          }
+        },
+        config.scripts
+      )
+    ),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
@@ -138,7 +144,7 @@ const prodConfig = {
             config.offline.whitelist
           ),
           runtimeCaching: runtimeCaching(config.offline.runtime),
-          staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
+          globIgnores: ["**/*.map", "**/asset-manifest.json"]
         })
     ),
     when(config.externals, () => new Externals({files: config.externals})),
@@ -166,23 +172,6 @@ const prodConfig = {
         })
     )
   ]),
-  module: {
-    rules: cleanList([
-      babelRules(),
-      {
-        test: /(\.css|\.scss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          require.resolve('css-loader'),
-          require.resolve('postcss-loader'),
-          require.resolve('sass-loader')
-        ]
-      },
-      when(config['externals-manifest'], () =>
-        manifestLoaderRules(config['externals-manifest'])
-      )
-    ])
-  },
   resolveLoader: {
     alias: {
       'externals-manifest-loader': require.resolve(
@@ -194,50 +183,7 @@ const prodConfig = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty'
-  }
-}
-
-const legacyConfig = {
-  ...prodConfig,
-  name: 'es5',
-  output: {
-    ...prodConfig.output,
-    path: path.resolve(process.env.PWD, 'public', 'es5'),
-    publicPath: `${prodConfig.output.publicPath}es5/`
   },
-  plugins: changePlugin(
-    'ScriptExtHtmlWebpackPlugin',
-    new ScriptExtHtmlWebpackPlugin({
-      ...config.scripts,
-      module: 'es6',
-      defaultAttribute: 'defer',
-      custom: [
-        {
-          test: /\.js$/,
-          attribute: 'nomodule',
-          value: ''
-        }
-      ]
-    })
-  )(prodConfig.plugins),
+  optimization: createOptimizationConfig(),
   module: createModuleConfig()
 }
-
-const modernConfig = {
-  ...prodConfig,
-  name: 'es6',
-  resolve: {
-    ...prodConfig.resolve,
-    mainFields: ['rawsrc', 'browser', 'module', 'main']
-  },
-  output: {
-    ...prodConfig.output,
-    path: path.resolve(process.env.PWD, 'public', 'es6'),
-    publicPath: `${prodConfig.output.publicPath}es6/`,
-    chunkFilename: '[name].[chunkhash:8].es6.js',
-    filename: '[name].[chunkhash:8].es6.js'
-  },
-  module: createModuleConfig({isModern: true})
-}
-
-module.exports = [legacyConfig, modernConfig]
