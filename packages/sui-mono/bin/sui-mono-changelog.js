@@ -24,7 +24,7 @@ program
   })
   .parse(process.argv)
 
-const CHANGELOG_NAME = 'CHANGELOG.md'
+const CHANGELOG_NAME = config.getChangelogFilename()
 const cwd = path.join(process.cwd(), getPackagesFolder())
 const getRepoFolders = () =>
   !isMonoPackage() ? getPackagesPaths(cwd)(getScopes()) : ['.']
