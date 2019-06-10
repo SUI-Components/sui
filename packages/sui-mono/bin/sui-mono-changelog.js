@@ -3,7 +3,7 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
-const {getScopes, getPackagesFolder, isMonoPackage} = require('../src/config')
+const {getScopes, getPackagesFolder, isMonoPackage, getChangelogFilename} = require('../src/config')
 const {getPackagesPaths} = require('@s-ui/helpers/packages')
 
 program
@@ -24,7 +24,7 @@ program
   })
   .parse(process.argv)
 
-const CHANGELOG_NAME = config.getChangelogFilename()
+const CHANGELOG_NAME = getChangelogFilename()
 const cwd = path.join(process.cwd(), getPackagesFolder())
 const getRepoFolders = () =>
   !isMonoPackage() ? getPackagesPaths(cwd)(getScopes()) : ['.']
