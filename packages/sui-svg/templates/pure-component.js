@@ -2,7 +2,7 @@ const template = (code, config, state) => {
   return `import React, {memo, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 
-const  ${state.componentName} = ({ssr = false}) => {
+const  ${state.componentName} = ({ssr = false, className}) => {
   const [render, setRender] = useState(ssr)
 
   useEffect(function() {
@@ -13,7 +13,7 @@ const  ${state.componentName} = ({ssr = false}) => {
 
   return render === false
     ? null
-    : ${code}
+    : ${code.replace('svg', 'svg className={className}')}
 }
 
 ${state.componentName}.propTypes = {
