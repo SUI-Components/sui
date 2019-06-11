@@ -40,6 +40,7 @@ const BASE_DIR = process.cwd()
 const packagesFolder = config.getPackagesFolder()
 const publishAccess = config.getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
+const changelogFilename = config.getChangelogFilename()
 
 const RELEASE_CODES = {
   0: 'clean',
@@ -81,11 +82,11 @@ const releaseEachPkg = ({pkg, code} = {}) => {
 
     let releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
-      ['git', ['add', cwd]]
+      ['git', ['add', path.join(cwd, 'package.json')]]
     ]
     let docCommands = [
       [suiMonoBinPath, ['changelog', cwd]],
-      ['git', ['add', cwd]],
+      ['git', ['add', path.join(cwd, changelogFilename)]],
       ['git', ['commit --amend --no-verify --no-edit']]
     ]
     let publishCommands = [
