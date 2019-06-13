@@ -1,5 +1,5 @@
 module.exports = manifestURL => ({
-  test: /(\.css|\.scss|\.js)$/,
+  test: /(\.js)$/,
   use: [
     {
       loader: 'externals-manifest-loader',

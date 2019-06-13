@@ -11,6 +11,12 @@ import jsYaml from 'js-yaml'
 import parseDomain from 'parse-domain'
 import compression from 'compression'
 import ssrConf from './config'
+import {
+  isMultiSite,
+  siteFromReq,
+  useStaticsByHost,
+  readHtmlTemplate
+} from './utils'
 
 const app = express()
 
@@ -52,9 +58,13 @@ const AUTH_DEFINITION = {
   users: {[AUTH_USERNAME]: AUTH_PASSWORD},
   challenge: true
 }
+// Global object within the server context containing the
+// cached HTML templates for each site.
+let _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
+  app.use(hooks[TYPES.PRE_HEALTH])
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
   )
@@ -65,7 +75,7 @@ const AUTH_DEFINITION = {
   app.use(express.static('statics'))
 
   app.use(hooks[TYPES.PRE_STATIC_PUBLIC])
-  app.use(express.static('public', {index: false}))
+  app.use(useStaticsByHost(express.static))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
 
@@ -74,6 +84,7 @@ const AUTH_DEFINITION = {
       const parsedUrl = parseDomain(req.hostname, {
         customTlds: /localhost|\.local/
       })
+
       !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
@@ -83,6 +94,26 @@ const AUTH_DEFINITION = {
               301
             )
     })
+
+  app.use((req, res, next) => {
+    // Since `_memoizedHtmlTemplatesMapping` will be always an object
+    // we need to define a key for each multisite and one default
+    // for single sites too.
+    const site = isMultiSite ? siteFromReq(req) : 'default'
+    const memoizedHtmlTemplate =
+      _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
+
+    if (memoizedHtmlTemplate) {
+      req.htmlTemplate = memoizedHtmlTemplate
+    } else {
+      const htmlTemplate = readHtmlTemplate(req)
+
+      req.htmlTemplate = htmlTemplate
+      _memoizedHtmlTemplatesMapping[site] = htmlTemplate
+    }
+
+    next()
+  })
 
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),

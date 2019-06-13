@@ -43,7 +43,7 @@ const initialFlush = res => {
 
 export default (req, res, next) => {
   const {url, query} = req
-  let [headTplPart, bodyTplPart] = getTplParts(req.criticalCSS)
+  let [headTplPart, bodyTplPart] = getTplParts(req)
   const criticalCSS = req.criticalCSS
 
   if (criticalCSS) {

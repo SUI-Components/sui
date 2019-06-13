@@ -21,6 +21,7 @@ const rootPath = path.join(basePath, packagesFolder)
 const deepLevel = getOrDefault('deepLevel', 1)
 const configCustomScopes = getOrDefault('customScopes', [])
 const publishAccess = getOrDefault('access', 'restricted')
+const changelogFilename = getOrDefault('changeLogFilename', 'CHANGELOG.md')
 
 module.exports = {
   getScopes: function() {
@@ -58,6 +59,9 @@ module.exports = {
   },
   getProjectName: function() {
     return projectPackage.name
+  },
+  getChangelogFilename: function() {
+    return changelogFilename
   },
   isMonoPackage: function() {
     const folders = cwds(rootPath, deepLevel)

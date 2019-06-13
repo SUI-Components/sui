@@ -50,8 +50,12 @@ module.exports = {
   output: {
     path: path.resolve(process.env.PWD, 'public'),
     publicPath: PUBLIC_PATH,
-    chunkFilename: '[name].[chunkhash:8].js',
-    filename: '[name].[chunkhash:8].js'
+    filename: config.onlyHash
+      ? '[contenthash:8].js'
+      : '[name].[contenthash:8].js',
+    chunkFilename: config.onlyHash
+      ? '[contenthash:8].js'
+      : '[name].[contenthash:8].js'
   },
   optimization: {
     minimizer: [
@@ -77,8 +81,12 @@ module.exports = {
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
-      chunkFilename: '[id].[contenthash:8].css'
+      filename: config.onlyHash
+        ? '[contenthash:8].css'
+        : '[name].[contenthash:8].css',
+      chunkFilename: config.onlyHash
+        ? '[contenthash:8].css'
+        : '[id].[contenthash:8].css'
     }),
     new HtmlWebpackPlugin({
       env: process.env,
@@ -179,12 +187,18 @@ module.exports = {
       babelRules,
       {
         test: /(\.css|\.scss)$/,
-        use: [
+        use: cleanList([
           MiniCssExtractPlugin.loader,
           require.resolve('css-loader'),
+          when(config['externals-manifest'], () => ({
+            loader: 'externals-manifest-loader',
+            options: {
+              manifestURL: config['externals-manifest']
+            }
+          })),
           require.resolve('postcss-loader'),
           require.resolve('sass-loader')
-        ]
+        ])
       },
       when(config['externals-manifest'], () =>
         manifestLoaderRules(config['externals-manifest'])

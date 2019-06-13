@@ -64,7 +64,11 @@ module.exports = ({config, packagesToLink}) => {
     },
     resolveLoader: {
       alias: {
-        'link-loader': require.resolve('./LinkLoader')
+        ...config.resolveLoader.alias,
+        'link-loader': require.resolve('./LinkLoader'),
+        'externals-manifest-loader': require.resolve(
+          './ExternalsManifestLoader'
+        )
       }
     }
   }

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mockmock",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@s-ui/test": "2",
-    "axios": "0.18.0",
+    "axios": "0.19.0",
     "@babel/cli": "7",
     "babel-preset-sui": "3"
   },

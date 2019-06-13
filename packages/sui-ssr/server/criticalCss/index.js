@@ -28,11 +28,11 @@ export default criticalCSS => (req, res, next) => {
     return next()
   }
 
-  const ua = parser(req.headers['user-agent'])
+  const ua = parser(req.get('User-Agent'))
   const urlRequest =
     req.protocol +
     '://' +
-    (process.env.CRITICAL_CSS_HOST || req.get('host')) +
+    (process.env.CRITICAL_CSS_HOST || req.hostname) +
     req.url
 
   const type = ua.device.type

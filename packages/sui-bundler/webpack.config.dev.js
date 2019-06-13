@@ -27,6 +27,9 @@ let webpackConfig = {
       react: path.resolve(path.join(process.env.PWD, './node_modules/react')),
       '@s-ui/react-context': path.resolve(
         path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+      ),
+      'react-router-dom': path.resolve(
+        path.join(process.env.PWD, './node_modules/react-router-dom')
       )
     },
     extensions: ['*', '.js', '.jsx', '.json']
@@ -101,7 +104,18 @@ let webpackConfig = {
       },
       {
         test: /(\.css|\.scss)$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+        use: cleanList([
+          'style-loader',
+          when(config['externals-manifest'], () => ({
+            loader: 'externals-manifest-loader',
+            options: {
+              manifestURL: config['externals-manifest']
+            }
+          })),
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ])
       },
       when(config['externals-manifest'], () =>
         manifestLoaderRules(config['externals-manifest'])
