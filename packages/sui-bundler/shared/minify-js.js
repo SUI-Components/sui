@@ -42,5 +42,5 @@ module.exports = sourceMap =>
     // Enable file caching
     cache: true,
     // use sourceMap if parameter is provided
-    sourceMap
+    sourceMap: !!sourceMap
   })
