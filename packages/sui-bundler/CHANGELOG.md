@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.16.0"></a>
+# 5.16.0 (2019-06-17)
+
+
+### Bug Fixes
+
+* pass targets config correctly ([7adb727](https://github.com/SUI-Components/sui/commit/7adb727))
+
+
+### Features
+
+* add targets config ([4a41ecf](https://github.com/SUI-Components/sui/commit/4a41ecf))
+* targets now is configurable ([ed82376](https://github.com/SUI-Components/sui/commit/ed82376))
+* upgrade dependencies ([e7a4ec7](https://github.com/SUI-Components/sui/commit/e7a4ec7))
+* upgrade dependencies ([7900f81](https://github.com/SUI-Components/sui/commit/7900f81))
+
+
+
 <a name="5.15.0"></a>
 # 5.15.0 (2019-06-06)
 
@@ -905,16 +923,6 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
-
-
-
-<a name="3.4.0"></a>
-# 3.4.0 (2017-06-27)
-
-
-### Features
-
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
