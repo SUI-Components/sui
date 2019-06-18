@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.17.0"></a>
+# 5.17.0 (2019-06-18)
+
+
+### Bug Fixes
+
+* sourceMap must be a boolean ([339c457](https://github.com/SUI-Components/sui/commit/339c457))
+
+
+### Features
+
+* move to terser instead uglify ([30b0d2d](https://github.com/SUI-Components/sui/commit/30b0d2d))
+
+
+
 <a name="5.16.0"></a>
 # 5.16.0 (2019-06-17)
 
