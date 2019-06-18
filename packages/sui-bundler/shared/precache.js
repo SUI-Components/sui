@@ -1,9 +1,5 @@
 const ALL = '::all::'
 
-exports.directoryIndex = whitelist => {
-  return whitelist ? undefined : false
-}
-
 exports.navigateFallbackWhitelist = whitelist => {
   if (!whitelist || whitelist[0] === ALL) {
     return []
