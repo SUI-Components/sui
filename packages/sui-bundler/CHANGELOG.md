@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.18.0"></a>
+# 5.18.0 (2019-06-18)
+
+
+### Features
+
+* move to workbox-webpack-plugin ([e5b959a](https://github.com/SUI-Components/sui/commit/e5b959a))
+
+
+
 <a name="5.17.0"></a>
 # 5.17.0 (2019-06-18)
 
