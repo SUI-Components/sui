@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const uglifyJsPlugin = require('./shared/uglify')
+const minifyJs = require('./shared/minify-js')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
@@ -23,6 +23,8 @@ const {
   directoryIndex
 } = require('./shared/precache')
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {sourceMap} = require('./shared/config')
+
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
@@ -30,10 +32,7 @@ require('./shared/shims')
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
 module.exports = {
-  devtool:
-    config.sourcemaps && config.sourcemaps.prod
-      ? config.sourcemaps.prod
-      : 'none',
+  devtool: sourceMap,
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
@@ -59,7 +58,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      uglifyJsPlugin,
+      minifyJs(sourceMap),
       new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: {}
       })

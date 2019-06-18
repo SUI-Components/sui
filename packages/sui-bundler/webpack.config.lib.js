@@ -1,8 +1,9 @@
 const webpack = require('webpack')
 const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
-const uglifyJsPlugin = require('./shared/uglify')
+const minifyJs = require('./shared/minify-js')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
+const {sourceMap} = require('./shared/config')
 require('./shared/shims')
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
     filename: 'index.js'
   },
   optimization: {
-    minimizer: [uglifyJsPlugin]
+    minimizer: [minifyJs(sourceMap)]
   },
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
