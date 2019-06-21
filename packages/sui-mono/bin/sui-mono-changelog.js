@@ -71,8 +71,11 @@ function generateChangelog(folder) {
         }
         output.write(chunk)
       })
-      .on('end', () => resolve(outputFile))
-      .on('error', reject)
+      .on('end', () => output.end(() => resolve(outputFile)))
+      .on('error', error => {
+        output.destroy(error)
+        reject(error)
+      })
   })
 }
 
