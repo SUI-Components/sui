@@ -9,7 +9,8 @@ export default {
     window.analytics.ready(function() {
       const [event, properties, options = {}, fn] = args
       options.traits = {
-        anonymousId: window.analytics.user().anonymousId()
+        anonymousId: window.analytics.user().anonymousId(),
+        userId: window.analytics.user().id()
       }
       window.analytics.track(event, properties, options, fn)
     })

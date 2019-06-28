@@ -10,13 +10,10 @@ describe('#suiAnalytics', () => {
         ready: function(cb) {
           cb()
         },
-        user: function() {
-          return {
-            anonymousId: function() {
-              return 'fakeAnonymousId'
-            }
-          }
-        },
+        user: () => ({
+          anonymousId: () => 'fakeAnonymousId',
+          id: () => 'fakeId'
+        }),
         track: sinon.stub()
       }
     })
@@ -30,7 +27,7 @@ describe('#suiAnalytics', () => {
 
       sinon.assert.callCount(window.analytics.track, 1)
       expect(window.analytics.track.getCall(0).args[2]).to.deep.equal({
-        traits: {anonymousId: 'fakeAnonymousId'}
+        traits: {anonymousId: 'fakeAnonymousId', userId: 'fakeId'}
       })
     })
   })
