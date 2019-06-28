@@ -7,11 +7,14 @@ function replaceCharIfNeeded(char) {
   return index === -1 ? char : to[index]
 }
 
-export function slugify(str) {
+export function slugify(str, allowQueryParams) {
+  const validCharsRegEx = allowQueryParams
+    ? /[^a-z0-9\\. - ? =]/g // only letters numbers, dashes, dots, equals and question marks
+    : /[^a-z0-9\\. -]/g // only letters numbers, dashes and dots
   return str
     .toLowerCase()
     .replace(/.{1}/g, replaceCharIfNeeded)
-    .replace(/[^a-z0-9\\. -]/g, '') // remove invalid chars only letters numbers, dashes and dots
+    .replace(validCharsRegEx, '') // remove invalid chars
     .replace(/\s+/g, '-') // collapse whitespace and replace by -
     .replace(/-+/g, '-') // collapse dashes
 }
