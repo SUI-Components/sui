@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.19.0"></a>
+# 5.19.0 (2019-07-01)
+
+
+### Features
+
+* add --link-all flag ([c413f17](https://github.com/SUI-Components/sui/commit/c413f17))
+
+
+
 <a name="5.18.0"></a>
 # 5.18.0 (2019-06-18)
 
