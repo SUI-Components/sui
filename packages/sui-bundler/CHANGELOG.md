@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.20.0"></a>
+# 5.20.0 (2019-07-01)
+
+
+### Bug Fixes
+
+* return an empty array ([a55ce9d](https://github.com/SUI-Components/sui/commit/a55ce9d))
+
+
+
 <a name="5.19.0"></a>
 # 5.19.0 (2019-07-01)
 
