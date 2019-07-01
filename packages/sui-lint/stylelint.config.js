@@ -10,9 +10,22 @@ function suitSelector(componentName) {
 }
 
 module.exports = {
-  extends: ['stylelint-prettier/recommended'],
-  plugins: ['stylelint-selector-bem-pattern', 'stylelint-scss'],
+  plugins: [
+    'stylelint-selector-bem-pattern',
+    'stylelint-scss',
+    'stylelint-prettier'
+  ],
   rules: {
+    'prettier/prettier': [
+      true,
+      {
+        printWidth: 80,
+        tabWidth: 2,
+        singleQuote: true,
+        bracketSpacing: false,
+        useTabs: false
+      }
+    ],
     'plugin/selector-bem-pattern': {
       componentName: /^[a-zA-Z]+$/,
       componentSelectors: suitSelector
@@ -40,9 +53,8 @@ module.exports = {
     'no-duplicate-at-import-rules': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
-    'no-extra-semicolons': true,
     'no-invalid-double-slash-comments': true,
-    'number-leading-zero': 'never',
+    'number-leading-zero': null,
     'property-no-unknown': true,
     'selector-pseudo-class-no-unknown': true,
     'selector-pseudo-element-no-unknown': true,
