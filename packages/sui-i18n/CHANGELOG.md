@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.18.0"></a>
+# 1.18.0 (2019-07-01)
+
+
+### Bug Fixes
+
+* scape dash char ([c4ba1a1](https://github.com/SUI-Components/sui/commit/c4ba1a1))
+
+
+### Features
+
+* (backwards compatible) add an option to allow query params in i18n url ([bdf22db](https://github.com/SUI-Components/sui/commit/bdf22db))
+
+
+
 <a name="1.17.0"></a>
 # 1.17.0 (2019-03-25)
 
