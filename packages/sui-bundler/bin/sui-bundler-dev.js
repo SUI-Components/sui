@@ -32,6 +32,10 @@ if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
     .option(
+      '--link-all [monorepo]',
+      'Link all packages inside of monorepo multipackage'
+    )
+    .option(
       '--link-package [package]',
       'Replace each occurrence of this package with an absolute path to this folder',
       (v, m) => {
@@ -80,6 +84,7 @@ const start = async ({
   const urls = prepareUrls(protocol, HOST, port)
   const nextConfig = linkLoaderConfigBuilder({
     config: preloadRemover({config, preLoader: program.preLoader}),
+    linkAll: program.linkAll,
     packagesToLink
   })
   const compiler = createCompiler(nextConfig, urls)
