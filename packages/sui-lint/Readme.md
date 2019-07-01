@@ -84,7 +84,9 @@ Steps to integrate sui-lint with an IDE:
   "eslintConfig": {
     "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }
 ```
 
@@ -102,35 +104,35 @@ Steps to integrate sui-lint with an IDE:
   "devDependencies": {
     "@s-ui/lint": "1.0.0-beta.1"
   },
-  "eslintConfig": { "extends": ["./node_modules/@s-ui/lint/eslintrc.js"] },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  "eslintConfig": { "extends": "./node_modules/@s-ui/lint/eslintrc.js" },
+  "stylelint": { "extends": "./node_modules/@s-ui/lint/stylelint.config.js" },
 }
 ```
 
 ### VSCode and prettier
 
 Prettier is integrated in sui-lint thanks to specific eslint rules.
-If you want VSCode to format your code exactly as `sui-lint js --fix` would do, you need specific config.+
+If you want VSCode to format your code exactly as `sui-lint js --fix` would do, you need specific config.
 
-#### prettier + eslint
+#### prettier + eslint + stylelint
 
 If you have installed [prettier in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) you can launch it with `CMD + Shift + P -> Format Document` over an opened file to format it with [prettier](https://github.com/prettier/prettier)
 
-By adding this line to your settings 
-
+By adding this line to your settings:
 ```json
 {
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true
 }
 ```
 
-when you do `CMD + Shift + P -> Format Document` the format tool will use [`prettier-eslint`](https://github.com/prettier/prettier-eslint)^[`prettier-eslint` is a dependency of [prettier-vscode](https://github.com/prettier/prettier-vscode/blob/1843acb5defac7898862a1df61cb67c7a8355d69/package.json#L204)] that will do a [`eslint --fix`](http://eslint.org/) after formatting your JavaScript file with [`prettier`](https://github.com/prettier/prettier)
+When you do `CMD + Shift + P -> Format Document` the format tool will use [`prettier-eslint`](https://github.com/prettier/prettier-eslint)^[`prettier-eslint` is a dependency of [prettier-vscode](https://github.com/prettier/prettier-vscode/blob/1843acb5defac7898862a1df61cb67c7a8355d69/package.json#L204)] that will do a [`eslint --fix`](http://eslint.org/) after formatting your JavaScript file with [`prettier`](https://github.com/prettier/prettier)
 
-So this shortcut will format our files ( w/ _prettier_) according to our `sui-lint` rules
+So this shortcut will format our files ( w/ _prettier_) according to our `sui-lint` rules.
 
-> you will need the `eslintConfig` and `sasslintConfig` properties added to the `package.json` as explained above
+> you will need the `eslintConfig` and `stylelintconfig` properties added to the `package.json` as explained above
 
-#### eslint extension
+#### Eslint extension
 Install [VSCode ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and set `eslint.autoFixOnSave` to true:
 
 ```json
@@ -139,9 +141,10 @@ Install [VSCode ESLint extension](https://marketplace.visualstudio.com/items?ite
 }
 ```
 
+#### Stylelint extension
+Install [VSCode Stylelint extension](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint).
+
 #### Conflict with `formatOnSave`
-
-
 
 If you have prettier enabled, or the default VSCode formatter activated with `editor.formatOnSave` to true, it may conflict with the `eslint.autoFixOnSave` option.
 
@@ -152,4 +155,12 @@ If you have prettier enabled, or the default VSCode formatter activated with `ed
     "editor.formatOnSave": false,
   },
 }
+```
+
+In case you have already the `formatOnSave` property disabled but want to get the functionality working for SCSS files, you'll need to activate it for SCSS file types in order to prettier fix your problems using stylelint. For this, you have to use the next config.
+
+```json
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
 ```
