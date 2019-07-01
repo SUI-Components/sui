@@ -29,7 +29,7 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
 
 const absolutePathForMonoRepo = base => {
   if (!base) {
-    return {}
+    return []
   }
   return fg
     .sync([
