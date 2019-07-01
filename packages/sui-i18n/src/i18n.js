@@ -96,10 +96,10 @@ export default class Rosetta {
     throw new Error(`Invalid type '${type}' passed to i18n.f`)
   }
 
-  url(urlPattern) {
+  url(urlPattern, allowQueryParams) {
     return urlPattern
       .split('/')
-      .map(token => slugify(this.t(token)))
+      .map(token => slugify(this.t(token), allowQueryParams))
       .join('/')
   }
 }

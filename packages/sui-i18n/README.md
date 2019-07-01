@@ -65,7 +65,7 @@ import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 const i18n = new I18n({adapter: new Polyglot()});
 i18n.languages = {
     'es-ES': {
-        'HELLO_WORLD': '¡Hola mundo!'
+        'HELLO_WORLD': '¡Hola mundo!',
     },
     'ca-ES': {
         'HELLO_WORLD': 'Hola món!'
@@ -147,6 +147,30 @@ i18n.c(1000000) //=> £1,000,000
 i18n.f('phone', '123123123') //=> '123 123 123'
 i18n.f('phone', '1 23 12312 3') //=> '123 123 123'
 i18n.f('phone', '123123123', {separator: '-'}) //=> '123-123-123'
+```
+
+### URLs
+
+`i18n.url` provides some funcionality for creating urls
+
+```js
+i18n.languages = {
+    'es-ES': {
+        "HOME": "home"
+        "REDIRECT_TRUE": "?redirect=true",
+
+    }
+}
+```
+
+```js
+i18n.url('/HOME') //=> 'www.example.com/home'
+i18n.url('/HOME') //=> 'www.example.com/home'
+i18n.url('/HOME') //=> 'www.example.com/home'
+i18n.url('/HOME/REDIRECT_TRUE', true) //=> ''www.example.com/home/?redirect=true'
+i18n.url('/HOME/REDIRECT_TRUE') //=> 'www.example.com/home/redirecttrue'
+i18n.url('/HOME/REDIRECT_TRUE', false) //=> 'www.example.com/home/redirecttrue'
+
 ```
 
 ### Use with ReactJS
