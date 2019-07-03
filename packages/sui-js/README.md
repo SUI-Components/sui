@@ -98,7 +98,7 @@ console.log(parseQueryString('?targetPage=pta')) // {targetPage: "pta"}
 
 import {arrayToCommaQueryString} from '@s-ui/js/lib/string'
 
-console.log(arrayToCommaQueryString({userId: 1, adId: 2, products: [3, 4, 5]})) // 'a=1&b=2,c=3,4,5'
+console.log(arrayToCommaQueryString({userId: 1, adId: 2, products: [3, 4, 5]})) // 'a=1&b=2&c=3,4,5'
 
 
 import {htmlStringToReactElement} from '@s-ui/js/lib/string'
