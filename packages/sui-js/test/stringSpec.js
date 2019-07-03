@@ -3,7 +3,7 @@ import {expect} from 'chai'
 import {
   parseQueryString,
   toQueryString,
-  arrayToCommaQueryString
+  fromArrayToCommaQueryString
 } from '../src/string/index'
 
 describe('@s-ui/js', () => {
@@ -25,7 +25,7 @@ describe('@s-ui/js', () => {
     it.only('should convert params array to comma separated object params', () => {
       const paramsArray = {a: 1, b: 2, c: [3, 4]}
       const params = 'a=1&b=2&c=3,4'
-      expect(arrayToCommaQueryString(paramsArray)).to.deep.equal(params)
+      expect(fromArrayToCommaQueryString(paramsArray)).to.deep.equal(params)
     })
   })
 })
