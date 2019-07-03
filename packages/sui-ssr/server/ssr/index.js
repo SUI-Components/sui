@@ -101,8 +101,8 @@ export default (req, res, next) => {
           context: {...context, device},
           renderProps,
           Target: useLegacyContext
-            ? withAllContexts(context)(RouterContext)
-            : withSUIContext(context)(RouterContext)
+            ? withAllContexts({...context, device})(RouterContext)
+            : withSUIContext({...context, device})(RouterContext)
         })
       } catch (err) {
         return next(err)
