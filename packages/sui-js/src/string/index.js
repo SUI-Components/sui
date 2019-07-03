@@ -2,7 +2,7 @@ import {parse, stringify} from 'qs'
 
 export const parseQueryString = query => parse(query, {ignoreQueryPrefix: true})
 export const arrayToCommaQueryString = query =>
-  unescape(stringify(query, {arrayFormat: 'comma'}))
+  decodeURIComponent(stringify(query, {arrayFormat: 'comma'}))
 
 export {stringify as toQueryString} from 'qs'
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
