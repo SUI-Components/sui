@@ -40,10 +40,12 @@ export default ({useCases, config}) =>
       return loader === undefined
         ? new NotImplementedUseCase(key)
         : {
-            execute: params => {
+            execute: (...params) => {
               // load async the factory, execute use case and return the promise
               return loader().then(factory =>
-                factory.default[method]({config: this._config}).execute(params)
+                factory.default[method]({config: this._config}).execute(
+                  ...params
+                )
               )
             },
             $: {
