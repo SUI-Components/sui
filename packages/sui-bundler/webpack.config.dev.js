@@ -30,6 +30,12 @@ let webpackConfig = {
       ),
       'react-router-dom': path.resolve(
         path.join(process.env.PWD, './node_modules/react-router-dom')
+      ),
+      '@s-ui/abtesting-optimizely-x': path.resolve(
+        path.join(
+          process.env.PWD,
+          './node_modules/@s-ui/abtesting-optimizely-x'
+        )
       )
     },
     extensions: ['*', '.js', '.jsx', '.json']
