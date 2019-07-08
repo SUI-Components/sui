@@ -15,6 +15,18 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   }workbench)?${path.sep}src)`
 )
 
+const ALIAS_FROM_CONFIG = config.alias
+  ? Object.entries(config.alias).reduce(
+      (obj, [aliasName, aliasPath]) => ({
+        ...obj,
+        [aliasName]: aliasPath.startsWith('./')
+          ? path.join(process.env.PWD, aliasPath)
+          : aliasPath
+      }),
+      {}
+    )
+  : {}
+
 let webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
@@ -31,12 +43,8 @@ let webpackConfig = {
       'react-router-dom': path.resolve(
         path.join(process.env.PWD, './node_modules/react-router-dom')
       ),
-      '@s-ui/abtesting-optimizely-x': path.resolve(
-        path.join(
-          process.env.PWD,
-          './node_modules/@s-ui/abtesting-optimizely-x'
-        )
-      )
+      // add extra alias from the config
+      ...ALIAS_FROM_CONFIG
     },
     extensions: ['*', '.js', '.jsx', '.json']
   },
