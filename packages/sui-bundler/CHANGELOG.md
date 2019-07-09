@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.21.0"></a>
+# 5.21.0 (2019-07-09)
+
+
+### Features
+
+* add alias to keep same experiment context on linked packages ([a7c3e6b](https://github.com/SUI-Components/sui/commit/a7c3e6b))
+* use ALIAS_FROM_CONFIG in dev webpackConfig instead of a hardcoded alias ([abed07e](https://github.com/SUI-Components/sui/commit/abed07e))
+
+
+
 <a name="5.20.0"></a>
 # 5.20.0 (2019-07-01)
 
@@ -968,6 +979,16 @@ with the old one
 ### BREAKING CHANGES
 
 * CLI has changed name
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2017-06-27)
+
+
+### Features
+
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
 
 
 
