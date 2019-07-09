@@ -24,6 +24,7 @@ const {
 } = require('./shared/precache')
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {sourceMap} = require('./shared/config')
+const parseAlias = require('./shared/parse-alias')
 
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
@@ -36,7 +37,7 @@ module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    alias: config.alias,
+    alias: parseAlias(config.alias),
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: config.vendor

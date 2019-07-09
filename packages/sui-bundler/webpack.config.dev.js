@@ -5,6 +5,7 @@ const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
+const parseAlias = require('./shared/parse-alias')
 require('./shared/shims')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
@@ -14,18 +15,6 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
     path.sep
   }workbench)?${path.sep}src)`
 )
-
-const ALIAS_FROM_CONFIG = config.alias
-  ? Object.entries(config.alias).reduce(
-      (obj, [aliasName, aliasPath]) => ({
-        ...obj,
-        [aliasName]: aliasPath.startsWith('./')
-          ? path.join(process.env.PWD, aliasPath)
-          : aliasPath
-      }),
-      {}
-    )
-  : {}
 
 let webpackConfig = {
   mode: 'development',
@@ -44,7 +33,7 @@ let webpackConfig = {
         path.join(process.env.PWD, './node_modules/react-router-dom')
       ),
       // add extra alias from the config
-      ...ALIAS_FROM_CONFIG
+      ...parseAlias(config.alias)
     },
     extensions: ['*', '.js', '.jsx', '.json']
   },

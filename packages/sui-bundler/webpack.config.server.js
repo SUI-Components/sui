@@ -3,13 +3,15 @@ const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
+const parseAlias = require('./shared/parse-alias')
+
 const {config, when, cleanList} = require('./shared')
 
 let webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
-    alias: config.alias,
+    alias: parseAlias(config.alias),
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: './server.js',
