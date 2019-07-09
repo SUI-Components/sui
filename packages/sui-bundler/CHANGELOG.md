@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.22.0"></a>
+# 5.22.0 (2019-07-09)
+
+
+### Bug Fixes
+
+* move alias parse logic to shared for all environments ([f1d437f](https://github.com/SUI-Components/sui/commit/f1d437f))
+
+
+
 <a name="5.21.0"></a>
 # 5.21.0 (2019-07-09)
 
