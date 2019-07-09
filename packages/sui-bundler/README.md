@@ -180,7 +180,6 @@ This tool works with zero configuration out the box but you could use some confi
 }
 ```
 
-**advice:** the alias option will not work for dev environment
 > The URL to the CDN **MUST** end with a slash `/`
 
 ## OnlyHash
