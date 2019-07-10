@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.0.0"></a>
+# 3.0.0 (2019-07-10)
+
+
+### Features
+
+* upgrade eslint and use stylelint for scss ([d9c8e18](https://github.com/SUI-Components/sui/commit/d9c8e18))
+
+
+### BREAKING CHANGES
+
+* Stop supporting sasslint, changes needed on the package and plugins of editor
+
+
+
 <a name="2.25.0"></a>
 # 2.25.0 (2019-07-10)
 
