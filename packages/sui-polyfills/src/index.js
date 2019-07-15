@@ -1,5 +1,3 @@
-console.log('NEW POLYFILL')
-
 require('core-js/features/array/fill')
 require('core-js/features/array/find-index')
 require('core-js/features/array/find')
