@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "scripts": {},
   "keywords": [],
-  "author": "Miguel Angel Duran <miduga@gmail.com>",
   "dependencies": {
-    "core-js": "2.6.3"
+    "core-js": "3"
   },
   "license": "MIT",
   "repository": {
