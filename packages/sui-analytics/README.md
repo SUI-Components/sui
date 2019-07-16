@@ -54,3 +54,11 @@ suiAnalytics.track('Registered', {
 ```js
 suiAnalytics.reset()
 ```
+
+## Adobe Analytics Integration - marketingCloudVisitorId
+
+Make sure to call the `setAdobeOrganizationId` function before your first track. It is needed in order to sent the marketingCloudVisitorId within your track events
+
+```js
+suiAnalytics.setAdobeOrganizationId('YOUR_ORGANIZATION_ID')
+```

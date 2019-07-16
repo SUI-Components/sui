@@ -1,3 +1,5 @@
+let adobeOrgId
+
 export default {
   identify: (...args) => {
     window.analytics.identify(...args)
@@ -12,7 +14,17 @@ export default {
         anonymousId: window.analytics.user().anonymousId(),
         userId: window.analytics.user().id()
       }
+      if (window && window.Visitor && adobeOrgId) {
+        options['Adobe Analytics'] = {
+          marketingCloudVisitorId: window.Visitor.getInstance(
+            adobeOrgId
+          ).getMarketingCloudVisitorID()
+        }
+      }
       window.analytics.track(event, properties, options, fn)
     })
+  },
+  setAdobeOrganizationId: id => {
+    adobeOrgId = id
   }
 }
