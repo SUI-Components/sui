@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@s-ui/lint": "2",
+    "lodash.camelcase": "^4.3.0",
     "validate-commit-msg": "2.14.0"
   },
   "keywords": [],
