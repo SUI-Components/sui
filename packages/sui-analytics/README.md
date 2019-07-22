@@ -24,7 +24,7 @@ sui-analytics will be an object with the methods described [here](#events)
 ### In your modern and beautiful JavaScript...
 
 ```js
-import suiAnalytics from "@s-ui/analytics"
+import suiAnalytics from '@s-ui/analytics'
 ```
 
 ### In your monolithic JavaScript...
