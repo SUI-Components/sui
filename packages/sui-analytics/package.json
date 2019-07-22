@@ -1,17 +1,19 @@
 {
   "name": "@s-ui/analytics",
   "version": "1.2.0",
-  "description": "",
+  "description": "Abstraction layer on top of Segment library.",
   "main": "lib/index.js",
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib"
+    "umd": "sui-bundler lib src-umd/index.js -o umd/ -p --root",
+    "prepare": "npm run lib && npm run umd"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "7",
+    "@s-ui/bundler": "5",
     "babel-preset-sui": "3",
     "sinon": "7.3.2"
   }
