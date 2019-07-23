@@ -11,14 +11,15 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
+    "@s-ui/react-context": "1",
     "prop-types": "15",
     "react": "16"
   },
   "dependencies": {
-    "@s-ui/component-peer-dependencies": "1",
     "intersection-observer": "0.5.1"
   },
   "devDependencies": {
+    "@s-ui/component-peer-dependencies": "1",
     "@babel/cli": "7",
     "babel-preset-sui": "3"
   }
