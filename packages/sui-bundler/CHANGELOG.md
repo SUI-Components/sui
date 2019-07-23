@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.23.0"></a>
+# 5.23.0 (2019-07-23)
+
+
+
 <a name="5.22.0"></a>
 # 5.22.0 (2019-07-09)
 
