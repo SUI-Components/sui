@@ -37,16 +37,7 @@ module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    alias: {
-      react: path.resolve(path.join(process.env.PWD, './node_modules/react')),
-      '@s-ui/react-context': path.resolve(
-        path.join(process.env.PWD, './node_modules/@s-ui/react-context')
-      ),
-      'react-router-dom': path.resolve(
-        path.join(process.env.PWD, './node_modules/react-router-dom')
-      ),
-      ...parseAlias(config.alias)
-    },
+    alias: parseAlias(config.alias),
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: config.vendor
