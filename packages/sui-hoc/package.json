@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
+    "@s-ui/react-context": "1",
     "prop-types": "15",
     "react": "16"
   },
   "dependencies": {
-    "@s-ui/react-context": "1",
     "intersection-observer": "0.5.1"
   },
   "devDependencies": {
