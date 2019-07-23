@@ -5,6 +5,6 @@ export const stats = userAgent => {
   return {
     isMobile: !!ua.mobile,
     osName: ua.osname,
-    bowser: ua.browser
+    browser: ua.browser
   }
 }
