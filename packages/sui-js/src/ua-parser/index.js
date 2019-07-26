@@ -1,12 +1,24 @@
-import bowser from 'bowser'
+import Bowser from 'bowser'
 
-export const stats = userAgent => {
-  const ua = bowser._detect(userAgent)
+export const uaParser = userAgent => {
+  const parser = Bowser.getParser(userAgent)
+
+  const parse = () => Bowser.parse(userAgent)
+
+  const stats = () => ({
+    isMobile: parser.is('mobile'),
+    osName: parser.getOSName(),
+    browserName: parser.getBrowserName(),
+    browserVersion: parser.getBrowserVersion()
+  })
+
+  const satisfies = checkTree => parser.satisfies(checkTree)
 
   return {
-    isMobile: !!ua.mobile,
-    osName: ua.osname,
-    browserName: ua.name,
-    browserVersion: ua.version
+    parse,
+    satisfies,
+    stats
   }
 }
+
+export const stats = userAgent => uaParser(userAgent).stats()

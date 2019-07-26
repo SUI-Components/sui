@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "Joan Claret <dpam23@gmail.com>",
   "dependencies": {
-    "bowser": "1.8.1",
+    "bowser": "2.5.2",
     "cookie": "0.3.1",
     "htmr": "0.7.0",
     "js-cookie": "2.1.4",
