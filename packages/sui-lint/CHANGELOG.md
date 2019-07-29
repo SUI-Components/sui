@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.1.0"></a>
+# 3.1.0 (2019-07-29)
+
+
+### Features
+
+* add support for chaining optional ([14ecd1f](https://github.com/SUI-Components/sui/commit/14ecd1f))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2019-07-10)
 
