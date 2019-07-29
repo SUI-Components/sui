@@ -24,7 +24,7 @@
     "@babel/cli": "7.4.4",
     "@babel/core": "7.4.5",
     "@s-ui/helpers": "1",
-    "@s-ui/lint": "2",
+    "@s-ui/lint": "3",
     "autoprefixer": "9.6.0",
     "babel-loader": "8.0.6",
     "babel-preset-sui": "3",
