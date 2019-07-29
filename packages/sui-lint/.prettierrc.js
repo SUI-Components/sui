@@ -8,5 +8,6 @@ module.exports = {
   useTabs: false,
   parser: 'babylon',
   jsxBracketSameLine: false,
-  arrowParens: 'avoid'
+  arrowParens: 'avoid',
+  optionalChaining: true
 }
