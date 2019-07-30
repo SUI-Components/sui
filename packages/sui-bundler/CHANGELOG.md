@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.25.0"></a>
+# 5.25.0 (2019-07-30)
+
+
+### Bug Fixes
+
+* fix missing compatibility with eslint 6 ([2590650](https://github.com/SUI-Components/sui/commit/2590650))
+
+
+
 <a name="5.24.0"></a>
 # 5.24.0 (2019-07-29)
 
