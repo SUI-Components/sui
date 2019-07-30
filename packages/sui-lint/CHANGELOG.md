@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.2.0"></a>
+# 3.2.0 (2019-07-30)
+
+
+### Features
+
+* Upgrade [@s-ui](https://github.com/s-ui)/lint ([c08537d](https://github.com/SUI-Components/sui/commit/c08537d))
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2019-07-29)
 
