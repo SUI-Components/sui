@@ -24,7 +24,7 @@
     "precommit": "sui-precommit run"
   },
   "devDependencies": {
-    "@s-ui/lint": "2",
+    "@s-ui/lint": "3",
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",
     "@s-ui/test": "2",

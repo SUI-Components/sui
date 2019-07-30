@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@s-ui/lint": "2",
+    "@s-ui/lint": "3",
     "@s-ui/helpers": "1",
     "commander": "2.9.0"
   },
