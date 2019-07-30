@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.4.0"></a>
+# 3.4.0 (2019-07-30)
+
+
+### Bug Fixes
+
+* remove deprecation notice ([6f3ea5e](https://github.com/SUI-Components/sui/commit/6f3ea5e))
+
+
+### Features
+
+* upgrade dependencies ([65557d8](https://github.com/SUI-Components/sui/commit/65557d8))
+
+
+
 <a name="3.3.0"></a>
 # 3.3.0 (2019-07-30)
 
