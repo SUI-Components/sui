@@ -16,7 +16,10 @@ getFilesToLint(EXTENSIONS, '**/src/**/*.scss').then(
   files =>
     (files.length &&
       executeLintingCommand(BIN_PATH, [
-        `'${files.join(', ')}'`,
+        files
+          .reduce((acc, file) => (acc += file + "' '"), " '")
+          .replace(/'$/, ''),
+
         '--config',
         CONFIG_PATH,
         '-i',
