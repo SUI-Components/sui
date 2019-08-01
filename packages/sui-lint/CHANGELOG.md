@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.5.0"></a>
+# 3.5.0 (2019-07-31)
+
+
+### Bug Fixes
+
+* fix lint several scss files ([dbcb9d8](https://github.com/SUI-Components/sui/commit/dbcb9d8))
+
+
+
 <a name="3.4.0"></a>
 # 3.4.0 (2019-07-30)
 
