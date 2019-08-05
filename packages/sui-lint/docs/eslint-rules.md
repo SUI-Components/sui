@@ -716,7 +716,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "prettier"
   ],
   "extends": [
-    "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/eslint-config-standard-jsx/index.js",
+    "./node_modules/eslint-config-standard-jsx/index.js",
     "standard",
     "standard-react",
     "./node_modules/@s-ui/lint/eslintrc.js",
@@ -724,7 +724,7 @@ These are the rules resulting of current configuration in `eslintrc.js`
     "prettier/standard",
     "prettier/react"
   ],
-  "parser": "/Users/david.almeida/Projects/sui/packages/sui-lint/node_modules/babel-eslint/lib/index.js"
+  "parser": "babel-eslint"
 }
 ```
 

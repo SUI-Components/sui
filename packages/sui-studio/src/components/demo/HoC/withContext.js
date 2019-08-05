@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 const withContext = (flag, context) => Target => {
   if (!flag) {
@@ -28,7 +29,7 @@ const withContext = (flag, context) => Target => {
     }
   }
 
-  return Contextify
+  return hoistNonReactStatics(Contextify, Target)
 }
 
 export default withContext

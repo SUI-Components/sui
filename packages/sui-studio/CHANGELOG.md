@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.3.0"></a>
+# 7.3.0 (2019-06-26)
+
+
+### Bug Fixes
+
+* hoist static props in react components ([163dab8](https://github.com/SUI-Components/sui/commit/163dab8))
+
+
+
 <a name="7.2.0"></a>
 # 7.2.0 (2019-05-24)
 

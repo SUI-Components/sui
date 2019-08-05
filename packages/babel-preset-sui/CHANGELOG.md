@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.2.0"></a>
+# 3.2.0 (2019-07-26)
+
+
+### Features
+
+* add [@babel](https://github.com/babel)/plugin-proposal-nullish-coalescing-operator ([fbc0c28](https://github.com/SUI-Components/sui/commit/fbc0c28))
+* add [@babel](https://github.com/babel)/plugin-proposal-optional-chaining 🎉 ([038e577](https://github.com/SUI-Components/sui/commit/038e577))
+
+
+
+<a name="3.1.0"></a>
+# 3.1.0 (2019-06-17)
+
+
+### Features
+
+* add default values to babel-preset-sui ([fad93aa](https://github.com/SUI-Components/sui/commit/fad93aa))
+* add targets config ([4a41ecf](https://github.com/SUI-Components/sui/commit/4a41ecf))
+* upgrade dependencies ([b941769](https://github.com/SUI-Components/sui/commit/b941769))
+* use defaults, add configurable targets and loose transformations for destruc ([1619e53](https://github.com/SUI-Components/sui/commit/1619e53))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2019-03-18)
 

@@ -81,6 +81,15 @@ To link more than one package at time, use as many times as desired the argument
 $ sui-bundler dev --link-package=/absolute_path/to/npm_package --link-package=/absolute_path2/to/npm_package
 ```
 
+If you want to link all the packages inside a monorepo-multipackage. Use the flag `--link-all` pointing to the folder where each package lives.
+For example, if you want to link all the components in a Studio, the command should be:
+
+```
+$ sui-bundler dev --link-all ../frontend-ma--uilib-components/components
+```
+
+And of course you can combine `link-all` and `link-package` flags
+
 ### Production
 
 ```
@@ -136,6 +145,8 @@ This tool works with zero configuration out the box but you could use some confi
 
 `manualCompression`: Compress files manually to gzip and brotli (if supported). Useful to use along with a S3 and Lambda@Edge in order to send the best content for the userAgent. (default: `false`)
 
+`targets`: Object with information about the browser and version supported. (default: `see the next example`)
+
 ```json
 {
   "sui-bundler": {
@@ -147,6 +158,13 @@ This tool works with zero configuration out the box but you could use some confi
     "alias": {"react": "preact"},
     "offline": true,
     "manualCompression": true,
+    "targets": {
+      "chrome": "41",
+      "ie": "11",
+      "safari": "8",
+      "firefox": "60",
+      "ios": "8"
+    },
     "externals": {
       "jquery": "./node_modules/jquery/jquery.min.js"
     },
@@ -162,7 +180,6 @@ This tool works with zero configuration out the box but you could use some confi
 }
 ```
 
-**advice:** the alias option will not work for dev environment
 > The URL to the CDN **MUST** end with a slash `/`
 
 ## OnlyHash

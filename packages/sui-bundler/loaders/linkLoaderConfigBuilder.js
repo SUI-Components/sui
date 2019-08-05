@@ -1,3 +1,4 @@
+const fg = require('fast-glob')
 const path = require('path')
 const LoaderUniversalOptionsPlugin = require('../plugins/loader-options')
 const loadersOptions = require('../shared/loader-options')
@@ -10,14 +11,8 @@ const removePlugin = name => plugins => {
   return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
 }
 
-module.exports = ({config, packagesToLink}) => {
-  if (packagesToLink.length === 0) {
-    return config
-  }
-
-  console.log('🔗 Linking packages:')
-
-  const entryPoints = packagesToLink.reduce((acc, pkg) => {
+const diccFromAbsolutePaths = (paths, init = {}) =>
+  paths.reduce((acc, pkg) => {
     const packagePath = path.resolve(pkg)
     try {
       const pkg = require(path.join(packagePath, 'package.json'))
@@ -30,7 +25,32 @@ module.exports = ({config, packagesToLink}) => {
       )
       return acc
     }
-  }, {})
+  }, init)
+
+const absolutePathForMonoRepo = base => {
+  if (!base) {
+    return []
+  }
+  return fg
+    .sync([
+      `${path.resolve(base)}/**/package.json`,
+      '!**/node_modules/**',
+      '!**/lib/**'
+    ])
+    .map(p => path.dirname(p))
+}
+
+module.exports = ({config, packagesToLink, linkAll}) => {
+  if (packagesToLink.length === 0 && !linkAll) {
+    return config
+  }
+
+  console.log('🔗 Linking packages:')
+
+  const entryPoints = diccFromAbsolutePaths(
+    packagesToLink || [],
+    diccFromAbsolutePaths(absolutePathForMonoRepo(linkAll))
+  )
 
   return {
     ...config,

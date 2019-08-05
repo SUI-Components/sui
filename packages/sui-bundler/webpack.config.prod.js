@@ -6,8 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const uglifyJsPlugin = require('./shared/uglify')
+
+const {GenerateSW} = require('workbox-webpack-plugin')
+const minifyJs = require('./shared/minify-js')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
@@ -19,10 +20,12 @@ const hasBrotliSupport = Boolean(zlib.brotliCompress)
 const {
   navigateFallbackWhitelist,
   navigateFallback,
-  runtimeCaching,
-  directoryIndex
+  runtimeCaching
 } = require('./shared/precache')
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {sourceMap} = require('./shared/config')
+const parseAlias = require('./shared/parse-alias')
+
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 require('./shared/shims')
@@ -30,14 +33,11 @@ require('./shared/shims')
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
 module.exports = {
-  devtool:
-    config.sourcemaps && config.sourcemaps.prod
-      ? config.sourcemaps.prod
-      : 'none',
+  devtool: sourceMap,
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    alias: config.alias,
+    alias: parseAlias(config.alias),
     extensions: ['*', '.js', '.jsx', '.json']
   },
   entry: config.vendor
@@ -59,7 +59,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      uglifyJsPlugin,
+      minifyJs(sourceMap),
       new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: {}
       })
@@ -123,38 +123,16 @@ module.exports = {
     when(
       config.offline,
       () =>
-        new SWPrecacheWebpackPlugin({
+        new GenerateSW({
           dontCacheBustUrlsMatching: /\.\w{8}\./,
-          filename: 'service-worker.js',
-          logger(message) {
-            if (message.indexOf('Total precache size is') === 0) {
-              // This message occurs for every build and is a bit too noisy.
-              return
-            }
-            console.log(message)
-          },
-          minify: true,
-          directoryIndex: (console.log(
-            'directoryIndex',
-            directoryIndex(config.offline.whitelist)
+          directoryIndex: config.offline.directoryIndex,
+          navigateFallback:
+            PUBLIC_PATH + navigateFallback(config.offline.whitelist),
+          navigateFallbackWhitelist: navigateFallbackWhitelist(
+            config.offline.whitelist
           ),
-          directoryIndex(config.offline.whitelist)),
-          navigateFallback: (console.log(
-            'navigateFallback',
-            PUBLIC_PATH + navigateFallback(config.offline.whitelist)
-          ),
-          PUBLIC_PATH + navigateFallback(config.offline.whitelist)),
-          navigateFallbackWhitelist: (console.log(
-            'navigateFallbackWhitelist',
-            navigateFallbackWhitelist(config.offline.whitelist)
-          ),
-          navigateFallbackWhitelist(config.offline.whitelist)),
-          runtimeCaching: (console.log(
-            'runtimeCaching',
-            runtimeCaching(config.offline.runtime)
-          ),
-          runtimeCaching(config.offline.runtime)),
-          staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
+          runtimeCaching: runtimeCaching(config.offline.runtime),
+          globIgnores: ['**/*.map', '**/asset-manifest.json']
         })
     ),
     when(config.externals, () => new Externals({files: config.externals})),

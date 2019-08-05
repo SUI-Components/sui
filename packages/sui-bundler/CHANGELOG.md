@@ -2,6 +2,115 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.25.0"></a>
+# 5.25.0 (2019-07-30)
+
+
+### Bug Fixes
+
+* fix missing compatibility with eslint 6 ([2590650](https://github.com/SUI-Components/sui/commit/2590650))
+
+
+
+<a name="5.24.0"></a>
+# 5.24.0 (2019-07-29)
+
+
+### Features
+
+* add major sui-lint ([e6c725b](https://github.com/SUI-Components/sui/commit/e6c725b))
+
+
+
+<a name="5.23.0"></a>
+# 5.23.0 (2019-07-23)
+
+
+
+<a name="5.22.0"></a>
+# 5.22.0 (2019-07-09)
+
+
+### Bug Fixes
+
+* move alias parse logic to shared for all environments ([f1d437f](https://github.com/SUI-Components/sui/commit/f1d437f))
+
+
+
+<a name="5.21.0"></a>
+# 5.21.0 (2019-07-09)
+
+
+### Features
+
+* add alias to keep same experiment context on linked packages ([a7c3e6b](https://github.com/SUI-Components/sui/commit/a7c3e6b))
+* use ALIAS_FROM_CONFIG in dev webpackConfig instead of a hardcoded alias ([abed07e](https://github.com/SUI-Components/sui/commit/abed07e))
+
+
+
+<a name="5.20.0"></a>
+# 5.20.0 (2019-07-01)
+
+
+### Bug Fixes
+
+* return an empty array ([a55ce9d](https://github.com/SUI-Components/sui/commit/a55ce9d))
+
+
+
+<a name="5.19.0"></a>
+# 5.19.0 (2019-07-01)
+
+
+### Features
+
+* add --link-all flag ([c413f17](https://github.com/SUI-Components/sui/commit/c413f17))
+
+
+
+<a name="5.18.0"></a>
+# 5.18.0 (2019-06-18)
+
+
+### Features
+
+* move to workbox-webpack-plugin ([e5b959a](https://github.com/SUI-Components/sui/commit/e5b959a))
+
+
+
+<a name="5.17.0"></a>
+# 5.17.0 (2019-06-18)
+
+
+### Bug Fixes
+
+* sourceMap must be a boolean ([339c457](https://github.com/SUI-Components/sui/commit/339c457))
+
+
+### Features
+
+* move to terser instead uglify ([30b0d2d](https://github.com/SUI-Components/sui/commit/30b0d2d))
+
+
+
+<a name="5.16.0"></a>
+# 5.16.0 (2019-06-17)
+
+
+### Bug Fixes
+
+* pass targets config correctly ([7adb727](https://github.com/SUI-Components/sui/commit/7adb727))
+
+
+### Features
+
+* add targets config ([4a41ecf](https://github.com/SUI-Components/sui/commit/4a41ecf))
+* targets now is configurable ([ed82376](https://github.com/SUI-Components/sui/commit/ed82376))
+* upgrade dependencies ([e7a4ec7](https://github.com/SUI-Components/sui/commit/e7a4ec7))
+* upgrade dependencies ([7900f81](https://github.com/SUI-Components/sui/commit/7900f81))
+
+
+
 <a name="5.15.0"></a>
 # 5.15.0 (2019-06-06)
 

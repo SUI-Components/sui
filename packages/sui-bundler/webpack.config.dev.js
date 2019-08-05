@@ -5,6 +5,7 @@ const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
+const parseAlias = require('./shared/parse-alias')
 require('./shared/shims')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
@@ -30,7 +31,9 @@ let webpackConfig = {
       ),
       'react-router-dom': path.resolve(
         path.join(process.env.PWD, './node_modules/react-router-dom')
-      )
+      ),
+      // add extra alias from the config
+      ...parseAlias(config.alias)
     },
     extensions: ['*', '.js', '.jsx', '.json']
   },

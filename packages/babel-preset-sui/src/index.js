@@ -1,10 +1,22 @@
 const cleanList = require('./clean-list')
+const {
+  DEFAULT_BROWSER_TARGETS,
+  SELECTIVE_LOOSE_REACT_HOOKS
+} = require('./defaults')
+
+function getTargets({targets = {}}) {
+  const {browser = DEFAULT_BROWSER_TARGETS} = targets
+
+  return browser
+}
 
 function plugins(api, opts = {}) {
   return cleanList([
     require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-syntax-export-default-from').default,
     require('@babel/plugin-syntax-export-namespace-from').default,
+    require('@babel/plugin-proposal-optional-chaining').default,
+    require('@babel/plugin-proposal-nullish-coalescing-operator').default,
     [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
     [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
     [
@@ -21,13 +33,24 @@ function plugins(api, opts = {}) {
       require('@babel/plugin-transform-runtime').default,
       {
         corejs: false,
+        useESModules: true,
         regenerator: true
+      }
+    ],
+    [
+      require('@babel/plugin-transform-destructuring').default,
+      {
+        // Use loose mode for performance on selected react hooks
+        loose: false,
+        selectiveLoose: SELECTIVE_LOOSE_REACT_HOOKS
       }
     ]
   ])
 }
 
 function presets(api, opts) {
+  const {targets} = opts
+
   return [
     [
       require('@babel/preset-env').default,
@@ -38,18 +61,7 @@ function presets(api, opts) {
         modules: false,
         // Exclude transforms that make all code slower
         exclude: ['transform-typeof-symbol'],
-        targets: {
-          node: '6.0.0',
-          browsers: [
-            '> 0.25%',
-            'Firefox ESR',
-            'Safari >= 8',
-            'iOS >= 8',
-            'ie >= 11',
-            'not op_mini all',
-            'not dead'
-          ]
-        },
+        targets: getTargets({targets}),
         useBuiltIns: false
       }
     ],
