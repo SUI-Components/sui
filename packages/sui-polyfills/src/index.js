@@ -18,4 +18,6 @@ require('core-js/fn/string/includes')
 require('core-js/fn/string/starts-with')
 require('core-js/fn/string/trim')
 
+require('./element-closest')
+
 module.exports = {}
