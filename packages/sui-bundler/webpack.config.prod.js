@@ -28,7 +28,6 @@ const parseAlias = require('./shared/parse-alias')
 
 const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
-require('./shared/shims')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 

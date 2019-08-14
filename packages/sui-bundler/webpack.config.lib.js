@@ -5,7 +5,6 @@ const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const {sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
-require('./shared/shims')
 
 module.exports = {
   mode: 'production',
