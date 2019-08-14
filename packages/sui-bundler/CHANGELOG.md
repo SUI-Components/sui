@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.26.0"></a>
+# 5.26.0 (2019-08-14)
+
+
+### Features
+
+* remove not needed Object.values anymore as node version supported is already supp ([e1b4834](https://github.com/SUI-Components/sui/commit/e1b4834))
+
+
+
 <a name="5.25.0"></a>
 # 5.25.0 (2019-07-30)
 
