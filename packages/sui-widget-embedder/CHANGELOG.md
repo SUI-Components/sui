@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.6.0"></a>
+# 3.6.0 (2019-08-16)
+
+
+### Bug Fixes
+
+* add source map to minify ([7af9051](https://github.com/SUI-Components/sui/commit/7af9051))
+* remove not needed slash ([51520ed](https://github.com/SUI-Components/sui/commit/51520ed))
+
+
+
 <a name="3.5.0"></a>
 # 3.5.0 (2019-08-14)
 
