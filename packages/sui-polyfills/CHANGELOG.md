@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.11.0"></a>
+# 1.11.0 (2019-08-21)
+
+
+### Features
+
+* Load only on client closest polyfill ([a159129](https://github.com/SUI-Components/sui/commit/a159129))
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2019-08-06)
 
@@ -9,6 +19,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add element.closest() polyfill ([d521692](https://github.com/SUI-Components/sui/commit/d521692))
+* upgrade core-js and add more polyfills ([23c076c](https://github.com/SUI-Components/sui/commit/23c076c))
 
 
 
