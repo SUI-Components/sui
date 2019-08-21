@@ -34,7 +34,11 @@ async function externalsManifestLoader(source) {
   }
 
   try {
-    const manifest = await getRemoteManifest(manifestURL)
+    const manifest = await getRemoteManifest(
+      typeof manifestURL === 'string'
+        ? manifestURL
+        : manifestURL[process.env.NODE_ENV]
+    )
     const entries = Object.entries(manifest)
     const nextSource = entries.reduce((acc, entry) => {
       const [dest, src] = entry
