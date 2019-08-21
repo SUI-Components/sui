@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "5.25.0",
+  "version": "5.26.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -46,7 +46,6 @@
     "node-sass": "4.12.0",
     "node-sass-json-importer": "3.1.6",
     "null-loader": "2.0.0",
-    "object.values": "1.1.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "postcss-loader": "2.1.6",
     "raw-loader": "0.5.1",
