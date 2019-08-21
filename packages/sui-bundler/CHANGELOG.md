@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.27.0"></a>
+# 5.27.0 (2019-08-21)
+
+
+### Bug Fixes
+
+* Use const instead let to fix linter ([c4aa858](https://github.com/SUI-Components/sui/commit/c4aa858))
+
+
+
 <a name="5.26.0"></a>
 # 5.26.0 (2019-08-14)
 
