@@ -42,8 +42,8 @@ async function externalsManifestLoader(source) {
     const entries = Object.entries(manifest)
     const nextSource = entries.reduce((acc, entry) => {
       const [dest, src] = entry
-      const regex = new RegExp(`${dest}`, 'g')
-      return acc.replace(regex, `${src}`)
+      const regex = new RegExp(dest, 'g')
+      return acc.replace(regex, src)
     }, source)
 
     cb(null, nextSource)
