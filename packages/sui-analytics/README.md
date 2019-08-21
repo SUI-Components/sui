@@ -21,10 +21,24 @@ sui-analytics will be an object with the methods described [here](#events)
 </script>
 ````
 
-### In your javascript
+### In your modern and beautiful JavaScript...
 
 ```js
 import suiAnalytics from '@s-ui/analytics'
+```
+
+### In your monolithic JavaScript...
+
+```js
+// First load the UMD module.
+<script src="https://unpkg.com/@s-ui/analytics/umd/index.js"></script>
+<script>
+  // Then trigger all the events you need referencing the right namespaced
+  // object: `window.sui.analytics`. For more info see the "Events" section below.
+  window.sui.analytics.identify('your user id', {});
+  window.sui.analytics.track('your event', {});
+  window.sui.analytics.reset();
+</script>
 ```
 
 ## Events

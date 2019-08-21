@@ -15,6 +15,8 @@ function plugins(api, opts = {}) {
     require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-syntax-export-default-from').default,
     require('@babel/plugin-syntax-export-namespace-from').default,
+    require('@babel/plugin-proposal-optional-chaining').default,
+    require('@babel/plugin-proposal-nullish-coalescing-operator').default,
     [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
     [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
     [
