@@ -13,7 +13,7 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
 
-let webpackConfig = {
+const webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
   resolve: {
