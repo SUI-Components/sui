@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.28.0"></a>
+# 5.28.0 (2019-08-21)
+
+
+### Bug Fixes
+
+* remove unnecessary template strings ([499fb33](https://github.com/SUI-Components/sui/commit/499fb33))
+
+
+
 <a name="5.27.0"></a>
 # 5.27.0 (2019-08-21)
 
@@ -9,6 +19,12 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * Use const instead let to fix linter ([c4aa858](https://github.com/SUI-Components/sui/commit/c4aa858))
+
+
+### Features
+
+* adds the ability to use environment variables to get different URLs ([1279202](https://github.com/SUI-Components/sui/commit/1279202))
+* remove dirname in regEx to get manifestURL ([fad8f37](https://github.com/SUI-Components/sui/commit/fad8f37))
 
 
 
