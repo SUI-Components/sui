@@ -2,6 +2,86 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.7.0"></a>
+# 3.7.0 (2019-08-02)
+
+
+### Features
+
+* equal prettier and  stylelint rule ([ea279a3](https://github.com/SUI-Components/sui/commit/ea279a3))
+
+
+
+<a name="3.6.0"></a>
+# 3.6.0 (2019-08-02)
+
+
+### Bug Fixes
+
+* add double quotes to patters ([788fccc](https://github.com/SUI-Components/sui/commit/788fccc))
+
+
+### Features
+
+* bump Version ([4deb536](https://github.com/SUI-Components/sui/commit/4deb536))
+
+
+
+<a name="3.5.0"></a>
+# 3.5.0 (2019-07-31)
+
+
+### Bug Fixes
+
+* fix lint several scss files ([dbcb9d8](https://github.com/SUI-Components/sui/commit/dbcb9d8))
+
+
+
+<a name="3.4.0"></a>
+# 3.4.0 (2019-07-30)
+
+
+### Bug Fixes
+
+* remove deprecation notice ([6f3ea5e](https://github.com/SUI-Components/sui/commit/6f3ea5e))
+
+
+### Features
+
+* upgrade dependencies ([65557d8](https://github.com/SUI-Components/sui/commit/65557d8))
+
+
+
+<a name="3.3.0"></a>
+# 3.3.0 (2019-07-30)
+
+
+### Bug Fixes
+
+* no-unused-expressions set to OFF ([ac42fd7](https://github.com/SUI-Components/sui/commit/ac42fd7))
+
+
+
+<a name="3.2.0"></a>
+# 3.2.0 (2019-07-30)
+
+
+### Features
+
+* Upgrade [@s-ui](https://github.com/s-ui)/lint ([c08537d](https://github.com/SUI-Components/sui/commit/c08537d))
+
+
+
+<a name="3.1.0"></a>
+# 3.1.0 (2019-07-29)
+
+
+### Features
+
+* add support for chaining optional ([14ecd1f](https://github.com/SUI-Components/sui/commit/14ecd1f))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2019-07-10)
 

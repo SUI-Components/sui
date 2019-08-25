@@ -2,7 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const prodConfig = require('@s-ui/bundler/webpack.config.prod')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const uglifyJsPlugin = require('@s-ui/bundler/shared/uglify')
+const minifyJs = require('@s-ui/bundler/shared/minify-js')
+const {sourceMap} = require('@s-ui/bundler/shared/config')
 const {pipe, removePlugin} = require('./utils')
 const MAIN_ENTRY_POINT = './index.js'
 
@@ -23,6 +24,7 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
   if (config.vendor) {
     entry['vendor'] = config.vendor
   }
+
   return webpack({
     ...prodConfig,
     context: path.resolve(process.cwd(), 'pages', page),
@@ -42,7 +44,7 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
     optimization: {
       ...prodConfig.optimization,
       minimizer: [
-        uglifyJsPlugin,
+        minifyJs(sourceMap),
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
             zindex: false
