@@ -54,7 +54,7 @@ module.exports = {
     'no-duplicate-selectors': true,
     'no-empty-source': true,
     'no-invalid-double-slash-comments': true,
-    'number-leading-zero': null,
+    'number-leading-zero': 'always',
     'property-no-unknown': true,
     'selector-pseudo-class-no-unknown': true,
     'selector-pseudo-element-no-unknown': true,

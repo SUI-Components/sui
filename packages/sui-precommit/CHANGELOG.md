@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.0"></a>
+# 2.7.0 (2019-07-30)
+
+
+### Features
+
+* Upgrade [@s-ui](https://github.com/s-ui)/lint ([31626ec](https://github.com/SUI-Components/sui/commit/31626ec))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2019-03-18)
 
@@ -75,6 +85,22 @@ All notable changes to this project will be documented in this file.
 ### BREAKING CHANGES
 
 * API has changed... now it's sui-lint instead of linting-rules
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-06-16)
+
+
+### Bug Fixes
+
+* add build script to be compatible with sui-mono releases ([0cd7d4b](https://github.com/SUI-Components/sui/commit/0cd7d4b))
+
+
+### Features
+
+* first commit of frontend-commit-rules migration to sui-precommit ([6f77134](https://github.com/SUI-Components/sui/commit/6f77134))
+* rename package to [@schibstedspain](https://github.com/schibstedspain)/sui-precommit ([b9a0a1d](https://github.com/SUI-Components/sui/commit/b9a0a1d))
 
 
 

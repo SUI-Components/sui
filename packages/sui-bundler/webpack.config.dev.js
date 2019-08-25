@@ -6,17 +6,14 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const parseAlias = require('./shared/parse-alias')
-require('./shared/shims')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${
-    path.sep
-  }workbench)?${path.sep}src)`
+  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
 
-let webpackConfig = {
+const webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
   resolve: {

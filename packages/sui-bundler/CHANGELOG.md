@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.28.0"></a>
+# 5.28.0 (2019-08-21)
+
+
+### Bug Fixes
+
+* remove unnecessary template strings ([499fb33](https://github.com/SUI-Components/sui/commit/499fb33))
+
+
+
+<a name="5.27.0"></a>
+# 5.27.0 (2019-08-21)
+
+
+### Bug Fixes
+
+* Use const instead let to fix linter ([c4aa858](https://github.com/SUI-Components/sui/commit/c4aa858))
+
+
+### Features
+
+* adds the ability to use environment variables to get different URLs ([1279202](https://github.com/SUI-Components/sui/commit/1279202))
+* remove dirname in regEx to get manifestURL ([fad8f37](https://github.com/SUI-Components/sui/commit/fad8f37))
+
+
+
+<a name="5.26.0"></a>
+# 5.26.0 (2019-08-14)
+
+
+### Features
+
+* remove not needed Object.values anymore as node version supported is already supp ([e1b4834](https://github.com/SUI-Components/sui/commit/e1b4834))
+
+
+
+<a name="5.25.0"></a>
+# 5.25.0 (2019-07-30)
+
+
+### Bug Fixes
+
+* fix missing compatibility with eslint 6 ([2590650](https://github.com/SUI-Components/sui/commit/2590650))
+
+
+
+<a name="5.24.0"></a>
+# 5.24.0 (2019-07-29)
+
+
+### Features
+
+* add major sui-lint ([e6c725b](https://github.com/SUI-Components/sui/commit/e6c725b))
+
+
+
 <a name="5.23.0"></a>
 # 5.23.0 (2019-07-23)
 

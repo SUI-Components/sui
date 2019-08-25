@@ -1,21 +1,27 @@
-require('core-js/fn/array/fill')
-require('core-js/fn/array/find')
-require('core-js/fn/array/find-index')
-require('core-js/fn/array/from')
-require('core-js/fn/array/includes')
-require('core-js/fn/array/is-array')
-require('core-js/fn/array/of')
+require('core-js/features/array/fill')
+require('core-js/features/array/find-index')
+require('core-js/features/array/find')
+require('core-js/features/array/from')
+require('core-js/features/array/includes')
+require('core-js/features/array/is-array')
+require('core-js/features/array/of')
 
-require('core-js/fn/object/assign')
-require('core-js/fn/object/keys')
-require('core-js/fn/object/values')
-require('core-js/fn/object/entries')
+require('core-js/features/object/assign')
+require('core-js/features/object/entries')
+require('core-js/features/object/keys')
+require('core-js/features/object/values')
 
-require('core-js/fn/promise')
+require('core-js/features/promise')
 
-require('core-js/fn/string/ends-with')
-require('core-js/fn/string/includes')
-require('core-js/fn/string/starts-with')
-require('core-js/fn/string/trim')
+require('core-js/features/string/ends-with')
+require('core-js/features/string/includes')
+require('core-js/features/string/starts-with')
+require('core-js/features/string/trim')
+require('core-js/features/string/pad-end')
+require('core-js/features/string/pad-start')
+
+require('core-js/features/url-search-params')
+
+require('./element-closest')
 
 module.exports = {}
