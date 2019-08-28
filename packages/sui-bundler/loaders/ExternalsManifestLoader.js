@@ -29,6 +29,10 @@ async function externalsManifestLoader(source) {
   const cb = this.async()
   const {manifestURL} = this.query
 
+  if (process.env.NODE_ENV === 'development') {
+    return cb(null, source)
+  }
+
   if (!manifestURL) {
     return cb(null, source)
   }
