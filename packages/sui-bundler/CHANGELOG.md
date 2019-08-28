@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.29.0"></a>
+# 5.29.0 (2019-08-28)
+
+
+### Features
+
+* externalManifestLoader dont apply in dev mode ([491ca38](https://github.com/SUI-Components/sui/commit/491ca38))
+
+
+
 <a name="5.28.0"></a>
 # 5.28.0 (2019-08-21)
 
