@@ -3,7 +3,8 @@
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
   staged: '--staged',
-  addFixes: '--add-fixes'
+  addFixes: '--add-fixes',
+  pattern: '--pattern'
 }
 const optionFlags = Object.values(OPTIONS)
 
