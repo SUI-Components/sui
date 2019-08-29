@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.9.0"></a>
+# 3.9.0 (2019-08-29)
+
+
+### Bug Fixes
+
+* apply external flags ([81a5c82](https://github.com/SUI-Components/sui/commit/81a5c82))
+
+
+
 <a name="3.8.0"></a>
 # 3.8.0 (2019-08-29)
 
