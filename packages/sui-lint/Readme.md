@@ -44,6 +44,14 @@ $ sui-lint sass [options]
 
 Lints all `**/src/**/*.scss` files in the project, excluding `node_modules`, `lib`, `dist`.
 
+To change the default pattern you can use the flag `--pattern`:
+
+example:
+
+```
+$ sui-lint sass --pattern ./widgets/**/*.scss
+```
+
 > **`.gitignore` file patterns are also excluded but interpretation may differ as only glob patterns are understood**
 
 
