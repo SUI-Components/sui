@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.8.0"></a>
+# 3.8.0 (2019-08-29)
+
+
+### Features
+
+* add new flag to change the default pattern ([e4c8b7c](https://github.com/SUI-Components/sui/commit/e4c8b7c))
+
+
+
 <a name="3.7.0"></a>
 # 3.7.0 (2019-08-02)
 
