@@ -35,7 +35,7 @@ const _cache = ({
   return (...args) => {
     if (
       (typeof window !== 'undefined' && window.__SUI_CACHE_DISABLED__) ||
-      global.__SUI_CACHE_DISABLED__
+      (typeof global !== 'undefined' && global.__SUI_CACHE_DISABLED__)
     ) {
       return original
     }
