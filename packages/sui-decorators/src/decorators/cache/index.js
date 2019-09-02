@@ -37,7 +37,7 @@ const _cache = ({
       (typeof window !== 'undefined' && window.__SUI_CACHE_DISABLED__) ||
       (typeof global !== 'undefined' && global.__SUI_CACHE_DISABLED__)
     ) {
-      return original
+      return original.apply(instance, args)
     }
 
     const key = `${target.constructor.name}::${fnName}::${createHash(
