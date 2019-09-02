@@ -33,6 +33,13 @@ const _cache = ({
   const cache = caches[fnName]
 
   return (...args) => {
+    if (
+      (typeof window !== 'undefined' && window.__SUI_CACHE_DISABLED__) ||
+      global.__SUI_CACHE_DISABLED__
+    ) {
+      return original
+    }
+
     const key = `${target.constructor.name}::${fnName}::${createHash(
       JSON.stringify(args)
     )}`
