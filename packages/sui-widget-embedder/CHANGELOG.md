@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.7.0"></a>
+# 3.7.0 (2019-09-12)
+
+
+### Bug Fixes
+
+* fix dev mode when page already has widgets on it ([7ac3a45](https://github.com/SUI-Components/sui/commit/7ac3a45))
+
+
+
 <a name="3.6.0"></a>
 # 3.6.0 (2019-08-16)
 
