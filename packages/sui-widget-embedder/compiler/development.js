@@ -12,7 +12,7 @@ module.exports = ({address, page, port}) =>
       path: '/',
       publicPath: `http://${address}:${port}/`,
       filename: 'bundle.js',
-      jsonpFunction: `webpackJsonp-${page}`
+      jsonpFunction: `webpackJsonp-${page}-dev`
     },
     plugins: pipe(removePlugin('HtmlWebpackPlugin'))(devConfig.plugins)
   })
