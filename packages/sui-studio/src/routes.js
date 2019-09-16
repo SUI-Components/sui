@@ -23,6 +23,10 @@ export default (
             path="changelog"
             component={props => <MarkdownFile {...props} file="CHANGELOG" />}
           />
+          <Route
+            path="uxdef"
+            component={props => <MarkdownFile {...props} file="UXDEF" />}
+          />
         </Route>
       </Route>
     </Route>
