@@ -7,6 +7,8 @@ import Documentation from './components/documentation'
 import Api from './components/documentation/Api'
 import MarkdownFile from './components/documentation/MarkdownFile'
 
+import {FILES} from './constants'
+
 export default (
   <Route>
     <Route path="/" component={Layout}>
@@ -17,15 +19,19 @@ export default (
           <Route path="api" component={Api} />
           <Route
             path="readme"
-            component={props => <MarkdownFile {...props} file="README" />}
+            component={props => <MarkdownFile {...props} file={FILES.README} />}
           />
           <Route
             path="changelog"
-            component={props => <MarkdownFile {...props} file="CHANGELOG" />}
+            component={props => (
+              <MarkdownFile {...props} file={FILES.CHANGELOG} />
+            )}
           />
           <Route
             path="uxdef"
-            component={props => <MarkdownFile {...props} file="UXDEF" />}
+            component={props => (
+              <MarkdownFile {...props} file={FILES.UX_DEFINITION} />
+            )}
           />
         </Route>
       </Route>
