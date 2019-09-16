@@ -1,34 +1,31 @@
+import React, {useEffect, useRef, useState} from 'react'
 import PropTypes from 'prop-types'
-import React, {Component} from 'react'
 
-export default class Markdown extends Component {
-  propTypes = {
-    content: PropTypes.string
-  }
+export default function Markdown({content}) {
+  const [dependenciesReady, setDependenciesReady] = useState(false)
+  const snarkdownRef = useRef()
 
-  state = {
-    dependenciesReady: false
-  }
+  useEffect(function() {
+    import('snarkdown').then(({default: snarkdown}) => {
+      snarkdownRef.current = snarkdown
+      setDependenciesReady(true)
+    })
+  })
 
-  async componentDidMount() {
-    const snarkdownDependency = await import('snarkdown')
-    this._snarkdown = snarkdownDependency.default
-    this.setState({dependenciesReady: true})
-  }
+  if (dependenciesReady === false) return null
+  const {current: snarkdown} = snarkdownRef
 
-  render() {
-    if (this.state.dependenciesReady === false) return null
-
-    const {content} = this.props
-    return (
-      content && (
-        <div
-          className="markdown-body"
-          dangerouslySetInnerHTML={{__html: this._snarkdown(content)}}
-        />
-      )
+  return (
+    content && (
+      <div
+        className="markdown-body"
+        dangerouslySetInnerHTML={{__html: snarkdown(content)}}
+      />
     )
-  }
+  )
 }
 
 Markdown.displayName = 'Markdown'
+Markdown.propTypes = {
+  content: PropTypes.string
+}
