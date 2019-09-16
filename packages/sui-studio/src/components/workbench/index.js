@@ -29,6 +29,7 @@ export default function Workbench({children, params}) {
           <Tab name="Api" path="documentation/api" />
           <Tab name="Readme" path="documentation/readme" />
           <Tab name="Changelog" path="documentation/changelog" />
+          <Tab name="UX Definition" path="documentation/uxdef" />
         </ul>
       </nav>
       <div className="sui-StudioWorkbench-content">{children}</div>
