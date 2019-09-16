@@ -1,20 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import snarkdown from '../../snarkdown'
 
 export default function Markdown({content}) {
-  const [dependenciesReady, setDependenciesReady] = useState(false)
-  const snarkdownRef = useRef()
-
-  useEffect(function() {
-    import('snarkdown').then(({default: snarkdown}) => {
-      snarkdownRef.current = snarkdown
-      setDependenciesReady(true)
-    })
-  })
-
-  if (dependenciesReady === false) return null
-  const {current: snarkdown} = snarkdownRef
-
   return (
     content && (
       <div

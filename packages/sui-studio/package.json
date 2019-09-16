@@ -48,7 +48,6 @@
     "normalize.css": "8.0.0",
     "pascal-case": "2.0.0",
     "react-docgen": "2.21.0",
-    "snarkdown": "1.2.2",
     "terminal-banner": "1.1.0"
   },
   "suistudio-webpack": {
