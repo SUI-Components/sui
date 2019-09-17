@@ -17,14 +17,7 @@ const withSwitchValue = BaseComponent => {
       onChangeFromProps(e, {value: innerValue})
     }
 
-    return (
-      <BaseComponent
-        {...props}
-        checked={value}
-        value={value}
-        onChange={onChange}
-      />
-    )
+    return <BaseComponent {...props} value={value} onChange={onChange} />
   }
 
   BaseComponentWithState.displayName = `withSwitchValue(${displayName})`
