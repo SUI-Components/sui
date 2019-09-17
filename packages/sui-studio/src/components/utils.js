@@ -37,7 +37,7 @@ export const getStudioLogo = () => {
 
 export const isEmptyObject = obj => {
   for (var x in obj) {
-    if (obj.hasOwnProperty(x)) {
+    if (obj.hasOwnProperty(x)) { // eslint-disable-line
       return false
     }
   }

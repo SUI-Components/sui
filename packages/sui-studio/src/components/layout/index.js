@@ -1,66 +1,50 @@
 /* global __BASE_DIR__ */
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
-
-import React, {Component} from 'react'
-import Markdown from '../documentation/Markdown'
 import cx from 'classnames'
 
 import {iconClose, iconMenu} from '../icons'
+import Markdown from '../documentation/Markdown'
 import Navigation from '../navigation'
 
 const readme = require(`raw-loader!${__BASE_DIR__}/components/README.md`)
 
-export default class Layout extends Component {
-  static propTypes = {
-    children: PropTypes.element
+export default function Layout({children}) {
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
+
+  const handleClickMenu = () => {
+    setMenuIsOpen(!menuIsOpen)
   }
 
-  state = {
-    menuIsOpen: false
-  }
+  const renderReadme = () => (
+    <div className="sui-Studio-readme">
+      <Markdown content={readme} />
+    </div>
+  )
 
-  handleClickMenu = () => {
-    this.setState({
-      menuIsOpen: !this.state.menuIsOpen
-    })
-  }
+  const sidebarClassName = cx('sui-Studio-sidebar', {
+    'sui-Studio-sidebar--open': menuIsOpen
+  })
 
-  _renderReadme() {
-    return (
-      <div className="sui-Studio-readme">
-        <Markdown content={readme} />
-      </div>
-    )
-  }
+  return (
+    <section className="sui-Studio">
+      <button className="sui-Studio-navMenu" onClick={handleClickMenu}>
+        {menuIsOpen ? iconClose : iconMenu}
+      </button>
 
-  render() {
-    const {children} = this.props
-    const {menuIsOpen} = this.state
-
-    const sidebarClassName = cx('sui-Studio-sidebar', {
-      'sui-Studio-sidebar--open': menuIsOpen
-    })
-
-    return (
-      <section className="sui-Studio">
-        <button className="sui-Studio-navMenu" onClick={this.handleClickMenu}>
-          {menuIsOpen ? iconClose : iconMenu}
-        </button>
-
-        <aside className={sidebarClassName}>
-          <div className="sui-Studio-sidebarBody">
-            <Navigation
-              handleClick={() => {
-                this.setState({menuIsOpen: false})
-              }}
-            />
-          </div>
-        </aside>
-
-        <div className="sui-Studio-main">
-          {children !== null ? children : this._renderReadme()}
+      <aside className={sidebarClassName}>
+        <div className="sui-Studio-sidebarBody">
+          <Navigation handleClick={() => setMenuIsOpen(false)} />
         </div>
-      </section>
-    )
-  }
+      </aside>
+
+      <div className="sui-Studio-main">
+        {children !== null ? children : renderReadme()}
+      </div>
+    </section>
+  )
+}
+
+Layout.propTypes = {
+  children: PropTypes.element
 }

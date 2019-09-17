@@ -1,26 +1,20 @@
 import PropTypes from 'prop-types'
-import React, {Component, Fragment} from 'react'
+import React, {useEffect, useState, Fragment} from 'react'
 import {tryRequireRawSrc} from '../tryRequire'
 
-class Api extends Component {
-  static propTypes = {
-    params: PropTypes.shape({
-      category: PropTypes.string,
-      component: PropTypes.string
-    })
-  }
+export default function Api({params}) {
+  const [docs, setDocs] = useState(false)
+  useEffect(() => {
+    async function getDocs() {
+      const reactDocs = await import('react-docgen')
+      const src = await tryRequireRawSrc(params)
+      const docs = reactDocs.parse(src)
+      setDocs(docs)
+    }
+    getDocs()
+  })
 
-  state = {docs: false}
-
-  async componentDidMount() {
-    const reactDocs = await import('react-docgen')
-    const src = await tryRequireRawSrc(this.props.params)
-    const docs = reactDocs.parse(src)
-
-    this.setState({docs})
-  }
-
-  _renderPropsApi({propsApi = {}}) {
+  const renderPropsApi = ({propsApi = {}}) => {
     const keysOfProps = Object.keys(propsApi).sort((a, b) => a.localeCompare(b))
     // if the component doesn't have props, show a message
     if (keysOfProps.length === 0) {
@@ -69,28 +63,26 @@ class Api extends Component {
     return [<h2 key="propTitles">Props</h2>, ...renderedProps]
   }
 
-  render() {
-    const {docs} = this.state
+  if (docs) {
+    const {category, component} = params
+    const {displayName, props} = docs
+    const componentTitle = `${displayName} (${category}/${component})`
 
-    if (docs) {
-      const {
-        params: {category, component}
-      } = this.props
-      const componentTitle = `${docs.displayName} (${category}/${component})`
-      const {props} = docs
-
-      return (
-        <Fragment>
-          <h1>{componentTitle}</h1>
-          {this._renderPropsApi({propsApi: props})}
-        </Fragment>
-      )
-    }
-
-    return null
+    return (
+      <Fragment>
+        <h1>{componentTitle}</h1>
+        {renderPropsApi({propsApi: props})}
+      </Fragment>
+    )
   }
+
+  return null
 }
 
 Api.displayName = 'Api'
-
-export default Api
+Api.propTypes = {
+  params: PropTypes.shape({
+    category: PropTypes.string,
+    component: PropTypes.string
+  })
+}

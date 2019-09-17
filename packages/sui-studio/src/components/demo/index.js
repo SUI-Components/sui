@@ -137,7 +137,7 @@ export default class Demo extends Component {
   }
 
   render() {
-    let {
+    const {
       ctxt = {},
       ctxtSelectedIndex,
       ctxtType,
