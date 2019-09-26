@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.3.0"></a>
+# 2.3.0 (2019-07-24)
+
+
+### Bug Fixes
+
+* use correct api ([3735682](https://github.com/SUI-Components/sui/commit/3735682))
+
+
+
+<a name="2.2.0"></a>
+# 2.2.0 (2019-07-23)
+
+
+### Features
+
+* force release ([4e9dc35](https://github.com/SUI-Components/sui/commit/4e9dc35))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2019-07-03)
 

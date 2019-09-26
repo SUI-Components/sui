@@ -22,7 +22,7 @@ describe('@s-ui/js', () => {
     })
   })
   describe('string:fromArrayToCommaQueryString', () => {
-    it.only('should convert params array to comma separated object params', () => {
+    it('should convert params array to comma separated object params', () => {
       const paramsArray = {a: 1, b: 2, c: [3, 4]}
       const params = 'a=1&b=2&c=3,4'
       expect(fromArrayToCommaQueryString(paramsArray)).to.deep.equal(params)

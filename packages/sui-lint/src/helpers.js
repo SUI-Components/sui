@@ -3,7 +3,8 @@
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
   staged: '--staged',
-  addFixes: '--add-fixes'
+  addFixes: '--add-fixes',
+  pattern: '--pattern'
 }
 const optionFlags = Object.values(OPTIONS)
 
@@ -60,7 +61,7 @@ const getGitIgnoredFiles = () =>
  * @returns {Array<String>} ['--ignore-pattern', 'folder/', ...]
  */
 const getArrayArgs = (arg, values) => {
-  return values.filter(Boolean).map(pattern => `${arg} ${pattern}`)
+  return values.filter(Boolean).map(pattern => `${arg} "${pattern}"`)
 }
 
 /**

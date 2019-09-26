@@ -132,7 +132,7 @@ node_modules`
 
   writeFile(
     COMPONENT_ENTRY_JS_POINT_FILE,
-    `import React, {Component} from 'react'
+    `import React from 'react'
 // import PropTypes from 'prop-types'
 
 const ${componentInPascal} = () => (
@@ -142,11 +142,7 @@ const ${componentInPascal} = () => (
 )
 
 ${componentInPascal}.displayName = '${componentInPascal}'
-
-// Remove these comments if you need
-// ${componentInPascal}.contextTypes = {i18n: PropTypes.object}
-// ${componentInPascal}.propTypes = {}
-// ${componentInPascal}.defaultProps = {}
+${componentInPascal}.propTypes = {}
 
 export default ${componentInPascal}
 `

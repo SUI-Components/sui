@@ -29,18 +29,25 @@ async function externalsManifestLoader(source) {
   const cb = this.async()
   const {manifestURL} = this.query
 
+  if (process.env.NODE_ENV === 'development') {
+    return cb(null, source)
+  }
+
   if (!manifestURL) {
     return cb(null, source)
   }
 
   try {
-    const dirname = path.dirname(manifestURL)
-    const manifest = await getRemoteManifest(manifestURL)
+    const manifest = await getRemoteManifest(
+      typeof manifestURL === 'string'
+        ? manifestURL
+        : manifestURL[process.env.NODE_ENV]
+    )
     const entries = Object.entries(manifest)
     const nextSource = entries.reduce((acc, entry) => {
       const [dest, src] = entry
-      const regex = new RegExp(`${dirname}${dest}`, 'g')
-      return acc.replace(regex, `${dirname}${src}`)
+      const regex = new RegExp(dest, 'g')
+      return acc.replace(regex, src)
     }, source)
 
     cb(null, nextSource)

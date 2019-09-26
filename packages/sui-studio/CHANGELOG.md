@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.4.0"></a>
+# 7.4.0 (2019-09-17)
+
+
+### Features
+
+*  Add new route for UX definitions ([c9dd5f2](https://github.com/SUI-Components/sui/commit/c9dd5f2))
+* Add constants file to reuse some ([5ef776f](https://github.com/SUI-Components/sui/commit/5ef776f))
+* Add custom snarkdown with table compatibility ([b1e172c](https://github.com/SUI-Components/sui/commit/b1e172c))
+* Add UX Definition tab ([5d25acd](https://github.com/SUI-Components/sui/commit/5d25acd))
+* Generate function instead class component ([efdf5dd](https://github.com/SUI-Components/sui/commit/efdf5dd))
+* Move API to function ([a92ae9d](https://github.com/SUI-Components/sui/commit/a92ae9d))
+* Move class to function ([b4e2152](https://github.com/SUI-Components/sui/commit/b4e2152))
+* Move classes to function ([1420335](https://github.com/SUI-Components/sui/commit/1420335))
+* Move classes to functions ([d8a4a8b](https://github.com/SUI-Components/sui/commit/d8a4a8b))
+* Move to function ([609dd6a](https://github.com/SUI-Components/sui/commit/609dd6a))
+* Show UX definition button only when needed ([cc1e3b8](https://github.com/SUI-Components/sui/commit/cc1e3b8))
+* Use constants ([11d0dbb](https://github.com/SUI-Components/sui/commit/11d0dbb))
+
+
+
 <a name="7.3.0"></a>
 # 7.3.0 (2019-06-26)
 
@@ -849,6 +870,22 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add commit command to sui-studio ([d5839b8](https://github.com/SUI-Components/sui/commit/d5839b8))
+
+
+
+<a name="4.0.0"></a>
+# 4.0.0 (2017-06-22)
+
+
+### Features
+
+* change bin name from suistudio to sui-studio for consistency with all CLIs ([2b4d0d6](https://github.com/SUI-Components/sui/commit/2b4d0d6))
+* migrate from https://github.com/SUI-Components/SUIStudio ([531e5ea](https://github.com/SUI-Components/sui/commit/531e5ea))
+
+
+### BREAKING CHANGES
+
+* API is now named sui-studio instead of suistudio
 
 
 

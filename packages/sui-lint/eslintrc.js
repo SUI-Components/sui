@@ -18,7 +18,13 @@ module.exports = {
     'prettier/react'
   ],
   parser: 'babel-eslint',
-  plugins: ['chai-friendly', 'no-only-tests', 'prettier', 'react-hooks'],
+  plugins: [
+    'babel',
+    'chai-friendly',
+    'no-only-tests',
+    'prettier',
+    'react-hooks'
+  ],
   rules: {
     'chai-friendly/no-unused-expressions': [
       RULES.ERROR,
@@ -29,6 +35,7 @@ module.exports = {
     'no-nested-ternary': RULES.WARNING,
     'no-only-tests/no-only-tests': RULES.ERROR,
     'no-unused-expressions': RULES.OFF,
+    'babel/no-unused-expressions': RULES.OFF,
     'react/default-props-match-prop-types': RULES.WARNING,
     'react/jsx-no-duplicate-props': [RULES.WARNING, {ignoreCase: true}],
     'react/jsx-no-undef': RULES.WARNING,

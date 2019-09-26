@@ -127,3 +127,13 @@ thus, avoiding writing very large integers
 * trackTo: Is you pass a host, each 20secds will be send a ping to `${trackTo}/__tracking/cache/event/stats` with a header `x-payload` where there is a object with the stats of hit, miss, env and algorithm
 
 * size (100): How many register can be in the cache before start to remove register.
+
+### How to disable the cache
+In some cases we might want to disable the `cache` for certain environment or testing purposes. In that case, we should expose a variable into the global scope as:
+```
+// For client side
+window.__SUI_CACHE_DISABLED__ = true
+
+// Server side
+global.__SUI_CACHE_DISABLED__ = true
+```

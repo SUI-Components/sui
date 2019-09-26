@@ -14,4 +14,4 @@ git checkout master
 # get the latest master changes
 git pull origin master
 # release new packages
-npm run release
+./node_modules/.bin/sui-mono release
