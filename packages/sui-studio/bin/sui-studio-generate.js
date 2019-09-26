@@ -135,15 +135,11 @@ node_modules`
     `import React, {Component} from 'react'
 // import PropTypes from 'prop-types'
 
-class ${componentInPascal} extends Component {
-  render() {
-    return (
-      <div className="${prefix}-${componentInPascal}">
-        <h1>${componentInPascal}</h1>
-      </div>
-    )
-  }
-}
+const ${componentInPascal} = () => (
+  <div className="${prefix}-${componentInPascal}">
+    <h1>${componentInPascal}</h1>
+  </div>
+)
 
 ${componentInPascal}.displayName = '${componentInPascal}'
 
