@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.23.0"></a>
+# 5.23.0 (2019-09-27)
+
+
+### Features
+
+* add PRE_SSR_HANDLER hook ([e5597a1](https://github.com/SUI-Components/sui/commit/e5597a1))
+* bump version ([1a5c5c3](https://github.com/SUI-Components/sui/commit/1a5c5c3))
+
+
+
 <a name="5.21.0"></a>
 # 5.21.0 (2019-07-03)
 
