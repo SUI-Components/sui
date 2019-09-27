@@ -63,6 +63,7 @@ export const hooksFactory = async () => {
     [TYPES.PRE_HEALTH]: NULL_MDWL,
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
+    [TYPES.PRE_SSR_HANDLER]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
     [TYPES.NOT_FOUND]: async (req, res, next) => {
       res
