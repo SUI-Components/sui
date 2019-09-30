@@ -1,4 +1,5 @@
 {
+  "name": "@s-ui/ssr",
   "version": "5.23.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
