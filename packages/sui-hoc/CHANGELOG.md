@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.21.0"></a>
+# 1.21.0 (2019-09-30)
+
+
+### Bug Fixes
+
+* cleaner code assuring boolean value ([c99bd82](https://github.com/SUI-Components/sui/commit/c99bd82))
+
+
+
 <a name="1.20.0"></a>
 # 1.20.0 (2019-09-30)
 
