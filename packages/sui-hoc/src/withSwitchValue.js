@@ -9,7 +9,7 @@ const withSwitchValue = BaseComponent => {
     onChange: onChangeFromProps,
     ...props
   }) => {
-    const [value, setValue] = useState(valueFromProps)
+    const [value, setValue] = useState(Boolean(valueFromProps))
 
     const onChange = e => {
       const innerValue = !value
