@@ -10,6 +10,7 @@ const withStreamService = (...services) => Target =>
     static displayName = `withStreamService(${Target.displayName})`
     static originalContextTypes =
       Target.originalContextTypes || Target.contextTypes
+
     static contextTypes = {
       domain: PropTypes.object.isRequired
     }
