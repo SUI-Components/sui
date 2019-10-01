@@ -21,6 +21,7 @@ describe('Error', () => {
       returnAFailedPromise() {
         return Promise.reject(new Error('Error Rejected'))
       }
+
       @inlineError
       throwAnException() {
         throw new Error('Error exception')
@@ -85,6 +86,7 @@ describe('Error', () => {
       returnAFailedPromise() {
         return Promise.reject(new CustomError('Error Rejected'))
       }
+
       @inlineError
       throwAnException() {
         throw new CustomError('Error exception')
