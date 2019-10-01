@@ -19,7 +19,7 @@ export default namespace => {
     getEntries() {
       return getEntries()
         .map(entry => {
-          let {name} = entry
+          const {name} = entry
           if (name.indexOf(prefix) === 0) {
             return {...entry, name: name.replace(prefix, '')}
           }

@@ -92,7 +92,7 @@ export default class Demo extends Component {
     this._loadStyles(this.props.params)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line
     this._loadStyles(nextProps.params)
   }
 
@@ -200,7 +200,7 @@ export default class Demo extends Component {
 
         <When value={!EnhanceDemoComponent && playground}>
           {() => (
-            <React.Fragment>
+            <>
               <button
                 className="sui-StudioDemo-codeButton"
                 onClick={this.handleCode}
@@ -228,7 +228,7 @@ export default class Demo extends Component {
                   ...nonDefaultExports
                 }}
               />
-            </React.Fragment>
+            </>
           )}
         </When>
 

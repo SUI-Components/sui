@@ -50,7 +50,7 @@ export default ({useCases, config}) =>
               execute: {
                 subscribe: fn => {
                   // creating an object here that will have a dispose method
-                  let ret = {dispose: function() {}}
+                  const ret = {dispose: function() {}}
                   loader().then(factory => {
                     // black magic: mutate the object, very small memory leak but that
                     // makes dispose working async and we need it

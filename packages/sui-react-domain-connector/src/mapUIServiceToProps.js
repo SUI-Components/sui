@@ -11,6 +11,7 @@ const mapUIServiceToProps = (...paths) => Target =>
     static displayName = `mapUIServiceToProps(${Target.displayName})`
     static originalContextTypes =
       Target.originalContextTypes || Target.contextTypes
+
     static contextTypes = {
       store: PropTypes.object.isRequired
     }

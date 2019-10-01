@@ -24,7 +24,9 @@ const params = queryStringToJSON(window.location.href)
 
 const importAll = requireContext => requireContext.keys().map(requireContext)
 ;(async () => {
-  const defaultStyle = await import('!css-content-loader!css-loader!sass-loader!component/index.scss')
+  const defaultStyle = await import(
+    '!css-content-loader!css-loader!sass-loader!component/index.scss'
+  )
   let styles = []
   let requireContextThemesKeys = []
   try {

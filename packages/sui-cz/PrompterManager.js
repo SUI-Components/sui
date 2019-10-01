@@ -111,11 +111,10 @@ class PrompterManager {
             )
           )
             .then(result => result.filter(Boolean))
-            .then(
-              result =>
-                typesWithOtherScopes.indexOf(answers.type) > -1
-                  ? result.concat(otherScopes)
-                  : result
+            .then(result =>
+              typesWithOtherScopes.indexOf(answers.type) > -1
+                ? result.concat(otherScopes)
+                : result
             )
         }
       },

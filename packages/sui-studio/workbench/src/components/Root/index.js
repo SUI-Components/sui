@@ -43,7 +43,7 @@ class Root extends React.PureComponent {
         <div className="Root-top">
           <Header componentID={componentID}>
             <Select
-              label={'Contexts'}
+              label="Contexts"
               options={contexts}
               initValue={actualContext}
               onChange={nextValue => {
@@ -52,7 +52,7 @@ class Root extends React.PureComponent {
               }}
             />
             <Select
-              label={'Themes'}
+              label="Themes"
               options={themes}
               initValue={actualStyle}
               onChange={nextValue => {
@@ -61,7 +61,7 @@ class Root extends React.PureComponent {
               }}
             />
             <Select
-              label={'Devices'}
+              label="Devices"
               options={DEVICES}
               initValue={actualDevice}
               onChange={nextValue => {

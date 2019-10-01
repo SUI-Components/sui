@@ -3,7 +3,12 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
-const {getScopes, getPackagesFolder, isMonoPackage, getChangelogFilename} = require('../src/config')
+const {
+  getScopes,
+  getPackagesFolder,
+  isMonoPackage,
+  getChangelogFilename
+} = require('../src/config')
 const {getPackagesPaths} = require('@s-ui/helpers/packages')
 
 program
@@ -56,9 +61,9 @@ const changelogOptions = {
 function generateChangelog(folder) {
   folder = path.resolve(folder)
   return new Promise((resolve, reject) => {
-    let gitRawCommitsOpts = {path: folder}
-    let outputFile = path.join(folder, CHANGELOG_NAME)
-    let output = fs.createWriteStream(path.join(outputFile))
+    const gitRawCommitsOpts = {path: folder}
+    const outputFile = path.join(folder, CHANGELOG_NAME)
+    const output = fs.createWriteStream(path.join(outputFile))
     let chunkCount = 0
     return conventionalChangelog(changelogOptions, {}, gitRawCommitsOpts)
       .on('data', chunk => {

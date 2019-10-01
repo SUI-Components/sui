@@ -8,7 +8,7 @@ const BODY_CLOSING_TAG = '</body>'
  * @return {Array}
  */
 export const getTplParts = req => {
-  let appParts = req.htmlTemplate.split(HEAD_CLOSING_TAG)
+  const appParts = req.htmlTemplate.split(HEAD_CLOSING_TAG)
 
   appParts[0] = `${appParts[0]}${HEAD_CLOSING_TAG}`
 

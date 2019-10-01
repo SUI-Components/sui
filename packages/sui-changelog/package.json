@@ -37,11 +37,6 @@
     "husky": "0.13.4",
     "validate-commit-msg": "2.14.0"
   },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
   "config": {
     "sui-mono": {
       "packagesFolder": "bin"

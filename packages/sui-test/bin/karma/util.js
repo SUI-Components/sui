@@ -5,14 +5,14 @@ const chalk = require('chalk')
 let firstFile
 const replacer = (str, before, root, filename, position) => {
   if (firstFile == null) {
-    let [line, char] = position.match(/\d+/g) || []
+    const [line, char] = position.match(/\d+/g) || []
     firstFile = [filename, line - 1, char | 0]
   }
   return before + chalk.blue('./' + filename + chalk.dim(position))
 }
 
 const highlight = (text, line, count) => {
-  let lines = text.split('\n')
+  const lines = text.split('\n')
   return (
     chalk.dim(lines.slice(0, line).join('\n')) +
     '\n' +
@@ -24,8 +24,8 @@ const highlight = (text, line, count) => {
 
 const outdent = (str, prefix = '', width = 80) => {
   str = str.replace(/(^\n+|\n+$)/g, '').replace(/\t/, '    ')
-  let indents = str.match(/^[ -]+/gm) || []
-  let minLength = indents.reduce(
+  const indents = str.match(/^[ -]+/gm) || []
+  const minLength = indents.reduce(
     (indent, value) => Math.min(indent, value.length),
     indents[0] ? indents[0].length : 0
   )
@@ -50,15 +50,15 @@ exports.cleanStack = (str, cwd = process.cwd()) => {
     replacer
   )
   if (firstFile != null) {
-    let [filename, line, char] = firstFile
+    const [filename, line, char] = firstFile
     if (line) {
       let read
       try {
         read = fs.readFileSync(path.resolve(cwd, filename), 'utf8')
       } catch (e) {}
       if (read) {
-        let start = Math.max(0, char - 40)
-        let startLine = Math.max(0, line - 3)
+        const start = Math.max(0, char - 40)
+        const startLine = Math.max(0, line - 3)
         read = read.split('\n')
         clean = clean.replace(/\n +/g, '\n  ')
         if (line < read.length) {
