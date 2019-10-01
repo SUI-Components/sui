@@ -15,8 +15,9 @@ const IGNORE_PATTERNS = ['**/node_modules/**', '**/lib/**', '**/dist/**']
 const patterns = IGNORE_PATTERNS.concat(getGitIgnoredFiles())
 
 program
-  .option('--staged')
   .option('--add-fixes')
+  .option('--staged')
+  .option('--fix', 'fix automatically problems with sass files')
   .option('--pattern <pattern>', 'root path to locate the sass files')
   .parse(process.argv)
 
