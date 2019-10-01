@@ -1,6 +1,9 @@
 # sui-decorators
 > Set of ES6 decorators to improve your apps
 
+## Definition
+Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality. The primary benefit of the __Decorator__ pattern is that you can take a rather vanilla object and wrap it in more advanced behaviors. [Learn more](https://robdodson.me/javascript-design-patterns-decorator/)
+
 ## Installation
 
 ```sh
