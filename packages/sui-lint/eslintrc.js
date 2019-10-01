@@ -46,6 +46,7 @@ module.exports = {
         ignore: []
       }
     ],
+    'react/jsx-handler-names': RULES.WARNING,
     'react/jsx-uses-react': RULES.WARNING,
     'react/jsx-uses-vars': RULES.WARNING,
     'react/no-deprecated': RULES.WARNING,
