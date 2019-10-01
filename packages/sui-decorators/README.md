@@ -117,7 +117,6 @@ For this method the cache is 2 seconds
 
 It is possible to set TTL using a string with the format `ttl: 'XXX [second|seconds|minute|minutes|hour|hours]'`,
 thus, avoiding writing very large integers
-[Example](https://github.com/carlosvillu/@s-ui/decorators/blob/feature/string-for-time/test/cacheSpec.js#L163)
 
 ### Options:
 
