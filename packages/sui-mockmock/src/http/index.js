@@ -6,4 +6,4 @@ const isNode =
     typeof process !== 'undefined' ? process : 0
   ) === '[object process]'
 
-export default (isNode ? ServerMocker : ClientMocker)
+export default isNode ? ServerMocker : ClientMocker
