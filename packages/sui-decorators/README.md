@@ -83,7 +83,7 @@ person.greetingAsync('Carlos');
 Creates a cache of calls to any method of a class.
 
 ```javascript
-import {cache} from 'cv-decorators';
+import {cache} from '@s-ui/decorators';
 
 class Dummy {
   @cache()
@@ -105,7 +105,7 @@ localStorage.__dumpCache__ = true
 By default the TTL for the keys in the cache is 500ms, but it can be changed with
 
 ```javascript
-import {cache} from 'cv-decorators';
+import {cache} from '@s-ui/decorators';
 
 class Dummy {
   @cache({ttl: 2000})
@@ -117,7 +117,7 @@ For this method the cache is 2 seconds
 
 It is possible to set TTL using a string with the format `ttl: 'XXX [second|seconds|minute|minutes|hour|hours]'`,
 thus, avoiding writing very large integers
-[Example](https://github.com/carlosvillu/cv-decorators/blob/feature/string-for-time/test/cacheSpec.js#L163)
+[Example](https://github.com/carlosvillu/@s-ui/decorators/blob/feature/string-for-time/test/cacheSpec.js#L163)
 
 ### Options:
 
