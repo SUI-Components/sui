@@ -63,7 +63,7 @@ const checkStageFuncs = config.getScopes().map(pkg => {
   return () =>
     hasChangedFiles(pkgPath).then(hasChanges => {
       if (hasChanges) {
-        let args = ['commit', `-m "${type}(${pkg}): ${message}"`]
+        const args = ['commit', `-m "${type}(${pkg}): ${message}"`]
         commitsCount++ && args.push('--no-verify') // precommit only once
         return getSpawnPromise('git', args)
       }
