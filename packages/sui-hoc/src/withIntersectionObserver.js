@@ -30,7 +30,9 @@ export const hocIntersectionObserverWithOptions = (
     async componentDidMount() {
       const target = this.refTarget
       if (shouldLoadIntersectionObserver()) {
-        await import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer')
+        await import(
+          /* webpackChunkName: "intersection-observer" */ 'intersection-observer'
+        )
       }
       new IntersectionObserver(this.handleChange).observe(target, options)
     }
