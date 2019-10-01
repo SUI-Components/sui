@@ -34,6 +34,7 @@ module.exports = {
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
     'no-only-tests/no-only-tests': RULES.ERROR,
+    'no-prototype-builtins': RULES.OFF,
     'no-unused-expressions': RULES.OFF,
     'babel/no-unused-expressions': RULES.OFF,
     'react/default-props-match-prop-types': RULES.WARNING,
