@@ -32,15 +32,10 @@
   },
   "devDependencies": {
     "@s-ui/lint": "3",
-    "@s-ui/mono": "1",
+    "@s-ui/mono": "1.43.0",
     "@s-ui/precommit": "2",
     "husky": "0.13.4",
     "validate-commit-msg": "2.14.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
   },
   "config": {
     "sui-mono": {

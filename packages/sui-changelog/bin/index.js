@@ -31,8 +31,8 @@ const {
 } = require('../src/helpers')
 
 let newPackageVersion = version
-let modifiedPackages = []
-let changelogData = []
+const modifiedPackages = []
+const changelogData = []
 
 const pushModifiedPackage = lines => oldVersionLine => {
   const oldVersionIndex = lines.indexOf(oldVersionLine)
