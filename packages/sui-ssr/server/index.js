@@ -60,7 +60,7 @@ const AUTH_DEFINITION = {
 }
 // Global object within the server context containing the
 // cached HTML templates for each site.
-let _memoizedHtmlTemplatesMapping = {}
+const _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
@@ -88,11 +88,11 @@ let _memoizedHtmlTemplatesMapping = {}
         !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
-          ? next()
-          : res.redirect(
-              `${req.protocol}://www.` + req.headers.host + req.url,
-              301
-            )
+        ? next()
+        : res.redirect(
+            `${req.protocol}://www.` + req.headers.host + req.url,
+            301
+          )
     })
 
   app.use((req, res, next) => {
