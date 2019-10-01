@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.10.0"></a>
+# 3.10.0 (2019-10-01)
+
+
+### Features
+
+* bump dependencies ([c2a6169](https://github.com/SUI-Components/sui/commit/c2a6169))
+* put jsx handler names to warning for now ([6eeaa1d](https://github.com/SUI-Components/sui/commit/6eeaa1d))
+
+
+
 <a name="3.9.0"></a>
 # 3.9.0 (2019-08-29)
 
