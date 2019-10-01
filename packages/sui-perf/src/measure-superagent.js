@@ -12,7 +12,7 @@ const spySuperagentRequest = superagent => {
 const measureSuperagent = (superagent, perf) => {
   spySuperagentRequest(superagent)
 
-  let callback = getMeasurementCallback(perf)
+  const callback = getMeasurementCallback(perf)
   callbacks.push(callback)
   return () => {
     callbacks = callbacks.filter(cb => cb !== callback)
@@ -22,7 +22,7 @@ const measureSuperagent = (superagent, perf) => {
 const getMeasurementCallback = perf =>
   function() {
     this.on('request', req => {
-      let label = `🌎  /${
+      const label = `🌎  /${
         req.url
           .split('//')
           .pop()

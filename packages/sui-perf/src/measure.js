@@ -15,7 +15,7 @@ export const measureFunc = ({mark, stop}) => label => func => {
 }
 
 export const measureMethod = perf => {
-  let measure = measureFunc(perf)
+  const measure = measureFunc(perf)
   return label => (obj, methodName) => {
     var originalMethod = obj[methodName]
     obj[methodName] = function(...args) {
