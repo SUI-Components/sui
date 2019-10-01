@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.4.0"></a>
+# 1.4.0 (2019-10-01)
+
+
+### Bug Fixes
+
+* use major again ([727b01c](https://github.com/SUI-Components/sui/commit/727b01c))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2019-07-30)
 
