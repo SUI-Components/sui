@@ -16,9 +16,9 @@ LoaderUniversalOptionsPlugin.prototype.apply = function(compiler, compilation) {
   var options = this.loaderOptions
   compiler.plugin('compilation', compilation => {
     compilation.plugin('normal-module-loader', (loaderContext, module) => {
-      for (let idx in module.loaders) {
-        let obj = module.loaders[idx]
-        for (let pkg in options) {
+      for (const idx in module.loaders) {
+        const obj = module.loaders[idx]
+        for (const pkg in options) {
           if (obj.loader.includes(`${path.sep}${pkg}${path.sep}`)) {
             obj.options = options[pkg]
             break

@@ -7,7 +7,7 @@ const parseAlias = require('./shared/parse-alias')
 
 const {config, when, cleanList} = require('./shared')
 
-let webpackConfig = {
+const webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {

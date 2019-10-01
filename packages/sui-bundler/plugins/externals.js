@@ -15,10 +15,8 @@ const safeAddToHeadAndBody = htmlPluginData => url => {
 
 const generateHashFromFile = uri =>
   new Promise((resolve, reject) => {
-    md5File(
-      path.resolve(process.cwd(), uri),
-      (err, hash) =>
-        hash !== undefined ? resolve(hash.slice(0, HASH_LENGTH)) : reject(err)
+    md5File(path.resolve(process.cwd(), uri), (err, hash) =>
+      hash !== undefined ? resolve(hash.slice(0, HASH_LENGTH)) : reject(err)
     )
   })
 
@@ -38,6 +36,7 @@ class Externals {
   constructor(options) {
     this.options = Object.assign({}, {files: {}}, options)
   }
+
   apply(compiler) {
     const {files} = this.options
     const uris = (Object.values(files) || []).map(envVars) // TODO: Remove this when merge with the version 3
