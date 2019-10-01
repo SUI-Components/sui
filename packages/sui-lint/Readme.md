@@ -84,7 +84,7 @@ It's usefull to make your code autoformat before any commit.
 
 Steps to integrate sui-lint with an IDE:
 
-1.  Install (if needed) eslint/sassLint plugin in your IDE.
+1.  Install (if needed) eslint/styleLint plugin in your IDE.
 2.  Add these lines to `package.json`:
 
 ```json
