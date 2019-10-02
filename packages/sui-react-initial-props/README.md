@@ -92,17 +92,29 @@ contextFactory(
 universal - react page component
 
 const Placeholder = () => <h1>Loading...</h1>
-const Page = (props) => (
-  <div>
-    <h1>This is the page</h1>
-    <p>{props.initialContent}</p>
-  </div>
-)
+const Page = (props) => {
+  useEffect(()=> {
+    // If defined previously as seen below, access __HTTP__ object as follows:
+    const {initialContent, __HTTP__} = props
+    const {redirectTo} = __HTTP__
+    window.location.href = redirectTo
+  })
+
+  return (
+    <div>
+      <h1>This is the page</h1>
+      <p>{initialContent}</p>
+    </div>
+  )
+}
+
 
 Page.renderLoading = () => <Placeholder />
 Page.getInitialProps = ({ context, routeInfo }) =>
   Promise.resolve({
-    initialContent: 'This is the initial content'
+    initialContent: 'This is the initial content',
+    // Optional __HTTP__ object to perform 301 Redirects
+    __HTTP__: {redirectTo: 'https://<301 Redirect Route>'}
   })
 ```
 
@@ -161,11 +173,12 @@ renderProps | `object` | Props used by React Router with some useful info. We're
 
 ##### Response
 
-The response is a promise resolved with two parameters.
+The response is a promise resolved with two parameters. In addition, you can define an optional `__HTTP__` object in `initialProps` to allow server side redirects using SUI-SSR:
 
 Field | Type | Description
 --- | --- | ---
 initialProps | `object` | Result of executing the `getInitialProps` of the pageComponent.
+initialprops.__HTTP__ | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 301 server side redirects using [sui-ssr](https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr). 
 reactString | `string` | String with the renderized app ready to be sent.
 
 #### loadPage(contextFactory, importPage)
