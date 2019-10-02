@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.25.0"></a>
+# 5.25.0 (2019-10-02)
+
+
+### Features
+
+* adds a key to allow 301 redirects in server ([8760da6](https://github.com/SUI-Components/sui/commit/8760da6))
+
+
+
 <a name="5.24.0"></a>
 # 5.24.0 (2019-09-30)
 
