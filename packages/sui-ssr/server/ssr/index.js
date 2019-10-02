@@ -115,6 +115,14 @@ export default (req, res, next) => {
 
       const {initialProps, reactString, performance} = initialData
 
+      const {__HTTP__} = initialProps
+      if (__HTTP__) {
+        const {redirectTo} = __HTTP__
+        if (redirectTo) {
+          return res.redirect(HTTP_PERMANENT_REDIRECT, __HTTP__.redirectTo)
+        }
+      }
+
       // The first html content has the be set after any possible call to next().
       // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
       // no matter the error page strategy set (loadSPAOnNotFound: true|false)

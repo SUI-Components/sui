@@ -4,7 +4,7 @@
 
 SSR can be tought to configure and maintain. SSR handles that for you providing:
 
-- SSRaS Server-Side Rendering as a Service
+- SSRaaS Server-Side Rendering as a Service
 - Server improvements shared accross projects
 
 ## Installation
@@ -235,6 +235,11 @@ SOME_OTHER_ENV_VAR: https://pre.somedomain.com/contact
 - Whatever you add in this file will be available in your context factory as `appConfig.envs` param.
 - This file must not contain secrets as it is meant to be available in both server and client side.
 - :warning: And of course, this file is not meant to be versioned.
+
+## Server Side Redirects
+
+SUI-SSR allows 301 redirects in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
+Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
 ## Use the ssr in a lambda function
 
