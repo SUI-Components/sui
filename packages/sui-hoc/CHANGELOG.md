@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.22.0"></a>
+# 1.22.0 (2019-10-03)
+
+
+### Features
+
+* name to handleChange ([f13e149](https://github.com/SUI-Components/sui/commit/f13e149))
+
+
+
 <a name="1.21.0"></a>
 # 1.21.0 (2019-09-30)
 
