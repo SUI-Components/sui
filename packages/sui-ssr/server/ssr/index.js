@@ -108,19 +108,22 @@ export default (req, res, next) => {
         return next(err)
       }
 
-      // Flush now if early-flush is disabled
-      if (!req.app.locals.earlyFlush) {
-        initialFlush(res)
-      }
-
       const {initialProps, reactString, performance} = initialData
+
+      // The __HTTP__ object is created before earlyFlush is applied
+      // to avoid unexpected behaviors
 
       const {__HTTP__} = initialProps
       if (__HTTP__) {
         const {redirectTo} = __HTTP__
         if (redirectTo) {
-          return res.redirect(HTTP_PERMANENT_REDIRECT, __HTTP__.redirectTo)
+          return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
         }
+      }
+
+      // Flush now if early-flush is disabled
+      if (!req.app.locals.earlyFlush) {
+        initialFlush(res)
       }
 
       // The first html content has the be set after any possible call to next().
