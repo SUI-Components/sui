@@ -111,7 +111,7 @@ export default (req, res, next) => {
       const {initialProps, reactString, performance} = initialData
 
       // The __HTTP__ object is created before earlyFlush is applied
-      // to avoid unspected behaviors
+      // to avoid unexpected behaviors
 
       const {__HTTP__} = initialProps
       if (__HTTP__) {
