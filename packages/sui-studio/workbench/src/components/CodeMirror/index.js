@@ -17,7 +17,7 @@ class CodeMirror extends React.PureComponent {
     const {isOpen} = this.state
 
     return (
-      <React.Fragment>
+      <>
         <button
           className="sui-StudioDemo-codeButton"
           onClick={this.handleClickButton}
@@ -29,9 +29,10 @@ class CodeMirror extends React.PureComponent {
           onChange={onChange}
           playground={playground}
         />
-      </React.Fragment>
+      </>
     )
   }
+
   handleClickButton = () => this.setState({isOpen: !this.state.isOpen})
 }
 

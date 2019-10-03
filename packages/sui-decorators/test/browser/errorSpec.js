@@ -34,7 +34,7 @@ describe('Error', () => {
     }
 
     const buzz = new Buzz()
-    buzz.$.execute.subscribe(_, ({params, error}) => {
+    buzz.$.execute.subscribe('', ({params, error}) => {
       expect(error).to.be.an.instanceof(Error)
       expect(error.message).to.be.eql('KO')
     })
@@ -63,6 +63,7 @@ describe('Error', () => {
       returnAFailedPromise() {
         return Promise.reject(new Error('Error Rejected'))
       }
+
       @inlineError
       throwAnException() {
         throw new Error('Error exception')
@@ -127,6 +128,7 @@ describe('Error', () => {
       returnAFailedPromise() {
         return Promise.reject(new CustomError('Error Rejected'))
       }
+
       @inlineError
       throwAnException() {
         throw new CustomError('Error exception')

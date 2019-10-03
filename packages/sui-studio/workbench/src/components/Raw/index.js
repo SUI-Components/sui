@@ -66,7 +66,7 @@ class Raw extends React.PureComponent {
         <div className="Raw-center">
           <When value={!EnhanceDemoComponent && playground}>
             {() => (
-              <React.Fragment>
+              <>
                 <Preview
                   scope={{
                     context,
@@ -76,7 +76,7 @@ class Raw extends React.PureComponent {
                   }}
                   code={playground}
                 />
-              </React.Fragment>
+              </>
             )}
           </When>
           <When value={EnhanceDemoComponent}>

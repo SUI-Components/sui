@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, {useEffect, useState, Fragment} from 'react'
+import React, {useEffect, useState} from 'react'
 import {tryRequireRawSrc} from '../tryRequire'
 
 export default function Api({params}) {
@@ -69,10 +69,10 @@ export default function Api({params}) {
     const componentTitle = `${displayName} (${category}/${component})`
 
     return (
-      <Fragment>
+      <>
         <h1>{componentTitle}</h1>
         {renderPropsApi({propsApi: props})}
-      </Fragment>
+      </>
     )
   }
 

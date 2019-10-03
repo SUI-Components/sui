@@ -1,4 +1,3 @@
-const path = require('path')
 const https = require('https')
 let MANIFEST = false
 

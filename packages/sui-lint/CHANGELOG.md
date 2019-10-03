@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.11.0"></a>
+# 3.11.0 (2019-10-01)
+
+
+### Bug Fixes
+
+* keep compatibility with usage of prototype builtins ([7281834](https://github.com/SUI-Components/sui/commit/7281834))
+
+
+### Features
+
+* add fix arg for sui-lint sass ([2444d5f](https://github.com/SUI-Components/sui/commit/2444d5f))
+
+
+
+<a name="3.10.0"></a>
+# 3.10.0 (2019-10-01)
+
+
+### Features
+
+* bump dependencies ([c2a6169](https://github.com/SUI-Components/sui/commit/c2a6169))
+* put jsx handler names to warning for now ([6eeaa1d](https://github.com/SUI-Components/sui/commit/6eeaa1d))
+
+
+
 <a name="3.9.0"></a>
 # 3.9.0 (2019-08-29)
 

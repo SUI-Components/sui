@@ -37,13 +37,18 @@ const repositories = [
 
   'frontend-ma--web-app',
   'frontend-ma--uilib-widgets',
+  'frontend-ma--web-app-plus',
 
   'frontend-mt--web-app',
   'frontend-mt--uilib-widgets',
+  'frontend-cf--web-app',
 
   'frontend-fc--web-server',
   'frontend-fc--uilib-widgets',
   'frontend-fcbw--uilib-widgets',
+
+  'frontend-hab--uilib-widgets',
+  'frontend-hab--web-professional',
 
   'frontend-ij--uilib-widgets'
 ]
@@ -63,7 +68,7 @@ const cloneCommands = repositories.map(repo => [
   'git',
   [
     'clone',
-    `git@github.schibsted.io:scmspain/${repo}.git`,
+    `git@github.mpi-internal.com:scmspain/${repo}.git`,
     path.join(WORK_DIRECTORY, repo)
   ]
 ])

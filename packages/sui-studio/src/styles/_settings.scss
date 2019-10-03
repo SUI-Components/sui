@@ -11,7 +11,7 @@ $c-gray-dark: darken($c-gray, 20%) !default;
 $c-gray-light: lighten($c-gray, 33%) !default;
 $c-gray-lightest: lighten($c-gray-light, 15%) !default;
 
-$c-green: #23d160  !default;
+$c-green: #23d160 !default;
 
 $c-font-base: $c-gray-dark !default;
 $c-font-accent: $c-primary !default;
@@ -34,7 +34,7 @@ $fw-bold: 700 !default;
 // Font sizes
 $fz-base: 14 !default;
 $fz-body: $fz-base * 1px !default;
-$fz-s: ceil($fz-base * .666) * 1px !default;
+$fz-s: ceil($fz-base * 0.666) * 1px !default;
 $fz-m: $fz-base * 1px !default;
 $fz-l: ceil(($fz-base * 1.25)) * 1px !default;
 $fz-xl: ceil($fz-base * 1.5) * 1px !default;

@@ -11,10 +11,11 @@ const withSwitchValue = BaseComponent => {
   }) => {
     const [value, setValue] = useState(Boolean(valueFromProps))
 
-    const onChange = e => {
+    const onChange = ev => {
       const innerValue = !value
+      const {name} = ev.target
       setValue(innerValue)
-      onChangeFromProps(e, {value: innerValue})
+      onChangeFromProps(ev, {name, value: innerValue})
     }
 
     return <BaseComponent {...props} value={value} onChange={onChange} />

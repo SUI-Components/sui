@@ -34,6 +34,7 @@ module.exports = {
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
     'no-only-tests/no-only-tests': RULES.ERROR,
+    'no-prototype-builtins': RULES.OFF,
     'no-unused-expressions': RULES.OFF,
     'babel/no-unused-expressions': RULES.OFF,
     'react/default-props-match-prop-types': RULES.WARNING,
@@ -46,6 +47,7 @@ module.exports = {
         ignore: []
       }
     ],
+    'react/jsx-handler-names': RULES.WARNING,
     'react/jsx-uses-react': RULES.WARNING,
     'react/jsx-uses-vars': RULES.WARNING,
     'react/no-deprecated': RULES.WARNING,

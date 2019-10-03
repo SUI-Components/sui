@@ -25,9 +25,7 @@ export default class NotImplementedUseCase extends UseCase {
   execute() {
     return Promise.resolve(
       console.warn(
-        `Service ${
-          this._key
-        } is not implemented in the current version of the domain`
+        `Service ${this._key} is not implemented in the current version of the domain`
       )
     )
   }

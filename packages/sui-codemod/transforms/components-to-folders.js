@@ -103,7 +103,7 @@ export default SUIContext.wrapper(Component, '${toPascalCase(file.name)}')
 const pathPseudoRelative = base => (literals, ...values) => {
   let string = ''
 
-  for (let [index, value] of values.entries()) {
+  for (const [index, value] of values.entries()) {
     string += literals[index]
     string += value.replace(base, '')
   }

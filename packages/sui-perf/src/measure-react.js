@@ -29,7 +29,7 @@ class SuiPerfHook {
 }
 
 const measureReact = perf => {
-  let perfHook = new SuiPerfHook(perf)
+  const perfHook = new SuiPerfHook(perf)
   ReactDebug.addHook(perfHook)
   return ReactDebug.removeHook.bind(ReactDebug, perfHook)
 }

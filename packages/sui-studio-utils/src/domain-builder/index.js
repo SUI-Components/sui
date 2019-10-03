@@ -57,14 +57,14 @@ export default class DomainBuilder {
         return self._useCases[useCase]
           ? {
               execute: params => {
-                const successResponse = self._useCases[useCase]['success']
-                return self._useCases[useCase]['success'] !== undefined
+                const successResponse = self._useCases[useCase].success
+                return self._useCases[useCase].success !== undefined
                   ? Promise.resolve(
                       typeof successResponse === 'function'
                         ? successResponse(params)
                         : successResponse
                     )
-                  : Promise.reject(self._useCases[useCase]['fail'])
+                  : Promise.reject(self._useCases[useCase].fail)
               }
             }
           : self._domain.get(useCase)

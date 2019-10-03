@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.26.0"></a>
+# 5.26.0 (2019-10-03)
+
+
+### Bug Fixes
+
+* moves earlyFlush invocation after res.redirect to avoid crashes ([92a7ae3](https://github.com/SUI-Components/sui/commit/92a7ae3))
+* typo in comment ([7001fda](https://github.com/SUI-Components/sui/commit/7001fda))
+
+
+
+<a name="5.25.0"></a>
+# 5.25.0 (2019-10-02)
+
+
+### Features
+
+* adds a key to allow 301 redirects in server ([8760da6](https://github.com/SUI-Components/sui/commit/8760da6))
+
+
+
 <a name="5.24.0"></a>
 # 5.24.0 (2019-09-30)
 

@@ -3,12 +3,15 @@
  * @param {Object} obj
  */
 const mapValuesToPlainObjects = obj =>
-  Object.keys(obj).reduce((o, key) => {
-    o[key] = obj[key]
-    if (o[key] instanceof AnemicModel) o[key] = o[key].toJSON()
-    if (o[key] instanceof Object) o[key] = mapValuesToPlainObjects(o[key])
-    return o
-  }, obj instanceof Array ? [] : {})
+  Object.keys(obj).reduce(
+    (o, key) => {
+      o[key] = obj[key]
+      if (o[key] instanceof AnemicModel) o[key] = o[key].toJSON()
+      if (o[key] instanceof Object) o[key] = mapValuesToPlainObjects(o[key])
+      return o
+    },
+    obj instanceof Array ? [] : {}
+  )
 
 /**
  * Converts anemic instance to an object with public props

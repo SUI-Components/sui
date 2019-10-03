@@ -12,14 +12,14 @@ const createServer = config => {
     reject = rej
   })
 
-  let callback = code => {
+  const callback = code => {
     if (code === 0) return resolve()
-    let err = Error(`Exit ${code}`)
+    const err = Error(`Exit ${code}`)
     err.code = code
     reject(err)
   }
 
-  let server = new Server(config, callback)
+  const server = new Server(config, callback)
 
   server.completion = promise
   return server
@@ -38,7 +38,7 @@ module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
     [pattern]: ['webpack']
   }
 
-  let server = createServer(configure)
+  const server = createServer(configure)
 
   server.start()
 

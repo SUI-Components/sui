@@ -4,9 +4,8 @@ const program = require('commander')
 const ncp = require('copy-paste')
 
 const appFactory = require('../development')
-let config =
-  require(`${process.cwd()}/package.json`)['config']['sui-widget-embedder'] ||
-  {}
+const config =
+  require(`${process.cwd()}/package.json`).config['sui-widget-embedder'] || {}
 
 const PORT = process.env.PORT || config.devPort || 3000
 config.port = PORT

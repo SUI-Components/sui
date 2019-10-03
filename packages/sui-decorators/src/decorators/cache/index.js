@@ -9,7 +9,7 @@ import LRU from './algorithms/LRU'
 const ALGORITHMS = {LRU: 'lru'}
 const DEFAULT_TTL = 500
 
-let caches = {}
+const caches = {}
 
 const _cache = ({
   algorithm,

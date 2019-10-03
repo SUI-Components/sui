@@ -6,7 +6,7 @@ const authDefinitionBuilder = require('./authDefinitionBuilder')
 
 module.exports = ({outputZipPath, pkg}) =>
   new Promise((resolve, reject) => {
-    let authVariableDefinition = program.auth
+    const authVariableDefinition = program.auth
       ? authDefinitionBuilder(program.auth.split(':'))
       : ''
     const output = program.outputFileName
