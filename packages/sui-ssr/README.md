@@ -193,6 +193,8 @@ Configs accepted:
 
 - **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
 
+  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the micriservice for generate the CriticalCSS
+  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the micriservice for generate the CriticalCSS
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of urls. If some of this URLs match with the current page url. this feature will be disabled for the page. That is usefull the enabled CriticalCSS in your site but not in one or two pages.
 
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
@@ -219,7 +221,7 @@ More info about Dynamic Rendering here: https://developers.google.com/search/doc
 
 ## Critical CSS
 
-For development you will need start the server with env var `CRITICAL_CSS_HOST` to allow to the external service request your current page.
+For development you will need start the server with env vars `CRITICAL_CSS_HOST` and `CRITICAL_CSS_PROTOCOL` to allow to the external service request your current page.
 
 If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
 
