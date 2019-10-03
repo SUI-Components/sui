@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.27.0"></a>
+# 5.27.0 (2019-10-03)
+
+
+### Bug Fixes
+
+* fix criticalCSS URL ([ba8c926](https://github.com/SUI-Components/sui/commit/ba8c926))
+
+
+
 <a name="5.26.0"></a>
 # 5.26.0 (2019-10-03)
 
