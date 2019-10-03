@@ -135,7 +135,7 @@ node_modules`
     `import React from 'react'
 // import PropTypes from 'prop-types'
 
-export default function ${componentInPascal} () {
+export default function ${componentInPascal}() {
   return (
     <div className="${prefix}-${componentInPascal}">
       <h1>${componentInPascal}</h1>
