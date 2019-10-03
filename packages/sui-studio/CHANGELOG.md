@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.5.0"></a>
+# 7.5.0 (2019-10-03)
+
+
+### Bug Fixes
+
+* generating linter correct function names ([7292fb1](https://github.com/SUI-Components/sui/commit/7292fb1))
+
+
+
 <a name="7.4.0"></a>
 # 7.4.0 (2019-09-17)
 
