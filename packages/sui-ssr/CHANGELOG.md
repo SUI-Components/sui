@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.28.0"></a>
+# 5.28.0 (2019-10-08)
+
+
+### Features
+
+* remove CriticalCSS after load styles ([2d7c061](https://github.com/SUI-Components/sui/commit/2d7c061))
+
+
+
 <a name="5.27.0"></a>
 # 5.27.0 (2019-10-03)
 
