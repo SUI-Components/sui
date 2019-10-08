@@ -50,11 +50,11 @@ export default (req, res, next) => {
     headTplPart = headTplPart
       .replace(
         HEAD_OPENING_TAG,
-        `${HEAD_OPENING_TAG}<style>${criticalCSS}</style>`
+        `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
       .replace(
         'rel="stylesheet"',
-        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
+        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
       )
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
