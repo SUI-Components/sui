@@ -54,6 +54,18 @@ export default class AxiosFetcher extends Fetcher {
   }
 
   /**
+   * Patch method
+   * @method patch
+   * @param {String} url
+   * @param {String} body
+   * @param {Object} options
+   * @return {Object}
+   */
+  patch(url, body, options) {
+    return this._axios.patch(url, body, options)
+  }
+
+  /**
    * Delete method
    * @method delete
    * @param {String} url

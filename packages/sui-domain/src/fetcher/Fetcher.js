@@ -30,6 +30,14 @@ export default class Fetcher {
    * @method
    * @return {Error}
    */
+  patch() {
+    throw new Error('[Fetcher#patch] must be implemented')
+  }
+
+  /**
+   * @method
+   * @return {Error}
+   */
   delete() {
     throw new Error('[Fetcher#delete] must be implemented')
   }
