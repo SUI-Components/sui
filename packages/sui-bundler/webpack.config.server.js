@@ -4,6 +4,7 @@ const path = require('path')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const parseAlias = require('./shared/parse-alias')
+const ThreadsPlugin = require('threads-plugin')
 
 const {config, when, cleanList} = require('./shared')
 
@@ -24,8 +25,11 @@ const webpackConfig = {
   optimization: {
     nodeEnv: false
   },
-  externals: [webpackNodeExternals()],
-  plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
+  externals: [webpackNodeExternals()]
+  plugins: [
+    new webpack.DefinePlugin({'global.GENTLY': false}),
+    new ThreadsPlugin()
+  ],
   resolveLoader: {
     alias: {
       'externals-manifest-loader': require.resolve(

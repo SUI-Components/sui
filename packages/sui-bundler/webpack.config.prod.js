@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ThreadsPlugin = require('threads-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -119,6 +120,7 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
+    new ThreadsPlugin(),
     when(
       config.offline,
       () =>

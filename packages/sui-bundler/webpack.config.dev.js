@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ThreadsPlugin = require('threads-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
@@ -10,7 +11,9 @@ const parseAlias = require('./shared/parse-alias')
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
+  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${
+    path.sep
+  }workbench)?${path.sep}src)`
 )
 
 const webpackConfig = {
@@ -51,6 +54,7 @@ const webpackConfig = {
       inject: true,
       env: process.env
     }),
+    new ThreadsPlugin(),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
   resolveLoader: {
@@ -79,7 +83,7 @@ const webpackConfig = {
             loader: require.resolve('eslint-loader')
           }
         ],
-        exclude: EXCLUDED_FOLDERS_REGEXP
+        exclude: [EXCLUDED_FOLDERS_REGEXP, /worker\.js$/]
       },
       {
         test: /\.jsx?$/,

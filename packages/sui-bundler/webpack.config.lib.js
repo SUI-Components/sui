@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const minifyJs = require('./shared/minify-js')
 const definePlugin = require('./shared/define')
+const ThreadsPlugin = require('threads-plugin')
 const babelRules = require('./shared/module-rules-babel')
 const {sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
@@ -30,7 +31,8 @@ module.exports = {
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
-    definePlugin()
+    definePlugin(),
+    new ThreadsPlugin()
   ]),
   module: {
     rules: [babelRules]
