@@ -5,8 +5,8 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
-const fs = require('fs-extra')
 const config = require('../webpack.config.prod')
+const fs = require('fs')
 const {config: projectConfig} = require('../shared')
 
 // TODO: Extract this
@@ -64,7 +64,7 @@ webpack(config).run((error, stats) => {
   console.log(`Webpack stats: ${stats}`)
 
   if (projectConfig.offline && projectConfig.offline.whitelist) {
-    fs.copySync(
+    fs.copyFileSync(
       path.resolve(process.cwd(), 'public', 'index.html'),
       path.resolve(process.cwd(), 'public', '200.html')
     )
