@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.30.0"></a>
+# 5.30.0 (2019-10-14)
+
+
+### Features
+
+* bump dependencies of sui-bundler ([35258ea](https://github.com/SUI-Components/sui/commit/35258ea))
+* upgrade dependencies ([389dad3](https://github.com/SUI-Components/sui/commit/389dad3))
+
+
+
 <a name="5.29.0"></a>
 # 5.29.0 (2019-08-28)
 
