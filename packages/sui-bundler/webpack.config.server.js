@@ -25,7 +25,7 @@ const webpackConfig = {
   optimization: {
     nodeEnv: false
   },
-  externals: [webpackNodeExternals()]
+  externals: [webpackNodeExternals()],
   plugins: [
     new webpack.DefinePlugin({'global.GENTLY': false}),
     new ThreadsPlugin()
