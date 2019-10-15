@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.31.0"></a>
+# 5.31.0 (2019-10-15)
+
+
+### Bug Fixes
+
+* rollback to raw-loader@1 to fix problems with export files ([8832645](https://github.com/SUI-Components/sui/commit/8832645))
+
+
+
 <a name="5.30.0"></a>
 # 5.30.0 (2019-10-14)
 
