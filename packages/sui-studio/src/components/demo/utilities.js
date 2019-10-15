@@ -25,3 +25,5 @@ export const removeDefaultContext = exports => {
   const {[DEFAULT_CONTEXT]: toOmit, ...restOfExports} = exports
   return restOfExports
 }
+
+export const interOps = obj => obj.default || obj

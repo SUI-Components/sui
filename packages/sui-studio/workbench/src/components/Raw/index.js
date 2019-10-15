@@ -12,7 +12,8 @@ import {
   createContextByType,
   cleanDisplayName,
   pipe,
-  removeDefaultContext
+  removeDefaultContext,
+  interOps
 } from '../../../../src/components/demo/utilities'
 
 import Component, * as named from 'component'
@@ -21,7 +22,7 @@ import './index.scss'
 
 let playground
 try {
-  playground = require('!raw-loader!demo/playground')
+  playground = interOps(require('!raw-loader!demo/playground'))
 } catch (e) {}
 
 const EMPTY = 0

@@ -1,4 +1,6 @@
 /* global __BASE_DIR__ */
+import {interOps} from './demo/utilities'
+
 const requireContextSrc = require.context(
   `bundle-loader?lazy!${__BASE_DIR__}/components`,
   true,
@@ -28,7 +30,8 @@ const requireFile = async ({
   extractDefault = true,
   importFile
 }) => {
-  const file = await importFile().catch(_ => defaultValue)
+  let file = await importFile().catch(_ => defaultValue)
+  file = interOps(file)
   if (typeof file === 'undefined') {
     return Promise.reject(new Error('Error requiring file'))
   }
