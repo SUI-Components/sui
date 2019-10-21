@@ -36,8 +36,16 @@ const useLegacyContext =
     ? ssrConfig.useLegacyContext
     : true
 
+const setContentType = res => {
+  if (ssrConfig.serverContentType !== 'undefined') {
+    res.set('Content-Type', ssrConfig.serverContentType)
+  } else {
+    res.type('html')
+  }
+}
+
 const initialFlush = res => {
-  res.type('html')
+  setContentType(res)
   res.flush()
 }
 
