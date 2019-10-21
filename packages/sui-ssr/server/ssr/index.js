@@ -37,7 +37,7 @@ const useLegacyContext =
     : true
 
 const setContentType = res => {
-  if (ssrConfig.serverContentType !== 'undefined') {
+  if (ssrConfig.serverContentType) {
     res.set('Content-Type', ssrConfig.serverContentType)
   } else {
     res.type('html')
