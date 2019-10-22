@@ -1,15 +1,20 @@
 import path from 'path'
 import fs from 'fs'
 
-let ssrConf
+const DEFAULT_VALUES = {
+  serverContentType: 'html',
+  useLegacyContext: true
+}
+
+let ssrConfig
 try {
   const spaConfig = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
   )
   const {config = {}} = spaConfig
-  ssrConf = config['sui-ssr'] || {}
+  ssrConfig = config['sui-ssr'] || {}
 } catch (e) {
-  ssrConf = {}
+  ssrConfig = {}
 }
 
-export default ssrConf
+export default {...DEFAULT_VALUES, ...ssrConfig}
