@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.29.0"></a>
+# 5.29.0 (2019-10-22)
+
+
+### Bug Fixes
+
+* fix undefined verification ([72ff69e](https://github.com/SUI-Components/sui/commit/72ff69e))
+
+
+### Features
+
+* added configuration to set the server content-type ([3217140](https://github.com/SUI-Components/sui/commit/3217140))
+
+
+
 <a name="5.28.0"></a>
 # 5.28.0 (2019-10-08)
 
