@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.18.0"></a>
+# 2.18.0 (2019-10-23)
+
+
+### Features
+
+* Improve sui-test browser performance and avoid memory problems ([fa55300](https://github.com/SUI-Components/sui/commit/fa55300))
+* Upgrade dependencies ([0ed869d](https://github.com/SUI-Components/sui/commit/0ed869d))
+
+
+
 <a name="2.17.0"></a>
 # 2.17.0 (2019-07-03)
 
