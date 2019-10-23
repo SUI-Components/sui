@@ -120,7 +120,9 @@ Promise.all([
   "eslintConfig": {
     "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }
 `
     )
