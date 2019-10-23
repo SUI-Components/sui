@@ -49,7 +49,18 @@ const _cache = ({
     }
 
     if (isPromise(cache.get(key).returns)) {
-      cache.get(key).returns.catch(() => cache.del(key))
+      cache
+        .get(key)
+        .returns.then(args => {
+          if (
+            args.__INLINE_ERROR__ &&
+            Array.isArray(args) &&
+            args[0] !== undefined
+          ) {
+            cache.del(key)
+          }
+        })
+        .catch(() => cache.del(key))
     }
 
     if (now - cache.get(key).createdAt > ttl) {
@@ -73,7 +84,10 @@ export default ({
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
   return (target, fnName, descriptor) => {
-    const {value: fn, configurable, enumerable} = descriptor
+    const {configurable, enumerable, writable} = descriptor
+    const originalGet = descriptor.get
+    const originalValue = descriptor.value
+    const isGetter = !!originalGet
 
     if (isNode && !server) {
       return descriptor
@@ -86,6 +100,7 @@ export default ({
         configurable,
         enumerable,
         get() {
+          const fn = isGetter ? originalGet.call(this) : originalValue
           if (this === target) {
             return fn
           }
@@ -104,9 +119,9 @@ export default ({
           })
 
           Object.defineProperty(this, fnName, {
-            configurable: true,
-            writable: true,
-            enumerable: false,
+            configurable,
+            writable,
+            enumerable,
             value: _fnCached
           })
           return _fnCached
