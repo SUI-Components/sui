@@ -14,12 +14,8 @@ const caches = {}
 const _cache = ({
   algorithm,
   fnName,
-  host,
   instance,
   original,
-  port,
-  segmentation,
-  server,
   size,
   target,
   ttl
@@ -28,7 +24,7 @@ const _cache = ({
     caches[fnName] ||
     (algorithm === ALGORITHMS.LRU
       ? new LRU({size})
-      : new Error(`[sui-decorators::cache] unknow algorithm: ${algorithm}`))
+      : new Error(`[sui-decorators::cache] unknown algorithm: ${algorithm}`))
 
   const cache = caches[fnName]
 
@@ -66,9 +62,6 @@ export default ({
   ttl = DEFAULT_TTL,
   server = false,
   algorithm = ALGORITHMS.LRU,
-  trackTo: host,
-  port,
-  segmentation,
   size
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
@@ -90,17 +83,13 @@ export default ({
             return fn
           }
           const _fnCached = _cache({
-            ttl: timeToLife,
-            target,
+            algorithm,
             fnName,
             instance: this,
             original: fn,
-            server,
-            algorithm,
-            host,
-            port,
-            segmentation,
-            size
+            size,
+            target,
+            ttl: timeToLife
           })
 
           Object.defineProperty(this, fnName, {
