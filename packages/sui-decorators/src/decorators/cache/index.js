@@ -14,12 +14,8 @@ const caches = {}
 const _cache = ({
   algorithm,
   fnName,
-  host,
   instance,
   original,
-  port,
-  segmentation,
-  server,
   size,
   target,
   ttl
@@ -28,7 +24,7 @@ const _cache = ({
     caches[fnName] ||
     (algorithm === ALGORITHMS.LRU
       ? new LRU({size})
-      : new Error(`[sui-decorators::cache] unknow algorithm: ${algorithm}`))
+      : new Error(`[sui-decorators::cache] unknown algorithm: ${algorithm}`))
 
   const cache = caches[fnName]
 
@@ -77,21 +73,20 @@ export default ({
   ttl = DEFAULT_TTL,
   server = false,
   algorithm = ALGORITHMS.LRU,
-  trackTo: host,
-  port,
-  segmentation,
   size
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
   return (target, fnName, descriptor) => {
+    // if we're on node but the decorator doesn't have the server flag
+    // then we ignore the usage of the decorator and thus the cache
+    if (isNode && !server) {
+      return descriptor
+    }
+
     const {configurable, enumerable, writable} = descriptor
     const originalGet = descriptor.get
     const originalValue = descriptor.value
     const isGetter = !!originalGet
-
-    if (isNode && !server) {
-      return descriptor
-    }
 
     // https://github.com/jayphelps/core-decorators.js/blob/master/src/autobind.js
     return Object.assign(
@@ -105,17 +100,13 @@ export default ({
             return fn
           }
           const _fnCached = _cache({
-            ttl: timeToLife,
-            target,
+            algorithm,
             fnName,
             instance: this,
             original: fn,
-            server,
-            algorithm,
-            host,
-            port,
-            segmentation,
-            size
+            size,
+            target,
+            ttl: timeToLife
           })
 
           Object.defineProperty(this, fnName, {
