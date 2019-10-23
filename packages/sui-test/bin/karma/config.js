@@ -15,11 +15,23 @@ const config = {
   browsers: ['Chrome'],
 
   webpack: {
+    devtool: 'eval',
     mode: 'development',
     node: {
       fs: 'empty'
     },
+    // webpack has the ability to generate path info in the output bundle.
+    // However, this puts garbage collection pressure on projects that bundle thousands of modules.
+    output: {
+      pathinfo: false
+    },
     plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
+    // avoid unneded optimizations for running our tests in order to get fatest bundling time
+    optimization: {
+      removeAvailableModules: false,
+      removeEmptyChunks: false,
+      splitChunks: false
+    },
     module: {
       rules: [
         {
@@ -30,7 +42,6 @@ const config = {
               options: {
                 babelrc: false,
                 cacheDirectory: true,
-                highlightCode: true,
                 presets: [
                   [
                     require.resolve('babel-preset-sui'),
