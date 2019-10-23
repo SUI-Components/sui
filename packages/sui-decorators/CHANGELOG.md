@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.8.0"></a>
+# 3.8.0 (2019-10-23)
+
+
+### Features
+
+* remove not needed parameters ([984d03f](https://github.com/SUI-Components/sui/commit/984d03f))
+* Update README and improve it a bit ([2694271](https://github.com/SUI-Components/sui/commit/2694271))
+* Upgrade tiny-lru dependency ([f5b8567](https://github.com/SUI-Components/sui/commit/f5b8567))
+* use new import from tiny-lru ([99271c8](https://github.com/SUI-Components/sui/commit/99271c8))
+
+
+
 <a name="3.7.0"></a>
 # 3.7.0 (2019-09-10)
 
