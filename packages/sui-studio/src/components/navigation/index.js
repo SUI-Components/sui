@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, {Component} from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router'
 import Logo from './Logo'
 
@@ -8,26 +8,26 @@ import {getComponentsList, getStudioName} from '../utils'
 const componentsList = getComponentsList()
 const studioName = getStudioName()
 
-export default class Navigation extends Component {
-  state = {search: ''}
+export default function Navigation({handleClick}) {
+  const [search, setSearch] = useState('')
 
-  _handleChange = e => {
-    this.setState({search: e.target.value})
+  const handleChange = e => {
+    setSearch(e.target.value)
   }
 
-  _handleFocus = e => {
+  const handleFocus = e => {
     e.target.select()
   }
 
-  _filterComponentsFromSearch({search}) {
+  const filterComponentsFromSearch = ({search}) => {
     return componentsList.filter(
       ({category, component}) =>
         category.includes(search) || component.includes(search)
     )
   }
 
-  _renderListFilteredBySearch({handleClick, search}) {
-    const filtered = this._filterComponentsFromSearch({search})
+  const renderListFilteredBySearch = ({handleClick, search}) => {
+    const filtered = filterComponentsFromSearch({search})
     let previousCategory = ''
 
     return filtered.reduce((acc, link) => {
@@ -60,39 +60,29 @@ export default class Navigation extends Component {
     }, [])
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.search !== this.state.search
-  }
+  return (
+    <nav className="sui-StudioNav">
+      <Link className="sui-StudioNav-header" onClick={handleClick} to="/">
+        <Logo />
+        <h1 className="sui-StudioNav-headerTitle">{studioName}</h1>
+      </Link>
 
-  render() {
-    const {search} = this.state
-    const {handleClick} = this.props
+      <input
+        className="sui-StudioNav-searchInput"
+        onChange={handleChange}
+        onFocus={handleFocus}
+        placeholder="Search component..."
+        type="search"
+        value={search}
+      />
 
-    return (
-      <nav className="sui-StudioNav">
-        <Link className="sui-StudioNav-header" onClick={handleClick} to="/">
-          <Logo />
-          <h1 className="sui-StudioNav-headerTitle">{studioName}</h1>
-        </Link>
-
-        <input
-          className="sui-StudioNav-searchInput"
-          onChange={this._handleChange}
-          onFocus={this._handleFocus}
-          placeholder="Search component..."
-          type="search"
-          value={search}
-        />
-
-        <ul className="sui-StudioNav-menu">
-          {this._renderListFilteredBySearch({handleClick, search})}
-        </ul>
-      </nav>
-    )
-  }
+      <ul className="sui-StudioNav-menu">
+        {renderListFilteredBySearch({handleClick, search})}
+      </ul>
+    </nav>
+  )
 }
 
 Navigation.propTypes = {
-  handleClick: PropTypes.func,
-  search: PropTypes.string
+  handleClick: PropTypes.func
 }

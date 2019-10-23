@@ -36,8 +36,16 @@ const useLegacyContext =
     ? ssrConfig.useLegacyContext
     : true
 
+const setContentType = res => {
+  if (ssrConfig.serverContentType) {
+    res.set('Content-Type', ssrConfig.serverContentType)
+  } else {
+    res.type('html')
+  }
+}
+
 const initialFlush = res => {
-  res.type('html')
+  setContentType(res)
   res.flush()
 }
 
@@ -50,11 +58,11 @@ export default (req, res, next) => {
     headTplPart = headTplPart
       .replace(
         HEAD_OPENING_TAG,
-        `${HEAD_OPENING_TAG}<style>${criticalCSS}</style>`
+        `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
       .replace(
         'rel="stylesheet"',
-        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
+        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
       )
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
@@ -108,12 +116,23 @@ export default (req, res, next) => {
         return next(err)
       }
 
+      const {initialProps, reactString, performance} = initialData
+
+      // The __HTTP__ object is created before earlyFlush is applied
+      // to avoid unexpected behaviors
+
+      const {__HTTP__} = initialProps
+      if (__HTTP__) {
+        const {redirectTo} = __HTTP__
+        if (redirectTo) {
+          return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
+        }
+      }
+
       // Flush now if early-flush is disabled
       if (!req.app.locals.earlyFlush) {
         initialFlush(res)
       }
-
-      const {initialProps, reactString, performance} = initialData
 
       // The first html content has the be set after any possible call to next().
       // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs

@@ -30,9 +30,11 @@ export default criticalCSS => (req, res, next) => {
 
   const ua = parser(req.get('User-Agent'))
   const urlRequest =
-    req.protocol +
-    '://' +
-    (process.env.CRITICAL_CSS_HOST || req.hostname) +
+    (process.env.CRITICAL_CSS_PROTOCOL ||
+      criticalCSS.protocol ||
+      req.protocol) +
+    ':/' +
+    (process.env.CRITICAL_CSS_HOST || criticalCSS.host || req.hostname) +
     req.url
 
   const type = ua.device.type

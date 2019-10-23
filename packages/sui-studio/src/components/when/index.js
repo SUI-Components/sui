@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const When = ({value, children}) => {
-  return value ? <React.Fragment>{children()}</React.Fragment> : null
+  return value ? <>{children()}</> : null
 }
 When.propTypes = {value: PropTypes.any, children: PropTypes.func}
 

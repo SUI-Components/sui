@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.31.0"></a>
+# 5.31.0 (2019-10-15)
+
+
+### Bug Fixes
+
+* rollback to raw-loader@1 to fix problems with export files ([8832645](https://github.com/SUI-Components/sui/commit/8832645))
+
+
+
+<a name="5.30.0"></a>
+# 5.30.0 (2019-10-14)
+
+
+### Features
+
+* bump dependencies of sui-bundler ([35258ea](https://github.com/SUI-Components/sui/commit/35258ea))
+* upgrade dependencies ([389dad3](https://github.com/SUI-Components/sui/commit/389dad3))
+
+
+
+<a name="5.29.0"></a>
+# 5.29.0 (2019-08-28)
+
+
+### Features
+
+* externalManifestLoader dont apply in dev mode ([491ca38](https://github.com/SUI-Components/sui/commit/491ca38))
+
+
+
 <a name="5.28.0"></a>
 # 5.28.0 (2019-08-21)
 

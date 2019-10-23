@@ -33,7 +33,7 @@ const check = () =>
   new Promise((resolve, reject) => {
     const packagesWithChangelog = config.getScopes()
 
-    let status = {}
+    const status = {}
     packagesWithChangelog.forEach(pkg => {
       status[pkg] = {
         increment: 0, // 0 = nothing, 1 = patch, 2 = minor, 3 = major

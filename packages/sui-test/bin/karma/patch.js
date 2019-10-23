@@ -1,9 +1,9 @@
 const chalk = require('chalk')
 
-let {write} = process.stdout
+const {write} = process.stdout
 process.stdout.write = msg => {
   // Strip + prettify console forwarded output:
-  let matches = msg.match(/^LOG ([A-Z]+): ([\s\S]*)$/)
+  const matches = msg.match(/^LOG ([A-Z]+): ([\s\S]*)$/)
   if (matches) {
     msg =
       chalk.bgBlueBright.white(' ' + matches[1] + ': ') +
@@ -13,7 +13,7 @@ process.stdout.write = msg => {
 
   // Strip browser prefix from the output since there's only one:
   if (msg.match(/^[\n\s]*Chrome/)) {
-    let color = /\bSUCCESS\b/.test(msg) ? 'greenBright' : 'magenta'
+    const color = /\bSUCCESS\b/.test(msg) ? 'greenBright' : 'magenta'
     msg = chalk[color](msg.replace(/^[\n\s]*.*?: /g, ''))
   }
 

@@ -10,6 +10,7 @@ const withLocalService = (...services) => Target => {
     static displayName = `withLocalService(${Target.displayName})`
     static originalContextTypes =
       Target.originalContextTypes || Target.contextTypes
+
     static contextTypes = {
       domain: PropTypes.object.isRequired
     }

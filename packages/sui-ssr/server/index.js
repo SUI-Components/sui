@@ -60,7 +60,7 @@ const AUTH_DEFINITION = {
 }
 // Global object within the server context containing the
 // cached HTML templates for each site.
-let _memoizedHtmlTemplatesMapping = {}
+const _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
@@ -85,14 +85,14 @@ let _memoizedHtmlTemplatesMapping = {}
         customTlds: /localhost|\.local/
       })
 
-      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
+        !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
-          ? next()
-          : res.redirect(
-              `${req.protocol}://www.` + req.headers.host + req.url,
-              301
-            )
+        ? next()
+        : res.redirect(
+            `${req.protocol}://www.` + req.headers.host + req.url,
+            301
+          )
     })
 
   app.use((req, res, next) => {
@@ -115,6 +115,8 @@ let _memoizedHtmlTemplatesMapping = {}
     next()
   })
 
+  app.use(hooks[TYPES.PRE_SSR_HANDLER])
+
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
@@ -123,5 +125,5 @@ let _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-  app.listen(PORT, () => console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)) // eslint-disable-line
+    app.listen(PORT, () => console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)) // eslint-disable-line
 })()

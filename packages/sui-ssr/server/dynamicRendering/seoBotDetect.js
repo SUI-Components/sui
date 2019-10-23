@@ -4,7 +4,7 @@
 /// /
 module.exports = function(request) {
   //	Get the request user agent info
-  let userAgent = request.headers['user-agent'] || ''
+  const userAgent = request.headers['user-agent'] || ''
 
   //	Convert all character cases to lower to avoid linux environment mismatching
   userAgent.toLowerCase()

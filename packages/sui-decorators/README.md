@@ -1,6 +1,9 @@
 # sui-decorators
 > Set of ES6 decorators to improve your apps
 
+## Definition
+Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality. The primary benefit of the __Decorator__ pattern is that you can take a rather vanilla object and wrap it in more advanced behaviors. [Learn more](https://robdodson.me/javascript-design-patterns-decorator/)
+
 ## Installation
 
 ```sh
@@ -80,7 +83,7 @@ person.greetingAsync('Carlos');
 Creates a cache of calls to any method of a class.
 
 ```javascript
-import {cache} from 'cv-decorators';
+import {cache} from '@s-ui/decorators';
 
 class Dummy {
   @cache()
@@ -102,7 +105,7 @@ localStorage.__dumpCache__ = true
 By default the TTL for the keys in the cache is 500ms, but it can be changed with
 
 ```javascript
-import {cache} from 'cv-decorators';
+import {cache} from '@s-ui/decorators';
 
 class Dummy {
   @cache({ttl: 2000})
@@ -114,7 +117,6 @@ For this method the cache is 2 seconds
 
 It is possible to set TTL using a string with the format `ttl: 'XXX [second|seconds|minute|minutes|hour|hours]'`,
 thus, avoiding writing very large integers
-[Example](https://github.com/carlosvillu/cv-decorators/blob/feature/string-for-time/test/cacheSpec.js#L163)
 
 ### Options:
 
@@ -127,3 +129,13 @@ thus, avoiding writing very large integers
 * trackTo: Is you pass a host, each 20secds will be send a ping to `${trackTo}/__tracking/cache/event/stats` with a header `x-payload` where there is a object with the stats of hit, miss, env and algorithm
 
 * size (100): How many register can be in the cache before start to remove register.
+
+### How to disable the cache
+In some cases we might want to disable the `cache` for certain environment or testing purposes. In that case, we should expose a variable into the global scope as:
+```
+// For client side
+window.__SUI_CACHE_DISABLED__ = true
+
+// Server side
+global.__SUI_CACHE_DISABLED__ = true
+```

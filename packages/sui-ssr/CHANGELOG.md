@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.29.0"></a>
+# 5.29.0 (2019-10-22)
+
+
+### Bug Fixes
+
+* fix undefined verification ([72ff69e](https://github.com/SUI-Components/sui/commit/72ff69e))
+
+
+### Features
+
+* added configuration to set the server content-type ([3217140](https://github.com/SUI-Components/sui/commit/3217140))
+
+
+
+<a name="5.28.0"></a>
+# 5.28.0 (2019-10-08)
+
+
+### Features
+
+* remove CriticalCSS after load styles ([2d7c061](https://github.com/SUI-Components/sui/commit/2d7c061))
+
+
+
+<a name="5.27.0"></a>
+# 5.27.0 (2019-10-03)
+
+
+### Bug Fixes
+
+* fix criticalCSS URL ([ba8c926](https://github.com/SUI-Components/sui/commit/ba8c926))
+
+
+
+<a name="5.26.0"></a>
+# 5.26.0 (2019-10-03)
+
+
+### Bug Fixes
+
+* moves earlyFlush invocation after res.redirect to avoid crashes ([92a7ae3](https://github.com/SUI-Components/sui/commit/92a7ae3))
+* typo in comment ([7001fda](https://github.com/SUI-Components/sui/commit/7001fda))
+
+
+
+<a name="5.25.0"></a>
+# 5.25.0 (2019-10-02)
+
+
+### Features
+
+* adds a key to allow 301 redirects in server ([8760da6](https://github.com/SUI-Components/sui/commit/8760da6))
+
+
+
+<a name="5.24.0"></a>
+# 5.24.0 (2019-09-30)
+
+
+### Features
+
+* restore package name ([972421c](https://github.com/SUI-Components/sui/commit/972421c))
+
+
+
+<a name="5.23.0"></a>
+# 5.23.0 (2019-09-27)
+
+
+### Features
+
+* add PRE_SSR_HANDLER hook ([e5597a1](https://github.com/SUI-Components/sui/commit/e5597a1))
+* bump version ([1a5c5c3](https://github.com/SUI-Components/sui/commit/1a5c5c3))
+* update deps ([4122711](https://github.com/SUI-Components/sui/commit/4122711))
+
+
+
 <a name="5.21.0"></a>
 # 5.21.0 (2019-07-03)
 

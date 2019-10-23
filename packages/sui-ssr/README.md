@@ -4,7 +4,7 @@
 
 SSR can be tought to configure and maintain. SSR handles that for you providing:
 
-- SSRaS Server-Side Rendering as a Service
+- SSRaaS Server-Side Rendering as a Service
 - Server improvements shared accross projects
 
 ## Installation
@@ -193,6 +193,8 @@ Configs accepted:
 
 - **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
 
+  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the micriservice for generate the CriticalCSS
+  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the micriservice for generate the CriticalCSS
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of urls. If some of this URLs match with the current page url. this feature will be disabled for the page. That is usefull the enabled CriticalCSS in your site but not in one or two pages.
 
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
@@ -211,6 +213,8 @@ Configs accepted:
   ```
   Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
+- **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
+
 ## Dynamic Rendering
 
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry _dynamicsURLS_ in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
@@ -219,7 +223,7 @@ More info about Dynamic Rendering here: https://developers.google.com/search/doc
 
 ## Critical CSS
 
-For development you will need start the server with env var `CRITICAL_CSS_HOST` to allow to the external service request your current page.
+For development you will need start the server with env vars `CRITICAL_CSS_HOST` and `CRITICAL_CSS_PROTOCOL` to allow to the external service request your current page.
 
 If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
 
@@ -235,6 +239,11 @@ SOME_OTHER_ENV_VAR: https://pre.somedomain.com/contact
 - Whatever you add in this file will be available in your context factory as `appConfig.envs` param.
 - This file must not contain secrets as it is meant to be available in both server and client side.
 - :warning: And of course, this file is not meant to be versioned.
+
+## Server Side Redirects
+
+SUI-SSR allows 301 redirects in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
+Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
 ## Use the ssr in a lambda function
 

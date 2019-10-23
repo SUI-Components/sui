@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/changelog",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "CLI to retrieve a changelog from a set of dependencies",
   "main": "./bin/index.js",
   "bin": {
@@ -36,11 +36,6 @@
     "@s-ui/precommit": "2",
     "husky": "0.13.4",
     "validate-commit-msg": "2.14.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
   },
   "config": {
     "sui-mono": {

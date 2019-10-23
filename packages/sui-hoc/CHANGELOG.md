@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.22.0"></a>
+# 1.22.0 (2019-10-03)
+
+
+### Features
+
+* name to handleChange ([f13e149](https://github.com/SUI-Components/sui/commit/f13e149))
+
+
+
+<a name="1.21.0"></a>
+# 1.21.0 (2019-09-30)
+
+
+### Bug Fixes
+
+* cleaner code assuring boolean value ([c99bd82](https://github.com/SUI-Components/sui/commit/c99bd82))
+
+
+
+<a name="1.20.0"></a>
+# 1.20.0 (2019-09-30)
+
+
+### Features
+
+* withSwitchValue ([a9bd22b](https://github.com/SUI-Components/sui/commit/a9bd22b))
+* withSwitchValue update ([0f43540](https://github.com/SUI-Components/sui/commit/0f43540))
+
+
+
 <a name="1.19.0"></a>
 # 1.19.0 (2019-07-23)
 

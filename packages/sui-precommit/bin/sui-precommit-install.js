@@ -28,7 +28,7 @@ function log(...args) {
  * @param  {String} script command to execute
  */
 function installScript(name, script) {
-  let pkg = JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
   pkg.scripts = pkg.scripts || {}
   pkg.scripts[name] && log('Script "' + name + '" already set. Overwritting...')
   pkg.scripts[name] = script
@@ -58,6 +58,6 @@ function installHuskyIfNotInstalled() {
  * @return {Boolean}
  */
 function isHuskyInstalled() {
-  let pkg = JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
-  return pkg.devDependencies && pkg.devDependencies['husky']
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
+  return pkg.devDependencies && pkg.devDependencies.husky
 }

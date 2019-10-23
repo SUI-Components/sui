@@ -289,6 +289,8 @@ Create the manifest file is up to you, but your file must follow this schema.
   /images/common/icons-spritesheet.png: "/images/common/icons-spritesheet.9498fa3745.png",
 }
 ```
+
+> If you setup the `NODE_ENV=development` then this loaders will be disabled.
 ## Externals
 
 It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.

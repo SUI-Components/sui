@@ -9,7 +9,7 @@ import LRU from './algorithms/LRU'
 const ALGORITHMS = {LRU: 'lru'}
 const DEFAULT_TTL = 500
 
-let caches = {}
+const caches = {}
 
 const _cache = ({
   algorithm,
@@ -33,6 +33,13 @@ const _cache = ({
   const cache = caches[fnName]
 
   return (...args) => {
+    if (
+      (typeof window !== 'undefined' && window.__SUI_CACHE_DISABLED__) ||
+      (typeof global !== 'undefined' && global.__SUI_CACHE_DISABLED__)
+    ) {
+      return original.apply(instance, args)
+    }
+
     const key = `${target.constructor.name}::${fnName}::${createHash(
       JSON.stringify(args)
     )}`

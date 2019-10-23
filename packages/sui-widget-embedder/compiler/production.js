@@ -22,7 +22,7 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
 
   const entry = {app: MAIN_ENTRY_POINT}
   if (config.vendor) {
-    entry['vendor'] = config.vendor
+    entry.vendor = config.vendor
   }
 
   return webpack({

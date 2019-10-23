@@ -44,6 +44,14 @@ $ sui-lint sass [options]
 
 Lints all `**/src/**/*.scss` files in the project, excluding `node_modules`, `lib`, `dist`.
 
+To change the default pattern you can use the flag `--pattern`:
+
+example:
+
+```
+$ sui-lint sass --pattern ./widgets/**/*.scss
+```
+
 > **`.gitignore` file patterns are also excluded but interpretation may differ as only glob patterns are understood**
 
 
@@ -76,7 +84,7 @@ It's usefull to make your code autoformat before any commit.
 
 Steps to integrate sui-lint with an IDE:
 
-1.  Install (if needed) eslint/sassLint plugin in your IDE.
+1.  Install (if needed) eslint/styleLint plugin in your IDE.
 2.  Add these lines to `package.json`:
 
 ```json
@@ -126,7 +134,7 @@ By adding this line to your settings:
 }
 ```
 
-When you do `CMD + Shift + P -> Format Document` the format tool will use [`prettier-eslint`](https://github.com/prettier/prettier-eslint)^[`prettier-eslint` is a dependency of [prettier-vscode](https://github.com/prettier/prettier-vscode/blob/1843acb5defac7898862a1df61cb67c7a8355d69/package.json#L204)] that will do a [`eslint --fix`](http://eslint.org/) after formatting your JavaScript file with [`prettier`](https://github.com/prettier/prettier)
+When you do `CMD + Shift + P -> Format Document` the format tool will use [`prettier-eslint`](https://github.com/prettier/prettier-eslint) [`prettier-eslint` is a dependency of [prettier-vscode](https://github.com/prettier/prettier-vscode/blob/1843acb5defac7898862a1df61cb67c7a8355d69/package.json#L204)] that will do a [`eslint --fix`](http://eslint.org/) after formatting your JavaScript file with [`prettier`](https://github.com/prettier/prettier)
 
 So this shortcut will format our files ( w/ _prettier_) according to our `sui-lint` rules.
 

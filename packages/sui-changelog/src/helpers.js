@@ -67,7 +67,7 @@ const getModifiedRepository = ({packageScope, packageName}) => {
 const isMonoRepo = url => url.match(monoRepoRegExp)
 
 const updateAndGetFileVersion = filePath => {
-  let file = editJsonFile(filePath)
+  const file = editJsonFile(filePath)
   const version = file.get('version')
   const newPackageVersion = version.replace(
     /(\w+).(\w+).(\w+)/,

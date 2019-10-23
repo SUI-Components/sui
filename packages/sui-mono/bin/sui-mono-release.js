@@ -80,17 +80,17 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     const pkgInfo = require(path.join(cwd, 'package.json'))
     const scripts = pkgInfo.scripts || {}
 
-    let releaseCommands = [
+    const releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', path.join(cwd, 'package.json')]]
     ]
-    let docCommands = [
+    const docCommands = [
       [suiMonoBinPath, ['changelog', cwd]],
       ['git', ['add', path.join(cwd, changelogFilename)]],
       ['git', ['commit --amend --no-verify --no-edit']]
     ]
-    let publishCommands = [
-      scripts['build'] && ['npm', ['run', 'build']],
+    const publishCommands = [
+      scripts.build && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
