@@ -5,17 +5,5 @@ module.exports = {
     safari: '8',
     firefox: '60', // esr
     ios: '8'
-  },
-  SELECTIVE_LOOSE_REACT_HOOKS: [
-    'useState',
-    'useEffect',
-    'useContext',
-    'useReducer',
-    'useCallback',
-    'useMemo',
-    'useRef',
-    'useImperativeHandle',
-    'useLayoutEffect',
-    'useDebugValue'
-  ]
+  }
 }
