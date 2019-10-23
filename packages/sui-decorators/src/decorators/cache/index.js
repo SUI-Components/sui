@@ -66,11 +66,13 @@ export default ({
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
   return (target, fnName, descriptor) => {
-    const {value: fn, configurable, enumerable} = descriptor
-
+    // if we're on node but the decorator doesn't have the server flag
+    // then we ignore the usage of the decorator and thus the cache
     if (isNode && !server) {
       return descriptor
     }
+
+    const {value: fn, configurable, enumerable} = descriptor
 
     // https://github.com/jayphelps/core-decorators.js/blob/master/src/autobind.js
     return Object.assign(
