@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.30.0"></a>
+# 5.30.0 (2019-10-24)
+
+
+### Features
+
+* stop branching our code for using default values ([9c52993](https://github.com/SUI-Components/sui/commit/9c52993))
+
+
+
 <a name="5.29.0"></a>
 # 5.29.0 (2019-10-22)
 
