@@ -39,6 +39,7 @@ const webpackConfig = {
     MAIN_ENTRY_POINT
   ]),
   target: 'web',
+  node: {fs: 'empty'},
   output: {
     publicPath: '/'
   },
