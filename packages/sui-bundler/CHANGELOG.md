@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.32.0"></a>
+# 5.32.0 (2019-10-28)
+
+
+### Bug Fixes
+
+* add fs as empty mock ([e7022e2](https://github.com/SUI-Components/sui/commit/e7022e2))
+
+
+
 <a name="5.31.0"></a>
 # 5.31.0 (2019-10-15)
 
