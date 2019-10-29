@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.23.0"></a>
+# 1.23.0 (2019-10-29)
+
+
+### Features
+
+* upgrade intersection-observer version ([6d99c4b](https://github.com/SUI-Components/sui/commit/6d99c4b))
+
+
+
 <a name="1.22.0"></a>
 # 1.22.0 (2019-10-03)
 
