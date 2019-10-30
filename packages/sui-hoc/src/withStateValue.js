@@ -23,9 +23,10 @@ const withStateValue = BaseComponent => {
       value: this.props.value
     }
 
-    onChange = (e, {value}) => {
+    onChange = (e, valuesToPropagate) => {
       const {onChange} = this.props
-      this.setState({value}, () => onChange(e, {value}))
+      const {value} = valuesToPropagate
+      this.setState({value}, () => onChange(e, valuesToPropagate))
     }
 
     render() {
