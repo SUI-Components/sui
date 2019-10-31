@@ -6,6 +6,8 @@ import Header from '../Header'
 import Select from '../Select'
 import Test from '../../../../src/components/test'
 
+import When from '../../../../src/components/when'
+
 const DEVICES = {
   mobile: {
     width: 362,
@@ -23,6 +25,7 @@ const DEVICES = {
 
 const importComponent = () => import('component/index.js')
 const importTest = () => import('test/index.js')
+
 class Root extends React.PureComponent {
   static propTypes = {
     componentID: PropTypes.string,
@@ -75,12 +78,16 @@ class Root extends React.PureComponent {
             />
           </Header>
         </div>
-        <Test
-          open
-          context={contexts[actualContext]}
-          importComponent={importComponent}
-          importTest={importTest}
-        />
+        <When value={__EXPERIMENTAL_TEST__}>
+          {() => (
+            <Test
+              open
+              context={contexts[actualContext]}
+              importComponent={importComponent}
+              importTest={importTest}
+            />
+          )}
+        </When>
         <div className={`Root-center Root-${actualDevice}`}>
           <span className={`Root-${actualDevice}-camera`} />
           <span className={`Root-${actualDevice}-speaker`} />
