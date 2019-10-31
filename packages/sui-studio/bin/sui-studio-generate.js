@@ -225,6 +225,7 @@ chai.use(chaiDOM)
 describe('${componentInPascal}', () => {
   it('Render', () => {
     render(<${componentInPascal} />)
+    expect(true).to.be.eql(false)
   })
 })`
   )
