@@ -7,9 +7,16 @@
   <link rel='preload' href='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js' as='script'>
 
   <link id='async-css' rel="async-stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
   <script src='https://unpkg.com/@babel/standalone@7.0.0-beta.38/babel.min.js'></script>
+  <script src="https://unpkg.com/chai/chai.js"></script>
+  <script src="https://unpkg.com/mocha/mocha.js"></script>
+  <script class="mocha-init">
+    mocha.setup('bdd');
+    mocha.checkLeaks();
+  </script>
 </head>
 <body>
   <div id="app"></div>

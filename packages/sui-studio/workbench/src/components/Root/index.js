@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import Header from '../Header'
 import Select from '../Select'
+import Test from '../../../../src/components/test'
 
 const DEVICES = {
   mobile: {
@@ -71,6 +72,7 @@ class Root extends React.PureComponent {
             />
           </Header>
         </div>
+        <Test open />
         <div className={`Root-center Root-${actualDevice}`}>
           <span className={`Root-${actualDevice}-camera`} />
           <span className={`Root-${actualDevice}-speaker`} />

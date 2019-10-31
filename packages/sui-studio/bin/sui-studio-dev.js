@@ -52,6 +52,7 @@ const studioDevConfig = {
     alias: {
       ...config.resolve.alias,
       component: path.join(PWD, 'components', category, component, 'src'),
+      test: path.join(PWD, 'test', category, component),
       package: path.join(
         PWD,
         'components',

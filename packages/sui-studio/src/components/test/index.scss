@@ -1,0 +1,16 @@
+.sui-Test {
+    background-color: #ff00002e;
+    display: none;
+    height: calc(100% - 100px);
+    max-width: 33%;
+    margin-top: 100px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9998;
+
+    &--open {
+      display: block;
+    }
+}
