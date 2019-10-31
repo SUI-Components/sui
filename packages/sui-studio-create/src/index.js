@@ -62,7 +62,8 @@ if (!PROJECT_NAME) {
 
 Promise.all([
   createDir(`${PROJECT_PATH}/components`),
-  createDir(`${PROJECT_PATH}/demo`)
+  createDir(`${PROJECT_PATH}/demo`),
+  createDir(`${PROJECT_PATH}/test`)
 ])
   .then(() =>
     writeFile(
