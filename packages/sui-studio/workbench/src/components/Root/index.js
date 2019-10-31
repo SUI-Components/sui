@@ -21,6 +21,8 @@ const DEVICES = {
   }
 }
 
+const importComponent = () => import('component/index.js')
+const importTest = () => import('test/index.js')
 class Root extends React.PureComponent {
   static propTypes = {
     componentID: PropTypes.string,
@@ -39,6 +41,7 @@ class Root extends React.PureComponent {
   render() {
     const {actualContext, actualStyle, actualDevice} = this.state
     const {contexts = {}, themes, componentID} = this.props
+
     return (
       <div className="Root">
         <div className="Root-top">
@@ -72,7 +75,12 @@ class Root extends React.PureComponent {
             />
           </Header>
         </div>
-        <Test open />
+        <Test
+          open
+          context={contexts[actualContext]}
+          importComponent={importComponent}
+          importTest={importTest}
+        />
         <div className={`Root-center Root-${actualDevice}`}>
           <span className={`Root-${actualDevice}-camera`} />
           <span className={`Root-${actualDevice}-speaker`} />

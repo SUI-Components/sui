@@ -56,10 +56,6 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
       demoStyles = require('!css-content-loader!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
   } catch (e) {}
 
-  try {
-    await import('test/index.js')
-  } catch (e) {}
-
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
   const themes = requireContextThemesKeys.reduce((acc, path, index) => {
     acc[path.replace('./', '').replace('.scss', '')] = styles[index]

@@ -218,8 +218,6 @@ import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
 import {render} from '@testing-library/react'
 
-import ${componentInPascal} from '${COMPONENT_ENTRY_JS_POINT_FILE}'
-
 chai.use(chaiDOM)
 
 describe('${componentInPascal}', () => {
