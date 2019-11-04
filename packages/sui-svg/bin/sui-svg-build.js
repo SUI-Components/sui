@@ -46,7 +46,7 @@ const getLibFile = file => {
 
 const getAllSrcSvgFiles = () => fg([`${SVG_FOLDER}/**/*.svg`])
 
-const transfomrSvgToReact = svg =>
+const transformSvgToReactComponent = svg =>
   svgr(svg, {
     template,
     expandProps: false,
@@ -84,7 +84,7 @@ fs.emptyDir(LIB_FOLDER)
   .then(entries =>
     entries.forEach(file => {
       fs.readFile(file, 'utf8')
-        .then(transfomrSvgToReact)
+        .then(transformSvgToReactComponent)
         .then(transformCodeWithBabel)
         .then(result => fs.outputFile(getLibFile(file), result.code))
         .catch(error => {
