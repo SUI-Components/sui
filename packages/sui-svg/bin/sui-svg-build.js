@@ -10,9 +10,13 @@ const babel = require('@babel/core')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 
 const template = require('../templates/icon-component')
-const BASE_DIR = process.cwd()
+
 const ATOM_ICON_VERSION = 1
+const ATOM_ICON_PACKAGE = '@s-ui/react-atom-icon'
+
+const BASE_DIR = process.cwd()
 const LIB_FOLDER = join(BASE_DIR, '.', 'lib')
+const PACKAGE_JSON = require(join(BASE_DIR, '.', 'package.json'))
 const SVG_FOLDER = join(BASE_DIR, '.', 'src')
 
 program
@@ -54,12 +58,18 @@ const transformCodeWithBabel = jsCode =>
     presets: [require.resolve('babel-preset-sui')]
   })
 
-const installNeededDependencies = () =>
-  getSpawnPromise('npm', [
-    'install',
-    `@s-ui/react-atom-icon@${ATOM_ICON_VERSION}`,
-    '--save-exact'
-  ])
+const installNeededDependencies = () => {
+  const {dependencies = {}} = PACKAGE_JSON
+  const isInstalled = Boolean(dependencies[ATOM_ICON_PACKAGE])
+
+  return isInstalled
+    ? Promise.resolve(true)
+    : getSpawnPromise('npm', [
+        'install',
+        `${ATOM_ICON_PACKAGE}@${ATOM_ICON_VERSION}`,
+        '--save-exact'
+      ])
+}
 
 const copyStylesFile = () => {
   fs.copy(
