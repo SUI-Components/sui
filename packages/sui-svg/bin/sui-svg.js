@@ -2,8 +2,7 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
-const pkg = require('../package.json')
-const version = pkg.version
+const {version} = require('../package.json')
 
 program.version(version, '    --version')
 
