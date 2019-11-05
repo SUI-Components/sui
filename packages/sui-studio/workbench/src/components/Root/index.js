@@ -21,6 +21,8 @@ const DEVICES = {
   }
 }
 
+const importComponent = () => import('component/index.js')
+const importTest = () => import('test/index.js')
 class Root extends React.PureComponent {
   static propTypes = {
     componentID: PropTypes.string,
@@ -94,7 +96,12 @@ class Root extends React.PureComponent {
           </div>
         </div>
         <div className={`Root-test`}>
-          <Test open />
+          <Test
+            open
+            context={contexts[actualContext]}
+            importComponent={importComponent}
+            importTest={importTest}
+          />
         </div>
         <div className="Root-bottom" />
       </div>
