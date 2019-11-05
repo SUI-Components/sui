@@ -18,12 +18,6 @@ const Test = ({open, importTest, importComponent, context}) => {
   })
 
   useEffect(() => {
-    window.mocha.run(failures => {
-      setFailures(failures)
-    })
-  }, [])
-
-  useEffect(() => {
     importComponent().then(module => {
       const Component = module.default || module
       const EnhanceComponent = withContext(/* flag */ context, context)(
@@ -37,7 +31,9 @@ const Test = ({open, importTest, importComponent, context}) => {
         </SUIContext.Provider>
       )
       importTest().then(() => {
-        window.mocha.run()
+        window.mocha.run(failures => {
+          setFailures(failures)
+        })
       })
     })
   }, [context, importComponent, importTest])
