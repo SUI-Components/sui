@@ -6,8 +6,6 @@ import Header from '../Header'
 import Select from '../Select'
 import Test from '../../../../src/components/test'
 
-import When from '../../../../src/components/when'
-
 const DEVICES = {
   mobile: {
     width: 362,
@@ -25,7 +23,6 @@ const DEVICES = {
 
 const importComponent = () => import('component/index.js')
 const importTest = () => import('test/index.js')
-
 class Root extends React.PureComponent {
   static propTypes = {
     componentID: PropTypes.string,
@@ -44,7 +41,6 @@ class Root extends React.PureComponent {
   render() {
     const {actualContext, actualStyle, actualDevice} = this.state
     const {contexts = {}, themes, componentID} = this.props
-
     return (
       <div className="Root">
         <div className="Root-top">
@@ -78,33 +74,33 @@ class Root extends React.PureComponent {
             />
           </Header>
         </div>
-        <When value={__EXPERIMENTAL_TEST__}>
-          {() => (
-            <Test
-              open
-              context={contexts[actualContext]}
-              importComponent={importComponent}
-              importTest={importTest}
+        <div className={`Root-center`}>
+          <div className={`Root-${actualDevice}`}>
+            <span className={`Root-${actualDevice}-camera`} />
+            <span className={`Root-${actualDevice}-speaker`} />
+            <span className={`Root-${actualDevice}-button`} />
+            <iframe
+              style={{
+                width: DEVICES[actualDevice].width,
+                height: DEVICES[actualDevice].height,
+                zoom: 1,
+                display: 'block',
+                margin: '10px auto',
+                overflow: 'scroll',
+                backgroundColor: '#fff',
+                border: '1px solid gray'
+              }}
+              src={`/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`}
+              scrolling="yes"
             />
-          )}
-        </When>
-        <div className={`Root-center Root-${actualDevice}`}>
-          <span className={`Root-${actualDevice}-camera`} />
-          <span className={`Root-${actualDevice}-speaker`} />
-          <span className={`Root-${actualDevice}-button`} />
-          <iframe
-            style={{
-              width: DEVICES[actualDevice].width,
-              height: DEVICES[actualDevice].height,
-              zoom: 1,
-              display: 'block',
-              margin: '10px auto',
-              overflow: 'scroll',
-              backgroundColor: '#fff',
-              border: '1px solid gray'
-            }}
-            src={`/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`}
-            scrolling="yes"
+          </div>
+        </div>
+        <div className={`Root-test`}>
+          <Test
+            open
+            context={contexts[actualContext]}
+            importComponent={importComponent}
+            importTest={importTest}
           />
         </div>
         <div className="Root-bottom" />

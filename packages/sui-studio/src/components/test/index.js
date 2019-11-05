@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
@@ -10,8 +10,11 @@ import {cleanDisplayName} from '../demo/utilities'
 const BASE_CLASSNAME = 'sui-Test'
 
 const Test = ({open, importTest, importComponent, context}) => {
+  const [failures, setFailures] = useState(0)
+
   const classnames = cx(BASE_CLASSNAME, {
-    [`${BASE_CLASSNAME}--open`]: open
+    [`${BASE_CLASSNAME}--open`]: open,
+    [`${BASE_CLASSNAME}--failures`]: failures
   })
 
   useEffect(() => {
@@ -28,7 +31,9 @@ const Test = ({open, importTest, importComponent, context}) => {
         </SUIContext.Provider>
       )
       importTest().then(() => {
-        window.mocha.run()
+        window.mocha.run(failures => {
+          setFailures(failures)
+        })
       })
     })
   }, [context, importComponent, importTest])

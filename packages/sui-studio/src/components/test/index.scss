@@ -1,16 +1,23 @@
 .sui-Test {
-    background-color: #ff00002e;
     display: none;
-    height: calc(100% - 100px);
-    max-width: 33%;
-    margin-top: 100px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
+    padding: 10px 20px 40px 20px;
+    height: 100%;
     z-index: 9998;
 
-    &--open {
+    &--open, &--failures {
       display: block;
     }
+}
+
+#mocha {
+  margin: 0;
+  
+  #mocha-stats {
+    padding-bottom: 20px;
+    position: unset;
+  }
+  
+  #mocha-report {
+    margin-top: 20px;
+  }
 }
