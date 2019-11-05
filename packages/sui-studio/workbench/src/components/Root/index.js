@@ -72,25 +72,29 @@ class Root extends React.PureComponent {
             />
           </Header>
         </div>
-        <Test open />
-        <div className={`Root-center Root-${actualDevice}`}>
-          <span className={`Root-${actualDevice}-camera`} />
-          <span className={`Root-${actualDevice}-speaker`} />
-          <span className={`Root-${actualDevice}-button`} />
-          <iframe
-            style={{
-              width: DEVICES[actualDevice].width,
-              height: DEVICES[actualDevice].height,
-              zoom: 1,
-              display: 'block',
-              margin: '10px auto',
-              overflow: 'scroll',
-              backgroundColor: '#fff',
-              border: '1px solid gray'
-            }}
-            src={`/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`}
-            scrolling="yes"
-          />
+        <div className={`Root-center`}>
+          <div className={`Root-${actualDevice}`}>
+            <span className={`Root-${actualDevice}-camera`} />
+            <span className={`Root-${actualDevice}-speaker`} />
+            <span className={`Root-${actualDevice}-button`} />
+            <iframe
+              style={{
+                width: DEVICES[actualDevice].width,
+                height: DEVICES[actualDevice].height,
+                zoom: 1,
+                display: 'block',
+                margin: '10px auto',
+                overflow: 'scroll',
+                backgroundColor: '#fff',
+                border: '1px solid gray'
+              }}
+              src={`/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`}
+              scrolling="yes"
+            />
+          </div>
+        </div>
+        <div className={`Root-test`}>
+          <Test open />
         </div>
         <div className="Root-bottom" />
       </div>

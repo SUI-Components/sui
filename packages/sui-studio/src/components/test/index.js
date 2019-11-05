@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
@@ -6,12 +6,16 @@ import cx from 'classnames'
 const BASE_CLASSNAME = 'sui-Test'
 
 const Test = ({open}) => {
+  const [failures, setFailures] = useState(0)
   const classnames = cx(BASE_CLASSNAME, {
-    [`${BASE_CLASSNAME}--open`]: open
+    [`${BASE_CLASSNAME}--open`]: open,
+    [`${BASE_CLASSNAME}--failures`]: failures
   })
 
   useEffect(() => {
-    window.mocha.run()
+    window.mocha.run(failures => {
+      setFailures(failures)
+    })
   }, [])
 
   return (
