@@ -33,17 +33,18 @@ const withStateValueTags = BaseComponent => {
       tags: this.props.tags || [] // valueInput
     }
 
-    onChangeTags = (e, {tags, value}) => {
+    onChangeTags = (e, valuesToPropagate) => {
       const {onChangeTags, onChange} = this.props // eslint-disable-line react/prop-types
+      const {tags} = valuesToPropagate
       this.setState({tags}, () => {
-        onChangeTags(e, {tags})
-        onChange(e, {value})
+        onChangeTags(e, valuesToPropagate)
+        onChange(e, valuesToPropagate)
       })
     }
 
-    onChange = (e, {value}) => {
+    onChange = (e, valuesToPropagate) => {
       const {onChange} = this.props
-      onChange(e, {value})
+      onChange(e, valuesToPropagate)
     }
 
     render() {

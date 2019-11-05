@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.33.0"></a>
+# 5.33.0 (2019-10-31)
+
+
+### Features
+
+* upgrade dependencies of sui-bundler ([3ac90b1](https://github.com/SUI-Components/sui/commit/3ac90b1))
+
+
+
 <a name="5.32.0"></a>
 # 5.32.0 (2019-10-28)
 
