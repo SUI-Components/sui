@@ -1,10 +1,14 @@
 /* eslint import/no-webpack-loader-syntax:0 */
+/* global __EXPERIMENTAL_TEST__ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import Header from '../Header'
 import Select from '../Select'
 import Test from '../../../../src/components/test'
+
+import When from '../../../../src/components/when'
 
 const DEVICES = {
   mobile: {
@@ -23,6 +27,7 @@ const DEVICES = {
 
 const importComponent = () => import('component/index.js')
 const importTest = () => import('test/index.js')
+
 class Root extends React.PureComponent {
   static propTypes = {
     componentID: PropTypes.string,
@@ -95,14 +100,19 @@ class Root extends React.PureComponent {
             />
           </div>
         </div>
-        <div className={`Root-test`}>
-          <Test
-            open
-            context={contexts[actualContext]}
-            importComponent={importComponent}
-            importTest={importTest}
-          />
-        </div>
+        <When value={__EXPERIMENTAL_TEST__}>
+          {() => (
+            <div className={`Root-test`}>
+              <Test
+                open
+                context={contexts[actualContext]}
+                importComponent={importComponent}
+                importTest={importTest}
+              />
+            </div>
+          )}
+        </When>
+
         <div className="Root-bottom" />
       </div>
     )
