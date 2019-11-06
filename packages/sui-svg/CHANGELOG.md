@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.0.0"></a>
+# 2.0.0 (2019-11-06)
+
+
+### Bug Fixes
+
+* fix typo with name ([34d2fc4](https://github.com/SUI-Components/sui/commit/34d2fc4))
+
+
+### Features
+
+* add some styles ([bb2cc81](https://github.com/SUI-Components/sui/commit/bb2cc81))
+* change template component name ([4631689](https://github.com/SUI-Components/sui/commit/4631689))
+* create styles to be imported where needed ([793c0ad](https://github.com/SUI-Components/sui/commit/793c0ad))
+* install needed dependencies, better readability, less dependencies ([33cb455](https://github.com/SUI-Components/sui/commit/33cb455))
+* install sui-atom-icon dependency if needed ([b71ec00](https://github.com/SUI-Components/sui/commit/b71ec00))
+* release new major version of sui-svg ([61ace32](https://github.com/SUI-Components/sui/commit/61ace32))
+* remove not needed dependencies ([7f8808b](https://github.com/SUI-Components/sui/commit/7f8808b))
+* upgrade dependencies ([585da3c](https://github.com/SUI-Components/sui/commit/585da3c))
+* write custom demo without dependencies and changing of props ([7f76e43](https://github.com/SUI-Components/sui/commit/7f76e43))
+
+
+### BREAKING CHANGES
+
+* Now icons are wrapped with SuiAtomIcon component with limited props and follow strict ux guidelines
+from the SuiAtomIcon component
+* Now icons are wrapped with AtomIcon
+
+
+
 <a name="1.10.0"></a>
 # 1.10.0 (2019-07-30)
 

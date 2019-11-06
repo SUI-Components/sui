@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.34.0"></a>
+# 5.34.0 (2019-11-06)
+
+
+### Features
+
+* add node 13 support by upgrading node-sass ([234442f](https://github.com/SUI-Components/sui/commit/234442f))
+
+
+
 <a name="5.33.0"></a>
 # 5.33.0 (2019-10-31)
 
