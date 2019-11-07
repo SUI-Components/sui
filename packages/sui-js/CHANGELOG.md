@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.4.0"></a>
+# 2.4.0 (2019-11-07)
+
+
+### Features
+
+* add cookie set options ([7b46fb5](https://github.com/SUI-Components/sui/commit/7b46fb5))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2019-07-24)
 
