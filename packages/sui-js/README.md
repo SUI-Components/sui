@@ -51,7 +51,7 @@ const smartBannerCookie = getCookie('smartbanner')
 
 // Set
 const {set: setCookie} = cookie
-const setSmartBannerCookie = setCookie('smartbanner', 1)
+const setSmartBannerCookie = setCookie('smartbanner', 1, { expires: 7, path: '' })
 ```
 
 ## events
