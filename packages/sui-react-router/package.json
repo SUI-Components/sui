@@ -1,0 +1,27 @@
+{
+  "name": "@s-ui/react-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
+    "prepare": "npm run lib"
+  },
+  "peerDependencies": {
+    "prop-types": "15",
+    "react": "16"
+  },
+  "devDependencies": {
+    "@s-ui/lint": "3",
+    "@babel/cli": "7.7.0",
+    "babel-preset-sui": "3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
