@@ -2,6 +2,7 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
+const chalk = require('chalk')
 const path = require('path')
 const {serialSpawn} = require('@s-ui/helpers/cli')
 
@@ -34,4 +35,11 @@ serialSpawn([
       watch && '--watch'
     ].filter(Boolean)
   ]
-]).catch(err => console.log(err))
+]).catch(err => {
+  if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
+    process.stderr.write(
+      chalk.red((err && (err.stack || err.message)) || err)
+    ) + '\n'
+  }
+  process.exit(err.code || 1)
+})
