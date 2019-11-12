@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary */
 export default class DomainBuilder {
   static extend({domain = {}}) {
     return new DomainBuilder({domain})
   }
 
+  // @ts-ignore
   constructor({domain} = {}) {
     this._domain = domain
     this._useCase = false
@@ -10,6 +12,7 @@ export default class DomainBuilder {
     this._useCases = {}
   }
 
+  // @ts-ignore
   for({useCase} = {}) {
     if (this._useCase) {
       throw new Error(
@@ -22,6 +25,7 @@ export default class DomainBuilder {
     return this
   }
 
+  // @ts-ignore
   respondWith({success, fail} = {}) {
     if (success !== undefined && fail !== undefined) {
       throw new Error(
@@ -47,7 +51,7 @@ export default class DomainBuilder {
     return this
   }
 
-  build() {
+  build({inlineError}) {
     const self = this
     return {
       get: useCase => {
@@ -61,10 +65,18 @@ export default class DomainBuilder {
                 return self._useCases[useCase].success !== undefined
                   ? Promise.resolve(
                       typeof successResponse === 'function'
-                        ? successResponse(params)
+                        ? inlineError
+                          ? [null, successResponse(params)]
+                          : successResponse(params)
+                        : inlineError
+                        ? [null, successResponse]
                         : successResponse
                     )
-                  : Promise.reject(self._useCases[useCase].fail)
+                  : Promise.reject(
+                      inlineError
+                        ? [self._useCases[useCase].fail, null]
+                        : self._useCases[useCase].fail
+                    )
               }
             }
           : self._domain.get(useCase)
