@@ -72,7 +72,7 @@ export default class DomainBuilder {
                         ? [null, successResponse]
                         : successResponse
                     )
-                  : Promise.reject(
+                  : Promise.resolve(
                       inlineError
                         ? [self._useCases[useCase].fail, null]
                         : self._useCases[useCase].fail
