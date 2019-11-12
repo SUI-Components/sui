@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.1.0"></a>
+# 2.1.0 (2019-11-12)
+
+
+### Bug Fixes
+
+* fix centering header ([0f8e993](https://github.com/SUI-Components/sui/commit/0f8e993))
+
+
+### Features
+
+* add search functionality to icons demo ([6ce9629](https://github.com/SUI-Components/sui/commit/6ce9629))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2019-11-06)
 
