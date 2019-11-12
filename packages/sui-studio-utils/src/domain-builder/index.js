@@ -4,7 +4,6 @@ export default class DomainBuilder {
     return new DomainBuilder({domain})
   }
 
-  // @ts-ignore
   constructor({domain} = {}) {
     this._domain = domain
     this._useCase = false
@@ -12,7 +11,6 @@ export default class DomainBuilder {
     this._useCases = {}
   }
 
-  // @ts-ignore
   for({useCase} = {}) {
     if (this._useCase) {
       throw new Error(
@@ -25,7 +23,6 @@ export default class DomainBuilder {
     return this
   }
 
-  // @ts-ignore
   respondWith({success, fail} = {}) {
     if (success !== undefined && fail !== undefined) {
       throw new Error(
