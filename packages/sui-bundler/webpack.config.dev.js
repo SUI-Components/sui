@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
+// const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
@@ -39,7 +39,6 @@ const webpackConfig = {
     MAIN_ENTRY_POINT
   ]),
   target: 'web',
-  node: {fs: 'empty'},
   output: {
     publicPath: '/'
   },
@@ -51,16 +50,16 @@ const webpackConfig = {
       template: './index.html',
       inject: true,
       env: process.env
-    }),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
+    })
+    // new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
-  resolveLoader: {
-    alias: {
-      'externals-manifest-loader': require.resolve(
-        './loaders/ExternalsManifestLoader'
-      )
-    }
-  },
+  // resolveLoader: {
+  //   alias: {
+  //     'externals-manifest-loader': require.resolve(
+  //       './loaders/ExternalsManifestLoader'
+  //     )
+  //   }
+  // },
   module: {
     rules: cleanList([
       {
@@ -107,24 +106,26 @@ const webpackConfig = {
         test: /(\.css|\.scss)$/,
         use: cleanList([
           'style-loader',
-          when(config['externals-manifest'], () => ({
-            loader: 'externals-manifest-loader',
-            options: {
-              manifestURL: config['externals-manifest']
-            }
-          })),
+          // when(config['externals-manifest'], () => ({
+          //   loader: 'externals-manifest-loader',
+          //   options: {
+          //     manifestURL: config['externals-manifest']
+          //   }
+          // })),
           'css-loader',
           'postcss-loader',
           'sass-loader'
         ])
-      },
-      when(config['externals-manifest'], () =>
-        manifestLoaderRules(config['externals-manifest'])
-      )
+      }
+      // when(config['externals-manifest'], () =>
+      //   manifestLoaderRules(config['externals-manifest'])
+      // )
     ])
   },
   devtool:
-    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
+    config.sourcemaps && config.sourcemaps.dev
+      ? config.sourcemaps.dev
+      : undefined
 }
 
 module.exports = webpackConfig

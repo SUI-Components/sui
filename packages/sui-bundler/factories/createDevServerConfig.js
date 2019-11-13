@@ -14,7 +14,7 @@ module.exports = (config, allowedHost) => ({
   publicPath: config.output.publicPath,
   quiet: true,
   watchOptions: {
-    ignored: ignoredFiles(config.context)
+    ignored: '/node_modules/'
   },
   https: protocol === 'https',
   host: host,
