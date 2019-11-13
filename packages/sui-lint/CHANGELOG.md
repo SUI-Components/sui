@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.12.0"></a>
+# 3.12.0 (2019-11-13)
+
+
+### Bug Fixes
+
+* add single quote as well ([bb451bc](https://github.com/SUI-Components/sui/commit/bb451bc))
+
+
+### Features
+
+* upgrade dependencies and add prettier-stylelint ([a62904e](https://github.com/SUI-Components/sui/commit/a62904e))
+
+
+
 <a name="3.11.0"></a>
 # 3.11.0 (2019-10-01)
 

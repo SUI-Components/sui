@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.19.0"></a>
+# 2.19.0 (2019-11-08)
+
+
+### Bug Fixes
+
+* avoid swallow error code in server execution ([e1597ff](https://github.com/SUI-Components/sui/commit/e1597ff))
+
+
+
 <a name="2.18.0"></a>
 # 2.18.0 (2019-10-23)
 

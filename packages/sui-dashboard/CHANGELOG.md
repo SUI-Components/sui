@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2019-11-13)
+
+
+### Features
+
+* add new habitaclia project to the dashboard ([61c2db2](https://github.com/SUI-Components/sui/commit/61c2db2))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2019-10-02)
 
