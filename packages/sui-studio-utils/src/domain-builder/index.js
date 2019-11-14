@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 export default class DomainBuilder {
   static extend({domain = {}}) {
     return new DomainBuilder({domain})
@@ -59,18 +58,24 @@ export default class DomainBuilder {
         data !== undefined ? {err: null, data} : {err: fail, data: null}
 
       const createResponse = ({err, data}) => {
-        const {resolve, reject} = Promise
-        if (inlineError) return resolve([err, data])
-
-        return err ? reject(err) : resolve(data)
+        if (inlineError) return Promise.resolve([err, data])
+        return err ? Promise.reject(err) : Promise.resolve(data)
       }
       return createResponse(responseParams)
     }
 
+    const buildGet = useCase => {
+      if (useCase === 'config') {
+        return this._config
+      }
+      if (self._useCases[useCase]) {
+        return {execute: exeUseCase(useCase)}
+      }
+      return self._domain.get(useCase)
+    }
+
     return {
-      get: useCase => ({
-        execute: exeUseCase(useCase)
-      }),
+      get: buildGet,
       _map: Object.assign(self._domain._map || {}, self._useCases),
       useCases: Object.assign(self._domain.useCases || {}, self._useCases)
     }
