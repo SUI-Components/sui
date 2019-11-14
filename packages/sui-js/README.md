@@ -107,7 +107,17 @@ htmlStringToReactElement('<p>No more dangerouslySetInnerHTML</p>')
 ```
 
 ## ua-parser
-A user agent parser. Returns an object `stats` with `isMobile` and `osName`.
+A user agent parser. Returns an object `stats`
+
+```text
+{
+  browserName: <string>,
+  browserVersion: <string>,
+  isMobile: <boolean>,
+  isTablet: <boolean>,
+  osName: <string>
+}
+```
 
 ```js
 import {stats} from '@s-ui/js/lib/ua-parser'
