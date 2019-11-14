@@ -47,28 +47,35 @@ export default class DomainBuilder {
     return this
   }
 
-  build() {
+  build({inlineError}) {
     const self = this
+    const exeUseCase = useCase => params => {
+      const {fail, success} = self._useCases[useCase]
+
+      const data = typeof success === 'function' ? success(params) : success
+
+      const responseParams =
+        data !== undefined ? {err: null, data} : {err: fail, data: null}
+
+      const createResponse = ({err, data}) => {
+        if (inlineError) return Promise.resolve([err, data])
+        return err ? Promise.reject(err) : Promise.resolve(data)
+      }
+      return createResponse(responseParams)
+    }
+
+    const buildGet = useCase => {
+      if (useCase === 'config') {
+        return this._config
+      }
+      if (self._useCases[useCase]) {
+        return {execute: exeUseCase(useCase)}
+      }
+      return self._domain.get(useCase)
+    }
+
     return {
-      get: useCase => {
-        if (useCase === 'config') {
-          return this._config
-        }
-        return self._useCases[useCase]
-          ? {
-              execute: params => {
-                const successResponse = self._useCases[useCase].success
-                return self._useCases[useCase].success !== undefined
-                  ? Promise.resolve(
-                      typeof successResponse === 'function'
-                        ? successResponse(params)
-                        : successResponse
-                    )
-                  : Promise.reject(self._useCases[useCase].fail)
-              }
-            }
-          : self._domain.get(useCase)
-      },
+      get: buildGet,
       _map: Object.assign(self._domain._map || {}, self._useCases),
       useCases: Object.assign(self._domain.useCases || {}, self._useCases)
     }
