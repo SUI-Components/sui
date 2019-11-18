@@ -1,8 +1,7 @@
-#!/usr/bin/env node
 const {writeFile} = require('@s-ui/helpers/file')
 const {name: suiLintPackageName} = require('../package.json')
 
-const ACTUAL_PACKAGE_PATH = `${process.cwd()}/package.json`
+const ACTUAL_PACKAGE_PATH = `${process.env.INIT_CWD}/package.json`
 
 const LINT_CONFIGS_PATH = './node_modules/@s-ui/lint/'
 const LINT_CONFIGS = {
@@ -32,6 +31,7 @@ const areDifferentLintConfig =
 
 // if they're different, we're going to rewrite the package.json
 if (areDifferentLintConfig) {
+  console.log('Adding @s-ui/lint config to package.json...')
   // remove deprecated linter config of sasslintConfig
   const {sasslintConfig, ...originalPackageJSON} = packageJSON
   // create the new package.json object to be written
@@ -40,5 +40,10 @@ if (areDifferentLintConfig) {
     ...LINT_CONFIGS
   }
   // write the new package.json with the linter conifg
-  writeFile(ACTUAL_PACKAGE_PATH, JSON.stringify(newPackageJSON, null, 2))
+  writeFile(
+    ACTUAL_PACKAGE_PATH,
+    JSON.stringify(newPackageJSON, null, 2)
+  ).then(() => console.log('Added @s-ui/lint config successfully'))
+} else {
+  console.log('@s-ui/lint config already in your package.json. Great!')
 }
