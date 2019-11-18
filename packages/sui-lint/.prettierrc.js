@@ -16,7 +16,7 @@ module.exports = {
   /* Specify the number of spaces per indentation-level. */
   tabWidth: 2,
   /* Print trailing commas wherever possible when multi-line.  */
-  trailingComma: 'es5',
+  trailingComma: 'none',
   /* Indent lines with tabs instead of spaces. */
   useTabs: false
 }
