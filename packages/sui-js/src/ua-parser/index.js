@@ -4,9 +4,10 @@ export const stats = userAgent => {
   const ua = bowser._detect(userAgent)
 
   return {
-    isMobile: !!ua.mobile,
+    isMobile: Boolean(ua.mobile),
     osName: ua.osname,
     browserName: ua.name,
-    browserVersion: ua.version
+    browserVersion: ua.version,
+    isTablet: Boolean(ua.tablet)
   }
 }
