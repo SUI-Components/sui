@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.13.0"></a>
+# 3.13.0 (2019-11-18)
+
+
+### Features
+
+* add explanation for every rule and move to es5 trailing commas ([e848aff](https://github.com/SUI-Components/sui/commit/e848aff))
+* add new postinstall script to add needed linter config ([7d41f52](https://github.com/SUI-Components/sui/commit/7d41f52))
+* rollback trailing commas ([75a6601](https://github.com/SUI-Components/sui/commit/75a6601))
+* unify linter rules for sass and js ([10e7cd8](https://github.com/SUI-Components/sui/commit/10e7cd8))
+* upgrade dependencies ([c686f23](https://github.com/SUI-Components/sui/commit/c686f23))
+
+
+
 <a name="3.12.0"></a>
 # 3.12.0 (2019-11-13)
 
