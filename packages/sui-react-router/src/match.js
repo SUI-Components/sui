@@ -1,56 +1,64 @@
-import React from 'react'
-import reactTreeWalker from './react-tree-walker'
+import {Tree} from './utils/Tree'
+import {fromReactTreeToJSON} from './utils/react-utils'
+import {matchPattern} from './utils/PatternUtils'
 
-const fromReactTreeToJSON = root => {
-  console.log(root, !React.isValidElement(root))
-  // if (!React.isValidElement(root)) {
-  //   return null
-  // }
-  return React.Children.toArray(root.props.children).reduce((acc, child) => {
-    const {component, path, children, getComponent} = child.props
-    return [
-      ...acc,
-      {
-        ...(component && {component}),
-        ...(path && {path}),
-        ...(getComponent && {getComponent}),
-        ...(children && {
-          children: fromReactTreeToJSON(children)
-        })
+// From tree to Array
+const matchRoutes = (tree, location, remainingPathname) => {
+  if (remainingPathname === undefined) {
+    if (location.pathname.charAt(0) !== '/') {
+      location = {
+        ...location,
+        pathname: `/${location.pathname}`
       }
-    ]
-  }, [])
+    }
+    remainingPathname = location.pathname
+  }
+
+  const matches = Tree.reduce(
+    (acc, node) => {
+      let {remainingPathname, paramNames, paramValues} = acc
+      const pattern = node.path || ''
+
+      if (pattern.charAt(0) === '/') {
+        remainingPathname = location.pathname
+        paramNames = []
+        paramValues = []
+      }
+
+      const matched = matchPattern(pattern, remainingPathname)
+      if (matched) {
+        acc = {
+          components: [...acc.components, node],
+          remainingPathname: matched.remainingPathname,
+          paramNames: [...paramNames, ...matched.paramNames],
+          paramValues: [...paramValues, ...matched.paramValues]
+        }
+      }
+
+      return acc
+    },
+    {
+      remainingPathname,
+      paramNames: [],
+      paramValues: [],
+      components: []
+    },
+    tree
+  )
+
+  return matches
 }
 
-const match = ({routes, history}, cb) => {
+const match = ({routes, history, location}, cb) => {
   const json = fromReactTreeToJSON(routes)
-  console.log(json)
+  if (location) {
+    location = history.createLocation(location)
+  } else {
+    location = history.getCurrentLocation()
+  }
+
+  const matchComponents = matchRoutes(json, location)
+  console.log(matchComponents)
 }
 
 export default match
-
-/*
-[
-{
-  component: App,
-  children: [{
-    path: '/',
-    children: [
-      {
-        index: true,
-        getComponent=loadHomePage
-      },
-      {
-        path: 'list',
-        getComponent=loadListPage
-      },
-      {
-        path: 'detail/:id',
-        getComponent=loadDetailPage
-      },
-
-    ]
-  }]
-}
-]
-*/

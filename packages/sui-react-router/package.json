@@ -23,5 +23,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "history": "3.3.0",
+    "invariant": "2.2.4"
+  }
 }

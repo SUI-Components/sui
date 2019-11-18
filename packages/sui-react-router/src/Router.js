@@ -1,14 +1,15 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import {routes} from './InternalPropTypes'
 
 const Router = ({routes, history, children}) => {
   return children
 }
 
+Router.displayName = 'Router'
 Router.propTypes = {
-  routes: PropTypes.object,
+  children: routes,
   history: PropTypes.object,
-  children: PropTypes.object
+  routes
 }
 
 export default Router
