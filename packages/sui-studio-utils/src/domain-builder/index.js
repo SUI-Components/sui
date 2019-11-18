@@ -47,7 +47,7 @@ export default class DomainBuilder {
     return this
   }
 
-  build({inlineError}) {
+  build({inlineError} = {}) {
     const self = this
     const exeUseCase = useCase => params => {
       const {fail, success} = self._useCases[useCase]
