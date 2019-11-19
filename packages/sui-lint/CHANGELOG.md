@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.14.0"></a>
+# 3.14.0 (2019-11-19)
+
+
+### Bug Fixes
+
+* escape hatch for errors on script modifying package.json ([791239a](https://github.com/SUI-Components/sui/commit/791239a))
+
+
+
 <a name="3.13.0"></a>
 # 3.13.0 (2019-11-18)
 
