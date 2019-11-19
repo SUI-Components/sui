@@ -2,30 +2,36 @@ import React from 'react'
 
 import IndexRoute from '../IndexRoute'
 import Redirect from '../Redirect'
-import {UUIDGenerator} from './uuid'
 
-export const fromReactTreeToJSON = (root, id = 1) => {
+export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   if (!React.isValidElement(root)) {
     return null
   }
 
-  const {component, path, children, getComponent, from, to} = root.props
+  const {component, path, children, getComponent, id, from, to} = root.props
   const {type} = root
-  return {
-    __ID_REF__: UUIDGenerator(),
-    ...(type.displayName === Redirect.displayName && {
-      redirect: true,
-      from,
-      to
-    }),
-    ...(type.displayName === IndexRoute.displayName && {index: true}),
-    ...(component && {component}),
-    ...(path && {path}),
-    ...(getComponent && {getComponent}),
-    ...(children && {
-      children: React.Children.toArray(children).map(node =>
-        fromReactTreeToJSON(node, id + 1)
-      )
-    })
+
+  if (type.displayName === IndexRoute.displayName) {
+    if (component) parent.component = component
+    if (getComponent) parent.getComponent = getComponent
   }
+
+  const node = Object.create(null)
+  if (type.displayName === Redirect.displayName) node.redirect = true
+  if (type.displayName === Redirect.displayName) node.from = from
+  if (type.displayName === Redirect.displayName) node.path = from
+  if (type.displayName === Redirect.displayName) node.to = to
+  if (type.displayName === IndexRoute.displayName) node.index = true
+
+  if (level) node.level = level
+  if (id) node.id = id
+  if (component) node.component = component
+  if (getComponent) node.getComponent = getComponent
+  if (path) node.path = path
+  if (children)
+    node.children = React.Children.toArray(children).map(child =>
+      fromReactTreeToJSON(child, node, level + 1)
+    )
+
+  return node
 }

@@ -27,5 +27,9 @@
   "dependencies": {
     "history": "3.3.0",
     "invariant": "2.2.4"
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }

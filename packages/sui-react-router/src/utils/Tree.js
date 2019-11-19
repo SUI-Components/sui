@@ -26,6 +26,16 @@ export const Tree = {
     }
     newNode.children = node.children.map(Tree.map(mapFn))
     return newNode
-  })
+  }),
+  forEach: curry(function forEach(eachFn, node) {
+    eachFn(node)
+    if (hasChildren(node)) {
+      node.children.forEach(Tree.forEach(eachFn))
+    }
+  }),
+  tap: function(tree) {
+    Tree.forEach(node => {
+      console.log(node) // eslint-disable-line
+    }, tree)
+  }
 }
-
