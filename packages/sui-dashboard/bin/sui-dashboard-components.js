@@ -49,6 +49,7 @@ const repositories = [
 
   'frontend-hab--uilib-widgets',
   'frontend-hab--web-professional',
+  'frontend-hab--web-app',
 
   'frontend-ij--uilib-widgets'
 ]

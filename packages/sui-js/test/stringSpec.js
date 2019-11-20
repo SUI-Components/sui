@@ -3,7 +3,8 @@ import {expect} from 'chai'
 import {
   parseQueryString,
   toQueryString,
-  fromArrayToCommaQueryString
+  fromArrayToCommaQueryString,
+  getRandomString
 } from '../src/string/index'
 
 describe('@s-ui/js', () => {
@@ -26,6 +27,13 @@ describe('@s-ui/js', () => {
       const paramsArray = {a: 1, b: 2, c: [3, 4]}
       const params = 'a=1&b=2&c=3,4'
       expect(fromArrayToCommaQueryString(paramsArray)).to.deep.equal(params)
+    })
+  })
+  describe('string:getRandomString', () => {
+    it('should get a random string', () => {
+      const randomString = getRandomString()
+      expect(randomString).to.be.an('string')
+      expect(randomString).to.have.lengthOf(15)
     })
   })
 })

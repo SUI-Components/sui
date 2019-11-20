@@ -1,3 +1,5 @@
+const prettierOptions = require('./.prettierrc')
+
 function suitSelector(componentName) {
   const ns = '[a-z]{2,3}'
   const WORD = '[a-z0-9][a-zA-Z0-9]*'
@@ -16,16 +18,7 @@ module.exports = {
     'stylelint-prettier'
   ],
   rules: {
-    'prettier/prettier': [
-      true,
-      {
-        printWidth: 80,
-        tabWidth: 2,
-        singleQuote: true,
-        bracketSpacing: false,
-        useTabs: false
-      }
-    ],
+    'prettier/prettier': [true, prettierOptions],
     'plugin/selector-bem-pattern': {
       componentName: /^[a-zA-Z]+$/,
       componentSelectors: suitSelector
@@ -59,6 +52,7 @@ module.exports = {
     'selector-pseudo-class-no-unknown': true,
     'selector-pseudo-element-no-unknown': true,
     'selector-type-no-unknown': true,
+    'string-quotes': 'single',
     'string-no-newline': true,
     'unit-no-unknown': true
   }
