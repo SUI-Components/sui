@@ -52,8 +52,6 @@
       "sui"
     ]
   },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml",
-  "author": "David Almeida <davidbarna@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SUI-Components/sui.git"
@@ -62,5 +60,9 @@
     "url": "https://github.com/SUI-Components/sui/issues"
   },
   "homepage": "https://github.com/SUI-Components/sui/#readme",
-  "license": "MIT"
+  "license": "MIT",
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }
