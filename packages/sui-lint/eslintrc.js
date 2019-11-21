@@ -1,4 +1,4 @@
-const prettierOptions = require('./.prettierrc.js')
+const prettierOptions = require('./.prettierrc')
 
 const RULES = {
   OFF: 0,

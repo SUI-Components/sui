@@ -84,17 +84,24 @@ It's usefull to make your code autoformat before any commit.
 
 Steps to integrate sui-lint with an IDE:
 
-1.  Install (if needed) eslint/styleLint plugin in your IDE.
-2.  Add these lines to `package.json`:
+1.  Install (if needed) eslint/stylelint/prettier plugins in your IDE. For example, for Visual Studio Code, the recommended ones are:
+    - [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+    - [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+    - [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
+  
+2.  After install the package, it will add automatically the needed configuration to your `package.json` file. If not, make sure you add these lines:
 
 ```json
 {
   "eslintConfig": {
-    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  }
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js"
 }
 ```
 
@@ -112,63 +119,36 @@ Steps to integrate sui-lint with an IDE:
   "devDependencies": {
     "@s-ui/lint": "3"
   },
-  "eslintConfig": { "extends": "./node_modules/@s-ui/lint/eslintrc.js" },
-  "stylelint": { "extends": "./node_modules/@s-ui/lint/stylelint.config.js" },
-}
-```
-
-### VSCode and prettier
-
-Prettier is integrated in sui-lint thanks to specific eslint rules.
-If you want VSCode to format your code exactly as `sui-lint js --fix` would do, you need specific config.
-
-#### prettier + eslint + stylelint
-
-If you have installed [prettier in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) you can launch it with `CMD + Shift + P -> Format Document` over an opened file to format it with [prettier](https://github.com/prettier/prettier)
-
-By adding this line to your settings:
-```json
-{
-  "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true
-}
-```
-
-When you do `CMD + Shift + P -> Format Document` the format tool will use [`prettier-eslint`](https://github.com/prettier/prettier-eslint) [`prettier-eslint` is a dependency of [prettier-vscode](https://github.com/prettier/prettier-vscode/blob/1843acb5defac7898862a1df61cb67c7a8355d69/package.json#L204)] that will do a [`eslint --fix`](http://eslint.org/) after formatting your JavaScript file with [`prettier`](https://github.com/prettier/prettier)
-
-So this shortcut will format our files ( w/ _prettier_) according to our `sui-lint` rules.
-
-> you will need the `eslintConfig` and `stylelintconfig` properties added to the `package.json` as explained above
-
-#### Eslint extension
-Install [VSCode ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and set `eslint.autoFixOnSave` to true:
-
-```json
-{
-  "eslint.autoFixOnSave": true
-}
-```
-
-#### Stylelint extension
-Install [VSCode Stylelint extension](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint).
-
-#### Conflict with `formatOnSave`
-
-If you have prettier enabled, or the default VSCode formatter activated with `editor.formatOnSave` to true, it may conflict with the `eslint.autoFixOnSave` option.
-
-```json
-{
-  "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": false,
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
   },
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js"
 }
 ```
 
-In case you have already the `formatOnSave` property disabled but want to get the functionality working for SCSS files, you'll need to activate it for SCSS file types in order to prettier fix your problems using stylelint. For this, you have to use the next config.
+### Visual Studio Code and Prettier integration
 
-```json
+Prettier is integrated in sui-lint with some specific rules. If you want VSCode to format your code exactly as `sui-lint js --fix` would do, keep reading:
+
+#### prettier + eslint + stylelint = 🎉
+
+`CMD + Shift + P -> Preferences: Open Settings (JSON)`.
+
+Add the next config to your preferences:
+```
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
+  "eslint.autoFixOnSave": true,
 ```
+
+It will format and fix the problems of linter on saving. If you prefer to do this manually, you could avoid adding the `eslint.autoFixOnSave` and `editor.formatOnSave` configs.
