@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const definePlugin = require('./shared/define')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
+// const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const parseAlias = require('./shared/parse-alias')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
@@ -14,8 +14,9 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
 )
 
 const webpackConfig = {
-  mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
+  mode: 'development',
+  target: 'web',
   resolve: {
     alias: {
       // this alias is needed so react hooks work as expected with linked packages
@@ -38,7 +39,6 @@ const webpackConfig = {
     require.resolve('react-dev-utils/webpackHotDevClient'),
     MAIN_ENTRY_POINT
   ]),
-  target: 'web',
   output: {
     publicPath: '/'
   },
