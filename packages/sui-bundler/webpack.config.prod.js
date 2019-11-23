@@ -31,10 +31,14 @@ const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
+const createFileNameHash = () =>
+  config.onlyHash ? '[contenthash:8].js' : '[name].[contenthash:8].js'
+
 module.exports = {
+  context: path.resolve(process.cwd(), 'src'),
   devtool: sourceMap,
   mode: 'production',
-  context: path.resolve(process.cwd(), 'src'),
+  target: 'web',
   resolve: {
     alias: parseAlias(config.alias),
     extensions: ['*', '.js', '.jsx', '.json']
@@ -45,16 +49,11 @@ module.exports = {
         vendor: config.vendor
       }
     : MAIN_ENTRY_POINT,
-  target: 'web',
   output: {
     path: path.resolve(process.env.PWD, 'public'),
     publicPath: PUBLIC_PATH,
-    filename: config.onlyHash
-      ? '[contenthash:8].js'
-      : '[name].[contenthash:8].js',
-    chunkFilename: config.onlyHash
-      ? '[contenthash:8].js'
-      : '[name].[contenthash:8].js'
+    filename: createFileNameHash(),
+    chunkFilename: createFileNameHash()
   },
   optimization: {
     minimizer: [
