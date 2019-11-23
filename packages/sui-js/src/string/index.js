@@ -11,3 +11,5 @@ export {has as hasAccents, remove as removeAccents} from 'remove-accents'
 export {default as toCamelCase} from 'lodash.camelcase'
 export {default as toCapitalCase} from 'lodash.capitalize'
 export {default as toKebabCase} from 'lodash.kebabcase'
+
+export {getRandomString} from './random-string'

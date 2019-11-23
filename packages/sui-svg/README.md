@@ -1,9 +1,8 @@
 # sui-svg
 
-> Converts your SVG files into React Components
+> Converts your SVG files into React Components wrapped with [SuiAtomIcon](https://sui-components.now.sh/workbench/atom/icon/demo).
 
 Features:
-
 - CLI for building the components
 - CLI for showing up a demo locally
 
@@ -22,32 +21,42 @@ Add bundling scripts to your **package.json**
   "name": "my-awesome-package",
   "version": "1.0.0",
   "scripts": {
-    "build": "sui-svg build",
-    "start": "npm run build && sui-svg demo"
+    "prepare": "sui-svg build",
+    "start": "npm run prepare && sui-svg demo"
   }
 }
 ```
 
 ## Expected folder structure
 
-A `src` folder with all the `.svg` files to be converted inside
+A `src` folder with all the `.svg` files to be converted inside.
 
 ## Output
 
-A `lib` folder with the generated components will be created/overridden
+A `lib` folder with the generated components will be created/overridden.
 
-**⚠️ Advice:** no `index.js` will be generated inside the lib folder, each component should be imported independently for performance reasons
+**⚠️ Advice:** no `index.js` will be generated inside the lib folder, each component should be imported independently for performance reasons.
 
 ## How to use the generated lib
 
 ```jsx
-import SUIComponent from '@s-ui/react-atom-component'
-import YourIcon from 'your-svg-repo/lib/Icons/YourIcon'
+import YourIcon from 'your-svg-repo/lib/YourIcon'
 
 const YourAwesomeComponent = () =>
-  <SUIComponent icon={<YourIcon />} />
+  <div>
+    <YourIcon />
+    <p>Awesome text/<p>
+  </div>
+```
+
+Also, keep in mind, you need to import the needed styles for the icons at least once in your app:
+
+```scss
+@import "your-svg-repo/lib/index";
 ```
 
 ## Template
 
-Check out the component template in order to check its features [here](templates/)
+Every icon svg will be wrapped using an `<AtomIcon>` that means you could use [all the props accepted by the component](https://sui-components.now.sh/workbench/atom/icon/documentation/api).
+
+The wrapped code is minimal, in order to avoid performance penalties. You could check it [here](templates/).

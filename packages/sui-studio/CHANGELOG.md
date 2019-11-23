@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.6.0"></a>
+# 7.6.0 (2019-10-28)
+
+
+### Bug Fixes
+
+* fix api blank page by updating dependencies ([ea020ed](https://github.com/SUI-Components/sui/commit/ea020ed))
+
+
+
 <a name="7.5.0"></a>
 # 7.5.0 (2019-10-03)
 

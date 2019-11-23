@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.34.0"></a>
+# 5.34.0 (2019-11-06)
+
+
+### Features
+
+* add node 13 support by upgrading node-sass ([234442f](https://github.com/SUI-Components/sui/commit/234442f))
+
+
+
+<a name="5.33.0"></a>
+# 5.33.0 (2019-10-31)
+
+
+### Features
+
+* upgrade dependencies of sui-bundler ([3ac90b1](https://github.com/SUI-Components/sui/commit/3ac90b1))
+
+
+
+<a name="5.32.0"></a>
+# 5.32.0 (2019-10-28)
+
+
+### Bug Fixes
+
+* add fs as empty mock ([e7022e2](https://github.com/SUI-Components/sui/commit/e7022e2))
+
+
+
 <a name="5.31.0"></a>
 # 5.31.0 (2019-10-15)
 

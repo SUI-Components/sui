@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.10.0"></a>
+# 3.10.0 (2019-10-24)
+
+
+### Bug Fixes
+
+* rollback to old tiny-lru to avoid class usage ([cd63db6](https://github.com/SUI-Components/sui/commit/cd63db6))
+
+
+
 <a name="3.9.0"></a>
 # 3.9.0 (2019-10-23)
 

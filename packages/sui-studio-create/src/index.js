@@ -103,7 +103,7 @@ Promise.all([
   "devDependencies": {
     "@s-ui/deploy": "2",
     "@s-ui/precommit": "2",
-    "@s-ui/studio": "6",
+    "@s-ui/studio": "7",
     "husky": "0.14.3",
     "validate-commit-msg": "2.14.0"
   },
@@ -120,7 +120,9 @@ Promise.all([
   "eslintConfig": {
     "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }
 `
     )

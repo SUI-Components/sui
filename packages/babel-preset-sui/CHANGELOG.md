@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.3.0"></a>
+# 3.3.0 (2019-10-23)
+
+
+### Features
+
+* remove const with selective react hooks ([9e9903a](https://github.com/SUI-Components/sui/commit/9e9903a))
+* stop using selective loose for destructuring that was doing the opposite as ([e56d67d](https://github.com/SUI-Components/sui/commit/e56d67d))
+* upgrade dependencies ([2481223](https://github.com/SUI-Components/sui/commit/2481223))
+
+
+
 <a name="3.2.0"></a>
 # 3.2.0 (2019-07-26)
 
@@ -10,6 +22,7 @@ All notable changes to this project will be documented in this file.
 
 * add [@babel](https://github.com/babel)/plugin-proposal-nullish-coalescing-operator ([fbc0c28](https://github.com/SUI-Components/sui/commit/fbc0c28))
 * add [@babel](https://github.com/babel)/plugin-proposal-optional-chaining 🎉 ([038e577](https://github.com/SUI-Components/sui/commit/038e577))
+* upgrade dependencies ([7fbd23c](https://github.com/SUI-Components/sui/commit/7fbd23c))
 
 
 
