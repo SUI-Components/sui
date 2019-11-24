@@ -11,6 +11,7 @@ const BASE_CLASSNAME = 'sui-Test'
 
 const Test = ({open, importTest, importComponent, context}) => {
   const [failures, setFailures] = useState(0)
+  const [notFoundTest, setNotFoundTest] = useState(false)
 
   const classnames = cx(BASE_CLASSNAME, {
     [`${BASE_CLASSNAME}--open`]: open,
@@ -20,9 +21,7 @@ const Test = ({open, importTest, importComponent, context}) => {
   useEffect(() => {
     importComponent().then(module => {
       const Component = module.default || module
-      const EnhanceComponent = withContext(/* flag */ context, context)(
-        Component
-      )
+      const EnhanceComponent = withContext(context, context)(Component)
       !EnhanceComponent.displayName &&
         console.error('[sui-Test] Component without displayName')
       window[cleanDisplayName(EnhanceComponent.displayName)] = props => (
@@ -30,13 +29,22 @@ const Test = ({open, importTest, importComponent, context}) => {
           <EnhanceComponent {...props} />
         </SUIContext.Provider>
       )
-      importTest().then(() => {
-        window.mocha.run(failures => {
-          setFailures(failures)
+
+      importTest()
+        .then(() => {
+          window.mocha.run(failures => {
+            setFailures(failures)
+          })
         })
-      })
+        .catch(() => {
+          setNotFoundTest(true)
+        })
     })
   }, [context, importComponent, importTest])
+
+  if (notFoundTest) {
+    return <h1>Not found test</h1>
+  }
 
   return (
     <div className={classnames}>

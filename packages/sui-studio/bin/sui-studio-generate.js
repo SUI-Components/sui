@@ -225,7 +225,8 @@ describe('${componentInPascal}', () => {
     render(<${componentInPascal} />)
     expect(true).to.be.eql(false)
   })
-})`
+})
+`
   )
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
