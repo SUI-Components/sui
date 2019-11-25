@@ -52,7 +52,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     remainingPathname = location.pathname
   }
 
-  Tree.tap(tree)
+  // Tree.tap(tree)
 
   const match = Tree.reduce(
     (acc, node) => {
@@ -67,7 +67,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
         nodes: acc.nodes.filter(n => n.level < node.level)
       }
 
-      console.log(node.level, acc)
+      // console.log(node.level, acc)
 
       if (pattern.charAt(0) === '/') {
         remainingPathname = location.pathname

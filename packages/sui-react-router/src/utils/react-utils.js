@@ -12,6 +12,7 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   const {type} = root
 
   if (type.displayName === IndexRoute.displayName) {
+    // https://es.wikipedia.org/wiki/Mutatis_mutandis
     if (component) parent.component = component
     if (getComponent) parent.getComponent = getComponent
   }
