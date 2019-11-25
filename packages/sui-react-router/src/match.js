@@ -1,91 +1,27 @@
-import {Tree} from './utils/Tree'
+import {REPLACE} from 'history/lib/Actions'
 import {fromReactTreeToJSON} from './utils/react-utils'
-import {matchPattern} from './utils/PatternUtils'
+import {createTransitionManager} from './createTransitionManager'
 
-const checkIntegrity = nodes =>
-  !nodes.some((node, index) => node.level !== index + 1)
+const match = async ({routes, history, location}, cb) => {
+  const jsonRoutes = fromReactTreeToJSON(routes)
+  const transitionManager = createTransitionManager({history, jsonRoutes})
 
-// From tree to Array
-const matchRoutes = (tree, location, remainingPathname) => {
-  if (remainingPathname === undefined) {
-    if (location.pathname.charAt(0) !== '/') {
-      location = {
-        ...location,
-        pathname: `/${location.pathname}`
-      }
-    }
-    remainingPathname = location.pathname
-  }
+  const match = await transitionManager.match(location)
+  const {components, redirectLocation, routeInfo} = match
+  // TODO: Maybe I need do something more here.
+  // https://github.com/ReactTraining/react-router/blob/v3/modules/RouterUtils.js#L1
+  const router = history
 
-  Tree.tap(tree)
-
-  const matches = Tree.reduce(
-    (acc, node) => {
-      let {remainingPathname, paramNames, paramValues} = acc
-      const pattern = node.path || ''
-
-      if (acc.isFinished) return acc
-      if (node.index) return acc
-
-      acc = {
-        ...acc,
-        components: acc.components.filter(n => n.level < node.level)
-      }
-      console.log(node.level, acc)
-
-      if (pattern.charAt(0) === '/') {
-        remainingPathname = location.pathname
-        paramNames = []
-        paramValues = []
-      }
-
-      if (remainingPathname === '' && pattern === '') {
-        return {
-          ...acc,
-          components: [...acc.components, node]
-        }
-      }
-
-      const matched = matchPattern(pattern, remainingPathname)
-      if (matched) {
-        acc = {
-          remainingPathname: matched.remainingPathname,
-          paramNames: [...paramNames, ...matched.paramNames],
-          paramValues: [...paramValues, ...matched.paramValues],
-          components: [...acc.components, node]
-        }
-      }
-
-      if (matched?.remainingPathname === '') {
-        acc = {
-          ...acc,
-          isFinished: checkIntegrity(acc.components)
-        }
-      }
-
-      return acc
-    },
+  return cb(
+    null,
+    redirectLocation && history.createLocation(redirectLocation, REPLACE),
     {
-      remainingPathname,
-      paramNames: [],
-      paramValues: [],
-      components: [],
-      isFinished: false
-    },
-    tree
+      components,
+      router,
+      matchContext: {transitionManager, router},
+      ...routeInfo
+    }
   )
-
-  return matches
-}
-
-const match = ({routes, history, location}, cb) => {
-  const json = fromReactTreeToJSON(routes)
-  location = location
-    ? history.createLocation(location)
-    : history.getCurrentLocation()
-
-  const matchComponents = matchRoutes(json, location)
-  console.log(matchComponents)
 }
 
 export default match
