@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.0"></a>
+# 2.6.0 (2019-11-19)
+
+
+### Bug Fixes
+
+* add getRandomString function ([e460d5f](https://github.com/SUI-Components/sui/commit/e460d5f))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2019-11-14)
 
