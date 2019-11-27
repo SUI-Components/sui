@@ -63,5 +63,14 @@
     "webpack-manifest-plugin": "2.2.0",
     "webpack-node-externals": "1.7.2",
     "workbox-webpack-plugin": "4.3.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }
