@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.6.0"></a>
+# 1.6.0 (2019-11-27)
+
+
+### Bug Fixes
+
+* update if repositories ([5ee5b0a](https://github.com/SUI-Components/sui/commit/5ee5b0a))
+* update mt repositories ([3b55b70](https://github.com/SUI-Components/sui/commit/3b55b70))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2019-11-13)
 
