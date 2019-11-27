@@ -54,7 +54,6 @@ const repositories = [
 
   'frontend-ij--uilib-widgets',
 
-  'frontend-if--uilib-components',
   'frontend-if--uilib-widgets'
 ]
 
