@@ -40,7 +40,8 @@ const repositories = [
   'frontend-ma--web-app-plus',
 
   'frontend-mt--web-app',
-  'frontend-mt--uilib-widgets',
+  'frontend-mt--uilib-widgets-coches',
+  'frontend-mt--uilib-widgets-motos',
   'frontend-cf--web-app',
 
   'frontend-fc--web-server',
@@ -51,7 +52,10 @@ const repositories = [
   'frontend-hab--web-professional',
   'frontend-hab--web-app',
 
-  'frontend-ij--uilib-widgets'
+  'frontend-ij--uilib-widgets',
+
+  'frontend-if--uilib-components',
+  'frontend-if--uilib-widgets'
 ]
 
 const cloneSUIComponentsCommand = [
