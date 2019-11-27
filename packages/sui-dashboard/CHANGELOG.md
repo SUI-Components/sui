@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.7.0"></a>
+# 1.7.0 (2019-11-27)
+
+
+### Bug Fixes
+
+* fix sui dashboard bad repo ([11fd6dd](https://github.com/SUI-Components/sui/commit/11fd6dd))
+
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2019-11-27)
 
