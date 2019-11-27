@@ -52,7 +52,10 @@ const repositories = [
   'frontend-hab--web-professional',
   'frontend-hab--web-app',
 
-  'frontend-ij--uilib-widgets'
+  'frontend-ij--uilib-widgets',
+
+  'frontend-if--uilib-components',
+  'frontend-if--uilib-widgets'
 ]
 
 const cloneSUIComponentsCommand = [
