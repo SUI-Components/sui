@@ -35,5 +35,6 @@
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  }
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js"
 }
