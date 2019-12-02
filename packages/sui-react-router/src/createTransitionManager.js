@@ -1,5 +1,7 @@
 import {Tree} from './utils/Tree'
+import _isActive from './utils/isActive'
 import {matchPattern} from './utils/PatternUtils'
+import {components} from '../lib/InternalPropTypes'
 
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
@@ -26,6 +28,11 @@ const createComponents = async ({nodes, routeInfo}) => {
         return resolve(component)
       })
     })
+
+  const indexRoute = nodes.findIndex(node => node.fromIndex)
+  if (indexRoute !== -1 && indexRoute !== nodes.length - 1) {
+    nodes = [...nodes.slice(0, indexRoute), ...nodes.slice(indexRoute + 1)]
+  }
 
   const components = await Promise.all(
     nodes
@@ -125,13 +132,35 @@ const matchRoutes = async (tree, location, remainingPathname) => {
 }
 
 export const createTransitionManager = ({history, jsonRoutes}) => {
+  let state = {}
   return {
-    match(location) {
+    async match(location) {
       location = location
         ? history.createLocation(location)
         : history.getCurrentLocation()
 
-      return matchRoutes(jsonRoutes, location)
+      const {redirectLocation, routeInfo, components} = await matchRoutes(
+        jsonRoutes,
+        location
+      )
+
+      state = {
+        ...state,
+        ...routeInfo
+      }
+
+      return {redirectLocation, routeInfo, components}
+    },
+    isActive(location, indexOnly) {
+      location = history.createLocation(location)
+
+      return _isActive(
+        location,
+        indexOnly,
+        state.location,
+        state.routes,
+        state.params
+      )
     }
   }
 }

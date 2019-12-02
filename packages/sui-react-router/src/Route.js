@@ -19,4 +19,3 @@ Route.propTypes = {
 }
 
 export default Route
-

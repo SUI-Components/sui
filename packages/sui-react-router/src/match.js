@@ -10,7 +10,13 @@ const match = async ({routes, history, location}, cb) => {
   const {components, redirectLocation, routeInfo} = match
   // TODO: Maybe I need do something more here.
   // https://github.com/ReactTraining/react-router/blob/v3/modules/RouterUtils.js#L1
-  const router = history
+  const router = {
+    ...history,
+    isActive: transitionManager.isActive,
+    location: routeInfo?.location,
+    params: routeInfo?.params,
+    routes: routeInfo?.routes
+  }
 
   return cb(
     null,

@@ -15,6 +15,7 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
     // https://es.wikipedia.org/wiki/Mutatis_mutandis
     if (component) parent.component = component
     if (getComponent) parent.getComponent = getComponent
+    parent.fromIndex = true
   }
 
   const node = Object.create(null)

@@ -1,6 +1,6 @@
 import React from 'react'
 import {func, object} from 'prop-types'
-import {routes} from './InternalPropTypes'
+import {routes, component, components} from './InternalPropTypes'
 
 import RRContext from './ReactRouterContext'
 
@@ -26,29 +26,29 @@ Router.displayName = 'Router'
 Router.defaultProps = {
   render: ({components, params, router, props}) => {
     const pipeReact = components => base =>
-      components.reduce(
-        (acc, component) =>
-          React.createElement(component, {
-            ...props,
-            params,
-            router,
-            children: acc
-          }),
-        base
-      )
-    const tree = pipeReact(components)(React.Fragment)
+      components.reduceRight((acc, component) => {
+        return React.createElement(component, {
+          ...props,
+          params,
+          router,
+          children: acc
+        })
+      }, base)
+    const tree = pipeReact(components)(null)
     return tree
   }
 }
 
 Router.propTypes = {
-  history: object,
   children: routes,
-  routes, // alias for children
+  component,
+  components,
+  history: object,
+  matchContext: object,
+  params: object,
   render: func,
-
-  // PRIVATE: For client-side rehydration of server match.
-  matchContext: object
+  router: object,
+  routes // alias for children
 }
 
 export default Router
