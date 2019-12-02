@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.35.0"></a>
+# 5.35.0 (2019-12-02)
+
+
+### Bug Fixes
+
+* fix version of terser ([e58612d](https://github.com/SUI-Components/sui/commit/e58612d))
+
+
+
 <a name="5.34.0"></a>
 # 5.34.0 (2019-11-06)
 
