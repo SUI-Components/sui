@@ -2,6 +2,7 @@ import {Tree} from './utils/Tree'
 import _isActive from './utils/isActive'
 import {matchPattern} from './utils/PatternUtils'
 import {components} from '../lib/InternalPropTypes'
+import warning from './routerWarning'
 
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
@@ -132,7 +133,15 @@ const matchRoutes = async (tree, location, remainingPathname) => {
 }
 
 export const createTransitionManager = ({history, jsonRoutes}) => {
-  let state = {}
+  let state = {
+    // components,
+    // router,
+    // matchContext: {transitionManager, router},
+    // location,
+    // params,
+    // routes
+  }
+
   return {
     async match(location) {
       location = location
@@ -146,10 +155,60 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
 
       state = {
         ...state,
-        ...routeInfo
+        ...routeInfo,
+        components,
+        location
       }
 
       return {redirectLocation, routeInfo, components}
+    },
+    listen(listener) {
+      const historyListener = async location => {
+        if (state.location === location) {
+          listener(null, {params: state.params, components: state.components})
+        } else {
+          try {
+            const {redirectLocation, routeInfo, components} = await matchRoutes(
+              jsonRoutes,
+              location
+            )
+
+            if (redirectLocation) {
+              return history.replace(redirectLocation)
+            }
+
+            if (!components) {
+              warning(
+                false,
+                'Location "%s" did not match any routes',
+                location.pathname + location.search + location.hash
+              )
+            }
+
+            state = {
+              ...state,
+              ...routeInfo,
+              components,
+              location
+            }
+
+            return listener(null, state)
+          } catch (err) {
+            listener(err)
+          }
+        }
+      }
+
+      const unsubscribe = history.listen(historyListener)
+
+      if (state.location) {
+        // Picking up on a matchContext.
+        listener(null, state)
+      } else {
+        historyListener(history.getCurrentLocation())
+      }
+
+      return unsubscribe
     },
     isActive(location, indexOnly) {
       location = history.createLocation(location)

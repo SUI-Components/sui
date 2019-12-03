@@ -1,22 +1,68 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {func, object} from 'prop-types'
 import {routes, component, components} from './InternalPropTypes'
+import {createTransitionManager} from './createTransitionManager'
+import {fromReactTreeToJSON} from '../lib/utils/react-utils'
+import {createRouterObject} from './utils/RouterUtils'
 
 import RRContext from './ReactRouterContext'
 
 const Router = ({
   components,
-  router,
   children,
   routes,
   render,
   matchContext,
   params,
+  history,
+  onError,
   ...props
 }) => {
+  debugger // eslint-disable-line
+  const transitionManager =
+    matchContext?.transitionManager ??
+    createTransitionManager({history, jsonRoutes: fromReactTreeToJSON(routes)})
+  const router =
+    props?.router ??
+    createRouterObject(history, transitionManager, {
+      location: null,
+      routes: null,
+      params: null
+    })
+
+  const [state, setState] = useState({router, params, components})
+
+  useEffect(() => {
+    const unlisten = matchContext.transitionManager.listen((err, nextState) => {
+      if (err) {
+        if (onError) {
+          return onError(err)
+        }
+        throw err
+      }
+
+      const {params, components, location} = nextState
+      const nextRouter = {
+        ...state.router,
+        params,
+        location,
+        routes
+      }
+
+      setState({router: nextRouter, params, components})
+    })
+
+    return () => unlisten()
+  }, []) // eslint-disable-line
+
   return (
-    <RRContext.Provider value={{router, params}}>
-      {render({components, params, props})}
+    <RRContext.Provider value={{router: state.router, params: state.params}}>
+      {render({
+        components: state.components,
+        params: state.params,
+        router: state.router,
+        props
+      })}
     </RRContext.Provider>
   )
 }
@@ -47,6 +93,7 @@ Router.propTypes = {
   matchContext: object,
   params: object,
   render: func,
+  onError: func,
   router: object,
   routes // alias for children
 }

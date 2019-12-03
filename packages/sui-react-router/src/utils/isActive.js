@@ -137,6 +137,11 @@ export default function isActive(
     pathname = `/${pathname}`
   }
 
+  // FIXME: basecase
+  if (pathname === '/') {
+    return pathname === currentLocation.pathname
+  }
+
   if (!pathIsActive(pathname, currentLocation.pathname)) {
     // The path check is necessary and sufficient for indexOnly, but otherwise
     // we still need to check the routes.

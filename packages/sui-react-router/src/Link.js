@@ -56,10 +56,9 @@ const Link = ({
 
       event.preventDefault()
 
-      window.location.href = to
-      // router.push(resolveToLocation(to, router))
+      router.push(resolveToLocation(to, router))
     },
-    [onClick, target, to]
+    [onClick, router, target, to]
   )
 
   if (!router) {
@@ -76,9 +75,6 @@ const Link = ({
 
   const toLocation = resolveToLocation(to, router)
   props = {...props, href: router.createHref(toLocation)}
-
-  debugger // eslint-disable-line
-  router.isActive(toLocation, onlyActiveOnIndex)
 
   if (activeClassName) {
     props.className = cx(props.className, {
