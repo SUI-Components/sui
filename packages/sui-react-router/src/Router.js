@@ -18,7 +18,6 @@ const Router = ({
   onError,
   ...props
 }) => {
-  debugger // eslint-disable-line
   const transitionManager =
     matchContext?.transitionManager ??
     createTransitionManager({history, jsonRoutes: fromReactTreeToJSON(routes)})
