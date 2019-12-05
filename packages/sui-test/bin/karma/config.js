@@ -10,7 +10,7 @@ const config = {
 
   frameworks: ['mocha'],
 
-  reporters: ['spec'],
+  reporters: [],
 
   browsers: ['Chrome'],
 
@@ -50,13 +50,7 @@ const config = {
                     }
                   ]
                 ],
-                plugins: [
-                  require.resolve('babel-plugin-dynamic-import-node'),
-                  require.resolve('@babel/plugin-proposal-export-default-from'),
-                  require.resolve(
-                    '@babel/plugin-proposal-export-namespace-from'
-                  )
-                ]
+                plugins: [require.resolve('babel-plugin-istanbul')]
               }
             }
           ]
@@ -74,6 +68,9 @@ const config = {
 
 if (TARGET === 'test:ci') {
   config.reporters = ['coverage'].concat(config.reporters)
+  config.preprocessors = {
+    'src/**/*.js': ['coverage']
+  }
   config.coverageReporter = {
     dir: `${CWD}/coverage`,
     reporters: [
