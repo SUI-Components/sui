@@ -50,14 +50,7 @@ const config = {
                     }
                   ]
                 ],
-                plugins: [
-                  require.resolve('babel-plugin-istanbul'),
-                  require.resolve('babel-plugin-dynamic-import-node'),
-                  require.resolve('@babel/plugin-proposal-export-default-from'),
-                  require.resolve(
-                    '@babel/plugin-proposal-export-namespace-from'
-                  )
-                ]
+                plugins: [require.resolve('babel-plugin-istanbul')]
               }
             }
           ]
