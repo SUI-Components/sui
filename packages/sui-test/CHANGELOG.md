@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.21.0"></a>
+# 2.21.0 (2019-12-10)
+
+
+### Features
+
+* add test timeout customization ([fc0391b](https://github.com/SUI-Components/sui/commit/fc0391b))
+* timeout ([7b6de78](https://github.com/SUI-Components/sui/commit/7b6de78))
+
+
+
 <a name="2.20.0"></a>
 # 2.20.0 (2019-12-05)
 
