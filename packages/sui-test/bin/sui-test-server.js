@@ -9,6 +9,7 @@ const {serialSpawn} = require('@s-ui/helpers/cli')
 program
   .option('-I, --inspect', 'Inspect node process')
   .option('-W, --watch', 'Run in watch mode')
+  .option('-T, --timeout', 'Timeout', 2000)
   .option('-P, --pattern <pattern>', 'Path pattern to include', 'test')
   .on('--help', () => {
     console.log('  Description:')
@@ -22,7 +23,7 @@ program
   })
   .parse(process.argv)
 
-const {pattern, watch, inspect} = program
+const {pattern, watch, inspect, timeout} = program
 
 serialSpawn([
   [
@@ -32,7 +33,8 @@ serialSpawn([
       `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
       '--recursive',
       inspect && '--inspect-brk',
-      watch && '--watch'
+      watch && '--watch',
+      timeout && `--timeout ${timeout}`
     ].filter(Boolean)
   ]
 ]).catch(err => {
