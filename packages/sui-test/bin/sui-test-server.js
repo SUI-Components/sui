@@ -34,7 +34,7 @@ serialSpawn([
       '--recursive',
       inspect && '--inspect-brk',
       watch && '--watch',
-      timeout && '--timeout'
+      timeout && `--timeout ${timeout}`
     ].filter(Boolean)
   ]
 ]).catch(err => {
