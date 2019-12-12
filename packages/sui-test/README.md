@@ -81,6 +81,7 @@ npm install @s-ui/test --save-dev
 
         -I, --inspect Inspect node process
         -W, --watch  Run in watch mode
+        -T, --timeout Customize test timeout
         -P, --pattern <pattern>  Path pattern to include (default: test)
         -h, --help   output usage information
     Description:

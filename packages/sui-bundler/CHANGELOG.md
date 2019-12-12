@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.36.0"></a>
+# 5.36.0 (2019-12-04)
+
+
+### Features
+
+* remove terser pinned  version ([da16a16](https://github.com/SUI-Components/sui/commit/da16a16))
+
+
+
 <a name="5.35.0"></a>
 # 5.35.0 (2019-12-02)
 
