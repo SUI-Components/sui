@@ -1,5 +1,5 @@
 import DefaultAdapter from './adapters/default'
-import {slugify} from './slugify'
+import {slugify} from '@s-ui/js/lib/string/slugify'
 
 export default class Rosetta {
   constructor({adapter = new DefaultAdapter()} = {}) {
