@@ -73,6 +73,9 @@ const executePhoenixOnPackages = () => {
           )
         }
       })
+      .catch(err => {
+        console.error(err)
+      })
   })
 
   return queue.onIdle().then(() => logUpdate('Installed all packages'))
