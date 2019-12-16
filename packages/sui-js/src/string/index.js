@@ -13,3 +13,4 @@ export {default as toCapitalCase} from 'lodash.capitalize'
 export {default as toKebabCase} from 'lodash.kebabcase'
 
 export {getRandomString} from './random-string'
+export {slugify} from './slugify'
