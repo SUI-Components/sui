@@ -4,6 +4,13 @@ const conventionalChangelog = require('conventional-changelog')
 const config = require('./config')
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
+const PACKAGE_VERSION_INCREMENT = {
+  NOTHING: 0,
+  PATCH: 1,
+  MINOR: 2,
+  MAJOR: 3
+}
+
 const isCommitBreakingChange = commit => {
   return (
     typeof commit.footer === 'string' &&
@@ -26,17 +33,17 @@ const flatten = status =>
 
       return acc
     },
-    {increment: 0, commits: []}
+    {increment: PACKAGE_VERSION_INCREMENT.NOTHING, commits: []}
   )
 
 const check = () =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     const packagesWithChangelog = config.getScopes()
 
     const status = {}
     packagesWithChangelog.forEach(pkg => {
       status[pkg] = {
-        increment: 0, // 0 = nothing, 1 = patch, 2 = minor, 3 = major
+        increment: PACKAGE_VERSION_INCREMENT.NOTHING,
         commits: []
       }
     })
@@ -58,19 +65,25 @@ const check = () =>
             commit.type === 'perf' ||
             commit.type === 'feat'
           ) {
-            status[pkg].increment = Math.max(status[pkg].increment, 2)
+            status[pkg].increment = Math.max(
+              status[pkg].increment,
+              PACKAGE_VERSION_INCREMENT.MINOR
+            )
             toPush = commit
           }
 
           if (isCommitBreakingChange(commit)) {
-            status[pkg].increment = Math.max(status[pkg].increment, 3)
+            status[pkg].increment = Math.max(
+              status[pkg].increment,
+              PACKAGE_VERSION_INCREMENT.MAJOR
+            )
             toPush = commit
           }
           if (toPush) {
             status[pkg].commits.push(commit)
           }
           if (commit.type === 'release') {
-            status[pkg].increment = 0
+            status[pkg].increment = PACKAGE_VERSION_INCREMENT.NOTHING
             status[pkg].commits = []
           }
           cb()
