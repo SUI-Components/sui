@@ -9,7 +9,7 @@ const logUpdate = require('log-update')
 const config = require('../src/config')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 
-const DEFAULT_CHUNK = 10
+const DEFAULT_CHUNK = 5
 
 program
   .option(
