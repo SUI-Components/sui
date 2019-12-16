@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.22.0"></a>
+# 2.22.0 (2019-12-16)
+
+
+### Bug Fixes
+
+* restore spec reporter ([1c99a23](https://github.com/SUI-Components/sui/commit/1c99a23))
+
+
+
+<a name="2.21.0"></a>
+# 2.21.0 (2019-12-10)
+
+
+### Features
+
+* add test timeout customization ([fc0391b](https://github.com/SUI-Components/sui/commit/fc0391b))
+* timeout ([7b6de78](https://github.com/SUI-Components/sui/commit/7b6de78))
+
+
+
+<a name="2.20.0"></a>
+# 2.20.0 (2019-12-05)
+
+
+### Features
+
+* better config for report ([3a79cda](https://github.com/SUI-Components/sui/commit/3a79cda))
+* remove deprecated dependency ([caac087](https://github.com/SUI-Components/sui/commit/caac087))
+* remove not needed plugins for mocha server (already in sui preset) ([348d18e](https://github.com/SUI-Components/sui/commit/348d18e))
+* upgrade dependencies ([7cdac03](https://github.com/SUI-Components/sui/commit/7cdac03))
+* upgrade dependencies ([52be959](https://github.com/SUI-Components/sui/commit/52be959))
+
+
+### Performance Improvements
+
+* remove not needed plugins from config ([84eba09](https://github.com/SUI-Components/sui/commit/84eba09))
+
+
+
 <a name="2.19.0"></a>
 # 2.19.0 (2019-11-08)
 
