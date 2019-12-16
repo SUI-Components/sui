@@ -9,12 +9,16 @@ const logUpdate = require('log-update')
 const config = require('../src/config')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 
-const DEFAULT_CHUNK = 20
+const DEFAULT_CHUNK = 10
 
 program
   .option(
     '-c, --chunk <number>',
     `Execute by chunks of N packages (defaults to ${DEFAULT_CHUNK})`
+  )
+  .option(
+    '--no-root',
+    'Avoid executing the script on root folder in case you already did it'
   )
   .option(
     '--no-progress',
@@ -34,36 +38,46 @@ program
   })
   .parse(process.argv)
 
+const {audit, chunk = DEFAULT_CHUNK, progress = true, root} = program
+
+const NPM_CMD = ['npm', ['install', audit ? '--no-audit' : '']]
 const RIMRAF_CMD = [
   require.resolve('rimraf/bin'),
   ['package-lock.json', 'node_modules']
 ]
-const NPM_CMD = ['npm', ['install']]
-const {audit, chunk = DEFAULT_CHUNK, progress} = program
-const numberOfChunks = Number(chunk)
-const queue = new Queue({concurrency: chunk})
+const rootExecution = root ? [RIMRAF_CMD, NPM_CMD] : []
+
+const queue = new Queue({concurrency: +chunk})
 
 const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) {
     return
   }
 
-  config
-    .getScopesPaths()
-    .map(cwd => [
+  const scopes = config.getScopesPaths()
+
+  scopes.map(cwd => {
+    const commands = [
       [...RIMRAF_CMD, {cwd, stdio: 'ignore'}],
       [...NPM_CMD, {cwd, stdio: 'ignore'}]
-    ])
-    .map(commands =>
-      queue.add(
-        serialSpawn(commands).then(() => {
-          const packageName = basename(commands[0][2].cwd).grey
-          logUpdate(`Installed ${packageName}`)
-        })
-      )
-    )
+    ]
+
+    queue
+      .add(() => serialSpawn(commands))
+      .then(() => {
+        if (progress) {
+          const {size, pending} = queue
+          const packageName = basename(cwd).grey
+          logUpdate(
+            `Installed ${packageName}. ${size + pending}/${scopes.length}`
+          )
+        }
+      })
+  })
+
+  return queue.onIdle().then(() => logUpdate('Installed all packages'))
 }
 
-serialSpawn([RIMRAF_CMD, NPM_CMD])
+serialSpawn(rootExecution)
   .then(executePhoenixOnPackages)
   .catch(showError)
