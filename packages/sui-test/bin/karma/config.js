@@ -10,7 +10,7 @@ const config = {
 
   frameworks: ['mocha'],
 
-  reporters: [],
+  reporters: ['spec'],
 
   browsers: ['Chrome'],
 
