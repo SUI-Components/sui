@@ -3,10 +3,11 @@
 require('colors')
 const program = require('commander')
 const {basename} = require('path')
+const {default: Queue} = require('p-queue')
+const logUpdate = require('log-update')
+
 const config = require('../src/config')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
-const {splitArray} = require('@s-ui/helpers/array')
-const Listr = require('listr')
 
 const DEFAULT_CHUNK = 20
 
@@ -17,8 +18,9 @@ program
   )
   .option(
     '--no-progress',
-    'Force to not show progress of tasks (not loading icons)'
+    'Force to not show progress of tasks (perfect for CI environments)'
   )
+  .option('--no-audit', 'Avoid auditing packages for better performance')
   .on('--help', () => {
     console.log(`
   Description:
@@ -37,69 +39,29 @@ const RIMRAF_CMD = [
   ['package-lock.json', 'node_modules']
 ]
 const NPM_CMD = ['npm', ['install']]
-let {chunk = DEFAULT_CHUNK, progress} = program
-chunk = Number(chunk)
+const {audit, chunk = DEFAULT_CHUNK, progress} = program
+const numberOfChunks = Number(chunk)
+const queue = new Queue({concurrency: chunk})
 
 const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) {
     return
   }
-  let taskList = config
+
+  config
     .getScopesPaths()
     .map(cwd => [
       [...RIMRAF_CMD, {cwd, stdio: 'ignore'}],
       [...NPM_CMD, {cwd, stdio: 'ignore'}]
     ])
-    .map(commands => ({
-      title:
-        'rimraf node_modules && npm i ' +
-        ('@' + basename(commands[0][2].cwd)).grey,
-      task: () => serialSpawn(commands)
-    }))
-
-  const withChunks = !!chunk && taskList.length > chunk
-  if (withChunks) {
-    taskList = splitArray(taskList, chunk).map((group, i) => {
-      const subTitle = progress
-        ? ''
-        : '\n' + group.map(task => task.title).join('\n')
-
-      return {
-        title: `#${i + 1} group of ${group.length} packages...` + subTitle,
-        task: () => new Listr(group, {concurrent: true})
-      }
-    })
-  }
-
-  const tasks = new Listr(taskList, {
-    concurrent: !withChunks,
-    renderer: !progress ? PlainTextRenderer : null
-  })
-  return tasks.run()
-}
-
-class PlainTextRenderer {
-  constructor(tasks, options) {
-    this._tasks = tasks
-  }
-
-  render() {
-    this._tasks.forEach(task =>
-      task.subscribe(event => {
-        if (event.type === 'STATE') {
-          console.log(
-            task.isPending()
-              ? task.title + '\n' + '... work in progress ...'.yellow
-              : '... completed successfully!'.green + '\n'
-          )
-        }
-      })
+    .map(commands =>
+      queue.add(
+        serialSpawn(commands).then(() => {
+          const packageName = basename(commands[0][2].cwd).grey
+          logUpdate(`Installed ${packageName}`)
+        })
+      )
     )
-  }
-
-  end(err) {
-    err && showError(err, program)
-  }
 }
 
 serialSpawn([RIMRAF_CMD, NPM_CMD])
