@@ -2,6 +2,7 @@
 /* eslint no-console:0 */
 require('colors')
 const program = require('commander')
+const figures = require('figures')
 const {basename} = require('path')
 const {default: Queue} = require('p-queue')
 const logUpdate = require('log-update')
@@ -69,7 +70,9 @@ const executePhoenixOnPackages = () => {
           const {size, pending} = queue
           const packageName = basename(cwd).grey
           logUpdate(
-            `Installed ${packageName}. ${size + pending}/${scopes.length}`
+            `${figures.play} ${packageName}: ${size + pending} of ${
+              scopes.length
+            } packages installed`
           )
         }
       })
@@ -78,7 +81,9 @@ const executePhoenixOnPackages = () => {
       })
   })
 
-  return queue.onIdle().then(() => logUpdate('Installed all packages'))
+  return queue
+    .onIdle()
+    .then(() => logUpdate(`${figures.tick} Installed all packages`))
 }
 
 serialSpawn(rootExecution)
