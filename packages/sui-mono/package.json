@@ -21,7 +21,9 @@
     "commander": "4.0.1",
     "commitizen": "4.0.3",
     "conventional-changelog": "3.1.18",
-    "listr": "0.14.3",
+    "figures": "3.1.0",
+    "log-update": "3.3.0",
+    "p-queue": "6.2.1",
     "rimraf": "3.0.0"
   },
   "repository": {

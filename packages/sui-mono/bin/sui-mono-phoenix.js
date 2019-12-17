@@ -2,13 +2,15 @@
 /* eslint no-console:0 */
 require('colors')
 const program = require('commander')
+const figures = require('figures')
 const {basename} = require('path')
+const {default: Queue} = require('p-queue')
+const logUpdate = require('log-update')
+
 const config = require('../src/config')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
-const {splitArray} = require('@s-ui/helpers/array')
-const Listr = require('listr')
 
-const DEFAULT_CHUNK = 20
+const DEFAULT_CHUNK = 5
 
 program
   .option(
@@ -16,9 +18,14 @@ program
     `Execute by chunks of N packages (defaults to ${DEFAULT_CHUNK})`
   )
   .option(
-    '--no-progress',
-    'Force to not show progress of tasks (not loading icons)'
+    '--no-root',
+    'Avoid executing the script on root folder in case you already did it'
   )
+  .option(
+    '--no-progress',
+    'Force to not show progress of tasks (perfect for CI environments)'
+  )
+  .option('--no-audit', 'Avoid auditing packages for better performance')
   .on('--help', () => {
     console.log(`
   Description:
@@ -32,76 +39,53 @@ program
   })
   .parse(process.argv)
 
+const {audit, chunk = DEFAULT_CHUNK, progress = true, root} = program
+
+const NPM_CMD = ['npm', ['install', audit ? '--no-audit' : '']]
 const RIMRAF_CMD = [
   require.resolve('rimraf/bin'),
   ['package-lock.json', 'node_modules']
 ]
-const NPM_CMD = ['npm', ['install']]
-let {chunk = DEFAULT_CHUNK, progress} = program
-chunk = Number(chunk)
+const rootExecution = root ? [RIMRAF_CMD, NPM_CMD] : []
+
+const queue = new Queue({concurrency: +chunk})
 
 const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) {
     return
   }
-  let taskList = config
-    .getScopesPaths()
-    .map(cwd => [
+
+  const scopes = config.getScopesPaths()
+
+  scopes.map(cwd => {
+    const commands = [
       [...RIMRAF_CMD, {cwd, stdio: 'ignore'}],
       [...NPM_CMD, {cwd, stdio: 'ignore'}]
-    ])
-    .map(commands => ({
-      title:
-        'rimraf node_modules && npm i ' +
-        ('@' + basename(commands[0][2].cwd)).grey,
-      task: () => serialSpawn(commands)
-    }))
+    ]
 
-  const withChunks = !!chunk && taskList.length > chunk
-  if (withChunks) {
-    taskList = splitArray(taskList, chunk).map((group, i) => {
-      const subTitle = progress
-        ? ''
-        : '\n' + group.map(task => task.title).join('\n')
-
-      return {
-        title: `#${i + 1} group of ${group.length} packages...` + subTitle,
-        task: () => new Listr(group, {concurrent: true})
-      }
-    })
-  }
-
-  const tasks = new Listr(taskList, {
-    concurrent: !withChunks,
-    renderer: !progress ? PlainTextRenderer : null
-  })
-  return tasks.run()
-}
-
-class PlainTextRenderer {
-  constructor(tasks, options) {
-    this._tasks = tasks
-  }
-
-  render() {
-    this._tasks.forEach(task =>
-      task.subscribe(event => {
-        if (event.type === 'STATE') {
-          console.log(
-            task.isPending()
-              ? task.title + '\n' + '... work in progress ...'.yellow
-              : '... completed successfully!'.green + '\n'
+    queue
+      .add(() => serialSpawn(commands))
+      .then(() => {
+        if (progress) {
+          const {size, pending} = queue
+          const packageName = basename(cwd).grey
+          logUpdate(
+            `${figures.play} ${packageName}: ${size + pending} of ${
+              scopes.length
+            } packages installed`
           )
         }
       })
-    )
-  }
+      .catch(err => {
+        console.error(err)
+      })
+  })
 
-  end(err) {
-    err && showError(err, program)
-  }
+  return queue
+    .onIdle()
+    .then(() => logUpdate(`${figures.tick} Installed all packages`))
 }
 
-serialSpawn([RIMRAF_CMD, NPM_CMD])
+serialSpawn(rootExecution)
   .then(executePhoenixOnPackages)
   .catch(showError)
