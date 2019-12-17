@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# 2.8.0 (2019-12-13)
+
+
+### Features
+
+* add slugify to string namespace ([239fe5a](https://github.com/SUI-Components/sui/commit/239fe5a))
+* move slugify to sui-js and use this version ([74ba017](https://github.com/SUI-Components/sui/commit/74ba017))
+
+
+
+<a name="2.7.0"></a>
+# 2.7.0 (2019-11-26)
+
+
+### Features
+
+* fix the md5 url reference ([9538177](https://github.com/SUI-Components/sui/commit/9538177))
+
+
+
+<a name="2.6.0"></a>
+# 2.6.0 (2019-11-19)
+
+
+### Bug Fixes
+
+* add getRandomString function ([e460d5f](https://github.com/SUI-Components/sui/commit/e460d5f))
+
+
+
+<a name="2.5.0"></a>
+# 2.5.0 (2019-11-14)
+
+
+### Features
+
+* add isTablet stat ([ceebb5c](https://github.com/SUI-Components/sui/commit/ceebb5c))
+
+
+
+<a name="2.4.0"></a>
+# 2.4.0 (2019-11-07)
+
+
+### Features
+
+* add cookie set options ([7b46fb5](https://github.com/SUI-Components/sui/commit/7b46fb5))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2019-07-24)
 

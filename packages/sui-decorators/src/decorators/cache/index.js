@@ -14,12 +14,8 @@ const caches = {}
 const _cache = ({
   algorithm,
   fnName,
-  host,
   instance,
   original,
-  port,
-  segmentation,
-  server,
   size,
   target,
   ttl
@@ -28,7 +24,7 @@ const _cache = ({
     caches[fnName] ||
     (algorithm === ALGORITHMS.LRU
       ? new LRU({size})
-      : new Error(`[sui-decorators::cache] unknow algorithm: ${algorithm}`))
+      : new Error(`[sui-decorators::cache] unknown algorithm: ${algorithm}`))
 
   const cache = caches[fnName]
 
@@ -49,7 +45,18 @@ const _cache = ({
     }
 
     if (isPromise(cache.get(key).returns)) {
-      cache.get(key).returns.catch(() => cache.del(key))
+      cache
+        .get(key)
+        .returns.then(args => {
+          if (
+            args.__INLINE_ERROR__ &&
+            Array.isArray(args) &&
+            args[0] !== undefined
+          ) {
+            cache.del(key)
+          }
+        })
+        .catch(() => cache.del(key))
     }
 
     if (now - cache.get(key).createdAt > ttl) {
@@ -66,18 +73,20 @@ export default ({
   ttl = DEFAULT_TTL,
   server = false,
   algorithm = ALGORITHMS.LRU,
-  trackTo: host,
-  port,
-  segmentation,
   size
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
   return (target, fnName, descriptor) => {
-    const {value: fn, configurable, enumerable} = descriptor
-
+    // if we're on node but the decorator doesn't have the server flag
+    // then we ignore the usage of the decorator and thus the cache
     if (isNode && !server) {
       return descriptor
     }
+
+    const {configurable, enumerable, writable} = descriptor
+    const originalGet = descriptor.get
+    const originalValue = descriptor.value
+    const isGetter = !!originalGet
 
     // https://github.com/jayphelps/core-decorators.js/blob/master/src/autobind.js
     return Object.assign(
@@ -86,27 +95,24 @@ export default ({
         configurable,
         enumerable,
         get() {
+          const fn = isGetter ? originalGet.call(this) : originalValue
           if (this === target) {
             return fn
           }
           const _fnCached = _cache({
-            ttl: timeToLife,
-            target,
+            algorithm,
             fnName,
             instance: this,
             original: fn,
-            server,
-            algorithm,
-            host,
-            port,
-            segmentation,
-            size
+            size,
+            target,
+            ttl: timeToLife
           })
 
           Object.defineProperty(this, fnName, {
-            configurable: true,
-            writable: true,
-            enumerable: false,
+            configurable,
+            writable,
+            enumerable,
             value: _fnCached
           })
           return _fnCached

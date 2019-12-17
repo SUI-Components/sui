@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "7.5.0",
+  "version": "7.6.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -43,11 +43,11 @@
     "fs.realpath": "1.0.0",
     "gh-pages": "0.4.0",
     "hoist-non-react-statics": "3.3.0",
-    "just-debounce-it": "1.0.1",
+    "just-debounce-it": "1.1.0",
     "lodash.kebabcase": "4.1.1",
-    "normalize.css": "8.0.0",
-    "pascal-case": "2.0.0",
-    "react-docgen": "2.21.0",
+    "normalize.css": "8.0.1",
+    "pascal-case": "2.0.1",
+    "react-docgen": "4.1.1",
     "terminal-banner": "1.1.0"
   },
   "suistudio-webpack": {
@@ -63,5 +63,14 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-studio#readme"
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-studio#readme",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }

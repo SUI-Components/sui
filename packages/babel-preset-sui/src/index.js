@@ -1,8 +1,5 @@
 const cleanList = require('./clean-list')
-const {
-  DEFAULT_BROWSER_TARGETS,
-  SELECTIVE_LOOSE_REACT_HOOKS
-} = require('./defaults')
+const {DEFAULT_BROWSER_TARGETS} = require('./defaults')
 
 function getTargets({targets = {}}) {
   const {browser = DEFAULT_BROWSER_TARGETS} = targets
@@ -35,14 +32,6 @@ function plugins(api, opts = {}) {
         corejs: false,
         useESModules: true,
         regenerator: true
-      }
-    ],
-    [
-      require('@babel/plugin-transform-destructuring').default,
-      {
-        // Use loose mode for performance on selected react hooks
-        loose: false,
-        selectiveLoose: SELECTIVE_LOOSE_REACT_HOOKS
       }
     ]
   ])

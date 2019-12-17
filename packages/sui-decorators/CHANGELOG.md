@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.10.0"></a>
+# 3.10.0 (2019-10-24)
+
+
+### Bug Fixes
+
+* rollback to old tiny-lru to avoid class usage ([cd63db6](https://github.com/SUI-Components/sui/commit/cd63db6))
+
+
+
+<a name="3.9.0"></a>
+# 3.9.0 (2019-10-23)
+
+
+### Features
+
+* bump version ([4ed7163](https://github.com/SUI-Components/sui/commit/4ed7163))
+
+
+
+<a name="3.8.0"></a>
+# 3.8.0 (2019-10-23)
+
+
+### Features
+
+* allow chaining decorators ([681c1f1](https://github.com/SUI-Components/sui/commit/681c1f1))
+* remove not needed parameters ([984d03f](https://github.com/SUI-Components/sui/commit/984d03f))
+* Update README and improve it a bit ([2694271](https://github.com/SUI-Components/sui/commit/2694271))
+* Upgrade tiny-lru dependency ([f5b8567](https://github.com/SUI-Components/sui/commit/f5b8567))
+* use new import from tiny-lru ([99271c8](https://github.com/SUI-Components/sui/commit/99271c8))
+
+
+
 <a name="3.7.0"></a>
 # 3.7.0 (2019-09-10)
 

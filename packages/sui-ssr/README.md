@@ -213,6 +213,8 @@ Configs accepted:
   ```
   Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
+- **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
+
 ## Dynamic Rendering
 
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry _dynamicsURLS_ in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.

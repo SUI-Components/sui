@@ -31,13 +31,8 @@ const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const useLegacyContext =
-  typeof ssrConfig.useLegacyContext !== 'undefined'
-    ? ssrConfig.useLegacyContext
-    : true
-
 const initialFlush = res => {
-  res.type('html')
+  res.type(ssrConfig.serverContentType)
   res.flush()
 }
 
@@ -100,7 +95,7 @@ export default (req, res, next) => {
         initialData = await ssrComponentWithInitialProps({
           context: {...context, device},
           renderProps,
-          Target: useLegacyContext
+          Target: ssrConfig.useLegacyContext
             ? withAllContexts({...context, device})(RouterContext)
             : withSUIContext({...context, device})(RouterContext)
         })

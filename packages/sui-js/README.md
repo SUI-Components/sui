@@ -51,7 +51,7 @@ const smartBannerCookie = getCookie('smartbanner')
 
 // Set
 const {set: setCookie} = cookie
-const setSmartBannerCookie = setCookie('smartbanner', 1)
+const setSmartBannerCookie = setCookie('smartbanner', 1, { expires: 7, path: '' })
 ```
 
 ## events
@@ -104,10 +104,28 @@ console.log(fromArrayToCommaQueryString({userId: 1, adId: 2, products: [3, 4, 5]
 import {htmlStringToReactElement} from '@s-ui/js/lib/string'
 
 htmlStringToReactElement('<p>No more dangerouslySetInnerHTML</p>')
+
+
+import {getRandomString} from '@s-ui/js/lib/string'
+
+const randomStringLength = 6
+const randomString = getRandomString(randomStringLength)
+console.log(randomString.length) // log = 6 || 15 by default
+console.log(randomString) // qwerty
 ```
 
 ## ua-parser
-A user agent parser. Returns an object `stats` with `isMobile` and `osName`.
+A user agent parser. Returns an object `stats`
+
+```text
+{
+  browserName: <string>,
+  browserVersion: <string>,
+  isMobile: <boolean>,
+  isTablet: <boolean>,
+  osName: <string>
+}
+```
 
 ```js
 import {stats} from '@s-ui/js/lib/ua-parser'

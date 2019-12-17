@@ -3,6 +3,7 @@ import sinon from 'sinon'
 import {expect} from 'chai'
 
 import cache from '../../src/decorators/cache'
+import inlineError from '../../src/decorators/error'
 
 describe('Cache', () => {
   it('Should exist', () => {
@@ -17,12 +18,15 @@ describe('Cache', () => {
         }
 
         @cache()
+        @inlineError
         syncRndNumber() {
           return this.rnd()
         }
       }
       const buz = new Buz()
-      expect(buz.syncRndNumber()).to.be.eql(buz.syncRndNumber())
+      const firstCall = buz.syncRndNumber()
+      const sencondCall = buz.syncRndNumber()
+      expect(firstCall).to.be.eql(sencondCall)
     })
   })
 
@@ -62,6 +66,7 @@ describe('Cache', () => {
     it('return twice the same random number without params', done => {
       class Dummy {
         @cache()
+        @inlineError
         asyncRndNumber(num) {
           return new Promise(resolve => setTimeout(resolve, 100, Math.random()))
         }
@@ -79,6 +84,7 @@ describe('Cache', () => {
       let fail = true // Un poco cogido por los pelos
       class Dummy {
         @cache()
+        @inlineError
         asyncRndNumber(num) {
           const prms = !fail
             ? new Promise((resolve, reject) =>
@@ -92,7 +98,7 @@ describe('Cache', () => {
         }
       }
       const dummy = new Dummy()
-      dummy.asyncRndNumber(12).catch(firstCall => {
+      dummy.asyncRndNumber(12).then(firstCall => {
         dummy.asyncRndNumber(12).then(secondCall => {
           expect(firstCall).to.be.not.eql(secondCall)
           done()

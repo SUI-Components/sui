@@ -15,11 +15,23 @@ const config = {
   browsers: ['Chrome'],
 
   webpack: {
+    devtool: 'eval',
     mode: 'development',
     node: {
       fs: 'empty'
     },
+    // webpack has the ability to generate path info in the output bundle.
+    // However, this puts garbage collection pressure on projects that bundle thousands of modules.
+    output: {
+      pathinfo: false
+    },
     plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
+    // avoid unneded optimizations for running our tests in order to get fatest bundling time
+    optimization: {
+      removeAvailableModules: false,
+      removeEmptyChunks: false,
+      splitChunks: false
+    },
     module: {
       rules: [
         {
@@ -30,7 +42,6 @@ const config = {
               options: {
                 babelrc: false,
                 cacheDirectory: true,
-                highlightCode: true,
                 presets: [
                   [
                     require.resolve('babel-preset-sui'),
@@ -39,13 +50,7 @@ const config = {
                     }
                   ]
                 ],
-                plugins: [
-                  require.resolve('babel-plugin-dynamic-import-node'),
-                  require.resolve('@babel/plugin-proposal-export-default-from'),
-                  require.resolve(
-                    '@babel/plugin-proposal-export-namespace-from'
-                  )
-                ]
+                plugins: [require.resolve('babel-plugin-istanbul')]
               }
             }
           ]
@@ -63,6 +68,9 @@ const config = {
 
 if (TARGET === 'test:ci') {
   config.reporters = ['coverage'].concat(config.reporters)
+  config.preprocessors = {
+    'src/**/*.js': ['coverage']
+  }
   config.coverageReporter = {
     dir: `${CWD}/coverage`,
     reporters: [

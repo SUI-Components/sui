@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="3.8.0"></a>
+# 3.8.0 (2019-11-19)
+
+
+### Bug Fixes
+
+* make it work without config ([124dc7c](https://github.com/SUI-Components/sui/commit/124dc7c))
+
+
+
 <a name="3.7.0"></a>
 # 3.7.0 (2019-09-12)
 
