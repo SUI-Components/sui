@@ -63,17 +63,17 @@
     padding: 8px 32px;
     text-decoration: none;
     text-transform: lowercase;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
 
     &:hover {
-      background-color: rgba($c-primary, .05);
+      background-color: rgba($c-primary, 0.05);
       border-bottom-color: $c-primary;
       color: $c-primary;
     }
 
     &--active {
-      background-color: rgba($c-primary, .1);
+      background-color: rgba($c-primary, 0.1);
       border-bottom-color: darken($c-primary, 10%);
       color: darken($c-primary, 10%);
       pointer-events: none;

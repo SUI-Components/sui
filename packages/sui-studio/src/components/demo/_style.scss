@@ -11,7 +11,7 @@
     @include breakpoint-from(s) {
       bottom: auto;
       top: 8px;
-    };
+    }
   }
 
   &-fullScreenButton {
@@ -19,7 +19,7 @@
     @include breakpoint-from(s) {
       bottom: auto;
       top: 65px;
-    };
+    }
   }
 
   &-code {
