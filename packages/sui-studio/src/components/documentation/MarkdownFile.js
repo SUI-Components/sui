@@ -9,6 +9,7 @@ export default function MarkdownFile({file, params}) {
   useEffect(
     function() {
       tryRequireMarkdown({...params, file}).then(setContent)
+      import('./markdown.css')
     },
     [params, file]
   )
