@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import {Component} from 'react'
+import {useEffect} from 'react'
 
 const createLinkElement = () => {
   const linkElement = document.createElement('link')
@@ -9,24 +9,24 @@ const createLinkElement = () => {
   return linkElement
 }
 
-export default class Style extends Component {
-  static propTypes = {
-    children: PropTypes.string
-  }
+export default function Style({children}) {
+  useEffect(
+    function() {
+      const linkElement = createLinkElement()
 
-  _linkElement = createLinkElement()
+      const blob = new window.Blob([children], {type: 'text/css'})
+      const oldSrc = linkElement.href
+      linkElement.href = window.URL.createObjectURL(blob)
+      oldSrc && window.URL.createObjectURL(blob)
 
-  componentWillUnmount() {
-    this._linkElement.disabled = true
-  }
+      return () => linkElement.parentNode.removeChild(linkElement)
+    },
+    [children]
+  )
 
-  render() {
-    // https://github.com/webpack-contrib/style-loader/blob/master/lib/addStyles.js
-    const blob = new window.Blob([this.props.children], {type: 'text/css'})
-    const oldSrc = this._linkElement.href
-    this._linkElement.href = window.URL.createObjectURL(blob)
-    oldSrc && window.URL.createObjectURL(blob)
+  return null
+}
 
-    return null
-  }
+Style.propTypes = {
+  children: PropTypes.string
 }
