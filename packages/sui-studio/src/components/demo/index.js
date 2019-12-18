@@ -33,6 +33,10 @@ const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
 export default class Demo extends Component {
   static async bootstrapWith(demo, {category, component, style, themes}) {
+    demo.setState({
+      exports: {default: null}
+    })
+
     const [
       exports,
       playground,
@@ -141,6 +145,7 @@ export default class Demo extends Component {
       ctxt = {},
       ctxtSelectedIndex,
       ctxtType,
+      DemoComponent,
       events,
       exports,
       isCodeOpen,
@@ -148,15 +153,12 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      themeSelectedIndex,
-      DemoComponent
+      themeSelectedIndex
     } = this.state
 
-    const Base = exports.default
+    const {default: Base} = exports
 
-    if (!Base) {
-      return <h1>Loading...</h1>
-    }
+    if (!Base) return null
 
     // check if is a normal component or it's wrapped with a React.memo method
     const ComponentToRender = Base.type ? Base.type : Base
