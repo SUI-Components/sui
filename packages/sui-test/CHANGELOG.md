@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.22.0"></a>
+# 2.22.0 (2019-12-16)
+
+
+### Bug Fixes
+
+* restore spec reporter ([1c99a23](https://github.com/SUI-Components/sui/commit/1c99a23))
+
+
+
 <a name="2.21.0"></a>
 # 2.21.0 (2019-12-10)
 

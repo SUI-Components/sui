@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/i18n",
-  "version": "1.18.0",
+  "version": "1.19.0",
   "description": "> Isomorphic i18n service for browser and node.",
   "main": "lib/",
   "scripts": {
@@ -12,7 +12,8 @@
   "author": "Enablers Frontend",
   "license": "ISC",
   "dependencies": {
-    "node-polyglot": "0.4.3"
+    "node-polyglot": "0.4.3",
+    "@s-ui/js": "2"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",

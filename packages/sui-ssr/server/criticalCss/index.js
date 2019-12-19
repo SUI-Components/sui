@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import routes from 'routes'
 import {match} from 'react-router'
 import https from 'https'
@@ -14,39 +15,37 @@ const generateMinimalCSSHash = routes => {
   }, '')
 }
 
-export default criticalCSS => (req, res, next) => {
-  if (!criticalCSS || process.env.DISABLE_CRITICAL_CSS === 'true') {
+const logMessage = message => NODE_ENV !== PRODUCTION && console.log(message)
+
+export default config => (req, res, next) => {
+  if (!config || process.env.DISABLE_CRITICAL_CSS === 'true') {
     return next()
   }
 
   if (
-    criticalCSS &&
-    criticalCSS.blackListURLs &&
-    Array.isArray(criticalCSS.blackListURLs) &&
-    criticalCSS.blackListURLs.some(regex => req.url.match(regex))
+    config &&
+    config.blackListURLs &&
+    Array.isArray(config.blackListURLs) &&
+    config.blackListURLs.some(regex => req.url.match(regex))
   ) {
     return next()
   }
 
   const ua = parser(req.get('User-Agent'))
   const urlRequest =
-    (process.env.CRITICAL_CSS_PROTOCOL ||
-      criticalCSS.protocol ||
-      req.protocol) +
+    (process.env.CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol) +
     ':/' +
-    (process.env.CRITICAL_CSS_HOST || criticalCSS.host || req.hostname) +
+    (process.env.CRITICAL_CSS_HOST || config.host || req.hostname) +
     req.url
-
   const type = ua.device.type
   const deviceTypes = {
     desktop: 'd',
     tablet: 't',
     mobile: 'm'
   }
-
   const device = deviceTypes[type] || deviceTypes.desktop
-
   const {url} = req
+
   match(
     {routes, location: url},
     async (error, redirectLocation, renderProps) => {
@@ -62,28 +61,23 @@ export default criticalCSS => (req, res, next) => {
       const criticalCSS = __CACHE__[hash]
 
       if (!criticalCSS) {
-        NODE_ENV !== PRODUCTION &&
-          console.log(
-            'Generation Critical CSS for -> ',
-            urlRequest,
-            'with hash: ',
-            hash
-          )
+        logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
-        https.get(serviceRequestURL, res => {
+        const headers = config.customHeaders
+
+        https.get(serviceRequestURL, {...headers}, res => {
           let css = ''
           if (res.statusCode !== 200) {
-            NODE_ENV !== PRODUCTION &&
-              console.log('No 200 request, statusCode:', res.statusCode)
+            logMessage(`No 200 request, statusCode: ${res.statusCode}`)
+
             return
           }
           res.on('data', data => {
             css += data
           })
           res.on('end', () => {
-            NODE_ENV !== PRODUCTION &&
-              console.log(`Add cache entry for ${hash}`)
+            logMessage(`Add cache entry for ${hash}`)
             __CACHE__[hash] = css
           })
         })
