@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import routes from 'routes'
 import {match} from 'react-router'
 import https from 'https'
@@ -13,6 +14,8 @@ const generateMinimalCSSHash = routes => {
     return acc
   }, '')
 }
+
+const logMessage = message => NODE_ENV !== PRODUCTION && console.log(message)
 
 export default criticalCSS => (req, res, next) => {
   if (!criticalCSS || process.env.DISABLE_CRITICAL_CSS === 'true') {
@@ -62,28 +65,23 @@ export default criticalCSS => (req, res, next) => {
       const criticalCSS = __CACHE__[hash]
 
       if (!criticalCSS) {
-        NODE_ENV !== PRODUCTION &&
-          console.log(
-            'Generation Critical CSS for -> ',
-            urlRequest,
-            'with hash: ',
-            hash
-          )
+        logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
-        https.get(serviceRequestURL, res => {
+        const headers = criticalCSS.customHeaders
+
+        https.get(serviceRequestURL, {...headers}, res => {
           let css = ''
           if (res.statusCode !== 200) {
-            NODE_ENV !== PRODUCTION &&
-              console.log('No 200 request, statusCode:', res.statusCode)
+            logMessage(`No 200 request, statusCode: ${res.statusCode}`)
+
             return
           }
           res.on('data', data => {
             css += data
           })
           res.on('end', () => {
-            NODE_ENV !== PRODUCTION &&
-              console.log(`Add cache entry for ${hash}`)
+            logMessage(`Add cache entry for ${hash}`)
             __CACHE__[hash] = css
           })
         })
