@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.19.0"></a>
+# 1.19.0 (2019-12-13)
+
+
+### Features
+
+* move slugify to sui-js and use this version ([74ba017](https://github.com/SUI-Components/sui/commit/74ba017))
+
+
+
 <a name="1.18.0"></a>
 # 1.18.0 (2019-07-01)
 

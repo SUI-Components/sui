@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# 2.8.0 (2019-12-13)
+
+
+### Features
+
+* add slugify to string namespace ([239fe5a](https://github.com/SUI-Components/sui/commit/239fe5a))
+* move slugify to sui-js and use this version ([74ba017](https://github.com/SUI-Components/sui/commit/74ba017))
+
+
+
+<a name="2.7.0"></a>
+# 2.7.0 (2019-11-26)
+
+
+### Features
+
+* fix the md5 url reference ([9538177](https://github.com/SUI-Components/sui/commit/9538177))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2019-11-19)
 
