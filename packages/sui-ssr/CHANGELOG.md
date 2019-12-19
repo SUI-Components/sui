@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.32.0 (2019-12-19)
+
+
+### Bug Fixes
+
+* avoid using the same name for different variables ([2001341](https://github.com/SUI-Components/sui/commit/20013412dc3e1780e7d2b973c088d0201d29a637))
+
+
+
 # 5.31.0 (2019-12-19)
 
 
