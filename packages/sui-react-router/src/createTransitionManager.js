@@ -3,6 +3,7 @@ import _isActive from './utils/isActive'
 import {matchPattern} from './utils/PatternUtils'
 import {components} from '../lib/InternalPropTypes'
 import warning from './routerWarning'
+import createMemoryHistory from './createMemoryHistory'
 
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
@@ -132,7 +133,11 @@ const matchRoutes = async (tree, location, remainingPathname) => {
   return {routeInfo, components}
 }
 
-export const createTransitionManager = ({history, jsonRoutes}) => {
+export const createTransitionManager = ({
+  history: externalHistory,
+  jsonRoutes
+}) => {
+  const history = externalHistory || createMemoryHistory()
   let state = {
     // components,
     // router,
