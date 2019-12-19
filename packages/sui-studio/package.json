@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "7.6.0",
+  "version": "7.6.0-beta.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,6 @@
   },
   "scripts": {
     "phoenix": "npx rimraf node_modules && npm it",
-    "up": "updtr --test-stdout --save-exact",
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
     "lint": "npm run lint:js && npm run lint:sass"
@@ -21,8 +20,7 @@
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/deploy": "2",
-    "updtr": "0.2.0"
+    "@s-ui/deploy": "2"
   },
   "dependencies": {
     "@s-ui/bundler": "5",
