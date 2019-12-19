@@ -1,7 +1,8 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
 import routes from 'routes'
-import {RouterContext, match} from 'react-router'
+import match from '@s-ui/react-router/lib/match'
+import Router from '@s-ui/react-router/lib/Router'
 import Helmet from 'react-helmet'
 import {
   createServerContextFactoryParams,
@@ -96,8 +97,8 @@ export default (req, res, next) => {
           context: {...context, device},
           renderProps,
           Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(RouterContext)
-            : withSUIContext({...context, device})(RouterContext)
+            ? withAllContexts({...context, device})(Router)
+            : withSUIContext({...context, device})(Router)
         })
       } catch (err) {
         return next(err)
