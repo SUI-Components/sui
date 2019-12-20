@@ -19,7 +19,6 @@ const DEFAULT_CHUNK = 5
 const SINGLE_CHUNK = 1
 
 const CI_FLAGS = [
-  'ignore-scripts',
   'loglevel=error',
   'no-audit',
   'no-fund',
