@@ -65,8 +65,11 @@ export default config => (req, res, next) => {
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
         const headers = config.customHeaders
+        const options = {
+          ...(headers && {headers})
+        }
 
-        https.get(serviceRequestURL, {...headers}, res => {
+        https.get(serviceRequestURL, options, res => {
           let css = ''
           if (res.statusCode !== 200) {
             logMessage(`No 200 request, statusCode: ${res.statusCode}`)
