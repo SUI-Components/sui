@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.46.0 (2019-12-20)
+
+
+### Bug Fixes
+
+* add needed scripts flag ([300830c](https://github.com/SUI-Components/sui/commit/300830c1792d3b44cab8a266ee600cfedd07ed48))
+* remove bin-links flag that's breaking some deployments ([8822812](https://github.com/SUI-Components/sui/commit/882281212b8c88289ea9cac05fb79565e98bc977))
+
+
+### Features
+
+* add new --ci flag focused on ci installs with fixes and optimizations ([cc2252e](https://github.com/SUI-Components/sui/commit/cc2252e84cbd3b8191320b66a40a9f78e0c9664b))
+* dont show progress on ci ([abe55aa](https://github.com/SUI-Components/sui/commit/abe55aa5e6c94f592283704f7785870f25da02c7))
+* install execa dependency ([d8b83c4](https://github.com/SUI-Components/sui/commit/d8b83c4836c7b771422b348b45e93a420140b6f5))
+
+
+
 # 1.45.0 (2019-12-17)
 
 
