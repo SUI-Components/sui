@@ -122,7 +122,7 @@ const executePhoenixOnPackages = () => {
     queue
       .add(() => installPackages({cwd}))
       .then(() => {
-        if (progress) {
+        if (progress && !ci) {
           const {size, pending} = queue
           logUpdate(
             `${figures.play} ${packageName}: ${size + pending} of ${
