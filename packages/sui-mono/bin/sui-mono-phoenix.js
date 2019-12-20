@@ -22,7 +22,6 @@ const CI_FLAGS = [
   'ignore-scripts',
   'loglevel=error',
   'no-audit',
-  'no-bin-links',
   'no-fund',
   'no-optional',
   'no-package-lock',
