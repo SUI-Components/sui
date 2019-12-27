@@ -8,7 +8,7 @@ export default ({context, routeInfo}) => Page => {
   const ClientPage = props => {
     const [{initialProps, isLoading}, setState] = useState({
       initialProps: {},
-      isLoading: false
+      isLoading: true
     })
 
     useEffect(function() {
