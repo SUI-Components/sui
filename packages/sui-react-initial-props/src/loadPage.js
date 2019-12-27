@@ -1,10 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
+import React, {useContext} from 'react'
+import InitialPropsContext from './initialPropsContext'
 import withInitialProps from './withInitialProps'
 import createClientContextFactoryParams from './createClientContextFactoryParams'
 
 const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
+
+console.log('new')
 
 const createUniversalPage = (contextFactory, routeInfo) => ({
   default: Page
@@ -33,12 +34,14 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
         .then(context => withInitialProps({context, routeInfo})(Page))
     )
   }
-  // we're in the server, so return just the component and pass the initialProps from the context
-  const ServerPage = (props, {initialProps = {}}) => (
-    <Page {...props} {...initialProps} />
-  )
-  // recover the initialProps if in the server we have retrieved them
-  ServerPage.contextTypes = {initialProps: PropTypes.object}
+  // we're in the server: Create a component that gets the initialProps from context
+  // this context has been created on the `ssrWithComponentWithInitialProps`
+  const ServerPage = props => {
+    const {initialProps} = useContext(InitialPropsContext)
+    console.log({initialProps})
+    return <Page {...props} {...initialProps} />
+  }
+  console.log('created server page')
   // recover the displayName from the original page
   ServerPage.displayName = Page.displayName
   // detect if the page has getInitialProps and wrap it with the routeInfo
