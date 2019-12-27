@@ -5,8 +5,6 @@ import createClientContextFactoryParams from './createClientContextFactoryParams
 
 const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
 
-console.log('new')
-
 const createUniversalPage = (contextFactory, routeInfo) => ({
   default: Page
 }) => {
@@ -22,7 +20,7 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
       // make a copy of the content safely
       const initialProps = {...window.__INITIAL_PROPS__}
       // remove the variable of the window before returning the component
-      delete window.__INITIAL_PROPS__
+      window.__INITIAL_PROPS__ = undefined
       // resolve the promise with the initialProps passed to the client
       return Promise.resolve(props => <Page {...initialProps} {...props} />)
     }
@@ -38,10 +36,8 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
   // this context has been created on the `ssrWithComponentWithInitialProps`
   const ServerPage = props => {
     const {initialProps} = useContext(InitialPropsContext)
-    console.log({initialProps})
     return <Page {...props} {...initialProps} />
   }
-  console.log('created server page')
   // recover the displayName from the original page
   ServerPage.displayName = Page.displayName
   // detect if the page has getInitialProps and wrap it with the routeInfo
