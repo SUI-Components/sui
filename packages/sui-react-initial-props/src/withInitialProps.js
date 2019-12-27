@@ -19,7 +19,7 @@ export default ({context, routeInfo}) => Page => {
         .catch(error => {
           setState({initialProps: {error}, isLoading: false})
         })
-    })
+    }, [])
 
     const renderLoading = () => {
       // check if the page has a renderLoading method, if not, just render nothing
