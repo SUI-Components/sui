@@ -106,8 +106,8 @@ const execute = (cmd, {cwd, stdin}) => {
   return execa(command, args, {cwd, stdin, stderr: 'inherit'})
 }
 
-const concurrency = ci ? SINGLE_CHUNK : chunk
-const queue = new Queue({concurrency: ci ? SINGLE_CHUNK : chunk})
+const concurrency = ci ? SINGLE_CHUNK : Number(chunk)
+const queue = new Queue({concurrency})
 console.log(`Using concurrency of: ${concurrency}`)
 
 const executePhoenixOnPackages = () => {
