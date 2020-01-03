@@ -6,10 +6,6 @@
   "bin": {
     "sui-studio": "./bin/sui-studio.js"
   },
-  "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib"
-  },
   "keywords": [
     "SUIComponents",
     "schibsted",
@@ -18,7 +14,6 @@
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7",
     "babel-preset-sui": "3",
     "@s-ui/mono": "1"
   },
