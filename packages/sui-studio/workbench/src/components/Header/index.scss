@@ -4,6 +4,14 @@
   justify-content: center;
   flex-direction: column;
 
+  &-link {
+    color: #09f;
+    font-size: 12px;
+    padding-left: 8px;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+
   &-title {
     display: block;
     font-weight: 100;
