@@ -5,7 +5,7 @@ import Tab from './Tab'
 
 import {isEmptyObject} from '../utils'
 
-const ContextButtons = ({ctxt, onContextChange, selected}) => {
+const ContextButtons = ({ctxt, onContextChange, selected = 0}) => {
   if (isEmptyObject(ctxt)) {
     return null
   }
@@ -32,7 +32,4 @@ ContextButtons.propTypes = {
   selected: PropTypes.number
 }
 
-ContextButtons.defaultProps = {
-  selected: 0
-}
 export default ContextButtons
