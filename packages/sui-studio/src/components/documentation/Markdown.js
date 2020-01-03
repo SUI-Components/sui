@@ -4,7 +4,7 @@ import snarkdown from '../../snarkdown'
 
 export default function Markdown({content}) {
   return (
-    Boolean(content) && (
+    content && (
       <div
         className="markdown-body"
         dangerouslySetInnerHTML={{__html: snarkdown(content)}}

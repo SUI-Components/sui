@@ -1,10 +1,9 @@
 /* eslint import/no-webpack-loader-syntax:0 */
 import React from 'react'
 import PropTypes from 'prop-types'
+import SUIContext from '@s-ui/react-context'
 
 import Preview from '../../../../src/components/preview'
-
-import SUIContext from '@s-ui/react-context'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import Style from '../../../../src/components/style'
 import When from '../../../../src/components/when'
@@ -42,6 +41,8 @@ class Raw extends React.PureComponent {
     actualContext: this.props.actualContext || 'default',
     actualStyle: this.props.actualStyle || 'default'
   }
+
+  handleChangeCodeMirror = playground => this.setState({playground})
 
   render() {
     const {playground, actualContext, actualStyle} = this.state
@@ -90,8 +91,6 @@ class Raw extends React.PureComponent {
       </div>
     )
   }
-
-  handleChangeCodeMirror = playground => this.setState({playground})
 }
 
 export default Raw
