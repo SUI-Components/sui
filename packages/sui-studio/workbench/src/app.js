@@ -63,25 +63,16 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
   }, {})
 
   const {raw} = params
+  const ComponentToRender = raw ? Raw : Root
   ReactDOM.render(
-    !raw ? (
-      <Root
-        contexts={contexts}
-        themes={{...themes, default: defaultStyle.default}}
-        componentID={__COMPONENT_ID__}
-        demo={DemoComponent}
-        demoStyles={demoStyles}
-      />
-    ) : (
-      <Raw
-        contexts={contexts}
-        themes={{...themes, default: defaultStyle.default}}
-        componentID={__COMPONENT_ID__}
-        demo={DemoComponent}
-        demoStyles={demoStyles}
-        {...params}
-      />
-    ),
+    <ComponentToRender
+      contexts={contexts}
+      themes={{...themes, default: defaultStyle.default}}
+      componentID={__COMPONENT_ID__}
+      demo={DemoComponent}
+      demoStyles={demoStyles}
+      {...params}
+    />,
     document.getElementById('app')
   )
 })()
