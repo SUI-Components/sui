@@ -4,12 +4,12 @@ import Markdown from './Markdown'
 import {tryRequireMarkdown} from '../tryRequire'
 
 export default function MarkdownFile({file, params}) {
-  const [content, setContent] = useState(false)
+  const [content, setContent] = useState(null)
 
   useEffect(
     function() {
       tryRequireMarkdown({...params, file}).then(setContent)
-      import('./markdown.css')
+      import('./markdown.css') // eslint-disable-line
     },
     [params, file]
   )
