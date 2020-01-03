@@ -8,6 +8,15 @@
     height: 100%;
   }
 
+  &-iframe {
+    background-color: #fff;
+    border: 1px solid gray;
+    display: block;
+    margin: 10px auto;
+    overflow: scroll;
+    zoom: 1;
+  }
+
   &-top {
     padding-bottom: 8px;
     height: 98px;
