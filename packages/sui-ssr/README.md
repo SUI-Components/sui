@@ -193,9 +193,10 @@ Configs accepted:
 
 - **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
 
-  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the micriservice for generate the CriticalCSS
-  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the micriservice for generate the CriticalCSS
-  - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of urls. If some of this URLs match with the current page url. this feature will be disabled for the page. That is usefull the enabled CriticalCSS in your site but not in one or two pages.
+  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the microservice for generating the Critical CSS.
+  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the microservice for generating the Critical CSS.
+  - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
+  - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
 
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
 
