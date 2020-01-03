@@ -8,9 +8,7 @@ const executeUseCase = ({domain, useCase, params}) => {
 }
 
 const EventsButtons = ({events, domain}) => {
-  if (!domain) {
-    return null
-  }
+  if (!domain || !events.length) return null
 
   return (
     <Tabs title="Events">

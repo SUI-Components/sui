@@ -4,9 +4,7 @@ import Tabs from './Tabs'
 import Tab from './Tab'
 
 const ThemesButtons = ({themes, onThemeChange, selected}) => {
-  if (themes.length === 0) {
-    return null
-  }
+  if (!themes.length) return null
 
   return (
     <Tabs title="Theme">
