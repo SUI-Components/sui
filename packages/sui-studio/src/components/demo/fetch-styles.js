@@ -15,7 +15,7 @@ const reqComponentsSCSS = require.context(
 export const themesFor = ({category, component}) =>
   reqThemePlayGround
     .keys()
-    .filter(p => p.includes(`${category}/${component}`))
+    .filter(p => p.includes(`${category}/${component}/`))
     .map(p => p.replace(`./${category}/${component}/themes/`, ''))
     .map(p => p.replace('.scss', ''))
 
