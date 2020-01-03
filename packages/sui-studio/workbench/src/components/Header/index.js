@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Header = ({children, componentID}) => (
   <header className="Header">
-    <h1 className="Header-title">SUIStudio workbench ({`${componentID}`})</h1>
+    <h1 className="Header-title">{componentID}</h1>
     <div className="Header-content">{children}</div>
   </header>
 )
