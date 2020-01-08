@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.33.0 (2019-12-20)
+
+
+### Bug Fixes
+
+* send custom headers properly inside an options object ([1cacef4](https://github.com/SUI-Components/sui/commit/1cacef465f24b2b482482be0ae457681c0498982))
+
+
+
 # 5.32.0 (2019-12-19)
 
 

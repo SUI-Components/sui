@@ -1,17 +1,10 @@
 {
   "name": "@s-ui/studio",
-  "version": "7.6.0",
+  "version": "7.7.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
     "sui-studio": "./bin/sui-studio.js"
-  },
-  "scripts": {
-    "phoenix": "npx rimraf node_modules && npm it",
-    "up": "updtr --test-stdout --save-exact",
-    "lint:js": "linting-rules js",
-    "lint:sass": "linting-rules sass",
-    "lint": "npm run lint:js && npm run lint:sass"
   },
   "keywords": [
     "SUIComponents",
@@ -20,34 +13,29 @@
   ],
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@s-ui/deploy": "2",
-    "updtr": "0.2.0"
-  },
   "dependencies": {
+    "@babel/standalone": "7",
     "@s-ui/bundler": "5",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "@s-ui/react-context": "1",
-    "bundle-loader": "0.5.4",
-    "classnames": "2.2.5",
-    "codemirror": "5.36.0",
-    "colors": "1.1.2",
-    "commander": "2.9.0",
+    "bundle-loader": "0.5.6",
+    "classnames": "2.2.6",
+    "codemirror": "5.50.2",
+    "colors": "1.4.0",
+    "commander": "4.0.1",
     "cpx": "1.5.0",
-    "cross-env": "2.0.0",
     "css-content-loader": "1.0.0",
-    "deepmerge": "0.2.10",
-    "fs-extra": "4.0.0",
+    "deepmerge": "4.2.2",
+    "fs-extra": "8.1.0",
     "fs.realpath": "1.0.0",
-    "gh-pages": "0.4.0",
-    "hoist-non-react-statics": "3.3.0",
+    "hoist-non-react-statics": "3.3.1",
     "just-debounce-it": "1.1.0",
     "lodash.kebabcase": "4.1.1",
     "normalize.css": "8.0.1",
-    "pascal-case": "2.0.1",
-    "react-docgen": "4.1.1",
+    "pascal-case": "3.1.1",
+    "react-docgen": "5.0.0",
     "terminal-banner": "1.1.0"
   },
   "suistudio-webpack": {
