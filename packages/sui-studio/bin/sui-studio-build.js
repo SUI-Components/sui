@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
+const program = require('commander')
 const {serialSpawn} = require('@s-ui/helpers/cli')
 const {join} = require('path')
 const fs = require('fs-extra')
@@ -10,11 +11,25 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const bundlerBuildPath = require.resolve('@s-ui/bundler/bin/sui-bundler-build')
 
+program
+  .option('--experimental-test', 'Display test runner result')
+  .parse(process.argv)
+
 serialSpawn([
   [
     bundlerBuildPath,
     ['-C', '--context', join(__dirname, '..', 'src')],
-    {shell: false, env: process.env}
+    {
+      shell: false,
+      env: {
+        ...process.env,
+        ...{
+          __EXPERIMENTAL_TEST__: JSON.stringify(
+            Boolean(program.experimentalTest)
+          )
+        }
+      }
+    }
   ]
 ])
   .then(() => fs.copy('public/index.html', 'public/200.html'))
