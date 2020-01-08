@@ -35,7 +35,7 @@
     "lodash.kebabcase": "4.1.1",
     "normalize.css": "8.0.1",
     "pascal-case": "3.1.1",
-    "react-docgen": "5.0.0",
+    "react-docgen": "5.1.0",
     "terminal-banner": "1.1.0"
   },
   "suistudio-webpack": {
