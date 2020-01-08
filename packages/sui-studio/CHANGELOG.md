@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.8.0 (2020-01-08)
+
+
+### Bug Fixes
+
+* correct usage of pascal-case package ([456f236](https://github.com/SUI-Components/sui/commit/456f2365d7c95c093843bc652631fd164aedd3db))
+
+
+
 # 7.7.0 (2020-01-07)
 
 
