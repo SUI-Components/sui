@@ -81,21 +81,20 @@ export default function Root({componentID, contexts = {}, themes}) {
           src={iframeSrc}
           scrolling="yes"
         />
-
-        <When value={__EXPERIMENTAL_TEST__}>
-          {() => (
-            <div className="Root-test">
-              <Test
-                open
-                context={contexts[actualContext]}
-                importComponent={importComponent}
-                importTest={importTest}
-              />
-            </div>
-          )}
-        </When>
       </div>
-      <div className="Root-bottom" />
+
+      <When value={__EXPERIMENTAL_TEST__}>
+        {() => (
+          <div className="Root-test">
+            <Test
+              open
+              context={contexts[actualContext]}
+              importComponent={importComponent}
+              importTest={importTest}
+            />
+          </div>
+        )}
+      </When>
     </div>
   )
 }

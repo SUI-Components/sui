@@ -12,10 +12,24 @@
     zoom: 1;
   }
 
+  &-test {
+    background: #fafafa;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+
   &-top {
     padding-bottom: 8px;
     height: 98px;
     width: 100%;
+
+    a {
+      color: #03f;
+      text-decoration: none;
+    }
   }
 
   &-center {
