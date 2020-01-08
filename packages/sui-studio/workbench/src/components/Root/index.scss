@@ -2,6 +2,16 @@
   height: 100vh;
   overflow-y: auto;
 
+  &-iframe {
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: block;
+    margin: 10px auto;
+    overflow: scroll;
+    zoom: 1;
+  }
+
   &-top {
     padding-bottom: 8px;
     height: 98px;
