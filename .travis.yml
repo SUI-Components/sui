@@ -9,7 +9,7 @@ before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
 install:
-  - npm run phoenix -- --no-progress --chunk 3
+  - npm run phoenix
 
 script:
   - npm run lint
