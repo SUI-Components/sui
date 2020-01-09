@@ -24,25 +24,24 @@ In case you want to create a new studio, check out [sui-studio-create](https://g
 
 Once you're in the new project, you can execute `sui-studio start` in order to start the development browser and start working on your components.
 
-
-
-
 ## Common Workflow
 
 ### Creating a new component
 #### 1) Create a component
 
 ```sh
-$ sui-studio generate house window
+$ npx sui-studio generate house window
 ```
 
-#### 2) Install component dependencies
-
+### Desarrolla el nuevo componente
+#### 2) Levanta el entorno de desarrollo
 ```sh
-$ sui-studio run-all npm install
+$ npx sui-studio dev house/window
 ```
 
-#### 3) Commit changes using the appropiate command
+#### 3) Abre tu browser a `http://localhost:3000`
+
+#### 4) Commit changes using the appropiate command
 
 First of all, stage you changes for commit with ```git add``` or whatever you use.
 
@@ -79,18 +78,92 @@ $ sui-studio release
 
 ## CLI
 
-### `$ sui-studio link-all`
+### `$ sui-studio start`
 
-Executes internally `$ sui-mono link`, that links all components to each other.
+También levanta un entorno de desarrollo donde podrás ver todos tus componente a la vez. Si tienes demasiados componentes es aconsejable usar el comando `dev`.
+
+### `sui-studio build`
+
+Contruye una versión estática y pensada para ser deployada de una aplicación donde vas a poder interacturar con todos los componentes. La interfaz, será la misma que cuando usas el comando start
+pero optimizada para ser puesta en producción.
+
+### `$ sui-studio dev`
+
+Levanta un entorno de desarrollo donde puedes trabajar en tu componente de forma totalmente aislada.
+
+## Testing
+
+Ahora es posible testear los componentes del studio. Tanto en la demo general como en el entorno de desarrollo. *Actualmente está en modo experimental*
+
+Todos los comandos anteriores soportan el flag `--experimental-test`. Solo usando ese flag podrás ver los tests en la interfaz del estudio.
+
+> Si usas el flag con el comando `dev` y no tienes el fichero de test en `test/[category]/[component]/index.js` el comando fallará.
+
+```
+/* eslint react/jsx-no-undef:0 */
+/* global AtomButton */
+
+import React from 'react'
+
+import chai, {expect} from 'chai'
+import chaiDOM from 'chai-dom'
+import {render} from '@testing-library/react'
+
+chai.use(chaiDOM)
+
+describe('AtomButton', () => {
+  it('Render', () => {
+    const {getByRole} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByRole('button')).to.have.text('HOLA')
+  })
+})
+```
+
+El componente será un objeto global a la hora de correr los test, por lo que es MUY IMPORTANTE que no lo importes. Para evitar problemas con el linter, puedes agregar
+los comentarios adecuados como en el ejemplo.
 
 
-### `$ sui-studio run-all`
+## Estructura de Ficheros
 
-Executes internally `$ sui-mono run`, that executed a command **in series** on each package folder.
+SUIStudio usa extensivamente el concepto de configuración bajo convenio, para indicarle como queremos relacionarnos con la aplicación. Sobre es especialmente importante la estructura de ficheros.
 
-### `$ sui-studio run-parallel`
-
-Executes internally `$ sui-mono run-parallel`, that executed a command **in parallel** on each package folder.
+```
+.
+├── components
+│   ├── README.md
+│   └── atom                                <- Esta es la categoría del componente
+│       ├── button                          <- Este es el nombre del componente
+│       │   ├── README.md
+│       │   ├── package.json
+│       │   └── src
+│       │       ├── index.js
+│       │       └── index.scss
+│       └── header
+│           ├── README.md
+│           ├── package.json
+│           └── src
+│               ├── index.js
+│               └── index.scss
+├── demo
+│   └── atom
+│       ├── button
+│       │   ├── context.js
+│       │   ├── playground                <- Código básico que quieres mostrar en la demo del componente
+│       │   └── themes                    <- Todos los ficheros sass dentro de esta carpeta serán temas a motrar en la interfaz
+│       │       └── myStudioTheme.scss
+│       └── header
+│           └── demo                      <- Cuando el playground se queda corto, pues crear esta carpeta `demo` para crear una "aplicación" donde puedes hacer requires.
+│               ├── index.js
+│               ├── index.scss
+│               └── package.json
+├── package.json
+└── test
+    └── atom
+        ├── button
+        │   └── index.js                 <- Este es el fichero que contiene los tests de ese componente.
+        └── header
+            └── index.js
+```
 
 # Conventions
 
