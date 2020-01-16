@@ -2,13 +2,34 @@
 /* eslint no-console:0 */
 require('colors')
 const program = require('commander')
+const figures = require('figures')
 const {basename} = require('path')
+const {default: Queue} = require('p-queue')
+const logUpdate = require('log-update')
+const execa = require('execa')
 const config = require('../src/config')
-const {serialSpawn, showError} = require('@s-ui/helpers/cli')
-const {splitArray} = require('@s-ui/helpers/array')
-const Listr = require('listr')
 
-const DEFAULT_CHUNK = 20
+const DEFAULT_CHUNK = 5
+/** NOTE:
+ * Latest version of node & npm seems to have some concurrency problem
+ * when installing packages. In order to be sure the CI deployment work as expected,
+ * we're only installing one package at a time.
+ * Related issue: https://github.com/npm/cli/issues/496
+ */
+const SINGLE_CHUNK = 1
+
+const CI_FLAGS = [
+  'loglevel=error',
+  'no-audit',
+  'no-fund',
+  'no-optional',
+  'no-package-lock',
+  'no-progress',
+  'no-save',
+  'no-shrinkwrap',
+  'prefer-offline',
+  'production'
+].map(flag => `--${flag}`)
 
 program
   .option(
@@ -16,8 +37,17 @@ program
     `Execute by chunks of N packages (defaults to ${DEFAULT_CHUNK})`
   )
   .option(
+    '--ci',
+    'Optimized mode for CI. Avoid removing folders, showing progress, auditing, write package-lock files and more'
+  )
+  .option('--no-audit', 'Avoid auditing packages for better performance')
+  .option(
+    '--no-root',
+    'Avoid executing the script on root folder in case you already did it'
+  )
+  .option(
     '--no-progress',
-    'Force to not show progress of tasks (not loading icons)'
+    'Force to not show progress of tasks (perfect for CI environments)'
   )
   .on('--help', () => {
     console.log(`
@@ -32,76 +62,89 @@ program
   })
   .parse(process.argv)
 
+const {
+  audit = true,
+  chunk = DEFAULT_CHUNK,
+  ci = false,
+  progress = true,
+  root = true
+} = program
+
+const NPM_CMD = ['npm', ['install', audit ? '' : '--no-audit']]
 const RIMRAF_CMD = [
   require.resolve('rimraf/bin'),
   ['package-lock.json', 'node_modules']
 ]
-const NPM_CMD = ['npm', ['install']]
-let {chunk = DEFAULT_CHUNK, progress} = program
-chunk = Number(chunk)
 
-const executePhoenixOnPackages = () => {
-  if (config.isMonoPackage()) {
-    return
-  }
-  let taskList = config
-    .getScopesPaths()
-    .map(cwd => [
-      [...RIMRAF_CMD, {cwd, stdio: 'ignore'}],
-      [...NPM_CMD, {cwd, stdio: 'ignore'}]
-    ])
-    .map(commands => ({
-      title:
-        'rimraf node_modules && npm i ' +
-        ('@' + basename(commands[0][2].cwd)).grey,
-      task: () => serialSpawn(commands)
-    }))
-
-  const withChunks = !!chunk && taskList.length > chunk
-  if (withChunks) {
-    taskList = splitArray(taskList, chunk).map((group, i) => {
-      const subTitle = progress
-        ? ''
-        : '\n' + group.map(task => task.title).join('\n')
-
-      return {
-        title: `#${i + 1} group of ${group.length} packages...` + subTitle,
-        task: () => new Listr(group, {concurrent: true})
-      }
-    })
+/**
+ * Execute needed commands to install packages
+ * @param {Object} params
+ * @param {string=} params.cwd
+ * @param {string=} params.stdin
+ */
+const installPackages = ({cwd = undefined, stdin = 'inherit'} = {}) => {
+  const executionParams = {cwd, stdin}
+  if (ci) {
+    const [npm] = NPM_CMD
+    return execute([npm, ['install', ...CI_FLAGS]], executionParams)
   }
 
-  const tasks = new Listr(taskList, {
-    concurrent: !withChunks,
-    renderer: !progress ? PlainTextRenderer : null
-  })
-  return tasks.run()
+  return execute(RIMRAF_CMD, executionParams).then(() =>
+    execute(NPM_CMD, executionParams)
+  )
 }
 
-class PlainTextRenderer {
-  constructor(tasks, options) {
-    this._tasks = tasks
-  }
+/**
+ * Execute command abstraction
+ * @param {Array<string | string[]>} cmd Array with the executable and the arguments to pass
+ * @param {object} params
+ * @param {string=} params.cwd
+ * @param {string=} params.stdin
+ */
+const execute = (cmd, {cwd, stdin}) => {
+  const [command, args] = cmd
+  return execa(command, args, {cwd, stdin, stderr: 'inherit'})
+}
 
-  render() {
-    this._tasks.forEach(task =>
-      task.subscribe(event => {
-        if (event.type === 'STATE') {
-          console.log(
-            task.isPending()
-              ? task.title + '\n' + '... work in progress ...'.yellow
-              : '... completed successfully!'.green + '\n'
+const concurrency = ci ? SINGLE_CHUNK : Number(chunk)
+const queue = new Queue({concurrency})
+console.log(`Using concurrency of: ${concurrency}`)
+
+const executePhoenixOnPackages = () => {
+  // if we're on a monorepo, then we don't have packages to install
+  if (config.isMonoPackage()) return
+
+  const scopes = config.getScopesPaths()
+  logUpdate(`${figures.play} Preparing ${scopes.length} packages to install...`)
+
+  scopes.map(cwd => {
+    const packageName = basename(cwd).grey
+    queue
+      .add(() => installPackages({cwd}))
+      .then(() => {
+        if (progress && !ci) {
+          const {size, pending} = queue
+          logUpdate(
+            `${figures.play} ${packageName}: ${size + pending} of ${
+              scopes.length
+            } packages installed`
           )
         }
       })
-    )
-  }
+      .catch(err => {
+        console.error(`Error installing ${packageName}:`)
+        console.error(err)
+      })
+  })
 
-  end(err) {
-    err && showError(err, program)
-  }
+  return queue
+    .onIdle()
+    .then(() => logUpdate(`${figures.tick} Installed all packages`))
 }
 
-serialSpawn([RIMRAF_CMD, NPM_CMD])
+logUpdate(`${figures.play} Installing root packages...`)
+;(root ? installPackages({stdin: 'inherit'}) : Promise.resolve())
   .then(executePhoenixOnPackages)
-  .catch(showError)
+  .catch(error => {
+    console.error(error)
+  })

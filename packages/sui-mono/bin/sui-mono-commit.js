@@ -5,7 +5,8 @@ const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
 
 /**
  * Get the list of modified files by the user
- * @param {boolean} checkIfStaged Determine if we should change if the modified file is staged
+ * @param {object}  params
+ * @param {boolean} params.checkIfStaged Determine if we should change if the modified file is staged
  */
 function getDiffedFiles({checkIfStaged = false} = {}) {
   return new Promise((resolve, reject) => {

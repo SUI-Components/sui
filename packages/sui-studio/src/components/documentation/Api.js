@@ -64,16 +64,8 @@ export default function Api({params}) {
   }
 
   if (docs) {
-    const {category, component} = params
-    const {displayName, props} = docs
-    const componentTitle = `${displayName} (${category}/${component})`
-
-    return (
-      <>
-        <h1>{componentTitle}</h1>
-        {renderPropsApi({propsApi: props})}
-      </>
-    )
+    const {props} = docs
+    return renderPropsApi({propsApi: props})
   }
 
   return null
