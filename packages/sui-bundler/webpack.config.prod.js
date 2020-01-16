@@ -27,7 +27,6 @@ const {sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
 
 const Externals = require('./plugins/externals')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
@@ -75,7 +74,6 @@ module.exports = {
     }
   },
   plugins: cleanList([
-    new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({
@@ -134,7 +132,6 @@ module.exports = {
         })
     ),
     when(config.externals, () => new Externals({files: config.externals})),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options')),
     when(
       config.manualCompression,
       () =>
@@ -172,7 +169,12 @@ module.exports = {
               manifestURL: config['externals-manifest']
             }
           })),
-          require.resolve('postcss-loader'),
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              plugins: [require('autoprefixer')()]
+            }
+          },
           require.resolve('sass-loader')
         ])
       },
@@ -188,9 +190,5 @@ module.exports = {
       )
     }
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  }
+  node: false
 }
