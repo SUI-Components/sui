@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.9.0 (2020-01-17)
+
+
+### Features
+
+* remove adding --save to README ([c1d5cc2](https://github.com/SUI-Components/sui/commit/c1d5cc23d7c9aa23c5dbc7e0c2a19aef96ab4cf3))
+
+
+
 # 7.8.0 (2020-01-08)
 
 
