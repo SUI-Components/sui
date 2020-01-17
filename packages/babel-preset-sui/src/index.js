@@ -9,11 +9,8 @@ function getTargets({targets = {}}) {
 
 function plugins(api, opts = {}) {
   return cleanList([
-    require('@babel/plugin-syntax-dynamic-import').default,
     require('@babel/plugin-syntax-export-default-from').default,
     require('@babel/plugin-syntax-export-namespace-from').default,
-    require('@babel/plugin-proposal-optional-chaining').default,
-    require('@babel/plugin-proposal-nullish-coalescing-operator').default,
     [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
     [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
     [
@@ -21,10 +18,6 @@ function plugins(api, opts = {}) {
       {
         wrap: true
       }
-    ],
-    [
-      require('@babel/plugin-proposal-object-rest-spread').default,
-      {useBuiltIns: true} // asume Object.assign is available by browser or polyfill
     ],
     [
       require('@babel/plugin-transform-runtime').default,
