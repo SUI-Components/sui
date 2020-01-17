@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@s-ui/component-peer-dependencies": "1",
-    "@babel/cli": "7.7.7",
+    "@babel/cli": "7.8.3",
     "babel-preset-sui": "3"
   }
 }
