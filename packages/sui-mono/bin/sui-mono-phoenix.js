@@ -124,10 +124,11 @@ const executePhoenixOnPackages = () => {
       .then(() => {
         if (progress && !ci) {
           const {size, pending} = queue
+          const totalPackages = scopes.length
+          const pendingPackages = size + pending
+          const installedPackages = totalPackages - pendingPackages
           logUpdate(
-            `${figures.play} ${packageName}: ${size + pending} of ${
-              scopes.length
-            } packages installed`
+            `${figures.play} ${packageName}: ${installedPackages} of ${totalPackages} packages installed`
           )
         }
       })
