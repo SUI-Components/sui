@@ -1,6 +1,6 @@
-dist: xenial
+dist: bionic
 language: node_js
-node_js: '10'
+node_js: '13'
 
 services:
   - docker
