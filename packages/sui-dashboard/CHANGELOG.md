@@ -2,81 +2,83 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="1.7.0"></a>
+# 1.8.0 (2020-01-20)
+
+
+### Features
+
+* add UT repository ([22b2dcb](https://github.com/SUI-Components/sui/commit/22b2dcb67533924df561a5ea94292a72659da196))
+
+
+
 # 1.7.0 (2019-11-27)
 
 
 ### Bug Fixes
 
-* fix sui dashboard bad repo ([11fd6dd](https://github.com/SUI-Components/sui/commit/11fd6dd))
+* fix sui dashboard bad repo ([11fd6dd](https://github.com/SUI-Components/sui/commit/11fd6dd5b0fde8c7e0157dd762db1bfdcc56592c))
 
 
 
-<a name="1.6.0"></a>
 # 1.6.0 (2019-11-27)
 
 
 ### Bug Fixes
 
-* update if repositories ([5ee5b0a](https://github.com/SUI-Components/sui/commit/5ee5b0a))
-* update mt repositories ([3b55b70](https://github.com/SUI-Components/sui/commit/3b55b70))
+* update if repositories ([5ee5b0a](https://github.com/SUI-Components/sui/commit/5ee5b0a8aefaac01e4f3b1d637ace0fe58fa67fb))
+* update mt repositories ([3b55b70](https://github.com/SUI-Components/sui/commit/3b55b70c5e35daf720e78d98b1ebeb0afe48f467))
 
 
 
-<a name="1.5.0"></a>
 # 1.5.0 (2019-11-13)
 
 
 ### Features
 
-* add new habitaclia project to the dashboard ([61c2db2](https://github.com/SUI-Components/sui/commit/61c2db2))
+* add new habitaclia project to the dashboard ([61c2db2](https://github.com/SUI-Components/sui/commit/61c2db29d849a0714923d814941e179c04352fa0))
 
 
 
-<a name="1.4.0"></a>
 # 1.4.0 (2019-10-02)
 
 
 ### Features
 
-* add new projects to the dashboard ([9c36cd3](https://github.com/SUI-Components/sui/commit/9c36cd3))
+* add new projects to the dashboard ([9c36cd3](https://github.com/SUI-Components/sui/commit/9c36cd3ddc734e44991ed4ad5e8c7943a625cfa5))
 
 
 
-<a name="1.3.0"></a>
 # 1.3.0 (2019-02-14)
 
 
 ### Bug Fixes
 
-* fix formula ([62caac7](https://github.com/SUI-Components/sui/commit/62caac7))
+* fix formula ([62caac7](https://github.com/SUI-Components/sui/commit/62caac78bb113a0a90b9f938436af16d49587d62))
 
 
 
-<a name="1.2.0"></a>
 # 1.2.0 (2018-12-12)
 
 
 ### Bug Fixes
 
-* binary name ([e9bfbc2](https://github.com/SUI-Components/sui/commit/e9bfbc2))
+* binary name ([e9bfbc2](https://github.com/SUI-Components/sui/commit/e9bfbc25899bdfa333edf85385e0cb53905128c2))
 
 
 
-<a name="1.1.0"></a>
 # 1.1.0 (2018-12-12)
 
 
 ### Bug Fixes
 
-* fix package name ([38550e1](https://github.com/SUI-Components/sui/commit/38550e1))
+* fix package name ([38550e1](https://github.com/SUI-Components/sui/commit/38550e1f1de5467496ae7cd5e65b8411c4303c88))
 
 
 ### Features
 
-* first commit ([ed34f18](https://github.com/SUI-Components/sui/commit/ed34f18))
-* remove excel feature and show better stats ([9138467](https://github.com/SUI-Components/sui/commit/9138467))
-* save report stats to google drive ([89ba52f](https://github.com/SUI-Components/sui/commit/89ba52f))
+* first commit ([ed34f18](https://github.com/SUI-Components/sui/commit/ed34f1898277d6b1c96ac9dc5e209c4a9fd0bf2e))
+* remove excel feature and show better stats ([9138467](https://github.com/SUI-Components/sui/commit/91384679493832314d5c598c7592e41afbcda180))
+* save report stats to google drive ([89ba52f](https://github.com/SUI-Components/sui/commit/89ba52f43ecece50260fbd8ee357faf131332ef9))
 
 
 
