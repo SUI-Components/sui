@@ -57,6 +57,13 @@ class ClientMock extends Mock {
     return this
   }
 
+  patch(path) {
+    this._method = 'PATCH'
+    this._path = path
+
+    return this
+  }
+
   post(path) {
     this._method = 'POST'
     this._path = path

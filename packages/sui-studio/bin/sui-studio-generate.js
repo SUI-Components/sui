@@ -172,7 +172,7 @@ ${componentInPascal}.propTypes = {}
 ## Installation
 
 \`\`\`sh
-$ npm install ${packageName} --save
+$ npm install ${packageName}
 \`\`\`
 
 ## Usage

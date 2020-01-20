@@ -31,6 +31,13 @@ class ServerMock extends Mock {
     return this
   }
 
+  patch(path) {
+    this._method = 'patch'
+    this._path = path
+
+    return this
+  }
+
   post(path) {
     this._method = 'post'
     this._path = path
