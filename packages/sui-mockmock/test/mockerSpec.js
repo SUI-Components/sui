@@ -47,5 +47,21 @@ describe('#ClientMocker', () => {
         })
       })
     })
+
+    describe('when mocking with PATCH method', () => {
+      beforeEach(() => {
+        mocker
+          .httpMock(fakeUrl)
+          .patch(fakePath)
+          .reply({})
+      })
+
+      it('should resolve statusCode 200', done => {
+        axios.patch(`${fakeUrl}${fakePath}`).then(({status}) => {
+          expect(status).to.be.eq(200)
+          done()
+        })
+      })
+    })
   })
 })

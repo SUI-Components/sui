@@ -1,4 +1,4 @@
-dist: xenial
+dist: bionic
 language: node_js
 node_js: '10'
 
@@ -8,7 +8,8 @@ services:
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
-after_install:
+install:
+  - npm install --no-audit --loglevel=error --no-fund --no-optional --no-package-lock --no-progress --no-save --no-shrinkwrap
   - npm run phoenix:ci
 
 script:

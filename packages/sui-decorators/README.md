@@ -7,7 +7,7 @@ Attach additional responsibilities to an object dynamically. Decorators provide 
 ## Installation
 
 ```sh
-npm install @schibstedspain/decorators --save
+npm install @s-ui/decorators
 ```
 
 ## Reference
