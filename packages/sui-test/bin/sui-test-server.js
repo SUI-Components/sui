@@ -9,7 +9,7 @@ const {serialSpawn} = require('@s-ui/helpers/cli')
 program
   .option('-I, --inspect', 'Inspect node process')
   .option('-W, --watch', 'Run in watch mode')
-  .option('-T, --timeout', 'Timeout', 2000)
+  .option('-T, --timeout <ms>', 'Timeout', 2000)
   .option('-P, --pattern <pattern>', 'Path pattern to include', 'test')
   .on('--help', () => {
     console.log('  Description:')
