@@ -5,7 +5,7 @@ import cookie, {cookieWithoutEncoding} from '../src/cookie/index'
 const TEST_URL = 'https://tools.ietf.org/#%'
 const ENCODED_TEST_URL = 'https://tools.ietf.org/#%25'
 
-describe.only('@s-ui/js', () => { // eslint-disable-line
+describe('@s-ui/js', () => {
   describe('cookie', () => {
     beforeEach(() => {
       cookie.set('url', TEST_URL)
