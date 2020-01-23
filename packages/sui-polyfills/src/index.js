@@ -1,6 +1,7 @@
 require('core-js/features/array/fill')
 require('core-js/features/array/find-index')
 require('core-js/features/array/find')
+require('core-js/features/array/flat')
 require('core-js/features/array/from')
 require('core-js/features/array/includes')
 require('core-js/features/array/is-array')
