@@ -47,6 +47,7 @@ program
   )
   .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
   .option('-G, --gui', 'Run the tests in GUI mode.')
+  .option('-R, --record', 'Record tests and send result to Dashboard')
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
 
@@ -56,7 +57,8 @@ const {
   userAgent,
   gui,
   screenshotsOnError,
-  scope
+  scope,
+  record
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
@@ -84,7 +86,8 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
     getSpawnPromise(cypressBinPath, [
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
-      '--project=' + CYPRESS_FOLDER_PATH
+      '--project=' + CYPRESS_FOLDER_PATH,
+      record && '--record'
     ])
   )
   .catch(showError)
