@@ -49,7 +49,7 @@ program
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-R, --record', 'Record tests and send result to Dashboard Service')
   .option(
-    '-K, --key',
+    '-K, --key <key>',
     'It is used to authenticate the project into the Dashboard Service'
   )
   .on('--help', () => console.log(HELP_MESSAGE))
@@ -62,7 +62,8 @@ const {
   gui,
   screenshotsOnError,
   scope,
-  record
+  record,
+  key
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
@@ -91,7 +92,8 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
       '--project=' + CYPRESS_FOLDER_PATH,
-      record && '--record'
+      record && '--record',
+      key && '--key=' + key
     ])
   )
   .catch(showError)
