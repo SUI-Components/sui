@@ -47,7 +47,11 @@ program
   )
   .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
   .option('-G, --gui', 'Run the tests in GUI mode.')
-  .option('-R, --record', 'Record tests and send result to Dashboard')
+  .option('-R, --record', 'Record tests and send result to Dashboard Service')
+  .option(
+    '-K, --key',
+    'It is used to authenticate the project into the Dashboard Service'
+  )
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
 
