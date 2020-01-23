@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.24.0 (2020-01-23)
+
+
+### Features
+
+* add key fla ([f544f1f](https://github.com/SUI-Components/sui/commit/f544f1f79b19832bc6965ecff28ac057baee84b4))
+* add key flag ([5d33e93](https://github.com/SUI-Components/sui/commit/5d33e939936d4cedee88209768060f718b787c90))
+* add record flag ([ff5bca3](https://github.com/SUI-Components/sui/commit/ff5bca396b113b07c8bac88118ddfa65f8113322))
+
+
+
 # 2.23.0 (2020-01-21)
 
 
