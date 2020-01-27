@@ -58,12 +58,15 @@ export default function Workbench({children, params}) {
     [category, component]
   )
 
+  debugger // eslint-disable-line
   return (
     <div className="sui-StudioWorkbench">
       <nav className="sui-StudioWorkbench-navigation">
         <ul className="sui-StudioTabs">
           <Tab name="Demo" path="demo" />
-          {__EXPERIMENTAL_TEST__ && <Tab name="Test" path="test" forceReload />}
+          {Boolean(JSON.parse(__EXPERIMENTAL_TEST__)) && (
+            <Tab name="Test" path="test" forceReload />
+          )}
           <Tab name="Api" path="documentation/api" />
           <Tab name="Readme" path="documentation/readme" />
           <Tab name="Changelog" path="documentation/changelog" />
