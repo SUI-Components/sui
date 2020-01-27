@@ -151,7 +151,8 @@ Add the next config to your preferences:
     "editor.formatOnSave": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   }
 }
 ```
