@@ -58,7 +58,6 @@ export default function Workbench({children, params}) {
     [category, component]
   )
 
-  debugger // eslint-disable-line
   return (
     <div className="sui-StudioWorkbench">
       <nav className="sui-StudioWorkbench-navigation">
