@@ -15,12 +15,13 @@ program.version(version, '    --version')
 program
   .command('start')
   .alias('s')
+  .option('--experimental-test', 'Display test runner result')
   .option(
     '-d, --dir-base [dir]',
     'Setup base dir where live src and demo folders',
     '.'
   )
-  .action(({dirBase}) => {
+  .action(({dirBase, experimentalTest}) => {
     console.clear()
     require('terminal-banner').terminalBanner(
       'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
@@ -33,7 +34,12 @@ program
         ['-c', path.join(__dirname, '..', 'src')],
         {
           shell: false,
-          env: process.env
+          env: {
+            ...process.env,
+            ...{
+              __EXPERIMENTAL_TEST__: JSON.stringify(Boolean(experimentalTest))
+            }
+          }
         }
       ).then(process.exit, process.exit)
     }, 3000)

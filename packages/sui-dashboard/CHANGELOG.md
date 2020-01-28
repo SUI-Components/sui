@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.9.0 (2020-01-22)
+
+
+### Features
+
+* Remove UT webapp ([bee4d8b](https://github.com/SUI-Components/sui/commit/bee4d8b6a14bdc506fcfa416672082aafb122a82))
+
+
+
 # 1.8.0 (2020-01-20)
 
 
