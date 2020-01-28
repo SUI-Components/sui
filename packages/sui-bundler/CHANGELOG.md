@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.38.0 (2020-01-28)
+
+
+### Bug Fixes
+
+* add __EXPERIMENTAL_TEST__ flag as default ([fc6af19](https://github.com/SUI-Components/sui/commit/fc6af19e4764dbf157f56a97e703db0bffc71878))
+* fix not well linked packages ([fd35988](https://github.com/SUI-Components/sui/commit/fd35988d0f734448134e0c0f84e2e06712434a72))
+
+
+
 # 5.37.0 (2020-01-17)
 
 

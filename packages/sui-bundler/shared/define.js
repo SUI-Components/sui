@@ -8,7 +8,8 @@ if (process.platform === 'win32') {
 
 const defaults = {
   __DEV__: false,
-  __BASE_DIR__: JSON.stringify(process.env.PWD)
+  __BASE_DIR__: JSON.stringify(process.env.PWD),
+  __EXPERIMENTAL_TEST__: JSON.stringify(process.env.__EXPERIMENTAL_TEST__)
 }
 
 module.exports = (vars = {}) =>

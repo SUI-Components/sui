@@ -1,4 +1,4 @@
-/* global __EXPERIMENTAL_TEST__ */
+/* global __EXPERIMENTAL_TEST_DEV__ */
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
@@ -83,7 +83,7 @@ export default function Root({componentID, contexts = {}, themes}) {
         />
       </div>
 
-      <When value={__EXPERIMENTAL_TEST__}>
+      <When value={Boolean(JSON.parse(__EXPERIMENTAL_TEST_DEV__ || 'false'))}>
         {() => (
           <div className="Root-test">
             <Test
