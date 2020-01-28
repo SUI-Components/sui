@@ -23,7 +23,7 @@ const Test = ({open, importTest, importComponent, context}) => {
       const Component = module.default || module
       const EnhanceComponent = withContext(context, context)(Component)
       !EnhanceComponent.displayName &&
-        console.error('[sui-Test] Component without displayName')
+        console.error('[sui-Test] Component without displayName') // eslint-disable-line
       window[cleanDisplayName(EnhanceComponent.displayName)] = props => (
         <SUIContext.Provider value={context}>
           <EnhanceComponent {...props} />

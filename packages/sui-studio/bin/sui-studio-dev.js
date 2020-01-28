@@ -45,16 +45,15 @@ const testPath = program.experimentalTest
   ? path.join(PWD, 'test', category, component)
   : path.join(PWD, 'components', category, component, 'src')
 
+const nextDefine = {
+  __COMPONENT_ID__: JSON.stringify(componentID),
+  __EXPERIMENTAL_TEST_DEV__: JSON.stringify(program.experimentalTest)
+}
+
 const studioDevConfig = {
   ...config,
   context: path.join(__dirname, '..', 'workbench', 'src'),
-  plugins: [
-    ...config.plugins,
-    new webpack.DefinePlugin({
-      __COMPONENT_ID__: JSON.stringify(componentID),
-      __EXPERIMENTAL_TEST__: JSON.stringify(Boolean(program.experimentalTest))
-    })
-  ],
+  plugins: [...config.plugins, new webpack.DefinePlugin(nextDefine)],
   resolve: {
     ...config.resolve,
     alias: {
