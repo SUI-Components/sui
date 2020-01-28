@@ -140,7 +140,9 @@ Prettier is integrated in sui-lint with some specific rules. If you want VSCode 
 `CMD + Shift + P -> Preferences: Open Settings (JSON)`.
 
 Add the next config to your preferences:
-```
+
+```json
+{
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -148,7 +150,11 @@ Add the next config to your preferences:
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
-  "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  }
+}
 ```
 
 It will format and fix the problems of linter on saving. If you prefer to do this manually, you could avoid adding the `eslint.autoFixOnSave` and `editor.formatOnSave` configs.

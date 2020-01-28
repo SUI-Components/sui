@@ -2,25 +2,77 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.11.0 (2020-01-28)
+
+
+### Bug Fixes
+
+* fix parse and evaluate Experimental test flag ([b0ce89f](https://github.com/SUI-Components/sui/commit/b0ce89f6b9c31107f04698ea1c815fa129fef72a))
+* use __EXPERIMENTA_TEST_DEV__ in dev mode ([b24a994](https://github.com/SUI-Components/sui/commit/b24a994e5d74ffb38f16c9e9e191d8d76335e253))
+
+
+
+# 7.10.0 (2020-01-23)
+
+
+
+# 7.9.0 (2020-01-17)
+
+
+### Bug Fixes
+
+* fix missing test and remove not needed code ([d29e170](https://github.com/SUI-Components/sui/commit/d29e17035f336843eadf66181510616f4e53e8a5))
+* fix styles for test ([5ffa517](https://github.com/SUI-Components/sui/commit/5ffa51793f7c2c3b352ec0ff53b416f44022d452))
+
+
+### Features
+
+* add iframe styles ([e0f81e7](https://github.com/SUI-Components/sui/commit/e0f81e7f4e9e7a33b0392dbe687c17aba1dc162a))
+* remove adding --save to README ([c1d5cc2](https://github.com/SUI-Components/sui/commit/c1d5cc23d7c9aa23c5dbc7e0c2a19aef96ab4cf3))
+
+
+
+# 7.8.0 (2020-01-08)
+
+
+### Bug Fixes
+
+* correct usage of pascal-case package ([456f236](https://github.com/SUI-Components/sui/commit/456f2365d7c95c093843bc652631fd164aedd3db))
+
+
+
 # 7.7.0 (2020-01-07)
 
 
 ### Bug Fixes
 
+* add importComponent and importTest props ([4b44ef3](https://github.com/SUI-Components/sui/commit/4b44ef35efb0feaedfa9338b517fa71efd8da19d))
 * avoid listing wrong themes when name is colliding ([2817ab1](https://github.com/SUI-Components/sui/commit/2817ab152cf65f35e27ece89819fac85035048d5))
 * avoid weird loading flash ([60f33bb](https://github.com/SUI-Components/sui/commit/60f33bbf8e0001ec3b3cf12f3e3cb338379fa281))
+* move setFailures state inside main useEffect ([5c9b1d0](https://github.com/SUI-Components/sui/commit/5c9b1d04e64f88d03c2780838d58c24139549c53))
 * needed dependency ([a3c36a4](https://github.com/SUI-Components/sui/commit/a3c36a446878cc1ef14c94eb356fd7fda51876e9))
 * remove not needed line ([7327750](https://github.com/SUI-Components/sui/commit/73277502e1aad719b9aae2f4fdef385c1949b49a))
 
 
 ### Features
 
+* --experimental-test flag to avoid major version ([c477e89](https://github.com/SUI-Components/sui/commit/c477e89faf4580ebda4da98601468d179b7de29d))
+* add __EXPERIMENTAL_TEST__ flag ([e342cc2](https://github.com/SUI-Components/sui/commit/e342cc2fc2308c66b617d3035fa4b2a45ab0c513))
 * add a friendly way to open the iframe ([d100a90](https://github.com/SUI-Components/sui/commit/d100a90cd9911d6295c1064470f5d06da3858b18))
+* add experimental test to build and start ([37260ee](https://github.com/SUI-Components/sui/commit/37260ee8bba1e02d8b086fd03aaac3c60ddca5aa))
 * add markdown to be loaded asyn ([01d1d37](https://github.com/SUI-Components/sui/commit/01d1d378c8f7935aae129797917bedd646d4cf0f))
+* add new tab for render component test ([6a487ab](https://github.com/SUI-Components/sui/commit/6a487ab1ee125e12429dc73c9e87a585ba52e8f5))
+* add styles to tests and demo ([e65077b](https://github.com/SUI-Components/sui/commit/e65077bfe5244ff06b58956dc8eea580881a1cec))
+* add testing to the dev mode ([9a888a9](https://github.com/SUI-Components/sui/commit/9a888a9ce1fc1fb62e358d30db1032877e4ef3c1))
+* apply context to the component ([1748b5e](https://github.com/SUI-Components/sui/commit/1748b5ea7cd9ed48f828217e60b61bff40b615ae))
 * better error handling ([375603d](https://github.com/SUI-Components/sui/commit/375603d4e2dea2537f5d528617c033a7aa2ebb6b))
 * better font-weight for props ([c5e3bfd](https://github.com/SUI-Components/sui/commit/c5e3bfd79006499c71e7363a0f085b766fa5ef15))
 * bump dependencies ([1109e6f](https://github.com/SUI-Components/sui/commit/1109e6f546c90bb94ef1426db7d5980b9c270c44))
+* center tablet and mobile if test are not displayed ([36e6ced](https://github.com/SUI-Components/sui/commit/36e6ced35d0eca7fd783093265bc40455d35cf30))
 * dont show events if they are not needed ([7bfd376](https://github.com/SUI-Components/sui/commit/7bfd376ee1784602b5eb45d53dad70598f2eb6e3))
+* force refactor default test ([b74be08](https://github.com/SUI-Components/sui/commit/b74be08b9503cadecb064785f684caeca0b0393d))
+* generate the test file with a relative url ([f233056](https://github.com/SUI-Components/sui/commit/f23305694eb88a2adaee320f6ec3f58da664f812))
+* gerenate te test file when create a new component ([344912a](https://github.com/SUI-Components/sui/commit/344912a50724bd5f19f3f036159d29d0b50677cf))
 * load markdown css locally ([4cde006](https://github.com/SUI-Components/sui/commit/4cde0065224f435c03612f1bd9c381884b59b87d))
 * more look as a mobile device ([79159c4](https://github.com/SUI-Components/sui/commit/79159c4eb43d07bcad3ac226bf0f8d0f6db0c9cf))
 * more minimalist look n feel ([88b9b85](https://github.com/SUI-Components/sui/commit/88b9b85db4b06dcfb03ae49784fed99643c6ac71))

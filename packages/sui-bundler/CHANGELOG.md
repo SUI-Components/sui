@@ -2,388 +2,371 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="5.36.0"></a>
+# 5.38.0 (2020-01-28)
+
+
+### Bug Fixes
+
+* add __EXPERIMENTAL_TEST__ flag as default ([fc6af19](https://github.com/SUI-Components/sui/commit/fc6af19e4764dbf157f56a97e703db0bffc71878))
+* fix not well linked packages ([fd35988](https://github.com/SUI-Components/sui/commit/fd35988d0f734448134e0c0f84e2e06712434a72))
+
+
+
+# 5.37.0 (2020-01-17)
+
+
+### Features
+
+* upgrade babel version to match babel-preset-sui ([f7a2440](https://github.com/SUI-Components/sui/commit/f7a24408299e4e1972f50b815c6c810b9d06d59a))
+
+
+
 # 5.36.0 (2019-12-04)
 
 
 ### Features
 
-* remove terser pinned  version ([da16a16](https://github.com/SUI-Components/sui/commit/da16a16))
+* remove terser pinned  version ([da16a16](https://github.com/SUI-Components/sui/commit/da16a16c78073fbe53011613548221296277a803))
 
 
 
-<a name="5.35.0"></a>
 # 5.35.0 (2019-12-02)
 
 
 ### Bug Fixes
 
-* fix version of terser ([e58612d](https://github.com/SUI-Components/sui/commit/e58612d))
+* fix version of terser ([e58612d](https://github.com/SUI-Components/sui/commit/e58612d6de7ce2581b006b02f31a4883bfdfa497))
 
 
 
-<a name="5.34.0"></a>
 # 5.34.0 (2019-11-06)
 
 
 ### Features
 
-* add node 13 support by upgrading node-sass ([234442f](https://github.com/SUI-Components/sui/commit/234442f))
+* add node 13 support by upgrading node-sass ([234442f](https://github.com/SUI-Components/sui/commit/234442f132b4fa6ff9255e05a5f1f044cc8f928f))
 
 
 
-<a name="5.33.0"></a>
 # 5.33.0 (2019-10-31)
 
 
 ### Features
 
-* upgrade dependencies of sui-bundler ([3ac90b1](https://github.com/SUI-Components/sui/commit/3ac90b1))
+* upgrade dependencies of sui-bundler ([3ac90b1](https://github.com/SUI-Components/sui/commit/3ac90b17dbc2dd9c4a45627ccdc733b6c88c3b90))
 
 
 
-<a name="5.32.0"></a>
 # 5.32.0 (2019-10-28)
 
 
 ### Bug Fixes
 
-* add fs as empty mock ([e7022e2](https://github.com/SUI-Components/sui/commit/e7022e2))
+* add fs as empty mock ([e7022e2](https://github.com/SUI-Components/sui/commit/e7022e2de280993c70a00263933ecc58ac02e524))
 
 
 
-<a name="5.31.0"></a>
 # 5.31.0 (2019-10-15)
 
 
 ### Bug Fixes
 
-* rollback to raw-loader@1 to fix problems with export files ([8832645](https://github.com/SUI-Components/sui/commit/8832645))
+* rollback to raw-loader@1 to fix problems with export files ([8832645](https://github.com/SUI-Components/sui/commit/8832645c2b2972f9607037f77a9a00f2be78994d))
 
 
 
-<a name="5.30.0"></a>
 # 5.30.0 (2019-10-14)
 
 
 ### Features
 
-* bump dependencies of sui-bundler ([35258ea](https://github.com/SUI-Components/sui/commit/35258ea))
-* upgrade dependencies ([389dad3](https://github.com/SUI-Components/sui/commit/389dad3))
+* bump dependencies of sui-bundler ([35258ea](https://github.com/SUI-Components/sui/commit/35258ea3dfbf4684a15be0b5547cd6a37d9976fd))
+* upgrade dependencies ([389dad3](https://github.com/SUI-Components/sui/commit/389dad3e7377223da09ae93ebd71221254537ddd))
 
 
 
-<a name="5.29.0"></a>
 # 5.29.0 (2019-08-28)
 
 
 ### Features
 
-* externalManifestLoader dont apply in dev mode ([491ca38](https://github.com/SUI-Components/sui/commit/491ca38))
+* externalManifestLoader dont apply in dev mode ([491ca38](https://github.com/SUI-Components/sui/commit/491ca38edaba7a42bb8d507529b4a50589a51347))
 
 
 
-<a name="5.28.0"></a>
 # 5.28.0 (2019-08-21)
 
 
 ### Bug Fixes
 
-* remove unnecessary template strings ([499fb33](https://github.com/SUI-Components/sui/commit/499fb33))
+* remove unnecessary template strings ([499fb33](https://github.com/SUI-Components/sui/commit/499fb336363cd4ff17a5fc8a7a0c21a29d67f113))
 
 
 
-<a name="5.27.0"></a>
 # 5.27.0 (2019-08-21)
 
 
 ### Bug Fixes
 
-* Use const instead let to fix linter ([c4aa858](https://github.com/SUI-Components/sui/commit/c4aa858))
+* Use const instead let to fix linter ([c4aa858](https://github.com/SUI-Components/sui/commit/c4aa858cdb7ba405a6c5b05db251fcc91757aed5))
 
 
 ### Features
 
-* adds the ability to use environment variables to get different URLs ([1279202](https://github.com/SUI-Components/sui/commit/1279202))
-* remove dirname in regEx to get manifestURL ([fad8f37](https://github.com/SUI-Components/sui/commit/fad8f37))
+* adds the ability to use environment variables to get different URLs ([1279202](https://github.com/SUI-Components/sui/commit/127920228f3c8595928caad77d0893aecb5313da))
+* remove dirname in regEx to get manifestURL ([fad8f37](https://github.com/SUI-Components/sui/commit/fad8f37986ada7ad7c3ede124cf2fac3257242eb))
 
 
 
-<a name="5.26.0"></a>
 # 5.26.0 (2019-08-14)
 
 
 ### Features
 
-* remove not needed Object.values anymore as node version supported is already supp ([e1b4834](https://github.com/SUI-Components/sui/commit/e1b4834))
+* remove not needed Object.values anymore as node version supported is already supp ([e1b4834](https://github.com/SUI-Components/sui/commit/e1b4834306755f3dd05fdda4fdf043fb5dd56bbd))
 
 
 
-<a name="5.25.0"></a>
 # 5.25.0 (2019-07-30)
 
 
 ### Bug Fixes
 
-* fix missing compatibility with eslint 6 ([2590650](https://github.com/SUI-Components/sui/commit/2590650))
+* fix missing compatibility with eslint 6 ([2590650](https://github.com/SUI-Components/sui/commit/25906504f291665b0b51303295e978a7988a4782))
 
 
 
-<a name="5.24.0"></a>
 # 5.24.0 (2019-07-29)
 
 
 ### Features
 
-* add major sui-lint ([e6c725b](https://github.com/SUI-Components/sui/commit/e6c725b))
+* add major sui-lint ([e6c725b](https://github.com/SUI-Components/sui/commit/e6c725b66a9e97973d3fbba9fb432a8937bcbde3))
 
 
 
-<a name="5.23.0"></a>
 # 5.23.0 (2019-07-23)
 
 
 
-<a name="5.22.0"></a>
 # 5.22.0 (2019-07-09)
 
 
 ### Bug Fixes
 
-* move alias parse logic to shared for all environments ([f1d437f](https://github.com/SUI-Components/sui/commit/f1d437f))
+* move alias parse logic to shared for all environments ([f1d437f](https://github.com/SUI-Components/sui/commit/f1d437f1cfa4901dc83b825e0b4ce78bc69865e5))
 
 
 
-<a name="5.21.0"></a>
 # 5.21.0 (2019-07-09)
 
 
 ### Features
 
-* add alias to keep same experiment context on linked packages ([a7c3e6b](https://github.com/SUI-Components/sui/commit/a7c3e6b))
-* use ALIAS_FROM_CONFIG in dev webpackConfig instead of a hardcoded alias ([abed07e](https://github.com/SUI-Components/sui/commit/abed07e))
+* add alias to keep same experiment context on linked packages ([a7c3e6b](https://github.com/SUI-Components/sui/commit/a7c3e6b80032d530773f3d66decc873756445857))
+* use ALIAS_FROM_CONFIG in dev webpackConfig instead of a hardcoded alias ([abed07e](https://github.com/SUI-Components/sui/commit/abed07e3986d8f2350f0dffc227c1d2a84ea2358))
 
 
 
-<a name="5.20.0"></a>
 # 5.20.0 (2019-07-01)
 
 
 ### Bug Fixes
 
-* return an empty array ([a55ce9d](https://github.com/SUI-Components/sui/commit/a55ce9d))
+* return an empty array ([a55ce9d](https://github.com/SUI-Components/sui/commit/a55ce9d779cb310fea0979c053224b60ecb5ccc4))
 
 
 
-<a name="5.19.0"></a>
 # 5.19.0 (2019-07-01)
 
 
 ### Features
 
-* add --link-all flag ([c413f17](https://github.com/SUI-Components/sui/commit/c413f17))
+* add --link-all flag ([c413f17](https://github.com/SUI-Components/sui/commit/c413f178c06bf93e248977b930b1ad327954d9ee))
 
 
 
-<a name="5.18.0"></a>
 # 5.18.0 (2019-06-18)
 
 
 ### Features
 
-* move to workbox-webpack-plugin ([e5b959a](https://github.com/SUI-Components/sui/commit/e5b959a))
+* move to workbox-webpack-plugin ([e5b959a](https://github.com/SUI-Components/sui/commit/e5b959a8b7580205b6c025a837fb3a03b1dbde16))
 
 
 
-<a name="5.17.0"></a>
 # 5.17.0 (2019-06-18)
 
 
 ### Bug Fixes
 
-* sourceMap must be a boolean ([339c457](https://github.com/SUI-Components/sui/commit/339c457))
+* sourceMap must be a boolean ([339c457](https://github.com/SUI-Components/sui/commit/339c457d0d8d893a3e5da0ce2a0f23a011bffa90))
 
 
 ### Features
 
-* move to terser instead uglify ([30b0d2d](https://github.com/SUI-Components/sui/commit/30b0d2d))
+* move to terser instead uglify ([30b0d2d](https://github.com/SUI-Components/sui/commit/30b0d2db960a60e013dab2bb39de2bad8a1617b3))
 
 
 
-<a name="5.16.0"></a>
 # 5.16.0 (2019-06-17)
 
 
 ### Bug Fixes
 
-* pass targets config correctly ([7adb727](https://github.com/SUI-Components/sui/commit/7adb727))
+* pass targets config correctly ([7adb727](https://github.com/SUI-Components/sui/commit/7adb72756efa4c75672b55641afac4053813e4ce))
 
 
 ### Features
 
-* add targets config ([4a41ecf](https://github.com/SUI-Components/sui/commit/4a41ecf))
-* targets now is configurable ([ed82376](https://github.com/SUI-Components/sui/commit/ed82376))
-* upgrade dependencies ([e7a4ec7](https://github.com/SUI-Components/sui/commit/e7a4ec7))
-* upgrade dependencies ([7900f81](https://github.com/SUI-Components/sui/commit/7900f81))
+* add targets config ([4a41ecf](https://github.com/SUI-Components/sui/commit/4a41ecfcd9ea6c3f832b9d254b9f3669216ae875))
+* targets now is configurable ([ed82376](https://github.com/SUI-Components/sui/commit/ed823768e35c8d648c67336338129bc1e71b31cf))
+* upgrade dependencies ([e7a4ec7](https://github.com/SUI-Components/sui/commit/e7a4ec71f1cb79bd24c75d2af36f18d0e703c58f))
+* upgrade dependencies ([7900f81](https://github.com/SUI-Components/sui/commit/7900f815b05eb3d1f1ea34eae2e5bddbce7a936f))
 
 
 
-<a name="5.15.0"></a>
 # 5.15.0 (2019-06-06)
 
 
 ### Features
 
-* support react-router-dom link-package ([f534f37](https://github.com/SUI-Components/sui/commit/f534f37))
+* support react-router-dom link-package ([f534f37](https://github.com/SUI-Components/sui/commit/f534f3772e268b5d0c74a8c971e61a6efd95de10))
 
 
 
-<a name="5.14.0"></a>
 # 5.14.0 (2019-06-06)
 
 
 ### Features
 
-* add onlyHash config ([ebad99b](https://github.com/SUI-Components/sui/commit/ebad99b))
+* add onlyHash config ([ebad99b](https://github.com/SUI-Components/sui/commit/ebad99b41d7e897c9e05313bce886a1143a13e5f))
 
 
 
-<a name="5.13.0"></a>
 # 5.13.0 (2019-05-27)
 
 
 ### Bug Fixes
 
-* fix incompatibility issue when use link-loader ([c2d76f7](https://github.com/SUI-Components/sui/commit/c2d76f7))
-* upgrade to not unsecure dependency ([bafcaff](https://github.com/SUI-Components/sui/commit/bafcaff))
+* fix incompatibility issue when use link-loader ([c2d76f7](https://github.com/SUI-Components/sui/commit/c2d76f7117748ccbc44143038d85bd620be97bdb))
+* upgrade to not unsecure dependency ([bafcaff](https://github.com/SUI-Components/sui/commit/bafcaff1f940960218648d1b4b12395e406d6610))
 
 
 
-<a name="5.12.0"></a>
 # 5.12.0 (2019-05-24)
 
 
 ### Bug Fixes
 
-* avoid css causing problems ([1871e80](https://github.com/SUI-Components/sui/commit/1871e80))
+* avoid css causing problems ([1871e80](https://github.com/SUI-Components/sui/commit/1871e80865930f355ad0ddd2cbafd3722f53aebf))
 
 
 
-<a name="5.11.0"></a>
 # 5.11.0 (2019-05-22)
 
 
 ### Bug Fixes
 
-* avoid ssr missmatch ([211df3d](https://github.com/SUI-Components/sui/commit/211df3d))
+* avoid ssr missmatch ([211df3d](https://github.com/SUI-Components/sui/commit/211df3d0465eddc21d143de99112436509427b46))
 
 
 
-<a name="5.10.0"></a>
 # 5.10.0 (2019-05-21)
 
 
 ### Features
 
-* add externals-manifest feature ([0809229](https://github.com/SUI-Components/sui/commit/0809229))
-* fix cache manifest and Readme typos ([14b67cd](https://github.com/SUI-Components/sui/commit/14b67cd))
-* fix export module ([b6c83a5](https://github.com/SUI-Components/sui/commit/b6c83a5))
-* reuse logic to load the loader ([47dc435](https://github.com/SUI-Components/sui/commit/47dc435))
+* add externals-manifest feature ([0809229](https://github.com/SUI-Components/sui/commit/08092292f8f8ce7626848ed086e813c5e88628d4))
+* fix cache manifest and Readme typos ([14b67cd](https://github.com/SUI-Components/sui/commit/14b67cd254bf4ed1fc25e9f3b6f4bc386682ec4f))
+* fix export module ([b6c83a5](https://github.com/SUI-Components/sui/commit/b6c83a57fa765bc8b1a4c027623aec546f2298da))
+* reuse logic to load the loader ([47dc435](https://github.com/SUI-Components/sui/commit/47dc435c4aa9f00150ade1dd1b9e41bad95c2bcb))
 
 
 
-<a name="5.9.0"></a>
 # 5.9.0 (2019-05-16)
 
 
 ### Bug Fixes
 
-* use require.resolve in order to make compatible with linking ([abf7f21](https://github.com/SUI-Components/sui/commit/abf7f21))
+* use require.resolve in order to make compatible with linking ([abf7f21](https://github.com/SUI-Components/sui/commit/abf7f210bd0ea975837232cc98e19b3e48e93092))
 
 
 
-<a name="5.8.0"></a>
 # 5.8.0 (2019-04-26)
 
 
 ### Bug Fixes
 
-* force a weird minRatio to force all files to be compressed ([dd68737](https://github.com/SUI-Components/sui/commit/dd68737))
-* force compress all the files no matter the weird length could have the result ([2a9d844](https://github.com/SUI-Components/sui/commit/2a9d844))
+* force a weird minRatio to force all files to be compressed ([dd68737](https://github.com/SUI-Components/sui/commit/dd6873776d16b14fff73ce3783fcce5342fd9745))
+* force compress all the files no matter the weird length could have the result ([2a9d844](https://github.com/SUI-Components/sui/commit/2a9d8443d3a06dd9afe76c924cfd0effeb501add))
 
 
 
-<a name="5.7.0"></a>
 # 5.7.0 (2019-04-24)
 
 
 ### Bug Fixes
 
-* use standard extension for gzip files ([ba540cd](https://github.com/SUI-Components/sui/commit/ba540cd))
+* use standard extension for gzip files ([ba540cd](https://github.com/SUI-Components/sui/commit/ba540cdd7591991480bdb9369a949fd1a159e85c))
 
 
 
-<a name="5.5.0"></a>
 # 5.5.0 (2019-04-11)
 
 
 ### Bug Fixes
 
-* fix sui-bundler ([e604d32](https://github.com/SUI-Components/sui/commit/e604d32))
-* remove param for manual compression, use config instead ([7b9facf](https://github.com/SUI-Components/sui/commit/7b9facf))
+* fix sui-bundler ([e604d32](https://github.com/SUI-Components/sui/commit/e604d32895b74040df3e70f41992a8782890b0ac))
+* remove param for manual compression, use config instead ([7b9facf](https://github.com/SUI-Components/sui/commit/7b9facf6b7d4010020b442e357dadcec94cd2ebf))
 
 
 
-<a name="5.4.0"></a>
 # 5.4.0 (2019-04-11)
 
 
 ### Features
 
-* add -M flag for activating manual compression with the binary ([8afaf98](https://github.com/SUI-Components/sui/commit/8afaf98))
-* add gzip and brotli comprssion ([924adb3](https://github.com/SUI-Components/sui/commit/924adb3))
-* add manualCompression behind a flag ([69a1cf4](https://github.com/SUI-Components/sui/commit/69a1cf4))
+* add -M flag for activating manual compression with the binary ([8afaf98](https://github.com/SUI-Components/sui/commit/8afaf98470c90db09229f09ce25932935932f6e4))
+* add gzip and brotli comprssion ([924adb3](https://github.com/SUI-Components/sui/commit/924adb3f9a5263259f6e48edb64917cf7754f2e2))
+* add manualCompression behind a flag ([69a1cf4](https://github.com/SUI-Components/sui/commit/69a1cf41b4087fc5938e70381f567207311857d1))
 
 
 
-<a name="5.3.0"></a>
 # 5.3.0 (2019-03-20)
 
 
 ### Bug Fixes
 
-* fix linking packages not working with the react context package ([e908d4e](https://github.com/SUI-Components/sui/commit/e908d4e))
+* fix linking packages not working with the react context package ([e908d4e](https://github.com/SUI-Components/sui/commit/e908d4e50786a24a4ed4545a68bbc400c726ef4e))
 
 
 
-<a name="5.2.0"></a>
 # 5.2.0 (2019-03-18)
 
 
 ### Features
 
-* Move to babel-preset-sui@3 ([ac080bf](https://github.com/SUI-Components/sui/commit/ac080bf))
+* Move to babel-preset-sui@3 ([ac080bf](https://github.com/SUI-Components/sui/commit/ac080bfe722d70f930b853a7993e928465c2ba2c))
 
 
 
-<a name="5.1.0"></a>
 # 5.1.0 (2019-03-18)
 
 
 ### Bug Fixes
 
-* force release of new package and tags ([bd0a45b](https://github.com/SUI-Components/sui/commit/bd0a45b))
+* force release of new package and tags ([bd0a45b](https://github.com/SUI-Components/sui/commit/bd0a45b472382f06cf3c5d412570a4184f4a01ed))
 
 
 
-<a name="5.0.0"></a>
 # 5.0.0 (2019-03-18)
 
 
 ### Features
 
-* bump major ([4cd98df](https://github.com/SUI-Components/sui/commit/4cd98df))
-* remove react-hot-loader ([a742871](https://github.com/SUI-Components/sui/commit/a742871))
+* bump major ([4cd98df](https://github.com/SUI-Components/sui/commit/4cd98dfabda32009a67dd30b02a3411ec73c56d8))
+* remove react-hot-loader ([a742871](https://github.com/SUI-Components/sui/commit/a7428717616818e98baf7fe56607de088268ace6))
 
 
 ### BREAKING CHANGES
@@ -392,99 +375,91 @@ All notable changes to this project will be documented in this file.
 
 
 
-<a name="4.9.0"></a>
 # 4.9.0 (2019-02-28)
 
 
 ### Bug Fixes
 
-* add alias to get linked packages with react hooks working ([1f7ace4](https://github.com/SUI-Components/sui/commit/1f7ace4))
+* add alias to get linked packages with react hooks working ([1f7ace4](https://github.com/SUI-Components/sui/commit/1f7ace4cff38bab14f10782aa38b4353db79337d))
 
 
 
-<a name="4.8.0"></a>
 # 4.8.0 (2019-02-21)
 
 
 ### Features
 
-* patch in development mode react-dom for get working with hooks and other features ([cf25e42](https://github.com/SUI-Components/sui/commit/cf25e42))
+* patch in development mode react-dom for get working with hooks and other features ([cf25e42](https://github.com/SUI-Components/sui/commit/cf25e426ea0095ed71119fc7ca28e3e22571b81d))
 
 
 
-<a name="4.7.0"></a>
 # 4.7.0 (2019-02-11)
 
 
 ### Bug Fixes
 
-* set fixed react-dev-utils version ([f18c6cd](https://github.com/SUI-Components/sui/commit/f18c6cd))
+* set fixed react-dev-utils version ([f18c6cd](https://github.com/SUI-Components/sui/commit/f18c6cdfcd276e3b58c2f8a33a4e23fe47411532))
 
 
 
-<a name="4.6.0"></a>
 # 4.6.0 (2019-02-04)
 
 
 ### Bug Fixes
 
-* force terser version to avoid problems with webpack ([6c3351b](https://github.com/SUI-Components/sui/commit/6c3351b))
+* force terser version to avoid problems with webpack ([6c3351b](https://github.com/SUI-Components/sui/commit/6c3351b5c5f7a4d8e85a3c2df8dfdfbd683b5722))
 
 
 
-<a name="4.3.0"></a>
 # 4.3.0 (2019-01-31)
 
 
 ### Bug Fixes
 
-* alias react-hot-loader to avoid problems when linking a package ([102e28f](https://github.com/SUI-Components/sui/commit/102e28f))
-* copy dev server url only in first compile ([08a1981](https://github.com/SUI-Components/sui/commit/08a1981))
-* fix javascript link loader becasue wrong regex, add bunch of comments and prepare ([751842d](https://github.com/SUI-Components/sui/commit/751842d))
-* fix linking subdependencies, better separation and useful logging ([ec4981c](https://github.com/SUI-Components/sui/commit/ec4981c))
-* fix problems with capitalcase ([0dce3ba](https://github.com/SUI-Components/sui/commit/0dce3ba))
+* alias react-hot-loader to avoid problems when linking a package ([102e28f](https://github.com/SUI-Components/sui/commit/102e28f4be66a1667ee43d87ced5b9f6a826fdef))
+* copy dev server url only in first compile ([08a1981](https://github.com/SUI-Components/sui/commit/08a1981b8c2464fa29ab49ebf3780cd8d2f0b58c))
+* fix javascript link loader becasue wrong regex, add bunch of comments and prepare ([751842d](https://github.com/SUI-Components/sui/commit/751842d5ab9578270f2fff903d3aaa452904c836))
+* fix linking subdependencies, better separation and useful logging ([ec4981c](https://github.com/SUI-Components/sui/commit/ec4981cf0fce557b989c00aa32a99bff45b2a282))
+* fix problems with capitalcase ([0dce3ba](https://github.com/SUI-Components/sui/commit/0dce3ba58b25830ebe17021abd346a6c1596df87))
 
 
 ### Features
 
-* separate sassLinkLoader ([06abb73](https://github.com/SUI-Components/sui/commit/06abb73))
+* separate sassLinkLoader ([06abb73](https://github.com/SUI-Components/sui/commit/06abb73c11d82726890fcfff24766aac2eecdbb5))
 
 
 
-<a name="4.2.0"></a>
 # 4.2.0 (2019-01-25)
 
 
 ### Bug Fixes
 
-* Fix react-hot-loader on linked packages ([1aaf396](https://github.com/SUI-Components/sui/commit/1aaf396))
+* Fix react-hot-loader on linked packages ([1aaf396](https://github.com/SUI-Components/sui/commit/1aaf39629b2d5b2851e598302957ad8031311183))
 
 
 
-<a name="4.1.0"></a>
 # 4.1.0 (2019-01-15)
 
 
 ### Features
 
-* add sourcemaps section to README documentation ([f497cd5](https://github.com/SUI-Components/sui/commit/f497cd5))
-* add sourcemaps support to improve integration with sentry ([2ee87ff](https://github.com/SUI-Components/sui/commit/2ee87ff))
-* remove unnecessary comment from uglifyjs config ([61aea8c](https://github.com/SUI-Components/sui/commit/61aea8c))
+* add sourcemaps section to README documentation ([f497cd5](https://github.com/SUI-Components/sui/commit/f497cd521a71769ecf796d6bef3837498714c9db))
+* add sourcemaps support to improve integration with sentry ([2ee87ff](https://github.com/SUI-Components/sui/commit/2ee87ffdcac3dcab6d53f5b0feace258f5b5ee3a))
+* remove unnecessary comment from uglifyjs config ([61aea8c](https://github.com/SUI-Components/sui/commit/61aea8cc68fa887ea2714c12f836a180fa1e8324))
 
 
 
-<a name="5.0.0"></a>
 # 5.0.0 (2019-01-14)
 
 
 ### Bug Fixes
 
-* add missing babel-cli ([24b7307](https://github.com/SUI-Components/sui/commit/24b7307))
+* add missing babel-cli ([24b7307](https://github.com/SUI-Components/sui/commit/24b73074fb99454a7f9d0c097fc249f1e6c1e8ee))
 
 
 ### Features
 
-* use new babel-preset-sui ([97ee9b3](https://github.com/SUI-Components/sui/commit/97ee9b3))
+* use new babel-preset-sui ([97ee9b3](https://github.com/SUI-Components/sui/commit/97ee9b311069aa3ce94a0a4d3fc5ca13cd28f64f))
 
 
 ### BREAKING CHANGES
@@ -493,24 +468,23 @@ All notable changes to this project will be documented in this file.
 
 
 
-<a name="3.34.0"></a>
 # 3.34.0 (2019-01-07)
 
 
 ### Bug Fixes
 
-* fix security issues with compromised dependencies ([46e450f](https://github.com/SUI-Components/sui/commit/46e450f))
-* remove default value not needed ([e3b9cf0](https://github.com/SUI-Components/sui/commit/e3b9cf0))
+* fix security issues with compromised dependencies ([46e450f](https://github.com/SUI-Components/sui/commit/46e450fd19ab34f7b8c40af25176412d88320873))
+* remove default value not needed ([e3b9cf0](https://github.com/SUI-Components/sui/commit/e3b9cf024d9158732a2a7514991a80f418c36368))
 
 
 ### Features
 
-* add react-hot-loader for dev webpack usage with babel preset sui ([a226993](https://github.com/SUI-Components/sui/commit/a226993))
-* add react-hot-loader/babel for webpack dev ([385d9ca](https://github.com/SUI-Components/sui/commit/385d9ca))
-* back to simple object instead function ([f88e3d2](https://github.com/SUI-Components/sui/commit/f88e3d2))
-* bump to MAJOR version to publish beta ([4d43fff](https://github.com/SUI-Components/sui/commit/4d43fff))
-* new beta ([2aafa25](https://github.com/SUI-Components/sui/commit/2aafa25))
-* upgrade dependencies ([5e5976e](https://github.com/SUI-Components/sui/commit/5e5976e))
+* add react-hot-loader for dev webpack usage with babel preset sui ([a226993](https://github.com/SUI-Components/sui/commit/a22699385f9dc41cd1feb9ff4da257726bc76b62))
+* add react-hot-loader/babel for webpack dev ([385d9ca](https://github.com/SUI-Components/sui/commit/385d9ca86868fdcae85032ea989d23bd646fa1fb))
+* back to simple object instead function ([f88e3d2](https://github.com/SUI-Components/sui/commit/f88e3d254ef1b0912a81b347c0022aefcdcd145a))
+* bump to MAJOR version to publish beta ([4d43fff](https://github.com/SUI-Components/sui/commit/4d43fff9fb142dd2f49fb7e9de5d782f36c34829))
+* new beta ([2aafa25](https://github.com/SUI-Components/sui/commit/2aafa25f35f124a715c0f9674abf71324eed5401))
+* upgrade dependencies ([5e5976e](https://github.com/SUI-Components/sui/commit/5e5976ec1f605631a236ee22365a1baf0952135c))
 
 
 ### BREAKING CHANGES
@@ -520,383 +494,346 @@ with the old one
 
 
 
-<a name="3.32.0"></a>
 # 3.32.0 (2018-12-11)
 
 
 
-<a name="3.31.0"></a>
 # 3.31.0 (2018-12-11)
 
 
 ### Bug Fixes
 
-* fix Windows RegExp syntax in LoaderConfigBuilder ([e626c3c](https://github.com/SUI-Components/sui/commit/e626c3c))
-* new release with fix for npm-run-all ([8431bca](https://github.com/SUI-Components/sui/commit/8431bca))
+* fix Windows RegExp syntax in LoaderConfigBuilder ([e626c3c](https://github.com/SUI-Components/sui/commit/e626c3c3da94db2f3704340b895eb5517171bee1))
+* new release with fix for npm-run-all ([8431bca](https://github.com/SUI-Components/sui/commit/8431bca8f183bfcd804b25c49d5c98850e986c3d))
 
 
 
-<a name="3.30.0"></a>
 # 3.30.0 (2018-12-11)
 
 
 ### Bug Fixes
 
-* fix windows bug with Regex rules ([d1dffa7](https://github.com/SUI-Components/sui/commit/d1dffa7))
+* fix windows bug with Regex rules ([d1dffa7](https://github.com/SUI-Components/sui/commit/d1dffa7dc435f3f7526da4feb2bd1d59813a888f))
 
 
 
-<a name="3.29.0"></a>
 # 3.29.0 (2018-12-04)
 
 
 ### Bug Fixes
 
-* ignore scss import files in server ([e41163e](https://github.com/SUI-Components/sui/commit/e41163e))
+* ignore scss import files in server ([e41163e](https://github.com/SUI-Components/sui/commit/e41163ef29eae46f8cd372559e356cddd72fb21a))
 
 
 ### Features
 
-* add server support for dynamic import and keep chunkNames for client ([6698cd1](https://github.com/SUI-Components/sui/commit/6698cd1))
+* add server support for dynamic import and keep chunkNames for client ([6698cd1](https://github.com/SUI-Components/sui/commit/6698cd1b87ebf7ebc76038390834d6c4f7285b68))
 
 
 
-<a name="3.28.0"></a>
 # 3.28.0 (2018-11-08)
 
 
 ### Bug Fixes
 
-* fix resolves to better linking and be sure we use own versions ([d21e581](https://github.com/SUI-Components/sui/commit/d21e581))
+* fix resolves to better linking and be sure we use own versions ([d21e581](https://github.com/SUI-Components/sui/commit/d21e581bf6c9ad27d304b0c10dc6439a4476897e))
 
 
 ### Features
 
-* add option to make no pre loaders run ([d0d240b](https://github.com/SUI-Components/sui/commit/d0d240b))
-* show port when compilation is not broken, only a warning ([5be259d](https://github.com/SUI-Components/sui/commit/5be259d))
-* upgrade dependencies ([823cc94](https://github.com/SUI-Components/sui/commit/823cc94))
+* add option to make no pre loaders run ([d0d240b](https://github.com/SUI-Components/sui/commit/d0d240b7f18b3be439127dc256d760daa43d4ff5))
+* show port when compilation is not broken, only a warning ([5be259d](https://github.com/SUI-Components/sui/commit/5be259dc414f063a748178221b2d1c974d8f7dad))
+* update to new options from babel-loader ([6a152d8](https://github.com/SUI-Components/sui/commit/6a152d832d0b9d39089d70dd1cf68cae1b15eea8))
+* upgrade dependencies ([823cc94](https://github.com/SUI-Components/sui/commit/823cc94326c9d09ea6f27a350fabc3c142bc56ca))
+* upgrade dependencies from babel7 ([8f85757](https://github.com/SUI-Components/sui/commit/8f85757b5ffe0adcb35ed706e97872ff09d505dc))
+* use new babel-loader with Babel@7 ([4b42854](https://github.com/SUI-Components/sui/commit/4b4285480c5a6955a5ca27a0f6bcd5faabf6a239))
 
 
 
-<a name="3.27.0"></a>
 # 3.27.0 (2018-10-25)
 
 
 
-<a name="3.26.0"></a>
 # 3.26.0 (2018-10-24)
 
 
 ### Bug Fixes
 
-* fix jsonp function param in webpack lib config ([28b3749](https://github.com/SUI-Components/sui/commit/28b3749))
+* fix jsonp function param in webpack lib config ([28b3749](https://github.com/SUI-Components/sui/commit/28b3749c35b5423ba2064ce060f44b109af641b0))
 
 
 ### Features
 
-* add resolve.alias to be passed as config param ([9ac79ba](https://github.com/SUI-Components/sui/commit/9ac79ba))
-* update to new options from babel-loader ([6a152d8](https://github.com/SUI-Components/sui/commit/6a152d8))
-* upgrade dependencies from babel7 ([8f85757](https://github.com/SUI-Components/sui/commit/8f85757))
+* add resolve.alias to be passed as config param ([9ac79ba](https://github.com/SUI-Components/sui/commit/9ac79bab7463a183f45b721abe6cfa55ee73727b))
 
 
 
-<a name="3.25.0"></a>
 # 3.25.0 (2018-10-15)
 
 
 ### Features
 
-* update bundle analyzer to latest version ([9604fcd](https://github.com/SUI-Components/sui/commit/9604fcd))
+* update bundle analyzer to latest version ([9604fcd](https://github.com/SUI-Components/sui/commit/9604fcd235655188fc52113c4397e0f3665a8241))
 
 
 
-<a name="3.24.0"></a>
 # 3.24.0 (2018-10-09)
 
 
 ### Bug Fixes
 
-* avoid collision of multiple webpack runtimes ([d6f627c](https://github.com/SUI-Components/sui/commit/d6f627c))
-* avoid collision of multiple webpack runtimes ([6e65145](https://github.com/SUI-Components/sui/commit/6e65145))
+* avoid collision of multiple webpack runtimes ([d6f627c](https://github.com/SUI-Components/sui/commit/d6f627cf78bfc6ef813fba7ac63770ceb5f7d51b))
+* avoid collision of multiple webpack runtimes ([6e65145](https://github.com/SUI-Components/sui/commit/6e65145cff8c714a7d70913af4382299b5b0b379))
 
 
 
-<a name="3.23.0"></a>
 # 3.23.0 (2018-10-02)
 
 
 ### Bug Fixes
 
-* let our bundler notice us about our bundle environment ([8f92953](https://github.com/SUI-Components/sui/commit/8f92953))
+* let our bundler notice us about our bundle environment ([8f92953](https://github.com/SUI-Components/sui/commit/8f92953ae1e2f9d327191630b53876dd0b172196))
 
 
 
-<a name="3.22.0"></a>
 # 3.22.0 (2018-09-26)
 
 
 ### Bug Fixes
 
-* add optimization node env overwrite to false in order to avoid side effects on ser ([888d34d](https://github.com/SUI-Components/sui/commit/888d34d))
+* add optimization node env overwrite to false in order to avoid side effects on ser ([888d34d](https://github.com/SUI-Components/sui/commit/888d34d00d792cef2bb417b0ca35f8400d89ba2d))
 
 
 
-<a name="3.21.0"></a>
 # 3.21.0 (2018-09-20)
 
 
 ### Bug Fixes
 
-* fix webpack mode when compile a server ([e2bec1c](https://github.com/SUI-Components/sui/commit/e2bec1c))
-
-
-### Features
-
-* use new babel-loader with Babel@7 ([4b42854](https://github.com/SUI-Components/sui/commit/4b42854))
+* fix webpack mode when compile a server ([e2bec1c](https://github.com/SUI-Components/sui/commit/e2bec1cabf9c85c269899ac4989ed5ec18cc6f2b))
 
 
 
-<a name="3.20.0"></a>
 # 3.20.0 (2018-08-20)
 
 
 
-<a name="3.19.0"></a>
 # 3.19.0 (2018-08-16)
 
 
 ### Bug Fixes
 
-* adjust public path on root=true ([0698bc5](https://github.com/SUI-Components/sui/commit/0698bc5))
-* warn when library path is not provided ([c94490e](https://github.com/SUI-Components/sui/commit/c94490e))
+* adjust public path on root=true ([0698bc5](https://github.com/SUI-Components/sui/commit/0698bc554720c5d1c927bd16aea362cde2d51e48))
+* warn when library path is not provided ([c94490e](https://github.com/SUI-Components/sui/commit/c94490eb01fcb9993ff21b652aebedfa84a915fb))
 
 
 ### Features
 
-* adds relative to absolute path conversion ([64785a2](https://github.com/SUI-Components/sui/commit/64785a2))
-* sui-bundler lib --umd option ([6e76e57](https://github.com/SUI-Components/sui/commit/6e76e57))
+* adds relative to absolute path conversion ([64785a2](https://github.com/SUI-Components/sui/commit/64785a2cd3f42422babb28ad311d2f37d1674a5a))
+* sui-bundler lib --umd option ([6e76e57](https://github.com/SUI-Components/sui/commit/6e76e570a52a4415844bd5a6638e6c0ac6fd7ddc))
 
 
 
-<a name="3.18.0"></a>
 # 3.18.0 (2018-08-10)
 
 
 ### Bug Fixes
 
-* now sass is linked too ([ed30901](https://github.com/SUI-Components/sui/commit/ed30901))
+* now sass is linked too ([ed30901](https://github.com/SUI-Components/sui/commit/ed30901871f5bdebffe1882c5f8c3090518ba42a))
 
 
 
-<a name="3.17.0"></a>
 # 3.17.0 (2018-08-07)
 
 
 ### Bug Fixes
 
-* let autoprefixer comments to avoid problems ([be99f15](https://github.com/SUI-Components/sui/commit/be99f15))
+* let autoprefixer comments to avoid problems ([be99f15](https://github.com/SUI-Components/sui/commit/be99f159f673f6777adbedc817c3803c73e788d7))
 
 
 
-<a name="3.16.0"></a>
 # 3.16.0 (2018-08-07)
 
 
 ### Features
 
-* remove all comments on CSS after building it ([d76cfa9](https://github.com/SUI-Components/sui/commit/d76cfa9))
-* update all dependencies to latest and remove not used ones ([6576422](https://github.com/SUI-Components/sui/commit/6576422))
+* remove all comments on CSS after building it ([d76cfa9](https://github.com/SUI-Components/sui/commit/d76cfa919f9504b5ac7313fe542e546c87aa2dae))
+* update all dependencies to latest and remove not used ones ([6576422](https://github.com/SUI-Components/sui/commit/65764222756774d061e818956e029b63a31b9759))
 
 
 
-<a name="3.15.0"></a>
 # 3.15.0 (2018-08-06)
 
 
 ### Bug Fixes
 
-* use sui-bundler analyze wihout removed dependency ([b19a233](https://github.com/SUI-Components/sui/commit/b19a233))
+* use sui-bundler analyze wihout removed dependency ([b19a233](https://github.com/SUI-Components/sui/commit/b19a233b67d8ec8688b79b7bfbdd12b059f3ac5e))
 
 
 
-<a name="3.14.0"></a>
 # 3.14.0 (2018-08-06)
 
 
 ### Features
 
-* bump version ([7d629cf](https://github.com/SUI-Components/sui/commit/7d629cf))
+* bump version ([7d629cf](https://github.com/SUI-Components/sui/commit/7d629cfe4784c0cc99b7ed781d0a9bce5cce1253))
 
 
 
-<a name="3.12.0"></a>
 # 3.12.0 (2018-08-06)
 
 
 ### Bug Fixes
 
-* fix error with default parameters ([05ef733](https://github.com/SUI-Components/sui/commit/05ef733))
+* fix error with default parameters ([05ef733](https://github.com/SUI-Components/sui/commit/05ef733b052ad931ae0c8be8e8eaebe8ed1aa6ec))
 
 
 ### Features
 
-* add link-loader ([8590edb](https://github.com/SUI-Components/sui/commit/8590edb))
-* improve console output ([ce10da8](https://github.com/SUI-Components/sui/commit/ce10da8))
+* add link-loader ([8590edb](https://github.com/SUI-Components/sui/commit/8590edb43cba04fb94c36e65a0f156209dfd9068))
+* improve console output ([ce10da8](https://github.com/SUI-Components/sui/commit/ce10da8b9bebe2db6f20a3f7d5b041696637755b))
 
 
 
-<a name="3.12.0"></a>
 # 3.12.0 (2018-07-27)
 
 
 ### Features
 
-* export a start function ([c5cc60b](https://github.com/SUI-Components/sui/commit/c5cc60b))
-* option to not use version directory ([deb58bf](https://github.com/SUI-Components/sui/commit/deb58bf))
+* export a start function ([c5cc60b](https://github.com/SUI-Components/sui/commit/c5cc60b155423c92949819a0ecdfd7cecc88fabb))
+* option to not use version directory ([deb58bf](https://github.com/SUI-Components/sui/commit/deb58bf452ae17cb61a17bb3e73bf0b71526ed17))
 
 
 
-<a name="3.11.0"></a>
 # 3.11.0 (2018-07-13)
 
 
 ### Bug Fixes
 
-* fix Travis CI broken when used node 10 ([735fafa](https://github.com/SUI-Components/sui/commit/735fafa))
+* fix Travis CI broken when used node 10 ([735fafa](https://github.com/SUI-Components/sui/commit/735fafadbcf439a84dc43e8225900ca359572871))
 
 
 
-<a name="3.10.0"></a>
 # 3.10.0 (2018-07-10)
 
 
 ### Bug Fixes
 
-* allow last versions of sui-helpers ([3ec95d1](https://github.com/SUI-Components/sui/commit/3ec95d1))
+* allow last versions of sui-helpers ([3ec95d1](https://github.com/SUI-Components/sui/commit/3ec95d1870d972acf7bb0cf78f2f6a14ec3504ca))
 
 
 ### Features
 
-* improve dev with eslint loader ([fe74597](https://github.com/SUI-Components/sui/commit/fe74597))
-* use cacheBabel compiled ([00ba04c](https://github.com/SUI-Components/sui/commit/00ba04c))
-* use react-dev-tools for dev command ([fc43780](https://github.com/SUI-Components/sui/commit/fc43780))
+* improve dev with eslint loader ([fe74597](https://github.com/SUI-Components/sui/commit/fe745979cc17c1822c062b3a41c00e2515d3d4c2))
+* use cacheBabel compiled ([00ba04c](https://github.com/SUI-Components/sui/commit/00ba04caa1a0c24167c5dee812228a7e0b7c0313))
+* use react-dev-tools for dev command ([fc43780](https://github.com/SUI-Components/sui/commit/fc43780cf489c9d01010ab02763bc771dcef9ffb))
 
 
 
-<a name="3.9.0"></a>
 # 3.9.0 (2018-06-25)
 
 
 
-<a name="3.8.0"></a>
 # 3.8.0 (2018-06-21)
 
 
 ### Bug Fixes
 
-* fix bundling in windows ([ed9c416](https://github.com/SUI-Components/sui/commit/ed9c416))
-* use Object.assign instead spread operator ([4bab0f8](https://github.com/SUI-Components/sui/commit/4bab0f8))
-* use Object.assign instead spread operator ([ecb8ac9](https://github.com/SUI-Components/sui/commit/ecb8ac9))
+* fix bundling in windows ([ed9c416](https://github.com/SUI-Components/sui/commit/ed9c4163079bb09a5ab37b013fbfce7f461794ff))
+* use Object.assign instead spread operator ([4bab0f8](https://github.com/SUI-Components/sui/commit/4bab0f8cc43680386692ae2c68ca484b725bd5d1))
+* use Object.assign instead spread operator ([ecb8ac9](https://github.com/SUI-Components/sui/commit/ecb8ac96108a6ac1d0516173c6f206ea3dc762c2))
 
 
 
-<a name="3.7.0"></a>
 # 3.7.0 (2018-06-20)
 
 
 ### Features
 
-* bump version ([c4d2567](https://github.com/SUI-Components/sui/commit/c4d2567))
+* bump version ([c4d2567](https://github.com/SUI-Components/sui/commit/c4d2567a1962cfe4ea80425944014f230c91daac))
 
 
 
-<a name="3.6.0"></a>
 # 3.6.0 (2018-06-20)
 
 
 ### Bug Fixes
 
-* prepare for windows ([3dd607a](https://github.com/SUI-Components/sui/commit/3dd607a))
+* prepare for windows ([3dd607a](https://github.com/SUI-Components/sui/commit/3dd607a4c00743c2112466903de1ee585897e7e1))
 
 
 ### Features
 
-* add context option to build ([49285e5](https://github.com/SUI-Components/sui/commit/49285e5))
-* use index.html like fallback ([b84e916](https://github.com/SUI-Components/sui/commit/b84e916))
+* add context option to build ([49285e5](https://github.com/SUI-Components/sui/commit/49285e5972e82266406098c0cf10567eaf14c337))
+* use index.html like fallback ([b84e916](https://github.com/SUI-Components/sui/commit/b84e9161293fa99cafba84c71ee1caeffcf709f3))
 
 
 
-<a name="3.5.0"></a>
 # 3.5.0 (2018-06-13)
 
 
 ### Bug Fixes
 
-* sui-bundler dev not using babel-preset-sui ([d0ca7ef](https://github.com/SUI-Components/sui/commit/d0ca7ef))
+* sui-bundler dev not using babel-preset-sui ([d0ca7ef](https://github.com/SUI-Components/sui/commit/d0ca7ef1848a9556a05f7f3fc221f6a04844db83))
 
 
 
-<a name="3.4.0"></a>
 # 3.4.0 (2018-06-11)
 
 
 ### Features
 
-* sui-bundler lib to bundle libraries ([4df41ac](https://github.com/SUI-Components/sui/commit/4df41ac))
+* sui-bundler lib to bundle libraries ([4df41ac](https://github.com/SUI-Components/sui/commit/4df41ac0f2176147ee189f7015e7fd861afccb57))
 
 
 
-<a name="3.3.0"></a>
 # 3.3.0 (2018-05-10)
 
 
 ### Bug Fixes
 
-* fix regression that runtime has not been created ([90994ff](https://github.com/SUI-Components/sui/commit/90994ff))
+* fix regression that runtime has not been created ([90994ff](https://github.com/SUI-Components/sui/commit/90994ff9dd89a2a15a12ae75957ebff88e8676f7))
 
 
 
-<a name="3.2.0"></a>
 # 3.2.0 (2018-05-04)
 
 
 ### Bug Fixes
 
-* avoid use Gently in the server config ([8d79955](https://github.com/SUI-Components/sui/commit/8d79955))
+* avoid use Gently in the server config ([8d79955](https://github.com/SUI-Components/sui/commit/8d799552fdb39dca8a4ae69208e58e28395c3325))
 
 
 
-<a name="3.1.0"></a>
 # 3.1.0 (2018-04-30)
 
 
 ### Bug Fixes
 
-* use Object.assign for compatibility withh node 6 ([424da99](https://github.com/SUI-Components/sui/commit/424da99))
+* use Object.assign for compatibility withh node 6 ([424da99](https://github.com/SUI-Components/sui/commit/424da99ab9977b981bb2f82863542b78b52369b8))
 
 
 
-<a name="3.0.0"></a>
 # 3.0.0 (2018-04-12)
 
 
 ### Bug Fixes
 
-* loadUniversalOptionsPlugin in pro as well ([b069576](https://github.com/SUI-Components/sui/commit/b069576))
+* loadUniversalOptionsPlugin in pro as well ([b069576](https://github.com/SUI-Components/sui/commit/b0695763936bb12d5fb3d724a777a836b12ac070))
 
 
 ### Features
 
-* adapt production configuration to be as development ([216fa61](https://github.com/SUI-Components/sui/commit/216fa61))
-* adapt production configuration to new versions ([d6474d5](https://github.com/SUI-Components/sui/commit/d6474d5))
-* merge ([6a3f18d](https://github.com/SUI-Components/sui/commit/6a3f18d))
-* remove json-loader and use native instead ([a8d939f](https://github.com/SUI-Components/sui/commit/a8d939f))
-* remove not needed loaders for some files and rollback to loader ([dd6a81a](https://github.com/SUI-Components/sui/commit/dd6a81a))
-* return loaderOptionsPlugin to be used ([5b6c358](https://github.com/SUI-Components/sui/commit/5b6c358))
-* update dependencies ([bbe43b1](https://github.com/SUI-Components/sui/commit/bbe43b1))
-* update dependencies ([6788838](https://github.com/SUI-Components/sui/commit/6788838))
-* update dependencies ([55217aa](https://github.com/SUI-Components/sui/commit/55217aa))
-* update html-webpack-plugin version ([389f546](https://github.com/SUI-Components/sui/commit/389f546))
+* adapt production configuration to be as development ([216fa61](https://github.com/SUI-Components/sui/commit/216fa614b3344c84466779422a33d7abf8d195d1))
+* adapt production configuration to new versions ([d6474d5](https://github.com/SUI-Components/sui/commit/d6474d56fdf49bf9ee85f7a5a131b14e45ff0c89))
+* merge ([6a3f18d](https://github.com/SUI-Components/sui/commit/6a3f18dfee2160138f881ef03bcd81e26ea37f71))
+* remove json-loader and use native instead ([a8d939f](https://github.com/SUI-Components/sui/commit/a8d939fea0a86a95aa78a69aaf67c49be9cb62e9))
+* remove not needed loaders for some files and rollback to loader ([dd6a81a](https://github.com/SUI-Components/sui/commit/dd6a81a1b5244f3c1f067171bd8ff023c050eae1))
+* return loaderOptionsPlugin to be used ([5b6c358](https://github.com/SUI-Components/sui/commit/5b6c358a7a68b731c7d827165e630d48453f0e49))
+* update dependencies ([bbe43b1](https://github.com/SUI-Components/sui/commit/bbe43b1fa66f0cd99702bc5f43da6f2c24f931e4))
+* update dependencies ([6788838](https://github.com/SUI-Components/sui/commit/6788838c5877e78fd6e9be009d2556df9c5174f3))
+* update dependencies ([55217aa](https://github.com/SUI-Components/sui/commit/55217aa5db02949471efba0a28c7e0f332b1e73e))
+* update html-webpack-plugin version ([389f546](https://github.com/SUI-Components/sui/commit/389f5469e3cf3acd07a34def6e3f5d5d688b8112))
 
 
 ### BREAKING CHANGES
@@ -906,226 +843,206 @@ with the old one
 
 
 
-<a name="2.15.0"></a>
 # 2.15.0 (2018-03-28)
 
 
 ### Bug Fixes
 
-* specify include and avoid getting others babelrc than the one we want ([12f60af](https://github.com/SUI-Components/sui/commit/12f60af))
-* update dependencies to fix some problems ([e2f8370](https://github.com/SUI-Components/sui/commit/e2f8370))
+* specify include and avoid getting others babelrc than the one we want ([12f60af](https://github.com/SUI-Components/sui/commit/12f60af84eb9c1b176a6a6fb1d122b72f586114c))
+* update dependencies to fix some problems ([e2f8370](https://github.com/SUI-Components/sui/commit/e2f8370420b48f54bf86deeaf9275a09892f4460))
 
 
 ### Features
 
-* add node-externals dep ([bd09441](https://github.com/SUI-Components/sui/commit/bd09441))
-* add server config ([cbc8a01](https://github.com/SUI-Components/sui/commit/cbc8a01))
-* relay more on default values ([99694b2](https://github.com/SUI-Components/sui/commit/99694b2))
-* remove deprecated way to add to the loader the config on PRO ([b9fb841](https://github.com/SUI-Components/sui/commit/b9fb841))
-* stop using old loader for webpack 2 and kiss ([0a83817](https://github.com/SUI-Components/sui/commit/0a83817))
-* update dependencies ([e448b94](https://github.com/SUI-Components/sui/commit/e448b94))
-* update dependencies ([988eb62](https://github.com/SUI-Components/sui/commit/988eb62))
-* update dependencies to latest versions and ensure Webpack 4 compatibility ([9771c45](https://github.com/SUI-Components/sui/commit/9771c45))
-* update node-sass-json-importer ([9da5273](https://github.com/SUI-Components/sui/commit/9da5273))
-* update to latest dependencies con hotfixes and webpack 4 support ([8ef23f7](https://github.com/SUI-Components/sui/commit/8ef23f7))
-* use latest versions of dependencies ([2237dfe](https://github.com/SUI-Components/sui/commit/2237dfe))
-* use manual vendor ([b03e2f6](https://github.com/SUI-Components/sui/commit/b03e2f6))
+* add node-externals dep ([bd09441](https://github.com/SUI-Components/sui/commit/bd09441a4ae8adf46aea79d918d0b58a85a6a712))
+* add server config ([cbc8a01](https://github.com/SUI-Components/sui/commit/cbc8a0186ea37e16bfa697130854d6084b996982))
+* relay more on default values ([99694b2](https://github.com/SUI-Components/sui/commit/99694b203ba6771b965df9cce87e02ce79a6fa6f))
+* remove deprecated way to add to the loader the config on PRO ([b9fb841](https://github.com/SUI-Components/sui/commit/b9fb8410c29ead0029285026f2a97dbf3bb82317))
+* stop using old loader for webpack 2 and kiss ([0a83817](https://github.com/SUI-Components/sui/commit/0a838171de27a2c99a4e75fe9273bae47872a306))
+* update dependencies ([e448b94](https://github.com/SUI-Components/sui/commit/e448b9464d9334758e3e84702afef1f5140ef103))
+* update dependencies ([988eb62](https://github.com/SUI-Components/sui/commit/988eb62c8b833878a0ee60e7f92990147297bd4d))
+* update dependencies to latest versions and ensure Webpack 4 compatibility ([9771c45](https://github.com/SUI-Components/sui/commit/9771c454c0c91505ced0ff406d0a85b84c3f26c1))
+* update node-sass-json-importer ([9da5273](https://github.com/SUI-Components/sui/commit/9da5273f8a3128ab1b5236dee468038237c01df1))
+* update to latest dependencies con hotfixes and webpack 4 support ([8ef23f7](https://github.com/SUI-Components/sui/commit/8ef23f73755183285ac18617046efa184f257320))
+* use latest versions of dependencies ([2237dfe](https://github.com/SUI-Components/sui/commit/2237dfe77e3c6f30684598c9a53470eadb03cae2))
+* use manual vendor ([b03e2f6](https://github.com/SUI-Components/sui/commit/b03e2f67478951d17274713fdcfce905a67784b3))
 
 
 
-<a name="2.14.0"></a>
 # 2.14.0 (2018-02-28)
 
 
 ### Features
 
-* translate to english ([d8d812f](https://github.com/SUI-Components/sui/commit/d8d812f))
-* update dependencies ([3b3c74a](https://github.com/SUI-Components/sui/commit/3b3c74a))
-* update dependencies ([bda676d](https://github.com/SUI-Components/sui/commit/bda676d))
-* use babel-loader new version compatible with webpack 4 ([e7defdf](https://github.com/SUI-Components/sui/commit/e7defdf))
+* translate to english ([d8d812f](https://github.com/SUI-Components/sui/commit/d8d812fdb595560babddb3101a3580611b7b13ac))
+* update dependencies ([3b3c74a](https://github.com/SUI-Components/sui/commit/3b3c74a1cf9ab1eb3316460e14656e13d3a08254))
+* update dependencies ([bda676d](https://github.com/SUI-Components/sui/commit/bda676dfc471a651ea734268efb872a96ff6883c))
+* use babel-loader new version compatible with webpack 4 ([e7defdf](https://github.com/SUI-Components/sui/commit/e7defdf14648f1de2b6b0890e6aa6c8fc3dd67d9))
 
 
 
-<a name="2.13.0"></a>
 # 2.13.0 (2018-02-22)
 
 
 ### Features
 
-* add a way to modify the config for Webpack's scriptsExtPlugin ([51cdfac](https://github.com/SUI-Components/sui/commit/51cdfac))
+* add a way to modify the config for Webpack's scriptsExtPlugin ([51cdfac](https://github.com/SUI-Components/sui/commit/51cdfacc6faffb72014f278917034a922e2e7bcc))
 
 
 
-<a name="2.12.0"></a>
 # 2.12.0 (2018-02-05)
 
 
 ### Features
 
-* show the time used for dev bundling ([5ffb110](https://github.com/SUI-Components/sui/commit/5ffb110))
-* use new modules use rules ([cafb5bb](https://github.com/SUI-Components/sui/commit/cafb5bb))
+* show the time used for dev bundling ([5ffb110](https://github.com/SUI-Components/sui/commit/5ffb1102b77e4c377b1304861d297ec2f6aa99e4))
+* use new modules use rules ([cafb5bb](https://github.com/SUI-Components/sui/commit/cafb5bbc9ca41c0bcb4b0a47dd8241ddee9da128))
 
 
 
-<a name="2.11.0"></a>
 # 2.11.0 (2017-12-28)
 
 
 ### Features
 
-* remove browser-sync as not being used anywhere and adding building time ([ad513a2](https://github.com/SUI-Components/sui/commit/ad513a2))
+* remove browser-sync as not being used anywhere and adding building time ([ad513a2](https://github.com/SUI-Components/sui/commit/ad513a2adc4fb0375c594d3f4b7544cb3fe7a72f))
 
 
 
-<a name="2.10.0"></a>
 # 2.10.0 (2017-11-10)
 
 
 ### Features
 
-* update to latest webpack version ([5efa34f](https://github.com/SUI-Components/sui/commit/5efa34f))
-* use new uglifyJSPlugin version ([ae6830e](https://github.com/SUI-Components/sui/commit/ae6830e))
+* update to latest webpack version ([5efa34f](https://github.com/SUI-Components/sui/commit/5efa34fe1679b08b89e2ce1b72355816d8826f3c))
+* use new uglifyJSPlugin version ([ae6830e](https://github.com/SUI-Components/sui/commit/ae6830eb667c53bbbd206b74c6c4288d5938a0df))
 
 
 
-<a name="2.9.0"></a>
 # 2.9.0 (2017-09-21)
 
 
 ### Bug Fixes
 
-* replace references to sui-studio by s-ui/studio ([4dfffb9](https://github.com/SUI-Components/sui/commit/4dfffb9))
+* replace references to sui-studio by s-ui/studio ([4dfffb9](https://github.com/SUI-Components/sui/commit/4dfffb9eb3a06d3cace0b007a917ee5b99931c87))
 
 
 
-<a name="2.8.0"></a>
 # 2.8.0 (2017-09-21)
 
 
 ### Bug Fixes
 
-* replace references to schibstedspain ([cd17403](https://github.com/SUI-Components/sui/commit/cd17403))
+* replace references to schibstedspain ([cd17403](https://github.com/SUI-Components/sui/commit/cd174037f51f3117aa45488867e80e5d542bb1ee))
 
 
 
-<a name="2.7.0"></a>
 # 2.7.0 (2017-09-21)
 
 
 ### Features
 
-* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([2687a1f](https://github.com/SUI-Components/sui/commit/2687a1f))
+* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([2687a1f](https://github.com/SUI-Components/sui/commit/2687a1fc8c9fc969adbfd060c07dde419e516189))
 
 
 
-<a name="2.6.0"></a>
 # 2.6.0 (2017-09-13)
 
 
 
-<a name="2.5.0"></a>
 # 2.5.0 (2017-08-29)
 
 
 ### Bug Fixes
 
-* fix build broken in windows ([2b6441e](https://github.com/SUI-Components/sui/commit/2b6441e))
+* fix build broken in windows ([2b6441e](https://github.com/SUI-Components/sui/commit/2b6441e4f1ec1052c5b1a76ba9f5496510e064df))
 
 
 
-<a name="1.20.0"></a>
 # 1.20.0 (2017-08-29)
 
 
 
-<a name="2.4.0"></a>
 # 2.4.0 (2017-08-29)
 
 
 ### Bug Fixes
 
-* fix json files not loading in sass imports ([02677c1](https://github.com/SUI-Components/sui/commit/02677c1))
+* fix json files not loading in sass imports ([02677c1](https://github.com/SUI-Components/sui/commit/02677c1e8bcc08eb9482c453b9712bd0f8ce1fea))
 
 
 
-<a name="2.3.0"></a>
 # 2.3.0 (2017-08-09)
 
 
 ### Bug Fixes
 
-* working inside the sui-studio ([c782bf0](https://github.com/SUI-Components/sui/commit/c782bf0))
+* working inside the sui-studio ([c782bf0](https://github.com/SUI-Components/sui/commit/c782bf0f679d89e9f284f584d3d71122965fa15c))
 
 
 
-<a name="2.2.0"></a>
 # 2.2.0 (2017-07-27)
 
 
 ### Bug Fixes
 
-* fix problems with postCss because API changed for the loader ([e60ed20](https://github.com/SUI-Components/sui/commit/e60ed20))
+* fix problems with postCss because API changed for the loader ([e60ed20](https://github.com/SUI-Components/sui/commit/e60ed20b60a1eea54fc451c0227c95d67aca0ba2))
 
 
 
-<a name="2.1.0"></a>
 # 2.1.0 (2017-07-27)
 
 
 ### Features
 
-* update to webpack 3.4.0 ([b28275b](https://github.com/SUI-Components/sui/commit/b28275b))
+* update to webpack 3.4.0 ([b28275b](https://github.com/SUI-Components/sui/commit/b28275b4f915a02e9149090a504903cf6765cf3e))
 
 
 
-<a name="1.5.0"></a>
 # 1.5.0 (2017-07-17)
 
 
 ### Bug Fixes
 
-* fix wrong way to check hasErrors and hasWarnings, always was undefined ([b5b8421](https://github.com/SUI-Components/sui/commit/b5b8421))
+* fix wrong way to check hasErrors and hasWarnings, always was undefined ([b5b8421](https://github.com/SUI-Components/sui/commit/b5b84215676cd7405b93c02dd70525dace14cfe1))
 
 
 ### Features
 
-* add Duplicated NPM Package checker on analyzing ([1809284](https://github.com/SUI-Components/sui/commit/1809284))
+* add Duplicated NPM Package checker on analyzing ([1809284](https://github.com/SUI-Components/sui/commit/1809284204ffca987c409b449de92aeb499b6656))
 
 
 
-<a name="1.4.0"></a>
 # 1.4.0 (2017-07-10)
 
 
 ### Bug Fixes
 
-* use contenthash because chunkhash sometimes doesnt change ([ca03399](https://github.com/SUI-Components/sui/commit/ca03399))
+* use contenthash because chunkhash sometimes doesnt change ([ca03399](https://github.com/SUI-Components/sui/commit/ca03399404ba0a8accf7f1e942b3765576290d49))
 
 
 
-<a name="1.3.0"></a>
 # 1.3.0 (2017-07-05)
 
 
 ### Features
 
-* use prefetch instead preload to avoid blocking requests ([582d59e](https://github.com/SUI-Components/sui/commit/582d59e)), closes [#41](https://github.com/SUI-Components/sui/issues/41)
+* use prefetch instead preload to avoid blocking requests ([582d59e](https://github.com/SUI-Components/sui/commit/582d59ef97fbf9198a3e12a023f76705e8c5ed02)), closes [#41](https://github.com/SUI-Components/sui/issues/41)
 
 
 
-<a name="1.2.0"></a>
 # 1.2.0 (2017-07-04)
 
 
 ### Bug Fixes
 
-* remove react alias as not need ([9db2e7a](https://github.com/SUI-Components/sui/commit/9db2e7a))
+* remove react alias as not need ([9db2e7a](https://github.com/SUI-Components/sui/commit/9db2e7a30c4dcf1c34a1c53dd3d6c24cf0ecddb1))
 
 
 ### Features
 
-* rename package and its binary ([0f57470](https://github.com/SUI-Components/sui/commit/0f57470))
-* update sui-bundler from suistudio-webpack ([5bd67f4](https://github.com/SUI-Components/sui/commit/5bd67f4))
+* rename package and its binary ([0f57470](https://github.com/SUI-Components/sui/commit/0f5747084619b3480b5d7338316ab1a749b2c4b9))
+* update sui-bundler from suistudio-webpack ([5bd67f4](https://github.com/SUI-Components/sui/commit/5bd67f47ad79f89696d9a2960fe3e5cd2a0be3ef))
 
 
 ### BREAKING CHANGES
@@ -1134,13 +1051,12 @@ with the old one
 
 
 
-<a name="3.4.0"></a>
 # 3.4.0 (2017-06-27)
 
 
 ### Features
 
-* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081))
+* migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081774048ab5c6be1f68d564d219294265bd))
 
 
 

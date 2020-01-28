@@ -4,7 +4,7 @@ const program = require('commander')
 const colors = require('colors')
 const fs = require('fs')
 const path = require('path')
-const pascalCase = require('pascal-case')
+const {pascalCase} = require('pascal-case')
 const spawn = require('child_process').spawn
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
@@ -64,6 +64,9 @@ const DEMO_DIR = `${BASE_DIR}/demo/${category}/${component}/`
 const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}playground`
 const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 const COMPONENT_ROUTES_FILE = `${DEMO_DIR}routes.js`
+
+const TEST_DIR = `${BASE_DIR}/test/${category}/${component}/`
+const COMPONENT_TEST_FILE = `${TEST_DIR}index.js`
 
 const {context, router, scope, prefix = 'sui'} = program
 const packageScope = scope ? `@${scope}/` : ''
@@ -169,7 +172,7 @@ ${componentInPascal}.propTypes = {}
 ## Installation
 
 \`\`\`sh
-$ npm install ${packageName} --save
+$ npm install ${packageName}
 \`\`\`
 
 ## Usage
@@ -206,7 +209,25 @@ return (<${componentInPascal} />)
     i18n: {t (s) { return s.split('').reverse().join('') }}
   }
 }`
-    )
+    ),
+  writeFile(
+    COMPONENT_TEST_FILE,
+    `import React from 'react'
+
+import chai, {expect} from 'chai'
+import chaiDOM from 'chai-dom'
+import {render} from '@testing-library/react'
+
+chai.use(chaiDOM)
+
+describe('${componentInPascal}', () => {
+  it('Render', () => {
+    render(<${componentInPascal} />)
+    expect(true).to.be.eql(false)
+  })
+})
+`
+  )
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
   const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})

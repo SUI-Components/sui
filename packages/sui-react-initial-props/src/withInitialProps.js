@@ -1,38 +1,35 @@
-import React, {Component} from 'react'
+import React, {useEffect, useState} from 'react'
 
 // This HoC creates the PageComponent prepared for the Client Side Rendering
 // It renders a placeholder, if any specified as `renderLoading` on the PageComponent
 // Also, executes the getInitialProps to retrieve the initialProps and then
 // Renders the component with the initialProps, hiding the placeholder
-export default ({context, routeInfo}) => Page =>
-  class ClientPage extends Component {
-    static displayName = `ClientPage(${Page.displayName})`
+export default ({context, routeInfo}) => Page => {
+  const ClientPage = props => {
+    const [{initialProps, isLoading}, setState] = useState({
+      initialProps: {},
+      isLoading: true
+    })
 
-    state = {initialProps: {}, isLoading: true}
+    useEffect(function() {
+      Page.getInitialProps({context, routeInfo})
+        .then(initialProps => {
+          setState({initialProps, isLoading: false})
+        })
+        .catch(error => {
+          setState({initialProps: {error}, isLoading: false})
+        })
+    }, [])
 
-    _renderLoading() {
+    const renderLoading = () => {
       // check if the page has a renderLoading method, if not, just render nothing
       return Page.renderLoading ? Page.renderLoading() : null
     }
 
-    componentDidMount() {
-      // get the initialProps by executing the provided method on the page
-      // when got the results, update the state to re-render the page hiding the placeholder
-      Page.getInitialProps({context, routeInfo})
-        .then(initialProps => {
-          this.setState({initialProps, isLoading: false})
-        })
-        .catch(err => {
-          // pass error as prop
-          this.setState({initialProps: {error: err}, isLoading: false})
-        })
-    }
-
-    render() {
-      return this.state.isLoading ? (
-        this._renderLoading()
-      ) : (
-        <Page {...this.state.initialProps} {...this.props} />
-      )
-    }
+    return isLoading ? renderLoading() : <Page {...initialProps} {...props} />
   }
+  // add ClientPage to name of the component
+  ClientPage.displayName = `ClientPage(${Page.displayName})`
+  // return the page
+  return ClientPage
+}

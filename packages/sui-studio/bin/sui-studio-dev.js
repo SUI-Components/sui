@@ -13,6 +13,7 @@ const {PWD} = process.env
 
 program
   .option('--link-all', 'Link all component inside the studio')
+  .option('--experimental-test', 'Display test runner result')
   .option(
     '--link-package [package]',
     'Link all component inside the studio',
@@ -40,18 +41,25 @@ if (!category || !component) {
   console.log('The correct command is $ sui-studio dev [category]/[component]')
 }
 
+const testPath = program.experimentalTest
+  ? path.join(PWD, 'test', category, component)
+  : path.join(PWD, 'components', category, component, 'src')
+
+const nextDefine = {
+  __COMPONENT_ID__: JSON.stringify(componentID),
+  __EXPERIMENTAL_TEST_DEV__: JSON.stringify(program.experimentalTest)
+}
+
 const studioDevConfig = {
   ...config,
   context: path.join(__dirname, '..', 'workbench', 'src'),
-  plugins: [
-    ...config.plugins,
-    new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID)})
-  ],
+  plugins: [...config.plugins, new webpack.DefinePlugin(nextDefine)],
   resolve: {
     ...config.resolve,
     alias: {
       ...config.resolve.alias,
       component: path.join(PWD, 'components', category, component, 'src'),
+      test: testPath,
       package: path.join(
         PWD,
         'components',

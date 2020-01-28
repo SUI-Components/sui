@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-context",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -11,13 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hoist-non-react-statics": "3.2.0"
+    "hoist-non-react-statics": "3.3.2"
   },
   "peerDependencies": {
     "@s-ui/component-peer-dependencies": "1"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.3",
+    "@babel/cli": "7.8.3",
     "babel-preset-sui": "3"
   }
 }
