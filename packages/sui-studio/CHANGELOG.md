@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.11.0 (2020-01-28)
+
+
+### Bug Fixes
+
+* fix parse and evaluate Experimental test flag ([b0ce89f](https://github.com/SUI-Components/sui/commit/b0ce89f6b9c31107f04698ea1c815fa129fef72a))
+* use __EXPERIMENTA_TEST_DEV__ in dev mode ([b24a994](https://github.com/SUI-Components/sui/commit/b24a994e5d74ffb38f16c9e9e191d8d76335e253))
+
+
+
 # 7.10.0 (2020-01-23)
 
 
