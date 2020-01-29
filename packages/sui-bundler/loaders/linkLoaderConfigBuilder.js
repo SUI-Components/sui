@@ -59,11 +59,12 @@ module.exports = ({config, packagesToLink, linkAll}) => {
       new LoaderUniversalOptionsPlugin({
         ...loadersOptions,
         'sass-loader': {
-          ...loadersOptions['sass-loader'],
-          importer: [
-            ...loadersOptions['sass-loader'].importer,
-            createSassLinkLoader(entryPoints)
-          ]
+          sassOptions: {
+            importer: [
+              ...loadersOptions['sass-loader'].importer,
+              createSassLinkLoader(entryPoints)
+            ]
+          }
         }
       })
     ],
