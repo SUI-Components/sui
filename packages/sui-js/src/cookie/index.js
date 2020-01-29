@@ -15,4 +15,17 @@ const cookie = {
   remove
 }
 
+const withoutEncoding = jsCookie.withConverter({
+  read: value => value,
+  write: value => value
+})
+
+const cookieWithoutEncoding = {
+  get: key => withoutEncoding.get(key),
+  getJSON: key => withoutEncoding.getJSON(key),
+  set: (key, val, opts) => withoutEncoding.set(key, val, opts),
+  remove: key => withoutEncoding.remove(key)
+}
+
 export default cookie
+export {cookieWithoutEncoding}

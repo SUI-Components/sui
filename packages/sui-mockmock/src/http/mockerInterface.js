@@ -4,6 +4,7 @@
 class Mock {
   get(path) {}
   getRegexp(path) {}
+  patch(path) {}
   post(path) {}
   query(queryObject) {}
   reply(response, statusCode) {}

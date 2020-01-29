@@ -1,10 +1,16 @@
 {
   "name": "@s-ui/studio",
-  "version": "7.9.0",
+  "version": "7.11.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
     "sui-studio": "./bin/sui-studio.js"
+  },
+  "scripts": {
+    "phoenix": "npx rimraf node_modules && npm it",
+    "lint:js": "linting-rules js",
+    "lint:sass": "linting-rules sass",
+    "lint": "npm run lint:js && npm run lint:sass"
   },
   "keywords": [
     "SUIComponents",
@@ -13,6 +19,9 @@
   ],
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
+  "devDependencies": {
+    "@s-ui/deploy": "2"
+  },
   "dependencies": {
     "@babel/standalone": "7",
     "@s-ui/bundler": "5",
@@ -20,7 +29,10 @@
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "@s-ui/react-context": "1",
+    "@testing-library/react": "9.3.0",
     "bundle-loader": "0.5.6",
+    "chai": "4.2.0",
+    "chai-dom": "1.8.1",
     "classnames": "2.2.6",
     "codemirror": "5.50.2",
     "colors": "1.4.0",

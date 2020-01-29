@@ -1,9 +1,11 @@
-/* eslint import/no-webpack-loader-syntax:0 */
+/* global __EXPERIMENTAL_TEST_DEV__ */
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
 import Header from '../Header'
 import Select from '../Select'
+import Test from '../../../../src/components/test'
+import When from '../../../../src/components/when'
 
 const DEVICES = {
   mobile: {
@@ -19,6 +21,9 @@ const DEVICES = {
     height: '100%'
   }
 }
+
+const importComponent = () => import('component/index.js')
+const importTest = () => import('test/index.js')
 
 const getFromStorage = (key, defaultValue) =>
   window.sessionStorage[key] || defaultValue
@@ -77,7 +82,19 @@ export default function Root({componentID, contexts = {}, themes}) {
           scrolling="yes"
         />
       </div>
-      <div className="Root-bottom" />
+
+      <When value={Boolean(JSON.parse(__EXPERIMENTAL_TEST_DEV__ || 'false'))}>
+        {() => (
+          <div className="Root-test">
+            <Test
+              open
+              context={contexts[actualContext]}
+              importComponent={importComponent}
+              importTest={importTest}
+            />
+          </div>
+        )}
+      </When>
     </div>
   )
 }
