@@ -13,12 +13,11 @@
   ],
   "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
   "license": "MIT",
-  "devDependencies": {},
   "dependencies": {
     "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
     "colors": "1.4.0",
-    "commander": "4.0.1",
+    "commander": "4.1.0",
     "commitizen": "4.0.3",
     "conventional-changelog": "3.1.18",
     "execa": "3.4.0",
