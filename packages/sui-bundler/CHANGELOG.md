@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.40.0 (2020-01-29)
+
+
+### Bug Fixes
+
+* fix link package ([9bd852d](https://github.com/SUI-Components/sui/commit/9bd852dc76d208c2b4cb9ced90f7d865d5a93532))
+
+
+
 # 5.39.0 (2020-01-29)
 
 
