@@ -34,8 +34,9 @@ const writeFile = (path, body) => {
     .then(() => {
       console.log(colors.gray(`Modified ${path}`))
     })
-    .catch(() => {
+    .catch(err => {
       showError(`Fail modifying ${path}`)
+      throw err
     })
 }
 
@@ -45,8 +46,9 @@ const createDir = path => {
     .then(() => {
       console.log(colors.gray(`Created ${path}`))
     })
-    .catch(() => {
+    .catch(err => {
       showError(`Fail creating ${path}`)
+      throw err
     })
 }
 
