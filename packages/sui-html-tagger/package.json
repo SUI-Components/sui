@@ -5,7 +5,7 @@
   "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
+    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [
@@ -15,11 +15,7 @@
   ],
   "author": "Enablers frontend",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "babel-preset-sui": "3"
-  },
   "dependencies": {
-    "just-debounce-it": "1.0.1"
+    "just-debounce-it": "1.1.0"
   }
 }

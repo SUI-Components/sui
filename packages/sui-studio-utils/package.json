@@ -4,16 +4,12 @@
   "description": "Set of utils made to be used on the desired studios",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "Enablers Frontend",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "babel-preset-sui": "3"
-  },
   "dependencies": {
     "@s-ui/i18n": "1"
   }

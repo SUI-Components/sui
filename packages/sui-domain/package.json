@@ -4,7 +4,7 @@
   "description": "SDK for creating domains",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -12,10 +12,5 @@
   "license": "ISC",
   "dependencies": {
     "axios": "0.19.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "babel-preset-sui": "3",
-    "fs-extra": "4.0.2"
   }
 }
