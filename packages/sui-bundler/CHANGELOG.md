@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.39.0 (2020-01-29)
+
+
+### Features
+
+* upgrade dependencies ([cc1bd43](https://github.com/SUI-Components/sui/commit/cc1bd43f0d8d7cbe4fc62e6095cb86c7152d71ac))
+
+
+
 # 5.38.0 (2020-01-28)
 
 
@@ -9,6 +18,12 @@ All notable changes to this project will be documented in this file.
 
 * add __EXPERIMENTAL_TEST__ flag as default ([fc6af19](https://github.com/SUI-Components/sui/commit/fc6af19e4764dbf157f56a97e703db0bffc71878))
 * fix not well linked packages ([fd35988](https://github.com/SUI-Components/sui/commit/fd35988d0f734448134e0c0f84e2e06712434a72))
+* upgrade dependency to fix weird bug ([52ebe86](https://github.com/SUI-Components/sui/commit/52ebe8654a686b228fde248b20358ff5012d203f))
+
+
+### Features
+
+* remove not used file-loader ([6568cbb](https://github.com/SUI-Components/sui/commit/6568cbbccbfbbf7d93262d4cf00960169cec7aba))
 
 
 
@@ -18,6 +33,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * upgrade babel version to match babel-preset-sui ([f7a2440](https://github.com/SUI-Components/sui/commit/f7a24408299e4e1972f50b815c6c810b9d06d59a))
+* upgrade dependencies and adapt configs with new needs ([4f8504a](https://github.com/SUI-Components/sui/commit/4f8504a80708327ac0e10ace88a8f015be5d9e26))
 
 
 
