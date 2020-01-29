@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "2.24.0",
+  "version": "2.25.0",
   "cypressVersion": "3.8.3",
   "description": "",
   "bin": {
