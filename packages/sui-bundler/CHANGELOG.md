@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.41.0 (2020-01-30)
+
+
+### Bug Fixes
+
+* remove deprecated css-content-loader package ([3c91bd7](https://github.com/SUI-Components/sui/commit/3c91bd720f66b7d2894e722485151f2563a41de9))
+
+
+
 # 5.40.0 (2020-01-29)
 
 
