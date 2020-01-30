@@ -2,12 +2,12 @@
 /* global __BASE_DIR__ */
 
 const reqThemePlayGround = require.context(
-  `!css-content-loader!css-loader!sass-loader!${__BASE_DIR__}/demo`,
+  `!css-loader!sass-loader!${__BASE_DIR__}/demo`,
   true,
   /^.*\/themes\/.*\.scss/
 )
 const reqComponentsSCSS = require.context(
-  `!css-content-loader!css-loader!sass-loader!${__BASE_DIR__}/components`,
+  `!css-loader!sass-loader!${__BASE_DIR__}/components`,
   true,
   /^\.\/\w+\/\w+\/src\/index\.scss/
 )
