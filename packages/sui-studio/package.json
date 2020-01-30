@@ -19,9 +19,6 @@
   ],
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@s-ui/deploy": "2"
-  },
   "dependencies": {
     "@babel/standalone": "7",
     "@s-ui/bundler": "5",
