@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.13.0 (2020-01-30)
+
+
+### Bug Fixes
+
+* force release with themes working ([21d0960](https://github.com/SUI-Components/sui/commit/21d0960172dc7357271636c58354e66825174e26))
+* remove deprecated css-content-loader ([26507a3](https://github.com/SUI-Components/sui/commit/26507a38d5d687cf477b6d8ab93056fc3ca473f2))
+
+
+
 # 7.12.0 (2020-01-30)
 
 
