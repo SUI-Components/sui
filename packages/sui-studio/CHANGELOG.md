@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.12.0 (2020-01-30)
+
+
+### Features
+
+* remove sui-deploy funcitonality from studio ([98a6a51](https://github.com/SUI-Components/sui/commit/98a6a5107e461429f1581648177a3cac4348f5a1))
+
+
+
 # 7.11.0 (2020-01-28)
 
 
