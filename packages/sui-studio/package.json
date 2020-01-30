@@ -35,7 +35,6 @@
     "colors": "1.4.0",
     "commander": "4.0.1",
     "cpx": "1.5.0",
-    "css-content-loader": "1.0.0",
     "deepmerge": "4.2.2",
     "fs-extra": "8.1.0",
     "fs.realpath": "1.0.0",

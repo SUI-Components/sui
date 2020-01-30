@@ -25,13 +25,13 @@ const params = queryStringToJSON(window.location.href)
 const importAll = requireContext => requireContext.keys().map(requireContext)
 ;(async () => {
   const defaultStyle = await import(
-    '!css-content-loader!css-loader!sass-loader!component/index.scss'
+    '!css-loader!sass-loader!component/index.scss'
   )
   let styles = []
   let requireContextThemesKeys = []
   try {
     const requireContextThemes = require.context(
-      '!css-content-loader!css-loader!sass-loader!demo/themes',
+      '!css-loader!sass-loader!demo/themes',
       false,
       /\.scss$/
     )
@@ -53,7 +53,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   let demoStyles = ''
   try {
-      demoStyles = require('!css-content-loader!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
+      demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
   } catch (e) {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
