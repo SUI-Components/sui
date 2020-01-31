@@ -10,7 +10,8 @@
     "phoenix": "npx rimraf node_modules && npm it",
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
-    "lint": "npm run lint:js && npm run lint:sass"
+    "lint": "npm run lint:js && npm run lint:sass",
+    "postinstall": "scripts/postinstall.js"
   },
   "keywords": [
     "SUIComponents",
@@ -40,6 +41,7 @@
     "cpx": "1.5.0",
     "css-content-loader": "1.0.0",
     "deepmerge": "4.2.2",
+    "fast-glob": "3.1.1",
     "fs-extra": "8.1.0",
     "fs.realpath": "1.0.0",
     "hoist-non-react-statics": "3.3.1",
