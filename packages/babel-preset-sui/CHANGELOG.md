@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.5.0 (2020-01-31)
+
+
+### Bug Fixes
+
+* add default opts object ([ed1de7b](https://github.com/SUI-Components/sui/commit/ed1de7b305777274fe4d356eb9705a21665dfc9e))
+
+
+
 # 3.4.0 (2020-01-17)
 
 
