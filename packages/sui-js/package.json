@@ -3,7 +3,7 @@
   "version": "2.9.0",
   "description": "Set of JS utilities",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -26,10 +26,6 @@
   },
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
-  },
-  "devDependencies": {
-    "@babel/cli": "7",
-    "babel-preset-sui": "3"
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
 }

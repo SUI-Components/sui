@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "7.11.0",
+  "version": "7.13.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -20,9 +20,6 @@
   ],
   "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@s-ui/deploy": "2"
-  },
   "dependencies": {
     "@babel/standalone": "7",
     "@s-ui/bundler": "5",
@@ -39,7 +36,6 @@
     "colors": "1.4.0",
     "commander": "4.0.1",
     "cpx": "1.5.0",
-    "css-content-loader": "1.0.0",
     "deepmerge": "4.2.2",
     "fast-glob": "3.1.1",
     "fs-extra": "8.1.0",

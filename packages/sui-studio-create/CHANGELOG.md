@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 4.14.0 (2020-01-30)
+
+
+### Features
+
+* stop adding sui-deploy when creating studio ([ca7e754](https://github.com/SUI-Components/sui/commit/ca7e75495fc1b0bc336203d14531c1fa772f341a))
+
+
+
 # 4.13.0 (2020-01-23)
 
 

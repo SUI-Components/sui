@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/react-context",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
-    "lib": "rm -Rf ./lib && babel --presets=sui ./src -d lib",
+    "lib": "rm -Rf ./lib && ../../node_modules/.bin/babel --presets=sui ./src -d lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -15,9 +15,5 @@
   },
   "peerDependencies": {
     "@s-ui/component-peer-dependencies": "1"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.8.3",
-    "babel-preset-sui": "3"
   }
 }

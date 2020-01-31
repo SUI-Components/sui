@@ -5,7 +5,7 @@
   "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
+    "lib:js": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -14,9 +14,5 @@
   "dependencies": {
     "node-polyglot": "0.4.3",
     "@s-ui/js": "2"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "babel-preset-sui": "3"
   }
 }

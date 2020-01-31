@@ -7,14 +7,11 @@
   },
   "main": "index.js",
   "scripts": {
-    "prepare": "babel ./src-react --out-dir ./react"
+    "prepare": "../../node_modules/.bin/babel ./src-react --out-dir ./react"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "7"
-  },
   "dependencies": {
     "@s-ui/bundler": "5",
     "@s-ui/component-peer-dependencies": "1",
@@ -26,7 +23,7 @@
     "iltorb": "2.4.3",
     "just-flatten-it": "2.1.0",
     "minify-stream": "1.1.0",
-    "rimraf": "2.6.3",
+    "rimraf": "3.0.1",
     "static-module": "1.5.0",
     "webpack-dev-middleware": "1.12.0",
     "workbox-sw": "2.1.2"

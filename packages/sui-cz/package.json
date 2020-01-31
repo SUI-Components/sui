@@ -10,9 +10,8 @@
   ],
   "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
   "license": "MIT",
-  "devDependencies": {},
   "dependencies": {
-    "colors": "1.1.2",
+    "colors": "1.4.0",
     "editor": "1.0.0",
     "temp": "0.8.3",
     "util.promisify": "1.0.0",

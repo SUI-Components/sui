@@ -61,7 +61,7 @@ module.exports = ({config, packagesToLink, linkAll}) => {
         'sass-loader': {
           sassOptions: {
             importer: [
-              ...loadersOptions['sass-loader'].importer,
+              ...loadersOptions['sass-loader'].sassOptions.importer,
               createSassLinkLoader(entryPoints)
             ]
           }
