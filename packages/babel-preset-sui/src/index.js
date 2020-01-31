@@ -30,7 +30,7 @@ function plugins(api, opts = {}) {
   ])
 }
 
-function presets(api, opts) {
+function presets(api, opts = {}) {
   const {targets} = opts
 
   return [
