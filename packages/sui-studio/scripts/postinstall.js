@@ -62,7 +62,7 @@ chai.use(chaiDOM)
 
 describe('AtomButton', () => {
   it('Render', () => {
-    // Example TO B DELETED!!!!
+    // Example TO BE DELETED!!!!
     // const {getByRole} = render(<AtomButton>HOLA</AtomButton>)
     // expect(getByRole('button')).to.have.text('HOLA')
     expect(true).to.be.eql(false)
