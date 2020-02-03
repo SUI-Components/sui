@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.14.0 (2020-02-03)
+
+
+### Bug Fixes
+
+* avoid node_modules folder ([3fc515c](https://github.com/SUI-Components/sui/commit/3fc515c587846f8f00f012e43b16630ba721127e))
+* use the proper env var ([d8ae7e4](https://github.com/SUI-Components/sui/commit/d8ae7e45a18970af794eda104712b7cd02a4ed0f))
+
+
+### Features
+
+* create postinstall task to crear all components tests folders and files ([3ec4d35](https://github.com/SUI-Components/sui/commit/3ec4d3567922519713cc423aa391da4ac3c3c939))
+* fix typo ([3a953fd](https://github.com/SUI-Components/sui/commit/3a953fd82bbce30d339de52a4c7d795a79a58387))
+* remove wrapper promise ([86ef5af](https://github.com/SUI-Components/sui/commit/86ef5af32bd0ffacc2372f01e861e439c7305daf))
+
+
+
 # 7.13.0 (2020-01-30)
 
 
