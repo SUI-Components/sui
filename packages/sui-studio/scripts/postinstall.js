@@ -10,7 +10,10 @@ if (fse.existsSync(`${process.env.INIT_CWD}/test`)) {
 console.log(`Generating test folder in ${process.env.INIT_CWD}`)
 
 const components = fg
-  .sync([`${process.env.INIT_CWD}/components/**/src/index.js`])
+  .sync([
+    `${process.env.INIT_CWD}/components/**/src/index.js`,
+    '!**/node_modules/**'
+  ])
   .map(path =>
     path
       .replace(process.env.INIT_CWD + '/components/', '')
