@@ -82,19 +82,14 @@ export default function Root({componentID, contexts = {}, themes}) {
           scrolling="yes"
         />
       </div>
-
-      <When value={Boolean(JSON.parse(__EXPERIMENTAL_TEST_DEV__ || 'false'))}>
-        {() => (
-          <div className="Root-test">
-            <Test
-              open
-              context={contexts[actualContext]}
-              importComponent={importComponent}
-              importTest={importTest}
-            />
-          </div>
-        )}
-      </When>
+      <div className="Root-test">
+        <Test
+          open
+          context={contexts[actualContext]}
+          importComponent={importComponent}
+          importTest={importTest}
+        />
+      </div>
     </div>
   )
 }
