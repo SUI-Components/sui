@@ -41,7 +41,7 @@ const createDir = path => {
     })
 }
 
-const BODY_TEST = `/**
+const BODY_TEST = component => `/*
  * Remember: YOUR COMPONENT IS DEFINED GLOBALLY
  * */
 
@@ -55,7 +55,7 @@ import chaiDOM from 'chai-dom'
 
 chai.use(chaiDOM)
 
-describe('[COMPNENT_NAME_HERE]', () => {
+describe('${component}', () => {
   it('Render', () => {
     // Example TO BE DELETED!!!!
     // const {getByRole} = render(<AtomButton>HOLA</AtomButton>)
@@ -68,6 +68,6 @@ Promise.all(
   components.map(component => createDir(`${CWD}/test/${component}`))
 ).then(
   components.map(component =>
-    writeFile(`${CWD}/test/${component}/index.js`, BODY_TEST)
+    writeFile(`${CWD}/test/${component}/index.js`, BODY_TEST(component))
   )
 )
