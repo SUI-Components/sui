@@ -44,6 +44,10 @@ export default function Root({componentID, contexts = {}, themes}) {
     getFromStorage('actualDevice', 'mobile')
   )
 
+  const [showTests, setShowTests] = useState(
+    getFromStorage('showTests', 'show')
+  )
+
   const {width, height} = DEVICES[actualDevice]
   const iframeSrc = `/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`
 
@@ -82,7 +86,18 @@ export default function Root({componentID, contexts = {}, themes}) {
           scrolling="yes"
         />
       </div>
-      <div className="Root-test">
+      <button
+        className={`Root-testSwitch--${showTests}`}
+        onClick={() => {
+          updateOnChange(
+            setShowTests,
+            'showTests'
+          )(showTests === 'show' ? 'hide' : 'show')
+        }}
+      >
+        {showTests === 'show' ? 'Close Tests' : 'Open Tests'}
+      </button>
+      <div className="Root-test" hidden={showTests === 'hide'}>
         <Test
           open
           context={contexts[actualContext]}
