@@ -1,15 +1,19 @@
 const fse = require('fs-extra')
 const fg = require('fast-glob')
 
-if (fse.existsSync(`${process.cwd()}/test`)) {
+console.log(`Looking for test folder in ${process.env.INIT_CWD}`)
+
+if (fse.existsSync(`${process.env.INIT_CWD}/test`)) {
+  console.log('Test folder in place')
   process.exit(0)
 }
+console.log(`Generating test folder in ${process.env.INIT_CWD}`)
 
 const components = fg
-  .sync([`${process.cwd()}/components/**/src/index.js`])
+  .sync([`${process.env.INIT_CWD}/components/**/src/index.js`])
   .map(path =>
     path
-      .replace(process.cwd() + '/components/', '')
+      .replace(process.env.INIT_CWD + '/components/', '')
       .replace('/src/index.js', '')
   )
 
@@ -70,9 +74,11 @@ describe('AtomButton', () => {
 })`
 
 Promise.all(
-  components.map(component => createDir(`${process.cwd()}/test/${component}`))
+  components.map(component =>
+    createDir(`${process.env.INIT_CWD}/test/${component}`)
+  )
 ).then(
   components.map(component =>
-    writeFile(`${process.cwd()}/test/${component}/index.js`, BODY_TEST)
+    writeFile(`${process.env.INIT_CWD}/test/${component}/index.js`, BODY_TEST)
   )
 )

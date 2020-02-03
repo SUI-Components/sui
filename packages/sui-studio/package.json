@@ -11,7 +11,7 @@
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
     "lint": "npm run lint:js && npm run lint:sass",
-    "postinstall": "scripts/postinstall.js"
+    "postinstall": "node scripts/postinstall.js"
   },
   "keywords": [
     "SUIComponents",
