@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.15.0 (2020-02-03)
+
+
+### Features
+
+* add temporal button to studio dev to show / hide the tests ([546fe93](https://github.com/SUI-Components/sui/commit/546fe93cc6bb4746195bcdeaf54c742fab0e0558))
+
+
+
 # 7.14.0 (2020-02-03)
 
 
