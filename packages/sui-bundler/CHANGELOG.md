@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.42.0 (2020-02-03)
+
+
+### Features
+
+* remove experimental test flag ([42ded2a](https://github.com/SUI-Components/sui/commit/42ded2a43b58f85b3bcd445443b4a959cbc295f1))
+
+
+
 # 5.41.0 (2020-01-30)
 
 
