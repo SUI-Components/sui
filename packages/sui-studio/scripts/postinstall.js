@@ -63,6 +63,7 @@ describe('${component}', () => {
     expect(true).to.be.eql(false)
   })
 })
+
 `
 
 Promise.all(
