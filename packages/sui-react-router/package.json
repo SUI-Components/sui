@@ -1,20 +1,15 @@
 {
   "name": "@s-ui/react-router",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "peerDependencies": {
     "prop-types": "15",
     "react": "16"
-  },
-  "devDependencies": {
-    "@s-ui/lint": "3",
-    "@babel/cli": "7.7.0",
-    "babel-preset-sui": "3"
   },
   "eslintConfig": {
     "extends": [
@@ -27,12 +22,8 @@
   "dependencies": {
     "classnames": "2.2.6",
     "history": "3.3.0",
-    "hoist-non-react-statics": "3.3.1",
+    "hoist-non-react-statics": "3.3.2",
     "invariant": "2.2.4",
     "warning": "4.0.3"
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }
