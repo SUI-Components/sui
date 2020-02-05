@@ -11,11 +11,6 @@
     "prop-types": "15",
     "react": "16"
   },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
