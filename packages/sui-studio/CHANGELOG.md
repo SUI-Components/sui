@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.16.0 (2020-02-05)
+
+
+### Bug Fixes
+
+* add additional line to test template to avoid linter issues ([bcbd6f9](https://github.com/SUI-Components/sui/commit/bcbd6f97468ea55de1770aaaa92c127109cc3ed6))
+* add additional line to test template to avoid linter issues ([f73351e](https://github.com/SUI-Components/sui/commit/f73351e2ccef43eacbc16f6a596d587b74a87dc3))
+* remove unwanted extra line ([bb5aaf2](https://github.com/SUI-Components/sui/commit/bb5aaf222c7811b92e5bea98f88dedb1eb64721e))
+
+
+
 # 7.15.0 (2020-02-03)
 
 
