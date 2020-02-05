@@ -62,7 +62,8 @@ describe('${component}', () => {
     // expect(getByRole('button')).to.have.text('HOLA')
     expect(true).to.be.eql(false)
   })
-})`
+})
+`
 
 Promise.all(
   components.map(component => createDir(`${CWD}/test/${component}`))
