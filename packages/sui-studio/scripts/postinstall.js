@@ -6,6 +6,7 @@ console.log(`Looking for test folder in ${CWD}`)
 
 if (fse.existsSync(`${CWD}/test`)) {
   console.log('Test folder in place')
+  process.exit(0)
 }
 console.log(`Generating test folder in ${CWD}`)
 
