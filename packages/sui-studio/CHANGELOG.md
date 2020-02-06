@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.17.0 (2020-02-06)
+
+
+### Bug Fixes
+
+* avoid remove test folder after phoenix ([e4166fc](https://github.com/SUI-Components/sui/commit/e4166fc08a797f38046d705f643963353e8aa187))
+
+
+
 # 7.16.0 (2020-02-05)
 
 
