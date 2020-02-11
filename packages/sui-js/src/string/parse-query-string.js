@@ -16,7 +16,7 @@ function parseQueryString(query, options = {}) {
     ...(typeof comma !== 'undefined' && {comma})
   }
 
-  parse(query, mergedOptions)
+  return parse(query, mergedOptions)
 }
 
 export default parseQueryString

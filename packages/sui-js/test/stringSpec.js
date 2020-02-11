@@ -21,6 +21,15 @@ describe('@s-ui/js', () => {
       const params = {a: '1', b: 'test'}
       expect(parseQueryString(query)).to.deep.equal(params)
     })
+
+    it('should convert query string to object params with comma option', () => {
+      const query = '?a=1&b=test&m=1,2,3'
+      const options = {comma: true}
+      const parsedQueryParams = parseQueryString(query, options)
+
+      const expected = {a: '1', b: 'test', m: ['1', '2', '3']}
+      expect(parsedQueryParams).to.deep.equal(expected)
+    })
   })
   describe('string:fromArrayToCommaQueryString', () => {
     it('should convert params array to comma separated object params', () => {
