@@ -131,7 +131,7 @@ First, you have to import the patcher to create the `context` object, inside the
 import '@s-ui/studio/patcher-mocha'
 ```
 
-After that, you can use the `describe.context` object to has a key by each context define in your `demo/context.js` file.
+After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.
 
 For example, if your context.js file looks like:
 

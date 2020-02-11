@@ -29,7 +29,7 @@ functionsToPatch.forEach(fnName => {
       if (!__CONTEXTS__) {
         // eslint-disable-next-line
         console.error(
-          'Your demo doesn´t have any context define. Create a context.js file in the demo folder.'
+          `You're trying to use the context ${prop} but it's not defined in your contexts.js file`
         )
         return function(title, cb) {
           return originalFn(title, cb)
