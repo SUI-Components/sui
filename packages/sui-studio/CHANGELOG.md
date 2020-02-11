@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.18.0 (2020-02-11)
+
+
+### Features
+
+* add patcher to mocha to allow switch contexts ([11b112a](https://github.com/SUI-Components/sui/commit/11b112aaf22551c083c8e4dce721fde8bcb6f4ea))
+
+
+
 # 7.17.0 (2020-02-06)
 
 
