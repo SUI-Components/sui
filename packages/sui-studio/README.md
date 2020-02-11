@@ -121,6 +121,56 @@ describe('AtomButton', () => {
 
 The component will be a global object when running tests, so it is PARAMOUNT NOT to import it. In order to avoid problems with the linter, add relevant comments, as in the example above. 
 
+### How works with different contexts
+
+If there is a `demo/context.js` file where you define several contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
+
+First, you have to import the patcher to create the `context` object, inside the `describe` object
+
+```js
+import '@s-ui/studio/patcher-mocha'
+```
+
+After that, you can use the `describe.context` object to has a key by each context define in your `demo/context.js` file.
+
+For example, if your context.js file looks like:
+
+```js
+export default () => {
+  return Promise.resolve({
+    default: {
+      user: {id: 12},
+      language: 'es'
+    },
+    other: {
+      user: {id: 34},
+      language: 'ca'
+    }
+  })
+}
+```
+the test file should be like:
+
+```js
+import '@s-ui/studio/patcher-mocha'
+
+chai.use(chaiDOM)
+
+describe.context.default('atom/button', AtomButton => {
+  it('Render', () => {
+    const {getByText} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByText('HOLA')).to.have.text('HOLA 12')
+  })
+})
+
+describe.context.other('atom/button', AtomButton => {
+  it('Render', () => {
+    const {getByText} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByText('HOLA')).to.have.text('HOLA 34')
+  })
+})
+```
+
 ## File structure
 
 SUIStudio profusely uses the concept of "convention over configuration" for file structure.
