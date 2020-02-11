@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.43.0 (2020-02-11)
+
+
+### Performance Improvements
+
+* avoid repetated libraries ([7ccd179](https://github.com/SUI-Components/sui/commit/7ccd179d973b247b634954900e15a922b6bd1ca6))
+
+
+
 # 5.42.0 (2020-02-03)
 
 
