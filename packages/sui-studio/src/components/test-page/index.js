@@ -35,7 +35,7 @@ const TestPage = ({params}) => {
                 category: params.category
               })
             }
-            context={requires?.contexts?.default}
+            context={requires?.contexts}
           />
         )}
       </When>
