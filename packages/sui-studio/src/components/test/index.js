@@ -8,6 +8,7 @@ import withContext from '../demo/HoC/withContext'
 import {cleanDisplayName} from '../demo/utilities'
 
 const BASE_CLASSNAME = 'sui-Test'
+const interOP = obj => (obj.default ? obj.default : obj)
 
 const Test = ({open, importTest, importComponent, context}) => {
   const [failures, setFailures] = useState(0)
@@ -19,13 +20,21 @@ const Test = ({open, importTest, importComponent, context}) => {
   })
 
   useEffect(() => {
-    importComponent().then(module => {
+    importComponent().then(async module => {
       const Component = module.default || module
-      const EnhanceComponent = withContext(context, context)(Component)
+
+      let nextContext = interOP(context)
+      nextContext =
+        typeof nextContext !== 'function' ? nextContext : await nextContext()
+
+      window.__STUDIO_CONTEXTS__ = nextContext
+      window.__STUDIO_COMPONENT__ = Component
+
+      const EnhanceComponent = withContext(nextContext, nextContext)(Component)
       !EnhanceComponent.displayName &&
         console.error('[sui-Test] Component without displayName') // eslint-disable-line
       window[cleanDisplayName(EnhanceComponent.displayName)] = props => (
-        <SUIContext.Provider value={context}>
+        <SUIContext.Provider value={nextContext.default}>
           <EnhanceComponent {...props} />
         </SUIContext.Provider>
       )
