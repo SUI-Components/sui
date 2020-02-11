@@ -1,6 +1,6 @@
-import {parse, stringify} from 'qs'
+import {stringify} from 'qs'
 
-export const parseQueryString = query => parse(query, {ignoreQueryPrefix: true})
+export {default as parseQueryString} from './parse-query-string'
 export const fromArrayToCommaQueryString = query =>
   decodeURIComponent(stringify(query, {arrayFormat: 'comma'}))
 
