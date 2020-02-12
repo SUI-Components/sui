@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.11.0 (2020-02-12)
+
+
+### Features
+
+* add delimiter option ([a454490](https://github.com/SUI-Components/sui/commit/a454490b93e30c3de849cabb6d9f4fdb79621b70))
+
+
+
 # 2.10.0 (2020-02-12)
 
 
