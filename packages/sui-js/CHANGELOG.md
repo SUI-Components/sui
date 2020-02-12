@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.10.0 (2020-02-12)
+
+
+### Features
+
+* add options to parseQueryString ([b36f6a4](https://github.com/SUI-Components/sui/commit/b36f6a4045831ed38bada360a25b032e1b26603f))
+* add own toQueryString ([b9956b3](https://github.com/SUI-Components/sui/commit/b9956b3ca2e6a0740f0f0d8d98fab5e1450b2b6f))
+* add second param for options ([a84ac13](https://github.com/SUI-Components/sui/commit/a84ac13b8998142a69071888c8fbc397a94d1a56))
+
+
+
 # 2.9.0 (2020-01-22)
 
 
