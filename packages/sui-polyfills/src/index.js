@@ -23,6 +23,8 @@ require('core-js/features/string/pad-start')
 
 require('core-js/features/url-search-params')
 
+require('core-js/features/map/map-keys')
+
 require('./element-closest')
 
 module.exports = {}
