@@ -16,9 +16,9 @@ export const fromArrayToCommaQueryString = query =>
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
 export {has as hasAccents, remove as removeAccents} from 'remove-accents'
 
-export {default as toCamelCase} from 'lodash.camelcase'
-export {default as toCapitalCase} from 'lodash.capitalize'
-export {default as toKebabCase} from 'lodash.kebabcase'
+export {default as toCamelCase} from 'just-camel-case'
+export {default as toCapitalCase} from 'just-capitalize'
+export {default as toKebabCase} from 'just-kebab-case'
 
 export {getRandomString} from './random-string'
 export {slugify} from './slugify'

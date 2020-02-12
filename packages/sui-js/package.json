@@ -13,9 +13,9 @@
     "cookie": "0.3.1",
     "htmr": "0.7.0",
     "js-cookie": "2.1.4",
-    "lodash.camelcase": "4.3.0",
-    "lodash.capitalize": "4.2.1",
-    "lodash.kebabcase": "4.1.1",
+    "just-camel-case": "4.0.2",
+    "just-capitalize": "1.0.0",
+    "just-kebab-case": "1.1.0",
     "qs": "6.7.0",
     "remove-accents": "0.4.2"
   },
