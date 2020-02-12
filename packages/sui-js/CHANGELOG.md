@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.12.0 (2020-02-12)
+
+
+### Features
+
+* Prefer just libraries instead lodash and others ([59183c2](https://github.com/SUI-Components/sui/commit/59183c26f3d1b625301ed3918dea79b36e73809e))
+
+
+
 # 2.11.0 (2020-02-12)
 
 
