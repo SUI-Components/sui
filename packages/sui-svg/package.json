@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/svg",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Converts svg files into React Components",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }
