@@ -14,6 +14,15 @@ describe('@s-ui/js', () => {
       const query = 'a=1&b=test'
       expect(toQueryString(params)).to.be.equal(query)
     })
+
+    it('should convert object params to query string with arrayFormat comma option', () => {
+      const queryParams = {a: 1, b: 'test', m: [1, 2, 3]}
+      const options = {arrayFormat: 'comma'}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = 'a=1&b=test&m=1%2C2%2C3'
+      expect(expected).to.be.equal(queryString)
+    })
   })
   describe('string:parseQueryString', () => {
     it('should convert query string to object params', () => {

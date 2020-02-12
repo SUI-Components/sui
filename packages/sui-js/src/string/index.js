@@ -1,10 +1,10 @@
-import {stringify} from 'qs'
+import toQueryString from './to-query-string'
 
 export {default as parseQueryString} from './parse-query-string'
+export {default as toQueryString} from './to-query-string'
 export const fromArrayToCommaQueryString = query =>
-  decodeURIComponent(stringify(query, {arrayFormat: 'comma'}))
+  decodeURIComponent(toQueryString(query, {arrayFormat: 'comma'}))
 
-export {stringify as toQueryString} from 'qs'
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
 export {has as hasAccents, remove as removeAccents} from 'remove-accents'
 
