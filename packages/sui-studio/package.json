@@ -42,9 +42,9 @@
     "fs.realpath": "1.0.0",
     "hoist-non-react-statics": "3.3.1",
     "just-debounce-it": "1.1.0",
-    "lodash.kebabcase": "4.1.1",
+    "just-kebab-case": "1.1.0",
+    "just-pascal-case": "1.1.0",
     "normalize.css": "8.0.1",
-    "pascal-case": "3.1.1",
     "react-docgen": "5.1.0",
     "terminal-banner": "1.1.0"
   },
