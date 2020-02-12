@@ -1,10 +1,18 @@
-import {parse, stringify} from 'qs'
+import toQueryString from './to-query-string'
 
-export const parseQueryString = query => parse(query, {ignoreQueryPrefix: true})
+export {default as parseQueryString} from './parse-query-string'
+export {default as toQueryString} from './to-query-string'
+
+/**
+ * @deprecated since version 2.9.0
+ * will be deleted in version 3
+ *
+ * use toQueryString(queryParams, {arrayFormat: 'comma'}) instead
+ * it may not be very convenient to decode with decodeURIComponent knowing that it will be used in the url
+ */
 export const fromArrayToCommaQueryString = query =>
-  decodeURIComponent(stringify(query, {arrayFormat: 'comma'}))
+  decodeURIComponent(toQueryString(query, {arrayFormat: 'comma'}))
 
-export {stringify as toQueryString} from 'qs'
 export {fromSnakeToCamelCase, fromCamelToSnakeCase} from './snake-case'
 export {has as hasAccents, remove as removeAccents} from 'remove-accents'
 
