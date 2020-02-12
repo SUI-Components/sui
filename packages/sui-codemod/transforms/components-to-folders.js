@@ -2,7 +2,7 @@ const fg = require('fast-glob')
 const babelParser = require('@babel/parser')
 const fs = require('fs')
 const path = require('path')
-const toPascalCase = require('pascal-case')
+const toPascalCase = require('just-pascal-case')
 
 const inRootFolder = file => file.path.match(/\/src\/\w+\.js$/)
 const insideFolder = file => file.path.match(/\/src\/.*\/\w+\.js$/)
