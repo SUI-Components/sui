@@ -25,6 +25,8 @@ require('core-js/features/url-search-params')
 
 require('core-js/features/map/map-keys')
 
+require('core-js/features/symbol')
+
 require('./element-closest')
 
 module.exports = {}
