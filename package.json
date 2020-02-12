@@ -22,7 +22,8 @@
     "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
     "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
     "commitmsg": "validate-commit-msg",
-    "precommit": "sui-precommit run"
+    "precommit": "sui-precommit run",
+    "test:test": "cross-env NODE_ENV=test & sui-test browser"
   },
   "devDependencies": {
     "@babel/cli": "7.8.3",

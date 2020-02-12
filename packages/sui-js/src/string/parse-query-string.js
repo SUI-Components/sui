@@ -7,13 +7,15 @@ import {parse} from 'qs'
  * @param {object} [options={}]
  * @param {boolean} [options.ignoreQueryPrefix=true] - avoid the leading question mark
  * @param {boolean} [options.comma] - comma to join array
+ * @param {string} [options.delimiter] - delimiter
  */
 function parseQueryString(query, options = {}) {
-  const {ignoreQueryPrefix = true, comma} = options
+  const {ignoreQueryPrefix = true, comma, delimiter} = options
 
   const mergedOptions = {
     ignoreQueryPrefix,
-    ...(typeof comma !== 'undefined' && {comma})
+    ...(typeof comma !== 'undefined' && {comma}),
+    ...(typeof delimiter !== 'undefined' && {delimiter})
   }
 
   return parse(query, mergedOptions)
