@@ -2,8 +2,8 @@
 
 import React from 'react'
 import SUIContext from '@s-ui/react-context'
-import withContext from '../src/components/demo/HoC/withContext'
-import {cleanDisplayName} from '../src/components/demo/utilities'
+import withContext from '../components/demo/HoC/withContext'
+import {cleanDisplayName} from '../components/demo/utilities'
 
 const global = globalThis || window // eslint-disable-line
 const __CONTEXTS__ = global.__STUDIO_CONTEXTS__ || {}

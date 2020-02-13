@@ -128,7 +128,7 @@ If there is a `demo/context.js` file where you define several contexts for your 
 First, you have to import the patcher to create the `context` object, inside the `describe` object
 
 ```js
-import '@s-ui/studio/patcher-mocha'
+import '@s-ui/studio/src/patcher-mocha'
 ```
 
 After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.

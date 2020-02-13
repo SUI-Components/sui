@@ -8,9 +8,8 @@ import withContext from '../demo/HoC/withContext'
 import {cleanDisplayName} from '../demo/utilities'
 
 const BASE_CLASSNAME = 'sui-Test'
-const interOP = obj => (obj.default ? obj.default : obj)
 
-const Test = ({open, importTest, importComponent, context}) => {
+const Test = ({open, importTest, importComponent, contexts}) => {
   const [failures, setFailures] = useState(0)
   const [notFoundTest, setNotFoundTest] = useState(false)
 
@@ -23,18 +22,20 @@ const Test = ({open, importTest, importComponent, context}) => {
     importComponent().then(async module => {
       const Component = module.default || module
 
-      let nextContext = interOP(context)
-      nextContext =
-        typeof nextContext !== 'function' ? nextContext : await nextContext()
+      const nextContexts =
+        typeof contexts !== 'function' ? contexts : await contexts()
 
-      window.__STUDIO_CONTEXTS__ = nextContext
+      window.__STUDIO_CONTEXTS__ = nextContexts
       window.__STUDIO_COMPONENT__ = Component
 
-      const EnhanceComponent = withContext(nextContext, nextContext)(Component)
+      const EnhanceComponent = withContext(
+        nextContexts.default,
+        nextContexts
+      )(Component)
       !EnhanceComponent.displayName &&
         console.error('[sui-Test] Component without displayName') // eslint-disable-line
       window[cleanDisplayName(EnhanceComponent.displayName)] = props => (
-        <SUIContext.Provider value={nextContext}>
+        <SUIContext.Provider value={nextContexts.default}>
           <EnhanceComponent {...props} />
         </SUIContext.Provider>
       )
@@ -49,7 +50,7 @@ const Test = ({open, importTest, importComponent, context}) => {
           setNotFoundTest(true)
         })
     })
-  }, [context, importComponent, importTest])
+  }, [contexts, importComponent, importTest])
 
   if (notFoundTest) {
     return <h1>Not found test</h1>
@@ -64,7 +65,7 @@ const Test = ({open, importTest, importComponent, context}) => {
 
 Test.displayName = 'Test'
 Test.propTypes = {
-  context: PropTypes.object,
+  contexts: PropTypes.object,
   importComponent: PropTypes.func,
   importTest: PropTypes.func,
   open: PropTypes.bool
