@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.13.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* enable delimiter to toQueryString method ([3e5ddbe](https://github.com/SUI-Components/sui/commit/3e5ddbed5081317b9e416370f3c4be36c19b266e))
+
+
+
 # 2.12.0 (2020-02-12)
 
 
