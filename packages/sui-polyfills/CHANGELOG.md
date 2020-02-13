@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.13.0 (2020-02-13)
+
+
+### Features
+
+* add Map.prototype.keys polyfill ([14fc14b](https://github.com/SUI-Components/sui/commit/14fc14bd8abc13ae83c1948972a5829f68e6b8c4))
+* add symbol polyfill ([d54f914](https://github.com/SUI-Components/sui/commit/d54f9143f2440952abb8923400a19726546a6932))
+
+
+
 # 1.12.0 (2020-01-23)
 
 
