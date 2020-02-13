@@ -120,7 +120,7 @@ const queryParams = {a: 1, b: 'test', m: [1, 2]}
 const options = {arrayFormat: 'repeat', delimiter: ':'}
 const queryString = toQueryString(queryParams, options)
 console.log(queryString) // 'a=1:b=test:m=1:m=2'
-```s
+```
 
 ## ua-parser
 A user agent parser. Returns an object `stats`
