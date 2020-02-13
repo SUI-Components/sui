@@ -6,6 +6,7 @@ import {stringify} from 'qs'
  * @param {object} queryParams
  * @param {object} [options={}]
  * @param {'indices'|'brackets'|'repeat'|'comma'} [options.arrayFormat] - specify the format of the output array
+ * @param {string} [options.delimiter] - delimiter
  */
 function toQueryString(queryParams, options = {}) {
   const {arrayFormat, delimiter} = options
