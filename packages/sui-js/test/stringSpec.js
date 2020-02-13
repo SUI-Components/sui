@@ -23,6 +23,15 @@ describe('@s-ui/js', () => {
       const expected = 'a=1&b=test&m=1%2C2%2C3'
       expect(expected).to.be.equal(queryString)
     })
+
+    it('should convert object params to query string with arrayFormat repeat and delimiter :', () => {
+      const queryParams = {a: 1, b: 'test', m: [1, 2]}
+      const options = {arrayFormat: 'repeat', delimiter: ':'}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = 'a=1:b=test:m=1:m=2'
+      expect(expected).to.be.equal(queryString)
+    })
   })
   describe('string:parseQueryString', () => {
     it('should convert query string to object params', () => {
