@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.20.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* sui-studio test breaks if we does not use patcher-mocha and describe.context ([e0782f7](https://github.com/SUI-Components/sui/commit/e0782f74a23b840f196cb6797ca81e6700f1fbae))
+
+
+
 # 7.19.0 (2020-02-12)
 
 
