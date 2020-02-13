@@ -112,7 +112,15 @@ const randomStringLength = 6
 const randomString = getRandomString(randomStringLength)
 console.log(randomString.length) // log = 6 || 15 by default
 console.log(randomString) // qwerty
-```
+
+
+import {toQueryString} from '@s-ui/js/lib/string'
+
+const queryParams = {a: 1, b: 'test', m: [1, 2]}
+const options = {arrayFormat: 'repeat', delimiter: ':'}
+const queryString = toQueryString(queryParams, options)
+console.log(queryString) // 'a=1:b=test:m=1:m=2'
+```s
 
 ## ua-parser
 A user agent parser. Returns an object `stats`
