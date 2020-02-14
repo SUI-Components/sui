@@ -54,7 +54,9 @@ const repositories = [
 
   'frontend-ij--uilib-widgets',
 
-  'frontend-if--uilib-widgets'
+  'frontend-if--uilib-widgets',
+
+  'frontend-re--ut-web-app'
 ]
 
 const cloneSUIComponentsCommand = [
