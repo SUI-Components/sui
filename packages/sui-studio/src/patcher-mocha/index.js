@@ -4,6 +4,7 @@ import React from 'react'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 const global = globalThis || window // eslint-disable-line
 const __CONTEXTS__ = global.__STUDIO_CONTEXTS__ || {}
@@ -57,9 +58,7 @@ functionsToPatch.forEach(fnName => {
           <EnhanceComponentWithLegacyContext {...props} />
         </SUIContext.Provider>
       )
-      EnhanceComponent.displayName = cleanDisplayName(
-        EnhanceComponentWithLegacyContext.displayName
-      )
+      hoistNonReactStatics(EnhanceComponent, EnhanceComponentWithLegacyContext)
 
       return function(title, cb) {
         return originalFn(`[${prop}] ${title}`, cb.partial(EnhanceComponent))

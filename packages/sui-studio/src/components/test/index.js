@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import SUIContext from '@s-ui/react-context'
 import withContext from '../demo/HoC/withContext'
@@ -34,11 +35,15 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       )(Component)
       !EnhanceComponent.displayName &&
         console.error('[sui-Test] Component without displayName') // eslint-disable-line
-      window[cleanDisplayName(EnhanceComponent.displayName)] = props => (
+
+      const NextComponent = props => (
         <SUIContext.Provider value={nextContexts.default}>
           <EnhanceComponent {...props} />
         </SUIContext.Provider>
       )
+      hoistNonReactStatics(NextComponent, Component)
+
+      window[cleanDisplayName(EnhanceComponent.displayName)] = NextComponent
 
       importTest()
         .then(() => {
