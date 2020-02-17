@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.25.0"></a>
+# 7.25.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([c063291](https://github.com/SUI-Components/sui/commit/c063291))
+
+
+
 <a name="7.23.0"></a>
 # 7.23.0 (2020-02-17)
 
