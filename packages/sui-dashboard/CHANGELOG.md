@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.16.0"></a>
+# 1.16.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([5409d51](https://github.com/SUI-Components/sui/commit/5409d51))
+
+
+
 <a name="1.14.0"></a>
 # 1.14.0 (2020-02-17)
 
