@@ -177,7 +177,7 @@ If a component is exported wrapped memoized: `export default React.memo(Componen
 
 If you need to make a test using a memoized component, just wrap it like:
 
-```
+```js
 const Component = React.memo(() => <></>)
 Component.displayName = 'Component'
 
@@ -186,7 +186,7 @@ export default Component
 
 or
 
-```
+```js
 const Component = () => <></>
 Component.displayName = 'Component'
 
