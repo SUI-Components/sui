@@ -173,7 +173,7 @@ describe.context.other('atom/button', AtomButton => {
 
 ### Known issue: Test a memoized component
 
-If a component is exported wrapped memoized: `export default React.memo(Component)`, it loses the displayName and sui-test dispatch an Error because of couldn't find the component.
+If a component is exported wrapped memoized: `export default React.memo(Component)`, it loses the displayName and sui-test dispatch an Error because it couldn't find the component.
 
 If you need to make a test using a memoized component, just wrap it like:
 
