@@ -171,6 +171,31 @@ describe.context.other('atom/button', AtomButton => {
 })
 ```
 
+### Known issue: Test a memoized component
+
+If a component is exported wrapped memoized: `export default React.memo(Component)`, it loses the displayName and sui-test dispatch an Error because it couldn't find the component.
+
+If you need to make a test using a memoized component, just wrap it like:
+
+```js
+const Component = React.memo(() => <></>)
+Component.displayName = 'Component'
+
+export default Component
+```
+
+or
+
+```js
+const Component = () => <></>
+Component.displayName = 'Component'
+
+const MemoComponent = React.memo(Component)
+MemoComponent.displayName = 'MemoComponent'
+
+export default MemoComponent
+```
+
 ## File structure
 
 SUIStudio profusely uses the concept of "convention over configuration" for file structure.
