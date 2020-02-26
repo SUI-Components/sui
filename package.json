@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix",
-    "phoenix:ci": "sui-mono phoenix --no-root",
+    "phoenix:ci": "sui-mono phoenix --ci --no-root",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "cross-env NODE_ENV=test npm run test:client && cross-env NODE_ENV=test npm run test:server",
