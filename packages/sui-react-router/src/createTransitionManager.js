@@ -1,7 +1,6 @@
 import {Tree} from './utils/Tree'
 import _isActive from './utils/isActive'
-import {matchPattern} from './utils/PatternUtils'
-import {components} from '../lib/InternalPropTypes'
+import {matchPattern} from './PatternUtils'
 import warning from './routerWarning'
 import createMemoryHistory from './createMemoryHistory'
 

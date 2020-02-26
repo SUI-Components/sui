@@ -1,4 +1,4 @@
-import {matchPattern} from './PatternUtils'
+import {matchPattern} from '../PatternUtils'
 
 function deepEqual(a, b) {
   if (a === b) return true
