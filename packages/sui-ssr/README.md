@@ -228,6 +228,24 @@ For development you will need start the server with env vars `CRITICAL_CSS_HOST`
 
 If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
 
+## Link Packages
+
+If you want you can link packages when you create a new static version of your site. But if you are using `sui-bundler` to link packages too. Please be sure to be in sync with the packages linkeds in both tools
+For example, you could use a bash command like this:
+
+```bash
+#!/bin/bash
+
+FLAGS="\
+  --link-package ../../frontend-ma--uilib-components/components/value/proposition/ \
+  --link-package ../../frontend-ma--uilib-components/components/banner/carsCampaign \
+  "
+CDN=/ npx sui-bundler build -C $FLAGS && \
+  npx sui-ssr build -C $FLAGS && \
+  PORT=5000 node server/index.js
+
+```
+
 ## Environment variables
 
 You can define environment variables by creating a yml file called `public-env.yml` in your SPA root directory:

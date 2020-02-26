@@ -93,10 +93,6 @@ Launch a development environment where you can work in total isolation on your c
 
 Test the studio's components both in the demo as in the development environment. *Currently in experimental mode*
 
-All previous commands suppor the `--experimental-test` flag, which is mandatory to see the tests in the studio's interface.
-
-> Using the flag with the `dev`command without the test file in `test/[category]/[component]/index.js` throws an error.
-
 Here's an example of what could go inside `test/[category]/[component]/index.js`:
 
 ```JS

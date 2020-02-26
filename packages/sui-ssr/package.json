@@ -12,9 +12,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "peerDependencies": {
-    "@s-ui/bundler": "5"
-  },
   "dependencies": {
     "@s-ui/hoc": "1",
     "@tunnckocore/execa": "4.4.1",
