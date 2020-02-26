@@ -54,6 +54,27 @@ module.exports = ({config, packagesToLink, linkAll}) => {
 
   return {
     ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        ...(!config.resolve.alias.react && {
+          react: path.resolve(
+            path.join(process.env.PWD, './node_modules/react')
+          )
+        }),
+        ...(!config.resolve.alias['@s-ui/react-context'] && {
+          '@s-ui/react-context': path.resolve(
+            path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+          )
+        }),
+        ...(!config.resolve.alias['react-router-dom'] && {
+          'react-router-dom': path.resolve(
+            path.join(process.env.PWD, './node_modules/react-router-dom')
+          )
+        })
+      }
+    },
     plugins: [
       ...removePlugin('LoaderUniversalOptionsPlugin')(config.plugins),
       new LoaderUniversalOptionsPlugin({

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.44.0 (2020-02-26)
+
+
+### Features
+
+* add --link-package flag ([ce86906](https://github.com/SUI-Components/sui/commit/ce8690600742f5fb45d760fffbcbc2a9080602c0))
+
+
+
 # 5.43.0 (2020-02-11)
 
 
