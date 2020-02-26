@@ -2,11 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.35.0 (2020-02-26)
+
+
+
 # 5.34.0 (2020-02-26)
 
 
 ### Features
 
+* add flag --link-package to build task ([6459226](https://github.com/SUI-Components/sui/commit/64592260249a26ecc9a66003f586b6fad5de95b7))
 * priorize head tag load for improve SEO ([dbc4996](https://github.com/SUI-Components/sui/commit/dbc49964ddf330e5c83c2c240609915c4b492241))
 
 
