@@ -21,6 +21,20 @@
     z-index: 1;
   }
 
+  &-testSwitch--show {
+    position: absolute;
+    right: 23px;
+    top: 60px;
+    z-index: 2;
+  }
+
+  &-testSwitch--hide {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    z-index: 2;
+  }
+
   &-top {
     padding-bottom: 8px;
     height: 98px;

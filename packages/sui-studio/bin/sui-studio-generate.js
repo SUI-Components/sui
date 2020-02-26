@@ -1,14 +1,15 @@
 /* eslint no-console:0 */
+const fs = require('fs')
+const path = require('path')
+const {spawn} = require('child_process')
 
 const program = require('commander')
 const colors = require('colors')
-const fs = require('fs')
-const path = require('path')
-const {pascalCase} = require('pascal-case')
-const spawn = require('child_process').spawn
+const toKebabCase = require('just-kebab-case')
+const toPascalCase = require('just-pascal-case')
+
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
-const toKebabCase = require('lodash.kebabcase')
 
 program
   .option('-R, --router', 'add routering for this component')
@@ -47,7 +48,7 @@ if (!wordsOnlyRegex.test(category)) {
   showError('category name must contain letters or underscore only')
 }
 
-const componentInPascal = pascalCase(
+const componentInPascal = toPascalCase(
   `${category.replace(/s$/, '')} ${component}`
 )
 

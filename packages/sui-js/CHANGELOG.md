@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.13.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* enable delimiter to toQueryString method ([3e5ddbe](https://github.com/SUI-Components/sui/commit/3e5ddbed5081317b9e416370f3c4be36c19b266e))
+
+
+
+# 2.12.0 (2020-02-12)
+
+
+### Features
+
+* Prefer just libraries instead lodash and others ([59183c2](https://github.com/SUI-Components/sui/commit/59183c26f3d1b625301ed3918dea79b36e73809e))
+
+
+
+# 2.11.0 (2020-02-12)
+
+
+### Features
+
+* add delimiter option ([a454490](https://github.com/SUI-Components/sui/commit/a454490b93e30c3de849cabb6d9f4fdb79621b70))
+
+
+
+# 2.10.0 (2020-02-12)
+
+
+### Features
+
+* add options to parseQueryString ([b36f6a4](https://github.com/SUI-Components/sui/commit/b36f6a4045831ed38bada360a25b032e1b26603f))
+* add own toQueryString ([b9956b3](https://github.com/SUI-Components/sui/commit/b9956b3ca2e6a0740f0f0d8d98fab5e1450b2b6f))
+* add second param for options ([a84ac13](https://github.com/SUI-Components/sui/commit/a84ac13b8998142a69071888c8fbc397a94d1a56))
+
+
+
 # 2.9.0 (2020-01-22)
 
 

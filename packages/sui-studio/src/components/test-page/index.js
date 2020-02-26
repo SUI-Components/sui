@@ -18,26 +18,28 @@ const TestPage = ({params}) => {
         setRequires({component: exports, contexts: ctxt, loading: false})
       })
       .catch(err => {
-        console.log(err) // eslint-disable-line
+                console.log(err) // eslint-disable-line
       })
   }, [params.category, params.component])
 
   return (
     <>
       <When value={requires.component}>
-        {() => (
-          <Test
-            open
-            importComponent={() => Promise.resolve(requires.component)}
-            importTest={() =>
-              tryRequireTest({
-                component: params.component,
-                category: params.category
-              })
-            }
-            context={requires?.contexts?.default}
-          />
-        )}
+        {() => {
+          return (
+            <Test
+              open
+              importComponent={() => Promise.resolve(requires.component)}
+              importTest={() =>
+                tryRequireTest({
+                  component: params.component,
+                  category: params.category
+                })
+              }
+              contexts={requires?.contexts}
+            />
+          )
+        }}
       </When>
       <When value={requires.loading}>{() => <h1>Loading...</h1>}</When>
     </>
