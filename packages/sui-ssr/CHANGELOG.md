@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.34.0 (2020-02-26)
+
+
+### Features
+
+* priorize head tag load for improve SEO ([dbc4996](https://github.com/SUI-Components/sui/commit/dbc49964ddf330e5c83c2c240609915c4b492241))
+
+
+
 # 5.33.0 (2019-12-20)
 
 
