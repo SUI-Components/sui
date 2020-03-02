@@ -1,0 +1,23 @@
+{
+  "name": "@s-ui/react-head",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-head": "3.3.0"
+  },
+  "devDependencies": {
+    "react": "16",
+    "react-dom": "16"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  }
+}
