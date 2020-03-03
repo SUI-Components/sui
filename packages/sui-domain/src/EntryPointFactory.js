@@ -48,7 +48,7 @@ export default ({useCases, config}) =>
             },
             $: {
               execute: {
-                subscribe: fn => {
+                subscribe: (onNext,onError) => {
                   // creating an object here that will have a dispose method
                   const ret = {dispose: function() {}}
                   loader().then(factory => {
@@ -56,7 +56,7 @@ export default ({useCases, config}) =>
                     // makes dispose working async and we need it
                     ret.dispose = factory.default[method]({
                       config: this._config
-                    }).$.execute.subscribe(fn).dispose
+                    }).$.execute.subscribe(onNext,OnError).dispose
                   })
                   // return the object that will be mutated async
                   return ret
