@@ -56,7 +56,7 @@ export default ({useCases, config}) =>
                     // makes dispose working async and we need it
                     ret.dispose = factory.default[method]({
                       config: this._config
-                    }).$.execute.subscribe(onNext,OnError).dispose
+                    }).$.execute.subscribe(onNext,onError).dispose
                   })
                   // return the object that will be mutated async
                   return ret
