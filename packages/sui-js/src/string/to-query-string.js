@@ -9,7 +9,7 @@ import {stringify} from 'qs'
  * @param {string} [options.delimiter] - delimiter
  */
 function toQueryString(queryParams, options = {}) {
-  const {arrayFormat, delimiter, encode} = options
+  const {arrayFormat, delimiter, encode = true} = options
 
   const mergedOptions = {
     ...(typeof arrayFormat !== 'undefined' && {arrayFormat}),
