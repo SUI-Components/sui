@@ -12,9 +12,9 @@ function toQueryString(queryParams, options = {}) {
   const {arrayFormat, delimiter, encode = true} = options
 
   const mergedOptions = {
+    encode,
     ...(typeof arrayFormat !== 'undefined' && {arrayFormat}),
-    ...(typeof delimiter !== 'undefined' && {delimiter}),
-    ...(typeof encode !== 'undefined' && {encode})
+    ...(typeof delimiter !== 'undefined' && {delimiter})
   }
 
   return stringify(queryParams, mergedOptions)
