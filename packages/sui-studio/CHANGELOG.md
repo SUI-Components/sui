@@ -2,6 +2,229 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="7.25.0"></a>
+# 7.25.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([c063291](https://github.com/SUI-Components/sui/commit/c063291))
+
+
+
+<a name="7.23.0"></a>
+# 7.23.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([94296bd](https://github.com/SUI-Components/sui/commit/94296bd))
+
+
+
+<a name="7.21.0"></a>
+# 7.21.0 (2020-02-17)
+
+
+### Bug Fixes
+
+* fix alternative ways to use context in dev / start / build mode ([da442fc](https://github.com/SUI-Components/sui/commit/da442fc))
+* hois demo component to use static props ([8578904](https://github.com/SUI-Components/sui/commit/8578904))
+* patcher-mocha is not transpiled ([2016d40](https://github.com/SUI-Components/sui/commit/2016d40))
+
+
+
+<a name="7.20.0"></a>
+# 7.20.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* sui-studio test breaks if we does not use patcher-mocha and describe.context ([e0782f7](https://github.com/SUI-Components/sui/commit/e0782f7))
+
+
+
+<a name="7.19.0"></a>
+# 7.19.0 (2020-02-12)
+
+
+### Features
+
+* Prefer just libraries instead lodash and others ([6b7cbe5](https://github.com/SUI-Components/sui/commit/6b7cbe5))
+
+
+
+<a name="7.18.0"></a>
+# 7.18.0 (2020-02-11)
+
+
+### Features
+
+* add patcher to mocha to allow switch contexts ([11b112a](https://github.com/SUI-Components/sui/commit/11b112a))
+
+
+
+<a name="7.17.0"></a>
+# 7.17.0 (2020-02-06)
+
+
+### Bug Fixes
+
+* avoid remove test folder after phoenix ([e4166fc](https://github.com/SUI-Components/sui/commit/e4166fc))
+
+
+
+<a name="7.16.0"></a>
+# 7.16.0 (2020-02-05)
+
+
+### Bug Fixes
+
+* add additional line to test template to avoid linter issues ([bcbd6f9](https://github.com/SUI-Components/sui/commit/bcbd6f9))
+* add additional line to test template to avoid linter issues ([f73351e](https://github.com/SUI-Components/sui/commit/f73351e))
+* remove unwanted extra line ([bb5aaf2](https://github.com/SUI-Components/sui/commit/bb5aaf2))
+
+
+
+<a name="7.15.0"></a>
+# 7.15.0 (2020-02-03)
+
+
+### Features
+
+* add temporal button to studio dev to show / hide the tests ([546fe93](https://github.com/SUI-Components/sui/commit/546fe93))
+
+
+
+<a name="7.14.0"></a>
+# 7.14.0 (2020-02-03)
+
+
+### Bug Fixes
+
+* avoid node_modules folder ([3fc515c](https://github.com/SUI-Components/sui/commit/3fc515c))
+* use the proper env var ([d8ae7e4](https://github.com/SUI-Components/sui/commit/d8ae7e4))
+
+
+### Features
+
+* create postinstall task to crear all components tests folders and files ([3ec4d35](https://github.com/SUI-Components/sui/commit/3ec4d35))
+* fix typo ([3a953fd](https://github.com/SUI-Components/sui/commit/3a953fd))
+* remove wrapper promise ([86ef5af](https://github.com/SUI-Components/sui/commit/86ef5af))
+
+
+
+<a name="7.13.0"></a>
+# 7.13.0 (2020-01-30)
+
+
+### Bug Fixes
+
+* force release with themes working ([21d0960](https://github.com/SUI-Components/sui/commit/21d0960))
+* remove deprecated css-content-loader ([26507a3](https://github.com/SUI-Components/sui/commit/26507a3))
+
+
+
+<a name="7.12.0"></a>
+# 7.12.0 (2020-01-30)
+
+
+### Features
+
+* remove sui-deploy funcitonality from studio ([98a6a51](https://github.com/SUI-Components/sui/commit/98a6a51))
+
+
+
+<a name="7.11.0"></a>
+# 7.11.0 (2020-01-28)
+
+
+### Bug Fixes
+
+* fix parse and evaluate Experimental test flag ([b0ce89f](https://github.com/SUI-Components/sui/commit/b0ce89f))
+* use __EXPERIMENTA_TEST_DEV__ in dev mode ([b24a994](https://github.com/SUI-Components/sui/commit/b24a994))
+
+
+
+<a name="7.10.0"></a>
+# 7.10.0 (2020-01-23)
+
+
+
+<a name="7.9.0"></a>
+# 7.9.0 (2020-01-17)
+
+
+### Bug Fixes
+
+* fix missing test and remove not needed code ([d29e170](https://github.com/SUI-Components/sui/commit/d29e170))
+* fix styles for test ([5ffa517](https://github.com/SUI-Components/sui/commit/5ffa517))
+
+
+### Features
+
+* add iframe styles ([e0f81e7](https://github.com/SUI-Components/sui/commit/e0f81e7))
+* remove adding --save to README ([c1d5cc2](https://github.com/SUI-Components/sui/commit/c1d5cc2))
+
+
+
+<a name="7.8.0"></a>
+# 7.8.0 (2020-01-08)
+
+
+### Bug Fixes
+
+* correct usage of pascal-case package ([456f236](https://github.com/SUI-Components/sui/commit/456f236))
+
+
+
+<a name="7.7.0"></a>
+# 7.7.0 (2020-01-07)
+
+
+### Bug Fixes
+
+* add importComponent and importTest props ([4b44ef3](https://github.com/SUI-Components/sui/commit/4b44ef3))
+* avoid listing wrong themes when name is colliding ([2817ab1](https://github.com/SUI-Components/sui/commit/2817ab1))
+* avoid weird loading flash ([60f33bb](https://github.com/SUI-Components/sui/commit/60f33bb))
+* move setFailures state inside main useEffect ([5c9b1d0](https://github.com/SUI-Components/sui/commit/5c9b1d0))
+* needed dependency ([a3c36a4](https://github.com/SUI-Components/sui/commit/a3c36a4))
+* remove not needed line ([7327750](https://github.com/SUI-Components/sui/commit/7327750))
+
+
+### Features
+
+* --experimental-test flag to avoid major version ([c477e89](https://github.com/SUI-Components/sui/commit/c477e89))
+* add __EXPERIMENTAL_TEST__ flag ([e342cc2](https://github.com/SUI-Components/sui/commit/e342cc2))
+* add a friendly way to open the iframe ([d100a90](https://github.com/SUI-Components/sui/commit/d100a90))
+* add experimental test to build and start ([37260ee](https://github.com/SUI-Components/sui/commit/37260ee))
+* add markdown to be loaded asyn ([01d1d37](https://github.com/SUI-Components/sui/commit/01d1d37))
+* add new tab for render component test ([6a487ab](https://github.com/SUI-Components/sui/commit/6a487ab))
+* add styles to tests and demo ([e65077b](https://github.com/SUI-Components/sui/commit/e65077b))
+* add testing to the dev mode ([9a888a9](https://github.com/SUI-Components/sui/commit/9a888a9))
+* apply context to the component ([1748b5e](https://github.com/SUI-Components/sui/commit/1748b5e))
+* better error handling ([375603d](https://github.com/SUI-Components/sui/commit/375603d))
+* better font-weight for props ([c5e3bfd](https://github.com/SUI-Components/sui/commit/c5e3bfd))
+* bump dependencies ([1109e6f](https://github.com/SUI-Components/sui/commit/1109e6f))
+* center tablet and mobile if test are not displayed ([36e6ced](https://github.com/SUI-Components/sui/commit/36e6ced))
+* dont show events if they are not needed ([7bfd376](https://github.com/SUI-Components/sui/commit/7bfd376))
+* force refactor default test ([b74be08](https://github.com/SUI-Components/sui/commit/b74be08))
+* generate the test file with a relative url ([f233056](https://github.com/SUI-Components/sui/commit/f233056))
+* gerenate te test file when create a new component ([344912a](https://github.com/SUI-Components/sui/commit/344912a))
+* load markdown css locally ([4cde006](https://github.com/SUI-Components/sui/commit/4cde006))
+* more look as a mobile device ([79159c4](https://github.com/SUI-Components/sui/commit/79159c4))
+* more minimalist look n feel ([88b9b85](https://github.com/SUI-Components/sui/commit/88b9b85))
+* move component to function ([34db4f8](https://github.com/SUI-Components/sui/commit/34db4f8))
+* move from class to function and some refactor ([02f526d](https://github.com/SUI-Components/sui/commit/02f526d))
+* move Raw to function and remove not needed code and states ([4bf27bc](https://github.com/SUI-Components/sui/commit/4bf27bc))
+* move to function Style component ([aca0de4](https://github.com/SUI-Components/sui/commit/aca0de4))
+* remove babel transformation for now ([6be5821](https://github.com/SUI-Components/sui/commit/6be5821))
+* separate dev dependencies ([5b8927d](https://github.com/SUI-Components/sui/commit/5b8927d))
+* simplify props documentation ([9ea385d](https://github.com/SUI-Components/sui/commit/9ea385d))
+* upgrade dependencies ([ad57dd4](https://github.com/SUI-Components/sui/commit/ad57dd4))
+
+
+
 <a name="7.6.0"></a>
 # 7.6.0 (2019-10-28)
 

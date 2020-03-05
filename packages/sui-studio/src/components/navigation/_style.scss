@@ -5,10 +5,10 @@
     height: 65px;
     padding: 16px;
     text-decoration: none;
-    transition: opacity .3s ease;
+    transition: opacity 0.3s ease;
 
     &:hover {
-      opacity: .75;
+      opacity: 0.75;
     }
 
     &Title {
@@ -52,14 +52,14 @@
       display: block;
       padding: 5px 16px;
       text-decoration: none;
-      transition: all .3s ease;
+      transition: all 0.3s ease;
       &:hover {
-        background-color: rgba($c-primary, .05);
+        background-color: rgba($c-primary, 0.05);
         border-left-color: $c-primary;
         color: $c-primary;
       }
       &--active {
-        background-color: rgba($c-primary, .1);
+        background-color: rgba($c-primary, 0.1);
         border-left-color: darken($c-primary, 10%);
         color: darken($c-primary, 10%);
         pointer-events: none;

@@ -1,17 +1,69 @@
 .Root {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
   overflow-y: auto;
 
-  &-center {
-    height: 100%;
+  &-iframe {
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: block;
+    margin: 10px auto;
+    overflow: scroll;
+    zoom: 1;
+  }
+
+  &-test {
+    background: #fafafa;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  &-testSwitch--show {
+    position: absolute;
+    right: 23px;
+    top: 60px;
+    z-index: 2;
+  }
+
+  &-testSwitch--hide {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    z-index: 2;
   }
 
   &-top {
-    box-shadow: 0 3px 5px rgba(100, 100, 100, .49);
     padding-bottom: 8px;
     height: 98px;
+    width: 100%;
+
+    a {
+      color: #03f;
+      text-decoration: none;
+    }
+  }
+
+  &-center {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    @include breakpoint-from(m) {
+      flex-direction: row;
+    }
+  }
+
+  &-desktop {
+    width: 100%;
+    height: 100%;
+  }
+
+  &-tablet {
+    margin: 0 auto;
   }
 
   &-mobile {

@@ -142,8 +142,8 @@ function getArrangedCommand(bin, args, opts) {
  * Get caption presenting comman execution in a folder
  * @param  {String} bin     Binary path or alias
  * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
- * @param  {Object} Options to pass to child_process.spawn call
- * @return {Striog}
+ * @param  {Object} options to pass to child_process.spawn call
+ * @return {String}
  */
 function getCommandCallMessage(bin, args, options = {}) {
   const folder = options.cwd

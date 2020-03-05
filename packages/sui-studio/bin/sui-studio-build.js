@@ -14,7 +14,10 @@ serialSpawn([
   [
     bundlerBuildPath,
     ['-C', '--context', join(__dirname, '..', 'src')],
-    {shell: false, env: process.env}
+    {
+      shell: false,
+      env: process.env
+    }
   ]
 ])
   .then(() => fs.copy('public/index.html', 'public/200.html'))

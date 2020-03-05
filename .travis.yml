@@ -1,6 +1,6 @@
-dist: xenial
+dist: bionic
 language: node_js
-node_js: '10'
+node_js: '13'
 
 services:
   - docker
@@ -9,7 +9,8 @@ before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
 install:
-  - npm run phoenix -- --no-progress --chunk 3
+  - npm install --no-audit --loglevel=error --no-fund --no-optional --no-package-lock --no-progress --no-save --no-shrinkwrap
+  - npm run phoenix:ci
 
 script:
   - npm run lint

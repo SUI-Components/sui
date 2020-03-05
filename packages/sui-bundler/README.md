@@ -97,6 +97,7 @@ $ sui-bundler build
 ```
 
 It will build a deployable folder `public` where you can find all your statics. If you wish to remove the content of the folder before generating new files, just use the flag `--clean | -C`
+If you want you can use the flag `--link-package` with this commands
 
 ### Library
 

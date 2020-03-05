@@ -4,15 +4,13 @@
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "7",
-    "babel-preset-sui": "3",
     "sinon": "2"
   },
   "dependencies": {

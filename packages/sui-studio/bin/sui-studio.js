@@ -55,10 +55,6 @@ program
   )
   .alias('b')
 
-program
-  .command('deploy', 'Generate a static version and deploys it to now.sh')
-  .alias('d')
-
 program.command('commit', 'Commit with semantic messages.').alias('co')
 
 program.command('release', 'Release whatever need to be release').alias('r')

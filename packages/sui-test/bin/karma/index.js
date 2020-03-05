@@ -25,7 +25,14 @@ const createServer = config => {
   return server
 }
 
-module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
+module.exports = async ({
+  watch,
+  ci,
+  pattern,
+  ignorePattern,
+  srcPattern,
+  timeout
+}) => {
   if (watch) configure.singleRun = false
   if (ci) configure.browsers = ['Firefox']
   if (ignorePattern) configure.exclude = [ignorePattern]
@@ -36,6 +43,11 @@ module.exports = async ({watch, ci, pattern, ignorePattern, srcPattern}) => {
   ]
   configure.preprocessors = {
     [pattern]: ['webpack']
+  }
+
+  configure.client.mocha = {
+    ...configure.client.mocha,
+    ...(timeout && {timeout})
   }
 
   const server = createServer(configure)

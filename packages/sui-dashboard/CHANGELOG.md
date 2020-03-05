@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="1.20.0"></a>
+# 1.20.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([12f8503](https://github.com/SUI-Components/sui/commit/12f8503))
+
+
+
+<a name="1.16.0"></a>
+# 1.16.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([5409d51](https://github.com/SUI-Components/sui/commit/5409d51))
+
+
+
+<a name="1.14.0"></a>
+# 1.14.0 (2020-02-17)
+
+
+### Features
+
+* add Unique Tool repository to SUI-Dashboard ([2b2c603](https://github.com/SUI-Components/sui/commit/2b2c603))
+* bump version ([98966e6](https://github.com/SUI-Components/sui/commit/98966e6))
+* bump version ([9064779](https://github.com/SUI-Components/sui/commit/9064779))
+
+
+
+<a name="1.9.0"></a>
+# 1.9.0 (2020-01-22)
+
+
+### Features
+
+* Remove UT webapp ([bee4d8b](https://github.com/SUI-Components/sui/commit/bee4d8b))
+
+
+
+<a name="1.8.0"></a>
+# 1.8.0 (2020-01-20)
+
+
+### Features
+
+* add UT repository ([22b2dcb](https://github.com/SUI-Components/sui/commit/22b2dcb))
+
+
+
 <a name="1.7.0"></a>
 # 1.7.0 (2019-11-27)
 

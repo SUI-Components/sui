@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mono",
-  "version": "1.44.0",
+  "version": "1.48.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
@@ -13,15 +13,17 @@
   ],
   "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
   "license": "MIT",
-  "devDependencies": {},
   "dependencies": {
     "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
     "colors": "1.4.0",
-    "commander": "4.0.1",
+    "commander": "4.1.0",
     "commitizen": "4.0.3",
     "conventional-changelog": "3.1.18",
-    "listr": "0.14.3",
+    "execa": "3.4.0",
+    "figures": "3.1.0",
+    "log-update": "3.3.0",
+    "p-queue": "6.2.1",
     "rimraf": "3.0.0"
   },
   "repository": {

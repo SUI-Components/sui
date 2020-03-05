@@ -14,10 +14,12 @@ export const createContextByType = (ctxt, type) => {
 
 export const isFunction = fnc =>
   !!(fnc && fnc.constructor && fnc.call && fnc.apply)
+
 export const cleanDisplayName = displayName => {
   const [fallback, name] = displayName.split(/\w+\((\w+)\)/)
   return name !== undefined ? name : fallback
 }
+
 export const pipe = (...funcs) => arg =>
   funcs.reduce((value, func) => func(value), arg)
 

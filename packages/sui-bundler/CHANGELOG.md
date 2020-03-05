@@ -2,6 +2,104 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="5.45.0"></a>
+# 5.45.0 (2020-02-28)
+
+
+### Features
+
+* upgrade terser to latest version to check if problems fixes ([85a274e](https://github.com/SUI-Components/sui/commit/85a274e))
+
+
+
+<a name="5.44.0"></a>
+# 5.44.0 (2020-02-26)
+
+
+### Features
+
+* add --link-package flag ([ce86906](https://github.com/SUI-Components/sui/commit/ce86906))
+
+
+
+<a name="5.43.0"></a>
+# 5.43.0 (2020-02-11)
+
+
+### Performance Improvements
+
+* avoid repetated libraries ([7ccd179](https://github.com/SUI-Components/sui/commit/7ccd179))
+
+
+
+<a name="5.42.0"></a>
+# 5.42.0 (2020-02-03)
+
+
+### Features
+
+* remove experimental test flag ([42ded2a](https://github.com/SUI-Components/sui/commit/42ded2a))
+
+
+
+<a name="5.41.0"></a>
+# 5.41.0 (2020-01-30)
+
+
+### Bug Fixes
+
+* remove deprecated css-content-loader package ([3c91bd7](https://github.com/SUI-Components/sui/commit/3c91bd7))
+
+
+
+<a name="5.40.0"></a>
+# 5.40.0 (2020-01-29)
+
+
+### Bug Fixes
+
+* fix link package ([9bd852d](https://github.com/SUI-Components/sui/commit/9bd852d))
+
+
+
+<a name="5.39.0"></a>
+# 5.39.0 (2020-01-29)
+
+
+### Features
+
+* upgrade dependencies ([cc1bd43](https://github.com/SUI-Components/sui/commit/cc1bd43))
+
+
+
+<a name="5.38.0"></a>
+# 5.38.0 (2020-01-28)
+
+
+### Bug Fixes
+
+* add __EXPERIMENTAL_TEST__ flag as default ([fc6af19](https://github.com/SUI-Components/sui/commit/fc6af19))
+* fix not well linked packages ([fd35988](https://github.com/SUI-Components/sui/commit/fd35988))
+* upgrade dependency to fix weird bug ([52ebe86](https://github.com/SUI-Components/sui/commit/52ebe86))
+
+
+### Features
+
+* remove not used file-loader ([6568cbb](https://github.com/SUI-Components/sui/commit/6568cbb))
+
+
+
+<a name="5.37.0"></a>
+# 5.37.0 (2020-01-17)
+
+
+### Features
+
+* upgrade babel version to match babel-preset-sui ([f7a2440](https://github.com/SUI-Components/sui/commit/f7a2440))
+* upgrade dependencies and adapt configs with new needs ([4f8504a](https://github.com/SUI-Components/sui/commit/4f8504a))
+
+
+
 <a name="5.36.0"></a>
 # 5.36.0 (2019-12-04)
 

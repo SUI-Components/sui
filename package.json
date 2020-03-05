@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix",
+    "phoenix:ci": "sui-mono phoenix --ci --no-root",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "cross-env NODE_ENV=test npm run test:client && cross-env NODE_ENV=test npm run test:server",
@@ -24,6 +25,7 @@
     "precommit": "sui-precommit run"
   },
   "devDependencies": {
+    "@babel/cli": "7.8.3",
     "@s-ui/lint": "3",
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",

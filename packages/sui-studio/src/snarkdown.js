@@ -1,3 +1,4 @@
+/* eslint  no-nested-ternary:0 */
 // from: https://github.com/developit/snarkdown/pull/18
 // adapted linter error & warnings
 

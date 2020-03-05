@@ -26,13 +26,16 @@ import {
   removeDefaultContext
 } from './utilities'
 
-const EMPTY = 0
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const CONTAINER_CLASS = 'sui-Studio'
 const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
 export default class Demo extends Component {
   static async bootstrapWith(demo, {category, component, style, themes}) {
+    demo.setState({
+      exports: {default: null}
+    })
+
     const [
       exports,
       playground,
@@ -141,6 +144,7 @@ export default class Demo extends Component {
       ctxt = {},
       ctxtSelectedIndex,
       ctxtType,
+      DemoComponent,
       events,
       exports,
       isCodeOpen,
@@ -148,22 +152,19 @@ export default class Demo extends Component {
       playground,
       style,
       themes,
-      themeSelectedIndex,
-      DemoComponent
+      themeSelectedIndex
     } = this.state
 
-    const Base = exports.default
+    const {default: Base} = exports
 
-    if (!Base) {
-      return <h1>Loading...</h1>
-    }
+    if (!Base) return null
 
     // check if is a normal component or it's wrapped with a React.memo method
     const ComponentToRender = Base.type ? Base.type : Base
 
     const nonDefaultExports = removeDefaultContext(exports)
     const context =
-      Object.keys(ctxt).length !== EMPTY && createContextByType(ctxt, ctxtType)
+      Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
 
     const Enhance = pipe(withContext(context, context))(ComponentToRender)
@@ -223,7 +224,7 @@ export default class Demo extends Component {
                 scope={{
                   context,
                   React,
-                  [`${cleanDisplayName(Enhance.displayName)}`]: Enhance,
+                  [cleanDisplayName(Enhance.displayName)]: Enhance,
                   domain,
                   ...nonDefaultExports
                 }}

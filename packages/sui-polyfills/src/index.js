@@ -1,6 +1,7 @@
 require('core-js/features/array/fill')
 require('core-js/features/array/find-index')
 require('core-js/features/array/find')
+require('core-js/features/array/flat')
 require('core-js/features/array/from')
 require('core-js/features/array/includes')
 require('core-js/features/array/is-array')
@@ -21,6 +22,10 @@ require('core-js/features/string/pad-end')
 require('core-js/features/string/pad-start')
 
 require('core-js/features/url-search-params')
+
+require('core-js/features/map/map-keys')
+
+require('core-js/features/symbol')
 
 require('./element-closest')
 

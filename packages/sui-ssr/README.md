@@ -193,9 +193,10 @@ Configs accepted:
 
 - **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
 
-  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the micriservice for generate the CriticalCSS
-  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the micriservice for generate the CriticalCSS
-  - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of urls. If some of this URLs match with the current page url. this feature will be disabled for the page. That is usefull the enabled CriticalCSS in your site but not in one or two pages.
+  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the microservice for generating the Critical CSS.
+  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the microservice for generating the Critical CSS.
+  - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
+  - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
 
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
 
@@ -226,6 +227,24 @@ More info about Dynamic Rendering here: https://developers.google.com/search/doc
 For development you will need start the server with env vars `CRITICAL_CSS_HOST` and `CRITICAL_CSS_PROTOCOL` to allow to the external service request your current page.
 
 If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
+
+## Link Packages
+
+If you want you can link packages when you create a new static version of your site. But if you are using `sui-bundler` to link packages too. Please be sure to be in sync with the packages linkeds in both tools
+For example, you could use a bash command like this:
+
+```bash
+#!/bin/bash
+
+FLAGS="\
+  --link-package ../../frontend-ma--uilib-components/components/value/proposition/ \
+  --link-package ../../frontend-ma--uilib-components/components/banner/carsCampaign \
+  "
+CDN=/ npx sui-bundler build -C $FLAGS && \
+  npx sui-ssr build -C $FLAGS && \
+  PORT=5000 node server/index.js
+
+```
 
 ## Environment variables
 

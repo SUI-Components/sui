@@ -35,6 +35,14 @@ const requireFile = async ({
   return extractDefault ? file.default : file
 }
 
+export const tryRequireTest = async ({category, component}) => {
+  return requireFile({
+    extractDefault: false,
+    importFile: () =>
+      import(`${__BASE_DIR__}/test/${category}/${component}/index.js`)
+  })
+}
+
 export const tryRequireMarkdown = async ({category, component, file}) => {
   return requireFile({
     defaultValue: '',

@@ -1,14 +1,13 @@
 # sui-studio
-> Develop, maintain and publish your SUI components.
+> Develop, maintain, and publish your SUI components.
 
-
-Sui Studio helps you to develop and document isolated UI components for your projects. It provides:
+Sui Studio helps you develop and document isolated UI components for your projects. It provides,
 
 * Isolated development of components
-* Unified development platform
-* Productivity improvement focusing of component development experience
-* Live Demos as a base of work (with auto-generated playgrounds)
-* Components discovery catalog generated from live demos and markdown docs.
+* A unified development platform
+* Productivity improvement, focusing on component-development experience
+* Live demos with auto-generated playgrounds
+* Catalog of components generated from live demos and markdown docs.
 
 ![](./assets/sui-studio-demo.gif)
 
@@ -22,25 +21,24 @@ npm install @s-ui/studio
 
 In case you want to create a new studio, check out [sui-studio-create](https://github.com/SUI-Components/sui/tree/master/packages/sui-studio-create)
 
-Once you're in the new project, you can execute `sui-studio start` in order to start the development browser and start working on your components.
-
-
-
+Once you're in a new project, execute `sui-studio start` to start the development browser and work on your components.
 
 ## Common Workflow
 
-### Creating a new component
-#### 1) Create a component
+### To create a new component, execute the component-scaffolding command.
 
 ```sh
-$ sui-studio generate house window
+$ npx sui-studio generate house window
 ```
 
-#### 2) Install component dependencies
+### To develop the new component,
+#### 1) Launch the development environment 
 
 ```sh
-$ sui-studio run-all npm install
+$ npx sui-studio dev house/window
 ```
+
+#### 2) Go to `http://localhost:3000`
 
 #### 3) Commit changes using the appropiate command
 
@@ -62,35 +60,179 @@ Add the script to your package.json
 }
 ```
 
-It will prompt a question form. The way you answer to this question form affects the way the commit's comment is built. Comments will be used later, after merging to master in order to decide what kind of change (release) is going to be done (minor or major).
+It will prompt a question form. The way you answer to this question form affects the way the commit's comment is built. Comments will be used later, after merging to master in order to decide what kind of change (release) is going to be applied (minor or major).
 
 Then just push your changes using ```git push``` and merge them into master after review.
 
 #### 4) Release
 
-Select master branch. First, check that the release will be properly built by executing:
+Select master branch. First, check that the release will be properly built by executing,
 ```
 $ sui-studio check-release
 ```
-If the output is the expected then run:
+If the output is the expected one, then run:
 ```
 $ sui-studio release
 ```
 
 ## CLI
 
-### `$ sui-studio link-all`
+### `$ sui-studio start`
 
-Executes internally `$ sui-mono link`, that links all components to each other.
+Launch a development environment where you can see all your components at once. If there are too many components, use the `dev`command. 
 
+### `sui-studio build`
 
-### `$ sui-studio run-all`
+Build a static version of a web app aimed to be deployed, where you will be able to interact with all components. The interface will be the same you use for the start command, only this one is optimized for production.
 
-Executes internally `$ sui-mono run`, that executed a command **in series** on each package folder.
+### `$ sui-studio dev`
 
-### `$ sui-studio run-parallel`
+Launch a development environment where you can work in total isolation on your component.
 
-Executes internally `$ sui-mono run-parallel`, that executed a command **in parallel** on each package folder.
+## Testing
+
+Test the studio's components both in the demo as in the development environment. *Currently in experimental mode*
+
+Here's an example of what could go inside `test/[category]/[component]/index.js`:
+
+```JS
+/* eslint react/jsx-no-undef:0 */
+/* global AtomButton */
+
+import React from 'react'
+
+import chai, {expect} from 'chai'
+import chaiDOM from 'chai-dom'
+import {render} from '@testing-library/react'
+
+chai.use(chaiDOM)
+
+describe('AtomButton', () => {
+  it('Render', () => {
+    const {getByRole} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByRole('button')).to.have.text('HOLA')
+  })
+})
+```
+
+The component will be a global object when running tests, so it is PARAMOUNT NOT to import it. In order to avoid problems with the linter, add relevant comments, as in the example above. 
+
+### How works with different contexts
+
+If there is a `demo/context.js` file where you define several contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
+
+First, you have to import the patcher to create the `context` object, inside the `describe` object
+
+```js
+import '@s-ui/studio/src/patcher-mocha'
+```
+
+After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.
+
+For example, if your context.js file looks like:
+
+```js
+export default () => {
+  return Promise.resolve({
+    default: {
+      user: {id: 12},
+      language: 'es'
+    },
+    other: {
+      user: {id: 34},
+      language: 'ca'
+    }
+  })
+}
+```
+the test file should be like:
+
+```js
+import '@s-ui/studio/patcher-mocha'
+
+chai.use(chaiDOM)
+
+describe.context.default('atom/button', AtomButton => {
+  it('Render', () => {
+    const {getByText} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByText('HOLA')).to.have.text('HOLA 12')
+  })
+})
+
+describe.context.other('atom/button', AtomButton => {
+  it('Render', () => {
+    const {getByText} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByText('HOLA')).to.have.text('HOLA 34')
+  })
+})
+```
+
+### Known issue: Test a memoized component
+
+If a component is exported wrapped memoized: `export default React.memo(Component)`, it loses the displayName and sui-test dispatch an Error because it couldn't find the component.
+
+If you need to make a test using a memoized component, just wrap it like:
+
+```js
+const Component = React.memo(() => <></>)
+Component.displayName = 'Component'
+
+export default Component
+```
+
+or
+
+```js
+const Component = () => <></>
+Component.displayName = 'Component'
+
+const MemoComponent = React.memo(Component)
+MemoComponent.displayName = 'MemoComponent'
+
+export default MemoComponent
+```
+
+## File structure
+
+SUIStudio profusely uses the concept of "convention over configuration" for file structure.
+
+```
+.
+├── components
+│   ├── README.md
+│   └── atom                                <- Component's category
+│       ├── button                          <- Component's name
+│       │   ├── README.md
+│       │   ├── package.json
+│       │   └── src
+│       │       ├── index.js
+│       │       └── index.scss
+│       └── header
+│           ├── README.md
+│           ├── package.json
+│           └── src
+│               ├── index.js
+│               └── index.scss
+├── demo
+│   └── atom
+│       ├── button
+│       │   ├── context.js
+│       │   ├── playground                <- Basic code that will be shown in the component's demo
+│       │   └── themes                    <- SASS files stored in this folder will be themes shown on the interface
+│       │       └── myStudioTheme.scss
+│       └── header
+│           └── demo                      <- Create a `demo` folder to put an demo app of your component (playground will be ignored)
+│               ├── index.js
+│               ├── index.scss
+│               └── package.json
+├── package.json
+└── test
+    └── atom
+        ├── button
+        │   └── index.js                 <- File containing all component's tests
+        └── header
+            └── index.js
+```
 
 # Conventions
 

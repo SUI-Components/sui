@@ -29,31 +29,27 @@ const showError = msg => {
 }
 
 const writeFile = (path, body) => {
-  return new Promise((resolve, reject) => {
-    fse.outputFile(path, body, err => {
-      if (err) {
-        showError(`Fail modifying ${path}`)
-        reject(err)
-      } else {
-        console.log(colors.gray(`Modified ${path}`))
-        resolve()
-      }
+  return fse
+    .outputFile(path, body)
+    .then(() => {
+      console.log(colors.gray(`Modified ${path}`))
     })
-  })
+    .catch(err => {
+      showError(`Fail modifying ${path}`)
+      throw err
+    })
 }
 
 const createDir = path => {
-  return new Promise((resolve, reject) => {
-    fse.mkdirp(path, err => {
-      if (err) {
-        showError(`Fail creating ${path}`)
-        reject(err)
-      } else {
-        console.log(colors.gray(`Created ${path}`))
-        resolve()
-      }
+  fse
+    .mkdirp(path)
+    .then(() => {
+      console.log(colors.gray(`Created ${path}`))
     })
-  })
+    .catch(err => {
+      showError(`Fail creating ${path}`)
+      throw err
+    })
 }
 
 if (!PROJECT_NAME) {
@@ -62,7 +58,8 @@ if (!PROJECT_NAME) {
 
 Promise.all([
   createDir(`${PROJECT_PATH}/components`),
-  createDir(`${PROJECT_PATH}/demo`)
+  createDir(`${PROJECT_PATH}/demo`),
+  createDir(`${PROJECT_PATH}/test`)
 ])
   .then(() =>
     writeFile(
@@ -84,13 +81,12 @@ Promise.all([
     "check:release": "sui-studio check-release",
     "co": "sui-studio commit",
     "commitmsg": "validate-commit-msg",
-    "deploy": "sui-deploy ${PROJECT_NAME} --now",
     "dev": "sui-studio dev",
     "generate": "sui-studio generate --prefix sui --scope ${PROJECT_NAME}",
     "lint:js": "sui-lint js",
     "lint:sass": "sui-lint sass",
     "lint": "npm run lint:js && npm run lint:sass",
-    "phoenix:ci": "npx @s-ui/mono phoenix --no-progress && (cd demo && npx @s-ui/mono phoenix --no-progress)",
+    "phoenix:ci": "npx @s-ui/mono phoenix --ci && (cd demo && npx @s-ui/mono phoenix --ci)",
     "phoenix": "npx @s-ui/mono phoenix && (cd demo && npx @s-ui/mono phoenix)",
     "precommit": "sui-precommit run",
     "release": "sui-studio release",
@@ -101,7 +97,6 @@ Promise.all([
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/deploy": "2",
     "@s-ui/precommit": "2",
     "@s-ui/studio": "7",
     "husky": "0.14.3",
