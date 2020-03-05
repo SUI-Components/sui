@@ -13,6 +13,9 @@
   "devDependencies": {
     "sinon": "2"
   },
+  "browser": {
+    "perf_hooks": false
+  },
   "dependencies": {
     "@s-ui/js": "2",
     "tiny-lru": "6.0.1"
