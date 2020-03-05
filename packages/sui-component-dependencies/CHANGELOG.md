@@ -2,54 +2,68 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="1.5.0"></a>
+# 1.6.0 (2020-03-05)
+
+
+### Features
+
+* add @s-ui/theme pkg to be imported ([4b62e7b](https://github.com/SUI-Components/sui/commit/4b62e7b718e076b0be849be3e4651853be98873c))
+
+
+
 # 1.5.0 (2019-02-21)
 
 
 ### Features
 
-* add hoist-non-react-statics dependencie ([c8eca80](https://github.com/SUI-Components/sui/commit/c8eca80))
-* remove hoist-non-react-statics dep ([c5f4abc](https://github.com/SUI-Components/sui/commit/c5f4abc))
+* add hoist-non-react-statics dependencie ([c8eca80](https://github.com/SUI-Components/sui/commit/c8eca808c494befac9263dbe0f7e5f6146a65ace))
+* remove hoist-non-react-statics dep ([c5f4abc](https://github.com/SUI-Components/sui/commit/c5f4abce9817d9a8564d4a75bb5436bc16258b6b))
 
 
 
-<a name="1.5.0"></a>
 # 1.5.0 (2017-10-05)
 
 
 ### Bug Fixes
 
-* add theme-basic back fro compatibility ([a940d09](https://github.com/SUI-Components/sui/commit/a940d09))
+* add theme-basic back fro compatibility ([a940d09](https://github.com/SUI-Components/sui/commit/a940d0918b54fef7c72ab730e4fc448efa7ffc2c))
 
 
 
-<a name="1.4.0"></a>
 # 1.4.0 (2017-10-04)
 
 
 ### Features
 
-* update sui-theme dep ([5901653](https://github.com/SUI-Components/sui/commit/5901653))
+* update sui-theme dep ([5901653](https://github.com/SUI-Components/sui/commit/5901653abbcea4642513dc93c1464ba150726a76))
 
 
 
-<a name="1.3.0"></a>
 # 1.3.0 (2017-09-21)
 
 
 ### Features
 
-* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([aa15cd1](https://github.com/SUI-Components/sui/commit/aa15cd1))
+* move package from [@schibstedspain](https://github.com/schibstedspain) scope to [@s-ui](https://github.com/s-ui) org ([aa15cd1](https://github.com/SUI-Components/sui/commit/aa15cd1bacb678ef93fce40cfb30e9cf34d51617))
 
 
 
-<a name="1.2.0"></a>
 # 1.2.0 (2017-06-22)
 
 
 ### Bug Fixes
 
-* make package public ([08b503b](https://github.com/SUI-Components/sui/commit/08b503b))
+* make package public ([08b503b](https://github.com/SUI-Components/sui/commit/08b503b51b8eb34652e3971887ca1388cd1f3d06))
+
+
+
+# 1.1.0 (2017-06-22)
+
+
+### Features
+
+* first release 1.0 ([54e5ff6](https://github.com/SUI-Components/sui/commit/54e5ff670aaa8825590964f019ba41a20a97fed2))
+* migrate from @schibstedspain/suistudio-fatigue-deps ([b0474f8](https://github.com/SUI-Components/sui/commit/b0474f8c6eca7a5948988d4756045d10fda1cc20))
 
 
 
