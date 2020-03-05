@@ -16,11 +16,20 @@ describe('@s-ui/js', () => {
     })
 
     it('should convert object params to query string with arrayFormat comma option', () => {
-      const queryParams = {a: 1, b: 'test', m: [1, 2, 3]}
+      const queryParams = {a: 1, b: 'lorem/ipsum', m: [1, 2, 3]}
       const options = {arrayFormat: 'comma'}
       const queryString = toQueryString(queryParams, options)
 
-      const expected = 'a=1&b=test&m=1%2C2%2C3'
+      const expected = 'a=1&b=lorem%2Fipsum&m=1%2C2%2C3'
+      expect(expected).to.be.equal(queryString)
+    })
+
+    it('should convert object params to query string with arrayFormat comma option and no encoding', () => {
+      const queryParams = {a: 1, b: 'lorem/ipsum', m: [1, 2, 3]}
+      const options = {arrayFormat: 'comma', encode: false}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = 'a=1&b=lorem/ipsum&m=1,2,3'
       expect(expected).to.be.equal(queryString)
     })
 
