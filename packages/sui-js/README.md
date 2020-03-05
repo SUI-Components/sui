@@ -116,10 +116,17 @@ console.log(randomString) // qwerty
 
 import {toQueryString} from '@s-ui/js/lib/string'
 
-const queryParams = {a: 1, b: 'test', m: [1, 2]}
+// example without setting encode option 
+const queryParams = {a: 1, b: 'lorem/ipsum', m: [1, 2]}
 const options = {arrayFormat: 'repeat', delimiter: ':'}
 const queryString = toQueryString(queryParams, options)
-console.log(queryString) // 'a=1:b=test:m=1:m=2'
+console.log(queryString) // 'a%3D1%3Ab%3Dlorem-ipsum%3Am%3D1%3Am%3D2'
+
+// example with encode option
+const queryParams = {a: 1, b: 'lorem/ipsum', m: [1, 2]}
+const options = {delimiter: '&', encode: false}
+const queryString = toQueryString(queryParams, options)
+console.log(queryString) // 'a=1&b=loremipsum&m=1,2'
 ```
 
 ## ua-parser
