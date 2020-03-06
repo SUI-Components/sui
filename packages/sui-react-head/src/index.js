@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Title, HeadProvider, Link, Meta} from 'react-head'
-export const SeoProvider = HeadProvider
+import Body from './Body'
 
-const BODY_ATTRIBUTES_KEY = 'data-bodyattributes'
+export const SeoProvider = HeadProvider
 
 const extractKeyFromTag = tag => {
   const {name, hreflang, rel} = tag
@@ -22,29 +22,6 @@ const renderTags = ({tagsArray = [], Component}) =>
     )
   })
 
-function Body({bodyAttributes = {}}) {
-  useEffect(function() {
-    // on the client, set the needed attributes
-    if (typeof document !== 'undefined' && document.body) {
-      Object.entries(bodyAttributes).forEach(([key, value]) => {
-        document.body.setAttribute(key, value)
-      })
-      return null
-    }
-  })
-  // on the client, set the needed attributes
-  if (typeof document !== 'undefined' && document.body) {
-    Object.entries(bodyAttributes).forEach(([key, value]) => {
-      document.body.setAttribute(key, value)
-    })
-    return null
-  }
-  const metaProps = {...bodyAttributes, [BODY_ATTRIBUTES_KEY]: ''}
-
-  // on the server, use the Meta tag to extract later
-  return <Meta {...metaProps} />
-}
-
 export default function Seo({bodyAttributes, title, meta, link}) {
   return (
     <>
@@ -54,10 +31,6 @@ export default function Seo({bodyAttributes, title, meta, link}) {
       {bodyAttributes && <Body bodyAttributes={bodyAttributes} />}
     </>
   )
-}
-
-Body.propTypes = {
-  bodyAttributes: PropTypes.object
 }
 
 Seo.propTypes = {
