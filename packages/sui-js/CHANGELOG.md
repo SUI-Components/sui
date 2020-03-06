@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.14.0 (2020-03-04)
+
+
+### Features
+
+* add encode property to toQueryString options handling and call to stringify ([8b9f01f](https://github.com/SUI-Components/sui/commit/8b9f01f804a57cf2862424076aa21d5188bb464f))
+
+
+
 # 2.13.0 (2020-02-13)
 
 
