@@ -154,7 +154,7 @@ ${componentInPascal}.propTypes = {}
 
   writeFile(
     COMPONENT_ENTRY_SCSS_POINT_FILE,
-    `@import '~@schibstedspain/sui-theme/lib/index';
+    `@import '~@s-ui/theme/lib/index';
 
 .${prefix}-${componentInPascal} {
   // Do your magic
