@@ -6,11 +6,21 @@ import Html from './Html'
 
 export {HeadProvider, Title, Link, Meta}
 
+/**
+ * Extract value in a specific order
+ * @param {{ name?: string, hreflang?: string, rel?: string }} tag
+ * @return {String}
+ */
 const extractKeyFromTag = tag => {
   const {name, hreflang, rel} = tag
   return name || hreflang || rel
 }
 
+/**
+ * Use the correct component to render the tag
+ * @param {{ tagsArray: Array, Component: Object }} tagsArray
+ * @returns {Array}
+ */
 const renderTags = ({tagsArray = [], Component}) =>
   tagsArray.map(tag => {
     const {hreflang: hrefLang, ...restOfTagInfo} = tag
