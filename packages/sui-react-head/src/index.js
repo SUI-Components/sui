@@ -4,7 +4,7 @@ import {Title, HeadProvider, Link, Meta} from 'react-head'
 import Body from './Body'
 import Html from './Html'
 
-export const SeoProvider = HeadProvider
+export {HeadProvider, Title, Link, Meta}
 
 const extractKeyFromTag = tag => {
   const {name, hreflang, rel} = tag
@@ -23,7 +23,7 @@ const renderTags = ({tagsArray = [], Component}) =>
     )
   })
 
-export default function Seo({
+export default function Head({
   bodyAttributes,
   htmlAttributes,
   title,
@@ -41,7 +41,7 @@ export default function Seo({
   )
 }
 
-Seo.propTypes = {
+Head.propTypes = {
   bodyAttributes: PropTypes.object,
   htmlAttributes: PropTypes.object,
   title: PropTypes.string,
