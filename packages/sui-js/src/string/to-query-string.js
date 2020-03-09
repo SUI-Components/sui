@@ -7,11 +7,13 @@ import {stringify} from 'qs'
  * @param {object} [options={}]
  * @param {'indices'|'brackets'|'repeat'|'comma'} [options.arrayFormat] - specify the format of the output array
  * @param {string} [options.delimiter] - delimiter
+ * @param {boolean} [options.encode=true] - encode
  */
 function toQueryString(queryParams, options = {}) {
-  const {arrayFormat, delimiter} = options
+  const {arrayFormat, delimiter, encode = true} = options
 
   const mergedOptions = {
+    encode,
     ...(typeof arrayFormat !== 'undefined' && {arrayFormat}),
     ...(typeof delimiter !== 'undefined' && {delimiter})
   }
