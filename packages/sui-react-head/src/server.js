@@ -11,12 +11,11 @@ import {HTML_ATTRIBUTES_KEY} from './Html'
  */
 const extractPropsFrom = (tags, {withKey}) => {
   // search the tag using the key and default to an empty object for simplicity
-  const {props} =
-    tags.find(({props}) => typeof props[withKey] !== 'undefined') || {}
+  const {props} = tags.find(({props}) => props.name === withKey) || {}
 
   if (props) {
     // discard the key used to search the tag
-    const {[withKey]: unusedKey, ...restOfTag} = props
+    const {name, ...restOfTag} = props
     // return only the desired info for the tag
     return restOfTag
   }
@@ -47,8 +46,7 @@ export function renderHeadTagsToString(headTags) {
 
   const headTagsToRender = headTags.filter(
     ({props}) =>
-      typeof props[BODY_ATTRIBUTES_KEY] !== 'undefined' ||
-      typeof props[HTML_ATTRIBUTES_KEY] !== 'undefined'
+      props.name !== BODY_ATTRIBUTES_KEY && props.name !== HTML_ATTRIBUTES_KEY
   )
 
   return {

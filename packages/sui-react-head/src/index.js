@@ -4,7 +4,7 @@ import {Title, HeadProvider, Link, Meta} from 'react-head'
 import Body from './Body'
 import Html from './Html'
 
-export {HeadProvider, Title, Link, Meta}
+export {HeadProvider, Title, Link, Meta, Html, Body}
 
 /**
  * Extract value in a specific order
@@ -45,8 +45,8 @@ export default function Head({
       {title && <Title>{title}</Title>}
       {renderTags({tagsArray: meta, Component: Meta})}
       {renderTags({tagsArray: link, Component: Link})}
-      {bodyAttributes && <Body bodyAttributes={bodyAttributes} />}
-      {htmlAttributes && <Html htmlAttributes={htmlAttributes} />}
+      {bodyAttributes && <Body attributes={bodyAttributes} />}
+      {htmlAttributes && <Html attributes={htmlAttributes} />}
     </>
   )
 }
