@@ -1,11 +1,13 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-    "test": "NODE_ENV=test sui-test server"
+    "test": "npm run test:server && npm run test:browser",
+    "test:browser": "NODE_ENV=test sui-test browser",
+    "test:server": "NODE_ENV=test sui-test server"
   },
   "keywords": [],
   "author": "",

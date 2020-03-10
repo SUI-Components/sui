@@ -1,11 +1,14 @@
 /* eslint no-unused-expressions:0 */
 /* eslint-env mocha */
+
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 import React from 'react'
 import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
 
 import Head, {HeadProvider, Body, Html, Meta, Link, Title} from '../src/index'
 import {renderHeadTagsToString} from '../src/server'
+descriptorsByEnvironmentPatcher()
 
 const render = children => {
   const headTags = []
@@ -13,9 +16,9 @@ const render = children => {
   return headTags
 }
 
-describe('react-head', () => {
+describe.server('react-headon server', () => {
   describe('<Body> component', () => {
-    it('on server renders a meta', () => {
+    it('renders a meta', () => {
       const headTags = render(<Body attributes={{class: 'is-test'}} />)
       expect(headTags.length).to.equal(1)
 
@@ -26,7 +29,7 @@ describe('react-head', () => {
   })
 
   describe('<Html> Component ', () => {
-    it('on server renders a meta', function() {
+    it('renders a meta', function() {
       const headTags = render(<Html attributes={{lang: 'es'}} />)
       expect(headTags.length).to.equal(1)
 
