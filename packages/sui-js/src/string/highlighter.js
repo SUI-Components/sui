@@ -7,11 +7,11 @@ export const highlightText = ({value, query, startTag, endTag}) => {
   const valueWithoutAccents = removeAccents(value).toLowerCase()
   // get all the matches of the query in the value
   const matches = findMatches(valueWithoutAccents, queryWithoutAccents)
-
+  const tagsLength = (startTag + endTag).length
   // highlight the matches of the query in the value
   const highlighterReducer = (valueHighlightedAccumulator, match, i) => {
-    const start = match.start + i * (startTag + endTag).length
-    const end = match.end + i * (startTag + endTag).length
+    const start = match.start + i * tagsLength
+    const end = match.end + i * tagsLength
     return `${valueHighlightedAccumulator.slice(
       0,
       start
