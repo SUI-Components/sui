@@ -18,7 +18,7 @@ const extractKeyFromTag = tag => {
 
 /**
  * Filter children from React by tag type and return an array
- * @param {{ children: Array, byTag: string }} params
+ * @param {{ children: Array<React.ReactNode>, byTag: string }} params
  * @returns {Array}
  */
 export const filter = ({children, byTag}) => {
@@ -45,7 +45,7 @@ const renderTags = ({tagsArray = [], Component}) =>
 /**
  * Extract specific tags from children
  * @param {{
- *    children: React.ReactChildren,
+ *    children: Array<React.ReactNode>,
  *    tag: 'meta' | 'link' | 'title'
  *    fallback: Array
  *  }} params
@@ -58,7 +58,7 @@ const extractTagsFrom = ({children, tag, fallback}) => {
 
 /**
  * Extract title from children
- * @param {*} param0
+ * @param {{ children: Array<React.ReactNode>, fallback: object }} params
  * @returns {String}
  */
 const extractTitleFrom = ({children, fallback}) => {
