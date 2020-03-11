@@ -25,6 +25,6 @@ module.exports = (config, allowedHost) => ({
   public: allowedHost,
   before(app) {
     app.use(errorOverlayMiddleware())
-    app.use(noopServiceWorkerMiddleware())
+    app.use(noopServiceWorkerMiddleware(''))
   }
 })
