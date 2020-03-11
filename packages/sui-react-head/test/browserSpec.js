@@ -6,7 +6,7 @@ import {
   waitForDomChange
 } from '@testing-library/react'
 
-import Head, {HeadProvider, Body, Meta, Link, Title} from '../src/index'
+import Head, {HeadProvider} from '../src/index'
 descriptorsByEnvironmentPatcher()
 
 const getMetaByName = name =>
@@ -19,55 +19,74 @@ const render = children => {
 }
 
 describe.client('react-head on client', () => {
-  describe('<Body> component', () => {
-    it('on client put attributes to document.body element', () => {
-      render(<Body attributes={{class: 'is-test'}} />)
-      expect(document.body.getAttribute('class')).to.equal('is-test')
-    })
-  })
-
-  describe('<Title> component', () => {
-    beforeEach(() => {
-      const $title = document.querySelector('title')
-      $title && $title.parentNode.removeChild($title)
-      document.title = ''
+  describe('<Head> component', () => {
+    describe('using bodyAttributes', function() {
+      it('put attributes to document.body element', () => {
+        render(<Head bodyAttributes={{class: 'is-test'}} />)
+        expect(document.body.getAttribute('class')).to.equal('is-test')
+      })
     })
 
-    it('on client put title element on the head with previous ssr title', done => {
-      const title = 'My awesome title'
-      const $title = document.querySelector('title')
-      // simulate title is being SSR by same library
-      $title.setAttribute('data-rh', '')
-      $title.setAttribute('data-reactroot', '')
-
-      // react-head should remove the previous title and add the new one
-      waitForDomChange({container: document.head}).then(mutations => {
-        const {addedNodes} = mutations[1]
-        const [{text}] = addedNodes
-        expect(text).to.equal(title)
-        done()
+    describe('title', function() {
+      beforeEach(() => {
+        const $title = document.querySelector('title')
+        $title && $title.parentNode.removeChild($title)
+        document.title = ''
       })
 
-      render(<Title>{title}</Title>)
-    })
+      it('put title element on the head with previous ssr title using children', done => {
+        const title = 'My awesome title'
+        const $title = document.querySelector('title')
+        // simulate title is being SSR by same library
+        $title.setAttribute('data-rh', '')
+        $title.setAttribute('data-reactroot', '')
 
-    it('on client put title element on the head without previous ssr title', () => {
-      const title = 'My awesome title'
-      const $title = document.querySelector('title')
-      $title.parentNode.removeChild($title)
+        // react-head should remove the previous title and add the new one
+        waitForDomChange({container: document.head}).then(mutations => {
+          const {addedNodes} = mutations[1]
+          const [{text}] = addedNodes
+          expect(text).to.equal(title)
+          done()
+        })
 
-      render(<Title>{title}</Title>)
-      expect(document.title).to.equal(title)
+        render(
+          <Head>
+            <title>{title}</title>
+          </Head>
+        )
+      })
+
+      it('put title element on the head without previous ssr title using children', () => {
+        const title = 'My awesome title'
+        const $title = document.querySelector('title')
+        $title.parentNode.removeChild($title)
+
+        render(<Head title={title} />)
+        expect(document.title).to.equal(title)
+      })
+
+      it('put title element on the head when combining APIs', () => {
+        const title = 'My awesome title'
+        const $title = document.querySelector('title')
+        $title.parentNode.removeChild($title)
+
+        render(
+          <Head title="Not this one">
+            <title>{title}</title>
+          </Head>
+        )
+        expect(document.title).to.equal(title)
+      })
     })
   })
 
   describe('<Meta> component', () => {
     it('create <meta> elements inside <head>', () => {
       render(
-        <>
-          <Meta name="meta-1" content="Awesome description" />
-          <Meta name="meta-2" content="viewport value" />
-        </>
+        <Head meta={[{name: 'meta-1', content: 'not this one'}]}>
+          <meta name="meta-1" content="Awesome description" />
+          <meta name="meta-2" content="viewport value" />
+        </Head>
       )
 
       expect(getMetaByName('meta-1').getAttribute('content')).to.equal(
@@ -82,10 +101,10 @@ describe.client('react-head on client', () => {
   describe('<Link> component', () => {
     it('create <link> elements inside <head>', () => {
       render(
-        <>
-          <Link rel="link-1" href="awesome-link" />
-          <Link rel="link-2" href="awesome-value" />
-        </>
+        <Head link={[{rel: 'link-1', href: 'not-this-one'}]}>
+          <link rel="link-1" href="awesome-link" />
+          <link rel="link-2" href="awesome-value" />
+        </Head>
       )
 
       expect(getLinkByRel('link-1').getAttribute('href')).to.equal(

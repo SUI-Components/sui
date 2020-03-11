@@ -4,7 +4,7 @@ import {Title, HeadProvider, Link, Meta} from 'react-head'
 import Body from './Body'
 import Html from './Html'
 
-export {HeadProvider, Title, Link, Meta, Html, Body}
+export {HeadProvider}
 
 /**
  * Extract value in a specific order
@@ -14,6 +14,15 @@ export {HeadProvider, Title, Link, Meta, Html, Body}
 const extractKeyFromTag = tag => {
   const {name, hreflang, rel} = tag
   return name || hreflang || rel
+}
+
+/**
+ * Filter children from React by tag type and return an array
+ * @param {{ children: Array, byTag: string }} params
+ * @returns {Array}
+ */
+export const filter = ({children, byTag}) => {
+  return React.Children.toArray(children).filter(child => child.type === byTag)
 }
 
 /**
@@ -33,18 +42,63 @@ const renderTags = ({tagsArray = [], Component}) =>
     )
   })
 
+/**
+ * Extract specific tags from children
+ * @param {{
+ *    children: React.ReactChildren,
+ *    tag: 'meta' | 'link' | 'title'
+ *    fallback: Array
+ *  }} params
+ * @returns {Array}
+ */
+const extractTagsFrom = ({children, tag, fallback}) => {
+  if (!children) return fallback
+  return filter({children, byTag: tag}).map(({props}) => ({...props}))
+}
+
+/**
+ * Extract title from children
+ * @param {*} param0
+ * @returns {String}
+ */
+const extractTitleFrom = ({children, fallback}) => {
+  if (!children) return fallback
+  const [title] = filter({children, byTag: 'title'}).map(({props}) => props)
+  return title ? title.children : fallback
+}
+
 export default function Head({
   bodyAttributes,
+  children,
   htmlAttributes,
   title,
-  meta,
-  link
+  meta = [],
+  link = []
 }) {
+  const metaTagsToRender = extractTagsFrom({
+    children,
+    tag: 'meta',
+    fallback: meta
+  })
+  const linkTagsToRender = extractTagsFrom({
+    children,
+    tag: 'link',
+    fallback: link
+  })
+  // title is a special case, so we have the extract from the array
+  // and simplify the fallback as used by the method
+  const titleToRender = extractTitleFrom({
+    children,
+    fallback: title
+  })
+
+  console.log(titleToRender)
+
   return (
     <>
-      {title && <Title>{title}</Title>}
-      {renderTags({tagsArray: meta, Component: Meta})}
-      {renderTags({tagsArray: link, Component: Link})}
+      {titleToRender && <Title>{titleToRender}</Title>}
+      {renderTags({tagsArray: metaTagsToRender, Component: Meta})}
+      {renderTags({tagsArray: linkTagsToRender, Component: Link})}
       {bodyAttributes && <Body attributes={bodyAttributes} />}
       {htmlAttributes && <Html attributes={htmlAttributes} />}
     </>
@@ -53,6 +107,10 @@ export default function Head({
 
 Head.propTypes = {
   bodyAttributes: PropTypes.object,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element
+  ]),
   htmlAttributes: PropTypes.object,
   title: PropTypes.string,
   link: PropTypes.arrayOf(
