@@ -100,7 +100,7 @@ export default function Root({componentID, contexts = {}, themes}) {
       <div className="Root-test" hidden={showTests === 'hide'}>
         <Test
           open
-          context={contexts[actualContext]}
+          contexts={contexts}
           importComponent={importComponent}
           importTest={importTest}
         />

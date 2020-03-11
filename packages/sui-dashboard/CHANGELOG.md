@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.21.0 (2020-03-09)
+
+
+### Features
+
+* add ij--web-app repo ([8f9cdb2](https://github.com/SUI-Components/sui/commit/8f9cdb25bee562900cc42ea436c113197424364a))
+
+
+
+# 1.20.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([12f8503](https://github.com/SUI-Components/sui/commit/12f850310f5c4d2736805a600a773575dd381902))
+
+
+
+# 1.16.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([5409d51](https://github.com/SUI-Components/sui/commit/5409d51823bba56ca69e6a4797333e6a22204078))
+
+
+
+# 1.14.0 (2020-02-17)
+
+
+### Features
+
+* add Unique Tool repository to SUI-Dashboard ([2b2c603](https://github.com/SUI-Components/sui/commit/2b2c603bd929fd8ce1de82cdff418a4b36f2e328))
+* bump version ([98966e6](https://github.com/SUI-Components/sui/commit/98966e644a5615db98097ee2eafafdfef4ebd0e0))
+* bump version ([9064779](https://github.com/SUI-Components/sui/commit/90647799da8f84017a99c36d949f584f9e1c29cf))
+
+
+
 # 1.9.0 (2020-01-22)
 
 

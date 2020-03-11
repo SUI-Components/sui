@@ -4,7 +4,8 @@ import {
   parseQueryString,
   toQueryString,
   fromArrayToCommaQueryString,
-  getRandomString
+  getRandomString,
+  highlightText
 } from '../src/string/index'
 
 describe('@s-ui/js', () => {
@@ -21,6 +22,15 @@ describe('@s-ui/js', () => {
       const queryString = toQueryString(queryParams, options)
 
       const expected = 'a=1&b=test&m=1%2C2%2C3'
+      expect(expected).to.be.equal(queryString)
+    })
+
+    it('should convert object params to query string with arrayFormat repeat and delimiter :', () => {
+      const queryParams = {a: 1, b: 'test', m: [1, 2]}
+      const options = {arrayFormat: 'repeat', delimiter: ':'}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = 'a=1:b=test:m=1:m=2'
       expect(expected).to.be.equal(queryString)
     })
   })
@@ -61,6 +71,18 @@ describe('@s-ui/js', () => {
       const randomString = getRandomString()
       expect(randomString).to.be.an('string')
       expect(randomString).to.have.lengthOf(15)
+    })
+  })
+  describe('string:highlightText', () => {
+    it('should highlight text', () => {
+      const highlightedText = highlightText({
+      value: 'Cálaca',
+      query: 'ca',
+      startTag: `<strong>`,
+      endTag: '</strong>'
+    })
+      expect(highlightedText).to.be.an('string')
+      expect(highlightedText).to.be.equal(`<strong>Cá</strong>la<strong>ca</strong>`)
     })
   })
 })

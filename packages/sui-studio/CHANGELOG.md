@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.26.0 (2020-03-09)
+
+
+### Features
+
+* use new @s-ui/theme pkg ([9988742](https://github.com/SUI-Components/sui/commit/99887420f9c8c0beb90c206ab007e49b3e024273))
+
+
+
+# 7.25.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([c063291](https://github.com/SUI-Components/sui/commit/c063291459987ed5dc37c446c9b07b9814140071))
+
+
+
+# 7.23.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([94296bd](https://github.com/SUI-Components/sui/commit/94296bd643fe97150929af6a1f6043cffb8cf455))
+
+
+
+# 7.21.0 (2020-02-17)
+
+
+### Bug Fixes
+
+* fix alternative ways to use context in dev / start / build mode ([da442fc](https://github.com/SUI-Components/sui/commit/da442fc42cea6d63f12e16aa0c33f13ca109252b))
+* hois demo component to use static props ([8578904](https://github.com/SUI-Components/sui/commit/8578904cbdb7a8132f61de147b81f887279e1a30))
+* patcher-mocha is not transpiled ([2016d40](https://github.com/SUI-Components/sui/commit/2016d408e39649c7b0b44d8fcc21594a5a9415b7))
+
+
+
+# 7.20.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* sui-studio test breaks if we does not use patcher-mocha and describe.context ([e0782f7](https://github.com/SUI-Components/sui/commit/e0782f74a23b840f196cb6797ca81e6700f1fbae))
+
+
+
 # 7.19.0 (2020-02-12)
 
 

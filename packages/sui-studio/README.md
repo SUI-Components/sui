@@ -93,10 +93,6 @@ Launch a development environment where you can work in total isolation on your c
 
 Test the studio's components both in the demo as in the development environment. *Currently in experimental mode*
 
-All previous commands suppor the `--experimental-test` flag, which is mandatory to see the tests in the studio's interface.
-
-> Using the flag with the `dev`command without the test file in `test/[category]/[component]/index.js` throws an error.
-
 Here's an example of what could go inside `test/[category]/[component]/index.js`:
 
 ```JS
@@ -128,7 +124,7 @@ If there is a `demo/context.js` file where you define several contexts for your 
 First, you have to import the patcher to create the `context` object, inside the `describe` object
 
 ```js
-import '@s-ui/studio/patcher-mocha'
+import '@s-ui/studio/src/patcher-mocha'
 ```
 
 After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.
@@ -169,6 +165,31 @@ describe.context.other('atom/button', AtomButton => {
     expect(getByText('HOLA')).to.have.text('HOLA 34')
   })
 })
+```
+
+### Known issue: Test a memoized component
+
+If a component is exported wrapped memoized: `export default React.memo(Component)`, it loses the displayName and sui-test dispatch an Error because it couldn't find the component.
+
+If you need to make a test using a memoized component, just wrap it like:
+
+```js
+const Component = React.memo(() => <></>)
+Component.displayName = 'Component'
+
+export default Component
+```
+
+or
+
+```js
+const Component = () => <></>
+Component.displayName = 'Component'
+
+const MemoComponent = React.memo(Component)
+MemoComponent.displayName = 'MemoComponent'
+
+export default MemoComponent
 ```
 
 ## File structure

@@ -9,6 +9,8 @@ const config = require('../webpack.config.prod')
 const fs = require('fs')
 const {config: projectConfig} = require('../shared')
 
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
+
 // TODO: Extract this
 const chalk = require('chalk')
 const chalkError = chalk.red
@@ -18,12 +20,22 @@ const chalkProcessing = chalk.blue
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
+  .option(
+    '--link-package [package]',
+    'Replace each occurrence of this package with an absolute path to this folder',
+    (v, m) => {
+      m.push(v)
+      return m
+    },
+    []
+  )
   .option('-c, --context [folder]', 'Context folder (cwd by default)')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-bundler build -S')
     console.log('    $ sui-bundler build -SC')
+    console.log('    $ sui-bundler dev --link-package /my/domain/folder')
     console.log('    $ sui-bundler build --help')
     console.log('')
   })
@@ -31,6 +43,14 @@ program
 
 const {clean = false, context} = program
 config.context = context || config.context
+const packagesToLink = program.linkPackage || []
+
+const nextConfig = packagesToLink.length
+  ? linkLoaderConfigBuilder({
+      config,
+      packagesToLink
+    })
+  : config
 
 process.env.NODE_ENV = process.env.NODE_ENV
   ? process.env.NODE_ENV
@@ -44,7 +64,7 @@ console.log(
   chalkProcessing('Generating minified bundle. This will take a moment...')
 )
 
-webpack(config).run((error, stats) => {
+webpack(nextConfig).run((error, stats) => {
   if (error) {
     console.log(chalkError(error))
     return 1
