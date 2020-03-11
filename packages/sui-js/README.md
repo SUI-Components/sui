@@ -112,6 +112,15 @@ const randomStringLength = 6
 const randomString = getRandomString(randomStringLength)
 console.log(randomString.length) // log = 6 || 15 by default
 console.log(randomString) // qwerty
+
+import {highlightText} from '@s-ui/js/lib/string'
+
+const highlightedText = highlightText({
+    value: 'Cádiz',
+    query: 'ca',
+    startTag: '<strong>',
+    endTag: '</strong>'
+  }) // "<strong>Cá</strong>diz
 ```
 
 ## ua-parser
