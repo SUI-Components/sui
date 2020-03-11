@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.47.0 (2020-03-11)
+
+
+### Bug Fixes
+
+* noopSW require a string ([d102131](https://github.com/SUI-Components/sui/commit/d1021311aead7f1e1e50160e55ff45ec76eae0ea)), closes [/github.com/facebook/create-react-app/commit/1cbc6f7db62f78747cb6ca41450099181139325e#diff-595228c9c4e2f6619c6bb1478ba4ef87L10](https://github.com//github.com/facebook/create-react-app/commit/1cbc6f7db62f78747cb6ca41450099181139325e/issues/diff-595228c9c4e2f6619c6bb1478ba4ef87L10)
+
+
+
 # 5.46.0 (2020-03-11)
 
 
