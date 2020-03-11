@@ -22,3 +22,5 @@ export {default as toKebabCase} from 'just-kebab-case'
 
 export {getRandomString} from './random-string'
 export {slugify} from './slugify'
+
+export {highlightText} from './highlighter'

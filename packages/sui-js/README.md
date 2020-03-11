@@ -120,6 +120,16 @@ const queryParams = {a: 1, b: 'test', m: [1, 2]}
 const options = {arrayFormat: 'repeat', delimiter: ':'}
 const queryString = toQueryString(queryParams, options)
 console.log(queryString) // 'a=1:b=test:m=1:m=2'
+
+import {highlightText} from '@s-ui/js/lib/string'
+
+const highlightedText = highlightText({
+    value: 'Cádiz',
+    query: 'ca',
+    startTag: '<strong>',
+    endTag: '</strong>'
+  }) // "<strong>Cá</strong>diz
+
 ```
 
 ## ua-parser
