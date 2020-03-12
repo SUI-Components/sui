@@ -92,8 +92,6 @@ export default function Head({
     fallback: title
   })
 
-  console.log(titleToRender)
-
   return (
     <>
       {titleToRender && <Title>{titleToRender}</Title>}
