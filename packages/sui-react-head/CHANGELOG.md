@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.2.0 (2020-03-12)
+
+
+### Bug Fixes
+
+* add prepare script ([2c8c17d](https://github.com/SUI-Components/sui/commit/2c8c17d7eda66e8e043c520f0affd11dd2b935d7))
+* force release ([b087964](https://github.com/SUI-Components/sui/commit/b08796486a8c845c2cd1c821749a16d7698581d6))
+
+
+
 # 1.1.0 (2020-03-12)
 
 
