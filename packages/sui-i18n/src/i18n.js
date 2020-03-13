@@ -40,6 +40,10 @@ export default class Rosetta {
     return this._currency
   }
 
+  get languages() {
+    return this._languages
+  }
+
   set languages(languages) {
     this._languages = languages
   }

@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && babel ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -15,8 +15,6 @@
     "react": "16"
   },
   "devDependencies": {
-    "@s-ui/component-peer-dependencies": "1",
-    "@babel/cli": "7.8.3",
-    "babel-preset-sui": "3"
+    "@s-ui/component-peer-dependencies": "1"
   }
 }

@@ -93,10 +93,6 @@ Launch a development environment where you can work in total isolation on your c
 
 Test the studio's components both in the demo as in the development environment. *Currently in experimental mode*
 
-All previous commands suppor the `--experimental-test` flag, which is mandatory to see the tests in the studio's interface.
-
-> Using the flag with the `dev`command without the test file in `test/[category]/[component]/index.js` throws an error.
-
 Here's an example of what could go inside `test/[category]/[component]/index.js`:
 
 ```JS
@@ -120,6 +116,81 @@ describe('AtomButton', () => {
 ```
 
 The component will be a global object when running tests, so it is PARAMOUNT NOT to import it. In order to avoid problems with the linter, add relevant comments, as in the example above. 
+
+### How works with different contexts
+
+If there is a `demo/context.js` file where you define several contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
+
+First, you have to import the patcher to create the `context` object, inside the `describe` object
+
+```js
+import '@s-ui/studio/src/patcher-mocha'
+```
+
+After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.
+
+For example, if your context.js file looks like:
+
+```js
+export default () => {
+  return Promise.resolve({
+    default: {
+      user: {id: 12},
+      language: 'es'
+    },
+    other: {
+      user: {id: 34},
+      language: 'ca'
+    }
+  })
+}
+```
+the test file should be like:
+
+```js
+import '@s-ui/studio/patcher-mocha'
+
+chai.use(chaiDOM)
+
+describe.context.default('atom/button', AtomButton => {
+  it('Render', () => {
+    const {getByText} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByText('HOLA')).to.have.text('HOLA 12')
+  })
+})
+
+describe.context.other('atom/button', AtomButton => {
+  it('Render', () => {
+    const {getByText} = render(<AtomButton>HOLA</AtomButton>)
+    expect(getByText('HOLA')).to.have.text('HOLA 34')
+  })
+})
+```
+
+### Known issue: Test a memoized component
+
+If a component is exported wrapped memoized: `export default React.memo(Component)`, it loses the displayName and sui-test dispatch an Error because it couldn't find the component.
+
+If you need to make a test using a memoized component, just wrap it like:
+
+```js
+const Component = React.memo(() => <></>)
+Component.displayName = 'Component'
+
+export default Component
+```
+
+or
+
+```js
+const Component = () => <></>
+Component.displayName = 'Component'
+
+const MemoComponent = React.memo(Component)
+MemoComponent.displayName = 'MemoComponent'
+
+export default MemoComponent
+```
 
 ## File structure
 

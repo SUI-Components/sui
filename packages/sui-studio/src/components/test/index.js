@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import SUIContext from '@s-ui/react-context'
 import withContext from '../demo/HoC/withContext'
@@ -9,7 +10,7 @@ import {cleanDisplayName} from '../demo/utilities'
 
 const BASE_CLASSNAME = 'sui-Test'
 
-const Test = ({open, importTest, importComponent, context}) => {
+const Test = ({open, importTest, importComponent, contexts}) => {
   const [failures, setFailures] = useState(0)
   const [notFoundTest, setNotFoundTest] = useState(false)
 
@@ -19,16 +20,30 @@ const Test = ({open, importTest, importComponent, context}) => {
   })
 
   useEffect(() => {
-    importComponent().then(module => {
+    importComponent().then(async module => {
       const Component = module.default || module
-      const EnhanceComponent = withContext(context, context)(Component)
+
+      const nextContexts =
+        typeof contexts !== 'function' ? contexts : await contexts()
+
+      window.__STUDIO_CONTEXTS__ = nextContexts
+      window.__STUDIO_COMPONENT__ = Component
+
+      const EnhanceComponent = withContext(
+        nextContexts.default,
+        nextContexts
+      )(Component)
       !EnhanceComponent.displayName &&
         console.error('[sui-Test] Component without displayName') // eslint-disable-line
-      window[cleanDisplayName(EnhanceComponent.displayName)] = props => (
-        <SUIContext.Provider value={context}>
+
+      const NextComponent = props => (
+        <SUIContext.Provider value={nextContexts.default}>
           <EnhanceComponent {...props} />
         </SUIContext.Provider>
       )
+      hoistNonReactStatics(NextComponent, Component)
+
+      window[cleanDisplayName(EnhanceComponent.displayName)] = NextComponent
 
       importTest()
         .then(() => {
@@ -40,7 +55,7 @@ const Test = ({open, importTest, importComponent, context}) => {
           setNotFoundTest(true)
         })
     })
-  }, [context, importComponent, importTest])
+  }, [contexts, importComponent, importTest])
 
   if (notFoundTest) {
     return <h1>Not found test</h1>
@@ -55,7 +70,7 @@ const Test = ({open, importTest, importComponent, context}) => {
 
 Test.displayName = 'Test'
 Test.propTypes = {
-  context: PropTypes.object,
+  contexts: PropTypes.object,
   importComponent: PropTypes.func,
   importTest: PropTypes.func,
   open: PropTypes.bool

@@ -2,6 +2,136 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.26.0 (2020-03-09)
+
+
+### Features
+
+* use new @s-ui/theme pkg ([9988742](https://github.com/SUI-Components/sui/commit/99887420f9c8c0beb90c206ab007e49b3e024273))
+
+
+
+# 7.25.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([c063291](https://github.com/SUI-Components/sui/commit/c063291459987ed5dc37c446c9b07b9814140071))
+
+
+
+# 7.23.0 (2020-02-17)
+
+
+### Features
+
+* bump version ([94296bd](https://github.com/SUI-Components/sui/commit/94296bd643fe97150929af6a1f6043cffb8cf455))
+
+
+
+# 7.21.0 (2020-02-17)
+
+
+### Bug Fixes
+
+* fix alternative ways to use context in dev / start / build mode ([da442fc](https://github.com/SUI-Components/sui/commit/da442fc42cea6d63f12e16aa0c33f13ca109252b))
+* hois demo component to use static props ([8578904](https://github.com/SUI-Components/sui/commit/8578904cbdb7a8132f61de147b81f887279e1a30))
+* patcher-mocha is not transpiled ([2016d40](https://github.com/SUI-Components/sui/commit/2016d408e39649c7b0b44d8fcc21594a5a9415b7))
+
+
+
+# 7.20.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* sui-studio test breaks if we does not use patcher-mocha and describe.context ([e0782f7](https://github.com/SUI-Components/sui/commit/e0782f74a23b840f196cb6797ca81e6700f1fbae))
+
+
+
+# 7.19.0 (2020-02-12)
+
+
+### Features
+
+* Prefer just libraries instead lodash and others ([6b7cbe5](https://github.com/SUI-Components/sui/commit/6b7cbe5f4a455ee17a550c50b84d51e9453453c1))
+
+
+
+# 7.18.0 (2020-02-11)
+
+
+### Features
+
+* add patcher to mocha to allow switch contexts ([11b112a](https://github.com/SUI-Components/sui/commit/11b112aaf22551c083c8e4dce721fde8bcb6f4ea))
+
+
+
+# 7.17.0 (2020-02-06)
+
+
+### Bug Fixes
+
+* avoid remove test folder after phoenix ([e4166fc](https://github.com/SUI-Components/sui/commit/e4166fc08a797f38046d705f643963353e8aa187))
+
+
+
+# 7.16.0 (2020-02-05)
+
+
+### Bug Fixes
+
+* add additional line to test template to avoid linter issues ([bcbd6f9](https://github.com/SUI-Components/sui/commit/bcbd6f97468ea55de1770aaaa92c127109cc3ed6))
+* add additional line to test template to avoid linter issues ([f73351e](https://github.com/SUI-Components/sui/commit/f73351e2ccef43eacbc16f6a596d587b74a87dc3))
+* remove unwanted extra line ([bb5aaf2](https://github.com/SUI-Components/sui/commit/bb5aaf222c7811b92e5bea98f88dedb1eb64721e))
+
+
+
+# 7.15.0 (2020-02-03)
+
+
+### Features
+
+* add temporal button to studio dev to show / hide the tests ([546fe93](https://github.com/SUI-Components/sui/commit/546fe93cc6bb4746195bcdeaf54c742fab0e0558))
+
+
+
+# 7.14.0 (2020-02-03)
+
+
+### Bug Fixes
+
+* avoid node_modules folder ([3fc515c](https://github.com/SUI-Components/sui/commit/3fc515c587846f8f00f012e43b16630ba721127e))
+* use the proper env var ([d8ae7e4](https://github.com/SUI-Components/sui/commit/d8ae7e45a18970af794eda104712b7cd02a4ed0f))
+
+
+### Features
+
+* create postinstall task to crear all components tests folders and files ([3ec4d35](https://github.com/SUI-Components/sui/commit/3ec4d3567922519713cc423aa391da4ac3c3c939))
+* fix typo ([3a953fd](https://github.com/SUI-Components/sui/commit/3a953fd82bbce30d339de52a4c7d795a79a58387))
+* remove wrapper promise ([86ef5af](https://github.com/SUI-Components/sui/commit/86ef5af32bd0ffacc2372f01e861e439c7305daf))
+
+
+
+# 7.13.0 (2020-01-30)
+
+
+### Bug Fixes
+
+* force release with themes working ([21d0960](https://github.com/SUI-Components/sui/commit/21d0960172dc7357271636c58354e66825174e26))
+* remove deprecated css-content-loader ([26507a3](https://github.com/SUI-Components/sui/commit/26507a38d5d687cf477b6d8ab93056fc3ca473f2))
+
+
+
+# 7.12.0 (2020-01-30)
+
+
+### Features
+
+* remove sui-deploy funcitonality from studio ([98a6a51](https://github.com/SUI-Components/sui/commit/98a6a5107e461429f1581648177a3cac4348f5a1))
+
+
+
 # 7.11.0 (2020-01-28)
 
 

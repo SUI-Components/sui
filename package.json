@@ -25,6 +25,7 @@
     "precommit": "sui-precommit run"
   },
   "devDependencies": {
+    "@babel/cli": "7.8.3",
     "@s-ui/lint": "3",
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",

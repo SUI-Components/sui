@@ -5,7 +5,7 @@ const svgr = require('@svgr/core').default
 const fs = require('fs-extra')
 const program = require('commander')
 const {join} = require('path')
-const toCamelCase = require('lodash.camelcase')
+const toCamelCase = require('just-camel-case')
 const babel = require('@babel/core')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 

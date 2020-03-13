@@ -9,6 +9,7 @@
   <script class="mocha-init">
     mocha.setup('bdd');
     mocha.checkLeaks();
+    mocha.globals(['google*', '_goog*']);
   </script>
 </head>
 <body>

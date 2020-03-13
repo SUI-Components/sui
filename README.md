@@ -30,7 +30,6 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-component-peer-dependencies](./packages/sui-component-peer-dependencies) | A set of peer dependencies for all SUI components. |
 | [sui-cz](./packages/sui-cz) | A commitizen adapter for semantic commits |
 | [sui-decorators](./packages/sui-decorators) | Set of ES6 decorators to improve your apps. |
-| [sui-deploy](./packages/sui-deploy) | CLI to deploy of sui-based projects. |
 | [sui-domain](./packages/sui-domain) | Backbone for creating a domain that complains with the guidelines of Schibsted Spain. |
 | [sui-helpers](./packages/sui-helpers) | A set of internal helpers used by sui-related packages. |
 | [sui-hoc](./packages/sui-hoc) | React utility belt for function components and higher-order components |

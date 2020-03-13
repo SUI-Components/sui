@@ -1,14 +1,15 @@
 /* eslint no-console:0 */
+const fs = require('fs')
+const path = require('path')
+const {spawn} = require('child_process')
 
 const program = require('commander')
 const colors = require('colors')
-const fs = require('fs')
-const path = require('path')
-const {pascalCase} = require('pascal-case')
-const spawn = require('child_process').spawn
+const toKebabCase = require('just-kebab-case')
+const toPascalCase = require('just-pascal-case')
+
 const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
-const toKebabCase = require('lodash.kebabcase')
 
 program
   .option('-R, --router', 'add routering for this component')
@@ -47,7 +48,7 @@ if (!wordsOnlyRegex.test(category)) {
   showError('category name must contain letters or underscore only')
 }
 
-const componentInPascal = pascalCase(
+const componentInPascal = toPascalCase(
   `${category.replace(/s$/, '')} ${component}`
 )
 
@@ -107,7 +108,7 @@ node_modules`
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx rimraf ./lib && npx mkdirp ./lib && npm run build:js && npm run build:styles",
+    "build": "npx rimraf ./lib && npm run build:js && npm run build:styles",
     "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },
@@ -153,7 +154,7 @@ ${componentInPascal}.propTypes = {}
 
   writeFile(
     COMPONENT_ENTRY_SCSS_POINT_FILE,
-    `@import '~@schibstedspain/sui-theme/lib/index';
+    `@import '~@s-ui/theme/lib/index';
 
 .${prefix}-${componentInPascal} {
   // Do your magic
