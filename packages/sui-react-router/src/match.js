@@ -5,7 +5,10 @@ import {createRouterObject} from './utils/RouterUtils'
 
 const match = async ({routes, history, location}, cb) => {
   const jsonRoutes = fromReactTreeToJSON(routes)
-  const transitionManager = createTransitionManager({history, jsonRoutes})
+  const transitionManager = createTransitionManager({
+    history,
+    jsonRoutes
+  })
 
   const match = await transitionManager.match(location)
   const {components, redirectLocation, routeInfo} = match
