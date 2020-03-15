@@ -108,7 +108,7 @@ node_modules`
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx rimraf ./lib && npx mkdirp ./lib && npm run build:js && npm run build:styles",
+    "build": "npx rimraf ./lib && npm run build:js && npm run build:styles",
     "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },

@@ -2,6 +2,10 @@ import {Mocker, Mock} from './mockerInterface'
 import nock from 'nock'
 
 class ServerMocker extends Mocker {
+  restore() {
+    nock.cleanAll()
+  }
+
   httpMock(baseUrl) {
     return new ServerMock(nock, baseUrl)
   }
