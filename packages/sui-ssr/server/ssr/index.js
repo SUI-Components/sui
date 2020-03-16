@@ -1,8 +1,10 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
+import React from 'react'
 import routes from 'routes'
 import {RouterContext, match} from 'react-router'
-import Helmet from 'react-helmet'
+import {HeadProvider} from '@s-ui/react-head'
+import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
 import {
   createServerContextFactoryParams,
   ssrComponentWithInitialProps
@@ -90,14 +92,21 @@ export default (req, res, next) => {
       )
 
       let initialData
+      const headTags = []
+
+      const InitialRouterContext = props => (
+        <HeadProvider headTags={headTags}>
+          <RouterContext {...props} />
+        </HeadProvider>
+      )
 
       try {
         initialData = await ssrComponentWithInitialProps({
           context: {...context, device},
           renderProps,
           Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(RouterContext)
-            : withSUIContext({...context, device})(RouterContext)
+            ? withAllContexts({...context, device})(InitialRouterContext)
+            : withSUIContext({...context, device})(InitialRouterContext)
         })
       } catch (err) {
         return next(err)
@@ -124,9 +133,15 @@ export default (req, res, next) => {
       // The first html content has the be set after any possible call to next().
       // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
       // no matter the error page strategy set (loadSPAOnNotFound: true|false)
-      const helmet = Helmet.renderStatic()
-      const {bodyAttributes, htmlAttributes, ...helmetHead} = helmet
-      res.write(HtmlBuilder.buildHead({headTplPart, helmetHead}))
+      const {
+        bodyAttributes,
+        headString,
+        htmlAttributes
+      } = renderHeadTagsToString(headTags)
+
+      res.write(
+        HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes})
+      )
       res.flush()
 
       // res.set({
