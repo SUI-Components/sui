@@ -228,6 +228,10 @@ For development you will need start the server with env vars `CRITICAL_CSS_HOST`
 
 If you have in your package.json the flag `criticalCSS: true` but you want to disable it in development. You can use the env var `DISABLE_CRITICAL_CSS=true` when you start your server.
 
+## Render Head tags
+
+This package use (@s-ui/react-head)[https://github.com/SUI-Components/sui/tree/master/packages/sui-react-head] to put custom HTML in your header.
+
 ## Link Packages
 
 If you want you can link packages when you create a new static version of your site. But if you are using `sui-bundler` to link packages too. Please be sure to be in sync with the packages linkeds in both tools
