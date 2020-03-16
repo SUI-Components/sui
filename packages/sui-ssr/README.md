@@ -230,7 +230,7 @@ If you have in your package.json the flag `criticalCSS: true` but you want to di
 
 ## Render Head tags
 
-This package use [@s-ui/react-head](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-head) to put custom HTML in your header.
+This package uses [@s-ui/react-head](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-head) to put custom HTML in your header.
 
 ## Link Packages
 
