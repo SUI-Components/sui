@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.1.0 (2020-03-17)
+
+
+### Bug Fixes
+
+* remove JSX from the server code ([0f96456](https://github.com/SUI-Components/sui/commit/0f9645602a8e41b9c5b0d92a74b468838da2ec9f))
+
+
+
 # 6.0.0 (2020-03-17)
 
 
