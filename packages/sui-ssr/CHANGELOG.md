@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.0.0 (2020-03-17)
+
+
+### Features
+
+* add @s-ui/react-head dependency ([6114f71](https://github.com/SUI-Components/sui/commit/6114f712d9a195accf39844ab8157807330f9f0b))
+* migrate to @s-ui/react-head ([6f92990](https://github.com/SUI-Components/sui/commit/6f929905a2ddfbd6d9608f78f0310d7770eb72a7))
+
+
+### BREAKING CHANGES
+
+* To put html tags in your headers you MUST use the package @s-ui/react-head
+
+
+
 # 5.35.0 (2020-02-26)
 
 
