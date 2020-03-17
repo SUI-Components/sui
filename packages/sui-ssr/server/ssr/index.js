@@ -90,16 +90,17 @@ export default (req, res, next) => {
     if (req.app.locals.earlyFlush) {
       initialFlush(res)
     }
-
     const context = await contextFactory(createServerContextFactoryParams(req))
+
     let initialData
     const headTags = []
 
-    const InitialRouterContext = props => (
-      <HeadProvider headTags={headTags}>
-        <RouterContext {...props} />
-      </HeadProvider>
-    )
+    const InitialRouterContext = props =>
+      React.createElement(
+        HeadProvider,
+        {headTags},
+        React.createElement(RouterContext, {...props})
+      )
 
     try {
       initialData = await ssrComponentWithInitialProps({
