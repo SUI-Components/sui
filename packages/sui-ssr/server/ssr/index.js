@@ -94,11 +94,12 @@ export default (req, res, next) => {
       let initialData
       const headTags = []
 
-      const InitialRouterContext = props => (
-        <HeadProvider headTags={headTags}>
-          <RouterContext {...props} />
-        </HeadProvider>
-      )
+      const InitialRouterContext = props =>
+        React.createElement(
+          HeadProvider,
+          {headTags},
+          React.createElement(RouterContext, {...props})
+        )
 
       try {
         initialData = await ssrComponentWithInitialProps({
