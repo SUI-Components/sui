@@ -3,8 +3,10 @@ import {performance} from 'perf_hooks'
 import isPromise from '../../helpers/isPromise'
 import isNode from '../../helpers/isNode'
 
-import {ConsoleReporter} from './reporter/ConsoleReporter'
 import {statusCodes} from './statusCodes'
+
+import {ConsoleReporter} from './reporters/ConsoleReporter'
+export {DataDogReporter} from './reporters/DataDogReporter'
 
 const getPerformanceMeter = () => (isNode ? performance : window.performance)
 
