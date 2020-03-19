@@ -10,9 +10,10 @@ export class DataDogReporter extends ReporterInterface {
     // eslint-disable-next-line no-console
     console.log('DataDogReporter.send()', metricName, value)
     const globalTags = {
-      methodStatus: status
+      status,
+      name: metricName
     }
 
-    this._client.timing(metricName, value, globalTags)
+    this._client.timing('tracer.datadog.reporter', value, globalTags)
   }
 }
