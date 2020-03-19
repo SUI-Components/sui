@@ -2,11 +2,11 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 import {inlineError, tracer} from '../../src'
-import {ConsoleReporter} from '../../src/decorators/tracer/reporter/ConsoleReporter'
+import {ConsoleReporter} from '../../src/decorators/tracer/reporters/ConsoleReporter'
 
 let fnSpy
 
-describe('Tracer', () => {
+describe.only('Tracer', () => {
   beforeEach(() => {
     fnSpy = sinon.spy()
 
