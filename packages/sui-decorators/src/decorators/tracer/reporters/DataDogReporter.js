@@ -1,19 +1,24 @@
 import {ReporterInterface} from './ReporterInterface'
 
 export class DataDogReporter extends ReporterInterface {
-  constructor({client}) {
+  constructor({client, siteName}) {
     super()
     this._client = client
+    this._siteName = siteName
   }
 
   send({metricName = 'NO_METRIC_NAME_SET', status, value}) {
-    // eslint-disable-next-line no-console
-    console.log('DataDogReporter.send()', metricName, value)
     const globalTags = {
       status,
       name: metricName
     }
 
-    this._client.timing('tracer.datadog.reporter', value, globalTags)
+    const siteNameSubString = `${this._siteName ? `${this._siteName}.` : ''}`
+
+    this._client.timing(
+      `${siteNameSubString}tracer.datadog.reporter`,
+      value,
+      globalTags
+    )
   }
 }
