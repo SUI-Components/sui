@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import routes from 'routes'
-import {match} from 'react-router'
+import match from '@s-ui/react-router/lib/match'
 import https from 'https'
 import parser from 'ua-parser-js'
 
