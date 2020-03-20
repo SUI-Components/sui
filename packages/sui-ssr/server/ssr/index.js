@@ -26,6 +26,15 @@ try {
 } catch (e) {
   contextFactory = async () => ({})
 }
+
+let hasStyleComponent = false
+let StyleSheetManager
+let SC
+try {
+  SC = require('styled-components')
+  StyleSheetManager = SC.StyleSheetManager
+  hasStyleComponent = true
+} catch (e) {}
 // END __MAGIC IMPORTS__
 
 // const SERVER_TIMING_HEADER = 'Server-Timing'
@@ -101,13 +110,33 @@ export default (req, res, next) => {
           React.createElement(RouterContext, {...props})
         )
 
+      let InitialRouterWithStylesContext
+      let sheet
+      if (hasStyleComponent) {
+        sheet = new SC.ServerStyleSheet()
+        InitialRouterWithStylesContext = props =>
+          React.createElement(
+            StyleSheetManager,
+            {sheet: sheet.instance},
+            React.createElement(InitialRouterContext, {...props})
+          )
+      }
+
       try {
         initialData = await ssrComponentWithInitialProps({
           context: {...context, device},
           renderProps,
           Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(InitialRouterContext)
-            : withSUIContext({...context, device})(InitialRouterContext)
+            ? withAllContexts({...context, device})(
+                hasStyleComponent
+                  ? InitialRouterWithStylesContext
+                  : InitialRouterContext
+              )
+            : withSUIContext({...context, device})(
+                hasStyleComponent
+                  ? InitialRouterWithStylesContext
+                  : InitialRouterContext
+              )
         })
       } catch (err) {
         return next(err)
@@ -131,14 +160,32 @@ export default (req, res, next) => {
         initialFlush(res)
       }
 
+      // Flush now if early-flush is disabled
+      if (!req.app.locals.earlyFlush) {
+        initialFlush(res)
+      }
       // The first html content has the be set after any possible call to next().
       // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
       // no matter the error page strategy set (loadSPAOnNotFound: true|false)
-      const {
-        bodyAttributes,
-        headString,
-        htmlAttributes
-      } = renderHeadTagsToString(headTags)
+      let {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(
+        headTags
+      )
+
+      if (hasStyleComponent) {
+        headString = sheet.getStyleTags() + headString
+      }
+
+      res.write(
+        HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes})
+      )
+      res.flush()
+
+      // res.set({
+      //   'Server-Timing': `
+      //   getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
+      //   renderToString;desc=renderToString;dur=${performance.renderToString}
+      // `.replace(/\n/g, '')
+      // })
 
       res.write(
         HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes})

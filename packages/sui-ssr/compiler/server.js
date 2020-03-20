@@ -4,6 +4,7 @@ const serverConfig = require('@s-ui/bundler/webpack.config.server')
 
 module.exports = ({outputPath}) => ({
   ...serverConfig,
+  mode: 'development',
   entry: path.join(__dirname, '..', 'server'),
   output: {
     ...serverConfig.output,
