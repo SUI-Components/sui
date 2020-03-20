@@ -4,9 +4,6 @@ import {matchPattern} from './PatternUtils'
 import warning from './routerWarning'
 import createMemoryHistory from './createMemoryHistory'
 
-const deepFlatten = arr =>
-  [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)))
-
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
 
@@ -34,26 +31,18 @@ const createComponents = async ({nodes, routeInfo}) => {
     })
 
   const indexRoute = nodes.findIndex(node => node.fromIndex)
-  if (indexRoute !== -1 && indexRoute !== nodes.length - 1) {
-    nodes = [...nodes.slice(0, indexRoute), ...nodes.slice(indexRoute + 1)]
+  if (indexRoute !== -1 && indexRoute === nodes.length - 1) {
+    nodes = [...nodes, nodes[indexRoute].indexNode]
   }
 
   const components = await Promise.all(
-    deepFlatten(
-      nodes
-        .filter(node => node.component || node.getComponent)
-        .map(node => {
-          if (node.component && !node.fromIndex) {
-            return Promise.resolve(node.component)
-          }
-
-          if (Array.isArray(node.getComponent)) {
-            return node.getComponent.map(fn => makePromise(fn))
-          }
-
-          return makePromise(node.getComponent)
-        })
-    )
+    nodes
+      .filter(node => node.component || node.getComponent)
+      .map(node => {
+        return node.component
+          ? Promise.resolve(node.component)
+          : makePromise(node.getComponent)
+      })
   )
 
   return components
