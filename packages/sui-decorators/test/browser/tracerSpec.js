@@ -68,6 +68,23 @@ describe.only('Tracer', () => {
     expect(testFunctionReturnedValue).to.be.instanceOf(TestFunction)
   })
 
+  it('Should pass the original function arguments', () => {
+    class TestFunction {
+      @tracer({metric: 'METRIC_1'})
+      tryFunction({p1, p2}) {
+        return p1 + p2
+      }
+    }
+
+    const testFnInstance = new TestFunction()
+    const testFunctionReturnedValue = testFnInstance.tryFunction({
+      p1: 'Hola',
+      p2: ' mundo'
+    })
+
+    expect(testFunctionReturnedValue).to.be.equal('Hola mundo')
+  })
+
   it('Should work with asynchronous functions and check promise resolve returns expected value', async () => {
     const timeout = 10
     const resolveValue = 'ok response'
