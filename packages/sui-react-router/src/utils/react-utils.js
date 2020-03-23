@@ -11,24 +11,16 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   const {component, path, children, getComponent, id, from, to} = root.props
   const {type} = root
 
-  if (type.displayName === IndexRoute.displayName) {
-    // https://es.wikipedia.org/wiki/Mutatis_mutandis
-    parent.getComponent = [
-      parent.component && ((_, cb) => cb(null, parent.component)),
-      parent.getComponent,
-      component && ((_, cb) => cb(null, component)),
-      getComponent
-    ].filter(Boolean)
-
-    parent.fromIndex = true
-  }
-
   const node = Object.create(null)
   if (type.displayName === Redirect.displayName) node.redirect = true
   if (type.displayName === Redirect.displayName) node.from = from
   if (type.displayName === Redirect.displayName) node.path = from
   if (type.displayName === Redirect.displayName) node.to = to
-  if (type.displayName === IndexRoute.displayName) node.index = true
+  if (type.displayName === IndexRoute.displayName) {
+    node.index = true
+    parent.fromIndex = true
+    parent.indexNode = node
+  }
 
   if (level) node.level = level
   if (id) node.id = id

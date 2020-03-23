@@ -17,19 +17,11 @@ export const getTplParts = req => {
 
 export class HtmlBuilder {}
 
-HtmlBuilder.buildHead = ({headTplPart, helmetHead = {}}) => {
+HtmlBuilder.buildHead = ({headTplPart, headString = ''}) => {
   const headElement = headTplPart.substr(headTplPart.indexOf('<head'))
   const headOpenningTag = headElement.substr(0, headElement.indexOf('>') + 1)
-  const {title, meta, link, ...remainingHelmetHeadTags} = helmetHead
 
-  return headTplPart.replace(
-    headOpenningTag,
-    `${headOpenningTag}${title.toString()}${meta.toString()}${link.toString()}${Object.keys(
-      remainingHelmetHeadTags
-    )
-      .map(section => remainingHelmetHeadTags[section].toString())
-      .join('')}`
-  )
+  return headTplPart.replace(headOpenningTag, `${headOpenningTag}${headString}`)
 }
 
 HtmlBuilder.buildBody = ({
