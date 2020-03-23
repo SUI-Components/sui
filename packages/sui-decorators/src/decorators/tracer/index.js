@@ -41,12 +41,12 @@ export default ({metricName} = {}) => {
           const reporter = getReporter()
           const perf = getPerformanceMeter()
 
-          const _fnTimed = () => {
+          const _fnTimed = (...args) => {
             // performance metric start
             const startTime = perf.now()
 
             //  original function
-            const returnValue = fn.apply(this)
+            const returnValue = fn.apply(this, args)
             if (isPromise(returnValue)) {
               return returnValue
                 .then(res => {
