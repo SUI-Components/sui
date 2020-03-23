@@ -84,7 +84,7 @@ export default ({metric = null} = {}) => {
                   return Promise.reject(error)
                 })
             } else {
-              // performance metric start
+              // performance metric ends
               const endTime = perf.now()
 
               reporter.send({
