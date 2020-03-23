@@ -18,7 +18,7 @@ const getReporter = () => {
   return customReporter || new ConsoleReporter()
 }
 
-export default ({metricName} = {}) => {
+export default ({metric = null} = {}) => {
   return (target, fnName, descriptor) => {
     const {configurable, enumerable, writable} = descriptor
     const originalGet = descriptor.get
@@ -40,6 +40,8 @@ export default ({metricName} = {}) => {
 
           const reporter = getReporter()
           const perf = getPerformanceMeter()
+          const classMethodName = `${target.constructor.name}::${fnName}`
+          const metricName = metric || classMethodName
 
           const _fnTimed = (...args) => {
             // performance metric start
