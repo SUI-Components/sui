@@ -25,7 +25,7 @@ describe('Tracer', () => {
 
   it('Should call the original function', () => {
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         fnSpy()
 
@@ -42,7 +42,7 @@ describe('Tracer', () => {
 
   it('Should return the original function value', () => {
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         return 'test return value'
       }
@@ -56,7 +56,7 @@ describe('Tracer', () => {
 
   it('Should preserve the original function context', () => {
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         return this
       }
@@ -68,11 +68,28 @@ describe('Tracer', () => {
     expect(testFunctionReturnedValue).to.be.instanceOf(TestFunction)
   })
 
+  it('Should pass the original function arguments', () => {
+    class TestFunction {
+      @tracer({metric: 'METRIC_1'})
+      tryFunction({p1, p2}) {
+        return p1 + p2
+      }
+    }
+
+    const testFnInstance = new TestFunction()
+    const testFunctionReturnedValue = testFnInstance.tryFunction({
+      p1: 'Hola',
+      p2: ' mundo'
+    })
+
+    expect(testFunctionReturnedValue).to.be.equal('Hola mundo')
+  })
+
   it('Should work with asynchronous functions and check promise resolve returns expected value', async () => {
     const timeout = 10
     const resolveValue = 'ok response'
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         return new Promise((resolve, reject) => {
           setTimeout(() => resolve(resolveValue), timeout)
@@ -93,7 +110,7 @@ describe('Tracer', () => {
     const timeout = 10
     const rejectValue = 'ko response'
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         return new Promise((resolve, reject) => {
           setTimeout(() => reject(rejectValue), timeout)
@@ -118,7 +135,7 @@ describe('Tracer', () => {
     const timeout = 10
     const resolveResponse = 'ok response'
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         return new Promise(resolve => {
           setTimeout(() => resolve(resolveResponse), timeout)
@@ -136,7 +153,7 @@ describe('Tracer', () => {
     const timeout = 10
     const failResponse = 'ko response'
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       tryFunction() {
         return new Promise((resolve, reject) => {
           setTimeout(() => reject(failResponse), timeout)
@@ -161,7 +178,7 @@ describe('Tracer', () => {
     const resolveResponse = 'ok response'
 
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       @inlineError
       tryFunction() {
         return new Promise(resolve => {
@@ -182,7 +199,7 @@ describe('Tracer', () => {
     const failResponse = 'ko response'
 
     class TestFunction {
-      @tracer({metricName: 'METRIC_1'})
+      @tracer({metric: 'METRIC_1'})
       @inlineError
       tryFunction() {
         return new Promise((resolve, reject) => {
@@ -195,6 +212,27 @@ describe('Tracer', () => {
     const [error] = await testFnInstance.tryFunction()
 
     expect(error).to.be.equal(failResponse)
+    expect(ConsoleReporter.prototype.send.called).to.be.true
+  })
+
+  it('Should use class and method as metric name if no metric arg is specified', async () => {
+    const timeout = 10
+    const resolveResponse = 'ok response'
+
+    class TestFunction {
+      @tracer()
+      @inlineError
+      tryFunction() {
+        return new Promise(resolve => {
+          setTimeout(() => resolve(resolveResponse), timeout)
+        })
+      }
+    }
+
+    const testFnInstance = new TestFunction()
+    const [, result] = await testFnInstance.tryFunction()
+
+    expect(result).to.be.equal(resolveResponse)
     expect(ConsoleReporter.prototype.send.called).to.be.true
   })
 })

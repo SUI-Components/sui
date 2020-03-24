@@ -16,7 +16,7 @@ export class DataDogReporter extends ReporterInterface {
     const siteNameSubString = `${this._siteName ? `${this._siteName}.` : ''}`
 
     this._client.timing(
-      `${siteNameSubString}tracer.datadog.reporter`,
+      `frontend.${siteNameSubString}tracer.datadog.reporter`,
       value,
       globalTags
     )

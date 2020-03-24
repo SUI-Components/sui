@@ -137,3 +137,96 @@ window.__SUI_CACHE_DISABLED__ = true
 // Server side
 global.__SUI_CACHE_DISABLED__ = true
 ```
+
+### @tracer
+
+Sends a performance timing metric to the configured reporter.
+
+```js
+import {tracer} from '@s-ui/decorators'
+
+class SomeUseCase {
+    @tracer({metric: 'METRIC_1'})
+    execute({input}) {
+        return ...
+    }
+}
+```
+
+#### Configuration
+
+This decorator will look for a `__SUI_DECORATOR_TRACER_REPORTER__` variable in the host (`window.__SUI_DECORATOR_TRACER_REPORTER__` in browser/`global.__SUI_DECORATOR_TRACER_REPORTER__ in SSR).
+
+If no reporter defined is found it will use the default `ConsoleReporter` which will output the messages in console.
+
+Also, the tracer provides a `DataDogReporter which implements the Reporter Interface. This reporter needs a client to be
+ passed to the reporter constructor. In this case, we are using [hot-shots](https://github.com/brightcove/hot-shots), 
+ which is a StatsD compatible client.
+
+**Note: be sure to define this in a server-only executed file.**
+
+```js
+import {DataDogReporter} from '@s-ui/decorators/lib/decorators/tracer'
+import StatsD from 'hot-shots'
+
+global.__SUI_DECORATOR_TRACER_REPORTER__ = new DataDogReporter({
+     client: new StatsD({
+       errorHandler: error => {
+         console.log('Socket errors caught here: ', error)
+       },
+       globalTags: {
+         env: process.env.NODE_ENV,
+         node_ssr: 'milanuncios',
+         origin: 'server'
+       }
+     }),
+     siteName: 'ma'
+   })
+```
+
+The provided `DataDogReporter` accepts a `siteName` parameter that will be appended to the metric name: 
+`frontend.${siteName}.tracer.datadog.reporter`, so we could look for our metric in datadog as `frontend.ma.tracer.datadog.reporter`.
+
+#### Usage
+
+After having the reporter configured, you need to add the `@tracer` in the useCases / methods you want to be 
+measured. The tracer uses the [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance).
+
+```
+import {UseCase} from '@s-ui/domain'
+import {inlineError, tracer} from '@s-ui/decorators'
+
+export class GetAdSearchParamsFromURLSearchUseCase extends UseCase {
+  ... 
+
+  @tracer()
+  @inlineError
+  async execute({path}) {
+```
+
+The decorator accepts an optional `metric` parameter that will be sent to the reporter. 
+
+```
+import {UseCase} from '@s-ui/domain'
+import {inlineError, tracer} from '@s-ui/decorators'
+
+export class GetAdSearchParamsFromURLSearchUseCase extends UseCase {
+  ... 
+
+  @tracer({metric: 'get_search_params'})
+  @inlineError
+  async execute({path}) {
+```
+
+#### Compatibility
+
+The `@tracer` decorator works fine with the `@inlineError` decorator, but it should be placed first: 
+
+ ```
+   (...)
+   
+   @tracer({metric: 'metric_1'})
+   @inlineError
+   async execute({path}) {
+   ...
+ ```
