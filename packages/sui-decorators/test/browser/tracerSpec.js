@@ -6,7 +6,7 @@ import {ConsoleReporter} from '../../src/decorators/tracer/reporters/ConsoleRepo
 
 let fnSpy
 
-describe.only('Tracer', () => {
+describe('Tracer', () => {
   beforeEach(() => {
     fnSpy = sinon.spy()
 

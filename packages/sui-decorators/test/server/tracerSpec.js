@@ -1,30 +1,13 @@
 /* eslint-disable no-unused-expressions */
-/* global __SUI_DECORATOR_TRACER_REPORTER__ */
 import {expect} from 'chai'
 import sinon from 'sinon'
 import {inlineError, tracer} from '../../src'
 import {ConsoleReporter} from '../../src/decorators/tracer/reporters/ConsoleReporter'
-import {DataDogReporter} from '../../src/decorators/tracer/reporters/DataDogReporter'
-import StatsD from 'hot-shots'
 
 let fnSpy
 
 describe('Tracer', () => {
   beforeEach(() => {
-    // eslint-disable-next-line
-    global.__SUI_DECORATOR_TRACER_REPORTER__ = new DataDogReporter({
-      client: new StatsD({
-        errorHandler: error => {
-          console.log('Socket errors caught here: ', error) // eslint-disable-line no-console
-        },
-        globalTags: {
-          env: process.env.NODE_ENV,
-          node_ssr: 'milanuncios'
-        }
-      }),
-      siteName: 'ma'
-    })
-
     fnSpy = sinon.spy()
 
     sinon.spy(ConsoleReporter.prototype, 'send')
@@ -86,7 +69,7 @@ describe('Tracer', () => {
     expect(testFunctionReturnedValue).to.be.instanceOf(TestFunction)
   })
 
-  it.only('Should work with asynchronous functions and check promise resolve returns expected value', async () => {
+  it('Should work with asynchronous functions and check promise resolve returns expected value', async () => {
     const timeout = 10
     const resolveValue = 'ok response'
     class TestFunction {
