@@ -11,7 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "sinon": "2"
+    "sinon": "2",
+    "hot-shots": "7.0.0"
+  },
+  "browser": {
+    "perf_hooks": false,
+    "hot-shots": false
   },
   "dependencies": {
     "@s-ui/js": "2",
