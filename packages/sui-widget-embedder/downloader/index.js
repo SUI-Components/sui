@@ -108,12 +108,12 @@
   }
 
   function matchNameWithRegExp(name, regExp) {
-    if(!regExp) {
+    if (!regExp) {
       return false
     }
     if (Array.isArray(regExp)) {
       return regExp.some(function(re) {
-        name.match(new RegExp(re))
+        return name.match(new RegExp(re))
       })
     }
 
