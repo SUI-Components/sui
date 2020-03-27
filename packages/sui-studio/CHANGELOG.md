@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.27.0 (2020-03-27)
+
+
+### Features
+
+* mod styles sorting in workbench Raw view ([c31458f](https://github.com/SUI-Components/sui/commit/c31458f5050737515684694e62800aa595de2369))
+
+
+
 # 7.26.0 (2020-03-09)
 
 
