@@ -9,7 +9,7 @@ const createLinkElement = () => {
   return linkElement
 }
 
-export default function Style({children}) {
+export default function Style({children, id}) {
   useEffect(
     function() {
       const linkElement = createLinkElement()
@@ -17,11 +17,12 @@ export default function Style({children}) {
       const blob = new window.Blob([children], {type: 'text/css'})
       const oldSrc = linkElement.href
       linkElement.href = window.URL.createObjectURL(blob)
+      linkElement.id = id
       oldSrc && window.URL.createObjectURL(blob)
 
       return () => linkElement.parentNode.removeChild(linkElement)
     },
-    [children]
+    [children, id]
   )
 
   return null
