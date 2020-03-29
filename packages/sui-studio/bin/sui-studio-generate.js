@@ -108,7 +108,7 @@ node_modules`
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx rimraf ./lib && npx mkdirp ./lib && npm run build:js && npm run build:styles",
+    "build": "npx rimraf ./lib && npm run build:js && npm run build:styles",
     "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },
@@ -154,7 +154,7 @@ ${componentInPascal}.propTypes = {}
 
   writeFile(
     COMPONENT_ENTRY_SCSS_POINT_FILE,
-    `@import '~@schibstedspain/sui-theme/lib/index';
+    `@import '~@s-ui/theme/lib/index';
 
 .${prefix}-${componentInPascal} {
   // Do your magic

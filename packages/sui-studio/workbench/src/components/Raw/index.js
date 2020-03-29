@@ -45,8 +45,8 @@ export default function Raw({
 
   return (
     <div className="Raw">
-      <Style>{themes[actualStyle]}</Style>
-      <Style>{demoStyles}</Style>
+      <Style id="sui-studio-raw-demo">{demoStyles}</Style>
+      <Style id="sui-studio-raw-theme">{themes[actualStyle]}</Style>
 
       <div className="Raw-center">
         <When value={!EnhanceDemoComponent && playground}>

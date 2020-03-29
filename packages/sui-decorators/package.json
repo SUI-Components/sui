@@ -1,17 +1,22 @@
 {
   "name": "@s-ui/decorators",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "sinon": "2"
+    "sinon": "2",
+    "hot-shots": "7.0.0"
+  },
+  "browser": {
+    "perf_hooks": false,
+    "hot-shots": false
   },
   "dependencies": {
     "@s-ui/js": "2",
