@@ -5,11 +5,7 @@ import routes from 'routes'
 import {RouterContext, match} from 'react-router'
 import {HeadProvider} from '@s-ui/react-head'
 import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
-import {
-  createServerContextFactoryParams,
-  ssrComponentWithInitialProps
-} from '@s-ui/react-initial-props'
-// END __MAGIC IMPORTS__
+import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
 
 import qs from 'querystring'
 import {getTplParts, HtmlBuilder} from '../template'
@@ -18,15 +14,6 @@ import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
-
-// __MAGIC IMPORTS__
-let contextFactory
-try {
-  contextFactory = require('contextFactory').default
-} catch (e) {
-  contextFactory = async () => ({})
-}
-// END __MAGIC IMPORTS__
 
 // const SERVER_TIMING_HEADER = 'Server-Timing'
 const HTTP_PERMANENT_REDIRECT = 301
@@ -81,15 +68,12 @@ export default (req, res, next) => {
       }
 
       const device = buildDeviceFrom({request: req})
+      const {context} = req
 
       // Flush if early-flush is enabled
       if (req.app.locals.earlyFlush) {
         initialFlush(res)
       }
-
-      const context = await contextFactory(
-        createServerContextFactoryParams(req)
-      )
 
       let initialData
       const headTags = []
