@@ -43,6 +43,10 @@ export default (req, res, next) => {
   let [headTplPart, bodyTplPart] = getTplParts(req)
   const criticalCSS = req.criticalCSS
 
+  if (res.statusCode === 404) {
+    return next()
+  }
+
   if (criticalCSS) {
     headTplPart = headTplPart
       .replace(
