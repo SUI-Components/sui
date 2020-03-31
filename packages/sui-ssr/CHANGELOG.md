@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.2.0 (2020-03-31)
+
+
+### Features
+
+* add check to skip ssr if statusCode is set to 404 ([3e8eb55](https://github.com/SUI-Components/sui/commit/3e8eb5507a0dc9494ac8759bf15f3eee169e5f80))
+
+
+
 # 6.1.0 (2020-03-17)
 
 
