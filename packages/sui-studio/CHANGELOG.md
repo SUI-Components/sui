@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.28.0 (2020-03-31)
+
+
+### Features
+
+* adds optimizely and utag_data globals to avoid Mocha global warnings ([585fa8c](https://github.com/SUI-Components/sui/commit/585fa8c28a052d7eeb7b4f22d5b34634e4e78e3c))
+
+
+
 # 7.27.0 (2020-03-27)
 
 
