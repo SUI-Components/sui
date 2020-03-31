@@ -41,9 +41,9 @@ const initialFlush = res => {
 export default (req, res, next) => {
   const {url, query} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
-  const criticalCSS = req.criticalCSS
+  const {skipSSR, criticalCSS} = req
 
-  if (res.statusCode === 404) {
+  if (skipSSR) {
     return next()
   }
 
