@@ -42,8 +42,9 @@ export default (req, res, next) => {
   const {url, query} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
   const criticalCSS = req.criticalCSS
+  const skipSSR = req.skipSSR
 
-  if (res.statusCode === 404) {
+  if (skipSSR) {
     return next()
   }
 
