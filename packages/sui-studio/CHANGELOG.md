@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.29.0 (2020-04-03)
+
+
+### Features
+
+* add new global variable ([1c15769](https://github.com/SUI-Components/sui/commit/1c15769bcebbc6a29d6a35585dc5ac9adf957e43))
+
+
+
 # 7.28.0 (2020-03-31)
 
 
