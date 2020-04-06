@@ -15,7 +15,7 @@ $ npm install @s-ui/studio-tools --save
 
 ```js
 import { DomainBuilder } from '@s-ui/studio-tools'
-import myDomain from '@schibstedspain/myDomain'
+import myDomain from 'domain'
 
 
 const domain = DomainBuilder.extend({ myDomain }).build()
@@ -30,7 +30,7 @@ const domain = DomainBuilder.extend({ myDomain }).build()
 
 ```js
 import { DomainBuilder } from '@s-ui/studio-tools'
-import myDomain from '@schibstedspain/myDomain'
+import myDomain from 'domain'
 
 const getProductsResponse = {
   success: ['pineapple', 'apple', 'strawberry', 'coffee']
@@ -49,7 +49,7 @@ domain.get('current_user_use_case').execute().then((products) => {
 
 ```js
 import { DomainBuilder } from '@s-ui/studio-tools'
-import myDomain from '@schibstedspain/myDomain'
+import myDomain from 'domain'
 
 const getProductsError = {
   fail: 'Unexpected error :('
@@ -88,7 +88,7 @@ The locales are getted using a usecase of a domain. You pass the usecase not the
 
 ```js
 import { i18n } from '@s-ui/studio-tools'
-import myDomain from '@schibstedspain/myDomain'
+import myDomain from 'domain'
 
 
 i18n({ literalsUseCase: myDomain.get('get_literals_from_backend') }).then((rossetaInstance) => {
@@ -114,7 +114,7 @@ Dictionary should be formed with this format:
 
 ```js
 import { i18n } from '@s-ui/studio-tools'
-import myDomain from '@schibstedspain/myDomain'
+import myDomain from 'domain'
 import myLocalesDictionary from '../../utils/dictionary' // Or wherever you have your locales object.
 
 i18n({ dictionary: myLocalesDictionary }).then((rossetaInstance) => {
@@ -137,7 +137,7 @@ Send custom config is as easy as put a config property on your object arguments:
 
 ```js
 import { i18n } from '@s-ui/studio-tools'
-import myDomain from '@schibstedspain/myDomain'
+import myDomain from 'domain'
 import myLocalesDictionary from '../../utils/dictionary' // Or wherever you have your locales object.
 
 i18n({
