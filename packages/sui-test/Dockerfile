@@ -2,8 +2,6 @@ FROM cypress/base
 
 WORKDIR /usr/src
 
-ARG CYPRESS_VERSION=3.8.3
-
-RUN npm install --force-only @s-ui/test cypress@$CYPRESS_VERSION
+RUN npm install --force-only @s-ui/test
 
 ENTRYPOINT ["npx", "sui-test", "e2e"]
