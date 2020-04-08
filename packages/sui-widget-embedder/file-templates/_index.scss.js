@@ -1,2 +1,2 @@
 module.exports = sitePrefix =>
-  `@import '~@schibstedspain/${sitePrefix}-theme/lib/index';`
+  `@import '~@adv-ui/${sitePrefix}-theme/lib/index';`
