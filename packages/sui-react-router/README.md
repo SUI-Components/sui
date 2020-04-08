@@ -68,15 +68,34 @@ match({routes, history: browserHistory}, (err, redirectLocation, renderProps) =>
   // you're ready to render (or hydrate if you already has rendered your app in the server)
   // you MUST wrap your app with the `<Router>` app that will provide the needed context
   ReactDOM.hydrate(
-    <Router>
-      <App {...renderProps} />
-    </Router>,
+    <Router {...renderProps} history={browserHistory} />,
     document.getElementById('app')
   )
 })
 ```
 
 ### Server Setup
+
+```js
+import {match, Router} from '@s-ui/react-router'
+import createMemoryHistory from '@s-ui/react-router/lib/createMemoryHistory'
+import {renderToString} from 'react-dom/server'
+import routes from './routes'
+
+export default (req, res, next) => {
+  const {url, query} = req
+
+  const history = createMemoryHistory()
+  history.push(url)
+
+  match({routes, history}, async (error, redirectLocation, renderProps) => {
+    if (error) return next(error)
+    if (redirectLocation) return res.redirect(301, redirectLocation.pathname)
+    if (!renderProps) return next()
+
+    const renderedApp = renderToString(<Router {...renderProps} />)
+    res.status(200).send(renderedApp)
+```
 
 ## API Reference
 
@@ -412,5 +431,5 @@ If all three parameters are `undefined`, this means that there was no route foun
 *Note: You probably don't want to use this in a browser unless you're doing server-side rendering of async routes.*
 
 ## Next features
-- Upgrade to History v6
-- Add hooks support
+- [ ] Upgrade to History v6: In order to improve bundle size and avoid naming collisions with React hooks.
+- [ ] Hooks: Add hooks to be able to access different router context properties in order to simplify its usage.
