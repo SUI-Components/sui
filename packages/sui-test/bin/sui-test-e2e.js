@@ -6,8 +6,8 @@ const program = require('commander')
 const fs = require('fs')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 const {resolveLazyNPMBin} = require('@s-ui/helpers/packages')
-const CYPRESS_VERSION =
-  require(path.join(__dirname, '..', 'package.json')).cypressVersion || '3.8.3'
+const CYPRESS_VERSION = require(path.join(__dirname, '..', 'package.json'))
+  .cypressVersion
 const CYPRESS_FOLDER_PATH = path.resolve(__dirname, 'cypress')
 const TESTS_FOLDER = process.cwd() + '/test-e2e'
 const SCREENSHOTS_FOLDER = process.cwd() + '/.tmp/test-e2e/screenshots'
@@ -48,6 +48,7 @@ program
   .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-R, --record', 'Record tests and send result to Dashboard Service')
+  .option('-C, --ci', 'Continuos integration mode, reduces memory consumption')
   .option(
     '-K, --key <key>',
     'It is used to authenticate the project into the Dashboard Service'
@@ -63,7 +64,8 @@ const {
   screenshotsOnError,
   scope,
   record,
-  key
+  key,
+  ci
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
@@ -84,6 +86,11 @@ if (userAgent) {
 if (screenshotsOnError) {
   cypressConfig.screenshotOnHeadlessFailure = true
   cypressConfig.screenshotsFolder = SCREENSHOTS_FOLDER
+}
+
+if (ci) {
+  cypressConfig.numTestsKeptInMemory = 1
+  cypressConfig.numSnapshotsKeptInMemory = 1
 }
 
 resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
