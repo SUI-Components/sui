@@ -1,5 +1,5 @@
 # sui-react-router
-> Set of ES6 decorators to improve your apps
+> Set of navigational components that compose declaratively with your application.
  
 ## Definition
 
@@ -8,12 +8,82 @@
 npm install @s-ui/react-router
 ```
 
+## Routes Setup
+
+You must define a React Element with your application routes tree. Check the [Configuration Components](#configuration-components) documentation to see the available components and their configuration.
+
+```js
+// routes.js file
+import { IndexRoute, Redirect, Route } from '@s-ui/react-router'
+
+export default (
+  <Route>
+    <Redirect from="/" to="/es/" />
+    <Route path="/:lang" component={App}>
+      <IndexRoute getComponent={loadHomePage} />
+      <Route
+        path="products"
+        getComponent={loadProductsPage}
+      />
+    </Route>
+  </Route>
+)
+```
+
+### Client Setup
+
+In order to be able to use the `@s-ui/react-router` on the client you should wrap your application with the `<Router>` component. It will provide the needed context to be able to use components like `<Link>` inside your app.
+
+```js
+/* Basic example by using directly Router */
+import {browserHistory, Router} from '@s-ui/react-router'
+import routes from './routes'
+
+// you're ready to render (or hydrate if you already has rendered your app in the server)
+// you MUST wrap your app with the `<Router>` app that will provide the needed context
+ReactDOM.hydrate(
+  <Router history={browserHistory}>{routes}</Router>,
+  document.getElementById('app')
+)
+```
+
+```js
+/* Advanced example using match method */
+import {browserHistory, match, Router} from '@s-ui/react-router'
+import routes from './routes'
+
+match({routes, history: browserHistory}, (err, redirectLocation, renderProps) => {
+  // if we have an error, log it and do nothing more
+  if (err) {
+    console.error(err)
+    return
+  }
+
+  // if some <Redirect> has been matched, then we will have the `redirectLocation` info
+  if (redirectLocation && redirectLocation.pathname) {
+    window.location = redirectLocation.pathname
+    return
+  }
+
+  // you're ready to render (or hydrate if you already has rendered your app in the server)
+  // you MUST wrap your app with the `<Router>` app that will provide the needed context
+  ReactDOM.hydrate(
+    <Router>
+      <App {...renderProps} />
+    </Router>,
+    document.getElementById('app')
+  )
+})
+```
+
+### Server Setup
+
 ## API Reference
 
 - [Components](#components)
   - [`<Router>`](#router)
   - [`<Link>`](#link)
-  - [`<RouterContext>`](#routercontext)
+  - [`Context`](#routercontext)
     - [`context.router`](#contextrouter)
 
 - [Configuration Components](#configuration-components)
@@ -36,7 +106,7 @@ npm install @s-ui/react-router
 ## Components
 
 ### `<Router>`
-Primary component of @s-ui/react-router. It keeps your UI and the URL in sync.
+Primary component of `@s-ui/react-router`. It keeps your UI and the URL in sync and provides your application with the needed React context.
 
 #### Props
 ##### `children` (required)
@@ -46,11 +116,11 @@ One or many [`<Route>`](#route)s, [`<Redirect>`](#redirect)s and one [`<IndexRou
 Alias for `children`.
 
 ##### `history`
-The history the router should listen to. Typically `browserHistory`.
+The history the router should listen to. Typically `browserHistory`. In server, for example, it would be `memoryHistory`.
 
 ```js
 import { browserHistory } from 'react-router'
-ReactDOM.render(<Router history={browserHistory} />, el)
+ReactDOM.render(<Router history={browserHistory} />, node)
 ```
 
 ### `<Link>`
@@ -60,15 +130,10 @@ A `<Link>` can know when the route it links to is active and automatically apply
 
 #### Props
 ##### `to`
-A location destination. Usually this is a string or an object, with the following semantics:
+A location destination. Usually this is a string or a function, with the following semantics:
 
 * If it's a string it represents the absolute path to link to, e.g. `/users/123` (relative paths are not supported).
-* If it's an object it can have four keys:
-  * `pathname`: A string representing the path to link to.
-  * `query`: An object of key:value pairs to be stringified.
-  * `hash`: A hash to put in the URL, e.g. `#a-hash`.
-  * `state`: State to persist to the `location`.
-* A function that receives the `location`. The function must return a string or an object with the previous mentioned four keys.
+* If it's a function, it receives the `location` as a parameter and it must return the string following the rules of the previous point.
 * If it is not specified, an anchor tag without an `href` attribute will be rendered.
 
 _Note: @s-ui/react-router currently does not manage scroll position, and will not scroll to the element corresponding to `hash`._
@@ -79,13 +144,8 @@ _Note: @s-ui/react-router currently does not manage scroll position, and will no
   Hello
 </Link>
 
-// Object location descriptor.
-<Link to={{ pathname: '/hello', query: { name: 'ryan' } }}>
-  Hello
-</Link>
-
 // Function returning location descriptor.
-<Link to={location => ({ ...location, query: { name: 'ryan' } })}>
+<Link to={location => `/hello?name=${location.query.name}`}>
   Hello
 </Link>
 
@@ -135,7 +195,7 @@ const refCallback = node => {
 <Link to="/" innerRef={refCallback} />
 ```
 
-### `<RouterContext>`
+### Router Context
 A `<RouterContext>` renders the component tree for a given router state. It's used by `<Router>` but also useful for server rendering and integrating in brownfield development.
 
 It also provides a `router` object on [context](https://facebook.github.io/react/docs/context.html).
