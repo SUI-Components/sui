@@ -29,5 +29,5 @@ export default function Style({children, id}) {
 }
 
 Style.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.array
 }
