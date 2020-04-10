@@ -70,7 +70,7 @@ const Link = ({
   }
 
   if (!to) {
-    return <a {...props} ref={innerRef} />
+    return <a {...props} onClick={onClick} ref={innerRef} />
   }
 
   const toLocation = resolveToLocation(to, router)
