@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.0.0 (2020-04-08)
+
+
+### Bug Fixes
+
+* install cypress in docker ([3ab59b9](https://github.com/SUI-Components/sui/commit/3ab59b9c7d05106ad8a0de184aa7878a4ad5efc5))
+
+
+### Features
+
+* add ci mode and update cypress version ([46dfeb6](https://github.com/SUI-Components/sui/commit/46dfeb602f135cd263c176a11572a156aa6f87cd))
+* update all cypress version definitions ([1d9dfeb](https://github.com/SUI-Components/sui/commit/1d9dfeb8990c803842d8f98e5423d7ab9f9f617e))
+* update cypress dep ([ac837d4](https://github.com/SUI-Components/sui/commit/ac837d46fec38912a844a3d493575975ab2ba163))
+
+
+### BREAKING CHANGES
+
+* update cypress version
+
+
+
 # 2.24.0 (2020-01-23)
 
 
