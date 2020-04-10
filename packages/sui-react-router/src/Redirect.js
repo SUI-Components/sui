@@ -1,7 +1,7 @@
-import invariant from 'invariant'
+import PropTypes from 'prop-types'
 
-import {string, object} from 'prop-types'
 import {falsy} from './InternalPropTypes'
+import invariant from './utils/invariant'
 
 const Redirect = () => {
   invariant(
@@ -12,13 +12,20 @@ const Redirect = () => {
 
 Redirect.displayName = 'Redirect'
 Redirect.propTypes = {
-  path: string,
-  from: string, // Alias for path
-  to: string.isRequired,
-  query: object,
-  state: object,
-  onEnter: falsy,
-  children: falsy
+  /** This component doesn't accept a children. If you provide one, you will get a warning  and it will be ignored */
+  children: falsy,
+  /**
+   * The path you want to redirect from, including dynamic segments.
+   */
+  from: PropTypes.string, // Alias for path
+  /**
+   * By default, the query parameters will just pass through but you can specify them if you need to.
+   */
+  query: PropTypes.object,
+  /**
+   * The path you want to redirect to.
+   */
+  to: PropTypes.string.isRequired
 }
 
 export default Redirect
