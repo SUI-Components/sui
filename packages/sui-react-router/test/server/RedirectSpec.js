@@ -33,11 +33,9 @@ describe('<Redirect>', () => {
 
   it('works with relative paths', async () => {
     const withRoutes = (
-      <>
-        <Route path="search">
-          <Redirect from="category" to="categories" />
-        </Route>
-      </>
+      <Route path="search">
+        <Redirect from="category" to="categories" />
+      </Route>
     )
     const redirectLocation = await getRedirectLocationFor({
       path: '/search/category',
