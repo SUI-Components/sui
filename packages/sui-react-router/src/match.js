@@ -15,7 +15,7 @@ import createMemoryHistory from './createMemoryHistory'
  * Note: You probably don't want to use this in a browser unless you're using
  * server-side rendering with async routes.
  * @param {{ routes: Array, history?: object, location }} options
- * @param {Function} callback
+ * @param {Function} callback Function to be execute after match
  */
 export default async (
   {routes, history = createMemoryHistory(), location},
@@ -33,19 +33,18 @@ export default async (
     routeInfo
   } = await transitionManager.match(location)
 
-  // TODO: Maybe I need do something more here.
-  // https://github.com/ReactTraining/react-router/blob/v3/modules/RouterUtils.js#L1
   const {isActive} = transitionManager
   const router = createRouterObject(history, isActive, routeInfo)
+  const renderProps = {
+    components,
+    router,
+    matchContext: {transitionManager, router},
+    ...routeInfo
+  }
 
   return callback(
     null,
     redirectLocation && history.createLocation(redirectLocation, REPLACE),
-    {
-      components,
-      router,
-      matchContext: {transitionManager, router},
-      ...routeInfo
-    }
+    renderProps
   )
 }
