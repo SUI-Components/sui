@@ -14,7 +14,7 @@ import createMemoryHistory from './createMemoryHistory'
  *
  * Note: You probably don't want to use this in a browser unless you're using
  * server-side rendering with async routes.
- * @param {{ routes: Array, history, location }} options
+ * @param {{ routes: Array, history?: object, location }} options
  * @param {Function} callback
  */
 export default async (
