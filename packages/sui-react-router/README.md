@@ -85,8 +85,7 @@ import routes from './routes'
 export default (req, res, next) => {
   const {url, query} = req
 
-  const history = createMemoryHistory()
-  history.push(url)
+  const history = createMemoryHistory(url)
 
   match({routes, history}, async (error, redirectLocation, renderProps) => {
     if (error) return next(error)
@@ -95,6 +94,7 @@ export default (req, res, next) => {
 
     const renderedApp = renderToString(<Router {...renderProps} />)
     res.status(200).send(renderedApp)
+  })
 ```
 
 ## API Reference
