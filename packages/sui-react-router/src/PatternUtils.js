@@ -1,3 +1,5 @@
+// from: https://github.com/ReactTraining/react-router/blob/v3/modules/PatternUtils.js
+
 import invariant from './utils/invariant'
 
 function escapeRegExp(string) {
