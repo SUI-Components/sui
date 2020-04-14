@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
-import {Router, Route, Link, match} from '../../src'
+import {Router, Route, Link, match} from '../../src/index'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
@@ -11,7 +11,7 @@ const getRenderedString = ({location = '/', withRoutes}) => {
   })
 }
 
-describe('Link', () => {
+describe('<Link />', () => {
   const createRoutes = (
     {to, props = {}} // eslint-disable-line react/prop-types
   ) => (
