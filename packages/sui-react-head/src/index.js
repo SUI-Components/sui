@@ -8,12 +8,12 @@ export {HeadProvider}
 
 /**
  * Extract value in a specific order
- * @param {{ name?: string, hreflang?: string, rel?: string }} tag
+ * @param {{ name?: string, hreflang?: string, rel?: string , content?: string}} tag
  * @return {String}
  */
 const extractKeyFromTag = tag => {
-  const {name, hreflang, rel} = tag
-  return name || hreflang || rel
+  const {name, hreflang, rel, content} = tag
+  return name || hreflang || rel || content
 }
 
 /**

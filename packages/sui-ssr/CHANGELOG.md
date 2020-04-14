@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.3.0 (2020-03-31)
+
+
+### Features
+
+* use skipSSR flag instead of checking status code to skip ssr ([67cc137](https://github.com/SUI-Components/sui/commit/67cc137737b1b52c0fab86841669acbdab5eb16c))
+
+
+
+# 6.2.0 (2020-03-31)
+
+
+### Features
+
+* add check to skip ssr if statusCode is set to 404 ([3e8eb55](https://github.com/SUI-Components/sui/commit/3e8eb5507a0dc9494ac8759bf15f3eee169e5f80))
+
+
+
 # 6.1.0 (2020-03-17)
 
 

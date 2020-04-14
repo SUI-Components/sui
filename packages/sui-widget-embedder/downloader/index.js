@@ -107,24 +107,38 @@
     })
   }
 
-  function matchPathnameWithRegExp(regExp) {
-    var pathname = window.location.pathname
+  function matchNameWithRegExp(name, regExp) {
+    if (!regExp) {
+      return false
+    }
     if (Array.isArray(regExp)) {
       return regExp.some(function(re) {
-        pathname.match(new RegExp(re))
+        return name.match(new RegExp(re))
       })
     }
 
-    return pathname.match(new RegExp(regExp))
+    return name.match(new RegExp(regExp))
+  }
+  function matchPathnameWithRegExp(regExp) {
+    return matchNameWithRegExp(window.location.pathname, regExp)
+  }
+
+  function matchhRefWithRegExp(regExp) {
+    return matchNameWithRegExp(window.location.href, regExp)
+  }
+
+  function match(pathnameRegExp, hrefRegExp) {
+    return matchPathnameWithRegExp(pathnameRegExp) || matchhRefWithRegExp(hrefRegExp)
   }
 
   var pages = []
   for (var page in pageConfigs) {
     var blacklistedRegExps = pageConfigs[page].blacklistedRegExps || []
     var pathnameRegExp = pageConfigs[page].pathnameRegExp
+    var hrefRegExp = pageConfigs[page].hrefRegExp
     var isBlacklisted = blacklistedRegExps.some(matchPathnameWithRegExp)
 
-    if (!isBlacklisted && matchPathnameWithRegExp(pathnameRegExp)) {
+    if (!isBlacklisted && match(pathnameRegExp,hrefRegExp)) {
       pages.push(page)
     }
   }

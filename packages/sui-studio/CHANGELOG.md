@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.30.0 (2020-04-09)
+
+
+### Bug Fixes
+
+* fix Style children array proptype ([1b72bf4](https://github.com/SUI-Components/sui/commit/1b72bf40191abca7f35fdfb2c9a861c5d1687fac))
+
+
+
+# 7.29.0 (2020-04-03)
+
+
+### Features
+
+* add new global variable ([1c15769](https://github.com/SUI-Components/sui/commit/1c15769bcebbc6a29d6a35585dc5ac9adf957e43))
+
+
+
+# 7.28.0 (2020-03-31)
+
+
+### Features
+
+* adds optimizely and utag_data globals to avoid Mocha global warnings ([585fa8c](https://github.com/SUI-Components/sui/commit/585fa8c28a052d7eeb7b4f22d5b34634e4e78e3c))
+
+
+
+# 7.27.0 (2020-03-27)
+
+
+### Features
+
+* mod styles sorting in workbench Raw view ([c31458f](https://github.com/SUI-Components/sui/commit/c31458f5050737515684694e62800aa595de2369))
+
+
+
 # 7.26.0 (2020-03-09)
 
 

@@ -89,6 +89,7 @@ fs.emptyDir(LIB_FOLDER)
         .then(result => fs.outputFile(getLibFile(file), result.code))
         .catch(error => {
           console.error(error)
+          process.exit(1)
         })
     })
   )

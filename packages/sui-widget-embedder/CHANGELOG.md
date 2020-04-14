@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.11.0 (2020-04-06)
+
+
+### Features
+
+* generate theme with new org name ([d7d9969](https://github.com/SUI-Components/sui/commit/d7d9969f5870c13c4c63d27feb8a77da807430fa))
+
+
+
+# 3.10.0 (2020-03-27)
+
+
+### Features
+
+* add new param hrefRegExp to identify the href where the widget will be do ([2080ddb](https://github.com/SUI-Components/sui/commit/2080ddbd5a657a56f0603484cde1d9eaf83a3d36))
+* return match regex and fix lint issue ([aec01e3](https://github.com/SUI-Components/sui/commit/aec01e35bac99fa21c5eab566b53d88a78efd12d))
+
+
+
 # 3.9.0 (2020-02-05)
 
 
