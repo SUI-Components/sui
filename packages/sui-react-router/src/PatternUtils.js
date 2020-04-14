@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import invariant from './utils/invariant'
 
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -151,9 +151,7 @@ export function getParams(pattern, pathname) {
  * Returns a version of the given pattern with params interpolated. Throws
  * if there is a dynamic segment of the pattern for which there is no param.
  */
-export function formatPattern(pattern, params) {
-  params = params || {}
-
+export function formatPattern(pattern, params = {}) {
   const {tokens} = compilePattern(pattern)
   let parenCount = 0
   let pathname = ''
@@ -171,9 +169,7 @@ export function formatPattern(pattern, params) {
 
       invariant(
         paramValue != null || parenCount > 0,
-        'Missing splat #%s for path "%s"',
-        splatIndex,
-        pattern
+        `Missing splat #${splatIndex} for path "${pattern}"`
       )
 
       if (paramValue != null) pathname += encodeURI(paramValue)
@@ -196,9 +192,7 @@ export function formatPattern(pattern, params) {
 
       invariant(
         paramValue != null || parenCount > 0,
-        'Missing "%s" parameter for path "%s"',
-        paramName,
-        pattern
+        `Missing "${paramName}" parameter for path "${pattern}"`
       )
 
       if (paramValue == null) {
@@ -218,9 +212,9 @@ export function formatPattern(pattern, params) {
 
           invariant(
             nextParenIdx > 0,
-            'Path "%s" is missing end paren at segment "%s"',
-            pattern,
-            tokensSubset.join('')
+            `Path "${pattern}" is missing end paren at segment "${tokensSubset.join(
+              ''
+            )}"`
           )
 
           // jump to ending paren
@@ -235,7 +229,7 @@ export function formatPattern(pattern, params) {
     }
   }
 
-  invariant(parenCount <= 0, 'Path "%s" is missing end paren', pattern)
+  invariant(parenCount <= 0, `Path "${pattern}" is missing end paren`)
 
   return pathname.replace(/\/+/g, '/')
 }
