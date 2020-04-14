@@ -1,15 +1,18 @@
-export const createRouterObject = (history, transitionManager, state) => {
-  const router = {
-    ...history,
-    isActive: transitionManager.isActive
-  }
+// from https://github.com/ReactTraining/react-router/blob/v3/modules/RouterUtils.js#L1
 
-  return assignRouterState(router, state)
-}
+/**
+ * Create the router object that will be availble in the context with all the needed info
+ * @param {Object} history
+ * @param {{ isActive: Function }} isActive
+ * @param {{ location: String, params, routes }} state
+ * @returns { import('../types').Router }
+ */
+export const createRouterObject = (history, isActive, state) => {
+  const {location, params, routes} = state || {}
 
-export const assignRouterState = (router, {location, params, routes} = {}) => {
   return {
-    ...router,
+    ...history,
+    isActive,
     location,
     params,
     routes
