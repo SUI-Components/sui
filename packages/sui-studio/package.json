@@ -28,6 +28,7 @@
     "@s-ui/mono": "1",
     "@s-ui/react-context": "1",
     "@testing-library/react": "9.3.0",
+    "@testing-library/user-event": "10.0.1",
     "bundle-loader": "0.5.6",
     "chai": "4.2.0",
     "chai-dom": "1.8.1",
