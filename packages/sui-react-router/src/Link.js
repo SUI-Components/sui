@@ -105,7 +105,7 @@ Link.propTypes = {
    */
   activeClassName: PropTypes.string,
   /**
-   * SThe styles to apply to the element when it is active.
+   * The styles to apply to the element when it is active.
    */
   activeStyle: PropTypes.object,
   /**
