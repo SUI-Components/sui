@@ -12,12 +12,12 @@ Route.propTypes = {
   /**
    * The child elements or routes to be rendered
    **/
-  children: PropTypes.object,
+  children: PropTypes.node,
   /**
    * A single component to be rendered when the route matches the URL. It can
    * be rendered by the parent route component with `props.children`.
    **/
-  component: PropTypes.object,
+  component: PropTypes.elementType,
   /**
    * Same as `component` but asynchronous, useful for code-splitting.
    */
