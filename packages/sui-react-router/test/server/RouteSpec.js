@@ -13,7 +13,7 @@ const getRenderedString = ({location = '/', withRoutes}) => {
   })
 }
 
-describe.only('<Route>', () => {
+describe('<Route>', () => {
   const App = ({children}) => (
     <div>
       App<section>{children}</section>
