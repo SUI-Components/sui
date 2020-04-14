@@ -1,4 +1,4 @@
-// https://jrsinclair.com/articles/2019/functional-js-traversing-trees-with-recursive-reduce/
+// from: https://jrsinclair.com/articles/2019/functional-js-traversing-trees-with-recursive-reduce/
 
 const curry = (fn, arity = fn.length, ...args) =>
   arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args)
@@ -32,10 +32,5 @@ export const Tree = {
     if (hasChildren(node)) {
       node.children.forEach(Tree.forEach(eachFn))
     }
-  }),
-  tap: function(tree) {
-    Tree.forEach(node => {
-      console.log(node) // eslint-disable-line
-    }, tree)
-  }
+  })
 }
