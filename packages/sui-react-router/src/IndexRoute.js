@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 import invariant from './utils/invariant'
 
-const IndexRoute = () => {
+const IndexRoute = () =>
   invariant(
     false,
     '<IndexRoute> elements are for router configuration only and should not be rendered'
   )
-}
 
 IndexRoute.displayName = 'IndexRoute'
 IndexRoute.propTypes = {

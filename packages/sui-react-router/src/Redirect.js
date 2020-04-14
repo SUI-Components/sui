@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import {falsy} from './InternalPropTypes'
 import invariant from './utils/invariant'
 
-const Redirect = () => {
+const Redirect = () =>
   invariant(
     false,
     '<Redirect> elements are for router configuration only and should not be rendered'
   )
-}
 
 Redirect.displayName = 'Redirect'
 Redirect.propTypes = {

@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 import invariant from './utils/invariant'
 
-const Route = () => {
+const Route = () =>
   invariant(
     false,
     '<Route> elements are for router configuration only and should not be rendered'
   )
-}
 
 Route.displayName = 'Route'
 Route.propTypes = {
