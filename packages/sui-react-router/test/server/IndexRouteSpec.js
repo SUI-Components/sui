@@ -3,7 +3,7 @@
 import {expect} from 'chai'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
-import {Router, Route, IndexRoute, match} from '../../src'
+import {Router, Route, IndexRoute, match} from '../../src/index'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
@@ -13,7 +13,7 @@ const getRenderedString = ({location = '/', withRoutes}) => {
   })
 }
 
-describe.only('<IndexRoute>', () => {
+describe('<IndexRoute>', () => {
   const Parent = ({children}) => <div>parent: {children}</div>
   const Child = () => <i>child</i>
 
