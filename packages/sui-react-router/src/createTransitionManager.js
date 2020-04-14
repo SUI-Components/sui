@@ -139,81 +139,96 @@ export const createTransitionManager = ({
     // routes
   }
 
-  return {
-    async match(location) {
-      location = location
-        ? history.createLocation(location)
-        : history.getCurrentLocation()
+  const match = async location => {
+    location = location
+      ? history.createLocation(location)
+      : history.getCurrentLocation()
 
-      const {redirectLocation, routeInfo, components} = await matchRoutes(
-        jsonRoutes,
-        location
-      )
+    const {redirectLocation, routeInfo, components} = await matchRoutes(
+      jsonRoutes,
+      location
+    )
 
-      state = {
-        ...state,
-        ...routeInfo,
-        components,
-        location
-      }
+    state = {
+      ...state,
+      ...routeInfo,
+      components,
+      location
+    }
 
-      return {redirectLocation, routeInfo, components}
-    },
-    listen(listener) {
-      const historyListener = async location => {
-        if (state.location === location) {
-          listener(null, {params: state.params, components: state.components})
-        } else {
-          try {
-            const {redirectLocation, routeInfo, components} = await matchRoutes(
-              jsonRoutes,
-              location
-            )
+    return {redirectLocation, routeInfo, components}
+  }
 
-            if (redirectLocation) {
-              return history.replace(redirectLocation)
-            }
+  /**
+   * This is the API for stateful environments. As the location
+   * changes, we update state and call the listener. We can also
+   * gracefully handle errors and redirects.
+   */
+  const listen = listener => {
+    const historyListener = async location => {
+      if (state.location === location) {
+        listener(null, {params: state.params, components: state.components})
+      } else {
+        try {
+          const {redirectLocation, routeInfo, components} = await matchRoutes(
+            jsonRoutes,
+            location
+          )
 
-            if (!components) {
-              const url = location.pathname + location.search + location.hash
-              warning(false, `Location "${url}" did not match any routes`)
-            }
-
-            state = {
-              ...state,
-              ...routeInfo,
-              components,
-              location
-            }
-
-            return listener(null, state)
-          } catch (err) {
-            listener(err)
+          if (redirectLocation) {
+            return history.replace(redirectLocation)
           }
+
+          if (!components) {
+            const url = location.pathname + location.search + location.hash
+            warning(false, `Location "${url}" did not match any routes`)
+          }
+
+          // call listener with null errors and the nextState
+          return listener(null, {
+            ...state,
+            ...routeInfo,
+            components,
+            location
+          })
+        } catch (err) {
+          listener(err)
         }
       }
-
-      const unsubscribe = history.listen(historyListener)
-
-      if (state.location) {
-        // Picking up on a matchContext.
-        listener(null, state)
-      } else {
-        historyListener(history.getCurrentLocation())
-      }
-
-      return unsubscribe
-    },
-    isActive(location, indexOnly) {
-      location = history.createLocation(location)
-
-      return _isActive(
-        location,
-        indexOnly,
-        state.location,
-        state.routes,
-        state.params
-      )
     }
+
+    // TODO: Only use a single history listener. Otherwise we'll end up with
+    // multiple concurrent calls to match.
+
+    // Set up the history listener first in case the initial match redirects.
+    const unsubscribe = history.listen(historyListener)
+
+    if (state.location) {
+      listener(null, state) // Picking up on a matchContext
+    } else {
+      historyListener(history.getCurrentLocation())
+    }
+
+    return unsubscribe
+  }
+
+  // Signature should be (location, indexOnly),
+  // but needs to support (path, query, indexOnly)
+  const isActive = (location, indexOnly) => {
+    location = history.createLocation(location)
+
+    return _isActive(
+      location,
+      indexOnly,
+      state.location,
+      state.routes,
+      state.params
+    )
+  }
+
+  return {
+    match,
+    listen,
+    isActive
   }
 }
