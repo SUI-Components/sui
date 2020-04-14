@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {func, object} from 'prop-types'
 import {routes, component, components} from './InternalPropTypes'
 import {createTransitionManager} from './createTransitionManager'
-import {fromReactTreeToJSON} from '../lib/utils/react-utils'
+import {fromReactTreeToJSON} from './utils/react-utils'
 import {createRouterObject} from './utils/RouterUtils'
 
 import RRContext from './ReactRouterContext'
