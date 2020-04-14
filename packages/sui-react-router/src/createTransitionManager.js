@@ -1,7 +1,7 @@
 import {Tree} from './utils/Tree'
 import _isActive from './utils/isActive'
 import {matchPattern} from './PatternUtils'
-import warning from './routerWarning'
+import warning from './utils/warning'
 import createMemoryHistory from './createMemoryHistory'
 
 const checkIntegrity = nodes =>
@@ -14,10 +14,7 @@ const createParams = ({paramValues, paramNames}) =>
 
 const findRedirect = nodes => {
   const tail = nodes[nodes.length - 1]
-  if (tail.redirect) {
-    return tail
-  }
-  return null
+  return tail.redirect ? tail : null
 }
 
 const createComponents = async ({nodes, routeInfo}) => {
@@ -60,22 +57,18 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     remainingPathname = location.pathname
   }
 
-  // Tree.tap(tree)
-
   const match = Tree.reduce(
     (acc, node) => {
       let {remainingPathname, paramNames, paramValues} = acc
-      const pattern = node.path || ''
-
       if (acc.isFinished) return acc
       if (node.index) return acc
+
+      const pattern = node.path || ''
 
       acc = {
         ...acc,
         nodes: acc.nodes.filter(n => n.level < node.level)
       }
-
-      // console.log(node.level, acc)
 
       if (pattern.charAt(0) === '/') {
         remainingPathname = location.pathname
@@ -182,11 +175,8 @@ export const createTransitionManager = ({
             }
 
             if (!components) {
-              warning(
-                false,
-                'Location "%s" did not match any routes',
-                location.pathname + location.search + location.hash
-              )
+              const url = location.pathname + location.search + location.hash
+              warning(false, `Location "${url}" did not match any routes`)
             }
 
             state = {
