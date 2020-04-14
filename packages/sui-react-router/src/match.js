@@ -4,6 +4,7 @@ import {REPLACE} from 'history/lib/Actions'
 import {fromReactTreeToJSON} from './utils/react-utils'
 import {createTransitionManager} from './createTransitionManager'
 import {createRouterObject} from './utils/RouterUtils'
+import createMemoryHistory from './createMemoryHistory'
 
 /**
  * A high-level API to be used for server-side rendering.
@@ -16,7 +17,10 @@ import {createRouterObject} from './utils/RouterUtils'
  * @param {{ routes: Array, history, location }} options
  * @param {Function} callback
  */
-export default async ({routes, history, location}, callback) => {
+export default async (
+  {routes, history = createMemoryHistory(), location},
+  callback
+) => {
   const jsonRoutes = fromReactTreeToJSON(routes)
   const transitionManager = createTransitionManager({
     history,
