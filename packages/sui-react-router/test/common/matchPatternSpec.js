@@ -1,3 +1,5 @@
+// from: https://github.com/ReactTraining/react-router/blob/v3/modules/__tests__/matchPattern-test.js
+
 import {expect} from 'chai'
 import {matchPattern} from '../../src/PatternUtils'
 
