@@ -102,8 +102,11 @@ export default (req, res, next) => {
 - [Components](#components)
   - [`<Router>`](#router)
   - [`<Link>`](#link)
-  - [`Context`](#routercontext)
-    - [`context.router`](#contextrouter)
+
+- [Hooks](#hooks)
+  - [`useLocation()`](#useLocation)
+  - [`useRouter`](#useRouter)
+  - [`useParams`](#useParams)
 
 - [Configuration Components](#configuration-components)
   - [`<Route>`](#route)
@@ -131,11 +134,8 @@ Primary component of `@s-ui/react-router`. It keeps your UI and the URL in sync 
 ##### `children` (required)
 One or many [`<Route>`](#route)s, [`<Redirect>`](#redirect)s and one [`<IndexRoute>`](#indexroute-1). When the history changes, `<Router>` will match a branch of its routes, and render their configured [components](#routecomponent), with child route components nested inside the parents.
 
-##### `routes`
-Alias for `children`.
-
 ##### `history`
-The history the router should listen to. Typically `browserHistory`. In server, for example, it would be `memoryHistory`.
+The history the router should listen to. Typically `browserHistory` on the client. In server, for example, it would be `memoryHistory`.
 
 ```js
 import { browserHistory } from 'react-router'
@@ -200,7 +200,6 @@ Given a route like `<Route path="/users/:userId" />`:
 // becomes one of these depending on your History and if the route is
 // active
 <a href="/users/123" class="active">Michael</a>
-<a href="#/users/123">Michael</a>
 
 // change the activeClassName
 <Link to={`/users/${user.id}`} activeClassName="current">{user.name}</Link>
@@ -214,14 +213,32 @@ const refCallback = node => {
 <Link to="/" innerRef={refCallback} />
 ```
 
-### Router Context
-A `<RouterContext>` renders the component tree for a given router state. It's used by `<Router>` but also useful for server rendering and integrating in brownfield development.
+## Hooks
 
-It also provides a `router` object on [context](https://facebook.github.io/react/docs/context.html).
+### useLocation
 
-#### `context.router`
+Returns the current location object. This is useful any time you need to know all the information of the current URL, like the `pathname`, the querystring with `search` or the `host`.
 
-Contains data and methods relevant to routing. Most useful for imperatively transitioning around the application.
+For example, you could create a hook to send a page view to your analytics tracker:
+
+```js
+import React from 'react'
+import {useLocation} from '@s-ui/react-router'
+
+function usePageViewToGoogleAnalytics() {
+  const location = useLocation()
+
+  useEffect(() => {
+    ga.send(['pageview', location.pathname])
+  }, [location])
+
+  return null
+}
+```
+
+### useRouter
+
+Provides you access to the `router` object that contains relevant data and methods regarding routing. Most useful for imperatively transitioning around the application.
 
 ##### `push(pathOrLoc)`
 Transitions to a new URL, adding a new entry in the browser history.
@@ -262,6 +279,28 @@ A route is only considered active if all the URL parameters match, including opt
 
 However, only explicitly specified query parameters will be checked. That means that `isActive({ pathname: '/foo', query: { a: 'b' } })` will return `true` when the location is `/foo?a=b&c=d`. To require that a query parameter be absent, specify its value as an explicit `undefined`, e.g. `isActive({ pathname: '/foo', query: { a: 'b', c: undefined } })`, which would be `false` in this example.
 
+### useParams
+
+Extract the matched params in a `path` in any place of your tree, in order 
+
+
+```js
+import React from 'react'
+import {useParams} from '@s-ui/react-router'
+
+function BlogPost() {
+  // We can call useParams() here to get the params
+  // matched on the path `/posts/:category/:slug`
+  const { category, slug } = useParams()
+}
+
+// from this router heriarchy
+ReactDOM.render(
+  <Router>
+    <Route path="/posts/:category/:slug" component={BlogPost} />
+  </Router>
+)
+```
 
 ## Configuration Components
 
