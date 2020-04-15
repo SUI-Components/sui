@@ -14,7 +14,7 @@ const createParams = ({paramValues, paramNames}) =>
 
 const findRedirect = nodes => {
   const tail = nodes[nodes.length - 1]
-  return tail.redirect ? tail : null
+  return tail && tail.redirect ? tail : null
 }
 
 const createComponents = async ({nodes, routeInfo}) => {
