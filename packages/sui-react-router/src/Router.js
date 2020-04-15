@@ -8,14 +8,14 @@ import {createRouterObject} from './utils/RouterUtils'
 import RRContext from './ReactRouterContext'
 
 const Router = ({
-  components,
   children,
-  routes,
-  render,
-  matchContext,
-  params,
+  components,
   history,
+  matchContext,
   onError,
+  params,
+  render,
+  routes,
   ...props
 }) => {
   const transitionManager =
