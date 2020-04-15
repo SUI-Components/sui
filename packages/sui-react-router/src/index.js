@@ -15,3 +15,6 @@ export {default as match} from './match'
 
 /* histories */
 export {default as browserHistory} from './browserHistory'
+
+/* hooks */
+export {useLocation, useParams, useRouter} from './hooks'
