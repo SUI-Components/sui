@@ -13,14 +13,16 @@ const getRenderedString = ({location = '/', withRoutes}) => {
 
 describe('<Link />', () => {
   const createRoutes = (
-    {to, props = {}} // eslint-disable-line react/prop-types
+    {to, withActiveProps = true, props = {}} // eslint-disable-line react/prop-types
   ) => (
     <Route
       path="/hello/:name"
       component={() => (
         <Link
-          activeClassName="active"
-          activeStyle={{color: 'red'}}
+          {...(withActiveProps && {
+            activeClassName: 'active',
+            activeStyle: {color: 'red'}
+          })}
           to={to}
           {...props}
         >
@@ -29,6 +31,15 @@ describe('<Link />', () => {
       )}
     />
   )
+
+  it.only('should not render unnecessary class=""', async () => {
+    const renderedString = await getRenderedString({
+      location: '/hello/michael',
+      withRoutes: createRoutes({to: '/hello/michael', withActiveProps: false})
+    })
+
+    expect(renderedString).not.to.contain('class')
+  })
 
   describe('with params', () => {
     // strings to check if the Link is active

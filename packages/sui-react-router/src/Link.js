@@ -85,7 +85,9 @@ const Link = ({
   // check if the route where the Link is pointing is the actual one
   const isActiveRoute = router.isActive(toLocation, onlyActiveOnIndex)
   // create className and inline styles depending if the route is active
-  const className = cx(restOfProps.className, isActiveRoute && activeClassName)
+  // if empty string, we default to `undefined` to avoid empty class attribute
+  const className =
+    cx(restOfProps.className, isActiveRoute && activeClassName) || undefined
   const style = {...restOfProps.style, ...(isActiveRoute && activeStyle)}
 
   const anchorProps = {
