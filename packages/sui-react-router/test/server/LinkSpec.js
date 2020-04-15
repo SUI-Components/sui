@@ -32,7 +32,7 @@ describe('<Link />', () => {
     />
   )
 
-  it.only('should not render unnecessary class=""', async () => {
+  it('should not render unnecessary class=""', async () => {
     const renderedString = await getRenderedString({
       location: '/hello/michael',
       withRoutes: createRoutes({to: '/hello/michael', withActiveProps: false})
