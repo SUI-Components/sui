@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.31.0 (2020-04-14)
+
+
+### Features
+
+* adds userEvent from testingLibrary ([de3387a](https://github.com/SUI-Components/sui/commit/de3387a5ebdd4f04329ae067ce18416891b89ab1))
+
+
+
 # 7.30.0 (2020-04-09)
 
 
