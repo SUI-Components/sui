@@ -10,5 +10,5 @@ const useRouterContext = () => {
 }
 
 export const useParams = () => useRouterContext().router.params
-export const useLocation = () => useRouterContext().location
+export const useLocation = () => useRouterContext().router.location
 export const useRouter = () => useRouterContext().router
