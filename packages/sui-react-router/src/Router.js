@@ -5,7 +5,7 @@ import {createTransitionManager} from './createTransitionManager'
 import {fromReactTreeToJSON} from './utils/react-utils'
 import {createRouterObject} from './utils/RouterUtils'
 
-import RRContext from './ReactRouterContext'
+import RRContext from './Context'
 
 const Router = ({
   children,
