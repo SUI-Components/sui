@@ -1,7 +1,7 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/match.js
 
 import {REPLACE} from 'history/lib/Actions'
-import {fromReactTreeToJSON} from './utils/react-utils'
+import {fromReactTreeToJSON} from './utils/ReactUtils'
 import {createTransitionManager} from './createTransitionManager'
 import {createRouterObject} from './utils/RouterUtils'
 import createMemoryHistory from './createMemoryHistory'

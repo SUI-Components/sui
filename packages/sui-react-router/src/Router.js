@@ -1,11 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, {createElement as h, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {routes, components} from './InternalPropTypes'
 import {createTransitionManager} from './createTransitionManager'
-import {fromReactTreeToJSON} from './utils/react-utils'
+import {fromReactTreeToJSON} from './utils/ReactUtils'
 import {createRouterObject} from './utils/RouterUtils'
 
 import RRContext from './Context'
+
+const renderRouterContent = ({components, params, router, props}) =>
+  components.reduceRight((acc, component) => {
+    return h(component, {
+      ...props,
+      params,
+      router,
+      children: acc
+    })
+  }, null)
 
 const Router = ({
   children,
@@ -14,7 +24,6 @@ const Router = ({
   matchContext,
   onError,
   params,
-  render,
   routes,
   ...props
 }) => {
@@ -56,7 +65,7 @@ const Router = ({
 
   return (
     <RRContext.Provider value={state}>
-      {render({
+      {renderRouterContent({
         components: state.components,
         params: state.params,
         router: state.router,
@@ -68,22 +77,6 @@ const Router = ({
 
 Router.displayName = 'Router'
 
-Router.defaultProps = {
-  render: ({components, params, router, props}) => {
-    const pipeReact = components => base =>
-      components.reduceRight((acc, component) => {
-        return React.createElement(component, {
-          ...props,
-          params,
-          router,
-          children: acc
-        })
-      }, base)
-    const tree = pipeReact(components)(null)
-    return tree
-  }
-}
-
 Router.propTypes = {
   children: routes,
   component: PropTypes.elementType,
@@ -92,7 +85,6 @@ Router.propTypes = {
   matchContext: PropTypes.object,
   onError: PropTypes.func,
   params: PropTypes.object,
-  render: PropTypes.func,
   router: PropTypes.object,
   routes // alias for children
 }
