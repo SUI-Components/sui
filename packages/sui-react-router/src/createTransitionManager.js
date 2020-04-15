@@ -1,6 +1,6 @@
 import {Tree} from './utils/Tree'
 import _isActive from './utils/isActive'
-import {matchPattern} from './PatternUtils'
+import {formatPattern, matchPattern} from './PatternUtils'
 import warning from './utils/warning'
 import createMemoryHistory from './createMemoryHistory'
 
@@ -17,32 +17,28 @@ const findRedirect = nodes => {
   return tail && tail.redirect ? tail : null
 }
 
-const createComponents = async ({nodes, routeInfo}) => {
-  const makePromise = getComponent =>
-    new Promise((resolve, reject) => {
-      getComponent(routeInfo, (err, component) => {
-        if (err) return reject(err)
+const makePromise = (getComponent, routeInfo) =>
+  new Promise((resolve, reject) => {
+    getComponent(routeInfo, (err, component) =>
+      err ? reject(err) : resolve(component)
+    )
+  })
 
-        return resolve(component)
-      })
-    })
-
+const createComponents = ({nodes, routeInfo}) => {
   const indexRoute = nodes.findIndex(node => node.fromIndex)
   if (indexRoute !== -1 && indexRoute === nodes.length - 1) {
     nodes = [...nodes, nodes[indexRoute].indexNode]
   }
-
-  const components = await Promise.all(
-    nodes
-      .filter(node => node.component || node.getComponent)
-      .map(node => {
-        return node.component
-          ? Promise.resolve(node.component)
-          : makePromise(node.getComponent)
-      })
-  )
-
-  return components
+  // create an array of promises with all components
+  const componentsPromises = nodes
+    .filter(node => node.component || node.getComponent)
+    .map(({component, getComponent}) => {
+      return component
+        ? Promise.resolve(component)
+        : makePromise(getComponent, routeInfo)
+    })
+  // return a promise that will resolve when all components are available
+  return Promise.all(componentsPromises)
 }
 
 // From tree to Array
@@ -84,6 +80,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
       }
 
       const matched = matchPattern(pattern, remainingPathname)
+
       if (matched) {
         acc = {
           remainingPathname: matched.remainingPathname,
@@ -112,13 +109,14 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     tree
   )
 
-  const redirectNode = findRedirect(match.nodes)
-  if (redirectNode) {
-    return {redirectLocation: redirectNode.to}
-  }
-
   const {nodes, paramValues, paramNames} = match
   const params = createParams({paramNames, paramValues})
+  // check if we have hit a redirect
+  const redirectNode = findRedirect(match.nodes)
+  if (redirectNode) {
+    return {redirectLocation: formatPattern(redirectNode.to, params)}
+  }
+
   const routeInfo = {location, params, routes: nodes}
   const components = await createComponents({nodes, routeInfo})
 

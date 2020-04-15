@@ -18,7 +18,7 @@ const getRenderedString = ({location = '/', withRoutes}) => {
   })
 }
 
-describe.only('Hooks', () => {
+describe('Hooks', () => {
   describe('useLocation', () => {
     it('returns the current location object', async () => {
       let location
