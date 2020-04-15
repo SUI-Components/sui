@@ -8,15 +8,19 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
     return null
   }
 
-  const {component, path, children, getComponent, id, from, to} = root.props
-  const {type} = root
+  const {props, type} = root
+  const {component, path, children, getComponent, id, from, to} = props
+  const {displayName} = type
 
   const node = Object.create(null)
-  if (type.displayName === Redirect.displayName) node.redirect = true
-  if (type.displayName === Redirect.displayName) node.from = from
-  if (type.displayName === Redirect.displayName) node.path = from
-  if (type.displayName === Redirect.displayName) node.to = to
-  if (type.displayName === IndexRoute.displayName) {
+  if (displayName === Redirect.displayName) {
+    node.redirect = true
+    node.from = from
+    node.path = from
+    node.to = to
+  }
+
+  if (displayName === IndexRoute.displayName) {
     node.index = true
     parent.fromIndex = true
     parent.indexNode = node

@@ -6,8 +6,11 @@
   "scripts": {
     "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
-    "test:client": "NODE_TEST=test ../../node_modules/.bin/sui-test browser -P \"/test/browser/*Spec.js\"",
-    "test:server": "NODE_TEST=test ../../node_modules/.bin/sui-test server -P \"./test/server/*.js\""
+    "test": "npm run test:server && npm run test:browser",
+    "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
+    "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
+    "test:server": "NODE_ENV=test sui-test server",
+    "test:server:watch": "npm run test:server -- --watch"
   },
   "peerDependencies": {
     "prop-types": "15",
@@ -21,7 +24,10 @@
     "history": "3.3.0"
   },
   "devDependencies": {
+    "@s-ui/test": "3",
     "@testing-library/react": "10.0.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "sinon": "9.0.2"
   }
 }

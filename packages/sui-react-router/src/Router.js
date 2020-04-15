@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react'
-import {func, object} from 'prop-types'
-import {routes, component, components} from './InternalPropTypes'
+import PropTypes from 'prop-types'
+import {routes, components} from './InternalPropTypes'
 import {createTransitionManager} from './createTransitionManager'
-import {fromReactTreeToJSON} from '../lib/utils/react-utils'
+import {fromReactTreeToJSON} from './utils/react-utils'
 import {createRouterObject} from './utils/RouterUtils'
 
 import RRContext from './ReactRouterContext'
 
 const Router = ({
-  components,
   children,
-  routes,
-  render,
-  matchContext,
-  params,
+  components,
   history,
+  matchContext,
   onError,
+  params,
+  render,
+  routes,
   ...props
 }) => {
   const transitionManager =
@@ -86,14 +86,14 @@ Router.defaultProps = {
 
 Router.propTypes = {
   children: routes,
-  component,
+  component: PropTypes.elementType,
   components,
-  history: object,
-  matchContext: object,
-  params: object,
-  render: func,
-  onError: func,
-  router: object,
+  history: PropTypes.object,
+  matchContext: PropTypes.object,
+  onError: PropTypes.func,
+  params: PropTypes.object,
+  render: PropTypes.func,
+  router: PropTypes.object,
   routes // alias for children
 }
 
