@@ -3,8 +3,8 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/useRouterHistory.js
 
 import createBrowserHistory from 'history/lib/createBrowserHistory'
-import useQueries from 'history/lib/useQueries'
 import useBasename from 'history/lib/useBasename'
+import useQueries from 'history/lib/useQueries'
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
