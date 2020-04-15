@@ -55,7 +55,7 @@ const Router = ({
   }, []) // eslint-disable-line
 
   return (
-    <RRContext.Provider value={{router: state.router, params: state.params}}>
+    <RRContext.Provider value={state}>
       {render({
         components: state.components,
         params: state.params,
