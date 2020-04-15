@@ -1,11 +1,11 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/Link.js
 
-import React, {useCallback, useContext} from 'react'
+import React, {useCallback} from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
 import invariant from './utils/invariant'
-import RRContext from './ReactRouterContext'
+import {useRouter} from './hooks'
 
 /**
  * Check if the event is created with some key being held to know it could be for a some contextual stuff
@@ -48,7 +48,7 @@ const Link = ({
   to,
   ...restOfProps
 }) => {
-  const {router} = useContext(RRContext)
+  const router = useRouter()
 
   const handleClick = useCallback(
     event => {
