@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.4.0 (2020-04-17)
+
+
+### Features
+
+* use parse to improve JSON ([2ea0d3f](https://github.com/SUI-Components/sui/commit/2ea0d3fd74b72a7eba034b636b3367b669da456a))
+
+
+
 # 6.3.0 (2020-03-31)
 
 
