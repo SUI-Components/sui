@@ -15,7 +15,7 @@ $ npm install @s-ui/react-head
 
 ## How to use
 
-### Usage
+### Usage
 
 Using `<Head>` component will allow you to define the tags inside the `<head>` element. You could use two different ways: using the `children` of the component with the desired tags or using the props.
 
