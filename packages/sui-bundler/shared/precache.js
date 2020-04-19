@@ -1,17 +1,16 @@
-const ALL = '::all::'
-
-exports.navigateFallbackWhitelist = whitelist => {
-  if (!whitelist || whitelist[0] === ALL) {
-    return []
+exports.navigateFallbackDenylist = denylist => {
+  if (!denylist) {
+    return undefined
   }
-  return whitelist.map(exp => new RegExp(exp))
+
+  return denylist.map(exp => new RegExp(exp))
 }
 
-exports.navigateFallback = whitelist => {
-  if (!whitelist) {
-    return ''
+exports.navigateFallback = (fallback, publicPath) => {
+  if (!fallback) {
+    return undefined
   }
-  return 'index.html'
+  return publicPath + fallback
 }
 
 exports.runtimeCaching = runtime => {
