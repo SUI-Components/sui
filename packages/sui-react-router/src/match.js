@@ -3,8 +3,7 @@
 import {REPLACE} from 'history/lib/Actions'
 import {fromReactTreeToJSON} from './utils/ReactUtils'
 import {createTransitionManager} from './createTransitionManager'
-import {createRouterObject} from './utils/RouterUtils'
-import createMemoryHistory from './createMemoryHistory'
+import {createRouterHistory, createRouterObject} from './utils/RouterUtils'
 
 /**
  * A high-level API to be used for server-side rendering.
@@ -14,11 +13,11 @@ import createMemoryHistory from './createMemoryHistory'
  *
  * Note: You probably don't want to use this in a browser unless you're using
  * server-side rendering with async routes.
- * @param {{ routes: Array, history?: object, location }} options
+ * @param {{ history?: object, location, routes: Array }} options
  * @param {Function} callback Function to be execute after match
  */
 export default async (
-  {routes, history = createMemoryHistory(), location},
+  {history = createRouterHistory(), location, routes},
   callback
 ) => {
   const jsonRoutes = fromReactTreeToJSON(routes)
