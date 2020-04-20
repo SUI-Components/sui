@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {routes, components} from './InternalPropTypes'
 import {createTransitionManager} from './createTransitionManager'
 import {fromReactTreeToJSON} from './utils/ReactUtils'
-import {createRouterObject} from './utils/RouterUtils'
+import {createRouterHistory, createRouterObject} from './utils/RouterUtils'
 
 import RRContext from './Context'
 
@@ -11,27 +11,30 @@ const renderRouterContent = ({components, params, router, props}) =>
   components.reduceRight((acc, component) => {
     return h(component, {
       ...props,
+      children: acc,
+      location: router.location,
       params,
-      router,
-      children: acc
+      routeParams: params,
+      router
     })
   }, null)
 
 const Router = ({
   children,
   components,
-  history,
+  history = createRouterHistory(),
   matchContext,
   onError,
   params,
   routes,
+  router: routerFromProps,
   ...props
 }) => {
   const transitionManager =
     matchContext?.transitionManager ??
     createTransitionManager({history, jsonRoutes: fromReactTreeToJSON(routes)})
   const router =
-    props?.router ??
+    routerFromProps ??
     createRouterObject(history, transitionManager, {
       location: null,
       routes: null,
