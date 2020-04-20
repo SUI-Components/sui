@@ -1,12 +1,10 @@
 import {expect} from 'chai'
 import React from 'react'
 import {Route, Redirect, match} from '../../src'
-import createMemoryHistory from '../../src/createMemoryHistory'
 
 const getRedirectLocationFor = ({path = '/', withRoutes}) => {
-  const history = createMemoryHistory(path)
   return new Promise(resolve => {
-    match({routes: withRoutes, history}, (_, redirectLocation) =>
+    match({routes: withRoutes, location: path}, (_, redirectLocation) =>
       resolve(redirectLocation)
     )
   })
