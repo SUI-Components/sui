@@ -21,7 +21,7 @@ Using `<Head>` component will allow you to define the tags inside the `<head>` e
 
 ```js
 import React from 'react'
-import { HeadProvider }, Head from 'react-head'
+import { HeadProvider }, Head from '@s-ui/react-head'
 
 const App = () => (
   <HeadProvider>
