@@ -35,10 +35,13 @@ type Router = RouterState & {
   isActive: (location: LocationDescriptor, indexOnly: boolean) => Boolean
 }
 
-type RouterState = {
+export type RouteInfo = {
   location: Location
   routes: Array<Route>
   params: Params
+}
+
+type RouterState = RouteInfo & {
   components: Array<Component>
 }
 
