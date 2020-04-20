@@ -14,7 +14,7 @@ function hasChildren(node) {
 }
 
 export const Tree = {
-  reduce: function reduce(reducerFn, init, node) {
+  reduce(reducerFn, init, node) {
     // Calculate the reduced value for this node
     const acc = reducerFn(init, node)
     // Stop processing tree structure if no further children
