@@ -34,25 +34,29 @@ export default (
 
 In order to be able to use the `@s-ui/react-router` on the client you should wrap your application with the `<Router>` component. It will provide the needed context to be able to use components like `<Link>` inside your app.
 
+#### If you only need Client Side Rendering
+
 ```js
 /* Basic example by using directly Router */
-import {browserHistory, Router} from '@s-ui/react-router'
+import {Router} from '@s-ui/react-router'
 import routes from './routes'
 
 // you're ready to render (or hydrate if you already has rendered your app in the server)
 // you MUST wrap your app with the `<Router>` app that will provide the needed context
 ReactDOM.hydrate(
-  <Router history={browserHistory}>{routes}</Router>,
+  <Router>{routes}</Router>,
   document.getElementById('app')
 )
 ```
 
+### If you are doing Server Side Rendering
+
 ```js
 /* Advanced example using match method */
-import {browserHistory, match, Router} from '@s-ui/react-router'
+import {match, Router} from '@s-ui/react-router'
 import routes from './routes'
 
-match({routes, history: browserHistory}, (err, redirectLocation, renderProps) => {
+match({routes}, (err, redirectLocation, renderProps) => {
   // if we have an error, log it and do nothing more
   if (err) {
     console.error(err)
@@ -68,7 +72,7 @@ match({routes, history: browserHistory}, (err, redirectLocation, renderProps) =>
   // you're ready to render (or hydrate if you already has rendered your app in the server)
   // you MUST wrap your app with the `<Router>` app that will provide the needed context
   ReactDOM.hydrate(
-    <Router {...renderProps} history={browserHistory} />,
+    <Router {...renderProps} />,
     document.getElementById('app')
   )
 })
@@ -78,16 +82,13 @@ match({routes, history: browserHistory}, (err, redirectLocation, renderProps) =>
 
 ```js
 import {match, Router} from '@s-ui/react-router'
-import createMemoryHistory from '@s-ui/react-router/lib/createMemoryHistory'
 import {renderToString} from 'react-dom/server'
 import routes from './routes'
 
 export default (req, res, next) => {
   const {url, query} = req
 
-  const history = createMemoryHistory(url)
-
-  match({routes, history}, async (error, redirectLocation, renderProps) => {
+  match({location: req.url, routes}, async (error, redirectLocation, renderProps) => {
     if (error) return next(error)
     if (redirectLocation) return res.redirect(301, redirectLocation.pathname)
     if (!renderProps) return next()
@@ -417,7 +418,7 @@ Contains methods relevant to routing. Most useful for imperatively transitioning
 The routes registered with the router.
 
 #### `routeParams`
-A subset of `props.params` that were directly specified in this component's route. For example, if the route's path is `users/:userId` and the URL is `/users/123/portfolios/345` then `props.routeParams` will be `{userId: '123'}`, and `props.params` will be `{userId: '123', portfolioId: '345'}`.
+Alias for `params`
 
 #### `children`
 The matched child route element to be rendered.
@@ -445,6 +446,8 @@ function App (props) {
 
 ## Histories
 
+By default, `@s-ui/react-router` automatically detects the correct history depending on your environment but you could still access to these histories in case you need them.
+
 ### `browserHistory`
 `browserHistory` uses the HTML5 History API when available, and falls back to full refreshes otherwise. `browserHistory` requires additional configuration on the server side to serve up URLs, but is the generally preferred solution for modern web pages.
 
@@ -455,6 +458,8 @@ function App (props) {
 ## Utilities
 
 ### `match({ routes, location, [history], [...options] }, cb)`
+
+*Note: You probably don't want to use this in a browser unless you're doing server-side rendering of async routes.*
 
 This function is to be used for server-side rendering. It matches a set of routes to a location, without rendering, and calls a `callback(error, redirectLocation, renderProps)` when it's done.
 
@@ -467,8 +472,5 @@ The three arguments to the callback function you pass to `match` are:
 
 If all three parameters are `undefined`, this means that there was no route found matching the given location.
 
-*Note: You probably don't want to use this in a browser unless you're doing server-side rendering of async routes.*
-
 ## Next features
 - [ ] Upgrade to History v6: In order to improve bundle size and avoid naming collisions with React hooks.
-- [ ] Hooks: Add hooks to be able to access different router context properties in order to simplify its usage.
