@@ -17,6 +17,12 @@ const findRedirect = nodes => {
   return tail && tail.redirect ? tail : null
 }
 
+/**
+ * Get a component passing the route info and returning a promise with the result
+ * @param {(location: object, callback: Function) => Promise<object>} getComponent Function to retrieve a component async
+ * @param {import('./types').RouteInfo} routeInfo
+ * @returns {Promise<import('react').ReactElement>}
+ */
 const makePromise = (getComponent, routeInfo) =>
   new Promise((resolve, reject) => {
     getComponent(routeInfo, (err, component) =>
@@ -41,7 +47,56 @@ const createComponents = ({nodes, routeInfo}) => {
   return Promise.all(componentsPromises)
 }
 
-// From tree to Array
+const createReducerRoutesTree = location => (acc, node) => {
+  let {remainingPathname, paramNames, paramValues} = acc
+  if (acc.isFinished) return acc
+  if (node.index) return acc
+
+  const {path: pattern = ''} = node
+
+  acc = {
+    ...acc,
+    nodes: acc.nodes.filter(n => n.level < node.level)
+  }
+
+  if (pattern.charAt(0) === '/') {
+    remainingPathname = location.pathname
+    paramNames = []
+    paramValues = []
+  }
+
+  if (pattern === '') {
+    return {
+      ...acc,
+      nodes: [...acc.nodes, node]
+    }
+  }
+
+  const matched = matchPattern(pattern, remainingPathname)
+
+  if (matched) {
+    acc = {
+      remainingPathname: matched.remainingPathname,
+      paramNames: [...paramNames, ...matched.paramNames],
+      paramValues: [...paramValues, ...matched.paramValues],
+      nodes: [...acc.nodes, node]
+    }
+  }
+
+  if (matched?.remainingPathname === '') {
+    acc.isFinished = checkIntegrity(acc.nodes)
+  }
+
+  return acc
+}
+
+/**
+ *
+ * @param {Object} tree
+ * @param {import('./types').Location} location
+ * @param {String=} remainingPathname
+ * @returns {Promise<Object>}
+ */
 const matchRoutes = async (tree, location, remainingPathname) => {
   if (remainingPathname === undefined) {
     if (location.pathname.charAt(0) !== '/') {
@@ -54,51 +109,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
   }
 
   const match = Tree.reduce(
-    (acc, node) => {
-      let {remainingPathname, paramNames, paramValues} = acc
-      if (acc.isFinished) return acc
-      if (node.index) return acc
-
-      const pattern = node.path || ''
-
-      acc = {
-        ...acc,
-        nodes: acc.nodes.filter(n => n.level < node.level)
-      }
-
-      if (pattern.charAt(0) === '/') {
-        remainingPathname = location.pathname
-        paramNames = []
-        paramValues = []
-      }
-
-      if (pattern === '') {
-        return {
-          ...acc,
-          nodes: [...acc.nodes, node]
-        }
-      }
-
-      const matched = matchPattern(pattern, remainingPathname)
-
-      if (matched) {
-        acc = {
-          remainingPathname: matched.remainingPathname,
-          paramNames: [...paramNames, ...matched.paramNames],
-          paramValues: [...paramValues, ...matched.paramValues],
-          nodes: [...acc.nodes, node]
-        }
-      }
-
-      if (matched?.remainingPathname === '') {
-        acc = {
-          ...acc,
-          isFinished: checkIntegrity(acc.nodes)
-        }
-      }
-
-      return acc
-    },
+    createReducerRoutesTree(location),
     {
       remainingPathname,
       paramNames: [],
@@ -123,19 +134,8 @@ const matchRoutes = async (tree, location, remainingPathname) => {
   return {routeInfo, components}
 }
 
-export const createTransitionManager = ({
-  history: externalHistory,
-  jsonRoutes
-}) => {
-  const history = externalHistory || createMemoryHistory()
-  let state = {
-    // components,
-    // router,
-    // matchContext: {transitionManager, router},
-    // location,
-    // params,
-    // routes
-  }
+export const createTransitionManager = ({history, jsonRoutes}) => {
+  let state = {}
 
   const match = async location => {
     location = location
