@@ -17,9 +17,10 @@ import {createRouterHistory, createRouterObject} from './utils/RouterUtils'
  * @param {Function} callback Function to be execute after match
  */
 export default async (
-  {history = createRouterHistory(), location, routes},
+  {history: externalHistory, location, routes},
   callback
 ) => {
+  const history = externalHistory || createRouterHistory(location)
   const jsonRoutes = fromReactTreeToJSON(routes)
   const transitionManager = createTransitionManager({
     history,

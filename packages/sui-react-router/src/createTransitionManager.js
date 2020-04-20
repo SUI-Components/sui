@@ -2,7 +2,6 @@ import {Tree} from './utils/Tree'
 import _isActive from './utils/isActive'
 import {formatPattern, matchPattern} from './PatternUtils'
 import warning from './utils/warning'
-import createMemoryHistory from './createMemoryHistory'
 
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
@@ -35,6 +34,7 @@ const createComponents = ({nodes, routeInfo}) => {
   if (indexRoute !== -1 && indexRoute === nodes.length - 1) {
     nodes = [...nodes, nodes[indexRoute].indexNode]
   }
+
   // create an array of promises with all components
   const componentsPromises = nodes
     .filter(node => node.component || node.getComponent)
