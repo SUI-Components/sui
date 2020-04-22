@@ -41,7 +41,7 @@ const initialFlush = res => {
 export default (req, res, next) => {
   const {url, query} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
-  const {skipSSR, criticalCSS} = req
+  const {skipSSR, criticalCSS, prpl} = req
 
   if (skipSSR) {
     return next()
@@ -56,6 +56,17 @@ export default (req, res, next) => {
       .replace(
         'rel="stylesheet"',
         'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
+      )
+      .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
+  }
+
+  if (prpl) {
+    headTplPart = headTplPart
+      .replace(
+        HEAD_OPENING_TAG,
+        `${HEAD_OPENING_TAG}${prpl.hints.reduce((acc, hint) => {
+          return `${acc}<link rel="preload" as="script" href="${hint.url}">\n`
+        }, '\n')}`
       )
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
