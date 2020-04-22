@@ -48,7 +48,7 @@ export default config => (req, res, next) => {
     tablet: 't',
     mobile: 'm'
   }
-  const device = deviceTypes[type] || deviceTypes.desktop
+  const device = deviceTypes[type] || deviceTypes.mobile
   const {url} = req
 
   match(
