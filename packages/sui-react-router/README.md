@@ -124,6 +124,7 @@ export default (req, res, next) => {
 
 - [Utilities](#utilities)
   - [`match()`](#match-routes-location-history-options--cb)
+  - [`withRouter`](#withroutercomponent-options)
 
 
 ## Components
@@ -474,3 +475,33 @@ If all three parameters are `undefined`, this means that there was no route foun
 
 ## Next features
 - [ ] Upgrade to History v6: In order to improve bundle size and avoid naming collisions with React hooks.
+
+### `withRouter(Component, displayName)`
+A HoC (higher-order component) that wraps another component to enhance its props with router props.
+
+```
+withRouterProps = {
+  ...componentProps,
+  router,
+  params,
+  location,
+  routes
+}
+```
+
+Pass in your component and it will return the wrapped component.
+
+You can explicit specify `router` as a prop to the wrapper component to override the router object from context.
+
+#### Options
+
+##### `displayName`
+You could define a manual `displayName` for your component. If not provided, it will use `withRouter(wrappedComponentDisplayname)`, where `wrappedComponentDisplayname` is the displayName (or name of the function/class as a fallback) of the enhanced component.
+
+```js
+const WrappedComponent = withRouter(MyComponent, { displayName: 'AwesomeComponentWithRouter' })
+WrappedComponent.displayName // AwesomeComponentWithRouter
+
+const WrappedComponent = withRouter(MyComponent)
+WrappedComponent.displayName // withRouter(MyComponent)
+```
