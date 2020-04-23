@@ -18,7 +18,7 @@ const zlib = require('zlib')
 const hasBrotliSupport = Boolean(zlib.brotliCompress)
 
 const {
-  navigateFallbackWhitelist,
+  navigateFallbackDenylist,
   navigateFallback,
   runtimeCaching
 } = require('./shared/precache')
@@ -124,15 +124,19 @@ module.exports = {
       config.offline,
       () =>
         new GenerateSW({
-          dontCacheBustUrlsMatching: /\.\w{8}\./,
+          skipWaiting: true,
+          clientsClaim: true,
+          dontCacheBustURLsMatching: /\.\w{8}\./,
           directoryIndex: config.offline.directoryIndex,
-          navigateFallback:
-            PUBLIC_PATH + navigateFallback(config.offline.whitelist),
-          navigateFallbackWhitelist: navigateFallbackWhitelist(
-            config.offline.whitelist
+          navigateFallback: navigateFallback(
+            config.offline.fallback,
+            PUBLIC_PATH
+          ),
+          navigateFallbackDenylist: navigateFallbackDenylist(
+            config.offline.denylist
           ),
           runtimeCaching: runtimeCaching(config.offline.runtime),
-          globIgnores: ['**/*.map', '**/asset-manifest.json']
+          exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE\.txt$/]
         })
     ),
     when(config.externals, () => new Externals({files: config.externals})),
