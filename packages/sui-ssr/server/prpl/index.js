@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import routes from 'routes'
 import {match} from 'react-router'
 import https from 'https'
@@ -6,9 +5,10 @@ import parser from 'ua-parser-js'
 
 const PRODUCTION = 'production'
 const {NODE_ENV = PRODUCTION} = process.env
-const __CACHE__ = {}
+let __REQUESTING__ = false
+let __CACHE__ = {}
 
-const generateMinimalCSSHash = routes => {
+const generatePRPLHash = routes => {
   return routes.reduce((acc, route) => {
     route.path && (acc += route.path)
     return acc
@@ -16,10 +16,14 @@ const generateMinimalCSSHash = routes => {
 }
 
 const logMessage = message =>
-  NODE_ENV !== PRODUCTION && console.log('[CRITICAL CSS]', message)
+  NODE_ENV !== PRODUCTION && console.log('[PRPL]', message)
 
 export default config => (req, res, next) => {
-  if (!config || process.env.DISABLE_CRITICAL_CSS === 'true') {
+  if (req.url.match('x-prpl-cache-invalidate')) {
+    __CACHE__ = {}
+  }
+
+  if (!config || process.env.DISABLE_PRPL === 'true') {
     return next()
   }
 
@@ -34,9 +38,9 @@ export default config => (req, res, next) => {
 
   const ua = parser(req.get('User-Agent'))
   const urlRequest =
-    (process.env.CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol) +
-    ':/' +
-    (process.env.CRITICAL_CSS_HOST || config.host || req.hostname) +
+    (process.env.PRPL_PROTOCOL || config.protocol || req.protocol) +
+    '://' +
+    (process.env.PRPL_HOST || config.host || req.hostname) +
     req.url
   const type = ua.device.type
   const deviceTypes = {
@@ -44,7 +48,7 @@ export default config => (req, res, next) => {
     tablet: 't',
     mobile: 'm'
   }
-  const device = deviceTypes[type] || deviceTypes.desktop
+  const device = deviceTypes[type] || deviceTypes.mobile
   const {url} = req
 
   match(
@@ -58,36 +62,49 @@ export default config => (req, res, next) => {
         return next()
       }
 
-      const hash = generateMinimalCSSHash(renderProps.routes) + '|' + device
-      const criticalCSS = __CACHE__[hash]
+      const hash = generatePRPLHash(renderProps.routes) + '|' + device
+      const prpl = __CACHE__[hash]
 
-      if (!criticalCSS) {
-        logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
+      if (!prpl && !__REQUESTING__) {
+        logMessage(`Generation PRPL for -> ${urlRequest} with ${hash}`)
 
-        const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
+        const serviceRequestURL = `https://critical-prpl-service.now.sh/prpl?device=${device}&url=${encodeURIComponent(
+          urlRequest
+        )}&cdn=${config.cdn}&strategy=${config.strategy}`
+
         const headers = config.customHeaders
         const options = {
           ...(headers && {headers})
         }
 
+        __REQUESTING__ = true
         https.get(serviceRequestURL, options, res => {
-          let css = ''
+          let json = ''
           if (res.statusCode !== 200) {
             logMessage(`No 200 request, statusCode: ${res.statusCode}`)
 
             return
           }
           res.on('data', data => {
-            css += data
+            json += data
+          })
+          res.on('error', () => {
+            logMessage(`Error Requesting ${serviceRequestURL}`)
+            __REQUESTING__ = false
           })
           res.on('end', () => {
             logMessage(`Add cache entry for ${hash}`)
-            __CACHE__[hash] = css
+            __REQUESTING__ = false
+            try {
+              __CACHE__[hash] = JSON.parse(json)
+            } catch (e) {
+              logMessage('Impossible parse response JSON')
+            }
           })
         })
+      } else {
+        req.prpl = prpl
       }
-
-      criticalCSS && (req.criticalCSS = criticalCSS)
 
       next()
     }
