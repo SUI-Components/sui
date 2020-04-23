@@ -25,6 +25,8 @@ export default config => (req, res, next) => {
 
   if (req.url.match('x-criticalcss-cache-invalidate')) {
     __CACHE__ = {}
+
+    console.log('CriticalCSS cache invalidated')
   }
 
   if (
