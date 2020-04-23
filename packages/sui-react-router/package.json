@@ -20,8 +20,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "classnames": "2.2.6",
-    "history": "3.3.0"
+    "classnames": "2.2.5",
+    "history": "3.3.0",
+    "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
     "@s-ui/test": "3",
