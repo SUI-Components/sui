@@ -3,7 +3,7 @@
 import {expect} from 'chai'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
-import {Router, Route, match} from '../../src/index'
+import {IndexRoute, Router, Route, match} from '../../src/index'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
@@ -97,6 +97,111 @@ describe('<Route>', () => {
       expect(renderedString).to.equal(
         '<div>App<section><h1>Search Results: <em>money</em></h1></section></div>'
       )
+    })
+  })
+
+  describe('receives the needed injected props', () => {
+    it('with a static route', async () => {
+      let injectedProps
+      const HomePage = props => {
+        injectedProps = props
+        return null
+      }
+      const withRoutes = (
+        <Route path="/home" component={HomePage}>
+          home
+        </Route>
+      )
+      await getRenderedString({location: '/home', withRoutes})
+
+      // we have location object with correct data
+      expect(injectedProps.location.pathname).to.equal('/home')
+      expect(injectedProps.location.query).to.deep.equal({})
+      // we have params objects with empty data
+      expect(injectedProps.params).to.deep.equal({})
+      expect(injectedProps.routeParams).to.deep.equal({})
+      // we have the router object
+      expect(injectedProps.router.getCurrentLocation).to.be.a('function')
+      // we have on router same location object
+      expect(injectedProps.router.location).to.equal(injectedProps.location)
+      // we have on router same routes
+      expect(injectedProps.routes[0].path).to.equal('/home')
+      expect(injectedProps.routes[0].component).to.equal(HomePage)
+      expect(injectedProps.router.routes).to.equal(injectedProps.routes)
+      // we have the matched child route element to be rendered.
+      expect(injectedProps.children)
+    })
+
+    it('with a dynamic route', async () => {
+      let injectedProps
+      const SearchPage = props => {
+        injectedProps = props
+        return null
+      }
+      const withRoutes = (
+        <Route path="/search/:keyword" component={SearchPage}>
+          home
+        </Route>
+      )
+      await getRenderedString({location: '/search/cars', withRoutes})
+
+      // we have location object with correct data
+      expect(injectedProps.location.pathname).to.equal('/search/cars')
+      expect(injectedProps.location.query).to.deep.equal({})
+      // we have params objects with empty data
+      expect(injectedProps.params).to.deep.equal({keyword: 'cars'})
+      expect(injectedProps.routeParams).to.deep.equal({keyword: 'cars'})
+      // we have the router object
+      expect(injectedProps.router.getCurrentLocation).to.be.a('function')
+      // we have on router same location object
+      expect(injectedProps.router.location).to.equal(injectedProps.location)
+      // we have on router same routes
+      expect(injectedProps.routes[0].path).to.equal('/search/:keyword')
+      expect(injectedProps.routes[0].component).to.equal(SearchPage)
+      expect(injectedProps.router.routes).to.equal(injectedProps.routes)
+      // we have the matched route info
+      expect(injectedProps.route.path).to.equal('/search/:keyword')
+    })
+
+    it('with nested routes', async () => {
+      let injectedPropsApp
+      let injectedPropsSearch
+
+      const AppPage = props => {
+        injectedPropsApp = props
+        return <div>{props.children}</div>
+      }
+
+      const SearchPage = props => {
+        injectedPropsSearch = props
+        return null
+      }
+
+      const withRoutes = (
+        <Route path="/:lang" component={AppPage}>
+          <IndexRoute
+            component={() => {
+              throw new Error('not here')
+            }}
+          />
+          <Route path="search/:keyword" component={SearchPage} />
+        </Route>
+      )
+      await getRenderedString({location: '/es/search/cars', withRoutes})
+
+      expect(injectedPropsApp.params)
+        .to.deep.equal({
+          lang: 'es',
+          keyword: 'cars'
+        })
+        .to.equal(injectedPropsSearch.params)
+
+      expect(injectedPropsApp.router).to.equal(injectedPropsSearch.router)
+
+      expect(injectedPropsApp.route).to.deep.equal({
+        path: 'search/:keyword',
+        component: SearchPage
+      })
     })
   })
 })
