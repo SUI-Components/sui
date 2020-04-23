@@ -1,45 +1,41 @@
 import React, {createElement as h, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import {routes, components} from './InternalPropTypes'
-import {createTransitionManager} from './createTransitionManager'
-import {fromReactTreeToJSON} from './utils/ReactUtils'
-import {createRouterHistory, createRouterObject} from './utils/RouterUtils'
 
-import RRContext from './Context'
+import {routes, components} from './internal/PropTypes'
+import {fromReactTreeToJSON} from './internal/ReactUtils'
+import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
 
-const renderRouterContent = ({components, params, router, props}) =>
-  components.reduceRight((acc, component) => {
-    return h(component, {
-      ...props,
-      children: acc,
-      location: router.location,
-      params,
-      routeParams: params,
-      router
-    })
-  }, null)
+import {createTransitionManager} from './internal/createTransitionManager'
+import RouterContext from './internal/Context'
+
+const renderRouterContent = ({components, params, router}) =>
+  components.reduceRight(
+    (acc, component) =>
+      h(component, {
+        children: acc,
+        location: router.location,
+        params,
+        routeParams: params,
+        router,
+        routes: router.routes
+      }),
+    null
+  )
 
 const Router = ({
-  children,
   components,
   history = createRouterHistory(),
   matchContext,
   onError,
   params,
-  routes,
   router: routerFromProps,
-  ...props
+  routes
 }) => {
   const transitionManager =
     matchContext?.transitionManager ??
     createTransitionManager({history, jsonRoutes: fromReactTreeToJSON(routes)})
   const router =
-    routerFromProps ??
-    createRouterObject(history, transitionManager, {
-      location: null,
-      routes: null,
-      params: null
-    })
+    routerFromProps ?? createRouterObject(history, transitionManager)
 
   const [state, setState] = useState({router, params, components})
 
@@ -67,22 +63,15 @@ const Router = ({
   }, []) // eslint-disable-line
 
   return (
-    <RRContext.Provider value={state}>
-      {renderRouterContent({
-        components: state.components,
-        params: state.params,
-        router: state.router,
-        props
-      })}
-    </RRContext.Provider>
+    <RouterContext.Provider value={state}>
+      {renderRouterContent(state)}
+    </RouterContext.Provider>
   )
 }
 
 Router.displayName = 'Router'
 
 Router.propTypes = {
-  children: routes,
-  component: PropTypes.elementType,
   components,
   history: PropTypes.object,
   matchContext: PropTypes.object,

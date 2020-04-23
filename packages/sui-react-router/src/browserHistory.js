@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/useRouterHistory.js
-import canUseDOM from './utils/canUseDOM'
+import canUseDOM from './internal/canUseDOM'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import useBasename from 'history/lib/useBasename'
 import useQueries from 'history/lib/useQueries'

@@ -1,7 +1,7 @@
-import {Tree} from './utils/Tree'
-import _isActive from './utils/isActive'
-import {formatPattern, matchPattern} from './PatternUtils'
-import warning from './utils/warning'
+import {formatPattern, matchPattern} from '../PatternUtils'
+import internalIsActive from './isActive'
+import {Tree} from './Tree'
+import warning from './warning'
 
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
@@ -19,7 +19,7 @@ const findRedirect = nodes => {
 /**
  * Get a component passing the route info and returning a promise with the result
  * @param {(location: object, callback: Function) => Promise<object>} getComponent Function to retrieve a component async
- * @param {import('./types').RouteInfo} routeInfo
+ * @param {import('../types').RouteInfo} routeInfo
  * @returns {Promise<import('react').ReactElement>}
  */
 const makePromise = (getComponent, routeInfo) =>
@@ -93,7 +93,7 @@ const createReducerRoutesTree = location => (acc, node) => {
 /**
  *
  * @param {Object} tree
- * @param {import('./types').Location} location
+ * @param {import('../types').Location} location
  * @param {String=} remainingPathname
  * @returns {Promise<Object>}
  */
@@ -215,7 +215,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
   const isActive = (location, indexOnly) => {
     location = history.createLocation(location)
 
-    return _isActive(
+    return internalIsActive(
       location,
       indexOnly,
       state.location,

@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import Context from './Context'
+import Context from './internal/Context'
 
 const useRouterContext = () => {
   const context = useContext(Context)

@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import invariant from '../../src/utils/invariant'
-import warning from '../../src/utils/warning'
+import invariant from '../../src/internal/invariant'
+import warning from '../../src/internal/warning'
 
 describe('Utils', () => {
   describe('invariant', () => {

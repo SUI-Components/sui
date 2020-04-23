@@ -1,7 +1,7 @@
 /* @global describe */
 
 import {expect} from 'chai'
-import isActive from '../../src/utils/isActive'
+import isActive from '../../src/internal/isActive'
 
 const DEFAULT = {pathname: '/home', query: null}
 const LOCATIONS = {

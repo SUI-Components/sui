@@ -1,8 +1,8 @@
 // from https://github.com/ReactTraining/react-router/blob/v3/modules/RouterUtils.js#L1
 
 import browserHistory from '../browserHistory'
-import canUseDOM from './canUseDOM'
 import createMemoryHistory from '../createMemoryHistory'
+import canUseDOM from './canUseDOM'
 
 /**
  * Create the history that the router will use depending on the environment
@@ -14,11 +14,15 @@ export const createRouterHistory = options =>
  * Create the router object that will be availble in the context with all the needed info
  * @param {Object} history
  * @param {{ isActive: Function }} isActive
- * @param {{ location: String, params, routes }} state
+ * @param {{ location: String, params: Object, routes: Array }=} state
  * @returns { import('../types').Router }
  */
-export const createRouterObject = (history, isActive, state) => {
-  const {location, params, routes} = state || {}
+export const createRouterObject = (
+  history,
+  isActive,
+  state = {location: null, params: null, routes: null}
+) => {
+  const {location, params, routes} = state
 
   return {
     ...history,

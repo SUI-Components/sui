@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import invariant from './utils/invariant'
+import invariant from './internal/invariant'
 
 const Route = () =>
   invariant(
