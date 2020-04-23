@@ -23,7 +23,7 @@ export default config => (req, res, next) => {
     __CACHE__ = {}
   }
 
-  if (!config || process.env.DISABLE_PRPL === 'true') {
+  if (req.skipSSR || !config || process.env.DISABLE_PRPL === 'true') {
     return next()
   }
 
@@ -97,6 +97,7 @@ export default config => (req, res, next) => {
             __REQUESTING__ = false
             try {
               __CACHE__[hash] = JSON.parse(json)
+              console.log({json})
             } catch (e) {
               logMessage('Impossible parse response JSON')
             }
