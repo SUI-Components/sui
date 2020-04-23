@@ -4,6 +4,7 @@
 /* components */
 export {default as Router} from './Router'
 export {default as Link} from './Link'
+export {default as withRouter} from './withRouter'
 
 /* components (configuration) */
 export {default as Redirect} from './Redirect'
