@@ -6,7 +6,7 @@ import parser from 'ua-parser-js'
 
 const PRODUCTION = 'production'
 const {NODE_ENV = PRODUCTION} = process.env
-const __CACHE__ = {}
+let __CACHE__ = {}
 
 const generateMinimalCSSHash = routes => {
   return routes.reduce((acc, route) => {
@@ -19,6 +19,10 @@ const logMessage = message =>
   NODE_ENV !== PRODUCTION && console.log('[CRITICAL CSS]', message)
 
 export default config => (req, res, next) => {
+  if (req.url.match('x-criticalcss-cache-invalidate')) {
+    __CACHE__ = {}
+  }
+
   if (!config || process.env.DISABLE_CRITICAL_CSS === 'true') {
     return next()
   }
