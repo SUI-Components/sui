@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.6.0 (2020-04-23)
+
+
+### Features
+
+* send hints preload with headers ([8c6a349](https://github.com/SUI-Components/sui/commit/8c6a3498ad0a62af580eb8e452c8d315856dee60))
+
+
+
 # 6.5.0 (2020-04-23)
 
 

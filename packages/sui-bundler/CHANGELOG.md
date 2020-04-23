@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.48.0 (2020-04-23)
+
+
+### Features
+
+* update workbox-webpack-plugin ([e219661](https://github.com/SUI-Components/sui/commit/e219661c25d51e9a27dd435508b243e6ed0c94f2))
+
+
+
 # 5.47.0 (2020-03-11)
 
 

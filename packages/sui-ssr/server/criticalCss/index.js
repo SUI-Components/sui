@@ -19,12 +19,12 @@ const logMessage = message =>
   NODE_ENV !== PRODUCTION && console.log('[CRITICAL CSS]', message)
 
 export default config => (req, res, next) => {
-  if (req.url.match('x-criticalcss-cache-invalidate')) {
-    __CACHE__ = {}
+  if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
+    return next()
   }
 
-  if (!config || process.env.DISABLE_CRITICAL_CSS === 'true') {
-    return next()
+  if (req.url.match('x-criticalcss-cache-invalidate')) {
+    __CACHE__ = {}
   }
 
   if (
@@ -86,6 +86,7 @@ export default config => (req, res, next) => {
           })
           res.on('end', () => {
             logMessage(`Add cache entry for ${hash}`)
+            console.log({css})
             __CACHE__[hash] = css
           })
         })

@@ -33,8 +33,19 @@ const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const initialFlush = res => {
+const initialFlush = (res, prpl) => {
   res.type(ssrConfig.serverContentType)
+  if (prpl) {
+    res.set(
+      'Link',
+      prpl.hints
+        .reduce((acc, hint) => {
+          return `${acc},<${hint.url}>; rel=preload; as=script`
+        }, '')
+        .replace(/,/, '')
+    )
+  }
+
   res.flush()
 }
 
@@ -56,17 +67,6 @@ export default (req, res, next) => {
       .replace(
         'rel="stylesheet"',
         'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
-      )
-      .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
-  }
-
-  if (prpl) {
-    headTplPart = headTplPart
-      .replace(
-        HEAD_OPENING_TAG,
-        `${HEAD_OPENING_TAG}${prpl.hints.reduce((acc, hint) => {
-          return `${acc}<link rel="preload" as="script" href="${hint.url}">\n`
-        }, '\n')}`
       )
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
@@ -99,7 +99,7 @@ export default (req, res, next) => {
 
       // Flush if early-flush is enabled
       if (req.app.locals.earlyFlush) {
-        initialFlush(res)
+        initialFlush(res, prpl)
       }
 
       const context = await contextFactory(
