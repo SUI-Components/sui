@@ -473,9 +473,6 @@ The three arguments to the callback function you pass to `match` are:
 
 If all three parameters are `undefined`, this means that there was no route found matching the given location.
 
-## Next features
-- [ ] Upgrade to History v6: In order to improve bundle size and avoid naming collisions with React hooks.
-
 ### `withRouter(Component, displayName)`
 A HoC (higher-order component) that wraps another component to enhance its props with router props.
 
@@ -505,3 +502,6 @@ WrappedComponent.displayName // AwesomeComponentWithRouter
 const WrappedComponent = withRouter(MyComponent)
 WrappedComponent.displayName // withRouter(MyComponent)
 ```
+
+## Next features
+- [ ] Upgrade to History v6: In order to improve bundle size and avoid naming collisions with React hooks.
