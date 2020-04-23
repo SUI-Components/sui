@@ -190,6 +190,15 @@ In windows system filenames with `~` could produce errors. To avoid that you can
 ## Offline
 
 Offline feature is deactivated by default. If you want to activate, you should put `offline: true` in the sui-bundler configuration in your package.json. Also, you need to configure a serviceWorker in the entry point of your app:
+Or you can setup several options:
+
+```json
+"offline": {
+  "fallback": "index.html",
+}
+```
+
+Where fallback is the page that you want to serve when the requested page don`t match with any cache entry. In a SPA scenerio usually you will want put `index.html` there
 
 ```js
 import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
@@ -225,7 +234,6 @@ You could use it to be used offline:
 
 ```js
 "offline": {
-  whitelist: ["::all::"]
   "runtime": [{
     "urlPattern": "ms-mt--api-web\\.spain\\.schibsted\\.io",
     "handler": "networkFirst"
