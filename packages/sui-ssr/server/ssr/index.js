@@ -34,15 +34,26 @@ const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const initialFlush = res => {
+const initialFlush = (res, prpl) => {
   res.type(ssrConfig.serverContentType)
+  if (prpl) {
+    res.set(
+      'Link',
+      prpl.hints
+        .reduce((acc, hint) => {
+          return `${acc},<${hint.url}>; rel=preload; as=script`
+        }, '')
+        .replace(/,/, '')
+    )
+  }
+
   res.flush()
 }
 
 export default (req, res, next) => {
   const {url, query} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
-  const {skipSSR, criticalCSS} = req
+  const {skipSSR, criticalCSS, prpl} = req
 
   if (skipSSR) {
     return next()
@@ -89,7 +100,7 @@ export default (req, res, next) => {
 
       // Flush if early-flush is enabled
       if (req.app.locals.earlyFlush) {
-        initialFlush(res)
+        initialFlush(res, prpl)
       }
       const context = await contextFactory(
         createServerContextFactoryParams(req)

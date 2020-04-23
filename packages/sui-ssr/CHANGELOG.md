@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.6.0 (2020-04-23)
+
+
+### Features
+
+* send hints preload with headers ([8c6a349](https://github.com/SUI-Components/sui/commit/8c6a3498ad0a62af580eb8e452c8d315856dee60))
+
+
+
+# 6.5.0 (2020-04-23)
+
+
+### Features
+
+* add support for the prpl service ([6e60e5b](https://github.com/SUI-Components/sui/commit/6e60e5bef8aba66c5f26ebe6d7ed9cad066eb1a3))
+* mobile as default prpl device ([820e79f](https://github.com/SUI-Components/sui/commit/820e79fa534715f1b443062387ba3e760af83a62))
+* remove development mode ([302aee4](https://github.com/SUI-Components/sui/commit/302aee4b6f253431dbae8a9a6f940e411425a522))
+
+
+
 # 6.4.0 (2020-04-17)
 
 
