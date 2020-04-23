@@ -10,9 +10,9 @@ import RouterContext from './internal/Context'
 
 const renderRouterContent = ({components, params, router}) =>
   components.reduceRight(
-    (acc, component) =>
+    (children, component) =>
       h(component, {
-        children: acc,
+        children, // accumulate is children
         location: router.location,
         params,
         routeParams: params,
@@ -40,25 +40,18 @@ const Router = ({
   const [state, setState] = useState({router, params, components})
 
   useEffect(() => {
-    const unlisten = matchContext.transitionManager.listen((err, nextState) => {
+    const handleTransition = (err, nextState) => {
       if (err) {
-        if (onError) {
-          return onError(err)
-        }
+        if (onError) return onError(err)
         throw err
       }
 
       const {params, components, location} = nextState
-      const nextRouter = {
-        ...state.router,
-        params,
-        location,
-        routes
-      }
-
+      const nextRouter = {...state.router, params, location, routes}
       setState({router: nextRouter, params, components})
-    })
+    }
 
+    const unlisten = matchContext.transitionManager.listen(handleTransition)
     return () => unlisten()
   }, []) // eslint-disable-line
 
