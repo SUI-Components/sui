@@ -22,7 +22,7 @@ export default config => (req, res, next) => {
   const logMessage = logMessageFactory(req.url)
 
   if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
-    logMessage('Skip middleware because is inactive')
+    logMessage('Skip middleware because it is inactive')
     return next()
   }
 

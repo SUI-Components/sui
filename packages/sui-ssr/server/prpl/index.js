@@ -25,7 +25,7 @@ export default config => (req, res, next) => {
   }
 
   if (req.skipSSR || !config || process.env.DISABLE_PRPL === 'true') {
-    logMessage('Skip middleware because is inactive')
+    logMessage('Skip middleware because it is inactive')
     return next()
   }
 
