@@ -32,7 +32,7 @@ export default config => (req, res, next) => {
     Array.isArray(config.blackListURLs) &&
     config.blackListURLs.some(regex => req.url.match(regex))
   ) {
-    logMessage('Skip middleware because url it is blacklisted')
+    logMessage('Skip middleware because url is blacklisted')
     return next()
   }
 

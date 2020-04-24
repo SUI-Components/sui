@@ -41,7 +41,7 @@ export default config => (req, res, next) => {
     Array.isArray(currentConfig.blackListURLs) &&
     currentConfig.blackListURLs.some(regex => req.url.match(regex))
   ) {
-    logMessage('Skip middleware because url it is blacklisted')
+    logMessage('Skip middleware because url is blacklisted')
     return next()
   }
 
@@ -101,7 +101,7 @@ export default config => (req, res, next) => {
             __REQUESTING__ = false
             try {
               __CACHE__[hash] = JSON.parse(json)
-              logMessage(`Add cache entry for ${hash} because`)
+              logMessage(`Add cache entry for ${hash}`)
             } catch (e) {
               logMessage('Impossible parse response JSON')
             }
