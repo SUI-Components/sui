@@ -218,9 +218,11 @@ return (<${componentInPascal} />)
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
 import {render} from '@testing-library/react'
+import '@s-ui/studio/src/patcher-mocha'
 
 chai.use(chaiDOM)
 
+// use describe.context.default if using context in demo (context.js)
 describe('${componentInPascal}', () => {
   it('Render', () => {
     render(<${componentInPascal} />)
