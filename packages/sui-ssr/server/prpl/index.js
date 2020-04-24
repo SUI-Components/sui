@@ -3,8 +3,6 @@ import {match} from 'react-router'
 import https from 'https'
 import parser from 'ua-parser-js'
 
-const PRODUCTION = 'production'
-const {NODE_ENV = PRODUCTION} = process.env
 let __REQUESTING__ = false
 let __CACHE__ = {}
 
@@ -15,40 +13,43 @@ const generatePRPLHash = routes => {
   }, '')
 }
 
-const logMessage = message =>
-  NODE_ENV !== PRODUCTION && console.log('[PRPL]', message)
+const logMessageFactory = url => message =>
+  process.env.VERBOSE &&
+  console.log(`\u001b[32m[PRPL](${url})\u001b[0m`, message)
 
 export default config => (req, res, next) => {
+  const logMessage = logMessageFactory(req.url)
   if (req.url.match('x-prpl-cache-invalidate')) {
+    logMessage('Cache invalidate')
     __CACHE__ = {}
   }
 
   if (req.skipSSR || !config || process.env.DISABLE_PRPL === 'true') {
+    logMessage('Skip middleware because is inactive')
     return next()
+  }
+
+  const currentConfig = {
+    ...config,
+    ...config[process.env.NODE_ENV],
+    ...config[process.env.STAGE]
   }
 
   if (
-    config &&
-    config.blackListURLs &&
-    Array.isArray(config.blackListURLs) &&
-    config.blackListURLs.some(regex => req.url.match(regex))
+    currentConfig &&
+    currentConfig.blackListURLs &&
+    Array.isArray(currentConfig.blackListURLs) &&
+    currentConfig.blackListURLs.some(regex => req.url.match(regex))
   ) {
+    logMessage('Skip middleware because url it is blacklisted')
     return next()
   }
 
-  const ua = parser(req.get('User-Agent'))
   const urlRequest =
-    (process.env.PRPL_PROTOCOL || config.protocol || req.protocol) +
+    (process.env.PRPL_PROTOCOL || currentConfig.protocol || req.protocol) +
     '://' +
-    (process.env.PRPL_HOST || config.host || req.hostname) +
+    (process.env.PRPL_HOST || currentConfig.host || req.hostname) +
     req.url
-  const type = ua.device.type
-  const deviceTypes = {
-    desktop: 'd',
-    tablet: 't',
-    mobile: 'm'
-  }
-  const device = deviceTypes[type] || deviceTypes.mobile
   const {url} = req
 
   match(
@@ -62,17 +63,20 @@ export default config => (req, res, next) => {
         return next()
       }
 
-      const hash = generatePRPLHash(renderProps.routes) + '|' + device
+      const hash =
+        generatePRPLHash(renderProps.routes) + '|' + 'FIX_M_ALL_REQUEST'
       const prpl = __CACHE__[hash]
 
       if (!prpl && !__REQUESTING__) {
         logMessage(`Generation PRPL for -> ${urlRequest} with ${hash}`)
 
-        const serviceRequestURL = `https://critical-prpl-service.now.sh/prpl?device=${device}&url=${encodeURIComponent(
+        const serviceRequestURL = `https://critical-prpl-service.now.sh/prpl?device=m&url=${encodeURIComponent(
           urlRequest
-        )}&cdn=${config.cdn}&strategy=${config.strategy}`
+        )}&cdn=${currentConfig.cdn}&strategy=${currentConfig.strategy}`
 
-        const headers = config.customHeaders
+        logMessage(serviceRequestURL)
+
+        const headers = currentConfig.customHeaders
         const options = {
           ...(headers && {headers})
         }
@@ -81,6 +85,7 @@ export default config => (req, res, next) => {
         https.get(serviceRequestURL, options, res => {
           let json = ''
           if (res.statusCode !== 200) {
+            __REQUESTING__ = false
             logMessage(`No 200 request, statusCode: ${res.statusCode}`)
 
             return
@@ -93,11 +98,10 @@ export default config => (req, res, next) => {
             __REQUESTING__ = false
           })
           res.on('end', () => {
-            logMessage(`Add cache entry for ${hash}`)
             __REQUESTING__ = false
             try {
               __CACHE__[hash] = JSON.parse(json)
-              console.log({json})
+              logMessage(`Add cache entry for ${hash} because`)
             } catch (e) {
               logMessage('Impossible parse response JSON')
             }
