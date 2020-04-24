@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.7.0 (2020-04-24)
+
+
+### Features
+
+* improve logging and config ([6be9929](https://github.com/SUI-Components/sui/commit/6be9929fa6b20ee57b12fcd569b2a218a8d42584))
+
+
+
 # 6.6.0 (2020-04-23)
 
 
