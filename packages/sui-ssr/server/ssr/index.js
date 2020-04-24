@@ -21,11 +21,18 @@ import ssrConfig from '../config'
 
 // __MAGIC IMPORTS__
 let contextFactory
+let contextProviders
 try {
   contextFactory = require('contextFactory').default
 } catch (e) {
   contextFactory = async () => ({})
 }
+try {
+  contextProviders = require('contextProviders').default
+} catch (e) {
+  contextProviders = []
+}
+
 // END __MAGIC IMPORTS__
 
 // const SERVER_TIMING_HEADER = 'Server-Timing'
@@ -98,11 +105,20 @@ export default (req, res, next) => {
       let initialData
       const headTags = []
 
-      const InitialRouterContext = props =>
-        React.createElement(
-          HeadProvider,
-          {headTags},
-          React.createElement(RouterContext, {...props})
+      const InitialContext = routerProps =>
+        [
+          {
+            provider: RouterContext,
+            props: routerProps
+          },
+          {
+            provider: HeadProvider,
+            props: {headTags}
+          },
+          ...contextProviders
+        ].reduce(
+          (acc, {provider, props}) => React.createElement(provider, props, acc),
+          null
         )
 
       try {
@@ -110,8 +126,8 @@ export default (req, res, next) => {
           context: {...context, device},
           renderProps,
           Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(InitialRouterContext)
-            : withSUIContext({...context, device})(InitialRouterContext)
+            ? withAllContexts({...context, device})(InitialContext)
+            : withSUIContext({...context, device})(InitialContext)
         })
       } catch (err) {
         return next(err)
