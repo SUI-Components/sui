@@ -225,8 +225,8 @@ chai.use(chaiDOM)
 // use describe() (without context.default) if not using context in demo (context.js)
 describe.context.default('${componentInPascal}', ${componentInPascal} => {
   it('Render', async () => {
-      const {findByText} = render(<${componentInPascal} />)
-      expect(await findByText('hello world')).to.be.visible
+    const {findByText} = render(<${componentInPascal} />)
+    expect(await findByText('hello world')).to.be.visible
   })
 })
 `
