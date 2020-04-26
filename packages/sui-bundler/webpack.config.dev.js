@@ -1,3 +1,5 @@
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -52,6 +54,7 @@ const webpackConfig = {
       inject: true,
       env: process.env
     }),
+    new ReactRefreshWebpackPlugin(),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
   ],
   resolveLoader: {
