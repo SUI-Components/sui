@@ -9,6 +9,8 @@ function getTargets({targets = {}}) {
 
 function plugins(api, opts = {}) {
   return cleanList([
+    process.env.NODE_ENV !== 'production' &&
+      require('react-refresh/babel').default,
     require('@babel/plugin-syntax-export-default-from').default,
     require('@babel/plugin-syntax-export-namespace-from').default,
     [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
