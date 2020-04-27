@@ -2,12 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.8.0 (2020-04-27)
+
+
+### Features
+
+* use logMessage instead of console ([ff9c38c](https://github.com/SUI-Components/sui/commit/ff9c38cb9257e1444b64c45098e4be6454e0134b))
+
+
+
 # 6.7.0 (2020-04-24)
 
 
 ### Features
 
+* add criticalCSS invalidate param ([71aa60d](https://github.com/SUI-Components/sui/commit/71aa60d5793420ad59584eddcbc416b345bfe6db))
 * improve logging and config ([6be9929](https://github.com/SUI-Components/sui/commit/6be9929fa6b20ee57b12fcd569b2a218a8d42584))
+* log message in console when critical css is invalidated ([9bdbe6c](https://github.com/SUI-Components/sui/commit/9bdbe6cdc38ba62e4956a9cedda3517971a50696))
 
 
 
