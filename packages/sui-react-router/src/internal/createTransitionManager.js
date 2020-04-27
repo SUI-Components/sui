@@ -20,7 +20,7 @@ const findRedirect = nodes => {
  * Get a component passing the route info and returning a promise with the result
  * @param {(location: object, callback: Function) => Promise<object>} getComponent Function to retrieve a component async
  * @param {import('../types').RouteInfo} routeInfo
- * @returns {Promise<import('react').ReactElement>}
+ * @returns {Promise<import('react').ComponentType>}
  */
 const makePromise = (getComponent, routeInfo) =>
   new Promise((resolve, reject) => {
@@ -108,15 +108,17 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     remainingPathname = location.pathname
   }
 
+  const initialObject = {
+    isFinished: false,
+    nodes: [],
+    paramNames: [],
+    paramValues: [],
+    remainingPathname
+  }
+
   const match = Tree.reduce(
     createReducerRoutesTree(location),
-    {
-      remainingPathname,
-      paramNames: [],
-      paramValues: [],
-      nodes: [],
-      isFinished: false
-    },
+    initialObject,
     tree
   )
 
