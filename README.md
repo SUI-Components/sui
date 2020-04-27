@@ -1,4 +1,4 @@
-# SUI (Schibsted User Interface)
+# SUI
 
 Monorepo of SUI packages.
 
