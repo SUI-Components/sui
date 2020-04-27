@@ -109,7 +109,7 @@ If you need to have support files, then create a `./test-e2e/support` directory,
 
 Support files runs before every single spec file and you don't have to import it in spec file.
 
-Example: 
+Example:
 
 `./test-e2e/support/index.js`
 
@@ -135,6 +135,7 @@ Then you can use in your specs `cy.login()`
     -U, --userAgentAppend <userAgentAppend>  Append string to UserAgent header.
     -UA, --userAgent <userAgent>             Overwrite string to UserAgent header.
     -G, --gui                                Run the tests in GUI mode.
+    -C, --ci                                 CI Mode, reduces memory consumption
     -h, --help                               output usage information
 ```
 

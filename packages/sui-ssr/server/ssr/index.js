@@ -15,20 +15,41 @@ import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
 
+// __MAGIC IMPORTS__
+let contextProviders
+try {
+  contextProviders = require('contextProviders').default
+} catch (e) {
+  contextProviders = []
+}
+
+// END __MAGIC IMPORTS__
+
 // const SERVER_TIMING_HEADER = 'Server-Timing'
 const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const initialFlush = res => {
+const initialFlush = (res, prpl) => {
   res.type(ssrConfig.serverContentType)
+  if (prpl) {
+    res.set(
+      'Link',
+      prpl.hints
+        .reduce((acc, hint) => {
+          return `${acc},<${hint.url}>; rel=preload; as=script`
+        }, '')
+        .replace(/,/, '')
+    )
+  }
+
   res.flush()
 }
 
 export default (req, res, next) => {
   const {url, query} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
-  const {skipSSR, criticalCSS} = req
+  const {skipSSR, criticalCSS, prpl} = req
 
   if (skipSSR) {
     return next()
@@ -76,17 +97,26 @@ export default (req, res, next) => {
 
       // Flush if early-flush is enabled
       if (req.app.locals.earlyFlush) {
-        initialFlush(res)
+        initialFlush(res, prpl)
       }
 
       let initialData
       const headTags = []
 
-      const InitialRouterContext = props =>
-        React.createElement(
-          HeadProvider,
-          {headTags},
-          React.createElement(RouterContext, {...props})
+      const InitialContext = routerProps =>
+        [
+          {
+            provider: RouterContext,
+            props: routerProps
+          },
+          {
+            provider: HeadProvider,
+            props: {headTags}
+          },
+          ...contextProviders
+        ].reduce(
+          (acc, {provider, props}) => React.createElement(provider, props, acc),
+          null
         )
 
       try {
@@ -94,8 +124,8 @@ export default (req, res, next) => {
           context: {...context, device},
           renderProps,
           Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(InitialRouterContext)
-            : withSUIContext({...context, device})(InitialRouterContext)
+            ? withAllContexts({...context, device})(InitialContext)
+            : withSUIContext({...context, device})(InitialContext)
         })
       } catch (err) {
         return next(err)

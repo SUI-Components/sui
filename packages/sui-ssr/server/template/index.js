@@ -67,8 +67,20 @@ HtmlBuilder.buildBody = ({
   return html
 }
 
-HtmlBuilder.injectDataHydration = ({windowPropertyName, data = {}}) =>
-  `<script>window.${windowPropertyName} = ${JSON.stringify(data).replace(
-    /<\//g,
-    '<\\/'
-  )};</script>`
+// https://github.com/gfx/webpack/blob/1cc9f8799bd60daa0b01518294de8974a0fed495/lib/JsonGenerator.js
+const stringifySafe = data => {
+  const stringified = JSON.stringify(data)
+  if (!stringified) {
+    return undefined // Invalid JSON
+  }
+
+  return stringified.replace(/\u2028|\u2029/g, str =>
+    str === '\u2029' ? '\\u2029' : '\\u2028'
+  ) // invalid in JavaScript but valid JSON
+}
+
+HtmlBuilder.injectDataHydration = ({windowPropertyName, data = {}}) => {
+  const jsonSource = JSON.stringify(stringifySafe(data))
+  const jsonExpr = `JSON.parse(${jsonSource})`
+  return `<script>window.${windowPropertyName} = ${jsonExpr};</script>`
+}

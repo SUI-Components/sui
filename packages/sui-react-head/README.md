@@ -15,13 +15,13 @@ $ npm install @s-ui/react-head
 
 ## How to use
 
-### Usage
+### Usage
 
 Using `<Head>` component will allow you to define the tags inside the `<head>` element. You could use two different ways: using the `children` of the component with the desired tags or using the props.
 
 ```js
 import React from 'react'
-import { HeadProvider }, Head from 'react-head'
+import Head, { HeadProvider } from '@s-ui/react-head'
 
 const App = () => (
   <HeadProvider>
@@ -48,7 +48,7 @@ const App = () => (
 
 **Important ⚠️**: You can't mix both of them in order to define `link`, `meta` and `title` tags. The children will have precedence and overwrite if you try to combine both. However, you could still use `htmlAttributes` and `bodyAttributes` with the `children` approach.
 
-### Server Side Setup
+### Server Side Setup
 
 ```js
 import {HeadProvider} from '@s-ui/react-head'

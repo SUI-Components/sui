@@ -2,6 +2,60 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.9.0 (2020-04-27)
+
+
+
+# 6.8.0 (2020-04-27)
+
+
+### Features
+
+* context providers as plugins ([2a57992](https://github.com/SUI-Components/sui/commit/2a57992453ab07884bba2bbdcd81a69c16f006cf))
+* use logMessage instead of console ([ff9c38c](https://github.com/SUI-Components/sui/commit/ff9c38cb9257e1444b64c45098e4be6454e0134b))
+
+
+
+# 6.7.0 (2020-04-24)
+
+
+### Features
+
+* add criticalCSS invalidate param ([71aa60d](https://github.com/SUI-Components/sui/commit/71aa60d5793420ad59584eddcbc416b345bfe6db))
+* improve logging and config ([6be9929](https://github.com/SUI-Components/sui/commit/6be9929fa6b20ee57b12fcd569b2a218a8d42584))
+* log message in console when critical css is invalidated ([9bdbe6c](https://github.com/SUI-Components/sui/commit/9bdbe6cdc38ba62e4956a9cedda3517971a50696))
+
+
+
+# 6.6.0 (2020-04-23)
+
+
+### Features
+
+* send hints preload with headers ([8c6a349](https://github.com/SUI-Components/sui/commit/8c6a3498ad0a62af580eb8e452c8d315856dee60))
+
+
+
+# 6.5.0 (2020-04-23)
+
+
+### Features
+
+* add support for the prpl service ([6e60e5b](https://github.com/SUI-Components/sui/commit/6e60e5bef8aba66c5f26ebe6d7ed9cad066eb1a3))
+* mobile as default prpl device ([820e79f](https://github.com/SUI-Components/sui/commit/820e79fa534715f1b443062387ba3e760af83a62))
+* remove development mode ([302aee4](https://github.com/SUI-Components/sui/commit/302aee4b6f253431dbae8a9a6f940e411425a522))
+
+
+
+# 6.4.0 (2020-04-17)
+
+
+### Features
+
+* use parse to improve JSON ([2ea0d3f](https://github.com/SUI-Components/sui/commit/2ea0d3fd74b72a7eba034b636b3367b669da456a))
+
+
+
 # 6.3.0 (2020-03-31)
 
 

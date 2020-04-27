@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.31.0 (2020-04-14)
+
+
+### Features
+
+* adds userEvent from testingLibrary ([de3387a](https://github.com/SUI-Components/sui/commit/de3387a5ebdd4f04329ae067ce18416891b89ab1))
+
+
+
+# 7.30.0 (2020-04-09)
+
+
+### Bug Fixes
+
+* fix Style children array proptype ([1b72bf4](https://github.com/SUI-Components/sui/commit/1b72bf40191abca7f35fdfb2c9a861c5d1687fac))
+
+
+
 # 7.29.0 (2020-04-03)
 
 

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.9.0 (2020-04-17)
+
+
+### Features
+
+* add context and routeInfo the Page.renderLoading ([0c1ad80](https://github.com/SUI-Components/sui/commit/0c1ad80bcb4c769ff0768a6e2e5434b27c7f798b))
+
+
+
 # 2.8.0 (2020-01-17)
 
 
