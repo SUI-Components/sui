@@ -232,6 +232,25 @@ If you have in your package.json the flag `criticalCSS: true` but you want to di
 
 This package uses [@s-ui/react-head](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-head) to put custom HTML in your header.
 
+## Context Providers
+
+In order to be able to render context providers from the server side that are global to your web application, create a new file called `web-app/src/contextProviders.js` that returns an array containing each context `{provider, props}` pair. For example
+
+```js
+// src/contextProviders.js
+import {AdvertisingProvider} from '@adv-ui/adit-saitama-context-advertising'
+
+export default [
+  {
+    provider: AdvertisingProvider,
+    props: {
+      site: 'xx',
+      environment: 'dev'
+    }
+  }
+]
+```
+
 ## Link Packages
 
 If you want you can link packages when you create a new static version of your site. But if you are using `sui-bundler` to link packages too. Please be sure to be in sync with the packages linkeds in both tools
