@@ -5,7 +5,7 @@ import https from 'https'
 import parser from 'ua-parser-js'
 
 let __REQUESTING__ = false
-const __CACHE__ = {}
+let __CACHE__ = {}
 
 const generateMinimalCSSHash = routes => {
   return routes.reduce((acc, route) => {
@@ -24,6 +24,12 @@ export default config => (req, res, next) => {
   if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
     logMessage('Skip middleware because it is inactive')
     return next()
+  }
+
+  if (req.url.match('x-criticalcss-cache-invalidate')) {
+    __CACHE__ = {}
+
+    logMessage('CriticalCSS cache invalidated')
   }
 
   if (
