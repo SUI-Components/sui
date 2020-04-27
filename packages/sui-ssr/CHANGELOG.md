@@ -2,11 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.9.0 (2020-04-27)
+
+
+
 # 6.8.0 (2020-04-27)
 
 
 ### Features
 
+* context providers as plugins ([2a57992](https://github.com/SUI-Components/sui/commit/2a57992453ab07884bba2bbdcd81a69c16f006cf))
 * use logMessage instead of console ([ff9c38c](https://github.com/SUI-Components/sui/commit/ff9c38cb9257e1444b64c45098e4be6454e0134b))
 
 
