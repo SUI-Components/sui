@@ -234,7 +234,7 @@ This package uses [@s-ui/react-head](https://github.com/SUI-Components/sui/tree/
 
 ## Context Providers
 
-In order to be able to render context providers from the server side that are global to your web application, create a new file called `web-app/src/contextProviders.js` that returns an array containing each context `{provider, props}` pair. For example
+In order to be able to render context providers from the server side that are global to your web application, create a new file called `web-app/src/contextProviders.js` that returns an array containing each context `{provider, props}` pair. For example:
 
 ```js
 // src/contextProviders.js
