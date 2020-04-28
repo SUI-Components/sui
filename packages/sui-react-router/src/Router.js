@@ -8,19 +8,23 @@ import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
 import {createTransitionManager} from './internal/createTransitionManager'
 import RouterContext from './internal/Context'
 
-const renderRouterContent = ({components, params, router}) =>
-  components.reduceRight(
-    (children, component) =>
-      h(component, {
-        children, // accumulate is children
-        location: router.location,
-        params,
-        routeParams: params,
-        router,
-        routes: router.routes
-      }),
+const renderRouterContent = ({components, params, router}) => {
+  const {location, routes} = router
+  const [route] = routes.length ? routes[routes.length - 1] : []
+
+  const routerInfo = {
+    location,
+    params,
+    routeParams: params,
+    route,
+    router,
+    routes
+  }
+  return components.reduceRight(
+    (children, component) => h(component, routerInfo, children),
     null
   )
+}
 
 const Router = ({
   components,

@@ -160,7 +160,10 @@ describe('<Route>', () => {
       expect(injectedProps.routes[0].component).to.equal(SearchPage)
       expect(injectedProps.router.routes).to.equal(injectedProps.routes)
       // we have the matched route info
-      expect(injectedProps.route.path).to.equal('/search/:keyword')
+      expect(injectedProps.route).to.includes({
+        component: SearchPage,
+        path: '/search/:keyword'
+      })
     })
 
     it('with nested routes', async () => {
@@ -198,7 +201,7 @@ describe('<Route>', () => {
 
       expect(injectedPropsApp.router).to.equal(injectedPropsSearch.router)
 
-      expect(injectedPropsApp.route).to.deep.equal({
+      expect(injectedPropsApp.route).to.includes({
         path: 'search/:keyword',
         component: SearchPage
       })

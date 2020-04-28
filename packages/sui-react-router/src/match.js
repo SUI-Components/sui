@@ -22,10 +22,7 @@ export default async (
 ) => {
   const history = externalHistory || createRouterHistory(location)
   const jsonRoutes = fromReactTreeToJSON(routes)
-  const transitionManager = createTransitionManager({
-    history,
-    jsonRoutes
-  })
+  const transitionManager = createTransitionManager({history, jsonRoutes})
 
   const {
     components,
