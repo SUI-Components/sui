@@ -66,14 +66,15 @@ const pushChangelogData = (commits, index) => {
   const {packageScope, packageName, from, to} = modifiedPackages[index]
   const gitUrl = getRepositoryUrl({packageScope, packageName})
 
-  changelogData.push({h4: `${packageName} ${to}`})
+  changelogData.push({h4: `${packageScope}/${packageName} ${to}`})
 
   // Maybe there is no GitHub URL for this package or it's
   // invalid so we cannot get its changelog data.
   // So that we print an special message.
   if (hasApiError(commits)) {
-    const {packageScope: scope, packageName: name} = modifiedPackages[index]
-    console.warn(`Error retrieving ${scope}/${name}: ${commits.message}`)
+    console.warn(
+      `Error retrieving ${packageScope}/${packageName}: ${commits.message}`
+    )
     changelogData.push({p: 'Error loading changelog data for this package.'})
     return
   }
