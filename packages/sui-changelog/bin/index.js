@@ -71,7 +71,14 @@ const pushChangelogData = (commits, index) => {
   // Maybe there is no GitHub URL for this package or it's
   // invalid so we cannot get its changelog data.
   // So that we print an special message.
-  if (typeof commits === 'undefined' || hasApiError(commits)) {
+  if (hasApiError(commits)) {
+    const {packageScope: scope, packageName: name} = modifiedPackages[index]
+    console.warn(`Error retrieving ${scope}/${name}: ${commits.message}`)
+    changelogData.push({p: 'Error loading changelog data for this package.'})
+    return
+  }
+
+  if (typeof commits === 'undefined') {
     changelogData.push({
       p: 'There is no changelog data for this package.'
     })

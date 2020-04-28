@@ -17,6 +17,7 @@ const PACKAGE_FILES = ['./package.json', './npm-shrinkwrap.json']
 const MAX_BUFFER = 1024 * 1024
 const INVALID_GITHUB_REPOSITORY_MESSAGE = 'Not Found'
 const LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE = 'API rate limit exceeded'
+const BAD_CREDENTIALS = 'Bad credentials'
 
 const monoRepoRegExp = /(sui|components).git/
 const versionRegExp = /"version": "(.*)",/
@@ -35,6 +36,7 @@ module.exports = {
   MAX_BUFFER,
   INVALID_GITHUB_REPOSITORY_MESSAGE,
   LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE,
+  BAD_CREDENTIALS,
   version,
   scopes,
   monoRepoRegExp,
