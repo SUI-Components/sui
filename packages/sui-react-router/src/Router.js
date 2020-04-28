@@ -10,7 +10,8 @@ import RouterContext from './internal/Context'
 
 const renderRouterContent = ({components, params, router}) => {
   const {location, routes} = router
-  const [route] = routes.length ? routes[routes.length - 1] : []
+  // get the latest matched route
+  const route = routes.length ? routes[routes.length - 1] : []
 
   const routerInfo = {
     location,
