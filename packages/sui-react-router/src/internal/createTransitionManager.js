@@ -214,6 +214,12 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
 
   // Signature should be (location, indexOnly),
   // but needs to support (path, query, indexOnly)
+  /**
+   * Check if current location is the active one using the history
+   * @param {import('../types').Location} location
+   * @param {Boolean} indexOnly Should we check only on index path?
+   * @returns {Boolean}
+   */
   const isActive = (location, indexOnly) => {
     location = history.createLocation(location)
 
