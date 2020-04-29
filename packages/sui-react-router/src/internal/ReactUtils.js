@@ -3,6 +3,12 @@ import React from 'react'
 import IndexRoute from '../IndexRoute'
 import Redirect from '../Redirect'
 
+/**
+ * Transform from React Elements tree to a plain json
+ * @param {import('react').ComponentType} root
+ * @param {Object} parent
+ * @param {Number} level
+ */
 export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   // Ignore non-elements. This allows people to more
   // easily inline conditionals in their route config.
