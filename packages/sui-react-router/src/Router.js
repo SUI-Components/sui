@@ -4,14 +4,15 @@ import PropTypes from 'prop-types'
 import {routes, components} from './internal/PropTypes'
 import {fromReactTreeToJSON} from './internal/ReactUtils'
 import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
-
 import {createTransitionManager} from './internal/createTransitionManager'
 import RouterContext from './internal/Context'
+
+import Route from './Route'
 
 const renderRouterContent = ({components, params, router}) => {
   const {location, routes} = router
   // get the latest matched route
-  const route = routes.length ? routes[routes.length - 1] : []
+  const route = routes && routes.length ? routes[routes.length - 1] : []
 
   const routerInfo = {
     location,
@@ -21,14 +22,21 @@ const renderRouterContent = ({components, params, router}) => {
     router,
     routes
   }
+
   return components.reduceRight(
     (children, component) => h(component, routerInfo, children),
     null
   )
 }
 
+const createRoutes = ({children, routes}) => {
+  if (routes) return fromReactTreeToJSON(routes)
+  return fromReactTreeToJSON(h(Route, null, children))
+}
+
 const Router = ({
-  components,
+  children,
+  components = [],
   history = createRouterHistory(),
   matchContext,
   onError,
@@ -36,11 +44,18 @@ const Router = ({
   router: routerFromProps,
   routes
 }) => {
+  // we might be using Router with match, if it's the case
+  // when we should have from props the transitionManager and the router object
+  // if not, we are going to create it with the needed info
   const transitionManager =
     matchContext?.transitionManager ??
-    createTransitionManager({history, jsonRoutes: fromReactTreeToJSON(routes)})
+    createTransitionManager({
+      history,
+      jsonRoutes: createRoutes({children, routes})
+    })
+
   const router =
-    routerFromProps ?? createRouterObject(history, transitionManager)
+    routerFromProps ?? createRouterObject(history, transitionManager.isActive)
 
   const [state, setState] = useState({router, params, components})
 
@@ -56,7 +71,7 @@ const Router = ({
       setState({router: nextRouter, params, components})
     }
 
-    const unlisten = matchContext.transitionManager.listen(handleTransition)
+    const unlisten = transitionManager.listen(handleTransition)
     return () => unlisten()
   }, []) // eslint-disable-line
 
@@ -70,6 +85,7 @@ const Router = ({
 Router.displayName = 'Router'
 
 Router.propTypes = {
+  children: routes,
   components,
   history: PropTypes.object,
   matchContext: PropTypes.object,
