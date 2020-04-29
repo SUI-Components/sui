@@ -13,7 +13,7 @@ export const createRouterHistory = options =>
 /**
  * Create the router object that will be availble in the context with all the needed info
  * @param {Object} history
- * @param {{ isActive: Function }} isActive
+ * @param {{ isActive: () => Boolean }} isActive
  * @param {{ location: String, params: Object, routes: Array }=} state
  * @returns { import('../types').Router }
  */
