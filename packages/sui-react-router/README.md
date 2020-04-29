@@ -379,20 +379,55 @@ By default, the query parameters will just pass through but you can specify them
 </Route>
 ```
 
-Note that the `<Redirect>` can be placed anywhere in the route hierarchy, though [normal precedence](/docs/guides/RouteMatching.md#precedence) rules apply. If you'd prefer the redirects to be next to their respective routes, the `from` path will match the same as a regular route `path`.
+**Note that the `<Redirect>` can't be placed anywhere in the route hierarchy**, so they can't be used as relative paths:
 
 ```js
-<Route path="course/:courseId">
-  <Route path="dashboard" />
-  {/* /course/123/home -> /course/123/dashboard */}
+// ⚠️ this won't work
+<Route path="course/:courseId" component={Course}>
+  <Route path="dashboard" component={Dashboard} />
   <Redirect from="home" to="dashboard" />
+</Route>
+
+// ✅ this would be the correct way to use it
+<Route>
+  <Route path="course/:courseId" component={Course}>
+    <Route path="dashboard" component={Dashboard} />
+  </Route>
+  <Redirect from="/course/:courseId/home" to="/course/:courseId/dashboard" />
 </Route>
 ```
 
 ### `<IndexRoute>`
 An `<IndexRoute>` allows you to provide a default "child" to a parent route when visitor is at the URL of the parent.
 
-Please see the [Index Routes guide](/docs/guides/IndexRoutes.md).
+To illustrate the use case for `IndexRoute`, imagine the following route config without it:
+
+```js
+<Router>
+  <Route path="/" component={App}>
+    <Route path="accounts" component={Accounts}/>
+    <Route path="statements" component={Statements}/>
+  </Route>
+</Router>
+```
+
+When the user visits `/`, the App component is rendered, but none of the children are, so `this.props.children` inside of `App` will be undefined. To render some default UI you could easily do `{this.props.children || <Home/>}`.
+
+But now `Home` can't participate in routing. You render in the same position as `Accounts` and `Statements`, so the router allows you to have `Home` be a first class route component with `IndexRoute`.
+
+```js
+<Router>
+  <Route path="/" component={App}>
+    <IndexRoute component={Home}/>
+    <Route path="accounts" component={Accounts}/>
+    <Route path="statements" component={Statements}/>
+  </Route>
+</Router>
+```
+
+Now `App` can render `{this.props.children}` and we have a first-class route for `Home` that can participate in routing.
+
+Keep in mind only one `IndexRoute` will be matched through your route tree.
 
 #### Props
 All the same props as [Route](#route) except for `path`.
