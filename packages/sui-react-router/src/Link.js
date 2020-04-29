@@ -79,7 +79,6 @@ const Link = ({
   if (!to) {
     return <a {...restOfProps} onClick={onClick} ref={innerRef} />
   }
-
   // resolve the location as the `to` prop could be an object
   const toLocation = resolveToLocation(to, router)
   // check if the route where the Link is pointing is the actual one
@@ -127,7 +126,7 @@ Link.propTypes = {
   /**
    * Only check if the destination is the actual route if you're in the index
    */
-  onlyActiveOnIndex: PropTypes.bool.isRequired,
+  onlyActiveOnIndex: PropTypes.bool,
   /**
    * Inline style for the element
    */
