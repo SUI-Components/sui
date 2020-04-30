@@ -68,7 +68,7 @@ export default config => (req, res, next) => {
         currentConfig.blackListRoutePaths &&
         Array.isArray(currentConfig.blackListRoutePaths) &&
         currentConfig.blackListRoutePaths.some(routePath =>
-          renderProps.router.some(route => route === routePath)
+          renderProps.routes.some(route => route.path === routePath)
         )
       ) {
         logMessage('Skip middleware because route path is blacklisted')

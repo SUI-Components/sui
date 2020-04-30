@@ -68,14 +68,12 @@ export default config => (req, res, next) => {
         return next()
       }
 
-      // eslint-disable-next-line no-debugger
-      debugger
       if (
         config &&
         config.blackListRoutePaths &&
         Array.isArray(config.blackListRoutePaths) &&
         config.blackListRoutePaths.some(routePath =>
-          renderProps.router.some(route => route === routePath)
+          renderProps.routes.some(route => route.path === routePath)
         )
       ) {
         logMessage('Skip middleware because route path is blacklisted')
