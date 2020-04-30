@@ -87,7 +87,7 @@ language: node_js
 dist: xenial
 
 node_js:
-  - "10"
+  - '10'
 
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
@@ -106,7 +106,7 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - "if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
+        - 'if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
       script:
         - npx @s-ui/ssr release --email srv.scms.jarvis@schibsted.com --name J.A.R.V.I.S
     - stage: deploy
@@ -114,8 +114,8 @@ jobs:
       env: NODE_ENV=development
       before_install:
         - set -e
-        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
-      name: "Deploy dev"
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: 'Deploy dev'
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -126,8 +126,8 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
-      name: "Deploy pro"
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: 'Deploy pro'
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -196,6 +196,7 @@ Configs accepted:
   - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the microservice for generating the Critical CSS.
   - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the microservice for generating the Critical CSS.
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
+  - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
   - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
 
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
@@ -203,6 +204,7 @@ Configs accepted:
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
 - **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname (key) and public folder (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
+
   ```json
   {
     "multiSite": {
@@ -212,6 +214,7 @@ Configs accepted:
     }
   }
   ```
+
   Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
 - **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
