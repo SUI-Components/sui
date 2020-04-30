@@ -87,7 +87,7 @@ language: node_js
 dist: xenial
 
 node_js:
-  - '10'
+  - "10"
 
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
@@ -106,7 +106,7 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - 'if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+        - "if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
       script:
         - npx @s-ui/ssr release --email srv.scms.jarvis@schibsted.com --name J.A.R.V.I.S
     - stage: deploy
@@ -114,8 +114,8 @@ jobs:
       env: NODE_ENV=development
       before_install:
         - set -e
-        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
-      name: 'Deploy dev'
+        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
+      name: "Deploy dev"
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -126,8 +126,8 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
-      name: 'Deploy pro'
+        -"if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
+      name: "Deploy pro"
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
