@@ -46,6 +46,7 @@
     "just-kebab-case": "1.1.0",
     "just-pascal-case": "1.1.0",
     "normalize.css": "8.0.1",
+    "react-router": "3.2.6",
     "react-docgen": "5.1.0",
     "terminal-banner": "1.1.0"
   },
