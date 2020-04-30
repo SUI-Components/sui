@@ -63,6 +63,18 @@ export default config => (req, res, next) => {
         return next()
       }
 
+      if (
+        currentConfig &&
+        currentConfig.blackListRoutePaths &&
+        Array.isArray(currentConfig.blackListRoutePaths) &&
+        currentConfig.blackListRoutePaths.some(routePath =>
+          renderProps.router.some(route => route === routePath)
+        )
+      ) {
+        logMessage('Skip middleware because route path is blacklisted')
+        return next()
+      }
+
       const hash =
         generatePRPLHash(renderProps.routes) + '|' + 'FIX_M_ALL_REQUEST'
       const prpl = __CACHE__[hash]
