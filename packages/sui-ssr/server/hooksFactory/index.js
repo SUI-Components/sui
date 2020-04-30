@@ -8,6 +8,8 @@ import {publicFolderByHost} from '../utils'
 // __MAGIC IMPORTS__
 // They came from {SPA}/src
 // import userHooks from 'hooks'
+import routes from 'routes'
+import {match} from 'react-router'
 let userHooks
 try {
   userHooks = require('hooks')
@@ -61,6 +63,40 @@ export const hooksFactory = async () => {
 
   return {
     [TYPES.PRE_HEALTH]: NULL_MDWL,
+    [TYPES.BOOTSTRAP]: async (req, res, next) => {
+
+      match[promisify.custom] = args =>
+        new Promise((resolve, reject) => {
+          match(args, (error, redirection, renderProps) => {
+            if (error) {
+              reject(error)
+            }
+
+            resolve({redirection, renderProps})
+          })
+        })
+
+      try {
+        const {redirectLocation, renderProps} = await promisify(match)({
+          routes,
+          location: req.url
+        })
+
+        req.matchResult = {
+          redirectLocation,
+          renderProps
+        }
+      } catch (error) {
+        req.matchResult = {
+          error
+        }
+
+        // TODO: error treatment? it gets until INTERNAL_ERROR hook?
+        return next(error)
+      }
+
+      return next()
+    },
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
     [TYPES.PRE_SSR_HANDLER]: NULL_MDWL,

@@ -71,6 +71,8 @@ const _memoizedHtmlTemplatesMapping = {}
   )
 
   app.use(compression())
+
+  app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
@@ -119,8 +121,8 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.PRE_SSR_HANDLER])
 
   app.get('*', [
-    criticalCss(ssrConf.criticalCSS),
-    prpl(ssrConf.prpl),
+    // criticalCss(ssrConf.criticalCSS),
+    // prpl(ssrConf.prpl),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
   ])
 

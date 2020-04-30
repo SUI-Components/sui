@@ -1,5 +1,6 @@
 export default {
   APP_CONFIG_SETUP: 'app_config_setup',
+  BOOTSTRAP: 'bootstrap',
   INTERNAL_ERROR: 'internal_error',
   LOGGING: 'logging',
   NOT_FOUND: 'not_found',
