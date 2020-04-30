@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.32.0 (2020-04-30)
+
+
+### Bug Fixes
+
+* ensure react-router is installed for verticales using different version ([fb78bb9](https://github.com/SUI-Components/sui/commit/fb78bb9fde6ddaf5c252751316195752ed6b9f44))
+
+
+
 # 7.31.0 (2020-04-14)
 
 
