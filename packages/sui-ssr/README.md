@@ -126,7 +126,7 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        -"if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
+        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
       name: "Deploy pro"
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
