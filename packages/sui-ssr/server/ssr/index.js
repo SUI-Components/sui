@@ -56,8 +56,8 @@ const initialFlush = (res, prpl) => {
   res.flush()
 }
 
-export default (req, res, next) => {
-  const {url, query} = req
+export default async (req, res, next) => {
+  const {query, matchResult} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
   const {skipSSR, criticalCSS, prpl} = req
 
@@ -78,121 +78,118 @@ export default (req, res, next) => {
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
 
-  match(
-    {routes, location: url},
-    async (error, redirectLocation, renderProps) => {
-      if (!error && redirectLocation) {
-        const queryString = Object.keys(query).length
-          ? `?${qs.stringify(query)}`
-          : ''
-        const destination = `${redirectLocation.pathname}${queryString}`
-        return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
-      }
+  // match(
+  //   {routes, location: url},
+  //   async (error, redirectLocation, renderProps) => {
+  const {error, redirectLocation, renderProps} = matchResult
 
-      if (error) {
-        return next(error)
-      }
+  // Question: why before if(error)?
+  if (!error && redirectLocation) {
+    const queryString = Object.keys(query).length
+      ? `?${qs.stringify(query)}`
+      : ''
+    const destination = `${redirectLocation.pathname}${queryString}`
+    return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
+  }
 
-      if (!renderProps) {
-        // This case will never happen if a "*" path is implemented for not-found pages.
-        // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`,
-        // the app (client side) won't respond either so the same result is obtained with
-        // the following line (best performance) than explicitly passing an error using
-        // `next(new Error(404))`
-        return next() // We asume that is a 404 page
-      }
+  if (error || !matchResult) {
+    return next(error)
+  }
 
-      const device = buildDeviceFrom({request: req})
+  if (!renderProps) {
+    // This case will never happen if a "*" path is implemented for not-found pages.
+    // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`,
+    // the app (client side) won't respond either so the same result is obtained with
+    // the following line (best performance) than explicitly passing an error using
+    // `next(new Error(404))`
+    return next() // We asume that is a 404 page
+  }
 
-      // Flush if early-flush is enabled
-      if (req.app.locals.earlyFlush) {
-        initialFlush(res, prpl)
-      }
+  const device = buildDeviceFrom({request: req})
 
-      const context = await contextFactory(
-        createServerContextFactoryParams(req)
-      )
+  // Flush if early-flush is enabled
+  if (req.app.locals.earlyFlush) {
+    initialFlush(res, prpl)
+  }
 
-      let initialData
-      const headTags = []
+  const context = await contextFactory(createServerContextFactoryParams(req))
 
-      const InitialContext = routerProps =>
-        [
-          {
-            provider: RouterContext,
-            props: routerProps
-          },
-          {
-            provider: HeadProvider,
-            props: {headTags}
-          },
-          ...contextProviders
-        ].reduce(
-          (acc, {provider, props}) => React.createElement(provider, props, acc),
-          null
-        )
+  let initialData
+  const headTags = []
 
-      try {
-        initialData = await ssrComponentWithInitialProps({
-          context: {...context, device},
-          renderProps,
-          Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(InitialContext)
-            : withSUIContext({...context, device})(InitialContext)
-        })
-      } catch (err) {
-        return next(err)
-      }
+  const InitialContext = routerProps =>
+    [
+      {
+        provider: RouterContext,
+        props: routerProps
+      },
+      {
+        provider: HeadProvider,
+        props: {headTags}
+      },
+      ...contextProviders
+    ].reduce(
+      (acc, {provider, props}) => React.createElement(provider, props, acc),
+      null
+    )
 
-      const {initialProps, reactString, performance} = initialData
+  try {
+    initialData = await ssrComponentWithInitialProps({
+      context: {...context, device},
+      renderProps,
+      Target: ssrConfig.useLegacyContext
+        ? withAllContexts({...context, device})(InitialContext)
+        : withSUIContext({...context, device})(InitialContext)
+    })
+  } catch (err) {
+    return next(err)
+  }
 
-      // The __HTTP__ object is created before earlyFlush is applied
-      // to avoid unexpected behaviors
+  const {initialProps, reactString, performance} = initialData
 
-      const {__HTTP__} = initialProps
-      if (__HTTP__) {
-        const {redirectTo} = __HTTP__
-        if (redirectTo) {
-          return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
-        }
-      }
+  // The __HTTP__ object is created before earlyFlush is applied
+  // to avoid unexpected behaviors
 
-      // Flush now if early-flush is disabled
-      if (!req.app.locals.earlyFlush) {
-        initialFlush(res)
-      }
-
-      // The first html content has the be set after any possible call to next().
-      // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
-      // no matter the error page strategy set (loadSPAOnNotFound: true|false)
-      const {
-        bodyAttributes,
-        headString,
-        htmlAttributes
-      } = renderHeadTagsToString(headTags)
-
-      res.write(
-        HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes})
-      )
-      res.flush()
-
-      // res.set({
-      //   'Server-Timing': `
-      //   getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
-      //   renderToString;desc=renderToString;dur=${performance.renderToString}
-      // `.replace(/\n/g, '')
-      // })
-
-      res.end(
-        HtmlBuilder.buildBody({
-          bodyAttributes,
-          bodyTplPart,
-          reactString,
-          appConfig: req.appConfig,
-          initialProps,
-          performance
-        })
-      )
+  const {__HTTP__} = initialProps
+  if (__HTTP__) {
+    const {redirectTo} = __HTTP__
+    if (redirectTo) {
+      return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
     }
+  }
+
+  // Flush now if early-flush is disabled
+  if (!req.app.locals.earlyFlush) {
+    initialFlush(res)
+  }
+
+  // The first html content has the be set after any possible call to next().
+  // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
+  // no matter the error page strategy set (loadSPAOnNotFound: true|false)
+  const {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(
+    headTags
   )
+
+  res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
+  res.flush()
+
+  // res.set({
+  //   'Server-Timing': `
+  //   getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
+  //   renderToString;desc=renderToString;dur=${performance.renderToString}
+  // `.replace(/\n/g, '')
+  // })
+
+  res.end(
+    HtmlBuilder.buildBody({
+      bodyAttributes,
+      bodyTplPart,
+      reactString,
+      appConfig: req.appConfig,
+      initialProps,
+      performance
+    })
+  )
+  //   }
+  // )
 }
