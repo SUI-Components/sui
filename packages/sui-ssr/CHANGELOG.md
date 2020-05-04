@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.10.0 (2020-05-04)
+
+
+### Bug Fixes
+
+* route.path fix ([921e721](https://github.com/SUI-Components/sui/commit/921e721c9073bc62c015abde374f9e1fc0c9b90c))
+
+
+### Features
+
+* add blackListRoutePaths cheking in criticalCSS and prpl ([8a0634e](https://github.com/SUI-Components/sui/commit/8a0634e1d1fa68168edaecf45ce8399846b514e5))
+
+
+
 # 6.9.0 (2020-04-27)
 
 
