@@ -12,6 +12,10 @@ import TestPage from './components/test-page/index'
 
 export default (
   <Route>
+    <Redirect
+      from="workbench/:category/:component"
+      to="/workbench/:category/:component/demo"
+    />
     <Route path="/" component={Layout}>
       <Route path="workbench/:category/:component" component={Workbench}>
         <Route path="test" component={TestPage} />
@@ -37,10 +41,6 @@ export default (
         </Route>
       </Route>
     </Route>
-    <Redirect
-      from="workbench/:category/:component"
-      to="workbench/:category/:component/demo"
-    />
     <Redirect from="**" to="/" />
   </Route>
 )
