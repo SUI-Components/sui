@@ -95,7 +95,6 @@ export const hooksFactory = async () => {
           error
         }
 
-        // TODO: error treatment? it gets until INTERNAL_ERROR hook?
         return next(error)
       }
 
