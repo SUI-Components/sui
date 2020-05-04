@@ -173,12 +173,12 @@ export default async (req, res, next) => {
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()
 
-  // res.set({
-  //   'Server-Timing': `
-  //   getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
-  //   renderToString;desc=renderToString;dur=${performance.renderToString}
-  // `.replace(/\n/g, '')
-  // })
+  res.set({
+    'Server-Timing': `
+    getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
+    renderToString;desc=renderToString;dur=${performance.renderToString}
+  `.replace(/\n/g, '')
+  })
 
   res.end(
     HtmlBuilder.buildBody({
