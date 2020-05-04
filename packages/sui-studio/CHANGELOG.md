@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.0.0 (2020-05-04)
+
+
+### Features
+
+* new major react testing library ([ed9d145](https://github.com/SUI-Components/sui/commit/ed9d145d534625c92f7650b3ebfec2f1df4094f0))
+
+
+### BREAKING CHANGES
+
+* New major o react-testing-library
+
+
+
+# 7.33.0 (2020-04-30)
+
+
+
+# 7.32.0 (2020-04-30)
+
+
+### Bug Fixes
+
+* ensure react-router is installed for verticales using different version ([fb78bb9](https://github.com/SUI-Components/sui/commit/fb78bb9fde6ddaf5c252751316195752ed6b9f44))
+
+
+### Features
+
+* add mocha global to test url redirects ([676d8f6](https://github.com/SUI-Components/sui/commit/676d8f6b178884bd34b0735b90a5899c53015cf2))
+
+
+
 # 7.31.0 (2020-04-14)
 
 

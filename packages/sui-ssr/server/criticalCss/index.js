@@ -68,6 +68,18 @@ export default config => (req, res, next) => {
         return next()
       }
 
+      if (
+        config &&
+        config.blackListRoutePaths &&
+        Array.isArray(config.blackListRoutePaths) &&
+        config.blackListRoutePaths.some(routePath =>
+          renderProps.routes.some(route => route.path === routePath)
+        )
+      ) {
+        logMessage('Skip middleware because route path is blacklisted')
+        return next()
+      }
+
       const hash = generateMinimalCSSHash(renderProps.routes) + '|' + device
       const criticalCSS = __CACHE__[hash]
 
@@ -77,7 +89,9 @@ export default config => (req, res, next) => {
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
         const headers = config.customHeaders
         const options = {
-          ...(headers && {headers})
+          ...(headers && {
+            headers
+          })
         }
 
         logMessage(serviceRequestURL)
