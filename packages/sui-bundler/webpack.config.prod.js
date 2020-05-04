@@ -14,6 +14,7 @@ const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 
+const crypto = require('crypto')
 const zlib = require('zlib')
 const hasBrotliSupport = Boolean(zlib.brotliCompress)
 
@@ -30,6 +31,9 @@ const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
+
+const FRAMEWORK_BUNDLES = [`react`, `react-dom`, `scheduler`, `prop-types`]
+const isCssModule = module => module.type === `css/mini-extract`
 
 module.exports = {
   devtool: sourceMap,
@@ -64,16 +68,86 @@ module.exports = {
       })
     ],
     runtimeChunk: true,
+    // https://github.com/wardpeet/gatsby/blob/241b52bbbdecc7fdd5500937e0b20dbfd5dbb799/packages/gatsby/src/utils/webpack.config.js#L489
     splitChunks: {
+      chunks: `all`,
       cacheGroups: {
-        vendor: {
-          chunks: 'all',
-          name: 'vendor',
-          test: 'vendor',
-          enforce: true,
+        default: false,
+        vendors: false,
+        framework: {
+          chunks: `all`,
+          name: `framework`,
+          // This regex ignores nested copies of framework libraries so they're bundled with their issuer.
+          test: new RegExp(
+            `(?<!node_modules.*)[\\\\/]node_modules[\\\\/](${FRAMEWORK_BUNDLES.join(
+              `|`
+            )})[\\\\/]`
+          ),
+          priority: 40,
+          // Don't let webpack eliminate this chunk (prevents this chunk from becoming a part of the commons chunk)
+          enforce: true
+        },
+        // if a module is bigger than 160kb from node_modules we make a separate chunk for it
+        lib: {
+          test(module) {
+            return (
+              !isCssModule(module) &&
+              module.size() > 160000 &&
+              /node_modules[/\\]/.test(module.identifier())
+            )
+          },
+          name(module) {
+            const hash = crypto.createHash(`sha1`)
+            if (!module.libIdent) {
+              throw new Error(
+                `Encountered unknown module type: ${module.type}. Please open an issue.`
+              )
+            }
+
+            hash.update(module.libIdent({context: process.env.PWD}))
+
+            return hash.digest(`hex`).substring(0, 8)
+          },
+          priority: 30,
+          minChunks: 1,
           reuseExistingChunk: true
+        },
+        commons: {
+          name: `commons`,
+          minChunks: 31, // TODO: Put number of PAGES !!!
+          priority: 20
+        },
+        // If a chunk is used in at least 2 components we create a separate chunk
+        shared: {
+          test(module) {
+            return !isCssModule(module)
+          },
+          name(module, chunks) {
+            const hash = crypto
+              .createHash(`sha1`)
+              .update(chunks.reduce((acc, chunk) => acc + chunk.name, ``))
+              .digest(`hex`)
+
+            return hash
+          },
+          priority: 10,
+          minChunks: 2,
+          reuseExistingChunk: true
+        },
+
+        // Bundle all css & lazy css into one stylesheet to make sure lazy components do not break
+        styles: {
+          test(module) {
+            return isCssModule(module)
+          },
+
+          name: `styles`,
+          priority: 40,
+          enforce: true
         }
-      }
+      },
+      maxInitialRequests: 25,
+      minSize: 20000
     }
   },
   plugins: cleanList([
