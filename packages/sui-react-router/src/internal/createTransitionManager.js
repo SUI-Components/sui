@@ -139,11 +139,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
 export const createTransitionManager = ({history, jsonRoutes}) => {
   let state = {}
 
-  const match = async location => {
-    location = location
-      ? history.createLocation(location)
-      : history.getCurrentLocation()
-
+  const matchRouteAndUpdateState = async ({location, jsonRoutes}) => {
     const {redirectLocation, routeInfo, components} = await matchRoutes(
       jsonRoutes,
       location
@@ -159,6 +155,14 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
     return {redirectLocation, routeInfo, components}
   }
 
+  const match = location => {
+    location = location
+      ? history.createLocation(location)
+      : history.getCurrentLocation()
+
+    return matchRouteAndUpdateState({jsonRoutes, location})
+  }
+
   /**
    * This is the API for stateful environments. As the location
    * changes, we update state and call the listener. We can also
@@ -170,10 +174,10 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
         listener(null, {params: state.params, components: state.components})
       } else {
         try {
-          const {redirectLocation, routeInfo, components} = await matchRoutes(
-            jsonRoutes,
-            location
-          )
+          const {
+            redirectLocation,
+            components
+          } = await matchRouteAndUpdateState({jsonRoutes, location})
 
           if (redirectLocation) {
             return history.replace(redirectLocation)
@@ -185,12 +189,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
           }
 
           // call listener with null errors and the nextState
-          return listener(null, {
-            ...state,
-            ...routeInfo,
-            components,
-            location
-          })
+          return listener(null, state)
         } catch (err) {
           listener(err)
         }
