@@ -57,7 +57,7 @@ const initialFlush = (res, prpl) => {
 }
 
 export default async (req, res, next) => {
-  const {query, matchResult} = req
+  const {query, matchResult = {}} = req
   let [headTplPart, bodyTplPart] = getTplParts(req)
   const {skipSSR, criticalCSS, prpl} = req
 
@@ -78,22 +78,18 @@ export default async (req, res, next) => {
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
 
-  // match(
-  //   {routes, location: url},
-  //   async (error, redirectLocation, renderProps) => {
   const {error, redirectLocation, renderProps} = matchResult
 
-  // Question: why before if(error)?
-  if (!error && redirectLocation) {
+  if (error) {
+    return next(error)
+  }
+
+  if (redirectLocation) {
     const queryString = Object.keys(query).length
       ? `?${qs.stringify(query)}`
       : ''
     const destination = `${redirectLocation.pathname}${queryString}`
     return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
-  }
-
-  if (error || !matchResult) {
-    return next(error)
   }
 
   if (!renderProps) {
