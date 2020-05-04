@@ -1,5 +1,5 @@
 import React from 'react'
-import {IndexRedirect, Route, Redirect} from 'react-router'
+import {Route, Redirect} from '@s-ui/react-router'
 import Layout from './components/layout'
 import Workbench from './components/workbench'
 import Demo from './components/demo'
@@ -14,7 +14,6 @@ export default (
   <Route>
     <Route path="/" component={Layout}>
       <Route path="workbench/:category/:component" component={Workbench}>
-        <IndexRedirect to="demo" />
         <Route path="test" component={TestPage} />
         <Route path="demo" component={Demo} />
         <Route path="documentation" component={Documentation}>
@@ -38,6 +37,10 @@ export default (
         </Route>
       </Route>
     </Route>
+    <Redirect
+      from="workbench/:category/:component"
+      to="workbench/:category/:component/demo"
+    />
     <Redirect from="**" to="/" />
   </Route>
 )
