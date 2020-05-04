@@ -75,6 +75,11 @@ export const hooksFactory = async () => {
           })
         })
 
+      if (!routes) {
+        console.error('Required routes file missing') // eslint-disable-line no-console
+        process.exit(1)
+      }
+
       try {
         const {redirectLocation, renderProps} = await promisify(match)({
           routes,
