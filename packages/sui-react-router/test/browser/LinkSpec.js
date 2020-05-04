@@ -3,7 +3,7 @@ import React from 'react'
 import {Router, Route, Link} from '../../src/index'
 import {render, fireEvent, screen} from '@testing-library/react'
 import sinon from 'sinon'
-import {createMemoryHistory} from 'history'
+import createMemoryHistory from '../../src/createMemoryHistory'
 
 describe('<Link />', () => {
   describe('when clicked', () => {
@@ -92,7 +92,6 @@ describe('<Link />', () => {
     })
 
     it('does not transition when has target blank', async () => {
-      const handleClick = sinon.spy()
       const PageWithLink = () => (
         <Link to="/hello" target="_blank">
           Link
@@ -115,6 +114,59 @@ describe('<Link />', () => {
       fireEvent.click(elementToClick)
 
       expect(historySpy.callCount).to.equal(0)
+    })
+  })
+
+  describe('with params', () => {
+    const createRoutes = (
+      {to, withActiveProps = true, props = {}} // eslint-disable-line react/prop-types
+    ) => (
+      <Route>
+        <Route
+          path="/hello/:name"
+          component={() => (
+            <Link
+              {...(withActiveProps && {
+                activeClassName: 'active',
+                activeStyle: {color: 'red'}
+              })}
+              to={to}
+              {...props}
+            >
+              Link to Michael
+            </Link>
+          )}
+        />
+        <Route
+          path="*"
+          component={() => <Link to="/hello/michael">Link</Link>}
+        />
+      </Route>
+    )
+
+    it('is active when its params match', async () => {
+      render(
+        <Router
+          history={createMemoryHistory()}
+          routes={createRoutes({to: '/hello/michael'})}
+        />
+      )
+      fireEvent.click(await screen.findByText('Link'))
+      const link = await screen.findByText('Link to Michael')
+      expect(link.getAttribute('class')).to.equal('active')
+      expect(link.getAttribute('style')).to.equal('color: red;')
+    })
+
+    it('is not active when its params dont match', async () => {
+      render(
+        <Router
+          history={createMemoryHistory()}
+          routes={createRoutes({to: '/hello/sui'})}
+        />
+      )
+      fireEvent.click(await screen.findByText('Link'))
+      const link = await screen.findByText('Link to Michael')
+      expect(link.getAttribute('class')).to.equal(null)
     })
   })
 })
