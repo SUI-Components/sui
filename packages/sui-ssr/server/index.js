@@ -121,8 +121,8 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.PRE_SSR_HANDLER])
 
   app.get('*', [
-    // criticalCss(ssrConf.criticalCSS),
-    // prpl(ssrConf.prpl),
+    criticalCss(ssrConf.criticalCSS),
+    prpl(ssrConf.prpl),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
   ])
 
