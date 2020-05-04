@@ -72,7 +72,7 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use(compression())
 
-  app.use(hooks[TYPES.BOOTSTRAP])
+  app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))

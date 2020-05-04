@@ -63,8 +63,7 @@ export const hooksFactory = async () => {
 
   return {
     [TYPES.PRE_HEALTH]: NULL_MDWL,
-    [TYPES.BOOTSTRAP]: async (req, res, next) => {
-
+    [TYPES.ROUTE_MATCHING]: async (req, res, next) => {
       match[promisify.custom] = args =>
         new Promise((resolve, reject) => {
           match(args, (error, redirection, renderProps) => {
