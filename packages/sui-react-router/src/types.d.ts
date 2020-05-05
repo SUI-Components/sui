@@ -1,38 +1,40 @@
 export type Action = 'PUSH' | 'REPLACE' | 'POP';
 
-type LocationDescriptorObject = {
+/**
+ * A location key is a string that is unique to a particular location. It is the one piece of data that most accurately answers the question "Where am I?".
+ */
+export type LocationKey = string
+
+export type LocationDescriptorObject = {
   pathname: Pathname;
   search?: Search;
   query?: Query;
   state?: LocationState;
 };
 
-type LocationDescriptor = LocationDescriptorObject | Path;
+export type LocationDescriptor = LocationDescriptorObject | Path;
 
-/**
- * A location key is a string that is unique to a particular location. It is the one piece of data that most accurately answers the question "Where am I?".
- */
-type LocationKey = string
+export type Query = Object
 
-type Query = Object
+export type QueryString = string
 
-type QueryString = string
+export type Pathname = string
 
-type Pathname = string
+export type Params = Object
 
-type Route = {
-  getComponent?: () => Promise<RouteComponent>
+export type Route = {
   component?: RouteComponent
+  getComponent?: () => Promise<RouteComponent>
   path?: RoutePattern
 }
 
-type Router = RouterState & {
-  push: (location: LocationDescriptor) => void
-  replace: (location: LocationDescriptor) => void
+export type Router = RouterState & {
   go: (n: number) => void
   goBack: () => void
   goForward: () => void
   isActive: (location: LocationDescriptor, indexOnly: boolean) => Boolean
+  push: (location: LocationDescriptor) => void
+  replace: (location: LocationDescriptor) => void
 }
 
 export type RouteInfo = {
@@ -41,19 +43,19 @@ export type RouteInfo = {
   params: Params
 }
 
-type RouterState = RouteInfo & {
+export type RouterState = RouteInfo & {
   components: Array<Component>
 }
 
-type RouteComponent = Component
+export type RouteComponent = Component
 
-type RoutePattern = string
+export type RoutePattern = string
 
 export type Location = {
-  pathname: Pathname
-  search: QueryString
-  query: Query
-  state: LocationState
   action: Action
   key: LocationKey
+  pathname: Pathname
+  query: Query
+  search: QueryString
+  state: LocationState
 }
