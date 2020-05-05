@@ -3,7 +3,7 @@ import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
 import {getTplParts, HtmlBuilder} from '../template'
-import {publicFolderByHost} from '../utils'
+import {publicFolderByHost, hrTimeToMs} from '../utils'
 
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
@@ -68,7 +68,15 @@ export const hooksFactory = async () => {
 
   return {
     [TYPES.PRE_HEALTH]: NULL_MDWL,
+    [TYPES.BOOTSTRAP]: (req, res, next) => {
+      req.performance = {}
+
+      return next()
+    },
     [TYPES.ROUTE_MATCHING]: async (req, res, next) => {
+      const startRouteMatchingTime = process.hrtime()
+      const {performance = {}, url} = req
+
       match[promisify.custom] = args =>
         new Promise((resolve, reject) => {
           match(args, (error, redirection, renderProps) => {
@@ -88,7 +96,7 @@ export const hooksFactory = async () => {
       try {
         const {redirectLocation, renderProps} = await promisify(match)({
           routes,
-          location: req.url
+          location: url
         })
 
         req.matchResult = {
@@ -103,16 +111,29 @@ export const hooksFactory = async () => {
         return next(error)
       }
 
+      const diffRouteMatchingTime = process.hrtime(startRouteMatchingTime)
+
+      req.performance = {
+        ...performance,
+        matchRoutes: hrTimeToMs(diffRouteMatchingTime)
+      }
+
       return next()
     },
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
     [TYPES.SETUP_CONTEXT]: async (req, res, next) => {
-      const context = await contextFactory(
-        createServerContextFactoryParams(req)
-      )
+      const startContextCreationTime = process.hrtime()
+      const {performance = {}} = req
 
-      req.context = context
+      req.context = await contextFactory(createServerContextFactoryParams(req))
+
+      const diffContextCreationTime = process.hrtime(startContextCreationTime)
+
+      req.performance = {
+        ...performance,
+        contextCreation: hrTimeToMs(diffContextCreationTime)
+      }
 
       return next()
     },
