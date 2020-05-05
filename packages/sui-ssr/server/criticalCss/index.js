@@ -131,30 +131,32 @@ export default config => (req, res, next) => {
           res.on('end', () => {
             __REQUESTING__ = false
 
+            const {mandatoryCSSRules} = currentConfig
+            const hasMandatoryRules =
+              mandatoryCSSRules && Object.keys(mandatoryCSSRules).length >= 1
+
             // Check if any currentConfig mandatory CSS rule is missing in generated critical CSS
-            if (
-              currentConfig.mandatoryCSSRules &&
-              Object.keys(currentConfig.mandatoryCSSRules).length >= 1 &&
-              renderProps.routes.find(route => {
-                const mandatoryCSSRulesForPath =
-                  currentConfig.mandatoryCSSRules[route.path]
-                if (!mandatoryCSSRulesForPath) {
-                  return false
-                }
-                // Look for css rule missMatch
-                const hasMissmatch = mandatoryCSSRulesForPath.some(cssRule => {
-                  const hasMisMatch = css.indexOf(cssRule) === -1
-                  if (hasMisMatch) {
+            const isMandatoryCssMissingInCritical = renderProps.routes.find(
+              route => {
+                const mandatoryCSSRulesForPath = mandatoryCSSRules[route.path]
+                if (!mandatoryCSSRulesForPath) return false
+
+                const checkCssRuleAgainstPath = cssRule => {
+                  const hasMismatch = !css.includes(cssRule)
+                  if (hasMismatch) {
                     logMessage(
                       `Mismatch detected at ${route.path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
                     )
-                    return hasMisMatch
+                    return hasMismatch
                   }
-                })
-                return hasMissmatch
-              })
-            ) {
-              // Missing mandatory CSS rule at generated critical CSS
+                }
+
+                // Check all css rules against path
+                return mandatoryCSSRulesForPath.some(checkCssRuleAgainstPath)
+              }
+            )
+
+            if (hasMandatoryRules && isMandatoryCssMissingInCritical) {
               __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
                 ? __RETRYS_BY_HASH__[hash] + 1
                 : 0
