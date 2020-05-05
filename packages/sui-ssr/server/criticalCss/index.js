@@ -32,11 +32,17 @@ export default config => (req, res, next) => {
     logMessage('CriticalCSS cache invalidated')
   }
 
+  const currentConfig = {
+    ...config,
+    ...config[process.env.NODE_ENV],
+    ...config[process.env.STAGE]
+  }
+
   if (
-    config &&
-    config.blackListURLs &&
-    Array.isArray(config.blackListURLs) &&
-    config.blackListURLs.some(regex => req.url.match(regex))
+    currentConfig &&
+    currentConfig.blackListURLs &&
+    Array.isArray(currentConfig.blackListURLs) &&
+    currentConfig.blackListURLs.some(regex => req.url.match(regex))
   ) {
     logMessage('Skip middleware because url is blacklisted')
     return next()
@@ -44,9 +50,11 @@ export default config => (req, res, next) => {
 
   const ua = parser(req.get('User-Agent'))
   const urlRequest =
-    (process.env.CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol) +
+    (process.env.CRITICAL_CSS_PROTOCOL ||
+      currentConfig.protocol ||
+      req.protocol) +
     ':/' +
-    (process.env.CRITICAL_CSS_HOST || config.host || req.hostname) +
+    (process.env.CRITICAL_CSS_HOST || currentConfig.host || req.hostname) +
     req.url
   const type = ua.device.type
   const deviceTypes = {
@@ -69,10 +77,10 @@ export default config => (req, res, next) => {
       }
 
       if (
-        config &&
-        config.blackListRoutePaths &&
-        Array.isArray(config.blackListRoutePaths) &&
-        config.blackListRoutePaths.some(routePath =>
+        currentConfig &&
+        currentConfig.blackListRoutePaths &&
+        Array.isArray(currentConfig.blackListRoutePaths) &&
+        currentConfig.blackListRoutePaths.some(routePath =>
           renderProps.routes.some(route => route.path === routePath)
         )
       ) {
@@ -87,7 +95,7 @@ export default config => (req, res, next) => {
         logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
-        const headers = config.customHeaders
+        const headers = currentConfig.customHeaders
         const options = {
           ...(headers && {
             headers
@@ -117,6 +125,31 @@ export default config => (req, res, next) => {
           res.on('end', () => {
             logMessage(`Add cache entry for ${hash}`)
             __REQUESTING__ = false
+
+            // eslint-disable-next-line no-debugger
+            debugger
+
+            // If Guards are ok then
+            if (
+              currentConfig &&
+              currentConfig.mandatoryCSSRules &&
+              Object.keys(currentConfig.mandatoryCSSRules).length >= 1 &&
+              renderProps.routes.find(route => {
+                // Find for css rule missMatch
+                const mandatoryCSSRulesForPath =
+                  currentConfig.mandatoryCSSRules[route.path]
+                if (!mandatoryCSSRulesForPath) {
+                  return false
+                }
+                const hasMissmatch = mandatoryCSSRulesForPath.some(
+                  cssRule => css.indexOf(cssRule) === -1
+                )
+                return hasMissmatch
+              })
+            ) {
+              return
+            }
+
             __CACHE__[hash] = css
           })
         })
