@@ -5,6 +5,7 @@ const parseDiff = require('what-the-diff').parse
 const exec = require('child_process').exec
 const execSync = require('child_process').execSync
 const json2md = require('json2md')
+const strategyFactory = require('../src/strategies/factory').strategyFactory
 const fs = require('fs')
 const log = console.log
 const error = console.error
@@ -12,7 +13,6 @@ const exit = process.exit
 const date = new Date()
 const {
   DEFAULT_SCOPES,
-  LOCK_FILE_NAME,
   PACKAGE_FILES,
   MAX_BUFFER,
   version,
@@ -142,63 +142,73 @@ const writeChangelogFile = repositories => {
 program
   .version(version)
   .option('-p, --phoenix', 'Run a phoenix before building the changelog.')
+  .option(
+    '-l, --package-lock',
+    'Uses package-lock.json file instead of npm-shrinkwrap'
+  )
+  .option('-m, --maintain-version')
   .parse(process.argv)
 
-const {phoenix} = program
+const {phoenix, packageLock, maintainVersion} = program
+
+const strategy = strategyFactory(packageLock)
 
 if (phoenix) {
-  execSync(
-    `npx rimraf node_modules && npx rimraf ${LOCK_FILE_NAME} && npm install --prefer-online && npm shrinkwrap`
-  )
+  execSync(strategy.phoenixCommand)
 } else {
-  execSync(`npx rimraf ${LOCK_FILE_NAME} && npm shrinkwrap`)
+  execSync(strategy.installCommand)
 }
+
 // Retrieve modified packages info from npm shrinkwrap.
-exec(`git diff ${LOCK_FILE_NAME}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
-  if (err) error(err)
-  const [diff = {}] = parseDiff(stdout)
-  const {hunks} = diff
+exec(
+  `git diff ${strategy.lockFileName}`,
+  {maxBuffer: MAX_BUFFER},
+  (err, stdout) => {
+    if (err) error(err)
+    const [diff = {}] = parseDiff(stdout)
+    const {hunks} = diff
 
-  if (!hunks) {
-    log('There are no changes in your shrinkwrap.')
-    exit()
+    if (!hunks) {
+      log('There are no changes.')
+      exit()
+    }
+
+    // Update package versions.
+    let oldPackageVersionParts
+    hunks.find(({lines}) => {
+      return lines.find(line => {
+        oldPackageVersionParts = line.match(oldPackageVersionRegExp)
+        return oldPackageVersionParts
+      })
+    })
+
+    if (!oldPackageVersionParts && !maintainVersion)
+      [...PACKAGE_FILES, strategy.lockFileName].forEach(filePath => {
+        newPackageVersion = updateAndGetFileVersion(filePath)
+      })
+
+    changelogData.push({
+      h2: `${newPackageVersion} (${date.getDate()}/${date.getMonth() +
+        1}/${date.getFullYear()})`
+    })
+
+    log('MODIFIED PACKAGES:')
+    hunks.forEach(({lines}) => {
+      // Get modified packages by filtering lines with git removal syntax from
+      // diff.
+      const linesWithModifiedPackages = lines.filter(line =>
+        line.match(oldVersionRegExp)
+      )
+      linesWithModifiedPackages.forEach(pushModifiedPackage(lines))
+    })
+
+    const modifiedRepositories = modifiedPackages.map(getModifiedRepository)
+
+    Promise.all(modifiedRepositories)
+      .then(responses => responses.map(response => response && response.json()))
+      .then(responses => {
+        Promise.all(responses).then(writeChangelogFile)
+      })
+      .catch(err => error(err))
   }
-
-  // Update package versions.
-  let oldPackageVersionParts
-  hunks.find(({lines}) => {
-    return lines.find(line => {
-      oldPackageVersionParts = line.match(oldPackageVersionRegExp)
-      return oldPackageVersionParts
-    })
-  })
-
-  if (!oldPackageVersionParts)
-    PACKAGE_FILES.forEach(filePath => {
-      newPackageVersion = updateAndGetFileVersion(filePath)
-    })
-
-  changelogData.push({
-    h2: `${newPackageVersion} (${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()})`
-  })
-
-  log('MODIFIED PACKAGES:')
-  hunks.forEach(({lines}) => {
-    // Get modified packages by filtering lines with git removal syntax from
-    // diff.
-    const linesWithModifiedPackages = lines.filter(line =>
-      line.match(oldVersionRegExp)
-    )
-    linesWithModifiedPackages.forEach(pushModifiedPackage(lines))
-  })
-
-  const modifiedRepositories = modifiedPackages.map(getModifiedRepository)
-
-  Promise.all(modifiedRepositories)
-    .then(responses => responses.map(response => response && response.json()))
-    .then(responses => {
-      Promise.all(responses).then(writeChangelogFile)
-    })
-    .catch(err => error(err))
-})
+)
