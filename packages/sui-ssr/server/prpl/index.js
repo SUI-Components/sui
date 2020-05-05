@@ -36,8 +36,6 @@ export default config => (req, res, next) => {
   }
 
   if (
-    currentConfig &&
-    currentConfig.blackListURLs &&
     Array.isArray(currentConfig.blackListURLs) &&
     currentConfig.blackListURLs.some(regex => req.url.match(regex))
   ) {
@@ -64,8 +62,6 @@ export default config => (req, res, next) => {
       }
 
       if (
-        currentConfig &&
-        currentConfig.blackListRoutePaths &&
         Array.isArray(currentConfig.blackListRoutePaths) &&
         currentConfig.blackListRoutePaths.some(routePath =>
           renderProps.routes.some(route => route.path === routePath)

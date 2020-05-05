@@ -198,7 +198,17 @@ Configs accepted:
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
   - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
   - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
-
+  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: Route path - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS. See a simple example below:
+    ```json
+    {
+      "mandatoryCSSRules": {
+        "/*": [
+          ".ma-AdCard"
+        ]
+       }
+    }
+    ``` 
+  
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
