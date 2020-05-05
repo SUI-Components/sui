@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.3.0 (2020-05-05)
+
+
+### Bug Fixes
+
+* revert using sui-react-router ([1056af1](https://github.com/SUI-Components/sui/commit/1056af17f0fc2ec5fd0c427c7ad5870748289bdb))
+
+
+
 # 8.2.0 (2020-05-05)
 
 
