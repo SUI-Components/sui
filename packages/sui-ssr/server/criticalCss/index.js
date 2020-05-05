@@ -6,6 +6,8 @@ import parser from 'ua-parser-js'
 
 let __REQUESTING__ = false
 let __CACHE__ = {}
+const __RETRYS_BY_HASH__ = {}
+const __MAX_RETRYS_BY_HASH__ = 3
 
 const generateMinimalCSSHash = routes => {
   return routes.reduce((acc, route) => {
@@ -39,8 +41,6 @@ export default config => (req, res, next) => {
   }
 
   if (
-    currentConfig &&
-    currentConfig.blackListURLs &&
     Array.isArray(currentConfig.blackListURLs) &&
     currentConfig.blackListURLs.some(regex => req.url.match(regex))
   ) {
@@ -77,8 +77,6 @@ export default config => (req, res, next) => {
       }
 
       if (
-        currentConfig &&
-        currentConfig.blackListRoutePaths &&
         Array.isArray(currentConfig.blackListRoutePaths) &&
         currentConfig.blackListRoutePaths.some(routePath =>
           renderProps.routes.some(route => route.path === routePath)
@@ -90,8 +88,13 @@ export default config => (req, res, next) => {
 
       const hash = generateMinimalCSSHash(renderProps.routes) + '|' + device
       const criticalCSS = __CACHE__[hash]
+      const retrysByHash = __RETRYS_BY_HASH__[hash] || 0
 
-      if (!criticalCSS && !__REQUESTING__) {
+      if (
+        !criticalCSS &&
+        !__REQUESTING__ &&
+        retrysByHash <= __MAX_RETRYS_BY_HASH__
+      ) {
         logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
 
         const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
@@ -120,6 +123,9 @@ export default config => (req, res, next) => {
           res.on('error', () => {
             logMessage(`Error Requesting ${serviceRequestURL}`)
             __REQUESTING__ = false
+            __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
+              ? __RETRYS_BY_HASH__[hash] + 1
+              : 0
           })
 
           res.on('end', () => {
@@ -127,7 +133,6 @@ export default config => (req, res, next) => {
 
             // Check if any currentConfig mandatory CSS rule is missing in generated critical CSS
             if (
-              currentConfig &&
               currentConfig.mandatoryCSSRules &&
               Object.keys(currentConfig.mandatoryCSSRules).length >= 1 &&
               renderProps.routes.find(route => {
@@ -138,15 +143,21 @@ export default config => (req, res, next) => {
                 }
                 // Look for css rule missMatch
                 const hasMissmatch = mandatoryCSSRulesForPath.some(cssRule => {
-                  logMessage(
-                    `Missmatch detected at ${route.path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
-                  )
-                  return css.indexOf(cssRule) === -1
+                  const hasMisMatch = css.indexOf(cssRule) === -1
+                  if (hasMisMatch) {
+                    logMessage(
+                      `Mismatch detected at ${route.path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
+                    )
+                    return hasMisMatch
+                  }
                 })
                 return hasMissmatch
               })
             ) {
               // Missing mandatory CSS rule at generated critical CSS
+              __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
+                ? __RETRYS_BY_HASH__[hash] + 1
+                : 0
               return
             }
 
