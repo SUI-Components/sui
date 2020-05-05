@@ -2,12 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.2.0 (2020-05-05)
+
+
+
 # 8.1.0 (2020-05-05)
+
+
+### Bug Fixes
+
+* stop using IndexRedirect ([a450f23](https://github.com/SUI-Components/sui/commit/a450f23db20de2f76d0402ba6c23e97a5a6c8feb))
 
 
 ### Features
 
 * modify studio styling ([fa62724](https://github.com/SUI-Components/sui/commit/fa62724843a1c8fcaeff5cdf329a5c9b315285c4))
+* use new router for studio ([df93be5](https://github.com/SUI-Components/sui/commit/df93be5edabbd7b74fe56d14204fed4b62949820))
+* use sui-react-router ([c283861](https://github.com/SUI-Components/sui/commit/c283861d09cf6282ed6bf73617a2b2517ed2c74e))
+* use sui-react-router latest beta and adapt routes ([1276d25](https://github.com/SUI-Components/sui/commit/1276d2550bc0ff5847174dc6a403f9448da195a8))
 
 
 
