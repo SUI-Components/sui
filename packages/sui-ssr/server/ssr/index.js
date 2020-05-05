@@ -1,8 +1,7 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
 import React from 'react'
-import routes from 'routes'
-import {RouterContext, match} from 'react-router'
+import {RouterContext} from 'react-router'
 import {HeadProvider} from '@s-ui/react-head'
 import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
 import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
@@ -46,29 +45,30 @@ const initialFlush = (res, prpl) => {
   res.flush()
 }
 
+const formatServerTimingHeader = metrics => {
+  const headerString = Object.entries(metrics)
+    .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
+    .replace(/(,$)/g, '')
+
+  return headerString
+}
+
 export default async (req, res, next) => {
-  const {query, matchResult = {}} = req
+  const {
+    context,
+    criticalCSS,
+    matchResult = {},
+    performance,
+    prpl,
+    query,
+    skipSSR
+  } = req
+  const {error, redirectLocation, renderProps} = matchResult
   let [headTplPart, bodyTplPart] = getTplParts(req)
-  const {skipSSR, criticalCSS, prpl} = req
 
   if (skipSSR) {
     return next()
   }
-
-  if (criticalCSS) {
-    headTplPart = headTplPart
-      .replace(
-        HEAD_OPENING_TAG,
-        `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
-      )
-      .replace(
-        'rel="stylesheet"',
-        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
-      )
-      .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
-  }
-
-  const {error, redirectLocation, renderProps} = matchResult
 
   if (error) {
     return next(error)
@@ -91,16 +91,28 @@ export default async (req, res, next) => {
     return next() // We asume that is a 404 page
   }
 
+  if (criticalCSS) {
+    headTplPart = headTplPart
+      .replace(
+        HEAD_OPENING_TAG,
+        `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
+      )
+      .replace(
+        'rel="stylesheet"',
+        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
+      )
+      .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
+  }
+
   const device = buildDeviceFrom({request: req})
-  const {context} = req
 
   // Flush if early-flush is enabled
   if (req.app.locals.earlyFlush) {
     initialFlush(res, prpl)
   }
 
-      let initialData
-      const headTags = []
+  let initialData
+  const headTags = []
 
   const InitialContext = routerProps =>
     [
@@ -130,7 +142,7 @@ export default async (req, res, next) => {
     return next(err)
   }
 
-  const {initialProps, reactString, performance} = initialData
+  const {initialProps, reactString, performance: ssrPerformance} = initialData
 
   // The __HTTP__ object is created before earlyFlush is applied
   // to avoid unexpected behaviors
@@ -155,15 +167,14 @@ export default async (req, res, next) => {
     headTags
   )
 
+  res.set({
+    'Server-Timing': formatServerTimingHeader({
+      ...performance,
+      ...ssrPerformance
+    })
+  })
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()
-
-  res.set({
-    'Server-Timing': `
-    getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
-    renderToString;desc=renderToString;dur=${performance.renderToString}
-  `.replace(/\n/g, '')
-  })
 
   res.end(
     HtmlBuilder.buildBody({
