@@ -1,6 +1,6 @@
 import React from 'react'
-import {Router} from '@s-ui/react-router'
+import {Router, browserHistory} from 'react-router'
 import routes from '../../routes'
 import '../../index.scss'
 
-export default () => <Router routes={routes} />
+export default () => <Router routes={routes} history={browserHistory} />
