@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.11.0 (2020-05-05)
+
+
+### Features
+
+* add config for env and mandatoryCSSRules check for criticalCSS ([585dbd8](https://github.com/SUI-Components/sui/commit/585dbd8ec57b76e7974f45275229cdcde04e8ce7))
+* add max retrys by hash logic ([1707518](https://github.com/SUI-Components/sui/commit/17075188f582c325af7203f55546639c1beb01ce))
+* code doc and logMessages ([ebdf251](https://github.com/SUI-Components/sui/commit/ebdf251b53c29304593adb9fe61b9dbd0b466e5a))
+
+
+
 # 6.10.0 (2020-05-04)
 
 
