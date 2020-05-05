@@ -5,11 +5,7 @@ import routes from 'routes'
 import {RouterContext, match} from 'react-router'
 import {HeadProvider} from '@s-ui/react-head'
 import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
-import {
-  createServerContextFactoryParams,
-  ssrComponentWithInitialProps
-} from '@s-ui/react-initial-props'
-// END __MAGIC IMPORTS__
+import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
 
 import qs from 'querystring'
 import {getTplParts, HtmlBuilder} from '../template'
@@ -20,13 +16,7 @@ import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
 
 // __MAGIC IMPORTS__
-let contextFactory
 let contextProviders
-try {
-  contextFactory = require('contextFactory').default
-} catch (e) {
-  contextFactory = async () => ({})
-}
 try {
   contextProviders = require('contextProviders').default
 } catch (e) {
@@ -102,16 +92,15 @@ export default async (req, res, next) => {
   }
 
   const device = buildDeviceFrom({request: req})
+  const {context} = req
 
   // Flush if early-flush is enabled
   if (req.app.locals.earlyFlush) {
     initialFlush(res, prpl)
   }
 
-  const context = await contextFactory(createServerContextFactoryParams(req))
-
-  let initialData
-  const headTags = []
+      let initialData
+      const headTags = []
 
   const InitialContext = routerProps =>
     [

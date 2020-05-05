@@ -118,6 +118,8 @@ const _memoizedHtmlTemplatesMapping = {}
     next()
   })
 
+  app.use(hooks[TYPES.SETUP_CONTEXT])
+
   app.use(hooks[TYPES.PRE_SSR_HANDLER])
 
   app.get('*', [
