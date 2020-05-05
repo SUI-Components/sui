@@ -45,13 +45,10 @@ const initialFlush = (res, prpl) => {
   res.flush()
 }
 
-const formatServerTimingHeader = metrics => {
-  const headerString = Object.entries(metrics)
+const formatServerTimingHeader = metrics =>
+  Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
     .replace(/(,$)/g, '')
-
-  return headerString
-}
 
 export default async (req, res, next) => {
   const {
