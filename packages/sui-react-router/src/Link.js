@@ -32,7 +32,7 @@ const isManageableTarget = target => !target || target === '_self'
 /**
  * Resolve location detecting if is a function or string
  * @param {function | string} to
- * @param {{ location: string }} router
+ * @param {import('./types').Router} router
  * @returns {String} Location
  */
 const resolveToLocation = (to, router) =>

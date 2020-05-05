@@ -53,6 +53,11 @@ const createComponents = ({nodes, routeInfo}) => {
   return Promise.all(componentsPromises)
 }
 
+/**
+ * Create the reducer to transverse the three
+ * @param {import('../types').Location} location
+ * @returns {(acc: object, node: object) => object}
+ */
 const createReducerRoutesTree = location => (acc, node) => {
   let {remainingPathname, paramNames, paramValues} = acc
   if (acc.isFinished) return acc

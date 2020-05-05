@@ -13,7 +13,7 @@ import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
  *
  * Note: You probably don't want to use this in a browser unless you're using
  * server-side rendering with async routes.
- * @param {{ history?: object, location, routes: Array }} options
+ * @param {{ history?: object, location, routes: import('react').ComponentType }} options
  * @param {Function} callback Function to be execute after match
  */
 export default async (
