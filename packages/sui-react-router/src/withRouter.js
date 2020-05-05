@@ -9,6 +9,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
  */
 export default (Component, {displayName} = {displayName: ''}) => {
   const WrappedComponent = externalProps => {
+    /** @type {import('./types').Router} Extract the router using the hook */
     const router = useRouter()
     const {params, location, routes} = router
     const props = {...externalProps, router, params, location, routes}

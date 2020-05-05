@@ -11,8 +11,14 @@ const createParams = ({paramValues, paramNames}) =>
     return {...acc, [name]: paramValues[index]}
   }, {})
 
+/**
+ * Find if there's a Redirect route
+ * @param {Array} nodes Array of nodes to check
+ */
 const findRedirect = nodes => {
+  // get last node
   const tail = nodes[nodes.length - 1]
+  // if last node is a redirect, we return it
   return tail && tail.redirect ? tail : null
 }
 
@@ -91,7 +97,7 @@ const createReducerRoutesTree = location => (acc, node) => {
 }
 
 /**
- *
+ * Reduce the tree and check if the current location is matching the routes keeping in mind the remainingPathname
  * @param {Object} tree
  * @param {import('../types').Location} location
  * @param {String=} remainingPathname
@@ -137,6 +143,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
 }
 
 export const createTransitionManager = ({history, jsonRoutes}) => {
+  /** @type {import('../types').RouterState} */
   let state = {}
 
   const matchRouteAndUpdateState = async ({location, jsonRoutes}) => {
@@ -155,6 +162,10 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
     return {redirectLocation, routeInfo, components}
   }
 
+  /**
+   * Match the current location with the json routes
+   * @param {import('../types').Location} location Current location object
+   */
   const match = location => {
     location = location
       ? history.createLocation(location)
@@ -211,8 +222,6 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
     return unsubscribe
   }
 
-  // Signature should be (location, indexOnly),
-  // but needs to support (path, query, indexOnly)
   /**
    * Check if current location is the active one using the history
    * @param {import('../types').Location} location
