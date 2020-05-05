@@ -160,55 +160,51 @@ if (phoenix) {
 }
 
 // Retrieve modified packages info from npm shrinkwrap.
-exec(
-  `git diff ${strategy.lockFileName}`,
-  {maxBuffer: MAX_BUFFER},
-  (err, stdout) => {
-    if (err) error(err)
-    const [diff = {}] = parseDiff(stdout)
-    const {hunks} = diff
+exec(`git diff ${strategy.file}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
+  if (err) error(err)
+  const [diff = {}] = parseDiff(stdout)
+  const {hunks} = diff
 
-    if (!hunks) {
-      log('There are no changes.')
-      exit()
-    }
-
-    // Update package versions.
-    let oldPackageVersionParts
-    hunks.find(({lines}) => {
-      return lines.find(line => {
-        oldPackageVersionParts = line.match(oldPackageVersionRegExp)
-        return oldPackageVersionParts
-      })
-    })
-
-    if (!oldPackageVersionParts && !maintainVersion)
-      [...PACKAGE_FILES, strategy.lockFileName].forEach(filePath => {
-        newPackageVersion = updateAndGetFileVersion(filePath)
-      })
-
-    changelogData.push({
-      h2: `${newPackageVersion} (${date.getDate()}/${date.getMonth() +
-        1}/${date.getFullYear()})`
-    })
-
-    log('MODIFIED PACKAGES:')
-    hunks.forEach(({lines}) => {
-      // Get modified packages by filtering lines with git removal syntax from
-      // diff.
-      const linesWithModifiedPackages = lines.filter(line =>
-        line.match(oldVersionRegExp)
-      )
-      linesWithModifiedPackages.forEach(pushModifiedPackage(lines))
-    })
-
-    const modifiedRepositories = modifiedPackages.map(getModifiedRepository)
-
-    Promise.all(modifiedRepositories)
-      .then(responses => responses.map(response => response && response.json()))
-      .then(responses => {
-        Promise.all(responses).then(writeChangelogFile)
-      })
-      .catch(err => error(err))
+  if (!hunks) {
+    log('There are no changes.')
+    exit()
   }
-)
+
+  // Update package versions.
+  let oldPackageVersionParts
+  hunks.find(({lines}) => {
+    return lines.find(line => {
+      oldPackageVersionParts = line.match(oldPackageVersionRegExp)
+      return oldPackageVersionParts
+    })
+  })
+
+  if (!oldPackageVersionParts && !maintainVersion)
+    [...PACKAGE_FILES, strategy.lockFileName].forEach(filePath => {
+      newPackageVersion = updateAndGetFileVersion(filePath)
+    })
+
+  changelogData.push({
+    h2: `${newPackageVersion} (${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()})`
+  })
+
+  log('MODIFIED PACKAGES:')
+  hunks.forEach(({lines}) => {
+    // Get modified packages by filtering lines with git removal syntax from
+    // diff.
+    const linesWithModifiedPackages = lines.filter(line =>
+      line.match(oldVersionRegExp)
+    )
+    linesWithModifiedPackages.forEach(pushModifiedPackage(lines))
+  })
+
+  const modifiedRepositories = modifiedPackages.map(getModifiedRepository)
+
+  Promise.all(modifiedRepositories)
+    .then(responses => responses.map(response => response && response.json()))
+    .then(responses => {
+      Promise.all(responses).then(writeChangelogFile)
+    })
+    .catch(err => error(err))
+})
