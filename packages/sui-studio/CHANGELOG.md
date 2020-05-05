@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.1.0 (2020-05-05)
+
+
+### Features
+
+* modify studio styling ([fa62724](https://github.com/SUI-Components/sui/commit/fa62724843a1c8fcaeff5cdf329a5c9b315285c4))
+
+
+
 # 8.0.0 (2020-05-04)
 
 
