@@ -29,6 +29,9 @@ const webpackConfig = {
       'react-router-dom': path.resolve(
         path.join(process.env.PWD, './node_modules/react-router-dom')
       ),
+      '@s-ui/react-router': path.resolve(
+        path.join(process.env.PWD, './node_modules/@s-ui/react-router')
+      ),
       // add extra alias from the config
       ...parseAlias(config.alias)
     },
