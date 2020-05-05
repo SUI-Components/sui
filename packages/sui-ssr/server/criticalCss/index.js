@@ -123,33 +123,34 @@ export default config => (req, res, next) => {
           })
 
           res.on('end', () => {
-            logMessage(`Add cache entry for ${hash}`)
             __REQUESTING__ = false
 
-            // eslint-disable-next-line no-debugger
-            debugger
-
-            // If Guards are ok then
+            // Check if any currentConfig mandatory CSS rule is missing in generated critical CSS
             if (
               currentConfig &&
               currentConfig.mandatoryCSSRules &&
               Object.keys(currentConfig.mandatoryCSSRules).length >= 1 &&
               renderProps.routes.find(route => {
-                // Find for css rule missMatch
                 const mandatoryCSSRulesForPath =
                   currentConfig.mandatoryCSSRules[route.path]
                 if (!mandatoryCSSRulesForPath) {
                   return false
                 }
-                const hasMissmatch = mandatoryCSSRulesForPath.some(
-                  cssRule => css.indexOf(cssRule) === -1
-                )
+                // Look for css rule missMatch
+                const hasMissmatch = mandatoryCSSRulesForPath.some(cssRule => {
+                  logMessage(
+                    `Missmatch detected at ${route.path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
+                  )
+                  return css.indexOf(cssRule) === -1
+                })
                 return hasMissmatch
               })
             ) {
+              // Missing mandatory CSS rule at generated critical CSS
               return
             }
 
+            logMessage(`Add cache entry for ${hash}`)
             __CACHE__[hash] = css
           })
         })
