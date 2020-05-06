@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.5.0 (2020-05-06)
+
+
+### Bug Fixes
+
+* remove caret of sui-react-router to stay on beta ([f56f6e5](https://github.com/SUI-Components/sui/commit/f56f6e545a61258f96b919d7c67bbe954ab195cb))
+
+
+
 # 8.4.0 (2020-05-06)
 
 
