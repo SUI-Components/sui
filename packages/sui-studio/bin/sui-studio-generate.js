@@ -183,7 +183,6 @@ $ npm install ${packageName}
 #### Import package and use the component
 
 \`\`\`js
-// Javascript
 import ${componentInPascal} from '${packageName}'
 
 return (<${componentInPascal} />)
