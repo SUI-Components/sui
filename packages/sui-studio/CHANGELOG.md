@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.4.0 (2020-05-06)
+
+
+### Bug Fixes
+
+* use correct beta for router ([be5ac83](https://github.com/SUI-Components/sui/commit/be5ac83028a2e2b44dbad28b9aa1ed2bc8505edf))
+
+
+### Features
+
+* rollback studio version ([e54cfd4](https://github.com/SUI-Components/sui/commit/e54cfd468588a03cd6f9cb1a0da63abf786c859b))
+
+
+### Reverts
+
+* Revert "Revert "Merge pull request #813 from SUI-Components/feat/move-studio-to-new-sui-react-router"" ([bc3fa74](https://github.com/SUI-Components/sui/commit/bc3fa747afe7ea485252a7cb0d8d328018c0077a)), closes [#813](https://github.com/SUI-Components/sui/issues/813)
+
+
+
 # 8.3.0 (2020-05-05)
 
 
