@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
-import {Link} from 'react-router'
+import {Link} from '@s-ui/react-router'
 import Logo from './Logo'
 
 import {getComponentsList, getStudioName} from '../utils'
