@@ -19,6 +19,13 @@ import {
   readHtmlTemplate
 } from './utils'
 
+import noOPConsole from 'noop-console'
+noOPConsole(console)
+
+if (process.env.CONSOLE) {
+  console._restore()
+}
+
 const app = express()
 
 app.set('x-powered-by', false)

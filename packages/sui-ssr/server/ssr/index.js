@@ -73,7 +73,7 @@ export default async (req, res, next) => {
   }
 
   if (criticalCSS) {
-    headTplPart = headTplPart
+    let nextHeadTplPart = headTplPart
       .replace(
         HEAD_OPENING_TAG,
         `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
@@ -82,7 +82,12 @@ export default async (req, res, next) => {
         'rel="stylesheet"',
         'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
       )
-      .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
+      .replace(
+        HEAD_CLOSING_TAG,
+        `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`
+      )
+    headTplPart = (' ' + nextHeadTplPart).slice(1)
+    nextHeadTplPart = null
   }
 
   if (prpl) {
@@ -92,7 +97,7 @@ export default async (req, res, next) => {
       }, '')
       .replace(/,/, '')
 
-    res.set('Link', linkHeader)
+    res.set('Link', (' ' + linkHeader).slice(1))
     linkHeader = null
   }
 

@@ -8,9 +8,11 @@ const BODY_CLOSING_TAG = '</body>'
  * @return {Array}
  */
 export const getTplParts = req => {
-  const appParts = req.htmlTemplate.split(HEAD_CLOSING_TAG)
+  let copyHTMLTemplate = (' ' + req.htmlTemplate).slice(1)
+  const appParts = copyHTMLTemplate.split(HEAD_CLOSING_TAG)
 
   appParts[0] = `${appParts[0]}${HEAD_CLOSING_TAG}`
+  copyHTMLTemplate = null
 
   return appParts
 }
@@ -18,10 +20,22 @@ export const getTplParts = req => {
 export class HtmlBuilder {}
 
 HtmlBuilder.buildHead = ({headTplPart, headString = ''}) => {
-  const headElement = headTplPart.substr(headTplPart.indexOf('<head'))
-  const headOpenningTag = headElement.substr(0, headElement.indexOf('>') + 1)
+  let copyHeadTplPart = (' ' + headTplPart).slice(1)
+  let copyHeadString = (' ' + headString).slice(1)
 
-  return headTplPart.replace(headOpenningTag, `${headOpenningTag}${headString}`)
+  let headElement = copyHeadTplPart.substr(copyHeadTplPart.indexOf('<head'))
+  let headOpenningTag = headElement.substr(0, headElement.indexOf('>') + 1)
+
+  const nextHead = copyHeadTplPart.replace(
+    headOpenningTag,
+    `${headOpenningTag}${copyHeadString}`
+  )
+  copyHeadTplPart = null
+  copyHeadString = null
+  headElement = null
+  headOpenningTag = null
+
+  return nextHead
 }
 
 HtmlBuilder.buildBody = ({
