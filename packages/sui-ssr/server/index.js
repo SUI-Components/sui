@@ -65,6 +65,7 @@ const _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
+  app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.PRE_HEALTH])
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
@@ -88,7 +89,7 @@ const _memoizedHtmlTemplatesMapping = {}
         customTlds: /localhost|\.local/
       })
 
-        !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
+      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
         ? next()
@@ -131,5 +132,7 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-    app.listen(PORT, () => console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)) // eslint-disable-line
+  app.listen(PORT, () =>
+    console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)
+  ) // eslint-disable-line
 })()
