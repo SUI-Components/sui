@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.7.0 (2020-05-07)
+
+
+
 # 8.6.0 (2020-05-07)
+
+
+### Features
+
+* improve sui-studio generate documentation ([cadf8fe](https://github.com/SUI-Components/sui/commit/cadf8fe385f250c5fa0979426b9ef229034327ae))
+* removed comment ([fd3e8ac](https://github.com/SUI-Components/sui/commit/fd3e8acee23168fe8e3ee413d357c1ea34ac3c76))
 
 
 
