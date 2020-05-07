@@ -46,7 +46,7 @@ HtmlBuilder.buildBody = ({
   initialProps,
   performance
 }) => {
-  let html = `${bodyTplPart}`
+  let html = (' ' + bodyTplPart).slice(1)
 
   if (bodyAttributes) {
     html = html.replace('<body>', `<body ${bodyAttributes.toString()}>`)
