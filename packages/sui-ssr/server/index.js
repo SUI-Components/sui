@@ -72,6 +72,8 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use(compression())
 
+  app.use(hooks[TYPES.BOOTSTRAP])
+  app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
@@ -80,7 +82,6 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(useStaticsByHost(express.static))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
-  app.use(hooks[TYPES.ROUTE_MATCHING])
 
   ssrConf.forceWWW &&
     app.use((req, res, next) => {
