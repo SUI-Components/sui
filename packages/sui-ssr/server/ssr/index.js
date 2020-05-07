@@ -29,22 +29,6 @@ const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const initialFlush = (res, prpl) => {
-  res.type(ssrConfig.serverContentType)
-  if (prpl) {
-    res.set(
-      'Link',
-      prpl.hints
-        .reduce((acc, hint) => {
-          return `${acc},<${hint.url}>; rel=preload; as=script`
-        }, '')
-        .replace(/,/, '')
-    )
-  }
-
-  res.flush()
-}
-
 const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
@@ -101,11 +85,23 @@ export default async (req, res, next) => {
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
 
+  if (prpl) {
+    let linkHeader = prpl.hints
+      .reduce((acc, hint) => {
+        return `${acc},<${hint.url}>; rel=preload; as=script`
+      }, '')
+      .replace(/,/, '')
+
+    res.set('Link', linkHeader)
+    linkHeader = null
+  }
+
   const device = buildDeviceFrom({request: req})
 
   // Flush if early-flush is enabled
   if (req.app.locals.earlyFlush) {
-    initialFlush(res, prpl)
+    res.type(ssrConfig.serverContentType)
+    res.flush()
   }
 
   let initialData
@@ -154,7 +150,8 @@ export default async (req, res, next) => {
 
   // Flush now if early-flush is disabled
   if (!req.app.locals.earlyFlush) {
-    initialFlush(res)
+    res.type(ssrConfig.serverContentType)
+    res.flush()
   }
 
   // The first html content has the be set after any possible call to next().

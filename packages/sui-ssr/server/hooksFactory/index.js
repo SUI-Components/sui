@@ -4,6 +4,7 @@ import {promisify} from 'util'
 import {resolve} from 'path'
 import {getTplParts, HtmlBuilder} from '../template'
 import {publicFolderByHost, hrTimeToMs} from '../utils'
+import ssrConf from '../config'
 
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
@@ -34,7 +35,11 @@ const getStaticErrorPageContent = async (status, req) => {
     return __PAGES__[status]
   }
   const html = await promisify(readFile)(
-    resolve(process.cwd(), publicFolderByHost(req), `${status}.html`),
+    resolve(
+      process.cwd(),
+      ssrConf.multiSite ? publicFolderByHost(req) : 'public',
+      `${status}.html`
+    ),
     'utf8'
   ).catch(e => `Generic Error Page: ${status}`)
   __PAGES__[status] = html
