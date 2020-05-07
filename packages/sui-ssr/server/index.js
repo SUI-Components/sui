@@ -65,6 +65,7 @@ const _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
+  app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.PRE_HEALTH])
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
@@ -72,7 +73,6 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use(compression())
 
-  app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
