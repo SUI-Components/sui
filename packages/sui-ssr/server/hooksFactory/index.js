@@ -151,7 +151,7 @@ export const hooksFactory = async () => {
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
       // getInitialProps could throw a 404 error or any other error
-      req.log && req.log.error && req.log.error(err)
+      req.log && req.log.error && req.log.error((' ' + err.message).slice(1))
       const status =
         err.message && err.message.includes(NOT_FOUND_CODE)
           ? NOT_FOUND_CODE
