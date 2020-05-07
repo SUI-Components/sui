@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.6.0 (2020-05-07)
+
+
+
 # 8.5.0 (2020-05-06)
 
 
@@ -21,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+* provide the displayName to the tested components ([147121c](https://github.com/SUI-Components/sui/commit/147121c2217ce02ee4597f0e96bc4e9b6711c056))
 * rollback studio version ([e54cfd4](https://github.com/SUI-Components/sui/commit/e54cfd468588a03cd6f9cb1a0da63abf786c859b))
 
 
