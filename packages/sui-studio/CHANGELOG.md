@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.8.0 (2020-05-07)
+
+
+### Bug Fixes
+
+* stop having super large windows when errors are long ([aa6e790](https://github.com/SUI-Components/sui/commit/aa6e790d80ef7ae02127b2a3caddbdd0b426580e))
+
+
+
 # 8.7.0 (2020-05-07)
 
 
