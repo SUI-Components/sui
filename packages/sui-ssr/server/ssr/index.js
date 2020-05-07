@@ -1,15 +1,10 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
 import React from 'react'
-import routes from 'routes'
-import {RouterContext, match} from 'react-router'
+import {RouterContext} from 'react-router'
 import {HeadProvider} from '@s-ui/react-head'
 import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
-import {
-  createServerContextFactoryParams,
-  ssrComponentWithInitialProps
-} from '@s-ui/react-initial-props'
-// END __MAGIC IMPORTS__
+import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
 
 import qs from 'querystring'
 import {getTplParts, HtmlBuilder} from '../template'
@@ -20,13 +15,7 @@ import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
 
 // __MAGIC IMPORTS__
-let contextFactory
 let contextProviders
-try {
-  contextFactory = require('contextFactory').default
-} catch (e) {
-  contextFactory = async () => ({})
-}
 try {
   contextProviders = require('contextProviders').default
 } catch (e) {
@@ -56,13 +45,47 @@ const initialFlush = (res, prpl) => {
   res.flush()
 }
 
-export default (req, res, next) => {
-  const {url, query} = req
+const formatServerTimingHeader = metrics =>
+  Object.entries(metrics)
+    .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
+    .replace(/(,$)/g, '')
+
+export default async (req, res, next) => {
+  const {
+    context,
+    criticalCSS,
+    matchResult = {},
+    performance,
+    prpl,
+    query,
+    skipSSR
+  } = req
+  const {error, redirectLocation, renderProps} = matchResult
   let [headTplPart, bodyTplPart] = getTplParts(req)
-  const {skipSSR, criticalCSS, prpl} = req
 
   if (skipSSR) {
     return next()
+  }
+
+  if (error) {
+    return next(error)
+  }
+
+  if (redirectLocation) {
+    const queryString = Object.keys(query).length
+      ? `?${qs.stringify(query)}`
+      : ''
+    const destination = `${redirectLocation.pathname}${queryString}`
+    return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
+  }
+
+  if (!renderProps) {
+    // This case will never happen if a "*" path is implemented for not-found pages.
+    // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`,
+    // the app (client side) won't respond either so the same result is obtained with
+    // the following line (best performance) than explicitly passing an error using
+    // `next(new Error(404))`
+    return next() // We asume that is a 404 page
   }
 
   if (criticalCSS) {
@@ -78,121 +101,86 @@ export default (req, res, next) => {
       .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
   }
 
-  match(
-    {routes, location: url},
-    async (error, redirectLocation, renderProps) => {
-      if (!error && redirectLocation) {
-        const queryString = Object.keys(query).length
-          ? `?${qs.stringify(query)}`
-          : ''
-        const destination = `${redirectLocation.pathname}${queryString}`
-        return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
-      }
+  const device = buildDeviceFrom({request: req})
 
-      if (error) {
-        return next(error)
-      }
+  // Flush if early-flush is enabled
+  if (req.app.locals.earlyFlush) {
+    initialFlush(res, prpl)
+  }
 
-      if (!renderProps) {
-        // This case will never happen if a "*" path is implemented for not-found pages.
-        // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`,
-        // the app (client side) won't respond either so the same result is obtained with
-        // the following line (best performance) than explicitly passing an error using
-        // `next(new Error(404))`
-        return next() // We asume that is a 404 page
-      }
+  let initialData
+  const headTags = []
 
-      const device = buildDeviceFrom({request: req})
+  const InitialContext = routerProps =>
+    [
+      {
+        provider: RouterContext,
+        props: routerProps
+      },
+      {
+        provider: HeadProvider,
+        props: {headTags}
+      },
+      ...contextProviders
+    ].reduce(
+      (acc, {provider, props}) => React.createElement(provider, props, acc),
+      null
+    )
 
-      // Flush if early-flush is enabled
-      if (req.app.locals.earlyFlush) {
-        initialFlush(res, prpl)
-      }
+  try {
+    initialData = await ssrComponentWithInitialProps({
+      context: {...context, device},
+      renderProps,
+      Target: ssrConfig.useLegacyContext
+        ? withAllContexts({...context, device})(InitialContext)
+        : withSUIContext({...context, device})(InitialContext)
+    })
+  } catch (err) {
+    return next(err)
+  }
 
-      const context = await contextFactory(
-        createServerContextFactoryParams(req)
-      )
+  const {initialProps, reactString, performance: ssrPerformance} = initialData
 
-      let initialData
-      const headTags = []
+  // The __HTTP__ object is created before earlyFlush is applied
+  // to avoid unexpected behaviors
 
-      const InitialContext = routerProps =>
-        [
-          {
-            provider: RouterContext,
-            props: routerProps
-          },
-          {
-            provider: HeadProvider,
-            props: {headTags}
-          },
-          ...contextProviders
-        ].reduce(
-          (acc, {provider, props}) => React.createElement(provider, props, acc),
-          null
-        )
-
-      try {
-        initialData = await ssrComponentWithInitialProps({
-          context: {...context, device},
-          renderProps,
-          Target: ssrConfig.useLegacyContext
-            ? withAllContexts({...context, device})(InitialContext)
-            : withSUIContext({...context, device})(InitialContext)
-        })
-      } catch (err) {
-        return next(err)
-      }
-
-      const {initialProps, reactString, performance} = initialData
-
-      // The __HTTP__ object is created before earlyFlush is applied
-      // to avoid unexpected behaviors
-
-      const {__HTTP__} = initialProps
-      if (__HTTP__) {
-        const {redirectTo} = __HTTP__
-        if (redirectTo) {
-          return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
-        }
-      }
-
-      // Flush now if early-flush is disabled
-      if (!req.app.locals.earlyFlush) {
-        initialFlush(res)
-      }
-
-      // The first html content has the be set after any possible call to next().
-      // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
-      // no matter the error page strategy set (loadSPAOnNotFound: true|false)
-      const {
-        bodyAttributes,
-        headString,
-        htmlAttributes
-      } = renderHeadTagsToString(headTags)
-
-      res.write(
-        HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes})
-      )
-      res.flush()
-
-      // res.set({
-      //   'Server-Timing': `
-      //   getInitialProps;desc=getInitialProps;dur=${performance.getInitialProps},
-      //   renderToString;desc=renderToString;dur=${performance.renderToString}
-      // `.replace(/\n/g, '')
-      // })
-
-      res.end(
-        HtmlBuilder.buildBody({
-          bodyAttributes,
-          bodyTplPart,
-          reactString,
-          appConfig: req.appConfig,
-          initialProps,
-          performance
-        })
-      )
+  const {__HTTP__} = initialProps
+  if (__HTTP__) {
+    const {redirectTo} = __HTTP__
+    if (redirectTo) {
+      return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
     }
+  }
+
+  // Flush now if early-flush is disabled
+  if (!req.app.locals.earlyFlush) {
+    initialFlush(res)
+  }
+
+  // The first html content has the be set after any possible call to next().
+  // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
+  // no matter the error page strategy set (loadSPAOnNotFound: true|false)
+  const {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(
+    headTags
+  )
+
+  res.set({
+    'Server-Timing': formatServerTimingHeader({
+      ...performance,
+      ...ssrPerformance
+    })
+  })
+  res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
+  res.flush()
+
+  res.end(
+    HtmlBuilder.buildBody({
+      bodyAttributes,
+      bodyTplPart,
+      reactString,
+      appConfig: req.appConfig,
+      initialProps,
+      performance
+    })
   )
 }
