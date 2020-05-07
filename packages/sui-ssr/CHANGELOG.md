@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.13.0 (2020-05-07)
+
+
+### Bug Fixes
+
+* fix hooks order ([e379a6d](https://github.com/SUI-Components/sui/commit/e379a6d82dc48f6b79dd649359d399fdbc00fb7c))
+
+
+### Features
+
+* activate bootstrap hook ([a0b58a5](https://github.com/SUI-Components/sui/commit/a0b58a5dfef642197e3a4c0e8414aa27d0c136f7))
+* boostrap even before pre health ([eee0eeb](https://github.com/SUI-Components/sui/commit/eee0eebf7fdffb52f6491e23848a84aa637c4417))
+
+
+
 # 6.12.0 (2020-05-07)
 
 
