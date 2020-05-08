@@ -34,14 +34,14 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
     }
 
     if (prpl) {
-      resp.set(
-        'Link',
-        prpl.hints
-          .reduce((acc, hint) => {
-            return `${acc},<${hint.url}>; rel=preload; as=script`
-          }, '')
-          .replace(/,/, '')
-      )
+      let linkHeader = prpl.hints
+        .reduce((acc, hint) => {
+          return `${acc},<${hint.url}>; rel=preload; as=script`
+        }, '')
+        .replace(/,/, '')
+
+      resp.set('Link', linkHeader)
+      linkHeader = null
     }
 
     return enabledDynamicRendering

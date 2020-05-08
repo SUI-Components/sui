@@ -4,6 +4,7 @@ import {promisify} from 'util'
 import {resolve} from 'path'
 import {getTplParts, HtmlBuilder} from '../template'
 import {publicFolderByHost, hrTimeToMs} from '../utils'
+import ssrConf from '../config'
 
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
@@ -34,7 +35,11 @@ const getStaticErrorPageContent = async (status, req) => {
     return __PAGES__[status]
   }
   const html = await promisify(readFile)(
-    resolve(process.cwd(), publicFolderByHost(req), `${status}.html`),
+    resolve(
+      process.cwd(),
+      ssrConf.multiSite ? publicFolderByHost(req) : 'public',
+      `${status}.html`
+    ),
     'utf8'
   ).catch(e => `Generic Error Page: ${status}`)
   __PAGES__[status] = html
@@ -146,7 +151,7 @@ export const hooksFactory = async () => {
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
       // getInitialProps could throw a 404 error or any other error
-      req.log && req.log.error && req.log.error(err)
+      req.log && req.log.error && req.log.error((' ' + err.message).slice(1))
       const status =
         err.message && err.message.includes(NOT_FOUND_CODE)
           ? NOT_FOUND_CODE
