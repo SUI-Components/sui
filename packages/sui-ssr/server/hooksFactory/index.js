@@ -79,12 +79,12 @@ export const hooksFactory = async () => {
 
       match[promisify.custom] = args =>
         new Promise((resolve, reject) => {
-          match(args, (error, redirection, renderProps) => {
+          match(args, (error, redirectLocation, renderProps) => {
             if (error) {
               reject(error)
             }
 
-            resolve({redirection, renderProps})
+            resolve({redirectLocation, renderProps})
           })
         })
 
