@@ -2,12 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.15.0 (2020-05-08)
+
+
+
 # 6.14.0 (2020-05-08)
 
 
 ### Bug Fixes
 
+* fix error memory leak ([f5c7610](https://github.com/SUI-Components/sui/commit/f5c76104430f8aa2b4b1328c2fef619ba0247089))
+* fix memory leak ([65c8958](https://github.com/SUI-Components/sui/commit/65c89581ed5767e0ebc914bad15441319832cd5d))
+* fix performance issue with strings ([2e727a2](https://github.com/SUI-Components/sui/commit/2e727a256022a70cf01dec85c4eb85568aa951cb))
 * fix redirect location param name ([6786f7c](https://github.com/SUI-Components/sui/commit/6786f7c3719bd978c56f847ec78ca902b415a856))
+* fix string memory leak ([acf4dc6](https://github.com/SUI-Components/sui/commit/acf4dc6fed50b64109be06eedbfd0aeafe1a0cc1))
 
 
 
