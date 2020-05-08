@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.14.0 (2020-05-08)
+
+
+### Bug Fixes
+
+* fix redirect location param name ([6786f7c](https://github.com/SUI-Components/sui/commit/6786f7c3719bd978c56f847ec78ca902b415a856))
+
+
+
 # 6.13.0 (2020-05-07)
 
 
