@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.6.0 (2020-05-11)
+
+
+### Features
+
+* add package-lock support and do not update version flag ([93663e8](https://github.com/SUI-Components/sui/commit/93663e8bf970813953dbd6ed1616c5486de63faa))
+* rename strategy file key ([6b81c35](https://github.com/SUI-Components/sui/commit/6b81c3517259d99a85ba0c5e29f7563994f17892))
+
+
+
 # 1.5.0 (2020-04-29)
 
 
