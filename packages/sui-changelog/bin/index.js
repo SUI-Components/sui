@@ -5,6 +5,7 @@ const parseDiff = require('what-the-diff').parse
 const exec = require('child_process').exec
 const execSync = require('child_process').execSync
 const json2md = require('json2md')
+const strategyFactory = require('../src/strategies/factory')
 const fs = require('fs')
 const log = console.log
 const error = console.error
@@ -12,7 +13,6 @@ const exit = process.exit
 const date = new Date()
 const {
   DEFAULT_SCOPES,
-  LOCK_FILE_NAME,
   PACKAGE_FILES,
   MAX_BUFFER,
   version,
@@ -142,25 +142,31 @@ const writeChangelogFile = repositories => {
 program
   .version(version)
   .option('-p, --phoenix', 'Run a phoenix before building the changelog.')
+  .option(
+    '-l, --package-lock',
+    'Uses package-lock.json file instead of npm-shrinkwrap'
+  )
+  .option('-m, --maintain-version')
   .parse(process.argv)
 
-const {phoenix} = program
+const {phoenix, packageLock, maintainVersion} = program
+
+const strategy = strategyFactory(packageLock)
 
 if (phoenix) {
-  execSync(
-    `npx rimraf node_modules && npx rimraf ${LOCK_FILE_NAME} && npm install --prefer-online && npm shrinkwrap`
-  )
+  execSync(strategy.phoenixCommand)
 } else {
-  execSync(`npx rimraf ${LOCK_FILE_NAME} && npm shrinkwrap`)
+  execSync(strategy.installCommand)
 }
+
 // Retrieve modified packages info from npm shrinkwrap.
-exec(`git diff ${LOCK_FILE_NAME}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
+exec(`git diff ${strategy.file}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
   if (err) error(err)
   const [diff = {}] = parseDiff(stdout)
   const {hunks} = diff
 
   if (!hunks) {
-    log('There are no changes in your shrinkwrap.')
+    log('There are no changes.')
     exit()
   }
 
@@ -173,8 +179,8 @@ exec(`git diff ${LOCK_FILE_NAME}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
     })
   })
 
-  if (!oldPackageVersionParts)
-    PACKAGE_FILES.forEach(filePath => {
+  if (!oldPackageVersionParts && !maintainVersion)
+    [...PACKAGE_FILES, strategy.lockFileName].forEach(filePath => {
       newPackageVersion = updateAndGetFileVersion(filePath)
     })
 
