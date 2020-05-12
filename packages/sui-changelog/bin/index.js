@@ -180,7 +180,7 @@ exec(`git diff ${strategy.file}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
   })
 
   if (!oldPackageVersionParts && !maintainVersion)
-    [...PACKAGE_FILES, strategy.lockFileName].forEach(filePath => {
+    [...PACKAGE_FILES, strategy.file].forEach(filePath => {
       newPackageVersion = updateAndGetFileVersion(filePath)
     })
 
