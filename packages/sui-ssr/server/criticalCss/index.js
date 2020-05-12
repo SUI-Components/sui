@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-import routes from 'routes'
-import match from '@s-ui/react-router/lib/match'
 import https from 'https'
 import parser from 'ua-parser-js'
+import {hrTimeToMs} from '../utils'
 
 let __REQUESTING__ = false
 let __CACHE__ = {}
@@ -21,7 +20,20 @@ const logMessageFactory = url => message =>
   console.log(`\u001b[36m[CRITICAL CSS](${url})\u001b[0m`, message)
 
 export default config => (req, res, next) => {
+  const startCriticalCSSTime = process.hrtime()
+
+  const {matchResult = {}, performance = {}} = req
   const logMessage = logMessageFactory(req.url)
+
+  const {error, renderProps} = matchResult
+
+  if (error) {
+    return next(error)
+  }
+
+  if (!renderProps) {
+    return next()
+  }
 
   if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
     logMessage('Skip middleware because it is inactive')
@@ -63,115 +75,114 @@ export default config => (req, res, next) => {
     mobile: 'm'
   }
   const device = deviceTypes[type] || deviceTypes.desktop
-  const {url} = req
 
-  match(
-    {routes, location: url},
-    async (error, redirectLocation, renderProps) => {
-      if (error) {
-        return next(error)
+  if (
+    Array.isArray(currentConfig.blackListRoutePaths) &&
+    currentConfig.blackListRoutePaths.some(routePath =>
+      renderProps.routes.some(route => route.path === routePath)
+    )
+  ) {
+    logMessage('Skip middleware because route path is blacklisted')
+    return next()
+  }
+
+  const hash = generateMinimalCSSHash(renderProps.routes) + '|' + device
+  const criticalCSS = __CACHE__[hash]
+  const retrysByHash = __RETRYS_BY_HASH__[hash] || 0
+
+  if (
+    !criticalCSS &&
+    !__REQUESTING__ &&
+    retrysByHash <= __MAX_RETRYS_BY_HASH__
+  ) {
+    logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
+
+    const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
+    const headers = currentConfig.customHeaders
+    const options = {
+      ...(headers && {
+        headers
+      })
+    }
+
+    logMessage(serviceRequestURL)
+
+    __REQUESTING__ = true
+    https.get(serviceRequestURL, options, res => {
+      let css = ''
+      if (res.statusCode !== 200) {
+        __REQUESTING__ = false
+        logMessage(`No 200 request, statusCode: ${res.statusCode}`)
+
+        return
       }
+      res.on('data', data => {
+        css += data
+      })
 
-      if (!renderProps) {
-        return next()
-      }
+      res.on('error', () => {
+        logMessage(`Error Requesting ${serviceRequestURL}`)
+        __REQUESTING__ = false
+        __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
+          ? __RETRYS_BY_HASH__[hash] + 1
+          : 0
+      })
 
-      if (
-        Array.isArray(currentConfig.blackListRoutePaths) &&
-        currentConfig.blackListRoutePaths.some(routePath =>
-          renderProps.routes.some(route => route.path === routePath)
-        )
-      ) {
-        logMessage('Skip middleware because route path is blacklisted')
-        return next()
-      }
+      res.on('end', () => {
+        __REQUESTING__ = false
 
-      const hash = generateMinimalCSSHash(renderProps.routes) + '|' + device
-      const criticalCSS = __CACHE__[hash]
-      const retrysByHash = __RETRYS_BY_HASH__[hash] || 0
+        const {mandatoryCSSRules} = currentConfig
+        const hasMandatoryRules =
+          mandatoryCSSRules && Object.keys(mandatoryCSSRules).length >= 1
 
-      if (
-        !criticalCSS &&
-        !__REQUESTING__ &&
-        retrysByHash <= __MAX_RETRYS_BY_HASH__
-      ) {
-        logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
+        if (hasMandatoryRules) {
+          // Check if any currentConfig mandatory CSS rule is missing in generated critical CSS
+          const isMandatoryCssMissingInCritical = renderProps.routes.find(
+            ({path}) => {
+              if (!path) {
+                return false
+              }
 
-        const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
-        const headers = currentConfig.customHeaders
-        const options = {
-          ...(headers && {
-            headers
-          })
-        }
+              const mandatoryCSSRulesForPath = mandatoryCSSRules[path]
+              if (!mandatoryCSSRulesForPath) return false
 
-        logMessage(serviceRequestURL)
+              const checkCssRuleAgainstPath = cssRule => {
+                const hasMismatch = !css.includes(cssRule)
+                if (hasMismatch) {
+                  logMessage(
+                    `Mismatch detected at ${path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
+                  )
+                  return hasMismatch
+                }
+              }
 
-        __REQUESTING__ = true
-        https.get(serviceRequestURL, options, res => {
-          let css = ''
-          if (res.statusCode !== 200) {
-            __REQUESTING__ = false
-            logMessage(`No 200 request, statusCode: ${res.statusCode}`)
+              // Check all css rules against path
+              return mandatoryCSSRulesForPath.some(checkCssRuleAgainstPath)
+            }
+          )
 
-            return
-          }
-          res.on('data', data => {
-            css += data
-          })
-
-          res.on('error', () => {
-            logMessage(`Error Requesting ${serviceRequestURL}`)
-            __REQUESTING__ = false
+          if (isMandatoryCssMissingInCritical) {
             __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
               ? __RETRYS_BY_HASH__[hash] + 1
               : 0
-          })
+            return
+          }
+        }
 
-          res.on('end', () => {
-            __REQUESTING__ = false
+        logMessage(`Add cache entry for ${hash}`)
+        __CACHE__[hash] = css
+      })
+    })
+  }
 
-            const {mandatoryCSSRules} = currentConfig
-            const hasMandatoryRules =
-              mandatoryCSSRules && Object.keys(mandatoryCSSRules).length >= 1
+  criticalCSS && (req.criticalCSS = criticalCSS)
 
-            // Check if any currentConfig mandatory CSS rule is missing in generated critical CSS
-            const isMandatoryCssMissingInCritical = renderProps.routes.find(
-              route => {
-                const mandatoryCSSRulesForPath = mandatoryCSSRules[route.path]
-                if (!mandatoryCSSRulesForPath) return false
+  const diffCriticalCSSTime = process.hrtime(startCriticalCSSTime)
 
-                const checkCssRuleAgainstPath = cssRule => {
-                  const hasMismatch = !css.includes(cssRule)
-                  if (hasMismatch) {
-                    logMessage(
-                      `Mismatch detected at ${route.path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
-                    )
-                    return hasMismatch
-                  }
-                }
+  req.performance = {
+    ...performance,
+    criticalCSS: hrTimeToMs(diffCriticalCSSTime)
+  }
 
-                // Check all css rules against path
-                return mandatoryCSSRulesForPath.some(checkCssRuleAgainstPath)
-              }
-            )
-
-            if (hasMandatoryRules && isMandatoryCssMissingInCritical) {
-              __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
-                ? __RETRYS_BY_HASH__[hash] + 1
-                : 0
-              return
-            }
-
-            logMessage(`Add cache entry for ${hash}`)
-            __CACHE__[hash] = css
-          })
-        })
-      }
-
-      criticalCSS && (req.criticalCSS = criticalCSS)
-
-      next()
-    }
-  )
+  next()
 }

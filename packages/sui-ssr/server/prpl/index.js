@@ -1,7 +1,5 @@
-import routes from 'routes'
-import match from '@s-ui/react-router/lib/match'
 import https from 'https'
-import parser from 'ua-parser-js'
+import {hrTimeToMs} from '../utils'
 
 let __REQUESTING__ = false
 let __CACHE__ = {}
@@ -15,10 +13,24 @@ const generatePRPLHash = routes => {
 
 const logMessageFactory = url => message =>
   process.env.VERBOSE &&
-  console.log(`\u001b[32m[PRPL](${url})\u001b[0m`, message)
+  console.log(`\u001b[32m[PRPL](${url})\u001b[0m`, message) // eslint-disable-line no-console
 
 export default config => (req, res, next) => {
+  const startPRPLTime = process.hrtime()
+
+  const {matchResult = {}, performance = {}} = req
+  const {error, renderProps} = matchResult
+
+  if (error) {
+    return next(error)
+  }
+
+  if (!renderProps) {
+    return next()
+  }
+
   const logMessage = logMessageFactory(req.url)
+
   if (req.url.match('x-prpl-cache-invalidate')) {
     logMessage('Cache invalidate')
     __CACHE__ = {}
@@ -48,78 +60,70 @@ export default config => (req, res, next) => {
     '://' +
     (process.env.PRPL_HOST || currentConfig.host || req.hostname) +
     req.url
-  const {url} = req
 
-  match(
-    {routes, location: url},
-    async (error, redirectLocation, renderProps) => {
-      if (error) {
-        return next(error)
-      }
+  if (
+    Array.isArray(currentConfig.blackListRoutePaths) &&
+    currentConfig.blackListRoutePaths.some(routePath =>
+      renderProps.routes.some(route => route.path === routePath)
+    )
+  ) {
+    logMessage('Skip middleware because route path is blacklisted')
+    return next()
+  }
 
-      if (!renderProps) {
-        return next()
-      }
+  const hash = generatePRPLHash(renderProps.routes) + '|' + 'FIX_M_ALL_REQUEST'
+  const prpl = __CACHE__[hash]
 
-      if (
-        Array.isArray(currentConfig.blackListRoutePaths) &&
-        currentConfig.blackListRoutePaths.some(routePath =>
-          renderProps.routes.some(route => route.path === routePath)
-        )
-      ) {
-        logMessage('Skip middleware because route path is blacklisted')
-        return next()
-      }
+  if (!prpl && !__REQUESTING__) {
+    logMessage(`Generation PRPL for -> ${urlRequest} with ${hash}`)
 
-      const hash =
-        generatePRPLHash(renderProps.routes) + '|' + 'FIX_M_ALL_REQUEST'
-      const prpl = __CACHE__[hash]
+    const serviceRequestURL = `https://critical-prpl-service.now.sh/prpl?device=m&url=${encodeURIComponent(
+      urlRequest
+    )}&cdn=${currentConfig.cdn}&strategy=${currentConfig.strategy}`
 
-      if (!prpl && !__REQUESTING__) {
-        logMessage(`Generation PRPL for -> ${urlRequest} with ${hash}`)
+    logMessage(serviceRequestURL)
 
-        const serviceRequestURL = `https://critical-prpl-service.now.sh/prpl?device=m&url=${encodeURIComponent(
-          urlRequest
-        )}&cdn=${currentConfig.cdn}&strategy=${currentConfig.strategy}`
-
-        logMessage(serviceRequestURL)
-
-        const headers = currentConfig.customHeaders
-        const options = {
-          ...(headers && {headers})
-        }
-
-        __REQUESTING__ = true
-        https.get(serviceRequestURL, options, res => {
-          let json = ''
-          if (res.statusCode !== 200) {
-            __REQUESTING__ = false
-            logMessage(`No 200 request, statusCode: ${res.statusCode}`)
-
-            return
-          }
-          res.on('data', data => {
-            json += data
-          })
-          res.on('error', () => {
-            logMessage(`Error Requesting ${serviceRequestURL}`)
-            __REQUESTING__ = false
-          })
-          res.on('end', () => {
-            __REQUESTING__ = false
-            try {
-              __CACHE__[hash] = JSON.parse(json)
-              logMessage(`Add cache entry for ${hash}`)
-            } catch (e) {
-              logMessage('Impossible parse response JSON')
-            }
-          })
-        })
-      } else {
-        req.prpl = prpl
-      }
-
-      next()
+    const headers = currentConfig.customHeaders
+    const options = {
+      ...(headers && {headers})
     }
-  )
+
+    __REQUESTING__ = true
+    https.get(serviceRequestURL, options, res => {
+      let json = ''
+      if (res.statusCode !== 200) {
+        __REQUESTING__ = false
+        logMessage(`No 200 request, statusCode: ${res.statusCode}`)
+
+        return
+      }
+      res.on('data', data => {
+        json += data
+      })
+      res.on('error', () => {
+        logMessage(`Error Requesting ${serviceRequestURL}`)
+        __REQUESTING__ = false
+      })
+      res.on('end', () => {
+        __REQUESTING__ = false
+        try {
+          __CACHE__[hash] = JSON.parse(json)
+          logMessage(`Add cache entry for ${hash}`)
+        } catch (e) {
+          logMessage('Impossible parse response JSON')
+        }
+      })
+    })
+  } else {
+    req.prpl = prpl
+  }
+
+  const diffPRPLTime = process.hrtime(startPRPLTime)
+
+  req.performance = {
+    ...performance,
+    prpl: hrTimeToMs(diffPRPLTime)
+  }
+
+  next()
 }

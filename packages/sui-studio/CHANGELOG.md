@@ -2,12 +2,85 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.8.0 (2020-05-07)
+
+
+### Bug Fixes
+
+* stop having super large windows when errors are long ([aa6e790](https://github.com/SUI-Components/sui/commit/aa6e790d80ef7ae02127b2a3caddbdd0b426580e))
+
+
+
+# 8.7.0 (2020-05-07)
+
+
+
+# 8.6.0 (2020-05-07)
+
+
+### Features
+
+* improve sui-studio generate documentation ([cadf8fe](https://github.com/SUI-Components/sui/commit/cadf8fe385f250c5fa0979426b9ef229034327ae))
+* removed comment ([fd3e8ac](https://github.com/SUI-Components/sui/commit/fd3e8acee23168fe8e3ee413d357c1ea34ac3c76))
+
+
+
+# 8.5.0 (2020-05-06)
+
+
+### Bug Fixes
+
+* remove caret of sui-react-router to stay on beta ([f56f6e5](https://github.com/SUI-Components/sui/commit/f56f6e545a61258f96b919d7c67bbe954ab195cb))
+
+
+
+# 8.4.0 (2020-05-06)
+
+
+### Bug Fixes
+
+* use correct beta for router ([be5ac83](https://github.com/SUI-Components/sui/commit/be5ac83028a2e2b44dbad28b9aa1ed2bc8505edf))
+
+
+### Features
+
+* provide the displayName to the tested components ([147121c](https://github.com/SUI-Components/sui/commit/147121c2217ce02ee4597f0e96bc4e9b6711c056))
+* rollback studio version ([e54cfd4](https://github.com/SUI-Components/sui/commit/e54cfd468588a03cd6f9cb1a0da63abf786c859b))
+
+
+### Reverts
+
+* Revert "Revert "Merge pull request #813 from SUI-Components/feat/move-studio-to-new-sui-react-router"" ([bc3fa74](https://github.com/SUI-Components/sui/commit/bc3fa747afe7ea485252a7cb0d8d328018c0077a)), closes [#813](https://github.com/SUI-Components/sui/issues/813)
+
+
+
+# 8.3.0 (2020-05-05)
+
+
+### Bug Fixes
+
+* revert using sui-react-router ([1056af1](https://github.com/SUI-Components/sui/commit/1056af17f0fc2ec5fd0c427c7ad5870748289bdb))
+
+
+
+# 8.2.0 (2020-05-05)
+
+
+
 # 8.1.0 (2020-05-05)
+
+
+### Bug Fixes
+
+* stop using IndexRedirect ([a450f23](https://github.com/SUI-Components/sui/commit/a450f23db20de2f76d0402ba6c23e97a5a6c8feb))
 
 
 ### Features
 
 * modify studio styling ([fa62724](https://github.com/SUI-Components/sui/commit/fa62724843a1c8fcaeff5cdf329a5c9b315285c4))
+* use new router for studio ([df93be5](https://github.com/SUI-Components/sui/commit/df93be5edabbd7b74fe56d14204fed4b62949820))
+* use sui-react-router ([c283861](https://github.com/SUI-Components/sui/commit/c283861d09cf6282ed6bf73617a2b2517ed2c74e))
+* use sui-react-router latest beta and adapt routes ([1276d25](https://github.com/SUI-Components/sui/commit/1276d2550bc0ff5847174dc6a403f9448da195a8))
 
 
 

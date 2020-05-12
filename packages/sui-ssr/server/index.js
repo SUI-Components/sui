@@ -19,6 +19,13 @@ import {
   readHtmlTemplate
 } from './utils'
 
+import noOPConsole from 'noop-console'
+noOPConsole(console)
+
+if (process.env.CONSOLE) {
+  console._restore()
+}
+
 const app = express()
 
 app.set('x-powered-by', false)
@@ -65,12 +72,15 @@ const _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
+  app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.PRE_HEALTH])
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
   )
 
   app.use(compression())
+
+  app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
@@ -86,7 +96,7 @@ const _memoizedHtmlTemplatesMapping = {}
         customTlds: /localhost|\.local/
       })
 
-        !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
+      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
         ? next()
@@ -116,6 +126,8 @@ const _memoizedHtmlTemplatesMapping = {}
     next()
   })
 
+  app.use(hooks[TYPES.SETUP_CONTEXT])
+
   app.use(hooks[TYPES.PRE_SSR_HANDLER])
 
   app.get('*', [
@@ -127,5 +139,7 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-    app.listen(PORT, () => console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)) // eslint-disable-line
+  app.listen(PORT, () =>
+    console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)
+  ) // eslint-disable-line
 })()

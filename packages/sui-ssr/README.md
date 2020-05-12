@@ -144,6 +144,15 @@ It uses the stdout stream so you can do things like:
   $ sui-ssr archive > ./myFileNameOrWhatever.zip
 ```
 
+## ENV Vars:
+
+- VERBOSE: Print in the console info about the criticalCSS and the PRPL middleware
+- CONSOLE: By default the console is disabled if you want to watch your `console.log` set up this env var to true set up this env var to true
+
+```
+$ VERBOSE=true CONSOLE=true node server/index.js
+```
+
 ## Hooks
 
 If you want to change the server´s behavior for very specific business operation like handling errors or logging you must use hooks.
