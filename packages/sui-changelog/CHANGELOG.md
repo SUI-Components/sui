@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.7.0 (2020-05-12)
+
+
+### Bug Fixes
+
+* use right strategy file key ([1551aaa](https://github.com/SUI-Components/sui/commit/1551aaa8af451d602cf9b37162025a5b60d9cc5e))
+
+
+
 # 1.6.0 (2020-05-11)
 
 
