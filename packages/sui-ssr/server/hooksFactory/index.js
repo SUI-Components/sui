@@ -12,7 +12,7 @@ import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 // They came from {SPA}/src
 // import userHooks from 'hooks'
 import routes from 'routes'
-import {match} from 'react-router'
+import {match} from '@s-ui/react-router'
 let userHooks
 let contextFactory
 try {
