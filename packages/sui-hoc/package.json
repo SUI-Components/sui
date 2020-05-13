@@ -16,7 +16,7 @@
     "react": "16"
   },
   "dependencies": {
-    "intersection-observer": "0.7.0"
+    "intersection-observer": "0.10.0"
   },
   "devDependencies": {
     "@s-ui/component-peer-dependencies": "1"
