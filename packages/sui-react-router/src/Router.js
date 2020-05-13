@@ -66,7 +66,7 @@ const Router = ({
         throw err
       }
 
-      const {params, components, location} = nextState
+      const {components, params, location, routes} = nextState
       const nextRouter = {...state.router, params, location, routes}
       setState({router: nextRouter, params, components})
     }
