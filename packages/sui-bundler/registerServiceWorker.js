@@ -4,7 +4,7 @@ exports.register = function(_ref) {
   var first = _ref.first
   var renovate = _ref.renovate
   return function() {
-    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         var swUrl = '/service-worker.js'
         navigator.serviceWorker
