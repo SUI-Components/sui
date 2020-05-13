@@ -67,5 +67,8 @@
   "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "dependencies": {
+    "undefined": "^0.1.0"
   }
 }
