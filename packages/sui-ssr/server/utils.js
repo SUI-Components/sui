@@ -48,3 +48,6 @@ export const readHtmlTemplate = req => {
 
   return fs.readFileSync(filePath, 'utf8')
 }
+
+// Transform node performance timing to milliseconds
+export const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6

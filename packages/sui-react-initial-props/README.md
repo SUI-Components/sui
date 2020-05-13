@@ -121,7 +121,7 @@ Page.getInitialProps = ({ context, routeInfo }) =>
 ## Installation
 
 ```sh
-npm install @schibstedspain/react-initial-props --save
+npm install @s-ui/react-initial-props --save
 ```
 
 ## API Reference

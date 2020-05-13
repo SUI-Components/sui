@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/hoc",
-  "version": "1.24.0",
+  "version": "1.25.0",
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "react": "16"
   },
   "dependencies": {
-    "intersection-observer": "0.7.0"
+    "intersection-observer": "0.10.0"
   },
   "devDependencies": {
     "@s-ui/component-peer-dependencies": "1"

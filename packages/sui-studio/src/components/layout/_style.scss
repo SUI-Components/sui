@@ -64,9 +64,31 @@
 }
 
 .sui-StudioPreview,
-.sui-StudioDocumentation,
-.sui-Studio-readme {
+.sui-StudioDocumentation {
   padding: 16px;
+}
+
+.sui-Studio-readme {
+  padding: 40px;
+  line-height: 1.5;
+  height: 100%;
+  .markdown-body {
+    max-width: 320px;
+  }
+  h3 {
+    font-weight: normal;
+  }
+  a {
+    color: $c-white;
+    background: $c-primary;
+    border-radius: 16px;
+    padding: 4px 12px;
+    text-decoration: none;
+    margin-right: 8px;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 8px;
+  }
 }
 
 .sui-Studio-navMenu {
