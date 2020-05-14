@@ -3,6 +3,13 @@ import internalIsActive from './isActive'
 import {Tree} from './Tree'
 import warning from './warning'
 
+const INITIAL_MATCH_OBJECT = {
+  isFinished: false,
+  nodes: [],
+  paramNames: [],
+  paramValues: []
+}
+
 const checkIntegrity = nodes =>
   !nodes.some((node, index) => node.level !== index + 1)
 
@@ -87,15 +94,15 @@ const createReducerRoutesTree = location => (acc, node) => {
 
   if (matched) {
     acc = {
-      remainingPathname: matched.remainingPathname,
+      nodes: [...acc.nodes, node],
       paramNames: [...paramNames, ...matched.paramNames],
       paramValues: [...paramValues, ...matched.paramValues],
-      nodes: [...acc.nodes, node]
+      remainingPathname: matched.remainingPathname
     }
-  }
 
-  if (matched?.remainingPathname === '') {
-    acc.isFinished = checkIntegrity(acc.nodes)
+    if (matched.remainingPathname === '') {
+      acc.isFinished = checkIntegrity(acc.nodes)
+    }
   }
 
   return acc
@@ -120,10 +127,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
   }
 
   const initialObject = {
-    isFinished: false,
-    nodes: [],
-    paramNames: [],
-    paramValues: [],
+    ...INITIAL_MATCH_OBJECT,
     remainingPathname
   }
 
@@ -133,13 +137,19 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     tree
   )
 
-  const {nodes, paramValues, paramNames} = match
+  const {nodes: nodesFromMatch, paramValues, paramNames} = match
   const params = createParams({paramNames, paramValues})
+
   // check if we have hit a redirect
-  const redirectNode = findRedirect(match.nodes)
+  const redirectNode = findRedirect(nodesFromMatch)
   if (redirectNode) {
     return {redirectLocation: formatPattern(redirectNode.to, params)}
   }
+
+  // if it's not a redirect and still there's remainingPathname then is not a match
+  const nodes = match.remainingPathname
+    ? INITIAL_MATCH_OBJECT.nodes
+    : nodesFromMatch
 
   const routeInfo = {location, params, routes: nodes}
   const components = await createComponents({nodes, routeInfo})

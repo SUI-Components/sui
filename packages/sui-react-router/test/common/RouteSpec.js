@@ -25,7 +25,6 @@ describe('<Route>', () => {
       Search Results: <em>{params.keyword}</em>
     </h1>
   )
-  const Detail = () => <h1>Detail Page</h1>
   const DontRender = () => {
     throw new Error('not supposed to be rendered')
   }
@@ -97,6 +96,61 @@ describe('<Route>', () => {
       expect(renderedString).to.equal(
         '<div>App<section><h1>Search Results: <em>money</em></h1></section></div>'
       )
+    })
+
+    it('do not match when only part of the nested route is matched', async () => {
+      const withRoutes = (
+        <Route path="/es" component={App}>
+          <Route path="search/:keyword" component={Search} />
+        </Route>
+      )
+
+      const renderedString = await getRenderedString({
+        location: '/es/this/dont/should/match',
+        withRoutes
+      })
+
+      expect(renderedString).to.equal('')
+    })
+
+    it('match the specific correct route with specific priority', async () => {
+      const withRoutes = (
+        <Route path="/es" component={App}>
+          <Route path="search/a" component={Search} />
+          <Route
+            path="search/:keyword"
+            component={() => new Error('do not match ')}
+          />
+        </Route>
+      )
+
+      const renderedString = await getRenderedString({
+        location: '/es/search/a',
+        withRoutes
+      })
+
+      expect(renderedString).to.equal(
+        '<div>App<section><h1>Search Results: <em></em></h1></section></div>'
+      )
+    })
+
+    it('match the fallback route if none is working', async () => {
+      const withRoutes = (
+        <Route path="/es" component={App}>
+          <Route path="dont/a" component={DontRender} />
+          <Route path="dont/:keyword" component={DontRender} />
+          <Route path="page" component={() => <h1>404</h1>} />
+        </Route>
+      )
+
+      const renderedString = await getRenderedString({
+        location: '/es/page',
+        withRoutes
+      })
+
+      expect(renderedString)
+        .to.include('App')
+        .to.include('404')
     })
   })
 
