@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.21.0 (2020-05-13)
+
+
+### Features
+
+* use latest axios version with bug fixes ([f20ad0a](https://github.com/SUI-Components/sui/commit/f20ad0a07321def5430e083c0d2a04a9f43455e7))
+
+
+
 # 1.20.0 (2020-03-03)
 
 

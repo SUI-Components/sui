@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mockmock",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@s-ui/test": "2",
-    "axios": "0.19.0"
+    "axios": "0.19.2"
   },
   "license": "MIT",
   "repository": {
