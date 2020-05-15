@@ -77,6 +77,8 @@ class ServerMock extends Mock {
     }
 
     mock.reply(statusCode, JSON.stringify(response))
+
+    return this
   }
 }
 
