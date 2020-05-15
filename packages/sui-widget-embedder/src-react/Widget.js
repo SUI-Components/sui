@@ -10,7 +10,8 @@ export default class Widget extends Component {
     node: PropTypes.string,
     i18n: PropTypes.object,
     domain: PropTypes.object,
-    isVisible: PropTypes.bool
+    isVisible: PropTypes.bool,
+    browser: PropTypes.object
   }
 
   static defaultProps = {
@@ -18,7 +19,14 @@ export default class Widget extends Component {
   }
 
   componentDidMount() {
-    const {node: selector, children, i18n, domain, isVisible} = this.props
+    const {
+      node: selector,
+      children,
+      i18n,
+      domain,
+      isVisible,
+      browser
+    } = this.props
     const node = document.querySelector(selector)
 
     if (!node) {
@@ -30,10 +38,11 @@ export default class Widget extends Component {
         <Context.Provider
           value={{
             i18n,
-            domain
+            domain,
+            browser
           }}
         >
-          <ProviderLegacy i18n={i18n} domain={domain}>
+          <ProviderLegacy i18n={i18n} domain={domain} browser={browser}>
             {children}
           </ProviderLegacy>
         </Context.Provider>,
