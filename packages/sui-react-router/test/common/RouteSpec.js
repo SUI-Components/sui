@@ -7,9 +7,9 @@ import {IndexRoute, Router, Route, match} from '../../src/index'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
-    match({routes: withRoutes, location}, (_, __, renderProps) =>
+    match({routes: withRoutes, location}, (_, __, renderProps) => {
       resolve(renderToString(<Router {...renderProps} />))
-    )
+    })
   })
 }
 
@@ -134,7 +134,7 @@ describe('<Route>', () => {
       )
     })
 
-    it('match the fallback route if none is working', async () => {
+    it('match the last route if previous dont working', async () => {
       const withRoutes = (
         <Route path="/es" component={App}>
           <Route path="dont/a" component={DontRender} />
@@ -145,6 +145,25 @@ describe('<Route>', () => {
 
       const renderedString = await getRenderedString({
         location: '/es/page',
+        withRoutes
+      })
+
+      expect(renderedString)
+        .to.include('App')
+        .to.include('404')
+    })
+
+    it('match fallback route if previous dont working', async () => {
+      const withRoutes = (
+        <Route path="/es" component={App}>
+          <Route path="dont/a" component={DontRender} />
+          <Route path="dont/:keyword" component={DontRender} />
+          <Route path="*" component={() => <h1>404</h1>} />
+        </Route>
+      )
+
+      const renderedString = await getRenderedString({
+        location: '/es/whatever',
         withRoutes
       })
 

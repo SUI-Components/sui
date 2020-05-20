@@ -20,28 +20,35 @@ export default async (
   {history: externalHistory, location, routes},
   callback
 ) => {
-  const history = externalHistory || createRouterHistory(location)
-  const jsonRoutes = fromReactTreeToJSON(routes)
-  const transitionManager = createTransitionManager({history, jsonRoutes})
+  try {
+    const history = externalHistory || createRouterHistory(location)
+    const jsonRoutes = fromReactTreeToJSON(routes)
+    const transitionManager = createTransitionManager({history, jsonRoutes})
+    const {
+      components,
+      redirectLocation,
+      routeInfo
+    } = await transitionManager.match(location)
 
-  const {
-    components,
-    redirectLocation,
-    routeInfo
-  } = await transitionManager.match(location)
+    // if it's not a redirection and we don't have components
+    // then we should response with nothing
+    if (!redirectLocation && (!components || !components.length)) callback()
 
-  const {isActive} = transitionManager
-  const router = createRouterObject(history, isActive, routeInfo)
-  const renderProps = {
-    components,
-    router,
-    matchContext: {transitionManager, router},
-    ...routeInfo
+    const {isActive} = transitionManager
+    const router = createRouterObject(history, isActive, routeInfo)
+    const renderProps = {
+      components,
+      router,
+      matchContext: {transitionManager, router},
+      ...routeInfo
+    }
+
+    return callback(
+      null,
+      redirectLocation && history.createLocation(redirectLocation, REPLACE),
+      renderProps
+    )
+  } catch (err) {
+    callback(err)
   }
-
-  return callback(
-    null,
-    redirectLocation && history.createLocation(redirectLocation, REPLACE),
-    renderProps
-  )
 }
