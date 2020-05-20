@@ -108,7 +108,7 @@ export function matchPattern(pattern, pathname) {
   }
 
   const matchedPath = match[0]
-  let remainingPathname = pathname.substr(matchedPath.length)
+  let remainingPathname = pathname.substring(matchedPath.length)
 
   if (remainingPathname) {
     // Require that the match ends at a path separator, if we didn't match
