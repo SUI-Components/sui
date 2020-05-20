@@ -1,5 +1,6 @@
 import './createMemoryHistorySpec'
 import './hooksSpec'
+import './matchSpec'
 import './IndexRouteSpec'
 import './LinkSpec'
 import './RedirectSpec'
