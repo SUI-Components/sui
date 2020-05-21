@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.0.0 (2020-05-21)
+
+
+### Features
+
+* use sui-react-router for match ([96c3e4e](https://github.com/SUI-Components/sui/commit/96c3e4e429a4bb4a20d442860d132aac714d5445))
+
+
+
 # 6.15.0 (2020-05-08)
 
 
@@ -66,6 +75,7 @@ All notable changes to this project will be documented in this file.
 * rename BOOTSTRAP hook to ROUTE_MATCHING ([475c885](https://github.com/SUI-Components/sui/commit/475c885173057f7bc53283c07370ad62d2b54f08))
 * retrieve critical and prpl middlewares ([a8eb072](https://github.com/SUI-Components/sui/commit/a8eb072c157a1c15f8ad915011a34c3aa23f0a0b))
 * retrieve server getInitialProps & render metrics ([cf72604](https://github.com/SUI-Components/sui/commit/cf7260486cd89ec9525b1a8fb311e171897bd86f))
+* use sui-react-router in prpl ([624b61d](https://github.com/SUI-Components/sui/commit/624b61d82fc9e288382f085be013a1a72a73630f))
 
 
 
@@ -127,6 +137,7 @@ All notable changes to this project will be documented in this file.
 * add support for the prpl service ([6e60e5b](https://github.com/SUI-Components/sui/commit/6e60e5bef8aba66c5f26ebe6d7ed9cad066eb1a3))
 * mobile as default prpl device ([820e79f](https://github.com/SUI-Components/sui/commit/820e79fa534715f1b443062387ba3e760af83a62))
 * remove development mode ([302aee4](https://github.com/SUI-Components/sui/commit/302aee4b6f253431dbae8a9a6f940e411425a522))
+* use default history and pass location instead pushing it ([d004a55](https://github.com/SUI-Components/sui/commit/d004a557eb8811f8cdc0cafbb12029d6f17d637e))
 
 
 
@@ -157,6 +168,7 @@ All notable changes to this project will be documented in this file.
 * add new SETUP_CONTEXT hook default function in hooksFactory ([b0aed96](https://github.com/SUI-Components/sui/commit/b0aed965f38845ce8b4383a779b5100ca7b7cdd3))
 * add new setup_context hook to hook types file ([aa96126](https://github.com/SUI-Components/sui/commit/aa96126ec30a2bfd7eddfbe2a48f3e646740d765))
 * add new SETUP_CONTEXT middleware in ssr server ([5d27850](https://github.com/SUI-Components/sui/commit/5d278504da3b82ce0008b6eb5dc9b683e0465d4e))
+* use @s-ui/react-router for criticalcss ([7ea27dd](https://github.com/SUI-Components/sui/commit/7ea27dd6aa12001e9013fe26b83a18348ac5ec04))
 * use request context instead of building it in ssr ([e8d62e8](https://github.com/SUI-Components/sui/commit/e8d62e874ced922b414a19b202d58a5ebd298b43))
 
 
@@ -171,6 +183,11 @@ All notable changes to this project will be documented in this file.
 
 
 # 6.0.0 (2020-03-17)
+
+
+### Bug Fixes
+
+* use a static version of the history ([21e020a](https://github.com/SUI-Components/sui/commit/21e020ae694fd6605fd8f3c487543529148aee4d))
 
 
 ### Features
@@ -205,6 +222,17 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * send custom headers properly inside an options object ([1cacef4](https://github.com/SUI-Components/sui/commit/1cacef465f24b2b482482be0ae457681c0498982))
+
+
+### Features
+
+* sui-ssr expect works with @s-ui/react-router ([86c32bd](https://github.com/SUI-Components/sui/commit/86c32bdec5a244a92ee4864bd93f27f23f941dc0))
+* use Router component and split requires ([3ac23e8](https://github.com/SUI-Components/sui/commit/3ac23e84b9f713ea85eb8cfd71843a2ccdcac245))
+
+
+### BREAKING CHANGES
+
+* Internal requirement path changes from react-router to @s-ui/react-router, break the convention.
 
 
 
