@@ -1,10 +1,11 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
 import React from 'react'
-import {RouterContext} from 'react-router'
+import {Router} from '@s-ui/react-router'
 import {HeadProvider} from '@s-ui/react-head'
 import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
 import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
+// END __MAGIC IMPORTS__
 
 import qs from 'querystring'
 import {getTplParts, HtmlBuilder} from '../template'
@@ -115,7 +116,7 @@ export default async (req, res, next) => {
   const InitialContext = routerProps =>
     [
       {
-        provider: RouterContext,
+        provider: Router,
         props: routerProps
       },
       {

@@ -72,6 +72,11 @@ module.exports = ({config, packagesToLink, linkAll}) => {
           'react-router-dom': path.resolve(
             path.join(process.env.PWD, './node_modules/react-router-dom')
           )
+        }),
+        ...(!config.resolve.alias['@s-ui/react-router'] && {
+          '@s-ui/react-router': path.resolve(
+            path.join(process.env.PWD, './node_modules/@s-ui/react-router')
+          )
         })
       }
     },
