@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.9.0 (2020-05-21)
+
+
+### Features
+
+* add scroll to the tests section ([ec981f4](https://github.com/SUI-Components/sui/commit/ec981f47f508443308a15e24785a351a363ca1fc))
+
+
+
 # 8.8.0 (2020-05-07)
 
 
