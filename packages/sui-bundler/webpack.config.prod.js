@@ -201,7 +201,9 @@ module.exports = {
           skipWaiting: true,
           clientsClaim: true,
           dontCacheBustURLsMatching: /\.\w{8}\./,
+          cleanupOutdatedCaches: true,
           directoryIndex: config.offline.directoryIndex,
+          additionalManifestEntries: config.offline.addToCache,
           navigateFallback: navigateFallback(
             config.offline.fallback,
             PUBLIC_PATH
