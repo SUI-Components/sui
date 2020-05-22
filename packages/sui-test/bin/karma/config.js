@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const path = require('path')
 
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
@@ -17,6 +18,13 @@ const config = {
   webpack: {
     devtool: 'eval',
     mode: 'development',
+    resolve: {
+      alias: {
+        '@s-ui/react-context': path.resolve(
+          path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+        )
+      }
+    },
     node: {
       fs: 'empty'
     },
