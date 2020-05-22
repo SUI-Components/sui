@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.12.0 (2020-05-18)
+
+
+### Features
+
+* bump version ([5dc42bf](https://github.com/SUI-Components/sui/commit/5dc42bf878eeba95624f226f7039013a24183e2c))
+
+
+
+# 1.11.0 (2020-05-15)
+
+
+### Features
+
+* get nth request (url, body, headers) from clientMocker ([43d813f](https://github.com/SUI-Components/sui/commit/43d813fe0ac12628c9efc336d54b711586952410))
+
+
+
 # 1.10.0 (2020-05-13)
 
 
