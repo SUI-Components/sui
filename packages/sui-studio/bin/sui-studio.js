@@ -89,4 +89,6 @@ program
   .command('clean-modules', 'Remove node_module folder in each component')
   .alias('cm')
 
+program.command('test', 'Run studio tests').alias('t')
+
 program.parse(process.argv)

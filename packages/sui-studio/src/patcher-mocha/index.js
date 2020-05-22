@@ -6,6 +6,7 @@ import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
+debugger // eslint-disable-line
 const global = globalThis || window // eslint-disable-line
 const __CONTEXTS__ = global.__STUDIO_CONTEXTS__ || {}
 const __COMPONENT__ = global.__STUDIO_COMPONENT__
