@@ -44,7 +44,6 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-perf](./packages/sui-perf) | React performance graphs in terminal (SSR support) |
 | [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
 | [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
-| [sui-react-domain-connector](./packages/sui-react-domain-connector) | Connect any React component to your domain use cases |
 | [sui-react-head](./packages/sui-react-head) | Populate the head element of your React app without hassle |
 | [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your react app |
 | [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA |
