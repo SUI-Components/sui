@@ -27,7 +27,7 @@ const run = async () => {
         suiTestClientPath,
         [
           // '--pattern',  path.join('test', 'atom', 'button', 'index.js'), // eslint-disable-line
-          '--src-pattern', path.join('test', 'atom', 'button', 'runtime.js'), // eslint-disable-line
+          '--src-pattern', path.join('test', 'runtime.js'), // eslint-disable-line
           program.watch && '--watch'
         ].filter(Boolean),
         {
