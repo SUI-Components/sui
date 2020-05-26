@@ -5,7 +5,7 @@ import {expect} from 'chai'
 import cache from '../../src/decorators/cache'
 import inlineError from '../../src/decorators/error'
 
-describe('Cache', () => {
+describe('Cache in browser', () => {
   it('Should exist', () => {
     expect(cache).to.be.a('function')
   })
