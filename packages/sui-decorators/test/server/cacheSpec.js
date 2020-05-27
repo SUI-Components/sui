@@ -8,7 +8,7 @@ import inlineError from '../../src/decorators/error'
 describe('Cache in the server', () => {
   describe('decorating a sync method', () => {
     it('should not apply cache in Node by default', () => {
-      class Buz {
+      class Buzz {
         constructor() {
           this.rnd = () => Math.random()
         }
@@ -19,12 +19,12 @@ describe('Cache in the server', () => {
           return this.rnd()
         }
       }
-      const buz = new Buz()
-      expect(buz.syncRndNumber()).to.be.not.eql(buz.syncRndNumber())
+      const buzz = new Buzz()
+      expect(buzz.syncRndNumber()).to.be.not.eql(buzz.syncRndNumber())
     })
 
     it('should apply cache if server param is true', () => {
-      class Buz1 {
+      class Buzz1 {
         constructor() {
           this.rnd = () => Math.random()
         }
@@ -34,12 +34,12 @@ describe('Cache in the server', () => {
           return this.rnd()
         }
       }
-      const buz = new Buz1()
-      expect(buz.syncRndNumber()).to.be.eql(buz.syncRndNumber())
+      const buzz1 = new Buzz1()
+      expect(buzz1.syncRndNumber()).to.be.eql(buzz1.syncRndNumber())
     })
 
-    it('witth inlineError should apply cache if server param is true', () => {
-      class Buz2 {
+    it('with inlineError should apply cache if server param is true', () => {
+      class Buzz2 {
         constructor() {
           this.rnd = () => Math.random()
         }
@@ -50,8 +50,8 @@ describe('Cache in the server', () => {
           return this.rnd()
         }
       }
-      const buz = new Buz2()
-      expect(buz.syncRndNumber()).to.be.eql(buz.syncRndNumber())
+      const buzz2 = new Buzz2()
+      expect(buzz2.syncRndNumber()).to.be.eql(buzz2.syncRndNumber())
     })
 
     it('should not apply cache for inlineError decorated error response', () => {
