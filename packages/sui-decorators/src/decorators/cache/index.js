@@ -20,13 +20,15 @@ const _cache = ({
   target,
   ttl
 } = {}) => {
-  caches[`${target.constructor.name}::${fnName}`] =
-    caches[`${target.constructor.name}::${fnName}`] ||
+  const cacheKey = `${target.constructor.name}::${fnName}`
+
+  caches[cacheKey] =
+    caches[cacheKey] ||
     (algorithm === ALGORITHMS.LRU
       ? new LRU({size})
       : new Error(`[sui-decorators::cache] unknown algorithm: ${algorithm}`))
 
-  const cache = caches[`${target.constructor.name}::${fnName}`]
+  const cache = caches[cacheKey]
 
   return (...args) => {
     if (
