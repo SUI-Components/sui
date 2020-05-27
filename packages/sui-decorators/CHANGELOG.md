@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.12.0 (2020-05-27)
+
+
+### Bug Fixes
+
+* cache key className+fnName and fix error case condition ([86ff64e](https://github.com/SUI-Components/sui/commit/86ff64ef5922851e619737ba4f050bd67a1ef1e6))
+
+
+
 # 3.11.0 (2020-03-25)
 
 
