@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.10.0 (2020-05-28)
+
+
+### Features
+
+* add assets folder to .npmignore ([4d3ad33](https://github.com/SUI-Components/sui/commit/4d3ad33a31e53103914e718d51439e5fe1ed8230))
+
+
+
 # 8.9.0 (2020-05-21)
 
 
@@ -122,6 +131,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add mocha global to test url redirects ([676d8f6](https://github.com/SUI-Components/sui/commit/676d8f6b178884bd34b0735b90a5899c53015cf2))
+* use same classnames as other packages to avoid duplicates ([9394a02](https://github.com/SUI-Components/sui/commit/9394a02c80a74763519b09bc12da5625c056f773))
 
 
 
