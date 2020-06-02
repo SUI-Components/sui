@@ -135,4 +135,129 @@ describe('Cache in the server', () => {
       expect(responseSecond[1]).to.be.eql(responseFourth[1])
     })
   })
+
+  describe('redis cache', () => {
+    const useRedis = process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE
+    let redis
+    if (useRedis) {
+      redis = require('redis').createClient(6379, 'localhost')
+    } else {
+      redis = require('redis-mock').createClient()
+    }
+
+    beforeEach(done => {
+      redis.flushdb(() => done())
+    })
+    it('should not apply cache for inlineError decorated error response and apply cache for ok simple random number response', async () => {
+      let shouldReturnError = true
+
+      class YummyAsync {
+        @cache({
+          server: true,
+          ttl: '1 minute',
+          redis: {host: 'localhost', port: 6379}
+        })
+        @inlineError
+        async asyncRndNumber() {
+          if (shouldReturnError) {
+            return Promise.reject(new Error('Error'))
+          }
+
+          return Math.random()
+        }
+      }
+
+      const yummyAsync = new YummyAsync()
+      // Error response, it should not be cached
+      const responseFirst = await yummyAsync.asyncRndNumber()
+
+      // Ok response, it should be cached
+      shouldReturnError = false
+      const responseSecond = await yummyAsync.asyncRndNumber()
+      const responseThird = await yummyAsync.asyncRndNumber()
+
+      // Here we force an error and expect not response error because it is cached
+      shouldReturnError = true
+      const responseFourth = await yummyAsync.asyncRndNumber()
+
+      expect(responseFirst[0]).to.be.not.null
+      expect(responseSecond[1]).to.be.eql(responseThird[1])
+      expect(responseFourth[0]).to.be.null
+      expect(responseSecond[1]).to.be.eql(responseFourth[1])
+    })
+
+    it('should not apply cache for inlineError decorated error response and apply cache for complex json response', async () => {
+      let shouldReturnError = true
+
+      class YummyAsync {
+        @cache({
+          server: true,
+          ttl: '1 minute',
+          redis: {host: 'localhost', port: 6379}
+        })
+        @inlineError
+        async asyncRndObject() {
+          if (shouldReturnError) {
+            return Promise.reject(new Error('Error'))
+          }
+
+          return {
+            name: 'YummyAsync',
+            randomNumbersList: [Math.random(), Math.random(), Math.random()],
+            boolValue: true,
+            date: Date.now()
+          }
+        }
+      }
+
+      const yummyAsync = new YummyAsync()
+      // Error response, it should not be cached
+      const responseFirst = await yummyAsync.asyncRndObject()
+
+      // Ok response, it should be cached
+      shouldReturnError = false
+      const responseSecond = await yummyAsync.asyncRndObject()
+      const responseThird = await yummyAsync.asyncRndObject()
+
+      // Here we force an error and expect not response error because it is cached
+      shouldReturnError = true
+      const responseFourth = await yummyAsync.asyncRndObject()
+
+      expect(responseFirst[0]).to.be.not.null
+      expect(responseSecond[1]).to.be.eql(responseThird[1])
+      expect(responseFourth[0]).to.be.null
+      expect(responseSecond[1]).to.be.eql(responseFourth[1])
+    })
+
+    it('should not apply cache for inlineError decorated error response and not apply cache for expired ttl complex json response', done => {
+      class YummyAsync {
+        @cache({
+          server: true,
+          ttl: 100,
+          redis: {host: 'localhost', port: 6379}
+        })
+        @inlineError
+        async asyncRndObjectWithTTL() {
+          return {
+            name: 'YummyAsync',
+            randomNumbersList: [Math.random(), Math.random(), Math.random()],
+            boolValue: true,
+            date: Date.now()
+          }
+        }
+      }
+
+      const yummyAsync = new YummyAsync()
+      yummyAsync.asyncRndObjectWithTTL().then(firstResponse => {
+        setTimeout(() => {
+          yummyAsync.asyncRndObjectWithTTL().then(secondResponse => {
+            expect(firstResponse[0]).to.be.null
+            expect(secondResponse[0]).to.be.null
+            expect(firstResponse[1]).to.be.not.eql(secondResponse[1])
+          })
+          done()
+        }, 110)
+      })
+    })
+  })
 })
