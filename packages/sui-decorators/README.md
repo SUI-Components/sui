@@ -134,11 +134,6 @@ import {UseCase} from '@s-ui/domain'
 import {inlineError, cache} from '@s-ui/decorators'
 
 export class GetSeoTagsSearchUseCase extends UseCase {
-  constructor({service, adSearchParamsSearchAggregateFactory}) {
-    super()
-    this._service = service
-  }
-
   @cache({
           server: true,
           ttl: '1 minute',
