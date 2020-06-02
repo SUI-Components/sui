@@ -22,25 +22,28 @@ export const inRedis = (
       response = await original.apply(instance, args)
     } catch (err) {
       console.error(
-        `[sui-decorators/cache]:inRedis Error getting original promise response for key: ${key}`
+        `[sui-decorators/cache]:inRedis Error getting original promise response for key: ${key}. `,
+        err
       )
       return err
     }
 
     try {
-      const isInlineErrorWithoutError =
-        response.__INLINE_ERROR__ &&
+      const isInlineErrorResponseWithoutError =
         Array.isArray(response) &&
+        response.__INLINE_ERROR__ &&
         response[0] === null &&
         response[1]
-      const noInlineError = response && !response.__INLINE_ERROR__
+      const isNormalResponseWithoutError =
+        response && !response.__INLINE_ERROR__
 
-      if (isInlineErrorWithoutError || noInlineError) {
+      if (isInlineErrorResponseWithoutError || isNormalResponseWithoutError) {
         cache.set(key, response, ttl)
       }
     } catch (err) {
       console.error(
-        `[sui-decorators/cache]:inRedis Error setting cache for key: ${key}. Infra error: ${err.message}`
+        `[sui-decorators/cache]:inRedis Error setting cache for key: ${key}. `,
+        err
       )
     }
   } else {
