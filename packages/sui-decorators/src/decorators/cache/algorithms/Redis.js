@@ -10,7 +10,7 @@ export default class Redis extends Cache {
     redisConnection = {host: '127.0.0.1', port: 6379},
     size = 100,
     namespace,
-    ttl
+    ttl = 500
   } = {}) {
     super()
     this._ttl = ttl
