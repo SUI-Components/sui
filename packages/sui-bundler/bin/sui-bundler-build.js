@@ -5,9 +5,10 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
+const staticModule = require('static-module')
+const minifyStream = require('minify-stream')
 const config = require('../webpack.config.prod')
 const fs = require('fs')
-const {config: projectConfig} = require('../shared')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 
@@ -83,12 +84,38 @@ webpack(nextConfig).run((error, stats) => {
 
   console.log(`Webpack stats: ${stats}`)
 
-  if (projectConfig.offline && projectConfig.offline.whitelist) {
+  if (fs.existsSync(process.cwd(), 'src', 'offline.html')) {
     fs.copyFileSync(
-      path.resolve(process.cwd(), 'public', 'index.html'),
-      path.resolve(process.cwd(), 'public', '200.html')
+      path.resolve(process.cwd(), 'src', 'offline.html'),
+      path.resolve(process.cwd(), 'public', 'offline.html')
     )
-    console.log(chalkSuccess('200.html create to be used in your Offline App'))
+
+    const manifest = require(path.resolve(
+      process.cwd(),
+      'public',
+      'asset-manifest.json'
+    ))
+
+    const manifestStatics = Object.values(manifest).filter(
+      url => !url.includes('runtime')
+    )
+
+    // generates the service worker
+    fs.createReadStream(path.resolve(__dirname, '..', 'service-worker.js'))
+      .pipe(
+        staticModule({
+          'static-manifest': () => JSON.stringify(manifestStatics),
+          'static-cache-name': () => JSON.stringify(Date.now().toString())
+        })
+      )
+      .pipe(minifyStream({sourceMap: false}))
+      .pipe(
+        fs.createWriteStream(
+          path.resolve(process.cwd(), 'public', 'service-worker.js')
+        )
+      )
+
+    console.log(chalkSuccess('Service worker generated succesfully!'))
   }
 
   console.log(
