@@ -148,7 +148,7 @@ describe('Cache in the server', () => {
     beforeEach(done => {
       redis.flushdb(() => done())
     })
-    it('should not apply cache for inlineError decorated error response and apply cache for ok simple random number response', async () => {
+    it('should apply cache for ok simple random number response and not apply cache for inlineError decorated error response', async () => {
       let shouldReturnError = true
 
       class YummyAsync {
@@ -186,7 +186,7 @@ describe('Cache in the server', () => {
       expect(responseSecond[1]).to.be.eql(responseFourth[1])
     })
 
-    it('should not apply cache for inlineError decorated error response and apply cache for complex json response', async () => {
+    it('should apply cache for a complex json response and not apply cache for inlineError decorated error response', async () => {
       let shouldReturnError = true
 
       class YummyAsync {
@@ -229,7 +229,7 @@ describe('Cache in the server', () => {
       expect(responseSecond[1]).to.be.eql(responseFourth[1])
     })
 
-    it('should not apply cache for inlineError decorated error response and not apply cache for expired ttl complex json response', done => {
+    it('should not apply cache for expired ttl complex json response', done => {
       class YummyAsync {
         @cache({
           server: true,
