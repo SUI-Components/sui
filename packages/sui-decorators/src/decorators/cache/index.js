@@ -27,16 +27,27 @@ const _cache = ({
   let cache = caches[cacheKey]
 
   if (!cache) {
-    cache = !redis
-      ? new LRU({size})
-      : new RedisLRU({size, redisConnection: redis, namespace: cacheKey, ttl})
-  }
-
-  if (isNode && redis) {
-    console.warn(
-      `[sui-decorators/cache] You are using redis cache for cacheKey: ${cacheKey}, your method MUST return a promise`
-    )
-    return inRedis(target, cache, original, fnName, instance, ttl)
+    if (!redis) {
+      cache = new LRU({size})
+    } else {
+      if (!isNode) {
+        console.warn(
+          '[sui-decorators/cache] Your redis config will be ignored in client side. Using the default inMemory LRU strategy.'
+        )
+        cache = new LRU({size})
+      } else {
+        cache = new RedisLRU({
+          size,
+          redisConnection: redis,
+          namespace: cacheKey,
+          ttl
+        })
+        console.warn(
+          `[sui-decorators/cache] You are using redis cache for cacheKey: ${cacheKey}, your method MUST return a promise`
+        )
+        return inRedis(target, cache, original, fnName, instance, ttl)
+      }
+    }
   }
 
   return inMemory(target, cache, original, fnName, instance, ttl)
