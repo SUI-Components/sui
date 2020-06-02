@@ -14,7 +14,6 @@ install:
   - npm run phoenix:ci
 
 script:
-  - npm update
   - npm run lint
   - npm run test:ci
 
