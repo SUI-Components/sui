@@ -1,7 +1,7 @@
 import Cache from './Cache'
 import redis from 'redis'
 import redisMock from 'redis-mock'
-import lru from '@s-ui/redis-lru'
+import lru from 'redis-lru'
 
 const useRedis = process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE
 
