@@ -66,7 +66,7 @@ export default ({
 
     if (!isNode && redis) {
       console.warn(
-        '[sui-decorators/cache] Your redis config will be ignored in client site. We are using the default LRU strategy.'
+        '[sui-decorators/cache] Your redis config will be ignored in client site. Using the default LRU strategy.'
       )
     }
 
