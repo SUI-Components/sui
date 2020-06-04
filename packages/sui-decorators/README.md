@@ -82,7 +82,7 @@ person.greetingAsync('Carlos');
 
 There are two types of cache handlers (Memory LRU and Redis LRU):
 
-### Memory LRU cache
+#### Memory LRU cache
 
 Creates a cache of calls to any method of a class, only when the response is not an error.
 
@@ -122,14 +122,17 @@ For this method the cache is of 2 seconds.
 It is possible to set TTL using a string with the format `ttl: 'XXX [second|seconds|minute|minutes|hour|hours]'`,
 thus, avoiding writing very large integers.
 
-### Redis LRU cache:
+#### Redis LRU cache:
 
-Creates a cache of the decorated method response of a class, only when the response is not an error.
-You must decorate methods that return a promise and its resolved value is a plain javascript object, a json or a simple type (number, string...). 
+It creates a cache of the decorated method response of a class, only when the response is not an error.
+You must decorate methods that return a promise and its resolved value is a plain javascript object, a JSON, or a simple type (number, string...).
 
-So if you are using redis cache decorator with [sui-domain extended project](https://github.com/SUI-Components/sui/tree/master/packages/sui-domain) methods, you should decorate `UseCase` classes `execute` methods which are the ones returning plain JSON objects.
 
-````javascript
+If you are using Redis cache decorator in a [sui-domain extended project](https://github.com/SUI-Components/sui/tree/master/packages/sui-domain), you should decorate `UseCase` classes `execute` methods which are the ones returning plain JSON objects.
+
+**Note: Redis cache only works in server side.**
+
+```javascript
 import {UseCase} from '@s-ui/domain'
 import {inlineError, cache} from '@s-ui/decorators'
 
@@ -152,20 +155,20 @@ export class GetSeoTagsSearchUseCase extends UseCase {
     return seoTagsResponse?.toJSON()
   }
 }
-````
+```
 
-To have redis cache fully working, previously a redis server should be up and running, you must set `server` flag to `true` and provide desired `redis` server connection config: `@cache({server: true, redis: {host: YOUR_REDIS_HOST, port: YOUR_REDIS_PORT_NUMBER}})`, if one of these params is not provided redis cache won't be activated.
+#### Configuration
 
-To do real requests against your redis server you must set `USE_REDIS_IN_SUI_DECORATORS_CACHE` variable to `true` (`process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE` in SSR).
+To have Redis cache fully working, previously a Redis server should be up and running, you must set `server` flag to `true` and provide desired `redis` server connection config: `@cache({server: true, redis: {host: YOUR_REDIS_HOST, port: YOUR_REDIS_PORT_NUMBER}})`, if one of these params is not provided redis cache won't be activated.
+
+To do real requests against your Redis server you must set `USE_REDIS_IN_SUI_DECORATORS_CACHE` variable to `true` (`process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE` in SSR).
 
 You can add it in your web-app `config-[dev|pre|pro]` file as `USE_REDIS_IN_SUI_DECORATORS_CACHE: true`, or as you wish.
 In case you want to pass tests against a real redis server you should set this variable, otherwise tests are running against a mocked redis.
 
 This decorator will look for a `USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE` variable in the host, `global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE` in SSR. This variable will add a version tag namespace in the cache key stored in Redis, it would be helpful to avoid not cleaned cache entries for different web-app deployed versions. If it's not decalred cache entry will be stored without version namespace in the key.
 
-You can set version in the web-app like this: `global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE = Date.now()`
-
-### Options:
+#### Options:
 
 Common for both LRU and Redis:
 
@@ -181,7 +184,7 @@ Only for Redis:
 
 * redis: desired redis server connection config `@cache({server: true, redis: {host: YOUR_REDIS_HOST, port: YOUR_REDIS_PORT_NUMBER}})`. (default: `undefined`, if `redis={} -> {host: '127.0.0.1', port: 6379}`) Remember `server` flag must be true and `process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE` must be setted to true to connect to the provided redis server.
 
-### How to disable the cache
+#### How to disable the cache
 In some cases we might want to disable the `cache` for certain environment or testing purposes. In that case, we should expose a variable into the global scope as:
 ```
 // For client side
