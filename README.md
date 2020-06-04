@@ -1,8 +1,9 @@
-# SUI (Schibsted User Interface)
+# SUI
 
 Monorepo of SUI packages.
 
 SUI is a set of packages which goal to ease development of SUI-based components and web apps, providing:
+
 * Unified stack (and workflow) easily updateable accross all sui based projects.
 * Minification of boilerplate. Boilerplate is tedious and copied code. Hardest to update...
 * Differents tools and services that solve only one problem each.
@@ -12,6 +13,7 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 ## Requirements
 
 ### Add `./node_modules/.bin/` to your $PATH
+
 Many SUI packages provide a CLI as a service. The binaries are declared in the package.json `bin` key.
 
 To make all npm binaries available in your command line, you should add bin directory to your $PATH:
@@ -21,6 +23,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 ```
 
 ## Available packages
+
 | Name | Description |
 | -- | -- |
 | [babel-preset-sui](./packages/babel-preset-sui) | A babel preset for SUI components common syntax |
@@ -41,7 +44,7 @@ $ export PATH="$PATH:./node_modules/.bin"
 | [sui-perf](./packages/sui-perf) | React performance graphs in terminal (SSR support) |
 | [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
 | [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
-| [sui-react-domain-connector](./packages/sui-react-domain-connector) | Connect any React component to your domain use cases |
+| [sui-react-head](./packages/sui-react-head) | Populate the head element of your React app without hassle |
 | [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your react app |
 | [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA |
 | [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |

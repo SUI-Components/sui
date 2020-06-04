@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.3.0 (2020-04-05)
+
+
+### Bug Fixes
+
+* add process.exit in sui-svg build error ([ab82989](https://github.com/SUI-Components/sui/commit/ab82989a97b9362acad561e635c55c08172c3365))
+
+
+
 # 2.2.0 (2020-02-12)
 
 

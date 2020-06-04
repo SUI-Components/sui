@@ -10,6 +10,7 @@ const {
   PRIVATE_GITHUB_API_URL_PATTERN,
   INVALID_GITHUB_REPOSITORY_MESSAGE,
   LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE,
+  BAD_CREDENTIALS,
   monoRepoRegExp
 } = require('./config')
 
@@ -85,7 +86,8 @@ const hasApiError = ({message} = {}) =>
     message &&
       [
         INVALID_GITHUB_REPOSITORY_MESSAGE,
-        LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE
+        LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE,
+        BAD_CREDENTIALS
       ].find(errorMessage => message.includes(errorMessage))
   )
 

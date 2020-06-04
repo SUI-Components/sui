@@ -3,16 +3,24 @@ import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
 import {getTplParts, HtmlBuilder} from '../template'
-import {publicFolderByHost} from '../utils'
+import {publicFolderByHost, hrTimeToMs} from '../utils'
+import ssrConf from '../config'
+
+import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
 // __MAGIC IMPORTS__
 // They came from {SPA}/src
 // import userHooks from 'hooks'
+import routes from 'routes'
+import {match} from '@s-ui/react-router'
 let userHooks
+let contextFactory
 try {
   userHooks = require('hooks')
+  contextFactory = require('contextFactory').default
 } catch (e) {
   userHooks = {}
+  contextFactory = async () => ({})
 }
 // END __MAGIC IMPORTS__
 
@@ -27,7 +35,11 @@ const getStaticErrorPageContent = async (status, req) => {
     return __PAGES__[status]
   }
   const html = await promisify(readFile)(
-    resolve(process.cwd(), publicFolderByHost(req), `${status}.html`),
+    resolve(
+      process.cwd(),
+      ssrConf.multiSite ? publicFolderByHost(req) : 'public',
+      `${status}.html`
+    ),
     'utf8'
   ).catch(e => `Generic Error Page: ${status}`)
   __PAGES__[status] = html
@@ -61,8 +73,75 @@ export const hooksFactory = async () => {
 
   return {
     [TYPES.PRE_HEALTH]: NULL_MDWL,
+    [TYPES.BOOTSTRAP]: (req, res, next) => {
+      req.performance = {}
+
+      return next()
+    },
+    [TYPES.ROUTE_MATCHING]: async (req, res, next) => {
+      const startRouteMatchingTime = process.hrtime()
+      const {performance = {}, url} = req
+
+      match[promisify.custom] = args =>
+        new Promise((resolve, reject) => {
+          match(args, (error, redirectLocation, renderProps) => {
+            if (error) {
+              reject(error)
+            }
+
+            resolve({redirectLocation, renderProps})
+          })
+        })
+
+      if (!routes) {
+        console.error('Required routes file missing') // eslint-disable-line no-console
+        process.exit(1)
+      }
+
+      try {
+        const {redirectLocation, renderProps} = await promisify(match)({
+          routes,
+          location: url
+        })
+
+        req.matchResult = {
+          redirectLocation,
+          renderProps
+        }
+      } catch (error) {
+        req.matchResult = {
+          error
+        }
+
+        return next(error)
+      }
+
+      const diffRouteMatchingTime = process.hrtime(startRouteMatchingTime)
+
+      req.performance = {
+        ...performance,
+        matchRoutes: hrTimeToMs(diffRouteMatchingTime)
+      }
+
+      return next()
+    },
     [TYPES.LOGGING]: NULL_MDWL,
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
+    [TYPES.SETUP_CONTEXT]: async (req, res, next) => {
+      const startContextCreationTime = process.hrtime()
+      const {performance = {}} = req
+
+      req.context = await contextFactory(createServerContextFactoryParams(req))
+
+      const diffContextCreationTime = process.hrtime(startContextCreationTime)
+
+      req.performance = {
+        ...performance,
+        contextCreation: hrTimeToMs(diffContextCreationTime)
+      }
+
+      return next()
+    },
     [TYPES.PRE_SSR_HANDLER]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
     [TYPES.NOT_FOUND]: async (req, res, next) => {
@@ -72,7 +151,7 @@ export const hooksFactory = async () => {
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
       // getInitialProps could throw a 404 error or any other error
-      req.log && req.log.error && req.log.error(err)
+      req.log && req.log.error && req.log.error((' ' + err.message).slice(1))
       const status =
         err.message && err.message.includes(NOT_FOUND_CODE)
           ? NOT_FOUND_CODE

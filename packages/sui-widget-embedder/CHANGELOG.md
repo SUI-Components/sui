@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.12.0 (2020-05-14)
+
+
+### Features
+
+* support browser context in widget ([efdd72a](https://github.com/SUI-Components/sui/commit/efdd72a1944902b3f9a2f9b2a7ab4d6626f9998b))
+
+
+
+# 3.11.0 (2020-04-06)
+
+
+### Features
+
+* generate theme with new org name ([d7d9969](https://github.com/SUI-Components/sui/commit/d7d9969f5870c13c4c63d27feb8a77da807430fa))
+
+
+
 # 3.10.0 (2020-03-27)
 
 

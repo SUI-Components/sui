@@ -20,13 +20,15 @@ const _cache = ({
   target,
   ttl
 } = {}) => {
-  caches[fnName] =
-    caches[fnName] ||
+  const cacheKey = `${target.constructor.name}::${fnName}`
+
+  caches[cacheKey] =
+    caches[cacheKey] ||
     (algorithm === ALGORITHMS.LRU
       ? new LRU({size})
       : new Error(`[sui-decorators::cache] unknown algorithm: ${algorithm}`))
 
-  const cache = caches[fnName]
+  const cache = caches[cacheKey]
 
   return (...args) => {
     if (
@@ -40,6 +42,7 @@ const _cache = ({
       JSON.stringify(args)
     )}`
     const now = Date.now()
+
     if (cache.get(key) === undefined) {
       cache.set(key, {createdAt: now, returns: original.apply(instance, args)})
     }
@@ -48,11 +51,7 @@ const _cache = ({
       cache
         .get(key)
         .returns.then(args => {
-          if (
-            args.__INLINE_ERROR__ &&
-            Array.isArray(args) &&
-            args[0] !== undefined
-          ) {
+          if (args.__INLINE_ERROR__ && Array.isArray(args) && args[0]) {
             cache.del(key)
           }
         })

@@ -23,7 +23,9 @@ export default ({context, routeInfo}) => Page => {
 
     const renderLoading = () => {
       // check if the page has a renderLoading method, if not, just render nothing
-      return Page.renderLoading ? Page.renderLoading() : null
+      return Page.renderLoading
+        ? Page.renderLoading({context, routeInfo})
+        : null
     }
 
     return isLoading ? renderLoading() : <Page {...initialProps} {...props} />

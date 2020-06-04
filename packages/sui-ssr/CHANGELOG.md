@@ -2,6 +2,154 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.0.0 (2020-05-21)
+
+
+### Features
+
+* use sui-react-router for match ([96c3e4e](https://github.com/SUI-Components/sui/commit/96c3e4e429a4bb4a20d442860d132aac714d5445))
+
+
+
+# 6.15.0 (2020-05-08)
+
+
+
+# 6.14.0 (2020-05-08)
+
+
+### Bug Fixes
+
+* fix error memory leak ([f5c7610](https://github.com/SUI-Components/sui/commit/f5c76104430f8aa2b4b1328c2fef619ba0247089))
+* fix memory leak ([65c8958](https://github.com/SUI-Components/sui/commit/65c89581ed5767e0ebc914bad15441319832cd5d))
+* fix performance issue with strings ([2e727a2](https://github.com/SUI-Components/sui/commit/2e727a256022a70cf01dec85c4eb85568aa951cb))
+* fix redirect location param name ([6786f7c](https://github.com/SUI-Components/sui/commit/6786f7c3719bd978c56f847ec78ca902b415a856))
+* fix string memory leak ([acf4dc6](https://github.com/SUI-Components/sui/commit/acf4dc6fed50b64109be06eedbfd0aeafe1a0cc1))
+
+
+
+# 6.13.0 (2020-05-07)
+
+
+### Bug Fixes
+
+* fix hooks order ([e379a6d](https://github.com/SUI-Components/sui/commit/e379a6d82dc48f6b79dd649359d399fdbc00fb7c))
+
+
+### Features
+
+* activate bootstrap hook ([a0b58a5](https://github.com/SUI-Components/sui/commit/a0b58a5dfef642197e3a4c0e8414aa27d0c136f7))
+* boostrap even before pre health ([eee0eeb](https://github.com/SUI-Components/sui/commit/eee0eebf7fdffb52f6491e23848a84aa637c4417))
+
+
+
+# 6.12.0 (2020-05-07)
+
+
+### Features
+
+* add bootstrap hook type ([6fb48c0](https://github.com/SUI-Components/sui/commit/6fb48c000b8a89c9a582d7b7c160ac8af302d0ea))
+* add timing to context and route matching hooks ([454b19f](https://github.com/SUI-Components/sui/commit/454b19fa5bf98946a77a90aa97cc8517f5cdfafa))
+* get match props from req and add timing in criticalCSS middleware ([5b5db82](https://github.com/SUI-Components/sui/commit/5b5db82d0126b431dea00f40a0ae3af644e409c9))
+* get match props from req and add timing in prpl middleware ([8e40376](https://github.com/SUI-Components/sui/commit/8e403769ab3e2ae62392e79e20aeff18170a0cf2))
+* move hrtimeToMs to utils module ([c3865c4](https://github.com/SUI-Components/sui/commit/c3865c4b0f1705497f817c772c88d9ce5a8092f2))
+* move req prop destructuring to top, return all timing info ([e6f8795](https://github.com/SUI-Components/sui/commit/e6f8795e659bf18d16779c9ebe1eb6b33239dfc7))
+
+
+
+# 6.11.0 (2020-05-05)
+
+
+### Bug Fixes
+
+* remove unused bootstrap hook type ([ca31f7e](https://github.com/SUI-Components/sui/commit/ca31f7ebf65606848d1d2497d6b1bd4986e65b38))
+
+
+### Features
+
+* add config for env and mandatoryCSSRules check for criticalCSS ([585dbd8](https://github.com/SUI-Components/sui/commit/585dbd8ec57b76e7974f45275229cdcde04e8ce7))
+* add max retrys by hash logic ([1707518](https://github.com/SUI-Components/sui/commit/17075188f582c325af7203f55546639c1beb01ce))
+* code doc and logMessages ([ebdf251](https://github.com/SUI-Components/sui/commit/ebdf251b53c29304593adb9fe61b9dbd0b466e5a))
+* exit process if no routes file found ([487705d](https://github.com/SUI-Components/sui/commit/487705d0f3be53cc3b41a9155e794a4eceae6a71))
+* manage errors first in ssr, before redirects ([8f6ccf6](https://github.com/SUI-Components/sui/commit/8f6ccf61e1cdbd53447ebfbcdce13c96a70c200b))
+* rename BOOTSTRAP hook to ROUTE_MATCHING ([475c885](https://github.com/SUI-Components/sui/commit/475c885173057f7bc53283c07370ad62d2b54f08))
+* retrieve critical and prpl middlewares ([a8eb072](https://github.com/SUI-Components/sui/commit/a8eb072c157a1c15f8ad915011a34c3aa23f0a0b))
+* retrieve server getInitialProps & render metrics ([cf72604](https://github.com/SUI-Components/sui/commit/cf7260486cd89ec9525b1a8fb311e171897bd86f))
+* use sui-react-router in prpl ([624b61d](https://github.com/SUI-Components/sui/commit/624b61d82fc9e288382f085be013a1a72a73630f))
+
+
+
+# 6.10.0 (2020-05-04)
+
+
+### Bug Fixes
+
+* route.path fix ([921e721](https://github.com/SUI-Components/sui/commit/921e721c9073bc62c015abde374f9e1fc0c9b90c))
+
+
+### Features
+
+* add blackListRoutePaths cheking in criticalCSS and prpl ([8a0634e](https://github.com/SUI-Components/sui/commit/8a0634e1d1fa68168edaecf45ce8399846b514e5))
+* add bootstrap hook ([67ed9b7](https://github.com/SUI-Components/sui/commit/67ed9b724628039a80fa00d0df26c4694a1d56a2))
+* remove match() from main ssr and move to bootstrap hook ([b90de60](https://github.com/SUI-Components/sui/commit/b90de601a225c2c74f1679044291b019c568148b))
+
+
+
+# 6.9.0 (2020-04-27)
+
+
+
+# 6.8.0 (2020-04-27)
+
+
+### Features
+
+* context providers as plugins ([2a57992](https://github.com/SUI-Components/sui/commit/2a57992453ab07884bba2bbdcd81a69c16f006cf))
+* use logMessage instead of console ([ff9c38c](https://github.com/SUI-Components/sui/commit/ff9c38cb9257e1444b64c45098e4be6454e0134b))
+
+
+
+# 6.7.0 (2020-04-24)
+
+
+### Features
+
+* add criticalCSS invalidate param ([71aa60d](https://github.com/SUI-Components/sui/commit/71aa60d5793420ad59584eddcbc416b345bfe6db))
+* improve logging and config ([6be9929](https://github.com/SUI-Components/sui/commit/6be9929fa6b20ee57b12fcd569b2a218a8d42584))
+* log message in console when critical css is invalidated ([9bdbe6c](https://github.com/SUI-Components/sui/commit/9bdbe6cdc38ba62e4956a9cedda3517971a50696))
+
+
+
+# 6.6.0 (2020-04-23)
+
+
+### Features
+
+* send hints preload with headers ([8c6a349](https://github.com/SUI-Components/sui/commit/8c6a3498ad0a62af580eb8e452c8d315856dee60))
+
+
+
+# 6.5.0 (2020-04-23)
+
+
+### Features
+
+* add support for the prpl service ([6e60e5b](https://github.com/SUI-Components/sui/commit/6e60e5bef8aba66c5f26ebe6d7ed9cad066eb1a3))
+* mobile as default prpl device ([820e79f](https://github.com/SUI-Components/sui/commit/820e79fa534715f1b443062387ba3e760af83a62))
+* remove development mode ([302aee4](https://github.com/SUI-Components/sui/commit/302aee4b6f253431dbae8a9a6f940e411425a522))
+* use default history and pass location instead pushing it ([d004a55](https://github.com/SUI-Components/sui/commit/d004a557eb8811f8cdc0cafbb12029d6f17d637e))
+
+
+
+# 6.4.0 (2020-04-17)
+
+
+### Features
+
+* use parse to improve JSON ([2ea0d3f](https://github.com/SUI-Components/sui/commit/2ea0d3fd74b72a7eba034b636b3367b669da456a))
+
+
+
 # 6.3.0 (2020-03-31)
 
 
@@ -17,6 +165,11 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add check to skip ssr if statusCode is set to 404 ([3e8eb55](https://github.com/SUI-Components/sui/commit/3e8eb5507a0dc9494ac8759bf15f3eee169e5f80))
+* add new SETUP_CONTEXT hook default function in hooksFactory ([b0aed96](https://github.com/SUI-Components/sui/commit/b0aed965f38845ce8b4383a779b5100ca7b7cdd3))
+* add new setup_context hook to hook types file ([aa96126](https://github.com/SUI-Components/sui/commit/aa96126ec30a2bfd7eddfbe2a48f3e646740d765))
+* add new SETUP_CONTEXT middleware in ssr server ([5d27850](https://github.com/SUI-Components/sui/commit/5d278504da3b82ce0008b6eb5dc9b683e0465d4e))
+* use @s-ui/react-router for criticalcss ([7ea27dd](https://github.com/SUI-Components/sui/commit/7ea27dd6aa12001e9013fe26b83a18348ac5ec04))
+* use request context instead of building it in ssr ([e8d62e8](https://github.com/SUI-Components/sui/commit/e8d62e874ced922b414a19b202d58a5ebd298b43))
 
 
 
@@ -30,6 +183,11 @@ All notable changes to this project will be documented in this file.
 
 
 # 6.0.0 (2020-03-17)
+
+
+### Bug Fixes
+
+* use a static version of the history ([21e020a](https://github.com/SUI-Components/sui/commit/21e020ae694fd6605fd8f3c487543529148aee4d))
 
 
 ### Features
@@ -64,6 +222,17 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * send custom headers properly inside an options object ([1cacef4](https://github.com/SUI-Components/sui/commit/1cacef465f24b2b482482be0ae457681c0498982))
+
+
+### Features
+
+* sui-ssr expect works with @s-ui/react-router ([86c32bd](https://github.com/SUI-Components/sui/commit/86c32bdec5a244a92ee4864bd93f27f23f941dc0))
+* use Router component and split requires ([3ac23e8](https://github.com/SUI-Components/sui/commit/3ac23e84b9f713ea85eb8cfd71843a2ccdcac245))
+
+
+### BREAKING CHANGES
+
+* Internal requirement path changes from react-router to @s-ui/react-router, break the convention.
 
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/domain",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "description": "SDK for creating domains",
   "main": "lib/index.js",
   "scripts": {
@@ -11,6 +11,6 @@
   "author": "Enablers Frontend",
   "license": "ISC",
   "dependencies": {
-    "axios": "0.19.0"
+    "axios": "0.19.2"
   }
 }

@@ -98,7 +98,11 @@ Promise.all([
 node_modules`
   ),
 
-  writeFile(COMPONENT_PACKAGE_NPMIGNORE_FILE, `src`),
+  writeFile(
+    COMPONENT_PACKAGE_NPMIGNORE_FILE,
+    `src
+assets`
+  ),
 
   writeFile(
     COMPONENT_PACKAGE_JSON_FILE,
@@ -179,10 +183,21 @@ $ npm install ${packageName}
 ## Usage
 
 ### Basic usage
+
+#### Import package and use the component
+
 \`\`\`js
 import ${componentInPascal} from '${packageName}'
 
 return (<${componentInPascal} />)
+\`\`\`
+
+#### Import the styles (Sass)
+
+\`\`\`css
+@import '~@s-ui/theme/lib/index';
+// @import 'your theme';
+@import '~${packageName}/lib/index';
 \`\`\`
 
 

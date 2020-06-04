@@ -43,7 +43,9 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       )
       hoistNonReactStatics(NextComponent, Component)
 
-      window[cleanDisplayName(EnhanceComponent.displayName)] = NextComponent
+      const displayName = cleanDisplayName(EnhanceComponent.displayName)
+      NextComponent.displayName = displayName
+      window[displayName] = NextComponent
 
       importTest()
         .then(() => {

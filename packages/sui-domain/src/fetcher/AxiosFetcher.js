@@ -1,7 +1,7 @@
 import Fetcher from './Fetcher'
 import axios from 'axios'
-// import getPerf from '@schibstedspain/sui-perf'
-// import measureAxios from '@schibstedspain/sui-perf/src/measure-axios'
+// import getPerf from '@s-ui/perf'
+// import measureAxios from '@s-ui/perf/src/measure-axios'
 
 /**
  * @implements Fetcher

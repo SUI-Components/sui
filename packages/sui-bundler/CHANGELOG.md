@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.49.0 (2020-05-21)
+
+
+### Features
+
+* support @s-ui/react-router context on linking packages ([c626ec2](https://github.com/SUI-Components/sui/commit/c626ec2b7cc78bdd2c1a45c0c934f48c2f685832))
+
+
+
+# 5.48.0 (2020-04-23)
+
+
+### Features
+
+* update workbox-webpack-plugin ([e219661](https://github.com/SUI-Components/sui/commit/e219661c25d51e9a27dd435508b243e6ed0c94f2))
+
+
+
 # 5.47.0 (2020-03-11)
 
 

@@ -25,12 +25,30 @@ $ npm install @s-ui/changelog --save-dev
 $ sui-changelog
 ```
 
-### Optionally running a phoenix
+### Options
+
+#### --phoenix (-p)
 
 If you feel more confortable having a clean install of your dependencies before retrieving the changelog, just set the `-p, --phoenix` option:
 
 ```sh
-$ sui-changelog -p
+npx @s-ui/changelog -p
+```
+
+#### --package-lock (-l)
+
+Use this flag if your project rely on `package-lock.json` file instead of `npm-shrinkwrap.json` for saving your dependencies tree
+
+```sh
+npx @s-ui/changelog --package-lock
+```
+
+#### --maintain-version (-m)
+
+You might not want this tool to update versions in your `package.json` nor your `npm-shrinkwrap.json`/`package-lock.json` files
+
+```sh
+npx @s-ui/changelog --maintain-version
 ```
 
 ### Adding more scopes

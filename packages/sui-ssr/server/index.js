@@ -1,6 +1,7 @@
 import express from 'express'
 import ssr from './ssr'
 import criticalCss from './criticalCss'
+import prpl from './prpl'
 import dynamicRendering from './dynamicRendering'
 import {hooksFactory} from './hooksFactory'
 import TYPES from '../hooks-types'
@@ -17,6 +18,13 @@ import {
   useStaticsByHost,
   readHtmlTemplate
 } from './utils'
+
+import noOPConsole from 'noop-console'
+noOPConsole(console)
+
+if (process.env.CONSOLE) {
+  console._restore()
+}
 
 const app = express()
 
@@ -64,12 +72,15 @@ const _memoizedHtmlTemplatesMapping = {}
 ;(async () => {
   const hooks = await hooksFactory()
 
+  app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.PRE_HEALTH])
   app.get('/_health', (req, res) =>
     res.status(200).json({uptime: process.uptime()})
   )
 
   app.use(compression())
+
+  app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
@@ -85,7 +96,7 @@ const _memoizedHtmlTemplatesMapping = {}
         customTlds: /localhost|\.local/
       })
 
-        !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
+      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
         ? next()
         : parsedUrl.subdomain
         ? next()
@@ -115,15 +126,20 @@ const _memoizedHtmlTemplatesMapping = {}
     next()
   })
 
+  app.use(hooks[TYPES.SETUP_CONTEXT])
+
   app.use(hooks[TYPES.PRE_SSR_HANDLER])
 
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),
+    prpl(ssrConf.prpl),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
   ])
 
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-    app.listen(PORT, () => console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)) // eslint-disable-line
+  app.listen(PORT, () =>
+    console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)
+  ) // eslint-disable-line
 })()
