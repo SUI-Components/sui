@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.16.0 (2020-06-04)
+
+
+### Bug Fixes
+
+* add redis-mock and hot-shot to dependencies ([4267659](https://github.com/SUI-Components/sui/commit/42676596e615b16b025b48fd238fcf269df8bc42))
+
+
+
 # 3.14.0 (2020-06-04)
 
 
