@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.13.0 (2020-06-04)
+
+
+### Features
+
+* inMemory cache handler ([3450125](https://github.com/SUI-Components/sui/commit/3450125b66ea474d777d0f7f9afce1b0592270ed))
+* inRedis cache handler ([17f2482](https://github.com/SUI-Components/sui/commit/17f2482dfb3a13ef919fe34f54ad40310d028541))
+* redis and isNode condition ([6e07a67](https://github.com/SUI-Components/sui/commit/6e07a6751a87ee25068823465b17527a038335c6))
+* redis client ([912aa68](https://github.com/SUI-Components/sui/commit/912aa688a5fe7e703fd56467882c59805c9ca574))
+* using inMemory and inRedis cache handlers ([f5a1680](https://github.com/SUI-Components/sui/commit/f5a1680feaa76de1e715c49d3917d28d897c3de2))
+
+
+
 # 3.12.0 (2020-05-27)
 
 
