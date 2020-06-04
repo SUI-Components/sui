@@ -19,7 +19,8 @@
     "perf_hooks": false,
     "hot-shots": false,
     "redis": false,
-    "redis-lru": false
+    "redis-lru": false,
+    "redis-mock": false
   },
   "dependencies": {
     "@s-ui/js": "2",
