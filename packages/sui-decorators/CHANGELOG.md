@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.14.0 (2020-06-04)
+
+
+### Bug Fixes
+
+* fix redis cache in browser ([d451f15](https://github.com/SUI-Components/sui/commit/d451f157380e4d8f57ff7e2043ebf4b57bbf5635))
+
+
+
 # 3.13.0 (2020-06-04)
 
 
