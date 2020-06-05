@@ -2,6 +2,7 @@
 /* eslint no-console:0 */
 
 const path = require('path')
+const os = require('os')
 const program = require('commander')
 const fs = require('fs')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
@@ -50,6 +51,7 @@ program
     '-b, --browser <browser>',
     'Select a different browser (chrome|edge|firefox)'
   )
+  .option('-N, --noWebSecurity', 'Disable all web securities')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-R, --record', 'Record tests and send result to Dashboard Service')
   .option('-C, --ci', 'Continuos integration mode, reduces memory consumption')
@@ -70,7 +72,8 @@ const {
   record,
   key,
   ci,
-  browser
+  browser,
+  noWebSecurity
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
@@ -98,12 +101,30 @@ if (ci) {
   cypressConfig.numSnapshotsKeptInMemory = 1
 }
 
+let projectURI = CYPRESS_FOLDER_PATH
+if (noWebSecurity) {
+  const defaultConfig = require(path.join(CYPRESS_FOLDER_PATH, 'cypress.json'))
+  const nextCypressConfig = {
+    ...defaultConfig,
+    chromeWebSecurity: false
+  }
+
+  const nextFolderPath = path.join(os.tmpdir(), '' + Date.now())
+  fs.mkdirSync(nextFolderPath)
+  fs.writeFileSync(
+    path.join(nextFolderPath, 'cypress.json'),
+    JSON.stringify(nextCypressConfig, null, 2),
+    'utf8'
+  )
+  projectURI = nextFolderPath
+}
+
 resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
   .then(cypressBinPath =>
     getSpawnPromise(cypressBinPath, [
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
-      '--project=' + CYPRESS_FOLDER_PATH,
+      '--project=' + projectURI,
       browser && '--browser=' + browser,
       record && '--record',
       key && '--key=' + key
