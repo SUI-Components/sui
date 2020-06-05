@@ -46,6 +46,10 @@ program
     'Overwrite string to UserAgent header.'
   )
   .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
+  .option(
+    '-b, --browser <browser>',
+    'Select a different browser (chrome|edge|firefox)'
+  )
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-R, --record', 'Record tests and send result to Dashboard Service')
   .option('-C, --ci', 'Continuos integration mode, reduces memory consumption')
@@ -65,7 +69,8 @@ const {
   scope,
   record,
   key,
-  ci
+  ci,
+  browser
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
@@ -99,6 +104,7 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
       '--project=' + CYPRESS_FOLDER_PATH,
+      browser && '--browser=' + browser,
       record && '--record',
       key && '--key=' + key
     ])
