@@ -21,7 +21,7 @@
     "@babel/plugin-transform-modules-commonjs": "7.8.3",
     "@babel/polyfill": "7.8.3",
     "@babel/register": "7.8.3",
-    "@s-ui/bundler": "^5.49.0",
+    "@s-ui/bundler": "5.49.0",
     "@s-ui/helpers": "1",
     "babel-loader": "8.0.6",
     "babel-plugin-dynamic-import-node": "2.3.0",
