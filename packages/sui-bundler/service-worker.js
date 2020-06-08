@@ -4,8 +4,8 @@
 const manifestStatics = require('static-manifest')()
 // will be replaced in build time by the current timestamp
 const cacheName = require('static-cache-name')()
-
-const OFFLINE_URL = 'offline.html'
+// will be replaced in build time by the route defined in offline config
+const offlineRoute = require('static-offline-route')()
 let supportsResponseBodyStream
 
 /**
@@ -45,9 +45,6 @@ const copyResponse = async function(response) {
     statusText: clonedResponse.statusText
   }
 
-  // Create the new response from the body stream and `ResponseInit`
-  // modifications. Note: not all browsers support the Response.body stream,
-  // so fall back to reading the entire body into memory as a blob.
   const body = canConstructResponseFromBodyStream()
     ? clonedResponse.body
     : await clonedResponse.blob()
@@ -76,14 +73,20 @@ self.addEventListener('install', event => {
       const cache = await caches.open(cacheName)
       // Setting {cache: 'reload'} in the new request will ensure that the response
       // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
-      await cache.add(new Request(OFFLINE_URL, {cache: 'reload'}))
+      if (offlineRoute) {
+        await cache.add(
+          new Request(offlineRoute, {
+            cache: 'reload'
+          })
+        )
+      }
       await cache.addAll(manifestStatics)
     })()
   )
 })
 
 self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate') {
+  if (offlineRoute && event.request.mode === 'navigate') {
     event.respondWith(
       (async () => {
         try {
@@ -100,23 +103,29 @@ self.addEventListener('fetch', event => {
           // due to a network error.
           // If fetch() returns a valid HTTP response with a response code in
           // the 4xx or 5xx range, the catch() will NOT be called.
-
           const cache = await caches.open(cacheName)
-          const cachedResponse = await cache.match(OFFLINE_URL)
+          const cachedResponse = await cache.match(offlineRoute)
 
+          console.log('cached offline', cachedResponse)
           return copyResponse(cachedResponse)
         }
       })()
     )
-  } else {
+  }
+})
+
+self.addEventListener('fetch', event => {
+  if (event.request.mode !== 'navigate') {
     event.respondWith(
-      caches.open(cacheName).then(cache => {
-        return cache.match(event.request).then(response => {
-          return fetch(event.request).then(response => {
-            return response
-          })
-        })
-      })
+      (async () => {
+        const cache = await caches.open(cacheName)
+        const cachedResponse = await cache.match(event.request)
+        console.log('cached request', cachedResponse, event.request)
+        if (cachedResponse) return cachedResponse
+
+        const fetchResponse = await fetch(event.request)
+        return fetchResponse
+      })()
     )
   }
 })
