@@ -1,3 +1,3 @@
-module.exports = class HoustonAdapter {
-  getEnabledFeatures({attributes, userId}) {}
+export default class HoustonAdapter {
+  getEnabledFeatures({attributes}) {}
 }

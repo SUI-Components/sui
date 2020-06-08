@@ -1,11 +1,3 @@
-const DefaultAdapter = require('./adapters/default')
-
-module.exports = class AB {
-  constructor({adapter = new DefaultAdapter()} = {}) {
-    this._adapter = adapter
-  }
-
-  getEnabledFeatures({attributes, userId}) {
-    return this._adapter.getEnabledFeatures({attributes, userId})
-  }
-}
+export {default as AB} from './ab'
+export {default as useFeature} from './hooks/useFeature'
+export {default as FeatureContext} from './contexts/FeatureContext'

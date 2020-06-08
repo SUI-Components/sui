@@ -1,5 +1,5 @@
-module.exports = class DefaultAdapter {
-  getEnabledFeatures({attributes, userId}) {
+export default class DefaultAdapter {
+  getEnabledFeatures({attributes}) {
     return Promise.resolve([])
   }
 }

@@ -7,26 +7,41 @@ const DEFAULT_OPTIONS = {
 
 const DEFAULT_TIMEOUT = 500
 
-module.exports = class OptimizelyAdapter {
-  constructor({sdkKey, options = DEFAULT_OPTIONS}) {
+export default class OptimizelyAdapter {
+  constructor({optimizely, userId}) {
+    if (this._userId) {
+      throw new Error('userId is mandatory to use OptimizelyAdapter')
+    }
+
+    if (this._optimizely) {
+      throw new Error(
+        'optimizely instance is mandatory to use OptimizelyAdapter'
+      )
+    }
+
+    this._optimizely = optimizely
+    this._userId = userId
+  }
+
+  static createOptimizelyInstance({options = DEFAULT_OPTIONS, sdkKey}) {
     optimizelySDK.setLogLevel('info')
     optimizelySDK.setLogger(optimizelySDK.logging.createLogger())
 
-    this._instance = optimizelySDK.createInstance({
+    return optimizelySDK.createInstance({
       sdkKey,
       datafileOptions: options
     })
   }
 
-  getEnabledFeatures({attributes, userId}) {
-    return this._onReady().then(instance =>
-      instance.getEnabledFeatures(userId.toString(), attributes)
+  getEnabledFeatures({attributes} = {}) {
+    return this._onReady().then(optimizely =>
+      optimizely.getEnabledFeatures(this._userId.toString(), attributes)
     )
   }
 
   _onReady() {
-    return this._instance
+    return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
-      .then(() => this._instance)
+      .then(() => this._optimizely)
   }
 }

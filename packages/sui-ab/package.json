@@ -1,20 +1,23 @@
 {
-  "name": "@s-ui/ab-full-stack",
+  "name": "@s-ui/ab",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:server",
-    "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
+    "lib:js": "npx rimraf ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
+    "lib": "npm run lib:js",
+    "prepare": "npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
+    "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
+    "test:server:watch": "npm run test:server -- --watch",
     "test:server": "NODE_ENV=test sui-test server -P 'test/server/*Spec.js'",
-    "test:server:watch": "npm run test:server -- --watch"
+    "test": "npm run test:server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@optimizely/optimizely-sdk": "4.0.0"
+    "@optimizely/optimizely-sdk": "^4.0.0"
   },
   "devDependencies": {
     "@s-ui/test": "3"
