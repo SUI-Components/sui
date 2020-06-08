@@ -226,4 +226,87 @@ describe('Cache in browser', () => {
       })
     })
   })
+
+  describe('redis cache should not apply in client', () => {
+    it('should apply inMemory cache for ok simple random number response and not apply cache for inlineError decorated error response', async () => {
+      let shouldReturnError = true
+
+      class YummyAsync {
+        @cache({
+          server: true,
+          ttl: '1 minute',
+          redis: {host: 'localhost', port: 6379}
+        })
+        @inlineError
+        async asyncRndNumber() {
+          if (shouldReturnError) {
+            return Promise.reject(new Error('Error'))
+          }
+
+          return Math.random()
+        }
+      }
+
+      const yummyAsync = new YummyAsync()
+      // Error response, it should not be cached
+      const responseFirst = await yummyAsync.asyncRndNumber()
+
+      // Ok response, it should be cached
+      shouldReturnError = false
+      const responseSecond = await yummyAsync.asyncRndNumber()
+      const responseThird = await yummyAsync.asyncRndNumber()
+
+      // Here we force an error and expect not response error because it is cached
+      shouldReturnError = true
+      const responseFourth = await yummyAsync.asyncRndNumber()
+
+      expect(responseFirst[0]).to.be.not.null
+      expect(responseSecond[1]).to.be.eql(responseThird[1])
+      expect(responseFourth[0]).to.be.null
+      expect(responseSecond[1]).to.be.eql(responseFourth[1])
+    })
+
+    it('should apply cache for a complex json response and not apply cache for inlineError decorated error response', async () => {
+      let shouldReturnError = true
+
+      class YummyAsync {
+        @cache({
+          server: true,
+          ttl: '1 minute',
+          redis: {host: 'localhost', port: 6379}
+        })
+        @inlineError
+        async asyncRndObject() {
+          if (shouldReturnError) {
+            return Promise.reject(new Error('Error'))
+          }
+
+          return {
+            name: 'YummyAsync',
+            randomNumbersList: [Math.random(), Math.random(), Math.random()],
+            boolValue: true,
+            date: Date.now()
+          }
+        }
+      }
+
+      const yummyAsync = new YummyAsync()
+      // Error response, it should not be cached
+      const responseFirst = await yummyAsync.asyncRndObject()
+
+      // Ok response, it should be cached
+      shouldReturnError = false
+      const responseSecond = await yummyAsync.asyncRndObject()
+      const responseThird = await yummyAsync.asyncRndObject()
+
+      // Here we force an error and expect not response error because it is cached
+      shouldReturnError = true
+      const responseFourth = await yummyAsync.asyncRndObject()
+
+      expect(responseFirst[0]).to.be.not.null
+      expect(responseSecond[1]).to.be.eql(responseThird[1])
+      expect(responseFourth[0]).to.be.null
+      expect(responseSecond[1]).to.be.eql(responseFourth[1])
+    })
+  })
 })
