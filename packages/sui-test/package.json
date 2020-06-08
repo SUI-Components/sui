@@ -21,6 +21,7 @@
     "@babel/plugin-transform-modules-commonjs": "7.8.3",
     "@babel/polyfill": "7.8.3",
     "@babel/register": "7.8.3",
+    "@s-ui/bundler": "^5.49.0",
     "@s-ui/helpers": "1",
     "babel-loader": "8.0.6",
     "babel-plugin-dynamic-import-node": "2.3.0",
@@ -38,5 +39,14 @@
     "karma-webpack": "4.0.2",
     "mocha": "6.2.2",
     "webpack": "4.41.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }

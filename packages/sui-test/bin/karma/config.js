@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 
+const definePlugin = require('@s-ui/bundler/shared/define')
+
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
 
@@ -33,7 +35,10 @@ const config = {
     output: {
       pathinfo: false
     },
-    plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
+    plugins: [
+      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      definePlugin({__DEV__: true}),
+    ],
     // avoid unneded optimizations for running our tests in order to get fatest bundling time
     optimization: {
       removeAvailableModules: false,
@@ -58,7 +63,10 @@ const config = {
                     }
                   ]
                 ],
-                plugins: [require.resolve('babel-plugin-istanbul')]
+                plugins: [
+                  require.resolve('babel-plugin-istanbul'),
+                  require.resolve('./babelPatch.js')
+                ]
               }
             }
           ]
