@@ -1,11 +1,10 @@
 /* eslint-env serviceworker */
-
 // will be replaced in build time by the real manifest.json content
 const manifestStatics = require('static-manifest')()
 // will be replaced in build time by the current timestamp
 const cacheName = require('static-cache-name')()
-// will be replaced in build time by the route defined in offline config
-const offlineRoute = require('static-offline-route')()
+
+const OFFLINE_PAGE = 'offline.html'
 let supportsResponseBodyStream
 
 /**
@@ -73,20 +72,18 @@ self.addEventListener('install', event => {
       const cache = await caches.open(cacheName)
       // Setting {cache: 'reload'} in the new request will ensure that the response
       // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
-      if (offlineRoute) {
-        await cache.add(
-          new Request(offlineRoute, {
-            cache: 'reload'
-          })
-        )
-      }
+      await cache.add(
+        new Request(OFFLINE_PAGE, {
+          cache: 'reload'
+        })
+      )
       await cache.addAll(manifestStatics)
     })()
   )
 })
 
 self.addEventListener('fetch', event => {
-  if (offlineRoute && event.request.mode === 'navigate') {
+  if (event.request.mode === 'navigate') {
     event.respondWith(
       (async () => {
         try {
@@ -104,9 +101,8 @@ self.addEventListener('fetch', event => {
           // If fetch() returns a valid HTTP response with a response code in
           // the 4xx or 5xx range, the catch() will NOT be called.
           const cache = await caches.open(cacheName)
-          const cachedResponse = await cache.match(offlineRoute)
+          const cachedResponse = await cache.match(OFFLINE_PAGE)
 
-          console.log('cached offline', cachedResponse)
           return copyResponse(cachedResponse)
         }
       })()
@@ -120,7 +116,6 @@ self.addEventListener('fetch', event => {
       (async () => {
         const cache = await caches.open(cacheName)
         const cachedResponse = await cache.match(event.request)
-        console.log('cached request', cachedResponse, event.request)
         if (cachedResponse) return cachedResponse
 
         const fetchResponse = await fetch(event.request)

@@ -9,7 +9,6 @@ const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
 const config = require('../webpack.config.prod')
 const fs = require('fs')
-const {config: projectConfig} = require('../shared')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 
@@ -85,36 +84,39 @@ webpack(nextConfig).run((error, stats) => {
 
   console.log(`Webpack stats: ${stats}`)
 
-  const manifest = require(path.resolve(
-    process.cwd(),
-    'public',
-    'asset-manifest.json'
-  ))
-
-  const manifestStatics = Object.values(manifest).filter(
-    url => !url.includes('runtime') && !url.includes('LICENSE')
-  )
-
-  // generates the service worker
-  fs.createReadStream(path.resolve(__dirname, '..', 'service-worker.js'))
-    .pipe(
-      staticModule({
-        'static-offline-route': () =>
-          projectConfig.offline && projectConfig.offline.route
-            ? JSON.stringify(projectConfig.offline.route)
-            : '',
-        'static-manifest': () => JSON.stringify(manifestStatics),
-        'static-cache-name': () => JSON.stringify(Date.now().toString())
-      })
+  if (fs.existsSync(process.cwd(), 'src', 'offline.html')) {
+    fs.copyFileSync(
+      path.resolve(process.cwd(), 'src', 'offline.html'),
+      path.resolve(process.cwd(), 'public', 'offline.html')
     )
-    .pipe(minifyStream({sourceMap: false}))
-    .pipe(
-      fs.createWriteStream(
-        path.resolve(process.cwd(), 'public', 'service-worker.js')
+
+    const manifest = require(path.resolve(
+      process.cwd(),
+      'public',
+      'asset-manifest.json'
+    ))
+
+    const manifestStatics = Object.values(manifest).filter(
+      url => !url.includes('runtime')
+    )
+
+    // generates the service worker
+    fs.createReadStream(path.resolve(__dirname, '..', 'service-worker.js'))
+      .pipe(
+        staticModule({
+          'static-manifest': () => JSON.stringify(manifestStatics),
+          'static-cache-name': () => JSON.stringify(Date.now().toString())
+        })
       )
-    )
+      .pipe(minifyStream({sourceMap: false}))
+      .pipe(
+        fs.createWriteStream(
+          path.resolve(process.cwd(), 'public', 'service-worker.js')
+        )
+      )
 
-  console.log('\nService worker generated succesfully!\n')
+    console.log('\nService worker generated succesfully!\n')
+  }
 
   console.log(
     chalkSuccess(
