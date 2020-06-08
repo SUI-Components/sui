@@ -41,7 +41,6 @@ functionsToPatch.forEach(fnName => {
           return originalFn(title, cb)
         }
 
-        debugger // eslint-disable-line
         let context = __CONTEXTS__[prop]
         if (!context) {
           // eslint-disable-next-line
