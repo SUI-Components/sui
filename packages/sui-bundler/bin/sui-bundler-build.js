@@ -96,8 +96,9 @@ webpack(nextConfig).run((error, stats) => {
       'asset-manifest.json'
     ))
 
+    // webpack's runtime chunks are not meant to be cached
     const manifestStatics = Object.values(manifest).filter(
-      url => !url.includes('runtime')
+      url => !url.includes('runtime~')
     )
 
     // generates the service worker
