@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.0.0 (2020-06-09)
+
+
+### Features
+
+* add dynamic offline page cache (not working) ([1069207](https://github.com/SUI-Components/sui/commit/1069207c55322590bfe8e33905d14e580d439fb7))
+* add offline service worker ([dbd6d08](https://github.com/SUI-Components/sui/commit/dbd6d084b2b2ebdd14543aa2936f8469568485d7))
+* offline.html file as fallback in offline case ([9132c70](https://github.com/SUI-Components/sui/commit/9132c70a39367fdb60c84be21ab8d77d04dc9a33))
+* register callbacks as optional and not env dependant ([4e21e3c](https://github.com/SUI-Components/sui/commit/4e21e3c7b7f97966705c0f818c048dc7303bec33))
+* runtime check improved and add docs ([fb33942](https://github.com/SUI-Components/sui/commit/fb33942292fb13fe0e00b3f7ae51d19ed970f212))
+
+
+### BREAKING CHANGES
+
+* new sw activation api
+
+
+
 # 5.49.0 (2020-05-21)
 
 
