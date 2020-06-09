@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.1.0 (2020-06-09)
+
+
+### Bug Fixes
+
+* make options parameter to be optional ([974a36a](https://github.com/SUI-Components/sui/commit/974a36aa9e30a5e8aa313fcb9d5f81077e6da276))
+
+
+
 # 6.0.0 (2020-06-09)
 
 
