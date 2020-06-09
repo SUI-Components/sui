@@ -1,8 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const definePlugin = require('@s-ui/bundler/shared/define')
-
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
 
@@ -37,7 +35,9 @@ const config = {
     },
     plugins: [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
-      definePlugin({__DEV__: true}),
+      new webpack.DefinePlugin(Object.assign({}, {
+        __BASE_DIR__: JSON.stringify(process.env.PWD)
+      }))
     ],
     // avoid unneded optimizations for running our tests in order to get fatest bundling time
     optimization: {
