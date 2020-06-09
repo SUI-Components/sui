@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.2.0 (2020-06-09)
+
+
+### Features
+
+* use register function directly ([b954d05](https://github.com/SUI-Components/sui/commit/b954d059db67bc9c7e70266057ceea3ce85e0bb4))
+
+
+
 # 6.1.0 (2020-06-09)
 
 
