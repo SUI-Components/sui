@@ -189,7 +189,7 @@ In windows system filenames with `~` could produce errors. To avoid that you can
 
 ## Offline
 
-Offline feature is deactivated by default. If you want to activate, you need to create the static `src/offline.html` file. You also need to configure a serviceWorker in the entry point of your app:
+Offline feature is deactivated by default. If you want to activate, you need to create the static `src/offline.html` file. No resource loaded by this page will be cached so watch out adding images or external scripts as they won't work in offline mode. You also need to configure a serviceWorker in the entry point of your app:
 
 ```js
 import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
