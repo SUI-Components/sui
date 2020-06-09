@@ -1,11 +1,12 @@
+/* global __BASE_DIR__ */
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import SUIContext from '@s-ui/react-context'
-import withContext from '../src/components/demo/HoC/withContext'
-import {cleanDisplayName} from '../src/components/demo/utilities'
+import withContext from '../components/demo/HoC/withContext'
+import {cleanDisplayName} from '../components/demo/utilities'
 
-const requireFile = async ({
+export const requireFile = async ({
   defaultValue,
   extractDefault = true,
   importFile
@@ -17,11 +18,10 @@ const requireFile = async ({
   return extractDefault ? file.default : file
 }
 
-const tryRequireContext = ({category, component}) =>
+export const tryRequireContext = ({category, component}) =>
   requireFile({
     defaultValue: false,
     importFile: () => {
-      debugger
       return import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
     }
   })
@@ -30,7 +30,6 @@ const tryRequireComponent = ({category, component}) =>
   requireFile({
     defaultValue: false,
     importFile: () => {
-      debugger
       return import(
         `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
       )
@@ -97,7 +96,7 @@ const enhanceComponent = displayName => {
 const run = async () => {
   const cache = declareAll(
     require.context(
-      '../components/',
+      `${__BASE_DIR__}/components/`,
       true,
       /\.\/(\w+)\/(\w+)\/(src)+\/index.(js|jsx)$/
     )
@@ -130,20 +129,18 @@ const run = async () => {
     window.__STUDIO_CONTEXTS__[displayName] = nextEntityContexts
     window.__STUDIO_COMPONENT__[displayName] = nextEntityComponent
     window[displayName] = enhanceComponent(displayName) // eslint-disable-line
-    return {
-      displayName,
-      categoryName,
-      componentName,
-      nextEntityContexts,
-      nextEntityComponent
-    }
   })
 
   testAll(
-    require.context('../test/', true, /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/)
+    require.context(
+      `${__BASE_DIR__}/test/`,
+      true,
+      /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
+    )
   )
 
   originalKarmaLoader.call(window.__karma__)
 }
 
 run()
+
