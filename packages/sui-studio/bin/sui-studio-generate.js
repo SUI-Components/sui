@@ -98,7 +98,11 @@ Promise.all([
 node_modules`
   ),
 
-  writeFile(COMPONENT_PACKAGE_NPMIGNORE_FILE, `src`),
+  writeFile(
+    COMPONENT_PACKAGE_NPMIGNORE_FILE,
+    `src
+assets`
+  ),
 
   writeFile(
     COMPONENT_PACKAGE_JSON_FILE,

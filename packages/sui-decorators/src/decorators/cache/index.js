@@ -1,10 +1,11 @@
-import {createHash} from '@s-ui/js/lib/hash'
-
 import isNode from '../../helpers/isNode'
-import isPromise from '../../helpers/isPromise'
 import stringOrIntToMs from '../../helpers/stringOrIntToMs'
 
+import {inMemory} from './handlers/inMemory'
+import {inRedis} from './handlers/inRedis'
+
 import LRU from './algorithms/LRU'
+import RedisLRU from './algorithms/Redis'
 
 const ALGORITHMS = {LRU: 'lru'}
 const DEFAULT_TTL = 500
@@ -18,69 +19,66 @@ const _cache = ({
   original,
   size,
   target,
-  ttl
+  ttl,
+  redis
 } = {}) => {
-  caches[fnName] =
-    caches[fnName] ||
-    (algorithm === ALGORITHMS.LRU
-      ? new LRU({size})
-      : new Error(`[sui-decorators::cache] unknown algorithm: ${algorithm}`))
+  const cacheKey = `${target.constructor.name}::${fnName}`
 
-  const cache = caches[fnName]
+  let cache = caches[cacheKey]
 
-  return (...args) => {
-    if (
-      (typeof window !== 'undefined' && window.__SUI_CACHE_DISABLED__) ||
-      (typeof global !== 'undefined' && global.__SUI_CACHE_DISABLED__)
-    ) {
-      return original.apply(instance, args)
-    }
-
-    const key = `${target.constructor.name}::${fnName}::${createHash(
-      JSON.stringify(args)
-    )}`
-    const now = Date.now()
-    if (cache.get(key) === undefined) {
-      cache.set(key, {createdAt: now, returns: original.apply(instance, args)})
-    }
-
-    if (isPromise(cache.get(key).returns)) {
-      cache
-        .get(key)
-        .returns.then(args => {
-          if (
-            args.__INLINE_ERROR__ &&
-            Array.isArray(args) &&
-            args[0] !== undefined
-          ) {
-            cache.del(key)
-          }
+  if (!cache) {
+    if (!redis) {
+      cache = new LRU({size})
+    } else {
+      if (!isNode) {
+        console.warn(
+          '[sui-decorators/cache] Your redis config will be ignored in client side. Using the default inMemory LRU strategy.'
+        )
+        cache = new LRU({size})
+      } else {
+        cache = new RedisLRU({
+          size,
+          redisConnection: redis,
+          namespace: cacheKey,
+          ttl
         })
-        .catch(() => cache.del(key))
+        console.warn(
+          `[sui-decorators/cache] You are using redis cache for cacheKey: ${cacheKey}, your method MUST return a promise`
+        )
+        return inRedis(target, cache, original, fnName, instance, ttl)
+      }
     }
-
-    if (now - cache.get(key).createdAt > ttl) {
-      cache.del(key)
-    }
-
-    return cache.get(key) !== undefined
-      ? cache.get(key).returns
-      : original.apply(instance, args)
   }
+
+  return inMemory(target, cache, original, fnName, instance, ttl)
 }
 
 export default ({
   ttl = DEFAULT_TTL,
   server = false,
   algorithm = ALGORITHMS.LRU,
-  size
+  size,
+  redis
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
   return (target, fnName, descriptor) => {
+    if (
+      (typeof window !== 'undefined' && window.__SUI_CACHE_DISABLED__) ||
+      (typeof global !== 'undefined' && global.__SUI_CACHE_DISABLED__)
+    ) {
+      return descriptor
+    }
+
     // if we're on node but the decorator doesn't have the server flag
     // then we ignore the usage of the decorator and thus the cache
     if (isNode && !server) {
       return descriptor
+    }
+
+    if (!isNode && redis) {
+      console.warn(
+        '[sui-decorators/cache] Your redis config will be ignored in client site. Using the default LRU strategy.'
+      )
     }
 
     const {configurable, enumerable, writable} = descriptor
@@ -106,7 +104,8 @@ export default ({
             original: fn,
             size,
             target,
-            ttl: timeToLife
+            ttl: timeToLife,
+            redis
           })
 
           Object.defineProperty(this, fnName, {
