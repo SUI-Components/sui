@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.7.0 (2020-06-09)
+
+
+### Features
+
+* remove propTypes import when not needed ([0e1b203](https://github.com/SUI-Components/sui/commit/0e1b203424dc27b016acf43137ee014fb199ab58))
+* upgrade dependencies ([14efce4](https://github.com/SUI-Components/sui/commit/14efce4535ea78df74bdc8cb161a30558c1f182f))
+
+
+
 # 3.6.0 (2020-03-18)
 
 
