@@ -1,8 +1,13 @@
 'use strict'
+
+var noop = function() {}
+
 /* eslint-disable no-console */
-exports.register = function(_ref) {
-  var first = _ref.first
-  var renovate = _ref.renovate
+exports.register = function(options) {
+  options = options || {}
+  var first = options.first || noop
+  var renovate = options.renovate || noop
+
   return function() {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
@@ -19,12 +24,12 @@ exports.register = function(_ref) {
                     // the fresh content will have been added to the cache.
                     // It's the perfect time to display a "New content is
                     // available; please refresh." message in your web app.
-                    renovate && renovate()
+                    renovate()
                   } else {
                     // At this point, everything has been precached.
                     // It's the perfect time to display a
                     // "Content is cached for offline use." message.
-                    first && first()
+                    first()
                   }
                 }
               }
