@@ -9,15 +9,33 @@ export default class RedisClient {
     this._redisClient = useRedis
       ? redis.createClient({
           port: redisConnection.port,
-          host: redisConnection.host
+          host: redisConnection.host,
+          retry_strategy: function(options) {
+            if (options.error && options.error.code === 'ECONNREFUSED') {
+              // End reconnecting on a specific error and flush all commands with
+              // a individual error
+              return new Error('The server refused the connection')
+            }
+            if (options.total_retry_time > 1000 * 60 * 60) {
+              // End reconnecting after a specific timeout and flush all commands
+              // with a individual error
+              return new Error('Retry time exhausted')
+            }
+            if (options.attempt > 10) {
+              // End reconnecting with built in error
+              return undefined
+            }
+            // reconnect after
+            return Math.min(options.attempt * 100, 3000)
+          }
         })
       : redisMock.createClient()
-    this._redisClient.on('error', err =>
-      console.error(
-        `[sui-decorators/cache]:RedisClient Error creating client`,
-        err
-      )
-    )
+
+    !useRedis && console.log('Using Mock Client')
+
+    this._redisClient.on('error', function() {
+      console.error(`[sui-decorators/cache]:RedisClient Error creating client`)
+    })
   }
 
   static getInstance({redisConnection = {host: '127.0.0.1', port: 6379}}) {

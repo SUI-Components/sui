@@ -18,14 +18,23 @@ export default class Redis extends Cache {
     })
   }
 
-  get(key) {
+  _delay(ms) {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(), ms)
+    })
+  }
+
+  async get(key) {
+    const ret = this._lruRedis.get(key)
     try {
-      return this._lruRedis.get(key)
+      const resp = await Promise.race([ret, this._delay(100)])
+      return resp
     } catch (err) {
       console.error(
-        `[sui-decorators/cache]:Redis Error getting cache item for key: ${key}.`,
-        err
+        `[sui-decorators/cache]:Redis Error Getting cache item for key: ${key}.`,
+        err.message
       )
+      return null
     }
   }
 
@@ -36,14 +45,13 @@ export default class Redis extends Cache {
    * @param {number} maxAge expire time in ms, default = 500ms
    */
   set(key, value, maxAge = this._ttl) {
-    try {
-      return this._lruRedis.set(key, value, maxAge)
-    } catch (err) {
+    const ret = this._lruRedis.set(key, value, maxAge)
+    Promise.race([ret, this._delay(100)]).catch(err => {
       console.error(
-        `[sui-decorators/cache]:Redis Error setting cache item for key: ${key}.`,
-        err
+        `[sui-decorators/cache]:Redis Error Setting cache item for key: ${key}.`,
+        err.message
       )
-    }
+    })
   }
 
   del(key) {
@@ -52,7 +60,7 @@ export default class Redis extends Cache {
     } catch (err) {
       console.error(
         `[sui-decorators/cache]:Redis Error deleting cache item for key: ${key}.`,
-        err
+        err.message
       )
     }
   }
