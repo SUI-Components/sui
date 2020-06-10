@@ -28,23 +28,15 @@ export const inRedis = (
       return err
     }
 
-    try {
-      const isInlineErrorResponseWithoutError =
-        Array.isArray(response) &&
-        response.__INLINE_ERROR__ &&
-        response[0] === null &&
-        response[1]
-      const isNormalResponseWithoutError =
-        response && !response.__INLINE_ERROR__
+    const isInlineErrorResponseWithoutError =
+      Array.isArray(response) &&
+      response.__INLINE_ERROR__ &&
+      response[0] === null &&
+      response[1]
+    const isNormalResponseWithoutError = response && !response.__INLINE_ERROR__
 
-      if (isInlineErrorResponseWithoutError || isNormalResponseWithoutError) {
-        cache.set(key, response, ttl)
-      }
-    } catch (err) {
-      console.error(
-        `[sui-decorators/cache]:inRedis Error setting cache for key: ${key}. `,
-        err
-      )
+    if (isInlineErrorResponseWithoutError || isNormalResponseWithoutError) {
+      cache.set(key, response, ttl)
     }
   } else {
     return cacheItem
