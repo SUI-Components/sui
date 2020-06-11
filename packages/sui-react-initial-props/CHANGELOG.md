@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.10.0 (2020-06-11)
+
+
+### Features
+
+* add req and res props to be available in getInitialProps ([66fd8dd](https://github.com/SUI-Components/sui/commit/66fd8dda7799b723b3da7716b7c111f1c16e0da6))
+
+
+
 # 2.9.0 (2020-04-17)
 
 
