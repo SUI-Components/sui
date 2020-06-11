@@ -7,6 +7,8 @@ const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
 export default function ssrComponentWithInitialProps({
   Target,
   context,
+  req,
+  res,
   renderProps,
   useStream = false
 }) {
@@ -16,7 +18,7 @@ export default function ssrComponentWithInitialProps({
     renderProps.components[renderProps.components.length - 1]
   // use the getInitialProps from the page to retrieve the props to initialize
   const getInitialProps = pageComponent.getInitialProps
-  return getInitialProps(context).then(initialProps => {
+  return getInitialProps(context, req, res).then(initialProps => {
     const diffGetInitialProps = process.hrtime(startGetInitialProps)
     // Create App with Context with the initialProps
     const AppWithContext = (
