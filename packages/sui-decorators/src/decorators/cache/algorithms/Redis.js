@@ -25,9 +25,11 @@ export default class Redis extends Cache {
   }
 
   async get(key) {
-    const ret = this._lruRedis.get(key)
     try {
-      const resp = await Promise.race([ret, this._delay(100)])
+      const resp = await Promise.race([
+        this._lruRedis.get(key),
+        this._delay(100)
+      ])
       return resp
     } catch (err) {
       console.error(
