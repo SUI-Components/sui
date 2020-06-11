@@ -96,9 +96,14 @@ webpack(nextConfig).run((error, stats) => {
       'asset-manifest.json'
     ))
 
-    // webpack's runtime chunks are not meant to be cached
+    const rulesOfFilesToNotCache = [
+      'runtime~', // webpack's runtime chunks are not meant to be cached
+      '.gz', // avoid gzipped files
+      '.br', // avoid brotli files
+      'LICENSE.txt' // avoid LICENSE files
+    ]
     const manifestStatics = Object.values(manifest).filter(
-      url => !url.includes('runtime~')
+      url => !rulesOfFilesToNotCache.some(rule => url.includes(rule))
     )
 
     // generates the service worker
