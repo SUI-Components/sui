@@ -140,12 +140,10 @@ describe('Cache in the server', () => {
     const useRedis = process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE
     let redis
     if (useRedis) {
-      try {
-        redis = require('redis').createClient(6379, 'localhost')
-        redis.on('error', () => {
-          redis = null
-        })
-      } catch (err) {}
+      redis = require('redis').createClient(6379, 'localhost')
+      redis.on('error', () => {
+        redis = null
+      })
     } else {
       redis = require('redis-mock').createClient()
     }
