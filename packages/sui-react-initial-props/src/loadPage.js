@@ -42,8 +42,8 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
   ServerPage.displayName = Page.displayName
   // detect if the page has getInitialProps and wrap it with the routeInfo
   // if we don't have any getInitialProps, just use a empty function returning an empty object
-  ServerPage.getInitialProps = context =>
-    Page.getInitialProps({context, routeInfo})
+  ServerPage.getInitialProps = (context, req, res) =>
+    Page.getInitialProps({context, routeInfo, req, res})
   // return the component to be used on the server
   return ServerPage
 }

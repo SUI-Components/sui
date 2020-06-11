@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.1.0 (2020-06-11)
+
+
+### Features
+
+* add req and response props ([d491d5b](https://github.com/SUI-Components/sui/commit/d491d5b569126d9eaa5565bf1313a16238d33e37))
+
+
+
 # 7.0.0 (2020-05-21)
 
 
