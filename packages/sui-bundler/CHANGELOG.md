@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.3.0 (2020-06-11)
+
+
+### Features
+
+* better filtering to ditch files not needed for the service-worker ([d3ca81e](https://github.com/SUI-Components/sui/commit/d3ca81e5f59c2c5f9c9439c4bfcbdaf3c1a173a8))
+
+
+
 # 6.2.0 (2020-06-09)
 
 
