@@ -87,7 +87,7 @@ webpack(nextConfig).run((error, stats) => {
   const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
   if (fs.existsSync(offlinePath)) {
     fs.copyFileSync(
-      path.resolve(process.cwd(), 'src', 'offline.html'),
+      path.resolve(offlinePath),
       path.resolve(process.cwd(), 'public', 'offline.html')
     )
 
