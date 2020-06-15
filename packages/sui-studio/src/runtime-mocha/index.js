@@ -5,36 +5,10 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
+import {requireFile, tryRequireContext, tryRequireComponent} from '../components/tryRequire'
 
-export const requireFile = async ({
-  defaultValue,
-  extractDefault = true,
-  importFile
-}) => {
-  const file = await importFile().catch(_ => defaultValue)
-  if (typeof file === 'undefined') {
-    return Promise.reject(new Error('Error requiring file'))
-  }
-  return extractDefault ? file.default : file
-}
-
-export const tryRequireContext = ({category, component}) =>
-  requireFile({
-    defaultValue: false,
-    importFile: () => {
-      return import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-    }
-  })
-
-const tryRequireComponent = ({category, component}) =>
-  requireFile({
-    defaultValue: false,
-    importFile: () => {
-      return import(
-        `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
-      )
-    }
-  })
+const originalKarmaLoader = window.__karma__.loaded
+window.__karma__.loaded = () => {}
 
 const regex = /\.\/(?<categoryName>\w+)\/(?<componentName>\w+)\/(src)+\/(index.js|jsx)$/
 
@@ -49,11 +23,9 @@ function declareAll(resolve) {
       groups: {categoryName, componentName}
     } = srcKey.match(regex)
     const component = resolve(srcKey).default
-    const key =
-      component.displayName ||
-      capitalize(categoryName) + capitalize(componentName)
-    cache[key] = {
-      displayName: key,
+    const displayName = capitalize(categoryName) + capitalize(componentName)
+    cache[displayName] = {
+      displayName,
       categoryName,
       componentName
     }
@@ -65,9 +37,6 @@ function testAll(resolve) {
     resolve(key)
   })
 }
-
-const originalKarmaLoader = window.__karma__.loaded
-window.__karma__.loaded = () => {}
 
 const enhanceComponent = displayName => {
   !displayName && console.error('[sui-Test] Component without displayName') // eslint-disable-line
@@ -143,4 +112,3 @@ const run = async () => {
 }
 
 run()
-
