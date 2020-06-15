@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.16.0 (2020-06-04)
+
+
+### Bug Fixes
+
+* add redis-mock and hot-shot to dependencies ([4267659](https://github.com/SUI-Components/sui/commit/42676596e615b16b025b48fd238fcf269df8bc42))
+
+
+
+# 3.14.0 (2020-06-04)
+
+
+### Bug Fixes
+
+* fix redis cache in browser ([d451f15](https://github.com/SUI-Components/sui/commit/d451f157380e4d8f57ff7e2043ebf4b57bbf5635))
+
+
+
+# 3.13.0 (2020-06-04)
+
+
+### Features
+
+* inMemory cache handler ([3450125](https://github.com/SUI-Components/sui/commit/3450125b66ea474d777d0f7f9afce1b0592270ed))
+* inRedis cache handler ([17f2482](https://github.com/SUI-Components/sui/commit/17f2482dfb3a13ef919fe34f54ad40310d028541))
+* redis and isNode condition ([6e07a67](https://github.com/SUI-Components/sui/commit/6e07a6751a87ee25068823465b17527a038335c6))
+* redis client ([912aa68](https://github.com/SUI-Components/sui/commit/912aa688a5fe7e703fd56467882c59805c9ca574))
+* using inMemory and inRedis cache handlers ([f5a1680](https://github.com/SUI-Components/sui/commit/f5a1680feaa76de1e715c49d3917d28d897c3de2))
+
+
+
+# 3.12.0 (2020-05-27)
+
+
+### Bug Fixes
+
+* cache key className+fnName and fix error case condition ([86ff64e](https://github.com/SUI-Components/sui/commit/86ff64ef5922851e619737ba4f050bd67a1ef1e6))
+
+
+
 # 3.11.0 (2020-03-25)
 
 
