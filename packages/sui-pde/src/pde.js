@@ -1,6 +1,6 @@
 import DefaultAdapter from './adapters/default'
 
-export default class AB {
+export default class PDE {
   constructor({adapter = new DefaultAdapter()} = {}) {
     this._adapter = adapter
   }
