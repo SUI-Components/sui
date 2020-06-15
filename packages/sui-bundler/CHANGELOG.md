@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.4.0 (2020-06-15)
+
+
+### Bug Fixes
+
+* fix check if offline file exists ([6416f6e](https://github.com/SUI-Components/sui/commit/6416f6e7afdfacf7a26de6ceb3945483877ac362))
+
+
+### Features
+
+* use offlinePath const for copy ([8b5d07a](https://github.com/SUI-Components/sui/commit/8b5d07a2628067d4b670a801bf5fb03c63ec6661))
+
+
+
 # 6.3.0 (2020-06-11)
 
 
