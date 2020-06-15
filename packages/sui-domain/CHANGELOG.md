@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.22.0 (2020-06-15)
+
+
+### Performance Improvements
+
+* use typescript interfaces to avoid javascript code ([285c909](https://github.com/SUI-Components/sui/commit/285c909cd0d87a79d6e3b128b65579c9e6ebdcd4))
+
+
+
 # 1.21.0 (2020-05-13)
 
 
