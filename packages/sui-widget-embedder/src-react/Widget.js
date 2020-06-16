@@ -41,7 +41,7 @@ export default function Widget({
       )
     }
     // depending on renderMultiple, get the full array or only the first one
-    const nodesToRender = renderMultiple ? [...nodes] : [nodes[0]]
+    const nodesToRender = renderMultiple ? [].slice.call(nodes) : [nodes[0]]
     // create the context object
     const context = {browser, domain, i18n}
 
