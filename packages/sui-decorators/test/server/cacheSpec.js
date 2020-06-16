@@ -141,13 +141,20 @@ describe('Cache in the server', () => {
     let redis
     if (useRedis) {
       redis = require('redis').createClient(6379, 'localhost')
+      redis.on('error', () => {
+        redis = null
+      })
     } else {
       redis = require('redis-mock').createClient()
     }
 
     beforeEach(done => {
+      if (!redis) {
+        return done()
+      }
       redis.flushdb(() => done())
     })
+
     it('should apply cache for ok simple random number response and not apply cache for inlineError decorated error response', async () => {
       let shouldReturnError = true
 

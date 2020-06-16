@@ -22,35 +22,35 @@ const _cache = ({
   ttl,
   redis
 } = {}) => {
+  const shouldUseRedisCache = redis && isNode
+  const shouldUseMemoryCache = !isNode || !redis
   const cacheKey = `${target.constructor.name}::${fnName}`
 
   let cache = caches[cacheKey]
 
-  if (!cache) {
-    if (!redis) {
-      cache = new LRU({size})
-    } else {
-      if (!isNode) {
-        console.warn(
-          '[sui-decorators/cache] Your redis config will be ignored in client side. Using the default inMemory LRU strategy.'
-        )
-        cache = new LRU({size})
-      } else {
-        cache = new RedisLRU({
-          size,
-          redisConnection: redis,
-          namespace: cacheKey,
-          ttl
-        })
-        console.warn(
-          `[sui-decorators/cache] You are using redis cache for cacheKey: ${cacheKey}, your method MUST return a promise`
-        )
-        return inRedis(target, cache, original, fnName, instance, ttl)
-      }
-    }
+  if (!cache && shouldUseRedisCache) {
+    console.warn(
+      `[sui-decorators/cache] You are using redis cache for cacheKey: ${cacheKey}, your method MUST return a promise`
+    )
+    cache = new RedisLRU({
+      size,
+      redisConnection: redis,
+      namespace: cacheKey,
+      ttl
+    })
   }
 
-  return inMemory(target, cache, original, fnName, instance, ttl)
+  if (!cache && shouldUseMemoryCache) {
+    redis &&
+      console.warn(
+        '[sui-decorators/cache] Your redis config will be ignored in client side. Using the default inMemory LRU strategy.'
+      )
+    cache = new LRU({size})
+  }
+
+  return shouldUseRedisCache
+    ? inRedis(target, cache, original, fnName, instance, ttl)
+    : inMemory(target, cache, original, fnName, instance, ttl)
 }
 
 export default ({
