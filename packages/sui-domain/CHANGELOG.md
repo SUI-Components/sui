@@ -2,12 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.0.0 (2020-06-16)
+
+
+
 # 1.22.0 (2020-06-15)
+
+
+### Features
+
+* support single factory for useCase ([c2aa834](https://github.com/SUI-Components/sui/commit/c2aa834ffedeacf3e843114709b9b20169fb53f6))
 
 
 ### Performance Improvements
 
 * use typescript interfaces to avoid javascript code ([285c909](https://github.com/SUI-Components/sui/commit/285c909cd0d87a79d6e3b128b65579c9e6ebdcd4))
+
+
+### BREAKING CHANGES
+
+* Yes, as it doesn't support not dynamic import for single useCases factories. We're not using it but,
+just in case, we must use a major for this and be sure we're able to use this only when intended.
 
 
 
