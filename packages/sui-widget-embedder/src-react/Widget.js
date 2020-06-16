@@ -54,9 +54,13 @@ export default function Widget({
 
 Widget.propTypes = {
   browser: PropTypes.object,
-  children: PropTypes.element,
+  children: PropTypes.element.isRequired,
   domain: PropTypes.object,
   i18n: PropTypes.object,
   isVisible: PropTypes.bool,
-  node: PropTypes.string
+  node: () =>
+    new Error(
+      'Prop `node` is deprecated and it will be removed in the next major version. Use `selector` instead for passing the CSS Path.'
+    ),
+  selector: PropTypes.string.isRequired
 }
