@@ -30,14 +30,14 @@ export default function Widget({
     const selectorToUse = selector || node
     if (!selectorToUse) {
       return console.warn(
-        `[Widget] You must define a selector or node to use the Widget`
+        `[Widget] You must define a selector or node (deprecated) to use the Widget`
       )
     }
 
     const nodes = document.querySelectorAll(selectorToUse)
     if (!nodes.length) {
       return console.warn(
-        `[Widget] unable find nodes using selector ${selector}`
+        `[Widget] unable find nodes using selector ${selectorToUse}`
       )
     }
     // depending on renderMultiple, get the full array or only the first one
@@ -53,10 +53,10 @@ export default function Widget({
 }
 
 Widget.propTypes = {
+  browser: PropTypes.object,
   children: PropTypes.element,
-  node: PropTypes.string,
-  i18n: PropTypes.object,
   domain: PropTypes.object,
+  i18n: PropTypes.object,
   isVisible: PropTypes.bool,
-  browser: PropTypes.object
+  node: PropTypes.string
 }
