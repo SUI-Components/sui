@@ -21,8 +21,7 @@
     "test:server:watch": "npm run test:server -- --watch",
     "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
     "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
-    "commitmsg": "validate-commit-msg",
-    "precommit": "sui-precommit run"
+    "commitmsg": "validate-commit-msg"
   },
   "devDependencies": {
     "@babel/cli": "7.8.3",

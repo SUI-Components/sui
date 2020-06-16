@@ -111,9 +111,11 @@ import render from '@s-ui/widget-embedder/react/render'
 - render: A method that expects a tree of React components starting with a Widgets root
 - Widgets: React component that encapsules all your widgets
 - Widget: React component that renders the children as a new React tree in another place of the page.
-  ** i18n: I18n library
-  ** domain: Domain library for your widgets
-  \*\* node: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
+  * `children`: Content of the Widget. Should be a compatible React Element.
+  * `i18n`: I18n library
+  * `domain`: Domain library for your widgets
+  * 
+  * `node` *(deprecated)*: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
 
 ## How to develop
 
