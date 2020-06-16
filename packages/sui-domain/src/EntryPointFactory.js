@@ -16,7 +16,7 @@ export default ({useCases, config}) =>
      * const configuration = domain.get('config')
      * const useCase = domain.get('phone_contact_use_case')
      * @param {string} key The name of the use case or indicate that we want to get the config
-     * @return (config|UseCase)
+     * @return {function|{execute: Function, $: object}|NotImplementedUseCase}
      */
     get(key) {
       // config key is still sync and we should return as it
@@ -29,13 +29,17 @@ export default ({useCases, config}) =>
       if (typeof useCase === 'undefined') {
         return new NotImplementedUseCase(key)
       }
-      // if the useCase is not an array
-      if (useCase instanceof Array === false) {
-        return useCase
-      }
-      // at this point, the developer is using webpack dynamic import for getting the useCases
-      // get the loader and the method from the useCases
-      const [loader, method] = useCase
+
+      const isDynamicImportWholeFactory = useCase instanceof Array
+
+      const [loader, method] = isDynamicImportWholeFactory
+        ? useCase // for the whole factory we extract the single method from the array
+        : [useCase] // for the single factory, the method is undefined as is default
+
+      const getMethod = isDynamicImportWholeFactory
+        ? factory => factory.default[method]
+        : factory => factory.default
+
       // if loader is undefined then is not implemented, otherwhise load async the useCase
       return loader === undefined
         ? new NotImplementedUseCase(key)
@@ -43,20 +47,20 @@ export default ({useCases, config}) =>
             execute: params => {
               // load async the factory, execute use case and return the promise
               return loader().then(factory =>
-                factory.default[method]({config: this._config}).execute(params)
+                getMethod(factory)({config: this._config}).execute(params)
               )
             },
             $: {
               execute: {
-                subscribe: (onNext,onError) => {
+                subscribe: (onNext, onError) => {
                   // creating an object here that will have a dispose method
                   const ret = {dispose: function() {}}
                   loader().then(factory => {
                     // black magic: mutate the object, very small memory leak but that
                     // makes dispose working async and we need it
-                    ret.dispose = factory.default[method]({
+                    ret.dispose = getMethod(factory)({
                       config: this._config
-                    }).$.execute.subscribe(onNext,onError).dispose
+                    }).$.execute.subscribe(onNext, onError).dispose
                   })
                   // return the object that will be mutated async
                   return ret
@@ -72,7 +76,7 @@ export default ({useCases, config}) =>
      * const configuration = domain.config('new_config', 'new value')
      * @param {String} key
      * @param {String} value
-     * @return {Config}
+     * @return {this}
      */
     config(key, value) {
       this._config.set(key, value)
