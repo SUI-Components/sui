@@ -196,7 +196,7 @@ import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => window.alert('New content is available; please refresh.')
-})();
+});
 ```
 
 You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
@@ -221,7 +221,23 @@ If you want to remove your ServiceWorker, you need to use the method `unregister
 
 ### Caching
 
-Setting up the `src/offline.html` static page will also activate the statics cache. All static named in the `asset-manifest.json` file will be cached except webpack's `runtime` chunks.
+It's possible to create a service worker that caches all static resources
+
+There are two ways to activate the statics cache option:
+
+1. Create a `src/offline.html` page as mentioned in the [offline]( #Offline) section
+2. Add the `staticsCacheOnly` option within the package.json like this:
+
+```json
+{
+  "sui-bundler": {
+    "serviceWorker": {
+      "staticsCacheOnly": true
+    }
+  }
+}
+```
+> Statics will be cached but no offline page will be activated
 
 ## Externals Manifest
 If your are using an external CDN to store statics assets that are now managed by Webpack, like SVG or IMGs, you can create a manifest.json file in the root of your CDN (likehttps://spa-mock-statics.surge.sh/manifest.json`).

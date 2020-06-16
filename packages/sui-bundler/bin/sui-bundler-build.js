@@ -9,6 +9,7 @@ const staticModule = require('static-module')
 const minifyStream = require('minify-stream')
 const config = require('../webpack.config.prod')
 const fs = require('fs')
+const {config: projectConfig} = require('../shared')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 
@@ -85,12 +86,20 @@ webpack(nextConfig).run((error, stats) => {
   console.log(`Webpack stats: ${stats}`)
 
   const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
-  if (fs.existsSync(offlinePath)) {
+  const offlinePageExists = fs.existsSync(offlinePath)
+  const staticsCacheOnly =
+    projectConfig &&
+    projectConfig.serviceWorker &&
+    projectConfig.serviceWorker.staticsCacheOnly
+
+  if (offlinePageExists) {
     fs.copyFileSync(
       path.resolve(offlinePath),
       path.resolve(process.cwd(), 'public', 'offline.html')
     )
+  }
 
+  if (offlinePageExists || staticsCacheOnly) {
     const manifest = require(path.resolve(
       process.cwd(),
       'public',
@@ -112,7 +121,8 @@ webpack(nextConfig).run((error, stats) => {
       .pipe(
         staticModule({
           'static-manifest': () => JSON.stringify(manifestStatics),
-          'static-cache-name': () => JSON.stringify(Date.now().toString())
+          'static-cache-name': () => JSON.stringify(Date.now().toString()),
+          'static-statics-cache-only': () => JSON.stringify(staticsCacheOnly)
         })
       )
       .pipe(minifyStream({sourceMap: false}))
