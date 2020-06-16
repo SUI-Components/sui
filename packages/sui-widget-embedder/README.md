@@ -117,7 +117,7 @@ import render from '@s-ui/widget-embedder/react/render'
   * `children` *(required)*: Content of the Widget. Should be a compatible React Element.
   * `domain`: Domain library for your widgets
   * `i18n`: I18n library
-  * `isVisible` *(required - default: true)*: Determine if the widget must be shown.
+  * `isVisible` *(default: true)*: Determine if the widget must be shown.
   * `node` *(deprecated)*: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
   * `renderMultiple` *(default: false)*: Determine if the Widget must be rendered on every node found using the selector prop (or deprecated `node` prop). If `false` the Widget will be rendered only in the first node found.
   * `selector`: *(required)* CSS Path to select the node (or nodes) where you want to render the Widget.
