@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.18.0 (2020-06-17)
+
+
+### Bug Fixes
+
+* reuse cache instances ([3ba5d66](https://github.com/SUI-Components/sui/commit/3ba5d669b0573a46d9c2aa78cd33a372cfbda3b9))
+
+
+
 # 3.17.0 (2020-06-16)
 
 
