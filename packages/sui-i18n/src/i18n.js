@@ -73,6 +73,14 @@ export default class Rosetta {
     })
   }
 
+  // Format percentage number.
+  p(number, minimumFractionDigits = 0) {
+    return this.n(number / 100, {
+      style: 'percent',
+      minimumFractionDigits
+    })
+  }
+
   /**
    * Format minor types.
    *
