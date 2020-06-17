@@ -134,6 +134,14 @@ describe('I18N', () => {
       })
 
       describe('properly formats minor types like', () => {
+        describe('percentage', () => {
+          it('from a non-decimal amount', () => {
+            expect(i18n.f('percentage', 10)).to.eql('10\xa0%')
+          })
+          it('from a decimal amount', () => {
+            expect(i18n.f('percentage', 12.34)).to.eql('12,34\xa0%')
+          })
+        })
         describe('phone', () => {
           it('from agglomerated digits', () => {
             expect(i18n.f('phone', '123123123')).to.eql('123 123 123')
