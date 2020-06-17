@@ -107,6 +107,14 @@ export default class Rosetta {
     throw new Error(`Invalid type '${type}' passed to i18n.f`)
   }
 
+  formatPercentage(value) {
+    return this.f('percentage', value)
+  }
+
+  formatPhone(phoneNumber) {
+    return this.f('phone', phoneNumber)
+  }
+
   url(urlPattern, allowQueryParams) {
     return urlPattern
       .split('/')
