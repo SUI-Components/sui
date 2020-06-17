@@ -38,6 +38,7 @@ const _cache = ({
       namespace: cacheKey,
       ttl
     })
+    caches[cacheKey] = cache
   }
 
   if (!cache && shouldUseMemoryCache) {
@@ -46,6 +47,7 @@ const _cache = ({
         '[sui-decorators/cache] Your redis config will be ignored in client side. Using the default inMemory LRU strategy.'
       )
     cache = new LRU({size})
+    caches[cacheKey] = cache
   }
 
   return shouldUseRedisCache
