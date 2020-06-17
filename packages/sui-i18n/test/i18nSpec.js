@@ -166,15 +166,15 @@ describe('I18N', () => {
             )
           })
 
-          it('from agglomerated digits', () => {
+          it('from agglomerated digits, using the formatPhone method', () => {
             expect(i18n.formatPhone('123123123')).to.eql('123 123 123')
           })
 
-          it('from wrong spaced groups', () => {
+          it('from wrong spaced groups, using the formatPhone method', () => {
             expect(i18n.formatPhone('1 23 12312 3')).to.eql('123 123 123')
           })
 
-          it('with custom separator', () => {
+          it('with custom separator, using the formatPhone method', () => {
             expect(i18n.formatPhone('123123123', {separator: '-'})).to.eql(
               '123-123-123'
             )
