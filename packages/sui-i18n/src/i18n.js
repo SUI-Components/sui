@@ -89,10 +89,11 @@ export default class Rosetta {
 
     switch (type) {
       case 'percentage': {
-        const {minimumFractionDigits = 0} = options
+        const {minimumFractionDigits = 0, maximumFractionDigits = 2} = options
         return this.n(value / 100, {
           style: 'percent',
-          minimumFractionDigits
+          minimumFractionDigits,
+          maximumFractionDigits
         })
       }
       case 'phone': {
