@@ -73,14 +73,6 @@ export default class Rosetta {
     })
   }
 
-  // Format percentage number.
-  p(number, minimumFractionDigits = 0) {
-    return this.n(number / 100, {
-      style: 'percent',
-      minimumFractionDigits
-    })
-  }
-
   /**
    * Format minor types.
    *
@@ -96,6 +88,13 @@ export default class Rosetta {
       throw new Error('i18n.f should receive any value as a second argument')
 
     switch (type) {
+      case 'percentage': {
+        const {minimumFractionDigits = 0} = options
+        return this.n(value / 100, {
+          style: 'percent',
+          minimumFractionDigits
+        })
+      }
       case 'phone': {
         const {separator = ' '} = options
         return value
