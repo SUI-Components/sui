@@ -26,6 +26,7 @@ functionsToPatch.forEach(fnName => {
   const handler = {
     get: function(obj, prop) {
       const originalFn = global[fnName]
+      const [contextName, deviceName = 'mobile'] = prop.split('#')
 
       if (!__CONTEXTS__) {
         // eslint-disable-next-line
@@ -37,7 +38,7 @@ functionsToPatch.forEach(fnName => {
         }
       }
 
-      let context = __CONTEXTS__[prop]
+      let context = __CONTEXTS__[contextName]
       if (!context) {
         // eslint-disable-next-line
         console.error(
@@ -49,10 +50,20 @@ functionsToPatch.forEach(fnName => {
         context = __CONTEXTS__.default
       }
 
-      const EnhanceComponentWithLegacyContext = withContext(
-        context,
-        context
-      )(__COMPONENT__)
+      let statsUserAgent = {isMobile: true, isTablet: false}
+
+      if (deviceName === 'tablet') {
+        statsUserAgent = {isMobile: false, isTablet: true}
+      } else if (deviceName === 'desktop') {
+        statsUserAgent = {isMobile: false, isTablet: false}
+      }
+
+      const EnhanceComponentWithLegacyContext = withContext(context, context)(
+        __COMPONENT__
+      )
+
+      context = {...context, statsUserAgent}
+
       const EnhanceComponent = props => (
         <SUIContext.Provider value={context}>
           <EnhanceComponentWithLegacyContext {...props} />
@@ -61,7 +72,10 @@ functionsToPatch.forEach(fnName => {
       hoistNonReactStatics(EnhanceComponent, EnhanceComponentWithLegacyContext)
 
       return function(title, cb) {
-        return originalFn(`[${prop}] ${title}`, cb.partial(EnhanceComponent))
+        return originalFn(
+          `[${contextName}#${deviceName}] ${title}`,
+          cb.partial(EnhanceComponent)
+        )
       }
     }
   }

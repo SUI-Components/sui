@@ -49,7 +49,7 @@ export default function Root({componentID, contexts = {}, themes}) {
   )
 
   const {width, height} = DEVICES[actualDevice]
-  const iframeSrc = `/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`
+  const iframeSrc = `/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}&actualDevice=${actualDevice}`
 
   return (
     <div className="Root">
@@ -89,10 +89,9 @@ export default function Root({componentID, contexts = {}, themes}) {
       <button
         className={`Root-testSwitch--${showTests}`}
         onClick={() => {
-          updateOnChange(
-            setShowTests,
-            'showTests'
-          )(showTests === 'show' ? 'hide' : 'show')
+          updateOnChange(setShowTests, 'showTests')(
+            showTests === 'show' ? 'hide' : 'show'
+          )
         }}
       >
         {showTests === 'show' ? 'Close Tests' : 'Open Tests'}

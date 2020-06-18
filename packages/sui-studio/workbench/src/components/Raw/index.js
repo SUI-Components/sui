@@ -28,6 +28,7 @@ const nonDefault = removeDefaultContext(named)
 export default function Raw({
   actualContext = 'default',
   actualStyle = 'default',
+  actualDevice = 'mobile',
   contexts = {},
   demo: DemoComponent,
   demoStyles,
@@ -53,7 +54,10 @@ export default function Raw({
           {() => (
             <Preview
               scope={{
-                context,
+                context: {
+                  ...context,
+                  statsUserAgent: {isMobile: true, isTablet: false}
+                },
                 React,
                 [cleanDisplayName(Enhance.displayName)]: Enhance,
                 ...nonDefault
@@ -63,7 +67,12 @@ export default function Raw({
           )}
         </When>
         {EnhanceDemoComponent && (
-          <SUIContext.Provider value={context}>
+          <SUIContext.Provider
+            value={{
+              ...context,
+              statsUserAgent: {isMobile: true, isTablet: false}
+            }}
+          >
             <EnhanceDemoComponent />
           </SUIContext.Provider>
         )}
