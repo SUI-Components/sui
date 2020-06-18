@@ -7,6 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
+const {GenerateSW} = require('workbox-webpack-plugin')
 const minifyJs = require('./shared/minify-js')
 const webpack = require('webpack')
 const definePlugin = require('./shared/define')
@@ -15,6 +16,12 @@ const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 
 const zlib = require('zlib')
 const hasBrotliSupport = Boolean(zlib.brotliCompress)
+
+const {
+  navigateFallbackDenylist,
+  navigateFallback,
+  runtimeCaching
+} = require('./shared/precache')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {sourceMap} = require('./shared/config')
@@ -114,6 +121,26 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
+    when(
+      config.offline && (config.offline.fallback || config.offline.runtime),
+      () =>
+        new GenerateSW({
+          skipWaiting: true,
+          clientsClaim: true,
+          cleanupOutdatedCaches: true,
+          directoryIndex: config.offline.directoryIndex,
+          navigateFallback: navigateFallback(
+            config.offline.fallback,
+            PUBLIC_PATH
+          ),
+          navigateFallbackDenylist: navigateFallbackDenylist(
+            config.offline.denylist
+          ),
+          runtimeCaching: runtimeCaching(config.offline.runtime),
+          importScripts: config.offline.importScripts || [],
+          exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE\.txt$/]
+        })
+    ),
     when(config.externals, () => new Externals({files: config.externals})),
     new LoaderUniversalOptionsPlugin(require('./shared/loader-options')),
     when(
