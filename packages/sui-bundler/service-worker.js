@@ -1,8 +1,14 @@
 /* eslint-env serviceworker */
+
+// will be replaced by the importScripts
+// IMPORT_SCRIPTS_HERE
+
 // will be replaced in build time by the real manifest.json content
 const manifestStatics = require('static-manifest')()
 // will be replaced in build time by the current timestamp
 const cacheName = require('static-cache-name')()
+// will be replaced in build time and set to true if offline.staticsCacheOnly flag activated
+const staticsCacheOnly = require('static-statics-cache-only')()
 
 const OFFLINE_PAGE = 'offline.html'
 let supportsResponseBodyStream
@@ -33,7 +39,7 @@ function canConstructResponseFromBodyStream() {
 /**
  * Clones a response as it's not possible to reuse those we save in cache
  * @param {Object} response
- * @returns {Response}
+ * @returns {Promise<Response>}
  */
 const copyResponse = async function(response) {
   const clonedResponse = response.clone()
@@ -70,6 +76,8 @@ self.addEventListener('install', event => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(cacheName)
+      await cache.addAll(manifestStatics)
+      if (staticsCacheOnly) return
       // Setting {cache: 'reload'} in the new request will ensure that the response
       // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
       await cache.add(
@@ -77,7 +85,6 @@ self.addEventListener('install', event => {
           cache: 'reload'
         })
       )
-      await cache.addAll(manifestStatics)
     })()
   )
 })
@@ -96,6 +103,7 @@ self.addEventListener('fetch', event => {
           const networkResponse = await fetch(event.request)
           return networkResponse
         } catch (error) {
+          if (staticsCacheOnly) throw error
           // catch is only triggered if an exception is thrown, which is likely
           // due to a network error.
           // If fetch() returns a valid HTTP response with a response code in

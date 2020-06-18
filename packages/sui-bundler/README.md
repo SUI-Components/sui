@@ -191,12 +191,24 @@ In windows system filenames with `~` could produce errors. To avoid that you can
 
 Offline feature is deactivated by default. If you want to activate, you need to create the static `src/offline.html` file. No resource loaded by this page will be cached so watch out adding images or external scripts as they won't work in offline mode. You also need to configure a serviceWorker in the entry point of your app:
 
+Or you can setup several options:
+
+```json
+"offline":
+  "fallback": "index.html",
+}
+```
+
+Where fallback is the page that you want to serve when the requested page doesn't match any cache entry. In a SPA scenario, you will usually want to put `index.html` there.
+
+If you have the page "src/offline.html" in your project, but you have configured the option "fallback" in your package.json. The generated SW will manage the fallback and ignore your offline page.
+
 ```js
 import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => window.alert('New content is available; please refresh.')
-})();
+});
 ```
 
 You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
@@ -221,7 +233,43 @@ If you want to remove your ServiceWorker, you need to use the method `unregister
 
 ### Caching
 
-Setting up the `src/offline.html` static page will also activate the statics cache. All static named in the `asset-manifest.json` file will be cached except webpack's `runtime` chunks.
+It's possible to create a service worker that caches all static resources
+
+There are two ways to activate the statics cache option:
+
+1. Create a `src/offline.html` page as mentioned in the [offline]( #Offline) section
+2. Add the `staticsCacheOnly` option within the package.json like this:
+
+```json
+{
+  "sui-bundler": {
+    "offline": {
+      "staticsCacheOnly": true,
+      "runtime": [{
+        "urlPattern": "ms-mt--api-web\\.spain\\.schibsted\\.io",
+        "handler": "networkFirst"
+      },{
+        "urlPattern": "fonts\\.googleapis\\.com",
+        "handler": "fastest"
+      },{
+        "urlPattern": "prea\\.ccdn\\.es\/cnet\/contents\/media",
+        "handler": "cacheFirst",
+        "options": {
+          "cache": {
+            "name": "image-cache",
+            "maxEntries": 50
+          }
+      }}]
+    }
+  }
+}
+```
+> Statics will be cached but no offline page will be activated
+
+Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-toolbox].
+If you need to cache resources, but their url is dynamically generated during the use of the application, you can use the `offline.runtime` entry, to indicate which resources you want to store in the browser cache.
+
+This is an ideal place to store e.g. ad images or API responses. By combining this with fallback, you can get an offline total page experience.
 
 ## Externals Manifest
 If your are using an external CDN to store statics assets that are now managed by Webpack, like SVG or IMGs, you can create a manifest.json file in the root of your CDN (likehttps://spa-mock-statics.surge.sh/manifest.json`).

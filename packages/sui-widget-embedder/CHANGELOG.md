@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.13.0 (2020-06-17)
+
+
+### Bug Fixes
+
+* ensure array is flatten with NodeList ([3270c5b](https://github.com/SUI-Components/sui/commit/3270c5ba2697643fe794bbb97d16913ee2f4b0c5))
+
+
+### Features
+
+* allow multiple containers for single Widget ([30ea72e](https://github.com/SUI-Components/sui/commit/30ea72e31d31cdcc00bd52206fd9759cfe7bafba))
+* improve PropTypes ([d3d8646](https://github.com/SUI-Components/sui/commit/d3d8646d7fd529422c4d92cdc39c8f72494d2adb))
+* publish new beta ([21f554b](https://github.com/SUI-Components/sui/commit/21f554ba9c9077244d29e488626334a411c26d2c))
+
+
+
 # 3.12.0 (2020-05-14)
 
 

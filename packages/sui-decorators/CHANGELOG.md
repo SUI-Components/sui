@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.18.0 (2020-06-17)
+
+
+### Bug Fixes
+
+* reuse cache instances ([3ba5d66](https://github.com/SUI-Components/sui/commit/3ba5d669b0573a46d9c2aa78cd33a372cfbda3b9))
+
+
+
+# 3.17.0 (2020-06-16)
+
+
+### Features
+
+* allow retry after lost conection with redis ([1b1f5a2](https://github.com/SUI-Components/sui/commit/1b1f5a2fa72cd3d30b2f3594d0cea3d291d37a33))
+* cache conditions refactor ([5292388](https://github.com/SUI-Components/sui/commit/52923880e1467c8768bd6034de8844171bebc460))
+* create RedisClient singleton class ([5088350](https://github.com/SUI-Components/sui/commit/5088350feabedc5ae9616cf04d18772e2021f34b))
+* make more relisiant to Redis lost connection ([77c9e73](https://github.com/SUI-Components/sui/commit/77c9e7349e7063bfd61d8fabaa45aa8c7e418846))
+* redis using RedisClient, methods error handling ([65f5265](https://github.com/SUI-Components/sui/commit/65f5265ef575d29be33d6f020269ae9ccb1c48bb))
+
+
+
 # 3.16.0 (2020-06-04)
 
 

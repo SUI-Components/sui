@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.23.0 (2020-06-17)
+
+
+### Features
+
+* add formatPercentage and formatPhone methods ([9d70990](https://github.com/SUI-Components/sui/commit/9d70990050b1d3fbdc0878d3455efba9785211e9))
+* add percentage formatting capability to i18n ([d9ba0db](https://github.com/SUI-Components/sui/commit/d9ba0db1809c5651e3bd653969959e4e2c882955))
+* allow for options on formatPercentage and formatPhone methods ([c8527b1](https://github.com/SUI-Components/sui/commit/c8527b1a60df0baa76fe213445eddae0502a986c))
+
+
+
 # 1.22.0 (2020-02-26)
 
 

@@ -134,6 +134,23 @@ describe('I18N', () => {
       })
 
       describe('properly formats minor types like', () => {
+        describe('percentage', () => {
+          it('from a non-decimal amount when ', () => {
+            expect(i18n.f('percentage', 10)).to.eql('10\xa0%')
+          })
+
+          it('from a decimal amount', () => {
+            expect(i18n.f('percentage', 12.34)).to.eql('12,34\xa0%')
+          })
+
+          it('from a non-decimal amount, using the formatPercentage method', () => {
+            expect(i18n.formatPercentage(10)).to.eql('10\xa0%')
+          })
+
+          it('from a decimal amount, using the formatPercentage method', () => {
+            expect(i18n.formatPercentage(12.34)).to.eql('12,34\xa0%')
+          })
+        })
         describe('phone', () => {
           it('from agglomerated digits', () => {
             expect(i18n.f('phone', '123123123')).to.eql('123 123 123')
@@ -145,6 +162,20 @@ describe('I18N', () => {
 
           it('with custom separator', () => {
             expect(i18n.f('phone', '123123123', {separator: '-'})).to.eql(
+              '123-123-123'
+            )
+          })
+
+          it('from agglomerated digits, using the formatPhone method', () => {
+            expect(i18n.formatPhone('123123123')).to.eql('123 123 123')
+          })
+
+          it('from wrong spaced groups, using the formatPhone method', () => {
+            expect(i18n.formatPhone('1 23 12312 3')).to.eql('123 123 123')
+          })
+
+          it('with custom separator, using the formatPhone method', () => {
+            expect(i18n.formatPhone('123123123', {separator: '-'})).to.eql(
               '123-123-123'
             )
           })

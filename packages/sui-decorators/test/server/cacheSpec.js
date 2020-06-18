@@ -23,7 +23,7 @@ describe('Cache in the server', () => {
       expect(buzz.syncRndNumber()).to.be.not.eql(buzz.syncRndNumber())
     })
 
-    it('should apply cache if server param is true', () => {
+    it('should apply cache if server param is true for different instances', () => {
       class Buzz1 {
         constructor() {
           this.rnd = () => Math.random()
@@ -31,11 +31,14 @@ describe('Cache in the server', () => {
 
         @cache({server: true})
         syncRndNumber() {
-          return this.rnd()
+          const rnd = this.rnd()
+          return rnd
         }
       }
-      const buzz1 = new Buzz1()
-      expect(buzz1.syncRndNumber()).to.be.eql(buzz1.syncRndNumber())
+      const buzz11 = new Buzz1()
+      const buzz12 = new Buzz1()
+
+      expect(buzz11.syncRndNumber()).to.be.eql(buzz12.syncRndNumber())
     })
 
     it('with inlineError should apply cache if server param is true', () => {
@@ -141,13 +144,20 @@ describe('Cache in the server', () => {
     let redis
     if (useRedis) {
       redis = require('redis').createClient(6379, 'localhost')
+      redis.on('error', () => {
+        redis = null
+      })
     } else {
       redis = require('redis-mock').createClient()
     }
 
     beforeEach(done => {
+      if (!redis) {
+        return done()
+      }
       redis.flushdb(() => done())
     })
+
     it('should apply cache for ok simple random number response and not apply cache for inlineError decorated error response', async () => {
       let shouldReturnError = true
 

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.2.0 (2020-06-16)
+
+
+### Bug Fixes
+
+* avoid not needed re-renders ([6e4aea3](https://github.com/SUI-Components/sui/commit/6e4aea3b329fa858a17635cf1d0b184b6cc466b2))
+
+
+
 # 1.1.0 (2020-05-21)
 
 

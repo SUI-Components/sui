@@ -88,6 +88,14 @@ export default class Rosetta {
       throw new Error('i18n.f should receive any value as a second argument')
 
     switch (type) {
+      case 'percentage': {
+        const {minimumFractionDigits = 0, maximumFractionDigits = 2} = options
+        return this.n(value / 100, {
+          style: 'percent',
+          minimumFractionDigits,
+          maximumFractionDigits
+        })
+      }
       case 'phone': {
         const {separator = ' '} = options
         return value
@@ -98,6 +106,14 @@ export default class Rosetta {
     }
 
     throw new Error(`Invalid type '${type}' passed to i18n.f`)
+  }
+
+  formatPercentage(value, options) {
+    return this.f('percentage', value, options)
+  }
+
+  formatPhone(phoneNumber, options) {
+    return this.f('phone', phoneNumber, options)
   }
 
   url(urlPattern, allowQueryParams) {

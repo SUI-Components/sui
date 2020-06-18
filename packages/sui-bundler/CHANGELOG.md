@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.5.0 (2020-06-16)
+
+
+### Features
+
+* add statics cache only option ([481ffd0](https://github.com/SUI-Components/sui/commit/481ffd0d094f1b28abb46ddf220be505b470638a))
+
+
+
 # 6.4.0 (2020-06-15)
 
 
