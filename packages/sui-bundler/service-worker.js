@@ -1,4 +1,8 @@
 /* eslint-env serviceworker */
+
+// will be replaced by the importScripts
+// IMPORT_SCRIPTS_HERE
+
 // will be replaced in build time by the real manifest.json content
 const manifestStatics = require('static-manifest')()
 // will be replaced in build time by the current timestamp
