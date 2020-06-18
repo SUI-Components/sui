@@ -23,7 +23,8 @@ const config = {
         '@s-ui/react-context': path.resolve(
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
-      }
+      },
+      extensions: ['.mjs', '.js', '.jsx', '.json']
     },
     node: {
       fs: 'empty'
@@ -35,9 +36,14 @@ const config = {
     },
     plugins: [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
-      new webpack.DefinePlugin(Object.assign({}, {
-        __BASE_DIR__: JSON.stringify(process.env.PWD)
-      }))
+      new webpack.DefinePlugin(
+        Object.assign(
+          {},
+          {
+            __BASE_DIR__: JSON.stringify(process.env.PWD)
+          }
+        )
+      )
     ],
     // avoid unneded optimizations for running our tests in order to get fatest bundling time
     optimization: {
