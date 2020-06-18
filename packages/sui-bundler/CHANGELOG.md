@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.7.0 (2020-06-18)
+
+
+### Bug Fixes
+
+* install "workbox-webpack-plugin" dependency ([0c19efc](https://github.com/SUI-Components/sui/commit/0c19efc3d7ede1b88dfc2a285dcdf342db5628d6))
+
+
+### Features
+
+* allow import external scripts in our SW ([41b8eee](https://github.com/SUI-Components/sui/commit/41b8eee8de111fc96c7e0e260f1af6960ecb855b))
+* bump version ([b5af574](https://github.com/SUI-Components/sui/commit/b5af574da09474c14fb8a4bf3b7baaec3ae5dea3))
+
+
+
 # 6.5.0 (2020-06-16)
 
 
