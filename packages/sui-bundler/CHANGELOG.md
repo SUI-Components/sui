@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.8.0 (2020-06-19)
+
+
+### Bug Fixes
+
+* allow no staticCacheOnly config ([c380d9b](https://github.com/SUI-Components/sui/commit/c380d9b73dab263e4e592b56e200158b73f3e932))
+
+
+
 # 6.7.0 (2020-06-18)
 
 
