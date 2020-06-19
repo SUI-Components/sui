@@ -39,7 +39,7 @@ module.exports = async ({
 
   configure.files = [
     `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
-    srcPattern && `${CWD}/${srcPattern}`,
+    ...(srcPattern && [`${CWD}/${srcPattern}`]),
     `${CWD}/${pattern}`
   ].filter(Boolean)
   configure.preprocessors = {
