@@ -38,7 +38,7 @@ functionsToPatch.forEach(fnName => {
 
         if (!__CONTEXTS__) {
           console.error(
-            `You're trying to use the context ${prop} but it's not defined in your contexts.js file`
+            `You're trying to use the context ${prop} but it's not defined in your context.js files`
           ) // eslint-disable-line
           return originalFn(title, cb)
         }
@@ -47,7 +47,7 @@ functionsToPatch.forEach(fnName => {
         if (!context) {
           // eslint-disable-next-line
           console.error(
-            `Your trying to use the context ${prop} but it is not defined in your contexts.js file.
+            `Your trying to use the context ${prop} but it is not defined in your context.js files.
           Only are allow the following contexts: ${Object.keys(__CONTEXTS__)}.
           as fallback you will use the "default" context in your test`
           )
