@@ -10,10 +10,10 @@ const global = globalThis || window // eslint-disable-line
 
 const functionsToPatch = ['describe']
 
-Function.prototype.partial = function() {
+Function.prototype.partial = function () {
   const fn = this
   const args = Array.prototype.slice.call(arguments)
-  return function() {
+  return function () {
     let arg = 0
     for (var i = 0; i < args.length && arg < arguments.length; i++)
       if (args[i] === undefined) args[i] = arguments[arg++]
@@ -23,8 +23,8 @@ Function.prototype.partial = function() {
 
 functionsToPatch.forEach(fnName => {
   const handler = {
-    get: function(obj /* describe.context */, prop /* context name */) {
-      return function(title, cb, displayName) {
+    get: function (obj /* describe.context */, prop /* context name */) {
+      return function (title, cb, displayName) {
         const originalFn = global[fnName]
 
         const __COMPONENT__ =
@@ -37,14 +37,16 @@ functionsToPatch.forEach(fnName => {
           {}
 
         if (!__CONTEXTS__) {
-          console.error(`You're trying to use the context ${prop} but it's not defined in your contexts.js file`) // eslint-disable-line
+          console.error(
+            `You're trying to use the context ${prop} but it's not defined in your contexts.js file`
+          ) // eslint-disable-line
           return originalFn(title, cb)
         }
 
         let context = __CONTEXTS__[prop]
         if (!context) {
           // eslint-disable-next-line
-        console.error(
+          console.error(
             `Your trying to use the context ${prop} but it is not defined in your contexts.js file.
           Only are allow the following contexts: ${Object.keys(__CONTEXTS__)}.
           as fallback you will use the "default" context in your test`
@@ -57,14 +59,11 @@ functionsToPatch.forEach(fnName => {
           context,
           context
         )(__COMPONENT__)
-        const EnhanceComponent = props => {
-          debugger // eslint-disable-line
-          return (
-            <SUIContext.Provider value={context}>
-              <EnhanceComponentWithLegacyContext {...props} />
-            </SUIContext.Provider>
-          )
-        }
+        const EnhanceComponent = props => (
+          <SUIContext.Provider value={context}>
+            <EnhanceComponentWithLegacyContext {...props} />
+          </SUIContext.Provider>
+        )
         hoistNonReactStatics(
           EnhanceComponent,
           EnhanceComponentWithLegacyContext
