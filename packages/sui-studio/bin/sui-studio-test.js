@@ -8,7 +8,7 @@ const path = require('path')
 const suiTestClientPath = require.resolve('@s-ui/test/bin/sui-test-browser')
 
 program
-  .option('--ci', 'Run compoents tests in CLI, headless mode')
+  .option('--ci', 'Run components tests in CLI, headless mode')
   .option('-W, --watch', 'Watch mode')
   .on('--help', () => {
     console.log('  Examples:')
