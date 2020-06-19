@@ -1,6 +1,7 @@
 /* eslint no-extend-native:0 */
 
 import React from 'react'
+import {Router, Route} from '@s-ui/react-router'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
@@ -53,9 +54,18 @@ functionsToPatch.forEach(fnName => {
         context,
         context
       )(__COMPONENT__)
+
+      const fakeRouter = context.router
       const EnhanceComponent = props => (
         <SUIContext.Provider value={context}>
-          <EnhanceComponentWithLegacyContext {...props} />
+          <Router fakeRouter={fakeRouter}>
+            <Route
+              path="/"
+              component={() => {
+                return <EnhanceComponentWithLegacyContext {...props} />
+              }}
+            />
+          </Router>
         </SUIContext.Provider>
       )
       hoistNonReactStatics(EnhanceComponent, EnhanceComponentWithLegacyContext)

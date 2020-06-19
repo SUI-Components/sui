@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
+import {Router, Route} from '@s-ui/react-router'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../demo/HoC/withContext'
 import {cleanDisplayName} from '../demo/utilities'
@@ -36,9 +37,18 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       !EnhanceComponent.displayName &&
         console.error('[sui-Test] Component without displayName') // eslint-disable-line
 
+      const fakeRouter = nextContexts.default?.router
       const NextComponent = props => (
         <SUIContext.Provider value={nextContexts.default}>
           <EnhanceComponent {...props} />
+          <Router fakeRouter={fakeRouter}>
+            <Route
+              path="/"
+              component={() => {
+                return <EnhanceComponent {...props} />
+              }}
+            />
+          </Router>
         </SUIContext.Provider>
       )
       hoistNonReactStatics(NextComponent, Component)

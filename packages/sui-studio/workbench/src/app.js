@@ -2,6 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import {Router, Route} from '@s-ui/react-router'
 import './styles/index.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
@@ -64,15 +65,30 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
+
+  const routes = (
+    <Router>
+      <Route
+        path="/"
+        component={() => {
+          return (
+            <ComponentToRender
+              contexts={contexts}
+              themes={{...themes, default: defaultStyle.default}}
+              componentID={__COMPONENT_ID__}
+              demo={DemoComponent}
+              demoStyles={demoStyles}
+              {...params}
+            />
+          )
+        }}
+      />
+    </Router>
+  )
+
+  const fakeRouter = contexts[params.actualContext]?.router
   ReactDOM.render(
-    <ComponentToRender
-      contexts={contexts}
-      themes={{...themes, default: defaultStyle.default}}
-      componentID={__COMPONENT_ID__}
-      demo={DemoComponent}
-      demoStyles={demoStyles}
-      {...params}
-    />,
+    <Router routes={routes} fakeRouter={fakeRouter} />,
     document.getElementById('app')
   )
 })()
