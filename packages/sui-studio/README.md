@@ -197,7 +197,7 @@ export default MemoComponent
 ```
 
 ## CLI testing integration
-SUIStudio provides tools for running your entire component test of your project on a karma browser
+SUIStudio provides tools for running your entire component tests of your project on a karma browser
 
 Add this scripts on your own components project
 ```
