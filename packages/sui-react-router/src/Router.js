@@ -42,7 +42,8 @@ const Router = ({
   onError,
   params,
   router: routerFromProps,
-  routes
+  routes,
+  fakeRouter
 }) => {
   // we might be using Router with match, if it's the case
   // when we should have from props the transitionManager and the router object
@@ -82,7 +83,7 @@ const Router = ({
   }, []) // eslint-disable-line
 
   return (
-    <RouterContext.Provider value={state}>
+    <RouterContext.Provider value={{...state, ...(fakeRouter && {router: fakeRouter})}}>
       {renderRouterContent(state)}
     </RouterContext.Provider>
   )
