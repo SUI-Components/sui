@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.1.0 (2020-06-08)
+
+
+### Features
+
+* add --browser flag to e2e ([5227956](https://github.com/SUI-Components/sui/commit/5227956a92b347c1d242c915f122b81b6aa05e0a))
+* add --noWebSecurity flag to e2e testing ([1eab372](https://github.com/SUI-Components/sui/commit/1eab372a3583c9580a5866c79aac800ca37b0cc9))
+* add news flag to README ([ac98c2a](https://github.com/SUI-Components/sui/commit/ac98c2a8976e856abe46f1cc86cfbda6129aeadd))
+
+
+
 # 3.0.0 (2020-04-08)
 
 

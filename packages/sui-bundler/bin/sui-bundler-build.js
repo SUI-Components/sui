@@ -5,6 +5,9 @@ const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
+const staticModule = require('static-module')
+const minifyStream = require('minify-stream')
+const replaceStream = require('replacestream')
 const config = require('../webpack.config.prod')
 const fs = require('fs')
 const {config: projectConfig} = require('../shared')
@@ -83,12 +86,74 @@ webpack(nextConfig).run((error, stats) => {
 
   console.log(`Webpack stats: ${stats}`)
 
-  if (projectConfig.offline && projectConfig.offline.whitelist) {
+  const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
+  const offlinePageExists = fs.existsSync(offlinePath)
+  const shouldCreateOurCustomSW = !(
+    projectConfig &&
+    projectConfig.offline &&
+    projectConfig.offline.fallback
+  )
+  const staticsCacheOnly =
+    (projectConfig &&
+      projectConfig.offline &&
+      projectConfig.offline.staticsCacheOnly) ||
+    ''
+
+  if (offlinePageExists) {
     fs.copyFileSync(
-      path.resolve(process.cwd(), 'public', 'index.html'),
-      path.resolve(process.cwd(), 'public', '200.html')
+      path.resolve(offlinePath),
+      path.resolve(process.cwd(), 'public', 'offline.html')
     )
-    console.log(chalkSuccess('200.html create to be used in your Offline App'))
+  }
+
+  if (shouldCreateOurCustomSW && (offlinePageExists || staticsCacheOnly)) {
+    const manifest = require(path.resolve(
+      process.cwd(),
+      'public',
+      'asset-manifest.json'
+    ))
+
+    const rulesOfFilesToNotCache = [
+      'runtime~', // webpack's runtime chunks are not meant to be cached
+      '.gz', // avoid gzipped files
+      '.br', // avoid brotli files
+      'LICENSE.txt' // avoid LICENSE files
+    ]
+    const manifestStatics = Object.values(manifest).filter(
+      url => !rulesOfFilesToNotCache.some(rule => url.includes(rule))
+    )
+
+    const importScripts =
+      (projectConfig &&
+        projectConfig.offline &&
+        projectConfig.offline.importScripts) ||
+      []
+
+    const stringImportScripts = importScripts
+      .map(url => `importScripts("${url}")`)
+      .join('\n')
+
+    Boolean(importScripts.length) &&
+      console.log('\nExternal Scripts Added to the SW:\n', stringImportScripts)
+
+    // generates the service worker
+    fs.createReadStream(path.resolve(__dirname, '..', 'service-worker.js'))
+      .pipe(replaceStream('// IMPORT_SCRIPTS_HERE', stringImportScripts))
+      .pipe(
+        staticModule({
+          'static-manifest': () => JSON.stringify(manifestStatics),
+          'static-cache-name': () => JSON.stringify(Date.now().toString()),
+          'static-statics-cache-only': () => JSON.stringify(staticsCacheOnly)
+        })
+      )
+      .pipe(minifyStream({sourceMap: false}))
+      .pipe(
+        fs.createWriteStream(
+          path.resolve(process.cwd(), 'public', 'service-worker.js')
+        )
+      )
+
+    console.log('\nService worker generated succesfully!\n')
   }
 
   console.log(

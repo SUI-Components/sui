@@ -22,6 +22,7 @@ const {
   navigateFallback,
   runtimeCaching
 } = require('./shared/precache')
+
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
@@ -121,12 +122,12 @@ module.exports = {
       fileName: 'asset-manifest.json'
     }),
     when(
-      config.offline,
+      config.offline && (config.offline.fallback || config.offline.runtime),
       () =>
         new GenerateSW({
           skipWaiting: true,
           clientsClaim: true,
-          dontCacheBustURLsMatching: /\.\w{8}\./,
+          cleanupOutdatedCaches: true,
           directoryIndex: config.offline.directoryIndex,
           navigateFallback: navigateFallback(
             config.offline.fallback,
@@ -136,6 +137,7 @@ module.exports = {
             config.offline.denylist
           ),
           runtimeCaching: runtimeCaching(config.offline.runtime),
+          importScripts: config.offline.importScripts || [],
           exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE\.txt$/]
         })
     ),

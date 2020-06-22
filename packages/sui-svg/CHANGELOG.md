@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.4.0 (2020-06-10)
+
+
+### Bug Fixes
+
+* sui svg must keep atomIcon display name in order to not break atom button implementati ([65b3a05](https://github.com/SUI-Components/sui/commit/65b3a05aaae0e0eb58772011013d4fa86c2671e2))
+
+
+
 # 2.3.0 (2020-04-05)
 
 

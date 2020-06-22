@@ -1,19 +1,15 @@
-import Fetcher from './Fetcher'
 import axios from 'axios'
 // import getPerf from '@s-ui/perf'
 // import measureAxios from '@s-ui/perf/src/measure-axios'
 
-/**
- * @implements Fetcher
- */
-export default class AxiosFetcher extends Fetcher {
+/** @typedef {import('./FetcherInterface').default} FetcherInterface */
+/** @implements {FetcherInterface} */
+export default class AxiosFetcher {
   /**
-   * @param {Object} deps
-   * @param {Config} deps.config
+   * @param {object} deps
+   * @param {object} deps.config
    */
   constructor({config}) {
-    super({config})
-
     this._axios = axios.create(config)
     // const perf = getPerf(config.get('serverRequestId') || 'default')
     // measureAxios(perf)(this._axios)
@@ -23,7 +19,7 @@ export default class AxiosFetcher extends Fetcher {
    * Get method
    * @param {String} url
    * @param {Object} options
-   * @return {Object}
+   * @return {Promise<any>}
    */
   get(url, options) {
     return this._axios.get(url, options)
@@ -35,7 +31,7 @@ export default class AxiosFetcher extends Fetcher {
    * @param {String} url
    * @param {String} body
    * @param {Object} options
-   * @return {Object}
+   * @return {Promise}
    */
   post(url, body, options) {
     return this._axios.post(url, body, options)

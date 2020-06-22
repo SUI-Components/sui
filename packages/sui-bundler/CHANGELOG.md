@@ -2,6 +2,98 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.8.0 (2020-06-19)
+
+
+### Bug Fixes
+
+* allow no staticCacheOnly config ([c380d9b](https://github.com/SUI-Components/sui/commit/c380d9b73dab263e4e592b56e200158b73f3e932))
+
+
+
+# 6.7.0 (2020-06-18)
+
+
+### Bug Fixes
+
+* install "workbox-webpack-plugin" dependency ([0c19efc](https://github.com/SUI-Components/sui/commit/0c19efc3d7ede1b88dfc2a285dcdf342db5628d6))
+
+
+### Features
+
+* allow import external scripts in our SW ([41b8eee](https://github.com/SUI-Components/sui/commit/41b8eee8de111fc96c7e0e260f1af6960ecb855b))
+* bump version ([b5af574](https://github.com/SUI-Components/sui/commit/b5af574da09474c14fb8a4bf3b7baaec3ae5dea3))
+
+
+
+# 6.5.0 (2020-06-16)
+
+
+### Features
+
+* add statics cache only option ([481ffd0](https://github.com/SUI-Components/sui/commit/481ffd0d094f1b28abb46ddf220be505b470638a))
+
+
+
+# 6.4.0 (2020-06-15)
+
+
+### Bug Fixes
+
+* fix check if offline file exists ([6416f6e](https://github.com/SUI-Components/sui/commit/6416f6e7afdfacf7a26de6ceb3945483877ac362))
+
+
+### Features
+
+* use offlinePath const for copy ([8b5d07a](https://github.com/SUI-Components/sui/commit/8b5d07a2628067d4b670a801bf5fb03c63ec6661))
+
+
+
+# 6.3.0 (2020-06-11)
+
+
+### Features
+
+* better filtering to ditch files not needed for the service-worker ([d3ca81e](https://github.com/SUI-Components/sui/commit/d3ca81e5f59c2c5f9c9439c4bfcbdaf3c1a173a8))
+
+
+
+# 6.2.0 (2020-06-09)
+
+
+### Features
+
+* use register function directly ([b954d05](https://github.com/SUI-Components/sui/commit/b954d059db67bc9c7e70266057ceea3ce85e0bb4))
+
+
+
+# 6.1.0 (2020-06-09)
+
+
+### Bug Fixes
+
+* make options parameter to be optional ([974a36a](https://github.com/SUI-Components/sui/commit/974a36aa9e30a5e8aa313fcb9d5f81077e6da276))
+
+
+
+# 6.0.0 (2020-06-09)
+
+
+### Features
+
+* add dynamic offline page cache (not working) ([1069207](https://github.com/SUI-Components/sui/commit/1069207c55322590bfe8e33905d14e580d439fb7))
+* add offline service worker ([dbd6d08](https://github.com/SUI-Components/sui/commit/dbd6d084b2b2ebdd14543aa2936f8469568485d7))
+* offline.html file as fallback in offline case ([9132c70](https://github.com/SUI-Components/sui/commit/9132c70a39367fdb60c84be21ab8d77d04dc9a33))
+* register callbacks as optional and not env dependant ([4e21e3c](https://github.com/SUI-Components/sui/commit/4e21e3c7b7f97966705c0f818c048dc7303bec33))
+* runtime check improved and add docs ([fb33942](https://github.com/SUI-Components/sui/commit/fb33942292fb13fe0e00b3f7ae51d19ed970f212))
+
+
+### BREAKING CHANGES
+
+* new sw activation api
+
+
+
 # 5.49.0 (2020-05-21)
 
 

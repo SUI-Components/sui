@@ -137,6 +137,8 @@ Then you can use in your specs `cy.login()`
     -G, --gui                                Run the tests in GUI mode.
     -C, --ci                                 CI Mode, reduces memory consumption
     -h, --help                               output usage information
+    -b, --browser <browser>                  Select a different browser (chrome|edge|firefox)
+    -N, --noWebSecurity                      Disable all web securities (CORS)
 ```
 
 #### `sui-test e2e --gui`

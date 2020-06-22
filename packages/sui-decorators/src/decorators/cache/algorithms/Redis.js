@@ -1,9 +1,6 @@
 import Cache from './Cache'
-import redis from 'redis'
-import redisMock from 'redis-mock'
+import RedisClient from './RedisClient'
 import lru from 'redis-lru'
-
-const useRedis = process.env.USE_REDIS_IN_SUI_DECORATORS_CACHE
 
 export default class Redis extends Cache {
   constructor({
@@ -14,20 +11,33 @@ export default class Redis extends Cache {
   } = {}) {
     super()
     this._ttl = ttl
-    this._redisClient = useRedis
-      ? redis.createClient({
-          port: redisConnection.port,
-          host: redisConnection.host
-        })
-      : redisMock.createClient()
+    this._redisClient = RedisClient.getInstance({redisConnection}).client
     this._lruRedis = lru(this._redisClient, {
       max: size,
       namespace
     })
   }
 
-  get(key) {
-    return this._lruRedis.get(key)
+  _delay(ms) {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(), ms)
+    })
+  }
+
+  async get(key) {
+    try {
+      const resp = await Promise.race([
+        this._lruRedis.get(key),
+        this._delay(100)
+      ])
+      return resp
+    } catch (err) {
+      console.error(
+        `[sui-decorators/cache]:Redis Error Getting cache item for key: ${key}.`,
+        err.message
+      )
+      return null
+    }
   }
 
   /**
@@ -37,10 +47,23 @@ export default class Redis extends Cache {
    * @param {number} maxAge expire time in ms, default = 500ms
    */
   set(key, value, maxAge = this._ttl) {
-    return this._lruRedis.set(key, value, maxAge)
+    const ret = this._lruRedis.set(key, value, maxAge)
+    Promise.race([ret, this._delay(100)]).catch(err => {
+      console.error(
+        `[sui-decorators/cache]:Redis Error Setting cache item for key: ${key}.`,
+        err.message
+      )
+    })
   }
 
   del(key) {
-    this._lruRedis.del(key)
+    try {
+      this._lruRedis.del(key)
+    } catch (err) {
+      console.error(
+        `[sui-decorators/cache]:Redis Error deleting cache item for key: ${key}.`,
+        err.message
+      )
+    }
   }
 }
