@@ -94,9 +94,10 @@ webpack(nextConfig).run((error, stats) => {
     projectConfig.offline.fallback
   )
   const staticsCacheOnly =
-    projectConfig &&
-    projectConfig.offline &&
-    projectConfig.offline.staticsCacheOnly
+    (projectConfig &&
+      projectConfig.offline &&
+      projectConfig.offline.staticsCacheOnly) ||
+    ''
 
   if (offlinePageExists) {
     fs.copyFileSync(
