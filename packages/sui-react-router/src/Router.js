@@ -82,8 +82,13 @@ const Router = ({
     return () => unlisten()
   }, []) // eslint-disable-line
 
+  if (fakeRouter) {
+    // We mutate the state so we can consume a fake router
+    state.router = fakeRouter
+  }
+
   return (
-    <RouterContext.Provider value={{...state, ...(fakeRouter && {router: fakeRouter})}}>
+    <RouterContext.Provider value={state}>
       {renderRouterContent(state)}
     </RouterContext.Provider>
   )
@@ -99,6 +104,7 @@ Router.propTypes = {
   onError: PropTypes.func,
   params: PropTypes.object,
   router: PropTypes.object,
+  fakeRouter: PropTypes.object,
   routes // alias for children
 }
 
