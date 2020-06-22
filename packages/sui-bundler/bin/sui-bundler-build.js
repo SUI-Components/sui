@@ -117,7 +117,8 @@ webpack(nextConfig).run((error, stats) => {
       'runtime~', // webpack's runtime chunks are not meant to be cached
       '.gz', // avoid gzipped files
       '.br', // avoid brotli files
-      'LICENSE.txt' // avoid LICENSE files
+      'LICENSE.txt', // avoid LICENSE files
+      '.map' // source maps
     ]
     const manifestStatics = Object.values(manifest).filter(
       url => !rulesOfFilesToNotCache.some(rule => url.includes(rule))
