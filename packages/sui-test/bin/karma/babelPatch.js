@@ -2,14 +2,14 @@
 // a final parameter which includes the component name in order to enhance it and provide the right one for the
 // appropiate test.
 
-module.exports = function (babel) {
+module.exports = function(babel) {
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
   const t = babel.types
   return {
     visitor: {
-      CallExpression: function (path, state) {
+      CallExpression: function(path, state) {
         if (
           path.node.callee.type === 'MemberExpression' &&
           path.node.callee.object.type === 'MemberExpression' &&
@@ -35,10 +35,7 @@ module.exports = function (babel) {
                 ),
                 t.identifier(propertyName)
               ),
-              [
-                ...args,
-                t.stringLiteral(ComponentName),
-              ]
+              [...args, t.stringLiteral(ComponentName)]
             )
           )
         }

@@ -5,7 +5,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
-import {requireFile, tryRequireContext, tryRequireComponent} from '../components/tryRequire'
+import {tryRequireContext, tryRequireComponent} from '../components/tryRequire'
 
 const originalKarmaLoader = window.__karma__.loaded
 window.__karma__.loaded = () => {}
@@ -22,7 +22,6 @@ function declareAll(resolve) {
     const {
       groups: {categoryName, componentName}
     } = srcKey.match(regex)
-    const component = resolve(srcKey).default
     const displayName = capitalize(categoryName) + capitalize(componentName)
     cache[displayName] = {
       displayName,

@@ -4,7 +4,6 @@ import React from 'react'
 import {Router, Route} from '@s-ui/react-router'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
-import {cleanDisplayName} from '../components/demo/utilities'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 const global = globalThis || window // eslint-disable-line
