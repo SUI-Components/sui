@@ -66,8 +66,9 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
 
-  const routes = (
-    <Router>
+  const fakeRouter = contexts[params.actualContext]?.router
+  ReactDOM.render(
+    <Router fakeRouter={fakeRouter}>
       <Route
         path="/"
         component={() => {
@@ -83,12 +84,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
           )
         }}
       />
-    </Router>
-  )
-
-  const fakeRouter = contexts[params.actualContext]?.router
-  ReactDOM.render(
-    <Router routes={routes} fakeRouter={fakeRouter} />,
+    </Router>,
     document.getElementById('app')
   )
 })()
