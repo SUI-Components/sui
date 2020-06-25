@@ -39,10 +39,12 @@ module.exports = async ({
 
   configure.files = [
     `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
+    ...(srcPattern && [`${CWD}/${srcPattern}`]),
     `${CWD}/${pattern}`
-  ]
+  ].filter(Boolean)
   configure.preprocessors = {
-    [pattern]: ['webpack']
+    [pattern]: ['webpack'],
+    ...(srcPattern && {[srcPattern]: ['webpack']})
   }
 
   configure.client.mocha = {

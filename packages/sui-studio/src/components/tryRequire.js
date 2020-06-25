@@ -23,7 +23,7 @@ const tryRequireSrc = ({category, component, requireContext}) => {
   })
 }
 
-const requireFile = async ({
+export const requireFile = async ({
   defaultValue,
   extractDefault = true,
   importFile
@@ -32,7 +32,7 @@ const requireFile = async ({
   if (typeof file === 'undefined') {
     return Promise.reject(new Error('Error requiring file'))
   }
-  return extractDefault ? file.default : file
+  return extractDefault && typeof file === 'object' ? file.default : file
 }
 
 export const tryRequireTest = async ({category, component}) => {
@@ -61,6 +61,20 @@ export const tryRequireRawSrc = ({category, component}) => {
     requireContext: requireContextRawSrc
   })
 }
+
+export const tryRequireContext = ({category, component}) =>
+  requireFile({
+    defaultValue: false,
+    importFile: () =>
+      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
+  })
+
+export const tryRequireComponent = ({category, component}) =>
+  requireFile({
+    defaultValue: false,
+    importFile: () =>
+      import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`)
+  })
 
 export const tryRequireCore = async ({category, component}) => {
   const exports = tryRequireSrc({
@@ -95,11 +109,7 @@ export const tryRequireCore = async ({category, component}) => {
       )
   })
 
-  const context = requireFile({
-    defaultValue: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-  })
+  const context = tryRequireContext({category, component})
 
   const events = requireFile({
     defaultValue: false,
