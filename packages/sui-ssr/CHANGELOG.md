@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.2.0 (2020-06-25)
+
+
+### Bug Fixes
+
+* fix possible xss ([5216b47](https://github.com/SUI-Components/sui/commit/5216b47b48aeeb496e9a5b5a620a70361026bdf3))
+
+
+
 # 7.1.0 (2020-06-11)
 
 
