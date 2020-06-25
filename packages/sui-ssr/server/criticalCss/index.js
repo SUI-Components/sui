@@ -99,7 +99,9 @@ export default config => (req, res, next) => {
 
     const serviceRequestURL = `https://get-critical-css-service.vercel.app/${device}?url=${encodeURIComponent(
       urlRequest
-    )}&extraHeaders=${encodeURIComponent(currentConfig.customHeaders)}`
+    )}&extraHeaders=${encodeURIComponent(
+      encodeURIComponent(JSON.stringify(currentConfig.customHeaders || {}))
+    )}`
 
     logMessage(serviceRequestURL)
 
