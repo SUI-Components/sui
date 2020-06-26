@@ -97,18 +97,16 @@ export default config => (req, res, next) => {
   ) {
     logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
 
-    const serviceRequestURL = `https://critical-css-service.now.sh/${device}/${urlRequest}`
-    const headers = currentConfig.customHeaders
-    const options = {
-      ...(headers && {
-        headers
-      })
-    }
+    const serviceRequestURL = `https://get-critical-css-service.vercel.app/${device}?url=${encodeURIComponent(
+      urlRequest
+    )}&extraHeaders=${encodeURIComponent(
+      JSON.stringify(currentConfig.customHeaders || {})
+    )}`
 
     logMessage(serviceRequestURL)
 
     __REQUESTING__ = true
-    https.get(serviceRequestURL, options, res => {
+    https.get(serviceRequestURL, res => {
       let css = ''
       if (res.statusCode !== 200) {
         __REQUESTING__ = false
