@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.3.0 (2020-06-26)
+
+
+### Bug Fixes
+
+* remove double encodeURIComponent ([bb5f501](https://github.com/SUI-Components/sui/commit/bb5f501e4914160191e31d063714b2c97cd34b59))
+
+
+### Features
+
+* migrate to the new CriticalCSS URL ([95aa20e](https://github.com/SUI-Components/sui/commit/95aa20e773004281401f0d9b227a27f7d82dcd46))
+* send empty object if there is not extraCustomHeaders ([c600355](https://github.com/SUI-Components/sui/commit/c60035526d0e05f5bc351bad59e38f1571e7a24a))
+
+
+
 # 7.2.0 (2020-06-25)
 
 
