@@ -62,20 +62,6 @@ export const tryRequireRawSrc = ({category, component}) => {
   })
 }
 
-export const tryRequireContext = ({category, component}) =>
-  requireFile({
-    defaultValue: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-  })
-
-export const tryRequireComponent = ({category, component}) =>
-  requireFile({
-    defaultValue: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`)
-  })
-
 export const tryRequireCore = async ({category, component}) => {
   const exports = tryRequireSrc({
     category,
@@ -109,7 +95,11 @@ export const tryRequireCore = async ({category, component}) => {
       )
   })
 
-  const context = tryRequireContext({category, component})
+  const context = requireFile({
+    defaultValue: false,
+    importFile: () =>
+      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
+  })
 
   const events = requireFile({
     defaultValue: false,
