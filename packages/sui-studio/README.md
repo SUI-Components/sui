@@ -89,6 +89,10 @@ Build a static version of a web app aimed to be deployed, where you will be able
 
 Launch a development environment where you can work in total isolation on your component.
 
+### `$ sui-studio test`
+
+Launch all project tests in a karma browser.
+
 ## Testing
 
 Test the studio's components both in the demo as in the development environment. *Currently in experimental mode*
@@ -191,6 +195,25 @@ MemoComponent.displayName = 'MemoComponent'
 
 export default MemoComponent
 ```
+
+## CLI testing integration
+SUIStudio provides tools for running your entire component tests of your project on a karma browser
+
+Add this scripts on your own components project
+```
+// package.json
+{
+  ...
+  scripts: {
+    ...
+	test: "sui-studio test"
+	test:watch: "sui-studio test --watch"
+    ...
+  }
+  ...
+}
+```
+
 
 ## File structure
 

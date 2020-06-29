@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.9.0 (2020-06-22)
+
+
+### Features
+
+* avoid load source maps ([fc02e16](https://github.com/SUI-Components/sui/commit/fc02e160cd1fd8b39319f5db9db5772bad496ff1))
+
+
+
 # 6.8.0 (2020-06-19)
 
 

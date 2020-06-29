@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const path = require('path')
 
 const TARGET = process.env.npm_lifecycle_event
 const CWD = process.cwd()
@@ -17,6 +18,14 @@ const config = {
   webpack: {
     devtool: 'eval',
     mode: 'development',
+    resolve: {
+      alias: {
+        '@s-ui/react-context': path.resolve(
+          path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+        )
+      },
+      extensions: ['.mjs', '.js', '.jsx', '.json']
+    },
     node: {
       fs: 'empty'
     },
@@ -25,7 +34,17 @@ const config = {
     output: {
       pathinfo: false
     },
-    plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
+    plugins: [
+      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new webpack.DefinePlugin(
+        Object.assign(
+          {},
+          {
+            __BASE_DIR__: JSON.stringify(process.env.PWD)
+          }
+        )
+      )
+    ],
     // avoid unneded optimizations for running our tests in order to get fatest bundling time
     optimization: {
       removeAvailableModules: false,
@@ -50,7 +69,10 @@ const config = {
                     }
                   ]
                 ],
-                plugins: [require.resolve('babel-plugin-istanbul')]
+                plugins: [
+                  require.resolve('babel-plugin-istanbul'),
+                  require.resolve('./babelPatch.js')
+                ]
               }
             }
           ]
