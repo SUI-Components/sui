@@ -76,7 +76,13 @@ self.addEventListener('install', event => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(cacheName)
-      await cache.addAll(manifestStatics)
+      await cache.addAll(
+        manifestStatics.map(url => {
+          return new Request(url, {
+            cache: 'reload'
+          })
+        })
+      )
       if (staticsCacheOnly) return
       // Setting {cache: 'reload'} in the new request will ensure that the response
       // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
