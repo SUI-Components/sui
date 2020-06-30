@@ -107,6 +107,9 @@ const _memoizedHtmlTemplatesMapping = {}
     })
 
   app.use((req, res, next) => {
+    const shouldUseIndexWhitoutThirdParties =
+      req.query['disable-tealium'] !== undefined
+
     // Since `_memoizedHtmlTemplatesMapping` will be always an object
     // we need to define a key for each multisite and one default
     // for single sites too.
@@ -114,14 +117,14 @@ const _memoizedHtmlTemplatesMapping = {}
     const memoizedHtmlTemplate =
       _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
 
-    if (memoizedHtmlTemplate) {
+    if (memoizedHtmlTemplate && !shouldUseIndexWhitoutThirdParties) {
       req.htmlTemplate = memoizedHtmlTemplate
     } else {
       const htmlTemplate = readHtmlTemplate(req)
 
       req.htmlTemplate = htmlTemplate
 
-      if (req.query['disable-tealium'] === undefined) {
+      if (!shouldUseIndexWhitoutThirdParties) {
         _memoizedHtmlTemplatesMapping[site] = htmlTemplate
       }
     }
