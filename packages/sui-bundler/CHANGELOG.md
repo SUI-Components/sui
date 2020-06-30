@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.10.0 (2020-06-30)
+
+
+### Features
+
+* create a new Request for each entry in the manifest ([4884ad0](https://github.com/SUI-Components/sui/commit/4884ad0c7aaae57d1ca4c49bacccb58fdbd22579))
+
+
+
 # 6.9.0 (2020-06-22)
 
 
