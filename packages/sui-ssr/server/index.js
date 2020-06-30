@@ -120,7 +120,10 @@ const _memoizedHtmlTemplatesMapping = {}
       const htmlTemplate = readHtmlTemplate(req)
 
       req.htmlTemplate = htmlTemplate
-      _memoizedHtmlTemplatesMapping[site] = htmlTemplate
+
+      if (req.query['disable-tealium'] === undefined) {
+        _memoizedHtmlTemplatesMapping[site] = htmlTemplate
+      }
     }
 
     next()
