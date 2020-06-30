@@ -49,6 +49,10 @@ program
     '--no-progress',
     'Force to not show progress of tasks (perfect for CI environments)'
   )
+  .option(
+    '-s, --scope <string>',
+    'Runs phoenix on a given scope, for example: -s atom/button'
+  )
   .on('--help', () => {
     console.log(`
   Description:
@@ -67,7 +71,8 @@ const {
   chunk = DEFAULT_CHUNK,
   ci = false,
   progress = true,
-  root = true
+  root = true,
+  scope: scopeArgument
 } = program
 
 const NPM_CMD = ['npm', ['install', audit ? '' : '--no-audit']]
@@ -114,7 +119,7 @@ const executePhoenixOnPackages = () => {
   // if we're on a monorepo, then we don't have packages to install
   if (config.isMonoPackage()) return
 
-  const scopes = config.getScopesPaths()
+  const scopes = config.getScopesPaths(scopeArgument)
   logUpdate(`${figures.play} Preparing ${scopes.length} packages to install...`)
 
   scopes.map(cwd => {
