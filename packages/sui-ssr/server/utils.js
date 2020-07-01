@@ -46,9 +46,10 @@ export const useStaticsByHost = expressStatic => {
 
 export const readHtmlTemplate = req => {
   const index =
-    req.query['disable-tealium'] === undefined
-      ? INDEX_FILE
-      : INDEX_WITHOUT_THIRD_PARTIES_FILE
+    ssrConf.queryDisableThirdParties &&
+    req.query[ssrConf.queryDisableThirdParties] !== undefined
+      ? INDEX_WITHOUT_THIRD_PARTIES_FILE
+      : INDEX_FILE
   const filePath = path.join(process.cwd(), publicFolderByHost(req), index)
 
   return fs.readFileSync(filePath, 'utf8')
