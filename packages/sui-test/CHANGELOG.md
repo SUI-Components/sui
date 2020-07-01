@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.2.0 (2020-06-23)
+
+
+### Bug Fixes
+
+* add resolve importers extension to the test-browser webpack conf ([8c4eaab](https://github.com/SUI-Components/sui/commit/8c4eaab20465cf1828ab46c2bc98a5208bf83310))
+* webpack config ([357d81f](https://github.com/SUI-Components/sui/commit/357d81fa603f8c76e90c1398c838e7468847f1df))
+
+
+### Features
+
+* remove sui-bundler dependency ([4f2b5cb](https://github.com/SUI-Components/sui/commit/4f2b5cbda67d7cfce9506ab00babda4d1a753ad2))
+
+
+
 # 3.1.0 (2020-06-08)
 
 
@@ -10,6 +25,9 @@ All notable changes to this project will be documented in this file.
 * add --browser flag to e2e ([5227956](https://github.com/SUI-Components/sui/commit/5227956a92b347c1d242c915f122b81b6aa05e0a))
 * add --noWebSecurity flag to e2e testing ([1eab372](https://github.com/SUI-Components/sui/commit/1eab372a3583c9580a5866c79aac800ca37b0cc9))
 * add news flag to README ([ac98c2a](https://github.com/SUI-Components/sui/commit/ac98c2a8976e856abe46f1cc86cfbda6129aeadd))
+* adds a cli testing bundling support for studio ([bd89687](https://github.com/SUI-Components/sui/commit/bd89687a9af8e7aed496fbefae055a946ced0afb))
+* enable src-pattern flag ([e7979af](https://github.com/SUI-Components/sui/commit/e7979affed024b721e884351042c679e46edfcf6))
+* fix the version on package.json ([ebfbec6](https://github.com/SUI-Components/sui/commit/ebfbec67d7bc7bbb53591ca7bec71610c15285ed))
 
 
 

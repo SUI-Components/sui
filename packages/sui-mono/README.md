@@ -15,7 +15,7 @@ We use:
 -  [ComVer](https://github.com/staltz/comver) as our versioning system
 -  [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#commit-message-conventions) as our standard for commit messages
 
-`sui-mono` provides, among other things, a standard template for commit messages (`sui-mono commit`) and is able to decide what needs to be released for you (`sui-mono check` & `sui-mono release`). 
+`sui-mono` provides, among other things, a standard template for commit messages (`sui-mono commit`) and is able to decide what needs to be released for you (`sui-mono check` & `sui-mono release`).
 
 
 ![](./assets/sui-mono-demo.gif)
@@ -97,6 +97,18 @@ If you don't want a fancy progress output (for instance in CI env), you can forc
 
 ```sh
 sui-mono phoenix --no-progress
+```
+
+Reinstalls all scope packages but ignores the `node_modules` folder and `package-lock.json` file at the root level of your project
+
+```sh
+sui-mono phoenix --no-root
+```
+
+Ables you to just reinstall the dependencies from a single scope
+
+```sh
+sui-mono phoenix --no-root --scope atom/button
 ```
 
 ### `link`
@@ -209,7 +221,7 @@ By default packages will be published as `restricted` in npm. If you want them t
 We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
 If you follow a structure where do you have:
 - a main folder and
-- inside this folder you have all the packages (subfolders, each one of them with its own `package.json` → *scopes*) 
+- inside this folder you have all the packages (subfolders, each one of them with its own `package.json` → *scopes*)
 
 ...this configuration will work for you
 
@@ -217,7 +229,7 @@ In order to specify the main folder you need to provide `packagesFolder` by defa
 By default we check only 1 level inside the main folder, but if you have categories for each package and inside the packages you can configure `deepLevel`
 
 
-This information will be used for releases and [`commitizen`](https://commitizen.github.io/cz-cli/) scopes. 
+This information will be used for releases and [`commitizen`](https://commitizen.github.io/cz-cli/) scopes.
 
 #### Examples
 

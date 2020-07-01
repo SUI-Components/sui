@@ -23,7 +23,7 @@ const tryRequireSrc = ({category, component, requireContext}) => {
   })
 }
 
-const requireFile = async ({
+export const requireFile = async ({
   defaultValue,
   extractDefault = true,
   importFile
@@ -32,7 +32,7 @@ const requireFile = async ({
   if (typeof file === 'undefined') {
     return Promise.reject(new Error('Error requiring file'))
   }
-  return extractDefault ? file.default : file
+  return extractDefault && typeof file === 'object' ? file.default : file
 }
 
 export const tryRequireTest = async ({category, component}) => {

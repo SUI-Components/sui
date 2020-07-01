@@ -3,12 +3,10 @@
 import React from 'react'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
-import {cleanDisplayName} from '../components/demo/utilities'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 const global = globalThis || window // eslint-disable-line
-const __CONTEXTS__ = global.__STUDIO_CONTEXTS__ || {}
-const __COMPONENT__ = global.__STUDIO_COMPONENT__
+
 const functionsToPatch = ['describe']
 
 Function.prototype.partial = function() {
@@ -24,43 +22,52 @@ Function.prototype.partial = function() {
 
 functionsToPatch.forEach(fnName => {
   const handler = {
-    get: function(obj, prop) {
-      const originalFn = global[fnName]
+    get: function(obj /* describe.context */, prop /* context name */) {
+      return function(title, cb, displayName) {
+        const originalFn = global[fnName]
 
-      if (!__CONTEXTS__) {
-        // eslint-disable-next-line
-        console.error(
-          `You're trying to use the context ${prop} but it's not defined in your contexts.js file`
-        )
-        return function(title, cb) {
+        const __COMPONENT__ =
+          global.__STUDIO_COMPONENT__[displayName] ||
+          global.__STUDIO_COMPONENT__
+
+        const __CONTEXTS__ =
+          global.__STUDIO_CONTEXTS__[__COMPONENT__.displayName] ||
+          global.__STUDIO_CONTEXTS__ ||
+          {}
+
+        if (!__CONTEXTS__) {
+          console.error(
+            `You're trying to use the context ${prop} but it's not defined in your context.js files`
+          ) // eslint-disable-line
           return originalFn(title, cb)
         }
-      }
 
-      let context = __CONTEXTS__[prop]
-      if (!context) {
-        // eslint-disable-next-line
-        console.error(
-          `Your trying to use the context ${prop} but it is not define in your contexts.js file.
+        let context = __CONTEXTS__[prop]
+        if (!context) {
+          // eslint-disable-next-line
+          console.error(
+            `Your trying to use the context ${prop} but it is not defined in your context.js files.
           Only are allow the following contexts: ${Object.keys(__CONTEXTS__)}.
           as fallback you will use the "default" context in your test`
+          )
+
+          context = __CONTEXTS__.default
+        }
+
+        const EnhanceComponentWithLegacyContext = withContext(
+          context,
+          context
+        )(__COMPONENT__)
+        const EnhanceComponent = props => (
+          <SUIContext.Provider value={context}>
+            <EnhanceComponentWithLegacyContext {...props} />
+          </SUIContext.Provider>
+        )
+        hoistNonReactStatics(
+          EnhanceComponent,
+          EnhanceComponentWithLegacyContext
         )
 
-        context = __CONTEXTS__.default
-      }
-
-      const EnhanceComponentWithLegacyContext = withContext(
-        context,
-        context
-      )(__COMPONENT__)
-      const EnhanceComponent = props => (
-        <SUIContext.Provider value={context}>
-          <EnhanceComponentWithLegacyContext {...props} />
-        </SUIContext.Provider>
-      )
-      hoistNonReactStatics(EnhanceComponent, EnhanceComponentWithLegacyContext)
-
-      return function(title, cb) {
         return originalFn(`[${prop}] ${title}`, cb.partial(EnhanceComponent))
       }
     }
