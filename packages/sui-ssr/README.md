@@ -405,8 +405,8 @@ The sui-ssr response would be an HTML like the following:
     <script defer importance="high" src="<%= app.entry %>"></script>
   <% } %>
 
-  <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
-  <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
+  <!--THIRD_PARTY-->
+  <!--THIRD_PARTY-->
   
 </head>
 
