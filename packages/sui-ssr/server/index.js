@@ -108,7 +108,8 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use((req, res, next) => {
     const shouldUseIndexWhitoutThirdParties =
-      req.query['disable-tealium'] !== undefined
+      ssrConf.queryDisableThirdParties &&
+      req.query[ssrConf.queryDisableThirdParties] !== undefined
 
     // Since `_memoizedHtmlTemplatesMapping` will be always an object
     // we need to define a key for each multisite and one default
