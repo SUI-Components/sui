@@ -1,2 +1,1 @@
-import {debounce} from './debounce'
-export {debounce}
+export {debounce} from './debounce'
