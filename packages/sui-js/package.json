@@ -16,6 +16,7 @@
     "just-camel-case": "4.0.2",
     "just-capitalize": "1.0.0",
     "just-kebab-case": "1.1.0",
+    "lodash.debounce": "4.0.8",
     "qs": "6.7.0",
     "remove-accents": "0.4.2"
   },
