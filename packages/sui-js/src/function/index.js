@@ -1,1 +1,2 @@
-export {default as debounce} from 'lodash.debounce'
+import {debounce} from './debounce'
+export {debounce}
