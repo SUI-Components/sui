@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.11.0 (2020-07-01)
+
+
+### Features
+
+* use fixed number of cores for Travis ([667868e](https://github.com/SUI-Components/sui/commit/667868e5cf18870c2b9b7ba3516417ed98efe693))
+
+
+
 # 6.10.0 (2020-06-30)
 
 
