@@ -1,4 +1,6 @@
 const TerserPlugin = require('terser-webpack-plugin')
+const {CI = false} = process.env
+const CI_PARALLEL_CORES = 4
 
 module.exports = sourceMap =>
   new TerserPlugin({
@@ -37,8 +39,10 @@ module.exports = sourceMap =>
       }
     },
     // Use multi-process parallel running to improve the build speed
-    // Default number of concurrent runs: os.cpus().length - 1
-    parallel: true,
+    // For CI: Use only 4 fixed cores as it gives incorrect info and could cause troubles
+    // Related: https://github.com/webpack-contrib/terser-webpack-plugin/issues/202
+    // If not CI then use os.cpus().length - 1
+    parallel: CI ? CI_PARALLEL_CORES : true,
     // Enable file caching
     cache: true,
     // use sourceMap if parameter is provided
