@@ -36,6 +36,14 @@ module.exports = ({outputZipPath, pkg}) =>
         name: 'package.json'
       }
     )
+
+    archive.append(
+      fs.readFileSync(path.join(__dirname, 'start-app.sh'), 'utf8'),
+      {
+        name: 'start-app.sh'
+      }
+    )
+
     archive.append(
       fs
         .readFileSync(path.join(__dirname, 'pm2.tpl'), 'utf8')
