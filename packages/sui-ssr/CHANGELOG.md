@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.4.0 (2020-07-03)
+
+
+### Bug Fixes
+
+* fix node version to 14-alpine in dockerfile.tpl ([aa6c57d](https://github.com/SUI-Components/sui/commit/aa6c57d61169053e00e3b303c754b42876d1b451))
+
+
+
 # 7.3.0 (2020-06-26)
 
 
