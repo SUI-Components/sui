@@ -8,10 +8,14 @@ COPY ./server ./server
 COPY ./statics ./statics
 COPY ./package.json ./package.json
 
+RUN chmod +x ./start-app.sh
+
 # HERE BEGIN THE AUTH ENV VARIABLES
 {{AUTH_VARIABLES}}
 ####################################
 
 EXPOSE 3000
+
+ENTRYPOINT ["./start-app.sh"]
 
 CMD [ "pm2-runtime", "start", "pm2.json"]
