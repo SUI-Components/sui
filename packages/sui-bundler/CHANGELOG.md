@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.12.0 (2020-07-06)
+
+
+### Features
+
+* upgrade node-sass to get Node 14 bindings ([cd8e240](https://github.com/SUI-Components/sui/commit/cd8e240cb30bc921b2d8aff591c6cf8979b6de0e))
+
+
+
 # 6.11.0 (2020-07-01)
 
 
