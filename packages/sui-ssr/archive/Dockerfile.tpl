@@ -7,7 +7,11 @@ COPY ./public ./public
 COPY ./server ./server
 COPY ./statics ./statics
 COPY ./package.json ./package.json
-COPY ./start-app.sh ./start-app.sh
+
+# HERE WE ADD THE ENTRY POINT PRE WORK
+{{ENTRYPOINT_PREWORK}}
+####################################
+
 
 # HERE BEGIN THE AUTH ENV VARIABLES
 {{AUTH_VARIABLES}}
@@ -15,6 +19,8 @@ COPY ./start-app.sh ./start-app.sh
 
 EXPOSE 3000
 
-ENTRYPOINT ["start-app.sh"]
+# HERE WE ADD THE ENTRY POINT
+{{ENTRYPOINT}}
+####################################
 
 CMD [ "pm2-runtime", "start", "pm2.json"]
