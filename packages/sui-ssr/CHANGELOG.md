@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.5.0 (2020-07-06)
+
+
+### Features
+
+* avoid cache index html w/out third parties ([e1c978f](https://github.com/SUI-Components/sui/commit/e1c978f2c3f1f6c7b9c9844da4381c966b430fc0))
+* dont user memoize template ([415cc95](https://github.com/SUI-Components/sui/commit/415cc9538f7407deeca14604d20c1094b5d9b8b4))
+* remove 3th party scripts using an AST ([e082ae6](https://github.com/SUI-Components/sui/commit/e082ae6daa5dcc676f90b2fd5daae63af83ef9e4))
+
+
+
 # 7.4.0 (2020-07-03)
 
 
