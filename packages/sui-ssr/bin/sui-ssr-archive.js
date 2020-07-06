@@ -12,6 +12,10 @@ const REMOVE_ZIP_PATH = path.join(process.cwd(), '*-sui-ssr.zip')
 program
   .option('-C, --clean', 'Remove previous zip')
   .option(
+    '-E, --entry-point <entryPoint>',
+    'Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C'
+  )
+  .option(
     '-A, --auth <auth>',
     'A string based on username:password that will be used in order to log-in inside our website'
   )
@@ -40,6 +44,12 @@ if (program.clean) {
   rimraf.sync(REMOVE_ZIP_PATH)
   // console.log(' -> Removed! ✅'.green.bold)
 }
+
+let entryPoint
+if (program.entryPoint) {
+  entryPoint = path.resolve(program.entryPoint)
+}
+
 const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
   process.cwd(),
@@ -47,5 +57,5 @@ const OUTPUT_ZIP_PATH = path.join(
 )
 ;(async () => {
   // console.log(' -> Compressing files... 🗄'.yellow)
-  await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg})
+  await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg, entryPoint})
 })()
