@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.8.0 (2020-07-06)
+
+
+### Features
+
+* use class properties from babel-preset-env ([439a4fd](https://github.com/SUI-Components/sui/commit/439a4fd356f3768ba80882416f6e614826c289d4))
+
+
+
 # 3.7.0 (2020-06-09)
 
 
