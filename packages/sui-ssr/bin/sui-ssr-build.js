@@ -3,13 +3,16 @@
 const program = require('commander')
 const rimraf = require('rimraf')
 const path = require('path')
+const fs = require('fs')
 const ncp = require('copy-paste')
 const webpack = require('webpack')
 
 const linkLoaderConfigBuilder = require('@s-ui/bundler/loaders/linkLoaderConfigBuilder')
 const serverConfigFactory = require('../compiler/server')
+const {removeMarkedTags} = require('../scripts/remove-tags')
 
 const BUILD_SERVER_PATH = path.join(process.cwd(), 'server')
+const PUBLIC_PATH = path.join(process.cwd(), 'public')
 
 program
   .option('-C, --clean', 'Remove build folder before create a new one')
@@ -70,6 +73,17 @@ const build = () =>
       const SERVER_ENTRY_POINT = path.join(
         BUILD_SERVER_PATH,
         jsonStats.assetsByChunkName.main
+      )
+
+      const html = fs.readFileSync(
+        path.join(PUBLIC_PATH, 'index.html'),
+        'utf-8'
+      )
+      const htmlWithoutThirdParties = removeMarkedTags(html)
+      fs.writeFileSync(
+        path.join(PUBLIC_PATH, 'index_without_third_parties.html'),
+        htmlWithoutThirdParties,
+        'utf-8'
       )
 
       program.verbose && console.log(`Webpack stats: ${stats}`)
