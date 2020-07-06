@@ -4,11 +4,18 @@ const archiver = require('archiver')
 const program = require('commander')
 const authDefinitionBuilder = require('./authDefinitionBuilder')
 
-module.exports = ({outputZipPath, pkg}) =>
+module.exports = ({outputZipPath, pkg, entryPoint}) =>
   new Promise((resolve, reject) => {
     const authVariableDefinition = program.auth
       ? authDefinitionBuilder(program.auth.split(':'))
       : ''
+
+    const entryPointPreWork = !entryPoint
+      ? ''
+      : 'COPY ./entry-point ./entry-point\nRUN chmod +x ./entry-point'
+
+    const entryPointLine = !entryPoint ? '' : 'ENTRYPOINT ["./entry-point"]'
+
     const output = program.outputFileName
       ? fs.createWriteStream(outputZipPath)
       : process.stdout
@@ -37,12 +44,10 @@ module.exports = ({outputZipPath, pkg}) =>
       }
     )
 
-    archive.append(
-      fs.readFileSync(path.join(__dirname, 'start-app.sh'), 'utf8'),
-      {
-        name: 'start-app.sh'
-      }
-    )
+    entryPoint &&
+      archive.append(fs.readFileSync(entryPoint, 'utf8'), {
+        name: 'entry-point'
+      })
 
     archive.append(
       fs
@@ -54,7 +59,9 @@ module.exports = ({outputZipPath, pkg}) =>
     archive.append(
       fs
         .readFileSync(path.join(__dirname, 'Dockerfile.tpl'), 'utf8')
-        .replace('{{AUTH_VARIABLES}}', authVariableDefinition),
+        .replace('{{AUTH_VARIABLES}}', authVariableDefinition)
+        .replace('{{ENTRYPOINT_PREWORK}}', entryPointPreWork)
+        .replace('{{ENTRYPOINT}}', entryPointLine),
       {name: 'Dockerfile'}
     )
     archive.directory(path.join(process.cwd(), 'public'), 'public')

@@ -46,6 +46,7 @@ It will, over parameter, make that the express server run over a username and pa
   Options:
 
     -C, --clean  Remove previous zip
+    -E, --entry-point Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C
     -h, --help   output usage information
     -A, --auth <username:password> Will build the express definition under authentication htpassword like.
     -O, --outputFileName <outputFileName> A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
@@ -61,6 +62,30 @@ It will, over parameter, make that the express server run over a username and pa
 ### IMPORTANT!!
 
 If no outputFileName is provided it will pipe the standard output stream `process.stdout`
+
+### Custom Entrypoint
+
+In most scenarios the default configuration of the Dockerfile should be sufficient to start the sui-ssr server. But it is possible that in some more extreme cases, you will need to do some work inside the container before you start the server.
+For those extreme cases you can use the `--entry-point` option in the `archive` command. You have to provide the path to an "executable" file that will do the ENTRYPOINT functions of your container.
+
+Changing this, can be very dangerous and you have to know very well what you are doing, or you can leave the server unusable. Above all, do what you do, make sure you run whatever you get as arguments to the script. Because this will be the default command for the container
+
+Here is an example of a possible script. It deletes a series of Environment Variables using a RegExp, before starting the server. Notice the last line, how we make sure to execute what comes to it by arguments
+
+```sh
+#!/usr/bin/env sh
+
+FILTER="^FOO_|^BAR_"
+
+for var in $(printenv | grep -E "$FILTER"); do
+    unset "$var"
+done
+
+echo "System Env variables after filter:"
+printenv
+
+exec "$@"
+```
 
 ## Release
 
