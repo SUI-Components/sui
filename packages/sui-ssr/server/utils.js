@@ -3,6 +3,7 @@ import fs from 'fs'
 import ssrConf from './config'
 
 const INDEX_FILE = 'index.html'
+const INDEX_WITHOUT_THIRD_PARTIES_FILE = 'index_without_third_parties.html'
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
 const EXPRESS_STATIC_CONFIG = {index: false}
@@ -44,7 +45,12 @@ export const useStaticsByHost = expressStatic => {
 }
 
 export const readHtmlTemplate = req => {
-  const filePath = path.join(process.cwd(), publicFolderByHost(req), INDEX_FILE)
+  const index =
+    ssrConf.queryDisableThirdParties &&
+    req.query[ssrConf.queryDisableThirdParties] !== undefined
+      ? INDEX_WITHOUT_THIRD_PARTIES_FILE
+      : INDEX_FILE
+  const filePath = path.join(process.cwd(), publicFolderByHost(req), index)
 
   return fs.readFileSync(filePath, 'utf8')
 }
