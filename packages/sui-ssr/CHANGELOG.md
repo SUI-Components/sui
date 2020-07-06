@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.6.0 (2020-07-06)
+
+
+### Features
+
+* add flag to define a custom entrypoint ([28dc7b7](https://github.com/SUI-Components/sui/commit/28dc7b70c2eef27e24f2f885e1ef8774aa73bcf8))
+* allow use an alternative entrypoint ([2b83bf4](https://github.com/SUI-Components/sui/commit/2b83bf4e98ae1984b61699cf0d2160eb4f3f60c0))
+
+
+
 # 7.5.0 (2020-07-06)
 
 
