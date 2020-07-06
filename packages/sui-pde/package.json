@@ -1,8 +1,8 @@
 {
   "name": "@s-ui/pde",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
