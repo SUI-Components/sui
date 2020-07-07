@@ -176,6 +176,9 @@ This tool works with zero configuration out the box but you could use some confi
     "sourcemaps": {
       "dev": "cheap-module-eval-source-map",
       "prod": "hidden-source-map"
+    },
+    "optimizations": {
+      "splitFrameworkOnChunk": true
     }
   }
 }
@@ -351,6 +354,12 @@ Different values can be configured for development (`dev`) and production (`prod
 
 
 Check all possible values accepted by webpack in the [devtool webpack docs](https://webpack.js.org/configuration/devtool/#devtool)
+
+## Optimizations
+
+You could tweak the performance of your bundle generation by using some flags provided in this config.
+
+`splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
 
 ## Contributing
 
