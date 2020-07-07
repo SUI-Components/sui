@@ -1,29 +1,27 @@
 /* eslint-disable no-console */
+const webpack = require('webpack')
+const path = require('path')
+const zlib = require('zlib')
+
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const path = require('path')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-
 const {GenerateSW} = require('workbox-webpack-plugin')
+
+const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const minifyJs = require('./shared/minify-js')
-const webpack = require('webpack')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-
-const zlib = require('zlib')
-const hasBrotliSupport = Boolean(zlib.brotliCompress)
-
+const {splitChunks} = require('./shared/optimization-split-chunks')
 const {
   navigateFallbackDenylist,
   navigateFallback,
   runtimeCaching
 } = require('./shared/precache')
-
-const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const {sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
 
@@ -31,6 +29,11 @@ const Externals = require('./plugins/externals')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
+
+const hasBrotliSupport = Boolean(zlib.brotliCompress)
+const filename = config.onlyHash
+  ? '[contenthash:8].js'
+  : '[name].[contenthash:8].js'
 
 module.exports = {
   devtool: sourceMap,
@@ -48,14 +51,10 @@ module.exports = {
     : MAIN_ENTRY_POINT,
   target: 'web',
   output: {
+    chunkFilename: filename,
+    filename,
     path: path.resolve(process.env.PWD, 'public'),
-    publicPath: PUBLIC_PATH,
-    filename: config.onlyHash
-      ? '[contenthash:8].js'
-      : '[name].[contenthash:8].js',
-    chunkFilename: config.onlyHash
-      ? '[contenthash:8].js'
-      : '[name].[contenthash:8].js'
+    publicPath: PUBLIC_PATH
   },
   optimization: {
     minimizer: [
@@ -65,17 +64,7 @@ module.exports = {
       })
     ],
     runtimeChunk: true,
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: 'all',
-          name: 'vendor',
-          test: 'vendor',
-          enforce: true,
-          reuseExistingChunk: true
-        }
-      }
-    }
+    splitChunks
   },
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
