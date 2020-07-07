@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.13.0 (2020-07-07)
+
+
+### Features
+
+* add framework separation config ([f33012f](https://github.com/SUI-Components/sui/commit/f33012f4a2f005fbb135e191cb0104764de98b44))
+
+
+
 # 6.12.0 (2020-07-06)
 
 
