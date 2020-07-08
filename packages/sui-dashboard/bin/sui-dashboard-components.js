@@ -4,7 +4,7 @@
 const os = require('os')
 const path = require('path')
 const program = require('commander')
-const {parallelSpawn} = require('@s-ui/helpers/cli')
+const {parallelSpawn, serialSpawn} = require('@s-ui/helpers/cli')
 const {stats} = require('../src')
 
 program
@@ -88,7 +88,7 @@ const installCommands = repositories.map(repo => [
 ;(async () => {
   await parallelSpawn(cloneSUIComponentsCommand)
   await parallelSpawn(cloneCommands)
-  await parallelSpawn(installCommands)
+  await serialSpawn(installCommands)
   const statsComponents = await stats({repositories, root: WORK_DIRECTORY})
 
   console.log(statsComponents)
