@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.22.0 (2020-07-08)
+
+
+### Features
+
+* use serial spawn over parallel ([9cff8bf](https://github.com/SUI-Components/sui/commit/9cff8bfe935675aff8db3c237213da428573d7fe))
+
+
+
 # 1.21.0 (2020-03-09)
 
 
