@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.14.0 (2020-07-09)
+
+
+### Features
+
+* upgrading dependencies to prepare to webpack 5 ([d5ba145](https://github.com/SUI-Components/sui/commit/d5ba1455eb040ecc7cad5954d5b717e2c1aa5208))
+
+
+
 # 6.13.0 (2020-07-07)
 
 
