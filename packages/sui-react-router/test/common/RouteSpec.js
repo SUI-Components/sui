@@ -57,10 +57,7 @@ describe('<Route>', () => {
     const Component = () => <div>Hello word</div>
     const regexp = /^\/deeplevel$/
     const withRoutes = (
-      <Route
-        path="/es"
-        component={({children}) => <h1>Layout: {children}</h1>}
-      >
+      <Route path="/es" component={({children}) => <h1>Layout: {children}</h1>}>
         <Route regexp={regexp} component={Component} />
       </Route>
     )
@@ -69,6 +66,38 @@ describe('<Route>', () => {
       withRoutes
     })
     expect(renderedString).to.equal('<h1>Layout: <div>Hello word</div></h1>')
+  })
+
+  it('RegExp allows group params', async () => {
+    const Component = ({router}) => {
+      return <div>{router.params.userId}</div>
+    }
+    const regexp = /user\/(?<userId>[0-9]+)$/
+    const withRoutes = <Route regexp={regexp} component={Component} />
+    const renderedString = await getRenderedString({
+      location: '/user/123',
+      withRoutes
+    })
+    expect(renderedString).to.equal('<div>123</div>')
+  })
+
+  it('RegExp allows many group params', async () => {
+    const Component = ({router}) => {
+      const {language, userId} = router.params
+      return (
+        <div>
+          <p>{language}</p>
+          <p>{userId}</p>
+        </div>
+      )
+    }
+    const regexp = /(?<language>[a-z]+)\/user\/(?<userId>[0-9]+)$/
+    const withRoutes = <Route regexp={regexp} component={Component} />
+    const renderedString = await getRenderedString({
+      location: '/es/user/123',
+      withRoutes
+    })
+    expect(renderedString).to.equal('<div><p>es</p><p>123</p></div>')
   })
 
   it('works with static paths', async () => {

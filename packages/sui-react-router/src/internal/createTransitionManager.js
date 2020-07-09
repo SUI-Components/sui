@@ -37,8 +37,9 @@ const findRedirect = nodes => {
  */
 const makePromise = (getComponent, routeInfo) =>
   new Promise((resolve, reject) => {
-    getComponent(routeInfo, (err, component) =>
-      err ? reject(err) : resolve(component)
+    getComponent(
+      routeInfo,
+      (err, component) => (err ? reject(err) : resolve(component))
     )
   })
 
@@ -82,11 +83,17 @@ const createReducerRoutesTree = location => (acc, node) => {
 
   if (regexp) {
     const match = remainingPathname.match(regexp)
+
     if (match) {
       acc = {
         ...acc,
         remainingPathname: '',
         nodes: [...acc.nodes, node]
+      }
+
+      if (match.groups) {
+        acc.paramNames = [...paramNames, ...Object.keys(match.groups)]
+        acc.paramValues = [...paramNames, ...Object.values(match.groups)]
       }
 
       acc.isFinished = checkIntegrity(acc.nodes)
@@ -218,10 +225,9 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
         listener(null, {params: state.params, components: state.components})
       } else {
         try {
-          const {
-            redirectLocation,
-            components
-          } = await matchRouteAndUpdateState({jsonRoutes, location})
+          const {redirectLocation, components} = await matchRouteAndUpdateState(
+            {jsonRoutes, location}
+          )
 
           if (redirectLocation) {
             return history.replace(redirectLocation)
