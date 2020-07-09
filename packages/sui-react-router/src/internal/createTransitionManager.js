@@ -70,11 +70,29 @@ const createReducerRoutesTree = location => (acc, node) => {
   if (acc.isFinished) return acc
   if (node.index) return acc
 
-  const {path: pattern = ''} = node
+  let {path: pattern, regexp} = node
+  if (!regexp && !pattern) {
+    pattern = ''
+  }
 
   acc = {
     ...acc,
     nodes: acc.nodes.filter(n => n.level < node.level)
+  }
+
+  if (regexp) {
+    const match = remainingPathname.match(regexp)
+    if (match) {
+      acc = {
+        ...acc,
+        remainingPathname: '',
+        nodes: [...acc.nodes, node]
+      }
+
+      acc.isFinished = checkIntegrity(acc.nodes)
+
+      return acc
+    }
   }
 
   if (pattern.charAt(0) === '/') {

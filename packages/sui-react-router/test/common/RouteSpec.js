@@ -29,6 +29,48 @@ describe('<Route>', () => {
     throw new Error('not supposed to be rendered')
   }
 
+  it('work with a regexp', async () => {
+    const Component = () => <div>Hello word</div>
+    const regexp = /^\/es$/
+    const withRoutes = <Route regexp={regexp} component={Component} />
+    const renderedString = await getRenderedString({
+      location: '/es',
+      withRoutes
+    })
+    expect(renderedString).to.equal('<div>Hello word</div>')
+  })
+
+  it('Path over Regexp', async () => {
+    const Component = () => <div>Hello word</div>
+    const regexp = /^\/de$/
+    const withRoutes = (
+      <Route path="/es" regexp={regexp} component={Component} />
+    )
+    const renderedString = await getRenderedString({
+      location: '/es',
+      withRoutes
+    })
+    expect(renderedString).to.equal('<div>Hello word</div>')
+  })
+
+  it('RegExp in deeper level', async () => {
+    const Component = () => <div>Hello word</div>
+    const regexp = /^\/deeplevel$/
+    const withRoutes = (
+      <Route
+        path="/es"
+        component={({children}) => <h1>Layout: {children}</h1>}
+      >
+        <Route regexp={regexp} component={Component} />
+      </Route>
+    )
+    const renderedString = await getRenderedString({
+      location: '/es/deeplevel',
+      withRoutes
+    })
+    expect(renderedString).to.equal('<h1>Layout: <div>Hello word</div></h1>')
+  })
+
   it('works with static paths', async () => {
     const withRoutes = (
       <>

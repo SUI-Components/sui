@@ -26,6 +26,7 @@ export type Route = {
   component?: RouteComponent
   getComponent?: () => Promise<RouteComponent>
   path?: RoutePattern
+  regexp: RouteRegExp
 }
 
 export type Router = RouterState & {
@@ -50,6 +51,7 @@ export type RouterState = RouteInfo & {
 export type RouteComponent = Component
 
 export type RoutePattern = string
+export type RouteRegExp = RegExp
 
 export type Location = {
   action: Action
