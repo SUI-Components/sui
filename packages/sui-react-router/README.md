@@ -215,6 +215,22 @@ const refCallback = node => {
 <Link to="/" innerRef={refCallback} />
 ```
 
+## Route
+
+### RegExp
+
+> Warning: If you solve a problem with a RegExp, you end up with two problems. The original and the RegExp.
+
+You can define a route in your application using a RegExp. And in this way simplify in certain scenarios the number of Route components you have to define.
+
+##### regexp
+```js
+<Route regexp={/\/(?<language>[a-z]+)\/user\/(?<userId>[0-9]+)$/} component={Component} />
+```
+
+Here we see that in addition to being able to match a regexp, you can manage to capture fragments of the URL using named groups. These captures you will find them in the params object like any other parameter.
+It is VERY important that you are careful when using a RegExp, because it has to be as inclusive as possible. This means that if you use it and the page doesn't work it is very likely that your regex will not consume the entire URL.
+
 ## Hooks
 
 ### useLocation
