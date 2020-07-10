@@ -13,7 +13,7 @@ function processImages({path, host}) {
   const imageFileNames = getImageFileNames(files, IMAGES_FOLDER)
 
   const json = {
-    host: host || 'localhost',
+    host,
     images: imageFileNames
   }
 
