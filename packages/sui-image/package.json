@@ -1,0 +1,32 @@
+{
+  "name": "sui-image",
+  "version": "1.0.0",
+  "description": "```sh $ npm install @s-ui/image --save ```",
+  "scripts": {
+    "test": "exit 0",
+    "lint": "sui-lint js && sui-lint sass"
+  },
+  "bin": {
+    "sui-image": "./bin/sui-image.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "7.8.4",
+    "@s-ui/bundler": "6",
+    "@s-ui/component-peer-dependencies": "latest",
+    "@s-ui/helpers": "1",
+    "@s-ui/lint": "3",
+    "babel-preset-sui": "3",
+    "commander": "5.1.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
+}
