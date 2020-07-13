@@ -180,7 +180,7 @@ Common for both LRU and Redis:
 
 * size: Maximum number of registers in the cache, when they exceed this number they will be erased (default: `100`)
 
-* cacheKeyString: String param containing cache key(it must be unique). It is useful to define a fixed cache key(constructor name + function name, e.g. `cacheKeyString: GetAdListSearchUseCase#execute`) and avoid problems with code minification. By default the following cache key will be created for  each `${target.constructor.name}::${fnName}` (default: `undefined`)
+* cacheKeyString: String param containing cache key(it must be unique). It is useful to define a fixed cache key(constructor name + function name, e.g. `cacheKeyString: GetAdListSearchUseCase#execute`) and avoid problems with code minification. By default the following cache key will be created for `${target.constructor.name}::${fnName}` (default: `undefined`)
 
 Only for Redis:
 
