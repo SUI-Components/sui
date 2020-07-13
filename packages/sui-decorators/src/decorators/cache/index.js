@@ -25,7 +25,7 @@ const _cache = ({
 } = {}) => {
   const shouldUseRedisCache = redis && isNode
   const shouldUseMemoryCache = !isNode || !redis
-  const cacheKey = cacheKeyString ?? `${target.constructor.name}::${fnName}`
+  const cacheKey = cacheKeyString || `${target.constructor.name}::${fnName}`
 
   let cache = caches[cacheKey]
 
