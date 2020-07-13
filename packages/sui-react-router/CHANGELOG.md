@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.3.0 (2020-07-13)
+
+
+### Features
+
+* add regexp property to the route component ([20119f8](https://github.com/SUI-Components/sui/commit/20119f847268cc768f606490446ae9041927dc0b))
+* added param groups in regex. Added tests too ([eaaa349](https://github.com/SUI-Components/sui/commit/eaaa34947595af5cca5cedd7ce3607a8cba228f5))
+* allow use regexp in middle of your routes definitions ([c3da38f](https://github.com/SUI-Components/sui/commit/c3da38f27b3fef3a83930ab53b3ec8ab7a9d366e))
+
+
+
 # 1.2.0 (2020-06-16)
 
 
