@@ -14,7 +14,7 @@ import compression from 'compression'
 import ssrConf from './config'
 import {
   isMultiSite,
-  siteFromReq,
+  hostFromReq,
   useStaticsByHost,
   readHtmlTemplate
 } from './utils'
@@ -114,7 +114,7 @@ const _memoizedHtmlTemplatesMapping = {}
     // Since `_memoizedHtmlTemplatesMapping` will be always an object
     // we need to define a key for each multisite and one default
     // for single sites too.
-    const site = isMultiSite ? siteFromReq(req) : 'default'
+    const site = isMultiSite ? hostFromReq(req) : 'default'
     const memoizedHtmlTemplate =
       _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
 

@@ -14,13 +14,20 @@ const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
 export const isMultiSite =
   multiSiteKeys && multiSiteKeys.length > 0 && multiSiteKeys.includes('default')
 
-export const siteFromReq = (req, header = DEFAULT_SITE_HEADER) =>
+export const hostFromReq = (req, header = DEFAULT_SITE_HEADER) =>
   req.get(header) || req.hostname
 
-export const publicFolderByHost = req =>
-  isMultiSite
-    ? multiSiteMapping[siteFromReq(req)] || multiSiteMapping.default
-    : DEFAULT_PUBLIC_FOLDER
+export const hostPattern = req => {
+  const host = hostFromReq(req)
+
+  return multiSiteKeys.find(hostPattern => host.match(hostPattern)) || 'default'
+}
+
+export const publicFolderByHost = req => {
+  const site = hostPattern(req)
+
+  return isMultiSite ? multiSiteMapping[site] : DEFAULT_PUBLIC_FOLDER
+}
 
 export const useStaticsByHost = expressStatic => {
   let middlewares
@@ -35,9 +42,9 @@ export const useStaticsByHost = expressStatic => {
   }
 
   return function serveStaticByHost(req, res, next) {
-    const site = siteFromReq(req)
+    const site = hostPattern(req)
     const middleware = isMultiSite
-      ? middlewares[site] || middlewares.default
+      ? middlewares[site]
       : expressStatic(DEFAULT_PUBLIC_FOLDER, EXPRESS_STATIC_CONFIG)
 
     middleware(req, res, next)
