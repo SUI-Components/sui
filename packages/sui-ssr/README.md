@@ -46,6 +46,7 @@ It will, over parameter, make that the express server run over a username and pa
   Options:
 
     -C, --clean  Remove previous zip
+    -E, --entry-point Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C
     -h, --help   output usage information
     -A, --auth <username:password> Will build the express definition under authentication htpassword like.
     -O, --outputFileName <outputFileName> A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
@@ -61,6 +62,30 @@ It will, over parameter, make that the express server run over a username and pa
 ### IMPORTANT!!
 
 If no outputFileName is provided it will pipe the standard output stream `process.stdout`
+
+### Custom Entrypoint
+
+In most scenarios the default configuration of the Dockerfile should be sufficient to start the sui-ssr server. But it is possible that in some more extreme cases, you will need to do some work inside the container before you start the server.
+For those extreme cases you can use the `--entry-point` option in the `archive` command. You have to provide the path to an "executable" file that will do the ENTRYPOINT functions of your container.
+
+Changing this, can be very dangerous and you have to know very well what you are doing, or you can leave the server unusable. Above all, do what you do, make sure you run whatever you get as arguments to the script. Because this will be the default command for the container
+
+Here is an example of a possible script. It deletes a series of Environment Variables using a RegExp, before starting the server. Notice the last line, how we make sure to execute what comes to it by arguments
+
+```sh
+#!/usr/bin/env sh
+
+FILTER="^FOO_|^BAR_"
+
+for var in $(printenv | grep -E "$FILTER"); do
+    unset "$var"
+done
+
+echo "System Env variables after filter:"
+printenv
+
+exec "$@"
+```
 
 ## Release
 
@@ -194,6 +219,7 @@ For example:
 
 Configs accepted:
 
+- **`queryDisableThirdParties`** (`undefined`): Any text string that goes in this option, will be taken as the QueryParam value that has to be present in the URL, to remove from the answer (index.html) the tags marked as Third Party.
 - **`forceWWW`** (`false`): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
 
 - **`earlyFlush`** (`true`): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
@@ -308,6 +334,117 @@ SOME_OTHER_ENV_VAR: https://pre.somedomain.com/contact
 
 SUI-SSR allows 301 redirects in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
 Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
+
+## Third Parties
+
+It is very likely that for performance reasons you will want to put the third party scripts directly into the index.html of your page.
+
+Although there is nothing wrong with that, you might be interested in measuring the performance of your site, without loading all these scripts. To do this, you would have to mark them with an HTML comment so that they can be removed from the server response, if the request is made with a QueryParam that matches the value set in `queryDisableThirdParties` in your application's sui-ssr configuration.
+
+If this were your `src/index.html` file:
+
+```html
+<html>
+<head>
+  <link rel="preconnect dns-prefetch" href="<%= CDN %>">
+  <!--THIRD_PARTY--><link rel="preconnect dns-prefetch" href="//c.dcdn.es">
+  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.es">
+  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.com">
+  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.googletagmanager.com">
+
+  <!-- ShellAPP -->
+  <% if (css && vendor && app) { %>
+    <link as="style" rel="preload" href="<%= css %>">
+    <link as="script" rel="preload" href="<%= vendor.entry %>">
+    <link as="script" rel="preload" href="<%= app.entry %>">
+  <% } %>
+
+  <!-- ThridPartyScripts -->
+
+  <!-- Advertisement -->
+  <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= utagScript %>">
+  <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= openAdsScript %>">
+
+  <!-- Load 3th parties and ShellAPP -->
+  <% if (vendor && app) { %>
+    <script defer importance="high" src="<%= vendor.entry %>"></script>
+    <script defer importance="high" src="<%= app.entry %>"></script>
+  <% } %>
+
+  <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
+  <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
+  
+</head>
+
+<body>
+  <div id="app" class="app">
+    <!-- APP -->
+  </div>
+</body>
+
+</html>
+```
+
+and this is a fragment of his sui-ssr configuration in your package.json
+
+```json
+{
+  "config": {
+    "sui-ssr": {
+      "queryDisableThirdParties": "disable-third-parties",
+    }
+  }
+}
+```
+
+by making a request like this: GET /?disable-third-parties
+
+The sui-ssr response would be an HTML like the following:
+
+
+```html
+<html>
+<head>
+  <link rel="preconnect dns-prefetch" href="<%= CDN %>">
+  <!--THIRD_PARTY-->
+  <!--THIRD_PARTY-->
+  <!--THIRD_PARTY-->
+  <!--THIRD_PARTY-->
+
+  <!-- ShellAPP -->
+  <% if (css && vendor && app) { %>
+    <link as="style" rel="preload" href="<%= css %>">
+    <link as="script" rel="preload" href="<%= vendor.entry %>">
+    <link as="script" rel="preload" href="<%= app.entry %>">
+  <% } %>
+
+  <!-- ThridPartyScripts -->
+
+  <!-- Advertisement -->
+  <!--THIRD_PARTY-->
+  <!--THIRD_PARTY-->
+
+  <!-- Load 3th parties and ShellAPP -->
+  <% if (vendor && app) { %>
+    <script defer importance="high" src="<%= vendor.entry %>"></script>
+    <script defer importance="high" src="<%= app.entry %>"></script>
+  <% } %>
+
+  <!--THIRD_PARTY-->
+  <!--THIRD_PARTY-->
+  
+</head>
+
+<body>
+  <div id="app" class="app">
+    <!-- APP -->
+  </div>
+</body>
+
+</html>
+```
+
+And this ensures that you are only measuring the performance impact of your platform.
 
 ## Use the ssr in a lambda function
 

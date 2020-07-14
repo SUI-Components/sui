@@ -2,6 +2,60 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.6.0 (2020-07-06)
+
+
+### Features
+
+* add flag to define a custom entrypoint ([28dc7b7](https://github.com/SUI-Components/sui/commit/28dc7b70c2eef27e24f2f885e1ef8774aa73bcf8))
+* allow use an alternative entrypoint ([2b83bf4](https://github.com/SUI-Components/sui/commit/2b83bf4e98ae1984b61699cf0d2160eb4f3f60c0))
+
+
+
+# 7.5.0 (2020-07-06)
+
+
+### Features
+
+* avoid cache index html w/out third parties ([e1c978f](https://github.com/SUI-Components/sui/commit/e1c978f2c3f1f6c7b9c9844da4381c966b430fc0))
+* dont user memoize template ([415cc95](https://github.com/SUI-Components/sui/commit/415cc9538f7407deeca14604d20c1094b5d9b8b4))
+* remove 3th party scripts using an AST ([e082ae6](https://github.com/SUI-Components/sui/commit/e082ae6daa5dcc676f90b2fd5daae63af83ef9e4))
+
+
+
+# 7.4.0 (2020-07-03)
+
+
+### Bug Fixes
+
+* fix node version to 14-alpine in dockerfile.tpl ([aa6c57d](https://github.com/SUI-Components/sui/commit/aa6c57d61169053e00e3b303c754b42876d1b451))
+
+
+
+# 7.3.0 (2020-06-26)
+
+
+### Bug Fixes
+
+* remove double encodeURIComponent ([bb5f501](https://github.com/SUI-Components/sui/commit/bb5f501e4914160191e31d063714b2c97cd34b59))
+
+
+### Features
+
+* migrate to the new CriticalCSS URL ([95aa20e](https://github.com/SUI-Components/sui/commit/95aa20e773004281401f0d9b227a27f7d82dcd46))
+* send empty object if there is not extraCustomHeaders ([c600355](https://github.com/SUI-Components/sui/commit/c60035526d0e05f5bc351bad59e38f1571e7a24a))
+
+
+
+# 7.2.0 (2020-06-25)
+
+
+### Bug Fixes
+
+* fix possible xss ([5216b47](https://github.com/SUI-Components/sui/commit/5216b47b48aeeb496e9a5b5a620a70361026bdf3))
+
+
+
 # 7.1.0 (2020-06-11)
 
 

@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.14.0 (2020-07-09)
+
+
+### Features
+
+* upgrading dependencies to prepare to webpack 5 ([d5ba145](https://github.com/SUI-Components/sui/commit/d5ba1455eb040ecc7cad5954d5b717e2c1aa5208))
+
+
+
+# 6.13.0 (2020-07-07)
+
+
+### Features
+
+* add framework separation config ([f33012f](https://github.com/SUI-Components/sui/commit/f33012f4a2f005fbb135e191cb0104764de98b44))
+
+
+
+# 6.12.0 (2020-07-06)
+
+
+### Features
+
+* upgrade node-sass to get Node 14 bindings ([cd8e240](https://github.com/SUI-Components/sui/commit/cd8e240cb30bc921b2d8aff591c6cf8979b6de0e))
+
+
+
+# 6.11.0 (2020-07-01)
+
+
+### Features
+
+* use fixed number of cores for Travis ([667868e](https://github.com/SUI-Components/sui/commit/667868e5cf18870c2b9b7ba3516417ed98efe693))
+
+
+
+# 6.10.0 (2020-06-30)
+
+
+### Features
+
+* create a new Request for each entry in the manifest ([4884ad0](https://github.com/SUI-Components/sui/commit/4884ad0c7aaae57d1ca4c49bacccb58fdbd22579))
+
+
+
 # 6.9.0 (2020-06-22)
 
 

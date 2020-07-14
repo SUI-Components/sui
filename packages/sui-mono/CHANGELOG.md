@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.49.0 (2020-06-30)
+
+
+### Features
+
+* single scope phoenix ([02a92b3](https://github.com/SUI-Components/sui/commit/02a92b37454a1592d2e240de5a24d6a214af1e97))
+
+
+
 # 1.48.0 (2020-01-17)
 
 

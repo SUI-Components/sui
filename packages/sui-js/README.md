@@ -1,4 +1,5 @@
 # sui-js
+
 > Set of useful js utilities
 
 ```sh
@@ -6,6 +7,7 @@ $ npm install @s-ui/js --save
 ```
 
 ## pipe
+
 Consist of a chain of processing functions, where the output of each element is the input of next
 
 ```js
@@ -19,6 +21,7 @@ console.log(pipe(textToUpperCase, textToArray)(title)) // ["S", "C", "H", "I", "
 ```
 
 ## asyncPipe
+
 Consist of a chain of processing async and sync functions, where the output of each element is the input of next. The result is a promise.
 
 ```js
@@ -34,6 +37,7 @@ asyncPipe(textToUpperCase, textToArray)(title).then(result => {
 ```
 
 ## cookie
+
 Parse, get and set cookies. Returns an object `cookie` with `parse`, `get` and `set` methods.
 
 **Note:** `set` method does not work on server side.
@@ -51,14 +55,15 @@ const smartBannerCookie = getCookie('smartbanner')
 
 // Set
 const {set: setCookie} = cookie
-const setSmartBannerCookie = setCookie('smartbanner', 1, { expires: 7, path: '' })
+const setSmartBannerCookie = setCookie('smartbanner', 1, {expires: 7, path: ''})
 ```
 
 ## events
+
 Creates an event and dispatches it
 
 ```js
-import { dispatchEvent } from '@s-ui/js/lib/events'
+import {dispatchEvent} from '@s-ui/js/lib/events'
 
 dispatchEvent({
   eventName: 'NAME_OF_THE_EVENT_TO_DISPATCH',
@@ -69,11 +74,33 @@ dispatchEvent({
 })
 ```
 
+## function
+
+Creates a debounced function that delays invoking func until after wait milliseconds have elapsed since the last time the debounced function was invoked.
+
+Arguments
+func (Function): The function to debounce.
+[wait=0](number): The number of milliseconds to delay.
+[options={}](Object): The options object.
+[options.leading=false](boolean): Specify invoking on the leading edge of the timeout.
+[options.maxWait](number): The maximum time func is allowed to be delayed before it's invoked.
+[options.trailing=true](boolean): Specify invoking on the trailing edge of the timeout.
+
+Returns
+(Function): Returns the new debounced function.
+
+```js
+import {debounce} from '@s-ui/js/lib/function'
+
+const callback = debounce(() => {}, 300)
+```
+
 ## hash
+
 Creates an insecure, but with pretty low collisions, hash based on MD5. Returns a string with the hash.
 
 ```js
-import { createHash } from '@s-ui/js/lib/hash'
+import {createHash} from '@s-ui/js/lib/hash'
 
 const stringToHash = 'This is the string that we will hash'
 const md5Hash = createHash(stringToHash)
@@ -82,29 +109,28 @@ console.log(md5Hash) // f97ed77ff4770b7d8f0a018223823d3b
 ```
 
 ## string
+
 A bunch of string utilities: remove accents, parse query strings...
 
 ```js
-import { removeAccents, hasAccents } from '@s-ui/js/lib/string'
+import {removeAccents, hasAccents} from '@s-ui/js/lib/string'
 
 console.log(removeAccents('París')) // "Paris"
 console.log(hasAccents('Árbol')) // true
-
 
 import {parseQueryString} from '@s-ui/js/lib/string'
 
 console.log(parseQueryString('?targetPage=pta')) // {targetPage: "pta"}
 
-
 import {fromArrayToCommaQueryString} from '@s-ui/js/lib/string'
 
-console.log(fromArrayToCommaQueryString({userId: 1, adId: 2, products: [3, 4, 5]})) // 'userId=1&adId=2&products=3,4,5'
-
+console.log(
+  fromArrayToCommaQueryString({userId: 1, adId: 2, products: [3, 4, 5]})
+) // 'userId=1&adId=2&products=3,4,5'
 
 import {htmlStringToReactElement} from '@s-ui/js/lib/string'
 
 htmlStringToReactElement('<p>No more dangerouslySetInnerHTML</p>')
-
 
 import {getRandomString} from '@s-ui/js/lib/string'
 
@@ -113,10 +139,9 @@ const randomString = getRandomString(randomStringLength)
 console.log(randomString.length) // log = 6 || 15 by default
 console.log(randomString) // qwerty
 
-
 import {toQueryString} from '@s-ui/js/lib/string'
 
-// example without setting encode option 
+// example without setting encode option
 const queryParams = {a: 1, b: 'lorem/ipsum', m: [1, 2]}
 const options = {arrayFormat: 'repeat', delimiter: ':'}
 const queryString = toQueryString(queryParams, options)
@@ -131,15 +156,15 @@ console.log(queryString) // 'a=1&b=lorem/ipsum&m=1,2'
 import {highlightText} from '@s-ui/js/lib/string'
 
 const highlightedText = highlightText({
-    value: 'Cádiz',
-    query: 'ca',
-    startTag: '<strong>',
-    endTag: '</strong>'
-  }) // "<strong>Cá</strong>diz
-
+  value: 'Cádiz',
+  query: 'ca',
+  startTag: '<strong>',
+  endTag: '</strong>'
+}) // "<strong>Cá</strong>diz
 ```
 
 ## ua-parser
+
 A user agent parser. Returns an object `stats`
 
 ```text
@@ -160,6 +185,7 @@ domain.config('osName', osName) // string
 ```
 
 ## classes
+
 Utilities to easily format classNames following the current convention for component-{children}-element--modifier
 
 ```js

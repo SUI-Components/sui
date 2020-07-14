@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.14.0 (2020-06-26)
+
+
+### Bug Fixes
+
+* fix sui-studio build bundle ([5f94962](https://github.com/SUI-Components/sui/commit/5f949629b4f37c658cd617efec31462bac407f3c))
+
+
+
 # 8.13.0 (2020-06-23)
 
 

@@ -2,10 +2,25 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
+import {Router, Route} from '@s-ui/react-router'
 import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
-import {tryRequireContext, tryRequireComponent} from '../components/tryRequire'
+import {requireFile} from '../components/tryRequire'
+
+export const tryRequireContext = ({category, component}) =>
+  requireFile({
+    defaultValue: false,
+    importFile: () =>
+      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
+  })
+
+export const tryRequireComponent = ({category, component}) =>
+  requireFile({
+    defaultValue: false,
+    importFile: () =>
+      import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`)
+  })
 
 const originalKarmaLoader = window.__karma__.loaded
 window.__karma__.loaded = () => {}
@@ -48,9 +63,17 @@ const enhanceComponent = displayName => {
     activeContext
   )(ActiveComponent)
 
+  const fakeRouter = activeContext.router
   const NextComponent = props => (
     <SUIContext.Provider value={activeContext.default}>
-      <EnhanceComponent {...props} />
+      <Router fakeRouter={fakeRouter}>
+        <Route
+          path="/"
+          component={() => {
+            return <EnhanceComponent {...props} />
+          }}
+        />
+      </Router>
     </SUIContext.Provider>
   )
   hoistNonReactStatics(NextComponent, ActiveComponent)
