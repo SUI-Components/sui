@@ -20,11 +20,12 @@ const _cache = ({
   size,
   target,
   ttl,
-  redis
+  redis,
+  cacheKeyString
 } = {}) => {
   const shouldUseRedisCache = redis && isNode
   const shouldUseMemoryCache = !isNode || !redis
-  const cacheKey = `${target.constructor.name}::${fnName}`
+  const cacheKey = cacheKeyString || `${target.constructor.name}::${fnName}`
 
   let cache = caches[cacheKey]
 
@@ -51,7 +52,7 @@ const _cache = ({
   }
 
   return shouldUseRedisCache
-    ? inRedis(target, cache, original, fnName, instance, ttl)
+    ? inRedis(target, cache, original, fnName, instance, ttl, cacheKey)
     : inMemory(target, cache, original, fnName, instance, ttl)
 }
 
@@ -60,7 +61,8 @@ export default ({
   server = false,
   algorithm = ALGORITHMS.LRU,
   size,
-  redis
+  redis,
+  cacheKeyString
 } = {}) => {
   const timeToLife = stringOrIntToMs({ttl}) || DEFAULT_TTL
   return (target, fnName, descriptor) => {
@@ -107,7 +109,8 @@ export default ({
             size,
             target,
             ttl: timeToLife,
-            redis
+            redis,
+            cacheKeyString
           })
 
           Object.defineProperty(this, fnName, {

@@ -4,9 +4,7 @@ import isPromise from '../../../helpers/isPromise'
 export const inMemory = (target, cache, original, fnName, instance, ttl) => (
   ...args
 ) => {
-  const key = `${target.constructor.name}::${fnName}::${createHash(
-    JSON.stringify(args)
-  )}`
+  const key = createHash(JSON.stringify(args))
   const now = Date.now()
 
   if (cache.get(key) === undefined) {

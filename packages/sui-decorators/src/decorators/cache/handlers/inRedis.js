@@ -10,20 +10,22 @@ export const inRedis = (
   original,
   fnName,
   instance,
-  ttl
+  ttl,
+  cacheKey
 ) => async (...args) => {
   const key = `${VERSION_NAMESPACE_TAG}${createHash(JSON.stringify(args))}`
-
   const cacheItem = await cache.get(key)
   let response
 
   if (!cacheItem) {
-    console.log(`[sui-decorators/cache]:inRedis Miss for key: ${key}. `)
+    console.log(
+      `[sui-decorators/cache]:inRedis Miss for key(${cacheKey}): ${key}`
+    )
     try {
       response = await original.apply(instance, args)
     } catch (err) {
       console.error(
-        `[sui-decorators/cache]:inRedis Error getting original promise response for key: ${key}. `,
+        `[sui-decorators/cache]:inRedis Error getting original promise response for key(${cacheKey}): ${key}.`,
         err
       )
       return err
@@ -38,10 +40,14 @@ export const inRedis = (
 
     if (isInlineErrorResponseWithoutError || isNormalResponseWithoutError) {
       cache.set(key, response, ttl)
-      console.log(`[sui-decorators/cache]:inRedis Add key: ${key}. `)
+      console.log(
+        `[sui-decorators/cache]:inRedis Add key(${cacheKey}): ${key}. `
+      )
     }
   } else {
-    console.log(`[sui-decorators/cache]:inRedis Hit for key: ${key}. `)
+    console.log(
+      `[sui-decorators/cache]:inRedis Hit for key(${cacheKey}): ${key}. `
+    )
     return cacheItem
   }
 
