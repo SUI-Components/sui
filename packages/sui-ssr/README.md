@@ -242,19 +242,20 @@ Configs accepted:
         ]
        }
     }
-    ``` 
-  
+    ```
+
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
-- **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname (key) and public folder (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
+- **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname or hostname pattern (key as string) and public folder (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
 
   ```json
   {
     "multiSite": {
       "my-motorcycles.com": "public-motorcycles",
       "my-trucks.com": "public-trucks",
+      "v([0-9]+).my-trucks.com": "public-trucks",
       "default": "public-cars"
     }
   }
@@ -373,7 +374,7 @@ If this were your `src/index.html` file:
 
   <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
   <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
-  
+
 </head>
 
 <body>
@@ -432,7 +433,7 @@ The sui-ssr response would be an HTML like the following:
 
   <!--THIRD_PARTY-->
   <!--THIRD_PARTY-->
-  
+
 </head>
 
 <body>
