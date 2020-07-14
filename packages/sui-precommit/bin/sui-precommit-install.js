@@ -75,7 +75,7 @@ function removeFromPackageJson(name, field = DEFAULT_PKG_FIELD) {
 
 /**
  * Write package.json file where command was executed
- * @param  {object}  pkg New package content to be write on the file
+ * @param {object} pkg New package content to be write on the file
  */
 function writePackageJson(pkg) {
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), {encoding: 'utf8'})
@@ -83,7 +83,7 @@ function writePackageJson(pkg) {
 
 /**
  * Install husky on project
- * @return {Promise}
+ * @return {Promise<number>}
  */
 function installHuskyIfNotInstalled() {
   if (!isHuskyInstalled()) {

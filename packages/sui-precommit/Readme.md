@@ -2,7 +2,7 @@
 
 > Effortless SUI precommit rules integration in your project
 
-Installs commit hook to ensure quality rules are executed before any commit (test, linting, consistent commit, etc)
+Installs commit hook to ensure quality rules are executed before any commit (test, linting, consistent commit, etc).
 
 It provides:
 
