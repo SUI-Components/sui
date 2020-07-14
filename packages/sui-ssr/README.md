@@ -112,7 +112,7 @@ language: node_js
 dist: xenial
 
 node_js:
-  - "10"
+  - '10'
 
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
@@ -131,7 +131,7 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - "if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
+        - 'if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
       script:
         - npx @s-ui/ssr release --email srv.scms.jarvis@schibsted.com --name J.A.R.V.I.S
     - stage: deploy
@@ -139,8 +139,8 @@ jobs:
       env: NODE_ENV=development
       before_install:
         - set -e
-        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
-      name: "Deploy dev"
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: 'Deploy dev'
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -151,8 +151,8 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
-      name: "Deploy pro"
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: 'Deploy pro'
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -237,24 +237,23 @@ Configs accepted:
     ```json
     {
       "mandatoryCSSRules": {
-        "/*": [
-          ".ma-AdCard"
-        ]
-       }
+        "/*": [".ma-AdCard"]
+      }
     }
-    ``` 
-  
+    ```
+
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
-- **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname (key) and public folder (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
+- **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname or hostname pattern (key as string) and public folder (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
 
   ```json
   {
     "multiSite": {
       "my-motorcycles.com": "public-motorcycles",
       "my-trucks.com": "public-trucks",
+      "v([0-9]+).my-trucks.com": "public-trucks",
       "default": "public-cars"
     }
   }
@@ -345,43 +344,54 @@ If this were your `src/index.html` file:
 
 ```html
 <html>
-<head>
-  <link rel="preconnect dns-prefetch" href="<%= CDN %>">
-  <!--THIRD_PARTY--><link rel="preconnect dns-prefetch" href="//c.dcdn.es">
-  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.es">
-  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.com">
-  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <head>
+    <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
+    <!--THIRD_PARTY-->
+    <link rel="preconnect dns-prefetch" href="//c.dcdn.es" />
+    <!--THIRD_PARTY-->
+    <link rel="dns-prefetch" href="//www.google.es" />
+    <!--THIRD_PARTY-->
+    <link rel="dns-prefetch" href="//www.google.com" />
+    <!--THIRD_PARTY-->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
-  <!-- ShellAPP -->
-  <% if (css && vendor && app) { %>
-    <link as="style" rel="preload" href="<%= css %>">
-    <link as="script" rel="preload" href="<%= vendor.entry %>">
-    <link as="script" rel="preload" href="<%= app.entry %>">
-  <% } %>
+    <!-- ShellAPP -->
+    <% if (css && vendor && app) { %>
+    <link as="style" rel="preload" href="<%= css %>" />
+    <link as="script" rel="preload" href="<%= vendor.entry %>" />
+    <link as="script" rel="preload" href="<%= app.entry %>" />
+    <% } %>
 
-  <!-- ThridPartyScripts -->
+    <!-- ThridPartyScripts -->
 
-  <!-- Advertisement -->
-  <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= utagScript %>">
-  <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= openAdsScript %>">
+    <!-- Advertisement -->
+    <!--THIRD_PARTY-->
+    <link as="script" importance="low" rel="preload" href="<%= utagScript %>" />
+    <!--THIRD_PARTY-->
+    <link
+      as="script"
+      importance="low"
+      rel="preload"
+      href="<%= openAdsScript %>"
+    />
 
-  <!-- Load 3th parties and ShellAPP -->
-  <% if (vendor && app) { %>
+    <!-- Load 3th parties and ShellAPP -->
+    <% if (vendor && app) { %>
     <script defer importance="high" src="<%= vendor.entry %>"></script>
     <script defer importance="high" src="<%= app.entry %>"></script>
-  <% } %>
+    <% } %>
 
-  <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
-  <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
-  
-</head>
+    <!--THIRD_PARTY-->
+    <script defer importance="high" src="<%= utagScript %>"></script>
+    <!--THIRD_PARTY-->
+    <script defer importance="low" src="<%= openAdsScript %>"></script>
+  </head>
 
-<body>
-  <div id="app" class="app">
-    <!-- APP -->
-  </div>
-</body>
-
+  <body>
+    <div id="app" class="app">
+      <!-- APP -->
+    </div>
+  </body>
 </html>
 ```
 
@@ -391,7 +401,7 @@ and this is a fragment of his sui-ssr configuration in your package.json
 {
   "config": {
     "sui-ssr": {
-      "queryDisableThirdParties": "disable-third-parties",
+      "queryDisableThirdParties": "disable-third-parties"
     }
   }
 }
@@ -401,46 +411,43 @@ by making a request like this: GET /?disable-third-parties
 
 The sui-ssr response would be an HTML like the following:
 
-
 ```html
 <html>
-<head>
-  <link rel="preconnect dns-prefetch" href="<%= CDN %>">
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
+  <head>
+    <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
 
-  <!-- ShellAPP -->
-  <% if (css && vendor && app) { %>
-    <link as="style" rel="preload" href="<%= css %>">
-    <link as="script" rel="preload" href="<%= vendor.entry %>">
-    <link as="script" rel="preload" href="<%= app.entry %>">
-  <% } %>
+    <!-- ShellAPP -->
+    <% if (css && vendor && app) { %>
+    <link as="style" rel="preload" href="<%= css %>" />
+    <link as="script" rel="preload" href="<%= vendor.entry %>" />
+    <link as="script" rel="preload" href="<%= app.entry %>" />
+    <% } %>
 
-  <!-- ThridPartyScripts -->
+    <!-- ThridPartyScripts -->
 
-  <!-- Advertisement -->
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
+    <!-- Advertisement -->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
 
-  <!-- Load 3th parties and ShellAPP -->
-  <% if (vendor && app) { %>
+    <!-- Load 3th parties and ShellAPP -->
+    <% if (vendor && app) { %>
     <script defer importance="high" src="<%= vendor.entry %>"></script>
     <script defer importance="high" src="<%= app.entry %>"></script>
-  <% } %>
+    <% } %>
 
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
-  
-</head>
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+  </head>
 
-<body>
-  <div id="app" class="app">
-    <!-- APP -->
-  </div>
-</body>
-
+  <body>
+    <div id="app" class="app">
+      <!-- APP -->
+    </div>
+  </body>
 </html>
 ```
 
