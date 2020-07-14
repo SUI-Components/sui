@@ -3,7 +3,14 @@
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const path = require('path')
 const fs = require('fs')
-const pkgPath = path.join(process.cwd(), 'package.json')
+
+/** In order to ensure this could work on postinstall script and also manually
+ * we neet to check if INIT_CWD is available and use it instead cwd
+ * as on postinstall the cwd will change
+ */
+const {INIT_CWD} = process.env
+const cwd = INIT_CWD || process.cwd()
+const pkgPath = path.join(cwd, 'package.json')
 
 const DEFAULT_PKG_FIELD = 'scripts'
 const HUSKY_VERSION = '4.2.5'
@@ -81,12 +88,11 @@ function writePackageJson(pkg) {
 function installHuskyIfNotInstalled() {
   if (!isHuskyInstalled()) {
     log('husky will be installed to allow git hook integration with node')
-    return getSpawnPromise('npm', [
-      'install',
-      `husky@${HUSKY_VERSION}`,
-      '--save-dev',
-      '--save-exact'
-    ])
+    return getSpawnPromise(
+      'npm',
+      ['install', `husky@${HUSKY_VERSION}`, '--save-dev', '--save-exact'],
+      {cwd}
+    )
   } else {
     return Promise.resolve(0)
   }
