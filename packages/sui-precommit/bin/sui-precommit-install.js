@@ -3,29 +3,36 @@
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const path = require('path')
 const fs = require('fs')
+const dset = require('dset')
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd
  * as on postinstall the cwd will change
  */
-const {INIT_CWD} = process.env
+const {CI = false, INIT_CWD} = process.env
 const cwd = INIT_CWD || process.cwd()
 const pkgPath = path.join(cwd, 'package.json')
 
 const DEFAULT_PKG_FIELD = 'scripts'
 const HUSKY_VERSION = '4.2.5'
 
-installHuskyIfNotInstalled()
-  .then(function() {
-    addToPackageJson('lint', 'sui-lint js && sui-lint sass')
-    addToPackageJson('pre-commit', 'sui-precommit run', 'hooks')
-    removeFromPackageJson('precommit')
-  })
-  .catch(function(err) {
-    log(err.message)
-    log('sui-precommit installation has FAILED.')
-    process.exit(1)
-  })
+const {name} = readPackageJson()
+/** We avoid performing the precommit install:
+ **  - for CI and the same precommit package
+ **  - for the `@s-ui/precommit` pkg itself */
+if (CI === false && name !== '@s-ui/precommit') {
+  installHuskyIfNotInstalled()
+    .then(function() {
+      addToPackageJson('sui-lint js && sui-lint sass', 'scripts.lint')
+      addToPackageJson('sui-precommit run', 'husky.hooks.pre-commit')
+      removeFromPackageJson('precommit')
+    })
+    .catch(function(err) {
+      log(err.message)
+      log('sui-precommit installation has FAILED.')
+      process.exit(1)
+    })
+}
 
 function log(...args) {
   /* eslint-disable no-console */
@@ -43,23 +50,19 @@ function readPackageJson() {
 
 /**
  * Add script on package.json where command was executed
- * @param  {string}  name   script name
- * @param  {string}  script command to execute
- * @param  {string?}  field  field where the script must be added
+ * @param  {string}   script command to execute
+ * @param  {string?}  path  path where the script must be added. Could be composed.
  **/
-function addToPackageJson(name, script, field = DEFAULT_PKG_FIELD) {
+function addToPackageJson(script, path = DEFAULT_PKG_FIELD) {
   const pkg = readPackageJson()
-  pkg[field] = pkg[field] || {}
-
-  pkg[field][name] = script
-  log(`Writing "${name}" on "${field}"...`)
-
+  dset(pkg, path, script)
+  log(`Writing "${name}" on object path "${path}"...`)
   writePackageJson(pkg)
 }
 
 /**
  * Add script on package.json where command was executed
- * @param  {string}  name   script name
+ * @param  {string}  name   property to remove
  * @param  {string}  field  field where the script is
  **/
 function removeFromPackageJson(name, field = DEFAULT_PKG_FIELD) {
@@ -93,9 +96,8 @@ function installHuskyIfNotInstalled() {
       ['install', `husky@${HUSKY_VERSION}`, '--save-dev', '--save-exact'],
       {cwd}
     )
-  } else {
-    return Promise.resolve(0)
   }
+  return Promise.resolve(0)
 }
 
 /**
