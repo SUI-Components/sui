@@ -20,7 +20,11 @@ export const hostFromReq = (req, header = DEFAULT_SITE_HEADER) =>
 export const hostPattern = req => {
   const host = hostFromReq(req)
 
-  return multiSiteKeys.find(hostPattern => host.match(hostPattern)) || 'default'
+  return (
+    (multiSiteKeys &&
+      multiSiteKeys.find(hostPattern => host.match(hostPattern))) ||
+    'default'
+  )
 }
 
 export const publicFolderByHost = req => {
