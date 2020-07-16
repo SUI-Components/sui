@@ -8,3 +8,7 @@ package-lock.json
 jsconfig.json
 packages/sui-codemod/COMMANDS
 sui-components-dashboard-9350df448fcd.json
+packages/sui-bundler/test/integration/features-app/public/
+packages/sui-bundler/test/integration/features-app/node_modules/
+packages/sui-bundler/test/integration/offline-app/node_modules/
+packages/sui-bundler/test/integration/offline-app/public/
