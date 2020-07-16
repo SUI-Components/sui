@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.7.0 (2020-07-15)
+
+
+### Bug Fixes
+
+* add double check before find an array element ([f891491](https://github.com/SUI-Components/sui/commit/f891491e8c700bfda759a8da283926c9eccec90c))
+
+
+### Features
+
+* accept host patterns in multisite config ([0c14746](https://github.com/SUI-Components/sui/commit/0c14746bc32b17db617b88b98cd8df3f9c3b4b22))
+
+
+
 # 7.6.0 (2020-07-06)
 
 
