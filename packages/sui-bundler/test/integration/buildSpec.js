@@ -11,19 +11,54 @@ const OFFLINE_APP_PATH = path.join(__dirname, 'offline-app')
 describe('sui-bundler', () => {
   it('Regresion test for features', async function() {
     this.timeout(0)
+    const CDN = 'https://my-cdn.com/'
     const {stdout} = await exec(
       `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
+      {
+        cwd: FEATURES_APP_PATH,
+        env: {
+          ...process.env,
+          CDN,
+          APP_NAME: 'test_app'
+        }
+      }
+    )
+
+    const {stdout: lsStdout} = await exec(
+      `ls "${FEATURES_APP_PATH}/public" | grep -E "br|gz" || true`,
       {
         cwd: FEATURES_APP_PATH
       }
     )
 
+    const manifest = require(path.join(
+      `${FEATURES_APP_PATH}/public/asset-manifest.json`
+    ))
+
+    const mainJS = manifest['main.js'].replace(CDN, '')
+
     expect(stdout.indexOf('Error')).to.be.eql(-1)
+    expect(lsStdout).to.be.not.eql('')
     expect(
       fs.existsSync(
         path.join(`${FEATURES_APP_PATH}/public/asset-manifest.json`)
       )
     ).to.be.true
+    expect(
+      fs
+        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/index.html`))
+        .indexOf(CDN)
+    ).to.be.not.eql(-1)
+    expect(
+      fs
+        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
+        .indexOf('test_app')
+    ).to.be.not.eql(-1)
+    expect(
+      fs
+        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
+        .indexOf('DEFAULT_VALUE')
+    ).to.be.not.eql(-1)
   })
 
   it('Offline Page', async function() {
