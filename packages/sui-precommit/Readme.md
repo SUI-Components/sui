@@ -39,6 +39,7 @@ Executes **4** actions:
 2.  If you already have a husky deprecated config, migrate it to the new one.
 3.  Add `sui-precommit run` as husky's precommit script.
 4.  Add `sui-lint` as npm lint script command so you can execute linting separately.
+**Note:** *If `lint` script is already present, it doesn't overwrite it (as some packages might not need executing `sui-lint sass` or `sui-lint js`).*
 
 Your package.json might be altered like that:
 
