@@ -3,7 +3,8 @@
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const path = require('path')
 const fs = require('fs')
-const dset = require('dset')
+const set = require('dset')
+const get = require('dlv')
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd
@@ -13,7 +14,6 @@ const {CI = false, INIT_CWD} = process.env
 const cwd = INIT_CWD || process.cwd()
 const pkgPath = path.join(cwd, 'package.json')
 
-const DEFAULT_PKG_FIELD = 'scripts'
 const HUSKY_VERSION = '4.2.5'
 
 const {name} = readPackageJson()
@@ -23,9 +23,9 @@ const {name} = readPackageJson()
 if (CI === false && name !== '@s-ui/precommit') {
   installHuskyIfNotInstalled()
     .then(function() {
-      addToPackageJson('sui-lint js && sui-lint sass', 'scripts.lint')
+      addToPackageJson('sui-lint js && sui-lint sass', 'scripts.lint', false)
       addToPackageJson('sui-precommit run', 'husky.hooks.pre-commit')
-      removeFromPackageJson('precommit')
+      removeFromPackageJson('precommit', 'scripts')
     })
     .catch(function(err) {
       log(err.message)
@@ -52,12 +52,16 @@ function readPackageJson() {
  * Add script on package.json where command was executed
  * @param  {string}   script command to execute
  * @param  {string?}  path  path where the script must be added. Could be composed.
+ * @param  {boolean}  overwrite the path script if already exists
  **/
-function addToPackageJson(script, path = DEFAULT_PKG_FIELD) {
+function addToPackageJson(script, path, overwrite = true) {
   const pkg = readPackageJson()
-  dset(pkg, path, script)
-  log(`Writing "${name}" on object path "${path}"...`)
-  writePackageJson(pkg)
+  // write if the path doesn't exist or we have to overwrite it
+  if (get(pkg, path) === undefined || overwrite) {
+    set(pkg, path, script)
+    log(`Writing "${name}" on object path "${path}"...`)
+    writePackageJson(pkg)
+  }
 }
 
 /**
@@ -65,7 +69,7 @@ function addToPackageJson(script, path = DEFAULT_PKG_FIELD) {
  * @param  {string}  name   property to remove
  * @param  {string}  field  field where the script is
  **/
-function removeFromPackageJson(name, field = DEFAULT_PKG_FIELD) {
+function removeFromPackageJson(name, field) {
   const pkg = readPackageJson()
   pkg[field] = pkg[field] || {}
 
