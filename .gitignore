@@ -14,3 +14,5 @@ packages/sui-bundler/test/integration/offline-app/node_modules/
 packages/sui-bundler/test/integration/offline-app/public/
 packages/sui-bundler/test/integration/external-manifest/node_modules/
 packages/sui-bundler/test/integration/external-manifest/public/
+packages/sui-bundler/test/integration/external-manifest-app/node_modules/
+packages/sui-bundler/test/integration/external-manifest-app/public/
