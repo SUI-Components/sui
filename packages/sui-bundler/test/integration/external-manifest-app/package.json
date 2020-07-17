@@ -1,0 +1,6 @@
+{
+  "name": "basic-app",
+  "sui-bundler": {
+    "externals-manifest": "http://localhost:1234/manifest.json"
+  }
+}

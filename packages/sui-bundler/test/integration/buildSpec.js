@@ -2,13 +2,15 @@ const fs = require('fs')
 const path = require('path')
 const util = require('util')
 const {expect} = require('chai')
-const exec = util.promisify(require('child_process').exec)
+const childProcess = require('child_process')
+const exec = util.promisify(childProcess.exec)
 
 const SUI_BUNDLER_BINARY_DIR = path.join(__dirname, '..', '..', 'bin')
 const FEATURES_APP_PATH = path.join(__dirname, 'features-app')
 const OFFLINE_APP_PATH = path.join(__dirname, 'offline-app')
+const EXTERNAL_MANIFEST_APP_PATH = path.join(__dirname, 'external-manifest-app')
 
-describe('sui-bundler', () => {
+describe('[Integration] sui-bundler', () => {
   it('Regresion test for features', async function() {
     this.timeout(0)
     const CDN = 'https://my-cdn.com/'
@@ -103,5 +105,49 @@ describe('sui-bundler', () => {
         .readFileSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))
         .indexOf('importScripts("https://external_url.com")')
     ).to.be.not.eql(-1)
+  })
+
+  it('External Manifest', async function() {
+    this.timeout(0)
+    let server
+    try {
+      server = childProcess.spawn('node', [`${__dirname}/static-server.js`], {
+        detached: false
+      })
+      // server.stdout.pipe(process.stdout)
+      // server.stderr.pipe(process.stdout)
+
+      const {stdout: bundlerStdout} = await exec(
+        `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
+        {
+          cwd: EXTERNAL_MANIFEST_APP_PATH
+        }
+      )
+      // console.log(bundlerStdout)
+
+      const manifest = require(path.join(
+        `${EXTERNAL_MANIFEST_APP_PATH}/public/asset-manifest.json`
+      ))
+
+      const mainJS = manifest['main.js'].replace('/', '')
+      const mainCSS = manifest['main.css'].replace('/', '')
+
+      expect(
+        fs
+          .readFileSync(
+            path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainJS}`)
+          )
+          .indexOf('http://localhost:1234/image.123abc.jpeg')
+      ).to.be.not.eql(-1)
+      expect(
+        fs
+          .readFileSync(
+            path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainCSS}`)
+          )
+          .indexOf('http://localhost:1234/css-image.456def.jpeg')
+      ).to.be.not.eql(-1)
+    } finally {
+      server.kill()
+    }
   })
 })

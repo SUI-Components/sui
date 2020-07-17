@@ -1,4 +1,4 @@
-const https = require('https')
+const https = require('http')
 let MANIFEST = false
 
 const getRemoteManifest = url =>
