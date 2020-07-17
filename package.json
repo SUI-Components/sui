@@ -20,9 +20,7 @@
     "test:server": "cross-env NODE_ENV=test & sui-test server -P \"./packages/*/\\!\\(browser\\)/server/*.js\"",
     "test:server:watch": "npm run test:server -- --watch",
     "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
-    "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master",
-    "commitmsg": "validate-commit-msg",
-    "precommit": "sui-precommit run"
+    "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master"
   },
   "devDependencies": {
     "@babel/cli": "7.8.3",
@@ -32,7 +30,7 @@
     "@s-ui/test": "2",
     "chai": "3.5.0",
     "cross-env": "5.1.6",
-    "husky": "0.13.4",
+    "husky": "4.2.5",
     "validate-commit-msg": "2.12.2"
   },
   "config": {
@@ -67,5 +65,11 @@
   "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sui-precommit run",
+      "commit-msg": "validate-commit-msg"
+    }
   }
 }
