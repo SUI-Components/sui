@@ -1,13 +1,20 @@
 const https = require('https')
+const http = require('http')
 let MANIFEST = false
 
-const getRemoteManifest = url =>
-  new Promise((resolve, reject) => {
+/**
+ * Return a Manifest object from the origen defined
+ * @param {string} url - Url to request the manifest
+ * @return {Promise<Object>} this should be the manifest
+ * */
+const getRemoteManifest = url => {
+  const client = url.indexOf('https') > -1 ? https : http
+  return new Promise((resolve, reject) => {
     if (MANIFEST) {
       return resolve(MANIFEST)
     }
 
-    https
+    client
       .get(url, resp => {
         let data = ''
 
@@ -23,6 +30,7 @@ const getRemoteManifest = url =>
         reject(err)
       })
   })
+}
 
 async function externalsManifestLoader(source) {
   const cb = this.async()

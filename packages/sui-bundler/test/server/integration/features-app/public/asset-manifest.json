@@ -1,0 +1,9 @@
+{
+  "main.css": "https://my-cdn.com/0.1579c39c.css",
+  "main.js": "https://my-cdn.com/main.cbe677b8.js",
+  "runtime~main.js": "https://my-cdn.com/runtime~main.385ea05d.js",
+  "0.1579c39c.css.br": "https://my-cdn.com/0.1579c39c.css.br",
+  "index.html": "https://my-cdn.com/index.html",
+  "main.cbe677b8.js.br": "https://my-cdn.com/main.cbe677b8.js.br",
+  "main.cbe677b8.js.gz": "https://my-cdn.com/main.cbe677b8.js.gz"
+}

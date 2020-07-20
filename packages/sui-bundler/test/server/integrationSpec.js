@@ -6,9 +6,13 @@ const childProcess = require('child_process')
 const exec = util.promisify(childProcess.exec)
 
 const SUI_BUNDLER_BINARY_DIR = path.join(__dirname, '..', '..', 'bin')
-const FEATURES_APP_PATH = path.join(__dirname, 'features-app')
-const OFFLINE_APP_PATH = path.join(__dirname, 'offline-app')
-const EXTERNAL_MANIFEST_APP_PATH = path.join(__dirname, 'external-manifest-app')
+const FEATURES_APP_PATH = path.join(__dirname, 'integration', 'features-app')
+const OFFLINE_APP_PATH = path.join(__dirname, 'integration', 'offline-app')
+const EXTERNAL_MANIFEST_APP_PATH = path.join(
+  __dirname,
+  'integration',
+  'external-manifest-app'
+)
 
 describe('[Integration] sui-bundler', () => {
   it('Regresion test for features', async function() {
@@ -111,11 +115,15 @@ describe('[Integration] sui-bundler', () => {
     this.timeout(0)
     let server
     try {
-      server = childProcess.spawn('node', [`${__dirname}/static-server.js`], {
-        detached: false
-      })
-      // server.stdout.pipe(process.stdout)
-      // server.stderr.pipe(process.stdout)
+      server = childProcess.spawn(
+        'node',
+        [path.join(__dirname, 'integration', 'static-server.js')],
+        {
+          detached: false
+        }
+      )
+      server.stdout.pipe(process.stdout)
+      server.stderr.pipe(process.stdout)
 
       const {stdout: bundlerStdout} = await exec(
         `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
@@ -123,7 +131,7 @@ describe('[Integration] sui-bundler', () => {
           cwd: EXTERNAL_MANIFEST_APP_PATH
         }
       )
-      // console.log(bundlerStdout)
+      console.log(bundlerStdout)
 
       const manifest = require(path.join(
         `${EXTERNAL_MANIFEST_APP_PATH}/public/asset-manifest.json`

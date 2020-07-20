@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{"8fAO":function(n,o,c){},mng9:function(n,o,c){"use strict";c.r(o);c("8fAO");console.log("http://localhost:1234/image.123abc.jpeg")}},[["mng9",1]]]);
