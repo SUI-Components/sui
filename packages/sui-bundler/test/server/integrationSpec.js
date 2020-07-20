@@ -98,8 +98,8 @@ Object.entries(manifest).forEach(([original, hashed]) => {
     expect(
       fs
         .readFileSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))
-        .indexOf('importScripts("https://external_url.com")')
-    ).to.be.not.eql(-1)
+        .includes('importScripts("https://external_url.com")')
+    ).to.be.true
   })
 
   it('External Manifest', async function() {
