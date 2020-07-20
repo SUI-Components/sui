@@ -43,28 +43,33 @@ describe('[Integration] sui-bundler', () => {
 
     const mainJS = manifest['main.js'].replace(CDN, '')
 
-    expect(stdout.indexOf('Error')).to.be.eql(-1)
+    expect(stdout.includes('Error')).to.be.false
+
     expect(lsStdout).to.be.not.eql('')
+
     expect(
       fs.existsSync(
         path.join(`${FEATURES_APP_PATH}/public/asset-manifest.json`)
       )
     ).to.be.true
+
     expect(
       fs
         .readFileSync(path.join(`${FEATURES_APP_PATH}/public/index.html`))
-        .indexOf(CDN)
-    ).to.be.not.eql(-1)
+        .includes(CDN)
+    ).to.be.true
+
     expect(
       fs
         .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
-        .indexOf('test_app')
-    ).to.be.not.eql(-1)
+        .includes('test_app')
+    ).to.be.true
+
     expect(
       fs
         .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
-        .indexOf('DEFAULT_VALUE')
-    ).to.be.not.eql(-1)
+        .includes('DEFAULT_VALUE')
+    ).to.be.true
   })
 
   it('Offline Page', async function() {
@@ -80,21 +85,24 @@ describe('[Integration] sui-bundler', () => {
       `${OFFLINE_APP_PATH}/public/asset-manifest.json`
     ))
 
-const sw = fs.readFileSync(
-  path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`)
-)
+    const sw = fs.readFileSync(
+      path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`)
+    )
 
-Object.entries(manifest).forEach(([original, hashed]) => {
-  const isRuntime = original.match('runtime')
-  expect(sw.includes(hashed)).to.equal(isRuntime ? false : true)
-})
+    Object.entries(manifest).forEach(([original, hashed]) => {
+      const isRuntime = original.match('runtime')
+      expect(sw.includes(hashed)).to.equal(!isRuntime)
+    })
 
-    expect(stdout.indexOf('Error')).to.be.eql(-1)
+    expect(stdout.includes('Error')).to.be.false
+
     expect(fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/offline.html`)))
       .to.be.true
+
     expect(
       fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))
     ).to.be.true
+
     expect(
       fs
         .readFileSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))
@@ -113,8 +121,8 @@ Object.entries(manifest).forEach(([original, hashed]) => {
           detached: false
         }
       )
-      server.stdout.pipe(process.stdout)
-      server.stderr.pipe(process.stdout)
+      // server.stdout.pipe(process.stdout)
+      // server.stderr.pipe(process.stdout)
 
       const {stdout: bundlerStdout} = await exec(
         `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
@@ -122,7 +130,7 @@ Object.entries(manifest).forEach(([original, hashed]) => {
           cwd: EXTERNAL_MANIFEST_APP_PATH
         }
       )
-      console.log(bundlerStdout)
+      // console.log(bundlerStdout)
 
       const manifest = require(path.join(
         `${EXTERNAL_MANIFEST_APP_PATH}/public/asset-manifest.json`
@@ -136,15 +144,16 @@ Object.entries(manifest).forEach(([original, hashed]) => {
           .readFileSync(
             path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainJS}`)
           )
-          .indexOf('http://localhost:1234/image.123abc.jpeg')
-      ).to.be.not.eql(-1)
+          .includes('http://localhost:1234/image.123abc.jpeg')
+      ).to.be.true
+
       expect(
         fs
           .readFileSync(
             path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainCSS}`)
           )
-          .indexOf('http://localhost:1234/css-image.456def.jpeg')
-      ).to.be.not.eql(-1)
+          .includes('http://localhost:1234/css-image.456def.jpeg')
+      ).to.be.true
     } finally {
       server.kill()
     }
