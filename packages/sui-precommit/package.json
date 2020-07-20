@@ -1,17 +1,22 @@
 {
   "name": "@s-ui/precommit",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "Effortless SUI precommit rules integration in your project",
   "main": "index.js",
   "bin": {
     "sui-precommit": "./bin/sui-precommit.js"
   },
+  "scripts": {
+    "postinstall": "node ./bin/sui-precommit.js install"
+  },
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@s-ui/lint": "3",
     "@s-ui/helpers": "1",
-    "commander": "2.9.0"
+    "@s-ui/lint": "3",
+    "commander": "5.1.0",
+    "dlv": "1.1.3",
+    "dset": "2.0.1"
   },
   "license": "MIT",
   "repository": {
