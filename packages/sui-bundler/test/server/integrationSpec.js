@@ -80,23 +80,14 @@ describe('[Integration] sui-bundler', () => {
       `${OFFLINE_APP_PATH}/public/asset-manifest.json`
     ))
 
-    Object.entries(manifest).forEach(([original, hashed]) => {
-      original.match('runtime')
-        ? expect(
-            fs
-              .readFileSync(
-                path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`)
-              )
-              .indexOf(hashed)
-          ).to.be.eql(-1)
-        : expect(
-            fs
-              .readFileSync(
-                path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`)
-              )
-              .indexOf(hashed)
-          ).to.be.not.eql(-1)
-    })
+const sw = fs.readFileSync(
+  path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`)
+)
+
+Object.entries(manifest).forEach(([original, hashed]) => {
+  const isRuntime = original.match('runtime')
+  expect(sw.includes(hashed)).to.equal(isRuntime ? false : true)
+})
 
     expect(stdout.indexOf('Error')).to.be.eql(-1)
     expect(fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/offline.html`)))
