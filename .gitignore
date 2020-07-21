@@ -8,3 +8,4 @@ package-lock.json
 jsconfig.json
 packages/sui-codemod/COMMANDS
 sui-components-dashboard-9350df448fcd.json
+.idea/
