@@ -1,3 +1,5 @@
 export default class HoustonAdapter {
-  getEnabledFeatures({attributes}) {}
+  constructor() {
+    throw new Error('Houston adapter not implemented yet')
+  }
 }

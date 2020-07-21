@@ -20,7 +20,7 @@ export default class OptimizelyAdapter {
     }
 
     this._optimizely = optimizely
-    this._userId = userId
+    this._userId = userId.toString()
   }
 
   static createOptimizelyInstance({options = DEFAULT_OPTIONS, sdkKey}) {
@@ -34,12 +34,19 @@ export default class OptimizelyAdapter {
   }
 
   getEnabledFeatures({attributes} = {}) {
-    return this._onReady().then(optimizely =>
-      optimizely.getEnabledFeatures(this._userId.toString(), attributes)
-    )
+    return this._optimizely.getEnabledFeatures(this._userId, attributes)
   }
 
-  _onReady() {
+  /**
+   * @param {Object} params
+   * @param {string} params.name
+   * @returns {string} variation name
+   */
+  activateExperiment({name}) {
+    return this._optimizely.activate(name, this._userId)
+  }
+
+  onReady() {
     return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
       .then(() => this._optimizely)

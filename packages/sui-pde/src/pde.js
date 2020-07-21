@@ -8,6 +8,10 @@ export default class PDE {
   getEnabledFeatures({attributes} = {}) {
     return this._adapter.getEnabledFeatures({attributes})
   }
+
+  activateExperiment({name}) {
+    return this._adapter.activateExperiment({name})
+  }
 }
 
 /**
