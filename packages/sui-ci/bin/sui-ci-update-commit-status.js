@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander')
 
-const updateCommitStatus = require('../src/index')
+const {updateCommitStatus} = require('../src/index')
 
 const {
   GH_TOKEN: auth,
