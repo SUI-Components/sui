@@ -1,7 +1,8 @@
 import {expect} from 'chai'
 import nock from 'nock'
 
-import updateCommitStatus from '../../src'
+import {mockGitHubRequest} from './utils'
+import {updateCommitStatus} from '../../src'
 
 const DEFAULT_PARAMS = {
   auth: 'auth',
@@ -14,16 +15,8 @@ const DEFAULT_PARAMS = {
 
 describe('sui-ci', () => {
   describe('update-commit-status', () => {
-    it('calls GitHub Api to update status of a commit', () => {
-      const nockedRequest = nock('https://api.github.com')
-        .post(/.*/)
-        .reply(200)
-
-      nockedRequest.on('request', (req, _, rawBody) => {
-        const {method, options} = req
-        const {href} = options
-        const body = JSON.parse(rawBody)
-
+    it('calls GitHub Api to update status of a commit', (done) => {
+      mockGitHubRequest(({method, href, body}) => {
         expect(method).to.equal('POST')
         expect(href).to.equal(
           'https://api.github.com/repos/SUI-Components/sui-components/statuses/commit-sha'
@@ -35,11 +28,11 @@ describe('sui-ci', () => {
           state: 'success',
           target_url: 'https://example.com'
         })
+
+        done()
       })
 
-      updateCommitStatus(DEFAULT_PARAMS).then(() => {
-        nockedRequest.done()
-      })
+      updateCommitStatus(DEFAULT_PARAMS)
     })
   })
 })
