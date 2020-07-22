@@ -28,6 +28,7 @@
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",
     "@s-ui/test": "2",
+    "@types/mocha": "8.0.0",
     "chai": "3.5.0",
     "cross-env": "5.1.6",
     "husky": "4.2.5",

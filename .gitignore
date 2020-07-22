@@ -8,4 +8,12 @@ package-lock.json
 jsconfig.json
 packages/sui-codemod/COMMANDS
 sui-components-dashboard-9350df448fcd.json
+packages/sui-bundler/test/server/integration/features-app/public/
+packages/sui-bundler/test/server/integration/features-app/node_modules/
+packages/sui-bundler/test/server/integration/offline-app/node_modules/
+packages/sui-bundler/test/server/integration/offline-app/public/
+packages/sui-bundler/test/server/integration/external-manifest/node_modules/
+packages/sui-bundler/test/server/integration/external-manifest/public/
+packages/sui-bundler/test/server/integration/external-manifest-app/node_modules/
+packages/sui-bundler/test/server/integration/external-manifest-app/public/
 .idea/
