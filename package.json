@@ -19,6 +19,7 @@
     "test:client:watch": "npm run test:client -- --watch",
     "test:server": "cross-env NODE_ENV=test & sui-test server -P \"./packages/*/\\!\\(browser\\)/server/*.js\"",
     "test:server:watch": "npm run test:server -- --watch",
+    "test:e2e": "npx concurrently --kill-others --success=first \"node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public\" \"npx sui-test e2e --baseUrl=http://localhost:1234\"",
     "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
     "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master"
   },
@@ -30,6 +31,7 @@
     "@s-ui/test": "2",
     "@types/mocha": "8.0.0",
     "chai": "3.5.0",
+    "concurrently": "5.2.0",
     "cross-env": "5.1.6",
     "husky": "4.2.5",
     "validate-commit-msg": "2.12.2"

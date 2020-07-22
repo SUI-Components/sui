@@ -21,6 +21,6 @@ packages/sui-studio/test/server/integration/empty-studio/components/fake/**
 packages/sui-studio/test/server/integration/empty-studio/demo/fake/**
 packages/sui-studio/test/server/integration/empty-studio/test/fake/**
 packages/sui-studio/test/server/integration/sample-studio/node_modules/
-packages/sui-studio/test/server/integration/sample-studio/components/test/component/node_modules/
+packages/sui-studio/test/server/integration/sample-studio/components/atom/button/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/public
 packages/sui-studio/test/server/integration/empty-studio/components/fake/componentnvim
