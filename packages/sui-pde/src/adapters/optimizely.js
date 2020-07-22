@@ -38,12 +38,24 @@ export default class OptimizelyAdapter {
   }
 
   /**
+   * Activates an A/B test for the specified user to start an experiment: determines whether they qualify for the experiment, buckets a qualified user into a variation, and sends an impression event to Optimizely.
+   * More info: https://docs.developers.optimizely.com/full-stack/docs/activate-javascript-node
    * @param {Object} params
    * @param {string} params.name
    * @returns {string} variation name
    */
   activateExperiment({name}) {
     return this._optimizely.activate(name, this._userId)
+  }
+
+  /**
+   * Tracks a conversion event. Logs an error message if the specified event key doesn't match any existing events.
+   * More info: https://docs.developers.optimizely.com/full-stack/docs/track-javascript-node
+   * @param {Object} params
+   * @param {string} params.name
+   */
+  trackExperiment({name}) {
+    return this._optimizely.track(name, this._userId)
   }
 
   onReady() {

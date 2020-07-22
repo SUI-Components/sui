@@ -12,12 +12,8 @@ export default class PDE {
   activateExperiment({name}) {
     return this._adapter.activateExperiment({name})
   }
-}
 
-/**
- * Provider
- * -> userId
- *
- * Consumer
- * const {isEnabled: isParrillaMapaEnabled} = useFeature({ featureKey: 'parrilla_mapa' })
- */
+  trackExperiment({name}) {
+    return this._adapter.trackExperiment({name})
+  }
+}

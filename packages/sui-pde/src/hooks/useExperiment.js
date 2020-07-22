@@ -13,5 +13,6 @@ export default function useExperiment(experimentName) {
     () => pde.activateExperiment({name: experimentName}),
     [experimentName, pde]
   )
-  return {variation}
+
+  return {variation, trackExperiment: pde.trackExperiment.bind(pde)}
 }
