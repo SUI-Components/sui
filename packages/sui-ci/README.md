@@ -9,6 +9,9 @@ It provides:
 
 Right now, it relies on some environment variables:
 * `GH_TOKEN`: GitHub Personal Access Token of the user that will create the status of the commit.
+* `SUI_CI_TOPIC`: *Optional* but useful environment variable to tell the CI which topic the commit is about.
+
+*@s-ui/ci* right now expects it's using *Travis* to execute CI, so the next environment variables are expected: `TRAVIS_BUILD_WEB_URL`, `TRAVIS_COMMIT`, `TRAVIS_PULL_REQUEST_SHA`, `TRAVIS_REPO_SLUG`.
 
 ## Usage
 
@@ -27,3 +30,6 @@ For example, you could use the CLI directly by using `npx` with that.
 ```sh
 $ npx @s-ui/ci update-commit-status --state OK --topic build 
 ```
+
+## In Action
+![image](https://user-images.githubusercontent.com/1561955/88173732-5d551480-cc23-11ea-986f-9073c188c2db.png)
