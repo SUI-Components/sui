@@ -7,7 +7,7 @@ It provides:
 
 ## Requirements
 
-Right now, it relies on some environemnt variables:
+Right now, it relies on some environment variables:
 * `GH_TOKEN`: GitHub Personal Access Token of the user that will create the status of the commit.
 
 ## Usage
