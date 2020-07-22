@@ -3,7 +3,7 @@
 > CLI with some useful commands for CI environments
 
 It provides:
-* A way to update a GitHub Commit Status on a CI environment.
+* A way to update a GitHub Commit Status from a CI environment.
 
 ## Requirements
 
