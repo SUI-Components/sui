@@ -1,5 +1,5 @@
 {
-  "name": "@sample-studio/sui-test-component",
+  "name": "@sample-studio/sui-atom-button",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",

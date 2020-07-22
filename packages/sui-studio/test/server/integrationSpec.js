@@ -42,7 +42,7 @@ describe('[Integration] sui-studio', () => {
     try {
       server = childProcess.spawn(
         'node',
-        [`${SUI_STUDIO_BINARY_DIR}/sui-studio-dev`, 'test/component'],
+        [`${SUI_STUDIO_BINARY_DIR}/sui-studio-dev`, 'atom/button'],
         {
           detached: false,
           env: {

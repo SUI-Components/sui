@@ -6,9 +6,9 @@ import {render} from '@testing-library/react'
 
 chai.use(chaiDOM)
 
-describe('TestComponent', () => {
+describe('AtomButton', () => {
   it('Render', () => {
-    render(<TestComponent />)
+    render(<AtomButton />)
     expect(true).to.be.eql(false)
   })
 })
