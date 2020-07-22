@@ -10,11 +10,9 @@ const SAMPLE_STUDIO_PATH = path.join(__dirname, 'integration', 'sample-studio')
 const EMPTY_STUDIO_PATH = path.join(__dirname, 'integration', 'empty-studio')
 
 const safeRemoveDir = uri => {
-  // console.log('Removing', uri)
   try {
     fs.rmdirSync(uri, {recursive: true})
   } catch (e) {
-    // console.error(e.message)
   }
 }
 
