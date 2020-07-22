@@ -1,0 +1,17 @@
+{
+  "name": "@sample-studio/sui-test-component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "npx rimraf ./lib && npm run build:js && npm run build:styles",
+    "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
+  },
+  "dependencies": {
+    "@s-ui/component-dependencies": "1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

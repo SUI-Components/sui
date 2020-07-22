@@ -1,0 +1,56 @@
+{
+  "name": "empty-studio",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "sui-studio build",
+    "check:release": "sui-studio check-release",
+    "co": "sui-studio commit",
+    "commitmsg": "validate-commit-msg",
+    "dev": "sui-studio dev",
+    "generate": "sui-studio generate --prefix sui --scope sample-studio",
+    "lint:js": "sui-lint js",
+    "lint:sass": "sui-lint sass",
+    "lint": "npm run lint:js && npm run lint:sass",
+    "phoenix:ci": "npx @s-ui/mono phoenix --ci && (cd demo && npx @s-ui/mono phoenix --ci)",
+    "phoenix": "npx @s-ui/mono phoenix && (cd demo && npx @s-ui/mono phoenix)",
+    "release": "sui-studio release",
+    "start": "sui-studio start"
+  },
+  "repository": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@s-ui/precommit": "2",
+    "@s-ui/studio": "7",
+    "husky": "4.2.5",
+    "validate-commit-msg": "2.14.0"
+  },
+  "dependencies": {},
+  "config": {
+    "sui-mono": {
+      "packagesFolder": "./components",
+      "deepLevel": 2
+    },
+    "validate-commit-msg": {
+      "types": "@s-ui/mono/src/types"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "sui-precommit run"
+    }
+  }
+}
+
