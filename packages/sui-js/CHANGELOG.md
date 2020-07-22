@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.17.0 (2020-07-21)
+
+
+### Features
+
+* add throttle fn ([ad620e3](https://github.com/SUI-Components/sui/commit/ad620e3e850202155cbc4dd628b23f1e30632295))
+
+
+
 # 2.16.0 (2020-07-02)
 
 

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.15.0 (2020-07-22)
+
+
+### Bug Fixes
+
+* use native ws as sockjs is giving problems with latest Node versions ([86fbcc3](https://github.com/SUI-Components/sui/commit/86fbcc34f1af86c4ac154e109cb1ff9381d3b1d7))
+
+
+
 # 6.14.0 (2020-07-09)
 
 

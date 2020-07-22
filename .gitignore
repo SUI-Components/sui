@@ -16,3 +16,4 @@ packages/sui-bundler/test/server/integration/external-manifest/node_modules/
 packages/sui-bundler/test/server/integration/external-manifest/public/
 packages/sui-bundler/test/server/integration/external-manifest-app/node_modules/
 packages/sui-bundler/test/server/integration/external-manifest-app/public/
+.idea/
