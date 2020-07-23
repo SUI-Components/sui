@@ -12,8 +12,7 @@ const EMPTY_STUDIO_PATH = path.join(__dirname, 'integration', 'empty-studio')
 const safeRemoveDir = uri => {
   try {
     fs.rmdirSync(uri, {recursive: true})
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 
 describe('[Integration] sui-studio', () => {
@@ -80,10 +79,7 @@ describe('[Integration] sui-studio', () => {
     it('Should generate a new component with the proper prefix', async function() {
       this.timeout(0)
 
-      const {
-        stdout: stdoutStudioGenerate,
-        stderr: stderrStudioGenerate
-      } = await exec(
+      const {stdout: stdoutStudioGenerate} = await exec(
         `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-generate.js" -P tst -S t-est fake component`,
         {
           cwd: EMPTY_STUDIO_PATH
