@@ -19,13 +19,14 @@ install:
   - npm install --no-audit --loglevel=error --no-fund --no-optional --no-package-lock --no-progress --no-save --no-shrinkwrap
   - npm run phoenix:ci
 
-script:
-  - npm run lint
-  - npm run test:ci
-  - npm run test:e2e
-
-jobs:
+matrix:
   include:
+    - stage:
+      if: type = pull_request
+      script:
+        - npm run lint
+        - npm run test:ci
+        - npm run test:e2e
     - stage: Release packages
       if: branch = master AND NOT type = pull_request
       script:
