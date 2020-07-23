@@ -1,6 +1,7 @@
 const {config} = require('./')
 
-const hasToSplitFrameworksOnChunk = config.optimizations && config.optimizations.splitFrameworkOnChunk
+const hasToSplitFrameworksOnChunk =
+  config.optimizations && config.optimizations.splitFrameworkOnChunk
 
 const frameworkSplitChunk = {
   framework: {
@@ -13,7 +14,7 @@ const frameworkSplitChunk = {
     // Don't let webpack eliminate this chunk (prevents this chunk from
     // becoming a part of the commons chunk)
     enforce: true
-  },
+  }
 }
 
 exports.splitChunks = {

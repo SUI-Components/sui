@@ -2,6 +2,8 @@ const decoratorKlass = Target => Target
 const decoratorMethod = (Target, name, definition) => definition
 
 @decoratorKlass
-export class Klass {
+class Klass {
   @decoratorMethod method() {}
 }
+
+export {Klass}
