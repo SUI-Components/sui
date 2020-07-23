@@ -39,7 +39,7 @@ serialSpawn([
   ]
 ]).catch(err => {
   if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
-    process.stderr.write(
+    process.stderr.write( // eslint-disable-line
       chalk.red((err && (err.stack || err.message)) || err)
     ) + '\n'
   }
