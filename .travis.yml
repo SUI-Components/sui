@@ -21,7 +21,7 @@ install:
 
 matrix:
   include:
-    - stage:
+    - stage: Lint and Tests
       if: type = pull_request
       script:
         - npm run lint
