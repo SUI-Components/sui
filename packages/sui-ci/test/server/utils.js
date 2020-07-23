@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-export const mockGitHubRequest = (executeExpectations) => {
+export const mockGitHubRequest = executeExpectations => {
   const nockedRequest = nock('https://api.github.com')
     .post(/.*/)
     .reply(200)

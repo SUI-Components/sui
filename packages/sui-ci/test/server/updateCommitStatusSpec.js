@@ -1,5 +1,4 @@
 import {expect} from 'chai'
-import nock from 'nock'
 
 import {mockGitHubRequest} from './utils'
 import {updateCommitStatus} from '../../src'
@@ -15,7 +14,7 @@ const DEFAULT_PARAMS = {
 
 describe('sui-ci', () => {
   describe('update-commit-status', () => {
-    it('calls GitHub Api to update status of a commit', (done) => {
+    it('calls GitHub Api to update status of a commit', done => {
       mockGitHubRequest(({method, href, body}) => {
         expect(method).to.equal('POST')
         expect(href).to.equal(
