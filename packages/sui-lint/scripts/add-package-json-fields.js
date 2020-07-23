@@ -2,8 +2,14 @@ try {
   const {writeFile} = require('@s-ui/helpers/file')
   const {name: suiLintPackageName} = require('../package.json')
 
-  const ACTUAL_PACKAGE_PATH = `${process.env.INIT_CWD}/package.json`
+  const {CI, INIT_CWD} = process.env
 
+  if (CI) {
+    console.log('CI detected, skipping @s-ui/lint postinstall')
+    process.exit(0)
+  }
+
+  const ACTUAL_PACKAGE_PATH = `${INIT_CWD}/package.json`
   const LINT_CONFIGS_PATH = './node_modules/@s-ui/lint/'
   const LINT_CONFIGS = {
     eslintConfig: {
@@ -23,7 +29,9 @@ try {
 
   // if actual package is the same, avoid the op
   // this is useful when linking the package
-  if (name === suiLintPackageName) return
+  if (name === suiLintPackageName) {
+    process.exit(0)
+  }
 
   // check if actual package has different lint config
   const areDifferentLintConfig =
