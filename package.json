@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/sui",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "description": "Monorepo for SUI (Schibsted User Interface) packages.",
   "keywords": [

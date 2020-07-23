@@ -1,13 +1,13 @@
 dist: bionic
 language: node_js
-node_js: '13'
+node_js: 'lts/*'
 
 addons:
   chrome: stable
 
 services:
   - docker
-  - redis-server
+  - redis
   - xvfb
 
 before_install:
@@ -19,7 +19,7 @@ install:
   - npm install --no-audit --loglevel=error --no-fund --no-optional --no-package-lock --no-progress --no-save --no-shrinkwrap
   - npm run phoenix:ci
 
-matrix:
+jobs:
   include:
     - stage: Lint and Tests
       if: type = pull_request
