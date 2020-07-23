@@ -85,13 +85,15 @@ describe('@s-ui/js', () => {
   describe('string:highlightText', () => {
     it('should highlight text', () => {
       const highlightedText = highlightText({
-      value: 'Cálaca',
-      query: 'ca',
-      startTag: `<strong>`,
-      endTag: '</strong>'
-    })
+        value: 'Cálaca',
+        query: 'ca',
+        startTag: `<strong>`,
+        endTag: '</strong>'
+      })
       expect(highlightedText).to.be.an('string')
-      expect(highlightedText).to.be.equal(`<strong>Cá</strong>la<strong>ca</strong>`)
+      expect(highlightedText).to.be.equal(
+        `<strong>Cá</strong>la<strong>ca</strong>`
+      )
     })
   })
 })
