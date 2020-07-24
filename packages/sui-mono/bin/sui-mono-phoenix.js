@@ -27,7 +27,7 @@ const CI_FLAGS = [
   'no-progress',
   'no-save',
   'no-shrinkwrap',
-  'prefer-offline',
+  'prefer-offline'
 ].map(flag => `--${flag}`)
 
 program
