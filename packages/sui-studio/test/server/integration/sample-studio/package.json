@@ -37,19 +37,5 @@
     "validate-commit-msg": {
       "types": "@s-ui/mono/src/types"
     }
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "sui-precommit run"
-    }
   }
 }
