@@ -90,7 +90,15 @@ const installPackages = ({cwd = undefined, stdin = 'inherit'} = {}) => {
   const executionParams = {cwd, stdin}
   if (ci) {
     const [npm] = NPM_CMD
-    return execute([npm, ['install', ...CI_FLAGS]], executionParams)
+    return execute(
+      [npm, ['install', ...CI_FLAGS, '--only=prod']],
+      executionParams
+    ).then(() => {
+      return execute(
+        [npm, ['install', ...CI_FLAGS, '--only=dev']],
+        executionParams
+      )
+    })
   }
 
   return execute(RIMRAF_CMD, executionParams).then(() =>
