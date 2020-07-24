@@ -19,7 +19,7 @@ describe('[Integration] sui-studio', () => {
   it('Should compile and build a static version with one component', async function() {
     this.timeout(0)
 
-    const {stdout: stdoutStudioBuild} = await exec(
+    const {stdout: stdoutStudioBuild, stderr: stderrStudioBuild} = await exec(
       `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-build" -C`,
       {
         cwd: SAMPLE_STUDIO_PATH,
@@ -29,6 +29,7 @@ describe('[Integration] sui-studio', () => {
         }
       }
     )
+    console.log(stdoutStudioBuild, stderrStudioBuild)
 
     expect(stdoutStudioBuild.includes('Error')).to.be.false
   })
@@ -48,8 +49,8 @@ describe('[Integration] sui-studio', () => {
           }
         }
       )
-      // server.stdout.pipe(process.stdout)
-      // server.stderr.pipe(process.stdout)
+      server.stdout.pipe(process.stdout)
+      server.stderr.pipe(process.stdout)
 
       const timer = setTimeout(() => {
         throw new Error('Timeout looking for OK')
