@@ -35,7 +35,7 @@ describe.only('[Integration] sui-studio', () => {
     expect(stdoutStudioBuild.includes('Error')).to.be.false
   })
 
-  it.skip('Should start a studio in mode dev', function(done) {
+  it('Should start a studio in mode dev', function(done) {
     this.timeout(0)
     let server
     try {
