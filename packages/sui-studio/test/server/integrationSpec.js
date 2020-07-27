@@ -16,7 +16,7 @@ const safeRemoveDir = uri => {
 }
 
 // eslint-disable-next-line
-describe.only('[Integration] sui-studio', () => {
+describe('[Integration] sui-studio', () => {
   it('Should compile and build a static version with one component', async function() {
     this.timeout(0)
 
