@@ -173,10 +173,8 @@ const automaticRelease = async ({
   authURL.username = githubToken
 
   await exec(`git pull --unshallow`, {cwd})
-  githubEmail &&
-    (await exec(`git config --global user.email "${githubEmail}"`, {cwd}))
-  githubUser &&
-    (await exec(`git config --global user.name "${githubUser}"`, {cwd}))
+  await exec(`git config --global user.email "${githubEmail}"`, {cwd})
+  await exec(`git config --global user.name "${githubUser}"`, {cwd})
   await exec('git remote rm origin', {cwd})
   await exec(`git remote add origin ${authURL} > /dev/null 2>&1`, {cwd})
   await exec(`git checkout master`, {cwd})
