@@ -8,7 +8,7 @@ const checker = require('../src/check')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const {exec: execNative} = require('child_process')
-const GitUrlParse = require('git-url-parse')
+const gitUrlParse = require('git-url-parse')
 const util = require('util')
 const exec = util.promisify(execNative)
 
@@ -168,7 +168,7 @@ const automaticRelease = async ({
   cwd
 }) => {
   const repoURL = await execute('git config --get remote.origin.url')
-  const gitURL = GitUrlParse(repoURL).toString('https')
+  const gitURL = gitUrlParse(repoURL).toString('https')
   const authURL = new URL(gitURL)
   authURL.username = githubToken
 
