@@ -58,7 +58,7 @@ describe.only('[Integration] sui-studio', () => {
       }, 30 * 1000)
 
       server.stdout.on('data', chunk => {
-        if (chunk.toString().includes('Compiled successfully!')) {
+        if (chunk.toString().includes('Project is running')) {
           server.kill()
           clearTimeout(timer)
           done()
