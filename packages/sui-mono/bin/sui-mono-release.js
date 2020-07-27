@@ -188,15 +188,16 @@ const isAutomaticRelease = ({githubToken, githubUser, githubEmail}) => {
 checker
   .check()
   .then(async status => {
+   const {githubEmail, githubToken, githubUser} = program
     isAutomaticRelease({
-      githubEmail: program.githubEmail,
-      githubToken: program.githubToken,
-      githubUser: program.githubUser
+      githubEmail,
+      githubToken,
+      githubUser
     })
       ? await automaticRelease({
-          githubEmail: program.githubEmail,
-          githubToken: program.githubToken,
-          githubUser: program.githubUser,
+          githubEmail,
+          githubToken,
+          githubUser,
           cwd: process.cwd()
         })
       : await checkIsMasterBranchActive({status, cwd: process.cwd()})
