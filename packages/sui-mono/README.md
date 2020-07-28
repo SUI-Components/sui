@@ -172,6 +172,14 @@ sui-mono release --scope "packages/sui-test"
 
 > 👉 `sui-mono` creates a new `MINOR` version for the package only when `fix`, `perf` or `feat` commits are detected, and a new `MAJOR` version if there is some commit marked as `BREAKING CHANGES`. Otherwise (any other types of commits detected), no new version will be generated and nothing will be released
 
+Automatic release (only CI)
+
+In case you want to release via CI the `--github-user` `--github-email` and `--github-token` must be passed by like follows:
+
+```sh
+sui-mono release --github-user [username] --github-email [user email] --github-token [TOKEN]
+```
+
 ## How to configure your project
 
 First you need to install the `@s-ui/mono` package in your project

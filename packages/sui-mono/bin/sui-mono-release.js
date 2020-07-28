@@ -2,16 +2,21 @@
 require('util.promisify/shim')()
 const program = require('commander')
 const path = require('path')
+const {shell} = require('@tunnckocore/execa')
 const config = require('../src/config')
 const checker = require('../src/check')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const {exec: execNative} = require('child_process')
+const gitUrlParse = require('git-url-parse')
 const util = require('util')
 const exec = util.promisify(execNative)
 
 program
   .option('-S, --scope <scope>', 'release a single scope')
+  .option('-T, --github-token <token>', 'github token')
+  .option('-U, --github-user <user>', 'github user')
+  .option('-E, --github-email <email>', 'github email')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -142,9 +147,62 @@ const checkIsMasterBranchActive = async ({status, cwd}) => {
   }
 }
 
+const execute = async (cmd, full) => {
+  try {
+    console.log('--->', cmd)
+    const [resp] = await shell(cmd)
+    const output = full ? resp : resp.stdout
+    console.log(output)
+    return output
+  } catch (e) {
+    const output = full ? e : e.stderr
+    console.log(output)
+    return e
+  }
+}
+
+const automaticRelease = async ({
+  githubToken,
+  githubUser,
+  githubEmail,
+  cwd
+}) => {
+  const repoURL = await execute('git config --get remote.origin.url')
+  const gitURL = gitUrlParse(repoURL).toString('https')
+  const authURL = new URL(gitURL)
+  authURL.username = githubToken
+
+  await exec(`git pull --unshallow`, {cwd})
+  await exec(`git config --global user.email "${githubEmail}"`, {cwd})
+  await exec(`git config --global user.name "${githubUser}"`, {cwd})
+  await exec('git remote rm origin', {cwd})
+  await exec(`git remote add origin ${authURL} > /dev/null 2>&1`, {cwd})
+  await exec(`git checkout master`, {cwd})
+  await exec(`git pull origin master`, {cwd})
+}
+
+const isAutomaticRelease = ({githubToken, githubUser, githubEmail}) => {
+  return githubToken && githubUser && githubEmail
+}
+
 checker
   .check()
-  .then(status => checkIsMasterBranchActive({status, cwd: process.cwd()}))
+  .then(async status => {
+   const {githubEmail, githubToken, githubUser} = program
+    isAutomaticRelease({
+      githubEmail,
+      githubToken,
+      githubUser
+    })
+      ? await automaticRelease({
+          githubEmail,
+          githubToken,
+          githubUser,
+          cwd: process.cwd()
+        })
+      : await checkIsMasterBranchActive({status, cwd: process.cwd()})
+    return status
+  })
   .then(status => releaseMode({status, packageScope}))
   .then(releases =>
     releases
