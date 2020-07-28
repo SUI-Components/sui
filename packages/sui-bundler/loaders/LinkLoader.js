@@ -3,7 +3,7 @@ const LIB_PATH = '/lib'
 const createMatchTransformer = linkedPackagePath => match => {
   // we have to detect if the last char is a quote or /lib to add the correct suffix
   const suffix = match[match.length - 1] === "'" ? "'" : LIB_PATH
-  return `${linkedPackagePath}${suffix}`.replace('src/lib', LIB_PATH)
+  return `${linkedPackagePath}${suffix}`.replace('/src/lib', '/src')
 }
 
 function linkLoader(source) {

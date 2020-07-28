@@ -2,12 +2,18 @@ dist: bionic
 language: node_js
 node_js: '13'
 
+addons:
+  chrome: stable
+
 services:
   - docker
   - redis-server
+  - xvfb
 
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+  - export DISPLAY=:99.0
+  - export CHROME_PATH="$(pwd)/chrome-linux/chrome"
 
 install:
   - npm install --no-audit --loglevel=error --no-fund --no-optional --no-package-lock --no-progress --no-save --no-shrinkwrap
@@ -16,6 +22,7 @@ install:
 script:
   - npm run lint
   - npm run test:ci
+  - npm run test:e2e
 
 jobs:
   include:

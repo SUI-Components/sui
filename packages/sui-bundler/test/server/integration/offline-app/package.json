@@ -1,0 +1,10 @@
+{
+  "name": "basic-app",
+  "sui-bundler": {
+    "offline": {
+      "importScripts": [
+        "https://external_url.com"
+      ]
+    }
+  }
+}

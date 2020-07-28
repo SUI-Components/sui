@@ -2,12 +2,12 @@
 
 > Effortless SUI precommit rules integration in your project
 
-Installs commit hook to ensure quality rules are executed before any commit (test, linting, consistent commit, etc)
+Installs commit hook to ensure quality rules are executed before any commit (test, linting, consistent commit, etc).
 
 It provides:
 
-* Assurance that all code is compliant with Schibsted's standards.
-* Centralize precommit rule:; quality rules can be improved and seemlessly inherited by all projects.
+* Assurance that all code is compliant with Adevinta's standards.
+* Centralize precommit rule: quality rules can be improved and seemlessly inherited by all projects.
 
 ## Installation
 
@@ -33,27 +33,28 @@ Executes all rules:
 
 Installs `sui-precommit` as git pre-commit hook.
 
-Executes 3 actions:
+Executes **4** actions:
 
 1.  Install [husky](https://www.npmjs.com/package/husky) (if not installed yet) to your project.
-1.  Add `sui-precommit run` as husky's precommit script.
-1.  Add `sui-lint` as npm lint script command so you can execute linting separately.
+2.  If you already have a husky deprecated config, migrate it to the new one.
+3.  Add `sui-precommit run` as husky's precommit script.
+4.  Add `sui-lint` as npm lint script command so you can execute linting separately.
+**Note:** *If `lint` script is already present, it doesn't overwrite it (as some packages might not need executing `sui-lint sass` or `sui-lint js`).*
 
 Your package.json might be altered like that:
 
 ```json
 {
   "scripts": {
-    "lint": "sui-lint js && sui-lint sass",
-    "precommit": "sui-precommit run"
+    "lint": "sui-lint js && sui-lint sass"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sui-precommit run"
+    }
   },
   "devDependencies": {
-    "husky": "0.13.4"
+    "husky": "4.2.5"
   }
 }
 ```
-
-> :warning: **Caution!**
->
-> **Make sure you first remove the pre-commit and commit-msg hooks from the
-> `.git/hooks` directory if already set. `sui-precommit install` will not overwrite them.**
