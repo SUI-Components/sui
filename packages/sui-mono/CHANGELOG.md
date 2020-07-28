@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.52.0 (2020-07-28)
+
+
+### Features
+
+* add automatic release options ([e51a6ec](https://github.com/SUI-Components/sui/commit/e51a6ec31082a5b8ef4aeb1ed341574bebaefba6))
+* docs and mandatory user and email options ([26387d1](https://github.com/SUI-Components/sui/commit/26387d19fb170b92e6b0a1c8cee39ebca285bd5e))
+* format sui mono readme ([afafcb6](https://github.com/SUI-Components/sui/commit/afafcb63c1b78064da359e9dc7070a12ed7e3968))
+
+
+
 # 1.49.0 (2020-06-30)
 
 
