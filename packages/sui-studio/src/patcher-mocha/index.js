@@ -4,11 +4,11 @@ import React from 'react'
 import SUIContext from '@s-ui/react-context'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import withContext from '../components/demo/HoC/withContext'
-import {AddSetupEnvironment} from '@s-ui/studio/src/environment/setupEnvironment'
+import {addSetupEnvironment} from '@s-ui/studio/src/environment/setupEnvironment'
 
 const global = globalThis || window // eslint-disable-line
 
-AddSetupEnvironment(global)
+addSetupEnvironment(global)
 
 const functionsToPatch = ['describe']
 

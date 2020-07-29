@@ -6,11 +6,11 @@ import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
 import {requireFile} from '../components/tryRequire'
-import {AddSetupEnvironment} from '../environment-mocha/setupEnvironment'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
 
 const global = globalThis || window // eslint-disable-line
 
-AddSetupEnvironment(global.setupEnvironment)
+addSetupEnvironment(global.setupEnvironment)
 
 export const tryRequireContext = ({category, component}) =>
   requireFile({

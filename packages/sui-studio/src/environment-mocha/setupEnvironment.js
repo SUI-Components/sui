@@ -10,7 +10,7 @@ const setupEnvironment = Component => props => {
   return utils
 }
 
-export const AddSetupEnvironment = target => {
+export const addSetupEnvironment = target => {
   if (!target.setupEnvironment) {
     target.setupEnvironment = setupEnvironment
   }
