@@ -6,7 +6,10 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import SUIContext from '@s-ui/react-context'
 import withContext from '../demo/HoC/withContext'
+import {AddSetupEnvironment} from '../../environment-mocha/setupEnvironment'
 import {cleanDisplayName} from '../demo/utilities'
+
+AddSetupEnvironment(window)
 
 const BASE_CLASSNAME = 'sui-Test'
 
