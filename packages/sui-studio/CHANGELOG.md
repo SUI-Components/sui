@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.16.0 (2020-07-30)
+
+
+### Bug Fixes
+
+* import route ([c1a2d25](https://github.com/SUI-Components/sui/commit/c1a2d25b02604b2398e7e885a04ffcffa7de868d))
+
+
+
 # 8.15.0 (2020-07-30)
 
 
