@@ -80,6 +80,23 @@ describe('Cache in browser', () => {
       )
     })
 
+    it('with cacheKeyString param defined should return twice the same random number without params', done => {
+      class Dummy2 {
+        @cache({server: true, cacheKeyString: 'Dummy2#asyncRndNumber'})
+        @inlineError
+        asyncRndNumber() {
+          return new Promise(resolve => setTimeout(resolve, 100, Math.random()))
+        }
+      }
+      const dummy = new Dummy2()
+      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(
+        ([firstCall, secondCall]) => {
+          expect(firstCall).to.be.eql(secondCall)
+          done()
+        }
+      )
+    })
+
     it('return different numbers if the promise fails', done => {
       let fail = true // Un poco cogido por los pelos
       class Dummy {
@@ -302,6 +319,45 @@ describe('Cache in browser', () => {
       // Here we force an error and expect not response error because it is cached
       shouldReturnError = true
       const responseFourth = await yummyAsync.asyncRndObject()
+
+      expect(responseFirst[0]).to.be.not.null
+      expect(responseSecond[1]).to.be.eql(responseThird[1])
+      expect(responseFourth[0]).to.be.null
+      expect(responseSecond[1]).to.be.eql(responseFourth[1])
+    })
+
+    it('with cacheKeyString param defined it should apply cache for ok simple random number response and not apply cache for inlineError decorated error response', async () => {
+      let shouldReturnError = true
+
+      class YummyAsync2 {
+        @cache({
+          server: true,
+          ttl: '1 minute',
+          redis: {host: 'localhost', port: 6379},
+          cacheKeyString: 'YummyAsync2#asyncRndNumber'
+        })
+        @inlineError
+        async asyncRndNumber() {
+          if (shouldReturnError) {
+            return Promise.reject(new Error('Error'))
+          }
+
+          return Math.random()
+        }
+      }
+
+      const yummyAsync = new YummyAsync2()
+      // Error response, it should not be cached
+      const responseFirst = await yummyAsync.asyncRndNumber()
+
+      // Ok response, it should be cached
+      shouldReturnError = false
+      const responseSecond = await yummyAsync.asyncRndNumber()
+      const responseThird = await yummyAsync.asyncRndNumber()
+
+      // Here we force an error and expect not response error because it is cached
+      shouldReturnError = true
+      const responseFourth = await yummyAsync.asyncRndNumber()
 
       expect(responseFirst[0]).to.be.not.null
       expect(responseSecond[1]).to.be.eql(responseThird[1])

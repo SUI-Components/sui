@@ -15,10 +15,16 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   if (!React.isValidElement(root)) return
 
   const {props, type} = root
-  const {component, path, children, getComponent, id, from, to} = props
+  const {component, path, children, getComponent, id, from, to, regexp} = props
   const {displayName} = type
 
   const node = Object.create(null)
+
+  // Path over Regexp
+  if (!path && regexp) {
+    node.regexp = regexp
+  }
+
   if (displayName === Redirect.displayName) {
     node.redirect = true
     node.from = from

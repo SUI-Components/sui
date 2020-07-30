@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 import express from 'express'
 import ssr from './ssr'
 import criticalCss from './criticalCss'
@@ -14,7 +15,7 @@ import compression from 'compression'
 import ssrConf from './config'
 import {
   isMultiSite,
-  siteFromReq,
+  hostFromReq,
   useStaticsByHost,
   readHtmlTemplate
 } from './utils'
@@ -107,20 +108,27 @@ const _memoizedHtmlTemplatesMapping = {}
     })
 
   app.use((req, res, next) => {
+    const shouldUseIndexWhitoutThirdParties =
+      ssrConf.queryDisableThirdParties &&
+      req.query[ssrConf.queryDisableThirdParties] !== undefined
+
     // Since `_memoizedHtmlTemplatesMapping` will be always an object
     // we need to define a key for each multisite and one default
     // for single sites too.
-    const site = isMultiSite ? siteFromReq(req) : 'default'
+    const site = isMultiSite ? hostFromReq(req) : 'default'
     const memoizedHtmlTemplate =
       _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
 
-    if (memoizedHtmlTemplate) {
+    if (memoizedHtmlTemplate && !shouldUseIndexWhitoutThirdParties) {
       req.htmlTemplate = memoizedHtmlTemplate
     } else {
       const htmlTemplate = readHtmlTemplate(req)
 
       req.htmlTemplate = htmlTemplate
-      _memoizedHtmlTemplatesMapping[site] = htmlTemplate
+
+      if (!shouldUseIndexWhitoutThirdParties) {
+        _memoizedHtmlTemplatesMapping[site] = htmlTemplate
+      }
     }
 
     next()

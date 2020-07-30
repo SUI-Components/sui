@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.7.0 (2020-07-15)
+
+
+### Bug Fixes
+
+* add double check before find an array element ([f891491](https://github.com/SUI-Components/sui/commit/f891491e8c700bfda759a8da283926c9eccec90c))
+
+
+### Features
+
+* accept host patterns in multisite config ([0c14746](https://github.com/SUI-Components/sui/commit/0c14746bc32b17db617b88b98cd8df3f9c3b4b22))
+
+
+
+# 7.6.0 (2020-07-06)
+
+
+### Features
+
+* add flag to define a custom entrypoint ([28dc7b7](https://github.com/SUI-Components/sui/commit/28dc7b70c2eef27e24f2f885e1ef8774aa73bcf8))
+* allow use an alternative entrypoint ([2b83bf4](https://github.com/SUI-Components/sui/commit/2b83bf4e98ae1984b61699cf0d2160eb4f3f60c0))
+
+
+
+# 7.5.0 (2020-07-06)
+
+
+### Features
+
+* avoid cache index html w/out third parties ([e1c978f](https://github.com/SUI-Components/sui/commit/e1c978f2c3f1f6c7b9c9844da4381c966b430fc0))
+* dont user memoize template ([415cc95](https://github.com/SUI-Components/sui/commit/415cc9538f7407deeca14604d20c1094b5d9b8b4))
+* remove 3th party scripts using an AST ([e082ae6](https://github.com/SUI-Components/sui/commit/e082ae6daa5dcc676f90b2fd5daae63af83ef9e4))
+
+
+
+# 7.4.0 (2020-07-03)
+
+
+### Bug Fixes
+
+* fix node version to 14-alpine in dockerfile.tpl ([aa6c57d](https://github.com/SUI-Components/sui/commit/aa6c57d61169053e00e3b303c754b42876d1b451))
+
+
+
 # 7.3.0 (2020-06-26)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mono",
-  "version": "1.48.0",
+  "version": "1.52.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
@@ -16,12 +16,14 @@
   "dependencies": {
     "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
+    "@tunnckocore/execa": "5.2.7",
     "colors": "1.4.0",
     "commander": "4.1.0",
     "commitizen": "4.0.3",
     "conventional-changelog": "3.1.18",
     "execa": "3.4.0",
     "figures": "3.1.0",
+    "git-url-parse": "11.1.2",
     "log-update": "3.3.0",
     "p-queue": "6.2.1",
     "rimraf": "3.0.0"

@@ -45,9 +45,10 @@ module.exports = {
         : configCustomScopes
     return flatten(scopes, customScopes)
   },
-  getScopesPaths: function() {
+  getScopesPaths: function(singleScope) {
     const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
-    return this.getScopes()
+    const scopes = singleScope ? [singleScope] : this.getScopes()
+    return scopes
       .filter(scope => scope !== ROOT_SCOPE)
       .map(pkg => path.join(packagesDir, pkg))
   },

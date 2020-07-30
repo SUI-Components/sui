@@ -18,7 +18,7 @@ const TestPage = ({params}) => {
         setRequires({component: exports, contexts: ctxt, loading: false})
       })
       .catch(err => {
-                console.log(err) // eslint-disable-line
+        console.log(err) // eslint-disable-line
       })
   }, [params.category, params.component])
 

@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.19.0 (2020-07-14)
+
+
+### Bug Fixes
+
+* fix inMemory key creation use args hash only ([b27a3d3](https://github.com/SUI-Components/sui/commit/b27a3d302638c41c1923b65da881a4e0cb96aa9d))
+
+
+### Features
+
+* add cacheKeyString param ([e3da2cd](https://github.com/SUI-Components/sui/commit/e3da2cd148dbb0499f153a79200f47bf302945c3))
+* inRedis add cacheKey logs ([fe708a4](https://github.com/SUI-Components/sui/commit/fe708a4bfa5add4cd5e0b0cfa5e69f87541cd042))
+
+
+
 # 3.18.0 (2020-06-17)
 
 

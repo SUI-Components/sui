@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.16.0 (2020-07-23)
+
+
+### Features
+
+* avoid executing postinstall on CI ([c5225b3](https://github.com/SUI-Components/sui/commit/c5225b3795cfc97ecd1a6b73706aaf6e05c00a47))
+
+
+
 # 3.15.0 (2020-05-06)
 
 
