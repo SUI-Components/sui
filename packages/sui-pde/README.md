@@ -24,13 +24,15 @@ import {PdeContext} from '@s-ui/pde'
 
 ### Experiments
 
+Given experiment `experimentX` with 2 variations `variationA` and `variationB` render `MyVariationA` or `MyVariationB` component depending on the variation the user has being assigned. Render `MyVariationA` by default
+
 ```js
-var variation = optimizelyClientInstance.activate('web-app-use-case-1', userId);
-if (variation === 'variation_1') {
-  // execute code for variation_1
-} else if (variation === 'variation_2') {
-  // execute code for variation_2
-} else {
-  // execute default code
+import {useExperiment} from '@s-ui/pde'
+
+const MyComponent = () => {
+  const {variation} = useExperiment('experimentX')
+
+  if (variation === 'variationB') return <MyVariationB />
+  return <MyVariationA>
 }
 ```
