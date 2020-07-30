@@ -2,18 +2,20 @@
 
 import React from 'react'
 import SUIContext from '@s-ui/react-context'
-import withContext from '../components/demo/HoC/withContext'
-import {cleanDisplayName} from '../components/demo/utilities'
 import hoistNonReactStatics from 'hoist-non-react-statics'
+import withContext from '../components/demo/HoC/withContext'
+import {addSetupEnvironment} from '@s-ui/studio/src/environment/setupEnvironment'
 
 const global = globalThis || window // eslint-disable-line
 
+addSetupEnvironment(global)
+
 const functionsToPatch = ['describe']
 
-Function.prototype.partial = function () {
+Function.prototype.partial = function() {
   const fn = this
   const args = Array.prototype.slice.call(arguments)
-  return function () {
+  return function() {
     let arg = 0
     for (var i = 0; i < args.length && arg < arguments.length; i++)
       if (args[i] === undefined) args[i] = arguments[arg++]
@@ -23,8 +25,8 @@ Function.prototype.partial = function () {
 
 functionsToPatch.forEach(fnName => {
   const handler = {
-    get: function (obj /* describe.context */, prop /* context name */) {
-      return function (title, cb, displayName) {
+    get: function(obj /* describe.context */, prop /* context name */) {
+      return function(title, cb, displayName) {
         const originalFn = global[fnName]
 
         const __COMPONENT__ =
