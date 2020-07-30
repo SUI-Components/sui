@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.17.0 (2020-07-30)
+
+
+### Bug Fixes
+
+* fix the target ([3ab5648](https://github.com/SUI-Components/sui/commit/3ab5648b51661ec5c5d4c272dbe03ea764e69e3f))
+
+
+
 # 8.16.0 (2020-07-30)
 
 
