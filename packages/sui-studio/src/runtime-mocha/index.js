@@ -10,7 +10,7 @@ import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
 
 const global = globalThis || window // eslint-disable-line
 
-addSetupEnvironment(global.setupEnvironment)
+addSetupEnvironment(global)
 
 export const tryRequireContext = ({category, component}) =>
   requireFile({
