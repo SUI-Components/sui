@@ -1,4 +1,7 @@
 /* eslint no-console:0 */
+// __MAGIC IMPORTS__
+// They came from {SPA}/src
+import './loaderSUISSREntryPoint'
 import express from 'express'
 import ssr from './ssr'
 import criticalCss from './criticalCss'
@@ -21,6 +24,7 @@ import {
 } from './utils'
 
 import noOPConsole from 'noop-console'
+
 noOPConsole(console)
 
 if (process.env.CONSOLE) {

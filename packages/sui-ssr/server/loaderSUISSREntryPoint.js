@@ -1,0 +1,3 @@
+try {
+  require('SUISSREntryPoint')
+} catch {}
