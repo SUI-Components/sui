@@ -2,24 +2,23 @@
 
 > Simple CLI for monorepo/multipackage.
 
-[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/mutlipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but *it also works with monopackage projects*.
+[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/mutlipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
 
 `sui-mono` provides:
 
-* Commit template → `sui-mono commit`
-* Release manager (parses commits to publish packages according to their changes)  → `sui-mono check`, `sui-mono release`
-* Run commands inside each package → `sui-mono run npm install`, `sui-mono run-parallel npm install`
-* Link all packages that have dependencies between each other → sui-mono link
+- Commit template → `sui-mono commit`
+- Release manager (parses commits to publish packages according to their changes) → `sui-mono check`, `sui-mono release`
+- Run commands inside each package → `sui-mono run npm install`, `sui-mono run-parallel npm install`
+- Link all packages that have dependencies between each other → sui-mono link
 
 We use:
--  [ComVer](https://github.com/staltz/comver) as our versioning system
--  [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#commit-message-conventions) as our standard for commit messages
+
+- [ComVer](https://github.com/staltz/comver) as our versioning system
+- [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#commit-message-conventions) as our standard for commit messages
 
 `sui-mono` provides, among other things, a standard template for commit messages (`sui-mono commit`) and is able to decide what needs to be released for you (`sui-mono check` & `sui-mono release`).
 
-
 ![](./assets/sui-mono-demo.gif)
-
 
 <!-- TOC -->
 
@@ -37,8 +36,8 @@ We use:
     - [`access`](#access)
     - [Scope (`packagesFolder`, `deepLevel`, `customScopes`)](#scope-packagesfolder-deeplevel-customscopes)
       - [Examples](#examples)
-          - [Project Example](#project-example)
-          - [Case `sui-studio`](#case-sui-studio)
+        - [Project Example](#project-example)
+        - [Case `sui-studio`](#case-sui-studio)
       - [Manual scopes](#manual-scopes)
 
 <!-- /TOC -->
@@ -48,7 +47,6 @@ We use:
 ```bash
 $ npm install @s-ui/mono --save-dev
 ```
-
 
 ## Usage
 
@@ -93,7 +91,7 @@ You can also disable the chunks with 0 value and always execute all commands in 
 sui-mono phoenix -c 0
 ```
 
-If you don't want a fancy progress output (for instance in CI env), you can force a plain text output :
+If you don't want a fancy progress output (for instance in CI env), you can force a plain text output:
 
 ```sh
 sui-mono phoenix --no-progress
@@ -120,10 +118,9 @@ sui-mono link
 ```
 
 Note that:
-* The monorepo will also be linked to the packages it contains if it uses them.
-* Packages that are not used locally will not be linked at all
 
-
+- The monorepo will also be linked to the packages it contains if it uses them.
+- Packages that are not used locally will not be linked at all
 
 ### `commit`
 
@@ -172,6 +169,14 @@ sui-mono release --scope "packages/sui-test"
 
 > 👉 `sui-mono` creates a new `MINOR` version for the package only when `fix`, `perf` or `feat` commits are detected, and a new `MAJOR` version if there is some commit marked as `BREAKING CHANGES`. Otherwise (any other types of commits detected), no new version will be generated and nothing will be released
 
+Automatic release (only CI)
+
+In case you want to release via CI the `--github-user` `--github-email` and `--github-token` must be passed by like follows:
+
+```sh
+sui-mono release --github-user [username] --github-email [user email] --github-token [TOKEN]
+```
+
 ## How to configure your project
 
 First you need to install the `@s-ui/mono` package in your project
@@ -215,19 +220,18 @@ By default packages will be published as `restricted` in npm. If you want them t
 
 ### Scope (`packagesFolder`, `deepLevel`, `customScopes`)
 
-> 👉  ` ` Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
-
+> 👉 `` Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
 
 We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
 If you follow a structure where do you have:
+
 - a main folder and
-- inside this folder you have all the packages (subfolders, each one of them with its own `package.json` → *scopes*)
+- inside this folder you have all the packages (subfolders, each one of them with its own `package.json` → _scopes_)
 
 ...this configuration will work for you
 
 In order to specify the main folder you need to provide `packagesFolder` by default its value is `src`
 By default we check only 1 level inside the main folder, but if you have categories for each package and inside the packages you can configure `deepLevel`
-
 
 This information will be used for releases and [`commitizen`](https://commitizen.github.io/cz-cli/) scopes.
 
@@ -290,4 +294,4 @@ There may be cases that you may want to add scopes for informative purposes but 
 Take in care that this scopes **will not be relevant for the release**, and if you commit to one package that has his own scope, but you use a custom scope, a release will not be generated.
 Custom scopes are for a very rare cases and you may not need it most of the times.
 
-Use `customScopes` in this cases like in the example. The scopes will be added to the automatically generated  ones.
+Use `customScopes` in this cases like in the example. The scopes will be added to the automatically generated ones.

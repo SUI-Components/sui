@@ -2,10 +2,13 @@
 
 import React from 'react'
 import SUIContext from '@s-ui/react-context'
-import withContext from '../components/demo/HoC/withContext'
 import hoistNonReactStatics from 'hoist-non-react-statics'
+import withContext from '../components/demo/HoC/withContext'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
 
 const global = globalThis || window // eslint-disable-line
+
+addSetupEnvironment(global)
 
 const functionsToPatch = ['describe']
 

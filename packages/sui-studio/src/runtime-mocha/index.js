@@ -6,6 +6,9 @@ import SUIContext from '@s-ui/react-context'
 import withContext from '../components/demo/HoC/withContext'
 import {cleanDisplayName} from '../components/demo/utilities'
 import {requireFile} from '../components/tryRequire'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
+
+addSetupEnvironment(window)
 
 export const tryRequireContext = ({category, component}) =>
   requireFile({
