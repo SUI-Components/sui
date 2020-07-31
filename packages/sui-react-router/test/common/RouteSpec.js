@@ -20,6 +20,11 @@ describe('<Route>', () => {
     </div>
   )
   const Home = () => <h1>The HomePage</h1>
+  const Login = () => (
+    <form>
+      <input type="text" name="user" />
+    </form>
+  )
   const Search = ({params}) => (
     <h1>
       Search Results: <em>{params.keyword}</em>
@@ -294,6 +299,45 @@ describe('<Route>', () => {
       expect(renderedString)
         .to.include('App')
         .to.include('404')
+    })
+
+    describe('works with paths belonging to Home route and', () => {
+      const withRoutes = (
+        <Route path="/">
+          <IndexRoute component={Home} />
+          <Route path="login" component={Login} />
+          <Route path="*" component={Search} />
+        </Route>
+      )
+
+      it('renders Home page', async () => {
+        const renderedString = await getRenderedString({
+          location: '/',
+          withRoutes
+        })
+
+        expect(renderedString).to.equal('<h1>The HomePage</h1>')
+      })
+
+      it('renders Login page', async () => {
+        const renderedString = await getRenderedString({
+          location: '/login',
+          withRoutes
+        })
+
+        expect(renderedString).to.equal(
+          '<form><input type="text" name="user"/></form>'
+        )
+      })
+
+      it('renders Search page as the default page', async () => {
+        const renderedString = await getRenderedString({
+          location: '/whatever',
+          withRoutes
+        })
+
+        expect(renderedString).to.equal('<h1>Search Results: <em></em></h1>')
+      })
     })
   })
 
