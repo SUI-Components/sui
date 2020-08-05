@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.14.0 (2020-08-05)
+
+
+### Features
+
+* allow a way to send a general context object ([7c548a2](https://github.com/SUI-Components/sui/commit/7c548a2c7571bfc102ababd605e0689cc1e74aee))
+
+
+
 # 3.13.0 (2020-06-17)
 
 
