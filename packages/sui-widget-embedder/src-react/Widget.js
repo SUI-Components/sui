@@ -17,10 +17,11 @@ function renderWidgetOnDOM({children, context, node}) {
 }
 
 export default function Widget({
-  browser,
+  browser, // deprecated
   children,
-  domain,
-  i18n,
+  context: contextFromProps, // use this instead passing browser, domain and i18n
+  domain, // deprecated
+  i18n, // deprecated
   isVisible = true,
   node, // deprecated
   selector,
@@ -43,7 +44,7 @@ export default function Widget({
     // depending on renderMultiple, get the full array or only the first one
     const nodesToRender = renderMultiple ? [].slice.call(nodes) : [nodes[0]]
     // create the context object
-    const context = {browser, domain, i18n}
+    const context = contextFromProps || {browser, domain, i18n}
 
     isVisible &&
       nodesToRender.map(node => renderWidgetOnDOM({children, context, node}))
