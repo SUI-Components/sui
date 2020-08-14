@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/pde",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -19,6 +19,7 @@
     "@optimizely/optimizely-sdk": "4.0.0"
   },
   "devDependencies": {
-    "@s-ui/test": "3"
+    "@s-ui/test": "3",
+    "react": "16.13.1"
   }
 }
