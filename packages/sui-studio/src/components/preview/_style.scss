@@ -6,4 +6,145 @@
     font-family: monospace;
     padding: 16px;
   }
+  .sui-Studio {
+    &-h1 {
+      font-size: 2.5em;
+      color: #333;
+    }
+    &-h2 {
+      font-size: 2em;
+      color: #333;
+    }
+    &-h3 {
+      font-size: 1.5em;
+      color: #333;
+    }
+    &-h4 {
+      font-size: 1.25em;
+      color: #333;
+    }
+    &-p {
+      font-size: 1em;
+      line-height: 1.6;
+      color: #333;
+    }
+    &-label {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #888;
+      text-transform: uppercase;
+    }
+    &-a {
+      color: inherit;
+      text-decoration: underline;
+      &:hover {
+        color: $c-primary;
+      }
+    }
+    &-button {
+      background-color: #333;
+      border: none;
+      color: white;
+      font-size: 1em;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: 500;
+      &:hover {
+        color: white;
+        background-color: $c-primary;
+      }
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba($c-primary, 0.2);
+      }
+      &.outline {
+        background: transparent;
+        color: #333;
+        box-shadow: inset 0 0 0 1px #333;
+        &:hover {
+          color: white;
+          background-color: $c-primary;
+          box-shadow: none;
+        }
+        &:focus {
+          outline: none;
+          box-shadow: inset 0 0 0 1px $c-primary,
+            0 0 0 4px rgba($c-primary, 0.2);
+        }
+      }
+      & + button {
+        margin-left: 8px;
+      }
+    }
+    &-ul,
+    &-ol {
+      line-height: 1.6;
+      padding-left: 1.2em;
+      color: #333;
+    }
+    &-code {
+      font-family: monospace;
+      font-size: inherit;
+      color: #ff0074;
+      border: solid 1px #ddd;
+      padding: 4px;
+      border-radius: 4px;
+      white-space: nowrap;
+      background: #f0f0f0;
+    }
+    &-wrapper {
+      &--light {
+        padding: 1em 2em 2em;
+        margin: 1em auto;
+        background: white;
+        border-radius: 4px;
+      }
+      &--dark {
+        padding: 1em 2em 2em;
+        margin: 1em auto;
+        background: #222;
+        border-radius: 4px;
+        .sui-Studio {
+          &-h1,
+          &-h2,
+          &-h3,
+          &-h4,
+          &-p,
+          &-ul,
+          &-ol {
+            color: #f0f0f0;
+          }
+          &-label {
+            color: #bbb;
+          }
+          &-button {
+            background-color: white;
+            color: #333;
+            &:hover {
+              color: white;
+              background-color: $c-primary;
+            }
+            &.outline {
+              background: transparent;
+              color: white;
+              box-shadow: inset 0 0 0 1px #fff;
+              &:hover {
+                background-color: $c-primary;
+                box-shadow: none;
+              }
+              &:focus {
+                outline: none;
+                box-shadow: inset 0 0 0 1px $c-primary,
+                  0 0 0 4px rgba($c-primary, 0.2);
+              }
+            }
+          }
+          &-code {
+            border: solid 1px #666;
+            background: #333;
+          }
+        }
+      }
+    }
+  }
 }
