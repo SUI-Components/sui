@@ -246,7 +246,7 @@ chai.use(chaiDOM)
 describe('${componentInPascal}', () => {
   const Component = ${componentInPascal}
   const setup = setupEnvironment(Component)
-  
+
   it('should render without crashing', () => {
     // Given
     const props = {}
@@ -271,7 +271,7 @@ describe('${componentInPascal}', () => {
     expect(container.innerHTML).to.be.a('string')
     expect(container.innerHTML).to.not.have.lengthOf(0)
   })
-  
+
   it('example to be deleted', () => {
     // Example TO BE DELETED!!!!
 
