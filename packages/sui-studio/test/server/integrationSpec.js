@@ -81,7 +81,7 @@ describe('[Integration] sui-studio', () => {
 
       const {
         stdout: stdoutStudioGenerate,
-        stderr: stderrStudioGenerate
+        stderr: stderrStudioGenerate // eslint-disable-line
       } = await exec(
         `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-generate.js" -P tst -S t-est fake component`,
         {
