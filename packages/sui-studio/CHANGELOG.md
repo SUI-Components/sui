@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.22.0 (2020-08-24)
+
+
+### Features
+
+* bump version ([555396c](https://github.com/SUI-Components/sui/commit/555396c7e68326dde60479b9a24dc5c2fc919db5))
+* bump version ([bfed547](https://github.com/SUI-Components/sui/commit/bfed547ccf5025824ed8b3b7ee479db78cdbed80))
+* fix tests ([0368706](https://github.com/SUI-Components/sui/commit/03687067e1c635561026b1383b477f70626463e4))
+
+
+
 # 8.18.0 (2020-07-30)
 
 
