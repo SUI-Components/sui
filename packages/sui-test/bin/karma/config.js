@@ -61,6 +61,7 @@ const config = {
               options: {
                 babelrc: false,
                 cacheDirectory: true,
+                sourceType: 'unambiguous',
                 presets: [
                   [
                     require.resolve('babel-preset-sui'),
@@ -76,7 +77,12 @@ const config = {
               }
             }
           ]
-        }
+        },
+        {
+          // ignore css/scss require/imports files in the server
+          test: /\.s?css$/,
+          use: ['null-loader']
+        },
       ]
     }
   },
