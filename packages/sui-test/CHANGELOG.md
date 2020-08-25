@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.3.0 (2020-08-25)
+
+
+### Bug Fixes
+
+* fix ci test errors ([27e33ed](https://github.com/SUI-Components/sui/commit/27e33ed8bbcfa78aa36fcdeb6210bd18935d8ff6))
+
+
+### Features
+
+* add null-loader ([b34324d](https://github.com/SUI-Components/sui/commit/b34324d88ce5dd3e31f6cacbe19215549eefcc01))
+
+
+
 # 3.2.0 (2020-06-23)
 
 
