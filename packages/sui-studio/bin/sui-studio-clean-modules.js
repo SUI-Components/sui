@@ -4,7 +4,7 @@ const colors = require('colors')
 const path = require('path')
 const {remove} = require('fs-extra')
 const BASE_DIR = process.cwd()
-const cwds = require('./walker').componentsFullPath(BASE_DIR)
+const cwds = require('../scripts/walker').componentsFullPath(BASE_DIR)
 
 const removeNodeModulesFolder = cwd => {
   const [component, category] = cwd.split(path.sep).reverse()
