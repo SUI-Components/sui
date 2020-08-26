@@ -8,6 +8,7 @@ const DEMO_PATH = './demo'
 const NEW_DEMO_PATH = './tmpDemo'
 const TEST_PATH = './test'
 const NEW_TEST_PATH = './tmpTest'
+const {NO_COMPONENTS_MESSAGE} = require('../config')
 
 const log = console.log
 const error = console.error
@@ -67,7 +68,7 @@ exec('git cherry -v master', {maxBuffer: MAX_BUFFER}, (err, stdout) => {
   if (err) error(err)
   const componentsList = getComponentsList(stdout)
   if (componentsList.length < 1) {
-    log('There are no components to build.')
+    log(NO_COMPONENTS_MESSAGE)
     process.exit(0)
   }
   cleanComponents(componentsList)

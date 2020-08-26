@@ -6,6 +6,7 @@ const {join} = require('path')
 const fs = require('fs-extra')
 const {execSync} = require('child_process')
 const program = require('commander')
+const {NO_COMPONENTS_MESSAGE} = require('../config')
 
 program
   .option('-O, --only-changes', 'only build changed components or demos')
@@ -18,7 +19,6 @@ program
 console.log('\n', process.env.NODE_ENV, '\n')
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
-const NO_COMPONENTS_MESSAGE = 'There are no components to build.'
 const bundlerBuildPath = require.resolve('@s-ui/bundler/bin/sui-bundler-build')
 const {onlyChanges, phoenixCommand} = program
 let needsBuild = true
