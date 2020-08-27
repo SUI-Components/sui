@@ -93,7 +93,7 @@ Build a static version of a web app aimed to be deployed, where you will be able
 #### Options
 
 - **`-O, --only-changes`**: only build changed components or demos
-- **`-P, --phoenix-command <command>`**: phoenix command to be executed before the build
+- **`-B, --before-build <command>`**: command to be executed before the build
 
 ### `$ sui-studio dev`
 
