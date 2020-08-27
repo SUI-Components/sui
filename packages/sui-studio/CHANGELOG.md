@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.23.0 (2020-08-27)
+
+
+### Features
+
+* create a config ([89f966c](https://github.com/SUI-Components/sui/commit/89f966c8772abbdb94dbb119559cd865ddae792e))
+* make studio build work with only changed components ([b65c732](https://github.com/SUI-Components/sui/commit/b65c7327b99afd1e6ab9a6c5cd68b898b85c0274))
+* update readme ([19d47da](https://github.com/SUI-Components/sui/commit/19d47da3c2165882a377a194e2cc92c7db565fac))
+
+
+
 # 8.22.0 (2020-08-24)
 
 
