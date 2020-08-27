@@ -93,7 +93,19 @@ Build a static version of a web app aimed to be deployed, where you will be able
 #### Options
 
 - **`-O, --only-changes`**: only build changed components or demos
-- **`-P, --phoenix-command <command>`**: phoenix command to be executed before the build
+- **`-B, --before-build <command>`**: command to be executed before the build (not working with multiple commands like `npx sui-mono phoenix && npx sui-lint js`, try to group them into just one: `npm run before_build`, for example)
+
+#### Examples
+
+```bash
+# run the build for all components
+npx sui-studio build
+```
+
+```bash
+# run the build just for changed components and also execute whatever you want before the build (phoenix, lint...)
+npx sui-studio build --only-changes --before-build="npx sui-mono phoenix"
+```
 
 ### `$ sui-studio dev`
 
