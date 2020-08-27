@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.24.0 (2020-08-27)
+
+
+### Features
+
+* change studio build option for before build command ([7802d34](https://github.com/SUI-Components/sui/commit/7802d3402e2a0c382c9376ea4b823f8b38956be0))
+* upgrade readme ([900ca74](https://github.com/SUI-Components/sui/commit/900ca746a89326124053e7d03ef8c1ffe545e04a))
+
+
+
 # 8.23.0 (2020-08-27)
 
 
