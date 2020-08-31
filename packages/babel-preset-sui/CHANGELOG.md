@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.10.0 (2020-08-31)
+
+
+### Features
+
+* upgrade babel dependencies ([32ec90d](https://github.com/SUI-Components/sui/commit/32ec90d18cbb34b035b0bd6092af7d68a89965f3))
+
+
+
 # 3.9.0 (2020-07-06)
 
 
