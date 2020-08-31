@@ -2,8 +2,15 @@
 import PropTypes from 'prop-types'
 import {transform} from '@babel/standalone'
 import React, {Component} from 'react'
+import DOC from '../../../doc'
 
 import SUIContext from '@s-ui/react-context'
+
+;(exist => {
+  if (!exist) {
+    window.DOC = DOC
+  }
+})(window.DOC)
 
 const TRANSFORM_PRESETS = {
   presets: ['es2015-loose', 'stage-3', 'react']

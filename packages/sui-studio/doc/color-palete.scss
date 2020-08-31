@@ -1,0 +1,40 @@
+// COLOR PALETE NAMES (https://colornames.org/)
+$c-palette-white: #ffffff;
+$c-palette-tungsten: #f0f0f0;
+$c-palette-steam: #dddddd;
+$c-palette-blyatful: #bbbbbb;
+$c-palette-true-gray: #888888;
+$c-palette-cursed-grey: #666666;
+$c-palette-dark-charcoal: #333333;
+$c-palette-mineshaft: #222222;
+$c-palette-hot-pink: #ff0074;
+$c-palette-vivid-cerulean: #00aaee;
+$c-palette-spectre-blue: #0099ff;
+$c-palette-dresden-blue: #0086bb;
+
+// STUDIO DOC COLORS
+// sui-studio greyscale
+$c-sui-studio-doc-g000: $c-palette-white;
+$c-sui-studio-doc-g100: $c-palette-tungsten;
+$c-sui-studio-doc-g200: $c-palette-steam;
+$c-sui-studio-doc-g300: $c-palette-blyatful;
+$c-sui-studio-doc-g500: $c-palette-true-gray;
+$c-sui-studio-doc-g600: $c-palette-cursed-grey;
+$c-sui-studio-doc-g800: $c-palette-dark-charcoal;
+$c-sui-studio-doc-g900: $c-palette-mineshaft;
+
+// primary
+$c-sui-studio-doc-primary-light: $c-palette-vivid-cerulean;
+$c-sui-studio-doc-primary: $c-palette-spectre-blue;
+$c-sui-studio-doc-primary-dark: $c-palette-dresden-blue;
+
+// sui-studio colors
+$c-sui-studio-doc-white: $c-palette-white;
+$c-sui-studio-doc-base: $c-palette-dark-charcoal;
+$c-sui-studio-doc-link: $c-palette-dark-charcoal;
+$c-sui-studio-doc-hightlight: $c-palette-hot-pink;
+
+$c-sui-studio-doc-dark-mode-white: $c-palette-white;
+$c-sui-studio-doc-dark-mode-base: $c-palette-tungsten;
+$c-sui-studio-doc-dark-mode-link: $c-palette-tungsten;
+$c-sui-studio-doc-dark-mode-hightlight: $c-palette-hot-pink;

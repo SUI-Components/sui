@@ -1,0 +1,10 @@
+.sui-studio-doc-label {
+  color: $c-sui-studio-doc-g500;
+  text-transform: $tt-sui-studio-doc-uppercase;
+  line-height: 1.6;
+  font-size: .75rem;
+  font-weight: $fw-sui-studio-doc-regular;
+  &.sui-studio-doc-label-mode-dark {
+    color: $c-sui-studio-doc-g300;
+  }
+}

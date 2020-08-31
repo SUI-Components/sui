@@ -1,4 +1,7 @@
+@import "../../../doc/index";
+
 .sui-StudioPreview {
+  padding: 10px;
   &-error {
     background-color: #c10000;
     color: #f0f0f0;
@@ -72,7 +75,7 @@
             0 0 0 4px rgba($c-primary, 0.2);
         }
       }
-      & + button {
+      & + .sui-Studio-button {
         margin-left: 8px;
       }
     }

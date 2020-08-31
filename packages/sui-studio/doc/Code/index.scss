@@ -1,0 +1,14 @@
+.sui-studio-doc-code {
+  color: $c-sui-studio-doc-hightlight;
+  font-size: .9em;
+  font-family: $ff-sui-studio-doc-monospace;
+  font-weight: $fw-sui-studio-doc-regular;
+  background: $c-sui-studio-doc-g100;
+  border: solid 1px $c-sui-studio-doc-g200;
+  border-radius: 4px;
+  padding: 0 2px;
+  &.sui-studio-doc-code-mode-dark {
+    border: solid 1px $c-sui-studio-doc-g600;
+    background: $c-sui-studio-doc-g800;
+  }
+}

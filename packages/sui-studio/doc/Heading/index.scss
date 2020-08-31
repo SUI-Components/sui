@@ -1,0 +1,29 @@
+.sui-studio-doc-heading {
+  margin: 0.8em 0 0.2em 0;
+  font-family: $ff-sui-studio-doc-sans-serif;
+  @at-root {
+    &-h1,
+    h1#{&} {
+      font-size: $fz-sui-studio-doc-xxl;
+      font-weight: $fw-sui-studio-doc-black;
+    }
+
+    &-h2,
+    h2#{&} {
+      font-size: $fz-sui-studio-doc-xl;
+      font-weight: $fw-sui-studio-doc-bold;
+    }
+
+    &-h3,
+    h3#{&} {
+      font-size: $fz-sui-studio-doc-lg;
+      font-weight: $fw-sui-studio-doc-bold;
+    }
+
+    &-h4,
+    h4#{&} {
+      font-size: $fz-sui-studio-doc-md;
+      font-weight: $fw-sui-studio-doc-bold;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.sui-studio-doc-separator {
+  width: 100%;
+  background-color: $c-sui-studio-doc-base;
+  hr {
+    margin: 0;
+    border: 1px solid transparent;
+  }
+  margin: .3em 0;
+  .sui-studio-doc-separator-content {
+    margin: -2px 0.3em;
+    display: block;
+    padding-left: calc(10px - 0.3em);
+    padding-right: calc(10px - 0.3em);
+    color: $c-sui-studio-doc-white;
+    &:empty {
+      min-height: 2px;
+    }
+  }
+  &.sui-studio-doc-separator-mode-dark {
+    .sui-studio-doc-separator-content {
+      background-color: $c-sui-studio-doc-dark-mode-base;
+      color: $c-sui-studio-doc-base;
+    }
+  }
+}

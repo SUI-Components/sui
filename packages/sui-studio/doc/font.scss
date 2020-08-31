@@ -1,0 +1,57 @@
+// FONT-FAMILY ff
+$ff-sui-studio-doc-monospace: 'Roboto Mono', monospace;
+$ff-sui-studio-doc-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+
+// FONT-SIZE fz
+$fz-sui-studio-doc-xs: 0.8em;
+$fz-sui-studio-doc-sm: 1em;
+$fz-sui-studio-doc-md: 1.25em;
+$fz-sui-studio-doc-lg: 1.5em;
+$fz-sui-studio-doc-xl: 2em;
+$fz-sui-studio-doc-xxl: 2.5em;
+
+// FONT-STRECH fst
+$fst-sui-studio-doc-ultra-condensed: ultra-condensed;
+$fst-sui-studio-doc-extra-condensed: extra-condensed;
+$fst-sui-studio-doc-condensed: condensed;
+$fst-sui-studio-doc-semi-condensed: semi-condensed;
+$fst-sui-studio-doc-normal: normal;
+$fst-sui-studio-doc-semi-expanded: semi-expanded;
+$fst-sui-studio-doc-expanded: expanded;
+$fst-sui-studio-doc-extra-expanded: extra-expanded;
+$fst-sui-studio-doc-ultra-expanded: ultra-expanded;
+
+// FONT_STYLE fs
+$fs-sui-studio-doc-normal: normal;
+$fs-sui-studio-doc-italic: italic;
+$fs-sui-studio-doc-oblique: oblique;
+
+// FONT-WIDTH fw
+$fw-sui-studio-doc-thin: 100;
+$fw-sui-studio-doc-lighter: 200;
+$fw-sui-studio-doc-light: 300;
+$fw-sui-studio-doc-regular: 400;
+$fw-sui-studio-doc-medium: 500;
+$fw-sui-studio-doc-semi-bold: 600;
+$fw-sui-studio-doc-bold: 700;
+$fw-sui-studio-doc-black: 900;
+
+@mixin td-sui-studio-doc-underscore() {
+  &:after {
+    content: ' ';
+    display: block;
+    border: 1px solid #d0d0d0;
+  }
+}
+@mixin td-sui-studio-doc-overscore() {
+  &:before {
+    content: ' ';
+    display: block;
+    border: 1px solid #d0d0d0;
+  }
+}
+
+// TEXT-TRANSFORM tt
+$tt-sui-studio-doc-capitalize: capitalize;
+$tt-sui-studio-doc-uppercase: uppercase;
+$tt-sui-studio-doc-lowercase: lowercase;

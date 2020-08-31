@@ -1,0 +1,8 @@
+.sui-studio-doc-article {
+  padding: 1em 2em 2em;
+  border-radius: 4px;
+  background: $c-sui-studio-doc-white;
+  &-mode-dark {
+    background: $c-sui-studio-doc-g900;
+  }
+}
