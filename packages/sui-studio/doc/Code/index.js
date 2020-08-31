@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 import Typography from '../Typography'
 
-const Paragraph = ({
+const Code = ({
   children,
   className,
   elementType = 'code',
@@ -25,6 +25,6 @@ const Paragraph = ({
     {children}
   </Typography>
 )
-Paragraph.displayName = 'Code'
+Code.displayName = 'Code'
 
-export default Paragraph
+export default Code
