@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.25.0 (2020-08-31)
+
+
+### Bug Fixes
+
+* check for the test folder ([472d621](https://github.com/SUI-Components/sui/commit/472d621d973af5bee213e9978201174b05bcbad8))
+
+
+
 # 8.24.0 (2020-08-27)
 
 
