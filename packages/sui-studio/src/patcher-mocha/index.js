@@ -71,7 +71,10 @@ functionsToPatch.forEach(fnName => {
           EnhanceComponentWithLegacyContext
         )
 
-        return originalFn(`[${prop}] ${title}`, cb.partial(EnhanceComponent))
+        return originalFn(
+          `[${prop}] ${title}`,
+          cb.partial(EnhanceComponent, context)
+        )
       }
     }
   }
