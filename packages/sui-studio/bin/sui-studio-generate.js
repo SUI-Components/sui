@@ -221,253 +221,256 @@ return (<${componentInPascal} />)
   Separator
 } = window.DOC
 
-return (<div className="sui-StudioPreview">
-  <Heading.H1>&lt;Component Name&gt;</Heading.H1>
-  <Paragraph>
-    &lt;This is a placeholder text. Replace it with the component usage description&gt; 
-  </Paragraph>
-  <Grid cols={1} gutter={10}>
-    <Grid.Cell>
-      <Article>
-        <Heading.H2>&lt;Prop&gt;</Heading.H2>
-        <Paragraph>
-          &lt;Replace me for the prop description&gt;
-        </Paragraph>
-        <${componentInPascal} />)
-      </Article>
-    </Grid.Cell>
-  </Grid>
-  <!-- also remove this demo until next comment-->
-  <Grid cols={2} gutter={[5, 10]}>
-    <Grid.Cell>
-      <Article>
-        <Grid cols={1} gutter={[5, 10]}>
-          <Grid.Cell>
-            <Heading.H1>Heading one</Heading.H1>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Heading.H2>Heading two</Heading.H2>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Heading.H3>Heading three</Heading.H3>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Heading.H4>Heading four</Heading.H4>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Paragraph>
-              This is just an example of a paragraph styled using the{' '}
-              <Code>Code</Code> element with a random text just to get a
-              few more lines here.
-            </Paragraph>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Paragraph>
-              <Anchor href="#">This is a link</Anchor>
-            </Paragraph>
-          </Grid.Cell>
-          <Grid.Cell>
-            <List.Unordered>
-              <List.Item>Item number 1</List.Item>
-              <List.Item>Item number 2</List.Item>
-              <List.Item>Item number 3</List.Item>
-            </List.Unordered>
-          </Grid.Cell>
-          <Grid.Cell>
-            <List.Ordered>
-              <List.Item>Item number 1</List.Item>
-              <List.Item>Item number 2</List.Item>
-              <List.Item>Item number 3</List.Item>
-            </List.Ordered>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Paragraph>
-              <Label>This is a label</Label>
-            </Paragraph>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Button fullWidth>button</Button>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Button outline fullWidth>
-              button
-            </Button>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Button.Group fullWidth>
-              <Button>button</Button>
-              <Button>button</Button>
-              <Button>button</Button>
-              <Button>button</Button>
-              <Button>button</Button>
-            </Button.Group>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Button.Group outline fullWidth>
-              <Button>button</Button>
-              <Button>button</Button>
-              <Button>button</Button>
-              <Button>button</Button>
-              <Button>button</Button>
-            </Button.Group>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Quote>Quote</Quote>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Text>Text</Text>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Grid cols={3} gutter={[5, 5]}>
-              <Grid.Cell>
-                <Text.Bold>Text.Bold</Text.Bold>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Strong>Text.Strong</Text.Strong>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Italic>Text.Italic</Text.Italic>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Emphasized>Text.Emphasized</Text.Emphasized>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Mark>Text.Mark</Text.Mark>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Small>Text.Small</Text.Small>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Deleted>Text.Deleted</Text.Deleted>
-              </Grid.Cell>
-            </Grid>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Separator />
-            <Separator>Separator</Separator>
-          </Grid.Cell>
-        </Grid>
-      </Article>
-    </Grid.Cell>
-    <Grid.Cell>
-      <Article mode="dark">
-        <Grid cols={1} gutter={[5, 10]}>
-          <Grid.Cell>
-            <Heading.H1 mode="dark">Heading one</Heading.H1>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Heading.H2 mode="dark">Heading two</Heading.H2>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Heading.H3 mode="dark">Heading three</Heading.H3>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Heading.H4 mode="dark">Heading four</Heading.H4>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Paragraph mode="dark">
-              This is just an example of a paragraph styled using the{' '}
-              <Code mode="dark">Code</Code> element with a random text
-              just to get a few more lines here.
-            </Paragraph>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Paragraph>
-              <Anchor href="#" mode="dark">
-                This is a link
-              </Anchor>
-            </Paragraph>
-          </Grid.Cell>
-          <Grid.Cell>
-            <List.Unordered mode="dark">
-              <List.Item mode="dark">Item number 1</List.Item>
-              <List.Item mode="dark">Item number 2</List.Item>
-              <List.Item mode="dark">Item number 3</List.Item>
-            </List.Unordered>
-          </Grid.Cell>
-          <Grid.Cell>
-            <List.Ordered mode="dark">
-              <List.Item mode="dark">Item number 1</List.Item>
-              <List.Item mode="dark">Item number 2</List.Item>
-              <List.Item mode="dark">Item number 3</List.Item>
-            </List.Ordered>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Paragraph>
-              <Label mode="dark">This is a label</Label>
-            </Paragraph>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Button fullWidth mode="dark">
-              button
-            </Button>
-          </Grid.Cell>
-          <Grid.Cell>
-            <Button outline fullWidth mode="dark">
-              button
-            </Button>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Button.Group fullWidth mode="dark">
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-            </Button.Group>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Button.Group outline fullWidth mode="dark">
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-              <Button mode="dark">button</Button>
-            </Button.Group>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Quote mode="dark">Quote</Quote>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Text mode="dark">Text</Text>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Grid cols={3} gutter={[5, 5]}>
-              <Grid.Cell>
-                <Text.Bold mode="dark">Text.Bold</Text.Bold>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Strong mode="dark">Text.Strong</Text.Strong>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Italic mode="dark">Text.Italic</Text.Italic>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Emphasized mode="dark">
-                  Text.Emphasized
-                </Text.Emphasized>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Mark mode="dark">Text.Mark</Text.Mark>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Small mode="dark">Text.Small</Text.Small>
-              </Grid.Cell>
-              <Grid.Cell>
-                <Text.Deleted mode="dark">Text.Deleted</Text.Deleted>
-              </Grid.Cell>
-            </Grid>
-          </Grid.Cell>
-          <Grid.Cell offset={1}>
-            <Separator mode="dark" />
-            <Separator mode="dark">Separator</Separator>
-          </Grid.Cell>
-        </Grid>
-      </Article>
-    </Grid.Cell>
-  </Grid>
-  <!-- also remove this demo until previous comment-->
-</div>`
+return (
+  <div className="sui-StudioPreview">
+    <Heading.H1>&lt;Component Name&gt;</Heading.H1>
+    <Paragraph>
+      &lt;This is a placeholder text. Replace it with the component usage description&gt; 
+    </Paragraph>
+    <Grid cols={1} gutter={10}>
+      <Grid.Cell>
+        <Article>
+          <Heading.H2>&lt;Prop&gt;</Heading.H2>
+          <Paragraph>
+            &lt;Replace me for the prop description&gt;
+          </Paragraph>
+          <${componentInPascal} />)
+        </Article>
+      </Grid.Cell>
+    </Grid>
+    <!-- also remove this demo until next comment-->
+    <Grid cols={2} gutter={[5, 10]}>
+      <Grid.Cell>
+        <Article>
+          <Grid cols={1} gutter={[5, 10]}>
+            <Grid.Cell>
+              <Heading.H1>Heading one</Heading.H1>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Heading.H2>Heading two</Heading.H2>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Heading.H3>Heading three</Heading.H3>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Heading.H4>Heading four</Heading.H4>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Paragraph>
+                This is just an example of a paragraph styled using the{' '}
+                <Code>Code</Code> element with a random text just to get a
+                few more lines here.
+              </Paragraph>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Paragraph>
+                <Anchor href="#">This is a link</Anchor>
+              </Paragraph>
+            </Grid.Cell>
+            <Grid.Cell>
+              <List.Unordered>
+                <List.Item>Item number 1</List.Item>
+                <List.Item>Item number 2</List.Item>
+                <List.Item>Item number 3</List.Item>
+              </List.Unordered>
+            </Grid.Cell>
+            <Grid.Cell>
+              <List.Ordered>
+                <List.Item>Item number 1</List.Item>
+                <List.Item>Item number 2</List.Item>
+                <List.Item>Item number 3</List.Item>
+              </List.Ordered>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Paragraph>
+                <Label>This is a label</Label>
+              </Paragraph>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Button fullWidth>button</Button>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Button outline fullWidth>
+                button
+              </Button>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Button.Group fullWidth>
+                <Button>button</Button>
+                <Button>button</Button>
+                <Button>button</Button>
+                <Button>button</Button>
+                <Button>button</Button>
+              </Button.Group>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Button.Group outline fullWidth>
+                <Button>button</Button>
+                <Button>button</Button>
+                <Button>button</Button>
+                <Button>button</Button>
+                <Button>button</Button>
+              </Button.Group>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Quote>Quote</Quote>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Text>Text</Text>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Grid cols={3} gutter={[5, 5]}>
+                <Grid.Cell>
+                  <Text.Bold>Text.Bold</Text.Bold>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Strong>Text.Strong</Text.Strong>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Italic>Text.Italic</Text.Italic>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Emphasized>Text.Emphasized</Text.Emphasized>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Mark>Text.Mark</Text.Mark>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Small>Text.Small</Text.Small>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Deleted>Text.Deleted</Text.Deleted>
+                </Grid.Cell>
+              </Grid>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Separator />
+              <Separator>Separator</Separator>
+            </Grid.Cell>
+          </Grid>
+        </Article>
+      </Grid.Cell>
+      <Grid.Cell>
+        <Article mode="dark">
+          <Grid cols={1} gutter={[5, 10]}>
+            <Grid.Cell>
+              <Heading.H1 mode="dark">Heading one</Heading.H1>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Heading.H2 mode="dark">Heading two</Heading.H2>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Heading.H3 mode="dark">Heading three</Heading.H3>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Heading.H4 mode="dark">Heading four</Heading.H4>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Paragraph mode="dark">
+                This is just an example of a paragraph styled using the{' '}
+                <Code mode="dark">Code</Code> element with a random text
+                just to get a few more lines here.
+              </Paragraph>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Paragraph>
+                <Anchor href="#" mode="dark">
+                  This is a link
+                </Anchor>
+              </Paragraph>
+            </Grid.Cell>
+            <Grid.Cell>
+              <List.Unordered mode="dark">
+                <List.Item mode="dark">Item number 1</List.Item>
+                <List.Item mode="dark">Item number 2</List.Item>
+                <List.Item mode="dark">Item number 3</List.Item>
+              </List.Unordered>
+            </Grid.Cell>
+            <Grid.Cell>
+              <List.Ordered mode="dark">
+                <List.Item mode="dark">Item number 1</List.Item>
+                <List.Item mode="dark">Item number 2</List.Item>
+                <List.Item mode="dark">Item number 3</List.Item>
+              </List.Ordered>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Paragraph>
+                <Label mode="dark">This is a label</Label>
+              </Paragraph>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Button fullWidth mode="dark">
+                button
+              </Button>
+            </Grid.Cell>
+            <Grid.Cell>
+              <Button outline fullWidth mode="dark">
+                button
+              </Button>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Button.Group fullWidth mode="dark">
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+              </Button.Group>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Button.Group outline fullWidth mode="dark">
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+                <Button mode="dark">button</Button>
+              </Button.Group>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Quote mode="dark">Quote</Quote>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Text mode="dark">Text</Text>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Grid cols={3} gutter={[5, 5]}>
+                <Grid.Cell>
+                  <Text.Bold mode="dark">Text.Bold</Text.Bold>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Strong mode="dark">Text.Strong</Text.Strong>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Italic mode="dark">Text.Italic</Text.Italic>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Emphasized mode="dark">
+                    Text.Emphasized
+                  </Text.Emphasized>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Mark mode="dark">Text.Mark</Text.Mark>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Small mode="dark">Text.Small</Text.Small>
+                </Grid.Cell>
+                <Grid.Cell>
+                  <Text.Deleted mode="dark">Text.Deleted</Text.Deleted>
+                </Grid.Cell>
+              </Grid>
+            </Grid.Cell>
+            <Grid.Cell offset={1}>
+              <Separator mode="dark" />
+              <Separator mode="dark">Separator</Separator>
+            </Grid.Cell>
+          </Grid>
+        </Article>
+      </Grid.Cell>
+    </Grid>
+    <!-- also remove this demo until previous comment-->
+  </div>
+)
+`
   ),
 
   router &&
