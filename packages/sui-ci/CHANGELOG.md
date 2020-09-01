@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.2.0 (2020-09-01)
+
+
+### Features
+
+* add support to Github Enterprise ([35ccd00](https://github.com/SUI-Components/sui/commit/35ccd004b6ba218c5428fa5dfb19dd6da0659990))
+
+
+
 # 1.1.0 (2020-07-23)
 
 
