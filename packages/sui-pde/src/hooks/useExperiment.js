@@ -2,7 +2,7 @@ import {useContext, useMemo} from 'react'
 import PdeContext from '../contexts/PdeContext'
 
 /**
- * Hook to use a feature toggle
+ * Hook to use a experiment
  * @param {string} experimentName
  * @return {{variation: string}}
  */

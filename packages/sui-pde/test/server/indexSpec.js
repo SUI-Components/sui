@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {PDE as SuiPDE} from '../../src'
 import OptimizelyAdapter from '../../src/adapters/optimizely'
 
-describe('@s-ui ab', () => {
+describe('@s-ui pde', () => {
   it('works with the default adapter', done => {
     const ab = new SuiPDE({userId: 123})
     ab.getEnabledFeatures().then(features => {
