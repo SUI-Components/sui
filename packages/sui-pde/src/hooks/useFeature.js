@@ -9,7 +9,6 @@ import PdeContext from '../contexts/PdeContext'
  */
 export default function useFeature(featureKey, options = {}) {
   const {features = []} = useContext(PdeContext)
-  // console.log('useFeature', featureKey, features)
 
   const isActive = features.some(f => f === featureKey)
   return {isActive}
