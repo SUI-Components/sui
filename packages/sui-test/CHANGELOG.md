@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.4.0 (2020-09-02)
+
+
+### Features
+
+* add support to svg import on null-loader ([20449f0](https://github.com/SUI-Components/sui/commit/20449f06c2c9474947d1c86877c40b5413e8e3f2))
+
+
+
 # 3.3.0 (2020-08-25)
 
 
