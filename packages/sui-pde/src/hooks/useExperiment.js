@@ -14,5 +14,5 @@ export default function useExperiment(experimentName) {
     [experimentName, pde]
   )
 
-  return {variation, trackExperiment: pde.trackExperiment.bind(pde)}
+  return {variation}
 }
