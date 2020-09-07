@@ -8,7 +8,7 @@
     "prepare": "npm run lib"
   },
   "keywords": [],
-  "author": "Enablers Frontend",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@s-ui/i18n": "1"
