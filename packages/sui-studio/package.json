@@ -18,7 +18,7 @@
     "schibsted",
     "reactjs"
   ],
-  "author": "Carlos Villuendas <carlos.villuendas@scmspain.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@babel/standalone": "7",
