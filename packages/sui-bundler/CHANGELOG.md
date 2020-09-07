@@ -2,12 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.16.0 (2020-09-07)
+
+
+### Features
+
+* upgrade webpack and terser to try to stop CI errors ([0eda6c5](https://github.com/SUI-Components/sui/commit/0eda6c5203bb058f9862d9145e339f142fd855b4))
+
+
+
 # 6.15.0 (2020-07-22)
 
 
 ### Bug Fixes
 
 * use native ws as sockjs is giving problems with latest Node versions ([86fbcc3](https://github.com/SUI-Components/sui/commit/86fbcc34f1af86c4ac154e109cb1ff9381d3b1d7))
+
+
+### Features
+
+* restore miss commit change ([8d0a411](https://github.com/SUI-Components/sui/commit/8d0a411b4974e167cfe0ba5a66d67188016d28e9))
 
 
 
