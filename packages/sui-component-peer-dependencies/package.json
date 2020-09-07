@@ -7,7 +7,7 @@
     "react",
     "component"
   ],
-  "author": "David Almeida <davidbarna@gmail.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/react-context": "1",
