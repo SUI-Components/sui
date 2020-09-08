@@ -11,7 +11,7 @@
     "commitizen",
     "release"
   ],
-  "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/cz": "1",

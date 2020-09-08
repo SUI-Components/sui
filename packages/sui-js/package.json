@@ -7,7 +7,7 @@
     "prepare": "npm run lib"
   },
   "keywords": [],
-  "author": "Joan Claret <dpam23@gmail.com>",
+  "author": "",
   "dependencies": {
     "bowser": "1.8.1",
     "cookie": "0.3.1",

@@ -13,7 +13,7 @@
     "test:server:watch": "npm run test:server -- --watch"
   },
   "keywords": [],
-  "author": "Enablers Frontend",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "0.19.2"

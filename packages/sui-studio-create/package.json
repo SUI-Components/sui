@@ -12,7 +12,7 @@
     "schibsted",
     "reactjs"
   ],
-  "author": "David Almeida <davidbarna@gmail.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/helpers": "1",
