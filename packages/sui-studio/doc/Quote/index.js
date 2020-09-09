@@ -1,10 +1,11 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 const Quote = ({children, className, elementType = 'q', mode, ...props}) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
@@ -17,7 +18,7 @@ const Quote = ({children, className, elementType = 'q', mode, ...props}) => (
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 
 Quote.displayName = 'Quote'

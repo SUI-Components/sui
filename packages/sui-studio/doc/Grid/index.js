@@ -1,7 +1,6 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
-
-import Typography from '../Typography'
 
 const range = (length, start = 0) => {
   return Array.from({length}, (_, i) => start + i)

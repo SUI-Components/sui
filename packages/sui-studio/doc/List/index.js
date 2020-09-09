@@ -1,7 +1,8 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 const List = {}
 
@@ -12,7 +13,7 @@ List.Unordered = ({
   mode,
   ...props
 }) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
@@ -25,12 +26,12 @@ List.Unordered = ({
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 List.Unordered.displayName = 'Unordered'
 
 List.Ordered = ({children, className, elementType = 'ol', mode, ...props}) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
@@ -43,12 +44,12 @@ List.Ordered = ({children, className, elementType = 'ol', mode, ...props}) => (
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 List.Ordered.displayName = 'Ordered'
 
 List.Item = ({children, className, elementType = 'li', mode, ...props}) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
@@ -61,7 +62,7 @@ List.Item = ({children, className, elementType = 'li', mode, ...props}) => (
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 List.Item.displayName = 'Item'
 

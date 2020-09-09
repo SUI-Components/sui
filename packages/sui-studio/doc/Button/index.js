@@ -1,7 +1,8 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 const Button = ({
   children,
@@ -11,20 +12,20 @@ const Button = ({
   className,
   ...props
 }) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
       'sui-studio-doc-button',
       {
-        ['sui-studio-doc-button-outline']: outline,
+        'sui-studio-doc-button-outline': outline,
         [`sui-studio-doc-button-mode-${mode}`]: mode
       },
       className
     )}
   >
     {children}
-  </Typography>
+  </Base>
 )
 Button.displayName = 'Button'
 
@@ -36,20 +37,20 @@ Button.Group = ({
   outline,
   ...props
 }) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
       'sui-studio-doc-button-group',
       {
-        ['sui-studio-doc-button-group-outline']: outline,
+        'sui-studio-doc-button-group-outline': outline,
         [`sui-studio-doc-button-group-mode-${mode}`]: mode
       },
       className
     )}
   >
     {children}
-  </Typography>
+  </Base>
 )
 
 Button.Group.displayName = 'ButtonGroup'

@@ -1,7 +1,8 @@
-import React, {cloneElement} from 'react'
+/* eslint react/prop-types: 0 */
+import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 export const HEADING_ELEMENT = {
   h1: {
@@ -55,9 +56,9 @@ export const HEADING_ELEMENT = {
 }
 
 const Heading = ({elementType, children, ...props}) => (
-  <Typography {...props} elementType={elementType}>
+  <Base {...props} elementType={elementType}>
     {children}
-  </Typography>
+  </Base>
 )
 
 Heading.displayName = 'Heading'

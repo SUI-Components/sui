@@ -1,7 +1,8 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 const Paragraph = ({
   children,
@@ -10,7 +11,7 @@ const Paragraph = ({
   mode,
   ...props
 }) => (
-  <Typography
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
@@ -23,7 +24,7 @@ const Paragraph = ({
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 Paragraph.displayName = 'Paragraph'
 

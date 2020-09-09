@@ -1,11 +1,14 @@
+/* global location */
+/* eslint react/prop-types: 0 */
+
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 export const isExternalURL = url => {
   var match = url.match(
-    /^([^:\/?#]+:)?(?:\/\/([^\/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/
+    /^([^:/?#]+:)?(?:\/\/([^/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/
   )
   if (
     typeof match[1] === 'string' &&
@@ -27,10 +30,10 @@ export const isExternalURL = url => {
   return false
 }
 
-const Anchor = ({children, href, target, mode, className, ...props}) => {
+const Anchor = ({children, className, href, mode, target, ...props}) => {
   const isExternalLink = isExternalURL(href)
   return (
-    <Typography
+    <Base
       {...props}
       elementType="a"
       className={cx(
@@ -41,7 +44,7 @@ const Anchor = ({children, href, target, mode, className, ...props}) => {
       target={target || (isExternalLink ? '_blank' : undefined)}
     >
       {children}
-    </Typography>
+    </Base>
   )
 }
 Anchor.displayName = 'Anchor'

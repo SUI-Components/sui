@@ -1,10 +1,11 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 const Label = ({children, className, elementType = 'span', mode, ...props}) => (
-  <Typography
+  <Base
     {...props}
     className={cx(
       'sui-studio-doc-label',
@@ -17,7 +18,7 @@ const Label = ({children, className, elementType = 'span', mode, ...props}) => (
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 Label.displayName = 'Label'
 

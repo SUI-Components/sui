@@ -1,30 +1,31 @@
-import React, {createElement} from 'react'
+/* eslint react/prop-types: 0 */
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Box from '../Box'
 
 const Article = ({
   children,
   className,
   elementType = 'article',
+  outline,
   mode,
   ...props
-}) => createElement(
-  elementType,
-  {
+}) =>
+  Box.call(this, {
     ...props,
+    elementType,
     className: cx(
       'sui-studio-doc-article',
       {
-        [`sui-studio-doc-article-mode-${mode}`]: mode
+        [`sui-studio-doc-article-mode-${mode}`]: mode,
+        'sui-studio-doc-article-outline': outline
       },
       className
     ),
-    mode
+    mode,
+    children
+  })
 
-  },
-  children
-)
 Article.displayName = 'Article'
 
 export default Article

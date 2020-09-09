@@ -1,16 +1,11 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
-const Code = ({
-  children,
-  className,
-  elementType = 'code',
-  mode,
-  ...props
-}) => (
-  <Typography
+const Code = ({children, className, elementType = 'code', mode, ...props}) => (
+  <Base
     {...props}
     elementType={elementType}
     className={cx(
@@ -23,7 +18,7 @@ const Code = ({
     mode={mode}
   >
     {children}
-  </Typography>
+  </Base>
 )
 Code.displayName = 'Code'
 

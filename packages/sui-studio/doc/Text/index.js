@@ -1,7 +1,8 @@
-import React, {Fragment, Children, isValidElement} from 'react'
+/* eslint react/prop-types: 0 */
+import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 export const TEXT_ELEMENT = {
   b: {
@@ -127,9 +128,9 @@ export const TEXT_ELEMENT = {
 }
 
 const Text = ({elementType = 'span', children, ...props}) => (
-  <Typography {...props} elementType={elementType}>
+  <Base {...props} elementType={elementType}>
     {children}
-  </Typography>
+  </Base>
 )
 
 Text.displayName = 'Text'

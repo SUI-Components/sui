@@ -1,4 +1,4 @@
-.sui-studio-doc-article {
+.sui-studio-doc-box {
   padding: 1em 2em;
   border-radius: 4px;
   background: $c-sui-studio-doc-white;
@@ -11,13 +11,12 @@
     border-color: $c-sui-studio-doc-g900;
     background: $c-sui-studio-doc-g900;
   }
-  &.sui-studio-doc-article-outline {
+  &.sui-studio-doc-box-outline {
     background: $c-sui-studio-doc-white;
     border-width: 1px;
     border-style: solid;
-    color: red;
     border-color: $c-sui-studio-doc-g900;
-    &.sui-studio-doc-article-mode-dark {
+    &.sui-studio-doc-box-mode-dark {
       border-color: $c-sui-studio-doc-white;
       background: $c-sui-studio-doc-g900;
     }

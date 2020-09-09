@@ -1,7 +1,8 @@
-import React, {Fragment} from 'react'
+/* eslint react/prop-types: 0 */
+import React from 'react'
 import cx from 'classnames'
 
-import Typography from '../Typography'
+import Base from '../Base'
 
 const Separator = ({
   children,
@@ -20,14 +21,14 @@ const Separator = ({
     )}
   >
     <hr />
-    <Typography
+    <Base
       {...props}
       className={cx('sui-studio-doc-separator-content', className)}
       elementType={elementType}
       mode={mode}
     >
       {children}
-    </Typography>
+    </Base>
   </div>
 )
 

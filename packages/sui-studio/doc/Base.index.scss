@@ -1,0 +1,79 @@
+.sui-studio-doc {
+  color: $c-sui-studio-doc-base;
+  font-family: $ff-sui-studio-doc-sans-serif;
+  font-weight: $fw-sui-studio-doc-lighter;
+  line-height: 1.4;
+  @at-root {
+    b#{&},
+    strong#{&} {
+      font-weight: $fw-sui-studio-doc-bold;
+    }
+  }
+  &.sui-studio-doc {
+    &-tt {
+      &-uppercase {
+        text-transform: $tt-sui-studio-doc-uppercase;
+      }
+      &-capitalize {
+        text-transform: $tt-sui-studio-doc-capitalize;
+      }
+      &-lowercase {
+        text-transform: $tt-sui-studio-doc-lowercase;
+      }
+    }
+    &-fw {
+      &-thin {
+        font-weight: $fw-sui-studio-doc-thin;
+      }
+      &-lighter {
+        font-weight: $fw-sui-studio-doc-lighter;
+      }
+      &-light {
+        font-weight: $fw-sui-studio-doc-light;
+      }
+      &-regular {
+        font-weight: $fw-sui-studio-doc-regular;
+      }
+      &-medium {
+        font-weight: $fw-sui-studio-doc-medium;
+      }
+      &-semi-bold {
+        font-weight: $fw-sui-studio-doc-semi-bold;
+      }
+      &-bold {
+        font-weight: $fw-sui-studio-doc-bold;
+      }
+      &-black {
+        font-weight: $fw-sui-studio-doc-black;
+      }
+    }
+    &-td {
+      &-underscore {
+        @include td-sui-studio-doc-underscore;
+      }
+      &-overscore {
+        @include td-sui-studio-doc-overscore;
+      }
+      &-underline {
+        text-decoration: underline;
+      }
+      &-overline {
+        text-decoration: overline;
+      }
+      &-line-through {
+        text-decoration: line-through;
+      }
+    }
+    &-deprecated {
+      text-decoration: line-through;
+    }
+    &-full-width {
+      width: 100%;
+    }
+    &-mode {
+      &-dark {
+        color: $c-sui-studio-doc-dark-mode-base;
+      }
+    }
+  }
+}
