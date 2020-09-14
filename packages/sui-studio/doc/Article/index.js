@@ -8,7 +8,6 @@ const Article = ({
   className,
   elementType = 'article',
   outline,
-  mode,
   ...props
 }) =>
   Box.call(this, {
@@ -17,12 +16,10 @@ const Article = ({
     className: cx(
       'sui-studio-doc-article',
       {
-        [`sui-studio-doc-article-mode-${mode}`]: mode,
         'sui-studio-doc-article-outline': outline
       },
       className
     ),
-    mode,
     children
   })
 

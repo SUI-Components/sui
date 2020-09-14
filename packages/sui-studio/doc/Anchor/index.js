@@ -30,18 +30,15 @@ export const isExternalURL = url => {
   return false
 }
 
-const Anchor = ({children, className, href, mode, target, ...props}) => {
+const Anchor = ({children, className, href = '#', target, ...props}) => {
   const isExternalLink = isExternalURL(href)
   return (
     <Base
-      {...props}
       elementType="a"
-      className={cx(
-        'sui-studio-doc-anchor',
-        {[`sui-studio-doc-anchor-mode-${mode}`]: mode},
-        className
-      )}
+      className={cx('sui-studio-doc-anchor', className)}
+      {...props}
       target={target || (isExternalLink ? '_blank' : undefined)}
+      href={href}
     >
       {children}
     </Base>

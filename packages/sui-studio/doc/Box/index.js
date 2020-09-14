@@ -2,15 +2,25 @@
 import {createElement} from 'react'
 import cx from 'classnames'
 
-const Box = ({
+import {withConditionalProvider} from '../Base'
+
+let Box = ({
   children,
   className,
   elementType = 'div',
   outline,
   mode,
+  color,
   ...props
-}) =>
-  createElement(
+}) => {
+  const styleColorProps = {}
+  if (color) {
+    styleColorProps.borderColor = color
+    if (!outline) {
+      styleColorProps.background = color
+    }
+  }
+  return createElement(
     elementType,
     {
       ...props,
@@ -22,11 +32,13 @@ const Box = ({
         },
         className
       ),
-      mode
+      style: {...props.style, ...styleColorProps}
     },
     children
   )
+}
 
+Box = withConditionalProvider(Box)
 Box.displayName = 'Box'
 
 export default Box

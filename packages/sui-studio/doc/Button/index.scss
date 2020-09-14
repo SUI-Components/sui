@@ -6,7 +6,7 @@
   padding: 6.5px 12px;
   border-radius: 4px;
   font-weight: $fw-sui-studio-doc-medium;
-  &.sui-studio-doc-button-mode-dark {
+  &.sui-studio-doc-mode-dark {
     background-color: $c-sui-studio-doc-dark-mode-white;
     color: $c-sui-studio-doc-base;
   }
@@ -20,7 +20,7 @@
     background-color: transparent;
     box-shadow: inset 0 0 0 1px $c-sui-studio-doc-g800;
     color: $c-sui-studio-doc-g800;
-    &.sui-studio-doc-button-mode-dark {
+    &.sui-studio-doc-mode-dark {
       background-color: transparent;
       box-shadow: inset 0 0 0 1px $c-sui-studio-doc-dark-mode-white;
       color: $c-sui-studio-doc-dark-mode-white;
@@ -61,7 +61,7 @@
       border-color: $c-sui-studio-doc-g800;
       border-width: 1px 0 1px 1px;
       color: $c-sui-studio-doc-g800;
-      &.sui-studio-doc-button-mode-dark {
+      &.sui-studio-doc-mode-dark {
         background-color: transparent;
         border-color: $c-sui-studio-doc-dark-mode-white;
         color: $c-sui-studio-doc-dark-mode-white;

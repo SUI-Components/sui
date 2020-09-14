@@ -4,18 +4,11 @@ import cx from 'classnames'
 
 import Base from '../Base'
 
-const Quote = ({children, className, elementType = 'q', mode, ...props}) => (
+const Quote = ({children, className, elementType = 'q', ...props}) => (
   <Base
     {...props}
     elementType={elementType}
-    className={cx(
-      'sui-studio-doc-quote',
-      {
-        [`sui-studio-doc-quote-mode-${mode}`]: mode
-      },
-      className
-    )}
-    mode={mode}
+    className={cx('sui-studio-doc-quote', className)}
   >
     {children}
   </Base>

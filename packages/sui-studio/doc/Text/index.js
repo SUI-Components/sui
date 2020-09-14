@@ -7,123 +7,48 @@ import Base from '../Base'
 export const TEXT_ELEMENT = {
   b: {
     elementType: 'b',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-bold',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn => cx('sui-studio-doc-text', 'sui-studio-doc-text-bold', cn)
   },
   strong: {
     elementType: 'strong',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-strong',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn => cx('sui-studio-doc-text', 'sui-studio-doc-text-strong', cn)
   },
   i: {
     elementType: 'i',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-italic',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn => cx('sui-studio-doc-text', 'sui-studio-doc-text-italic', cn)
   },
   em: {
     elementType: 'em',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-emphasized',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn =>
+      cx('sui-studio-doc-text', 'sui-studio-doc-text-emphasized', cn)
   },
   mark: {
     elementType: 'mark',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-marked',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn => cx('sui-studio-doc-text', 'sui-studio-doc-text-marked', cn)
   },
   small: {
     elementType: 'small',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-small',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn => cx('sui-studio-doc-text', 'sui-studio-doc-text-small', cn)
   },
   del: {
     elementType: 'del',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-deleted',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn =>
+      cx('sui-studio-doc-text', 'sui-studio-doc-text-deleted', cn)
   },
   ins: {
     elementType: 'ins',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-inserted',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn =>
+      cx('sui-studio-doc-text', 'sui-studio-doc-text-inserted', cn)
   },
   sub: {
     elementType: 'sub',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-subscript',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn =>
+      cx('sui-studio-doc-text', 'sui-studio-doc-text-subscript', cn)
   },
   sup: {
     elementType: 'sup',
-    className: (cn, mode) =>
-      cx(
-        'sui-studio-doc-text',
-        'sui-studio-doc-text-superscript',
-        {
-          [`sui-studio-doc-text-mode-${mode}`]: mode
-        },
-        cn
-      )
+    className: cn =>
+      cx('sui-studio-doc-text', 'sui-studio-doc-text-superscript', cn)
   }
 }
 
@@ -139,14 +64,12 @@ Text.Bold = ({
   children,
   className,
   elementType = TEXT_ELEMENT.b.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
-    className={TEXT_ELEMENT.b.className(className, mode)}
+    className={TEXT_ELEMENT.b.className(className)}
     elementType={elementType}
-    mode={mode}
   >
     {children}
   </Text>
@@ -157,14 +80,12 @@ Text.Strong = ({
   children,
   className,
   elementType = TEXT_ELEMENT.strong.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
-    className={TEXT_ELEMENT.strong.className(className, mode)}
+    className={TEXT_ELEMENT.strong.className(className)}
     elementType={elementType}
-    mode={mode}
   >
     {children}
   </Text>
@@ -175,14 +96,12 @@ Text.Italic = ({
   children,
   className,
   elementType = TEXT_ELEMENT.i.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
     elementType={elementType}
-    className={TEXT_ELEMENT.i.className(className, mode)}
-    mode={mode}
+    className={TEXT_ELEMENT.i.className(className)}
   >
     {children}
   </Text>
@@ -193,14 +112,12 @@ Text.Emphasized = ({
   children,
   className,
   elementType = TEXT_ELEMENT.em.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
     elementType={elementType}
-    className={TEXT_ELEMENT.em.className(className, mode)}
-    mode={mode}
+    className={TEXT_ELEMENT.em.className(className)}
   >
     {children}
   </Text>
@@ -211,14 +128,12 @@ Text.Mark = ({
   children,
   className,
   elementType = TEXT_ELEMENT.mark.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
     elementType={elementType}
-    className={TEXT_ELEMENT.mark.className(className, mode)}
-    mode={mode}
+    className={TEXT_ELEMENT.mark.className(className)}
   >
     {children}
   </Text>
@@ -229,14 +144,12 @@ Text.Small = ({
   children,
   className,
   elementType = TEXT_ELEMENT.small.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
     elementType={elementType}
-    className={TEXT_ELEMENT.small.className(className, mode)}
-    mode={mode}
+    className={TEXT_ELEMENT.small.className(className)}
   >
     {children}
   </Text>
@@ -247,14 +160,12 @@ Text.Deleted = ({
   children,
   className,
   elementType = TEXT_ELEMENT.del.elementType,
-  mode,
   ...props
 }) => (
   <Text
     {...props}
     elementType={elementType}
-    className={TEXT_ELEMENT.del.className(className, mode)}
-    mode={mode}
+    className={TEXT_ELEMENT.del.className(className)}
   >
     {children}
   </Text>

@@ -1,6 +1,8 @@
 /* eslint react/prop-types: 0 */
-import React, {createElement, Fragment} from 'react'
+import React, {createElement, Fragment, useContext} from 'react'
 import cx from 'classnames'
+
+import Context from './context'
 
 export const MODES = {
   LIGHT: 'light',
@@ -30,6 +32,50 @@ export const TEXT_DECORATION = {
   UNDERLINE: 'underline',
   OVERLINE: 'overline',
   LINETHROUGH: 'line-through'
+}
+
+export const ConditionalProvider = ({
+  children,
+  content,
+  elementType,
+  needsProvider,
+  mode,
+  ...otherProps
+}) => {
+  const contextProps = useContext(Context) || {}
+  if (!needsProvider) {
+    return children({
+      ...otherProps,
+      ...contextProps,
+      elementType,
+      children: content
+    })
+  }
+  return (
+    <Context.Provider value={{mode}}>
+      {children({...otherProps, mode, elementType, children: content})}
+    </Context.Provider>
+  )
+}
+
+export const withConditionalProvider = Component => {
+  const Base = ({...otherProps} = {}) => {
+    const needsProvider =
+      Object.keys(otherProps).includes('mode') &&
+      Object.entries(MODES)
+        .flat()
+        .includes(otherProps.mode)
+    return (
+      <ConditionalProvider
+        {...otherProps}
+        content={otherProps.children}
+        needsProvider={needsProvider}
+      >
+        {Component}
+      </ConditionalProvider>
+    )
+  }
+  return Base
 }
 
 export const transformProps = (
@@ -98,11 +144,12 @@ const Base = ({children, elementType, ...otherProps}) => {
   ) {
     ownElementType = 'span'
   }
-  return createElement(ownElementType, ownProps, children)
+  return createElement(ownElementType, {...ownProps}, children)
 }
 
-Base.displayName = 'Base'
-Base.propTypes = {}
-Base.defaultProps = {}
+const BaseConditionalProvided = withConditionalProvider(Base)
+BaseConditionalProvided.displayName = 'Base'
+BaseConditionalProvided.propTypes = {}
+BaseConditionalProvided.defaultProps = {}
 
-export default Base
+export default BaseConditionalProvided
