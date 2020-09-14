@@ -218,6 +218,7 @@ module.exports = {
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
     'no-prototype-builtins': RULES.OFF,
+    'no-return-await': RULES.WARNING,
     'no-unused-expressions': RULES.OFF,
     'babel/no-unused-expressions': RULES.OFF,
     strict: RULES.OFF,
