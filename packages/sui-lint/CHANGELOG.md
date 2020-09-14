@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.17.0 (2020-09-14)
+
+
+### Features
+
+* add no-return-await rule warning ([f536995](https://github.com/SUI-Components/sui/commit/f5369959b433aea63678d3140c99a6444ad11a5d))
+
+
+
 # 3.16.0 (2020-07-23)
 
 
