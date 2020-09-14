@@ -27,7 +27,7 @@
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "@s-ui/react-context": "1",
-    "@s-ui/react-router": "1.0.0-beta.11",
+    "@s-ui/react-router": "1",
     "@s-ui/test": "3",
     "@testing-library/react": "10.0.4",
     "@testing-library/user-event": "10.0.1",
@@ -50,6 +50,9 @@
     "normalize.css": "8.0.1",
     "react-docgen": "5.1.0",
     "terminal-banner": "1.1.0"
+  },
+  "devDependencies": {
+    "@s-ui/theme": "8"
   },
   "suistudio-webpack": {
     "vendor": [

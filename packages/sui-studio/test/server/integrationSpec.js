@@ -20,7 +20,7 @@ describe('[Integration] sui-studio', () => {
     this.timeout(0)
 
     const {stdout: stdoutStudioBuild} = await exec(
-      `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-build" -C`,
+      `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-build"`,
       {
         cwd: SAMPLE_STUDIO_PATH,
         env: {

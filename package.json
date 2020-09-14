@@ -68,11 +68,5 @@
   "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "sui-precommit run",
-      "commit-msg": "validate-commit-msg"
-    }
   }
 }
