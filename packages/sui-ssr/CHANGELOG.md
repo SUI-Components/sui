@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.8.0 (2020-09-15)
+
+
+### Features
+
+* convert contextProvider to factory and pass contextFactory returned value ([0ee923e](https://github.com/SUI-Components/sui/commit/0ee923ea5cd4990a80571229d2ec800dfc162b4c))
+
+
+
 # 7.7.0 (2020-07-15)
 
 
