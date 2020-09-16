@@ -69,9 +69,6 @@ const singlePackageRelease = ({status, packageScope}) =>
 
 const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
-    return reject(new Error('Error beta'))
-
-    /* eslint-disable */
     if (code === 0) {
       return resolve()
     }
@@ -218,6 +215,7 @@ checker
       )
   )
   .catch(err => {
+    console.error('[sui-mono release] ERROR:')
     console.error(err)
     process.exit(1)
   })
