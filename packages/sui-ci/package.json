@@ -9,6 +9,7 @@
   "dependencies": {
     "@octokit/core": "3.1.2",
     "commander": "6.1.0",
+    "execa": "4.0.3",
     "git-remote-origin-url": "3.1.0",
     "git-url-parse": "11.1.3"
   },

@@ -1,19 +1,47 @@
 # sui-ci
 
-> CLI with some useful commands for CI environments
+> CLI with some useful commands for Travis CI
 
 It provides:
-* A way to update a GitHub Commit Status from a CI environment.
+* A way to update a GitHub Commit Status from a CI environment with `update-commit-status` command.
+* A way to publish through CI all packages that used `sui-mono` with `release` command.
 
-## Requirements
+## release
+
+### Requirements
+
+The following environment variables are needed:
+* `GITHUB_TOKEN`: GitHub Personal Access Token of the user that will create the commit with the release.
+* `TRAVIS_PULL_REQUEST`: The pull request number if the current job is a pull request, `false` if it's not a pull request.
+ 
+Other optional enviromnet variables are:
+* `GITHUB_USER`: GitHub username of the user that will create the commit with the release.
+* `GITHUB_EMAIL`: GitHub email of the user that will create the commit with the release.
+
+
+### Usage
+
+```
+Usage: sui-ci release
+```
+
+For example, you could use the CLI directly by using `npx` with that.
+
+```sh
+$ npx @s-ui/ci release
+```
+
+## update-commit-status
+
+### Requirements
 
 Right now, it relies on some environment variables:
-* `GH_TOKEN`: GitHub Personal Access Token of the user that will create the status of the commit.
+* `GITHUB_TOKEN`: GitHub Personal Access Token of the user that will create the status of the commit.
 * `SUI_CI_TOPIC`: *Optional* but useful environment variable to tell the CI which topic the commit is about.
 
 *@s-ui/ci* right now expects it's using *Travis* to execute CI, so the next environment variables are expected: `TRAVIS_BUILD_WEB_URL`, `TRAVIS_COMMIT`, `TRAVIS_PULL_REQUEST_SHA`, `TRAVIS_REPO_SLUG`.
 
-## Usage
+### Usage
 
 ```
 Usage: sui-ci update-commit-status [options]
@@ -31,5 +59,5 @@ For example, you could use the CLI directly by using `npx` with that.
 $ npx @s-ui/ci update-commit-status --state OK --topic build 
 ```
 
-## In Action
+### In Action
 ![image](https://user-images.githubusercontent.com/1561955/88173732-5d551480-cc23-11ea-986f-9073c188c2db.png)
