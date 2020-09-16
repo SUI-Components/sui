@@ -25,7 +25,15 @@ module.exports = async function release({
     return process.exit(0)
   }
 
-  return execute(
-    `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken}`
-  )
+  try {
+    const {stdout} = await execute(
+      `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken}`
+    )
+    console.info(stdout)
+    console.info('[sui-ci release] Success!')
+  } catch (e) {
+    console.error('[sui-ci release] Something went wrong:')
+    console.error(e.message)
+    process.exit(1)
+  }
 }
