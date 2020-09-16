@@ -27,7 +27,7 @@ module.exports = async function release({
 
   try {
     const {stdout} = await execute(
-      `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken}`
+      `npx @sui/mono@1 release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken}`
     )
     console.info(stdout)
     console.info('[sui-ci release] Success!')
