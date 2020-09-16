@@ -21,15 +21,14 @@ Other optional enviromnet variables are:
 
 ### Usage
 
-```
-Usage: sui-ci release
+The **recommended way** to use this is adding in your `travis.yml` as latest step of the `script` lifecycle the next command `npx @s-ui/ci@beta release`:
+
+```yaml
+script:
+  - npx @s-ui/ci release
 ```
 
-For example, you could use the CLI directly by using `npx` with that.
-
-```sh
-$ npx @s-ui/ci release
-```
+The reason why we need to use the `script` lifecycle is because is the last step in Travis to determine if a build is failing. You could safely use in next job cycles like `after_success` but keep in mind that if the release fails the build won't change. 
 
 ## update-commit-status
 
