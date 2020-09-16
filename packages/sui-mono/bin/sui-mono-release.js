@@ -69,6 +69,9 @@ const singlePackageRelease = ({status, packageScope}) =>
 
 const releaseEachPkg = ({pkg, code} = {}) => {
   return new Promise((resolve, reject) => {
+    return reject(new Error('Error beta'))
+
+    /* eslint-disable */
     if (code === 0) {
       return resolve()
     }
@@ -188,7 +191,7 @@ const isAutomaticRelease = ({githubToken, githubUser, githubEmail}) => {
 checker
   .check()
   .then(async status => {
-   const {githubEmail, githubToken, githubUser} = program
+    const {githubEmail, githubToken, githubUser} = program
     isAutomaticRelease({
       githubEmail,
       githubToken,
@@ -214,4 +217,7 @@ checker
         Promise.resolve([])
       )
   )
-  .catch(console.log.bind(console))
+  .catch(err => {
+    console.error(err)
+    process.exit(1)
+  })
