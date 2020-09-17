@@ -25,8 +25,8 @@ async function getApiBaseUrl() {
 /**
  * Update GitHub commit status
  * @param {object} params
- * @param {string} params.auth Personal token from GitHub or GitHub Enterprise
  * @param {string} params.commit Commit SHA to update its status
+ * @param {string} params.gitHubToken Personal token from GitHub or GitHub Enterprise
  * @param {string} params.stateKey Key to grab the state info
  * @param {string} params.targetUrl Url where the `Details` link on the status will navigate to
  * @param {string} params.topic It indicates what the commit new status is about
@@ -34,12 +34,12 @@ async function getApiBaseUrl() {
  * @returns {Promise}
  */
 module.exports = async function updateCommitStatus({
-  auth,
   commit,
+  gitHubToken,
+  repoSlug,
   stateKey,
   targetUrl,
-  topic,
-  repoSlug
+  topic
 }) {
   const [owner, repo] = repoSlug.split('/')
   const state = STATUS_STATES[stateKey]
@@ -57,7 +57,7 @@ module.exports = async function updateCommitStatus({
     target_url: targetUrl
   }
 
-  const octokit = new Octokit({auth})
+  const octokit = new Octokit({auth: gitHubToken})
   return octokit.request(
     'POST /repos/{owner}/{repo}/statuses/{sha}',
     requestParams
