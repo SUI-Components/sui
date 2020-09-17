@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.53.0 (2020-09-17)
+
+
+### Features
+
+* better error logging ([5f4cc2a](https://github.com/SUI-Components/sui/commit/5f4cc2a87d3b44321ba8b4d78f356a66f0b3d113))
+* better handling of sui-mono release errors ([febfa81](https://github.com/SUI-Components/sui/commit/febfa81da6c49938c02001970dacf8c27869fb76))
+* remove @tunnckocore/execa dependency ([2307124](https://github.com/SUI-Components/sui/commit/23071246d79b32a005d7b5c05b1837c15472a767))
+* upgrade dependencies ([20ee5e7](https://github.com/SUI-Components/sui/commit/20ee5e761156f476245c693204b8bf41b2be8906))
+
+
+
 # 1.52.0 (2020-07-28)
 
 
