@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.3.0 (2020-09-17)
+
+
+### Bug Fixes
+
+* add release command ([bdbcd0a](https://github.com/SUI-Components/sui/commit/bdbcd0a351ea3e1e084caa849ef03a4aa2358d18))
+* use correct package name ([0749fe0](https://github.com/SUI-Components/sui/commit/0749fe0a482a36e680a3aaf5a71560788771abeb))
+
+
+### Features
+
+* add release command ([abb42a7](https://github.com/SUI-Components/sui/commit/abb42a741b3dc4e580704a639ff921bf387f298c))
+* better error handling ([a188336](https://github.com/SUI-Components/sui/commit/a1883361ffddb2a4f539ae38bf30fbcaf673a8c0))
+* output console info and exit with 1 if an error exists ([e9d1fd5](https://github.com/SUI-Components/sui/commit/e9d1fd5cd4d012ab9a99e8fa5736571cc8f13f2e))
+* use npx to execute sui-mono ([0aeb1a8](https://github.com/SUI-Components/sui/commit/0aeb1a8d96e5c50364b66c8b9c6c6e5e6ce1e0b3))
+* use sui-mono instead npx that give us problems ([27bfaa9](https://github.com/SUI-Components/sui/commit/27bfaa97f1dee69dbe98cfb7d711dae50c2e58ec))
+
+
+
 # 1.2.0 (2020-09-01)
 
 
