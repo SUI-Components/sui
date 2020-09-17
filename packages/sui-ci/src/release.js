@@ -6,25 +6,23 @@ const {command: execute} = require('execa')
  * @param {string=} params.gitHubEmail Github Email to be used when commiting
  * @param {string}  params.gitHubToken Personal token from GitHub or GitHub Enterprise
  * @param {string=} params.gitHubUser Github Username to be used when commiting
- * @param {string}  params.pullRequestNumber Number of Pull Request
+ * @param {Boolean} params.isPullRequest Determine if it's a Pull Request
  * @returns {Promise}
  */
 module.exports = async function release({
   gitHubEmail = 'srv.scms.git-enb@adevinta.com',
   gitHubToken,
   gitHubUser = 'Adevinta',
-  pullRequestNumber
+  isPullRequest
 }) {
-  if (!gitHubToken) {
-    console.error('[sui-ci release] GitHub Token not provided')
-    process.exit(1)
+  if (isPullRequest) {
+    console.info(`[sui-ci release] Nothing to release as it's a Pull Request`)
+    return process.exit(0)
   }
 
-  if (pullRequestNumber) {
-    console.info(
-      `[sui-ci release] Nothing to release. PR Number: ${pullRequestNumber}`
-    )
-    return process.exit(0)
+  if (!gitHubToken) {
+    console.error('[sui-ci release] GitHub Token not provided')
+    return process.exit(1)
   }
 
   try {
