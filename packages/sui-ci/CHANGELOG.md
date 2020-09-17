@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.4.0 (2020-09-17)
+
+
+### Bug Fixes
+
+* change pullRequest conditional ([ef1131d](https://github.com/SUI-Components/sui/commit/ef1131deae4c5cf98d3ec68fc5fc4d779c5cf541))
+
+
+
 # 1.3.0 (2020-09-17)
 
 
