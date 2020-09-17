@@ -20,8 +20,10 @@ module.exports = async function release({
     process.exit(1)
   }
 
-  if (!pullRequestNumber) {
-    console.info("[sui-ci release] Nothing to release, we're in a Pull Request")
+  if (pullRequestNumber) {
+    console.info(
+      `[sui-ci release] Nothing to release. PR Number: ${pullRequestNumber}`
+    )
     return process.exit(0)
   }
 
