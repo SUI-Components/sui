@@ -21,7 +21,7 @@ Other optional enviromnet variables are:
 
 ### Usage
 
-The **recommended way** to use this is adding in your `travis.yml` as latest step of the `script` lifecycle the next command `npx @s-ui/ci@beta release`:
+The **recommended way** to use this is adding in your `travis.yml` as latest step of the `script` lifecycle the next command `npx @s-ui/ci release`:
 
 ```yaml
 script:
