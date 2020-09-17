@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.5.0 (2020-09-17)
+
+
+### Features
+
+* better handling of Pull Request environment variable from Travis ([58a1ce5](https://github.com/SUI-Components/sui/commit/58a1ce5c21f43a466ac0a7c75de697efb4ccc634))
+
+
+
 # 1.4.0 (2020-09-17)
 
 
