@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.11.0 (2020-09-17)
+
+
+### Features
+
+* simplify code and remove not needed files ([3d71d68](https://github.com/SUI-Components/sui/commit/3d71d682a4ff0668d9e99768aa50a0b0c4d31749))
+
+
+
 # 3.10.0 (2020-08-31)
 
 
