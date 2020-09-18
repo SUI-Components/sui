@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.54.0 (2020-09-18)
+
+
+### Features
+
+* add new flag to skip ci on release ([3f4e757](https://github.com/SUI-Components/sui/commit/3f4e757fb6788135f422eee04262ba097857ec33))
+
+
+
 # 1.53.0 (2020-09-17)
 
 
