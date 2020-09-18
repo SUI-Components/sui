@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.6.0 (2020-09-18)
+
+
+### Features
+
+* skip ci with sui-mono by default ([850ec2b](https://github.com/SUI-Components/sui/commit/850ec2b6503873f9f249ad62e122f3aa6f8ad420))
+
+
+
 # 1.5.0 (2020-09-17)
 
 
