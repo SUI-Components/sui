@@ -24,6 +24,11 @@ export default class OptimizelyAdapter {
     this._userId = userId.toString()
   }
 
+  /**
+   * @param {object} param
+   * @param {string} param.sdkKey
+   * @param {object} [param.options] https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+   */
   static createOptimizelyInstance({options: optionParameter, sdkKey}) {
     const options = {...DEFAULT_OPTIONS, ...optionParameter}
     optimizelySDK.setLogLevel(options.logLevel)
@@ -44,10 +49,11 @@ export default class OptimizelyAdapter {
    * More info: https://docs.developers.optimizely.com/full-stack/docs/activate-javascript-node
    * @param {Object} params
    * @param {string} params.name
+   * @param {object} [params.attributes]
    * @returns {string} variation name
    */
-  activateExperiment({name}) {
-    return this._optimizely.activate(name, this._userId)
+  activateExperiment({name, attributes}) {
+    return this._optimizely.activate(name, this._userId, attributes)
   }
 
   /**
