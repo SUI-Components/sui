@@ -16,6 +16,7 @@ program
   .option('-T, --github-token <token>', 'github token')
   .option('-U, --github-user <user>', 'github user')
   .option('-E, --github-email <email>', 'github email')
+  .option('--skip-ci', 'Add [skip ci] to release commit message', false)
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -66,7 +67,7 @@ const singlePackageRelease = ({status, packageScope}) =>
     .filter(scope => scope === packageScope)
     .map(scope => scopeMapper({scope, status}))
 
-const releaseEachPkg = ({pkg, code} = {}) => {
+const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
   return new Promise((resolve, reject) => {
     if (code === 0) {
       return resolve()
@@ -103,10 +104,15 @@ const releaseEachPkg = ({pkg, code} = {}) => {
       .then(() => {
         // Create release commit
         const {version} = getPackageJson(cwd, true)
-        return serialSpawn(
-          [['git', [`commit -m "release(${packageScope}): v${version}"`]]],
-          {cwd}
-        )
+
+        // We're adding [skip ci] to the commit message to avoid
+        // start a build on CI if not needed
+        // docs: https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
+        const commitMsg = `release(${packageScope}): v${version}${
+          skipCI ? ' [skip ci]' : ''
+        }`
+
+        return serialSpawn([['git', [`commit -m "${commitMsg}"`]]], {cwd})
       })
       .then(() => serialSpawn(docCommands))
       .then(() => {
@@ -193,7 +199,7 @@ checker
   .then(releases =>
     releases
       .filter(({code}) => code !== 0)
-      .map(release => () => releaseEachPkg(release))
+      .map(release => () => releaseEachPkg(release, {skipCI: program.skipCi}))
       // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
       .reduce(
         (m, p) => m.then(v => Promise.all([...v, p()])),
