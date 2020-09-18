@@ -2,7 +2,8 @@ const optimizelySDK = require('@optimizely/optimizely-sdk')
 
 const DEFAULT_OPTIONS = {
   autoUpdate: true,
-  updateInterval: 10 * 1000 // 10 seconds in milliseconds
+  updateInterval: 10 * 1000, // 10 seconds in milliseconds
+  logLevel: 'info'
 }
 
 const DEFAULT_TIMEOUT = 500
@@ -23,8 +24,9 @@ export default class OptimizelyAdapter {
     this._userId = userId.toString()
   }
 
-  static createOptimizelyInstance({options = DEFAULT_OPTIONS, sdkKey}) {
-    optimizelySDK.setLogLevel('info')
+  static createOptimizelyInstance({options: optionParameter, sdkKey}) {
+    const options = {...DEFAULT_OPTIONS, ...optionParameter}
+    optimizelySDK.setLogLevel(options.logLevel)
     optimizelySDK.setLogger(optimizelySDK.logging.createLogger())
 
     return optimizelySDK.createInstance({
