@@ -24,6 +24,7 @@ export const tryRequireTest = async ({category, component}) => {
 export const tryRequireMarkdown = async ({category, component, file}) => {
   return requireFile({
     defaultValue: '',
+    extractDefault: true,
     importFile: () =>
       import(
         /* webpackExclude: /\/node_modules\/(.*)\/(\w+).md$/ */
@@ -35,6 +36,7 @@ export const tryRequireMarkdown = async ({category, component, file}) => {
 export const tryRequireRawSrc = ({category, component}) => {
   return requireFile({
     defaultValue: '',
+    extractDefault: true,
     importFile: () =>
       import(
         /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
@@ -63,6 +65,7 @@ export const tryRequireCore = async ({category, component}) => {
   })
 
   const playground = requireFile({
+    extractDefault: true,
     importFile: () =>
       import(
         `!raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`

@@ -14,7 +14,7 @@ const EventsButtons = ({events, domain}) => {
       {Object.keys(events).map(useCase =>
         Object.keys(events[useCase]).map(event => (
           <Tab
-            handleClick={evt => {
+            handleClick={() => {
               executeUseCase({
                 domain,
                 useCase,

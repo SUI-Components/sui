@@ -7,7 +7,9 @@ import {iconClose, iconMenu} from '../icons'
 import Markdown from '../documentation/Markdown'
 import Navigation from '../navigation'
 
-const readme = require(`raw-loader!${__BASE_DIR__}/components/README.md`)
+const {
+  default: readme
+} = require(`raw-loader!${__BASE_DIR__}/components/README.md`)
 
 export default function Layout({children}) {
   const [menuIsOpen, setMenuIsOpen] = useState(false)

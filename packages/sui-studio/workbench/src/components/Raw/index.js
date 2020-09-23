@@ -17,7 +17,7 @@ import Component, * as named from 'component'
 import './index.scss'
 let playground
 try {
-  playground = require('!raw-loader!demo/playground')
+  playground = require('!raw-loader!demo/playground').default
 } catch (e) {}
 
 const nonDefault = removeDefaultContext(named)
