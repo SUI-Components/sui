@@ -18,7 +18,9 @@ program
     '.'
   )
   .action(() => {
-    console.log('This command will be deprecated, please check `sui-studio dev --help` to develop new components')
+    console.log(
+      'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
+    )
 
     setTimeout(() => {
       const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
@@ -78,10 +80,6 @@ program
   .alias('l')
 
 program.command('init <project>', 'Create a new project').alias('i')
-
-program
-  .command('clean-modules', 'Remove node_module folder in each component')
-  .alias('cm')
 
 program.command('test', 'Run studio tests').alias('t')
 
