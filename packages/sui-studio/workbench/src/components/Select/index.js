@@ -16,7 +16,7 @@ export default function Select({initValue, label, onChange, options}) {
 
   return (
     <label className="Select">
-      <span className="Select-label">{label}</span>
+      <span>{label}</span>
       <select value={value} onChange={handleChangeSelect}>
         {Object.keys(options).map(option => (
           <option key={option} value={option}>
