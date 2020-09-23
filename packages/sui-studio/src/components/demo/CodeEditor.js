@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import React, {useEffect, useRef} from 'react'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import debounce from 'just-debounce-it'
 

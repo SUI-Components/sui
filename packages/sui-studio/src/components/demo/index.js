@@ -1,7 +1,6 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
-
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
@@ -44,9 +43,8 @@ export default class Demo extends Component {
   }
 
   _init({category, component}) {
-    // reset the components in order to show nothing in case
-    // we're navigating to another component
     this.setState({
+      // clean state in case we're moving from another component
       exports: {default: null}
     })
 
