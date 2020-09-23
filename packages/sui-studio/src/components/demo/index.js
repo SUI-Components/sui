@@ -6,7 +6,6 @@ import React, {Component} from 'react'
 import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
-import When from '../when'
 
 import {tryRequireCore as tryRequire} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
@@ -31,45 +30,6 @@ const CONTAINER_CLASS = 'sui-Studio'
 const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
 export default class Demo extends Component {
-  static async bootstrapWith(demo, {category, component, style, themes}) {
-    demo.setState({
-      exports: {default: null}
-    })
-
-    const [
-      exports,
-      playground,
-      ctxt,
-      events,
-      pkg,
-      DemoComponent
-    ] = await tryRequire({
-      category,
-      component
-    })
-    const context = isFunction(ctxt) ? await ctxt() : ctxt
-
-    demo.setState({
-      events,
-      exports,
-      pkg,
-      playground,
-      style,
-      themes,
-      ctxt: context,
-      DemoComponent
-    })
-  }
-
-  static propTypes = {
-    category: PropTypes.string,
-    component: PropTypes.string,
-    params: PropTypes.shape({
-      category: PropTypes.string,
-      component: PropTypes.string
-    })
-  }
-
   state = {
     ctxt: false,
     ctxtSelectedIndex: 0,
@@ -84,19 +44,49 @@ export default class Demo extends Component {
     themeSelectedIndex: 0
   }
 
-  _loadStyles({category, component}) {
-    stylesFor({category, component}).then(style => {
+  _init({category, component}) {
+    // reset the components in order to show nothing in case
+    // we're navigating to another component
+    this.setState({
+      exports: {default: null}
+    })
+
+    Promise.all([
+      stylesFor({category, component}),
+      tryRequire({category, component})
+    ]).then(async ([style, requiredModules]) => {
+      const [
+        exports,
+        playground,
+        ctxt,
+        events,
+        pkg,
+        DemoComponent
+      ] = requiredModules
       const themes = themesFor({category, component})
-      Demo.bootstrapWith(this, {category, component, style, themes})
+      // context could be a Promise, and we should wait for it
+      const context = isFunction(ctxt) ? await ctxt() : ctxt
+
+      this.setState({
+        ctxt: context,
+        DemoComponent,
+        events,
+        exports,
+        pkg,
+        playground,
+        style,
+        themes
+      })
     })
   }
 
   componentDidMount() {
-    this._loadStyles(this.props.params)
+    this._init(this.props.params)
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line
-    this._loadStyles(nextProps.params)
+  // eslint-disable-next-line
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this._init(nextProps.params)
   }
 
   componentWillUnmount() {
@@ -199,48 +189,53 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        <When value={!EnhanceDemoComponent && playground}>
-          {() => (
-            <>
-              <button
-                className="sui-StudioDemo-codeButton"
-                onClick={this.handleCode}
-              >
-                {isCodeOpen ? iconClose : iconCode}
-              </button>
+        {!EnhanceDemoComponent && playground && (
+          <>
+            <button
+              className="sui-StudioDemo-codeButton"
+              onClick={this.handleCode}
+            >
+              {isCodeOpen ? iconClose : iconCode}
+            </button>
 
-              {isCodeOpen && (
-                <CodeEditor
-                  isOpen={isCodeOpen}
-                  onChange={playground => {
-                    this.setState({playground})
-                  }}
-                  playground={playground}
-                />
-              )}
-
-              <Preview
-                code={playground}
-                scope={{
-                  context,
-                  React,
-                  [cleanDisplayName(Enhance.displayName)]: Enhance,
-                  domain,
-                  ...nonDefaultExports
+            {isCodeOpen && (
+              <CodeEditor
+                isOpen={isCodeOpen}
+                onChange={playground => {
+                  this.setState({playground})
                 }}
+                playground={playground}
               />
-            </>
-          )}
-        </When>
+            )}
 
-        <When value={EnhanceDemoComponent}>
-          {() => (
-            <SUIContext.Provider value={context}>
-              <EnhanceDemoComponent />
-            </SUIContext.Provider>
-          )}
-        </When>
+            <Preview
+              code={playground}
+              scope={{
+                context,
+                React,
+                [cleanDisplayName(Enhance.displayName)]: Enhance,
+                domain,
+                ...nonDefaultExports
+              }}
+            />
+          </>
+        )}
+
+        {EnhanceDemoComponent && (
+          <SUIContext.Provider value={context}>
+            <EnhanceDemoComponent />
+          </SUIContext.Provider>
+        )}
       </div>
     )
   }
+}
+
+Demo.propTypes = {
+  category: PropTypes.string,
+  component: PropTypes.string,
+  params: PropTypes.shape({
+    category: PropTypes.string,
+    component: PropTypes.string
+  })
 }
