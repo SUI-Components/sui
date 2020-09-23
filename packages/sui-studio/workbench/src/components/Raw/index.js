@@ -6,7 +6,6 @@ import SUIContext from '@s-ui/react-context'
 import Preview from '../../../../src/components/preview'
 import withContext from '../../../../src/components/demo/HoC/withContext'
 import Style from '../../../../src/components/style'
-import When from '../../../../src/components/when'
 import {
   createContextByType,
   cleanDisplayName,
@@ -17,7 +16,6 @@ import {
 import Component, * as named from 'component'
 
 import './index.scss'
-
 let playground
 try {
   playground = require('!raw-loader!demo/playground')
@@ -49,19 +47,17 @@ export default function Raw({
       <Style id="sui-studio-raw-theme">{themes[actualStyle]}</Style>
 
       <div className="Raw-center">
-        <When value={!EnhanceDemoComponent && playground}>
-          {() => (
-            <Preview
-              scope={{
-                context,
-                React,
-                [cleanDisplayName(Enhance.displayName)]: Enhance,
-                ...nonDefault
-              }}
-              code={playground}
-            />
-          )}
-        </When>
+        {!EnhanceDemoComponent && playground && (
+          <Preview
+            scope={{
+              context,
+              React,
+              [cleanDisplayName(Enhance.displayName)]: Enhance,
+              ...nonDefault
+            }}
+            code={playground}
+          />
+        )}
         {EnhanceDemoComponent && (
           <SUIContext.Provider value={context}>
             <EnhanceDemoComponent />
