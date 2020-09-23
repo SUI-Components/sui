@@ -12,11 +12,6 @@ program.version(version, '    --version')
 program
   .command('start')
   .alias('s')
-  .option(
-    '-d, --dir-base [dir]',
-    'Setup base dir where live src and demo folders',
-    '.'
-  )
   .action(() => {
     console.log(
       'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
@@ -45,10 +40,7 @@ program
   .alias('g')
 
 program
-  .command(
-    'build',
-    'Generate a static version ready to be deploy to now.sh or GH-Pages'
-  )
+  .command('build', 'Generate a static version ready to be deployed')
   .alias('b')
 
 program.command('commit', 'Commit with semantic messages.').alias('co')
