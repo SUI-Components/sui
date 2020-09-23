@@ -3,16 +3,13 @@ import PropTypes from 'prop-types'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
-import {isEmptyObject} from '../utils'
-
 const ContextButtons = ({ctxt, onContextChange, selected = 0}) => {
-  if (isEmptyObject(ctxt)) {
-    return null
-  }
+  const contextKeys = Object.keys(ctxt)
+  if (contextKeys.length === 0) return null
 
   return (
     <Tabs title="Context">
-      {Object.keys(ctxt).map((ctxtType, index) => (
+      {contextKeys.map((ctxtType, index) => (
         <Tab
           handleClick={() => onContextChange(ctxtType, index)}
           isActive={index === selected}

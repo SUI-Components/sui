@@ -9,6 +9,7 @@ export const getComponentsList = () => {
     true,
     /^\.\/\w+\/\w+\/package\.json/
   )
+
   return (
     reqPackages
       .keys()
@@ -26,20 +27,11 @@ export const getSuiStudioConfig = () => {
 }
 
 export const getStudioName = () => {
-  const config = getSuiStudioConfig()
-  return config.name || 'SUI Components'
+  const {name = 'SUI Components'} = getSuiStudioConfig()
+  return name
 }
 
 export const getStudioLogo = () => {
-  const config = getSuiStudioConfig()
-  return config.logo || DEFAULT_LOGO
-}
-
-export const isEmptyObject = obj => {
-  for (var x in obj) {
-    if (obj.hasOwnProperty(x)) { // eslint-disable-line
-      return false
-    }
-  }
-  return true
+  const {logo = DEFAULT_LOGO} = getSuiStudioConfig()
+  return logo
 }
