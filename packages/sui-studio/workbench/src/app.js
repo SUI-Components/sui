@@ -23,6 +23,7 @@ const queryStringToJSON = queryString => {
 const params = queryStringToJSON(window.location.href)
 
 const importAll = requireContext => requireContext.keys().map(requireContext)
+
 ;(async () => {
   const defaultStyle = await import(
     '!css-loader!sass-loader!component/index.scss'
@@ -64,6 +65,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
+
   ReactDOM.render(
     <ComponentToRender
       contexts={contexts}
