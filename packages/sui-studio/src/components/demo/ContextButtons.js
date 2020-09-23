@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
@@ -14,7 +14,7 @@ const ContextButtons = ({ctxt, onContextChange, selected = 0}) => {
     <Tabs title="Context">
       {Object.keys(ctxt).map((ctxtType, index) => (
         <Tab
-          handleClick={evt => onContextChange(ctxtType, index)}
+          handleClick={() => onContextChange(ctxtType, index)}
           isActive={index === selected}
           key={`${ctxtType}${index}`}
           literal={ctxtType}
