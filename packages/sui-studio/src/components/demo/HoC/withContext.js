@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-const withContext = (flag, context) => Target => {
+export default /* withContext */ (flag, context) => Target => {
   if (!flag) return Target
 
   const types = Object.keys(context).reduce((ctxtTypes, key) => {
@@ -10,14 +10,16 @@ const withContext = (flag, context) => Target => {
     return ctxtTypes
   }, {})
 
+  const originalContextTypes =
+    Target.originalContextTypes || Target.contextTypes || types
+
   class Contextify extends Component {
     static displayName = `Contextify(${Target.displayName})`
 
-    static originalContextTypes =
-      Target.originalContextTypes || Target.contextTypes || types
+    static originalContextTypes = originalContextTypes
 
     static get childContextTypes() {
-      return Target.originalContextTypes || Target.contextTypes || types
+      return originalContextTypes
     }
 
     getChildContext() {
@@ -31,5 +33,3 @@ const withContext = (flag, context) => Target => {
 
   return hoistNonReactStatics(Contextify, Target)
 }
-
-export default withContext

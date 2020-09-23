@@ -19,14 +19,13 @@ const updateOnChange = (setState, sessionKey) => nextValue => {
 }
 
 export default function Root({componentID, contexts = {}, themes}) {
-  const [actualContext, setActualContext] = useState(
+  const [actualContext, setActualContext] = useState(() =>
     getFromStorage('actualContext', 'default')
   )
-  const [actualStyle, setActualStyle] = useState(
+  const [actualStyle, setActualStyle] = useState(() =>
     getFromStorage('actualStyle', 'default')
   )
-
-  const [showTests, setShowTests] = useState(
+  const [showTests, setShowTests] = useState(() =>
     getFromStorage('showTests', 'show')
   )
 
@@ -60,12 +59,7 @@ export default function Root({componentID, contexts = {}, themes}) {
         </button>
       </Header>
 
-      <iframe
-        className="Root-iframe"
-        src={iframeSrc}
-        scrolling="yes"
-        title="Demo"
-      />
+      <iframe src={iframeSrc} scrolling="yes" title="Demo" />
       <div className="Root-test" hidden={showTests === 'hide'}>
         <Test
           open

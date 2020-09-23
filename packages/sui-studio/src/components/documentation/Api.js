@@ -41,7 +41,7 @@ export default function Api({params}) {
       return (
         <div className="sui-StudioProps-prop" key={propName}>
           <h3>{propName}</h3>
-          <div className="sui-StudioProps-tags">
+          <div>
             <div className="sui-StudioProps-tag sui-StudioProps-required">
               <span>required</span>
               <span className={required ? 'is-required' : ''}>
