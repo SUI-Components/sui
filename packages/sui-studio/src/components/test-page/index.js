@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import {tryRequireCore as tryRequire, tryRequireTest} from '../tryRequire'
 
-import When from '../when'
 import Test from '../test'
 
 const TestPage = ({params}) => {
@@ -24,24 +23,20 @@ const TestPage = ({params}) => {
 
   return (
     <>
-      <When value={requires.component}>
-        {() => {
-          return (
-            <Test
-              open
-              importComponent={() => Promise.resolve(requires.component)}
-              importTest={() =>
-                tryRequireTest({
-                  component: params.component,
-                  category: params.category
-                })
-              }
-              contexts={requires?.contexts}
-            />
-          )
-        }}
-      </When>
-      <When value={requires.loading}>{() => <h1>Loading...</h1>}</When>
+      {requires.component && (
+        <Test
+          open
+          importComponent={() => Promise.resolve(requires.component)}
+          importTest={() =>
+            tryRequireTest({
+              component: params.component,
+              category: params.category
+            })
+          }
+          contexts={requires?.contexts}
+        />
+      )}
+      {requires.loading && <h1>Loading...</h1>}
     </>
   )
 }
