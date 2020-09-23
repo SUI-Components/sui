@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import './styles/index.scss'
+import './styles.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
 import {isFunction} from '../../src/components/demo/utilities'
@@ -53,7 +53,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   let demoStyles = ''
   try {
-      demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
+    demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
   } catch (e) {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
