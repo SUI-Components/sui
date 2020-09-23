@@ -21,7 +21,6 @@ import {
   createContextByType,
   isFunction,
   cleanDisplayName,
-  pipe,
   removeDefaultContext
 } from './utilities'
 
@@ -157,10 +156,10 @@ export default class Demo extends Component {
       Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
 
-    const Enhance = pipe(withContext(context, context))(ComponentToRender)
+    const Enhance = withContext(context, context)(ComponentToRender)
 
     const EnhanceDemoComponent =
-      DemoComponent && pipe(withContext(context, context))(DemoComponent)
+      DemoComponent && withContext(context, context)(DemoComponent)
 
     !Enhance.displayName &&
       console.error(new Error('Component.displayName must be defined.'))

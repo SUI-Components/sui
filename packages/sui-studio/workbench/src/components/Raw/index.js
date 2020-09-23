@@ -9,7 +9,6 @@ import Style from '../../../../src/components/style'
 import {
   createContextByType,
   cleanDisplayName,
-  pipe,
   removeDefaultContext
 } from '../../../../src/components/demo/utilities'
 
@@ -36,10 +35,10 @@ export default function Raw({
 
   // check if is a normal component or it's wrapped with a React.memo method
   const ComponentToRender = Component.type ? Component.type : Component
-  const Enhance = pipe(withContext(context, context))(ComponentToRender)
+  const Enhance = withContext(context, context)(ComponentToRender)
 
   const EnhanceDemoComponent =
-    DemoComponent && pipe(withContext(context, context))(DemoComponent)
+    DemoComponent && withContext(context, context)(DemoComponent)
 
   return (
     <div className="Raw">

@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 const withContext = (flag, context) => Target => {
-  if (!flag) {
-    return Target
-  }
+  if (!flag) return Target
 
   const types = Object.keys(context).reduce((ctxtTypes, key) => {
     ctxtTypes[key] = PropTypes.object

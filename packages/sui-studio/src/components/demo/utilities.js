@@ -5,7 +5,7 @@ export const DEFAULT_CONTEXT = 'default'
 export const createContextByType = (ctxt, type) => {
   // check if the user has created a context.js with the needed contextTypes
   if (typeof ctxt !== 'object' || ctxt === null) {
-    console.warn( // eslint-disable-line
+    console.warn(
       "[Studio] You're trying to use a contextType in your component but it seems that you haven't created a context.js in the playground folder. This will likely make your component won't work as expected or it might have an useless context."
     )
   }
@@ -19,9 +19,6 @@ export const cleanDisplayName = displayName => {
   const [fallback, name] = displayName.split(/\w+\((\w+)\)/)
   return name !== undefined ? name : fallback
 }
-
-export const pipe = (...funcs) => arg =>
-  funcs.reduce((value, func) => func(value), arg)
 
 export const removeDefaultContext = exports => {
   const {[DEFAULT_CONTEXT]: toOmit, ...restOfExports} = exports
