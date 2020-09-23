@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 
 import {tryRequireCore as tryRequire, tryRequireTest} from '../tryRequire'
@@ -6,9 +6,9 @@ import {tryRequireCore as tryRequire, tryRequireTest} from '../tryRequire'
 import Test from '../test'
 
 const TestPage = ({params}) => {
-  const [requires, setRequires] = React.useState({loading: true})
+  const [requires, setRequires] = useState({loading: true})
 
-  React.useEffect(() => {
+  useEffect(() => {
     tryRequire({
       category: params.category,
       component: params.component
