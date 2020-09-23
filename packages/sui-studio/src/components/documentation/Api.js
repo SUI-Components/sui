@@ -3,16 +3,19 @@ import React, {useEffect, useState} from 'react'
 import {tryRequireRawSrc} from '../tryRequire'
 
 export default function Api({params}) {
-  const [docs, setDocs] = useState(false)
+  const [docs, setDocs] = useState(null)
+
   useEffect(() => {
     async function getDocs() {
       const reactDocs = await import('react-docgen')
       const src = await tryRequireRawSrc(params)
-      const docs = reactDocs.parse(src)
-      setDocs(docs)
+      if (src) {
+        const docs = reactDocs.parse(src)
+        setDocs(docs)
+      }
     }
     getDocs()
-  })
+  }, [params])
 
   const renderPropsApi = ({propsApi = {}}) => {
     const keysOfProps = Object.keys(propsApi).sort((a, b) => a.localeCompare(b))
@@ -28,7 +31,8 @@ export default function Api({params}) {
       const {value = undefined} = defaultValue
 
       if (typeof type === 'undefined') {
-        console.warn( // eslint-disable-line
+        console.warn(
+          // eslint-disable-line
           'It seem that you might have a prop with a defaultValue but it does not exist as propType'
         )
         return
