@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-
-require('fs.realpath').monkeypatch()
-
 const program = require('commander')
 const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
@@ -20,11 +17,8 @@ program
     'Setup base dir where live src and demo folders',
     '.'
   )
-  .action(({dirBase}) => {
-    console.clear()
-    require('terminal-banner').terminalBanner(
-      'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
-    )
+  .action(() => {
+    console.log('This command will be deprecated, please check `sui-studio dev --help` to develop new components')
 
     setTimeout(() => {
       const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
