@@ -35,7 +35,6 @@ export default class Demo extends Component {
     exports: false,
     isCodeOpen: false,
     isFullScreen: false,
-    pkg: false,
     playground: undefined,
     theme: 'default',
     themes: [],
@@ -52,14 +51,7 @@ export default class Demo extends Component {
       stylesFor({category, component}),
       tryRequire({category, component})
     ]).then(async ([style, requiredModules]) => {
-      const [
-        exports,
-        playground,
-        ctxt,
-        events,
-        pkg,
-        DemoComponent
-      ] = requiredModules
+      const [exports, playground, ctxt, events, DemoComponent] = requiredModules
       const themes = themesFor({category, component})
       // context could be a Promise, and we should wait for it
       const context = isFunction(ctxt) ? await ctxt() : ctxt
@@ -69,7 +61,6 @@ export default class Demo extends Component {
         DemoComponent,
         events,
         exports,
-        pkg,
         playground,
         style,
         themes

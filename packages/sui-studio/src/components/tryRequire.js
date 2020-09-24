@@ -55,15 +55,6 @@ export const tryRequireCore = async ({category, component}) => {
       )
   })
 
-  const pkg = requireFile({
-    defaultValue: {dependencies: {}},
-    importFile: () =>
-      import(
-        /* webpackExclude: /\/node_modules\/(.*)\/package.json$/ */
-        `${__BASE_DIR__}/components/${category}/${component}/package.json`
-      )
-  })
-
   const playground = requireFile({
     extractDefault: true,
     importFile: () =>
@@ -90,5 +81,5 @@ export const tryRequireCore = async ({category, component}) => {
       import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
   })
 
-  return Promise.all([exports, playground, context, events, pkg, demo])
+  return Promise.all([exports, playground, context, events, demo])
 }
