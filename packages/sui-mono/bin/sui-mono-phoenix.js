@@ -10,13 +10,6 @@ const execa = require('execa')
 const config = require('../src/config')
 
 const DEFAULT_CHUNK = 5
-/** NOTE:
- * Latest version of node & npm seems to have some concurrency problem
- * when installing packages. In order to be sure the CI deployment work as expected,
- * we're only installing one package at a time.
- * Related issue: https://github.com/npm/cli/issues/496
- */
-const SINGLE_CHUNK = 1
 
 const CI_FLAGS = [
   'loglevel=error',
@@ -111,7 +104,7 @@ const execute = (cmd, {cwd, stdin}) => {
   return execa(command, args, {cwd, stdin, stderr: 'inherit'})
 }
 
-const concurrency = ci ? SINGLE_CHUNK : Number(chunk)
+const concurrency = Number(chunk)
 const queue = new Queue({concurrency})
 console.log(`Using concurrency of: ${concurrency}`)
 
