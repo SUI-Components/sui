@@ -4,9 +4,8 @@ import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from '@s-ui/react-router'
 import cx from 'classnames'
-
+import {fetchMarkdownFile} from '../tryRequire'
 import {FILES} from '../../constants'
-import {tryRequireMarkdown} from '../tryRequire'
 
 const TAB_CLASS = 'sui-StudioTabs-tab'
 const LINK_CLASS = 'sui-StudioTabs-link'
@@ -48,11 +47,11 @@ export default function Workbench({children, params}) {
   useEffect(
     function() {
       // check if ux definition files exist to show the button
-      tryRequireMarkdown({category, component, file: FILES.UX_DEFINITION}).then(
-        content => {
-          setShowUX(Boolean(content))
-        }
-      )
+      fetchMarkdownFile({
+        category,
+        component,
+        file: FILES.UX_DEFINITION
+      }).then(content => setShowUX(Boolean(content)))
     },
     [category, component]
   )
