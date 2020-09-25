@@ -13,8 +13,8 @@ const TestPage = ({params}) => {
       category: params.category,
       component: params.component
     })
-      .then(([exports, playground, ctxt = {}]) => {
-        setRequires({component: exports, contexts: ctxt, loading: false})
+      .then(([exports, contexts = {}]) => {
+        setRequires({component: exports, contexts, loading: false})
       })
       .catch(err => {
         console.log(err) // eslint-disable-line
@@ -33,7 +33,7 @@ const TestPage = ({params}) => {
               category: params.category
             })
           }
-          contexts={requires?.contexts}
+          contexts={requires.contexts}
         />
       )}
       {requires.loading && <h1>Loading...</h1>}

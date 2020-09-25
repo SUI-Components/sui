@@ -52,13 +52,9 @@ const Test = ({open, importTest, importComponent, contexts}) => {
 
       importTest()
         .then(() => {
-          window.mocha.run(failures => {
-            setFailures(failures)
-          })
+          window.mocha.run(setFailures)
         })
-        .catch(() => {
-          setNotFoundTest(true)
-        })
+        .catch(() => setNotFoundTest(true))
     })
   }, [contexts, importComponent, importTest])
 
