@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* global __BASE_DIR__ */
 
-export const requireFile = async ({
+const safeImport = async ({
   defaultValue = false,
   extractDefault = true,
   importFile
@@ -31,17 +31,20 @@ export const fetchMarkdownFile = ({category, component, file}) =>
 export const fetchPlayground = ({category, component}) =>
   fetchStaticFile(`/demo/${category}/${component}/playground`)
 
-export const tryRequireTest = async ({category, component}) => {
-  return requireFile({
-    extractDefault: false,
+export const importContexts = ({category, component}) =>
+  safeImport({
+    defaultValue: false,
     importFile: () =>
-      import(`${__BASE_DIR__}/test/${category}/${component}/index.js`)
+      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
   })
-}
 
-export const tryRequireCore = async ({category, component}) => {
-  const exports = requireFile({
-    extractDefault: false,
+export const importReactComponent = ({
+  category,
+  component,
+  extractDefault = false
+}) =>
+  safeImport({
+    extractDefault,
     importFile: () =>
       import(
         /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
@@ -49,7 +52,8 @@ export const tryRequireCore = async ({category, component}) => {
       )
   })
 
-  const demo = requireFile({
+const importDemo = ({category, component}) =>
+  safeImport({
     importFile: () =>
       import(
         /* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
@@ -57,15 +61,16 @@ export const tryRequireCore = async ({category, component}) => {
       )
   })
 
-  const context = requireFile({
-    importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-  })
-
-  const events = requireFile({
+const importEvents = ({category, component}) =>
+  safeImport({
     importFile: () =>
       import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
   })
 
-  return Promise.all([exports, context, events, demo])
-}
+export const importMainModules = params =>
+  Promise.all([
+    importReactComponent(params),
+    importContexts(params),
+    importEvents(params),
+    importDemo(params)
+  ])

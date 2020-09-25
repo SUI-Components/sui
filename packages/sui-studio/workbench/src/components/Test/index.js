@@ -24,7 +24,6 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   useEffect(() => {
     importComponent().then(async module => {
       const Component = module.default || module
-
       // extract displayName for the Component
       // until React 17, we need a workaround for React.memo exported components
       // https://github.com/facebook/react/issues/18026#issuecomment-675900452

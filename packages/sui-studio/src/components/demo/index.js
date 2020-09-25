@@ -6,7 +6,7 @@ import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
 
-import {tryRequireCore as tryRequire, fetchPlayground} from '../tryRequire'
+import {importMainModules, fetchPlayground} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
@@ -49,7 +49,7 @@ export default class Demo extends Component {
 
     Promise.all([
       stylesFor({category, component}),
-      tryRequire({category, component}),
+      importMainModules({category, component}),
       fetchPlayground({category, component})
     ]).then(async ([style, requiredModules, playground]) => {
       const [exports, ctxt, events, DemoComponent] = requiredModules
