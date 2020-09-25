@@ -3,7 +3,6 @@
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from '@s-ui/react-router'
-import cx from 'classnames'
 import {fetchMarkdownFile} from '../tryRequire'
 import {FILES} from '../../constants'
 
@@ -17,29 +16,16 @@ const SPALink = ({name, to}) => (
   </Link>
 )
 
-const AnchorLink = ({name, to}) => {
-  const isActive = window.location.href.match(to)
-  const className = cx(LINK_CLASS, {
-    [ACTIVE_CLASS]: isActive
-  })
-  return (
-    <a className={className} href={to}>
-      {name}
-    </a>
-  )
-}
-
 export default function Workbench({children, params}) {
   const [showUX, setShowUX] = useState(false)
   const {category, component} = params
 
-  const Tab = ({name, path, forceReload = false}) => {
+  const Tab = ({name, path}) => {
     const to = `/workbench/${category}/${component}/${path}`
-    const Link = forceReload ? AnchorLink : SPALink
 
     return (
       <li className={TAB_CLASS}>
-        <Link to={to} name={name} />
+        <SPALink to={to} name={name} />
       </li>
     )
   }
@@ -61,7 +47,6 @@ export default function Workbench({children, params}) {
       <nav className="sui-StudioWorkbench-navigation">
         <ul className="sui-StudioTabs">
           <Tab name="Demo" path="demo" />
-          <Tab name="Test" path="test" forceReload />
           <Tab name="Api" path="documentation/api" />
           <Tab name="Readme" path="documentation/readme" />
           <Tab name="Changelog" path="documentation/changelog" />
