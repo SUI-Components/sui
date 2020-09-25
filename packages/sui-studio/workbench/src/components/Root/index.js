@@ -1,11 +1,9 @@
-/* global __EXPERIMENTAL_TEST_DEV__ */
-
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
 import Header from '../Header'
 import Select from '../Select'
-import Test from '../../../../src/components/test'
+import Test from '../Test'
 
 const importComponent = () => import('component/index.js')
 const importTest = () => import('test/index.js')
