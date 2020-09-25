@@ -5,9 +5,7 @@ process.on('unhandledRejection', err => {
   throw err
 })
 
-const pkg = require('../package')
 const program = require('commander')
-const checkForUpdate = require('update-check')
 const path = require('path')
 const chalk = require('chalk')
 const WebpackDevServer = require('webpack-dev-server')
@@ -20,13 +18,11 @@ const {
 const webpackConfig = require('../webpack.config.dev')
 const createDevServerConfig = require('../factories/createDevServerConfig')
 const createCompiler = require('../factories/createCompiler')
-const preloadRemover = require('../loaders/preLoadRemover')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
-let update = null
 
 if (!module.parent) {
   program
@@ -44,14 +40,12 @@ if (!module.parent) {
       },
       []
     )
-    .option('--no-pre-loader', 'Does not execute any pre enforced loaded')
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
       console.log('    $ sui-bundler dev')
       console.log('    $ sui-bundler dev --context /my/app/folder')
       console.log('    $ sui-bundler dev --link-package /my/domain/folder')
-      console.log('    $ sui-bundler dev --no-pre-loader')
       console.log('')
     })
     .parse(process.argv)
@@ -83,7 +77,7 @@ const start = async ({
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
   const nextConfig = linkLoaderConfigBuilder({
-    config: preloadRemover({config, preLoader: program.preLoader}),
+    config,
     linkAll: program.linkAll,
     packagesToLink
   })
@@ -102,22 +96,6 @@ const start = async ({
       })
     })
   })
-
-  try {
-    update = await checkForUpdate(pkg)
-  } catch (err) {
-    console.error(`Failed to check for updates: ${err}`)
-  }
-
-  if (update) {
-    console.log(
-      chalk.gray(
-        `The latest version of ${require('../package.json').name} is ${
-          update.latest
-        }. Please update!`
-      )
-    )
-  }
 }
 
 if (!module.parent) {
