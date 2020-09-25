@@ -13,35 +13,26 @@ export const requireFile = async ({
   return extractDefault && typeof file === 'object' ? file.default : file
 }
 
+const fetchStaticFile = path =>
+  window
+    .fetch(path)
+    .then(res => res.text())
+    .then(text => (text.startsWith('<!') ? false : text))
+
+export const fetchComponentSrcRawFile = ({category, component}) =>
+  fetchStaticFile(`/components/${category}/${component}/src/index.js`)
+
+export const fetchMarkdownFile = ({category, component, file}) =>
+  fetchStaticFile(`/components/${category}/${component}/${file}.md`)
+
+export const fetchPlayground = ({category, component}) =>
+  fetchStaticFile(`/demo/${category}/${component}/playground`)
+
 export const tryRequireTest = async ({category, component}) => {
   return requireFile({
     extractDefault: false,
     importFile: () =>
       import(`${__BASE_DIR__}/test/${category}/${component}/index.js`)
-  })
-}
-
-export const tryRequireMarkdown = async ({category, component, file}) => {
-  return requireFile({
-    defaultValue: '',
-    extractDefault: true,
-    importFile: () =>
-      import(
-        /* webpackExclude: /\/node_modules\/(.*)\/(\w+).md$/ */
-        `!raw-loader!${__BASE_DIR__}/components/${category}/${component}/${file}.md`
-      )
-  })
-}
-
-export const tryRequireRawSrc = ({category, component}) => {
-  return requireFile({
-    defaultValue: '',
-    extractDefault: true,
-    importFile: () =>
-      import(
-        /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
-        `!raw-loader!${__BASE_DIR__}/components/${category}/${component}/src/index.js`
-      )
   })
 }
 
@@ -52,14 +43,6 @@ export const tryRequireCore = async ({category, component}) => {
       import(
         /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
         `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
-      )
-  })
-
-  const playground = requireFile({
-    extractDefault: true,
-    importFile: () =>
-      import(
-        `!raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`
       )
   })
 
@@ -81,5 +64,5 @@ export const tryRequireCore = async ({category, component}) => {
       import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
   })
 
-  return Promise.all([exports, playground, context, events, demo])
+  return Promise.all([exports, context, events, demo])
 }
