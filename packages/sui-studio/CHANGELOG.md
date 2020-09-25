@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 8.26.0 (2020-09-25)
+
+
+### Features
+
+* better way of getting global object ([8ce0e52](https://github.com/SUI-Components/sui/commit/8ce0e5263b3b1cb5cbe2ccbb4b0444ae1cad4262))
+
+
+
 # 8.25.0 (2020-08-31)
 
 
