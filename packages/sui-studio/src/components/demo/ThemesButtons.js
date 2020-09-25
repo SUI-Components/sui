@@ -20,7 +20,6 @@ const ThemesButtons = ({themes, onThemeChange, selected}) => {
   )
 }
 
-ThemesButtons.displayName = 'ThemesButtons'
 ThemesButtons.propTypes = {
   themes: PropTypes.array,
   onThemeChange: PropTypes.func,

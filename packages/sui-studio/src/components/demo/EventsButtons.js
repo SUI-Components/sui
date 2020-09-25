@@ -30,7 +30,6 @@ const EventsButtons = ({events, domain}) => {
   )
 }
 
-EventsButtons.displayName = 'EventsButtons'
 EventsButtons.propTypes = {
   domain: PropTypes.object,
   events: PropTypes.object
