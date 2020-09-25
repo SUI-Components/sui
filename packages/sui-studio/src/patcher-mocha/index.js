@@ -9,7 +9,7 @@ import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
 
 const global =
   typeof globalThis !== 'undefined'
-    ? globalThis
+    ? globalThis // eslint-disable-line
     : typeof window !== 'undefined'
     ? window
     : undefined
