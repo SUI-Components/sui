@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.56.0 (2020-09-25)
+
+
+### Features
+
+* install dev dependencies on sui-mono as well ([36072ed](https://github.com/SUI-Components/sui/commit/36072edced687d0bbee84715343ebe86cc265823))
+
+
+
 # 1.55.0 (2020-09-25)
 
 
