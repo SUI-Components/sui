@@ -20,8 +20,7 @@ const CI_FLAGS = [
   'no-progress',
   'no-save',
   'no-shrinkwrap',
-  'prefer-offline',
-  'production'
+  'prefer-offline'
 ].map(flag => `--${flag}`)
 
 program
@@ -42,6 +41,7 @@ program
     '--no-progress',
     'Force to not show progress of tasks (perfect for CI environments)'
   )
+  .option('--production', 'Install only production packages')
   .option(
     '-s, --scope <string>',
     'Runs phoenix on a given scope, for example: -s atom/button'
@@ -64,11 +64,15 @@ const {
   chunk = DEFAULT_CHUNK,
   ci = false,
   progress = true,
+  production = false,
   root = true,
   scope: scopeArgument
 } = program
 
-const NPM_CMD = ['npm', ['install', audit ? '' : '--no-audit']]
+const NPM_CMD = [
+  'npm',
+  ['install', audit ? '' : '--no-audit', production ? '--production' : '']
+]
 const RIMRAF_CMD = [
   require.resolve('rimraf/bin'),
   ['package-lock.json', 'node_modules']
@@ -84,7 +88,10 @@ const installPackages = ({cwd = undefined, stdin = 'inherit'} = {}) => {
   const executionParams = {cwd, stdin}
   if (ci) {
     const [npm] = NPM_CMD
-    return execute([npm, ['install', ...CI_FLAGS]], executionParams)
+    return execute(
+      [npm, ['install', ...CI_FLAGS, production ? '--production' : '']],
+      executionParams
+    )
   }
 
   return execute(RIMRAF_CMD, executionParams).then(() =>
