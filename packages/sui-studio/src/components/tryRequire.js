@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* global __BASE_DIR__ */
 
 const safeImport = async ({
