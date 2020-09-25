@@ -13,7 +13,6 @@ export default function Markdown({content}) {
   )
 }
 
-Markdown.displayName = 'Markdown'
 Markdown.propTypes = {
   content: PropTypes.string
 }

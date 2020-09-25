@@ -73,7 +73,6 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   )
 }
 
-Test.displayName = 'Test'
 Test.propTypes = {
   contexts: PropTypes.object,
   importComponent: PropTypes.func,

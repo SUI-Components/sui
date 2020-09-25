@@ -18,7 +18,6 @@ export default function MarkdownFile({file, params}) {
   return content && <Markdown content={content} />
 }
 
-MarkdownFile.displayName = 'MarkdownFile'
 MarkdownFile.propTypes = {
   params: PropTypes.object,
   file: PropTypes.string

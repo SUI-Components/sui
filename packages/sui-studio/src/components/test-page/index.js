@@ -41,7 +41,6 @@ const TestPage = ({params}) => {
   )
 }
 
-TestPage.displayName = 'TestPage'
 TestPage.propTypes = {
   params: PropTypes.shape({
     category: PropTypes.string,

@@ -21,8 +21,6 @@ const ContextButtons = ({ctxt, onContextChange, selected = 0}) => {
   )
 }
 
-ContextButtons.displayName = 'ContextButtons'
-
 ContextButtons.propTypes = {
   ctxt: PropTypes.object,
   onContextChange: PropTypes.func,
