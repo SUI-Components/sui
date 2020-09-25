@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint no-extend-native:0 */
 
 import React from 'react'
@@ -6,7 +7,12 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import withContext from '../components/demo/HoC/withContext'
 import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
 
-const global = globalThis || window // eslint-disable-line
+const global =
+  typeof globalThis !== 'undefined'
+    ? globalThis // eslint-disable-line
+    : typeof window !== 'undefined'
+    ? window
+    : undefined
 
 addSetupEnvironment(global)
 

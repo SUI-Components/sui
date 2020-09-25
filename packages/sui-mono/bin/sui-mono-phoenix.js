@@ -10,13 +10,6 @@ const execa = require('execa')
 const config = require('../src/config')
 
 const DEFAULT_CHUNK = 5
-/** NOTE:
- * Latest version of node & npm seems to have some concurrency problem
- * when installing packages. In order to be sure the CI deployment work as expected,
- * we're only installing one package at a time.
- * Related issue: https://github.com/npm/cli/issues/496
- */
-const SINGLE_CHUNK = 1
 
 const CI_FLAGS = [
   'loglevel=error',
@@ -27,8 +20,7 @@ const CI_FLAGS = [
   'no-progress',
   'no-save',
   'no-shrinkwrap',
-  'prefer-offline',
-  'production'
+  'prefer-offline'
 ].map(flag => `--${flag}`)
 
 program
@@ -49,6 +41,7 @@ program
     '--no-progress',
     'Force to not show progress of tasks (perfect for CI environments)'
   )
+  .option('--production', 'Install only production packages')
   .option(
     '-s, --scope <string>',
     'Runs phoenix on a given scope, for example: -s atom/button'
@@ -71,11 +64,15 @@ const {
   chunk = DEFAULT_CHUNK,
   ci = false,
   progress = true,
+  production = false,
   root = true,
   scope: scopeArgument
 } = program
 
-const NPM_CMD = ['npm', ['install', audit ? '' : '--no-audit']]
+const NPM_CMD = [
+  'npm',
+  ['install', audit ? '' : '--no-audit', production ? '--production' : '']
+]
 const RIMRAF_CMD = [
   require.resolve('rimraf/bin'),
   ['package-lock.json', 'node_modules']
@@ -91,7 +88,10 @@ const installPackages = ({cwd = undefined, stdin = 'inherit'} = {}) => {
   const executionParams = {cwd, stdin}
   if (ci) {
     const [npm] = NPM_CMD
-    return execute([npm, ['install', ...CI_FLAGS]], executionParams)
+    return execute(
+      [npm, ['install', ...CI_FLAGS, production ? '--production' : '']],
+      executionParams
+    )
   }
 
   return execute(RIMRAF_CMD, executionParams).then(() =>
@@ -111,7 +111,7 @@ const execute = (cmd, {cwd, stdin}) => {
   return execa(command, args, {cwd, stdin, stderr: 'inherit'})
 }
 
-const concurrency = ci ? SINGLE_CHUNK : Number(chunk)
+const concurrency = Number(chunk)
 const queue = new Queue({concurrency})
 console.log(`Using concurrency of: ${concurrency}`)
 
