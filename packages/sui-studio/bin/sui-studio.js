@@ -3,31 +3,24 @@
 const program = require('commander')
 const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
-const pkg = require('../package.json')
-
-const version = pkg.version
+const {version} = require('../package.json')
+const copyStaticFiles = require('./helpers/copyStaticFiles')
 
 program.version(version, '    --version')
 
 program
   .command('start')
   .alias('s')
-  .action(() => {
-    console.log(
-      'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
-    )
+  .action(async () => {
+    console.info('[deprecated] Use `sui-studio dev` to develop components')
 
-    setTimeout(() => {
-      const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
-      getSpawnPromise(
-        devServerExec,
-        ['-c', path.join(__dirname, '..', 'src')],
-        {
-          shell: false,
-          env: process.env
-        }
-      ).then(process.exit, process.exit)
-    }, 3000)
+    await copyStaticFiles()
+
+    const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
+    const args = ['-c', path.join(__dirname, '..', 'src'), '--no-pre-loader']
+    getSpawnPromise(devServerExec, args, {
+      shell: false
+    }).then(process.exit, process.exit)
   })
 
 program.command('dev <component>', 'Develop an isolate component').alias('d')
