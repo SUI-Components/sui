@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.17.0 (2020-09-25)
+
+
+### Features
+
+* use 2 cores for CI terser ([2ff7820](https://github.com/SUI-Components/sui/commit/2ff78202ffc319668b56972e071ad87cd9c76ee1))
+
+
+
 # 6.16.0 (2020-09-07)
 
 
