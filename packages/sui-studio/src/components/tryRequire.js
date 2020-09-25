@@ -17,6 +17,9 @@ const fetchStaticFile = path =>
   window
     .fetch(path)
     .then(res => res.text())
+    // As we're working within a SPA, 404 routes return the index.html.
+    // So, we concatenate another `then` to check if we hit the
+    // index.html starting with <!DOCTYPE, to return false
     .then(text => (text.startsWith('<!') ? false : text))
 
 export const fetchComponentSrcRawFile = ({category, component}) =>
