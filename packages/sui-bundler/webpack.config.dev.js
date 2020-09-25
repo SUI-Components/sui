@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
-const eslintFormatter = require('react-dev-utils/eslintFormatter')
+
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const parseAlias = require('./shared/parse-alias')
@@ -66,25 +66,6 @@ const webpackConfig = {
   },
   module: {
     rules: cleanList([
-      {
-        test: /\.(js|jsx|mjs)$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint'),
-              baseConfig: {
-                extends: [require.resolve('@s-ui/lint/eslintrc.js')]
-              },
-              ignore: false,
-              useEslintrc: false
-            },
-            loader: require.resolve('eslint-loader')
-          }
-        ],
-        exclude: EXCLUDED_FOLDERS_REGEXP
-      },
       {
         test: /\.jsx?$/,
         exclude: EXCLUDED_FOLDERS_REGEXP,
