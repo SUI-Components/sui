@@ -6,7 +6,7 @@ import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
 
-import {tryRequireCore as tryRequire} from '../tryRequire'
+import {tryRequireCore as tryRequire, fetchPlayground} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
@@ -49,12 +49,12 @@ export default class Demo extends Component {
 
     Promise.all([
       stylesFor({category, component}),
-      tryRequire({category, component})
-    ]).then(async ([style, requiredModules]) => {
-      const [exports, playground, ctxt, events, DemoComponent] = requiredModules
+      tryRequire({category, component}),
+      fetchPlayground({category, component})
+    ]).then(async ([style, requiredModules, playground]) => {
+      const [exports, ctxt, events, DemoComponent] = requiredModules
       const themes = themesFor({category, component})
-      // context could be a Promise, and we should wait for it
-      const context = isFunction(ctxt) ? await ctxt() : ctxt
+      const context = isFunction(ctxt) ? await ctxt() : ctxt // context could be a Promise, and we should wait for it
 
       this.setState({
         ctxt: context,

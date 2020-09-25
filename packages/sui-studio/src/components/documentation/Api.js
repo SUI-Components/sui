@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
-import {tryRequireRawSrc} from '../tryRequire'
+import {fetchComponentSrcRawFile, fetchMarkdownFile} from '../tryRequire'
 
 export default function Api({params}) {
   const [docs, setDocs] = useState(null)
@@ -8,11 +8,11 @@ export default function Api({params}) {
   useEffect(() => {
     async function getDocs() {
       const reactDocs = await import('react-docgen')
-      const src = await tryRequireRawSrc(params)
-      if (src) {
-        const docs = reactDocs.parse(src)
+      const {category, component} = params
+      fetchComponentSrcRawFile({category, component}).then(rawSource => {
+        const docs = reactDocs.parse(rawSource)
         setDocs(docs)
-      }
+      })
     }
     getDocs()
   }, [params])
