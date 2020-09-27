@@ -5,6 +5,7 @@ module.exports = function copyStaticFiles() {
     [
       'components/**/README.md',
       'components/**/CHANGELOG.md',
+      'components/**/UXDEF.md',
       'components/**/src/index.js',
       'demo/**/playground'
     ],
