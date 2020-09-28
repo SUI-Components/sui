@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.12.0 (2020-09-28)
+
+
+### Features
+
+* add babel-plugin-preval plugin to unlock some further optimizations to our c ([c7dcd5a](https://github.com/SUI-Components/sui/commit/c7dcd5a0f47bd7fe83f424d1bd37996e0dff3e07))
+
+
+
 # 3.11.0 (2020-09-17)
 
 
