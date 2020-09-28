@@ -6,6 +6,7 @@ const getTargets = ({targets = {}}) => {
 }
 
 const plugins = (api, opts = {}) => [
+  require('babel-plugin-preval'),
   require('@babel/plugin-syntax-export-default-from').default,
   require('@babel/plugin-syntax-export-namespace-from').default,
   [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
