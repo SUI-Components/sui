@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.15.0 (2020-09-28)
+
+
+### Features
+
+* remove not needed change of configuration for optimizations field ([b815c8f](https://github.com/SUI-Components/sui/commit/b815c8fea8838332222690682f87625399d0b461))
+
+
+
 # 3.14.0 (2020-08-05)
 
 

@@ -7,12 +7,12 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const {GenerateSW} = require('workbox-webpack-plugin')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const minifyJs = require('./shared/minify-js')
+const minifyCss = require('./shared/minify-css')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
@@ -57,12 +57,8 @@ module.exports = {
     publicPath: PUBLIC_PATH
   },
   optimization: {
-    minimizer: [
-      minifyJs(sourceMap),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {}
-      })
-    ],
+    minimize: true,
+    minimizer: [minifyJs(sourceMap), minifyCss()],
     runtimeChunk: true,
     splitChunks
   },

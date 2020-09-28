@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-sui",
-  "version": "3.11.0",
+  "version": "3.12.0",
   "description": "A preset for all babel-transpiled javascript of the SUI family.",
   "main": "src/index.js",
   "keywords": [],
@@ -15,6 +15,7 @@
     "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "7.10.4",
     "@babel/runtime": "7.11.2",
+    "babel-plugin-preval": "5.0.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
     "babel-runtime": "6.26.0"
   },
