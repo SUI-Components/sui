@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.19.0 (2020-09-28)
+
+
+
 # 6.18.0 (2020-09-28)
 
 
@@ -14,6 +18,7 @@ All notable changes to this project will be documented in this file.
 * remove eslint-loader to speed up things ([8bd4a29](https://github.com/SUI-Components/sui/commit/8bd4a29edecf8ba5992a3af1fe0afcb182721a3e))
 * remove not needed stuff ([46117af](https://github.com/SUI-Components/sui/commit/46117af633465bb1c04f24862637d8d7177e49c4))
 * remove not used code ([947f7b9](https://github.com/SUI-Components/sui/commit/947f7b9771b9c9a4187ff645cfb7b80bd775cdc1))
+* remove not used raw-loader from sui-bundler ([2870237](https://github.com/SUI-Components/sui/commit/2870237d485ec2a8fb909e35039fd642217be2ae))
 * upgrade dependencies and replace some ([4c00998](https://github.com/SUI-Components/sui/commit/4c00998bb2e82cc24b5caebdfe2d97ff7a132259))
 * use 2 cores for CI terser ([2ff7820](https://github.com/SUI-Components/sui/commit/2ff78202ffc319668b56972e071ad87cd9c76ee1))
 * use css-minify instead OptimizeCSSAssetsPlugin ([08bf51a](https://github.com/SUI-Components/sui/commit/08bf51ab3dddb819d12fddb27f91799b0617c3d9))
