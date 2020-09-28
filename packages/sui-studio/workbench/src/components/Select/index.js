@@ -4,19 +4,17 @@ import PropTypes from 'prop-types'
 export default function Select({initValue, label, onChange, options}) {
   const [value, setValue] = useState(initValue)
 
+  if (!Object.keys(options).length) return null
+
   const handleChangeSelect = event => {
     const {value} = event.target
     setValue(value)
     onChange(value)
   }
 
-  if (!Object.keys(options).length) {
-    return null
-  }
-
   return (
     <label className="Select">
-      <span className="Select-label">{label}</span>
+      <span>{label}</span>
       <select value={value} onChange={handleChangeSelect}>
         {Object.keys(options).map(option => (
           <option key={option} value={option}>

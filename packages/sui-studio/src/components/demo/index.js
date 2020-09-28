@@ -1,14 +1,12 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
-
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
 import Style from '../style'
-import When from '../when'
 
-import {tryRequireCore as tryRequire} from '../tryRequire'
+import {importMainModules, fetchPlayground} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
@@ -22,7 +20,6 @@ import {
   createContextByType,
   isFunction,
   cleanDisplayName,
-  pipe,
   removeDefaultContext
 } from './utilities'
 
@@ -31,45 +28,6 @@ const CONTAINER_CLASS = 'sui-Studio'
 const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
 export default class Demo extends Component {
-  static async bootstrapWith(demo, {category, component, style, themes}) {
-    demo.setState({
-      exports: {default: null}
-    })
-
-    const [
-      exports,
-      playground,
-      ctxt,
-      events,
-      pkg,
-      DemoComponent
-    ] = await tryRequire({
-      category,
-      component
-    })
-    const context = isFunction(ctxt) ? await ctxt() : ctxt
-
-    demo.setState({
-      events,
-      exports,
-      pkg,
-      playground,
-      style,
-      themes,
-      ctxt: context,
-      DemoComponent
-    })
-  }
-
-  static propTypes = {
-    category: PropTypes.string,
-    component: PropTypes.string,
-    params: PropTypes.shape({
-      category: PropTypes.string,
-      component: PropTypes.string
-    })
-  }
-
   state = {
     ctxt: false,
     ctxtSelectedIndex: 0,
@@ -77,26 +35,46 @@ export default class Demo extends Component {
     exports: false,
     isCodeOpen: false,
     isFullScreen: false,
-    pkg: false,
     playground: undefined,
     theme: 'default',
     themes: [],
     themeSelectedIndex: 0
   }
 
-  _loadStyles({category, component}) {
-    stylesFor({category, component}).then(style => {
+  _init({category, component}) {
+    this.setState({
+      // clean state in case we're moving from another component
+      exports: {default: null}
+    })
+
+    Promise.all([
+      stylesFor({category, component}),
+      importMainModules({category, component}),
+      fetchPlayground({category, component})
+    ]).then(async ([style, requiredModules, playground]) => {
+      const [exports, ctxt, events, DemoComponent] = requiredModules
       const themes = themesFor({category, component})
-      Demo.bootstrapWith(this, {category, component, style, themes})
+      const context = isFunction(ctxt) ? await ctxt() : ctxt // context could be a Promise, and we should wait for it
+
+      this.setState({
+        ctxt: context,
+        DemoComponent,
+        events,
+        exports,
+        playground,
+        style,
+        themes
+      })
     })
   }
 
   componentDidMount() {
-    this._loadStyles(this.props.params)
+    this._init(this.props.params)
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line
-    this._loadStyles(nextProps.params)
+  // eslint-disable-next-line
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this._init(nextProps.params)
   }
 
   componentWillUnmount() {
@@ -167,10 +145,10 @@ export default class Demo extends Component {
       Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
 
-    const Enhance = pipe(withContext(context, context))(ComponentToRender)
+    const Enhance = withContext(context, context)(ComponentToRender)
 
     const EnhanceDemoComponent =
-      DemoComponent && pipe(withContext(context, context))(DemoComponent)
+      DemoComponent && withContext(context, context)(DemoComponent)
 
     !Enhance.displayName &&
       console.error(new Error('Component.displayName must be defined.'))
@@ -199,48 +177,53 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        <When value={!EnhanceDemoComponent && playground}>
-          {() => (
-            <>
-              <button
-                className="sui-StudioDemo-codeButton"
-                onClick={this.handleCode}
-              >
-                {isCodeOpen ? iconClose : iconCode}
-              </button>
+        {!EnhanceDemoComponent && playground && (
+          <>
+            <button
+              className="sui-StudioDemo-codeButton"
+              onClick={this.handleCode}
+            >
+              {isCodeOpen ? iconClose : iconCode}
+            </button>
 
-              {isCodeOpen && (
-                <CodeEditor
-                  isOpen={isCodeOpen}
-                  onChange={playground => {
-                    this.setState({playground})
-                  }}
-                  playground={playground}
-                />
-              )}
-
-              <Preview
-                code={playground}
-                scope={{
-                  context,
-                  React,
-                  [cleanDisplayName(Enhance.displayName)]: Enhance,
-                  domain,
-                  ...nonDefaultExports
+            {isCodeOpen && (
+              <CodeEditor
+                isOpen={isCodeOpen}
+                onChange={playground => {
+                  this.setState({playground})
                 }}
+                playground={playground}
               />
-            </>
-          )}
-        </When>
+            )}
 
-        <When value={EnhanceDemoComponent}>
-          {() => (
-            <SUIContext.Provider value={context}>
-              <EnhanceDemoComponent />
-            </SUIContext.Provider>
-          )}
-        </When>
+            <Preview
+              code={playground}
+              scope={{
+                context,
+                React,
+                [cleanDisplayName(Enhance.displayName)]: Enhance,
+                domain,
+                ...nonDefaultExports
+              }}
+            />
+          </>
+        )}
+
+        {EnhanceDemoComponent && (
+          <SUIContext.Provider value={context}>
+            <EnhanceDemoComponent />
+          </SUIContext.Provider>
+        )}
       </div>
     )
   }
+}
+
+Demo.propTypes = {
+  category: PropTypes.string,
+  component: PropTypes.string,
+  params: PropTypes.shape({
+    category: PropTypes.string,
+    component: PropTypes.string
+  })
 }

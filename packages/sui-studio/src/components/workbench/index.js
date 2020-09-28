@@ -1,58 +1,43 @@
+/* eslint-disable react/prop-types */
+
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from '@s-ui/react-router'
-import cx from 'classnames'
-
+import {fetchMarkdownFile} from '../tryRequire'
 import {FILES} from '../../constants'
-import {tryRequireMarkdown} from '../tryRequire'
-import When from '../when'
 
 const TAB_CLASS = 'sui-StudioTabs-tab'
 const LINK_CLASS = 'sui-StudioTabs-link'
 const ACTIVE_CLASS = LINK_CLASS + '--active'
 
+const SPALink = ({name, to}) => (
+  <Link activeClassName={ACTIVE_CLASS} className={LINK_CLASS} to={to}>
+    {name}
+  </Link>
+)
+
 export default function Workbench({children, params}) {
   const [showUX, setShowUX] = useState(false)
   const {category, component} = params
 
-  const Tab = ({name, path, forceReload = false}) => ( // eslint-disable-line
-    <li className={TAB_CLASS}>
-      <When value={!forceReload}>
-        {() => (
-          <Link
-            activeClassName={ACTIVE_CLASS}
-            className={LINK_CLASS}
-            to={`/workbench/${category}/${component}/${path}`}
-          >
-            {name}
-          </Link>
-        )}
-      </When>
-      <When value={forceReload}>
-        {() => {
-          const href = `/workbench/${category}/${component}/${path}`
-          const isActive = window.location.href.match(href)
-          const className = cx(LINK_CLASS, {
-            [ACTIVE_CLASS]: isActive
-          })
-          return (
-            <a className={className} href={href}>
-              {name}
-            </a>
-          )
-        }}
-      </When>
-    </li>
-  )
+  const Tab = ({name, path}) => {
+    const to = `/workbench/${category}/${component}/${path}`
+
+    return (
+      <li className={TAB_CLASS}>
+        <SPALink to={to} name={name} />
+      </li>
+    )
+  }
 
   useEffect(
     function() {
       // check if ux definition files exist to show the button
-      tryRequireMarkdown({category, component, file: FILES.UX_DEFINITION}).then(
-        content => {
-          setShowUX(Boolean(content))
-        }
-      )
+      fetchMarkdownFile({
+        category,
+        component,
+        file: FILES.UX_DEFINITION
+      }).then(content => setShowUX(Boolean(content)))
     },
     [category, component]
   )
@@ -62,7 +47,6 @@ export default function Workbench({children, params}) {
       <nav className="sui-StudioWorkbench-navigation">
         <ul className="sui-StudioTabs">
           <Tab name="Demo" path="demo" />
-          <Tab name="Test" path="test" forceReload />
           <Tab name="Api" path="documentation/api" />
           <Tab name="Readme" path="documentation/readme" />
           <Tab name="Changelog" path="documentation/changelog" />

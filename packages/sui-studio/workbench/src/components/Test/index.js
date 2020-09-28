@@ -5,9 +5,8 @@ import cx from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import SUIContext from '@s-ui/react-context'
-import withContext from '../demo/HoC/withContext'
-import {addSetupEnvironment} from '../../environment-mocha/setupEnvironment'
-import {cleanDisplayName} from '../demo/utilities'
+import withContext from '../../../../src/components/demo/HoC/withContext'
+import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment'
 
 addSetupEnvironment(window)
 
@@ -25,6 +24,10 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   useEffect(() => {
     importComponent().then(async module => {
       const Component = module.default || module
+      // extract displayName for the Component
+      // until React 17, we need a workaround for React.memo exported components
+      // https://github.com/facebook/react/issues/18026#issuecomment-675900452
+      const displayName = Component.displayName || Component.type.displayName
 
       const nextContexts =
         typeof contexts !== 'function' ? contexts : await contexts()
@@ -36,8 +39,8 @@ const Test = ({open, importTest, importComponent, contexts}) => {
         nextContexts.default,
         nextContexts
       )(Component)
-      !EnhanceComponent.displayName &&
-        console.error('[sui-Test] Component without displayName') // eslint-disable-line
+
+      !displayName && console.error('[sui-Test] Component without displayName') // eslint-disable-line
 
       const NextComponent = props => (
         <SUIContext.Provider value={nextContexts.default}>
@@ -46,25 +49,16 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       )
       hoistNonReactStatics(NextComponent, Component)
 
-      const displayName = cleanDisplayName(EnhanceComponent.displayName)
       NextComponent.displayName = displayName
       window[displayName] = NextComponent
 
       importTest()
-        .then(() => {
-          window.mocha.run(failures => {
-            setFailures(failures)
-          })
-        })
-        .catch(() => {
-          setNotFoundTest(true)
-        })
+        .then(() => window.mocha.run(setFailures))
+        .catch(() => setNotFoundTest(true))
     })
   }, [contexts, importComponent, importTest])
 
-  if (notFoundTest) {
-    return <h1>Not found test</h1>
-  }
+  if (notFoundTest) return <h1>No tests found</h1>
 
   return (
     <div className={classnames}>
@@ -73,7 +67,6 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   )
 }
 
-Test.displayName = 'Test'
 Test.propTypes = {
   contexts: PropTypes.object,
   importComponent: PropTypes.func,

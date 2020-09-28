@@ -5,38 +5,19 @@
     height: 65px;
     padding: 16px;
     text-decoration: none;
-    transition: opacity 0.3s ease;
-
-    &:hover {
-      opacity: 0.75;
-    }
-
-    &Title {
-      color: #333;
-      font-size: 18px;
-      font-weight: 100;
-      letter-spacing: -1px;
-      margin: 0;
-      padding-left: 8px;
-    }
   }
 
   &-searchInput {
-    @include icon-search($fgc-navbar);
-    background-color: $c-white-light;
-    background-position: 8px 6px;
-    background-size: auto 1em;
     border: 1px solid $c-gray-lightest;
     border-radius: 15px;
     color: #666;
     font-size: 12px;
     margin: 0 5%;
     outline: none;
-    padding: 4px 4px 4px 32px;
-    width: 90%;
+    padding: 4px 4px 4px 8px;
+    width: 80%;
 
     &:focus {
-      @include icon-search($c-gray-light);
       background-color: $c-white;
       border: 1px solid $c-gray-light;
     }
@@ -71,11 +52,9 @@
     }
 
     &Title {
-      color: $c-gray;
-      font-weight: 100;
+      color: $c-black;
       padding-bottom: 10px;
       padding-top: 20px;
-      text-transform: uppercase;
     }
   }
 }

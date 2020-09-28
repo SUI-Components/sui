@@ -3,9 +3,8 @@ import React from 'react'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
-const executeUseCase = ({domain, useCase, params}) => {
-  return domain.get(useCase).execute(params)
-}
+const executeUseCase = ({domain, useCase, params}) =>
+  domain.get(useCase).execute(params)
 
 const EventsButtons = ({events, domain}) => {
   if (!domain || !events.length) return null
@@ -15,7 +14,7 @@ const EventsButtons = ({events, domain}) => {
       {Object.keys(events).map(useCase =>
         Object.keys(events[useCase]).map(event => (
           <Tab
-            handleClick={evt => {
+            handleClick={() => {
               executeUseCase({
                 domain,
                 useCase,
@@ -31,7 +30,6 @@ const EventsButtons = ({events, domain}) => {
   )
 }
 
-EventsButtons.displayName = 'EventsButtons'
 EventsButtons.propTypes = {
   domain: PropTypes.object,
   events: PropTypes.object
