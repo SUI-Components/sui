@@ -17,7 +17,7 @@ program
     await copyStaticFiles()
 
     const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
-    const args = ['-c', path.join(__dirname, '..', 'src'), '--no-pre-loader']
+    const args = ['-c', path.join(__dirname, '..', 'src')]
     getSpawnPromise(devServerExec, args, {
       shell: false
     }).then(process.exit, process.exit)
