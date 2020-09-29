@@ -2,11 +2,9 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
-import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import SUIContext from '@s-ui/react-context'
-import withContext from '../../../../src/components/demo/HoC/withContext'
 import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment'
+import {addReactContextToComponent} from '../../../../src/components/utils'
 
 addSetupEnvironment(window)
 
@@ -24,10 +22,6 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   useEffect(() => {
     importComponent().then(async module => {
       const Component = module.default || module
-      // extract displayName for the Component
-      // until React 17, we need a workaround for React.memo exported components
-      // https://github.com/facebook/react/issues/18026#issuecomment-675900452
-      const displayName = Component.displayName || Component.type.displayName
 
       const nextContexts =
         typeof contexts !== 'function' ? contexts : await contexts()
@@ -35,22 +29,10 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       window.__STUDIO_CONTEXTS__ = nextContexts
       window.__STUDIO_COMPONENT__ = Component
 
-      const EnhanceComponent = withContext(
-        nextContexts.default,
-        nextContexts
-      )(Component)
+      const {default: context} = nextContexts
 
-      !displayName && console.error('[sui-Test] Component without displayName') // eslint-disable-line
-
-      const NextComponent = props => (
-        <SUIContext.Provider value={nextContexts.default}>
-          <EnhanceComponent {...props} />
-        </SUIContext.Provider>
-      )
-      hoistNonReactStatics(NextComponent, Component)
-
-      NextComponent.displayName = displayName
-      window[displayName] = NextComponent
+      const NextComponent = addReactContextToComponent(Component, {context})
+      window[Component.displayName] = NextComponent
 
       importTest()
         .then(() => window.mocha.run(setFailures))
