@@ -10,4 +10,8 @@ export default class Cache {
   del() {
     throw new Error('[Cache#del] must be implemented')
   }
+
+  clear() {
+    throw new Error('[Cache#clear] must be implemented')
+  }
 }

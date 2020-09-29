@@ -57,7 +57,11 @@ const _cache = ({
 }
 
 const _invalidateCache = ({original, instance, cacheKeyString}) => {
-  delete caches[cacheKeyString]
+  const cache = caches[cacheKeyString]
+
+  if (cache) {
+    cache.clear()
+  }
 
   return (...args) => {
     return original.apply(instance, args)
