@@ -64,8 +64,13 @@ program
   .command('link <origin> <destination>', 'Link components between them')
   .alias('l')
 
-program.command('init <project>', 'Create a new project').alias('i')
-
 program.command('test', 'Run studio tests').alias('t')
+
+program
+  .command(
+    'install',
+    'Install components dependencies optimised for the studio'
+  )
+  .alias('i')
 
 program.parse(process.argv)
