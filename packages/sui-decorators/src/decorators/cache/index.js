@@ -56,7 +56,15 @@ const _cache = ({
     : inMemory(target, cache, original, fnName, instance, ttl)
 }
 
-export default ({
+const _invalidateCache = ({original, instance, cacheKeyString}) => {
+  delete caches[cacheKeyString]
+
+  return (...args) => {
+    return original.apply(instance, args)
+  }
+}
+
+export const cache = ({
   ttl = DEFAULT_TTL,
   server = false,
   algorithm = ALGORITHMS.LRU,
@@ -119,6 +127,53 @@ export default ({
             enumerable,
             value: _fnCached
           })
+          return _fnCached
+        },
+        set(newValue) {
+          Object.defineProperty(this, fnName, {
+            configurable: true,
+            writable: true,
+            enumerable: true,
+            value: newValue
+          })
+
+          return newValue
+        }
+      }
+    )
+  }
+}
+
+export const invalidateCache = ({cacheKeyString} = {}) => {
+  return (target, fnName, descriptor) => {
+    const {configurable, enumerable, writable} = descriptor
+    const originalGet = descriptor.get
+    const originalValue = descriptor.value
+    const isGetter = !!originalGet
+
+    return Object.assign(
+      {},
+      {
+        configurable,
+        enumerable,
+        get() {
+          const fn = isGetter ? originalGet.call(this) : originalValue
+          if (this === target) {
+            return fn
+          }
+          const _fnCached = _invalidateCache({
+            instance: this,
+            original: fn,
+            cacheKeyString
+          })
+
+          Object.defineProperty(this, fnName, {
+            configurable,
+            writable,
+            enumerable,
+            value: _fnCached
+          })
+
           return _fnCached
         },
         set(newValue) {
