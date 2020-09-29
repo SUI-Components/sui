@@ -12,7 +12,6 @@ import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
 import EventsButtons from './EventsButtons'
 import ThemesButtons from './ThemesButtons'
-import withContext from './HoC/withContext'
 
 import SUIContext from '@s-ui/react-context'
 
@@ -145,12 +144,7 @@ export default class Demo extends Component {
       Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
 
-    const Enhance = withContext(context, context)(ComponentToRender)
-
-    const EnhanceDemoComponent =
-      DemoComponent && withContext(context, context)(DemoComponent)
-
-    !Enhance.displayName &&
+    !ComponentToRender.displayName &&
       console.error(new Error('Component.displayName must be defined.'))
 
     return (
@@ -177,7 +171,7 @@ export default class Demo extends Component {
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
-        {!EnhanceDemoComponent && playground && (
+        {!DemoComponent && playground && (
           <>
             <button
               className="sui-StudioDemo-codeButton"
@@ -201,7 +195,9 @@ export default class Demo extends Component {
               scope={{
                 context,
                 React,
-                [cleanDisplayName(Enhance.displayName)]: Enhance,
+                [cleanDisplayName(
+                  ComponentToRender.displayName
+                )]: ComponentToRender,
                 domain,
                 ...nonDefaultExports
               }}
@@ -209,9 +205,9 @@ export default class Demo extends Component {
           </>
         )}
 
-        {EnhanceDemoComponent && (
+        {DemoComponent && (
           <SUIContext.Provider value={context}>
-            <EnhanceDemoComponent />
+            <DemoComponent />
           </SUIContext.Provider>
         )}
       </div>
