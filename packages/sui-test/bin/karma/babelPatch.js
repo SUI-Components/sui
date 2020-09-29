@@ -1,31 +1,36 @@
-// This script is an AST babylon parse. It identify the "describe.context.[whatever]" Call statement and adds
-// a final parameter which includes the component name in order to enhance it and provide the right one for the
-// appropiate test.
+/*
+  This script is an AST babylon parse. It identify the "describe.context.[contextToUse]". Call statement and adds
+  a final parameter which includes a Component Key based on the path.
 
-module.exports = function (babel) {
-  function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1)
-  }
-  const t = babel.types
+  The Component Key will be used to get from `window.__STUDIO_CONTEXTS__` the correct Component and, then, using the `contextToUse`property to grab the correct context for the specific component.
+*/
+
+module.exports = function({types: t}) {
   return {
     visitor: {
-      CallExpression: function (path, state) {
+      CallExpression: function(path, state) {
+        const {
+          node: {arguments: args, callee}
+        } = path
+
         if (
-          path.node.callee.type === 'MemberExpression' &&
-          path.node.callee.object.type === 'MemberExpression' &&
-          path.node.callee.object.property.name === 'context' &&
-          path.node.callee.object.object.type === 'Identifier' &&
-          path.node.callee.object.object.name === 'describe' &&
-          path.node.arguments.length === 2
+          callee.type === 'MemberExpression' &&
+          callee.object.type === 'MemberExpression' &&
+          callee.object.property.name === 'context' &&
+          callee.object.object.type === 'Identifier' &&
+          callee.object.object.name === 'describe' &&
+          args.length === 2
         ) {
-          const propertyName = path.node.callee.property.name
-          const args = path.node.arguments
-          const ComponentName = state.file.opts.filename
-            .replace(`${state.file.opts.cwd}/test/`, '')
+          // extract from property.name the context we want to use
+          const contextToUse = callee.property.name
+          // extract category and component from the filename
+          // by reversing the path and exlcuding the first slash (it's /index.js)
+          const [, component, category] = state.file.opts.filename
             .split('/')
-            .slice(0, 2)
-            .map(capitalize)
-            .join('')
+            .reverse()
+          // we create a key based on the category and component path
+          const componentKey = `${category}/${component}`
+
           path.replaceWith(
             t.callExpression(
               t.memberExpression(
@@ -33,12 +38,9 @@ module.exports = function (babel) {
                   t.identifier('describe'),
                   t.identifier('context')
                 ),
-                t.identifier(propertyName)
+                t.identifier(contextToUse)
               ),
-              [
-                ...args,
-                t.stringLiteral(ComponentName),
-              ]
+              [...args, t.stringLiteral(componentKey)]
             )
           )
         }
