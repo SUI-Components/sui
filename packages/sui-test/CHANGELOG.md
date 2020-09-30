@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+# 4.0.0 (2020-09-30)
+
+
+### Features
+
+* adap sui-test to use componentKey instead displayName ([ba33c39](https://github.com/SUI-Components/sui/commit/ba33c39c137df8f346939770cc2abab708357d6c))
+* use babel-cli from root instead dependency ([9dbcac5](https://github.com/SUI-Components/sui/commit/9dbcac55d3889ec7537487fd99b38251348f7c7a))
+
+
+### BREAKING CHANGES
+
+* New babel patch for describe.context test for studio
+
+
+
 # 3.4.0 (2020-09-02)
 
 
