@@ -7,7 +7,7 @@
     "sui-test": "./bin/sui-test.js"
   },
   "scripts": {
-    "lib:js": "npx rimraf ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib:js": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
     "prepare": "npm run lib",
     "postpublish": "make build"
@@ -16,7 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/cli": "7.8.3",
     "@babel/core": "7.8.3",
     "@babel/plugin-transform-modules-commonjs": "7.8.3",
     "@babel/polyfill": "7.8.3",
