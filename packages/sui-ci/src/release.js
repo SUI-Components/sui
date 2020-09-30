@@ -26,6 +26,8 @@ module.exports = async function release({
   }
 
   try {
+    await execute('git pull origin master')
+
     const {stdout} = await execute(
       `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken} --skip-ci`
     )
