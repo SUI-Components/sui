@@ -17,8 +17,8 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "colors": "1.4.0",
-    "commander": "4.1.0",
-    "fs-extra": "8.1.0"
+    "commander": "6.1.0",
+    "fs-extra": "9.0.1"
   },
   "repository": {
     "type": "git",
