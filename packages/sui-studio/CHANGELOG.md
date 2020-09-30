@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.1.0 (2020-09-30)
+
+
+### Features
+
+* add reusable way to add context to components ([0fd6113](https://github.com/SUI-Components/sui/commit/0fd6113ac8f0a55ea037a9c6fcae8276f86ded85))
+* reuse context method ([90eedb2](https://github.com/SUI-Components/sui/commit/90eedb2e4217d2b8f0bcc3b8ea5af719471c78bd))
+* simplify patcher mocha ([50ce50b](https://github.com/SUI-Components/sui/commit/50ce50b0702be1c9a7c9833527f41cc09450b392))
+* simplify runtime mocha ([f577692](https://github.com/SUI-Components/sui/commit/f577692551cc7a4436c2edef36001e35504c1aaf))
+* stop using deprecated context ([f523613](https://github.com/SUI-Components/sui/commit/f523613ace9ef4f2017832abd56ed8097175d04b))
+* stop using old withContext utility ([8935e03](https://github.com/SUI-Components/sui/commit/8935e03ee010e341c4f2d577b976e5772fbc8159))
+
+
+
 # 9.0.0 (2020-09-28)
 
 
