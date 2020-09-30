@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.57.0 (2020-09-30)
+
+
+### Features
+
+* add better logging ([01a4a19](https://github.com/SUI-Components/sui/commit/01a4a19ea5e1e02769efc1607551c4b5e8702da4))
+
+
+
 # 1.56.0 (2020-09-25)
 
 
