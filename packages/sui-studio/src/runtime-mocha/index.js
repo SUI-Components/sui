@@ -38,20 +38,36 @@ Promise.all(
       component,
       extractDefault: true
     })
-    const Component = componentModule.type || componentModule
+
+    const Component =
+      componentModule && (componentModule.type || componentModule)
+    if (!componentModule) {
+      throw new Error(`Missing export default from ${categoryComponentKey}`)
+    }
+
     const {displayName} = Component
     // store on the window the contexts and components using the ${category/component} key
     window.__STUDIO_CONTEXTS__[categoryComponentKey] = contexts
     window.__STUDIO_COMPONENT__[categoryComponentKey] = Component
-    // in order to have available the component in the test without importing it
-    // we're making it available through the window object with the default context
-    window[displayName] = addReactContextToComponent(Component, {
-      context: contexts.default
+
+    const ComponentWithReactContext = addReactContextToComponent(Component, {
+      context: contexts.default,
+      id: categoryComponentKey
     })
+
+    // if the Component has a displayName, we're going to make the Component
+    // available through the window object with the default context without importing it
+    if (displayName) {
+      window[displayName] = ComponentWithReactContext
+    }
   })
-).then(() => {
-  // in order to force all tests, we're importing all the files that matches the pattern
-  importAll(allTestsFiles)
-  // we're ready to go
-  originalKarmaLoader.call(window.__karma__)
-})
+)
+  .then(() => {
+    // in order to force all tests, we're importing all the files that matches the pattern
+    importAll(allTestsFiles)
+    // we're ready to go
+    originalKarmaLoader.call(window.__karma__)
+  })
+  .catch(err => {
+    console.error(err)
+  })
