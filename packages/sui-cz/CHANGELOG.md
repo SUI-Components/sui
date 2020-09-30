@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.11.0 (2020-09-30)
+
+
+### Features
+
+* remove deprecated shim for util.promisify ([a9f9cbe](https://github.com/SUI-Components/sui/commit/a9f9cbe9977b54c59efd103917386bff65843ec5))
+
+
+
 # 1.10.0 (2020-02-12)
 
 
