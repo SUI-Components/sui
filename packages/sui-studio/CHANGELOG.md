@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.3.0 (2020-09-30)
+
+
+### Features
+
+* add more verbose errors on studio regarding tests ([8583f45](https://github.com/SUI-Components/sui/commit/8583f454766553ccf8cc9fb7c61804de29d0967b))
+* use new sui-test major ([2172b61](https://github.com/SUI-Components/sui/commit/2172b61899d4c5504243a71db623558c61b2e225))
+
+
+
 # 9.2.0 (2020-09-30)
 
 
