@@ -78,6 +78,8 @@ const RIMRAF_CMD = [
   ['package-lock.json', 'node_modules']
 ]
 
+console.info(`[sui-mono] CI mode enabled: ${ci}`)
+
 /**
  * Execute needed commands to install packages
  * @param {Object} params
@@ -113,7 +115,7 @@ const execute = (cmd, {cwd, stdin}) => {
 
 const concurrency = Number(chunk)
 const queue = new Queue({concurrency})
-console.log(`Using concurrency of: ${concurrency}`)
+console.log(`[sui-mono] Using concurrency of: ${concurrency}`)
 
 const executePhoenixOnPackages = () => {
   // if we're on a monorepo, then we don't have packages to install
