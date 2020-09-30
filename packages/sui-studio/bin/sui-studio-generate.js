@@ -408,7 +408,7 @@ return (
                 button
               </Button>
             </Grid.Cell>
-            <Grid.Cell offset={1}>
+            <Grid.Cell>
               <Button.Group fullWidth>
                 <Button>button</Button>
                 <Button>button</Button>
@@ -417,7 +417,7 @@ return (
                 <Button>button</Button>
               </Button.Group>
             </Grid.Cell>
-            <Grid.Cell offset={1}>
+            <Grid.Cell>
               <Button.Group outline fullWidth>
                 <Button>button</Button>
                 <Button>button</Button>
@@ -426,13 +426,13 @@ return (
                 <Button>button</Button>
               </Button.Group>
             </Grid.Cell>
-            <Grid.Cell offset={1}>
+            <Grid.Cell>
               <Quote>Quote</Quote>
             </Grid.Cell>
-            <Grid.Cell offset={1}>
+            <Grid.Cell>
               <Text>Text</Text>
             </Grid.Cell>
-            <Grid.Cell offset={1}>
+            <Grid.Cell>
               <Grid cols={3} gutter={[5, 5]}>
                 <Grid.Cell>
                   <Text.Bold>Text.Bold</Text.Bold>
@@ -459,7 +459,7 @@ return (
                 </Grid.Cell>
               </Grid>
             </Grid.Cell>
-            <Grid.Cell offset={1}>
+            <Grid.Cell>
               <Separator />
               <Separator>Separator</Separator>
             </Grid.Cell>
