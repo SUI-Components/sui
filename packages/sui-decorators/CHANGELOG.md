@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.21.0 (2020-09-30)
+
+
+### Bug Fixes
+
+* export default cache to keep compatibility with file imports from outside ([a1d6848](https://github.com/SUI-Components/sui/commit/a1d684850951ac80d291fbd040d25c0c29d09a40))
+
+
+
 # 3.20.0 (2020-09-30)
 
 
