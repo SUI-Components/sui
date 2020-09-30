@@ -66,4 +66,8 @@ export default class Redis extends Cache {
       )
     }
   }
+
+  clear() {
+    this._lruRedis.reset()
+  }
 }

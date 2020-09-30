@@ -18,4 +18,8 @@ export default class LRU extends Cache {
   del(key) {
     this._lru.delete(key)
   }
+
+  clear() {
+    this._lru.clear()
+  }
 }

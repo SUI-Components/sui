@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.58.0 (2020-09-30)
+
+
+### Features
+
+* upgrade dependencies ([1e06aa6](https://github.com/SUI-Components/sui/commit/1e06aa6ab2c6444e3d8a52079eb282823981f134))
+
+
+
 # 1.57.0 (2020-09-30)
 
 

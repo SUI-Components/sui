@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.2.0 (2020-09-30)
+
+
+### Bug Fixes
+
+* more resilient way to get Component.displayName ([ebdf2a7](https://github.com/SUI-Components/sui/commit/ebdf2a72dfb4a2e9f1d8a574054ac55b1bc15776))
+
+
+
 # 9.1.0 (2020-09-30)
 
 
