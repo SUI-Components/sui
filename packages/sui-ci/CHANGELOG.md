@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.7.0 (2020-09-30)
+
+
+### Features
+
+* pull changes before running release command ([a177f9b](https://github.com/SUI-Components/sui/commit/a177f9ba6efc10f80cdee7186b23d006798cf0c7))
+
+
+
 # 1.6.0 (2020-09-18)
 
 
