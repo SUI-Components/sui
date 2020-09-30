@@ -2,15 +2,15 @@
   "name": "@s-ui/sui",
   "version": "0.0.0",
   "private": true,
-  "description": "Monorepo for SUI (Schibsted User Interface) packages.",
+  "description": "Monorepo for SUI (Simple User Interface) packages.",
   "keywords": [
-    "schibsted",
+    "adevinta",
     "monorepo",
     "sui"
   ],
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix",
-    "phoenix:ci": "sui-mono phoenix --ci --no-root",
+    "phoenix:ci": "sui-mono phoenix --ci",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "cross-env NODE_ENV=test npm run test:client && cross-env NODE_ENV=test npm run test:server",
@@ -29,7 +29,6 @@
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",
     "@s-ui/test": "2",
-    "@types/mocha": "8.0.0",
     "chai": "3.5.0",
     "concurrently": "5.2.0",
     "cross-env": "5.1.6",
