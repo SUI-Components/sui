@@ -49,7 +49,10 @@ export const addReactContextToComponent = (Component, {context}) => {
   // extract displayName for the Component
   // until React 17, we need a workaround for React.memo exported components
   // https://github.com/facebook/react/issues/18026#issuecomment-675900452
-  const displayName = Component.displayName || Component.type.displayName
+  const displayName =
+    Component.displayName ||
+    (Component.type && Component.type.displayName) ||
+    Component.name
   !displayName && console.error('Component without displayName') // eslint-disable-line
 
   // use the new React context and the provider to make context available
