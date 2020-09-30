@@ -1,13 +1,13 @@
 {
   "name": "@s-ui/test",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "cypressVersion": "4.3.0",
   "description": "",
   "bin": {
     "sui-test": "./bin/sui-test.js"
   },
   "scripts": {
-    "lib:js": "npx rimraf ./lib && babel --presets sui ./src --out-dir ./lib",
+    "lib:js": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
     "prepare": "npm run lib",
     "postpublish": "make build"
@@ -16,7 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/cli": "7.8.3",
     "@babel/core": "7.8.3",
     "@babel/plugin-transform-modules-commonjs": "7.8.3",
     "@babel/polyfill": "7.8.3",
@@ -39,14 +38,5 @@
     "mocha": "6.2.2",
     "null-loader": "4.0.0",
     "webpack": "4.41.5"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }

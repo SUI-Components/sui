@@ -7,22 +7,23 @@ const fs = require('fs-extra')
 const {execSync} = require('child_process')
 const program = require('commander')
 const {NO_COMPONENTS_MESSAGE} = require('../config')
+const copyStaticFiles = require('./helpers/copyStaticFiles')
 
 program
   .option('-O, --only-changes', 'only build changed components or demos')
   .option(
-    '-P, --phoenix-command <command>',
-    'phoenix command to be executed before the build'
+    '-B, --before-build <command>',
+    'command to be executed before the build'
   )
   .parse(process.argv)
 
-console.log('\n', process.env.NODE_ENV, '\n')
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
+console.log(`Environment: ${process.env.NODE_ENV}`)
 
 const bundlerBuildPath = require.resolve('@s-ui/bundler/bin/sui-bundler-build')
-const {onlyChanges, phoenixCommand} = program
+const {onlyChanges, beforeBuild} = program
 let needsBuild = true
-let phoenix = false
+let beforeBuildCommand
 
 if (onlyChanges) {
   const stdout = execSync(
@@ -32,15 +33,15 @@ if (onlyChanges) {
   needsBuild = !stdout.includes(NO_COMPONENTS_MESSAGE)
 }
 
-if (phoenixCommand) {
-  const [command, ...args] = phoenixCommand.split(' ')
-  phoenix = [command, args]
+if (beforeBuild) {
+  const [command, ...args] = beforeBuild.split(' ')
+  beforeBuildCommand = [command, args]
 }
 
 if (needsBuild) {
   serialSpawn(
     [
-      phoenix,
+      beforeBuildCommand,
       [
         bundlerBuildPath,
         ['-C', '--context', join(__dirname, '..', 'src')],
@@ -52,6 +53,7 @@ if (needsBuild) {
     ].filter(Boolean)
   )
     .then(() => fs.copy('public/index.html', 'public/200.html'))
-    .then(code => process.exit(code))
-    .catch(code => process.exit(code))
+    .then(copyStaticFiles)
+    .then(() => process.exit(0))
+    .catch(() => process.exit(1))
 }

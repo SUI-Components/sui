@@ -1,36 +1,33 @@
-const cleanList = require('./clean-list')
 const {DEFAULT_BROWSER_TARGETS} = require('./defaults')
 
-function getTargets({targets = {}}) {
+const getTargets = ({targets = {}}) => {
   const {browser = DEFAULT_BROWSER_TARGETS} = targets
-
   return browser
 }
 
-function plugins(api, opts = {}) {
-  return cleanList([
-    require('@babel/plugin-syntax-export-default-from').default,
-    require('@babel/plugin-syntax-export-namespace-from').default,
-    [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
-    [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
-    [
-      require('babel-plugin-transform-react-remove-prop-types').default,
-      {
-        removeImport: true
-      }
-    ],
-    [
-      require('@babel/plugin-transform-runtime').default,
-      {
-        corejs: false,
-        useESModules: true,
-        regenerator: true
-      }
-    ]
-  ])
-}
+const plugins = (api, opts = {}) => [
+  require('babel-plugin-preval'),
+  require('@babel/plugin-syntax-export-default-from').default,
+  require('@babel/plugin-syntax-export-namespace-from').default,
+  [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
+  [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
+  [
+    require('babel-plugin-transform-react-remove-prop-types').default,
+    {
+      removeImport: true
+    }
+  ],
+  [
+    require('@babel/plugin-transform-runtime').default,
+    {
+      corejs: false,
+      useESModules: true,
+      regenerator: true
+    }
+  ]
+]
 
-function presets(api, opts = {}) {
+const presets = (api, opts = {}) => {
   const {targets} = opts
 
   return [
@@ -38,11 +35,10 @@ function presets(api, opts = {}) {
       require('@babel/preset-env').default,
       {
         debug: false,
+        exclude: ['transform-typeof-symbol'], // Exclude transforms that make all code slower
         ignoreBrowserslistConfig: true,
         loose: true,
         modules: false,
-        // Exclude transforms that make all code slower
-        exclude: ['transform-typeof-symbol'],
         targets: getTargets({targets}),
         useBuiltIns: false
       }

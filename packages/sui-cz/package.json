@@ -8,7 +8,7 @@
     "commitizen",
     "adapter"
   ],
-  "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "colors": "1.4.0",

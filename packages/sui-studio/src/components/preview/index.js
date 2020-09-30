@@ -1,11 +1,11 @@
 /* eslint no-console: 0 */
-import PropTypes from 'prop-types'
-import {transform} from '@babel/standalone'
 import React, {Component} from 'react'
-import DOC from '../../../doc'
+import PropTypes from 'prop-types'
 
 import SUIContext from '@s-ui/react-context'
+import {transform} from '@babel/standalone'
 
+import DOC from '../../../doc'
 ;(exist => {
   if (!exist) {
     window.DOC = DOC

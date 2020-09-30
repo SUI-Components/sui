@@ -1,11 +1,29 @@
 .Header {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  background: rgba(0, 132, 255, 0.8);
+  border-radius: 8px;
+  bottom: 16px;
+  color: #fff;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding: 32px;
+  position: absolute;
+  right: 32px;
+  z-index: 2;
+
+  &-actions {
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 0 0;
+  }
 
   &-link {
-    color: #09f;
+    color: #fff;
     font-size: 12px;
     padding-left: 8px;
     text-decoration: none;
@@ -13,7 +31,9 @@
   }
 
   &-title {
+    font-size: 16px;
     display: block;
-    font-weight: 100;
+    margin: 0 0 24px;
+    font-weight: 600;
   }
 }

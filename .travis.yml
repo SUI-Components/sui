@@ -16,7 +16,6 @@ before_install:
   - export CHROME_PATH="$(pwd)/chrome-linux/chrome"
 
 install:
-  - npm install --no-audit --loglevel=error --no-fund --no-optional --no-package-lock --no-progress --no-save --no-shrinkwrap
   - npm run phoenix:ci
 
 script:

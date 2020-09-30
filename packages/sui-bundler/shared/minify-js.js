@@ -1,6 +1,6 @@
 const TerserPlugin = require('terser-webpack-plugin')
 const {CI = false} = process.env
-const CI_PARALLEL_CORES = 4
+const CI_PARALLEL_CORES = 2
 
 module.exports = sourceMap =>
   new TerserPlugin({

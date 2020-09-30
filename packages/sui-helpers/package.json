@@ -3,7 +3,7 @@
   "version": "1.17.0",
   "description": "A set of internal helpers used by sui-related packages.",
   "keywords": [],
-  "author": "David Almeida <davidbarna@gmail.com>",
+  "author": "",
   "dependencies": {
     "colors": "1.1.2",
     "commander": "2.9.0",

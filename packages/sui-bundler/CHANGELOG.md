@@ -2,12 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.19.0 (2020-09-28)
+
+
+
+# 6.18.0 (2020-09-28)
+
+
+
+# 6.17.0 (2020-09-25)
+
+
+### Features
+
+* remove eslint-loader to speed up things ([8bd4a29](https://github.com/SUI-Components/sui/commit/8bd4a29edecf8ba5992a3af1fe0afcb182721a3e))
+* remove not needed stuff ([46117af](https://github.com/SUI-Components/sui/commit/46117af633465bb1c04f24862637d8d7177e49c4))
+* remove not used code ([947f7b9](https://github.com/SUI-Components/sui/commit/947f7b9771b9c9a4187ff645cfb7b80bd775cdc1))
+* remove not used raw-loader from sui-bundler ([2870237](https://github.com/SUI-Components/sui/commit/2870237d485ec2a8fb909e35039fd642217be2ae))
+* upgrade dependencies and replace some ([4c00998](https://github.com/SUI-Components/sui/commit/4c00998bb2e82cc24b5caebdfe2d97ff7a132259))
+* use 2 cores for CI terser ([2ff7820](https://github.com/SUI-Components/sui/commit/2ff78202ffc319668b56972e071ad87cd9c76ee1))
+* use css-minify instead OptimizeCSSAssetsPlugin ([08bf51a](https://github.com/SUI-Components/sui/commit/08bf51ab3dddb819d12fddb27f91799b0617c3d9))
+
+
+
+# 6.16.0 (2020-09-07)
+
+
+### Features
+
+* upgrade webpack and terser to try to stop CI errors ([0eda6c5](https://github.com/SUI-Components/sui/commit/0eda6c5203bb058f9862d9145e339f142fd855b4))
+
+
+
 # 6.15.0 (2020-07-22)
 
 
 ### Bug Fixes
 
 * use native ws as sockjs is giving problems with latest Node versions ([86fbcc3](https://github.com/SUI-Components/sui/commit/86fbcc34f1af86c4ac154e109cb1ff9381d3b1d7))
+
+
+### Features
+
+* restore miss commit change ([8d0a411](https://github.com/SUI-Components/sui/commit/8d0a411b4974e167cfe0ba5a66d67188016d28e9))
 
 
 

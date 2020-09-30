@@ -6,7 +6,7 @@
     "fatigue",
     "bundle"
   ],
-  "author": "Carlos Villuendas <carlosvillu@gmail.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/theme": "8",

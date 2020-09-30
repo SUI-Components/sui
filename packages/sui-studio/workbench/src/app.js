@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import './styles/index.scss'
+import './styles.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
 import {isFunction} from '../../src/components/demo/utilities'
@@ -23,6 +23,7 @@ const queryStringToJSON = queryString => {
 const params = queryStringToJSON(window.location.href)
 
 const importAll = requireContext => requireContext.keys().map(requireContext)
+
 ;(async () => {
   const defaultStyle = await import(
     '!css-loader!sass-loader!component/index.scss'
@@ -53,7 +54,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   let demoStyles = ''
   try {
-      demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
+    demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
   } catch (e) {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
@@ -64,6 +65,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
+
   ReactDOM.render(
     <ComponentToRender
       contexts={contexts}

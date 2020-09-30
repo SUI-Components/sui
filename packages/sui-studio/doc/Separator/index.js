@@ -1,8 +1,9 @@
 /* eslint react/prop-types: 0 */
-import React from 'react'
+import React, {useContext} from 'react'
 import cx from 'classnames'
 
-import Base from '../Base'
+import Context from '../context'
+import Base, {MODES} from '../Base'
 
 const Separator = ({
   children,
@@ -10,27 +11,34 @@ const Separator = ({
   elementType = 'span',
   mode,
   ...props
-}) => (
-  <div
-    className={cx(
-      'sui-studio-doc-separator',
-      {
-        [`sui-studio-doc-separator-mode-${mode}`]: mode
-      },
-      className
-    )}
-  >
-    <hr />
-    <Base
-      {...props}
-      className={cx('sui-studio-doc-separator-content', className)}
-      elementType={elementType}
-      mode={mode}
+}) => {
+  const contextProps = useContext(Context) || {}
+  const ownMode = mode || contextProps.mode
+  return (
+    <div
+      className={cx(
+        'sui-studio-doc-separator',
+        {
+          [`sui-studio-doc-separator-mode-${ownMode}`]: ownMode
+        },
+        className
+      )}
     >
-      {children}
-    </Base>
-  </div>
-)
+      <hr />
+      <Base
+        {...props}
+        className={cx('sui-studio-doc-separator-content', className)}
+        elementType={elementType}
+        {...{
+          ...contextProps,
+          mode: ownMode === MODES.LIGHT ? MODES.DARK : MODES.LIGHT
+        }}
+      >
+        {children}
+      </Base>
+    </div>
+  )
+}
 
 Separator.displayName = 'Separator'
 

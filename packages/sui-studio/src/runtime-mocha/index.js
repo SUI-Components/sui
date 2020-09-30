@@ -1,130 +1,57 @@
 /* global __BASE_DIR__ */
-import React from 'react'
-import hoistNonReactStatics from 'hoist-non-react-statics'
-
-import SUIContext from '@s-ui/react-context'
-import withContext from '../components/demo/HoC/withContext'
-import {cleanDisplayName} from '../components/demo/utilities'
-import {requireFile} from '../components/tryRequire'
+import {importContexts, importReactComponent} from '../components/tryRequire'
 import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
+import {addReactContextToComponent} from '../components/utils'
 
 addSetupEnvironment(window)
 
-export const tryRequireContext = ({category, component}) =>
-  requireFile({
-    defaultValue: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
-  })
+window.__STUDIO_CONTEXTS__ = {}
+window.__STUDIO_COMPONENT__ = {}
 
-export const tryRequireComponent = ({category, component}) =>
-  requireFile({
-    defaultValue: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/components/${category}/${component}/src/index.js`)
-  })
+// Require all the files from a context
+const importAll = r => r.keys().forEach(r)
 
+// Avoid running Karma until all components tests are loaded
 const originalKarmaLoader = window.__karma__.loaded
 window.__karma__.loaded = () => {}
 
-const regex = /\.\/(?<categoryName>\w+)\/(?<componentName>\w+)\/(src)+\/(index.js|jsx)$/
+// get all tests files available using a regex
+const allTestsFiles = require.context(
+  `${__BASE_DIR__}/test/`,
+  true,
+  /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
+)
+// get all the needed components from the available tests
+Promise.all(
+  allTestsFiles.keys().map(async key => {
+    // get the category component from the segments of the path
+    // ex: ./card/property/index.js -> card property
+    const [, category, component] = key.split('/')
+    const categoryComponentKey = `${category}/${component}`
 
-function declareAll(resolve) {
-  const cache = {}
-  const capitalize = s => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
-  resolve.keys().forEach(srcKey => {
-    const {
-      groups: {categoryName, componentName}
-    } = srcKey.match(regex)
-    const displayName = capitalize(categoryName) + capitalize(componentName)
-    cache[displayName] = {
-      displayName,
-      categoryName,
-      componentName
-    }
-  })
-  return cache
-}
-function testAll(resolve) {
-  resolve.keys().forEach(key => {
-    resolve(key)
-  })
-}
+    const getContexts = await importContexts({category, component})
+    const contexts =
+      typeof getContexts === 'function' ? await getContexts() : getContexts
 
-const enhanceComponent = displayName => {
-  !displayName && console.error('[sui-Test] Component without displayName') // eslint-disable-line
-
-  const activeContext = window.__STUDIO_CONTEXTS__[displayName]
-  const ActiveComponent = window.__STUDIO_COMPONENT__[displayName]
-
-  const EnhanceComponent = withContext(
-    activeContext.default,
-    activeContext
-  )(ActiveComponent)
-
-  const NextComponent = props => (
-    <SUIContext.Provider value={activeContext.default}>
-      <EnhanceComponent {...props} />
-    </SUIContext.Provider>
-  )
-  hoistNonReactStatics(NextComponent, ActiveComponent)
-
-  const nextDisplayName = cleanDisplayName(displayName)
-  NextComponent.displayName = nextDisplayName
-
-  return NextComponent
-}
-
-const run = async () => {
-  const cache = declareAll(
-    require.context(
-      `${__BASE_DIR__}/components/`,
-      true,
-      /\.\/(\w+)\/(\w+)\/(src)+\/index.(js|jsx)$/
-    )
-  )
-
-  async function asyncForEach(array, callback) {
-    const response = []
-    for (let index = 0; index < array.length; index++) {
-      response[index] = await callback(array[index], index, array)
-    }
-    return response
-  }
-
-  window.__STUDIO_CONTEXTS__ = {}
-  window.__STUDIO_COMPONENT__ = {}
-  await asyncForEach(Object.keys(cache), async cachedValueKeyName => {
-    const {categoryName, componentName, displayName} = cache[cachedValueKeyName]
-    let nextEntityContexts = await tryRequireContext({
-      category: categoryName,
-      component: componentName
+    const componentModule = await importReactComponent({
+      category,
+      component,
+      extractDefault: true
     })
-    nextEntityContexts =
-      typeof nextEntityContexts !== 'function'
-        ? nextEntityContexts
-        : await nextEntityContexts() // eslint-disable-line
-    const nextEntityComponent = await tryRequireComponent({
-      category: categoryName,
-      component: componentName
+    const Component = componentModule.type || componentModule
+    const {displayName} = Component
+    // store on the window the contexts and components using the ${category/component} key
+    window.__STUDIO_CONTEXTS__[categoryComponentKey] = contexts
+    window.__STUDIO_COMPONENT__[categoryComponentKey] = Component
+    // in order to have available the component in the test without importing it
+    // we're making it available through the window object with the default context
+    window[displayName] = addReactContextToComponent(Component, {
+      context: contexts.default
     })
-    window.__STUDIO_CONTEXTS__[displayName] = nextEntityContexts
-    window.__STUDIO_COMPONENT__[displayName] = nextEntityComponent
-    window[displayName] = enhanceComponent(displayName) // eslint-disable-line
   })
-
-  testAll(
-    require.context(
-      `${__BASE_DIR__}/test/`,
-      true,
-      /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
-    )
-  )
-
+).then(() => {
+  // in order to force all tests, we're importing all the files that matches the pattern
+  importAll(allTestsFiles)
+  // we're ready to go
   originalKarmaLoader.call(window.__karma__)
-}
-
-run()
+})

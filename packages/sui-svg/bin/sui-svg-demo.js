@@ -14,11 +14,7 @@ program
   .parse(process.argv)
 
 const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
-getSpawnPromise(
-  devServerExec,
-  ['-c', path.join(__dirname, '..', 'src'), '--no-pre-loader'],
-  {
-    shell: false,
-    env: process.env
-  }
-).then(process.exit, process.exit)
+getSpawnPromise(devServerExec, ['-c', path.join(__dirname, '..', 'src')], {
+  shell: false,
+  env: process.env
+}).then(process.exit, process.exit)

@@ -9,7 +9,7 @@
     "prepare": "npm run lib"
   },
   "keywords": [],
-  "author": "David Almeida <davidbarna@gmail.com>",
+  "author": "",
   "dependencies": {
     "colors": "1.1.2",
     "marky": "1.2.0"

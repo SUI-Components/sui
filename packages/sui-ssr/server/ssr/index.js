@@ -123,7 +123,9 @@ export default async (req, res, next) => {
         provider: HeadProvider,
         props: {headTags}
       },
-      ...contextProviders
+      ...(typeof contextProviders === 'function'
+        ? contextProviders({context})
+        : contextProviders)
     ].reduce(
       (acc, {provider, props}) => React.createElement(provider, props, acc),
       null

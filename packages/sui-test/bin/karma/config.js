@@ -80,9 +80,9 @@ const config = {
         },
         {
           // ignore css/scss require/imports files in the server
-          test: /\.s?css$/,
+          test: [/\.s?css$/, /\.svg$/],
           use: ['null-loader']
-        },
+        }
       ]
     }
   },

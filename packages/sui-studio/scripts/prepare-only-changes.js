@@ -58,7 +58,7 @@ async function cleanComponents(list) {
     await fs.remove(TEST_PATH)
     fs.renameSync(NEW_COMPONENTS_PATH, COMPONENTS_PATH)
     fs.renameSync(NEW_DEMO_PATH, DEMO_PATH)
-    fs.renameSync(NEW_TEST_PATH, TEST_PATH)
+    if (fs.existsSync(NEW_TEST_PATH)) fs.renameSync(NEW_TEST_PATH, TEST_PATH)
   } catch (err) {
     error(err)
   }

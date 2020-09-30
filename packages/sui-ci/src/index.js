@@ -1,3 +1,4 @@
 const updateCommitStatus = require('./updateCommitStatus')
+const release = require('./release')
 
-module.exports = {updateCommitStatus}
+module.exports = {release, updateCommitStatus}
