@@ -194,3 +194,5 @@ export const invalidateCache = ({cacheKeyString} = {}) => {
     )
   }
 }
+
+export default cache
