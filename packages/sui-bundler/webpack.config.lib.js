@@ -3,7 +3,7 @@ const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const minifyJs = require('./shared/minify-js')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
-const {sourceMap} = require('./shared/config')
+const {extractComments, sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
 
 module.exports = {
@@ -25,7 +25,9 @@ module.exports = {
     filename: 'index.js'
   },
   optimization: {
-    minimizer: [minifyJs(sourceMap)]
+    // avoid looping over all the modules after the compilation
+    checkWasmTypes: false,
+    minimizer: [minifyJs({extractComments, sourceMap})]
   },
   plugins: cleanList([
     new webpack.HashedModuleIdsPlugin(),
