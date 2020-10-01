@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.20.0 (2020-10-01)
+
+
+### Features
+
+* rollback dependency for now to avoid problem with migrations ([3496e18](https://github.com/SUI-Components/sui/commit/3496e18bcb02bc7246481a21d09a8e5683a6b4be))
+* use new config for extracting comments and improve build time avoiding wasm check ([c828cb9](https://github.com/SUI-Components/sui/commit/c828cb9a7428b08df78826507819d692108f6d49))
+
+
+
 # 6.19.0 (2020-09-28)
 
 
