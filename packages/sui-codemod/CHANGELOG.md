@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.4.0 (2020-10-01)
+
+
+### Features
+
+* upgrade dependencies ([2893cf0](https://github.com/SUI-Components/sui/commit/2893cf0aa221ae320a47191590776a6d81ba0570))
+
+
+
 # 1.3.0 (2020-02-12)
 
 
