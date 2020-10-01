@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 6.21.0 (2020-10-01)
+
+
+### Features
+
+* extractComments false by default ([f4be29b](https://github.com/SUI-Components/sui/commit/f4be29b16f27fa018c9767d8a8a7a7368cdd90cc))
+
+
+
 # 6.20.0 (2020-10-01)
 
 
