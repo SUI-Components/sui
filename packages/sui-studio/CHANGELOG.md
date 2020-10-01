@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.4.0 (2020-10-01)
+
+
+### Features
+
+* improve chunk names to understand better what we're bundling ([0b0c371](https://github.com/SUI-Components/sui/commit/0b0c3716523398196fd229dd207d52c1713d27f0))
+
+
+
 # 9.3.0 (2020-09-30)
 
 
