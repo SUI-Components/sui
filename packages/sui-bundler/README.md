@@ -146,6 +146,8 @@ This tool works with zero configuration out the box but you could use some confi
 
 `manualCompression`: Compress files manually to gzip and brotli (if supported). Useful to use along with a S3 and Lambda@Edge in order to send the best content for the userAgent. (default: `false`)
 
+`extractComments`: Determine whether comments shall be extracted to a separate file or not. Like LICENSE comments. (default: `false`)
+
 `targets`: Object with information about the browser and version supported. (default: `see the next example`)
 
 ```json
