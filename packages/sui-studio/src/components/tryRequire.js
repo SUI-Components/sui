@@ -34,7 +34,10 @@ export const importContexts = ({category, component}) =>
   safeImport({
     defaultValue: false,
     importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
+      import(
+        /* webpackChunkName: context-[request].js */
+        `${__BASE_DIR__}/demo/${category}/${component}/context.js`
+      )
   })
 
 export const importReactComponent = ({
@@ -46,6 +49,7 @@ export const importReactComponent = ({
     extractDefault,
     importFile: () =>
       import(
+        /* webpackChunkName: src-[request].js */
         /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
         `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
       )
@@ -55,6 +59,7 @@ const importDemo = ({category, component}) =>
   safeImport({
     importFile: () =>
       import(
+        /* webpackChunkName: demo-[request].js */
         /* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
         `${__BASE_DIR__}/demo/${category}/${component}/demo/index.js`
       )
@@ -63,7 +68,10 @@ const importDemo = ({category, component}) =>
 const importEvents = ({category, component}) =>
   safeImport({
     importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
+      import(
+        /* webpackChunkName: events-[request].js */
+        `${__BASE_DIR__}/demo/${category}/${component}/events.js`
+      )
   })
 
 export const importMainModules = params =>
