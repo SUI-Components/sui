@@ -22,7 +22,7 @@ const {
   navigateFallback,
   runtimeCaching
 } = require('./shared/precache')
-const {sourceMap} = require('./shared/config')
+const {extractComments, sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
 
 const Externals = require('./plugins/externals')
@@ -57,8 +57,10 @@ module.exports = {
     publicPath: PUBLIC_PATH
   },
   optimization: {
+    // avoid looping over all the modules after the compilation
+    checkWasmTypes: false,
     minimize: true,
-    minimizer: [minifyJs(sourceMap), minifyCss()],
+    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()],
     runtimeChunk: true,
     splitChunks
   },

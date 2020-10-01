@@ -2,8 +2,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 const {CI = false} = process.env
 const CI_PARALLEL_CORES = 2
 
-module.exports = sourceMap =>
+module.exports = ({extractComments, sourceMap}) =>
   new TerserPlugin({
+    extractComments,
     terserOptions: {
       parse: {
         // we want terser to parse ecma 8 code. However, we don't want it
@@ -39,7 +40,7 @@ module.exports = sourceMap =>
       }
     },
     // Use multi-process parallel running to improve the build speed
-    // For CI: Use only 4 fixed cores as it gives incorrect info and could cause troubles
+    // For CI: Use only fixed cores as it gives incorrect info and could cause troubles
     // Related: https://github.com/webpack-contrib/terser-webpack-plugin/issues/202
     // If not CI then use os.cpus().length - 1
     parallel: CI ? CI_PARALLEL_CORES : true,
