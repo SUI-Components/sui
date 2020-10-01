@@ -5,8 +5,8 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "colors": "1.1.2",
-    "commander": "2.9.0",
+    "colors": "1.4.0",
+    "commander": "6.1.0",
     "execa": "0.10.0",
     "figures": "2.0.0",
     "fs-extra": "4.0.1",
