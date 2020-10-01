@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.59.0 (2020-10-01)
+
+
+### Features
+
+* remove not needed shim ([ae5c152](https://github.com/SUI-Components/sui/commit/ae5c152a3faf28dbc196d3e5e247df92b1474ad2))
+
+
+
 # 1.58.0 (2020-09-30)
 
 
