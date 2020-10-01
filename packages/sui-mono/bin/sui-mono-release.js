@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-require('util.promisify/shim')()
+
 const program = require('commander')
 const path = require('path')
 const config = require('../src/config')
