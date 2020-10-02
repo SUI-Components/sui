@@ -25,10 +25,10 @@
     "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
-    "@s-ui/test": "3",
-    "@testing-library/react": "10.0.2",
+    "@s-ui/test": "4",
+    "@testing-library/react": "11.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "sinon": "9.0.2"
+    "sinon": "9.1.0"
   }
 }
