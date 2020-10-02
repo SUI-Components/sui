@@ -144,8 +144,6 @@ This tool works with zero configuration out the box but you could use some confi
 
 `scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
 
-`manualCompression`: Compress files manually to gzip and brotli (if supported). Useful to use along with a S3 and Lambda@Edge in order to send the best content for the userAgent. (default: `false`)
-
 `extractComments`: Determine whether comments shall be extracted to a separate file or not. Like LICENSE comments. (default: `false`)
 
 `targets`: Object with information about the browser and version supported. (default: `see the next example`)
@@ -160,7 +158,6 @@ This tool works with zero configuration out the box but you could use some confi
     "externals-manifest": "https://url_to_me_cdn/manifest.json",
     "alias": {"react": "preact"},
     "offline": true,
-    "manualCompression": true,
     "targets": {
       "chrome": "41",
       "ie": "11",

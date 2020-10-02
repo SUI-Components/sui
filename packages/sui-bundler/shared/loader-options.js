@@ -3,8 +3,5 @@ module.exports = {
     sassOptions: {
       importer: []
     }
-  },
-  'postcss-loader': {
-    plugins: _ => [require('autoprefixer')()]
   }
 }

@@ -42,13 +42,15 @@ const webpackConfig = {
   ]),
   target: 'web',
   node: {fs: 'empty'},
+  optimization: {
+    noEmitOnErrors: true
+  },
   output: {
     publicPath: '/'
   },
   plugins: [
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin({__DEV__: true}),
-    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',
       inject: true,
@@ -83,16 +85,23 @@ const webpackConfig = {
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([
-          'style-loader',
+          require.resolve('style-loader'),
           when(config['externals-manifest'], () => ({
             loader: 'externals-manifest-loader',
             options: {
               manifestURL: config['externals-manifest']
             }
           })),
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
+          require.resolve('css-loader'),
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              postcssOptions: {
+                plugins: ['autoprefixer', {}]
+              }
+            }
+          },
+          require.resolve('sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>

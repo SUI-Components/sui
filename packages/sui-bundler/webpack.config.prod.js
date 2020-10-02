@@ -115,7 +115,14 @@ module.exports = {
               manifestURL: config['externals-manifest']
             }
           })),
-          require.resolve('postcss-loader'),
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              postcssOptions: {
+                plugins: ['autoprefixer', {}]
+              }
+            }
+          },
           require.resolve('sass-loader')
         ])
       },
