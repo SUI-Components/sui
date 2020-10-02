@@ -2,13 +2,11 @@ const webpack = require('webpack')
 const clearConsole = require('react-dev-utils/clearConsole')
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
 const chalk = require('chalk')
-const ncp = require('copy-paste')
 
 const isInteractive = process.stdout.isTTY
 let compiler
 
 const printInstructions = ({urls, copyToClipboard}) => {
-  copyToClipboard && ncp.copy(urls.localUrlForBrowser)
   console.log(`
   ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}
   ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}
