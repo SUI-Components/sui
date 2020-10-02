@@ -15,7 +15,7 @@ const safeAddToHeadAndBody = htmlPluginData => url => {
 
 const generateHashFromFile = uri =>
   new Promise((resolve, reject) => {
-    md5File(path.resolve(process.cwd(), uri), (err, hash) =>
+    md5File(path.resolve(process.cwd(), uri)).then((err, hash) =>
       hash !== undefined ? resolve(hash.slice(0, HASH_LENGTH)) : reject(err)
     )
   })

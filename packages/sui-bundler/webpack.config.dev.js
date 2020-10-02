@@ -34,8 +34,7 @@ const webpackConfig = {
       ),
       // add extra alias from the config
       ...parseAlias(config.alias)
-    },
-    extensions: ['*', '.js', '.jsx', '.json']
+    }
   },
   entry: cleanList([
     require.resolve('react-dev-utils/webpackHotDevClient'),

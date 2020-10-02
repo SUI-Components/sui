@@ -11,8 +11,7 @@ const webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
-    alias: parseAlias(config.alias),
-    extensions: ['*', '.js', '.jsx', '.json']
+    alias: parseAlias(config.alias)
   },
   entry: './server.js',
   target: 'node',

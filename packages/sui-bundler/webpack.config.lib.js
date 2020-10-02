@@ -9,8 +9,7 @@ const parseAlias = require('./shared/parse-alias')
 module.exports = {
   mode: 'production',
   resolve: {
-    alias: parseAlias(config.alias),
-    extensions: ['*', '.js', '.jsx', '.json']
+    alias: parseAlias(config.alias)
   },
   entry: config.vendor
     ? {
