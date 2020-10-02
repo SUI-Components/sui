@@ -1,7 +1,7 @@
 module.exports = {
   'sass-loader': {
     sassOptions: {
-      importer: [require('node-sass-json-importer')()]
+      importer: []
     }
   },
   'postcss-loader': {
