@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.5.0 (2020-10-02)
+
+
+### Features
+
+* use better chunk naming to avoid twice js ([53a8ace](https://github.com/SUI-Components/sui/commit/53a8ace1978cd43538d428f36c6ab8095f18595b))
+
+
+
 # 9.4.0 (2020-10-01)
 
 
