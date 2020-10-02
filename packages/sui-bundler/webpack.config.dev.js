@@ -70,12 +70,6 @@ const webpackConfig = {
         exclude: EXCLUDED_FOLDERS_REGEXP,
         use: [
           {
-            loader: require.resolve('thread-loader'),
-            options: {
-              poolTimeout: Infinity // keep workers alive for more effective watch mode
-            }
-          },
-          {
             loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
