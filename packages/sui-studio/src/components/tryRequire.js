@@ -35,7 +35,7 @@ export const importContexts = ({category, component}) =>
     defaultValue: false,
     importFile: () =>
       import(
-        /* webpackChunkName: context-[request].js */
+        /* webpackChunkName: "context-[request]" */
         `${__BASE_DIR__}/demo/${category}/${component}/context.js`
       )
   })
@@ -49,7 +49,7 @@ export const importReactComponent = ({
     extractDefault,
     importFile: () =>
       import(
-        /* webpackChunkName: src-[request].js */
+        /* webpackChunkName: "src-[request]" */
         /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
         `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
       )
@@ -59,7 +59,7 @@ const importDemo = ({category, component}) =>
   safeImport({
     importFile: () =>
       import(
-        /* webpackChunkName: demo-[request].js */
+        /* webpackChunkName: "demo-[request]" */
         /* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
         `${__BASE_DIR__}/demo/${category}/${component}/demo/index.js`
       )
@@ -69,7 +69,7 @@ const importEvents = ({category, component}) =>
   safeImport({
     importFile: () =>
       import(
-        /* webpackChunkName: events-[request].js */
+        /* webpackChunkName: "events-[request]" */
         `${__BASE_DIR__}/demo/${category}/${component}/events.js`
       )
   })
