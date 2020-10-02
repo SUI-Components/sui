@@ -26,7 +26,6 @@
     "autoprefixer": "10.0.1",
     "babel-loader": "8.1.0",
     "babel-preset-sui": "3",
-    "bundle-loader": "0.5.6",
     "chalk": "4.1.0",
     "commander": "6.1.0",
     "css-loader": "4.3.0",
