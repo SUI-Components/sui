@@ -152,6 +152,23 @@ describe('<Route>', () => {
       expect(renderedString).to.equal('<div><p>es</p><p>123</p></div>')
     })
 
+    it('Routes below a regex work properly', async () => {
+      const regexp = /\/user\/(?<userId>[0-9]+)$/
+      const withRoutes = (
+        <Route>
+          <Route regexp={regexp} component={null} />
+          <Route path="/search/:keyword" component={Search} />
+        </Route>
+      )
+      const renderedString = await getRenderedString({
+        location: '/search/works',
+        withRoutes
+      })
+      expect(renderedString)
+        .to.contain('Search Results')
+        .to.contain('works')
+    })
+
     it('works with static paths', async () => {
       const withRoutes = (
         <>
