@@ -175,7 +175,7 @@ export default () => {
 the test file should be like:
 
 ```js
-import '@s-ui/studio/patcher-mocha'
+import '@s-ui/studio/src/patcher-mocha'
 
 chai.use(chaiDOM)
 
