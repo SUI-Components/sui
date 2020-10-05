@@ -4,12 +4,14 @@
 const reqThemePlayGround = require.context(
   `!css-loader!sass-loader!${__BASE_DIR__}/demo`,
   true,
-  /^.*\/themes\/.*\.scss/
+  /^.*\/themes\/.*\.scss/,
+  'lazy'
 )
 const reqComponentsSCSS = require.context(
   `!css-loader!sass-loader!${__BASE_DIR__}/components`,
   true,
-  /^\.\/\w+\/\w+\/src\/index\.scss/
+  /^\.\/\w+\/\w+\/src\/index\.scss/,
+  'lazy'
 )
 
 export const themesFor = ({category, component}) =>

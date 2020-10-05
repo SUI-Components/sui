@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.6.0 (2020-10-05)
+
+
+### Features
+
+* separate enormeus chunk in smaller ones to improve build and avoid crash ([6ab2cb1](https://github.com/SUI-Components/sui/commit/6ab2cb1e0268a9944f2ea982803c4ccae9e515a4))
+
+
+
 # 9.5.0 (2020-10-02)
 
 
