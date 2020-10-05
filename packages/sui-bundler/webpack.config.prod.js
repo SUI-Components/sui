@@ -31,7 +31,8 @@ module.exports = {
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    alias: parseAlias(config.alias)
+    alias: parseAlias(config.alias),
+    extensions: ['.js', '.json']
   },
   entry: config.vendor
     ? {
@@ -119,7 +120,7 @@ module.exports = {
             loader: require.resolve('postcss-loader'),
             options: {
               postcssOptions: {
-                plugins: ['autoprefixer', {}]
+                plugins: [require('autoprefixer')()]
               }
             }
           },

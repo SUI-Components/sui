@@ -88,16 +88,12 @@ webpack(nextConfig).run((error, stats) => {
 
   const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
   const offlinePageExists = fs.existsSync(offlinePath)
-  const shouldCreateOurCustomSW = !(
-    projectConfig &&
-    projectConfig.offline &&
-    projectConfig.offline.fallback
-  )
+
   const staticsCacheOnly =
     (projectConfig &&
       projectConfig.offline &&
       projectConfig.offline.staticsCacheOnly) ||
-    ''
+    false
 
   if (offlinePageExists) {
     fs.copyFileSync(
@@ -106,7 +102,7 @@ webpack(nextConfig).run((error, stats) => {
     )
   }
 
-  if (shouldCreateOurCustomSW && (offlinePageExists || staticsCacheOnly)) {
+  if (offlinePageExists || staticsCacheOnly) {
     const manifest = require(path.resolve(
       process.cwd(),
       'public',

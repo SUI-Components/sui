@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "7.0.0-beta.1",
+  "version": "7.0.0-beta.3",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/core": "7.11.6",
     "@s-ui/helpers": "1",
-    "autoprefixer": "10.0.1",
+    "autoprefixer": "9.8.6",
     "babel-loader": "8.1.0",
     "babel-preset-sui": "3",
     "chalk": "4.1.0",
@@ -37,7 +37,7 @@
     "mini-css-extract-plugin": "0.11.3",
     "minify-stream": "2.1.0",
     "null-loader": "4.0.0",
-    "postcss": "8.1.1",
+    "postcss": "7.0.35",
     "postcss-loader": "4.0.3",
     "react-dev-utils": "10.2.1",
     "replacestream": "4.0.3",

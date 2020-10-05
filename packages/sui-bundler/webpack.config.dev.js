@@ -34,7 +34,8 @@ const webpackConfig = {
       ),
       // add extra alias from the config
       ...parseAlias(config.alias)
-    }
+    },
+    extensions: ['.js', '.json']
   },
   entry: cleanList([
     require.resolve('react-dev-utils/webpackHotDevClient'),
@@ -97,7 +98,7 @@ const webpackConfig = {
             loader: require.resolve('postcss-loader'),
             options: {
               postcssOptions: {
-                plugins: ['autoprefixer', {}]
+                plugins: [require('autoprefixer')()]
               }
             }
           },
