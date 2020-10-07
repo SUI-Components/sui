@@ -10,18 +10,14 @@ const DEFAULT_TIMEOUT = 500
 
 export default class OptimizelyAdapter {
   constructor({optimizely, userId}) {
-    if (this._userId) {
-      throw new Error('userId is mandatory to use OptimizelyAdapter')
-    }
-
-    if (this._optimizely) {
+    if (!optimizely) {
       throw new Error(
         'optimizely instance is mandatory to use OptimizelyAdapter'
       )
     }
 
     this._optimizely = optimizely
-    this._userId = userId.toString()
+    this._userId = userId?.toString()
   }
 
   /**
@@ -53,6 +49,7 @@ export default class OptimizelyAdapter {
    * @returns {string} variation name
    */
   activateExperiment({name, attributes}) {
+    if (!this._userId) return 'default'
     return this._optimizely.activate(name, this._userId, attributes)
   }
 
