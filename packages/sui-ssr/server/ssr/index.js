@@ -134,6 +134,8 @@ export default async (req, res, next) => {
     initialData = await ssrComponentWithInitialProps({
       context: {...context, device},
       renderProps,
+      req,
+      res,
       Target: ssrConfig.useLegacyContext
         ? withAllContexts({...context, device})(InitialContext)
         : withSUIContext({...context, device})(InitialContext)
