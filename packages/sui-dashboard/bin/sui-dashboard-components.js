@@ -43,6 +43,7 @@ const repositories = [
   'frontend-mt--uilib-widgets-coches',
   'frontend-mt--uilib-widgets-motos',
   'frontend-cf--web-app',
+  'frontend-mt--uilib-widgets-coches-pro',
 
   'frontend-fc--web-server',
   'frontend-fc--uilib-widgets',
