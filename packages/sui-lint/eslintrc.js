@@ -201,9 +201,9 @@ module.exports = {
     'prettier/standard',
     'prettier/react'
   ],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   plugins: [
-    'babel',
+    '@babel',
     'chai-friendly',
     'jsx-a11y',
     'no-only-tests',
@@ -214,13 +214,13 @@ module.exports = {
     ...ACCESIBILITY_RULES,
     ...REACT_RULES,
     ...TESTING_RULES,
+    '@babel/no-unused-expressions': RULES.OFF,
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
     'no-prototype-builtins': RULES.OFF,
     'no-return-await': RULES.WARNING,
     'no-unused-expressions': RULES.OFF,
-    'babel/no-unused-expressions': RULES.OFF,
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   }
