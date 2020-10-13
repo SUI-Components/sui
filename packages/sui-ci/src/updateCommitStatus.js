@@ -10,6 +10,7 @@ const {
 
 /**
  * Get the needed API Base Url depending on the remote origin url
+ * @return {Promise<string>} API base url
  */
 async function getApiBaseUrl() {
   const gitRemoteOriginUrl = await getGitRemoteOriginUrl().catch(
@@ -20,6 +21,19 @@ async function getApiBaseUrl() {
   return resource === 'github.com'
     ? 'https://api.github.com'
     : `https://${resource}/api/v3`
+}
+
+/**
+ * Create a default description dictionary for a topic
+ * @param {string} topic
+ * @return {{ [status: string]: string }}
+ */
+function createDefaultDescriptionDictionary(topic) {
+  return {
+    [STATUS_STATES.KO]: `Failed ${topic} step`,
+    [STATUS_STATES.OK]: `${topic} passed successfully!`,
+    [STATUS_STATES.RUN]: `Running ${topic}...`
+  }
 }
 
 /**
@@ -46,10 +60,13 @@ module.exports = async function updateCommitStatus({
 
   const baseUrl = await getApiBaseUrl()
 
+  const descriptionDictionaryForTopic =
+    STATUS_DESCRIPTION[topic] || createDefaultDescriptionDictionary(topic)
+
   const requestParams = {
     baseUrl,
     context: `${STATUS_CONTEXT} (${topic})`,
-    description: STATUS_DESCRIPTION[topic][state],
+    description: descriptionDictionaryForTopic[state],
     owner,
     repo,
     sha: commit,
