@@ -14,7 +14,7 @@ const DEFAULT_PARAMS = {
 
 describe('sui-ci', () => {
   describe('update-commit-status', () => {
-    it('calls GitHub Api to update status of a commit with a install message', done => {
+    it('calls GitHub Api to update status of a commit with the correct message for install topic', done => {
       mockGitHubRequest(({method, href, body}) => {
         expect(method).to.equal('POST')
         expect(href).to.equal(
@@ -34,7 +34,7 @@ describe('sui-ci', () => {
       updateCommitStatus(DEFAULT_PARAMS)
     })
 
-    it('calls GitHub Api to update status of a commit with a default message for unknwon topic', done => {
+    it('calls GitHub Api to update status of a commit with a default message for unknown topic', done => {
       mockGitHubRequest(({method, href, body}) => {
         expect(method).to.equal('POST')
         expect(href).to.equal(
