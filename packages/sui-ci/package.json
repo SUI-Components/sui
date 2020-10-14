@@ -11,7 +11,7 @@
     "commander": "6.1.0",
     "execa": "4.0.3",
     "git-remote-origin-url": "3.1.0",
-    "git-url-parse": "11.2.0"
+    "git-url-parse": "11.3.0"
   },
   "devDependencies": {
     "nock": "13.0.4"
