@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.8.0 (2020-10-14)
+
+
+### Features
+
+* add lint as personalized step ([51283ef](https://github.com/SUI-Components/sui/commit/51283ef16c434e6abfbd7d677e5e0db9736294a9))
+* add possibility to have a custom topic with a default message ([eda268e](https://github.com/SUI-Components/sui/commit/eda268e0e70e8b1d4593e23258826a517ca33656))
+
+
+
 # 1.7.0 (2020-09-30)
 
 
