@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.13.0 (2020-10-14)
+
+
+### Features
+
+* cache babel config ([4c6ccad](https://github.com/SUI-Components/sui/commit/4c6ccad88d6e7b1e089caee2eec83bb5787ecb45))
+
+
+
 # 3.12.0 (2020-09-28)
 
 
