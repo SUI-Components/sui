@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {fetchComponentSrcRawFile} from '../tryRequire'
 
 export default function Api({params}) {
@@ -10,7 +10,10 @@ export default function Api({params}) {
       const reactDocs = await import('react-docgen')
       const {category, component} = params
       const rawSource = await fetchComponentSrcRawFile({category, component})
-      const docs = reactDocs.parse(rawSource)
+      const docs = reactDocs.parse(
+        rawSource,
+        reactDocs.resolver.findAllComponentDefinitions
+      )
       setDocs(docs)
     }
     getDocs()
@@ -62,14 +65,21 @@ export default function Api({params}) {
     })
   }
 
-  if (docs) {
-    const {props} = docs
+  const renderComponentDoc = (componentDoc, index = 0) => {
+    const {props} = componentDoc
     return (
-      <>
+      <Fragment key={index}>
+        <h1>{componentDoc.displayName}</h1>
         <h2>Props</h2>
         {renderPropsApi({props})}
-      </>
+      </Fragment>
     )
+  }
+
+  if (docs) {
+    return Array.isArray(docs)
+      ? docs.map(renderComponentDoc)
+      : renderComponentDoc(docs)
   }
 
   return null
