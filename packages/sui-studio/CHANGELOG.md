@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.7.0 (2020-10-16)
+
+
+### Bug Fixes
+
+* theme not charged when changing between components despite of presenting it selecte ([918d2c9](https://github.com/SUI-Components/sui/commit/918d2c9bcbe53106851a9a60254fa94485c59f46))
+
+
+
 # 9.6.0 (2020-10-05)
 
 
