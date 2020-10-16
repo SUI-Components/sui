@@ -40,14 +40,14 @@ export default class Demo extends Component {
     themeSelectedIndex: 0
   }
 
-  _init({category, component}) {
+  _init({category, component, theme}) {
     this.setState({
       // clean state in case we're moving from another component
       exports: {default: null}
     })
 
     Promise.all([
-      stylesFor({category, component}),
+      stylesFor({category, component, withTheme: theme}),
       importMainModules({category, component}),
       fetchPlayground({category, component})
     ]).then(async ([style, requiredModules, playground]) => {
@@ -73,7 +73,7 @@ export default class Demo extends Component {
 
   // eslint-disable-next-line
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this._init(nextProps.params)
+    this._init({...nextProps.params, theme: this.state.theme})
   }
 
   componentWillUnmount() {
@@ -149,7 +149,7 @@ export default class Demo extends Component {
 
     return (
       <div className="sui-StudioDemo">
-        <Style>{style}</Style>
+        <Style id="sui-studio-demo-style">{style}</Style>
         <div className="sui-StudioNavBar-secondary">
           <ContextButtons
             ctxt={ctxt || {}}
