@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.9.0 (2020-10-19)
+
+
+### Features
+
+* use native prepare script instead build ([6eaabc9](https://github.com/SUI-Components/sui/commit/6eaabc9385c6886ac34ec9d7e76599c315ed9e4e))
+
+
+
 # 9.8.0 (2020-10-19)
 
 
