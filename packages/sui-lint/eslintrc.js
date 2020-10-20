@@ -166,14 +166,14 @@ const REACT_RULES = {
       ignore: []
     }
   ],
-  'react/jsx-uses-react': RULES.WARNING,
+  'react/jsx-uses-react': RULES.OFF,
   'react/jsx-uses-vars': RULES.WARNING,
   'react/no-deprecated': RULES.WARNING,
   'react/no-direct-mutation-state': RULES.ERROR,
   'react/no-is-mounted': RULES.WARNING,
   'react/no-multi-comp': [RULES.WARNING, {ignoreStateless: true}],
   'react/no-unused-prop-types': RULES.WARNING,
-  'react/react-in-jsx-scope': RULES.WARNING,
+  'react/react-in-jsx-scope': RULES.OFF,
   'react/require-render-return': RULES.WARNING
 }
 
