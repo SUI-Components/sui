@@ -164,7 +164,13 @@ const automaticRelease = async ({
   const authURL = new URL(gitURL)
   authURL.username = githubToken
 
-  await exec(`git pull --unshallow`, {cwd})
+  const {
+    stdout: rawIsShallowRepository
+  } = await exec('git rev-parse --is-shallow-repository', {cwd})
+  const isShallowRepository = rawIsShallowRepository === 'true'
+
+  if (isShallowRepository) await exec(`git pull --unshallow --quiet`, {cwd})
+
   await exec(`git config --global user.email "${githubEmail}"`, {cwd})
   await exec(`git config --global user.name "${githubUser}"`, {cwd})
   await exec('git remote rm origin', {cwd})
