@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.14.0 (2020-10-21)
+
+
+### Features
+
+* support automatic jsx React import ([039a8ec](https://github.com/SUI-Components/sui/commit/039a8ecfd0456a7e97e29e6dbdcb6f7006a8d00b))
+
+
+
 # 3.13.0 (2020-10-14)
 
 
