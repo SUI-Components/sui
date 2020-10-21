@@ -166,14 +166,14 @@ const REACT_RULES = {
       ignore: []
     }
   ],
-  'react/jsx-uses-react': RULES.WARNING,
+  'react/jsx-uses-react': RULES.OFF,
   'react/jsx-uses-vars': RULES.WARNING,
   'react/no-deprecated': RULES.WARNING,
   'react/no-direct-mutation-state': RULES.ERROR,
   'react/no-is-mounted': RULES.WARNING,
   'react/no-multi-comp': [RULES.WARNING, {ignoreStateless: true}],
   'react/no-unused-prop-types': RULES.WARNING,
-  'react/react-in-jsx-scope': RULES.WARNING,
+  'react/react-in-jsx-scope': RULES.OFF,
   'react/require-render-return': RULES.WARNING
 }
 
@@ -201,9 +201,9 @@ module.exports = {
     'prettier/standard',
     'prettier/react'
   ],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   plugins: [
-    'babel',
+    '@babel',
     'chai-friendly',
     'jsx-a11y',
     'no-only-tests',
@@ -214,13 +214,13 @@ module.exports = {
     ...ACCESIBILITY_RULES,
     ...REACT_RULES,
     ...TESTING_RULES,
+    '@babel/no-unused-expressions': RULES.OFF,
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
     'no-prototype-builtins': RULES.OFF,
     'no-return-await': RULES.WARNING,
     'no-unused-expressions': RULES.OFF,
-    'babel/no-unused-expressions': RULES.OFF,
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   }
