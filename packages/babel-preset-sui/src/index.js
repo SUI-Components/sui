@@ -43,7 +43,10 @@ const presets = (api, opts = {}) => {
         useBuiltIns: false
       }
     ],
-    [require('@babel/preset-react').default, {useBuiltIns: true}]
+    [
+      require('@babel/preset-react').default,
+      {runtime: 'automatic', useBuiltIns: true}
+    ]
   ]
 }
 
