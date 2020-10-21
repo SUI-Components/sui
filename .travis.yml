@@ -5,6 +5,10 @@ node_js: '13'
 addons:
   chrome: stable
 
+env:
+  - GITHUB_USER=sui-bot
+  - GITHUB_EMAIL=cloud-accounts@scmspain.com
+
 services:
   - docker
   - redis-server
@@ -28,4 +32,4 @@ jobs:
     - stage: Release packages
       if: branch = master AND NOT type = pull_request
       script:
-        - sh .travis-release.sh
+        - npx @s-ui/ci release
