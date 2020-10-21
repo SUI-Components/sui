@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/component-peer-dependencies",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A set of dependencies for hosts of sui components.",
   "keywords": [
     "bundle",
