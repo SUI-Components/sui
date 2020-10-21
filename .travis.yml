@@ -5,10 +5,6 @@ node_js: '13'
 addons:
   chrome: stable
 
-env:
-  - GITHUB_USER=sui-bot
-  - GITHUB_EMAIL=cloud-accounts@scmspain.com
-
 services:
   - docker
   - redis-server
@@ -20,7 +16,7 @@ before_install:
   - export CHROME_PATH="$(pwd)/chrome-linux/chrome"
 
 install:
-  - npm run phoenix:ci
+  - GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npm run phoenix:ci
 
 script:
   - npm run lint
