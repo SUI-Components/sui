@@ -16,7 +16,7 @@ before_install:
   - export CHROME_PATH="$(pwd)/chrome-linux/chrome"
 
 install:
-  - GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npm run phoenix:ci
+  - npm run phoenix:ci
 
 script:
   - npm run lint
@@ -28,4 +28,4 @@ jobs:
     - stage: Release packages
       if: branch = master AND NOT type = pull_request
       script:
-        - npx @s-ui/ci release
+        - GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci release
