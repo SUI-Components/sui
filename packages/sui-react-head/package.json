@@ -7,8 +7,8 @@
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test": "npm run test:server && npm run test:browser",
-    "test:browser": "NODE_ENV=test npm exec sui-test browser",
-    "test:server": "NODE_ENV=test npm exec sui-test server"
+    "test:browser": "NODE_ENV=test sui-test browser",
+    "test:server": "NODE_ENV=test sui-test server"
   },
   "keywords": [],
   "author": "",
