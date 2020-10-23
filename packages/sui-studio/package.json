@@ -59,14 +59,5 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-studio#readme",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  }
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-studio#readme"
 }

@@ -38,11 +38,6 @@
       "types": "@s-ui/mono/src/types"
     }
   },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   },
