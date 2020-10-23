@@ -38,10 +38,6 @@
       "types": "@s-ui/mono/src/types"
     }
   },
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "husky": {
     "hooks": {
       "pre-commit": "sui-precommit run"
