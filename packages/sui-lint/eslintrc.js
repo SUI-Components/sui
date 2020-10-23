@@ -234,7 +234,7 @@ module.exports = {
     'no-unused-expressions': RULES.OFF,
     'no-unused-vars': [
       RULES.ERROR,
-      {ignoreRestSiblings: true, varsIgnorePattern: 'React'}
+      {args: 'none', ignoreRestSiblings: true, varsIgnorePattern: 'React'}
     ],
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
