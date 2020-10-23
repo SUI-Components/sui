@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/precommit",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Effortless SUI precommit rules integration in your project",
   "main": "index.js",
   "bin": {
@@ -26,14 +26,5 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-precommit#readme",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  }
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-precommit#readme"
 }

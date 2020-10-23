@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.9.0 (2020-10-19)
+
+
+### Features
+
+* use native prepare script instead build ([6eaabc9](https://github.com/SUI-Components/sui/commit/6eaabc9385c6886ac34ec9d7e76599c315ed9e4e))
+
+
+
+# 9.8.0 (2020-10-19)
+
+
+
+# 9.7.0 (2020-10-16)
+
+
+### Bug Fixes
+
+* some api doc tabs not working fine ([4333233](https://github.com/SUI-Components/sui/commit/4333233e9191e4bbb1697733c1fbbbd58b7549c7))
+* theme not charged when changing between components despite of presenting it selecte ([918d2c9](https://github.com/SUI-Components/sui/commit/918d2c9bcbe53106851a9a60254fa94485c59f46))
+
+
+
 # 9.6.0 (2020-10-05)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/component-peer-dependencies",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A set of dependencies for hosts of sui components.",
   "keywords": [
     "bundle",
@@ -14,7 +14,7 @@
     "@s-ui/react-head": "1",
     "prop-types": "15.6",
     "react": "16",
-    "react-dom": ">=16.4.2",
+    "react-dom": "^16.4.2",
     "react-helmet": "5",
     "react-router": "3"
   },

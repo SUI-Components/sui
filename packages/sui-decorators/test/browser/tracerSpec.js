@@ -91,7 +91,7 @@ describe('Tracer', () => {
     class TestFunction {
       @tracer({metric: 'METRIC_1'})
       tryFunction() {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
           setTimeout(() => resolve(resolveValue), timeout)
         })
       }

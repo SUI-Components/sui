@@ -130,7 +130,7 @@ const pageConfigs = () =>
   )
 
 const createBrotli = file =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     createReadStream(path.resolve(process.cwd(), 'public', file))
       .pipe(brotli())
       .pipe(
@@ -141,7 +141,7 @@ const createBrotli = file =>
   })
 
 const createGzip = file =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     createReadStream(path.resolve(process.cwd(), 'public', file))
       .pipe(gzip)
       .pipe(
@@ -189,7 +189,8 @@ const createDownloader = () =>
   })
 
 const createSW = () =>
-  new Promise((res, rej) => { // eslint-disable-line
+  // eslint-disable-next-line
+  new Promise((res, rej) => {
     const filename = 'workbox-sw.prod.v2.1.2'
     const staticManifests = manifests()
     const staticCache = flatten(

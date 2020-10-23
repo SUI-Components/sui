@@ -28,4 +28,4 @@ jobs:
     - stage: Release packages
       if: branch = master AND NOT type = pull_request
       script:
-        - sh .travis-release.sh
+        - GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci release

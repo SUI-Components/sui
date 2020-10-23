@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.60.0 (2020-10-20)
+
+
+### Features
+
+* detect if should unshallow ([da591db](https://github.com/SUI-Components/sui/commit/da591db84811813f599efac95d46a7041fbd473b))
+
+
+
 # 1.59.0 (2020-10-01)
 
 

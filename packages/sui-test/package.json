@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "cypressVersion": "4.3.0",
   "description": "",
   "bin": {
@@ -16,13 +16,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "7.8.3",
-    "@babel/plugin-transform-modules-commonjs": "7.8.3",
-    "@babel/polyfill": "7.8.3",
-    "@babel/register": "7.8.3",
+    "@babel/core": "7.12.3",
+    "@babel/plugin-transform-modules-commonjs": "7.12.1",
+    "@babel/polyfill": "7.12.1",
+    "@babel/register": "7.12.1",
     "@s-ui/helpers": "1",
-    "babel-loader": "8.0.6",
-    "babel-plugin-dynamic-import-node": "2.3.0",
+    "babel-loader": "8.1.0",
+    "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "5.2.0",
     "babel-preset-sui": "3",
     "chalk": "3.0.0",

@@ -43,11 +43,20 @@ const presets = (api, opts = {}) => {
         useBuiltIns: false
       }
     ],
-    [require('@babel/preset-react').default, {useBuiltIns: true}]
+    [
+      require('@babel/preset-react').default,
+      {runtime: 'automatic', useBuiltIns: true}
+    ]
   ]
 }
 
-module.exports = (api, opts) => ({
-  presets: presets(api, opts),
-  plugins: plugins(api, opts)
-})
+module.exports = (api, opts) => {
+  // Permacache the computed config and never call this config function again
+  // more info: https://babeljs.io/docs/en/config-files#config-function-api
+  api.cache(true)
+
+  return {
+    presets: presets(api, opts),
+    plugins: plugins(api, opts)
+  }
+}

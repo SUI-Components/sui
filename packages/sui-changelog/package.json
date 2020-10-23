@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/changelog",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "CLI to retrieve a changelog from a set of dependencies",
   "main": "./bin/index.js",
   "bin": {

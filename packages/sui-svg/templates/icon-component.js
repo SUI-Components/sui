@@ -1,4 +1,4 @@
-const template = (code, config, state) => {
+const template = code => {
   return `import React, {memo} from 'react'
 import AtomIcon from '@s-ui/react-atom-icon'
 

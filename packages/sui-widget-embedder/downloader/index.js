@@ -128,7 +128,9 @@
   }
 
   function match(pathnameRegExp, hrefRegExp) {
-    return matchPathnameWithRegExp(pathnameRegExp) || matchhRefWithRegExp(hrefRegExp)
+    return (
+      matchPathnameWithRegExp(pathnameRegExp) || matchhRefWithRegExp(hrefRegExp)
+    )
   }
 
   var pages = []
@@ -138,7 +140,7 @@
     var hrefRegExp = pageConfigs[page].hrefRegExp
     var isBlacklisted = blacklistedRegExps.some(matchPathnameWithRegExp)
 
-    if (!isBlacklisted && match(pathnameRegExp,hrefRegExp)) {
+    if (!isBlacklisted && match(pathnameRegExp, hrefRegExp)) {
       pages.push(page)
     }
   }
