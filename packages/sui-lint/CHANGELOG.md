@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.22.0 (2020-10-23)
+
+
+### Features
+
+* avoid checking not used args ([967af5a](https://github.com/SUI-Components/sui/commit/967af5a1500623614c6eba2318c7b65fc2e9687b))
+
+
+
 # 3.21.0 (2020-10-23)
 
 
