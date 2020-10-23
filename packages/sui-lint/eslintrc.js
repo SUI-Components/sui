@@ -185,13 +185,22 @@ const TESTING_RULES = {
   'no-only-tests/no-only-tests': RULES.ERROR
 }
 
+const resolvedBabelPresetSui = require.resolve('babel-preset-sui')
+const parser = resolvedBabelPresetSui ? '@babel/eslint-parser' : undefined
+
 module.exports = {
   env: {
+    es6: true,
     mocha: true
   },
+  parser,
   parserOptions: {
     ecmaFeatures: {
       jsx: true
+    },
+    ecmaVersion: 12,
+    babelOptions: {
+      configFile: resolvedBabelPresetSui
     }
   },
   extends: [
@@ -201,7 +210,6 @@ module.exports = {
     'prettier/standard',
     'prettier/react'
   ],
-  parser: '@babel/eslint-parser',
   plugins: [
     '@babel',
     'chai-friendly',
