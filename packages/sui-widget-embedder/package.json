@@ -28,14 +28,5 @@
     "static-module": "1.5.0",
     "webpack-dev-middleware": "1.12.0",
     "workbox-sw": "2.1.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }
