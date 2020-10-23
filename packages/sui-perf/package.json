@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-perf#readme",
   "peerDependencies": {
-    "react": "16",
-    "react-dom": "16"
+    "react": "16 || 17",
+    "react-dom": "16 || 17"
   }
 }
