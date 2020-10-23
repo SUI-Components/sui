@@ -225,6 +225,7 @@ module.exports = {
     ...ACCESIBILITY_RULES,
     ...REACT_RULES,
     ...TESTING_RULES,
+    'accessor-pairs': RULES.OFF,
     '@babel/no-unused-expressions': RULES.OFF,
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
