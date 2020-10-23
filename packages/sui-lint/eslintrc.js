@@ -193,6 +193,9 @@ module.exports = {
     es6: true,
     mocha: true
   },
+  globals: {
+    preval: 'readonly'
+  },
   parser,
   parserOptions: {
     ecmaFeatures: {
