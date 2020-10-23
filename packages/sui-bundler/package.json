@@ -24,7 +24,6 @@
     "@babel/cli": "7.12.1",
     "@babel/core": "7.12.3",
     "@s-ui/helpers": "1",
-    "@s-ui/lint": "3",
     "autoprefixer": "9.8.5",
     "babel-loader": "8.1.0",
     "babel-preset-sui": "3",
@@ -62,14 +61,5 @@
     "webpack-manifest-plugin": "2.2.0",
     "webpack-node-externals": "1.7.2",
     "workbox-webpack-plugin": "5.1.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }
