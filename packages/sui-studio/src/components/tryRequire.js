@@ -5,7 +5,7 @@ const safeImport = async ({
   extractDefault = true,
   importFile
 }) => {
-  const file = await importFile().catch(_ => defaultValue)
+  const file = await importFile().catch(() => defaultValue)
   if (typeof file === 'undefined') {
     return Promise.reject(new Error('Error requiring file'))
   }

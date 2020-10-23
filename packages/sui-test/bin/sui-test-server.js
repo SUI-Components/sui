@@ -39,9 +39,7 @@ serialSpawn([
   ]
 ]).catch(err => {
   if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
-    process.stderr.write(
-      chalk.red((err && (err.stack || err.message)) || err)
-    ) + '\n'
+    process.stderr.write(chalk.red((err && (err.stack || err.message)) || err))
   }
   process.exit(err.code || 1)
 })

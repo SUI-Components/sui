@@ -41,7 +41,7 @@ const getStaticErrorPageContent = async (status, req) => {
       `${status}.html`
     ),
     'utf8'
-  ).catch(e => `Generic Error Page: ${status}`)
+  ).catch(() => `Generic Error Page: ${status}`)
   __PAGES__[status] = html
   return html
 }
@@ -144,12 +144,12 @@ export const hooksFactory = async () => {
     },
     [TYPES.PRE_SSR_HANDLER]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
-    [TYPES.NOT_FOUND]: async (req, res, next) => {
+    [TYPES.NOT_FOUND]: async (req, res) => {
       res
         .status(NOT_FOUND_CODE)
         .send(await getStaticErrorPageContent(NOT_FOUND_CODE, req))
     },
-    [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
+    [TYPES.INTERNAL_ERROR]: async (err, req, res) => {
       // getInitialProps could throw a 404 error or any other error
       req.log && req.log.error && req.log.error((' ' + err.message).slice(1))
       const status =
