@@ -1,70 +1,63 @@
 const webpack = require('webpack')
 const clearConsole = require('react-dev-utils/clearConsole')
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
-const chalk = require('chalk')
+const log = require('../shared/log')
 
 const isInteractive = process.stdout.isTTY
-let compiler
 
-const printInstructions = ({urls, copyToClipboard}) => {
-  console.log(`
-  ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}
-  ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}
-  `)
-}
+const printInstructions = ({urls}) =>
+  log.info(`
+  Local:    ${urls.localUrlForTerminal}
+  Network:  ${urls.lanUrlForTerminal}
+`)
 
 module.exports = (config, urls) => {
+  let compiler
   try {
     compiler = webpack(config)
   } catch (err) {
-    console.log(chalk.red('Failed to compile.'))
-    console.log()
-    console.log(err.message || err)
-    console.log()
+    log.error(`✖ Failed to compile:\n ${err.message || err}`)
     process.exit(1)
   }
 
   compiler.hooks.invalid.tap('invalid', () => {
-    if (isInteractive) {
-      clearConsole()
-    }
-    console.log('Compiling...')
+    if (isInteractive) clearConsole()
+    log.processing('❯ Compiling...')
   })
-
-  let isFirstCompile = true
 
   compiler.hooks.done.tap('done', stats => {
-    if (isInteractive) {
-      clearConsole()
-    }
+    if (isInteractive) clearConsole()
 
-    const messages = formatWebpackMessages(stats.toJson({}, true))
-    const isSuccessful = !messages.errors.length
+    const isSuccessful = !stats.hasErrors()
 
+    // Log the correct message of compilation depending if we have warnings
     if (isSuccessful) {
-      console.log(chalk.green('Compiled successfully!'))
+      stats.hasWarnings()
+        ? log.warn('⚠ Compiled with warnings')
+        : log.success('✔ Compiled successfully')
     }
 
-    if (isSuccessful && isInteractive) {
-      printInstructions({urls, copyToClipboard: isFirstCompile})
-    }
+    // Even with warnings, we show instructions to access localhost if we have a compilation
+    if (isSuccessful && isInteractive) printInstructions({urls})
 
-    if (messages.errors.length) {
+    // If we have errors, we must show them
+    if (!isSuccessful) {
+      const messages = formatWebpackMessages(stats.toJson('errors-only', true))
       // Only keep the first error. Others are often indicative
       // of the same problem, but confuse the reader with noise.
-      if (messages.errors.length > 1) {
-        messages.errors.length = 1
-      }
-      console.log(chalk.red('Failed to compile.\n'))
-      console.log(messages.errors.join('\n\n'))
+      if (messages.errors.length > 1) messages.errors.length = 1
+      // Show the errors
+      log.error(`✖ Failed to compile:\n${messages.errors.join('\n\n')}`)
     }
 
-    if (messages.warnings.length) {
-      console.log(chalk.yellow('Compiled with warnings:\n'))
-      console.log(messages.warnings.join('\n\n'))
+    // With warnings, even after showing the instructions we must list the warnings we have
+    if (stats.hasWarnings()) {
+      const messages = formatWebpackMessages(
+        stats.toJson('errors-warnings', true)
+      )
+      log.warn(messages.warnings.join('\n\n'))
     }
-
-    isFirstCompile = false
   })
+
   return compiler
 }
