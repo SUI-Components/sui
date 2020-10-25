@@ -1,25 +1,21 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
-// https://github.com/coryhouse/react-slingshot/blob/master/tools/build.js
-const program = require('commander')
-const rimraf = require('rimraf')
-const webpack = require('webpack')
-const path = require('path')
-const staticModule = require('static-module')
-const minifyStream = require('minify-stream')
-const replaceStream = require('replacestream')
-const config = require('../webpack.config.prod')
+
 const fs = require('fs')
+const minifyStream = require('minify-stream')
+const path = require('path')
+const program = require('commander')
+const replaceStream = require('replacestream')
+const rimraf = require('rimraf')
+const staticModule = require('static-module')
+const webpack = require('webpack')
+
+const config = require('../webpack.config.prod')
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
+const log = require('../shared/log')
 const {config: projectConfig} = require('../shared')
 
-const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
-
-// TODO: Extract this
-const chalk = require('chalk')
-const chalkError = chalk.red
-const chalkSuccess = chalk.green
-const chalkWarning = chalk.yellow
-const chalkProcessing = chalk.blue
+process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -51,49 +47,42 @@ const packagesToLink = program.linkPackage || []
 const nextConfig = packagesToLink.length
   ? linkLoaderConfigBuilder({
       config,
-      packagesToLink
+      packagesToLink,
+      linkAll: false
     })
   : config
 
-process.env.NODE_ENV = process.env.NODE_ENV
-  ? process.env.NODE_ENV
-  : 'production'
-
 if (clean) {
-  console.log(chalkProcessing('Removing previous build...'))
+  log.processing('Removing previous build...')
   rimraf.sync(path.resolve(process.env.PWD, 'public'))
 }
-console.log(
-  chalkProcessing('Generating minified bundle. This will take a moment...')
-)
+
+log.processing('Generating minified bundle. This will take a moment...')
 
 webpack(nextConfig).run((error, stats) => {
   if (error) {
-    console.log(chalkError(error))
+    log.error(error)
     return 1
   }
 
-  const jsonStats = stats.toJson()
-
   if (stats.hasErrors()) {
-    return jsonStats.errors.map(error => console.log(chalkError(error)))
+    const jsonStats = stats.toJson('errors-only')
+    return jsonStats.errors.map(log.error)
   }
 
   if (stats.hasWarnings()) {
-    console.log(chalkWarning('Webpack generated the following warnings: '))
-    jsonStats.warnings.map(warning => console.log(chalkWarning(warning)))
+    const jsonStats = stats.toJson('errors-warnings')
+    log.warn('Webpack generated the following warnings: ')
+    jsonStats.warnings.map(log.warn)
   }
 
   console.log(`Webpack stats: ${stats}`)
 
   const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
   const offlinePageExists = fs.existsSync(offlinePath)
+  const {offline: offlineConfig = {}} = projectConfig
 
-  const staticsCacheOnly =
-    (projectConfig &&
-      projectConfig.offline &&
-      projectConfig.offline.staticsCacheOnly) ||
-    false
+  const staticsCacheOnly = offlineConfig.staticsCacheOnly || false
 
   if (offlinePageExists) {
     fs.copyFileSync(
@@ -111,8 +100,6 @@ webpack(nextConfig).run((error, stats) => {
 
     const rulesOfFilesToNotCache = [
       'runtime~', // webpack's runtime chunks are not meant to be cached
-      '.gz', // avoid gzipped files
-      '.br', // avoid brotli files
       'LICENSE.txt', // avoid LICENSE files
       '.map' // source maps
     ]
@@ -120,11 +107,7 @@ webpack(nextConfig).run((error, stats) => {
       url => !rulesOfFilesToNotCache.some(rule => url.includes(rule))
     )
 
-    const importScripts =
-      (projectConfig &&
-        projectConfig.offline &&
-        projectConfig.offline.importScripts) ||
-      []
+    const importScripts = offlineConfig.importScripts || []
 
     const stringImportScripts = importScripts
       .map(url => `importScripts("${url}")`)
@@ -153,10 +136,8 @@ webpack(nextConfig).run((error, stats) => {
     console.log('\nService worker generated succesfully!\n')
   }
 
-  console.log(
-    chalkSuccess(
-      `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
-    )
+  log.success(
+    `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
   )
 
   return 0
