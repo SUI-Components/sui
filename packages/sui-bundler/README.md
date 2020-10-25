@@ -140,7 +140,7 @@ Then you can find your library directly in the provided namespace variable: `win
 
 ## Configuration
 
-This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside the package.json of your project.
+This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside a `config` property in the package.json of your project.
 
 `scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
 

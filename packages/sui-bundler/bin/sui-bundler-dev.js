@@ -7,7 +7,6 @@ process.on('unhandledRejection', err => {
 
 const program = require('commander')
 const path = require('path')
-const chalk = require('chalk')
 const WebpackDevServer = require('webpack-dev-server')
 const clearConsole = require('react-dev-utils/clearConsole')
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
@@ -15,11 +14,14 @@ const {
   choosePort,
   prepareUrls
 } = require('react-dev-utils/WebpackDevServerUtils')
+
 const webpackConfig = require('../webpack.config.dev')
+
 const createDevServerConfig = require('../factories/createDevServerConfig')
 const createCompiler = require('../factories/createCompiler')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
+const log = require('../shared/log')
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
@@ -68,7 +70,7 @@ const start = async ({
       path.join(config.context, 'app.js')
     ])
   ) {
-    console.error(
+    log.error(
       `Required files are missing, create and index.html and app.js inside your src folder.`
     )
     process.exit(1)
@@ -84,13 +86,11 @@ const start = async ({
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
   const devServer = new WebpackDevServer(compiler, serverConfig)
-  console.log(chalk.cyan('Starting the development server...\n'))
+  log.processing('Starting the development server...\n')
   devServer.listen(port, HOST, err => {
-    if (err) {
-      return console.log(err)
-    }
-    ;['SIGINT', 'SIGTERM'].forEach(function(sig) {
-      process.on(sig, function() {
+    if (err) return log.error(err)
+    ;['SIGINT', 'SIGTERM'].forEach(sig => {
+      process.on(sig, () => {
         devServer.close()
         process.exit()
       })
