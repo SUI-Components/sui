@@ -8,10 +8,7 @@ const {getPackageJson} = require('@s-ui/helpers/packages')
 const path = require('path')
 const config = require('../webpack.config.lib')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
-const chalk = require('chalk')
-
-const showSuccess = msg => console.log(chalk.green(msg))
-const showInfo = msg => console.log(chalk.blue(msg))
+const log = require('../shared/log')
 
 program
   .usage('[options] <entry>')
@@ -73,30 +70,26 @@ if (umd) {
 }
 
 if (clean) {
-  showInfo(`Removing previous build in ${output}...`)
+  log.processing(`Removing previous build in ${output}...`)
   rimraf.sync(outputFolder)
 }
 
-showInfo('Generating minified bundle. This will take a moment...')
+log.processing('Generating minified bundle. This will take a moment...')
+
 webpack(webpackConfig).run((error, stats) => {
   if (error) {
     showError(error, program)
     return 1
   }
 
-  const jsonStats = stats.toJson()
-
-  if (stats.hasErrors()) {
-    return jsonStats.errors.map(showError)
-  }
-
-  if (stats.hasWarnings()) {
-    showWarning('Webpack generated the following warnings: ')
-    jsonStats.warnings.map(showWarning)
+  if (stats.hasErrors() || stats.hasWarnings()) {
+    const jsonStats = stats.toJson('errors-warnings')
+    jsonStats.warnings.map(log.warn)
+    jsonStats.errors.map(log.error)
   }
 
   console.log(`Webpack stats: ${stats}`)
-  showSuccess(
+  log.success(
     `Your library is compiled in production mode in: \n${outputFolder}`
   )
 
