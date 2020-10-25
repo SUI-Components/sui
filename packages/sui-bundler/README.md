@@ -150,34 +150,36 @@ This tool works with zero configuration out the box but you could use some confi
 
 ```json
 {
-  "sui-bundler": {
-    "onlyHash": "true",
-    "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
-    "vendor": ["react", "react-dom"],
-    "cdn": "https://url_to_me_cdn.com/",
-    "externals-manifest": "https://url_to_me_cdn/manifest.json",
-    "alias": {"react": "preact"},
-    "offline": true,
-    "targets": {
-      "chrome": "41",
-      "ie": "11",
-      "safari": "8",
-      "firefox": "60",
-      "ios": "8"
-    },
-    "externals": {
-      "jquery": "./node_modules/jquery/jquery.min.js"
-    },
-    "scripts": {
-      "prefetch": "low-priority-chunk.js",
-      "preload": ["page1.js", "page2.js"]
-    },
-    "sourcemaps": {
-      "dev": "cheap-module-eval-source-map",
-      "prod": "hidden-source-map"
-    },
-    "optimizations": {
-      "splitFrameworkOnChunk": true
+  "config": {
+    "sui-bundler": {
+      "onlyHash": "true",
+      "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
+      "vendor": ["react", "react-dom"],
+      "cdn": "https://url_to_me_cdn.com/",
+      "externals-manifest": "https://url_to_me_cdn/manifest.json",
+      "alias": {"react": "preact"},
+      "offline": true,
+      "targets": {
+        "chrome": "41",
+        "ie": "11",
+        "safari": "8",
+        "firefox": "60",
+        "ios": "8"
+      },
+      "externals": {
+        "jquery": "./node_modules/jquery/jquery.min.js"
+      },
+      "scripts": {
+        "prefetch": "low-priority-chunk.js",
+        "preload": ["page1.js", "page2.js"]
+      },
+      "sourcemaps": {
+        "dev": "cheap-module-eval-source-map",
+        "prod": "hidden-source-map"
+      },
+      "optimizations": {
+        "splitFrameworkOnChunk": true
+      }
     }
   }
 }
@@ -301,6 +303,48 @@ Check all possible values accepted by webpack in the [devtool webpack docs](http
 You could tweak the performance of your bundle generation by using some flags provided in this config.
 
 `splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
+
+## Migrations
+
+### Migrate from v6 to v7
+
+- In order to keep same config object across all `sui` tools, `sui-bundler` config has been moved from package.json root to the `config` property.
+
+```json
+// before
+{
+  "sui-bundler": { /* config */ }
+}
+
+//now
+{
+  "config": {
+    "sui-bundler": { /* config */ }
+  }
+}
+```
+
+- As major html-webpack-plugin is being used, if you're using templates on your `index.html` to access chunks, you must change it to use `js` property instead `chunks`.
+
+```js
+// before
+const {app, vendor} = htmlWebpackPlugin.files.chunks
+// now
+const {app, vendor} = htmlWebpackPlugin.files.js
+```
+
+- `manualCompression` flag on your `sui-bundler` config is not longer supported and it will be ignored. No more manual compression are featured.
+
+- Deprecated usage of old service-worker based on `workbox` has been removed.
+
+- Now, only `.js` and `.json` extensions will be resolved if you ignore them on importing the file.
+
+```js
+// before
+import util from './util' // finally, any extension will be handled as we're using * as a fallback
+// after
+import util from './util' // only .js and .json files will be resolved
+```
 
 ## Contributing
 
