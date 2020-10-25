@@ -4,10 +4,10 @@
 const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
-const {getPackageJson} = require('@s-ui/helpers/packages')
 const path = require('path')
-const config = require('../webpack.config.lib')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
+const {getPackageJson} = require('@s-ui/helpers/packages')
+const config = require('../webpack.config.lib')
 const log = require('../shared/log')
 
 program
@@ -46,7 +46,7 @@ if (!entry) {
 }
 
 if (!publicPath) {
-  showWarning('--path option is required for the chuncks to work.', program)
+  showWarning('--path option is required for the chuncks to work.')
 }
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
