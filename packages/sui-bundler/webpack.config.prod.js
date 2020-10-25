@@ -18,7 +18,6 @@ const {extractComments, sourceMap} = require('./shared/config')
 const parseAlias = require('./shared/parse-alias')
 
 const Externals = require('./plugins/externals')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
@@ -99,8 +98,7 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
-    when(config.externals, () => new Externals({files: config.externals})),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
+    when(config.externals, () => new Externals({files: config.externals}))
   ]),
   module: {
     rules: cleanList([
