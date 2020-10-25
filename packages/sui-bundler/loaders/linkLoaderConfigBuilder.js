@@ -1,15 +1,8 @@
 const fg = require('fast-glob')
 const path = require('path')
-const LoaderUniversalOptionsPlugin = require('../plugins/loader-options')
-const loadersOptions = require('../shared/loader-options')
-const createSassLinkLoader = require('./sassLinkLoader')
 
-const removePlugin = name => plugins => {
-  const pos = plugins
-    .map(p => p.constructor.toString())
-    .findIndex(string => string.match(name))
-  return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
-}
+const createSassLinkLoader = require('./sassLinkLoader')
+const log = require('../shared/log')
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
   paths.reduce((acc, pkg) => {
@@ -17,11 +10,11 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
     try {
       const pkg = require(path.join(packagePath, 'package.json'))
       acc[pkg.name] = path.join(packagePath, 'src')
-      console.log(`\t✅  ${pkg.name} from path "${packagePath}"`)
+      log.success(`✔ ${pkg.name} from path "${packagePath}"`)
       return acc
     } catch (e) {
-      console.log(
-        `\t⚠️  Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`
+      log.warn(
+        `⚠ Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`
       )
       return acc
     }
@@ -41,16 +34,44 @@ const absolutePathForMonoRepo = base => {
 }
 
 module.exports = ({config, packagesToLink, linkAll}) => {
-  if (packagesToLink.length === 0 && !linkAll) {
-    return config
-  }
+  if (packagesToLink.length === 0 && !linkAll) return config
 
-  console.log('🔗 Linking packages:')
+  log.processing('❯ Linking packages:')
 
   const entryPoints = diccFromAbsolutePaths(
     packagesToLink || [],
     diccFromAbsolutePaths(absolutePathForMonoRepo(linkAll))
   )
+
+  const sassLoaderWithLinkLoaderConfig = {
+    loader: require.resolve('sass-loader'),
+    options: {
+      sassOptions: {
+        importer: createSassLinkLoader(entryPoints)
+      }
+    }
+  }
+
+  const javascriptLinkLoader = {
+    test: /\.jsx?$/,
+    use: {
+      loader: 'link-loader',
+      options: {
+        entryPoints
+      }
+    }
+  }
+
+  const newRules = config.module.rules.map(rule => {
+    const {use: originalUseList} = rule
+    const use = originalUseList.map(singleUse => {
+      if (typeof singleUse === 'string' && singleUse.includes('sass-loader')) {
+        return sassLoaderWithLinkLoaderConfig
+      }
+      return singleUse
+    })
+    return {...rule, use}
+  })
 
   return {
     ...config,
@@ -80,34 +101,9 @@ module.exports = ({config, packagesToLink, linkAll}) => {
         })
       }
     },
-    plugins: [
-      ...removePlugin('LoaderUniversalOptionsPlugin')(config.plugins),
-      new LoaderUniversalOptionsPlugin({
-        ...loadersOptions,
-        'sass-loader': {
-          sassOptions: {
-            importer: [
-              ...loadersOptions['sass-loader'].sassOptions.importer,
-              createSassLinkLoader(entryPoints)
-            ]
-          }
-        }
-      })
-    ],
     module: {
       ...config.module,
-      rules: [
-        ...config.module.rules,
-        {
-          test: /\.jsx?$/,
-          use: {
-            loader: 'link-loader',
-            options: {
-              entryPoints
-            }
-          }
-        }
-      ]
+      rules: [...newRules, javascriptLinkLoader]
     },
     resolveLoader: {
       alias: {
