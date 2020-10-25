@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
 
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
@@ -56,8 +55,7 @@ const webpackConfig = {
       template: './index.html',
       inject: true,
       env: process.env
-    }),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options'))
+    })
   ],
   resolveLoader: {
     alias: {
@@ -77,7 +75,6 @@ const webpackConfig = {
             options: {
               babelrc: false,
               cacheDirectory: true,
-              highlightCode: true,
               presets: [require.resolve('babel-preset-sui')]
             }
           }
