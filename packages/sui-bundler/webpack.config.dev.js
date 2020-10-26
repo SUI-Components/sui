@@ -4,37 +4,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const parseAlias = require('./shared/parse-alias')
+const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
+const {resolveLoader} = require('./shared/resolve-loader')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
 
-const {PWD} = process.env
-
 const webpackConfig = {
   mode: 'development',
-  context: path.resolve(PWD, 'src'),
+  context: path.resolve(process.env.PWD, 'src'),
   resolve: {
     alias: {
-      // this alias is needed so react hooks work as expected with linked packages
-      // Why? The reason is that as hooks stores references of components
-      // you should use the exact same imported file from node_modules, and the linked package
-      // was trying to use another diferent from its own node_modules
-      react: path.resolve(path.join(PWD, './node_modules/react')),
-      '@s-ui/react-context': path.resolve(
-        path.join(PWD, './node_modules/@s-ui/react-context')
-      ),
-      'react-router-dom': path.resolve(
-        path.join(PWD, './node_modules/react-router-dom')
-      ),
-      '@s-ui/react-router': path.resolve(
-        path.join(PWD, './node_modules/@s-ui/react-router')
-      ),
-      // add extra alias from the config
-      ...parseAlias(config.alias)
+      ...defaultAlias,
+      ...aliasFromConfig
     },
     extensions: ['.js', '.json']
   },
@@ -64,13 +49,7 @@ const webpackConfig = {
       env: process.env
     })
   ],
-  resolveLoader: {
-    alias: {
-      'externals-manifest-loader': require.resolve(
-        './loaders/ExternalsManifestLoader'
-      )
-    }
-  },
+  resolveLoader,
   module: {
     rules: cleanList([
       {
@@ -102,7 +81,11 @@ const webpackConfig = {
             loader: require.resolve('postcss-loader'),
             options: {
               postcssOptions: {
-                plugins: [require('autoprefixer')()]
+                plugins: [
+                  require('autoprefixer')({
+                    overrideBrowserslist: config.targets
+                  })
+                ]
               }
             }
           },

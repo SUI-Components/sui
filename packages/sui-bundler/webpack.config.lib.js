@@ -4,12 +4,15 @@ const minifyJs = require('./shared/minify-js')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const {extractComments, sourceMap} = require('./shared/config')
-const parseAlias = require('./shared/parse-alias')
+const {aliasFromConfig} = require('./shared/resolve-alias')
 
 module.exports = {
   mode: 'production',
   resolve: {
-    alias: parseAlias(config.alias)
+    alias: {
+      ...aliasFromConfig
+    },
+    extensions: ['.js', '.json']
   },
   entry: config.vendor
     ? {

@@ -58,9 +58,7 @@ const outputFolder = path.join(
   path.sep,
   root ? '' : version
 )
-const webpackConfig = Object.assign({}, config, {
-  entry: path.resolve(process.cwd(), entry)
-})
+const webpackConfig = {...config, entry: path.resolve(process.cwd(), entry)}
 webpackConfig.output.publicPath = publicPath + (root ? '' : version + '/')
 webpackConfig.output.path = outputFolder
 

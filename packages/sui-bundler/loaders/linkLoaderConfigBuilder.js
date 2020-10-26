@@ -3,6 +3,7 @@ const path = require('path')
 
 const createSassLinkLoader = require('./sassLinkLoader')
 const log = require('../shared/log')
+const {defaultAlias} = require('../shared/resolve-alias')
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
   paths.reduce((acc, pkg) => {
@@ -21,9 +22,7 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
   }, init)
 
 const absolutePathForMonoRepo = base => {
-  if (!base) {
-    return []
-  }
+  if (!base) return []
   return fg
     .sync([
       `${path.resolve(base)}/**/package.json`,
@@ -78,27 +77,9 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     resolve: {
       ...config.resolve,
       alias: {
-        ...config.resolve.alias,
-        ...(!config.resolve.alias.react && {
-          react: path.resolve(
-            path.join(process.env.PWD, './node_modules/react')
-          )
-        }),
-        ...(!config.resolve.alias['@s-ui/react-context'] && {
-          '@s-ui/react-context': path.resolve(
-            path.join(process.env.PWD, './node_modules/@s-ui/react-context')
-          )
-        }),
-        ...(!config.resolve.alias['react-router-dom'] && {
-          'react-router-dom': path.resolve(
-            path.join(process.env.PWD, './node_modules/react-router-dom')
-          )
-        }),
-        ...(!config.resolve.alias['@s-ui/react-router'] && {
-          '@s-ui/react-router': path.resolve(
-            path.join(process.env.PWD, './node_modules/@s-ui/react-router')
-          )
-        })
+        // we have to make sure we load default alias as we could be linking a package on production
+        ...defaultAlias,
+        ...config.resolve.alias
       }
     },
     module: {

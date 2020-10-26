@@ -15,9 +15,8 @@ const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const {splitChunks} = require('./shared/optimization-split-chunks')
 const {extractComments, sourceMap} = require('./shared/config')
-const parseAlias = require('./shared/parse-alias')
-
-const Externals = require('./plugins/externals')
+const {aliasFromConfig} = require('./shared/resolve-alias')
+const {resolveLoader} = require('./shared/resolve-loader')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
@@ -25,12 +24,16 @@ const filename = config.onlyHash
   ? '[contenthash:8].js'
   : '[name].[contenthash:8].js'
 
+const cssFileName = config.onlyHash
+  ? '[contenthash:8].css'
+  : '[name].[contenthash:8].css'
+
 module.exports = {
   devtool: sourceMap,
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    alias: parseAlias(config.alias),
+    alias: {...aliasFromConfig},
     extensions: ['.js', '.json']
   },
   entry: config.vendor
@@ -59,46 +62,21 @@ module.exports = {
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({
-      filename: config.onlyHash
-        ? '[contenthash:8].css'
-        : '[name].[contenthash:8].css',
-      chunkFilename: config.onlyHash
-        ? '[contenthash:8].css'
-        : '[id].[contenthash:8].css'
+      filename: cssFileName,
+      chunkFilename: cssFileName
     }),
     new HtmlWebpackPlugin({
       env: process.env,
       inject: 'head',
-      template: './index.html',
-      trackJSToken: '',
-      minify: {
-        collapseWhitespace: true,
-        keepClosingSlash: true,
-        minifyCSS: true,
-        minifyURLs: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
+      template: './index.html'
     }),
-    new ScriptExtHtmlWebpackPlugin(
-      Object.assign(
-        {
-          defaultAttribute: 'defer',
-          inline: 'runtime',
-          prefetch: {
-            test: /\.js$/,
-            chunks: 'all'
-          }
-        },
-        config.scripts
-      )
-    ),
-    new ManifestPlugin({
-      fileName: 'asset-manifest.json'
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer',
+      inline: 'runtime',
+      prefetch: {test: /\.js$/, chunks: 'all'},
+      ...config.scripts
     }),
-    when(config.externals, () => new Externals({files: config.externals}))
+    new ManifestPlugin({fileName: 'asset-manifest.json'})
   ]),
   module: {
     rules: cleanList([
@@ -118,7 +96,11 @@ module.exports = {
             loader: require.resolve('postcss-loader'),
             options: {
               postcssOptions: {
-                plugins: [require('autoprefixer')()]
+                plugins: [
+                  require('autoprefixer')({
+                    overrideBrowserslist: config.targets
+                  })
+                ]
               }
             }
           },
@@ -130,13 +112,7 @@ module.exports = {
       )
     ])
   },
-  resolveLoader: {
-    alias: {
-      'externals-manifest-loader': require.resolve(
-        './loaders/ExternalsManifestLoader'
-      )
-    }
-  },
+  resolveLoader,
   node: {
     fs: 'empty',
     net: 'empty',
