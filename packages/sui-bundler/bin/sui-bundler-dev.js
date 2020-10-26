@@ -71,7 +71,7 @@ const start = async ({
     ])
   ) {
     log.error(
-      `Required files are missing, create and index.html and app.js inside your src folder.`
+      `✖ Required files are missing, create and index.html and app.js inside your src folder.`
     )
     process.exit(1)
   }
@@ -86,7 +86,7 @@ const start = async ({
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
   const devServer = new WebpackDevServer(compiler, serverConfig)
-  log.processing('Starting the development server...\n')
+  log.processing('❯ Starting the development server...\n')
   devServer.listen(port, HOST, err => {
     if (err) return log.error(err)
     ;['SIGINT', 'SIGTERM'].forEach(sig => {

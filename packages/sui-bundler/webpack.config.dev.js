@@ -12,24 +12,26 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
 
+const {PWD} = process.env
+
 const webpackConfig = {
   mode: 'development',
-  context: path.resolve(process.env.PWD, 'src'),
+  context: path.resolve(PWD, 'src'),
   resolve: {
     alias: {
       // this alias is needed so react hooks work as expected with linked packages
       // Why? The reason is that as hooks stores references of components
       // you should use the exact same imported file from node_modules, and the linked package
       // was trying to use another diferent from its own node_modules
-      react: path.resolve(path.join(process.env.PWD, './node_modules/react')),
+      react: path.resolve(path.join(PWD, './node_modules/react')),
       '@s-ui/react-context': path.resolve(
-        path.join(process.env.PWD, './node_modules/@s-ui/react-context')
+        path.join(PWD, './node_modules/@s-ui/react-context')
       ),
       'react-router-dom': path.resolve(
-        path.join(process.env.PWD, './node_modules/react-router-dom')
+        path.join(PWD, './node_modules/react-router-dom')
       ),
       '@s-ui/react-router': path.resolve(
-        path.join(process.env.PWD, './node_modules/@s-ui/react-router')
+        path.join(PWD, './node_modules/@s-ui/react-router')
       ),
       // add extra alias from the config
       ...parseAlias(config.alias)
