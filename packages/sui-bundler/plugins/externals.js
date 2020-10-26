@@ -3,7 +3,7 @@ const fs = require('fs')
 const md5File = require('md5-file')
 
 const HASH_LENGTH = 8
-const envVars = str => str.replace(/\$(\w+)/g, (str, p1, p2) => process.env[p1])
+const envVars = str => str.replace(/\$(\w+)/g, (str, p1) => process.env[p1])
 
 const safeAddToHeadAndBody = htmlPluginData => url => {
   const script = `<script src="${url}"></script>`

@@ -43,9 +43,14 @@ const webpackConfig = {
   target: 'web',
   node: {fs: 'empty'},
   optimization: {
-    noEmitOnErrors: true
+    noEmitOnErrors: true,
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    runtimeChunk: true,
+    splitChunks: false
   },
   output: {
+    pathinfo: false,
     publicPath: '/'
   },
   plugins: [
