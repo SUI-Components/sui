@@ -166,9 +166,6 @@ This tool works with zero configuration out the box but you could use some confi
         "firefox": "60",
         "ios": "8"
       },
-      "externals": {
-        "jquery": "./node_modules/jquery/jquery.min.js"
-      },
       "scripts": {
         "prefetch": "low-priority-chunk.js",
         "preload": ["page1.js", "page2.js"]
@@ -277,10 +274,6 @@ Create the manifest file is up to you, but your file must follow this schema.
 
 > If you setup the `NODE_ENV=development` then this loaders will be disabled.
 
-## Externals
-
-It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
-
 ## Configuring source map generation
 
 SUI-bundler generates no sourcemaps by default but you can change this behaviour and configure them in the sui-bundler section of your package.json.
@@ -326,7 +319,7 @@ You could tweak the performance of your bundle generation by using some flags pr
 }
 ```
 
-- As major html-webpack-plugin is being used, if you're using templates on your `index.html` to access chunks, you must change it to use `js` property instead `chunks`.
+- As major `html-webpack-plugin` is being used, if you're using templates on your `index.html` to access chunks, you must change it to use `js` property instead `chunks`.
 
 ```js
 // before
@@ -347,6 +340,8 @@ import util from './util' // finally, any extension will be handled as we're usi
 // after
 import util from './util' // only .js and .json files will be resolved
 ```
+
+- `externals` config has been removed. Stop using `externals` for loading external scripts and just put your scripts in the `src/index.html` file or load by importing them in your app.
 
 ## Contributing
 

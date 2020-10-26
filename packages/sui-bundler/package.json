@@ -34,7 +34,6 @@
     "duplicate-package-checker-webpack-plugin": "3.0.0",
     "fast-glob": "3.2.4",
     "html-webpack-plugin": "4.5.0",
-    "md5-file": "5.0.0",
     "mini-css-extract-plugin": "1.2.0",
     "minify-stream": "2.1.0",
     "node-sass": "4.14.1",
