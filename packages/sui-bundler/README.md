@@ -31,7 +31,7 @@ Add bundling scripts to your **package.json**
 
 ## Requirements for web app bundling
 
-node 6+ version is required.
+node 12 version is required.
 
 ### Folder structure
 
@@ -236,7 +236,7 @@ If you define the `externals-manifest` key in the config pointing to this link, 
 
 If in your CSS you have:
 
-```
+```css
 #app {
   color: blue;
   background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png') no-repeat scroll;
@@ -245,13 +245,13 @@ If in your CSS you have:
 
 After compile you will get:
 
-```
+```css
 #app{color:#00f;background:url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png) no-repeat scroll}
 ```
 
 Or if in your JS you have:
 
-```
+```jsx
 <img
   src={'https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.gif'}
 />
@@ -259,14 +259,15 @@ Or if in your JS you have:
 
 After compile will be:
 
-```
+```jsx
 <img src="https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.5daef216ab.gif">
 ```
 
 The main idea is have a long term caching strategy for the hashed files. But you **NEVER** must cache the `manifest.json` file.
 
 Create the manifest file is up to you, but your file must follow this schema.
-```
+
+```json
 {
   /images/favicon.ico: "/images/favicon.23f4ccc7ca.ico",
   /images/common/arrow-down.png: "/images/common/arrow-down.2d12edfb00.png",
@@ -275,6 +276,7 @@ Create the manifest file is up to you, but your file must follow this schema.
 ```
 
 > If you setup the `NODE_ENV=development` then this loaders will be disabled.
+
 ## Externals
 
 It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
