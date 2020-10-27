@@ -68,7 +68,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       env: process.env,
       inject: 'head',
-      template: './index.html'
+      template: './index.html',
+      minify: {
+        collapseWhitespace: true,
+        keepClosingSlash: true,
+        minifyCSS: true,
+        minifyURLs: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      }
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer',
