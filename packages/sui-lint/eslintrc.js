@@ -237,6 +237,7 @@ module.exports = {
       RULES.ERROR,
       {args: 'none', ignoreRestSiblings: true, varsIgnorePattern: 'React'}
     ],
+    'no-var': RULES.WARNING,
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   }
