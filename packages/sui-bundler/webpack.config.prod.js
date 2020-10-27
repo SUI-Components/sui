@@ -1,14 +1,11 @@
 /* eslint-disable no-console */
 const webpack = require('webpack')
 const path = require('path')
-const zlib = require('zlib')
 
-const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const {GenerateSW} = require('workbox-webpack-plugin')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
 const minifyJs = require('./shared/minify-js')
@@ -17,31 +14,27 @@ const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const {splitChunks} = require('./shared/optimization-split-chunks')
-const {
-  navigateFallbackDenylist,
-  navigateFallback,
-  runtimeCaching
-} = require('./shared/precache')
 const {extractComments, sourceMap} = require('./shared/config')
-const parseAlias = require('./shared/parse-alias')
-
-const Externals = require('./plugins/externals')
-const LoaderUniversalOptionsPlugin = require('./plugins/loader-options')
+const {aliasFromConfig} = require('./shared/resolve-alias')
+const {resolveLoader} = require('./shared/resolve-loader')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
-const hasBrotliSupport = Boolean(zlib.brotliCompress)
 const filename = config.onlyHash
   ? '[contenthash:8].js'
   : '[name].[contenthash:8].js'
+
+const cssFileName = config.onlyHash
+  ? '[contenthash:8].css'
+  : '[name].[contenthash:8].css'
 
 module.exports = {
   devtool: sourceMap,
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
-    alias: parseAlias(config.alias),
-    extensions: ['*', '.js', '.jsx', '.json']
+    alias: {...aliasFromConfig},
+    extensions: ['.js', '.json']
   },
   entry: config.vendor
     ? {
@@ -69,89 +62,21 @@ module.exports = {
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({
-      filename: config.onlyHash
-        ? '[contenthash:8].css'
-        : '[name].[contenthash:8].css',
-      chunkFilename: config.onlyHash
-        ? '[contenthash:8].css'
-        : '[id].[contenthash:8].css'
+      filename: cssFileName,
+      chunkFilename: cssFileName
     }),
     new HtmlWebpackPlugin({
       env: process.env,
       inject: 'head',
-      template: './index.html',
-      trackJSToken: '',
-      minify: {
-        collapseWhitespace: true,
-        keepClosingSlash: true,
-        minifyCSS: true,
-        minifyURLs: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
+      template: './index.html'
     }),
-    new ScriptExtHtmlWebpackPlugin(
-      Object.assign(
-        {
-          defaultAttribute: 'defer',
-          inline: 'runtime',
-          prefetch: {
-            test: /\.js$/,
-            chunks: 'all'
-          }
-        },
-        config.scripts
-      )
-    ),
-    new ManifestPlugin({
-      fileName: 'asset-manifest.json'
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer',
+      inline: 'runtime',
+      prefetch: {test: /\.js$/, chunks: 'all'},
+      ...config.scripts
     }),
-    when(
-      config.offline && (config.offline.fallback || config.offline.runtime),
-      () =>
-        new GenerateSW({
-          skipWaiting: true,
-          clientsClaim: true,
-          cleanupOutdatedCaches: true,
-          directoryIndex: config.offline.directoryIndex,
-          navigateFallback: navigateFallback(
-            config.offline.fallback,
-            PUBLIC_PATH
-          ),
-          navigateFallbackDenylist: navigateFallbackDenylist(
-            config.offline.denylist
-          ),
-          runtimeCaching: runtimeCaching(config.offline.runtime),
-          importScripts: config.offline.importScripts || [],
-          exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE\.txt$/]
-        })
-    ),
-    when(config.externals, () => new Externals({files: config.externals})),
-    new LoaderUniversalOptionsPlugin(require('./shared/loader-options')),
-    when(
-      config.manualCompression,
-      () =>
-        new CompressionPlugin({
-          filename: '[path].gz',
-          threshold: 0,
-          minRatio: 2,
-          test: /\.(js|css)$/i
-        })
-    ),
-    when(
-      config.manualCompression && hasBrotliSupport,
-      () =>
-        new CompressionPlugin({
-          filename: '[path].br',
-          algorithm: 'brotliCompress',
-          threshold: 0,
-          minRatio: 2,
-          test: /\.(js|css)$/i,
-          compressionOptions: {level: 11}
-        })
-    )
+    new ManifestPlugin({fileName: 'asset-manifest.json'})
   ]),
   module: {
     rules: cleanList([
@@ -167,7 +92,18 @@ module.exports = {
               manifestURL: config['externals-manifest']
             }
           })),
-          require.resolve('postcss-loader'),
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('autoprefixer')({
+                    overrideBrowserslist: config.targets
+                  })
+                ]
+              }
+            }
+          },
           require.resolve('sass-loader')
         ])
       },
@@ -176,13 +112,7 @@ module.exports = {
       )
     ])
   },
-  resolveLoader: {
-    alias: {
-      'externals-manifest-loader': require.resolve(
-        './loaders/ExternalsManifestLoader'
-      )
-    }
-  },
+  resolveLoader,
   node: {
     fs: 'empty',
     net: 'empty',

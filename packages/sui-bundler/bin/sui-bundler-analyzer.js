@@ -4,39 +4,29 @@
 const webpack = require('webpack')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-const chalk = require('chalk')
+const log = require('../shared/log')
 const config = require('../webpack.config.prod')
-
-console.log('🔎  Bundler Analyzer')
-
-// Don't show ugly deprecation warnings that mess with the logging
-process.noDeprecation = true
 
 config.plugins.push(new BundleAnalyzerPlugin())
 config.plugins.push(
   new DuplicatePackageCheckerPlugin({
-    // Also show module that is requiring each duplicate package
-    verbose: true,
-    // Emit errors instead of warnings
-    emitError: false
+    verbose: true, // Show module that is requiring each duplicate package
+    emitError: false // Avoid emit errors, just a warning
   })
 )
 
-console.log(chalk.cyan('Building and analyzing...\n'))
+log.processing('🔎 Analyzing Bundle...\n')
 webpack(config).run((error, stats) => {
   if (error) {
-    console.log(chalk.red('Error analyzing the build'))
+    log.error('Error analyzing the build')
     throw new Error(error)
   }
 
-  console.log(chalk.green('Bundle analyzed successfully'))
-  const jsonStats = stats.toJson()
+  log.success('Bundle analyzed successfully')
 
-  if (stats.hasErrors()) {
-    return jsonStats.errors.map(error => console.error(error))
-  }
-
-  if (stats.hasWarnings()) {
-    jsonStats.warnings.map(warning => console.warn(warning))
+  if (stats.hasErrors() || stats.hasWarnings()) {
+    const jsonStats = stats.toJson('errors-warnings')
+    jsonStats.warnings.map(log.warn)
+    jsonStats.errors.map(log.error)
   }
 })
