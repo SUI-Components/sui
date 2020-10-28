@@ -142,8 +142,6 @@ Then you can find your library directly in the provided namespace variable: `win
 
 This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside a `config` property in the package.json of your project.
 
-`scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
-
 `extractComments`: Determine whether comments shall be extracted to a separate file or not. Like LICENSE comments. (default: `false`)
 
 `targets`: Object with information about the browser and version supported. (default: `see the next example`)
@@ -165,10 +163,6 @@ This tool works with zero configuration out the box but you could use some confi
         "safari": "8",
         "firefox": "60",
         "ios": "8"
-      },
-      "scripts": {
-        "prefetch": "low-priority-chunk.js",
-        "preload": ["page1.js", "page2.js"]
       },
       "sourcemaps": {
         "dev": "cheap-module-eval-source-map",
@@ -329,6 +323,8 @@ const {app, vendor} = htmlWebpackPlugin.files.js
 ```
 
 - `manualCompression` flag on your `sui-bundler` config is not longer supported and it will be ignored. No more manual compression are featured.
+
+- `scripts` config is not longer supported as `ScriptExtHtmlWebpackPlugin` is not longer used.
 
 - Deprecated usage of old service-worker based on `workbox` has been removed.
 

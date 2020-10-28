@@ -5,9 +5,15 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
 
-const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {
+  when,
+  cleanList,
+  envVars,
+  MAIN_ENTRY_POINT,
+  config
+} = require('./shared/index')
 const minifyJs = require('./shared/minify-js')
 const minifyCss = require('./shared/minify-css')
 const definePlugin = require('./shared/define')
@@ -68,7 +74,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       env: process.env,
       inject: 'head',
-      template: './index.html',
       minify: {
         collapseWhitespace: true,
         keepClosingSlash: true,
@@ -78,14 +83,11 @@ module.exports = {
         removeRedundantAttributes: true,
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
-      }
+      },
+      scriptLoading: 'defer',
+      template: './index.html'
     }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'defer',
-      inline: 'runtime',
-      prefetch: {test: /\.js$/, chunks: 'all'},
-      ...config.scripts
-    }),
+    new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/]),
     new ManifestPlugin({fileName: 'asset-manifest.json'})
   ]),
   module: {
