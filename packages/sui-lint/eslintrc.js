@@ -194,6 +194,7 @@ module.exports = {
     mocha: true
   },
   globals: {
+    'cypress/globals': true,
     preval: 'readonly'
   },
   parser,
@@ -210,6 +211,7 @@ module.exports = {
     'standard',
     'standard-react',
     'prettier',
+    'plugin:cypress/recommended',
     'prettier/standard',
     'prettier/react'
   ],
