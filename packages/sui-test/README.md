@@ -167,7 +167,22 @@ Cypress can be detected as a robot if your server has that kind of protection or
 
 If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/test-e2e/screenshots` folder of your project.
 
+# Config
 
+`@s-ui/test` could use a `config` in your `package.json` to tweak some behaviors. These are
+
+- `server`: Config for `@s-ui/test server` binary:
+  - `forceTranspilation`: List of regexs (string based, later will be transformed with `new Regex`) of modules to transpile. This is useful in case you're using server tests for modules that are ESModules based and need to be transpiled with `@babel/plugin-transform-modules-commonjs`.
+
+```json
+"config": {
+  "sui-test": {
+    "server": {
+      "forceTranspilation": ["@adv-ui/vendor-by-consents-loader"]
+    }
+  }
+}
+```
 
 # Tools
 
