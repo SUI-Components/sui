@@ -43,7 +43,7 @@
     "just-pascal-case": "1.1.0",
     "normalize.css": "8.0.1",
     "raw-loader": "4.0.1",
-    "react-docgen": "5.3.0"
+    "react-docgen": "5.3.1"
   },
   "sui-bundler": {
     "vendor": [
