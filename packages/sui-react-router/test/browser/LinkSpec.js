@@ -1,5 +1,4 @@
 import {expect} from 'chai'
-import React from 'react'
 import {Router, Route, Link} from '../../src/index'
 import {render, fireEvent, screen} from '@testing-library/react'
 import sinon from 'sinon'

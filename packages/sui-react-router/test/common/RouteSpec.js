@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import {expect} from 'chai'
-import React from 'react'
 import {renderToString} from 'react-dom/server'
 import {IndexRoute, Router, Route, match} from '../../src/index'
 

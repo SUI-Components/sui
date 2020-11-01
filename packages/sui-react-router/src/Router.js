@@ -1,4 +1,4 @@
-import React, {createElement as h, useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import {routes, components} from './internal/PropTypes'
@@ -24,15 +24,15 @@ const renderRouterContent = ({components, params, router}) => {
   }
 
   return components.reduceRight(
-    (children, component) => h(component, routerInfo, children),
+    (children, Component) => <Component {...routerInfo}>{children}</Component>,
     null
   )
 }
 
-const createRoutes = ({children, routes}) => {
-  if (routes) return fromReactTreeToJSON(routes)
-  return fromReactTreeToJSON(h(Route, null, children))
-}
+const createRoutes = ({children, routes}) =>
+  routes
+    ? fromReactTreeToJSON(routes)
+    : fromReactTreeToJSON(<Route>{children}</Route>)
 
 const Router = ({
   children,
