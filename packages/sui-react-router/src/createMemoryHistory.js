@@ -2,7 +2,7 @@
 
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/createMemoryHistory.js
 
-import {createMemoryHistory as baseCreateMemoryHistory} from 'history'
+import baseCreateMemoryHistory from 'history/createMemoryHistory'
 import useHistoryLocationQuery from './internal/useHistoryLocationQuery'
 
 export default function createMemoryHistory(initialEntry) {
