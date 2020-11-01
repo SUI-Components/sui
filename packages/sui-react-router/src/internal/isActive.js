@@ -9,35 +9,13 @@ import {matchPattern} from '../PatternUtils'
  */
 function deepEqual(a, b) {
   if (a === b) return true
-
   if (a == null || b == null) return false
 
-  if (Array.isArray(a)) {
-    return (
-      Array.isArray(b) &&
-      a.length === b.length &&
-      a.every((item, index) => deepEqual(item, b[index]))
-    )
-  }
-
   if (typeof a === 'object') {
-    for (const p in a) {
-      if (!Object.prototype.hasOwnProperty.call(a, p)) {
-        continue
-      }
-
-      if (a[p] === undefined) {
-        if (b[p] !== undefined) {
-          return false
-        }
-      } else if (!Object.prototype.hasOwnProperty.call(b, p)) {
-        return false
-      } else if (!deepEqual(a[p], b[p])) {
-        return false
-      }
-    }
-
-    return true
+    const diff = Object.keys(a).find(
+      key => b[key] === undefined || !deepEqual(a[key], b[key])
+    )
+    return !diff
   }
 
   return String(a) === String(b)
