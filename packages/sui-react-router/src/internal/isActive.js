@@ -120,6 +120,7 @@ function routeIsActive(pathname, routes, params) {
 /**
  * Returns true if all key/value pairs in the given query are
  * currently active.
+ * @returns {Boolean}
  */
 function queryIsActive(query, activeQuery) {
   if (activeQuery == null) return query == null

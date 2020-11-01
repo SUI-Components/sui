@@ -1,6 +1,6 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/match.js
 
-import {createLocation} from 'history'
+import createLocation from './internal/createLocation'
 import {fromReactTreeToJSON} from './internal/ReactUtils'
 import {createTransitionManager} from './internal/createTransitionManager'
 import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
@@ -50,7 +50,6 @@ export default async (
       renderProps
     )
   } catch (err) {
-    console.log(err)
     callback(err)
   }
 }

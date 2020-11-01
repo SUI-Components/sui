@@ -92,7 +92,7 @@ const Link = ({
   const anchorProps = {
     ...restOfProps,
     className,
-    href: router.createHref(toLocation),
+    href: toLocation,
     target,
     style
   }

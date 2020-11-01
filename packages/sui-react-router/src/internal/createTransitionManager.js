@@ -1,6 +1,6 @@
-import {createLocation} from 'history'
 import {formatPattern, matchPattern} from '../PatternUtils'
 import internalIsActive from './isActive'
+import createLocation from './createLocation'
 import {Tree} from './Tree'
 import warning from './warning'
 
@@ -270,8 +270,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
    * @returns {Boolean}
    */
   const isActive = (location, indexOnly) => {
-    location = history.createLocation(location)
-
+    location = createLocation(location)
     return internalIsActive(
       location,
       indexOnly,
