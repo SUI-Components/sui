@@ -5,7 +5,8 @@
 import {createMemoryHistory as baseCreateMemoryHistory} from 'history'
 import useHistoryLocationQuery from './internal/useHistoryLocationQuery'
 
-export default function createMemoryHistory(options) {
+export default function createMemoryHistory(initialEntry) {
+  const options = initialEntry ? {initialEntries: [initialEntry]} : undefined
   const history = baseCreateMemoryHistory(options)
   return useHistoryLocationQuery(history)
 }
