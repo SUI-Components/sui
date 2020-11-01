@@ -1,10 +1,11 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/match.js
 
-import {REPLACE} from 'history/lib/Actions'
+import {createLocation} from 'history'
 import {fromReactTreeToJSON} from './internal/ReactUtils'
 import {createTransitionManager} from './internal/createTransitionManager'
 import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
 
+const REPLACE = 'replace'
 /**
  * A high-level API to be used for server-side rendering.
  *
@@ -45,10 +46,11 @@ export default async (
 
     return callback(
       null,
-      redirectLocation && history.createLocation(redirectLocation, REPLACE),
+      redirectLocation && createLocation(redirectLocation, REPLACE),
       renderProps
     )
   } catch (err) {
+    console.log(err)
     callback(err)
   }
 }

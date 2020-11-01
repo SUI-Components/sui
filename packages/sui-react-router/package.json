@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "2.2.5",
-    "history": "3.3.0",
+    "history": "4.10.1",
     "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
@@ -29,6 +29,6 @@
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17",
-    "sinon": "9.2.0"
+    "sinon": "9.2.1"
   }
 }

@@ -2,15 +2,10 @@
 
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/createMemoryHistory.js
 
-import useQueries from 'history/lib/useQueries'
-import useBasename from 'history/lib/useBasename'
-import baseCreateMemoryHistory from 'history/lib/createMemoryHistory'
+import {createMemoryHistory as baseCreateMemoryHistory} from 'history'
+import useHistoryLocationQuery from './internal/useHistoryLocationQuery'
 
 export default function createMemoryHistory(options) {
-  // signatures and type checking differ between `useQueries` and
-  // `createMemoryHistory`, have to create `memoryHistory` first because
-  // `useQueries` doesn't understand the signature
-  const memoryHistory = baseCreateMemoryHistory(options)
-  const createHistory = () => memoryHistory
-  return useQueries(useBasename(createHistory))(options)
+  const history = baseCreateMemoryHistory(options)
+  return useHistoryLocationQuery(history)
 }

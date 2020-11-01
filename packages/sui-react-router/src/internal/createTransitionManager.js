@@ -1,3 +1,4 @@
+import {createLocation} from 'history'
 import {formatPattern, matchPattern} from '../PatternUtils'
 import internalIsActive from './isActive'
 import {Tree} from './Tree'
@@ -208,7 +209,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
    */
   const match = location => {
     location = location
-      ? history.createLocation(location)
+      ? createLocation(location)
       : history.getCurrentLocation()
 
     return matchRouteAndUpdateState({jsonRoutes, location})
