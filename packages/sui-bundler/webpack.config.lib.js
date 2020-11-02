@@ -23,7 +23,6 @@ module.exports = {
   target: 'web',
   output: {
     jsonpFunction: 'suiWebpackJsonp',
-    chunkFilename: '[name].[chunkhash:8].js',
     filename: 'index.js'
   },
   optimization: {
@@ -32,7 +31,9 @@ module.exports = {
     minimizer: [minifyJs({extractComments, sourceMap})]
   },
   plugins: cleanList([
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin()
   ]),
