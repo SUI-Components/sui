@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared')
+const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index')
 const minifyJs = require('./shared/minify-js')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
@@ -23,7 +23,6 @@ module.exports = {
   target: 'web',
   output: {
     jsonpFunction: 'suiWebpackJsonp',
-    chunkFilename: '[name].[chunkhash:8].js',
     filename: 'index.js'
   },
   optimization: {
@@ -32,7 +31,9 @@ module.exports = {
     minimizer: [minifyJs({extractComments, sourceMap})]
   },
   plugins: cleanList([
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin()
   ]),
