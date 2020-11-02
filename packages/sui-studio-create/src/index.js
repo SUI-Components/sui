@@ -1,60 +1,39 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const colors = require('colors')
-const program = require('commander')
 const BASE_DIR = process.cwd()
 const fse = require('fs-extra')
-const {getSpawnPromise} = require('@s-ui/helpers/cli')
+const {spawn} = require('child_process')
 
-program
-  .on('--help', () => {
-    console.log('  Examples:')
-    console.log('')
-    console.log('    $ sui-studio-create <project-name>')
-    console.log('    $ sui-studio-create sui-studio')
-    console.log('    $ sui-studio-create --help')
-    console.log('    $ sui-studio-create -h')
-    console.log('')
-  })
-  .parse(process.argv)
+const [, , param] = process.argv
+const HELP_PARAM = ['--help', '-h']
 
-const [PROJECT_NAME] = program.args
-const PROJECT_PATH = `${BASE_DIR}/${PROJECT_NAME}`
+const createDir = path => fse.mkdirp(path)
+const writeFile = (path, body) => fse.outputFile(path, body)
 
 const showError = msg => {
-  program.outputHelp(txt => colors.red(txt))
-  console.error(colors.red(msg))
+  console.error('Error:')
+  console.error(msg)
   process.exit(1)
 }
 
-const writeFile = (path, body) => {
-  return fse
-    .outputFile(path, body)
-    .then(() => {
-      console.log(colors.gray(`Modified ${path}`))
-    })
-    .catch(err => {
-      showError(`Fail modifying ${path}`)
-      throw err
-    })
+const showHelp = () => {
+  console.log('  Examples:')
+  console.log('')
+  console.log('    $ sui-studio-create <project-name>')
+  console.log('    $ sui-studio-create sui-studio')
+  console.log('    $ sui-studio-create --help')
+  console.log('    $ sui-studio-create -h')
+  console.log('')
+  process.exit(0)
 }
 
-const createDir = path => {
-  fse
-    .mkdirp(path)
-    .then(() => {
-      console.log(colors.gray(`Created ${path}`))
-    })
-    .catch(err => {
-      showError(`Fail creating ${path}`)
-      throw err
-    })
+if (HELP_PARAM.includes(param) || !param) {
+  showHelp()
 }
 
-if (!PROJECT_NAME) {
-  showError('the project name must be defined')
-}
+const PROJECT_NAME = param
+const PROJECT_PATH = `${BASE_DIR}/${PROJECT_NAME}`
 
 Promise.all([
   createDir(`${PROJECT_PATH}/components`),
@@ -80,7 +59,6 @@ Promise.all([
     "build": "sui-studio build",
     "check:release": "sui-studio check-release",
     "co": "sui-studio commit",
-    "commitmsg": "validate-commit-msg",
     "dev": "sui-studio dev",
     "generate": "sui-studio generate --prefix sui --scope ${PROJECT_NAME}",
     "lint:js": "sui-lint js",
@@ -88,7 +66,6 @@ Promise.all([
     "lint": "npm run lint:js && npm run lint:sass",
     "phoenix:ci": "npx @s-ui/mono phoenix --ci && (cd demo && npx @s-ui/mono phoenix --ci)",
     "phoenix": "npx @s-ui/mono phoenix && (cd demo && npx @s-ui/mono phoenix)",
-    "precommit": "sui-precommit run",
     "release": "sui-studio release",
     "start": "sui-studio start"
   },
@@ -98,11 +75,13 @@ Promise.all([
   "license": "MIT",
   "devDependencies": {
     "@s-ui/precommit": "2",
-    "@s-ui/studio": "7",
-    "husky": "0.14.3",
+    "@s-ui/studio": "9",
+    "husky": "4.2.5",
     "validate-commit-msg": "2.14.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@s-ui/component-dependencies": "1"
+  },
   "config": {
     "sui-mono": {
       "packagesFolder": "./components",
@@ -117,11 +96,24 @@ Promise.all([
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg",
+      "pre-commit": "sui-precommit run"
+    }
   }
 }
 `
     )
   )
-  .then(() => getSpawnPromise('npm', ['i'], {cwd: PROJECT_PATH}))
-  .then(process.exit)
-  .catch(process.exit)
+  .then(() => {
+    console.log(
+      '[sui-studio-create] Created folder structure. Installing dependencies...'
+    )
+    spawn('npm', ['install', '--no-fund', '--no-audit'], {
+      cwd: PROJECT_PATH,
+      stdio: 'inherit'
+    })
+  })
+  .catch(showError)
