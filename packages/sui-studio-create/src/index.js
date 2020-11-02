@@ -11,12 +11,6 @@ const HELP_PARAM = ['--help', '-h']
 const createDir = path => fse.mkdirp(path)
 const writeFile = (path, body) => fse.outputFile(path, body)
 
-const showError = msg => {
-  console.error('Error:')
-  console.error(msg)
-  process.exit(1)
-}
-
 const showHelp = () => {
   console.log('  Examples:')
   console.log('')
@@ -116,4 +110,8 @@ Promise.all([
       stdio: 'inherit'
     })
   })
-  .catch(showError)
+  .catch(err => {
+    console.error('Error:')
+    console.error(err)
+    process.exit(1)
+  })
