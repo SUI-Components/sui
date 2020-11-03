@@ -9,15 +9,12 @@
   "preferGlobal": true,
   "keywords": [
     "SUIComponents",
-    "schibsted",
-    "reactjs"
+    "SUI Studio",
+    "SUI Studio Create"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@s-ui/helpers": "1",
-    "colors": "1.4.0",
-    "commander": "6.1.0",
     "fs-extra": "9.0.1"
   },
   "repository": {

@@ -116,7 +116,7 @@ assets`
     "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@s-ui/component-dependencies": "1"
   },${
     repository.url
@@ -140,8 +140,7 @@ assets`
 
   writeFile(
     COMPONENT_ENTRY_JS_POINT_FILE,
-    `import React from 'react'
-// import PropTypes from 'prop-types'
+    `// import PropTypes from 'prop-types'
 
 export default function ${componentInPascal}() {
   return (
@@ -235,7 +234,6 @@ return (<${componentInPascal} />)
 /* eslint react/jsx-no-undef:0 */
 /* eslint no-undef:0 */
 
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
