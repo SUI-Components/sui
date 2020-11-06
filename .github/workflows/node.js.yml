@@ -20,6 +20,6 @@ jobs:
       with:
         node-version: 12
     - run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-    - run: npx @s-ui/mono phoenix --ci
+    - run: npx -p @s-ui/mono phoenix --ci
     - run: npm run lint
     - run: npm run test:ci
