@@ -16,9 +16,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/standalone": "7",
-    "@s-ui/bundler": "6",
-    "@s-ui/component-peer-dependencies": "latest",
+    "@babel/standalone": "7.12.6",
+    "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "1",
     "@s-ui/react-context": "1",
@@ -29,7 +28,7 @@
     "chai": "4.2.0",
     "chai-dom": "1.8.2",
     "classnames": "2.2.5",
-    "codemirror": "5.58.1",
+    "codemirror": "5.58.2",
     "colors": "1.4.0",
     "commander": "6.1.0",
     "cpx": "1.5.0",
@@ -42,15 +41,19 @@
     "just-kebab-case": "1.1.0",
     "just-pascal-case": "1.1.0",
     "normalize.css": "8.0.1",
-    "raw-loader": "4.0.1",
+    "raw-loader": "4.0.2",
+    "react": "16",
+    "react-dom": "16",
     "react-docgen": "5.3.1"
   },
-  "sui-bundler": {
-    "vendor": [
-      "react",
-      "react-dom",
-      "runtime-regenerator"
-    ]
+  "config": {
+    "sui-bundler": {
+      "vendor": [
+        "react",
+        "react-dom",
+        "runtime-regenerator"
+      ]
+    }
   },
   "repository": {
     "type": "git",
