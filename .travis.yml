@@ -14,6 +14,8 @@ before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
   - export DISPLAY=:99.0
   - export CHROME_PATH="$(pwd)/chrome-linux/chrome"
+  - echo $DOCKER_USERNAME
+  - echo $DOCKER_PASSWORD
 
 install:
   - npm run phoenix:ci
