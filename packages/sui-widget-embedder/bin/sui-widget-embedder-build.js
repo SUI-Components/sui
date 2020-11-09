@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
+const flatten = require('just-flatten-it')
+const minifyStream = require('minify-stream')
 const program = require('commander')
 const rimraf = require('rimraf')
 const staticModule = require('static-module')
-const minifyStream = require('minify-stream')
-const flatten = require('just-flatten-it')
-const zlib = require('zlib')
-
-const gzip = zlib.createGzip()
-const brotli = require('iltorb').compressStream
 
 const path = require('path')
 const {resolve} = path
@@ -31,7 +27,6 @@ const PUBLIC_PATH = resolve(process.cwd(), 'public')
 const pkg = require(resolve(process.cwd(), 'package.json'))
 const config = pkg.config || {}
 const suiWidgetEmbedderConfig = config['sui-widget-embedder'] || {}
-const {manualCompression} = suiWidgetEmbedderConfig
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -78,17 +73,11 @@ const build = ({page, remoteCdn}) => {
   })
   return new Promise((resolve, reject) => {
     compiler.run((error, stats) => {
-      if (error) {
-        reject(error)
-        return
-      }
+      if (error) return reject(error)
 
       const jsonStats = stats.toJson()
 
-      if (stats.hasErrors()) {
-        reject(jsonStats.errors)
-        return
-      }
+      if (stats.hasErrors()) return reject(jsonStats.errors)
 
       if (stats.hasWarnings()) {
         console.log('Webpack generated the following warnings: ')
@@ -129,28 +118,6 @@ const pageConfigs = () =>
     {}
   )
 
-const createBrotli = file =>
-  new Promise(resolve => {
-    createReadStream(path.resolve(process.cwd(), 'public', file))
-      .pipe(brotli())
-      .pipe(
-        createWriteStream(
-          path.resolve(process.cwd(), 'public', `${file}.br`)
-        ).on('finish', resolve)
-      )
-  })
-
-const createGzip = file =>
-  new Promise(resolve => {
-    createReadStream(path.resolve(process.cwd(), 'public', file))
-      .pipe(gzip)
-      .pipe(
-        createWriteStream(
-          path.resolve(process.cwd(), 'public', `${file}.gz`)
-        ).on('finish', resolve)
-      )
-  })
-
 const createDownloader = () =>
   // eslint-disable-next-line
   new Promise((res, rej) => {
@@ -170,18 +137,7 @@ const createDownloader = () =>
         createWriteStream(resolve(process.cwd(), 'public', FILE_DOWNLOADER))
           .on('finish', () => {
             console.log(`Created a new ${FILE_DOWNLOADER} file`)
-
-            if (manualCompression) {
-              Promise.all([
-                createBrotli(FILE_DOWNLOADER),
-                createGzip(FILE_DOWNLOADER)
-              ]).then(() => {
-                console.log('Manually compressed downloader done!')
-                res()
-              })
-            } else {
-              res()
-            }
+            res()
           })
           .on('error', rej)
       )

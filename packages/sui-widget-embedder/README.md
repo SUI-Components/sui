@@ -71,7 +71,6 @@ Inside your project-level package.json, you could config the library,
 - `alias` [OPTIONAL]: create aliases to `import` certain modules more easily or to avoid importing them in production.
 - `remoteCdn` [OPTIONAL] (default: `'/'`): the base path of the cdn where your assets will be located.
 - `devPort` [OPTIONAL] (default: `3000`): Port where your development server will be listening.
-- `manualCompression` [OPTIONAL] (default: false): Compress files manually with gzip and brotli to be served via CDN
 
 ### Page config
 
@@ -113,13 +112,9 @@ import render from '@s-ui/widget-embedder/react/render'
 - `Widgets`: React Component that encapsules all your widgets.
 
 - `Widget`: React Component that renders the children as a new React tree in another place of the page. Available props:
-  * `browser`: *(deprecated)* Browser object with useful info about the browser of the User Agent. (Note: better use the context object)
   * `children` *(required)*: Content of the Widget. Should be a compatible React Element.
-  * `context`: Object with the context object that you want to be available inside the widget. If `context` is provided, then `browser`, `domain` and `i18n` props are ignored.
-  * `domain`: *(deprecated)* Domain library for your widgets
-  * `i18n`: *(deprecated)* I18n library
+  * `context`: Object with the context object that you want to be available inside the widget.
   * `isVisible` *(default: true)*: Determine if the widget must be shown.
-  * `node` *(deprecated)*: css path that indicates where you want create the new React tree. If that node doesnt exist in the current page you will get a warning in the console.
   * `renderMultiple` *(default: false)*: Determine if the Widget must be rendered on every node found using the selector prop (or deprecated `node` prop). If `false` the Widget will be rendered only in the first node found.
   * `selector`: *(required)* CSS Path to select the node (or nodes) where you want to render the Widget.
 

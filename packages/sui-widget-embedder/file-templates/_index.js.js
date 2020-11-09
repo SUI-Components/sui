@@ -1,5 +1,4 @@
-module.exports = () => `import React from 'react'
-import Widget from '@s-ui/widget-embedder/react/Widget'
+module.exports = () => `import Widget from '@s-ui/widget-embedder/react/Widget'
 import Widgets from '@s-ui/widget-embedder/react/Widgets'
 import render from '@s-ui/widget-embedder/react/render'
 import './index.scss'

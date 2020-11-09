@@ -1,3 +1,5 @@
+/* eslint-disable no-console, no-var */
+
 ;(function() {
   'use strict'
   var manifests = require('static-manifests')()
