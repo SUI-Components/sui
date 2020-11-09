@@ -14,7 +14,7 @@ const EXTERNAL_MANIFEST_APP_PATH = path.join(
   'external-manifest-app'
 )
 
-describe('[Integration] sui-bundler', () => {
+describe.skip('[Integration] sui-bundler', () => {
   it('Regresion test for features', async function() {
     this.timeout(0)
     const CDN = 'https://my-cdn.com/'

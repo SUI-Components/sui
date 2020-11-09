@@ -15,7 +15,7 @@ const safeRemoveDir = uri => {
   } catch (e) {}
 }
 
-describe('[Integration] sui-studio', () => {
+describe.skip('[Integration] sui-studio', () => {
   it('Should compile and build a static version with one component', async function() {
     this.timeout(0)
 
@@ -113,8 +113,7 @@ describe('[Integration] sui-studio', () => {
           ),
           'utf8'
         )
-      ).to.be.eql(`import React from 'react'
-// import PropTypes from 'prop-types'
+      ).to.be.eql(`// import PropTypes from 'prop-types'
 
 export default function FakeComponent() {
   return (
