@@ -5,7 +5,7 @@ const getTargets = ({targets = {}}) => {
   return browser
 }
 
-const plugins = (api, opts = {}) => [
+const plugins = (api, {useESModules = true} = {}) => [
   require('babel-plugin-preval'),
   require('@babel/plugin-syntax-export-default-from').default,
   require('@babel/plugin-syntax-export-namespace-from').default,
@@ -21,7 +21,7 @@ const plugins = (api, opts = {}) => [
     require('@babel/plugin-transform-runtime').default,
     {
       corejs: false,
-      useESModules: true,
+      useESModules,
       regenerator: true
     }
   ]
