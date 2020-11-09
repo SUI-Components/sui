@@ -10,12 +10,12 @@ on:
     branches: [ master ]
 
 jobs:
-  env:
-    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   build:
     runs-on: ubuntu-latest
 
     steps:
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
