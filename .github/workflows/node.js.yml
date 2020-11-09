@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
         node-version: 12
         registry-url: https//registry.npmjs.org
