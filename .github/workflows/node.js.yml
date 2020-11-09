@@ -19,8 +19,9 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
-        node-version: 12
+        node-version: 14
         registry-url: https//registry.npmjs.org
     - run: npm run phoenix:ci
     - run: npm run lint
     - run: npm run test:ci
+    - run: GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci release
