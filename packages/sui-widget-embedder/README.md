@@ -115,7 +115,7 @@ import render from '@s-ui/widget-embedder/react/render'
   * `children` *(required)*: Content of the Widget. Should be a compatible React Element.
   * `context`: Object with the context object that you want to be available inside the widget.
   * `isVisible` *(default: true)*: Determine if the widget must be shown.
-  * `renderMultiple` *(default: false)*: Determine if the Widget must be rendered on every node found using the selector prop (or deprecated `node` prop). If `false` the Widget will be rendered only in the first node found.
+  * `renderMultiple` *(default: false)*: Determine if the Widget must be rendered on every node found using the selector prop. If `false` the Widget will be rendered only in the first node found.
   * `selector`: *(required)* CSS Path to select the node (or nodes) where you want to render the Widget.
 
 ### Passing a context to a Widget
@@ -123,7 +123,6 @@ import render from '@s-ui/widget-embedder/react/render'
 Sometimes the components you want to render inside a Widget are expecting a React Context to be available. You could use the prop `context` in order to send an object that will be used to create an static context by using *@s-ui/react-context*.
 
 ```js
-import React from 'react'
 import Widget from '@s-ui/widget-embedder/react/Widget'
 import Widgets from '@s-ui/widget-embedder/react/Widgets'
 import render from '@s-ui/widget-embedder/react/render'
@@ -174,18 +173,6 @@ If you want to define the remoteCdn by command option you can pass it using the 
 $ sui-widget-embedder build -R http://mycdn.com
 ```
 
-## Hot module replacement
-
-In order to be able to use webpack's hot module replacement feature, you'll need to use the hot loader module inside your widget.js like this:
-
-```js
-import {hot} from 'react-hot-loader'
-
-const YourAwesomeWidget = () => ...
-
-export default hot(module)(YourAwesomeWidget) // don't worry about "module", it will work thanks to webpack
-```
-
 ## Propagate webpack's resolve.alias config
 
 In case you need this feature of webpack (e.g to not load faker in prod environment) you have to add an `alias` to your `sui-widget-embedder's` option within your package.json like so:
@@ -197,6 +184,60 @@ In case you need this feature of webpack (e.g to not load faker in prod environm
       "moduleToLoad": "path/to/file/to/load"
     }
   }
+```
+
+## Migrations
+
+### Migrate from v3 to v4
+
+- This version uses latest **@s-ui/bundler@7**. You might want to check [its migration guide.](https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#migrations)
+ 
+- Removed support for legacy props `i18n`, `browser` and `domain`. Instead, use the `context` prop so you could pass directly the context object you want to use on your Widgets.
+
+```diff
+-      <Widget
+-        browser={browser}
+-        domain={domain}
+-        i18n={i18n}
+-        selector="#widget-userCommunicationsMessage">
++      <Widget context={context} selector="#widget-userCommunicationsMessage">
+```
+
+- Removed `node` prop that indicates where you want to create the React tree as the name was incorrect. Instead use `selector`.
+
+```diff
+-      <Widget node="#widget-id">
++      <Widget selector="#widget-id">
+```
+
+- Removed support for legacy React Context. If your widgets were using it, please, move to the new React Context.
+
+- Removed `@s-ui/react-domain-connect` package. It added the legacy context support.
+
+- `manualCompression` flag on your `sui-widget-embedder` config is not longer supported and it will be ignored. No more manual compression is supported.
+
+```diff
+-  "config": {
+-    "sui-widget-embedder": {
+-      "manualCompression": true
+-    },
+```
+
+- New `react/jsx` is used so you don't need to import React from `react`. The generated files avoid that as well.
+
+```diff
+-import React from 'react'
+import Widget from '@s-ui/widget-embedder/react/Widget'
+import Widgets from '@s-ui/widget-embedder/react/Widgets'
+```
+
+- Now, only `.js` and `.json` extensions will be resolved if you ignore them on importing the file.
+
+```js
+// before
+import util from './util' // finally, any extension will be handled as we're using * as a fallback
+// after
+import util from './util' // only .js and .json files will be resolved
 ```
 
 ## Contributing
