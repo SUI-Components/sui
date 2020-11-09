@@ -16,13 +16,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      name: Check out repository
     - uses: actions/setup-node@v1
+      name: Set up Node.js
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
+
     - run: npm run phoenix:ci
+      name: Installing dependencies
+
     - run: npm run lint
+      name: Lint
+
     - run: npm run test:ci
+      name: Tests
+
     - run: GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci release
+      name: Release
