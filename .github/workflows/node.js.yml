@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(toJSON(github.event.commits.*.message), '[skip ci]')"
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
 
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +22,11 @@ jobs:
       with:
         node-version: 14
         registry-url: https//registry.npmjs.org
+    - name: Install dependencies
     - run: npm run phoenix:ci
+    - name: Lint
     - run: npm run lint
+    - name: Tests
     - run: npm run test:ci
+    - name: Release
     - run: GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci release
