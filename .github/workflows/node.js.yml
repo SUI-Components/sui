@@ -21,7 +21,7 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
         node-version: 14
-        registry-url: https//registry.npmjs.org
+        registry-url: 'https://registry.npmjs.org'
     - run: npm run phoenix:ci
     - run: npm run lint
     - run: npm run test:ci
