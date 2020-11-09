@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    if: ${{ !contains(toJSON(github.event.commits.*.message), '[skip ci]') }}
+    if: ${{ !contains(toJson(github.event.commits.*.message), '[skip ci]') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,10 @@ jobs:
       with:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
     - run: npm run phoenix:ci
     - run: npm run lint
     - run: npm run test:ci
