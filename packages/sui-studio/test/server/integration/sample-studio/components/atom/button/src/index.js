@@ -1,6 +1,3 @@
-import React from 'react'
-// import PropTypes from 'prop-types'
-
 export default function AtomButton() {
   return (
     <div className="sui-AtomButton">

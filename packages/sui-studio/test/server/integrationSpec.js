@@ -16,7 +16,7 @@ const safeRemoveDir = uri => {
 }
 
 describe('[Integration] sui-studio', () => {
-  it('Should compile and build a static version with one component', async function() {
+  it('Should compile and build a static version with one component', async function () {
     this.timeout(0)
 
     const {stdout: stdoutStudioBuild} = await exec(
@@ -33,7 +33,7 @@ describe('[Integration] sui-studio', () => {
     expect(stdoutStudioBuild.includes('Error')).to.be.false
   })
 
-  it('Should start a studio in mode dev', function(done) {
+  it('Should start a studio in mode dev', function (done) {
     this.timeout(0)
     let server
     try {
@@ -76,7 +76,7 @@ describe('[Integration] sui-studio', () => {
     })
     afterEach(() => {})
 
-    it('Should generate a new component with the proper prefix', async function() {
+    it('Should generate a new component with the proper prefix', async function () {
       this.timeout(0)
 
       const {
@@ -113,8 +113,7 @@ describe('[Integration] sui-studio', () => {
           ),
           'utf8'
         )
-      ).to.be.eql(`import React from 'react'
-// import PropTypes from 'prop-types'
+      ).to.be.eql(`// import PropTypes from 'prop-types'
 
 export default function FakeComponent() {
   return (
@@ -177,7 +176,6 @@ FakeComponent.propTypes = {}
 /* eslint react/jsx-no-undef:0 */
 /* eslint no-undef:0 */
 
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
