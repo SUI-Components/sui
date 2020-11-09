@@ -1,5 +1,5 @@
 const template = code => {
-  return `import React, {memo} from 'react'
+  return `import {memo} from 'react'
 import AtomIcon from '@s-ui/react-atom-icon'
 
 const MemoAtomIcon = memo(props => <AtomIcon {...props}>${code}</AtomIcon>)
