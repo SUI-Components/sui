@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment'
-import {addReactContextToComponent} from '../../../../src/components/utils'
+import {
+  addReactContextToComponent,
+  extractDisplayName
+} from '../../../../src/components/utils'
 
 addSetupEnvironment(window)
 
@@ -22,6 +25,7 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   useEffect(() => {
     importComponent().then(async module => {
       const Component = module.default || module
+      const displayName = extractDisplayName(Component)
 
       const nextContexts =
         typeof contexts !== 'function' ? contexts : await contexts()
@@ -32,7 +36,7 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       const {default: context} = nextContexts
 
       const NextComponent = addReactContextToComponent(Component, {context})
-      window[Component.displayName] = NextComponent
+      window[displayName] = NextComponent
 
       importTest()
         .then(() => window.mocha.run(setFailures))
