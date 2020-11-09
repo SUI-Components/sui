@@ -24,16 +24,16 @@
     "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master"
   },
   "devDependencies": {
-    "@babel/cli": "7.11.6",
+    "@babel/cli": "7.12.1",
     "@s-ui/lint": "3",
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",
-    "@s-ui/test": "2",
-    "chai": "3.5.0",
-    "concurrently": "5.2.0",
+    "@s-ui/test": "4",
+    "chai": "4.2.0",
+    "concurrently": "5.3.0",
     "cross-env": "5.1.6",
-    "husky": "4.2.5",
-    "validate-commit-msg": "2.12.2"
+    "husky": "4.3.0",
+    "validate-commit-msg": "2.14.0"
   },
   "config": {
     "sui-mono": {
