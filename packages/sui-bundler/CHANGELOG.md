@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.9.0 (2020-11-10)
+
+
+### Features
+
+* avoid publishing huge CHANGELOG.md ([0764184](https://github.com/SUI-Components/sui/commit/07641849284d54436397719381acaaa3fbda5970))
+
+
+
 # 7.8.0 (2020-11-10)
 
 
