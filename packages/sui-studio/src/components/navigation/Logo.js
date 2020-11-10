@@ -1,4 +1,3 @@
-import React from 'react'
 import {getStudioLogo} from '../utils'
 
 export default () => (

@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const iconFullScreenExit = (
   <svg viewBox="0 0 24 24">
     <path d="M0 0h24v24H0z" fill="none" />
