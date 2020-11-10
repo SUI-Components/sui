@@ -16,6 +16,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@babel/cli": "7.12.1",
     "@babel/standalone": "7.12.6",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
