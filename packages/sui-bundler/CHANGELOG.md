@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.8.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* use autoprefixer@9 for now ([f8f6eda](https://github.com/SUI-Components/sui/commit/f8f6eda4de11d11892b3dd00bd17b285470803e4))
+
+
+
 # 7.7.0 (2020-11-10)
 
 
