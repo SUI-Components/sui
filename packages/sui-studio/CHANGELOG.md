@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.13.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* ignore test folder to publish ([68a0daa](https://github.com/SUI-Components/sui/commit/68a0daa0c3316e0558d295e16df875d07fe2d344))
+
+
+
 # 9.12.0 (2020-11-10)
 
 
