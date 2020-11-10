@@ -109,9 +109,10 @@ module.exports = {
             options: {
               postcssOptions: {
                 plugins: [
-                  require('autoprefixer')({
+                  'autoprefixer',
+                  {
                     overrideBrowserslist: config.targets
-                  })
+                  }
                 ]
               }
             }
