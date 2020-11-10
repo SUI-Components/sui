@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@s-ui/helpers": "1",
-    "autoprefixer": "10.0.1",
+    "autoprefixer": "9.8.6",
     "babel-loader": "8.1.0",
     "babel-preset-sui": "3",
     "chalk": "4.1.0",
