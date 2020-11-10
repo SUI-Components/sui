@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 7.7.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* ignore test folder for publishing package ([1941f3a](https://github.com/SUI-Components/sui/commit/1941f3a439f4a8b61e3b121ec929e922829301b2))
+
+
+
 # 7.6.0 (2020-11-10)
 
 
