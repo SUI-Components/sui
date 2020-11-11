@@ -24,9 +24,9 @@ jobs:
       with:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
-    # - run: npm run phoenix:ci
-    # - run: npm run lint
-    # - run: npm run test:ci
+    - run: npm run phoenix:ci
+    - run: npm run lint
+    - run: npm run test:ci
     - run: npx @s-ui/ci@beta release
       env:
         GITHUB_EMAIL: cloud-accounts@scmspain.com
