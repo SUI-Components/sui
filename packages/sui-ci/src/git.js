@@ -7,11 +7,10 @@ exports.checkIsPullRequest = async () => {
     return TRAVIS_PULL_REQUEST !== 'false'
   } else {
     const {stdout: mainOrigin} = await execute(
-      'git rev-parse --abbrev-ref origin/HEAD'
+      'git symbolic-ref refs/remotes/origin/HEAD'
     )
-    const [, mainBranch] = mainOrigin.split('/')
-    const [, , processBranch] = GITHUB_REF.split('/')
-    console.log({mainBranch, processBranch})
-    return mainBranch === processBranch
+    const [mainBranch] = mainOrigin.split('/').reverse()
+    const [processBranch] = GITHUB_REF.split('/').reverse()
+    return mainBranch !== processBranch
   }
 }
