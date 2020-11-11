@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.12.0 (2020-11-11)
+
+
+### Features
+
+* use new way to detect github main branch ([b1adb25](https://github.com/SUI-Components/sui/commit/b1adb256a22ffb557f6480d15631ca5b81ccf40b))
+
+
+
 # 1.11.0 (2020-11-11)
 
 
