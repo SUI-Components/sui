@@ -69,9 +69,7 @@ const singlePackageRelease = ({status, packageScope}) =>
 
 const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
   return new Promise((resolve, reject) => {
-    if (code === 0) {
-      return resolve()
-    }
+    if (code === 0) return resolve()
 
     const isMonoPackage = config.isMonoPackage()
 
@@ -97,7 +95,7 @@ const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
     const publishCommands = [
       scripts.build && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
-      ['git', ['push', '--tags', 'origin', 'HEAD']]
+      ['git', ['push', '-f', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
 
     serialSpawn(releaseCommands, {cwd})
