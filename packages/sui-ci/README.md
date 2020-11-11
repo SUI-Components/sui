@@ -10,14 +10,18 @@ It provides:
 
 ### Requirements
 
-The following environment variables are needed:
+The following environment variables are used:
 * `GITHUB_TOKEN`: GitHub Personal Access Token of the user that will create the commit with the release.
-* `TRAVIS_PULL_REQUEST`: The pull request number if the current job is a pull request, `false` if it's not a pull request.
  
-Other optional enviromnet variables are:
+Other optional environment variables are:
 * `GITHUB_USER`: GitHub username of the user that will create the commit with the release.
 * `GITHUB_EMAIL`: GitHub email of the user that will create the commit with the release.
 
+When using *Travis* as CI it also uses:
+* `TRAVIS_PULL_REQUEST`: The pull request number if the current job is a pull request, `false` if it's not a pull request.
+
+When using *GitHub Actions* as CI it also uses:
+* `GITHUB_REF`: The branch ref that triggered the workflow. For example, refs/heads/feature-branch-1.
 
 ### Usage
 
@@ -38,7 +42,10 @@ Right now, it relies on some environment variables:
 * `GITHUB_TOKEN`: GitHub Personal Access Token of the user that will create the status of the commit.
 * `SUI_CI_TOPIC`: Environment variable to tell the CI which topic the commit is about. If not defined, you must use the `--topic` parameter in order to define the topic that you're talking about. 
 
-*@s-ui/ci* right now expects it's using *Travis* to execute CI, so the next environment variables are expected: `TRAVIS_BUILD_WEB_URL`, `TRAVIS_COMMIT`, `TRAVIS_PULL_REQUEST_SHA`, `TRAVIS_REPO_SLUG`.
+When using *Travis* as CI, *@s-ui/ci* uses the next environment variables are expected: `TRAVIS_BUILD_WEB_URL`, `TRAVIS_COMMIT`, `TRAVIS_PULL_REQUEST_SHA`, `TRAVIS_REPO_SLUG`.
+
+When using *GitHub Actions* as CI, it uses:
+`GITHUB_EVENT_PATH`, `GITHUB_SHA`, `GITHUB_RUN_ID`, `GITHUB_SERVER_URL`.
 
 ### Usage
 
