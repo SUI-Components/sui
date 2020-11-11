@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix",
-    "phoenix:ci": "npx @s-ui/mono phoenix --ci",
+    "phoenix:ci": "npx -p @s-ui/mono sui-mono phoenix --ci",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "cross-env NODE_ENV=test npm run test:client && cross-env NODE_ENV=test npm run test:server",
@@ -28,12 +28,12 @@
     "@s-ui/lint": "3",
     "@s-ui/mono": "1",
     "@s-ui/precommit": "2",
-    "@s-ui/test": "2",
-    "chai": "3.5.0",
-    "concurrently": "5.2.0",
+    "@s-ui/test": "4",
+    "chai": "4.2.0",
+    "concurrently": "5.3.0",
     "cross-env": "5.1.6",
-    "husky": "4.2.5",
-    "validate-commit-msg": "2.12.2"
+    "husky": "4.3.0",
+    "validate-commit-msg": "2.14.0"
   },
   "config": {
     "sui-mono": {

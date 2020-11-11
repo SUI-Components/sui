@@ -1,0 +1,32 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Cancel Previous Redundant Builds
+      uses: styfle/cancel-workflow-action@0.6.0
+      with:
+        access_token: ${{ github.token }}
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      with:
+        node-version: 14
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm run phoenix:ci
+    - run: npm run lint
+    - run: npm run test:ci
+    - run: GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci release

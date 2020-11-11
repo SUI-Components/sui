@@ -57,7 +57,7 @@ import chaiDOM from 'chai-dom'
 chai.use(chaiDOM)
 
 describe('${component}', () => {
-  const Component = ${componentInPascal}
+  const Component = ${component}
   const setup = setupEnvironment(Component)
   
   it('should render without crashing', () => {
