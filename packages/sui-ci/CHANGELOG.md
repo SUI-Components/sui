@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.11.0 (2020-11-11)
+
+
+### Bug Fixes
+
+* try another command to get default branch ([e8389bf](https://github.com/SUI-Components/sui/commit/e8389bf1795c4881b39b72d639ae5b9cd4da1b67))
+
+
+
 # 1.10.0 (2020-11-11)
 
 
