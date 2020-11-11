@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio-create",
-  "version": "4.16.0",
+  "version": "4.17.0",
   "description": " CLI to create studios for sui components development.",
   "main": "src/index.js",
   "bin": {
