@@ -3,7 +3,7 @@ const {release} = require('../src/index')
 const {checkIsPullRequest} = require('../src/git')
 
 const {
-  GH_TOKEN,
+  GH_TOKEN, // deprecated
   GITHUB_EMAIL: gitHubEmail,
   GITHUB_TOKEN,
   GITHUB_USER: gitHubUser
