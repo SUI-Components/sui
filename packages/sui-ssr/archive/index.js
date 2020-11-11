@@ -4,7 +4,7 @@ const archiver = require('archiver')
 const program = require('commander')
 const authDefinitionBuilder = require('./authDefinitionBuilder')
 
-module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry = ''}) =>
+module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
   new Promise((resolve, reject) => {
     const authVariableDefinition = program.auth
       ? authDefinitionBuilder(program.auth.split(':'))
@@ -20,7 +20,6 @@ module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry = ''}) =>
     const archive = archiver('zip', {
       zlib: {level: 9}
     })
-    if (dockerRegistry) dockerRegistry = `${dockerRegistry}/`
 
     output.on('close', () => {
       // eslint-disable-next-line no-console

@@ -50,9 +50,10 @@ if (program.clean) {
 }
 
 let entryPoint
-if (program.entryPoint) {
-  entryPoint = path.resolve(program.entryPoint)
-}
+let dockerRegistry = ''
+
+if (program.entryPoint) entryPoint = path.resolve(program.entryPoint)
+if (program.dockerRegistry) dockerRegistry = `${dockerRegistry}/`
 
 const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
@@ -61,5 +62,10 @@ const OUTPUT_ZIP_PATH = path.join(
 )
 ;(async () => {
   // console.log(' -> Compressing files... 🗄'.yellow)
-  await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg, entryPoint})
+  await archive({
+    outputZipPath: OUTPUT_ZIP_PATH,
+    pkg,
+    entryPoint,
+    dockerRegistry
+  })
 })()
