@@ -32,6 +32,6 @@ jobs:
     - run: npx @s-ui/ci@beta release
       env:
         GITHUB_EMAIL: cloud-accounts@scmspain.com
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
         GITHUB_USER: sui-bot
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
