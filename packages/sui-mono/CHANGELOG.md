@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.61.0 (2020-11-11)
+
+
+### Features
+
+* force tags pushing for avoiding a lot of problems from travis ([89e2f57](https://github.com/SUI-Components/sui/commit/89e2f5758b15066c53242089bad4ff7a7085722c))
+
+
+
 # 1.60.0 (2020-10-20)
 
 
