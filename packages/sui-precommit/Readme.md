@@ -54,7 +54,7 @@ Your package.json might be altered like that:
     }
   },
   "devDependencies": {
-    "husky": "4.2.5"
+    "husky": "4.3.0"
   }
 }
 ```
