@@ -4,26 +4,26 @@ const archiver = require('archiver')
 const program = require('commander')
 const authDefinitionBuilder = require('./authDefinitionBuilder')
 
-module.exports = ({outputZipPath, pkg, entryPoint}) =>
+module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry = ''}) =>
   new Promise((resolve, reject) => {
     const authVariableDefinition = program.auth
       ? authDefinitionBuilder(program.auth.split(':'))
       : ''
-
     const entryPointPreWork = !entryPoint
       ? ''
       : 'COPY ./entry-point ./entry-point\nRUN chmod +x ./entry-point'
 
     const entryPointLine = !entryPoint ? '' : 'ENTRYPOINT ["./entry-point"]'
-
     const output = program.outputFileName
       ? fs.createWriteStream(outputZipPath)
       : process.stdout
     const archive = archiver('zip', {
       zlib: {level: 9}
     })
+    if (dockerRegistry) dockerRegistry = `${dockerRegistry}/`
 
     output.on('close', () => {
+      // eslint-disable-next-line no-console
       console.log(
         '-> File',
         program.outputFileName.magenta.bold + '.zip'.magenta.bold,
@@ -31,6 +31,7 @@ module.exports = ({outputZipPath, pkg, entryPoint}) =>
         Math.round(archive.pointer() / 1024).toString().blue.bold +
           ' kb'.blue.bold
       )
+      // eslint-disable-next-line no-console
       console.log(' -> Success ✅'.green)
 
       resolve()
@@ -59,6 +60,7 @@ module.exports = ({outputZipPath, pkg, entryPoint}) =>
     archive.append(
       fs
         .readFileSync(path.join(__dirname, 'Dockerfile.tpl'), 'utf8')
+        .replace('{{DOCKER_REGISTRY}}', dockerRegistry)
         .replace('{{AUTH_VARIABLES}}', authVariableDefinition)
         .replace('{{ENTRYPOINT_PREWORK}}', entryPointPreWork)
         .replace('{{ENTRYPOINT}}', entryPointLine),

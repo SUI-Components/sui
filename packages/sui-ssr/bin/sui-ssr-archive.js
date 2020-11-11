@@ -12,6 +12,10 @@ const REMOVE_ZIP_PATH = path.join(process.cwd(), '*-sui-ssr.zip')
 program
   .option('-C, --clean', 'Remove previous zip')
   .option(
+    '-R, --docker-registry <dockerRegistry>',
+    'Custom registry to be used as a proxy or instead of the Docker Hub registry'
+  )
+  .option(
     '-E, --entry-point <entryPoint>',
     'Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C'
   )
