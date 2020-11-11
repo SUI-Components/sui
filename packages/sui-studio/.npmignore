@@ -9,3 +9,4 @@ client/public
 .sass-lint.yml
 .scss-lint.yml
 assets/sui-studio-demo.gif
+test/

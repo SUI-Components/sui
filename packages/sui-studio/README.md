@@ -121,11 +121,9 @@ Test the studio's components both in the demo as in the development environment.
 
 Here's an example of what could go inside `test/[category]/[component]/index.js`:
 
-```JS
+```js
 /* eslint react/jsx-no-undef:0 */
 /* global AtomButton */
-
-import React from 'react'
 
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'

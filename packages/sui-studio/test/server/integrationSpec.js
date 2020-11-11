@@ -176,7 +176,6 @@ FakeComponent.propTypes = {}
 /* eslint react/jsx-no-undef:0 */
 /* eslint no-undef:0 */
 
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'

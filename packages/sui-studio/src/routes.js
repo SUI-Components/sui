@@ -1,4 +1,3 @@
-import React from 'react'
 import {Route, Redirect} from '@s-ui/react-router'
 import Layout from './components/layout'
 import Workbench from './components/workbench'

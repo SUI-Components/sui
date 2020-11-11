@@ -1,7 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
+
 const prodConfig = require('@s-ui/bundler/webpack.config.prod')
 const {pipe, removePlugin} = require('./utils')
+
 const MAIN_ENTRY_POINT = './index.js'
 
 const requireOrDefault = path => {
@@ -38,10 +40,6 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
         : prodConfig.output.publicPath,
       jsonpFunction: `webpackJsonp-${page}`
     },
-    plugins: pipe(
-      removePlugin('HtmlWebpackPlugin'),
-      removePlugin('ScriptExtHtmlWebpackPlugin'),
-      removePlugin('PreloadWebpackPlugin')
-    )(prodConfig.plugins)
+    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(prodConfig.plugins)
   })
 }
