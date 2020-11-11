@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.10.0 (2020-11-11)
+
+
+### Features
+
+* add support to GitHub Actions ([a78f2f2](https://github.com/SUI-Components/sui/commit/a78f2f2c25dc22e4584c7333c99e1ef24ebd91af))
+* upgrade dependencies for sui-ci ([0b8748e](https://github.com/SUI-Components/sui/commit/0b8748edeb06d8a7cfb1bdcf1d38cf3bf88423d2))
+
+
+
 # 1.8.0 (2020-10-14)
 
 
