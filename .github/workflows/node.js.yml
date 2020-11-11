@@ -21,13 +21,15 @@ jobs:
         access_token: ${{ github.token }}
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
     # - run: npm run phoenix:ci
     # - run: npm run lint
     # - run: npm run test:ci
-    - run: GITHUB_USER=sui-bot GITHUB_EMAIL=cloud-accounts@scmspain.com npx @s-ui/ci@beta release
+    - run: npx @s-ui/ci@beta release
+      env:
+        GITHUB_EMAIL: cloud-accounts@scmspain.com
+        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_USER: sui-bot
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
