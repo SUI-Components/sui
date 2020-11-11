@@ -70,7 +70,7 @@ Promise.all([
   "devDependencies": {
     "@s-ui/precommit": "2",
     "@s-ui/studio": "9",
-    "husky": "4.2.5",
+    "husky": "4.3.0",
     "validate-commit-msg": "2.14.0"
   },
   "dependencies": {
