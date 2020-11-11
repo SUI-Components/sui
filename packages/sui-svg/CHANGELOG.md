@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.9.0 (2020-11-11)
+
+
+### Features
+
+* update README ([f894163](https://github.com/SUI-Components/sui/commit/f8941638a0fb43f2f5fe604524a9406bad4ce755))
+
+
+
 # 2.8.0 (2020-11-11)
 
 
