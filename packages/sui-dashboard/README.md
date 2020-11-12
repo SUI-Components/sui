@@ -9,9 +9,21 @@ If you want to add or remove project, you have to edit the bin/sui-dashboard-com
 
 `$ npm install @s-ui/dashboard`
 
-## Docker:
+## Usage:
 
-`docker run -v ~/.ssh:/root/.ssh:ro -v ~/.npmrc:/root/.npmrc:ro node npx @s-ui/dashboard components`
+`npx @s-ui/dashboard components`
+
+If you want to get the results including versions you should use:
+
+`npx @s-ui/dashboard components -- -v`
+
+If you want to save a file with teh result you can also use:
+
+`npx @s-ui/dashboard components -- -o ./output.json`
+
+or simply combine both options
+
+`npx @s-ui/dashboard components -- -v -o ./output.json`
 
 ## CLI:
 
@@ -24,6 +36,9 @@ Options:
 
 Commands:
   components     Update several metrics about sui-components
+    Options:
+        -v --versions           output versions used
+        -o --output <filename>  save result on filename
   help [cmd]     display help for [cmd]
 
 ```

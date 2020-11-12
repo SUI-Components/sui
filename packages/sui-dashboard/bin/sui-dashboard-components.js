@@ -5,9 +5,12 @@ const os = require('os')
 const path = require('path')
 const program = require('commander')
 const {parallelSpawn, serialSpawn} = require('@s-ui/helpers/cli')
+const fs = require('fs')
 const {stats} = require('../src')
 
 program
+  .option('-v, --versions', 'output versions used')
+  .option('-o, --output <filename>', 'save result on filename')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -15,6 +18,8 @@ program
     console.log('')
   })
   .parse(process.argv)
+
+const programOptions = program.opts()
 
 const WORK_DIRECTORY = path.join(os.tmpdir(), Date.now().toString())
 const FLAGS_INSTALL = [
@@ -90,7 +95,18 @@ const installCommands = repositories.map(repo => [
   await parallelSpawn(cloneSUIComponentsCommand)
   await parallelSpawn(cloneCommands)
   await serialSpawn(installCommands)
-  const statsComponents = await stats({repositories, root: WORK_DIRECTORY})
+  const statsComponents = await stats({
+    repositories,
+    root: WORK_DIRECTORY,
+    getVersions: programOptions.versions
+  })
 
   console.log(statsComponents)
+  if (programOptions.output) {
+    fs.writeFileSync(
+      program.output,
+      JSON.stringify(statsComponents, null, 2),
+      'utf8'
+    )
+  }
 })()
