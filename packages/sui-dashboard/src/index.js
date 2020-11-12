@@ -3,6 +3,8 @@ const fs = require('fs')
 
 const flat = arr => [].concat(...arr)
 
+const getPackageContent = filepath => JSON.parse(fs.readFileSync(filepath))
+
 module.exports.stats = async ({
   repositories,
   root,
@@ -30,8 +32,7 @@ module.exports.stats = async ({
       acc[component] = dirs
         .filter(dir => dir.includes(component))
         .map(dir => {
-          const pkg =
-            getVersions && JSON.parse(fs.readFileSync(`${dir}/package.json`))
+          const pkg = getVersions && getPackageContent(`${dir}/package.json`)
           return dir
             .replace(root, '')
             .replace(
@@ -49,8 +50,7 @@ module.exports.stats = async ({
       .filter(dir => dir.includes(repo))
       .filter(dir => suiComponents.some(sui => dir.includes(sui)))
       .map(dir => {
-        const pkg =
-          getVersions && JSON.parse(fs.readFileSync(`${dir}/package.json`))
+        const pkg = getVersions && getPackageContent(`${dir}/package.json`)
         return dir.replace(
           /^.+(?<comp>@[a-z|-]+\/[a-z|-]+$)/,
           '$<comp>' + (getVersions ? `@${pkg.version}` : '')
