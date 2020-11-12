@@ -1,5 +1,4 @@
 import {expect} from 'chai'
-import React from 'react'
 import {Route, Redirect, match} from '../../src'
 
 const getRedirectLocationFor = ({path = '/', withRoutes}) => {

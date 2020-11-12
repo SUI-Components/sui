@@ -240,7 +240,6 @@ Returns the current location object. This is useful any time you need to know al
 For example, you could create a hook to send a page view to your analytics tracker:
 
 ```js
-import React from 'react'
 import {useLocation} from '@s-ui/react-router'
 
 function usePageViewToGoogleAnalytics() {
@@ -303,7 +302,6 @@ Extract the matched params in a `path` in any place of your tree, in order
 
 
 ```js
-import React from 'react'
 import {useParams} from '@s-ui/react-router'
 
 function BlogPost() {
