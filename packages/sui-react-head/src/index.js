@@ -1,4 +1,4 @@
-import React from 'react'
+import {Children as ReactChildren} from 'react'
 import PropTypes from 'prop-types'
 import {Title, HeadProvider, Link, Meta} from 'react-head'
 import Body from './Body'
@@ -22,7 +22,7 @@ const extractKeyFromTag = tag => {
  * @returns {Array}
  */
 export const filter = ({children, byTag}) => {
-  return React.Children.toArray(children).filter(child => child.type === byTag)
+  return ReactChildren.toArray(children).filter(child => child.type === byTag)
 }
 
 /**
