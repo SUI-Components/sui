@@ -32,6 +32,8 @@ jobs:
     - run: npm run test:ci
     - run: npx @s-ui/ci release
       env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         GITHUB_EMAIL: cloud-accounts@scmspain.com
         GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
         GITHUB_USER: sui-bot
