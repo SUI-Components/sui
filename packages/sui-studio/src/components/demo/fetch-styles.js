@@ -43,7 +43,7 @@ export default /* stylesFor */ ({category, component, withTheme = 'default'}) =>
       console.info('style path: ', stylePath)
       console.info('style to inject: ', style)
 
-      resolve(style)
+      resolve(style.default)
     } catch (e) {
       console.error(e)
       console.warn(`No styles for ${category}/${component}`)
