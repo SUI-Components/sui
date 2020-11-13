@@ -8,6 +8,9 @@
     "monorepo",
     "sui"
   ],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix",
     "phoenix:ci": "npx -p @s-ui/mono sui-mono phoenix --ci",
