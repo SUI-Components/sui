@@ -58,8 +58,8 @@ export function tagHTML({tags}) {
     // create an observer instance
     const observer = new window.MutationObserver(function(mutations) {
       const numberOfMutations = mutations.length
-      for (var i = 0; i < numberOfMutations; i++) {
-        var mutation = mutations[i]
+      for (let i = 0; i < numberOfMutations; i++) {
+        const mutation = mutations[i]
         // only fire the tagging when nodes are added
         // because this will be fired for removed nodes as well
         if (mutation.addedNodes.length) {
@@ -89,7 +89,7 @@ export function tagHTML({tags}) {
   }
 
   function addTrackingTagsToElement(el, trackingTags) {
-    for (var tag in trackingTags) {
+    for (const tag in trackingTags) {
       const attrName = PREFIX_TAG + tag
       const trackingTagValue = trackingTags[tag]
       // Never retagging a previous DOM with the same value
@@ -101,11 +101,11 @@ export function tagHTML({tags}) {
   }
 
   function searchTagsToTrackOnDocument() {
-    for (var key in tags) {
+    for (const key in tags) {
       const arrayDOMElements = Array.prototype.slice.call(
         document.querySelectorAll(key)
       )
-      for (var i = 0; i < arrayDOMElements.length; i++) {
+      for (let i = 0; i < arrayDOMElements.length; i++) {
         addTrackingTagsToElement(arrayDOMElements[i], tags[key])
       }
     }

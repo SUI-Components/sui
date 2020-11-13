@@ -58,6 +58,5 @@ export default function Header({children, componentID, iframeSrc}) {
 Header.propTypes = {
   children: PropTypes.array,
   componentID: PropTypes.string,
-  draggable: PropTypes.bool,
   iframeSrc: PropTypes.string
 }
