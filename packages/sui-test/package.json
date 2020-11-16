@@ -4,7 +4,7 @@
   "cypressVersion": "4.3.0",
   "description": "",
   "bin": {
-    "sui-test": "./bin/sui-test.js"
+    "sui-test": "bin/sui-test.js"
   },
   "scripts": {
     "lib:js": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
@@ -27,7 +27,7 @@
     "babel-preset-sui": "3",
     "chalk": "4.1.0",
     "commander": "6.2.0",
-    "karma": "4.4.1",
+    "karma": "5.2.3",
     "karma-chrome-launcher": "3.1.0",
     "karma-clear-screen-reporter": "1.0.0",
     "karma-coverage": "2.0.3",
