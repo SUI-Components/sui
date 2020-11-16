@@ -7,7 +7,8 @@ module.exports = function copyStaticFiles() {
       'components/**/CHANGELOG.md',
       'components/**/UXDEF.md',
       'components/**/src/index.js',
-      'demo/**/playground'
+      'demo/**/playground',
+      'public/globals.js'
     ],
     'public',
     {

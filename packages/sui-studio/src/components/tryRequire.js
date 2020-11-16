@@ -74,6 +74,15 @@ const importEvents = ({category, component}) =>
       )
   })
 
+export const importGobals = () =>
+  safeImport({
+    importFile: () =>
+      import(
+        /* webpackChunkName: "globals" */
+        `${__BASE_DIR__}/demo/globals.js`
+      )
+  })
+
 export const importMainModules = params =>
   Promise.all([
     importReactComponent(params),

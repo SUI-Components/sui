@@ -5,6 +5,7 @@ const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const {version} = require('../package.json')
 const copyStaticFiles = require('./helpers/copyStaticFiles')
+const copyGlobals = require('./helpers/copyGlobals')
 
 program.version(version, '    --version')
 
@@ -14,6 +15,7 @@ program
   .action(async () => {
     console.info('[deprecated] Use `sui-studio dev` to develop components')
 
+    await copyGlobals()
     await copyStaticFiles()
 
     const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
