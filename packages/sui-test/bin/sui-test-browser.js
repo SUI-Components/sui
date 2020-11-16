@@ -20,11 +20,7 @@ program
     'Path pattern to ignore for testing',
     false
   )
-  .option(
-    '--src-pattern <srcPattern>',
-    'Define the source directory',
-    'src/**/*.js'
-  )
+  .option('--src-pattern <srcPattern>', 'Define the source directory', false)
   .option('-T, --timeout <ms>', 'Timeout', 2000)
   .on('--help', () => {
     console.log('  Description:')
@@ -41,6 +37,7 @@ program
 const {watch, ci, pattern, ignorePattern, srcPattern, timeout} = program
 runner({watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .then(output => {
+    console.log({watch})
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
   })
