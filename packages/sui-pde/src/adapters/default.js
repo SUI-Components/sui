@@ -4,6 +4,6 @@ export default class DefaultAdapter {
   }
 
   activateExperiment({name}) {
-    return ''
+    return 'default'
   }
 }

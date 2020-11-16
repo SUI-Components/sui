@@ -1,15 +1,23 @@
-const optimizelySDK = require('@optimizely/optimizely-sdk')
+import optimizelySDK from '@optimizely/optimizely-sdk'
+import integrations from './integrations'
 
 const DEFAULT_OPTIONS = {
   autoUpdate: true,
-  updateInterval: 10 * 1000, // 10 seconds in milliseconds
+  updateInterval: 60 * 1000, // 60 seconds in milliseconds
   logLevel: 'info'
 }
 
 const DEFAULT_TIMEOUT = 500
 
 export default class OptimizelyAdapter {
-  constructor({optimizely, userId}) {
+  /**
+   * @constructor
+   * @param {object} param
+   * @param {object} param.optimizely OptimizelyInstance returned by createOptimizelyInstance method
+   * @param {string=} param.userId
+   * @param {object} param.activeIntegrations segment activated by default
+   */
+  constructor({optimizely, userId, activeIntegrations = {segment: true}}) {
     if (!optimizely) {
       throw new Error(
         'optimizely instance is mandatory to use OptimizelyAdapter'
@@ -18,6 +26,15 @@ export default class OptimizelyAdapter {
 
     this._optimizely = optimizely
     this._userId = userId?.toString()
+
+    if (this._isActivated()) {
+      integrations.forEach(integration =>
+        integration({
+          activeIntegrations,
+          optimizelyInstance: optimizely
+        })
+      )
+    }
   }
 
   /**
@@ -29,11 +46,17 @@ export default class OptimizelyAdapter {
     const options = {...DEFAULT_OPTIONS, ...optionParameter}
     optimizelySDK.setLogLevel(options.logLevel)
     optimizelySDK.setLogger(optimizelySDK.logging.createLogger())
-
-    return optimizelySDK.createInstance({
+    const optimizelyInstance = optimizelySDK.createInstance({
       sdkKey,
       datafileOptions: options
     })
+
+    return optimizelyInstance
+  }
+
+  _isActivated() {
+    if (!this._userId) return false
+    return true
   }
 
   getEnabledFeatures({attributes} = {}) {
@@ -41,7 +64,8 @@ export default class OptimizelyAdapter {
   }
 
   /**
-   * Activates an A/B test for the specified user to start an experiment: determines whether they qualify for the experiment, buckets a qualified user into a variation, and sends an impression event to Optimizely.
+   * Activates an A/B test for the specified user to start an experiment: determines whether they qualify for the experiment,
+   * buckets a qualified user into a variation, and sends an impression event to Optimizely.
    * More info: https://docs.developers.optimizely.com/full-stack/docs/activate-javascript-node
    * @param {Object} params
    * @param {string} params.name
@@ -49,18 +73,8 @@ export default class OptimizelyAdapter {
    * @returns {string} variation name
    */
   activateExperiment({name, attributes}) {
-    if (!this._userId) return 'default'
+    if (!this._isActivated()) return 'default'
     return this._optimizely.activate(name, this._userId, attributes)
-  }
-
-  /**
-   * Tracks a conversion event. Logs an error message if the specified event key doesn't match any existing events.
-   * More info: https://docs.developers.optimizely.com/full-stack/docs/track-javascript-node
-   * @param {Object} params
-   * @param {string} params.name
-   */
-  trackExperiment({name}) {
-    return this._optimizely.track(name, this._userId)
   }
 
   onReady() {
