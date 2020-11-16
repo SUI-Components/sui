@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 /* global Element */
 
 if (typeof window !== 'undefined') {

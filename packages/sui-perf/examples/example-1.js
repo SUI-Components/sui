@@ -8,7 +8,7 @@ const asyncTask = time => new Promise(resolve => setTimeout(resolve, time))
 
 export default ({mark, stop, measure, getEntries}) => {
   mark('Example 1 - async')
-  var promise = asyncTask(100)
+  const promise = asyncTask(100)
     .then(() => stop('Example 1 - async'))
     .then(() => console.log(getEntries()))
 

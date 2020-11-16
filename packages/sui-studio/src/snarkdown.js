@@ -42,8 +42,8 @@ export default function parse(md, prevLinks) {
   let t
 
   function tag(token) {
-    var desc = TAGS[token.replace(/\*/g, '_')[1] || '']
-    var end = context[context.length - 1] === token
+    const desc = TAGS[token.replace(/\*/g, '_')[1] || '']
+    const end = context[context.length - 1] === token
     if (!desc) return token
     if (!desc[1]) return desc[0]
     context[end ? 'pop' : 'push'](token)
@@ -125,18 +125,18 @@ export default function parse(md, prevLinks) {
     }
     // Table parser
     else if (token[18]) {
-      var l = token[18].split('\n')
-      var i = l.length
-      var table = ''
-      var r = 'td>'
+      const l = token[18].split('\n')
+      let i = l.length
+      let table = ''
+      let r = 'td>'
       while (i--) {
         if (l[i].match(/^\|\s+---+.*$/)) {
           r = 'th>'
           continue
         }
-        var c = l[i].split(/\|\s*/)
-        var j = c.length
-        var tr = ''
+        const c = l[i].split(/\|\s*/)
+        let j = c.length
+        let tr = ''
         while (j--) {
           tr = (c[j] ? `<${r + parse(c[j])}</${r}` : '') + tr
         }
