@@ -1,7 +1,16 @@
 import DefaultAdapter from './adapters/default'
 
 export default class PDE {
-  constructor({adapter = new DefaultAdapter()} = {}) {
+  /**
+   * @constructor
+   * @param {object} param
+   * @param {object} param.adapter
+   * @param {boolean} param.hasUserConsents
+   */
+  constructor({adapter, hasUserConsents = true} = {}) {
+    if (!adapter || !hasUserConsents) {
+      adapter = new DefaultAdapter()
+    }
     this._adapter = adapter
   }
 
@@ -11,9 +20,5 @@ export default class PDE {
 
   activateExperiment({name}) {
     return this._adapter.activateExperiment({name})
-  }
-
-  trackExperiment({name}) {
-    return this._adapter.trackExperiment({name})
   }
 }
