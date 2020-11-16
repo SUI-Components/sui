@@ -20,11 +20,7 @@ program
     'Path pattern to ignore for testing',
     false
   )
-  .option(
-    '--src-pattern <srcPattern>',
-    'Define the source directory',
-    'src/**/*.js'
-  )
+  .option('--src-pattern <srcPattern>', 'Define the source directory', false)
   .option('-T, --timeout <ms>', 'Timeout', 2000)
   .on('--help', () => {
     console.log('  Description:')
