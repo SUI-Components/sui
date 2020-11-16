@@ -37,7 +37,6 @@ program
 const {watch, ci, pattern, ignorePattern, srcPattern, timeout} = program
 runner({watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .then(output => {
-    console.log({watch})
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
   })
