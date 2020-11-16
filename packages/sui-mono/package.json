@@ -1,32 +1,30 @@
 {
   "name": "@s-ui/mono",
-  "version": "1.52.0",
+  "version": "1.61.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
     "sui-mono": "./bin/sui-mono.js"
   },
   "keywords": [
-    "schibsted",
     "commitizen",
     "release"
   ],
-  "author": "Ignacio Tolstoy <ignacio.tolstoy@scmspain.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
-    "@tunnckocore/execa": "5.2.7",
     "colors": "1.4.0",
-    "commander": "4.1.0",
-    "commitizen": "4.0.3",
-    "conventional-changelog": "3.1.18",
-    "execa": "3.4.0",
-    "figures": "3.1.0",
-    "git-url-parse": "11.1.2",
-    "log-update": "3.3.0",
-    "p-queue": "6.2.1",
-    "rimraf": "3.0.0"
+    "commander": "6.1.0",
+    "commitizen": "4.2.1",
+    "conventional-changelog": "3.1.23",
+    "execa": "4.0.3",
+    "figures": "3.2.0",
+    "git-url-parse": "11.3.0",
+    "log-update": "4.0.0",
+    "p-queue": "6.6.1",
+    "rimraf": "3.0.2"
   },
   "repository": {
     "type": "git",

@@ -13,7 +13,7 @@
     "tags",
     "service"
   ],
-  "author": "Enablers frontend",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "just-debounce-it": "1.1.0"

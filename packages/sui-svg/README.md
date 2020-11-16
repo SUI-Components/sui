@@ -1,10 +1,10 @@
 # sui-svg
 
-> Converts your SVG files into React Components wrapped with [SuiAtomIcon](https://sui-components.now.sh/workbench/atom/icon/demo).
+> Converts your SVG files into React Components wrapped with [@s-ui/atom-icon](https://sui-components.now.sh/workbench/atom/icon/demo).
 
 Features:
-- CLI for building the components
-- CLI for showing up a demo locally
+- Building the components
+- Showing up a demo locally
 
 ## Installation
 

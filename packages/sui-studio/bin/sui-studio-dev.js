@@ -7,7 +7,7 @@ const webpack = require('webpack')
 const config = require('@s-ui/bundler/webpack.config.dev')
 const startDevServer = require('@s-ui/bundler/bin/sui-bundler-dev')
 
-const {componentsFullPath} = require('../bin/walker')
+const {componentsFullPath} = require('./helpers/walker')
 
 const {PWD} = process.env
 

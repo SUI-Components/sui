@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import snarkdown from '../../snarkdown'
 
@@ -13,7 +12,6 @@ export default function Markdown({content}) {
   )
 }
 
-Markdown.displayName = 'Markdown'
 Markdown.propTypes = {
   content: PropTypes.string
 }

@@ -40,7 +40,12 @@ module.exports = (config, allowedHost) => ({
   },
   public: allowedHost,
   before(app) {
+    // This lets us open files from the runtime error overlay.
     app.use(errorOverlayMiddleware())
+  },
+  after(app) {
+    // This service worker file is effectively a 'no-op' that will reset any
+    // previous service worker registered for the same host:port combination.
     app.use(noopServiceWorkerMiddleware(config.output.publicPath))
   }
 })

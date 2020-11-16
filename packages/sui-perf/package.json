@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/perf",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Utilities to measure and monitor perf of your isomorphic apps.",
   "main": "lib/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "prepare": "npm run lib"
   },
   "keywords": [],
-  "author": "David Almeida <davidbarna@gmail.com>",
+  "author": "",
   "dependencies": {
     "colors": "1.1.2",
     "marky": "1.2.0"
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-perf#readme",
   "peerDependencies": {
-    "react": "16",
-    "react-dom": "16"
+    "react": "16 || 17",
+    "react-dom": "16 || 17"
   }
 }

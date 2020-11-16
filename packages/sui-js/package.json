@@ -1,17 +1,17 @@
 {
   "name": "@s-ui/js",
-  "version": "2.17.0",
+  "version": "2.18.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
-  "author": "Joan Claret <dpam23@gmail.com>",
+  "author": "",
   "dependencies": {
     "bowser": "1.8.1",
     "cookie": "0.3.1",
-    "htmr": "0.7.0",
+    "htmr": "0.8.8",
     "js-cookie": "2.1.4",
     "just-camel-case": "4.0.2",
     "just-capitalize": "1.0.0",

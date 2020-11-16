@@ -1,8 +1,7 @@
 /* eslint no-console:0 */
-require('util.promisify/shim')()
+
 const program = require('commander')
 const path = require('path')
-const {shell} = require('@tunnckocore/execa')
 const config = require('../src/config')
 const checker = require('../src/check')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
@@ -17,6 +16,7 @@ program
   .option('-T, --github-token <token>', 'github token')
   .option('-U, --github-user <user>', 'github user')
   .option('-E, --github-email <email>', 'github email')
+  .option('--skip-ci', 'Add [skip ci] to release commit message', false)
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -67,11 +67,9 @@ const singlePackageRelease = ({status, packageScope}) =>
     .filter(scope => scope === packageScope)
     .map(scope => scopeMapper({scope, status}))
 
-const releaseEachPkg = ({pkg, code} = {}) => {
+const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
   return new Promise((resolve, reject) => {
-    if (code === 0) {
-      return resolve()
-    }
+    if (code === 0) return resolve()
 
     const isMonoPackage = config.isMonoPackage()
 
@@ -97,17 +95,22 @@ const releaseEachPkg = ({pkg, code} = {}) => {
     const publishCommands = [
       scripts.build && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
-      ['git', ['push', '--tags', 'origin', 'HEAD']]
+      ['git', ['push', '-f', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
 
     serialSpawn(releaseCommands, {cwd})
       .then(() => {
         // Create release commit
         const {version} = getPackageJson(cwd, true)
-        return serialSpawn(
-          [['git', [`commit -m "release(${packageScope}): v${version}"`]]],
-          {cwd}
-        )
+
+        // We're adding [skip ci] to the commit message to avoid
+        // start a build on CI if not needed
+        // docs: https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
+        const commitMsg = `release(${packageScope}): v${version}${
+          skipCI ? ' [skip ci]' : ''
+        }`
+
+        return serialSpawn([['git', [`commit -m "${commitMsg}"`]]], {cwd})
       })
       .then(() => serialSpawn(docCommands))
       .then(() => {
@@ -129,11 +132,11 @@ const releaseMode = packageScope ? singlePackageRelease : releasesByPackages
 
 const checkIsMasterBranchActive = async ({status, cwd}) => {
   try {
-    const output = await exec(`git rev-parse --abbrev-ref HEAD`, {
+    const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
       cwd
     })
 
-    if (output.stdout.trim() === 'master') {
+    if (stdout.trim() === 'master') {
       return Promise.resolve(status)
     } else {
       throw new Error(
@@ -147,32 +150,25 @@ const checkIsMasterBranchActive = async ({status, cwd}) => {
   }
 }
 
-const execute = async (cmd, full) => {
-  try {
-    console.log('--->', cmd)
-    const [resp] = await shell(cmd)
-    const output = full ? resp : resp.stdout
-    console.log(output)
-    return output
-  } catch (e) {
-    const output = full ? e : e.stderr
-    console.log(output)
-    return e
-  }
-}
-
 const automaticRelease = async ({
   githubToken,
   githubUser,
   githubEmail,
   cwd
 }) => {
-  const repoURL = await execute('git config --get remote.origin.url')
+  const {stdout} = await exec('git config --get remote.origin.url', {cwd})
+  const repoURL = stdout.trim()
   const gitURL = gitUrlParse(repoURL).toString('https')
   const authURL = new URL(gitURL)
   authURL.username = githubToken
 
-  await exec(`git pull --unshallow`, {cwd})
+  const {
+    stdout: rawIsShallowRepository
+  } = await exec('git rev-parse --is-shallow-repository', {cwd})
+  const isShallowRepository = rawIsShallowRepository === 'true'
+
+  if (isShallowRepository) await exec(`git pull --unshallow --quiet`, {cwd})
+
   await exec(`git config --global user.email "${githubEmail}"`, {cwd})
   await exec(`git config --global user.name "${githubUser}"`, {cwd})
   await exec('git remote rm origin', {cwd})
@@ -188,7 +184,7 @@ const isAutomaticRelease = ({githubToken, githubUser, githubEmail}) => {
 checker
   .check()
   .then(async status => {
-   const {githubEmail, githubToken, githubUser} = program
+    const {githubEmail, githubToken, githubUser} = program
     isAutomaticRelease({
       githubEmail,
       githubToken,
@@ -207,11 +203,15 @@ checker
   .then(releases =>
     releases
       .filter(({code}) => code !== 0)
-      .map(release => () => releaseEachPkg(release))
+      .map(release => () => releaseEachPkg(release, {skipCI: program.skipCi}))
       // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
       .reduce(
         (m, p) => m.then(v => Promise.all([...v, p()])),
         Promise.resolve([])
       )
   )
-  .catch(console.log.bind(console))
+  .catch(err => {
+    console.error('[sui-mono release] ERROR:')
+    console.error(err)
+    process.exit(1)
+  })

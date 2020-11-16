@@ -2,6 +2,232 @@
 
 All notable changes to this project will be documented in this file.
 
+# 9.15.0 (2020-11-11)
+
+
+### Bug Fixes
+
+* add missing import React from react for Raw component ([15fdc2f](https://github.com/SUI-Components/sui/commit/15fdc2f4239e808391eeb20a987a91441ea1dd77))
+* fix themes on dev mode ([4f164f1](https://github.com/SUI-Components/sui/commit/4f164f1da5bfe122234fe10337d9c7dc5b429952))
+
+
+
+# 9.13.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* ignore test folder to publish ([68a0daa](https://github.com/SUI-Components/sui/commit/68a0daa0c3316e0558d295e16df875d07fe2d344))
+
+
+
+# 9.12.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* better support for extracting displayName ([451ff04](https://github.com/SUI-Components/sui/commit/451ff04779894239cc0cd3c85033bd10d145ba4d))
+
+
+### Features
+
+* add again babel-cli to sui-studio ([7fe7019](https://github.com/SUI-Components/sui/commit/7fe7019efcb3a1f336b2b156eaf8da19d3d10b00))
+* avoid importing React and use peerDependencies instead of dependencies ([1ac6982](https://github.com/SUI-Components/sui/commit/1ac69821601fd5b277b47573ca05ffd92e737945))
+* fix missing variable ([fbd8d6c](https://github.com/SUI-Components/sui/commit/fbd8d6c2bfd324008a7b43381f6208500eee6466))
+* use latest sui-bundler ([67b1ee6](https://github.com/SUI-Components/sui/commit/67b1ee615e8873937067dfb9cff117a58a041995))
+* use new react/jsx ([1882a94](https://github.com/SUI-Components/sui/commit/1882a943eab1c0e82e7d76c90ac9c57e97f39ee5))
+
+
+
+# 9.9.0 (2020-10-19)
+
+
+### Features
+
+* use native prepare script instead build ([6eaabc9](https://github.com/SUI-Components/sui/commit/6eaabc9385c6886ac34ec9d7e76599c315ed9e4e))
+
+
+
+# 9.8.0 (2020-10-19)
+
+
+
+# 9.7.0 (2020-10-16)
+
+
+### Bug Fixes
+
+* some api doc tabs not working fine ([4333233](https://github.com/SUI-Components/sui/commit/4333233e9191e4bbb1697733c1fbbbd58b7549c7))
+* theme not charged when changing between components despite of presenting it selecte ([918d2c9](https://github.com/SUI-Components/sui/commit/918d2c9bcbe53106851a9a60254fa94485c59f46))
+
+
+
+# 9.6.0 (2020-10-05)
+
+
+### Features
+
+* separate enormeus chunk in smaller ones to improve build and avoid crash ([6ab2cb1](https://github.com/SUI-Components/sui/commit/6ab2cb1e0268a9944f2ea982803c4ccae9e515a4))
+
+
+
+# 9.5.0 (2020-10-02)
+
+
+### Features
+
+* use better chunk naming to avoid twice js ([53a8ace](https://github.com/SUI-Components/sui/commit/53a8ace1978cd43538d428f36c6ab8095f18595b))
+
+
+
+# 9.4.0 (2020-10-01)
+
+
+### Features
+
+* improve chunk names to understand better what we're bundling ([0b0c371](https://github.com/SUI-Components/sui/commit/0b0c3716523398196fd229dd207d52c1713d27f0))
+
+
+
+# 9.3.0 (2020-09-30)
+
+
+### Features
+
+* add more verbose errors on studio regarding tests ([8583f45](https://github.com/SUI-Components/sui/commit/8583f454766553ccf8cc9fb7c61804de29d0967b))
+* use new sui-test major ([2172b61](https://github.com/SUI-Components/sui/commit/2172b61899d4c5504243a71db623558c61b2e225))
+
+
+
+# 9.2.0 (2020-09-30)
+
+
+### Bug Fixes
+
+* more resilient way to get Component.displayName ([ebdf2a7](https://github.com/SUI-Components/sui/commit/ebdf2a72dfb4a2e9f1d8a574054ac55b1bc15776))
+
+
+
+# 9.1.0 (2020-09-30)
+
+
+### Features
+
+* add reusable way to add context to components ([0fd6113](https://github.com/SUI-Components/sui/commit/0fd6113ac8f0a55ea037a9c6fcae8276f86ded85))
+* reuse context method ([90eedb2](https://github.com/SUI-Components/sui/commit/90eedb2e4217d2b8f0bcc3b8ea5af719471c78bd))
+* simplify patcher mocha ([50ce50b](https://github.com/SUI-Components/sui/commit/50ce50b0702be1c9a7c9833527f41cc09450b392))
+* simplify runtime mocha ([f577692](https://github.com/SUI-Components/sui/commit/f577692551cc7a4436c2edef36001e35504c1aaf))
+* stop using deprecated context ([f523613](https://github.com/SUI-Components/sui/commit/f523613ace9ef4f2017832abd56ed8097175d04b))
+* stop using old withContext utility ([8935e03](https://github.com/SUI-Components/sui/commit/8935e03ee010e341c4f2d577b976e5772fbc8159))
+
+
+
+# 9.0.0 (2020-09-28)
+
+
+### Features
+
+* copy UXDEF static file ([9b52ad0](https://github.com/SUI-Components/sui/commit/9b52ad0a3072958d5e1bd98e82ecb40d95159776))
+* move test page to workbench, only way to use it in browser ([0c8bade](https://github.com/SUI-Components/sui/commit/0c8bade69ef0548cd8830d62b3ad004fd0e6437d))
+* remove Test Page ([e2bac50](https://github.com/SUI-Components/sui/commit/e2bac50399f89662ba6d81a37cc3c8e11f01f8a9))
+* remove test page for sui-studio build ([706eeb0](https://github.com/SUI-Components/sui/commit/706eeb0f9111bddfe24e183f27af8c60aa22cd97))
+* stop using deprecated parameter of sui-bundler ([d41de16](https://github.com/SUI-Components/sui/commit/d41de16782c4f1d9722b1ba09fe87c4f3e6f680c))
+* upgrade test page import from workbench dev ([af7a2c9](https://github.com/SUI-Components/sui/commit/af7a2c951c35e9a080bb8730be9b56712486103b))
+
+
+### Performance Improvements
+
+* improve performance by using preval instead bundling ([36bb012](https://github.com/SUI-Components/sui/commit/36bb012b2931178339330c3e9a02b245fa025ae5))
+
+
+
+# 8.26.0 (2020-09-25)
+
+
+### Bug Fixes
+
+* fix eternal loop in API pages because wront useEffect ([b395f2b](https://github.com/SUI-Components/sui/commit/b395f2b8ea243afa89d508f02f53f5e4759d5abb))
+
+
+### Features
+
+* add dependencies a reuse vendor ([aafaded](https://github.com/SUI-Components/sui/commit/aafadedf9a331a6865642cc2a9483d53378f9cd4))
+* better way of getting global object ([8ce0e52](https://github.com/SUI-Components/sui/commit/8ce0e5263b3b1cb5cbe2ccbb4b0444ae1cad4262))
+* fetch instead bundling ([067a281](https://github.com/SUI-Components/sui/commit/067a281cbab86fe7f20b71c3ed53dbdf95c43e88))
+* fetch static files instead bundling them ([5fc0dce](https://github.com/SUI-Components/sui/commit/5fc0dcedbacc1dea953a6f74cf5a8bb5830fb3f7))
+* import from codeMirror only what's needed ([cd5daa9](https://github.com/SUI-Components/sui/commit/cd5daa91c686af3f7b38901c398c82a6cc098a8c))
+* merge root to index to simplify ([2375240](https://github.com/SUI-Components/sui/commit/2375240dad01908571befaea48ebb1461d3f2679))
+* minor tweaks to styles ([fc4711e](https://github.com/SUI-Components/sui/commit/fc4711e61817b098545cde948291acd07c0ff3d1))
+* remove event object not needed ([d486ada](https://github.com/SUI-Components/sui/commit/d486ada841716944fbc8275d35fe4bffa25e3bed))
+* remove not used clean modules command ([61ea6df](https://github.com/SUI-Components/sui/commit/61ea6dfdb3fead28699a785b51e062fa4be084c6))
+* remove not used parameter ([cfbcf8f](https://github.com/SUI-Components/sui/commit/cfbcf8f4dc6f3b0c59a0a2c89a9a70980fd21c11))
+* remove require.ensure and old require.context ([891d30a](https://github.com/SUI-Components/sui/commit/891d30ac914502e18d7b9d4c3f348e298c67cd1a))
+* remove terminal banner and fs.realpath dependencies not needed ([9668525](https://github.com/SUI-Components/sui/commit/9668525d92788efe6c92ec3c0d3c7e8b5f4d954f))
+* stop using pipe as it's not needed ([3eebb37](https://github.com/SUI-Components/sui/commit/3eebb3733ac72dd77683258ad4105098e8bae6f4))
+* upgrade dependencies. Mostly sui-bundler major. ([4a85be1](https://github.com/SUI-Components/sui/commit/4a85be14f7efcfb1eb58ae4fa4c65280cd00b3d0))
+* upgrade raw-loader to latest version ([e801f94](https://github.com/SUI-Components/sui/commit/e801f945ce0ba53e36b969df6d5c8cf3e0b0265d))
+* use copyStaticFiles to avoid raw-loader for static files ([b3a6d5d](https://github.com/SUI-Components/sui/commit/b3a6d5d1f5960c8ff89ca7ed664f8670f445d891))
+* use fetch static instead bundling ([9042d5a](https://github.com/SUI-Components/sui/commit/9042d5a173cb41754073aab628bcb8192bb743b9))
+* use major for new sui-studio ([c647caa](https://github.com/SUI-Components/sui/commit/c647caad3c559ad0981fecabfd93a3fe2b04af55))
+* use new dev styling ([c1fd37a](https://github.com/SUI-Components/sui/commit/c1fd37a12ae5bb539db3a0ad1678d5830ea0027b))
+
+
+### BREAKING CHANGES
+
+* Stop supporting jsx file extensions
+
+
+
+# 8.25.0 (2020-08-31)
+
+
+### Bug Fixes
+
+* check for the test folder ([472d621](https://github.com/SUI-Components/sui/commit/472d621d973af5bee213e9978201174b05bcbad8))
+
+
+
+# 8.24.0 (2020-08-27)
+
+
+### Features
+
+* change studio build option for before build command ([7802d34](https://github.com/SUI-Components/sui/commit/7802d3402e2a0c382c9376ea4b823f8b38956be0))
+* upgrade readme ([900ca74](https://github.com/SUI-Components/sui/commit/900ca746a89326124053e7d03ef8c1ffe545e04a))
+
+
+
+# 8.23.0 (2020-08-27)
+
+
+### Features
+
+* create a config ([89f966c](https://github.com/SUI-Components/sui/commit/89f966c8772abbdb94dbb119559cd865ddae792e))
+* make studio build work with only changed components ([b65c732](https://github.com/SUI-Components/sui/commit/b65c7327b99afd1e6ab9a6c5cd68b898b85c0274))
+* update readme ([19d47da](https://github.com/SUI-Components/sui/commit/19d47da3c2165882a377a194e2cc92c7db565fac))
+
+
+
+# 8.22.0 (2020-08-24)
+
+
+### Features
+
+* bump version ([555396c](https://github.com/SUI-Components/sui/commit/555396c7e68326dde60479b9a24dc5c2fc919db5))
+* bump version ([bfed547](https://github.com/SUI-Components/sui/commit/bfed547ccf5025824ed8b3b7ee479db78cdbed80))
+* fix tests ([0368706](https://github.com/SUI-Components/sui/commit/03687067e1c635561026b1383b477f70626463e4))
+
+
+
+# 8.18.0 (2020-07-30)
+
+
+### Bug Fixes
+
+* fix environment target ([7e745d4](https://github.com/SUI-Components/sui/commit/7e745d466942669a811517cd89f0850c2ad54065))
+
+
+
 # 8.17.0 (2020-07-30)
 
 

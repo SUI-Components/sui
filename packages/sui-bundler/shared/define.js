@@ -6,10 +6,9 @@ if (process.platform === 'win32') {
   process.env.PWD = process.cwd()
 }
 
-const defaults = {
-  __DEV__: false,
-  __BASE_DIR__: JSON.stringify(process.env.PWD)
-}
-
 module.exports = (vars = {}) =>
-  new webpack.DefinePlugin(Object.assign({}, defaults, vars))
+  new webpack.DefinePlugin({
+    __DEV__: false,
+    __BASE_DIR__: JSON.stringify(process.env.PWD),
+    ...vars
+  })

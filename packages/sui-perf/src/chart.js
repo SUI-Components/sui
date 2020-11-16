@@ -32,7 +32,7 @@ const getEndTime = entries => {
 const getHighest = (num1, num2) => (num1 > num2 ? num1 : num2)
 
 const getTextRow = layout => {
-  var pads = layout.map(num => padEmpty(num))
+  const pads = layout.map(num => padEmpty(num))
   return cells => {
     return cells.map((cell, idx) => pads[idx](cell)).join(' ')
   }

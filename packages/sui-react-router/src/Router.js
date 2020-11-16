@@ -1,4 +1,4 @@
-import React, {createElement as h, useState, useEffect} from 'react'
+import {createElement as h, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import {routes, components} from './internal/PropTypes'

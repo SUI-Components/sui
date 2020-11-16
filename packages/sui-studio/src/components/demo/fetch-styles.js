@@ -1,50 +1,55 @@
 /* eslint no-console:0 */
 /* global __BASE_DIR__ */
 
-const reqThemePlayGround = require.context(
+const requireAvailableThemes = require.context(
   `!css-loader!sass-loader!${__BASE_DIR__}/demo`,
   true,
-  /^.*\/themes\/.*\.scss/
+  /^.*\/themes\/.*\.scss/,
+  'lazy'
 )
-const reqComponentsSCSS = require.context(
+const requireComponentStyles = require.context(
   `!css-loader!sass-loader!${__BASE_DIR__}/components`,
   true,
-  /^\.\/\w+\/\w+\/src\/index\.scss/
+  /^\.\/\w+\/\w+\/src\/index\.scss/,
+  'lazy'
 )
 
 export const themesFor = ({category, component}) =>
-  reqThemePlayGround
+  requireAvailableThemes
     .keys()
     .filter(p => p.includes(`${category}/${component}/`))
     .map(p => p.replace(`./${category}/${component}/themes/`, ''))
     .map(p => p.replace('.scss', ''))
 
-export default /* stylesFor */ ({category, component, withTheme = 'default'}) =>
-  new Promise(resolve => {
-    const componentPath = `${category}/${component}`
-    console.groupCollapsed(
-      `[sui-studio] Applying new styles for ${componentPath}`
-    )
-    try {
-      console.info('withTheme: ', withTheme)
+export default /* stylesFor */ async ({
+  category,
+  component,
+  withTheme = 'default'
+}) => {
+  const componentPath = `${category}/${component}`
+  const isDefaultTheme = withTheme === 'default'
 
-      const stylePath =
-        withTheme === 'default'
-          ? `./${componentPath}/src/index.scss`
-          : `./${componentPath}/themes/${withTheme}.scss`
+  console.info(
+    `[sui-studio] Applying new styles for ${componentPath} with theme: ${withTheme}`
+  )
 
-      const style =
-        withTheme === 'default'
-          ? reqComponentsSCSS(stylePath)
-          : reqThemePlayGround(stylePath)
+  // if we're not using any theme, we load the default styles from the component itself
+  // if we've selected a theme, we load the styles for that specific theme
+  const stylePath = isDefaultTheme
+    ? `./${componentPath}/src/index.scss`
+    : `./${componentPath}/themes/${withTheme}.scss`
 
-      console.info('style path: ', stylePath)
-      console.info('style to inject: ', style)
+  // use the correct require method to extract the expected styles
+  const requireLazyStyles = isDefaultTheme
+    ? requireComponentStyles
+    : requireAvailableThemes
 
-      resolve(style)
-    } catch (e) {
-      console.error(e)
-      console.warn(`No styles for ${category}/${component}`)
-    }
-    console.groupEnd()
-  })
+  try {
+    // extract the `default` property from the ESModule from lazy required styles
+    const {default: style} = await requireLazyStyles(stylePath)
+    return style
+  } catch (e) {
+    console.warn(`No styles for ${category}/${component}`)
+    console.error(e)
+  }
+}

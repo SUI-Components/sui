@@ -31,7 +31,7 @@ Add bundling scripts to your **package.json**
 
 ## Requirements for web app bundling
 
-node 6+ version is required.
+node 12 version is required.
 
 ### Folder structure
 
@@ -140,45 +140,37 @@ Then you can find your library directly in the provided namespace variable: `win
 
 ## Configuration
 
-This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside the package.json of your project.
+This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside a `config` property in the package.json of your project.
 
-`scripts` property accept ScriptExtHtmlWebpackPlugin config: https://github.com/numical/script-ext-html-webpack-plugin#configuration
-
-`manualCompression`: Compress files manually to gzip and brotli (if supported). Useful to use along with a S3 and Lambda@Edge in order to send the best content for the userAgent. (default: `false`)
+`extractComments`: Determine whether comments shall be extracted to a separate file or not. Like LICENSE comments. (default: `false`)
 
 `targets`: Object with information about the browser and version supported. (default: `see the next example`)
 
 ```json
 {
-  "sui-bundler": {
-    "onlyHash": "true",
-    "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
-    "vendor": ["react", "react-dom"],
-    "cdn": "https://url_to_me_cdn.com/",
-    "externals-manifest": "https://url_to_me_cdn/manifest.json",
-    "alias": {"react": "preact"},
-    "offline": true,
-    "manualCompression": true,
-    "targets": {
-      "chrome": "41",
-      "ie": "11",
-      "safari": "8",
-      "firefox": "60",
-      "ios": "8"
-    },
-    "externals": {
-      "jquery": "./node_modules/jquery/jquery.min.js"
-    },
-    "scripts": {
-      "prefetch": "low-priority-chunk.js",
-      "preload": ["page1.js", "page2.js"]
-    },
-    "sourcemaps": {
-      "dev": "cheap-module-eval-source-map",
-      "prod": "hidden-source-map"
-    },
-    "optimizations": {
-      "splitFrameworkOnChunk": true
+  "config": {
+    "sui-bundler": {
+      "onlyHash": "true",
+      "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
+      "vendor": ["react", "react-dom"],
+      "cdn": "https://url_to_me_cdn.com/",
+      "externals-manifest": "https://url_to_me_cdn/manifest.json",
+      "alias": {"react": "preact"},
+      "offline": true,
+      "targets": {
+        "chrome": "41",
+        "ie": "11",
+        "safari": "8",
+        "firefox": "60",
+        "ios": "8"
+      },
+      "sourcemaps": {
+        "dev": "cheap-module-eval-source-map",
+        "prod": "hidden-source-map"
+      },
+      "optimizations": {
+        "splitFrameworkOnChunk": true
+      }
     }
   }
 }
@@ -190,19 +182,9 @@ This tool works with zero configuration out the box but you could use some confi
 
 In windows system filenames with `~` could produce errors. To avoid that you can use the flag `onlyHash` in your configuration to go form names like `Home.123.js` to `123.js`. And that should solve the issue.
 
-## Offline
+## Offline and SW support
 
 Offline feature is deactivated by default. If you want to activate, you need to create the static `src/offline.html` file. No resource loaded by this page will be cached so watch out adding images or external scripts as they won't work in offline mode. You also need to configure a serviceWorker in the entry point of your app:
-
-Or you can setup several options:
-
-```json
-"offline":
-  "fallback": "index.html",
-}
-```
-
-Where fallback is the page that you want to serve when the requested page doesn't match any cache entry. In a SPA scenario, you will usually want to put `index.html` there.
 
 If you have the page "src/offline.html" in your project, but you have configured the option "fallback" in your package.json. The generated SW will manage the fallback and ignore your offline page.
 
@@ -216,25 +198,9 @@ register({
 
 You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
 
-If you're using Firebase, it's recommendable to not cache the file serviceWorker.js, adding this config to your `firebase.json`
-
-```json
-{
-  "hosting": {
-    "headers": [{
-       "source" : "/service-worker.js",
-       "headers" : [ {
-          "key" : "Cache-Control",
-          "value" : "no-cache"
-          }]
-        }]
-  }
-}
-```
-
 If you want to remove your ServiceWorker, you need to use the method `unregister`, the same way you used the `register` method before.
 
-### Caching
+### Only Caching
 
 It's possible to create a service worker that caches all static resources
 
@@ -247,32 +213,12 @@ There are two ways to activate the statics cache option:
 {
   "sui-bundler": {
     "offline": {
-      "staticsCacheOnly": true,
-      "runtime": [{
-        "urlPattern": "ms-mt--api-web\\.spain\\.schibsted\\.io",
-        "handler": "networkFirst"
-      },{
-        "urlPattern": "fonts\\.googleapis\\.com",
-        "handler": "fastest"
-      },{
-        "urlPattern": "prea\\.ccdn\\.es\/cnet\/contents\/media",
-        "handler": "cacheFirst",
-        "options": {
-          "cache": {
-            "name": "image-cache",
-            "maxEntries": 50
-          }
-      }}]
+      "staticsCacheOnly": true
     }
   }
 }
 ```
 > Statics will be cached but no offline page will be activated
-
-Runtime follows the (API of sw-toolbox)[https://github.com/GoogleChromeLabs/sw-toolbox].
-If you need to cache resources, but their url is dynamically generated during the use of the application, you can use the `offline.runtime` entry, to indicate which resources you want to store in the browser cache.
-
-This is an ideal place to store e.g. ad images or API responses. By combining this with fallback, you can get an offline total page experience.
 
 ## Externals Manifest
 If your are using an external CDN to store statics assets that are now managed by Webpack, like SVG or IMGs, you can create a manifest.json file in the root of your CDN (likehttps://spa-mock-statics.surge.sh/manifest.json`).
@@ -281,7 +227,7 @@ If you define the `externals-manifest` key in the config pointing to this link, 
 
 If in your CSS you have:
 
-```
+```css
 #app {
   color: blue;
   background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png') no-repeat scroll;
@@ -290,13 +236,13 @@ If in your CSS you have:
 
 After compile you will get:
 
-```
+```css
 #app{color:#00f;background:url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png) no-repeat scroll}
 ```
 
 Or if in your JS you have:
 
-```
+```jsx
 <img
   src={'https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.gif'}
 />
@@ -304,14 +250,15 @@ Or if in your JS you have:
 
 After compile will be:
 
-```
+```jsx
 <img src="https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.5daef216ab.gif">
 ```
 
 The main idea is have a long term caching strategy for the hashed files. But you **NEVER** must cache the `manifest.json` file.
 
 Create the manifest file is up to you, but your file must follow this schema.
-```
+
+```json
 {
   /images/favicon.ico: "/images/favicon.23f4ccc7ca.ico",
   /images/common/arrow-down.png: "/images/common/arrow-down.2d12edfb00.png",
@@ -320,21 +267,6 @@ Create the manifest file is up to you, but your file must follow this schema.
 ```
 
 > If you setup the `NODE_ENV=development` then this loaders will be disabled.
-## Externals
-
-It offers you a way to upload an external library to your project that you would normally put by hand in a tag script in the index.html file. It adds a reference in the index.html with a hash.
-
-## Hot Module Replacement - React
-
-It offers Hot Module Replacement out-of-the-box, you only have to follow [these instructions](https://webpack.js.org/guides/hot-module-replacement/#enabling-hmr) for your project.
-
-## Ignoring pre enforced loaders
-
-Use in case of generated code, for example
-
-```sh
-> sui-bundler dev --no-pre-loader
-```
 
 ## Configuring source map generation
 
@@ -360,6 +292,52 @@ Check all possible values accepted by webpack in the [devtool webpack docs](http
 You could tweak the performance of your bundle generation by using some flags provided in this config.
 
 `splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
+
+## Migrations
+
+### Migrate from v6 to v7
+
+- In order to keep same config object across all `sui` tools, `sui-bundler` config has been moved from package.json root to the `config` property.
+
+```json
+// before
+{
+  "sui-bundler": { /* config */ }
+}
+
+//now
+{
+  "config": {
+    "sui-bundler": { /* config */ }
+  }
+}
+```
+
+- As major `html-webpack-plugin` is being used, if you're using templates on your `index.html` to access chunks, you must change it to use `js` property instead `chunks`.
+
+```js
+// before
+const {app, vendor} = htmlWebpackPlugin.files.chunks
+// now
+const {app, vendor} = htmlWebpackPlugin.files.js
+```
+
+- `manualCompression` flag on your `sui-bundler` config is not longer supported and it will be ignored. No more manual compression are featured.
+
+- `scripts` config is not longer supported as `ScriptExtHtmlWebpackPlugin` is not longer used.
+
+- Deprecated usage of old service-worker based on `workbox` has been removed.
+
+- Now, only `.js` and `.json` extensions will be resolved if you ignore them on importing the file.
+
+```js
+// before
+import util from './util' // finally, any extension will be handled as we're using * as a fallback
+// after
+import util from './util' // only .js and .json files will be resolved
+```
+
+- `externals` config has been removed. Stop using `externals` for loading external scripts and just put your scripts in the `src/index.html` file or load by importing them in your app.
 
 ## Contributing
 

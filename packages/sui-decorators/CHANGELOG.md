@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.21.0 (2020-09-30)
+
+
+### Bug Fixes
+
+* export default cache to keep compatibility with file imports from outside ([a1d6848](https://github.com/SUI-Components/sui/commit/a1d684850951ac80d291fbd040d25c0c29d09a40))
+
+
+
+# 3.20.0 (2020-09-30)
+
+
+### Features
+
+* add cache clear support instead of delete ([9aa6fbe](https://github.com/SUI-Components/sui/commit/9aa6fbea77861704f5fb925228f1310ed60477ff))
+* add cache invalidation ([5c2a4ef](https://github.com/SUI-Components/sui/commit/5c2a4ef4444c24ad98315c2dfea70a183469f0b0))
+
+
+
 # 3.19.0 (2020-07-14)
 
 

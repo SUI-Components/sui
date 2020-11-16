@@ -112,11 +112,11 @@ assets`
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx rimraf ./lib && npm run build:js && npm run build:styles",
+    "prepare": "npx rimraf ./lib && npm run build:js && npm run build:styles",
     "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@s-ui/component-dependencies": "1"
   },${
     repository.url
@@ -140,8 +140,7 @@ assets`
 
   writeFile(
     COMPONENT_ENTRY_JS_POINT_FILE,
-    `import React from 'react'
-// import PropTypes from 'prop-types'
+    `// import PropTypes from 'prop-types'
 
 export default function ${componentInPascal}() {
   return (
@@ -235,7 +234,6 @@ return (<${componentInPascal} />)
 /* eslint react/jsx-no-undef:0 */
 /* eslint no-undef:0 */
 
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
@@ -246,7 +244,7 @@ chai.use(chaiDOM)
 describe('${componentInPascal}', () => {
   const Component = ${componentInPascal}
   const setup = setupEnvironment(Component)
-  
+
   it('should render without crashing', () => {
     // Given
     const props = {}
@@ -271,7 +269,7 @@ describe('${componentInPascal}', () => {
     expect(container.innerHTML).to.be.a('string')
     expect(container.innerHTML).to.not.have.lengthOf(0)
   })
-  
+
   it('example to be deleted', () => {
     // Example TO BE DELETED!!!!
 

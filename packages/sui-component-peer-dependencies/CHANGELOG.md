@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.9.0 (2020-10-21)
+
+
+### Bug Fixes
+
+* avoid installing react-dom@17 ([585b696](https://github.com/SUI-Components/sui/commit/585b6966dee18fd52cf44c9921ca6bab4829918a))
+
+
+
 # 1.8.0 (2020-03-13)
 
 

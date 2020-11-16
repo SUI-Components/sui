@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
-import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import SUIContext from '@s-ui/react-context'
-import withContext from '../demo/HoC/withContext'
-import {addSetupEnvironment} from '../../environment-mocha/setupEnvironment'
-import {cleanDisplayName} from '../demo/utilities'
+import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment'
+import {
+  addReactContextToComponent,
+  extractDisplayName
+} from '../../../../src/components/utils'
 
 addSetupEnvironment(window)
 
@@ -25,6 +25,7 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   useEffect(() => {
     importComponent().then(async module => {
       const Component = module.default || module
+      const displayName = extractDisplayName(Component)
 
       const nextContexts =
         typeof contexts !== 'function' ? contexts : await contexts()
@@ -32,39 +33,18 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       window.__STUDIO_CONTEXTS__ = nextContexts
       window.__STUDIO_COMPONENT__ = Component
 
-      const EnhanceComponent = withContext(
-        nextContexts.default,
-        nextContexts
-      )(Component)
-      !EnhanceComponent.displayName &&
-        console.error('[sui-Test] Component without displayName') // eslint-disable-line
+      const {default: context} = nextContexts
 
-      const NextComponent = props => (
-        <SUIContext.Provider value={nextContexts.default}>
-          <EnhanceComponent {...props} />
-        </SUIContext.Provider>
-      )
-      hoistNonReactStatics(NextComponent, Component)
-
-      const displayName = cleanDisplayName(EnhanceComponent.displayName)
-      NextComponent.displayName = displayName
+      const NextComponent = addReactContextToComponent(Component, {context})
       window[displayName] = NextComponent
 
       importTest()
-        .then(() => {
-          window.mocha.run(failures => {
-            setFailures(failures)
-          })
-        })
-        .catch(() => {
-          setNotFoundTest(true)
-        })
+        .then(() => window.mocha.run(setFailures))
+        .catch(() => setNotFoundTest(true))
     })
   }, [contexts, importComponent, importTest])
 
-  if (notFoundTest) {
-    return <h1>Not found test</h1>
-  }
+  if (notFoundTest) return <h1>No tests found</h1>
 
   return (
     <div className={classnames}>
@@ -73,7 +53,6 @@ const Test = ({open, importTest, importComponent, contexts}) => {
   )
 }
 
-Test.displayName = 'Test'
 Test.propTypes = {
   contexts: PropTypes.object,
   importComponent: PropTypes.func,

@@ -19,7 +19,6 @@ module.exports = {
           ]
         ]
       }
-    },
-    require.resolve('source-map-loader')
+    }
   ]
 }

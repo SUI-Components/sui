@@ -1,9 +1,8 @@
 /* eslint no-console: 0 */
-import PropTypes from 'prop-types'
-import {transform} from '@babel/standalone'
 import React, {Component} from 'react'
-
+import PropTypes from 'prop-types'
 import SUIContext from '@s-ui/react-context'
+import {transform} from '@babel/standalone'
 
 const TRANSFORM_PRESETS = {
   presets: ['es2015-loose', 'stage-3', 'react']

@@ -12,11 +12,10 @@ const EMPTY_STUDIO_PATH = path.join(__dirname, 'integration', 'empty-studio')
 const safeRemoveDir = uri => {
   try {
     fs.rmdirSync(uri, {recursive: true})
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 
-describe('[Integration] sui-studio', () => {
+describe.skip('[Integration] sui-studio', () => {
   it('Should compile and build a static version with one component', async function() {
     this.timeout(0)
 
@@ -82,7 +81,7 @@ describe('[Integration] sui-studio', () => {
 
       const {
         stdout: stdoutStudioGenerate,
-        stderr: stderrStudioGenerate
+        stderr: stderrStudioGenerate // eslint-disable-line
       } = await exec(
         `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-generate.js" -P tst -S t-est fake component`,
         {
@@ -114,8 +113,7 @@ describe('[Integration] sui-studio', () => {
           ),
           'utf8'
         )
-      ).to.be.eql(`import React from 'react'
-// import PropTypes from 'prop-types'
+      ).to.be.eql(`// import PropTypes from 'prop-types'
 
 export default function FakeComponent() {
   return (
@@ -171,17 +169,60 @@ FakeComponent.propTypes = {}
           ),
           'utf8'
         )
-      ).to.be.eql(`import React from 'react'
+      ).to.be.eql(`/*
+ * Remember: YOUR COMPONENT IS DEFINED GLOBALLY
+ * */
+
+/* eslint react/jsx-no-undef:0 */
+/* eslint no-undef:0 */
+
+import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
-import {render} from '@testing-library/react'
 
 chai.use(chaiDOM)
 
 describe('FakeComponent', () => {
-  it('Render', () => {
-    render(<FakeComponent />)
+  const Component = FakeComponent
+  const setup = setupEnvironment(Component)
+
+  it('should render without crashing', () => {
+    // Given
+    const props = {}
+
+    // When
+    const component = <Component {...props} />
+
+    // Then
+    const div = document.createElement('div')
+    ReactDOM.render(component, div)
+    ReactDOM.unmountComponentAtNode(div)
+  })
+
+  it('should NOT render null', () => {
+    // Given
+    const props = {}
+
+    // When
+    const {container} = setup(props)
+
+    // Then
+    expect(container.innerHTML).to.be.a('string')
+    expect(container.innerHTML).to.not.have.lengthOf(0)
+  })
+
+  it('example to be deleted', () => {
+    // Example TO BE DELETED!!!!
+
+    // Given
+    // const props = {}
+
+    // When
+    // const {getByRole} = setup(props)
+
+    // Then
+    // expect(getByRole('button')).to.have.text('HOLA')
     expect(true).to.be.eql(false)
   })
 })

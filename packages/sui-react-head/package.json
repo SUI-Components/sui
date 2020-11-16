@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -14,16 +14,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-head": "3.3.0"
+    "react-head": "3.4.0"
   },
   "devDependencies": {
-    "@s-ui/test": "2",
-    "@testing-library/react": "9.5.0",
-    "react": "16",
-    "react-dom": "16"
+    "@s-ui/test": "4",
+    "@testing-library/react": "11.1.0",
+    "react": "17",
+    "react-dom": "17"
   },
   "peerDependencies": {
-    "react": "16",
-    "react-dom": "16"
+    "react": "16 || 17",
+    "react-dom": "16 || 17"
   }
 }

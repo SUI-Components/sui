@@ -55,7 +55,7 @@ const createLink = () => {
 }
 
 const watch = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(() => {
     const babel = spawn('npm', ['run', 'babel', '--', '--watch'], {cwd: origin})
     babel.stdout.on('data', data =>
       console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`))

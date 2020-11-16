@@ -1,4 +1,3 @@
-import React from 'react'
 import {Route, Redirect} from '@s-ui/react-router'
 import Layout from './components/layout'
 import Workbench from './components/workbench'
@@ -8,7 +7,6 @@ import Api from './components/documentation/Api'
 import MarkdownFile from './components/documentation/MarkdownFile'
 
 import {FILES} from './constants'
-import TestPage from './components/test-page/index'
 
 export default (
   <Route>
@@ -18,7 +16,6 @@ export default (
     />
     <Route path="/" component={Layout}>
       <Route path="workbench/:category/:component" component={Workbench}>
-        <Route path="test" component={TestPage} />
         <Route path="demo" component={Demo} />
         <Route path="documentation" component={Documentation}>
           <Route path="api" component={Api} />

@@ -2,6 +2,90 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.61.0 (2020-11-11)
+
+
+### Features
+
+* force tags pushing for avoiding a lot of problems from travis ([89e2f57](https://github.com/SUI-Components/sui/commit/89e2f5758b15066c53242089bad4ff7a7085722c))
+
+
+
+# 1.60.0 (2020-10-20)
+
+
+### Features
+
+* detect if should unshallow ([da591db](https://github.com/SUI-Components/sui/commit/da591db84811813f599efac95d46a7041fbd473b))
+
+
+
+# 1.59.0 (2020-10-01)
+
+
+### Features
+
+* remove not needed shim ([ae5c152](https://github.com/SUI-Components/sui/commit/ae5c152a3faf28dbc196d3e5e247df92b1474ad2))
+
+
+
+# 1.58.0 (2020-09-30)
+
+
+### Features
+
+* upgrade dependencies ([1e06aa6](https://github.com/SUI-Components/sui/commit/1e06aa6ab2c6444e3d8a52079eb282823981f134))
+
+
+
+# 1.57.0 (2020-09-30)
+
+
+### Features
+
+* add better logging ([01a4a19](https://github.com/SUI-Components/sui/commit/01a4a19ea5e1e02769efc1607551c4b5e8702da4))
+
+
+
+# 1.56.0 (2020-09-25)
+
+
+### Features
+
+* install dev dependencies on sui-mono as well ([36072ed](https://github.com/SUI-Components/sui/commit/36072edced687d0bbee84715343ebe86cc265823))
+
+
+
+# 1.55.0 (2020-09-25)
+
+
+### Features
+
+* enable again concurrent installs as npm bug is already fixed ([da8f1cf](https://github.com/SUI-Components/sui/commit/da8f1cf965e9096d8382634bcdf3bac3f360d2c3))
+
+
+
+# 1.54.0 (2020-09-18)
+
+
+### Features
+
+* add new flag to skip ci on release ([3f4e757](https://github.com/SUI-Components/sui/commit/3f4e757fb6788135f422eee04262ba097857ec33))
+
+
+
+# 1.53.0 (2020-09-17)
+
+
+### Features
+
+* better error logging ([5f4cc2a](https://github.com/SUI-Components/sui/commit/5f4cc2a87d3b44321ba8b4d78f356a66f0b3d113))
+* better handling of sui-mono release errors ([febfa81](https://github.com/SUI-Components/sui/commit/febfa81da6c49938c02001970dacf8c27869fb76))
+* remove @tunnckocore/execa dependency ([2307124](https://github.com/SUI-Components/sui/commit/23071246d79b32a005d7b5c05b1837c15472a767))
+* upgrade dependencies ([20ee5e7](https://github.com/SUI-Components/sui/commit/20ee5e761156f476245c693204b8bf41b2be8906))
+
+
+
 # 1.52.0 (2020-07-28)
 
 

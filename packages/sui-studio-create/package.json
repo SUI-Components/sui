@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio-create",
-  "version": "4.14.0",
+  "version": "4.17.0",
   "description": " CLI to create studios for sui components development.",
   "main": "src/index.js",
   "bin": {
@@ -9,16 +9,13 @@
   "preferGlobal": true,
   "keywords": [
     "SUIComponents",
-    "schibsted",
-    "reactjs"
+    "SUI Studio",
+    "SUI Studio Create"
   ],
-  "author": "David Almeida <davidbarna@gmail.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
-    "@s-ui/helpers": "1",
-    "colors": "1.4.0",
-    "commander": "4.1.0",
-    "fs-extra": "8.1.0"
+    "fs-extra": "9.0.1"
   },
   "repository": {
     "type": "git",

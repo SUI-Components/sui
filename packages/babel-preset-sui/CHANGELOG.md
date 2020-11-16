@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.16.0 (2020-11-11)
+
+
+### Features
+
+* add a way to disable ESModules to avoid mixing them on server tests ([80b2363](https://github.com/SUI-Components/sui/commit/80b236321b7edb6810b3cc46239352ade4edfe42))
+* upgrade dependencies ([9fc81da](https://github.com/SUI-Components/sui/commit/9fc81da5fc1b9d65dd46d929c7b98c395d233c83))
+
+
+
+# 3.14.0 (2020-10-21)
+
+
+### Features
+
+* support automatic jsx React import ([039a8ec](https://github.com/SUI-Components/sui/commit/039a8ecfd0456a7e97e29e6dbdcb6f7006a8d00b))
+
+
+
+# 3.13.0 (2020-10-14)
+
+
+### Features
+
+* cache babel config ([4c6ccad](https://github.com/SUI-Components/sui/commit/4c6ccad88d6e7b1e089caee2eec83bb5787ecb45))
+
+
+
+# 3.12.0 (2020-09-28)
+
+
+### Features
+
+* add babel-plugin-preval plugin to unlock some further optimizations to our c ([c7dcd5a](https://github.com/SUI-Components/sui/commit/c7dcd5a0f47bd7fe83f424d1bd37996e0dff3e07))
+
+
+
+# 3.11.0 (2020-09-17)
+
+
+### Features
+
+* simplify code and remove not needed files ([3d71d68](https://github.com/SUI-Components/sui/commit/3d71d682a4ff0668d9e99768aa50a0b0c4d31749))
+
+
+
+# 3.10.0 (2020-08-31)
+
+
+### Features
+
+* upgrade babel dependencies ([32ec90d](https://github.com/SUI-Components/sui/commit/32ec90d18cbb34b035b0bd6092af7d68a89965f3))
+
+
+
 # 3.9.0 (2020-07-06)
 
 

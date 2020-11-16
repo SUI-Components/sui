@@ -1,42 +1,26 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-
-require('fs.realpath').monkeypatch()
-
 const program = require('commander')
 const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
-const pkg = require('../package.json')
-
-const version = pkg.version
+const {version} = require('../package.json')
+const copyStaticFiles = require('./helpers/copyStaticFiles')
 
 program.version(version, '    --version')
 
 program
   .command('start')
   .alias('s')
-  .option(
-    '-d, --dir-base [dir]',
-    'Setup base dir where live src and demo folders',
-    '.'
-  )
-  .action(({dirBase}) => {
-    console.clear()
-    require('terminal-banner').terminalBanner(
-      'This command will be deprecated, please check `sui-studio dev --help` to develop new components'
-    )
+  .action(async () => {
+    console.info('[deprecated] Use `sui-studio dev` to develop components')
 
-    setTimeout(() => {
-      const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
-      getSpawnPromise(
-        devServerExec,
-        ['-c', path.join(__dirname, '..', 'src')],
-        {
-          shell: false,
-          env: process.env
-        }
-      ).then(process.exit, process.exit)
-    }, 3000)
+    await copyStaticFiles()
+
+    const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
+    const args = ['-c', path.join(__dirname, '..', 'src')]
+    getSpawnPromise(devServerExec, args, {
+      shell: false
+    }).then(process.exit, process.exit)
   })
 
 program.command('dev <component>', 'Develop an isolate component').alias('d')
@@ -49,10 +33,7 @@ program
   .alias('g')
 
 program
-  .command(
-    'build',
-    'Generate a static version ready to be deploy to now.sh or GH-Pages'
-  )
+  .command('build', 'Generate a static version ready to be deployed')
   .alias('b')
 
 program.command('commit', 'Commit with semantic messages.').alias('co')
@@ -84,10 +65,6 @@ program
   .alias('l')
 
 program.command('init <project>', 'Create a new project').alias('i')
-
-program
-  .command('clean-modules', 'Remove node_module folder in each component')
-  .alias('cm')
 
 program.command('test', 'Run studio tests').alias('t')
 

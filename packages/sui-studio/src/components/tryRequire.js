@@ -1,111 +1,83 @@
 /* global __BASE_DIR__ */
-const requireContextSrc = require.context(
-  `bundle-loader?lazy!${__BASE_DIR__}/components`,
-  true,
-  /^\.\/\w+\/\w+\/src\/index\.jsx?/
-)
 
-const requireContextRawSrc = require.context(
-  `!!bundle-loader?lazy!!raw-loader!${__BASE_DIR__}/components`,
-  true,
-  /^\.\/\w+\/\w+\/src\/index\.jsx?/
-)
-
-const tryRequireSrc = ({category, component, requireContext}) => {
-  return new Promise(resolve => {
-    require.ensure([], () => {
-      const indexFilePath = `./${category}/${component}/src/index.js`
-      const bundler = requireContext.keys().includes(indexFilePath)
-        ? requireContext(indexFilePath)
-        : requireContext(`${indexFilePath}x`) // try with jsx file
-      bundler(resolve)
-    })
-  })
-}
-
-export const requireFile = async ({
-  defaultValue,
+const safeImport = async ({
+  defaultValue = false,
   extractDefault = true,
   importFile
 }) => {
-  const file = await importFile().catch(_ => defaultValue)
+  const file = await importFile().catch(() => defaultValue)
   if (typeof file === 'undefined') {
     return Promise.reject(new Error('Error requiring file'))
   }
   return extractDefault && typeof file === 'object' ? file.default : file
 }
 
-export const tryRequireTest = async ({category, component}) => {
-  return requireFile({
-    extractDefault: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/test/${category}/${component}/index.js`)
-  })
-}
+const fetchStaticFile = path =>
+  window
+    .fetch(path)
+    .then(res => res.text())
+    // As we're working within a SPA, 404 routes return the index.html.
+    // So, we concatenate another `then` to check if we hit the
+    // index.html starting with <!DOCTYPE, to return false
+    .then(text => (text.startsWith('<!') ? false : text))
 
-export const tryRequireMarkdown = async ({category, component, file}) => {
-  return requireFile({
-    defaultValue: '',
-    importFile: () =>
-      import(
-        /* webpackExclude: /\/node_modules\/(.*)\/(\w+).md$/ */
-        `!raw-loader!${__BASE_DIR__}/components/${category}/${component}/${file}.md`
-      )
-  })
-}
+export const fetchComponentSrcRawFile = ({category, component}) =>
+  fetchStaticFile(`/components/${category}/${component}/src/index.js`)
 
-export const tryRequireRawSrc = ({category, component}) => {
-  return tryRequireSrc({
-    category,
-    component,
-    requireContext: requireContextRawSrc
-  })
-}
+export const fetchMarkdownFile = ({category, component, file}) =>
+  fetchStaticFile(`/components/${category}/${component}/${file}.md`)
 
-export const tryRequireCore = async ({category, component}) => {
-  const exports = tryRequireSrc({
-    category,
-    component,
-    requireContext: requireContextSrc
-  })
+export const fetchPlayground = ({category, component}) =>
+  fetchStaticFile(`/demo/${category}/${component}/playground`)
 
-  const pkg = requireFile({
-    defaultValue: {dependencies: {}},
-    importFile: () =>
-      import(
-        /* webpackExclude: /\/node_modules\/(.*)\/package.json$/ */
-        `${__BASE_DIR__}/components/${category}/${component}/package.json`
-      )
-  })
-
-  const playground = requireFile({
+export const importContexts = ({category, component}) =>
+  safeImport({
     defaultValue: false,
     importFile: () =>
       import(
-        `!raw-loader!${__BASE_DIR__}/demo/${category}/${component}/playground`
+        /* webpackChunkName: "context-[request]" */
+        `${__BASE_DIR__}/demo/${category}/${component}/context.js`
       )
   })
 
-  const demo = requireFile({
-    defaultValue: false,
+export const importReactComponent = ({
+  category,
+  component,
+  extractDefault = false
+}) =>
+  safeImport({
+    extractDefault,
     importFile: () =>
       import(
+        /* webpackChunkName: "src-[request]" */
+        /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
+        `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
+      )
+  })
+
+const importDemo = ({category, component}) =>
+  safeImport({
+    importFile: () =>
+      import(
+        /* webpackChunkName: "demo-[request]" */
         /* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
         `${__BASE_DIR__}/demo/${category}/${component}/demo/index.js`
       )
   })
 
-  const context = requireFile({
-    defaultValue: false,
+const importEvents = ({category, component}) =>
+  safeImport({
     importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/context.js`)
+      import(
+        /* webpackChunkName: "events-[request]" */
+        `${__BASE_DIR__}/demo/${category}/${component}/events.js`
+      )
   })
 
-  const events = requireFile({
-    defaultValue: false,
-    importFile: () =>
-      import(`${__BASE_DIR__}/demo/${category}/${component}/events.js`)
-  })
-
-  return Promise.all([exports, playground, context, events, pkg, demo])
-}
+export const importMainModules = params =>
+  Promise.all([
+    importReactComponent(params),
+    importContexts(params),
+    importEvents(params),
+    importDemo(params)
+  ])

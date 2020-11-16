@@ -1,10 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
+
 const prodConfig = require('@s-ui/bundler/webpack.config.prod')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const minifyJs = require('@s-ui/bundler/shared/minify-js')
-const {sourceMap} = require('@s-ui/bundler/shared/config')
 const {pipe, removePlugin} = require('./utils')
+
 const MAIN_ENTRY_POINT = './index.js'
 
 const requireOrDefault = path => {
@@ -41,21 +40,6 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
         : prodConfig.output.publicPath,
       jsonpFunction: `webpackJsonp-${page}`
     },
-    optimization: {
-      ...prodConfig.optimization,
-      minimizer: [
-        minifyJs(sourceMap),
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
-            zindex: false
-          }
-        })
-      ]
-    },
-    plugins: pipe(
-      removePlugin('HtmlWebpackPlugin'),
-      removePlugin('ScriptExtHtmlWebpackPlugin'),
-      removePlugin('PreloadWebpackPlugin')
-    )(prodConfig.plugins)
+    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(prodConfig.plugins)
   })
 }

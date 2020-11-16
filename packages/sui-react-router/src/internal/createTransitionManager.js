@@ -98,9 +98,8 @@ const createReducerRoutesTree = location => (acc, node) => {
       if (acc.remainingPathname === '') {
         acc.isFinished = checkIntegrity(acc.nodes)
       }
-
-      return acc
     }
+    return acc
   }
 
   if (pattern.charAt(0) === '/') {

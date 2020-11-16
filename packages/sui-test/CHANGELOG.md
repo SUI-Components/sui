@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+# 4.0.0 (2020-09-30)
+
+
+### Features
+
+* adap sui-test to use componentKey instead displayName ([ba33c39](https://github.com/SUI-Components/sui/commit/ba33c39c137df8f346939770cc2abab708357d6c))
+* use babel-cli from root instead dependency ([9dbcac5](https://github.com/SUI-Components/sui/commit/9dbcac55d3889ec7537487fd99b38251348f7c7a))
+
+
+### BREAKING CHANGES
+
+* New babel patch for describe.context test for studio
+
+
+
+# 3.4.0 (2020-09-02)
+
+
+### Features
+
+* add support to svg import on null-loader ([20449f0](https://github.com/SUI-Components/sui/commit/20449f06c2c9474947d1c86877c40b5413e8e3f2))
+
+
+
+# 3.3.0 (2020-08-25)
+
+
+### Bug Fixes
+
+* fix ci test errors ([27e33ed](https://github.com/SUI-Components/sui/commit/27e33ed8bbcfa78aa36fcdeb6210bd18935d8ff6))
+
+
+### Features
+
+* add null-loader ([b34324d](https://github.com/SUI-Components/sui/commit/b34324d88ce5dd3e31f6cacbe19215549eefcc01))
+
+
+
 # 3.2.0 (2020-06-23)
 
 

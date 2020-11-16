@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2.9.0 (2020-11-11)
+
+
+### Features
+
+* update README ([f894163](https://github.com/SUI-Components/sui/commit/f8941638a0fb43f2f5fe604524a9406bad4ce755))
+
+
+
+# 2.8.0 (2020-11-11)
+
+
+### Bug Fixes
+
+* fix linter errors ([20146dc](https://github.com/SUI-Components/sui/commit/20146dc769a93bc8cbd5664fbfe7807a07be4376))
+
+
+### Features
+
+* change README ([9cd2604](https://github.com/SUI-Components/sui/commit/9cd26041d97101ac3b9f271766eb8a835deb16ea))
+* use newest sui-bundler and avod importing React according to new jsx ([3edaa01](https://github.com/SUI-Components/sui/commit/3edaa012828f888ae227a3f994278fa2da6f706a))
+
+
+
+# 2.6.0 (2020-09-28)
+
+
+### Features
+
+* stop using deprecated no-pre-loader param ([93ce122](https://github.com/SUI-Components/sui/commit/93ce1227fc2956ea9862095dccae4e47bb480e28))
+
+
+
+# 2.5.0 (2020-09-16)
+
+
+### Features
+
+* upgrade to latest sui-bundler version ([f3a4577](https://github.com/SUI-Components/sui/commit/f3a4577bf190f2e5c1d290e0a3b81e607bc49bd1))
+
+
+
 # 2.4.0 (2020-06-10)
 
 

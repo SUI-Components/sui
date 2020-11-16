@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/svg",
-  "version": "2.4.0",
+  "version": "2.9.0",
   "description": "Converts svg files into React Components",
   "main": "index.js",
   "scripts": {
@@ -10,27 +10,18 @@
     "sui-svg": "./bin/sui-svg.js"
   },
   "dependencies": {
-    "@babel/core": "7.8.4",
-    "@s-ui/bundler": "5",
+    "@babel/core": "7.12.3",
+    "@s-ui/bundler": "7",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
     "@s-ui/react-atom-icon": "1",
     "@svgr/core": "3.1.0",
     "babel-preset-sui": "3",
-    "commander": "4.1.1",
-    "fast-glob": "3.1.1",
+    "commander": "6.2.0",
+    "fast-glob": "3.2.4",
     "just-camel-case": "4.0.2"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
-  },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
-  "stylelint": {
-    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  }
+  "license": "ISC"
 }

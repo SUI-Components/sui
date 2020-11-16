@@ -1,8 +1,16 @@
 const fg = require('fast-glob')
+const fs = require('fs')
 
 const flat = arr => [].concat(...arr)
 
-module.exports.stats = async ({repositories, root, dry}) => {
+const getPackageContent = filepath => JSON.parse(fs.readFileSync(filepath))
+
+module.exports.stats = async ({
+  repositories,
+  root,
+  dry,
+  getVersions = false
+}) => {
   const suiComponents = fg
     .sync([
       `${root}/sui-components/components/**/package.json`,
@@ -23,9 +31,15 @@ module.exports.stats = async ({repositories, root, dry}) => {
     (acc, component) => {
       acc[component] = dirs
         .filter(dir => dir.includes(component))
-        .map(dir =>
-          dir.replace(root, '').replace(/(?<repo>[a-z|-]+)\/.*/, '$<repo>')
-        )
+        .map(dir => {
+          const pkg = getVersions && getPackageContent(`${dir}/package.json`)
+          return dir
+            .replace(root, '')
+            .replace(
+              /(?<repo>[a-z|-]+)\/.*/,
+              '$<repo>' + (getVersions ? ` – v${pkg.version}` : '')
+            )
+        })
       return acc
     },
     {}
@@ -35,7 +49,13 @@ module.exports.stats = async ({repositories, root, dry}) => {
     acc[repo] = dirs
       .filter(dir => dir.includes(repo))
       .filter(dir => suiComponents.some(sui => dir.includes(sui)))
-      .map(dir => dir.replace(/^.+(?<comp>@[a-z|-]+\/[a-z|-]+$)/, '$<comp>'))
+      .map(dir => {
+        const pkg = getVersions && getPackageContent(`${dir}/package.json`)
+        return dir.replace(
+          /^.+(?<comp>@[a-z|-]+\/[a-z|-]+$)/,
+          '$<comp>' + (getVersions ? `@${pkg.version}` : '')
+        )
+      })
     return acc
   }, {})
 

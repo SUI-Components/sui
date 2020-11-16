@@ -31,6 +31,11 @@ const STATUS_DESCRIPTION = {
     [STATUS_STATES.OK]: 'Bundle completed!',
     [STATUS_STATES.RUN]: 'Creating bundle...'
   },
+  lint: {
+    [STATUS_STATES.KO]: 'Linting has failed!',
+    [STATUS_STATES.OK]: 'Lint completed!',
+    [STATUS_STATES.RUN]: 'Linting code...'
+  },
   install: {
     [STATUS_STATES.KO]: 'Failed installing packages!',
     [STATUS_STATES.OK]: 'All packages installed!',

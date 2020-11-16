@@ -2,6 +2,108 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.12.0 (2020-11-11)
+
+
+### Features
+
+* use new way to detect github main branch ([b1adb25](https://github.com/SUI-Components/sui/commit/b1adb256a22ffb557f6480d15631ca5b81ccf40b))
+
+
+
+# 1.11.0 (2020-11-11)
+
+
+### Bug Fixes
+
+* try another command to get default branch ([e8389bf](https://github.com/SUI-Components/sui/commit/e8389bf1795c4881b39b72d639ae5b9cd4da1b67))
+
+
+
+# 1.10.0 (2020-11-11)
+
+
+### Features
+
+* add support to GitHub Actions ([a78f2f2](https://github.com/SUI-Components/sui/commit/a78f2f2c25dc22e4584c7333c99e1ef24ebd91af))
+* upgrade dependencies for sui-ci ([0b8748e](https://github.com/SUI-Components/sui/commit/0b8748edeb06d8a7cfb1bdcf1d38cf3bf88423d2))
+
+
+
+# 1.8.0 (2020-10-14)
+
+
+### Features
+
+* add lint as personalized step ([51283ef](https://github.com/SUI-Components/sui/commit/51283ef16c434e6abfbd7d677e5e0db9736294a9))
+* add possibility to have a custom topic with a default message ([eda268e](https://github.com/SUI-Components/sui/commit/eda268e0e70e8b1d4593e23258826a517ca33656))
+
+
+
+# 1.7.0 (2020-09-30)
+
+
+### Features
+
+* pull changes before running release command ([a177f9b](https://github.com/SUI-Components/sui/commit/a177f9ba6efc10f80cdee7186b23d006798cf0c7))
+
+
+
+# 1.6.0 (2020-09-18)
+
+
+### Features
+
+* skip ci with sui-mono by default ([850ec2b](https://github.com/SUI-Components/sui/commit/850ec2b6503873f9f249ad62e122f3aa6f8ad420))
+
+
+
+# 1.5.0 (2020-09-17)
+
+
+### Features
+
+* better handling of Pull Request environment variable from Travis ([58a1ce5](https://github.com/SUI-Components/sui/commit/58a1ce5c21f43a466ac0a7c75de697efb4ccc634))
+
+
+
+# 1.4.0 (2020-09-17)
+
+
+### Bug Fixes
+
+* change pullRequest conditional ([ef1131d](https://github.com/SUI-Components/sui/commit/ef1131deae4c5cf98d3ec68fc5fc4d779c5cf541))
+
+
+
+# 1.3.0 (2020-09-17)
+
+
+### Bug Fixes
+
+* add release command ([bdbcd0a](https://github.com/SUI-Components/sui/commit/bdbcd0a351ea3e1e084caa849ef03a4aa2358d18))
+* use correct package name ([0749fe0](https://github.com/SUI-Components/sui/commit/0749fe0a482a36e680a3aaf5a71560788771abeb))
+
+
+### Features
+
+* add release command ([abb42a7](https://github.com/SUI-Components/sui/commit/abb42a741b3dc4e580704a639ff921bf387f298c))
+* better error handling ([a188336](https://github.com/SUI-Components/sui/commit/a1883361ffddb2a4f539ae38bf30fbcaf673a8c0))
+* output console info and exit with 1 if an error exists ([e9d1fd5](https://github.com/SUI-Components/sui/commit/e9d1fd5cd4d012ab9a99e8fa5736571cc8f13f2e))
+* use npx to execute sui-mono ([0aeb1a8](https://github.com/SUI-Components/sui/commit/0aeb1a8d96e5c50364b66c8b9c6c6e5e6ce1e0b3))
+* use sui-mono instead npx that give us problems ([27bfaa9](https://github.com/SUI-Components/sui/commit/27bfaa97f1dee69dbe98cfb7d711dae50c2e58ec))
+
+
+
+# 1.2.0 (2020-09-01)
+
+
+### Features
+
+* add support to Github Enterprise ([35ccd00](https://github.com/SUI-Components/sui/commit/35ccd004b6ba218c5428fa5dfb19dd6da0659990))
+
+
+
 # 1.1.0 (2020-07-23)
 
 

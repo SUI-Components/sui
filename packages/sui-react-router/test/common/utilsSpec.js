@@ -18,24 +18,24 @@ describe('Utils', () => {
   })
 
   describe('warning', () => {
-    let spy
+    let spyWarn
 
     beforeEach(() => {
-      spy = sinon.spy(console, 'warn')
+      spyWarn = sinon.spy(console, 'warn')
     })
 
     afterEach(() => {
-      spy.restore()
+      spyWarn.restore()
     })
 
     it('should log a warning if condition passed is falsy', () => {
       warning(false, 'Warning Message')
-      expect(spy.calledWith('Warning Message')).to.be.true
+      expect(spyWarn.calledWith('Warning Message')).to.be.true
     })
 
     it('should do nothing if condition passed is truthy', () => {
-      warning(true, 'Error Message')
-      expect(console.error).not.to.have.been.called
+      warning(true, 'Warning Message')
+      expect(spyWarn.calledWith('Warning Message')).to.be.false
     })
   })
 

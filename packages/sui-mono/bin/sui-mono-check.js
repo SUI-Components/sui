@@ -24,15 +24,10 @@ program
   .parse(process.argv)
 
 const incrementName = code => {
-  if (code === 1) {
-    return 'patch'
-  } else if (code === 2) {
-    return 'minor'
-  } else if (code === 3) {
-    return 'major'
-  } else {
-    return ''
-  }
+  if (code === 1) return 'patch'
+  if (code === 2) return 'minor'
+  if (code === 3) return 'major'
+  return ''
 }
 
 const showReportHeaderPositive = () => {
@@ -53,8 +48,8 @@ const showReportHeaderNegative = () => {
 }
 
 const showReport = status => {
-  var headerShown = false
-  for (var pkg in status) {
+  let headerShown = false
+  for (const pkg in status) {
     if (status.hasOwnProperty(pkg) && status[pkg].increment > 0) {
       if (!headerShown) {
         showReportHeaderPositive()

@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+const {existsSync, readFileSync} = require('fs')
+const {extname} = require('path')
+const git = require('simple-git')
 
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
@@ -37,15 +40,13 @@ function executeLintingCommand(binPath, args) {
  * @param {String} path
  * @returns {Array<String>}
  */
-const getFileLinesAsArray = path => {
-  const {existsSync, readFileSync} = require('fs')
-  return existsSync(path)
+const getFileLinesAsArray = path =>
+  existsSync(path)
     ? readFileSync(path, 'utf8')
         .toString()
         .split('\n')
         .filter(Boolean)
     : []
-}
 
 /**
  * Get as array .gitignore files and filter lines that are comments
@@ -60,21 +61,19 @@ const getGitIgnoredFiles = () =>
  * @param {Array<String>} values
  * @returns {Array<String>} ['--ignore-pattern', 'folder/', ...]
  */
-const getArrayArgs = (arg, values) => {
-  return values.filter(Boolean).map(pattern => `${arg} "${pattern}"`)
-}
+const getArrayArgs = (arg, values) =>
+  values.filter(Boolean).map(pattern => `${arg} "${pattern}"`)
 
 /**
  * Get from git status name of staged files
  * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
  * @returns {Promise<Array>} Array of file paths
  */
-const getGitStatusFiles = async extensions => {
-  const {extname} = require('path')
-  return new Promise((resolve, reject) => {
-    require('simple-git')().diff(
+const getGitStatusFiles = async extensions =>
+  new Promise((resolve, reject) => {
+    git().diff(
       ['--cached', '--name-only', '--diff-filter=d'], // Delete files as excluded
-      function(err, summary) {
+      (err, summary) => {
         err && reject(err)
         const files = summary
           ? summary
@@ -85,7 +84,6 @@ const getGitStatusFiles = async extensions => {
       }
     )
   })
-}
 
 /**
  * Get files to lint according to command options

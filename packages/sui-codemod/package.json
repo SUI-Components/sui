@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/codemod",
-  "version": "1.3.0",
+  "version": "1.7.0",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -13,11 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/parser": "7.8.4",
+    "@babel/parser": "7.12.5",
     "colors": "1.4.0",
-    "commander": "4.1.1",
-    "fast-glob": "2.2.6",
-    "jscodeshift": "0.6.3",
+    "commander": "6.2.0",
+    "fast-glob": "3.2.4",
+    "jscodeshift": "0.11.0",
     "just-pascal-case": "1.1.0"
   }
 }

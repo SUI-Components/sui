@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/dashboard",
-  "version": "1.22.0",
+  "version": "1.25.0",
   "description": "",
   "bin": {
     "sui-dashboard": "./bin/sui-dashboard.js"
@@ -12,9 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "@s-ui/helpers": "1",
-    "chalk": "2.4.2",
-    "commander": "3.0.2",
-    "fast-glob": "3.0.4",
-    "update-check": "1.5.3"
+    "chalk": "4.1.0",
+    "commander": "6.1.0",
+    "fast-glob": "3.2.4",
+    "update-check": "1.5.4"
   }
 }

@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.5.0 (2020-10-05)
+
+
+### Features
+
+* upgrade sui-react-router dependencies ([7ce1bd4](https://github.com/SUI-Components/sui/commit/7ce1bd46c2c89e1c72de31fedb40d2568d6d1a37))
+
+
+
+# 1.4.0 (2020-10-02)
+
+
+### Bug Fixes
+
+* fixed Routes below a Route that use regexp ([c6d31e5](https://github.com/SUI-Components/sui/commit/c6d31e581f8aa05592f860a1fae230144238a448)), closes [#946](https://github.com/SUI-Components/sui/issues/946)
+
+
+
 # 1.3.0 (2020-07-13)
 
 
