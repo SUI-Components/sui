@@ -1,6 +1,7 @@
 const {
   GITHUB_EVENT_PATH,
   GITHUB_REF = '',
+  GITHUB_SHA = '',
   TRAVIS_COMMIT,
   TRAVIS_PULL_REQUEST,
   TRAVIS_PULL_REQUEST_SHA
@@ -21,13 +22,13 @@ exports.getCommitSha = () => {
   const commitFromTravis = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT
   if (commitFromTravis) return commitFromTravis
 
-  // For GitHub Actions, extract from the GitHub global event
-  const {head_commit: headCommit, pull_request: pullRequest} = getGitHubEvent()
+  // For GitHub Actions, extract from the GitHub global event for pullRequest
+  const {pull_request: pullRequest} = getGitHubEvent()
   try {
     // try from pullRequest and fallback to branch latest sha
     return pullRequest.head.sha
   } catch {
-    return headCommit
+    return GITHUB_SHA
   }
 }
 
