@@ -12,10 +12,18 @@ export default function useExperiment(experimentName, attributes) {
   if (pde === null)
     throw new Error('[useExperiment] sui-pde provider is required to work')
 
-  const variation = useMemo(
-    () => pde.activateExperiment({name: experimentName, attributes}),
-    [experimentName, pde, attributes]
-  )
+  const variation = useMemo(() => {
+    let variationName
+
+    try {
+      variationName = pde.activateExperiment({name: experimentName, attributes})
+    } catch (error) {
+      console.error(error)
+      return 'default'
+    }
+
+    return variationName
+  }, [experimentName, pde, attributes])
 
   return {variation}
 }
