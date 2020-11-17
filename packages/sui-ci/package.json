@@ -7,14 +7,14 @@
     "sui-ci": "./bin/sui-ci.js"
   },
   "dependencies": {
-    "@octokit/core": "3.1.3",
-    "commander": "6.1.0",
-    "execa": "4.0.3",
+    "@octokit/core": "3.2.1",
+    "commander": "6.2.0",
+    "execa": "4.1.0",
     "git-remote-origin-url": "3.1.0",
-    "git-url-parse": "11.3.0"
+    "git-url-parse": "11.4.0"
   },
   "devDependencies": {
-    "nock": "13.0.4"
+    "nock": "13.0.5"
   },
   "keywords": [],
   "author": "",

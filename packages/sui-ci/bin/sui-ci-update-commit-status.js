@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander')
+const {getCommitSha} = require('../src/git')
 
 const {updateCommitStatus} = require('../src/index')
 
@@ -8,12 +9,9 @@ const {
   GITHUB_REPOSITORY,
   GITHUB_RUN_ID,
   GITHUB_SERVER_URL,
-  GITHUB_SHA,
   GITHUB_TOKEN,
   SUI_CI_TOPIC: topicFromEnv,
   TRAVIS_BUILD_WEB_URL,
-  TRAVIS_COMMIT,
-  TRAVIS_PULL_REQUEST_SHA,
   TRAVIS_REPO_SLUG
 } = process.env
 
@@ -44,7 +42,7 @@ program
   )
   .parse(process.argv)
 
-const commit = GITHUB_SHA || TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT
+const commit = getCommitSha()
 const {state: stateKey, topic, url: targetUrl} = program
 
 updateCommitStatus({
