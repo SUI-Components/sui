@@ -22,12 +22,12 @@ exports.getCommitSha = () => {
   if (commitFromTravis) return commitFromTravis
 
   // For GitHub Actions, extract from the GitHub global event
-  const {head, pull_request: pullRequest} = getGitHubEvent()
+  const {head_commit: headCommit, pull_request: pullRequest} = getGitHubEvent()
   try {
     // try from pullRequest and fallback to branch latest sha
     return pullRequest.head.sha
   } catch {
-    return head.sha
+    return headCommit
   }
 }
 
