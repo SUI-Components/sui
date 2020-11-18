@@ -8,7 +8,6 @@ module.exports = function copyGlobals() {
     fs.writeFileSync('demo/globals.js', '// globals file', 'utf8')
   }
   cpy(['demo/globals.js'], 'public', {
-    deep: 3,
     parents: true
   })
 }
