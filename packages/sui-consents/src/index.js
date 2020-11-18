@@ -20,7 +20,7 @@ const readCookie = (key, cookies) => {
  */
 const getUserConsents = ({cookies}) => {
   const cookieValue = readCookie(TCF_COOKIE_KEY, cookies)
-  if (!cookieValue) return false
+  if (!cookieValue) return {}
 
   try {
     const {purpose} = JSON.parse(atob(cookieValue))
