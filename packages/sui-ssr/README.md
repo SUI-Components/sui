@@ -345,45 +345,32 @@ If this were your `src/index.html` file:
 <html>
   <head>
     <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
-    <!--THIRD_PARTY-->
-    <link rel="preconnect dns-prefetch" href="//c.dcdn.es" />
-    <!--THIRD_PARTY-->
-    <link rel="dns-prefetch" href="//www.google.es" />
-    <!--THIRD_PARTY-->
-    <link rel="dns-prefetch" href="//www.google.com" />
-    <!--THIRD_PARTY-->
-    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <!--THIRD_PARTY--><link rel="preconnect dns-prefetch" href="//c.dcdn.es" />
+    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.es" />
+    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.com" />
+    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
     <!-- ShellAPP -->
     <% if (css && vendor && app) { %>
-    <link as="style" rel="preload" href="<%= css %>" />
-    <link as="script" rel="preload" href="<%= vendor.entry %>" />
-    <link as="script" rel="preload" href="<%= app.entry %>" />
+      <link as="style" rel="preload" href="<%= css %>" />
+      <link as="script" rel="preload" href="<%= vendor.entry %>" />
+      <link as="script" rel="preload" href="<%= app.entry %>" />
     <% } %>
 
     <!-- ThridPartyScripts -->
 
     <!-- Advertisement -->
-    <!--THIRD_PARTY-->
-    <link as="script" importance="low" rel="preload" href="<%= utagScript %>" />
-    <!--THIRD_PARTY-->
-    <link
-      as="script"
-      importance="low"
-      rel="preload"
-      href="<%= openAdsScript %>"
-    />
+    <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= utagScript %>" />
+    <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= openAdsScript %>" />
 
     <!-- Load 3th parties and ShellAPP -->
     <% if (vendor && app) { %>
-    <script defer importance="high" src="<%= vendor.entry %>"></script>
-    <script defer importance="high" src="<%= app.entry %>"></script>
+      <script defer importance="high" src="<%= vendor.entry %>"></script>
+      <script defer importance="high" src="<%= app.entry %>"></script>
     <% } %>
 
-    <!--THIRD_PARTY-->
-    <script defer importance="high" src="<%= utagScript %>"></script>
-    <!--THIRD_PARTY-->
-    <script defer importance="low" src="<%= openAdsScript %>"></script>
+    <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
+    <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
   </head>
 
   <body>
@@ -421,9 +408,9 @@ The sui-ssr response would be an HTML like the following:
 
     <!-- ShellAPP -->
     <% if (css && vendor && app) { %>
-    <link as="style" rel="preload" href="<%= css %>" />
-    <link as="script" rel="preload" href="<%= vendor.entry %>" />
-    <link as="script" rel="preload" href="<%= app.entry %>" />
+      <link as="style" rel="preload" href="<%= css %>" />
+      <link as="script" rel="preload" href="<%= vendor.entry %>" />
+      <link as="script" rel="preload" href="<%= app.entry %>" />
     <% } %>
 
     <!-- ThridPartyScripts -->
@@ -434,8 +421,8 @@ The sui-ssr response would be an HTML like the following:
 
     <!-- Load 3th parties and ShellAPP -->
     <% if (vendor && app) { %>
-    <script defer importance="high" src="<%= vendor.entry %>"></script>
-    <script defer importance="high" src="<%= app.entry %>"></script>
+      <script defer importance="high" src="<%= vendor.entry %>"></script>
+      <script defer importance="high" src="<%= app.entry %>"></script>
     <% } %>
 
     <!--THIRD_PARTY-->
