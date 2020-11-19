@@ -53,7 +53,7 @@ let entryPoint
 let dockerRegistry = ''
 
 if (program.entryPoint) entryPoint = path.resolve(program.entryPoint)
-if (program.dockerRegistry) dockerRegistry = `${dockerRegistry}/`
+if (program.dockerRegistry) dockerRegistry = `${program.dockerRegistry}/`
 
 const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
