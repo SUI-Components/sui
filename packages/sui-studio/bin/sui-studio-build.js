@@ -8,6 +8,7 @@ const {execSync} = require('child_process')
 const program = require('commander')
 const {NO_COMPONENTS_MESSAGE} = require('../config')
 const copyStaticFiles = require('./helpers/copyStaticFiles')
+const copyGlobals = require('./helpers/copyGlobals')
 
 program
   .option('-O, --only-changes', 'only build changed components or demos')
@@ -39,6 +40,7 @@ if (beforeBuild) {
 }
 
 if (needsBuild) {
+  copyGlobals()
   serialSpawn(
     [
       beforeBuildCommand,
@@ -54,6 +56,7 @@ if (needsBuild) {
   )
     .then(() => fs.copy('public/index.html', 'public/200.html'))
     .then(copyStaticFiles)
+    .then(copyGlobals)
     .then(() => process.exit(0))
     .catch(() => process.exit(1))
 }

@@ -1,7 +1,10 @@
 import {render} from 'react-dom'
 import {Router} from '@s-ui/react-router'
 
+import {importGobals} from './components/tryRequire'
 import routes from './routes'
 import './index.scss'
 
-render(<Router routes={routes} />, document.getElementById('root'))
+importGobals().then(() => {
+  render(<Router routes={routes} />, document.getElementById('root'))
+})
