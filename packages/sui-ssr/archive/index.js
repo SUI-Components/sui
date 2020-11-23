@@ -4,7 +4,7 @@ const archiver = require('archiver')
 const program = require('commander')
 const authDefinitionBuilder = require('./authDefinitionBuilder')
 
-module.exports = ({outputZipPath, pkg, entryPoint}) =>
+module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
   new Promise((resolve, reject) => {
     const authVariableDefinition = program.auth
       ? authDefinitionBuilder(program.auth.split(':'))
@@ -59,6 +59,7 @@ module.exports = ({outputZipPath, pkg, entryPoint}) =>
     archive.append(
       fs
         .readFileSync(path.join(__dirname, 'Dockerfile.tpl'), 'utf8')
+        .replace('{{DOCKER_REGISTRY}}', dockerRegistry)
         .replace('{{AUTH_VARIABLES}}', authVariableDefinition)
         .replace('{{ENTRYPOINT_PREWORK}}', entryPointPreWork)
         .replace('{{ENTRYPOINT}}', entryPointLine),

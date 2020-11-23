@@ -12,6 +12,10 @@ const REMOVE_ZIP_PATH = path.join(process.cwd(), '*-sui-ssr.zip')
 program
   .option('-C, --clean', 'Remove previous zip')
   .option(
+    '-R, --docker-registry <dockerRegistry>',
+    'Custom registry to be used as a proxy or instead of the Docker Hub registry'
+  )
+  .option(
     '-E, --entry-point <entryPoint>',
     'Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C'
   )
@@ -45,10 +49,10 @@ if (program.clean) {
   // console.log(' -> Removed! ✅'.green.bold)
 }
 
+let dockerRegistry = ''
 let entryPoint
-if (program.entryPoint) {
-  entryPoint = path.resolve(program.entryPoint)
-}
+if (program.entryPoint) entryPoint = path.resolve(program.entryPoint)
+if (program.dockerRegistry) dockerRegistry = `${program.dockerRegistry}/`
 
 const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
@@ -57,5 +61,10 @@ const OUTPUT_ZIP_PATH = path.join(
 )
 ;(async () => {
   // console.log(' -> Compressing files... 🗄'.yellow)
-  await archive({outputZipPath: OUTPUT_ZIP_PATH, pkg, entryPoint})
+  await archive({
+    outputZipPath: OUTPUT_ZIP_PATH,
+    pkg,
+    entryPoint,
+    dockerRegistry
+  })
 })()

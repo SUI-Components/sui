@@ -23,6 +23,7 @@ Generate a static version of the server w/out dependencies in the server folder.
   Options:
 
     -C, --clean    Remove build folder before create a new one
+    -R, --docker-registry <dockerRegistry>  Custom registry to be used as a proxy or instead of the Docker Hub registry
     -V, --verbose  Verbose output
     -h, --help     output usage information
   Description:
