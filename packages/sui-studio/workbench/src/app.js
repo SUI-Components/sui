@@ -5,7 +5,7 @@ import './styles.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
 import {isFunction} from '../../src/components/demo/utilities'
-import {importGobals} from '../../src/components/tryRequire'
+import {importGlobals} from '../../src/components/tryRequire'
 
 const queryStringToJSON = queryString => {
   if (queryString.indexOf('?') > -1) {
@@ -69,7 +69,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
 
-  await importGobals()
+  await importGlobals()
 
   ReactDOM.render(
     <ComponentToRender

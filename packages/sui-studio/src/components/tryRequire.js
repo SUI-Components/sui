@@ -74,14 +74,18 @@ const importEvents = ({category, component}) =>
       )
   })
 
-export const importGobals = () =>
-  safeImport({
+export const importGlobals = () => {
+  // we use a variable for the file so Webpack
+  // could safe fail if the file doesn't exist
+  const globalsFile = 'globals.js'
+  return safeImport({
     importFile: () =>
       import(
-        /* webpackChunkName: "globals" */
-        `${__BASE_DIR__}/demo/globals.js`
+        /* webpackInclude: /\/demo\/globals.js$/ */
+        `${__BASE_DIR__}/demo/${globalsFile}`
       )
   })
+}
 
 export const importMainModules = params =>
   Promise.all([
