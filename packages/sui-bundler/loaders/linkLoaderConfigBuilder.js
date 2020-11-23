@@ -1,7 +1,6 @@
 const fg = require('fast-glob')
 const path = require('path')
 
-const createSassLinkLoader = require('./sassLinkLoader')
 const log = require('../shared/log')
 const {defaultAlias} = require('../shared/resolve-alias')
 
@@ -42,35 +41,15 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     diccFromAbsolutePaths(absolutePathForMonoRepo(linkAll))
   )
 
-  const sassLoaderWithLinkLoaderConfig = {
-    loader: require.resolve('sass-loader'),
-    options: {
-      sassOptions: {
-        importer: createSassLinkLoader(entryPoints)
-      }
-    }
-  }
-
-  const javascriptLinkLoader = {
-    test: /\.jsx?$/,
+  const linkLoader = {
+    test: /\.(jsx?|scss)$/,
     use: {
-      loader: 'link-loader',
+      loader: require.resolve('./LinkLoader'),
       options: {
         entryPoints
       }
     }
   }
-
-  const newRules = config.module.rules.map(rule => {
-    const {use: originalUseList} = rule
-    const use = originalUseList.map(singleUse => {
-      if (typeof singleUse === 'string' && singleUse.includes('sass-loader')) {
-        return sassLoaderWithLinkLoaderConfig
-      }
-      return singleUse
-    })
-    return {...rule, use}
-  })
 
   return {
     ...config,
@@ -84,12 +63,11 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     },
     module: {
       ...config.module,
-      rules: [...newRules, javascriptLinkLoader]
+      rules: [...config.module.rules, linkLoader]
     },
     resolveLoader: {
       alias: {
         ...config.resolveLoader.alias,
-        'link-loader': require.resolve('./LinkLoader'),
         'externals-manifest-loader': require.resolve(
           './ExternalsManifestLoader'
         )
