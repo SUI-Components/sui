@@ -10,7 +10,8 @@ describe('LinkLoader', () => {
           entryPoints: {
             '@s-ui/module': '/User/Developer/sui/module/src'
           }
-        }
+        },
+        request: 'file.js'
       },
       "require('@s-ui/module')"
     )
@@ -25,7 +26,8 @@ describe('LinkLoader', () => {
           entryPoints: {
             '@s-ui/module': '/User/Developer/sui/module/src'
           }
-        }
+        },
+        request: 'file.js'
       },
       "require('@s-ui/module/lib/level/mod.js')"
     )
@@ -49,7 +51,7 @@ describe('LinkLoader', () => {
     )
 
     expect(nextSource).to.be.eql(
-      '@import "~/User/Developer/sui/module/src/index";'
+      '@import "/User/Developer/sui/module/src/index";'
     )
   })
 })

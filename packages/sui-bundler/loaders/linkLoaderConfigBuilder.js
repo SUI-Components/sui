@@ -43,6 +43,7 @@ module.exports = ({config, packagesToLink, linkAll}) => {
 
   const linkLoader = {
     test: /\.(jsx?|scss)$/,
+    enforce: 'pre',
     use: {
       loader: require.resolve('./LinkLoader'),
       options: {
