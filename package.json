@@ -19,9 +19,7 @@
     "test:client:watch": "npm run test:client -- --watch",
     "test:server": "NODE_ENV=test & sui-test server -P \"./packages/*/\\!\\(browser\\)/server/*.js\"",
     "test:server:watch": "npm run test:server -- --watch",
-    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234",
-    "wiki:pull": "git subtree pull --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master --squash",
-    "wiki:push": "git subtree push --prefix=.wiki https://github.com/SUI-Components/sui.wiki.git master"
+    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",
