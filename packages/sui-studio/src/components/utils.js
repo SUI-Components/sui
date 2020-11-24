@@ -74,3 +74,23 @@ export const addReactContextToComponent = (Component, {context}) => {
 
   return ComponentWithAllContexts
 }
+
+/**
+ * Safely do a dynamic import
+ * @param {object} params
+ * @param {any=} params.defaultValue to return in case the dynamic import fails
+ * @param {boolean=} params.extractDefault extract default from imported module
+ * @param {() => Promise<any>} params.importFile function to import dynamically a module
+ * @return {Promise<any>}
+ */
+export const safeImport = async ({
+  defaultValue = false,
+  extractDefault = true,
+  importFile
+}) => {
+  const file = await importFile().catch(() => defaultValue)
+  if (typeof file === 'undefined') {
+    return Promise.reject(new Error('Error requiring file'))
+  }
+  return extractDefault && typeof file === 'object' ? file.default : file
+}

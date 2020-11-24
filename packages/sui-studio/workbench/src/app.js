@@ -5,7 +5,7 @@ import './styles.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
 import {isFunction} from '../../src/components/demo/utilities'
-import {importGlobals} from '../../src/components/tryRequire'
+import {importGlobals} from '../../src/components/globals'
 
 const queryStringToJSON = queryString => {
   if (queryString.indexOf('?') > -1) {
