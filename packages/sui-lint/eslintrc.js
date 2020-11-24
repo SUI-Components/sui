@@ -185,10 +185,9 @@ const TESTING_RULES = {
   'no-only-tests/no-only-tests': RULES.ERROR
 }
 
-let resolvedBabelPresetSui = false
+let resolvedBabelPresetSui
 try {
-  require.resolve('babel-preset-sui')
-  resolvedBabelPresetSui = true
+  resolvedBabelPresetSui = require.resolve('babel-preset-sui')
 } catch {}
 
 const parser = resolvedBabelPresetSui ? '@babel/eslint-parser' : undefined
