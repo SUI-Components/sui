@@ -170,7 +170,7 @@ It uses the stdout stream so you can do things like:
 
 ## ENV Vars:
 
-- VERBOSE: Print in the console info about the criticalCSS and the PRPL middleware
+- VERBOSE: Print in the console info about the criticalCSS middleware
 - CONSOLE: By default the console is disabled if you want to watch your `console.log` set up this env var to true set up this env var to true
 
 ```

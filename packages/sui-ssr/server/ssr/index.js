@@ -41,7 +41,6 @@ export default async (req, res, next) => {
     criticalCSS,
     matchResult = {},
     performance,
-    prpl,
     query,
     skipSSR
   } = req
@@ -89,17 +88,6 @@ export default async (req, res, next) => {
       )
     headTplPart = (' ' + nextHeadTplPart).slice(1)
     nextHeadTplPart = null
-  }
-
-  if (prpl) {
-    let linkHeader = prpl.hints
-      .reduce((acc, hint) => {
-        return `${acc},<${hint.url}>; rel=preload; as=script`
-      }, '')
-      .replace(/,/, '')
-
-    res.set('Link', (' ' + linkHeader).slice(1))
-    linkHeader = null
   }
 
   const device = buildDeviceFrom({request: req})
