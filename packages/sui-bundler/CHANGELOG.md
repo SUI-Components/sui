@@ -46,6 +46,7 @@ All notable changes to this project will be documented in this file.
 * create a reusable log helper ([9c79eee](https://github.com/SUI-Components/sui/commit/9c79eee58cd958b6d5977b92ca23fe8bf81c8c58))
 * disable Code Splitting for libs built with Webpack ([58e27e2](https://github.com/SUI-Components/sui/commit/58e27e24b637612f8803b5895cfe975250fb8ce9))
 * extract log helper and remove not needed code ([0ed4e83](https://github.com/SUI-Components/sui/commit/0ed4e832002e1d7eb7efcf94cc3715b2f653728d))
+* fix missing variable ([fbd8d6c](https://github.com/SUI-Components/sui/commit/fbd8d6c2bfd324008a7b43381f6208500eee6466))
 * get json errors only when needed and use log helper ([04f0ee3](https://github.com/SUI-Components/sui/commit/04f0ee33d0cf910f0c08ed520ba8985d0bd5b71b))
 * improve and simplify bundle analyzer ([b3ef708](https://github.com/SUI-Components/sui/commit/b3ef708c2a976378a959aeee21a291b1f945e7ab))
 * improve development build time ([092dc18](https://github.com/SUI-Components/sui/commit/092dc18ca22b5f9a5adf42500eeeb1851b3beeaa))
