@@ -1,16 +1,6 @@
 /* global __BASE_DIR__ */
 
-const safeImport = async ({
-  defaultValue = false,
-  extractDefault = true,
-  importFile
-}) => {
-  const file = await importFile().catch(() => defaultValue)
-  if (typeof file === 'undefined') {
-    return Promise.reject(new Error('Error requiring file'))
-  }
-  return extractDefault && typeof file === 'object' ? file.default : file
-}
+import {safeImport} from './utils'
 
 const fetchStaticFile = path =>
   window
