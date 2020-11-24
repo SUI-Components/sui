@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.28.0 (2020-11-24)
+
+
+### Bug Fixes
+
+* use correct resolved config not only as flag ([d79881d](https://github.com/SUI-Components/sui/commit/d79881de823dd10f8cd64acbb4e5be9860dcd91b))
+* use it without babel preset sui for node projects ([5514520](https://github.com/SUI-Components/sui/commit/55145206b6ab9369edba8f84abaf83a8d6397915))
+
+
+### Features
+
+* add cypress plugin ([510d469](https://github.com/SUI-Components/sui/commit/510d4695bb501ffda180070ed1c79bba3507d0ba))
+* add no-var rule warning ([f7a8cf4](https://github.com/SUI-Components/sui/commit/f7a8cf440b34ead9d79cea305753e5280d80f69a))
+* disable new problematic accessor-pairs rule ([7c6d9ad](https://github.com/SUI-Components/sui/commit/7c6d9ad5ebccabaf31c28c674a6359c12f10a3bd))
+
+
+
 # 3.22.0 (2020-10-23)
 
 
