@@ -1,14 +1,20 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 export default BaseComponent => {
   const displayName = BaseComponent.displayName
 
   return class WithOpenToggle extends Component {
     state = {
-      isOpen: !!this.props.isOpen // eslint-disable-line react/prop-types
+      isOpen: !!this.props.isOpen
     }
 
     static displayName = `WithOpenToggle(${displayName})`
+
+    static propTypes = {
+      /** isOpen */
+      isOpen: PropTypes.boolean
+    }
 
     handleToggle = (_, {isOpen} = {}) => {
       this.setState(prevState => ({
