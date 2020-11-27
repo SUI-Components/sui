@@ -5,7 +5,7 @@ export default BaseComponent => {
 
   return class WithOpenToggle extends Component {
     state = {
-      isOpen: !!this.props.isOpen // eslint-disable-line
+      isOpen: !!this.props.isOpen // eslint-disable-line react/prop-types
     }
 
     static displayName = `WithOpenToggle(${displayName})`
