@@ -9,7 +9,6 @@
 - Commit template → `sui-mono commit`
 - Release manager (parses commits to publish packages according to their changes) → `sui-mono check`, `sui-mono release`
 - Run commands inside each package → `sui-mono run npm install`, `sui-mono run-parallel npm install`
-- Link all packages that have dependencies between each other → sui-mono link
 
 We use:
 
@@ -27,7 +26,6 @@ We use:
   - [Usage](#usage)
     - [`run` command on all packages](#run-command-on-all-packages)
     - [`phoenix`](#phoenix)
-    - [`link`](#link)
     - [`commit`](#commit)
     - [`commit-all` commit for all contained packages](#commit-all-commit-for-all-contained-packages)
     - [`check` & `release`](#check--release)
@@ -36,8 +34,8 @@ We use:
     - [`access`](#access)
     - [Scope (`packagesFolder`, `deepLevel`, `customScopes`)](#scope-packagesfolder-deeplevel-customscopes)
       - [Examples](#examples)
-        - [Project Example](#project-example)
-        - [Case `sui-studio`](#case-sui-studio)
+          - [Project Example](#project-example)
+          - [Case `sui-studio`](#case-sui-studio)
       - [Manual scopes](#manual-scopes)
 
 <!-- /TOC -->
@@ -108,19 +106,6 @@ Ables you to just reinstall the dependencies from a single scope
 ```sh
 sui-mono phoenix --no-root --scope atom/button
 ```
-
-### `link`
-
-Is you want to link all packages between each other, to ease development:
-
-```sh
-sui-mono link
-```
-
-Note that:
-
-- The monorepo will also be linked to the packages it contains if it uses them.
-- Packages that are not used locally will not be linked at all
 
 ### `commit`
 
