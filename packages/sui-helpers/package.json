@@ -2,15 +2,13 @@
   "name": "@s-ui/helpers",
   "version": "1.19.0",
   "description": "A set of internal helpers used by sui-related packages.",
-  "keywords": [],
   "author": "",
   "dependencies": {
     "colors": "1.4.0",
-    "commander": "6.1.0",
-    "execa": "0.10.0",
-    "figures": "2.0.0",
-    "fs-extra": "4.0.1",
-    "listr": "0.14.3"
+    "commander": "6.2.0",
+    "execa": "4.1.0",
+    "figures": "3.2.0",
+    "fs-extra": "9.0.1"
   },
   "license": "MIT",
   "repository": {
