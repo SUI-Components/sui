@@ -4,8 +4,7 @@ const path = require('path')
 /**
  * Get absolute paths of packages
  * @param  {String} cwd
- * @param  {Array} packages
- * @return {Array}
+ * @return {(packages: Array) => Array<string>}
  */
 const getPackagesPaths = cwd => {
   const getPath = path.join.bind(this, cwd)
@@ -21,9 +20,10 @@ const getPackagesPaths = cwd => {
 const getPackageJson = (packagePath, disableCache = false) => {
   try {
     const filePath = require.resolve(path.join(packagePath, 'package.json'))
-    if (disableCache) {
-      delete require.cache[filePath]
-    }
+    // Modules are cached in this object when they are required.
+    // By deleting a key value from this object, the next require will reload the module.
+    if (disableCache) delete require.cache[filePath]
+
     return require(filePath)
   } catch (e) {
     return {}
@@ -46,14 +46,12 @@ const getPackageDependencies = packagePath => {
 /**
  * Get npm names of packages from paths
  * @param  {String} cwd
- * @param  {Array} packages
- * @return {Array}
+ * @return {(packages: Array<string>) => Array}
  */
 const getPackagesNames = cwd => {
   const getPaths = getPackagesPaths(cwd)
-  return packages => {
-    return getPaths(packages).map(pkgPath => getPackageJson(pkgPath).name)
-  }
+  return packages =>
+    getPaths(packages).map(pkgPath => getPackageJson(pkgPath).name)
 }
 
 /**
@@ -72,7 +70,7 @@ const mapNameToPath = cwds => packages => name => cwds[packages.indexOf(name)]
  * @return {Array<Array>} index[0] is a path, index[1] re found dependencies
  */
 const getDependenciesBeingUsed = dependencies => pkgPath => {
-  var deps = getPackageDependencies(pkgPath)
+  const deps = getPackageDependencies(pkgPath)
   return deps.filter(name => dependencies.indexOf(name) !== -1)
 }
 
@@ -113,7 +111,7 @@ const getUsedInternalDependencies = cwds => dependencies => {
 /**
  * Resolve path in local ./node_modules folder
  * @param {String} binPath  Relative path to file.
- * @return {String} Absolute path of the file
+ * @return {() => String} Absolute path of the file
  */
 const resolveLocalNPMBin = binPath => () =>
   require.resolve(binPath, {
@@ -122,8 +120,8 @@ const resolveLocalNPMBin = binPath => () =>
 
 /**
  * Resolve bin path. If not present, installs package prior return.
- * @param {*} binPath Relative path to bin or node file.
- * @param {*} pkg Name of package to install in case of absence. ex: `my-package@8.5`
+ * @param {string} binPath Relative path to bin or node file.
+ * @param {string} pkg Name of package to install in case of absence. ex: `my-package@8.5`
  * @return {Promise<String>} Absolute path of the file
  */
 const resolveLazyNPMBin = async (binPath, pkg) => {
@@ -132,10 +130,9 @@ const resolveLazyNPMBin = async (binPath, pkg) => {
     return resolvePkgBin()
   } catch (e) {
     const {getSpawnPromise} = require('./cli')
-    require('colors')
-    console.log(
+
+    console.info(
       `It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`
-        .cyan
     )
     return getSpawnPromise('npm', ['install', `${pkg}`, '--no-save']).then(
       resolvePkgBin
