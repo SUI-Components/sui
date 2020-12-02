@@ -108,8 +108,7 @@ const installRootPackages = () => {
   if (!root) return Promise.resolve()
 
   console.log(`Installing root packages...`)
-  return Promise.resolve()
-  // return getSpawnPromise(createInstallPackagesCommand(process.cwd()))
+  return getSpawnPromise(createInstallPackagesCommand(process.cwd()))
 }
 
 const executePhoenixOnPackages = () => {
