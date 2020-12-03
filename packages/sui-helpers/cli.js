@@ -1,15 +1,15 @@
 /* eslint no-console:0 */
 const processSpawn = require('child_process').spawn
-const CODE_OK = 0
-const log = console.log
 const colors = require('colors')
 const program = require('commander')
 const execa = require('execa')
-const Listr = require('listr')
-const figures = require('figures')
+const {default: Queue} = require('p-queue')
 const path = require('path')
-const {splitArray} = require('./array')
+const logUpdate = require('./log-update.js')
+
 const isWin = process.platform === 'win32'
+const CODE_OK = 0
+const log = console.log
 
 /**
  * Spawn several commands in children processes, in series
@@ -18,9 +18,10 @@ const isWin = process.platform === 'win32'
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function serialSpawn(commands, options = {}) {
-  return commands.reduce(function(promise, args) {
-    return promise.then(getSpawnPromiseFactory(...args, options))
-  }, Promise.resolve())
+  return commands.reduce(
+    (promise, args) => promise.then(getSpawnPromiseFactory(...args, options)),
+    Promise.resolve()
+  )
 }
 
 /**
@@ -30,40 +31,50 @@ function serialSpawn(commands, options = {}) {
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function parallelSpawn(commands, options = {}) {
-  const symbol = figures.pointer + figures.pointer
+  const {chunks, title} = options
+
   commands = commands.map(([bin, args, opts]) => [
     bin,
     args,
-    Object.assign({}, opts, options)
+    {...opts, ...options}
   ])
 
-  log(`${symbol} Running ${commands.length} commands in parallel.`.cyan)
-  return spawnList(commands, {concurrent: true})
-    .then(() => log(`${commands.length} commands run successfully.`.green))
+  const commandsTitle = title || 'commands'
+
+  log(`›› Running ${commands.length} ${commandsTitle} in parallel.`.cyan)
+  return spawnList(commands, {chunks, title})
+    .then(() =>
+      logUpdate.done(
+        `✔ ${commands.length} ${commandsTitle} run successfully.`.green
+      )
+    )
     .catch(showError)
 }
 
 /**
  * Executes n commands as an updating list in the command line
  * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
- * @param {Object} listrOptions Options for listr npm package
- * @param {Number} chunks Number of chunks of tasks to split by to avoid too long output
+ * @param {Object} options Options for the spawn list
+ * @param {Number=} options.chunks Number of chunks of tasks to split by to avoid too long output
+ * @param {string=} options.title Title to be used as command
  */
-function spawnList(commands, listrOptions = {}, chunks = 15) {
-  let taskList = commands.map(([bin, args, opts, title]) => ({
-    title: title || getCommandCallMessage(bin, args, opts),
-    task: () => execa(...getArrangedCommand(bin, args, opts))
-  }))
+function spawnList(commands, {chunks = 15, title = ''} = {}) {
+  const concurrency = Number(chunks)
+  const queue = new Queue({concurrency})
 
-  if (!listrOptions.concurrent && chunks && taskList.length > chunks) {
-    taskList = splitArray(taskList, chunks).map((chunk, i) => ({
-      title: `#${i + 1} group of ${chunk.length} commands...`,
-      task: () => new Listr(chunk, listrOptions)
-    }))
-  }
+  commands.map(([bin, args, opts, titleFromCommand]) =>
+    queue
+      .add(() => execa(...getArrangedCommand(bin, args, opts)))
+      .then(() => {
+        const titleToUse =
+          title || titleFromCommand || getCommandCallMessage(bin, args, opts)
+        const {size, pending} = queue
+        const count = `${size + pending} of ${commands.length} pending`
+        logUpdate(`› ${titleToUse} ─ ${count.cyan}`)
+      })
+  )
 
-  const tasks = new Listr(taskList, listrOptions)
-  return tasks.run()
+  return queue.onIdle()
 }
 
 /**
@@ -74,9 +85,7 @@ function spawnList(commands, listrOptions = {}, chunks = 15) {
  * @return {Function} Function to execute to get the promise
  */
 function getSpawnPromiseFactory(bin, args, options) {
-  return function() {
-    return getSpawnPromise(bin, args, options)
-  }
+  return () => getSpawnPromise(bin, args, options)
 }
 
 /**
@@ -115,10 +124,12 @@ function getSpawnPromise(bin, args, options = {}) {
  * @return {ChildProcess}
  */
 function getSpawnProcess(bin, args, options = {}) {
-  options = Object.assign(
-    {shell: true, stdio: 'inherit', cwd: process.cwd()},
-    options
-  )
+  options = {
+    shell: true,
+    stdio: 'inherit',
+    cwd: process.cwd(),
+    ...options
+  }
   return processSpawn(...getArrangedCommand(bin, args, options))
 }
 
@@ -147,54 +158,41 @@ function getArrangedCommand(bin, args, opts) {
  */
 function getCommandCallMessage(bin, args, options = {}) {
   const folder = options.cwd
-    ? '@' +
-      options.cwd
+    ? options.cwd
         .split(path.sep)
         .slice(-2)
         .join(path.sep)
     : ''
+
   const command = bin.split(path.sep).pop() + ' ' + args.join(' ')
-  return `${command} ${folder.grey}`
+  return `${command.bold.white} ${folder.brightWhite}`
 }
 
-/*
+/**
  * Shows an error in the command line and exits process
  * It also outputs help content of the command
  * The program param will have commander instance to output the help command
  * @param  {String} msg
  * @param  {Object} foreignProgram
- * @return
  */
-const showError = (msg, foreignProgram) => {
-  const logRed = txt => console.log(colors.red(txt))
-  logRed(
-    `\n${figures.cross} An error occurred during command execution. Info:\n`
-  )
-  logRed(colors.red(msg)) // eslint-disable-line no-console
-  foreignProgram
-    ? foreignProgram.outputHelp(txt => txt)
-    : program.outputHelp(txt => txt)
-
+const showError = (msg, foreignProgram = program) => {
+  console.error(colors.red(`✖ Error: ${msg}\n`))
+  foreignProgram.outputHelp(txt => txt)
   process.exit(1)
 }
 
-/*
+/**
  * Shows a visible warning message the command line.
- * @param  {String} msg
- * @return
+ * @param {String} msg
  */
 const showWarning = msg => {
-  const logYellow = txt =>
-    console.log(colors.black.bgYellow(`${figures.warning} ${txt}`)) // eslint-disable-line no-console
-  logYellow(msg)
+  console.warn(colors.black.bgYellow(`⚠ ${msg}\n`))
 }
 
 module.exports = {
-  serialSpawn,
-  parallelSpawn,
-  spawnList,
-  getSpawnPromiseFactory,
   getSpawnPromise,
+  parallelSpawn,
+  serialSpawn,
   showError,
   showWarning
 }

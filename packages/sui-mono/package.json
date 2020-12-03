@@ -15,15 +15,10 @@
   "dependencies": {
     "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
-    "colors": "1.4.0",
-    "commander": "6.1.0",
-    "commitizen": "4.2.1",
-    "conventional-changelog": "3.1.23",
-    "execa": "4.0.3",
-    "figures": "3.2.0",
-    "git-url-parse": "11.3.0",
-    "log-update": "4.0.0",
-    "p-queue": "6.6.1",
+    "commander": "6.2.0",
+    "commitizen": "4.2.2",
+    "conventional-changelog": "3.1.24",
+    "git-url-parse": "11.4.0",
     "rimraf": "3.0.2"
   },
   "repository": {
