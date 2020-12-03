@@ -103,6 +103,7 @@ function getSpawnPromise(bin, args, options = {}) {
       log(getCommandCallMessage(bin, args, options))
     }
     getSpawnProcess(bin, args, options).on('exit', code => {
+      console.log({code})
       code === CODE_OK
         ? resolve(code)
         : reject(
@@ -131,6 +132,7 @@ function getSpawnProcess(bin, args, options = {}) {
     cwd: process.cwd(),
     ...options
   }
+  console.log('getSpawnProcess', options)
   return processSpawn(...getArrangedCommand(bin, args, options))
 }
 
