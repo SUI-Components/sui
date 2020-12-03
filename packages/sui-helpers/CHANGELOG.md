@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.23.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add some logging ([479e91e](https://github.com/SUI-Components/sui/commit/479e91e4505eba9b6dcf87edd52e504a27d2c67b))
+
+
+
 # 1.22.0 (2020-12-03)
 
 
