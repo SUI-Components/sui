@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.63.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add some logging ([9f84855](https://github.com/SUI-Components/sui/commit/9f84855be1dd9865662f7f3022e4fcfbab131782))
+* use root packages ([61233a6](https://github.com/SUI-Components/sui/commit/61233a669212f46513a22ddf1717f81bce509097))
+
+
+### Features
+
+* improve logging and output info ([6ea408d](https://github.com/SUI-Components/sui/commit/6ea408d8017b1d6337beb4e1c1506dc10afad0c7))
+* remove link command from sui-mono ([fe60923](https://github.com/SUI-Components/sui/commit/fe609231551b50c502cea290cfc55f89012d7293))
+* use new @s-ui/helpers to reuse code and upgrade dependencies ([2143dd6](https://github.com/SUI-Components/sui/commit/2143dd68c1effd87f65bcdcd1a14fa4729fbdb74))
+
+
+
 # 1.61.0 (2020-11-11)
 
 
