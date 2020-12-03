@@ -70,6 +70,7 @@ const NPM_CMD = [
   NPM_BIN,
   [
     'install',
+    '--loglevel=error',
     audit ? '' : '--no-audit',
     production ? '--production' : '',
     progress ? '' : '--no-progress'
@@ -80,13 +81,14 @@ const RIMRAF_CMD = [
   ['package-lock.json', 'node_modules']
 ]
 
+console.log(`[sui-mono] Clean install ${scopeArgument || 'all'} packages`)
 console.info(`[sui-mono] CI mode enabled: ${ci}`)
 
 /**
  * Create needed commands to install packages
  * @param {string} cwd
  */
-const createInstallPackagesCommand = cwd => {
+const createInstallPackagesCommand = (cwd = process.cwd()) => {
   const executionParams = {cwd}
   if (ci) {
     const commandArgs = [
@@ -107,8 +109,9 @@ const createInstallPackagesCommand = cwd => {
 const installRootPackages = () => {
   if (!root) return Promise.resolve()
 
-  console.log(`Installing root packages...`)
-  return getSpawnPromise(createInstallPackagesCommand(process.cwd()))
+  console.log(`[sui-mono] Installing root packages...`)
+  const [bin, args] = createInstallPackagesCommand()
+  return getSpawnPromise(bin, args)
 }
 
 const executePhoenixOnPackages = () => {
@@ -119,13 +122,17 @@ const executePhoenixOnPackages = () => {
   const installPackagesCommands = scopes.map(createInstallPackagesCommand)
 
   return parallelSpawn(removePackagesCommands, {
-    chunk,
+    chunks: chunk,
     title: 'rimraf'
   }).then(() =>
-    parallelSpawn(installPackagesCommands, {chunk, title: 'npm install'})
+    parallelSpawn(installPackagesCommands, {
+      chunks: chunk,
+      title: 'npm install'
+    })
   )
 }
 
 installRootPackages()
   .then(executePhoenixOnPackages)
+  .then(() => process.exit(0))
   .catch(showError)

@@ -32,6 +32,7 @@ function serialSpawn(commands, options = {}) {
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function parallelSpawn(commands, options = {}) {
+  const {chunks, title} = options
   const symbol = figures.pointer + figures.pointer
 
   commands = commands.map(([bin, args, opts]) => [
@@ -40,11 +41,14 @@ function parallelSpawn(commands, options = {}) {
     {...opts, ...options}
   ])
 
-  log(`${symbol} Running ${commands.length} commands in parallel.`.cyan)
-  return spawnList(commands)
+  const commandsTitle = title || 'commands'
+
+  log(`${symbol} Running ${commands.length} ${commandsTitle} in parallel.`.cyan)
+  return spawnList(commands, {chunks, title})
     .then(() =>
       logUpdate.done(
-        `${figures.tick} ${commands.length} commands run successfully.`.green
+        `${figures.tick} ${commands.length} ${commandsTitle} run successfully.`
+          .green
       )
     )
     .catch(showError)
@@ -53,21 +57,24 @@ function parallelSpawn(commands, options = {}) {
 /**
  * Executes n commands as an updating list in the command line
  * @param  {Array} commands Binary with array of args, like ['npm', ['run', 'test']]
- * @param {Number} chunks Number of chunks of tasks to split by to avoid too long output
+ * @param {Object} options Options for the spawn list
+ * @param {Number=} options.chunks Number of chunks of tasks to split by to avoid too long output
+ * @param {string=} options.title Title to be used as command
  */
-function spawnList(commands, chunks = 15) {
+function spawnList(commands, {chunks = 15, title = ''} = {}) {
   const concurrency = Number(chunks)
   const queue = new Queue({concurrency})
 
-  commands.map(([bin, args, opts, title]) =>
+  commands.map(([bin, args, opts, titleFromCommand]) =>
     queue
       .add(() => execa(...getArrangedCommand(bin, args, opts)))
       .then(() => {
-        const commandTitle = title || getCommandCallMessage(bin, args, opts)
+        const titleToUse =
+          title || titleFromCommand || getCommandCallMessage(bin, args, opts)
         const {size, pending} = queue
-        const count = `${size + pending}/${commands.length}`
+        const count = `${size + pending} of ${commands.length} pending`
         logUpdate(
-          `${figures.pointerSmall} ${commandTitle} ${figures.line} ${count.cyan}`
+          `${figures.pointerSmall} ${titleToUse} ${figures.line} ${count.cyan}`
         )
       })
   )
@@ -161,6 +168,7 @@ function getCommandCallMessage(bin, args, options = {}) {
         .slice(-2)
         .join(path.sep)
     : ''
+
   const command = bin.split(path.sep).pop() + ' ' + args.join(' ')
   return `${command.bold.white} ${folder.brightWhite}`
 }
