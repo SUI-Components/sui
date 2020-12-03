@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.65.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* better logging for sui-mono ([98aa91a](https://github.com/SUI-Components/sui/commit/98aa91ab28e08cebe4615ff791605fe3cd40b165))
+
+
+
 # 1.64.0 (2020-12-03)
 
 
