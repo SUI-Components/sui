@@ -110,8 +110,11 @@ const installRootPackages = () => {
   if (!root) return Promise.resolve()
 
   console.log(`[sui-mono] Installing root packages...`)
-  const [bin, args] = createInstallPackagesCommand()
-  return getSpawnPromise(bin, args)
+  const [bin, ...args] = createInstallPackagesCommand()
+  console.log('installRootPackages', {bin, args})
+  return getSpawnPromise(bin, args).then(() => {
+    console.log('Installed root packages')
+  })
 }
 
 const executePhoenixOnPackages = () => {
