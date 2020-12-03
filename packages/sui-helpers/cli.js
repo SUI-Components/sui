@@ -43,11 +43,12 @@ function parallelSpawn(commands, options = {}) {
 
   log(`›› Running ${commands.length} ${commandsTitle} in parallel.`.cyan)
   return spawnList(commands, {chunks, title})
-    .then(() =>
+    .then(() => {
       logUpdate.done(
         `✔ ${commands.length} ${commandsTitle} run successfully.`.green
       )
-    )
+      return CODE_OK
+    })
     .catch(showError)
 }
 
