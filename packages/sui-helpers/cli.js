@@ -4,7 +4,6 @@ const colors = require('colors')
 const program = require('commander')
 const execa = require('execa')
 const {default: Queue} = require('p-queue')
-const figures = require('figures')
 const path = require('path')
 const logUpdate = require('./log-update.js')
 
@@ -33,7 +32,6 @@ function serialSpawn(commands, options = {}) {
  */
 function parallelSpawn(commands, options = {}) {
   const {chunks, title} = options
-  const symbol = figures.pointer + figures.pointer
 
   commands = commands.map(([bin, args, opts]) => [
     bin,
@@ -43,12 +41,11 @@ function parallelSpawn(commands, options = {}) {
 
   const commandsTitle = title || 'commands'
 
-  log(`${symbol} Running ${commands.length} ${commandsTitle} in parallel.`.cyan)
+  log(`›› Running ${commands.length} ${commandsTitle} in parallel.`.cyan)
   return spawnList(commands, {chunks, title})
     .then(() =>
       logUpdate.done(
-        `${figures.tick} ${commands.length} ${commandsTitle} run successfully.`
-          .green
+        `✔ ${commands.length} ${commandsTitle} run successfully.`.green
       )
     )
     .catch(showError)
@@ -73,9 +70,7 @@ function spawnList(commands, {chunks = 15, title = ''} = {}) {
           title || titleFromCommand || getCommandCallMessage(bin, args, opts)
         const {size, pending} = queue
         const count = `${size + pending} of ${commands.length} pending`
-        logUpdate(
-          `${figures.pointerSmall} ${titleToUse} ${figures.line} ${count.cyan}`
-        )
+        logUpdate(`› ${titleToUse} ─ ${count.cyan}`)
       })
   )
 
@@ -181,7 +176,7 @@ function getCommandCallMessage(bin, args, options = {}) {
  * @param  {Object} foreignProgram
  */
 const showError = (msg, foreignProgram = program) => {
-  console.error(colors.red(`${figures.cross} Error: ${msg}\n`))
+  console.error(colors.red(`✖ Error: ${msg}\n`))
   foreignProgram.outputHelp(txt => txt)
   process.exit(1)
 }
@@ -191,7 +186,7 @@ const showError = (msg, foreignProgram = program) => {
  * @param {String} msg
  */
 const showWarning = msg => {
-  console.warn(colors.black.bgYellow(`${figures.warning} ${msg}\n`))
+  console.warn(colors.black.bgYellow(`⚠ ${msg}\n`))
 }
 
 module.exports = {

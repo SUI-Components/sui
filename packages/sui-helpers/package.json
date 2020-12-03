@@ -7,7 +7,6 @@
     "colors": "1.4.0",
     "commander": "6.2.0",
     "execa": "4.1.0",
-    "figures": "3.2.0",
     "fs-extra": "9.0.1"
   },
   "license": "MIT",
