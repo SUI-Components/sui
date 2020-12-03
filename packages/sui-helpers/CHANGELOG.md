@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.22.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* return CODE OK ([3cfab9d](https://github.com/SUI-Components/sui/commit/3cfab9d09763b6889f3519157f3b93e1f06ce19c))
+
+
+
 # 1.21.0 (2020-12-03)
 
 
