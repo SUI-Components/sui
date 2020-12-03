@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.64.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* pass executionParams ([56007b5](https://github.com/SUI-Components/sui/commit/56007b59c6b1237afe2cfe496f8a84dc1a2ebc52))
+
+
+
 # 1.63.0 (2020-12-03)
 
 
