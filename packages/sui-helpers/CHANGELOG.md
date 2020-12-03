@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.24.0 (2020-12-03)
+
+
+### Features
+
+* use more execa and avoid spawn ([b777e6f](https://github.com/SUI-Components/sui/commit/b777e6f31e7fa847f91d84a65d005261c652e814))
+
+
+
 # 1.23.0 (2020-12-03)
 
 
