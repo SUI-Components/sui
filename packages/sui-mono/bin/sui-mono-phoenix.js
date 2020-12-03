@@ -110,9 +110,9 @@ const installRootPackages = () => {
   if (!root) return Promise.resolve()
 
   console.log(`[sui-mono] Installing root packages...`)
-  const [bin, ...args] = createInstallPackagesCommand()
+  const [bin, args, executionParams] = createInstallPackagesCommand()
   console.log('installRootPackages', {bin, args})
-  return getSpawnPromise(bin, args).then(() => {
+  return getSpawnPromise(bin, args, executionParams).then(() => {
     console.log('Installed root packages')
   })
 }
