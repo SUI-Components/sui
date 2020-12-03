@@ -1,5 +1,4 @@
 /* eslint no-console:0 */
-const processSpawn = require('child_process').spawn
 const colors = require('colors')
 const program = require('commander')
 const execa = require('execa')
@@ -9,6 +8,7 @@ const logUpdate = require('./log-update.js')
 
 const isWin = process.platform === 'win32'
 const CODE_OK = 0
+const CODE_KO = 1
 const log = console.log
 
 /**
@@ -94,46 +94,16 @@ function getSpawnPromiseFactory(bin, args, options) {
  * @param  {String} bin     Binary path or alias
  * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
  * @param  {Object} options Options to pass to child_process.spawn call
- * @return {Promise<Number>} Process exit code
+ * @return {Promise<any>} Process exit code
  */
 function getSpawnPromise(bin, args, options = {}) {
-  return new Promise(function(resolve, reject) {
-    if (options.stdio !== 'ignore') {
-      log('')
-      log(getCommandCallMessage(bin, args, options))
-    }
-    getSpawnProcess(bin, args, options).on('exit', code => {
-      console.log({code})
-      code === CODE_OK
-        ? resolve(code)
-        : reject(
-            new Error(
-              args
-                .toString()
-                .split(',')
-                .join(' ')
-            )
-          )
-    })
-  })
-}
-
-/**
- * Spawn given command and return a promise of the exit code value
- * @param  {String} bin     Binary path or alias
- * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
- * @param  {Object} [options={shell: true, stdio: 'inherit'}] Options to pass to child_process.spawn call
- * @return {ChildProcess}
- */
-function getSpawnProcess(bin, args, options = {}) {
-  options = {
-    shell: true,
-    stdio: 'inherit',
-    cwd: process.cwd(),
-    ...options
+  if (options.stdio !== 'ignore') {
+    log('')
+    log(getCommandCallMessage(bin, args, options))
   }
-  console.log('getSpawnProcess', options)
-  return processSpawn(...getArrangedCommand(bin, args, options))
+  return execa(bin, args, options)
+    .then(() => CODE_OK)
+    .catch(() => CODE_KO)
 }
 
 /**
