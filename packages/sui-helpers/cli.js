@@ -9,7 +9,6 @@ const colors = require('./colors.js')
 
 const CODE_OK = 0
 const CODE_KO = 1
-const log = console.log
 
 /**
  * Spawn several commands in children processes, in series
@@ -31,7 +30,7 @@ function serialSpawn(commands, options = {}) {
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function parallelSpawn(commands, options = {}) {
-  const {chunks, title} = options
+  const {chunks = 15, title} = options
 
   commands = commands.map(([bin, args, opts]) => [
     bin,
@@ -41,15 +40,13 @@ function parallelSpawn(commands, options = {}) {
 
   const commandsTitle = title || 'commands'
 
-  log(
+  console.log(
     colors.cyan(`›› Running ${commands.length} ${commandsTitle} in parallel.`)
   )
   return spawnList(commands, {chunks, title})
     .then(() => {
       logUpdate(
-        colors.success(
-          `✔ ${commands.length} ${commandsTitle} run successfully.`
-        )
+        colors.green(`✔ ${commands.length} ${commandsTitle} run successfully.`)
       )
       logUpdate.done()
       return CODE_OK
@@ -92,8 +89,8 @@ function spawnList(commands, {chunks = 15, title = ''} = {}) {
  */
 function getSpawnPromise(bin, args, options = {}) {
   if (options.stdio !== 'ignore') {
-    log('')
-    log(getCommandCallMessage(bin, args, options))
+    console.log('')
+    console.log(getCommandCallMessage(bin, args, options))
   }
   return execa(bin, args, options)
     .then(() => CODE_OK)
@@ -116,7 +113,7 @@ function getCommandCallMessage(bin, args, options = {}) {
     : ''
 
   const command = bin.split(path.sep).pop() + ' ' + args.join(' ')
-  return `${colors.bold(command)} ${colors.cyan(folder.brightWhite)}`
+  return `${colors.bold(command)} ${colors.cyan(folder)}`
 }
 
 /**
