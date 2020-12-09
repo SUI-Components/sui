@@ -33,7 +33,9 @@ const createUniversalPage = routeInfo => ({default: Page}) => {
   return ServerPage
 }
 
-// TODO: Remove unnecessary contextFactory in next major
+// TODO: Remove this method on next major as it's using unnecessary contextFactory param
+// and unnecesary calling done method instead relying on promises
+// TODO: We should make sure @s-ui/react-router supports Promises as react-router
 export default (contextFactory, importPage) => (routeInfo, done) => {
   importPage()
     .then(createUniversalPage(routeInfo))
