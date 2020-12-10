@@ -29,6 +29,7 @@
     "@s-ui/test": "4",
     "chai": "4.2.0",
     "husky": "4.3.0",
+    "sinon": "9.2.1",
     "validate-commit-msg": "2.14.0"
   },
   "config": {
