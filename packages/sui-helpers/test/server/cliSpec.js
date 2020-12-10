@@ -24,26 +24,14 @@ describe('[sui-helpers] cli.js utils', () => {
   })
 
   describe('parallelSpawn', () => {
-    beforeEach(() => {
-      sinon.stub(process.stdout, 'write')
-    })
-
     it('spawn several commands in children processes, in parallel', done => {
       parallelSpawn([
         ['echo', ['firstCall']],
         ['echo', ['secondCall']]
-      ]).then(() => {
-        const calls = process.stdout.write.getCalls()
-        const found = ['firstCall', 'secondCall'].every(arg =>
-          calls.find(call => call.firstArg.includes(arg))
-        )
-        expect(found).to.be.true
+      ]).then(CODE => {
+        expect(CODE).to.equal(0)
         done()
       })
-    })
-
-    afterEach(() => {
-      process.stdout.write.restore()
     })
   })
 

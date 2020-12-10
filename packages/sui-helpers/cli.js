@@ -46,10 +46,9 @@ function parallelSpawn(commands, options = {}) {
 
   return spawnList(commands, {chunks, title})
     .then(() => {
-      logUpdate(
+      logUpdate.done(
         colors.green(`✔ ${commands.length} ${commandsTitle} run successfully.`)
       )
-      logUpdate.done()
       return CODE_OK
     })
     .catch(showError)
