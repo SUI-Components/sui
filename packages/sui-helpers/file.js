@@ -1,5 +1,5 @@
 const fse = require('fs-extra')
-const colors = require('colors')
+const colors = require('./colors')
 const {showError} = require('./cli')
 
 const log = msg => console.log(colors.gray(msg)) // eslint-disable-line no-console

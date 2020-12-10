@@ -1,16 +1,10 @@
-const readline = require('readline')
 const {CI = false} = process.env
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
 
 const logUpdate = msg => {
   if (CI) return
-  readline.clearLine(process.stdout, 0)
-  readline.cursorTo(process.stdout, 0)
-  rl.write(msg)
+  process.stdout.clearLine(0)
+  process.stdout.cursorTo(0)
+  process.stdout.write(msg)
 }
 
 logUpdate.done = msg => {
