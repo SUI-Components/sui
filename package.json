@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/cli": "7.12.1",
     "@s-ui/lint": "3",
-    "@s-ui/mono": "1",
+    "@s-ui/mono": "beta",
     "@s-ui/precommit": "2",
     "@s-ui/test": "4",
     "chai": "4.2.0",
