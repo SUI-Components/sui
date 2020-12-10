@@ -48,10 +48,10 @@ export default Page => {
     // pathName from context is outdated, so we update it from routeInfo
     const context = {...suiContext, pathName: routeInfo.location.pathname}
 
-    const [{initialProps, isLoading}, setState] = useState({
+    const [{initialProps, isLoading}, setState] = useState(() => ({
       initialProps: initialPropsFromWindowRef.current || {},
       isLoading: !initialPropsFromWindowRef.current
-    })
+    }))
 
     useEffect(() => {
       // check if got initial props from window, because then there's no need
@@ -59,6 +59,8 @@ export default Page => {
       if (initialPropsFromWindowRef.current) {
         initialPropsFromWindowRef.current = undefined
       } else {
+        setState({initialProps, isLoading: true})
+
         Page.getInitialProps({context, routeInfo})
           .then(initialProps => {
             setState({initialProps, isLoading: false})
