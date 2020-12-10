@@ -25,28 +25,25 @@ describe('[sui-helpers] cli.js utils', () => {
 
   describe('parallelSpawn', () => {
     beforeEach(() => {
-      sinon.stub(console, 'log')
+      sinon.stub(process.stdout, 'write')
     })
 
     it('spawn several commands in children processes, in parallel', done => {
       parallelSpawn([
-        ['sleep', ['1 && echo true']],
+        ['echo', ['firstCall']],
         ['echo', ['secondCall']]
       ]).then(() => {
-        const calls = console.log.getCalls()
-        const firstEcho = calls.findIndex(call =>
-          call.firstArg.includes('firstCall')
+        const calls = process.stdout.write.getCalls()
+        const found = ['firstCall', 'secondCall'].every(arg =>
+          calls.find(call => call.firstArg.includes(arg))
         )
-        const secondEcho = calls.findIndex(call =>
-          call.firstArg.includes('secondCall')
-        )
-        expect(secondEcho < firstEcho).to.be.true
+        expect(found).to.be.true
         done()
       })
     })
 
     afterEach(() => {
-      console.log.restore()
+      process.stdout.write.restore()
     })
   })
 
@@ -57,7 +54,7 @@ describe('[sui-helpers] cli.js utils', () => {
 
     it('spawn several commands in children processes, in series', done => {
       serialSpawn([
-        ['sleep', ['1 && echo true']],
+        ['echo', ['firstCall']],
         ['echo', ['secondCall']]
       ]).then(() => {
         const calls = console.log.getCalls()

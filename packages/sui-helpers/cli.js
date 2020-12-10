@@ -43,6 +43,7 @@ function parallelSpawn(commands, options = {}) {
   console.log(
     colors.cyan(`›› Running ${commands.length} ${commandsTitle} in parallel.`)
   )
+
   return spawnList(commands, {chunks, title})
     .then(() => {
       logUpdate(

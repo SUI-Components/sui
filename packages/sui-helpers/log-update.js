@@ -10,8 +10,7 @@ const logUpdate = msg => {
 logUpdate.done = msg => {
   if (CI) return console.log(msg)
 
-  logUpdate(msg)
-  console.log()
+  console.log(msg)
 }
 
 module.exports = logUpdate
