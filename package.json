@@ -9,7 +9,7 @@
     "sui"
   ],
   "scripts": {
-    "phoenix": "npx @s-ui/mono phoenix",
+    "phoenix": "npx -p ./packages/sui-mono sui-mono phoenix",
     "phoenix:ci": "npx -p ./packages/sui-mono sui-mono phoenix --ci",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
