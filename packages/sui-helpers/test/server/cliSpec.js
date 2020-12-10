@@ -8,7 +8,7 @@ import {
 } from '../../cli.js'
 import sinon from 'sinon'
 
-describe.only('[sui-helpers] cli.js utils', () => {
+describe('[sui-helpers] cli.js utils', () => {
   describe('getSpawnPromise', () => {
     it('should spawn correct command and return a promise with success exit code', () => {
       getSpawnPromise('ls', ['-l']).then(EXIT_CODE => {
