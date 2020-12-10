@@ -3,6 +3,7 @@ const path = require('path')
 
 const log = require('../shared/log')
 const {defaultAlias} = require('../shared/resolve-alias')
+const createSassLinkImporter = require('./sassLinkImporter.js')
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
   paths.reduce((acc, pkg) => {
@@ -52,6 +53,26 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     }
   }
 
+  const sassLoaderWithLinkImporter = {
+    loader: require.resolve('sass-loader'),
+    options: {
+      sassOptions: {
+        importer: createSassLinkImporter(entryPoints)
+      }
+    }
+  }
+
+  const {rules} = config.module
+  const rulesWithLink = rules.map(rule => {
+    const {use, test: regex} = rule
+    if (!regex.test('.css')) return rule
+
+    return {
+      ...rule,
+      use: [...use.slice(0, -1), sassLoaderWithLinkImporter]
+    }
+  })
+
   return {
     ...config,
     resolve: {
@@ -64,15 +85,7 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     },
     module: {
       ...config.module,
-      rules: [...config.module.rules, linkLoader]
-    },
-    resolveLoader: {
-      alias: {
-        ...config.resolveLoader.alias,
-        'externals-manifest-loader': require.resolve(
-          './ExternalsManifestLoader'
-        )
-      }
+      rules: [...rulesWithLink, linkLoader]
     }
   }
 }
