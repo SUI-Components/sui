@@ -42,9 +42,15 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     diccFromAbsolutePaths(absolutePathForMonoRepo(linkAll))
   )
 
+  /**
+   * Create a loader config for javascript and css files that
+   * are handled by Webpack. So when we try to load them
+   * we check the entryPoints to change the source file
+   * if neccesary
+   */
   const linkLoader = {
     test: /\.(jsx?|scss)$/,
-    enforce: 'pre',
+    enforce: 'pre', // this will ensure is execute before transformations
     use: {
       loader: require.resolve('./LinkLoader'),
       options: {
@@ -53,6 +59,11 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     }
   }
 
+  /**
+   * Create a sass-loader config for scss files that
+   * are handled by Sass. These are nested modules imported
+   * and thus is sass binary which needs a special config for them.
+   */
   const sassLoaderWithLinkImporter = {
     loader: require.resolve('sass-loader'),
     options: {
@@ -62,6 +73,10 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     }
   }
 
+  /**
+   * Iterate over rules to change the previous sassLoader config
+   * with the one with the importer created
+   */
   const {rules} = config.module
   const rulesWithLink = rules.map(rule => {
     const {use, test: regex} = rule
@@ -73,6 +88,10 @@ module.exports = ({config, packagesToLink, linkAll}) => {
     }
   })
 
+  /**
+   * Return the new webpack config to be used
+   * with all the needed changes for linking packages
+   */
   return {
     ...config,
     resolve: {
