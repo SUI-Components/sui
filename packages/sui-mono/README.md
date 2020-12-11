@@ -2,7 +2,7 @@
 
 > Simple CLI for monorepo/multipackage.
 
-[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/mutlipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
+[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/multipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
 
 `sui-mono` provides:
 
@@ -34,8 +34,8 @@ We use:
     - [`access`](#access)
     - [Scope (`packagesFolder`, `deepLevel`, `customScopes`)](#scope-packagesfolder-deeplevel-customscopes)
       - [Examples](#examples)
-          - [Project Example](#project-example)
-          - [Case `sui-studio`](#case-sui-studio)
+        - [Project Example](#project-example)
+        - [Case `sui-studio`](#case-sui-studio)
       - [Manual scopes](#manual-scopes)
 
 <!-- /TOC -->
@@ -205,7 +205,7 @@ By default packages will be published as `restricted` in npm. If you want them t
 
 ### Scope (`packagesFolder`, `deepLevel`, `customScopes`)
 
-> 👉 `` Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
+> 👉 Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
 
 We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
 If you follow a structure where do you have:
