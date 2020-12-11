@@ -8,7 +8,7 @@ let __CACHE__ = {}
 const __RETRYS_BY_HASH__ = {}
 const __MAX_RETRYS_BY_HASH__ = 3
 const CRITICAL_CSS_SERVICE_DOMAIN =
-  'https://critical-css-service.es-global-pro.schip.io/'
+  'https://critical-css-service.es-global-pro.schip.io'
 
 const generateMinimalCSSHash = routes => {
   return routes.reduce((acc, route) => {
