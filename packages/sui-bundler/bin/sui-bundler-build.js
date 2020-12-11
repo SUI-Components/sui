@@ -2,13 +2,12 @@
 /* eslint-disable no-console */
 
 const fs = require('fs')
-const minifyStream = require('minify-stream')
 const path = require('path')
 const program = require('commander')
-const replaceStream = require('replacestream')
 const rimraf = require('rimraf')
-const staticModule = require('static-module')
 const webpack = require('webpack')
+const {minify} = require('terser')
+const {writeFile} = require('@s-ui/helpers/file')
 
 const config = require('../webpack.config.prod')
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
@@ -59,7 +58,7 @@ if (clean) {
 
 log.processing('Generating minified bundle. This will take a moment...')
 
-webpack(nextConfig).run((error, stats) => {
+webpack(nextConfig).run(async (error, stats) => {
   if (error) {
     log.error(error)
     return 1
@@ -116,23 +115,36 @@ webpack(nextConfig).run((error, stats) => {
     Boolean(importScripts.length) &&
       console.log('\nExternal Scripts Added to the SW:\n', stringImportScripts)
 
-    // generates the service worker
-    fs.createReadStream(path.resolve(__dirname, '..', 'service-worker.js'))
-      .pipe(replaceStream('// IMPORT_SCRIPTS_HERE', stringImportScripts))
-      .pipe(
-        staticModule({
-          'static-manifest': () => JSON.stringify(manifestStatics),
-          'static-cache-name': () => JSON.stringify(Date.now().toString()),
-          'static-statics-cache-only': () => JSON.stringify(staticsCacheOnly)
-        })
+    // read the service worker template
+    const swTemplate = fs.readFileSync(
+      path.resolve(__dirname, '..', 'service-worker.js'),
+      'utf-8'
+    )
+
+    console.log(swTemplate)
+
+    // replace all the variables from the template with the actual values
+    const swCode = swTemplate
+      .replace('// IMPORT_SCRIPTS_HERE', stringImportScripts)
+      .replace("require('static-manifest')", JSON.stringify(staticsCacheOnly))
+      .replace(
+        "require('static-cache-name')",
+        JSON.stringify(Date.now().toString())
       )
-      .pipe(minifyStream({sourceMap: false}))
-      .pipe(
-        fs.createWriteStream(
-          path.resolve(process.cwd(), 'public', 'service-worker.js')
-        )
+      .replace(
+        "require('static-statics-cache-only')",
+        JSON.stringify(manifestStatics)
       )
 
+    console.log(swCode)
+
+    const {code: minifiedSw} = await minify(swCode, {sourceMap: false})
+    const swFilePath = path.resolve(
+      process.cwd(),
+      'public',
+      'service-worker.js'
+    )
+    await writeFile(swFilePath, minifiedSw)
     console.log('\nService worker generated succesfully!\n')
   }
 
