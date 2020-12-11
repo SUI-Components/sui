@@ -83,19 +83,17 @@ webpack(nextConfig).run(async (error, stats) => {
 
   const staticsCacheOnly = offlineConfig.staticsCacheOnly || false
 
+  const resolvePublicFile = file => path.resolve(process.cwd(), 'public', file)
+
   if (offlinePageExists) {
     fs.copyFileSync(
       path.resolve(offlinePath),
-      path.resolve(process.cwd(), 'public', 'offline.html')
+      resolvePublicFile('offline.html')
     )
   }
 
   if (offlinePageExists || staticsCacheOnly) {
-    const manifest = require(path.resolve(
-      process.cwd(),
-      'public',
-      'asset-manifest.json'
-    ))
+    const manifest = require(resolvePublicFile('asset-manifest.json'))
 
     const rulesOfFilesToNotCache = [
       'runtime~', // webpack's runtime chunks are not meant to be cached
@@ -124,22 +122,19 @@ webpack(nextConfig).run(async (error, stats) => {
     // replace all the variables from the template with the actual values
     const swCode = swTemplate
       .replace('// IMPORT_SCRIPTS_HERE', stringImportScripts)
-      .replace("require('static-manifest')", JSON.stringify(staticsCacheOnly))
+      .replace("require('static-manifest')", JSON.stringify(manifestStatics))
       .replace(
         "require('static-cache-name')",
         JSON.stringify(Date.now().toString())
       )
       .replace(
         "require('static-statics-cache-only')",
-        JSON.stringify(manifestStatics)
+        JSON.stringify(staticsCacheOnly)
       )
 
     const {code: minifiedSw} = await minify(swCode, {sourceMap: false})
-    const swFilePath = path.resolve(
-      process.cwd(),
-      'public',
-      'service-worker.js'
-    )
+    const swFilePath = resolvePublicFile('service-worker.js')
+
     await writeFile(swFilePath, minifiedSw)
     console.log('\nService worker generated succesfully!\n')
   }
