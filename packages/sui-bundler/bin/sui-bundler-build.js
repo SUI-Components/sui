@@ -121,8 +121,6 @@ webpack(nextConfig).run(async (error, stats) => {
       'utf-8'
     )
 
-    console.log(swTemplate)
-
     // replace all the variables from the template with the actual values
     const swCode = swTemplate
       .replace('// IMPORT_SCRIPTS_HERE', stringImportScripts)
@@ -135,8 +133,6 @@ webpack(nextConfig).run(async (error, stats) => {
         "require('static-statics-cache-only')",
         JSON.stringify(manifestStatics)
       )
-
-    console.log(swCode)
 
     const {code: minifiedSw} = await minify(swCode, {sourceMap: false})
     const swFilePath = path.resolve(
