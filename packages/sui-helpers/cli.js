@@ -64,16 +64,29 @@ function parallelSpawn(commands, options = {}) {
 function spawnList(commands, {chunks = 15, title = ''} = {}) {
   const concurrency = Number(chunks)
   const queue = new Queue({concurrency})
+  const logUpdateProgress = (title, pending) => {
+    const pendingMessage = colors.cyan(
+      `${pending} of ${commands.length} pending`
+    )
+    logUpdate(`› ${title} ─ ${pendingMessage}`)
+  }
+
+  if (title) logUpdateProgress(title, commands.length)
 
   commands.map(([bin, args, opts, titleFromCommand]) =>
     queue
-      .add(() => execa(bin, args, opts))
+      .add(() =>
+        execa(bin, args, opts).catch(e => {
+          console.error(bin, args, opts)
+          console.error(e)
+        })
+      )
       .then(() => {
         const titleToUse =
           title || titleFromCommand || getCommandCallMessage(bin, args, opts)
         const {size, pending} = queue
-        const count = `${size + pending} of ${commands.length} pending`
-        logUpdate(`› ${titleToUse} ─ ${colors.cyan(count)}`)
+        const totalPending = size + pending
+        logUpdateProgress(titleToUse, totalPending)
       })
   )
 
