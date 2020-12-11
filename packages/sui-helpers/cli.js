@@ -92,7 +92,15 @@ function getSpawnPromise(bin, args, options = {}) {
     console.log('')
     console.log(getCommandCallMessage(bin, args, options))
   }
-  return execa(bin, args, options)
+
+  const execaOptions = {
+    shell: true,
+    stdio: 'inherit',
+    cwd: process.cwd(),
+    ...options
+  }
+
+  return execa(bin, args, execaOptions)
     .then(() => CODE_OK)
     .catch(() => CODE_KO)
 }
