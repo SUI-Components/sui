@@ -1,71 +1,55 @@
 const path = require('path')
-const readdirSync = require('fs').readdirSync
-const statSync = require('fs').statSync
+const {existsSync, readdirSync, statSync} = require('fs')
+const {getPackageJson} = require('@s-ui/helpers/packages')
 
-const basePath = process.cwd()
-const projectPackage = require(path.join(basePath, 'package.json'))
-const packageConfig = projectPackage.config
+const CWD = process.cwd()
 const ROOT_SCOPE = 'Root'
 
-function getOrDefault(key, defaultValue) {
-  return (
-    (packageConfig &&
-      packageConfig['sui-mono'] &&
-      packageConfig['sui-mono'][key]) ||
-    defaultValue
-  )
-}
+const {config: packageConfig = {}, name: packageName} = getPackageJson(CWD)
+const {
+  changelogFilename = 'CHANGELOG.md',
+  configCustomScopes = [],
+  deepLevel = 1,
+  packagesFolder = 'src',
+  publishAccess = 'restricted'
+} = packageConfig['sui-mono'] || {}
 
-const packagesFolder = getOrDefault('packagesFolder', 'src')
-const rootPath = path.join(basePath, packagesFolder)
-const deepLevel = getOrDefault('deepLevel', 1)
-const configCustomScopes = getOrDefault('customScopes', [])
-const publishAccess = getOrDefault('access', 'restricted')
-const changelogFilename = getOrDefault('changeLogFilename', 'CHANGELOG.md')
+const rootPath = path.join(CWD, packagesFolder)
 
 module.exports = {
   getScopes: function() {
-    const folders = cwds(rootPath, deepLevel)
-    const scopes = folders.map(folder => {
-      const reversedPath = folder.split(path.sep)
-      const scope = Array.apply(null, Array(deepLevel)).map(
-        Number.prototype.valueOf,
-        0
-      )
+    const folders = getDeepFolders(rootPath, deepLevel)
 
-      return scope
-        .map(() => reversedPath.pop())
-        .reverse()
-        .join(path.sep)
-    })
+    const scopes = folders
+      .filter(folder => existsSync(path.resolve(folder, 'package.json')))
+      .map(
+        folder =>
+          folder // /User/project/components/detail/slider
+            .split(path.sep) // ['', 'User', 'project', 'components', 'detail', 'slider']
+            .slice(deepLevel * -1) // ['detail', 'slider']
+            .join(path.sep) // 'detail/slider'
+      )
 
     const customScopes =
       hasRootFiles() && this.isMonoPackage()
         ? [...configCustomScopes, ROOT_SCOPE]
         : configCustomScopes
-    return flatten(scopes, customScopes)
+
+    return [...scopes, ...customScopes]
   },
   getScopesPaths: function(singleScope) {
-    const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
+    const packagesDir = path.join(CWD, this.getPackagesFolder())
     const scopes = singleScope ? [singleScope] : this.getScopes()
     return scopes
       .filter(scope => scope !== ROOT_SCOPE)
       .map(pkg => path.join(packagesDir, pkg))
   },
-  getPackagesFolder: function() {
-    return packagesFolder
-  },
-  getPublishAccess: function() {
-    return publishAccess
-  },
-  getProjectName: function() {
-    return projectPackage.name
-  },
-  getChangelogFilename: function() {
-    return changelogFilename
-  },
+  getPackagesFolder: () => packagesFolder,
+  getPublishAccess: () => publishAccess,
+  getProjectName: () => packageName,
+  getChangelogFilename: () => changelogFilename,
   isMonoPackage: function() {
-    const folders = cwds(rootPath, deepLevel)
+    const folders = getDeepFolders(rootPath, deepLevel)
     const pkgFolders = folders.filter(getPackageConfig)
     return !pkgFolders.length
   }
@@ -75,30 +59,18 @@ const getFolders = dir =>
   readdirSync(dir)
     .map(file => path.join(dir, file))
     .filter(onlyFolders)
-const onlyFolders = filePath => statSync(filePath).isDirectory()
-const flatten = (x, y) => x.concat(y)
 
-const cwds = (rootDir, deep) => {
-  const baseFolders = Array.apply(null, Array(deep)).map(
-    Number.prototype.valueOf,
-    0
-  )
+const onlyFolders = filePath =>
+  statSync(filePath).isDirectory() && !filePath.includes('node_modules')
 
-  return baseFolders.reduce(
-    acc => {
-      return acc.map(getFolders).reduce(flatten)
-    },
+const getDeepFolders = (rootDir, deep) => {
+  return [...Array(deep)].reduce(
+    currentFolders => currentFolders.flatMap(getFolders),
     [rootDir]
   )
 }
 
-const getPackageConfig = packagePath => {
-  try {
-    return require(path.join(packagePath, 'package.json'))
-  } catch (e) {
-    return null
-  }
-}
+const getPackageConfig = packagePath => getPackageJson(packagePath).name
 
 const hasRootFiles = () =>
   Boolean(
