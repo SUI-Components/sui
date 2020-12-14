@@ -5,7 +5,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
+const InlineChunkHtmlPlugin = require('./plugins/InlineChunkHtmlPlugin')
 
 const {
   when,
@@ -35,20 +35,20 @@ const cssFileName = config.onlyHash
   : '[name].[contenthash:8].css'
 
 module.exports = {
+  target: ['web', 'es5'],
   devtool: sourceMap,
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {...aliasFromConfig},
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json'],
+    fallback: {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty'
+    }
   },
-  entry: config.vendor
-    ? {
-        app: MAIN_ENTRY_POINT,
-        vendor: config.vendor
-      }
-    : MAIN_ENTRY_POINT,
-  target: 'web',
+  entry: MAIN_ENTRY_POINT,
   output: {
     chunkFilename: filename,
     filename,
@@ -59,12 +59,11 @@ module.exports = {
     // avoid looping over all the modules after the compilation
     checkWasmTypes: false,
     minimize: true,
-    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()],
+    minimizer: [minifyJs({extractComments}), minifyCss()],
     runtimeChunk: true,
     splitChunks
   },
   plugins: cleanList([
-    new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({
@@ -124,10 +123,5 @@ module.exports = {
       )
     ])
   },
-  resolveLoader,
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  }
+  resolveLoader
 }

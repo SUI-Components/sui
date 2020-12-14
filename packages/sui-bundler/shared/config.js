@@ -8,4 +8,4 @@ const {extractComments, sourcemaps} = config
 
 exports.config = config
 exports.extractComments = extractComments || false
-exports.sourceMap = (sourcemaps && sourcemaps.prod) || 'none'
+exports.sourceMap = (sourcemaps && sourcemaps.prod) || false

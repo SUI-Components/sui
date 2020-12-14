@@ -2,7 +2,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const {CI = false} = process.env
 const CI_PARALLEL_CORES = 2
 
-module.exports = ({extractComments, sourceMap}) =>
+module.exports = ({extractComments}) =>
   new TerserPlugin({
     extractComments,
     terserOptions: {
@@ -43,9 +43,5 @@ module.exports = ({extractComments, sourceMap}) =>
     // For CI: Use only fixed cores as it gives incorrect info and could cause troubles
     // Related: https://github.com/webpack-contrib/terser-webpack-plugin/issues/202
     // If not CI then use os.cpus().length - 1
-    parallel: CI ? CI_PARALLEL_CORES : true,
-    // Enable file caching
-    cache: true,
-    // use sourceMap if parameter is provided
-    sourceMap: !!sourceMap
+    parallel: CI ? CI_PARALLEL_CORES : true
   })
