@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/hoc",
-  "version": "1.29.1",
+  "version": "1.30.0",
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
   "scripts": {
