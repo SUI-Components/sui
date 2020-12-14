@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.69.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* avoid sui-mono to get wrong folders ([7e235c4](https://github.com/SUI-Components/sui/commit/7e235c4bc4f5692101372a8e2b887f217b68fb8b))
+* force new release without console.log ([b4d0a74](https://github.com/SUI-Components/sui/commit/b4d0a74efded0cc572a1dd687438c846a7ac61e3))
+* use correct access config ([1ec2947](https://github.com/SUI-Components/sui/commit/1ec2947a188957ac88908a7d9249ca25e96dcf42))
+
+
+### Features
+
+* avoid removing folders on CI as they don't exist ([57457c3](https://github.com/SUI-Components/sui/commit/57457c39bfa6ee9d9d1c9caa523b1371e5e64302))
+
+
+
 # 1.65.0 (2020-12-03)
 
 
