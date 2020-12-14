@@ -111,7 +111,6 @@ const installRootPackages = () => {
 
   console.log(`[sui-mono] Installing root packages...`)
   const [bin, args, executionParams] = createInstallPackagesCommand()
-  console.log('installRootPackages', {bin, args, executionParams})
   return getSpawnPromise(bin, args, executionParams).then(() => {
     console.log('Installed root packages')
   })
@@ -124,10 +123,16 @@ const executePhoenixOnPackages = () => {
   const removePackagesCommands = scopes.map(cwd => [...RIMRAF_CMD, {cwd}])
   const installPackagesCommands = scopes.map(createInstallPackagesCommand)
 
-  return parallelSpawn(removePackagesCommands, {
-    chunks: chunk,
-    title: 'rimraf'
-  }).then(() =>
+  // if we're on CI, we don't need to remove folders
+  const removeFoldersPromise = ci
+    ? Promise.resolve()
+    : parallelSpawn(removePackagesCommands, {
+        chunks: chunk,
+        title: 'rimraf'
+      })
+
+  // after cleaning node_modules folders, we install packages
+  return removeFoldersPromise.then(() =>
     parallelSpawn(installPackagesCommands, {
       chunks: chunk,
       title: 'npm install'

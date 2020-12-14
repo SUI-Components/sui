@@ -1,15 +1,14 @@
 /* eslint no-console:0 */
-const colors = require('colors')
 const program = require('commander')
 const execa = require('execa')
 const {default: Queue} = require('p-queue')
 const path = require('path')
-const logUpdate = require('./log-update.js')
 
-const isWin = process.platform === 'win32'
+const logUpdate = require('./log-update.js')
+const colors = require('./colors.js')
+
 const CODE_OK = 0
 const CODE_KO = 1
-const log = console.log
 
 /**
  * Spawn several commands in children processes, in series
@@ -19,7 +18,7 @@ const log = console.log
  */
 function serialSpawn(commands, options = {}) {
   return commands.reduce(
-    (promise, args) => promise.then(getSpawnPromiseFactory(...args, options)),
+    (promise, args) => promise.then(() => getSpawnPromise(...args, options)),
     Promise.resolve()
   )
 }
@@ -31,7 +30,7 @@ function serialSpawn(commands, options = {}) {
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function parallelSpawn(commands, options = {}) {
-  const {chunks, title} = options
+  const {chunks = 15, title} = options
 
   commands = commands.map(([bin, args, opts]) => [
     bin,
@@ -41,11 +40,14 @@ function parallelSpawn(commands, options = {}) {
 
   const commandsTitle = title || 'commands'
 
-  log(`›› Running ${commands.length} ${commandsTitle} in parallel.`.cyan)
+  console.log(
+    colors.cyan(`›› Running ${commands.length} ${commandsTitle} in parallel.`)
+  )
+
   return spawnList(commands, {chunks, title})
     .then(() => {
       logUpdate.done(
-        `✔ ${commands.length} ${commandsTitle} run successfully.`.green
+        colors.green(`✔ ${commands.length} ${commandsTitle} run successfully.`)
       )
       return CODE_OK
     })
@@ -62,31 +64,33 @@ function parallelSpawn(commands, options = {}) {
 function spawnList(commands, {chunks = 15, title = ''} = {}) {
   const concurrency = Number(chunks)
   const queue = new Queue({concurrency})
+  const logUpdateProgress = (title, pending) => {
+    const pendingMessage = colors.cyan(
+      `${pending} of ${commands.length} pending`
+    )
+    logUpdate(`› ${title} ─ ${pendingMessage}`)
+  }
+
+  if (title) logUpdateProgress(title, commands.length)
 
   commands.map(([bin, args, opts, titleFromCommand]) =>
     queue
-      .add(() => execa(...getArrangedCommand(bin, args, opts)))
+      .add(() =>
+        execa(bin, args, opts).catch(e => {
+          console.error(bin, args, opts)
+          console.error(e)
+        })
+      )
       .then(() => {
         const titleToUse =
           title || titleFromCommand || getCommandCallMessage(bin, args, opts)
         const {size, pending} = queue
-        const count = `${size + pending} of ${commands.length} pending`
-        logUpdate(`› ${titleToUse} ─ ${count.cyan}`)
+        const totalPending = size + pending
+        logUpdateProgress(titleToUse, totalPending)
       })
   )
 
   return queue.onIdle()
-}
-
-/**
- * Get a function that returns a promise of given command
- * @param  {String} bin     Binary path or alias
- * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
- * @param  {Object} options Options to pass to child_process.spawn call
- * @return {Function} Function to execute to get the promise
- */
-function getSpawnPromiseFactory(bin, args, options) {
-  return () => getSpawnPromise(bin, args, options)
 }
 
 /**
@@ -98,28 +102,20 @@ function getSpawnPromiseFactory(bin, args, options) {
  */
 function getSpawnPromise(bin, args, options = {}) {
   if (options.stdio !== 'ignore') {
-    log('')
-    log(getCommandCallMessage(bin, args, options))
+    console.log('')
+    console.log(getCommandCallMessage(bin, args, options))
   }
-  return execa(bin, args, options)
+
+  const execaOptions = {
+    shell: true,
+    stdio: 'inherit',
+    cwd: process.cwd(),
+    ...options
+  }
+
+  return execa(bin, args, execaOptions)
     .then(() => CODE_OK)
     .catch(() => CODE_KO)
-}
-
-/**
- * Returns modified command to work on linux, osx and windows.
- * The flag '#!/usr/bin/env node' is ignored by Windows. So the scripts must
- * be executed by node explicitely.
- * We assume that if `bin` is an abolsute path, it's always a js file to execute.
- * @param  {String} bin     Binary path or alias
- * @param  {Array} args    Array of args, like ['npm', ['run', 'test']]
- * @param  {Object} opts to pass to child_process.spawn call
- * @returns {Object} {bin, args, options}
- */
-function getArrangedCommand(bin, args, opts) {
-  return path.isAbsolute(bin) && isWin // check if it's a file or an alias
-    ? ['node', [bin, ...args], opts]
-    : [bin, args, opts]
 }
 
 /**
@@ -138,7 +134,7 @@ function getCommandCallMessage(bin, args, options = {}) {
     : ''
 
   const command = bin.split(path.sep).pop() + ' ' + args.join(' ')
-  return `${command.bold.white} ${folder.brightWhite}`
+  return `${colors.bold(command)} ${colors.cyan(folder)}`
 }
 
 /**
@@ -159,7 +155,7 @@ const showError = (msg, foreignProgram = program) => {
  * @param {String} msg
  */
 const showWarning = msg => {
-  console.warn(colors.black.bgYellow(`⚠ ${msg}\n`))
+  console.warn(colors.yellow(`⚠ ${msg}\n`))
 }
 
 module.exports = {

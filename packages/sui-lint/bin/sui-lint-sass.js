@@ -31,7 +31,7 @@ getFilesToLint(EXTENSIONS, program.pattern || '**/src/**/*.scss').then(
 
         '--config',
         CONFIG_PATH,
-        '-i',
+        '--ignore-pattern',
         `'${patterns.join(', ')}'`
       ])) ||
     console.log('[sui-lint sass] No sass files to lint.')

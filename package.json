@@ -9,8 +9,8 @@
     "sui"
   ],
   "scripts": {
-    "phoenix": "npx @s-ui/mono phoenix",
-    "phoenix:ci": "npx -p @s-ui/mono sui-mono phoenix --ci",
+    "phoenix": "npx -p @s-ui/mono sui-mono phoenix",
+    "phoenix:ci": "npx -p ./packages/sui-mono sui-mono phoenix --ci",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "NODE_ENV=test npm run test:client && NODE_ENV=test npm run test:server",
@@ -29,6 +29,7 @@
     "@s-ui/test": "4",
     "chai": "4.2.0",
     "husky": "4.3.0",
+    "sinon": "9.2.1",
     "validate-commit-msg": "2.14.0"
   },
   "config": {

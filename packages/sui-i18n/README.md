@@ -117,7 +117,9 @@ if (global.Intl) {
 }
 ```
 
-### Setting a currency
+### Currency
+
+#### Setting a currency
 
 We can format price numbers by setting a currency in our app. Number will be formatted regarding culture and currency set.
 
@@ -136,6 +138,25 @@ i18n.culture = 'en-GB';
 i18n.currency = 'GBP';
 i18n.c(1000) //=> £1,000
 i18n.c(1000000) //=> £1,000,000
+```
+
+#### Currency symbol
+
+Get the currency symbol.
+
+```javascript
+import I18n from '@s-ui/i18n';
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
+
+const i18n = new I18n({adapter: new Polyglot()});
+
+i18n.culture = 'es-ES';
+i18n.currency = 'EUR';
+i18n.currencySymbol //=> €
+
+i18n.culture = 'en-GB';
+i18n.currency = 'GBP';
+i18n.currencySymbol //=> £
 ```
 
 ### Formatting minor types
