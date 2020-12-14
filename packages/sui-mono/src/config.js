@@ -20,15 +20,13 @@ module.exports = {
   getScopes: function() {
     const folders = getDeepFolders(rootPath, deepLevel)
 
-    const scopes = folders
-      .filter(folder => existsSync(path.resolve(folder, 'package.json')))
-      .map(
-        folder =>
-          folder // /User/project/components/detail/slider
-            .split(path.sep) // ['', 'User', 'project', 'components', 'detail', 'slider']
-            .slice(deepLevel * -1) // ['detail', 'slider']
-            .join(path.sep) // 'detail/slider'
-      )
+    const scopes = folders.map(
+      folder =>
+        folder // /User/project/components/detail/slider
+          .split(path.sep) // ['', 'User', 'project', 'components', 'detail', 'slider']
+          .slice(deepLevel * -1) // ['detail', 'slider']
+          .join(path.sep) // 'detail/slider'
+    )
 
     const customScopes =
       hasRootFiles() && this.isMonoPackage()
