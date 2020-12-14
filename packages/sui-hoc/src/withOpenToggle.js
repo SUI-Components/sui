@@ -6,7 +6,7 @@ export default BaseComponent => {
 
   return class WithOpenToggle extends Component {
     state = {
-      isOpen: false
+      isOpen: Boolean(this.props.isOpen)
     }
 
     static displayName = `WithOpenToggle(${displayName})`
