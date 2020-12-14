@@ -7,11 +7,11 @@ const ROOT_SCOPE = 'Root'
 
 const {config: packageConfig = {}, name: packageName} = getPackageJson(CWD)
 const {
+  access: publishAccess = 'restricted',
   changelogFilename = 'CHANGELOG.md',
-  configCustomScopes = [],
+  customScopes: configCustomScopes = [],
   deepLevel = 1,
-  packagesFolder = 'src',
-  publishAccess = 'restricted'
+  packagesFolder = 'src'
 } = packageConfig['sui-mono'] || {}
 
 const rootPath = path.join(CWD, packagesFolder)
