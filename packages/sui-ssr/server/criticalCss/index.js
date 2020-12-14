@@ -7,6 +7,8 @@ let __REQUESTING__ = false
 let __CACHE__ = {}
 const __RETRYS_BY_HASH__ = {}
 const __MAX_RETRYS_BY_HASH__ = 3
+const __CRITICAL_CSS_SERVICE_DOMAIN__ =
+  'https://critical-css-service.es-global-pro.schip.io'
 
 const generateMinimalCSSHash = routes => {
   return routes.reduce((acc, route) => {
@@ -97,7 +99,7 @@ export default config => (req, res, next) => {
   ) {
     logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
 
-    const serviceRequestURL = `https://get-critical-css-service.vercel.app/${device}?url=${encodeURIComponent(
+    const serviceRequestURL = `${__CRITICAL_CSS_SERVICE_DOMAIN__}/${device}?url=${encodeURIComponent(
       urlRequest
     )}&extraHeaders=${encodeURIComponent(
       JSON.stringify(currentConfig.customHeaders || {})
