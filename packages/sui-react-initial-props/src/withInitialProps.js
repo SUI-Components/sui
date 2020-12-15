@@ -59,7 +59,10 @@ export default Page => {
       if (initialPropsFromWindowRef.current) {
         initialPropsFromWindowRef.current = undefined
       } else {
-        setState({initialProps, isLoading: true})
+        // only update state if already request initial props
+        if (requestedInitialPropsOnceRef.current) {
+          setState({initialProps, isLoading: true})
+        }
 
         Page.getInitialProps({context, routeInfo})
           .then(initialProps => {
