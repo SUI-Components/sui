@@ -97,7 +97,7 @@ export default Page => {
 
   // if `keepMounted` property is found and the component is the same one,
   // we just reuse it instead of returning a new one
-  if (Page.keepMounted && Page.name === latestClientPage?.Page?.name) {
+  if (Page.keepMounted && Page.displayName === latestClientPage?.Page?.displayName) {
     return latestClientPage
   }
 
