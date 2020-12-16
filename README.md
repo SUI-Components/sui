@@ -1,4 +1,4 @@
-# SUI
+# SUI ![CI](https://github.com/SUI-Components/sui/workflows/CI/badge.svg)
 
 SUI is a set of packages which goal to ease development of SUI-based components and web apps, providing:
 
