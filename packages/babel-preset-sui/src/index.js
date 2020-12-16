@@ -14,7 +14,7 @@ const plugins = (api, {useESModules = true} = {}) => [
   [
     require('babel-plugin-transform-react-remove-prop-types').default,
     {
-      removeImport: true
+      mode: 'wrap'
     }
   ],
   [
