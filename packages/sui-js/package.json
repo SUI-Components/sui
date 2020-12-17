@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "2.18.0",
+  "version": "2.19.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
