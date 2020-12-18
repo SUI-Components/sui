@@ -22,11 +22,19 @@ program
 
 const run = async () => {
   try {
-    await serialSpawn([
+    const result = await serialSpawn([
       [
         suiTestClientPath,
         [
-          '--src-pattern', path.join('node_modules', '@s-ui', 'studio', 'src', 'runtime-mocha', 'index.js'), // eslint-disable-line
+          '--src-pattern',
+          path.join(
+            'node_modules',
+            '@s-ui',
+            'studio',
+            'src',
+            'runtime-mocha',
+            'index.js'
+          ),
           program.watch && '--watch',
           program.ci && '--ci'
         ].filter(Boolean),
@@ -37,9 +45,12 @@ const run = async () => {
       ]
     ])
 
-    if (!program.watch) {
+    if (program.watch) {
       process.exit(0)
     }
+
+    // if the tests fails results = 1
+    process.exit(result)
   } catch (err) {
     console.error(err)
     process.exit(err.code || 1)
