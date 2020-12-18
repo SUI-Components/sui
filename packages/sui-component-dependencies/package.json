@@ -15,6 +15,10 @@
     "@schibstedspain/theme-basic": "7",
     "classnames": "2.2.5"
   },
+  "scripts": {
+    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
+    "prepare": "npm run lib"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SUI-Components/sui.git"
@@ -22,5 +26,23 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-component-dependencies#readme"
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-component-dependencies#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "7",
+    "@testing-library/react": "11",
+    "prop-types": "15",
+    "react": "17",
+    "react-dom": "17",
+    "sinon": "9",
+    "sinon-chai": "3"
+  },
+  "config": {
+    "sui-test": {
+      "server": {
+        "forceTranspilation": [
+          "@babel/plugin-transform-modules-commonjs"
+        ]
+      }
+    }
+  }
 }
