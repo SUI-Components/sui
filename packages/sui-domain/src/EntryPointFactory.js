@@ -1,7 +1,9 @@
-import NotImplementedUseCase from './NotImplementedUseCase'
+import createNotImplementedUseCase from './createNotImplementedUseCase'
 
 export default ({useCases, config}) =>
   class EntryPoint {
+    subscribers = {}
+
     constructor(params = {config: {}}) {
       // decide to use a static config from the factory
       // or use a config passed to the constructor that could be mutated
@@ -10,7 +12,7 @@ export default ({useCases, config}) =>
     }
 
     /**
-     * Retreives one entry from the public dictionary
+     * Retrieves one entry from the public dictionary
      * The dictionary will contain the use cases and configuration
      * @example
      * const configuration = domain.get('config')
@@ -26,9 +28,8 @@ export default ({useCases, config}) =>
       // get the useCase using the key passed by the user
       const useCase = this._useCases[key]
       // if the useCase doesn't exist, then let developer know that the useCase is not implemented
-      if (typeof useCase === 'undefined') {
-        return new NotImplementedUseCase(key)
-      }
+      if (typeof useCase === 'undefined')
+        return createNotImplementedUseCase(key)
 
       const isDynamicImportWholeFactory = useCase instanceof Array
 
@@ -42,13 +43,34 @@ export default ({useCases, config}) =>
 
       // if loader is undefined then is not implemented, otherwhise load async the useCase
       return loader === undefined
-        ? new NotImplementedUseCase(key)
+        ? createNotImplementedUseCase(key)
         : {
             execute: params => {
+              const subscriptionsForUseCase = this.subscribers[key] || []
               // load async the factory, execute use case and return the promise
-              return loader().then(factory =>
-                getMethod(factory)({config: this._config}).execute(params)
-              )
+              return loader()
+                .then(factory =>
+                  getMethod(factory)({config: this._config}).execute(params)
+                )
+                .then(result => {
+                  subscriptionsForUseCase.forEach(fn =>
+                    fn({error: null, params, result})
+                  )
+                  return result
+                })
+                .catch(e => {
+                  subscriptionsForUseCase.forEach(fn =>
+                    fn({error: e, params, result: null})
+                  )
+                  return Promise.reject(e)
+                })
+            },
+            subscribe: callback => {
+              this.subscribers[key] = this.subscribers[key] || []
+              this.subscribers[key].push(callback)
+
+              // return a way to remove the listener
+              return () => this.subscribers[key].filter(l => l !== callback)
             },
             $: {
               execute: {
