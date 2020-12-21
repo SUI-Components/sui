@@ -1,4 +1,3 @@
-import React from 'react'
 import {renderToNodeStream, renderToString} from 'react-dom/server'
 import InitialPropsContext from './initialPropsContext'
 
