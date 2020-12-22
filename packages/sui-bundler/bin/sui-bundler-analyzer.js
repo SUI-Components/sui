@@ -10,7 +10,7 @@ const logUpdate = require('@s-ui/helpers/log-update')
 const installNeededDependencies = async () => {
   try {
     require('webpack-bundle-analyzer')
-    require('duplicate-package-checker-webpack-plugin')
+    return true
   } catch (e) {
     logUpdate('Installing needed dependencies...')
     return getSpawnPromise('npm', [
@@ -22,12 +22,17 @@ const installNeededDependencies = async () => {
       'webpack-bundle-analyzer@4.3.0 duplicate-package-checker-webpack-plugin@3.0.0'
     ]).then(() => {
       logUpdate.done('Installed needed dependencies')
+      getSpawnPromise('./node_modules/.bin/sui-bundler', ['analyzer']).then(
+        () => false
+      )
     })
   }
 }
 
 ;(async () => {
-  await installNeededDependencies()
+  const keepExecution = await installNeededDependencies()
+  if (!keepExecution) return
+
   const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
   const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 
