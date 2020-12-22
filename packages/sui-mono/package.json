@@ -15,7 +15,7 @@
   "dependencies": {
     "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
-    "commander": "6.2.0",
+    "commander": "6.2.1",
     "commitizen": "4.2.2",
     "conventional-changelog": "3.1.24",
     "git-url-parse": "11.4.0",
