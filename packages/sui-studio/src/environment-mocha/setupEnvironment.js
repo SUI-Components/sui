@@ -1,11 +1,21 @@
+import SUIContext from '@s-ui/react-context'
 import {render} from '@testing-library/react'
 
-const setupEnvironment = Component => props => {
+const setupEnvironment = (Component, context) => props => {
   const container = document.createElement('div')
   container.setAttribute('id', 'test-container')
-  return render(<Component {...props} />, {
-    container: document.body.appendChild(container)
-  })
+  return render(
+    context ? (
+      <SUIContext.Provider value={context}>
+        <Component {...props} />
+      </SUIContext.Provider>
+    ) : (
+      <Component {...props} />
+    ),
+    {
+      container: document.body.appendChild(container)
+    }
+  )
 }
 
 export const addSetupEnvironment = target => {
