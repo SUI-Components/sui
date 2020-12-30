@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "cypressVersion": "4.3.0",
   "description": "",
   "bin": {
@@ -21,7 +21,7 @@
     "@babel/polyfill": "7.12.1",
     "@babel/register": "7.12.10",
     "@s-ui/helpers": "1",
-    "babel-loader": "8.2.1",
+    "babel-loader": "8.2.2",
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "6.0.0",
     "babel-preset-sui": "3",
