@@ -8,7 +8,6 @@ const logUpdate = require('./log-update.js')
 const colors = require('./colors.js')
 
 const CODE_OK = 0
-const CODE_KO = 1
 
 /**
  * Spawn several commands in children processes, in series
@@ -113,9 +112,7 @@ function getSpawnPromise(bin, args, options = {}) {
     ...options
   }
 
-  return execa(bin, args, execaOptions)
-    .then(() => CODE_OK)
-    .catch(() => CODE_KO)
+  return execa(bin, args, execaOptions).then(() => CODE_OK)
 }
 
 /**
