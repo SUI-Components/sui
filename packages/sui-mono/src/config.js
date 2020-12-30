@@ -1,5 +1,5 @@
 const path = require('path')
-const {existsSync, readdirSync, statSync} = require('fs')
+const {readdirSync, statSync} = require('fs')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 
 const CWD = process.cwd()
