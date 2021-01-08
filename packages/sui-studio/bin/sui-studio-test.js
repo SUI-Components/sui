@@ -38,7 +38,7 @@ const run = async () => {
           ),
           program.watch && '--watch',
           program.ci && '--ci',
-          program.timeout !== undefined && `-T ${program.timeout}`
+          program.timeout && `-T ${program.timeout}`
         ].filter(Boolean),
         {
           shell: false,
