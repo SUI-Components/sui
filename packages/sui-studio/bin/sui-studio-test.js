@@ -10,7 +10,7 @@ const suiTestClientPath = require.resolve('@s-ui/test/bin/sui-test-browser')
 program
   .option('-C, --ci', 'Run components tests in CLI, headless mode')
   .option('-W, --watch', 'Watch mode')
-  .option('-T, --timeout <timeout>', 'Timeout', 2000)
+  .option('-T, --timeout <timeout>', 'Timeout')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -38,7 +38,7 @@ const run = async () => {
           ),
           program.watch && '--watch',
           program.ci && '--ci',
-          `-T ${program.timeout}`
+          program.timeout !== undefined && `-T ${program.timeout}`
         ].filter(Boolean),
         {
           shell: false,
