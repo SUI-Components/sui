@@ -25,6 +25,7 @@
     "@s-ui/react-router": "1",
     "@s-ui/test": "4",
     "@testing-library/react": "10.0.4",
+    "@testing-library/react-hooks": "4.0.1",
     "@testing-library/user-event": "10.0.1",
     "chai": "4.2.0",
     "chai-dom": "1.8.2",
