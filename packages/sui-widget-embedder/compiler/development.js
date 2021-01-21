@@ -8,6 +8,10 @@ module.exports = ({address, page, port}) =>
     ...devConfig,
     context: path.resolve(process.cwd(), 'pages', page),
     entry: [`./index.js`],
+    optimization: {
+      ...devConfig.optimization,
+      runtimeChunk: false
+    },
     output: {
       path: '/',
       publicPath: `http://${address}:${port}/`,
