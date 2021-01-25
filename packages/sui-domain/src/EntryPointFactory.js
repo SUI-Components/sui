@@ -70,9 +70,16 @@ export default ({useCases, config}) =>
               this.subscribers[key].push(callback)
 
               // return a way to remove the listener
-              return () => this.subscribers[key].filter(l => l !== callback)
+              return {
+                unsubscribe: () => {
+                  this.subscribers[key] = this.subscribers[key].filter(
+                    l => l !== callback
+                  )
+                }
+              }
             },
             $: {
+              // support deprecated decorator @streamify
               execute: {
                 subscribe: (onNext, onError) => {
                   // creating an object here that will have a dispose method
