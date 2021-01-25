@@ -1,17 +1,17 @@
 {
   "name": "@s-ui/ci",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "",
   "main": "./bin/sui-ci.js",
   "bin": {
     "sui-ci": "./bin/sui-ci.js"
   },
   "dependencies": {
-    "@octokit/core": "3.2.1",
-    "commander": "6.2.0",
+    "@octokit/core": "3.2.4",
+    "commander": "6.2.1",
     "execa": "4.1.0",
     "git-remote-origin-url": "3.1.0",
-    "git-url-parse": "11.4.0"
+    "git-url-parse": "11.4.3"
   },
   "devDependencies": {
     "nock": "13.0.5"

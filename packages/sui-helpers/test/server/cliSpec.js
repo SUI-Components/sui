@@ -10,15 +10,17 @@ import sinon from 'sinon'
 
 describe('[sui-helpers] cli.js utils', () => {
   describe('getSpawnPromise', () => {
-    it('should spawn correct command and return a promise with success exit code', () => {
+    it('should spawn correct command and return a promise with success exit code', done => {
       getSpawnPromise('ls', ['-l']).then(EXIT_CODE => {
         expect(EXIT_CODE).to.equal(0)
+        done()
       })
     })
 
-    it('should try spawn incorrect command and return a promise with error exit code', () => {
-      getSpawnPromise('non-existent-command', ['error']).then(EXIT_CODE => {
-        expect(EXIT_CODE).to.equal(1)
+    it('should try spawn incorrect command and return a promise with error exit code', done => {
+      getSpawnPromise('non-existent-command', ['error']).catch(err => {
+        expect(err.command).to.equal('non-existent-command error')
+        done()
       })
     })
   })
