@@ -101,3 +101,17 @@ export default class CurrentUserService extends Service {
   }
 }
 ```
+
+## Listen a useCase
+
+`@s-ui/domain` includes a way to subscribe to eveyr useCase execution without the need of using any kind of decorator or external dependency.
+
+This is useful if you have side effects in a different place from where you're executing the useCase of the domain.
+
+```js
+domain
+  .get('generate_search_url_search_use_case')
+  .subscribe(({params, error, result}) => {
+    // doSomething when the useCase generate_search_url_search_use_case is called in other place
+  })
+```
