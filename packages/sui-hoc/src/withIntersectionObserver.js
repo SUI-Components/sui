@@ -16,7 +16,8 @@ export const hocIntersectionObserverWithOptions = (
     static contextTypes = BaseComponent.contextTypes
 
     state = {
-      isIntersecting: true
+      isIntersecting: true,
+      intersectionObserver: null
     }
 
     handleChange = ([{isIntersecting}]) => {
@@ -34,7 +35,16 @@ export const hocIntersectionObserverWithOptions = (
           /* webpackChunkName: "intersection-observer" */ 'intersection-observer'
         )
       }
-      new IntersectionObserver(this.handleChange).observe(target, options)
+      this.setState(
+        {
+          intersectionObserver: new IntersectionObserver(this.handleChange)
+        },
+        () => this.state.intersectionObserver.observe(target, options)
+      )
+    }
+
+    componentWillUnmount() {
+      this.state.intersectionObserver.disconnect()
     }
 
     render() {
