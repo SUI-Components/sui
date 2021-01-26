@@ -13,7 +13,7 @@ export default BaseComponent => {
 
     static propTypes = {
       /** isOpen */
-      isOpen: PropTypes.boolean
+      isOpen: PropTypes.bool
     }
 
     handleToggle = (_, {isOpen} = {}) => {
