@@ -139,6 +139,9 @@ Then you can use in your specs `cy.login()`
     -h, --help                               output usage information
     -b, --browser <browser>                  Select a different browser (chrome|edge|firefox)
     -N, --noWebSecurity                      Disable all web securities (CORS)
+    -K, --key                                It is used to authenticate the project into the Dashboard Service
+    -P, --parallel                           Run tests on parallel
+    -R, --record                             Record tests and send result to Dashboard Service
 ```
 
 #### `sui-test e2e --gui`
