@@ -94,7 +94,7 @@ If you want release your server to a branch (generate a clean package-lock file 
 $ npx sui-ssr release --email bot@email.com --name BotName
 ```
 
-To use this command you have to define a `GH_TOKEN` env var in your CI server. This token must be associate to the user and email passing by flags to the command
+To use this command you have to define a `GITHUB_TOKEN` env var in your CI server. This token must be associate to the user and email passing by flags to the command
 
 Example of a `.travis.yml`:
 
