@@ -4,11 +4,11 @@
 // IMPORT_SCRIPTS_HERE
 
 // will be replaced in build time by the real manifest.json content
-const manifestStatics = require('static-manifest')()
+const manifestStatics = require('static-manifest')
 // will be replaced in build time by the current timestamp
-const cacheName = require('static-cache-name')()
+const cacheName = require('static-cache-name')
 // will be replaced in build time and set to true if offline.staticsCacheOnly flag activated
-const staticsCacheOnly = require('static-statics-cache-only')()
+const staticsCacheOnly = require('static-statics-cache-only')
 
 const OFFLINE_PAGE = 'offline.html'
 let supportsResponseBodyStream

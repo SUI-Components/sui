@@ -2,14 +2,13 @@
 
 > Simple CLI for monorepo/multipackage.
 
-[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/mutlipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
+[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/multipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
 
 `sui-mono` provides:
 
 - Commit template → `sui-mono commit`
 - Release manager (parses commits to publish packages according to their changes) → `sui-mono check`, `sui-mono release`
 - Run commands inside each package → `sui-mono run npm install`, `sui-mono run-parallel npm install`
-- Link all packages that have dependencies between each other → sui-mono link
 
 We use:
 
@@ -27,7 +26,6 @@ We use:
   - [Usage](#usage)
     - [`run` command on all packages](#run-command-on-all-packages)
     - [`phoenix`](#phoenix)
-    - [`link`](#link)
     - [`commit`](#commit)
     - [`commit-all` commit for all contained packages](#commit-all-commit-for-all-contained-packages)
     - [`check` & `release`](#check--release)
@@ -108,19 +106,6 @@ Ables you to just reinstall the dependencies from a single scope
 ```sh
 sui-mono phoenix --no-root --scope atom/button
 ```
-
-### `link`
-
-Is you want to link all packages between each other, to ease development:
-
-```sh
-sui-mono link
-```
-
-Note that:
-
-- The monorepo will also be linked to the packages it contains if it uses them.
-- Packages that are not used locally will not be linked at all
 
 ### `commit`
 
@@ -220,7 +205,7 @@ By default packages will be published as `restricted` in npm. If you want them t
 
 ### Scope (`packagesFolder`, `deepLevel`, `customScopes`)
 
-> 👉 `` Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
+> 👉 Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
 
 We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
 If you follow a structure where do you have:

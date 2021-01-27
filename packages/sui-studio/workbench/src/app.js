@@ -5,6 +5,7 @@ import './styles.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
 import {isFunction} from '../../src/components/demo/utilities'
+import {importGlobals} from '../../src/components/globals'
 
 const queryStringToJSON = queryString => {
   if (queryString.indexOf('?') > -1) {
@@ -38,24 +39,22 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
     )
     requireContextThemesKeys = requireContextThemes.keys()
     styles = importAll(requireContextThemes)
-  } catch (e) {}
+  } catch {}
 
   let ctxt = {}
   try {
-    const resp = require('demo/context')
-    ctxt = resp.default || resp
-  } catch (e) {}
+    ctxt = require('demo/context').default
+  } catch {}
 
   let DemoComponent
   try {
-    const comp = require('demo/demo')
-    DemoComponent = comp.default || comp
-  } catch (e) {}
+    DemoComponent = require('demo/demo').default
+  } catch {}
 
   let demoStyles = ''
   try {
     demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
-  } catch (e) {}
+  } catch {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
   const themes = requireContextThemesKeys.reduce((acc, path, index) => {
@@ -67,6 +66,8 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
+
+  await importGlobals()
 
   ReactDOM.render(
     <ComponentToRender

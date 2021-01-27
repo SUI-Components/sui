@@ -64,16 +64,16 @@ program
 
 const {
   baseUrl,
-  userAgentAppend,
-  userAgent,
-  gui,
-  screenshotsOnError,
-  scope,
-  record,
-  key,
-  ci,
   browser,
-  noWebSecurity
+  ci,
+  gui,
+  key,
+  noWebSecurity,
+  record,
+  scope,
+  screenshotsOnError,
+  userAgent,
+  userAgentAppend
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),

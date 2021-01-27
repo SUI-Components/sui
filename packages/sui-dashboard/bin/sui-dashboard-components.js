@@ -38,8 +38,6 @@ const FLAGS_INSTALL = [
   'json'
 ]
 const repositories = [
-  'frontend-vb--uilib-widgets',
-
   'frontend-ma--web-app',
   'frontend-ma--uilib-widgets',
   'frontend-ma--web-app-plus',
@@ -91,6 +89,7 @@ const installCommands = repositories.map(repo => [
   ['install', ...FLAGS_INSTALL.map(f => `--${f}`)],
   {cwd: path.join(WORK_DIRECTORY, repo)}
 ])
+
 ;(async () => {
   await parallelSpawn(cloneSUIComponentsCommand)
   await parallelSpawn(cloneCommands)

@@ -6,7 +6,7 @@ const HEAD_CLOSING_TAG = '</head>'
 
 export default function dynamicRendering(fallback, dynamicsURLS = []) {
   return function middleware(req, resp, next) {
-    const {criticalCSS, prpl} = req
+    const {criticalCSS} = req
 
     if (!dynamicsURLS.length || seoBotDetect(req)) {
       return fallback.call(this, req, resp, next)
@@ -31,17 +31,6 @@ export default function dynamicRendering(fallback, dynamicsURLS = []) {
           'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\'"'
         )
         .replace(HEAD_CLOSING_TAG, replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG))
-    }
-
-    if (prpl) {
-      let linkHeader = prpl.hints
-        .reduce((acc, hint) => {
-          return `${acc},<${hint.url}>; rel=preload; as=script`
-        }, '')
-        .replace(/,/, '')
-
-      resp.set('Link', linkHeader)
-      linkHeader = null
     }
 
     return enabledDynamicRendering

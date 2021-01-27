@@ -45,17 +45,16 @@ It will, over parameter, make that the express server run over a username and pa
 
   Options:
 
-    -C, --clean  Remove previous zip
-    -E, --entry-point Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C
-    -h, --help   output usage information
-    -A, --auth <username:password> Will build the express definition under authentication htpassword like.
-    -O, --outputFileName <outputFileName> A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
-  Description:
+    -C, --clean                             Remove previous zip
+    -R, --docker-registry <dockerRegistry>  Custom registry to be used as a proxy or instead of the Docker Hub registry
+    -E, --entry-point                       Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C
+    -h, --help                              Output usage information
+    -A, --auth <username:password>          Will build the express definition under authentication htpassword like.
+    -O, --outputFileName <outputFileName>   A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
 
   Examples:
 
     $ sui-ssr archive
-
     $ sui-ssr archive --outputFileName=myFile // output: myFile-sui-ssr.zip
 ```
 
@@ -112,7 +111,7 @@ language: node_js
 dist: xenial
 
 node_js:
-  - "10"
+  - '10'
 
 before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
@@ -131,7 +130,7 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - "if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
+        - 'if [ ! -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
       script:
         - npx @s-ui/ssr release --email srv.scms.jarvis@schibsted.com --name J.A.R.V.I.S
     - stage: deploy
@@ -139,8 +138,8 @@ jobs:
       env: NODE_ENV=development
       before_install:
         - set -e
-        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
-      name: "Deploy dev"
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: 'Deploy dev'
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -151,8 +150,8 @@ jobs:
       env: NODE_ENV=production
       before_install:
         - set -e
-        - "if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi"
-      name: "Deploy pro"
+        - 'if [ -z $(git tag --points-at $TRAVIS_COMMIT) ]; then travis_terminate; fi'
+      name: 'Deploy pro'
       script:
         - echo "Esto construye $NODE_ENV con la versión $TRAVIS_TAG ($TRAVIS_COMMIT_MESSAGE)"
         - npm install surge
@@ -171,7 +170,7 @@ It uses the stdout stream so you can do things like:
 
 ## ENV Vars:
 
-- VERBOSE: Print in the console info about the criticalCSS and the PRPL middleware
+- VERBOSE: Print in the console info about the criticalCSS middleware
 - CONSOLE: By default the console is disabled if you want to watch your `console.log` set up this env var to true set up this env var to true
 
 ```
@@ -237,10 +236,8 @@ Configs accepted:
     ```json
     {
       "mandatoryCSSRules": {
-        "/*": [
-          ".ma-AdCard"
-        ]
-       }
+        "/*": [".ma-AdCard"]
+      }
     }
     ```
 
@@ -346,43 +343,41 @@ If this were your `src/index.html` file:
 
 ```html
 <html>
-<head>
-  <link rel="preconnect dns-prefetch" href="<%= CDN %>">
-  <!--THIRD_PARTY--><link rel="preconnect dns-prefetch" href="//c.dcdn.es">
-  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.es">
-  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.com">
-  <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <head>
+    <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
+    <!--THIRD_PARTY--><link rel="preconnect dns-prefetch" href="//c.dcdn.es" />
+    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.es" />
+    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.com" />
+    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
-  <!-- ShellAPP -->
-  <% if (css && vendor && app) { %>
-    <link as="style" rel="preload" href="<%= css %>">
-    <link as="script" rel="preload" href="<%= vendor.entry %>">
-    <link as="script" rel="preload" href="<%= app.entry %>">
-  <% } %>
+    <!-- ShellAPP -->
+    <% if (css && vendor && app) { %>
+      <link as="style" rel="preload" href="<%= css %>" />
+      <link as="script" rel="preload" href="<%= vendor.entry %>" />
+      <link as="script" rel="preload" href="<%= app.entry %>" />
+    <% } %>
 
-  <!-- ThridPartyScripts -->
+    <!-- ThridPartyScripts -->
 
-  <!-- Advertisement -->
-  <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= utagScript %>">
-  <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= openAdsScript %>">
+    <!-- Advertisement -->
+    <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= utagScript %>" />
+    <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= openAdsScript %>" />
 
-  <!-- Load 3th parties and ShellAPP -->
-  <% if (vendor && app) { %>
-    <script defer importance="high" src="<%= vendor.entry %>"></script>
-    <script defer importance="high" src="<%= app.entry %>"></script>
-  <% } %>
+    <!-- Load 3th parties and ShellAPP -->
+    <% if (vendor && app) { %>
+      <script defer importance="high" src="<%= vendor.entry %>"></script>
+      <script defer importance="high" src="<%= app.entry %>"></script>
+    <% } %>
 
-  <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
-  <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
+    <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
+    <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
+  </head>
 
-</head>
-
-<body>
-  <div id="app" class="app">
-    <!-- APP -->
-  </div>
-</body>
-
+  <body>
+    <div id="app" class="app">
+      <!-- APP -->
+    </div>
+  </body>
 </html>
 ```
 
@@ -392,7 +387,7 @@ and this is a fragment of his sui-ssr configuration in your package.json
 {
   "config": {
     "sui-ssr": {
-      "queryDisableThirdParties": "disable-third-parties",
+      "queryDisableThirdParties": "disable-third-parties"
     }
   }
 }
@@ -402,46 +397,43 @@ by making a request like this: GET /?disable-third-parties
 
 The sui-ssr response would be an HTML like the following:
 
-
 ```html
 <html>
-<head>
-  <link rel="preconnect dns-prefetch" href="<%= CDN %>">
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
+  <head>
+    <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
 
-  <!-- ShellAPP -->
-  <% if (css && vendor && app) { %>
-    <link as="style" rel="preload" href="<%= css %>">
-    <link as="script" rel="preload" href="<%= vendor.entry %>">
-    <link as="script" rel="preload" href="<%= app.entry %>">
-  <% } %>
+    <!-- ShellAPP -->
+    <% if (css && vendor && app) { %>
+      <link as="style" rel="preload" href="<%= css %>" />
+      <link as="script" rel="preload" href="<%= vendor.entry %>" />
+      <link as="script" rel="preload" href="<%= app.entry %>" />
+    <% } %>
 
-  <!-- ThridPartyScripts -->
+    <!-- ThridPartyScripts -->
 
-  <!-- Advertisement -->
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
+    <!-- Advertisement -->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
 
-  <!-- Load 3th parties and ShellAPP -->
-  <% if (vendor && app) { %>
-    <script defer importance="high" src="<%= vendor.entry %>"></script>
-    <script defer importance="high" src="<%= app.entry %>"></script>
-  <% } %>
+    <!-- Load 3th parties and ShellAPP -->
+    <% if (vendor && app) { %>
+      <script defer importance="high" src="<%= vendor.entry %>"></script>
+      <script defer importance="high" src="<%= app.entry %>"></script>
+    <% } %>
 
-  <!--THIRD_PARTY-->
-  <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+    <!--THIRD_PARTY-->
+  </head>
 
-</head>
-
-<body>
-  <div id="app" class="app">
-    <!-- APP -->
-  </div>
-</body>
-
+  <body>
+    <div id="app" class="app">
+      <!-- APP -->
+    </div>
+  </body>
 </html>
 ```
 

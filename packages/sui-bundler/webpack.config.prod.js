@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
 
@@ -88,7 +88,7 @@ module.exports = {
       template: './index.html'
     }),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/]),
-    new ManifestPlugin({fileName: 'asset-manifest.json'})
+    new WebpackManifestPlugin({fileName: 'asset-manifest.json'})
   ]),
   module: {
     rules: cleanList([

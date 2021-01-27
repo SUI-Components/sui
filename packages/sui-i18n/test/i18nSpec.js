@@ -97,6 +97,10 @@ describe('I18N', () => {
         it('formats number 1000000 properly', () => {
           expect(i18n.c(1000000)).to.eql('£1,000,000')
         })
+
+        it('gets currency symbol', () => {
+          expect(i18n.currencySymbol).to.eql('£')
+        })
       })
 
       describe('with euro (EUR) as currency type', () => {
@@ -113,6 +117,10 @@ describe('I18N', () => {
 
         it('formats number 1000000 properly', () => {
           expect(i18n.c(1000000)).to.eql('€1,000,000')
+        })
+
+        it('gets currency symbol', () => {
+          expect(i18n.currencySymbol).to.eql('€')
         })
       })
     })

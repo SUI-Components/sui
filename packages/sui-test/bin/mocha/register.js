@@ -6,7 +6,8 @@ const regexToAdd = forceTranspilation.map(
 )
 
 require('@babel/register')({
-  only: [/test/, /src/, /@s-ui/, ...regexToAdd],
+  ignore: [],
+  only: [/test/, /src/, /@s-ui/, /@babel\/runtime/, ...regexToAdd],
   presets: [
     [
       'babel-preset-sui',

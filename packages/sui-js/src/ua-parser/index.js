@@ -1,13 +1,12 @@
 import bowser from 'bowser'
 
 export const stats = userAgent => {
-  const ua = bowser._detect(userAgent)
-
+  const ua = bowser.parse(userAgent)
   return {
-    isMobile: Boolean(ua.mobile),
-    osName: ua.osname,
-    browserName: ua.name,
-    browserVersion: ua.version,
-    isTablet: Boolean(ua.tablet)
+    isMobile: ua.platform.type === bowser.PLATFORMS_MAP.mobile,
+    osName: ua.os.name,
+    browserName: ua.browser.name,
+    browserVersion: ua.browser.version,
+    isTablet: ua.platform.type === bowser.PLATFORMS_MAP.tablet
   }
 }

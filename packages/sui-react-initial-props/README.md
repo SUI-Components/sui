@@ -13,44 +13,9 @@
 ## Usage
 
 ```js
-// React Router routes
 import loadPage from '@s-ui/react-initial-props/lib/loadPage'
-
-// context factory has to return a promise and it will be passed to the context of your components
-// as well as a param to the getInitialProps
-const contextFactory = ({ cookies, isClient, pathName, req = {}, userAgent }) => {
-  return Promise.resolve({
-    isHome: pathName === 'es',
-    isLogged: cookies['user-is-logged'],
-    isMobile: userAgent.includes('Android')
-  })
-}
-
-// use the loadPage from the sui-react-initial-props
-const loadHomePage = loadPage(contextFactory,
-  () => import(/* webpackChunkName: "HomePage" */ './pages/Home')
-)
-
-export default (
-  <Route>
-    <Route path='/:lang' component={loadHomePage}>
-  </Route>
-)
-```
-
-```js
-// universal - React Router routes
-import loadPage from '@s-ui/react-initial-props/lib/loadPage'
-
-// context factory has to return a promise and it will be passed to the context of your components
-// as well as a param to the getInitialProps
-const contextFactory = ({ cookies, isClient, pathName, req = {}, userAgent }) => {
-  return Promise.resolve({
-    isHome: pathName === 'es',
-    isLogged: cookies['user-is-logged'],
-    isMobile: userAgent.includes('Android')
-  })
-}
+// contextFactory is not used anymore but the param is needed to be present for compatibility reasons
+const contextFactory = null
 
 // use the loadPage from the sui-react-initial-props
 const loadHomePage = loadPage(contextFactory,
@@ -91,7 +56,6 @@ contextFactory(
 ```js
 universal - react page component
 
-const Placeholder = () => <h1>Loading...</h1>
 const Page = (props) => {
   useEffect(()=> {
     // If defined previously as seen below, access __HTTP__ object as follows:
@@ -108,15 +72,27 @@ const Page = (props) => {
   )
 }
 
-
-Page.renderLoading = () => <Placeholder />
 Page.getInitialProps = ({ context, routeInfo }) =>
   Promise.resolve({
     initialContent: 'This is the initial content',
     // Optional __HTTP__ object to perform 301 Redirects
     __HTTP__: {redirectTo: 'https://<301 Redirect Route>'}
   })
+/**
+ * Determine if Page should be kept while navigating on client between routes for the same page.
+ * If `true`, while getting intial props on client, the component will receive a `isLoading` prop.
+ * If `false`, a `renderLoading` method could be used in order to render a placeholder while loading.
+ * If no value is provided, `false` is used.
+**/
+Page.keepMounted = true
+
+/**
+ * This could be used only in case you are using `keepMounted` with a false value.
+ * This will be rendered while fetching getInitialProps on the client.
+**/
+Page.renderLoading = () => <h1>Loading...</h1>
 ```
+
 
 ## Installation
 

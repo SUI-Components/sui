@@ -1,0 +1,444 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+
+# 2.17.0 (2020-07-21)
+
+
+### Features
+
+* add throttle fn ([ad620e3](https://github.com/SUI-Components/sui/commit/ad620e3e850202155cbc4dd628b23f1e30632295))
+
+
+
+# 2.16.0 (2020-07-02)
+
+
+### Features
+
+* add debounce ([8ecd186](https://github.com/SUI-Components/sui/commit/8ecd18625518c77d393438c96fe56f90efa2fdfe))
+* add debounce file ([80f5c9f](https://github.com/SUI-Components/sui/commit/80f5c9fb9188a22b121ff8947f87824d9ebeb5c7))
+* ES6 exporting imported modules ([76096a1](https://github.com/SUI-Components/sui/commit/76096a15ca2c4de30f1e64067ccf3ab3711cd6cb))
+* fix lint error ([51abe2e](https://github.com/SUI-Components/sui/commit/51abe2e930ee41b256c1d819cef1af527a8a8ec4))
+
+
+
+# 2.15.0 (2020-03-11)
+
+
+### Features
+
+* add highlightText method to sui-js ([05157ac](https://github.com/SUI-Components/sui/commit/05157acf4d9628a330ebbfc98cd761f0c6dfedf9))
+* add readme (bump bersion) ([20e7132](https://github.com/SUI-Components/sui/commit/20e71323e2d20ea2be915420ee550959d07b4b88))
+* extract tags length into a variable ([25ed87c](https://github.com/SUI-Components/sui/commit/25ed87cb54ca39dc653470f0ed7d11a8f92e03de))
+
+
+
+# 2.14.0 (2020-03-04)
+
+
+### Features
+
+* add encode property to toQueryString options handling and call to stringify ([8b9f01f](https://github.com/SUI-Components/sui/commit/8b9f01f804a57cf2862424076aa21d5188bb464f))
+
+
+
+# 2.13.0 (2020-02-13)
+
+
+### Bug Fixes
+
+* enable delimiter to toQueryString method ([3e5ddbe](https://github.com/SUI-Components/sui/commit/3e5ddbed5081317b9e416370f3c4be36c19b266e))
+
+
+
+# 2.12.0 (2020-02-12)
+
+
+### Features
+
+* Prefer just libraries instead lodash and others ([59183c2](https://github.com/SUI-Components/sui/commit/59183c26f3d1b625301ed3918dea79b36e73809e))
+
+
+
+# 2.11.0 (2020-02-12)
+
+
+### Features
+
+* add delimiter option ([a454490](https://github.com/SUI-Components/sui/commit/a454490b93e30c3de849cabb6d9f4fdb79621b70))
+
+
+
+# 2.10.0 (2020-02-12)
+
+
+### Features
+
+* add options to parseQueryString ([b36f6a4](https://github.com/SUI-Components/sui/commit/b36f6a4045831ed38bada360a25b032e1b26603f))
+* add own toQueryString ([b9956b3](https://github.com/SUI-Components/sui/commit/b9956b3ca2e6a0740f0f0d8d98fab5e1450b2b6f))
+* add second param for options ([a84ac13](https://github.com/SUI-Components/sui/commit/a84ac13b8998142a69071888c8fbc397a94d1a56))
+
+
+
+# 2.9.0 (2020-01-22)
+
+
+### Bug Fixes
+
+* remove only method ([32d0f23](https://github.com/SUI-Components/sui/commit/32d0f23f80220262b4b5045c77aa5406a0c04357))
+
+
+### Features
+
+* add specs ([de30f4c](https://github.com/SUI-Components/sui/commit/de30f4ca84ba5d438d7aa97033dc5c62b523a9fb))
+* add support for managing cookies without encoding ([9298dbe](https://github.com/SUI-Components/sui/commit/9298dbefdb57d24307bd9a04b6d4e29dcf3aabc9))
+
+
+
+# 2.8.0 (2019-12-13)
+
+
+### Features
+
+* add slugify to string namespace ([239fe5a](https://github.com/SUI-Components/sui/commit/239fe5a66ec2736d0e4f0eb9fa82f406fbc61c9f))
+* move slugify to sui-js and use this version ([74ba017](https://github.com/SUI-Components/sui/commit/74ba017f47e867b81ba1498618fd728273ba907f))
+
+
+
+# 2.7.0 (2019-11-26)
+
+
+### Features
+
+* fix the md5 url reference ([9538177](https://github.com/SUI-Components/sui/commit/953817754900fa7dac9542ed2983fc2cfcef9499))
+
+
+
+# 2.6.0 (2019-11-19)
+
+
+### Bug Fixes
+
+* add getRandomString function ([e460d5f](https://github.com/SUI-Components/sui/commit/e460d5fb0d534f022d7f00be0927b293f64cc50c))
+
+
+
+# 2.5.0 (2019-11-14)
+
+
+### Features
+
+* add isTablet stat ([ceebb5c](https://github.com/SUI-Components/sui/commit/ceebb5c579d91ef9e81a72ee35c05c35346b4078))
+
+
+
+# 2.4.0 (2019-11-07)
+
+
+### Features
+
+* add cookie set options ([7b46fb5](https://github.com/SUI-Components/sui/commit/7b46fb54a68661d3b5e7fcf27bef296082db1f42))
+
+
+
+# 2.3.0 (2019-07-24)
+
+
+### Bug Fixes
+
+* use correct api ([3735682](https://github.com/SUI-Components/sui/commit/3735682f0188c244df2af65b7bb9d3bc837c7908))
+
+
+
+# 2.2.0 (2019-07-23)
+
+
+### Features
+
+* force release ([4e9dc35](https://github.com/SUI-Components/sui/commit/4e9dc35a897049b5779dda4dc25a44fe8843e684))
+
+
+
+# 2.1.0 (2019-07-03)
+
+
+### Features
+
+* arrayToCommaQueryString method ([80f69a0](https://github.com/SUI-Components/sui/commit/80f69a0d966836a7be52f242c4f1f562ace1de8a))
+* fix deprecated unescape to decodeUriComponent ([7eea020](https://github.com/SUI-Components/sui/commit/7eea020eee6f36e77c3990c33a19f7ff9ae4df7a))
+* fix example response ([8dfc7a1](https://github.com/SUI-Components/sui/commit/8dfc7a1dd2946db3441a66b07bc563111c525bce))
+* fix test description method name ([3e8e417](https://github.com/SUI-Components/sui/commit/3e8e4171de73dd5656d2deee03e9d1d84a481768))
+* fix unescape ([03c8ba2](https://github.com/SUI-Components/sui/commit/03c8ba22f5dd131628ae89d8ce211f6a13260ea3))
+* rename method ([4c57be6](https://github.com/SUI-Components/sui/commit/4c57be6824f50d9b5574aeb335143ddff9667f00))
+
+
+
+# 2.0.0 (2019-05-16)
+
+
+### Bug Fixes
+
+* move htmr to React context ([75df8c7](https://github.com/SUI-Components/sui/commit/75df8c7a39b1536d2cc02fc9f5eaa41cf5c60715))
+
+
+### BREAKING CHANGES
+
+* Change context of htmr from string to react
+
+
+
+# 1.28.0 (2019-05-09)
+
+
+### Bug Fixes
+
+* fix export name for htmr ([830a308](https://github.com/SUI-Components/sui/commit/830a308c8b33fb9ff5098821e06bb4bc9d79f063))
+
+
+
+# 1.27.0 (2019-05-09)
+
+
+### Features
+
+* added htmr package ([f6c424b](https://github.com/SUI-Components/sui/commit/f6c424b673320c8c945bc63646800fe558328939))
+
+
+
+# 1.26.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* Release library with correct babel-preset-sui installed ([3076de8](https://github.com/SUI-Components/sui/commit/3076de85184ffac6b907c910c85d45450dcd51c5))
+
+
+
+# 1.25.0 (2019-03-18)
+
+
+### Bug Fixes
+
+* switch proposal export for supported syntax one ([d84b4e1](https://github.com/SUI-Components/sui/commit/d84b4e1d34c7a517427e354b0701fa22001090a8))
+
+
+
+# 1.24.0 (2019-03-18)
+
+
+### Features
+
+* Move to babel-preset-sui@3 ([c8988d5](https://github.com/SUI-Components/sui/commit/c8988d57b6213e2d51e204bb5f8c0c9156edbf87))
+
+
+
+# 1.23.0 (2019-02-20)
+
+
+### Features
+
+* added readme ([4ea7f12](https://github.com/SUI-Components/sui/commit/4ea7f12f4752dec31539e875a32bc3e2932bc983))
+* added utils to suit class names ([541ce2d](https://github.com/SUI-Components/sui/commit/541ce2d4939f5e162e9f875128563c83de7183bc))
+
+
+
+# 1.22.0 (2019-02-15)
+
+
+### Features
+
+* update deps ([a773db5](https://github.com/SUI-Components/sui/commit/a773db5435527115e7898ea4867ca70f1e1eea85))
+
+
+
+# 1.21.0 (2019-02-14)
+
+
+### Features
+
+* add async pipe fn ([6e811b3](https://github.com/SUI-Components/sui/commit/6e811b354bf22483b6b7f0d00cac27d00564fb75)), closes [#488](https://github.com/SUI-Components/sui/issues/488)
+* add async pipe fn ([4f0a3f3](https://github.com/SUI-Components/sui/commit/4f0a3f310918ae5379c73568ced869f00ba7c114))
+
+
+
+# 1.20.0 (2019-01-15)
+
+
+### Features
+
+* added helpers needed for several sui-components ([dc4fce1](https://github.com/SUI-Components/sui/commit/dc4fce1df2f315f2129a494d5b98bac153f2f7ee))
+* also export getCurrentElementFocused ([bd71eb7](https://github.com/SUI-Components/sui/commit/bd71eb7a674cb4543db412517a5fe349796c4688))
+* better implementation w/ findIndex ([d8a0496](https://github.com/SUI-Components/sui/commit/d8a04960504e19e4b7972163ce46b19ad2b204f7))
+* null as default index value ([d1f3e90](https://github.com/SUI-Components/sui/commit/d1f3e90f426d06fb635555b86af2e4535940fc84))
+* tests added ([aea0554](https://github.com/SUI-Components/sui/commit/aea055462bfc8a938fe73b4bf362c6693dd8978b))
+
+
+
+# 1.19.0 (2019-01-10)
+
+
+### Bug Fixes
+
+* fix sui-js pipe linter error ([0df9ffc](https://github.com/SUI-Components/sui/commit/0df9ffc28f9e73a839db3bac45732b84c29bdb1a))
+
+
+### Features
+
+* added pipe method ([ea4b977](https://github.com/SUI-Components/sui/commit/ea4b977b9c264fe643375349eff652740532fd8e))
+* added tests for the pipe method and applied some suggestions received about syntax ([5454378](https://github.com/SUI-Components/sui/commit/5454378ffb12ec08598d5aa56c6910ed3da4c1db))
+
+
+
+# 1.18.0 (2018-12-20)
+
+
+### Bug Fixes
+
+* replace query string dep ([206e166](https://github.com/SUI-Components/sui/commit/206e166c6a3d0be559f30ef47276871c97f2b607))
+
+
+### Features
+
+* add ignore prefix by default ([9d5b712](https://github.com/SUI-Components/sui/commit/9d5b712f2da2196c61f44ba47ed414131b62eab8))
+
+
+
+# 1.17.0 (2018-10-18)
+
+
+### Features
+
+* dom-selection helpers for react components (backToTop, sticky...) ([8fba808](https://github.com/SUI-Components/sui/commit/8fba808a5036fe80a56cbb1d9716b5e628a62e29))
+
+
+
+# 1.16.0 (2018-10-17)
+
+
+### Features
+
+* created capital case and camelcase util ([672143d](https://github.com/SUI-Components/sui/commit/672143d407eda5db346955f1ac98a3a9fc7eead8))
+* export utils ([73ab118](https://github.com/SUI-Components/sui/commit/73ab1182c7e03ceb563e43e5c91e5354b3b45418))
+
+
+
+# 1.15.0 (2018-10-10)
+
+
+### Features
+
+* add an string method to convert objects to query strings ([6659641](https://github.com/SUI-Components/sui/commit/6659641acd8bdd7bdb1d7c22cf72205b2cdb8fb8))
+
+
+
+# 1.14.0 (2018-10-03)
+
+
+### Features
+
+* bump version ([cf1f140](https://github.com/SUI-Components/sui/commit/cf1f14008b611825ecf1e5427be53c13a317636a))
+* upgrade version ([dd235a6](https://github.com/SUI-Components/sui/commit/dd235a611b6cb811b9a4dd53f3e5269bcb646643))
+
+
+
+# [1.12.0](https://github.com/SUI-Components/sui/compare/v2.17.1...1.12.0) (2018-10-03)
+
+
+### Features
+
+* adding query string utility ([1e69772](https://github.com/SUI-Components/sui/commit/1e69772c200bf0913660f2967fc1d617845b2bee))
+* code refactor, export parseQueryString instead of parseQueryUtility ([7741019](https://github.com/SUI-Components/sui/commit/7741019b25675715390592a241a58ca3a98d1d56))
+
+
+
+# 1.11.0 (2018-09-06)
+
+
+### Features
+
+* add email regex ([a219d1f](https://github.com/SUI-Components/sui/commit/a219d1ffb88687d7324617d4480f077fdbba8f1c))
+
+
+
+# 1.9.0 (2018-07-05)
+
+
+### Features
+
+* string - toKebabCase function ([258d72d](https://github.com/SUI-Components/sui/commit/258d72d8412bd0a839aeebd931b8c5cb8a4068dc))
+
+
+
+# 1.8.0 (2018-02-21)
+
+
+### Features
+
+* add new events to create a reusable dispatchEvent method ([236635c](https://github.com/SUI-Components/sui/commit/236635cedb53188e42b2c21370848aee40fd710b))
+
+
+
+# 1.7.0 (2018-01-17)
+
+
+### Bug Fixes
+
+* fixed linting errors ([e98f05f](https://github.com/SUI-Components/sui/commit/e98f05fd214c5f20bcc8011cfa1077ede474d5a4))
+
+
+### Features
+
+* created the function fromSnakeToCamelCase and fromCamelToSnakeCase and made a little r ([64c4dee](https://github.com/SUI-Components/sui/commit/64c4dee5174f415a51410a21ae6d50afa88c2f42))
+
+
+
+# 1.6.0 (2018-01-12)
+
+
+
+# 1.5.0 (2018-01-04)
+
+
+### Features
+
+* add getjson method ([f50f39a](https://github.com/SUI-Components/sui/commit/f50f39aef856141e8d8d3bee00cc03e07aefe397))
+* add remove method ([4b84c61](https://github.com/SUI-Components/sui/commit/4b84c616a143d0951e1a687988c9908191c3b396))
+* avoid loop on code and inline result ([d257926](https://github.com/SUI-Components/sui/commit/d2579263309d358407123677bd4367b4d7ac426f))
+* create new hash sui-js library ([8694033](https://github.com/SUI-Components/sui/commit/86940339d7770bb4fade725eb7ab93b8634fad94))
+
+
+
+# 1.4.0 (2017-11-22)
+
+
+### Features
+
+* add string utilities ([9bd2997](https://github.com/SUI-Components/sui/commit/9bd299711837316b4313eb9bb6658482645edec9))
+* update readme ([1d994a8](https://github.com/SUI-Components/sui/commit/1d994a8c1d4b1636e1c1a78f2b0187b883f2953d))
+
+
+
+# 1.3.0 (2017-11-20)
+
+
+### Features
+
+* insert js-cookie ([4ce212f](https://github.com/SUI-Components/sui/commit/4ce212ffc8e7450bcb4d2a9cdab108b93a2192f0))
+* upgrade version ([4b06aba](https://github.com/SUI-Components/sui/commit/4b06aba547a9538fe3e78df6ba7186509d7d89c0))
+
+
+
+# 1.1.0 (2017-11-15)
+
+
+### Features
+
+* export an object instead of a function ([3d55caf](https://github.com/SUI-Components/sui/commit/3d55caff5b7a912bca9e1e557ce370dff2b0a10a))
+* init sui-js package ([84719ae](https://github.com/SUI-Components/sui/commit/84719ae1a45f5456f7b39120bb9859dbbe6ae4f2))
+* insert a façade ([8380efb](https://github.com/SUI-Components/sui/commit/8380efbe44bb94e5d4a17ee2849524adc12d22e7))
+* remove unused dependencies ([4bc24c2](https://github.com/SUI-Components/sui/commit/4bc24c2eff61603cf59aa1fdc80d46aac1000df8))
+* rename browser in to ua-parser ([dda6032](https://github.com/SUI-Components/sui/commit/dda6032235ef53a29f48fed9625a5a268fadfa0c))
+
+
+

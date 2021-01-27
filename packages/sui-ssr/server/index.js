@@ -2,7 +2,6 @@
 import express from 'express'
 import ssr from './ssr'
 import criticalCss from './criticalCss'
-import prpl from './prpl'
 import dynamicRendering from './dynamicRendering'
 import {hooksFactory} from './hooksFactory'
 import TYPES from '../hooks-types'
@@ -140,7 +139,6 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),
-    prpl(ssrConf.prpl),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
   ])
 

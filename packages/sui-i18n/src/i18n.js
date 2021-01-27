@@ -40,6 +40,21 @@ export default class Rosetta {
     return this._currency
   }
 
+  get currencySymbol() {
+    const value = this.n(0, {
+      style: 'currency',
+      currency: this.currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
+
+    if (typeof value !== 'string') {
+      return
+    }
+
+    return value.replace(/\d/g, '').trim()
+  }
+
   get languages() {
     return this._languages
   }

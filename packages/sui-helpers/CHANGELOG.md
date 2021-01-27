@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.24.0 (2020-12-03)
+
+
+### Features
+
+* use more execa and avoid spawn ([b777e6f](https://github.com/SUI-Components/sui/commit/b777e6f31e7fa847f91d84a65d005261c652e814))
+
+
+
+# 1.23.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add some logging ([479e91e](https://github.com/SUI-Components/sui/commit/479e91e4505eba9b6dcf87edd52e504a27d2c67b))
+
+
+
+# 1.22.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* return CODE OK ([3cfab9d](https://github.com/SUI-Components/sui/commit/3cfab9d09763b6889f3519157f3b93e1f06ce19c))
+
+
+
+# 1.21.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add missing dependency ([9d27200](https://github.com/SUI-Components/sui/commit/9d27200146eba8aa8878023f4ca19daa5cb3708f))
+
+
+### Features
+
+* improve logging and output info ([6ea408d](https://github.com/SUI-Components/sui/commit/6ea408d8017b1d6337beb4e1c1506dc10afad0c7))
+* remove figures and remove another dependency ([954df81](https://github.com/SUI-Components/sui/commit/954df81c876ddc96ff69081ad4b4bc02e6cc5dd9))
+* remove not needed code used on sui-mono link ([e4eb240](https://github.com/SUI-Components/sui/commit/e4eb2401af2ca0748ba3664d684dc74cef7e8f8a))
+* removing listR and logUpdate dependencies ([4feba3e](https://github.com/SUI-Components/sui/commit/4feba3efa762db56fcac66b3d1e649be97d59b8b))
+
+
+
 # 1.18.0 (2020-10-01)
 
 

@@ -1,0 +1,21 @@
+{
+  "name": "@s-ui/consents",
+  "version": "1.2.0",
+  "main": "lib/index.js",
+  "description": "iab consents handler",
+  "scripts": {
+    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "prepare": "npm run lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-consents#readme"
+}

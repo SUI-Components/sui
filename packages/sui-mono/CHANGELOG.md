@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+# 1.69.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* avoid sui-mono to get wrong folders ([7e235c4](https://github.com/SUI-Components/sui/commit/7e235c4bc4f5692101372a8e2b887f217b68fb8b))
+* force new release without console.log ([b4d0a74](https://github.com/SUI-Components/sui/commit/b4d0a74efded0cc572a1dd687438c846a7ac61e3))
+* use correct access config ([1ec2947](https://github.com/SUI-Components/sui/commit/1ec2947a188957ac88908a7d9249ca25e96dcf42))
+
+
+### Features
+
+* avoid removing folders on CI as they don't exist ([57457c3](https://github.com/SUI-Components/sui/commit/57457c39bfa6ee9d9d1c9caa523b1371e5e64302))
+
+
+
+# 1.65.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* better logging for sui-mono ([98aa91a](https://github.com/SUI-Components/sui/commit/98aa91ab28e08cebe4615ff791605fe3cd40b165))
+
+
+
+# 1.64.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* pass executionParams ([56007b5](https://github.com/SUI-Components/sui/commit/56007b59c6b1237afe2cfe496f8a84dc1a2ebc52))
+
+
+
+# 1.63.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add some logging ([9f84855](https://github.com/SUI-Components/sui/commit/9f84855be1dd9865662f7f3022e4fcfbab131782))
+* use root packages ([61233a6](https://github.com/SUI-Components/sui/commit/61233a669212f46513a22ddf1717f81bce509097))
+
+
+### Features
+
+* improve logging and output info ([6ea408d](https://github.com/SUI-Components/sui/commit/6ea408d8017b1d6337beb4e1c1506dc10afad0c7))
+* remove link command from sui-mono ([fe60923](https://github.com/SUI-Components/sui/commit/fe609231551b50c502cea290cfc55f89012d7293))
+* use new @s-ui/helpers to reuse code and upgrade dependencies ([2143dd6](https://github.com/SUI-Components/sui/commit/2143dd68c1effd87f65bcdcd1a14fa4729fbdb74))
+
+
+
 # 1.61.0 (2020-11-11)
 
 

@@ -1,7 +1,6 @@
 const {expect} = require('chai')
 
 const linkLoader = require('../../loaders/LinkLoader')
-const sassLinkLoader = require('../../loaders/sassLinkLoader')
 
 describe('LinkLoader', () => {
   it('Should rewrite the source code for JS files in the root', async () => {
@@ -11,7 +10,8 @@ describe('LinkLoader', () => {
           entryPoints: {
             '@s-ui/module': '/User/Developer/sui/module/src'
           }
-        }
+        },
+        request: 'file.js'
       },
       "require('@s-ui/module')"
     )
@@ -26,7 +26,8 @@ describe('LinkLoader', () => {
           entryPoints: {
             '@s-ui/module': '/User/Developer/sui/module/src'
           }
-        }
+        },
+        request: 'file.js'
       },
       "require('@s-ui/module/lib/level/mod.js')"
     )
@@ -37,12 +38,20 @@ describe('LinkLoader', () => {
   })
 
   it('Should rewrite the source code for SASS files in the root', async () => {
-    const nextSource = sassLinkLoader({
-      '@s-ui/module': '/User/Developer/sui/module/src'
-    })('~@s-ui/module/lib/index.scss')
+    const nextSource = linkLoader.call(
+      {
+        query: {
+          entryPoints: {
+            '@s-ui/module': '/User/Developer/sui/module/src'
+          }
+        },
+        request: 'file.scss'
+      },
+      '@import "~@s-ui/module/lib/index";'
+    )
 
-    expect(nextSource.file).to.be.eql(
-      '/User/Developer/sui/module/src/index.scss'
+    expect(nextSource).to.be.eql(
+      '@import "/User/Developer/sui/module/src/index";'
     )
   })
 })
