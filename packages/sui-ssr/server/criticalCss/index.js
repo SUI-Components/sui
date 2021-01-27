@@ -61,7 +61,7 @@ export default config => (req, res, next) => {
   }
 
   const ua = parser(req.get('User-Agent'))
-  const requestUrl = buildRequestUrl(config, req)
+  const requestUrl = buildRequestUrl(currentConfig, req)
   const type = ua.device.type
   const deviceTypes = {
     desktop: 'd',
