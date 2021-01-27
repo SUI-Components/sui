@@ -112,7 +112,7 @@ const _memoizedHtmlTemplatesMapping = {}
       req.query[ssrConf.queryDisableThirdParties] !== undefined
 
     // Since `_memoizedHtmlTemplatesMapping` will be always an object
-    // we need to define a key for each multisite and one default
+    // we need to define a key for each multi site and one default
     // for single sites too.
     const site = isMultiSite ? hostFromReq(req) : 'default'
     const memoizedHtmlTemplate =
