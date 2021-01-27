@@ -7,22 +7,11 @@
  * the requested method is not implemented yet.
  *
  * */
-export default class NotImplementedUseCase {
-  /**
-   * @param {string} key The requested use case not being implemented
-   */
-  constructor(key) {
-    this._key = key
-  }
-
-  /**
-   * @override
-   */
-  execute() {
-    return Promise.resolve(
+export default key => ({
+  execute: () =>
+    Promise.resolve(
       console.warn(
-        `Service ${this._key} is not implemented in the current version of the domain`
+        `Service ${key} is not implemented in the current version of the domain`
       )
     )
-  }
-}
+})
