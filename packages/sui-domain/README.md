@@ -104,7 +104,7 @@ export default class CurrentUserService extends Service {
 
 ## Listen a useCase
 
-`@s-ui/domain` includes a way to subscribe to eveyr useCase execution without the need of using any kind of decorator or external dependency.
+`@s-ui/domain` includes a way to subscribe to every useCase execution without the need of using any kind of decorator or external dependency.
 
 This is useful if you have side effects in a different place from where you're executing the useCase of the domain.
 
