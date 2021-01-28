@@ -6,7 +6,6 @@ const INDEX_FILE = 'index.html'
 const INDEX_WITHOUT_THIRD_PARTIES_FILE = 'index_without_third_parties.html'
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
-const MULTI_SITE_PUBLIC_FOLDER_PREFIX = 'public-'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
 const multiSiteMapping = ssrConf.multiSite
@@ -31,11 +30,12 @@ export const hostPattern = req => {
 export const publicFolder = req => {
   const site = siteByHost(req)
   if (!site) return DEFAULT_PUBLIC_FOLDER
+  const publicFolderPrefix = `${DEFAULT_PUBLIC_FOLDER}-`
   // Keep compatibility with those multi site configurations
   // that already define the public folder.
-  const multiSitePublicFolder = site.includes(MULTI_SITE_PUBLIC_FOLDER_PREFIX)
+  const multiSitePublicFolder = site.includes(publicFolderPrefix)
     ? site
-    : `${MULTI_SITE_PUBLIC_FOLDER_PREFIX}-${site}`
+    : `${publicFolderPrefix}${site}`
 
   return multiSitePublicFolder
 }
