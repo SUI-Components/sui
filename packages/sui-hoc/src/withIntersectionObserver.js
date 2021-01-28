@@ -44,7 +44,9 @@ export const hocIntersectionObserverWithOptions = (
     }
 
     componentWillUnmount() {
-      this.state.intersectionObserver.disconnect()
+      if (this.state.intersectionObserver) {
+        this.state.intersectionObserver.disconnect()
+      }
     }
 
     render() {
