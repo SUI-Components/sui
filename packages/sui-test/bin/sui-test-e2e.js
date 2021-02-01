@@ -133,7 +133,7 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
     getSpawnPromise(cypressBinPath, [
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
-      '--project=' + (process.env.CYPRESS_PROJECT_ID || projectURI),
+      '--project=' + projectURI,
       browser && '--browser=' + browser
     ])
   )
