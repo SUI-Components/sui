@@ -57,8 +57,8 @@ const check = () =>
             return cb()
           }
 
-          var pkg = commit.scope
-          var toPush = null
+          const pkg = commit.scope
+          let toPush = null
 
           if (
             commit.type === 'fix' ||
