@@ -4,7 +4,7 @@ import PdeContext from '../../src/contexts/PdeContext'
 import useExperiment from '../../src/hooks/useExperiment'
 import sinon from 'sinon'
 
-describe('useBoolean hook', () => {
+describe('useExperiment hook', () => {
   afterEach(cleanup)
 
   describe('when no pde context is set', () => {

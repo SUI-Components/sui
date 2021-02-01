@@ -7,10 +7,10 @@
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
-    "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
+    "test:browser": "NODE_ENV=test sui-test browser",
     "test:server:watch": "npm run test:server -- --watch",
-    "test:server": "NODE_ENV=test sui-test server -P 'test/server/*Spec.js'",
-    "test": "npm run test:server"
+    "test:server": "NODE_ENV=test sui-test server",
+    "test": "npm run test:server && npm run test:browser"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,10 @@
     "@optimizely/optimizely-sdk": "4.0.0"
   },
   "devDependencies": {
-    "@s-ui/test": "3",
-    "react": "16.13.1"
+    "@s-ui/test": "4",
+    "@testing-library/react": "11.2.3",
+    "@testing-library/react-hooks": "4.0.1",
+    "react": "16",
+    "react-test-renderer": "17.0.1"
   }
 }
