@@ -6,13 +6,16 @@ const INDEX_FILE = 'index.html'
 const INDEX_WITHOUT_THIRD_PARTIES_FILE = 'index_without_third_parties.html'
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
+const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
 const multiSiteMapping = ssrConf.multiSite
 const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
 
 export const isMultiSite =
-  multiSiteKeys && multiSiteKeys.length > 0 && multiSiteKeys.includes('default')
+  multiSiteKeys &&
+  multiSiteKeys.length > 0 &&
+  multiSiteKeys.includes(DEFAULT_MULTI_SITE_KEY)
 
 export const hostFromReq = (req, header = DEFAULT_SITE_HEADER) =>
   req.get(header) || req.hostname
@@ -23,40 +26,50 @@ export const hostPattern = req => {
   return (
     (multiSiteKeys &&
       multiSiteKeys.find(hostPattern => host.match(hostPattern))) ||
-    'default'
+    DEFAULT_MULTI_SITE_KEY
   )
+}
+
+const multiSitePublicFolder = site => {
+  const publicFolderPrefix = `${DEFAULT_PUBLIC_FOLDER}-`
+  // Keep compatibility with those multi site configurations
+  // that already define the public folder.
+  return site.includes(publicFolderPrefix)
+    ? site
+    : `${publicFolderPrefix}${site}`
 }
 
 export const publicFolder = req => {
   const site = siteByHost(req)
   if (!site) return DEFAULT_PUBLIC_FOLDER
-  const publicFolderPrefix = `${DEFAULT_PUBLIC_FOLDER}-`
-  // Keep compatibility with those multi site configurations
-  // that already define the public folder.
-  const multiSitePublicFolder = site.includes(publicFolderPrefix)
-    ? site
-    : `${publicFolderPrefix}${site}`
 
-  return multiSitePublicFolder
+  return multiSitePublicFolder(site)
 }
 
-export const siteByHost = req =>
-  isMultiSite && multiSiteMapping[hostPattern(req)]
+const siteByHostPattern = hostPattern =>
+  isMultiSite && multiSiteMapping[hostPattern]
+
+export const siteByHost = req => siteByHostPattern(hostPattern(req))
 
 export const useStaticsByHost = expressStatic => {
   let middlewares
   if (isMultiSite) {
-    middlewares = Object.keys(multiSiteMapping).reduce(
-      (acc, site) => ({
+    middlewares = multiSiteKeys.reduce((acc, hostPattern) => {
+      const site = siteByHostPattern(hostPattern)
+      if (acc[site]) return acc
+
+      return {
         ...acc,
-        [site]: expressStatic(multiSiteMapping[site], EXPRESS_STATIC_CONFIG)
-      }),
-      {}
-    )
+        [site]: expressStatic(
+          multiSitePublicFolder(site),
+          EXPRESS_STATIC_CONFIG
+        )
+      }
+    }, {})
   }
 
   return function serveStaticByHost(req, res, next) {
-    const site = hostPattern(req)
+    const site = siteByHost(req)
     const middleware = isMultiSite
       ? middlewares[site]
       : expressStatic(DEFAULT_PUBLIC_FOLDER, EXPRESS_STATIC_CONFIG)
@@ -80,12 +93,12 @@ export const readHtmlTemplate = req => {
 export const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
 
 export const buildRequestUrl = (config, req) => {
-  const {CRITICAL_CSS_PROTOCOL, CRITICAL_CSS_HOST} = process.env
-  const protocol = CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol
+  const protocol =
+    process.env.CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol
   const site = siteByHost(req)
   const hostFromConfig =
     typeof config.host === 'object' && site ? config.host[site] : config.host
-  const host = CRITICAL_CSS_HOST || hostFromConfig || req.hostname
+  const host = process.env.CRITICAL_CSS_HOST || hostFromConfig || req.hostname
   const url = `${protocol}:/${host}${req.url}`
 
   return url
