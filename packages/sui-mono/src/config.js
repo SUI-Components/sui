@@ -1,11 +1,17 @@
 const path = require('path')
 const {readdirSync, statSync} = require('fs')
 const {getPackageJson} = require('@s-ui/helpers/packages')
+const glob = require('glob')
 
 const CWD = process.cwd()
 const ROOT_SCOPE = 'Root'
 
-const {config: packageConfig = {}, name: packageName} = getPackageJson(CWD)
+const {
+  config: packageConfig = {},
+  name: packageName,
+  workspaces
+} = getPackageJson(CWD)
+
 const {
   access: publishAccess = 'restricted',
   changelogFilename = 'CHANGELOG.md',
@@ -18,6 +24,8 @@ const rootPath = path.join(CWD, packagesFolder)
 
 module.exports = {
   getScopes: function() {
+    if (workspaces) return this.getWorkspacesScopes()
+
     const folders = getDeepFolders(rootPath, deepLevel)
 
     const scopes = folders.map(
@@ -36,6 +44,8 @@ module.exports = {
     return [...scopes, ...customScopes]
   },
   getScopesPaths: function(singleScope) {
+    if (workspaces) return this.getWorkspacesPaths()
+
     const packagesDir = path.join(CWD, this.getPackagesFolder())
     const scopes = singleScope ? [singleScope] : this.getScopes()
     return scopes
@@ -45,6 +55,28 @@ module.exports = {
   getPackagesFolder: () => packagesFolder,
   getPublishAccess: () => publishAccess,
   getProjectName: () => packageName,
+  getWorkspacesScopes: () => {
+    const paths = this.getWorkspacesPaths()
+
+    return paths.map(path => path.replace('/package.json', ''))
+  },
+  getWorkspacesPaths: () => {
+    // {components/**,demo/**,tests/**}/package.json
+
+    const pattern =
+      workspaces.length > 1
+        ? `{${workspaces.join()}}/package.json`
+        : `${workspaces[0]}/package.json`
+
+    console.log({pattern})
+
+    const files = glob.sync(pattern, {
+      ignore: ['**/node_modules/**', './node_modules/**']
+    })
+    console.log('------------')
+    console.log(files)
+    console.log('------------')
+  },
   getChangelogFilename: () => changelogFilename,
   isMonoPackage: function() {
     const folders = getDeepFolders(rootPath, deepLevel)
