@@ -3,7 +3,7 @@ import integrations from './integrations'
 
 const DEFAULT_OPTIONS = {
   autoUpdate: true,
-  updateInterval: 60 * 1000, // 60 seconds in milliseconds
+  updateInterval: 60 * 1000, // 60 seconds
   logLevel: 'info'
 }
 
