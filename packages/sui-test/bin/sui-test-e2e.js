@@ -106,8 +106,6 @@ if (ci) {
 }
 
 if (key) cypressConfig.key = key
-if (parallel) cypressConfig.parallel = true
-if (record) cypressConfig.record = true
 if (group) cypressConfig.group = group
 
 let projectURI = CYPRESS_FOLDER_PATH
@@ -134,7 +132,10 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
       '--project=' + projectURI,
-      browser && '--browser=' + browser
+      key && '--key=' + key,
+      browser && '--browser=' + browser,
+      parallel && '--parallel',
+      record && '--record'
     ])
   )
   .catch(showError)
