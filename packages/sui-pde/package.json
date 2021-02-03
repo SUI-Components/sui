@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@optimizely/optimizely-sdk": "4.0.0"
+    "@optimizely/optimizely-sdk": "4.4.3"
   },
   "devDependencies": {
     "@s-ui/test": "4",
