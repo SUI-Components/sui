@@ -30,7 +30,7 @@ const optimizelyAdapter = new OptimizelyAdapter({
 
 const pde = new PDE({
   adapter: optimizelyAdapter,
-  hasUserConsents: // optional boolean, true by default
+  hasUserConsents: true // optional boolean, true by default
 })
 
 // app.js
