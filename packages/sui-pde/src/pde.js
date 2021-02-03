@@ -21,4 +21,8 @@ export default class PDE {
   activateExperiment({name}) {
     return this._adapter.activateExperiment({name})
   }
+
+  getInitialData() {
+    return this._adapter.getInitialData()
+  }
 }

@@ -42,13 +42,18 @@ export default class OptimizelyAdapter {
    * @param {string} param.sdkKey
    * @param {object} [param.options] https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
    */
-  static createOptimizelyInstance({options: optionParameter, sdkKey}) {
+  static createOptimizelyInstance({
+    options: optionParameter,
+    sdkKey,
+    datafile
+  }) {
     const options = {...DEFAULT_OPTIONS, ...optionParameter}
     optimizelySDK.setLogLevel(options.logLevel)
     optimizelySDK.setLogger(optimizelySDK.logging.createLogger())
     const optimizelyInstance = optimizelySDK.createInstance({
       sdkKey,
-      datafileOptions: options
+      datafileOptions: options,
+      datafile
     })
 
     return optimizelyInstance
@@ -61,6 +66,19 @@ export default class OptimizelyAdapter {
 
   getEnabledFeatures({attributes} = {}) {
     return this._optimizely.getEnabledFeatures(this._userId, attributes)
+  }
+
+  /**
+   * returns the datafile, useful in a server/client scenario
+   */
+  getInitialData() {
+    let datafile = null
+    try {
+      datafile = this._optimizely.getOptimizelyConfig().getDatafile()
+    } catch (error) {
+      console.error(error)
+    }
+    return datafile
   }
 
   /**
