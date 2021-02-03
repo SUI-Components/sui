@@ -28,7 +28,7 @@ const optimizelyAdapter = new OptimizelyAdapter({
   userId: // mandatory
 })
 
-const pde: new PDE({
+const pde = new PDE({
   adapter: optimizelyAdapter,
   hasUserConsents: // optional boolean, true by default
 })
