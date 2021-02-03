@@ -18,9 +18,10 @@ Setup the tool's own react context in your context factory like this:
 import {PDE, PdeContext} from '@s-ui/pde'
 import OptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely'
 
+// all options here https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
 const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
   sdkKey: MY_API_KEY,  // optimizely sdk api key
-  options // optional: https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+  options // datafileOptions
 })
 
 const optimizelyAdapter = new OptimizelyAdapter({
