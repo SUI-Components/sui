@@ -27,7 +27,7 @@ export default class OptimizelyAdapter {
     this._optimizely = optimizely
     this._userId = userId?.toString()
 
-    if (this._isActivated()) {
+    if (this._hasUser()) {
       integrations.forEach(integration =>
         integration({
           activeIntegrations,
@@ -54,7 +54,7 @@ export default class OptimizelyAdapter {
     return optimizelyInstance
   }
 
-  _isActivated() {
+  _hasUser() {
     if (!this._userId) return false
     return true
   }
@@ -73,7 +73,7 @@ export default class OptimizelyAdapter {
    * @returns {string} variation name
    */
   activateExperiment({name, attributes}) {
-    if (!this._isActivated()) return 'default'
+    if (!this._hasUser()) return 'default'
     return this._optimizely.activate(name, this._userId, attributes)
   }
 

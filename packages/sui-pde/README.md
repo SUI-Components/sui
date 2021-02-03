@@ -15,7 +15,7 @@ $ npm install @s-ui/pde
 Setup the tool's own react context in your context factory like this:
 
 ```jsx
-import {PdeContext} from '@s-ui/pde'
+import {PDE, PdeContext} from '@s-ui/pde'
 import OptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely'
 
 const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
