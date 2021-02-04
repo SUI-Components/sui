@@ -41,6 +41,10 @@ const pde = new PDE({
 </PdeContext.Provider>
 ```
 
+#### SSR considerations
+
+When client-side rendering, sui-pde will load the datafile saved as `window.__INITIAL_CONTEXT_DATA__.pde` as initial datafile. Therefore, you'll need to inject the output of the `pde.getInitialContextData()` function in your html when server side rendering.
+
 ### Experiments
 
 Given experiment `experimentX` with 2 variations `variationA` and `variationB` render `MyVariationA` or `MyVariationB` component depending on the variation the user has being assigned. Render `MyVariationA` by default
