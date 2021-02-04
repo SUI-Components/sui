@@ -46,7 +46,8 @@ HtmlBuilder.buildBody = ({
   reactString,
   appConfig,
   initialProps,
-  performance
+  performance,
+  initialContextData
 }) => {
   let html = (' ' + bodyTplPart).slice(1)
 
@@ -77,6 +78,9 @@ HtmlBuilder.buildBody = ({
     })}${HtmlBuilder.injectDataHydration({
       windowPropertyName: '__INITIAL_PROPS__',
       data: initialProps
+    })}${HtmlBuilder.injectDataHydration({
+      windowPropertyName: '__INITIAL_CONTEXT_DATA__',
+      data: initialContextData
     })}${BODY_CLOSING_TAG}`
   )
 

@@ -168,6 +168,13 @@ export default async (req, res, next) => {
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()
 
+  const initialContextData = Object.keys(context).reduce((acc, contextKey) => {
+    if (context[contextKey] && context[contextKey].getInitialContextData) {
+      acc[contextKey] = context[contextKey].getInitialContextData()
+    }
+    return acc
+  }, {})
+
   res.end(
     HtmlBuilder.buildBody({
       bodyAttributes,
@@ -175,7 +182,8 @@ export default async (req, res, next) => {
       reactString,
       appConfig: req.appConfig,
       initialProps,
-      performance
+      performance,
+      initialContextData
     })
   )
 }
