@@ -50,6 +50,15 @@ export default class OptimizelyAdapter {
     const options = {...DEFAULT_OPTIONS, ...optionParameter}
     optimizelySDK.setLogLevel(options.logLevel)
     optimizelySDK.setLogger(optimizelySDK.logging.createLogger())
+
+    if (
+      !datafile &&
+      typeof window !== 'undefined' &&
+      window.__INITIAL_CONTEXT_DATA__.pde
+    ) {
+      datafile = window.__INITIAL_CONTEXT_DATA__.pde
+    }
+
     const optimizelyInstance = optimizelySDK.createInstance({
       sdkKey,
       datafileOptions: options,
@@ -71,7 +80,7 @@ export default class OptimizelyAdapter {
   /**
    * returns the datafile, useful in a server/client scenario
    */
-  getInitialData() {
+  getInitialContextData() {
     let datafile = null
     try {
       datafile = this._optimizely.getOptimizelyConfig().getDatafile()

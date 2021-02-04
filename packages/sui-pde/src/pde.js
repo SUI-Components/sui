@@ -18,11 +18,15 @@ export default class PDE {
     return this._adapter.getEnabledFeatures({attributes})
   }
 
+  /**
+   * @param {object} param
+   * @param {string} param.name
+   */
   activateExperiment({name}) {
     return this._adapter.activateExperiment({name})
   }
 
-  getInitialData() {
-    return this._adapter.getInitialData()
+  getInitialContextData() {
+    return this._adapter.getInitialContextData()
   }
 }
