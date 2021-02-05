@@ -87,6 +87,7 @@ export default class OptimizelyAdapter {
     try {
       datafile = this._optimizely.getOptimizelyConfig().getDatafile()
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error)
     }
     return datafile
