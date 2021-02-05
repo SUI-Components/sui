@@ -43,7 +43,7 @@ const pde = new PDE({
 
 #### SSR considerations
 
-When client-side rendering, sui-pde will load the datafile saved as `window.__INITIAL_CONTEXT_DATA__.pde` as initial datafile. Therefore, you'll need to inject the output of the `pde.getInitialContextData()` function in your html when server side rendering.
+When client-side rendering, sui-pde will load the datafile saved as `window.__INITIAL_CONTEXT_VALUE__.pde` as initial datafile. Therefore, you'll need to inject the output of the `pde.getInitialContextData()` function in your html when server side rendering.
 
 ### Experiments
 
