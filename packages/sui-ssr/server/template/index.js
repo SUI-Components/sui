@@ -80,11 +80,11 @@ HtmlBuilder.buildBody = ({
       windowPropertyName: '__INITIAL_PROPS__',
       data: initialProps
     },
-    {
+    initialContextValue && {
       windowPropertyName: INITIAL_CONTEXT_VALUE,
       data: initialContextValue
     }
-  ]
+  ].filter(Boolean)
 
   /**
    * Given the injectDataHidration fn that returns a string, this reducer
