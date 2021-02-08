@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {HtmlBuilder} from '../../server/template'
 
 describe('template builder', () => {
-  it('should hidrate config and initial props ', () => {
+  it('should hydrate config and initial props ', () => {
     const html = HtmlBuilder.buildBody({
       bodyAttributes: false,
       bodyTplPart: '<body></body>',
