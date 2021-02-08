@@ -1,4 +1,5 @@
 import jsesc from 'jsesc'
+import {INITIAL_CONTEXT_VALUE} from '../initialContextValue'
 
 const APP_PLACEHOLDER = '<!-- APP -->'
 const HEAD_CLOSING_TAG = '</head>'
@@ -47,7 +48,7 @@ HtmlBuilder.buildBody = ({
   appConfig,
   initialProps,
   performance,
-  initialContextData
+  initialContextValue
 }) => {
   let html = (' ' + bodyTplPart).slice(1)
 
@@ -70,19 +71,31 @@ HtmlBuilder.buildBody = ({
     )
   }
 
-  html = html.replace(
-    BODY_CLOSING_TAG,
-    `${HtmlBuilder.injectDataHydration({
+  const hydrationDataConfigs = [
+    {
       windowPropertyName: '__APP_CONFIG__',
       data: appConfig
-    })}${HtmlBuilder.injectDataHydration({
+    },
+    {
       windowPropertyName: '__INITIAL_PROPS__',
       data: initialProps
-    })}${HtmlBuilder.injectDataHydration({
-      windowPropertyName: '__INITIAL_CONTEXT_DATA__',
-      data: initialContextData
-    })}${BODY_CLOSING_TAG}`
+    },
+    {
+      windowPropertyName: INITIAL_CONTEXT_VALUE,
+      data: initialContextValue
+    }
+  ]
+
+  /**
+   * Given the injectDataHidration fn that returns a string, this reducer
+   * concatenates each output of the fn for every hydrationDataConfig
+   */
+  const hydrationHtml = hydrationDataConfigs.reduce(
+    (acc, config) => `${acc}${HtmlBuilder.injectDataHydration(config)}`,
+    ''
   )
+
+  html = html.replace(BODY_CLOSING_TAG, `${hydrationHtml}${BODY_CLOSING_TAG}`)
 
   return html
 }

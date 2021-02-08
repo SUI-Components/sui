@@ -14,6 +14,7 @@ import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
+import {getInitialContextValue} from '../initialContextValue'
 
 // __MAGIC IMPORTS__
 let contextProviders
@@ -168,13 +169,6 @@ export default async (req, res, next) => {
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()
 
-  const initialContextData = Object.keys(context).reduce((acc, contextKey) => {
-    if (context[contextKey] && context[contextKey].getInitialContextData) {
-      acc[contextKey] = context[contextKey].getInitialContextData()
-    }
-    return acc
-  }, {})
-
   res.end(
     HtmlBuilder.buildBody({
       bodyAttributes,
@@ -183,7 +177,7 @@ export default async (req, res, next) => {
       appConfig: req.appConfig,
       initialProps,
       performance,
-      initialContextData
+      initialContextValue: getInitialContextValue(context)
     })
   )
 }
