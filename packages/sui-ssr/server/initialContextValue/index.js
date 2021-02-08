@@ -10,7 +10,7 @@ export const INITIAL_CONTEXT_VALUE = '__INITIAL_CONTEXT_VALUE__'
 /**
  * @param {Object[]} context
  * @param {function=} context.getInitialValue
- * @returns {Object[]}
+ * @returns {Object}
  */
 export const getInitialContextValue = context =>
   Object.keys(context)

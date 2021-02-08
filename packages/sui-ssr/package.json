@@ -7,11 +7,22 @@
     "sui-ssr": "./bin/sui-ssr.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:server:watch": "npm run test:server -- --watch",
+    "test:server": "NODE_ENV=test sui-test server",
+    "test": "npm run test:server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "config": {
+    "sui-test": {
+      "server": {
+        "forceTranspilation": [
+          "./server"
+        ]
+      }
+    }
+  },
   "dependencies": {
     "@s-ui/hoc": "1",
     "@tunnckocore/execa": "4.4.1",
@@ -30,5 +41,8 @@
     "parse5": "6.0.0",
     "rimraf": "3.0.0",
     "ua-parser-js": "0.7.20"
+  },
+  "devDependencies": {
+    "@s-ui/test": "4"
   }
 }
