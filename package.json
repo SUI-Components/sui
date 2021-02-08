@@ -39,6 +39,13 @@
     },
     "validate-commit-msg": {
       "types": "@s-ui/mono/src/types"
+    },
+    "sui-test": {
+      "server": {
+        "forceTranspilation": [
+          "./packages/sui-ssr/server"
+        ]
+      }
     }
   },
   "eslintConfig": {
