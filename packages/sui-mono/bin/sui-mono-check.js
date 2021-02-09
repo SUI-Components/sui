@@ -31,20 +31,11 @@ const incrementName = code => {
 }
 
 const showReportHeaderPositive = () => {
-  console.log(
-    'RELEASES TO DO\n\n' +
-      'We checked all packages and recent commits, and discovered that\n' +
-      'according to ComVer https://github.com/staltz/comver you should\n' +
-      'release new versions for the following packages.\n'
-  )
+  console.log('Releases to do:\n')
 }
 
 const showReportHeaderNegative = () => {
-  console.log(
-    'Nothing to release.\n\n' +
-      'We checked all packages and recent commits, and discovered that\n' +
-      'you do not need to release any new version, according to ComVer.'
-  )
+  console.log('Nothing to release according to your recent commits.')
 }
 
 const showReport = status => {
@@ -57,15 +48,13 @@ const showReport = status => {
       }
 
       const versionString = incrementName(status[pkg].increment).toUpperCase()
-      console.log(
-        `"${pkg}" needs a new ${versionString} version released because: `
-      )
+      console.log(` "${pkg}" ─ new ${versionString} version: `)
 
       status[pkg].commits.forEach(commit => {
-        console.log('  . ' + commit.header)
-        if (checker.isCommitBreakingChange(commit)) {
-          console.log('    BREAKING CHANGE')
-        }
+        const messagePrefix = checker.isCommitBreakingChange(commit)
+          ? '☒ breaking change -'
+          : '›'
+        console.log(`  ${messagePrefix} ${commit.header}`)
       })
       console.log('')
     }
