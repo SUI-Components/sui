@@ -75,13 +75,11 @@ const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
     if (code === 0) return resolve()
 
     const isMonoPackage = checkIsMonoPackage()
-
     const tagPrefix = isMonoPackage ? '' : `${pkg}-`
-
     const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
 
-    const cwd = isMonoPackage ? BASE_DIR : pkg
-    const pkgInfo = require(path.join(cwd, 'package.json'))
+    const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+    const {private: isPrivatePackage} = getPackageJson(cwd, true)
 
     const releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
@@ -95,18 +93,16 @@ const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
     ]
 
     const publishCommands = [
-      !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
+      !isPrivatePackage && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '-f', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
 
     serialSpawn(releaseCommands, {cwd})
       .then(() => {
-        // Create release commit
         const {version} = getPackageJson(cwd, true)
 
-        // We're adding [skip ci] to the commit message to avoid
-        // start a build on CI if not needed
-        // docs: https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
+        // Add [skip ci] to the commit message to avoid CI build
+        // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
         const commitMsg = `release(${packageScope}): v${version}${
           skipCI ? ' [skip ci]' : ''
         }`
@@ -129,23 +125,17 @@ const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
 }
 
 const checkIsMasterBranchActive = async ({status, cwd}) => {
-  try {
-    const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
-      cwd
-    })
+  const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
+    cwd
+  })
 
-    if (stdout.trim() === 'master') {
-      return Promise.resolve(status)
-    } else {
-      throw new Error(
+  const isMaster = stdout.trim() === 'master'
+
+  return isMaster
+    ? Promise.resolve(status)
+    : showError(
         'Active branch is not master, please make releases only in master branch'
       )
-    }
-  } catch (error) {
-    showError(error)
-
-    return Promise.reject(error)
-  }
 }
 
 const prepareAutomaticRelease = async ({
@@ -206,7 +196,5 @@ checker
       )
   )
   .catch(err => {
-    console.error('[sui-mono release] ERROR:')
-    console.error(err)
-    process.exit(1)
+    showError(`[sui-mono release]: ${err}`)
   })
