@@ -92,14 +92,23 @@ export const readHtmlTemplate = req => {
 // Transform node performance timing to milliseconds
 export const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
 
-export const buildRequestUrl = (config, req) => {
-  const protocol =
-    process.env.CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol
+const hostFromConfig = ({host}, req) => {
   const site = siteByHost(req)
-  const hostFromConfig =
-    typeof config.host === 'object' && site ? config.host[site] : config.host
-  const host = process.env.CRITICAL_CSS_HOST || hostFromConfig || req.hostname
-  const url = `${protocol}:/${host}${req.url}`
+
+  if (typeof host === 'undefined') return
+  if (typeof host === 'string') return host
+  if (!site)
+    throw new Error(
+      'You need a `multiSite` configuration in your package.json in order to use an object as a valid host value.`'
+    )
+  if (typeof host === 'object') return host[site]
+}
+
+export const buildRequestUrl = (config, req) => {
+  const {CRITICAL_CSS_PROTOCOL, CRITICAL_CSS_HOST} = process.env
+  const protocol = CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol
+  const host = CRITICAL_CSS_HOST || hostFromConfig(config, req) || req.hostname
+  const url = `${protocol}://${host}${req.url}`
 
   return url
 }
