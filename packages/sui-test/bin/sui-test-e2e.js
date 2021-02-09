@@ -53,12 +53,14 @@ program
   )
   .option('-N, --noWebSecurity', 'Disable all web securities')
   .option('-G, --gui', 'Run the tests in GUI mode.')
+  .option('-P, --parallel', 'Run tests on parallelRun tests on parallel')
   .option('-R, --record', 'Record tests and send result to Dashboard Service')
-  .option('-C, --ci', 'Continuos integration mode, reduces memory consumption')
+  .option('-C, --ci', 'Continuous integration mode, reduces memory consumption')
   .option(
     '-K, --key <key>',
     'It is used to authenticate the project into the Dashboard Service'
   )
+  .option('--group', 'Combines tests in different groups')
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
 
@@ -66,9 +68,11 @@ const {
   baseUrl,
   browser,
   ci,
+  group,
   gui,
   key,
   noWebSecurity,
+  parallel,
   record,
   scope,
   screenshotsOnError,
@@ -101,6 +105,9 @@ if (ci) {
   cypressConfig.numSnapshotsKeptInMemory = 1
 }
 
+if (key) cypressConfig.key = key
+if (group) cypressConfig.group = group
+
 let projectURI = CYPRESS_FOLDER_PATH
 if (noWebSecurity) {
   const defaultConfig = require(path.join(CYPRESS_FOLDER_PATH, 'cypress.json'))
@@ -125,9 +132,10 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
       gui ? 'open' : 'run',
       '--config=' + objectToCommaString(cypressConfig),
       '--project=' + projectURI,
+      key && '--key=' + key,
       browser && '--browser=' + browser,
-      record && '--record',
-      key && '--key=' + key
+      parallel && '--parallel',
+      record && '--record'
     ])
   )
   .catch(showError)
