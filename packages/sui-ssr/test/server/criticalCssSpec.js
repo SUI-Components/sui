@@ -11,8 +11,7 @@ const _getMockedRequest = hostname => ({
   protocol: 'http'
 })
 
-// eslint-disable-next-line
-describe.only('Critical CSS Middleware', () => {
+describe('Critical CSS Middleware', () => {
   describe('With a multi site config', () => {
     const multiSiteConfig = {
       protocol: 'https',
