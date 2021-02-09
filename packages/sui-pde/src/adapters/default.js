@@ -3,6 +3,10 @@ export default class DefaultAdapter {
     return Promise.resolve([])
   }
 
+  getInitialData() {
+    return null
+  }
+
   activateExperiment({name}) {
     return 'default'
   }

@@ -18,9 +18,11 @@ Setup the tool's own react context in your context factory like this:
 import {PDE, PdeContext} from '@s-ui/pde'
 import OptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely'
 
+// all options here https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node, but for now only 3 of them are available
 const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
   sdkKey: MY_API_KEY,  // optimizely sdk api key
-  options // optional: https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+  options // optional, datafileOptions
+  datafile: // optional
 })
 
 const optimizelyAdapter = new OptimizelyAdapter({
@@ -38,6 +40,10 @@ const pde = new PDE({
   // children
 </PdeContext.Provider>
 ```
+
+#### SSR considerations
+
+When client-side rendering, sui-pde will load the datafile saved as `window.__INITIAL_CONTEXT_VALUE__.pde` as initial datafile. Therefore, you'll need to inject the output of the `pde.getInitialContextData()` function in your html when server side rendering.
 
 ### Experiments
 

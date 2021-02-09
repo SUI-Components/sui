@@ -109,4 +109,24 @@ describe('@s-ui pde', () => {
     })
     expect(window.optimizelyClientInstance).to.not.exist
   })
+
+  it.client('loads datafile if set', () => {
+    window.__INITIAL_CONTEXT_VALUE__ = {pde: {initialDatafile: true}}
+    const optimizelySDK = {
+      setLogger: () => {},
+      setLogLevel: () => {},
+      logging: {
+        createLogger: () => {}
+      },
+      createInstance: sinon.spy()
+    }
+    OptimizelyAdapter.createOptimizelyInstance({
+      optimizely: optimizelySDK
+    })
+    expect(optimizelySDK.createInstance.calledOnce)
+
+    expect(
+      optimizelySDK.createInstance.firstCall.args[0].datafile
+    ).to.deep.equal({initialDatafile: true})
+  })
 })

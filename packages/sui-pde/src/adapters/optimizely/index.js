@@ -40,15 +40,31 @@ export default class OptimizelyAdapter {
   /**
    * @param {object} param
    * @param {string} param.sdkKey
-   * @param {object} [param.options] https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+   * @param {object=} param.datafile
+   * @param {object} param.options https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+   * @param {object} optimizely test purposes only, optimizely sdk
    */
-  static createOptimizelyInstance({options: optionParameter, sdkKey}) {
+  static createOptimizelyInstance({
+    options: optionParameter,
+    sdkKey,
+    datafile,
+    optimizely = optimizelySDK
+  }) {
     const options = {...DEFAULT_OPTIONS, ...optionParameter}
-    optimizelySDK.setLogLevel(options.logLevel)
-    optimizelySDK.setLogger(optimizelySDK.logging.createLogger())
-    const optimizelyInstance = optimizelySDK.createInstance({
+    optimizely.setLogLevel(options.logLevel)
+    optimizely.setLogger(optimizely.logging.createLogger())
+    if (
+      !datafile &&
+      typeof window !== 'undefined' &&
+      window.__INITIAL_CONTEXT_VALUE__?.pde
+    ) {
+      datafile = window.__INITIAL_CONTEXT_VALUE__.pde
+    }
+
+    const optimizelyInstance = optimizely.createInstance({
       sdkKey,
-      datafileOptions: options
+      datafileOptions: options,
+      datafile
     })
 
     return optimizelyInstance
@@ -61,6 +77,20 @@ export default class OptimizelyAdapter {
 
   getEnabledFeatures({attributes} = {}) {
     return this._optimizely.getEnabledFeatures(this._userId, attributes)
+  }
+
+  /**
+   * returns the datafile, useful in a server/client scenario
+   */
+  getInitialData() {
+    let datafile = null
+    try {
+      datafile = this._optimizely.getOptimizelyConfig().getDatafile()
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+    }
+    return datafile
   }
 
   /**
