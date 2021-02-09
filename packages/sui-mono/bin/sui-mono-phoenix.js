@@ -3,7 +3,7 @@
 const program = require('commander')
 const {getSpawnPromise, parallelSpawn, showError} = require('@s-ui/helpers/cli')
 
-const config = require('../src/config')
+const {checkIsMonoPackage, getWorkspaces} = require('../src/config')
 
 const DEFAULT_CHUNK = 5
 
@@ -117,10 +117,10 @@ const installRootPackages = () => {
 }
 
 const executePhoenixOnPackages = () => {
-  if (config.isMonoPackage()) return
+  if (checkIsMonoPackage()) return
 
   // get scopes only where a `npm install` is possible
-  const scopes = config.getWorkspaces()
+  const scopes = getWorkspaces()
 
   const removePackagesCommands = scopes.map(cwd => [...RIMRAF_CMD, {cwd}])
   const installPackagesCommands = scopes.map(createInstallPackagesCommand)
