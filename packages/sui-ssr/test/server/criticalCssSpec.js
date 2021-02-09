@@ -3,13 +3,7 @@ import {
   buildRequestUrl,
   __RewireAPI__ as utilsRewireAPI
 } from '../../server/utils'
-
-const _getMockedRequest = hostname => ({
-  get: () => {},
-  url: '/',
-  hostname,
-  protocol: 'http'
-})
+import {getMockedRequest, multiSiteMapping} from './fixtures'
 
 describe('Critical CSS Middleware', () => {
   describe('With a multi site config', () => {
@@ -22,12 +16,6 @@ describe('Critical CSS Middleware', () => {
     }
 
     beforeEach(() => {
-      const multiSiteMapping = {
-        'www.bikes.com': 'bikes',
-        'www.trucks.com': 'trucks',
-        'dev.trucks.com': 'trucks',
-        default: 'bikes'
-      }
       utilsRewireAPI.__Rewire__('multiSiteMapping', multiSiteMapping)
       utilsRewireAPI.__Rewire__('multiSiteKeys', Object.keys(multiSiteMapping))
       utilsRewireAPI.__Rewire__('isMultiSite', true)
@@ -42,7 +30,7 @@ describe('Critical CSS Middleware', () => {
     it('Should create the request URL properly', () => {
       const requestUrl = buildRequestUrl(
         multiSiteConfig,
-        _getMockedRequest('www.bikes.com')
+        getMockedRequest('www.bikes.com')
       )
 
       expect(requestUrl).to.equal('https://www.bikes.com/')
@@ -51,7 +39,7 @@ describe('Critical CSS Middleware', () => {
     it('Should create the request URL properly in a dev environment', () => {
       const requestUrl = buildRequestUrl(
         multiSiteConfig,
-        _getMockedRequest('dev.trucks.com')
+        getMockedRequest('dev.trucks.com')
       )
 
       expect(requestUrl).to.equal('https://www.trucks.com/')
@@ -67,7 +55,7 @@ describe('Critical CSS Middleware', () => {
     it('Should create the request URL properly', () => {
       const requestUrl = buildRequestUrl(
         regularConfig,
-        _getMockedRequest('www.bikes.com')
+        getMockedRequest('www.bikes.com')
       )
 
       expect(requestUrl).to.equal('https://www.bikes.com/')
@@ -76,7 +64,7 @@ describe('Critical CSS Middleware', () => {
     it('Should create the request URL properly in a dev environment', () => {
       const requestUrl = buildRequestUrl(
         regularConfig,
-        _getMockedRequest('dev.bikes.com')
+        getMockedRequest('dev.bikes.com')
       )
 
       expect(requestUrl).to.equal('https://www.bikes.com/')
@@ -85,13 +73,13 @@ describe('Critical CSS Middleware', () => {
 
   describe('Without config', () => {
     it('Should create the request URL properly', () => {
-      const requestUrl = buildRequestUrl({}, _getMockedRequest('www.bikes.com'))
+      const requestUrl = buildRequestUrl({}, getMockedRequest('www.bikes.com'))
 
       expect(requestUrl).to.equal('http://www.bikes.com/')
     })
 
     it('Should create the request URL properly in a dev environment', () => {
-      const requestUrl = buildRequestUrl({}, _getMockedRequest('dev.bikes.com'))
+      const requestUrl = buildRequestUrl({}, getMockedRequest('dev.bikes.com'))
 
       expect(requestUrl).to.equal('http://dev.bikes.com/')
     })
