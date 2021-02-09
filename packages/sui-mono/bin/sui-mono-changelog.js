@@ -3,13 +3,7 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
-const {
-  getScopes,
-  getPackagesFolder,
-  isMonoPackage,
-  getChangelogFilename
-} = require('../src/config')
-const {getPackagesPaths} = require('@s-ui/helpers/packages')
+const {getWorkspaces, getChangelogFilename} = require('../src/config')
 
 program
   .usage('<folder1> <folder2> <etc>')
@@ -30,23 +24,17 @@ program
   .parse(process.argv)
 
 const CHANGELOG_NAME = getChangelogFilename()
-const cwd = path.join(process.cwd(), getPackagesFolder())
-const getRepoFolders = () =>
-  !isMonoPackage() ? getPackagesPaths(cwd)(getScopes()) : ['.']
-const folders = program.args.length ? program.args : getRepoFolders()
+
+const folders = program.args.length ? program.args : getWorkspaces()
 const changelogOptions = {
   preset: 'angular',
   append: false,
   releaseCount: 0,
   outputUnreleased: false,
-  transform: function(commit, cb) {
+  transform: (commit, cb) => {
     if (commit.type === 'release') {
       // Identifies commits that set a version as tags are not set
       commit.version = commit.subject.replace('v', '')
-    }
-    if (!isMonoPackage()) {
-      // Remove repeated scope for multipackage
-      commit.scope = ''
     }
     commit.committerDate = commit.committerDate.substring(0, 10) // simple date format
     cb(null, commit)
@@ -85,5 +73,5 @@ function generateChangelog(folder) {
 }
 
 Promise.all(folders.map(path => generateChangelog(path)))
-  .then(code => process.exit(0))
-  .catch(code => process.exit(1))
+  .then(() => process.exit(0))
+  .catch(() => process.exit(1))
