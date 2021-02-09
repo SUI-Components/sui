@@ -1,6 +1,7 @@
 /* eslint no-console:0 */
 const path = require('path')
-const {exec} = require('child_process')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
 
 /**
@@ -8,20 +9,13 @@ const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
  * @param {object}  params
  * @param {boolean} params.checkIfStaged Determine if we should change if the modified file is staged
  */
-function getDiffedFiles({checkIfStaged = false} = {}) {
-  return new Promise((resolve, reject) => {
-    let command = 'git diff --name-only'
-    if (checkIfStaged) command += ' --cached'
-    exec(command, (err, stdout) => {
-      if (err) return reject(err)
-      const output = stdout || ''
-
-      resolve({
-        hasFiles: output.trim().length > 0,
-        files: output
-      })
-    })
-  })
+const getDiffedFiles = ({checkIfStaged = false} = {}) => {
+  let command = 'git diff --name-only'
+  if (checkIfStaged) command += ' --cached'
+  return exec(command).then((files = '') => ({
+    hasFiles: files.trim().length > 0,
+    files
+  }))
 }
 
 /**
@@ -29,6 +23,7 @@ function getDiffedFiles({checkIfStaged = false} = {}) {
  */
 async function initCommit() {
   const {hasFiles: hasStagedFiles} = await getDiffedFiles({checkIfStaged: true})
+
   if (hasStagedFiles === false) {
     console.log('No files added to staging! Did you forget to run git add?\n')
     const modified = await getDiffedFiles()

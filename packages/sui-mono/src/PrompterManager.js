@@ -146,7 +146,7 @@ class PrompterManager {
           {key: 'n', name: 'Abort commit', value: 'no'},
           {key: 'e', name: 'Edit message', value: 'edit'}
         ],
-        message: function(answers) {
+        message: answers => {
           const SEP =
             '###--------------------------------------------------------###'
           console.log(`${SEP} \n ${buildCommit(answers)} \n ${SEP} \n`)
