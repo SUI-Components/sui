@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 
 const conventionalChangelog = require('conventional-changelog')
-const config = require('./config')
+const {checkIsMonoPackage, getProjectName, getWorkspaces} = require('./config')
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
 const PACKAGE_VERSION_INCREMENT = {
@@ -11,17 +11,17 @@ const PACKAGE_VERSION_INCREMENT = {
   MAJOR: 3
 }
 
+const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf']
+
 const isCommitBreakingChange = commit => {
   return (
     typeof commit.footer === 'string' &&
-    commit.footer.indexOf('BREAKING CHANGE') !== -1
+    commit.footer.includes('BREAKING CHANGE')
   )
 }
 
 const flattenForMonopackage = status => {
-  return config.isMonoPackage()
-    ? {[config.getProjectName()]: flatten(status)}
-    : status
+  return checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status
 }
 
 const flatten = status =>
@@ -38,7 +38,7 @@ const flatten = status =>
 
 const check = () =>
   new Promise(resolve => {
-    const packagesWithChangelog = config.getScopes()
+    const packagesWithChangelog = getWorkspaces()
 
     const status = {}
     packagesWithChangelog.forEach(pkg => {
@@ -53,18 +53,12 @@ const check = () =>
         preset: 'angular',
         append: true,
         transform: (commit, cb) => {
-          if (packagesWithChangelog.indexOf(commit.scope) === -1) {
-            return cb()
-          }
+          if (!packagesWithChangelog.includes(commit.scope)) return cb()
 
           const pkg = commit.scope
           let toPush = null
 
-          if (
-            commit.type === 'fix' ||
-            commit.type === 'perf' ||
-            commit.type === 'feat'
-          ) {
+          if (COMMIT_TYPES_WITH_RELEASE.includes(commit.type)) {
             status[pkg].increment = Math.max(
               status[pkg].increment,
               PACKAGE_VERSION_INCREMENT.MINOR

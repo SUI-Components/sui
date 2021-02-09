@@ -6,8 +6,7 @@ const config = require('../src/config')
  * @return {Array<Array>}
  */
 function getAllTaskArrays() {
-  const cwds = config.getScopesPaths()
-  console.log(cwds)
+  const cwds = config.getWorkspaces()
   return cwds.map(getTaskArray)
 }
 
@@ -17,10 +16,9 @@ function getAllTaskArrays() {
  * @return {Array<Array>}
  */
 function getTaskArray(folder) {
-  return []
-  // const [command] = program.args
-  // const args = process.argv.slice(process.argv.indexOf(command) + 1)
-  // return [command, args, {cwd: folder}]
+  const [command] = program.args
+  const args = process.argv.slice(process.argv.indexOf(command) + 1)
+  return [command, args, {cwd: folder}]
 }
 
 module.exports = {getAllTaskArrays}

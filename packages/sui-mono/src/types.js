@@ -1,1 +1,1 @@
-module.exports = require('@s-ui/cz/commitTypes')
+module.exports = require('./commitTypes.json.json')
