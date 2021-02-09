@@ -3,7 +3,11 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
-const {getWorkspaces, getChangelogFilename} = require('../src/config')
+const {
+  getWorkspaces,
+  getChangelogFilename,
+  checkIsMonoPackage
+} = require('../src/config')
 
 program
   .usage('<folder1> <folder2> <etc>')
@@ -35,6 +39,11 @@ const changelogOptions = {
     if (commit.type === 'release') {
       // Identifies commits that set a version as tags are not set
       commit.version = commit.subject.replace('v', '')
+    }
+
+    if (!checkIsMonoPackage()) {
+      // Remove repeated scope for multipackage
+      commit.scope = ''
     }
     commit.committerDate = commit.committerDate.substring(0, 10) // simple date format
     cb(null, commit)
