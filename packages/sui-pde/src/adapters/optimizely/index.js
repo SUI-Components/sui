@@ -82,7 +82,7 @@ export default class OptimizelyAdapter {
   /**
    * returns the datafile, useful in a server/client scenario
    */
-  getInitialContextData() {
+  getInitialData() {
     let datafile = null
     try {
       datafile = this._optimizely.getOptimizelyConfig().getDatafile()
