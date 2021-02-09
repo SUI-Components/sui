@@ -2,7 +2,11 @@
 
 const program = require('commander')
 const path = require('path')
-const config = require('../src/config')
+const {
+  checkIsMonoPackage,
+  getChangelogFilename,
+  getPublishAccess
+} = require('../src/config')
 const checker = require('../src/check')
 const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
@@ -42,10 +46,10 @@ program
   .parse(process.argv)
 
 const BASE_DIR = process.cwd()
-const packagesFolder = config.getPackagesFolder()
-const publishAccess = config.getPublishAccess()
+
+const publishAccess = getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
-const changelogFilename = config.getChangelogFilename()
+const changelogFilename = getChangelogFilename()
 
 const RELEASE_CODES = {
   0: 'clean',
@@ -59,41 +63,38 @@ const scopeMapper = ({scope, status}) => ({
   code: status[scope].increment
 })
 
-const releasesByPackages = ({status}) =>
-  Object.keys(status).map(scope => scopeMapper({scope, status}))
-
-const singlePackageRelease = ({status, packageScope}) =>
-  Object.keys(status)
-    .filter(scope => scope === packageScope)
+const releasesByPackages = ({status}) => {
+  const {scope: packageScope} = program
+  return Object.keys(status)
+    .filter(scope => (packageScope ? scope === packageScope : true))
     .map(scope => scopeMapper({scope, status}))
+}
 
-const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
+const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
   return new Promise((resolve, reject) => {
     if (code === 0) return resolve()
 
-    const isMonoPackage = config.isMonoPackage()
+    const isMonoPackage = checkIsMonoPackage()
 
     const tagPrefix = isMonoPackage ? '' : `${pkg}-`
 
     const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
 
-    const cwd = isMonoPackage
-      ? BASE_DIR
-      : path.join(BASE_DIR, packagesFolder, pkg)
+    const cwd = isMonoPackage ? BASE_DIR : pkg
     const pkgInfo = require(path.join(cwd, 'package.json'))
-    const scripts = pkgInfo.scripts || {}
 
     const releaseCommands = [
       ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
       ['git', ['add', path.join(cwd, 'package.json')]]
     ]
+
     const docCommands = [
       [suiMonoBinPath, ['changelog', cwd]],
       ['git', ['add', path.join(cwd, changelogFilename)]],
       ['git', ['commit --amend --no-verify --no-edit']]
     ]
+
     const publishCommands = [
-      scripts.build && ['npm', ['run', 'build']],
       !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
       ['git', ['push', '-f', '--tags', 'origin', 'HEAD']]
     ].filter(Boolean)
@@ -127,9 +128,6 @@ const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
   })
 }
 
-const packageScope = program.scope
-const releaseMode = packageScope ? singlePackageRelease : releasesByPackages
-
 const checkIsMasterBranchActive = async ({status, cwd}) => {
   try {
     const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
@@ -150,7 +148,7 @@ const checkIsMasterBranchActive = async ({status, cwd}) => {
   }
 }
 
-const automaticRelease = async ({
+const prepareAutomaticRelease = async ({
   githubToken,
   githubUser,
   githubEmail,
@@ -177,20 +175,15 @@ const automaticRelease = async ({
   await exec(`git pull origin master`, {cwd})
 }
 
-const isAutomaticRelease = ({githubToken, githubUser, githubEmail}) => {
-  return githubToken && githubUser && githubEmail
-}
+const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
+  githubToken && githubUser && githubEmail
 
 checker
   .check()
   .then(async status => {
     const {githubEmail, githubToken, githubUser} = program
-    isAutomaticRelease({
-      githubEmail,
-      githubToken,
-      githubUser
-    })
-      ? await automaticRelease({
+    checkIsAutomaticRelease(program)
+      ? await prepareAutomaticRelease({
           githubEmail,
           githubToken,
           githubUser,
@@ -199,11 +192,13 @@ checker
       : await checkIsMasterBranchActive({status, cwd: process.cwd()})
     return status
   })
-  .then(status => releaseMode({status, packageScope}))
+  .then(status => releasesByPackages({status}))
   .then(releases =>
     releases
       .filter(({code}) => code !== 0)
-      .map(release => () => releaseEachPkg(release, {skipCI: program.skipCi}))
+      .map(release => () =>
+        releaseEachPkg({...release, skipCI: program.skipCi})
+      )
       // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
       .reduce(
         (m, p) => m.then(v => Promise.all([...v, p()])),
