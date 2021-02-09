@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {publicFolder, __RewireAPI__ as utilsRewireAPI} from '../../server/utils'
 import {getMockedRequest, multiSiteMapping} from './fixtures'
 
-describe('Utils', () => {
+describe('[sui-ssr] Utils', () => {
   describe('Public folder', () => {
     describe('In a multi site project', () => {
       beforeEach(() => {
