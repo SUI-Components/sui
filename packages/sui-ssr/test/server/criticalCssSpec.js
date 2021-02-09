@@ -5,7 +5,7 @@ import {
 } from '../../server/utils'
 import {getMockedRequest, multiSiteMapping} from './fixtures'
 
-describe('Critical CSS Middleware', () => {
+describe('[sui-ssr] Critical CSS Middleware', () => {
   describe('With a multi site config', () => {
     const multiSiteConfig = {
       protocol: 'https',
