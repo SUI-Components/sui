@@ -56,14 +56,12 @@ const showReport = status => {
         headerShown = true
       }
 
+      const versionString = incrementName(status[pkg].increment).toUpperCase()
       console.log(
-        '`' +
-          pkg +
-          '` needs a new ' +
-          incrementName(status[pkg].increment).toUpperCase() +
-          ' version released because:'
+        `"${pkg}" needs a new ${versionString} version released because: `
       )
-      status[pkg].commits.forEach(function(commit) {
+
+      status[pkg].commits.forEach(commit => {
         console.log('  . ' + commit.header)
         if (checker.isCommitBreakingChange(commit)) {
           console.log('    BREAKING CHANGE')
@@ -72,9 +70,7 @@ const showReport = status => {
       console.log('')
     }
   }
-  if (!headerShown) {
-    showReportHeaderNegative()
-  }
+  if (!headerShown) showReportHeaderNegative()
 }
 
 checker.check().then(showReport)
