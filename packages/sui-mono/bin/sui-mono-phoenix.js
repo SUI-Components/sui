@@ -2,8 +2,6 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const {getSpawnPromise, parallelSpawn, showError} = require('@s-ui/helpers/cli')
-const {existsSync} = require('fs')
-const path = require('path')
 
 const config = require('../src/config')
 
@@ -122,9 +120,7 @@ const executePhoenixOnPackages = () => {
   if (config.isMonoPackage()) return
 
   // get scopes only where a `npm install` is possible
-  const scopes = config
-    .getScopesPaths(scopeArgument)
-    .filter(folder => existsSync(path.resolve(folder, 'package.json')))
+  const scopes = config.getWorkspaces()
 
   const removePackagesCommands = scopes.map(cwd => [...RIMRAF_CMD, {cwd}])
   const installPackagesCommands = scopes.map(createInstallPackagesCommand)
