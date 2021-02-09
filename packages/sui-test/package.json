@@ -24,6 +24,7 @@
     "babel-loader": "8.2.2",
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "6.0.0",
+    "babel-plugin-rewire": "1.2.0",
     "babel-preset-sui": "3",
     "chalk": "4.1.0",
     "commander": "6.2.1",
