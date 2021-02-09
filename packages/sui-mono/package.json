@@ -13,14 +13,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@s-ui/cz": "1",
     "@s-ui/helpers": "1",
+    "colors": "1.4.0",
     "commander": "6.2.1",
-    "commitizen": "4.2.2",
+    "commitizen": "4.2.3",
     "conventional-changelog": "3.1.24",
-    "git-url-parse": "11.4.0",
+    "editor": "1.0.0",
+    "git-url-parse": "11.4.4",
     "glob": "7.1.6",
-    "rimraf": "3.0.2"
+    "rimraf": "3.0.2",
+    "temp": "0.9.4",
+    "word-wrap": "1.2.3"
   },
   "repository": {
     "type": "git",
