@@ -1,35 +1,15 @@
 import {expect} from 'chai'
+import {buildRequestUrl} from '../../server/utils'
+import {getMockedRequest} from './fixtures'
 import {
-  buildRequestUrl,
-  __RewireAPI__ as utilsRewireAPI
-} from '../../server/utils'
-import {getMockedRequest, multiSiteMapping} from './fixtures'
+  buildRequestUrlWithConfig,
+  buildRequestUrlWithMultiSiteConfig
+} from './fixtures/utils'
 
 describe('[sui-ssr] Critical CSS Middleware', () => {
   describe('With a multi site config', () => {
-    const multiSiteConfig = {
-      protocol: 'https',
-      host: {
-        bikes: 'www.bikes.com',
-        trucks: 'www.trucks.com'
-      }
-    }
-
-    beforeEach(() => {
-      utilsRewireAPI.__Rewire__('multiSiteMapping', multiSiteMapping)
-      utilsRewireAPI.__Rewire__('multiSiteKeys', Object.keys(multiSiteMapping))
-      utilsRewireAPI.__Rewire__('isMultiSite', true)
-    })
-
-    afterEach(() => {
-      utilsRewireAPI.__ResetDependency__('multiSiteMapping')
-      utilsRewireAPI.__ResetDependency__('multiSiteKeys')
-      utilsRewireAPI.__ResetDependency__('isMultiSite')
-    })
-
     it('Should create the request URL properly', () => {
-      const requestUrl = buildRequestUrl(
-        multiSiteConfig,
+      const requestUrl = buildRequestUrlWithMultiSiteConfig(
         getMockedRequest('www.bikes.com')
       )
 
@@ -37,8 +17,7 @@ describe('[sui-ssr] Critical CSS Middleware', () => {
     })
 
     it('Should create the request URL properly in a dev environment', () => {
-      const requestUrl = buildRequestUrl(
-        multiSiteConfig,
+      const requestUrl = buildRequestUrlWithMultiSiteConfig(
         getMockedRequest('dev.trucks.com')
       )
 
@@ -47,14 +26,8 @@ describe('[sui-ssr] Critical CSS Middleware', () => {
   })
 
   describe('With a regular config', () => {
-    const regularConfig = {
-      protocol: 'https',
-      host: 'www.bikes.com'
-    }
-
     it('Should create the request URL properly', () => {
-      const requestUrl = buildRequestUrl(
-        regularConfig,
+      const requestUrl = buildRequestUrlWithConfig(
         getMockedRequest('www.bikes.com')
       )
 
@@ -62,8 +35,7 @@ describe('[sui-ssr] Critical CSS Middleware', () => {
     })
 
     it('Should create the request URL properly in a dev environment', () => {
-      const requestUrl = buildRequestUrl(
-        regularConfig,
+      const requestUrl = buildRequestUrlWithConfig(
         getMockedRequest('dev.bikes.com')
       )
 
@@ -73,13 +45,13 @@ describe('[sui-ssr] Critical CSS Middleware', () => {
 
   describe('Without config', () => {
     it('Should create the request URL properly', () => {
-      const requestUrl = buildRequestUrl({}, getMockedRequest('www.bikes.com'))
+      const requestUrl = buildRequestUrl(getMockedRequest('www.bikes.com'))
 
       expect(requestUrl).to.equal('http://www.bikes.com/')
     })
 
     it('Should create the request URL properly in a dev environment', () => {
-      const requestUrl = buildRequestUrl({}, getMockedRequest('dev.bikes.com'))
+      const requestUrl = buildRequestUrl(getMockedRequest('dev.bikes.com'))
 
       expect(requestUrl).to.equal('http://dev.bikes.com/')
     })
