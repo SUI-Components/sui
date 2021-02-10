@@ -314,7 +314,7 @@ export default [
 
 ### Shared context data between server and client
 
-In case you need to share initial client data needed by a context provider, add an `getInitialValue` to your context provider. It will be injected into the html as `window.__INITIAL_CONTEXT_VALUE__[you context key]`
+In case you need to share initial client data needed by a context provider, add an `getInitialData` to your context provider. It will be injected into the html as `window.__INITIAL_CONTEXT_VALUE__[you context key]`
 
 
 ## Link Packages
