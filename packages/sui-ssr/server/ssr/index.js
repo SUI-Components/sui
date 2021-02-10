@@ -13,6 +13,7 @@ import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
+import {getInitialContextValue} from '../initialContextValue'
 
 // __MAGIC IMPORTS__
 let contextProviders
@@ -186,7 +187,8 @@ export default async (req, res, next) => {
       reactString,
       appConfig: req.appConfig,
       initialProps,
-      performance
+      performance,
+      initialContextValue: getInitialContextValue(context)
     })
   )
 }
