@@ -12,7 +12,7 @@ const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
 const getDiffedFiles = ({checkIfStaged = false} = {}) => {
   let command = 'git diff --name-only'
   if (checkIfStaged) command += ' --cached'
-  return exec(command).then((files = '') => ({
+  return exec(command).then(({stdout: files = ''}) => ({
     hasFiles: files.trim().length > 0,
     files
   }))
