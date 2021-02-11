@@ -52,8 +52,8 @@ import myDomain from 'domain'
 
 const domain = DomainBuilder.extend({ myDomain })
   .mockUseCases([
-    ['get_products_use_case', respondWith: {success: ['pineapple', 'apple', 'strawberry', 'coffee']}],
-    ['get_user_use_case', respondWith: {fail: {code: 500, data: {}}}]
+    ['get_products_use_case', {success: ['pineapple', 'apple', 'strawberry', 'coffee']}],
+    ['get_user_use_case', {fail: {code: 500, data: {}}}]
   ]).build()
 
 // Execute the use case and check if everything works
