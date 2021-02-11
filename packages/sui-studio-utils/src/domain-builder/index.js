@@ -10,6 +10,13 @@ export default class DomainBuilder {
     this._useCases = {}
   }
 
+  mockUseCases(mocks) {
+    mocks.forEach(
+      ([useCase, respondWith]) => (this._useCases[useCase] = respondWith)
+    )
+    return this
+  }
+
   for({useCase} = {}) {
     if (this._useCase) {
       throw new Error(
