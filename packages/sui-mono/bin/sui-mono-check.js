@@ -1,6 +1,7 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const checker = require('../src/check')
+const colors = require('@s-ui/helpers/colors')
 
 program
   .on('--help', () => {
@@ -31,11 +32,13 @@ const incrementName = code => {
 }
 
 const showReportHeaderPositive = () => {
-  console.log('Releases to do:\n')
+  console.log(colors.green('Releases to do:\n'))
 }
 
 const showReportHeaderNegative = () => {
-  console.log('Nothing to release according to your recent commits.')
+  console.log(
+    colors.yellow('Nothing to release according to your recent commits.')
+  )
 }
 
 const showReport = status => {
@@ -47,12 +50,15 @@ const showReport = status => {
         headerShown = true
       }
 
-      const versionString = incrementName(status[pkg].increment).toUpperCase()
-      console.log(` "${pkg}" ─ new ${versionString} version: `)
+      const versionString = colors.yellow(
+        incrementName(status[pkg].increment).toUpperCase()
+      )
+      const pkgName = colors.cyan(pkg)
+      console.log(` ${pkgName} ─ new ${versionString} version: `)
 
       status[pkg].commits.forEach(commit => {
         const messagePrefix = checker.isCommitBreakingChange(commit)
-          ? '☒ breaking change -'
+          ? `› ${colors.red('BREAKING CHANGE')} -`
           : '›'
         console.log(`  ${messagePrefix} ${commit.header}`)
       })

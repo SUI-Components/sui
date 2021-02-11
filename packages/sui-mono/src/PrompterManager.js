@@ -3,7 +3,7 @@
 // Promisify polyfill to add compatibility on node < 8 versions.
 const {readFileSync} = require('fs')
 const {close, write} = require('fs/promises')
-const colors = require('colors')
+const colors = require('@s-ui/helpers/colors')
 const {open} = require('temp').track()
 const util = require('util')
 const editorLegacy = require('editor')
