@@ -14,7 +14,6 @@
   "license": "MIT",
   "dependencies": {
     "@s-ui/helpers": "1",
-    "colors": "1.4.0",
     "commander": "6.2.1",
     "commitizen": "4.2.3",
     "conventional-changelog": "3.1.24",
