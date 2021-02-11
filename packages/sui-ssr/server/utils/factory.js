@@ -102,9 +102,9 @@ export default ({path, fs, config: ssrConf = {}}) => {
   }
 
   const buildRequestUrl = req => {
-    const config = ssrConf.criticalCss
+    const config = ssrConf.criticalCss || {}
     const {CRITICAL_CSS_PROTOCOL, CRITICAL_CSS_HOST} = process.env
-    const protocol = CRITICAL_CSS_PROTOCOL || config?.protocol || req.protocol
+    const protocol = CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol
     const host =
       CRITICAL_CSS_HOST || hostFromConfig(config, req) || req.hostname
     const url = `${protocol}://${host}${req.url}`
