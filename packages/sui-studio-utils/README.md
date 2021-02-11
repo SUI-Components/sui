@@ -44,6 +44,25 @@ domain.get('current_user_use_case').execute().then((products) => {
 })
 ```
 
+#### more than one use case at a time
+
+```js
+import { DomainBuilder } from '@s-ui/studio-tools'
+import myDomain from 'domain'
+
+const domain = DomainBuilder.extend({ myDomain })
+  .mockUseCases([
+    ['get_products_use_case', respondWith: {success: ['pineapple', 'apple', 'strawberry', 'coffee']}],
+    ['get_user_use_case', respondWith: {fail: {code: 500, data: {}}}]
+  ]).build()
+
+// Execute the use case and check if everything works
+domain.get('current_user_use_case').execute().then((products) => {
+  console.log(products) // ['pineapple', 'apple', 'strawberry', 'coffee']
+})
+domain.get('get_user_use_case).execute().catch(error => console.error(error)) // 500
+```
+
 
 ### Forcing an error throw
 
