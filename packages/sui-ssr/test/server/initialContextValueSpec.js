@@ -7,14 +7,14 @@ describe('#getInitialContextValue', () => {
       domain: {fakeDomain: 'fakeDomain'},
       i18n: {i18n: 'fakeI18n'},
       pde: {
-        getInitialValue: () => ({initialValue: 'initialValue'})
+        getInitialData: () => ({initialValue: 'initialValue'})
       },
       anotherContextWithoutInitialValue: {
         key: 'value'
       },
       anotherContextWithInitialValue: {
         key: 'withInitialValue',
-        getInitialValue: () => ({
+        getInitialData: () => ({
           some: 'data',
           any: 2
         })
