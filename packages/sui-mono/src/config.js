@@ -1,6 +1,7 @@
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const glob = require('glob')
 
+const CHANGELOG_FILENAME = 'CHANGELOG.md'
 const CWD = process.cwd()
 const packageFile = getPackageJson(CWD)
 
@@ -26,14 +27,11 @@ function factoryConfigMethods(packageFile) {
     workspaces = []
   } = packageFile
 
-  const {
-    access: publishAccess = 'restricted',
-    changelogFilename = 'CHANGELOG.md'
-  } = packageConfig['sui-mono'] || {}
+  const {access: publishAccess = 'restricted'} = packageConfig['sui-mono'] || {}
 
   return {
     checkIsMonoPackage: () => workspaces.length === 0,
-    getChangelogFilename: () => changelogFilename,
+    getChangelogFilename: () => CHANGELOG_FILENAME,
     getProjectName: () => packageName,
     getPublishAccess: () => publishAccess,
     getWorkspaces: () => getWorkspaces(workspaces)
