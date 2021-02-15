@@ -29,10 +29,12 @@ describe('[sui-helpers] packages.js utils', () => {
   describe('resolveLazyNPMBin', () => {
     it('install a lazy dependency for the binary and return', async function() {
       this.timeout(30000) // allow npm install to have plenty of time
-      const bin = await resolveLazyNPMBin('premove', 'premove@3.0.1', __dirname)
-      expect(bin).to.include(
-        '/packages/sui-helpers/test/server/node_modules/premove/dist/index.js'
+      const bin = await resolveLazyNPMBin(
+        '.bin/premove',
+        'premove@3.0.1',
+        __dirname
       )
+      expect(bin).to.include('premove/bin.js')
     })
   })
 })
