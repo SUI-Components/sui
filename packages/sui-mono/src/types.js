@@ -1,1 +1,1 @@
-module.exports = require('./commitTypes.json.json')
+module.exports = require('./commitTypes.json')
