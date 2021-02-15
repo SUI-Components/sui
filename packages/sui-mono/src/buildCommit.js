@@ -1,7 +1,7 @@
 const wrap = require('word-wrap')
 
 const MAX_LINE_WIDTH = 100
-const wrapOptions = {
+const WRAP_OPTIONS = {
   trim: true,
   newline: '\n',
   indent: '',
@@ -29,11 +29,11 @@ module.exports = function buildCommit(answers) {
   const commitMsgTrimmed = commitMsg.slice(0, MAX_LINE_WIDTH)
 
   // Wrap these lines at 100 characters
-  let bodyMsg = wrap(body, wrapOptions) || ''
+  let bodyMsg = wrap(body, WRAP_OPTIONS) || ''
   bodyMsg = bodyMsg.split('|').join('\n')
 
-  const breakingMsg = wrap(breaking, wrapOptions)
-  const footerMsg = wrap(footer, wrapOptions)
+  const breakingMsg = wrap(breaking, WRAP_OPTIONS)
+  const footerMsg = wrap(footer, WRAP_OPTIONS)
 
   let result = commitMsgTrimmed
 
