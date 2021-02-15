@@ -20,9 +20,8 @@ const isCommitBreakingChange = commit => {
   )
 }
 
-const flattenForMonopackage = status => {
-  return checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status
-}
+const flattenForMonopackage = status =>
+  checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status
 
 const flatten = status =>
   Object.keys(status).reduce(
