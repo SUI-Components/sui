@@ -4,9 +4,9 @@ const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
 const {
+  checkIsMonoPackage,
   getWorkspaces,
-  getChangelogFilename,
-  checkIsMonoPackage
+  getChangelogFilename
 } = require('../src/config')
 
 program
@@ -30,6 +30,7 @@ program
 const CHANGELOG_NAME = getChangelogFilename()
 
 const folders = program.args.length ? program.args : getWorkspaces()
+
 const changelogOptions = {
   preset: 'angular',
   append: false,
