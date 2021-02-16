@@ -6,7 +6,7 @@ const config = require('../src/config')
  * @return {Array<Array>}
  */
 function getAllTaskArrays() {
-  const cwds = config.getScopesPaths()
+  const cwds = config.getWorkspaces()
   return cwds.map(getTaskArray)
 }
 

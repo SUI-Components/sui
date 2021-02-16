@@ -1,6 +1,7 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const checker = require('../src/check')
+const colors = require('@s-ui/helpers/colors')
 
 program
   .on('--help', () => {
@@ -31,19 +32,12 @@ const incrementName = code => {
 }
 
 const showReportHeaderPositive = () => {
-  console.log(
-    'RELEASES TO DO\n\n' +
-      'We checked all packages and recent commits, and discovered that\n' +
-      'according to ComVer https://github.com/staltz/comver you should\n' +
-      'release new versions for the following packages.\n'
-  )
+  console.log(colors.green('Releases to do:\n'))
 }
 
 const showReportHeaderNegative = () => {
   console.log(
-    'Nothing to release.\n\n' +
-      'We checked all packages and recent commits, and discovered that\n' +
-      'you do not need to release any new version, according to ComVer.'
+    colors.yellow('Nothing to release according to your recent commits.')
   )
 }
 
@@ -56,25 +50,22 @@ const showReport = status => {
         headerShown = true
       }
 
-      console.log(
-        '`' +
-          pkg +
-          '` needs a new ' +
-          incrementName(status[pkg].increment).toUpperCase() +
-          ' version released because:'
+      const versionString = colors.yellow(
+        incrementName(status[pkg].increment).toUpperCase()
       )
-      status[pkg].commits.forEach(function(commit) {
-        console.log('  . ' + commit.header)
-        if (checker.isCommitBreakingChange(commit)) {
-          console.log('    BREAKING CHANGE')
-        }
+      const pkgName = colors.cyan(pkg)
+      console.log(` ${pkgName} ─ new ${versionString} version: `)
+
+      status[pkg].commits.forEach(commit => {
+        const messagePrefix = checker.isCommitBreakingChange(commit)
+          ? `› ${colors.red('BREAKING CHANGE')} -`
+          : '›'
+        console.log(`  ${messagePrefix} ${commit.header}`)
       })
       console.log('')
     }
   }
-  if (!headerShown) {
-    showReportHeaderNegative()
-  }
+  if (!headerShown) showReportHeaderNegative()
 }
 
 checker.check().then(showReport)

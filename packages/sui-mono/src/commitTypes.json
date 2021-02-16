@@ -1,0 +1,28 @@
+{
+  "types": {
+    "feat": {
+      "description": "feat: Add a new feature"
+    },
+    "fix": {
+      "description": "fix: Submit a bug fix"
+    },
+    "docs": {
+      "description": "docs: Documentation only changes"
+    },
+    "refactor": {
+      "description": "refactor: A code change that neither fixes a bug nor adds a feature. Includes code style changes."
+    },
+    "perf": {
+      "description": "perf: A code change that improves performance"
+    },
+    "test": {
+      "description": "test: Add tests or modify tests only"
+    },
+    "chore": {
+      "description": "chore: Changes to the build process or auxiliary tools and libraries such as documentation generation. META only."
+    },
+    "release": {
+      "description": "release: Publish a new version of a package."
+    }
+  }
+}

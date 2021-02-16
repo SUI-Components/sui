@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 const program = require('commander')
-const path = require('path')
 const {exec} = require('child_process')
-const config = require('../src/config')
+const {getWorkspaces} = require('../src/config')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 
 program
@@ -15,7 +14,7 @@ program
     console.log('')
     console.log('    Do same commit for all packages')
     console.log('')
-    console.log('    Usefull for cross-pacakge refactors.')
+    console.log('    Useful for cross-pacakge refactors.')
     console.log('')
     console.log('  Examples:')
     console.log('')
@@ -33,8 +32,6 @@ const {message, type} = program
 !message && showError('Commit message is mandatory')
 !type && showError('Commit type is mandatory')
 
-const packagesDir = path.join(process.cwd(), config.getPackagesFolder())
-
 /**
  * Checks if given path has changes
  * @param  {String}  path Folder to check
@@ -42,9 +39,13 @@ const packagesDir = path.join(process.cwd(), config.getPackagesFolder())
  */
 const hasChangedFiles = path => {
   return new Promise((resolve, reject) => {
-    exec(`git add . && git status ${path}`, {cwd: path}, (err, output) => {
-      err ? reject(err) : resolve(!output.includes('nothing to commit'))
-    })
+    exec(
+      `git add . && git status ${path}`,
+      {cwd: process.cwd()},
+      (err, output) => {
+        err ? reject(err) : resolve(!output.includes('nothing to commit'))
+      }
+    )
   })
 }
 
@@ -58,10 +59,9 @@ let commitsCount = 0
  * Functions that executes the commit for each package
  * @type {Array<Function>}
  */
-const checkStageFuncs = config.getScopes().map(pkg => {
-  const pkgPath = path.join(packagesDir, pkg)
+const checkStageFuncs = getWorkspaces().map(pkg => {
   return () =>
-    hasChangedFiles(pkgPath).then(hasChanges => {
+    hasChangedFiles(pkg).then(hasChanges => {
       if (hasChanges) {
         const args = ['commit', `-m "${type}(${pkg}): ${message}"`]
         commitsCount++ && args.push('--no-verify') // precommit only once
