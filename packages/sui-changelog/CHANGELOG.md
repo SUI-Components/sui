@@ -1,6 +1,21 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.11.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([fb8ef6b](https://github.com/SUI-Components/sui/commit/fb8ef6b1adf38a8a8a5f58ac27b20b696e98beaa))
+
+
+
+# 1.10.0 (2020-11-02)
+
+
+
+# 1.9.0 (2020-10-23)
+
+
 
 # 1.8.0 (2020-10-01)
 

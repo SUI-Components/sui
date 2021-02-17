@@ -1,6 +1,13 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.10.0 (2020-10-23)
+
+
+### Features
+
+* support react 17 as peer dependency ([efeec5f](https://github.com/SUI-Components/sui/commit/efeec5f0538eca3e0e19fd12ec8ef52d253dd1d6))
+
+
 
 # 1.9.0 (2020-02-12)
 

@@ -4,9 +4,9 @@ const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
 const {
+  checkIsMonoPackage,
   getWorkspaces,
-  getChangelogFilename,
-  checkIsMonoPackage
+  getChangelogFilename
 } = require('../src/config')
 
 program
@@ -30,6 +30,7 @@ program
 const CHANGELOG_NAME = getChangelogFilename()
 
 const folders = program.args.length ? program.args : getWorkspaces()
+
 const changelogOptions = {
   preset: 'angular',
   append: false,
@@ -38,7 +39,7 @@ const changelogOptions = {
   transform: (commit, cb) => {
     if (commit.type === 'release') {
       // Identifies commits that set a version as tags are not set
-      commit.version = commit.subject.replace('v', '')
+      commit.version = commit.subject.replace('v', '').replace(' [skip ci]', '')
     }
 
     if (!checkIsMonoPackage()) {
@@ -46,6 +47,7 @@ const changelogOptions = {
       commit.scope = ''
     }
     commit.committerDate = commit.committerDate.substring(0, 10) // simple date format
+
     cb(null, commit)
   }
 }
@@ -62,15 +64,11 @@ function generateChangelog(folder) {
     const outputFile = path.join(folder, CHANGELOG_NAME)
     const output = fs.createWriteStream(path.join(outputFile))
     let chunkCount = 0
+
     return conventionalChangelog(changelogOptions, {}, gitRawCommitsOpts)
       .on('data', chunk => {
-        if (!chunkCount++) {
-          // First chunk is always an empty release
-          output.write(
-            '# Change Log\n\n' +
-              'All notable changes to this project will be documented in this file.\n\n'
-          )
-        }
+        // First chunk is always an empty release
+        if (!chunkCount++) output.write('# CHANGELOG\n\n')
         output.write(chunk)
       })
       .on('end', () => output.end(() => resolve(outputFile)))

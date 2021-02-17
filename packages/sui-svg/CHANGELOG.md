@@ -1,6 +1,13 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 2.10.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([3b88466](https://github.com/SUI-Components/sui/commit/3b88466af39cef5270f412857158acad39a9d2e9))
+
+
 
 # 2.9.0 (2020-11-11)
 
@@ -14,6 +21,15 @@ All notable changes to this project will be documented in this file.
 # 2.8.0 (2020-11-11)
 
 
+### Features
+
+* change README ([9cd2604](https://github.com/SUI-Components/sui/commit/9cd26041d97101ac3b9f271766eb8a835deb16ea))
+
+
+
+# 2.7.0 (2020-11-09)
+
+
 ### Bug Fixes
 
 * fix linter errors ([20146dc](https://github.com/SUI-Components/sui/commit/20146dc769a93bc8cbd5664fbfe7807a07be4376))
@@ -21,7 +37,6 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* change README ([9cd2604](https://github.com/SUI-Components/sui/commit/9cd26041d97101ac3b9f271766eb8a835deb16ea))
 * use newest sui-bundler and avod importing React according to new jsx ([3edaa01](https://github.com/SUI-Components/sui/commit/3edaa012828f888ae227a3f994278fa2da6f706a))
 
 
