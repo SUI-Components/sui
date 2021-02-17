@@ -1,6 +1,4 @@
-# Change Log
-
-All notable changes to this project will be documented in this file.
+# CHANGELOG
 
 # 3.21.0 (2020-09-30)
 

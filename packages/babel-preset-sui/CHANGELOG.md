@@ -1,14 +1,47 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 3.19.0 (2021-02-16)
+
+
+### Features
+
+* upgrade babel dependencies ([a2d1a49](https://github.com/SUI-Components/sui/commit/a2d1a490a104de9bb5ec922a9d32a5c46e711852))
+
+
+
+# 3.18.0 (2020-12-21)
+
+
+### Bug Fixes
+
+* rollback propTypes wrap mode from now ([c6f1660](https://github.com/SUI-Components/sui/commit/c6f166050ff7c12e6de1ed0a435d6d88e08bfd6d))
+
+
+
+# 3.17.0 (2020-12-16)
+
+
+### Features
+
+* avoid removing propTypes and wrap with NODE_ENV static check instead ([c106843](https://github.com/SUI-Components/sui/commit/c106843d3705beb87df89acf7def7f4b4e9dcc6e))
+
+
 
 # 3.16.0 (2020-11-11)
 
 
 ### Features
 
-* add a way to disable ESModules to avoid mixing them on server tests ([80b2363](https://github.com/SUI-Components/sui/commit/80b236321b7edb6810b3cc46239352ade4edfe42))
 * upgrade dependencies ([9fc81da](https://github.com/SUI-Components/sui/commit/9fc81da5fc1b9d65dd46d929c7b98c395d233c83))
+
+
+
+# 3.15.0 (2020-11-09)
+
+
+### Features
+
+* add a way to disable ESModules to avoid mixing them on server tests ([80b2363](https://github.com/SUI-Components/sui/commit/80b236321b7edb6810b3cc46239352ade4edfe42))
 
 
 

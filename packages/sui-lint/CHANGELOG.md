@@ -1,6 +1,22 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 3.30.0 (2020-12-22)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([886780c](https://github.com/SUI-Components/sui/commit/886780c9e004177e93f94a23f9e364fb77fca7ea))
+
+
+
+# 3.29.0 (2020-12-11)
+
+
+### Bug Fixes
+
+* use correct flag for stylelint for ignoring patterns ([717e5db](https://github.com/SUI-Components/sui/commit/717e5db70f4aed8bd19e46051012b3ddf067688c))
+
+
 
 # 3.28.0 (2020-11-24)
 
@@ -8,13 +24,41 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * use correct resolved config not only as flag ([d79881d](https://github.com/SUI-Components/sui/commit/d79881de823dd10f8cd64acbb4e5be9860dcd91b))
+
+
+
+# 3.26.0 (2020-11-24)
+
+
+### Bug Fixes
+
 * use it without babel preset sui for node projects ([5514520](https://github.com/SUI-Components/sui/commit/55145206b6ab9369edba8f84abaf83a8d6397915))
+
+
+
+# 3.25.0 (2020-10-30)
 
 
 ### Features
 
 * add cypress plugin ([510d469](https://github.com/SUI-Components/sui/commit/510d4695bb501ffda180070ed1c79bba3507d0ba))
+
+
+
+# 3.24.0 (2020-10-27)
+
+
+### Features
+
 * add no-var rule warning ([f7a8cf4](https://github.com/SUI-Components/sui/commit/f7a8cf440b34ead9d79cea305753e5280d80f69a))
+
+
+
+# 3.23.0 (2020-10-23)
+
+
+### Features
+
 * disable new problematic accessor-pairs rule ([7c6d9ad](https://github.com/SUI-Components/sui/commit/7c6d9ad5ebccabaf31c28c674a6359c12f10a3bd))
 
 
@@ -40,20 +84,32 @@ All notable changes to this project will be documented in this file.
 # 3.20.0 (2020-10-23)
 
 
+### Features
+
+* be compatible with code that still hasnt migrated over importing React ([42cce16](https://github.com/SUI-Components/sui/commit/42cce166b244184cd6da8e3997302f6c5cc06491))
+* ignore rest siblings ([0d23fa8](https://github.com/SUI-Components/sui/commit/0d23fa8408d1e28d428e97ab4d5679e3eff0a830))
+* use prettier@1 for now ([f95e820](https://github.com/SUI-Components/sui/commit/f95e820be98bafd18774da4ce31950bc7f270423))
+
+
+
+# 3.19.0 (2020-10-23)
+
+
 ### Bug Fixes
 
 * make sui-lint work correctly with studios ([9aba618](https://github.com/SUI-Components/sui/commit/9aba6183badd77f9f4cebc57da551b812ee4f2d4))
 
 
+
+# 3.18.0 (2020-10-22)
+
+
 ### Features
 
 * allow using new jsx from React ([75425bd](https://github.com/SUI-Components/sui/commit/75425bdb1e5274683788a1fb6b38601dd3ede3e9))
-* be compatible with code that still hasnt migrated over importing React ([42cce16](https://github.com/SUI-Components/sui/commit/42cce166b244184cd6da8e3997302f6c5cc06491))
-* ignore rest siblings ([0d23fa8](https://github.com/SUI-Components/sui/commit/0d23fa8408d1e28d428e97ab4d5679e3eff0a830))
 * new release with jsx changes and upgrading dependencies ([5387fec](https://github.com/SUI-Components/sui/commit/5387fec63be6443af719f528f11426cd92cb9448))
 * upgrade dependencies ([6d955b7](https://github.com/SUI-Components/sui/commit/6d955b7aab24a25387d0b9830d1cdde0ff9ac164))
 * upgrade lint dependencies ([2e7faae](https://github.com/SUI-Components/sui/commit/2e7faaeb017597e89338b2b70c0287f94994ea25))
-* use prettier@1 for now ([f95e820](https://github.com/SUI-Components/sui/commit/f95e820be98bafd18774da4ce31950bc7f270423))
 
 
 

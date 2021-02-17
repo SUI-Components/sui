@@ -1,6 +1,21 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.7.0 (2020-11-11)
+
+
+### Features
+
+* upgrade dependencies ([13ecdfd](https://github.com/SUI-Components/sui/commit/13ecdfd614e5c5e8d5ee7e43dea559db2d4acdb2))
+
+
+
+# 1.6.0 (2020-11-02)
+
+
+
+# 1.5.0 (2020-10-23)
+
+
 
 # 1.4.0 (2020-10-01)
 

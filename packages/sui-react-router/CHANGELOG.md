@@ -1,6 +1,22 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.7.0 (2020-11-12)
+
+
+### Features
+
+* use new React jsx import from babel ([bb1d291](https://github.com/SUI-Components/sui/commit/bb1d29160ba9538ecb9702e22524547ef8a5c7ce))
+
+
+
+# 1.6.0 (2020-10-23)
+
+
+### Features
+
+* support react 17 as peer dependency ([b2a22c2](https://github.com/SUI-Components/sui/commit/b2a22c2af038168242604ccb7fb87120d82d4912))
+
+
 
 # 1.5.0 (2020-10-05)
 

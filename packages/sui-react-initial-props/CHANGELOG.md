@@ -1,6 +1,28 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 2.12.0 (2020-12-21)
+
+
+### Bug Fixes
+
+* set isLoading to true before gettingInitialProps ([7e18344](https://github.com/SUI-Components/sui/commit/7e18344cb554e1f611d408e2bb10df63d7ae20a7))
+* update isLoading only if needed ([f7e2060](https://github.com/SUI-Components/sui/commit/f7e2060f89d98b120504008bc80da24fd62b6831))
+
+
+### Features
+
+* add possibility to keep mounted the component ([e1a0712](https://github.com/SUI-Components/sui/commit/e1a0712af015ad2d6149f712c3354052659eea59))
+
+
+
+# 2.11.0 (2020-10-23)
+
+
+### Features
+
+* support react 17 as peer dependency ([bf8d9d9](https://github.com/SUI-Components/sui/commit/bf8d9d9d26d1cf214b3b82d37741c3665625e8e0))
+
+
 
 # 2.10.0 (2020-06-11)
 

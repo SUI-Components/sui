@@ -1,6 +1,119 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 9.26.0 (2021-01-13)
+
+
+### Features
+
+* add recaptcha globals to workbench ([2f0c5d9](https://github.com/SUI-Components/sui/commit/2f0c5d9c5d02c6837174d4f7a50c1bb48f970a07))
+
+
+
+# 9.25.0 (2021-01-13)
+
+
+### Features
+
+* add @testing-library/react-hooks dependency ([99bbd03](https://github.com/SUI-Components/sui/commit/99bbd03a683958bd40813fb4868cbbd4d00d903a))
+* prevent recaptcha global leak ([09483f7](https://github.com/SUI-Components/sui/commit/09483f799cd64151c1ec14debfa5c3a70cdfcb11))
+
+
+
+# 9.24.0 (2021-01-08)
+
+
+### Features
+
+* add test timeout option ([910ea54](https://github.com/SUI-Components/sui/commit/910ea54b9278fe3f38c7eb57f7ad4542f7ba49b7))
+* fix sui test timeout condition ([0c5d295](https://github.com/SUI-Components/sui/commit/0c5d29567da2a6b93de15788cb440ef248191897))
+* fix test timeout default value ([0bc31b5](https://github.com/SUI-Components/sui/commit/0bc31b57f0c47d0c552f7e84404cfed72ddbb894))
+
+
+
+# 9.23.0 (2020-12-30)
+
+
+
+# 9.22.0 (2020-12-30)
+
+
+### Features
+
+* add core to global variables ([37d7fd6](https://github.com/SUI-Components/sui/commit/37d7fd63d25be268a91b3dcc2b458545527253c3))
+* add core to global variables ([1bb73b7](https://github.com/SUI-Components/sui/commit/1bb73b7c23e23e7797d1680d3ae77884b8dbc9c5))
+* add internal global variables so mocha test doesn't fail ([9ea6e38](https://github.com/SUI-Components/sui/commit/9ea6e38bc9d9bd6c9efaa5493a1f8b555f8d6a95))
+* upgrade dependencies ([b1e47b3](https://github.com/SUI-Components/sui/commit/b1e47b336a250c0ae067e4f0accdc7570e66609a))
+
+
+
+# 9.21.0 (2020-12-22)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([ab7d575](https://github.com/SUI-Components/sui/commit/ab7d5755fb908be05076a34a93dffabd8fb36bd8))
+
+
+
+# 9.20.0 (2020-12-18)
+
+
+### Features
+
+* exit with the test run result ([3376e61](https://github.com/SUI-Components/sui/commit/3376e618634e2c0f6c5113a4d893ebe0961ea6f4))
+* remove beta version ([119a96e](https://github.com/SUI-Components/sui/commit/119a96e9c266f8eaa6d74d08aeb5dd6283dcade8))
+
+
+
+# 9.19.0 (2020-11-24)
+
+
+### Bug Fixes
+
+* avoid bundling all styles on dev and fix scss linking ([de6f2c4](https://github.com/SUI-Components/sui/commit/de6f2c4731b5a255c18ac87ed163673abc2b2438))
+
+
+
+# 9.18.0 (2020-11-23)
+
+
+### Bug Fixes
+
+* fix dev mode when globals.js file is not available ([7be0f82](https://github.com/SUI-Components/sui/commit/7be0f822e35224b9593672054a7b21869d26be08))
+
+
+
+# 9.17.0 (2020-11-19)
+
+
+### Bug Fixes
+
+* bin scripts copyGlobals MOD ([cded11a](https://github.com/SUI-Components/sui/commit/cded11a6f373e14d8e3adc08a6e193f8509a8fdc))
+* dev mode and start mode with same background ([144589d](https://github.com/SUI-Components/sui/commit/144589d7854c0ca493c304500740ff7c286e4c2d))
+* lint ([a51ce87](https://github.com/SUI-Components/sui/commit/a51ce8738d4d82273739a7a591e7d9b556b9e6e4))
+* mode dev ([d22c41b](https://github.com/SUI-Components/sui/commit/d22c41b7c04c0dc44d2c54eeb56263bf6624456f))
+
+
+### Features
+
+* add globals.js conf ([7ce376e](https://github.com/SUI-Components/sui/commit/7ce376e3d221bcef0cab824277f569e864408507))
+
+
+
+# 9.16.0 (2020-11-12)
+
+
+### Bug Fixes
+
+* fix styles not showing on start mode ([2b5e202](https://github.com/SUI-Components/sui/commit/2b5e202f321c24f8de5d11e90a74546c1ea317fa))
+* import correctly styles with ESModules and simplify file ([3bc7771](https://github.com/SUI-Components/sui/commit/3bc777105dbb14342406f7969d0bd2754dc0a1e3))
+
+
+### Features
+
+* use latest version of husky ([6a5fbfb](https://github.com/SUI-Components/sui/commit/6a5fbfba45d96a24f6398aa1213fc94b764c61e6))
+
+
 
 # 9.15.0 (2020-11-11)
 
@@ -8,6 +121,14 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * add missing import React from react for Raw component ([15fdc2f](https://github.com/SUI-Components/sui/commit/15fdc2f4239e808391eeb20a987a91441ea1dd77))
+
+
+
+# 9.14.0 (2020-11-11)
+
+
+### Bug Fixes
+
 * fix themes on dev mode ([4f164f1](https://github.com/SUI-Components/sui/commit/4f164f1da5bfe122234fe10337d9c7dc5b429952))
 
 
@@ -24,6 +145,15 @@ All notable changes to this project will be documented in this file.
 # 9.12.0 (2020-11-10)
 
 
+### Features
+
+* add again babel-cli to sui-studio ([7fe7019](https://github.com/SUI-Components/sui/commit/7fe7019efcb3a1f336b2b156eaf8da19d3d10b00))
+
+
+
+# 9.11.0 (2020-11-10)
+
+
 ### Bug Fixes
 
 * better support for extracting displayName ([451ff04](https://github.com/SUI-Components/sui/commit/451ff04779894239cc0cd3c85033bd10d145ba4d))
@@ -31,11 +161,18 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* add again babel-cli to sui-studio ([7fe7019](https://github.com/SUI-Components/sui/commit/7fe7019efcb3a1f336b2b156eaf8da19d3d10b00))
-* avoid importing React and use peerDependencies instead of dependencies ([1ac6982](https://github.com/SUI-Components/sui/commit/1ac69821601fd5b277b47573ca05ffd92e737945))
 * fix missing variable ([fbd8d6c](https://github.com/SUI-Components/sui/commit/fbd8d6c2bfd324008a7b43381f6208500eee6466))
 * use latest sui-bundler ([67b1ee6](https://github.com/SUI-Components/sui/commit/67b1ee615e8873937067dfb9cff117a58a041995))
 * use new react/jsx ([1882a94](https://github.com/SUI-Components/sui/commit/1882a943eab1c0e82e7d76c90ac9c57e97f39ee5))
+
+
+
+# 9.10.0 (2020-11-03)
+
+
+### Features
+
+* avoid importing React and use peerDependencies instead of dependencies ([1ac6982](https://github.com/SUI-Components/sui/commit/1ac69821601fd5b277b47573ca05ffd92e737945))
 
 
 
