@@ -6,14 +6,14 @@ export const getMockedRequest = hostname => ({
 })
 
 export const ssrConfig = {
-  criticalCss: {
+  criticalCSS: {
     protocol: 'https',
     host: 'www.bikes.com'
   }
 }
 
 export const ssrMultiSiteConfig = {
-  criticalCss: {
+  criticalCSS: {
     protocol: 'https',
     host: {
       bikes: 'www.bikes.com',
