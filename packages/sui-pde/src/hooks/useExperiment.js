@@ -19,7 +19,7 @@ export default function useExperiment(experimentName, attributes) {
       variationName = pde.activateExperiment({name: experimentName, attributes})
     } catch (error) {
       console.error(error)
-      return 'default'
+      return null
     }
 
     return variationName

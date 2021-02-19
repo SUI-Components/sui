@@ -40,7 +40,7 @@ describe('useExperiment hook', () => {
 
     it('should return the default variation', () => {
       const {result} = renderHook(() => useExperiment(), {wrapper})
-      expect(result.current.variation).to.equal('default')
+      expect(result.current.variation).to.equal(null)
     })
   })
 })

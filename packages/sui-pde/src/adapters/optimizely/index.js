@@ -3,7 +3,7 @@ import integrations from './integrations'
 
 const DEFAULT_OPTIONS = {
   autoUpdate: true,
-  updateInterval: 60 * 1000, // 60 seconds
+  updateInterval: 5 * 60 * 1000, // 5 minutes
   logLevel: 'info'
 }
 
@@ -100,10 +100,10 @@ export default class OptimizelyAdapter {
    * @param {Object} params
    * @param {string} params.name
    * @param {object} [params.attributes]
-   * @returns {string} variation name
+   * @returns {string=} variation name
    */
   activateExperiment({name, attributes}) {
-    if (!this._hasUser()) return 'default'
+    if (!this._hasUser()) return null
     return this._optimizely.activate(name, this._userId, attributes)
   }
 

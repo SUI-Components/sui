@@ -65,7 +65,7 @@ describe('@s-ui pde', () => {
     })
 
     expect(optimizelyAdapter.activateExperiment({name: 'fakeTest'})).to.equal(
-      'default'
+      null
     )
     expect(optimizelyInstanceStub.activate.notCalled).to.equal(true)
   })
