@@ -17,7 +17,6 @@ const config = {
 
   webpack: {
     devtool: 'eval',
-    mode: 'development',
     resolve: {
       alias: {
         '@s-ui/react-context': path.resolve(
@@ -26,31 +25,15 @@ const config = {
       },
       extensions: ['.mjs', '.js', '.jsx', '.json']
     },
-    node: {
-      fs: 'empty'
-    },
-    // webpack has the ability to generate path info in the output bundle.
-    // However, this puts garbage collection pressure on projects that bundle thousands of modules.
-    output: {
-      pathinfo: false
-    },
     plugins: [
+      new webpack.ProvidePlugin({
+        process: require.resolve('process/browser')
+      }),
       new webpack.EnvironmentPlugin(['NODE_ENV']),
-      new webpack.DefinePlugin(
-        Object.assign(
-          {},
-          {
-            __BASE_DIR__: JSON.stringify(process.env.PWD)
-          }
-        )
-      )
+      new webpack.DefinePlugin({
+        __BASE_DIR__: JSON.stringify(process.env.PWD)
+      })
     ],
-    // avoid unneded optimizations for running our tests in order to get fatest bundling time
-    optimization: {
-      removeAvailableModules: false,
-      removeEmptyChunks: false,
-      splitChunks: false
-    },
     module: {
       rules: [
         {
@@ -81,7 +64,7 @@ const config = {
         {
           // ignore css/scss require/imports files in the server
           test: [/\.s?css$/, /\.svg$/],
-          use: ['null-loader']
+          use: [require.resolve('null-loader')]
         }
       ]
     }
