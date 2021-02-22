@@ -49,7 +49,7 @@ When client-side rendering, sui-pde will load the datafile saved as `window.__IN
 
 Given experiment `experimentX` with 2 variations `variationA` and `variationB` render `MyVariationA` or `MyVariationB` component depending on the variation the user has being assigned. Render `MyVariationA` by default
 
-⚠️ if the user did not consent to or if optimizely decides that the user will not be part of the experiment of something goes wrong, `useExperiment` will return as variation value `default`
+⚠️ if the user did not consent to or if optimizely decides that the user will not be part of the experiment of something goes wrong, `useExperiment` will return as variation value `null`
 
 ```js
 import {useExperiment} from '@s-ui/pde'
