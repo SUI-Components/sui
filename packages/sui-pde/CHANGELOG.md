@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.3.0 (2021-02-22)
+
+
+### Features
+
+* null instead of default and increase update interval ([e831aad](https://github.com/SUI-Components/sui/commit/e831aadec8623e774596d4871c58d96346416f24))
+
+
+
 # 1.2.0 (2021-02-09)
 
 
