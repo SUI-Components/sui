@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.33.0 (2021-02-23)
+
+
+### Bug Fixes
+
+* fix shouldLoadIntersectionObserver function for some old chrome versions with ([e74ccda](https://github.com/SUI-Components/sui/commit/e74ccdafa0b9e724d18616f096224f35cc22a2f9))
+
+
+
 # 1.32.0 (2021-01-28)
 
 
