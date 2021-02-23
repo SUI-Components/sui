@@ -4,7 +4,8 @@ import React, {Component} from 'react'
 const shouldLoadIntersectionObserver = () =>
   !('IntersectionObserver' in window) ||
   !('IntersectionObserverEntry' in window) ||
-  !('intersectionRatio' in window.IntersectionObserverEntry.prototype)
+  !('intersectionRatio' in window.IntersectionObserverEntry.prototype) ||
+  !('isIntersecting' in window.IntersectionObserverEntry.prototype)
 
 export const hocIntersectionObserverWithOptions = (
   options = {}
