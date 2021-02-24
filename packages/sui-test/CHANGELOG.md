@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.11.0 (2021-02-24)
+
+
+### Bug Fixes
+
+* bump dependencies babel ([621c0ee](https://github.com/SUI-Components/sui/commit/621c0ee08e7a0dcadd4ed591921516b9bb041e44))
+
+
+
 # 4.10.0 (2021-02-02)
 
 
