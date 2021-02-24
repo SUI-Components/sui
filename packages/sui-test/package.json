@@ -16,10 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "7.12.10",
-    "@babel/plugin-transform-modules-commonjs": "7.12.1",
+    "@babel/core": "7.13.1",
+    "@babel/plugin-transform-modules-commonjs": "7.13.0",
     "@babel/polyfill": "7.12.1",
-    "@babel/register": "7.12.10",
+    "@babel/register": "7.13.0",
     "@s-ui/helpers": "1",
     "babel-loader": "8.2.2",
     "babel-plugin-dynamic-import-node": "2.3.3",
