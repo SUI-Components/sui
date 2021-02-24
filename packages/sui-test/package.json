@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/test",
-  "version": "4.10.0",
-  "cypressVersion": "4.12.1",
+  "version": "5.0.0-beta.3",
+  "cypressVersion": "6.50",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -26,7 +26,7 @@
     "babel-plugin-istanbul": "6.0.0",
     "babel-preset-sui": "3",
     "chalk": "4.1.0",
-    "commander": "7.1.0",
+    "commander": "6.2.1",
     "karma": "6.1.1",
     "karma-chrome-launcher": "3.1.0",
     "karma-clear-screen-reporter": "1.0.0",
