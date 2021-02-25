@@ -9,21 +9,36 @@ window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
 // Require all the files from a context
-const importAll = r => r.keys().forEach(r)
+const importAll = request => request.keys().forEach(request)
 
 // Avoid running Karma until all components tests are loaded
 const originalKarmaLoader = window.__karma__.loaded
 window.__karma__.loaded = () => {}
 
 // get all tests files available using a regex
-const allTestsFiles = require.context(
+const testsFiles = require.context(
   `${__BASE_DIR__}/test/`,
   true,
   /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
 )
+
+const testsFromComponentsFiles = require.context(
+  `${__BASE_DIR__}/components/`,
+  true,
+  /\.\/(\w+)\/(\w+)\/test\/(.*).(js|jsx)/
+)
+
+const allTestsFiles = testsFiles.keys().concat(testsFromComponentsFiles.keys())
+
+if (testsFiles.keys().length) {
+  console.warn(
+    '[deprecated] Using `test` root folder for testing components is deprecated. Please, consider using the new way by putting a `test` folder inside the /components/[category]/[component]/test'
+  )
+}
+
 // get all the needed components from the available tests
 Promise.all(
-  allTestsFiles.keys().map(async key => {
+  allTestsFiles.map(async key => {
     // get the category component from the segments of the path
     // ex: ./card/property/index.js -> card property
     const [, category, component] = key.split('/')
@@ -64,7 +79,8 @@ Promise.all(
 )
   .then(() => {
     // in order to force all tests, we're importing all the files that matches the pattern
-    importAll(allTestsFiles)
+    importAll(testsFiles)
+    importAll(testsFromComponentsFiles)
     // we're ready to go
     originalKarmaLoader.call(window.__karma__)
   })
