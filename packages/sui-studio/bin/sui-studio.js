@@ -70,4 +70,8 @@ program.command('init <project>', 'Create a new project').alias('i')
 
 program.command('test', 'Run studio tests').alias('t')
 
+program
+  .command('test-migrate', 'Migrate test to new folder structure')
+  .alias('tm')
+
 program.parse(process.argv)
