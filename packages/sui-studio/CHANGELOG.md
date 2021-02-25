@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 9.27.0 (2021-02-25)
+
+
+### Features
+
+* add new command to migrate test folder structure ([e5b7e6e](https://github.com/SUI-Components/sui/commit/e5b7e6e9a4731655cfbd3e1fbf39855ed7cb9b08))
+* use new folder structure when generating components ([1bce422](https://github.com/SUI-Components/sui/commit/1bce422367a4051d06343c8e2a9dcd3e8a8899b7))
+* use new test folder structure for tests ([4d3d7cc](https://github.com/SUI-Components/sui/commit/4d3d7cc851705e3f155daf3da05e4aa28b78dfd5))
+
+
+
 # 9.26.0 (2021-01-13)
 
 
