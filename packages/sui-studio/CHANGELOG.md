@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.28.0 (2021-02-26)
+
+
+### Bug Fixes
+
+* add test folder to npmignore file on generate new component ([10cccdc](https://github.com/SUI-Components/sui/commit/10cccdc5fab87d6bfc31ea78ac36f906fa11c97b))
+
+
+
 # 9.27.0 (2021-02-25)
 
 
