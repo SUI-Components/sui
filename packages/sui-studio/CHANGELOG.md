@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.29.0 (2021-02-26)
+
+
+### Bug Fixes
+
+* make test folder really optional ([124ae63](https://github.com/SUI-Components/sui/commit/124ae63bbab0f3d9a6871a2d576ad82db3e49050))
+
+
+
 # 9.28.0 (2021-02-26)
 
 
