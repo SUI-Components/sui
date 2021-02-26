@@ -90,6 +90,7 @@ node_modules`
   writeFile(
     COMPONENT_PACKAGE_NPMIGNORE_FILE,
     `src
+test
 assets`
   ),
 
