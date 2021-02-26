@@ -15,12 +15,18 @@ const importAll = request => request.keys().forEach(request)
 const originalKarmaLoader = window.__karma__.loaded
 window.__karma__.loaded = () => {}
 
-// get all tests files available using a regex
-const testsFiles = require.context(
-  `${__BASE_DIR__}/test/`,
-  true,
-  /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
-)
+// default testFiles in case /test folder does not exist
+let testsFiles = () => {}
+testsFiles.keys = () => []
+
+try {
+  // get all tests files available using a regex
+  testsFiles = require.context(
+    `${__BASE_DIR__}/test/`,
+    true,
+    /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
+  )
+} catch (e) {}
 
 const testsFromComponentsFiles = require.context(
   `${__BASE_DIR__}/components/`,
