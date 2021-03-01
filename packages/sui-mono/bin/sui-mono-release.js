@@ -165,9 +165,7 @@ const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
 
 checkIsMasterBranchActive().then(isMaster => {
   if (!isMaster) {
-    console.warn(
-      'Active branch is not master, please make releases only in master branch'
-    )
+    console.warn('Active branch is not main. No releases to do.')
     return
   }
 
