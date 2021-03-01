@@ -107,6 +107,17 @@ export default class OptimizelyAdapter {
     return this._optimizely.activate(name, this._userId, attributes)
   }
 
+  /**
+   * Gets the variation without tracking the impression
+   * @param {Object} params
+   * @param {string} params.name
+   * @param {object} [params.attributes]
+   * @returns {string=} variation name
+   */
+  getVariation({name, attributes}) {
+    return this._optimizely.getVariation(name, this._userId, attributes)
+  }
+
   onReady() {
     return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
