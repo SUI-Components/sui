@@ -124,18 +124,13 @@ const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
   })
 }
 
-const checkIsMasterBranchActive = async ({status, cwd}) => {
+const checkIsMasterBranchActive = async ({cwd}) => {
   const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
     cwd
   })
 
   const isMaster = stdout.trim() === 'master'
-
   return isMaster
-    ? Promise.resolve(status)
-    : showError(
-        'Active branch is not master, please make releases only in master branch'
-      )
 }
 
 const prepareAutomaticRelease = async ({
@@ -168,33 +163,42 @@ const prepareAutomaticRelease = async ({
 const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
   githubToken && githubUser && githubEmail
 
-checker
-  .check()
-  .then(async status => {
-    const {githubEmail, githubToken, githubUser} = program
-    checkIsAutomaticRelease(program)
-      ? await prepareAutomaticRelease({
+checkIsMasterBranchActive().then(isMaster => {
+  if (!isMaster) {
+    console.warn(
+      'Active branch is not master, please make releases only in master branch'
+    )
+    return
+  }
+
+  checker
+    .check()
+    .then(async status => {
+      const {githubEmail, githubToken, githubUser} = program
+
+      if (checkIsAutomaticRelease(program)) {
+        await prepareAutomaticRelease({
           githubEmail,
           githubToken,
           githubUser,
           cwd: process.cwd()
         })
-      : await checkIsMasterBranchActive({status, cwd: process.cwd()})
-    return status
-  })
-  .then(status => releasesByPackages({status}))
-  .then(releases =>
-    releases
-      .filter(({code}) => code !== 0)
-      .map(release => () =>
-        releaseEachPkg({...release, skipCI: program.skipCi})
-      )
-      // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
-      .reduce(
-        (m, p) => m.then(v => Promise.all([...v, p()])),
-        Promise.resolve([])
-      )
-  )
-  .catch(err => {
-    showError(`[sui-mono release]: ${err}`)
-  })
+      }
+
+      const releases = releasesByPackages({status})
+
+      releases
+        .filter(({code}) => code !== 0)
+        .map(release => () =>
+          releaseEachPkg({...release, skipCI: program.skipCi})
+        )
+        // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
+        .reduce(
+          (m, p) => m.then(v => Promise.all([...v, p()])),
+          Promise.resolve([])
+        )
+    })
+    .catch(err => {
+      showError(`[sui-mono release]: ${err}`)
+    })
+})
