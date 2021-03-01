@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.4.0 (2021-03-01)
+
+
+### Features
+
+* add getVariation ([4894ec5](https://github.com/SUI-Components/sui/commit/4894ec5de69238128832e236451a6ac8cf87b34e))
+* default adapter returns null ([821a9a1](https://github.com/SUI-Components/sui/commit/821a9a14ad14282e79b2b5a5a496f44f955dd224))
+
+
+
 # 1.3.0 (2021-02-22)
 
 
