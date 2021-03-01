@@ -21,12 +21,22 @@ export default class PDE {
   /**
    * @param {object} param
    * @param {string} param.name
+   * @param {object} param.attributes
    */
-  activateExperiment({name}) {
-    return this._adapter.activateExperiment({name})
+  activateExperiment({name, attributes}) {
+    return this._adapter.activateExperiment({name, attributes})
   }
 
   getInitialData() {
     return this._adapter.getInitialData()
+  }
+
+  /**
+   * @param {object} param
+   * @param {string} param.name
+   * @param {object} param.attributes
+   */
+  getVariation({name, attributes}) {
+    return this._adapter.getVariation({name, attributes})
   }
 }
