@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.1.0 (2021-03-01)
+
+
+### Bug Fixes
+
+* fix creation of CHANGELOG because skip ci commit msg ([dc4ac41](https://github.com/SUI-Components/sui/commit/dc4ac417ff9e6d6eb81bdbb2c2b3763ac482fc83))
+
+
+### Features
+
+* check isMaster before creating scopes ([a1f617c](https://github.com/SUI-Components/sui/commit/a1f617c85740b39be6f171687d4ca3848d094a17))
+
+
+
 # 2.0.0 (2021-02-16)
 
 
