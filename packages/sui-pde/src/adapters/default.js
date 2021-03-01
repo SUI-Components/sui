@@ -7,7 +7,11 @@ export default class DefaultAdapter {
     return null
   }
 
-  activateExperiment({name}) {
-    return 'default'
+  activateExperiment() {
+    return null
+  }
+
+  getVariation() {
+    return null
   }
 }
