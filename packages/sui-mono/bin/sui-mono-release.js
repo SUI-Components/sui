@@ -163,15 +163,14 @@ const prepareAutomaticRelease = async ({
 const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
   githubToken && githubUser && githubEmail
 
-checkIsMasterBranchActive().then(isMaster => {
-  if (!isMaster) {
-    console.warn('Active branch is not main. No releases to do.')
-    return
-  }
+checkIsMasterBranchActive({cwd: process.cwd()})
+  .then(isMaster => {
+    if (!isMaster) {
+      console.warn('Active branch is not main. No releases to do.')
+      return
+    }
 
-  checker
-    .check()
-    .then(async status => {
+    return checker.check().then(async status => {
       const {githubEmail, githubToken, githubUser} = program
 
       if (checkIsAutomaticRelease(program)) {
@@ -196,7 +195,7 @@ checkIsMasterBranchActive().then(isMaster => {
           Promise.resolve([])
         )
     })
-    .catch(err => {
-      showError(`[sui-mono release]: ${err}`)
-    })
-})
+  })
+  .catch(err => {
+    showError(`[sui-mono release]: ${err}`)
+  })
