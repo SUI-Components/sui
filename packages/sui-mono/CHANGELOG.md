@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.2.0 (2021-03-01)
+
+
+### Bug Fixes
+
+* check correctly if master ([577d99a](https://github.com/SUI-Components/sui/commit/577d99af943fcdf6b9ed8d37fb24d378a6508928))
+
+
+
 # 2.1.0 (2021-03-01)
 
 
