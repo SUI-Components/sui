@@ -76,8 +76,7 @@ export const hooksFactory = async () => {
       const startRouteMatchingTime = process.hrtime()
       const {performance = {}, url} = req
       const site = siteByHost(req)
-      const siteRoutes =
-        isMultiSite && isFunction(routes) ? routes({site}) : routes
+      const siteRoutes = site && isFunction(routes) ? routes({site}) : routes
 
       match[promisify.custom] = args =>
         new Promise((resolve, reject) => {
