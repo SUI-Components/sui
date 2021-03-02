@@ -1,6 +1,15 @@
 # CHANGELOG
 
+# 9.31.0 (2021-03-02)
+
+
+
 # 9.30.0 (2021-03-02)
+
+
+### Bug Fixes
+
+* fix sui studio dev error when test folder has been migrated ([274ed62](https://github.com/SUI-Components/sui/commit/274ed62bbab91d6db1659bd6a248144213ac2b44))
 
 
 ### Features
