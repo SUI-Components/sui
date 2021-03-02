@@ -20,7 +20,8 @@ describe('@s-ui pde', () => {
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
-      userId: 'user123'
+      userId: 'user123',
+      hasUserConsents: true
     })
   })
 
@@ -78,7 +79,7 @@ describe('@s-ui pde', () => {
     })
   })
 
-  it('loads the default adapter when the user gives no consent', () => {
+  it('loads the default adapter when the no adapter is passed by', () => {
     const pde = new SuiPDE({hasUserConsents: false})
 
     expect(pde._adapter).to.be.instanceOf(DefaultAdapter)
@@ -117,7 +118,8 @@ describe('@s-ui pde', () => {
       // eslint-disable-next-line no-new
       new OptimizelyAdapter({
         optimizely: optimizelyInstanceStub,
-        userId: '123'
+        userId: '123',
+        hasUserConsents: true
       })
       // eslint-disable-next-line eqeqeq
       expect(window.optimizelyClientInstance == optimizelyInstanceStub).to.be
@@ -130,7 +132,8 @@ describe('@s-ui pde', () => {
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
       userId: '123',
-      activeIntegrations: {segment: false}
+      activeIntegrations: {segment: false},
+      hasUserConsents: true
     })
     expect(window.optimizelyClientInstance).to.not.exist
   })

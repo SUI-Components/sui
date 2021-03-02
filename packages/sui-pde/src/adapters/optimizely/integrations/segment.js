@@ -11,14 +11,14 @@
 export const segment = ({
   activeIntegrations,
   optimizelyInstance,
-  hasUserConsent
+  hasUserConsents
 }) => {
-  if (!activeIntegrations.segment) return
-  if (!hasUserConsent) {
+  if (!activeIntegrations.segment || typeof window === 'undefined') return
+  if (!hasUserConsents) {
     delete window.optimizelyClientInstance
     return
   }
-  if (typeof window !== 'undefined' && !window.optimizelyClientInstance) {
+  if (!window.optimizelyClientInstance) {
     window.optimizelyClientInstance = optimizelyInstance
   }
 }

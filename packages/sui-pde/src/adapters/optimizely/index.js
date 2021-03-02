@@ -33,7 +33,7 @@ export default class OptimizelyAdapter {
     this._optimizely = optimizely
     this._userId = userId?.toString()
     this._activeIntegrations = activeIntegrations
-    this._updateConsents({hasUserConsents})
+    this.updateConsents({hasUserConsents})
   }
 
   /**
@@ -97,7 +97,7 @@ export default class OptimizelyAdapter {
    * @returns {string=} variation name
    */
   activateExperiment({name, attributes}) {
-    if (!this._hasUserConsents()) return null
+    if (!this._hasUserConsents) return null
     return this._optimizely.activate(name, this._userId, attributes)
   }
 
@@ -109,7 +109,7 @@ export default class OptimizelyAdapter {
    * @returns {string=} variation name
    */
   getVariation({name, attributes}) {
-    if (!this._hasUserConsents()) return null
+    if (!this._hasUserConsents) return null
     return this._optimizely.getVariation(name, this._userId, attributes)
   }
 
