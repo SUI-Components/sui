@@ -10,8 +10,7 @@
     "phoenix": "npx rimraf node_modules && npm it",
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
-    "lint": "npm run lint:js && npm run lint:sass",
-    "postinstall": "node scripts/postinstall.js"
+    "lint": "npm run lint:js && npm run lint:sass"
   },
   "author": "",
   "license": "MIT",
