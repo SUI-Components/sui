@@ -8,10 +8,11 @@ export default class PDE {
    * @param {boolean} param.hasUserConsents
    */
   constructor({adapter, hasUserConsents = true} = {}) {
-    if (!adapter || !hasUserConsents) {
+    if (!adapter) {
       adapter = new DefaultAdapter()
     }
     this._adapter = adapter
+    this._adapter.updateConsents({hasUserConsents})
   }
 
   getEnabledFeatures({attributes} = {}) {
