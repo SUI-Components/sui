@@ -3,7 +3,7 @@ import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
 import {getTplParts, HtmlBuilder} from '../template'
-import {publicFolder, hrTimeToMs, siteByHost, isMultiSite} from '../utils'
+import {publicFolder, hrTimeToMs, siteByHost} from '../utils'
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
 // __MAGIC IMPORTS__
