@@ -24,15 +24,16 @@ module.exports = function({types: t}) {
           // by reversing the path and exlcuding the first slash (it's /index.js)
           const reversedPath = state.file.opts.filename.split('/').reverse()
           const [, lastPath] = reversedPath
-          const isNewPath = lastPath === 'test'
+          const isRelativeTestPath = lastPath === 'test'
           let componentKey = ''
-          if (isNewPath) {
+          if (isRelativeTestPath) {
             const [, , component, category] = reversedPath
             componentKey = `${category}/${component}`
           } else {
             const [, component, category] = reversedPath
             componentKey = `${category}/${component}`
           }
+
           path.replaceWith(
             t.callExpression(
               t.memberExpression(
