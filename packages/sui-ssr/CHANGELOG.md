@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 7.20.0 (2021-03-02)
+
+
+### Bug Fixes
+
+* change conditional check ([3cd2796](https://github.com/SUI-Components/sui/commit/3cd2796db6f2b99644580401563a32ff65ecfbac))
+* remove unnecessary import ([c48d029](https://github.com/SUI-Components/sui/commit/c48d0294d913ffb244852788e512420e474eed72))
+
+
+### Features
+
+* implement site feature for routes on route_matching hook ([da9dd55](https://github.com/SUI-Components/sui/commit/da9dd554eaec4c575ff10e6fdc3ebfd81de591cf))
+
+
+
 # 7.19.0 (2021-02-22)
 
 
