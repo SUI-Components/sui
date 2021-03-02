@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.12.0 (2021-03-02)
+
+
+### Bug Fixes
+
+* fix new test path in studio ([bc489a1](https://github.com/SUI-Components/sui/commit/bc489a163d3dfdaba6c731beaa91d4257239dbaf))
+* rename var ([6356923](https://github.com/SUI-Components/sui/commit/63569236a468993cc2993b6b0cf2e08c1750d8cd))
+
+
+
 # 4.11.0 (2021-02-24)
 
 
