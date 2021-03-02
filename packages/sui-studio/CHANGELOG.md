@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.30.0 (2021-03-02)
+
+
+### Features
+
+* remove postinstall ([332e2e8](https://github.com/SUI-Components/sui/commit/332e2e85827ddc049d5b08ef29625784bc93aa67))
+
+
+
 # 9.29.0 (2021-02-26)
 
 
