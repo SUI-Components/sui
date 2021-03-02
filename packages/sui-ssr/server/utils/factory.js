@@ -115,6 +115,7 @@ export default ({path, fs, config: ssrConf = {}}) => {
   return {
     isMultiSite,
     hostFromReq,
+    siteByHost,
     useStaticsByHost,
     readHtmlTemplate,
     buildRequestUrl,

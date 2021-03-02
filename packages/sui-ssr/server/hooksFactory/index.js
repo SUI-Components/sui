@@ -3,7 +3,7 @@ import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
 import {getTplParts, HtmlBuilder} from '../template'
-import {publicFolder, hrTimeToMs} from '../utils'
+import {publicFolder, hrTimeToMs, siteByHost, isMultiSite} from '../utils'
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
 // __MAGIC IMPORTS__
@@ -75,6 +75,9 @@ export const hooksFactory = async () => {
     [TYPES.ROUTE_MATCHING]: async (req, res, next) => {
       const startRouteMatchingTime = process.hrtime()
       const {performance = {}, url} = req
+      const site = siteByHost(req)
+      const siteRoutes =
+        isMultiSite && isFunction(routes) ? routes({site}) : routes
 
       match[promisify.custom] = args =>
         new Promise((resolve, reject) => {
@@ -87,14 +90,14 @@ export const hooksFactory = async () => {
           })
         })
 
-      if (!routes) {
+      if (!siteRoutes) {
         console.error('Required routes file missing') // eslint-disable-line no-console
         process.exit(1)
       }
 
       try {
         const {redirectLocation, renderProps} = await promisify(match)({
-          routes,
+          routes: siteRoutes,
           location: url
         })
 
