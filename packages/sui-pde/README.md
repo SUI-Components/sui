@@ -27,12 +27,12 @@ const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
 
 const optimizelyAdapter = new OptimizelyAdapter({
   optimizely: optimizelyInstance,
-  userId: // mandatory
+  userId: // mandatory,
+  hasUserConsents  // if false, the user won't be part of the A/B test
 })
 
 const pde = new PDE({
-  adapter: optimizelyAdapter,
-  hasUserConsents: true // optional boolean, true by default
+  adapter: optimizelyAdapter
 })
 
 // app.js
@@ -62,6 +62,19 @@ const MyComponent = () => {
   if (variation === 'variationB') return <MyVariationB />
   return <MyVariationA>
 }
+```
+
+### Feature Flags
+
+⚠️ user consents do not apply to feature flags
+
+```js
+import  {useFeature} from '@s-ui/pde'
+
+const MyComponent = () => {
+  const {isActive} = useFeature('myFeatureKey') // isActive = true when the feature flag is activated
+}
+
 ```
 
 #### Segment integration
