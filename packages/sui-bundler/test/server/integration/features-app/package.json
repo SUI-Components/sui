@@ -1,5 +1,5 @@
 {
-  "name": "basic-app",
+  "name": "@s-ui/studio-basic-app",
   "sui-bundler": {
     "env": [
       "APP_NAME",
