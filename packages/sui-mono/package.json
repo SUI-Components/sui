@@ -6,11 +6,6 @@
   "bin": {
     "sui-mono": "./bin/sui-mono.js"
   },
-  "keywords": [
-    "commitizen",
-    "release"
-  ],
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/helpers": "1",
