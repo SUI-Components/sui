@@ -129,16 +129,7 @@ const checkIsMasterBranchActive = async ({cwd}) => {
     cwd
   })
 
-  let isMaster = stdout.trim() === 'master'
-
-  // Travis is returning HEAD as branch so we need to check
-  // if we're on Travis as a fallback using environment vars
-  if (!isMaster) {
-    const {TRAVIS_BRANCH, TRAVIS_PULL_REQUEST_BRANCH} = process.env
-    isMaster = TRAVIS_BRANCH === 'master' && !TRAVIS_PULL_REQUEST_BRANCH
-  }
-
-  return isMaster
+  return stdout.trim() === 'master'
 }
 
 const prepareAutomaticRelease = async ({
@@ -174,7 +165,7 @@ const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
 checkIsMasterBranchActive({cwd: process.cwd()})
   .then(isMaster => {
     if (!isMaster) {
-      console.warn('Active branch is not main. No releases to do.')
+      console.warn('Active branch is not master branch. No releases to do.')
       return
     }
 
@@ -190,18 +181,18 @@ checkIsMasterBranchActive({cwd: process.cwd()})
         })
       }
 
-      const releases = releasesByPackages({status})
-
-      releases
-        .filter(({code}) => code !== 0)
-        .map(release => () =>
-          releaseEachPkg({...release, skipCI: program.skipCi})
-        )
-        // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
-        .reduce(
-          (m, p) => m.then(v => Promise.all([...v, p()])),
-          Promise.resolve([])
-        )
+      return (
+        releasesByPackages({status})
+          .filter(({code}) => code !== 0)
+          .map(release => () =>
+            releaseEachPkg({...release, skipCI: program.skipCi})
+          )
+          // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
+          .reduce(
+            (m, p) => m.then(v => Promise.all([...v, p()])),
+            Promise.resolve([])
+          )
+      )
     })
   })
   .catch(err => {
