@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "9.23.0",
+  "version": "9.31.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -10,8 +10,7 @@
     "phoenix": "npx rimraf node_modules && npm it",
     "lint:js": "linting-rules js",
     "lint:sass": "linting-rules sass",
-    "lint": "npm run lint:js && npm run lint:sass",
-    "postinstall": "node scripts/postinstall.js"
+    "lint": "npm run lint:js && npm run lint:sass"
   },
   "author": "",
   "license": "MIT",
@@ -25,6 +24,7 @@
     "@s-ui/react-router": "1",
     "@s-ui/test": "4",
     "@testing-library/react": "10.0.4",
+    "@testing-library/react-hooks": "4.0.1",
     "@testing-library/user-event": "10.0.1",
     "chai": "4.2.0",
     "chai-dom": "1.8.2",

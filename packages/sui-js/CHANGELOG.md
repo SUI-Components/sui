@@ -1,6 +1,31 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 2.20.0 (2020-12-18)
+
+
+### Bug Fixes
+
+* fix bowser map ([fc31c63](https://github.com/SUI-Components/sui/commit/fc31c637984835cd0ebc308df2decfa7c37df73f))
+
+
+
+# 2.19.0 (2020-12-17)
+
+
+### Features
+
+* update bowser version ([054cf5f](https://github.com/SUI-Components/sui/commit/054cf5fec3896248b11b12eb42f3906e926a43af))
+
+
+
+# 2.18.0 (2020-11-09)
+
+
+### Features
+
+* reformat README to bump version ([34a6b8d](https://github.com/SUI-Components/sui/commit/34a6b8de9a314213535a71a0e04ca3e79919f93c))
+
+
 
 # 2.17.0 (2020-07-21)
 

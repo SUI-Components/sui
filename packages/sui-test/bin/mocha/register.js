@@ -1,9 +1,13 @@
 const {serverConfig} = require('../../src/config')
-const {forceTranspilation = []} = serverConfig
+const {forceTranspilation = [], esmOverride = false} = serverConfig
 
 const regexToAdd = forceTranspilation.map(
   regexString => new RegExp(regexString)
 )
+
+if (esmOverride) {
+  require('./applyEsmOverride')
+}
 
 require('@babel/register')({
   ignore: [],

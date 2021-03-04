@@ -16,7 +16,7 @@ program
       ' Release a server version. Create a git tag and update a minor version in the package.json'
     )
     console.log(
-      ' It is mandatory setup a $GH_TOKEN envVar to execute this command'
+      ' It is mandatory setup a $GITHUB_TOKEN envVar to execute this command'
     )
     console.log('')
     console.log('  Examples:')
@@ -43,11 +43,11 @@ const execute = async (cmd, full) => {
 }
 ;(async () => {
   const cwd = process.cwd()
-  const {GH_TOKEN} = process.env
+  const {GITHUB_TOKEN, GH_TOKEN} = process.env
 
-  if (!GH_TOKEN) {
-    throw new Error('Missing GH_TOKEN var')
-  }
+  const gitHubToken = GITHUB_TOKEN || GH_TOKEN
+
+  if (!gitHubToken) throw new Error('Missing GITHUB_TOKEN environment variable')
 
   try {
     await execute(`git checkout ${branch}`)
@@ -63,7 +63,7 @@ const execute = async (cmd, full) => {
     const repoURL = await execute('git config --get remote.origin.url')
     const gitURL = GitUrlParse(repoURL).toString('https')
     const authURL = new URL(gitURL)
-    authURL.username = GH_TOKEN
+    authURL.username = gitHubToken
 
     await execute(`git config --global user.email "${email}"`)
     await execute(`git config --global user.name "${name}"`)

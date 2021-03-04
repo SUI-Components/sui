@@ -1,20 +1,128 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 2.2.0 (2021-03-01)
+
+
+### Bug Fixes
+
+* check correctly if master ([577d99a](https://github.com/SUI-Components/sui/commit/577d99af943fcdf6b9ed8d37fb24d378a6508928))
+
+
+
+# 2.1.0 (2021-03-01)
+
+
+### Bug Fixes
+
+* fix creation of CHANGELOG because skip ci commit msg ([dc4ac41](https://github.com/SUI-Components/sui/commit/dc4ac417ff9e6d6eb81bdbb2c2b3763ac482fc83))
+
+
+### Features
+
+* check isMaster before creating scopes ([a1f617c](https://github.com/SUI-Components/sui/commit/a1f617c85740b39be6f171687d4ca3848d094a17))
+
+
+
+# 2.0.0 (2021-02-16)
+
+
+### Bug Fixes
+
+* check monorepo for commit msg ([421ebe7](https://github.com/SUI-Components/sui/commit/421ebe783a8b000071e34650fcf66898b390f165))
+* fix release with new system ([aad8b75](https://github.com/SUI-Components/sui/commit/aad8b754f712ade770ee990b0d17f1bc1b563819))
+* fix usage of isMonoPackage ([5e9a6df](https://github.com/SUI-Components/sui/commit/5e9a6df4d056bf08909475c7be0f03f46bb9a567))
+* fix use of stdout from exec method ([1a5a62f](https://github.com/SUI-Components/sui/commit/1a5a62f5e1d0d310a99cb38f40cdaccdbdd42887))
+* fix wrong double json extension ([1ca591b](https://github.com/SUI-Components/sui/commit/1ca591b4a33124166d92bb90c409238a8200f0e4))
+* fix wrong import ([a6e1243](https://github.com/SUI-Components/sui/commit/a6e12432a84fca095c7361d5aa5d4b47e1b740c3))
+* use new code instead old one ([fac46c2](https://github.com/SUI-Components/sui/commit/fac46c21bf1dbb776108fa940b3a0b0d58358058))
+
+
+### Features
+
+* add glob dependency ([bc0850e](https://github.com/SUI-Components/sui/commit/bc0850e8addccf834f1fa31f9818e3d2489d0c43))
+* force new BREAKING CHANGE ([5255db5](https://github.com/SUI-Components/sui/commit/5255db596095fe3046f937d0f71d80e037dae3d5))
+* integrade sui-cz dependencies ([3c484b4](https://github.com/SUI-Components/sui/commit/3c484b482f64d15b3709a424312a25df81c5781c))
+* integrate sui-cz to sui-mono ([dbb0376](https://github.com/SUI-Components/sui/commit/dbb0376f54ccac9284559807baca3b12e4c08ce6))
+* make changelog filename constant and not configurable ([b546a92](https://github.com/SUI-Components/sui/commit/b546a92881d1bf3e246865d295179ae6a626885d))
+* simplify messages ([1a5465d](https://github.com/SUI-Components/sui/commit/1a5465d378cd24d5a6b08bc48092ff0f9dd1a73f))
+* use factory pattern for better testing ([26f7e1a](https://github.com/SUI-Components/sui/commit/26f7e1a18a285fe00e3275c40c2b0f1e99fb5ab9))
+* use internal sui-cz instead pkg ([6cce645](https://github.com/SUI-Components/sui/commit/6cce64535714561e266be57dfcc0b29da96cf91a))
+* use new methods with workspaces for releases ([3bb436f](https://github.com/SUI-Components/sui/commit/3bb436fa92f7233ebc3ae3ed8daee0f8b256c7e0))
+* use scopes instead calculating paths ([36ddd2e](https://github.com/SUI-Components/sui/commit/36ddd2e1d3923d2c761488f1ccffe03aa70e0e7d))
+* use sui-helpers/colors instead colors ([75549c3](https://github.com/SUI-Components/sui/commit/75549c379de01e648e52459024e38e71609e78a3))
+* use sui-helpers/colors instead colors lib ([4f7dc49](https://github.com/SUI-Components/sui/commit/4f7dc49a070c52f0057c7927188895935f06e48d))
+* use workspaces for changelog instead scopes ([8c1b59d](https://github.com/SUI-Components/sui/commit/8c1b59dafd1046cdce941fcba4f36808082acaa5))
+* use workspaces instead scopes ([0011beb](https://github.com/SUI-Components/sui/commit/0011beb971401bba6e1df28e859a3e49dc063245))
+* wip workspaces ([72dd093](https://github.com/SUI-Components/sui/commit/72dd093d58889200d1dca9954d3d8bd6a122d4e4))
+
+
+### BREAKING CHANGES
+
+* packagesFolder field is not longer used. build scripts are not longer executed before releasing.
+Check README for migration guide.
+
+
+
+# 1.72.0 (2020-12-30)
+
+
+### Bug Fixes
+
+* fix linter errors ([6b5b68c](https://github.com/SUI-Components/sui/commit/6b5b68c70f152e0ca1f9ac55e464c8bf975103af))
+
+
+
+# 1.71.0 (2020-12-22)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([15ba0ea](https://github.com/SUI-Components/sui/commit/15ba0ea6ee43c3d67376e673dbb16647da52e0d1))
+
+
+
+# 1.70.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* keep scopes for monorepos but avoid npm install on them ([90bf87f](https://github.com/SUI-Components/sui/commit/90bf87f9c3147d4a32ed25ce2d88a798625e9dcf))
+
+
 
 # 1.69.0 (2020-12-14)
 
 
 ### Bug Fixes
 
-* avoid sui-mono to get wrong folders ([7e235c4](https://github.com/SUI-Components/sui/commit/7e235c4bc4f5692101372a8e2b887f217b68fb8b))
-* force new release without console.log ([b4d0a74](https://github.com/SUI-Components/sui/commit/b4d0a74efded0cc572a1dd687438c846a7ac61e3))
 * use correct access config ([1ec2947](https://github.com/SUI-Components/sui/commit/1ec2947a188957ac88908a7d9249ca25e96dcf42))
+
+
+
+# 1.68.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* avoid sui-mono to get wrong folders ([7e235c4](https://github.com/SUI-Components/sui/commit/7e235c4bc4f5692101372a8e2b887f217b68fb8b))
+
+
+
+# 1.67.0 (2020-12-11)
 
 
 ### Features
 
 * avoid removing folders on CI as they don't exist ([57457c3](https://github.com/SUI-Components/sui/commit/57457c39bfa6ee9d9d1c9caa523b1371e5e64302))
+
+
+
+# 1.66.0 (2020-12-10)
+
+
+### Bug Fixes
+
+* force new release without console.log ([b4d0a74](https://github.com/SUI-Components/sui/commit/b4d0a74efded0cc572a1dd687438c846a7ac61e3))
 
 
 
@@ -42,6 +150,14 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * add some logging ([9f84855](https://github.com/SUI-Components/sui/commit/9f84855be1dd9865662f7f3022e4fcfbab131782))
+
+
+
+# 1.62.0 (2020-12-03)
+
+
+### Bug Fixes
+
 * use root packages ([61233a6](https://github.com/SUI-Components/sui/commit/61233a669212f46513a22ddf1717f81bce509097))
 
 

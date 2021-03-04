@@ -1,6 +1,33 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.15.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([0dae1f6](https://github.com/SUI-Components/sui/commit/0dae1f65a0c87e6b66cbc191f1391bc3ab64342e))
+
+
+
+# 1.14.0 (2020-11-17)
+
+
+### Bug Fixes
+
+* force release for sui-ci ([004230c](https://github.com/SUI-Components/sui/commit/004230c49aec74b2bde8b8d3f6044e42b6620cde))
+* return correct sha for master ([2ae16dd](https://github.com/SUI-Components/sui/commit/2ae16dde82ea96344107679b950f5e62cd09417e))
+* use correct field for commit sha ([2ce676c](https://github.com/SUI-Components/sui/commit/2ce676cc854a1574a6bda621ab9c26fab3a7f6f0))
+
+
+
+# 1.13.0 (2020-11-17)
+
+
+### Features
+
+* add support to GitHub Actions ([abebe4d](https://github.com/SUI-Components/sui/commit/abebe4dff97c9bc4d01c8f3041764520372af36f))
+
+
 
 # 1.12.0 (2020-11-11)
 
@@ -26,6 +53,14 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add support to GitHub Actions ([a78f2f2](https://github.com/SUI-Components/sui/commit/a78f2f2c25dc22e4584c7333c99e1ef24ebd91af))
+
+
+
+# 1.9.0 (2020-10-21)
+
+
+### Features
+
 * upgrade dependencies for sui-ci ([0b8748e](https://github.com/SUI-Components/sui/commit/0b8748edeb06d8a7cfb1bdcf1d38cf3bf88423d2))
 
 

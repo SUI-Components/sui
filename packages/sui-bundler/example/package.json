@@ -19,6 +19,9 @@
   "author": "",
   "license": "ISC",
   "sui-bundler": {
-    "vendor": ["react", "react-dom"]
+    "vendor": [
+      "react",
+      "react-dom"
+    ]
   }
 }

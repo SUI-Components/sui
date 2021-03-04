@@ -94,7 +94,7 @@ If you want release your server to a branch (generate a clean package-lock file 
 $ npx sui-ssr release --email bot@email.com --name BotName
 ```
 
-To use this command you have to define a `GH_TOKEN` env var in your CI server. This token must be associate to the user and email passing by flags to the command
+To use this command you have to define a `GITHUB_TOKEN` env var in your CI server. This token must be associate to the user and email passing by flags to the command
 
 Example of a `.travis.yml`:
 
@@ -228,7 +228,22 @@ Configs accepted:
 - **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
 
   - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the microservice for generating the Critical CSS.
-  - **`criticalCSS.host`** (`undefined`): Define the HOST used to make the request to the microservice for generating the Critical CSS.
+  - **`criticalCSS.host`** `[String/Object]` (`undefined`): Define the host used to make the request to generate the Critical CSS. It can be a simple string or an object defining multiple options for multi sites configurations, giving a different value for each site.
+
+    ```json
+    // With simple host:
+    {
+      "host": "my-motorcycles.com"
+    }
+    // With multi site:
+    {
+      "host": {
+        "motorcycles": "my-motorcycles.com",
+        "trucks": "my-trucks.com"
+      }
+    }
+    ```
+
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
   - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
   - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
@@ -245,15 +260,15 @@ Configs accepted:
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
-- **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname or hostname pattern (key as string) and public folder (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
+- **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname or hostname pattern (key as string) and the site name (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
 
   ```json
   {
     "multiSite": {
-      "my-motorcycles.com": "public-motorcycles",
-      "my-trucks.com": "public-trucks",
-      "v([0-9]+).my-trucks.com": "public-trucks",
-      "default": "public-cars"
+      "my-motorcycles.com": "motorcycles",
+      "my-trucks.com": "trucks",
+      "v([0-9]+).my-trucks.com": "trucks",
+      "default": "cars"
     }
   }
   ```
@@ -296,6 +311,11 @@ export default [
   }
 ]
 ```
+
+### Shared context data between server and client
+
+In case you need to share initial client data needed by a context provider, add an `getInitialData` to your context provider. It will be injected into the html as `window.__INITIAL_CONTEXT_VALUE__[you context key]`
+
 
 ## Link Packages
 

@@ -1,6 +1,30 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 2.13.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([15f4134](https://github.com/SUI-Components/sui/commit/15f413457572a77320749692f29c1cc909626283))
+
+
+
+# 2.12.0 (2020-11-11)
+
+
+### Features
+
+* install latest husky version ([d8a8bb3](https://github.com/SUI-Components/sui/commit/d8a8bb3d06aa8c6018531fe8a1772c9c7030750e))
+
+
+
+# 2.11.0 (2020-11-02)
+
+
+
+# 2.10.0 (2020-10-23)
+
+
 
 # 2.9.0 (2020-10-01)
 

@@ -1,6 +1,22 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 4.17.0 (2020-11-11)
+
+
+### Features
+
+* use latest version of husky ([6a5fbfb](https://github.com/SUI-Components/sui/commit/6a5fbfba45d96a24f6398aa1213fc94b764c61e6))
+
+
+
+# 4.16.0 (2020-11-03)
+
+
+### Features
+
+* upgrade created package.json and simplify dependencies ([110b111](https://github.com/SUI-Components/sui/commit/110b11129b27e9c8a1c24df427e0519f03410aa3))
+
+
 
 # 4.15.0 (2020-09-30)
 
