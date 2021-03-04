@@ -2,7 +2,6 @@ import {segment as segmentIntegration} from './segment'
 
 /**
  * Add to this array any integration between optimizely and a third party
- * It's expected to be an object with an initialize and a delete function
  */
 const integrations = [segmentIntegration]
 
