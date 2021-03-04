@@ -69,7 +69,7 @@ export default class OptimizelyAdapter {
     return optimizelyInstance
   }
 
-  getEnabledFeatures({attributes} = {}) {
+  getEnabledFeatures({attributes}) {
     return this._optimizely.getEnabledFeatures(this._userId, attributes)
   }
 
