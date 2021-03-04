@@ -32,7 +32,8 @@ const optimizelyAdapter = new OptimizelyAdapter({
 })
 
 const pde = new PDE({
-  adapter: optimizelyAdapter
+  adapter: optimizelyAdapter,
+  hasUserConsents: true // Kept because of legacy reasons, pass it by the OptimizelyAdapter constructor
 })
 
 // app.js
@@ -73,6 +74,8 @@ import  {useFeature} from '@s-ui/pde'
 
 const MyComponent = () => {
   const {isActive} = useFeature('myFeatureKey') // isActive = true when the feature flag is activated
+
+  return <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
 }
 
 ```
