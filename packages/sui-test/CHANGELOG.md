@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.13.0 (2021-03-04)
+
+
+### Bug Fixes
+
+* add option to patch CJS loader in node v12.21.0 ([e08c872](https://github.com/SUI-Components/sui/commit/e08c8723ae8fc8f4debaf66e3a4ac739c1a93565)), closes [#1068](https://github.com/SUI-Components/sui/issues/1068)
+
+
+
 # 4.12.0 (2021-03-02)
 
 
