@@ -129,7 +129,15 @@ const checkIsMasterBranchActive = async ({cwd}) => {
     cwd
   })
 
-  const isMaster = stdout.trim() === 'master'
+  let isMaster = stdout.trim() === 'master'
+
+  // Travis is returning HEAD as branch so we need to check
+  // if we're on Travis as a fallback using environment vars
+  if (!isMaster) {
+    const {TRAVIS_BRANCH, TRAVIS_PULL_REQUEST_BRANCH} = process.env
+    isMaster = TRAVIS_BRANCH === 'master' && !TRAVIS_PULL_REQUEST_BRANCH
+  }
+
   return isMaster
 }
 
