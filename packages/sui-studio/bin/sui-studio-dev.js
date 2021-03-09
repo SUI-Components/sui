@@ -62,7 +62,7 @@ const studioDevConfig = {
       component: path.join(componentPath, 'src'),
       test: testPath,
       package: path.join(componentPath, 'package.json'),
-      demo: path.join(PWD, 'demo', category, component)
+      demo: path.join(componentPath, 'demo')
     }
   }
 }

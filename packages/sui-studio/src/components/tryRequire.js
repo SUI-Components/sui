@@ -18,7 +18,7 @@ export const fetchMarkdownFile = ({category, component, file}) =>
   fetchStaticFile(`/components/${category}/${component}/${file}.md`)
 
 export const fetchPlayground = ({category, component}) =>
-  fetchStaticFile(`/demo/${category}/${component}/playground`)
+  fetchStaticFile(`/components/${category}/${component}/demo/playground`)
 
 export const importContexts = ({category, component}) =>
   safeImport({
@@ -26,7 +26,7 @@ export const importContexts = ({category, component}) =>
     importFile: () =>
       import(
         /* webpackChunkName: "context-[request]" */
-        `${__BASE_DIR__}/demo/${category}/${component}/context.js`
+        `${__BASE_DIR__}/components/${category}/${component}/demo/context.js`
       )
   })
 
@@ -51,7 +51,7 @@ const importDemo = ({category, component}) =>
       import(
         /* webpackChunkName: "demo-[request]" */
         /* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
-        `${__BASE_DIR__}/demo/${category}/${component}/demo/index.js`
+        `${__BASE_DIR__}/components/${category}/${component}/demo/index.js`
       )
   })
 
@@ -60,7 +60,7 @@ const importEvents = ({category, component}) =>
     importFile: () =>
       import(
         /* webpackChunkName: "events-[request]" */
-        `${__BASE_DIR__}/demo/${category}/${component}/events.js`
+        `${__BASE_DIR__}/components/${category}/${component}/demo/events.js`
       )
   })
 
@@ -71,8 +71,8 @@ export const importGlobals = () => {
   return safeImport({
     importFile: () =>
       import(
-        /* webpackInclude: /\/demo\/globals.js$/ */
-        `${__BASE_DIR__}/demo/${globalsFile}`
+        /* webpackInclude: /\/components\/globals.js$/ */
+        `${__BASE_DIR__}/components/${globalsFile}`
       )
   })
 }
