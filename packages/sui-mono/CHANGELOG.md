@@ -1,5 +1,60 @@
 # CHANGELOG
 
+# 2.6.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* better error handling ([9461a68](https://github.com/SUI-Components/sui/commit/9461a6821f976838412b89a3a0557b064d05488a))
+
+
+
+# 2.5.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* add more logging ([e916138](https://github.com/SUI-Components/sui/commit/e916138241ba9c48172f209146d6a4a7d08b1e35))
+* more output for errors ([55da8a6](https://github.com/SUI-Components/sui/commit/55da8a601169209d828c389fb626d0d8400cc544))
+
+
+
+## 2.4.2 (2021-03-10)
+
+
+
+## 2.4.1 (2021-03-10)
+
+
+### Bug Fixes
+
+* use correctly async await ([ec27a36](https://github.com/SUI-Components/sui/commit/ec27a36d187e18eaec95d66e02d9f381fcd400a0))
+
+
+### Features
+
+* better output ([3c81753](https://github.com/SUI-Components/sui/commit/3c81753f6a06785dd0585d133b5c17b6f72f1e85))
+
+
+
+# 2.4.0 (2021-03-04)
+
+
+### Bug Fixes
+
+* return Promise for catch error and remove Travis code ([91610bf](https://github.com/SUI-Components/sui/commit/91610bf6c7231a086f825d5cc74a1c8a3ed8e1d4))
+
+
+
+# 2.3.0 (2021-03-04)
+
+
+### Bug Fixes
+
+* fix Travis check if master branch for releases ([cc8d759](https://github.com/SUI-Components/sui/commit/cc8d7594854ed8943f8b19927380bef4a7d02805))
+
+
+
 # 2.2.0 (2021-03-01)
 
 
