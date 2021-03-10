@@ -1,5 +1,26 @@
 # CHANGELOG
 
+# 9.33.0 (2021-03-10)
+
+
+### Features
+
+* upgrade react version ([2a6705d](https://github.com/SUI-Components/sui/commit/2a6705d8e2e1c249f03dcaa92dcc69f511b9857e))
+* upgrade react-dom ([d71ce1f](https://github.com/SUI-Components/sui/commit/d71ce1fc58571f075c642900327324941b39d7d6))
+
+
+
+# 9.32.0 (2021-03-08)
+
+
+### Features
+
+* add ref to mocha setup environment ([557d14b](https://github.com/SUI-Components/sui/commit/557d14bef1d2902a74618d9f922545f4918122f1))
+* pull master ([e4456e0](https://github.com/SUI-Components/sui/commit/e4456e0bad2fec9b1f025e270d0115f020582106))
+* studio contextify component without loosing its reference ([44f39b8](https://github.com/SUI-Components/sui/commit/44f39b85175553751766dd186a3976ee100691df))
+
+
+
 # 9.31.0 (2021-03-02)
 
 
@@ -71,6 +92,7 @@
 
 ### Features
 
+* add optional context to the setup environment ([a62ca3e](https://github.com/SUI-Components/sui/commit/a62ca3ee502ba08f164df6973756b82590f016e7))
 * add test timeout option ([910ea54](https://github.com/SUI-Components/sui/commit/910ea54b9278fe3f38c7eb57f7ad4542f7ba49b7))
 * fix sui test timeout condition ([0c5d295](https://github.com/SUI-Components/sui/commit/0c5d29567da2a6b93de15788cb440ef248191897))
 * fix test timeout default value ([0bc31b5](https://github.com/SUI-Components/sui/commit/0bc31b57f0c47d0c552f7e84404cfed72ddbb894))
