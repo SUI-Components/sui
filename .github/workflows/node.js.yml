@@ -26,8 +26,8 @@ jobs:
       with:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
-    - run: node ./packages/sui-mono/bin/sui-mono-release --github-token ${{secrets.GH_ACTIONS_TOKEN}}
     - run: npm run phoenix:ci
+    - run: npx -p ./packages/sui-mono sui-mono release --github-token ${{secrets.GH_ACTIONS_TOKEN}}
     - run: npm run lint
     - run: npm run test:ci
     - run: npx -p ./packages/sui-ci sui-ci release
