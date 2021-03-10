@@ -138,16 +138,22 @@ const prepareAutomaticRelease = async ({
   githubEmail,
   cwd
 }) => {
+  console.log('inside prepareAutomaticRelease')
   const {stdout} = await exec('git config --get remote.origin.url', {cwd})
+  console.log('1.')
   const repoURL = stdout.trim()
+  console.log('2.')
   const gitURL = gitUrlParse(repoURL).toString('https')
+  console.log('3.')
   const authURL = new URL(gitURL)
   authURL.username = githubToken
+  console.log('4.')
 
   const {
     stdout: rawIsShallowRepository
   } = await exec('git rev-parse --is-shallow-repository', {cwd})
   const isShallowRepository = rawIsShallowRepository === 'true'
+  console.log('5.')
 
   if (isShallowRepository) await exec(`git pull --unshallow --quiet`, {cwd})
 
@@ -180,10 +186,14 @@ checkShouldRelease()
       return
     }
 
+    console.log({shouldRelease})
+
     return checker.check().then(async status => {
+      console.log({status})
       const {githubEmail, githubToken, githubUser} = program
 
       if (isAutomaticRelease) {
+        console.log({isAutomaticRelease})
         await prepareAutomaticRelease({
           githubEmail,
           githubToken,
@@ -191,6 +201,8 @@ checkShouldRelease()
           cwd: process.cwd()
         })
       }
+
+      console.log('after automaticRelease')
 
       return (
         releasesByPackages({status})
