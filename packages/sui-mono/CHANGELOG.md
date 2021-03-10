@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.7.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* fix linter error ([040dcec](https://github.com/SUI-Components/sui/commit/040dcecbe70e806b7ca729d60d5f42293c100efe))
+
+
+
 # 2.6.0 (2021-03-10)
 
 
