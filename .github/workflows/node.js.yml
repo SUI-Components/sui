@@ -29,7 +29,7 @@ jobs:
     - run: npm run phoenix:ci
     - run: npm run lint
     - run: npm run test:ci
-    - run: npx @s-ui/ci release
+    - run: npx -p ./packages/sui-ci sui-ci release
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
