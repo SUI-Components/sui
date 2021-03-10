@@ -14,4 +14,12 @@ export default class DefaultAdapter {
   getVariation() {
     return null
   }
+
+  updateConsents() {
+    return null
+  }
+
+  async onReady() {
+    return true
+  }
 }
