@@ -168,11 +168,13 @@ const checkShouldRelease = async () => {
     checkIsMasterBranchActive({cwd: process.cwd()})
   ])
 
-  return isAutomaticRelease || isMasterBranchActive
+  return {isAutomaticRelease, isMasterBranchActive}
 }
 
 checkShouldRelease()
-  .then(shouldRelease => {
+  .then(({isAutomaticRelease, isMasterBranchActive}) => {
+    const shouldRelease = isAutomaticRelease || isMasterBranchActive
+
     if (!shouldRelease) {
       console.log('[sui-mono release] No release is needed')
       return
@@ -181,12 +183,14 @@ checkShouldRelease()
     return checker.check().then(async status => {
       const {githubEmail, githubToken, githubUser} = program
 
-      await prepareAutomaticRelease({
-        githubEmail,
-        githubToken,
-        githubUser,
-        cwd: process.cwd()
-      })
+      if (isAutomaticRelease) {
+        await prepareAutomaticRelease({
+          githubEmail,
+          githubToken,
+          githubUser,
+          cwd: process.cwd()
+        })
+      }
 
       return (
         releasesByPackages({status})
