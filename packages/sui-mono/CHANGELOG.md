@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.8.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* fix linter errors ([f0f6a56](https://github.com/SUI-Components/sui/commit/f0f6a56cc74c4cbf41814a0b26bfe5e028faf7a3))
+
+
+### Features
+
+* improve readability ([2a75931](https://github.com/SUI-Components/sui/commit/2a75931242eda45d57c7008643bc91fd063bf60a))
+
+
+
 # 2.7.0 (2021-03-10)
 
 
