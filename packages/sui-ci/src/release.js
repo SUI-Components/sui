@@ -37,6 +37,7 @@ module.exports = async function release({
     console.info(stdout)
     console.info('[sui-ci release] Success!')
   } catch (e) {
+    console.error(e)
     console.error('[sui-ci release] Something went wrong:')
     console.error(e.message)
     return process.exit(1)
