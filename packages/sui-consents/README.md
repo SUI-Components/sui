@@ -8,10 +8,10 @@ $ npm install @s-ui/consents
 
 ## hasUserConsents
 
-Returns if a user has given its consent to a set of consents
+Returns if a user has given its consent to a set of consents.
 
 ```js
-import {hasUserConsents} from '../src/index'
+import {hasUserConsents} from '@s-ui/consents'
 
 const cookies = (req) => {
   if (isClient) {
@@ -25,4 +25,15 @@ hasUserConsents({
   requiredConsents: [1, 2, 3],
   cookies
 })
+```
+
+## useUserConsents
+
+React hook that returns whether a user has given its consent to a set of consents or not, and updates over time if the user changes the consents.
+
+```js
+import {useUserConsents} from '@s-ui/consents'
+
+// will return true if user did accept at least to consents 1, 2 and 3
+const isAccepted = useUserConsents([1, 2, 3])
 ```
