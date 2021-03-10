@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.16.0 (2021-03-10)
+
+
+### Features
+
+* add more output ([5ca34e3](https://github.com/SUI-Components/sui/commit/5ca34e3f4b6487256f9e2cf54274f103798e9c66))
+
+
+
 # 1.15.0 (2020-12-30)
 
 
