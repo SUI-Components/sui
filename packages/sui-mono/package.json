@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mono",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
