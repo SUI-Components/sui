@@ -8,7 +8,7 @@ const {
   getPublishAccess
 } = require('../src/config')
 const checker = require('../src/check')
-const {serialSpawn} = require('@s-ui/helpers/cli')
+const {serialSpawn, showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const {exec: execNative} = require('child_process')
 const gitUrlParse = require('git-url-parse')
@@ -70,58 +70,36 @@ const releasesByPackages = ({status}) => {
     .map(scope => scopeMapper({scope, status}))
 }
 
-const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
-  return new Promise((resolve, reject) => {
-    if (code === 0) return resolve()
+const releaseEachPkg = async ({pkg, code, skipCI} = {}) => {
+  const isMonoPackage = checkIsMonoPackage()
+  const tagPrefix = isMonoPackage ? '' : `${pkg}-`
+  const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
 
-    const isMonoPackage = checkIsMonoPackage()
-    const tagPrefix = isMonoPackage ? '' : `${pkg}-`
-    const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
+  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+  const {private: isPrivatePackage} = getPackageJson(cwd, true)
 
-    const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-    const {private: isPrivatePackage} = getPackageJson(cwd, true)
+  await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
+  await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
 
-    const releaseCommands = [
-      ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
-      ['git', ['add', path.join(cwd, 'package.json')]]
-    ]
+  const {version} = getPackageJson(cwd, true)
 
-    const docCommands = [
-      [suiMonoBinPath, ['changelog', cwd]],
-      ['git', ['add', path.join(cwd, changelogFilename)]],
-      ['git', ['commit --amend --no-verify --no-edit']]
-    ]
+  // Add [skip ci] to the commit message to avoid CI build
+  // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
+  const commitMsg = `release(${packageScope}): v${version}${
+    skipCI ? ' [skip ci]' : ''
+  }`
 
-    const publishCommands = [
-      !isPrivatePackage && ['npm', ['publish', `--access=${publishAccess}`]],
-      ['git', ['push', '-f', '--tags', 'origin', 'HEAD']]
-    ].filter(Boolean)
+  await exec(`git commit -m "${commitMsg}"`, {cwd})
 
-    serialSpawn(releaseCommands, {cwd})
-      .then(() => {
-        const {version} = getPackageJson(cwd, true)
+  await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
+  await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
+  await exec(`git commit --amend --no-verify --no-edit`, {cwd})
 
-        // Add [skip ci] to the commit message to avoid CI build
-        // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
-        const commitMsg = `release(${packageScope}): v${version}${
-          skipCI ? ' [skip ci]' : ''
-        }`
+  await exec(`git tag -a ${tagPrefix}${version} -m "v${version}`, {cwd})
 
-        return serialSpawn([['git', [`commit -m "${commitMsg}"`]]], {cwd})
-      })
-      .then(() => serialSpawn(docCommands))
-      .then(() => {
-        // Create release tag
-        const {version} = getPackageJson(cwd)
-        return serialSpawn(
-          [['git', [`tag -a ${tagPrefix}${version} -m "v${version}"`]]],
-          {cwd}
-        )
-      })
-      .then(() => serialSpawn(publishCommands, {cwd}))
-      .then(resolve)
-      .catch(reject)
-  })
+  !isPrivatePackage &&
+    (await exec(`npm publish --access=${publishAccess}`, {cwd}))
+  await exec('git push -f --tags origin HEAD')
 }
 
 const checkIsMasterBranchActive = async () => {
@@ -218,4 +196,5 @@ checkShouldRelease()
   })
   .catch(err => {
     console.error(err)
+    showError(err)
   })
