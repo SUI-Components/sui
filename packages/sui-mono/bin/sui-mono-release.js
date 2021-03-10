@@ -70,7 +70,7 @@ const releasesByPackages = ({status}) => {
     .map(scope => scopeMapper({scope, status}))
 }
 
-const releaseEachPkg = async ({pkg, code, skipCI} = {}) => {
+const releasePackage = async ({pkg, code, skipCI} = {}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
@@ -174,7 +174,7 @@ checkShouldRelease()
       )
 
       for (const pkg of packagesToRelease) {
-        await releaseEachPkg({...pkg, skipCI: program.skipCi})
+        await releasePackage({...pkg, skipCI: program.skipCi})
       }
 
       console.log(
