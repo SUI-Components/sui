@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.10.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** force sui-mono new release ([f1a3ac6](https://github.com/SUI-Components/sui/commit/f1a3ac61851fa05a61e22d5b54bc1eb499ebeec6))
+* **packages/sui-mono:** remove console.log ([3c1b57a](https://github.com/SUI-Components/sui/commit/3c1b57ae5d9f689d15f1686907323c4830084baf))
+
+
+
 # 2.9.0 (2021-03-10)
 
 
