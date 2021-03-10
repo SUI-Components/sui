@@ -163,7 +163,7 @@ const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
   githubToken && githubUser && githubEmail
 
 const checkShouldRelease = async () => {
-  const [isAutomaticRelease, isMasterBranchActive] = Promise.all([
+  const [isAutomaticRelease, isMasterBranchActive] = await Promise.all([
     checkIsAutomaticRelease(program),
     checkIsMasterBranchActive({cwd: process.cwd()})
   ])
