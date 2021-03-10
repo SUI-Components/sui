@@ -70,7 +70,7 @@ const releasesByPackages = ({status}) => {
     .map(scope => scopeMapper({scope, status}))
 }
 
-const releaseEachPkg = async ({pkg, code, skipCI} = {}) => {
+const releasePackage = async ({pkg, code, skipCI} = {}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
@@ -114,20 +114,15 @@ const prepareAutomaticRelease = async ({
 }) => {
   console.log('inside prepareAutomaticRelease')
   const {stdout} = await exec('git config --get remote.origin.url')
-  console.log('1.')
   const repoURL = stdout.trim()
-  console.log('2.')
   const gitURL = gitUrlParse(repoURL).toString('https')
-  console.log('3.')
   const authURL = new URL(gitURL)
   authURL.username = githubToken
-  console.log('4.')
 
   const {stdout: rawIsShallowRepository} = await exec(
     'git rev-parse --is-shallow-repository'
   )
   const isShallowRepository = rawIsShallowRepository === 'true'
-  console.log('5.')
 
   if (isShallowRepository) await exec(`git pull --unshallow --quiet`)
 
@@ -163,14 +158,10 @@ checkShouldRelease()
       return
     }
 
-    console.log({shouldRelease})
-
     return checker.check().then(async status => {
-      console.log({status})
       const {githubEmail, githubToken, githubUser} = program
 
       if (isAutomaticRelease) {
-        console.log({isAutomaticRelease})
         await prepareAutomaticRelease({
           githubEmail,
           githubToken,
@@ -178,19 +169,16 @@ checkShouldRelease()
         })
       }
 
-      console.log('after automaticRelease')
+      const packagesToRelease = releasesByPackages({status}).filter(
+        ({code}) => code !== 0
+      )
 
-      return (
-        releasesByPackages({status})
-          .filter(({code}) => code !== 0)
-          .map(release => () =>
-            releaseEachPkg({...release, skipCI: program.skipCi})
-          )
-          // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
-          .reduce(
-            (m, p) => m.then(v => Promise.all([...v, p()])),
-            Promise.resolve([])
-          )
+      for (const pkg of packagesToRelease) {
+        await releasePackage({...pkg, skipCI: program.skipCi})
+      }
+
+      console.log(
+        `[sui-mono release] ${packagesToRelease.length} packages released`
       )
     })
   })
