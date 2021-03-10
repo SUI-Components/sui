@@ -112,7 +112,6 @@ const prepareAutomaticRelease = async ({
   githubUser,
   githubEmail
 }) => {
-  console.log('inside prepareAutomaticRelease')
   const {stdout} = await exec('git config --get remote.origin.url')
   const repoURL = stdout.trim()
   const gitURL = gitUrlParse(repoURL).toString('https')
