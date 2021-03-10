@@ -7,6 +7,14 @@
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
+  "peerDependencies": {
+    "@s-ui/react-context": "1",
+    "react": "16 || 17"
+  },
+  "devDependencies": {
+    "@s-ui/react-context": "1",
+    "react": "17"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
