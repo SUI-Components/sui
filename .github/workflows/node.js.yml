@@ -27,7 +27,7 @@ jobs:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
     - run: npm run phoenix:ci
-    - run: npx -p ./packages/sui-mono sui-mono release --github-token ${{secrets.GH_ACTIONS_TOKEN}}
+    - run: npx -p ./packages/sui-mono sui-mono release --github-email srv.scms.git-enb@adevinta.com --github-user Adevinta --github-token ${{secrets.GH_ACTIONS_TOKEN}}
     - run: npm run lint
     - run: npm run test:ci
     - run: npx -p ./packages/sui-ci sui-ci release
