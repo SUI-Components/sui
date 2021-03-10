@@ -95,7 +95,7 @@ const releasePackage = async ({pkg, code, skipCI} = {}) => {
   await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
   await exec(`git commit --amend --no-verify --no-edit`, {cwd})
 
-  await exec(`git tag -a ${tagPrefix}${version} -m "v${version}`, {cwd})
+  await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
 
   !isPrivatePackage &&
     (await exec(`npm publish --access=${publishAccess}`, {cwd}))
