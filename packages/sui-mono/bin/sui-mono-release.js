@@ -124,22 +124,18 @@ const releaseEachPkg = ({pkg, code, skipCI} = {}) => {
   })
 }
 
-const checkIsMasterBranchActive = async ({cwd}) => {
-  const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
-    cwd
-  })
-
+const checkIsMasterBranchActive = async () => {
+  const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`)
   return stdout.trim() === 'master'
 }
 
 const prepareAutomaticRelease = async ({
   githubToken,
   githubUser,
-  githubEmail,
-  cwd
+  githubEmail
 }) => {
   console.log('inside prepareAutomaticRelease')
-  const {stdout} = await exec('git config --get remote.origin.url', {cwd})
+  const {stdout} = await exec('git config --get remote.origin.url')
   console.log('1.')
   const repoURL = stdout.trim()
   console.log('2.')
@@ -149,20 +145,20 @@ const prepareAutomaticRelease = async ({
   authURL.username = githubToken
   console.log('4.')
 
-  const {
-    stdout: rawIsShallowRepository
-  } = await exec('git rev-parse --is-shallow-repository', {cwd})
+  const {stdout: rawIsShallowRepository} = await exec(
+    'git rev-parse --is-shallow-repository'
+  )
   const isShallowRepository = rawIsShallowRepository === 'true'
   console.log('5.')
 
-  if (isShallowRepository) await exec(`git pull --unshallow --quiet`, {cwd})
+  if (isShallowRepository) await exec(`git pull --unshallow --quiet`)
 
-  await exec(`git config --global user.email "${githubEmail}"`, {cwd})
-  await exec(`git config --global user.name "${githubUser}"`, {cwd})
-  await exec('git remote rm origin', {cwd})
-  await exec(`git remote add origin ${authURL} > /dev/null 2>&1`, {cwd})
-  await exec(`git checkout master`, {cwd})
-  await exec(`git pull origin master`, {cwd})
+  await exec(`git config --global user.email "${githubEmail}"`)
+  await exec(`git config --global user.name "${githubUser}"`)
+  await exec('git remote rm origin')
+  await exec(`git remote add origin ${authURL} > /dev/null 2>&1`)
+  await exec(`git checkout master`)
+  await exec(`git pull origin master`)
 }
 
 const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
@@ -170,10 +166,11 @@ const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
 
 const checkShouldRelease = async () => {
   await exec('git pull origin master')
+  const {githubEmail, githubToken, githubUser} = program
 
   const [isAutomaticRelease, isMasterBranchActive] = await Promise.all([
-    checkIsAutomaticRelease(program),
-    checkIsMasterBranchActive({cwd: process.cwd()})
+    checkIsAutomaticRelease({githubEmail, githubToken, githubUser}),
+    checkIsMasterBranchActive()
   ])
 
   return {isAutomaticRelease, isMasterBranchActive}
@@ -199,8 +196,7 @@ checkShouldRelease()
         await prepareAutomaticRelease({
           githubEmail,
           githubToken,
-          githubUser,
-          cwd: process.cwd()
+          githubUser
         })
       }
 
@@ -222,5 +218,4 @@ checkShouldRelease()
   })
   .catch(err => {
     console.error(err)
-    showError(err)
   })
