@@ -30,16 +30,9 @@ module.exports = async function release({
   await exec('git pull origin master')
 
   console.info(`[sui-ci release] Executing sui-mono release...`)
-  const {stdout, stderr} = await exec(
+  await exec(
     `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken} --skip-ci`
   )
 
-  if (stderr) {
-    console.error('[sui-ci release] Something went wrong:')
-    console.error(stderr)
-    process.exit(1)
-  }
-
-  console.log(stdout)
-  console.info('[sui-ci release] Success!')
+  console.info('[sui-ci release] Finished')
 }
