@@ -1,5 +1,5 @@
 import optimizelySDK from '@optimizely/optimizely-sdk'
-import integrations from './integrations'
+import {updateIntegrations} from './integrations/handler'
 
 const DEFAULT_OPTIONS = {
   autoUpdate: true,
@@ -16,8 +16,14 @@ export default class OptimizelyAdapter {
    * @param {object} param.optimizely OptimizelyInstance returned by createOptimizelyInstance method
    * @param {string=} param.userId
    * @param {object} param.activeIntegrations segment activated by default
+   * @param {boolean} param.hasUserConsents
    */
-  constructor({optimizely, userId, activeIntegrations = {segment: true}}) {
+  constructor({
+    optimizely,
+    userId,
+    activeIntegrations = {segment: true},
+    hasUserConsents
+  }) {
     if (!optimizely) {
       throw new Error(
         'optimizely instance is mandatory to use OptimizelyAdapter'
@@ -26,15 +32,8 @@ export default class OptimizelyAdapter {
 
     this._optimizely = optimizely
     this._userId = userId?.toString()
-
-    if (this._hasUser()) {
-      integrations.forEach(integration =>
-        integration({
-          activeIntegrations,
-          optimizelyInstance: optimizely
-        })
-      )
-    }
+    this._activeIntegrations = activeIntegrations
+    this.updateConsents({hasUserConsents})
   }
 
   /**
@@ -70,12 +69,12 @@ export default class OptimizelyAdapter {
     return optimizelyInstance
   }
 
-  _hasUser() {
-    if (!this._userId) return false
-    return true
-  }
-
-  getEnabledFeatures({attributes} = {}) {
+  /**
+   * @param {object} param
+   * @param {object} param.attributes
+   * @return {string[]}
+   */
+  getEnabledFeatures({attributes}) {
     return this._optimizely.getEnabledFeatures(this._userId, attributes)
   }
 
@@ -103,7 +102,7 @@ export default class OptimizelyAdapter {
    * @returns {string=} variation name
    */
   activateExperiment({name, attributes}) {
-    if (!this._hasUser()) return null
+    if (!this._hasUserConsents) return null
     return this._optimizely.activate(name, this._userId, attributes)
   }
 
@@ -115,6 +114,7 @@ export default class OptimizelyAdapter {
    * @returns {string=} variation name
    */
   getVariation({name, attributes}) {
+    if (!this._hasUserConsents) return null
     return this._optimizely.getVariation(name, this._userId, attributes)
   }
 
@@ -122,5 +122,14 @@ export default class OptimizelyAdapter {
     return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
       .then(() => this._optimizely)
+  }
+
+  updateConsents({hasUserConsents}) {
+    this._hasUserConsents = hasUserConsents
+    updateIntegrations({
+      hasUserConsents: this._hasUserConsents,
+      activeIntegrations: this._activeIntegrations,
+      optimizelyInstance: this._optimizely
+    })
   }
 }
