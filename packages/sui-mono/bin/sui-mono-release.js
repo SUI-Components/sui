@@ -8,7 +8,7 @@ const {
   getPublishAccess
 } = require('../src/config')
 const checker = require('../src/check')
-const {serialSpawn, showError} = require('@s-ui/helpers/cli')
+const {showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const {exec: execNative} = require('child_process')
 const gitUrlParse = require('git-url-parse')
@@ -27,13 +27,13 @@ program
     console.log('    Release your packages based on the version check output')
     console.log('')
     console.log(
-      '    Its adviced that you inspect the output on sui-mono check before releasing'
+      "    It's adviced that you inspect the output on sui-mono check before releasing"
     )
     console.log('    Release is the process of:')
-    console.log('     - Build your project (with build or prepare npm script)')
+    console.log('     - Build your project (executing prepare npm script)')
     console.log('     - Updating package.json version')
     console.log('     - Creating a release commit type')
-    console.log('     - Pushing the package to npm (in case its not private)')
+    console.log('     - Publishing the package to npm (if not private)')
     console.log('')
     console.log('  Examples:')
     console.log('')
