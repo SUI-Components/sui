@@ -220,5 +220,5 @@ checkShouldRelease()
   })
   .catch(err => {
     console.error(err)
-    showError(`[sui-mono release]: ${err}`)
+    showError(err)
   })
