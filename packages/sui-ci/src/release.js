@@ -26,11 +26,14 @@ module.exports = async function release({
   }
 
   try {
+    console.info(`[sui-ci release] Pull latest changes...`)
     await execute('git pull origin master')
 
+    console.info(`[sui-ci release] Executing sui-mono release`)
     const {stdout} = await execute(
       `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken} --skip-ci`
     )
+
     console.info(stdout)
     console.info('[sui-ci release] Success!')
   } catch (e) {
