@@ -8,7 +8,7 @@ const {
   getPublishAccess
 } = require('../src/config')
 const checker = require('../src/check')
-const {serialSpawn, showError} = require('@s-ui/helpers/cli')
+const {serialSpawn} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const {exec: execNative} = require('child_process')
 const gitUrlParse = require('git-url-parse')
