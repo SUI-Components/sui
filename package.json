@@ -24,6 +24,9 @@
     "test:server:watch": "npm run test:server -- --watch",
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
   },
+  "dependencies": {
+    "react": "17"
+  },
   "devDependencies": {
     "@babel/cli": "7.12.1",
     "@s-ui/lint": "3",

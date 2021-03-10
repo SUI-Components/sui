@@ -18,11 +18,14 @@
   "dependencies": {
     "@optimizely/optimizely-sdk": "4.4.3"
   },
+  "peerDependencies": {
+    "react": "16 || 17"
+  },
   "devDependencies": {
     "@s-ui/test": "4",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
-    "react": "16",
+    "react": "17",
     "react-test-renderer": "17.0.1"
   }
 }
