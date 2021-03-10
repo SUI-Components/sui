@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.17.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* add more logging ([e916138](https://github.com/SUI-Components/sui/commit/e916138241ba9c48172f209146d6a4a7d08b1e35))
+
+
+
 # 1.16.0 (2021-03-10)
 
 
