@@ -169,6 +169,8 @@ const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
   githubToken && githubUser && githubEmail
 
 const checkShouldRelease = async () => {
+  await exec('git pull origin master')
+
   const [isAutomaticRelease, isMasterBranchActive] = await Promise.all([
     checkIsAutomaticRelease(program),
     checkIsMasterBranchActive({cwd: process.cwd()})
