@@ -18,7 +18,7 @@ function migrateTestFolders() {
     if (!fs.existsSync(newTestPath)) {
       fs.moveSync(testPath, newTestPath)
       console.log(`Moved folder: ${testPath}`)
-      fs.moveSync(`${testPath}/index.js`, `${newTestPath}/index.test.js`)
+      fs.moveSync(`${newTestPath}/index.js`, `${newTestPath}/index.test.js`)
       console.log(`Renamed test file: ${testPath}`)
     }
   })
