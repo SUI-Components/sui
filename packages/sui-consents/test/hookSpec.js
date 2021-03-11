@@ -3,6 +3,7 @@ import SUIContext from '@s-ui/react-context'
 import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 import {expect} from 'chai'
 import {render} from '@testing-library/react'
+import {renderToString} from 'react-dom/server'
 import {TCF_WINDOW_API} from '../src/config'
 import {useUserConsents} from '../src/index'
 import {tcfApiMock, triggerTcfEvent} from './mocks'
@@ -37,7 +38,8 @@ function setup(hookArgs, ctxCookiesFixture) {
     Object.assign(setupRef, {isAccepted: useUserConsents(hookArgs)})
     return null
   }
-  render(
+  const renderFunc = typeof window === 'undefined' ? renderToString : render
+  renderFunc(
     <ContextFixtureWrapper value={{cookies: ctxCookiesFixture}}>
       <TestComponent />
     </ContextFixtureWrapper>
@@ -45,7 +47,33 @@ function setup(hookArgs, ctxCookiesFixture) {
   return setupRef
 }
 
-describe.client('useUserConsents', () => {
+describe.server('useUserConsents on server', () => {
+  describe("when the user still didn't accept any consent", () => {
+    let setupRef
+
+    beforeEach(() => {
+      setupRef = setup(REQUIRED_CONSENTS, REJECTED_CONSENTS_COOKIE)
+    })
+
+    it('should return that the user has NOT given the required consents', () => {
+      expect(setupRef.isAccepted).to.be.false
+    })
+  })
+
+  describe('when the user accepted all of the consents', () => {
+    let setupRef
+
+    beforeEach(() => {
+      setupRef = setup(REQUIRED_CONSENTS, ACCEPTED_CONSENTS_COOKIE)
+    })
+
+    it('should return that the user has given the required consents', () => {
+      expect(setupRef.isAccepted).to.be.true
+    })
+  })
+})
+
+describe.client('useUserConsents on browser', () => {
   before(() => {
     window[TCF_WINDOW_API] = tcfApiMock
   })
