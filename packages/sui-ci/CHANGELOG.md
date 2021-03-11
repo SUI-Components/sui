@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 1.18.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* better error handling ([4bd069e](https://github.com/SUI-Components/sui/commit/4bd069e74809c80074f3d0d9e98a995a25e64ab0))
+* fix logging for sui-ci ([be919b1](https://github.com/SUI-Components/sui/commit/be919b14cb808257e4cffc7bb495f55be65f88f3))
+
+
+
+# 1.17.0 (2021-03-10)
+
+
+### Bug Fixes
+
+* add more logging ([e916138](https://github.com/SUI-Components/sui/commit/e916138241ba9c48172f209146d6a4a7d08b1e35))
+
+
+
 # 1.16.0 (2021-03-10)
 
 
