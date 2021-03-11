@@ -1,9 +1,8 @@
 import {useContext, useEffect, useState} from 'react'
 import SUIContext from '@s-ui/react-context'
 
+import {TCF_WINDOW_API, TCF_VERSION} from './config'
 import hasUserConsents from './hasUserConsents'
-
-const TCF_WINDOW_API = '__tcfapi'
 
 /**
  * @param {array} requiredConsents for example [1, 3, 8]
@@ -36,10 +35,9 @@ export default function useUserConsents(requiredConsents) {
           )
         )
       }
-
-      tcfApi('addEventListener', 2, consentsListener)
+      tcfApi('addEventListener', TCF_VERSION, consentsListener)
       return () => {
-        tcfApi('removeEventListener', 2, consentsListener)
+        tcfApi('removeEventListener', TCF_VERSION, consentsListener)
       }
     }
   }, [requiredConsents])

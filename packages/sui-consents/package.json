@@ -5,25 +5,24 @@
   "description": "iab consents handler",
   "scripts": {
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib"
-  },
-  "peerDependencies": {
-    "@s-ui/react-context": "1",
-    "react": "16 || 17"
-  },
-  "devDependencies": {
-    "@s-ui/react-context": "1",
-    "react": "17"
+    "prepare": "npm run lib",
+    "test": "npm run test:server && npm run test:browser",
+    "test:browser": "NODE_ENV=test sui-test browser",
+    "test:server": "NODE_ENV=test sui-test server"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SUI-Components/sui.git"
+  "devDependencies": {
+    "@s-ui/component-peer-dependencies": "1",
+    "@s-ui/react-context": "1",
+    "@s-ui/test": "4",
+    "@testing-library/react": "11.2.5",
+    "react": "17",
+    "react-dom": "17"
   },
-  "bugs": {
-    "url": "https://github.com/SUI-Components/sui/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-consents#readme"
+  "peerDependencies": {
+    "@s-ui/react-context": "1",
+    "react": "16 || 17"
+  }
 }

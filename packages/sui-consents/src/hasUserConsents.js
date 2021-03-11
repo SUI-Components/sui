@@ -1,6 +1,5 @@
 import atob from './atob'
-
-const TCF_COOKIE_KEY = 'borosTcf'
+import {TCF_COOKIE_KEY} from './config'
 
 /**
  * Extracts the cookie value from the cookie string
