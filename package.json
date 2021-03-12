@@ -29,9 +29,11 @@
     "@s-ui/lint": "3",
     "@s-ui/mono": "2",
     "@s-ui/precommit": "2",
+    "@s-ui/react-context": "1",
     "@s-ui/test": "4",
     "chai": "4.2.0",
     "husky": "4.3.0",
+    "react": "17",
     "sinon": "9.2.1",
     "validate-commit-msg": "2.14.0"
   },
