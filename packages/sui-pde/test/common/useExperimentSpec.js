@@ -5,7 +5,7 @@ import PdeContext from '../../src/contexts/PdeContext'
 import useExperiment from '../../src/hooks/useExperiment'
 import sinon from 'sinon'
 
-describe('useExperiment hook', () => {
+describe.client('useExperiment hook', () => {
   beforeEach(() => {
     window.analytics = {
       track: sinon.spy()

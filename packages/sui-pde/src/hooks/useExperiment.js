@@ -18,11 +18,7 @@ export default function useExperiment(experimentName, attributes) {
     try {
       variationName = pde.activateExperiment({name: experimentName, attributes})
 
-      if (
-        variationName &&
-        typeof window !== 'undefined' &&
-        window.analytics?.track
-      ) {
+      if (variationName && window.analytics?.track) {
         window.analytics.track('Experiment Viewed', {
           experimentName,
           variationName
