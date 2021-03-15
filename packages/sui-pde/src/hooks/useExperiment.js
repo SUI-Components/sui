@@ -17,6 +17,21 @@ export default function useExperiment(experimentName, attributes) {
 
     try {
       variationName = pde.activateExperiment({name: experimentName, attributes})
+
+      if (
+        variationName &&
+        typeof window !== 'undefined' &&
+        window.analytics?.track
+      ) {
+        window.analytics.track('Experiment Viewed', {
+          experimentName,
+          variationName
+        })
+      } else {
+        console.error(
+          "[useExperiment] sui-pde: window.analytics.track expected to exists but doesn't"
+        )
+      }
     } catch (error) {
       console.error(error)
       return null

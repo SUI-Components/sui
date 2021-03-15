@@ -52,6 +52,8 @@ Given experiment `experimentX` with 2 variations `variationA` and `variationB` r
 
 ⚠️ if the user did not consent to or if optimizely decides that the user will not be part of the experiment of something goes wrong, `useExperiment` will return as variation value `null`
 
+⚠️ the `useExperiment` hook will send call a global window.analytics.track method with `Experiment Viewed` as event name with the experiment properties so you are able to replicate the experiment in your analytics tool
+
 ```js
 import {useExperiment} from '@s-ui/pde'
 
