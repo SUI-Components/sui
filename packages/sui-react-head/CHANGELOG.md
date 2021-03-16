@@ -1,6 +1,22 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.6.0 (2020-11-12)
+
+
+### Features
+
+* use new jsx React ([8e4e461](https://github.com/SUI-Components/sui/commit/8e4e4611e35806a5081c33a6aafb63a848d961ca))
+
+
+
+# 1.5.0 (2020-10-22)
+
+
+### Features
+
+* prepare for react 17 react-head ([3c5a0cc](https://github.com/SUI-Components/sui/commit/3c5a0ccda307c497cbfb3fa4c9b3a93392441a7d))
+
+
 
 # 1.4.0 (2020-03-24)
 

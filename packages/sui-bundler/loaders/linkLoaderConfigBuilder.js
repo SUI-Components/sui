@@ -1,15 +1,9 @@
 const fg = require('fast-glob')
 const path = require('path')
-const LoaderUniversalOptionsPlugin = require('../plugins/loader-options')
-const loadersOptions = require('../shared/loader-options')
-const createSassLinkLoader = require('./sassLinkLoader')
 
-const removePlugin = name => plugins => {
-  const pos = plugins
-    .map(p => p.constructor.toString())
-    .findIndex(string => string.match(name))
-  return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
-}
+const log = require('../shared/log')
+const {defaultAlias} = require('../shared/resolve-alias')
+const createSassLinkImporter = require('./sassLinkImporter.js')
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
   paths.reduce((acc, pkg) => {
@@ -17,20 +11,18 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
     try {
       const pkg = require(path.join(packagePath, 'package.json'))
       acc[pkg.name] = path.join(packagePath, 'src')
-      console.log(`\t✅  ${pkg.name} from path "${packagePath}"`)
+      log.success(`✔ ${pkg.name} from path "${packagePath}"`)
       return acc
     } catch (e) {
-      console.log(
-        `\t⚠️  Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`
+      log.warn(
+        `⚠ Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`
       )
       return acc
     }
   }, init)
 
 const absolutePathForMonoRepo = base => {
-  if (!base) {
-    return []
-  }
+  if (!base) return []
   return fg
     .sync([
       `${path.resolve(base)}/**/package.json`,
@@ -41,82 +33,78 @@ const absolutePathForMonoRepo = base => {
 }
 
 module.exports = ({config, packagesToLink, linkAll}) => {
-  if (packagesToLink.length === 0 && !linkAll) {
-    return config
-  }
+  if (packagesToLink.length === 0 && !linkAll) return config
 
-  console.log('🔗 Linking packages:')
+  log.processing('❯ Linking packages:')
 
   const entryPoints = diccFromAbsolutePaths(
     packagesToLink || [],
     diccFromAbsolutePaths(absolutePathForMonoRepo(linkAll))
   )
 
+  /**
+   * Create a loader config for javascript and css files that
+   * are handled by Webpack. So when we try to load them
+   * we check the entryPoints to change the source file
+   * if neccesary
+   */
+  const linkLoader = {
+    test: /\.(jsx?|scss)$/,
+    enforce: 'pre', // this will ensure is execute before transformations
+    use: {
+      loader: require.resolve('./LinkLoader'),
+      options: {
+        entryPoints
+      }
+    }
+  }
+
+  /**
+   * Create a sass-loader config for scss files that
+   * are handled by Sass. These are nested modules imported
+   * and thus is sass binary which needs a special config for them.
+   */
+  const sassLoaderWithLinkImporter = {
+    loader: require.resolve('sass-loader'),
+    options: {
+      sassOptions: {
+        importer: createSassLinkImporter(entryPoints)
+      }
+    }
+  }
+
+  /**
+   * Iterate over rules to change the previous sassLoader config
+   * with the one with the importer created
+   */
+  const {rules} = config.module
+  const rulesWithLink = rules.map(rule => {
+    const {use, test: regex} = rule
+    if (!regex.test('.css')) return rule
+
+    return {
+      ...rule,
+      use: [...use.slice(0, -1), sassLoaderWithLinkImporter]
+    }
+  })
+
+  /**
+   * Return the new webpack config to be used
+   * with all the needed changes for linking packages
+   */
   return {
     ...config,
     resolve: {
       ...config.resolve,
       alias: {
-        ...config.resolve.alias,
-        ...(!config.resolve.alias.react && {
-          react: path.resolve(
-            path.join(process.env.PWD, './node_modules/react')
-          )
-        }),
-        ...(!config.resolve.alias['@s-ui/react-context'] && {
-          '@s-ui/react-context': path.resolve(
-            path.join(process.env.PWD, './node_modules/@s-ui/react-context')
-          )
-        }),
-        ...(!config.resolve.alias['react-router-dom'] && {
-          'react-router-dom': path.resolve(
-            path.join(process.env.PWD, './node_modules/react-router-dom')
-          )
-        }),
-        ...(!config.resolve.alias['@s-ui/react-router'] && {
-          '@s-ui/react-router': path.resolve(
-            path.join(process.env.PWD, './node_modules/@s-ui/react-router')
-          )
-        })
+        // we have to make sure we load default alias as we could be linking a package on production
+        ...defaultAlias,
+        ...config.resolve.alias
       }
     },
-    plugins: [
-      ...removePlugin('LoaderUniversalOptionsPlugin')(config.plugins),
-      new LoaderUniversalOptionsPlugin({
-        ...loadersOptions,
-        'sass-loader': {
-          sassOptions: {
-            importer: [
-              ...loadersOptions['sass-loader'].sassOptions.importer,
-              createSassLinkLoader(entryPoints)
-            ]
-          }
-        }
-      })
-    ],
     module: {
       ...config.module,
-      rules: [
-        ...config.module.rules,
-        {
-          test: /\.jsx?$/,
-          use: {
-            loader: 'link-loader',
-            options: {
-              entryPoints
-            }
-          }
-        }
-      ]
-    },
-    resolveLoader: {
-      alias: {
-        ...config.resolveLoader.alias,
-        'link-loader': require.resolve('./LinkLoader'),
-        'externals-manifest-loader': require.resolve(
-          './ExternalsManifestLoader'
-        )
-      }
+      rules: [...rulesWithLink, linkLoader]
     }
   }
 }

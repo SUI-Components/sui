@@ -1,11 +1,11 @@
-const {'sui-bundler': config = {}} = require(`${process.cwd()}/package.json`)
+const {config} = require('./config')
 
-exports.config = config
 exports.MAIN_ENTRY_POINT = './app.js'
-
-exports.when = (check, getValue) => (check ? getValue() : false)
+exports.config = config
 
 exports.cleanList = list => list.filter(Boolean)
+
+exports.when = (check, getValue) => (check ? getValue() : false)
 
 exports.envVars = (env = []) =>
   env.reduce(

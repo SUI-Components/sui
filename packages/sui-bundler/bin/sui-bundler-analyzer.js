@@ -2,41 +2,61 @@
 /* eslint-disable no-console */
 
 const webpack = require('webpack')
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-const chalk = require('chalk')
+const log = require('../shared/log')
 const config = require('../webpack.config.prod')
+const {getSpawnPromise} = require('@s-ui/helpers/cli')
+const logUpdate = require('@s-ui/helpers/log-update')
 
-console.log('🔎  Bundler Analyzer')
+const installNeededDependencies = async () => {
+  try {
+    require('webpack-bundle-analyzer')
+    return true
+  } catch (e) {
+    logUpdate('Installing needed dependencies...')
+    return getSpawnPromise('npm', [
+      'install',
+      '--no-save',
+      '--no-optional',
+      '--no-audit',
+      '--no-fund',
+      'webpack-bundle-analyzer@4.3.0 duplicate-package-checker-webpack-plugin@3.0.0'
+    ]).then(() => {
+      logUpdate.done('Installed needed dependencies')
+      getSpawnPromise('./node_modules/.bin/sui-bundler', ['analyzer']).then(
+        () => false
+      )
+    })
+  }
+}
 
-// Don't show ugly deprecation warnings that mess with the logging
-process.noDeprecation = true
+;(async () => {
+  const keepExecution = await installNeededDependencies()
+  if (!keepExecution) return
 
-config.plugins.push(new BundleAnalyzerPlugin())
-config.plugins.push(
-  new DuplicatePackageCheckerPlugin({
-    // Also show module that is requiring each duplicate package
-    verbose: true,
-    // Emit errors instead of warnings
-    emitError: false
+  const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+  const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+
+  config.plugins.push(new BundleAnalyzerPlugin())
+  config.plugins.push(
+    new DuplicatePackageCheckerPlugin({
+      verbose: true, // Show module that is requiring each duplicate package
+      emitError: false // Avoid emit errors, just a warning
+    })
+  )
+
+  log.processing('🔎 Analyzing Bundle...\n')
+  webpack(config).run((error, stats) => {
+    if (error) {
+      log.error('Error analyzing the build')
+      throw new Error(error)
+    }
+
+    log.success('Bundle analyzed successfully')
+
+    if (stats.hasErrors() || stats.hasWarnings()) {
+      const jsonStats = stats.toJson('errors-warnings')
+      jsonStats.warnings.map(log.warn)
+      jsonStats.errors.map(log.error)
+    }
   })
-)
-
-console.log(chalk.cyan('Building and analyzing...\n'))
-webpack(config).run((error, stats) => {
-  if (error) {
-    console.log(chalk.red('Error analyzing the build'))
-    throw new Error(error)
-  }
-
-  console.log(chalk.green('Bundle analyzed successfully'))
-  const jsonStats = stats.toJson()
-
-  if (stats.hasErrors()) {
-    return jsonStats.errors.map(error => console.error(error))
-  }
-
-  if (stats.hasWarnings()) {
-    jsonStats.warnings.map(warning => console.warn(warning))
-  }
-})
+})()

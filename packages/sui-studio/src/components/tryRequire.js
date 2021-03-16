@@ -1,16 +1,6 @@
 /* global __BASE_DIR__ */
 
-const safeImport = async ({
-  defaultValue = false,
-  extractDefault = true,
-  importFile
-}) => {
-  const file = await importFile().catch(() => defaultValue)
-  if (typeof file === 'undefined') {
-    return Promise.reject(new Error('Error requiring file'))
-  }
-  return extractDefault && typeof file === 'object' ? file.default : file
-}
+import {safeImport} from './utils'
 
 const fetchStaticFile = path =>
   window
@@ -73,6 +63,19 @@ const importEvents = ({category, component}) =>
         `${__BASE_DIR__}/demo/${category}/${component}/events.js`
       )
   })
+
+export const importGlobals = () => {
+  // we use a variable for the file so Webpack
+  // could safe fail if the file doesn't exist
+  const globalsFile = 'globals.js'
+  return safeImport({
+    importFile: () =>
+      import(
+        /* webpackInclude: /\/demo\/globals.js$/ */
+        `${__BASE_DIR__}/demo/${globalsFile}`
+      )
+  })
+}
 
 export const importMainModules = params =>
   Promise.all([

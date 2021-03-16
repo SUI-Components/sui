@@ -2,9 +2,13 @@
 
 const program = require('commander')
 const path = require('path')
-const config = require('../src/config')
+const {
+  checkIsMonoPackage,
+  getChangelogFilename,
+  getPublishAccess
+} = require('../src/config')
 const checker = require('../src/check')
-const {serialSpawn, showError} = require('@s-ui/helpers/cli')
+const {showError} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const {exec: execNative} = require('child_process')
 const gitUrlParse = require('git-url-parse')
@@ -23,13 +27,13 @@ program
     console.log('    Release your packages based on the version check output')
     console.log('')
     console.log(
-      '    Its adviced that you inspect the output on sui-mono check before releasing'
+      "    It's adviced that you inspect the output on sui-mono check before releasing"
     )
     console.log('    Release is the process of:')
-    console.log('     - Build your project (with build or prepare npm script)')
+    console.log('     - Build your project (executing prepare npm script)')
     console.log('     - Updating package.json version')
     console.log('     - Creating a release commit type')
-    console.log('     - Pushing the package to npm (in case its not private)')
+    console.log('     - Publishing the package to npm (if not private)')
     console.log('')
     console.log('  Examples:')
     console.log('')
@@ -42,10 +46,10 @@ program
   .parse(process.argv)
 
 const BASE_DIR = process.cwd()
-const packagesFolder = config.getPackagesFolder()
-const publishAccess = config.getPublishAccess()
+
+const publishAccess = getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
-const changelogFilename = config.getChangelogFilename()
+const changelogFilename = getChangelogFilename()
 
 const RELEASE_CODES = {
   0: 'clean',
@@ -59,161 +63,125 @@ const scopeMapper = ({scope, status}) => ({
   code: status[scope].increment
 })
 
-const releasesByPackages = ({status}) =>
-  Object.keys(status).map(scope => scopeMapper({scope, status}))
-
-const singlePackageRelease = ({status, packageScope}) =>
-  Object.keys(status)
-    .filter(scope => scope === packageScope)
+const releasesByPackages = ({status}) => {
+  const {scope: packageScope} = program
+  return Object.keys(status)
+    .filter(scope => (packageScope ? scope === packageScope : true))
     .map(scope => scopeMapper({scope, status}))
-
-const releaseEachPkg = ({pkg, code} = {}, {skipCI} = {}) => {
-  return new Promise((resolve, reject) => {
-    if (code === 0) {
-      return resolve()
-    }
-
-    const isMonoPackage = config.isMonoPackage()
-
-    const tagPrefix = isMonoPackage ? '' : `${pkg}-`
-
-    const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
-
-    const cwd = isMonoPackage
-      ? BASE_DIR
-      : path.join(BASE_DIR, packagesFolder, pkg)
-    const pkgInfo = require(path.join(cwd, 'package.json'))
-    const scripts = pkgInfo.scripts || {}
-
-    const releaseCommands = [
-      ['npm', ['--no-git-tag-version', 'version', `${RELEASE_CODES[code]}`]],
-      ['git', ['add', path.join(cwd, 'package.json')]]
-    ]
-    const docCommands = [
-      [suiMonoBinPath, ['changelog', cwd]],
-      ['git', ['add', path.join(cwd, changelogFilename)]],
-      ['git', ['commit --amend --no-verify --no-edit']]
-    ]
-    const publishCommands = [
-      scripts.build && ['npm', ['run', 'build']],
-      !pkgInfo.private && ['npm', ['publish', `--access=${publishAccess}`]],
-      ['git', ['push', '--tags', 'origin', 'HEAD']]
-    ].filter(Boolean)
-
-    serialSpawn(releaseCommands, {cwd})
-      .then(() => {
-        // Create release commit
-        const {version} = getPackageJson(cwd, true)
-
-        // We're adding [skip ci] to the commit message to avoid
-        // start a build on CI if not needed
-        // docs: https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
-        const commitMsg = `release(${packageScope}): v${version}${
-          skipCI ? ' [skip ci]' : ''
-        }`
-
-        return serialSpawn([['git', [`commit -m "${commitMsg}"`]]], {cwd})
-      })
-      .then(() => serialSpawn(docCommands))
-      .then(() => {
-        // Create release tag
-        const {version} = getPackageJson(cwd)
-        return serialSpawn(
-          [['git', [`tag -a ${tagPrefix}${version} -m "v${version}"`]]],
-          {cwd}
-        )
-      })
-      .then(() => serialSpawn(publishCommands, {cwd}))
-      .then(resolve)
-      .catch(reject)
-  })
 }
 
-const packageScope = program.scope
-const releaseMode = packageScope ? singlePackageRelease : releasesByPackages
+const releasePackage = async ({pkg, code, skipCI} = {}) => {
+  const isMonoPackage = checkIsMonoPackage()
+  const tagPrefix = isMonoPackage ? '' : `${pkg}-`
+  const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
 
-const checkIsMasterBranchActive = async ({status, cwd}) => {
-  try {
-    const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`, {
-      cwd
-    })
+  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+  const {private: isPrivatePackage} = getPackageJson(cwd, true)
 
-    if (stdout.trim() === 'master') {
-      return Promise.resolve(status)
-    } else {
-      throw new Error(
-        'Active branch is not master, please make releases only in master branch'
-      )
-    }
-  } catch (error) {
-    showError(error)
+  await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
+  await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
 
-    return Promise.reject(error)
-  }
+  const {version} = getPackageJson(cwd, true)
+
+  // Add [skip ci] to the commit message to avoid CI build
+  // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
+  const commitMsg = `release(${packageScope}): v${version}${
+    skipCI ? ' [skip ci]' : ''
+  }`
+
+  await exec(`git commit -m "${commitMsg}"`, {cwd})
+
+  await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
+  await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
+  await exec(`git commit --amend --no-verify --no-edit`, {cwd})
+
+  await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
+
+  !isPrivatePackage &&
+    (await exec(`npm publish --access=${publishAccess}`, {cwd}))
+  await exec('git push -f --tags origin HEAD')
 }
 
-const automaticRelease = async ({
+const checkIsMasterBranchActive = async () => {
+  const {stdout} = await exec(`git rev-parse --abbrev-ref HEAD`)
+  return stdout.trim() === 'master'
+}
+
+const prepareAutomaticRelease = async ({
   githubToken,
   githubUser,
-  githubEmail,
-  cwd
+  githubEmail
 }) => {
-  const {stdout} = await exec('git config --get remote.origin.url', {cwd})
+  const {stdout} = await exec('git config --get remote.origin.url')
   const repoURL = stdout.trim()
   const gitURL = gitUrlParse(repoURL).toString('https')
   const authURL = new URL(gitURL)
   authURL.username = githubToken
 
-  const {
-    stdout: rawIsShallowRepository
-  } = await exec('git rev-parse --is-shallow-repository', {cwd})
+  const {stdout: rawIsShallowRepository} = await exec(
+    'git rev-parse --is-shallow-repository'
+  )
   const isShallowRepository = rawIsShallowRepository === 'true'
 
-  if (isShallowRepository) await exec(`git pull --unshallow --quiet`, {cwd})
+  if (isShallowRepository) await exec(`git pull --unshallow --quiet`)
 
-  await exec(`git config --global user.email "${githubEmail}"`, {cwd})
-  await exec(`git config --global user.name "${githubUser}"`, {cwd})
-  await exec('git remote rm origin', {cwd})
-  await exec(`git remote add origin ${authURL} > /dev/null 2>&1`, {cwd})
-  await exec(`git checkout master`, {cwd})
-  await exec(`git pull origin master`, {cwd})
+  await exec(`git config --global user.email "${githubEmail}"`)
+  await exec(`git config --global user.name "${githubUser}"`)
+  await exec('git remote rm origin')
+  await exec(`git remote add origin ${authURL} > /dev/null 2>&1`)
+  await exec(`git checkout master`)
+  await exec(`git pull origin master`)
 }
 
-const isAutomaticRelease = ({githubToken, githubUser, githubEmail}) => {
-  return githubToken && githubUser && githubEmail
+const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
+  githubToken && githubUser && githubEmail
+
+const checkShouldRelease = async () => {
+  await exec('git pull origin master')
+  const {githubEmail, githubToken, githubUser} = program
+
+  const [isAutomaticRelease, isMasterBranchActive] = await Promise.all([
+    checkIsAutomaticRelease({githubEmail, githubToken, githubUser}),
+    checkIsMasterBranchActive()
+  ])
+
+  return {isAutomaticRelease, isMasterBranchActive}
 }
 
-checker
-  .check()
-  .then(async status => {
-    const {githubEmail, githubToken, githubUser} = program
-    isAutomaticRelease({
-      githubEmail,
-      githubToken,
-      githubUser
-    })
-      ? await automaticRelease({
+checkShouldRelease()
+  .then(({isAutomaticRelease, isMasterBranchActive}) => {
+    const shouldRelease = isAutomaticRelease || isMasterBranchActive
+
+    if (!shouldRelease) {
+      console.log('[sui-mono release] No release is needed')
+      return
+    }
+
+    return checker.check().then(async status => {
+      const {githubEmail, githubToken, githubUser} = program
+
+      if (isAutomaticRelease) {
+        await prepareAutomaticRelease({
           githubEmail,
           githubToken,
-          githubUser,
-          cwd: process.cwd()
+          githubUser
         })
-      : await checkIsMasterBranchActive({status, cwd: process.cwd()})
-    return status
-  })
-  .then(status => releaseMode({status, packageScope}))
-  .then(releases =>
-    releases
-      .filter(({code}) => code !== 0)
-      .map(release => () => releaseEachPkg(release, {skipCI: program.skipCi}))
-      // https://gist.github.com/istarkov/a42b3bd1f2a9da393554
-      .reduce(
-        (m, p) => m.then(v => Promise.all([...v, p()])),
-        Promise.resolve([])
+      }
+
+      const packagesToRelease = releasesByPackages({status}).filter(
+        ({code}) => code !== 0
       )
-  )
+
+      for (const pkg of packagesToRelease) {
+        await releasePackage({...pkg, skipCI: program.skipCi})
+      }
+
+      console.log(
+        `[sui-mono release] ${packagesToRelease.length} packages released`
+      )
+    })
+  })
   .catch(err => {
-    console.error('[sui-mono release] ERROR:')
     console.error(err)
-    process.exit(1)
+    showError(err)
   })

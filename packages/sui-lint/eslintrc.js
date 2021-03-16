@@ -185,7 +185,11 @@ const TESTING_RULES = {
   'no-only-tests/no-only-tests': RULES.ERROR
 }
 
-const resolvedBabelPresetSui = require.resolve('babel-preset-sui')
+let resolvedBabelPresetSui
+try {
+  resolvedBabelPresetSui = require.resolve('babel-preset-sui')
+} catch {}
+
 const parser = resolvedBabelPresetSui ? '@babel/eslint-parser' : undefined
 
 module.exports = {
@@ -194,6 +198,7 @@ module.exports = {
     mocha: true
   },
   globals: {
+    'cypress/globals': true,
     preval: 'readonly'
   },
   parser,
@@ -210,6 +215,7 @@ module.exports = {
     'standard',
     'standard-react',
     'prettier',
+    'plugin:cypress/recommended',
     'prettier/standard',
     'prettier/react'
   ],
@@ -237,6 +243,7 @@ module.exports = {
       RULES.ERROR,
       {args: 'none', ignoreRestSiblings: true, varsIgnorePattern: 'React'}
     ],
+    'no-var': RULES.WARNING,
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   }

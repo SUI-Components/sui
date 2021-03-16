@@ -1,38 +1,23 @@
-import React, {useContext} from 'react'
+import {useContext} from 'react'
 import InitialPropsContext from './initialPropsContext'
 import withInitialProps from './withInitialProps'
-import createClientContextFactoryParams from './createClientContextFactoryParams'
 
 const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
 
-const createUniversalPage = (contextFactory, routeInfo) => ({
-  default: Page
-}) => {
+const createUniversalPage = routeInfo => ({default: Page}) => {
   // check if the Page page has a getInitialProps, if not put a resolve with an empty object
   Page.getInitialProps =
     typeof Page.getInitialProps === 'function'
       ? Page.getInitialProps
       : EMPTY_GET_INITIAL_PROPS
-  // check if we're on the client
+
+  // CLIENT
   if (typeof window !== 'undefined') {
-    // check if we have already data for this component on the window
-    if (typeof window.__INITIAL_PROPS__ !== 'undefined') {
-      // make a copy of the content safely
-      const initialProps = {...window.__INITIAL_PROPS__}
-      // remove the variable of the window before returning the component
-      window.__INITIAL_PROPS__ = undefined
-      // resolve the promise with the initialProps passed to the client
-      return Promise.resolve(props => <Page {...initialProps} {...props} />)
-    }
-    // create the context to be used as param on the getInitialProps
-    // TODO: Maybe this is no needed as we already have created it?
-    return (
-      contextFactory(createClientContextFactoryParams())
-        // now, we have to create the Page to be rendered on the client with all the info
-        .then(context => withInitialProps({context, routeInfo})(Page))
-    )
+    // let withInitialProps HOC handle client getInitialProps logic
+    return Promise.resolve(withInitialProps(Page))
   }
-  // we're in the server: Create a component that gets the initialProps from context
+  // SERVER
+  // Create a component that gets the initialProps from context
   // this context has been created on the `ssrWithComponentWithInitialProps`
   const ServerPage = props => {
     const {initialProps} = useContext(InitialPropsContext)
@@ -48,9 +33,12 @@ const createUniversalPage = (contextFactory, routeInfo) => ({
   return ServerPage
 }
 
+// TODO: Remove this method on next major as it's using unnecessary contextFactory param
+// and unnecesary calling done method instead relying on promises
+// TODO: We should make sure @s-ui/react-router supports Promises as react-router
 export default (contextFactory, importPage) => (routeInfo, done) => {
   importPage()
-    .then(createUniversalPage(contextFactory, routeInfo))
+    .then(createUniversalPage(routeInfo))
     .then(Page => {
       done(null, Page)
     })

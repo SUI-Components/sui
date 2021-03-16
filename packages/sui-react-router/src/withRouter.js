@@ -1,4 +1,3 @@
-import React from 'react'
 import {useRouter} from './hooks'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 

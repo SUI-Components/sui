@@ -1,108 +1,44 @@
-const path = require('path')
-const readdirSync = require('fs').readdirSync
-const statSync = require('fs').statSync
+const {getPackageJson} = require('@s-ui/helpers/packages')
+const glob = require('glob')
 
-const basePath = process.cwd()
-const projectPackage = require(path.join(basePath, 'package.json'))
-const packageConfig = projectPackage.config
-const ROOT_SCOPE = 'Root'
+const CHANGELOG_FILENAME = 'CHANGELOG.md'
+const CWD = process.cwd()
+const packageFile = getPackageJson(CWD)
 
-function getOrDefault(key, defaultValue) {
-  return (
-    (packageConfig &&
-      packageConfig['sui-mono'] &&
-      packageConfig['sui-mono'][key]) ||
-    defaultValue
-  )
+const getWorkspaces = workspaces => {
+  // If we have more than one workspace, we join
+  // folders with the pattern {components/**,demo/**,tests/**}/package.json
+  const pattern =
+    workspaces.length > 1
+      ? `{${workspaces.join()}}/package.json`
+      : `${workspaces[0]}/package.json`
+
+  const paths = glob.sync(pattern, {
+    ignore: ['**/node_modules/**', './node_modules/**']
+  })
+
+  return paths.map(path => path.replace('/package.json', ''))
 }
 
-const packagesFolder = getOrDefault('packagesFolder', 'src')
-const rootPath = path.join(basePath, packagesFolder)
-const deepLevel = getOrDefault('deepLevel', 1)
-const configCustomScopes = getOrDefault('customScopes', [])
-const publishAccess = getOrDefault('access', 'restricted')
-const changelogFilename = getOrDefault('changeLogFilename', 'CHANGELOG.md')
+function factoryConfigMethods(packageFile) {
+  const {
+    config: packageConfig = {},
+    name: packageName,
+    workspaces = []
+  } = packageFile
+
+  const {access: publishAccess = 'restricted'} = packageConfig['sui-mono'] || {}
+
+  return {
+    checkIsMonoPackage: () => workspaces.length === 0,
+    getChangelogFilename: () => CHANGELOG_FILENAME,
+    getProjectName: () => packageName,
+    getPublishAccess: () => publishAccess,
+    getWorkspaces: () => getWorkspaces(workspaces)
+  }
+}
 
 module.exports = {
-  getScopes: function() {
-    const folders = cwds(rootPath, deepLevel)
-    const scopes = folders.map(folder => {
-      const reversedPath = folder.split(path.sep)
-      const scope = Array.apply(null, Array(deepLevel)).map(
-        Number.prototype.valueOf,
-        0
-      )
-
-      return scope
-        .map(() => reversedPath.pop())
-        .reverse()
-        .join(path.sep)
-    })
-
-    const customScopes =
-      hasRootFiles() && this.isMonoPackage()
-        ? [...configCustomScopes, ROOT_SCOPE]
-        : configCustomScopes
-    return flatten(scopes, customScopes)
-  },
-  getScopesPaths: function(singleScope) {
-    const packagesDir = path.join(process.cwd(), this.getPackagesFolder())
-    const scopes = singleScope ? [singleScope] : this.getScopes()
-    return scopes
-      .filter(scope => scope !== ROOT_SCOPE)
-      .map(pkg => path.join(packagesDir, pkg))
-  },
-  getPackagesFolder: function() {
-    return packagesFolder
-  },
-  getPublishAccess: function() {
-    return publishAccess
-  },
-  getProjectName: function() {
-    return projectPackage.name
-  },
-  getChangelogFilename: function() {
-    return changelogFilename
-  },
-  isMonoPackage: function() {
-    const folders = cwds(rootPath, deepLevel)
-    const pkgFolders = folders.filter(getPackageConfig)
-    return !pkgFolders.length
-  }
+  factoryConfigMethods,
+  ...factoryConfigMethods(packageFile)
 }
-
-const getFolders = dir =>
-  readdirSync(dir)
-    .map(file => path.join(dir, file))
-    .filter(onlyFolders)
-const onlyFolders = filePath => statSync(filePath).isDirectory()
-const flatten = (x, y) => x.concat(y)
-
-const cwds = (rootDir, deep) => {
-  const baseFolders = Array.apply(null, Array(deep)).map(
-    Number.prototype.valueOf,
-    0
-  )
-
-  return baseFolders.reduce(
-    acc => {
-      return acc.map(getFolders).reduce(flatten)
-    },
-    [rootDir]
-  )
-}
-
-const getPackageConfig = packagePath => {
-  try {
-    return require(path.join(packagePath, 'package.json'))
-  } catch (e) {
-    return null
-  }
-}
-
-const hasRootFiles = () =>
-  Boolean(
-    readdirSync(rootPath)
-      .map(file => path.join(rootPath, file))
-      .find(filePath => statSync(filePath).isFile())
-  )

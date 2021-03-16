@@ -2,14 +2,13 @@
 
 > Simple CLI for monorepo/multipackage.
 
-[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/mutlipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
+[`sui-mono`](https://github.com/SUI-Components/sui/tree/master/packages/sui-mono) is a tool that aims to **simplify management for monorepo/multipackage projects** ([`sui`](https://github.com/SUI-Components/sui/) for example) but _it also works with monopackage projects_.
 
 `sui-mono` provides:
 
 - Commit template → `sui-mono commit`
 - Release manager (parses commits to publish packages according to their changes) → `sui-mono check`, `sui-mono release`
 - Run commands inside each package → `sui-mono run npm install`, `sui-mono run-parallel npm install`
-- Link all packages that have dependencies between each other → sui-mono link
 
 We use:
 
@@ -27,18 +26,20 @@ We use:
   - [Usage](#usage)
     - [`run` command on all packages](#run-command-on-all-packages)
     - [`phoenix`](#phoenix)
-    - [`link`](#link)
     - [`commit`](#commit)
     - [`commit-all` commit for all contained packages](#commit-all-commit-for-all-contained-packages)
     - [`check` & `release`](#check--release)
   - [How to configure your project](#how-to-configure-your-project)
     - [`private`](#private)
     - [`access`](#access)
-    - [Scope (`packagesFolder`, `deepLevel`, `customScopes`)](#scope-packagesfolder-deeplevel-customscopes)
+    - [`workspaces`](#workspaces)
       - [Examples](#examples)
-        - [Project Example](#project-example)
-        - [Case `sui-studio`](#case-sui-studio)
+          - [Project Example](#project-example)
+          - [Case `sui-studio`](#case-sui-studio)
       - [Manual scopes](#manual-scopes)
+  - [Migration from v1](#migration-from-v1)
+    - [`packagesFolder` and `deepLevel` are not longer used](#packagesfolder-and-deeplevel-are-not-longer-used)
+    - [`build` script is not longer executed before release](#build-script-is-not-longer-executed-before-release)
 
 <!-- /TOC -->
 
@@ -109,19 +110,6 @@ Ables you to just reinstall the dependencies from a single scope
 sui-mono phoenix --no-root --scope atom/button
 ```
 
-### `link`
-
-Is you want to link all packages between each other, to ease development:
-
-```sh
-sui-mono link
-```
-
-Note that:
-
-- The monorepo will also be linked to the packages it contains if it uses them.
-- Packages that are not used locally will not be linked at all
-
 ### `commit`
 
 You do your normal git workflow, but when commiting you should use:
@@ -165,7 +153,7 @@ In case you want to release a **single package** use the `--scope` param
 sui-mono release --scope "packages/sui-test"
 ```
 
-> Your packages must implement script `npm run build` or `npm run prepublish` that will be executed before any release.
+> Your packages could use a `prepublish` script that will be executed before any release.
 
 > 👉 `sui-mono` creates a new `MINOR` version for the package only when `fix`, `perf` or `feat` commits are detected, and a new `MAJOR` version if there is some commit marked as `BREAKING CHANGES`. Otherwise (any other types of commits detected), no new version will be generated and nothing will be released
 
@@ -189,20 +177,14 @@ Then, you can configure your `package.json` to suit your needs
 
 `sui-mono` allows you to configure some parts of its functioning, but it also defines a few defaults for convenience.
 
-Here's a full example of the options
+Here's a full example of the options:
 
 ```json
 "private": true,
+"workspaces": ["components/**"],
 "config": {
   "sui-mono": {
     "access": "public",
-    "packagesFolder": "test/components",
-    "deepLevel": 2,
-    "customScopes": [
-      "cz-config",
-      "check",
-      "release"
-    ]
   },
   "validate-commit-msg": {
     "types": "@s-ui/mono/src/types"
@@ -212,26 +194,19 @@ Here's a full example of the options
 
 ### `private`
 
-If you specify that your package is private (`"private": true,`), it will not get pushed to npm repository
+If you specify that your package is private (`"private": true,`), it will not get pushed to npm repository.
 
 ### `access`
 
-By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `"access": "public"`
+By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `"access": "public"`.
 
-### Scope (`packagesFolder`, `deepLevel`, `customScopes`)
+### `workspaces`
 
-> 👉 `` Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
+> 👉 Setting the proper scope in the commit message is important, because this is used for `sui-mono check` and `sui-mono release` to assign changes to specific packages and release them to the proper packages
 
-We provide a simple tool to automate the way the [scopes](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#commit-message-with-scope) are retrieved.
-If you follow a structure where do you have:
+Workspaces is a generic term that refers to the set of features that provides support to managing multiple packages from your local files system from within a singular top-level, root package.
 
-- a main folder and
-- inside this folder you have all the packages (subfolders, each one of them with its own `package.json` → _scopes_)
-
-...this configuration will work for you
-
-In order to specify the main folder you need to provide `packagesFolder` by default its value is `src`
-By default we check only 1 level inside the main folder, but if you have categories for each package and inside the packages you can configure `deepLevel`
+These `workspaces` are defined in the root `package.json` of the project and uses glob pattern. The pattern will search all the folders with a valid `package.json` file and not inside a `node_modules` folder in order to get all the available scopes.
 
 This information will be used for releases and [`commitizen`](https://commitizen.github.io/cz-cli/) scopes.
 
@@ -249,12 +224,19 @@ src/
   ...
 ```
 
-The default options will give you a list of scopes like this one for your commit:
+You will have to add the next config on `workspaces` in your `package.json` root file:
+
+```json
+{
+  "workspaces": ["src/**"]
+}
+
+This will give you a list of scopes like this one for your commit:
 
 ```text
-i18n
-users
-search
+src/i18n
+src/users
+src/search
 ```
 
 ###### Case `sui-studio`
@@ -274,17 +256,16 @@ components/
 If you set the configuration of your project like this:
 
 ```json
-"packagesFolder": "components"
-"deepLevel": 2
+"workspaces": ["components/**"]
 ```
 
 You will have a list of scopes like this one when performing a commit:
 
 ```text
-ads/big
-ads/small
-card/featured
-card/normal
+components/ads/big
+components/ads/small
+components/card/featured
+components/card/normal
 ```
 
 #### Manual scopes
@@ -295,3 +276,34 @@ Take in care that this scopes **will not be relevant for the release**, and if y
 Custom scopes are for a very rare cases and you may not need it most of the times.
 
 Use `customScopes` in this cases like in the example. The scopes will be added to the automatically generated ones.
+
+## Migration from v1
+
+### `packagesFolder` and `deepLevel` are not longer used
+
+You should use `workspaces` based on `npm` and `yarn` native config instead.
+
+Before:
+
+```json
+{
+  "config": {
+    "sui-mono": {
+      "packagesFolder": "components",
+      "deepLevel": 2
+    }
+  }
+}
+```
+
+After:
+
+```json
+{
+  "workspaces": ["components/**"]
+}
+```
+
+### `build` script is not longer executed before release
+
+Instead, you should rely on using `prepublish` script

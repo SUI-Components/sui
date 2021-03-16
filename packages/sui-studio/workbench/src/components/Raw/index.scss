@@ -1,3 +1,6 @@
+@import '../../../../src/styles/settings';
+
 body {
   overflow: auto;
+  background-color: $bgc-main;
 }

@@ -9,10 +9,8 @@
   <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
   <script src="https://unpkg.com/mocha/mocha.js"></script>
   <script class="mocha-init">
-    mocha.setup('bdd');
-    mocha.checkLeaks();
-    mocha.globals(['google*', '_goog*', 'optimizely', 'utag_data','goog', 'gvjs_*', '__ROUTER_PUSH_TRIGGERED__', 'infovis',
-      'gviz']);
+    mocha.setup('bdd')
+    mocha.setup({ignoreLeaks: true})
   </script>
 </head>
 <body>

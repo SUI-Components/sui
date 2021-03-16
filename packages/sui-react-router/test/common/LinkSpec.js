@@ -1,5 +1,4 @@
 import {expect} from 'chai'
-import React from 'react'
 import {renderToString} from 'react-dom/server'
 import {Router, Route, Link, match} from '../../src/index'
 

@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
 import https from 'https'
 import parser from 'ua-parser-js'
-import {hrTimeToMs} from '../utils'
+import {hrTimeToMs, buildRequestUrl} from '../utils'
 
 let __REQUESTING__ = false
 let __CACHE__ = {}
 const __RETRYS_BY_HASH__ = {}
 const __MAX_RETRYS_BY_HASH__ = 3
+const __CRITICAL_CSS_SERVICE_DOMAIN__ =
+  'https://critical-css-service.es-global-pro.schip.io'
 
 const generateMinimalCSSHash = routes => {
   return routes.reduce((acc, route) => {
@@ -21,10 +23,8 @@ const logMessageFactory = url => message =>
 
 export default config => (req, res, next) => {
   const startCriticalCSSTime = process.hrtime()
-
   const {matchResult = {}, performance = {}} = req
   const logMessage = logMessageFactory(req.url)
-
   const {error, renderProps} = matchResult
 
   if (error) {
@@ -36,7 +36,7 @@ export default config => (req, res, next) => {
   }
 
   if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
-    logMessage('Skip middleware because it is inactive')
+    logMessage("Skip middleware because it's inactive")
     return next()
   }
 
@@ -61,13 +61,7 @@ export default config => (req, res, next) => {
   }
 
   const ua = parser(req.get('User-Agent'))
-  const urlRequest =
-    (process.env.CRITICAL_CSS_PROTOCOL ||
-      currentConfig.protocol ||
-      req.protocol) +
-    ':/' +
-    (process.env.CRITICAL_CSS_HOST || currentConfig.host || req.hostname) +
-    req.url
+  const requestUrl = buildRequestUrl(req)
   const type = ua.device.type
   const deviceTypes = {
     desktop: 'd',
@@ -95,18 +89,18 @@ export default config => (req, res, next) => {
     !__REQUESTING__ &&
     retrysByHash <= __MAX_RETRYS_BY_HASH__
   ) {
-    logMessage(`Generation Critical CSS for -> ${urlRequest} with ${hash}`)
+    logMessage(`Generation Critical CSS for -> ${requestUrl} with ${hash}`)
 
-    const serviceRequestURL = `https://get-critical-css-service.vercel.app/${device}?url=${encodeURIComponent(
-      urlRequest
+    const serviceRequestUrl = `${__CRITICAL_CSS_SERVICE_DOMAIN__}/${device}?url=${encodeURIComponent(
+      requestUrl
     )}&extraHeaders=${encodeURIComponent(
       JSON.stringify(currentConfig.customHeaders || {})
     )}`
 
-    logMessage(serviceRequestURL)
+    logMessage(serviceRequestUrl)
 
     __REQUESTING__ = true
-    https.get(serviceRequestURL, res => {
+    https.get(serviceRequestUrl, res => {
       let css = ''
       if (res.statusCode !== 200) {
         __REQUESTING__ = false
@@ -119,7 +113,7 @@ export default config => (req, res, next) => {
       })
 
       res.on('error', () => {
-        logMessage(`Error Requesting ${serviceRequestURL}`)
+        logMessage(`Error Requesting ${serviceRequestUrl}`)
         __REQUESTING__ = false
         __RETRYS_BY_HASH__[hash] = __RETRYS_BY_HASH__[hash]
           ? __RETRYS_BY_HASH__[hash] + 1

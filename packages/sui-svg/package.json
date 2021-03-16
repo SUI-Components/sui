@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/svg",
-  "version": "2.6.0",
+  "version": "2.10.0",
   "description": "Converts svg files into React Components",
   "main": "index.js",
   "scripts": {
@@ -10,14 +10,14 @@
     "sui-svg": "./bin/sui-svg.js"
   },
   "dependencies": {
-    "@babel/core": "7.11.6",
-    "@s-ui/bundler": "6",
+    "@babel/core": "7.12.10",
+    "@s-ui/bundler": "7",
     "@s-ui/component-peer-dependencies": "latest",
     "@s-ui/helpers": "1",
     "@s-ui/react-atom-icon": "1",
     "@svgr/core": "3.1.0",
     "babel-preset-sui": "3",
-    "commander": "6.1.0",
+    "commander": "6.2.1",
     "fast-glob": "3.2.4",
     "just-camel-case": "4.0.2"
   },

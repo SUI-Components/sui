@@ -1,6 +1,4 @@
-# SUI
-
-Monorepo of SUI packages.
+# SUI ![CI](https://github.com/SUI-Components/sui/workflows/CI/badge.svg)
 
 SUI is a set of packages which goal to ease development of SUI-based components and web apps, providing:
 
@@ -9,18 +7,6 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 * Differents tools and services that solve only one problem each.
 * Transparency for developer (changes and improvements have no impact on DX)
 * Facilitates tooling development as asumptions can be made on the stack of each package.
-
-## Requirements
-
-### Add `./node_modules/.bin/` to your $PATH
-
-Many SUI packages provide a CLI as a service. The binaries are declared in the package.json `bin` key.
-
-To make all npm binaries available in your command line, you should add bin directory to your $PATH:
-
-```sh
-$ export PATH="$PATH:./node_modules/.bin"
-```
 
 ## Available packages
 

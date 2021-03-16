@@ -1,6 +1,8 @@
 const fse = require('fs-extra')
-const colors = require('colors')
+const colors = require('./colors')
 const {showError} = require('./cli')
+
+const log = msg => console.log(colors.gray(msg)) // eslint-disable-line no-console
 
 /**
  * Write a file with given content
@@ -8,33 +10,21 @@ const {showError} = require('./cli')
  * @param  {String} content Content to write
  * @return {Promise}
  */
-const writeFile = (path, content) => {
-  return fse
+const writeFile = (path, content) =>
+  fse
     .outputFile(path, content)
-    .then(() => {
-      console.log(colors.gray(`Created ${path}`)) // eslint-disable-line no-console
-    })
-    .catch(err => {
-      showError(`Failed creating ${path}`)
-      throw new Error(err)
-    })
-}
+    .then(() => log(`Created ${path}`))
+    .catch(() => showError(`Failed creating ${path}`))
 
 /**
  * Remove a file
  * @param  {String} path Path of file to remove
  * @return {Promise}
  */
-const removeFile = path => {
-  return fse
+const removeFile = path =>
+  fse
     .remove(path)
-    .then(() => {
-      console.log(colors.gray(`Removed ${path}`)) // eslint-disable-line no-console
-    })
-    .catch(err => {
-      showError(`Failed removing ${path}`)
-      throw new Error(err)
-    })
-}
+    .then(() => log(`Removed ${path}`))
+    .catch(() => showError(`Failed removing ${path}`))
 
 module.exports = {writeFile, removeFile}

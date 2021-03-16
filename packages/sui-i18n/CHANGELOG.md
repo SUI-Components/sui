@@ -1,6 +1,14 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.24.0 (2020-12-09)
+
+
+### Features
+
+* add currency symbol doc ([dac1f53](https://github.com/SUI-Components/sui/commit/dac1f53d548f1b2432d44c4418f2744faaf8c2b0))
+* add currency symbol support ([5fd97b2](https://github.com/SUI-Components/sui/commit/5fd97b2b74716c46d6810ddf9385a0b38637f823))
+
+
 
 # 1.23.0 (2020-06-17)
 

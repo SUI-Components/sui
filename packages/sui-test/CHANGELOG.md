@@ -1,6 +1,130 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 4.13.0 (2021-03-04)
+
+
+### Bug Fixes
+
+* add option to patch CJS loader in node v12.21.0 ([e08c872](https://github.com/SUI-Components/sui/commit/e08c8723ae8fc8f4debaf66e3a4ac739c1a93565)), closes [#1068](https://github.com/SUI-Components/sui/issues/1068)
+
+
+
+# 4.12.0 (2021-03-02)
+
+
+### Bug Fixes
+
+* fix new test path in studio ([bc489a1](https://github.com/SUI-Components/sui/commit/bc489a163d3dfdaba6c731beaa91d4257239dbaf))
+* rename var ([6356923](https://github.com/SUI-Components/sui/commit/63569236a468993cc2993b6b0cf2e08c1750d8cd))
+
+
+
+# 4.11.0 (2021-02-24)
+
+
+### Bug Fixes
+
+* bump dependencies babel ([621c0ee](https://github.com/SUI-Components/sui/commit/621c0ee08e7a0dcadd4ed591921516b9bb041e44))
+
+
+
+# 4.10.0 (2021-02-02)
+
+
+### Bug Fixes
+
+* use args for command ([0172ebf](https://github.com/SUI-Components/sui/commit/0172ebfeea59e5cd56f4535297a7ec7de8972e34))
+* use previous project uri ([b7e073f](https://github.com/SUI-Components/sui/commit/b7e073f121abc87208089624c346c325b3b5ab76))
+
+
+### Features
+
+* add support to parallelization ([cab916c](https://github.com/SUI-Components/sui/commit/cab916c68af4072ddeb8f8473154d567ac1bc051))
+
+
+
+# 4.9.0 (2020-12-30)
+
+
+### Bug Fixes
+
+* force new release of sui-test docker ([ebe3460](https://github.com/SUI-Components/sui/commit/ebe34605751e87a3941a46baf4e4af24940533e0))
+
+
+
+# 4.8.0 (2020-12-30)
+
+
+### Bug Fixes
+
+* Do not catch error for getSpawnPromise ([e47120e](https://github.com/SUI-Components/sui/commit/e47120eb4880e5f365223a4d327cdbb54c28ac14))
+
+
+
+# 4.7.0 (2020-12-22)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([d1e8368](https://github.com/SUI-Components/sui/commit/d1e8368e5202386997b8ff673d18c80f342f6c4b))
+
+
+
+# 4.6.0 (2020-12-01)
+
+
+### Bug Fixes
+
+* transpile babel-runtime as sometimes that's needed ([1500c49](https://github.com/SUI-Components/sui/commit/1500c49edb0af21e56cbbaa8eeb32fa03b1c59c9))
+
+
+
+# 4.5.0 (2020-11-16)
+
+
+### Features
+
+* remove srcPattern default as it is causing problems ([8b8e8c0](https://github.com/SUI-Components/sui/commit/8b8e8c03cc8d1151b29bf215d6ffd706ccd20ef8))
+* upgrade dependencies ([a84c4e1](https://github.com/SUI-Components/sui/commit/a84c4e12720175246e379784006eeca3cb5ac126))
+* use latest karma ([5789dc6](https://github.com/SUI-Components/sui/commit/5789dc6a87952237d7366100f81e42cc7d30ea87))
+
+
+
+# 4.4.0 (2020-11-12)
+
+
+### Features
+
+* try new release with new GitHub Actions build ([b15856a](https://github.com/SUI-Components/sui/commit/b15856acccc37dd86efa8603b43489ea57f522ab))
+
+
+
+# 4.3.0 (2020-11-09)
+
+
+### Features
+
+* disable ESModules on babel-preset-sui for mocha server tests ([e5c3a9b](https://github.com/SUI-Components/sui/commit/e5c3a9b5df5b0cbd75276b550b9b97d5ec53dde1))
+
+
+
+# 4.2.0 (2020-10-30)
+
+
+### Features
+
+* add a config to force transpilation of modules via config ([d85e9ef](https://github.com/SUI-Components/sui/commit/d85e9efaa6d566cae901b7370d094d44d8c6efe8))
+
+
+
+# 4.1.0 (2020-10-21)
+
+
+### Features
+
+* upgrade sui-test dependencies ([2b590c4](https://github.com/SUI-Components/sui/commit/2b590c4617ab0375f45da248317dc2d0adf9479c))
+
+
 
 # 4.0.0 (2020-09-30)
 

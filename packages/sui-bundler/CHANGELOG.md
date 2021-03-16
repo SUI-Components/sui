@@ -1,6 +1,199 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 7.14.0 (2020-12-30)
+
+
+### Bug Fixes
+
+* Do not catch error for getSpawnPromise ([e720bfe](https://github.com/SUI-Components/sui/commit/e720bfe5d0ea1fbed749ae44eb917ff310246729))
+
+
+
+# 7.14.0 (2020-12-22)
+
+
+### Bug Fixes
+
+* fix analyzer usage ([bff2675](https://github.com/SUI-Components/sui/commit/bff2675903d717b8b29b72572d71a0708f28c358))
+
+
+
+# 7.13.0 (2020-12-22)
+
+
+### Features
+
+* download analyzer dependencies only on demand ([7b84b92](https://github.com/SUI-Components/sui/commit/7b84b925763a99d25eff841f1a06174510d28735))
+
+
+
+# 7.12.0 (2020-12-11)
+
+
+### Features
+
+* remove dependencies and use newest webpack-manifest-plugin ([3f2c326](https://github.com/SUI-Components/sui/commit/3f2c326dd215b94e41bb642dc3e61d5070efb230))
+* use correct version and remove console.log ([692ce0b](https://github.com/SUI-Components/sui/commit/692ce0baeedba86e57e2733ee2b18ef606224594))
+
+
+
+# 7.11.0 (2020-12-10)
+
+
+### Features
+
+* fix to be able to link nested sass packages that are relying on Sass Importer and ([0846761](https://github.com/SUI-Components/sui/commit/0846761915049c812fb8ef7b18955187217a447f))
+
+
+
+# 7.10.0 (2020-11-24)
+
+
+### Features
+
+* upgrade dependencies and simplify sass linking ([0e4273c](https://github.com/SUI-Components/sui/commit/0e4273c3c46a28cc180e01299adcdf5bc453a1e7))
+
+
+
+# 7.9.0 (2020-11-10)
+
+
+### Features
+
+* avoid publishing huge CHANGELOG.md ([0764184](https://github.com/SUI-Components/sui/commit/07641849284d54436397719381acaaa3fbda5970))
+
+
+
+# 7.8.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* use autoprefixer@9 for now ([f8f6eda](https://github.com/SUI-Components/sui/commit/f8f6eda4de11d11892b3dd00bd17b285470803e4))
+
+
+
+# 7.7.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* ignore test folder for publishing package ([1941f3a](https://github.com/SUI-Components/sui/commit/1941f3a439f4a8b61e3b121ec929e922829301b2))
+
+
+
+# 7.6.0 (2020-11-10)
+
+
+### Bug Fixes
+
+* rollback to postcss@7 for now ([744996a](https://github.com/SUI-Components/sui/commit/744996abf80ad421ab7bccf841358c0b3e8648d6))
+* use latest dependencies and avoid some problems ([fc7b4b6](https://github.com/SUI-Components/sui/commit/fc7b4b6398fb346e855e96cf18691065685a8690))
+
+
+### Features
+
+* fix missing variable ([fbd8d6c](https://github.com/SUI-Components/sui/commit/fbd8d6c2bfd324008a7b43381f6208500eee6466))
+
+
+
+# 7.5.0 (2020-11-02)
+
+
+### Features
+
+* disable Code Splitting for libs built with Webpack ([58e27e2](https://github.com/SUI-Components/sui/commit/58e27e24b637612f8803b5895cfe975250fb8ce9))
+
+
+
+# 7.4.0 (2020-10-30)
+
+
+### Features
+
+* use old react-dev-utils until react fast refresh support on sui-bundler ([fd6948a](https://github.com/SUI-Components/sui/commit/fd6948aed871ba391ed5120ee180a72daff2babb))
+
+
+
+# 7.3.0 (2020-10-28)
+
+
+### Features
+
+* remove not needed node-sass dependency ([40437d1](https://github.com/SUI-Components/sui/commit/40437d10c9728e9cc0d03c3f41f3ebee7b8835a9))
+
+
+
+# 7.2.0 (2020-10-28)
+
+
+### Features
+
+* remove not needed package from package.json ([7ca9ac9](https://github.com/SUI-Components/sui/commit/7ca9ac999cb3b7c8c08ada769ee1bb9458b6fa58))
+* stop using not mantained ScriptExtHtmlWebpackPlugin ([42c0475](https://github.com/SUI-Components/sui/commit/42c0475e979e3151caeaf88691600885fa2bb247))
+
+
+
+# 7.1.0 (2020-10-27)
+
+
+### Bug Fixes
+
+* avoid removing magic comments from index html ([b553f98](https://github.com/SUI-Components/sui/commit/b553f98c730ffdf5b40e7afe8f69147122317b78))
+
+
+
+# 7.0.0 (2020-10-27)
+
+
+### Features
+
+* create a new resolve-alias file to reuse better alias things ([fdae71d](https://github.com/SUI-Components/sui/commit/fdae71d8bae88f1202eee04c5df06fb429694628))
+* create a reusable log helper ([9c79eee](https://github.com/SUI-Components/sui/commit/9c79eee58cd958b6d5977b92ca23fe8bf81c8c58))
+* extract log helper and remove not needed code ([0ed4e83](https://github.com/SUI-Components/sui/commit/0ed4e832002e1d7eb7efcf94cc3715b2f653728d))
+* get json errors only when needed and use log helper ([04f0ee3](https://github.com/SUI-Components/sui/commit/04f0ee33d0cf910f0c08ed520ba8985d0bd5b71b))
+* improve and simplify bundle analyzer ([b3ef708](https://github.com/SUI-Components/sui/commit/b3ef708c2a976378a959aeee21a291b1f945e7ab))
+* improve development build time ([092dc18](https://github.com/SUI-Components/sui/commit/092dc18ca22b5f9a5adf42500eeeb1851b3beeaa))
+* improve log readability ([2e41eb0](https://github.com/SUI-Components/sui/commit/2e41eb0e57df9829e9ebeafabb94dd43301913fa))
+* put sass link loader configuration directly without deprecated loaders ([a67f5e5](https://github.com/SUI-Components/sui/commit/a67f5e540cafc7a2def9a5e4bda74ee7238cb885))
+* refactor how to get config ([7162222](https://github.com/SUI-Components/sui/commit/71622229f60b7618dcecdafed5edd775901419dc))
+* remove deprecated LoaderUniversalOptionsPlugin ([d09f4bb](https://github.com/SUI-Components/sui/commit/d09f4bb89ccd6bea0e1ef4225d95185ec706318f))
+* remove externals plugin ([5509010](https://github.com/SUI-Components/sui/commit/5509010706ad5fc627f1c3fd009ca33c39bc96fe))
+* remove loader-options from deprecated config loader ([793ba8b](https://github.com/SUI-Components/sui/commit/793ba8b98b7fd5b26c07e704433009247f33c635))
+* simplify compiler and use correct order of messages ([00a4cd9](https://github.com/SUI-Components/sui/commit/00a4cd99c02067d24994db50163c24823f0979c7))
+* stop using LoaderUniversalOptionsPlugin ([5f994a5](https://github.com/SUI-Components/sui/commit/5f994a5e100f7770ea233e353c43a075b72f5fa1))
+* stop using LoaderUniversalOptionsPlugin on pro ([bc801cc](https://github.com/SUI-Components/sui/commit/bc801ccd84e4720de2d7a867bb7962ca142117dd))
+* upgrade dependencies ([e028dcd](https://github.com/SUI-Components/sui/commit/e028dcd04d955d0d44ed5157246ddc46e85454bd))
+* use new log helper ([c61061e](https://github.com/SUI-Components/sui/commit/c61061e93c7f47a06919ffc29b78935616ac59d6))
+* use new resolve-alias file instead parse-alias ([c70fe7a](https://github.com/SUI-Components/sui/commit/c70fe7a70e386b61f186819e94f6eec72bfde3a6))
+
+
+
+# 6.22.0 (2020-10-21)
+
+
+### Features
+
+* adapt package to remove deprecated sw generation ([bfec3dc](https://github.com/SUI-Components/sui/commit/bfec3dcdcf85c398a83a4597c55c881b0bead61c))
+* remove bundle-loader not needed ([6a0da27](https://github.com/SUI-Components/sui/commit/6a0da27a5f355778bc0cfbfe91a19c182fc8a756))
+* remove copy paste feature ([67b263a](https://github.com/SUI-Components/sui/commit/67b263ae17bc202378972a78673d352417752ed1))
+* remove features and latest sass version from dart ([b8789f6](https://github.com/SUI-Components/sui/commit/b8789f63edf559b8bd5771e592c7e996bbf4545e))
+* remove node-sass-json-importer ([8ddd3e6](https://github.com/SUI-Components/sui/commit/8ddd3e6c754db7ae7f45e95c0104fe46fd763a15))
+* remove not used dependencies ([b18b786](https://github.com/SUI-Components/sui/commit/b18b786a170652a96b9ff543f46657f3b140028b))
+* remove thread-loader as it seems its benefits are near zero ([4e70bc4](https://github.com/SUI-Components/sui/commit/4e70bc4e9e56749f2ff054f08e401429fe9ea8ab))
+* sync dependencies with sui-test ([44ebe0d](https://github.com/SUI-Components/sui/commit/44ebe0d59e432a582f3fb7ff3d62c2ff3383b976))
+* use correct config for postcss ([cda2a5f](https://github.com/SUI-Components/sui/commit/cda2a5fc23cc2af0806fbb1171c2bbba0c7a975a))
+* use correct dev sercer config ([3b2188d](https://github.com/SUI-Components/sui/commit/3b2188d95cfdebf860d88a87ccbd86e1b6f72f68))
+
+
+### BREAKING CHANGES
+
+* Remove feature that allowed importing json from sass
+* Remove manual compression feautre. Remove deprecated service worker creation. Upgrade to latest
+dependencies. Use sass binary from dart version. Stop messing with extensions resolved, use default
+extensions.
+
+
 
 # 6.21.0 (2020-10-01)
 

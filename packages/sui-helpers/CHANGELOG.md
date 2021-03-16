@@ -1,6 +1,129 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.31.0 (2021-02-16)
+
+
+### Bug Fixes
+
+* make node 12 friendly ([0b4a48f](https://github.com/SUI-Components/sui/commit/0b4a48f8fbc88e731f3229936435c6aa61f409e6))
+
+
+
+# 1.30.0 (2021-02-01)
+
+
+### Features
+
+* improve installation time of lazy packages ([22f7688](https://github.com/SUI-Components/sui/commit/22f7688e981ac5970775db232c118b2aed87ea44))
+
+
+
+# 1.29.0 (2020-12-30)
+
+
+### Bug Fixes
+
+* Do not catch error for getSpawnPromise ([d454a15](https://github.com/SUI-Components/sui/commit/d454a15bb6bf151263854f2e447f11743bf28430))
+
+
+
+# 1.28.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([4b72fa9](https://github.com/SUI-Components/sui/commit/4b72fa96b048512f9b90c99409140adc27db5a5e))
+
+
+
+# 1.27.0 (2020-12-11)
+
+
+### Features
+
+* more verbose errors ([92469c2](https://github.com/SUI-Components/sui/commit/92469c2776856da040a9275fafd39ac46a32cd5e))
+
+
+
+# 1.26.0 (2020-12-11)
+
+
+### Bug Fixes
+
+* use correct exec options correctly ([69601df](https://github.com/SUI-Components/sui/commit/69601df4e2c5099c85b01b7bc34c7ab713babe97))
+
+
+
+# 1.25.0 (2020-12-10)
+
+
+### Bug Fixes
+
+* fix tests ([61fa92a](https://github.com/SUI-Components/sui/commit/61fa92ae4856065aff65245661cd3705dfe1e23c))
+* use correct package version ([98b96c6](https://github.com/SUI-Components/sui/commit/98b96c67976ecda74ae1a291ce1bf525c918419e))
+
+
+### Features
+
+* add colors helper and avoid external dependency ([0386376](https://github.com/SUI-Components/sui/commit/0386376f2b567b22c4f9710d19c32fb2eac4c91b))
+* avoid using readline to avoid blocking read stdin ([d7db9a1](https://github.com/SUI-Components/sui/commit/d7db9a12ec39465dadc61d9ddca35452d9db2110))
+* remove not needed dependencies and upgrade execa ([6aadc7d](https://github.com/SUI-Components/sui/commit/6aadc7d9cca5a54687896784dc3dd8de08af5fef))
+* remove Windows support and simplify file ([9b1b38a](https://github.com/SUI-Components/sui/commit/9b1b38a04bc3ac27ddd5c6629092083a04324cdf))
+* use new colors helper ([51c03f6](https://github.com/SUI-Components/sui/commit/51c03f65ef0b185bc8f8c835c39f8e97f4f68183))
+
+
+
+# 1.24.0 (2020-12-03)
+
+
+### Features
+
+* use more execa and avoid spawn ([b777e6f](https://github.com/SUI-Components/sui/commit/b777e6f31e7fa847f91d84a65d005261c652e814))
+
+
+
+# 1.23.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add some logging ([479e91e](https://github.com/SUI-Components/sui/commit/479e91e4505eba9b6dcf87edd52e504a27d2c67b))
+
+
+
+# 1.22.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* return CODE OK ([3cfab9d](https://github.com/SUI-Components/sui/commit/3cfab9d09763b6889f3519157f3b93e1f06ce19c))
+
+
+
+# 1.21.0 (2020-12-03)
+
+
+### Bug Fixes
+
+* add missing dependency ([9d27200](https://github.com/SUI-Components/sui/commit/9d27200146eba8aa8878023f4ca19daa5cb3708f))
+
+
+
+# 1.20.0 (2020-12-03)
+
+
+### Features
+
+* improve logging and output info ([6ea408d](https://github.com/SUI-Components/sui/commit/6ea408d8017b1d6337beb4e1c1506dc10afad0c7))
+* remove figures and remove another dependency ([954df81](https://github.com/SUI-Components/sui/commit/954df81c876ddc96ff69081ad4b4bc02e6cc5dd9))
+* remove not needed code used on sui-mono link ([e4eb240](https://github.com/SUI-Components/sui/commit/e4eb2401af2ca0748ba3664d684dc74cef7e8f8a))
+* removing listR and logUpdate dependencies ([4feba3e](https://github.com/SUI-Components/sui/commit/4feba3efa762db56fcac66b3d1e649be97d59b8b))
+
+
+
+# 1.19.0 (2020-10-23)
+
+
 
 # 1.18.0 (2020-10-01)
 

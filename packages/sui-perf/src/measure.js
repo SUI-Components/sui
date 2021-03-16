@@ -6,8 +6,8 @@ export const measureFunc = ({mark, stop}) => label => func => {
   }
 
   mark(label)
-  var result = func()
-  var stopMeasure = () => stop(label)
+  const result = func()
+  const stopMeasure = () => stop(label)
   result instanceof Promise
     ? result.then(stopMeasure, stopMeasure)
     : stopMeasure()
@@ -17,7 +17,7 @@ export const measureFunc = ({mark, stop}) => label => func => {
 export const measureMethod = perf => {
   const measure = measureFunc(perf)
   return label => (obj, methodName) => {
-    var originalMethod = obj[methodName]
+    const originalMethod = obj[methodName]
     obj[methodName] = function(...args) {
       const labelText =
         (typeof label === 'function' && label.call(this, ...args)) ||

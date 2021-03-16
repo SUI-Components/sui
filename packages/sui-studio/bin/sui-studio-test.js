@@ -8,8 +8,9 @@ const path = require('path')
 const suiTestClientPath = require.resolve('@s-ui/test/bin/sui-test-browser')
 
 program
-  .option('--ci', 'Run components tests in CLI, headless mode')
+  .option('-C, --ci', 'Run components tests in CLI, headless mode')
   .option('-W, --watch', 'Watch mode')
+  .option('-T, --timeout <timeout>', 'Timeout')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -22,13 +23,22 @@ program
 
 const run = async () => {
   try {
-    await serialSpawn([
+    const result = await serialSpawn([
       [
         suiTestClientPath,
         [
-          '--src-pattern', path.join('node_modules', '@s-ui', 'studio', 'src', 'runtime-mocha', 'index.js'), // eslint-disable-line
+          '--src-pattern',
+          path.join(
+            'node_modules',
+            '@s-ui',
+            'studio',
+            'src',
+            'runtime-mocha',
+            'index.js'
+          ),
           program.watch && '--watch',
-          program.ci && '--ci'
+          program.ci && '--ci',
+          program.timeout && `-T ${program.timeout}`
         ].filter(Boolean),
         {
           shell: false,
@@ -37,9 +47,12 @@ const run = async () => {
       ]
     ])
 
-    if (!program.watch) {
+    if (program.watch) {
       process.exit(0)
     }
+
+    // if the tests fails results = 1
+    process.exit(result)
   } catch (err) {
     console.error(err)
     process.exit(err.code || 1)

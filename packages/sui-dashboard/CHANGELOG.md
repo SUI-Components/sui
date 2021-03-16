@@ -1,6 +1,35 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.27.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([2ee38fe](https://github.com/SUI-Components/sui/commit/2ee38fe48275da842182cc21867024dbfa4e0165))
+
+
+
+# 1.26.0 (2020-12-11)
+
+
+### Features
+
+* remove vibbo repositories ([4e405bf](https://github.com/SUI-Components/sui/commit/4e405bf1c1404577b4c43dd6393eea7df8d3a178))
+
+
+
+# 1.25.0 (2020-11-12)
+
+
+### Features
+
+* add versions and filename result options on teh script ([e0bf170](https://github.com/SUI-Components/sui/commit/e0bf1702300d8c8ea4dfdff3ef9501e683b3646c))
+
+
+
+# 1.24.0 (2020-10-23)
+
+
 
 # 1.23.0 (2020-09-30)
 

@@ -5,23 +5,18 @@ const getTargets = ({targets = {}}) => {
   return browser
 }
 
-const plugins = (api, opts = {}) => [
+const plugins = (api, {useESModules = true} = {}) => [
   require('babel-plugin-preval'),
   require('@babel/plugin-syntax-export-default-from').default,
   require('@babel/plugin-syntax-export-namespace-from').default,
   [require('@babel/plugin-proposal-decorators').default, {legacy: true}],
   [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
-  [
-    require('babel-plugin-transform-react-remove-prop-types').default,
-    {
-      removeImport: true
-    }
-  ],
+  require('babel-plugin-transform-react-remove-prop-types').default,
   [
     require('@babel/plugin-transform-runtime').default,
     {
       corejs: false,
-      useESModules: true,
+      useESModules,
       regenerator: true
     }
   ]

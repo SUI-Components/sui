@@ -1,25 +1,20 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
-// https://github.com/coryhouse/react-slingshot/blob/master/tools/build.js
+
+const fs = require('fs')
+const path = require('path')
 const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
-const path = require('path')
-const staticModule = require('static-module')
-const minifyStream = require('minify-stream')
-const replaceStream = require('replacestream')
+const {minify} = require('terser')
+const {writeFile} = require('@s-ui/helpers/file')
+
 const config = require('../webpack.config.prod')
-const fs = require('fs')
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
+const log = require('../shared/log')
 const {config: projectConfig} = require('../shared')
 
-const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
-
-// TODO: Extract this
-const chalk = require('chalk')
-const chalkError = chalk.red
-const chalkSuccess = chalk.green
-const chalkWarning = chalk.yellow
-const chalkProcessing = chalk.blue
+process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
@@ -51,72 +46,57 @@ const packagesToLink = program.linkPackage || []
 const nextConfig = packagesToLink.length
   ? linkLoaderConfigBuilder({
       config,
-      packagesToLink
+      packagesToLink,
+      linkAll: false
     })
   : config
 
-process.env.NODE_ENV = process.env.NODE_ENV
-  ? process.env.NODE_ENV
-  : 'production'
-
 if (clean) {
-  console.log(chalkProcessing('Removing previous build...'))
+  log.processing('Removing previous build...')
   rimraf.sync(path.resolve(process.env.PWD, 'public'))
 }
-console.log(
-  chalkProcessing('Generating minified bundle. This will take a moment...')
-)
 
-webpack(nextConfig).run((error, stats) => {
+log.processing('Generating minified bundle. This will take a moment...')
+
+webpack(nextConfig).run(async (error, stats) => {
   if (error) {
-    console.log(chalkError(error))
+    log.error(error)
     return 1
   }
 
-  const jsonStats = stats.toJson()
-
   if (stats.hasErrors()) {
-    return jsonStats.errors.map(error => console.log(chalkError(error)))
+    const jsonStats = stats.toJson('errors-only')
+    return jsonStats.errors.map(log.error)
   }
 
   if (stats.hasWarnings()) {
-    console.log(chalkWarning('Webpack generated the following warnings: '))
-    jsonStats.warnings.map(warning => console.log(chalkWarning(warning)))
+    const jsonStats = stats.toJson('errors-warnings')
+    log.warn('Webpack generated the following warnings: ')
+    jsonStats.warnings.map(log.warn)
   }
 
   console.log(`Webpack stats: ${stats}`)
 
   const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
   const offlinePageExists = fs.existsSync(offlinePath)
-  const shouldCreateOurCustomSW = !(
-    projectConfig &&
-    projectConfig.offline &&
-    projectConfig.offline.fallback
-  )
-  const staticsCacheOnly =
-    (projectConfig &&
-      projectConfig.offline &&
-      projectConfig.offline.staticsCacheOnly) ||
-    ''
+  const {offline: offlineConfig = {}} = projectConfig
+
+  const staticsCacheOnly = offlineConfig.staticsCacheOnly || false
+
+  const resolvePublicFile = file => path.resolve(process.cwd(), 'public', file)
 
   if (offlinePageExists) {
     fs.copyFileSync(
       path.resolve(offlinePath),
-      path.resolve(process.cwd(), 'public', 'offline.html')
+      resolvePublicFile('offline.html')
     )
   }
 
-  if (shouldCreateOurCustomSW && (offlinePageExists || staticsCacheOnly)) {
-    const manifest = require(path.resolve(
-      process.cwd(),
-      'public',
-      'asset-manifest.json'
-    ))
+  if (offlinePageExists || staticsCacheOnly) {
+    const manifest = require(resolvePublicFile('asset-manifest.json'))
 
     const rulesOfFilesToNotCache = [
       'runtime~', // webpack's runtime chunks are not meant to be cached
-      '.gz', // avoid gzipped files
-      '.br', // avoid brotli files
       'LICENSE.txt', // avoid LICENSE files
       '.map' // source maps
     ]
@@ -124,11 +104,7 @@ webpack(nextConfig).run((error, stats) => {
       url => !rulesOfFilesToNotCache.some(rule => url.includes(rule))
     )
 
-    const importScripts =
-      (projectConfig &&
-        projectConfig.offline &&
-        projectConfig.offline.importScripts) ||
-      []
+    const importScripts = offlineConfig.importScripts || []
 
     const stringImportScripts = importScripts
       .map(url => `importScripts("${url}")`)
@@ -137,30 +113,34 @@ webpack(nextConfig).run((error, stats) => {
     Boolean(importScripts.length) &&
       console.log('\nExternal Scripts Added to the SW:\n', stringImportScripts)
 
-    // generates the service worker
-    fs.createReadStream(path.resolve(__dirname, '..', 'service-worker.js'))
-      .pipe(replaceStream('// IMPORT_SCRIPTS_HERE', stringImportScripts))
-      .pipe(
-        staticModule({
-          'static-manifest': () => JSON.stringify(manifestStatics),
-          'static-cache-name': () => JSON.stringify(Date.now().toString()),
-          'static-statics-cache-only': () => JSON.stringify(staticsCacheOnly)
-        })
+    // read the service worker template
+    const swTemplate = fs.readFileSync(
+      path.resolve(__dirname, '..', 'service-worker.js'),
+      'utf-8'
+    )
+
+    // replace all the variables from the template with the actual values
+    const swCode = swTemplate
+      .replace('// IMPORT_SCRIPTS_HERE', stringImportScripts)
+      .replace("require('static-manifest')", JSON.stringify(manifestStatics))
+      .replace(
+        "require('static-cache-name')",
+        JSON.stringify(Date.now().toString())
       )
-      .pipe(minifyStream({sourceMap: false}))
-      .pipe(
-        fs.createWriteStream(
-          path.resolve(process.cwd(), 'public', 'service-worker.js')
-        )
+      .replace(
+        "require('static-statics-cache-only')",
+        JSON.stringify(staticsCacheOnly)
       )
 
+    const {code: minifiedSw} = await minify(swCode, {sourceMap: false})
+    const swFilePath = resolvePublicFile('service-worker.js')
+
+    await writeFile(swFilePath, minifiedSw)
     console.log('\nService worker generated succesfully!\n')
   }
 
-  console.log(
-    chalkSuccess(
-      `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
-    )
+  log.success(
+    `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
   )
 
   return 0

@@ -1,6 +1,37 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 2.3.0 (2021-03-01)
+
+
+### Bug Fixes
+
+* Use axios without vulnerabilities ([5ba1f9f](https://github.com/SUI-Components/sui/commit/5ba1f9f3c203e6cf843e6347220cdfbf9772aefa))
+
+
+
+# 2.2.0 (2021-01-27)
+
+
+### Bug Fixes
+
+* unsubscribe correctly and update listeners ([a8d6f1e](https://github.com/SUI-Components/sui/commit/a8d6f1e30b469d25bfecab5ec5a23e3c5ec85091))
+
+
+### Features
+
+* subscribe to domain Use Case without decorators ([5738c96](https://github.com/SUI-Components/sui/commit/5738c9660d0bf0dd9a23fab2b421f98607056e9f))
+
+
+
+# 2.1.0 (2020-12-01)
+
+
+### Bug Fixes
+
+* avoid transforming with Babel to avoid problems with sui-test ([d893bc4](https://github.com/SUI-Components/sui/commit/d893bc496988794721000cf06b2bf56b46bb7310))
+* disable line for linter ([5341db8](https://github.com/SUI-Components/sui/commit/5341db8dba1c2ea5f4abaa9246e3099b3f400256))
+
+
 
 # 2.0.0 (2020-06-16)
 

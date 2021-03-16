@@ -139,6 +139,9 @@ Then you can use in your specs `cy.login()`
     -h, --help                               output usage information
     -b, --browser <browser>                  Select a different browser (chrome|edge|firefox)
     -N, --noWebSecurity                      Disable all web securities (CORS)
+    -K, --key                                It is used to authenticate the project into the Dashboard Service
+    -P, --parallel                           Run tests on parallel
+    -R, --record                             Record tests and send result to Dashboard Service
 ```
 
 #### `sui-test e2e --gui`
@@ -167,7 +170,24 @@ Cypress can be detected as a robot if your server has that kind of protection or
 
 If defined, any error on your tests will create a screenshot of that moment in the `./.tmp/test-e2e/screenshots` folder of your project.
 
+# Config
 
+`@s-ui/test` could use a `config` in your `package.json` to tweak some behaviors. These are
+
+- `server`: Config for `@s-ui/test server` binary:
+  - `forceTranspilation`: List of regexs (string based, later will be transformed with `new Regex`) of modules to transpile. This is useful in case you're using server tests for modules that are ESModules based and need to be transpiled with `@babel/plugin-transform-modules-commonjs`.
+  - `esmOverride`: Boolean flag (defaults to `false`), enable patching the Node's CJS loader when facing ESM errors, like `ERR_REQUIRE_ESM` in `node > v12.12.0`. 
+
+```json
+"config": {
+  "sui-test": {
+    "server": {
+      "forceTranspilation": ["@adv-ui/vendor-by-consents-loader"],
+      "esmOverride": true
+    }
+  }
+}
+```
 
 # Tools
 

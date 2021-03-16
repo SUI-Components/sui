@@ -1,18 +1,18 @@
 /* eslint no-undef:0 */
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 import './styles.scss'
 import Root from './components/Root'
 import Raw from './components/Raw'
 import {isFunction} from '../../src/components/demo/utilities'
+import {importGlobals} from '../../src/components/globals'
 
 const queryStringToJSON = queryString => {
   if (queryString.indexOf('?') > -1) {
     queryString = queryString.split('?')[1]
   }
-  var pairs = queryString.split('&')
-  var result = {}
+  const pairs = queryString.split('&')
+  const result = {}
   pairs.forEach(function(pair) {
     pair = pair.split('=')
     result[pair[0]] = decodeURIComponent(pair[1] || '')
@@ -25,9 +25,10 @@ const params = queryStringToJSON(window.location.href)
 const importAll = requireContext => requireContext.keys().map(requireContext)
 
 ;(async () => {
-  const defaultStyle = await import(
+  const {default: defaultStyle} = await import(
     '!css-loader!sass-loader!component/index.scss'
   )
+
   let styles = []
   let requireContextThemesKeys = []
   try {
@@ -38,41 +39,43 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
     )
     requireContextThemesKeys = requireContextThemes.keys()
     styles = importAll(requireContextThemes)
-  } catch (e) {}
+  } catch {}
 
   let ctxt = {}
   try {
-    const resp = require('demo/context')
-    ctxt = resp.default || resp
-  } catch (e) {}
+    ctxt = require('demo/context').default
+  } catch {}
 
   let DemoComponent
   try {
-    const comp = require('demo/demo')
-    DemoComponent = comp.default || comp
-  } catch (e) {}
+    DemoComponent = require('demo/demo').default
+  } catch {}
 
   let demoStyles = ''
   try {
     demoStyles = require('!css-loader!sass-loader!demo/demo/index.scss') // eslint-disable-line
-  } catch (e) {}
+  } catch {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
   const themes = requireContextThemesKeys.reduce((acc, path, index) => {
-    acc[path.replace('./', '').replace('.scss', '')] = styles[index]
+    const style = styles[index]
+    const themeName = path.replace('./', '').replace('.scss', '')
+    acc[themeName] = style.default || style
     return acc
   }, {})
 
   const {raw} = params
   const ComponentToRender = raw ? Raw : Root
 
+  await importGlobals()
+
   ReactDOM.render(
     <ComponentToRender
-      contexts={contexts}
-      themes={{...themes, default: defaultStyle.default}}
       componentID={__COMPONENT_ID__}
+      contexts={contexts}
       demo={DemoComponent}
       demoStyles={demoStyles}
+      themes={{...themes, default: defaultStyle}}
       {...params}
     />,
     document.getElementById('app')

@@ -4,7 +4,8 @@ import React, {Component} from 'react'
 const shouldLoadIntersectionObserver = () =>
   !('IntersectionObserver' in window) ||
   !('IntersectionObserverEntry' in window) ||
-  !('intersectionRatio' in window.IntersectionObserverEntry.prototype)
+  !('intersectionRatio' in window.IntersectionObserverEntry.prototype) ||
+  !('isIntersecting' in window.IntersectionObserverEntry.prototype)
 
 export const hocIntersectionObserverWithOptions = (
   options = {}
@@ -16,7 +17,8 @@ export const hocIntersectionObserverWithOptions = (
     static contextTypes = BaseComponent.contextTypes
 
     state = {
-      isIntersecting: true
+      isIntersecting: true,
+      intersectionObserver: null
     }
 
     handleChange = ([{isIntersecting}]) => {
@@ -34,7 +36,18 @@ export const hocIntersectionObserverWithOptions = (
           /* webpackChunkName: "intersection-observer" */ 'intersection-observer'
         )
       }
-      new IntersectionObserver(this.handleChange).observe(target, options)
+      this.setState(
+        {
+          intersectionObserver: new IntersectionObserver(this.handleChange)
+        },
+        () => this.state.intersectionObserver.observe(target, options)
+      )
+    }
+
+    componentWillUnmount() {
+      if (this.state.intersectionObserver) {
+        this.state.intersectionObserver.disconnect()
+      }
     }
 
     render() {

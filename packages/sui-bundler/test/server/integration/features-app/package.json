@@ -1,7 +1,13 @@
 {
-  "name": "basic-app",
+  "name": "@s-ui/studio-basic-app",
   "sui-bundler": {
-    "env": ["APP_NAME", ["USER_NAME", "DEFAULT_VALUE"]],
+    "env": [
+      "APP_NAME",
+      [
+        "USER_NAME",
+        "DEFAULT_VALUE"
+      ]
+    ],
     "manualCompression": true
   }
 }

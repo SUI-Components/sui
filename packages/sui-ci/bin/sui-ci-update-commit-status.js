@@ -1,21 +1,28 @@
 #!/usr/bin/env node
 const program = require('commander')
+const {getCommitSha} = require('../src/git')
 
 const {updateCommitStatus} = require('../src/index')
 
 const {
   GH_TOKEN,
+  GITHUB_REPOSITORY,
+  GITHUB_RUN_ID,
+  GITHUB_SERVER_URL,
   GITHUB_TOKEN,
   SUI_CI_TOPIC: topicFromEnv,
-  TRAVIS_BUILD_WEB_URL: buildUrl,
-  TRAVIS_COMMIT,
-  TRAVIS_PULL_REQUEST_SHA,
-  TRAVIS_REPO_SLUG: repoSlug
+  TRAVIS_BUILD_WEB_URL,
+  TRAVIS_REPO_SLUG
 } = process.env
 
-// to keep compatibility with previous environment variable
-// GITHUB_TOKEN usage is preferred
+const buildUrl =
+  TRAVIS_BUILD_WEB_URL ||
+  `${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}`
+
+// GH_TOKEN is deprecated but yet used as a fallback for compatibility
 const gitHubToken = GITHUB_TOKEN || GH_TOKEN
+
+const repoSlug = GITHUB_REPOSITORY || TRAVIS_REPO_SLUG
 
 program
   .option(
@@ -35,7 +42,7 @@ program
   )
   .parse(process.argv)
 
-const commit = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT
+const commit = getCommitSha()
 const {state: stateKey, topic, url: targetUrl} = program
 
 updateCommitStatus({

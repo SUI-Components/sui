@@ -1,6 +1,80 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 1.33.0 (2021-02-23)
+
+
+### Bug Fixes
+
+* fix shouldLoadIntersectionObserver function for some old chrome versions with ([e74ccda](https://github.com/SUI-Components/sui/commit/e74ccdafa0b9e724d18616f096224f35cc22a2f9))
+
+
+
+# 1.32.0 (2021-01-28)
+
+
+### Bug Fixes
+
+* add safety check on unmount before disconnecting intersection observer ([56023e5](https://github.com/SUI-Components/sui/commit/56023e55bf7820343059e849bbbc4dfc4cefe777))
+
+
+
+# 1.31.0 (2021-01-26)
+
+
+### Bug Fixes
+
+* proptype undefined ([ba4aa1a](https://github.com/SUI-Components/sui/commit/ba4aa1a96e315f1f51f3b2cad32bf08c0c51b83f))
+* withIntersectionObserver - memory leak - cancel all subscriptions  and asyncronous tas ([9f9653a](https://github.com/SUI-Components/sui/commit/9f9653ac75f53a23b1ef1de202955242402abe3e))
+
+
+
+# 1.30.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* force new release ([a57c800](https://github.com/SUI-Components/sui/commit/a57c80064b0cb420289f4e2426bc9111acdce612))
+
+
+
+# 1.29.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* fix isOpen initial state to withOpenToggle HOC ([c46ae37](https://github.com/SUI-Components/sui/commit/c46ae37cd059121b06c45d652544540b79c5d016))
+
+
+
+# 1.28.0 (2020-12-09)
+
+
+### Bug Fixes
+
+* back to the previous behavior version ([1786769](https://github.com/SUI-Components/sui/commit/178676919d17368d3ab387d4266ecf51bb32f951))
+
+
+
+# 1.27.0 (2020-11-30)
+
+
+### Bug Fixes
+
+* add proptypes ([95be67c](https://github.com/SUI-Components/sui/commit/95be67c96e7333cf96d5f9c8f59c691117c10d90))
+* apply PR suggestion ([d83fbd5](https://github.com/SUI-Components/sui/commit/d83fbd5c28c41412a568e81268d3b760a78e1b19))
+* apply PR suggestions ([7c48d52](https://github.com/SUI-Components/sui/commit/7c48d5294a1125a3b8e25645fdd9763a099cd6fd))
+* define default state with prop ([057cfe5](https://github.com/SUI-Components/sui/commit/057cfe54cb9e3f5f5b2fca5d1d567ee2384bc786))
+
+
+
+# 1.26.0 (2020-10-23)
+
+
+### Features
+
+* support react 17 as peer dependency ([300195c](https://github.com/SUI-Components/sui/commit/300195c9390d8d36c49302865fdaf4df9b9e7e25))
+
+
 
 # 1.25.0 (2020-05-13)
 

@@ -1,4 +1,5 @@
-const {command: execute} = require('execa')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 
 /**
  * Release packages of the repository on CI
@@ -25,17 +26,14 @@ module.exports = async function release({
     return process.exit(1)
   }
 
-  try {
-    await execute('git pull origin master')
+  console.info(`[sui-ci release] Pull latest changes...`)
+  await exec('git pull origin master')
 
-    const {stdout} = await execute(
-      `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken} --skip-ci`
-    )
-    console.info(stdout)
-    console.info('[sui-ci release] Success!')
-  } catch (e) {
-    console.error('[sui-ci release] Something went wrong:')
-    console.error(e.message)
-    return process.exit(1)
-  }
+  console.info(`[sui-ci release] Executing sui-mono release...`)
+  const {stdout} = await exec(
+    `sui-mono release --github-email "${gitHubEmail}" --github-user "${gitHubUser}" --github-token ${gitHubToken} --skip-ci`
+  )
+  console.log(stdout)
+
+  console.info('[sui-ci release] Finished')
 }

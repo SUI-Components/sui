@@ -1,6 +1,143 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 7.20.0 (2021-03-02)
+
+
+### Bug Fixes
+
+* change conditional check ([3cd2796](https://github.com/SUI-Components/sui/commit/3cd2796db6f2b99644580401563a32ff65ecfbac))
+* remove unnecessary import ([c48d029](https://github.com/SUI-Components/sui/commit/c48d0294d913ffb244852788e512420e474eed72))
+
+
+### Features
+
+* implement site feature for routes on route_matching hook ([da9dd55](https://github.com/SUI-Components/sui/commit/da9dd554eaec4c575ff10e6fdc3ebfd81de591cf))
+
+
+
+# 7.19.0 (2021-02-22)
+
+
+### Features
+
+* update deps ([2824498](https://github.com/SUI-Components/sui/commit/2824498cf0d93518363af62bd5758a1154d612df))
+
+
+
+# 7.18.0 (2021-02-19)
+
+
+### Bug Fixes
+
+* fix critical css config object ([58234f4](https://github.com/SUI-Components/sui/commit/58234f45bc407f4a9218e1f25ad2095320b27ba1))
+
+
+
+# 7.17.0 (2021-02-15)
+
+
+### Features
+
+* add initial context value ([3987106](https://github.com/SUI-Components/sui/commit/39871062aff64ab893208d482f286cef8d220879))
+* let the context providers inject data into the html ([7b9fc62](https://github.com/SUI-Components/sui/commit/7b9fc627781cf9346615302bae0f7c2b035e2b35))
+* update test config + fix tests ([7c30bbc](https://github.com/SUI-Components/sui/commit/7c30bbcb74ff6bab0b87d97909d42a1e0849a19e))
+* use getInitialData ([d1c248d](https://github.com/SUI-Components/sui/commit/d1c248d71b7d983f563bfc3be4e2079843462982))
+
+
+
+# 7.16.0 (2021-02-11)
+
+
+### Bug Fixes
+
+* fix optional chaining in server code ([e531407](https://github.com/SUI-Components/sui/commit/e53140795d29f06af3eafee5f9b21ce710fce92a))
+
+
+
+# 7.15.0 (2021-02-11)
+
+
+### Bug Fixes
+
+* fix build request url method ([f4ee1ab](https://github.com/SUI-Components/sui/commit/f4ee1abd8f65fb4711e8de3ad4310d01de391960))
+* fix duplicated hyphen ([91fd5c5](https://github.com/SUI-Components/sui/commit/91fd5c5320fa10e47c472f7c07d31aec39313e3b))
+* fix passed config reference ([8fdc61f](https://github.com/SUI-Components/sui/commit/8fdc61fbfef7f35c2f4d3179c926bc11fb2b6af0))
+* fix some issues that were breaking the server for multi sites apps ([7fa9c8b](https://github.com/SUI-Components/sui/commit/7fa9c8b15c81ef2e2eb4320843c839ef4f081481))
+
+
+### Features
+
+* allow multiple hosts for critical css ([07f6272](https://github.com/SUI-Components/sui/commit/07f6272b5e1d5d5d9db6aaf138e34d3cf22a77bc))
+
+
+
+# 7.14.0 (2021-01-27)
+
+
+### Features
+
+* use GITHUB_TOKEN instead GH_TOKEN to normalize but keep compatibility ([8f6b5bb](https://github.com/SUI-Components/sui/commit/8f6b5bb3c68ed2f706bee4c7c8c5a0f270b49e1c))
+
+
+
+# 7.13.0 (2021-01-13)
+
+
+### Bug Fixes
+
+* rollback commander version to avoid clashing options names ([5642357](https://github.com/SUI-Components/sui/commit/5642357b5753aa57376088d36d42450b695461b5))
+
+
+
+# 7.12.0 (2020-12-30)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([b90af66](https://github.com/SUI-Components/sui/commit/b90af6658d8df16348098709103a288d9b938521))
+
+
+
+# 7.11.0 (2020-12-14)
+
+
+### Bug Fixes
+
+* modify constant naming ([f4fcf04](https://github.com/SUI-Components/sui/commit/f4fcf04f130bd777c174a66feaed9c6639fa1978))
+* remove the fucking slash again ([313e7a2](https://github.com/SUI-Components/sui/commit/313e7a2c00e6eb53ac5afa28619feace78db4a72))
+
+
+### Features
+
+* update the critical css service domain ([8a72d78](https://github.com/SUI-Components/sui/commit/8a72d7810592e1e870fba5b161d6163fd52bda83))
+
+
+
+# 7.10.0 (2020-11-24)
+
+
+### Features
+
+* remove prpl code ([ac28a31](https://github.com/SUI-Components/sui/commit/ac28a3189a2199c06565ba41c6cc1ccb76ef7fc0))
+* remove prpl service usage ([c239b3f](https://github.com/SUI-Components/sui/commit/c239b3fc3b4c1f36964f3e390c4380364859a15d))
+
+
+
+# 7.9.0 (2020-11-20)
+
+
+### Bug Fixes
+
+* fix program value ([9ce59ad](https://github.com/SUI-Components/sui/commit/9ce59ad7c238ffe2bf3f941cf5bbe42c62473a39))
+* set docker registry in bin file ([5d6d515](https://github.com/SUI-Components/sui/commit/5d6d515a16234cd766ce4f1811d568e8142f1a74))
+* unformat some comments in readme ([7471f14](https://github.com/SUI-Components/sui/commit/7471f14a5d64c2c4ec605f335e1d745c4629125a))
+
+
+### Features
+
+* add option to define a custom registry for the pm2 dependency ([21a7707](https://github.com/SUI-Components/sui/commit/21a77072e54f1a079defff8d643ec2f926bc6e7c))
+
+
 
 # 7.8.0 (2020-09-15)
 

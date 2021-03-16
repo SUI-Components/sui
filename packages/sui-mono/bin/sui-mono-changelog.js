@@ -4,12 +4,10 @@ const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
 const {
-  getScopes,
-  getPackagesFolder,
-  isMonoPackage,
+  checkIsMonoPackage,
+  getWorkspaces,
   getChangelogFilename
 } = require('../src/config')
-const {getPackagesPaths} = require('@s-ui/helpers/packages')
 
 program
   .usage('<folder1> <folder2> <etc>')
@@ -30,25 +28,26 @@ program
   .parse(process.argv)
 
 const CHANGELOG_NAME = getChangelogFilename()
-const cwd = path.join(process.cwd(), getPackagesFolder())
-const getRepoFolders = () =>
-  !isMonoPackage() ? getPackagesPaths(cwd)(getScopes()) : ['.']
-const folders = program.args.length ? program.args : getRepoFolders()
+
+const folders = program.args.length ? program.args : getWorkspaces()
+
 const changelogOptions = {
   preset: 'angular',
   append: false,
   releaseCount: 0,
   outputUnreleased: false,
-  transform: function(commit, cb) {
+  transform: (commit, cb) => {
     if (commit.type === 'release') {
       // Identifies commits that set a version as tags are not set
-      commit.version = commit.subject.replace('v', '')
+      commit.version = commit.subject.replace('v', '').replace(' [skip ci]', '')
     }
-    if (!isMonoPackage()) {
+
+    if (!checkIsMonoPackage()) {
       // Remove repeated scope for multipackage
       commit.scope = ''
     }
     commit.committerDate = commit.committerDate.substring(0, 10) // simple date format
+
     cb(null, commit)
   }
 }
@@ -65,15 +64,11 @@ function generateChangelog(folder) {
     const outputFile = path.join(folder, CHANGELOG_NAME)
     const output = fs.createWriteStream(path.join(outputFile))
     let chunkCount = 0
+
     return conventionalChangelog(changelogOptions, {}, gitRawCommitsOpts)
       .on('data', chunk => {
-        if (!chunkCount++) {
-          // First chunk is always an empty release
-          output.write(
-            '# Change Log\n\n' +
-              'All notable changes to this project will be documented in this file.\n\n'
-          )
-        }
+        // First chunk is always an empty release
+        if (!chunkCount++) output.write('# CHANGELOG\n\n')
         output.write(chunk)
       })
       .on('end', () => output.end(() => resolve(outputFile)))
@@ -85,5 +80,5 @@ function generateChangelog(folder) {
 }
 
 Promise.all(folders.map(path => generateChangelog(path)))
-  .then(code => process.exit(0))
-  .catch(code => process.exit(1))
+  .then(() => process.exit(0))
+  .catch(() => process.exit(1))

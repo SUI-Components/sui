@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "2.17.0",
+  "version": "2.20.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "bowser": "1.8.1",
+    "bowser": "2.11.0",
     "cookie": "0.3.1",
     "htmr": "0.8.8",
     "js-cookie": "2.1.4",

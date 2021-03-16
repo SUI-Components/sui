@@ -1,5 +1,4 @@
 import {expect} from 'chai'
-import React from 'react'
 import {Redirect, Route, match} from '../../src/index'
 
 const matchPromise = ({location = '/', withRoutes}) => {

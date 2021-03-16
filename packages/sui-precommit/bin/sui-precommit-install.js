@@ -14,7 +14,7 @@ const {CI = false, INIT_CWD} = process.env
 const cwd = INIT_CWD || process.cwd()
 const pkgPath = path.join(cwd, 'package.json')
 
-const HUSKY_VERSION = '4.2.5'
+const HUSKY_VERSION = '4.3.0'
 
 const {name} = readPackageJson()
 /** We avoid performing the precommit install:

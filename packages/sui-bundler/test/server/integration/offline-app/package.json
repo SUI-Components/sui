@@ -1,5 +1,5 @@
 {
-  "name": "basic-app",
+  "name": "@s-ui/studio-offline-app",
   "sui-bundler": {
     "offline": {
       "importScripts": [

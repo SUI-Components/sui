@@ -1,6 +1,37 @@
-# Change Log
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
+# 4.2.0 (2021-01-22)
+
+
+### Bug Fixes
+
+* widgets not loading in dev mode ([219dfe3](https://github.com/SUI-Components/sui/commit/219dfe3b3224e187ba8d131d56fcd05fac3a7898))
+
+
+
+# 4.1.0 (2020-12-22)
+
+
+### Features
+
+* Use latest and same commander version and avoid installing different versions ([816d42b](https://github.com/SUI-Components/sui/commit/816d42b96b6716ea412c364bc2551f76b71b5195))
+
+
+
+# 4.0.0 (2020-11-10)
+
+
+### Features
+
+* update README with breaking changes and migration guide ([df67a6e](https://github.com/SUI-Components/sui/commit/df67a6e632ada21fd1bee16447c015864cb6c3ba))
+* use latest sui-bundler and remove deprecated options ([74c14ba](https://github.com/SUI-Components/sui/commit/74c14ba82555e68e212f9342ca4bbe16760ae7b3))
+
+
+### BREAKING CHANGES
+
+* Uses latest sui-bundler. Remove deprecated options. Use new jsx import.
+
+
 
 # 3.15.0 (2020-09-28)
 
