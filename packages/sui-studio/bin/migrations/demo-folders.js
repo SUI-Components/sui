@@ -2,6 +2,7 @@
 
 const glob = require('fast-glob')
 const fs = require('fs-extra')
+const {checkAndClean} = require('./utils')
 
 const ENCODING = 'utf8'
 const log = console.log
@@ -41,12 +42,13 @@ function migrateDemoFolders() {
     const demoPath = `./demo/${category}/${component}`
     const newDemoPath = `./components/${category}/${component}/demo`
 
-    if (fs.existsSync(newDemoPath)) {
-      fs.moveSync(demoPath, newDemoPath)
-      log(`Moved folder: ${demoPath}`)
-      replaceImportedPaths(newDemoPath)
-      log(`Fixed imported paths`)
-    }
+    // Clean the new path if it already exists
+    checkAndClean(newDemoPath)
+
+    fs.moveSync(demoPath, newDemoPath)
+    log(`Moved folder: ${demoPath}`)
+    replaceImportedPaths(newDemoPath)
+    log(`Fixed imported paths`)
   })
 
   fs.removeSync('./demo')

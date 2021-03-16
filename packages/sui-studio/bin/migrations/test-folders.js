@@ -2,6 +2,9 @@
 
 const glob = require('fast-glob')
 const fs = require('fs-extra')
+const {checkAndClean} = require('./utils')
+
+const log = console.log
 
 function migrateTestFolders() {
   const files = glob.sync(['test/*/*/index.js'])
@@ -15,16 +18,17 @@ function migrateTestFolders() {
     const testPath = `./test/${category}/${component}`
     const newTestPath = `./components/${category}/${component}/test`
 
-    if (!fs.existsSync(newTestPath)) {
-      fs.moveSync(testPath, newTestPath)
-      console.log(`Moved folder: ${testPath}`)
-      fs.moveSync(`${newTestPath}/index.js`, `${newTestPath}/index.test.js`)
-      console.log(`Renamed test file: ${testPath}`)
-    }
+    // Clean the new path if it already exists.
+    checkAndClean(newTestPath)
+
+    fs.moveSync(testPath, newTestPath)
+    log(`Moved folder: ${testPath}`)
+    fs.moveSync(`${newTestPath}/index.js`, `${newTestPath}/index.test.js`)
+    log(`Renamed test file: ${testPath}`)
   })
 
   fs.removeSync('./test')
-  console.log('Removed test folder not needed anymore')
+  log('Removed test folder not needed anymore')
 }
 
 module.exports = migrateTestFolders
