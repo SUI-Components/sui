@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.6.0 (2021-03-16)
+
+
+### Features
+
+* **packages/sui-pde:** added different strategies for server/client hook execution ([b3cbc07](https://github.com/SUI-Components/sui/commit/b3cbc07fb08831599a973b9af034ad7864dcf9ff))
+* **packages/sui-pde:** launch experiment viewed event ([03bba5c](https://github.com/SUI-Components/sui/commit/03bba5c4c7e9daf4473d9ad45e8c2dfe4beb95d0))
+
+
+
 # 1.5.0 (2021-03-10)
 
 
