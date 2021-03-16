@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.35.0 (2021-03-16)
+
+
+### Features
+
+* **packages/sui-studio:** setupEnvironment with multiple contexts ([37877cc](https://github.com/SUI-Components/sui/commit/37877cc32f9cb184211ce750fd3df8952e7eed36))
+
+
+
 # 9.34.0 (2021-03-10)
 
 
