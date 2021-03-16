@@ -45,7 +45,8 @@
     "raw-loader": "4.0.2",
     "react": "17",
     "react-dom": "17",
-    "react-docgen": "5.3.1"
+    "react-docgen": "5.3.1",
+    "react-test-renderer": "17.0.1"
   },
   "config": {
     "sui-bundler": {
