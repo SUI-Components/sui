@@ -206,7 +206,7 @@ const ComponentWithContext = () => {
       const value = useContext(ThemeContext)
       return <p>{value}</p>
     }
-const setup = customSetupEnvironment(ComponentWithContext, {
+const setup = setupEnvironment(ComponentWithContext, {
   contexts: [
     {
       provider: ThemeContext.Provider,
