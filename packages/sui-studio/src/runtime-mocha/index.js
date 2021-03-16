@@ -31,7 +31,7 @@ try {
 const testsFromComponentsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/(.*).(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/index.test.(js|jsx)/
 )
 
 const allTestsFiles = testsFiles.keys().concat(testsFromComponentsFiles.keys())
