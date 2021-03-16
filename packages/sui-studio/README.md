@@ -141,9 +141,9 @@ describe('AtomButton', () => {
 
 The component will be a global object when running tests, so it is PARAMOUNT NOT to import it. In order to avoid problems with the linter, add relevant comments, as in the example above.
 
-### How works with different contexts
+### How works with different SUI contexts
 
-If there is a `demo/context.js` file where you define several contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
+If there is a `demo/context.js` file where you define several SUI contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
 
 First, you have to import the patcher to create the `context` object, inside the `describe` object
 
@@ -191,6 +191,39 @@ describe.context.other('atom/button', AtomButton => {
   })
 })
 ```
+
+### How works with other context (Not SUI Context)
+
+Each test has a `setupEnvironment` function in global scope. This function works equal to React Testing Library (RTL) `render` method but has two wrapped features:
+
+- It uses a container to isolate the tested component.
+- It has a `contexts` render option in order to pass an array of contexts providers to be wrapped.
+
+An example could be:
+
+```js
+const ComponentWithContext = () => {
+      const value = useContext(ThemeContext)
+      return <p>{value}</p>
+    }
+const setup = customSetupEnvironment(ComponentWithContext, {
+  contexts: [
+    {
+      provider: ThemeContext.Provider,
+      value: 'dark'
+    }
+  ],
+  wrapper: ({children}) => (
+    <div>
+      <p>Hello</p>
+      {children}
+    </div>
+  )
+})
+```
+
+You can see RTL render options documentation [here](https://testing-library.com/docs/react-testing-library/api/#render-options)
+
 
 ### Known issue: Test a memoized component
 
