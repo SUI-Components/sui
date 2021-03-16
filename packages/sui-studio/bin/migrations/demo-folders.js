@@ -15,10 +15,10 @@ function replaceImportedPaths(rootPath) {
       if (err) return log(err)
 
       const replacedData = data
-        .replace(new RegExp('../../../utils', 'g'), '../../../../utils')
+        .replace(new RegExp('../../../utils', 'g'), 'utils')
         .replace(
           new RegExp('../../../../components/(.*)/src', 'g'),
-          '../../src'
+          'components/$1/src'
         )
 
       // Skip writing the file if there's nothing new.
