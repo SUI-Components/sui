@@ -55,15 +55,6 @@ const importDemo = ({category, component}) =>
       )
   })
 
-const importEvents = ({category, component}) =>
-  safeImport({
-    importFile: () =>
-      import(
-        /* webpackChunkName: "events-[request]" */
-        `${__BASE_DIR__}/components/${category}/${component}/demo/events.js`
-      )
-  })
-
 export const importGlobals = () => {
   // we use a variable for the file so Webpack
   // could safe fail if the file doesn't exist
@@ -81,6 +72,5 @@ export const importMainModules = params =>
   Promise.all([
     importReactComponent(params),
     importContexts(params),
-    importEvents(params),
     importDemo(params)
   ])
