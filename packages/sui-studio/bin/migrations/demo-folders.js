@@ -7,28 +7,50 @@ const {checkAndClean} = require('./utils')
 const ENCODING = 'utf8'
 const log = console.log
 
-function replaceImportedPaths(rootPath) {
-  const demoFiles = glob.sync([`${rootPath}/**/*.{js,scss}`])
+function replaceImportedPaths(file) {
+  try {
+    const data = fs.readFileSync(file, ENCODING)
 
-  demoFiles.forEach(file => {
-    fs.readFile(file, ENCODING, (err, data) => {
-      if (err) return log(err)
+    const replacedData = data
+      .replace(new RegExp('../../../utils', 'g'), 'utils')
+      .replace(
+        new RegExp('../../../../components/(.*)/src', 'g'),
+        'components/$1/src'
+      )
 
-      const replacedData = data
-        .replace(new RegExp('../../../utils', 'g'), 'utils')
-        .replace(
-          new RegExp('../../../../components/(.*)/src', 'g'),
-          'components/$1/src'
-        )
+    // Skip writing the file if there's nothing new.
+    if (replacedData === data) return
 
-      // Skip writing the file if there's nothing new.
-      if (replacedData === data) return
+    fs.writeFileSync(file, replacedData, ENCODING)
+  } catch (error) {
+    if (error) return log(error)
+  }
+}
 
-      fs.writeFile(file, replacedData, ENCODING, err => {
-        if (err) return log(err)
-      })
-    })
-  })
+function flatFile(file) {
+  const shouldFlat = file.match('/demo/demo/')
+
+  try {
+    if (shouldFlat) {
+      const newFilePath = file.replace('demo/demo', 'demo')
+      fs.moveSync(file, newFilePath)
+    }
+  } catch (error) {
+    if (error) return log(error)
+  }
+}
+
+function renameDemoJs(file) {
+  const shouldRename = file.match(`/demo.js`)
+
+  try {
+    if (shouldRename) {
+      const newFileName = file.replace('demo.js', 'index.js')
+      fs.renameSync(file, newFileName)
+    }
+  } catch (error) {
+    if (error) return log(error)
+  }
 }
 
 function migrateDemoFolders() {
@@ -47,8 +69,16 @@ function migrateDemoFolders() {
 
     fs.moveSync(demoPath, newDemoPath)
     log(`Moved folder: ${demoPath}`)
-    replaceImportedPaths(newDemoPath)
+
+    const demoFiles = glob.sync([`${newDemoPath}/**/*.{js,scss}`])
+    demoFiles.forEach(file => {
+      replaceImportedPaths(file) // Fix imported paths
+      flatFile(file) // Move /demo/demo/ files to demo/
+      renameDemoJs(file) // Rename demo.js to index.js
+    })
     log(`Fixed imported paths`)
+    log(`Demo folder flattened`)
+    log(`demo.js files renamed to index.js`)
   })
 
   fs.removeSync('./demo')

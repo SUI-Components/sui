@@ -12,7 +12,6 @@ const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
 
 program
-  .option('-R, --router', 'add routering for this component')
   .option('-C, --context', 'add context for this component')
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
@@ -21,10 +20,10 @@ program
     console.log('')
     console.log('    $ sui-studio generate <category> <component>')
     console.log('    $ sui-studio generate cards alfa')
-    console.log('    $ sui-studio generate searchs re-beta -P mt')
-    console.log('    $ sui-studio generate searchs re-beta -R -C')
-    console.log('    $ custom-help --help')
-    console.log('    $ custom-help -h')
+    console.log('    $ sui-studio generate searchs re-beta --prefix mt')
+    console.log('    $ sui-studio generate searchs re-beta --context')
+    console.log('    $ sui-studio --help')
+    console.log('    $ sui-studio -h')
     console.log('')
   })
   .parse(process.argv)
@@ -57,15 +56,14 @@ const COMPONENT_PACKAGE_NPMIGNORE_FILE = `${COMPONENT_PATH}.npmignore`
 const COMPONENT_ENTRY_SCSS_POINT_FILE = `${COMPONENT_PATH}src/index.scss`
 const COMPONENT_README_FILE = `${COMPONENT_PATH}README.md`
 
-const DEMO_DIR = `${BASE_DIR}/demo/${category}/${component}/`
-const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}playground`
+const DEMO_DIR = `${COMPONENT_PATH}/demo/`
+const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}index.js`
 const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
-const COMPONENT_ROUTES_FILE = `${DEMO_DIR}routes.js`
 
 const TEST_DIR = `${COMPONENT_PATH}/test/`
-const COMPONENT_TEST_FILE = `${TEST_DIR}index.js`
+const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, router, scope, prefix = 'sui'} = program
+const {context, scope, prefix = 'sui'} = program
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
@@ -185,7 +183,7 @@ return (<${componentInPascal} />)
 
 \`\`\`css
 @import '~@s-ui/theme/lib/index';
-// @import 'your theme';
+/* @import 'your theme'; */
 @import '~${packageName}/lib/index';
 \`\`\`
 
@@ -193,18 +191,13 @@ return (<${componentInPascal} />)
 > **Find full description and more examples in the [demo page](#).**`
   ),
 
-  writeFile(COMPONENT_PLAYGROUND_FILE, `return (<${componentInPascal} />)`),
-
-  router &&
-    writeFile(
-      COMPONENT_ROUTES_FILE,
-      `module.exports = {
-  pattern: '/:lang',
-  'default': '/es',
-  'en': '/en',
-  'de': '/de'
-}`
-    ),
+  writeFile(
+    COMPONENT_PLAYGROUND_FILE,
+    `
+    import ${componentInPascal} from 'components/${category}/${component}/'
+    export default () => (<${componentInPascal} />)
+  `
+  ),
 
   context &&
     writeFile(
