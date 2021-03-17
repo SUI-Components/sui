@@ -40,7 +40,8 @@ module.exports = {
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {...aliasFromConfig},
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json'],
+    modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: config.vendor
     ? {
