@@ -2,7 +2,7 @@
 import {createContext, useContext} from 'react'
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
-import customSetupEnvironment from '../src/environment-mocha/setupEnvironment'
+import setupEnvironment from '../src/environment-mocha/setupEnvironment'
 
 chai.use(chaiDOM)
 
@@ -12,7 +12,7 @@ describe('setupEnvironment', () => {
       return <p>{text}</p>
     }
 
-    const setup = customSetupEnvironment(SimpleComponent)
+    const setup = setupEnvironment(SimpleComponent)
 
     it('Can render a component', () => {
       // Given
@@ -34,7 +34,7 @@ describe('setupEnvironment', () => {
       const value = useContext(ThemeContext)
       return <p>{value}</p>
     }
-    const setup = customSetupEnvironment(ComponentWithContext, {
+    const setup = setupEnvironment(ComponentWithContext, {
       contexts: [
         {
           provider: ThemeContext.Provider,
@@ -59,7 +59,7 @@ describe('setupEnvironment', () => {
     const Component = () => {
       return <p>Example</p>
     }
-    const setup = customSetupEnvironment(Component, {
+    const setup = setupEnvironment(Component, {
       wrapper: ({children}) => (
         <div>
           <p>Hello</p>
@@ -87,7 +87,7 @@ describe('setupEnvironment', () => {
       const value = useContext(ThemeContext)
       return <p>{value}</p>
     }
-    const setup = customSetupEnvironment(ComponentWithContext, {
+    const setup = setupEnvironment(ComponentWithContext, {
       contexts: [
         {
           provider: ThemeContext.Provider,

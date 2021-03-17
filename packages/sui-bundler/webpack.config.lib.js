@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index')
+const path = require('path')
 const minifyJs = require('./shared/minify-js')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
@@ -12,7 +13,8 @@ module.exports = {
     alias: {
       ...aliasFromConfig
     },
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json'],
+    modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: config.vendor
     ? {
