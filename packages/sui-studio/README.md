@@ -103,8 +103,8 @@ npx sui-studio build
 ```
 
 ```bash
-# run the build just for changed components and also execute whatever you want before the build (phoenix, lint...)
-npx sui-studio build --only-changes --before-build="npx sui-mono phoenix"
+# run the build just for changed components in a branch and also execute whatever you want before the build (phoenix, lint...)
+GITHUB_PULL_REQUEST=123 npx sui-studio build --only-changes --before-build="npx sui-mono phoenix"
 ```
 
 ### `$ sui-studio dev`
@@ -203,9 +203,9 @@ An example could be:
 
 ```js
 const ComponentWithContext = () => {
-      const value = useContext(ThemeContext)
-      return <p>{value}</p>
-    }
+  const value = useContext(ThemeContext)
+  return <p>{value}</p>
+}
 const setup = customSetupEnvironment(ComponentWithContext, {
   contexts: [
     {
@@ -223,7 +223,6 @@ const setup = customSetupEnvironment(ComponentWithContext, {
 ```
 
 You can see RTL render options documentation [here](https://testing-library.com/docs/react-testing-library/api/#render-options)
-
 
 ### Known issue: Test a memoized component
 
