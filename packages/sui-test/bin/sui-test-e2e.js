@@ -28,6 +28,7 @@ const objectToCommaString = obj =>
     .join(',')
 
 const supportFilesFolderPath = path.join(TESTS_FOLDER, 'support')
+const pluginsFilesFolderPath = path.join(TESTS_FOLDER, 'plugins')
 
 program
   .option(
@@ -87,6 +88,9 @@ const cypressConfig = {
 
 if (fs.existsSync(supportFilesFolderPath)) {
   cypressConfig.supportFile = supportFilesFolderPath
+}
+if (fs.existsSync(pluginsFilesFolderPath)) {
+  cypressConfig.pluginsFile = pluginsFilesFolderPath
 }
 
 if (userAgent) {

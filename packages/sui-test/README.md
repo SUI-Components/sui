@@ -122,6 +122,30 @@ Cypress.Commands.add('login', () => {
 
 Then you can use in your specs `cy.login()`
 
+### Plugin files
+
+If you need to have plugins, then create a `./test-e2e/plugins` directory, it will be detected and added to the `cypress.json` configuration.
+
+Plugins enable you to tap into, modify, or extend the internal behavior of Cypress.
+
+Example:
+
+`./test-e2e/plugins/index.js`
+
+```js
+module.exports = (on, config) => {
+  /**
+   * @see https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
+   */
+  on('before:browser:launch', (browser, launchOptions) => {
+    if (browser.name === 'chrome') {
+      launchOptions.args.push('--disable-dev-shm-usage')
+    }
+    return launchOptions
+  })
+}
+```
+
 ### Options
 
 ```sh
