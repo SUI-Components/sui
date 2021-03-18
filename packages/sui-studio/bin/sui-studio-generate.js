@@ -193,20 +193,27 @@ return (<${componentInPascal} />)
 
   writeFile(
     COMPONENT_PLAYGROUND_FILE,
-    `
-    import ${componentInPascal} from 'components/${category}/${component}/'
-    export default () => (<${componentInPascal} />)
-  `
+    `import ${componentInPascal} from 'components/${category}/${component}/'
+export default () => <${componentInPascal} />
+`
   ),
 
   context &&
     writeFile(
       COMPONENT_CONTEXT_FILE,
       `module.exports = {
-  'default': {
-    i18n: {t (s) { return s.split('').reverse().join('') }}
+  default: {
+    i18n: {
+      t(s) {
+        return s
+          .split('')
+          .reverse()
+          .join('')
+      }
+    }
   }
-}`
+}
+`
     ),
   writeFile(
     COMPONENT_TEST_FILE,

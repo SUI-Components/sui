@@ -70,7 +70,7 @@ function migrateDemoFolders() {
     fs.moveSync(demoPath, newDemoPath)
     log(`Moved folder: ${demoPath}`)
 
-    const demoFiles = glob.sync([`${newDemoPath}/**/*.{js,scss}`])
+    const demoFiles = glob.sync([`${newDemoPath}/**/*.{js,scss,json}`])
     demoFiles.forEach(file => {
       replaceImportedPaths(file) // Fix imported paths
       flatFile(file) // Move /demo/demo/ files to demo/
