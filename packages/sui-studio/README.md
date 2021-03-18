@@ -103,7 +103,7 @@ npx sui-studio build
 ```
 
 ```bash
-# run the build just for changed components in a branch and also execute whatever you want before the build (phoenix, lint...)
+# run the build just for changed components on a PR and also execute whatever you want before the build (phoenix, lint...)
 GITHUB_PULL_REQUEST=123 npx sui-studio build --only-changes --before-build="npx sui-mono phoenix"
 ```
 
