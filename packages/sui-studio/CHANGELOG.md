@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.36.0 (2021-03-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** get commits list from github api ([32b7b7b](https://github.com/SUI-Components/sui/commit/32b7b7bc50ee5b25ac692c14543e05e425463b82))
+* **sui-studio:** fix prop types warning for Style ([7b1af48](https://github.com/SUI-Components/sui/commit/7b1af48501d6817b1874ce6d89300d92eeba24cb))
+
+
+
 # 9.35.0 (2021-03-16)
 
 
