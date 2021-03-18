@@ -14,8 +14,8 @@ function replaceImportedPaths(file) {
     const replacedData = data
       .replace(new RegExp('../../../utils', 'g'), 'utils')
       .replace(
-        new RegExp('../../../../components/(.*)/src', 'g'),
-        'components/$1/src'
+        new RegExp('../../../(../)?components/(.*)/src', 'g'),
+        'components/$2/src'
       )
 
     // Skip writing the file if there's nothing new.
@@ -71,14 +71,16 @@ function migrateDemoFolders() {
     log(`Moved folder: ${demoPath}`)
 
     const demoFiles = glob.sync([`${newDemoPath}/**/*.{js,scss,json}`])
+
     demoFiles.forEach(file => {
       replaceImportedPaths(file) // Fix imported paths
       flatFile(file) // Move /demo/demo/ files to demo/
       renameDemoJs(file) // Rename demo.js to index.js
     })
-    log(`Fixed imported paths`)
-    log(`Demo folder flattened`)
-    log(`demo.js files renamed to index.js`)
+    log('Fixed imported paths')
+    checkAndClean(`${newDemoPath}/demo`)
+    log('Demo folder flattened and cleaned')
+    log('`demo.js` files renamed to `index.js`')
   })
 
   fs.removeSync('./demo')
