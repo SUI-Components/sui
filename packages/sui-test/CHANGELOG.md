@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 4.16.0 (2021-03-19)
+
+
+
 # 4.15.0 (2021-03-19)
 
 
@@ -7,6 +11,12 @@
 
 * **packages/sui-test:** e2e docker image to use browsers ([96ee8b0](https://github.com/SUI-Components/sui/commit/96ee8b030958661cef2e600224fb7ca607f79d27))
 * **packages/sui-test:** follow up 96ee8b03 ([362649a](https://github.com/SUI-Components/sui/commit/362649a22110a865d96335dc8b4009b31255dc94))
+
+
+### Features
+
+* **packages/sui-test:** add headless and default command timeout options ([049288d](https://github.com/SUI-Components/sui/commit/049288d5211e9860904c1a9c79761cfcc15c8e40))
+* **packages/sui-test:** replace -dct by -T ([f3266a6](https://github.com/SUI-Components/sui/commit/f3266a6c92fafbd431e4a102932924d5003ba44d))
 
 
 
