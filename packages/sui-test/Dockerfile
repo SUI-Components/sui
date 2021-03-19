@@ -1,4 +1,4 @@
-FROM cypress/browsers:node12.18.3-chrome89-ff86
+FROM cypress/browsers
 
 WORKDIR /usr/src
 
