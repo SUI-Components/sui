@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.15.0 (2021-03-19)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** e2e docker image to use browsers ([96ee8b0](https://github.com/SUI-Components/sui/commit/96ee8b030958661cef2e600224fb7ca607f79d27))
+* **packages/sui-test:** follow up 96ee8b03 ([362649a](https://github.com/SUI-Components/sui/commit/362649a22110a865d96335dc8b4009b31255dc94))
+
+
+
 # 4.14.0 (2021-03-18)
 
 
