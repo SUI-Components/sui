@@ -36,6 +36,10 @@ program
     'URL of the site to execute tests (in ./test-e2e/) on.'
   )
   .option(
+    '-dct, --defaultCommandTimeout <ms>',
+    'Time, in milliseconds, to wait until most DOM based commands are considered timed out.'
+  )
+  .option(
     '-S, --screenshotsOnError',
     'Take screenshots of page on any failure.'
   )
@@ -52,6 +56,10 @@ program
     '-b, --browser <browser>',
     'Select a different browser (chrome|edge|firefox)'
   )
+  .option(
+    '-H, --headless',
+    'Hide the browser instead of running headed (default for Electron)'
+  )
   .option('-N, --noWebSecurity', 'Disable all web securities')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-P, --parallel', 'Run tests on parallelRun tests on parallel')
@@ -67,11 +75,13 @@ program
 
 const {
   baseUrl,
+  defaultCommandTimeout,
   browser,
   ci,
   group,
   gui,
   key,
+  headless,
   noWebSecurity,
   parallel,
   record,
@@ -84,6 +94,10 @@ const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
   baseUrl,
   fixturesFolder: path.join(TESTS_FOLDER, 'fixtures')
+}
+
+if (defaultCommandTimeout) {
+  cypressConfig.defaultCommandTimeout = defaultCommandTimeout
 }
 
 if (fs.existsSync(supportFilesFolderPath)) {
@@ -138,6 +152,7 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
       '--project=' + projectURI,
       key && '--key=' + key,
       browser && '--browser=' + browser,
+      headless && '--headless',
       parallel && '--parallel',
       record && '--record'
     ])

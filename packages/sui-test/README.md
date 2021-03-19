@@ -155,6 +155,7 @@ module.exports = (on, config) => {
   Options:
 
     -B, --baseUrl <baseUrl>                  URL of the site to execute tests (in ./test/e2e/) on.
+    -dct, --defaultCommandTimeout <ms>       Time, in milliseconds, to wait until most DOM based commands are considered timed out.
     -S, --screenshotsOnError                 Take screenshots of page on any failure.
     -U, --userAgentAppend <userAgentAppend>  Append string to UserAgent header.
     -UA, --userAgent <userAgent>             Overwrite string to UserAgent header.
@@ -162,6 +163,7 @@ module.exports = (on, config) => {
     -C, --ci                                 CI Mode, reduces memory consumption
     -h, --help                               output usage information
     -b, --browser <browser>                  Select a different browser (chrome|edge|firefox)
+    -H, --headless                           Hide the browser instead of running headed (default for Electron)
     -N, --noWebSecurity                      Disable all web securities (CORS)
     -K, --key                                It is used to authenticate the project into the Dashboard Service
     -P, --parallel                           Run tests on parallel
