@@ -155,7 +155,7 @@ module.exports = (on, config) => {
   Options:
 
     -B, --baseUrl <baseUrl>                  URL of the site to execute tests (in ./test/e2e/) on.
-    -dct, --defaultCommandTimeout <ms>       Time, in milliseconds, to wait until most DOM based commands are considered timed out.
+    -T, --defaultCommandTimeout <ms>         Time, in milliseconds, to wait until most DOM based commands are considered timed out.
     -S, --screenshotsOnError                 Take screenshots of page on any failure.
     -U, --userAgentAppend <userAgentAppend>  Append string to UserAgent header.
     -UA, --userAgent <userAgent>             Overwrite string to UserAgent header.

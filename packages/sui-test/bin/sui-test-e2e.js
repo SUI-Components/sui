@@ -36,7 +36,7 @@ program
     'URL of the site to execute tests (in ./test-e2e/) on.'
   )
   .option(
-    '-dct, --defaultCommandTimeout <ms>',
+    '-T, --defaultCommandTimeout <ms>',
     'Time, in milliseconds, to wait until most DOM based commands are considered timed out.'
   )
   .option(
