@@ -1,5 +1,25 @@
 # CHANGELOG
 
+# 2.0.0 (2021-03-22)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix param name trackExperimentViewed ([6d890a0](https://github.com/SUI-Components/sui/commit/6d890a055f0e767c970ddd6ba079b611ec6ed1f2))
+* **packages/sui-pde:** getEnabledFeatures returns an array not a promise ([47a754c](https://github.com/SUI-Components/sui/commit/47a754c84a86a27c07690168bf69232d2fe4c7ae))
+
+
+### Features
+
+* **packages/sui-pde:** add custom track to useExperiment ([81c8f8f](https://github.com/SUI-Components/sui/commit/81c8f8f28296ea58b9128961aba8da98f7d4fc10))
+
+
+### BREAKING CHANGES
+
+* **packages/sui-pde:** useExperiment now uses named parameters
+
+
+
 # 1.6.0 (2021-03-16)
 
 
