@@ -15,36 +15,15 @@ const importAll = request => request.keys().forEach(request)
 const originalKarmaLoader = window.__karma__.loaded
 window.__karma__.loaded = () => {}
 
-// default testFiles in case /test folder does not exist
-let testsFiles = () => {}
-testsFiles.keys = () => []
-
-try {
-  // get all tests files available using a regex
-  testsFiles = require.context(
-    `${__BASE_DIR__}/test/`,
-    true,
-    /\.\/(\w+)\/(\w+)\/index.(js|jsx)$/
-  )
-} catch (e) {}
-
-const testsFromComponentsFiles = require.context(
+const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
   /\.\/(\w+)\/(\w+)\/test\/index.test.(js|jsx)/
 )
 
-const allTestsFiles = testsFiles.keys().concat(testsFromComponentsFiles.keys())
-
-if (testsFiles.keys().length) {
-  console.warn(
-    '[deprecated] Using `test` root folder for testing components is deprecated. Please, consider using the new way by putting a `test` folder inside the /components/[category]/[component]/test'
-  )
-}
-
 // get all the needed components from the available tests
 Promise.all(
-  allTestsFiles.map(async key => {
+  testsFiles.keys().map(async key => {
     // get the category component from the segments of the path
     // ex: ./card/property/index.js -> card property
     const [, category, component] = key.split('/')
@@ -86,10 +65,10 @@ Promise.all(
   .then(() => {
     // in order to force all tests, we're importing all the files that matches the pattern
     importAll(testsFiles)
-    importAll(testsFromComponentsFiles)
     // we're ready to go
     originalKarmaLoader.call(window.__karma__)
   })
   .catch(err => {
+    // eslint-disable-next-line no-console
     console.error(err)
   })
