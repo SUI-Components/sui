@@ -6,152 +6,6 @@ const RULES = {
   ERROR: 2
 }
 
-const ACCESIBILITY_RULES = {
-  'jsx-a11y/accessible-emoji': RULES.WARNING,
-  'jsx-a11y/alt-text': RULES.WARNING,
-  'jsx-a11y/anchor-has-content': RULES.WARNING,
-  'jsx-a11y/anchor-is-valid': RULES.WARNING,
-  'jsx-a11y/aria-activedescendant-has-tabindex': RULES.WARNING,
-  'jsx-a11y/aria-props': RULES.WARNING,
-  'jsx-a11y/aria-proptypes': RULES.WARNING,
-  'jsx-a11y/aria-role': RULES.WARNING,
-  'jsx-a11y/aria-unsupported-elements': RULES.WARNING,
-  // 'jsx-a11y/autocomplete-valid': RULES.WARNING, // we need to update eslint for this
-  'jsx-a11y/click-events-have-key-events': RULES.WARNING,
-  'jsx-a11y/control-has-associated-label': [
-    'off',
-    {
-      ignoreElements: [
-        'audio',
-        'canvas',
-        'embed',
-        'input',
-        'textarea',
-        'tr',
-        'video'
-      ],
-      ignoreRoles: [
-        'grid',
-        'listbox',
-        'menu',
-        'menubar',
-        'radiogroup',
-        'row',
-        'tablist',
-        'toolbar',
-        'tree',
-        'treegrid'
-      ],
-      includeRoles: ['alert', 'dialog']
-    }
-  ],
-  'jsx-a11y/heading-has-content': RULES.WARNING,
-  'jsx-a11y/html-has-lang': RULES.WARNING,
-  'jsx-a11y/iframe-has-title': RULES.WARNING,
-  'jsx-a11y/img-redundant-alt': RULES.WARNING,
-  'jsx-a11y/interactive-supports-focus': [
-    RULES.WARNING,
-    {
-      tabbable: [
-        'button',
-        'checkbox',
-        'link',
-        'searchbox',
-        'spinbutton',
-        'switch',
-        'textbox'
-      ]
-    }
-  ],
-  'jsx-a11y/label-has-associated-control': RULES.WARNING,
-  'jsx-a11y/label-has-for': 'off',
-  'jsx-a11y/media-has-caption': RULES.WARNING,
-  'jsx-a11y/mouse-events-have-key-events': RULES.WARNING,
-  'jsx-a11y/no-access-key': RULES.WARNING,
-  'jsx-a11y/no-autofocus': RULES.WARNING,
-  'jsx-a11y/no-distracting-elements': RULES.WARNING,
-  'jsx-a11y/no-interactive-element-to-noninteractive-role': [
-    RULES.WARNING,
-    {
-      tr: ['none', 'presentation']
-    }
-  ],
-  'jsx-a11y/no-noninteractive-element-interactions': [
-    RULES.WARNING,
-    {
-      handlers: [
-        'onClick',
-        'onError',
-        'onLoad',
-        'onMouseDown',
-        'onMouseUp',
-        'onKeyPress',
-        'onKeyDown',
-        'onKeyUp'
-      ],
-      alert: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
-      body: ['onError', 'onLoad'],
-      dialog: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
-      iframe: ['onError', 'onLoad'],
-      img: ['onError', 'onLoad']
-    }
-  ],
-  'jsx-a11y/no-noninteractive-element-to-interactive-role': [
-    RULES.WARNING,
-    {
-      ul: [
-        'listbox',
-        'menu',
-        'menubar',
-        'radiogroup',
-        'tablist',
-        'tree',
-        'treegrid'
-      ],
-      ol: [
-        'listbox',
-        'menu',
-        'menubar',
-        'radiogroup',
-        'tablist',
-        'tree',
-        'treegrid'
-      ],
-      li: ['menuitem', 'option', 'row', 'tab', 'treeitem'],
-      table: ['grid'],
-      td: ['gridcell']
-    }
-  ],
-  'jsx-a11y/no-noninteractive-tabindex': [
-    RULES.WARNING,
-    {
-      tags: [],
-      roles: ['tabpanel'],
-      allowExpressionValues: true
-    }
-  ],
-  'jsx-a11y/no-onchange': RULES.WARNING,
-  'jsx-a11y/no-redundant-roles': RULES.WARNING,
-  'jsx-a11y/no-static-element-interactions': [
-    RULES.WARNING,
-    {
-      allowExpressionValues: true,
-      handlers: [
-        'onClick',
-        'onMouseDown',
-        'onMouseUp',
-        'onKeyPress',
-        'onKeyDown',
-        'onKeyUp'
-      ]
-    }
-  ],
-  'jsx-a11y/role-has-required-aria-props': RULES.WARNING,
-  'jsx-a11y/role-supports-aria-props': RULES.WARNING,
-  'jsx-a11y/scope': RULES.WARNING,
-  'jsx-a11y/tabindex-no-positive': RULES.WARNING
-}
-
 const REACT_RULES = {
   'react-hooks/exhaustive-deps': RULES.WARNING, // Checks effect dependencies
   'react-hooks/rules-of-hooks': RULES.ERROR, // Checks rules of Hooks
@@ -222,13 +76,11 @@ module.exports = {
   plugins: [
     '@babel',
     'chai-friendly',
-    'jsx-a11y',
     'no-only-tests',
     'prettier',
     'react-hooks'
   ],
   rules: {
-    ...ACCESIBILITY_RULES,
     ...REACT_RULES,
     ...TESTING_RULES,
     'accessor-pairs': RULES.OFF,
