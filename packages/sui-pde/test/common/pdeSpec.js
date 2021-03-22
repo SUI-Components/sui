@@ -25,14 +25,14 @@ describe('@s-ui pde', () => {
     })
   })
 
-  it('loads the default adapter features', done => {
+  it('loads the default adapter features', () => {
     const ab = new SuiPDE()
     const features = ab.getEnabledFeatures()
     expect(features).to.be.an('array')
     expect(features.length).to.equal(0)
   })
 
-  it('loads the Optimizely Adapter features', done => {
+  it('loads the Optimizely Adapter features', () => {
     const ab = new SuiPDE({
       adapter: optimizelyAdapter
     })
@@ -40,7 +40,7 @@ describe('@s-ui pde', () => {
     expect(features).to.deep.equal(['a', 'b'])
   })
 
-  it('loads the Optimizely Adapter features even when no test consents', done => {
+  it('loads the Optimizely Adapter features even when no test consents', () => {
     const ab = new SuiPDE({
       adapter: optimizelyAdapter,
       hasUserConsents: false
