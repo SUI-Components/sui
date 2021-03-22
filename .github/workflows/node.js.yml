@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: 14
         registry-url: 'https://registry.npmjs.org'
-    - run: npm run phoenix:ci
+    - run: npm install --no-optional --no-save --no-fund --no-audit
     - run: npm run lint
     - run: npm run test:ci
     - run: npx -p ./packages/sui-ci sui-ci release
