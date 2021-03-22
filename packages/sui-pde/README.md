@@ -77,7 +77,7 @@ Cause: `Experiment Viewed` won't be sent.
 - Root: `Experiment Viewed` should has a different name or properties.
 Cause: Send a track with wrong values.
 
-In order to have a higher controll about that, useExperiment accepts a `browserTrackExperiment` callback to customize it
+In order to have a higher controll about that, useExperiment accepts a `trackExperimentViewed` callback to customize it
 
 ```js
 import {useExperiment} from '@s-ui/pde'
@@ -95,7 +95,7 @@ const trackExperiment = () => {
 const MyComponent = () => {
   const {variation} = useExperiment({
     experimentName: EXPERIMENT_NAME,
-    browserTrackExperiment: trackExperiment
+    trackExperimentViewed: trackExperiment
   })
 
   if (variation === 'variationB') return <MyVariationB />

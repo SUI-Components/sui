@@ -110,7 +110,7 @@ describe('useExperiment hook', () => {
             () =>
               useExperiment({
                 experimentName: 'test_experiment_id',
-                browserTrackExperiment: customTrack
+                trackExperimentViewed: customTrack
               }),
             {
               wrapper

@@ -42,13 +42,13 @@ const browserStrategy = {
  * @param {object} param
  * @param {string} param.experimentName
  * @param {object} param.attributes
- * @param {function} param.browserTrackExperiment
+ * @param {function} param.trackExperimentViewed
  * @return {{variation: string}}
  */
 export default function useExperiment({
   experimentName,
   attributes,
-  browserTrackExperiment
+  trackExperimentViewed
 } = {}) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
@@ -60,8 +60,8 @@ export default function useExperiment({
     let variationName
     const clientStrategy = {
       ...browserStrategy,
-      ...(browserTrackExperiment && {
-        trackExperiment: browserTrackExperiment
+      ...(trackExperimentViewed && {
+        trackExperiment: trackExperimentViewed
       })
     }
     const strategy = isNode ? serverStrategy : clientStrategy
@@ -76,7 +76,7 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [experimentName, pde, attributes, browserTrackExperiment])
+  }, [experimentName, pde, attributes, trackExperimentViewed])
 
   return {variation}
 }
