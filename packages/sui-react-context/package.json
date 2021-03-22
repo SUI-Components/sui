@@ -12,8 +12,5 @@
   "license": "ISC",
   "dependencies": {
     "hoist-non-react-statics": "3.3.2"
-  },
-  "peerDependencies": {
-    "@s-ui/component-peer-dependencies": "1"
   }
 }
