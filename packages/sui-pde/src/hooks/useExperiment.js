@@ -39,11 +39,17 @@ const browserStrategy = {
 
 /**
  * Hook to use a experiment
- * @param {string} experimentName
- * @param {object} attributes
+ * @param {object} param
+ * @param {string} param.experimentName
+ * @param {object} param.attributes
+ * @param {function} param.trackExperimentViewed
  * @return {{variation: string}}
  */
-export default function useExperiment(experimentName, attributes) {
+export default function useExperiment({
+  experimentName,
+  attributes,
+  trackExperimentViewed
+} = {}) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
     throw new Error(
@@ -52,7 +58,13 @@ export default function useExperiment(experimentName, attributes) {
 
   const variation = useMemo(() => {
     let variationName
-    const strategy = isNode ? serverStrategy : browserStrategy
+    const clientStrategy = {
+      ...browserStrategy,
+      ...(trackExperimentViewed && {
+        trackExperiment: trackExperimentViewed
+      })
+    }
+    const strategy = isNode ? serverStrategy : clientStrategy
 
     try {
       variationName = strategy.getVariation({pde, experimentName, attributes})
@@ -64,7 +76,7 @@ export default function useExperiment(experimentName, attributes) {
     }
 
     return variationName
-  }, [experimentName, pde, attributes])
+  }, [experimentName, pde, attributes, trackExperimentViewed])
 
   return {variation}
 }

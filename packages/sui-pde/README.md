@@ -50,17 +50,53 @@ When client-side rendering, sui-pde will load the datafile saved as `window.__IN
 
 Given experiment `experimentX` with 2 variations `variationA` and `variationB` render `MyVariationA` or `MyVariationB` component depending on the variation the user has being assigned. Render `MyVariationA` by default
 
-⚠️ if the user did not consent to or if optimizely decides that the user will not be part of the experiment of something goes wrong, `useExperiment` will return as variation value `null`
+⚠️ If the user did not consent to or if optimizely decides that the user will not be part of the experiment of something goes wrong, `useExperiment` will return as variation value `null`
 
-⚠️ the `useExperiment` hook will send call a global window.analytics.track method with `Experiment Viewed` as event name with the experiment properties so you are able to replicate the experiment in your analytics tool
+⚠️ The `useExperiment` hook will send call a global window.analytics.track method with `Experiment Viewed` as event name with the experiment properties so you are able to replicate the experiment in your analytics tool
 
 ```js
 import {useExperiment} from '@s-ui/pde'
 
-const EXPERIMENT = 'experimentX'
+const EXPERIMENT_NAME = 'experimentX'
 
 const MyComponent = () => {
-  const {variation} = useExperiment(EXPERIMENT)
+  const {variation} = useExperiment({experimentName: EXPERIMENT_NAME})
+
+  if (variation === 'variationB') return <MyVariationB />
+  return <MyVariationA>
+}
+```
+
+**Special cases for useExperiment `Experiment Viewed` track**
+
+Given useExperiment sends `Experiment Viewed` on being executed, some facts could happen:
+
+- Root: Analytics SDK is loaded async and loads after useExperiment hook has been called
+Cause: `Experiment Viewed` won't be sent.
+
+- Root: `Experiment Viewed` should has a different name or properties.
+Cause: Send a track with wrong values.
+
+In order to have a higher controll about that, useExperiment accepts a `trackExperimentViewed` callback to customize it
+
+```js
+import {useExperiment} from '@s-ui/pde'
+
+const EXPERIMENT_NAME = 'experimentX'
+
+const trackExperiment = () => {
+  window.analytics.track('Experiment Viewed', {
+      experimentName,
+      variationName,
+      customProperty: 'yay'
+    })
+}
+
+const MyComponent = () => {
+  const {variation} = useExperiment({
+    experimentName: EXPERIMENT_NAME,
+    trackExperimentViewed: trackExperiment
+  })
 
   if (variation === 'variationB') return <MyVariationB />
   return <MyVariationA>

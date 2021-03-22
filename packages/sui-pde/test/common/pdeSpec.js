@@ -15,7 +15,7 @@ describe('@s-ui pde', () => {
     optimizelyInstanceStub = {
       activate: sinon.stub().returns('variationA'),
       onReady: async () => true,
-      getEnabledFeatures: async () => ['a', 'b'],
+      getEnabledFeatures: () => ['a', 'b'],
       getVariation: sinon.stub().returns('variationB')
     }
     optimizelyAdapter = new OptimizelyAdapter({
@@ -25,40 +25,28 @@ describe('@s-ui pde', () => {
     })
   })
 
-  it('loads the default adapter features', done => {
+  it('loads the default adapter features', () => {
     const ab = new SuiPDE()
-    ab.getEnabledFeatures()
-      .then(features => {
-        expect(features).to.be.an('array')
-        expect(features.length).to.equal(0)
-        done()
-      })
-      .catch(done)
+    const features = ab.getEnabledFeatures()
+    expect(features).to.be.an('array')
+    expect(features.length).to.equal(0)
   })
 
-  it('loads the Optimizely Adapter features', done => {
+  it('loads the Optimizely Adapter features', () => {
     const ab = new SuiPDE({
       adapter: optimizelyAdapter
     })
-    ab.getEnabledFeatures()
-      .then(features => {
-        expect(features).to.deep.equal(['a', 'b'])
-        done()
-      })
-      .catch(done)
+    const features = ab.getEnabledFeatures()
+    expect(features).to.deep.equal(['a', 'b'])
   })
 
-  it('loads the Optimizely Adapter features even when no test consents', done => {
+  it('loads the Optimizely Adapter features even when no test consents', () => {
     const ab = new SuiPDE({
       adapter: optimizelyAdapter,
       hasUserConsents: false
     })
-    ab.getEnabledFeatures()
-      .then(features => {
-        expect(features).to.deep.equal(['a', 'b'])
-        done()
-      })
-      .catch(done)
+    const features = ab.getEnabledFeatures()
+    expect(features).to.deep.equal(['a', 'b'])
   })
 
   it('should call optimizelys sdk activate fn', () => {
@@ -126,7 +114,7 @@ describe('@s-ui pde', () => {
       const optimizelyInstanceStub = {
         activate: sinon.stub().returns('variationA'),
         onReady: async () => true,
-        getEnabledFeatures: async () => ['a', 'b']
+        getEnabledFeatures: () => ['a', 'b']
       }
       // only executed to create window.optimizelyClientInstance
       // eslint-disable-next-line no-new
