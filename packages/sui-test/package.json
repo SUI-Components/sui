@@ -21,6 +21,7 @@
     "@babel/polyfill": "7.12.1",
     "@babel/register": "7.13.0",
     "@s-ui/helpers": "1",
+    "@testing-library/cypress": "^7.0.4",
     "babel-loader": "8.2.2",
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "6.0.0",
