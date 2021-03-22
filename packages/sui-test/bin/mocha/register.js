@@ -11,7 +11,7 @@ if (esmOverride) {
 
 require('@babel/register')({
   ignore: [],
-  only: [/test/, /src/, /@s-ui/, /@babel\/runtime/, ...regexToAdd],
+  only: [/test/, /lib/, /src/, /@s-ui/, /@babel\/runtime/, ...regexToAdd],
   presets: [
     [
       'babel-preset-sui',
