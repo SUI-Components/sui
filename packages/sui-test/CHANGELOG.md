@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.17.0 (2021-03-22)
+
+
+### Features
+
+* **packages/sui-test:** add module resolver for tests ([31d71c9](https://github.com/SUI-Components/sui/commit/31d71c9f9cc3002d0637ebb187dfc243f7e9f1ae))
+
+
+
 # 4.16.0 (2021-03-19)
 
 
