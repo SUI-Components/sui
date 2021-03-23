@@ -9,8 +9,8 @@ export const importGlobals = () => {
   return safeImport({
     importFile: () =>
       import(
-        /* webpackInclude: /\/demo\/globals.js$/ */
-        `${__BASE_DIR__}/demo/${globalsFile}`
+        /* webpackInclude: /\/components\/globals.js$/ */
+        `${__BASE_DIR__}/components/${globalsFile}`
       )
   })
 }

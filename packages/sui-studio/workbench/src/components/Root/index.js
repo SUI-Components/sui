@@ -6,7 +6,7 @@ import Select from '../Select'
 import Test from '../Test'
 
 const importComponent = () => import('component/index.js')
-const importTest = () => import('test/index.js')
+const importTest = () => import('test/index.test.js')
 
 const getFromStorage = (key, defaultValue) =>
   window.sessionStorage[key] || defaultValue
