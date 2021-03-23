@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.18.0 (2021-03-23)
+
+
+### Features
+
+* **packages/sui-test:** add @testing-library/cypress lib ([dec0fa5](https://github.com/SUI-Components/sui/commit/dec0fa522e394eff71f4ea1ccca9b0ebef16f19c))
+
+
+
 # 4.17.0 (2021-03-22)
 
 
