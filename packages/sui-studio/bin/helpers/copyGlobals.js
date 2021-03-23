@@ -8,8 +8,8 @@ module.exports = function copyGlobals() {
     console.log('*** globals detected ***') // eslint-disable-line
   } else {
     fs.writeFileSync(GLOBALS_FILE_PATH, '// globals file', 'utf8')
+    cpy([GLOBALS_FILE_PATH], 'public', {
+      parents: true
+    })
   }
-  cpy([GLOBALS_FILE_PATH], 'public', {
-    parents: true
-  })
 }
