@@ -67,20 +67,26 @@ function migrateDemoFolders() {
     // Clean the new path if it already exists
     checkAndClean(newDemoPath)
 
-    fs.moveSync(demoPath, newDemoPath)
-    log(`Moved folder: ${demoPath}`)
+    try {
+      fs.moveSync(demoPath, newDemoPath)
+      log(`Moved folder: ${demoPath}`)
 
-    const demoFiles = glob.sync([`${newDemoPath}/**/*.{js,scss,json}`])
+      const demoFiles = glob.sync([`${newDemoPath}/**/*.{js,scss,json}`])
 
-    demoFiles.forEach(file => {
-      replaceImportedPaths(file) // Fix imported paths
-      flatFile(file) // Move /demo/demo/ files to demo/
-      renameDemoJs(file) // Rename demo.js to index.js
-    })
-    log('Fixed imported paths')
-    checkAndClean(`${newDemoPath}/demo`)
-    log('Demo folder flattened and cleaned')
-    log('`demo.js` files renamed to `index.js`')
+      demoFiles.forEach(file => {
+        replaceImportedPaths(file) // Fix imported paths
+        flatFile(file) // Move /demo/demo/ files to demo/
+        renameDemoJs(file) // Rename demo.js to index.js
+      })
+      log('Fixed imported paths')
+      checkAndClean(`${newDemoPath}/demo`)
+      log('Demo folder flattened and cleaned')
+      log('`demo.js` files renamed to `index.js`')
+    } catch (e) {
+      log(
+        `${demoPath} not found. Maybe this doesn't exist. Check in case you need this demo.`
+      )
+    }
   })
 
   fs.removeSync('./demo')
