@@ -73,7 +73,7 @@ export default async (req, res, next) => {
     return next() // We asume that is a 404 page
   }
 
-  if (criticalCSS) {
+  if (criticalCSS && criticalCSS !== '') {
     let nextHeadTplPart = headTplPart
       .replace(
         HEAD_OPENING_TAG,
