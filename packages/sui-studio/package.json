@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "9.33.0-beta.9",
+  "version": "9.32.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
