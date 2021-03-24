@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.11.0 (2021-03-24)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove root node_modules when using phoenix ([65eb524](https://github.com/SUI-Components/sui/commit/65eb52485d7b2fafaadcbc31246cee31d449693a))
+
+
+
 # 2.10.0 (2021-03-10)
 
 
