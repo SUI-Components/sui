@@ -6,8 +6,13 @@
   flex: 1;
   flex-direction: column;
 
-  &-codeButton {
+  &-codeButton,
+  &-fullScreenButton {
     @include floating-button($c-primary, 56px, 72px);
+    box-sizing: border-box;
+  }
+
+  &-codeButton {
     @include breakpoint-from(s) {
       bottom: auto;
       top: 8px;
@@ -15,7 +20,6 @@
   }
 
   &-fullScreenButton {
-    @include floating-button($c-primary, 56px, 72px);
     @include breakpoint-from(s) {
       bottom: auto;
       top: 65px;
