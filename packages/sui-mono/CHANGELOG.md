@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.12.0 (2021-03-25)
+
+
+### Features
+
+* **packages/sui-mono:** use less context for commits ([d9dcc25](https://github.com/SUI-Components/sui/commit/d9dcc255efe65c93f906e0fb6689b4fa623d8916))
+
+
+
 # 2.11.0 (2021-03-24)
 
 
