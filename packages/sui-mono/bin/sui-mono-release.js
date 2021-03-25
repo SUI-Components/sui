@@ -73,7 +73,7 @@ const releasesByPackages = ({status}) => {
 const releasePackage = async ({pkg, code, skipCI} = {}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
-  const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
+  const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
   const {private: isPrivatePackage} = getPackageJson(cwd, true)
