@@ -27,8 +27,8 @@
     width: $w-sidebar;
 
     &Body {
-      width: $w-sidebar;
       transition: width 0.25s ease-out;
+      width: $w-sidebar;
     }
 
     &--open {
