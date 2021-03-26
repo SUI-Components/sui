@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 10.1.0 (2021-03-26)
+
+
+### Bug Fixes
+
+* **sui-studio:** studio workspace area scolling behavior workaround. ([b1b4417](https://github.com/SUI-Components/sui/commit/b1b44176c862554a416ead85cd4399d52e430104))
+
+
+### Features
+
+* **packages/sui-studio:** deploy ([e10c6c1](https://github.com/SUI-Components/sui/commit/e10c6c133eeb4c935f48ad7c9f554f9e4f82ac08))
+
+
+
 # 10.0.0 (2021-03-23)
 
 
