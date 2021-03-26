@@ -1,8 +1,9 @@
+const {ESBuildMinifyPlugin} = require('esbuild-loader')
 const TerserPlugin = require('terser-webpack-plugin')
 const {CI = false} = process.env
 const CI_PARALLEL_CORES = 2
 
-module.exports = ({extractComments, sourceMap}) =>
+const terser = ({extractComments, sourceMap}) =>
   new TerserPlugin({
     extractComments,
     terserOptions: {
@@ -49,3 +50,14 @@ module.exports = ({extractComments, sourceMap}) =>
     // use sourceMap if parameter is provided
     sourceMap: !!sourceMap
   })
+
+const esbuild = ({extractComments, sourceMap}) =>
+  ESBuildMinifyPlugin({
+    target: 'es6',
+    sourcemap: sourceMap !== 'none' && sourceMap !== false
+  })
+
+module.exports = ({extractComments, sourceMap, useExperimentalMinifier}) =>
+  useExperimentalMinifier
+    ? esbuild({extractComments, sourceMap})
+    : terser({extractComments, sourceMap})

@@ -20,7 +20,11 @@ const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const {splitChunks} = require('./shared/optimization-split-chunks')
-const {extractComments, sourceMap} = require('./shared/config')
+const {
+  extractComments,
+  useExperimentalMinifier,
+  sourceMap
+} = require('./shared/config')
 const {aliasFromConfig} = require('./shared/resolve-alias')
 const {resolveLoader} = require('./shared/resolve-loader')
 
@@ -60,7 +64,10 @@ module.exports = {
     // avoid looping over all the modules after the compilation
     checkWasmTypes: false,
     minimize: true,
-    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()],
+    minimizer: [
+      minifyJs({useExperimentalMinifier, extractComments, sourceMap}),
+      minifyCss()
+    ],
     runtimeChunk: true,
     splitChunks
   },

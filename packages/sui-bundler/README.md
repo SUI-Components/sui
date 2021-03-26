@@ -155,7 +155,9 @@ This tool works with zero configuration out the box but you could use some confi
       "vendor": ["react", "react-dom"],
       "cdn": "https://url_to_me_cdn.com/",
       "externals-manifest": "https://url_to_me_cdn/manifest.json",
-      "alias": {"react": "preact"},
+      "alias": {
+        "react": "preact"
+      },
       "offline": true,
       "targets": {
         "chrome": "41",
@@ -169,7 +171,8 @@ This tool works with zero configuration out the box but you could use some confi
         "prod": "hidden-source-map"
       },
       "optimizations": {
-        "splitFrameworkOnChunk": true
+        "splitFrameworkOnChunk": true,
+        "useExperimentalMinifier": true
       }
     }
   }
@@ -292,6 +295,8 @@ Check all possible values accepted by webpack in the [devtool webpack docs](http
 You could tweak the performance of your bundle generation by using some flags provided in this config.
 
 `splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
+
+`useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify code instead using terser in order to boost build time and memory usage.
 
 ## Migrations
 

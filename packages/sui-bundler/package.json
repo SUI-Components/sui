@@ -30,6 +30,7 @@
     "commander": "6.2.1",
     "css-loader": "4.3.0",
     "css-minimizer-webpack-plugin": "1.1.5",
+    "esbuild-loader": "2.10.0",
     "fast-glob": "3.2.4",
     "fibers": "5.0.0",
     "html-webpack-plugin": "4.5.0",
