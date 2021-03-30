@@ -4,7 +4,6 @@
   "description": "A set of internal helpers used by sui-related packages.",
   "author": "",
   "dependencies": {
-    "commander": "6.2.1",
     "execa": "5.0.0",
     "fs-extra": "9.0.1",
     "p-queue": "6.6.2"
