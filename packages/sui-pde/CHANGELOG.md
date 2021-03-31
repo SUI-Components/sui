@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.1.0 (2021-03-31)
+
+
+### Features
+
+* **packages/sui-pde:** increase optimizely sdk version ([7424c81](https://github.com/SUI-Components/sui/commit/7424c814e09b5eb8fa2f85c15da5b077f8087ad2))
+
+
+
 # 2.0.0 (2021-03-22)
 
 
