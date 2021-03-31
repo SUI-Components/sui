@@ -17,4 +17,16 @@ try {
   ssrConfig = {}
 }
 
-export default {...DEFAULT_VALUES, ...ssrConfig}
+let assetsManifest
+try {
+  assetsManifest = JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), '/public/asset-manifest.json'),
+      'utf8'
+    )
+  )
+} catch (error) {
+  assetsManifest = null
+}
+
+export default {...DEFAULT_VALUES, ...ssrConfig, assetsManifest}

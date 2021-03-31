@@ -36,6 +36,29 @@ const formatServerTimingHeader = metrics =>
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
     .replace(/(,$)/g, '')
 
+const ASYNC_CSS_ATTRS =
+  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
+const ASSETS_FILE = ssrConfig.assetsManifest
+
+const getStyleHrefBy = ({pageName}) => ASSETS_FILE[`${pageName}.css`]
+
+const createStylesFor = ({pageName, async = false}) => {
+  const appStyles = ssrConfig.createStylesFor.appStyles
+  const shouldCreatePageStyles = ssrConfig.createStylesFor.createPagesStyles
+
+  const stylesheets = [
+    appStyles && getStyleHrefBy({pageName: appStyles}),
+    shouldCreatePageStyles && getStyleHrefBy({pageName})
+  ].filter(Boolean)
+
+  const attributes = async ? ASYNC_CSS_ATTRS : ''
+  const stylesHTML = stylesheets
+    .map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`)
+    .join('')
+
+  return stylesHTML
+}
+
 export default async (req, res, next) => {
   const {
     context,
@@ -46,6 +69,7 @@ export default async (req, res, next) => {
     skipSSR
   } = req
   const {error, redirectLocation, renderProps} = matchResult
+
   let [headTplPart, bodyTplPart] = getTplParts(req)
 
   if (skipSSR) {
@@ -73,16 +97,30 @@ export default async (req, res, next) => {
     return next() // We asume that is a 404 page
   }
 
-  if (criticalCSS) {
+  const hasCriticalCSS = criticalCSS && criticalCSS !== ''
+
+  // get the pageComponent and its displayName to retrieve its styles
+  const pageComponent =
+    renderProps.components[renderProps.components.length - 1]
+  const pageName = pageComponent.displayName
+
+  if (ssrConfig.createStylesFor && ASSETS_FILE && pageName) {
+    const pageStyles = createStylesFor({pageName, async: hasCriticalCSS})
+    let nextHeadTplPart = headTplPart.replace(
+      HEAD_OPENING_TAG,
+      `${HEAD_OPENING_TAG}${pageStyles}`
+    )
+    headTplPart = (' ' + nextHeadTplPart).slice(1)
+    nextHeadTplPart = null
+  }
+
+  if (hasCriticalCSS) {
     let nextHeadTplPart = headTplPart
       .replace(
         HEAD_OPENING_TAG,
         `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
-      .replace(
-        'rel="stylesheet"',
-        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
-      )
+      .replace('rel="stylesheet"', ASYNC_CSS_ATTRS)
       .replace(
         HEAD_CLOSING_TAG,
         `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`
