@@ -6,6 +6,9 @@ const DEFAULT_VALUES = {
   useLegacyContext: true
 }
 
+const ASYNC_CSS_ATTRS =
+  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
+
 let ssrConfig
 try {
   const spaConfig = JSON.parse(
@@ -29,4 +32,9 @@ try {
   assetsManifest = null
 }
 
-export default {...DEFAULT_VALUES, ...ssrConfig, assetsManifest}
+export default {
+  ASYNC_CSS_ATTRS,
+  ...DEFAULT_VALUES,
+  ...ssrConfig,
+  assetsManifest
+}

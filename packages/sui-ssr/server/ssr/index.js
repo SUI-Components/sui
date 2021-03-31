@@ -14,6 +14,7 @@ import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
+import {createStylesFor} from '../utils'
 import {getInitialContextValue} from '../initialContextValue'
 
 // __MAGIC IMPORTS__
@@ -35,29 +36,6 @@ const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
     .replace(/(,$)/g, '')
-
-const ASYNC_CSS_ATTRS =
-  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
-const ASSETS_FILE = ssrConfig.assetsManifest
-
-const getStyleHrefBy = ({pageName}) => ASSETS_FILE[`${pageName}.css`]
-
-const createStylesFor = ({pageName, async = false}) => {
-  const appStyles = ssrConfig.createStylesFor.appStyles
-  const shouldCreatePageStyles = ssrConfig.createStylesFor.createPagesStyles
-
-  const stylesheets = [
-    appStyles && getStyleHrefBy({pageName: appStyles}),
-    shouldCreatePageStyles && getStyleHrefBy({pageName})
-  ].filter(Boolean)
-
-  const attributes = async ? ASYNC_CSS_ATTRS : ''
-  const stylesHTML = stylesheets
-    .map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`)
-    .join('')
-
-  return stylesHTML
-}
 
 export default async (req, res, next) => {
   const {
@@ -104,7 +82,7 @@ export default async (req, res, next) => {
     renderProps.components[renderProps.components.length - 1]
   const pageName = pageComponent.displayName
 
-  if (ssrConfig.createStylesFor && ASSETS_FILE && pageName) {
+  if (ssrConfig.createStylesFor && pageName) {
     const pageStyles = createStylesFor({pageName, async: hasCriticalCSS})
     let nextHeadTplPart = headTplPart.replace(
       HEAD_OPENING_TAG,
@@ -120,7 +98,7 @@ export default async (req, res, next) => {
         HEAD_OPENING_TAG,
         `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
-      .replace('rel="stylesheet"', ASYNC_CSS_ATTRS)
+      .replace('rel="stylesheet"', ssrConfig.ASYNC_CSS_ATTRS)
       .replace(
         HEAD_CLOSING_TAG,
         `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`
