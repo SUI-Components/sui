@@ -118,7 +118,9 @@ export default ({path, fs, config: ssrConf = {}}) => {
     return assetsFile && assetsFile[`${pageName}.css`]
   }
 
-  const createStylesFor = ({pageName, async = false}) => {
+  const createStylesFor = ({pageName, async = false} = {}) => {
+    if (!ssrConf.createStylesFor) return ''
+
     const appStyles = ssrConf.createStylesFor.appStyles
     const shouldCreatePageStyles = ssrConf.createStylesFor.createPagesStyles
 
