@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.2.0 (2021-04-08)
+
+
+### Features
+
+* **packages/sui-pde:** global attributes to be always used ([671a5f1](https://github.com/SUI-Components/sui/commit/671a5f17412cae4f2a1188a17301c1f3eb704e1a))
+
+
+
 # 2.1.0 (2021-03-31)
 
 
