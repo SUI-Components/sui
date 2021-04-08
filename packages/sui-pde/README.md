@@ -22,13 +22,17 @@ import OptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely'
 const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
   sdkKey: MY_API_KEY,  // optimizely sdk api key
   options // optional, datafileOptions
-  datafile: // optional
+  datafile // optional
 })
 
 const optimizelyAdapter = new OptimizelyAdapter({
   optimizely: optimizelyInstance,
   userId: // mandatory,
-  hasUserConsents  // if false, the user won't be part of the A/B test
+  hasUserConsents  // if false, the user won't be part of the A/B test,
+  applicationAttributes: {   // optional, global application attributes that must be send on every experiment activation
+    site: 'coches.net',
+    environment: 'development'
+  }
 })
 
 const pde = new PDE({

@@ -22,7 +22,8 @@ export default class OptimizelyAdapter {
     optimizely,
     userId,
     activeIntegrations = {segment: true},
-    hasUserConsents
+    hasUserConsents,
+    applicationAttributes = {}
   }) {
     if (!optimizely) {
       throw new Error(
@@ -33,6 +34,7 @@ export default class OptimizelyAdapter {
     this._optimizely = optimizely
     this._userId = userId?.toString()
     this._activeIntegrations = activeIntegrations
+    this._applicationAttributes = applicationAttributes
     this.updateConsents({hasUserConsents})
   }
 
@@ -103,7 +105,10 @@ export default class OptimizelyAdapter {
    */
   activateExperiment({name, attributes}) {
     if (!this._hasUserConsents) return null
-    return this._optimizely.activate(name, this._userId, attributes)
+    return this._optimizely.activate(name, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
   }
 
   /**
@@ -115,7 +120,10 @@ export default class OptimizelyAdapter {
    */
   getVariation({name, attributes}) {
     if (!this._hasUserConsents) return null
-    return this._optimizely.getVariation(name, this._userId, attributes)
+    return this._optimizely.getVariation(name, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
   }
 
   onReady() {
