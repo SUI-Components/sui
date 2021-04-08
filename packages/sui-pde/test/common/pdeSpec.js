@@ -106,6 +106,52 @@ describe('@s-ui pde', () => {
     expect(typeof optimizelyAdapter._userId).to.equal('string')
   })
 
+  it('loads attributes set by application on every activate experiment', () => {
+    optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: 'user123',
+      hasUserConsents: true,
+      applicationAttributes: {
+        environment: 'production',
+        site: 'mysite.com'
+      }
+    })
+    optimizelyAdapter.activateExperiment({
+      name: 'fakeTest',
+      attributes: {
+        attr: 'attrValue'
+      }
+    })
+    expect(optimizelyInstanceStub.activate.args[0][2]).to.deep.equal({
+      environment: 'production',
+      site: 'mysite.com',
+      attr: 'attrValue'
+    })
+  })
+
+  it('loads attributes set by application on every get variation', () => {
+    optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: 'user123',
+      hasUserConsents: true,
+      applicationAttributes: {
+        environment: 'production',
+        site: 'mysite.com'
+      }
+    })
+    optimizelyAdapter.getVariation({
+      name: 'fakeTest',
+      attributes: {
+        attr: 'attrValue'
+      }
+    })
+    expect(optimizelyInstanceStub.getVariation.args[0][2]).to.deep.equal({
+      environment: 'production',
+      site: 'mysite.com',
+      attr: 'attrValue'
+    })
+  })
+
   it.client(
     'uses the optimizely adapter by default as global object to integrate with segment',
     () => {
