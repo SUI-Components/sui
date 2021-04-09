@@ -37,6 +37,7 @@ describe('useExperiment hook', () => {
       describe('and window.analytics.track exists', () => {
         before(() => {
           window.analytics = {
+            ready: cb => cb(),
             track: sinon.spy()
           }
           sinon.spy(console, 'error')

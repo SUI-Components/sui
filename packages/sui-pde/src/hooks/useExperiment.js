@@ -30,9 +30,11 @@ const browserStrategy = {
       return
     }
 
-    window.analytics.track('Experiment Viewed', {
-      experimentName,
-      variationName
+    window.analytics.ready(() => {
+      window.analytics.track('Experiment Viewed', {
+        experimentName,
+        variationName
+      })
     })
   }
 }
