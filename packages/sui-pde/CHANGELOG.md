@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.3.0 (2021-04-09)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** wait for tracking lib to be ready ([4063f5b](https://github.com/SUI-Components/sui/commit/4063f5b34279832916a655e3553346191c72e11f))
+
+
+
 # 2.2.0 (2021-04-08)
 
 
