@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.22.0 (2021-04-12)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** prevent remove already deleted node ([073a343](https://github.com/SUI-Components/sui/commit/073a3430e8feff3031121fe4a597d2d87b9e21fb))
+
+
+
 # 7.21.0 (2021-04-07)
 
 
