@@ -66,6 +66,20 @@ describe('useExperiment hook', () => {
             experimentName: 'test_experiment_id'
           })
         })
+
+        describe('when the variation is forced by query param', () => {
+          it('should return the forced variation of an experiment', () => {
+            const {result} = renderHook(
+              () =>
+                useExperiment({
+                  experimentName: 'experiment1',
+                  queryString: '?suipde_experiment1=variation1'
+                }),
+              {wrapper}
+            )
+            expect(result.current.variation).to.equal('variation1')
+          })
+        })
       })
 
       describe('and window.analytics.track does not exist', () => {

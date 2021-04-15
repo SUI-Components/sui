@@ -1,5 +1,5 @@
 import {useContext, useMemo} from 'react'
-import PdeContext from '../../contexts/PdeContext'
+import PdeContext from '../contexts/PdeContext'
 import {getPlatformStrategy} from './platformStrategies'
 
 /**
@@ -13,7 +13,8 @@ import {getPlatformStrategy} from './platformStrategies'
 export default function useExperiment({
   experimentName,
   attributes,
-  trackExperimentViewed
+  trackExperimentViewed,
+  queryString // for test purposes only
 } = {}) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
@@ -28,6 +29,13 @@ export default function useExperiment({
     })
 
     try {
+      const forcedVariation = strategy.getForcedVariation({
+        key: experimentName,
+        queryString
+      })
+      if (forcedVariation) {
+        return forcedVariation
+      }
       variationName = strategy.getVariation({pde, experimentName, attributes})
       strategy.trackExperiment({variationName, experimentName})
     } catch (error) {
@@ -37,7 +45,7 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [experimentName, pde, attributes, trackExperimentViewed])
+  }, [trackExperimentViewed, experimentName, queryString, pde, attributes])
 
   return {variation}
 }
