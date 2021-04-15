@@ -4,13 +4,12 @@ import {getPlatformStrategy} from './platformStrategies'
 
 /**
  * Hook to use a feature toggle
- * @param {object} params
- * @param {string} params.featureKey
- * @param {object} params.attributes
- * @param {string} params.queryString test purposes only
+ * @param {string} featureKey
+ * @param {object} attributes
+ * @param {string} [queryString] test purposes only
  * @return {{isActive: boolean}}
  */
-export default function useFeature({featureKey, attributes, queryString}) {
+export default function useFeature(featureKey, attributes, queryString) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
     throw new Error('[useExperiment] sui-pde provider is required to work')
@@ -23,7 +22,7 @@ export default function useFeature({featureKey, attributes, queryString}) {
   })
 
   if (forcedValue) {
-    return {isActive: forcedValue}
+    return {isActive: forcedValue === 'on'}
   }
 
   const features = pde.getEnabledFeatures({attributes})

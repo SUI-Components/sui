@@ -8,6 +8,7 @@ import {getPlatformStrategy} from './platformStrategies'
  * @param {string} param.experimentName
  * @param {object} param.attributes
  * @param {function} param.trackExperimentViewed
+ * @param {string} [param.queryString] Test purposes only
  * @return {{variation: string}}
  */
 export default function useExperiment({
@@ -29,7 +30,7 @@ export default function useExperiment({
     })
 
     try {
-      const forcedVariation = strategy.getForcedVariation({
+      const forcedVariation = strategy.getForcedValue({
         key: experimentName,
         queryString
       })
