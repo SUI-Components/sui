@@ -1,0 +1,31 @@
+// --- Opacity --- //
+
+// alpha parameter for rgba Colors
+// @include bgcolor-opacity($c-black);
+
+@mixin bgcolor-opacity($color) {
+  background-color: rgba($color, 1);
+
+  @each $value in $c-opacity {
+    &-#{$value} {
+      background-color: rgba($color, $value/100);
+    }
+  }
+}
+
+@mixin bgcolor-overlay-opacity($color) {
+  @each $value in $c-opacity {
+    &-overlay-#{$value} {
+      position: relative;
+
+      &::before {
+        background-color: rgba($color, $value/100);
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
+}
