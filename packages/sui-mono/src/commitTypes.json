@@ -13,13 +13,13 @@
       "description": "refactor: A code change that neither fixes a bug nor adds a feature. Includes code style changes."
     },
     "perf": {
-      "description": "perf: A code change that improves performance"
+      "description": "perf: A code change that improves performance."
     },
     "test": {
-      "description": "test: Add tests or modify tests only"
+      "description": "test: Add tests or modify tests only."
     },
     "chore": {
-      "description": "chore: Changes to the build process or auxiliary tools and libraries such as documentation generation. META only."
+      "description": "chore: Changes to the build process or auxiliary tools and libraries such as documentation generation."
     },
     "release": {
       "description": "release: Publish a new version of a package."

@@ -22,7 +22,7 @@ const scopes = config.getWorkspaces().map(name => ({name}))
 
 const allowedBreakingChanges = ['feat', 'fix']
 const typesWithOtherScopes = ['feat', 'fix', 'release', 'test', 'docs', 'chore']
-const defaultScopes = [{name: 'META'}, {name: 'Root'}, {name: 'examples'}]
+const defaultScopes = [{name: 'Root'}]
 const otherScopes = defaultScopes
 
 const getCommitTypesMapped = () =>

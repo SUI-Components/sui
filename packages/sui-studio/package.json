@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "9.36.0",
+  "version": "10.1.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -19,7 +19,7 @@
     "@babel/standalone": "7.12.12",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
-    "@s-ui/mono": "1",
+    "@s-ui/mono": "2",
     "@s-ui/react-context": "1",
     "@s-ui/react-router": "1",
     "@s-ui/test": "4",

@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 7.16.0 (2021-03-26)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** use new for initializing loader ([d13bf08](https://github.com/SUI-Components/sui/commit/d13bf081b3c4b7b2159e3a5261792345fb64d6b8))
+
+
+### Features
+
+* **packages/sui-bundler:** add new experimental minifier to test with sui-bundler ([8c0339d](https://github.com/SUI-Components/sui/commit/8c0339dae630fc00d5c70037a90d92f92ca3912e))
+
+
+
 # 7.15.0 (2021-03-17)
 
 

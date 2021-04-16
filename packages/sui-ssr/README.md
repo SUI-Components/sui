@@ -277,6 +277,13 @@ Configs accepted:
 
 - **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
 
+- **`createStylesFor`** (`undefined`): Define how the server should manage style imports. When separate styles per page, by default those imports will load css asynchronously but maybe we want that server to add them as an `<link>` in app head and be async or not depends on criticalCSS.
+
+  - **`appStyles`** (`string`): Define the webpackChunkName of app styles. These styles usually are imported in `app.js`.
+  - **`createPagesStyles`** (`false`): Define if pages have style imports that should be managed by the server. The server will get these files from the `asset-manifest.json` file, which should be created by sui-ssr.
+
+> ⚠️ `createStylesFor` does not works as expected when sui-bundler configuration has `onlyHash` defined to `true`.
+
 ## Dynamic Rendering
 
 If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry _dynamicsURLS_ in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.

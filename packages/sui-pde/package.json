@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/pde",
-  "version": "1.6.0",
+  "version": "2.3.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@optimizely/optimizely-sdk": "4.4.3"
+    "@optimizely/optimizely-sdk": "4.5.1"
   },
   "peerDependencies": {
     "react": "16 || 17"

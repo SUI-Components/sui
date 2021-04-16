@@ -1,7 +1,5 @@
 .sui-Studio {
   display: flex;
-  height: 100vh;
-  overflow: hidden;
 
   &-logo {
     & > svg {
@@ -13,22 +11,20 @@
   &-sidebar {
     @include breakpoint-from(s) {
       flex: 0 0 $w-sidebar;
-      position: relative;
       transform: translate3d(0, 0, 0);
     }
 
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
-    display: block;
-    height: 100%;
+    height: 100vh;
     overflow-x: hidden;
-    overflow-y: auto;
-    position: absolute;
+    overflow-y: scroll;
+    position: fixed;
     transform: translate3d(-100%, 0, 0);
     transition: transform 0.5s ease-in-out;
-    width: 100%;
     z-index: 9998;
+    width: $w-sidebar;
 
     &Body {
       transition: width 0.25s ease-out;
@@ -43,8 +39,9 @@
 
   &-main {
     background-color: $bgc-main;
-    overflow: auto;
-    width: 100%;
+    width: calc(100% - #{$w-sidebar});
+    margin-left: $w-sidebar;
+    min-height: 100vh;
   }
 
   &.sui-Studio--fullscreen {
@@ -52,6 +49,10 @@
     .sui-StudioWorkbench-navigation,
     .sui-StudioNavBar-secondary {
       display: none;
+    }
+    .sui-Studio-main {
+      margin-left: 0;
+      width: 100%;
     }
   }
 }

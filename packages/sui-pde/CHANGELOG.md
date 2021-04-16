@@ -1,5 +1,52 @@
 # CHANGELOG
 
+# 2.3.0 (2021-04-09)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** wait for tracking lib to be ready ([4063f5b](https://github.com/SUI-Components/sui/commit/4063f5b34279832916a655e3553346191c72e11f))
+
+
+
+# 2.2.0 (2021-04-08)
+
+
+### Features
+
+* **packages/sui-pde:** global attributes to be always used ([671a5f1](https://github.com/SUI-Components/sui/commit/671a5f17412cae4f2a1188a17301c1f3eb704e1a))
+
+
+
+# 2.1.0 (2021-03-31)
+
+
+### Features
+
+* **packages/sui-pde:** increase optimizely sdk version ([7424c81](https://github.com/SUI-Components/sui/commit/7424c814e09b5eb8fa2f85c15da5b077f8087ad2))
+
+
+
+# 2.0.0 (2021-03-22)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix param name trackExperimentViewed ([6d890a0](https://github.com/SUI-Components/sui/commit/6d890a055f0e767c970ddd6ba079b611ec6ed1f2))
+* **packages/sui-pde:** getEnabledFeatures returns an array not a promise ([47a754c](https://github.com/SUI-Components/sui/commit/47a754c84a86a27c07690168bf69232d2fe4c7ae))
+
+
+### Features
+
+* **packages/sui-pde:** add custom track to useExperiment ([81c8f8f](https://github.com/SUI-Components/sui/commit/81c8f8f28296ea58b9128961aba8da98f7d4fc10))
+
+
+### BREAKING CHANGES
+
+* **packages/sui-pde:** useExperiment now uses named parameters
+
+
+
 # 1.6.0 (2021-03-16)
 
 
