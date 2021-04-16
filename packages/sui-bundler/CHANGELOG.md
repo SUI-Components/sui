@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.17.0 (2021-04-16)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** prevent creation wrong webpack rule when link packages on ssr ([f3fad18](https://github.com/SUI-Components/sui/commit/f3fad186c5a2e94b544a8404143b260f13986d90))
+
+
+
 # 7.16.0 (2021-03-26)
 
 
