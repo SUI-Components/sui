@@ -16,7 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@optimizely/optimizely-sdk": "4.5.1"
+    "@optimizely/optimizely-sdk": "4.5.1",
+    "@s-ui/js": "2"
   },
   "peerDependencies": {
     "react": "16 || 17"

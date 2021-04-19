@@ -1,8 +1,11 @@
+import {parseQueryString} from '@s-ui/js/lib/string'
+
 const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes}) => {
     return pde.getVariation({pde, name: experimentName, attributes})
   },
-  trackExperiment: () => {}
+  trackExperiment: () => {},
+  getForcedValue: () => {}
 })
 
 const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
@@ -35,10 +38,27 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
         variationName
       })
     })
+  },
+  /**
+   * @param {object} param
+   * @param {string} key Experiment or feature flag key
+   * @param {string} queryString Test purposes only
+   * @returns {string|null}
+   */
+  getForcedValue: ({key, queryString = document.location.search}) => {
+    const queryParams = parseQueryString(queryString)
+    return queryParams[`suipde_${key}`]
   }
 })
 
-export const getPlatformStrategy = ({customTrackExperimentViewed}) => {
+/**
+ * Returns the implementation of experiment related methods depending on
+ * which platform we are server/browser
+ * @param {object} param
+ * @param {function} [param.customTrackExperimentViewed]
+ * @returns object
+ */
+export const getPlatformStrategy = ({customTrackExperimentViewed} = {}) => {
   const isNode = typeof window === 'undefined'
   if (isNode) {
     return getServerStrategy()

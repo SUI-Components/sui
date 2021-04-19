@@ -107,6 +107,10 @@ const MyComponent = () => {
 }
 ```
 
+#### Force experiment variation
+
+It's possible to force a variation for our experiment in the browser. For example, lets assume we want to QA a specific variation for our test called `abtest2_recommender` and the test is running in `http://myweb.com`. In order to force a variation you'll have to add a query param using the experiment name but adding `suipde_` as prefix, for example, for our recommender test, the url to open in order to force a variation would be `http://myweb.com?suipde_abtest2_recommender=default`. This would force the default variation. If forced, optimizely impression will not be triggered.
+
 ### Feature Flags
 
 ⚠️ user consents do not apply to feature flags
@@ -133,3 +137,7 @@ const optimizelyAdapter = new OptimizelyAdapter({
   activeIntegrations: {segment: false}
 })
 ```
+
+#### Force feature flag to be on/off
+
+It's slighty different to force a feature flag to be activated or deactivated. Lets assume we have our feature flag `ff_skills_field` running under `http://myweb.com`. In order to force the flag to be on or off you'll have to add a query param using the flag's name but adding `suipde_` as prefix same way we force an experiment, but the only valid values are on or off. For example, in this case, the url to open in order to force would be `http://myweb.com?suipde_ff_skills_field=on`. This would force the feature flag to be on. `http://myweb.com?suipde_ff_skills_field=off` would set the feature flag as off. If forced, optimizely impression will not be triggered.
