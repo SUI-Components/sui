@@ -4,7 +4,7 @@
   "description": "Set of utils made to be used on the desired studios",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
+    "lib": "babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],

@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
-    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
+    "lib": "babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],

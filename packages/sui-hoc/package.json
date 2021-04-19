@@ -4,7 +4,7 @@
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --out-dir ./lib  ./src",
+    "lib": "babel --out-dir ./lib  ./src",
     "prepare": "npm run lib"
   },
   "keywords": [],
