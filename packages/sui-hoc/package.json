@@ -17,8 +17,5 @@
   },
   "dependencies": {
     "intersection-observer": "0.10.0"
-  },
-  "devDependencies": {
-    "@s-ui/component-peer-dependencies": "1"
   }
 }

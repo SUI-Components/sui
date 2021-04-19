@@ -13,8 +13,5 @@
   "peerDependencies": {
     "prop-types": "15",
     "react": "16 || 17"
-  },
-  "devDependencies": {
-    "@s-ui/component-peer-dependencies": "1"
   }
 }

@@ -48,7 +48,7 @@
     "react": "17",
     "react-dom": "17",
     "react-docgen": "5.3.1",
-    "react-test-renderer": "17.0.1"
+    "react-test-renderer": "17"
   },
   "config": {
     "sui-bundler": {

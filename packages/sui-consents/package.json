@@ -16,7 +16,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/component-peer-dependencies": "1",
     "@s-ui/react-context": "1",
     "@s-ui/test": "4",
     "@testing-library/react": "11.2.5",

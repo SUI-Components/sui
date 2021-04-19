@@ -17,7 +17,6 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-changelog](./packages/sui-changelog) | CLI to retrieve a changelog from a set of dependencies |
 | [sui-ci](./packages/sui-ci) | CLI and library with tools for Continuos Integration |
 | [sui-component-dependencies](./packages/sui-component-dependencies) | A set of common dependencies for all SUI components |
-| [sui-component-peer-dependencies](./packages/sui-component-peer-dependencies) | A set of peer dependencies for all SUI components. |
 | [sui-cz](./packages/sui-cz) | A commitizen adapter for semantic commits |
 | [sui-decorators](./packages/sui-decorators) | Set of ES6 decorators to improve your apps. |
 | [sui-domain](./packages/sui-domain) | Backbone for creating a domain that complains with the guidelines of Schibsted Spain. |
