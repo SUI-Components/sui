@@ -1,11 +1,21 @@
 # CHANGELOG
 
+# 4.19.0 (2021-04-19)
+
+
+
 # 4.18.0 (2021-03-23)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** avoid using missing dependency ([5c7fe8d](https://github.com/SUI-Components/sui/commit/5c7fe8d29fe284ea2722ea432a7520f0dad2b389))
 
 
 ### Features
 
 * **packages/sui-test:** add @testing-library/cypress lib ([dec0fa5](https://github.com/SUI-Components/sui/commit/dec0fa522e394eff71f4ea1ccca9b0ebef16f19c))
+* **packages/sui-test:** fix server tests that uses linked packages of npm@7 by transforming them ([aea2a4d](https://github.com/SUI-Components/sui/commit/aea2a4de98c5b65e0acf8d15f872628c5e2f020a))
 
 
 
