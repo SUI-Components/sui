@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.4.0 (2021-04-19)
+
+
+### Features
+
+* **packages/sui-pde:** force test and flag value ([467f528](https://github.com/SUI-Components/sui/commit/467f5283a68a9e5db1c4812eda31230411bd5135))
+* **packages/sui-pde:** make the tests pass ([db88c8e](https://github.com/SUI-Components/sui/commit/db88c8e51c986d2a78d9d1de0fe9aeee4b6eeb95))
+
+
+
 # 2.3.0 (2021-04-09)
 
 
