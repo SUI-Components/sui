@@ -7,7 +7,7 @@
     "sui-test": "bin/sui-test.js"
   },
   "scripts": {
-    "lib:js": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "lib:js": "babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
     "prepare": "npm run lib",
     "postpublish": "make build"

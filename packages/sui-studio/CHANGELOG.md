@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.2.0 (2021-04-19)
+
+
+### Features
+
+* **packages/sui-studio:** use better version to be in sync with React ([866f0da](https://github.com/SUI-Components/sui/commit/866f0da8aa902b23915352c2e680b1c718239144))
+
+
+
 # 10.1.0 (2021-03-26)
 
 
@@ -25,6 +34,7 @@
 
 ### Features
 
+* **META:** use npm install directly ([2e3e96c](https://github.com/SUI-Components/sui/commit/2e3e96c628f80e2ff0f1d2e64a888d7aef6f9688))
 * **packages/sui-studio:** remove commands not used anymore provided by @s-ui/mono directly ([13ab7b9](https://github.com/SUI-Components/sui/commit/13ab7b98f5939aaad9b9ea6ca4f6873979249640))
 
 

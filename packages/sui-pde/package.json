@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:browser": "NODE_ENV=test sui-test browser",
@@ -27,6 +27,6 @@
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",
-    "react-test-renderer": "17.0.1"
+    "react-test-renderer": "17"
   }
 }

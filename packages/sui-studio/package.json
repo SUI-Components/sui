@@ -1,16 +1,10 @@
 {
   "name": "@s-ui/studio",
-  "version": "10.1.0",
+  "version": "10.2.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
     "sui-studio": "./bin/sui-studio.js"
-  },
-  "scripts": {
-    "phoenix": "npx rimraf node_modules && npm it",
-    "lint:js": "linting-rules js",
-    "lint:sass": "linting-rules sass",
-    "lint": "npm run lint:js && npm run lint:sass"
   },
   "author": "",
   "license": "MIT",
@@ -48,7 +42,7 @@
     "react": "17",
     "react-dom": "17",
     "react-docgen": "5.3.1",
-    "react-test-renderer": "17.0.1"
+    "react-test-renderer": "17"
   },
   "config": {
     "sui-bundler": {

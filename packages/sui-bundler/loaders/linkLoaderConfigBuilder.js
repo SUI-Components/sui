@@ -80,7 +80,7 @@ module.exports = ({config, packagesToLink, linkAll}) => {
   const {rules} = config.module
   const rulesWithLink = rules.map(rule => {
     const {use, test: regex} = rule
-    if (!regex.test('.css')) return rule
+    if (!regex.test('.css') || use === 'null-loader') return rule
 
     return {
       ...rule,

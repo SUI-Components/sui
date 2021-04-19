@@ -34,6 +34,7 @@
     "chai": "4.2.0",
     "husky": "4.3.0",
     "react": "17",
+    "rimraf": "3.0.2",
     "sinon": "9.2.1",
     "validate-commit-msg": "2.14.0"
   },
