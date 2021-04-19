@@ -4,7 +4,7 @@
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
-    "lib": "rm -Rf ./lib && ../../node_modules/.bin/babel --presets=sui ./src -d lib",
+    "lib": "babel --presets=sui ./src -d lib",
     "prepare": "npm run lib"
   },
   "keywords": [],

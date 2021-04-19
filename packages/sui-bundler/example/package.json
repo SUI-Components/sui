@@ -6,7 +6,7 @@
   "scripts": {
     "build": "sui-bundler build -C",
     "start": "sui-bundler dev",
-    "phoenix": "npx rimraf node_modules && npm i --cache-min=999999"
+    "phoenix": "rimraf node_modules && npm i --cache-min=999999"
   },
   "dependencies": {
     "react": "17.0.1",
