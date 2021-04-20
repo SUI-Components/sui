@@ -7,7 +7,7 @@ const DEFAULT_VALUES = {
 }
 
 const ASYNC_CSS_ATTRS =
-  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';"'
+  'rel="stylesheet" media="print" as="style" onload="this.media=\'all\'"'
 
 let ssrConfig
 try {
