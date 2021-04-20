@@ -39,6 +39,7 @@
     "noop-console": "0.8.0",
     "parse-domain": "2.3.4",
     "parse5": "6.0.0",
+    "path-to-regexp": "6.2.0",
     "rimraf": "3.0.0",
     "ua-parser-js": "0.7.20"
   },
