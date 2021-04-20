@@ -1,0 +1,23 @@
+{
+  "name": "@s-ui/theme",
+  "version": "8.96.0",
+  "description": "Generic theme to add styles to all SUI components",
+  "main": "lib/index.scss",
+  "scripts": {
+    "clean:lib": "npx rimraf lib",
+    "lib": "cpx \"./src/**/*.scss\" lib/",
+    "lint": "sui-lint sass",
+    "prepare": "npm run lib"
+  },
+  "keywords": [
+    "sass",
+    "theme",
+    "basic"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/SUI-Components/sui",
+  "devDependencies": {
+    "@s-ui/lint": "3",
+    "cpx": "1.5.0"
+  }
+}
