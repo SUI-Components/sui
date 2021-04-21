@@ -160,6 +160,9 @@ jobs:
         - npm run ssr:deploy:production
 ```
 
+> If you want that release commit does not trigger a Travis build you could use the flag `--skip-ci` and commit message will have `[skip ci]` string. See more information about [Travis skipping build docs](https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build)
+
+
 ## Use the ssr output as stream
 
 It uses the stdout stream so you can do things like:
