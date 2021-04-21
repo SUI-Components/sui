@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.20.0 (2021-04-21)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** add an option to prevents compile lib folders for server tests ([5e6a9fd](https://github.com/SUI-Components/sui/commit/5e6a9fdb3c0bf19bad379c2ddcc8e493ee5a11df))
+
+
+
 # 4.19.0 (2021-04-19)
 
 
