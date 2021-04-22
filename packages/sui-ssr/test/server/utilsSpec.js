@@ -6,7 +6,7 @@ import utilsFactory from '../../server/utils/factory'
 import {getMockedRequest} from './fixtures'
 import {publicFolderWithMultiSiteConfig} from './fixtures/utils'
 const ASYNC_CSS_ATTRS =
-  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
+  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';'
 describe('[sui-ssr] Utils', () => {
   describe('Public folder', () => {
     describe('In a multi site project', () => {
