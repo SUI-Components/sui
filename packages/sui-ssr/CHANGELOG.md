@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 7.23.0 (2021-04-22)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix async styles load ([5849d33](https://github.com/SUI-Components/sui/commit/5849d338f122a4d8ee15d3953ef28bbd99b16086))
+* **packages/sui-ssr:** fix package json version ([a47224c](https://github.com/SUI-Components/sui/commit/a47224c67959dd78f1bfa283fc06d822ef6a39d9))
+* **packages/sui-ssr:** fix test async constant ([98a6928](https://github.com/SUI-Components/sui/commit/98a6928c21616b7f9990882df9c6568f479ede2a))
+* **packages/sui-ssr:** not remove critical css when page loads ([99ec9d1](https://github.com/SUI-Components/sui/commit/99ec9d18413cccc0bc515456637d47bde4748dc5))
+
+
+### Features
+
+* **sui-ssr:** add debugbear user-agent detection in ssr perf/dynamicRendering ([f5bbf84](https://github.com/SUI-Components/sui/commit/f5bbf846fce2fd78d71eeaab972a0b8afaa5480d))
+* **sui-ssr:** bump sui-ssr ([2cffe54](https://github.com/SUI-Components/sui/commit/2cffe54c31ceceda717e237449da67ec3ba7d452))
+
+
+
 # 7.22.0 (2021-04-12)
 
 
