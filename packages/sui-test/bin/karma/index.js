@@ -5,6 +5,7 @@ const CWD = process.cwd()
 
 module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   if (ci) config.browsers = ['Firefox']
+  if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
   if (watch) config.singleRun = false
 

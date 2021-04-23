@@ -15,6 +15,8 @@ const config = {
 
   browsers: ['Chrome'],
 
+  browserDisconnectTolerance: 1,
+
   webpack: {
     devtool: 'eval',
     mode: 'development',
