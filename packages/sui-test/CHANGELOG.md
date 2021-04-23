@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.21.0 (2021-04-23)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** use timeout command option to increase also browser disconnect timeout ([a10e653](https://github.com/SUI-Components/sui/commit/a10e6537e4817eb2bff89fa7661adfbfec0a68b1))
+
+
+
 # 4.20.0 (2021-04-21)
 
 
