@@ -1,3 +1,4 @@
+import {forwardRef} from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import SUIContext from '@s-ui/react-context'
 
@@ -62,11 +63,11 @@ export const addReactContextToComponent = (Component, {context}) => {
   !displayName && console.error('Component without displayName') // eslint-disable-line
 
   // use the new React context and the provider to make context available
-  const ComponentWithAllContexts = props => (
+  const ComponentWithAllContexts = forwardRef((props, ref) => (
     <SUIContext.Provider value={context}>
-      <Component {...props} />
+      <Component {...props} ref={ref} />
     </SUIContext.Provider>
-  )
+  ))
   // New component does not have any of the static methods of the original component.
   // We need to copy them:
   // https://reactjs.org/docs/higher-order-components.html#static-methods-must-be-copied-over

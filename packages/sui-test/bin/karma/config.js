@@ -15,6 +15,8 @@ const config = {
 
   browsers: ['Chrome'],
 
+  browserDisconnectTolerance: 1,
+
   webpack: {
     devtool: 'eval',
     resolve: {
@@ -23,6 +25,7 @@ const config = {
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
       },
+      modules: [path.resolve(process.cwd()), 'node_modules'],
       extensions: ['.mjs', '.js', '.jsx', '.json']
     },
     plugins: [

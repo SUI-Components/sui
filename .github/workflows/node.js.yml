@@ -22,14 +22,14 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: 15
         registry-url: 'https://registry.npmjs.org'
-    - run: npm run phoenix:ci
+    - run: npm install --no-optional --no-save --no-fund --no-audit
     - run: npm run lint
     - run: npm run test:ci
-    - run: npx @s-ui/ci release
+    - run: npx -p ./packages/sui-ci sui-ci release
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

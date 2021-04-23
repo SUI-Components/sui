@@ -1,16 +1,11 @@
 {
   "name": "@s-ui/mono",
-  "version": "2.0.1",
+  "version": "2.12.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
     "sui-mono": "./bin/sui-mono.js"
   },
-  "keywords": [
-    "commitizen",
-    "release"
-  ],
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@s-ui/helpers": "1",

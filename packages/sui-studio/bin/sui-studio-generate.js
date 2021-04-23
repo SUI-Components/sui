@@ -12,7 +12,6 @@ const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
 
 program
-  .option('-R, --router', 'add routering for this component')
   .option('-C, --context', 'add context for this component')
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
@@ -21,10 +20,10 @@ program
     console.log('')
     console.log('    $ sui-studio generate <category> <component>')
     console.log('    $ sui-studio generate cards alfa')
-    console.log('    $ sui-studio generate searchs re-beta -P mt')
-    console.log('    $ sui-studio generate searchs re-beta -R -C')
-    console.log('    $ custom-help --help')
-    console.log('    $ custom-help -h')
+    console.log('    $ sui-studio generate searchs re-beta --prefix mt')
+    console.log('    $ sui-studio generate searchs re-beta --context')
+    console.log('    $ sui-studio --help')
+    console.log('    $ sui-studio -h')
     console.log('')
   })
   .parse(process.argv)
@@ -32,12 +31,8 @@ program
 const BASE_DIR = process.cwd()
 const [category, component] = program.args
 
-if (!component) {
-  showError('component must be defined')
-}
-if (!category) {
-  showError('category must be defined')
-}
+if (!component) showError('component must be defined')
+if (!category) showError('category must be defined')
 
 const wordsOnlyRegex = /^[\w]+$/
 
@@ -61,15 +56,14 @@ const COMPONENT_PACKAGE_NPMIGNORE_FILE = `${COMPONENT_PATH}.npmignore`
 const COMPONENT_ENTRY_SCSS_POINT_FILE = `${COMPONENT_PATH}src/index.scss`
 const COMPONENT_README_FILE = `${COMPONENT_PATH}README.md`
 
-const DEMO_DIR = `${BASE_DIR}/demo/${category}/${component}/`
-const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}playground`
+const DEMO_DIR = `${COMPONENT_PATH}/demo/`
+const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}index.js`
 const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
-const COMPONENT_ROUTES_FILE = `${DEMO_DIR}routes.js`
 
-const TEST_DIR = `${BASE_DIR}/test/${category}/${component}/`
-const COMPONENT_TEST_FILE = `${TEST_DIR}index.js`
+const TEST_DIR = `${COMPONENT_PATH}/test/`
+const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, router, scope, prefix = 'sui'} = program
+const {context, scope, prefix = 'sui'} = program
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
@@ -84,13 +78,6 @@ if (fs.existsSync(COMPONENT_PATH)) {
   ${COMPONENT_PATH}`)
 }
 
-if (!repository.url || !homepage) {
-  console.log(
-    `Missing repository and/or homepage field in monorepo package.json
-Component is created without those fields.`.yellow
-  )
-}
-
 Promise.all([
   writeFile(
     COMPONENT_PACKAGE_GITIGNORE_FILE,
@@ -101,6 +88,7 @@ node_modules`
   writeFile(
     COMPONENT_PACKAGE_NPMIGNORE_FILE,
     `src
+test
 assets`
   ),
 
@@ -112,9 +100,9 @@ assets`
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npx rimraf ./lib && npm run build:js && npm run build:styles",
-    "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-    "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
+    "prepare": "npm run build:js && npm run build:styles",
+    "build:js": "babel --presets sui ./src --out-dir ./lib",
+    "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
     "@s-ui/component-dependencies": "1"
@@ -195,7 +183,7 @@ return (<${componentInPascal} />)
 
 \`\`\`css
 @import '~@s-ui/theme/lib/index';
-// @import 'your theme';
+/* @import 'your theme'; */
 @import '~${packageName}/lib/index';
 \`\`\`
 
@@ -203,27 +191,29 @@ return (<${componentInPascal} />)
 > **Find full description and more examples in the [demo page](#).**`
   ),
 
-  writeFile(COMPONENT_PLAYGROUND_FILE, `return (<${componentInPascal} />)`),
-
-  router &&
-    writeFile(
-      COMPONENT_ROUTES_FILE,
-      `module.exports = {
-  pattern: '/:lang',
-  'default': '/es',
-  'en': '/en',
-  'de': '/de'
-}`
-    ),
+  writeFile(
+    COMPONENT_PLAYGROUND_FILE,
+    `import ${componentInPascal} from 'components/${category}/${component}/'
+export default () => <${componentInPascal} />
+`
+  ),
 
   context &&
     writeFile(
       COMPONENT_CONTEXT_FILE,
       `module.exports = {
-  'default': {
-    i18n: {t (s) { return s.split('').reverse().join('') }}
+  default: {
+    i18n: {
+      t(s) {
+        return s
+          .split('')
+          .reverse()
+          .join('')
+      }
+    }
   }
-}`
+}
+`
     ),
   writeFile(
     COMPONENT_TEST_FILE,
@@ -238,11 +228,11 @@ import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
+import Component from '../src/index'
 
 chai.use(chaiDOM)
 
 describe('${componentInPascal}', () => {
-  const Component = ${componentInPascal}
   const setup = setupEnvironment(Component)
 
   it('should render without crashing', () => {
@@ -268,20 +258,6 @@ describe('${componentInPascal}', () => {
     // Then
     expect(container.innerHTML).to.be.a('string')
     expect(container.innerHTML).to.not.have.lengthOf(0)
-  })
-
-  it('example to be deleted', () => {
-    // Example TO BE DELETED!!!!
-
-    // Given
-    // const props = {}
-
-    // When
-    // const {getByRole} = setup(props)
-
-    // Then
-    // expect(getByRole('button')).to.have.text('HOLA')
-    expect(true).to.be.eql(false)
   })
 })
 `

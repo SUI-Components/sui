@@ -38,36 +38,14 @@ program
   .command('build', 'Generate a static version ready to be deployed')
   .alias('b')
 
-program.command('commit', 'Commit with semantic messages.').alias('co')
-
-program.command('release', 'Release whatever need to be release').alias('r')
-
-program.command('check-release', 'Which packages must be updates').alias('cr')
-
-program
-  .command(
-    'run-all <command>',
-    'Run, in series, the same command in each component'
-  )
-  .alias('ra')
-
-program
-  .command(
-    'run-parallel <command>',
-    'Run, in parallel, the same command in each component'
-  )
-  .alias('rp')
-
-program
-  .command('link-all <command>', 'Link all components between each other')
-  .alias('la')
-
 program
   .command('link <origin> <destination>', 'Link components between them')
   .alias('l')
 
-program.command('init <project>', 'Create a new project').alias('i')
-
 program.command('test', 'Run studio tests').alias('t')
+
+program
+  .command('migrate <topic>', 'Migrate any legacy topic to the new structure')
+  .alias('m')
 
 program.parse(process.argv)

@@ -2,6 +2,7 @@
 
 const program = require('commander')
 const path = require('path')
+const fs = require('fs')
 const webpack = require('webpack')
 
 const config = require('@s-ui/bundler/webpack.config.dev')
@@ -40,6 +41,13 @@ if (!category || !component) {
   console.log('The correct command is $ sui-studio dev [category]/[component]')
 }
 
+const componentPath = path.join(PWD, 'components', category, component)
+const legacyTestPath = path.join(PWD, 'test', category, component)
+
+const testPath = fs.existsSync(legacyTestPath)
+  ? legacyTestPath
+  : path.join(componentPath, 'test')
+
 const studioDevConfig = {
   ...config,
   context: path.join(__dirname, '..', 'workbench', 'src'),
@@ -51,16 +59,10 @@ const studioDevConfig = {
     ...config.resolve,
     alias: {
       ...config.resolve.alias,
-      component: path.join(PWD, 'components', category, component, 'src'),
-      test: path.join(PWD, 'test', category, component),
-      package: path.join(
-        PWD,
-        'components',
-        category,
-        component,
-        'package.json'
-      ),
-      demo: path.join(PWD, 'demo', category, component)
+      component: path.join(componentPath, 'src'),
+      test: testPath,
+      package: path.join(componentPath, 'package.json'),
+      demo: path.join(componentPath, 'demo')
     }
   }
 }

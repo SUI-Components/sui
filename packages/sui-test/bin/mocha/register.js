@@ -1,13 +1,24 @@
 const {serverConfig} = require('../../src/config')
-const {forceTranspilation = []} = serverConfig
+const {
+  forceTranspilation = [],
+  esmOverride = false,
+  useLibDir = true
+} = serverConfig
 
 const regexToAdd = forceTranspilation.map(
   regexString => new RegExp(regexString)
 )
 
+if (esmOverride) {
+  require('./applyEsmOverride')
+}
+
+const libDir = /lib/
+const paths = [/test/, libDir, /src/, /@s-ui/, /@babel\/runtime/, ...regexToAdd]
+
 require('@babel/register')({
   ignore: [],
-  only: [/test/, /src/, /@s-ui/, /@babel\/runtime/, ...regexToAdd],
+  only: useLibDir ? paths : paths.filter(path => path !== libDir),
   presets: [
     [
       'babel-preset-sui',

@@ -28,11 +28,16 @@ const objectToCommaString = obj =>
     .join(',')
 
 const supportFilesFolderPath = path.join(TESTS_FOLDER, 'support')
+const pluginsFilesFolderPath = path.join(TESTS_FOLDER, 'plugins')
 
 program
   .option(
     '-B, --baseUrl <baseUrl>',
     'URL of the site to execute tests (in ./test-e2e/) on.'
+  )
+  .option(
+    '-T, --defaultCommandTimeout <ms>',
+    'Time, in milliseconds, to wait until most DOM based commands are considered timed out.'
   )
   .option(
     '-S, --screenshotsOnError',
@@ -51,6 +56,10 @@ program
     '-b, --browser <browser>',
     'Select a different browser (chrome|edge|firefox)'
   )
+  .option(
+    '-H, --headless',
+    'Hide the browser instead of running headed (default for Electron)'
+  )
   .option('-N, --noWebSecurity', 'Disable all web securities')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-P, --parallel', 'Run tests on parallelRun tests on parallel')
@@ -66,11 +75,13 @@ program
 
 const {
   baseUrl,
+  defaultCommandTimeout,
   browser,
   ci,
   group,
   gui,
   key,
+  headless,
   noWebSecurity,
   parallel,
   record,
@@ -86,8 +97,15 @@ const cypressConfig = {
   fixturesFolder: path.join(TESTS_FOLDER, 'fixtures')
 }
 
+if (defaultCommandTimeout) {
+  cypressConfig.defaultCommandTimeout = defaultCommandTimeout
+}
+
 if (fs.existsSync(supportFilesFolderPath)) {
   cypressConfig.supportFile = supportFilesFolderPath
+}
+if (fs.existsSync(pluginsFilesFolderPath)) {
+  cypressConfig.pluginsFile = pluginsFilesFolderPath
 }
 
 if (userAgent) {
@@ -135,6 +153,7 @@ resolveLazyNPMBin('cypress/bin/cypress', `cypress@${CYPRESS_VERSION}`)
       '--project=' + projectURI,
       key && '--key=' + key,
       browser && '--browser=' + browser,
+      headless && '--headless',
       parallel && '--parallel',
       record && '--record'
     ])

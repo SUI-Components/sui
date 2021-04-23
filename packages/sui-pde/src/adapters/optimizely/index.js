@@ -1,9 +1,9 @@
 import optimizelySDK from '@optimizely/optimizely-sdk'
-import integrations from './integrations'
+import {updateIntegrations} from './integrations/handler'
 
 const DEFAULT_OPTIONS = {
   autoUpdate: true,
-  updateInterval: 60 * 1000, // 60 seconds
+  updateInterval: 5 * 60 * 1000, // 5 minutes
   logLevel: 'info'
 }
 
@@ -16,8 +16,15 @@ export default class OptimizelyAdapter {
    * @param {object} param.optimizely OptimizelyInstance returned by createOptimizelyInstance method
    * @param {string=} param.userId
    * @param {object} param.activeIntegrations segment activated by default
+   * @param {boolean} param.hasUserConsents
    */
-  constructor({optimizely, userId, activeIntegrations = {segment: true}}) {
+  constructor({
+    optimizely,
+    userId,
+    activeIntegrations = {segment: true},
+    hasUserConsents,
+    applicationAttributes = {}
+  }) {
     if (!optimizely) {
       throw new Error(
         'optimizely instance is mandatory to use OptimizelyAdapter'
@@ -26,15 +33,9 @@ export default class OptimizelyAdapter {
 
     this._optimizely = optimizely
     this._userId = userId?.toString()
-
-    if (this._hasUser()) {
-      integrations.forEach(integration =>
-        integration({
-          activeIntegrations,
-          optimizelyInstance: optimizely
-        })
-      )
-    }
+    this._activeIntegrations = activeIntegrations
+    this._applicationAttributes = applicationAttributes
+    this.updateConsents({hasUserConsents})
   }
 
   /**
@@ -70,12 +71,12 @@ export default class OptimizelyAdapter {
     return optimizelyInstance
   }
 
-  _hasUser() {
-    if (!this._userId) return false
-    return true
-  }
-
-  getEnabledFeatures({attributes} = {}) {
+  /**
+   * @param {object} param
+   * @param {object} param.attributes
+   * @return {string[]}
+   */
+  getEnabledFeatures({attributes}) {
     return this._optimizely.getEnabledFeatures(this._userId, attributes)
   }
 
@@ -100,16 +101,43 @@ export default class OptimizelyAdapter {
    * @param {Object} params
    * @param {string} params.name
    * @param {object} [params.attributes]
-   * @returns {string} variation name
+   * @returns {string=} variation name
    */
   activateExperiment({name, attributes}) {
-    if (!this._hasUser()) return 'default'
-    return this._optimizely.activate(name, this._userId, attributes)
+    if (!this._hasUserConsents) return null
+    return this._optimizely.activate(name, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
+  }
+
+  /**
+   * Gets the variation without tracking the impression
+   * @param {Object} params
+   * @param {string} params.name
+   * @param {object} [params.attributes]
+   * @returns {string=} variation name
+   */
+  getVariation({name, attributes}) {
+    if (!this._hasUserConsents) return null
+    return this._optimizely.getVariation(name, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
   }
 
   onReady() {
     return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
       .then(() => this._optimizely)
+  }
+
+  updateConsents({hasUserConsents}) {
+    this._hasUserConsents = hasUserConsents
+    updateIntegrations({
+      hasUserConsents: this._hasUserConsents,
+      activeIntegrations: this._activeIntegrations,
+      optimizelyInstance: this._optimizely
+    })
   }
 }

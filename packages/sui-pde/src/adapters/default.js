@@ -1,13 +1,25 @@
 export default class DefaultAdapter {
   getEnabledFeatures({attributes}) {
-    return Promise.resolve([])
+    return []
   }
 
   getInitialData() {
     return null
   }
 
-  activateExperiment({name}) {
-    return 'default'
+  activateExperiment() {
+    return null
+  }
+
+  getVariation() {
+    return null
+  }
+
+  updateConsents() {
+    return null
+  }
+
+  async onReady() {
+    return true
   }
 }

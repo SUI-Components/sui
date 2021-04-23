@@ -4,7 +4,7 @@
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf lib && ../../node_modules/.bin/babel ./src -d lib --presets sui",
+    "lib": "babel ./src -d lib --presets sui",
     "prepare": "npm run lib",
     "test": "npm run test:client && npm run test:server",
     "test:client": "sui-test browser",
@@ -22,8 +22,8 @@
     "sinon": "2.4.1"
   },
   "devDependencies": {
-    "@s-ui/test": "2",
-    "axios": "0.19.2"
+    "@s-ui/test": "4",
+    "axios": "0.21.1"
   },
   "license": "MIT",
   "repository": {

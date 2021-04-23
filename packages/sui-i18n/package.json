@@ -5,7 +5,7 @@
   "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "npx rimraf ./lib && ../../node_modules/.bin/babel ./src --out-dir ./lib",
+    "lib:js": "babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],

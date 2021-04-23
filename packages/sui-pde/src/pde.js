@@ -8,10 +8,11 @@ export default class PDE {
    * @param {boolean} param.hasUserConsents
    */
   constructor({adapter, hasUserConsents = true} = {}) {
-    if (!adapter || !hasUserConsents) {
+    if (!adapter) {
       adapter = new DefaultAdapter()
     }
     this._adapter = adapter
+    this._adapter.updateConsents({hasUserConsents})
   }
 
   getEnabledFeatures({attributes} = {}) {
@@ -21,12 +22,22 @@ export default class PDE {
   /**
    * @param {object} param
    * @param {string} param.name
+   * @param {object} param.attributes
    */
-  activateExperiment({name}) {
-    return this._adapter.activateExperiment({name})
+  activateExperiment({name, attributes}) {
+    return this._adapter.activateExperiment({name, attributes})
   }
 
   getInitialData() {
     return this._adapter.getInitialData()
+  }
+
+  /**
+   * @param {object} param
+   * @param {string} param.name
+   * @param {object} param.attributes
+   */
+  getVariation({name, attributes}) {
+    return this._adapter.getVariation({name, attributes})
   }
 }

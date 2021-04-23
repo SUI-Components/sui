@@ -122,6 +122,30 @@ Cypress.Commands.add('login', () => {
 
 Then you can use in your specs `cy.login()`
 
+### Plugin files
+
+If you need to have plugins, then create a `./test-e2e/plugins` directory, it will be detected and added to the `cypress.json` configuration.
+
+Plugins enable you to tap into, modify, or extend the internal behavior of Cypress.
+
+Example:
+
+`./test-e2e/plugins/index.js`
+
+```js
+module.exports = (on, config) => {
+  /**
+   * @see https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
+   */
+  on('before:browser:launch', (browser, launchOptions) => {
+    if (browser.name === 'chrome') {
+      launchOptions.args.push('--disable-dev-shm-usage')
+    }
+    return launchOptions
+  })
+}
+```
+
 ### Options
 
 ```sh
@@ -131,6 +155,7 @@ Then you can use in your specs `cy.login()`
   Options:
 
     -B, --baseUrl <baseUrl>                  URL of the site to execute tests (in ./test/e2e/) on.
+    -T, --defaultCommandTimeout <ms>         Time, in milliseconds, to wait until most DOM based commands are considered timed out.
     -S, --screenshotsOnError                 Take screenshots of page on any failure.
     -U, --userAgentAppend <userAgentAppend>  Append string to UserAgent header.
     -UA, --userAgent <userAgent>             Overwrite string to UserAgent header.
@@ -138,6 +163,7 @@ Then you can use in your specs `cy.login()`
     -C, --ci                                 CI Mode, reduces memory consumption
     -h, --help                               output usage information
     -b, --browser <browser>                  Select a different browser (chrome|edge|firefox)
+    -H, --headless                           Hide the browser instead of running headed (default for Electron)
     -N, --noWebSecurity                      Disable all web securities (CORS)
     -K, --key                                It is used to authenticate the project into the Dashboard Service
     -P, --parallel                           Run tests on parallel
@@ -176,12 +202,15 @@ If defined, any error on your tests will create a screenshot of that moment in t
 
 - `server`: Config for `@s-ui/test server` binary:
   - `forceTranspilation`: List of regexs (string based, later will be transformed with `new Regex`) of modules to transpile. This is useful in case you're using server tests for modules that are ESModules based and need to be transpiled with `@babel/plugin-transform-modules-commonjs`.
+  - `esmOverride`: Boolean flag (defaults to `false`), enable patching the Node's CJS loader when facing ESM errors, like `ERR_REQUIRE_ESM` in `node > v12.12.0`. 
+  - `useLibDir`: activated by default. Prevents to compile lib folders on mocha runner if set to false
 
 ```json
 "config": {
   "sui-test": {
     "server": {
-      "forceTranspilation": ["@adv-ui/vendor-by-consents-loader"]
+      "forceTranspilation": ["@adv-ui/vendor-by-consents-loader"],
+      "esmOverride": true
     }
   }
 }

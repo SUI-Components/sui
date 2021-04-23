@@ -1,5 +1,4 @@
 /* eslint no-console:0 */
-const program = require('commander')
 const execa = require('execa')
 const {default: Queue} = require('p-queue')
 const path = require('path')
@@ -141,9 +140,9 @@ function getCommandCallMessage(bin, args, options = {}) {
  * @param  {String} msg
  * @param  {Object} foreignProgram
  */
-const showError = (msg, foreignProgram = program) => {
+const showError = (msg, foreignProgram) => {
   console.error(colors.red(`✖ Error: ${msg}\n`))
-  foreignProgram.outputHelp(txt => txt)
+  foreignProgram && foreignProgram.outputHelp(txt => txt)
   process.exit(1)
 }
 

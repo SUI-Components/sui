@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/pde",
-  "version": "1.2.0",
+  "version": "2.4.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:browser": "NODE_ENV=test sui-test browser",
@@ -16,13 +16,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@optimizely/optimizely-sdk": "4.4.3"
+    "@optimizely/optimizely-sdk": "4.5.1",
+    "@s-ui/js": "2"
+  },
+  "peerDependencies": {
+    "react": "16 || 17"
   },
   "devDependencies": {
     "@s-ui/test": "4",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
-    "react": "16",
-    "react-test-renderer": "17.0.1"
+    "react": "17",
+    "react-test-renderer": "17"
   }
 }

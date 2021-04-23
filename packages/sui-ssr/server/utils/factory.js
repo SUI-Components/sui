@@ -112,13 +112,40 @@ export default ({path, fs, config: ssrConf = {}}) => {
     return url
   }
 
+  const getStyleHrefBy = ({pageName}) => {
+    const assetsFile = ssrConf.assetsManifest
+
+    return assetsFile && assetsFile[`${pageName}.css`]
+  }
+
+  const createStylesFor = ({pageName, async = false} = {}) => {
+    if (!ssrConf.createStylesFor) return ''
+
+    const appStyles = ssrConf.createStylesFor.appStyles
+    const shouldCreatePageStyles = ssrConf.createStylesFor.createPagesStyles
+
+    const stylesheets = [
+      appStyles && getStyleHrefBy({pageName: appStyles}),
+      shouldCreatePageStyles && getStyleHrefBy({pageName})
+    ].filter(Boolean)
+
+    const attributes = async ? ssrConf.ASYNC_CSS_ATTRS : ''
+    const stylesHTML = stylesheets
+      .map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`)
+      .join('')
+
+    return stylesHTML
+  }
+
   return {
-    isMultiSite,
-    hostFromReq,
-    useStaticsByHost,
-    readHtmlTemplate,
     buildRequestUrl,
+    createStylesFor,
+    hostFromReq,
+    hrTimeToMs,
+    isMultiSite,
     publicFolder,
-    hrTimeToMs
+    readHtmlTemplate,
+    siteByHost,
+    useStaticsByHost
   }
 }

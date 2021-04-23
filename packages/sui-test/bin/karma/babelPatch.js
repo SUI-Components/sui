@@ -1,10 +1,8 @@
 /*
   This script is an AST babylon parse. It identify the "describe.context.[contextToUse]". Call statement and adds
   a final parameter which includes a Component Key based on the path.
-
   The Component Key will be used to get from `window.__STUDIO_CONTEXTS__` the correct Component and, then, using the `contextToUse`property to grab the correct context for the specific component.
 */
-
 module.exports = function({types: t}) {
   return {
     visitor: {
@@ -12,7 +10,6 @@ module.exports = function({types: t}) {
         const {
           node: {arguments: args, callee}
         } = path
-
         if (
           callee.type === 'MemberExpression' &&
           callee.object.type === 'MemberExpression' &&
@@ -25,11 +22,17 @@ module.exports = function({types: t}) {
           const contextToUse = callee.property.name
           // extract category and component from the filename
           // by reversing the path and exlcuding the first slash (it's /index.js)
-          const [, component, category] = state.file.opts.filename
-            .split('/')
-            .reverse()
-          // we create a key based on the category and component path
-          const componentKey = `${category}/${component}`
+          const reversedPath = state.file.opts.filename.split('/').reverse()
+          const [, lastPath] = reversedPath
+          const isRelativeTestPath = lastPath === 'test'
+          let componentKey = ''
+          if (isRelativeTestPath) {
+            const [, , component, category] = reversedPath
+            componentKey = `${category}/${component}`
+          } else {
+            const [, component, category] = reversedPath
+            componentKey = `${category}/${component}`
+          }
 
           path.replaceWith(
             t.callExpression(

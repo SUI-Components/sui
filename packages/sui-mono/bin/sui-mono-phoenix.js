@@ -71,6 +71,7 @@ const NPM_CMD = [
   [
     'install',
     '--loglevel=error',
+    '--no-fund',
     audit ? '' : '--no-audit',
     production ? '--production' : '',
     progress ? '' : '--no-progress'
@@ -106,14 +107,22 @@ const createInstallPackagesCommand = (cwd = process.cwd()) => {
  * Install root packages
  * @return {Promise}
  */
-const installRootPackages = () => {
+const installRootPackages = async () => {
   if (!root) return Promise.resolve()
 
+  console.log(`[sui-mono] Removing previous root packages...`)
+  const [removeBin, removeArgs] = RIMRAF_CMD
+  await getSpawnPromise(removeBin, removeArgs, {cwd: process.cwd()})
+
   console.log(`[sui-mono] Installing root packages...`)
-  const [bin, args, executionParams] = createInstallPackagesCommand()
-  return getSpawnPromise(bin, args, executionParams).then(() => {
-    console.log('Installed root packages')
-  })
+  const [
+    installBin,
+    installArgs,
+    installExecutionParams
+  ] = createInstallPackagesCommand()
+  await getSpawnPromise(installBin, installArgs, installExecutionParams)
+
+  console.log('[sui-mono] Installed root packages')
 }
 
 const executePhoenixOnPackages = () => {

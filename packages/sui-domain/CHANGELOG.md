@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.3.0 (2021-03-01)
+
+
+### Bug Fixes
+
+* Use axios without vulnerabilities ([5ba1f9f](https://github.com/SUI-Components/sui/commit/5ba1f9f3c203e6cf843e6347220cdfbf9772aefa))
+
+
+
 # 2.2.0 (2021-01-27)
 
 

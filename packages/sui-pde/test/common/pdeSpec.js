@@ -15,45 +15,73 @@ describe('@s-ui pde', () => {
     optimizelyInstanceStub = {
       activate: sinon.stub().returns('variationA'),
       onReady: async () => true,
-      getEnabledFeatures: async () => ['a', 'b']
+      getEnabledFeatures: () => ['a', 'b'],
+      getVariation: sinon.stub().returns('variationB')
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
-      userId: '123'
+      userId: 'user123',
+      hasUserConsents: true
     })
   })
 
-  it('works with the default adapter', done => {
+  it('loads the default adapter features', () => {
     const ab = new SuiPDE()
-    ab.getEnabledFeatures()
-      .then(features => {
-        expect(features).to.be.an('array')
-        done()
-      })
-      .catch(done)
+    const features = ab.getEnabledFeatures()
+    expect(features).to.be.an('array')
+    expect(features.length).to.equal(0)
   })
 
-  it('works with Optimizely Adapter', done => {
+  it('loads the Optimizely Adapter features', () => {
     const ab = new SuiPDE({
       adapter: optimizelyAdapter
     })
-    ab.getEnabledFeatures()
-      .then(features => {
-        expect(features).to.deep.equal(['a', 'b'])
-        done()
-      })
-      .catch(done)
+    const features = ab.getEnabledFeatures()
+    expect(features).to.deep.equal(['a', 'b'])
+  })
+
+  it('loads the Optimizely Adapter features even when no test consents', () => {
+    const ab = new SuiPDE({
+      adapter: optimizelyAdapter,
+      hasUserConsents: false
+    })
+    const features = ab.getEnabledFeatures()
+    expect(features).to.deep.equal(['a', 'b'])
   })
 
   it('should call optimizelys sdk activate fn', () => {
     const variationName = optimizelyAdapter.activateExperiment({
-      name: 'fakeTest'
+      name: 'fakeTest',
+      attributes: {
+        attr: 'attrValue'
+      }
     })
     expect(variationName).to.equal('variationA')
     expect(optimizelyInstanceStub.activate.called).to.equal(true)
+    expect(optimizelyInstanceStub.activate.args[0][0]).to.equal('fakeTest')
+    expect(optimizelyInstanceStub.activate.args[0][1]).to.equal('user123')
+    expect(optimizelyInstanceStub.activate.args[0][2]).to.deep.equal({
+      attr: 'attrValue'
+    })
   })
 
-  it('loads the default adapter when the user gives no consent', () => {
+  it('should call optimizelys sdk getVariation fn', () => {
+    const variationName = optimizelyAdapter.getVariation({
+      name: 'fakeTest',
+      attributes: {
+        attr: 'attrValue'
+      }
+    })
+    expect(variationName).to.equal('variationB')
+    expect(optimizelyInstanceStub.getVariation.called).to.equal(true)
+    expect(optimizelyInstanceStub.getVariation.args[0][0]).to.equal('fakeTest')
+    expect(optimizelyInstanceStub.getVariation.args[0][1]).to.equal('user123')
+    expect(optimizelyInstanceStub.getVariation.args[0][2]).to.deep.equal({
+      attr: 'attrValue'
+    })
+  })
+
+  it('loads the default adapter when no adapter is passed by', () => {
     const pde = new SuiPDE({hasUserConsents: false})
 
     expect(pde._adapter).to.be.instanceOf(DefaultAdapter)
@@ -65,7 +93,7 @@ describe('@s-ui pde', () => {
     })
 
     expect(optimizelyAdapter.activateExperiment({name: 'fakeTest'})).to.equal(
-      'default'
+      null
     )
     expect(optimizelyInstanceStub.activate.notCalled).to.equal(true)
   })
@@ -78,6 +106,52 @@ describe('@s-ui pde', () => {
     expect(typeof optimizelyAdapter._userId).to.equal('string')
   })
 
+  it('loads attributes set by application on every activate experiment', () => {
+    optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: 'user123',
+      hasUserConsents: true,
+      applicationAttributes: {
+        environment: 'production',
+        site: 'mysite.com'
+      }
+    })
+    optimizelyAdapter.activateExperiment({
+      name: 'fakeTest',
+      attributes: {
+        attr: 'attrValue'
+      }
+    })
+    expect(optimizelyInstanceStub.activate.args[0][2]).to.deep.equal({
+      environment: 'production',
+      site: 'mysite.com',
+      attr: 'attrValue'
+    })
+  })
+
+  it('loads attributes set by application on every get variation', () => {
+    optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: 'user123',
+      hasUserConsents: true,
+      applicationAttributes: {
+        environment: 'production',
+        site: 'mysite.com'
+      }
+    })
+    optimizelyAdapter.getVariation({
+      name: 'fakeTest',
+      attributes: {
+        attr: 'attrValue'
+      }
+    })
+    expect(optimizelyInstanceStub.getVariation.args[0][2]).to.deep.equal({
+      environment: 'production',
+      site: 'mysite.com',
+      attr: 'attrValue'
+    })
+  })
+
   it.client(
     'uses the optimizely adapter by default as global object to integrate with segment',
     () => {
@@ -86,13 +160,14 @@ describe('@s-ui pde', () => {
       const optimizelyInstanceStub = {
         activate: sinon.stub().returns('variationA'),
         onReady: async () => true,
-        getEnabledFeatures: async () => ['a', 'b']
+        getEnabledFeatures: () => ['a', 'b']
       }
       // only executed to create window.optimizelyClientInstance
       // eslint-disable-next-line no-new
       new OptimizelyAdapter({
         optimizely: optimizelyInstanceStub,
-        userId: '123'
+        userId: '123',
+        hasUserConsents: true
       })
       // eslint-disable-next-line eqeqeq
       expect(window.optimizelyClientInstance == optimizelyInstanceStub).to.be
@@ -105,7 +180,8 @@ describe('@s-ui pde', () => {
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
       userId: '123',
-      activeIntegrations: {segment: false}
+      activeIntegrations: {segment: false},
+      hasUserConsents: true
     })
     expect(window.optimizelyClientInstance).to.not.exist
   })
@@ -128,5 +204,18 @@ describe('@s-ui pde', () => {
     expect(
       optimizelySDK.createInstance.firstCall.args[0].datafile
     ).to.deep.equal({initialDatafile: true})
+  })
+
+  it('loads the default variation when no consents given', () => {
+    const optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: 'user123',
+      hasUserConsents: false
+    })
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter,
+      hasUserConsents: false
+    })
+    expect(pde.activateExperiment({name: 'test'})).to.be.null
   })
 })

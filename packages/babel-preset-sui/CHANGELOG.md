@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.20.0 (2021-02-24)
+
+
+### Bug Fixes
+
+* use latest versions of babel with fixed packages esmodules ([5d28b99](https://github.com/SUI-Components/sui/commit/5d28b99e26f30014f83c6a1b24ffe9c99e397cde))
+
+
+
 # 3.19.0 (2021-02-16)
 
 

@@ -1,4 +1,3 @@
-const colors = require('colors')
 // List of test describers to be patched.
 const functionsToPatch = ['describe', 'describe.only', 'it', 'it.only']
 // List of environments, the environment define the function name. describe.client, describe.server
@@ -37,21 +36,17 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     ) {
       return () => {
         throw new Error(
-          colors.red(
-            `Seems that you are doing a ${descriptorName}.${env}.only but you are running the tests for the ${
-              isNode ? environments.SERVER : environments.CLIENT
-            }\n\n`
-          )
+          `Seems that you are doing a ${descriptorName}.${env}.only but you are running the tests for the ${
+            isNode ? environments.SERVER : environments.CLIENT
+          }\n\n`
         )
       }
     } else {
       return title =>
         console.warn(
-          colors.yellow(
-            `skiping on the ${
-              isNode ? environments.SERVER : environments.CLIENT
-            } '${descriptorName}('${title}')\n`
-          )
+          `skiping on the ${
+            isNode ? environments.SERVER : environments.CLIENT
+          } '${descriptorName}('${title}')\n`
         )
     }
   }
