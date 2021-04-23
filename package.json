@@ -12,8 +12,7 @@
     "packages/**"
   ],
   "scripts": {
-    "phoenix": "npx -p @s-ui/mono sui-mono phoenix",
-    "phoenix:ci": "npx -p ./packages/sui-mono sui-mono phoenix --ci",
+    "phoenix": "npx @s-ui/mono@2 run 'rm -rf ./node_modules' && npm install --legacy-peer-deps",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
