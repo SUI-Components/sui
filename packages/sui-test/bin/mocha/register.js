@@ -2,7 +2,7 @@ const {serverConfig} = require('../../src/config')
 const {
   forceTranspilation = [],
   esmOverride = false,
-  useLibDir = true
+  useLibDir = false
 } = serverConfig
 
 const regexToAdd = forceTranspilation.map(
