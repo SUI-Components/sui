@@ -9,8 +9,8 @@
     "phoenix": "rimraf node_modules && npm i --cache-min=999999"
   },
   "dependencies": {
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react": "17",
+    "react-dom": "17"
   },
   "devDependencies": {
     "@s-ui/bundler": "7"
