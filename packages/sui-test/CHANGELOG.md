@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.22.0 (2021-04-26)
+
+
+### Features
+
+* **packages/sui-test:** use flag as false by default ([6a83b81](https://github.com/SUI-Components/sui/commit/6a83b810a98687ed5fe7bb374757c894d3c88f24))
+
+
+
 # 4.21.0 (2021-04-23)
 
 
