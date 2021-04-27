@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.5.0 (2021-04-27)
+
+
+### Features
+
+* **packages/sui-pde:** implement isFeatureEnabled ([9b92140](https://github.com/SUI-Components/sui/commit/9b921406c56fa657240ad803cafd937f451976ff))
+
+
+
 # 2.4.0 (2021-04-19)
 
 
