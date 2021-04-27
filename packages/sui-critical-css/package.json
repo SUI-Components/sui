@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/critical-css",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "bin": "src/cli.js",
   "description": "",
   "type": "module",
