@@ -4,7 +4,11 @@ import {join} from 'path'
 import {extractCSSFromUrl} from './extract-from-url.js'
 import {devices} from './config.js'
 
-// TODO: Falta sacar la info por cada device
+export const createUrlFrom = ({hostname, pathOptions}) => {
+  const path = typeof pathOptions === 'string' ? pathOptions : pathOptions.url
+  return `${hostname}${path}`
+}
+
 export async function extractCSSFromApp({routes, config = {}}) {
   const manifest = {}
   const {hostname, outputDir = '/critical-css'} = config
@@ -13,14 +17,7 @@ export async function extractCSSFromApp({routes, config = {}}) {
   await mkdir(join(process.cwd(), outputDir), {recursive: true})
 
   for await (const [pathKey, pathOptions] of Object.entries(routes)) {
-    let urlToExtractCSSFrom
-    if (typeof pathOptions === 'string') {
-      urlToExtractCSSFrom = pathOptions
-    } else {
-      urlToExtractCSSFrom = pathOptions.url
-    }
-
-    urlToExtractCSSFrom = `${hostname}${urlToExtractCSSFrom}`
+    const url = createUrlFrom({hostname, pathOptions})
 
     const hash = createHash('md5')
       .update(pathKey)
@@ -33,7 +30,7 @@ export async function extractCSSFromApp({routes, config = {}}) {
     const configForMobileDevice = devices.m
 
     const css = await extractCSSFromUrl({
-      url: urlToExtractCSSFrom,
+      url,
       ...configForMobileDevice
     })
 
