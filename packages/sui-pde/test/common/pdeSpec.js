@@ -16,7 +16,20 @@ describe('@s-ui pde', () => {
       activate: sinon.stub().returns('variationA'),
       onReady: async () => true,
       getEnabledFeatures: () => ['a', 'b'],
-      getVariation: sinon.stub().returns('variationB')
+      isFeatureEnabled: sinon.stub().returns(true),
+      getVariation: sinon.stub().returns('variationB'),
+      projectConfigManager: {
+        getConfig: () => ({
+          featureKeyMap: {
+            featureUsedInTest: {
+              experimentIds: ['1234']
+            },
+            featureNotUsedInTest: {
+              experimentIds: []
+            }
+          }
+        })
+      }
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
@@ -47,6 +60,29 @@ describe('@s-ui pde', () => {
     })
     const features = ab.getEnabledFeatures()
     expect(features).to.deep.equal(['a', 'b'])
+  })
+
+  it('shouldnt load feature when its being used in an experiment and the user has not given his consent', () => {
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter,
+      hasUserConsents: false
+    })
+    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
+    expect(enabled).to.equal(false)
+    expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(false)
+  })
+
+  it('should load a feture that is being used in an experiment when the user has given his consents', () => {
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter,
+      hasUserConsents: true
+    })
+    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
+    expect(enabled).to.equal(true)
+    expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(true)
+    expect(optimizelyInstanceStub.isFeatureEnabled.args[0][0]).to.equal(
+      'featureUsedInTest'
+    )
   })
 
   it('should call optimizelys sdk activate fn', () => {
