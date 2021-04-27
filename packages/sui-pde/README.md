@@ -111,9 +111,9 @@ const MyComponent = () => {
 
 It's possible to force a variation for our experiment in the browser. For example, lets assume we want to QA a specific variation for our test called `abtest2_recommender` and the test is running in `http://myweb.com`. In order to force a variation you'll have to add a query param using the experiment name but adding `suipde_` as prefix, for example, for our recommender test, the url to open in order to force a variation would be `http://myweb.com?suipde_abtest2_recommender=default`. This would force the default variation. If forced, optimizely impression will not be triggered.
 
-### Feature Flags
+### Feature Flags and Feature Tests
 
-⚠️ user consents do not apply to feature flags
+⚠️ user consent do apply to feature flags only when used as feature test
 
 ```js
 import  {useFeature} from '@s-ui/pde'
