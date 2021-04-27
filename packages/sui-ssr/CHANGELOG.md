@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 7.24.0 (2021-04-26)
+
+
+
 # 7.23.0 (2021-04-22)
 
 
@@ -13,6 +17,7 @@
 
 ### Features
 
+* **packages/sui-ssr:** skip ci release by flag ([f166d34](https://github.com/SUI-Components/sui/commit/f166d34fc7045cd08a2b234a7db9f58cdbeb10b0))
 * **sui-ssr:** add debugbear user-agent detection in ssr perf/dynamicRendering ([f5bbf84](https://github.com/SUI-Components/sui/commit/f5bbf846fce2fd78d71eeaab972a0b8afaa5480d))
 * **sui-ssr:** bump sui-ssr ([2cffe54](https://github.com/SUI-Components/sui/commit/2cffe54c31ceceda717e237449da67ec3ba7d452))
 
