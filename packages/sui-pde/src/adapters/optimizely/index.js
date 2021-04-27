@@ -147,7 +147,7 @@ export default class OptimizelyAdapter {
       ].experimentIds.length > 0 &&
       !this._hasUserConsents
     ) {
-      return null
+      return false
     }
 
     return this._optimizely.isFeatureEnabled(
