@@ -1,6 +1,8 @@
 import {chromium} from 'playwright'
-import {purgeCSS} from 'css-purge'
-import {blockedResourceTypes, skippedResources} from './config'
+import cssPurge from 'css-purge'
+import {blockedResourceTypes, skippedResources} from './config.js'
+
+const {purgeCSS} = cssPurge
 
 let browser
 
@@ -23,7 +25,7 @@ const getBrowser = async () => {
   return browser
 }
 
-async function extractCSSFromUrl({
+export async function extractCSSFromUrl({
   customHeaders,
   height,
   url,
@@ -108,5 +110,3 @@ async function extractCSSFromUrl({
     browser = null
   }
 }
-
-export default extractCSSFromUrl
