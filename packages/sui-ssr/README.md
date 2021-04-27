@@ -251,7 +251,7 @@ Configs accepted:
   - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
   - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
   - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: **Route path or regexp** - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS. 
-    - In case of **regexp**, you can obtain the value in **getInitialProps** **route** second param, and escape **\\** with **\\\\** for validate the json. 
+    - In case of **regexp**, you can obtain the value in **getInitialProps** **route** second param, and escape **\\** with **\\\\** for validate the json.
    
     See a simple example below:
       ```json
