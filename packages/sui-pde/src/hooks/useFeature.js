@@ -12,7 +12,7 @@ import {getPlatformStrategy} from './platformStrategies'
 export default function useFeature(featureKey, attributes, queryString) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
-    throw new Error('[useExperiment] sui-pde provider is required to work')
+    throw new Error('[useFeature] sui-pde provider is required to work')
 
   const strategy = getPlatformStrategy()
 
