@@ -9,7 +9,7 @@
     "sui"
   ],
   "workspaces": [
-    "packages/**"
+    "packages/*"
   ],
   "scripts": {
     "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -f package-lock.json && npm install",
