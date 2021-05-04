@@ -27,8 +27,7 @@ const ContextButtons = ({ctxt, onContextChange}) => {
 
 ContextButtons.propTypes = {
   ctxt: PropTypes.object,
-  onContextChange: PropTypes.func,
-  selected: PropTypes.number
+  onContextChange: PropTypes.func
 }
 
 export default ContextButtons
