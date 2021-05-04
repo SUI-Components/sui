@@ -4,17 +4,10 @@ import PropTypes from 'prop-types'
 import Header from '../Header'
 import Select from '../Select'
 import Test from '../Test'
+import {getFromStorage, updateOnChange} from '../../../../src/utils'
 
 const importComponent = () => import('component/index.js')
 const importTest = () => import('test/index.js')
-
-const getFromStorage = (key, defaultValue) =>
-  window.sessionStorage[key] || defaultValue
-
-const updateOnChange = (setState, sessionKey) => nextValue => {
-  window.sessionStorage.setItem(sessionKey, nextValue)
-  setState(nextValue)
-}
 
 export default function Root({componentID, contexts = {}, themes}) {
   const [actualContext, setActualContext] = useState(() =>

@@ -46,7 +46,11 @@ export default function Navigation({handleClick}) {
             activeClassName="sui-StudioNav-menuLink--active"
             className="sui-StudioNav-menuLink"
             onClick={handleClick}
-            to={`/workbench/${category}/${component}`}
+            to={({
+              query: {actualContext = 'default', actualStyle = 'default'}
+            }) =>
+              `/workbench/${category}/${component}/demo?actualContext=${actualContext}&actualStyle=${actualStyle}`
+            }
           >
             <div className="sui-StudioNav-menuLinkItem">
               <span>{component}</span>

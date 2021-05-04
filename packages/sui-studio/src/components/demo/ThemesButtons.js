@@ -1,17 +1,24 @@
 import PropTypes from 'prop-types'
+import {useLocation} from '@s-ui/react-router'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
-const ThemesButtons = ({themes, onThemeChange, selected}) => {
-  if (!themes.length) return null
+const ThemesButtons = ({themes, onThemeChange}) => {
+  const {
+    query: {actualStyle = 'default'}
+  } = useLocation()
+
+  if (!themes.length) {
+    return null
+  }
 
   return (
     <Tabs title="Theme">
       {['default', ...themes].map((theme, index) => (
         <Tab
-          handleClick={() => onThemeChange(theme, index)}
+          handleClick={() => onThemeChange(theme)}
           key={`${theme}${index}`}
-          isActive={index === selected}
+          isActive={theme === actualStyle}
           literal={theme}
         />
       ))}
@@ -21,8 +28,7 @@ const ThemesButtons = ({themes, onThemeChange, selected}) => {
 
 ThemesButtons.propTypes = {
   themes: PropTypes.array,
-  onThemeChange: PropTypes.func,
-  selected: PropTypes.number
+  onThemeChange: PropTypes.func
 }
 
 export default ThemesButtons

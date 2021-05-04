@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import {Link} from '@s-ui/react-router'
+import {Link, useLocation} from '@s-ui/react-router'
 import {fetchMarkdownFile} from '../tryRequire'
 import {FILES} from '../../constants'
 
@@ -21,7 +21,10 @@ export default function Workbench({children, params}) {
   const {category, component} = params
 
   const Tab = ({name, path}) => {
-    const to = `/workbench/${category}/${component}/${path}`
+    const {
+      query: {actualContext = 'default', actualStyle = 'default'}
+    } = useLocation()
+    const to = `/workbench/${category}/${component}/${path}?actualContext=${actualContext}&actualStyle=${actualStyle}`
 
     return (
       <li className={TAB_CLASS}>

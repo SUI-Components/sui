@@ -1,6 +1,8 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import SUIContext from '@s-ui/react-context'
+import {withRouter} from '@s-ui/react-router'
 
 import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
 import Preview from '../preview'
@@ -13,8 +15,6 @@ import ContextButtons from './ContextButtons'
 import EventsButtons from './EventsButtons'
 import ThemesButtons from './ThemesButtons'
 
-import SUIContext from '@s-ui/react-context'
-
 import {
   createContextByType,
   isFunction,
@@ -26,28 +26,29 @@ const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const CONTAINER_CLASS = 'sui-Studio'
 const FULLSCREEN_CLASS = 'sui-Studio--fullscreen'
 
-export default class Demo extends Component {
+class Demo extends Component {
   state = {
     ctxt: false,
-    ctxtSelectedIndex: 0,
-    ctxtType: 'default',
     exports: false,
     isCodeOpen: false,
     isFullScreen: false,
     playground: undefined,
-    theme: 'default',
-    themes: [],
-    themeSelectedIndex: 0
+    themes: []
   }
 
-  _init({category, component, theme}) {
+  _init({
+    category,
+    component,
+    actualStyle = 'default',
+    actualContext = 'default'
+  }) {
     this.setState({
       // clean state in case we're moving from another component
       exports: {default: null}
     })
 
     Promise.all([
-      stylesFor({category, component, withTheme: theme}),
+      stylesFor({category, component, withTheme: actualStyle}),
       importMainModules({category, component}),
       fetchPlayground({category, component})
     ]).then(async ([style, requiredModules, playground]) => {
@@ -68,12 +69,23 @@ export default class Demo extends Component {
   }
 
   componentDidMount() {
-    this._init(this.props.params)
+    const {
+      params,
+      router: {
+        location: {query}
+      }
+    } = this.props
+    this._init({...params, ...query})
   }
 
   // eslint-disable-next-line
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this._init({...nextProps.params, theme: this.state.theme})
+  UNSAFE_componentWillReceiveProps({
+    params,
+    router: {
+      location: {query}
+    }
+  }) {
+    this._init({...params, ...query})
   }
 
   componentWillUnmount() {
@@ -97,30 +109,30 @@ export default class Demo extends Component {
     })
   }
 
-  handleContextChange = (ctxtType, index) => {
+  handleContextChange = actualContext => {
+    const {router} = this.props
+    const {pathname, query} = this.props.router.location
     this.setState({
-      ctxtType,
-      ctxtSelectedIndex: index,
       playground: this.state.playground + EVIL_HACK_TO_RERENDER_AFTER_CHANGE
     })
+    router.push({pathname, query: {...query, actualContext}})
   }
 
-  handleThemeChange = (theme, index) => {
+  handleThemeChange = actualStyle => {
+    const {router} = this.props
+    const {pathname, query} = this.props.router.location
     const {category, component} = this.props.params
-    stylesFor({category, component, withTheme: theme}).then(style => {
+    stylesFor({category, component, withTheme: actualStyle}).then(style => {
       this.setState({
-        style,
-        theme,
-        themeSelectedIndex: index
+        style
       })
     })
+    router.push({pathname, query: {...query, actualStyle}})
   }
 
   render() {
     const {
       ctxt = {},
-      ctxtSelectedIndex,
-      ctxtType,
       DemoComponent,
       events,
       exports,
@@ -128,9 +140,10 @@ export default class Demo extends Component {
       isFullScreen,
       playground,
       style,
-      themes,
-      themeSelectedIndex
+      themes
     } = this.state
+
+    const {actualContext = 'default'} = this.props.router.location.query
 
     const {default: Base} = exports
 
@@ -141,7 +154,7 @@ export default class Demo extends Component {
 
     const nonDefaultExports = removeDefaultContext(exports)
     const context =
-      Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
+      Object.keys(ctxt).length && createContextByType(ctxt, actualContext)
     const {domain} = context || {}
 
     !ComponentToRender.displayName &&
@@ -153,12 +166,10 @@ export default class Demo extends Component {
         <div className="sui-StudioNavBar-secondary">
           <ContextButtons
             ctxt={ctxt || {}}
-            selected={ctxtSelectedIndex}
             onContextChange={this.handleContextChange}
           />
           <ThemesButtons
             themes={themes}
-            selected={themeSelectedIndex}
             onThemeChange={this.handleThemeChange}
           />
           <EventsButtons events={events || {}} domain={domain} />
@@ -218,8 +229,11 @@ export default class Demo extends Component {
 Demo.propTypes = {
   category: PropTypes.string,
   component: PropTypes.string,
+  router: PropTypes.object,
   params: PropTypes.shape({
     category: PropTypes.string,
     component: PropTypes.string
   })
 }
+
+export default withRouter(Demo)

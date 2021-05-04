@@ -19,7 +19,6 @@ export default function Style({children, id}) {
       linkElement.href = window.URL.createObjectURL(blob)
       linkElement.id = id
       oldSrc && window.URL.createObjectURL(blob)
-
       return () => linkElement.parentNode.removeChild(linkElement)
     },
     [children, id]
