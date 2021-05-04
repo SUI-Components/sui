@@ -15,6 +15,8 @@ const config = {
 
   browsers: ['Chrome'],
 
+  browserDisconnectTolerance: 1,
+
   webpack: {
     devtool: 'eval',
     mode: 'development',
@@ -24,6 +26,7 @@ const config = {
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
       },
+      modules: [path.resolve(process.cwd()), 'node_modules'],
       extensions: ['.mjs', '.js', '.jsx', '.json']
     },
     node: {
@@ -36,14 +39,9 @@ const config = {
     },
     plugins: [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
-      new webpack.DefinePlugin(
-        Object.assign(
-          {},
-          {
-            __BASE_DIR__: JSON.stringify(process.env.PWD)
-          }
-        )
-      )
+      new webpack.DefinePlugin({
+        __BASE_DIR__: JSON.stringify(process.env.PWD)
+      })
     ],
     // avoid unneded optimizations for running our tests in order to get fatest bundling time
     optimization: {

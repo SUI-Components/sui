@@ -7,7 +7,7 @@ import Test from '../Test'
 import {getFromStorage, updateOnChange} from '../../../../src/utils'
 
 const importComponent = () => import('component/index.js')
-const importTest = () => import('test/index.js')
+const importTest = () => import('test/index.test.js')
 
 export default function Root({componentID, contexts = {}, themes}) {
   const [actualContext, setActualContext] = useState(() =>

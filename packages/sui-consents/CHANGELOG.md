@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.4.0 (2021-04-19)
+
+
+### Features
+
+* **packages/sui-consents:** remove component peer dependencies ([56c9b3c](https://github.com/SUI-Components/sui/commit/56c9b3cae507fa5ac4088839139bc2b69addf6d3))
+
+
+
 # 1.3.0 (2021-03-12)
 
 

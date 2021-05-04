@@ -6,6 +6,9 @@ const DEFAULT_VALUES = {
   useLegacyContext: true
 }
 
+const ASYNC_CSS_ATTRS =
+  'rel="stylesheet" media="print" as="style" onload="this.media=\'all\'"'
+
 let ssrConfig
 try {
   const spaConfig = JSON.parse(
@@ -17,4 +20,21 @@ try {
   ssrConfig = {}
 }
 
-export default {...DEFAULT_VALUES, ...ssrConfig}
+let assetsManifest
+try {
+  assetsManifest = JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), '/public/asset-manifest.json'),
+      'utf8'
+    )
+  )
+} catch (error) {
+  assetsManifest = null
+}
+
+export default {
+  ASYNC_CSS_ATTRS,
+  ...DEFAULT_VALUES,
+  ...ssrConfig,
+  assetsManifest
+}

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.12.0 (2021-03-25)
+
+
+### Features
+
+* **packages/sui-mono:** use less context for commits ([d9dcc25](https://github.com/SUI-Components/sui/commit/d9dcc255efe65c93f906e0fb6689b4fa623d8916))
+
+
+
+# 2.11.0 (2021-03-24)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove root node_modules when using phoenix ([65eb524](https://github.com/SUI-Components/sui/commit/65eb52485d7b2fafaadcbc31246cee31d449693a))
+
+
+
 # 2.10.0 (2021-03-10)
 
 

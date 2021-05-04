@@ -1,13 +1,15 @@
 const cpy = require('cpy')
 const fs = require('fs')
 
+const GLOBALS_FILE_PATH = 'components/globals.js'
+
 module.exports = function copyGlobals() {
-  if (fs.existsSync('demo/globals.js')) {
-    console.log('*** globals detected ***')   // eslint-disable-line
+  if (fs.existsSync(GLOBALS_FILE_PATH)) {
+    console.log('*** globals detected ***') // eslint-disable-line
   } else {
-    fs.writeFileSync('demo/globals.js', '// globals file', 'utf8')
+    fs.writeFileSync(GLOBALS_FILE_PATH, '// globals file', 'utf8')
   }
-  cpy(['demo/globals.js'], 'public', {
+  cpy([GLOBALS_FILE_PATH], 'public', {
     parents: true
   })
 }

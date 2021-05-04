@@ -1,6 +1,6 @@
 export default class DefaultAdapter {
   getEnabledFeatures({attributes}) {
-    return Promise.resolve([])
+    return []
   }
 
   getInitialData() {
@@ -21,5 +21,9 @@ export default class DefaultAdapter {
 
   async onReady() {
     return true
+  }
+
+  isFeatureEnabled() {
+    return false
   }
 }
