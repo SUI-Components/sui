@@ -1,16 +1,10 @@
 {
   "name": "@s-ui/studio",
-  "version": "9.38.0",
+  "version": "10.2.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
     "sui-studio": "./bin/sui-studio.js"
-  },
-  "scripts": {
-    "phoenix": "npx rimraf node_modules && npm it",
-    "lint:js": "linting-rules js",
-    "lint:sass": "linting-rules sass",
-    "lint": "npm run lint:js && npm run lint:sass"
   },
   "author": "",
   "license": "MIT",
@@ -19,7 +13,7 @@
     "@babel/standalone": "7.12.12",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
-    "@s-ui/mono": "1",
+    "@s-ui/mono": "2",
     "@s-ui/react-context": "1",
     "@s-ui/react-router": "1",
     "@s-ui/test": "4",
@@ -37,16 +31,18 @@
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.4",
     "fs-extra": "9.0.1",
+    "git-url-parse": "11.4.4",
     "hoist-non-react-statics": "3.3.2",
     "just-debounce-it": "1.1.0",
     "just-kebab-case": "1.1.0",
     "just-pascal-case": "1.1.0",
+    "node-fetch": "2.6.1",
     "normalize.css": "8.0.1",
     "raw-loader": "4.0.2",
     "react": "17",
     "react-dom": "17",
     "react-docgen": "5.3.1",
-    "react-test-renderer": "17.0.1"
+    "react-test-renderer": "17"
   },
   "config": {
     "sui-bundler": {

@@ -22,7 +22,8 @@ export default class OptimizelyAdapter {
     optimizely,
     userId,
     activeIntegrations = {segment: true},
-    hasUserConsents
+    hasUserConsents,
+    applicationAttributes = {}
   }) {
     if (!optimizely) {
       throw new Error(
@@ -33,6 +34,7 @@ export default class OptimizelyAdapter {
     this._optimizely = optimizely
     this._userId = userId?.toString()
     this._activeIntegrations = activeIntegrations
+    this._applicationAttributes = applicationAttributes
     this.updateConsents({hasUserConsents})
   }
 
@@ -103,7 +105,10 @@ export default class OptimizelyAdapter {
    */
   activateExperiment({name, attributes}) {
     if (!this._hasUserConsents) return null
-    return this._optimizely.activate(name, this._userId, attributes)
+    return this._optimizely.activate(name, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
   }
 
   /**
@@ -115,13 +120,41 @@ export default class OptimizelyAdapter {
    */
   getVariation({name, attributes}) {
     if (!this._hasUserConsents) return null
-    return this._optimizely.getVariation(name, this._userId, attributes)
+    return this._optimizely.getVariation(name, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
   }
 
   onReady() {
     return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
       .then(() => this._optimizely)
+  }
+
+  /**
+   * Checks if a feature flag is active or not
+   * @param {object} param
+   * @param {string} param.featureKey
+   * @parma {object=} param.attributes
+   * @returns {boolean}
+   */
+  isFeatureEnabled({featureKey, attributes}) {
+    // check for user consents only if featureKey is a feature that belongs to a feature test
+    if (
+      this._optimizely.projectConfigManager.getConfig().featureKeyMap[
+        featureKey
+      ].experimentIds.length > 0 &&
+      !this._hasUserConsents
+    ) {
+      return false
+    }
+
+    return this._optimizely.isFeatureEnabled(
+      featureKey,
+      this._userId,
+      attributes
+    )
   }
 
   updateConsents({hasUserConsents}) {

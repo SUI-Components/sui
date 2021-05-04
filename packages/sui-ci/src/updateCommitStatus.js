@@ -1,4 +1,4 @@
-const {Octokit} = require('@octokit/core')
+const fetch = require('node-fetch')
 const parseGitUrl = require('git-url-parse')
 const getGitRemoteOriginUrl = require('git-remote-origin-url')
 
@@ -63,20 +63,19 @@ module.exports = async function updateCommitStatus({
   const descriptionDictionaryForTopic =
     STATUS_DESCRIPTION[topic] || createDefaultDescriptionDictionary(topic)
 
-  const requestParams = {
-    baseUrl,
+  const body = JSON.stringify({
     context: `${STATUS_CONTEXT} (${topic})`,
     description: descriptionDictionaryForTopic[state],
-    owner,
-    repo,
-    sha: commit,
     state,
     target_url: targetUrl
-  }
+  })
 
-  const octokit = new Octokit({auth: gitHubToken})
-  return octokit.request(
-    'POST /repos/{owner}/{repo}/statuses/{sha}',
-    requestParams
-  )
+  return fetch(`${baseUrl}/repos/${owner}/${repo}/statuses/${commit}`, {
+    body,
+    headers: {
+      Accept: 'application/vnd.github.v3+json',
+      Authorization: `token ${gitHubToken}`
+    },
+    method: 'POST'
+  })
 }

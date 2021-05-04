@@ -37,6 +37,7 @@ describe('useExperiment hook', () => {
       describe('and window.analytics.track exists', () => {
         before(() => {
           window.analytics = {
+            ready: cb => cb(),
             track: sinon.spy()
           }
           sinon.spy(console, 'error')
@@ -49,7 +50,7 @@ describe('useExperiment hook', () => {
 
         it('should return the right variationName and launch the Experiment Viewed event', () => {
           const {result} = renderHook(
-            () => useExperiment('test_experiment_id'),
+            () => useExperiment({experimentName: 'test_experiment_id'}),
             {
               wrapper
             }
@@ -63,6 +64,20 @@ describe('useExperiment hook', () => {
           expect(window.analytics.track.args[0][1]).to.deep.equal({
             variationName: 'activateExperimentA',
             experimentName: 'test_experiment_id'
+          })
+        })
+
+        describe('when the variation is forced by query param', () => {
+          it('should return the forced variation of an experiment', () => {
+            const {result} = renderHook(
+              () =>
+                useExperiment({
+                  experimentName: 'experiment1',
+                  queryString: '?suipde_experiment1=variation1'
+                }),
+              {wrapper}
+            )
+            expect(result.current.variation).to.equal('variation1')
           })
         })
       })
@@ -79,7 +94,7 @@ describe('useExperiment hook', () => {
         it('should return the right variationName and log an error', () => {
           delete window.analytics
           const {result} = renderHook(
-            () => useExperiment('test_experiment_id'),
+            () => useExperiment({experimentName: 'test_experiment_id'}),
             {
               wrapper
             }
@@ -89,6 +104,36 @@ describe('useExperiment hook', () => {
           expect(console.error.args[0][0]).to.include(
             'window.analytics.track expected'
           )
+        })
+      })
+
+      describe('and use a custom track function', () => {
+        let customTrack
+
+        before(() => {
+          customTrack = sinon.spy()
+          sinon.spy(console, 'error')
+        })
+
+        after(() => {
+          customTrack = undefined
+          console.error.restore()
+        })
+
+        it('should return the right variationName and execute custom track function', () => {
+          const {result} = renderHook(
+            () =>
+              useExperiment({
+                experimentName: 'test_experiment_id',
+                trackExperimentViewed: customTrack
+              }),
+            {
+              wrapper
+            }
+          )
+          expect(result.current.variation).to.equal('activateExperimentA')
+          sinon.assert.callCount(console.error, 0)
+          sinon.assert.callCount(customTrack, 1)
         })
       })
     })
@@ -103,9 +148,12 @@ describe('useExperiment hook', () => {
       })
 
       it('should return the right variationName and launch the Experiment Viewed event', () => {
-        const {result} = renderHook(() => useExperiment('test_experiment_id'), {
-          wrapper
-        })
+        const {result} = renderHook(
+          () => useExperiment({experimentName: 'test_experiment_id'}),
+          {
+            wrapper
+          }
+        )
         expect(result.current.variation).to.equal('getVariationA')
         sinon.assert.callCount(console.error, 0)
       })

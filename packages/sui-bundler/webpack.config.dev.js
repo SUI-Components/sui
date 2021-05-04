@@ -21,7 +21,8 @@ const webpackConfig = {
       ...defaultAlias,
       ...aliasFromConfig
     },
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json'],
+    modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: cleanList([
     require.resolve('react-dev-utils/webpackHotDevClient'),

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/Link.js
 
 import {useCallback} from 'react'

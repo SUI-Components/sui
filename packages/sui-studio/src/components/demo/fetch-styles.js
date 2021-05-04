@@ -2,9 +2,9 @@
 /* global __BASE_DIR__ */
 
 const requireAvailableThemes = require.context(
-  `!css-loader!sass-loader!${__BASE_DIR__}/demo`,
+  `!css-loader!sass-loader!${__BASE_DIR__}/components`,
   true,
-  /^.*\/themes\/.*\.scss/,
+  /^.*\/demo\/themes\/.*\.scss/,
   'lazy'
 )
 const requireComponentStyles = require.context(
