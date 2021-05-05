@@ -50,6 +50,7 @@
         "forceTranspilation": [
           "./packages/sui-ssr/server"
         ],
+        "esmOverride": true,
         "useLibDir": true
       }
     }
