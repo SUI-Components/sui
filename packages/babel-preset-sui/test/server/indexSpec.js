@@ -1,8 +1,9 @@
 import {transformAsync as transform} from '@babel/core'
 import {expect} from 'chai'
+import babelPresetSui from '../../src/index.js'
 
 const babelConfig = {
-  presets: [require.resolve('../../src/index.js')]
+  presets: [babelPresetSui]
 }
 
 const babel = source => transform(source, babelConfig)
