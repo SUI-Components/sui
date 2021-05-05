@@ -9,15 +9,9 @@
     "lint": "sui-lint sass",
     "prepare": "npm run lib"
   },
-  "keywords": [
-    "sass",
-    "theme",
-    "basic"
-  ],
   "license": "ISC",
   "homepage": "https://github.com/SUI-Components/sui",
   "devDependencies": {
-    "@s-ui/lint": "3",
     "cpx": "1.5.0"
   }
 }
