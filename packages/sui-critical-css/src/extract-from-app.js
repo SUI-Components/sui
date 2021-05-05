@@ -4,6 +4,8 @@ import {join} from 'path'
 import {extractCSSFromUrl} from './extract-from-url.js'
 import {devices} from './config.js'
 
+const configForMobileDevice = devices.m
+
 export const createUrlFrom = ({hostname, pathOptions}) => {
   const path = typeof pathOptions === 'string' ? pathOptions : pathOptions.url
   return `${hostname}${path}`
@@ -27,23 +29,25 @@ export async function extractCSSFromApp({routes, config = {}}) {
 
     manifest[pathKey] = cssFileName
 
-    const configForMobileDevice = devices.m
-
     const css = await extractCSSFromUrl({
       url,
       ...configForMobileDevice
-    })
+    }).catch(() => '')
 
     const cssPathFile = join(process.cwd(), outputDir, cssFileName)
-    writeFile(cssPathFile, css)
+    writeFilesPromises.push(writeFile(cssPathFile, css))
   }
-
-  const manifestPathFile = join(process.cwd(), outputDir, 'critical.json')
-  await writeFile(manifestPathFile, JSON.stringify(manifest))
 
   const results = await Promise.allSettled(writeFilesPromises)
   const errors = results.filter(r => r.status === 'rejected')
 
-  if (errors.length) console.warn('Some files have not been written correctly')
-  console.log('All files written')
+  if (errors.length) {
+    console.warn('Some critical css files have not been written correctly:')
+    errors.forEach(error => console.error(error))
+  }
+  console.log('All Critical CSS files written')
+
+  const manifestPathFile = join(process.cwd(), outputDir, 'critical.json')
+  await writeFile(manifestPathFile, JSON.stringify(manifest))
+  console.log('Manifest Critical CSS created')
 }
