@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.18.0 (2021-04-29)
+
+
+### Features
+
+* **packages/sui-bundler:** remove fibers dependency ([415d195](https://github.com/SUI-Components/sui/commit/415d195395e125543c8ab1be0b60d17d04614739))
+
+
+
 # 7.17.0 (2021-04-16)
 
 

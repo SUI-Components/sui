@@ -7,7 +7,7 @@ const DEFAULT_VALUES = {
 }
 
 const ASYNC_CSS_ATTRS =
-  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');if(e){e.parentNode.removeChild(e);}"'
+  'rel="stylesheet" media="print" as="style" onload="this.media=\'all\'"'
 
 let ssrConfig
 try {

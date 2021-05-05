@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "2.20.0",
+  "version": "2.21.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
@@ -11,7 +11,7 @@
   "dependencies": {
     "bowser": "2.11.0",
     "cookie": "0.3.1",
-    "htmr": "0.8.8",
+    "htmr": "0.10.0",
     "js-cookie": "2.1.4",
     "just-camel-case": "4.0.2",
     "just-capitalize": "1.0.0",

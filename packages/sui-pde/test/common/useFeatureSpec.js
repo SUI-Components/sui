@@ -7,17 +7,30 @@ import sinon from 'sinon'
 
 describe('when pde context is set', () => {
   let wrapper
-  let getEnabledFeatures
+  let isFeatureEnabled
   afterEach(cleanup)
 
   before(() => {
-    getEnabledFeatures = sinon.stub().returns(['fakeFlag'])
+    isFeatureEnabled = sinon.stub().returns(true)
     // eslint-disable-next-line react/prop-types
     wrapper = ({children}) => (
-      <PdeContext.Provider value={{features: [], pde: {getEnabledFeatures}}}>
+      <PdeContext.Provider value={{pde: {isFeatureEnabled}}}>
         {children}
       </PdeContext.Provider>
     )
+  })
+
+  it('should check if a feature is enabled', () => {
+    const {result} = renderHook(
+      () => useFeature('feature1', {attribute1: 'value'}),
+      {wrapper}
+    )
+    expect(result.current.isActive).to.equal(true)
+    expect(isFeatureEnabled.called).to.equal(true)
+    expect(isFeatureEnabled.args[0][0]).to.deep.equal({
+      featureKey: 'feature1',
+      attributes: {attribute1: 'value'}
+    })
   })
 
   describe.client('and the hook is executed by the browser', () => {

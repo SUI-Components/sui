@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.6.0 (2021-04-30)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix error message on useFeature hook ([30e81bb](https://github.com/SUI-Components/sui/commit/30e81bb36469758565b66edd85b025073e90b2cc))
+
+
+
+# 2.5.0 (2021-04-27)
+
+
+### Features
+
+* **packages/sui-pde:** implement isFeatureEnabled ([9b92140](https://github.com/SUI-Components/sui/commit/9b921406c56fa657240ad803cafd937f451976ff))
+
+
+
 # 2.4.0 (2021-04-19)
 
 

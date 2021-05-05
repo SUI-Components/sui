@@ -12,7 +12,7 @@ import {getPlatformStrategy} from './platformStrategies'
 export default function useFeature(featureKey, attributes, queryString) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
-    throw new Error('[useExperiment] sui-pde provider is required to work')
+    throw new Error('[useFeature] sui-pde provider is required to work')
 
   const strategy = getPlatformStrategy()
 
@@ -25,7 +25,12 @@ export default function useFeature(featureKey, attributes, queryString) {
     return {isActive: forcedValue === 'on'}
   }
 
-  const features = pde.getEnabledFeatures({attributes})
-  const isActive = features.some(f => f === featureKey)
+  let isActive
+  try {
+    isActive = pde.isFeatureEnabled({featureKey, attributes})
+  } catch (error) {
+    console.error(error)
+    isActive = false
+  }
   return {isActive}
 }
