@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 7.25.0 (2021-04-27)
+
+
+### Features
+
+* **packages/sui-ssr:** trigger release ([017088d](https://github.com/SUI-Components/sui/commit/017088dd10e16e5dc5d4cec987dbcbc93e8d70a8))
+* **sui-ssr:** add sui-router regexp support for critical css mandatoryCSSRules flag ([8bee98c](https://github.com/SUI-Components/sui/commit/8bee98c4444ff7774de31886abcf38045e13d638))
+* **sui-ssr:** update readme ([17a3bbc](https://github.com/SUI-Components/sui/commit/17a3bbc0c5dcb1fc8edd89aea1db7e809abc0c99))
+
+
+
 # 7.24.0 (2021-04-26)
 
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.23.0 (2021-05-05)
+
+
+### Features
+
+* **packages/sui-test:** add cypress-file-upload dependency ([c9097a1](https://github.com/SUI-Components/sui/commit/c9097a154d4a5a2b160fb5153d869473c1a35ba6))
+
+
+
 # 4.22.0 (2021-04-26)
 
 
