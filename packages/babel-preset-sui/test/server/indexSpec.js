@@ -11,7 +11,7 @@ const babel = source => transform(source, babelConfig)
 describe('babel-preset-sui', function() {
   // first time babel is called is pretty slow
   // and could be worse than 2s
-  this.timeout(10000)
+  this.timeout(20000)
 
   describe('regarding React', () => {
     it('should support and use JSX Runtime', async () => {
