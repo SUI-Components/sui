@@ -32,7 +32,10 @@ export async function extractCSSFromApp({routes, config = {}}) {
     const css = await extractCSSFromUrl({
       url,
       ...configForMobileDevice
-    }).catch(() => '')
+    }).catch(() => {
+      console.error(`Error extracting Critical CSS from ${url}`)
+      return ''
+    })
 
     const cssPathFile = join(process.cwd(), outputDir, cssFileName)
     writeFilesPromises.push(writeFile(cssPathFile, css))

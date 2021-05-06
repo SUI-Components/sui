@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const fs = require('fs/promises')
 const path = require('path')
-const pathToRegexp = require('path-to-regexp') // peerDependency? ->
+const pathToRegexp = require('path-to-regexp')
 
 const CRITICAL_CSS_DIR = 'critical-css'
 
