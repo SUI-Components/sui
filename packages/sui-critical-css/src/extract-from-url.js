@@ -15,6 +15,7 @@ const getBrowser = async () => {
       // Required for Docker version of Puppeteer
       '--no-sandbox',
       '--disable-gpu',
+      '--disable-web-security',
       '--disable-setuid-sandbox',
       // This will write shared memory files into /tmp instead of /dev/shm,
       // because Docker’s default for /dev/shm is 64MB
@@ -61,27 +62,22 @@ export async function extractCSSFromUrl({
       .goto(url, {waitUntil: 'load'})
       .catch(error => ({error}))
 
-    if (!response) {
-      throw new Error('Response is not present')
+    const closeAll = async error => {
+      await page.close()
+      await browser.close()
+      browser = null
+      if (error) throw new Error(`[ko] ${error}`)
     }
+
+    if (!response) await closeAll('Response is not present')
+
+    if (response.error)
+      await closeAll(`Response has an error: ${response.error}`)
+
+    if (!response.ok() && response.status() !== 304)
+      await closeAll(`Response status code ${response.status()} for url ${url}`)
 
     console.log('[ok] Got response')
-
-    if (response.error) {
-      await page.close()
-      await browser.close()
-      browser = null
-      throw new Error(response.error)
-    }
-
-    if (!response.ok() && response.status() !== 304) {
-      await page.close()
-      await browser.close()
-      browser = null
-      throw new Error(
-        `[KO] Response status code for the url ${url} was ${response.status()}`
-      )
-    }
 
     const coverage = await page.coverage.stopCSSCoverage()
     console.log('[ok] Got coverage')
@@ -94,9 +90,7 @@ export async function extractCSSFromUrl({
     }
 
     // Close the browser to close the connection and free up resources
-    await page.close()
-    await browser.close()
-    browser = null
+    await closeAll()
 
     // return minified css
     return new Promise((resolve, reject) => {
