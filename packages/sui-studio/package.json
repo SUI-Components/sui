@@ -9,8 +9,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "7.12.10",
-    "@babel/standalone": "7.12.12",
+    "@babel/cli": "7.13.16",
+    "@babel/standalone": "7.14.1",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "2",
