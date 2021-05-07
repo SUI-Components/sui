@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.4.0 (2021-05-07)
+
+
+### Features
+
+* **packages/sui-studio:** ignore leaks also for studio dev ([c466cc8](https://github.com/SUI-Components/sui/commit/c466cc8fef521c102829f7f33c4f59f6ec7820d0))
+
+
+
 # 10.3.0 (2021-05-06)
 
 
