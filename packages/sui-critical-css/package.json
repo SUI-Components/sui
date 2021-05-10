@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/critical-css",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "type": "module",
   "main": "src/index.js",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "css-purge": "3.1.8",
+    "clean-css": "5.1.2",
     "playwright": "1.10.0"
   },
   "peerDependencies": {
