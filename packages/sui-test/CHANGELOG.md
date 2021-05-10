@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.24.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-test:** upgrade dependencies ([c1bf6ec](https://github.com/SUI-Components/sui/commit/c1bf6ecd296ee6e0f16c92368672a0f2ed61f15b))
+
+
+
 # 4.23.0 (2021-05-05)
 
 
