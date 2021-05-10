@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.3.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-critical-css:** use Clean CSS instead PurgeCSS. Smaller, faster and better. ([1e03050](https://github.com/SUI-Components/sui/commit/1e030501162e2afadd6ce6bfcc2745d083de0fe5))
+
+
+
 # 1.2.0 (2021-05-06)
 
 
