@@ -1,10 +1,10 @@
 import {chromium} from 'playwright'
-import cssPurge from 'css-purge'
+import CleanCSS from 'clean-css'
 import {blockedResourceTypes, skippedResources} from './config.js'
 
-const {purgeCSS} = cssPurge
-
 let browser
+
+const css = new CleanCSS({level: 2})
 
 // Setup a browser instance or return the one already created
 const getBrowser = async () => {
@@ -93,11 +93,11 @@ export async function extractCSSFromUrl({
     await closeAll()
 
     // return minified css
-    return new Promise((resolve, reject) => {
-      purgeCSS(coveredCSS, {}, (err, result) =>
-        err ? reject(err) : resolve(result)
-      )
-    })
+    const {styles, stats} = css.minify(coveredCSS)
+    console.log(
+      `[css] Minified from ${stats.originalSize} to ${stats.minifiedSize} bytes`
+    )
+    return styles
   } catch (e) {
     console.log(e)
     browser && browser.close && (await browser.close())
