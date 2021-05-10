@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.5.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-studio:** update testing-library/user-event version ([e7e8cdd](https://github.com/SUI-Components/sui/commit/e7e8cdd765401802fdefe96443e156308a9f8e11))
+
+
+
 # 10.4.0 (2021-05-07)
 
 
