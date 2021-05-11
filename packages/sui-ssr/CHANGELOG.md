@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.26.0 (2021-05-11)
+
+
+### Features
+
+* **packages/sui-ssr:** enable define commit to release ([4a09d3d](https://github.com/SUI-Components/sui/commit/4a09d3d2684216823529e88ef06eb3b55597b4b4))
+
+
+
 # 7.25.0 (2021-04-27)
 
 
