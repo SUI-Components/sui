@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 4.25.0 (2021-05-10)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** put back @s-ui/test ([c23ea81](https://github.com/SUI-Components/sui/commit/c23ea8141bbd8f3b6f56205655d2aed7db04658c))
+
+
+
+# 4.24.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-test:** upgrade dependencies ([c1bf6ec](https://github.com/SUI-Components/sui/commit/c1bf6ecd296ee6e0f16c92368672a0f2ed61f15b))
+
+
+
 # 4.23.0 (2021-05-05)
 
 

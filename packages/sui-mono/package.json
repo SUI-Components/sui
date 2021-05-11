@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mono",
-  "version": "2.12.0",
+  "version": "2.13.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
@@ -10,11 +10,11 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
-    "commitizen": "4.2.3",
+    "commitizen": "4.2.4",
     "conventional-changelog": "3.1.24",
     "editor": "1.0.0",
     "git-url-parse": "11.4.4",
-    "glob": "7.1.6",
+    "glob": "7.1.7",
     "rimraf": "3.0.2",
     "temp": "0.9.4",
     "word-wrap": "1.2.3"

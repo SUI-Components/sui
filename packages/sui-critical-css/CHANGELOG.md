@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 1.3.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-critical-css:** use Clean CSS instead PurgeCSS. Smaller, faster and better. ([1e03050](https://github.com/SUI-Components/sui/commit/1e030501162e2afadd6ce6bfcc2745d083de0fe5))
+
+
+
+# 1.2.0 (2021-05-06)
+
+
+### Features
+
+* **packages/sui-critical-css:** add Julian feedback to PR ([ec97f7b](https://github.com/SUI-Components/sui/commit/ec97f7bc70443fc4eb587ad1945b19c359bdaf3c))
+* **packages/sui-critical-css:** iterate critical css and remove cli ([4d7c66f](https://github.com/SUI-Components/sui/commit/4d7c66fa0476569384eaebb912e8b0a3f264587c))
+
+
+
 # 1.1.0 (2021-04-27)
 
 

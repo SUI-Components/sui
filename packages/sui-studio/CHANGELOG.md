@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 10.5.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-studio:** update testing-library/user-event version ([e7e8cdd](https://github.com/SUI-Components/sui/commit/e7e8cdd765401802fdefe96443e156308a9f8e11))
+
+
+
+# 10.4.0 (2021-05-07)
+
+
+### Features
+
+* **packages/sui-studio:** ignore leaks also for studio dev ([c466cc8](https://github.com/SUI-Components/sui/commit/c466cc8fef521c102829f7f33c4f59f6ec7820d0))
+
+
+
+# 10.3.0 (2021-05-06)
+
+
+### Features
+
+* **packages/sui-studio:** use latest babel-cli ([cb84e11](https://github.com/SUI-Components/sui/commit/cb84e11f2ee228125cc4e3ccfb7e374afc5c4a18))
+
+
+
 # 10.2.0 (2021-04-19)
 
 

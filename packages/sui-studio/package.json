@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "10.2.0",
+  "version": "10.5.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -9,8 +9,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "7.12.10",
-    "@babel/standalone": "7.12.12",
+    "@babel/cli": "7.13.16",
+    "@babel/standalone": "7.14.1",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "2",
@@ -19,7 +19,7 @@
     "@s-ui/test": "4",
     "@testing-library/react": "10.0.4",
     "@testing-library/react-hooks": "4.0.1",
-    "@testing-library/user-event": "10.0.1",
+    "@testing-library/user-event": "13.1.1",
     "chai": "4.2.0",
     "chai-dom": "1.8.2",
     "classnames": "2.2.5",
