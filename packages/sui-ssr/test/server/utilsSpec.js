@@ -54,12 +54,12 @@ describe('[sui-ssr] Utils', () => {
         fs,
         path,
         config: {
-          assetsManifest: {
-            'AppStyles.css': 'file.css'
-          },
           createStylesFor: {
             appStyles: 'AppStyles'
           }
+        },
+        assetsManifest: {
+          'AppStyles.css': 'file.css'
         }
       })
 
@@ -73,12 +73,12 @@ describe('[sui-ssr] Utils', () => {
         path,
         config: {
           ASYNC_CSS_ATTRS,
-          assetsManifest: {
-            'AppStyles.css': 'file.css'
-          },
           createStylesFor: {
             appStyles: 'AppStyles'
           }
+        },
+        assetsManifest: {
+          'AppStyles.css': 'file.css'
         }
       })
 
@@ -93,12 +93,12 @@ describe('[sui-ssr] Utils', () => {
         fs,
         path,
         config: {
-          assetsManifest: {
-            'Home.css': 'home.123.css'
-          },
           createStylesFor: {
             createPagesStyles: true
           }
+        },
+        assetsManifest: {
+          'Home.css': 'home.123.css'
         }
       })
 
@@ -112,12 +112,12 @@ describe('[sui-ssr] Utils', () => {
         path,
         config: {
           ASYNC_CSS_ATTRS,
-          assetsManifest: {
-            'Home.css': 'home.css'
-          },
           createStylesFor: {
             createPagesStyles: true
           }
+        },
+        assetsManifest: {
+          'Home.css': 'home.css'
         }
       })
 
@@ -133,14 +133,14 @@ describe('[sui-ssr] Utils', () => {
         path,
         config: {
           ASYNC_CSS_ATTRS,
-          assetsManifest: {
-            'AppStyles.css': 'file.css',
-            'Home.css': 'home.css'
-          },
           createStylesFor: {
             appStyles: 'AppStyles',
             createPagesStyles: true
           }
+        },
+        assetsManifest: {
+          'AppStyles.css': 'file.css',
+          'Home.css': 'home.css'
         }
       })
 

@@ -5,7 +5,7 @@ const DEFAULT_PUBLIC_FOLDER = 'public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
-export default ({path, fs, config: ssrConf = {}}) => {
+export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   const multiSiteMapping = ssrConf.multiSite
   const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
 
@@ -112,23 +112,38 @@ export default ({path, fs, config: ssrConf = {}}) => {
     return url
   }
 
-  const getStyleHrefBy = ({pageName}) => {
-    const assetsFile = ssrConf.assetsManifest
+  const getAssetsManifest = ({req}) => {
+    let assetsManifest
+
+    try {
+      assetsManifest = JSON.parse(
+        fs.readFileSync(
+          path.join(process.cwd(), publicFolder(req), 'asset-manifest.json'),
+          'utf8'
+        )
+      )
+    } catch (error) {
+      assetsManifest = null
+    }
+
+    return assetsManifest
+  }
+
+  const getStyleHrefBy = ({pageName, req}) => {
+    const assetsFile = assetsManifest || getAssetsManifest({req})
 
     return assetsFile && assetsFile[`${pageName}.css`]
   }
 
-  const createStylesFor = ({pageName, async = false} = {}) => {
+  const createStylesFor = ({pageName, async = false, req} = {}) => {
     if (!ssrConf.createStylesFor) return ''
 
     const appStyles = ssrConf.createStylesFor.appStyles
     const shouldCreatePageStyles = ssrConf.createStylesFor.createPagesStyles
-
     const stylesheets = [
-      appStyles && getStyleHrefBy({pageName: appStyles}),
-      shouldCreatePageStyles && getStyleHrefBy({pageName})
+      appStyles && getStyleHrefBy({pageName: appStyles, req}),
+      shouldCreatePageStyles && getStyleHrefBy({pageName, req})
     ].filter(Boolean)
-
     const attributes = async ? ssrConf.ASYNC_CSS_ATTRS : ''
     const stylesHTML = stylesheets
       .map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`)
