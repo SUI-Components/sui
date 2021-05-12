@@ -5,6 +5,8 @@ const DEFAULT_PUBLIC_FOLDER = 'public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
+let cachedAssetsManifest
+
 export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   const multiSiteMapping = ssrConf.multiSite
   const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
@@ -113,6 +115,8 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   }
 
   const getAssetsManifest = ({req}) => {
+    if (cachedAssetsManifest) return cachedAssetsManifest
+
     let assetsManifest
 
     try {
@@ -122,6 +126,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
           'utf8'
         )
       )
+      cachedAssetsManifest = assetsManifest
     } catch (error) {
       assetsManifest = null
     }
