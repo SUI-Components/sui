@@ -2,7 +2,6 @@
 import express from 'express'
 import ssr from './ssr'
 import criticalCss from './criticalCss'
-import staticCriticalCss from './staticCriticalCss'
 import dynamicRendering from './dynamicRendering'
 import {hooksFactory} from './hooksFactory'
 import TYPES from '../hooks-types'
@@ -19,8 +18,8 @@ import {
   useStaticsByHost,
   readHtmlTemplate
 } from './utils'
-import noOPConsole from 'noop-console'
 
+import noOPConsole from 'noop-console'
 noOPConsole(console)
 
 if (process.env.CONSOLE) {
@@ -140,7 +139,6 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),
-    staticCriticalCss(ssrConf.criticalCSS),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
   ])
 
