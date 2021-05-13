@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.19.0 (2021-05-12)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** fix pde context reference when working with linked packages ([a010fd9](https://github.com/SUI-Components/sui/commit/a010fd98e8ac1bcab026359149516225ce9bbd80))
+
+
+
 # 7.18.0 (2021-04-29)
 
 

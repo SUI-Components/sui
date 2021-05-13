@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 7.28.0 (2021-05-13)
+
+
+### Features
+
+* **packages/sui-ssr:** upgrade express dependency version to latest ([e18fedb](https://github.com/SUI-Components/sui/commit/e18fedb5714064a0f308364222a646720410b8de))
+
+
+
+# 7.27.0 (2021-05-12)
+
+
+
 # 7.26.0 (2021-05-11)
 
 
