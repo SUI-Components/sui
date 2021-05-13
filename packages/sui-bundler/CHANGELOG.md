@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.20.0 (2021-05-13)
+
+
+### Features
+
+* **packages/sui-bundler:** upgrade bundler dependencies ([8a9ee89](https://github.com/SUI-Components/sui/commit/8a9ee8970c40510728ab353905a88825eee87ad0))
+
+
+
 # 7.19.0 (2021-05-12)
 
 
