@@ -60,6 +60,7 @@ export default class OptimizelyAdapter {
       window.__INITIAL_CONTEXT_VALUE__?.pde
     ) {
       datafile = window.__INITIAL_CONTEXT_VALUE__.pde
+      sdkKey = undefined
     }
 
     const optimizelyInstance = optimizely.createInstance({
