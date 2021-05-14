@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/svg",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "description": "Converts svg files into React Components",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "babel-preset-sui": "3",
     "commander": "6.2.1",
     "fast-glob": "3.2.5",
+    "fs-extra": "10.0.0",
     "just-camel-case": "4.0.2",
     "react": "17",
     "react-dom": "17",
