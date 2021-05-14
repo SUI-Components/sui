@@ -71,16 +71,18 @@ fs.emptyDir(LIB_FOLDER)
   .then(installNeededDependencies)
   .then(getAllSrcSvgFiles)
   .then(entries =>
-    entries.forEach(file => {
-      fs.readFile(file, 'utf8')
-        .then(transformSvgToReactComponent)
-        .then(transformCodeWithBabel)
-        .then(result => fs.outputFile(getLibFile(file), result.code))
-        .catch(error => {
-          console.error(error)
-          process.exit(1)
-        })
-    })
+    Promise.all([
+      entries.map(file => {
+        fs.readFile(file, 'utf8')
+          .then(transformSvgToReactComponent)
+          .then(transformCodeWithBabel)
+          .then(result => fs.outputFile(getLibFile(file), result.code))
+          .catch(error => {
+            console.error(error)
+            process.exit(1)
+          })
+      })
+    ])
   )
   .then(createIndexFile)
   .then(copyStylesFile)
