@@ -50,9 +50,7 @@ const installNeededDependencies = () => {
 
   return isInstalled
     ? Promise.resolve(true)
-    : exec(
-        `npm install ${ATOM_ICON_PACKAGE}@${ATOM_ICON_VERSION} --save-exact'`
-      )
+    : exec(`npm install ${ATOM_ICON_PACKAGE}@${ATOM_ICON_VERSION} --save-exact`)
 }
 
 const copyStylesFile = () =>
