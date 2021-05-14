@@ -1,13 +1,10 @@
-/* global __BASE_DIR__ */
-
 import React, {useState} from 'react'
-import PropTypes from 'prop-types'
-import {render} from 'react-dom'
+import ReactDOM from 'react-dom'
 import {ATOM_ICON_COLORS, ATOM_ICON_SIZES} from '@s-ui/react-atom-icon'
 import './index.scss'
+import {icons as iconFiles} from '@s-ui/svg-icons'
 
-const iconFiles = require.context(`${__BASE_DIR__}/lib`, true, /\.*\.js$/)
-
+// eslint-disable-next-line react/prop-types
 const Select = ({onChange, name, options, value}) => {
   const handleChange = e => onChange(e.target.value)
   return (
@@ -24,27 +21,22 @@ const Select = ({onChange, name, options, value}) => {
   )
 }
 
-Select.propTypes = {
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  options: PropTypes.array,
-  value: PropTypes.string
+const cleanKey = key => {
+  const [filename] = key.split('/').reverse()
+  return filename.replace('.js', '')
 }
-
-const cleanKey = key => key.replace('./', '').replace('.js', '')
 const isEmptySearch = search => search === ''
 
 const getIconsToShow = ({searchKey}) => {
-  return iconFiles
-    .keys()
-    .filter(key => {
+  return Object.entries(iconFiles)
+    .filter(([key]) => {
       if (isEmptySearch(searchKey)) return true
 
       const iconName = cleanKey(key)
       return iconName.toLowerCase().includes(searchKey.toLowerCase())
     })
-    .map(key => {
-      const {default: Component} = iconFiles(key)
+    .map(([key, module]) => {
+      const {default: Component} = module
       const name = cleanKey(key)
       return {Component, name}
     })
@@ -95,4 +87,4 @@ const App = () => {
   )
 }
 
-render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))

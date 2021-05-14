@@ -1,13 +1,14 @@
 #!/usr/bin/env node
+
 /* eslint no-console:0 */
+const {optimize} = require('svgo')
 const fg = require('fast-glob')
-const svgr = require('@svgr/core').default
 const fs = require('fs-extra')
-const program = require('commander')
+const util = require('util')
 const {join} = require('path')
 const toCamelCase = require('just-camel-case')
-const babel = require('@babel/core')
-const {getSpawnPromise} = require('@s-ui/helpers/cli')
+const {transformAsync} = require('@babel/core')
+const exec = util.promisify(require('child_process').exec)
 
 const template = require('../templates/icon-component')
 
@@ -15,22 +16,9 @@ const ATOM_ICON_VERSION = 1
 const ATOM_ICON_PACKAGE = '@s-ui/react-atom-icon'
 
 const BASE_DIR = process.cwd()
-const LIB_FOLDER = join(BASE_DIR, '.', 'lib')
-const PACKAGE_JSON = require(join(BASE_DIR, '.', 'package.json'))
-const SVG_FOLDER = join(BASE_DIR, '.', 'src')
-
-program
-  .on('--help', () => {
-    console.log('  Description:')
-    console.log('')
-    console.log('    Builds React lib based on svg files')
-    console.log('')
-    console.log('    Setup your repo with a svg folder')
-    console.log('    Every svg file inside this folder will be converted into')
-    console.log('    a React component')
-    console.log('')
-  })
-  .parse(process.argv)
+const LIB_FOLDER = join(BASE_DIR, 'lib')
+const PACKAGE_JSON = require(join(BASE_DIR, 'package.json'))
+const SVG_FOLDER = join(BASE_DIR, 'src')
 
 const camelCase = fileName => {
   const camelFile = toCamelCase(fileName)
@@ -46,15 +34,13 @@ const getLibFile = file => {
 
 const getAllSrcSvgFiles = () => fg([`${SVG_FOLDER}/**/*.svg`])
 
-const transformSvgToReactComponent = svg =>
-  svgr(svg, {
-    template,
-    expandProps: false,
-    removeTitle: true
-  })
+const transformSvgToReactComponent = svg => {
+  const {data} = optimize(svg)
+  return template(data)
+}
 
 const transformCodeWithBabel = jsCode =>
-  babel.transformAsync(jsCode, {
+  transformAsync(jsCode, {
     presets: [require.resolve('babel-preset-sui')]
   })
 
@@ -64,19 +50,22 @@ const installNeededDependencies = () => {
 
   return isInstalled
     ? Promise.resolve(true)
-    : getSpawnPromise('npm', [
-        'install',
-        `${ATOM_ICON_PACKAGE}@${ATOM_ICON_VERSION}`,
-        '--save-exact'
-      ])
+    : exec(
+        `npm install ${ATOM_ICON_PACKAGE}@${ATOM_ICON_VERSION} --save-exact'`
+      )
 }
 
-const copyStylesFile = () => {
+const copyStylesFile = () =>
   fs.copy(
     require.resolve('../templates/icon-styles.scss'),
     `${LIB_FOLDER}/index.scss`
   )
-}
+
+const createIndexFile = () =>
+  fs.outputFile(
+    `${LIB_FOLDER}/_demo.js`,
+    `export const icons = import.meta.globEager('./*.js')`
+  )
 
 fs.emptyDir(LIB_FOLDER)
   .then(installNeededDependencies)
@@ -93,4 +82,5 @@ fs.emptyDir(LIB_FOLDER)
         })
     })
   )
+  .then(createIndexFile)
   .then(copyStylesFile)
