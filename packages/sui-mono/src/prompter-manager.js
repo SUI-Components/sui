@@ -67,7 +67,7 @@ const getCommitSteps = ({scopesWithChanges}) => [
     initial: true,
     message() {
       const {answers} = this.state
-      const commitMsg = `\n${buildCommit(answers)}\n\n`
+      const commitMsg = `\n\n${buildCommit(answers)}\n\n`
       return `${commitMsg}Are you sure you want to proceed with the commit above?`
     }
   }
