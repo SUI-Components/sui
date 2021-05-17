@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.29.0 (2021-05-17)
+
+
+### Features
+
+* **packages/sui-ssr:** support npm 7 and node 15 forcing mime dependency in sui-ssr to prevent runt ([645db65](https://github.com/SUI-Components/sui/commit/645db65388dc17c89c8e3bf73482d1dbe158e32b))
+
+
+
 # 7.28.0 (2021-05-13)
 
 
