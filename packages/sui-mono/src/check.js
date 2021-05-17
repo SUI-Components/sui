@@ -16,8 +16,9 @@ const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf']
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
-  return [body, footer]
-    .some(msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE'))
+  return [body, footer].some(
+    msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE')
+  )
 }
 
 const flattenForMonopackage = status =>

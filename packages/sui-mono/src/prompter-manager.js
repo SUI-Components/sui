@@ -90,9 +90,11 @@ module.exports = async function startMainCommitFlow() {
     )
   ).then(result => result.filter(Boolean))
 
-  const answers = await prompt(getCommitSteps({scopesWithChanges})).catch(err => {
-    console.error(err)
-  })
+  const answers = await prompt(getCommitSteps({scopesWithChanges})).catch(
+    err => {
+      console.error(err)
+    }
+  )
 
   if (answers && answers.confirmCommit === true) {
     const commitMsg = buildCommit(answers)
