@@ -28,8 +28,6 @@ It lints all `js|jsx` files in your project, excluding `.eslintignore` and `.git
 
 Same options available in [eslint](https://eslint.org/docs/user-guide/command-line-interface) except one: `-c, --config`. If you try to use this option, an exception will be thrown.
 
-
-
 ### Format JS files
 
 ```sh
