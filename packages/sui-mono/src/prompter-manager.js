@@ -90,22 +90,20 @@ module.exports = async function startMainCommitFlow() {
     )
   ).then(result => result.filter(Boolean))
 
-  prompt(getCommitSteps({scopesWithChanges}))
-    .then(async answers => {
-      if (answers.confirmCommit === true) {
-        const commitMsg = buildCommit(answers)
-        const commitParams = commitMsg
-          .split('\n') // separate each new line to
-          .filter(Boolean) // filter empty strings
-          .map(msg => `-m "${msg}"`)
-          .join(' ')
+  const answers = await prompt(getCommitSteps({scopesWithChanges})).catch(err => {
+    console.error(err)
+  })
 
-        await exec(`git commit ${commitParams}`, {cwd: process.cwd()})
-      } else {
-        console.log(colors.red('Commit has been canceled.'))
-      }
-    })
-    .catch(err => {
-      console.error(err)
-    })
+  if (answers && answers.confirmCommit === true) {
+    const commitMsg = buildCommit(answers)
+    const commitParams = commitMsg
+      .split('\n') // separate each new line to
+      .filter(Boolean) // filter empty strings
+      .map(msg => `-m "${msg}"`)
+      .join(' ')
+
+    await exec(`git commit ${commitParams}`, {cwd: process.cwd()})
+  } else {
+    console.log(colors.red('Commit has been canceled.'))
+  }
 }
