@@ -1,6 +1,4 @@
 import axios from 'axios'
-// import getPerf from '@s-ui/perf'
-// import measureAxios from '@s-ui/perf/src/measure-axios'
 
 /** @typedef {import('./FetcherInterface').default} FetcherInterface */
 /** @implements {FetcherInterface} */
@@ -11,8 +9,6 @@ export default class AxiosFetcher {
    */
   constructor({config}) {
     this._axios = axios.create(config)
-    // const perf = getPerf(config.get('serverRequestId') || 'default')
-    // measureAxios(perf)(this._axios)
   }
 
   /**
