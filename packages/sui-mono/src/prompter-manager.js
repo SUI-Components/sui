@@ -67,8 +67,8 @@ const getCommitSteps = ({scopesWithChanges}) => [
     initial: true,
     message() {
       const {answers} = this.state
-      console.log(`\n${buildCommit(answers)}\n`)
-      return 'Are you sure you want to proceed with the commit above?'
+      const commitMsg = `\n${buildCommit(answers)}\n\n`
+      return `${commitMsg}Are you sure you want to proceed with the commit above?`
     }
   }
 ]
@@ -104,7 +104,9 @@ module.exports = async function startMainCommitFlow() {
       .map(msg => `-m "${msg}"`)
       .join(' ')
 
-    await exec(`git commit ${commitParams}`, {cwd: process.cwd()})
+    const commitArgs = process.argv.slice(2).join(' ')
+
+    await exec(`git commit ${commitParams} ${commitArgs}`, {cwd: process.cwd()})
   } else {
     console.log(colors.red('Commit has been canceled.'))
   }
