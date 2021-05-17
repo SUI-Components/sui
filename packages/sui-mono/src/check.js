@@ -14,10 +14,10 @@ const PACKAGE_VERSION_INCREMENT = {
 const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf']
 
 const isCommitBreakingChange = commit => {
-  return (
-    typeof commit.footer === 'string' &&
-    commit.footer.includes('BREAKING CHANGE')
-  )
+  const {body, footer} = commit
+
+  return [body, footer]
+    .some(msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE'))
 }
 
 const flattenForMonopackage = status =>
