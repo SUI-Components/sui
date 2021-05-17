@@ -522,3 +522,10 @@ Maybe you want to use a config like this:
   }
 }
 ```
+
+# Next Steps:
+
+**Stop compiling s-ui/ssr**
+⚠️ `sui-ssr build` is going to be deprecated in some following major version:
+
+- With that we could delete mime version of package json. Added because webpack does not get correctly mime version and could cause server errors. It is an express dependency.
