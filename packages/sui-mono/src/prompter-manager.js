@@ -1,21 +1,18 @@
 /* eslint-disable no-console */
 
 const colors = require('@s-ui/helpers/colors')
-const util = require('util')
-const {exec: execNative} = require('child_process')
+const {promisify} = require('util')
+const exec = promisify(require('child_process').exec)
 const {prompt} = require('enquirer')
+
 const buildCommit = require('./build-commit')
 const config = require('./config')
 const {types: commitTypes} = require('./commit-types')
 
-const exec = util.promisify(execNative)
-
 const scopes = config.getWorkspaces().map(name => ({name}))
 
 const allowedBreakingChanges = ['feat', 'fix']
-const typesWithOtherScopes = ['feat', 'fix', 'release', 'test', 'docs', 'chore']
 const defaultScopes = [{name: 'Root'}]
-const otherScopes = defaultScopes
 
 const getCommitTypesMapped = () =>
   Object.keys(commitTypes).map(value => ({
@@ -34,15 +31,7 @@ const getCommitSteps = ({scopesWithChanges}) => [
     type: 'select',
     name: 'scope',
     message: '\nDenote the SCOPE of this change:',
-    choices() {
-      const {type} = this.state.answers
-
-      console.log({scopesWithChanges, type})
-
-      return typesWithOtherScopes.includes(type)
-        ? scopesWithChanges.concat(otherScopes)
-        : scopesWithChanges
-    }
+    choices: scopesWithChanges.concat(defaultScopes)
   },
   {
     type: 'input',
@@ -75,6 +64,7 @@ const getCommitSteps = ({scopesWithChanges}) => [
   {
     type: 'confirm',
     name: 'confirmCommit',
+    initial: true,
     message() {
       const {answers} = this.state
       console.log(`\n${buildCommit(answers)}\n`)
