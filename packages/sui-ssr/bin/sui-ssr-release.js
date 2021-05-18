@@ -9,6 +9,8 @@ program
   .option('-B, --branch <branch>', 'Release branch. Will be master by default')
   .option('-E, --email <email>', 'Releaser´s email')
   .option('-N, --name <name>', 'Releaser´s name')
+  .option('-C, --commit <commit>', 'Commit to tag')
+  .option('-sci, --skip-ci', 'Skip CI')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -26,7 +28,7 @@ program
   })
   .parse(process.argv)
 
-const {branch = 'master', email, name} = program
+const {branch = 'master', email, name, skipCi = false, commit} = program
 
 const execute = async (cmd, full) => {
   try {
@@ -41,6 +43,13 @@ const execute = async (cmd, full) => {
     return e
   }
 }
+
+const getCommitToTag = async () => {
+  if (commit) return commit
+
+  return execute('git rev-parse HEAD')
+}
+
 ;(async () => {
   const cwd = process.cwd()
   const {GITHUB_TOKEN, GH_TOKEN} = process.env
@@ -52,8 +61,8 @@ const execute = async (cmd, full) => {
   try {
     await execute(`git checkout ${branch}`)
     await execute(`git pull origin ${branch}`)
-    const lastCommitHash = await execute('git rev-parse HEAD')
-    const hasTag = await execute(`git tag --points-at ${lastCommitHash}`)
+    const commitToTag = await getCommitToTag()
+    const hasTag = await execute(`git tag --points-at ${commitToTag}`)
 
     if (hasTag) {
       console.log('We are going to release the current tag:', hasTag)
@@ -88,7 +97,11 @@ const execute = async (cmd, full) => {
       )}`
     )
 
-    await execute(`git commit -m "release(META): ${nextVersion}"`)
+    const skipCiMessage = skipCi ? '[skip ci]' : ''
+
+    await execute(
+      `git commit -m "release(META): ${nextVersion} ${skipCiMessage}"`
+    )
     await execute(`git tag -a "v${nextVersion}" -m "v${nextVersion}"`)
     await execute('git status')
     await execute(`git push --set-upstream --tags origin ${branch}`)

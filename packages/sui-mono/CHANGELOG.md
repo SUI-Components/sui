@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.13.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-mono:** use latest commitizen with less dependencies ([d1acee0](https://github.com/SUI-Components/sui/commit/d1acee0d76da434ec509451f786c1f3b328aa9e6))
+
+
+
 # 2.12.0 (2021-03-25)
 
 

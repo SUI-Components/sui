@@ -130,19 +130,20 @@ export default config => (req, res, next) => {
         if (hasMandatoryRules) {
           // Check if any currentConfig mandatory CSS rule is missing in generated critical CSS
           const isMandatoryCssMissingInCritical = renderProps.routes.find(
-            ({path}) => {
-              if (!path) {
+            ({path, regexp}) => {
+              const routeCondition = path || regexp
+              if (!routeCondition) {
                 return false
               }
 
-              const mandatoryCSSRulesForPath = mandatoryCSSRules[path]
+              const mandatoryCSSRulesForPath = mandatoryCSSRules[routeCondition]
               if (!mandatoryCSSRulesForPath) return false
 
               const checkCssRuleAgainstPath = cssRule => {
                 const hasMismatch = !css.includes(cssRule)
                 if (hasMismatch) {
                   logMessage(
-                    `Mismatch detected at ${path} path, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
+                    `Mismatch detected at ${routeCondition} route codition, mandatory CSS rule ${cssRule} missing in generated critical CSS. Cache entry not added for ${hash}`
                   )
                   return hasMismatch
                 }

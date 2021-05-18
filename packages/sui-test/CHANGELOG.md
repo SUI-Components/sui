@@ -1,5 +1,59 @@
 # CHANGELOG
 
+# 4.25.0 (2021-05-10)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** put back @s-ui/test ([c23ea81](https://github.com/SUI-Components/sui/commit/c23ea8141bbd8f3b6f56205655d2aed7db04658c))
+
+
+
+# 4.24.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-test:** upgrade dependencies ([c1bf6ec](https://github.com/SUI-Components/sui/commit/c1bf6ecd296ee6e0f16c92368672a0f2ed61f15b))
+
+
+
+# 4.23.0 (2021-05-05)
+
+
+### Features
+
+* **packages/sui-test:** add cypress-file-upload dependency ([c9097a1](https://github.com/SUI-Components/sui/commit/c9097a154d4a5a2b160fb5153d869473c1a35ba6))
+
+
+
+# 4.22.0 (2021-04-26)
+
+
+### Features
+
+* **packages/sui-test:** use flag as false by default ([6a83b81](https://github.com/SUI-Components/sui/commit/6a83b810a98687ed5fe7bb374757c894d3c88f24))
+
+
+
+# 4.21.0 (2021-04-23)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** use timeout command option to increase also browser disconnect timeout ([a10e653](https://github.com/SUI-Components/sui/commit/a10e6537e4817eb2bff89fa7661adfbfec0a68b1))
+
+
+
+# 4.20.0 (2021-04-21)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** add an option to prevents compile lib folders for server tests ([5e6a9fd](https://github.com/SUI-Components/sui/commit/5e6a9fdb3c0bf19bad379c2ddcc8e493ee5a11df))
+
+
+
 # 4.19.0 (2021-04-19)
 
 

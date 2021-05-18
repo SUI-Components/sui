@@ -60,6 +60,7 @@ export default class OptimizelyAdapter {
       window.__INITIAL_CONTEXT_VALUE__?.pde
     ) {
       datafile = window.__INITIAL_CONTEXT_VALUE__.pde
+      sdkKey = undefined
     }
 
     const optimizelyInstance = optimizely.createInstance({
@@ -130,6 +131,31 @@ export default class OptimizelyAdapter {
     return this._optimizely
       .onReady({timeout: DEFAULT_TIMEOUT})
       .then(() => this._optimizely)
+  }
+
+  /**
+   * Checks if a feature flag is active or not
+   * @param {object} param
+   * @param {string} param.featureKey
+   * @parma {object=} param.attributes
+   * @returns {boolean}
+   */
+  isFeatureEnabled({featureKey, attributes}) {
+    // check for user consents only if featureKey is a feature that belongs to a feature test
+    if (
+      this._optimizely.projectConfigManager.getConfig().featureKeyMap[
+        featureKey
+      ].experimentIds.length > 0 &&
+      !this._hasUserConsents
+    ) {
+      return false
+    }
+
+    return this._optimizely.isFeatureEnabled(
+      featureKey,
+      this._userId,
+      attributes
+    )
   }
 
   updateConsents({hasUserConsents}) {

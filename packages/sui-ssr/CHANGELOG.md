@@ -1,5 +1,70 @@
 # CHANGELOG
 
+# 7.29.0 (2021-05-17)
+
+
+### Features
+
+* **packages/sui-ssr:** support npm 7 and node 15 forcing mime dependency in sui-ssr to prevent runt ([645db65](https://github.com/SUI-Components/sui/commit/645db65388dc17c89c8e3bf73482d1dbe158e32b))
+
+
+
+# 7.28.0 (2021-05-13)
+
+
+### Features
+
+* **packages/sui-ssr:** upgrade express dependency version to latest ([e18fedb](https://github.com/SUI-Components/sui/commit/e18fedb5714064a0f308364222a646720410b8de))
+
+
+
+# 7.27.0 (2021-05-12)
+
+
+
+# 7.26.0 (2021-05-11)
+
+
+### Features
+
+* **packages/sui-ssr:** enable define commit to release ([4a09d3d](https://github.com/SUI-Components/sui/commit/4a09d3d2684216823529e88ef06eb3b55597b4b4))
+
+
+
+# 7.25.0 (2021-04-27)
+
+
+### Features
+
+* **packages/sui-ssr:** trigger release ([017088d](https://github.com/SUI-Components/sui/commit/017088dd10e16e5dc5d4cec987dbcbc93e8d70a8))
+* **sui-ssr:** add sui-router regexp support for critical css mandatoryCSSRules flag ([8bee98c](https://github.com/SUI-Components/sui/commit/8bee98c4444ff7774de31886abcf38045e13d638))
+* **sui-ssr:** update readme ([17a3bbc](https://github.com/SUI-Components/sui/commit/17a3bbc0c5dcb1fc8edd89aea1db7e809abc0c99))
+
+
+
+# 7.24.0 (2021-04-26)
+
+
+
+# 7.23.0 (2021-04-22)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix async styles load ([5849d33](https://github.com/SUI-Components/sui/commit/5849d338f122a4d8ee15d3953ef28bbd99b16086))
+* **packages/sui-ssr:** fix package json version ([a47224c](https://github.com/SUI-Components/sui/commit/a47224c67959dd78f1bfa283fc06d822ef6a39d9))
+* **packages/sui-ssr:** fix test async constant ([98a6928](https://github.com/SUI-Components/sui/commit/98a6928c21616b7f9990882df9c6568f479ede2a))
+* **packages/sui-ssr:** not remove critical css when page loads ([99ec9d1](https://github.com/SUI-Components/sui/commit/99ec9d18413cccc0bc515456637d47bde4748dc5))
+
+
+### Features
+
+* **packages/sui-ssr:** skip ci release by flag ([f166d34](https://github.com/SUI-Components/sui/commit/f166d34fc7045cd08a2b234a7db9f58cdbeb10b0))
+* **sui-ssr:** add debugbear user-agent detection in ssr perf/dynamicRendering ([f5bbf84](https://github.com/SUI-Components/sui/commit/f5bbf846fce2fd78d71eeaab972a0b8afaa5480d))
+* **sui-ssr:** bump sui-ssr ([2cffe54](https://github.com/SUI-Components/sui/commit/2cffe54c31ceceda717e237449da67ec3ba7d452))
+
+
+
 # 7.22.0 (2021-04-12)
 
 

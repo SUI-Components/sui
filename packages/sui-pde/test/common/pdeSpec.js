@@ -16,7 +16,20 @@ describe('@s-ui pde', () => {
       activate: sinon.stub().returns('variationA'),
       onReady: async () => true,
       getEnabledFeatures: () => ['a', 'b'],
-      getVariation: sinon.stub().returns('variationB')
+      isFeatureEnabled: sinon.stub().returns(true),
+      getVariation: sinon.stub().returns('variationB'),
+      projectConfigManager: {
+        getConfig: () => ({
+          featureKeyMap: {
+            featureUsedInTest: {
+              experimentIds: ['1234']
+            },
+            featureNotUsedInTest: {
+              experimentIds: []
+            }
+          }
+        })
+      }
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
@@ -47,6 +60,29 @@ describe('@s-ui pde', () => {
     })
     const features = ab.getEnabledFeatures()
     expect(features).to.deep.equal(['a', 'b'])
+  })
+
+  it('shouldnt load feature when its being used in an experiment and the user has not given his consent', () => {
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter,
+      hasUserConsents: false
+    })
+    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
+    expect(enabled).to.equal(false)
+    expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(false)
+  })
+
+  it('should load a feture that is being used in an experiment when the user has given his consents', () => {
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter,
+      hasUserConsents: true
+    })
+    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
+    expect(enabled).to.equal(true)
+    expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(true)
+    expect(optimizelyInstanceStub.isFeatureEnabled.args[0][0]).to.equal(
+      'featureUsedInTest'
+    )
   })
 
   it('should call optimizelys sdk activate fn', () => {
@@ -186,7 +222,7 @@ describe('@s-ui pde', () => {
     expect(window.optimizelyClientInstance).to.not.exist
   })
 
-  it.client('loads datafile if set', () => {
+  it.client('loads datafile if set but do not pass sdkKey', () => {
     window.__INITIAL_CONTEXT_VALUE__ = {pde: {initialDatafile: true}}
     const optimizelySDK = {
       setLogger: () => {},
@@ -196,14 +232,17 @@ describe('@s-ui pde', () => {
       },
       createInstance: sinon.spy()
     }
+
     OptimizelyAdapter.createOptimizelyInstance({
       optimizely: optimizelySDK
     })
+
     expect(optimizelySDK.createInstance.calledOnce)
 
-    expect(
-      optimizelySDK.createInstance.firstCall.args[0].datafile
-    ).to.deep.equal({initialDatafile: true})
+    const {sdkKey, datafile} = optimizelySDK.createInstance.firstCall.args[0]
+
+    expect(sdkKey).be.undefined
+    expect(datafile).to.deep.equal({initialDatafile: true})
   })
 
   it('loads the default variation when no consents given', () => {
