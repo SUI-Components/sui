@@ -24,9 +24,9 @@
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
   },
   "devDependencies": {
-    "@babel/cli": "7.13.16",
+    "@babel/cli": "7.14.3",
     "@s-ui/lint": "3",
-    "@s-ui/mono": "beta",
+    "@s-ui/mono": "2",
     "@s-ui/precommit": "2",
     "@s-ui/react-context": "1",
     "@s-ui/test": "4",
