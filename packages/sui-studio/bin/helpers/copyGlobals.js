@@ -1,7 +1,8 @@
-const cpy = require('cpy')
+const copy = require('copyfiles')
 const fs = require('fs')
 
 const GLOBALS_FILE_PATH = 'components/globals.js'
+const DESTINATION_FOLDER = 'public'
 
 module.exports = function copyGlobals() {
   if (fs.existsSync(GLOBALS_FILE_PATH)) {
@@ -9,7 +10,7 @@ module.exports = function copyGlobals() {
   } else {
     fs.writeFileSync(GLOBALS_FILE_PATH, '// globals file', 'utf8')
   }
-  cpy([GLOBALS_FILE_PATH], 'public', {
-    parents: true
-  })
+  copy([GLOBALS_FILE_PATH, DESTINATION_FOLDER], () =>
+    console.log('[sui-studio] Copied globals file correctly')
+  )
 }
