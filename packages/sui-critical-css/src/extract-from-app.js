@@ -13,7 +13,7 @@ export const createUrlFrom = ({hostname, pathOptions}) => {
 
 export async function extractCSSFromApp({routes, config = {}}) {
   const manifest = {}
-  const {hostname, outputDir = '/critical-css'} = config
+  const {filename = 'critical', hostname, outputDir = '/critical-css'} = config
   const writeFilesPromises = []
 
   await mkdir(join(process.cwd(), outputDir), {recursive: true})
@@ -50,7 +50,7 @@ export async function extractCSSFromApp({routes, config = {}}) {
   }
   console.log('All Critical CSS files written')
 
-  const manifestPathFile = join(process.cwd(), outputDir, 'critical.json')
+  const manifestPathFile = join(process.cwd(), outputDir, `${filename}.json`)
   await writeFile(manifestPathFile, JSON.stringify(manifest))
   console.log('Manifest Critical CSS created')
 }
