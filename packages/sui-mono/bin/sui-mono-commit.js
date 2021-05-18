@@ -1,8 +1,7 @@
 /* eslint no-console:0 */
-const path = require('path')
-const util = require('util')
-const exec = util.promisify(require('child_process').exec)
-const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
+const {promisify} = require('util')
+const startMainCommitFlow = require('../src/prompter-manager')
+const exec = promisify(require('child_process').exec)
 
 /**
  * Get the list of modified files by the user
@@ -12,6 +11,7 @@ const bootstrap = require('commitizen/dist/cli/git-cz').bootstrap
 const getDiffedFiles = ({checkIfStaged = false} = {}) => {
   let command = 'git diff --name-only'
   if (checkIfStaged) command += ' --cached'
+
   return exec(command).then(({stdout: files = ''}) => ({
     hasFiles: files.trim().length > 0,
     files
@@ -34,13 +34,7 @@ async function initCommit() {
     return
   }
 
-  bootstrap({
-    debug: false,
-    cliPath: path.join(process.cwd(), 'node_modules/commitizen'),
-    config: {
-      path: require.resolve('../src/commitsPrompter.js')
-    }
-  })
+  startMainCommitFlow()
 }
 
 initCommit()
