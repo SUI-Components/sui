@@ -10,7 +10,13 @@ const icons = path.resolve(process.cwd(), 'lib', '_demo.js')
   const server = await createServer({
     root,
     optimizeDeps: {
-      include: ['react-dom']
+      include: [
+        'classnames',
+        'prop-types',
+        'react',
+        'react/jsx-runtime',
+        'react-dom'
+      ]
     },
     resolve: {
       alias: [

@@ -62,7 +62,7 @@ const copyStylesFile = () =>
 const createIndexFile = () =>
   fs.outputFile(
     `${LIB_FOLDER}/_demo.js`,
-    `export const icons = import.meta.globEager('./*.js')`
+    `export const icons = import.meta.globEager('./**/*.js')`
   )
 
 fs.emptyDir(LIB_FOLDER)
