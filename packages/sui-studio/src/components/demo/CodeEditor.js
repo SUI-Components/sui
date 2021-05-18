@@ -3,9 +3,6 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import debounce from 'just-debounce-it'
 
-import {fromTextArea} from 'codemirror'
-import 'codemirror/mode/javascript/javascript'
-
 const CODE_MIRROR_OPTIONS = {
   lineNumbers: true,
   mode: 'javascript',
@@ -26,7 +23,10 @@ function CodeEditor({isOpen, onChange, playground}) {
 
   useEffect(function() {
     const onChangeDebounced = createOnChangeDebounced()
-    const codeMirror = fromTextArea(textAreaRef.current, CODE_MIRROR_OPTIONS)
+    const codeMirror = window.CodeMirror.fromTextArea(
+      textAreaRef.current,
+      CODE_MIRROR_OPTIONS
+    )
     codeMirror.setValue(playground)
     codeMirror.on('change', onChangeDebounced)
 
