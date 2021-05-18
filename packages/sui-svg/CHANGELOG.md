@@ -1,5 +1,27 @@
 # CHANGELOG
 
+# 3.0.0 (2021-05-18)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** add missing dependency ([2a05c32](https://github.com/SUI-Components/sui/commit/2a05c32da913796cb473f600b0a1be6cb9efb45b))
+* **packages/sui-svg:** use correctly npm install for atom icon ([f764433](https://github.com/SUI-Components/sui/commit/f764433c08f5a593926b0127b995bac719e7d0cf))
+
+
+### Features
+
+* **packages/sui-svg:** add sass as dependency ([30b2995](https://github.com/SUI-Components/sui/commit/30b29951e65eabcd2cc04418cec7e1eabfd2634b))
+* **packages/sui-svg:** change catalogue title ([6e90dac](https://github.com/SUI-Components/sui/commit/6e90dac8d350b8be00b3bff8acc5c8556b06d333))
+* **packages/sui-svg:** migrate sui-svg to use vite ([7dd6d80](https://github.com/SUI-Components/sui/commit/7dd6d80b2867f92beaf04f9c570d9f0523932316))
+* **packages/sui-svg:** Release a new version with breaking changes ([a173665](https://github.com/SUI-Components/sui/commit/a1736652eafae5619710fae4396e25549e17e165))
+* **packages/sui-svg:** use correct alpha ([d74d8be](https://github.com/SUI-Components/sui/commit/d74d8be9d10907ac2a02d42a618def0313dd5b4c))
+* **packages/sui-svg:** use dangerouslySetInnerHTML for SVGs ([0995c90](https://github.com/SUI-Components/sui/commit/0995c9084cb39fde3969e7a4ee9a9fd32eae5a2c))
+* **packages/sui-svg:** use latest alpha ([937207e](https://github.com/SUI-Components/sui/commit/937207e9e7baecc2fff119e19de87b7f808294a1))
+* **packages/sui-svg:** use needed dependencies and transform them accordingly ([84d2600](https://github.com/SUI-Components/sui/commit/84d2600edc1fdffa78f410e3bbb6e1d74e67c206))
+
+
+
 # 2.11.0 (2021-04-19)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/svg",
-  "version": "2.11.1",
+  "version": "3.0.0",
   "description": "Converts svg files into React Components",
   "main": "index.js",
   "scripts": {
