@@ -6,12 +6,11 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1"
   />
-  <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-  <script src="https://unpkg.com/mocha/mocha.js"></script>
-  <script class="mocha-init">
-    mocha.setup('bdd')
-    mocha.setup({ignoreLeaks: true})
-  </script>
+  <script defer src="https://unpkg.com/@babel/standalone@7.14.3/babel.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/javascript/javascript.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/theme/material.min.css" />
 </head>
 <body>
   <div id="root"></div>
