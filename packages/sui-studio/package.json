@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "10.5.0",
+  "version": "10.7.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "7.13.16",
+    "@babel/cli": "7.14.3",
     "@babel/standalone": "7.14.1",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
@@ -30,10 +30,10 @@
     "cpy": "8.1.1",
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.4",
-    "fs-extra": "9.0.1",
+    "fs-extra": "10.0.0",
     "git-url-parse": "11.4.4",
     "hoist-non-react-statics": "3.3.2",
-    "just-debounce-it": "1.1.0",
+    "just-debounce-it": "1.5.0",
     "just-kebab-case": "1.1.0",
     "just-pascal-case": "1.1.0",
     "node-fetch": "2.6.1",

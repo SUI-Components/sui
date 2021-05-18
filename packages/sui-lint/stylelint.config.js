@@ -1,28 +1,9 @@
 const prettierOptions = require('./.prettierrc')
 
-function suitSelector(componentName) {
-  const ns = '[a-z]{2,3}'
-  const WORD = '[a-z0-9][a-zA-Z0-9]*'
-  const descendant = `(?:-${WORD})?`
-  const modifier = `(?:--${WORD}(?:\\.${ns}${componentName}${descendant}--${WORD})*)?`
-  const attribute = '(?:\\[.+\\])?'
-  const state = `(?:\\.(is|has)-${WORD})*`
-  const body = descendant + modifier + attribute + state
-  return new RegExp(`^\\.${ns}${componentName}\\b${body}$`)
-}
-
 module.exports = {
-  plugins: [
-    'stylelint-selector-bem-pattern',
-    'stylelint-scss',
-    'stylelint-prettier'
-  ],
+  plugins: ['stylelint-scss', 'stylelint-prettier'],
   rules: {
     'prettier/prettier': [true, prettierOptions],
-    'plugin/selector-bem-pattern': {
-      componentName: /^[a-zA-Z]+$/,
-      componentSelectors: suitSelector
-    },
     'scss/at-rule-no-unknown': true,
     'at-rule-no-unknown': null,
     'block-no-empty': true,
