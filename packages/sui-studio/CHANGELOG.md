@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.7.0 (2021-05-18)
+
+
+### Features
+
+* **packages/sui-studio:** Use old babel/standalone ([68994c9](https://github.com/SUI-Components/sui/commit/68994c9311a08024bf13ed427232bbe3a2efe7bc))
+
+
+
 # 10.6.0 (2021-05-18)
 
 
