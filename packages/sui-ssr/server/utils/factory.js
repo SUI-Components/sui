@@ -139,21 +139,21 @@ export default ({path, fs, config: ssrConf = {}}) => {
     return stylesHTML
   }
 
-  const getCriticalManifest = ({req}) => {
+  const criticalDir = ({req}) => {
+    const site = siteByHost(req)
+
+    return site ? `critical-css-${site}` : 'critical-css'
+  }
+
+  const criticalManifest = ({req}) => {
     if (cachedCriticalManifest) return cachedCriticalManifest
 
     let criticalManifest
 
     try {
-      const site = siteByHost(req)
-
       criticalManifest = JSON.parse(
         fs.readFileSync(
-          path.join(
-            process.cwd(),
-            site ? `critical-css-${site}` : 'critical-css',
-            'critical.json'
-          ),
+          path.join(process.cwd(), criticalDir({req}), 'critical.json'),
           'utf8'
         )
       )
@@ -175,6 +175,7 @@ export default ({path, fs, config: ssrConf = {}}) => {
     readHtmlTemplate,
     siteByHost,
     useStaticsByHost,
-    getCriticalManifest
+    criticalDir,
+    criticalManifest
   }
 }
