@@ -15,7 +15,7 @@ describe('Tracer', () => {
 
   afterEach(() => {
     global.__SUI_DECORATOR_TRACER_REPORTER__ = undefined
-    fnSpy.reset()
+    fnSpy.resetHistory()
 
     ConsoleReporter.prototype.send.restore()
   })
