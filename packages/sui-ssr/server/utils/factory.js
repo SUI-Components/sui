@@ -151,8 +151,8 @@ export default ({path, fs, config: ssrConf = {}}) => {
         fs.readFileSync(
           path.join(
             process.cwd(),
-            'critical-css',
-            site ? `critical-${site}.json` : 'critical.json'
+            site ? `critical-css-${site}` : 'critical-css',
+            'critical.json'
           ),
           'utf8'
         )
