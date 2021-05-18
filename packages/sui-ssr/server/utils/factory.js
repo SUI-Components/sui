@@ -5,6 +5,8 @@ const DEFAULT_PUBLIC_FOLDER = 'public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
+let cachedCriticalManifest
+
 export default ({path, fs, config: ssrConf = {}}) => {
   const multiSiteMapping = ssrConf.multiSite
   const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
@@ -137,6 +139,32 @@ export default ({path, fs, config: ssrConf = {}}) => {
     return stylesHTML
   }
 
+  const getCriticalManifest = ({req}) => {
+    if (cachedCriticalManifest) return cachedCriticalManifest
+
+    let criticalManifest
+
+    try {
+      const site = siteByHost(req)
+
+      criticalManifest = JSON.parse(
+        fs.readFileSync(
+          path.join(
+            process.cwd(),
+            'critical-css',
+            site ? `critical-${site}.json` : 'critical.json'
+          ),
+          'utf8'
+        )
+      )
+      cachedCriticalManifest = criticalManifest
+    } catch (error) {
+      criticalManifest = null
+    }
+
+    return criticalManifest
+  }
+
   return {
     buildRequestUrl,
     createStylesFor,
@@ -146,6 +174,7 @@ export default ({path, fs, config: ssrConf = {}}) => {
     publicFolder,
     readHtmlTemplate,
     siteByHost,
-    useStaticsByHost
+    useStaticsByHost,
+    getCriticalManifest
   }
 }
