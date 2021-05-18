@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.6.0 (2021-05-18)
+
+
+### Features
+
+* **packages/sui-studio:** upgrade deps ([191b742](https://github.com/SUI-Components/sui/commit/191b742489e746f4a6d4ce55940047340dd05159))
+
+
+
 # 10.5.0 (2021-05-10)
 
 
