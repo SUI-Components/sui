@@ -193,7 +193,7 @@ return (<${componentInPascal} />)
 
   writeFile(
     COMPONENT_PLAYGROUND_FILE,
-    `import ${componentInPascal} from 'components/${category}/${component}/'
+    `import ${componentInPascal} from 'components/${category}/${component}/src'
 export default () => <${componentInPascal} />
 `
   ),
