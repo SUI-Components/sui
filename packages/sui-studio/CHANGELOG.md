@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 10.8.0 (2021-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Fix mocha version to 7 and remove deprecated option ([6f78805](https://github.com/SUI-Components/sui/commit/6f7880510a37fd95907ee848f1d0212c63f2efbb))
+
+
+### Features
+
+* **packages/sui-studio:** Remove and add some deps ([39f08f3](https://github.com/SUI-Components/sui/commit/39f08f302d348d78e8e1e11ff47bc07917dfed87))
+* **packages/sui-studio:** Use babel standalone from bundle and be more resilient ([c70a44f](https://github.com/SUI-Components/sui/commit/c70a44f0ce7a2aa54fa63d87f335463d5b34c06f))
+* **packages/sui-studio:** Use client dependencies instead bundle ([5611b08](https://github.com/SUI-Components/sui/commit/5611b08746c408eab0f22710d25f443a7667c6f2))
+* **packages/sui-studio:** Use CodeMirror from window instead bundle ([ea5bc7b](https://github.com/SUI-Components/sui/commit/ea5bc7bf58ecefd7ef867c23370ecfd83ca0be91))
+* **packages/sui-studio:** Use copyfiles instead cpy for smaller deps size ([cc1a637](https://github.com/SUI-Components/sui/commit/cc1a63789b36fa2f0e6cd37a8425848cb6cac63f))
+
+
+
 # 10.7.0 (2021-05-18)
 
 
