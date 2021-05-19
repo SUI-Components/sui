@@ -8,7 +8,7 @@ const {
   STATUS_STATES
 } = require('./constants')
 
-export const getDomain = (url = '') => {
+const getDomain = (url = '') => {
   const [, address] = url.trim().split('@')
   const [domain] = address.split(':')
   return domain
