@@ -9,9 +9,16 @@ const {
 } = require('./constants')
 
 const getDomain = (url = '') => {
-  const [, address] = url.trim().split('@')
-  const [domain] = address.split(':')
-  return domain
+  const cleanUrl = url.trim().replace('\n', '')
+  const isHttp = cleanUrl.startsWith('https://')
+
+  if (isHttp) {
+    return cleanUrl.split('/')[2]
+  } else {
+    const [, address] = cleanUrl.split('@')
+    const [domain] = address.split(':')
+    return domain
+  }
 }
 
 /**
