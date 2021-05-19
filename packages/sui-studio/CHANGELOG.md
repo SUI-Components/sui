@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.11.0 (2021-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio demo should use src code instead lib ([d1db917](https://github.com/SUI-Components/sui/commit/d1db91748ba553dd5c3bb1a354097e1a40058680))
+
+
+
 # 10.10.0 (2021-05-19)
 
 
