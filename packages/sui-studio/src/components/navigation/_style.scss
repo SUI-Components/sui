@@ -27,6 +27,7 @@
   &-menu {
     list-style: none;
     padding-left: 16px;
+    margin: 0;
 
     &Link {
       border-left: 1px solid #e4e4e4;
@@ -56,6 +57,9 @@
       color: $c-black;
       padding-bottom: 10px;
       padding-top: 20px;
+      &:nth-child(1) {
+        padding-top: 20px;
+      }
     }
   }
 }
