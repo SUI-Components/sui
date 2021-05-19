@@ -2,11 +2,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import SUIContext from '@s-ui/react-context'
-import {transform} from '@babel/standalone'
 
 const TRANSFORM_PRESETS = {
   presets: ['es2015-loose', 'stage-3', 'react']
 }
+
+let previousCode = ''
 
 const getCompiledCode = ({code, scope}) => {
   const codeToCompile = `
@@ -14,7 +15,13 @@ const getCompiledCode = ({code, scope}) => {
       ${code}
     });`
 
-  return transform(codeToCompile, TRANSFORM_PRESETS).code
+  try {
+    const {code} = window.Babel.transform(codeToCompile, TRANSFORM_PRESETS)
+    previousCode = code
+    return code
+  } catch (e) {
+    return previousCode
+  }
 }
 
 class ErrorRenderBoundary extends Component {

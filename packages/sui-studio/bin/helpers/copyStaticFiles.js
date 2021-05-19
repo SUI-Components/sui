@@ -1,18 +1,20 @@
-const cpy = require('cpy')
+const copy = require('copyfiles')
+
+const DESTINATION_FOLDER = 'public'
 
 module.exports = function copyStaticFiles() {
-  return cpy(
+  return copy(
     [
       'components/**/README.md',
       'components/**/CHANGELOG.md',
       'components/**/UXDEF.md',
       'components/**/src/index.js',
-      'demo/**/playground'
+      'components/**/demo/playground',
+      DESTINATION_FOLDER
     ],
-    'public',
     {
-      deep: 3,
-      parents: true
-    }
+      exclude: 'node_modules/**'
+    },
+    () => console.log('[sui-studio] Static files copied')
   )
 }
