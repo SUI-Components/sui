@@ -4,14 +4,14 @@
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
-    "lib": "npx rimraf ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "sinon": "2"
+    "sinon": "10.0.0"
   },
   "browser": {
     "perf_hooks": false,

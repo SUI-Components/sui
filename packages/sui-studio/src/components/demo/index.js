@@ -10,7 +10,6 @@ import {importMainModules, fetchPlayground} from '../tryRequire'
 import stylesFor, {themesFor} from './fetch-styles'
 import CodeEditor from './CodeEditor'
 import ContextButtons from './ContextButtons'
-import EventsButtons from './EventsButtons'
 import ThemesButtons from './ThemesButtons'
 
 import SUIContext from '@s-ui/react-context'
@@ -51,14 +50,13 @@ export default class Demo extends Component {
       importMainModules({category, component}),
       fetchPlayground({category, component})
     ]).then(async ([style, requiredModules, playground]) => {
-      const [exports, ctxt, events, DemoComponent] = requiredModules
+      const [exports, ctxt, DemoComponent] = requiredModules
       const themes = themesFor({category, component})
       const context = isFunction(ctxt) ? await ctxt() : ctxt // context could be a Promise, and we should wait for it
 
       this.setState({
         ctxt: context,
         DemoComponent,
-        events,
         exports,
         playground,
         style,
@@ -122,7 +120,6 @@ export default class Demo extends Component {
       ctxtSelectedIndex,
       ctxtType,
       DemoComponent,
-      events,
       exports,
       isCodeOpen,
       isFullScreen,
@@ -161,7 +158,6 @@ export default class Demo extends Component {
             selected={themeSelectedIndex}
             onThemeChange={this.handleThemeChange}
           />
-          <EventsButtons events={events || {}} domain={domain} />
         </div>
 
         <button

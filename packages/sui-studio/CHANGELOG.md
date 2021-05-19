@@ -1,10 +1,128 @@
 # CHANGELOG
 
-# 9.35.0 (2021-03-16)
+# 10.7.0 (2021-05-18)
 
 
 ### Features
 
+* **packages/sui-studio:** Use old babel/standalone ([68994c9](https://github.com/SUI-Components/sui/commit/68994c9311a08024bf13ed427232bbe3a2efe7bc))
+
+
+
+# 10.6.0 (2021-05-18)
+
+
+### Features
+
+* **packages/sui-studio:** upgrade deps ([191b742](https://github.com/SUI-Components/sui/commit/191b742489e746f4a6d4ce55940047340dd05159))
+
+
+
+# 10.5.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-studio:** update testing-library/user-event version ([e7e8cdd](https://github.com/SUI-Components/sui/commit/e7e8cdd765401802fdefe96443e156308a9f8e11))
+
+
+
+# 10.4.0 (2021-05-07)
+
+
+### Features
+
+* **packages/sui-studio:** ignore leaks also for studio dev ([c466cc8](https://github.com/SUI-Components/sui/commit/c466cc8fef521c102829f7f33c4f59f6ec7820d0))
+
+
+
+# 10.3.0 (2021-05-06)
+
+
+### Features
+
+* **packages/sui-studio:** use latest babel-cli ([cb84e11](https://github.com/SUI-Components/sui/commit/cb84e11f2ee228125cc4e3ccfb7e374afc5c4a18))
+
+
+
+# 10.2.0 (2021-04-19)
+
+
+### Features
+
+* **packages/sui-studio:** use better version to be in sync with React ([866f0da](https://github.com/SUI-Components/sui/commit/866f0da8aa902b23915352c2e680b1c718239144))
+
+
+
+# 10.1.0 (2021-03-26)
+
+
+### Bug Fixes
+
+* **sui-studio:** studio workspace area scolling behavior workaround. ([b1b4417](https://github.com/SUI-Components/sui/commit/b1b44176c862554a416ead85cd4399d52e430104))
+
+
+### Features
+
+* **packages/sui-studio:** deploy ([e10c6c1](https://github.com/SUI-Components/sui/commit/e10c6c133eeb4c935f48ad7c9f554f9e4f82ac08))
+
+
+
+# 10.0.0 (2021-03-23)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** remove old tests imports ([df9323f](https://github.com/SUI-Components/sui/commit/df9323f7f2012146d2286f3191b4565c6cbb1c9c))
+* **packages/sui-studio:** upgrade beta version ([adb061d](https://github.com/SUI-Components/sui/commit/adb061d3c23082cb650eff32f087fcb5df8d2676))
+
+
+### Features
+
+* **META:** use npm install directly ([2e3e96c](https://github.com/SUI-Components/sui/commit/2e3e96c628f80e2ff0f1d2e64a888d7aef6f9688))
+* **packages/sui-studio:** remove commands not used anymore provided by @s-ui/mono directly ([13ab7b9](https://github.com/SUI-Components/sui/commit/13ab7b98f5939aaad9b9ea6ca4f6873979249640))
+
+
+### BREAKING CHANGES
+
+* **packages/sui-studio:** Commands link, run, run-all, init, release and commit removed.
+
+
+
+# 9.36.0 (2021-03-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** beta 5 version ([8610c01](https://github.com/SUI-Components/sui/commit/8610c01c8bd30f0fa48683273c6d7aa18dbe5671))
+* **packages/sui-studio:** beta 7 ([d4c335b](https://github.com/SUI-Components/sui/commit/d4c335bbbecf7b92d2bec6176e87c728e88cd3ba))
+* **packages/sui-studio:** fix import test for studio dev ([fe26bca](https://github.com/SUI-Components/sui/commit/fe26bca44564a80b8e24f1e023dc1a1aac75745b))
+* **packages/sui-studio:** fix reg exp for imported paths and clean demo dirs ([9b34610](https://github.com/SUI-Components/sui/commit/9b346103073ba9b54df6080a6e0a9ff00113467e))
+* **packages/sui-studio:** get commits list from github api ([32b7b7b](https://github.com/SUI-Components/sui/commit/32b7b7bc50ee5b25ac692c14543e05e425463b82))
+* **sui-studio:** fix prop types warning for Style ([7b1af48](https://github.com/SUI-Components/sui/commit/7b1af48501d6817b1874ce6d89300d92eeba24cb))
+
+
+### Features
+
+* **packages/sui-studio:** flat demo folder and support for generate ([9b15900](https://github.com/SUI-Components/sui/commit/9b15900a26709b6e6551349e0304ab0a61c2000b))
+
+
+
+# 9.35.0 (2021-03-16)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** check and clean new paths before migrating ([4068021](https://github.com/SUI-Components/sui/commit/40680219222158b927be0b2c1a3d8eb1b9507fce))
+* **packages/sui-studio:** import only new test files ([2824901](https://github.com/SUI-Components/sui/commit/2824901d193764dc9956987b86a58b8c7fb2a0b1))
+* **packages/sui-studio:** replace relative paths for absolute ones ([272b635](https://github.com/SUI-Components/sui/commit/272b635ddeb1bb4324b72369eb8aebae95de4e56))
+
+
+### Features
+
+* **packages/sui-studio:** create new bin for migrations ([7d125ff](https://github.com/SUI-Components/sui/commit/7d125ff67666a68089510f6a18e5d76172e74233))
+* **packages/sui-studio:** remove events ([496f827](https://github.com/SUI-Components/sui/commit/496f827a0277d1887fd3d528bf78f5e8a91bbba7))
+* **packages/sui-studio:** replace old paths in demo migration script ([2c309e9](https://github.com/SUI-Components/sui/commit/2c309e98514241cdb936688917931c63ccfdfca2))
 * **packages/sui-studio:** setupEnvironment with multiple contexts ([37877cc](https://github.com/SUI-Components/sui/commit/37877cc32f9cb184211ce750fd3df8952e7eed36))
 
 
@@ -19,6 +137,7 @@
 ### Features
 
 * **packages/sui-studio:** ignore window global leaks ([d4d9402](https://github.com/SUI-Components/sui/commit/d4d94025281f66f989a644f818716f38dc517d1f))
+* **packages/sui-studio:** move demo folder inside components ([4a432e5](https://github.com/SUI-Components/sui/commit/4a432e51b33a199d762cd1e31a7d9c2f233832fd))
 * **packages/sui-studio:** upgrade react version ([2a6705d](https://github.com/SUI-Components/sui/commit/2a6705d8e2e1c249f03dcaa92dcc69f511b9857e))
 * **packages/sui-studio:** upgrade react-dom ([d71ce1f](https://github.com/SUI-Components/sui/commit/d71ce1fc58571f075c642900327324941b39d7d6))
 

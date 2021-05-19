@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-const MAX_BUFFER = 1024 * 1024
 const COMPONENTS_PATH = './components'
 const NEW_COMPONENTS_PATH = './tmpComponents'
 const DEMO_PATH = './demo'
@@ -12,31 +11,41 @@ const {NO_COMPONENTS_MESSAGE} = require('../config')
 
 const log = console.log
 const error = console.error
-const {exec} = require('child_process')
 const fs = require('fs-extra')
+const path = require('path')
+const fetch = require('node-fetch')
+const gitUrlParse = require('git-url-parse')
 
-function getComponentsList(stdout) {
-  const COMMIT_MESSAGE_PATTERN = /(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z]+)/
+const MAX_GITHUB_API_RESULTS = 100
+const PUBLIC_GITHUB_HOST = 'github.com'
+const PUBLIC_GITHUB_API_URL_PATTERN =
+  'https://api.github.com/repos/:org/:repo/pulls/:pull_request/commits?per_page=:results'
+const PRIVATE_GITHUB_API_URL_PATTERN =
+  'https://:host/api/v3/repos/:org/:repo/pulls/:pull_request/commits?access_token=:token'
+
+function getComponentsList(commits) {
+  const COMMIT_MESSAGE_PATTERN = /\((?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
   const list = []
 
-  stdout.split('\n').forEach(line => {
-    const data = line.match(COMMIT_MESSAGE_PATTERN)
+  commits.forEach(commit => {
+    const data = commit.match(COMMIT_MESSAGE_PATTERN)
     if (!data) return
-    const [component] = data
-    if (!list.includes(component)) list.push(component)
+    const {context, component} = data.groups
+    const componentPath = `${context}/${component}`
+    if (!list.includes(componentPath)) list.push(componentPath)
   })
 
   return list
 }
 
 async function cleanComponents(list) {
-  list.forEach(async component => {
-    const componentsSrc = `${COMPONENTS_PATH}/${component}/`
-    const componentsDest = `${NEW_COMPONENTS_PATH}/${component}/`
-    const demoSrc = `${DEMO_PATH}/${component}/`
-    const demoDest = `${NEW_DEMO_PATH}/${component}/`
-    const tmpSrc = `${TEST_PATH}/${component}/`
-    const tmpDest = `${NEW_TEST_PATH}/${component}/`
+  list.forEach(async componentPath => {
+    const componentsSrc = `${COMPONENTS_PATH}/${componentPath}/`
+    const componentsDest = `${NEW_COMPONENTS_PATH}/${componentPath}/`
+    const demoSrc = `${DEMO_PATH}/${componentPath}/`
+    const demoDest = `${NEW_DEMO_PATH}/${componentPath}/`
+    const tmpSrc = `${TEST_PATH}/${componentPath}/`
+    const tmpDest = `${NEW_TEST_PATH}/${componentPath}/`
 
     try {
       await fs.move(componentsSrc, componentsDest)
@@ -64,12 +73,52 @@ async function cleanComponents(list) {
   }
 }
 
-exec('git cherry -v master', {maxBuffer: MAX_BUFFER}, (err, stdout) => {
-  if (err) error(err)
-  const componentsList = getComponentsList(stdout)
-  if (componentsList.length < 1) {
-    log(NO_COMPONENTS_MESSAGE)
-    process.exit(0)
+function getRepositoryUrl() {
+  const packageJson = require(path.join(process.cwd(), 'package.json'))
+  return packageJson.repository && packageJson.repository.url
+}
+
+function check(requiredVarName, requiredVar) {
+  if (!requiredVar) {
+    log(
+      `You need to set the ${requiredVarName} variable in order to fetch the pull request commits.`
+    )
+    process.exit(1)
   }
-  cleanComponents(componentsList)
-})
+}
+
+function buildPullCommitsResource() {
+  const {GITHUB_TOKEN, GITHUB_PULL_REQUEST} = process.env
+  check('GITHUB_TOKEN', GITHUB_TOKEN)
+  check('GITHUB_PULL_REQUEST', GITHUB_PULL_REQUEST)
+  const gitUrl = getRepositoryUrl()
+  check('gitUrl', gitUrl)
+  const isPublic = gitUrl.includes(PUBLIC_GITHUB_HOST)
+  const apiUrlPattern = isPublic
+    ? PUBLIC_GITHUB_API_URL_PATTERN
+    : PRIVATE_GITHUB_API_URL_PATTERN
+  const {resource, organization, name} = gitUrlParse(gitUrl)
+
+  return apiUrlPattern
+    .replace(':host', resource)
+    .replace(':org', organization)
+    .replace(':repo', name)
+    .replace(':pull_request', GITHUB_PULL_REQUEST)
+    .replace(':token', GITHUB_TOKEN)
+    .replace(':results', MAX_GITHUB_API_RESULTS)
+}
+
+const pullCommits = buildPullCommitsResource()
+
+fetch(pullCommits)
+  .then(response => response.json())
+  .then(response => {
+    const commits = response.map(({commit}) => commit.message)
+    const componentsList = getComponentsList(commits)
+
+    if (componentsList.length < 1) {
+      log(NO_COMPONENTS_MESSAGE)
+      process.exit(0)
+    }
+    cleanComponents(componentsList)
+  })

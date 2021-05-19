@@ -1,4 +1,4 @@
-FROM cypress/base
+FROM cypress/browsers
 
 WORKDIR /usr/src
 

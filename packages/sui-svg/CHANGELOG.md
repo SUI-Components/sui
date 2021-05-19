@@ -1,11 +1,42 @@
 # CHANGELOG
 
+# 3.0.0 (2021-05-18)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** add missing dependency ([2a05c32](https://github.com/SUI-Components/sui/commit/2a05c32da913796cb473f600b0a1be6cb9efb45b))
+* **packages/sui-svg:** use correctly npm install for atom icon ([f764433](https://github.com/SUI-Components/sui/commit/f764433c08f5a593926b0127b995bac719e7d0cf))
+
+
+### Features
+
+* **packages/sui-svg:** add sass as dependency ([30b2995](https://github.com/SUI-Components/sui/commit/30b29951e65eabcd2cc04418cec7e1eabfd2634b))
+* **packages/sui-svg:** change catalogue title ([6e90dac](https://github.com/SUI-Components/sui/commit/6e90dac8d350b8be00b3bff8acc5c8556b06d333))
+* **packages/sui-svg:** migrate sui-svg to use vite ([7dd6d80](https://github.com/SUI-Components/sui/commit/7dd6d80b2867f92beaf04f9c570d9f0523932316))
+* **packages/sui-svg:** Release a new version with breaking changes ([a173665](https://github.com/SUI-Components/sui/commit/a1736652eafae5619710fae4396e25549e17e165))
+* **packages/sui-svg:** use correct alpha ([d74d8be](https://github.com/SUI-Components/sui/commit/d74d8be9d10907ac2a02d42a618def0313dd5b4c))
+* **packages/sui-svg:** use dangerouslySetInnerHTML for SVGs ([0995c90](https://github.com/SUI-Components/sui/commit/0995c9084cb39fde3969e7a4ee9a9fd32eae5a2c))
+* **packages/sui-svg:** use latest alpha ([937207e](https://github.com/SUI-Components/sui/commit/937207e9e7baecc2fff119e19de87b7f808294a1))
+* **packages/sui-svg:** use needed dependencies and transform them accordingly ([84d2600](https://github.com/SUI-Components/sui/commit/84d2600edc1fdffa78f410e3bbb6e1d74e67c206))
+
+
+
+# 2.11.0 (2021-04-19)
+
+
+### Features
+
+* **packages/sui-svg:** remove component peer dependencies ([e543f67](https://github.com/SUI-Components/sui/commit/e543f67b604c99a7927ded7f0e9b9c506830ad63))
+
+
+
 # 2.10.0 (2020-12-30)
 
 
 ### Features
 
-* Use latest and same commander version and avoid installing different versions ([3b88466](https://github.com/SUI-Components/sui/commit/3b88466af39cef5270f412857158acad39a9d2e9))
+* **sui-svg:** Use latest and same commander version and avoid installing different versions ([3b88466](https://github.com/SUI-Components/sui/commit/3b88466af39cef5270f412857158acad39a9d2e9))
 
 
 
@@ -14,7 +45,7 @@
 
 ### Features
 
-* update README ([f894163](https://github.com/SUI-Components/sui/commit/f8941638a0fb43f2f5fe604524a9406bad4ce755))
+* **sui-svg:** update README ([f894163](https://github.com/SUI-Components/sui/commit/f8941638a0fb43f2f5fe604524a9406bad4ce755))
 
 
 
@@ -23,7 +54,7 @@
 
 ### Features
 
-* change README ([9cd2604](https://github.com/SUI-Components/sui/commit/9cd26041d97101ac3b9f271766eb8a835deb16ea))
+* **sui-svg:** change README ([9cd2604](https://github.com/SUI-Components/sui/commit/9cd26041d97101ac3b9f271766eb8a835deb16ea))
 
 
 
@@ -32,12 +63,12 @@
 
 ### Bug Fixes
 
-* fix linter errors ([20146dc](https://github.com/SUI-Components/sui/commit/20146dc769a93bc8cbd5664fbfe7807a07be4376))
+* **sui-svg:** fix linter errors ([20146dc](https://github.com/SUI-Components/sui/commit/20146dc769a93bc8cbd5664fbfe7807a07be4376))
 
 
 ### Features
 
-* use newest sui-bundler and avod importing React according to new jsx ([3edaa01](https://github.com/SUI-Components/sui/commit/3edaa012828f888ae227a3f994278fa2da6f706a))
+* **sui-svg:** use newest sui-bundler and avod importing React according to new jsx ([3edaa01](https://github.com/SUI-Components/sui/commit/3edaa012828f888ae227a3f994278fa2da6f706a))
 
 
 
@@ -46,7 +77,7 @@
 
 ### Features
 
-* stop using deprecated no-pre-loader param ([93ce122](https://github.com/SUI-Components/sui/commit/93ce1227fc2956ea9862095dccae4e47bb480e28))
+* **sui-svg:** stop using deprecated no-pre-loader param ([93ce122](https://github.com/SUI-Components/sui/commit/93ce1227fc2956ea9862095dccae4e47bb480e28))
 
 
 
@@ -55,7 +86,7 @@
 
 ### Features
 
-* upgrade to latest sui-bundler version ([f3a4577](https://github.com/SUI-Components/sui/commit/f3a4577bf190f2e5c1d290e0a3b81e607bc49bd1))
+* **sui-svg:** upgrade to latest sui-bundler version ([f3a4577](https://github.com/SUI-Components/sui/commit/f3a4577bf190f2e5c1d290e0a3b81e607bc49bd1))
 
 
 
@@ -64,7 +95,7 @@
 
 ### Bug Fixes
 
-* sui svg must keep atomIcon display name in order to not break atom button implementati ([65b3a05](https://github.com/SUI-Components/sui/commit/65b3a05aaae0e0eb58772011013d4fa86c2671e2))
+* **sui-svg:** sui svg must keep atomIcon display name in order to not break atom button implementati ([65b3a05](https://github.com/SUI-Components/sui/commit/65b3a05aaae0e0eb58772011013d4fa86c2671e2))
 
 
 
@@ -73,7 +104,7 @@
 
 ### Bug Fixes
 
-* add process.exit in sui-svg build error ([ab82989](https://github.com/SUI-Components/sui/commit/ab82989a97b9362acad561e635c55c08172c3365))
+* **sui-svg:** add process.exit in sui-svg build error ([ab82989](https://github.com/SUI-Components/sui/commit/ab82989a97b9362acad561e635c55c08172c3365))
 
 
 
@@ -82,12 +113,12 @@
 
 ### Bug Fixes
 
-* fix template import for atom ico ([e6eaa4d](https://github.com/SUI-Components/sui/commit/e6eaa4d763068ed8ce793377ff6dc2b7bf6761ed))
+* **sui-svg:** fix template import for atom ico ([e6eaa4d](https://github.com/SUI-Components/sui/commit/e6eaa4d763068ed8ce793377ff6dc2b7bf6761ed))
 
 
 ### Features
 
-* Prefer just libraries instead lodash and others ([a15298a](https://github.com/SUI-Components/sui/commit/a15298a848925025ca5634ffc14fb90422b83dd5))
+* **sui-svg:** Prefer just libraries instead lodash and others ([a15298a](https://github.com/SUI-Components/sui/commit/a15298a848925025ca5634ffc14fb90422b83dd5))
 
 
 
@@ -96,12 +127,12 @@
 
 ### Bug Fixes
 
-* fix centering header ([0f8e993](https://github.com/SUI-Components/sui/commit/0f8e9936aaf92efb20c0351117c063583e284e77))
+* **sui-svg:** fix centering header ([0f8e993](https://github.com/SUI-Components/sui/commit/0f8e9936aaf92efb20c0351117c063583e284e77))
 
 
 ### Features
 
-* add search functionality to icons demo ([6ce9629](https://github.com/SUI-Components/sui/commit/6ce9629a9f29d941931d7a9924ee047e946cb9e9))
+* **sui-svg:** add search functionality to icons demo ([6ce9629](https://github.com/SUI-Components/sui/commit/6ce9629a9f29d941931d7a9924ee047e946cb9e9))
 
 
 
@@ -110,27 +141,27 @@
 
 ### Bug Fixes
 
-* fix typo with name ([34d2fc4](https://github.com/SUI-Components/sui/commit/34d2fc4dec2d41126a9a30440c1fd109009dd8b0))
+* **sui-svg:** fix typo with name ([34d2fc4](https://github.com/SUI-Components/sui/commit/34d2fc4dec2d41126a9a30440c1fd109009dd8b0))
 
 
 ### Features
 
-* add some styles ([bb2cc81](https://github.com/SUI-Components/sui/commit/bb2cc81768e879aebfe005accb422b8a9ec7bded))
-* change template component name ([4631689](https://github.com/SUI-Components/sui/commit/463168950bfc026451700051cfef2fc62af236e6))
-* create styles to be imported where needed ([793c0ad](https://github.com/SUI-Components/sui/commit/793c0addd104efde5537a15dda02fc167c1e990e))
-* install needed dependencies, better readability, less dependencies ([33cb455](https://github.com/SUI-Components/sui/commit/33cb455496fe0524dbab9cc5e11b80eb391cea1b))
-* install sui-atom-icon dependency if needed ([b71ec00](https://github.com/SUI-Components/sui/commit/b71ec00b929e77b18530193ef840d3446b14e485))
-* release new major version of sui-svg ([61ace32](https://github.com/SUI-Components/sui/commit/61ace32c5088bcc48195cc68c75df2992d28a5d1))
-* remove not needed dependencies ([7f8808b](https://github.com/SUI-Components/sui/commit/7f8808b8c39a0888b7bcb7b542caf4c30ce72882))
-* upgrade dependencies ([585da3c](https://github.com/SUI-Components/sui/commit/585da3cdfb67d1af13a7deaa1e1d46526b10bebe))
-* write custom demo without dependencies and changing of props ([7f76e43](https://github.com/SUI-Components/sui/commit/7f76e43d4fc8c5d22dd574cff765b01da3db1094))
+* **sui-svg:** add some styles ([bb2cc81](https://github.com/SUI-Components/sui/commit/bb2cc81768e879aebfe005accb422b8a9ec7bded))
+* **sui-svg:** change template component name ([4631689](https://github.com/SUI-Components/sui/commit/463168950bfc026451700051cfef2fc62af236e6))
+* **sui-svg:** create styles to be imported where needed ([793c0ad](https://github.com/SUI-Components/sui/commit/793c0addd104efde5537a15dda02fc167c1e990e))
+* **sui-svg:** install needed dependencies, better readability, less dependencies ([33cb455](https://github.com/SUI-Components/sui/commit/33cb455496fe0524dbab9cc5e11b80eb391cea1b))
+* **sui-svg:** install sui-atom-icon dependency if needed ([b71ec00](https://github.com/SUI-Components/sui/commit/b71ec00b929e77b18530193ef840d3446b14e485))
+* **sui-svg:** release new major version of sui-svg ([61ace32](https://github.com/SUI-Components/sui/commit/61ace32c5088bcc48195cc68c75df2992d28a5d1))
+* **sui-svg:** remove not needed dependencies ([7f8808b](https://github.com/SUI-Components/sui/commit/7f8808b8c39a0888b7bcb7b542caf4c30ce72882))
+* **sui-svg:** upgrade dependencies ([585da3c](https://github.com/SUI-Components/sui/commit/585da3cdfb67d1af13a7deaa1e1d46526b10bebe))
+* **sui-svg:** write custom demo without dependencies and changing of props ([7f76e43](https://github.com/SUI-Components/sui/commit/7f76e43d4fc8c5d22dd574cff765b01da3db1094))
 
 
 ### BREAKING CHANGES
 
-* Now icons are wrapped with SuiAtomIcon component with limited props and follow strict ux guidelines
+* **sui-svg:** Now icons are wrapped with SuiAtomIcon component with limited props and follow strict ux guidelines
 from the SuiAtomIcon component
-* Now icons are wrapped with AtomIcon
+* **sui-svg:** Now icons are wrapped with AtomIcon
 
 
 
@@ -139,7 +170,7 @@ from the SuiAtomIcon component
 
 ### Features
 
-* Upgrade @s-ui/lint ([7c2e1e4](https://github.com/SUI-Components/sui/commit/7c2e1e40a42e7bfbbac2af7bdb5d6e547e24ee74))
+* **sui-svg:** Upgrade @s-ui/lint ([7c2e1e4](https://github.com/SUI-Components/sui/commit/7c2e1e40a42e7bfbbac2af7bdb5d6e547e24ee74))
 
 
 
@@ -148,7 +179,7 @@ from the SuiAtomIcon component
 
 ### Bug Fixes
 
-* camelcase is used as a dependency ([f28f7ad](https://github.com/SUI-Components/sui/commit/f28f7ad56cea70a37480ef6f0b3b5ae97eac4efb))
+* **sui-svg:** camelcase is used as a dependency ([f28f7ad](https://github.com/SUI-Components/sui/commit/f28f7ad56cea70a37480ef6f0b3b5ae97eac4efb))
 
 
 
@@ -157,8 +188,8 @@ from the SuiAtomIcon component
 
 ### Bug Fixes
 
-* add lodash.camelcase dependency ([e479123](https://github.com/SUI-Components/sui/commit/e4791230df3d1f3d94d0027f99ff19200919854c))
-* remove caret ([67ba083](https://github.com/SUI-Components/sui/commit/67ba0838a4ab6c83b7f52c364c11b03d8c9a79b1))
+* **sui-svg:** add lodash.camelcase dependency ([e479123](https://github.com/SUI-Components/sui/commit/e4791230df3d1f3d94d0027f99ff19200919854c))
+* **sui-svg:** remove caret ([67ba083](https://github.com/SUI-Components/sui/commit/67ba0838a4ab6c83b7f52c364c11b03d8c9a79b1))
 
 
 
@@ -167,7 +198,7 @@ from the SuiAtomIcon component
 
 ### Features
 
-* add className ([889869c](https://github.com/SUI-Components/sui/commit/889869c54fe534e76fe50b3b5e925b0f4c720ae7))
+* **sui-svg:** add className ([889869c](https://github.com/SUI-Components/sui/commit/889869c54fe534e76fe50b3b5e925b0f4c720ae7))
 
 
 
@@ -176,7 +207,7 @@ from the SuiAtomIcon component
 
 ### Bug Fixes
 
-* remove unsupported import ([a62818b](https://github.com/SUI-Components/sui/commit/a62818b2c1655fd828cb1ea50b5973344030acc7))
+* **sui-svg:** remove unsupported import ([a62818b](https://github.com/SUI-Components/sui/commit/a62818b2c1655fd828cb1ea50b5973344030acc7))
 
 
 
@@ -185,7 +216,7 @@ from the SuiAtomIcon component
 
 ### Performance Improvements
 
-* move to React Hooks instead using class ([f98d117](https://github.com/SUI-Components/sui/commit/f98d1177b70071aae094ccd02d398c95d4628707))
+* **sui-svg:** move to React Hooks instead using class ([f98d117](https://github.com/SUI-Components/sui/commit/f98d1177b70071aae094ccd02d398c95d4628707))
 
 
 
@@ -194,7 +225,7 @@ from the SuiAtomIcon component
 
 ### Features
 
-* migrate to bundler v4 ([20dd44d](https://github.com/SUI-Components/sui/commit/20dd44d8c5af69f166279fe125a338bffb7812cf))
+* **sui-svg:** migrate to bundler v4 ([20dd44d](https://github.com/SUI-Components/sui/commit/20dd44d8c5af69f166279fe125a338bffb7812cf))
 
 
 
@@ -203,7 +234,7 @@ from the SuiAtomIcon component
 
 ### Features
 
-* remove title tag on build ([3d47360](https://github.com/SUI-Components/sui/commit/3d473601226fc21acae02f582b785ad72b7d4041))
+* **sui-svg:** remove title tag on build ([3d47360](https://github.com/SUI-Components/sui/commit/3d473601226fc21acae02f582b785ad72b7d4041))
 
 
 
@@ -212,7 +243,7 @@ from the SuiAtomIcon component
 
 ### Features
 
-* compiles + rebuilds file tree ([6e44226](https://github.com/SUI-Components/sui/commit/6e44226aa43ec04751077a4ed3de47cbab242692))
+* **sui-svg:** compiles + rebuilds file tree ([6e44226](https://github.com/SUI-Components/sui/commit/6e44226aa43ec04751077a4ed3de47cbab242692))
 
 
 
@@ -221,9 +252,9 @@ from the SuiAtomIcon component
 
 ### Features
 
-* first commit ([142511c](https://github.com/SUI-Components/sui/commit/142511cab32b2680ff58628d6473383cb8686f97))
-* remove not needed dependencies ([2639e7e](https://github.com/SUI-Components/sui/commit/2639e7e09c0d20961a3478eeff0916904fa118bb))
-* update dependencies + new dev server approach ([d8e7440](https://github.com/SUI-Components/sui/commit/d8e7440efdefb584cedf6b03784d984a56adbab0))
+* **sui-svg:** first commit ([142511c](https://github.com/SUI-Components/sui/commit/142511cab32b2680ff58628d6473383cb8686f97))
+* **sui-svg:** remove not needed dependencies ([2639e7e](https://github.com/SUI-Components/sui/commit/2639e7e09c0d20961a3478eeff0916904fa118bb))
+* **sui-svg:** update dependencies + new dev server approach ([d8e7440](https://github.com/SUI-Components/sui/commit/d8e7440efdefb584cedf6b03784d984a56adbab0))
 
 
 

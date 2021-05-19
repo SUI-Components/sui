@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/react-context",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
-    "lib": "rm -Rf ./lib && ../../node_modules/.bin/babel --presets=sui ./src -d lib",
+    "lib": "babel --presets=sui ./src -d lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -12,8 +12,5 @@
   "license": "ISC",
   "dependencies": {
     "hoist-non-react-statics": "3.3.2"
-  },
-  "peerDependencies": {
-    "@s-ui/component-peer-dependencies": "1"
   }
 }

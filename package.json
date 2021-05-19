@@ -9,11 +9,10 @@
     "sui"
   ],
   "workspaces": [
-    "packages/**"
+    "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx -p @s-ui/mono sui-mono phoenix",
-    "phoenix:ci": "npx -p ./packages/sui-mono sui-mono phoenix --ci",
+    "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -f package-lock.json && npm install --legacy-peer-deps",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
@@ -25,7 +24,7 @@
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
+    "@babel/cli": "7.14.3",
     "@s-ui/lint": "3",
     "@s-ui/mono": "2",
     "@s-ui/precommit": "2",
@@ -34,13 +33,13 @@
     "chai": "4.2.0",
     "husky": "4.3.0",
     "react": "17",
-    "sinon": "9.2.1",
+    "rimraf": "3.0.2",
+    "sinon": "10.0.0",
     "validate-commit-msg": "2.14.0"
   },
   "config": {
     "sui-mono": {
-      "access": "public",
-      "packagesFolder": "./packages"
+      "access": "public"
     },
     "validate-commit-msg": {
       "types": "@s-ui/mono/src/types"
@@ -49,7 +48,9 @@
       "server": {
         "forceTranspilation": [
           "./packages/sui-ssr/server"
-        ]
+        ],
+        "esmOverride": true,
+        "useLibDir": true
       }
     }
   },
