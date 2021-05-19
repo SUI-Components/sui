@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.10.0 (2021-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Avoid importing non existent styles ([0576c0e](https://github.com/SUI-Components/sui/commit/0576c0eec13da2ca3f5aa47f15cab8b458177f73))
+
+
+
 # 10.9.0 (2021-05-19)
 
 
