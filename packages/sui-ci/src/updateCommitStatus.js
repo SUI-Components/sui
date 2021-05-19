@@ -23,6 +23,8 @@ async function getApiBaseUrl() {
     `git config --get remote.origin.url`
   ).catch(() => 'git@github.com:sui/remote-url.git')
 
+  console.log({gitRemoteOriginUrl})
+
   const domain = getDomain(gitRemoteOriginUrl)
 
   return domain === 'github.com'
