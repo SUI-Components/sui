@@ -1,6 +1,6 @@
+const {promisify} = require('util')
+const exec = promisify(require('child_process').exec)
 const fetch = require('node-fetch')
-const parseGitUrl = require('git-url-parse')
-const getGitRemoteOriginUrl = require('git-remote-origin-url')
 
 const {
   STATUS_CONTEXT,
@@ -8,19 +8,33 @@ const {
   STATUS_STATES
 } = require('./constants')
 
+const getDomain = (url = '') => {
+  const cleanUrl = url.trim().replace('\n', '')
+  const isHttp = cleanUrl.startsWith('https://')
+
+  if (isHttp) {
+    return cleanUrl.split('/')[2]
+  } else {
+    const [, address] = cleanUrl.split('@')
+    const [domain] = address.split(':')
+    return domain
+  }
+}
+
 /**
  * Get the needed API Base Url depending on the remote origin url
  * @return {Promise<string>} API base url
  */
 async function getApiBaseUrl() {
-  const gitRemoteOriginUrl = await getGitRemoteOriginUrl().catch(
-    () => 'git@github.com:sui/remote-url.git'
-  )
-  const {resource} = parseGitUrl(gitRemoteOriginUrl)
+  const {stdout: gitRemoteOriginUrl} = await exec(
+    `git config --get remote.origin.url`
+  ).catch(() => 'git@github.com:sui/remote-url.git')
 
-  return resource === 'github.com'
+  const domain = getDomain(gitRemoteOriginUrl)
+
+  return domain === 'github.com'
     ? 'https://api.github.com'
-    : `https://${resource}/api/v3`
+    : `https://${domain}/api/v3`
 }
 
 /**
