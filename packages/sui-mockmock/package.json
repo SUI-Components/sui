@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mockmock",
-  "version": "1.12.0",
+  "version": "2.0.0",
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
