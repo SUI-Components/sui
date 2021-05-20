@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.15.0 (2021-05-20)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Avoid checking git status message and use porcelain instead ([8af59ac](https://github.com/SUI-Components/sui/commit/8af59ac628a901e54ac825a33d87b4a9d99d65bd))
+
+
+
 # 2.14.0 (2021-05-18)
 
 
