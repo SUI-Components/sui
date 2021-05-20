@@ -40,10 +40,10 @@ const {message, type} = program
 const hasChangedFiles = path => {
   return new Promise((resolve, reject) => {
     exec(
-      `git add . && git status ${path}`,
+      `git add . && git status ${path} --porcelain`,
       {cwd: process.cwd()},
-      (err, output) => {
-        err ? reject(err) : resolve(!output.includes('nothing to commit'))
+      (err, {stdout}) => {
+        err ? reject(err) : resolve(stdout.trim() !== '')
       }
     )
   })
