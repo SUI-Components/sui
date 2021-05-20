@@ -79,8 +79,10 @@ const getCommitSteps = ({scopesWithChanges}) => [
  * @return {Promise<Boolean>}
  */
 const checkIfHasChangedFiles = async path => {
-  const output = await exec(`git status ${path}`, {cwd: process.cwd()})
-  return !output.stdout.includes('nothing to commit')
+  const {stdout} = await exec(`git status ${path} --porcelain`, {
+    cwd: process.cwd()
+  })
+  return stdout.trim() !== ''
 }
 
 module.exports = async function startMainCommitFlow() {
