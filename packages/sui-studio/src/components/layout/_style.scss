@@ -27,8 +27,8 @@
     width: $w-sidebar;
 
     &Body {
-      transition: width 0.25s ease-out;
       width: $w-sidebar;
+      transition: width 0.25s ease-out;
     }
 
     &--open {
@@ -39,9 +39,15 @@
 
   &-main {
     background-color: $bgc-main;
-    width: calc(100% - #{$w-sidebar});
-    margin-left: $w-sidebar;
+    width: 100%;
+    margin-left: 0;
     min-height: 100vh;
+    transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+    @include breakpoint-from(s) {
+      width: calc(100% - #{$w-sidebar});
+      margin-left: $w-sidebar;
+      transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+    }
   }
 
   &.sui-Studio--fullscreen {

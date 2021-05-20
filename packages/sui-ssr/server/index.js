@@ -18,8 +18,8 @@ import {
   useStaticsByHost,
   readHtmlTemplate
 } from './utils'
-import noOPConsole from 'noop-console'
 
+import noOPConsole from 'noop-console'
 noOPConsole(console)
 
 if (process.env.CONSOLE) {

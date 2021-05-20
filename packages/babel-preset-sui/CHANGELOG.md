@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.22.0 (2021-05-13)
+
+
+### Features
+
+* **packages/babel-preset-sui:** upgrade deps ([1ebd9e0](https://github.com/SUI-Components/sui/commit/1ebd9e00dd66530f13397ec15e6c5baba5cb7923))
+
+
+
 # 3.21.0 (2021-05-05)
 
 

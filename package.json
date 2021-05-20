@@ -24,7 +24,7 @@
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
   },
   "devDependencies": {
-    "@babel/cli": "7.13.16",
+    "@babel/cli": "7.14.3",
     "@s-ui/lint": "3",
     "@s-ui/mono": "2",
     "@s-ui/precommit": "2",
@@ -34,13 +34,12 @@
     "husky": "4.3.0",
     "react": "17",
     "rimraf": "3.0.2",
-    "sinon": "9.2.1",
+    "sinon": "10.0.0",
     "validate-commit-msg": "2.14.0"
   },
   "config": {
     "sui-mono": {
-      "access": "public",
-      "packagesFolder": "./packages"
+      "access": "public"
     },
     "validate-commit-msg": {
       "types": "@s-ui/mono/src/types"

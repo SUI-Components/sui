@@ -14,7 +14,7 @@ describe('Tracer', () => {
   })
 
   afterEach(() => {
-    fnSpy.reset()
+    fnSpy.resetHistory()
 
     ConsoleReporter.prototype.send.restore()
   })

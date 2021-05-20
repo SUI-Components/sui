@@ -12,6 +12,7 @@ const {PWD} = process.env
 const defaultPackagesToAlias = [
   'react',
   'react-router-dom',
+  '@s-ui/pde',
   '@s-ui/react-context',
   '@s-ui/react-router'
 ]

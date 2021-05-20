@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.5.0 (2021-05-20)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** get files from the optional critical dir param ([5faa8dd](https://github.com/SUI-Components/sui/commit/5faa8dd13ee9eb28673d3557165a8e49d0cebda3))
+
+
+
+# 1.4.0 (2021-05-12)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** remove default value ([fa7c9f0](https://github.com/SUI-Components/sui/commit/fa7c9f09ee86a29cf4d27f90e5a7423f60826f18))
+
+
+
 # 1.3.0 (2021-05-10)
 
 

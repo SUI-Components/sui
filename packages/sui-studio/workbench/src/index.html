@@ -3,12 +3,11 @@
   <title>SUI Studio</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-
-  <script src="https://unpkg.com/mocha/mocha.js"></script>
-  <script class="mocha-init">
+  <link rel="stylesheet" href="https://unpkg.com/mocha@7/mocha.css" />
+  <script src="https://unpkg.com/mocha@7/mocha.js"></script>
+  <script>
     mocha.setup('bdd');
-    mocha.setup({ignoreLeaks: true});
+    mocha.setup({checkLeaks: false});
   </script>
 </head>
 <body>

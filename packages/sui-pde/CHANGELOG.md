@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.7.0 (2021-05-13)
+
+
+### Features
+
+* **packages/sui-pde:** avoid re downloading datafile on client when context has info ([007c3e8](https://github.com/SUI-Components/sui/commit/007c3e843a27b1c39f3d99a088d38aad0890fbc0))
+
+
+
 # 2.6.0 (2021-04-30)
 
 
