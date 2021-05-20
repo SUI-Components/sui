@@ -115,7 +115,11 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   }
 
   const getAssetsManifest = ({req}) => {
-    if (cachedAssetsManifest) return cachedAssetsManifest
+    const site = siteByHost(req)
+
+    if (cachedAssetsManifest) {
+      return site ? cachedAssetsManifest[site] : cachedAssetsManifest
+    }
 
     let assetsManifest
 
@@ -126,7 +130,14 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
           'utf8'
         )
       )
-      cachedAssetsManifest = assetsManifest
+      if (site) {
+        cachedAssetsManifest = {
+          ...cachedAssetsManifest,
+          [site]: assetsManifest
+        }
+      } else {
+        cachedAssetsManifest = assetsManifest
+      }
     } catch (error) {
       assetsManifest = null
     }
