@@ -57,7 +57,15 @@ const getCommitToTag = async () => {
 
   return execute('git rev-parse HEAD')
 }
+const getNpmInstall = ({
+  legacyPeerDeps: hasLegacyPeerDeps,
+  only: onlyScope
+} = {}) => {
+  const only = onlyScope ? `--only=${onlyScope}` : ''
+  const legacyPeerDeps = hasLegacyPeerDeps ? '--legacy-peer-deps' : ''
 
+  return `npm install ${legacyPeerDeps} ${only} --package-lock-only --prefer-online --package-lock --progress false --no-bin-links false --ignore-scripts`
+}
 ;(async () => {
   const cwd = process.cwd()
   const {GITHUB_TOKEN, GH_TOKEN} = process.env
@@ -90,16 +98,10 @@ const getCommitToTag = async () => {
     await execute(`rm -Rf ${path.join(cwd, 'package-lock.json')}`)
 
     if (npm7) {
-      await execute(
-        'npm install --legacy-peer-deps --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-      )
+      await execute(getNpmInstall({legacyPeerDeps: npm7}))
     } else {
-      await execute(
-        'npm install --only pro --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-      )
-      await execute(
-        'npm install --only=dev --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-      )
+      await execute(getNpmInstall({only: 'pro'}))
+      await execute(getNpmInstall({only: 'dev'}))
     }
 
     await execute('npm version minor --no-git-tag-version')
