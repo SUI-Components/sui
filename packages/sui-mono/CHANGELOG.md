@@ -1,5 +1,35 @@
 # CHANGELOG
 
+# 2.15.0 (2021-05-20)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Avoid checking git status message and use porcelain instead ([8af59ac](https://github.com/SUI-Components/sui/commit/8af59ac628a901e54ac825a33d87b4a9d99d65bd))
+
+
+
+# 2.14.0 (2021-05-18)
+
+
+### Features
+
+* **packages/sui-mono:** Add break line ([6dfa325](https://github.com/SUI-Components/sui/commit/6dfa325efcec1cdeb53b0b15bab9c6b530574360))
+* **packages/sui-mono:** Avoid using console.log and pass args to git commit ([349a249](https://github.com/SUI-Components/sui/commit/349a24929fee7e6769e036470b3960cba20e1afb))
+* **packages/sui-mono:** Check footer and body to know if is breaking change ([82c6b85](https://github.com/SUI-Components/sui/commit/82c6b85f13edcb87b80ad2c4f52f87e86718329b))
+* **packages/sui-mono:** More readable list of commit types ([da1e819](https://github.com/SUI-Components/sui/commit/da1e81911962b01b3cfa9a1ee70c379c2a49b033))
+* **packages/sui-mono:** Promisify exec ([8d7ebf9](https://github.com/SUI-Components/sui/commit/8d7ebf97d76acdb60daff2a74431f0ed9548e723))
+* **packages/sui-mono:** Remove not needed dependencies ([5055963](https://github.com/SUI-Components/sui/commit/5055963a001552af2cb0aa162165dad688368aa1))
+* **packages/sui-mono:** Remove remember commit as we're moving to prepush ([b34ffbc](https://github.com/SUI-Components/sui/commit/b34ffbcbf30c89e30128e16488b10fbab0be1386))
+* **packages/sui-mono:** Rewrite Prmpter Manager and change name to use kebab case ([3d925b4](https://github.com/SUI-Components/sui/commit/3d925b408bbd109574568f987119f093700e5a9a))
+* **packages/sui-mono:** Simplify Prompter Manager ([2184199](https://github.com/SUI-Components/sui/commit/218419942772be26301fa210d5db6fa8e2664a22))
+* **packages/sui-mono:** Use correct package version ([7c3e55c](https://github.com/SUI-Components/sui/commit/7c3e55c4b7346e518278da38ef5e6aba0d90c6c5))
+* **packages/sui-mono:** Use name kebab case file name ([006a618](https://github.com/SUI-Components/sui/commit/006a61884a472687bb20dfaed9f9769d571c6abc))
+* **packages/sui-mono:** Use new bootstrap without commitizen ([6217450](https://github.com/SUI-Components/sui/commit/62174505685bd137cac097cebf479f8fc7794258))
+* **packages/sui-mono:** Use new way to build commits message ([2d619bc](https://github.com/SUI-Components/sui/commit/2d619bc96c0868fc631e82e3cc69dadfffbe11c2))
+
+
+
 # 2.13.0 (2021-05-10)
 
 

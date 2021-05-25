@@ -52,7 +52,7 @@ const YourAwesomeComponent = () =>
 Also, keep in mind, you need to import the needed styles for the icons at least once in your app:
 
 ```scss
-@import "your-svg-repo/lib/index";
+@import 'your-svg-repo/lib/index';
 ```
 
 ## Template

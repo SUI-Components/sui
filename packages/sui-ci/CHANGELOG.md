@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.21.0 (2021-05-19)
+
+
+### Features
+
+* **packages/sui-ci:** Avoid using export keyword ([cf6d641](https://github.com/SUI-Components/sui/commit/cf6d641d449d09f642a2648f2e4e04ffe51cef90))
+* **packages/sui-ci:** Get more info on GitHub Actions ([bdbee60](https://github.com/SUI-Components/sui/commit/bdbee6021cc4590ed5d91de0f8246204303c03c9))
+* **packages/sui-ci:** Ignore publishing tests ([d0254e7](https://github.com/SUI-Components/sui/commit/d0254e73ccb4f1f28966b059aabbea62d292aac9))
+* **packages/sui-ci:** Prepare package version for release ([a92fb26](https://github.com/SUI-Components/sui/commit/a92fb264cb35b4b3957577accfe38fa44802f292))
+* **packages/sui-ci:** Remove not needed dependencies with a few lines ([22c10ab](https://github.com/SUI-Components/sui/commit/22c10ab6417178b8bca424c6e06c1cc4841b2c59))
+* **packages/sui-ci:** Support http remote urls ([2ed3315](https://github.com/SUI-Components/sui/commit/2ed3315b98a5527e41d32b48b8b7d91259ba13fe))
+
+
+
 # 1.19.0 (2021-03-16)
 
 

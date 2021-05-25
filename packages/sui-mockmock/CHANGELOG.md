@@ -1,11 +1,25 @@
 # CHANGELOG
 
+# 2.0.0 (2021-05-20)
+
+
+### Bug Fixes
+
+* **packages/sui-domain:** Use axios without vulnerabilities ([5ba1f9f](https://github.com/SUI-Components/sui/commit/5ba1f9f3c203e6cf843e6347220cdfbf9772aefa))
+
+
+### Features
+
+* **packages/sui-mockmock:** Upgrade dependencies ([7b268e7](https://github.com/SUI-Components/sui/commit/7b268e7450448ab88b9f05c9dcc0aed3023cd962))
+
+
+
 # 1.12.0 (2020-05-18)
 
 
 ### Features
 
-* bump version ([5dc42bf](https://github.com/SUI-Components/sui/commit/5dc42bf878eeba95624f226f7039013a24183e2c))
+* **sui-mockmock:** bump version ([5dc42bf](https://github.com/SUI-Components/sui/commit/5dc42bf878eeba95624f226f7039013a24183e2c))
 
 
 
@@ -14,7 +28,7 @@
 
 ### Features
 
-* get nth request (url, body, headers) from clientMocker ([43d813f](https://github.com/SUI-Components/sui/commit/43d813fe0ac12628c9efc336d54b711586952410))
+* **sui-mockmock:** get nth request (url, body, headers) from clientMocker ([43d813f](https://github.com/SUI-Components/sui/commit/43d813fe0ac12628c9efc336d54b711586952410))
 
 
 
@@ -23,7 +37,7 @@
 
 ### Features
 
-* use latest axios and same version as sui-domain ([c6efdff](https://github.com/SUI-Components/sui/commit/c6efdff1bce0eda29344b2f1b2cfcf4b559007fe))
+* **sui-mockmock:** use latest axios and same version as sui-domain ([c6efdff](https://github.com/SUI-Components/sui/commit/c6efdff1bce0eda29344b2f1b2cfcf4b559007fe))
 
 
 
@@ -32,7 +46,7 @@
 
 ### Bug Fixes
 
-* fix restore interceptors and use new nock version ([3b29764](https://github.com/SUI-Components/sui/commit/3b297642012911423d85e695d4db2620244a095d))
+* **sui-mockmock:** fix restore interceptors and use new nock version ([3b29764](https://github.com/SUI-Components/sui/commit/3b297642012911423d85e695d4db2620244a095d))
 
 
 
@@ -41,8 +55,8 @@
 
 ### Features
 
-* add patch method to sui-mockmock ([618de69](https://github.com/SUI-Components/sui/commit/618de694f755d9a9b42b9d827ddaf0ab959c8bdb))
-* add test ([1f161e8](https://github.com/SUI-Components/sui/commit/1f161e8901387e4e2d07929fdc61c51215b2ca00))
+* **sui-mockmock:** add patch method to sui-mockmock ([618de69](https://github.com/SUI-Components/sui/commit/618de694f755d9a9b42b9d827ddaf0ab959c8bdb))
+* **sui-mockmock:** add test ([1f161e8](https://github.com/SUI-Components/sui/commit/1f161e8901387e4e2d07929fdc61c51215b2ca00))
 
 
 
@@ -51,7 +65,7 @@
 
 ### Features
 
-* Upgrade axios ([eaf153b](https://github.com/SUI-Components/sui/commit/eaf153b4f92becd7fd541969bd611ed2621c464c))
+* **sui-mockmock:** Upgrade axios ([eaf153b](https://github.com/SUI-Components/sui/commit/eaf153b4f92becd7fd541969bd611ed2621c464c))
 
 
 
@@ -60,7 +74,7 @@
 
 ### Bug Fixes
 
-* Release library with correct babel-preset-sui installed ([63f258a](https://github.com/SUI-Components/sui/commit/63f258af58d64fa939195f0b1c5e21734d777948))
+* **sui-mockmock:** Release library with correct babel-preset-sui installed ([63f258a](https://github.com/SUI-Components/sui/commit/63f258af58d64fa939195f0b1c5e21734d777948))
 
 
 
@@ -69,7 +83,7 @@
 
 ### Features
 
-* Move to babel-preset-sui@3 ([ec008eb](https://github.com/SUI-Components/sui/commit/ec008ebe41a91bdaf344b43e2ec6909e89c0f89d))
+* **sui-mockmock:** Move to babel-preset-sui@3 ([ec008eb](https://github.com/SUI-Components/sui/commit/ec008ebe41a91bdaf344b43e2ec6909e89c0f89d))
 
 
 
@@ -78,7 +92,7 @@
 
 ### Features
 
-* update dependencies ([c7fc439](https://github.com/SUI-Components/sui/commit/c7fc4390d1ad59f2ca365f9f6de0eb0fbdf998c9))
+* **sui-mockmock:** update dependencies ([c7fc439](https://github.com/SUI-Components/sui/commit/c7fc4390d1ad59f2ca365f9f6de0eb0fbdf998c9))
 
 
 
@@ -87,7 +101,7 @@
 
 ### Bug Fixes
 
-* added != 200 status code mock for get request ([28836dc](https://github.com/SUI-Components/sui/commit/28836dc36286ebef5e934141cffe1f726699cfc3))
+* **sui-mockmock:** added != 200 status code mock for get request ([28836dc](https://github.com/SUI-Components/sui/commit/28836dc36286ebef5e934141cffe1f726699cfc3))
 
 
 
@@ -96,12 +110,12 @@
 
 ### Features
 
-* new sui-mockmock package for testing mocks ([f645f58](https://github.com/SUI-Components/sui/commit/f645f5824f7535bd97c09917bb83911f28feacf8))
+* **sui-mockmock:** new sui-mockmock package for testing mocks ([f645f58](https://github.com/SUI-Components/sui/commit/f645f5824f7535bd97c09917bb83911f28feacf8))
 
 
 ### Performance Improvements
 
-* detect node and ensure no node code is loaded on browser mode ([a40c2f4](https://github.com/SUI-Components/sui/commit/a40c2f49394fad8631f8e23e09f4a74dcb7bbb40))
+* **sui-mockmock:** detect node and ensure no node code is loaded on browser mode ([a40c2f4](https://github.com/SUI-Components/sui/commit/a40c2f49394fad8631f8e23e09f4a74dcb7bbb40))
 
 
 
