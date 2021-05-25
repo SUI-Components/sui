@@ -11,7 +11,7 @@ program
   .option('-N, --name <name>', 'Releaser´s name')
   .option('-C, --commit <commit>', 'Commit to tag')
   .option('-sci, --skip-ci', 'Skip CI')
-  .option('-npm7, --npm7', 'Is npm 7 project')
+  .option('--npm7', 'Is npm 7 project')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
