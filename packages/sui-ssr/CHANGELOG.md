@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 7.30.0 (2021-05-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix option name, not abbreviation ([e39b805](https://github.com/SUI-Components/sui/commit/e39b805bee3a054677582f9f879c4577347c6a35))
+
+
+### Features
+
+* **packages/sui-ssr:** use ssr release with npm 7 ([c94d9cd](https://github.com/SUI-Components/sui/commit/c94d9cd2e5d6522dadec111a2f3b262ea20aa561))
+
+
+
 # 7.29.0 (2021-05-17)
 
 
