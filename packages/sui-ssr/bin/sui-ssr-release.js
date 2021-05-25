@@ -11,6 +11,7 @@ program
   .option('-N, --name <name>', 'Releaser´s name')
   .option('-C, --commit <commit>', 'Commit to tag')
   .option('-sci, --skip-ci', 'Skip CI')
+  .option('-npm7, --npm7', 'Is npm 7 project')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -28,7 +29,14 @@ program
   })
   .parse(process.argv)
 
-const {branch = 'master', email, name, skipCi = false, commit} = program
+const {
+  branch = 'master',
+  email,
+  name,
+  skipCi = false,
+  commit,
+  npm7 = false
+} = program
 
 const execute = async (cmd, full) => {
   try {
@@ -81,12 +89,18 @@ const getCommitToTag = async () => {
 
     await execute(`rm -Rf ${path.join(cwd, 'package-lock.json')}`)
 
-    await execute(
-      'npm install --only pro --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-    )
-    await execute(
-      'npm install --only=dev --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-    )
+    if (npm7) {
+      await execute(
+        'npm install --legacy-peer-deps --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
+      )
+    } else {
+      await execute(
+        'npm install --only pro --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
+      )
+      await execute(
+        'npm install --only=dev --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
+      )
+    }
 
     await execute('npm version minor --no-git-tag-version')
     const nextVersion = require(path.join(cwd, 'package.json')).version
