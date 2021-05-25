@@ -28,7 +28,6 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-lint](./packages/sui-lint) | CLI to lint your code and make it compliant to SUI official rules |
 | [sui-mockmock](./packages/sui-mockmock) | Mocking utilities for testing. |
 | [sui-mono](./packages/sui-mono) | Simple CLI for monorepo/multipackage commits, releases, etc. |
-| [sui-perf](./packages/sui-perf) | React performance graphs in terminal (SSR support) |
 | [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
 | [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
 | [sui-react-head](./packages/sui-react-head) | Populate the head element of your React app without hassle |

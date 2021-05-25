@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 7.20.0 (2021-05-13)
+
+
+### Features
+
+* **packages/sui-bundler:** upgrade bundler dependencies ([8a9ee89](https://github.com/SUI-Components/sui/commit/8a9ee8970c40510728ab353905a88825eee87ad0))
+
+
+
+# 7.19.0 (2021-05-12)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** fix pde context reference when working with linked packages ([a010fd9](https://github.com/SUI-Components/sui/commit/a010fd98e8ac1bcab026359149516225ce9bbd80))
+
+
+
 # 7.18.0 (2021-04-29)
 
 
