@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.19.0 (2021-05-26)
+
+
+### Features
+
+* **packages/sui-studio-create:** Use studio@10 when creating new studios ([3aeedf2](https://github.com/SUI-Components/sui/commit/3aeedf2eb36c72d37a1d01e9c2faf27fea7699db))
+
+
+
 # 4.18.0 (2021-05-18)
 
 
