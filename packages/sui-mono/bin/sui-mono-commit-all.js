@@ -41,7 +41,7 @@ const {message, type} = program
 const hasChangedFiles = async path => {
   const {stdout = ''} = await exec(
     `git add . && git status ${path} --porcelain`
-  ).catch(() => '')
+  ).catch(err => console.error(err) && '')
   return stdout.trim() !== ''
 }
 
