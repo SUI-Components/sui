@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.31.0 (2021-05-26)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix ssr lock file update for npm 7 given a npm issue ([ffded0b](https://github.com/SUI-Components/sui/commit/ffded0bccb84cf2f08cd4e0ae02f75c45700465e))
+
+
+
 # 7.30.0 (2021-05-25)
 
 
