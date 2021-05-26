@@ -148,7 +148,7 @@ export default ({path, fs, config: ssrConf = {}}) => {
   const criticalManifest = ({req}) => {
     if (cachedCriticalManifest) return cachedCriticalManifest
 
-    let criticalManifest
+    let criticalManifest = {}
 
     try {
       criticalManifest = JSON.parse(
@@ -159,7 +159,7 @@ export default ({path, fs, config: ssrConf = {}}) => {
       )
       cachedCriticalManifest = criticalManifest
     } catch (error) {
-      criticalManifest = null
+      console.warn('Manifest for Critical CSS is missing') // eslint-disable-line
     }
 
     return criticalManifest
