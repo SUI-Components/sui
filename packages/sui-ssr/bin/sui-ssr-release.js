@@ -59,12 +59,22 @@ const getCommitToTag = async () => {
 }
 const getNpmInstall = ({
   legacyPeerDeps: hasLegacyPeerDeps,
+  packageLockOnly,
   only: onlyScope
 } = {}) => {
-  const only = onlyScope ? `--only=${onlyScope}` : ''
-  const legacyPeerDeps = hasLegacyPeerDeps ? '--legacy-peer-deps' : ''
+  const installCommand = [
+    'npm install',
+    hasLegacyPeerDeps && '--legacy-peer-deps',
+    onlyScope && `--only=${onlyScope}`,
+    packageLockOnly && '--package-lock-only',
+    '--prefer-online',
+    '--package-lock',
+    '--progress false',
+    '--no-bin-links',
+    '--ignore-scripts'
+  ]
 
-  return `npm install ${legacyPeerDeps} ${only} --package-lock-only --prefer-online --package-lock --progress false --no-bin-links false --ignore-scripts`
+  return installCommand.filter(Boolean).join(' ')
 }
 ;(async () => {
   const cwd = process.cwd()
@@ -98,10 +108,15 @@ const getNpmInstall = ({
     await execute(`rm -Rf ${path.join(cwd, 'package-lock.json')}`)
 
     if (npm7) {
+      /**
+       * Given '--package-lock-only' does not work as expected with npm 7.
+       * Then we need to make a clean installation to updates package-lock file used in the release.
+       * See: https://github.com/npm/cli/issues/2747
+       */
       await execute(getNpmInstall({legacyPeerDeps: npm7}))
     } else {
-      await execute(getNpmInstall({only: 'pro'}))
-      await execute(getNpmInstall({only: 'dev'}))
+      await execute(getNpmInstall({only: 'pro', packageLockOnly: true}))
+      await execute(getNpmInstall({only: 'dev', packageLockOnly: true}))
     }
 
     await execute('npm version minor --no-git-tag-version')
