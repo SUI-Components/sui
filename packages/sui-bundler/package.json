@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
-    "@babel/core": "7.14.2",
+    "@babel/core": "7.14.3",
     "@s-ui/helpers": "1",
     "autoprefixer": "9.8.6",
     "babel-loader": "8.2.2",
