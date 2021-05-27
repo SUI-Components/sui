@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.12.0 (2021-05-27)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct paths for themes on npm start ([e70ea31](https://github.com/SUI-Components/sui/commit/e70ea31ad0fe4e706cb81b27ad0b2a0d866d9371))
+
+
+
 # 10.11.0 (2021-05-19)
 
 
