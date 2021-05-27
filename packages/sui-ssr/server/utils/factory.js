@@ -142,7 +142,7 @@ export default ({path, fs, config: ssrConf = {}}) => {
   const criticalDir = ({req}) => {
     const site = siteByHost(req)
 
-    return site ? `critical-css-${site}` : 'critical-css'
+    return site ? `critical-css/${site}` : 'critical-css'
   }
 
   const criticalManifest = ({req}) => {
