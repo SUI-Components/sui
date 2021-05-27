@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.13.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-studio:** Remove deprecated dependency but keep compatibility ([71c65e6](https://github.com/SUI-Components/sui/commit/71c65e633f776bb61a49ab0f8d6ca12add69e1b2))
+
+
+
 # 10.12.0 (2021-05-27)
 
 
