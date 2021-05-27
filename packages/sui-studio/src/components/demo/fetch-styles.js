@@ -4,7 +4,7 @@
 const requireAvailableThemes = require.context(
   `!css-loader!sass-loader!${__BASE_DIR__}/components`,
   true,
-  /^.*\/demo\/themes\/.*\.scss/,
+  /^\.\/\w+\/\w+\/demo\/themes\/.*\.scss/,
   'lazy'
 )
 const requireComponentStyles = require.context(
@@ -18,7 +18,7 @@ export const themesFor = ({category, component}) =>
   requireAvailableThemes
     .keys()
     .filter(p => p.includes(`${category}/${component}/`))
-    .map(p => p.replace(`./${category}/${component}/themes/`, ''))
+    .map(p => p.replace(`./${category}/${component}/demo/themes/`, ''))
     .map(p => p.replace('.scss', ''))
 
 export default /* stylesFor */ async ({
@@ -37,7 +37,7 @@ export default /* stylesFor */ async ({
   // if we've selected a theme, we load the styles for that specific theme
   const stylePath = isDefaultTheme
     ? `./${componentPath}/src/index.scss`
-    : `./${componentPath}/themes/${withTheme}.scss`
+    : `./${componentPath}/demo/themes/${withTheme}.scss`
 
   // use the correct require method to extract the expected styles
   const requireLazyStyles = isDefaultTheme
