@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "7.33.0",
+  "version": "7.34.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -39,7 +39,6 @@
     "jsesc": "3.0.1",
     "mime": "1.6.0",
     "noop-console": "0.8.0",
-    "parse-domain": "2.3.4",
     "parse5": "6.0.0",
     "rimraf": "3.0.0",
     "ua-parser-js": "0.7.20"

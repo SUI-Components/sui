@@ -10,7 +10,6 @@ import basicAuth from 'express-basic-auth'
 import path from 'path'
 import fs from 'fs'
 import jsYaml from 'js-yaml'
-import parseDomain from 'parse-domain'
 import compression from 'compression'
 import ssrConf from './config'
 import {
@@ -93,18 +92,14 @@ const _memoizedHtmlTemplatesMapping = {}
 
   ssrConf.forceWWW &&
     app.use((req, res, next) => {
-      const parsedUrl = parseDomain(req.hostname, {
-        customTlds: /localhost|\.local/
-      })
+      const {hostname, subdomains} = req
 
-      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
-        ? next()
-        : parsedUrl.subdomain
-        ? next()
-        : res.redirect(
-            `${req.protocol}://www.` + req.headers.host + req.url,
-            301
-          )
+      const isLocalhost =
+        hostname.includes('localhost') || hostname.includes('.local')
+
+      if (isLocalhost || subdomains.length) return next()
+
+      res.redirect(`${req.protocol}://www.` + req.headers.host + req.url, 301)
     })
 
   app.use((req, res, next) => {

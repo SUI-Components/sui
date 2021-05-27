@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 7.34.0 (2021-05-27)
+
+
+
 # 7.33.0 (2021-05-27)
 
 
@@ -36,6 +40,7 @@
 
 ### Features
 
+* **packages/sui-ssr:** Avoid using huge dependency for easy check ([1024e8b](https://github.com/SUI-Components/sui/commit/1024e8be156e197306367ab1da3d933a46c15caf))
 * **packages/sui-ssr:** use critical middleware ([a3af3aa](https://github.com/SUI-Components/sui/commit/a3af3aa22974bc4773528871beaa881c9a1a5ab5))
 * **packages/sui-ssr:** use ssr release with npm 7 ([c94d9cd](https://github.com/SUI-Components/sui/commit/c94d9cd2e5d6522dadec111a2f3b262ea20aa561))
 
