@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.100.0 (2021-05-27)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** Force new release of theme ([f1cd9b9](https://github.com/SUI-Components/sui/commit/f1cd9b90293e49e618c30307a3aa8490203d209e))
+* **packages/sui-theme:** Release correctly sui-theme ([b363f7b](https://github.com/SUI-Components/sui/commit/b363f7b02a7c7bfa9b0c4ee326dbd9cd2f92ce61))
+
+
+
 # 8.99.0 (2021-05-27)
 
 
