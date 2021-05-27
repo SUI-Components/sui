@@ -105,7 +105,7 @@ assets`
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
-    "@s-ui/component-dependencies": "1"
+    "@s-ui/theme": "8"
   },${
     repository.url
       ? `
