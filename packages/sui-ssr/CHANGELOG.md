@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.33.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-ssr:** keep only one folder for critical css in multisites ([4d95d15](https://github.com/SUI-Components/sui/commit/4d95d15867a025297586420e1c9f43c27fb5e703))
+
+
+
 # 7.32.0 (2021-05-26)
 
 
