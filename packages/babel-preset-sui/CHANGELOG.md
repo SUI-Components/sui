@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.23.0 (2021-05-27)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use same babel/core dependency version across packages ([bb0ef22](https://github.com/SUI-Components/sui/commit/bb0ef227e12542ceb0dd281308d8a929117c1618))
+
+
+
 # 3.22.0 (2021-05-13)
 
 
