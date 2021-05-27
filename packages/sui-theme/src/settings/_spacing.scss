@@ -35,3 +35,14 @@ $m-xs: $m-base / 4 !default; // 2px
 $gutter: $p-l !default;
 $gutter-s: $gutter / 2 !default;
 $gutter-l: $gutter * 2 !default;
+
+// Gap
+$g-base: 8px;
+
+$g-giant: $g-base * 6; // 48px
+$g-xxxl: $g-base * 5; // 40px
+$g-xxl: $g-base * 4; // 32px
+$g-xl: $g-base * 3; // 24px
+$g-l: $g-base * 2; // 16px
+$g-m: $g-base; // 8px
+$g-s: $g-base / 2; // 4px

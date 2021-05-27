@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.26.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-test:** Use same babel/core dependency across packages ([7a42a26](https://github.com/SUI-Components/sui/commit/7a42a26140419d7b11735fe919a38283f8768db1))
+
+
+
 # 4.25.0 (2021-05-10)
 
 

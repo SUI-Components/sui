@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.21.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-bundler:** Use same babel/loader dep across packages ([f0522db](https://github.com/SUI-Components/sui/commit/f0522db07adb52eb8a365ea5c19c1ccc3edfa98c))
+
+
+
 # 7.20.0 (2021-05-13)
 
 
