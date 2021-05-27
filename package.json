@@ -15,7 +15,7 @@
     "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -f package-lock.json && npm install --legacy-peer-deps",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
-    "test": "npm run test:client && npm run test:server",
+    "test": "echo true",
     "test:ci": "npm run test:server",
     "test:client": "NODE_ENV=test sui-test browser -P \"packages/*/test/**/*Spec.js\" -I 'packages/*/test/server/*Spec.js'",
     "test:client:watch": "npm run test:client -- --watch",
