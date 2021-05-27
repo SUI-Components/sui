@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.99.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-theme:** ad gap variables ([ba878f3](https://github.com/SUI-Components/sui/commit/ba878f350c328f81fbdeca47d1bbbf8b63bd5391))
+
+
+
 # 8.98.0 (2021-04-20)
 
 
