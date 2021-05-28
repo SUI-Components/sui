@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 8.102.0 (2021-05-28)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** use as described in docu ([8e7b2d7](https://github.com/SUI-Components/sui/commit/8e7b2d76d70d8651436d7721a3fdb48bfd7f3f85))
+
+
+### Features
+
+* **packages/sui-theme:** remove clean ([8771c04](https://github.com/SUI-Components/sui/commit/8771c046eefc639d8a3a8ccd961842f8196e01af))
+
+
+
 # 8.101.0 (2021-05-28)
 
 
