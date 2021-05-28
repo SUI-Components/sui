@@ -5,7 +5,7 @@
   "main": "lib/index.scss",
   "scripts": {
     "clean:lib": "npx rimraf lib",
-    "lib": "copyup ./src/**.scss lib/",
+    "lib": "copyup ./src/**/*.scss lib/",
     "lint": "sui-lint sass",
     "prepare": "npm run lib"
   },
