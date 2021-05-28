@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.22.0 (2021-05-28)
+
+
+### Features
+
+* **packages/sui-js:** update htmr version ([4dd542e](https://github.com/SUI-Components/sui/commit/4dd542eec7f8065fc1f84d0d4ac8d7bec82cfbe3))
+
+
+
 # 2.21.0 (2021-05-04)
 
 
