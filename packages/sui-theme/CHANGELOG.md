@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.101.0 (2021-05-28)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** lib script copy path ([e066e24](https://github.com/SUI-Components/sui/commit/e066e242cd528f6d5045efcd759ff10b9c19c57d))
+
+
+
 # 8.100.0 (2021-05-27)
 
 
