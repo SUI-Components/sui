@@ -37,6 +37,14 @@ const formatServerTimingHeader = metrics =>
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
     .replace(/(,$)/g, '')
 
+const cssLinksRegExp = /<link([^>]*)rel="stylesheet"([^<]*)>/g
+
+const convertToAsyncLinks = (allMatch, startingAttrs, endingAttrs) => {
+  const isAlreadyAsync = allMatch.includes('onload')
+  if (isAlreadyAsync) return allMatch
+  return `<link${startingAttrs}${ssrConfig.ASYNC_CSS_ATTRS}${endingAttrs}>`
+}
+
 export default async (req, res, next) => {
   const {
     context,
@@ -98,7 +106,7 @@ export default async (req, res, next) => {
         HEAD_OPENING_TAG,
         `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
-      .replace('rel="stylesheet"', ssrConfig.ASYNC_CSS_ATTRS)
+      .replace(cssLinksRegExp, convertToAsyncLinks)
       .replace(
         HEAD_CLOSING_TAG,
         `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`
