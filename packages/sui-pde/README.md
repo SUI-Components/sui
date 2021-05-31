@@ -119,7 +119,7 @@ const MyComponent = () => {
 }
 ```
 
-#### Attributes
+#### Attributes
 
 In order to pass by attributes, you'll able to do so by adding the named parameter `attributes` when using the useExperiment hook. Something like this:
 
