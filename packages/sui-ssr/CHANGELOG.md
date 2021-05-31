@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.35.0 (2021-05-31)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix async stylesheet links replacement ([fe53f37](https://github.com/SUI-Components/sui/commit/fe53f372d496c58d53922ed38939ba87ba7759e0))
+
+
+
 # 7.34.0 (2021-05-27)
 
 
