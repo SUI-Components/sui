@@ -13,7 +13,7 @@ const getDisplayNameFrom = (matchResult = {}) => {
   const {renderProps = {}} = matchResult
   const {components = []} = renderProps
   const pageComponent = components[components.length - 1]
-  return pageComponent?.displayName
+  return pageComponent && pageComponent.displayName
 }
 
 const findCriticalKeyFrom = ({manifest, pathFromRequest}) =>
