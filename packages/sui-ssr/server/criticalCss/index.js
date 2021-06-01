@@ -35,7 +35,12 @@ export default config => (req, res, next) => {
     return next()
   }
 
-  if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
+  if (
+    req.skipSSR ||
+    !config ||
+    config.buildTime ||
+    process.env.DISABLE_CRITICAL_CSS === 'true'
+  ) {
     logMessage("Skip middleware because it's inactive")
     return next()
   }
