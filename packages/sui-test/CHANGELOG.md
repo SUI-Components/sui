@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.27.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-test:** Use latest webpack@4 version ([3ee4184](https://github.com/SUI-Components/sui/commit/3ee41843557ea9113c501092191ed92fcd58feb0))
+
+
+
 # 4.26.0 (2021-05-27)
 
 
