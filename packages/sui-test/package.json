@@ -39,6 +39,6 @@
     "karma-webpack": "4.0.2",
     "mocha": "6.2.2",
     "null-loader": "4.0.1",
-    "webpack": "4.41.5"
+    "webpack": "4.46.0"
   }
 }
