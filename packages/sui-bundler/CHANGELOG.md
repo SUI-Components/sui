@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.22.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest webpack@4 version ([86c30e9](https://github.com/SUI-Components/sui/commit/86c30e974e891128aaa9d826cadff7f1ed69805d))
+
+
+
 # 7.21.0 (2021-05-27)
 
 
