@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.9.0 (2021-06-02)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** Add already tracked outside the ready ([b7b7d78](https://github.com/SUI-Components/sui/commit/b7b7d7866a170ead18c13ae9f7a6c7feedd52080))
+
+
+
 # 2.8.0 (2021-06-02)
 
 
