@@ -17,7 +17,7 @@ npm install @s-ui/critical-css -D
 
 ## Programatical usage:
 
-In order to extract critical css and match extracted files with you page or route you can use two approaches:
+In order to extract critical css and match extracted files with your page or route you can use two approaches:
 
 - Using path-to-regex
 - Using page component displayName
