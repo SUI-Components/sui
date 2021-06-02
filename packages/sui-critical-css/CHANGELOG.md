@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.6.0 (2021-06-02)
+
+
+### Features
+
+* **packages/sui-critical-css:** Add support to displayName critical key ([b1be20e](https://github.com/SUI-Components/sui/commit/b1be20e1585d55ad46c9ac98b31c8e99d7518025))
+* **packages/sui-critical-css:** Avoid using optional chaining ([2772ab3](https://github.com/SUI-Components/sui/commit/2772ab382079449cd2e3811eba91651bddac6e81))
+* **packages/sui-critical-css:** use bot UA in order to prevent dynamic rendering strategies issues ([bc2f72e](https://github.com/SUI-Components/sui/commit/bc2f72e0822d350c9f5feb57291e6a2da00b7aaa))
+
+
+
 # 1.5.0 (2021-05-20)
 
 
