@@ -37,8 +37,9 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
       return
     }
 
+    experimentsAlreadyTracked.push(experimentName)
+
     window.analytics.ready(() => {
-      experimentsAlreadyTracked.push(experimentName)
       window.analytics.track('Experiment Viewed', {
         experimentName,
         variationName
