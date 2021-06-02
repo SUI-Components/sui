@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.8.0 (2021-06-02)
+
+
+### Features
+
+* **packages/sui-pde:** Track experiment viewed only once ([19b320a](https://github.com/SUI-Components/sui/commit/19b320afd910cb421c9afb6871f4b15052b9a37e))
+
+
+
 # 2.7.0 (2021-05-13)
 
 
