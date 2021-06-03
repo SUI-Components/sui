@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.29.0 (2021-06-03)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** Use correctly config file ([556f62b](https://github.com/SUI-Components/sui/commit/556f62b803e2a7443a17987a4785bab4ceaf61b5))
+
+
+
 # 4.28.0 (2021-06-03)
 
 
