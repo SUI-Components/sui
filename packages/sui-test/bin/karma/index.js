@@ -4,10 +4,8 @@ const config = require('./config')
 const CWD = process.cwd()
 
 module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
-  if (ci) config.browsers = ['Firefox']
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
-  if (watch) config.singleRun = false
 
   config.files = [
     `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
@@ -22,6 +20,27 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   config.client.mocha = {
     ...config.client.mocha,
     ...(timeout && {timeout})
+  }
+
+  if (ci) {
+    config.browsers = ['Firefox']
+    config.reporters = ['coverage'].concat(config.reporters)
+    config.preprocessors = {
+      'src/**/*.js': ['coverage']
+    }
+    config.coverageReporter = {
+      dir: `${CWD}/coverage`,
+      reporters: [
+        {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
+        {type: 'html', subdir: 'report-html'},
+        {type: 'text-summary'}
+      ]
+    }
+  }
+
+  if (watch) {
+    config.singleRun = false
+    config.reporters = ['clear-screen'].concat(config.reporters)
   }
 
   return new Promise((resolve, reject) => {
