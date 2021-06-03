@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.28.0 (2021-06-03)
+
+
+### Features
+
+* **packages/sui-test:** Avoid using script name as contract for modifying config ([e3ebb29](https://github.com/SUI-Components/sui/commit/e3ebb2941b0661eb31ab260923f61e7cbece0ead))
+
+
+
 # 4.27.0 (2021-06-01)
 
 
