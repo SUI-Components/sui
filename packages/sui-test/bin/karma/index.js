@@ -7,22 +7,6 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 
-  config.files = [
-    `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
-    srcPattern ? `${CWD}/${srcPattern}` : '',
-    `${CWD}/${pattern}`
-  ].filter(Boolean)
-
-  config.preprocessors = {
-    [pattern]: ['webpack'],
-    ...(srcPattern && {[srcPattern]: ['webpack']})
-  }
-
-  config.client.mocha = {
-    ...config.client.mocha,
-    ...(timeout && {timeout})
-  }
-
   if (ci) {
     config.browsers = ['Firefox']
     config.reporters = ['coverage'].concat(config.reporters)
@@ -42,6 +26,22 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   if (watch) {
     config.singleRun = false
     config.reporters = ['clear-screen'].concat(config.reporters)
+  }
+
+  config.files = [
+    `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
+    srcPattern ? `${CWD}/${srcPattern}` : '',
+    `${CWD}/${pattern}`
+  ].filter(Boolean)
+
+  config.preprocessors = {
+    [pattern]: ['webpack'],
+    ...(srcPattern && {[srcPattern]: ['webpack']})
+  }
+
+  config.client.mocha = {
+    ...config.client.mocha,
+    ...(timeout && {timeout})
   }
 
   return new Promise((resolve, reject) => {
