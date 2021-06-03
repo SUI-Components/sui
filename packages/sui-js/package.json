@@ -19,7 +19,8 @@
     "lodash.debounce": "4.0.8",
     "lodash.throttle": "4.1.1",
     "qs": "6.7.0",
-    "remove-accents": "0.4.2"
+    "remove-accents": "0.4.2",
+    "uuid": "8.3.2"
   },
   "license": "MIT",
   "repository": {
