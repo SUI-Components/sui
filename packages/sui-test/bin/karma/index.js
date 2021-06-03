@@ -12,6 +12,7 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
     srcPattern ? `${CWD}/${srcPattern}` : '',
     `${CWD}/${pattern}`
   ].filter(Boolean)
+
   config.preprocessors = {
     [pattern]: ['webpack'],
     ...(srcPattern && {[srcPattern]: ['webpack']})
