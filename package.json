@@ -35,6 +35,7 @@
     "react": "17",
     "rimraf": "3.0.2",
     "sinon": "10.0.0",
+    "typescript": "4.3.2",
     "validate-commit-msg": "2.14.0"
   },
   "config": {
