@@ -1,4 +1,4 @@
-export default req => ({
+export default (req: IncomingMessage.ServerRequest) => ({
   appConfig: req.appConfig,
   req,
   cookies: req.headers.cookie,

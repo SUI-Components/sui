@@ -1,7 +1,8 @@
 import {renderToNodeStream, renderToString} from 'react-dom/server'
 import InitialPropsContext from './initialPropsContext'
+import {SsrComponentWithInitialPropsParams} from './types'
 
-const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
+const hrTimeToMs = (diff: [number, number]) => diff[0] * 1e3 + diff[1] * 1e-6
 
 export default function ssrComponentWithInitialProps({
   Target,
@@ -10,14 +11,13 @@ export default function ssrComponentWithInitialProps({
   res,
   renderProps,
   useStream = false
-}) {
+}: SsrComponentWithInitialPropsParams) {
   const startGetInitialProps = process.hrtime()
-  // get the page with the initialProps
-  const pageComponent =
-    renderProps.components[renderProps.components.length - 1]
   // use the getInitialProps from the page to retrieve the props to initialize
-  const getInitialProps = pageComponent.getInitialProps
-  return getInitialProps(context, req, res).then(initialProps => {
+  const {getInitialProps} =
+    renderProps.components[renderProps.components.length - 1]
+
+  return getInitialProps(context, req, res).then((initialProps: object) => {
     const diffGetInitialProps = process.hrtime(startGetInitialProps)
     // Create App with Context with the initialProps
     const AppWithContext = (

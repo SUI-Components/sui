@@ -1,8 +1,10 @@
 import {useContext, useEffect, useRef, useState} from 'react'
 import SUIContext from '@s-ui/react-context'
+import {ClientPageComponent, WithInitialPropsComponent} from './types'
+import { RouteInfo } from '@s-ui/react-router/src/types'
 
 // used to store the last definition of ClientPage component so it can be reused
-let latestClientPage = null
+let latestClientPage: WithInitialPropsComponent
 
 const getInitialPropsFromWindow = () => {
   // if no window initial props, then do nothing
@@ -16,7 +18,7 @@ const getInitialPropsFromWindow = () => {
 }
 
 // extract needed info from props for routeInfo object
-const createRouteInfoFromProps = ({location, params, routes}) => ({
+const createRouteInfoFromProps = ({location, params, routes}: RouteInfo) => ({
   location,
   params,
   routes
@@ -32,19 +34,19 @@ const createRouteInfoFromProps = ({location, params, routes}) => ({
 // and the very same component is matched by the router, so PageComponent just
 // gets props updated. Also, since PageComponent keeps mounted it will receive
 // an `isLoading` prop while getInitialProps is in progress.
-export default Page => {
+export default (Page: ClientPageComponent): WithInitialPropsComponent  => {
   // gather window initial props for this Page, if present
   const windowInitialProps = getInitialPropsFromWindow()
 
   // define Page wrapper component
-  const ClientPage = props => {
+  const ClientPage: WithInitialPropsComponent = (props: RouteInfo & object) => {
     const initialPropsFromWindowRef = useRef(windowInitialProps)
     // used to know if initialProps has been requested at least once
     const requestedInitialPropsOnceRef = useRef(!!windowInitialProps)
     // create routeInfo object from current props which are updated
     const routeInfo = createRouteInfoFromProps(props)
     // consume sui context from the context provider
-    const suiContext = useContext(SUIContext)
+    const suiContext: object = useContext(SUIContext)
     // pathName from context is outdated, so we update it from routeInfo
     const context = {...suiContext, pathName: routeInfo.location.pathname}
 
@@ -65,10 +67,10 @@ export default Page => {
         }
 
         Page.getInitialProps({context, routeInfo})
-          .then(initialProps => {
+          .then((initialProps: object) => {
             setState({initialProps, isLoading: false})
           })
-          .catch(error => {
+          .catch((error: Error) => {
             setState({initialProps: {error}, isLoading: false})
           })
           .finally(() => {
