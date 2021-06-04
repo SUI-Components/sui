@@ -49,6 +49,23 @@ export default class PDE {
    * @returns {boolean}
    */
   isFeatureEnabled({featureKey, attributes}) {
-    return this._adapter.isFeatureEnabled({featureKey, attributes})
+    return this._adapter.isFeatureEnabled({
+      featureKey,
+      attributes
+    })
+  }
+
+  /**
+   * Return all variables of a given feature
+   * @param {object} param
+   * @param {string} param.featureKey Feature flag key
+   * @parma {object=} param.attributes
+   * @returns {object}
+   */
+  getAllFeatureVariables({featureKey, attributes}) {
+    return this._adapter.getAllFeatureVariables({
+      featureKey,
+      attributes
+    })
   }
 }

@@ -161,6 +161,25 @@ const MyComponent = () => {
 }
 ```
 
+#### Feature Flags Variables
+
+Returns all feature variables for the specified feature flag
+
+```js
+import {useFeature} from '@s-ui/pde'
+
+const MyComponent = () => {
+  const {isActive, variables} = useFeature('myFeatureKey') // variables = an object with all the feature variables
+
+  return (
+    <p>
+      The feature 'myFeatureKey' is{' '}
+      {isActive ? `active and price value is ${variables.price}` : 'inactive'}
+    </p>
+  )
+}
+```
+
 #### Segment integration
 
 By default, segment integration will be active, this means that a global `window.optimizelyClientInstance` reference to the `optimizelyIntance` object passed by to the PDE constructor will be created. In case you want to turn this option off, create the optimizely adapter as follows:
