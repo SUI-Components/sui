@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
-    "lib": "babel ./src --out-dir ./lib",
+    "lib": "tsc",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -13,5 +13,10 @@
   "peerDependencies": {
     "prop-types": "15",
     "react": "16 || 17"
+  },
+  "devDependencies": {
+    "@s-ui/react-router": "1",
+    "@types/express": "4",
+    "@types/node": "15"
   }
 }
