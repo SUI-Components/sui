@@ -21,16 +21,18 @@ export default function useFeature(featureKey, attributes, queryString) {
     queryString
   })
 
-  if (forcedValue) {
-    return {isActive: forcedValue === 'on'}
-  }
-
-  let isActive
   try {
-    isActive = pde.isFeatureEnabled({featureKey, attributes})
+    const isActive = forcedValue
+      ? forcedValue === 'on'
+      : pde.isFeatureEnabled({featureKey, attributes})
+
+    const variables = pde.getAllFeatureVariables({
+      featureKey,
+      attributes
+    })
+
+    return {isActive, variables}
   } catch (error) {
-    console.error(error)
-    isActive = false
+    return {isActive: false, variables: {}}
   }
-  return {isActive}
 }

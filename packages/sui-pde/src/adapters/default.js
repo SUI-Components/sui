@@ -26,4 +26,8 @@ export default class DefaultAdapter {
   isFeatureEnabled() {
     return false
   }
+
+  getAllFeatureVariables() {
+    return {}
+  }
 }
