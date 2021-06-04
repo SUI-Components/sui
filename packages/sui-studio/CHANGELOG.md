@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.14.0 (2021-06-04)
+
+
+### Features
+
+* **packages/sui-studio:** Use correct npmignore when generating components ([adfd939](https://github.com/SUI-Components/sui/commit/adfd939c40916a4c9c062d237311c32a30df5179))
+
+
+
 # 10.13.0 (2021-05-27)
 
 
