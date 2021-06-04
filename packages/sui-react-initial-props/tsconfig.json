@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "outDir": "./lib",
+    "strict": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "lib"],
+  "types": [
+    "@s-ui/react-router/src/types.d.ts"
+  ]
+}
