@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.10.0 (2021-06-04)
+
+
+### Features
+
+* **packages/sui-pde:** add feature variables support ([f9a29cc](https://github.com/SUI-Components/sui/commit/f9a29cc1584db3ffe3b720de10a3c8f5d8d8fd48))
+
+
+
 # 2.9.0 (2021-06-02)
 
 
