@@ -87,9 +87,11 @@ node_modules`
 
   writeFile(
     COMPONENT_PACKAGE_NPMIGNORE_FILE,
-    `src
+    `assets
+demo
+src
 test
-assets`
+`
   ),
 
   writeFile(
