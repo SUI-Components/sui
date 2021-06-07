@@ -6,7 +6,8 @@
     "noImplicitAny": false,
     "outDir": "./lib",
     "strict": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "lib"],
