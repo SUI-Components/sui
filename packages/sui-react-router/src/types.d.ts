@@ -1,12 +1,20 @@
 export type Action = 'PUSH' | 'REPLACE' | 'POP';
 
+export type Query = object
+export type QueryString = string
+export type Pathname = string
+export type Params = object
+
 /**
  * A location key is a string that is unique to a particular location. It is the one piece of data that most accurately answers the question "Where am I?".
  */
 export type LocationKey = string
-export type LocationState = unknown
 export type Search = string
 export type Path = string
+
+type LocationState = {
+  from: Location;
+}
 
 export type LocationDescriptorObject = {
   pathname: Pathname;
@@ -16,14 +24,6 @@ export type LocationDescriptorObject = {
 };
 
 export type LocationDescriptor = LocationDescriptorObject | Path;
-
-export type Query = Object
-
-export type QueryString = string
-
-export type Pathname = string
-
-export type Params = Object
 
 export type Route = {
   component?: RouteComponent

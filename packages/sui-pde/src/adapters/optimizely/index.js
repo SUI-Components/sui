@@ -158,6 +158,21 @@ export default class OptimizelyAdapter {
     )
   }
 
+  /**
+   * Return all variables of a given feature
+   * @param {object} param
+   * @param {string} param.featureKey
+   * @parma {object=} param.attributes
+   * @returns {object}
+   */
+  getAllFeatureVariables({featureKey, attributes}) {
+    return this._optimizely.getAllFeatureVariables(
+      featureKey,
+      this._userId,
+      attributes
+    )
+  }
+
   updateConsents({hasUserConsents}) {
     this._hasUserConsents = hasUserConsents
     updateIntegrations({

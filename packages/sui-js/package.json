@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "2.22.0",
+  "version": "2.23.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
@@ -18,6 +18,7 @@
     "just-kebab-case": "1.1.0",
     "lodash.debounce": "4.0.8",
     "lodash.throttle": "4.1.1",
+    "nanoid": "3.1.23",
     "qs": "6.7.0",
     "remove-accents": "0.4.2"
   },
