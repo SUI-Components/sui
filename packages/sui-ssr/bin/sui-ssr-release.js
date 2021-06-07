@@ -9,6 +9,9 @@ program
   .option('-B, --branch <branch>', 'Release branch. Will be master by default')
   .option('-E, --email <email>', 'Releaser´s email')
   .option('-N, --name <name>', 'Releaser´s name')
+  .option('-C, --commit <commit>', 'Commit to tag')
+  .option('-sci, --skip-ci', 'Skip CI')
+  .option('--npm7', 'Is npm 7 project')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -26,7 +29,14 @@ program
   })
   .parse(process.argv)
 
-const {branch = 'master', email, name} = program
+const {
+  branch = 'master',
+  email,
+  name,
+  skipCi = false,
+  commit,
+  npm7 = false
+} = program
 
 const execute = async (cmd, full) => {
   try {
@@ -41,6 +51,31 @@ const execute = async (cmd, full) => {
     return e
   }
 }
+
+const getCommitToTag = async () => {
+  if (commit) return commit
+
+  return execute('git rev-parse HEAD')
+}
+const getNpmInstall = ({
+  legacyPeerDeps: hasLegacyPeerDeps,
+  packageLockOnly,
+  only: onlyScope
+} = {}) => {
+  const installCommand = [
+    'npm install',
+    hasLegacyPeerDeps && '--legacy-peer-deps',
+    onlyScope && `--only=${onlyScope}`,
+    packageLockOnly && '--package-lock-only',
+    '--prefer-online',
+    '--package-lock',
+    '--progress false',
+    '--no-bin-links',
+    '--ignore-scripts'
+  ]
+
+  return installCommand.filter(Boolean).join(' ')
+}
 ;(async () => {
   const cwd = process.cwd()
   const {GITHUB_TOKEN, GH_TOKEN} = process.env
@@ -52,8 +87,8 @@ const execute = async (cmd, full) => {
   try {
     await execute(`git checkout ${branch}`)
     await execute(`git pull origin ${branch}`)
-    const lastCommitHash = await execute('git rev-parse HEAD')
-    const hasTag = await execute(`git tag --points-at ${lastCommitHash}`)
+    const commitToTag = await getCommitToTag()
+    const hasTag = await execute(`git tag --points-at ${commitToTag}`)
 
     if (hasTag) {
       console.log('We are going to release the current tag:', hasTag)
@@ -72,12 +107,17 @@ const execute = async (cmd, full) => {
 
     await execute(`rm -Rf ${path.join(cwd, 'package-lock.json')}`)
 
-    await execute(
-      'npm install --only pro --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-    )
-    await execute(
-      'npm install --only=dev --package-lock-only --prefer-online --package-lock --progress false --loglevel error --no-bin-links --ignore-scripts'
-    )
+    if (npm7) {
+      /**
+       * Given '--package-lock-only' does not work as expected with npm 7.
+       * Then we need to make a clean installation to updates package-lock file used in the release.
+       * See: https://github.com/npm/cli/issues/2747
+       */
+      await execute(getNpmInstall({legacyPeerDeps: npm7}))
+    } else {
+      await execute(getNpmInstall({only: 'pro', packageLockOnly: true}))
+      await execute(getNpmInstall({only: 'dev', packageLockOnly: true}))
+    }
 
     await execute('npm version minor --no-git-tag-version')
     const nextVersion = require(path.join(cwd, 'package.json')).version
@@ -88,7 +128,11 @@ const execute = async (cmd, full) => {
       )}`
     )
 
-    await execute(`git commit -m "release(META): ${nextVersion}"`)
+    const skipCiMessage = skipCi ? '[skip ci]' : ''
+
+    await execute(
+      `git commit -m "release(META): ${nextVersion} ${skipCiMessage}"`
+    )
     await execute(`git tag -a "v${nextVersion}" -m "v${nextVersion}"`)
     await execute('git status')
     await execute(`git push --set-upstream --tags origin ${branch}`)

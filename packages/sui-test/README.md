@@ -203,6 +203,7 @@ If defined, any error on your tests will create a screenshot of that moment in t
 - `server`: Config for `@s-ui/test server` binary:
   - `forceTranspilation`: List of regexs (string based, later will be transformed with `new Regex`) of modules to transpile. This is useful in case you're using server tests for modules that are ESModules based and need to be transpiled with `@babel/plugin-transform-modules-commonjs`.
   - `esmOverride`: Boolean flag (defaults to `false`), enable patching the Node's CJS loader when facing ESM errors, like `ERR_REQUIRE_ESM` in `node > v12.12.0`. 
+  - `useLibDir`: disabled by default. Prevents to compile lib folders on mocha runner if set to false
 
 ```json
 "config": {

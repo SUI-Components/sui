@@ -1,19 +1,18 @@
 /* eslint no-console:0 */
 
+const {promisify} = require('util')
 const program = require('commander')
 const path = require('path')
+const {showError} = require('@s-ui/helpers/cli')
+const {getPackageJson} = require('@s-ui/helpers/packages')
+const exec = promisify(require('child_process').exec)
+const gitUrlParse = require('git-url-parse')
 const {
   checkIsMonoPackage,
   getChangelogFilename,
   getPublishAccess
 } = require('../src/config')
 const checker = require('../src/check')
-const {showError} = require('@s-ui/helpers/cli')
-const {getPackageJson} = require('@s-ui/helpers/packages')
-const {exec: execNative} = require('child_process')
-const gitUrlParse = require('git-url-parse')
-const util = require('util')
-const exec = util.promisify(execNative)
 
 program
   .option('-S, --scope <scope>', 'release a single scope')
@@ -73,7 +72,7 @@ const releasesByPackages = ({status}) => {
 const releasePackage = async ({pkg, code, skipCI} = {}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
-  const packageScope = isMonoPackage ? 'META' : pkg.replace(path.sep, '/')
+  const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
   const {private: isPrivatePackage} = getPackageJson(cwd, true)

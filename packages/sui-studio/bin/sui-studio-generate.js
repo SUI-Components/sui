@@ -87,9 +87,11 @@ node_modules`
 
   writeFile(
     COMPONENT_PACKAGE_NPMIGNORE_FILE,
-    `src
+    `assets
+demo
+src
 test
-assets`
+`
   ),
 
   writeFile(
@@ -100,12 +102,12 @@ assets`
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npx rimraf ./lib && npm run build:js && npm run build:styles",
-    "build:js": "../../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
-    "build:styles": "../../../node_modules/.bin/cpx './src/**/*.scss' ./lib"
+    "prepare": "npm run build:js && npm run build:styles",
+    "build:js": "babel --presets sui ./src --out-dir ./lib",
+    "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
-    "@s-ui/component-dependencies": "1"
+    "@s-ui/theme": "8"
   },${
     repository.url
       ? `
@@ -193,7 +195,7 @@ return (<${componentInPascal} />)
 
   writeFile(
     COMPONENT_PLAYGROUND_FILE,
-    `import ${componentInPascal} from 'components/${category}/${component}/'
+    `import ${componentInPascal} from 'components/${category}/${component}/src'
 export default () => <${componentInPascal} />
 `
   ),

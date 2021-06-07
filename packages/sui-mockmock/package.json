@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/mockmock",
-  "version": "1.12.0",
+  "version": "2.0.0",
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf lib && ../../node_modules/.bin/babel ./src -d lib --presets sui",
+    "lib": "babel ./src -d lib --presets sui",
     "prepare": "npm run lib",
     "test": "npm run test:client && npm run test:server",
     "test:client": "sui-test browser",
@@ -18,8 +18,8 @@
     "./lib/http/serverMocker.js": false
   },
   "dependencies": {
-    "nock": "9.1.6",
-    "sinon": "2.4.1"
+    "nock": "13.0.11",
+    "sinon": "10.0.0"
   },
   "devDependencies": {
     "@s-ui/test": "4",

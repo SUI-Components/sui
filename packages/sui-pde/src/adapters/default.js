@@ -22,4 +22,12 @@ export default class DefaultAdapter {
   async onReady() {
     return true
   }
+
+  isFeatureEnabled() {
+    return false
+  }
+
+  getAllFeatureVariables() {
+    return {}
+  }
 }

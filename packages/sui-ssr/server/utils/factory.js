@@ -5,6 +5,8 @@ const DEFAULT_PUBLIC_FOLDER = 'public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
+let cachedCriticalManifest
+
 export default ({path, fs, config: ssrConf = {}}) => {
   const multiSiteMapping = ssrConf.multiSite
   const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
@@ -112,14 +114,68 @@ export default ({path, fs, config: ssrConf = {}}) => {
     return url
   }
 
+  const getStyleHrefBy = ({pageName}) => {
+    const assetsFile = ssrConf.assetsManifest
+
+    return assetsFile && assetsFile[`${pageName}.css`]
+  }
+
+  const createStylesFor = ({pageName, async = false} = {}) => {
+    if (!ssrConf.createStylesFor) return ''
+
+    const appStyles = ssrConf.createStylesFor.appStyles
+    const shouldCreatePageStyles = ssrConf.createStylesFor.createPagesStyles
+
+    const stylesheets = [
+      appStyles && getStyleHrefBy({pageName: appStyles}),
+      shouldCreatePageStyles && getStyleHrefBy({pageName})
+    ].filter(Boolean)
+
+    const attributes = async ? ssrConf.ASYNC_CSS_ATTRS : ''
+    const stylesHTML = stylesheets
+      .map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`)
+      .join('')
+
+    return stylesHTML
+  }
+
+  const criticalDir = ({req}) => {
+    const site = siteByHost(req)
+
+    return site ? `critical-css/${site}` : 'critical-css'
+  }
+
+  const criticalManifest = ({req}) => {
+    if (cachedCriticalManifest) return cachedCriticalManifest
+
+    let criticalManifest = {}
+
+    try {
+      criticalManifest = JSON.parse(
+        fs.readFileSync(
+          path.join(process.cwd(), criticalDir({req}), 'critical.json'),
+          'utf8'
+        )
+      )
+      cachedCriticalManifest = criticalManifest
+    } catch (error) {
+      console.warn('Manifest for Critical CSS is missing') // eslint-disable-line
+    }
+
+    return criticalManifest
+  }
+
   return {
-    isMultiSite,
+    buildRequestUrl,
+    createStylesFor,
     hostFromReq,
+    hrTimeToMs,
+    isMultiSite,
+    publicFolder,
+    readHtmlTemplate,
     siteByHost,
     useStaticsByHost,
-    readHtmlTemplate,
-    buildRequestUrl,
-    publicFolder,
-    hrTimeToMs
+    criticalDir,
+    criticalManifest
   }
 }

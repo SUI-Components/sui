@@ -160,6 +160,9 @@ jobs:
         - npm run ssr:deploy:production
 ```
 
+> If you want that release commit does not trigger a Travis build you could use the flag `--skip-ci` and commit message will have `[skip ci]` string. See more information about [Travis skipping build docs](https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build)
+
+
 ## Use the ssr output as stream
 
 It uses the stdout stream so you can do things like:
@@ -247,13 +250,21 @@ Configs accepted:
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
   - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
   - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
-  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: Route path - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS. See a simple example below:
-    ```json
-    {
-      "mandatoryCSSRules": {
-        "/*": [".ma-AdCard"]
+  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: **Route path or regexp** - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS. 
+    - In case of **regexp**, you can obtain the value in **getInitialProps** **route** second param, and escape **\\** with **\\\\** for validate the json.
+   
+    See a simple example below:
+      ```json
+      {
+        "mandatoryCSSRules": {
+          "/\\/.*\\x2D([0-9]{6,9})\\.htm(\\?.+)?$/": [
+            ".ma-AdDetail"
+          ],
+          "/*": [
+            ".ma-AdCard"
+          ]
+        }
       }
-    }
     ```
 
 - **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
@@ -276,6 +287,13 @@ Configs accepted:
   Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
 - **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
+
+- **`createStylesFor`** (`undefined`): Define how the server should manage style imports. When separate styles per page, by default those imports will load css asynchronously but maybe we want that server to add them as an `<link>` in app head and be async or not depends on criticalCSS.
+
+  - **`appStyles`** (`string`): Define the webpackChunkName of app styles. These styles usually are imported in `app.js`.
+  - **`createPagesStyles`** (`false`): Define if pages have style imports that should be managed by the server. The server will get these files from the `asset-manifest.json` file, which should be created by sui-ssr.
+
+> ⚠️ `createStylesFor` does not works as expected when sui-bundler configuration has `onlyHash` defined to `true`.
 
 ## Dynamic Rendering
 
@@ -504,3 +522,10 @@ Maybe you want to use a config like this:
   }
 }
 ```
+
+# Next Steps:
+
+**Stop compiling s-ui/ssr**
+⚠️ `sui-ssr build` is going to be deprecated in some following major version:
+
+- With that we could delete mime version of package json. Added because webpack does not get correctly mime version and could cause server errors. It is an express dependency.

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint no-console:0 */
 
 const program = require('commander')
 const {version} = require('../package.json')

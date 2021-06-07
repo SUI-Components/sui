@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/react-router",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "npx rimraf ./lib && npx mkdirp ./lib && ../../node_modules/.bin/babel --presets sui ./src --out-dir ./lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test": "npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
@@ -29,6 +29,6 @@
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17",
-    "sinon": "9.2.0"
+    "sinon": "10.0.0"
   }
 }

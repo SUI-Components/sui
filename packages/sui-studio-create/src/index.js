@@ -29,11 +29,7 @@ if (HELP_PARAM.includes(param) || !param) {
 const PROJECT_NAME = param
 const PROJECT_PATH = `${BASE_DIR}/${PROJECT_NAME}`
 
-Promise.all([
-  createDir(`${PROJECT_PATH}/components`),
-  createDir(`${PROJECT_PATH}/demo`),
-  createDir(`${PROJECT_PATH}/test`)
-])
+Promise.all([createDir(`${PROJECT_PATH}/components`)])
   .then(() =>
     writeFile(
       `${PROJECT_PATH}/components/README.md`,
@@ -48,28 +44,30 @@ Promise.all([
   "name": "${PROJECT_NAME}",
   "version": "1.0.0",
   "description": "",
+  "workspaces": [
+    "components/**"
+  ],
   "private": true,
   "scripts": {
     "build": "sui-studio build",
-    "check:release": "sui-studio check-release",
-    "co": "sui-studio commit",
+    "check:release": "sui-mono check-release",
+    "co": "sui-mono commit",
     "dev": "sui-studio dev",
     "generate": "sui-studio generate --prefix sui --scope ${PROJECT_NAME}",
     "lint:js": "sui-lint js",
     "lint:sass": "sui-lint sass",
     "lint": "npm run lint:js && npm run lint:sass",
-    "phoenix:ci": "npx @s-ui/mono phoenix --ci && (cd demo && npx @s-ui/mono phoenix --ci)",
-    "phoenix": "npx @s-ui/mono phoenix && (cd demo && npx @s-ui/mono phoenix)",
-    "release": "sui-studio release",
+    "phoenix": "npx @s-ui/mono@2 run 'rm -rf ./node_modules' && rm -rf ./node_modules && npm install --legacy-peer-deps",
+    "phoenix:ci": "npm run phoenix -- --no-optional --no-fund --no-audit",
+    "release": "sui-mono release",
     "start": "sui-studio start"
   },
   "repository": {},
-  "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@s-ui/precommit": "2",
-    "@s-ui/studio": "9",
+    "@s-ui/studio": "10",
     "husky": "4.3.0",
     "validate-commit-msg": "2.14.0"
   },
@@ -77,10 +75,6 @@ Promise.all([
     "@s-ui/component-dependencies": "1"
   },
   "config": {
-    "sui-mono": {
-      "packagesFolder": "./components",
-      "deepLevel": 2
-    },
     "validate-commit-msg": {
       "types": "@s-ui/mono/src/types"
     }

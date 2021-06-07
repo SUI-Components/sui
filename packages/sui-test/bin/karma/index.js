@@ -4,15 +4,36 @@ const config = require('./config')
 const CWD = process.cwd()
 
 module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
-  if (ci) config.browsers = ['Firefox']
+  if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
-  if (watch) config.singleRun = false
+
+  if (ci) {
+    config.browsers = ['Firefox']
+    config.reporters = ['coverage'].concat(config.reporters)
+    config.preprocessors = {
+      'src/**/*.js': ['coverage']
+    }
+    config.coverageReporter = {
+      dir: `${CWD}/coverage`,
+      reporters: [
+        {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
+        {type: 'html', subdir: 'report-html'},
+        {type: 'text-summary'}
+      ]
+    }
+  }
+
+  if (watch) {
+    config.singleRun = false
+    config.reporters = ['clear-screen'].concat(config.reporters)
+  }
 
   config.files = [
     `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
     srcPattern ? `${CWD}/${srcPattern}` : '',
     `${CWD}/${pattern}`
   ].filter(Boolean)
+
   config.preprocessors = {
     [pattern]: ['webpack'],
     ...(srcPattern && {[srcPattern]: ['webpack']})

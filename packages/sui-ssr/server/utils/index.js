@@ -4,23 +4,29 @@ import config from '../config'
 import utilsFactory from './factory'
 
 const {
-  isMultiSite,
+  buildRequestUrl,
+  createStylesFor,
   hostFromReq,
+  hrTimeToMs,
+  isMultiSite,
   publicFolder,
+  readHtmlTemplate,
   siteByHost,
   useStaticsByHost,
-  readHtmlTemplate,
-  hrTimeToMs,
-  buildRequestUrl
+  criticalDir,
+  criticalManifest
 } = utilsFactory({path, fs, config})
 
 export {
-  isMultiSite,
+  buildRequestUrl,
+  createStylesFor,
   hostFromReq,
+  hrTimeToMs,
+  isMultiSite,
   publicFolder,
+  readHtmlTemplate,
   siteByHost,
   useStaticsByHost,
-  readHtmlTemplate,
-  hrTimeToMs,
-  buildRequestUrl
+  criticalDir,
+  criticalManifest
 }

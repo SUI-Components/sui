@@ -1,41 +1,6 @@
 import {useContext, useMemo} from 'react'
 import PdeContext from '../contexts/PdeContext'
-
-const isNode = typeof window === 'undefined'
-
-const serverStrategy = {
-  getVariation: ({pde, experimentName, attributes}) => {
-    return pde.getVariation({pde, name: experimentName, attributes})
-  },
-  trackExperiment: () => {}
-}
-
-const browserStrategy = {
-  getVariation: ({pde, experimentName, attributes}) => {
-    const variationName = pde.activateExperiment({
-      name: experimentName,
-      attributes
-    })
-
-    return variationName
-  },
-  trackExperiment: ({variationName, experimentName}) => {
-    // user is not part of the experiment
-    if (!variationName) return
-    if (!window.analytics?.track) {
-      // eslint-disable-next-line no-console
-      console.error(
-        "[sui-pde: useExperiment] window.analytics.track expected to exists but doesn't"
-      )
-      return
-    }
-
-    window.analytics.track('Experiment Viewed', {
-      experimentName,
-      variationName
-    })
-  }
-}
+import {getPlatformStrategy} from './platformStrategies'
 
 /**
  * Hook to use a experiment
@@ -43,12 +8,14 @@ const browserStrategy = {
  * @param {string} param.experimentName
  * @param {object} param.attributes
  * @param {function} param.trackExperimentViewed
+ * @param {string} [param.queryString] Test purposes only
  * @return {{variation: string}}
  */
 export default function useExperiment({
   experimentName,
   attributes,
-  trackExperimentViewed
+  trackExperimentViewed,
+  queryString // for test purposes only
 } = {}) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
@@ -58,15 +25,18 @@ export default function useExperiment({
 
   const variation = useMemo(() => {
     let variationName
-    const clientStrategy = {
-      ...browserStrategy,
-      ...(trackExperimentViewed && {
-        trackExperiment: trackExperimentViewed
-      })
-    }
-    const strategy = isNode ? serverStrategy : clientStrategy
+    const strategy = getPlatformStrategy({
+      customTrackExperimentViewed: trackExperimentViewed
+    })
 
     try {
+      const forcedVariation = strategy.getForcedValue({
+        key: experimentName,
+        queryString
+      })
+      if (forcedVariation) {
+        return forcedVariation
+      }
       variationName = strategy.getVariation({pde, experimentName, attributes})
       strategy.trackExperiment({variationName, experimentName})
     } catch (error) {
@@ -76,7 +46,7 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [experimentName, pde, attributes, trackExperimentViewed])
+  }, [trackExperimentViewed, experimentName, queryString, pde, attributes])
 
   return {variation}
 }

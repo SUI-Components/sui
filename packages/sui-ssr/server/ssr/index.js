@@ -14,6 +14,7 @@ import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
+import {createStylesFor} from '../utils'
 import {getInitialContextValue} from '../initialContextValue'
 
 // __MAGIC IMPORTS__
@@ -36,6 +37,14 @@ const formatServerTimingHeader = metrics =>
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
     .replace(/(,$)/g, '')
 
+const cssLinksRegExp = /<link([^>]*)rel="stylesheet"([^<]*)>/g
+
+const convertToAsyncLinks = (allMatch, startingAttrs, endingAttrs) => {
+  const isAlreadyAsync = allMatch.includes('onload')
+  if (isAlreadyAsync) return allMatch
+  return `<link${startingAttrs}${ssrConfig.ASYNC_CSS_ATTRS}${endingAttrs}>`
+}
+
 export default async (req, res, next) => {
   const {
     context,
@@ -46,6 +55,7 @@ export default async (req, res, next) => {
     skipSSR
   } = req
   const {error, redirectLocation, renderProps} = matchResult
+
   let [headTplPart, bodyTplPart] = getTplParts(req)
 
   if (skipSSR) {
@@ -73,16 +83,30 @@ export default async (req, res, next) => {
     return next() // We asume that is a 404 page
   }
 
-  if (criticalCSS) {
+  const hasCriticalCSS = criticalCSS && criticalCSS !== ''
+
+  // get the pageComponent and its displayName to retrieve its styles
+  const pageComponent =
+    renderProps.components[renderProps.components.length - 1]
+  const pageName = pageComponent.displayName
+
+  if (ssrConfig.createStylesFor && pageName) {
+    const pageStyles = createStylesFor({pageName, async: hasCriticalCSS})
+    let nextHeadTplPart = headTplPart.replace(
+      HEAD_OPENING_TAG,
+      `${HEAD_OPENING_TAG}${pageStyles}`
+    )
+    headTplPart = (' ' + nextHeadTplPart).slice(1)
+    nextHeadTplPart = null
+  }
+
+  if (hasCriticalCSS) {
     let nextHeadTplPart = headTplPart
       .replace(
         HEAD_OPENING_TAG,
         `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
-      .replace(
-        'rel="stylesheet"',
-        'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';var e=document.getElementById(\'critical\');e.parentNode.removeChild(e);"'
-      )
+      .replace(cssLinksRegExp, convertToAsyncLinks)
       .replace(
         HEAD_CLOSING_TAG,
         `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`

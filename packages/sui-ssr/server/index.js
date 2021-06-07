@@ -2,6 +2,7 @@
 import express from 'express'
 import ssr from './ssr'
 import criticalCss from './criticalCss'
+import staticCriticalCss from './staticCriticalCss'
 import dynamicRendering from './dynamicRendering'
 import {hooksFactory} from './hooksFactory'
 import TYPES from '../hooks-types'
@@ -9,7 +10,6 @@ import basicAuth from 'express-basic-auth'
 import path from 'path'
 import fs from 'fs'
 import jsYaml from 'js-yaml'
-import parseDomain from 'parse-domain'
 import compression from 'compression'
 import ssrConf from './config'
 import {
@@ -92,18 +92,14 @@ const _memoizedHtmlTemplatesMapping = {}
 
   ssrConf.forceWWW &&
     app.use((req, res, next) => {
-      const parsedUrl = parseDomain(req.hostname, {
-        customTlds: /localhost|\.local/
-      })
+      const {hostname, subdomains} = req
 
-      !parsedUrl || parsedUrl.tld === 'localhost' // eslint-disable-line
-        ? next()
-        : parsedUrl.subdomain
-        ? next()
-        : res.redirect(
-            `${req.protocol}://www.` + req.headers.host + req.url,
-            301
-          )
+      const isLocalhost =
+        hostname.includes('localhost') || hostname.includes('.local')
+
+      if (isLocalhost || subdomains.length) return next()
+
+      res.redirect(`${req.protocol}://www.` + req.headers.host + req.url, 301)
     })
 
   app.use((req, res, next) => {
@@ -139,6 +135,7 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.get('*', [
     criticalCss(ssrConf.criticalCSS),
+    staticCriticalCss(ssrConf.criticalCSS),
     dynamicRendering(ssr, ssrConf.dynamicsURLS)
   ])
 

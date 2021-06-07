@@ -37,6 +37,7 @@ describe('useExperiment hook', () => {
       describe('and window.analytics.track exists', () => {
         before(() => {
           window.analytics = {
+            ready: cb => cb(),
             track: sinon.spy()
           }
           sinon.spy(console, 'error')
@@ -63,6 +64,20 @@ describe('useExperiment hook', () => {
           expect(window.analytics.track.args[0][1]).to.deep.equal({
             variationName: 'activateExperimentA',
             experimentName: 'test_experiment_id'
+          })
+        })
+
+        describe('when the variation is forced by query param', () => {
+          it('should return the forced variation of an experiment', () => {
+            const {result} = renderHook(
+              () =>
+                useExperiment({
+                  experimentName: 'experiment1',
+                  queryString: '?suipde_experiment1=variation1'
+                }),
+              {wrapper}
+            )
+            expect(result.current.variation).to.equal('variation1')
           })
         })
       })

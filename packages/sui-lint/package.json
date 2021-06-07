@@ -1,13 +1,12 @@
 {
   "name": "@s-ui/lint",
-  "version": "3.30.0",
+  "version": "3.31.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
     "sui-lint": "bin/sui-lint.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "sui-lint js",
     "postinstall": "node ./scripts/add-package-json-fields.js",
     "eslint:print-rules": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config .",
@@ -17,9 +16,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.12.10",
-    "@babel/eslint-parser": "7.12.1",
-    "@babel/eslint-plugin": "7.12.1",
+    "@babel/core": "7.14.3",
+    "@babel/eslint-parser": "7.14.3",
+    "@babel/eslint-plugin": "7.13.16",
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
     "eslint": "7.16.0",
@@ -29,7 +28,6 @@
     "eslint-plugin-chai-friendly": "0.6.0",
     "eslint-plugin-cypress": "2.11.2",
     "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-no-only-tests": "2.4.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.1.4",
@@ -39,11 +37,10 @@
     "eslint-plugin-standard": "4.0.2",
     "prettier": "1.19.1",
     "simple-git": "1.126.0",
-    "stylelint": "12.0.0",
+    "stylelint": "13.13.1",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-recommended-scss": "4.2.0",
-    "stylelint-prettier": "1.1.2",
-    "stylelint-scss": "3.18.0",
-    "stylelint-selector-bem-pattern": "2.1.0"
+    "stylelint-prettier": "1.2.0",
+    "stylelint-scss": "3.19.0"
   }
 }

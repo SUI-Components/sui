@@ -1,5 +1,153 @@
 # CHANGELOG
 
+# 10.14.0 (2021-06-04)
+
+
+### Features
+
+* **packages/sui-studio:** Use correct npmignore when generating components ([adfd939](https://github.com/SUI-Components/sui/commit/adfd939c40916a4c9c062d237311c32a30df5179))
+
+
+
+# 10.13.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-studio:** Remove deprecated dependency but keep compatibility ([71c65e6](https://github.com/SUI-Components/sui/commit/71c65e633f776bb61a49ab0f8d6ca12add69e1b2))
+
+
+
+# 10.12.0 (2021-05-27)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct paths for themes on npm start ([e70ea31](https://github.com/SUI-Components/sui/commit/e70ea31ad0fe4e706cb81b27ad0b2a0d866d9371))
+
+
+
+# 10.11.0 (2021-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio demo should use src code instead lib ([d1db917](https://github.com/SUI-Components/sui/commit/d1db91748ba553dd5c3bb1a354097e1a40058680))
+
+
+
+# 10.10.0 (2021-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Avoid importing non existent styles ([0576c0e](https://github.com/SUI-Components/sui/commit/0576c0eec13da2ca3f5aa47f15cab8b458177f73))
+
+
+
+# 10.9.0 (2021-05-19)
+
+
+
+# 10.8.0 (2021-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Fix mocha version to 7 and remove deprecated option ([6f78805](https://github.com/SUI-Components/sui/commit/6f7880510a37fd95907ee848f1d0212c63f2efbb))
+* **packages/sui-studio:** mobile navbar behavior ([fd3a671](https://github.com/SUI-Components/sui/commit/fd3a671acbe9e0917248d6fdc643fdc885366c5c))
+
+
+### Features
+
+* **packages/sui-studio:** Remove and add some deps ([39f08f3](https://github.com/SUI-Components/sui/commit/39f08f302d348d78e8e1e11ff47bc07917dfed87))
+* **packages/sui-studio:** Use babel standalone from bundle and be more resilient ([c70a44f](https://github.com/SUI-Components/sui/commit/c70a44f0ce7a2aa54fa63d87f335463d5b34c06f))
+* **packages/sui-studio:** Use client dependencies instead bundle ([5611b08](https://github.com/SUI-Components/sui/commit/5611b08746c408eab0f22710d25f443a7667c6f2))
+* **packages/sui-studio:** Use CodeMirror from window instead bundle ([ea5bc7b](https://github.com/SUI-Components/sui/commit/ea5bc7bf58ecefd7ef867c23370ecfd83ca0be91))
+* **packages/sui-studio:** Use copyfiles instead cpy for smaller deps size ([cc1a637](https://github.com/SUI-Components/sui/commit/cc1a63789b36fa2f0e6cd37a8425848cb6cac63f))
+
+
+
+# 10.7.0 (2021-05-18)
+
+
+### Features
+
+* **packages/sui-studio:** Use old babel/standalone ([68994c9](https://github.com/SUI-Components/sui/commit/68994c9311a08024bf13ed427232bbe3a2efe7bc))
+
+
+
+# 10.6.0 (2021-05-18)
+
+
+### Features
+
+* **packages/sui-studio:** upgrade deps ([191b742](https://github.com/SUI-Components/sui/commit/191b742489e746f4a6d4ce55940047340dd05159))
+
+
+
+# 10.5.0 (2021-05-10)
+
+
+### Features
+
+* **packages/sui-studio:** update testing-library/user-event version ([e7e8cdd](https://github.com/SUI-Components/sui/commit/e7e8cdd765401802fdefe96443e156308a9f8e11))
+
+
+
+# 10.4.0 (2021-05-07)
+
+
+### Features
+
+* **packages/sui-studio:** ignore leaks also for studio dev ([c466cc8](https://github.com/SUI-Components/sui/commit/c466cc8fef521c102829f7f33c4f59f6ec7820d0))
+
+
+
+# 10.3.0 (2021-05-06)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** unnecesary spacings ([0e6ebb4](https://github.com/SUI-Components/sui/commit/0e6ebb40c17f38471d8c0fec4f86bad1d004fd8c))
+
+
+### Features
+
+* **packages/sui-studio:** use latest babel-cli ([cb84e11](https://github.com/SUI-Components/sui/commit/cb84e11f2ee228125cc4e3ccfb7e374afc5c4a18))
+
+
+
+# 10.2.0 (2021-04-19)
+
+
+### Bug Fixes
+
+* **sui-studio:** studio workspace area scolling behavior workaround. ([709cae7](https://github.com/SUI-Components/sui/commit/709cae77670449d36284788bf5c566c6fc1a21c7))
+
+
+### Features
+
+* **packages/sui-studio:** update package version number ([2120171](https://github.com/SUI-Components/sui/commit/21201715df1f461f7632e610a42792bd627f96bc))
+* **packages/sui-studio:** update user-events to 13.1.1 version ([64daab4](https://github.com/SUI-Components/sui/commit/64daab423f847b2793d9e485553f20a9846395b7))
+* **packages/sui-studio:** use better version to be in sync with React ([866f0da](https://github.com/SUI-Components/sui/commit/866f0da8aa902b23915352c2e680b1c718239144))
+
+
+
+# 10.1.0 (2021-03-26)
+
+
+### Bug Fixes
+
+* **sui-studio:** studio workspace area scolling behavior workaround. ([b1b4417](https://github.com/SUI-Components/sui/commit/b1b44176c862554a416ead85cd4399d52e430104))
+
+
+### Features
+
+* **packages/sui-studio:** deploy ([e10c6c1](https://github.com/SUI-Components/sui/commit/e10c6c133eeb4c935f48ad7c9f554f9e4f82ac08))
+
+
+
 # 10.0.0 (2021-03-23)
 
 
@@ -11,6 +159,7 @@
 
 ### Features
 
+* **META:** use npm install directly ([2e3e96c](https://github.com/SUI-Components/sui/commit/2e3e96c628f80e2ff0f1d2e64a888d7aef6f9688))
 * **packages/sui-studio:** remove commands not used anymore provided by @s-ui/mono directly ([13ab7b9](https://github.com/SUI-Components/sui/commit/13ab7b98f5939aaad9b9ea6ca4f6873979249640))
 
 

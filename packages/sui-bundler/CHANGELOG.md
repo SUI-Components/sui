@@ -1,5 +1,73 @@
 # CHANGELOG
 
+# 7.22.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest webpack@4 version ([86c30e9](https://github.com/SUI-Components/sui/commit/86c30e974e891128aaa9d826cadff7f1ed69805d))
+
+
+
+# 7.21.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-bundler:** Use same babel/loader dep across packages ([f0522db](https://github.com/SUI-Components/sui/commit/f0522db07adb52eb8a365ea5c19c1ccc3edfa98c))
+
+
+
+# 7.20.0 (2021-05-13)
+
+
+### Features
+
+* **packages/sui-bundler:** upgrade bundler dependencies ([8a9ee89](https://github.com/SUI-Components/sui/commit/8a9ee8970c40510728ab353905a88825eee87ad0))
+
+
+
+# 7.19.0 (2021-05-12)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** fix pde context reference when working with linked packages ([a010fd9](https://github.com/SUI-Components/sui/commit/a010fd98e8ac1bcab026359149516225ce9bbd80))
+
+
+
+# 7.18.0 (2021-04-29)
+
+
+### Features
+
+* **packages/sui-bundler:** remove fibers dependency ([415d195](https://github.com/SUI-Components/sui/commit/415d195395e125543c8ab1be0b60d17d04614739))
+
+
+
+# 7.17.0 (2021-04-16)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** prevent creation wrong webpack rule when link packages on ssr ([f3fad18](https://github.com/SUI-Components/sui/commit/f3fad186c5a2e94b544a8404143b260f13986d90))
+
+
+
+# 7.16.0 (2021-03-26)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** use new for initializing loader ([d13bf08](https://github.com/SUI-Components/sui/commit/d13bf081b3c4b7b2159e3a5261792345fb64d6b8))
+
+
+### Features
+
+* **packages/sui-bundler:** add new experimental minifier to test with sui-bundler ([8c0339d](https://github.com/SUI-Components/sui/commit/8c0339dae630fc00d5c70037a90d92f92ca3912e))
+
+
+
 # 7.15.0 (2021-03-17)
 
 
