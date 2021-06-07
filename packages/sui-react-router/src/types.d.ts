@@ -4,6 +4,9 @@ export type Action = 'PUSH' | 'REPLACE' | 'POP';
  * A location key is a string that is unique to a particular location. It is the one piece of data that most accurately answers the question "Where am I?".
  */
 export type LocationKey = string
+export type LocationState = unknown
+export type Search = string
+export type Path = string
 
 export type LocationDescriptorObject = {
   pathname: Pathname;
@@ -45,10 +48,10 @@ export type RouteInfo = {
 }
 
 export type RouterState = RouteInfo & {
-  components: Array<Component>
+  components: Array<React.ComponentType>
 }
 
-export type RouteComponent = Component
+export type RouteComponent = React.ComponentType
 
 export type RoutePattern = string
 export type RouteRegExp = RegExp
