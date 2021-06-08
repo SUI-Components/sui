@@ -8,6 +8,9 @@ const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 const {resolveLoader} = require('./shared/resolve-loader')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+
+const smp = new SpeedMeasurePlugin({disable: !process.env.MEASURE})
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
@@ -102,4 +105,4 @@ const webpackConfig = {
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
 }
 
-module.exports = webpackConfig
+module.exports = smp.wrap(webpackConfig)
