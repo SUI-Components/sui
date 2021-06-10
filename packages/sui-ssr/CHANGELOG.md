@@ -1,5 +1,60 @@
 # CHANGELOG
 
+# 7.35.0 (2021-05-31)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix async stylesheet links replacement ([fe53f37](https://github.com/SUI-Components/sui/commit/fe53f372d496c58d53922ed38939ba87ba7759e0))
+
+
+
+# 7.34.0 (2021-05-27)
+
+
+
+# 7.33.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-ssr:** keep only one folder for critical css in multisites ([4d95d15](https://github.com/SUI-Components/sui/commit/4d95d15867a025297586420e1c9f43c27fb5e703))
+
+
+
+# 7.32.0 (2021-05-26)
+
+
+
+# 7.31.0 (2021-05-26)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix ssr lock file update for npm 7 given a npm issue ([ffded0b](https://github.com/SUI-Components/sui/commit/ffded0bccb84cf2f08cd4e0ae02f75c45700465e))
+* **packages/sui-ssr:** import middleware ([12bd504](https://github.com/SUI-Components/sui/commit/12bd5042456b9f73439b8ef3f6500a6c22af4c9c))
+* **packages/sui-ssr:** set manifest as an object by default ([d2af323](https://github.com/SUI-Components/sui/commit/d2af3231c8968f2d3aeb6c3a12d0e666b113d332))
+
+
+
+# 7.30.0 (2021-05-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix manifest path ([0c82887](https://github.com/SUI-Components/sui/commit/0c8288758015d5cda9d7340534104f35be213135))
+* **packages/sui-ssr:** fix option name, not abbreviation ([e39b805](https://github.com/SUI-Components/sui/commit/e39b805bee3a054677582f9f879c4577347c6a35))
+* **packages/sui-ssr:** get critical dir ([8e191fe](https://github.com/SUI-Components/sui/commit/8e191fe32151433039a8b2a58f846e3fc0574a31))
+
+
+### Features
+
+* **packages/sui-ssr:** Avoid using huge dependency for easy check ([1024e8b](https://github.com/SUI-Components/sui/commit/1024e8be156e197306367ab1da3d933a46c15caf))
+* **packages/sui-ssr:** use critical middleware ([a3af3aa](https://github.com/SUI-Components/sui/commit/a3af3aa22974bc4773528871beaa881c9a1a5ab5))
+* **packages/sui-ssr:** use ssr release with npm 7 ([c94d9cd](https://github.com/SUI-Components/sui/commit/c94d9cd2e5d6522dadec111a2f3b262ea20aa561))
+
+
+
 # 7.29.0 (2021-05-17)
 
 
@@ -45,6 +100,11 @@
 # 7.24.0 (2021-04-26)
 
 
+### Bug Fixes
+
+* **packages/sui-ssr:** fix import ([53fab68](https://github.com/SUI-Components/sui/commit/53fab681660a44ccd20338e84310ed9eb29b8cbd))
+
+
 
 # 7.23.0 (2021-04-22)
 
@@ -59,6 +119,7 @@
 
 ### Features
 
+* **packages/sui-ssr:** add static critical css middleware ([8904137](https://github.com/SUI-Components/sui/commit/89041370b362ea14c2e720c2b28c0f488d9d6dbd))
 * **packages/sui-ssr:** skip ci release by flag ([f166d34](https://github.com/SUI-Components/sui/commit/f166d34fc7045cd08a2b234a7db9f58cdbeb10b0))
 * **sui-ssr:** add debugbear user-agent detection in ssr perf/dynamicRendering ([f5bbf84](https://github.com/SUI-Components/sui/commit/f5bbf846fce2fd78d71eeaab972a0b8afaa5480d))
 * **sui-ssr:** bump sui-ssr ([2cffe54](https://github.com/SUI-Components/sui/commit/2cffe54c31ceceda717e237449da67ec3ba7d452))

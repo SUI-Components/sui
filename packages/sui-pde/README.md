@@ -8,6 +8,18 @@
 $ npm install @s-ui/pde
 ```
 
+## About
+
+This is a tool that abstracts from:
+
+- PDE tools like Optimizely, Houston, Target, Unleash, ...
+- Integration with third party analytics tools like Segment
+- User id management
+- User consents management
+- Common audiences and segments
+
+In order to abstract from progressive delivery and experimentation (PDE) tools like Optimizely, sui-pde provides a JS class which requires an adapter that connects directly to one of those tools. We did implement the Optimizely Full Stack adapter.
+
 ## Optimizely adapter
 
 ### React context
@@ -76,10 +88,10 @@ const MyComponent = () => {
 Given useExperiment sends `Experiment Viewed` on being executed, some facts could happen:
 
 - Root: Analytics SDK is loaded async and loads after useExperiment hook has been called
-Cause: `Experiment Viewed` won't be sent.
+- Cause: `Experiment Viewed` won't be sent.
 
 - Root: `Experiment Viewed` should has a different name or properties.
-Cause: Send a track with wrong values.
+- Cause: Send a track with wrong values.
 
 In order to have a higher controll about that, useExperiment accepts a `trackExperimentViewed` callback to customize it
 
@@ -107,6 +119,30 @@ const MyComponent = () => {
 }
 ```
 
+#### Attributes
+
+In order to pass by attributes, you'll able to do so by adding the named parameter `attributes` when using the useExperiment hook. Something like this:
+
+```js
+import {useExperiment} from '@s-ui/pde'
+
+const EXPERIMENT_NAME = 'experimentX'
+
+const MyComponent = () => {
+  const {variation} = useExperiment({
+    experimentName: EXPERIMENT_NAME,
+    attributes: {   // this will send these attributes
+      isLoggedIn: true
+    }
+  })
+
+  if (variation === 'variationB') return <MyVariationB />
+  return <MyVariationA>
+}
+```
+
+⚠️ Remember that common attributes (those attributes that every experiment should send by) are set with the `applicationAttributes` when creating the optimizely adapter. Check out the [react context section](#React-context)
+
 #### Force experiment variation
 
 It's possible to force a variation for our experiment in the browser. For example, lets assume we want to QA a specific variation for our test called `abtest2_recommender` and the test is running in `http://myweb.com`. In order to force a variation you'll have to add a query param using the experiment name but adding `suipde_` as prefix, for example, for our recommender test, the url to open in order to force a variation would be `http://myweb.com?suipde_abtest2_recommender=default`. This would force the default variation. If forced, optimizely impression will not be triggered.
@@ -116,14 +152,32 @@ It's possible to force a variation for our experiment in the browser. For exampl
 ⚠️ user consent do apply to feature flags only when used as feature test
 
 ```js
-import  {useFeature} from '@s-ui/pde'
+import {useFeature} from '@s-ui/pde'
 
 const MyComponent = () => {
   const {isActive} = useFeature('myFeatureKey') // isActive = true when the feature flag is activated
 
   return <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
 }
+```
 
+#### Feature Flags Variables
+
+Returns all feature variables for the specified feature flag
+
+```js
+import {useFeature} from '@s-ui/pde'
+
+const MyComponent = () => {
+  const {isActive, variables} = useFeature('myFeatureKey') // variables = an object with all the feature variables
+
+  return (
+    <p>
+      The feature 'myFeatureKey' is{' '}
+      {isActive ? `active and price value is ${variables.price}` : 'inactive'}
+    </p>
+  )
+}
 ```
 
 #### Segment integration
@@ -137,6 +191,24 @@ const optimizelyAdapter = new OptimizelyAdapter({
   activeIntegrations: {segment: false}
 })
 ```
+
+#### Attributes
+
+In order to pass by attributes, you'll able to do so by adding the second argument as `attributes` when using the useFeature hook. Something like this:
+
+```js
+import {useFeature} from '@s-ui/pde'
+
+const MyComponent = () => {
+  const {isActive} = useFeature('myFeatureKey', {
+    isLoggedIn: true // this second parameter are the attributes
+  })
+
+  return <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
+}
+```
+
+⚠️ Remember that common attributes (those attributes that every experiment should send by) are set with the `applicationAttributes` when creating the optimizely adapter. Check out the [react context section](#React-context)
 
 #### Force feature flag to be on/off
 

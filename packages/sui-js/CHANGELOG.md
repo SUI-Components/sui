@@ -1,5 +1,25 @@
 # CHANGELOG
 
+# 2.23.0 (2021-06-07)
+
+
+### Features
+
+* **packages/sui-js:** Add uuid utils ([8fc60af](https://github.com/SUI-Components/sui/commit/8fc60afbc22d3f289586b15d2c2d6e3e81e8a3b2))
+* **packages/sui-js:** Rename folder ([8b036de](https://github.com/SUI-Components/sui/commit/8b036de07ac15d37f8109b87b0f4752634c596e0))
+* **packages/sui-js:** Use nanoid instead ([fc15daa](https://github.com/SUI-Components/sui/commit/fc15daac4e934fa719dab5bbf114d6e83484fea9))
+
+
+
+# 2.22.0 (2021-05-28)
+
+
+### Features
+
+* **packages/sui-js:** update htmr version ([4dd542e](https://github.com/SUI-Components/sui/commit/4dd542eec7f8065fc1f84d0d4ac8d7bec82cfbe3))
+
+
+
 # 2.21.0 (2021-05-04)
 
 

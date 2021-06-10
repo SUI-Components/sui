@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 const program = require('commander')
-const checker = require('../src/check')
 const colors = require('@s-ui/helpers/colors')
+const checker = require('../src/check')
 
 program
   .on('--help', () => {
@@ -25,9 +25,9 @@ program
   .parse(process.argv)
 
 const incrementName = code => {
-  if (code === 1) return 'patch'
-  if (code === 2) return 'minor'
-  if (code === 3) return 'major'
+  if (code === 1) return 'PATCH'
+  if (code === 2) return 'MINOR'
+  if (code === 3) return 'MAJOR'
   return ''
 }
 
@@ -50,9 +50,7 @@ const showReport = status => {
         headerShown = true
       }
 
-      const versionString = colors.yellow(
-        incrementName(status[pkg].increment).toUpperCase()
-      )
+      const versionString = colors.yellow(incrementName(status[pkg].increment))
       const pkgName = colors.cyan(pkg)
       console.log(` ${pkgName} ─ new ${versionString} version: `)
 

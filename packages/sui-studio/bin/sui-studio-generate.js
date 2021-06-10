@@ -87,9 +87,11 @@ node_modules`
 
   writeFile(
     COMPONENT_PACKAGE_NPMIGNORE_FILE,
-    `src
+    `assets
+demo
+src
 test
-assets`
+`
   ),
 
   writeFile(
@@ -105,7 +107,7 @@ assets`
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
-    "@s-ui/component-dependencies": "1"
+    "@s-ui/theme": "8"
   },${
     repository.url
       ? `

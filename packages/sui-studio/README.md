@@ -1,8 +1,8 @@
-# sui-studio
+# @s-ui/studio
 
-> Develop, maintain, and publish your SUI components.
+> Develop, maintain, and publish your React Components.
 
-Sui Studio helps you develop and document isolated UI components for your projects. It provides,
+@s-ui/studio helps you develop and document isolated UI components for your projects. It provides,
 
 - Isolated development of components
 - A unified development platform
@@ -15,7 +15,7 @@ Sui Studio helps you develop and document isolated UI components for your projec
 ## Installation
 
 ```sh
-npm install @s-ui/studio
+npm install @s-ui/studio -D
 ```
 
 ## Getting Started
@@ -57,7 +57,7 @@ Add the script to your package.json
 ```json
 {
   "scripts": {
-    "co": "sui-studio commit"
+    "co": "sui-mono commit"
   }
 }
 ```
@@ -71,20 +71,20 @@ Then just push your changes using `git push` and merge them into master after re
 Select master branch. First, check that the release will be properly built by executing,
 
 ```
-$ sui-studio check-release
+$ sui-mono check-release
 ```
 
 If the output is the expected one, then run:
 
 ```
-$ sui-studio release
+$ sui-mono release
 ```
 
 ## CLI
 
 ### `$ sui-studio start`
 
-Launch a development environment where you can see all your components at once. If there are too many components, use the `dev`command.
+Launch a development environment where you can see all your components at once. If there are too many components, use the `dev` command.
 
 ### `$ sui-studio build`
 
@@ -170,7 +170,7 @@ export default () => {
 }
 ```
 
-the test file should be like:
+The test file should be like:
 
 ```js
 import '@s-ui/studio/src/patcher-mocha'
@@ -251,7 +251,7 @@ export default MemoComponent
 
 ## CLI testing integration
 
-SUIStudio provides tools for running your entire component tests of your project on a karma browser
+@s-ui/studio provides tools for running your entire component tests of your project on a karma browser
 
 Add this scripts on your own components project
 
@@ -271,44 +271,38 @@ Add this scripts on your own components project
 
 ## File structure
 
-SUIStudio profusely uses the concept of "convention over configuration" for file structure.
+@s-ui/studio profusely uses the concept of "convention over configuration" for file structure.
 
 ```
-.
 ├── components
 │   ├── README.md
-│   └── atom                                <- Component's category
-│       ├── button                          <- Component's name
+│   └── atom                             <- Component's category
+│       ├── button                       <- Component's name
 │       │   ├── README.md
 │       │   ├── package.json
-│       │   └── src
-│       │       ├── index.js
-│       │       └── index.scss
+│       │   ├── src
+│       │   │   ├── index.js
+│       │   │   └── index.scss
+│       │   ├── demo
+│       │   │   ├── context.js
+│       │   │   ├── playground             <- Basic code that will be shown in the component's demo
+│       │   │   └── themes                 <- SASS files stored in this folder will be themes shown on the interface
+│       │   │       └── myStudioTheme.scss
+│       │   └── test
+│       │       └── index.js              <- File containing all component's tests
 │       └── header
 │           ├── README.md
 │           ├── package.json
-│           └── src
-│               ├── index.js
-│               └── index.scss
-├── demo
-│   └── atom
-│       ├── button
-│       │   ├── context.js
-│       │   ├── playground                <- Basic code that will be shown in the component's demo
-│       │   └── themes                    <- SASS files stored in this folder will be themes shown on the interface
-│       │       └── myStudioTheme.scss
-│       └── header
-│           └── demo                      <- Create a `demo` folder to put an demo app of your component (playground will be ignored)
-│               ├── index.js
-│               ├── index.scss
-│               └── package.json
-├── package.json
-└── test
-    └── atom
-        ├── button
-        │   └── index.js                 <- File containing all component's tests
-        └── header
-            └── index.js
+│           ├── src
+│           │   ├── index.js
+│           │   └── index.scss
+│           ├── demo                   <- Create a `demo` folder to put an demo app of your component (playground will be ignored)
+│           │   ├── index.js
+│           │   ├── index.scss
+│           │   └── package.json
+│           └── test
+│               └── index.js
+└── package.json
 ```
 
 # Conventions

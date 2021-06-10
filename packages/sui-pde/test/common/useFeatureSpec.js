@@ -6,15 +6,20 @@ import useFeature from '../../src/hooks/useFeature'
 import sinon from 'sinon'
 
 describe('when pde context is set', () => {
+  const variables = {variable: 'variable'}
   let wrapper
   let isFeatureEnabled
+  let getAllFeatureVariables
   afterEach(cleanup)
 
   before(() => {
     isFeatureEnabled = sinon.stub().returns(true)
+    getAllFeatureVariables = sinon.stub().returns(variables)
     // eslint-disable-next-line react/prop-types
     wrapper = ({children}) => (
-      <PdeContext.Provider value={{pde: {isFeatureEnabled}}}>
+      <PdeContext.Provider
+        value={{pde: {isFeatureEnabled, getAllFeatureVariables}}}
+      >
         {children}
       </PdeContext.Provider>
     )
@@ -25,7 +30,22 @@ describe('when pde context is set', () => {
       () => useFeature('feature1', {attribute1: 'value'}),
       {wrapper}
     )
+
     expect(result.current.isActive).to.equal(true)
+    expect(isFeatureEnabled.called).to.equal(true)
+    expect(isFeatureEnabled.args[0][0]).to.deep.equal({
+      featureKey: 'feature1',
+      attributes: {attribute1: 'value'}
+    })
+  })
+
+  it('should return feature variables', () => {
+    const {result} = renderHook(
+      () => useFeature('feature1', {attribute1: 'value'}),
+      {wrapper}
+    )
+
+    expect(result.current.variables).to.be.deep.equal(variables)
     expect(isFeatureEnabled.called).to.equal(true)
     expect(isFeatureEnabled.args[0][0]).to.deep.equal({
       featureKey: 'feature1',

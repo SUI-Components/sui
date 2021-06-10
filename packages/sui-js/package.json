@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js",
-  "version": "2.21.0",
+  "version": "2.23.0",
   "description": "Set of JS utilities",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
@@ -11,13 +11,14 @@
   "dependencies": {
     "bowser": "2.11.0",
     "cookie": "0.3.1",
-    "htmr": "0.10.0",
+    "htmr": "1.0.0",
     "js-cookie": "2.1.4",
     "just-camel-case": "4.0.2",
     "just-capitalize": "1.0.0",
     "just-kebab-case": "1.1.0",
     "lodash.debounce": "4.0.8",
     "lodash.throttle": "4.1.1",
+    "nanoid": "3.1.23",
     "qs": "6.7.0",
     "remove-accents": "0.4.2"
   },

@@ -1,9 +1,10 @@
 {
   "name": "@s-ui/studio",
-  "version": "10.11.0",
+  "version": "10.14.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
+    "cpx": "./bin/cpx.js",
     "sui-studio": "./bin/sui-studio.js"
   },
   "author": "",
@@ -24,7 +25,6 @@
     "classnames": "2.2.5",
     "colors": "1.4.0",
     "commander": "6.2.1",
-    "cpx": "1.5.0",
     "copyfiles": "2.4.1",
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.4",

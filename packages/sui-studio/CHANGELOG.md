@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 10.14.0 (2021-06-04)
+
+
+### Features
+
+* **packages/sui-studio:** Use correct npmignore when generating components ([adfd939](https://github.com/SUI-Components/sui/commit/adfd939c40916a4c9c062d237311c32a30df5179))
+
+
+
+# 10.13.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-studio:** Remove deprecated dependency but keep compatibility ([71c65e6](https://github.com/SUI-Components/sui/commit/71c65e633f776bb61a49ab0f8d6ca12add69e1b2))
+
+
+
+# 10.12.0 (2021-05-27)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct paths for themes on npm start ([e70ea31](https://github.com/SUI-Components/sui/commit/e70ea31ad0fe4e706cb81b27ad0b2a0d866d9371))
+
+
+
 # 10.11.0 (2021-05-19)
 
 

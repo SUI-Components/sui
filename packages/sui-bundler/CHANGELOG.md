@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 7.22.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest webpack@4 version ([86c30e9](https://github.com/SUI-Components/sui/commit/86c30e974e891128aaa9d826cadff7f1ed69805d))
+
+
+
+# 7.21.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-bundler:** Use same babel/loader dep across packages ([f0522db](https://github.com/SUI-Components/sui/commit/f0522db07adb52eb8a365ea5c19c1ccc3edfa98c))
+
+
+
 # 7.20.0 (2021-05-13)
 
 

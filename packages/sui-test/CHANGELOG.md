@@ -1,5 +1,41 @@
 # CHANGELOG
 
+# 4.29.0 (2021-06-03)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** Use correctly config file ([556f62b](https://github.com/SUI-Components/sui/commit/556f62b803e2a7443a17987a4785bab4ceaf61b5))
+
+
+
+# 4.28.0 (2021-06-03)
+
+
+### Features
+
+* **packages/sui-test:** Avoid using script name as contract for modifying config ([e3ebb29](https://github.com/SUI-Components/sui/commit/e3ebb2941b0661eb31ab260923f61e7cbece0ead))
+
+
+
+# 4.27.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-test:** Use latest webpack@4 version ([3ee4184](https://github.com/SUI-Components/sui/commit/3ee41843557ea9113c501092191ed92fcd58feb0))
+
+
+
+# 4.26.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-test:** Use same babel/core dependency across packages ([7a42a26](https://github.com/SUI-Components/sui/commit/7a42a26140419d7b11735fe919a38283f8768db1))
+
+
+
 # 4.25.0 (2021-05-10)
 
 

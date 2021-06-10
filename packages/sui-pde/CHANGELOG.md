@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 2.10.0 (2021-06-04)
+
+
+### Features
+
+* **packages/sui-pde:** add feature variables support ([f9a29cc](https://github.com/SUI-Components/sui/commit/f9a29cc1584db3ffe3b720de10a3c8f5d8d8fd48))
+
+
+
+# 2.9.0 (2021-06-02)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** Add already tracked outside the ready ([b7b7d78](https://github.com/SUI-Components/sui/commit/b7b7d7866a170ead18c13ae9f7a6c7feedd52080))
+
+
+
+# 2.8.0 (2021-06-02)
+
+
+### Features
+
+* **packages/sui-pde:** Track experiment viewed only once ([19b320a](https://github.com/SUI-Components/sui/commit/19b320afd910cb421c9afb6871f4b15052b9a37e))
+
+
+
 # 2.7.0 (2021-05-13)
 
 

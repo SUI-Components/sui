@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.16.0 (2021-05-26)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Allow commit all to work as expected ([4f28982](https://github.com/SUI-Components/sui/commit/4f289823aa49ee64ac92f87045c19a1e9dd901ff))
+
+
+### Features
+
+* **packages/sui-mono:** Log error but return an empty string ([95493d9](https://github.com/SUI-Components/sui/commit/95493d9da72f1a1368588c45c11ef0c41f704674))
+
+
+
 # 2.15.0 (2021-05-20)
 
 

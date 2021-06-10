@@ -52,8 +52,8 @@ export async function extractCSSFromUrl({
       const request = route.request()
       return blockedResourceTypes.includes(request.resourceType()) ||
         skippedResources.includes(request.url())
-        ? route.abort()
-        : route.continue()
+        ? route.abort().catch(() => {})
+        : route.continue().catch(() => {})
     })
 
     await page.coverage.startCSSCoverage()

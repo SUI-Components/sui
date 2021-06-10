@@ -1,5 +1,7 @@
 import {parseQueryString} from '@s-ui/js/lib/string'
 
+const experimentsAlreadyTracked = []
+
 const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes}) => {
     return pde.getVariation({pde, name: experimentName, attributes})
@@ -24,6 +26,9 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
 
     // user is not part of the experiment
     if (!variationName) return
+    // if experiment has been already tracked
+    if (experimentsAlreadyTracked.includes(experimentName)) return
+
     if (!window.analytics?.track) {
       // eslint-disable-next-line no-console
       console.error(
@@ -31,6 +36,8 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
       )
       return
     }
+
+    experimentsAlreadyTracked.push(experimentName)
 
     window.analytics.ready(() => {
       window.analytics.track('Experiment Viewed', {
