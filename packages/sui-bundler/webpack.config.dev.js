@@ -90,7 +90,7 @@ const webpackConfig = {
               }
             }
           },
-          require.resolve('fast-sass-loader')
+          require.resolve('super-sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>

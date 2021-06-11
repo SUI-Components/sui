@@ -65,9 +65,8 @@ module.exports = ({config, packagesToLink, linkAll}) => {
    * and thus is sass binary which needs a special config for them.
    */
   const sassLoaderWithLinkImporter = {
-    loader: require.resolve('fast-sass-loader'),
+    loader: require.resolve('super-sass-loader'),
     options: {
-      resolveURLs: false,
       sassOptions: {
         importer: createSassLinkImporter(entryPoints)
       }

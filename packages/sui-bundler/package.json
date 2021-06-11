@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "7.22.0",
+  "version": "7.22.0-beta.1",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -40,7 +40,8 @@
     "react-dev-utils": "11.0.4",
     "rimraf": "3.0.2",
     "sass": "1.32.13",
-    "fast-sass-loader": "2.0.0",
+    "sass-loader": "10.1.0",
+    "super-sass-loader": "0.1.0",
     "style-loader": "2.0.0",
     "terser-webpack-plugin": "4.2.2",
     "webpack": "4.46.0",
