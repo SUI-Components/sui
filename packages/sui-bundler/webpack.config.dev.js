@@ -14,7 +14,7 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
 const useExperimentalSCSSLoader =
   config.optimizations && config.optimizations.useExperimentalSCSSLoader
 
-const smp = new SpeedMeasurePlugin({disable: !config.measure})
+const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = {
   mode: 'development',
@@ -107,4 +107,4 @@ const webpackConfig = {
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
 }
 
-module.exports = smp.wrap(webpackConfig)
+module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig

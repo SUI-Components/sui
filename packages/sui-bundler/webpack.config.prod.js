@@ -41,7 +41,7 @@ const cssFileName = config.onlyHash
 const useExperimentalSCSSLoader =
   config.optimizations && config.optimizations.useExperimentalSCSSLoader
 
-const smp = new SpeedMeasurePlugin({disable: !process.env.MEASURE})
+const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = {
   devtool: sourceMap,
@@ -147,4 +147,4 @@ const webpackConfig = {
   }
 }
 
-module.exports = smp.wrap(webpackConfig)
+module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
