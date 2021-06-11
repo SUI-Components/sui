@@ -124,7 +124,7 @@ module.exports = {
               }
             }
           },
-          require.resolve('sass-loader')
+          require.resolve('fast-sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>

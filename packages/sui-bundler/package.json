@@ -40,7 +40,7 @@
     "react-dev-utils": "11.0.4",
     "rimraf": "3.0.2",
     "sass": "1.32.13",
-    "sass-loader": "10.1.0",
+    "fast-sass-loader": "2.0.0",
     "style-loader": "2.0.0",
     "terser-webpack-plugin": "4.2.2",
     "webpack": "4.46.0",
