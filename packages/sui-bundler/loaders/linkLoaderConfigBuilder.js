@@ -1,9 +1,13 @@
 const fg = require('fast-glob')
 const path = require('path')
 
+const {config} = require('../shared')
 const log = require('../shared/log')
 const {defaultAlias} = require('../shared/resolve-alias')
 const createSassLinkImporter = require('./sassLinkImporter.js')
+
+const useExperimentalSCSSLoader =
+  config.optimizations && config.optimizations.useExperimentalSCSSLoader
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
   paths.reduce((acc, pkg) => {
@@ -65,7 +69,9 @@ module.exports = ({config, packagesToLink, linkAll}) => {
    * and thus is sass binary which needs a special config for them.
    */
   const sassLoaderWithLinkImporter = {
-    loader: require.resolve('super-sass-loader'),
+    loader: useExperimentalSCSSLoader
+      ? require.resolve('super-sass-loader')
+      : require.resolve('sass-loader'),
     options: {
       sassOptions: {
         importer: createSassLinkImporter(entryPoints)

@@ -7,9 +7,6 @@ const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
-
-const smp = new SpeedMeasurePlugin({disable: !process.env.MEASURE})
-
 const {
   when,
   cleanList,
@@ -40,6 +37,11 @@ const filename = config.onlyHash
 const cssFileName = config.onlyHash
   ? '[contenthash:8].css'
   : '[name].[contenthash:8].css'
+
+const useExperimentalSCSSLoader =
+  config.optimizations && config.optimizations.useExperimentalSCSSLoader
+
+const smp = new SpeedMeasurePlugin({disable: !process.env.MEASURE})
 
 const webpackConfig = {
   devtool: sourceMap,
@@ -127,7 +129,9 @@ const webpackConfig = {
               }
             }
           },
-          require.resolve('super-sass-loader')
+          useExperimentalSCSSLoader
+            ? require.resolve('super-sass-loader')
+            : require.resolve('sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
