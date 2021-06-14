@@ -1,5 +1,3 @@
-import pkg from '../package.json'
-
 export const blockedResourceTypes = [
   'beacon',
   'csp_report',
@@ -13,7 +11,7 @@ export const blockedResourceTypes = [
 
 const GOOGLE_BOT_UA =
   '(compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-const CRITICAL_UA = `CriticalCSS/${pkg.version}`
+const CRITICAL_UA = `CriticalCSS`
 
 export const devices = {
   m: {
