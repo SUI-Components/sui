@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.7.0 (2021-06-10)
+
+
+### Features
+
+* **packages/sui-critical-css:** Catch not important errors to avoid breaking execution ([0330611](https://github.com/SUI-Components/sui/commit/0330611ef7d12b3c7991ac1524b9a5d54bf4627c))
+
+
+
 # 1.6.0 (2021-06-02)
 
 
