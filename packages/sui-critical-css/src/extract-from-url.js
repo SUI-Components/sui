@@ -1,4 +1,4 @@
-import {chromium} from 'playwright'
+import {chromium} from 'playwright-chromium'
 import CleanCSS from 'clean-css'
 import {blockedResourceTypes, skippedResources} from './config.js'
 
