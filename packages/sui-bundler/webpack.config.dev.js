@@ -1,17 +1,20 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias')
-
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 const {resolveLoader} = require('./shared/resolve-loader')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
+const useExperimentalSCSSLoader =
+  config.optimizations && config.optimizations.useExperimentalSCSSLoader
+
+const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = {
   mode: 'development',
@@ -90,7 +93,9 @@ const webpackConfig = {
               }
             }
           },
-          require.resolve('sass-loader')
+          useExperimentalSCSSLoader
+            ? require.resolve('super-sass-loader')
+            : require.resolve('sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
@@ -102,4 +107,4 @@ const webpackConfig = {
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
 }
 
-module.exports = webpackConfig
+module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig

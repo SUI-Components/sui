@@ -41,6 +41,8 @@
     "rimraf": "3.0.2",
     "sass": "1.32.13",
     "sass-loader": "10.1.0",
+    "super-sass-loader": "0.1.1",
+    "speed-measure-webpack-plugin": "1.5.0",
     "style-loader": "2.0.0",
     "terser-webpack-plugin": "4.2.2",
     "webpack": "4.46.0",
