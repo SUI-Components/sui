@@ -38,9 +38,6 @@ const cssFileName = config.onlyHash
   ? '[contenthash:8].css'
   : '[name].[contenthash:8].css'
 
-const useExperimentalSCSSLoader =
-  config.optimizations && config.optimizations.useExperimentalSCSSLoader
-
 const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = {
@@ -129,9 +126,7 @@ const webpackConfig = {
               }
             }
           },
-          useExperimentalSCSSLoader
-            ? require.resolve('super-sass-loader')
-            : require.resolve('sass-loader')
+          require.resolve('sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
