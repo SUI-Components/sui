@@ -311,7 +311,7 @@ You could tweak the performance of your bundle generation by using some flags pr
 
 `useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify code instead using terser in order to boost build time and memory usage.
 
-`useExperimentalSCSSLoader` (default: `false`): Use [fast-sass-loader](https://github.com/yibn2008/fast-sass-loader) (currently a fork of it [super-sass-loader](https://github.com/andresz1/super-sass-loader)) instead of `sass-loader`
+`useExperimentalSCSSLoader` (default: `false`): Use [fast-sass-loader](https://github.com/yibn2008/fast-sass-loader) (currently a fork of it [super-sass-loader](https://github.com/andresz1/super-sass-loader)) instead of `sass-loader` (available in development only)
 
 ## Migrations
 
