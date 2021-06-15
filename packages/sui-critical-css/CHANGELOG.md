@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.8.0 (2021-06-14)
+
+
+### Features
+
+* **packages/sui-critical-css:** Remove version for now ([ff015af](https://github.com/SUI-Components/sui/commit/ff015affd52d3d7a6e9e68c4b6f92fa5f8cd6390))
+* **packages/sui-critical-css:** Use chromium only and add UA to critical-css service ([9012573](https://github.com/SUI-Components/sui/commit/9012573c33c56499782e33091607b398cca50482))
+
+
+
 # 1.7.0 (2021-06-10)
 
 
