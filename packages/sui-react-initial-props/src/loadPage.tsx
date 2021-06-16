@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useContext } from 'react'
 import InitialPropsContext from './initialPropsContext'
 import withInitialProps from './withInitialProps'
@@ -38,7 +39,7 @@ const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({ defaul
 // TODO: Remove this method on next major as it's using unnecessary contextFactory param
 // and unnecesary calling done method instead relying on promises
 export default (_: any, importPage: () => Promise<any>) =>
-  (routeInfo: ReactRouterTypes.RouteInfo, done: DoneImportingPageCallback) => {
+  async (routeInfo: ReactRouterTypes.RouteInfo, done: DoneImportingPageCallback) => {
     importPage()
       .then(createUniversalPage(routeInfo))
       .then(Page => {

@@ -1,4 +1,4 @@
-export type Action = 'PUSH' | 'REPLACE' | 'POP';
+export type Action = 'PUSH' | 'REPLACE' | 'POP'
 
 export type Query = object
 export type QueryString = string
@@ -12,20 +12,20 @@ export type LocationKey = string
 export type Search = string
 export type Path = string
 
-type LocationState = {
-  from: Location;
+interface LocationState {
+  from: Location
 }
 
-export type LocationDescriptorObject = {
-  pathname: Pathname;
-  search?: Search;
-  query?: Query;
-  state?: LocationState;
-};
+export interface LocationDescriptorObject {
+  pathname: Pathname
+  search?: Search
+  query?: Query
+  state?: LocationState
+}
 
-export type LocationDescriptor = LocationDescriptorObject | Path;
+export type LocationDescriptor = LocationDescriptorObject | Path
 
-export type Route = {
+export interface Route {
   component?: RouteComponent
   getComponent?: () => Promise<RouteComponent>
   path?: RoutePattern
@@ -41,14 +41,14 @@ export type Router = RouterState & {
   replace: (location: LocationDescriptor) => void
 }
 
-export type RouteInfo = {
+export interface RouteInfo {
   location: Location
-  routes: Array<Route>
+  routes: Route[]
   params: Params
 }
 
 export type RouterState = RouteInfo & {
-  components: Array<React.ComponentType>
+  components: React.ComponentType[]
 }
 
 export type RouteComponent = React.ComponentType
@@ -56,7 +56,7 @@ export type RouteComponent = React.ComponentType
 export type RoutePattern = string
 export type RouteRegExp = RegExp
 
-export type Location = {
+export interface Location {
   action: Action
   key: LocationKey
   pathname: Pathname
