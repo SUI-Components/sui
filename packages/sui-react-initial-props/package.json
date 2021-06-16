@@ -5,7 +5,8 @@
   "types": "lib/index.d.ts",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
-    "lib": "tsc",
+    "lib": "tsc --outDir lib",
+    "lint": "sui-ts-lint",
     "prepare": "npm run lib"
   },
   "keywords": [],

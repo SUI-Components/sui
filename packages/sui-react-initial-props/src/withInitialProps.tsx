@@ -1,16 +1,16 @@
-import {useContext, useEffect, useRef, useState} from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import SUIContext from '@s-ui/react-context'
-import {ClientPageComponent, WithInitialPropsComponent} from './types'
 import { RouteInfo } from '@s-ui/react-router/src/types'
+import { ClientPageComponent, WithInitialPropsComponent } from './types'
 
 // used to store the last definition of ClientPage component so it can be reused
 let latestClientPage: WithInitialPropsComponent
 
-const getInitialPropsFromWindow = () => {
+const getInitialPropsFromWindow = (): object | undefined => {
   // if no window initial props, then do nothing
   if (typeof window.__INITIAL_PROPS__ === 'undefined') return
   // make a copy of the content safely
-  const windowInitialProps = {...window.__INITIAL_PROPS__}
+  const windowInitialProps = { ...window.__INITIAL_PROPS__ }
   // remove the variable of the window
   window.__INITIAL_PROPS__ = undefined
   // return retrieved props from window
@@ -18,7 +18,7 @@ const getInitialPropsFromWindow = () => {
 }
 
 // extract needed info from props for routeInfo object
-const createRouteInfoFromProps = ({location, params, routes}: RouteInfo) => ({
+const createRouteInfoFromProps = ({ location, params, routes }: RouteInfo): RouteInfo => ({
   location,
   params,
   routes
@@ -34,44 +34,45 @@ const createRouteInfoFromProps = ({location, params, routes}: RouteInfo) => ({
 // and the very same component is matched by the router, so PageComponent just
 // gets props updated. Also, since PageComponent keeps mounted it will receive
 // an `isLoading` prop while getInitialProps is in progress.
-export default (Page: ClientPageComponent): WithInitialPropsComponent  => {
+export default (Page: ClientPageComponent): WithInitialPropsComponent => {
   // gather window initial props for this Page, if present
   const windowInitialProps = getInitialPropsFromWindow()
+  const { keepMounted = false } = Page
 
   // define Page wrapper component
   const ClientPage: WithInitialPropsComponent = (props: RouteInfo & object) => {
     const initialPropsFromWindowRef = useRef(windowInitialProps)
     // used to know if initialProps has been requested at least once
-    const requestedInitialPropsOnceRef = useRef(!!windowInitialProps)
+    const requestedInitialPropsOnceRef = useRef(!(windowInitialProps == null))
     // create routeInfo object from current props which are updated
     const routeInfo = createRouteInfoFromProps(props)
     // consume sui context from the context provider
     const suiContext: object = useContext(SUIContext)
     // pathName from context is outdated, so we update it from routeInfo
-    const context = {...suiContext, pathName: routeInfo.location.pathname}
+    const context = { ...suiContext, pathName: routeInfo.location.pathname }
 
-    const [{initialProps, isLoading}, setState] = useState(() => ({
-      initialProps: initialPropsFromWindowRef.current || {},
-      isLoading: !initialPropsFromWindowRef.current
+    const [{ initialProps, isLoading }, setState] = useState(() => ({
+      initialProps: (initialPropsFromWindowRef.current != null) || {},
+      isLoading: initialPropsFromWindowRef.current == null
     }))
 
     useEffect(() => {
       // check if got initial props from window, because then there's no need
       // to request them again from client
-      if (initialPropsFromWindowRef.current) {
+      if (initialPropsFromWindowRef.current != null) {
         initialPropsFromWindowRef.current = undefined
       } else {
         // only update state if already request initial props
         if (requestedInitialPropsOnceRef.current) {
-          setState({initialProps, isLoading: true})
+          setState({ initialProps, isLoading: true })
         }
 
-        Page.getInitialProps({context, routeInfo})
+        Page.getInitialProps({ context, routeInfo })
           .then((initialProps: object) => {
-            setState({initialProps, isLoading: false})
+            setState({ initialProps, isLoading: false })
           })
           .catch((error: Error) => {
-            setState({initialProps: {error}, isLoading: false})
+            setState({ initialProps: { error }, isLoading: false })
           })
           .finally(() => {
             if (requestedInitialPropsOnceRef.current) return
@@ -80,20 +81,20 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent  => {
       }
     }, [routeInfo.location]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const renderPage = () => (
+    const renderPage = (): any => (
       <Page {...initialProps} {...props} isLoading={isLoading} />
     )
 
     // if the page has a `keepMounted` property and already requested
     // initialProps once, just keep rendering the page
-    if (Page.keepMounted && requestedInitialPropsOnceRef.current) {
+    if (keepMounted && requestedInitialPropsOnceRef.current) {
       return renderPage()
     }
 
-    const renderLoading = () => {
+    const renderLoading = (): React.ElementType<any> | null => {
       // check if the page has a `renderLoading` method, if not, just render nothing
-      return Page.renderLoading
-        ? Page.renderLoading({context, routeInfo})
+      return (Page.renderLoading != null)
+        ? Page.renderLoading({ context, routeInfo })
         : null
     }
 
@@ -103,16 +104,18 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent  => {
   // if `keepMounted` property is found and the component is the same one,
   // we just reuse it instead of returning a new one
   if (
-    Page.keepMounted &&
+    keepMounted &&
     Page.displayName === latestClientPage?.Page?.displayName
   ) {
     return latestClientPage
   }
 
+  const displayName = Page.displayName ?? 'WithoutDisplayName'
+
   // save original page component
   ClientPage.Page = Page
   // add ClientPage to name of the component
-  ClientPage.displayName = `ClientPage(${Page.displayName})`
+  ClientPage.displayName = `ClientPage(${displayName})`
   // save ClientPage to latestClientPage
   latestClientPage = ClientPage
   // return the page

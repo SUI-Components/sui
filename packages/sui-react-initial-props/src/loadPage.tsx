@@ -1,11 +1,11 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import InitialPropsContext from './initialPropsContext'
 import withInitialProps from './withInitialProps'
-import {ClientPageComponent, ReactRouterTypes, DoneImportingPageCallback, WithInitialPropsComponent} from './types'
+import { ClientPageComponent, ReactRouterTypes, DoneImportingPageCallback, WithInitialPropsComponent } from './types'
 
-const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
+const EMPTY_GET_INITIAL_PROPS = async (): Promise<object> => ({})
 
-const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({default: Page}: {default: ClientPageComponent}) => {
+const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({ default: Page }: {default: ClientPageComponent}) => {
   // check if the Page page has a getInitialProps, if not put a resolve with an empty object
   Page.getInitialProps =
     typeof Page.getInitialProps === 'function'
@@ -21,7 +21,7 @@ const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({default
   // Create a component that gets the initialProps from context
   // this context has been created on the `ssrWithComponentWithInitialProps`
   const ServerPage: WithInitialPropsComponent = (props: object) => {
-    const {initialProps} = useContext(InitialPropsContext)
+    const { initialProps } = useContext(InitialPropsContext)
     return <Page {...props} {...initialProps} />
   }
   // recover the displayName from the original page
@@ -29,8 +29,8 @@ const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({default
   // detect if the page has getInitialProps and wrap it with the routeInfo
   // if we don't have any getInitialProps, just use a empty function returning an empty object
   ServerPage.getInitialProps =
-    (context: object, req: IncomingMessage.ServerRequest, res: IncomingMessage.ClientResponse) =>
-      Page.getInitialProps({context, routeInfo, req, res})
+    async (context: object, req: IncomingMessage.ServerRequest, res: IncomingMessage.ClientResponse) =>
+      await Page.getInitialProps({ context, routeInfo, req, res })
   // return the component to be used on the server
   return ServerPage
 }
@@ -39,9 +39,9 @@ const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({default
 // and unnecesary calling done method instead relying on promises
 export default (_: any, importPage: () => Promise<any>) =>
   (routeInfo: ReactRouterTypes.RouteInfo, done: DoneImportingPageCallback) => {
-  importPage()
-    .then(createUniversalPage(routeInfo))
-    .then(Page => {
-      done(null, Page)
-    })
-}
+    importPage()
+      .then(createUniversalPage(routeInfo))
+      .then(Page => {
+        done(null, Page)
+      })
+  }
