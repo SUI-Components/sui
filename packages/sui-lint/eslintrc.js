@@ -68,8 +68,8 @@ module.exports = {
   extends: [
     'standard',
     'standard-react',
-    'prettier',
     'plugin:cypress/recommended',
+    'prettier',
     'prettier/standard',
     'prettier/react'
   ],
@@ -98,5 +98,18 @@ module.exports = {
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
-  }
+  },
+  overrides: [
+    {
+      files: ['**/*.+(ts|tsx)'],
+      extends: ['standard-with-typescript', 'standard-jsx'],
+      parserOptions: {
+        project: './tsconfig.json'
+      },
+      rules: {
+        'no-return-await': 'off',
+        'prettier/prettier': RULES.OFF
+      }
+    }
+  ]
 }
