@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.15.0 (2021-06-16)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** adapt only changes flag to studio 10 new structure ([d61411d](https://github.com/SUI-Components/sui/commit/d61411ddad99852912585af4fad6f9b4138a60a2))
+
+
+
 # 10.14.0 (2021-06-04)
 
 
