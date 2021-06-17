@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 3.32.0 (2021-06-17)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use same babel/core dependency version across packages ([bb0ef22](https://github.com/SUI-Components/sui/commit/bb0ef227e12542ceb0dd281308d8a929117c1618))
+* **packages/sui-lint:** Add TypeScript support ([d257a52](https://github.com/SUI-Components/sui/commit/d257a526115cd44715d8040bbaeff818cb38c662))
+* **sui-lint:** remove not working/used deps and upgrade stylelint versions ([06cc872](https://github.com/SUI-Components/sui/commit/06cc872cddafc2893583ebeefd100e05cf072549))
+
+
+
 # 3.31.0 (2021-04-19)
 
 
