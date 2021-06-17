@@ -11,7 +11,7 @@ const {
 
 const BIN_PATH = require.resolve('eslint/bin/eslint')
 const CONFIG_PATH = require.resolve('../eslintrc.js')
-const EXTENSIONS = ['js', 'jsx']
+const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
 
 const patterns = IGNORE_PATTERNS.concat(getGitIgnoredFiles())

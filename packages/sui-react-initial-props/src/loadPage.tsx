@@ -1,10 +1,12 @@
-import {useContext} from 'react'
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { useContext } from 'react'
 import InitialPropsContext from './initialPropsContext'
 import withInitialProps from './withInitialProps'
+import { ClientPageComponent, ReactRouterTypes, DoneImportingPageCallback, WithInitialPropsComponent } from './types'
 
-const EMPTY_GET_INITIAL_PROPS = () => Promise.resolve({})
+const EMPTY_GET_INITIAL_PROPS = async (): Promise<object> => ({})
 
-const createUniversalPage = routeInfo => ({default: Page}) => {
+const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({ default: Page }: {default: ClientPageComponent}) => {
   // check if the Page page has a getInitialProps, if not put a resolve with an empty object
   Page.getInitialProps =
     typeof Page.getInitialProps === 'function'
@@ -19,27 +21,28 @@ const createUniversalPage = routeInfo => ({default: Page}) => {
   // SERVER
   // Create a component that gets the initialProps from context
   // this context has been created on the `ssrWithComponentWithInitialProps`
-  const ServerPage = props => {
-    const {initialProps} = useContext(InitialPropsContext)
+  const ServerPage: WithInitialPropsComponent = (props: object) => {
+    const { initialProps } = useContext(InitialPropsContext)
     return <Page {...props} {...initialProps} />
   }
   // recover the displayName from the original page
   ServerPage.displayName = Page.displayName
   // detect if the page has getInitialProps and wrap it with the routeInfo
   // if we don't have any getInitialProps, just use a empty function returning an empty object
-  ServerPage.getInitialProps = (context, req, res) =>
-    Page.getInitialProps({context, routeInfo, req, res})
+  ServerPage.getInitialProps =
+    async (context: object, req: IncomingMessage.ServerRequest, res: IncomingMessage.ClientResponse) =>
+      await Page.getInitialProps({ context, routeInfo, req, res })
   // return the component to be used on the server
   return ServerPage
 }
 
 // TODO: Remove this method on next major as it's using unnecessary contextFactory param
 // and unnecesary calling done method instead relying on promises
-// TODO: We should make sure @s-ui/react-router supports Promises as react-router
-export default (contextFactory, importPage) => (routeInfo, done) => {
-  importPage()
-    .then(createUniversalPage(routeInfo))
-    .then(Page => {
-      done(null, Page)
-    })
-}
+export default (_: any, importPage: () => Promise<any>) =>
+  async (routeInfo: ReactRouterTypes.RouteInfo, done: DoneImportingPageCallback) => {
+    importPage()
+      .then(createUniversalPage(routeInfo))
+      .then(Page => {
+        done(null, Page)
+      })
+  }

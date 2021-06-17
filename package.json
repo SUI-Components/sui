@@ -12,7 +12,7 @@
     "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -f package-lock.json && npm install --legacy-peer-deps",
+    "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -rf package-lock.json node_modules && npm install --legacy-peer-deps",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
@@ -35,6 +35,7 @@
     "react": "17",
     "rimraf": "3.0.2",
     "sinon": "10.0.0",
+    "typescript": "4.3.2",
     "validate-commit-msg": "2.14.0"
   },
   "config": {
