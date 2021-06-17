@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.17.0 (2021-06-17)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** commit all should add each path changes independently ([8e151a3](https://github.com/SUI-Components/sui/commit/8e151a36b2c5357a9f1612573bd8fba89bd16b79))
+
+
+
 # 2.16.0 (2021-05-26)
 
 
