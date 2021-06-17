@@ -57,6 +57,7 @@ const COMPONENT_ENTRY_SCSS_POINT_FILE = `${COMPONENT_PATH}src/index.scss`
 const COMPONENT_README_FILE = `${COMPONENT_PATH}README.md`
 
 const DEMO_DIR = `${COMPONENT_PATH}/demo/`
+const DEMO_PACKAGE_JSON_FILE = `${DEMO_DIR}package.json`
 const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}index.js`
 const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 
@@ -92,6 +93,16 @@ demo
 src
 test
 `
+  ),
+
+  writeFile(
+    DEMO_PACKAGE_JSON_FILE,
+    `{
+      "name": "${packageName}-demo",
+      "version": "1.0.0",
+      "private": true,
+      "description": "Demo for ${packageName}"
+    }`
   ),
 
   writeFile(
