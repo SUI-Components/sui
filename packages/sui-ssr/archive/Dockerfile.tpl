@@ -1,4 +1,4 @@
-FROM {{DOCKER_REGISTRY}}keymetrics/pm2:14-alpine
+FROM {{DOCKER_REGISTRY}}keymetrics/pm2:16-alpine
 
 WORKDIR /usr/src/app
 
