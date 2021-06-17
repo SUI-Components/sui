@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.16.0 (2021-06-17)
+
+
+### Features
+
+* **packages/sui-studio:** Add package.json to demo with private field ([e317067](https://github.com/SUI-Components/sui/commit/e3170672c3c41bac4ae0c4ba8b593a88d9c40a31))
+
+
+
 # 10.15.0 (2021-06-16)
 
 
