@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.36.0 (2021-06-18)
+
+
+### Features
+
+* **packages/sui-ssr:** force release ([73c2400](https://github.com/SUI-Components/sui/commit/73c24003424e3b88bdd4c15d6e47113abfb5fcf7))
+
+
+
 # 7.35.0 (2021-05-31)
 
 
