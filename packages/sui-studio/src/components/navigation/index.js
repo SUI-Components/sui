@@ -19,10 +19,13 @@ export default function Navigation({handleClick}) {
   }
 
   const filterComponentsFromSearch = ({search}) => {
-    return componentsList.filter(
-      ({category, component}) =>
-        category.includes(search) || component.includes(search)
-    )
+    return componentsList.filter(({category, component}) => {
+      const lowerCasedSearch = search.toLowerCase()
+      return (
+        category.toLowerCase().includes(lowerCasedSearch) ||
+        component.toLowerCase().includes(lowerCasedSearch)
+      )
+    })
   }
 
   const renderListFilteredBySearch = ({handleClick, search}) => {
