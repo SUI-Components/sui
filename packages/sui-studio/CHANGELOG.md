@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.17.0 (2021-06-18)
+
+
+### Features
+
+* **packages/sui-studio:** Make search case insensitive ([0e87d0c](https://github.com/SUI-Components/sui/commit/0e87d0c3c2261706a15848d078e5f035956dcd8e))
+
+
+
 # 10.16.0 (2021-06-17)
 
 
