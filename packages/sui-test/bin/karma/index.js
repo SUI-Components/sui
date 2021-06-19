@@ -29,10 +29,12 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   }
 
   config.files = [
-    `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
     srcPattern ? `${CWD}/${srcPattern}` : '',
-    `${CWD}/${pattern}`
+    {pattern: `${CWD}/${pattern}`, watch: false}
   ].filter(Boolean)
+
+  console.log({pattern})
+  console.log(config.files)
 
   config.preprocessors = {
     [pattern]: ['webpack'],

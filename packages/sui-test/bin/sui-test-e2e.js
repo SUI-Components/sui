@@ -90,6 +90,7 @@ const {
   userAgent,
   userAgentAppend
 } = program
+
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
   baseUrl,
