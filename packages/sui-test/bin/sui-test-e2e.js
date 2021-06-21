@@ -65,6 +65,8 @@ program
   .option('-P, --parallel', 'Run tests on parallelRun tests on parallel')
   .option('-R, --record', 'Record tests and send result to Dashboard Service')
   .option('-C, --ci', 'Continuous integration mode, reduces memory consumption')
+  .option('-VH, --viewportHeight', 'Sets custom viewport height')
+  .option('-VW, --viewportWidth', 'Sets custom viewport width')
   .option(
     '-K, --key <key>',
     'It is used to authenticate the project into the Dashboard Service'
@@ -88,7 +90,9 @@ const {
   scope,
   screenshotsOnError,
   userAgent,
-  userAgentAppend
+  userAgentAppend,
+  viewportHeight,
+  viewportWidth
 } = program
 const cypressConfig = {
   integrationFolder: path.join(TESTS_FOLDER, scope || ''),
@@ -111,6 +115,14 @@ if (userAgent) {
   cypressConfig.userAgent = `"${userAgent}"`
 } else if (userAgentAppend) {
   cypressConfig.userAgent = `"${DEFAULT_USER_AGENT} ${userAgentAppend}"`
+}
+
+if (viewportHeight) {
+  cypressConfig.viewportHeight = viewportHeight
+}
+
+if (viewportWidth) {
+  cypressConfig.viewportWidth = viewportWidth
 }
 
 if (screenshotsOnError) {
