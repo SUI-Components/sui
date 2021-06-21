@@ -21,7 +21,7 @@ const PRIVATE_GITHUB_API_URL_PATTERN =
 const ENCODING = 'utf8'
 
 function getComponentsFromDemoImports(componentPath) {
-  let componentsFromDemoImports
+  let componentsFromDemoImports = []
 
   try {
     const file = path.join(
@@ -41,8 +41,8 @@ function getComponentsFromDemoImports(componentPath) {
     componentsFromDemoImports = matchedImports.map(
       ({groups: {componentPath} = {}}) => componentPath
     )
-  } catch (error) {
-    if (error) return log(error)
+  } catch (err) {
+    error(err)
   }
 
   return componentsFromDemoImports
@@ -60,9 +60,9 @@ function getComponentsList(commits) {
     const componentsFromDemoImports = getComponentsFromDemoImports(
       componentPath
     )
+
     list = [...list, componentPath, ...componentsFromDemoImports]
   })
-  console.log('list', list)
 
   // Return the list without duplicated keys.
   return [...new Set(list)]
