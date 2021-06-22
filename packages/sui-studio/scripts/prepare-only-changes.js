@@ -18,20 +18,54 @@ const PUBLIC_GITHUB_API_URL_PATTERN =
   'https://api.github.com/repos/:org/:repo/pulls/:pull_request/commits?per_page=:results'
 const PRIVATE_GITHUB_API_URL_PATTERN =
   'https://:host/api/v3/repos/:org/:repo/pulls/:pull_request/commits?access_token=:token'
+const ENCODING = 'utf8'
+
+function getComponentsFromDemoImports(componentPath) {
+  let componentsFromDemoImports = []
+
+  try {
+    const file = path.join(
+      process.cwd(),
+      'components',
+      componentPath,
+      'demo',
+      'index.js'
+    )
+
+    if (!file) return
+
+    const data = fs.readFileSync(file, ENCODING)
+    const importRegExp = /import (?<componentName>.*) from 'components\/(?<componentPath>.*)\/src'/g
+    const matchedImports = [...data.matchAll(importRegExp)]
+
+    componentsFromDemoImports = matchedImports.map(
+      ({groups: {componentPath} = {}}) => componentPath
+    )
+  } catch (err) {
+    error(err)
+  }
+
+  return componentsFromDemoImports
+}
 
 function getComponentsList(commits) {
   const COMMIT_MESSAGE_PATTERN = /\(components\/(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
-  const list = []
+  let list = []
 
   commits.forEach(commit => {
     const data = commit.match(COMMIT_MESSAGE_PATTERN)
     if (!data) return
     const {context, component} = data.groups
     const componentPath = `${context}/${component}`
-    if (!list.includes(componentPath)) list.push(componentPath)
+    const componentsFromDemoImports = getComponentsFromDemoImports(
+      componentPath
+    )
+
+    list = [...list, componentPath, ...componentsFromDemoImports]
   })
 
-  return list
+  // Return the list without duplicated keys.
+  return [...new Set(list)]
 }
 
 async function cleanComponents(list) {
@@ -64,6 +98,7 @@ async function cleanComponents(list) {
 
 function getRepositoryUrl() {
   const packageJson = require(path.join(process.cwd(), 'package.json'))
+
   return packageJson.repository && packageJson.repository.url
 }
 
