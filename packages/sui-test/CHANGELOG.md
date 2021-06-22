@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.33.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** improve karma config construction ([81d803d](https://github.com/SUI-Components/sui/commit/81d803da988c2ff246962dd46774af17990c6a5b))
+* **packages/sui-test:** improve readability thanks to midu ([a00de2f](https://github.com/SUI-Components/sui/commit/a00de2f0c2b9328055827f6e27e13e2e3a01355a))
+
+
+
 # 4.32.0 (2021-06-22)
 
 
