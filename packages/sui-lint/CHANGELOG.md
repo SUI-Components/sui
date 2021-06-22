@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.33.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-lint:** Use latest babel dependencies ([0f2d3a5](https://github.com/SUI-Components/sui/commit/0f2d3a5cba1e47f8ac0816b14061148759879af6))
+
+
+
 # 3.32.0 (2021-06-17)
 
 
