@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.24.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest babel dependencies ([66149cf](https://github.com/SUI-Components/sui/commit/66149cf287ac2282ea24c9e4a2e8e346cc431c30))
+
+
+
 # 7.23.0 (2021-06-15)
 
 
