@@ -1,7 +1,6 @@
 // https://github.com/developit/karmatic/blob/master/src/index.js
 const {Server} = require('karma')
 const config = require('./config')
-const {clientConfig} = require('../../src/config')
 const CWD = process.cwd()
 
 module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
@@ -22,8 +21,6 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
         {type: 'text-summary'}
       ]
     }
-
-    config.client.captureConsole = Boolean(clientConfig.captureConsole)
   }
 
   if (watch) {
