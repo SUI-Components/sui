@@ -1,6 +1,8 @@
 // --- Forms --- //
 
 // Inputs
+@use "sass:math";
+
 $bgc-input: $c-white !default;
 $bgc-input-hover: $c-white !default;
 $bgc-input-focus: $c-gray-lightest !default;
@@ -361,7 +363,7 @@ $bgc-thumbnail-basic-caption: $c-black !default;
 $c-thumbnail-basic-caption: $c-white !default;
 $fz-thumbnail-basic-caption: $fz-h4 !default;
 $trs-thumbnail-basic: $trsdu-slow ease-in-out !default;
-$p-thumbnail-basic-caption: ceil($p-base / 3) !default;
+$p-thumbnail-basic-caption: ceil(math.div($p-base, 3)) !default;
 
 // List
 $m-list-gutter: $m-h !default;

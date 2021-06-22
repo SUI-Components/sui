@@ -1,8 +1,10 @@
 // --- Strip number --- //
 // Necessary to support $fz definitions either with or without units
+@use "sass:math";
+
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number * 0 + 1);
+    @return math.div($number, $number * 0 + 1);
   }
 
   @return $number;
