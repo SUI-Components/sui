@@ -2,10 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const {clientConfig} = require('../../src/config')
 
-const captureConsole =
-  typeof clientConfig.captureConsole !== 'undefined'
-    ? clientConfig.captureConsole
-    : true
+const {captureConsole = true} = clientConfig
 
 const config = {
   singleRun: true,
