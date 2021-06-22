@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.30.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-test:** Use latest babel dependencies ([54debd1](https://github.com/SUI-Components/sui/commit/54debd10d245cad54e4d38f5082ff50f56af516f))
+
+
+
 # 4.29.0 (2021-06-03)
 
 
