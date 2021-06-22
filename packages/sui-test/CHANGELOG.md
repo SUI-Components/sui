@@ -1,10 +1,24 @@
 # CHANGELOG
 
+# 4.32.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** fix capture console option in karma config ([4d5ef53](https://github.com/SUI-Components/sui/commit/4d5ef53d1ad5028f301e1cd73b9fd7e62ab8b289))
+
+
+
+# 4.31.0 (2021-06-22)
+
+
+
 # 4.30.0 (2021-06-22)
 
 
 ### Features
 
+* **packages/sui-test:** enable or disable logs in ci for browser test ([77db5aa](https://github.com/SUI-Components/sui/commit/77db5aa3f35eae8722db61bf1650df91f8ae2cf4))
 * **packages/sui-test:** Use latest babel dependencies ([54debd1](https://github.com/SUI-Components/sui/commit/54debd10d245cad54e4d38f5082ff50f56af516f))
 
 
