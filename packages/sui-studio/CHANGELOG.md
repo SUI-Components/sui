@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 10.18.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** build relative demo components on only changes ([617649e](https://github.com/SUI-Components/sui/commit/617649e295a84e7aa961626116dc68f78e7f6a64))
+* **packages/sui-studio:** fix linting errors ([099849e](https://github.com/SUI-Components/sui/commit/099849e3a07d4805fb11b28dee28587d37da28cb))
+
+
+
 # 10.17.0 (2021-06-18)
 
 
