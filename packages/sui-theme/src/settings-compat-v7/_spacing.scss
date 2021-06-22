@@ -1,5 +1,5 @@
 // Margins
-@use "sass:math";
+@use 'sass:math';
 
 $m-base: 16px !default;
 $m-v: ceil($m-base * 0.5) !default; // 8px

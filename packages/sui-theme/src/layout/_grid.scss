@@ -16,7 +16,7 @@
 // @include sui-cell-of($col-num, $gutter: $custom-gutter)
 
 // Grid
-@use "sass:math";
+@use 'sass:math';
 
 @mixin sui-grid($add-gutter: true, $inline: false, $gutter: $gutter) {
   display: flex;

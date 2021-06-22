@@ -1,6 +1,6 @@
 // Split a string into a list
 // http://stackoverflow.com/questions/32376461/how-to-split-a-string-into-two-lists-of-numbers-in-sass#answer-42295154
-@use "sass:math";
+@use 'sass:math';
 
 @function str-split($string, $separator) {
   // Empty list

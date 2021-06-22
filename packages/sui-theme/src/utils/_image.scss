@@ -1,5 +1,5 @@
 // Mixin to maintain an elements aspect ratio, even as it scales.
-@use "sass:math";
+@use 'sass:math';
 
 @mixin aspect-ratio($width: 16, $height: 9) {
   position: relative;
