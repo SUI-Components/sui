@@ -23,7 +23,7 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
       ]
     }
 
-    config.captureConsole = Boolean(clientConfig.captureConsole)
+    config.client.captureConsole = Boolean(clientConfig.captureConsole)
   }
 
   if (watch) {
