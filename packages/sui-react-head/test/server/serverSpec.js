@@ -6,8 +6,8 @@ import React from 'react'
 import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
 
-import Head, {HeadProvider} from '../src/index'
-import {renderHeadTagsToString} from '../src/server'
+import Head, {HeadProvider} from '../../lib/index'
+import {renderHeadTagsToString} from '../../lib/server'
 descriptorsByEnvironmentPatcher()
 
 const render = children => {
