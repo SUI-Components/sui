@@ -1,6 +1,6 @@
-import {formatPattern, matchPattern} from '../PatternUtils'
+import { formatPattern, matchPattern } from '../PatternUtils'
 import internalIsActive from './isActive'
-import {Tree} from './Tree'
+import { Tree } from './Tree'
 import warning from './warning'
 
 const INITIAL_MATCH_OBJECT = {
@@ -10,12 +10,12 @@ const INITIAL_MATCH_OBJECT = {
   paramValues: []
 }
 
-const checkIntegrity = nodes =>
+const checkIntegrity = (nodes): boolean =>
   !nodes.some((node, index) => node.level !== index + 1)
 
-const createParams = ({paramValues, paramNames}) =>
+const createParams = ({ paramValues, paramNames }) =>
   paramNames.reduce((acc, name, index) => {
-    return {...acc, [name]: paramValues[index]}
+    return { ...acc, [name]: paramValues[index] }
   }, {})
 
 /**
@@ -35,14 +35,14 @@ const findRedirect = nodes => {
  * @param {import('../types').RouteInfo} routeInfo
  * @returns {Promise<import('react').ComponentType>}
  */
-const makePromise = (getComponent, routeInfo) =>
-  new Promise((resolve, reject) => {
+const makePromise = async (getComponent, routeInfo) =>
+  await new Promise((resolve, reject) => {
     getComponent(routeInfo, (err, component) =>
       err ? reject(err) : resolve(component)
     )
   })
 
-const createComponents = ({nodes, routeInfo}) => {
+const createComponents = async ({ nodes, routeInfo }) => {
   const indexRoute = nodes.findIndex(node => node.fromIndex)
   if (indexRoute !== -1 && indexRoute === nodes.length - 1) {
     nodes = [...nodes, nodes[indexRoute].indexNode]
@@ -51,13 +51,13 @@ const createComponents = ({nodes, routeInfo}) => {
   // create an array of promises with all components
   const componentsPromises = nodes
     .filter(node => node.component || node.getComponent)
-    .map(({component, getComponent}) => {
+    .map(async ({ component, getComponent }) => {
       return component
-        ? Promise.resolve(component)
-        : makePromise(getComponent, routeInfo)
+        ? await Promise.resolve(component)
+        : await makePromise(getComponent, routeInfo)
     })
   // return a promise that will resolve when all components are available
-  return Promise.all(componentsPromises)
+  return await Promise.all(componentsPromises)
 }
 
 /**
@@ -66,11 +66,11 @@ const createComponents = ({nodes, routeInfo}) => {
  * @returns {(acc: object, node: object) => object}
  */
 const createReducerRoutesTree = location => (acc, node) => {
-  let {remainingPathname, paramNames, paramValues} = acc
+  let { remainingPathname, paramNames, paramValues } = acc
   if (acc.isFinished) return acc
   if (node.index) return acc
 
-  let {path: pattern, regexp} = node
+  let { path: pattern, regexp } = node
   if (!regexp && !pattern) {
     pattern = ''
   }
@@ -117,7 +117,7 @@ const createReducerRoutesTree = location => (acc, node) => {
 
   const matched = matchPattern(pattern, remainingPathname)
 
-  if (matched) {
+  if (matched != null) {
     acc = {
       nodes: [...acc.nodes, node],
       paramNames: [...paramNames, ...matched.paramNames],
@@ -140,7 +140,7 @@ const createReducerRoutesTree = location => (acc, node) => {
  * @param {String=} remainingPathname
  * @returns {Promise<Object>}
  */
-const matchRoutes = async (tree, location, remainingPathname) => {
+const matchRoutes = async (tree, location: Location, remainingPathname): Promise<object> => {
   if (remainingPathname === undefined) {
     if (location.pathname.charAt(0) !== '/') {
       location = {
@@ -162,13 +162,13 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     tree
   )
 
-  const {nodes: nodesFromMatch, paramValues, paramNames} = match
-  const params = createParams({paramNames, paramValues})
+  const { nodes: nodesFromMatch, paramValues, paramNames } = match
+  const params = createParams({ paramNames, paramValues })
 
   // check if we have hit a redirect
   const redirectNode = findRedirect(nodesFromMatch)
   if (redirectNode) {
-    return {redirectLocation: formatPattern(redirectNode.to, params)}
+    return { redirectLocation: formatPattern(redirectNode.to, params) }
   }
 
   // if it's not a redirect and still there's remainingPathname then is not a match
@@ -176,18 +176,18 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     ? INITIAL_MATCH_OBJECT.nodes
     : nodesFromMatch
 
-  const routeInfo = {location, params, routes: nodes}
-  const components = await createComponents({nodes, routeInfo})
+  const routeInfo = { location, params, routes: nodes }
+  const components = await createComponents({ nodes, routeInfo })
 
-  return {routeInfo, components}
+  return { routeInfo, components }
 }
 
-export const createTransitionManager = ({history, jsonRoutes}) => {
+export const createTransitionManager = ({ history, jsonRoutes }) => {
   /** @type {import('../types').RouterState} */
   let state = {}
 
-  const matchRouteAndUpdateState = async ({location, jsonRoutes}) => {
-    const {redirectLocation, routeInfo, components} = await matchRoutes(
+  const matchRouteAndUpdateState = async ({ location, jsonRoutes }) => {
+    const { redirectLocation, routeInfo, components } = await matchRoutes(
       jsonRoutes,
       location
     )
@@ -199,19 +199,19 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
       location
     }
 
-    return {redirectLocation, routeInfo, components}
+    return { redirectLocation, routeInfo, components }
   }
 
   /**
    * Match the current location with the json routes
    * @param {import('../types').Location} location Current location object
    */
-  const match = location => {
+  const match = async location => {
     location = location
       ? history.createLocation(location)
       : history.getCurrentLocation()
 
-    return matchRouteAndUpdateState({jsonRoutes, location})
+    return await matchRouteAndUpdateState({ jsonRoutes, location })
   }
 
   /**
@@ -222,19 +222,19 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
   const listen = listener => {
     const historyListener = async location => {
       if (state.location === location) {
-        listener(null, {params: state.params, components: state.components})
+        listener(null, { params: state.params, components: state.components })
       } else {
         try {
           const {
             redirectLocation,
             components
-          } = await matchRouteAndUpdateState({jsonRoutes, location})
+          } = await matchRouteAndUpdateState({ jsonRoutes, location })
 
           if (redirectLocation) {
             return history.replace(redirectLocation)
           }
 
-          if (!components) {
+          if (components == null) {
             const url = location.pathname + location.search + location.hash
             warning(false, `Location "${url}" did not match any routes`)
           }

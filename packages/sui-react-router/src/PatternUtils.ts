@@ -2,11 +2,11 @@
 
 import invariant from './internal/invariant'
 
-function escapeRegExp(string) {
+function escapeRegExp (string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function _compilePattern(pattern) {
+function _compilePattern (pattern) {
   let regexpSource = ''
   const paramNames = []
   const tokens = []
@@ -14,7 +14,7 @@ function _compilePattern(pattern) {
   let match
   let lastIndex = 0
   const matcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|\*\*|\*|\(|\)|\\\(|\\\)/g
-  while ((match = matcher.exec(pattern))) {
+  while (((match = matcher.exec(pattern)) != null)) {
     if (match.index !== lastIndex) {
       tokens.push(pattern.slice(lastIndex, match.index))
       regexpSource += escapeRegExp(pattern.slice(lastIndex, match.index))
@@ -59,9 +59,8 @@ function _compilePattern(pattern) {
 
 const CompiledPatternsCache = Object.create(null)
 
-export function compilePattern(pattern) {
-  if (!CompiledPatternsCache[pattern])
-    CompiledPatternsCache[pattern] = _compilePattern(pattern)
+export function compilePattern (pattern) {
+  if (!CompiledPatternsCache[pattern]) { CompiledPatternsCache[pattern] = _compilePattern(pattern) }
 
   return CompiledPatternsCache[pattern]
 }
@@ -86,12 +85,12 @@ export function compilePattern(pattern) {
  * - paramNames
  * - paramValues
  */
-export function matchPattern(pattern, pathname) {
+export function matchPattern (pattern, pathname) {
   // Ensure pattern starts with leading slash for consistency with pathname.
   if (pattern.charAt(0) !== '/') {
     pattern = `/${pattern}`
   }
-  let {regexpSource, paramNames, tokens} = compilePattern(pattern)
+  let { regexpSource, paramNames, tokens } = compilePattern(pattern)
 
   if (pattern.charAt(pattern.length - 1) !== '/') {
     regexpSource += '/?' // Allow optional path separator at end.
@@ -129,17 +128,17 @@ export function matchPattern(pattern, pathname) {
   }
 }
 
-export function getParamNames(pattern) {
+export function getParamNames (pattern) {
   return compilePattern(pattern).paramNames
 }
 
-export function getParams(pattern, pathname) {
+export function getParams (pattern, pathname) {
   const match = matchPattern(pattern, pathname)
-  if (!match) {
+  if (match == null) {
     return null
   }
 
-  const {paramNames, paramValues} = match
+  const { paramNames, paramValues } = match
   const params = {}
 
   paramNames.forEach((paramName, index) => {
@@ -153,8 +152,8 @@ export function getParams(pattern, pathname) {
  * Returns a version of the given pattern with params interpolated. Throws
  * if there is a dynamic segment of the pattern for which there is no param.
  */
-export function formatPattern(pattern, params = {}) {
-  const {tokens} = compilePattern(pattern)
+export function formatPattern (pattern, params = {}) {
+  const { tokens } = compilePattern(pattern)
   let parenCount = 0
   let pathname = ''
   let splatIndex = 0
@@ -222,9 +221,7 @@ export function formatPattern(pattern, params = {}) {
           // jump to ending paren
           i = curTokenIdx + nextParenIdx - 1
         }
-      } else if (parenCount)
-        parenHistory[parenCount - 1] += encodeURIComponent(paramValue)
-      else pathname += encodeURIComponent(paramValue)
+      } else if (parenCount) { parenHistory[parenCount - 1] += encodeURIComponent(paramValue) } else pathname += encodeURIComponent(paramValue)
     } else {
       if (parenCount) parenHistory[parenCount - 1] += token
       else pathname += token

@@ -33,6 +33,7 @@ export interface Route {
 }
 
 export type Router = RouterState & {
+  createHref: (toLocation: string) => string
   go: (n: number) => void
   goBack: () => void
   goForward: () => void

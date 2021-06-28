@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types'
 
 import invariant from './internal/invariant'
-import {falsy} from './internal/PropTypes'
+import { falsy } from './internal/PropTypes'
 
 /**
  * An <IndexRoute> is used to specify its parent's <Route indexRoute> in

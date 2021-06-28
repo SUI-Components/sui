@@ -1,4 +1,4 @@
-import {Children as ReactChildren, isValidElement} from 'react'
+import { Children as ReactChildren, isValidElement } from 'react'
 
 import IndexRoute from '../IndexRoute'
 import Redirect from '../Redirect'
@@ -14,9 +14,9 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   // easily inline conditionals in their route config.
   if (!isValidElement(root)) return
 
-  const {props, type} = root
-  const {component, path, children, getComponent, id, from, to, regexp} = props
-  const {displayName} = type
+  const { props, type } = root
+  const { component, path, children, getComponent, id, from, to, regexp } = props
+  const { displayName } = type
 
   const node = Object.create(null)
 
@@ -43,10 +43,11 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   if (component) node.component = component
   if (getComponent) node.getComponent = getComponent
   if (path) node.path = path
-  if (children)
+  if (children) {
     node.children = ReactChildren.toArray(children).map(child =>
       fromReactTreeToJSON(child, node, level + 1)
     )
+  }
 
   return node
 }

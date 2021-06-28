@@ -2,12 +2,13 @@
 
 import browserHistory from '../browserHistory'
 import createMemoryHistory from '../createMemoryHistory'
+import { Router } from '../types.js'
 import canUseDOM from './canUseDOM'
 
 /**
  * Create the history that the router will use depending on the environment
  */
-export const createRouterHistory = options =>
+export const createRouterHistory = (options?): History =>
   canUseDOM ? browserHistory : createMemoryHistory(options)
 
 /**
@@ -15,14 +16,13 @@ export const createRouterHistory = options =>
  * @param {object} history
  * @param {(...args) => boolean } isActive
  * @param {{ location: string, params: object, routes: array }=} state
- * @returns { import('../types').Router }
  */
 export const createRouterObject = (
   history,
-  isActive,
-  state = {location: null, params: null, routes: null}
-) => {
-  const {location, params, routes} = state
+  isActive: (...args) => boolean,
+  state = { location: null, params: null, routes: null }
+): Router => {
+  const { location, params, routes } = state
 
   return {
     ...history,

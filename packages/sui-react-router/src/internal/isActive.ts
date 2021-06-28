@@ -1,13 +1,12 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/isActive.js
-import {matchPattern} from '../PatternUtils'
+import { matchPattern } from '../PatternUtils'
+import { Location } from '../types'
 
 /**
  * Check if two objects are deep equal
- * @param {object} a
- * @param {object} b
- * @returns {Boolean} If a and b are deep equal
+ * @returns If a and b are deep equal
  */
-function deepEqual(a, b) {
+function deepEqual (a: object, b: object): boolean {
   if (a === b) return true
 
   if (a == null || b == null) return false
@@ -47,11 +46,11 @@ function deepEqual(a, b) {
  * Returns true if the current pathname matches the supplied one, net of
  * leading and trailing slash normalization. This is sufficient for an
  * indexOnly route match.
- * @param {string} pathname Pathname to compare
- * @param {string} currentPathname Current pathname to compare against the previous
- * @returns {Boolean} Return if the pathname provided is active
+ * @param pathname Pathname to compare
+ * @param currentPathname Current pathname to compare against the previous
+ * @returns Return if the pathname provided is active
  */
-function pathIsActive(pathname, currentPathname) {
+function pathIsActive (pathname: string, currentPathname: string): boolean {
   // Normalize leading slash for consistency. Leading slash on pathname has
   // already been normalized in isActive. See caveat there.
   if (currentPathname.charAt(0) !== '/') {
@@ -74,17 +73,17 @@ function pathIsActive(pathname, currentPathname) {
 
 /**
  * Returns true if the given pathname matches the active routes and params.
- * @returns {Boolean} Return if the route provided is active
+ * @returns The route provided is active or not
  */
-function routeIsActive(pathname, routes, params) {
-  let remainingPathname = pathname
-  let paramNames = []
-  let paramValues = []
+function routeIsActive (pathname: string, routes, params): boolean {
+  let remainingPathname: string | null = pathname
+  let paramNames: any[] = []
+  let paramValues: any[] = []
 
   // for...of would work here but it's probably slower post-transpilation.
   for (let i = 0, len = routes.length; i < len; ++i) {
     const route = routes[i]
-    const pattern = route.path || ''
+    const pattern: string = route.path != null ? route.path : ''
 
     if (pattern.charAt(0) === '/') {
       remainingPathname = pathname
@@ -92,9 +91,9 @@ function routeIsActive(pathname, routes, params) {
       paramValues = []
     }
 
-    if (remainingPathname !== null && pattern) {
+    if (remainingPathname !== null && Boolean(pattern)) {
       const matched = matchPattern(pattern, remainingPathname)
-      if (matched) {
+      if (matched != null) {
         remainingPathname = matched.remainingPathname
         paramNames = [...paramNames, ...matched.paramNames]
         paramValues = [...paramValues, ...matched.paramValues]
@@ -121,7 +120,7 @@ function routeIsActive(pathname, routes, params) {
  * Returns true if all key/value pairs in the given query are
  * currently active.
  */
-function queryIsActive(query, activeQuery) {
+function queryIsActive (query, activeQuery): boolean {
   if (activeQuery == null) return query == null
   if (query == null) return true
   return deepEqual(query, activeQuery)
@@ -131,13 +130,13 @@ function queryIsActive(query, activeQuery) {
  * Check if <Link> with a given pathname/query combination is currently active.
  * @returns {Boolean} Returns true if it matches
  */
-export default function isActive(
-  {pathname, query},
-  indexOnly,
-  currentLocation,
-  routes,
-  params
-) {
+export default function isActive (
+  { pathname, query }: Location,
+  indexOnly: boolean,
+  currentLocation: Location,
+  routes: any[],
+  params: object
+): boolean {
   if (currentLocation == null) return false
 
   // TODO: This is a bit ugly. It keeps around support for treating pathnames

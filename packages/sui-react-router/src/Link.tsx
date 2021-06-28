@@ -1,11 +1,11 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/Link.js
 
-import {useCallback} from 'react'
+import { useCallback } from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
 import invariant from './internal/invariant'
-import {useRouter} from './hooks'
+import { useRouter } from './hooks'
 
 /**
  * Check if the event is created with some key being held to know it could be for a some contextual stuff
@@ -87,7 +87,7 @@ const Link = ({
   // if empty string, we default to `undefined` to avoid empty class attribute
   const className =
     cx(restOfProps.className, isActiveRoute && activeClassName) || undefined
-  const style = {...restOfProps.style, ...(isActiveRoute && activeStyle)}
+  const style = { ...restOfProps.style, ...(isActiveRoute && activeStyle) }
 
   const anchorProps = {
     ...restOfProps,
@@ -117,7 +117,7 @@ Link.propTypes = {
    * Get the underlying ref of the component using React.createRef.
    */
   innerRef: PropTypes.oneOfType([
-    PropTypes.shape({current: PropTypes.elementType})
+    PropTypes.shape({ current: PropTypes.elementType })
   ]),
   /**
    * Function to execute when the element is clicked

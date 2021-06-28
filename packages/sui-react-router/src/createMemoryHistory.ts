@@ -6,7 +6,7 @@ import useQueries from 'history/lib/useQueries'
 import useBasename from 'history/lib/useBasename'
 import baseCreateMemoryHistory from 'history/lib/createMemoryHistory'
 
-export default function createMemoryHistory(options) {
+export default function createMemoryHistory (options?: object) {
   // signatures and type checking differ between `useQueries` and
   // `createMemoryHistory`, have to create `memoryHistory` first because
   // `useQueries` doesn't understand the signature

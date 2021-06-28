@@ -1,16 +1,16 @@
-import {createElement as h, useState, useEffect} from 'react'
-import PropTypes from 'prop-types'
+import { createElement as h, useState, useEffect } from 'react'
 
-import {routes, components} from './internal/PropTypes'
-import {fromReactTreeToJSON} from './internal/ReactUtils'
-import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
-import {createTransitionManager} from './internal/createTransitionManager'
+import { fromReactTreeToJSON } from './internal/ReactUtils'
+import { createRouterHistory, createRouterObject } from './internal/RouterUtils'
+import { createTransitionManager } from './internal/createTransitionManager'
 import RouterContext from './internal/Context'
 
 import Route from './Route'
+import * as React from 'react'
+import { Router as RouterType } from './types.js'
 
-const renderRouterContent = ({components, params, router}) => {
-  const {location, routes} = router
+const renderRouterContent = ({ components, params, router }) => {
+  const { location, routes } = router
   // get the latest matched route
   const route = routes && routes.length ? routes[routes.length - 1] : []
 
@@ -29,11 +29,21 @@ const renderRouterContent = ({components, params, router}) => {
   )
 }
 
-const createRoutes = ({children, routes}) => {
+const createRoutes = ({ children, routes }) => {
   if (routes) return fromReactTreeToJSON(routes)
   return fromReactTreeToJSON(h(Route, null, children))
 }
 
+interface RouterProps {
+  children: React.ReactNode
+  components: React.ReactNode
+  history: History
+  matchContext: (...args) => any
+  onError?: (...args) => void
+  params: object
+  router: RouterType
+  routes // alias for children
+}
 const Router = ({
   children,
   components = [],
@@ -43,7 +53,7 @@ const Router = ({
   params,
   router: routerFromProps,
   routes
-}) => {
+}: RouterProps): JSX.Element => {
   // we might be using Router with match, if it's the case
   // when we should have from props the transitionManager and the router object
   // if not, we are going to create it with the needed info
@@ -51,19 +61,22 @@ const Router = ({
     matchContext?.transitionManager ??
     createTransitionManager({
       history,
-      jsonRoutes: createRoutes({children, routes})
+      jsonRoutes: createRoutes({ children, routes })
     })
 
   const router =
     routerFromProps ?? createRouterObject(history, transitionManager.isActive)
 
-  const [state, setState] = useState({router, params, components})
+  const [state, setState] = useState({ router, params, components })
 
   useEffect(() => {
     let prevState = {}
-    const handleTransition = (err, nextState) => {
+    const handleTransition = (err, nextState): void => {
       if (err) {
-        if (onError) return onError(err)
+        if (typeof onError === 'function') {
+          onError(err)
+          return
+        }
         throw err
       }
 
@@ -72,9 +85,9 @@ const Router = ({
       if (prevState === nextState) return
       prevState = nextState
 
-      const {components, params, location, routes} = nextState
-      const nextRouter = {...state.router, params, location, routes}
-      setState({router: nextRouter, params, components})
+      const { components, params, location, routes } = nextState
+      const nextRouter = { ...state.router, params, location, routes }
+      setState({ router: nextRouter, params, components })
     }
 
     const unlisten = transitionManager.listen(handleTransition)
@@ -89,16 +102,5 @@ const Router = ({
 }
 
 Router.displayName = 'Router'
-
-Router.propTypes = {
-  children: routes,
-  components,
-  history: PropTypes.object,
-  matchContext: PropTypes.object,
-  onError: PropTypes.func,
-  params: PropTypes.object,
-  router: PropTypes.object,
-  routes // alias for children
-}
 
 export default Router
