@@ -100,7 +100,7 @@ import {useExperiment} from '@s-ui/pde'
 
 const EXPERIMENT_NAME = 'experimentX'
 
-const trackExperiment = () => {
+const trackExperiment = ({experimentName, variationName}) => {
   window.analytics.track('Experiment Viewed', {
       experimentName,
       variationName,
