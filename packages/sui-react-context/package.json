@@ -4,7 +4,7 @@
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
-    "lib": "babel --presets=sui ./src -d lib",
+    "lib": "tsc",
     "prepare": "npm run lib"
   },
   "keywords": [],
