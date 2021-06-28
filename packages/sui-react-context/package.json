@@ -2,8 +2,8 @@
   "name": "@s-ui/react-context",
   "version": "1.6.0",
   "description": "",
-  "main": "./lib/index",
-  "types": "./lib/index",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lib": "tsc",
     "prepare": "npm run lib"

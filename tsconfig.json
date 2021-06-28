@@ -12,6 +12,7 @@
   },
   "exclude": ["node_modules", "lib"],
   "types": [
+    "@s-ui/react-context/src/index.ts",
     "@s-ui/react-router/src/types.d.ts"
   ]
 }
