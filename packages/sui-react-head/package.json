@@ -6,10 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "lib": "rm -rf ./lib && tsc",
-    "prepare": "npm run lib",
-    "test": "npm run prepare && npm run test:server && npm run test:browser",
-    "test:browser": "NODE_ENV=test sui-test browser",
-    "test:server": "NODE_ENV=test sui-test server"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
