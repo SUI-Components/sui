@@ -1,22 +1,19 @@
-import {useContext, useEffect, useState} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SUIContext from '@s-ui/react-context'
 
-import {TCF_WINDOW_API, TCF_VERSION} from './config'
+import { TCF_WINDOW_API, TCF_VERSION } from './config'
 import hasUserConsents from './hasUserConsents'
+import { EventStatus, Purpose } from './types'
 
-/**
- * @param {array} requiredConsents for example [1, 3, 8]
- * @return {boolean}
- */
-export default function useUserConsents(requiredConsents) {
+export default function useUserConsents (requiredConsents: number[]): boolean {
   /**
    * Consents acceptance state is inited based on the cookies from the
    * context, so we know the state of consents from the beginning, even
    * in SSR.
    */
-  const {cookies} = useContext(SUIContext)
+  const { cookies } = useContext(SUIContext)
   const [areConsentsAccepted, setAreConsentsAccepted] = useState(() =>
-    hasUserConsents({requiredConsents, cookies})
+    hasUserConsents({ requiredConsents, cookies })
   )
 
   /**
@@ -26,9 +23,10 @@ export default function useUserConsents(requiredConsents) {
    */
   useEffect(() => {
     const tcfApi = window[TCF_WINDOW_API]
-    if (tcfApi) {
-      const consentsListener = ({eventStatus, purpose}) => {
-        if (eventStatus !== 'useractioncomplete') return
+    if (tcfApi !== undefined) {
+      const consentsListener = ({ eventStatus, purpose }: { eventStatus: EventStatus, purpose: Purpose}): void => {
+        if (eventStatus !== EventStatus.USER_ACTION_COMPLETE) return
+
         setAreConsentsAccepted(
           requiredConsents.every(purposeId =>
             Boolean(purpose.consents[purposeId])

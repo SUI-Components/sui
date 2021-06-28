@@ -4,8 +4,8 @@ import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environ
 import {expect} from 'chai'
 import {render} from '@testing-library/react'
 import {renderToString} from 'react-dom/server'
-import {TCF_WINDOW_API} from '../../src/config'
-import {useUserConsents} from '../../src/index'
+import {TCF_WINDOW_API} from '../../lib/config'
+import {useUserConsents} from '../../lib/index'
 import {tcfApiMock, triggerTcfEvent} from './mocks'
 
 descriptorsByEnvironmentPatcher()
