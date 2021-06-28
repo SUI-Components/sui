@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "lib": "tsc --outDir lib",
+    "lib": "rm -rf ./lib && tsc",
     "prepare": "npm run lib",
     "test": "npm run prepare && npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser",
