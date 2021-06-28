@@ -10,7 +10,6 @@
     "strict": true,
     "target": "es5",
   },
-  "include": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
   "exclude": ["node_modules", "lib"],
   "types": [
     "@s-ui/react-router/src/types.d.ts"
