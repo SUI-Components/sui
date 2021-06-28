@@ -48,7 +48,7 @@ const Head: React.FC<HeadProps> = ({
 
   return (
     <>
-      {titleToRender && <Title>{titleToRender}</Title>}
+      {titleToRender !== '' && <Title>{titleToRender}</Title>}
       {renderTags({ tagsArray: metaTagsToRender, Component: Meta })}
       {renderTags({ tagsArray: linkTagsToRender, Component: Link })}
       {(bodyAttributes != null) && <Body attributes={bodyAttributes} />}
