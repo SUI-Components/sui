@@ -1,8 +1,9 @@
 {
   "name": "@s-ui/consents",
   "version": "1.4.0",
-  "main": "lib/index.js",
+  "main": "lib/index",
   "description": "iab consents handler",
+  "types": "lib/index",
   "scripts": {
     "lib": "rm -rf ./lib && tsc",
     "prepare": "npm run lib"
