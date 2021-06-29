@@ -71,7 +71,7 @@ const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
   component
 )}`
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
-const {repository, homepage} = packageInfo
+const {repository = {}, homepage} = packageInfo
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
