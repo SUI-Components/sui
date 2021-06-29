@@ -17,7 +17,6 @@ import ssrConfig from '../config'
 import {createStylesFor} from '../utils'
 import {getInitialContextValue} from '../initialContextValue'
 import {
-  statusCodes,
   redirectStatusCodes,
   DEFAULT_REDIRECT_STATUS_CODE
 } from '../../status-codes'
@@ -75,7 +74,7 @@ export default async (req, res, next) => {
       ? `?${qs.stringify(query)}`
       : ''
     const destination = `${redirectLocation.pathname}${queryString}`
-    return res.redirect(statusCodes.MOVED_PERMANENTLY, destination)
+    return res.redirect(DEFAULT_REDIRECT_STATUS_CODE, destination)
   }
 
   if (!renderProps) {
