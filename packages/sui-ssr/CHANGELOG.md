@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 7.37.0 (2021-06-29)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** use only the constant ([6f82412](https://github.com/SUI-Components/sui/commit/6f82412f74966e1e72800782a5f71f656c19c827))
+
+
+### Features
+
+* **packages/sui-ssr:** allow to set a specific redirect status code ([3566d01](https://github.com/SUI-Components/sui/commit/3566d013a983177641bdebc6b109855670e65b96))
+
+
+
 # 7.36.0 (2021-06-18)
 
 
