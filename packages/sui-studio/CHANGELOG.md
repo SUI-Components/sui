@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.20.0 (2021-06-29)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Allow non existent repository field ([6bf2b7f](https://github.com/SUI-Components/sui/commit/6bf2b7f65c324cf58070c715084ab51eea71c48b))
+
+
+
 # 10.19.0 (2021-06-29)
 
 
