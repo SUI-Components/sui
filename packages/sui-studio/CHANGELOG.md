@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 10.19.0 (2021-06-29)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** patch ([ca363f1](https://github.com/SUI-Components/sui/commit/ca363f1f872b20e4b953ad1b146e05b32bcbdede))
+* **packages/sui-studio:** patch ([bd7db58](https://github.com/SUI-Components/sui/commit/bd7db5823ad68c2c037a5fdabf1e69e4438d4e75))
+
+
+
 # 10.18.0 (2021-06-22)
 
 
