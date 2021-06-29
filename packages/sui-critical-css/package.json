@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/critical-css",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "description": "",
   "type": "module",
   "main": "src/index.js",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "clean-css": "5.1.2",
-    "playwright": "1.11.1"
+    "playwright-chromium": "1.12.2"
   },
   "peerDependencies": {
     "path-to-regexp": "*"

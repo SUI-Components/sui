@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.9.0 (2021-06-17)
+
+
+### Features
+
+* **packages/sui-react-router:** Improve types for sui-react-router ([cebaffd](https://github.com/SUI-Components/sui/commit/cebaffd2e006d26fa7fec9fbc0f898464f628f51))
+
+
+
 # 1.8.0 (2021-06-04)
 
 

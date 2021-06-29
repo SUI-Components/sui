@@ -1,5 +1,42 @@
 # CHANGELOG
 
+# 10.18.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** build relative demo components on only changes ([617649e](https://github.com/SUI-Components/sui/commit/617649e295a84e7aa961626116dc68f78e7f6a64))
+* **packages/sui-studio:** fix linting errors ([099849e](https://github.com/SUI-Components/sui/commit/099849e3a07d4805fb11b28dee28587d37da28cb))
+
+
+
+# 10.17.0 (2021-06-18)
+
+
+### Features
+
+* **packages/sui-studio:** Make search case insensitive ([0e87d0c](https://github.com/SUI-Components/sui/commit/0e87d0c3c2261706a15848d078e5f035956dcd8e))
+
+
+
+# 10.16.0 (2021-06-17)
+
+
+### Features
+
+* **packages/sui-studio:** Add package.json to demo with private field ([e317067](https://github.com/SUI-Components/sui/commit/e3170672c3c41bac4ae0c4ba8b593a88d9c40a31))
+
+
+
+# 10.15.0 (2021-06-16)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** adapt only changes flag to studio 10 new structure ([d61411d](https://github.com/SUI-Components/sui/commit/d61411ddad99852912585af4fad6f9b4138a60a2))
+
+
+
 # 10.14.0 (2021-06-04)
 
 

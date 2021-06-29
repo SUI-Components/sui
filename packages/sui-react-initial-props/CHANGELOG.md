@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.14.0 (2021-06-17)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Fix all linter errors ([2842ce9](https://github.com/SUI-Components/sui/commit/2842ce956bfcd95d3b2dea7844a18364276aba29))
+* **packages/sui-react-initial-props:** Migrate sui-react-initial-props to TypeScript ([9a891cb](https://github.com/SUI-Components/sui/commit/9a891cb2a57c861991062b6bb4572e962b3ebf9e))
+
+
+
 # 2.13.0 (2021-04-19)
 
 

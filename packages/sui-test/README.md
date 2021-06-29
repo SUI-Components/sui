@@ -205,9 +205,15 @@ If defined, any error on your tests will create a screenshot of that moment in t
   - `esmOverride`: Boolean flag (defaults to `false`), enable patching the Node's CJS loader when facing ESM errors, like `ERR_REQUIRE_ESM` in `node > v12.12.0`. 
   - `useLibDir`: disabled by default. Prevents to compile lib folders on mocha runner if set to false
 
+- `client`: Config for `@s-ui/test browser` binary:
+  - `captureConsole`: [default: `true`] Capture all console output and pipe it to the terminal. Only customizable for CI
+
 ```json
 "config": {
   "sui-test": {
+    "client": {
+      "captureConsole": false
+    },
     "server": {
       "forceTranspilation": ["@adv-ui/vendor-by-consents-loader"],
       "esmOverride": true

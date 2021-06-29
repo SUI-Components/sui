@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "jsx": "react-jsx",
+    "module": "ES6",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "outDir": "./lib",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es5",
+  },
+  "exclude": ["node_modules", "lib"],
+  "types": [
+    "@s-ui/react-router/src/types.d.ts"
+  ]
+}

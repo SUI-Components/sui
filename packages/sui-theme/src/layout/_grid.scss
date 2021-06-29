@@ -16,6 +16,8 @@
 // @include sui-cell-of($col-num, $gutter: $custom-gutter)
 
 // Grid
+@use 'sass:math';
+
 @mixin sui-grid($add-gutter: true, $inline: false, $gutter: $gutter) {
   display: flex;
 
@@ -59,7 +61,7 @@
 }
 
 @mixin sui-cell-of($col-num, $gutter: $gutter) {
-  $w-content: 100% / $col-num;
+  $w-content: math.div(100%, $col-num);
 
   @include sui-cell($gutter: $gutter);
   flex-basis: calc(#{$w-content} - #{$gutter});

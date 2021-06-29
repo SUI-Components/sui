@@ -1,5 +1,43 @@
 # CHANGELOG
 
+# 4.34.0 (2021-06-29)
+
+
+
+# 4.33.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** improve karma config construction ([81d803d](https://github.com/SUI-Components/sui/commit/81d803da988c2ff246962dd46774af17990c6a5b))
+* **packages/sui-test:** improve readability thanks to midu ([a00de2f](https://github.com/SUI-Components/sui/commit/a00de2f0c2b9328055827f6e27e13e2e3a01355a))
+
+
+
+# 4.32.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** fix capture console option in karma config ([4d5ef53](https://github.com/SUI-Components/sui/commit/4d5ef53d1ad5028f301e1cd73b9fd7e62ab8b289))
+
+
+
+# 4.31.0 (2021-06-22)
+
+
+
+# 4.30.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-test:** allow for custom viewport height and width ([6809468](https://github.com/SUI-Components/sui/commit/680946842b20df055ca3ead63dc73bf334a57a80))
+* **packages/sui-test:** enable or disable logs in ci for browser test ([77db5aa](https://github.com/SUI-Components/sui/commit/77db5aa3f35eae8722db61bf1650df91f8ae2cf4))
+* **packages/sui-test:** Use latest babel dependencies ([54debd1](https://github.com/SUI-Components/sui/commit/54debd10d245cad54e4d38f5082ff50f56af516f))
+
+
+
 # 4.29.0 (2021-06-03)
 
 

@@ -17,6 +17,8 @@
 // @include grid-value(xs, 6); // Added a `xs` breakpoint, 6 columns
 // @include grid-value(sm, 12); // Added a `sm` breakpoint, 12 columns
 
+@use 'sass:math';
+
 $grid-columns: 12;
 
 @mixin grid-parent($gap) {
@@ -27,7 +29,7 @@ $grid-columns: 12;
 }
 
 @mixin grid-flex-basis($columns) {
-  min-width: (100% / $grid-columns) * $columns;
+  min-width: math.div(100%, $grid-columns) * $columns;
 }
 
 @mixin grid-value($breakpoint-name, $columns) {

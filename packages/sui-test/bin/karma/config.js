@@ -1,5 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
+const {clientConfig} = require('../../src/config')
+
+const {captureConsole = true} = clientConfig
 
 const config = {
   singleRun: true,
@@ -83,6 +86,7 @@ const config = {
   },
 
   client: {
+    captureConsole,
     mocha: {
       reporter: 'html'
     }

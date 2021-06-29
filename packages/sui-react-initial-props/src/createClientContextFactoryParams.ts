@@ -1,4 +1,6 @@
-export default () => ({
+import { ContextFactoryParams } from './types'
+
+export default (): ContextFactoryParams => ({
   appConfig: window.__APP_CONFIG__,
   cookies: document.cookie,
   isClient: true,
