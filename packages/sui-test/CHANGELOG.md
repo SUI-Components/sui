@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 4.34.0 (2021-06-29)
+
+
+
 # 4.33.0 (2021-06-22)
 
 
@@ -28,6 +32,7 @@
 
 ### Features
 
+* **packages/sui-test:** allow for custom viewport height and width ([6809468](https://github.com/SUI-Components/sui/commit/680946842b20df055ca3ead63dc73bf334a57a80))
 * **packages/sui-test:** enable or disable logs in ci for browser test ([77db5aa](https://github.com/SUI-Components/sui/commit/77db5aa3f35eae8722db61bf1650df91f8ae2cf4))
 * **packages/sui-test:** Use latest babel dependencies ([54debd1](https://github.com/SUI-Components/sui/commit/54debd10d245cad54e4d38f5082ff50f56af516f))
 
