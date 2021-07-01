@@ -10,7 +10,11 @@
     "outDir": "./lib",
     "skipLibCheck": true,
     "strict": true,
-    "target": "es5"
+    "target": "es5",
+    "types": [
+      "react",
+      "node"
+    ]
   },
   "exclude": ["node_modules", "lib"],
   "typeAcquisition": { "enable": true }
