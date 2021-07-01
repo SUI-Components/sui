@@ -2,9 +2,10 @@
   "name": "@s-ui/react-context",
   "version": "1.6.0",
   "description": "",
-  "main": "./lib/index.js",
+  "main": "lib/index",
+  "types": "src/index.tsx",
   "scripts": {
-    "lib": "babel --presets=sui ./src -d lib",
+    "lib": "rm -rf ./lib && tsc",
     "prepare": "npm run lib"
   },
   "keywords": [],

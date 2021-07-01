@@ -2,16 +2,20 @@
   "compilerOptions": {
     "declaration": true,
     "jsx": "react-jsx",
-    "module": "ES6",
+    "module": "es6",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
+    "baseUrl": ".",
     "outDir": "./lib",
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
+    "types": [
+      "react",
+      "node"
+    ]
   },
   "exclude": ["node_modules", "lib"],
-  "types": [
-    "@s-ui/react-router/src/types.d.ts"
-  ]
+  "typeAcquisition": { "enable": true }
 }

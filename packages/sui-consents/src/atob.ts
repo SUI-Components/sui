@@ -1,9 +1,7 @@
 /**
  * Isomorphic atob solution
- * @param {string} encodedData
- * @returns {string}
  */
-export default encodedData => {
+export default (encodedData: string): string => {
   if (typeof window !== 'undefined') {
     return window.atob(encodedData)
   }
