@@ -11,9 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@s-ui/react-context": "1"
-  },
   "devDependencies": {
     "@s-ui/react-context": "1",
     "@s-ui/test": "4",

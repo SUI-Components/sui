@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
+    "@s-ui/react-context": "1",
     "prop-types": "15",
     "react": "16 || 17"
   },

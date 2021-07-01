@@ -1,5 +1,3 @@
-declare module '@s-ui/react-context'
-
 export interface Purpose {
   consents: {
     /**
