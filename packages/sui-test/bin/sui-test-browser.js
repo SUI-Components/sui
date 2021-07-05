@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-require('./karma/patch')
 const program = require('commander')
 const chalk = require('chalk')
 const runner = require('./karma')

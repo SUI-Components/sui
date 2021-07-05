@@ -29,7 +29,6 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   }
 
   config.files = [
-    `${CWD}/node_modules/@babel/polyfill/dist/polyfill.min.js`,
     srcPattern ? `${CWD}/${srcPattern}` : '',
     `${CWD}/${pattern}`
   ].filter(Boolean)

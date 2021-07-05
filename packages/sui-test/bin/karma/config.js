@@ -17,9 +17,18 @@ const config = {
 
   browserDisconnectTolerance: 1,
 
+  webpackMiddleware: {
+    stats: {
+      all: false,
+      errors: true,
+      timings: true
+    }
+  },
+
   webpack: {
     devtool: 'eval',
     mode: 'development',
+    stats: 'minimal',
     resolve: {
       alias: {
         '@s-ui/react-context': path.resolve(
