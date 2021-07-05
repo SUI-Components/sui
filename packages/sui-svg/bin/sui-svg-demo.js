@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const {createServer} = require('vite')
-const path = require('path')
+import {createServer} from 'vite'
+import {join, resolve} from 'path'
 
-const root = path.join(__dirname, '..', 'src')
-const icons = path.resolve(process.cwd(), 'lib', '_demo.js')
+const root = join(__dirname, '..', 'src')
+const icons = resolve(process.cwd(), 'lib', '_demo.js')
 
 ;(async () => {
   const server = await createServer({
