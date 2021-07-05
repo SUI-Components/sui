@@ -109,7 +109,8 @@ module.exports = {
         project: './tsconfig.json'
       },
       rules: {
-        'no-return-await': 'off',
+        'no-return-await': RULES.OFF,
+        'react/prop-types': RULES.OFF,
         'prettier/prettier': RULES.OFF
       }
     }
