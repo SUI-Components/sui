@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.21.0 (2021-07-05)
+
+
+### Features
+
+* **packages/sui-studio:** Prepare sui-studio for new sui-test ([962293b](https://github.com/SUI-Components/sui/commit/962293bbb53c2e0d81206f053a607afe76d83736))
+
+
+
 # 10.20.0 (2021-06-29)
 
 
