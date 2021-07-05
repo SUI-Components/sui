@@ -81,9 +81,11 @@ module.exports = {
   rules: {
     ...REACT_RULES,
     ...TESTING_RULES,
+    '@babel/no-unused-expressions': RULES.OFF,
     'accessor-pairs': RULES.OFF,
     'array-callback-return': RULES.WARNING,
-    '@babel/no-unused-expressions': RULES.OFF,
+    'import/no-webpack-loader-syntax': RULES.WARNING,
+    'node/no-path-concat': RULES.WARNING,
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
