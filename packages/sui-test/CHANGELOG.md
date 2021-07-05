@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 5.0.0 (2021-07-05)
+
+
+### Features
+
+* **packages/sui-test:** Add less noisy server tests ([8494821](https://github.com/SUI-Components/sui/commit/84948211af1869c0765c5fc546226ab80e1584ea))
+* **packages/sui-test:** Upgrade dependencies of sui-test, less verbose and less patch ([6213cac](https://github.com/SUI-Components/sui/commit/6213cac69280925d5255fab389768e35db3775bb))
+* **packages/sui-test:** Use latest mocha version ([5dc5dc2](https://github.com/SUI-Components/sui/commit/5dc5dc29f1dc49a65197dd7ea864157b84399f5c))
+
+
+
 # 4.34.0 (2021-06-29)
 
 
