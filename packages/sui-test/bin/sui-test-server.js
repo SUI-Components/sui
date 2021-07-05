@@ -24,6 +24,7 @@ program
   .parse(process.argv)
 
 const {pattern, watch, inspect, timeout} = program
+const ci = Boolean(process.env.CI)
 
 serialSpawn([
   [
@@ -34,7 +35,8 @@ serialSpawn([
       '--recursive',
       inspect && '--inspect-brk',
       watch && '--watch',
-      timeout && `--timeout ${timeout}`
+      timeout && `--timeout ${timeout}`,
+      ci && `--reporter min`
     ].filter(Boolean)
   ]
 ]).catch(err => {
