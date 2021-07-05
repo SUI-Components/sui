@@ -69,9 +69,7 @@ module.exports = {
     'standard',
     'standard-react',
     'plugin:cypress/recommended',
-    'prettier',
-    'prettier/standard',
-    'prettier/react'
+    'prettier'
   ],
   plugins: [
     '@babel',
@@ -84,6 +82,7 @@ module.exports = {
     ...REACT_RULES,
     ...TESTING_RULES,
     'accessor-pairs': RULES.OFF,
+    'array-callback-return': RULES.WARNING,
     '@babel/no-unused-expressions': RULES.OFF,
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
@@ -97,6 +96,7 @@ module.exports = {
     ],
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
+    'prefer-regex-literals': RULES.WARNING,
     'prettier/prettier': [RULES.ERROR, prettierOptions]
   },
   overrides: [
