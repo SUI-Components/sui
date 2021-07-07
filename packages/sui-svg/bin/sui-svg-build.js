@@ -9,7 +9,7 @@ import {join} from 'path'
 import toCamelCase from 'just-camel-case'
 import {transformAsync} from '@babel/core'
 
-import template from '../templates/icon-component'
+import template from '../templates/icon-component.js'
 const exec = promisify(require('child_process').exec)
 
 const ATOM_ICON_VERSION = 1
