@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const BASE_DIR = process.cwd()
-const fse = require('fs-extra')
-const {spawn} = require('child_process')
+import fse from 'fs-extra'
+import childProcess from 'child_process'
 
+const {spawn} = childProcess
+
+const BASE_DIR = process.cwd()
 const [, , param] = process.argv
 const HELP_PARAM = ['--help', '-h']
 
