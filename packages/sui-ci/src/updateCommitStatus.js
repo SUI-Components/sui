@@ -1,12 +1,9 @@
-const {promisify} = require('util')
-const exec = promisify(require('child_process').exec)
-const fetch = require('node-fetch')
+import {promisify} from 'util'
+import fetch from 'node-fetch'
+import {exec as execNode} from 'child_process'
+import {STATUS_CONTEXT, STATUS_DESCRIPTION, STATUS_STATES} from './constants'
 
-const {
-  STATUS_CONTEXT,
-  STATUS_DESCRIPTION,
-  STATUS_STATES
-} = require('./constants')
+const exec = promisify(execNode)
 
 const getDomain = (url = '') => {
   const cleanUrl = url.trim().replace('\n', '')
@@ -61,7 +58,7 @@ function createDefaultDescriptionDictionary(topic) {
  * @param {string} params.repoSlug Slug with the format ${owner}/${repositoryName}
  * @returns {Promise}
  */
-module.exports = async function updateCommitStatus({
+export default async function updateCommitStatus({
   commit,
   gitHubToken,
   repoSlug,
