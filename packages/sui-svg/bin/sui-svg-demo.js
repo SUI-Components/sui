@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import {createServer} from 'vite'
-import {join, resolve} from 'path'
+import {resolve} from 'path'
 
-const root = join(__dirname, '..', 'src')
+const {pathname: root} = new URL('../src', import.meta.url)
+
 const icons = resolve(process.cwd(), 'lib', '_demo.js')
 
 ;(async () => {

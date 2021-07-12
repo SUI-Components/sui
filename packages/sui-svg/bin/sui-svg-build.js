@@ -3,14 +3,19 @@
 /* eslint no-console:0 */
 import {optimize} from 'svgo'
 import fg from 'fast-glob'
-import {copy, outputFile, emptyDir, readFile} from 'fs-extra'
+import fs from 'fs-extra'
 import {promisify} from 'util'
 import {join} from 'path'
 import toCamelCase from 'just-camel-case'
 import {transformAsync} from '@babel/core'
+import {createRequire} from 'module'
+import {exec as execWithCallback} from 'child_process'
 
 import template from '../templates/icon-component.js'
-const exec = promisify(require('child_process').exec)
+
+const require = createRequire(import.meta.url)
+const exec = promisify(execWithCallback)
+const {copy, outputFile, emptyDir, readFile} = fs
 
 const ATOM_ICON_VERSION = 1
 const ATOM_ICON_PACKAGE = '@s-ui/react-atom-icon'
