@@ -1,3 +1,5 @@
+import {readFile} from 'fs/promises'
+
 const {
   GITHUB_EVENT_PATH,
   GITHUB_REF = '',
@@ -11,19 +13,26 @@ const {
  * Get GitHub global event object used on GitHub Actions
  * @return {object}
  */
-const getGitHubEvent = () => require(GITHUB_EVENT_PATH)
+const getGitHubEvent = async () => {
+  try {
+    const file = await readFile(GITHUB_EVENT_PATH, 'utf-8')
+    return JSON.parse(file)
+  } catch (e) {
+    return {}
+  }
+}
 
 /**
  * Get the latest commit sha depending on the CI system used
  * @return {string}
  */
-export const getCommitSha = () => {
+export const getCommitSha = async () => {
   // For Travis, we try to get the sha from Pull Request and fallback to commit from master
   const commitFromTravis = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT
   if (commitFromTravis) return commitFromTravis
 
   // For GitHub Actions, extract from the GitHub global event for pullRequest
-  const {pull_request: pullRequest} = getGitHubEvent()
+  const {pull_request: pullRequest} = await getGitHubEvent()
   try {
     // try from pullRequest and fallback to branch latest sha
     return pullRequest.head.sha
