@@ -41,14 +41,15 @@ program
   )
   .parse(process.argv)
 
-const commit = getCommitSha()
 const {state: stateKey, topic, url: targetUrl} = program
 
-updateCommitStatus({
-  commit,
-  gitHubToken,
-  stateKey,
-  targetUrl,
-  topic,
-  repoSlug
+getCommitSha().then(commit => {
+  return updateCommitStatus({
+    commit,
+    gitHubToken,
+    stateKey,
+    targetUrl,
+    topic,
+    repoSlug
+  })
 })
