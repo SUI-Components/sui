@@ -27,7 +27,7 @@ module.exports = async ({
     config.exclude = ['**/lib/**/*.js']
 
     config.preprocessors = {
-      '**/!(lib)': ['coverage']
+      'src/**/*.js': ['coverage']
     }
     config.coverageReporter = {
       dir: `${CWD}/coverage`,
