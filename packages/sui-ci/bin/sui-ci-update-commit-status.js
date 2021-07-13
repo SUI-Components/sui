@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const program = require('commander')
-const {getCommitSha} = require('../src/git')
+import program from 'commander'
+import {getCommitSha} from '../src/git'
 
-const {updateCommitStatus} = require('../src/index')
+import {updateCommitStatus} from '../src/index'
 
 const {
   GH_TOKEN,

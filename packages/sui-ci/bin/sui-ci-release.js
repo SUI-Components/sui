@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const {release} = require('../src/index')
-const {checkIsPullRequest} = require('../src/git')
+import {release} from '../src/index'
+import {checkIsPullRequest} from '../src/git'
 
 const {
   GH_TOKEN, // deprecated
