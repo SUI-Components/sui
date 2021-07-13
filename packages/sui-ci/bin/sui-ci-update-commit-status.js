@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander'
-import {getCommitSha} from '../src/git'
-
-import {updateCommitStatus} from '../src/index'
+import {getCommitSha} from '../src/git.js'
+import {updateCommitStatus} from '../src/index.js'
 
 const {
   GH_TOKEN,

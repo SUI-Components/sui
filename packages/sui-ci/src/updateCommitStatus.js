@@ -1,7 +1,7 @@
 import {promisify} from 'util'
 import fetch from 'node-fetch'
 import {exec as execNode} from 'child_process'
-import {STATUS_CONTEXT, STATUS_DESCRIPTION, STATUS_STATES} from './constants'
+import {STATUS_CONTEXT, STATUS_DESCRIPTION, STATUS_STATES} from './constants.js'
 
 const exec = promisify(execNode)
 

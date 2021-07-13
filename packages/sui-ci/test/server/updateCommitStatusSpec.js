@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 
-import {mockGitHubRequest} from './utils'
-import {updateCommitStatus} from '../../src'
+import {mockGitHubRequest} from './utils.js'
+import {updateCommitStatus} from '../../src/index.js'
 
 const DEFAULT_PARAMS = {
   commit: 'commit-sha',
