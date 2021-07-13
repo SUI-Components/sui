@@ -17,7 +17,7 @@ const getGitHubEvent = () => require(GITHUB_EVENT_PATH)
  * Get the latest commit sha depending on the CI system used
  * @return {string}
  */
-exports.getCommitSha = () => {
+export const getCommitSha = () => {
   // For Travis, we try to get the sha from Pull Request and fallback to commit from master
   const commitFromTravis = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT
   if (commitFromTravis) return commitFromTravis
@@ -36,7 +36,7 @@ exports.getCommitSha = () => {
  * Determine if we're on a pull request supporting different CI systems
  * @return {boolean}
  */
-exports.checkIsPullRequest = () => {
+export const checkIsPullRequest = () => {
   // For Travis we need to transform string to a Boolean
   if (TRAVIS_PULL_REQUEST) return TRAVIS_PULL_REQUEST !== 'false'
 
