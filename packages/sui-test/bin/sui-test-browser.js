@@ -21,6 +21,7 @@ program
   )
   .option('--src-pattern <srcPattern>', 'Define the source directory', false)
   .option('-T, --timeout <ms>', 'Timeout', 2000)
+  .option('--coverage', 'Run the coverage preprocessor', false)
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -33,8 +34,17 @@ program
   })
   .parse(process.argv)
 
-const {watch, ci, pattern, ignorePattern, srcPattern, timeout} = program
-runner({watch, ci, pattern, ignorePattern, srcPattern, timeout})
+const {
+  coverage,
+  watch,
+  ci,
+  pattern,
+  ignorePattern,
+  srcPattern,
+  timeout
+} = program
+
+runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
