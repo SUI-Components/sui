@@ -35,13 +35,13 @@ program
   .parse(process.argv)
 
 const {
-  coverage,
-  watch,
   ci,
-  pattern,
+  coverage,
   ignorePattern,
+  pattern,
   srcPattern,
-  timeout
+  timeout,
+  watch
 } = program
 
 runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})

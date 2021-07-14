@@ -24,7 +24,6 @@ module.exports = async ({
 
   if (coverage || ci) {
     config.reporters = ['coverage'].concat(config.reporters)
-    config.exclude = ['**/lib/**/*.js']
 
     config.preprocessors = {
       'src/**/*.js': ['coverage']
