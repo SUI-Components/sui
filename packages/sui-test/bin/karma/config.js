@@ -81,7 +81,7 @@ const config = {
                   [
                     require.resolve('babel-plugin-istanbul'),
                     {
-                      exclude: ['**/lib/**/*.js']
+                      exclude: ['**/lib/**/*.js', '**/test/**/*.js']
                     }
                   ],
                   require.resolve('./babelPatch.js')
