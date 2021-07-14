@@ -1,17 +1,13 @@
 {
   "name": "@s-ui/studio-create",
-  "version": "4.19.0",
+  "version": "4.20.0",
   "description": " CLI to create studios for React Components development.",
   "main": "src/index.js",
+  "type": "module",
   "bin": {
     "sui-studio-create": "./src/index.js"
   },
   "preferGlobal": true,
-  "keywords": [
-    "SUIComponents",
-    "SUI Studio",
-    "SUI Studio Create"
-  ],
   "author": "",
   "license": "MIT",
   "dependencies": {

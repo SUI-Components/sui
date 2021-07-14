@@ -14,4 +14,4 @@ export default MemoAtomIcon
 `
 }
 
-module.exports = template
+export default template

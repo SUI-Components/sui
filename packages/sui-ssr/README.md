@@ -250,9 +250,9 @@ Configs accepted:
   - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
   - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
   - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
-  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: **Route path or regexp** - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS. 
+  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: **Route path or regexp** - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS.
     - In case of **regexp**, you can obtain the value in **getInitialProps** **route** second param, and escape **\\** with **\\\\** for validate the json.
-   
+
     See a simple example below:
       ```json
       {
@@ -368,7 +368,7 @@ SOME_OTHER_ENV_VAR: https://pre.somedomain.com/contact
 
 ## Server Side Redirects
 
-SUI-SSR allows 301 redirects in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
+SUI-SSR allows any kind of redirects (3XX) in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
 Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
 ## Third Parties

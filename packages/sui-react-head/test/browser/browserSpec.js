@@ -6,7 +6,7 @@ import {
   waitForDomChange
 } from '@testing-library/react'
 
-import Head, {HeadProvider} from '../src/index'
+import Head, {HeadProvider} from '../../lib/index'
 descriptorsByEnvironmentPatcher()
 
 const getMetaByName = name =>

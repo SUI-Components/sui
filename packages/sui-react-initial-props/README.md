@@ -154,7 +154,7 @@ The response is a promise resolved with two parameters. In addition, you can def
 Field | Type | Description
 --- | --- | ---
 initialProps | `object` | Result of executing the `getInitialProps` of the pageComponent.
-initialprops.__HTTP__ | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 301 server side redirects using [sui-ssr](https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr). 
+initialprops.__HTTP__ | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 3XX server side redirects using [sui-ssr](https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr). By default, redirect status code is 301, but you may set a valid `redirectStatusCode` option set in the file `@s-ui/ssr/status-codes`.
 reactString | `string` | String with the renderized app ready to be sent.
 
 #### loadPage(contextFactory, importPage)

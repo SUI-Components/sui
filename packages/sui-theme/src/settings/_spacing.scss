@@ -16,8 +16,8 @@ $p-xxl: $p-base * 4 !default; // 32px
 $p-xl: $p-base * 3 !default; // 24px
 $p-l: $p-base * 2 !default; // 16px
 $p-m: $p-base !default; // 8px
-$p-s: $p-base / 2 !default; // 4px
-$p-xs: $p-base / 4 !default; // 2px
+$p-s: $p-base * 0.5 !default; // 4px
+$p-xs: $p-base * 0.25 !default; // 2px
 
 // Margins
 $m-base: 8px; // 8px
@@ -28,12 +28,12 @@ $m-xxl: $m-base * 4 !default; // 32px
 $m-xl: $m-base * 3 !default; // 24px
 $m-l: $m-base * 2 !default; // 16px
 $m-m: $m-base !default; // 8px
-$m-s: $m-base / 2 !default; // 4px
-$m-xs: $m-base / 4 !default; // 2px
+$m-s: $m-base * 0.5 !default; // 4px
+$m-xs: $m-base * 0.25 !default; // 2px
 
 // Gutter
 $gutter: $p-l !default;
-$gutter-s: $gutter / 2 !default;
+$gutter-s: $gutter * 0.5 !default;
 $gutter-l: $gutter * 2 !default;
 
 // Gap
@@ -45,4 +45,4 @@ $g-xxl: $g-base * 4; // 32px
 $g-xl: $g-base * 3; // 24px
 $g-l: $g-base * 2; // 16px
 $g-m: $g-base; // 8px
-$g-s: $g-base / 2; // 4px
+$g-s: $g-base * 0.5; // 4px

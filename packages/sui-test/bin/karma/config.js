@@ -1,5 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
+const {clientConfig} = require('../../src/config')
+
+const {captureConsole = true} = clientConfig
 
 const config = {
   singleRun: true,
@@ -14,9 +17,18 @@ const config = {
 
   browserDisconnectTolerance: 1,
 
+  webpackMiddleware: {
+    stats: {
+      all: false,
+      errors: true,
+      timings: true
+    }
+  },
+
   webpack: {
     devtool: 'eval',
     mode: 'development',
+    stats: 'minimal',
     resolve: {
       alias: {
         '@s-ui/react-context': path.resolve(
@@ -66,7 +78,12 @@ const config = {
                   ]
                 ],
                 plugins: [
-                  require.resolve('babel-plugin-istanbul'),
+                  [
+                    require.resolve('babel-plugin-istanbul'),
+                    {
+                      exclude: ['**/lib/**/*.js']
+                    }
+                  ],
                   require.resolve('./babelPatch.js')
                 ]
               }
@@ -83,6 +100,7 @@ const config = {
   },
 
   client: {
+    captureConsole,
     mocha: {
       reporter: 'html'
     }

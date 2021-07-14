@@ -1,5 +1,35 @@
 # CHANGELOG
 
+# 7.25.0 (2021-06-29)
+
+
+
+# 7.24.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest babel dependencies ([66149cf](https://github.com/SUI-Components/sui/commit/66149cf287ac2282ea24c9e4a2e8e346cc431c30))
+
+
+
+# 7.23.0 (2021-06-15)
+
+
+### Features
+
+* **packages/sui-bundler:** add a way to measure build time ([4580fa5](https://github.com/SUI-Components/sui/commit/4580fa5d285ffcc895ad4d9cb648667021559ead))
+* **packages/sui-bundler:** add feature flags ([14a113e](https://github.com/SUI-Components/sui/commit/14a113e21a2f9a961c8e13bd2da70e97ae0c585a))
+* **packages/sui-bundler:** apply feedback ([8b30c77](https://github.com/SUI-Components/sui/commit/8b30c77b2adb2fa667f18759854a4f757374cb28))
+* **packages/sui-bundler:** fix linking reload ([f811078](https://github.com/SUI-Components/sui/commit/f81107897c4740e8040bf331364af87d25e98805))
+* **packages/sui-bundler:** remove beta version ([2fc75d4](https://github.com/SUI-Components/sui/commit/2fc75d464c3c216e58df41a884a623b9d3178db2))
+* **packages/sui-bundler:** remove production super sass loader support ([b3e9263](https://github.com/SUI-Components/sui/commit/b3e926300b9a0ff23d1d05a1f98add5e584f7e6a))
+* **packages/sui-bundler:** try fast sass loader ([abc350f](https://github.com/SUI-Components/sui/commit/abc350f74a8997c058dc924774358ec13c048360))
+* **packages/sui-bundler:** try super sass loader ([4b65379](https://github.com/SUI-Components/sui/commit/4b6537901ec82ebe54369edc491638d059c48e43))
+* **packages/sui-bundler:** update README ([031a195](https://github.com/SUI-Components/sui/commit/031a195229fe9df5cd91613d86d47f7a3dfc335a))
+
+
+
 # 7.22.0 (2021-06-01)
 
 

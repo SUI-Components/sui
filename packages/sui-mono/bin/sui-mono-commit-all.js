@@ -34,14 +34,21 @@ const {message, type} = program
 !type && showError('Commit type is mandatory')
 
 /**
- * Checks if given path has changes
+ * Checks if given path has changes and `git add` them
  * @param  {String}  path Folder to check
  * @return {Promise<Boolean>}
  */
 const hasChangedFiles = async path => {
-  const {stdout = ''} = await exec(
-    `git add . && git status ${path} --porcelain`
-  ).catch(err => console.error(err) && '')
+  let stdout = ''
+
+  try {
+    await exec(`git add .`, {cwd: path})
+    const status = await exec(`git status ${path} --porcelain`)
+    stdout = status.stdout || ''
+  } catch (error) {
+    console.error(error)
+  }
+
   return stdout.trim() !== ''
 }
 

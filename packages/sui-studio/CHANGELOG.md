@@ -1,5 +1,79 @@
 # CHANGELOG
 
+# 10.22.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-studio:** Add coverage param for studio binary ([dd9548c](https://github.com/SUI-Components/sui/commit/dd9548ce9cf2646185b1f81757ecd2cd708e73c7))
+
+
+
+# 10.21.0 (2021-07-05)
+
+
+### Features
+
+* **packages/sui-studio:** Prepare sui-studio for new sui-test ([962293b](https://github.com/SUI-Components/sui/commit/962293bbb53c2e0d81206f053a607afe76d83736))
+
+
+
+# 10.20.0 (2021-06-29)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Allow non existent repository field ([6bf2b7f](https://github.com/SUI-Components/sui/commit/6bf2b7f65c324cf58070c715084ab51eea71c48b))
+
+
+
+# 10.19.0 (2021-06-29)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** patch ([ca363f1](https://github.com/SUI-Components/sui/commit/ca363f1f872b20e4b953ad1b146e05b32bcbdede))
+* **packages/sui-studio:** patch ([bd7db58](https://github.com/SUI-Components/sui/commit/bd7db5823ad68c2c037a5fdabf1e69e4438d4e75))
+
+
+
+# 10.18.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** build relative demo components on only changes ([617649e](https://github.com/SUI-Components/sui/commit/617649e295a84e7aa961626116dc68f78e7f6a64))
+* **packages/sui-studio:** fix linting errors ([099849e](https://github.com/SUI-Components/sui/commit/099849e3a07d4805fb11b28dee28587d37da28cb))
+
+
+
+# 10.17.0 (2021-06-18)
+
+
+### Features
+
+* **packages/sui-studio:** Make search case insensitive ([0e87d0c](https://github.com/SUI-Components/sui/commit/0e87d0c3c2261706a15848d078e5f035956dcd8e))
+
+
+
+# 10.16.0 (2021-06-17)
+
+
+### Features
+
+* **packages/sui-studio:** Add package.json to demo with private field ([e317067](https://github.com/SUI-Components/sui/commit/e3170672c3c41bac4ae0c4ba8b593a88d9c40a31))
+
+
+
+# 10.15.0 (2021-06-16)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** adapt only changes flag to studio 10 new structure ([d61411d](https://github.com/SUI-Components/sui/commit/d61411ddad99852912585af4fad6f9b4138a60a2))
+
+
+
 # 10.14.0 (2021-06-04)
 
 
