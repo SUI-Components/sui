@@ -42,12 +42,23 @@ if (!module.parent) {
       },
       []
     )
+    .option(
+      '--link-multiple-packages [packages]',
+      'Replace each comma-separated given package with an absolute path to this folder',
+      (v, m) => {
+        return m.concat(v.split(','))
+      },
+      []
+    )
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
       console.log('    $ sui-bundler dev')
       console.log('    $ sui-bundler dev --context /my/app/folder')
       console.log('    $ sui-bundler dev --link-package /my/domain/folder')
+      console.log(
+        '    $ sui-bundler dev --link-multiple-packages /my/domain/folder,/my/literals/folder'
+      )
       console.log('')
     })
     .parse(process.argv)
@@ -60,7 +71,8 @@ process.noDeprecation = true
 
 const start = async ({
   config = webpackConfig,
-  packagesToLink = program.linkPackage || []
+  singlePackagesToLink = program.linkPackage || [],
+  multiplePackagesToLink = program.linkMultiplePackages || []
 } = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
@@ -78,6 +90,8 @@ const start = async ({
   const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
+  // bundle all packages given by arguments
+  const packagesToLink = singlePackagesToLink.concat(multiplePackagesToLink)
   const nextConfig = linkLoaderConfigBuilder({
     config,
     linkAll: program.linkAll,
