@@ -20,6 +20,7 @@ const getGitHubEvent = async () => {
     console.log(file)
     return JSON.parse(file)
   } catch (e) {
+    console.error(e)
     return {}
   }
 }
