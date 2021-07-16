@@ -29,7 +29,7 @@
     "@s-ui/mono": "2",
     "@s-ui/precommit": "2",
     "@s-ui/react-context": "1",
-    "@s-ui/test": "4",
+    "@s-ui/test": "5",
     "chai": "4.2.0",
     "husky": "4.3.0",
     "react": "17",
