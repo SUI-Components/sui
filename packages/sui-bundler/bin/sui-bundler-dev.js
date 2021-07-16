@@ -30,23 +30,15 @@ if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
     .option(
-      '--link-all [monorepo]',
+      '-L, --link-all [monorepo]',
       'Link all packages inside of monorepo multipackage'
     )
     .option(
-      '--link-package [package]',
+      '-l, --link-package [package]',
       'Replace each occurrence of this package with an absolute path to this folder',
       (v, m) => {
         m.push(v)
         return m
-      },
-      []
-    )
-    .option(
-      '--link-multiple-packages [packages]',
-      'Replace each comma-separated given package with an absolute path to this folder',
-      (v, m) => {
-        return m.concat(v.split(','))
       },
       []
     )
@@ -56,9 +48,6 @@ if (!module.parent) {
       console.log('    $ sui-bundler dev')
       console.log('    $ sui-bundler dev --context /my/app/folder')
       console.log('    $ sui-bundler dev --link-package /my/domain/folder')
-      console.log(
-        '    $ sui-bundler dev --link-multiple-packages /my/domain/folder,/my/literals/folder'
-      )
       console.log('')
     })
     .parse(process.argv)
@@ -71,8 +60,7 @@ process.noDeprecation = true
 
 const start = async ({
   config = webpackConfig,
-  singlePackagesToLink = program.linkPackage || [],
-  multiplePackagesToLink = program.linkMultiplePackages || []
+  packagesToLink = program.linkPackage || []
 } = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
@@ -90,8 +78,6 @@ const start = async ({
   const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
-  // bundle all packages given by arguments
-  const packagesToLink = singlePackagesToLink.concat(multiplePackagesToLink)
   const nextConfig = linkLoaderConfigBuilder({
     config,
     linkAll: program.linkAll,
