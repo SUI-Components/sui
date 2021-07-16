@@ -35,7 +35,7 @@ describe('useExperiment hook', () => {
 
     describe.client('and the hook is executed by the browser', () => {
       describe('and window.analytics.track exists', () => {
-        before(() => {
+        beforeEach(() => {
           window.analytics = {
             ready: cb => cb(),
             track: sinon.spy()
@@ -43,14 +43,14 @@ describe('useExperiment hook', () => {
           sinon.spy(console, 'error')
         })
 
-        after(() => {
+        afterEach(() => {
           delete window.analytics
           console.error.restore()
         })
 
         it('should return the right variationName and launch the Experiment Viewed event', () => {
           const {result} = renderHook(
-            () => useExperiment({experimentName: 'test_experiment_id'}),
+            () => useExperiment({experimentName: 'test_experiment_id_1'}),
             {
               wrapper
             }
@@ -63,7 +63,7 @@ describe('useExperiment hook', () => {
           )
           expect(window.analytics.track.args[0][1]).to.deep.equal({
             variationName: 'activateExperimentA',
-            experimentName: 'test_experiment_id'
+            experimentName: 'test_experiment_id_1'
           })
         })
 
@@ -80,6 +80,24 @@ describe('useExperiment hook', () => {
             expect(result.current.variation).to.equal('variation1')
           })
         })
+
+        describe('when the same experiment is loaded more than once', () => {
+          it('should only track once', () => {
+            renderHook(
+              () => useExperiment({experimentName: 'test_experiment_id'}),
+              {
+                wrapper
+              }
+            )
+            renderHook(
+              () => useExperiment({experimentName: 'test_experiment_id'}),
+              {
+                wrapper
+              }
+            )
+            expect(window.analytics.track.args.length).to.equal(1)
+          })
+        })
       })
 
       describe('and window.analytics.track does not exist', () => {
@@ -94,7 +112,7 @@ describe('useExperiment hook', () => {
         it('should return the right variationName and log an error', () => {
           delete window.analytics
           const {result} = renderHook(
-            () => useExperiment({experimentName: 'test_experiment_id'}),
+            () => useExperiment({experimentName: 'test_experiment_id_2'}),
             {
               wrapper
             }
