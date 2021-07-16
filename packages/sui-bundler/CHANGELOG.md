@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 7.26.0 (2021-07-16)
+
+
+### Features
+
+* **packages/sui-bundler:** add command option to link multiple packages ([2d04198](https://github.com/SUI-Components/sui/commit/2d04198b2a2a60c8276f3ab5ab2d00a797eb3a70))
+* **packages/sui-bundler:** add shorthand for linking packages in build script for consistency ([a04e7a9](https://github.com/SUI-Components/sui/commit/a04e7a903f87a3a52b9bfcb93da15511e3819170))
+* **packages/sui-bundler:** implement shorthand options for linking packages ([e6ad861](https://github.com/SUI-Components/sui/commit/e6ad861641c351916d3226f267844815208c0dff))
+
+
+
 # 7.25.0 (2021-06-29)
 
 
