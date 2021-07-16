@@ -19,7 +19,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
   .option(
-    '--link-package [package]',
+    '-l, --link-package [package]',
     'Replace each occurrence of this package with an absolute path to this folder',
     (v, m) => {
       m.push(v)

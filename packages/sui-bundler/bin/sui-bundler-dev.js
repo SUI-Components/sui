@@ -30,11 +30,11 @@ if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
     .option(
-      '--link-all [monorepo]',
+      '-L, --link-all [monorepo]',
       'Link all packages inside of monorepo multipackage'
     )
     .option(
-      '--link-package [package]',
+      '-l, --link-package [package]',
       'Replace each occurrence of this package with an absolute path to this folder',
       (v, m) => {
         m.push(v)
