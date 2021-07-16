@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.22.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-studio:** Add coverage param for studio binary ([dd9548c](https://github.com/SUI-Components/sui/commit/dd9548ce9cf2646185b1f81757ecd2cd708e73c7))
+
+
+
 # 10.21.0 (2021-07-05)
 
 

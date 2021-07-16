@@ -78,7 +78,12 @@ const config = {
                   ]
                 ],
                 plugins: [
-                  require.resolve('babel-plugin-istanbul'),
+                  [
+                    require.resolve('babel-plugin-istanbul'),
+                    {
+                      exclude: ['**/lib/**/*.js', '**/test/**/*.js']
+                    }
+                  ],
                   require.resolve('./babelPatch.js')
                 ]
               }

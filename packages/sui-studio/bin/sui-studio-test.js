@@ -11,6 +11,7 @@ program
   .option('-C, --ci', 'Run components tests in CLI, headless mode')
   .option('-W, --watch', 'Watch mode')
   .option('-T, --timeout <timeout>', 'Timeout')
+  .option('--coverage', 'Create coverage', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -36,6 +37,7 @@ const run = async () => {
             'runtime-mocha',
             'index.js'
           ),
+          program.coverage && '--coverage',
           program.watch && '--watch',
           program.ci && '--ci',
           program.timeout && `-T ${program.timeout}`

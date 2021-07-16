@@ -1,5 +1,25 @@
 # CHANGELOG
 
+# 5.2.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-test:** add tests directory to excluded coverage directories ([a792a0d](https://github.com/SUI-Components/sui/commit/a792a0d8a40f785867a3409dbf4f74c5a6454427))
+
+
+
+# 5.1.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-test:** Add coverage param and exclude not needed files ([3cb2a8d](https://github.com/SUI-Components/sui/commit/3cb2a8dce4db4e7fef55866edfeaef48e9f1725d))
+* **packages/sui-test:** Remove exclude array ([4648d2b](https://github.com/SUI-Components/sui/commit/4648d2b97d3ea64ac64a3e127af23eb5277d7b25))
+* **packages/sui-test:** Use correct pattern ([d651fd9](https://github.com/SUI-Components/sui/commit/d651fd9386dfcd2c0216dfe328171e052ec2d778))
+
+
+
 # 5.0.0 (2021-07-05)
 
 
