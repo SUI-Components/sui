@@ -81,7 +81,7 @@ describe('useExperiment hook', () => {
           })
         })
 
-        describe('when the same experiment is loaded one more than once', () => {
+        describe('when the same experiment is loaded more than once', () => {
           it('should only track once', () => {
             renderHook(
               () => useExperiment({experimentName: 'test_experiment_id'}),
