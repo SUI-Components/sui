@@ -17,6 +17,7 @@
     "just-capitalize": "1.0.0",
     "just-kebab-case": "1.1.0",
     "lodash.debounce": "4.0.8",
+    "lodash.defer": "4.1.0",
     "lodash.throttle": "4.1.1",
     "nanoid": "3.1.23",
     "qs": "6.7.0",
