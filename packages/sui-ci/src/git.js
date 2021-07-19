@@ -15,15 +15,9 @@ const {
  */
 const getGitHubEvent = async () => {
   try {
-    console.log(GITHUB_EVENT_PATH)
-    console.log('before readFile')
     const file = await readFile(GITHUB_EVENT_PATH, 'utf-8')
-    console.log('content of file')
-    console.log(file)
     return JSON.parse(file)
   } catch (e) {
-    console.error('something wrong happened:')
-    console.error(e)
     return {}
   }
 }
