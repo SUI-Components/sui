@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-const program = require('commander')
-const {getCommitSha} = require('../src/git')
-
-const {updateCommitStatus} = require('../src/index')
+import program from 'commander'
+import {getCommitSha} from '../src/git.js'
+import {updateCommitStatus} from '../src/index.js'
 
 const {
   GH_TOKEN,
@@ -42,14 +41,15 @@ program
   )
   .parse(process.argv)
 
-const commit = getCommitSha()
 const {state: stateKey, topic, url: targetUrl} = program
 
-updateCommitStatus({
-  commit,
-  gitHubToken,
-  stateKey,
-  targetUrl,
-  topic,
-  repoSlug
+getCommitSha().then(commit => {
+  return updateCommitStatus({
+    commit,
+    gitHubToken,
+    stateKey,
+    targetUrl,
+    topic,
+    repoSlug
+  })
 })

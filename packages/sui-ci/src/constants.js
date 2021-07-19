@@ -2,14 +2,14 @@
  * Context to send to all status
  * @type {string}
  */
-const STATUS_CONTEXT = '@s-ui/ci'
+export const STATUS_CONTEXT = '@s-ui/ci'
 
 /**
  * Enum for status states
  * @readonly
  * @enum {string}
  */
-const STATUS_STATES = {
+export const STATUS_STATES = {
   KO: 'error',
   RUN: 'pending',
   OK: 'success'
@@ -20,7 +20,7 @@ const STATUS_STATES = {
  * @readonly
  * @enum {{[x: string]: string}}
  */
-const STATUS_DESCRIPTION = {
+export const STATUS_DESCRIPTION = {
   tests: {
     [STATUS_STATES.KO]: 'Failed passing tests!',
     [STATUS_STATES.OK]: 'All tests passed successfully!',
@@ -47,5 +47,3 @@ const STATUS_DESCRIPTION = {
     [STATUS_STATES.RUN]: 'Deploying your app...'
   }
 }
-
-module.exports = {STATUS_CONTEXT, STATUS_DESCRIPTION, STATUS_STATES}
