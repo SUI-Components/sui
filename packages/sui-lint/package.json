@@ -20,7 +20,7 @@
     "@babel/eslint-plugin": "7.14.5",
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
-    "eslint": "7.30.0",
+    "eslint": "7.31.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",
     "eslint-config-standard-react": "11.0.1",
@@ -33,14 +33,13 @@
     "eslint-plugin-promise": "5.1.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
-    "eslint-plugin-standard": "5.0.0",
     "prettier": "1.19.1",
     "simple-git": "1.126.0",
     "stylelint": "13.13.1",
     "stylelint-config-prettier": "8.0.2",
-    "stylelint-config-recommended-scss": "4.2.0",
+    "stylelint-config-recommended-scss": "4.3.0",
     "stylelint-prettier": "1.2.0",
-    "stylelint-scss": "3.19.0",
+    "stylelint-scss": "3.20.1",
     "ts-standard": "10.0.0"
   }
 }
