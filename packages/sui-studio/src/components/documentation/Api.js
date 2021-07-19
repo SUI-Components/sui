@@ -28,15 +28,7 @@ export default function Api({params}) {
     // if we have props, render all of them using React
     return keysOfProps.map(propName => {
       const {defaultValue = {}, required, type, description} = props[propName]
-      const {value = undefined} = defaultValue
-
-      if (typeof type === 'undefined') {
-        console.warn(
-          // eslint-disable-line
-          'It seem that you might have a prop with a defaultValue but it does not exist as propType'
-        )
-        return
-      }
+      const {value} = defaultValue
 
       return (
         <div className="sui-StudioProps-prop" key={propName}>
