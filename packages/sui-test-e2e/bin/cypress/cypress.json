@@ -1,0 +1,10 @@
+{
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "supportFile": false,
+  "video": false,
+  "screenshotOnRunFailure": false,
+  "trashAssetsBeforeRuns": true,
+  "viewportWidth": 1240,
+  "viewportHeight": 960
+}
