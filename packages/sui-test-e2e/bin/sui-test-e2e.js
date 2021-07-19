@@ -2,9 +2,8 @@
 /* eslint no-console:0 */
 
 import {join} from 'path'
-import {tmpdir} from 'os'
 import program from 'commander'
-import {existsSync, mkdirSync, writeFileSync} from 'fs'
+import {existsSync} from 'fs'
 import {createRequire} from 'module'
 import cypress from 'cypress'
 
