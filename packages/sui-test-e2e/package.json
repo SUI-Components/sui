@@ -1,0 +1,22 @@
+{
+  "name": "@s-ui/test-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "sui-test-e2e": "bin/sui-test-e2e.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@testing-library/cypress": "7.0.6",
+    "commander": "8.0.0",
+    "cypress": "7.7.0",
+    "cypress-file-upload": "5.0.8"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
