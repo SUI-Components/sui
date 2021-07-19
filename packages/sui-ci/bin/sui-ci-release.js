@@ -12,11 +12,12 @@ const {
 // to keep compatibility with previous environment variable
 // GITHUB_TOKEN usage is preferred
 const gitHubToken = GITHUB_TOKEN || GH_TOKEN
-const isPullRequest = checkIsPullRequest()
 
-release({
-  gitHubEmail,
-  gitHubToken,
-  gitHubUser,
-  isPullRequest
+checkIsPullRequest().then(isPullRequest => {
+  release({
+    gitHubEmail,
+    gitHubToken,
+    gitHubUser,
+    isPullRequest
+  })
 })

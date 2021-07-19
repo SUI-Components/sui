@@ -16,6 +16,7 @@ const {
 const getGitHubEvent = async () => {
   try {
     console.log(GITHUB_EVENT_PATH)
+    console.log('before readFile')
     const file = await readFile(GITHUB_EVENT_PATH, 'utf-8')
     console.log('content of file')
     console.log(file)
@@ -50,14 +51,14 @@ export const getCommitSha = async () => {
  * Determine if we're on a pull request supporting different CI systems
  * @return {boolean}
  */
-export const checkIsPullRequest = () => {
+export const checkIsPullRequest = async () => {
   // For Travis we need to transform string to a Boolean
   if (TRAVIS_PULL_REQUEST) return TRAVIS_PULL_REQUEST !== 'false'
 
   // For GitHub Actions, we extract that info from GitHub global event
   const {
     repository: {master_branch: masterBranch}
-  } = getGitHubEvent()
+  } = await getGitHubEvent()
   const [processBranch] = GITHUB_REF.split('/').reverse()
   // if the master branch from the github event is different as the branch used
   // then we're on a pull request
