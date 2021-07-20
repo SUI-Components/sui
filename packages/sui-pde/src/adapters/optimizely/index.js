@@ -151,7 +151,7 @@ export default class OptimizelyAdapter {
 
     // check for user consents only if featureKey is a feature that belongs to a feature test
     if (linkedExperimentNames.length > 0 && !this._hasUserConsents) {
-      return false
+      return {isActive: false, linkedExperiments: []}
     }
 
     return {

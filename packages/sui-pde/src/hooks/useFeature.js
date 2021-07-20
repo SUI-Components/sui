@@ -32,6 +32,7 @@ const trackLinkedExperimentsViewed = ({
   getExperimentVariation,
   attributes
 }) => {
+  if (!linkedExperiments) return
   linkedExperiments.forEach(experimentName => {
     const variationName = getExperimentVariation({
       name: experimentName,
@@ -61,23 +62,30 @@ export default function useFeature(featureKey, attributes, queryString) {
   })
 
   try {
-    const {isActive, linkedExperiments} = forcedValue
-      ? forcedValue === 'on'
-      : pde.isFeatureEnabled({featureKey, attributes})
+    if (forcedValue) {
+      return {isActive: forcedValue === 'on', linkedExperiments: []}
+    }
+    const {isActive, linkedExperiments} = pde.isFeatureEnabled({
+      featureKey,
+      attributes
+    })
 
     const variables = pde.getAllFeatureVariables({
       featureKey,
       attributes
     })
 
-    trackFeatureFlagViewed({isActive, track: strategy.track, featureKey})
+    trackFeatureFlagViewed({
+      isActive,
+      trackExperimentViewed: strategy.trackExperiment,
+      featureKey
+    })
     trackLinkedExperimentsViewed({
       linkedExperiments,
-      trackExperiment: strategy.track,
+      trackExperimentViewed: strategy.trackExperiment,
       getExperimentVariation: pde.getVariation,
       attributes
     })
-
     return {isActive, variables}
   } catch (error) {
     console.error(error)
