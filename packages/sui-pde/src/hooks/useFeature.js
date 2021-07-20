@@ -3,6 +3,45 @@ import PdeContext from '../contexts/PdeContext'
 import {getPlatformStrategy} from './platformStrategies'
 
 /**
+ * track feature flag's own Experiment Viewed event
+ * @param {object} param
+ * @param {boolean} param.isActive
+ * @param {function} param.trackExperimentViewed
+ * @param {string} param.featureKey
+ */
+const trackFeatureFlagViewed = ({
+  isActive,
+  trackExperimentViewed,
+  featureKey
+}) => {
+  const variationName = isActive ? 'On State' : 'Off State'
+  trackExperimentViewed({experimentName: featureKey, variationName})
+}
+
+/**
+ * track every linked experiment's Experiment Viewed event
+ * @param {object} param
+ * @param {linkedExperiments} string[] feature tests using the current feature flag
+ * @param {function} trackExperimentViewed
+ * @param {function} getExperimentVariation gets user variation linked to experiment
+ * @param {object} attributes user attributes to take into account for its segmentation
+ */
+const trackLinkedExperimentsViewed = ({
+  linkedExperiments,
+  trackExperimentViewed,
+  getExperimentVariation,
+  attributes
+}) => {
+  linkedExperiments.forEach(experimentName => {
+    const variationName = getExperimentVariation({
+      name: experimentName,
+      attributes
+    })
+    trackExperimentViewed({variationName, experimentName})
+  })
+}
+
+/**
  * Hook to use a feature toggle
  * @param {string} featureKey
  * @param {object} attributes
@@ -22,7 +61,7 @@ export default function useFeature(featureKey, attributes, queryString) {
   })
 
   try {
-    const isActive = forcedValue
+    const {isActive, linkedExperiments} = forcedValue
       ? forcedValue === 'on'
       : pde.isFeatureEnabled({featureKey, attributes})
 
@@ -31,8 +70,17 @@ export default function useFeature(featureKey, attributes, queryString) {
       attributes
     })
 
+    trackFeatureFlagViewed({isActive, track: strategy.track, featureKey})
+    trackLinkedExperimentsViewed({
+      linkedExperiments,
+      trackExperiment: strategy.track,
+      getExperimentVariation: pde.getVariation,
+      attributes
+    })
+
     return {isActive, variables}
   } catch (error) {
+    console.error(error)
     return {isActive: false, variables: {}}
   }
 }
