@@ -101,7 +101,7 @@ const {
   userAgentAppend,
   viewportHeight,
   viewportWidth
-} = program
+} = program.opts()
 
 const cypressConfig = {
   ...DEFAULT_CYPRESS_CONFIG,
