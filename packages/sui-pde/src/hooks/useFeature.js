@@ -65,6 +65,7 @@ export default function useFeature(featureKey, attributes, queryString) {
     if (forcedValue) {
       return {isActive: forcedValue === 'on', linkedExperiments: []}
     }
+
     const {isActive, linkedExperiments} = pde.isFeatureEnabled({
       featureKey,
       attributes
