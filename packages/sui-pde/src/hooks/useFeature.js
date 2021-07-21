@@ -2,6 +2,9 @@ import {useContext} from 'react'
 import PdeContext from '../contexts/PdeContext'
 import {getPlatformStrategy} from './platformStrategies'
 
+const VARIATION_NAME_ON = 'On State'
+const VARIATION_NAME_OFF = 'Off State'
+
 /**
  * track feature flag's own Experiment Viewed event
  * @param {object} param
@@ -14,7 +17,7 @@ const trackFeatureFlagViewed = ({
   trackExperimentViewed,
   featureKey
 }) => {
-  const variationName = isActive ? 'On State' : 'Off State'
+  const variationName = isActive ? VARIATION_NAME_ON : VARIATION_NAME_OFF
   trackExperimentViewed({experimentName: featureKey, variationName})
 }
 
