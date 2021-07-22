@@ -71,7 +71,11 @@ program
   .option('-N, --noWebSecurity', 'Disable all web securities')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-P, --parallel', 'Run tests on parallelRun tests on parallel')
-  .option('-R, --record', 'Record tests and send result to Dashboard Service')
+  .option(
+    '-R, --record',
+    'Record tests and send result to Dashboard Service',
+    false
+  )
   .option('-C, --ci', 'Continuous integration mode, reduces memory consumption')
   .option('-VH, --viewportHeight', 'Sets custom viewport height')
   .option('-VW, --viewportWidth', 'Sets custom viewport width')
@@ -164,6 +168,19 @@ const cypressExecutableConfig = {
 ;(gui
   ? cypress.open(cypressExecutableConfig)
   : cypress.run(cypressExecutableConfig)
-).catch(error => {
-  console.error(error)
-})
+)
+  .then(result => {
+    if (result.failures) {
+      console.error('Could not execute tests')
+      console.error(result.message)
+      process.exit(result.failures)
+    }
+
+    // print test results and exit
+    // with the number of failed tests as exit code
+    process.exit(result.totalFailed)
+  })
+  .catch(err => {
+    console.error(err.message)
+    process.exit(1)
+  })
