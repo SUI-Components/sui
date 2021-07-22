@@ -19,8 +19,6 @@ const DEFAULT_CYPRESS_CONFIG = {
   fixturesFolder: false,
   pluginsFile: false,
   supportFile: false,
-  video: false,
-  screenshotOnRunFailure: false,
   trashAssetsBeforeRuns: true,
   viewportWidth: 1240,
   viewportHeight: 960
@@ -49,7 +47,8 @@ program
   )
   .option(
     '-S, --screenshotsOnError',
-    'Take screenshots of page on any failure.'
+    'Take screenshots of page on any failure.',
+    false
   )
   .option(
     '-U, --userAgentAppend <userAgentAppend>',
@@ -83,6 +82,7 @@ program
     '-K, --key <key>',
     'It is used to authenticate the project into the Dashboard Service'
   )
+  .option('-V, --video', 'Enable video recording', false)
   .option('--group', 'Combines tests in different groups')
   .on('--help', () => console.log(HELP_MESSAGE))
   .parse(process.argv)
@@ -103,6 +103,7 @@ const {
   screenshotsOnError,
   userAgent,
   userAgentAppend,
+  video,
   viewportHeight,
   viewportWidth
 } = program.opts()
@@ -150,19 +151,18 @@ if (ci) {
   cypressConfig.numSnapshotsKeptInMemory = 1
 }
 
-if (key) cypressConfig.key = key
-if (group) cypressConfig.group = group
-
 if (noWebSecurity) cypressConfig.chromeWebSecurity = false
 
 const cypressExecutableConfig = {
   config: cypressConfig,
   configFile: false,
   key,
+  group,
   browser,
   headless,
   parallel,
-  record
+  record,
+  video
 }
 
 ;(gui
@@ -171,7 +171,7 @@ const cypressExecutableConfig = {
 )
   .then(result => {
     if (result.failures) {
-      console.error('Could not execute tests')
+      console.error('Could not execute tests:')
       console.error(result.message)
       process.exit(result.failures)
     }
