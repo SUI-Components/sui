@@ -111,7 +111,7 @@ const cypressConfig = {
 }
 
 if (defaultCommandTimeout) {
-  cypressConfig.defaultCommandTimeout = defaultCommandTimeout
+  cypressConfig.defaultCommandTimeout = +defaultCommandTimeout
 }
 
 if (existsSync(supportFilesFolderPath)) {
