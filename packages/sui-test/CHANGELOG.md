@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.3.0 (2021-07-23)
+
+
+### Features
+
+* **packages/sui-test:** add json-summary coverage report ([67acc91](https://github.com/SUI-Components/sui/commit/67acc91fcc782ce25472dfd242814c844203d411))
+
+
+
 # 5.2.0 (2021-07-14)
 
 
