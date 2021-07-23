@@ -81,11 +81,23 @@ To link more than one package at time, use as many times as desired the argument
 $ sui-bundler dev --link-package=/absolute_path/to/npm_package --link-package=/absolute_path2/to/npm_package
 ```
 
+You can also use `-l` as a shorthand to link a package.
+
+```
+$ sui-bundler dev -l /absolute_path/to/npm_package -l /absolute_path2/to/npm_package
+```
+
 If you want to link all the packages inside a monorepo-multipackage. Use the flag `--link-all` pointing to the folder where each package lives.
 For example, if you want to link all the components in a Studio, the command should be:
 
 ```
 $ sui-bundler dev --link-all ../frontend-ma--uilib-components/components
+```
+
+You can use `-L` as a shorthand to link all packages.
+
+```
+$ sui-bundler dev -L ../frontend-ma--uilib-components/components
 ```
 
 And of course you can combine `link-all` and `link-package` flags

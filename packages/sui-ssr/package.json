@@ -42,8 +42,5 @@
     "parse5": "6.0.0",
     "rimraf": "3.0.0",
     "ua-parser-js": "0.7.20"
-  },
-  "devDependencies": {
-    "@s-ui/test": "4"
   }
 }
