@@ -33,6 +33,7 @@ module.exports = async ({
       reporters: [
         {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
         {type: 'html', subdir: 'report-html'},
+        {type: 'json-summary', subdir: '.', file: 'coverage.json'},
         {type: 'text-summary'}
       ]
     }
