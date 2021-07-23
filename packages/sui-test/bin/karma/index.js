@@ -32,7 +32,7 @@ module.exports = async ({
       dir: `${CWD}/coverage`,
       reporters: [
         {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
-        {type: 'html', subdir: 'report-html'},
+        {type: 'lcov', subdir: '.'},
         {type: 'json-summary', subdir: '.', file: 'coverage.json'},
         {type: 'text-summary'}
       ]
