@@ -20,6 +20,7 @@ const DEFAULT_CYPRESS_CONFIG = {
   pluginsFile: false,
   supportFile: false,
   trashAssetsBeforeRuns: true,
+  videoUploadOnPasses: false,
   viewportWidth: 1240,
   viewportHeight: 960
 }
@@ -142,13 +143,12 @@ if (viewportWidth) {
 }
 
 if (screenshotsOnError) {
-  cypressConfig.screenshotOnHeadlessFailure = true
+  cypressConfig.screenshotOnRunFailure = true
   cypressConfig.screenshotsFolder = SCREENSHOTS_FOLDER
 }
 
 if (ci) {
   cypressConfig.numTestsKeptInMemory = 1
-  cypressConfig.numSnapshotsKeptInMemory = 1
 }
 
 if (noWebSecurity) cypressConfig.chromeWebSecurity = false
