@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test-e2e",
-  "version": "1.0.0-beta.9",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -8,11 +8,12 @@
     "sui-test-e2e": "bin/sui-test-e2e.js"
   },
   "scripts": {
+    "postpublish": "make build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@testing-library/cypress": "8.0.0",
-    "commander": "8.0.0",
+    "commander": "8.1.0",
     "cypress": "8.0.0",
     "cypress-file-upload": "5.0.8"
   },
