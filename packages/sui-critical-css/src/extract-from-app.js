@@ -3,6 +3,7 @@ import {mkdir, writeFile} from 'fs/promises'
 import {join} from 'path'
 import {extractCSSFromUrl} from './extract-from-url.js'
 import {devices} from './config.js'
+import fetch from 'node-fetch'
 
 const TIME_BETWEEN_RETRIES = 1000
 const TIMES_TO_RETRY = 15
