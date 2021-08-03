@@ -21,7 +21,7 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
       if (retries === 0) return resolve(false)
 
       const response = await fetch(healthCheckUrl)
-      return response.ok()
+      return response.ok
         ? resolve(true)
         : window.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
     }
