@@ -4,6 +4,9 @@ import {join} from 'path'
 import {extractCSSFromUrl} from './extract-from-url.js'
 import {devices} from './config.js'
 
+const TIME_BETWEEN_RETRIES = 1000
+const TIMES_TO_RETRY = 15
+
 const configForMobileDevice = devices.m
 
 export const createUrlFrom = ({hostname, pathOptions}) => {
@@ -11,10 +14,34 @@ export const createUrlFrom = ({hostname, pathOptions}) => {
   return `${hostname}${path}`
 }
 
+const waitForHealthCheck = async ({healthCheckUrl}) => {
+  return new Promise(resolve => {
+    async function retry(retries) {
+      if (retries === 0) return resolve(false)
+
+      const response = await fetch(healthCheckUrl)
+      return response.ok()
+        ? resolve(true)
+        : window.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
+    }
+
+    retry(TIMES_TO_RETRY)
+  })
+}
+
 export async function extractCSSFromApp({routes, config = {}}) {
   const manifest = {}
-  const {hostname, outputDir = '/critical-css'} = config
+  const {healthCheck, hostname, outputDir = '/critical-css'} = config
   const writeFilesPromises = []
+
+  if (healthCheck) {
+    const healthCheckUrl = createUrlFrom({hostname, pathOptions: healthCheck})
+    const isHealthCheckEnabled = await waitForHealthCheck({healthCheckUrl})
+    if (!isHealthCheckEnabled) {
+      console.error(`Error reaching healthCheck ${healthCheckUrl}`)
+      process.exit(1)
+    }
+  }
 
   await mkdir(join(process.cwd(), outputDir), {recursive: true})
 
