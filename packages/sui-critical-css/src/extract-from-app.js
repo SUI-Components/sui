@@ -30,7 +30,7 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
 
       return isResponseOK
         ? resolve(true)
-        : window.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
+        : global.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
     }
 
     retry(TIMES_TO_RETRY)
