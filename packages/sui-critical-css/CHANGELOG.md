@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.9.0 (2021-08-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** Add back response.error because it came with the error ([15cb6d3](https://github.com/SUI-Components/sui/commit/15cb6d395e7e98aac3e56af56d07a7c0e57e3e11))
+* **packages/sui-critical-css:** Add health check support ([9d8cffb](https://github.com/SUI-Components/sui/commit/9d8cffbca7dec8b6c7d630bed1985a6a4d0c43b8))
+* **packages/sui-critical-css:** Avoid using as method ([a8be35e](https://github.com/SUI-Components/sui/commit/a8be35e38d18de2f434fa6c7287b029f20a698a5))
+* **packages/sui-critical-css:** Restore package version ([a691730](https://github.com/SUI-Components/sui/commit/a6917305577981debdf18f202fd09d941e1c475f))
+* **packages/sui-critical-css:** Use correct global variable ([3a7658a](https://github.com/SUI-Components/sui/commit/3a7658a6b55028f5bd06d940f3af6db8c44517ca))
+* **packages/sui-critical-css:** Use node fetch ([f7a7e6e](https://github.com/SUI-Components/sui/commit/f7a7e6e8dbc5ac5a611520eaff07434178dbb290))
+
+
+
 # 1.8.0 (2021-06-14)
 
 
