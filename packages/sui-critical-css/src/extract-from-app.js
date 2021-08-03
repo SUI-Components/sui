@@ -20,8 +20,15 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
     async function retry(retries) {
       if (retries === 0) return resolve(false)
 
-      const response = await fetch(healthCheckUrl)
-      return response.ok
+      let isResponseOK = false
+      try {
+        const response = await fetch(healthCheckUrl)
+        isResponseOK = response.ok
+      } catch (e) {
+        isResponseOK = false
+      }
+
+      return isResponseOK
         ? resolve(true)
         : window.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
     }
@@ -32,11 +39,14 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
 
 export async function extractCSSFromApp({routes, config = {}}) {
   const manifest = {}
-  const {healthCheck, hostname, outputDir = '/critical-css'} = config
+  const {healthCheckPath, hostname, outputDir = '/critical-css'} = config
   const writeFilesPromises = []
 
-  if (healthCheck) {
-    const healthCheckUrl = createUrlFrom({hostname, pathOptions: healthCheck})
+  if (healthCheckPath) {
+    const healthCheckUrl = createUrlFrom({
+      hostname,
+      pathOptions: healthCheckPath
+    })
     const isHealthCheckEnabled = await waitForHealthCheck({healthCheckUrl})
     if (!isHealthCheckEnabled) {
       console.error(`Error reaching healthCheck ${healthCheckUrl}`)
