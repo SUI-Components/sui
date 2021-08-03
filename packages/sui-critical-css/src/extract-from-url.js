@@ -71,8 +71,7 @@ export async function extractCSSFromUrl({
 
     if (!response) await closeAll('Response is not present')
 
-    if (response.error)
-      await closeAll(`Response has an error: ${response.error}`)
+    if (response.error) await closeAll(response.error)
 
     if (!response.ok() && response.status() !== 304)
       await closeAll(`Response status code ${response.status()} for url ${url}`)
