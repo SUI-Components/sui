@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.0.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-test:** Remove e2e from @s-ui/test ([52eea8d](https://github.com/SUI-Components/sui/commit/52eea8d30e20ebe86d3a4b989ad5422495dbdae7))
+
+
+
 # 5.3.0 (2021-07-23)
 
 
