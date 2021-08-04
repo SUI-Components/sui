@@ -10,10 +10,8 @@
   "dependencies": {
     "clean-css": "5.1.2",
     "node-fetch": "2.6.1",
+    "path-to-regexp": "0.1.7",
     "playwright-chromium": "1.12.2"
-  },
-  "peerDependencies": {
-    "path-to-regexp": "*"
   },
   "keywords": [],
   "author": "",
