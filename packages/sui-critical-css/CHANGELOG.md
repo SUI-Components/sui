@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.11.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-critical-css:** Force version of path-to-regexp on critical-css package ([37fff14](https://github.com/SUI-Components/sui/commit/37fff14ffce57b88ea1d04e8ddfa74b863ce0ea2))
+
+
+
 # 1.9.0 (2021-08-03)
 
 
