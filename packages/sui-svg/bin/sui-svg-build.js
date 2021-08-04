@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 
 /* eslint no-console:0 */
-const {optimize} = require('svgo')
-const fg = require('fast-glob')
-const fs = require('fs-extra')
-const util = require('util')
-const {join} = require('path')
-const toCamelCase = require('just-camel-case')
-const {transformAsync} = require('@babel/core')
-const exec = util.promisify(require('child_process').exec)
+import {optimize} from 'svgo'
+import fg from 'fast-glob'
+import fs from 'fs-extra'
+import {promisify} from 'util'
+import {join} from 'path'
+import toCamelCase from 'just-camel-case'
+import {transformAsync} from '@babel/core'
+import {createRequire} from 'module'
+import {exec as execWithCallback} from 'child_process'
 
-const template = require('../templates/icon-component')
+import template from '../templates/icon-component.js'
+
+const require = createRequire(import.meta.url)
+const exec = promisify(execWithCallback)
+const {copy, outputFile, emptyDir, readFile} = fs
 
 const ATOM_ICON_VERSION = 1
 const ATOM_ICON_PACKAGE = '@s-ui/react-atom-icon'
@@ -54,27 +59,27 @@ const installNeededDependencies = () => {
 }
 
 const copyStylesFile = () =>
-  fs.copy(
+  copy(
     require.resolve('../templates/icon-styles.scss'),
     `${LIB_FOLDER}/index.scss`
   )
 
 const createIndexFile = () =>
-  fs.outputFile(
+  outputFile(
     `${LIB_FOLDER}/_demo.js`,
     `export const icons = import.meta.globEager('./**/*.js')`
   )
 
-fs.emptyDir(LIB_FOLDER)
+emptyDir(LIB_FOLDER)
   .then(installNeededDependencies)
   .then(getAllSrcSvgFiles)
   .then(entries =>
     Promise.all([
       entries.map(file => {
-        fs.readFile(file, 'utf8')
+        readFile(file, 'utf8')
           .then(transformSvgToReactComponent)
           .then(transformCodeWithBabel)
-          .then(result => fs.outputFile(getLibFile(file), result.code))
+          .then(result => outputFile(getLibFile(file), result.code))
           .catch(error => {
             console.error(error)
             process.exit(1)

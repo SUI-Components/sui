@@ -22,7 +22,6 @@
     "sinon": "10.0.0"
   },
   "devDependencies": {
-    "@s-ui/test": "4",
     "axios": "0.21.1"
   },
   "license": "MIT",

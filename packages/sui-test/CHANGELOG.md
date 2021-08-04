@@ -1,5 +1,45 @@
 # CHANGELOG
 
+# 5.3.0 (2021-07-23)
+
+
+### Features
+
+* **packages/sui-test:** add json-summary coverage report ([67acc91](https://github.com/SUI-Components/sui/commit/67acc91fcc782ce25472dfd242814c844203d411))
+
+
+
+# 5.2.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-test:** add tests directory to excluded coverage directories ([a792a0d](https://github.com/SUI-Components/sui/commit/a792a0d8a40f785867a3409dbf4f74c5a6454427))
+
+
+
+# 5.1.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-test:** Add coverage param and exclude not needed files ([3cb2a8d](https://github.com/SUI-Components/sui/commit/3cb2a8dce4db4e7fef55866edfeaef48e9f1725d))
+* **packages/sui-test:** Remove exclude array ([4648d2b](https://github.com/SUI-Components/sui/commit/4648d2b97d3ea64ac64a3e127af23eb5277d7b25))
+* **packages/sui-test:** Use correct pattern ([d651fd9](https://github.com/SUI-Components/sui/commit/d651fd9386dfcd2c0216dfe328171e052ec2d778))
+
+
+
+# 5.0.0 (2021-07-05)
+
+
+### Features
+
+* **packages/sui-test:** Add less noisy server tests ([8494821](https://github.com/SUI-Components/sui/commit/84948211af1869c0765c5fc546226ab80e1584ea))
+* **packages/sui-test:** Upgrade dependencies of sui-test, less verbose and less patch ([6213cac](https://github.com/SUI-Components/sui/commit/6213cac69280925d5255fab389768e35db3775bb))
+* **packages/sui-test:** Use latest mocha version ([5dc5dc2](https://github.com/SUI-Components/sui/commit/5dc5dc29f1dc49a65197dd7ea864157b84399f5c))
+
+
+
 # 4.34.0 (2021-06-29)
 
 

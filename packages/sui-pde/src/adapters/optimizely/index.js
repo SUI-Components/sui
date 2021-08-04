@@ -87,12 +87,16 @@ export default class OptimizelyAdapter {
   getInitialData() {
     let datafile = null
     try {
-      datafile = this._optimizely.getOptimizelyConfig().getDatafile()
+      datafile = this.getOptimizelyConfig().getDatafile()
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
     }
     return datafile
+  }
+
+  getOptimizelyConfig() {
+    return this._optimizely.getOptimizelyConfig()
   }
 
   /**
@@ -138,24 +142,26 @@ export default class OptimizelyAdapter {
    * @param {object} param
    * @param {string} param.featureKey
    * @parma {object=} param.attributes
-   * @returns {boolean}
+   * @returns {isActive: boolean, linkedExperiments: number[]}
    */
   isFeatureEnabled({featureKey, attributes}) {
+    const linkedExperimentNames = Object.keys(
+      this.getOptimizelyConfig().featuresMap[featureKey].experimentsMap
+    )
+
     // check for user consents only if featureKey is a feature that belongs to a feature test
-    if (
-      this._optimizely.projectConfigManager.getConfig().featureKeyMap[
-        featureKey
-      ].experimentIds.length > 0 &&
-      !this._hasUserConsents
-    ) {
-      return false
+    if (linkedExperimentNames.length > 0 && !this._hasUserConsents) {
+      return {isActive: false, linkedExperiments: []}
     }
 
-    return this._optimizely.isFeatureEnabled(
-      featureKey,
-      this._userId,
-      attributes
-    )
+    return {
+      isActive: this._optimizely.isFeatureEnabled(
+        featureKey,
+        this._userId,
+        attributes
+      ),
+      linkedExperiments: linkedExperimentNames
+    }
   }
 
   /**

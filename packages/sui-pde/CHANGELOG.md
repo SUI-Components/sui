@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 2.11.0 (2021-07-27)
+
+
+### Features
+
+* **packages/sui-pde:** fix scope ([9580db5](https://github.com/SUI-Components/sui/commit/9580db5128a678867841a7a51f0f3d98523be7f9))
+* **packages/sui-pde:** track feature flags and feature tests ([0e09997](https://github.com/SUI-Components/sui/commit/0e09997a3e1a3c299e0958cd4c4e5cdccd11aa7e))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 2.10.0 (2021-06-04)
 
 

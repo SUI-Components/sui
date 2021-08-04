@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.104.0 (2021-07-06)
+
+
+### Features
+
+* **packages/sui-theme:** add color for tiktok social brand ([56eca1b](https://github.com/SUI-Components/sui/commit/56eca1b565400b005a6589e6cd40017d7c7e3cd6))
+
+
+
 # 8.103.0 (2021-06-22)
 
 

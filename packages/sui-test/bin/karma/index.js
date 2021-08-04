@@ -1,15 +1,30 @@
 // https://github.com/developit/karmatic/blob/master/src/index.js
-const {Server} = require('karma')
+const {
+  config: {parseConfig},
+  Server
+} = require('karma')
 const config = require('./config')
 const CWD = process.cwd()
 
-module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
+module.exports = async ({
+  ci,
+  coverage,
+  ignorePattern,
+  pattern,
+  srcPattern,
+  timeout,
+  watch
+}) => {
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 
   if (ci) {
     config.browsers = ['Firefox']
+  }
+
+  if (coverage || ci) {
     config.reporters = ['coverage'].concat(config.reporters)
+
     config.preprocessors = {
       'src/**/*.js': ['coverage']
     }
@@ -18,6 +33,7 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
       reporters: [
         {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
         {type: 'html', subdir: 'report-html'},
+        {type: 'json-summary', subdir: '.', file: 'coverage.json'},
         {type: 'text-summary'}
       ]
     }
@@ -34,6 +50,7 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
   ].filter(Boolean)
 
   config.preprocessors = {
+    ...config.preprocessors,
     [pattern]: ['webpack'],
     ...(srcPattern && {[srcPattern]: ['webpack']})
   }
@@ -43,8 +60,13 @@ module.exports = ({ci, pattern, ignorePattern, srcPattern, timeout, watch}) => {
     ...(timeout && {timeout})
   }
 
+  const karmaConfig = await parseConfig(null, config, {
+    promiseConfig: true,
+    throwErrors: true
+  })
+
   return new Promise((resolve, reject) => {
-    const server = new Server(config, code => {
+    const server = new Server(karmaConfig, code => {
       if (code === 0) return resolve()
       const err = new Error(`Exit ${code}`)
       err.code = code

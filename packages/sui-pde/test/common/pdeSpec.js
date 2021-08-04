@@ -18,18 +18,18 @@ describe('@s-ui pde', () => {
       getEnabledFeatures: () => ['a', 'b'],
       isFeatureEnabled: sinon.stub().returns(true),
       getVariation: sinon.stub().returns('variationB'),
-      projectConfigManager: {
-        getConfig: () => ({
-          featureKeyMap: {
-            featureUsedInTest: {
-              experimentIds: ['1234']
-            },
-            featureNotUsedInTest: {
-              experimentIds: []
+      getOptimizelyConfig: () => ({
+        featuresMap: {
+          featureUsedInTest: {
+            experimentsMap: {
+              '1234': {}
             }
+          },
+          featureNotUsedInTest: {
+            experimentsMap: {}
           }
-        })
-      }
+        }
+      })
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
@@ -67,8 +67,11 @@ describe('@s-ui pde', () => {
       adapter: optimizelyAdapter,
       hasUserConsents: false
     })
-    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
-    expect(enabled).to.equal(false)
+    const {isActive, linkedExperiments} = pde.isFeatureEnabled({
+      featureKey: 'featureUsedInTest'
+    })
+    expect(isActive).to.equal(false)
+    expect(linkedExperiments).to.deep.equal([])
     expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(false)
   })
 
@@ -77,8 +80,11 @@ describe('@s-ui pde', () => {
       adapter: optimizelyAdapter,
       hasUserConsents: true
     })
-    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
-    expect(enabled).to.equal(true)
+    const {isActive, linkedExperiments} = pde.isFeatureEnabled({
+      featureKey: 'featureUsedInTest'
+    })
+    expect(isActive).to.equal(true)
+    expect(linkedExperiments).to.deep.equal(['1234'])
     expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(true)
     expect(optimizelyInstanceStub.isFeatureEnabled.args[0][0]).to.equal(
       'featureUsedInTest'
