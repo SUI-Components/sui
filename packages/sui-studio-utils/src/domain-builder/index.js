@@ -50,7 +50,8 @@ export default class DomainBuilder {
   build({inlineError} = {}) {
     const self = this
     const exeUseCase = useCase => params => {
-      const subscriptions = self._domain.subscribers[useCase] || []
+      const subscribers = self._domain.subscribers || {}
+      const subscriptions = subscribers[useCase] || []
       const {fail, success} = self._useCases[useCase]
 
       const data = typeof success === 'function' ? success(params) : success
