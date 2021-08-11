@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.10.0 (2021-08-11)
+
+
+### Features
+
+* **packages/sui-studio-utils:** add subscriptions domain v1 support ([cd0c729](https://github.com/SUI-Components/sui/commit/cd0c729aa7e4af89986010803b7773e435b0e502))
+
+
+
 # 1.9.0 (2021-08-10)
 
 
