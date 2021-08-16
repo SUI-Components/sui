@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.27.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove chalk log ([cf666aa](https://github.com/SUI-Components/sui/commit/cf666aa39df481affd834d1f67b4c4923ab0aae5))
+
+
+
 # 7.26.0 (2021-07-16)
 
 

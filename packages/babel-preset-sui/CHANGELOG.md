@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.26.0 (2021-08-16)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use latest babel versions ([0f30814](https://github.com/SUI-Components/sui/commit/0f308141902e8f683c91913c870cd3617b5f6545))
+
+
+
 # 3.25.0 (2021-06-22)
 
 

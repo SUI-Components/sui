@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.34.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-lint:** Use latest babel version ([30a46fe](https://github.com/SUI-Components/sui/commit/30a46fe74a8c16ca05e4c30ca4b1910a497bdc49))
+
+
+
 # 3.33.0 (2021-06-22)
 
 
