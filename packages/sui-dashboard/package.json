@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@s-ui/helpers": "1",
-    "chalk": "4.1.0",
     "commander": "6.2.1",
     "fast-glob": "3.2.4",
     "update-check": "1.5.4"
