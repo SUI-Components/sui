@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.12.0 (2021-08-13)
+
+
+### Features
+
+* **packages/sui-pde:** force feature ssr support ([10f9b2f](https://github.com/SUI-Components/sui/commit/10f9b2f9f6d8d488da537555378cf49a6d3f3d5f))
+
+
+
 # 2.11.0 (2021-07-27)
 
 

@@ -7,7 +7,14 @@ const getServerStrategy = () => ({
     return pde.getVariation({pde, name: experimentName, attributes})
   },
   trackExperiment: () => {},
-  getForcedValue: () => {}
+  getForcedValue: ({key, queryString}) => {
+    if (!queryString) {
+      return
+    }
+
+    const queryParams = parseQueryString(queryString)
+    return queryParams[`suipde_${key}`]
+  }
 })
 
 const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
