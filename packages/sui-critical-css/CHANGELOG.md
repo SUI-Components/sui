@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use networkidle instead load to get Critical CSS ([7889071](https://github.com/SUI-Components/sui/commit/7889071b5a2acf61dc8f97a893284424349b2f0e))
+
+
+
 # 1.11.0 (2021-08-04)
 
 
