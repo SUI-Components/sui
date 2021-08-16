@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.1.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-test:** Use latest babel versions ([4681815](https://github.com/SUI-Components/sui/commit/46818153876746cc97918d6a5fc6c4d9255cc469))
+
+
+
 # 6.0.0 (2021-08-04)
 
 
