@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.23.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-studio:** Update babel and fast-glob packages versions ([0aab820](https://github.com/SUI-Components/sui/commit/0aab82092613a33094e51380cf38073d7214ecfe))
+
+
+
 # 10.22.0 (2021-07-14)
 
 
