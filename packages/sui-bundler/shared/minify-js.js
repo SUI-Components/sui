@@ -53,6 +53,7 @@ const terser = ({extractComments, sourceMap}) =>
 
 const esbuild = ({extractComments, sourceMap}) =>
   new ESBuildMinifyPlugin({
+    css: true,
     target: 'es6',
     sourcemap: sourceMap !== 'none' && sourceMap !== false
   })
