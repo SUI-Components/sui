@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.28.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Use esbuild for CSS minification ([a4de64b](https://github.com/SUI-Components/sui/commit/a4de64b3f8d0d5faf63ddf393f9619637d297b33))
+
+
+
 # 7.27.0 (2021-08-16)
 
 
