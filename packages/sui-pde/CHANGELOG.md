@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.13.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-pde:** Remove errors on initializing Optimizely ([2416372](https://github.com/SUI-Components/sui/commit/24163723a34262714fbe43ea1e1b4c6b2b8c3f52))
+* **packages/sui-pde:** Support unknown userId for feature enabled method ([084d3de](https://github.com/SUI-Components/sui/commit/084d3dea44e03b0a828b8450a738a15971868881))
+
+
+
 # 2.12.0 (2021-08-13)
 
 
