@@ -161,8 +161,11 @@ export default class OptimizelyAdapter {
       this.getOptimizelyConfig().featuresMap[featureKey].experimentsMap
     )
 
-    // check for user consents only if featureKey is a feature that belongs to a feature test
-    if (linkedExperimentNames.length > 0 && !this._hasUserConsents) {
+    // check for user consents only if featureKey is a feature that belongs to a feature test or if a userId is available
+    if (
+      (linkedExperimentNames.length > 0 && !this._hasUserConsents) ||
+      !this._userId
+    ) {
       return {isActive: false, linkedExperiments: []}
     }
 
