@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 10.24.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-studio:** bump ([75d8b70](https://github.com/SUI-Components/sui/commit/75d8b70980ef20f8818ef2c31b9d7968af4c123d))
+* **sui-studio:** add link package short alias ([76773b7](https://github.com/SUI-Components/sui/commit/76773b70dbf3ce6bc2b104ed1270440582da37da))
+
+
+
 # 10.23.0 (2021-08-16)
 
 
