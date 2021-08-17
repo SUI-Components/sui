@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 7.38.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-ssr:** bump ([64035b1](https://github.com/SUI-Components/sui/commit/64035b1397bc4efb63172a357822e8bd6215079c))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+* **sui-ssr:** add link package short alias ([629aab4](https://github.com/SUI-Components/sui/commit/629aab45e07ea5f00daf606d6b9102f4c88823ee))
+
+
+
 # 7.37.0 (2021-06-29)
 
 
