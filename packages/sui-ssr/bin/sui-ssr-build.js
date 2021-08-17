@@ -17,7 +17,7 @@ const PUBLIC_PATH = path.join(process.cwd(), 'public')
 program
   .option('-C, --clean', 'Remove build folder before create a new one')
   .option(
-    '--link-package [package]',
+    '-l, --link-package [package]',
     'Replace each occurrence of this package with an absolute path to this folder',
     (v, m) => {
       m.push(v)
