@@ -20,8 +20,7 @@ export default class Rosetta {
 
   set culture(culture) {
     this._culture = culture
-    this.translator.locale = culture.split('-')[0]
-    this.translator.translations = this._languages[culture]
+    this._updateTranslator({culture})
   }
 
   set currency(currency) {
@@ -61,6 +60,33 @@ export default class Rosetta {
 
   set languages(languages) {
     this._languages = languages
+  }
+
+  // Given a culture, it refreshes the translator with the current language.
+  _updateTranslator({culture}) {
+    const [locale] = culture.split('-')
+    const translations = this._languages[culture]
+    this.translator.locale = locale
+    this.translator.translations = translations
+  }
+
+  /**
+   * Add new languages or modify current ones.
+   *
+   * @param {String} culture The culture we want to update, takes current if left empty
+   * @param {String} key Key in where to store the translation, if empty, will overwrite the language
+   * @param {Object} translations Translations to be added
+   */
+  addTranslations({culture, key, translations}) {
+    const newCulture = culture || this._culture
+
+    if (key) {
+      this._languages[newCulture][key] = translations // won't work for nested keys
+    } else {
+      this._languages[newCulture] = translations
+    }
+
+    this._updateTranslator({culture: newCulture})
   }
 
   // Translate.

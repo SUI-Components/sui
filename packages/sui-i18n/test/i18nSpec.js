@@ -141,6 +141,19 @@ describe('I18N', () => {
         expect(i18n.t('literalOne')).to.eql('TranslateOneEsES')
       })
 
+      it('modify translations "literalOne" properly', () => {
+        const translations = {literalOne: 'TranslateTwoEsES'}
+        i18n.addTranslations({translations})
+        expect(i18n.t('literalOne')).to.eql('TranslateTwoEsES')
+      })
+
+      it('add translations "dynamicLiteral" properly', () => {
+        const translations = {literalOne: 'TranslateDynamicEsES'}
+        const key = 'dynamicLiteralKey'
+        i18n.addTranslations({key, translations})
+        expect(i18n.t(`${key}.literalOne`)).to.eql('TranslateDynamicEsES')
+      })
+
       describe('properly formats minor types like', () => {
         describe('percentage', () => {
           it('from a non-decimal amount when ', () => {
