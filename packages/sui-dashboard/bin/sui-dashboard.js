@@ -2,9 +2,9 @@
 /* eslint no-console:0 */
 
 const checkForUpdate = require('update-check')
-const chalk = require('chalk')
 const program = require('commander')
 const pkg = require('../package.json')
+const colors = require('@s-ui/helpers/colors')
 const version = pkg.version
 
 program.version(version, '    --version')
@@ -22,10 +22,8 @@ program.parse(process.argv)
 
   if (update) {
     console.log(
-      chalk.gray(
-        `The latest version of ${require('../package.json').name} is ${
-          update.latest
-        }. Please update!`
+      colors.gray(
+        `The latest version of ${pkg.name} is ${update.latest}. Please update!`
       )
     )
   }

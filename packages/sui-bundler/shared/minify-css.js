@@ -1,6 +1,6 @@
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
-module.exports = () =>
+const createCssMinimizerPlugin = () =>
   new CssMinimizerPlugin({
     minimizerOptions: {
       preset: [
@@ -11,3 +11,6 @@ module.exports = () =>
       ]
     }
   })
+
+module.exports = ({useExperimentalMinifier}) =>
+  !useExperimentalMinifier && createCssMinimizerPlugin()

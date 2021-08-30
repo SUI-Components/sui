@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 6.1.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-test:** Use latest babel versions ([4681815](https://github.com/SUI-Components/sui/commit/46818153876746cc97918d6a5fc6c4d9255cc469))
+
+
+
+# 6.0.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-test:** Remove e2e from @s-ui/test ([52eea8d](https://github.com/SUI-Components/sui/commit/52eea8d30e20ebe86d3a4b989ad5422495dbdae7))
+
+
+
+# 5.3.0 (2021-07-23)
+
+
+### Features
+
+* **packages/sui-test:** add json-summary coverage report ([67acc91](https://github.com/SUI-Components/sui/commit/67acc91fcc782ce25472dfd242814c844203d411))
+
+
+
 # 5.2.0 (2021-07-14)
 
 

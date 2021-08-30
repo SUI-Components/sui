@@ -50,6 +50,8 @@ export default class DomainBuilder {
   build({inlineError} = {}) {
     const self = this
     const exeUseCase = useCase => params => {
+      const subscribers = self._domain.subscribers || {}
+      const subscriptions = subscribers[useCase] || []
       const {fail, success} = self._useCases[useCase]
 
       const data = typeof success === 'function' ? success(params) : success
@@ -58,6 +60,9 @@ export default class DomainBuilder {
         data !== undefined ? {err: null, data} : {err: fail, data: null}
 
       const createResponse = ({err, data}) => {
+        subscriptions.forEach(fn =>
+          fn({error: err, params, result: [err, data]})
+        )
         if (inlineError) return Promise.resolve([err, data])
         return err ? Promise.reject(err) : Promise.resolve(data)
       }
@@ -68,10 +73,14 @@ export default class DomainBuilder {
       if (useCase === 'config') {
         return this._config
       }
+
+      const base = self._domain.get(useCase)
+
       if (self._useCases[useCase]) {
-        return {execute: exeUseCase(useCase)}
+        return {...base, execute: exeUseCase(useCase)}
       }
-      return self._domain.get(useCase)
+
+      return base
     }
 
     return {

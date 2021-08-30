@@ -2,6 +2,52 @@ import {useContext} from 'react'
 import PdeContext from '../contexts/PdeContext'
 import {getPlatformStrategy} from './platformStrategies'
 
+const VARIATION_NAME_ON = 'On State'
+const VARIATION_NAME_OFF = 'Off State'
+
+/**
+ * track feature flag's own Experiment Viewed event
+ * @param {object} param
+ * @param {boolean} param.isActive
+ * @param {function} param.trackExperimentViewed
+ * @param {string} param.featureKey
+ */
+const trackFeatureFlagViewed = ({
+  isActive,
+  trackExperimentViewed,
+  featureKey
+}) => {
+  const variationName = isActive ? VARIATION_NAME_ON : VARIATION_NAME_OFF
+  trackExperimentViewed({experimentName: featureKey, variationName})
+}
+
+/**
+ * track every linked experiment's Experiment Viewed event
+ * @param {object} param
+ * @param {linkedExperiments} string[] feature tests using the current feature flag
+ * @param {function} trackExperimentViewed
+ * @param {function} getExperimentVariation gets user variation linked to experiment
+ * @param {object} attributes user attributes to take into account for its segmentation
+ * @param {object} pde
+ */
+const trackLinkedExperimentsViewed = ({
+  linkedExperiments,
+  trackExperimentViewed,
+  getExperimentVariation,
+  attributes,
+  pde
+}) => {
+  if (!linkedExperiments) return
+  linkedExperiments.forEach(experimentName => {
+    const variationName = getExperimentVariation({
+      experimentName,
+      pde,
+      attributes
+    })
+    trackExperimentViewed({variationName, experimentName})
+  })
+}
+
 /**
  * Hook to use a feature toggle
  * @param {string} featureKey
@@ -22,17 +68,35 @@ export default function useFeature(featureKey, attributes, queryString) {
   })
 
   try {
-    const isActive = forcedValue
-      ? forcedValue === 'on'
-      : pde.isFeatureEnabled({featureKey, attributes})
+    if (forcedValue) {
+      return {isActive: forcedValue === 'on', linkedExperiments: []}
+    }
+
+    const {isActive, linkedExperiments} = pde.isFeatureEnabled({
+      featureKey,
+      attributes
+    })
 
     const variables = pde.getAllFeatureVariables({
       featureKey,
       attributes
     })
 
+    trackFeatureFlagViewed({
+      isActive,
+      trackExperimentViewed: strategy.trackExperiment,
+      featureKey
+    })
+    trackLinkedExperimentsViewed({
+      linkedExperiments,
+      trackExperimentViewed: strategy.trackExperiment,
+      getExperimentVariation: strategy.getVariation,
+      pde,
+      attributes
+    })
     return {isActive, variables}
   } catch (error) {
+    console.error(error)
     return {isActive: false, variables: {}}
   }
 }

@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 7.29.0 (2021-08-18)
+
+
+### Features
+
+* **packages/sui-bundler:** Improve build times by caching some transformations ([d65be77](https://github.com/SUI-Components/sui/commit/d65be7734118bd1ac58cce949fb8a8cc31d85784))
+
+
+
+# 7.28.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Use esbuild for CSS minification ([a4de64b](https://github.com/SUI-Components/sui/commit/a4de64b3f8d0d5faf63ddf393f9619637d297b33))
+
+
+
+# 7.27.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove chalk log ([cf666aa](https://github.com/SUI-Components/sui/commit/cf666aa39df481affd834d1f67b4c4923ab0aae5))
+
+
+
 # 7.26.0 (2021-07-16)
 
 

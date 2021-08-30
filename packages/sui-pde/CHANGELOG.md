@@ -1,5 +1,35 @@
 # CHANGELOG
 
+# 2.13.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-pde:** Remove errors on initializing Optimizely ([2416372](https://github.com/SUI-Components/sui/commit/24163723a34262714fbe43ea1e1b4c6b2b8c3f52))
+* **packages/sui-pde:** Support unknown userId for feature enabled method ([084d3de](https://github.com/SUI-Components/sui/commit/084d3dea44e03b0a828b8450a738a15971868881))
+
+
+
+# 2.12.0 (2021-08-13)
+
+
+### Features
+
+* **packages/sui-pde:** force feature ssr support ([10f9b2f](https://github.com/SUI-Components/sui/commit/10f9b2f9f6d8d488da537555378cf49a6d3f3d5f))
+
+
+
+# 2.11.0 (2021-07-27)
+
+
+### Features
+
+* **packages/sui-pde:** fix scope ([9580db5](https://github.com/SUI-Components/sui/commit/9580db5128a678867841a7a51f0f3d98523be7f9))
+* **packages/sui-pde:** track feature flags and feature tests ([0e09997](https://github.com/SUI-Components/sui/commit/0e09997a3e1a3c299e0958cd4c4e5cdccd11aa7e))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 2.10.0 (2021-06-04)
 
 
