@@ -91,7 +91,7 @@ i18n.n(1000) //=> 1,000
 i18n.n(1000000) //=> 1,000,000
 ```
 
-### Add or modify translations dinamically
+### Add or modify translations dynamically
 
 You can use the method `addTranslations` to add new literals or modify existent ones given a key.
 ```javascript
