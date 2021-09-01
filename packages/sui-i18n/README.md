@@ -93,7 +93,7 @@ i18n.n(1000000) //=> 1,000,000
 
 ### Add or modify translations dynamically
 
-You can use the method `addTranslations` to add new literals or modify existent ones given a key.
+You can use the method `addTranslations` to add new literals or modify existing ones given a key.
 ```javascript
 import I18n from '@s-ui/i18n';
 import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
