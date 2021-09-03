@@ -12,5 +12,4 @@ const createCssMinimizerPlugin = () =>
     }
   })
 
-module.exports = ({useExperimentalMinifier}) =>
-  !useExperimentalMinifier && createCssMinimizerPlugin()
+module.exports = () => createCssMinimizerPlugin()
