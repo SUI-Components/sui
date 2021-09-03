@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.30.0 (2021-09-03)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove experimental css minifier ([db76fda](https://github.com/SUI-Components/sui/commit/db76fda795d7d75eaef0ff66321a8baee48dc07b))
+
+
+
 # 7.29.0 (2021-08-18)
 
 
