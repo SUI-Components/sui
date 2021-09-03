@@ -9,7 +9,7 @@ const config = {
 
   basePath: '',
 
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'webpack'],
 
   reporters: ['spec'],
 
@@ -26,8 +26,6 @@ const config = {
   },
 
   webpack: {
-    devtool: 'eval',
-    mode: 'development',
     stats: 'minimal',
     resolve: {
       alias: {
@@ -41,23 +39,12 @@ const config = {
     node: {
       fs: 'empty'
     },
-    // webpack has the ability to generate path info in the output bundle.
-    // However, this puts garbage collection pressure on projects that bundle thousands of modules.
-    output: {
-      pathinfo: false
-    },
     plugins: [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD)
       })
     ],
-    // avoid unneded optimizations for running our tests in order to get fatest bundling time
-    optimization: {
-      removeAvailableModules: false,
-      removeEmptyChunks: false,
-      splitChunks: false
-    },
     module: {
       rules: [
         {
