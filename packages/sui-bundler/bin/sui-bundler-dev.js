@@ -85,13 +85,20 @@ const start = async ({
   })
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
-  const devServer = new WebpackDevServer(compiler, serverConfig)
+  const devServer = new WebpackDevServer(
+    {
+      ...serverConfig,
+      port,
+      host: HOST
+    },
+    compiler
+  )
   log.processing('❯ Starting the development server...\n')
-  devServer.listen(port, HOST, err => {
+  devServer.startCallback(err => {
     if (err) return log.error(err)
     ;['SIGINT', 'SIGTERM'].forEach(sig => {
       process.on(sig, () => {
-        devServer.close()
+        devServer.stop()
         process.exit()
       })
     })
