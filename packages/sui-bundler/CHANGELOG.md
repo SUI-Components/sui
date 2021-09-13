@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.31.0 (2021-09-13)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade sui-bundler deps ([851b017](https://github.com/SUI-Components/sui/commit/851b0178f0653b475fe9fe94228bca7f60d44817))
+
+
+
 # 7.30.0 (2021-09-03)
 
 
