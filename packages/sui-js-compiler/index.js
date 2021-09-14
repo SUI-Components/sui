@@ -8,8 +8,6 @@ const fs = require('fs-extra')
 ;(async () => {
   const files = await fg('./src/**/*.{js,jsx}')
 
-  console.time('[sui-js-compiler]')
-
   await Promise.all(
     files.map(async file => {
       const output = await transformFile(file, defaultConfig)
@@ -18,6 +16,4 @@ const fs = require('fs-extra')
       return fs.outputFile(outputPath, code)
     })
   )
-
-  console.timeEnd('[sui-js-compiler]')
 })()

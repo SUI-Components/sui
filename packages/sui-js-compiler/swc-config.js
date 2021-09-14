@@ -1,4 +1,5 @@
 module.exports = {
+  minify: true,
   jsc: {
     parser: {
       syntax: 'ecmascript',
