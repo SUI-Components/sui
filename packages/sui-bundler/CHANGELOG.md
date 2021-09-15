@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 7.32.0 (2021-09-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Disable experimental css minificator ([f1ec960](https://github.com/SUI-Components/sui/commit/f1ec960badc968477e7a60ada762775b2067a23c))
+
+
+
+# 7.31.0 (2021-09-13)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade sui-bundler deps ([851b017](https://github.com/SUI-Components/sui/commit/851b0178f0653b475fe9fe94228bca7f60d44817))
+
+
+
 # 7.30.0 (2021-09-03)
 
 
