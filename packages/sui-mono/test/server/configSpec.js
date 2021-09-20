@@ -100,10 +100,10 @@ describe('config', () => {
       expect(workspaces.length === 0).to.equal(true)
     })
 
-    it('returns an empty array of workspaces if config not provided', () => {
+    it('returns Root workspace if config not provided', () => {
       const {getWorkspaces} = factoryConfigMethods({})
       const workspaces = getWorkspaces()
-      expect(workspaces.length === 0).to.equal(true)
+      expect(workspaces).to.deep.equal(['Root'])
     })
   })
 })

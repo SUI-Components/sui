@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.25.0 (2021-09-08)
+
+
+### Features
+
+* **packages/sui-studio:** Reuse sui-test version if available ([663e81f](https://github.com/SUI-Components/sui/commit/663e81f1aedd4bd3d289eb095da203290d7ae285))
+
+
+
 # 10.24.0 (2021-08-17)
 
 

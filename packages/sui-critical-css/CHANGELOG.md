@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.13.0 (2021-09-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** bump dependencies ([81f0891](https://github.com/SUI-Components/sui/commit/81f0891175d9041c16cbf3ed60661925f55da852))
+
+
+
 # 1.12.0 (2021-08-16)
 
 
