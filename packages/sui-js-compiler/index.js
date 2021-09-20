@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const defaultConfig = require('./swc-config.js')
 const {transformFile} = require('@swc/core')
+const defaultConfig = require('./swc-config.js')
 const fg = require('fast-glob')
 const fs = require('fs-extra')
 
