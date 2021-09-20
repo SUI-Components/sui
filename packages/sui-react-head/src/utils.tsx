@@ -3,7 +3,7 @@ import { Children as ReactChildren } from 'react'
 import { Tag } from './types'
 
 const checkRelNeedsHref = (rel: string): boolean =>
-  ['preload', 'prefetch'].includes(rel)
+  ['alternate', 'preload', 'prefetch'].includes(rel)
 
 /**
  * Use rel as key but put extra info if needed
