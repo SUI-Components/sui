@@ -1,7 +1,4 @@
 /* global decorator */
-
-import React from 'react'
-
 export class Whatever {
   @decorator
   async execute() {
