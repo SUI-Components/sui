@@ -21,6 +21,6 @@
   },
   "peerDependencies": {
     "react": "16 || 17",
-    "react-dom": "16 || 17"
+    "react-dom": "16 || 17"
   }
 }
