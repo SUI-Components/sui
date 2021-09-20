@@ -1,5 +1,59 @@
 # CHANGELOG
 
+# 7.32.0 (2021-09-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Disable experimental css minificator ([f1ec960](https://github.com/SUI-Components/sui/commit/f1ec960badc968477e7a60ada762775b2067a23c))
+
+
+
+# 7.31.0 (2021-09-13)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade sui-bundler deps ([851b017](https://github.com/SUI-Components/sui/commit/851b0178f0653b475fe9fe94228bca7f60d44817))
+
+
+
+# 7.30.0 (2021-09-03)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove experimental css minifier ([db76fda](https://github.com/SUI-Components/sui/commit/db76fda795d7d75eaef0ff66321a8baee48dc07b))
+
+
+
+# 7.29.0 (2021-08-18)
+
+
+### Features
+
+* **packages/sui-bundler:** Improve build times by caching some transformations ([d65be77](https://github.com/SUI-Components/sui/commit/d65be7734118bd1ac58cce949fb8a8cc31d85784))
+
+
+
+# 7.28.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Use esbuild for CSS minification ([a4de64b](https://github.com/SUI-Components/sui/commit/a4de64b3f8d0d5faf63ddf393f9619637d297b33))
+
+
+
+# 7.27.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove chalk log ([cf666aa](https://github.com/SUI-Components/sui/commit/cf666aa39df481affd834d1f67b4c4923ab0aae5))
+
+
+
 # 7.26.0 (2021-07-16)
 
 

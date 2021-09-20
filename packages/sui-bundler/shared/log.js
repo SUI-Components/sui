@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
-
-const chalk = require('chalk')
+const colors = require('@s-ui/helpers/colors')
 
 module.exports = {
-  info: msg => console.log(chalk.white(msg)),
-  error: msg => console.log(chalk.red(msg)),
-  success: msg => console.log(chalk.green(msg)),
-  warn: msg => console.log(chalk.yellow(msg)),
-  processing: msg => console.log(chalk.blue(msg))
+  info: msg => console.log(colors.gray(msg)),
+  error: msg => console.log(colors.red(msg)),
+  success: msg => console.log(colors.green(msg)),
+  warn: msg => console.log(colors.yellow(msg)),
+  processing: msg => console.log(colors.cyan(msg))
 }

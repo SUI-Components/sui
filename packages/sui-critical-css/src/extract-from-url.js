@@ -59,7 +59,7 @@ export async function extractCSSFromUrl({
     await page.coverage.startCSSCoverage()
 
     const response = await page
-      .goto(url, {waitUntil: 'load'})
+      .goto(url, {waitUntil: 'networkidle'})
       .catch(error => ({error}))
 
     const closeAll = async error => {

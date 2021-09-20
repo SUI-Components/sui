@@ -1,5 +1,33 @@
 # CHANGELOG
 
+# 10.25.0 (2021-09-08)
+
+
+### Features
+
+* **packages/sui-studio:** Reuse sui-test version if available ([663e81f](https://github.com/SUI-Components/sui/commit/663e81f1aedd4bd3d289eb095da203290d7ae285))
+
+
+
+# 10.24.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-studio:** bump ([75d8b70](https://github.com/SUI-Components/sui/commit/75d8b70980ef20f8818ef2c31b9d7968af4c123d))
+* **sui-studio:** add link package short alias ([76773b7](https://github.com/SUI-Components/sui/commit/76773b70dbf3ce6bc2b104ed1270440582da37da))
+
+
+
+# 10.23.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-studio:** Update babel and fast-glob packages versions ([0aab820](https://github.com/SUI-Components/sui/commit/0aab82092613a33094e51380cf38073d7214ecfe))
+
+
+
 # 10.22.0 (2021-07-14)
 
 

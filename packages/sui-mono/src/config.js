@@ -6,6 +6,7 @@ const CWD = process.cwd()
 const packageFile = getPackageJson(CWD)
 
 const getWorkspaces = workspaces => {
+  if (workspaces.length === 0) return ['Root']
   // If we have more than one workspace, we join
   // folders with the pattern {components/**,demo/**,tests/**}/package.json
   const pattern =
