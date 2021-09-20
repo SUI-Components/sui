@@ -2,12 +2,28 @@ import * as React from 'react'
 import { Children as ReactChildren } from 'react'
 import { Tag } from './types'
 
+const checkRelNeedsHref = (rel: string): boolean =>
+  ['preload', 'prefetch'].includes(rel)
+
+/**
+ * Use rel as key but put extra info if needed
+ * to avoid duplicated keys
+ */
+const extractRelAsKey = (tag: Tag): string | undefined => {
+  const { rel, href, hreflang } = tag
+  if (rel != null) {
+    if (hreflang != null) return `${rel}-${hreflang}`
+    if (checkRelNeedsHref(rel) && href != null) return `${rel}-${href}`
+    return rel
+  }
+}
+
 /**
  * Extract value in a specific order
  */
 const extractKeyFromTag = (tag: Tag): string | undefined => {
-  const { name, hreflang, rel, content } = tag
-  return name ?? hreflang ?? rel ?? content
+  const { name, content } = tag
+  return name ?? extractRelAsKey(tag) ?? content
 }
 
 /**
