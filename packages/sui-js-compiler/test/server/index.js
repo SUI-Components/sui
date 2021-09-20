@@ -21,7 +21,6 @@ describe('@s-ui/js-compiler', () => {
     const compiledFile = await fs.readFile(libFilePath, 'utf-8')
 
     expect(compiledFile).to.contain('react/jsx-runtime')
-    expect(compiledFile).to.contain('/*#__PURE__*/')
     expect(compiledFile).to.contain('_jsx')
 
     expect(compiledFile).to.contain('applyDecoratedDescriptor')
