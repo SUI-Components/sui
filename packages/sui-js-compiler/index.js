@@ -6,6 +6,8 @@ const fg = require('fast-glob')
 const fs = require('fs-extra')
 
 ;(async () => {
+  console.time('[sui-js-compiler]')
+
   const files = await fg('./src/**/*.{js,jsx}')
 
   await Promise.all(
@@ -16,4 +18,6 @@ const fs = require('fs-extra')
       return fs.outputFile(outputPath, code)
     })
   )
+
+  console.timeEnd('[sui-js-compiler]')
 })()
