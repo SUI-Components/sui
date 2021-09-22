@@ -12,9 +12,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@testing-library/cypress": "8.0.0",
-    "commander": "8.1.0",
-    "cypress": "8.1.0",
+    "@testing-library/cypress": "8.0.1",
+    "commander": "8.2.0",
+    "cypress": "8.4.1",
     "cypress-file-upload": "5.0.8"
   },
   "keywords": [],
