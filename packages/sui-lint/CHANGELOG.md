@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.35.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-lint:** Unify @babel/core version across packages ([916eac7](https://github.com/SUI-Components/sui/commit/916eac70f006cef3acc6800fccc30cd957cfc066))
+
+
+
 # 3.34.0 (2021-08-16)
 
 
