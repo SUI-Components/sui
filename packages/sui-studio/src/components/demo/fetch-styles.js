@@ -10,7 +10,7 @@ const requireAvailableThemes = require.context(
 const requireComponentStyles = require.context(
   `!css-loader!sass-loader!${__BASE_DIR__}/components`,
   true,
-  /^\.\/\w+\/\w+\/src\/index\.scss/,
+  /^\.\/\w+\/\w+\/(src|demo)\/index\.scss/,
   'lazy'
 )
 
@@ -33,17 +33,25 @@ export default /* stylesFor */ async ({
     `[sui-studio] Applying new styles for ${componentPath} with theme: ${withTheme}`
   )
 
-  // if we're not using any theme, we load the default styles from the component itself
-  // if we've selected a theme, we load the styles for that specific theme
-  const stylePath = isDefaultTheme
-    ? `./${componentPath}/src/index.scss`
-    : `./${componentPath}/demo/themes/${withTheme}.scss`
-
   // use the correct require method to extract the expected styles
   const requireLazyStyles = isDefaultTheme
     ? requireComponentStyles
     : requireAvailableThemes
 
+  // if we're not using any theme, we load the default styles from its demo or the component itself default styles.
+  // if we've selected a theme, we load the styles for that specific theme
+  const stylePath = requireLazyStyles.keys().find(fileName => {
+    if (
+      !isDefaultTheme &&
+      `./${componentPath}/demo/themes/${withTheme}.scss` === fileName
+    ) {
+      return `./${componentPath}/demo/themes/${withTheme}.scss`
+    } else if (`./${componentPath}/demo/index.scss` === fileName) {
+      return fileName
+    } else if (`./${componentPath}/src/index.scss` === fileName) {
+      return fileName
+    }
+  })
   try {
     // extract the `default` property from the ESModule from lazy required styles
     const {default: style} = await requireLazyStyles(stylePath)
