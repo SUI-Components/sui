@@ -263,4 +263,25 @@ describe('@s-ui pde', () => {
     })
     expect(pde.activateExperiment({name: 'test'})).to.be.null
   })
+
+  it('should merge the application attributes with the feature attributes', () => {
+    optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: '123',
+      activeIntegrations: {segment: false},
+      hasUserConsents: true,
+      applicationAttributes: {applicationKey: 'applicationValue'}
+    })
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter
+    })
+    pde.isFeatureEnabled({
+      featureKey: 'featureUsedInTest',
+      attributes: {featureKey: 'featureValue'}
+    })
+    expect(optimizelyInstanceStub.isFeatureEnabled.args[0][2]).to.deep.equal({
+      applicationKey: 'applicationValue',
+      featureKey: 'featureValue'
+    })
+  })
 })
