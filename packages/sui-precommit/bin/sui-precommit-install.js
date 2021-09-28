@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const path = require('path')
 const fs = require('fs')
 const set = require('dset')
 const get = require('dlv')
+const {writeFile} = require('@s-ui/helpers/file')
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd
@@ -14,24 +14,43 @@ const {CI = false, INIT_CWD} = process.env
 const cwd = INIT_CWD || process.cwd()
 const pkgPath = path.join(cwd, 'package.json')
 
-const HUSKY_VERSION = '4.3.0'
-
 const {name} = readPackageJson()
 /** We avoid performing the precommit install:
  **  - for CI and the same precommit package
  **  - for the `@s-ui/precommit` pkg itself */
+
 if (CI === false && name !== '@s-ui/precommit') {
-  installHuskyIfNotInstalled()
-    .then(function() {
-      addToPackageJson('sui-lint js && sui-lint sass', 'scripts.lint', false)
-      addToPackageJson('sui-precommit run', 'husky.hooks.pre-commit')
-      removeFromPackageJson('precommit', 'scripts')
-    })
-    .catch(function(err) {
-      log(err.message)
-      log('sui-precommit installation has FAILED.')
-      process.exit(1)
-    })
+  const hooksPath = path.join(cwd, '.git')
+
+  const commitMsgPath = `${hooksPath}/hooks/commitmsg`
+  const preCommitPath = `${hooksPath}/hooks/pre-commit`
+  const prePushPath = `${hooksPath}/hooks/pre-push`
+
+  Promise.all([
+    writeFile(commitMsgPath, '#!/bin/sh\nnpm run commitmsg --if-present'),
+    writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
+    writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
+  ]).then(() => {
+    fs.chmod(commitMsgPath, '755')
+    fs.chmod(preCommitPath, '755')
+    fs.chmod(prePushPath, '755')
+  })
+
+  try {
+    addToPackageJson(
+      'sui-lint js --staged && sui-lint sass --staged',
+      'scripts.lint',
+      false
+    )
+    addToPackageJson('echo "Add test script"', 'scripts.test', false)
+    addToPackageJson('npm run lint', 'scripts.pre-commit', false)
+    addToPackageJson('npm run test', 'scripts.pre-push', false)
+    removeFromPackageJson('husky')
+  } catch (err) {
+    log(err.message)
+    log('sui-precommit installation has FAILED.')
+    process.exit(1)
+  }
 }
 
 function log(...args) {
@@ -45,7 +64,8 @@ function log(...args) {
  * @returns {object} Package.json content in JSON format
  */
 function readPackageJson() {
-  return JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
+  console.log(pkgPath)
+  return require(pkgPath)
 }
 
 /**
@@ -67,17 +87,12 @@ function addToPackageJson(script, path, overwrite = true) {
 /**
  * Add script on package.json where command was executed
  * @param  {string}  name   property to remove
- * @param  {string}  field  field where the script is
  **/
-function removeFromPackageJson(name, field) {
+function removeFromPackageJson(name) {
   const pkg = readPackageJson()
-  pkg[field] = pkg[field] || {}
-
-  const {[name]: remove, ...rest} = pkg[field]
-  pkg[field] = rest
-  log(`"${name}" removed from "${field}". Writing changes...`)
-
-  writePackageJson(pkg)
+  const {[name]: remove, ...rest} = pkg
+  log(`"${name}" removed from package. Writing changes...`)
+  writePackageJson(rest)
 }
 
 /**
@@ -86,30 +101,4 @@ function removeFromPackageJson(name, field) {
  */
 function writePackageJson(pkg) {
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), {encoding: 'utf8'})
-}
-
-/**
- * Install husky on project
- * @return {Promise<number>}
- */
-function installHuskyIfNotInstalled() {
-  if (!isHuskyInstalled()) {
-    log('husky will be installed to allow git hook integration with node')
-    return getSpawnPromise(
-      'npm',
-      ['install', `husky@${HUSKY_VERSION}`, '--save-dev', '--save-exact'],
-      {cwd}
-    )
-  }
-  return Promise.resolve(0)
-}
-
-/**
- * Get if husky is already installed with the expected version
- * @return {Boolean}
- */
-function isHuskyInstalled() {
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
-  const huskyDependency = pkg.devDependencies && pkg.devDependencies.husky
-  return huskyDependency === HUSKY_VERSION
 }
