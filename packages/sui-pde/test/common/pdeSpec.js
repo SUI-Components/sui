@@ -265,7 +265,6 @@ describe('@s-ui pde', () => {
   })
 
   it('should merge the application attributes with the feature attributes', () => {
-    delete window.optimizelyClientInstance
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
       userId: '123',
