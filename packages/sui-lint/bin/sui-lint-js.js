@@ -27,5 +27,5 @@ getFilesToLint(EXTENSIONS).then(
       ]).then(
         () => isOptionSet('--fix') && stageFilesIfRequired(EXTENSIONS)
       )) ||
-    console.log('[sui-lint js] No javascript files to lint.')
+    console.log('[sui-lint js] No JavaScript files to lint.')
 )
