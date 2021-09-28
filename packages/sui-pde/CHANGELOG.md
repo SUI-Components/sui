@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.14.0 (2021-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** isFeatureEnabled pass by application attributes ([4bfc251](https://github.com/SUI-Components/sui/commit/4bfc251f86dabb4d37c0feadae6bdf3263551fc7))
+
+
+### Features
+
+* **packages/sui-pde:** removing not needed clean step ([d180026](https://github.com/SUI-Components/sui/commit/d18002668105e44baccab6e23413bc5bf115a442))
+
+
+
 # 2.13.0 (2021-08-17)
 
 
