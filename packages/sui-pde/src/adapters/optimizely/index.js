@@ -170,11 +170,10 @@ export default class OptimizelyAdapter {
     }
 
     return {
-      isActive: this._optimizely.isFeatureEnabled(
-        featureKey,
-        this._userId,
-        attributes
-      ),
+      isActive: this._optimizely.isFeatureEnabled(featureKey, this._userId, {
+        ...this._applicationAttributes,
+        ...attributes
+      }),
       linkedExperiments: linkedExperimentNames
     }
   }
