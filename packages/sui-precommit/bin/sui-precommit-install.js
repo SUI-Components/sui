@@ -2,6 +2,7 @@
 
 const path = require('path')
 const fs = require('fs')
+const fsPromises = require('fs/promises')
 const set = require('dset')
 const get = require('dlv')
 const {writeFile} = require('@s-ui/helpers/file')
@@ -30,11 +31,13 @@ if (CI === false && name !== '@s-ui/precommit') {
     writeFile(commitMsgPath, '#!/bin/sh\nnpm run commitmsg --if-present'),
     writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
     writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
-  ]).then(() => {
-    fs.chmod(commitMsgPath, '755')
-    fs.chmod(preCommitPath, '755')
-    fs.chmod(prePushPath, '755')
-  })
+  ]).then(() =>
+    Promise.all([
+      fsPromises.chmod(commitMsgPath, '755'),
+      fsPromises.chmod(preCommitPath, '755'),
+      fsPromises.chmod(prePushPath, '755')
+    ])
+  )
 
   try {
     addToPackageJson(
