@@ -29,6 +29,7 @@ const FLAGS_INSTALL = [
   'no-shrinkwrap',
   'no-optional',
   'no-bin-links',
+  'legacy-peer-deps',
   'prefer-offline',
   'progress false',
   'loglevel error',
@@ -37,24 +38,25 @@ const FLAGS_INSTALL = [
   'production',
   'json'
 ]
+
 const repositories = [
-  'frontend-ma--web-app',
   'frontend-ma--uilib-widgets',
   'frontend-ma--web-app-plus',
+  'frontend-ma--web-app',
 
-  'frontend-mt--web-app',
-  'frontend-mt--uilib-widgets-coches',
-  'frontend-mt--uilib-widgets-motos',
   'frontend-cf--web-app',
   'frontend-mt--uilib-widgets-coches-pro',
+  'frontend-mt--uilib-widgets-coches',
+  'frontend-mt--uilib-widgets-motos',
+  'frontend-mt--web-app',
 
-  'frontend-fc--web-server',
   'frontend-fc--uilib-widgets',
+  'frontend-fc--web-server',
   'frontend-fcbw--uilib-widgets',
 
   'frontend-hab--uilib-widgets',
-  'frontend-hab--web-professional',
   'frontend-hab--web-app',
+  'frontend-hab--web-professional',
 
   'frontend-ij--uilib-widgets',
   'frontend-ij--web-app',
