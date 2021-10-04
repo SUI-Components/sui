@@ -13,7 +13,6 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
-    "fast-glob": "3.2.7",
-    "update-check": "1.5.4"
+    "fast-glob": "3.2.7"
   }
 }

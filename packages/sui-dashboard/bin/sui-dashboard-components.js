@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
+const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const program = require('commander')
 const {parallelSpawn, serialSpawn} = require('@s-ui/helpers/cli')
-const fs = require('fs')
 const {stats} = require('../src')
 
 program
