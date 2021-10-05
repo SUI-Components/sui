@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.14.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrad clean-css dependency ([cb2ba9d](https://github.com/SUI-Components/sui/commit/cb2ba9d0e5771b296884517a64e0deb81da76508))
+
+
+
 # 1.13.0 (2021-09-03)
 
 
