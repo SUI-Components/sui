@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.17.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Use major for types/node ([81f4fda](https://github.com/SUI-Components/sui/commit/81f4fdaa7d182939e87c30ada5206267b4e51875))
+* **packages/sui-react-initial-props:** Use major version for types/node ([a941830](https://github.com/SUI-Components/sui/commit/a9418305dfb2b3c56538ee1828aec3f3dae1867e))
+
+
+
 # 2.16.0 (2021-10-05)
 
 
