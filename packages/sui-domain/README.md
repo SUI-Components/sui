@@ -5,11 +5,12 @@
 ## Motivation
 
 **sui-domain** provides:
-* Avoid repeating boilerplate code by extracting some on this library.
-* Enforce all to follow same rules while creating a new domain.
-* A HttpFetcher to make http requests
-* Set of domain objects to extend
-* A utility to create an entry point
+
+- Avoid repeating boilerplate code by extracting some on this library.
+- Enforce all to follow same rules while creating a new domain.
+- A HttpFetcher to make http requests
+- Set of domain objects to extend
+- A utility to create an entry point
 
 ## Installation
 
@@ -50,7 +51,7 @@ const domain = new EntryPoint({ config })
 ## Using Fetcher
 
 ```javascript
-import { FetcherFactory } from '@s-ui/domain'
+import {FetcherFactory} from '@s-ui/domain'
 import UserEntitiesFactory from '../../user/Entities/factory'
 import UserValueObjectsFactory from '../../user/ValueObjects/factory'
 
@@ -65,21 +66,20 @@ export default class UserRepositoriesFactory {
       emptyUserValueObjectFactory: UserValueObjectsFactory.emptyUserValueObject
     })
 }
-
 ```
 
 ## Using a domain object
 
 ```javascript
-import { UseCase } from '@s-ui/domain'
+import {UseCase} from '@s-ui/domain'
 
 export default class CurrentUserUseCase extends UseCase {
-  constructor ({service} = {}) {
+  constructor({service} = {}) {
     super()
     this._service = service
   }
 
-  async execute () {
+  async execute() {
     const userEntity = await this._service.execute()
     return userEntity.toJSON()
   }
@@ -87,15 +87,15 @@ export default class CurrentUserUseCase extends UseCase {
 ```
 
 ```javascript
-import { Service } from '@s-ui/domain'
+import {Service} from '@s-ui/domain'
 
 export default class CurrentUserService extends Service {
-  constructor ({repository} = {}) {
+  constructor({repository} = {}) {
     super()
     this._repository = repository
   }
 
-  async execute () {
+  async execute() {
     const userEntity = this._repository.current()
     return userEntity
   }
@@ -114,4 +114,16 @@ domain
   .subscribe(({params, error, result}) => {
     // doSomething when the useCase generate_search_url_search_use_case is called in other place
   })
+```
+
+If you want unsubscribe any useCase execution
+
+```js
+const subscribedUseCase$ = domain
+  .get('generate_search_url_search_use_case')
+  .subscribe(({params, error, result}) => {
+    // doSomething when the useCase generate_search_url_search_use_case is called in other place
+  })
+
+subscribedUseCase$.unsubscribe()
 ```
