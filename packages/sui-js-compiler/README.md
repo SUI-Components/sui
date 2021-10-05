@@ -30,7 +30,7 @@ $ ./node_modules/.bin/sui-js-compiler
 
 ## Requirements
 
-Automatically, `@s-ui/js-compiler` search for `/src` folder and output the compiled files to `/lib`.
+Automatically, `@s-ui/js-compiler` searches for `/src` folder and outputs the compiled files to `/lib`.
 
 ## Contributing
 
