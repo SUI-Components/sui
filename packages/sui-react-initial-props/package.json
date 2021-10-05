@@ -17,7 +17,7 @@
     "react": "16 || 17"
   },
   "devDependencies": {
-    "@types/node": "16.10.2",
+    "@types/node": "16",
     "@s-ui/react-router": "1"
   }
 }
