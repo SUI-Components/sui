@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.26.0 (2021-09-23)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio default style loading ([ffaa2cd](https://github.com/SUI-Components/sui/commit/ffaa2cd3d5b18f7310953080701181f94d6fcfa8))
+
+
+
 # 10.25.0 (2021-09-08)
 
 

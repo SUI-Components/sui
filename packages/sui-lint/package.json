@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "3.34.0",
+  "version": "3.35.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -16,8 +16,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.15.0",
-    "@babel/eslint-parser": "7.15.0",
+    "@babel/core": "7.15.5",
+    "@babel/eslint-parser": "7.15.7",
     "@babel/eslint-plugin": "7.14.5",
     "@s-ui/helpers": "1",
     "commander": "6.2.1",

@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.29.0 (2021-10-04)
+
+
+### Bug Fixes
+
+* **packages/sui-dashboard:** Support npm@7 ([7608efe](https://github.com/SUI-Components/sui/commit/7608efe83f23a7de96b52ba0b390b3a574ea2556))
+
+
+### Features
+
+* **packages/sui-dashboard:** Use latest fast-glob package version ([e566240](https://github.com/SUI-Components/sui/commit/e566240fb34be1cedfb35cc0bfc691d4537eb934))
+
+
+
 # 1.28.0 (2021-08-16)
 
 

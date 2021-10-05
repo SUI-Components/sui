@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.33.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-helpers:** Unify fs-extra dependency across packages ([aee6515](https://github.com/SUI-Components/sui/commit/aee6515f61696ead884659c59eccb098a41a682e))
+
+
+
 # 1.32.0 (2021-03-30)
 
 
