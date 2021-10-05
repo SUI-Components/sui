@@ -12,7 +12,7 @@ const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
 
 program
-  .option('-C, --context', 'add context for this component')
+  .option('-C, --context [customContextPath]', 'add context for this component')
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
   .on('--help', () => {
@@ -72,6 +72,20 @@ const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
 )}`
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
 const {repository = {}, homepage} = packageInfo
+
+const defaultContext = `module.exports = {
+  default: {
+    i18n: {
+      t(s) {
+        return s
+          .split('')
+          .reverse()
+          .join('')
+      }
+    }
+  }
+}
+`
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
@@ -212,22 +226,14 @@ export default () => <${componentInPascal} />
   ),
 
   context &&
-    writeFile(
-      COMPONENT_CONTEXT_FILE,
-      `module.exports = {
-  default: {
-    i18n: {
-      t(s) {
-        return s
-          .split('')
-          .reverse()
-          .join('')
-      }
-    }
-  }
-}
-`
-    ),
+    (function() {
+      const isBooleanContext = typeof context === 'boolean'
+      if (isBooleanContext)
+        return writeFile(COMPONENT_CONTEXT_FILE, defaultContext)
+
+      const contextBuffer = fs.readFileSync(`${BASE_DIR}${context}`)
+      writeFile(COMPONENT_CONTEXT_FILE, contextBuffer.toString())
+    })(),
   writeFile(
     COMPONENT_TEST_FILE,
     `/*
@@ -242,6 +248,8 @@ import ReactDOM from 'react-dom'
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
 import Component from '../src/index'
+
+${context && "import '@s-ui/studio/src/patcher-mocha'"}
 
 chai.use(chaiDOM)
 
