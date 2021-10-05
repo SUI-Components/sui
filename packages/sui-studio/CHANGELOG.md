@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.27.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies ([1097bdc](https://github.com/SUI-Components/sui/commit/1097bdc5aaf5108a2cbf932f0ded4abe8d23de0c))
+
+
+
 # 10.26.0 (2021-09-23)
 
 

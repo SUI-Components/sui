@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.16.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Bump version ([6465a64](https://github.com/SUI-Components/sui/commit/6465a64c38a88cedaae7e9c44ba777eabbcadb42))
+* **packages/sui-react-initial-props:** Move types to devDependencies ([3ec6e9a](https://github.com/SUI-Components/sui/commit/3ec6e9a6422863aa9314e5703c02686ad82ac372))
+
+
+
 # 2.14.0 (2021-06-17)
 
 
