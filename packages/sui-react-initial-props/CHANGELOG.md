@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.18.0 (2021-10-06)
+
+
+### Bug Fixes
+
+* **packages/sui-react-initial-props:** Be sure we have initial props when hydrating ([611a4fc](https://github.com/SUI-Components/sui/commit/611a4fc79881bc71665e4d6ff957c3716942470f))
+
+
+
 # 2.17.0 (2021-10-05)
 
 
