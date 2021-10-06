@@ -1,38 +1,15 @@
 /* eslint-disable no-console */
 const {existsSync, readFileSync} = require('fs')
 const {extname} = require('path')
-const git = require('simple-git')
+const {getSpawnPromise} = require('@s-ui/helpers/cli')
+const {promisify} = require('util')
+const exec = promisify(require('child_process').exec)
 
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 const OPTIONS = {
   staged: '--staged',
   addFixes: '--add-fixes',
   pattern: '--pattern'
-}
-const optionFlags = Object.values(OPTIONS)
-
-/**
- * Get args removing given args
- * @param {Array<String>} args process.argv
- * @returns {Array<String>}
- */
-const filterOptionFlags = args => args.filter(arg => !optionFlags.includes(arg))
-
-/**
- * Execute bin as lint command. If -c is defined, process will be exited.
- * @param  {String} binPath Absolute path of binary
- * @param  {Array} args    Arguments to pass to child process
- * @return {ChildProcess}
- */
-function executeLintingCommand(binPath, args) {
-  const {showError, getSpawnPromise} = require('@s-ui/helpers/cli')
-  const [, , ...processArgs] = filterOptionFlags(process.argv)
-
-  if (processArgs.find(arg => arg === '-c')) {
-    console.log('[sui-lint] Dont use your own config file. Remove `-c` flag')
-    process.exit(1)
-  }
-  return getSpawnPromise(binPath, args.concat(processArgs)).catch(showError)
 }
 
 /**
@@ -43,7 +20,6 @@ function executeLintingCommand(binPath, args) {
 const getFileLinesAsArray = path =>
   existsSync(path)
     ? readFileSync(path, 'utf8')
-        .toString()
         .split('\n')
         .filter(Boolean)
     : []
@@ -56,45 +32,50 @@ const getGitIgnoredFiles = () =>
   getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
 
 /**
- * Get multiple value arg
- * @param {String} arg Ex: '--my-option'
- * @param {Array<String>} values
- * @returns {Array<String>} ['--ignore-pattern', 'folder/', ...]
+ * Get from git status name of staged files
+ * @param {string[]} extensions Extensions list. Example: ['js', 'sass', 'css']
+ * @returns {Promise<string[]>} Array of file paths
  */
-const getArrayArgs = (arg, values) =>
-  values.filter(Boolean).map(pattern => `${arg} "${pattern}"`)
+const getGitDiffFiles = async ({extensions, range = null, staged = true}) => {
+  const command = [
+    'git diff --name-only --diff-filter=d',
+    range && `${range}`,
+    staged && '--cached'
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  return exec(command).then(({stdout: summary = ''}) =>
+    getFilesFromDiff({summary, extensions})
+  )
+}
 
 /**
- * Get from git status name of staged files
- * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
- * @returns {Promise<Array>} Array of file paths
+ * Filter files from git diff status stdout
+ * @param {string[]} extensions Extensions list. Example: ['js', 'sass', 'css']
+ * @param {string} summary stdout from git diff
+ * @returns {string[]} Array of file paths
  */
-const getGitStatusFiles = async extensions =>
-  new Promise((resolve, reject) => {
-    git().diff(
-      ['--cached', '--name-only', '--diff-filter=d'], // Delete files as excluded
-      (err, summary) => {
-        err && reject(err)
-        const files = summary
-          ? summary
-              .split('\n')
-              .filter(file => extensions.includes(extname(file).substr(1)))
-          : []
-        resolve(files)
-      }
-    )
-  })
+const getFilesFromDiff = ({extensions, summary}) =>
+  summary
+    .split('\n')
+    .filter(file => extensions.includes(extname(file).substring(1)))
 
 /**
  * Get files to lint according to command options
- * @param {Array<String>} extensions Extensions list: ['js', 'sass', 'css']
- * @param {String} defaultFiles Defaults to './'
- * @returns {Promise<Array>} Array of file patterns
+ * @param {string[]} extensions Extensions list: ['js', 'sass', 'css']
+ * @param {string} defaultFiles Defaults to './'
+ * @returns {Promise<string[]>} Array of file patterns
  */
-const getFilesToLint = async (extensions, defaultFiles = './') =>
-  process.argv.includes(OPTIONS.staged)
-    ? getGitStatusFiles(extensions)
+const getFilesToLint = async (extensions, defaultFiles = './') => {
+  const {TRAVIS_COMMIT_RANGE: range} = process.env
+  const staged = process.argv.includes(OPTIONS.staged)
+  const getFromDiff = range || staged
+
+  return getFromDiff
+    ? getGitDiffFiles({extensions, range, staged})
     : [defaultFiles]
+}
 
 /**
  * If --staged option is on, it will staged made changes
@@ -104,8 +85,7 @@ const getFilesToLint = async (extensions, defaultFiles = './') =>
 const stageFilesIfRequired = async extensions => {
   const {argv} = process
   if (argv.includes(OPTIONS.staged) && argv.includes(OPTIONS.addFixes)) {
-    const {getSpawnPromise} = require('@s-ui/helpers/cli')
-    const files = await getGitStatusFiles(extensions)
+    const files = await getGitStagedFiles(extensions)
     return getSpawnPromise('git', ['add', ...files])
   }
 }
@@ -114,11 +94,9 @@ const stageFilesIfRequired = async extensions => {
  * Get if current process has option set
  * @param {String} option
  */
-const isOptionSet = option => process.argv.includes(option)
+const isOptionSet = option => process.argv.includes(`--${option}`)
 
-exports.executeLintingCommand = executeLintingCommand
 exports.getFileLinesAsArray = getFileLinesAsArray
-exports.getArrayArgs = getArrayArgs
 exports.getFilesToLint = getFilesToLint
 exports.getGitIgnoredFiles = getGitIgnoredFiles
 exports.stageFilesIfRequired = stageFilesIfRequired

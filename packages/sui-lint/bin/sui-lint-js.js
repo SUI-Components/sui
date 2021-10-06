@@ -1,31 +1,52 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const {
-  executeLintingCommand,
-  getArrayArgs,
   getFilesToLint,
   getGitIgnoredFiles,
   isOptionSet,
   stageFilesIfRequired
 } = require('../src/helpers')
 
-const BIN_PATH = require.resolve('eslint/bin/eslint')
-const CONFIG_PATH = require.resolve('../eslintrc.js')
+const {ESLint} = require('eslint')
+const config = require('../eslintrc.js')
+
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
 
-const patterns = IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+const baseConfig = {
+  ...config,
+  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+}
+const formatterName = process.env.CI ? 'stylish' : 'codeframe'
 
-getFilesToLint(EXTENSIONS).then(
-  files =>
-    (files.length &&
-      executeLintingCommand(BIN_PATH, [
-        `-c ${CONFIG_PATH}`,
-        ...getArrayArgs('--ext', EXTENSIONS),
-        ...getArrayArgs('--ignore-pattern', patterns),
-        ...files
-      ]).then(
-        () => isOptionSet('--fix') && stageFilesIfRequired(EXTENSIONS)
-      )) ||
-    console.log('[sui-lint js] No javascript files to lint.')
-)
+;(async function main() {
+  const files = await getFilesToLint(EXTENSIONS)
+  if (!files.length) {
+    console.log('[sui-lint js] No JavaScript files to lint')
+    return
+  }
+  console.log(`[sui-lint js] Linting JavaScript files...`)
+
+  const fix = isOptionSet('fix')
+  const eslint = new ESLint({
+    baseConfig,
+    fix,
+    extensions: EXTENSIONS,
+    useEslintrc: false
+  })
+
+  const results = await eslint.lintFiles(files)
+
+  if (fix) {
+    await ESLint.outputFixes(results)
+    stageFilesIfRequired(EXTENSIONS)
+  }
+
+  const formatter = await eslint.loadFormatter(formatterName)
+  const resultText = formatter.format(results)
+
+  console.log(resultText)
+})().catch(error => {
+  process.exitCode = 1
+  console.error('[sui-lint js]', error)
+})
