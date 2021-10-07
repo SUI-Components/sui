@@ -38,7 +38,6 @@ export default function useExperiment({
         return forcedVariation
       }
       variationName = strategy.getVariation({pde, experimentName, attributes})
-      console.log('variationName', variationName)
       strategy.trackExperiment({variationName, experimentName})
     } catch (error) {
       // eslint-disable-next-line no-console

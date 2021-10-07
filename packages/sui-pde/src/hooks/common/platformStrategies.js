@@ -1,5 +1,5 @@
 import {parseQueryString} from '@s-ui/js/lib/string'
-import {TrackedEventsLocalCache} from './TrackedEventsLocalCache'
+import {trackedEventsLocalCache} from './trackedEventsLocalCache'
 
 const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes}) => {
@@ -78,6 +78,9 @@ export const getPlatformStrategy = ({customTrackExperimentViewed} = {}) => {
   if (isNode) {
     return getServerStrategy()
   }
-  const cache = new TrackedEventsLocalCache()
-  return getBrowserStrategy({customTrackExperimentViewed, cache})
+  trackedEventsLocalCache.init()
+  return getBrowserStrategy({
+    customTrackExperimentViewed,
+    cache: trackedEventsLocalCache
+  })
 }
