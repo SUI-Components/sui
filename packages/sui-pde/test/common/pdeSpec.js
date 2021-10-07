@@ -38,6 +38,11 @@ describe('@s-ui pde', () => {
     })
   })
 
+  afterEach(() => {
+    if (typeof window === 'undefined') return
+    window.localStorage.removeItem('sui-pde:tracked-events-cache')
+  })
+
   it('loads the default adapter features', () => {
     const ab = new SuiPDE()
     const features = ab.getEnabledFeatures()

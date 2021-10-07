@@ -9,7 +9,11 @@ describe('when pde context is set', () => {
   const variables = {variable: 'variable'}
   let wrapper
 
-  afterEach(cleanup)
+  afterEach(() => {
+    cleanup()
+    if (typeof window === 'undefined') return
+    window.localStorage.removeItem('sui-pde:tracked-events-cache')
+  })
 
   describe('when no experiment is linked', () => {
     let isFeatureEnabled
@@ -212,7 +216,11 @@ describe('when pde context is set', () => {
       wrapper = ({children}) => (
         <PdeContext.Provider
           value={{
-            pde: {isFeatureEnabled, getAllFeatureVariables, getVariation}
+            pde: {
+              isFeatureEnabled,
+              getAllFeatureVariables,
+              getVariation
+            }
           }}
         >
           {children}
@@ -228,16 +236,22 @@ describe('when pde context is set', () => {
       renderHook(() => useFeature('featureKey4', {attribute1: 'value'}), {
         wrapper
       })
+
+      // feature being called
       expect(window.analytics.track.args[0][0]).to.equal('Experiment Viewed')
       expect(window.analytics.track.args[0][1]).to.deep.equal({
         experimentName: 'featureKey4',
         variationName: 'On State'
       })
+
+      // first experiment linked to the feature
       expect(window.analytics.track.args[1][0]).to.equal('Experiment Viewed')
       expect(window.analytics.track.args[1][1]).to.deep.equal({
         experimentName: 'abtest_fake_id',
         variationName: 'variation1'
       })
+
+      // second experiment linked to the feature
       expect(window.analytics.track.args[2][0]).to.equal('Experiment Viewed')
       expect(window.analytics.track.args[2][1]).to.deep.equal({
         experimentName: 'abtest_second_fake_id',
@@ -245,4 +259,89 @@ describe('when pde context is set', () => {
       })
     })
   })
+
+  describe.client(
+    'when calling twice the useFeature hook with the same feature key',
+    () => {
+      let getAllFeatureVariables
+      let getVariation
+      let stubFactory
+
+      beforeEach(() => {
+        window.analytics = {
+          ready: cb => cb(),
+          track: sinon.spy()
+        }
+
+        stubFactory = isFeatureEnabled => {
+          getAllFeatureVariables = sinon.stub().returns(variables)
+
+          // eslint-disable-next-line react/prop-types
+          wrapper = ({children}) => (
+            <PdeContext.Provider
+              value={{
+                pde: {
+                  isFeatureEnabled,
+                  getAllFeatureVariables,
+                  getVariation
+                }
+              }}
+            >
+              {children}
+            </PdeContext.Provider>
+          )
+        }
+      })
+
+      afterEach(() => {
+        delete window.analytics
+      })
+
+      describe('when the second time returns the same value as the first time', () => {
+        beforeEach(() => {
+          const isFeatureEnabled = sinon.stub()
+          isFeatureEnabled.onCall(0).returns({
+            isActive: true
+          })
+          isFeatureEnabled.onCall(1).returns({
+            isActive: true
+          })
+
+          stubFactory(isFeatureEnabled)
+        })
+        it('should send only one experiment viewed event', () => {
+          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
+            wrapper
+          })
+          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
+            wrapper
+          })
+          expect(window.analytics.track.args.length).to.equal(1)
+        })
+      })
+
+      describe('when the second time returns a different value as the first time', () => {
+        beforeEach(() => {
+          const isFeatureEnabled = sinon.stub()
+          isFeatureEnabled.onCall(0).returns({
+            isActive: true
+          })
+          isFeatureEnabled.onCall(1).returns({
+            isActive: false
+          })
+
+          stubFactory(isFeatureEnabled)
+        })
+        it('should send two experiment viewed events', () => {
+          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
+            wrapper
+          })
+          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
+            wrapper
+          })
+          expect(window.analytics.track.args.length).to.equal(2)
+        })
+      })
+    }
+  )
 })

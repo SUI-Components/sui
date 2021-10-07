@@ -1,6 +1,6 @@
 import {useContext, useMemo} from 'react'
 import PdeContext from '../contexts/PdeContext'
-import {getPlatformStrategy} from './platformStrategies'
+import {getPlatformStrategy} from './common/platformStrategies'
 
 /**
  * Hook to use a experiment
@@ -38,6 +38,7 @@ export default function useExperiment({
         return forcedVariation
       }
       variationName = strategy.getVariation({pde, experimentName, attributes})
+      console.log('variationName', variationName)
       strategy.trackExperiment({variationName, experimentName})
     } catch (error) {
       // eslint-disable-next-line no-console
