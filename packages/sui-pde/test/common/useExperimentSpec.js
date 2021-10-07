@@ -3,13 +3,14 @@ import {cleanup, renderHook} from '@testing-library/react-hooks'
 import {expect} from 'chai'
 import PdeContext from '../../src/contexts/PdeContext'
 import useExperiment from '../../src/hooks/useExperiment'
+import {LOCAL_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
 import sinon from 'sinon'
 
 describe('useExperiment hook', () => {
   afterEach(() => {
     cleanup()
     if (typeof window === 'undefined') return
-    window.localStorage.removeItem('sui-pde:tracked-events-cache')
+    window.localStorage.removeItem(PDE_CACHE_STORAGE_KEY)
   })
 
   describe('when no pde context is set', () => {

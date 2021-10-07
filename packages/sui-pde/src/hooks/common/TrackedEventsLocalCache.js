@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = 'sui-pde:tracked-events-cache'
+export const LOCAL_STORAGE_KEY = 'sui-pde:tracked-events-cache'
 
 const read = () => {
   return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
