@@ -1,11 +1,12 @@
-export const LOCAL_STORAGE_KEY = 'sui-pde:tracked-events-cache'
+export const SESSION_STORAGE_KEY = 'sui-pde:tracked-events-cache'
 
 const read = () => {
-  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  const storageOutput = sessionStorage.getItem(SESSION_STORAGE_KEY)
+  return JSON.parse(storageOutput)
 }
 
 const update = () => {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(trackedKeys))
+  sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(trackedKeys))
 }
 
 let trackedKeys

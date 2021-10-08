@@ -3,6 +3,7 @@ import {PDE as SuiPDE} from '../../src'
 import OptimizelyAdapter from '../../src/adapters/optimizely'
 import DefaultAdapter from '../../src/adapters/default'
 import sinon from 'sinon'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
 
 import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 
@@ -40,7 +41,7 @@ describe('@s-ui pde', () => {
 
   afterEach(() => {
     if (typeof window === 'undefined') return
-    window.localStorage.removeItem('sui-pde:tracked-events-cache')
+    window.sessionStorage.removeItem(PDE_CACHE_STORAGE_KEY)
   })
 
   it('loads the default adapter features', () => {
