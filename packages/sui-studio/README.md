@@ -32,6 +32,20 @@ Once you're in a new project, execute `sui-studio start` to start the developmen
 $ npx sui-studio generate house window
 ```
 
+#### Context
+
+Use `-C` parameter to generate the component with a default context
+
+```sh
+$ npx sui-studio generate house window -C
+```
+
+Use `-C path` parameter to generate the component with a given default context
+
+```sh
+$ npx sui-studio generate house window -C ./myCustomContext.js
+```
+
 ### To develop the new component,
 
 #### 1) Launch the development environment
