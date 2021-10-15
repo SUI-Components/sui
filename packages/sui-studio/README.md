@@ -34,13 +34,13 @@ $ npx sui-studio generate house window
 
 #### Context
 
-Use `-C` parameter to generate the component with a default context
+Use `-C` or `--context` parameter to generate the component with a default context
 
 ```sh
 $ npx sui-studio generate house window -C
 ```
 
-Use `-C path` parameter to generate the component with a given default context
+Use `-C path` or `--context path` parameter to generate the component with a given default context
 
 ```sh
 $ npx sui-studio generate house window -C ./myCustomContext.js
