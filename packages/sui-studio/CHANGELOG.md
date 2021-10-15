@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.28.0 (2021-10-15)
+
+
+### Features
+
+* **packages/sui-studio:** add dev mode raw default style loading ([2d87f1b](https://github.com/SUI-Components/sui/commit/2d87f1bfbc3ccb6437bb98e22085df4d3adaade2))
+
+
+
 # 10.27.0 (2021-10-05)
 
 
