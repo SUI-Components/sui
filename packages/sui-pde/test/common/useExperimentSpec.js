@@ -267,20 +267,42 @@ describe('useExperiment hook', () => {
 
           stubFactory(activateExperiment)
         })
-        it('should send two experiment viewed events', () => {
-          renderHook(
-            () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
-            {
-              wrapper
-            }
-          )
-          renderHook(
-            () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args.length).to.equal(2)
+
+        describe('when the user doesnt end the session in between', () => {
+          it('should send only one experiment viewed event', () => {
+            renderHook(
+              () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
+              {
+                wrapper
+              }
+            )
+            renderHook(
+              () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
+              {
+                wrapper
+              }
+            )
+            expect(window.analytics.track.args.length).to.equal(1)
+          })
+        })
+
+        describe('when the user ends the session in between', () => {
+          it('should send only one experiment viewed event', () => {
+            renderHook(
+              () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
+              {
+                wrapper
+              }
+            )
+            window.sessionStorage.removeItem(PDE_CACHE_STORAGE_KEY)
+            renderHook(
+              () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
+              {
+                wrapper
+              }
+            )
+            expect(window.analytics.track.args.length).to.equal(2)
+          })
         })
       })
     }

@@ -17,6 +17,12 @@ export const trackedEventsLocalCache = {
   includes: (key, value) => {
     return trackedKeys[key] === value
   },
+  includesKey: key => {
+    return trackedKeys[key] !== undefined
+  },
+  get: key => {
+    return trackedKeys[key]
+  },
   push: (key, value) => {
     if (trackedKeys[key] === value) return
     trackedKeys[key] = value

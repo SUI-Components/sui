@@ -18,6 +18,10 @@ const getServerStrategy = () => ({
 
 const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
   getVariation: ({pde, experimentName, attributes}) => {
+    if (cache.includesKey(experimentName)) {
+      return cache.get(experimentName)
+    }
+
     const variationName = pde.activateExperiment({
       name: experimentName,
       attributes
