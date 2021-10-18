@@ -91,6 +91,47 @@ i18n.n(1000) //=> 1,000
 i18n.n(1000000) //=> 1,000,000
 ```
 
+### Add or modify translations dynamically
+
+You can use the method `addTranslations` to add new literals or modify existing ones given a key.
+```javascript
+import I18n from '@s-ui/i18n';
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
+
+const i18n = new I18n({adapter: new Polyglot()});
+i18n.languages = {
+    'es-ES': {
+        'HELLO_WORLD': '¡Hola mundo!',
+    },
+    'ca-ES': {
+        'HELLO_WORLD': 'Hola món!'
+    },
+    'en-GB': {
+        'HELLO_WORLD': 'Hello world!'
+    }
+};
+
+i18n.culture = 'es-ES';
+
+// You can add new translations to the current culture
+const translations = {'HELLO_SUI': '¡Hola desde sui!'} //  this will modify all es-ES dictionary!
+i18n.addTranslations({translations})
+i18n.t('HELLO_WORLD') //=> HELLO_WOLD
+i18n.t('HELLO_SUI') //=> ¡Hola desde sui!
+
+// Or specify a new culture to be set
+const caTranslations = {'HELLO_SUI': '¡Hola des de sui!'}
+i18n.addTranslations({culture: 'ca-ES', translations: caTranslations}) // culture now is: ca-ES
+i18n.t('HELLO_SUI') //=> ¡Hola des de sui!
+
+i18n.culture = 'es-ES';
+
+// If you specify `key`, it will add to the current dictionary
+i18n.addTranslations({key: 'DYNAMIC_GREETINGS', translations})
+i18n.t('HELLO_WORLD') //=> ¡Hola mundo!
+i18n.t('DYNAMIC_GREETINGS.HELLO_SUI') //=> ¡Hola desde sui!
+```
+
 ### Using number formatting in the server side
 
 If you want to take advantage of this library methods to format numbers (`i18n.n()` and `i18n.c()`) in the server side, you must implement [a polyfill for `Intl` API](http://formatjs.io/guides/runtime-environments/#server).

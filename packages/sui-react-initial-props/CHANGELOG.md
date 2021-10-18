@@ -1,5 +1,34 @@
 # CHANGELOG
 
+# 2.18.0 (2021-10-06)
+
+
+### Bug Fixes
+
+* **packages/sui-react-initial-props:** Be sure we have initial props when hydrating ([611a4fc](https://github.com/SUI-Components/sui/commit/611a4fc79881bc71665e4d6ff957c3716942470f))
+
+
+
+# 2.17.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Use major for types/node ([81f4fda](https://github.com/SUI-Components/sui/commit/81f4fdaa7d182939e87c30ada5206267b4e51875))
+* **packages/sui-react-initial-props:** Use major version for types/node ([a941830](https://github.com/SUI-Components/sui/commit/a9418305dfb2b3c56538ee1828aec3f3dae1867e))
+
+
+
+# 2.16.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Bump version ([6465a64](https://github.com/SUI-Components/sui/commit/6465a64c38a88cedaae7e9c44ba777eabbcadb42))
+* **packages/sui-react-initial-props:** Move types to devDependencies ([3ec6e9a](https://github.com/SUI-Components/sui/commit/3ec6e9a6422863aa9314e5703c02686ad82ac372))
+
+
+
 # 2.14.0 (2021-06-17)
 
 

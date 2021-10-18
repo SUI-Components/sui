@@ -1,6 +1,7 @@
 // --- Functions --- //
 
 // Image URL
-@function image-url($image, $url: $url-statics + 'images/') {
-  @return url('#{$url}#{$image}');
+@function image-url($image, $url: $url-statics + 'images') {
+  $url-slash: if(str-index($image, '/'), '', '/');
+  @return url('#{$url}#{$url-slash}#{$image}');
 }
