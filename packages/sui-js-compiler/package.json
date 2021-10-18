@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@swc/core": "1.2.93",
+    "@swc/core": "1.2.99",
     "@swc/helpers": "0.2.13",
     "fast-glob": "3.2.7",
     "fs-extra": "10.0.0"
