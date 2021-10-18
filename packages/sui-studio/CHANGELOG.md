@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 10.28.0 (2021-10-15)
+
+
+### Features
+
+* **packages/sui-studio:** add dev mode raw default style loading ([2d87f1b](https://github.com/SUI-Components/sui/commit/2d87f1bfbc3ccb6437bb98e22085df4d3adaade2))
+
+
+
+# 10.27.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies ([1097bdc](https://github.com/SUI-Components/sui/commit/1097bdc5aaf5108a2cbf932f0ded4abe8d23de0c))
+
+
+
+# 10.26.0 (2021-09-23)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio default style loading ([ffaa2cd](https://github.com/SUI-Components/sui/commit/ffaa2cd3d5b18f7310953080701181f94d6fcfa8))
+
+
+
 # 10.25.0 (2021-09-08)
 
 

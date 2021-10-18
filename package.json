@@ -24,13 +24,13 @@
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
   },
   "devDependencies": {
-    "@babel/cli": "7.14.5",
+    "@babel/cli": "7.15.7",
     "@s-ui/lint": "3",
     "@s-ui/mono": "2",
     "@s-ui/precommit": "2",
     "@s-ui/react-context": "1",
-    "@s-ui/test": "5",
-    "chai": "4.2.0",
+    "@s-ui/test": "6",
+    "chai": "4.3.4",
     "husky": "4.3.0",
     "react": "17",
     "rimraf": "3.0.2",

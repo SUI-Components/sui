@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.3.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Upgrade dependencies ([ed4783b](https://github.com/SUI-Components/sui/commit/ed4783bbab1696ff400f53a5240428304dd71374))
+
+
+
 # 1.2.0 (2021-08-04)
 
 

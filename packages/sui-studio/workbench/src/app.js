@@ -74,8 +74,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
       componentID={__COMPONENT_ID__}
       contexts={contexts}
       demo={DemoComponent}
-      demoStyles={demoStyles}
-      themes={{...themes, default: defaultStyle}}
+      themes={{...themes, default: demoStyles?.default || defaultStyle}}
       {...params}
     />,
     document.getElementById('app')

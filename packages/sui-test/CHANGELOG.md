@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.2.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-test:** Unify @babel/core package versions ([b29c83b](https://github.com/SUI-Components/sui/commit/b29c83bc95688cbded4cae36ff1b67925688a39a))
+
+
+
 # 6.1.0 (2021-08-16)
 
 

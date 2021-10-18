@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import PdeContext from '../contexts/PdeContext'
-import {getPlatformStrategy} from './platformStrategies'
+import {getPlatformStrategy} from './common/platformStrategies'
 
 const VARIATION_NAME_ON = 'On State'
 const VARIATION_NAME_OFF = 'Off State'
@@ -26,20 +26,18 @@ const trackFeatureFlagViewed = ({
  * @param {object} param
  * @param {linkedExperiments} string[] feature tests using the current feature flag
  * @param {function} trackExperimentViewed
- * @param {function} getExperimentVariation gets user variation linked to experiment
  * @param {object} attributes user attributes to take into account for its segmentation
  * @param {object} pde
  */
 const trackLinkedExperimentsViewed = ({
   linkedExperiments,
   trackExperimentViewed,
-  getExperimentVariation,
   attributes,
   pde
 }) => {
   if (!linkedExperiments) return
   linkedExperiments.forEach(experimentName => {
-    const variationName = getExperimentVariation({
+    const variationName = pde.getVariation({
       experimentName,
       pde,
       attributes
@@ -90,12 +88,12 @@ export default function useFeature(featureKey, attributes, queryString) {
     trackLinkedExperimentsViewed({
       linkedExperiments,
       trackExperimentViewed: strategy.trackExperiment,
-      getExperimentVariation: strategy.getVariation,
       pde,
       attributes
     })
     return {isActive, variables}
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error)
     return {isActive: false, variables: {}}
   }
