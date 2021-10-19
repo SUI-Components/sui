@@ -76,7 +76,13 @@ Page.getInitialProps = ({ context, routeInfo }) =>
   Promise.resolve({
     initialContent: 'This is the initial content',
     // Optional __HTTP__ object to perform 301 Redirects
-    __HTTP__: {redirectTo: 'https://<301 Redirect Route>'}
+    __HTTP__: {
+      redirectTo: 'https://<301 Redirect Route>',
+      // Optional object to set an Http-Cookie before redirection
+      httpCookie: {
+        AdNotAvailable: true
+      }
+    }
   })
 /**
  * Determine if Page should be kept while navigating on client between routes for the same page.
@@ -154,7 +160,7 @@ The response is a promise resolved with two parameters. In addition, you can def
 Field | Type | Description
 --- | --- | ---
 initialProps | `object` | Result of executing the `getInitialProps` of the pageComponent.
-initialprops.__HTTP__ | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 3XX server side redirects using [sui-ssr](https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr). By default, redirect status code is 301, but you may set a valid `redirectStatusCode` option set in the file `@s-ui/ssr/status-codes`.
+initialprops.__HTTP__ | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 3XX server side redirects using [sui-ssr]. By default, redirect status code is 301, but you may set a valid `redirectStatusCode` option set in the file `@s-ui/ssr/status-codes` and an optional `httpCookie` key where you will define an object with the key/value of the `Http-Cookie` to be set from server. (see https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr)
 reactString | `string` | String with the renderized app ready to be sent.
 
 #### loadPage(contextFactory, importPage)
