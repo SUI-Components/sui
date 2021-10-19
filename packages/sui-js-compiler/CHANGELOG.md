@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.2.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Remove promise.all for now ([29f686e](https://github.com/SUI-Components/sui/commit/29f686e40edbbbfb680f2d0180e357b238ed2f8b))
+
+
+
 # 1.1.0 (2021-10-05)
 
 

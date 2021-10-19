@@ -168,7 +168,13 @@ export default async (req, res, next) => {
 
   const {__HTTP__} = initialProps
   if (__HTTP__) {
-    const {redirectTo, redirectStatusCode} = __HTTP__
+    const {redirectTo, redirectStatusCode, httpCookie} = __HTTP__
+
+    if (httpCookie) {
+      const [[field, value]] = Object.entries(httpCookie)
+      res.cookie(field, value, {httpOnly: true})
+    }
+
     if (redirectTo) {
       const isValidRedirectStatusCode = redirectStatusCodes.includes(
         redirectStatusCode
