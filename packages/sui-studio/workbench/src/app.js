@@ -1,4 +1,4 @@
-/* eslint no-undef:0 */
+/* eslint-disable no-console, no-undef, import/no-webpack-loader-syntax */
 import ReactDOM from 'react-dom'
 
 import './styles.scss'

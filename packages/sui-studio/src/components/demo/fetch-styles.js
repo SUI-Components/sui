@@ -1,4 +1,4 @@
-/* eslint no-console:0 */
+/* eslint-disable no-console, import/no-webpack-loader-syntax */
 /* global __BASE_DIR__ */
 
 const requireAvailableThemes = require.context(
