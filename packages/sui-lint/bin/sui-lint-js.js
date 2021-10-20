@@ -47,7 +47,7 @@ const formatterName = process.env.CI ? 'stylish' : 'codeframe'
 
   console.log(resultText)
 
-  if (results.errorCount > 0) {
+  if (ESLint.getErrorResults(results).length > 0) {
     throw new Error('You must fix linting errores before continuing...')
   }
 })().catch(error => {
