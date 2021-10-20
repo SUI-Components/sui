@@ -21,11 +21,11 @@ program
 
 getFilesToLint(EXTENSIONS, program.pattern).then(files => {
   if (!files.length) {
-    console.log('[sui-lint sass] No sass files to lint.')
+    console.log('[sui-lint] No SCSS files to lint.')
     return
   }
 
-  console.log(`[sui-lint scss] Linting SCSS files...`)
+  console.log(`[sui-lint] Linting ${files.length} SCSS files...`)
 
   return stylelint
     .lint({
@@ -42,6 +42,6 @@ getFilesToLint(EXTENSIONS, program.pattern).then(files => {
     })
     .catch(error => {
       process.exitCode = 1
-      console.error('[sui-lint scss]', error)
+      console.error('[sui-lint]', error)
     })
 })

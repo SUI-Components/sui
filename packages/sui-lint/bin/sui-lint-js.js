@@ -22,10 +22,10 @@ const formatterName = process.env.CI ? 'stylish' : 'codeframe'
 ;(async function main() {
   const files = await getFilesToLint(EXTENSIONS)
   if (!files.length) {
-    console.log('[sui-lint js] No JavaScript files to lint')
+    console.log('[sui-lint] No JavaScript files to lint')
     return
   }
-  console.log(`[sui-lint js] Linting JavaScript files...`)
+  console.log(`[sui-lint] Linting ${files.length} JavaScript files...`)
 
   const fix = isOptionSet('fix')
   const eslint = new ESLint({
@@ -48,5 +48,5 @@ const formatterName = process.env.CI ? 'stylish' : 'codeframe'
   console.log(resultText)
 })().catch(error => {
   process.exitCode = 1
-  console.error('[sui-lint js]', error)
+  console.error('[sui-lint]', error)
 })
