@@ -73,7 +73,7 @@ const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
 const {repository = {}, homepage} = packageInfo
 
-const trimLines = str => str.replace(/(\r\n|\r|\n){2,}/g, '$1\n')
+const removeRepeatedNewLines = str => str.replace(/(\r\n|\r|\n){2,}/g, '$1\n')
 
 const testTemplate = `/*
  * Remember: YOUR COMPONENT IS DEFINED GLOBALLY
@@ -285,7 +285,7 @@ export default () => <${componentInPascal} />
       const contextBuffer = fs.readFileSync(`${BASE_DIR}${context}`)
       writeFile(COMPONENT_CONTEXT_FILE, contextBuffer.toString())
     })(),
-  writeFile(COMPONENT_TEST_FILE, trimLines(testTemplate))
+  writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(testTemplate))
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
   const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
