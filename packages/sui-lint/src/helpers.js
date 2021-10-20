@@ -84,8 +84,11 @@ const getFilesToLint = async (extensions, defaultFiles = './') => {
  */
 const stageFilesIfRequired = async extensions => {
   const {argv} = process
-  if (argv.includes(OPTIONS.staged) && argv.includes(OPTIONS.addFixes)) {
-    const files = await getGitStagedFiles(extensions)
+  const staged = argv.includes(OPTIONS.staged)
+  const addFixes = argv.includes(OPTIONS.addFixes)
+
+  if (staged && addFixes) {
+    const files = await getGitDiffFiles({extensions, staged})
     return getSpawnPromise('git', ['add', ...files])
   }
 }
