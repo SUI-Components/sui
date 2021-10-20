@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.19.0 (2021-10-19)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** update readme according ton new htppCookie sui-ssr feature ([b77f93a](https://github.com/SUI-Components/sui/commit/b77f93aa8fc2cac6156aa5e81d955dc89a1a3898))
+
+
+
+# 2.18.0 (2021-10-06)
+
+
+### Bug Fixes
+
+* **packages/sui-react-initial-props:** Be sure we have initial props when hydrating ([611a4fc](https://github.com/SUI-Components/sui/commit/611a4fc79881bc71665e4d6ff957c3716942470f))
+
+
+
 # 2.17.0 (2021-10-05)
 
 

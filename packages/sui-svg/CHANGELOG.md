@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.4.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite dependency ([de94119](https://github.com/SUI-Components/sui/commit/de941194b8c17197011d5a3473e52b0851db0356))
+
+
+
 # 3.3.0 (2021-10-05)
 
 

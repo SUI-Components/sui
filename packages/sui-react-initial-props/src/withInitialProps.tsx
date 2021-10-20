@@ -3,18 +3,16 @@ import SUIContext from '@s-ui/react-context'
 import { RouteInfo } from '@s-ui/react-router/src/types'
 import { ClientPageComponent, WithInitialPropsComponent } from './types'
 
+const INITIAL_PROPS_KEY = '__INITIAL_PROPS__'
+
 // used to store the last definition of ClientPage component so it can be reused
 let latestClientPage: WithInitialPropsComponent
 
 const getInitialPropsFromWindow = (): object | undefined => {
   // if no window initial props, then do nothing
-  if (typeof window.__INITIAL_PROPS__ === 'undefined') return
-  // make a copy of the content safely
-  const windowInitialProps = { ...window.__INITIAL_PROPS__ }
-  // remove the variable of the window
-  window.__INITIAL_PROPS__ = undefined
+  if (typeof window[INITIAL_PROPS_KEY] === 'undefined') return
   // return retrieved props from window
-  return windowInitialProps
+  return window[INITIAL_PROPS_KEY]
 }
 
 // extract needed info from props for routeInfo object
@@ -35,15 +33,17 @@ const createRouteInfoFromProps = ({ location, params, routes }: RouteInfo): Rout
 // gets props updated. Also, since PageComponent keeps mounted it will receive
 // an `isLoading` prop while getInitialProps is in progress.
 export default (Page: ClientPageComponent): WithInitialPropsComponent => {
+  const { keepMounted = false } = Page
   // gather window initial props for this Page, if present
   const windowInitialProps = getInitialPropsFromWindow()
-  const { keepMounted = false } = Page
+  // remove the variable of the window
+  window[INITIAL_PROPS_KEY] = null
 
   // define Page wrapper component
   const ClientPage: WithInitialPropsComponent = (props: RouteInfo & object) => {
     const initialPropsFromWindowRef = useRef(windowInitialProps)
     // used to know if initialProps has been requested at least once
-    const requestedInitialPropsOnceRef = useRef(!(windowInitialProps == null))
+    const requestedInitialPropsOnceRef = useRef(windowInitialProps != null)
     // create routeInfo object from current props which are updated
     const routeInfo = createRouteInfoFromProps(props)
     // consume sui context from the context provider
@@ -52,7 +52,7 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
     const context = { ...suiContext, pathName: routeInfo.location.pathname }
 
     const [{ initialProps, isLoading }, setState] = useState(() => ({
-      initialProps: (initialPropsFromWindowRef.current != null) || {},
+      initialProps: initialPropsFromWindowRef.current ?? {},
       isLoading: initialPropsFromWindowRef.current == null
     }))
 

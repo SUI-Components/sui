@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.106.0 (2021-10-15)
+
+
+### Features
+
+* **packages/sui-theme:** Add new l and xl input sizes ([66a0e02](https://github.com/SUI-Components/sui/commit/66a0e02abea1c8993a4612134f6194cbb1d6f296))
+
+
+
 # 8.105.0 (2021-09-23)
 
 

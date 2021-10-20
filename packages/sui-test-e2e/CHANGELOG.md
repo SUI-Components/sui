@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.4.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Use latest Cypress version ([338c2ca](https://github.com/SUI-Components/sui/commit/338c2ca4163f93616a7c0c79a69c28b3198756c9))
+
+
+
 # 1.3.0 (2021-09-22)
 
 

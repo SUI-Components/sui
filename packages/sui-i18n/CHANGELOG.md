@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.26.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-i18n:** support custom culture in n and c ([38eda29](https://github.com/SUI-Components/sui/commit/38eda29fa9c2adab9be90d5cf2936f4091d43a83))
+
+
+
 # 1.25.0 (2021-08-24)
 
 
