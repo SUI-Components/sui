@@ -37,8 +37,12 @@ getFilesToLint(EXTENSIONS, program.pattern).then(files => {
         ignoreFiles: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
       }
     })
-    .then(data => {
-      console.log(data.output)
+    .then(({output, errored}) => {
+      console.log(output)
+
+      if (errored) {
+        throw new Error('You must fix linting errores before continuing...')
+      }
     })
     .catch(error => {
       process.exitCode = 1

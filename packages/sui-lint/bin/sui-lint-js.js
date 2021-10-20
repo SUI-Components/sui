@@ -46,6 +46,10 @@ const formatterName = process.env.CI ? 'stylish' : 'codeframe'
   const resultText = formatter.format(results)
 
   console.log(resultText)
+
+  if (results.errorCount > 0) {
+    throw new Error('You must fix linting errores before continuing...')
+  }
 })().catch(error => {
   process.exitCode = 1
   console.error('[sui-lint]', error)
