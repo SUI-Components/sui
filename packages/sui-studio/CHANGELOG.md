@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.29.0 (2021-10-20)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add Babel package on index.html for dev mode ([3ceb285](https://github.com/SUI-Components/sui/commit/3ceb2852691568285b70938e5d2235e7f8dd1292))
+
+
+
 # 10.28.0 (2021-10-15)
 
 
