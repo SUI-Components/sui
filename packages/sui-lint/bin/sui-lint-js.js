@@ -10,6 +10,7 @@ const {
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')
 
+const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
 
@@ -17,7 +18,7 @@ const baseConfig = {
   ...config,
   ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
 }
-const formatterName = process.env.CI ? 'stylish' : 'codeframe'
+const formatterName = CI ? 'stylish' : 'codeframe'
 
 ;(async function main() {
   const files = await getFilesToLint(EXTENSIONS)
@@ -43,11 +44,14 @@ const formatterName = process.env.CI ? 'stylish' : 'codeframe'
   }
 
   const formatter = await eslint.loadFormatter(formatterName)
-  const resultText = formatter.format(results)
+  const errors = ESLint.getErrorResults(results)
+
+  const resultsToShow = CI ? errors : results
+  const resultText = formatter.format(resultsToShow)
 
   console.log(resultText)
 
-  if (ESLint.getErrorResults(results).length > 0) {
+  if (errors.length > 0) {
     throw new Error('You must fix linting errores before continuing...')
   }
 })().catch(error => {
