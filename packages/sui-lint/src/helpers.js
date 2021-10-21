@@ -116,7 +116,9 @@ const checkFilesToLint = ({files, language}) => {
     return false
   }
 
-  if (files.length === 1 && files[0] === './') {
+  const [firstPattern] = files
+  // check if pattern is all files for JS or SCSS
+  if (firstPattern === './' || firstPattern === '**/*.scss') {
     console.log(`[sui-lint] Lint all ${language} files`)
     return false
   }
