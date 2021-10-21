@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 3.36.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Fix problems with staged files ([e5bbbf2](https://github.com/SUI-Components/sui/commit/e5bbbf2f1314c2f5e10ac95bc0faccea079b32d1))
+
+
+### Features
+
+* **packages/sui-lint:** Exit code 1 if sui-lint js fails ([aba85bd](https://github.com/SUI-Components/sui/commit/aba85bdbf17a6016a0600cc9eaab967552540989))
+* **packages/sui-lint:** Exit with error if problem detected ([b4406ae](https://github.com/SUI-Components/sui/commit/b4406ae125db1bc3893e6d73311a042875e83dbe))
+* **packages/sui-lint:** Improve log messages ([4788c1c](https://github.com/SUI-Components/sui/commit/4788c1caecd9f281c55a1f9db39d62ec9f78e4c1))
+* **packages/sui-lint:** Less noisy linter on CI ([181e74e](https://github.com/SUI-Components/sui/commit/181e74ed8e7e79a24d18660aaa4fe6cb955d8c51))
+* **packages/sui-lint:** Migrate to programmatic Node ([2f929e3](https://github.com/SUI-Components/sui/commit/2f929e34b159d0af27fb6da68d1016cd1ecf3daa))
+* **packages/sui-lint:** Upgrade minor versions for dependencies ([fa0d522](https://github.com/SUI-Components/sui/commit/fa0d52247af4c45e0c477046b6d7fa6e1fb416ee))
+
+
+
 # 3.35.0 (2021-09-22)
 
 

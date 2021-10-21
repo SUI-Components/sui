@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "3.35.0",
+  "version": "3.36.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
