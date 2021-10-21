@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.3.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies about babel ([abc3fa1](https://github.com/SUI-Components/sui/commit/abc3fa1bdaa4dc7c9b9f27b0dbb4fef32777e804))
+
+
+
 # 6.2.0 (2021-09-22)
 
 
