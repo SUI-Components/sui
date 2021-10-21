@@ -33,7 +33,10 @@ const getGitIgnoredFiles = () =>
 
 /**
  * Get from git status name of staged files
- * @param {string[]} extensions Extensions list. Example: ['js', 'sass', 'css']
+ * @param {object} params
+ * @param {string[]} params.extensions Extensions list. Example: ['js', 'sass', 'css']
+ * @param {string=} params.range Range of commits to lint
+ * @param {boolean} params.staged If true, it will get staged files
  * @returns {Promise<string[]>} Array of file paths
  */
 const getGitDiffFiles = async ({extensions, range = null, staged = true}) => {
@@ -52,8 +55,9 @@ const getGitDiffFiles = async ({extensions, range = null, staged = true}) => {
 
 /**
  * Filter files from git diff status stdout
- * @param {string[]} extensions Extensions list. Example: ['js', 'sass', 'css']
- * @param {string} summary stdout from git diff
+ * @param {object} params
+ * @param {string[]} params.extensions Extensions list. Example: ['js', 'sass', 'css']
+ * @param {string} params.summary stdout from git diff
  * @returns {string[]} Array of file paths
  */
 const getFilesFromDiff = ({extensions, summary}) =>
@@ -99,10 +103,35 @@ const stageFilesIfRequired = async extensions => {
  */
 const isOptionSet = option => process.argv.includes(`--${option}`)
 
+/**
+ * Check if there're files to lint and output a message
+ * @param {Object} params
+ * @param {String[]} params.files Files to lint
+ * @param {"JavaScript" | "SCSS"} params.language Language to lint
+ * @returns {boolean} If there's files to lint
+ */
+const checkFilesToLint = ({files, language}) => {
+  if (!files.length) {
+    console.log(`[sui-lint] No ${language} files to lint`)
+    return false
+  }
+
+  const [firstPattern] = files
+  // check if pattern is all files for JS or SCSS
+  if (firstPattern === './' || firstPattern === '**/*.scss') {
+    console.log(`[sui-lint] Lint all ${language} files`)
+    return true
+  }
+
+  console.log(`[sui-lint] Linting ${files.length} ${language} files...`)
+  return true
+}
+
+exports.checkFilesToLint = checkFilesToLint
 exports.getFileLinesAsArray = getFileLinesAsArray
 exports.getFilesToLint = getFilesToLint
 exports.getGitIgnoredFiles = getGitIgnoredFiles
-exports.stageFilesIfRequired = stageFilesIfRequired
 exports.isOptionSet = isOptionSet
+exports.stageFilesIfRequired = stageFilesIfRequired
 exports.GIT_IGNORE_PATH = GIT_IGNORE_PATH
 exports.OPTIONS = OPTIONS
