@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const {
+  checkFilesToLint,
   getFilesToLint,
   getGitIgnoredFiles,
   isOptionSet,
@@ -22,11 +23,7 @@ const formatterName = CI ? 'stylish' : 'codeframe'
 
 ;(async function main() {
   const files = await getFilesToLint(EXTENSIONS)
-  if (!files.length) {
-    console.log('[sui-lint] No JavaScript files to lint')
-    return
-  }
-  console.log(`[sui-lint] Linting ${files.length} JavaScript files...`)
+  if (!checkFilesToLint({files, language: 'JavaScript'})) return
 
   const fix = isOptionSet('fix')
   const eslint = new ESLint({
