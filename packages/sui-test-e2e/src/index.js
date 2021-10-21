@@ -1,2 +1,1 @@
-import addCommands from './add-commands'
-export {addCommands}
+export {default as addCommands} from './add-commands'
