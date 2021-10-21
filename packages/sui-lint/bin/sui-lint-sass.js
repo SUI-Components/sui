@@ -3,7 +3,11 @@
 const program = require('commander')
 const stylelint = require('stylelint')
 const config = require('../stylelint.config.js')
-const {getGitIgnoredFiles, getFilesToLint} = require('../src/helpers')
+const {
+  checkFilesToLint,
+  getGitIgnoredFiles,
+  getFilesToLint
+} = require('../src/helpers')
 
 const EXTENSIONS = ['scss']
 const IGNORE_PATTERNS = ['**/node_modules/**', '**/lib/**', '**/dist/**']
@@ -20,12 +24,7 @@ program
   .parse(process.argv)
 
 getFilesToLint(EXTENSIONS, program.pattern).then(files => {
-  if (!files.length) {
-    console.log('[sui-lint] No SCSS files to lint.')
-    return
-  }
-
-  console.log(`[sui-lint] Linting ${files.length} SCSS files...`)
+  if (!checkFilesToLint({files, language: 'SCSS'})) return
 
   return stylelint
     .lint({
