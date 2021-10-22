@@ -279,11 +279,13 @@ export default () => <${componentInPascal} />
   context &&
     (function() {
       const isBooleanContext = typeof context === 'boolean'
-      if (isBooleanContext)
-        return writeFile(COMPONENT_CONTEXT_FILE, defaultContext)
 
-      const contextBuffer = fs.readFileSync(`${BASE_DIR}${context}`)
-      writeFile(COMPONENT_CONTEXT_FILE, contextBuffer.toString())
+      writeFile(
+        COMPONENT_CONTEXT_FILE,
+        isBooleanContext
+          ? defaultContext
+          : fs.readFileSync(`${BASE_DIR}${context}`).toString()
+      )
     })(),
   writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(testTemplate))
 ]).then(() => {
