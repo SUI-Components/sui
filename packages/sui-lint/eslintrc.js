@@ -97,7 +97,8 @@ module.exports = {
     ],
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
-    'prettier/prettier': [RULES.ERROR, prettierOptions]
+    'prettier/prettier': [RULES.ERROR, prettierOptions],
+    'react/jsx-no-bind': RULES.WARNING
   },
   overrides: [
     {
