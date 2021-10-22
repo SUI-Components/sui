@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.38.0 (2021-10-22)
+
+
+### Features
+
+* **packages/sui-lint:** Move react/jsx-no-bind to warning for now ([ddc8e02](https://github.com/SUI-Components/sui/commit/ddc8e02963f12ee0956244eb8ce7b5b55bd0c48d))
+
+
+
 # 3.37.0 (2021-10-21)
 
 
