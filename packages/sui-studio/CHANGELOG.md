@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.30.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** force release ([636ae02](https://github.com/SUI-Components/sui/commit/636ae026c4947629e24245cab110ab12badef58f))
+
+
+
 # 10.29.0 (2021-10-20)
 
 
