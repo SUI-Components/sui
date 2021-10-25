@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+// @ts-check
+
 const program = require('commander')
 const stylelint = require('stylelint')
 const config = require('../stylelint.config.js')
@@ -28,6 +30,7 @@ getFilesToLint(EXTENSIONS, program.pattern).then(files => {
 
   return stylelint
     .lint({
+      customSyntax: 'postcss-scss',
       files,
       formatter: 'string',
       config: {
