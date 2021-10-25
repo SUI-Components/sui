@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.34.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-helpers:** Use readline instead process.stdout to clear lines ([0f8892e](https://github.com/SUI-Components/sui/commit/0f8892e7f1587df8cdca4d1543273188f96d9bf3))
+
+
+
+# 1.33.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-helpers:** Unify fs-extra dependency across packages ([aee6515](https://github.com/SUI-Components/sui/commit/aee6515f61696ead884659c59eccb098a41a682e))
+
+
+
 # 1.32.0 (2021-03-30)
 
 

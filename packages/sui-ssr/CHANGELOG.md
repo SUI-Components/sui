@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 7.40.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-ssr:** update archiver version ([50049fc](https://github.com/SUI-Components/sui/commit/50049fcae6191f631651f2f83eda6cca15ef0dcf))
+
+
+
+# 7.39.0 (2021-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** http cookie ([e2f1ea4](https://github.com/SUI-Components/sui/commit/e2f1ea4f837d5491f3b7647e065a30c60def8ca4))
+* **packages/sui-ssr:** update readme according ton new htppCookie sui-ssr feature ([0478b5d](https://github.com/SUI-Components/sui/commit/0478b5da8f2f459cf818ca0b7783753c05238170))
+
+
+
 # 7.38.0 (2021-08-17)
 
 

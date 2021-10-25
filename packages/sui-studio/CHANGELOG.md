@@ -1,5 +1,59 @@
 # CHANGELOG
 
+# 10.30.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** force release ([636ae02](https://github.com/SUI-Components/sui/commit/636ae026c4947629e24245cab110ab12badef58f))
+
+
+
+# 10.29.0 (2021-10-20)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add Babel package on index.html for dev mode ([3ceb285](https://github.com/SUI-Components/sui/commit/3ceb2852691568285b70938e5d2235e7f8dd1292))
+
+
+
+# 10.28.0 (2021-10-15)
+
+
+### Features
+
+* **packages/sui-studio:** add dev mode raw default style loading ([2d87f1b](https://github.com/SUI-Components/sui/commit/2d87f1bfbc3ccb6437bb98e22085df4d3adaade2))
+
+
+
+# 10.27.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies ([1097bdc](https://github.com/SUI-Components/sui/commit/1097bdc5aaf5108a2cbf932f0ded4abe8d23de0c))
+
+
+
+# 10.26.0 (2021-09-23)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio default style loading ([ffaa2cd](https://github.com/SUI-Components/sui/commit/ffaa2cd3d5b18f7310953080701181f94d6fcfa8))
+
+
+
+# 10.25.0 (2021-09-08)
+
+
+### Features
+
+* **packages/sui-studio:** Reuse sui-test version if available ([663e81f](https://github.com/SUI-Components/sui/commit/663e81f1aedd4bd3d289eb095da203290d7ae285))
+
+
+
 # 10.24.0 (2021-08-17)
 
 

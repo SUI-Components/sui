@@ -1,5 +1,25 @@
 # CHANGELOG
 
+# 1.9.0 (2021-09-22)
+
+
+### Bug Fixes
+
+* **packages/sui-react-head:** Fix wrong symbol inside package.json ([ed840e1](https://github.com/SUI-Components/sui/commit/ed840e156dd4d92996031056326d8372a06f91aa))
+
+
+
+# 1.8.0 (2021-09-20)
+
+
+### Features
+
+* **packages/sui-react-head:** Add alternate as well ([60c0577](https://github.com/SUI-Components/sui/commit/60c05779ad65cd1b238c607e5a18636a191bd3bc))
+* **packages/sui-react-head:** Avoid preload and prefetch link tags to create duplicated keys ([62e6619](https://github.com/SUI-Components/sui/commit/62e66199f5030bccce7b0c5aa991538e7e4f88bc))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 1.7.0 (2021-06-28)
 
 

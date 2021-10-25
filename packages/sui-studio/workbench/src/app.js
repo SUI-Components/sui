@@ -1,4 +1,4 @@
-/* eslint no-undef:0 */
+/* eslint-disable no-console, no-undef, import/no-webpack-loader-syntax */
 import ReactDOM from 'react-dom'
 
 import './styles.scss'
@@ -74,8 +74,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
       componentID={__COMPONENT_ID__}
       contexts={contexts}
       demo={DemoComponent}
-      demoStyles={demoStyles}
-      themes={{...themes, default: defaultStyle}}
+      themes={{...themes, default: demoStyles?.default || defaultStyle}}
       {...params}
     />,
     document.getElementById('app')

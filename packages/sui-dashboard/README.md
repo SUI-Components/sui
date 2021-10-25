@@ -1,13 +1,8 @@
-# sui-dasboard
+# @s-ui/dashboard
 
-Show stats about the current sui--component usage in differents projects.
+Show stats about the current SUI-Components usage in differents projects.
 
-If you want to add or remove project, you have to edit the bin/sui-dashboard-component.js file.
-
-
-## install:
-
-`$ npm install @s-ui/dashboard`
+If you want to add or remove a project, you have to edit the `bin/sui-dashboard-components.js` file.
 
 ## Usage:
 
@@ -17,11 +12,11 @@ If you want to get the results including versions you should use:
 
 `npx @s-ui/dashboard components -- -v`
 
-If you want to save a file with teh result you can also use:
+If you want to save a file with the result you can also use:
 
 `npx @s-ui/dashboard components -- -o ./output.json`
 
-or simply combine both options
+Or simply combine both options:
 
 `npx @s-ui/dashboard components -- -v -o ./output.json`
 

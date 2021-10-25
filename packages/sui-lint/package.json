@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "3.34.0",
+  "version": "3.38.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -9,15 +9,15 @@
   "scripts": {
     "lint": "sui-lint js",
     "postinstall": "node ./scripts/add-package-json-fields.js",
-    "eslint:print-rules": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config .",
-    "eslint:prettier-check": "./node_modules/.bin/eslint --config=./eslintrc.js --print-config . | ./node_modules/.bin/eslint-config-prettier-check"
+    "eslint:print-rules": "eslint --config=./eslintrc.js --print-config eslintrc.js",
+    "eslint:prettier-check": "eslint --config=./eslintrc.js --print-config eslintrc.js | eslint-config-prettier-check"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.15.0",
-    "@babel/eslint-parser": "7.15.0",
+    "@babel/core": "7.15.8",
+    "@babel/eslint-parser": "7.15.8",
     "@babel/eslint-plugin": "7.14.5",
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
@@ -26,22 +26,21 @@
     "eslint-config-standard": "14.1.1",
     "eslint-config-standard-react": "9.2.0",
     "eslint-plugin-chai-friendly": "0.6.0",
-    "eslint-plugin-cypress": "2.11.2",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-no-only-tests": "2.4.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-no-only-tests": "2.6.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.1.4",
-    "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-react": "7.26.1",
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-standard": "4.0.2",
     "prettier": "1.19.1",
-    "simple-git": "1.126.0",
     "stylelint": "13.13.1",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-recommended-scss": "4.2.0",
     "stylelint-prettier": "1.2.0",
-    "stylelint-scss": "3.19.0",
+    "stylelint-scss": "3.21.0",
     "ts-standard": "10.0.0"
   }
 }

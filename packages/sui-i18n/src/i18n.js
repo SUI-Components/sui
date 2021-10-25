@@ -95,23 +95,27 @@ export default class Rosetta {
   }
 
   // Format number.
-  n(number, options = {}) {
+  n(number, options = {}, culture) {
     if (typeof number !== 'number') {
       throw new Error('i18n.n should receive a number.')
     }
 
     return typeof Intl !== 'undefined'
-      ? new Intl.NumberFormat(this._culture, options).format(number)
+      ? new Intl.NumberFormat(culture || this._culture, options).format(number)
       : number
   }
 
   // Format currency number.
-  c(number, minimumFractionDigits = 0) {
-    return this.n(number, {
-      style: 'currency',
-      currency: this._currency,
-      minimumFractionDigits
-    })
+  c(number, minimumFractionDigits = 0, culture) {
+    return this.n(
+      number,
+      {
+        style: 'currency',
+        currency: this._currency,
+        minimumFractionDigits
+      },
+      culture
+    )
   }
 
   /**

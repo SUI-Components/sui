@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-initial-props",
-  "version": "2.14.0",
+  "version": "2.19.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "description": "Provide a way to get initial props for async pages",
@@ -16,10 +16,11 @@
     "prop-types": "15",
     "react": "16 || 17"
   },
-  "dependencies": {
-    "@types/node": "15"
-  },
   "devDependencies": {
+    "@testing-library/react": "11.1.0",
+    "@types/node": "16",
+    "react": "17",
+    "react-dom": "17",
     "@s-ui/react-router": "1"
   }
 }
