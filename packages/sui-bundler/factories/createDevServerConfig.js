@@ -1,6 +1,5 @@
 // @ts-check
 
-const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware')
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware')
 const ignoredFiles = require('react-dev-utils/ignoredFiles')
 
@@ -31,10 +30,6 @@ module.exports = config => ({
     disableDotRule: true
   },
   open: true,
-  onBeforeSetupMiddleware(devServer) {
-    // This lets us open files from the runtime error overlay.
-    devServer.app.use(errorOverlayMiddleware())
-  },
   onAfterSetupMiddleware(devServer) {
     // This service worker file is effectively a 'no-op' that will reset any
     // previous service worker registered for the same host:port combination.

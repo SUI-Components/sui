@@ -8,8 +8,9 @@ process.on('unhandledRejection', err => {
 const program = require('commander')
 const path = require('path')
 const WebpackDevServer = require('webpack-dev-server')
-const clearConsole = require('react-dev-utils/clearConsole')
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
+
+const clearConsole = require('../utils/clearConsole')
+const checkRequiredFiles = require('../utils/checkRequiredFiles')
 const {
   choosePort,
   prepareUrls
