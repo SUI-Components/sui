@@ -163,11 +163,11 @@ test
   writeFile(
     DEMO_PACKAGE_JSON_FILE,
     `{
-      "name": "${packageName}-demo",
-      "version": "1.0.0",
-      "private": true,
-      "description": "Demo for ${packageName}"
-    }`
+  "name": "${packageName}-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo for ${packageName}"
+}`
   ),
 
   writeFile(
