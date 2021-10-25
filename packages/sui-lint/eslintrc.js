@@ -99,7 +99,8 @@ module.exports = {
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
     'prefer-regex-literals': RULES.WARNING,
-    'prettier/prettier': [RULES.ERROR, prettierOptions]
+    'prettier/prettier': [RULES.ERROR, prettierOptions],
+    'react/jsx-no-bind': RULES.WARNING
   },
   overrides: [
     {

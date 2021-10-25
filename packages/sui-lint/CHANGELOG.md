@@ -1,5 +1,29 @@
 # CHANGELOG
 
+# 3.38.0 (2021-10-22)
+
+
+### Features
+
+* **packages/sui-lint:** Move react/jsx-no-bind to warning for now ([ddc8e02](https://github.com/SUI-Components/sui/commit/ddc8e02963f12ee0956244eb8ce7b5b55bd0c48d))
+
+
+
+# 3.37.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Lint when it's all files ([6038217](https://github.com/SUI-Components/sui/commit/6038217b2c2840dd84df787fbbce9eddd2bcd853))
+
+
+### Features
+
+* **packages/sui-lint:** Better detection for SCSS files ([6292c8c](https://github.com/SUI-Components/sui/commit/6292c8cf78ab198ade2094157527b8da0c043654))
+* **packages/sui-lint:** Reuse code and use better jsdoc ([344e74d](https://github.com/SUI-Components/sui/commit/344e74dddd808fddfc88f3509802bc1e285a842a))
+
+
+
 # 3.36.0 (2021-10-21)
 
 

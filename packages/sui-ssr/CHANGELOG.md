@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.40.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-ssr:** update archiver version ([50049fc](https://github.com/SUI-Components/sui/commit/50049fcae6191f631651f2f83eda6cca15ef0dcf))
+
+
+
 # 7.39.0 (2021-10-19)
 
 
