@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.31.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** Generate components demo with correct tab size ([eaa7026](https://github.com/SUI-Components/sui/commit/eaa7026f83e8c365b3a3a8b01bb141e193e8d6c8))
+
+
+
 # 10.30.0 (2021-10-25)
 
 
