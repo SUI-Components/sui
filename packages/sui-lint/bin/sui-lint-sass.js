@@ -30,7 +30,6 @@ getFilesToLint(EXTENSIONS, program.pattern).then(files => {
     .lint({
       files,
       formatter: 'string',
-      syntax: 'scss',
       config: {
         ...config,
         ignoreFiles: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
