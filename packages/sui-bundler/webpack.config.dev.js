@@ -27,6 +27,7 @@ const webpackConfig = {
     extensions: ['.js', '.json'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
+  stats: 'errors-only',
   entry: cleanList([
     require.resolve('react-dev-utils/webpackHotDevClient'),
     MAIN_ENTRY_POINT
