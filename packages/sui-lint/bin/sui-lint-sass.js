@@ -30,7 +30,6 @@ getFilesToLint(EXTENSIONS, program.pattern).then(files => {
 
   return stylelint
     .lint({
-      customSyntax: 'postcss-scss',
       files,
       formatter: 'string',
       config: {
