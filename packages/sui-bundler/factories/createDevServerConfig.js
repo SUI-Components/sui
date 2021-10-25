@@ -1,14 +1,22 @@
+// @ts-check
+
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware')
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware')
 const ignoredFiles = require('react-dev-utils/ignoredFiles')
 
-const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
-const host = process.env.HOST || '0.0.0.0'
+const {HOST, HTTPS} = process.env
+const protocol = HTTPS === 'true' ? 'https' : 'http'
+const host = HOST || '0.0.0.0'
 
 module.exports = config => ({
   allowedHosts: 'all',
   client: {
-    logging: 'none'
+    logging: 'none',
+    overlay: {
+      errors: true,
+      warnings: false
+    },
+    progress: true
   },
   static: {
     directory: 'public',
@@ -22,6 +30,7 @@ module.exports = config => ({
   historyApiFallback: {
     disableDotRule: true
   },
+  open: true,
   onBeforeSetupMiddleware(devServer) {
     // This lets us open files from the runtime error overlay.
     devServer.app.use(errorOverlayMiddleware())
