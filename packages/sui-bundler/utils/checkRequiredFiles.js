@@ -12,9 +12,11 @@ function checkRequiredFiles(files) {
   } catch (err) {
     const dirName = path.dirname(currentFilePath)
     const fileName = path.basename(currentFilePath)
-    console.log('Could not find a required file.')
-    console.log('  Name: ') + chalk.cyan(fileName)
-    console.log('  Searched in: ') + chalk.cyan(dirName)
+
+    console.log('Could not find a required file:')
+    console.log(`  Name: ${fileName}`)
+    console.log(`  Searched in: ${dirName}`)
+
     return false
   }
 }

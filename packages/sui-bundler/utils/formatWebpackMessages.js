@@ -20,11 +20,11 @@ function formatMessage(message) {
   if (typeof message === 'string') {
     lines = message.split('\n')
   } else if ('message' in message) {
-    lines = message['message'].split('\n')
+    lines = message.message.split('\n')
   } else if (Array.isArray(message)) {
     message.forEach(message => {
       if ('message' in message) {
-        lines = message['message'].split('\n')
+        lines = message.message.split('\n')
       }
     })
   }
