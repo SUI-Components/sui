@@ -55,9 +55,6 @@ if (!module.parent) {
   webpackConfig.context = context || webpackConfig.context
 }
 
-// Don't show ugly deprecation warnings that mess with the logging
-process.noDeprecation = true
-
 const start = async ({
   config = webpackConfig,
   packagesToLink = program.linkPackage || []
