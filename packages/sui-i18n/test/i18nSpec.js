@@ -4,6 +4,8 @@ import {expect} from 'chai'
 
 import Rosetta from '../src'
 import Polyglot from '../src/adapters/polyglot'
+import {ALL_TRANSLATIONS} from './fixtures/all_translations'
+import {LANGUAGES} from './fixtures/languages'
 
 describe('I18N', () => {
   let i18n
@@ -31,17 +33,7 @@ describe('I18N', () => {
 
     beforeEach(() => {
       i18n = new Rosetta({adapter: new Polyglot()})
-      i18n.languages = {
-        'es-ES': {
-          literalOne: 'TranslateOneEsES'
-        },
-        'en-GB': {
-          literalOne: 'TranslateOneEnGB'
-        },
-        'es-CA': {
-          literalOne: 'TranslateOneEsCA'
-        }
-      }
+      i18n.languages = LANGUAGES
     })
     afterEach(() => {
       i18n = null
@@ -201,6 +193,22 @@ describe('I18N', () => {
             )
           })
         })
+      })
+    })
+
+    describe('available cultures "es-ES, ca-ES, en-GB"', () => {
+      beforeEach(() => {
+        i18n.culture = 'es-ES'
+        const translations = {literalOne: 'TranslateOneEsES'}
+        i18n.addTranslations({translations})
+      })
+
+      afterEach(() => {
+        i18n.culture = ''
+      })
+
+      it('returns object with translations of "literalOne" properly', () => {
+        expect(i18n.getAllTranslations('literalOne')).to.eql(ALL_TRANSLATIONS)
       })
     })
   })
