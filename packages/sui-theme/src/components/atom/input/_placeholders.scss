@@ -27,3 +27,33 @@
   box-shadow: $bxsh-molecule-autosuggest-focus;
   outline: 0 none;
 }
+
+@mixin sui-atom-input-input() {
+  background: $bgc-atom-input;
+  border: $bd-atom-input-base;
+  box-sizing: border-box;
+  color: $c-atom-input;
+  font-family: inherit;
+  font-size: $fz-atom-input;
+  padding-left: $pl-atom-input;
+  padding-right: $pr-atom-input;
+  width: 100%;
+}
+
+@mixin sui-atom-input-input-focus() {
+  border: $bd-atom-input;
+  box-shadow: $bxsh-atom-input;
+  outline: 0 none;
+}
+
+@mixin sui-atom-input-select-focus() {
+  border: $bd-atom-select-focus;
+  box-shadow: $bxsh-atom-select-focus;
+  outline: 0 none;
+}
+
+@mixin sui-molecule-autosuggest-focus() {
+  border: $bd-molecule-autosuggest-focus;
+  box-shadow: $bxsh-molecule-autosuggest-focus;
+  outline: 0 none;
+}
