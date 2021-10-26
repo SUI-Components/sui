@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.27.0 (2021-10-26)
+
+
+### Features
+
+* **packages/sui-i18n:** add new method to get all translations given a key ([82346d5](https://github.com/SUI-Components/sui/commit/82346d5978688328e4715d0685fb586cc65bbe0d))
+
+
+
 # 1.26.0 (2021-10-05)
 
 
