@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.107.0 (2021-10-27)
+
+
+### Features
+
+* **packages/sui-theme:** add mixins to be used instead of extends ([4dda7da](https://github.com/SUI-Components/sui/commit/4dda7da6e72845e89e504e8620041843e9d982a2))
+
+
+
 # 8.106.0 (2021-10-15)
 
 
