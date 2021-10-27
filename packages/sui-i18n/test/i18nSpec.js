@@ -5,7 +5,7 @@ import {expect} from 'chai'
 import Rosetta from '../src'
 import Polyglot from '../src/adapters/polyglot'
 import {ALL_TRANSLATIONS} from './fixtures/all_translations'
-import {LANGUAGES} from './fixtures/languages'
+import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages'
 
 describe('I18N', () => {
   let i18n
@@ -195,21 +195,23 @@ describe('I18N', () => {
         })
       })
     })
+  })
 
-    describe('available cultures "es-ES, ca-ES, en-GB"', () => {
-      beforeEach(() => {
-        i18n.culture = 'es-ES'
-        const translations = {literalOne: 'TranslateOneEsES'}
-        i18n.addTranslations({translations})
-      })
+  describe('available cultures "es-ES, ca-ES, en-GB"', () => {
+    let i18n
+    beforeEach(() => {
+      i18n = new Rosetta({adapter: new Polyglot()})
+      i18n.languages = LANGUAGES_WITH_SCOPES
+      i18n.culture = 'es-ES'
+    })
+    afterEach(() => {
+      i18n = null
+    })
 
-      afterEach(() => {
-        i18n.culture = ''
-      })
-
-      it('returns object with translations of "literalOne" properly', () => {
-        expect(i18n.getAllTranslations('literalOne')).to.eql(ALL_TRANSLATIONS)
-      })
+    it('returns object with translations of "literalOne" properly', () => {
+      expect(i18n.getAllTranslations('SCOPE.LITERAL_ONE')).to.eql(
+        ALL_TRANSLATIONS
+      )
     })
   })
 })
