@@ -1,4 +1,5 @@
 /* global __magic__ */
+// extracted from: https://mathiasbynens.be/notes/globalthis
 
 ;(function() {
   if (typeof globalThis === 'object') return
