@@ -29,5 +29,6 @@ require('core-js/features/map/map-keys')
 require('core-js/features/symbol')
 
 require('./element-closest')
+require('./globalThis')
 
 module.exports = {}
