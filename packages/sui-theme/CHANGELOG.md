@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.109.0 (2021-10-28)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** HOTFIX [@use](https://github.com/use) keyword ([94af755](https://github.com/SUI-Components/sui/commit/94af755953bf71f85a08b68dbab87f0f02804d24))
+
+
+
 # 8.108.0 (2021-10-28)
 
 
