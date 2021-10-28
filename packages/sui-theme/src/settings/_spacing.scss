@@ -1,4 +1,4 @@
-@use './size';
+@use './size' as size;
 
 // --- Spacing --- //
 //
@@ -10,7 +10,7 @@
 // * p = padding
 
 // Paddings
-$p-base: $sz-base; // 8px
+$p-base: size.$sz-base; // 8px
 
 $p-giant: $p-base * 6 !default; // 48px
 $p-xxxl: $p-base * 5 !default; // 40px
@@ -22,7 +22,7 @@ $p-s: $p-base * 0.5 !default; // 4px
 $p-xs: $p-base * 0.25 !default; // 2px
 
 // Margins
-$m-base: $sz-base; // 8px
+$m-base: size.$sz-base; // 8px
 
 $m-giant: $m-base * 6 !default; // 48px
 $m-xxxl: $m-base * 5 !default; // 40px
@@ -34,13 +34,13 @@ $m-s: $m-base * 0.5 !default; // 4px
 $m-xs: $m-base * 0.25 !default; // 2px
 
 // Gutter
-$gutter: $sz-base * 2 !default;
+$gutter: size.$sz-base * 2 !default;
 
 $gutter-s: $gutter * 0.5 !default;
 $gutter-l: $gutter * 2 !default;
 
 // Gap
-$g-base: $sz-base;
+$g-base: size.$sz-base;
 
 $g-giant: $g-base * 6; // 48px
 $g-xxxl: $g-base * 5; // 40px
