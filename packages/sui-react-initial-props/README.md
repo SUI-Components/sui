@@ -81,7 +81,9 @@ Page.getInitialProps = ({ context, routeInfo }) =>
       // Optional object to set an Http-Cookie before redirection
       httpCookie: {
         AdNotAvailable: true
-      }
+      },
+      // Optional object to set a response headers before redirection
+      headers: {'Cache-Control': 'no-store, max-age=0'}
     }
   })
 /**
