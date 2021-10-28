@@ -9,3 +9,15 @@ export const LANGUAGES = {
     literalOne: 'TranslateOneCaES'
   }
 }
+
+export const LANGUAGES_WITH_SCOPES = {
+  'es-ES': {
+    SCOPE: {LITERAL_ONE: 'TranslateOneEsES'}
+  },
+  'en-GB': {
+    SCOPE: {LITERAL_ONE: 'TranslateOneEnGB'}
+  },
+  'ca-ES': {
+    SCOPE: {LITERAL_ONE: 'TranslateOneCaES'}
+  }
+}

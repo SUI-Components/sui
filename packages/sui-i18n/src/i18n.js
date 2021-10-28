@@ -100,7 +100,9 @@ export default class Rosetta {
     return Object.fromEntries(
       Object.keys(this._languages).map(language => [
         language,
-        this._languages[language][key]
+        key
+          .split('.')
+          .reduce((level, newKey) => level[newKey], this._languages[language])
       ])
     )
   }
