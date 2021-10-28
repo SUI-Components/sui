@@ -176,7 +176,7 @@ export default async (req, res, next) => {
     }
 
     if (headers) {
-      res.set(headers)
+      res.append(headers)
     }
 
     if (redirectTo) {
