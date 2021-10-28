@@ -176,7 +176,10 @@ export default async (req, res, next) => {
     }
 
     if (headers) {
-      res.append(headers)
+      headers.forEach(header => {
+        const [[field, value]] = Object.entries(header)
+        res.append(field, value)
+      })
     }
 
     if (redirectTo) {
