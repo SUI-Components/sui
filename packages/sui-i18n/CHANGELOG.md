@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.28.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-i18n:** enable get all translations when scoped in contexts ([b331290](https://github.com/SUI-Components/sui/commit/b331290fefca3bffc0058b48992819d272dc0319))
+
+
+
 # 1.27.0 (2021-10-26)
 
 
