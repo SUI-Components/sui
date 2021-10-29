@@ -1,5 +1,39 @@
 # CHANGELOG
 
+# 8.109.0 (2021-10-28)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** HOTFIX [@use](https://github.com/use) keyword ([94af755](https://github.com/SUI-Components/sui/commit/94af755953bf71f85a08b68dbab87f0f02804d24))
+
+
+
+# 8.108.0 (2021-10-28)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** icon sizes depends on its own token ([92f92fd](https://github.com/SUI-Components/sui/commit/92f92fdea50025d790da6285dc3ecfdbaa8db0a1))
+* **packages/sui-theme:** lint ([3e66860](https://github.com/SUI-Components/sui/commit/3e66860caed65b6adaa20d2e09b71c99d80a9e13))
+* **packages/sui-theme:** misspelling ([c640394](https://github.com/SUI-Components/sui/commit/c6403940386c23beeb1edb250944d6f40532c0e1))
+
+
+### Features
+
+* **packages/sui-theme:** Sets the default gitd system syze base. Start using it. Fixes the addition ([b67ffa9](https://github.com/SUI-Components/sui/commit/b67ffa9c0e7cf9e09cd77a100906cf835f284d89))
+
+
+
+# 8.107.0 (2021-10-27)
+
+
+### Features
+
+* **packages/sui-theme:** add mixins to be used instead of extends ([4dda7da](https://github.com/SUI-Components/sui/commit/4dda7da6e72845e89e504e8620041843e9d982a2))
+
+
+
 # 8.106.0 (2021-10-15)
 
 

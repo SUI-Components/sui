@@ -376,6 +376,11 @@ Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/
 SUI-SSR allows to set an Http-Cookie in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
 Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
+## Server Side Headers
+
+SUI-SSR allows to set a response headers in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
+Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
+
 ## Third Parties
 
 It is very likely that for performance reasons you will want to put the third party scripts directly into the index.html of your page.

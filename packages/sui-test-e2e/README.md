@@ -83,6 +83,25 @@ Cypress.Commands.add('login', () => {
 
 Then you can use in your specs `cy.login()`
 
+You can make use of `@s-ui/test-e2e/lib/add-commands` to extend from `@testing-library/cypress` commands.
+
+Example:
+
+```js
+// ./test-e2e/support/index.js
+
+import '@s-ui/test-e2e/lib/add-commands'
+
+// Rest of your custom commands
+
+// ./test-e2e/integration/yourAwesomeTest.js
+
+cy.findByText()
+```
+
+[More info here](https://testing-library.com/docs/cypress-testing-library/intro/)
+
+
 ### Plugin files
 
 If you need to have plugins, then create a `./test-e2e/plugins` directory, it will be detected and added to the `cypress.json` configuration.

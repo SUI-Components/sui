@@ -121,6 +121,19 @@ describe${context ? '.context.default' : ''}('${componentInPascal}', ${
     expect(container.innerHTML).to.be.a('string')
     expect(container.innerHTML).to.not.have.lengthOf(0)
   })
+  
+  it.skip('should NOT extend classNames', () => {
+    // Given
+    const props = {className: 'extended-classNames'}
+    const findSentence = str => string => string.match(new RegExp(\`S*\${str}S*\`))
+
+    // When
+    const {container} = setup(props)
+    const findClassName = findSentence(props.className)
+
+    // Then
+    expect(findClassName(container.innerHTML)).to.be.null
+  })
 })
 `
 
@@ -163,11 +176,11 @@ test
   writeFile(
     DEMO_PACKAGE_JSON_FILE,
     `{
-      "name": "${packageName}-demo",
-      "version": "1.0.0",
-      "private": true,
-      "description": "Demo for ${packageName}"
-    }`
+  "name": "${packageName}-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo for ${packageName}"
+}`
   ),
 
   writeFile(

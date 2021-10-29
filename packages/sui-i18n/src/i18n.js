@@ -89,6 +89,24 @@ export default class Rosetta {
     this._updateTranslator({culture: newCulture})
   }
 
+  /**
+   * Get all available translations for a key
+   *
+   * @param {String} key Key of the literal
+   * @returns {Object} Object with cultures as key and literal as value
+   */
+  getAllTranslations(key) {
+    if (!key) return {}
+    return Object.fromEntries(
+      Object.keys(this._languages).map(language => [
+        language,
+        key
+          .split('.')
+          .reduce((level, newKey) => level[newKey], this._languages[language])
+      ])
+    )
+  }
+
   // Translate.
   t(key, values) {
     return this.translator.translate(key, values)
