@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.110.0 (2021-10-29)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** replace [@use](https://github.com/use) for [@import](https://github.com/import) ([ee0893c](https://github.com/SUI-Components/sui/commit/ee0893cbd38bf77724a9bcd29cc98e1e1050424d))
+
+
+
 # 8.109.0 (2021-10-28)
 
 
