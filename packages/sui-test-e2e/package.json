@@ -1,15 +1,17 @@
 {
   "name": "@s-ui/test-e2e",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "type": "module",
   "bin": {
     "sui-test-e2e": "bin/sui-test-e2e.js"
   },
   "scripts": {
     "postpublish": "make build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lib": "babel --out-dir ./lib  ./src",
+    "prepare": "npm run lib"
   },
   "dependencies": {
     "@testing-library/cypress": "8.0.1",

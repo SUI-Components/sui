@@ -1,4 +1,4 @@
-%sui-atom-input-input {
+@mixin sui-atom-input-input() {
   background: $bgc-atom-input;
   border: $bd-atom-input-base;
   box-sizing: border-box;
@@ -10,20 +10,36 @@
   width: 100%;
 }
 
-%sui-atom-input-input-focus {
+@mixin sui-atom-input-input-focus() {
   border: $bd-atom-input;
   box-shadow: $bxsh-atom-input;
   outline: 0 none;
 }
 
-%sui-atom-input-select-focus {
+@mixin sui-atom-input-select-focus() {
   border: $bd-atom-select-focus;
   box-shadow: $bxsh-atom-select-focus;
   outline: 0 none;
 }
 
-%sui-molecule-autosuggest-focus {
+@mixin sui-molecule-autosuggest-focus() {
   border: $bd-molecule-autosuggest-focus;
   box-shadow: $bxsh-molecule-autosuggest-focus;
   outline: 0 none;
+}
+
+%sui-atom-input-input {
+  @include sui-atom-input-input;
+}
+
+%sui-atom-input-input-focus {
+  @include sui-atom-input-input-focus;
+}
+
+%sui-atom-input-select-focus {
+  @include sui-atom-input-select-focus;
+}
+
+%sui-molecule-autosuggest-focus {
+  @include sui-molecule-autosuggest-focus;
 }

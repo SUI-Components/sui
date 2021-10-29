@@ -1,5 +1,42 @@
 # CHANGELOG
 
+# 10.32.0 (2021-10-27)
+
+
+### Features
+
+* **packages/sui-studio:** add classname test agreement to the test template ([d74ac7c](https://github.com/SUI-Components/sui/commit/d74ac7c50ef7bf38a278c5ab0106a17736a10cd5))
+* **packages/sui-studio:** skip test template ([6a727bc](https://github.com/SUI-Components/sui/commit/6a727bcc6b965f878ca246a4755d0ef652d48fed))
+
+
+
+# 10.31.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** Generate components demo with correct tab size ([eaa7026](https://github.com/SUI-Components/sui/commit/eaa7026f83e8c365b3a3a8b01bb141e193e8d6c8))
+
+
+
+# 10.30.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** force release ([636ae02](https://github.com/SUI-Components/sui/commit/636ae026c4947629e24245cab110ab12badef58f))
+
+
+
+# 10.29.0 (2021-10-20)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add Babel package on index.html for dev mode ([3ceb285](https://github.com/SUI-Components/sui/commit/3ceb2852691568285b70938e5d2235e7f8dd1292))
+
+
+
 # 10.28.0 (2021-10-15)
 
 

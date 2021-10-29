@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 7.34.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-bundler:** Adapt linter errors ([6f35331](https://github.com/SUI-Components/sui/commit/6f35331c568d39c636a953b265253e32e8bef71b))
+* **packages/sui-bundler:** Add License links ([b92db3a](https://github.com/SUI-Components/sui/commit/b92db3a150349a583c27e6df6ebbcef3711451a2))
+* **packages/sui-bundler:** Improve usability for dev mode ([cf8787d](https://github.com/SUI-Components/sui/commit/cf8787d3365bcddcdb7ccc1029dc426e94de6f6d))
+* **packages/sui-bundler:** Less noisy dev mode ([f5e21eb](https://github.com/SUI-Components/sui/commit/f5e21eb3d29164e0e92d3bda37739769cab99ab8))
+* **packages/sui-bundler:** Remove not needed line regarding deprecation notices ([a0962dc](https://github.com/SUI-Components/sui/commit/a0962dc2ea7959f4b1b089279895f21df5efdfe0))
+* **packages/sui-bundler:** Start migrating away from react-dev-utils ([3bbf7f4](https://github.com/SUI-Components/sui/commit/3bbf7f474297f5c5b0fa2f8886696ffbeec978c4))
+
+
+
+# 7.33.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies about babel ([740c02e](https://github.com/SUI-Components/sui/commit/740c02ea66a0fe1e86e1be9633ab8322d0fbd0d1))
+
+
+
 # 7.32.0 (2021-09-14)
 
 
@@ -15,6 +38,7 @@
 ### Features
 
 * **packages/sui-bundler:** Upgrade sui-bundler deps ([851b017](https://github.com/SUI-Components/sui/commit/851b0178f0653b475fe9fe94228bca7f60d44817))
+* **packages/sui-bundler:** Use latest webpack-dev-server ([0f5e33e](https://github.com/SUI-Components/sui/commit/0f5e33e08af4d07ea4059d73c016efb3a088c5d0))
 
 
 

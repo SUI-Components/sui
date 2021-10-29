@@ -20,6 +20,7 @@ const getCompiledCode = ({code, scope}) => {
     previousCode = code
     return code
   } catch (e) {
+    console.error(e)
     return previousCode
   }
 }

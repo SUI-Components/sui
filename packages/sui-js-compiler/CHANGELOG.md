@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.3.0 (2021-10-26)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade @swc/core dependency ([539bac1](https://github.com/SUI-Components/sui/commit/539bac1c20043d9e39342eda3de34b88699a29dd))
+
+
+
+# 1.2.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Remove promise.all for now ([29f686e](https://github.com/SUI-Components/sui/commit/29f686e40edbbbfb680f2d0180e357b238ed2f8b))
+
+
+
 # 1.1.0 (2021-10-05)
 
 

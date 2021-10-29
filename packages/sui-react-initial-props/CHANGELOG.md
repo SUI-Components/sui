@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 2.20.0 (2021-10-29)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** update doc ([cf0fe85](https://github.com/SUI-Components/sui/commit/cf0fe85aba93dec8fc3caddf22a320223bad094d))
+* **packages/sui-react-initial-props:** update docs ([d84466e](https://github.com/SUI-Components/sui/commit/d84466eae4fe68145b3ba742ab0b71d565da6aea))
+
+
+
+# 2.19.0 (2021-10-19)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** update readme according ton new htppCookie sui-ssr feature ([b77f93a](https://github.com/SUI-Components/sui/commit/b77f93aa8fc2cac6156aa5e81d955dc89a1a3898))
+
+
+
 # 2.18.0 (2021-10-06)
 
 
