@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 7.41.0 (2021-10-29)
+
+
+### Features
+
+* **packages/sui-ssr:** allow to receive headers as an array ([6c83043](https://github.com/SUI-Components/sui/commit/6c830436895dbcd31912e079bed9ffdd77fe28ad))
+* **packages/sui-ssr:** http redirect headers ([075db29](https://github.com/SUI-Components/sui/commit/075db29c58e1dbae37515353ad01f32ef4af3831))
+* **packages/sui-ssr:** prevent to reset previows headers ([915ef93](https://github.com/SUI-Components/sui/commit/915ef93eb130fe0d7785b177a26148e18dde8e2e))
+* **packages/sui-ssr:** update doc ([2699b65](https://github.com/SUI-Components/sui/commit/2699b65602dd5964ec614b19de32de2835a848e9))
+
+
+
 # 7.40.0 (2021-10-21)
 
 
