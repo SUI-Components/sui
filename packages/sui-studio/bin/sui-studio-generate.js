@@ -121,7 +121,7 @@ describe${context ? '.context.default' : ''}('${componentInPascal}', ${
     expect(container.innerHTML).to.be.a('string')
     expect(container.innerHTML).to.not.have.lengthOf(0)
   })
-  
+
   it.skip('should NOT extend classNames', () => {
     // Given
     const props = {className: 'extended-classNames'}
