@@ -1,5 +1,6 @@
 /* eslint no-console:0 */
 const path = require('path')
+const {getSpawnPromise} = require('./cli')
 
 /**
  * Get absolute paths of packages
@@ -52,8 +53,6 @@ const resolveLazyNPMBin = async (binPath, pkg, cwd = process.cwd()) => {
   try {
     return resolvePkgBin()
   } catch (e) {
-    const {getSpawnPromise} = require('./cli')
-
     console.info(
       `It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`
     )

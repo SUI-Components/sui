@@ -4,7 +4,6 @@
 const program = require('commander')
 const chalk = require('chalk')
 const runner = require('./karma')
-const {cleanStack} = require('./karma/util')
 
 program
   .option('-W, --watch', 'Run in watch mode')
@@ -52,7 +51,7 @@ runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .catch(err => {
     if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
       process.stderr.write(
-        chalk.red(cleanStack((err && (err.stack || err.message)) || err)) + '\n'
+        chalk.red((err && (err.stack || err.message)) || err) + '\n'
       )
     }
     process.exit(err.code || 1)
