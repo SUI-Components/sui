@@ -46,8 +46,11 @@ module.exports = async ({
 
   config.files = [
     srcPattern ? `${CWD}/${srcPattern}` : '',
-    `${CWD}/${pattern}`
+    {pattern: `${CWD}/${pattern}`, watch: false}
   ].filter(Boolean)
+
+  console.log({pattern})
+  console.log(config.files)
 
   config.preprocessors = {
     ...config.preprocessors,

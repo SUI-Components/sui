@@ -11,6 +11,14 @@ const config = {
 
   frameworks: ['mocha', 'webpack'],
 
+  plugins: [
+    'karma-chrome-launcher',
+    'karma-firefox-launcher',
+    'karma-mocha',
+    'karma-spec-reporter',
+    'karma-webpack'
+  ],
+
   reporters: ['spec'],
 
   browsers: ['Chrome'],
@@ -34,13 +42,21 @@ const config = {
         )
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
-      extensions: ['.mjs', '.js', '.jsx', '.json']
-    },
-    node: {
-      fs: 'empty',
-      child_process: 'empty',
-      module: 'empty',
-      readline: 'empty'
+      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      fallback: {
+        child_process: false,
+        constants: false,
+        fs: false,
+        os: false,
+        module: false,
+        stream: false,
+        http: false,
+        https: false,
+        path: false,
+        timers: false,
+        readline: false,
+        zlib: false
+      }
     },
     plugins: [
       new webpack.ProvidePlugin({
@@ -87,11 +103,6 @@ const config = {
               }
             }
           ]
-        },
-        {
-          // ignore css/scss require/imports files in the server
-          test: [/\.s?css$/, /\.svg$/],
-          use: [require.resolve('null-loader')]
         }
       ]
     }
