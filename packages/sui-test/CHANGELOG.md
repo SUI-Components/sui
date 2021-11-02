@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Remove chalk dependency ([34f7806](https://github.com/SUI-Components/sui/commit/34f7806d8ba9c29d5853c6ad3eafbba7b2ed8322))
+
+
+
 # 6.4.0 (2021-11-02)
 
 
