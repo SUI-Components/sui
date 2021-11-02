@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc-core dependency ([340849a](https://github.com/SUI-Components/sui/commit/340849adc55654c0527a85064789c464c77e7f34))
+
+
+
 # 1.4.0 (2021-11-02)
 
 
