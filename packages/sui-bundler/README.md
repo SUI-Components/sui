@@ -81,11 +81,23 @@ To link more than one package at time, use as many times as desired the argument
 $ sui-bundler dev --link-package=/absolute_path/to/npm_package --link-package=/absolute_path2/to/npm_package
 ```
 
+You can also use `-l` as a shorthand to link a package.
+
+```
+$ sui-bundler dev -l /absolute_path/to/npm_package -l /absolute_path2/to/npm_package
+```
+
 If you want to link all the packages inside a monorepo-multipackage. Use the flag `--link-all` pointing to the folder where each package lives.
 For example, if you want to link all the components in a Studio, the command should be:
 
 ```
 $ sui-bundler dev --link-all ../frontend-ma--uilib-components/components
+```
+
+You can use `-L` as a shorthand to link all packages.
+
+```
+$ sui-bundler dev -L ../frontend-ma--uilib-components/components
 ```
 
 And of course you can combine `link-all` and `link-package` flags
@@ -124,6 +136,7 @@ sui-bundler lib umd/index.js -o lib/fancy -p http://my-cdn.com/fancy
 ```
 
 `sui-bundler lib` will add your package version as subfolder:
+
 - `-o lib/fancy` outputs to `./lib/fancy/0.0.0/`
 - `-p http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy/0.0.0` as public path for chunks loading.
 - `-r http://my-cdn.com/fancy` sets `http://my-cdn.com/fancy` as public path for chunks loading, discarded the version subdirectory.
@@ -158,6 +171,7 @@ This tool works with zero configuration out the box but you could use some confi
       "alias": {
         "react": "preact"
       },
+      "measure": true,
       "offline": true,
       "targets": {
         "chrome": "41",
@@ -172,7 +186,8 @@ This tool works with zero configuration out the box but you could use some confi
       },
       "optimizations": {
         "splitFrameworkOnChunk": true,
-        "useExperimentalMinifier": true
+        "useExperimentalMinifier": true,
+        "useExperimentalSCSSLoader": true
       }
     }
   }
@@ -196,12 +211,16 @@ import {register, unregister} from '@s-ui/bundler/registerServiceWorker'
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => window.alert('New content is available; please refresh.')
-});
+})
 ```
 
 You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
 
 If you want to remove your ServiceWorker, you need to use the method `unregister`, the same way you used the `register` method before.
+
+### Build time measurement
+
+Set `measure` to `true` if you want to check step by step build times.
 
 ### Only Caching
 
@@ -209,7 +228,7 @@ It's possible to create a service worker that caches all static resources
 
 There are two ways to activate the statics cache option:
 
-1. Create a `src/offline.html` page as mentioned in the [offline]( #Offline) section
+1. Create a `src/offline.html` page as mentioned in the [offline](#Offline) section
 2. Add the `staticsCacheOnly` option within the package.json like this:
 
 ```json
@@ -221,9 +240,11 @@ There are two ways to activate the statics cache option:
   }
 }
 ```
+
 > Statics will be cached but no offline page will be activated
 
 ## Externals Manifest
+
 If your are using an external CDN to store statics assets that are now managed by Webpack, like SVG or IMGs, you can create a manifest.json file in the root of your CDN (likehttps://spa-mock-statics.surge.sh/manifest.json`).
 
 If you define the `externals-manifest` key in the config pointing to this link, sui-bundler will replace any ocurrence of each key for the value
@@ -233,14 +254,19 @@ If in your CSS you have:
 ```css
 #app {
   color: blue;
-  background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png') no-repeat scroll;
+  background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png')
+    no-repeat scroll;
 }
 ```
 
 After compile you will get:
 
 ```css
-#app{color:#00f;background:url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png) no-repeat scroll}
+#app {
+  color: #00f;
+  background: url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png)
+    no-repeat scroll;
+}
 ```
 
 Or if in your JS you have:
@@ -287,7 +313,6 @@ Different values can be configured for development (`dev`) and production (`prod
 }
 ```
 
-
 Check all possible values accepted by webpack in the [devtool webpack docs](https://webpack.js.org/configuration/devtool/#devtool)
 
 ## Optimizations
@@ -296,7 +321,9 @@ You could tweak the performance of your bundle generation by using some flags pr
 
 `splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
 
-`useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify code instead using terser in order to boost build time and memory usage.
+`useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify JavaScript and CSS instead using `terser` and `css-minimizer-webpack-plugin` in order to boost build time and memory usage.
+
+`useExperimentalSCSSLoader` (default: `false`): Use [fast-sass-loader](https://github.com/yibn2008/fast-sass-loader) (currently a fork of it [super-sass-loader](https://github.com/andresz1/super-sass-loader)) instead of `sass-loader` (available in development only)
 
 ## Migrations
 

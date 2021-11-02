@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: 16
         registry-url: 'https://registry.npmjs.org'
-    - run: npm install --no-optional --no-save --no-fund --no-audit
+    - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
     - run: npm run lint
     - run: npm run test:ci
     - run: npx -p ./packages/sui-ci sui-ci release

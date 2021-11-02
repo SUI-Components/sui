@@ -8,8 +8,9 @@ process.on('unhandledRejection', err => {
 const program = require('commander')
 const path = require('path')
 const WebpackDevServer = require('webpack-dev-server')
-const clearConsole = require('react-dev-utils/clearConsole')
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
+
+const clearConsole = require('../utils/clearConsole')
+const checkRequiredFiles = require('../utils/checkRequiredFiles')
 const {
   choosePort,
   prepareUrls
@@ -30,11 +31,11 @@ if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
     .option(
-      '--link-all [monorepo]',
+      '-L, --link-all [monorepo]',
       'Link all packages inside of monorepo multipackage'
     )
     .option(
-      '--link-package [package]',
+      '-l, --link-package [package]',
       'Replace each occurrence of this package with an absolute path to this folder',
       (v, m) => {
         m.push(v)
@@ -54,9 +55,6 @@ if (!module.parent) {
   const {context} = program
   webpackConfig.context = context || webpackConfig.context
 }
-
-// Don't show ugly deprecation warnings that mess with the logging
-process.noDeprecation = true
 
 const start = async ({
   config = webpackConfig,
@@ -85,13 +83,20 @@ const start = async ({
   })
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
-  const devServer = new WebpackDevServer(compiler, serverConfig)
+  const devServer = new WebpackDevServer(
+    {
+      ...serverConfig,
+      port,
+      host: HOST
+    },
+    compiler
+  )
   log.processing('❯ Starting the development server...\n')
-  devServer.listen(port, HOST, err => {
+  devServer.startCallback(err => {
     if (err) return log.error(err)
     ;['SIGINT', 'SIGTERM'].forEach(sig => {
       process.on(sig, () => {
-        devServer.close()
+        devServer.stop()
         process.exit()
       })
     })

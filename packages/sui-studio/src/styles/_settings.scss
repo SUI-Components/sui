@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 // --- Colors --- //
 $c-primary: #09f !default;
 $c-accent: #ff3860 !default;
@@ -43,19 +45,19 @@ $fz-xl: ceil($fz-base * 1.5) * 1px !default;
 
 // Margins
 $m-base: 10px !default;
-$m-v: ceil($m-base / 2) !default;
+$m-v: ceil($m-base * 0.5) !default;
 $m-h: $m-base !default;
-$m-v-small: $m-v / 2 !default;
-$m-h-small: $m-h / 2 !default;
+$m-v-small: $m-v * 0.5 !default;
+$m-h-small: $m-h * 0.5 !default;
 $m-v-large: $m-v * 2 !default;
 $m-h-large: $m-h * 2 !default;
 
 // Paddings
 $p-base: 10px !default;
-$p-v: $p-base / 1.5 !default;
+$p-v: math.div($p-base, 1.5) !default;
 $p-h: $p-base !default;
-$p-v-small: $p-v / 2 !default;
-$p-h-small: $p-h / 2 !default;
+$p-v-small: $p-v * 0.5 !default;
+$p-h-small: $p-h * 0.5 !default;
 $p-v-large: $p-v * 2 !default;
 $p-h-large: $p-h * 2 !default;
 

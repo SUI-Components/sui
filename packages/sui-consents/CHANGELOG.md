@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.5.0 (2021-07-01)
+
+
+### Features
+
+* **packages/sui-consents:** Migrate to TypeScript ([45a751e](https://github.com/SUI-Components/sui/commit/45a751ea823a43f1bde7a888c09d37f9c873e39e))
+
+
+
 # 1.4.0 (2021-04-19)
 
 

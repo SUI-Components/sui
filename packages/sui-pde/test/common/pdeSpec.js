@@ -3,6 +3,7 @@ import {PDE as SuiPDE} from '../../src'
 import OptimizelyAdapter from '../../src/adapters/optimizely'
 import DefaultAdapter from '../../src/adapters/default'
 import sinon from 'sinon'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
 
 import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 
@@ -18,24 +19,29 @@ describe('@s-ui pde', () => {
       getEnabledFeatures: () => ['a', 'b'],
       isFeatureEnabled: sinon.stub().returns(true),
       getVariation: sinon.stub().returns('variationB'),
-      projectConfigManager: {
-        getConfig: () => ({
-          featureKeyMap: {
-            featureUsedInTest: {
-              experimentIds: ['1234']
-            },
-            featureNotUsedInTest: {
-              experimentIds: []
+      getOptimizelyConfig: () => ({
+        featuresMap: {
+          featureUsedInTest: {
+            experimentsMap: {
+              '1234': {}
             }
+          },
+          featureNotUsedInTest: {
+            experimentsMap: {}
           }
-        })
-      }
+        }
+      })
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
       userId: 'user123',
       hasUserConsents: true
     })
+  })
+
+  afterEach(() => {
+    if (typeof window === 'undefined') return
+    window.sessionStorage.removeItem(PDE_CACHE_STORAGE_KEY)
   })
 
   it('loads the default adapter features', () => {
@@ -67,8 +73,11 @@ describe('@s-ui pde', () => {
       adapter: optimizelyAdapter,
       hasUserConsents: false
     })
-    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
-    expect(enabled).to.equal(false)
+    const {isActive, linkedExperiments} = pde.isFeatureEnabled({
+      featureKey: 'featureUsedInTest'
+    })
+    expect(isActive).to.equal(false)
+    expect(linkedExperiments).to.deep.equal([])
     expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(false)
   })
 
@@ -77,8 +86,11 @@ describe('@s-ui pde', () => {
       adapter: optimizelyAdapter,
       hasUserConsents: true
     })
-    const enabled = pde.isFeatureEnabled({featureKey: 'featureUsedInTest'})
-    expect(enabled).to.equal(true)
+    const {isActive, linkedExperiments} = pde.isFeatureEnabled({
+      featureKey: 'featureUsedInTest'
+    })
+    expect(isActive).to.equal(true)
+    expect(linkedExperiments).to.deep.equal(['1234'])
     expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(true)
     expect(optimizelyInstanceStub.isFeatureEnabled.args[0][0]).to.equal(
       'featureUsedInTest'
@@ -256,5 +268,26 @@ describe('@s-ui pde', () => {
       hasUserConsents: false
     })
     expect(pde.activateExperiment({name: 'test'})).to.be.null
+  })
+
+  it('should merge the application attributes with the feature attributes', () => {
+    optimizelyAdapter = new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: '123',
+      activeIntegrations: {segment: false},
+      hasUserConsents: true,
+      applicationAttributes: {applicationKey: 'applicationValue'}
+    })
+    const pde = new SuiPDE({
+      adapter: optimizelyAdapter
+    })
+    pde.isFeatureEnabled({
+      featureKey: 'featureUsedInTest',
+      attributes: {featureKey: 'featureValue'}
+    })
+    expect(optimizelyInstanceStub.isFeatureEnabled.args[0][2]).to.deep.equal({
+      applicationKey: 'applicationValue',
+      featureKey: 'featureValue'
+    })
   })
 })

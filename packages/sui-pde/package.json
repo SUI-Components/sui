@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/pde",
-  "version": "2.7.0",
+  "version": "2.15.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -23,7 +23,6 @@
     "react": "16 || 17"
   },
   "devDependencies": {
-    "@s-ui/test": "4",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",

@@ -15,7 +15,20 @@ Install package to your project:
 npm install @s-ui/critical-css -D
 ```
 
-Programmatic usage:
+## Programatical usage:
+
+In order to extract critical css and match extracted files with your page or route you can use two approaches:
+
+- Using path-to-regex
+- Using page component displayName
+
+You can combine both of them.
+
+### Using `path-to-regex`:
+
+You can use [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) to create and validate that your Path-to-Regexp works as expected.
+
+Example:
 
 ```js
 // scripts/get-critical-css-for-routes.js
@@ -37,7 +50,39 @@ const routes = {
 extractCSSFromApp({config, routes})
 ```
 
-Now you should execute this script on your CI before deploying/dockerizing your app.
+### Using `displayName`
+
+Example:
+
+```js
+// scripts/get-critical-css-for-routes.js
+import {extractCSSFromApp} from '@s-ui/critical-css'
+
+// Page display names
+const displayNames = {
+  home: 'Home',
+  list: 'List'
+}
+
+const config = {
+  hostname: 'http://localhost'
+}
+
+const routes = {
+  [displayNames.home]: {
+    url: '/es'
+  },
+  [displayNames.list]: {
+    url: '/es/catalogo-productos'
+  }
+}
+
+extractCSSFromApp({config, routes})
+```
+
+## Use in your server
+
+You should execute this script on your CI before deploying/dockerizing your app.
 
 ```
 node scripts/get-critical-css-for-routes.js

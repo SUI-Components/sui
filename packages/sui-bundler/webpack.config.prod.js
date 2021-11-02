@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
-
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const {
   when,
   cleanList,
@@ -38,7 +38,9 @@ const cssFileName = config.onlyHash
   ? '[contenthash:8].css'
   : '[name].[contenthash:8].css'
 
-module.exports = {
+const smp = new SpeedMeasurePlugin()
+
+const webpackConfig = {
   devtool: sourceMap,
   mode: 'production',
   context: path.resolve(process.cwd(), 'src'),
@@ -67,7 +69,7 @@ module.exports = {
     minimizer: [
       minifyJs({useExperimentalMinifier, extractComments, sourceMap}),
       minifyCss()
-    ],
+    ].filter(Boolean),
     runtimeChunk: true,
     splitChunks
   },
@@ -139,3 +141,5 @@ module.exports = {
     tls: 'empty'
   }
 }
+
+module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig

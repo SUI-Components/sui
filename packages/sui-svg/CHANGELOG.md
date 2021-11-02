@@ -1,5 +1,44 @@
 # CHANGELOG
 
+# 3.4.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite dependency ([de94119](https://github.com/SUI-Components/sui/commit/de941194b8c17197011d5a3473e52b0851db0356))
+
+
+
+# 3.3.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies ([00f463a](https://github.com/SUI-Components/sui/commit/00f463a0231807c8dee17ac0daed25ffd43f0beb))
+
+
+
+# 3.2.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies for sui-svg ([b15c94f](https://github.com/SUI-Components/sui/commit/b15c94f190cc50fb9d306c1e681476fd46da2103))
+
+
+
+# 3.1.0 (2021-07-12)
+
+
+### Features
+
+* **packages/sui-svg:** Adapt to ESModules ([d59c4dd](https://github.com/SUI-Components/sui/commit/d59c4dd6c11120f503acef906c32cc1cd92a8753))
+* **packages/sui-svg:** Add missing extension ([3683fff](https://github.com/SUI-Components/sui/commit/3683fff519c4afec5ba4f826c619c29add75fda7))
+* **packages/sui-svg:** Migrate @s-ui/svg to ESM ([57504a6](https://github.com/SUI-Components/sui/commit/57504a646036864b933a4e9e8c64763033732cd6))
+* **packages/sui-svg:** Upgrade deps ([a88f7df](https://github.com/SUI-Components/sui/commit/a88f7df38786f7fa448c547338a17286adb5b858))
+
+
+
 # 3.0.0 (2021-05-18)
 
 

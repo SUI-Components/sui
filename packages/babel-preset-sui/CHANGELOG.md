@@ -1,5 +1,68 @@
 # CHANGELOG
 
+# 3.29.0 (2021-10-21)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade dependencies about babel ([d59044e](https://github.com/SUI-Components/sui/commit/d59044e41ba2f6fc861b3b5ed01c156f70bfc904))
+
+
+
+# 3.28.0 (2021-09-28)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade dependencies ([d0ce85c](https://github.com/SUI-Components/sui/commit/d0ce85cfad0b09b57ac562cd5b351ae1487c9f6b))
+
+
+
+# 3.27.0 (2021-09-08)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade deps for babel-preset-sui ([ac95437](https://github.com/SUI-Components/sui/commit/ac9543765f5f01dfaa3e2556c76fb0a105b352fd))
+
+
+
+# 3.26.0 (2021-08-16)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use latest babel versions ([0f30814](https://github.com/SUI-Components/sui/commit/0f308141902e8f683c91913c870cd3617b5f6545))
+
+
+
+# 3.25.0 (2021-06-22)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use latest babel dependencies ([23af357](https://github.com/SUI-Components/sui/commit/23af3579f6b38cbfa9b39199af1b8077e0a67b7b))
+
+
+
+# 3.24.0 (2021-05-31)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade dependency ([5f48e6b](https://github.com/SUI-Components/sui/commit/5f48e6b7f088fd7c67ad715775424675b8bdc5db))
+
+
+
+# 3.23.0 (2021-05-27)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use same babel/core dependency version across packages ([bb0ef22](https://github.com/SUI-Components/sui/commit/bb0ef227e12542ceb0dd281308d8a929117c1618))
+
+
+
 # 3.22.0 (2021-05-13)
 
 

@@ -1,5 +1,86 @@
 # CHANGELOG
 
+# 3.38.0 (2021-10-22)
+
+
+### Features
+
+* **packages/sui-lint:** Move react/jsx-no-bind to warning for now ([ddc8e02](https://github.com/SUI-Components/sui/commit/ddc8e02963f12ee0956244eb8ce7b5b55bd0c48d))
+
+
+
+# 3.37.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Lint when it's all files ([6038217](https://github.com/SUI-Components/sui/commit/6038217b2c2840dd84df787fbbce9eddd2bcd853))
+
+
+### Features
+
+* **packages/sui-lint:** Better detection for SCSS files ([6292c8c](https://github.com/SUI-Components/sui/commit/6292c8cf78ab198ade2094157527b8da0c043654))
+* **packages/sui-lint:** Reuse code and use better jsdoc ([344e74d](https://github.com/SUI-Components/sui/commit/344e74dddd808fddfc88f3509802bc1e285a842a))
+
+
+
+# 3.36.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Fix problems with staged files ([e5bbbf2](https://github.com/SUI-Components/sui/commit/e5bbbf2f1314c2f5e10ac95bc0faccea079b32d1))
+
+
+### Features
+
+* **packages/sui-lint:** Exit code 1 if sui-lint js fails ([aba85bd](https://github.com/SUI-Components/sui/commit/aba85bdbf17a6016a0600cc9eaab967552540989))
+* **packages/sui-lint:** Exit with error if problem detected ([b4406ae](https://github.com/SUI-Components/sui/commit/b4406ae125db1bc3893e6d73311a042875e83dbe))
+* **packages/sui-lint:** Improve log messages ([4788c1c](https://github.com/SUI-Components/sui/commit/4788c1caecd9f281c55a1f9db39d62ec9f78e4c1))
+* **packages/sui-lint:** Less noisy linter on CI ([181e74e](https://github.com/SUI-Components/sui/commit/181e74ed8e7e79a24d18660aaa4fe6cb955d8c51))
+* **packages/sui-lint:** Migrate to programmatic Node ([2f929e3](https://github.com/SUI-Components/sui/commit/2f929e34b159d0af27fb6da68d1016cd1ecf3daa))
+* **packages/sui-lint:** Upgrade minor versions for dependencies ([fa0d522](https://github.com/SUI-Components/sui/commit/fa0d52247af4c45e0c477046b6d7fa6e1fb416ee))
+
+
+
+# 3.35.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-lint:** Unify @babel/core version across packages ([916eac7](https://github.com/SUI-Components/sui/commit/916eac70f006cef3acc6800fccc30cd957cfc066))
+
+
+
+# 3.34.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-lint:** Use latest babel version ([30a46fe](https://github.com/SUI-Components/sui/commit/30a46fe74a8c16ca05e4c30ca4b1910a497bdc49))
+
+
+
+# 3.33.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-lint:** Use latest babel dependencies ([0f2d3a5](https://github.com/SUI-Components/sui/commit/0f2d3a5cba1e47f8ac0816b14061148759879af6))
+
+
+
+# 3.32.0 (2021-06-17)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use same babel/core dependency version across packages ([bb0ef22](https://github.com/SUI-Components/sui/commit/bb0ef227e12542ceb0dd281308d8a929117c1618))
+* **packages/sui-lint:** Add TypeScript support ([d257a52](https://github.com/SUI-Components/sui/commit/d257a526115cd44715d8040bbaeff818cb38c662))
+* **sui-lint:** remove not working/used deps and upgrade stylelint versions ([06cc872](https://github.com/SUI-Components/sui/commit/06cc872cddafc2893583ebeefd100e05cf072549))
+
+
+
 # 3.31.0 (2021-04-19)
 
 

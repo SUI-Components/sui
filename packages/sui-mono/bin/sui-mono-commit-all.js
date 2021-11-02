@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 const program = require('commander')
-const {exec} = require('child_process')
 const {getWorkspaces} = require('../src/config')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
 
@@ -33,20 +34,22 @@ const {message, type} = program
 !type && showError('Commit type is mandatory')
 
 /**
- * Checks if given path has changes
+ * Checks if given path has changes and `git add` them
  * @param  {String}  path Folder to check
  * @return {Promise<Boolean>}
  */
-const hasChangedFiles = path => {
-  return new Promise((resolve, reject) => {
-    exec(
-      `git add . && git status ${path} --porcelain`,
-      {cwd: process.cwd()},
-      (err, {stdout}) => {
-        err ? reject(err) : resolve(stdout.trim() !== '')
-      }
-    )
-  })
+const hasChangedFiles = async path => {
+  let stdout = ''
+
+  try {
+    await exec(`git add .`, {cwd: path})
+    const status = await exec(`git status ${path} --porcelain`)
+    stdout = status.stdout || ''
+  } catch (error) {
+    console.error(error)
+  }
+
+  return stdout.trim() !== ''
 }
 
 /**

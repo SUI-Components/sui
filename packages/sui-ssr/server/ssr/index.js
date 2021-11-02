@@ -16,6 +16,10 @@ import {buildDeviceFrom} from '../../build-device'
 import ssrConfig from '../config'
 import {createStylesFor} from '../utils'
 import {getInitialContextValue} from '../initialContextValue'
+import {
+  redirectStatusCodes,
+  DEFAULT_REDIRECT_STATUS_CODE
+} from '../../status-codes'
 
 // __MAGIC IMPORTS__
 let contextProviders
@@ -28,7 +32,6 @@ try {
 // END __MAGIC IMPORTS__
 
 // const SERVER_TIMING_HEADER = 'Server-Timing'
-const HTTP_PERMANENT_REDIRECT = 301
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
@@ -36,6 +39,14 @@ const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
     .replace(/(,$)/g, '')
+
+const cssLinksRegExp = /<link([^>]*)rel="stylesheet"([^<]*)>/g
+
+const convertToAsyncLinks = (allMatch, startingAttrs, endingAttrs) => {
+  const isAlreadyAsync = allMatch.includes('onload')
+  if (isAlreadyAsync) return allMatch
+  return `<link${startingAttrs}${ssrConfig.ASYNC_CSS_ATTRS}${endingAttrs}>`
+}
 
 export default async (req, res, next) => {
   const {
@@ -63,7 +74,7 @@ export default async (req, res, next) => {
       ? `?${qs.stringify(query)}`
       : ''
     const destination = `${redirectLocation.pathname}${queryString}`
-    return res.redirect(HTTP_PERMANENT_REDIRECT, destination)
+    return res.redirect(DEFAULT_REDIRECT_STATUS_CODE, destination)
   }
 
   if (!renderProps) {
@@ -98,7 +109,7 @@ export default async (req, res, next) => {
         HEAD_OPENING_TAG,
         `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
       )
-      .replace('rel="stylesheet"', ssrConfig.ASYNC_CSS_ATTRS)
+      .replace(cssLinksRegExp, convertToAsyncLinks)
       .replace(
         HEAD_CLOSING_TAG,
         `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`
@@ -157,9 +168,29 @@ export default async (req, res, next) => {
 
   const {__HTTP__} = initialProps
   if (__HTTP__) {
-    const {redirectTo} = __HTTP__
+    const {redirectTo, redirectStatusCode, httpCookie, headers} = __HTTP__
+
+    if (httpCookie) {
+      const [[field, value]] = Object.entries(httpCookie)
+      res.cookie(field, value, {httpOnly: true})
+    }
+
+    if (headers) {
+      headers.forEach(header => {
+        const [[field, value]] = Object.entries(header)
+        res.append(field, value)
+      })
+    }
+
     if (redirectTo) {
-      return res.redirect(HTTP_PERMANENT_REDIRECT, redirectTo)
+      const isValidRedirectStatusCode = redirectStatusCodes.includes(
+        redirectStatusCode
+      )
+      const validRedirectStatusCode = isValidRedirectStatusCode
+        ? redirectStatusCode
+        : DEFAULT_REDIRECT_STATUS_CODE
+
+      return res.redirect(validRedirectStatusCode, redirectTo)
     }
   }
 

@@ -3,10 +3,6 @@
 
 const COMPONENTS_PATH = './components'
 const NEW_COMPONENTS_PATH = './tmpComponents'
-const DEMO_PATH = './demo'
-const NEW_DEMO_PATH = './tmpDemo'
-const TEST_PATH = './test'
-const NEW_TEST_PATH = './tmpTest'
 const {NO_COMPONENTS_MESSAGE} = require('../config')
 
 const log = console.log
@@ -22,35 +18,63 @@ const PUBLIC_GITHUB_API_URL_PATTERN =
   'https://api.github.com/repos/:org/:repo/pulls/:pull_request/commits?per_page=:results'
 const PRIVATE_GITHUB_API_URL_PATTERN =
   'https://:host/api/v3/repos/:org/:repo/pulls/:pull_request/commits?access_token=:token'
+const ENCODING = 'utf8'
+
+function getComponentsFromDemoImports(componentPath) {
+  let componentsFromDemoImports = []
+
+  try {
+    const file = path.join(
+      process.cwd(),
+      'components',
+      componentPath,
+      'demo',
+      'index.js'
+    )
+
+    if (!file) return
+
+    const data = fs.readFileSync(file, ENCODING)
+    const importRegExp = /import (?<componentName>.*) from 'components\/(?<componentPath>.*)\/src'/g
+    const matchedImports = [...data.matchAll(importRegExp)]
+
+    componentsFromDemoImports = matchedImports.map(
+      ({groups: {componentPath} = {}}) => componentPath
+    )
+  } catch (err) {
+    error(err)
+  }
+
+  return componentsFromDemoImports
+}
 
 function getComponentsList(commits) {
-  const COMMIT_MESSAGE_PATTERN = /\((?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
-  const list = []
+  const COMMIT_MESSAGE_PATTERN = /\(components\/(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
+  let list = []
 
   commits.forEach(commit => {
     const data = commit.match(COMMIT_MESSAGE_PATTERN)
     if (!data) return
     const {context, component} = data.groups
     const componentPath = `${context}/${component}`
-    if (!list.includes(componentPath)) list.push(componentPath)
+    const componentsFromDemoImports = getComponentsFromDemoImports(
+      componentPath
+    )
+
+    list = [...list, componentPath, ...componentsFromDemoImports]
   })
 
-  return list
+  // Return the list without duplicated keys.
+  return [...new Set(list)]
 }
 
 async function cleanComponents(list) {
   list.forEach(async componentPath => {
     const componentsSrc = `${COMPONENTS_PATH}/${componentPath}/`
     const componentsDest = `${NEW_COMPONENTS_PATH}/${componentPath}/`
-    const demoSrc = `${DEMO_PATH}/${componentPath}/`
-    const demoDest = `${NEW_DEMO_PATH}/${componentPath}/`
-    const tmpSrc = `${TEST_PATH}/${componentPath}/`
-    const tmpDest = `${NEW_TEST_PATH}/${componentPath}/`
 
     try {
       await fs.move(componentsSrc, componentsDest)
-      await fs.move(demoSrc, demoDest)
-      if (fs.existsSync(tmpSrc)) await fs.move(tmpSrc, tmpDest)
     } catch (err) {
       error(err)
     }
@@ -61,13 +85,12 @@ async function cleanComponents(list) {
       `${COMPONENTS_PATH}/README.md`,
       `${NEW_COMPONENTS_PATH}/README.md`
     )
-    await fs.move(`${DEMO_PATH}/package.json`, `${NEW_DEMO_PATH}/package.json`)
-    await fs.remove(COMPONENTS_PATH)
-    await fs.remove(DEMO_PATH)
-    await fs.remove(TEST_PATH)
-    fs.renameSync(NEW_COMPONENTS_PATH, COMPONENTS_PATH)
-    fs.renameSync(NEW_DEMO_PATH, DEMO_PATH)
-    if (fs.existsSync(NEW_TEST_PATH)) fs.renameSync(NEW_TEST_PATH, TEST_PATH)
+    await fs.move(
+      `${COMPONENTS_PATH}/globals.js`,
+      `${NEW_COMPONENTS_PATH}/globals.js`
+    )
+    await fs.rm(COMPONENTS_PATH, {recursive: true, force: true})
+    await fs.rename(NEW_COMPONENTS_PATH, COMPONENTS_PATH)
   } catch (err) {
     error(err)
   }
@@ -75,6 +98,7 @@ async function cleanComponents(list) {
 
 function getRepositoryUrl() {
   const packageJson = require(path.join(process.cwd(), 'package.json'))
+
   return packageJson.repository && packageJson.repository.url
 }
 

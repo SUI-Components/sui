@@ -1,15 +1,15 @@
 const webpack = require('webpack')
 const path = require('path')
-
-const TARGET = process.env.npm_lifecycle_event
-const CWD = process.cwd()
+const {clientConfig} = require('../../src/config')
+const {sep} = require('path')
+const {captureConsole = true} = clientConfig
 
 const config = {
   singleRun: true,
 
   basePath: '',
 
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'webpack'],
 
   reporters: ['spec'],
 
@@ -17,10 +17,18 @@ const config = {
 
   browserDisconnectTolerance: 1,
 
+  webpackMiddleware: {
+    stats: 'errors-only'
+  },
+
   webpack: {
     devtool: 'eval',
+    stats: 'errors-only',
     resolve: {
       alias: {
+        '.scss': false,
+        '.css': false,
+        '.svg': false,
         '@s-ui/react-context': path.resolve(
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
@@ -28,11 +36,19 @@ const config = {
       modules: [path.resolve(process.cwd()), 'node_modules'],
       extensions: ['.mjs', '.js', '.jsx', '.json']
     },
+    node: {
+      fs: 'empty',
+      child_process: 'empty',
+      module: 'empty',
+      readline: 'empty'
+    },
     plugins: [
       new webpack.ProvidePlugin({
         process: require.resolve('process/browser')
       }),
-      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'test' // use 'test' unless process.env.NODE_ENV is defined
+      }),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD)
       })
@@ -41,6 +57,9 @@ const config = {
       rules: [
         {
           test: /\.jsx?$/,
+          exclude: new RegExp(
+            `node_modules(?!${sep}@s-ui${sep}studio${sep}src)`
+          ),
           use: [
             {
               loader: require.resolve('babel-loader'),
@@ -57,7 +76,12 @@ const config = {
                   ]
                 ],
                 plugins: [
-                  require.resolve('babel-plugin-istanbul'),
+                  [
+                    require.resolve('babel-plugin-istanbul'),
+                    {
+                      exclude: ['**/lib/**/*.js', '**/test/**/*.js']
+                    }
+                  ],
                   require.resolve('./babelPatch.js')
                 ]
               }
@@ -74,29 +98,11 @@ const config = {
   },
 
   client: {
+    captureConsole,
     mocha: {
       reporter: 'html'
     }
   }
-}
-
-if (TARGET === 'test:ci') {
-  config.reporters = ['coverage'].concat(config.reporters)
-  config.preprocessors = {
-    'src/**/*.js': ['coverage']
-  }
-  config.coverageReporter = {
-    dir: `${CWD}/coverage`,
-    reporters: [
-      {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
-      {type: 'html', subdir: 'report-html'},
-      {type: 'text-summary'}
-    ]
-  }
-}
-
-if (TARGET === 'test:watch') {
-  config.reporters = ['clear-screen'].concat(config.reporters)
 }
 
 module.exports = config
