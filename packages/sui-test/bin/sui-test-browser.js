@@ -2,7 +2,7 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
-const chalk = require('chalk')
+const colors = require('@s-ui/helpers/colors')
 const runner = require('./karma')
 
 program
@@ -51,7 +51,7 @@ runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .catch(err => {
     if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
       process.stderr.write(
-        chalk.red((err && (err.stack || err.message)) || err) + '\n'
+        colors.red((err && (err.stack || err.message)) || err) + '\n'
       )
     }
     process.exit(err.code || 1)
