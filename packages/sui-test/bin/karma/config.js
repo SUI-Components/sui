@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const {clientConfig} = require('../../src/config')
-
+const {sep} = require('path')
 const {captureConsole = true} = clientConfig
 
 const config = {
@@ -18,15 +18,11 @@ const config = {
   browserDisconnectTolerance: 1,
 
   webpackMiddleware: {
-    stats: {
-      all: false,
-      errors: true,
-      timings: true
-    }
+    stats: 'errors-only'
   },
 
   webpack: {
-    stats: 'minimal',
+    stats: 'errors-only',
     resolve: {
       alias: {
         '@s-ui/react-context': path.resolve(
@@ -37,10 +33,15 @@ const config = {
       extensions: ['.mjs', '.js', '.jsx', '.json']
     },
     node: {
-      fs: 'empty'
+      fs: 'empty',
+      child_process: 'empty',
+      module: 'empty',
+      readline: 'empty'
     },
     plugins: [
-      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'test' // use 'test' unless process.env.NODE_ENV is defined
+      }),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD)
       })
@@ -49,6 +50,9 @@ const config = {
       rules: [
         {
           test: /\.jsx?$/,
+          exclude: new RegExp(
+            `node_modules(?!${sep}@s-ui${sep}studio${sep}src)`
+          ),
           use: [
             {
               loader: require.resolve('babel-loader'),
