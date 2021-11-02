@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.35.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove open for now ([2b7c28b](https://github.com/SUI-Components/sui/commit/2b7c28bae36b3496e375d47450634631046a4ace))
+
+
+
 # 7.34.0 (2021-10-28)
 
 
