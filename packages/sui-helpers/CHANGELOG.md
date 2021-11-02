@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.35.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-helpers:** Move require package to the top ([5a6630a](https://github.com/SUI-Components/sui/commit/5a6630ae77b8fd4f4f4a4b2d5fc5425c3d4405ca))
+
+
+
 # 1.34.0 (2021-10-25)
 
 

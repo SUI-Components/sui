@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/helpers",
-  "version": "1.34.0",
+  "version": "1.35.0",
   "description": "A set of internal helpers used by sui-related packages.",
   "author": "",
   "dependencies": {
