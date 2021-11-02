@@ -1,8 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
+
 const {clientConfig} = require('../../src/config')
-const {sep} = require('path')
+
 const {captureConsole = true} = clientConfig
+const {sep} = path
 
 const config = {
   singleRun: true,
@@ -12,11 +14,11 @@ const config = {
   frameworks: ['mocha', 'webpack'],
 
   plugins: [
-    'karma-chrome-launcher',
-    'karma-firefox-launcher',
-    'karma-mocha',
-    'karma-spec-reporter',
-    'karma-webpack'
+    require.resolve('karma-webpack'),
+    require.resolve('karma-chrome-launcher'),
+    require.resolve('karma-firefox-launcher'),
+    require.resolve('karma-mocha'),
+    require.resolve('karma-spec-reporter')
   ],
 
   reporters: ['spec'],
@@ -34,9 +36,6 @@ const config = {
     stats: 'errors-only',
     resolve: {
       alias: {
-        '.scss': false,
-        '.css': false,
-        '.svg': false,
         '@s-ui/react-context': path.resolve(
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
@@ -62,15 +61,20 @@ const config = {
       new webpack.ProvidePlugin({
         process: require.resolve('process/browser')
       }),
-      new webpack.EnvironmentPlugin({
-        NODE_ENV: 'test' // use 'test' unless process.env.NODE_ENV is defined
-      }),
       new webpack.DefinePlugin({
-        __BASE_DIR__: JSON.stringify(process.env.PWD)
+        __BASE_DIR__: JSON.stringify(process.env.PWD),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'test')
       })
     ],
     module: {
       rules: [
+        {
+          test: [/\.s?css$/, /\.svg$/],
+          type: 'asset/inline',
+          generator: {
+            dataUrl: () => ''
+          }
+        },
         {
           test: /\.jsx?$/,
           exclude: new RegExp(
