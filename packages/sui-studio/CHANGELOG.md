@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.33.0 (2021-11-03)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** prettier spacing error ([2b483c2](https://github.com/SUI-Components/sui/commit/2b483c23f0681e0caca3c41e1037beb7eb0e97a3))
+
+
+
 # 10.32.0 (2021-10-27)
 
 
