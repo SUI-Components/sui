@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "7.15.7",
+    "@babel/cli": "7",
     "@s-ui/bundler": "7",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "2",
