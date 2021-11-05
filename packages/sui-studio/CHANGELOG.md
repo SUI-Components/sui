@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.34.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Simplify @babel/cli version to use the same as others packages ([629e759](https://github.com/SUI-Components/sui/commit/629e759ba78968d440c55d00a04fa1ab92fe69f0))
+
+
+
 # 10.33.0 (2021-11-03)
 
 
