@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.35.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Better error output ([03ce37f](https://github.com/SUI-Components/sui/commit/03ce37fd13bb6a172d3d6ffd8206c403fc8f2eae))
+
+
+
 # 10.34.0 (2021-11-05)
 
 
