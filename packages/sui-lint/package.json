@@ -16,8 +16,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.15.8",
-    "@babel/eslint-parser": "7.15.8",
+    "@babel/core": "7.16.0",
+    "@babel/eslint-parser": "7.16.0",
     "@babel/eslint-plugin": "7.14.5",
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
