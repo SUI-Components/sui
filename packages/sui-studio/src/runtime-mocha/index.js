@@ -41,7 +41,12 @@ Promise.all(
 
     const Component =
       componentModule && (componentModule.type || componentModule)
+
     if (!componentModule) {
+      console.error(
+        `Could not find component ${categoryComponentKey} in ${key}`
+      )
+      console.error(`Available keys: `, testsFiles.keys())
       throw new Error(`Missing export default from ${categoryComponentKey}`)
     }
 
