@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.36.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([703a1bc](https://github.com/SUI-Components/sui/commit/703a1bc7bf34fe49739ec28999ecea98b93385c9))
+
+
+
 # 7.35.0 (2021-11-02)
 
 
