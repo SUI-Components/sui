@@ -53,13 +53,7 @@ const webpackConfig = {
     extensions: ['.js', '.json'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
-  entry: config.vendor
-    ? {
-        app: MAIN_ENTRY_POINT,
-        vendor: config.vendor
-      }
-    : MAIN_ENTRY_POINT,
-  target: 'web',
+  entry: MAIN_ENTRY_POINT,
   output: {
     chunkFilename: filename,
     filename,
@@ -135,12 +129,7 @@ const webpackConfig = {
       )
     ])
   },
-  resolveLoader,
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  }
+  resolveLoader
 }
 
 module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig

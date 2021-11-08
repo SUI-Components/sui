@@ -10,4 +10,4 @@ exports.config = config
 exports.useExperimentalMinifier =
   config.optimizations && config.optimizations.useExperimentalMinifier
 exports.extractComments = extractComments || false
-exports.sourceMap = (sourcemaps && sourcemaps.prod) || 'none'
+exports.sourceMap = (sourcemaps && sourcemaps.prod) || false

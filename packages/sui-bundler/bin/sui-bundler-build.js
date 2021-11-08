@@ -66,13 +66,14 @@ webpack(nextConfig).run(async (error, stats) => {
 
   if (stats.hasErrors()) {
     const jsonStats = stats.toJson('errors-only')
-    return jsonStats.errors.map(log.error)
+    return jsonStats.errors.map(({message}) => log.error(message))
   }
 
   if (stats.hasWarnings()) {
     const jsonStats = stats.toJson('errors-warnings')
     log.warn('Webpack generated the following warnings: ')
-    jsonStats.warnings.map(log.warn)
+    log.warn(jsonStats.warnings)
+    jsonStats.warnings.map(({message}) => log.warn(message))
   }
 
   console.log(`Webpack stats: ${stats}`)

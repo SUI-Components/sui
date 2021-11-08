@@ -13,6 +13,9 @@ const {resolveLoader} = require('./shared/resolve-loader')
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
+const outputPath = path.join(process.cwd(), 'dist')
+
+process.env.NODE_ENV = 'development'
 
 const smp = new SpeedMeasurePlugin()
 
@@ -27,16 +30,18 @@ const webpackConfig = {
       ...defaultAlias,
       ...aliasFromConfig
     },
-    extensions: ['.js', '.json'],
-    modules: ['node_modules', path.resolve(process.cwd())]
+    fallback: {
+      fs: false
+    },
+    modules: ['node_modules', path.resolve(process.cwd())],
+    extensions: ['.js', '.json']
   },
   stats: 'errors-only',
   entry: cleanList([
-    require.resolve('react-dev-utils/webpackHotDevClient'),
-    MAIN_ENTRY_POINT
+    MAIN_ENTRY_POINT,
+    require.resolve('webpack-plugin-serve/client')
   ]),
   target: 'web',
-  node: false,
   optimization: {
     emitOnErrors: false,
     removeAvailableModules: false,
@@ -45,6 +50,7 @@ const webpackConfig = {
     splitChunks: false
   },
   output: {
+    path: outputPath,
     pathinfo: false,
     publicPath: '/'
   },
@@ -108,6 +114,7 @@ const webpackConfig = {
       )
     ])
   },
+  watch: true,
   devtool:
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
