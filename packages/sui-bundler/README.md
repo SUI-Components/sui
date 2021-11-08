@@ -1,4 +1,4 @@
-# sui-bunder
+# sui-bundler
 
 > Config-free bundler for ES6 React apps.
 
