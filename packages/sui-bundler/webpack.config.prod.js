@@ -1,3 +1,5 @@
+// @ts-check
+
 /* eslint-disable no-console */
 const webpack = require('webpack')
 const path = require('path')
@@ -5,7 +7,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
+const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const {
   when,
@@ -19,7 +21,6 @@ const minifyCss = require('./shared/minify-css')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {splitChunks} = require('./shared/optimization-split-chunks')
 const {
   extractComments,
   useExperimentalMinifier,
@@ -40,6 +41,9 @@ const cssFileName = config.onlyHash
 
 const smp = new SpeedMeasurePlugin()
 
+/** @typedef {import('webpack').Configuration} WebpackConfig */
+
+/** @type {WebpackConfig} */
 const webpackConfig = {
   devtool: sourceMap,
   mode: 'production',
@@ -63,18 +67,15 @@ const webpackConfig = {
     publicPath: PUBLIC_PATH
   },
   optimization: {
-    // avoid looping over all the modules after the compilation
-    checkWasmTypes: false,
     minimize: true,
     minimizer: [
       minifyJs({useExperimentalMinifier, extractComments, sourceMap}),
       minifyCss()
     ].filter(Boolean),
-    runtimeChunk: true,
-    splitChunks
+    runtimeChunk: true
   },
   plugins: cleanList([
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.ids.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({

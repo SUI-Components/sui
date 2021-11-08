@@ -1,3 +1,5 @@
+// @ts-check
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -16,6 +18,9 @@ const useExperimentalSCSSLoader =
 
 const smp = new SpeedMeasurePlugin()
 
+/** @typedef {import('webpack').Configuration} WebpackConfig */
+
+/** @type {WebpackConfig} */
 const webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
@@ -33,9 +38,9 @@ const webpackConfig = {
     MAIN_ENTRY_POINT
   ]),
   target: 'web',
-  node: {fs: 'empty'},
+  node: false,
   optimization: {
-    noEmitOnErrors: true,
+    emitOnErrors: false,
     removeAvailableModules: false,
     removeEmptyChunks: false,
     runtimeChunk: true,
@@ -46,6 +51,9 @@ const webpackConfig = {
     publicPath: '/'
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin({__DEV__: true}),
     new HtmlWebpackPlugin({
@@ -94,9 +102,7 @@ const webpackConfig = {
               }
             }
           },
-          useExperimentalSCSSLoader
-            ? require.resolve('super-sass-loader')
-            : require.resolve('sass-loader')
+          require.resolve('@s-ui/sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
@@ -105,7 +111,7 @@ const webpackConfig = {
     ])
   },
   devtool:
-    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
+    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
 
 module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
