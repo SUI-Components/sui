@@ -1,8 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
+
 const {clientConfig} = require('../../src/config')
-const {sep} = require('path')
+
 const {captureConsole = true} = clientConfig
+const {sep} = path
 
 const config = {
   singleRun: true,
@@ -10,6 +12,14 @@ const config = {
   basePath: '',
 
   frameworks: ['mocha', 'webpack'],
+
+  plugins: [
+    require.resolve('karma-webpack'),
+    require.resolve('karma-chrome-launcher'),
+    require.resolve('karma-firefox-launcher'),
+    require.resolve('karma-mocha'),
+    require.resolve('karma-spec-reporter')
+  ],
 
   reporters: ['spec'],
 
@@ -22,6 +32,7 @@ const config = {
   },
 
   webpack: {
+    devtool: 'eval',
     stats: 'errors-only',
     resolve: {
       alias: {
@@ -30,24 +41,40 @@ const config = {
         )
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
-      extensions: ['.mjs', '.js', '.jsx', '.json']
-    },
-    node: {
-      fs: 'empty',
-      child_process: 'empty',
-      module: 'empty',
-      readline: 'empty'
+      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      fallback: {
+        child_process: false,
+        constants: false,
+        fs: false,
+        os: false,
+        module: false,
+        stream: false,
+        http: false,
+        https: false,
+        path: false,
+        timers: false,
+        readline: false,
+        zlib: false
+      }
     },
     plugins: [
-      new webpack.EnvironmentPlugin({
-        NODE_ENV: 'test' // use 'test' unless process.env.NODE_ENV is defined
+      new webpack.ProvidePlugin({
+        process: require.resolve('process/browser')
       }),
       new webpack.DefinePlugin({
-        __BASE_DIR__: JSON.stringify(process.env.PWD)
+        __BASE_DIR__: JSON.stringify(process.env.PWD),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'test')
       })
     ],
     module: {
       rules: [
+        {
+          test: [/\.s?css$/, /\.svg$/],
+          type: 'asset/inline',
+          generator: {
+            dataUrl: () => ''
+          }
+        },
         {
           test: /\.jsx?$/,
           exclude: new RegExp(
@@ -80,11 +107,6 @@ const config = {
               }
             }
           ]
-        },
-        {
-          // ignore css/scss require/imports files in the server
-          test: [/\.s?css$/, /\.svg$/],
-          use: ['null-loader']
         }
       ]
     }

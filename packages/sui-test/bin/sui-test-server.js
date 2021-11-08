@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const program = require('commander')
 const path = require('path')
+const program = require('commander')
 const colors = require('@s-ui/helpers/colors')
 const {serialSpawn} = require('@s-ui/helpers/cli')
 
