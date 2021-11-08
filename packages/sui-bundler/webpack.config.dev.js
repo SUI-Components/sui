@@ -11,10 +11,8 @@ const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
 const {resolveLoader} = require('./shared/resolve-loader')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
+  `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
-const useExperimentalSCSSLoader =
-  config.optimizations && config.optimizations.useExperimentalSCSSLoader
 
 const smp = new SpeedMeasurePlugin()
 
