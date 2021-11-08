@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.7.0 (2021-11-08)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Use strict ([6641ad9](https://github.com/SUI-Components/sui/commit/6641ad98a71c707e698c9428358cfb22ad202583))
+
+
+
+# 1.6.0 (2021-11-08)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc-core dependency ([91f9cad](https://github.com/SUI-Components/sui/commit/91f9cad777d7f929d7a75c7f42c83533bfd9c4c5))
+
+
+
 # 1.5.0 (2021-11-02)
 
 

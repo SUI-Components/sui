@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.111.0 (2021-11-08)
+
+
+### Features
+
+* **packages/sui-theme:** Add default values for thumbnail basic ([683d079](https://github.com/SUI-Components/sui/commit/683d0790d2c75af0ae9d6880a9a0116694445ed7))
+* **packages/sui-theme:** Add default! to avoid being overwritten ([b7fdb82](https://github.com/SUI-Components/sui/commit/b7fdb824c1028bdb015d3fa42f55bbbf37d19a9c))
+
+
+
 # 8.110.0 (2021-10-29)
 
 
