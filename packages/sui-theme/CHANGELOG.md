@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.112.0 (2021-11-10)
+
+
+### Features
+
+* **packages/sui-theme:** Scss changes for the atom input ([eae13ef](https://github.com/SUI-Components/sui/commit/eae13ef932b5ced3f1fc2d80a59bfb993981b7db))
+
+
+
 # 8.111.0 (2021-11-08)
 
 
