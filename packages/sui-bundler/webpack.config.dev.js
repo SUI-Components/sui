@@ -44,6 +44,7 @@ const webpackConfig = {
   ]),
   target: 'web',
   optimization: {
+    checkWasmTypes: false,
     emitOnErrors: false,
     removeAvailableModules: false,
     removeEmptyChunks: false,

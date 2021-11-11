@@ -21,11 +21,7 @@ const minifyCss = require('./shared/minify-css')
 const definePlugin = require('./shared/define')
 const babelRules = require('./shared/module-rules-babel')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {
-  extractComments,
-  useExperimentalMinifier,
-  sourceMap
-} = require('./shared/config')
+const {extractComments, sourceMap} = require('./shared/config')
 const {aliasFromConfig} = require('./shared/resolve-alias')
 const {resolveLoader} = require('./shared/resolve-loader')
 
@@ -61,11 +57,11 @@ const webpackConfig = {
     publicPath: PUBLIC_PATH
   },
   optimization: {
+    checkWasmTypes: false,
     minimize: true,
-    minimizer: [
-      minifyJs({useExperimentalMinifier, extractComments, sourceMap}),
-      minifyCss()
-    ].filter(Boolean),
+    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(
+      Boolean
+    ),
     runtimeChunk: true
   },
   plugins: cleanList([
