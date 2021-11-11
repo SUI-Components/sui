@@ -12,7 +12,7 @@ export default function Feature({
 }
 
 Feature.propTypes = {
-  featureKey: PropTypes.string,
+  featureKey: PropTypes.string.isRequired,
   attributes: PropTypes.object,
   queryString: PropTypes.string,
   children: PropTypes.func
