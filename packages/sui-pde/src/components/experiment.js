@@ -8,14 +8,14 @@ export default function Experiment({
   queryString,
   children
 }) {
-  const value = useExperiment({
+  const {variation} = useExperiment({
     experimentName,
     attributes,
     trackExperimentViewed,
     queryString
   })
 
-  return children(value)
+  return children({variation})
 }
 
 Experiment.propTypes = {

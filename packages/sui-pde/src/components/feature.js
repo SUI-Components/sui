@@ -7,8 +7,8 @@ export default function Feature({
   attributes,
   queryString
 }) {
-  const value = useFeature(featureKey, attributes, queryString)
-  return children(value)
+  const {isActive, variables} = useFeature(featureKey, attributes, queryString)
+  return children({isActive, variables})
 }
 
 Feature.propTypes = {
