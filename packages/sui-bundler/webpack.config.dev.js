@@ -4,6 +4,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+
 const definePlugin = require('./shared/define')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias')
@@ -38,8 +39,8 @@ const webpackConfig = {
   },
   stats: 'errors-only',
   entry: cleanList([
-    MAIN_ENTRY_POINT,
-    require.resolve('webpack-plugin-serve/client')
+    require.resolve('react-dev-utils/webpackHotDevClient'),
+    MAIN_ENTRY_POINT
   ]),
   target: 'web',
   optimization: {

@@ -121,7 +121,7 @@ const webpackConfig = {
               }
             }
           },
-          require.resolve('sass-loader')
+          require.resolve('@s-ui/sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
