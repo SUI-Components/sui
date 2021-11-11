@@ -19,11 +19,11 @@ body {
   @import "~not-exists-module2/index.scss";  // this should be skiped
 */
 .foobar {
-  color: #FFF;
+  color: #fff;
 }
 
 .include-test {
-  color: #FFF;
+  color: #fff;
 }
 
 .web_foobaz {
