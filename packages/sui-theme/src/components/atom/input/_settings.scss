@@ -13,3 +13,18 @@ $bxsh-molecule-autosuggest-focus: $bxsh-atom-input !default;
 
 $bd-atom-select-focus: $bd-atom-input !default;
 $bxsh-atom-select-focus: $bxsh-atom-input !default;
+
+$h-atom-input--xl: 7 * $sz-base !default; // 56px
+$h-atom-input--l: 6 * $sz-base !default; // 48px
+$h-atom-input--m: 5 * $sz-base !default; // 40px
+$h-atom-input--s: 4 * $sz-base !default; // 32px
+$h-atom-input--xs: 3 * $sz-base !default; // 24px
+
+$c-atom-input--success: $c-success !default;
+$c-atom-input--error: $c-error !default;
+$c-atom-input--alert: $c-alert !default;
+
+$sizes-atom-input: xl $h-atom-input--xl, l $h-atom-input--l, m $h-atom-input--m,
+  xs $h-atom-input--xs, s $h-atom-input--s !default;
+$states-atom-input: success $c-atom-input--success, error $c-atom-input--error,
+  alert $c-atom-input--alert !default;
