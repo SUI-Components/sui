@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.113.0 (2021-11-11)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** add deleted styles again to s-ui theme in order to fix breaking change in o ([05d7d98](https://github.com/SUI-Components/sui/commit/05d7d98d6c7e29a3a7390cb2fd8ded98e8f0dead))
+
+
+
 # 8.112.0 (2021-11-10)
 
 
