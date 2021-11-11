@@ -18,6 +18,7 @@ function handleError(err, stats, done) {
 
   const info = stats.toJson()
   if (stats.hasErrors()) {
+    console.log(info.errors)
     done(info.errors)
     return false
   }
@@ -56,7 +57,7 @@ function runSimpleTest(done, fixtureName) {
   })
 }
 
-describe.only('test sass-loader', function() {
+describe('test sass-loader', function() {
   this.timeout(10000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
@@ -135,10 +136,6 @@ describe.only('test sass-loader', function() {
 
   it('should resolve files with double extensions', function(done) {
     runSimpleTest(done, 'double-extensions')
-  })
-
-  it('should be able to import non sass files with a passed transformer', function(done) {
-    runSimpleTest(done, 'withTransformer')
   })
 
   it('should be able to skip import in comment', function(done) {

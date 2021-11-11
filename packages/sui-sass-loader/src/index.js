@@ -86,8 +86,6 @@ function getLoaderConfig(ctx) {
     sassOptions: {}
   }
 
-  console.log(ctx.getOptions())
-
   const options = utils.mergeDeep(defaults, ctx.getOptions() || {})
   const includePaths = options.includePaths
   const basedir =
@@ -95,16 +93,14 @@ function getLoaderConfig(ctx) {
   const transformers = createTransformersMap(options.transformers)
   const implementation = options.implementation || require('sass')
 
-  // convert relative to absolute
-  for (let i = 0; i < includePaths.length; i++) {
-    if (!path.isAbsolute(includePaths[i])) {
-      includePaths[i] = path.join(basedir, includePaths[i])
-    }
-  }
+  // convert relative paths to absolute
+  const includePathsWithAbsolutePaths = includePaths.map(p =>
+    path.isAbsolute(p) ? p : path.join(basedir, p)
+  )
 
   return {
     basedir,
-    includePaths,
+    includePaths: includePathsWithAbsolutePaths,
     transformers,
     implementation,
     baseEntryDir: path.dirname(ctx.resourcePath),
