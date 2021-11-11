@@ -33,6 +33,8 @@
     "karma-webpack": "5.0.0",
     "mocha": "9.1.3",
     "process": "0.11.10",
-    "webpack": "5.62.1"
+    "stream-browserify": "3.0.0",
+    "util": "0.12.4",
+    "webpack": "5.61.0"
   }
 }
