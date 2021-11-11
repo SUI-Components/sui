@@ -6,13 +6,13 @@ const utils = require('./utils')
 // compile cache
 // cache = {
 //   <entry>: {
-//      mtime: <Number>,            // 修改时间
-//      writeTimes: <Number>,       // 编译次数
-//      readTimes: <Number>,        // 读取次数 (自最后一次编译)
-//      lastCompile: <Number>,      // 最后一次编译
-//      result: <String>,           // 编译结果
-//      dependencies: {             // 依赖文件状态
-//          <file>: <Number>,       // 依赖文件以及修改时间
+//      mtime: <Number>,            // change time
+//      writeTimes: <Number>,       // compilation times
+//      readTimes: <Number>,        // read times (from last compilation)
+//      lastCompile: <Number>,      // last compilation time
+//      result: <String>,           // compilation result
+//      dependencies: {             // dependencies files status
+//          <file>: <Number>,       // file and modification time
 //          ...
 //      }
 //   },
@@ -40,14 +40,12 @@ class Cache {
   }
 
   isValid() {
-    if (!(this.entry in CACHE_STORE)) {
-      return false
-    }
+    if (!(this.entry in CACHE_STORE)) return false
 
     const cache = CACHE_STORE[this.entry]
     const estat = utils.fstat(this.entry)
 
-    // 文件不存在, 或时间不正确
+    // The file does not exist, or the time is incorrect
     if (!estat || estat.mtime.getTime() !== cache.mtime) {
       return false
     }
@@ -94,9 +92,7 @@ class Cache {
   }
 
   write(dependencies, result) {
-    if (!fs.existsSync(this.entry)) {
-      return
-    }
+    if (!fs.existsSync(this.entry)) return
 
     let cache = CACHE_STORE[this.entry]
 
@@ -111,7 +107,9 @@ class Cache {
       }
     }
 
-    cache.mtime = utils.fstat(this.entry).mtime.getTime()
+    const mtime = utils.fstat(this.entry)
+
+    cache.mtime = mtime ? mtime.mtimeMs : 0
     cache.writeTimes++
     cache.readTimes = 0
     cache.result = result

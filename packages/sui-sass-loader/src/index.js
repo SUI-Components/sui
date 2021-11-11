@@ -1,3 +1,5 @@
+// @ts-check
+
 const path = require('path')
 const fs = require('fs-extra')
 const preview = require('cli-source-preview')
@@ -28,13 +30,13 @@ function getImportsToResolve(original, includePaths, transformers) {
   const imports = []
   let names = [basename]
   let exts = [extname]
-  const extensionPrecedence = [...EXT_PRECEDENCE, Object.keys(transformers)]
+  const extensionPrecedence = [...EXT_PRECEDENCE, ...Object.keys(transformers)]
 
   if (!extname) {
     exts = extensionPrecedence
   }
 
-  if (extname && extensionPrecedence.indexOf(extname) === -1) {
+  if (extname && !extensionPrecedence.includes(extname)) {
     basename = path.basename(original)
     names = [basename]
     exts = extensionPrecedence
@@ -64,9 +66,7 @@ function getImportsToResolve(original, includePaths, transformers) {
 }
 
 function createTransformersMap(transformers) {
-  if (!transformers) {
-    return {}
-  }
+  if (!transformers) return {}
 
   // return map of extension strings to transformer functions
   return transformers.reduce((extensionMap, transformer) => {
@@ -93,14 +93,16 @@ function getLoaderConfig(ctx) {
   const transformers = createTransformersMap(options.transformers)
   const implementation = options.implementation || require('sass')
 
-  // convert relative paths to absolute
-  const includePathsWithAbsolutePaths = includePaths.map(p =>
-    path.isAbsolute(p) ? p : path.join(basedir, p)
-  )
+  // convert relative to absolute
+  for (let i = 0; i < includePaths.length; i++) {
+    if (!path.isAbsolute(includePaths[i])) {
+      includePaths[i] = path.join(basedir, includePaths[i])
+    }
+  }
 
   return {
     basedir,
-    includePaths: includePathsWithAbsolutePaths,
+    includePaths,
     transformers,
     implementation,
     baseEntryDir: path.dirname(ctx.resourcePath),
@@ -115,11 +117,9 @@ function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
   level = level || 0
   dependencies = dependencies || []
 
-  const includePaths = opts.includePaths
-  const transformers = opts.transformers
-  const sassOptions = opts.sassOptions || {}
-  const importer = sassOptions.importer
-  let content = false
+  const {includePaths, transformers, sassOptions = {}} = opts
+  const {importer} = sassOptions
+  let content
 
   if (typeof entry === 'object') {
     content = entry.content
