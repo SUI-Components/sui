@@ -10,6 +10,9 @@ const {resolveLoader} = require('./shared/resolve-loader')
 
 const filename = '[name].[chunkhash:8].js'
 
+/** @typedef {import('webpack').Configuration} WebpackConfig */
+
+/** @type {WebpackConfig} */
 const webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -37,9 +40,12 @@ const webpackConfig = {
     rules: cleanList([
       babelRules,
       {
-        // ignore css/scss require/imports files in the server
-        test: /\.s?css$/,
-        use: 'null-loader'
+        // ignore css/scss/svg require/imports files in the server
+        test: [/\.s?css$/, /\.svg$/],
+        type: 'asset/inline',
+        generator: {
+          dataUrl: () => ''
+        }
       },
       when(config['externals-manifest'], () =>
         manifestLoaderRules(config['externals-manifest'])
