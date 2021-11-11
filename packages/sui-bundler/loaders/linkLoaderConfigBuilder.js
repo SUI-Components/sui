@@ -1,7 +1,6 @@
 const fg = require('fast-glob')
 const path = require('path')
 
-const {config} = require('../shared')
 const log = require('../shared/log')
 const {defaultAlias} = require('../shared/resolve-alias')
 const createSassLinkImporter = require('./sassLinkImporter.js')
@@ -81,7 +80,7 @@ module.exports = ({config, packagesToLink, linkAll}) => {
   const {rules} = config.module
   const rulesWithLink = rules.map(rule => {
     const {use, test: regex} = rule
-    if (!regex.test('.css') || use === 'null-loader') return rule
+    if (!regex.test('.css')) return rule
 
     return {
       ...rule,
