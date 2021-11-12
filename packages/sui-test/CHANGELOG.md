@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.6.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-test:** add categories env variable ([389b8ae](https://github.com/SUI-Components/sui/commit/389b8ae970173434117af09dcafff207104be40b))
+
+
+
 # 6.5.0 (2021-11-02)
 
 
