@@ -40,7 +40,8 @@ const config = {
     },
     plugins: [
       new webpack.EnvironmentPlugin({
-        NODE_ENV: 'test' // use 'test' unless process.env.NODE_ENV is defined
+        NODE_ENV: 'test', // use 'test' unless process.env.NODE_ENV is defined,
+        CATEGORIES: process.env.CATEGORIES
       }),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD)
