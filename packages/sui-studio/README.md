@@ -279,7 +279,7 @@ Add this scripts on your own components project
 }
 ```
 
-If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separeted set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
+If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
 
 ## File structure
 
