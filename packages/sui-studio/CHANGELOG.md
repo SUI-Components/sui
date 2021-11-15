@@ -1,5 +1,60 @@
 # CHANGELOG
 
+# 10.36.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-studio:** add categories env variable ([9280ff2](https://github.com/SUI-Components/sui/commit/9280ff2b5a3aefc11310daabc05c6c7b9d381c87))
+
+
+
+# 10.35.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Better error output ([03ce37f](https://github.com/SUI-Components/sui/commit/03ce37fd13bb6a172d3d6ffd8206c403fc8f2eae))
+
+
+
+# 10.34.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Simplify @babel/cli version to use the same as others packages ([629e759](https://github.com/SUI-Components/sui/commit/629e759ba78968d440c55d00a04fa1ab92fe69f0))
+
+
+
+# 10.33.0 (2021-11-03)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** prettier spacing error ([2b483c2](https://github.com/SUI-Components/sui/commit/2b483c23f0681e0caca3c41e1037beb7eb0e97a3))
+
+
+
+# 10.32.0 (2021-10-27)
+
+
+### Features
+
+* **packages/sui-studio:** add classname test agreement to the test template ([d74ac7c](https://github.com/SUI-Components/sui/commit/d74ac7c50ef7bf38a278c5ab0106a17736a10cd5))
+* **packages/sui-studio:** skip test template ([6a727bc](https://github.com/SUI-Components/sui/commit/6a727bcc6b965f878ca246a4755d0ef652d48fed))
+
+
+
+# 10.31.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** Generate components demo with correct tab size ([eaa7026](https://github.com/SUI-Components/sui/commit/eaa7026f83e8c365b3a3a8b01bb141e193e8d6c8))
+
+
+
 # 10.30.0 (2021-10-25)
 
 

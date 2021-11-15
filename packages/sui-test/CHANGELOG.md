@@ -1,5 +1,34 @@
 # CHANGELOG
 
+# 6.6.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-test:** add categories env variable ([389b8ae](https://github.com/SUI-Components/sui/commit/389b8ae970173434117af09dcafff207104be40b))
+
+
+
+# 6.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Remove chalk dependency ([34f7806](https://github.com/SUI-Components/sui/commit/34f7806d8ba9c29d5853c6ad3eafbba7b2ed8322))
+
+
+
+# 6.4.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Rollback karma to less dependencies ([4001650](https://github.com/SUI-Components/sui/commit/400165059f8d2c99d788e30cd3c092f77e136faa))
+* **packages/sui-test:** Tweak config for sui-test ([6e0e36f](https://github.com/SUI-Components/sui/commit/6e0e36f78c9684cb2b9319231e90b4bd5a59340b))
+* **packages/sui-test:** Upgrade dependencies packages ([090a692](https://github.com/SUI-Components/sui/commit/090a692874647eb946c8cd07a760fa9ed706e4d8))
+
+
+
 # 6.3.0 (2021-10-21)
 
 
@@ -15,6 +44,8 @@
 ### Features
 
 * **packages/sui-test:** Unify @babel/core package versions ([b29c83b](https://github.com/SUI-Components/sui/commit/b29c83bc95688cbded4cae36ff1b67925688a39a))
+* **packages/sui-test:** Upgrade babel/core dependency ([4652296](https://github.com/SUI-Components/sui/commit/4652296fef3abd60a14165716df53da889949d67))
+* **packages/sui-test:** Upgrade karma-webpack with less dependencies and rely on default config mor ([9061070](https://github.com/SUI-Components/sui/commit/9061070a78c175e2ea90068445f402f2f98ec63e))
 
 
 

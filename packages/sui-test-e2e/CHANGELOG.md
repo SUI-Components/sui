@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.5.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-test-e2e:** expose add-commands from testing-library ([7f31723](https://github.com/SUI-Components/sui/commit/7f31723311174108cb2654e40e1d6f3894162067))
+
+
+
 # 1.4.0 (2021-10-18)
 
 

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.35.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-helpers:** Move require package to the top ([5a6630a](https://github.com/SUI-Components/sui/commit/5a6630ae77b8fd4f4f4a4b2d5fc5425c3d4405ca))
+
+
+
+# 1.34.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-helpers:** Use readline instead process.stdout to clear lines ([0f8892e](https://github.com/SUI-Components/sui/commit/0f8892e7f1587df8cdca4d1543273188f96d9bf3))
+
+
+
 # 1.33.0 (2021-09-22)
 
 

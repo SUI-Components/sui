@@ -1,5 +1,65 @@
 # CHANGELOG
 
+# 7.39.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade version of webpack-dev-server ([15fb8f7](https://github.com/SUI-Components/sui/commit/15fb8f747ba8cd862debe53473fc066bccf452e1))
+* **packages/sui-bundler:** Use correct watch config ([adc7689](https://github.com/SUI-Components/sui/commit/adc7689f8d57a14f1ce46adf5af5c52b4df07e80))
+
+
+
+# 7.38.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Rollback watch config ([7bf2c67](https://github.com/SUI-Components/sui/commit/7bf2c67a92dbd9442731e79dfb7a39ffcfc78b06))
+
+
+
+# 7.37.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Avoid watching files on CI and make it configurable ([a623af5](https://github.com/SUI-Components/sui/commit/a623af566aee43eacfab962e88e9da840568298a))
+
+
+
+# 7.36.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([703a1bc](https://github.com/SUI-Components/sui/commit/703a1bc7bf34fe49739ec28999ecea98b93385c9))
+
+
+
+# 7.35.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove open for now ([2b7c28b](https://github.com/SUI-Components/sui/commit/2b7c28bae36b3496e375d47450634631046a4ace))
+
+
+
+# 7.34.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-bundler:** Adapt linter errors ([6f35331](https://github.com/SUI-Components/sui/commit/6f35331c568d39c636a953b265253e32e8bef71b))
+* **packages/sui-bundler:** Add License links ([b92db3a](https://github.com/SUI-Components/sui/commit/b92db3a150349a583c27e6df6ebbcef3711451a2))
+* **packages/sui-bundler:** Improve usability for dev mode ([cf8787d](https://github.com/SUI-Components/sui/commit/cf8787d3365bcddcdb7ccc1029dc426e94de6f6d))
+* **packages/sui-bundler:** Less noisy dev mode ([f5e21eb](https://github.com/SUI-Components/sui/commit/f5e21eb3d29164e0e92d3bda37739769cab99ab8))
+* **packages/sui-bundler:** Remove not needed line regarding deprecation notices ([a0962dc](https://github.com/SUI-Components/sui/commit/a0962dc2ea7959f4b1b089279895f21df5efdfe0))
+* **packages/sui-bundler:** Start migrating away from react-dev-utils ([3bbf7f4](https://github.com/SUI-Components/sui/commit/3bbf7f474297f5c5b0fa2f8886696ffbeec978c4))
+
+
+
 # 7.33.0 (2021-10-21)
 
 
@@ -24,6 +84,7 @@
 ### Features
 
 * **packages/sui-bundler:** Upgrade sui-bundler deps ([851b017](https://github.com/SUI-Components/sui/commit/851b0178f0653b475fe9fe94228bca7f60d44817))
+* **packages/sui-bundler:** Use latest webpack-dev-server ([0f5e33e](https://github.com/SUI-Components/sui/commit/0f5e33e08af4d07ea4059d73c016efb3a088c5d0))
 
 
 

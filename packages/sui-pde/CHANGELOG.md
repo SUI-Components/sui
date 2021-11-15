@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 2.16.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-pde:** add first iteration of experiment and feature components ([391d655](https://github.com/SUI-Components/sui/commit/391d655459dcb96a61f5b4b7c295ad3c22bd8df2))
+* **packages/sui-pde:** apply destructoring review ([da66fc3](https://github.com/SUI-Components/sui/commit/da66fc3a0e086167ad47da427d9aca07450aec0f))
+* **packages/sui-pde:** fix given reviews ([b074190](https://github.com/SUI-Components/sui/commit/b0741905f37ef0699c2efbfc238dbc1a3556d295))
+
+
+
 # 2.15.0 (2021-10-08)
 
 
