@@ -69,7 +69,8 @@ const config = {
       }),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD),
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'test')
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'test'),
+        CATEGORIES: JSON.stringify(process.env.CATEGORIES)
       })
     ],
     module: {

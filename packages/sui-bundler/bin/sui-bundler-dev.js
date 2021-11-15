@@ -25,7 +25,8 @@ const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 const log = require('../shared/log')
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
-const HOST = process.env.HOST || '0.0.0.0'
+const {CI = false, HOST = '0.0.0.0'} = process.env
+const DEFAULT_WATCH = !CI
 
 if (!module.parent) {
   program
@@ -43,6 +44,11 @@ if (!module.parent) {
       },
       []
     )
+    .option(
+      '-w, --watch',
+      'Watch files and restart the server on change',
+      DEFAULT_WATCH
+    )
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
@@ -52,6 +58,7 @@ if (!module.parent) {
       console.log('')
     })
     .parse(process.argv)
+
   const {context} = program
   webpackConfig.context = context || webpackConfig.context
 }

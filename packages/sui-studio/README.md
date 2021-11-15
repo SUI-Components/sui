@@ -272,16 +272,14 @@ Add this scripts on your own components project
 ```
 // package.json
 {
-  ...
   scripts: {
-    ...
-	test: "sui-studio test"
-	test:watch: "sui-studio test --watch"
-    ...
+	  "test": "sui-studio test",
+	  "test:watch": "sui-studio test --watch"
   }
-  ...
 }
 ```
+
+If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
 
 ## File structure
 

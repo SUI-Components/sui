@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 1.9.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependency ([ff5e1bf](https://github.com/SUI-Components/sui/commit/ff5e1bf681935e5fd85ff151eee29e3583dc3226))
+* **packages/sui-js-compiler:** Upgrade swc/helpers ([37cb14d](https://github.com/SUI-Components/sui/commit/37cb14d60f905324d62c2a57bfb4c822d5c8a72a))
+
+
+
+# 1.8.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependency ([e62272a](https://github.com/SUI-Components/sui/commit/e62272a430de57716da12701acd3e33c2e23f14d))
+
+
+
 # 1.7.0 (2021-11-08)
 
 
