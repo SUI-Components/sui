@@ -7,6 +7,14 @@ const {HOST, HTTPS} = process.env
 const protocol = HTTPS === 'true' ? 'https' : 'http'
 const host = HOST || '0.0.0.0'
 
+const getWatchOptions = ({context, watch}) => {
+  return watch
+    ? {
+        ignored: ignoredFiles(context)
+      }
+    : false
+}
+
 module.exports = config => ({
   allowedHosts: 'all',
   client: {
@@ -19,9 +27,7 @@ module.exports = config => ({
   },
   static: {
     directory: 'public',
-    watch: {
-      ignored: ignoredFiles(config.context)
-    }
+    watch: getWatchOptions(config)
   },
   hot: true,
   https: protocol === 'https',
