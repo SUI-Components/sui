@@ -29,7 +29,6 @@ module.exports = config => ({
   historyApiFallback: {
     disableDotRule: true
   },
-  watch: config.watch,
   onAfterSetupMiddleware(devServer) {
     // This service worker file is effectively a 'no-op' that will reset any
     // previous service worker registered for the same host:port combination.
