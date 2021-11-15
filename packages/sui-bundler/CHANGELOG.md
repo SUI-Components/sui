@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.38.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Rollback watch config ([7bf2c67](https://github.com/SUI-Components/sui/commit/7bf2c67a92dbd9442731e79dfb7a39ffcfc78b06))
+
+
+
 # 7.37.0 (2021-11-15)
 
 
