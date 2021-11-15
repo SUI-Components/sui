@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.37.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Avoid watching files on CI and make it configurable ([a623af5](https://github.com/SUI-Components/sui/commit/a623af566aee43eacfab962e88e9da840568298a))
+
+
+
 # 7.36.0 (2021-11-05)
 
 
