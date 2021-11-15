@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 7.39.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade version of webpack-dev-server ([15fb8f7](https://github.com/SUI-Components/sui/commit/15fb8f747ba8cd862debe53473fc066bccf452e1))
+* **packages/sui-bundler:** Use correct watch config ([adc7689](https://github.com/SUI-Components/sui/commit/adc7689f8d57a14f1ce46adf5af5c52b4df07e80))
+
+
+
 # 7.38.0 (2021-11-15)
 
 
