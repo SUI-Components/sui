@@ -26,7 +26,7 @@ function handleError(err, stats, done) {
   return true
 }
 
-function runSimpleTest(done, fixtureName) {
+function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
   const config = require('./fixtures/' + fixtureName + '/webpack.config.js')
   const compiler = webpack(config)
 
@@ -39,11 +39,11 @@ function runSimpleTest(done, fixtureName) {
       assert.equal(stats.errors, undefined)
 
       const css = fs.readFileSync(
-        path.join(__dirname, 'runtime/' + fixtureName + '/index.css'),
+        path.join(__dirname, `runtime/${fixtureName}/${compiledFileName}.css`),
         'utf8'
       )
       const expect = fs.readFileSync(
-        path.join(__dirname, 'fixtures/' + fixtureName + '/expect.css'),
+        path.join(__dirname, `fixtures/${fixtureName}/expect.css`),
         'utf8'
       )
 
@@ -57,7 +57,7 @@ function runSimpleTest(done, fixtureName) {
   })
 }
 
-describe('test sass-loader', function() {
+describe.only('test sass-loader', function() {
   this.timeout(10000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
@@ -67,63 +67,11 @@ describe('test sass-loader', function() {
   })
 
   it('should load normal sass file', function(done) {
-    const config = require('./fixtures/normal/webpack.config.js')
-    const compiler = webpack(config)
-
-    compiler.run((err, stats) => {
-      if (!handleError(err, stats, done)) {
-        return
-      }
-
-      try {
-        assert.equal(stats.errors, undefined)
-
-        const css = fs.readFileSync(
-          path.join(__dirname, 'runtime/normal/index.css'),
-          'utf8'
-        )
-        const expect = fs.readFileSync(
-          path.join(__dirname, 'fixtures/normal/expect.css'),
-          'utf8'
-        )
-
-        assert.equal(clearCRLF(css), clearCRLF(expect))
-
-        done()
-      } catch (err) {
-        done(err)
-      }
-    })
+    runSimpleTest(done, 'normal')
   })
 
   it('should load sass file with data option', function(done) {
-    const config = require('./fixtures/withData/webpack.config.js')
-    const compiler = webpack(config)
-
-    compiler.run((err, stats) => {
-      if (!handleError(err, stats, done)) {
-        return
-      }
-
-      try {
-        assert.equal(stats.errors, undefined)
-
-        const css = fs.readFileSync(
-          path.join(__dirname, 'runtime/withData/index.css'),
-          'utf8'
-        )
-        const expect = fs.readFileSync(
-          path.join(__dirname, 'fixtures/withData/expect.css'),
-          'utf8'
-        )
-
-        assert.equal(clearCRLF(css), clearCRLF(expect))
-
-        done()
-      } catch (err) {
-        done(err)
-      }
-    })
+    runSimpleTest(done, 'withData')
   })
 
   it('should compile without options', function(done) {
@@ -192,5 +140,9 @@ describe('test sass-loader', function() {
 
   it('should accept a different sass implementation', function(done) {
     runSimpleTest(done, 'withSass')
+  })
+
+  it('should compile files loaded async', function(done) {
+    runSimpleTest(done, 'async', 'async')
   })
 })
