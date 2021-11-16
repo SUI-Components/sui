@@ -62,11 +62,17 @@ const scopeMapper = ({scope, status}) => ({
   code: status[scope].increment
 })
 
+const filterDemoScope = ({scope}) => {
+  const isDemo = scope.pkg.match(/components\/\w+\/\w+\/demo/)
+  return !isDemo
+}
+
 const releasesByPackages = ({status}) => {
   const {scope: packageScope} = program
   return Object.keys(status)
     .filter(scope => (packageScope ? scope === packageScope : true))
     .map(scope => scopeMapper({scope, status}))
+    .filter(scope => filterDemoScope({scope}))
 }
 
 const releasePackage = async ({pkg, code, skipCI} = {}) => {
