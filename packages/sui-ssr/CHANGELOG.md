@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.42.0 (2021-11-15)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** remove unnecesary log when critical css is disabled ([077aa85](https://github.com/SUI-Components/sui/commit/077aa85237af07f9eeec789aa0f0ed84e301837e))
+
+
+
 # 7.41.0 (2021-10-29)
 
 

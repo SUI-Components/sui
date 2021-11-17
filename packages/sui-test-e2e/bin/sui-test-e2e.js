@@ -148,6 +148,7 @@ if (screenshotsOnError) {
 }
 
 if (ci) {
+  cypressConfig.watchForFileChanges = false
   cypressConfig.numTestsKeptInMemory = 1
 }
 

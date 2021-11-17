@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.36.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-studio:** add categories env variable ([9280ff2](https://github.com/SUI-Components/sui/commit/9280ff2b5a3aefc11310daabc05c6c7b9d381c87))
+
+
+
 # 10.35.0 (2021-11-05)
 
 

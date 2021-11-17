@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 8.113.0 (2021-11-11)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** add deleted styles again to s-ui theme in order to fix breaking change in o ([05d7d98](https://github.com/SUI-Components/sui/commit/05d7d98d6c7e29a3a7390cb2fd8ded98e8f0dead))
+
+
+
+# 8.112.0 (2021-11-10)
+
+
+### Features
+
+* **packages/sui-theme:** Scss changes for the atom input ([eae13ef](https://github.com/SUI-Components/sui/commit/eae13ef932b5ced3f1fc2d80a59bfb993981b7db))
+
+
+
 # 8.111.0 (2021-11-08)
 
 
