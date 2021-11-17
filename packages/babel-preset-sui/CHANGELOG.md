@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.31.0 (2021-11-17)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade babel dependencies ([a3a82e2](https://github.com/SUI-Components/sui/commit/a3a82e294627153773c4bca14343b545fdf5e943))
+
+
+
 # 3.30.0 (2021-11-05)
 
 
