@@ -59,13 +59,14 @@ if (!module.parent) {
     })
     .parse(process.argv)
 
-  const {context} = program
+  const {context} = program.opts()
+
   webpackConfig.context = context || webpackConfig.context
 }
 
 const start = async ({
   config = webpackConfig,
-  packagesToLink = program.linkPackage || []
+  packagesToLink = program.opts().linkPackage || []
 } = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
@@ -85,7 +86,7 @@ const start = async ({
   const urls = prepareUrls(protocol, HOST, port)
   const nextConfig = linkLoaderConfigBuilder({
     config,
-    linkAll: program.linkAll,
+    linkAll: program.opts().linkAll,
     packagesToLink
   })
   const compiler = createCompiler(nextConfig, urls)

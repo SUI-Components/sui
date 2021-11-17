@@ -35,7 +35,7 @@ const {
   path: publicPath,
   args: [entry],
   root = false
-} = program
+} = program.opts()
 
 if (!output) {
   showError(new Error('--output is mandatory.'), program)

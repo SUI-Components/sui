@@ -39,9 +39,13 @@ program
   })
   .parse(process.argv)
 
-const {clean = false, context} = program
+const {
+  clean = false,
+  context,
+  linkPackage: packagesToLink = []
+} = program.opts()
+
 config.context = context || config.context
-const packagesToLink = program.linkPackage || []
 
 const nextConfig = packagesToLink.length
   ? linkLoaderConfigBuilder({
