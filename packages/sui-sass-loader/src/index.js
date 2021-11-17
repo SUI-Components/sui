@@ -174,10 +174,7 @@ function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
   }
 
   content = content.replace(MATCH_USES, total => {
-    if (uses.indexOf(total) < 0) {
-      uses.push(total)
-    }
-
+    if (!uses.includes(total)) uses.push(total)
     return ''
   })
 
@@ -192,9 +189,7 @@ function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
       return range.start >= commentRange[0] && range.end <= commentRange[1]
     })
 
-    if (finded) {
-      return total
-    }
+    if (finded) return total
 
     const contents = []
     let matched
@@ -288,20 +283,11 @@ module.exports = function(content) {
   const options = getLoaderConfig(this)
   const ctx = this
 
-  // for webpack 1
-  if (this.cacheable) {
-    this.cacheable()
-  }
-
   function resolver(ctx) {
     return function(dir, importFile) {
       return new Promise((resolve, reject) => {
         ctx.resolve(dir, importFile, (err, resolvedFile) => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve(resolvedFile)
-          }
+          err ? reject(err) : resolve(resolvedFile)
         })
       })
     }
@@ -341,9 +327,7 @@ module.exports = function(content) {
         uses
       )
 
-      dependencies.forEach(file => {
-        ctx.dependency(file)
-      })
+      dependencies.forEach(file => ctx.dependency(file))
 
       try {
         const result = yield new Promise((resolve, reject) => {
