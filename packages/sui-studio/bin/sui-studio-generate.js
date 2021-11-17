@@ -15,7 +15,7 @@ program
   .option('-C, --context [customContextPath]', 'add context for this component')
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
-  .otpion('-W, --swc', 'Use the new SWC compiler', false)
+  .option('-W, --swc', 'Use the new SWC compiler', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
