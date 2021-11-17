@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.37.0 (2021-11-17)
+
+
+### Features
+
+* **packages/sui-studio:** Add new flag to create components using new compiler ([8770599](https://github.com/SUI-Components/sui/commit/87705997d13a5254b1af4e4576e415db96ce9ba9))
+
+
+
 # 10.36.0 (2021-11-12)
 
 
