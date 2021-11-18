@@ -2,13 +2,13 @@
 /* global __BASE_DIR__ */
 
 const requireAvailableThemes = require.context(
-  `!css-loader!sass-loader!${__BASE_DIR__}/components`,
+  `!css-loader!@s-ui/sass-loader!${__BASE_DIR__}/components`,
   true,
   /^\.\/\w+\/\w+\/demo\/themes\/.*\.scss/,
   'lazy'
 )
 const requireComponentStyles = require.context(
-  `!css-loader!sass-loader!${__BASE_DIR__}/components`,
+  `!css-loader!@s-ui/sass-loader!${__BASE_DIR__}/components`,
   true,
   /^\.\/\w+\/\w+\/(src|demo)\/index\.scss/,
   'lazy'

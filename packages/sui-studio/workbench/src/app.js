@@ -26,14 +26,14 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
 ;(async () => {
   const {default: defaultStyle} = await import(
-    '!css-loader!sass-loader!component/index.scss'
+    '!css-loader!@s-ui/sass-loader!component/index.scss'
   )
 
   let styles = []
   let requireContextThemesKeys = []
   try {
     const requireContextThemes = require.context(
-      '!css-loader!sass-loader!demo/themes',
+      '!css-loader!@s-ui/sass-loader!demo/themes',
       false,
       /\.scss$/
     )
