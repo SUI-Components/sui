@@ -144,6 +144,8 @@ function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
   // replace url(...)
   if (opts.resolveURLs) {
     content = content.replace(MATCH_URL_ALL, (total, left, file, right) => {
+      if (file.startsWith('data:')) return total
+
       if (loaderUtils.isUrlRequest(file)) {
         // handle url(<loader>!<file>)
         const pos = file.lastIndexOf('!')
