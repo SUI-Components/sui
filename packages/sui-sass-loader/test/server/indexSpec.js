@@ -98,6 +98,10 @@ describe.only('test sass-loader', function() {
     runSimpleTest(done, 'pass-output-style')
   })
 
+  it('should support base64 fonts', function(done) {
+    runSimpleTest(done, 'base-64-fonts')
+  })
+
   it('should load normal sass file without url resolving', function(done) {
     const config = require('./fixtures/normal-no-url-resolve/webpack.config.js')
     const compiler = webpack(config)
