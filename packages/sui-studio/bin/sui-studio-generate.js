@@ -154,7 +154,7 @@ const defaultContext = `module.exports = {
 
 const prepare = swc
   ? 'sui-js-compiler'
-  : 'babel --presets sui ./src --out-dir ./lib'
+  : 'npm run build:js && npm run build:styles'
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
