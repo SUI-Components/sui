@@ -76,7 +76,6 @@ webpack(nextConfig).run(async (error, stats) => {
   if (stats.hasWarnings()) {
     const jsonStats = stats.toJson('errors-warnings')
     log.warn('Webpack generated the following warnings: ')
-    log.warn(jsonStats.warnings)
     jsonStats.warnings.map(({message}) => log.warn(message))
   }
 
