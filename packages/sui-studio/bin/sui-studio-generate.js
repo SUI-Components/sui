@@ -152,9 +152,9 @@ const defaultContext = `module.exports = {
 }
 `
 
-const prepare = swc
+const buildJs = swc
   ? 'sui-js-compiler'
-  : 'npm run build:js && npm run build:styles'
+  : 'babel --presets sui ./src --out-dir ./lib'
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
@@ -196,8 +196,8 @@ test
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "${prepare}",
-    "build:js": "babel --presets sui ./src --out-dir ./lib",
+    "prepare": "npm run build:js && npm run build:styles",
+    "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
