@@ -1,5 +1,3 @@
-const async = require('async')
-
 /**
  * Replace string asynchronously
  *
@@ -8,7 +6,7 @@ const async = require('async')
  * @param  {Function} replacer  function that return promise
  * @return {String}
  */
-function replaceAsync(text, rule, replacer) {
+async function replaceAsync(text, rule, replacer) {
   let matches
   const ranges = []
 
@@ -22,32 +20,13 @@ function replaceAsync(text, rule, replacer) {
     ])
   }
 
-  return new Promise((resolve, reject) => {
-    async.mapSeries(
-      ranges,
-      function(range, done) {
-        replacer
-          .apply(
-            {
-              start: range[0],
-              end: range[1]
-            },
-            range[2]
-          )
-          .then(
-            ret => {
-              done(null, ret)
-            },
-            err => {
-              done(err)
-            }
-          )
-      },
-      function(err, results) {
-        err ? reject(err) : resolve(replaceByRanges(text, ranges, results))
-      }
-    )
-  })
+  const results = []
+  for (const range of ranges) {
+    const [start, end, matches] = range
+    const result = await replacer.apply({start, end}, matches)
+    results.push(result)
+  }
+  return replaceByRanges(text, ranges, results)
 }
 
 function replaceByRanges(text, ranges, replaces) {
