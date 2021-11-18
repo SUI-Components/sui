@@ -47,7 +47,12 @@ const webpackConfig = {
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json'],
-    modules: ['node_modules', path.resolve(process.cwd())]
+    modules: ['node_modules', path.resolve(process.cwd())],
+    fallback: {
+      assert: false,
+      fs: false,
+      path: false
+    }
   },
   entry: MAIN_ENTRY_POINT,
   output: {
