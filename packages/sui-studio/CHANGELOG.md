@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.38.0 (2021-11-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix typo ([b7e79f1](https://github.com/SUI-Components/sui/commit/b7e79f150da1ae515c952396b26a8e813bedad92))
+
+
+
 # 10.37.0 (2021-11-17)
 
 
