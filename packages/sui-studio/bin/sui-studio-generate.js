@@ -152,7 +152,7 @@ const defaultContext = `module.exports = {
 }
 `
 
-const prepare = swc
+const buildJs = swc
   ? 'sui-js-compiler'
   : 'babel --presets sui ./src --out-dir ./lib'
 
@@ -196,8 +196,8 @@ test
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "${prepare}",
-    "build:js": "babel --presets sui ./src --out-dir ./lib",
+    "prepare": "npm run build:js && npm run build:styles",
+    "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
