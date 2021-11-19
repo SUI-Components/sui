@@ -1,68 +1,19 @@
-import {parseQueryString} from '@s-ui/js/lib/string'
 import {trackedEventsLocalCache} from './trackedEventsLocalCache'
+import {serverGetVariation, clientGetVariation} from './getVariation'
+import {serverTrackExperiment, clientTrackExperiment} from './trackExperiment'
+import {serverGetForcedValue, clientGetForcedValue} from './getForcedValue'
 
 const getServerStrategy = () => ({
-  getVariation: ({pde, experimentName, attributes}) => {
-    return pde.getVariation({pde, name: experimentName, attributes})
-  },
-  trackExperiment: () => {},
-  getForcedValue: ({key, queryString}) => {
-    if (!queryString) {
-      return
-    }
-
-    const queryParams = parseQueryString(queryString)
-    return queryParams[`suipde_${key}`]
-  }
+  getVariation: serverGetVariation,
+  trackExperiment: serverTrackExperiment,
+  getForcedValue: serverGetForcedValue
 })
 
 const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
-  getVariation: ({pde, experimentName, attributes}) => {
-    const variationName = pde.activateExperiment({
-      name: experimentName,
-      attributes
-    })
+  getVariation: clientGetVariation,
+  trackExperiment: clientTrackExperiment({customTrackExperimentViewed, cache}),
 
-    return variationName
-  },
-  trackExperiment: ({variationName, experimentName}) => {
-    if (customTrackExperimentViewed) {
-      return customTrackExperimentViewed({variationName, experimentName})
-    }
-
-    // user is not part of the experiment
-    if (!variationName) return
-
-    // if experiment has been already tracked
-    if (cache.includes(experimentName, variationName)) return
-
-    if (!window.analytics?.track) {
-      // eslint-disable-next-line no-console
-      console.error(
-        "[sui-pde: useExperiment] window.analytics.track expected to exists but doesn't"
-      )
-      return
-    }
-
-    cache.push(experimentName, variationName)
-
-    window.analytics.ready(() => {
-      window.analytics.track('Experiment Viewed', {
-        experimentName,
-        variationName
-      })
-    })
-  },
-  /**
-   * @param {object} param
-   * @param {string} key Experiment or feature flag key
-   * @param {string} queryString Test purposes only
-   * @returns {string|null}
-   */
-  getForcedValue: ({key, queryString = document.location.search}) => {
-    const queryParams = parseQueryString(queryString)
-    return queryParams[`suipde_${key}`]
-  }
+  getForcedValue: clientGetForcedValue
 })
 
 /**
