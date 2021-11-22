@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "8.0.0-beta.7",
+  "version": "8.0.0-beta.8",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"

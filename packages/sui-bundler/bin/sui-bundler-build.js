@@ -6,7 +6,6 @@ const path = require('path')
 const program = require('commander')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
-const {minify} = require('terser')
 const {writeFile} = require('@s-ui/helpers/file')
 
 const config = require('../webpack.config.prod')
@@ -136,10 +135,9 @@ webpack(nextConfig).run(async (error, stats) => {
         JSON.stringify(staticsCacheOnly)
       )
 
-    const {code: minifiedSw} = await minify(swCode, {sourceMap: false})
     const swFilePath = resolvePublicFile('service-worker.js')
 
-    await writeFile(swFilePath, minifiedSw)
+    await writeFile(swFilePath, swCode)
     console.log('\nService worker generated succesfully!\n')
   }
 
