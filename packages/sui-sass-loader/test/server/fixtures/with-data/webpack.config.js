@@ -13,7 +13,7 @@ module.exports = {
     index: './actual/index.scss'
   },
   output: {
-    path: path.join(__dirname, '../../runtime/withData'),
+    path: path.join(__dirname, '../../runtime/with-data'),
     filename: '[name].js'
   },
   module: {

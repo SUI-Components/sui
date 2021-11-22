@@ -14,7 +14,7 @@ module.exports = {
     index: './index.scss'
   },
   output: {
-    path: path.join(__dirname, '../../runtime/withSass'),
+    path: path.join(__dirname, '../../runtime/with-sass'),
     filename: '[name].js'
   },
   module: {

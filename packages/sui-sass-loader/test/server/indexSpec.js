@@ -58,11 +58,11 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
 }
 
 describe('test sass-loader', function() {
-  this.timeout(10000)
+  this.timeout(15000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
 
-  beforeEach(done => {
+  before(done => {
     rmdir(runtimeDir, done)
   })
 
@@ -71,7 +71,7 @@ describe('test sass-loader', function() {
   })
 
   it('should load sass file with data option', function(done) {
-    runSimpleTest(done, 'withData')
+    runSimpleTest(done, 'with-data')
   })
 
   it('should compile without options', function(done) {
@@ -100,6 +100,18 @@ describe('test sass-loader', function() {
 
   it('should support base64 fonts', function(done) {
     runSimpleTest(done, 'base-64-fonts')
+  })
+
+  it('should support alias from Webpack', function(done) {
+    runSimpleTest(done, 'with-alias')
+  })
+
+  it('should accept a different sass implementation', function(done) {
+    runSimpleTest(done, 'with-sass')
+  })
+
+  it('should compile files loaded async', function(done) {
+    runSimpleTest(done, 'async', 'async')
   })
 
   it('should load normal sass file without url resolving', function(done) {
@@ -140,13 +152,5 @@ describe('test sass-loader', function() {
         done(err)
       }
     })
-  })
-
-  it('should accept a different sass implementation', function(done) {
-    runSimpleTest(done, 'withSass')
-  })
-
-  it('should compile files loaded async', function(done) {
-    runSimpleTest(done, 'async', 'async')
   })
 })
