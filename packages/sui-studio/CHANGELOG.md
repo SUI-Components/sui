@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.39.0 (2021-11-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix prepare script to copy styles ([5e9c0fd](https://github.com/SUI-Components/sui/commit/5e9c0fd784c1aba7b452e3e3635fb0ca6ba54d63))
+
+
+
 # 10.38.0 (2021-11-18)
 
 
