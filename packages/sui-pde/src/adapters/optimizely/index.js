@@ -1,5 +1,6 @@
-import optimizelySDK from '@optimizely/optimizely-sdk'
+import optimizelySDK, {enums} from '@optimizely/optimizely-sdk'
 import {updateIntegrations} from './integrations/handler'
+import {trackingListener} from './trackingListener'
 
 const DEFAULT_DATAFILE_OPTIONS = {
   autoUpdate: true,
@@ -80,6 +81,11 @@ export default class OptimizelyAdapter {
       datafile,
       ...DEFAULT_EVENTS_OPTIONS
     })
+
+    optimizelyInstance.notificationCenter.addNotificationListener(
+      enums.NOTIFICATION_TYPES.DECISION,
+      trackingListener
+    )
 
     return optimizelyInstance
   }
@@ -166,15 +172,14 @@ export default class OptimizelyAdapter {
       (linkedExperimentNames.length > 0 && !this._hasUserConsents) ||
       !this._userId
     ) {
-      return {isActive: false, linkedExperiments: []}
+      return {isActive: false}
     }
 
     return {
       isActive: this._optimizely.isFeatureEnabled(featureKey, this._userId, {
         ...this._applicationAttributes,
         ...attributes
-      }),
-      linkedExperiments: linkedExperimentNames
+      })
     }
   }
 
