@@ -1,10 +1,12 @@
+// @ts-check
+
 /**
  * Replace string asynchronously
  *
- * @param  {String} text        text to replace
+ * @param  {String} text        Text to replace
  * @param  {RegExp} rule        RegExp
- * @param  {Function} replacer  function that return promise
- * @return {String}
+ * @param  {Function} replacer  Function that return promise
+ * @return {Promise<string>}    Replaced text
  */
 async function replaceAsync(text, rule, replacer) {
   let matches
@@ -29,6 +31,13 @@ async function replaceAsync(text, rule, replacer) {
   return replaceByRanges(text, ranges, results)
 }
 
+/**
+ * Replace by ranges
+ * @param {string} text
+ * @param {Array<[number, number]>} ranges
+ * @param {Array<string>} replaces
+ * @returns {string}
+ */
 function replaceByRanges(text, ranges, replaces) {
   const points = [0]
   const map = {}

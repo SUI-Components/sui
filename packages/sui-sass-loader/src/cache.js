@@ -39,13 +39,17 @@ class Cache {
     this.entry = entry
   }
 
+  isCached() {
+    return this.entry in CACHE_STORE
+  }
+
   isValid() {
-    if (!(this.entry in CACHE_STORE)) return false
+    if (!this.isCached()) return false
 
     const cache = CACHE_STORE[this.entry]
     const estat = utils.fstat(this.entry)
 
-    // The file does not exist, or the time is incorrect
+    // The file does not exist or the time is incorrect
     if (!estat || estat.mtime.getTime() !== cache.mtime) {
       return false
     }
@@ -67,24 +71,18 @@ class Cache {
   }
 
   read() {
-    if (this.entry in CACHE_STORE) {
-      const cache = CACHE_STORE[this.entry]
-      cache.readTimes++
+    if (!this.isCached()) return false
 
-      return cache.result
-    } else {
-      return false
-    }
+    const cache = CACHE_STORE[this.entry]
+    cache.readTimes++
+    return cache.result
   }
 
   getDependencies() {
-    if (this.entry in CACHE_STORE) {
-      const cache = CACHE_STORE[this.entry]
+    if (!this.isCached()) return []
 
-      return Object.keys(cache.dependencies)
-    } else {
-      return []
-    }
+    const cache = CACHE_STORE[this.entry]
+    return Object.keys(cache.dependencies)
   }
 
   markInvalid() {
