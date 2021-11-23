@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const rmdir = require('rimraf')
 
 const clearCRLF = raw => raw.replace(/\r/g, '').trim()
+const readFile = file => fs.readFileSync(path.join(__dirname, file), 'utf8')
 
 function handleError(err, stats, done) {
   if (err) {
@@ -31,21 +32,13 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
   const compiler = webpack(config)
 
   compiler.run((err, stats) => {
-    if (!handleError(err, stats, done)) {
-      return
-    }
+    if (!handleError(err, stats, done)) return
 
     try {
       assert.equal(stats.errors, undefined)
 
-      const css = fs.readFileSync(
-        path.join(__dirname, `runtime/${fixtureName}/${compiledFileName}.css`),
-        'utf8'
-      )
-      const expect = fs.readFileSync(
-        path.join(__dirname, `fixtures/${fixtureName}/expect.css`),
-        'utf8'
-      )
+      const css = readFile(`runtime/${fixtureName}/${compiledFileName}.css`)
+      const expect = readFile(`fixtures/${fixtureName}/expect.css`)
 
       assert.equal(clearCRLF(css), clearCRLF(expect))
 
@@ -57,7 +50,7 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
   })
 }
 
-describe('test sass-loader', function() {
+describe.only('test sass-loader', function() {
   this.timeout(15000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
@@ -102,7 +95,7 @@ describe('test sass-loader', function() {
     runSimpleTest(done, 'base-64-fonts')
   })
 
-  it('should support alias from Webpack', function(done) {
+  it.only('should support alias from Webpack', function(done) {
     runSimpleTest(done, 'with-alias')
   })
 
@@ -119,32 +112,18 @@ describe('test sass-loader', function() {
     const compiler = webpack(config)
 
     compiler.run((err, stats) => {
-      if (!handleError(err, stats, done)) {
-        return
-      }
+      if (!handleError(err, stats, done)) return
 
       try {
         assert.equal(stats.errors, undefined)
 
-        const css = fs.readFileSync(
-          path.join(__dirname, 'runtime/normal-no-url-resolve/index.css'),
-          'utf8'
-        )
-        const expect = fs.readFileSync(
-          path.join(__dirname, 'fixtures/normal-no-url-resolve/expect.css'),
-          'utf8'
-        )
+        const css = readFile('runtime/normal-no-url-resolve/index.css')
+        const expect = readFile('fixtures/normal-no-url-resolve/expect.css')
 
         assert.equal(clearCRLF(css), clearCRLF(expect))
 
-        const css2 = fs.readFileSync(
-          path.join(__dirname, 'runtime/normal-no-url-resolve/index2.css'),
-          'utf8'
-        )
-        const expect2 = fs.readFileSync(
-          path.join(__dirname, 'fixtures/normal-no-url-resolve/expect2.css'),
-          'utf8'
-        )
+        const css2 = readFile('runtime/normal-no-url-resolve/index2.css')
+        const expect2 = readFile('fixtures/normal-no-url-resolve/expect2.css')
 
         assert.equal(clearCRLF(css2), clearCRLF(expect2))
         done()
