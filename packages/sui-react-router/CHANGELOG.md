@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.11.0 (2021-11-23)
+
+
+### Features
+
+* **packages/sui-react-router:** remove unnecessary prop & add test ([780ed87](https://github.com/SUI-Components/sui/commit/780ed87c8f312bcee6f8c32711ec4cb482036d8e))
+* **packages/sui-react-router:** update test description ([d592a77](https://github.com/SUI-Components/sui/commit/d592a77c4b35036279bea8dafef40d5f7e09a41e))
+
+
+
 # 1.10.0 (2021-11-23)
 
 
