@@ -44,6 +44,7 @@ const Link = ({
   innerRef,
   onClick,
   onlyActiveOnIndex = false,
+  state,
   target,
   to,
   ...restOfProps
@@ -60,10 +61,10 @@ const Link = ({
         !isModifiedEvent(event) // Ignore clicks with modifier keys
       ) {
         event.preventDefault()
-        router.push(resolveToLocation(to, router))
+        router.push({pathname: resolveToLocation(to, router), state})
       }
     },
-    [onClick, router, target, to]
+    [onClick, router, target, to, state]
   )
 
   // Ignore if rendered outside the context of router
@@ -94,6 +95,7 @@ const Link = ({
     className,
     href: router.createHref(toLocation),
     target,
+    state,
     style
   }
 
@@ -127,6 +129,10 @@ Link.propTypes = {
    * Only check if the destination is the actual route if you're in the index
    */
   onlyActiveOnIndex: PropTypes.bool,
+  /**
+   * The route state to pass to router push
+   */
+  state: PropTypes.object,
   /**
    * Inline style for the element
    */
