@@ -95,8 +95,12 @@ describe.only('test sass-loader', function() {
     runSimpleTest(done, 'base-64-fonts')
   })
 
-  it.only('should support alias from Webpack', function(done) {
+  it('should support alias from Webpack', function(done) {
     runSimpleTest(done, 'with-alias')
+  })
+
+  it('should support modified resolve modules from Webpack', function(done) {
+    runSimpleTest(done, 'with-resolve-modules')
   })
 
   it('should accept a different sass implementation', function(done) {
