@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/sass-loader",
   "description": "Sass Loader for Webpack",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "src/index.js",
   "scripts": {
     "lint": "sui-lint js",

@@ -51,7 +51,7 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
 }
 
 describe.only('test sass-loader', function() {
-  this.timeout(15000)
+  this.timeout(30000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
 
