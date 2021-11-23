@@ -171,7 +171,7 @@ describe('<Link />', () => {
   })
 
   describe('with state', () => {
-    it('pass state between routes', async () => {
+    it('passes state between routes', async () => {
       const customState = {isCustomState: true}
       const history = createMemoryHistory()
 
