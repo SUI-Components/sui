@@ -17,6 +17,13 @@ const MATCH_IMPORTS = /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1
 const MATCH_USES = /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_FILES = /(['"])([^,;'"]+)(\1)/g
 
+/**
+ * Get imports to resolve
+ * @param {string} original Original path to resolve
+ * @param {Array<string>} includePaths
+ * @param {Object} transformers
+ * @returns {Array<string>} Return array of possible import files to resolve
+ */
 function getImportsToResolve(original, includePaths, transformers) {
   const extname = path.extname(original)
   let basename = path.basename(original, extname)
@@ -87,11 +94,21 @@ function getLoaderConfig(ctx) {
   }
 
   const options = utils.mergeDeep(defaults, ctx.getOptions() || {})
-  const includePaths = options.includePaths
+  const {
+    data,
+    includePaths,
+    implementation = require('sass'),
+    resolveURLs,
+    root,
+    sassOptions,
+    transformers
+  } = options
+
+  // get webpack config from context ctx
+  const {alias} = ctx._compilation.options.resolve
+
   const basedir =
     ctx.rootContext || options.context || ctx.options.context || process.cwd()
-  const transformers = createTransformersMap(options.transformers)
-  const implementation = options.implementation || require('sass')
 
   // convert relative to absolute
   for (let i = 0; i < includePaths.length; i++) {
@@ -101,23 +118,28 @@ function getLoaderConfig(ctx) {
   }
 
   return {
+    alias,
     basedir,
-    includePaths,
-    transformers,
-    implementation,
     baseEntryDir: path.dirname(ctx.resourcePath),
-    root: options.root,
-    data: options.data,
-    resolveURLs: options.resolveURLs,
-    sassOptions: options.sassOptions
+    data,
+    implementation,
+    includePaths,
+    resolveURLs,
+    root,
+    sassOptions,
+    transformers: createTransformersMap(transformers)
   }
 }
 
-function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
-  level = level || 0
-  dependencies = dependencies || []
-
-  const {includePaths, transformers, sassOptions = {}} = opts
+function* mergeSources(
+  opts,
+  entry,
+  resolve,
+  dependencies = [],
+  level = 0,
+  uses
+) {
+  const {alias, includePaths, transformers, sassOptions = {}} = opts
   const {importer} = sassOptions
   let content
 
@@ -217,30 +239,42 @@ function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
         includePaths,
         transformers
       )
+
       let resolvedImport
 
       for (let i = 0; i < imports.length; i++) {
-        const reqFile = loaderUtils.urlToRequest(imports[i], opts.root)
+        const importFile = imports[i]
+
+        const foundAlias = Object.entries(alias).some(([alias, path]) => {
+          if (importFile.startsWith(alias)) {
+            const file = importFile.replace(alias, path)
+
+            if (fs.existsSync(file)) {
+              resolvedImport = file
+              return true
+            }
+          }
+        })
+
+        if (foundAlias) break
+
+        const reqFile = loaderUtils.urlToRequest(importFile, opts.root)
         const tmp = importer ? importer(reqFile) : {}
 
-        // if imports[i] is absolute path, then use it directly
-        if (path.isAbsolute(imports[i]) && fs.existsSync(imports[i])) {
-          resolvedImport = imports[i]
+        // if importFile is absolute path, then use it directly
+        if (path.isAbsolute(importFile) && fs.existsSync(importFile)) {
+          resolvedImport = importFile
         } else if (tmp?.file) {
           try {
             resolvedImport = tmp.file
             break
-          } catch (err) {
-            // skip
-          }
+          } catch {} // skip
         } else {
           try {
-            const reqFile = loaderUtils.urlToRequest(imports[i], opts.root)
+            const reqFile = loaderUtils.urlToRequest(importFile, opts.root)
             resolvedImport = yield resolve(entryDir, reqFile)
             break
-          } catch (err) {
-            // skip
-          }
+          } catch {} // skip
         }
       }
 
@@ -256,7 +290,7 @@ function* mergeSources(opts, entry, resolve, dependencies, level, uses) {
 
       resolvedImport = path.normalize(resolvedImport)
 
-      if (dependencies.indexOf(resolvedImport) < 0) {
+      if (!dependencies.includes(resolvedImport)) {
         dependencies.push(resolvedImport)
 
         contents.push(
@@ -295,9 +329,7 @@ module.exports = function(content) {
     }
   }
 
-  function appendUses(content, uses) {
-    return uses.join('') + content
-  }
+  const appendUses = (content, uses) => uses.join('') + content
 
   return co(function*() {
     const dependencies = []
@@ -319,7 +351,7 @@ module.exports = function(content) {
           options,
           {
             file: entry,
-            content: content
+            content
           },
           resolver(ctx),
           dependencies,
@@ -340,11 +372,7 @@ module.exports = function(content) {
           })
 
           options.implementation.render(sassOptions, (err, result) => {
-            if (err) {
-              reject(err)
-            } else {
-              resolve(result)
-            }
+            err ? reject(err) : resolve(result)
           })
         })
 
