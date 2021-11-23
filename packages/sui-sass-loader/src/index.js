@@ -53,17 +53,18 @@ function getImportsToResolve(original, includePaths, transformers) {
     names.push('_' + basename)
   }
 
-  for (let i = 0; i < names.length; i++) {
-    for (let j = 0; j < exts.length; j++) {
+  names.forEach(name => {
+    exts.forEach(ext => {
+      const file = name + ext
+      const filePath = path.join(dirname, file)
       // search relative to original file
-      imports.push(path.join(dirname, names[i] + exts[j]))
-
+      imports.push(filePath)
       // search in includePaths
       for (const includePath of includePaths) {
-        imports.push(path.join(includePath, dirname, names[i] + exts[j]))
+        imports.push(path.join(includePath, filePath))
       }
-    }
-  }
+    })
+  })
 
   return [
     ...imports,
@@ -82,6 +83,31 @@ function createTransformersMap(transformers) {
     })
     return extensionMap
   }, {})
+}
+
+/**
+ * Transform relative paths to absolute paths
+ * @param {object} params
+ * @param {string} params.baseUrl
+ * @param {Array<string>} params.paths - paths to transform
+ * @return {Array<string>} List of transformed path
+ */
+const transformRelativeToAbsolutePaths = ({baseUrl, paths}) => {
+  return paths.map(currentPath =>
+    path.isAbsolute(currentPath) ? currentPath : path.join(baseUrl, currentPath)
+  )
+}
+
+/**
+ * Extract Webpack config from loader context
+ * @param {object} ctx
+ * @returns {{alias: { [x: string]: string}, modules: Array<string>}}
+ */
+const getWebpackConfig = ctx => {
+  const {_compilation: compilation} = ctx
+  const {resolve = {}} = compilation.options
+  const {alias = {}, modules = ['node_modules']} = resolve
+  return {alias, modules}
 }
 
 function getLoaderConfig(ctx) {
@@ -104,18 +130,11 @@ function getLoaderConfig(ctx) {
     transformers
   } = options
 
-  // get webpack config from context ctx
-  const {alias} = ctx._compilation.options.resolve
-
   const basedir =
     ctx.rootContext || options.context || ctx.options.context || process.cwd()
 
-  // convert relative to absolute
-  for (let i = 0; i < includePaths.length; i++) {
-    if (!path.isAbsolute(includePaths[i])) {
-      includePaths[i] = path.join(basedir, includePaths[i])
-    }
-  }
+  // get webpack config from context ctx
+  const {alias, modules} = getWebpackConfig(ctx)
 
   return {
     alias,
@@ -123,7 +142,11 @@ function getLoaderConfig(ctx) {
     baseEntryDir: path.dirname(ctx.resourcePath),
     data,
     implementation,
-    includePaths,
+    includePaths: transformRelativeToAbsolutePaths({
+      paths: includePaths,
+      baseUrl: basedir
+    }),
+    modules,
     resolveURLs,
     root,
     sassOptions,
@@ -139,7 +162,7 @@ function* mergeSources(
   level = 0,
   uses
 ) {
-  const {alias, includePaths, transformers, sassOptions = {}} = opts
+  const {alias, includePaths, modules, transformers, sassOptions = {}} = opts
   const {importer} = sassOptions
   let content
 
@@ -245,6 +268,8 @@ function* mergeSources(
       for (let i = 0; i < imports.length; i++) {
         const importFile = imports[i]
 
+        /* check resolve.alias in order to change
+           the import file path to the alias path */
         const foundAlias = Object.entries(alias).some(([alias, path]) => {
           if (importFile.startsWith(alias)) {
             const file = importFile.replace(alias, path)
@@ -257,6 +282,18 @@ function* mergeSources(
         })
 
         if (foundAlias) break
+
+        /* check resolve.modules in order to change
+           the import file path to the module path */
+        const foundModule = modules.some(module => {
+          const fullPath = path.join(module, importFile)
+          if (fs.existsSync(fullPath)) {
+            resolvedImport = fullPath
+            return true
+          }
+        })
+
+        if (foundModule) break
 
         const reqFile = loaderUtils.urlToRequest(importFile, opts.root)
         const tmp = importer ? importer(reqFile) : {}
