@@ -1,3 +1,5 @@
+// @ts-check
+
 const fs = require('fs')
 
 const COMMENTS_RULE_MAPS = {
@@ -5,6 +7,11 @@ const COMMENTS_RULE_MAPS = {
   '/*': '*/'
 }
 
+/**
+ * Check if argument is an object
+ * @param {any} item - The item to check
+ * @returns {boolean}
+ */
 const isObject = item =>
   item && typeof item === 'object' && !Array.isArray(item)
 
@@ -30,7 +37,7 @@ const utils = {
   fstat(file) {
     try {
       return fs.statSync(file)
-    } catch (err) {
+    } catch {
       return false
     }
   },
