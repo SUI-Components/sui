@@ -18,7 +18,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.join(__dirname, './aliased-folder')
+      component: path.join(__dirname, './aliased-folder/components')
     }
   },
   module: {
