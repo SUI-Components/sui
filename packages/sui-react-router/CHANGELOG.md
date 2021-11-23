@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.10.0 (2021-11-23)
+
+
+### Features
+
+* **packages/sui-react-router:** pass state to router push ([9fe3573](https://github.com/SUI-Components/sui/commit/9fe3573831259ef6e6ce1725ed7e601dc79e3096))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 1.9.0 (2021-06-17)
 
 
