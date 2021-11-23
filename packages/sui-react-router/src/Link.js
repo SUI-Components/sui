@@ -95,7 +95,6 @@ const Link = ({
     className,
     href: router.createHref(toLocation),
     target,
-    state,
     style
   }
 
