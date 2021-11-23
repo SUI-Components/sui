@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "6.6.0",
+  "version": "7.0.0-beta.1",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -23,7 +23,7 @@
     "babel-plugin-istanbul": "6.0.0",
     "babel-preset-sui": "3",
     "commander": "6.2.1",
-    "karma": "6.3.8",
+    "karma": "6.3.4",
     "karma-chrome-launcher": "3.1.0",
     "karma-clear-screen-reporter": "1.0.0",
     "karma-coverage": "2.0.3",
@@ -35,6 +35,6 @@
     "process": "0.11.10",
     "stream-browserify": "3.0.0",
     "util": "0.12.4",
-    "webpack": "5.61.0"
+    "webpack": "5.64.2"
   }
 }
