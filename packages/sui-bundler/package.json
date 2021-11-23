@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "8.0.0-beta.8",
+  "version": "8.0.0-beta.9",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -42,7 +42,7 @@
     "sass": "1.43.4",
     "speed-measure-webpack-plugin": "1.5.0",
     "style-loader": "3.3.1",
-    "webpack": "5.64.1",
+    "webpack": "5.64.2",
     "webpack-dev-server": "4.5.0",
     "webpack-manifest-plugin": "4.0.2",
     "webpack-node-externals": "3.0.0"
