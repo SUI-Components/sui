@@ -39,10 +39,18 @@ class Cache {
     this.entry = entry
   }
 
+  /**
+   * Check if entry is cached
+   * @returns {boolean}
+   */
   isCached() {
     return this.entry in CACHE_STORE
   }
 
+  /**
+   * Check if entry is valid
+   * @returns {boolean}
+   */
   isValid() {
     if (!this.isCached()) return false
 
@@ -78,6 +86,10 @@ class Cache {
     return cache.result
   }
 
+  /**
+   * Return all dependencies
+   * @returns {Array<any>}
+   */
   getDependencies() {
     if (!this.isCached()) return []
 
