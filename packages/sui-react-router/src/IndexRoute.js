@@ -1,3 +1,4 @@
+// @ts-check
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/IndexRoute.js
 
 import PropTypes from 'prop-types'
