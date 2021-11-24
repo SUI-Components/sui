@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2021-11-24)
+
+
+### Bug Fixes
+
+* **packages/sui-react-router:** Avoid using object on pushing new location ([c20b9a1](https://github.com/SUI-Components/sui/commit/c20b9a1365f01097da8ce532618ae5d4c6141fab))
+
+
+
 # 1.11.0 (2021-11-23)
 
 
