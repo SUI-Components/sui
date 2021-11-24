@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.13.0 (2021-11-24)
+
+
+### Performance Improvements
+
+* **packages/sui-react-router:** Extract some constants ([a564214](https://github.com/SUI-Components/sui/commit/a5642144747cd6f4e7bb450c2d263729dcb13373))
+
+
+
 # 1.12.0 (2021-11-24)
 
 
