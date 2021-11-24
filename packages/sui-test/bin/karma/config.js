@@ -18,6 +18,7 @@ const config = {
     require.resolve('karma-chrome-launcher'),
     require.resolve('karma-firefox-launcher'),
     require.resolve('karma-mocha'),
+    require.resolve('karma-coverage'),
     require.resolve('karma-spec-reporter')
   ],
 
