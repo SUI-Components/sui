@@ -1,3 +1,4 @@
+// @ts-check
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/Link.js
 
 import {useCallback} from 'react'
@@ -61,7 +62,10 @@ const Link = ({
         !isModifiedEvent(event) // Ignore clicks with modifier keys
       ) {
         event.preventDefault()
-        router.push({pathname: resolveToLocation(to, router), state})
+        const pathname = resolveToLocation(to, router)
+        const pushLocation = state ? {pathname, state} : pathname
+
+        router.push(pushLocation)
       }
     },
     [onClick, router, target, to, state]
