@@ -17,7 +17,8 @@
     "@testing-library/cypress": "8.0.1",
     "commander": "8.2.0",
     "cypress": "8.6.0",
-    "cypress-file-upload": "5.0.8"
+    "cypress-file-upload": "5.0.8",
+    "har-validator": "5.1.5"
   },
   "keywords": [],
   "author": "",
