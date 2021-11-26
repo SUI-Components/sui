@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.114.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-theme:** Avoid using copyfiles dependency for copying files ([5079245](https://github.com/SUI-Components/sui/commit/5079245570fa0f774cf8d592dea587253565a84b))
+
+
+
 # 8.113.0 (2021-11-11)
 
 
