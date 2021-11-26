@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable no-console */
 const {existsSync, readFileSync} = require('fs')
 const {extname} = require('path')
@@ -66,13 +67,30 @@ const getFilesFromDiff = ({extensions, summary}) =>
     .filter(file => extensions.includes(extname(file).substring(1)))
 
 /**
+ * Get the commit range depending on the CI used (Travis or GitHub Actions)
+ * @returns {string|null} - Example: commit1...commit2
+ */
+const getCommitRange = () => {
+  const {GITHUB_EVENT_PATH, TRAVIS_COMMIT_RANGE: travisRange} = process.env
+  if (travisRange) return travisRange
+
+  if (GITHUB_EVENT_PATH) {
+    const file = readFileSync(GITHUB_EVENT_PATH, 'utf8')
+    const {after, before} = JSON.parse(file)
+    if (after && before) return `${before}...${after}`
+  }
+
+  return null
+}
+
+/**
  * Get files to lint according to command options
  * @param {string[]} extensions Extensions list: ['js', 'sass', 'css']
  * @param {string} defaultFiles Defaults to './'
  * @returns {Promise<string[]>} Array of file patterns
  */
 const getFilesToLint = async (extensions, defaultFiles = './') => {
-  const {TRAVIS_COMMIT_RANGE: range} = process.env
+  const range = getCommitRange()
   const staged = process.argv.includes(OPTIONS.staged)
   const getFromDiff = range || staged
 
