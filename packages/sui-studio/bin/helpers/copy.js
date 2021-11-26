@@ -24,7 +24,7 @@ const debug = (...args) => (DEBUG ? console.log('[copyfiles] ', ...args) : null)
 const checkDepth = (filePath, up) => {
   // components/atom/button
   const depth = path.normalize(filePath).split(path.sep).length - 1
-  return depth > up
+  return depth >= up
 }
 
 /**
