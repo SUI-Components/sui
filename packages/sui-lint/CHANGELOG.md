@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-lint:** Better control over undefined values for after and before ([0b19792](https://github.com/SUI-Components/sui/commit/0b197927c1afa5ea2b2b30bfd2ea031d10005395))
+* **packages/sui-lint:** Get commit range on GitHub Actions on linter ([4fe7503](https://github.com/SUI-Components/sui/commit/4fe7503822caf95a4228486de90828ad8ac7e4a2))
+
+
+
 # 3.39.0 (2021-11-05)
 
 
