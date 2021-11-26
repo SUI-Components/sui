@@ -53,7 +53,7 @@ const resolveFilePath = (filePath, {flatten, up}) => {
   )
 }
 
-module.exports = async function copyFiles(args, config) {
+module.exports = async function copyFiles(args, config = {}) {
   const input = args.slice()
   const outDir = input.pop()
   const globOpts = {}
@@ -67,6 +67,10 @@ module.exports = async function copyFiles(args, config) {
   debug(`Config for glob: `, globOpts)
 
   const files = await glob(input, globOpts)
+
+  if (files.length === 0) {
+    console.log('No files found.')
+  }
 
   debug(`Copying ${files.length} files from ${input} to ${outDir}`)
 
