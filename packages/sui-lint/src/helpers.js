@@ -76,6 +76,7 @@ const getCommitRange = () => {
 
   if (GITHUB_EVENT_PATH) {
     const file = readFileSync(GITHUB_EVENT_PATH, 'utf8')
+    console.log(JSON.parse(file))
     const {after, before} = JSON.parse(file)
     return `${before}...${after}`
   }
