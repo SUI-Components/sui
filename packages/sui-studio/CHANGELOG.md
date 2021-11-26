@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.41.0 (2021-11-26)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct conditional ([3adaf68](https://github.com/SUI-Components/sui/commit/3adaf68b732385ac20cebc687f51e21adb7f7b46))
+
+
+
 # 10.40.0 (2021-11-26)
 
 
