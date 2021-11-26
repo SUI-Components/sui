@@ -50,7 +50,7 @@ $ npx sui-studio generate house window -C ./myCustomContext.js
 
 We're migrating to `swc` so you could generate the new component with the expected `prepare` field by using the flag `--swc` or `-W`.
 
-### To develop the new component,
+### To develop the new component
 
 #### 1) Launch the development environment
 
@@ -131,7 +131,18 @@ Launch a development environment where you can work in total isolation on your c
 
 ### `$ sui-studio test`
 
-Launch all project tests in a karma browser.
+Launch all project tests in a Karma browser.
+
+### `$ cpx`
+
+This command allow you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.  
+
+#### Examples
+
+```sh
+# copy all files with scss extension from src to lib
+$ cpx './src/**/*.scss' ./lib
+```
 
 ## Testing
 
