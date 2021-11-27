@@ -16,6 +16,8 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
 )
 const outputPath = path.join(process.cwd(), 'dist')
 
+const {CI = false} = process.env
+
 process.env.NODE_ENV = 'development'
 
 const smp = new SpeedMeasurePlugin()
@@ -116,7 +118,7 @@ const webpackConfig = {
       )
     ])
   },
-  watch: true,
+  watch: !CI,
   devtool:
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
