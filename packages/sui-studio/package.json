@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "10.39.0",
+  "version": "10.41.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -25,7 +25,6 @@
     "classnames": "2.2.5",
     "colors": "1.4.0",
     "commander": "6.2.1",
-    "copyfiles": "2.4.1",
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.7",
     "fs-extra": "10.0.0",

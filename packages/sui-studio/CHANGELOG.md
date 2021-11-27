@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 10.41.0 (2021-11-26)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct conditional ([3adaf68](https://github.com/SUI-Components/sui/commit/3adaf68b732385ac20cebc687f51e21adb7f7b46))
+
+
+
+# 10.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-studio:** Add check when no files are found and config is object by default ([557a11b](https://github.com/SUI-Components/sui/commit/557a11b3c2d105aa6ea4e04936af05959b61bf99))
+* **packages/sui-studio:** Create new copyfiles command and avoid using copyfiles package ([88cc759](https://github.com/SUI-Components/sui/commit/88cc759a643995725ce1f28598dc994175278de2))
+
+
+
 # 10.39.0 (2021-11-19)
 
 

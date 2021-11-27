@@ -1,4 +1,4 @@
-const copy = require('copyfiles')
+const copy = require('./copy.js')
 
 const DESTINATION_FOLDER = 'public'
 
@@ -14,7 +14,8 @@ module.exports = function copyStaticFiles() {
     ],
     {
       exclude: 'node_modules/**'
-    },
-    () => console.log('[sui-studio] Static files copied')
-  )
+    }
+  ).then(() => {
+    console.log('[sui-studio] Static files copied')
+  })
 }

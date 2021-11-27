@@ -33,10 +33,11 @@ export interface Route {
 }
 
 export type Router = RouterState & {
+  createHref: (location: LocationDescriptor, query?: string) => string
   go: (n: number) => void
   goBack: () => void
   goForward: () => void
-  isActive: (location: LocationDescriptor, indexOnly: boolean) => Boolean
+  isActive: (location: LocationDescriptor, indexOnly: boolean) => boolean
   push: (location: LocationDescriptor) => void
   replace: (location: LocationDescriptor) => void
 }

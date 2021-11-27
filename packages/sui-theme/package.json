@@ -1,17 +1,14 @@
 {
   "name": "@s-ui/theme",
-  "version": "8.113.0",
+  "version": "8.114.0",
   "description": "Generic theme to add styles to all SUI components",
   "main": "lib/index.scss",
   "scripts": {
     "clean:lib": "npx rimraf lib",
-    "lib": "copyup './src/**/*.scss' lib/ ",
+    "lib": "cp -R src lib",
     "lint": "sui-lint sass",
     "prepare": "npm run lib"
   },
   "license": "ISC",
-  "homepage": "https://github.com/SUI-Components/sui",
-  "devDependencies": {
-    "copyfiles": "2.4.1"
-  }
+  "homepage": "https://github.com/SUI-Components/sui"
 }

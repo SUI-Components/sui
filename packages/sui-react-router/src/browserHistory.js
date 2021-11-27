@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable react-hooks/rules-of-hooks */
 
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/useRouterHistory.js
