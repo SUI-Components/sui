@@ -24,8 +24,8 @@ const createCompiler = require('../factories/createCompiler')
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 const log = require('../shared/log')
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
-const {CI = false, HOST = '0.0.0.0'} = process.env
+const {CI = false, HOST = '0.0.0.0', HTTPS, PORT} = process.env
+const DEFAULT_PORT = +PORT || 3000
 const DEFAULT_WATCH = !CI
 
 if (!module.parent) {
@@ -81,7 +81,8 @@ const start = async ({
     )
     process.exit(1)
   }
-  const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
+
+  const protocol = HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(HOST, DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
   const nextConfig = linkLoaderConfigBuilder({
@@ -89,6 +90,7 @@ const start = async ({
     linkAll: program.opts().linkAll,
     packagesToLink
   })
+
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
   const devServer = new WebpackDevServer(
@@ -99,6 +101,7 @@ const start = async ({
     },
     compiler
   )
+
   log.processing('❯ Starting the development server...\n')
   devServer.startCallback(err => {
     if (err) return log.error(err)
