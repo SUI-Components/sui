@@ -1,7 +1,7 @@
 // @ts-check
 
-const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware')
-const ignoredFiles = require('react-dev-utils/ignoredFiles')
+const noopServiceWorkerMiddleware = require('../utils/noopServiceWorkerMiddleware.js')
+const ignoredFiles = require('../utils/ignoredFiles.js')
 
 const {HOST, HTTPS} = process.env
 const protocol = HTTPS === 'true' ? 'https' : 'http'
