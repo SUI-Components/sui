@@ -1,10 +1,11 @@
+// @ts-check
 /* eslint no-console:0 */
 const fs = require('fs')
 const path = require('path')
 const {spawn} = require('child_process')
 
 const program = require('commander')
-const colors = require('colors')
+const colors = require('@s-ui/helpers/colors')
 const toKebabCase = require('just-kebab-case')
 const toPascalCase = require('just-pascal-case')
 
