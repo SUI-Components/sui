@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.36.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-helpers:** Add types to colors method ([2707380](https://github.com/SUI-Components/sui/commit/2707380b515e5cff4f2369d19f6f78e2168c10af))
+
+
+
 # 1.35.0 (2021-11-02)
 
 
