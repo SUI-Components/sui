@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.41.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-lint:** Simplify logging logic to show all files always ([6cb5012](https://github.com/SUI-Components/sui/commit/6cb5012d12a82ac1ab1bd6020facbbb9c385b749))
+* **packages/sui-lint:** Use correct commit range for PRs ([f124aa5](https://github.com/SUI-Components/sui/commit/f124aa54b6b2ca6ea20d5c0493e445e01b8d6281))
+
+
+
 # 3.40.0 (2021-11-26)
 
 

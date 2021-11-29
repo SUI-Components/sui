@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 10.42.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-studio:** Stop using not needed loader ([9a7dc75](https://github.com/SUI-Components/sui/commit/9a7dc75b1812dd4c55b574ef79d8cba57c41422f))
+* **packages/sui-studio:** Use colors from @s-ui/helpers instead dependency ([da1cf07](https://github.com/SUI-Components/sui/commit/da1cf07a1469f6d3a86eeaa6f45ae89eec1d3a04))
+
+
+
 # 10.41.0 (2021-11-26)
 
 
