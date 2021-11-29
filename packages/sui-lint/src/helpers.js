@@ -72,12 +72,19 @@ const getFilesFromDiff = ({extensions, summary}) =>
  */
 const getCommitRange = () => {
   const {GITHUB_EVENT_PATH, TRAVIS_COMMIT_RANGE: travisRange} = process.env
+  // Travis has a built-in environment variable that
+  // always returns the commit range that we need
   if (travisRange) return travisRange
 
   if (GITHUB_EVENT_PATH) {
     const file = readFileSync(GITHUB_EVENT_PATH, 'utf8')
-    const {after, before} = JSON.parse(file)
-    if (after && before) return `${before}...${after}`
+    const {after, before, pull_request: pullRequest} = JSON.parse(file)
+    // get the correct commit range depending if
+    // we're on a PR or a push to master
+    const base = pullRequest?.base?.sha ?? before
+    const head = pullRequest?.head?.sha ?? after
+
+    if (after && before) return `${base}...${head}`
   }
 
   return null
@@ -132,13 +139,6 @@ const checkFilesToLint = ({files, language}) => {
   if (!files.length) {
     console.log(`[sui-lint] No ${language} files to lint`)
     return false
-  }
-
-  const [firstPattern] = files
-  // check if pattern is all files for JS or SCSS
-  if (firstPattern === './' || firstPattern === '**/*.scss') {
-    console.log(`[sui-lint] Lint all ${language} files`)
-    return true
   }
 
   console.log(`[sui-lint] Linting ${files.length} ${language} files...`)
