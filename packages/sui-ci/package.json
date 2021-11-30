@@ -12,7 +12,7 @@
     "commander": "6.2.1"
   },
   "devDependencies": {
-    "nock": "13.1.1"
+    "nock": "13.2.1"
   },
   "keywords": [],
   "author": "",
