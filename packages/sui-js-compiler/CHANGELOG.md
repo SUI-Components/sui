@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.10.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc compiler version ([d0b0083](https://github.com/SUI-Components/sui/commit/d0b0083a57aab9358b2a455bf2279fa3af3f6260))
+
+
+
 # 1.9.0 (2021-11-11)
 
 
