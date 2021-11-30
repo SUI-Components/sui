@@ -11,10 +11,7 @@ const WebpackDevServer = require('webpack-dev-server')
 
 const clearConsole = require('../utils/clearConsole')
 const checkRequiredFiles = require('../utils/checkRequiredFiles')
-const {
-  choosePort,
-  prepareUrls
-} = require('react-dev-utils/WebpackDevServerUtils')
+const {choosePort, prepareUrls} = require('../utils/WebpackDevServerUtils.js')
 
 const webpackConfig = require('../webpack.config.dev')
 
@@ -83,7 +80,7 @@ const start = async ({
   }
 
   const protocol = HTTPS === 'true' ? 'https' : 'http'
-  const port = await choosePort(HOST, DEFAULT_PORT)
+  const port = await choosePort(DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
   const nextConfig = linkLoaderConfigBuilder({
     config,
