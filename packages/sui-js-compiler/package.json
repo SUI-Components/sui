@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js-compiler",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "JavaScript Compiler",
   "main": "index.js",
   "bin": {
