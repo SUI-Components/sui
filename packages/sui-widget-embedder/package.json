@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/widget-embedder",
-  "version": "4.3.0",
+  "version": "4.4.0-beta.1",
   "description": "",
   "bin": {
     "sui-widget-embedder": "./bin/sui-widget-embedder.js"
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@s-ui/bundler": "7",
+    "@s-ui/bundler": "beta",
     "@s-ui/helpers": "1",
     "@s-ui/react-context": "1",
     "@s-ui/react-hooks": "1",
@@ -23,7 +23,7 @@
     "minify-stream": "2.1.0",
     "rimraf": "3.0.2",
     "static-module": "1.5.0",
-    "webpack-dev-middleware": "1.12.0",
+    "webpack-dev-middleware": "5.2.2",
     "workbox-sw": "2.1.2"
   }
 }
