@@ -1,6 +1,15 @@
 # CHANGELOG
 
+# 8.116.0 (2021-12-02)
+
+
+
 # 8.115.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-theme:** add new variable: border input focus ([f695ef2](https://github.com/SUI-Components/sui/commit/f695ef206f7fad0e1a1e16702358c2bb239ba1e6))
 
 
 
