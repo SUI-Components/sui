@@ -1,5 +1,8 @@
-import optimizelySDK from '@optimizely/optimizely-sdk'
+import optimizelySDK, {
+  enums as optimizelyEnums
+} from '@optimizely/optimizely-sdk'
 import {updateIntegrations} from './integrations/handler'
+import {handleSegmentDecision} from './integrations/segment'
 
 const DEFAULT_DATAFILE_OPTIONS = {
   autoUpdate: true,
@@ -46,7 +49,12 @@ export default class OptimizelyAdapter {
     this._userId = userId?.toString()
     this._activeIntegrations = activeIntegrations
     this._applicationAttributes = applicationAttributes
+
     this.updateConsents({hasUserConsents})
+    this.addNotificationListener({
+      type: optimizelyEnums.NOTIFICATION_TYPES.DECISION,
+      handler: handleSegmentDecision
+    })
   }
 
   /**
@@ -82,6 +90,10 @@ export default class OptimizelyAdapter {
     })
 
     return optimizelyInstance
+  }
+
+  addNotificationListener({type, handler}) {
+    this._optimizely.notificationCenter.addNotificationListener(type, handler)
   }
 
   /**

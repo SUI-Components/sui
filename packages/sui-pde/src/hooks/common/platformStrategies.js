@@ -34,7 +34,7 @@ const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
     if (!variationName) return
 
     // if experiment has been already tracked
-    if (cache.includes(experimentName, variationName)) return
+    // if (cache.includes(experimentName, variationName)) return
 
     if (!window.analytics?.track) {
       // eslint-disable-next-line no-console
