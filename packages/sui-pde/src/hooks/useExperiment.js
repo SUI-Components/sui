@@ -7,14 +7,12 @@ import {getPlatformStrategy} from './common/platformStrategies'
  * @param {object} param
  * @param {string} param.experimentName
  * @param {object} param.attributes
- * @param {function} param.trackExperimentViewed
  * @param {string} [param.queryString] Test purposes only
  * @return {{variation: string}}
  */
 export default function useExperiment({
   experimentName,
   attributes,
-  trackExperimentViewed,
   queryString // for test purposes only
 } = {}) {
   const {pde} = useContext(PdeContext)
@@ -25,9 +23,7 @@ export default function useExperiment({
 
   const variation = useMemo(() => {
     let variationName
-    const strategy = getPlatformStrategy({
-      customTrackExperimentViewed: trackExperimentViewed
-    })
+    const strategy = getPlatformStrategy()
 
     try {
       const forcedVariation = strategy.getForcedValue({
@@ -38,7 +34,6 @@ export default function useExperiment({
         return forcedVariation
       }
       variationName = strategy.getVariation({pde, experimentName, attributes})
-      strategy.trackExperiment({variationName, experimentName})
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
@@ -46,7 +41,7 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [trackExperimentViewed, experimentName, queryString, pde, attributes])
+  }, [experimentName, queryString, pde, attributes])
 
   return {variation}
 }

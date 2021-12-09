@@ -1,3 +1,4 @@
+import {trackedEventsLocalCache as cache} from '../../../utils/trackedEventsLocalCache'
 /**
  * From https://segment.com/docs/connections/destinations/catalog/optimizely-web/#optimizely-full-stack-javascript-sdk
  * The instance must be named optmizelyClientInstance.
@@ -23,16 +24,12 @@ export const segment = ({
   }
 }
 
-const VARIATION_NAME_ON = 'On State'
-const VARIATION_NAME_OFF = 'Off State'
-const TRACK_EVENT_NAME = 'Experiment Viewed'
-
 const getFeatureTrackData = ({decisionInfo} = {}) => {
   const {featureKey, featureEnabled} = decisionInfo
 
   return {
     experimentName: featureKey,
-    variationName: featureEnabled ? VARIATION_NAME_ON : VARIATION_NAME_OFF
+    variationName: featureEnabled ? 'On State' : 'Off State'
   }
 }
 const getFeatureTestTrackData = ({decisionInfo} = {}) => {
@@ -51,11 +48,36 @@ const getExperimentTrackData = ({decisionInfo} = {}) => {
   }
 }
 
+const trackExperiment = ({experimentName, variationName}) => {
+  // user is not part of the experiment
+  if (!variationName) return
+
+  // if experiment has been already tracked
+  if (cache.includes(experimentName, variationName)) return
+
+  if (!window.analytics?.track) {
+    // eslint-disable-next-line no-console
+    console.error(
+      "[sui-pde: useExperiment] window.analytics.track expected to exists but doesn't"
+    )
+    return
+  }
+
+  cache.push(experimentName, variationName)
+
+  window.analytics.ready(() => {
+    window.analytics.track('Experiment Viewed', {
+      experimentName,
+      variationName
+    })
+  })
+}
+
 /**
  * Based on Optimizely documentation:
  * https://docs.developers.optimizely.com/full-stack/docs/set-up-segment
  */
-export function handleSegmentDecision(decision) {
+export function handleSegmentNotificationListener(decision) {
   const {type, decisionInfo} = decision
   const {source} = decisionInfo
 
@@ -70,13 +92,11 @@ export function handleSegmentDecision(decision) {
     ? featureTrackingDataMapper
     : getExperimentTrackData
 
+  const trackingData = trackingDataMapper(decision)
+
   console.log({
-    decision,
-    event: TRACK_EVENT_NAME,
-    data: trackingDataMapper(decision)
+    decision
   })
 
-  window.analytics.ready(() => {
-    window.analytics.track(TRACK_EVENT_NAME, trackingDataMapper(decision))
-  })
+  trackExperiment(trackingData)
 }

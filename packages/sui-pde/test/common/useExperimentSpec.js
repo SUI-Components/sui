@@ -3,7 +3,7 @@ import {cleanup, renderHook} from '@testing-library/react-hooks'
 import {expect} from 'chai'
 import PdeContext from '../../src/contexts/PdeContext'
 import useExperiment from '../../src/hooks/useExperiment'
-import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/utils/trackedEventsLocalCache'
 import sinon from 'sinon'
 
 describe('useExperiment hook', () => {

@@ -2,8 +2,9 @@ import optimizelySDK, {
   enums as optimizelyEnums
 } from '@optimizely/optimizely-sdk'
 import {updateIntegrations} from './integrations/handler'
-import {handleSegmentDecision} from './integrations/segment'
+import {handleSegmentNotificationListener} from './integrations/segment'
 
+const notificationTypes = optimizelyEnums.NOTIFICATION_TYPES
 const DEFAULT_DATAFILE_OPTIONS = {
   autoUpdate: true,
   updateInterval: 5 * 60 * 1000 // 5 minutes
@@ -22,6 +23,8 @@ const {
 
 const LOGGER_LEVEL =
   process.env.NODE_ENV === 'production' ? LOG_LEVEL.error : LOG_LEVEL.info
+
+export {notificationTypes, handleSegmentNotificationListener}
 
 export default class OptimizelyAdapter {
   /**
@@ -52,8 +55,8 @@ export default class OptimizelyAdapter {
 
     this.updateConsents({hasUserConsents})
     this.addNotificationListener({
-      type: optimizelyEnums.NOTIFICATION_TYPES.DECISION,
-      handler: handleSegmentDecision
+      type: notificationTypes.DECISION,
+      handler: handleSegmentNotificationListener
     })
   }
 

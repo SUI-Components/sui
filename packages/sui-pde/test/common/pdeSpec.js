@@ -3,7 +3,7 @@ import {PDE as SuiPDE} from '../../src'
 import OptimizelyAdapter from '../../src/adapters/optimizely'
 import DefaultAdapter from '../../src/adapters/default'
 import sinon from 'sinon'
-import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/utils/trackedEventsLocalCache'
 
 import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 
@@ -30,7 +30,10 @@ describe('@s-ui pde', () => {
             experimentsMap: {}
           }
         }
-      })
+      }),
+      notificationCenter: {
+        addNotificationListener: () => {}
+      }
     }
     optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
@@ -208,7 +211,10 @@ describe('@s-ui pde', () => {
       const optimizelyInstanceStub = {
         activate: sinon.stub().returns('variationA'),
         onReady: async () => true,
-        getEnabledFeatures: () => ['a', 'b']
+        getEnabledFeatures: () => ['a', 'b'],
+        notificationCenter: {
+          addNotificationListener: () => {}
+        }
       }
       // only executed to create window.optimizelyClientInstance
       // eslint-disable-next-line no-new

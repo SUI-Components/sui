@@ -1,5 +1,5 @@
 import {parseQueryString} from '@s-ui/js/lib/string'
-import {trackedEventsLocalCache} from './trackedEventsLocalCache'
+import {trackedEventsLocalCache} from '../../utils/trackedEventsLocalCache'
 
 const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes}) => {
@@ -16,7 +16,7 @@ const getServerStrategy = () => ({
   }
 })
 
-const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
+const getBrowserStrategy = ({cache}) => ({
   getVariation: ({pde, experimentName, attributes}) => {
     const variationName = pde.activateExperiment({
       name: experimentName,
@@ -24,34 +24,6 @@ const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
     })
 
     return variationName
-  },
-  trackExperiment: ({variationName, experimentName}) => {
-    if (customTrackExperimentViewed) {
-      return customTrackExperimentViewed({variationName, experimentName})
-    }
-
-    // user is not part of the experiment
-    if (!variationName) return
-
-    // if experiment has been already tracked
-    // if (cache.includes(experimentName, variationName)) return
-
-    if (!window.analytics?.track) {
-      // eslint-disable-next-line no-console
-      console.error(
-        "[sui-pde: useExperiment] window.analytics.track expected to exists but doesn't"
-      )
-      return
-    }
-
-    cache.push(experimentName, variationName)
-
-    window.analytics.ready(() => {
-      window.analytics.track('Experiment Viewed', {
-        experimentName,
-        variationName
-      })
-    })
   },
   /**
    * @param {object} param
@@ -69,10 +41,9 @@ const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
  * Returns the implementation of experiment related methods depending on
  * which platform we are server/browser
  * @param {object} param
- * @param {function} [param.customTrackExperimentViewed]
  * @returns object
  */
-export const getPlatformStrategy = ({customTrackExperimentViewed} = {}) => {
+export const getPlatformStrategy = () => {
   const isNode = typeof window === 'undefined'
 
   if (isNode) {
@@ -80,7 +51,6 @@ export const getPlatformStrategy = ({customTrackExperimentViewed} = {}) => {
   }
   trackedEventsLocalCache.init()
   return getBrowserStrategy({
-    customTrackExperimentViewed,
     cache: trackedEventsLocalCache
   })
 }
