@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 7.40.0 (2021-12-09)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** bundler analyzer with node 16 does not work because of dependencies insta ([997cefa](https://github.com/SUI-Components/sui/commit/997cefa49eb545c78146c67af2054cfaf254c66b))
+* **packages/sui-bundler:** prevent audit and fund on npm install ([70e1c59](https://github.com/SUI-Components/sui/commit/70e1c59ba0c8008b2ce98338e3a702738f12249f))
+
+
+
 # 7.39.0 (2021-11-15)
 
 
