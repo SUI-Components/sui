@@ -16,6 +16,8 @@ const installNeededDependencies = async () => {
     return getSpawnPromise('npm', [
       'install',
       '--no-save',
+      '--no-audit',
+      '--no-fund',
       'webpack-bundle-analyzer@4.5.0 duplicate-package-checker-webpack-plugin@3.0.0'
     ]).then(() => {
       logUpdate.done('Installed needed dependencies')
