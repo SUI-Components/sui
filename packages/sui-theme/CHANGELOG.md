@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 8.116.0 (2021-12-02)
+
+
+
+# 8.115.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-theme:** add new variable: border input focus ([f695ef2](https://github.com/SUI-Components/sui/commit/f695ef206f7fad0e1a1e16702358c2bb239ba1e6))
+
+
+
 # 8.114.0 (2021-11-26)
 
 
@@ -85,6 +98,7 @@
 
 ### Features
 
+* **packages/sui-theme:** add new bdrs circular ([a98881d](https://github.com/SUI-Components/sui/commit/a98881d9dda533ddbd690bf7a4722663d4380584))
 * **packages/sui-theme:** Add new l and xl input sizes ([66a0e02](https://github.com/SUI-Components/sui/commit/66a0e02abea1c8993a4612134f6194cbb1d6f296))
 
 

@@ -71,7 +71,10 @@ const getFilesFromDiff = ({extensions, summary}) =>
  * @returns {string|null} - Example: commit1...commit2
  */
 const getCommitRange = () => {
-  const {GITHUB_EVENT_PATH, TRAVIS_COMMIT_RANGE: travisRange} = process.env
+  const {CI, GITHUB_EVENT_PATH, TRAVIS_COMMIT_RANGE: travisRange} = process.env
+  // get commit range only for CI
+  if (!CI) return null
+
   // Travis has a built-in environment variable that
   // always returns the commit range that we need
   if (travisRange) return travisRange

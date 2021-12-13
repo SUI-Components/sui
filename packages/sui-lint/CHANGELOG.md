@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.42.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-lint:** Get range of commits only for CI ([36f68bb](https://github.com/SUI-Components/sui/commit/36f68bb9f1cf18e18a462c5277003158ae727e73))
+
+
+
 # 3.41.0 (2021-11-29)
 
 
