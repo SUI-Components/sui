@@ -85,6 +85,7 @@ module.exports = {
     ...TESTING_RULES,
     'accessor-pairs': RULES.OFF,
     '@babel/no-unused-expressions': RULES.OFF,
+    'import/extensions': [RULES.WARNING, 'always', {ignorePackages: true}],
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
