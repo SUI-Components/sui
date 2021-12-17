@@ -35,7 +35,7 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "prettier": "1.19.1",
     "stylelint": "13.13.1",
-    "stylelint-config-prettier": "8.0.2",
+    "stylelint-config-prettier": "9.0.3",
     "stylelint-config-recommended-scss": "4.3.0",
     "stylelint-prettier": "1.2.0",
     "stylelint-scss": "3.21.0",
