@@ -68,7 +68,7 @@ Given experiment `experimentX` with 2 variations `variationA` and `variationB` r
 
 ⚠️ If the user did not consent to or if optimizely decides that the user will not be part of the experiment of something goes wrong, `useExperiment` will return as variation value `null`
 
-⚠️ The `useExperiment` hook will send call a global window.analytics.track method with `Experiment Viewed` as event name with the experiment properties so you are able to replicate the experiment in your analytics tool
+⚠️ The `useExperiment` hook will call a global window.analytics.track method with `Experiment Viewed` as event name with the experiment properties so you are able to replicate the experiment in your analytics tool
 
 ```js
 import {useExperiment} from '@s-ui/pde'
@@ -80,6 +80,22 @@ const MyComponent = () => {
 
   if (variation === 'variationB') return <MyVariationB />
   return <MyVariationA>
+}
+```
+
+You can also use `Experiment` component which takes the same props as the hook
+
+```js
+import {Experiment} from '@s-ui/pde'
+
+const EXPERIMENT_NAME = 'experimentX'
+
+const MyComponent = () => {
+  return (
+    <Experiment experimentName={EXPERIMENT_NAME}>
+      {({variation}) => variation === 'variationB' ? <MyVariationB /> : <MyVariationA>}
+    </Experiment>
+  )
 }
 ```
 
@@ -150,6 +166,7 @@ It's possible to force a variation for our experiment in the browser. For exampl
 ### Feature Flags and Feature Tests
 
 ⚠️ user consent do apply to feature flags only when used as feature test
+⚠️ The `useFeature` hook will call a global window.analytics.track method with `Experiment Viewed` as event name with the experiment properties so you are able to replicate the experiment in your analytics tool. For each linked experiment (feature tests), an extra `Experiment Viewed` event will be send.
 
 ```js
 import {useFeature} from '@s-ui/pde'
@@ -158,6 +175,26 @@ const MyComponent = () => {
   const {isActive} = useFeature('myFeatureKey') // isActive = true when the feature flag is activated
 
   return <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
+}
+```
+
+You can also use `Feature` component which takes the following optional props
+
+- `featureName`
+- `attributes`
+- `queryString`
+
+```js
+import {Feature} from '@s-ui/pde'
+
+const MyComponent = () => {
+  return (
+    <Feature featureKey="myFeatureKey">
+      {({isActive}) => (
+        <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
+      )}
+    </Experiment>
+  )
 }
 ```
 
@@ -192,7 +229,7 @@ const optimizelyAdapter = new OptimizelyAdapter({
 })
 ```
 
-#### Attributes
+#### Attributes
 
 In order to pass by attributes, you'll able to do so by adding the second argument as `attributes` when using the useFeature hook. Something like this:
 

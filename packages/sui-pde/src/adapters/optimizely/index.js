@@ -1,13 +1,24 @@
 import optimizelySDK from '@optimizely/optimizely-sdk'
 import {updateIntegrations} from './integrations/handler'
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_DATAFILE_OPTIONS = {
   autoUpdate: true,
-  updateInterval: 5 * 60 * 1000, // 5 minutes
-  logLevel: 'info'
+  updateInterval: 5 * 60 * 1000 // 5 minutes
+}
+
+const DEFAULT_EVENTS_OPTIONS = {
+  eventBatchSize: 10,
+  eventFlushInterval: 1000
 }
 
 const DEFAULT_TIMEOUT = 500
+
+const {
+  enums: {LOG_LEVEL}
+} = optimizelySDK
+
+const LOGGER_LEVEL =
+  process.env.NODE_ENV === 'production' ? LOG_LEVEL.error : LOG_LEVEL.info
 
 export default class OptimizelyAdapter {
   /**
@@ -51,8 +62,8 @@ export default class OptimizelyAdapter {
     datafile,
     optimizely = optimizelySDK
   }) {
-    const options = {...DEFAULT_OPTIONS, ...optionParameter}
-    optimizely.setLogLevel(options.logLevel)
+    const options = {...DEFAULT_DATAFILE_OPTIONS, ...optionParameter}
+    optimizely.setLogLevel(LOGGER_LEVEL)
     optimizely.setLogger(optimizely.logging.createLogger())
     if (
       !datafile &&
@@ -66,7 +77,8 @@ export default class OptimizelyAdapter {
     const optimizelyInstance = optimizely.createInstance({
       sdkKey,
       datafileOptions: options,
-      datafile
+      datafile,
+      ...DEFAULT_EVENTS_OPTIONS
     })
 
     return optimizelyInstance
@@ -87,12 +99,16 @@ export default class OptimizelyAdapter {
   getInitialData() {
     let datafile = null
     try {
-      datafile = this._optimizely.getOptimizelyConfig().getDatafile()
+      datafile = this.getOptimizelyConfig().getDatafile()
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
     }
     return datafile
+  }
+
+  getOptimizelyConfig() {
+    return this._optimizely.getOptimizelyConfig()
   }
 
   /**
@@ -138,24 +154,28 @@ export default class OptimizelyAdapter {
    * @param {object} param
    * @param {string} param.featureKey
    * @parma {object=} param.attributes
-   * @returns {boolean}
+   * @returns {isActive: boolean, linkedExperiments: number[]}
    */
   isFeatureEnabled({featureKey, attributes}) {
-    // check for user consents only if featureKey is a feature that belongs to a feature test
+    const linkedExperimentNames = Object.keys(
+      this.getOptimizelyConfig().featuresMap[featureKey].experimentsMap
+    )
+
+    // check for user consents only if featureKey is a feature that belongs to a feature test or if a userId is available
     if (
-      this._optimizely.projectConfigManager.getConfig().featureKeyMap[
-        featureKey
-      ].experimentIds.length > 0 &&
-      !this._hasUserConsents
+      (linkedExperimentNames.length > 0 && !this._hasUserConsents) ||
+      !this._userId
     ) {
-      return false
+      return {isActive: false, linkedExperiments: []}
     }
 
-    return this._optimizely.isFeatureEnabled(
-      featureKey,
-      this._userId,
-      attributes
-    )
+    return {
+      isActive: this._optimizely.isFeatureEnabled(featureKey, this._userId, {
+        ...this._applicationAttributes,
+        ...attributes
+      }),
+      linkedExperiments: linkedExperimentNames
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/critical-css",
-  "version": "1.8.0",
+  "version": "1.14.0",
   "description": "",
   "type": "module",
   "main": "src/index.js",
@@ -8,11 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "clean-css": "5.1.2",
-    "playwright-chromium": "1.12.2"
-  },
-  "peerDependencies": {
-    "path-to-regexp": "*"
+    "clean-css": "5.2.1",
+    "node-fetch": "3.0.0",
+    "path-to-regexp": "0.1.7",
+    "playwright-chromium": "1.14.1"
   },
   "keywords": [],
   "author": "",

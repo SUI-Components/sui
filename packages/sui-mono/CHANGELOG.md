@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.18.0 (2021-09-08)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Fix support for monorepo monopackage on sui-mono ([63fe0a8](https://github.com/SUI-Components/sui/commit/63fe0a8eb382448e4c46f5eace16166dd161f6ff))
+
+
+
 # 2.17.0 (2021-06-17)
 
 

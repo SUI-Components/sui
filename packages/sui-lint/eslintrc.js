@@ -86,6 +86,7 @@ module.exports = {
     'array-callback-return': RULES.WARNING,
     'import/no-webpack-loader-syntax': RULES.WARNING,
     'node/no-path-concat': RULES.WARNING,
+    'import/extensions': [RULES.WARNING, 'always', {ignorePackages: true}],
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
@@ -99,7 +100,8 @@ module.exports = {
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
     'prefer-regex-literals': RULES.WARNING,
-    'prettier/prettier': [RULES.ERROR, prettierOptions]
+    'prettier/prettier': [RULES.ERROR, prettierOptions],
+    'react/jsx-no-bind': RULES.WARNING
   },
   overrides: [
     {

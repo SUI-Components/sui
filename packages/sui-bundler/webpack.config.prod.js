@@ -69,7 +69,7 @@ const webpackConfig = {
     minimizer: [
       minifyJs({useExperimentalMinifier, extractComments, sourceMap}),
       minifyCss()
-    ],
+    ].filter(Boolean),
     runtimeChunk: true,
     splitChunks
   },

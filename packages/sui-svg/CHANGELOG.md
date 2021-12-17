@@ -1,5 +1,41 @@
 # CHANGELOG
 
+# 3.5.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade sui-svg dependencies ([c176aca](https://github.com/SUI-Components/sui/commit/c176acab5f9179f2c6b7cc17dcf1d4a376e26590))
+
+
+
+# 3.4.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite dependency ([de94119](https://github.com/SUI-Components/sui/commit/de941194b8c17197011d5a3473e52b0851db0356))
+
+
+
+# 3.3.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies ([00f463a](https://github.com/SUI-Components/sui/commit/00f463a0231807c8dee17ac0daed25ffd43f0beb))
+
+
+
+# 3.2.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies for sui-svg ([b15c94f](https://github.com/SUI-Components/sui/commit/b15c94f190cc50fb9d306c1e681476fd46da2103))
+
+
+
 # 3.1.0 (2021-07-12)
 
 

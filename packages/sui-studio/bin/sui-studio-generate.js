@@ -1,10 +1,11 @@
+// @ts-check
 /* eslint no-console:0 */
 const fs = require('fs')
 const path = require('path')
 const {spawn} = require('child_process')
 
 const program = require('commander')
-const colors = require('colors')
+const colors = require('@s-ui/helpers/colors')
 const toKebabCase = require('just-kebab-case')
 const toPascalCase = require('just-pascal-case')
 
@@ -12,9 +13,10 @@ const {showError} = require('@s-ui/helpers/cli')
 const {writeFile} = require('@s-ui/helpers/file')
 
 program
-  .option('-C, --context', 'add context for this component')
+  .option('-C, --context [customContextPath]', 'add context for this component')
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
+  .option('-W, --swc', 'Use the new SWC compiler', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -64,7 +66,7 @@ const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 const TEST_DIR = `${COMPONENT_PATH}/test/`
 const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, scope, prefix = 'sui'} = program
+const {context, scope, prefix = 'sui', swc} = program
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
@@ -72,6 +74,88 @@ const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
 )}`
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
 const {repository = {}, homepage} = packageInfo
+
+const removeRepeatedNewLines = str => str.replace(/(\r\n|\r|\n){2,}/g, '$1\n')
+
+const testTemplate = `/*
+ * Remember: YOUR COMPONENT IS DEFINED GLOBALLY
+ * */
+
+/* eslint react/jsx-no-undef:0 */
+/* eslint no-undef:0 */
+
+import ReactDOM from 'react-dom'
+
+import chai, {expect} from 'chai'
+import chaiDOM from 'chai-dom'
+${context ? '' : "import Component from '../src/index'"}
+
+${context ? "import '@s-ui/studio/src/patcher-mocha'" : ''}
+
+chai.use(chaiDOM)
+
+describe${context ? '.context.default' : ''}('${componentInPascal}', ${
+  context ? 'Component' : '()'
+} => {
+  const setup = setupEnvironment(Component)
+
+  it('should render without crashing', () => {
+    // Given
+    const props = {}
+
+    // When
+    const component = <Component {...props} />
+
+    // Then
+    const div = document.createElement('div')
+    ReactDOM.render(component, div)
+    ReactDOM.unmountComponentAtNode(div)
+  })
+
+  it('should NOT render null', () => {
+    // Given
+    const props = {}
+
+    // When
+    const {container} = setup(props)
+
+    // Then
+    expect(container.innerHTML).to.be.a('string')
+    expect(container.innerHTML).to.not.have.lengthOf(0)
+  })
+
+  it.skip('should NOT extend classNames', () => {
+    // Given
+    const props = {className: 'extended-classNames'}
+    const findSentence = str => string => string.match(new RegExp(\`S*\${str}S*\`))
+
+    // When
+    const {container} = setup(props)
+    const findClassName = findSentence(props.className)
+
+    // Then
+    expect(findClassName(container.innerHTML)).to.be.null
+  })
+})
+`
+
+const defaultContext = `module.exports = {
+  default: {
+    i18n: {
+      t(s) {
+        return s
+          .split('')
+          .reverse()
+          .join('')
+      }
+    }
+  }
+}
+`
+
+const buildJs = swc
+  ? 'sui-js-compiler'
+  : 'babel --presets sui ./src --out-dir ./lib'
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
@@ -98,11 +182,11 @@ test
   writeFile(
     DEMO_PACKAGE_JSON_FILE,
     `{
-      "name": "${packageName}-demo",
-      "version": "1.0.0",
-      "private": true,
-      "description": "Demo for ${packageName}"
-    }`
+  "name": "${packageName}-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo for ${packageName}"
+}`
   ),
 
   writeFile(
@@ -114,7 +198,7 @@ test
   "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build:js && npm run build:styles",
-    "build:js": "babel --presets sui ./src --out-dir ./lib",
+    "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {
@@ -212,69 +296,17 @@ export default () => <${componentInPascal} />
   ),
 
   context &&
-    writeFile(
-      COMPONENT_CONTEXT_FILE,
-      `module.exports = {
-  default: {
-    i18n: {
-      t(s) {
-        return s
-          .split('')
-          .reverse()
-          .join('')
-      }
-    }
-  }
-}
-`
-    ),
-  writeFile(
-    COMPONENT_TEST_FILE,
-    `/*
- * Remember: YOUR COMPONENT IS DEFINED GLOBALLY
- * */
+    (function() {
+      const isBooleanContext = typeof context === 'boolean'
 
-/* eslint react/jsx-no-undef:0 */
-/* eslint no-undef:0 */
-
-import ReactDOM from 'react-dom'
-
-import chai, {expect} from 'chai'
-import chaiDOM from 'chai-dom'
-import Component from '../src/index'
-
-chai.use(chaiDOM)
-
-describe('${componentInPascal}', () => {
-  const setup = setupEnvironment(Component)
-
-  it('should render without crashing', () => {
-    // Given
-    const props = {}
-
-    // When
-    const component = <Component {...props} />
-
-    // Then
-    const div = document.createElement('div')
-    ReactDOM.render(component, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
-
-  it('should NOT render null', () => {
-    // Given
-    const props = {}
-
-    // When
-    const {container} = setup(props)
-
-    // Then
-    expect(container.innerHTML).to.be.a('string')
-    expect(container.innerHTML).to.not.have.lengthOf(0)
-  })
-})
-`
-  )
+      writeFile(
+        COMPONENT_CONTEXT_FILE,
+        isBooleanContext
+          ? defaultContext
+          : fs.readFileSync(`${BASE_DIR}${context}`).toString()
+      )
+    })(),
+  writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(testTemplate))
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
   const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})

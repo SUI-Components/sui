@@ -1,5 +1,55 @@
 # CHANGELOG
 
+# 1.14.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrad clean-css dependency ([cb2ba9d](https://github.com/SUI-Components/sui/commit/cb2ba9d0e5771b296884517a64e0deb81da76508))
+
+
+
+# 1.13.0 (2021-09-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** bump dependencies ([81f0891](https://github.com/SUI-Components/sui/commit/81f0891175d9041c16cbf3ed60661925f55da852))
+
+
+
+# 1.12.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use networkidle instead load to get Critical CSS ([7889071](https://github.com/SUI-Components/sui/commit/7889071b5a2acf61dc8f97a893284424349b2f0e))
+
+
+
+# 1.11.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-critical-css:** Force version of path-to-regexp on critical-css package ([37fff14](https://github.com/SUI-Components/sui/commit/37fff14ffce57b88ea1d04e8ddfa74b863ce0ea2))
+
+
+
+# 1.9.0 (2021-08-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** Add back response.error because it came with the error ([15cb6d3](https://github.com/SUI-Components/sui/commit/15cb6d395e7e98aac3e56af56d07a7c0e57e3e11))
+* **packages/sui-critical-css:** Add health check support ([9d8cffb](https://github.com/SUI-Components/sui/commit/9d8cffbca7dec8b6c7d630bed1985a6a4d0c43b8))
+* **packages/sui-critical-css:** Avoid using as method ([a8be35e](https://github.com/SUI-Components/sui/commit/a8be35e38d18de2f434fa6c7287b029f20a698a5))
+* **packages/sui-critical-css:** Restore package version ([a691730](https://github.com/SUI-Components/sui/commit/a6917305577981debdf18f202fd09d941e1c475f))
+* **packages/sui-critical-css:** Use correct global variable ([3a7658a](https://github.com/SUI-Components/sui/commit/3a7658a6b55028f5bd06d940f3af6db8c44517ca))
+* **packages/sui-critical-css:** Use node fetch ([f7a7e6e](https://github.com/SUI-Components/sui/commit/f7a7e6e8dbc5ac5a611520eaff07434178dbb290))
+
+
+
 # 1.8.0 (2021-06-14)
 
 

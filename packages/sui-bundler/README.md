@@ -1,4 +1,4 @@
-# sui-bunder
+# sui-bundler
 
 > Config-free bundler for ES6 React apps.
 
@@ -321,7 +321,7 @@ You could tweak the performance of your bundle generation by using some flags pr
 
 `splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
 
-`useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify code instead using terser in order to boost build time and memory usage.
+`useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify JavaScript and CSS instead using `terser` and `css-minimizer-webpack-plugin` in order to boost build time and memory usage.
 
 `useExperimentalSCSSLoader` (default: `false`): Use [fast-sass-loader](https://github.com/yibn2008/fast-sass-loader) (currently a fork of it [super-sass-loader](https://github.com/andresz1/super-sass-loader)) instead of `sass-loader` (available in development only)
 

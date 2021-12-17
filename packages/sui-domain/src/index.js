@@ -1,19 +1,8 @@
-import Entity from './Entity'
-import EntryPointFactory from './EntryPointFactory'
-import FetcherFactory from './fetcher/factory'
-import Mapper from './Mapper'
-import Repository from './Repository'
-import Service from './Service'
-import UseCase from './UseCase'
-import ValueObject from './ValueObject'
-
-export {
-  Entity,
-  EntryPointFactory,
-  FetcherFactory,
-  Mapper,
-  Repository,
-  Service,
-  UseCase,
-  ValueObject
-}
+export {default as Entity} from './Entity'
+export {default as EntryPointFactory} from './EntryPointFactory'
+export {default as FetcherFactory} from './fetcher/factory'
+export {default as Mapper} from './Mapper'
+export {default as Repository} from './Repository'
+export {default as Service} from './Service'
+export {default as UseCase} from './UseCase'
+export {default as ValueObject} from './ValueObject'

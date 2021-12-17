@@ -1,5 +1,81 @@
 # CHANGELOG
 
+# 6.6.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-test:** add categories env variable ([389b8ae](https://github.com/SUI-Components/sui/commit/389b8ae970173434117af09dcafff207104be40b))
+
+
+
+# 6.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Remove chalk dependency ([34f7806](https://github.com/SUI-Components/sui/commit/34f7806d8ba9c29d5853c6ad3eafbba7b2ed8322))
+
+
+
+# 6.4.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Rollback karma to less dependencies ([4001650](https://github.com/SUI-Components/sui/commit/400165059f8d2c99d788e30cd3c092f77e136faa))
+* **packages/sui-test:** Tweak config for sui-test ([6e0e36f](https://github.com/SUI-Components/sui/commit/6e0e36f78c9684cb2b9319231e90b4bd5a59340b))
+* **packages/sui-test:** Upgrade dependencies packages ([090a692](https://github.com/SUI-Components/sui/commit/090a692874647eb946c8cd07a760fa9ed706e4d8))
+
+
+
+# 6.3.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies about babel ([abc3fa1](https://github.com/SUI-Components/sui/commit/abc3fa1bdaa4dc7c9b9f27b0dbb4fef32777e804))
+
+
+
+# 6.2.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-test:** Unify @babel/core package versions ([b29c83b](https://github.com/SUI-Components/sui/commit/b29c83bc95688cbded4cae36ff1b67925688a39a))
+* **packages/sui-test:** Upgrade babel/core dependency ([4652296](https://github.com/SUI-Components/sui/commit/4652296fef3abd60a14165716df53da889949d67))
+* **packages/sui-test:** Upgrade karma-webpack with less dependencies and rely on default config mor ([9061070](https://github.com/SUI-Components/sui/commit/9061070a78c175e2ea90068445f402f2f98ec63e))
+
+
+
+# 6.1.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-test:** Use latest babel versions ([4681815](https://github.com/SUI-Components/sui/commit/46818153876746cc97918d6a5fc6c4d9255cc469))
+
+
+
+# 6.0.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-test:** Remove e2e from @s-ui/test ([52eea8d](https://github.com/SUI-Components/sui/commit/52eea8d30e20ebe86d3a4b989ad5422495dbdae7))
+
+
+
+# 5.3.0 (2021-07-23)
+
+
+### Features
+
+* **packages/sui-test:** add json-summary coverage report ([67acc91](https://github.com/SUI-Components/sui/commit/67acc91fcc782ce25472dfd242814c844203d411))
+
+
+
 # 5.2.0 (2021-07-14)
 
 

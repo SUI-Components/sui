@@ -1,6 +1,6 @@
 const webpack = require('webpack')
-const clearConsole = require('react-dev-utils/clearConsole')
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
+const formatWebpackMessages = require('../utils/formatWebpackMessages')
+const clearConsole = require('../utils/clearConsole')
 const log = require('../shared/log')
 
 const isInteractive = process.stdout.isTTY

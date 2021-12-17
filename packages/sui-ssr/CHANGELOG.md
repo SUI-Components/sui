@@ -1,5 +1,56 @@
 # CHANGELOG
 
+# 7.42.0 (2021-11-15)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** remove unnecesary log when critical css is disabled ([077aa85](https://github.com/SUI-Components/sui/commit/077aa85237af07f9eeec789aa0f0ed84e301837e))
+
+
+
+# 7.41.0 (2021-10-29)
+
+
+### Features
+
+* **packages/sui-ssr:** allow to receive headers as an array ([6c83043](https://github.com/SUI-Components/sui/commit/6c830436895dbcd31912e079bed9ffdd77fe28ad))
+* **packages/sui-ssr:** http redirect headers ([075db29](https://github.com/SUI-Components/sui/commit/075db29c58e1dbae37515353ad01f32ef4af3831))
+* **packages/sui-ssr:** prevent to reset previows headers ([915ef93](https://github.com/SUI-Components/sui/commit/915ef93eb130fe0d7785b177a26148e18dde8e2e))
+* **packages/sui-ssr:** update doc ([2699b65](https://github.com/SUI-Components/sui/commit/2699b65602dd5964ec614b19de32de2835a848e9))
+
+
+
+# 7.40.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-ssr:** update archiver version ([50049fc](https://github.com/SUI-Components/sui/commit/50049fcae6191f631651f2f83eda6cca15ef0dcf))
+
+
+
+# 7.39.0 (2021-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** http cookie ([e2f1ea4](https://github.com/SUI-Components/sui/commit/e2f1ea4f837d5491f3b7647e065a30c60def8ca4))
+* **packages/sui-ssr:** update readme according ton new htppCookie sui-ssr feature ([0478b5d](https://github.com/SUI-Components/sui/commit/0478b5da8f2f459cf818ca0b7783753c05238170))
+
+
+
+# 7.38.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-ssr:** bump ([64035b1](https://github.com/SUI-Components/sui/commit/64035b1397bc4efb63172a357822e8bd6215079c))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+* **sui-ssr:** add link package short alias ([629aab4](https://github.com/SUI-Components/sui/commit/629aab45e07ea5f00daf606d6b9102f4c88823ee))
+
+
+
 # 7.37.0 (2021-06-29)
 
 

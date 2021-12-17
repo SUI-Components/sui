@@ -1,5 +1,53 @@
 # CHANGELOG
 
+# 2.20.0 (2021-10-29)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** update doc ([cf0fe85](https://github.com/SUI-Components/sui/commit/cf0fe85aba93dec8fc3caddf22a320223bad094d))
+* **packages/sui-react-initial-props:** update docs ([d84466e](https://github.com/SUI-Components/sui/commit/d84466eae4fe68145b3ba742ab0b71d565da6aea))
+
+
+
+# 2.19.0 (2021-10-19)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** update readme according ton new htppCookie sui-ssr feature ([b77f93a](https://github.com/SUI-Components/sui/commit/b77f93aa8fc2cac6156aa5e81d955dc89a1a3898))
+
+
+
+# 2.18.0 (2021-10-06)
+
+
+### Bug Fixes
+
+* **packages/sui-react-initial-props:** Be sure we have initial props when hydrating ([611a4fc](https://github.com/SUI-Components/sui/commit/611a4fc79881bc71665e4d6ff957c3716942470f))
+
+
+
+# 2.17.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Use major for types/node ([81f4fda](https://github.com/SUI-Components/sui/commit/81f4fdaa7d182939e87c30ada5206267b4e51875))
+* **packages/sui-react-initial-props:** Use major version for types/node ([a941830](https://github.com/SUI-Components/sui/commit/a9418305dfb2b3c56538ee1828aec3f3dae1867e))
+
+
+
+# 2.16.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** Bump version ([6465a64](https://github.com/SUI-Components/sui/commit/6465a64c38a88cedaae7e9c44ba777eabbcadb42))
+* **packages/sui-react-initial-props:** Move types to devDependencies ([3ec6e9a](https://github.com/SUI-Components/sui/commit/3ec6e9a6422863aa9314e5703c02686ad82ac372))
+
+
+
 # 2.14.0 (2021-06-17)
 
 

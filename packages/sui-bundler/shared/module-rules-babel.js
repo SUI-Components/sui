@@ -8,6 +8,8 @@ module.exports = {
     {
       loader: require.resolve('babel-loader'),
       options: {
+        cacheDirectory: true,
+        cacheCompression: false,
         babelrc: false,
         compact: true,
         presets: [

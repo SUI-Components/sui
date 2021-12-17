@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { useEffect } from 'react'
 import { Meta } from 'react-head'
 

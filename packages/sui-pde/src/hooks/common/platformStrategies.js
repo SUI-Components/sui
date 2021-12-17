@@ -1,16 +1,22 @@
 import {parseQueryString} from '@s-ui/js/lib/string'
-
-const experimentsAlreadyTracked = []
+import {trackedEventsLocalCache} from './trackedEventsLocalCache'
 
 const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes}) => {
     return pde.getVariation({pde, name: experimentName, attributes})
   },
   trackExperiment: () => {},
-  getForcedValue: () => {}
+  getForcedValue: ({key, queryString}) => {
+    if (!queryString) {
+      return
+    }
+
+    const queryParams = parseQueryString(queryString)
+    return queryParams[`suipde_${key}`]
+  }
 })
 
-const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
+const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
   getVariation: ({pde, experimentName, attributes}) => {
     const variationName = pde.activateExperiment({
       name: experimentName,
@@ -26,8 +32,9 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
 
     // user is not part of the experiment
     if (!variationName) return
+
     // if experiment has been already tracked
-    if (experimentsAlreadyTracked.includes(experimentName)) return
+    if (cache.includes(experimentName, variationName)) return
 
     if (!window.analytics?.track) {
       // eslint-disable-next-line no-console
@@ -37,7 +44,7 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
       return
     }
 
-    experimentsAlreadyTracked.push(experimentName)
+    cache.push(experimentName, variationName)
 
     window.analytics.ready(() => {
       window.analytics.track('Experiment Viewed', {
@@ -67,9 +74,13 @@ const getBrowserStrategy = ({customTrackExperimentViewed}) => ({
  */
 export const getPlatformStrategy = ({customTrackExperimentViewed} = {}) => {
   const isNode = typeof window === 'undefined'
+
   if (isNode) {
     return getServerStrategy()
   }
-
-  return getBrowserStrategy({customTrackExperimentViewed})
+  trackedEventsLocalCache.init()
+  return getBrowserStrategy({
+    customTrackExperimentViewed,
+    cache: trackedEventsLocalCache
+  })
 }

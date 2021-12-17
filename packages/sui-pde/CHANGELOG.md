@@ -1,5 +1,72 @@
 # CHANGELOG
 
+# 2.16.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-pde:** add first iteration of experiment and feature components ([391d655](https://github.com/SUI-Components/sui/commit/391d655459dcb96a61f5b4b7c295ad3c22bd8df2))
+* **packages/sui-pde:** apply destructoring review ([da66fc3](https://github.com/SUI-Components/sui/commit/da66fc3a0e086167ad47da427d9aca07450aec0f))
+* **packages/sui-pde:** fix given reviews ([b074190](https://github.com/SUI-Components/sui/commit/b0741905f37ef0699c2efbfc238dbc1a3556d295))
+
+
+
+# 2.15.0 (2021-10-08)
+
+
+### Features
+
+* **packages/sui-pde:** add cache for tracking events so its only send on update ([0cf6c26](https://github.com/SUI-Components/sui/commit/0cf6c26fdc926784c3d8f7fe984bc9ba0887b645))
+* **packages/sui-pde:** migrate cache to functions ([3d8a9d4](https://github.com/SUI-Components/sui/commit/3d8a9d4e79a1aec33f4a2283105102e28d926d86))
+* **packages/sui-pde:** reuse cache name string in tests ([7c4cabc](https://github.com/SUI-Components/sui/commit/7c4cabc853de9b55aa86653b360ed4263a383aba))
+* **packages/sui-pde:** use session storage + file renaming ([4d77a5a](https://github.com/SUI-Components/sui/commit/4d77a5a8f6e2f56f24af9c261f08ca5a958de9e7))
+
+
+
+# 2.14.0 (2021-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** isFeatureEnabled pass by application attributes ([4bfc251](https://github.com/SUI-Components/sui/commit/4bfc251f86dabb4d37c0feadae6bdf3263551fc7))
+
+
+### Features
+
+* **packages/sui-pde:** removing not needed clean step ([d180026](https://github.com/SUI-Components/sui/commit/d18002668105e44baccab6e23413bc5bf115a442))
+
+
+
+# 2.13.0 (2021-08-17)
+
+
+### Features
+
+* **packages/sui-pde:** Remove errors on initializing Optimizely ([2416372](https://github.com/SUI-Components/sui/commit/24163723a34262714fbe43ea1e1b4c6b2b8c3f52))
+* **packages/sui-pde:** Support unknown userId for feature enabled method ([084d3de](https://github.com/SUI-Components/sui/commit/084d3dea44e03b0a828b8450a738a15971868881))
+
+
+
+# 2.12.0 (2021-08-13)
+
+
+### Features
+
+* **packages/sui-pde:** force feature ssr support ([10f9b2f](https://github.com/SUI-Components/sui/commit/10f9b2f9f6d8d488da537555378cf49a6d3f3d5f))
+
+
+
+# 2.11.0 (2021-07-27)
+
+
+### Features
+
+* **packages/sui-pde:** fix scope ([9580db5](https://github.com/SUI-Components/sui/commit/9580db5128a678867841a7a51f0f3d98523be7f9))
+* **packages/sui-pde:** track feature flags and feature tests ([0e09997](https://github.com/SUI-Components/sui/commit/0e09997a3e1a3c299e0958cd4c4e5cdccd11aa7e))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 2.10.0 (2021-06-04)
 
 
