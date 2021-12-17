@@ -1,8 +1,11 @@
 {
   "name": "@s-ui/domain",
+  "type": "module",
   "version": "2.3.0",
   "description": "SDK for creating domains",
-  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
   "scripts": {
     "lib": "babel ./src --out-dir ./lib",
     "prepare": "npm run lib",
