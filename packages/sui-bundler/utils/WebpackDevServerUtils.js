@@ -15,9 +15,9 @@ const url = require('url')
 
 const {findFreePorts, isFreePort} = require('find-free-ports')
 
-const clearConsole = require('./clearConsole')
-const formatWebpackMessages = require('./formatWebpackMessages')
-const getProcessForPort = require('./getProcessForPort')
+const clearConsole = require('./clearConsole.js')
+const formatWebpackMessages = require('./formatWebpackMessages.js')
+const getProcessForPort = require('./getProcessForPort.js')
 
 const {bold, cyan, green, yellow, red} = require('@s-ui/helpers/colors')
 
@@ -190,35 +190,6 @@ function createCompiler({
   })
 
   return compiler
-}
-
-function resolveLoopback(proxy) {
-  const o = url.parse(proxy)
-  o.host = undefined
-  if (o.hostname !== 'localhost') {
-    return proxy
-  }
-  // Unfortunately, many languages (unlike node) do not yet support IPv6.
-  // This means even though localhost resolves to ::1, the application
-  // must fall back to IPv4 (on 127.0.0.1).
-  // We can re-enable this in a few years.
-  /* try {
-     o.hostname = address.ipv6() ? '::1' : '127.0.0.1';
-   } catch (_ignored) {
-     o.hostname = '127.0.0.1';
-   } */
-
-  try {
-    // Check if we're on a network; if we are, chances are we can resolve
-    // localhost. Otherwise, we can just be safe and assume localhost is
-    // IPv4 for maximum compatibility.
-    if (!address.ip()) {
-      o.hostname = '127.0.0.1'
-    }
-  } catch (_ignored) {
-    o.hostname = '127.0.0.1'
-  }
-  return url.format(o)
 }
 
 // We need to provide a custom onError function for httpProxyMiddleware.
