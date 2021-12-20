@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.43.0 (2021-12-15)
+
+
+### Features
+
+* **packages/sui-lint:** Add rule to check extensions on files ([00689b9](https://github.com/SUI-Components/sui/commit/00689b944502edb6978a58861b018d6b67009d5a))
+
+
+
 # 3.42.0 (2021-12-02)
 
 
