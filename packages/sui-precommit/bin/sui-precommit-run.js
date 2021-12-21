@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {serialSpawn} from '@s-ui/helpers/cli'
+import {serialSpawn} from '@s-ui/helpers/cli.js'
 import {createRequire} from 'module'
 
 const require = createRequire(import.meta.url)

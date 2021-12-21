@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {getSpawnPromise} from '@s-ui/helpers/cli'
+import {getSpawnPromise} from '@s-ui/helpers/cli.js'
 import {join} from 'path'
 import {readFileSync, writeFileSync} from 'fs'
 import set from 'dset'
