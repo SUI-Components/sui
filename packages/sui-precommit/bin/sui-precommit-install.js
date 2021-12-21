@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const {getSpawnPromise} = require('@s-ui/helpers/cli')
-const path = require('path')
-const fs = require('fs')
-const set = require('dset')
-const get = require('dlv')
+import {getSpawnPromise} from '@s-ui/helpers/cli'
+import {join} from 'path'
+import {readFileSync, writeFileSync} from 'fs'
+import set from 'dset'
+import get from 'dlv'
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd
@@ -12,7 +12,7 @@ const get = require('dlv')
  */
 const {CI = false, INIT_CWD} = process.env
 const cwd = INIT_CWD || process.cwd()
-const pkgPath = path.join(cwd, 'package.json')
+const pkgPath = join(cwd, 'package.json')
 
 const HUSKY_VERSION = '4.3.0'
 
@@ -45,7 +45,7 @@ function log(...args) {
  * @returns {object} Package.json content in JSON format
  */
 function readPackageJson() {
-  return JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
+  return JSON.parse(readFileSync(pkgPath, {encoding: 'utf8'}))
 }
 
 /**
@@ -85,7 +85,7 @@ function removeFromPackageJson(name, field) {
  * @param {object} pkg New package content to be write on the file
  */
 function writePackageJson(pkg) {
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), {encoding: 'utf8'})
+  writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), {encoding: 'utf8'})
 }
 
 /**
@@ -109,7 +109,7 @@ function installHuskyIfNotInstalled() {
  * @return {Boolean}
  */
 function isHuskyInstalled() {
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, {encoding: 'utf8'}))
+  const pkg = JSON.parse(readFileSync(pkgPath, {encoding: 'utf8'}))
   const huskyDependency = pkg.devDependencies && pkg.devDependencies.husky
   return huskyDependency === HUSKY_VERSION
 }
