@@ -1,3 +1,1 @@
-import i18n from './i18n'
-
-export default i18n
+export {default} from './i18n.js'

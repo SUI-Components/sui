@@ -2,12 +2,12 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
 
-import Rosetta from '../src'
-import Polyglot from '../src/adapters/polyglot'
-import {ALL_TRANSLATIONS} from './fixtures/all_translations'
-import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages'
+import Rosetta from '../src/index.js'
+import Polyglot from '../src/adapters/polyglot.js'
+import {ALL_TRANSLATIONS} from './fixtures/all_translations.js'
+import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages.js'
 
-describe('I18N', () => {
+describe.only('I18N', () => {
   let i18n
 
   beforeEach(() => {
