@@ -1,28 +1,31 @@
-export type Action = 'PUSH' | 'REPLACE' | 'POP';
+export type Action = 'PUSH' | 'REPLACE' | 'POP'
+
+export type Query = object
+export type QueryString = string
+export type Pathname = string
+export type Params = object
 
 /**
  * A location key is a string that is unique to a particular location. It is the one piece of data that most accurately answers the question "Where am I?".
  */
 export type LocationKey = string
+export type Search = string
+export type Path = string
 
-export type LocationDescriptorObject = {
-  pathname: Pathname;
-  search?: Search;
-  query?: Query;
-  state?: LocationState;
-};
+interface LocationState {
+  from: Location
+}
 
-export type LocationDescriptor = LocationDescriptorObject | Path;
+export interface LocationDescriptorObject {
+  pathname: Pathname
+  search?: Search
+  query?: Query
+  state?: LocationState
+}
 
-export type Query = Object
+export type LocationDescriptor = LocationDescriptorObject | Path
 
-export type QueryString = string
-
-export type Pathname = string
-
-export type Params = Object
-
-export type Route = {
+export interface Route {
   component?: RouteComponent
   getComponent?: () => Promise<RouteComponent>
   path?: RoutePattern
@@ -30,30 +33,31 @@ export type Route = {
 }
 
 export type Router = RouterState & {
+  createHref: (location: LocationDescriptor, query?: string) => string
   go: (n: number) => void
   goBack: () => void
   goForward: () => void
-  isActive: (location: LocationDescriptor, indexOnly: boolean) => Boolean
+  isActive: (location: LocationDescriptor, indexOnly: boolean) => boolean
   push: (location: LocationDescriptor) => void
   replace: (location: LocationDescriptor) => void
 }
 
-export type RouteInfo = {
+export interface RouteInfo {
   location: Location
-  routes: Array<Route>
+  routes: Route[]
   params: Params
 }
 
 export type RouterState = RouteInfo & {
-  components: Array<Component>
+  components: React.ComponentType[]
 }
 
-export type RouteComponent = Component
+export type RouteComponent = React.ComponentType
 
 export type RoutePattern = string
 export type RouteRegExp = RegExp
 
-export type Location = {
+export interface Location {
   action: Action
   key: LocationKey
   pathname: Pathname

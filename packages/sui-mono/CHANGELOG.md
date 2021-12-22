@@ -1,5 +1,46 @@
 # CHANGELOG
 
+# 2.18.0 (2021-09-08)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Fix support for monorepo monopackage on sui-mono ([63fe0a8](https://github.com/SUI-Components/sui/commit/63fe0a8eb382448e4c46f5eace16166dd161f6ff))
+
+
+
+# 2.17.0 (2021-06-17)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** commit all should add each path changes independently ([8e151a3](https://github.com/SUI-Components/sui/commit/8e151a36b2c5357a9f1612573bd8fba89bd16b79))
+
+
+
+# 2.16.0 (2021-05-26)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Allow commit all to work as expected ([4f28982](https://github.com/SUI-Components/sui/commit/4f289823aa49ee64ac92f87045c19a1e9dd901ff))
+
+
+### Features
+
+* **packages/sui-mono:** Log error but return an empty string ([95493d9](https://github.com/SUI-Components/sui/commit/95493d9da72f1a1368588c45c11ef0c41f704674))
+
+
+
+# 2.15.0 (2021-05-20)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Avoid checking git status message and use porcelain instead ([8af59ac](https://github.com/SUI-Components/sui/commit/8af59ac628a901e54ac825a33d87b4a9d99d65bd))
+
+
+
 # 2.14.0 (2021-05-18)
 
 

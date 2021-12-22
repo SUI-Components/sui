@@ -1,5 +1,186 @@
 # CHANGELOG
 
+# 6.6.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-test:** add categories env variable ([389b8ae](https://github.com/SUI-Components/sui/commit/389b8ae970173434117af09dcafff207104be40b))
+
+
+
+# 6.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Remove chalk dependency ([34f7806](https://github.com/SUI-Components/sui/commit/34f7806d8ba9c29d5853c6ad3eafbba7b2ed8322))
+
+
+
+# 6.4.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Rollback karma to less dependencies ([4001650](https://github.com/SUI-Components/sui/commit/400165059f8d2c99d788e30cd3c092f77e136faa))
+* **packages/sui-test:** Tweak config for sui-test ([6e0e36f](https://github.com/SUI-Components/sui/commit/6e0e36f78c9684cb2b9319231e90b4bd5a59340b))
+* **packages/sui-test:** Upgrade dependencies packages ([090a692](https://github.com/SUI-Components/sui/commit/090a692874647eb946c8cd07a760fa9ed706e4d8))
+
+
+
+# 6.3.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies about babel ([abc3fa1](https://github.com/SUI-Components/sui/commit/abc3fa1bdaa4dc7c9b9f27b0dbb4fef32777e804))
+
+
+
+# 6.2.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-test:** Unify @babel/core package versions ([b29c83b](https://github.com/SUI-Components/sui/commit/b29c83bc95688cbded4cae36ff1b67925688a39a))
+* **packages/sui-test:** Upgrade babel/core dependency ([4652296](https://github.com/SUI-Components/sui/commit/4652296fef3abd60a14165716df53da889949d67))
+* **packages/sui-test:** Upgrade karma-webpack with less dependencies and rely on default config mor ([9061070](https://github.com/SUI-Components/sui/commit/9061070a78c175e2ea90068445f402f2f98ec63e))
+
+
+
+# 6.1.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-test:** Use latest babel versions ([4681815](https://github.com/SUI-Components/sui/commit/46818153876746cc97918d6a5fc6c4d9255cc469))
+
+
+
+# 6.0.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-test:** Remove e2e from @s-ui/test ([52eea8d](https://github.com/SUI-Components/sui/commit/52eea8d30e20ebe86d3a4b989ad5422495dbdae7))
+
+
+
+# 5.3.0 (2021-07-23)
+
+
+### Features
+
+* **packages/sui-test:** add json-summary coverage report ([67acc91](https://github.com/SUI-Components/sui/commit/67acc91fcc782ce25472dfd242814c844203d411))
+
+
+
+# 5.2.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-test:** add tests directory to excluded coverage directories ([a792a0d](https://github.com/SUI-Components/sui/commit/a792a0d8a40f785867a3409dbf4f74c5a6454427))
+
+
+
+# 5.1.0 (2021-07-14)
+
+
+### Features
+
+* **packages/sui-test:** Add coverage param and exclude not needed files ([3cb2a8d](https://github.com/SUI-Components/sui/commit/3cb2a8dce4db4e7fef55866edfeaef48e9f1725d))
+* **packages/sui-test:** Remove exclude array ([4648d2b](https://github.com/SUI-Components/sui/commit/4648d2b97d3ea64ac64a3e127af23eb5277d7b25))
+* **packages/sui-test:** Use correct pattern ([d651fd9](https://github.com/SUI-Components/sui/commit/d651fd9386dfcd2c0216dfe328171e052ec2d778))
+
+
+
+# 5.0.0 (2021-07-05)
+
+
+### Features
+
+* **packages/sui-test:** Add less noisy server tests ([8494821](https://github.com/SUI-Components/sui/commit/84948211af1869c0765c5fc546226ab80e1584ea))
+* **packages/sui-test:** Upgrade dependencies of sui-test, less verbose and less patch ([6213cac](https://github.com/SUI-Components/sui/commit/6213cac69280925d5255fab389768e35db3775bb))
+* **packages/sui-test:** Use latest mocha version ([5dc5dc2](https://github.com/SUI-Components/sui/commit/5dc5dc29f1dc49a65197dd7ea864157b84399f5c))
+
+
+
+# 4.34.0 (2021-06-29)
+
+
+
+# 4.33.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** improve karma config construction ([81d803d](https://github.com/SUI-Components/sui/commit/81d803da988c2ff246962dd46774af17990c6a5b))
+* **packages/sui-test:** improve readability thanks to midu ([a00de2f](https://github.com/SUI-Components/sui/commit/a00de2f0c2b9328055827f6e27e13e2e3a01355a))
+
+
+
+# 4.32.0 (2021-06-22)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** fix capture console option in karma config ([4d5ef53](https://github.com/SUI-Components/sui/commit/4d5ef53d1ad5028f301e1cd73b9fd7e62ab8b289))
+
+
+
+# 4.31.0 (2021-06-22)
+
+
+
+# 4.30.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-test:** allow for custom viewport height and width ([6809468](https://github.com/SUI-Components/sui/commit/680946842b20df055ca3ead63dc73bf334a57a80))
+* **packages/sui-test:** enable or disable logs in ci for browser test ([77db5aa](https://github.com/SUI-Components/sui/commit/77db5aa3f35eae8722db61bf1650df91f8ae2cf4))
+* **packages/sui-test:** Use latest babel dependencies ([54debd1](https://github.com/SUI-Components/sui/commit/54debd10d245cad54e4d38f5082ff50f56af516f))
+
+
+
+# 4.29.0 (2021-06-03)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** Use correctly config file ([556f62b](https://github.com/SUI-Components/sui/commit/556f62b803e2a7443a17987a4785bab4ceaf61b5))
+
+
+
+# 4.28.0 (2021-06-03)
+
+
+### Features
+
+* **packages/sui-test:** Avoid using script name as contract for modifying config ([e3ebb29](https://github.com/SUI-Components/sui/commit/e3ebb2941b0661eb31ab260923f61e7cbece0ead))
+
+
+
+# 4.27.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-test:** Use latest webpack@4 version ([3ee4184](https://github.com/SUI-Components/sui/commit/3ee41843557ea9113c501092191ed92fcd58feb0))
+
+
+
+# 4.26.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-test:** Use same babel/core dependency across packages ([7a42a26](https://github.com/SUI-Components/sui/commit/7a42a26140419d7b11735fe919a38283f8768db1))
+
+
+
 # 4.25.0 (2021-05-10)
 
 

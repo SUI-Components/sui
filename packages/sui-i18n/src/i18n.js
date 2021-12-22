@@ -20,8 +20,7 @@ export default class Rosetta {
 
   set culture(culture) {
     this._culture = culture
-    this.translator.locale = culture.split('-')[0]
-    this.translator.translations = this._languages[culture]
+    this._updateTranslator({culture})
   }
 
   set currency(currency) {
@@ -63,29 +62,78 @@ export default class Rosetta {
     this._languages = languages
   }
 
+  // Given a culture, it refreshes the translator with the current language.
+  _updateTranslator({culture}) {
+    const [locale] = culture.split('-')
+    const translations = this._languages[culture]
+    this.translator.locale = locale
+    this.translator.translations = translations
+  }
+
+  /**
+   * Add new languages or modify current ones.
+   *
+   * @param {String} culture The culture we want to update, takes current if left empty
+   * @param {String} key Key in where to store the translation, if empty, will overwrite the language
+   * @param {Object} translations Translations to be added
+   */
+  addTranslations({culture, key, translations}) {
+    const newCulture = culture || this._culture
+
+    if (key) {
+      this._languages[newCulture][key] = translations // won't work for nested keys
+    } else {
+      this._languages[newCulture] = translations
+    }
+
+    this._updateTranslator({culture: newCulture})
+  }
+
+  /**
+   * Get all available translations for a key
+   *
+   * @param {String} key Key of the literal
+   * @returns {Object} Object with cultures as key and literal as value
+   */
+  getAllTranslations(key) {
+    if (!key) return {}
+    return Object.fromEntries(
+      Object.keys(this._languages).map(language => [
+        language,
+        key
+          .split('.')
+          .reduce((level, newKey) => level[newKey], this._languages[language])
+      ])
+    )
+  }
+
   // Translate.
   t(key, values) {
     return this.translator.translate(key, values)
   }
 
   // Format number.
-  n(number, options = {}) {
+  n(number, options = {}, culture) {
     if (typeof number !== 'number') {
       throw new Error('i18n.n should receive a number.')
     }
 
     return typeof Intl !== 'undefined'
-      ? new Intl.NumberFormat(this._culture, options).format(number)
+      ? new Intl.NumberFormat(culture || this._culture, options).format(number)
       : number
   }
 
   // Format currency number.
-  c(number, minimumFractionDigits = 0) {
-    return this.n(number, {
-      style: 'currency',
-      currency: this._currency,
-      minimumFractionDigits
-    })
+  c(number, minimumFractionDigits = 0, culture) {
+    return this.n(
+      number,
+      {
+        style: 'currency',
+        currency: this._currency,
+        minimumFractionDigits
+      },
+      culture
+    )
   }
 
   /**

@@ -1,5 +1,7 @@
-const util = require('util')
-const exec = util.promisify(require('child_process').exec)
+/* eslint-disable no-console */
+import {exec as execNode} from 'child_process'
+import {promisify} from 'util'
+const exec = promisify(execNode)
 
 /**
  * Release packages of the repository on CI
@@ -10,7 +12,7 @@ const exec = util.promisify(require('child_process').exec)
  * @param {Boolean} params.isPullRequest Determine if it's a Pull Request
  * @returns {Promise}
  */
-module.exports = async function release({
+export default async function release({
   gitHubEmail = 'srv.scms.git-enb@adevinta.com',
   gitHubToken,
   gitHubUser = 'Adevinta',

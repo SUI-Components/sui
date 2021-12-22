@@ -1,5 +1,33 @@
 # CHANGELOG
 
+# 1.23.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-ci:** Unify versions of same package ([3032dfd](https://github.com/SUI-Components/sui/commit/3032dfdcd205dc67368bd950e1c8cf17900f8bb7))
+
+
+
+# 1.22.0 (2021-07-19)
+
+
+### Features
+
+* **packages/sui-ci:** Add more logging ([a8b34de](https://github.com/SUI-Components/sui/commit/a8b34de66218663dbe256ae84049920f2c82f9a6))
+* **packages/sui-ci:** Add more output ([c48d393](https://github.com/SUI-Components/sui/commit/c48d3938d94ab53b6a5551467d8a772e1f23afad))
+* **packages/sui-ci:** Export correctly constants ([f881e4a](https://github.com/SUI-Components/sui/commit/f881e4a5f859d8053dcecf6467ba10a3c0e8a8e3))
+* **packages/sui-ci:** Export modules correctly ([ac2ed08](https://github.com/SUI-Components/sui/commit/ac2ed08e707156ed36c2efeecebe09efc11242ec))
+* **packages/sui-ci:** Migrate to ESM ([e4988b2](https://github.com/SUI-Components/sui/commit/e4988b2d8bbfbfce7b9405d63833e7fed8f05561))
+* **packages/sui-ci:** Move correctly imports to ESModules ([f56ef55](https://github.com/SUI-Components/sui/commit/f56ef55f3da24c6f556a2519b5dc88efbbb19a93))
+* **packages/sui-ci:** Read error ([923b228](https://github.com/SUI-Components/sui/commit/923b2285e9237f835836af49f5f9d991d3719408))
+* **packages/sui-ci:** Remove console.log ([a9ffe81](https://github.com/SUI-Components/sui/commit/a9ffe81d130508a05c576c063121446b31a73a63))
+* **packages/sui-ci:** Require file correctly on ESM ([7274f93](https://github.com/SUI-Components/sui/commit/7274f93dc67508d6c838a115e8fc6a289f408f28))
+* **packages/sui-ci:** Use async await for getting the commit ([32c2b1e](https://github.com/SUI-Components/sui/commit/32c2b1e4ce6107aed443945d46c1003b4bab4326))
+* **packages/sui-ci:** Use async/await when getting github event info ([da7bebc](https://github.com/SUI-Components/sui/commit/da7bebc47d06da4693be7cb3041b71ef58d44a65))
+
+
+
 # 1.21.0 (2021-05-19)
 
 

@@ -1,5 +1,85 @@
 # CHANGELOG
 
+# 1.14.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrad clean-css dependency ([cb2ba9d](https://github.com/SUI-Components/sui/commit/cb2ba9d0e5771b296884517a64e0deb81da76508))
+
+
+
+# 1.13.0 (2021-09-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** bump dependencies ([81f0891](https://github.com/SUI-Components/sui/commit/81f0891175d9041c16cbf3ed60661925f55da852))
+
+
+
+# 1.12.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use networkidle instead load to get Critical CSS ([7889071](https://github.com/SUI-Components/sui/commit/7889071b5a2acf61dc8f97a893284424349b2f0e))
+
+
+
+# 1.11.0 (2021-08-04)
+
+
+### Features
+
+* **packages/sui-critical-css:** Force version of path-to-regexp on critical-css package ([37fff14](https://github.com/SUI-Components/sui/commit/37fff14ffce57b88ea1d04e8ddfa74b863ce0ea2))
+
+
+
+# 1.9.0 (2021-08-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** Add back response.error because it came with the error ([15cb6d3](https://github.com/SUI-Components/sui/commit/15cb6d395e7e98aac3e56af56d07a7c0e57e3e11))
+* **packages/sui-critical-css:** Add health check support ([9d8cffb](https://github.com/SUI-Components/sui/commit/9d8cffbca7dec8b6c7d630bed1985a6a4d0c43b8))
+* **packages/sui-critical-css:** Avoid using as method ([a8be35e](https://github.com/SUI-Components/sui/commit/a8be35e38d18de2f434fa6c7287b029f20a698a5))
+* **packages/sui-critical-css:** Restore package version ([a691730](https://github.com/SUI-Components/sui/commit/a6917305577981debdf18f202fd09d941e1c475f))
+* **packages/sui-critical-css:** Use correct global variable ([3a7658a](https://github.com/SUI-Components/sui/commit/3a7658a6b55028f5bd06d940f3af6db8c44517ca))
+* **packages/sui-critical-css:** Use node fetch ([f7a7e6e](https://github.com/SUI-Components/sui/commit/f7a7e6e8dbc5ac5a611520eaff07434178dbb290))
+
+
+
+# 1.8.0 (2021-06-14)
+
+
+### Features
+
+* **packages/sui-critical-css:** Remove version for now ([ff015af](https://github.com/SUI-Components/sui/commit/ff015affd52d3d7a6e9e68c4b6f92fa5f8cd6390))
+* **packages/sui-critical-css:** Use chromium only and add UA to critical-css service ([9012573](https://github.com/SUI-Components/sui/commit/9012573c33c56499782e33091607b398cca50482))
+
+
+
+# 1.7.0 (2021-06-10)
+
+
+### Features
+
+* **packages/sui-critical-css:** Catch not important errors to avoid breaking execution ([0330611](https://github.com/SUI-Components/sui/commit/0330611ef7d12b3c7991ac1524b9a5d54bf4627c))
+
+
+
+# 1.6.0 (2021-06-02)
+
+
+### Features
+
+* **packages/sui-critical-css:** Add support to displayName critical key ([b1be20e](https://github.com/SUI-Components/sui/commit/b1be20e1585d55ad46c9ac98b31c8e99d7518025))
+* **packages/sui-critical-css:** Avoid using optional chaining ([2772ab3](https://github.com/SUI-Components/sui/commit/2772ab382079449cd2e3811eba91651bddac6e81))
+* **packages/sui-critical-css:** use bot UA in order to prevent dynamic rendering strategies issues ([bc2f72e](https://github.com/SUI-Components/sui/commit/bc2f72e0822d350c9f5feb57291e6a2da00b7aaa))
+
+
+
 # 1.5.0 (2021-05-20)
 
 

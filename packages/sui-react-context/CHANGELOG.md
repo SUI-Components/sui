@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.7.0 (2021-07-01)
+
+
+### Features
+
+* **packages/sui-react-context:** Migrate @s-ui/react-context to TS ([a086041](https://github.com/SUI-Components/sui/commit/a086041f80e2b07dd582bec1c0ed30bbeab107a3))
+
+
+
 # 1.6.0 (2021-04-19)
 
 

@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-require('./karma/patch')
 const program = require('commander')
-const chalk = require('chalk')
+const colors = require('@s-ui/helpers/colors')
 const runner = require('./karma')
-const {cleanStack} = require('./karma/util')
 
 program
   .option('-W, --watch', 'Run in watch mode')
@@ -22,6 +20,7 @@ program
   )
   .option('--src-pattern <srcPattern>', 'Define the source directory', false)
   .option('-T, --timeout <ms>', 'Timeout', 2000)
+  .option('--coverage', 'Run the coverage preprocessor', false)
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -34,8 +33,17 @@ program
   })
   .parse(process.argv)
 
-const {watch, ci, pattern, ignorePattern, srcPattern, timeout} = program
-runner({watch, ci, pattern, ignorePattern, srcPattern, timeout})
+const {
+  ci,
+  coverage,
+  ignorePattern,
+  pattern,
+  srcPattern,
+  timeout,
+  watch
+} = program
+
+runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
@@ -43,7 +51,7 @@ runner({watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .catch(err => {
     if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
       process.stderr.write(
-        chalk.red(cleanStack((err && (err.stack || err.message)) || err)) + '\n'
+        colors.red((err && (err.stack || err.message)) || err) + '\n'
       )
     }
     process.exit(err.code || 1)

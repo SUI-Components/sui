@@ -1,8 +1,8 @@
-# sui-studio
+# @s-ui/studio
 
-> Develop, maintain, and publish your SUI components.
+> Develop, maintain, and publish your React Components.
 
-Sui Studio helps you develop and document isolated UI components for your projects. It provides,
+@s-ui/studio helps you develop and document isolated UI components for your projects. It provides,
 
 - Isolated development of components
 - A unified development platform
@@ -15,7 +15,7 @@ Sui Studio helps you develop and document isolated UI components for your projec
 ## Installation
 
 ```sh
-npm install @s-ui/studio
+npm install @s-ui/studio -D
 ```
 
 ## Getting Started
@@ -32,7 +32,25 @@ Once you're in a new project, execute `sui-studio start` to start the developmen
 $ npx sui-studio generate house window
 ```
 
-### To develop the new component,
+#### Context
+
+Use `-C` or `--context` parameter to generate the component with a default context
+
+```sh
+$ npx sui-studio generate house window -C
+```
+
+Use `-C path` or `--context path` parameter to generate the component with a given default context
+
+```sh
+$ npx sui-studio generate house window -C ./myCustomContext.js
+```
+
+### Use new compiler
+
+We're migrating to `swc` so you could generate the new component with the expected `prepare` field by using the flag `--swc` or `-W`.
+
+### To develop the new component
 
 #### 1) Launch the development environment
 
@@ -57,7 +75,7 @@ Add the script to your package.json
 ```json
 {
   "scripts": {
-    "co": "sui-studio commit"
+    "co": "sui-mono commit"
   }
 }
 ```
@@ -71,20 +89,20 @@ Then just push your changes using `git push` and merge them into master after re
 Select master branch. First, check that the release will be properly built by executing,
 
 ```
-$ sui-studio check-release
+$ sui-mono check-release
 ```
 
 If the output is the expected one, then run:
 
 ```
-$ sui-studio release
+$ sui-mono release
 ```
 
 ## CLI
 
 ### `$ sui-studio start`
 
-Launch a development environment where you can see all your components at once. If there are too many components, use the `dev`command.
+Launch a development environment where you can see all your components at once. If there are too many components, use the `dev` command.
 
 ### `$ sui-studio build`
 
@@ -113,7 +131,18 @@ Launch a development environment where you can work in total isolation on your c
 
 ### `$ sui-studio test`
 
-Launch all project tests in a karma browser.
+Launch all project tests in a Karma browser.
+
+### `$ cpx`
+
+This command allow you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.  
+
+#### Examples
+
+```sh
+# copy all files with scss extension from src to lib
+$ cpx './src/**/*.scss' ./lib
+```
 
 ## Testing
 
@@ -170,7 +199,7 @@ export default () => {
 }
 ```
 
-the test file should be like:
+The test file should be like:
 
 ```js
 import '@s-ui/studio/src/patcher-mocha'
@@ -251,64 +280,56 @@ export default MemoComponent
 
 ## CLI testing integration
 
-SUIStudio provides tools for running your entire component tests of your project on a karma browser
+@s-ui/studio provides tools for running your entire component tests of your project on a karma browser
 
 Add this scripts on your own components project
 
 ```
 // package.json
 {
-  ...
   scripts: {
-    ...
-	test: "sui-studio test"
-	test:watch: "sui-studio test --watch"
-    ...
+	  "test": "sui-studio test",
+	  "test:watch": "sui-studio test --watch"
   }
-  ...
 }
 ```
 
+If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
+
 ## File structure
 
-SUIStudio profusely uses the concept of "convention over configuration" for file structure.
+@s-ui/studio profusely uses the concept of "convention over configuration" for file structure.
 
 ```
-.
 ├── components
 │   ├── README.md
-│   └── atom                                <- Component's category
-│       ├── button                          <- Component's name
+│   └── atom                             <- Component's category
+│       ├── button                       <- Component's name
 │       │   ├── README.md
 │       │   ├── package.json
-│       │   └── src
-│       │       ├── index.js
-│       │       └── index.scss
+│       │   ├── src
+│       │   │   ├── index.js
+│       │   │   └── index.scss
+│       │   ├── demo
+│       │   │   ├── context.js
+│       │   │   ├── playground             <- Basic code that will be shown in the component's demo
+│       │   │   └── themes                 <- SASS files stored in this folder will be themes shown on the interface
+│       │   │       └── myStudioTheme.scss
+│       │   └── test
+│       │       └── index.js              <- File containing all component's tests
 │       └── header
 │           ├── README.md
 │           ├── package.json
-│           └── src
-│               ├── index.js
-│               └── index.scss
-├── demo
-│   └── atom
-│       ├── button
-│       │   ├── context.js
-│       │   ├── playground                <- Basic code that will be shown in the component's demo
-│       │   └── themes                    <- SASS files stored in this folder will be themes shown on the interface
-│       │       └── myStudioTheme.scss
-│       └── header
-│           └── demo                      <- Create a `demo` folder to put an demo app of your component (playground will be ignored)
-│               ├── index.js
-│               ├── index.scss
-│               └── package.json
-├── package.json
-└── test
-    └── atom
-        ├── button
-        │   └── index.js                 <- File containing all component's tests
-        └── header
-            └── index.js
+│           ├── src
+│           │   ├── index.js
+│           │   └── index.scss
+│           ├── demo                   <- Create a `demo` folder to put an demo app of your component (playground will be ignored)
+│           │   ├── index.js
+│           │   ├── index.scss
+│           │   └── package.json
+│           └── test
+│               └── index.js
+└── package.json
 ```
 
 # Conventions

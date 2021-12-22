@@ -1,15 +1,15 @@
 const webpack = require('webpack')
 const path = require('path')
-
-const TARGET = process.env.npm_lifecycle_event
-const CWD = process.cwd()
+const {clientConfig} = require('../../src/config')
+const {sep} = require('path')
+const {captureConsole = true} = clientConfig
 
 const config = {
   singleRun: true,
 
   basePath: '',
 
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'webpack'],
 
   reporters: ['spec'],
 
@@ -17,9 +17,12 @@ const config = {
 
   browserDisconnectTolerance: 1,
 
+  webpackMiddleware: {
+    stats: 'errors-only'
+  },
+
   webpack: {
-    devtool: 'eval',
-    mode: 'development',
+    stats: 'errors-only',
     resolve: {
       alias: {
         '@s-ui/react-context': path.resolve(
@@ -30,29 +33,27 @@ const config = {
       extensions: ['.mjs', '.js', '.jsx', '.json']
     },
     node: {
-      fs: 'empty'
-    },
-    // webpack has the ability to generate path info in the output bundle.
-    // However, this puts garbage collection pressure on projects that bundle thousands of modules.
-    output: {
-      pathinfo: false
+      fs: 'empty',
+      child_process: 'empty',
+      module: 'empty',
+      readline: 'empty'
     },
     plugins: [
-      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'test', // use 'test' unless process.env.NODE_ENV is defined,
+        CATEGORIES: process.env.CATEGORIES
+      }),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD)
       })
     ],
-    // avoid unneded optimizations for running our tests in order to get fatest bundling time
-    optimization: {
-      removeAvailableModules: false,
-      removeEmptyChunks: false,
-      splitChunks: false
-    },
     module: {
       rules: [
         {
           test: /\.jsx?$/,
+          exclude: new RegExp(
+            `node_modules(?!${sep}@s-ui${sep}studio${sep}src)`
+          ),
           use: [
             {
               loader: require.resolve('babel-loader'),
@@ -69,7 +70,12 @@ const config = {
                   ]
                 ],
                 plugins: [
-                  require.resolve('babel-plugin-istanbul'),
+                  [
+                    require.resolve('babel-plugin-istanbul'),
+                    {
+                      exclude: ['**/lib/**/*.js', '**/test/**/*.js']
+                    }
+                  ],
                   require.resolve('./babelPatch.js')
                 ]
               }
@@ -86,29 +92,11 @@ const config = {
   },
 
   client: {
+    captureConsole,
     mocha: {
       reporter: 'html'
     }
   }
-}
-
-if (TARGET === 'test:ci') {
-  config.reporters = ['coverage'].concat(config.reporters)
-  config.preprocessors = {
-    'src/**/*.js': ['coverage']
-  }
-  config.coverageReporter = {
-    dir: `${CWD}/coverage`,
-    reporters: [
-      {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
-      {type: 'html', subdir: 'report-html'},
-      {type: 'text-summary'}
-    ]
-  }
-}
-
-if (TARGET === 'test:watch') {
-  config.reporters = ['clear-screen'].concat(config.reporters)
 }
 
 module.exports = config

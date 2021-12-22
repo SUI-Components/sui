@@ -1,7 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "4.25.0",
-  "cypressVersion": "4.12.1",
+  "version": "6.6.2",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -9,36 +8,31 @@
   "scripts": {
     "lib:js": "babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
-    "prepare": "npm run lib",
-    "postpublish": "make build"
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "7.14.0",
-    "@babel/plugin-transform-modules-commonjs": "7.14.0",
-    "@babel/polyfill": "7.12.1",
-    "@babel/register": "7.13.16",
+    "@babel/core": "7.16.0",
+    "@babel/plugin-transform-modules-commonjs": "7.16.0",
+    "@babel/register": "7.16.0",
     "@s-ui/helpers": "1",
-    "@testing-library/cypress": "7.0.6",
-    "babel-loader": "8.2.2",
+    "babel-loader": "8.2.3",
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "6.0.0",
     "babel-preset-sui": "3",
-    "chalk": "4.1.1",
     "commander": "6.2.1",
-    "cypress-file-upload": "5.0.7",
-    "karma": "5.2.3",
+    "karma": "6.3.4",
     "karma-chrome-launcher": "3.1.0",
     "karma-clear-screen-reporter": "1.0.0",
     "karma-coverage": "2.0.3",
-    "karma-firefox-launcher": "2.1.0",
+    "karma-firefox-launcher": "2.1.2",
     "karma-mocha": "2.0.1",
     "karma-spec-reporter": "0.0.32",
-    "karma-webpack": "4.0.2",
-    "mocha": "6.2.2",
+    "karma-webpack": "5.0.0",
+    "mocha": "9.1.3",
     "null-loader": "4.0.1",
-    "webpack": "4.41.5"
+    "webpack": "4.46.0"
   }
 }

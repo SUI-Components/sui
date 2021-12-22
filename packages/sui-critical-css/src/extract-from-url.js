@@ -1,4 +1,4 @@
-import {chromium} from 'playwright'
+import {chromium} from 'playwright-chromium'
 import CleanCSS from 'clean-css'
 import {blockedResourceTypes, skippedResources} from './config.js'
 
@@ -52,14 +52,14 @@ export async function extractCSSFromUrl({
       const request = route.request()
       return blockedResourceTypes.includes(request.resourceType()) ||
         skippedResources.includes(request.url())
-        ? route.abort()
-        : route.continue()
+        ? route.abort().catch(() => {})
+        : route.continue().catch(() => {})
     })
 
     await page.coverage.startCSSCoverage()
 
     const response = await page
-      .goto(url, {waitUntil: 'load'})
+      .goto(url, {waitUntil: 'networkidle'})
       .catch(error => ({error}))
 
     const closeAll = async error => {
@@ -71,8 +71,7 @@ export async function extractCSSFromUrl({
 
     if (!response) await closeAll('Response is not present')
 
-    if (response.error)
-      await closeAll(`Response has an error: ${response.error}`)
+    if (response.error) await closeAll(response.error)
 
     if (!response.ok() && response.status() !== 304)
       await closeAll(`Response status code ${response.status()} for url ${url}`)

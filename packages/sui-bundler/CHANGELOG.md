@@ -1,5 +1,198 @@
 # CHANGELOG
 
+# 7.40.0 (2021-12-09)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** bundler analyzer with node 16 does not work because of dependencies insta ([997cefa](https://github.com/SUI-Components/sui/commit/997cefa49eb545c78146c67af2054cfaf254c66b))
+* **packages/sui-bundler:** prevent audit and fund on npm install ([70e1c59](https://github.com/SUI-Components/sui/commit/70e1c59ba0c8008b2ce98338e3a702738f12249f))
+
+
+
+# 7.39.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade version of webpack-dev-server ([15fb8f7](https://github.com/SUI-Components/sui/commit/15fb8f747ba8cd862debe53473fc066bccf452e1))
+* **packages/sui-bundler:** Use correct watch config ([adc7689](https://github.com/SUI-Components/sui/commit/adc7689f8d57a14f1ce46adf5af5c52b4df07e80))
+
+
+
+# 7.38.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Rollback watch config ([7bf2c67](https://github.com/SUI-Components/sui/commit/7bf2c67a92dbd9442731e79dfb7a39ffcfc78b06))
+
+
+
+# 7.37.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Avoid watching files on CI and make it configurable ([a623af5](https://github.com/SUI-Components/sui/commit/a623af566aee43eacfab962e88e9da840568298a))
+
+
+
+# 7.36.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([703a1bc](https://github.com/SUI-Components/sui/commit/703a1bc7bf34fe49739ec28999ecea98b93385c9))
+
+
+
+# 7.35.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove open for now ([2b7c28b](https://github.com/SUI-Components/sui/commit/2b7c28bae36b3496e375d47450634631046a4ace))
+
+
+
+# 7.34.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-bundler:** Adapt linter errors ([6f35331](https://github.com/SUI-Components/sui/commit/6f35331c568d39c636a953b265253e32e8bef71b))
+* **packages/sui-bundler:** Add License links ([b92db3a](https://github.com/SUI-Components/sui/commit/b92db3a150349a583c27e6df6ebbcef3711451a2))
+* **packages/sui-bundler:** Improve usability for dev mode ([cf8787d](https://github.com/SUI-Components/sui/commit/cf8787d3365bcddcdb7ccc1029dc426e94de6f6d))
+* **packages/sui-bundler:** Less noisy dev mode ([f5e21eb](https://github.com/SUI-Components/sui/commit/f5e21eb3d29164e0e92d3bda37739769cab99ab8))
+* **packages/sui-bundler:** Remove not needed line regarding deprecation notices ([a0962dc](https://github.com/SUI-Components/sui/commit/a0962dc2ea7959f4b1b089279895f21df5efdfe0))
+* **packages/sui-bundler:** Start migrating away from react-dev-utils ([3bbf7f4](https://github.com/SUI-Components/sui/commit/3bbf7f474297f5c5b0fa2f8886696ffbeec978c4))
+
+
+
+# 7.33.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies about babel ([740c02e](https://github.com/SUI-Components/sui/commit/740c02ea66a0fe1e86e1be9633ab8322d0fbd0d1))
+
+
+
+# 7.32.0 (2021-09-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Disable experimental css minificator ([f1ec960](https://github.com/SUI-Components/sui/commit/f1ec960badc968477e7a60ada762775b2067a23c))
+
+
+
+# 7.31.0 (2021-09-13)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade sui-bundler deps ([851b017](https://github.com/SUI-Components/sui/commit/851b0178f0653b475fe9fe94228bca7f60d44817))
+* **packages/sui-bundler:** Use latest webpack-dev-server ([0f5e33e](https://github.com/SUI-Components/sui/commit/0f5e33e08af4d07ea4059d73c016efb3a088c5d0))
+
+
+
+# 7.30.0 (2021-09-03)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove experimental css minifier ([db76fda](https://github.com/SUI-Components/sui/commit/db76fda795d7d75eaef0ff66321a8baee48dc07b))
+
+
+
+# 7.29.0 (2021-08-18)
+
+
+### Features
+
+* **packages/sui-bundler:** Improve build times by caching some transformations ([d65be77](https://github.com/SUI-Components/sui/commit/d65be7734118bd1ac58cce949fb8a8cc31d85784))
+
+
+
+# 7.28.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Use esbuild for CSS minification ([a4de64b](https://github.com/SUI-Components/sui/commit/a4de64b3f8d0d5faf63ddf393f9619637d297b33))
+
+
+
+# 7.27.0 (2021-08-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove chalk log ([cf666aa](https://github.com/SUI-Components/sui/commit/cf666aa39df481affd834d1f67b4c4923ab0aae5))
+
+
+
+# 7.26.0 (2021-07-16)
+
+
+### Features
+
+* **packages/sui-bundler:** add command option to link multiple packages ([2d04198](https://github.com/SUI-Components/sui/commit/2d04198b2a2a60c8276f3ab5ab2d00a797eb3a70))
+* **packages/sui-bundler:** add shorthand for linking packages in build script for consistency ([a04e7a9](https://github.com/SUI-Components/sui/commit/a04e7a903f87a3a52b9bfcb93da15511e3819170))
+* **packages/sui-bundler:** implement shorthand options for linking packages ([e6ad861](https://github.com/SUI-Components/sui/commit/e6ad861641c351916d3226f267844815208c0dff))
+
+
+
+# 7.25.0 (2021-06-29)
+
+
+
+# 7.24.0 (2021-06-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest babel dependencies ([66149cf](https://github.com/SUI-Components/sui/commit/66149cf287ac2282ea24c9e4a2e8e346cc431c30))
+
+
+
+# 7.23.0 (2021-06-15)
+
+
+### Features
+
+* **packages/sui-bundler:** add a way to measure build time ([4580fa5](https://github.com/SUI-Components/sui/commit/4580fa5d285ffcc895ad4d9cb648667021559ead))
+* **packages/sui-bundler:** add feature flags ([14a113e](https://github.com/SUI-Components/sui/commit/14a113e21a2f9a961c8e13bd2da70e97ae0c585a))
+* **packages/sui-bundler:** apply feedback ([8b30c77](https://github.com/SUI-Components/sui/commit/8b30c77b2adb2fa667f18759854a4f757374cb28))
+* **packages/sui-bundler:** fix linking reload ([f811078](https://github.com/SUI-Components/sui/commit/f81107897c4740e8040bf331364af87d25e98805))
+* **packages/sui-bundler:** remove beta version ([2fc75d4](https://github.com/SUI-Components/sui/commit/2fc75d464c3c216e58df41a884a623b9d3178db2))
+* **packages/sui-bundler:** remove production super sass loader support ([b3e9263](https://github.com/SUI-Components/sui/commit/b3e926300b9a0ff23d1d05a1f98add5e584f7e6a))
+* **packages/sui-bundler:** try fast sass loader ([abc350f](https://github.com/SUI-Components/sui/commit/abc350f74a8997c058dc924774358ec13c048360))
+* **packages/sui-bundler:** try super sass loader ([4b65379](https://github.com/SUI-Components/sui/commit/4b6537901ec82ebe54369edc491638d059c48e43))
+* **packages/sui-bundler:** update README ([031a195](https://github.com/SUI-Components/sui/commit/031a195229fe9df5cd91613d86d47f7a3dfc335a))
+
+
+
+# 7.22.0 (2021-06-01)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest webpack@4 version ([86c30e9](https://github.com/SUI-Components/sui/commit/86c30e974e891128aaa9d826cadff7f1ed69805d))
+
+
+
+# 7.21.0 (2021-05-27)
+
+
+### Features
+
+* **packages/sui-bundler:** Use same babel/loader dep across packages ([f0522db](https://github.com/SUI-Components/sui/commit/f0522db07adb52eb8a365ea5c19c1ccc3edfa98c))
+
+
+
 # 7.20.0 (2021-05-13)
 
 

@@ -18,8 +18,7 @@ const generateMinimalCSSHash = routes => {
 }
 
 const logMessageFactory = url => message =>
-  process.env.VERBOSE &&
-  console.log(`\u001b[36m[CRITICAL CSS](${url})\u001b[0m`, message)
+  process.env.VERBOSE && console.log(`[CRITICAL CSS](${url}): ${message}`)
 
 export default config => (req, res, next) => {
   const startCriticalCSSTime = process.hrtime()
@@ -36,7 +35,6 @@ export default config => (req, res, next) => {
   }
 
   if (req.skipSSR || !config || process.env.DISABLE_CRITICAL_CSS === 'true') {
-    logMessage("Skip middleware because it's inactive")
     return next()
   }
 

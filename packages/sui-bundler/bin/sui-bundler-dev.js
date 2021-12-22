@@ -8,8 +8,9 @@ process.on('unhandledRejection', err => {
 const program = require('commander')
 const path = require('path')
 const WebpackDevServer = require('webpack-dev-server')
-const clearConsole = require('react-dev-utils/clearConsole')
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
+
+const clearConsole = require('../utils/clearConsole')
+const checkRequiredFiles = require('../utils/checkRequiredFiles')
 const {
   choosePort,
   prepareUrls
@@ -24,23 +25,29 @@ const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
 const log = require('../shared/log')
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
-const HOST = process.env.HOST || '0.0.0.0'
+const {CI = false, HOST = '0.0.0.0'} = process.env
+const DEFAULT_WATCH = !CI
 
 if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
     .option(
-      '--link-all [monorepo]',
+      '-L, --link-all [monorepo]',
       'Link all packages inside of monorepo multipackage'
     )
     .option(
-      '--link-package [package]',
+      '-l, --link-package [package]',
       'Replace each occurrence of this package with an absolute path to this folder',
       (v, m) => {
         m.push(v)
         return m
       },
       []
+    )
+    .option(
+      '-w, --watch',
+      'Watch files and restart the server on change',
+      DEFAULT_WATCH
     )
     .on('--help', () => {
       console.log('  Examples:')
@@ -51,12 +58,10 @@ if (!module.parent) {
       console.log('')
     })
     .parse(process.argv)
+
   const {context} = program
   webpackConfig.context = context || webpackConfig.context
 }
-
-// Don't show ugly deprecation warnings that mess with the logging
-process.noDeprecation = true
 
 const start = async ({
   config = webpackConfig,
@@ -85,13 +90,20 @@ const start = async ({
   })
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
-  const devServer = new WebpackDevServer(compiler, serverConfig)
+  const devServer = new WebpackDevServer(
+    {
+      ...serverConfig,
+      port,
+      host: HOST
+    },
+    compiler
+  )
   log.processing('❯ Starting the development server...\n')
-  devServer.listen(port, HOST, err => {
+  devServer.startCallback(err => {
     if (err) return log.error(err)
     ;['SIGINT', 'SIGTERM'].forEach(sig => {
       process.on(sig, () => {
-        devServer.close()
+        devServer.stop()
         process.exit()
       })
     })

@@ -1,14 +1,12 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.6.0",
+  "version": "1.9.0",
   "description": "",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib",
-    "test": "npm run test:server && npm run test:browser",
-    "test:browser": "NODE_ENV=test sui-test browser",
-    "test:server": "NODE_ENV=test sui-test server"
+    "lib": "rm -rf ./lib && tsc",
+    "prepare": "npm run lib"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +15,12 @@
     "react-head": "3.4.0"
   },
   "devDependencies": {
-    "@s-ui/test": "4",
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17"
   },
   "peerDependencies": {
     "react": "16 || 17",
-    "react-dom": "16 || 17"
+    "react-dom": "16 || 17"
   }
 }

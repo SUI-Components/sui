@@ -21,6 +21,7 @@ require('core-js/features/string/trim')
 require('core-js/features/string/pad-end')
 require('core-js/features/string/pad-start')
 
+require('core-js/features/url')
 require('core-js/features/url-search-params')
 
 require('core-js/features/map/map-keys')
@@ -28,5 +29,6 @@ require('core-js/features/map/map-keys')
 require('core-js/features/symbol')
 
 require('./element-closest')
+require('./globalThis')
 
 module.exports = {}

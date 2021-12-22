@@ -13,9 +13,9 @@ const {componentsFullPath} = require('./helpers/walker')
 const {PWD} = process.env
 
 program
-  .option('--link-all', 'Link all component inside the studio')
+  .option('-L, --link-all', 'Link all component inside the studio')
   .option(
-    '--link-package [package]',
+    '-l, --link-package [package]',
     'Link all component inside the studio',
     (v, m) => {
       m.push(v)
