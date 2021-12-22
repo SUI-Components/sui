@@ -1,12 +1,14 @@
 import path from 'path'
 import fs from 'fs'
 import {expect} from 'chai'
-import {publicFolder} from '../../server/utils'
-import utilsFactory from '../../server/utils/factory'
-import {getMockedRequest} from './fixtures'
-import {publicFolderWithMultiSiteConfig} from './fixtures/utils'
+import {publicFolder} from '../../server/utils/index.js'
+import utilsFactory from '../../server/utils/factory.js'
+import {getMockedRequest} from './fixtures/index.js'
+import {publicFolderWithMultiSiteConfig} from './fixtures/utils.js'
+
 const ASYNC_CSS_ATTRS =
   'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';'
+
 describe('[sui-ssr] Utils', () => {
   describe('Public folder', () => {
     describe('In a multi site project', () => {
@@ -42,7 +44,8 @@ describe('[sui-ssr] Utils', () => {
           createStylesFor: {
             appStyles: 'AppStyles'
           }
-        }
+        },
+        assetsManifest: {}
       })
 
       const styles = createStylesFor()
