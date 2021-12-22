@@ -197,6 +197,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
   return {
     buildRequestUrl,
+    getAssetsManifest,
     createStylesFor,
     hostFromReq,
     hrTimeToMs,
