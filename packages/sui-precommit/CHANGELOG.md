@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.15.0 (2021-12-23)
+
+
+### Features
+
+* **packages/sui-precommit:** Add file extension to imports ([5ab9b6f](https://github.com/SUI-Components/sui/commit/5ab9b6fd0753fb3fa27828d177a978fbaf453e50))
+* **packages/sui-precommit:** Migrate package to ESModules ([3ab3b9e](https://github.com/SUI-Components/sui/commit/3ab3b9eae41cbd894046929f99317a1dda3f8dd6))
+
+
+
 # 2.14.0 (2021-05-17)
 
 
