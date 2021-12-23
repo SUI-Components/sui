@@ -5,7 +5,7 @@
   "bin": {
     "sui-dashboard": "./bin/sui-dashboard.js"
   },
-  "main": "src/index.js",
+  "type": "module",
   "scripts": {},
   "keywords": [],
   "author": "",
