@@ -5,7 +5,7 @@ import {writeFileSync} from 'fs'
 import {tmpdir} from 'os'
 import {join} from 'path'
 import commander from 'commander'
-import {parallelSpawn, serialSpawn} from '@s-ui/helpers/cli'
+import {parallelSpawn, serialSpawn} from '@s-ui/helpers/cli.js'
 import {stats} from '../src/index.js'
 
 commander

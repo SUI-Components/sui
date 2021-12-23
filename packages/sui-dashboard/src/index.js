@@ -1,4 +1,4 @@
-import {sync} from 'fast-glob'
+import fg from 'fast-glob'
 import {readFileSync} from 'fs'
 
 const flat = arr => [].concat(...arr)
@@ -6,10 +6,12 @@ const flat = arr => [].concat(...arr)
 const getPackageContent = filepath => JSON.parse(readFileSync(filepath))
 
 export async function stats({repositories, root, getVersions = false}) {
-  const suiComponents = sync([
-    `${root}/sui-components/components/**/package.json`,
-    '!**/node_modules/**'
-  ]).map(path => require(path).name)
+  const suiComponents = fg
+    .sync([
+      `${root}/sui-components/components/**/package.json`,
+      '!**/node_modules/**'
+    ])
+    .map(path => require(path).name)
 
   const componentsInstalled = flat(
     repositories.map(repo => [
@@ -18,7 +20,7 @@ export async function stats({repositories, root, getVersions = false}) {
     ])
   )
 
-  const dirs = sync(componentsInstalled, {onlyDirectories: true})
+  const dirs = fg.sync(componentsInstalled, {onlyDirectories: true})
 
   const statsSUIComponentUsedInProjects = suiComponents.reduce(
     (acc, component) => {
