@@ -1,6 +1,7 @@
+// @ts-check
 /* eslint no-console:0 */
 
-const colors = require('colors')
+const colors = require('@s-ui/helpers/colors')
 const spawn = require('child_process').spawn
 const fs = require('fs-extra')
 const program = require('commander')

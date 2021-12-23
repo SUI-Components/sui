@@ -1,5 +1,64 @@
 # CHANGELOG
 
+# 8.116.0 (2021-12-02)
+
+
+
+# 8.115.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-theme:** add new variable: border input focus ([f695ef2](https://github.com/SUI-Components/sui/commit/f695ef206f7fad0e1a1e16702358c2bb239ba1e6))
+
+
+
+# 8.114.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-theme:** Avoid using copyfiles dependency for copying files ([5079245](https://github.com/SUI-Components/sui/commit/5079245570fa0f774cf8d592dea587253565a84b))
+
+
+
+# 8.113.0 (2021-11-11)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** add deleted styles again to s-ui theme in order to fix breaking change in o ([05d7d98](https://github.com/SUI-Components/sui/commit/05d7d98d6c7e29a3a7390cb2fd8ded98e8f0dead))
+
+
+
+# 8.112.0 (2021-11-10)
+
+
+### Features
+
+* **packages/sui-theme:** Scss changes for the atom input ([eae13ef](https://github.com/SUI-Components/sui/commit/eae13ef932b5ced3f1fc2d80a59bfb993981b7db))
+
+
+
+# 8.111.0 (2021-11-08)
+
+
+### Features
+
+* **packages/sui-theme:** Add default values for thumbnail basic ([683d079](https://github.com/SUI-Components/sui/commit/683d0790d2c75af0ae9d6880a9a0116694445ed7))
+* **packages/sui-theme:** Add default! to avoid being overwritten ([b7fdb82](https://github.com/SUI-Components/sui/commit/b7fdb824c1028bdb015d3fa42f55bbbf37d19a9c))
+
+
+
+# 8.110.0 (2021-10-29)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** replace [@use](https://github.com/use) for [@import](https://github.com/import) ([ee0893c](https://github.com/SUI-Components/sui/commit/ee0893cbd38bf77724a9bcd29cc98e1e1050424d))
+
+
+
 # 8.109.0 (2021-10-28)
 
 
@@ -39,6 +98,7 @@
 
 ### Features
 
+* **packages/sui-theme:** add new bdrs circular ([a98881d](https://github.com/SUI-Components/sui/commit/a98881d9dda533ddbd690bf7a4722663d4380584))
 * **packages/sui-theme:** Add new l and xl input sizes ([66a0e02](https://github.com/SUI-Components/sui/commit/66a0e02abea1c8993a4612134f6194cbb1d6f296))
 
 

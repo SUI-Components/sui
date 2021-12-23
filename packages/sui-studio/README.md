@@ -46,7 +46,11 @@ Use `-C path` or `--context path` parameter to generate the component with a giv
 $ npx sui-studio generate house window -C ./myCustomContext.js
 ```
 
-### To develop the new component,
+### Use new compiler
+
+We're migrating to `swc` so you could generate the new component with the expected `prepare` field by using the flag `--swc` or `-W`.
+
+### To develop the new component
 
 #### 1) Launch the development environment
 
@@ -127,7 +131,18 @@ Launch a development environment where you can work in total isolation on your c
 
 ### `$ sui-studio test`
 
-Launch all project tests in a karma browser.
+Launch all project tests in a Karma browser.
+
+### `$ cpx`
+
+This command allow you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.  
+
+#### Examples
+
+```sh
+# copy all files with scss extension from src to lib
+$ cpx './src/**/*.scss' ./lib
+```
 
 ## Testing
 
@@ -272,16 +287,14 @@ Add this scripts on your own components project
 ```
 // package.json
 {
-  ...
   scripts: {
-    ...
-	test: "sui-studio test"
-	test:watch: "sui-studio test --watch"
-    ...
+	  "test": "sui-studio test",
+	  "test:watch": "sui-studio test --watch"
   }
-  ...
 }
 ```
+
+If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
 
 ## File structure
 

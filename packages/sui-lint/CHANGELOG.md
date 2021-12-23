@@ -1,5 +1,52 @@
 # CHANGELOG
 
+# 3.43.0 (2021-12-15)
+
+
+### Features
+
+* **packages/sui-lint:** Add rule to check extensions on files ([00689b9](https://github.com/SUI-Components/sui/commit/00689b944502edb6978a58861b018d6b67009d5a))
+
+
+
+# 3.42.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-lint:** Get range of commits only for CI ([36f68bb](https://github.com/SUI-Components/sui/commit/36f68bb9f1cf18e18a462c5277003158ae727e73))
+
+
+
+# 3.41.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-lint:** Simplify logging logic to show all files always ([6cb5012](https://github.com/SUI-Components/sui/commit/6cb5012d12a82ac1ab1bd6020facbbb9c385b749))
+* **packages/sui-lint:** Use correct commit range for PRs ([f124aa5](https://github.com/SUI-Components/sui/commit/f124aa54b6b2ca6ea20d5c0493e445e01b8d6281))
+
+
+
+# 3.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-lint:** Better control over undefined values for after and before ([0b19792](https://github.com/SUI-Components/sui/commit/0b197927c1afa5ea2b2b30bfd2ea031d10005395))
+* **packages/sui-lint:** Get commit range on GitHub Actions on linter ([4fe7503](https://github.com/SUI-Components/sui/commit/4fe7503822caf95a4228486de90828ad8ac7e4a2))
+
+
+
+# 3.39.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([2719b6c](https://github.com/SUI-Components/sui/commit/2719b6cbebc15872f107661ee45775a7a69dac04))
+
+
+
 # 3.38.0 (2021-10-22)
 
 

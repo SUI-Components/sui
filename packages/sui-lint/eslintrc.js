@@ -86,6 +86,7 @@ module.exports = {
     'array-callback-return': RULES.WARNING,
     'import/no-webpack-loader-syntax': RULES.WARNING,
     'node/no-path-concat': RULES.WARNING,
+    'import/extensions': [RULES.WARNING, 'always', {ignorePackages: true}],
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,

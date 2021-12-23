@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.5.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade sui-svg dependencies ([c176aca](https://github.com/SUI-Components/sui/commit/c176acab5f9179f2c6b7cc17dcf1d4a376e26590))
+
+
+
 # 3.4.0 (2021-10-18)
 
 

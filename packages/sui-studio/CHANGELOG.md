@@ -1,5 +1,97 @@
 # CHANGELOG
 
+# 10.42.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-studio:** Stop using not needed loader ([9a7dc75](https://github.com/SUI-Components/sui/commit/9a7dc75b1812dd4c55b574ef79d8cba57c41422f))
+* **packages/sui-studio:** Use colors from @s-ui/helpers instead dependency ([da1cf07](https://github.com/SUI-Components/sui/commit/da1cf07a1469f6d3a86eeaa6f45ae89eec1d3a04))
+
+
+
+# 10.41.0 (2021-11-26)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct conditional ([3adaf68](https://github.com/SUI-Components/sui/commit/3adaf68b732385ac20cebc687f51e21adb7f7b46))
+
+
+
+# 10.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-studio:** Add check when no files are found and config is object by default ([557a11b](https://github.com/SUI-Components/sui/commit/557a11b3c2d105aa6ea4e04936af05959b61bf99))
+* **packages/sui-studio:** Create new copyfiles command and avoid using copyfiles package ([88cc759](https://github.com/SUI-Components/sui/commit/88cc759a643995725ce1f28598dc994175278de2))
+
+
+
+# 10.39.0 (2021-11-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix prepare script to copy styles ([5e9c0fd](https://github.com/SUI-Components/sui/commit/5e9c0fd784c1aba7b452e3e3635fb0ca6ba54d63))
+
+
+
+# 10.38.0 (2021-11-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix typo ([b7e79f1](https://github.com/SUI-Components/sui/commit/b7e79f150da1ae515c952396b26a8e813bedad92))
+
+
+
+# 10.37.0 (2021-11-17)
+
+
+### Features
+
+* **packages/sui-studio:** Add new flag to create components using new compiler ([8770599](https://github.com/SUI-Components/sui/commit/87705997d13a5254b1af4e4576e415db96ce9ba9))
+
+
+
+# 10.36.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-studio:** add categories env variable ([9280ff2](https://github.com/SUI-Components/sui/commit/9280ff2b5a3aefc11310daabc05c6c7b9d381c87))
+
+
+
+# 10.35.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Better error output ([03ce37f](https://github.com/SUI-Components/sui/commit/03ce37fd13bb6a172d3d6ffd8206c403fc8f2eae))
+
+
+
+# 10.34.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Simplify @babel/cli version to use the same as others packages ([629e759](https://github.com/SUI-Components/sui/commit/629e759ba78968d440c55d00a04fa1ab92fe69f0))
+
+
+
+# 10.33.0 (2021-11-03)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** prettier spacing error ([2b483c2](https://github.com/SUI-Components/sui/commit/2b483c23f0681e0caca3c41e1037beb7eb0e97a3))
+
+
+
 # 10.32.0 (2021-10-27)
 
 

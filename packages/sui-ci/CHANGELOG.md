@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.23.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-ci:** Unify versions of same package ([3032dfd](https://github.com/SUI-Components/sui/commit/3032dfdcd205dc67368bd950e1c8cf17900f8bb7))
+
+
+
 # 1.22.0 (2021-07-19)
 
 

@@ -1,10 +1,11 @@
+// @ts-check
 /* eslint no-console:0 */
 const fs = require('fs')
 const path = require('path')
 const {spawn} = require('child_process')
 
 const program = require('commander')
-const colors = require('colors')
+const colors = require('@s-ui/helpers/colors')
 const toKebabCase = require('just-kebab-case')
 const toPascalCase = require('just-pascal-case')
 
@@ -15,6 +16,7 @@ program
   .option('-C, --context [customContextPath]', 'add context for this component')
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
+  .option('-W, --swc', 'Use the new SWC compiler', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -64,7 +66,7 @@ const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 const TEST_DIR = `${COMPONENT_PATH}/test/`
 const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, scope, prefix = 'sui'} = program
+const {context, scope, prefix = 'sui', swc} = program
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
@@ -121,7 +123,7 @@ describe${context ? '.context.default' : ''}('${componentInPascal}', ${
     expect(container.innerHTML).to.be.a('string')
     expect(container.innerHTML).to.not.have.lengthOf(0)
   })
-  
+
   it.skip('should NOT extend classNames', () => {
     // Given
     const props = {className: 'extended-classNames'}
@@ -150,6 +152,10 @@ const defaultContext = `module.exports = {
   }
 }
 `
+
+const buildJs = swc
+  ? 'sui-js-compiler'
+  : 'babel --presets sui ./src --out-dir ./lib'
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
@@ -192,7 +198,7 @@ test
   "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build:js && npm run build:styles",
-    "build:js": "babel --presets sui ./src --out-dir ./lib",
+    "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },
   "peerDependencies": {

@@ -1,5 +1,61 @@
 # CHANGELOG
 
+# 7.40.0 (2021-12-09)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** bundler analyzer with node 16 does not work because of dependencies insta ([997cefa](https://github.com/SUI-Components/sui/commit/997cefa49eb545c78146c67af2054cfaf254c66b))
+* **packages/sui-bundler:** prevent audit and fund on npm install ([70e1c59](https://github.com/SUI-Components/sui/commit/70e1c59ba0c8008b2ce98338e3a702738f12249f))
+
+
+
+# 7.39.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade version of webpack-dev-server ([15fb8f7](https://github.com/SUI-Components/sui/commit/15fb8f747ba8cd862debe53473fc066bccf452e1))
+* **packages/sui-bundler:** Use correct watch config ([adc7689](https://github.com/SUI-Components/sui/commit/adc7689f8d57a14f1ce46adf5af5c52b4df07e80))
+
+
+
+# 7.38.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Rollback watch config ([7bf2c67](https://github.com/SUI-Components/sui/commit/7bf2c67a92dbd9442731e79dfb7a39ffcfc78b06))
+
+
+
+# 7.37.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-bundler:** Avoid watching files on CI and make it configurable ([a623af5](https://github.com/SUI-Components/sui/commit/a623af566aee43eacfab962e88e9da840568298a))
+
+
+
+# 7.36.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([703a1bc](https://github.com/SUI-Components/sui/commit/703a1bc7bf34fe49739ec28999ecea98b93385c9))
+
+
+
+# 7.35.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Remove open for now ([2b7c28b](https://github.com/SUI-Components/sui/commit/2b7c28bae36b3496e375d47450634631046a4ace))
+
+
+
 # 7.34.0 (2021-10-28)
 
 

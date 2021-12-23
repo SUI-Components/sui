@@ -1,5 +1,64 @@
 # CHANGELOG
 
+# 1.10.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc compiler version ([d0b0083](https://github.com/SUI-Components/sui/commit/d0b0083a57aab9358b2a455bf2279fa3af3f6260))
+
+
+
+# 1.9.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependency ([ff5e1bf](https://github.com/SUI-Components/sui/commit/ff5e1bf681935e5fd85ff151eee29e3583dc3226))
+* **packages/sui-js-compiler:** Upgrade swc/helpers ([37cb14d](https://github.com/SUI-Components/sui/commit/37cb14d60f905324d62c2a57bfb4c822d5c8a72a))
+
+
+
+# 1.8.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependency ([e62272a](https://github.com/SUI-Components/sui/commit/e62272a430de57716da12701acd3e33c2e23f14d))
+
+
+
+# 1.7.0 (2021-11-08)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Use strict ([6641ad9](https://github.com/SUI-Components/sui/commit/6641ad98a71c707e698c9428358cfb22ad202583))
+
+
+
+# 1.6.0 (2021-11-08)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc-core dependency ([91f9cad](https://github.com/SUI-Components/sui/commit/91f9cad777d7f929d7a75c7f42c83533bfd9c4c5))
+
+
+
+# 1.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc-core dependency ([340849a](https://github.com/SUI-Components/sui/commit/340849adc55654c0527a85064789c464c77e7f34))
+
+
+
+# 1.4.0 (2021-11-02)
+
+
+
 # 1.3.0 (2021-10-26)
 
 
