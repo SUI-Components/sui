@@ -11,7 +11,7 @@ const Cache = require('./cache')
 const utils = require('./utils')
 
 const BOM_HEADER = '\uFEFF'
-const EXT_PRECEDENCE = ['.scss', '.sass', '.css']
+const EXT_PRECEDENCE = ['.scss', '.css']
 const MATCH_URL_ALL = /url\(\s*(['"]?)([^ '"()]+)(\1)\s*\)/g
 const MATCH_IMPORTS = /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_USES = /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
@@ -25,14 +25,23 @@ const MATCH_FILES = /(['"])([^,;'"]+)(\1)/g
  * @returns {Array<string>} Return array of possible import files to resolve
  */
 function getImportsToResolve(original, includePaths, transformers) {
+  /**
+   * We're fixing when the import to a node_modules is not using the ~ symbol at the beggining
+   * In order to keep it retrocompatible, we're matching the packages starting with a @
+   * like @s-ui/icons, and then adding the ~ as needed.
+   */
+  if (original.startsWith('@')) {
+    original = `~${original}`
+  }
+
   const extname = path.extname(original)
   let basename = path.basename(original, extname)
   const dirname = path.dirname(original)
 
   // is module import
-  if (original.startsWith('~') && (dirname === '.' || !dirname.includes('/'))) {
-    return [original]
-  }
+  // if ((original.startsWith('~')) && (dirname === '.' || !dirname.includes('/'))) {
+  //   return [original]
+  // }
 
   const imports = []
   let names = [basename]
