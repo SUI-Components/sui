@@ -54,7 +54,7 @@ describe('test sass-loader', function() {
   /**
    * First test needs a lot of time to boot up. We still don't know exactly why, but a high timeout is needed to avoid breaking tests on CI.
    */
-  this.timeout(30000)
+  this.timeout(60000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
 
