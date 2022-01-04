@@ -50,7 +50,7 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
   })
 }
 
-describe.only('test sass-loader', function() {
+describe('test sass-loader', function() {
   /**
    * First test needs a lot of time to boot up. We still don't know exactly why, but a high timeout is needed to avoid breaking tests on CI.
    */
@@ -112,6 +112,10 @@ describe.only('test sass-loader', function() {
 
   it('should compile files loaded async', function(done) {
     runSimpleTest(done, 'async', 'async')
+  })
+
+  it('should handle files with @use', function(done) {
+    runSimpleTest(done, 'with-use')
   })
 
   it('should load normal sass file without url resolving', function(done) {
