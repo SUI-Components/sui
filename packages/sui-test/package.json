@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "7.16.0",
+    "@babel/core": "7.16.7",
     "@babel/plugin-transform-modules-commonjs": "7.16.0",
     "@babel/register": "7.16.0",
     "@s-ui/helpers": "1",
