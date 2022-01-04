@@ -201,7 +201,7 @@ function* mergeSources(
   // replace url(...)
   if (opts.resolveURLs) {
     content = content.replace(MATCH_URL_ALL, (total, left, file, right) => {
-      if (file.startsWith('data:')) return total
+      if (!file.startsWith('.')) return total
 
       if (loaderUtils.isUrlRequest(file)) {
         // handle url(<loader>!<file>)
