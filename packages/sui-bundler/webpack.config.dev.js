@@ -41,7 +41,8 @@ const webpackConfig = {
       ...aliasFromConfig
     },
     fallback: {
-      fs: false
+      fs: false,
+      url: require.resolve('url/')
     },
     modules: ['node_modules', path.resolve(process.cwd())],
     extensions: ['.js', '.json']
