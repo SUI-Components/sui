@@ -42,6 +42,7 @@ const webpackConfig = {
     },
     fallback: {
       fs: false,
+      buffer: require.resolve('buffer/'),
       url: require.resolve('url/')
     },
     modules: ['node_modules', path.resolve(process.cwd())],
