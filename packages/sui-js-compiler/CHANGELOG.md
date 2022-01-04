@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.11.0 (2021-12-21)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** revert version change ([d41cc28](https://github.com/SUI-Components/sui/commit/d41cc28f8d5e4cd76280ed7a39713e7fc6e4fd8f))
+* **packages/sui-js-compiler:** use last version of swc core and helpers ([c3cee84](https://github.com/SUI-Components/sui/commit/c3cee8459c0f2eace6d5e32eecb5945f11b15d6f))
+
+
+
 # 1.10.0 (2021-11-30)
 
 

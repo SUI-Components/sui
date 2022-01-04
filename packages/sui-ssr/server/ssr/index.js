@@ -94,7 +94,7 @@ export default async (req, res, next) => {
   const pageName = pageComponent.displayName
 
   if (ssrConfig.createStylesFor && pageName) {
-    const pageStyles = createStylesFor({pageName, async: hasCriticalCSS})
+    const pageStyles = createStylesFor({pageName, async: hasCriticalCSS, req})
     let nextHeadTplPart = headTplPart.replace(
       HEAD_OPENING_TAG,
       `${HEAD_OPENING_TAG}${pageStyles}`
