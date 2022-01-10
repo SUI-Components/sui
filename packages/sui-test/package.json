@@ -22,6 +22,7 @@
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "6.0.0",
     "babel-preset-sui": "3",
+    "colors": "1.4.0",
     "commander": "6.2.1",
     "karma": "6.3.4",
     "karma-chrome-launcher": "3.1.0",
