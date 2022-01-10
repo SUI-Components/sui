@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.44.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade babel dependencies ([6e83503](https://github.com/SUI-Components/sui/commit/6e83503e79504299df37e8be024d4d2e79405ee3))
+
+
+
 # 3.43.0 (2021-12-15)
 
 
