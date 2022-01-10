@@ -23,7 +23,8 @@ if (!topic) {
   console.log(
     'An argument is required. Please, try using "test" or "demo" topic'
   )
-  return
+
+  process.exit(1)
 }
 
 if (topic === 'demo') migrateDemoFolders()
