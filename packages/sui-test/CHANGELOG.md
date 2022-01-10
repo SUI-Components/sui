@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.7.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test:** Pin colors version on package.json ([36bd496](https://github.com/SUI-Components/sui/commit/36bd4963d64527ded0c6c40303fc989b619967c3))
+
+
+
 # 6.6.0 (2021-11-12)
 
 
