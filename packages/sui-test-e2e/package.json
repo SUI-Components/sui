@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@testing-library/cypress": "8.0.1",
+    "colors": "1.4.0",
     "commander": "8.2.0",
     "cypress": "8.6.0",
     "cypress-file-upload": "5.0.8"
