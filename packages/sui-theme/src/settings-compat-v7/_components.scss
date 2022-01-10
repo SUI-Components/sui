@@ -122,8 +122,8 @@ $c-button-flat-icon-stroke: transparent !default;
 $bgc-button-flat-active: $c-gray !default;
 
 // Card
-$bdc-article-featured: $c-featured !default;
 $bd-article-featured: $bdw-l solid $bdc-article-featured !default;
+$bdc-article-featured: $c-featured !default;
 $bdrs-card: 0 !default;
 $bxsh-card: $bxsh-base !default;
 $bxsh-card-hover: 0 1px 6px 2px rgba($c-black, 0.15) !default;
