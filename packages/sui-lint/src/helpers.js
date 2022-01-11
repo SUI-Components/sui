@@ -87,7 +87,7 @@ const getCommitRange = () => {
     const base = pullRequest?.base?.sha ?? before
     const head = pullRequest?.head?.sha ?? after
 
-    if (after && before) {
+    if (base && head) {
       const commitRange = `${base}...${head}`
       console.log(`[sui-lint] Using commit range: ${commitRange}`)
       return commitRange
