@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.118.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** fix variable declaration order ([d7ab7a9](https://github.com/SUI-Components/sui/commit/d7ab7a957224b5dc6f2c3cfcd4e64400abc93933))
+
+
+
 # 8.117.0 (2022-01-10)
 
 
