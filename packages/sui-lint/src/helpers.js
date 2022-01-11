@@ -87,7 +87,15 @@ const getCommitRange = () => {
     const base = pullRequest?.base?.sha ?? before
     const head = pullRequest?.head?.sha ?? after
 
-    if (after && before) return `${base}...${head}`
+    if (after && before) {
+      const commitRange = `${base}...${head}`
+      console.log(`[sui-lint] Using commit range: ${commitRange}`)
+      return commitRange
+    }
+
+    console.log(
+      '[sui-lint] No commit range found using GitHub Event from Actions'
+    )
   }
 
   return null
