@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 3.45.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Show correct number of linted files ([1e2509f](https://github.com/SUI-Components/sui/commit/1e2509f7f0aafe4d325843e631acf575bd0940ad))
+
+
+### Features
+
+* **packages/sui-lint:** Use better logging for sui-lint on Actions ([2e73a6c](https://github.com/SUI-Components/sui/commit/2e73a6c64a9138481542c5a0e1c124832d010705))
+
+
+
 # 3.44.0 (2022-01-10)
 
 
