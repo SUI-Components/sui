@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.46.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Use correct conditional for PRs on Actions ([7c11422](https://github.com/SUI-Components/sui/commit/7c1142263ab11ea46acd0af9f32bf0fef63d5bc6))
+
+
+
 # 3.45.0 (2022-01-11)
 
 
