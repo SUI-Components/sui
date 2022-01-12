@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "3.43.0",
+  "version": "3.46.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -16,9 +16,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.16.0",
-    "@babel/eslint-parser": "7.16.0",
-    "@babel/eslint-plugin": "7.14.5",
+    "@babel/core": "7.16.7",
+    "@babel/eslint-parser": "7.16.5",
+    "@babel/eslint-plugin": "7.16.5",
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
     "eslint": "7.16.0",
@@ -27,7 +27,7 @@
     "eslint-config-standard-react": "9.2.0",
     "eslint-plugin-chai-friendly": "0.6.0",
     "eslint-plugin-cypress": "2.12.1",
-    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-import": "2.25.4",
     "eslint-plugin-no-only-tests": "2.6.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.1.4",

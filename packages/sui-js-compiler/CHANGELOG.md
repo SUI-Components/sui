@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependencies ([185dfba](https://github.com/SUI-Components/sui/commit/185dfba31e665c27df8ec478562e680097f79309))
+
+
+
 # 1.11.0 (2021-12-21)
 
 

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 8.118.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** fix variable declaration order ([d7ab7a9](https://github.com/SUI-Components/sui/commit/d7ab7a957224b5dc6f2c3cfcd4e64400abc93933))
+
+
+
+# 8.117.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-theme:** allow to overwrite the card article description color ([3f95a1c](https://github.com/SUI-Components/sui/commit/3f95a1ca947e5d1502f4c4ed2b44a50dcc9f9f8b))
+
+
+
 # 8.116.0 (2021-12-02)
 
 

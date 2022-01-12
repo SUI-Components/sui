@@ -1,10 +1,10 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
-const colors = require('colors')
 const fs = require('fs')
 const path = require('path')
 const {showError} = require('@s-ui/helpers/cli')
+const colors = require('@s-ui/helpers/colors')
 const {writeFile} = require('@s-ui/helpers/file')
 
 const indexJS = require('../file-templates/_index.js.js')
@@ -30,7 +30,7 @@ program
     console.log('    $ custom-help -h')
     console.log('')
     console.log(
-      colors.magenta(
+      colors.cyan(
         '    IMPORTANT - Regexp (-E) must be with commas ALWAYS to avoid terminal escape or interpretation'
       )
     )

@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
-import {ssrConfig, ssrMultiSiteConfig} from './'
-import utilsFactory from '../../../server/utils/factory'
+import {ssrConfig, ssrMultiSiteConfig} from './index.js'
+import utilsFactory from '../../../server/utils/factory.js'
 
 const {buildRequestUrl: buildRequestUrlWithConfig} = utilsFactory({
   path,
