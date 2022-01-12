@@ -118,6 +118,10 @@ describe('test sass-loader', function() {
     runSimpleTest(done, 'with-use')
   })
 
+  it('should handle themes and default values', function(done) {
+    runSimpleTest(done, 'using-variables-with-default')
+  })
+
   it('should load normal sass file without url resolving', function(done) {
     const config = require('./fixtures/normal-no-url-resolve/webpack.config.js')
     const compiler = webpack(config)
