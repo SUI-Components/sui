@@ -70,6 +70,9 @@ const webpackConfig = {
     runtimeChunk: true
   },
   plugins: cleanList([
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    }),
     new webpack.ids.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
