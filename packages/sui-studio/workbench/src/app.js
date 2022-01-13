@@ -2,10 +2,10 @@
 import ReactDOM from 'react-dom'
 
 import './styles.scss'
-import Root from './components/Root'
-import Raw from './components/Raw'
-import {isFunction} from '../../src/components/demo/utilities'
-import {importGlobals} from '../../src/components/globals'
+import Root from './components/Root/index.js'
+import Raw from './components/Raw/index.js'
+import {isFunction} from '../../src/components/demo/utilities.js'
+import {importGlobals} from '../../src/components/globals.js'
 
 const queryStringToJSON = queryString => {
   if (queryString.indexOf('?') > -1) {
