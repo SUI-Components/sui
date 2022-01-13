@@ -11,7 +11,8 @@ const PORT = process.env.PORT || config.devPort || 3000
 config.port = PORT
 
 program
-  .usage('-p detail -a address')
+  .usage('-p detail -a address -b')
+  .option('-b, --browser', 'Enable the dev mode inside a html file')
   .option('-p, --page <name>', 'Name of the page')
   .option(
     '-a, --address <ip-address>',
@@ -33,9 +34,9 @@ program
   })
   .parse(process.argv)
 
-const {address, page} = program
+const {address, browser, page} = program
 
-appFactory({address, page, config}).listen(PORT, () => {
+appFactory({address, browser, page, config}).listen(PORT, () => {
   const scriptToExecute = `(function(s,o,g,r,a,m){a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(document,'script','http://${address}:${PORT}/bundle.js');`
   ncp.copy(scriptToExecute)
   console.log(

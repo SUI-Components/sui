@@ -3,9 +3,10 @@ const express = require('express')
 
 const app = express()
 
-module.exports = ({address, page, config}) => {
+module.exports = ({address, browser, page, config}) => {
   const compiler = require('../compiler/development')({
     address,
+    browser,
     page,
     port: config.port
   })
