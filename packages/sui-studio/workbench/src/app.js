@@ -31,7 +31,17 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   let styles = []
   let requireContextThemesKeys = []
+
   try {
+    /**
+     * TODO: In this case, it seems that we're getting twice the same theme
+     * Example:
+     * [
+     *  "./adevinta.scss",
+     *  "components/atom/button/demo/themes/adevinta.scss"
+     * ]
+     * We might want to filter those to avoid importAll to import twice the same
+     */
     const requireContextThemes = require.context(
       '!css-loader!@s-ui/sass-loader!demo/themes',
       false,
@@ -58,8 +68,11 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
   const themes = requireContextThemesKeys.reduce((acc, path, index) => {
+    const filename = path.indexOf('/') ? path.split('/').reverse()[0] : path
+
+    const themeName = filename.replace('./', '').replace('.scss', '')
+
     const style = styles[index]
-    const themeName = path.replace('./', '').replace('.scss', '')
     acc[themeName] = style.default || style
     return acc
   }, {})
