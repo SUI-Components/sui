@@ -72,7 +72,7 @@ if (clean) {
   rimraf.sync(outputFolder)
 }
 
-log.processing('Generating minified bundle. This will take a moment...')
+log.processing('Generating minified bundle...')
 
 webpack(webpackConfig).run((error, stats) => {
   if (error) {

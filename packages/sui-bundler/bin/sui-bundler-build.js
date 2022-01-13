@@ -59,7 +59,7 @@ if (clean) {
   rimraf.sync(path.resolve(process.env.PWD, 'public'))
 }
 
-log.processing('Generating minified bundle. This will take a moment...')
+log.processing('Generating minified bundle...')
 
 webpack(nextConfig).run(async (error, stats) => {
   if (error) {
