@@ -9,21 +9,22 @@ const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+
 const {
   when,
   cleanList,
   envVars,
   MAIN_ENTRY_POINT,
   config
-} = require('./shared/index')
-const minifyJs = require('./shared/minify-js')
-const minifyCss = require('./shared/minify-css')
-const definePlugin = require('./shared/define')
-const babelRules = require('./shared/module-rules-babel')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {extractComments, sourceMap} = require('./shared/config')
-const {aliasFromConfig} = require('./shared/resolve-alias')
-const {resolveLoader} = require('./shared/resolve-loader')
+} = require('./shared/index.js')
+const {aliasFromConfig} = require('./shared/resolve-alias.js')
+const {extractComments, sourceMap} = require('./shared/config.js')
+const {resolveLoader} = require('./shared/resolve-loader.js')
+const babelRules = require('./shared/module-rules-babel.js')
+const definePlugin = require('./shared/define.js')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const minifyCss = require('./shared/minify-css.js')
+const minifyJs = require('./shared/minify-js.js')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 

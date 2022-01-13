@@ -31,6 +31,7 @@ const webpackConfig = {
   },
   optimization: {
     checkWasmTypes: false,
+    minimize: true,
     nodeEnv: false
   },
   externals: [webpackNodeExternals()],

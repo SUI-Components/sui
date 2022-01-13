@@ -8,11 +8,8 @@ const protocol = HTTPS === 'true' ? 'https' : 'http'
 const host = HOST || '0.0.0.0'
 
 const getWatchOptions = ({context, watch}) => {
-  return watch
-    ? {
-        ignored: ignoredFiles(context)
-      }
-    : false
+  if (!watch) return false
+  return {ignored: ignoredFiles(context)}
 }
 
 module.exports = config => ({
@@ -35,9 +32,11 @@ module.exports = config => ({
   historyApiFallback: {
     disableDotRule: true
   },
-  onAfterSetupMiddleware(devServer) {
-    // This service worker file is effectively a 'no-op' that will reset any
-    // previous service worker registered for the same host:port combination.
-    devServer.app.use(noopServiceWorkerMiddleware(config.output.publicPath))
+  setupMiddlewares(middlewares, devServer) {
+    if (!devServer) throw new Error('webpack-dev-server is not defined')
+
+    middlewares.push(noopServiceWorkerMiddleware(config.output.publicPath))
+
+    return middlewares
   }
 })

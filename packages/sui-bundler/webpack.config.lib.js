@@ -1,11 +1,16 @@
 const webpack = require('webpack')
-const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index')
+const {
+  cleanList,
+  envVars,
+  MAIN_ENTRY_POINT,
+  config
+} = require('./shared/index.js')
 const path = require('path')
-const minifyJs = require('./shared/minify-js')
-const definePlugin = require('./shared/define')
-const babelRules = require('./shared/module-rules-babel')
-const {extractComments, sourceMap} = require('./shared/config')
-const {aliasFromConfig} = require('./shared/resolve-alias')
+const minifyJs = require('./shared/minify-js.js')
+const definePlugin = require('./shared/define.js')
+const babelRules = require('./shared/module-rules-babel.js')
+const {extractComments, sourceMap} = require('./shared/config.js')
+const {aliasFromConfig} = require('./shared/resolve-alias.js')
 
 module.exports = {
   mode: 'production',
@@ -30,6 +35,7 @@ module.exports = {
   optimization: {
     // avoid looping over all the modules after the compilation
     checkWasmTypes: false,
+    minimize: true,
     minimizer: [minifyJs({extractComments, sourceMap})]
   },
   plugins: cleanList([
