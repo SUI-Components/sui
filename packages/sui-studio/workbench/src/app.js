@@ -53,7 +53,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   let demoStyles = ''
   try {
-    demoStyles = require('!css-loader!sass-loader!demo/index.scss') // eslint-disable-line
+    demoStyles = require('!css-loader!@s-ui/sass-loader!demo/index.scss') // eslint-disable-line
   } catch {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
