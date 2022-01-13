@@ -7,6 +7,9 @@ $c-link-negative-hover: $c-white !default;
 $ff-link: $ff-sans-serif !default;
 $lh-link: $lh-l !default;
 
+$td-link: none !default;
+$td-link-hover: underline !default;
+
 @mixin link($negative: false) {
   color: if($negative, $c-link-negative, $c-link);
   font-family: $ff-link;
@@ -16,11 +19,12 @@ $lh-link: $lh-l !default;
   letter-spacing: normal;
   line-height: $lh-link;
   text-align: left;
+  text-decoration: $td-link;
 
   &:hover,
   &:active {
     color: if($negative, $c-link-negative-hover, $c-link-hover);
-    text-decoration: underline;
+    text-decoration: $td-link-hover;
   }
 }
 
