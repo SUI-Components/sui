@@ -37,7 +37,7 @@
     "fast-glob": "3.2.10",
     "find-free-ports": "3.0.0",
     "html-webpack-plugin": "5.5.0",
-    "mini-css-extract-plugin": "2.4.6",
+    "mini-css-extract-plugin": "2.5.0",
     "postcss": "8.4.5",
     "postcss-loader": "6.2.1",
     "process": "0.11.10",
