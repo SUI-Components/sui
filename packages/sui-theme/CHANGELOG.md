@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.119.0 (2022-01-18)
+
+
+### Features
+
+* **packages/sui-theme:** add new link font weight variable ([fcb4e3f](https://github.com/SUI-Components/sui/commit/fcb4e3f30029d82ebff967ffa5bc660c779573cf))
+
+
+
 # 8.118.0 (2022-01-11)
 
 
