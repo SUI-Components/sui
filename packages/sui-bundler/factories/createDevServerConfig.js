@@ -12,6 +12,7 @@ const getWatchOptions = ({context, watch}) => {
   return {ignored: ignoredFiles(context)}
 }
 
+/** @returns {import('webpack-dev-server').Configuration} */
 module.exports = config => ({
   allowedHosts: 'all',
   client: {
@@ -21,6 +22,13 @@ module.exports = config => ({
       warnings: false
     },
     progress: true
+  },
+  // Enable gzip compression of generated files
+  compress: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Headers': '*'
   },
   static: {
     directory: 'public',
