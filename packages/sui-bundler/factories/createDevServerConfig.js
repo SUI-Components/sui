@@ -21,7 +21,7 @@ module.exports = config => ({
       errors: true,
       warnings: false
     },
-    progress: true
+    progress: false
   },
   // Enable gzip compression of generated files
   compress: true,
