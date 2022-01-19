@@ -5,6 +5,7 @@ $c-link-hover: $c-primary-dark !default;
 $c-link-negative-hover: $c-white !default;
 
 $ff-link: $ff-sans-serif !default;
+$fw-link: normal !default;
 $lh-link: $lh-l !default;
 
 @mixin link($negative: false) {
@@ -12,7 +13,7 @@ $lh-link: $lh-l !default;
   font-family: $ff-link;
   font-stretch: normal;
   font-style: normal;
-  font-weight: normal;
+  font-weight: $fw-link;
   letter-spacing: normal;
   line-height: $lh-link;
   text-align: left;

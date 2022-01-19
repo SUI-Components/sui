@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.43.0 (2021-12-29)
+
+
+### Features
+
+* **packages/sui-ssr:** expose util func to get the assets manifest ([4d442ca](https://github.com/SUI-Components/sui/commit/4d442ca2173335e59e1a98b21fd8d6b208ee677b))
+
+
+
 # 7.42.0 (2021-11-15)
 
 
@@ -116,6 +125,7 @@
 
 ### Bug Fixes
 
+* **packages/sui-ssr:** fix cache for multisites ([118b2cc](https://github.com/SUI-Components/sui/commit/118b2ccc722adecabdf00c820f030ff891e9f258))
 * **packages/sui-ssr:** fix manifest path ([0c82887](https://github.com/SUI-Components/sui/commit/0c8288758015d5cda9d7340534104f35be213135))
 * **packages/sui-ssr:** fix option name, not abbreviation ([e39b805](https://github.com/SUI-Components/sui/commit/e39b805bee3a054677582f9f879c4577347c6a35))
 * **packages/sui-ssr:** get critical dir ([8e191fe](https://github.com/SUI-Components/sui/commit/8e191fe32151433039a8b2a58f846e3fc0574a31))
@@ -150,8 +160,20 @@
 # 7.27.0 (2021-05-12)
 
 
+### Bug Fixes
+
+* **packages/sui-ssr:** cache asset manifest once retrieved ([8f66ac2](https://github.com/SUI-Components/sui/commit/8f66ac273582e7c0ba66b77e6a882d6fb7077272))
+* **packages/sui-ssr:** remove not needed code ([3d6ce2c](https://github.com/SUI-Components/sui/commit/3d6ce2c6b01176e77a6a3fea9aa8c6195379ed0f))
+* **packages/sui-ssr:** remove not needed file ([cc3c17c](https://github.com/SUI-Components/sui/commit/cc3c17cef3f24a88cd457dee5a4b3b4f118968d5))
+
+
 
 # 7.26.0 (2021-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix create styles for multisites ([b1f2d4e](https://github.com/SUI-Components/sui/commit/b1f2d4e7271191b1d9df6fd2d18fc8c1be165077))
 
 
 ### Features

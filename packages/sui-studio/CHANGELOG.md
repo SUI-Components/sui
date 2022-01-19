@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 10.43.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix lint error ([f8d80dd](https://github.com/SUI-Components/sui/commit/f8d80dd491a6293264c5e30e5366457323c664e9))
+
+
+
 # 10.42.0 (2021-11-29)
 
 
@@ -487,7 +496,6 @@
 ### Features
 
 * **sui-studio:** add ref to mocha setup environment ([557d14b](https://github.com/SUI-Components/sui/commit/557d14bef1d2902a74618d9f922545f4918122f1))
-* **sui-studio:** pull master ([e4456e0](https://github.com/SUI-Components/sui/commit/e4456e0bad2fec9b1f025e270d0115f020582106))
 * **sui-studio:** studio contextify component without loosing its reference ([44f39b8](https://github.com/SUI-Components/sui/commit/44f39b85175553751766dd186a3976ee100691df))
 
 

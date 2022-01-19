@@ -1,10 +1,11 @@
 import path from 'path'
 import fs from 'fs'
-import config from '../config'
-import utilsFactory from './factory'
+import config from '../config.js'
+import utilsFactory from './factory.js'
 
 const {
   buildRequestUrl,
+  getAssetsManifest,
   createStylesFor,
   hostFromReq,
   hrTimeToMs,
@@ -19,6 +20,7 @@ const {
 
 export {
   buildRequestUrl,
+  getAssetsManifest,
   createStylesFor,
   hostFromReq,
   hrTimeToMs,

@@ -15,6 +15,10 @@ body {
   color: #000;
 }
 
+article {
+  color: #fff;
+}
+
 /*
   @import "~not-exists-module2/index.scss";  // this should be skiped
 */

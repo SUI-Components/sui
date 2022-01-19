@@ -51,7 +51,10 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
 }
 
 describe('test sass-loader', function() {
-  this.timeout(30000)
+  /**
+   * First test needs a lot of time to boot up. We still don't know exactly why, but a high timeout is needed to avoid breaking tests on CI.
+   */
+  this.timeout(60000)
 
   const runtimeDir = path.join(__dirname, 'runtime')
 
@@ -109,6 +112,14 @@ describe('test sass-loader', function() {
 
   it('should compile files loaded async', function(done) {
     runSimpleTest(done, 'async', 'async')
+  })
+
+  it('should handle files with @use', function(done) {
+    runSimpleTest(done, 'with-use')
+  })
+
+  it('should handle themes and default values', function(done) {
+    runSimpleTest(done, 'using-variables-with-default')
   })
 
   it('should load normal sass file without url resolving', function(done) {

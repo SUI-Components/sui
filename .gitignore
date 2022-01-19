@@ -1,5 +1,6 @@
 node_modules/
 lib/
+coverage/
 .DS_Store
 npm-debug.log
 .tern-port
@@ -24,3 +25,5 @@ packages/sui-studio/test/server/integration/sample-studio/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/components/atom/button/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/public
 packages/sui-studio/test/server/integration/empty-studio/components/fake/componentnvim
+
+!packages/sui-sass-loader/test/server/fixtures/**/node_modules

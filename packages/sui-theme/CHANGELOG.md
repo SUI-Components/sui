@@ -1,5 +1,45 @@
 # CHANGELOG
 
+# 8.119.0 (2022-01-18)
+
+
+### Features
+
+* **packages/sui-theme:** add new link font weight variable ([fcb4e3f](https://github.com/SUI-Components/sui/commit/fcb4e3f30029d82ebff967ffa5bc660c779573cf))
+
+
+
+# 8.118.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** fix variable declaration order ([d7ab7a9](https://github.com/SUI-Components/sui/commit/d7ab7a957224b5dc6f2c3cfcd4e64400abc93933))
+
+
+
+# 8.117.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-theme:** allow to overwrite the card article description color ([3f95a1c](https://github.com/SUI-Components/sui/commit/3f95a1ca947e5d1502f4c4ed2b44a50dcc9f9f8b))
+
+
+
+# 8.116.0 (2021-12-02)
+
+
+
+# 8.115.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-theme:** add new variable: border input focus ([f695ef2](https://github.com/SUI-Components/sui/commit/f695ef206f7fad0e1a1e16702358c2bb239ba1e6))
+
+
+
 # 8.114.0 (2021-11-26)
 
 
@@ -85,6 +125,7 @@
 
 ### Features
 
+* **packages/sui-theme:** add new bdrs circular ([a98881d](https://github.com/SUI-Components/sui/commit/a98881d9dda533ddbd690bf7a4722663d4380584))
 * **packages/sui-theme:** Add new l and xl input sizes ([66a0e02](https://github.com/SUI-Components/sui/commit/66a0e02abea1c8993a4612134f6194cbb1d6f296))
 
 

@@ -1,5 +1,55 @@
 # CHANGELOG
 
+# 3.46.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Use correct conditional for PRs on Actions ([7c11422](https://github.com/SUI-Components/sui/commit/7c1142263ab11ea46acd0af9f32bf0fef63d5bc6))
+
+
+
+# 3.45.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Show correct number of linted files ([1e2509f](https://github.com/SUI-Components/sui/commit/1e2509f7f0aafe4d325843e631acf575bd0940ad))
+
+
+### Features
+
+* **packages/sui-lint:** Use better logging for sui-lint on Actions ([2e73a6c](https://github.com/SUI-Components/sui/commit/2e73a6c64a9138481542c5a0e1c124832d010705))
+
+
+
+# 3.44.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade babel dependencies ([6e83503](https://github.com/SUI-Components/sui/commit/6e83503e79504299df37e8be024d4d2e79405ee3))
+
+
+
+# 3.43.0 (2021-12-15)
+
+
+### Features
+
+* **packages/sui-lint:** Add rule to check extensions on files ([00689b9](https://github.com/SUI-Components/sui/commit/00689b944502edb6978a58861b018d6b67009d5a))
+
+
+
+# 3.42.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-lint:** Get range of commits only for CI ([36f68bb](https://github.com/SUI-Components/sui/commit/36f68bb9f1cf18e18a462c5277003158ae727e73))
+
+
+
 # 3.41.0 (2021-11-29)
 
 

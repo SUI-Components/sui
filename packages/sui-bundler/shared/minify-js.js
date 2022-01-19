@@ -1,10 +1,10 @@
-const {ESBuildMinifyPlugin} = require('esbuild-loader')
-
-const esbuild = ({sourceMap}) =>
-  new ESBuildMinifyPlugin({
-    target: 'es6',
-    sourcemap: sourceMap !== 'none' && sourceMap !== false
-  })
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = ({extractComments, sourceMap}) =>
-  esbuild({extractComments, sourceMap})
+  new TerserPlugin({
+    minify: TerserPlugin.esbuildMinify,
+    terserOptions: {
+      target: 'es6',
+      sourcemap: sourceMap !== 'none' && sourceMap !== false
+    }
+  })

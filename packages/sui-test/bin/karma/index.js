@@ -3,7 +3,7 @@ const {
   config: {parseConfig},
   Server
 } = require('karma')
-const config = require('./config')
+const config = require('./config.js')
 const CWD = process.cwd()
 
 module.exports = async ({

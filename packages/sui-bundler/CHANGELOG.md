@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 7.41.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade babel dependencies ([5b3acfe](https://github.com/SUI-Components/sui/commit/5b3acfee8a34680e81f2c651665af1ef23cc7ef9))
+
+
+
+# 7.40.0 (2021-12-09)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** bundler analyzer with node 16 does not work because of dependencies insta ([997cefa](https://github.com/SUI-Components/sui/commit/997cefa49eb545c78146c67af2054cfaf254c66b))
+* **packages/sui-bundler:** prevent audit and fund on npm install ([70e1c59](https://github.com/SUI-Components/sui/commit/70e1c59ba0c8008b2ce98338e3a702738f12249f))
+
+
+
 # 7.39.0 (2021-11-15)
 
 
@@ -1442,7 +1461,6 @@ with the old one
 
 ### Features
 
-* **sui-bundler:** add link-loader ([8590edb](https://github.com/SUI-Components/sui/commit/8590edb43cba04fb94c36e65a0f156209dfd9068))
 * **sui-bundler:** improve console output ([ce10da8](https://github.com/SUI-Components/sui/commit/ce10da8b9bebe2db6f20a3f7d5b041696637755b))
 
 
@@ -1576,7 +1594,6 @@ with the old one
 
 ### Features
 
-* **META:** merge ([6a3f18d](https://github.com/SUI-Components/sui/commit/6a3f18dfee2160138f881ef03bcd81e26ea37f71))
 * **sui-bundler:** adapt production configuration to be as development ([216fa61](https://github.com/SUI-Components/sui/commit/216fa614b3344c84466779422a33d7abf8d195d1))
 * **sui-bundler:** adapt production configuration to new versions ([d6474d5](https://github.com/SUI-Components/sui/commit/d6474d56fdf49bf9ee85f7a5a131b14e45ff0c89))
 * **sui-bundler:** remove json-loader and use native instead ([a8d939f](https://github.com/SUI-Components/sui/commit/a8d939fea0a86a95aa78a69aaf67c49be9cb62e9))
