@@ -11,11 +11,16 @@ module.exports = function generateApiDocs() {
 
   components.forEach(file => {
     const source = fs.readFileSync(file, 'utf-8')
+    let docs = {}
 
-    const docs = reactDocs.parse(
-      source,
-      reactDocs.resolver.findAllComponentDefinitions
-    )
+    try {
+      docs = reactDocs.parse(
+        source,
+        reactDocs.resolver.findAllComponentDefinitions
+      )
+    } catch (e) {
+      console.warn(`[sui-studio] Couldn't generate API docs for ${file}`)
+    }
 
     const outputFile = file.replace('index.js', 'definitions.json')
     fs.writeFileSync(
