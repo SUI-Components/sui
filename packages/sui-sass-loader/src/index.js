@@ -2,6 +2,7 @@
 
 const path = require('path')
 const fs = require('fs-extra')
+const crypto = require('crypto')
 const preview = require('cli-source-preview')
 const co = require('co')
 const loaderUtils = require('loader-utils')
@@ -16,8 +17,6 @@ const MATCH_URL_ALL = /url\(\s*(['"]?)([^ '"()]+)(\1)\s*\)/g
 const MATCH_IMPORTS = /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_USES = /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_FILES = /(['"])([^,;'"]+)(\1)/g
-
-let CHAR_CODE_FOR_USE = 97
 
 /**
  * Get imports to resolve
@@ -242,10 +241,12 @@ function* mergeSources(
     }
     // we check if it's a file to include it correctly
     if (total.includes('settings')) {
-      const hash = `s${String.fromCharCode(CHAR_CODE_FOR_USE)}`
+      // we generate a random hash for the namespace of the settings
+      // so we could have same @use of different settings files
+      // we add a `s` at the beggining to ensure is a valid variable name
+      const hash = `s${crypto.randomBytes(20).toString('hex')}`
       settingsNameSpaceReplace = hash
       uses.push(`@use '${path.join(entryDir, 'settings.scss')}' as ${hash};`)
-      CHAR_CODE_FOR_USE++
       return ''
     }
     // default empty string
