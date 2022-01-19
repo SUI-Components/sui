@@ -8,7 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
 const {
   when,
@@ -35,8 +34,6 @@ const filename = config.onlyHash
 const cssFileName = config.onlyHash
   ? '[contenthash:8].css'
   : '[name].[contenthash:8].css'
-
-const smp = new SpeedMeasurePlugin()
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
@@ -137,4 +134,4 @@ const webpackConfig = {
   resolveLoader
 }
 
-module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
+module.exports = webpackConfig

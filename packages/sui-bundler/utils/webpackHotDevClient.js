@@ -22,7 +22,7 @@
 
 const stripAnsi = require('strip-ansi')
 const url = require('url')
-const formatWebpackMessages = require('./formatWebpackMessages')
+const formatWebpackMessages = require('./formatWebpackMessages.js')
 
 // We need to keep track of if there has been a runtime error.
 // Essentially, we cannot guarantee application state was not corrupted by the

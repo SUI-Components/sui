@@ -3,7 +3,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
 const {
   envVars,
@@ -26,8 +25,6 @@ const outputPath = path.join(process.cwd(), 'dist')
 const {CI = false} = process.env
 
 process.env.NODE_ENV = 'development'
-
-const smp = new SpeedMeasurePlugin()
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
@@ -132,4 +129,4 @@ const webpackConfig = {
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
 
-module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
+module.exports = webpackConfig
