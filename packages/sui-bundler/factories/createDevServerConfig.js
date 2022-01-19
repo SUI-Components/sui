@@ -27,7 +27,6 @@ module.exports = config => ({
     watch: getWatchOptions(config)
   },
   hot: true,
-  https: protocol === 'https',
   host,
   historyApiFallback: {
     disableDotRule: true
@@ -38,5 +37,6 @@ module.exports = config => ({
     middlewares.push(noopServiceWorkerMiddleware(config.output.publicPath))
 
     return middlewares
-  }
+  },
+  server: protocol
 })

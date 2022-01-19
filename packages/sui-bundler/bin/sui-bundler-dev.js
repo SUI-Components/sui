@@ -18,8 +18,8 @@ const webpackConfig = require('../webpack.config.dev')
 const createDevServerConfig = require('../factories/createDevServerConfig')
 const createCompiler = require('../factories/createCompiler')
 
-const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
-const log = require('../shared/log')
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder.js')
+const log = require('../shared/log.js')
 
 const {CI = false, HOST = '0.0.0.0', HTTPS, PORT} = process.env
 const DEFAULT_PORT = +PORT || 3000

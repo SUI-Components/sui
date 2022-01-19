@@ -7,8 +7,8 @@ const webpack = require('webpack')
 const path = require('path')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
-const config = require('../webpack.config.lib')
-const log = require('../shared/log')
+const config = require('../webpack.config.lib.js')
+const log = require('../shared/log.js')
 
 program
   .usage('[options] <entry>')
