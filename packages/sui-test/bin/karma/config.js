@@ -1,10 +1,18 @@
+// @ts-check
+
 const webpack = require('webpack')
 const path = require('path')
-
-const {clientConfig} = require('../../src/config')
+const {envVars} = require('@s-ui/bundler/shared/index.js')
+const {bundlerConfig, clientConfig} = require('../../src/config.js')
 
 const {captureConsole = true} = clientConfig
 const {sep} = path
+
+/**
+ *  Transform the env config (Array) to an object.
+ *  Where the value is always an empty string.
+ */
+const environmentVariables = envVars(bundlerConfig.env)
 
 const config = {
   singleRun: true,
@@ -65,13 +73,16 @@ const config = {
       }
     },
     plugins: [
-      new webpack.ProvidePlugin({
-        process: require.resolve('process/browser')
-      }),
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD),
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'test'),
         CATEGORIES: JSON.stringify(process.env.CATEGORIES)
+      }),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'development',
+        ...environmentVariables
+      }),
+      new webpack.ProvidePlugin({
+        process: require.resolve('process/browser')
       })
     ],
     module: {

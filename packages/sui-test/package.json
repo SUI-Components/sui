@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "7.0.0-beta.5",
+  "version": "7.0.0-beta.7",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
