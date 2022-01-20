@@ -41,7 +41,6 @@ module.exports = async ({
 
   if (watch) {
     config.singleRun = false
-    config.reporters = ['clear-screen'].concat(config.reporters)
   }
 
   config.files = [
