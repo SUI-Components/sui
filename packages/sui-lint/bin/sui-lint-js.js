@@ -6,7 +6,7 @@ const {
   getGitIgnoredFiles,
   isOptionSet,
   stageFilesIfRequired
-} = require('../src/helpers')
+} = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')
@@ -15,6 +15,7 @@ const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
 const LINT_FORMATTER = 'stylish'
+const DEFAULT_PATTERN = './'
 
 const baseConfig = {
   ...config,
@@ -22,8 +23,15 @@ const baseConfig = {
 }
 
 ;(async function main() {
-  const files = await getFilesToLint(EXTENSIONS)
-  if (!checkFilesToLint({files, language: 'JavaScript'})) return
+  const files = await getFilesToLint(EXTENSIONS, DEFAULT_PATTERN)
+  if (
+    !checkFilesToLint({
+      files,
+      language: 'JavaScript',
+      defaultPattern: DEFAULT_PATTERN
+    })
+  )
+    return
 
   const fix = isOptionSet('fix')
   const eslint = new ESLint({

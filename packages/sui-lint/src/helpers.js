@@ -87,7 +87,15 @@ const getCommitRange = () => {
     const base = pullRequest?.base?.sha ?? before
     const head = pullRequest?.head?.sha ?? after
 
-    if (after && before) return `${base}...${head}`
+    if (base && head) {
+      const commitRange = `${base}...${head}`
+      console.log(`[sui-lint] Using commit range: ${commitRange}`)
+      return commitRange
+    }
+
+    console.log(
+      '[sui-lint] No commit range found using GitHub Event from Actions'
+    )
   }
 
   return null
@@ -96,10 +104,10 @@ const getCommitRange = () => {
 /**
  * Get files to lint according to command options
  * @param {string[]} extensions Extensions list: ['js', 'sass', 'css']
- * @param {string} defaultFiles Defaults to './'
+ * @param {string} defaultFiles Pattern with the files in case no other options are set
  * @returns {Promise<string[]>} Array of file patterns
  */
-const getFilesToLint = async (extensions, defaultFiles = './') => {
+const getFilesToLint = async (extensions, defaultFiles) => {
   const range = getCommitRange()
   const staged = process.argv.includes(OPTIONS.staged)
   const getFromDiff = range || staged
@@ -133,15 +141,21 @@ const isOptionSet = option => process.argv.includes(`--${option}`)
 
 /**
  * Check if there're files to lint and output a message
- * @param {Object} params
- * @param {String[]} params.files Files to lint
+ * @param {Object}                params
+ * @param {String[]}              params.files Files to lint
  * @param {"JavaScript" | "SCSS"} params.language Language to lint
+ * @param {String}                params.defaultPattern Default pattern to lint
  * @returns {boolean} If there's files to lint
  */
-const checkFilesToLint = ({files, language}) => {
+const checkFilesToLint = ({files, language, defaultPattern}) => {
   if (!files.length) {
     console.log(`[sui-lint] No ${language} files to lint`)
     return false
+  }
+
+  if (files.length === 1 && files[0] === defaultPattern) {
+    console.log(`[sui-lint] Linting all ${language} files...`)
+    return true
   }
 
   console.log(`[sui-lint] Linting ${files.length} ${language} files...`)
