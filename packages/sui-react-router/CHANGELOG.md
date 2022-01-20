@@ -1,5 +1,43 @@
 # CHANGELOG
 
+# 1.13.0 (2021-11-24)
+
+
+### Performance Improvements
+
+* **packages/sui-react-router:** Extract some constants ([a564214](https://github.com/SUI-Components/sui/commit/a5642144747cd6f4e7bb450c2d263729dcb13373))
+
+
+
+# 1.12.0 (2021-11-24)
+
+
+### Bug Fixes
+
+* **packages/sui-react-router:** Avoid using object on pushing new location ([c20b9a1](https://github.com/SUI-Components/sui/commit/c20b9a1365f01097da8ce532618ae5d4c6141fab))
+
+
+
+# 1.11.0 (2021-11-23)
+
+
+### Features
+
+* **packages/sui-react-router:** remove unnecessary prop & add test ([780ed87](https://github.com/SUI-Components/sui/commit/780ed87c8f312bcee6f8c32711ec4cb482036d8e))
+* **packages/sui-react-router:** update test description ([d592a77](https://github.com/SUI-Components/sui/commit/d592a77c4b35036279bea8dafef40d5f7e09a41e))
+
+
+
+# 1.10.0 (2021-11-23)
+
+
+### Features
+
+* **packages/sui-react-router:** pass state to router push ([9fe3573](https://github.com/SUI-Components/sui/commit/9fe3573831259ef6e6ce1725ed7e601dc79e3096))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 1.9.0 (2021-06-17)
 
 

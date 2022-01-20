@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.4.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Stop using colors package and use our own helper ([7d04dc8](https://github.com/SUI-Components/sui/commit/7d04dc8b21e4d7dff2397311eeb1daf9a984c106))
+
+
+
 # 4.3.0 (2021-04-19)
 
 

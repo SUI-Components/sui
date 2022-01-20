@@ -1,22 +1,23 @@
-/* global __BASE_DIR__ */
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 import {iconClose, iconMenu} from '../icons'
 import Markdown from '../documentation/Markdown'
 import Navigation from '../navigation'
-
-const {
-  default: readme
-} = require(`raw-loader!${__BASE_DIR__}/components/README.md`)
+import {fetchComponentsReadme} from '../tryRequire.js'
 
 export default function Layout({children}) {
+  const [readme, setReadme] = useState(null)
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   const handleClickMenu = () => {
     setMenuIsOpen(!menuIsOpen)
   }
+
+  useEffect(() => {
+    fetchComponentsReadme().then(setReadme)
+  }, [])
 
   const renderReadme = () => (
     <div className="sui-Studio-readme">

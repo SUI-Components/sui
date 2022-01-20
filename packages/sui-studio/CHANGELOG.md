@@ -1,5 +1,70 @@
 # CHANGELOG
 
+# 10.43.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix lint error ([f8d80dd](https://github.com/SUI-Components/sui/commit/f8d80dd491a6293264c5e30e5366457323c664e9))
+
+
+
+# 10.42.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-studio:** Stop using not needed loader ([9a7dc75](https://github.com/SUI-Components/sui/commit/9a7dc75b1812dd4c55b574ef79d8cba57c41422f))
+* **packages/sui-studio:** Use colors from @s-ui/helpers instead dependency ([da1cf07](https://github.com/SUI-Components/sui/commit/da1cf07a1469f6d3a86eeaa6f45ae89eec1d3a04))
+
+
+
+# 10.41.0 (2021-11-26)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct conditional ([3adaf68](https://github.com/SUI-Components/sui/commit/3adaf68b732385ac20cebc687f51e21adb7f7b46))
+
+
+
+# 10.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-studio:** Add check when no files are found and config is object by default ([557a11b](https://github.com/SUI-Components/sui/commit/557a11b3c2d105aa6ea4e04936af05959b61bf99))
+* **packages/sui-studio:** Create new copyfiles command and avoid using copyfiles package ([88cc759](https://github.com/SUI-Components/sui/commit/88cc759a643995725ce1f28598dc994175278de2))
+
+
+
+# 10.39.0 (2021-11-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix prepare script to copy styles ([5e9c0fd](https://github.com/SUI-Components/sui/commit/5e9c0fd784c1aba7b452e3e3635fb0ca6ba54d63))
+
+
+
+# 10.38.0 (2021-11-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix typo ([b7e79f1](https://github.com/SUI-Components/sui/commit/b7e79f150da1ae515c952396b26a8e813bedad92))
+
+
+
+# 10.37.0 (2021-11-17)
+
+
+### Features
+
+* **packages/sui-studio:** Add new flag to create components using new compiler ([8770599](https://github.com/SUI-Components/sui/commit/87705997d13a5254b1af4e4576e415db96ce9ba9))
+
+
+
 # 10.36.0 (2021-11-12)
 
 
@@ -431,7 +496,6 @@
 ### Features
 
 * **sui-studio:** add ref to mocha setup environment ([557d14b](https://github.com/SUI-Components/sui/commit/557d14bef1d2902a74618d9f922545f4918122f1))
-* **sui-studio:** pull master ([e4456e0](https://github.com/SUI-Components/sui/commit/e4456e0bad2fec9b1f025e270d0115f020582106))
 * **sui-studio:** studio contextify component without loosing its reference ([44f39b8](https://github.com/SUI-Components/sui/commit/44f39b85175553751766dd186a3976ee100691df))
 
 

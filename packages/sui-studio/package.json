@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "10.36.0",
+  "version": "10.43.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -23,9 +23,7 @@
     "chai": "4.3.4",
     "chai-dom": "1.9.0",
     "classnames": "2.2.5",
-    "colors": "1.4.0",
     "commander": "6.2.1",
-    "copyfiles": "2.4.1",
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.7",
     "fs-extra": "10.0.0",
@@ -36,7 +34,6 @@
     "just-pascal-case": "1.1.0",
     "node-fetch": "2.6.1",
     "normalize.css": "8.0.1",
-    "raw-loader": "4.0.2",
     "react": "17",
     "react-docgen": "5.3.1",
     "react-dom": "17",

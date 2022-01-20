@@ -11,6 +11,7 @@ const DEFINED_COLORS = {
   yellow: 35
 }
 
+/** @type {{ bold: function, cyan: function, red: function, gray: function, green: function, yellow: function }} */
 const colors = {}
 
 Object.entries(DEFINED_COLORS).forEach(([colorKey, colorPrefix]) => {

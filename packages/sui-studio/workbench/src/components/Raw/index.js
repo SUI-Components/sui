@@ -1,5 +1,5 @@
 /* eslint import/no-webpack-loader-syntax:0 */
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import SUIContext from '@s-ui/react-context'
 
@@ -14,25 +14,30 @@ import {
 import Component, * as named from 'component'
 
 import './index.scss'
-let playground
-try {
-  playground = require('!raw-loader!demo/playground').default
-} catch (e) {}
+import {fetchPlayground} from '../../../../src/components/tryRequire.js'
 
 const nonDefault = removeDefaultContext(named)
 
 export default function Raw({
   actualContext = 'default',
   actualStyle = 'default',
+  componentID,
   contexts = {},
   demo: DemoComponent,
   themes
 }) {
+  const [playground, setPlayground] = useState(null)
+
   const context =
     Object.keys(contexts).length && createContextByType(contexts, actualContext)
 
   // check if is a normal component or it's wrapped with a React.memo method
   const ComponentToRender = Component.type ? Component.type : Component
+
+  useEffect(() => {
+    const [category, component] = componentID.split('/')
+    fetchPlayground({category, component}).then(setPlayground)
+  }, [componentID])
 
   return (
     <div className="Raw">
@@ -65,8 +70,8 @@ export default function Raw({
 Raw.propTypes = {
   actualContext: PropTypes.string,
   actualStyle: PropTypes.string,
+  componentID: PropTypes.string,
   contexts: PropTypes.object,
   demo: PropTypes.node,
-  demoStyles: PropTypes.string,
   themes: PropTypes.object
 }

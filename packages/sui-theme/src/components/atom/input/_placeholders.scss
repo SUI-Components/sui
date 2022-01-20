@@ -11,7 +11,7 @@
 }
 
 @mixin sui-atom-input-input-focus() {
-  border: $bd-atom-input;
+  border: $bd-atom-input-focus;
   box-shadow: $bxsh-atom-input;
   outline: 0 none;
 }

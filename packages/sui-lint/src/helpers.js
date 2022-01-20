@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable no-console */
 const {existsSync, readFileSync} = require('fs')
 const {extname} = require('path')
@@ -66,13 +67,48 @@ const getFilesFromDiff = ({extensions, summary}) =>
     .filter(file => extensions.includes(extname(file).substring(1)))
 
 /**
+ * Get the commit range depending on the CI used (Travis or GitHub Actions)
+ * @returns {string|null} - Example: commit1...commit2
+ */
+const getCommitRange = () => {
+  const {CI, GITHUB_EVENT_PATH, TRAVIS_COMMIT_RANGE: travisRange} = process.env
+  // get commit range only for CI
+  if (!CI) return null
+
+  // Travis has a built-in environment variable that
+  // always returns the commit range that we need
+  if (travisRange) return travisRange
+
+  if (GITHUB_EVENT_PATH) {
+    const file = readFileSync(GITHUB_EVENT_PATH, 'utf8')
+    const {after, before, pull_request: pullRequest} = JSON.parse(file)
+    // get the correct commit range depending if
+    // we're on a PR or a push to master
+    const base = pullRequest?.base?.sha ?? before
+    const head = pullRequest?.head?.sha ?? after
+
+    if (base && head) {
+      const commitRange = `${base}...${head}`
+      console.log(`[sui-lint] Using commit range: ${commitRange}`)
+      return commitRange
+    }
+
+    console.log(
+      '[sui-lint] No commit range found using GitHub Event from Actions'
+    )
+  }
+
+  return null
+}
+
+/**
  * Get files to lint according to command options
  * @param {string[]} extensions Extensions list: ['js', 'sass', 'css']
- * @param {string} defaultFiles Defaults to './'
+ * @param {string} defaultFiles Pattern with the files in case no other options are set
  * @returns {Promise<string[]>} Array of file patterns
  */
-const getFilesToLint = async (extensions, defaultFiles = './') => {
-  const {TRAVIS_COMMIT_RANGE: range} = process.env
+const getFilesToLint = async (extensions, defaultFiles) => {
+  const range = getCommitRange()
   const staged = process.argv.includes(OPTIONS.staged)
   const getFromDiff = range || staged
 
@@ -105,21 +141,20 @@ const isOptionSet = option => process.argv.includes(`--${option}`)
 
 /**
  * Check if there're files to lint and output a message
- * @param {Object} params
- * @param {String[]} params.files Files to lint
+ * @param {Object}                params
+ * @param {String[]}              params.files Files to lint
  * @param {"JavaScript" | "SCSS"} params.language Language to lint
+ * @param {String}                params.defaultPattern Default pattern to lint
  * @returns {boolean} If there's files to lint
  */
-const checkFilesToLint = ({files, language}) => {
+const checkFilesToLint = ({files, language, defaultPattern}) => {
   if (!files.length) {
     console.log(`[sui-lint] No ${language} files to lint`)
     return false
   }
 
-  const [firstPattern] = files
-  // check if pattern is all files for JS or SCSS
-  if (firstPattern === './' || firstPattern === '**/*.scss') {
-    console.log(`[sui-lint] Lint all ${language} files`)
+  if (files.length === 1 && files[0] === defaultPattern) {
+    console.log(`[sui-lint] Linting all ${language} files...`)
     return true
   }
 

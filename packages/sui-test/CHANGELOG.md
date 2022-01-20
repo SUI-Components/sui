@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 6.8.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade babel dependencies ([7b2ae22](https://github.com/SUI-Components/sui/commit/7b2ae221af22e87c30b5b130bb4ee4e5f5d5602b))
+
+
+
+# 6.7.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test:** Pin colors version on package.json ([36bd496](https://github.com/SUI-Components/sui/commit/36bd4963d64527ded0c6c40303fc989b619967c3))
+
+
+
 # 6.6.0 (2021-11-12)
 
 

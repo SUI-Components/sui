@@ -1,3 +1,5 @@
+// @ts-check
+
 import {createElement as h, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 

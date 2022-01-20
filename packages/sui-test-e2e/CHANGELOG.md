@@ -1,5 +1,27 @@
 # CHANGELOG
 
+# 1.8.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Pin colors version on package.json ([5ad173b](https://github.com/SUI-Components/sui/commit/5ad173b0f2d8af4e6451554a5770b26ebb61248e))
+
+
+
+# 1.7.0 (2021-11-26)
+
+
+
+# 1.6.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Avoid watching files on CI ([9558de4](https://github.com/SUI-Components/sui/commit/9558de45f2791e2d1a9090a8a8c92a6c2d1e18d4))
+
+
+
 # 1.5.0 (2021-10-25)
 
 

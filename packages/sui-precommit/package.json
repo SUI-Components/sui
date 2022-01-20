@@ -1,8 +1,8 @@
 {
   "name": "@s-ui/precommit",
-  "version": "2.14.0",
+  "version": "2.15.0",
   "description": "Effortless SUI precommit rules integration in your project",
-  "main": "index.js",
+  "type": "module",
   "bin": {
     "sui-precommit": "./bin/sui-precommit.js"
   },
