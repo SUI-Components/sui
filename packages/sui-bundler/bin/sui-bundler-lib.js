@@ -28,14 +28,10 @@ program
   )
   .parse(process.argv)
 
-const {
-  clean = false,
-  output,
-  umd = false,
-  path: publicPath,
-  args: [entry],
-  root = false
-} = program.opts()
+const [entry] = program.args
+const options = program.opts()
+const {clean = false, output, umd = false, root = false} = options
+const publicPath = options.path
 
 if (!output) {
   showError(new Error('--output is mandatory.'), program)
