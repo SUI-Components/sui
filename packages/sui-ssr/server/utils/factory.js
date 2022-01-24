@@ -1,5 +1,3 @@
-const INDEX_FILE = 'index.html'
-const INDEX_WITHOUT_THIRD_PARTIES_FILE = 'index_without_third_parties.html'
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
@@ -79,13 +77,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   }
 
   const readHtmlTemplate = req => {
-    const index =
-      ssrConf.queryDisableThirdParties &&
-      req.query[ssrConf.queryDisableThirdParties] !== undefined
-        ? INDEX_WITHOUT_THIRD_PARTIES_FILE
-        : INDEX_FILE
-    const filePath = path.join(process.cwd(), publicFolder(req), index)
-
+    const filePath = path.join(process.cwd(), publicFolder(req), 'index.html')
     return fs.readFileSync(filePath, 'utf8')
   }
 

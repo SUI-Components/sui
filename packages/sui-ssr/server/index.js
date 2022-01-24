@@ -103,10 +103,6 @@ const _memoizedHtmlTemplatesMapping = {}
     })
 
   app.use((req, res, next) => {
-    const shouldUseIndexWhitoutThirdParties =
-      ssrConf.queryDisableThirdParties &&
-      req.query[ssrConf.queryDisableThirdParties] !== undefined
-
     // Since `_memoizedHtmlTemplatesMapping` will be always an object
     // we need to define a key for each multi site and one default
     // for single sites too.
@@ -114,16 +110,12 @@ const _memoizedHtmlTemplatesMapping = {}
     const memoizedHtmlTemplate =
       _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
 
-    if (memoizedHtmlTemplate && !shouldUseIndexWhitoutThirdParties) {
+    if (memoizedHtmlTemplate) {
       req.htmlTemplate = memoizedHtmlTemplate
     } else {
       const htmlTemplate = readHtmlTemplate(req)
-
       req.htmlTemplate = htmlTemplate
-
-      if (!shouldUseIndexWhitoutThirdParties) {
-        _memoizedHtmlTemplatesMapping[site] = htmlTemplate
-      }
+      _memoizedHtmlTemplatesMapping[site] = htmlTemplate
     }
 
     next()
