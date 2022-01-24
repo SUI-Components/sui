@@ -4,7 +4,6 @@ import config from '../config.js'
 import utilsFactory from './factory.js'
 
 const {
-  buildRequestUrl,
   getAssetsManifest,
   createStylesFor,
   hostFromReq,
@@ -19,7 +18,6 @@ const {
 } = utilsFactory({path, fs, config})
 
 export {
-  buildRequestUrl,
   getAssetsManifest,
   createStylesFor,
   hostFromReq,

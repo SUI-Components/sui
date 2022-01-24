@@ -212,7 +212,6 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
-    "criticalCSS": true, // or a config object something like {blackListURLs: ["mis-anuncios", "legacy-url\\.(html)?"]}
     "forceWWW": true
   }
 }
@@ -225,45 +224,6 @@ Configs accepted:
 - **`earlyFlush`** (`true`): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
 
 - **`loadSPAOnNotFound`** (`false`): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
-
-- **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
-
-  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the microservice for generating the Critical CSS.
-  - **`criticalCSS.host`** `[String/Object]` (`undefined`): Define the host used to make the request to generate the Critical CSS. It can be a simple string or an object defining multiple options for multi sites configurations, giving a different value for each site.
-
-    ```json
-    // With simple host:
-    {
-      "host": "my-motorcycles.com"
-    }
-    // With multi site:
-    {
-      "host": {
-        "motorcycles": "my-motorcycles.com",
-        "trucks": "my-trucks.com"
-      }
-    }
-    ```
-
-  - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
-  - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
-  - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
-  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: **Route path or regexp** - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS.
-    - In case of **regexp**, you can obtain the value in **getInitialProps** **route** second param, and escape **\\** with **\\\\** for validate the json.
-
-    See a simple example below:
-      ```json
-      {
-        "mandatoryCSSRules": {
-          "/\\/.*\\x2D([0-9]{6,9})\\.htm(\\?.+)?$/": [
-            ".ma-AdDetail"
-          ],
-          "/*": [
-            ".ma-AdCard"
-          ]
-        }
-      }
-    ```
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 

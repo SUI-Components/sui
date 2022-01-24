@@ -84,29 +84,6 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   // Transform node performance timing to milliseconds
   const hrTimeToMs = diff => diff[0] * 1e3 + diff[1] * 1e-6
 
-  const hostFromConfig = ({host} = {}, req) => {
-    const site = siteByHost(req)
-
-    if (typeof host === 'undefined') return
-    if (typeof host === 'string') return host
-    if (!site)
-      throw new Error(
-        'You need a `multiSite` configuration in your package.json in order to use an object as a valid host value.`'
-      )
-    if (typeof host === 'object') return host[site]
-  }
-
-  const buildRequestUrl = req => {
-    const config = ssrConf.criticalCSS || {}
-    const {CRITICAL_CSS_PROTOCOL, CRITICAL_CSS_HOST} = process.env
-    const protocol = CRITICAL_CSS_PROTOCOL || config.protocol || req.protocol
-    const host =
-      CRITICAL_CSS_HOST || hostFromConfig(config, req) || req.hostname
-    const url = `${protocol}://${host}${req.url}`
-
-    return url
-  }
-
   const getAssetsManifest = ({req}) => {
     const site = siteByHost(req)
 
@@ -188,7 +165,6 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   }
 
   return {
-    buildRequestUrl,
     getAssetsManifest,
     createStylesFor,
     hostFromReq,

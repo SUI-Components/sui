@@ -1,16 +1,15 @@
 /* eslint no-console:0 */
 import express from 'express'
-import ssr from './ssr'
-import criticalCss from './criticalCss'
-import staticCriticalCss from './staticCriticalCss'
-import {hooksFactory} from './hooksFactory'
-import TYPES from '../hooks-types'
+import ssr from './middlewares/ssr.js'
+import staticCriticalCss from './middlewares/criticalCss.js'
+import {hooksFactory} from './hooksFactory/index.js'
+import TYPES from '../hooks-types.js'
 import basicAuth from 'express-basic-auth'
 import path from 'path'
 import fs from 'fs'
 import jsYaml from 'js-yaml'
 import compression from 'compression'
-import ssrConf from './config'
+import ssrConf from './config.js'
 import {
   isMultiSite,
   hostFromReq,
@@ -124,11 +123,7 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use(hooks[TYPES.PRE_SSR_HANDLER])
 
-  app.get('*', [
-    criticalCss(ssrConf.criticalCSS),
-    staticCriticalCss(ssrConf.criticalCSS),
-    ssr
-  ])
+  app.get('*', [staticCriticalCss, ssr])
 
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
