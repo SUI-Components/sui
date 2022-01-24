@@ -213,15 +213,13 @@ For example:
 "config": {
   "sui-ssr": {
     "criticalCSS": true, // or a config object something like {blackListURLs: ["mis-anuncios", "legacy-url\\.(html)?"]}
-    "forceWWW": true,
-    "dynamicsURLS": ["\/legal/*"]
+    "forceWWW": true
   }
 }
 ```
 
 Configs accepted:
 
-- **`queryDisableThirdParties`** (`undefined`): Any text string that goes in this option, will be taken as the QueryParam value that has to be present in the URL, to remove from the answer (index.html) the tags marked as Third Party.
 - **`forceWWW`** (`false`): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
 
 - **`earlyFlush`** (`true`): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
@@ -267,8 +265,6 @@ Configs accepted:
       }
     ```
 
-- **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
-
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
 - **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname or hostname pattern (key as string) and the site name (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:
@@ -294,12 +290,6 @@ Configs accepted:
   - **`createPagesStyles`** (`false`): Define if pages have style imports that should be managed by the server. The server will get these files from the `asset-manifest.json` file, which should be created by sui-ssr.
 
 > ⚠️ `createStylesFor` does not works as expected when sui-bundler configuration has `onlyHash` defined to `true`.
-
-## Dynamic Rendering
-
-If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry _dynamicsURLS_ in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
-
-More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
 
 ## Critical CSS
 
