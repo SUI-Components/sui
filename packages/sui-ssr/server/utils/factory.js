@@ -88,7 +88,9 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
     const site = siteByHost(req)
 
     if (cachedAssetsManifest) {
-      return site ? cachedAssetsManifest[site] : cachedAssetsManifest
+      if (site && cachedAssetsManifest[site]) return cachedAssetsManifest[site]
+
+      if (!site) return cachedAssetsManifest
     }
 
     let assetsManifest

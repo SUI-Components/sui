@@ -1,8 +1,8 @@
 const fg = require('fast-glob')
 const path = require('path')
 
-const log = require('../shared/log')
-const {defaultAlias} = require('../shared/resolve-alias')
+const log = require('../shared/log.js')
+const {defaultAlias} = require('../shared/resolve-alias.js')
 const createSassLinkImporter = require('./sassLinkImporter.js')
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
