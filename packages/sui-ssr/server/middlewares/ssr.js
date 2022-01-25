@@ -122,7 +122,7 @@ export default async (req, res, next) => {
 
   // Flush if early-flush is enabled
   if (req.app.locals.earlyFlush) {
-    res.type(ssrConfig.serverContentType)
+    res.type('html')
     res.flush()
   }
 
@@ -196,7 +196,7 @@ export default async (req, res, next) => {
 
   // Flush now if early-flush is disabled
   if (!req.app.locals.earlyFlush) {
-    res.type(ssrConfig.serverContentType)
+    res.type('html')
     res.flush()
   }
 

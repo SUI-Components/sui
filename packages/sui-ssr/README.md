@@ -242,8 +242,6 @@ Configs accepted:
 
   Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
-- **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
-
 - **`createStylesFor`** (`undefined`): Define how the server should manage style imports. When separate styles per page, by default those imports will load css asynchronously but maybe we want that server to add them as an `<link>` in app head and be async or not depends on criticalCSS.
 
   - **`appStyles`** (`string`): Define the webpackChunkName of app styles. These styles usually are imported in `app.js`.
