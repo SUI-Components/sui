@@ -1,9 +1,8 @@
-import TYPES from '../../hooks-types'
+import TYPES from '../../hooks-types.js'
 import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
-import {getTplParts, HtmlBuilder} from '../template'
-import {publicFolder, hrTimeToMs, siteByHost} from '../utils'
+import {publicFolder, hrTimeToMs, siteByHost} from '../utils/index.js'
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
 // __MAGIC IMPORTS__
@@ -43,7 +42,6 @@ const getStaticErrorPageContent = async (status, req) => {
 // Build app config and attach it to the request.
 const builAppConfig = (req, res, next) => {
   req.appConfig = {
-    envs: req.app.locals.publicEnvConfig,
     hostname: req.hostname
   }
   next()

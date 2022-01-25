@@ -5,9 +5,6 @@ import staticCriticalCss from './middlewares/criticalCss.js'
 import {hooksFactory} from './hooksFactory/index.js'
 import TYPES from '../hooks-types.js'
 import basicAuth from 'express-basic-auth'
-import path from 'path'
-import fs from 'fs'
-import jsYaml from 'js-yaml'
 import compression from 'compression'
 import ssrConf from './config.js'
 import {
@@ -15,7 +12,7 @@ import {
   hostFromReq,
   useStaticsByHost,
   readHtmlTemplate
-} from './utils'
+} from './utils/index.js'
 
 import noOPConsole from 'noop-console'
 noOPConsole(console)
@@ -27,18 +24,6 @@ if (process.env.CONSOLE) {
 const app = express()
 
 app.set('x-powered-by', false)
-
-// Read public env vars from public-env.yml file and make them available for
-// middlewares by adding them to app.locals
-try {
-  const publicEnvFile = fs.readFileSync(
-    path.join(process.cwd(), 'public-env.yml'),
-    'utf8'
-  )
-  app.locals.publicEnvConfig = jsYaml.safeLoad(publicEnvFile)
-} catch (err) {
-  app.locals.publicEnvConfig = {}
-}
 
 // Read early-flush config.
 // true: will flush before getInitialProps() was called favoring TTFB

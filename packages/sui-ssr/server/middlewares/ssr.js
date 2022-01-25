@@ -8,18 +8,18 @@ import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
 // END __MAGIC IMPORTS__
 
 import qs from 'querystring'
-import {getTplParts, HtmlBuilder} from '../template'
-import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
+import {getTplParts, HtmlBuilder} from '../template/index.js'
+import replaceWithLoadCSSPolyfill from '../template/cssrelpreload.js'
 import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
-import {buildDeviceFrom} from '../../build-device'
-import ssrConfig from '../config'
-import {createStylesFor} from '../utils'
-import {getInitialContextValue} from '../initialContextValue'
+import {buildDeviceFrom} from '../../build-device.js'
+import ssrConfig from '../config.js'
+import {createStylesFor} from '../utils/index.js'
+import {getInitialContextValue} from '../initialContextValue/index.js'
 import {
   redirectStatusCodes,
   DEFAULT_REDIRECT_STATUS_CODE
-} from '../../status-codes'
+} from '../../status-codes.js'
 
 // __MAGIC IMPORTS__
 let contextProviders
