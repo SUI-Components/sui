@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 7.44.0 (2022-01-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** allow multisite cache assets manifest ([6e6c885](https://github.com/SUI-Components/sui/commit/6e6c8852f3cf2755fef904ce91f30035ed5dfef0))
+
+
+
 # 7.43.0 (2021-12-29)
 
 
@@ -1170,7 +1179,6 @@
 * **sui-ssr:** added custom name feature ([4aae7fc](https://github.com/SUI-Components/sui/commit/4aae7fc41e76fe99918d9ae5a9f4e1a8a2b65faa))
 * **sui-ssr:** added descriptive logs ([c6f97a0](https://github.com/SUI-Components/sui/commit/c6f97a0e4d5e841f7a5a5afd3b855ce0f462d3d8))
 * **sui-ssr:** added kb info on zip ([9472cc9](https://github.com/SUI-Components/sui/commit/9472cc9dd2edfdb2e0cb4ebcdcc80930336b80fe))
-* **sui-ssr:** added KB to sui-ssr ([78f8202](https://github.com/SUI-Components/sui/commit/78f82028382790da8aee064fb3278a93663c613d))
 * **sui-ssr:** bump version to major. ([db9bd4a](https://github.com/SUI-Components/sui/commit/db9bd4ade9441791525d274a4441466b7ee260a2))
 * **sui-ssr:** changed the way that we create files. Now we create the files with a name -sui-ssr su ([1a2fcd4](https://github.com/SUI-Components/sui/commit/1a2fcd4653cb8953c278628286e4a7cc3177ffa6))
 * **sui-ssr:** improved readme for the archive command ([fbaf1b2](https://github.com/SUI-Components/sui/commit/fbaf1b23fc717f10c040e6656adbcf65d48f6f3a))
