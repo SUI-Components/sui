@@ -40,16 +40,6 @@ const getStaticErrorPageContent = async (status, req) => {
   return html
 }
 
-const getSpaWithErroredContent = (req, err) => {
-  const [headTplPart, bodyTplPart] = getTplParts(req)
-  return `${HtmlBuilder.buildHead({headTplPart})}
-    ${HtmlBuilder.buildBody({
-      bodyTplPart,
-      appConfig: req.appConfig,
-      initialProps: {error: {message: err.message}}
-    })}`
-}
-
 // Build app config and attach it to the request.
 const builAppConfig = (req, res, next) => {
   req.appConfig = {
@@ -158,11 +148,7 @@ export const hooksFactory = async () => {
         res.status(status)
       }
 
-      if (req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE) {
-        res.end(getSpaWithErroredContent(req, err))
-      } else {
-        res.end(await getStaticErrorPageContent(status, req))
-      }
+      res.end(await getStaticErrorPageContent(status, req))
     },
     ..._userHooks
   }

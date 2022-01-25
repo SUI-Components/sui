@@ -223,8 +223,6 @@ Configs accepted:
 
 - **`earlyFlush`** (`true`): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
 
-- **`loadSPAOnNotFound`** (`false`): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
-
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
 - **`multiSite`** (`undefined`): Should be an object containing a mapping with an association of hostname or hostname pattern (key as string) and the site name (value) in order to make your server work with more than one public folder. **Important! You must set at least a `default` value to enable this feature.** See one simple example below:

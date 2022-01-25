@@ -79,10 +79,6 @@ export default async (req, res, next) => {
 
   if (!renderProps) {
     // This case will never happen if a "*" path is implemented for not-found pages.
-    // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`,
-    // the app (client side) won't respond either so the same result is obtained with
-    // the following line (best performance) than explicitly passing an error using
-    // `next(new Error(404))`
     return next() // We asume that is a 404 page
   }
 
@@ -202,7 +198,6 @@ export default async (req, res, next) => {
 
   // The first html content has the be set after any possible call to next().
   // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
-  // no matter the error page strategy set (loadSPAOnNotFound: true|false)
   const {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(
     headTags
   )

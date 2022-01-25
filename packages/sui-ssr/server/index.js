@@ -49,15 +49,6 @@ app.locals.earlyFlush =
     ? ssrConf.earlyFlush
     : EARLY_FLUSH_DEFAULT
 
-// Error pages usage
-// false: will try to load 4xx / 5xx pages
-// true: will return index.html for any error
-const LOAD_SPA_ON_404_DEFAULT = false
-app.locals.loadSPAOnNotFound =
-  typeof ssrConf.loadSPAOnNotFound !== 'undefined'
-    ? ssrConf.loadSPAOnNotFound
-    : LOAD_SPA_ON_404_DEFAULT
-
 const {PORT = 3000, AUTH_USERNAME, AUTH_PASSWORD} = process.env
 const runningUnderAuth = AUTH_USERNAME && AUTH_PASSWORD
 const AUTH_DEFINITION = {
