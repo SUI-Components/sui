@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "8.0.0-beta.0",
+  "version": "8.0.0-beta.2",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -31,11 +31,10 @@
     "commander": "3.0.1",
     "compression": "1.7.4",
     "copy-paste": "1.3.0",
-    "copy-webpack-plugin": "9.1.0",
+    "copy-webpack-plugin": "10.2.1",
     "express": "4.17.2",
-    "express-basic-auth": "1.2.0",
-    "git-url-parse": "11.1.2",
-    "js-yaml": "3.12.0",
+    "express-basic-auth": "1.2.1",
+    "git-url-parse": "11.4.4",
     "jsesc": "3.0.2",
     "mime": "1.6.0",
     "noop-console": "0.8.0",
