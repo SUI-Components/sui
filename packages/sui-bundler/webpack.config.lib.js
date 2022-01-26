@@ -29,7 +29,6 @@ module.exports = {
     : MAIN_ENTRY_POINT,
   target: 'web',
   output: {
-    jsonpFunction: 'suiWebpackJsonp',
     filename: 'index.js'
   },
   optimization: {
@@ -47,10 +46,5 @@ module.exports = {
   ]),
   module: {
     rules: [babelRules]
-  },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
   }
 }
