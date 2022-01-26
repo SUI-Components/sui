@@ -171,7 +171,6 @@ This tool works with zero configuration out the box but you could use some confi
       "alias": {
         "react": "preact"
       },
-      "measure": true,
       "offline": true,
       "targets": {
         "chrome": "41",
@@ -212,10 +211,6 @@ register({
 You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
 
 If you want to remove your ServiceWorker, you need to use the method `unregister`, the same way you used the `register` method before.
-
-### Build time measurement
-
-Set `measure` to `true` if you want to check step by step build times.
 
 ### Only Caching
 

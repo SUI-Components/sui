@@ -24,11 +24,21 @@ $ npm install @s-ui/domain --save
 import { EntryPointFactory } from '@s-ui/domain'
 
 // useCases is an object with a key with the name of the use case
-// and the value is the factory of the useCase
+// and an array with a function to import the factory and the
+// useCase name as string
 const useCases = {
-  'current_user': UserFactory.currentUserUseCase
-  'products_search': SearchFactory.productsSearchUseCase
-  'real_estate_detail': DetailFactory.realEstateDetailUseCase
+  'current_user': [
+    () => import('./user/UseCases/factory'),
+    'currentUserUseCase'
+    ],
+  'products_search': [
+    () => import('./search/UseCases/factory'),
+    'productsSearchUseCase'
+    ],
+  'real_estate_detail': [
+    () => import('./detail/UseCases/factory'),
+    'realEstateDetailUseCase'
+    ]
 }
 
 // config could be a simple object or a more complicated

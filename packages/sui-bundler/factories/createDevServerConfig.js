@@ -8,13 +8,11 @@ const protocol = HTTPS === 'true' ? 'https' : 'http'
 const host = HOST || '0.0.0.0'
 
 const getWatchOptions = ({context, watch}) => {
-  return watch
-    ? {
-        ignored: ignoredFiles(context)
-      }
-    : false
+  if (!watch) return false
+  return {ignored: ignoredFiles(context)}
 }
 
+/** @returns {import('webpack-dev-server').Configuration} */
 module.exports = config => ({
   allowedHosts: 'all',
   client: {
@@ -23,21 +21,30 @@ module.exports = config => ({
       errors: true,
       warnings: false
     },
-    progress: true
+    progress: false
+  },
+  // Enable gzip compression of generated files
+  compress: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Headers': '*'
   },
   static: {
     directory: 'public',
     watch: getWatchOptions(config)
   },
   hot: true,
-  https: protocol === 'https',
   host,
   historyApiFallback: {
     disableDotRule: true
   },
-  onAfterSetupMiddleware(devServer) {
-    // This service worker file is effectively a 'no-op' that will reset any
-    // previous service worker registered for the same host:port combination.
-    devServer.app.use(noopServiceWorkerMiddleware(config.output.publicPath))
-  }
+  setupMiddlewares(middlewares, devServer) {
+    if (!devServer) throw new Error('webpack-dev-server is not defined')
+
+    middlewares.push(noopServiceWorkerMiddleware(config.output.publicPath))
+
+    return middlewares
+  },
+  server: protocol
 })

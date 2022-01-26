@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 
 const webpack = require('webpack')
-const log = require('../shared/log')
-const config = require('../webpack.config.prod')
+const log = require('../shared/log.js')
+const config = require('../webpack.config.prod.js')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const logUpdate = require('@s-ui/helpers/log-update')
 
@@ -16,10 +16,9 @@ const installNeededDependencies = async () => {
     return getSpawnPromise('npm', [
       'install',
       '--no-save',
-      '--no-optional',
       '--no-audit',
       '--no-fund',
-      'webpack-bundle-analyzer@4.3.0 duplicate-package-checker-webpack-plugin@3.0.0'
+      'webpack-bundle-analyzer@4.5.0 duplicate-package-checker-webpack-plugin@3.0.0'
     ]).then(() => {
       logUpdate.done('Installed needed dependencies')
       getSpawnPromise('./node_modules/.bin/sui-bundler', ['analyzer']).then(

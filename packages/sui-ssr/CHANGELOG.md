@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 7.44.0 (2022-01-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** allow multisite cache assets manifest ([6e6c885](https://github.com/SUI-Components/sui/commit/6e6c8852f3cf2755fef904ce91f30035ed5dfef0))
+
+
+
+# 7.43.0 (2021-12-29)
+
+
+### Features
+
+* **packages/sui-ssr:** expose util func to get the assets manifest ([4d442ca](https://github.com/SUI-Components/sui/commit/4d442ca2173335e59e1a98b21fd8d6b208ee677b))
+
+
+
 # 7.42.0 (2021-11-15)
 
 
@@ -116,6 +134,7 @@
 
 ### Bug Fixes
 
+* **packages/sui-ssr:** fix cache for multisites ([118b2cc](https://github.com/SUI-Components/sui/commit/118b2ccc722adecabdf00c820f030ff891e9f258))
 * **packages/sui-ssr:** fix manifest path ([0c82887](https://github.com/SUI-Components/sui/commit/0c8288758015d5cda9d7340534104f35be213135))
 * **packages/sui-ssr:** fix option name, not abbreviation ([e39b805](https://github.com/SUI-Components/sui/commit/e39b805bee3a054677582f9f879c4577347c6a35))
 * **packages/sui-ssr:** get critical dir ([8e191fe](https://github.com/SUI-Components/sui/commit/8e191fe32151433039a8b2a58f846e3fc0574a31))
@@ -150,8 +169,20 @@
 # 7.27.0 (2021-05-12)
 
 
+### Bug Fixes
+
+* **packages/sui-ssr:** cache asset manifest once retrieved ([8f66ac2](https://github.com/SUI-Components/sui/commit/8f66ac273582e7c0ba66b77e6a882d6fb7077272))
+* **packages/sui-ssr:** remove not needed code ([3d6ce2c](https://github.com/SUI-Components/sui/commit/3d6ce2c6b01176e77a6a3fea9aa8c6195379ed0f))
+* **packages/sui-ssr:** remove not needed file ([cc3c17c](https://github.com/SUI-Components/sui/commit/cc3c17cef3f24a88cd457dee5a4b3b4f118968d5))
+
+
 
 # 7.26.0 (2021-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix create styles for multisites ([b1f2d4e](https://github.com/SUI-Components/sui/commit/b1f2d4e7271191b1d9df6fd2d18fc8c1be165077))
 
 
 ### Features
@@ -1148,7 +1179,6 @@
 * **sui-ssr:** added custom name feature ([4aae7fc](https://github.com/SUI-Components/sui/commit/4aae7fc41e76fe99918d9ae5a9f4e1a8a2b65faa))
 * **sui-ssr:** added descriptive logs ([c6f97a0](https://github.com/SUI-Components/sui/commit/c6f97a0e4d5e841f7a5a5afd3b855ce0f462d3d8))
 * **sui-ssr:** added kb info on zip ([9472cc9](https://github.com/SUI-Components/sui/commit/9472cc9dd2edfdb2e0cb4ebcdcc80930336b80fe))
-* **sui-ssr:** added KB to sui-ssr ([78f8202](https://github.com/SUI-Components/sui/commit/78f82028382790da8aee064fb3278a93663c613d))
 * **sui-ssr:** bump version to major. ([db9bd4a](https://github.com/SUI-Components/sui/commit/db9bd4ade9441791525d274a4441466b7ee260a2))
 * **sui-ssr:** changed the way that we create files. Now we create the files with a name -sui-ssr su ([1a2fcd4](https://github.com/SUI-Components/sui/commit/1a2fcd4653cb8953c278628286e4a7cc3177ffa6))
 * **sui-ssr:** improved readme for the archive command ([fbaf1b2](https://github.com/SUI-Components/sui/commit/fbaf1b23fc717f10c040e6656adbcf65d48f6f3a))

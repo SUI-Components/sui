@@ -8,18 +8,18 @@ import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
 // END __MAGIC IMPORTS__
 
 import qs from 'querystring'
-import {getTplParts, HtmlBuilder} from '../template'
-import replaceWithLoadCSSPolyfill from '../template/cssrelpreload'
+import {getTplParts, HtmlBuilder} from '../template/index.js'
+import replaceWithLoadCSSPolyfill from '../template/cssrelpreload.js'
 import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
 import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
-import {buildDeviceFrom} from '../../build-device'
-import ssrConfig from '../config'
-import {createStylesFor} from '../utils'
-import {getInitialContextValue} from '../initialContextValue'
+import {buildDeviceFrom} from '../../build-device.js'
+import ssrConfig from '../config.js'
+import {createStylesFor} from '../utils/index.js'
+import {getInitialContextValue} from '../initialContextValue/index.js'
 import {
   redirectStatusCodes,
   DEFAULT_REDIRECT_STATUS_CODE
-} from '../../status-codes'
+} from '../../status-codes.js'
 
 // __MAGIC IMPORTS__
 let contextProviders
@@ -79,10 +79,6 @@ export default async (req, res, next) => {
 
   if (!renderProps) {
     // This case will never happen if a "*" path is implemented for not-found pages.
-    // If the path "*" is not implemented, in case of having `loadSPAOnNotFound: true`,
-    // the app (client side) won't respond either so the same result is obtained with
-    // the following line (best performance) than explicitly passing an error using
-    // `next(new Error(404))`
     return next() // We asume that is a 404 page
   }
 
@@ -94,7 +90,7 @@ export default async (req, res, next) => {
   const pageName = pageComponent.displayName
 
   if (ssrConfig.createStylesFor && pageName) {
-    const pageStyles = createStylesFor({pageName, async: hasCriticalCSS})
+    const pageStyles = createStylesFor({pageName, async: hasCriticalCSS, req})
     let nextHeadTplPart = headTplPart.replace(
       HEAD_OPENING_TAG,
       `${HEAD_OPENING_TAG}${pageStyles}`
@@ -122,7 +118,7 @@ export default async (req, res, next) => {
 
   // Flush if early-flush is enabled
   if (req.app.locals.earlyFlush) {
-    res.type(ssrConfig.serverContentType)
+    res.type('html')
     res.flush()
   }
 
@@ -196,13 +192,12 @@ export default async (req, res, next) => {
 
   // Flush now if early-flush is disabled
   if (!req.app.locals.earlyFlush) {
-    res.type(ssrConfig.serverContentType)
+    res.type('html')
     res.flush()
   }
 
   // The first html content has the be set after any possible call to next().
   // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
-  // no matter the error page strategy set (loadSPAOnNotFound: true|false)
   const {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(
     headTags
   )

@@ -1,12 +1,12 @@
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
-const babelRules = require('./shared/module-rules-babel')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {aliasFromConfig} = require('./shared/resolve-alias')
 
-const {config, when, cleanList} = require('./shared')
-const {resolveLoader} = require('./shared/resolve-loader')
+const {config, when, cleanList} = require('./shared/index.js')
+const babelRules = require('./shared/module-rules-babel.js')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const {aliasFromConfig} = require('./shared/resolve-alias.js')
+const {resolveLoader} = require('./shared/resolve-loader.js')
 
 const filename = '[name].[chunkhash:8].js'
 
@@ -31,6 +31,7 @@ const webpackConfig = {
   },
   optimization: {
     checkWasmTypes: false,
+    minimize: true,
     nodeEnv: false
   },
   externals: [webpackNodeExternals()],

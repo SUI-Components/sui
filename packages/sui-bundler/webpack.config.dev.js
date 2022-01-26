@@ -3,13 +3,19 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-const definePlugin = require('./shared/define')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias')
-const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
-const {resolveLoader} = require('./shared/resolve-loader')
+const {
+  envVars,
+  MAIN_ENTRY_POINT,
+  config,
+  cleanList,
+  when
+} = require('./shared/index.js')
+const definePlugin = require('./shared/define.js')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
+
+const {resolveLoader} = require('./shared/resolve-loader.js')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
@@ -19,8 +25,6 @@ const outputPath = path.join(process.cwd(), 'dist')
 const {CI = false} = process.env
 
 process.env.NODE_ENV = 'development'
-
-const smp = new SpeedMeasurePlugin()
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
@@ -34,14 +38,16 @@ const webpackConfig = {
       ...aliasFromConfig
     },
     fallback: {
-      fs: false
+      fs: false,
+      buffer: require.resolve('buffer/'),
+      url: require.resolve('url/')
     },
     modules: ['node_modules', path.resolve(process.cwd())],
     extensions: ['.js', '.json']
   },
   stats: 'errors-only',
   entry: cleanList([
-    require.resolve('react-dev-utils/webpackHotDevClient'),
+    require.resolve('./utils/webpackHotDevClient.js'),
     MAIN_ENTRY_POINT
   ]),
   target: 'web',
@@ -60,7 +66,7 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin({__DEV__: true}),
@@ -123,4 +129,4 @@ const webpackConfig = {
     config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
 
-module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
+module.exports = webpackConfig

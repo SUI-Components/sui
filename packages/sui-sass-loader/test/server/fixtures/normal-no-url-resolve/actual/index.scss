@@ -2,6 +2,8 @@
 @import 'img/index.scss';
 @import './sass2.scss';
 @import '~test-module/test.scss';
+@import '@test-module/test.scss';
+
 // @import "~not-exists-module/index.scss";  // this should be skiped
 /*
   @import "~not-exists-module2/index.scss";  // this should be skiped

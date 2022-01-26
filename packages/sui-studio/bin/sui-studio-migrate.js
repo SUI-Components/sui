@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 
 const program = require('commander')
-const migrateDemoFolders = require('./migrations/demo-folders')
-const migrateTestFolders = require('./migrations/test-folders')
+const migrateDemoFolders = require('./migrations/demo-folders.js')
+const migrateTestFolders = require('./migrations/test-folders.js')
 
 program
   .on('--help', () => {

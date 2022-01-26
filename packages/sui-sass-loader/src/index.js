@@ -2,16 +2,17 @@
 
 const path = require('path')
 const fs = require('fs-extra')
+const crypto = require('crypto')
 const preview = require('cli-source-preview')
 const co = require('co')
 const loaderUtils = require('loader-utils')
 
-const replaceAsync = require('./replace')
-const Cache = require('./cache')
-const utils = require('./utils')
+const replaceAsync = require('./replace.js')
+const Cache = require('./cache.js')
+const utils = require('./utils.js')
 
 const BOM_HEADER = '\uFEFF'
-const EXT_PRECEDENCE = ['.scss', '.sass', '.css']
+const EXT_PRECEDENCE = ['.scss', '.css']
 const MATCH_URL_ALL = /url\(\s*(['"]?)([^ '"()]+)(\1)\s*\)/g
 const MATCH_IMPORTS = /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_USES = /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
@@ -25,14 +26,24 @@ const MATCH_FILES = /(['"])([^,;'"]+)(\1)/g
  * @returns {Array<string>} Return array of possible import files to resolve
  */
 function getImportsToResolve(original, includePaths, transformers) {
+  /**
+   * We're fixing when the import to a node_modules is not using the ~ symbol at the beggining
+   * In order to keep it retrocompatible, we're matching the packages starting with a @
+   * like @s-ui/icons, and then adding the ~ as needed.
+   */
+  if (original.startsWith('@')) {
+    original = `~${original}`
+  }
+
   const extname = path.extname(original)
   let basename = path.basename(original, extname)
   const dirname = path.dirname(original)
 
+  // this code seems safe to be removed
   // is module import
-  if (original.startsWith('~') && (dirname === '.' || !dirname.includes('/'))) {
-    return [original]
-  }
+  // if ((original.startsWith('~')) && (dirname === '.' || !dirname.includes('/'))) {
+  //   return [original]
+  // }
 
   const imports = []
   let names = [basename]
@@ -189,7 +200,7 @@ function* mergeSources(
   // replace url(...)
   if (opts.resolveURLs) {
     content = content.replace(MATCH_URL_ALL, (total, left, file, right) => {
-      if (file.startsWith('data:')) return total
+      if (!file.startsWith('.')) return total
 
       if (loaderUtils.isUrlRequest(file)) {
         // handle url(<loader>!<file>)
@@ -220,10 +231,31 @@ function* mergeSources(
     })
   }
 
+  let settingsNameSpaceReplace
+
   content = content.replace(MATCH_USES, total => {
-    if (!uses.includes(total)) uses.push(total)
+    // we only put sass helpers once
+    if (total.includes('sass:')) {
+      if (!uses.includes(total)) uses.push(total)
+      return ''
+    }
+    // we check if it's a file to include it correctly
+    if (total.includes('settings')) {
+      // we generate a random hash for the namespace of the settings
+      // so we could have same @use of different settings files
+      // we add a `s` at the beggining to ensure is a valid variable name
+      const hash = `s${crypto.randomBytes(20).toString('hex')}`
+      settingsNameSpaceReplace = hash
+      uses.push(`@use '${path.join(entryDir, 'settings.scss')}' as ${hash};`)
+      return ''
+    }
+    // default empty string
     return ''
   })
+
+  if (settingsNameSpaceReplace) {
+    content = content.replaceAll('settings', settingsNameSpaceReplace)
+  }
 
   // find comments should after content.replace(...), otherwise the comments offset will be incorrect
   const commentRanges = utils.findComments(content)
@@ -265,35 +297,41 @@ function* mergeSources(
 
       let resolvedImport
 
-      for (let i = 0; i < imports.length; i++) {
-        const importFile = imports[i]
+      /* Check resolve.alias Webpack config to check if
+         the import path is an alias and we don't need
+         to do nothing more to resolve it.
+      */
+      const resolveImportUsingAlias = ({importFile}) => {
+        return Object.entries(alias).some(([alias, path]) => {
+          if (!importFile.startsWith(alias)) return
 
-        /* check resolve.alias in order to change
-           the import file path to the alias path */
-        const foundAlias = Object.entries(alias).some(([alias, path]) => {
-          if (importFile.startsWith(alias)) {
-            const file = importFile.replace(alias, path)
-
-            if (fs.existsSync(file)) {
-              resolvedImport = file
-              return true
-            }
+          const file = importFile.replace(alias, path)
+          // check if using the alias we could resolve the file
+          if (fs.existsSync(file)) {
+            resolvedImport = file
+            return true
           }
         })
+      }
 
-        if (foundAlias) break
-
-        /* check resolve.modules in order to change
-           the import file path to the module path */
-        const foundModule = modules.some(module => {
+      /* Check resolve.modules in order to change
+         the import file path to the module path
+      */
+      const resolveImportUsingModules = ({importFile}) => {
+        return modules.some(module => {
           const fullPath = path.join(module, importFile)
           if (fs.existsSync(fullPath)) {
             resolvedImport = fullPath
             return true
           }
         })
+      }
 
-        if (foundModule) break
+      for (let i = 0; i < imports.length; i++) {
+        const importFile = imports[i]
+
+        if (resolveImportUsingAlias({importFile})) break
+        if (resolveImportUsingModules({importFile})) break
 
         const reqFile = loaderUtils.urlToRequest(importFile, opts.root)
         const tmp = importer ? importer(reqFile) : {}
@@ -356,15 +394,12 @@ module.exports = function(content) {
   const options = getLoaderConfig(this)
   const ctx = this
 
-  function resolver(ctx) {
-    return function(dir, importFile) {
-      return new Promise((resolve, reject) => {
-        ctx.resolve(dir, importFile, (err, resolvedFile) => {
-          err ? reject(err) : resolve(resolvedFile)
-        })
+  const resolver = ctx => (dir, importFile) =>
+    new Promise((resolve, reject) => {
+      ctx.resolve(dir, importFile, (err, resolvedFile) => {
+        err ? reject(err) : resolve(resolvedFile)
       })
-    }
-  }
+    })
 
   const appendUses = (content, uses) => uses.join('') + content
 
