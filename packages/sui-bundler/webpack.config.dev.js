@@ -66,7 +66,7 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin({__DEV__: true}),
