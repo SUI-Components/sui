@@ -19,6 +19,9 @@ const webpackConfig = {
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json'],
+    fallback: {
+      https: require.resolve('https-browserify')
+    },
     modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: './server.js',

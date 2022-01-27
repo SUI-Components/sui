@@ -49,6 +49,7 @@ const webpackConfig = {
     fallback: {
       assert: false,
       fs: false,
+      https: require.resolve('https-browserify'),
       path: false
     }
   },
