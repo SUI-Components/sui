@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/widget-embedder",
-  "version": "4.4.0-beta.1",
+  "version": "5.0.0-beta.0",
   "description": "",
   "bin": {
     "sui-widget-embedder": "./bin/sui-widget-embedder.js"
