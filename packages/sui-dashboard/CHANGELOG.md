@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.30.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-dashboard:** Remove not needed dependency and improve docs ([3cb25cb](https://github.com/SUI-Components/sui/commit/3cb25cb6ed4d7bd6ee8a32c302b30d2b0eaa4751))
+* **packages/sui-dashboard:** Unify version of fast-glob ([51fdcc1](https://github.com/SUI-Components/sui/commit/51fdcc182618243c27f6dd74272ccf8687b96164))
+
+
+
 # 1.29.0 (2021-10-04)
 
 
