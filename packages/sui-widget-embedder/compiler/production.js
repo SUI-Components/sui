@@ -38,7 +38,7 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
       publicPath: remoteCdn
         ? `${remoteCdn}/${page}/`
         : prodConfig.output.publicPath,
-      jsonpFunction: `webpackJsonp-${page}`
+      chunkLoadingGlobal: `webpackJsonp-${page}`
     },
     plugins: pipe(removePlugin('HtmlWebpackPlugin'))(prodConfig.plugins)
   })

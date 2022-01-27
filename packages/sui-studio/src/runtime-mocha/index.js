@@ -1,14 +1,14 @@
-/* global __BASE_DIR__ */
-import {importContexts, importReactComponent} from '../components/tryRequire'
-import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
-import {addReactContextToComponent} from '../components/utils'
+/* global __BASE_DIR__, CATEGORIES */
+import {importContexts, importReactComponent} from '../components/tryRequire.js'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
+import {addReactContextToComponent} from '../components/utils.js'
 
 addSetupEnvironment(window)
 
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
-const pattern = process.env.CATEGORIES
+const pattern = CATEGORIES
 const categories = pattern ? pattern.split(',') : null
 
 const filterAll = key => {

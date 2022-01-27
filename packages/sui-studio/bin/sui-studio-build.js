@@ -6,9 +6,10 @@ const {join} = require('path')
 const fs = require('fs-extra')
 const {execSync} = require('child_process')
 const program = require('commander')
-const {NO_COMPONENTS_MESSAGE} = require('../config')
-const copyStaticFiles = require('./helpers/copyStaticFiles')
-const copyGlobals = require('./helpers/copyGlobals')
+const {NO_COMPONENTS_MESSAGE} = require('../config/index.js')
+const generateApiDocs = require('./helpers/generateApiDocs.js')
+const copyStaticFiles = require('./helpers/copyStaticFiles.js')
+const copyGlobals = require('./helpers/copyGlobals.js')
 
 program
   .option('-O, --only-changes', 'only build changed components or demos')
@@ -57,6 +58,7 @@ if (needsBuild) {
     .then(() => fs.copy('public/index.html', 'public/200.html'))
     .then(copyStaticFiles)
     .then(copyGlobals)
+    .then(generateApiDocs)
     .then(() => process.exit(0))
     .catch(() => process.exit(1))
 }

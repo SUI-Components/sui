@@ -6,7 +6,7 @@ const DESTINATION_FOLDER = 'public'
 
 module.exports = function copyGlobals() {
   if (fs.existsSync(GLOBALS_FILE_PATH)) {
-    console.log('*** globals detected ***') // eslint-disable-line
+    console.log('[sui-studio] Globals file already detected') // eslint-disable-line
     return
   }
 
