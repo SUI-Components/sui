@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.1.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-studio:** Use latest bundler and test dependencies ([73b078d](https://github.com/SUI-Components/sui/commit/73b078dde18b7804fd17e9569bf12bacdc0fcaac))
+
+
+
 # 11.0.0 (2022-01-27)
 
 
