@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.1.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Use latest bundler and test dependencies ([acf7a54](https://github.com/SUI-Components/sui/commit/acf7a54257b1d86b125e9d06337c027cabd1cb48))
+
+
+
 # 5.0.0 (2022-01-27)
 
 
