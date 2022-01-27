@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.0.0-beta.8",
+  "version": "10.43.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -11,12 +11,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7",
-    "@s-ui/bundler": "beta",
+    "@s-ui/bundler": "8",
     "@s-ui/helpers": "1",
     "@s-ui/mono": "2",
     "@s-ui/react-context": "1",
     "@s-ui/react-router": "1",
-    "@s-ui/test": "beta",
+    "@s-ui/test": "7",
     "@testing-library/react": "10.0.4",
     "@testing-library/react-hooks": "4.0.1",
     "@testing-library/user-event": "13.1.1",
