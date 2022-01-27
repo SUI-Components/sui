@@ -4,7 +4,6 @@
   'use strict'
   var manifests = require('static-manifests')()
   var pageConfigs = require('static-pageConfigs')()
-  var serviceWorkerCdn = require('service-worker-cdn')()
   // https://davidwalsh.name/javascript-loader
   var load = (function() {
     function loaderFor(tag) {
@@ -155,18 +154,4 @@
         }
       })
     )
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register(serviceWorkerCdn + '/sw.js')
-      .then(function(registration) {
-        console.log(
-          'Service Worker registration successful with scope: ',
-          registration.scope
-        )
-      })
-      .catch(function(err) {
-        console.log('Service Worker registration failed: ', err)
-      })
-  }
 })()
