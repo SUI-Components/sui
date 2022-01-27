@@ -1,9 +1,8 @@
-import TYPES from '../../hooks-types'
+import TYPES from '../../hooks-types.js'
 import {readFile} from 'fs'
 import {promisify} from 'util'
 import {resolve} from 'path'
-import {getTplParts, HtmlBuilder} from '../template'
-import {publicFolder, hrTimeToMs, siteByHost} from '../utils'
+import {publicFolder, hrTimeToMs, siteByHost} from '../utils/index.js'
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 
 // __MAGIC IMPORTS__
@@ -40,20 +39,9 @@ const getStaticErrorPageContent = async (status, req) => {
   return html
 }
 
-const getSpaWithErroredContent = (req, err) => {
-  const [headTplPart, bodyTplPart] = getTplParts(req)
-  return `${HtmlBuilder.buildHead({headTplPart})}
-    ${HtmlBuilder.buildBody({
-      bodyTplPart,
-      appConfig: req.appConfig,
-      initialProps: {error: {message: err.message}}
-    })}`
-}
-
 // Build app config and attach it to the request.
 const builAppConfig = (req, res, next) => {
   req.appConfig = {
-    envs: req.app.locals.publicEnvConfig,
     hostname: req.hostname
   }
   next()
@@ -158,11 +146,7 @@ export const hooksFactory = async () => {
         res.status(status)
       }
 
-      if (req.app.locals.loadSPAOnNotFound && status === NOT_FOUND_CODE) {
-        res.end(getSpaWithErroredContent(req, err))
-      } else {
-        res.end(await getStaticErrorPageContent(status, req))
-      }
+      res.end(await getStaticErrorPageContent(status, req))
     },
     ..._userHooks
   }

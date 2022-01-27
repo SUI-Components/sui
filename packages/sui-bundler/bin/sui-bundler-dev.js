@@ -11,21 +11,18 @@ const WebpackDevServer = require('webpack-dev-server')
 
 const clearConsole = require('../utils/clearConsole')
 const checkRequiredFiles = require('../utils/checkRequiredFiles')
-const {
-  choosePort,
-  prepareUrls
-} = require('react-dev-utils/WebpackDevServerUtils')
+const {choosePort, prepareUrls} = require('../utils/WebpackDevServerUtils.js')
 
 const webpackConfig = require('../webpack.config.dev')
 
 const createDevServerConfig = require('../factories/createDevServerConfig')
 const createCompiler = require('../factories/createCompiler')
 
-const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
-const log = require('../shared/log')
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder.js')
+const log = require('../shared/log.js')
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
-const {CI = false, HOST = '0.0.0.0'} = process.env
+const {CI = false, HOST = '0.0.0.0', HTTPS, PORT} = process.env
+const DEFAULT_PORT = +PORT || 3000
 const DEFAULT_WATCH = !CI
 
 if (!module.parent) {
@@ -59,13 +56,14 @@ if (!module.parent) {
     })
     .parse(process.argv)
 
-  const {context} = program
+  const {context} = program.opts()
+
   webpackConfig.context = context || webpackConfig.context
 }
 
 const start = async ({
   config = webpackConfig,
-  packagesToLink = program.linkPackage || []
+  packagesToLink = program.opts().linkPackage || []
 } = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
@@ -80,14 +78,16 @@ const start = async ({
     )
     process.exit(1)
   }
-  const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
-  const port = await choosePort(HOST, DEFAULT_PORT)
+
+  const protocol = HTTPS === 'true' ? 'https' : 'http'
+  const port = await choosePort(DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
   const nextConfig = linkLoaderConfigBuilder({
     config,
-    linkAll: program.linkAll,
+    linkAll: program.opts().linkAll,
     packagesToLink
   })
+
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
   const devServer = new WebpackDevServer(
@@ -98,6 +98,7 @@ const start = async ({
     },
     compiler
   )
+
   log.processing('❯ Starting the development server...\n')
   devServer.startCallback(err => {
     if (err) return log.error(err)

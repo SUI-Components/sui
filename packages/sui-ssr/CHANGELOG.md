@@ -1,10 +1,41 @@
 # CHANGELOG
 
+# 8.0.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-ssr:** Release a new major that uses Webpack@5 toolchain ([ed4b75c](https://github.com/SUI-Components/sui/commit/ed4b75cdc5ee4fa46ce95605d2619e0d177d8b37))
+
+
+
+# 7.44.0 (2022-01-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** allow multisite cache assets manifest ([6e6c885](https://github.com/SUI-Components/sui/commit/6e6c8852f3cf2755fef904ce91f30035ed5dfef0))
+* **packages/sui-ssr:** CopyWebpackPlugin options ([8ab247e](https://github.com/SUI-Components/sui/commit/8ab247eaf06e22a09030ede3346bc540a562cc98))
+
+
+### Features
+
+* **packages/sui-ssr:** remove criticalCss service config and related code ([63ab106](https://github.com/SUI-Components/sui/commit/63ab106bb771d0e74198849819ec1d2e430ea4f6))
+* **packages/sui-ssr:** remove dynamicsURLS config and related code ([f0df377](https://github.com/SUI-Components/sui/commit/f0df377e6781c945b961c62a3099ecd53922119b))
+* **packages/sui-ssr:** remove js-yaml dependency and publicEnvConfig functionality ([cf8104e](https://github.com/SUI-Components/sui/commit/cf8104e048e910a87b7e86fc341c5f8d4d4cfad4))
+* **packages/sui-ssr:** remove loadSPAOnNotFound config and related code ([0fe5fdc](https://github.com/SUI-Components/sui/commit/0fe5fdc80ad858ae50db26c3bd791c4d6c89addf))
+* **packages/sui-ssr:** remove queryDisableThirdParties config and related code ([3b00c72](https://github.com/SUI-Components/sui/commit/3b00c72302091ba984689ded3c0a688269dcbde5))
+* **packages/sui-ssr:** remove serverContentType config and related code ([b851310](https://github.com/SUI-Components/sui/commit/b851310ea400ba54e3f454cc56e1beb430ba31df))
+* **packages/sui-ssr:** support webpack 5 for build ([f28a699](https://github.com/SUI-Components/sui/commit/f28a699c546d0775e171807d9968c0ede79a4a36))
+
+
+
 # 7.43.0 (2021-12-29)
 
 
 ### Features
 
+* **packages/sui-ssr:** Bump dependencies ([c23f185](https://github.com/SUI-Components/sui/commit/c23f1858d0ab732cf08115b6c4e684286a93e6c2))
 * **packages/sui-ssr:** expose util func to get the assets manifest ([4d442ca](https://github.com/SUI-Components/sui/commit/4d442ca2173335e59e1a98b21fd8d6b208ee677b))
 
 
@@ -1170,7 +1201,6 @@
 * **sui-ssr:** added custom name feature ([4aae7fc](https://github.com/SUI-Components/sui/commit/4aae7fc41e76fe99918d9ae5a9f4e1a8a2b65faa))
 * **sui-ssr:** added descriptive logs ([c6f97a0](https://github.com/SUI-Components/sui/commit/c6f97a0e4d5e841f7a5a5afd3b855ce0f462d3d8))
 * **sui-ssr:** added kb info on zip ([9472cc9](https://github.com/SUI-Components/sui/commit/9472cc9dd2edfdb2e0cb4ebcdcc80930336b80fe))
-* **sui-ssr:** added KB to sui-ssr ([78f8202](https://github.com/SUI-Components/sui/commit/78f82028382790da8aee064fb3278a93663c613d))
 * **sui-ssr:** bump version to major. ([db9bd4a](https://github.com/SUI-Components/sui/commit/db9bd4ade9441791525d274a4441466b7ee260a2))
 * **sui-ssr:** changed the way that we create files. Now we create the files with a name -sui-ssr su ([1a2fcd4](https://github.com/SUI-Components/sui/commit/1a2fcd4653cb8953c278628286e4a7cc3177ffa6))
 * **sui-ssr:** improved readme for the archive command ([fbaf1b2](https://github.com/SUI-Components/sui/commit/fbaf1b23fc717f10c040e6656adbcf65d48f6f3a))

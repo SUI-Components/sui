@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 
 const webpack = require('webpack')
-const log = require('../shared/log')
-const config = require('../webpack.config.prod')
+const log = require('../shared/log.js')
+const config = require('../webpack.config.prod.js')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 const logUpdate = require('@s-ui/helpers/log-update')
 

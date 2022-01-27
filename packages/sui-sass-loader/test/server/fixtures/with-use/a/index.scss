@@ -1,0 +1,5 @@
+@use 'settings';
+
+body {
+  color: settings.$color;
+}

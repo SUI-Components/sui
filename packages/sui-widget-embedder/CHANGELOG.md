@@ -1,10 +1,42 @@
 # CHANGELOG
 
-# 4.4.0 (2022-01-10)
+# 5.1.0 (2022-01-27)
 
 
 ### Features
 
+* **packages/sui-widget-embedder:** Use latest bundler and test dependencies ([acf7a54](https://github.com/SUI-Components/sui/commit/acf7a54257b1d86b125e9d06337c027cabd1cb48))
+
+
+
+# 5.0.0 (2022-01-27)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** template ([d24e296](https://github.com/SUI-Components/sui/commit/d24e29619d0831841bdfa619b694b6fae8b97e83))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Release a new major version of widget embedder ([65f0e02](https://github.com/SUI-Components/sui/commit/65f0e0265ff6c23fa053e82ee9a82b73b6c355a1))
+* **packages/sui-widget-embedder:** Remove Service Worker option ([e4d176b](https://github.com/SUI-Components/sui/commit/e4d176b5956a220cd48d5669da141d77999657e8))
+
+
+
+# 4.4.0 (2022-01-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** update webpack-dev-middleware and use bundler beta. Publish also ([161bc78](https://github.com/SUI-Components/sui/commit/161bc78fe84528682a5ca4accdac0b269c9bdde1))
+* **packages/sui-widget-embedder:** webpack config for v5 ([4746791](https://github.com/SUI-Components/sui/commit/474679147444581c2683f6b28e625ade282b9ee6))
+* **packages/sui-widget-embedder:** widget embedder template should use correct Widget prop ([30ba5b5](https://github.com/SUI-Components/sui/commit/30ba5b5bbf0e82c8bfc625e053ae92788dcfb1ca))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Bump dependencies ([2def8b5](https://github.com/SUI-Components/sui/commit/2def8b56284d263a0e628bf870577fca276806a6))
 * **packages/sui-widget-embedder:** Stop using colors package and use our own helper ([7d04dc8](https://github.com/SUI-Components/sui/commit/7d04dc8b21e4d7dff2397311eeb1daf9a984c106))
 
 
