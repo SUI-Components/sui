@@ -1,5 +1,26 @@
 # CHANGELOG
 
+# 11.0.0 (2022-01-27)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio component test runner by category ([98bbb37](https://github.com/SUI-Components/sui/commit/98bbb372fa376dfca65984ab99bf0d8e9f1e0b04))
+
+
+### Features
+
+* **packages/sui-bundler:** Remove deprecation notices and add extensions for files ([e151093](https://github.com/SUI-Components/sui/commit/e15109386f70644ade58b8f5dd0b9fff20c70ba8))
+* **packages/sui-studio:** Avoid showing duplicated themes ([cf9349c](https://github.com/SUI-Components/sui/commit/cf9349cacfaece7d663fe72fbd7cdec0ef88a35f))
+* **packages/sui-studio:** Generate props definitions for components at build time ([dfcb144](https://github.com/SUI-Components/sui/commit/dfcb1448ab72bb484bccbcf173608ba2e586862d))
+* **packages/sui-studio:** Improve API generation info problems for studio on build time ([ccf6114](https://github.com/SUI-Components/sui/commit/ccf611401d1b78ab6d376bee2dd313dea8cfc346))
+* **packages/sui-studio:** Log timing for some ops ([72d1540](https://github.com/SUI-Components/sui/commit/72d15405dcec349fc4cd1eb89b43033c24be778a))
+* **packages/sui-studio:** Release new major version of sui-studio based on Webpack@5 ([4b41c74](https://github.com/SUI-Components/sui/commit/4b41c742c6d69b7e8afd3fbec74f52e55004fdbd))
+* **packages/sui-studio:** Unify version of fast-glob ([0479b54](https://github.com/SUI-Components/sui/commit/0479b5428fdc4ba894992c1b13fd2120a7866cdb))
+* **packages/sui-studio:** Use @s-ui/sass-loader instead old sass-loader ([94d5bef](https://github.com/SUI-Components/sui/commit/94d5bef28c0fdf83877a445c77c51c5dfe0eb783))
+
+
+
 # 10.43.0 (2022-01-11)
 
 
@@ -46,6 +67,11 @@
 * **packages/sui-studio:** fix prepare script to copy styles ([5e9c0fd](https://github.com/SUI-Components/sui/commit/5e9c0fd784c1aba7b452e3e3635fb0ca6ba54d63))
 
 
+### Features
+
+* **packages/sui-studio:** Stop using sass-loader and migrate to [@s-ui](https://github.com/s-ui) package ([2622d4f](https://github.com/SUI-Components/sui/commit/2622d4f2758b602fb3916633c2435608769e8d0d))
+
+
 
 # 10.38.0 (2021-11-18)
 
@@ -57,6 +83,11 @@
 
 
 # 10.37.0 (2021-11-17)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Dont use return outside a function ([0a51c9b](https://github.com/SUI-Components/sui/commit/0a51c9b2356245f97ed3833088371dcc9d73055a))
 
 
 ### Features
@@ -71,6 +102,7 @@
 ### Features
 
 * **packages/sui-studio:** add categories env variable ([9280ff2](https://github.com/SUI-Components/sui/commit/9280ff2b5a3aefc11310daabc05c6c7b9d381c87))
+* **packages/sui-studio:** Upgrade dependencies ([dd05b59](https://github.com/SUI-Components/sui/commit/dd05b59fa5ab4b2052112135397bdcb2fa4a52da))
 
 
 
