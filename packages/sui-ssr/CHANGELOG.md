@@ -1,11 +1,32 @@
 # CHANGELOG
 
+# 8.0.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-ssr:** Release a new major that uses Webpack@5 toolchain ([ed4b75c](https://github.com/SUI-Components/sui/commit/ed4b75cdc5ee4fa46ce95605d2619e0d177d8b37))
+
+
+
 # 7.44.0 (2022-01-25)
 
 
 ### Bug Fixes
 
 * **packages/sui-ssr:** allow multisite cache assets manifest ([6e6c885](https://github.com/SUI-Components/sui/commit/6e6c8852f3cf2755fef904ce91f30035ed5dfef0))
+* **packages/sui-ssr:** CopyWebpackPlugin options ([8ab247e](https://github.com/SUI-Components/sui/commit/8ab247eaf06e22a09030ede3346bc540a562cc98))
+
+
+### Features
+
+* **packages/sui-ssr:** remove criticalCss service config and related code ([63ab106](https://github.com/SUI-Components/sui/commit/63ab106bb771d0e74198849819ec1d2e430ea4f6))
+* **packages/sui-ssr:** remove dynamicsURLS config and related code ([f0df377](https://github.com/SUI-Components/sui/commit/f0df377e6781c945b961c62a3099ecd53922119b))
+* **packages/sui-ssr:** remove js-yaml dependency and publicEnvConfig functionality ([cf8104e](https://github.com/SUI-Components/sui/commit/cf8104e048e910a87b7e86fc341c5f8d4d4cfad4))
+* **packages/sui-ssr:** remove loadSPAOnNotFound config and related code ([0fe5fdc](https://github.com/SUI-Components/sui/commit/0fe5fdc80ad858ae50db26c3bd791c4d6c89addf))
+* **packages/sui-ssr:** remove queryDisableThirdParties config and related code ([3b00c72](https://github.com/SUI-Components/sui/commit/3b00c72302091ba984689ded3c0a688269dcbde5))
+* **packages/sui-ssr:** remove serverContentType config and related code ([b851310](https://github.com/SUI-Components/sui/commit/b851310ea400ba54e3f454cc56e1beb430ba31df))
+* **packages/sui-ssr:** support webpack 5 for build ([f28a699](https://github.com/SUI-Components/sui/commit/f28a699c546d0775e171807d9968c0ede79a4a36))
 
 
 
@@ -14,6 +35,7 @@
 
 ### Features
 
+* **packages/sui-ssr:** Bump dependencies ([c23f185](https://github.com/SUI-Components/sui/commit/c23f1858d0ab732cf08115b6c4e684286a93e6c2))
 * **packages/sui-ssr:** expose util func to get the assets manifest ([4d442ca](https://github.com/SUI-Components/sui/commit/4d442ca2173335e59e1a98b21fd8d6b208ee677b))
 
 
