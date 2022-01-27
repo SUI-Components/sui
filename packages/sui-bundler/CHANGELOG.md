@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.1.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-bundler:** Use latest bundler and test dependencies ([ef4aa22](https://github.com/SUI-Components/sui/commit/ef4aa22e398520947bbb97f609e91d8a511e9caf))
+
+
+
 # 9.0.0 (2022-01-27)
 
 
