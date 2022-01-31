@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.35.0 (2022-01-31)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Sync babel/core dependency ([3e2c79f](https://github.com/SUI-Components/sui/commit/3e2c79f7f7249462e3d08924b3f0971cc2207b21))
+
+
+
 # 3.34.0 (2022-01-11)
 
 
