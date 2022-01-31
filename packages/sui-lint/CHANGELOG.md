@@ -1,11 +1,23 @@
 # CHANGELOG
 
+# 4.0.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Avoid duplicated key ([6e78a07](https://github.com/SUI-Components/sui/commit/6e78a07559a1255df9bd2ea4fda146fabeeb877f))
+* **packages/sui-lint:** Remove not needed plugin ([63feab6](https://github.com/SUI-Components/sui/commit/63feab6e1856ef7de60506ca7ee940f0908f8d36))
+* **packages/sui-lint:** Use new major for eslint and prettier ([423c040](https://github.com/SUI-Components/sui/commit/423c0403849a6f29012a34f1b8393d1ae670febe))
+
+
+
 # 3.47.0 (2022-01-31)
 
 
 ### Features
 
 * **packages/sui-lint:** Sync babel/core dependency ([3b6cc91](https://github.com/SUI-Components/sui/commit/3b6cc914f5065adf8daa118ed4dbe0508e5ffba7))
+* **packages/sui-lint:** Upgrade dependencies ([3a85608](https://github.com/SUI-Components/sui/commit/3a85608b597b67d3bb6a6027097a00e7c435eb6b))
 
 
 
@@ -84,7 +96,13 @@
 
 ### Features
 
+* **packages/sui-lint:** Add dependency ([ba67604](https://github.com/SUI-Components/sui/commit/ba676048946eb6139113a634a5b4e279d020e57d))
+* **packages/sui-lint:** Remove customSyntax ([990fc1f](https://github.com/SUI-Components/sui/commit/990fc1ffe2e6b5615c36b10b2a764606b350c980))
+* **packages/sui-lint:** Remove customSyntax ([ce0a72d](https://github.com/SUI-Components/sui/commit/ce0a72d61ccd5fdf9ddef47c6867ca9b6f13c675))
+* **packages/sui-lint:** Resolve correctly needed dependency ([2b9ce10](https://github.com/SUI-Components/sui/commit/2b9ce10cc5181a46babf294aab09790c95e70e78))
 * **packages/sui-lint:** Upgrade dependencies ([2719b6c](https://github.com/SUI-Components/sui/commit/2719b6cbebc15872f107661ee45775a7a69dac04))
+* **packages/sui-lint:** Upgrade to latest stylelint dependency ([fe7c0f9](https://github.com/SUI-Components/sui/commit/fe7c0f9adf6b06855286d40e2cf7bd9df72774e9))
+* **packages/sui-lint:** Use customSyntax ([8bbb480](https://github.com/SUI-Components/sui/commit/8bbb480e05cf2e01c5546a38469c2542faf7363d))
 
 
 
