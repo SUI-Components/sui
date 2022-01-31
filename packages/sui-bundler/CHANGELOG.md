@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.2.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-bundler:** Sync babel/core dependency ([c86b1cc](https://github.com/SUI-Components/sui/commit/c86b1ccff521f4e9325156fde0cf44c12f72e68a))
+
+
+
 # 9.1.0 (2022-01-27)
 
 
