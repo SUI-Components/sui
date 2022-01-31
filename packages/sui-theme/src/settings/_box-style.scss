@@ -30,4 +30,5 @@ $bxsh-m: 0 1px 4px 0 rgba(0, 0, 0, 0.24) !default;
 $bxsh-l: 0 3px 8px 0 rgba(0, 0, 0, 0.16) !default;
 
 // Box shadows focus
-$bxsh-focus: 0 0 3px 0 $c-primary !default;
+$bxsh-focus-size: 0 0 3px 0 !default;
+$bxsh-focus: $bxsh-focus-size $c-primary !default;
