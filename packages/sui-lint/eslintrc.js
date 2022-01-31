@@ -69,9 +69,7 @@ module.exports = {
     'standard',
     'standard-react',
     'plugin:cypress/recommended',
-    'prettier',
-    'prettier/standard',
-    'prettier/react'
+    'prettier'
   ],
   plugins: [
     '@babel',
@@ -83,8 +81,11 @@ module.exports = {
   rules: {
     ...REACT_RULES,
     ...TESTING_RULES,
-    'accessor-pairs': RULES.OFF,
     '@babel/no-unused-expressions': RULES.OFF,
+    'accessor-pairs': RULES.OFF,
+    'array-callback-return': RULES.WARNING,
+    'import/no-webpack-loader-syntax': RULES.WARNING,
+    'node/no-path-concat': RULES.WARNING,
     'import/extensions': [RULES.WARNING, 'always', {ignorePackages: true}],
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
@@ -98,13 +99,14 @@ module.exports = {
     ],
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
+    'prefer-regex-literals': RULES.WARNING,
     'prettier/prettier': [RULES.ERROR, prettierOptions],
     'react/jsx-no-bind': RULES.WARNING
   },
   overrides: [
     {
       files: ['**/*.+(ts|tsx)'],
-      extends: ['standard-with-typescript', 'standard-jsx'],
+      extends: ['standard-with-typescript', 'standard-react'],
       parserOptions: {
         project: './tsconfig.json'
       },

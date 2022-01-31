@@ -1,7 +1,8 @@
 const prettierOptions = require('./.prettierrc')
 
 module.exports = {
-  plugins: ['stylelint-scss', 'stylelint-prettier'],
+  extends: ['stylelint-config-recommended-scss'],
+  plugins: ['stylelint-prettier'],
   rules: {
     'prettier/prettier': [true, prettierOptions],
     'scss/at-rule-no-unknown': true,
