@@ -22,8 +22,11 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 16
-        registry-url: 'https://registry.npmjs.org'
-    - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
+    - name: Install dependencies
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
+        run_install: true
     - run: npm run lint
     - run: npm run test:ci
     - run: npx -p ./packages/sui-ci sui-ci release
