@@ -34,7 +34,6 @@
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-react": "7.28.0",
-    "eslint-plugin-standard": "5.0.0",
     "eslint": "8.8.0",
     "postcss-scss": "4.0.3",
     "prettier": "2.1.2",
