@@ -81,7 +81,6 @@ module.exports = {
   rules: {
     ...REACT_RULES,
     ...TESTING_RULES,
-    'accessor-pairs': RULES.OFF,
     '@babel/no-unused-expressions': RULES.OFF,
     'accessor-pairs': RULES.OFF,
     'array-callback-return': RULES.WARNING,
