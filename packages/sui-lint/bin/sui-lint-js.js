@@ -15,11 +15,11 @@ const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
 const DEFAULT_PATTERN = './'
+const LINT_FORMATTER = 'stylish'
 const baseConfig = {
   ...config,
   ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
 }
-const formatterName = CI ? 'stylish' : 'codeframe'
 
 ;(async function main() {
   const files = await getFilesToLint(EXTENSIONS, DEFAULT_PATTERN)
@@ -47,7 +47,7 @@ const formatterName = CI ? 'stylish' : 'codeframe'
     stageFilesIfRequired(EXTENSIONS)
   }
 
-  const formatter = await eslint.loadFormatter(formatterName)
+  const formatter = await eslint.loadFormatter(LINT_FORMATTER)
   const errors = ESLint.getErrorResults(results)
 
   const resultsToShow = CI ? errors : results

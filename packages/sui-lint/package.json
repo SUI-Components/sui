@@ -9,8 +9,7 @@
   "scripts": {
     "lint": "sui-lint js",
     "postinstall": "node ./scripts/add-package-json-fields.js",
-    "eslint:print-rules": "eslint --config=./eslintrc.js --print-config eslintrc.js",
-    "eslint:prettier-check": "eslint --config=./eslintrc.js --print-config eslintrc.js | eslint-config-prettier-check"
+    "eslint:print-rules": "eslint --config=./eslintrc.js --print-config ./eslintrc.js"
   },
   "keywords": [],
   "author": "",
@@ -20,12 +19,12 @@
     "@babel/eslint-parser": "7.16.5",
     "@babel/eslint-plugin": "7.16.5",
     "@s-ui/helpers": "1",
+    "@typescript-eslint/eslint-plugin": "5.10.1",
     "commander": "6.2.1",
-    "eslint": "7.16.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-config-standard": "16.0.3",
     "eslint-config-standard-react": "11.0.1",
     "eslint-config-standard-with-typescript": "21.0.1",
+    "eslint-config-standard": "16.0.3",
     "eslint-plugin-chai-friendly": "0.7.2",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.25.4",
@@ -33,15 +32,15 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "6.0.0",
-    "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-react": "7.28.0",
     "eslint-plugin-standard": "5.0.0",
+    "eslint": "8.8.0",
     "postcss-scss": "4.0.3",
     "prettier": "2.1.2",
-    "stylelint": "14.3.0",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-recommended-scss": "5.0.2",
     "stylelint-prettier": "2.0.0",
-    "@typescript-eslint/eslint-plugin": "5.10.1"
+    "stylelint": "14.3.0"
   }
 }
