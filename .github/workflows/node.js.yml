@@ -28,7 +28,6 @@ jobs:
         version: latest
         run_install: |
           - recursive: false
-            args: [--silent]
 
     - run: npm run lint
     - run: npm run test:ci
