@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 
 const program = require('commander')
-const migrateDemoFolders = require('./migrations/demo-folders')
-const migrateTestFolders = require('./migrations/test-folders')
+const migrateDemoFolders = require('./migrations/demo-folders.js')
+const migrateTestFolders = require('./migrations/test-folders.js')
 
 program
   .on('--help', () => {
@@ -23,7 +23,7 @@ if (!topic) {
   console.log(
     'An argument is required. Please, try using "test" or "demo" topic'
   )
-  return
+  process.exit(1)
 }
 
 if (topic === 'demo') migrateDemoFolders()

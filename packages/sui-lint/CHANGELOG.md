@@ -1,5 +1,136 @@
 # CHANGELOG
 
+# 3.47.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Sync babel/core dependency ([3b6cc91](https://github.com/SUI-Components/sui/commit/3b6cc914f5065adf8daa118ed4dbe0508e5ffba7))
+
+
+
+# 3.46.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Use correct conditional for PRs on Actions ([7c11422](https://github.com/SUI-Components/sui/commit/7c1142263ab11ea46acd0af9f32bf0fef63d5bc6))
+
+
+
+# 3.45.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Show correct number of linted files ([1e2509f](https://github.com/SUI-Components/sui/commit/1e2509f7f0aafe4d325843e631acf575bd0940ad))
+
+
+### Features
+
+* **packages/sui-lint:** Use better logging for sui-lint on Actions ([2e73a6c](https://github.com/SUI-Components/sui/commit/2e73a6c64a9138481542c5a0e1c124832d010705))
+
+
+
+# 3.44.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade babel dependencies ([6e83503](https://github.com/SUI-Components/sui/commit/6e83503e79504299df37e8be024d4d2e79405ee3))
+
+
+
+# 3.43.0 (2021-12-15)
+
+
+### Features
+
+* **packages/sui-lint:** Add rule to check extensions on files ([00689b9](https://github.com/SUI-Components/sui/commit/00689b944502edb6978a58861b018d6b67009d5a))
+
+
+
+# 3.42.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-lint:** Get range of commits only for CI ([36f68bb](https://github.com/SUI-Components/sui/commit/36f68bb9f1cf18e18a462c5277003158ae727e73))
+
+
+
+# 3.41.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-lint:** Simplify logging logic to show all files always ([6cb5012](https://github.com/SUI-Components/sui/commit/6cb5012d12a82ac1ab1bd6020facbbb9c385b749))
+* **packages/sui-lint:** Use correct commit range for PRs ([f124aa5](https://github.com/SUI-Components/sui/commit/f124aa54b6b2ca6ea20d5c0493e445e01b8d6281))
+
+
+
+# 3.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-lint:** Better control over undefined values for after and before ([0b19792](https://github.com/SUI-Components/sui/commit/0b197927c1afa5ea2b2b30bfd2ea031d10005395))
+* **packages/sui-lint:** Get commit range on GitHub Actions on linter ([4fe7503](https://github.com/SUI-Components/sui/commit/4fe7503822caf95a4228486de90828ad8ac7e4a2))
+
+
+
+# 3.39.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([2719b6c](https://github.com/SUI-Components/sui/commit/2719b6cbebc15872f107661ee45775a7a69dac04))
+
+
+
+# 3.38.0 (2021-10-22)
+
+
+### Features
+
+* **packages/sui-lint:** Move react/jsx-no-bind to warning for now ([ddc8e02](https://github.com/SUI-Components/sui/commit/ddc8e02963f12ee0956244eb8ce7b5b55bd0c48d))
+
+
+
+# 3.37.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Lint when it's all files ([6038217](https://github.com/SUI-Components/sui/commit/6038217b2c2840dd84df787fbbce9eddd2bcd853))
+
+
+### Features
+
+* **packages/sui-lint:** Better detection for SCSS files ([6292c8c](https://github.com/SUI-Components/sui/commit/6292c8cf78ab198ade2094157527b8da0c043654))
+* **packages/sui-lint:** Reuse code and use better jsdoc ([344e74d](https://github.com/SUI-Components/sui/commit/344e74dddd808fddfc88f3509802bc1e285a842a))
+
+
+
+# 3.36.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Fix problems with staged files ([e5bbbf2](https://github.com/SUI-Components/sui/commit/e5bbbf2f1314c2f5e10ac95bc0faccea079b32d1))
+
+
+### Features
+
+* **packages/sui-lint:** Exit code 1 if sui-lint js fails ([aba85bd](https://github.com/SUI-Components/sui/commit/aba85bdbf17a6016a0600cc9eaab967552540989))
+* **packages/sui-lint:** Exit with error if problem detected ([b4406ae](https://github.com/SUI-Components/sui/commit/b4406ae125db1bc3893e6d73311a042875e83dbe))
+* **packages/sui-lint:** Improve log messages ([4788c1c](https://github.com/SUI-Components/sui/commit/4788c1caecd9f281c55a1f9db39d62ec9f78e4c1))
+* **packages/sui-lint:** Less noisy linter on CI ([181e74e](https://github.com/SUI-Components/sui/commit/181e74ed8e7e79a24d18660aaa4fe6cb955d8c51))
+* **packages/sui-lint:** Migrate to programmatic Node ([2f929e3](https://github.com/SUI-Components/sui/commit/2f929e34b159d0af27fb6da68d1016cd1ecf3daa))
+* **packages/sui-lint:** Upgrade minor versions for dependencies ([fa0d522](https://github.com/SUI-Components/sui/commit/fa0d52247af4c45e0c477046b6d7fa6e1fb416ee))
+
+
+
 # 3.35.0 (2021-09-22)
 
 

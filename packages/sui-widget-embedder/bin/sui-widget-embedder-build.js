@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const flatten = require('just-flatten-it')
 const minifyStream = require('minify-stream')
 const program = require('commander')
 const rimraf = require('rimraf')
@@ -15,10 +14,9 @@ const {
   createWriteStream
 } = require('fs')
 const {showError} = require('@s-ui/helpers/cli')
-const compilerFactory = require('../compiler/production')
+const compilerFactory = require('../compiler/production.js')
 
 const FILE_DOWNLOADER = 'downloader.js'
-const FILE_SW = 'sw.js'
 
 const PAGES_FOLDER = 'pages'
 const PAGES_PATH = resolve(process.cwd(), PAGES_FOLDER)
@@ -33,10 +31,6 @@ program
   .option(
     '-R --remoteCdn <url>',
     'Remote url where the downloader will be placed'
-  )
-  .option(
-    '-D --serviceWorkerCdn <url>',
-    'Remote url where the browser will register the sw'
   )
   .on('--help', () => {
     console.log('  Description:')
@@ -58,7 +52,6 @@ program
   .parse(process.argv)
 
 const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
-const serviceWorkerCdn = program.serviceWorkerCdn || remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
@@ -75,16 +68,9 @@ const build = ({page, remoteCdn}) => {
     compiler.run((error, stats) => {
       if (error) return reject(error)
 
-      const jsonStats = stats.toJson()
-
-      if (stats.hasErrors()) return reject(jsonStats.errors)
-
-      if (stats.hasWarnings()) {
-        console.log('Webpack generated the following warnings: ')
-        jsonStats.warnings.map(warning => console.log(warning))
-      }
-
       console.log(`Webpack stats: ${stats}`)
+
+      if (stats.hasErrors()) return reject(new Error('Webpack build failed'))
       resolve()
     })
   })
@@ -128,8 +114,7 @@ const createDownloader = () =>
         staticModule({
           'static-manifests': () => JSON.stringify(staticManifests),
           'static-pageConfigs': () => JSON.stringify(staticPageConfigs),
-          'static-cdn': () => JSON.stringify(remoteCdn),
-          'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
+          'static-cdn': () => JSON.stringify(remoteCdn)
         })
       )
       .pipe(minifyStream({sourceMap: false}))
@@ -144,51 +129,6 @@ const createDownloader = () =>
       .on('error', rej)
   })
 
-const createSW = () =>
-  // eslint-disable-next-line
-  new Promise((res, rej) => {
-    const filename = 'workbox-sw.prod.v2.1.2'
-    const staticManifests = manifests()
-    const staticCache = flatten(
-      Object.keys(staticManifests).map(page => {
-        const manifest = staticManifests[page]
-        return Object.keys(manifest)
-          .map(entry => `${remoteCdn}/${page}/${manifest[entry]}`)
-          .filter(url => !url.endsWith('.map'))
-      })
-    )
-    const workboxImportPath = require.resolve(
-      `workbox-sw/build/importScripts/${filename}`
-    )
-
-    createReadStream(resolve(__dirname, '..', 'downloader', FILE_SW))
-      .pipe(
-        staticModule({
-          'static-cache': () => JSON.stringify(staticCache),
-          'static-cdn': () => JSON.stringify(remoteCdn),
-          'service-worker-cdn': () => JSON.stringify(serviceWorkerCdn)
-        })
-      )
-      .pipe(minifyStream({sourceMap: false}))
-      .pipe(
-        createWriteStream(resolve(process.cwd(), 'public', FILE_SW)).on(
-          'finish',
-          () => {
-            createReadStream(workboxImportPath).pipe(
-              createWriteStream(resolve(process.cwd(), 'public', filename)).on(
-                'finish',
-                () => {
-                  console.log('Create a new sw.js file')
-                  res()
-                }
-              )
-            )
-          }
-        )
-      )
-      .on('error', rej)
-  })
-
 const serialPromiseExecution = promises =>
   promises.reduce((acc, func) => acc.then(() => func()), Promise.resolve([]))
 
@@ -196,5 +136,4 @@ serialPromiseExecution(
   pagesFor({path: PAGES_FOLDER}).map(page => () => build({page, remoteCdn}))
 )
   .then(createDownloader)
-  .then(createSW)
   .catch(showError)

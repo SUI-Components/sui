@@ -194,7 +194,7 @@ Here's a full example of the options:
 
 ### `private`
 
-If you specify that your package is private (`"private": true,`), it will not get pushed to npm repository.
+If you specify that your package is private (`"private": true,`), it will be ignored by @s-ui/mono releases and thus it won't get pushed to the npm repository.
 
 ### `access`
 

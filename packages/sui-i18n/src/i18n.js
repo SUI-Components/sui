@@ -89,29 +89,51 @@ export default class Rosetta {
     this._updateTranslator({culture: newCulture})
   }
 
+  /**
+   * Get all available translations for a key
+   *
+   * @param {String} key Key of the literal
+   * @returns {Object} Object with cultures as key and literal as value
+   */
+  getAllTranslations(key) {
+    if (!key) return {}
+    return Object.fromEntries(
+      Object.keys(this._languages).map(language => [
+        language,
+        key
+          .split('.')
+          .reduce((level, newKey) => level[newKey], this._languages[language])
+      ])
+    )
+  }
+
   // Translate.
   t(key, values) {
     return this.translator.translate(key, values)
   }
 
   // Format number.
-  n(number, options = {}) {
+  n(number, options = {}, culture) {
     if (typeof number !== 'number') {
       throw new Error('i18n.n should receive a number.')
     }
 
     return typeof Intl !== 'undefined'
-      ? new Intl.NumberFormat(this._culture, options).format(number)
+      ? new Intl.NumberFormat(culture || this._culture, options).format(number)
       : number
   }
 
   // Format currency number.
-  c(number, minimumFractionDigits = 0) {
-    return this.n(number, {
-      style: 'currency',
-      currency: this._currency,
-      minimumFractionDigits
-    })
+  c(number, minimumFractionDigits = 0, culture) {
+    return this.n(
+      number,
+      {
+        style: 'currency',
+        currency: this._currency,
+        minimumFractionDigits
+      },
+      culture
+    )
   }
 
   /**

@@ -1,7 +1,7 @@
 const webpack = require('webpack')
-const clearConsole = require('react-dev-utils/clearConsole')
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
-const log = require('../shared/log')
+const formatWebpackMessages = require('../utils/formatWebpackMessages.js')
+const clearConsole = require('../utils/clearConsole.js')
+const log = require('../shared/log.js')
 
 const isInteractive = process.stdout.isTTY
 
@@ -14,7 +14,7 @@ const printInstructions = ({urls}) =>
 module.exports = (config, urls) => {
   let compiler
   try {
-    compiler = webpack(config)
+    compiler = webpack(config, () => {})
   } catch (err) {
     log.error(`✖ Failed to compile:\n ${err.message || err}`)
     process.exit(1)

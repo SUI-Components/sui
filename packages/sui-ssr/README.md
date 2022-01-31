@@ -212,62 +212,16 @@ For example:
 ```js
 "config": {
   "sui-ssr": {
-    "criticalCSS": true, // or a config object something like {blackListURLs: ["mis-anuncios", "legacy-url\\.(html)?"]}
-    "forceWWW": true,
-    "dynamicsURLS": ["\/legal/*"]
+    "forceWWW": true
   }
 }
 ```
 
 Configs accepted:
 
-- **`queryDisableThirdParties`** (`undefined`): Any text string that goes in this option, will be taken as the QueryParam value that has to be present in the URL, to remove from the answer (index.html) the tags marked as Third Party.
 - **`forceWWW`** (`false`): If you set up to true, then when you have a request from `yoursite.com` the server will respond with a 301 to `www.yoursite.com`. But any subdomain in the original request will be respected.
 
 - **`earlyFlush`** (`true`): Set it to true in favor of TTFB with the potencial risk of returning soft 404s (200 when the page is not found). Set it to false in order to wait for getInitialProps() result (may throw a 404 error or any other error that will be used to define the proper HTTP error code in the response header) before flushing for the first time.
-
-- **`loadSPAOnNotFound`** (`false`): Set it to true in order to read index.html file so that the SPA can handle 404 errors. Set it to false in order to load 404.html instead.
-
-- **`criticalCSS`** (`false`): If you setup this flag to true, you will get this awesome feature for free. More about Critical CSS [here](https://www.smashingmagazine.com/2015/08/understanding-critical-css/). You have the posibility of setup several config for fine tuning of this feature.
-
-  - **`criticalCSS.protocol`** (`undefined`): Define the protocol used to make the request to the microservice for generating the Critical CSS.
-  - **`criticalCSS.host`** `[String/Object]` (`undefined`): Define the host used to make the request to generate the Critical CSS. It can be a simple string or an object defining multiple options for multi sites configurations, giving a different value for each site.
-
-    ```json
-    // With simple host:
-    {
-      "host": "my-motorcycles.com"
-    }
-    // With multi site:
-    {
-      "host": {
-        "motorcycles": "my-motorcycles.com",
-        "trucks": "my-trucks.com"
-      }
-    }
-    ```
-
-  - **`criticalCSS.blackListURLs`** (`undefined`): Array of RegEx of URLs. If some of these URLs match with the current page URL, this feature will be disabled for that page. This is useful to enable CriticalCSS in your site just for a few pages.
-  - **`criticalCSS.blackListRoutePaths`** (`undefined`): Array of route paths. If one of these route paths matches with any of the current path `renderProps.routes` tree from the spa router routes, criticalCSS will be disabled. This is useful to disable CriticalCSS in your site just for the chosen route paths.
-  - **`criticalCSS.customHeaders`** (`undefined`): Object containing all the custom headers you want to send to the Critical CSS service in order to make it work without any limitation or regarding any requirement your target URL needs.
-  - **`criticalCSS.mandatoryCSSRules`** (`undefined`): Object containing key: **Route path or regexp** - value: array of mandatory css rules for the given route. So if any of these mandatory CSS rules is missing in the generated critical CSS, it won't be activated for the given route. This is useful to disable CriticalCSS when a mandatory CSS rule is missing in the generated critical CSS.
-    - In case of **regexp**, you can obtain the value in **getInitialProps** **route** second param, and escape **\\** with **\\\\** for validate the json.
-
-    See a simple example below:
-      ```json
-      {
-        "mandatoryCSSRules": {
-          "/\\/.*\\x2D([0-9]{6,9})\\.htm(\\?.+)?$/": [
-            ".ma-AdDetail"
-          ],
-          "/*": [
-            ".ma-AdCard"
-          ]
-        }
-      }
-    ```
-
-- **`dynamicsURLS`** (`[]`): Array of allowed urls in order to make them be rendered dynamically based on the Dynamic Rendering guidelines by Google: https://developers.google.com/search/docs/guides/dynamic-rendering
 
 - **`useLegacyContext`** (`true`): If you don't want to use the legacy context you have to set this flag to `false`. If you leave it as default, you'll be still using the legacy context but also the new one in order to be able to migrate your code easily.
 
@@ -286,20 +240,12 @@ Configs accepted:
 
   Once this set is done, if you want to test your server in `localhost` you must run it setting the custom header `'X-Serve-Site'` (with the value of your desired site) to the request. If you're a Google Chrome user, you can achieve it by installing the extension [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj).
 
-- **`serverContentType`** (`undefined`): A valid Content-Type string to be set in response header Content-Type. If not defined, it will use the regular html type with utf-8 charset encoding.
-
 - **`createStylesFor`** (`undefined`): Define how the server should manage style imports. When separate styles per page, by default those imports will load css asynchronously but maybe we want that server to add them as an `<link>` in app head and be async or not depends on criticalCSS.
 
   - **`appStyles`** (`string`): Define the webpackChunkName of app styles. These styles usually are imported in `app.js`.
   - **`createPagesStyles`** (`false`): Define if pages have style imports that should be managed by the server. The server will get these files from the `asset-manifest.json` file, which should be created by sui-ssr.
 
 > ⚠️ `createStylesFor` does not works as expected when sui-bundler configuration has `onlyHash` defined to `true`.
-
-## Dynamic Rendering
-
-If you want to apply this new technique proposal by Google to improve your SEO and your site's performance you have to set up the entry _dynamicsURLS_ in the config of the package json with an array of allowed urls. Each entry in this array must be a string and follow the structure of a RegExp constructor.
-
-More info about Dynamic Rendering here: https://developers.google.com/search/docs/guides/dynamic-rendering
 
 ## Critical CSS
 
@@ -371,111 +317,15 @@ SOME_OTHER_ENV_VAR: https://pre.somedomain.com/contact
 SUI-SSR allows any kind of redirects (3XX) in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
 Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
-## Third Parties
+## Server Side Htpp-Cookie
 
-It is very likely that for performance reasons you will want to put the third party scripts directly into the index.html of your page.
+SUI-SSR allows to set an Http-Cookie in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
+Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
-Although there is nothing wrong with that, you might be interested in measuring the performance of your site, without loading all these scripts. To do this, you would have to mark them with an HTML comment so that they can be removed from the server response, if the request is made with a QueryParam that matches the value set in `queryDisableThirdParties` in your application's sui-ssr configuration.
+## Server Side Headers
 
-If this were your `src/index.html` file:
-
-```html
-<html>
-  <head>
-    <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
-    <!--THIRD_PARTY--><link rel="preconnect dns-prefetch" href="//c.dcdn.es" />
-    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.es" />
-    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.google.com" />
-    <!--THIRD_PARTY--><link rel="dns-prefetch" href="//www.googletagmanager.com" />
-
-    <!-- ShellAPP -->
-    <% if (css && vendor && app) { %>
-      <link as="style" rel="preload" href="<%= css %>" />
-      <link as="script" rel="preload" href="<%= vendor.entry %>" />
-      <link as="script" rel="preload" href="<%= app.entry %>" />
-    <% } %>
-
-    <!-- ThridPartyScripts -->
-
-    <!-- Advertisement -->
-    <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= utagScript %>" />
-    <!--THIRD_PARTY--><link as="script" importance="low" rel="preload" href="<%= openAdsScript %>" />
-
-    <!-- Load 3th parties and ShellAPP -->
-    <% if (vendor && app) { %>
-      <script defer importance="high" src="<%= vendor.entry %>"></script>
-      <script defer importance="high" src="<%= app.entry %>"></script>
-    <% } %>
-
-    <!--THIRD_PARTY--><script defer importance="high" src="<%= utagScript %>"></script>
-    <!--THIRD_PARTY--><script defer importance="low" src="<%= openAdsScript %>"></script>
-  </head>
-
-  <body>
-    <div id="app" class="app">
-      <!-- APP -->
-    </div>
-  </body>
-</html>
-```
-
-and this is a fragment of his sui-ssr configuration in your package.json
-
-```json
-{
-  "config": {
-    "sui-ssr": {
-      "queryDisableThirdParties": "disable-third-parties"
-    }
-  }
-}
-```
-
-by making a request like this: GET /?disable-third-parties
-
-The sui-ssr response would be an HTML like the following:
-
-```html
-<html>
-  <head>
-    <link rel="preconnect dns-prefetch" href="<%= CDN %>" />
-    <!--THIRD_PARTY-->
-    <!--THIRD_PARTY-->
-    <!--THIRD_PARTY-->
-    <!--THIRD_PARTY-->
-
-    <!-- ShellAPP -->
-    <% if (css && vendor && app) { %>
-      <link as="style" rel="preload" href="<%= css %>" />
-      <link as="script" rel="preload" href="<%= vendor.entry %>" />
-      <link as="script" rel="preload" href="<%= app.entry %>" />
-    <% } %>
-
-    <!-- ThridPartyScripts -->
-
-    <!-- Advertisement -->
-    <!--THIRD_PARTY-->
-    <!--THIRD_PARTY-->
-
-    <!-- Load 3th parties and ShellAPP -->
-    <% if (vendor && app) { %>
-      <script defer importance="high" src="<%= vendor.entry %>"></script>
-      <script defer importance="high" src="<%= app.entry %>"></script>
-    <% } %>
-
-    <!--THIRD_PARTY-->
-    <!--THIRD_PARTY-->
-  </head>
-
-  <body>
-    <div id="app" class="app">
-      <!-- APP -->
-    </div>
-  </body>
-</html>
-```
-
-And this ensures that you are only measuring the performance impact of your platform.
+SUI-SSR allows to set a response headers in server side rendering when combined with SUI-REACT-INITIAL-PROPS.
+Check out its [documentation](https://github.com/SUI-Components/sui/tree/master/packages/sui-react-initial-props#response-2) to get detailed information and an implementation example.
 
 ## Use the ssr in a lambda function
 

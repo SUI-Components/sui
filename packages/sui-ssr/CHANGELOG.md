@@ -1,5 +1,85 @@
 # CHANGELOG
 
+# 8.0.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-ssr:** Release a new major that uses Webpack@5 toolchain ([ed4b75c](https://github.com/SUI-Components/sui/commit/ed4b75cdc5ee4fa46ce95605d2619e0d177d8b37))
+
+
+
+# 7.44.0 (2022-01-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** allow multisite cache assets manifest ([6e6c885](https://github.com/SUI-Components/sui/commit/6e6c8852f3cf2755fef904ce91f30035ed5dfef0))
+* **packages/sui-ssr:** CopyWebpackPlugin options ([8ab247e](https://github.com/SUI-Components/sui/commit/8ab247eaf06e22a09030ede3346bc540a562cc98))
+
+
+### Features
+
+* **packages/sui-ssr:** remove criticalCss service config and related code ([63ab106](https://github.com/SUI-Components/sui/commit/63ab106bb771d0e74198849819ec1d2e430ea4f6))
+* **packages/sui-ssr:** remove dynamicsURLS config and related code ([f0df377](https://github.com/SUI-Components/sui/commit/f0df377e6781c945b961c62a3099ecd53922119b))
+* **packages/sui-ssr:** remove js-yaml dependency and publicEnvConfig functionality ([cf8104e](https://github.com/SUI-Components/sui/commit/cf8104e048e910a87b7e86fc341c5f8d4d4cfad4))
+* **packages/sui-ssr:** remove loadSPAOnNotFound config and related code ([0fe5fdc](https://github.com/SUI-Components/sui/commit/0fe5fdc80ad858ae50db26c3bd791c4d6c89addf))
+* **packages/sui-ssr:** remove queryDisableThirdParties config and related code ([3b00c72](https://github.com/SUI-Components/sui/commit/3b00c72302091ba984689ded3c0a688269dcbde5))
+* **packages/sui-ssr:** remove serverContentType config and related code ([b851310](https://github.com/SUI-Components/sui/commit/b851310ea400ba54e3f454cc56e1beb430ba31df))
+* **packages/sui-ssr:** support webpack 5 for build ([f28a699](https://github.com/SUI-Components/sui/commit/f28a699c546d0775e171807d9968c0ede79a4a36))
+
+
+
+# 7.43.0 (2021-12-29)
+
+
+### Features
+
+* **packages/sui-ssr:** Bump dependencies ([c23f185](https://github.com/SUI-Components/sui/commit/c23f1858d0ab732cf08115b6c4e684286a93e6c2))
+* **packages/sui-ssr:** expose util func to get the assets manifest ([4d442ca](https://github.com/SUI-Components/sui/commit/4d442ca2173335e59e1a98b21fd8d6b208ee677b))
+
+
+
+# 7.42.0 (2021-11-15)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** remove unnecesary log when critical css is disabled ([077aa85](https://github.com/SUI-Components/sui/commit/077aa85237af07f9eeec789aa0f0ed84e301837e))
+
+
+
+# 7.41.0 (2021-10-29)
+
+
+### Features
+
+* **packages/sui-ssr:** allow to receive headers as an array ([6c83043](https://github.com/SUI-Components/sui/commit/6c830436895dbcd31912e079bed9ffdd77fe28ad))
+* **packages/sui-ssr:** http redirect headers ([075db29](https://github.com/SUI-Components/sui/commit/075db29c58e1dbae37515353ad01f32ef4af3831))
+* **packages/sui-ssr:** prevent to reset previows headers ([915ef93](https://github.com/SUI-Components/sui/commit/915ef93eb130fe0d7785b177a26148e18dde8e2e))
+* **packages/sui-ssr:** update doc ([2699b65](https://github.com/SUI-Components/sui/commit/2699b65602dd5964ec614b19de32de2835a848e9))
+
+
+
+# 7.40.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-ssr:** update archiver version ([50049fc](https://github.com/SUI-Components/sui/commit/50049fcae6191f631651f2f83eda6cca15ef0dcf))
+
+
+
+# 7.39.0 (2021-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** http cookie ([e2f1ea4](https://github.com/SUI-Components/sui/commit/e2f1ea4f837d5491f3b7647e065a30c60def8ca4))
+* **packages/sui-ssr:** update readme according ton new htppCookie sui-ssr feature ([0478b5d](https://github.com/SUI-Components/sui/commit/0478b5da8f2f459cf818ca0b7783753c05238170))
+
+
+
 # 7.38.0 (2021-08-17)
 
 
@@ -76,6 +156,7 @@
 
 ### Bug Fixes
 
+* **packages/sui-ssr:** fix cache for multisites ([118b2cc](https://github.com/SUI-Components/sui/commit/118b2ccc722adecabdf00c820f030ff891e9f258))
 * **packages/sui-ssr:** fix manifest path ([0c82887](https://github.com/SUI-Components/sui/commit/0c8288758015d5cda9d7340534104f35be213135))
 * **packages/sui-ssr:** fix option name, not abbreviation ([e39b805](https://github.com/SUI-Components/sui/commit/e39b805bee3a054677582f9f879c4577347c6a35))
 * **packages/sui-ssr:** get critical dir ([8e191fe](https://github.com/SUI-Components/sui/commit/8e191fe32151433039a8b2a58f846e3fc0574a31))
@@ -110,8 +191,20 @@
 # 7.27.0 (2021-05-12)
 
 
+### Bug Fixes
+
+* **packages/sui-ssr:** cache asset manifest once retrieved ([8f66ac2](https://github.com/SUI-Components/sui/commit/8f66ac273582e7c0ba66b77e6a882d6fb7077272))
+* **packages/sui-ssr:** remove not needed code ([3d6ce2c](https://github.com/SUI-Components/sui/commit/3d6ce2c6b01176e77a6a3fea9aa8c6195379ed0f))
+* **packages/sui-ssr:** remove not needed file ([cc3c17c](https://github.com/SUI-Components/sui/commit/cc3c17cef3f24a88cd457dee5a4b3b4f118968d5))
+
+
 
 # 7.26.0 (2021-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix create styles for multisites ([b1f2d4e](https://github.com/SUI-Components/sui/commit/b1f2d4e7271191b1d9df6fd2d18fc8c1be165077))
 
 
 ### Features
@@ -1108,7 +1201,6 @@
 * **sui-ssr:** added custom name feature ([4aae7fc](https://github.com/SUI-Components/sui/commit/4aae7fc41e76fe99918d9ae5a9f4e1a8a2b65faa))
 * **sui-ssr:** added descriptive logs ([c6f97a0](https://github.com/SUI-Components/sui/commit/c6f97a0e4d5e841f7a5a5afd3b855ce0f462d3d8))
 * **sui-ssr:** added kb info on zip ([9472cc9](https://github.com/SUI-Components/sui/commit/9472cc9dd2edfdb2e0cb4ebcdcc80930336b80fe))
-* **sui-ssr:** added KB to sui-ssr ([78f8202](https://github.com/SUI-Components/sui/commit/78f82028382790da8aee064fb3278a93663c613d))
 * **sui-ssr:** bump version to major. ([db9bd4a](https://github.com/SUI-Components/sui/commit/db9bd4ade9441791525d274a4441466b7ee260a2))
 * **sui-ssr:** changed the way that we create files. Now we create the files with a name -sui-ssr su ([1a2fcd4](https://github.com/SUI-Components/sui/commit/1a2fcd4653cb8953c278628286e4a7cc3177ffa6))
 * **sui-ssr:** improved readme for the archive command ([fbaf1b2](https://github.com/SUI-Components/sui/commit/fbaf1b23fc717f10c040e6656adbcf65d48f6f3a))

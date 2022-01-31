@@ -1,4 +1,4 @@
-const {serverConfig} = require('../../src/config')
+const {serverConfig} = require('../../src/config.js')
 const {
   forceTranspilation = [],
   esmOverride = false,
@@ -10,7 +10,7 @@ const regexToAdd = forceTranspilation.map(
 )
 
 if (esmOverride) {
-  require('./applyEsmOverride')
+  require('./applyEsmOverride.js')
 }
 
 const libDir = /lib/

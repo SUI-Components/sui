@@ -1,16 +1,9 @@
-$h-atom-input--m: 40px !default;
-$h-atom-input--s: 32px !default;
-$h-atom-input--xs: 24px !default;
-
-$c-atom-input--success: $c-success !default;
-$c-atom-input--error: $c-error !default;
-$c-atom-input--alert: $c-alert !default;
-
 $pl-atom-input: $p-l !default;
 $pr-atom-input: $p-l !default;
 
 $bxsh-atom-input: $bxsh-focus !default;
 $bd-atom-input: $bdw-s solid $c-primary !default;
+$bd-atom-input-focus: $bd-atom-input !default;
 $fz-atom-input: $fz-base !default;
 $bgc-atom-input: $c-white !default;
 $c-atom-input: initial !default;
@@ -22,6 +15,17 @@ $bxsh-molecule-autosuggest-focus: $bxsh-atom-input !default;
 $bd-atom-select-focus: $bd-atom-input !default;
 $bxsh-atom-select-focus: $bxsh-atom-input !default;
 
-$sizes-atom-input: m $h-atom-input--m, xs $h-atom-input--xs, s $h-atom-input--s !default;
+$h-atom-input--xl: 7 * $sz-base !default; // 56px
+$h-atom-input--l: 6 * $sz-base !default; // 48px
+$h-atom-input--m: 5 * $sz-base !default; // 40px
+$h-atom-input--s: 4 * $sz-base !default; // 32px
+$h-atom-input--xs: 3 * $sz-base !default; // 24px
+
+$c-atom-input--success: $c-success !default;
+$c-atom-input--error: $c-error !default;
+$c-atom-input--alert: $c-alert !default;
+
+$sizes-atom-input: xl $h-atom-input--xl, l $h-atom-input--l, m $h-atom-input--m,
+  xs $h-atom-input--xs, s $h-atom-input--s !default;
 $states-atom-input: success $c-atom-input--success, error $c-atom-input--error,
   alert $c-atom-input--alert !default;

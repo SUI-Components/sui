@@ -1,11 +1,109 @@
 # CHANGELOG
 
+# 8.1.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-test:** Sync babel/core dependency ([469c8b1](https://github.com/SUI-Components/sui/commit/469c8b14f9b8d37821f78cdb7025ae0d6f1d699e))
+
+
+
+# 8.0.0 (2022-01-27)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** Define correctly environment variables on sui-test ([bbc284d](https://github.com/SUI-Components/sui/commit/bbc284dd5a9cae82a349c83e485d2368580f2a28))
+
+
+### Features
+
+* **packages/sui-test:** Add extensions ([0d774dc](https://github.com/SUI-Components/sui/commit/0d774dc8df981fa52463899c1aa7ce10ab4abd2a))
+* **packages/sui-test:** Release a new major based on webpack 5 ([39f45c2](https://github.com/SUI-Components/sui/commit/39f45c2c681a2fba8684fafc5d4238698df3e5be))
+* **packages/sui-test:** Release the new sui-test version ([9134bef](https://github.com/SUI-Components/sui/commit/9134bef0ce8cc14d8782e92d4b44bc2dcbeb7605))
+* **packages/sui-test:** Remove clear-screen for karma on watch mode ([93ad0cf](https://github.com/SUI-Components/sui/commit/93ad0cf9787740352406b7a0bd7ae1e275faefef))
+* **packages/sui-test:** Unify webpack versions ([549fff3](https://github.com/SUI-Components/sui/commit/549fff397db31e1b52c028e92ea0a977cab0cb5b))
+* **packages/sui-test:** Update mocha version ([e2dbdde](https://github.com/SUI-Components/sui/commit/e2dbdde35329eaea26350a5bf34e818ecb8722d9))
+* **packages/sui-test:** Use same Webpack version as sui-bundler ([900767e](https://github.com/SUI-Components/sui/commit/900767e207e55e22be13659ebfa8a384e34ac318))
+
+
+
+# 6.8.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade babel dependencies ([7b2ae22](https://github.com/SUI-Components/sui/commit/7b2ae221af22e87c30b5b130bb4ee4e5f5d5602b))
+
+
+
+# 6.7.0 (2022-01-10)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** Add missing plugin ([9fc31f1](https://github.com/SUI-Components/sui/commit/9fc31f1f155e5e4fecec0fcb1f3cba9fe9da22e1))
+
+
+### Features
+
+* **packages/sui-test:** Bump versions ([4a6c135](https://github.com/SUI-Components/sui/commit/4a6c13500f6c2f0e8d9b2825c903b6ecc8fe3165))
+* **packages/sui-test:** Pin colors version on package.json ([36bd496](https://github.com/SUI-Components/sui/commit/36bd4963d64527ded0c6c40303fc989b619967c3))
+* **packages/sui-test:** Upgrade dependencies ([319037c](https://github.com/SUI-Components/sui/commit/319037c5c6d4fe6ce4a8d1965997673326a75143))
+* **packages/sui-test:** Upgrade Webpack version to use the same as sui-bundler ([0e20b1d](https://github.com/SUI-Components/sui/commit/0e20b1d7136b243ba863e5f7cc2f9c719b36b74c))
+
+
+
+# 6.6.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-test:** add categories env variable ([389b8ae](https://github.com/SUI-Components/sui/commit/389b8ae970173434117af09dcafff207104be40b))
+* **packages/sui-test:** Add needed node polyfills ([cf7693a](https://github.com/SUI-Components/sui/commit/cf7693a0dbfeb65e2fecdc73ffb6136468657949))
+* **packages/sui-test:** Integrate new Webpack 5 on sui-test ([26a1181](https://github.com/SUI-Components/sui/commit/26a11811b85fb5dad21e37d8b7211a3374377fb8))
+* **packages/sui-test:** Sync sui-bundler webpack 5 ([393d559](https://github.com/SUI-Components/sui/commit/393d5591ec7cbd58a04b6c1fb94393786c69ecee))
+
+
+
+# 6.5.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Remove chalk dependency ([34f7806](https://github.com/SUI-Components/sui/commit/34f7806d8ba9c29d5853c6ad3eafbba7b2ed8322))
+
+
+
+# 6.4.0 (2021-11-02)
+
+
+### Features
+
+* **packages/sui-test:** Rollback karma to less dependencies ([4001650](https://github.com/SUI-Components/sui/commit/400165059f8d2c99d788e30cd3c092f77e136faa))
+* **packages/sui-test:** Tweak config for sui-test ([6e0e36f](https://github.com/SUI-Components/sui/commit/6e0e36f78c9684cb2b9319231e90b4bd5a59340b))
+* **packages/sui-test:** Upgrade dependencies packages ([090a692](https://github.com/SUI-Components/sui/commit/090a692874647eb946c8cd07a760fa9ed706e4d8))
+
+
+
+# 6.3.0 (2021-10-21)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies about babel ([abc3fa1](https://github.com/SUI-Components/sui/commit/abc3fa1bdaa4dc7c9b9f27b0dbb4fef32777e804))
+
+
+
 # 6.2.0 (2021-09-22)
 
 
 ### Features
 
 * **packages/sui-test:** Unify @babel/core package versions ([b29c83b](https://github.com/SUI-Components/sui/commit/b29c83bc95688cbded4cae36ff1b67925688a39a))
+* **packages/sui-test:** Upgrade babel/core dependency ([4652296](https://github.com/SUI-Components/sui/commit/4652296fef3abd60a14165716df53da889949d67))
+* **packages/sui-test:** Upgrade karma-webpack with less dependencies and rely on default config mor ([9061070](https://github.com/SUI-Components/sui/commit/9061070a78c175e2ea90068445f402f2f98ec63e))
 
 
 

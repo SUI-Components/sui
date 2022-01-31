@@ -1,3 +1,4 @@
+// @ts-check
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/index.js
 // as @s-ui/react-router is a subset of react-router@3, some exports are missing
 

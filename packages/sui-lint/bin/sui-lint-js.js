@@ -1,31 +1,64 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const {
-  executeLintingCommand,
-  getArrayArgs,
+  checkFilesToLint,
   getFilesToLint,
   getGitIgnoredFiles,
   isOptionSet,
   stageFilesIfRequired
-} = require('../src/helpers')
+} = require('../src/helpers.js')
 
-const BIN_PATH = require.resolve('eslint/bin/eslint')
-const CONFIG_PATH = require.resolve('../eslintrc.js')
+const {ESLint} = require('eslint')
+const config = require('../eslintrc.js')
+
+const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
+const DEFAULT_PATTERN = './'
+const baseConfig = {
+  ...config,
+  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+}
+const formatterName = CI ? 'stylish' : 'codeframe'
 
-const patterns = IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+;(async function main() {
+  const files = await getFilesToLint(EXTENSIONS, DEFAULT_PATTERN)
+  if (
+    !checkFilesToLint({
+      files,
+      language: 'JavaScript',
+      defaultPattern: DEFAULT_PATTERN
+    })
+  )
+    return
 
-getFilesToLint(EXTENSIONS).then(
-  files =>
-    (files.length &&
-      executeLintingCommand(BIN_PATH, [
-        `-c ${CONFIG_PATH}`,
-        ...getArrayArgs('--ext', EXTENSIONS),
-        ...getArrayArgs('--ignore-pattern', patterns),
-        ...files
-      ]).then(
-        () => isOptionSet('--fix') && stageFilesIfRequired(EXTENSIONS)
-      )) ||
-    console.log('[sui-lint js] No JavaScript files to lint.')
-)
+  const fix = isOptionSet('fix')
+  const eslint = new ESLint({
+    baseConfig,
+    fix,
+    extensions: EXTENSIONS,
+    useEslintrc: false
+  })
+
+  const results = await eslint.lintFiles(files)
+
+  if (fix) {
+    await ESLint.outputFixes(results)
+    stageFilesIfRequired(EXTENSIONS)
+  }
+
+  const formatter = await eslint.loadFormatter(formatterName)
+  const errors = ESLint.getErrorResults(results)
+
+  const resultsToShow = CI ? errors : results
+  const resultText = formatter.format(resultsToShow)
+
+  console.log(resultText)
+
+  if (errors.length > 0) {
+    throw new Error('You must fix linting errores before continuing...')
+  }
+})().catch(error => {
+  process.exitCode = 1
+  console.error('[sui-lint]', error)
+})

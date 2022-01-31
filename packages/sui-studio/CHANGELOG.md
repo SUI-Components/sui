@@ -1,5 +1,202 @@
 # CHANGELOG
 
+# 11.1.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-studio:** Use latest bundler and test dependencies ([73b078d](https://github.com/SUI-Components/sui/commit/73b078dde18b7804fd17e9569bf12bacdc0fcaac))
+
+
+
+# 11.0.0 (2022-01-27)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio component test runner by category ([98bbb37](https://github.com/SUI-Components/sui/commit/98bbb372fa376dfca65984ab99bf0d8e9f1e0b04))
+
+
+### Features
+
+* **packages/sui-bundler:** Remove deprecation notices and add extensions for files ([e151093](https://github.com/SUI-Components/sui/commit/e15109386f70644ade58b8f5dd0b9fff20c70ba8))
+* **packages/sui-studio:** Avoid showing duplicated themes ([cf9349c](https://github.com/SUI-Components/sui/commit/cf9349cacfaece7d663fe72fbd7cdec0ef88a35f))
+* **packages/sui-studio:** Generate props definitions for components at build time ([dfcb144](https://github.com/SUI-Components/sui/commit/dfcb1448ab72bb484bccbcf173608ba2e586862d))
+* **packages/sui-studio:** Improve API generation info problems for studio on build time ([ccf6114](https://github.com/SUI-Components/sui/commit/ccf611401d1b78ab6d376bee2dd313dea8cfc346))
+* **packages/sui-studio:** Log timing for some ops ([72d1540](https://github.com/SUI-Components/sui/commit/72d15405dcec349fc4cd1eb89b43033c24be778a))
+* **packages/sui-studio:** Release new major version of sui-studio based on Webpack@5 ([4b41c74](https://github.com/SUI-Components/sui/commit/4b41c742c6d69b7e8afd3fbec74f52e55004fdbd))
+* **packages/sui-studio:** Unify version of fast-glob ([0479b54](https://github.com/SUI-Components/sui/commit/0479b5428fdc4ba894992c1b13fd2120a7866cdb))
+* **packages/sui-studio:** Use @s-ui/sass-loader instead old sass-loader ([94d5bef](https://github.com/SUI-Components/sui/commit/94d5bef28c0fdf83877a445c77c51c5dfe0eb783))
+
+
+
+# 10.43.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix lint error ([f8d80dd](https://github.com/SUI-Components/sui/commit/f8d80dd491a6293264c5e30e5366457323c664e9))
+
+
+
+# 10.42.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-studio:** Stop using not needed loader ([9a7dc75](https://github.com/SUI-Components/sui/commit/9a7dc75b1812dd4c55b574ef79d8cba57c41422f))
+* **packages/sui-studio:** Use colors from @s-ui/helpers instead dependency ([da1cf07](https://github.com/SUI-Components/sui/commit/da1cf07a1469f6d3a86eeaa6f45ae89eec1d3a04))
+
+
+
+# 10.41.0 (2021-11-26)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct conditional ([3adaf68](https://github.com/SUI-Components/sui/commit/3adaf68b732385ac20cebc687f51e21adb7f7b46))
+
+
+
+# 10.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-studio:** Add check when no files are found and config is object by default ([557a11b](https://github.com/SUI-Components/sui/commit/557a11b3c2d105aa6ea4e04936af05959b61bf99))
+* **packages/sui-studio:** Create new copyfiles command and avoid using copyfiles package ([88cc759](https://github.com/SUI-Components/sui/commit/88cc759a643995725ce1f28598dc994175278de2))
+
+
+
+# 10.39.0 (2021-11-19)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix prepare script to copy styles ([5e9c0fd](https://github.com/SUI-Components/sui/commit/5e9c0fd784c1aba7b452e3e3635fb0ca6ba54d63))
+
+
+### Features
+
+* **packages/sui-studio:** Stop using sass-loader and migrate to [@s-ui](https://github.com/s-ui) package ([2622d4f](https://github.com/SUI-Components/sui/commit/2622d4f2758b602fb3916633c2435608769e8d0d))
+
+
+
+# 10.38.0 (2021-11-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix typo ([b7e79f1](https://github.com/SUI-Components/sui/commit/b7e79f150da1ae515c952396b26a8e813bedad92))
+
+
+
+# 10.37.0 (2021-11-17)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Dont use return outside a function ([0a51c9b](https://github.com/SUI-Components/sui/commit/0a51c9b2356245f97ed3833088371dcc9d73055a))
+
+
+### Features
+
+* **packages/sui-studio:** Add new flag to create components using new compiler ([8770599](https://github.com/SUI-Components/sui/commit/87705997d13a5254b1af4e4576e415db96ce9ba9))
+
+
+
+# 10.36.0 (2021-11-12)
+
+
+### Features
+
+* **packages/sui-studio:** add categories env variable ([9280ff2](https://github.com/SUI-Components/sui/commit/9280ff2b5a3aefc11310daabc05c6c7b9d381c87))
+* **packages/sui-studio:** Upgrade dependencies ([dd05b59](https://github.com/SUI-Components/sui/commit/dd05b59fa5ab4b2052112135397bdcb2fa4a52da))
+
+
+
+# 10.35.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Better error output ([03ce37f](https://github.com/SUI-Components/sui/commit/03ce37fd13bb6a172d3d6ffd8206c403fc8f2eae))
+
+
+
+# 10.34.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-studio:** Simplify @babel/cli version to use the same as others packages ([629e759](https://github.com/SUI-Components/sui/commit/629e759ba78968d440c55d00a04fa1ab92fe69f0))
+
+
+
+# 10.33.0 (2021-11-03)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** prettier spacing error ([2b483c2](https://github.com/SUI-Components/sui/commit/2b483c23f0681e0caca3c41e1037beb7eb0e97a3))
+
+
+
+# 10.32.0 (2021-10-27)
+
+
+### Features
+
+* **packages/sui-studio:** add classname test agreement to the test template ([d74ac7c](https://github.com/SUI-Components/sui/commit/d74ac7c50ef7bf38a278c5ab0106a17736a10cd5))
+* **packages/sui-studio:** skip test template ([6a727bc](https://github.com/SUI-Components/sui/commit/6a727bcc6b965f878ca246a4755d0ef652d48fed))
+
+
+
+# 10.31.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** Generate components demo with correct tab size ([eaa7026](https://github.com/SUI-Components/sui/commit/eaa7026f83e8c365b3a3a8b01bb141e193e8d6c8))
+
+
+
+# 10.30.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-studio:** force release ([636ae02](https://github.com/SUI-Components/sui/commit/636ae026c4947629e24245cab110ab12badef58f))
+
+
+
+# 10.29.0 (2021-10-20)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add Babel package on index.html for dev mode ([3ceb285](https://github.com/SUI-Components/sui/commit/3ceb2852691568285b70938e5d2235e7f8dd1292))
+
+
+
+# 10.28.0 (2021-10-15)
+
+
+### Features
+
+* **packages/sui-studio:** add dev mode raw default style loading ([2d87f1b](https://github.com/SUI-Components/sui/commit/2d87f1bfbc3ccb6437bb98e22085df4d3adaade2))
+
+
+
+# 10.27.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies ([1097bdc](https://github.com/SUI-Components/sui/commit/1097bdc5aaf5108a2cbf932f0ded4abe8d23de0c))
+
+
+
 # 10.26.0 (2021-09-23)
 
 
@@ -340,7 +537,6 @@
 ### Features
 
 * **sui-studio:** add ref to mocha setup environment ([557d14b](https://github.com/SUI-Components/sui/commit/557d14bef1d2902a74618d9f922545f4918122f1))
-* **sui-studio:** pull master ([e4456e0](https://github.com/SUI-Components/sui/commit/e4456e0bad2fec9b1f025e270d0115f020582106))
 * **sui-studio:** studio contextify component without loosing its reference ([44f39b8](https://github.com/SUI-Components/sui/commit/44f39b85175553751766dd186a3976ee100691df))
 
 

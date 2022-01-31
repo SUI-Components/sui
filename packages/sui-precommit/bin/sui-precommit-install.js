@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const fs = require('fs')
-const fsPromises = require('fs/promises')
-const set = require('dset')
-const get = require('dlv')
-const {writeFile} = require('@s-ui/helpers/file')
+import {join} from 'path'
+import {readFileSync, writeFileSync} from 'fs'
+import set from 'dset'
+import get from 'dlv'
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd
@@ -13,7 +11,7 @@ const {writeFile} = require('@s-ui/helpers/file')
  */
 const {CI = false, INIT_CWD} = process.env
 const cwd = INIT_CWD || process.cwd()
-const pkgPath = path.join(cwd, 'package.json')
+const pkgPath = join(cwd, 'package.json')
 
 const {name} = readPackageJson()
 /** We avoid performing the precommit install:
@@ -67,8 +65,7 @@ function log(...args) {
  * @returns {object} Package.json content in JSON format
  */
 function readPackageJson() {
-  console.log(pkgPath)
-  return require(pkgPath)
+  return JSON.parse(readFileSync(pkgPath, {encoding: 'utf8'}))
 }
 
 /**
@@ -103,5 +100,5 @@ function removeFromPackageJson(name) {
  * @param {object} pkg New package content to be write on the file
  */
 function writePackageJson(pkg) {
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), {encoding: 'utf8'})
+  writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), {encoding: 'utf8'})
 }

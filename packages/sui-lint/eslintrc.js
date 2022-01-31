@@ -85,6 +85,7 @@ module.exports = {
     ...TESTING_RULES,
     'accessor-pairs': RULES.OFF,
     '@babel/no-unused-expressions': RULES.OFF,
+    'import/extensions': [RULES.WARNING, 'always', {ignorePackages: true}],
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
@@ -97,7 +98,8 @@ module.exports = {
     ],
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
-    'prettier/prettier': [RULES.ERROR, prettierOptions]
+    'prettier/prettier': [RULES.ERROR, prettierOptions],
+    'react/jsx-no-bind': RULES.WARNING
   },
   overrides: [
     {
@@ -107,7 +109,7 @@ module.exports = {
         project: './tsconfig.json'
       },
       rules: {
-        'no-return-await': 'off',
+        'no-return-await': RULES.OFF,
         'prettier/prettier': RULES.OFF
       }
     }

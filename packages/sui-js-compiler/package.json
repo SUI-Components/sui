@@ -1,0 +1,21 @@
+{
+  "name": "@s-ui/js-compiler",
+  "version": "1.12.0",
+  "description": "JavaScript Compiler",
+  "main": "index.js",
+  "bin": {
+    "sui-js-compiler": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@swc/core": "1.2.127",
+    "@swc/helpers": "0.3.2",
+    "fast-glob": "3.2.10",
+    "fs-extra": "10.0.0"
+  }
+}

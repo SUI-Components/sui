@@ -18,9 +18,6 @@ export const inRedis = (
   let response
 
   if (!cacheItem) {
-    console.log(
-      `[sui-decorators/cache]:inRedis Miss for key(${cacheKey}): ${key}`
-    )
     try {
       response = await original.apply(instance, args)
     } catch (err) {
@@ -40,14 +37,8 @@ export const inRedis = (
 
     if (isInlineErrorResponseWithoutError || isNormalResponseWithoutError) {
       cache.set(key, response, ttl)
-      console.log(
-        `[sui-decorators/cache]:inRedis Add key(${cacheKey}): ${key}. `
-      )
     }
   } else {
-    console.log(
-      `[sui-decorators/cache]:inRedis Hit for key(${cacheKey}): ${key}. `
-    )
     return cacheItem
   }
 

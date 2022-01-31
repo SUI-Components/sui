@@ -13,10 +13,12 @@ module.exports = ({address, page, config}) => {
   app.use(
     webpackMiddleware(compiler, {
       serverSideRender: true,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      noInfo: true
+      headers: [
+        {
+          key: 'Access-Control-Allow-Origin',
+          value: '*'
+        }
+      ]
     })
   )
 

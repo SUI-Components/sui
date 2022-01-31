@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 2.16.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-pde:** add first iteration of experiment and feature components ([391d655](https://github.com/SUI-Components/sui/commit/391d655459dcb96a61f5b4b7c295ad3c22bd8df2))
+* **packages/sui-pde:** apply destructoring review ([da66fc3](https://github.com/SUI-Components/sui/commit/da66fc3a0e086167ad47da427d9aca07450aec0f))
+* **packages/sui-pde:** fix given reviews ([b074190](https://github.com/SUI-Components/sui/commit/b0741905f37ef0699c2efbfc238dbc1a3556d295))
+
+
+
+# 2.15.0 (2021-10-08)
+
+
+### Features
+
+* **packages/sui-pde:** add cache for tracking events so its only send on update ([0cf6c26](https://github.com/SUI-Components/sui/commit/0cf6c26fdc926784c3d8f7fe984bc9ba0887b645))
+* **packages/sui-pde:** migrate cache to functions ([3d8a9d4](https://github.com/SUI-Components/sui/commit/3d8a9d4e79a1aec33f4a2283105102e28d926d86))
+* **packages/sui-pde:** reuse cache name string in tests ([7c4cabc](https://github.com/SUI-Components/sui/commit/7c4cabc853de9b55aa86653b360ed4263a383aba))
+* **packages/sui-pde:** use session storage + file renaming ([4d77a5a](https://github.com/SUI-Components/sui/commit/4d77a5a8f6e2f56f24af9c261f08ca5a958de9e7))
+
+
+
 # 2.14.0 (2021-09-28)
 
 

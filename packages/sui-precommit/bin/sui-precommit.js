@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-const program = require('commander')
-const pkg = require('../package.json')
-const version = pkg.version
+import program from 'commander'
+import {createRequire} from 'module'
+
+const require = createRequire(import.meta.url)
+const {version} = require('../package.json')
 
 program.version(version, '    --version')
 

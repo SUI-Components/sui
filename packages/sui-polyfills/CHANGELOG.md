@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.15.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-polyfills:** Add from where we extracted the code ([1db21eb](https://github.com/SUI-Components/sui/commit/1db21ebc5629fdf3da314c27620066da8f63141f))
+* **packages/sui-polyfills:** Add globalThis polyfill ([3f74450](https://github.com/SUI-Components/sui/commit/3f74450573d4fa0634f0aaadb6e43a7993fa80bd))
+
+
+
 # 1.14.0 (2021-06-15)
 
 

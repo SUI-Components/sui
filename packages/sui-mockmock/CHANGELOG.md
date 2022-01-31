@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.1.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-mockmock:** Unify versions of same package ([c40887c](https://github.com/SUI-Components/sui/commit/c40887c92a70df2e65043ee9b0666bc8dd4b2e45))
+* **Root:** Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 2.0.0 (2021-05-20)
 
 

@@ -118,7 +118,7 @@ describe('<Link />', () => {
 
   describe('with params', () => {
     const createRoutes = (
-      {to, withActiveProps = true, props = {}} // eslint-disable-line react/prop-types
+      {to, state, withActiveProps = true, props = {}} // eslint-disable-line react/prop-types
     ) => (
       <Route>
         <Route
@@ -130,6 +130,7 @@ describe('<Link />', () => {
                 activeStyle: {color: 'red'}
               })}
               to={to}
+              state={state}
               {...props}
             >
               Link to Michael
@@ -166,6 +167,36 @@ describe('<Link />', () => {
       fireEvent.click(await screen.findByText('Link'))
       const link = await screen.findByText('Link to Michael')
       expect(link.getAttribute('class')).to.equal(null)
+    })
+  })
+
+  describe('with state', () => {
+    it('passes state between routes', async () => {
+      const customState = {isCustomState: true}
+      const history = createMemoryHistory()
+
+      render(
+        <section id="app">
+          <Router history={history}>
+            <Route
+              path="*"
+              component={() => (
+                <Link to="/hello/sui" state={customState}>
+                  Link
+                </Link>
+              )}
+            />
+          </Router>
+        </section>
+      )
+
+      const elementToClick = await screen.findByText('Link')
+      fireEvent.click(elementToClick)
+
+      const {state: historyState} = history.getCurrentLocation()
+      const [customStateKey] = Object.keys(customState)
+
+      expect(historyState).to.haveOwnProperty(customStateKey).be.true
     })
   })
 })
