@@ -2,6 +2,7 @@
 
 import {join} from 'path'
 import {readFileSync, writeFileSync} from 'fs'
+import {chmod, writeFile} from 'fs/promises'
 import set from 'dset'
 import get from 'dlv'
 
@@ -19,7 +20,7 @@ const {name} = readPackageJson()
  **  - for the `@s-ui/precommit` pkg itself */
 
 if (CI === false && name !== '@s-ui/precommit') {
-  const hooksPath = path.join(cwd, '.git')
+  const hooksPath = join(cwd, '.git')
 
   const commitMsgPath = `${hooksPath}/hooks/commitmsg`
   const preCommitPath = `${hooksPath}/hooks/pre-commit`
@@ -31,9 +32,9 @@ if (CI === false && name !== '@s-ui/precommit') {
     writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
   ]).then(() =>
     Promise.all([
-      fsPromises.chmod(commitMsgPath, '755'),
-      fsPromises.chmod(preCommitPath, '755'),
-      fsPromises.chmod(prePushPath, '755')
+      chmod(commitMsgPath, '755'),
+      chmod(preCommitPath, '755'),
+      chmod(prePushPath, '755')
     ])
   )
 
