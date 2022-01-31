@@ -25,7 +25,7 @@
     "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
-    "@testing-library/react": "11.1.0",
+    "@testing-library/react": "11.2.7",
     "react": "17",
     "react-dom": "17",
     "sinon": "10.0.0"
