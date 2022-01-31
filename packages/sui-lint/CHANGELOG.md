@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.1.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Move some errors to warnings ([f6a5a3b](https://github.com/SUI-Components/sui/commit/f6a5a3bb591fffa623f6cfd797824b81e911e5cb))
+
+
+
 # 4.0.0 (2022-01-31)
 
 
