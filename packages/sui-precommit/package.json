@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/precommit",
-  "version": "2.16.0-beta.2",
+  "version": "2.16.0-beta.7",
   "description": "Effortless SUI precommit rules integration in your project",
   "type": "module",
   "bin": {
@@ -12,7 +12,6 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@s-ui/helpers": "1",
     "dlv": "1.1.3",
     "dset": "2.1.0"
   },

@@ -3,7 +3,7 @@
 // @ts-check
 
 import {join} from 'path'
-import {readFileSync, writeFileSync} from 'fs'
+import {readFileSync, writeFileSync, existsSync} from 'fs'
 import {chmod, writeFile} from 'fs/promises'
 import set from 'dset'
 import get from 'dlv'
@@ -23,6 +23,18 @@ const {name} = readPackageJson()
 
 if (CI === false && name !== '@s-ui/precommit') {
   const hooksPath = join(cwd, '.git')
+
+  /**
+   * Check if hooks directory exists. If not, it means
+   * the project is not a Git Repository and it doesn't
+   * make sense to install Git hooks for now.
+   */
+  if (!existsSync(hooksPath)) {
+    log('No .git folder found. Skipping precommit hooks installation...')
+    process.exit(0)
+  }
+
+  log('Installing precommit hooks...')
 
   const commitMsgPath = `${hooksPath}/hooks/commitmsg`
   const preCommitPath = `${hooksPath}/hooks/pre-commit`
@@ -56,14 +68,14 @@ if (CI === false && name !== '@s-ui/precommit') {
     removeFromPackageJson('husky')
   } catch (err) {
     log(err.message)
-    log('sui-precommit installation has FAILED.')
+    log('[@s-ui/precommit] Installation has FAILED.')
     process.exit(1)
   }
 }
 
 function log(...args) {
   /* eslint-disable no-console */
-  args[0] = '[sui-precommit] ' + args[0]
+  args[0] = '[@s-ui/precommit] ' + args[0]
   console.log(...args)
 }
 
@@ -86,7 +98,7 @@ function addToPackageJson(script, path, overwrite = true) {
   // write if the path doesn't exist or we have to overwrite it
   if (get(pkg, path) === undefined || overwrite) {
     set(pkg, path, script)
-    log(`Writing "${name}" on object path "${path}"...`)
+    log(`Added "${path}"...`)
     writePackageJson(pkg)
   }
 }
