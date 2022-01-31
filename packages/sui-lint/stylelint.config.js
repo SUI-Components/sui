@@ -1,4 +1,4 @@
-const prettierOptions = require('./.prettierrc')
+const prettierOptions = require('./.prettierrc.js')
 
 module.exports = {
   extends: ['stylelint-config-recommended-scss'],
@@ -6,6 +6,11 @@ module.exports = {
   rules: {
     'prettier/prettier': [true, prettierOptions],
     'scss/at-rule-no-unknown': true,
+    'scss/at-import-partial-extension': false,
+    'scss/at-import-no-partial-leading-underscore': false,
+    'scss/comment-no-empty': false,
+    'scss/dollar-variable-no-missing-interpolation': false,
+    'scss/no-global-function-names': false,
     'at-rule-no-unknown': null,
     'block-no-empty': true,
     'color-no-invalid-hex': true,
@@ -28,6 +33,7 @@ module.exports = {
     'no-duplicate-at-import-rules': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
+    'no-invalid-position-at-import-rule': 'warning',
     'no-invalid-double-slash-comments': true,
     'number-leading-zero': 'always',
     'property-no-unknown': true,

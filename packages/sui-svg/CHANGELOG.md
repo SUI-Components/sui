@@ -1,10 +1,15 @@
 # CHANGELOG
 
+# 3.7.0 (2022-01-31)
+
+
+
 # 3.6.0 (2022-01-10)
 
 
 ### Features
 
+* **packages/sui-svg:** Bump dependencies ([c53c827](https://github.com/SUI-Components/sui/commit/c53c827ebedcca56e7b07cd42499887f130ebc08))
 * **packages/sui-svg:** Upgrade dependencies ([3aa5e48](https://github.com/SUI-Components/sui/commit/3aa5e48c9d45136949e5626401d1d2cfb0cb765b))
 
 
@@ -14,6 +19,7 @@
 
 ### Features
 
+* **packages/sui-svg:** Upgrade dependencies to use same as bundler ([8453f31](https://github.com/SUI-Components/sui/commit/8453f31d2e1229df055eda843b1dec8c7d25b1a3))
 * **packages/sui-svg:** Upgrade sui-svg dependencies ([c176aca](https://github.com/SUI-Components/sui/commit/c176acab5f9179f2c6b7cc17dcf1d4a376e26590))
 
 
