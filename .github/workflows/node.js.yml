@@ -26,8 +26,10 @@ jobs:
       uses: pnpm/action-setup@v2
       with:
         version: latest
-        run_install: true
-        recursive: false
+        run_install: |
+          - recursive: false
+            args: [--silent]
+
     - run: npm run lint
     - run: npm run test:ci
     - run: npx -p ./packages/sui-ci sui-ci release
