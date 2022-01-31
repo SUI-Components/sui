@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.1.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-test:** Sync babel/core dependency ([469c8b1](https://github.com/SUI-Components/sui/commit/469c8b14f9b8d37821f78cdb7025ae0d6f1d699e))
+
+
+
 # 8.0.0 (2022-01-27)
 
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.47.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Sync babel/core dependency ([3b6cc91](https://github.com/SUI-Components/sui/commit/3b6cc914f5065adf8daa118ed4dbe0508e5ffba7))
+
+
+
 # 3.46.0 (2022-01-11)
 
 
