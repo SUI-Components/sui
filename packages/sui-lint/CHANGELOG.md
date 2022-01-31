@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 4.2.0 (2022-01-31)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Use correct way to handle warnings on stylelint ([351d8c2](https://github.com/SUI-Components/sui/commit/351d8c2f4dfd621475f11994ae5a13524ecfcae5))
+* **packages/sui-lint:** Use false for some rules ([4af4bdf](https://github.com/SUI-Components/sui/commit/4af4bdf5456a84fb029a75a8b1fa20494eddec0f))
+
+
+
+# 4.1.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Move some errors to warnings ([f6a5a3b](https://github.com/SUI-Components/sui/commit/f6a5a3bb591fffa623f6cfd797824b81e911e5cb))
+
+
+
 # 4.0.0 (2022-01-31)
 
 

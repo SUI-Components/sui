@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.121.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-theme:** Add new box shadow size variable ([a26c335](https://github.com/SUI-Components/sui/commit/a26c335e3faa9a8ab8867e6289b5df1853170d28))
+
+
+
 # 8.120.0 (2022-01-24)
 
 
