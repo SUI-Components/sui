@@ -4,7 +4,7 @@
   "description": "Mocking utilities for testing.",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "babel ./src -d lib --presets sui",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test": "npm run test:client && npm run test:server",
     "test:client": "sui-test browser",
