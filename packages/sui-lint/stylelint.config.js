@@ -6,11 +6,11 @@ module.exports = {
   rules: {
     'prettier/prettier': [true, prettierOptions],
     'scss/at-rule-no-unknown': true,
-    'scss/at-import-partial-extension': null,
-    'scss/at-import-no-partial-leading-underscore': null,
-    'scss/comment-no-empty': null,
-    'scss/dollar-variable-no-missing-interpolation': null,
-    'scss/no-global-function-names': null,
+    'scss/at-import-partial-extension': null, // we should consider this? extensions yes or no?
+    'scss/at-import-no-partial-leading-underscore': null, // we should consider this?
+    'scss/comment-no-empty': null, // we must activate this sometime
+    'scss/dollar-variable-no-missing-interpolation': null, // we must activate this sometime
+    'scss/no-global-function-names': null, // we must activate this sometime
     'at-rule-no-unknown': null,
     'block-no-empty': true,
     'color-no-invalid-hex': true,
@@ -33,7 +33,7 @@ module.exports = {
     'no-duplicate-at-import-rules': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
-    'no-invalid-position-at-import-rule': 'warning',
+    'no-invalid-position-at-import-rule': null, // we must activate this sometime
     'no-invalid-double-slash-comments': true,
     'number-leading-zero': 'always',
     'property-no-unknown': true,
