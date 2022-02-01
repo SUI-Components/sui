@@ -21,22 +21,22 @@
     "test:client:watch": "npm run test:client -- --watch",
     "test:server": "sui-test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
     "test:server:watch": "npm run test:server -- --watch",
-    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
+    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234",
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run test"
   },
   "devDependencies": {
     "@babel/cli": "7",
     "@s-ui/lint": "3",
     "@s-ui/mono": "2",
-    "@s-ui/precommit": "2",
+    "@s-ui/precommit": "3",
     "@s-ui/react-context": "1",
     "@s-ui/test": "8",
     "chai": "4.3.6",
-    "husky": "4.3.0",
     "react": "17",
     "rimraf": "3.0.2",
     "sinon": "10.0.0",
-    "typescript": "4.3.2",
-    "validate-commit-msg": "2.14.0"
+    "typescript": "4.3.2"
   },
   "config": {
     "sui-mono": {
@@ -78,11 +78,5 @@
   "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "sui-precommit run",
-      "commit-msg": "validate-commit-msg"
-    }
   }
 }
