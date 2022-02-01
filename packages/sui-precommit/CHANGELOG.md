@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.1.0 (2022-02-01)
+
+
+### Bug Fixes
+
+* **packages/sui-precommit:** Fix commit-msg hook ([85725bd](https://github.com/SUI-Components/sui/commit/85725bd9c27ce3ce9ecb4845584375e0f83ea8f3))
+
+
+
 # 3.0.0 (2022-02-01)
 
 
