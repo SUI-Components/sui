@@ -36,12 +36,12 @@ if (CI === false && name !== '@s-ui/precommit') {
 
   log('Installing precommit hooks...')
 
-  const commitMsgPath = `${hooksPath}/hooks/commitmsg`
+  const commitMsgPath = `${hooksPath}/hooks/commit-msg`
   const preCommitPath = `${hooksPath}/hooks/pre-commit`
   const prePushPath = `${hooksPath}/hooks/pre-push`
 
   Promise.all([
-    writeFile(commitMsgPath, '#!/bin/sh\nnpm run commitmsg --if-present'),
+    writeFile(commitMsgPath, '#!/bin/sh\nnpm run commit-msg --if-present'),
     writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
     writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
   ]).then(() =>
