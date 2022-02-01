@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.19.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-mono:** Check private field to avoid release private packages ([80a1ab3](https://github.com/SUI-Components/sui/commit/80a1ab3128cda568844f362cad2dcc9cd2265128))
+
+
+
 # 2.18.0 (2021-09-08)
 
 
