@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.3.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-lint:** Use correct value to turn rules off ([9623a58](https://github.com/SUI-Components/sui/commit/9623a58433668bb0222c4f351624bf729b4a0a96))
+
+
+
 # 4.2.0 (2022-01-31)
 
 
