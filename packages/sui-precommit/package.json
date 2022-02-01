@@ -1,19 +1,17 @@
 {
   "name": "@s-ui/precommit",
-  "version": "2.15.0",
+  "version": "2.15.1",
   "description": "Effortless SUI precommit rules integration in your project",
   "type": "module",
   "bin": {
     "sui-precommit": "./bin/sui-precommit.js"
   },
   "scripts": {
-    "postinstall": "node ./bin/sui-precommit.js install"
+    "postinstall": "node ./bin/sui-precommit.js"
   },
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@s-ui/helpers": "1",
-    "commander": "6.2.1",
     "dlv": "1.1.3",
     "dset": "2.1.0"
   },
