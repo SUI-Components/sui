@@ -11,6 +11,8 @@ module.exports = {
     'scss/comment-no-empty': null, // we must activate this sometime
     'scss/dollar-variable-no-missing-interpolation': null, // we must activate this sometime
     'scss/no-global-function-names': null, // we must activate this sometime
+    'scss/operator-no-newline-after': null,
+    'scss/operator-no-unspaced': null,
     'at-rule-no-unknown': null,
     'block-no-empty': true,
     'color-no-invalid-hex': true,
