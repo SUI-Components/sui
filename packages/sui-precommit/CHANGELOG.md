@@ -1,12 +1,32 @@
 # CHANGELOG
 
+# 3.0.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-precommit:** Add missing packages ([afc7326](https://github.com/SUI-Components/sui/commit/afc7326b06d6a1a6b93272310905f1943995115d))
+* **packages/sui-precommit:** Force new release of sui-precommit after merge ([2158abb](https://github.com/SUI-Components/sui/commit/2158abbf9bfa71afdb4ff6195212466b0c086574))
+* **packages/sui-precommit:** Remove not needed stuff ([0ec2ad9](https://github.com/SUI-Components/sui/commit/0ec2ad9791b442e7a3de5e1bd77458c7e6d8b33f))
+* **packages/sui-precommit:** Rollback version for release ([8941df2](https://github.com/SUI-Components/sui/commit/8941df2f698b38ff347ad2cf909ac65247bd9aee))
+* **packages/sui-precommit:** Simplify precommit further ([7d5ad2c](https://github.com/SUI-Components/sui/commit/7d5ad2ce83422b34ac256c6a4891e2e7290a04fc))
+* **packages/sui-precommit:** Update README with new info ([8c3023e](https://github.com/SUI-Components/sui/commit/8c3023ea9fc0ca161fb6fb301ad4d55b0d3043cb))
+
+
+
 # 2.15.0 (2021-12-23)
+
+
+### Bug Fixes
+
+* **packages/sui-precommit:** Wait accordingly to promises ([b609ee7](https://github.com/SUI-Components/sui/commit/b609ee7acfd1db59cf765738b6e3575b0be8549d))
 
 
 ### Features
 
 * **packages/sui-precommit:** Add file extension to imports ([5ab9b6f](https://github.com/SUI-Components/sui/commit/5ab9b6fd0753fb3fa27828d177a978fbaf453e50))
 * **packages/sui-precommit:** Migrate package to ESModules ([3ab3b9e](https://github.com/SUI-Components/sui/commit/3ab3b9eae41cbd894046929f99317a1dda3f8dd6))
+* **packages/sui-precommit:** Remove Husky dependency and create manually hooks ([307c833](https://github.com/SUI-Components/sui/commit/307c833ec16c08e2e7b0f8fd94ab2740b8acfe75))
 
 
 
