@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.6.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-lint:** Disable more rules because the new version ([487ac04](https://github.com/SUI-Components/sui/commit/487ac0495d597d643fa912f7b10d3a2f665b6c35))
+
+
+
 # 4.5.0 (2022-02-01)
 
 
