@@ -33,7 +33,7 @@ module.exports = {
     'no-duplicate-at-import-rules': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
-    'no-invalid-position-at-import-rule': null, // we must activate this sometime!
+    'no-invalid-position-at-import-rule': null, // we must activate this sometime!!
     'no-invalid-double-slash-comments': true,
     'number-leading-zero': 'always',
     'property-no-unknown': true,
