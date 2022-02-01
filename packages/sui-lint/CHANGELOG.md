@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.5.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-lint:** Disable rule ([75d7e2b](https://github.com/SUI-Components/sui/commit/75d7e2bd9dfdbfc065e06eb4c6e0777a82b835a2))
+* **packages/sui-lint:** Use correct value for disable rule ([35758c9](https://github.com/SUI-Components/sui/commit/35758c97a8f5a30e23877309bda129b023f5ef83))
+
+
+
 # 4.4.0 (2022-02-01)
 
 
