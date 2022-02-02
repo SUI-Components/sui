@@ -2,7 +2,7 @@
 
 Optimized sass-loader for Webpack@5.
 
-*Fork of fast-sass-loader and based on super-sass-loader.*
+*Fork of [fast-sass-loader](https://github.com/yibn2008/fast-sass-loader)*
 
 
 **Features:**
@@ -30,21 +30,7 @@ and you need install **sass** and **webpack** as peer dependencies.
 
 ## Configuration
 
-
 ## Options
-
-### implementation
-
-since version 2.x, fast-sass-loader use dart-sass (npm `sass`) instead of original node-sass, if you want use node-sass please use this options to modify.
-
-```js
-{
-  loader: 'fast-sass-loader',
-  options: {
-    implementation: require('node-sass')
-  }
-}
-```
 
 ### includePaths:
 
@@ -57,7 +43,7 @@ If you want to prepend Sass code before the actual entry file, you can set the d
 {
     loader: "fast-sass-loader",
     options: {
-        data: "$env: " + process.env.NODE_ENV + ";"
+      data: "$env: " + process.env.NODE_ENV + ";"
     }
 }
 ```
@@ -65,20 +51,22 @@ If you want to prepend Sass code before the actual entry file, you can set the d
 Please note: Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this.
 
 ### transformers:
-If you want to import files that aren't basic Sass or css files, you can use the transformers option. This option takes an array of transformer entries, each with a list of file extensions and a tranform function. If an imported file's extension matches one of the transformers' extensions, the file contents will be passed to the corresponding transform function. Your transform function should return a sass string that will be directly written into your compiled Sass file. This is especially useful if you use .json files to share your basic styles across platforms and you'd like to import your .json files directly into your Sass.
+
+If you want to import files that aren't basic SCSS or CSS files, you can use the transformers option. This option takes an array of transformer entries, each with a list of file extensions and a tranform function. If an imported file's extension matches one of the transformers' extensions, the file contents will be passed to the corresponding transform function. Your transform function should return a sass string that will be directly written into your compiled Sass file. This is especially useful if you use .json files to share your basic styles across platforms and you'd like to import your .json files directly into your SASS.
+
 ```javascript
 {
-    loader: "fast-sass-loader",
-    options: {
-        transformers: [
-            {
-                extensions: [".json"],
-                transform: function(rawFile) {
-                    return jsonToSass(rawFile);
-                }
-            }
-        ]
-    }
+  loader: "fast-sass-loader",
+  options: {
+    transformers: [
+      {
+        extensions: [".json"],
+        transform: function(rawFile) {
+          return jsonToSass(rawFile);
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -92,7 +80,7 @@ By default `fast-sass-loader` resolves and rewrites paths inside `url()`. This b
 
 ### Mixing import `.scss` and`.sass` file is not allowed
 
-Since `fast-sass-loader` will parse `@import` and merge all files into single sass file, you cannot import `.scss` file from `.sass` (or opposite).
+Since `@s-ui/sass-loader` will parse `@import` and merge all files into single sass file, you cannot import `.scss` file from `.sass` (or opposite).
 
 For example:
 
@@ -107,9 +95,9 @@ body {
 
 ### Avoid same variable name in different sass files
 
-Since `fast-sass-loader` will dedupe sass file, later imported file will be ignored. Using same variable name in different sass fill would produce unexpected output.
+Since `@s-ui/sass-loader` will dedupe sass file, later imported file will be ignored. Using same variable name in different SCSS files fill would produce unexpected output.
 
-For example (compile `entry.scss` with fast-sass-loader):
+For example (compile `entry.scss` with @s-ui/sass-loader):
 
 ```sass
 // a.scss
@@ -152,7 +140,7 @@ fast-sass-loader doesn't support `@import` statement in sass rules, for example:
 }
 ```
 
-you should wrap the rules that you want to import with mixin, then include them in your `.a { ... }` or `.b { ... }`
+You should wrap the rules that you want to import with mixin, then include them in your `.a { ... }` or `.b { ... }`
 
 ## License
 
