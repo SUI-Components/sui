@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.2.0 (2022-02-02)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Upgrade webpack-dev-middleware dependency ([c896f26](https://github.com/SUI-Components/sui/commit/c896f26f2124f31cfdba1634fa3becb5c82671e9))
+
+
+
 # 5.1.0 (2022-01-27)
 
 
