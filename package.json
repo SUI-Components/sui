@@ -12,7 +12,7 @@
     "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -rf package-lock.json node_modules && npm install --legacy-peer-deps",
+    "phoenix": "npx @s-ui/mono run 'rm -rf ./node_modules' && rm -rf package-lock.json node_modules && npm install --legacy-peer-deps",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
@@ -23,7 +23,8 @@
     "test:server:watch": "npm run test:server -- --watch",
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234",
     "pre-commit": "npm run lint",
-    "pre-push": "npm run test"
+    "pre-push": "npm run test",
+    "commit-msg": "validate-commit-msg"
   },
   "devDependencies": {
     "@babel/cli": "7",
@@ -36,7 +37,8 @@
     "react": "17",
     "rimraf": "3.0.2",
     "sinon": "10.0.0",
-    "typescript": "4.3.2"
+    "typescript": "4.3.2",
+    "validate-commit-msg": "2.14.0"
   },
   "config": {
     "sui-mono": {
