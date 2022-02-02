@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 const program = require('commander')
-const rimraf = require('rimraf')
 
 const path = require('path')
 const {resolve} = path
-const {readdirSync, statSync} = require('fs')
+const {readdirSync, statSync, rmdirSync} = require('fs')
 const {readFile, writeFile} = require('fs/promises')
 const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production.js')
@@ -49,7 +48,7 @@ const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
-  rimraf.sync(PUBLIC_PATH)
+  rmdirSync(PUBLIC_PATH, {recursive: true})
 }
 
 const build = ({page, remoteCdn}) => {
