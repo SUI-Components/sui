@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.3.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix studio import components ([754f790](https://github.com/SUI-Components/sui/commit/754f7901059a55506031b7061da024155b6b630d))
+
+
+
 # 11.2.0 (2022-02-04)
 
 
