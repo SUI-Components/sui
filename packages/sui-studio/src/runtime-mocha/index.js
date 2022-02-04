@@ -82,7 +82,7 @@ Promise.all(
 )
   .then(() => {
     // in order to force all tests, we're importing all the files that matches the pattern
-    importAll(selectedTestFiles)
+    importAll(testsFiles)
     // we're ready to go
     originalKarmaLoader.call(window.__karma__)
   })
