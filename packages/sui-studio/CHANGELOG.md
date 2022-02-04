@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 11.2.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** import only selected test files ([f1b34bf](https://github.com/SUI-Components/sui/commit/f1b34bfb85f6ea64da9631bebdbbc13601caf707))
+* **packages/sui-studio:** use pattern to avoid multiple patterns (srcPattern + pattern) ([6ad0a36](https://github.com/SUI-Components/sui/commit/6ad0a36a6866fffdf21dc8b79a992a462c4ab4f0))
+
+
+
 # 11.1.0 (2022-01-27)
 
 
