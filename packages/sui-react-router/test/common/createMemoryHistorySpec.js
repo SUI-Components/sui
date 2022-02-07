@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 
-import createMemoryHistory from '../../src/createMemoryHistory'
+import createMemoryHistory from '../../src/createMemoryHistory.js'
 
 describe('createMemoryHistory', () => {
   it('adds query empty object when no querystring is present', () => {

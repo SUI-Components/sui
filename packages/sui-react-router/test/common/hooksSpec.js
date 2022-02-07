@@ -7,7 +7,7 @@ import {
   useLocation,
   useParams,
   useRouter
-} from '../../src/index'
+} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
