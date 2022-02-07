@@ -3,8 +3,8 @@
 
 import PropTypes from 'prop-types'
 
-import invariant from './internal/invariant'
-import {falsy} from './internal/PropTypes'
+import invariant from './internal/invariant.js'
+import {falsy} from './internal/PropTypes.js'
 
 /**
  * An <IndexRoute> is used to specify its parent's <Route indexRoute> in
