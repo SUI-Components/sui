@@ -4,14 +4,13 @@
 const fs = require('fs')
 const path = require('path')
 const program = require('commander')
-const rimraf = require('rimraf')
 const webpack = require('webpack')
 const {writeFile} = require('@s-ui/helpers/file')
 
-const config = require('../webpack.config.prod')
-const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
-const log = require('../shared/log')
-const {config: projectConfig} = require('../shared')
+const config = require('../webpack.config.prod.js')
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder.js')
+const log = require('../shared/log.js')
+const {config: projectConfig} = require('../shared/index.js')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
@@ -56,7 +55,10 @@ const nextConfig = packagesToLink.length
 
 if (clean) {
   log.processing('Removing previous build...')
-  rimraf.sync(path.resolve(process.env.PWD, 'public'))
+  fs.rmSync(path.resolve(process.env.PWD, 'public'), {
+    force: true,
+    recursive: true
+  })
 }
 
 log.processing('Generating minified bundle...')

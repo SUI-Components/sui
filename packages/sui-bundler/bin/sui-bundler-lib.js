@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 // https://github.com/coryhouse/react-slingshot/blob/master/tools/build.js
 const program = require('commander')
-const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
+const fs = require('fs')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
 const config = require('../webpack.config.lib.js')
@@ -65,7 +65,7 @@ if (umd) {
 
 if (clean) {
   log.processing(`Removing previous build in ${output}...`)
-  rimraf.sync(outputFolder)
+  fs.rmSync(outputFolder, {force: true, recursive: true})
 }
 
 log.processing('Generating minified bundle...')
