@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.4.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-studio:** update fast-glob ([8a4bac3](https://github.com/SUI-Components/sui/commit/8a4bac36b2983f74976451f726bbb329e50450e7))
+
+
+
 # 11.3.0 (2022-02-04)
 
 
