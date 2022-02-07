@@ -41,7 +41,6 @@ const FLAGS_INSTALL = [
 
 const repositories = [
   'frontend-ma--uilib-widgets',
-  'frontend-ma--web-app-plus',
   'frontend-ma--web-app',
 
   'frontend-cf--web-app',
@@ -52,7 +51,6 @@ const repositories = [
 
   'frontend-fc--uilib-widgets',
   'frontend-fc--web-server',
-  'frontend-fcbw--uilib-widgets',
 
   'frontend-hab--uilib-widgets',
   'frontend-hab--web-app',
@@ -60,10 +58,15 @@ const repositories = [
 
   'frontend-ij--uilib-widgets',
   'frontend-ij--web-app',
+  'frontend-ij--web-backoffice',
 
   'frontend-if--uilib-widgets',
 
-  'frontend-re--ut-web-app'
+  'frontend-ep--uilib-widgets',
+
+  'frontend-re--ut-web-app',
+
+  'frontend-adit--uilib-genos'
 ]
 
 const cloneSUIComponentsCommand = [
