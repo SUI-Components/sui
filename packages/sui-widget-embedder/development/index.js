@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 
 module.exports = ({address, page, config}) => {
-  const compiler = require('../compiler/development')({
+  const compiler = require('../compiler/development.js')({
     address,
     page,
     port: config.port

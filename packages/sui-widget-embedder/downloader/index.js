@@ -88,10 +88,12 @@
 
   function loadAssetsFor(page) {
     var manifest = manifests[page]
+
     var loadStyle = function () {
       var css = manifest['app.css'] || manifest['main.css']
       return css ? load.css(css) : Promise.resolve()
     }
+
     var loadScripts = [
       manifest['runtime~app.js'],
       manifest['main.js'],
