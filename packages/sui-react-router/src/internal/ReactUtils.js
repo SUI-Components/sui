@@ -1,7 +1,7 @@
 import {Children as ReactChildren, isValidElement} from 'react'
 
-import IndexRoute from '../IndexRoute'
-import Redirect from '../Redirect'
+import IndexRoute from '../IndexRoute.js'
+import Redirect from '../Redirect.js'
 
 /**
  * Transform from React Elements tree to a plain json

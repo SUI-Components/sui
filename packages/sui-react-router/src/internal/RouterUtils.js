@@ -1,8 +1,8 @@
 // from https://github.com/ReactTraining/react-router/blob/v3/modules/RouterUtils.js#L1
 
-import browserHistory from '../browserHistory'
-import createMemoryHistory from '../createMemoryHistory'
-import canUseDOM from './canUseDOM'
+import browserHistory from '../browserHistory.js'
+import createMemoryHistory from '../createMemoryHistory.js'
+import canUseDOM from './canUseDOM.js'
 
 /**
  * Create the history that the router will use depending on the environment

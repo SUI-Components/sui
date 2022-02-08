@@ -1,5 +1,33 @@
 # CHANGELOG
 
+# 11.4.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-studio:** update fast-glob ([8a4bac3](https://github.com/SUI-Components/sui/commit/8a4bac36b2983f74976451f726bbb329e50450e7))
+
+
+
+# 11.3.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix studio import components ([754f790](https://github.com/SUI-Components/sui/commit/754f7901059a55506031b7061da024155b6b630d))
+
+
+
+# 11.2.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** import only selected test files ([f1b34bf](https://github.com/SUI-Components/sui/commit/f1b34bfb85f6ea64da9631bebdbbc13601caf707))
+* **packages/sui-studio:** use pattern to avoid multiple patterns (srcPattern + pattern) ([6ad0a36](https://github.com/SUI-Components/sui/commit/6ad0a36a6866fffdf21dc8b79a992a462c4ab4f0))
+
+
+
 # 11.1.0 (2022-01-27)
 
 

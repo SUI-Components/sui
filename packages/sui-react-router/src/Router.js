@@ -3,13 +3,16 @@
 import {createElement as h, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
-import {routes, components} from './internal/PropTypes'
-import {fromReactTreeToJSON} from './internal/ReactUtils'
-import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
-import {createTransitionManager} from './internal/createTransitionManager'
-import RouterContext from './internal/Context'
+import {routes, components} from './internal/PropTypes.js'
+import {fromReactTreeToJSON} from './internal/ReactUtils.js'
+import {
+  createRouterHistory,
+  createRouterObject
+} from './internal/RouterUtils.js'
+import {createTransitionManager} from './internal/createTransitionManager.js'
+import RouterContext from './internal/Context.js'
 
-import Route from './Route'
+import Route from './Route.js'
 
 const renderRouterContent = ({components, params, router}) => {
   const {location, routes} = router
