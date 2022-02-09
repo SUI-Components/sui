@@ -1,18 +1,11 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const minifyStream = require('minify-stream')
 const program = require('commander')
-const rimraf = require('rimraf')
-const staticModule = require('static-module')
 
 const path = require('path')
 const {resolve} = path
-const {
-  readdirSync,
-  statSync,
-  createReadStream,
-  createWriteStream
-} = require('fs')
+const {readdirSync, statSync, rmdirSync} = require('fs')
+const {readFile, writeFile} = require('fs/promises')
 const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production.js')
 
@@ -55,7 +48,7 @@ const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
-  rimraf.sync(PUBLIC_PATH)
+  rmdirSync(PUBLIC_PATH, {recursive: true})
 }
 
 const build = ({page, remoteCdn}) => {
@@ -104,30 +97,32 @@ const pageConfigs = () =>
     {}
   )
 
-const createDownloader = () =>
-  // eslint-disable-next-line
-  new Promise((res, rej) => {
-    const staticManifests = manifests()
-    const staticPageConfigs = pageConfigs()
-    createReadStream(resolve(__dirname, '..', 'downloader', 'index.js'))
-      .pipe(
-        staticModule({
-          'static-manifests': () => JSON.stringify(staticManifests),
-          'static-pageConfigs': () => JSON.stringify(staticPageConfigs),
-          'static-cdn': () => JSON.stringify(remoteCdn)
-        })
-      )
-      .pipe(minifyStream({sourceMap: false}))
-      .pipe(
-        createWriteStream(resolve(process.cwd(), 'public', FILE_DOWNLOADER))
-          .on('finish', () => {
-            console.log(`Created a new ${FILE_DOWNLOADER} file`)
-            res()
-          })
-          .on('error', rej)
-      )
-      .on('error', rej)
-  })
+const createDownloader = async () => {
+  const staticManifests = manifests()
+  const staticPageConfigs = pageConfigs()
+
+  const input = resolve(__dirname, '..', 'downloader', 'index.js')
+  const output = resolve(process.cwd(), 'public', FILE_DOWNLOADER)
+
+  try {
+    const downloader = await readFile(input, 'utf-8')
+
+    await writeFile(
+      output,
+      downloader
+        .replace("require('static-manifests')", JSON.stringify(staticManifests))
+        .replace(
+          "require('static-pageConfigs')",
+          JSON.stringify(staticPageConfigs)
+        )
+    )
+
+    console.log(`Created a new ${FILE_DOWNLOADER} file`)
+  } catch (e) {
+    console.error(e)
+    console.log(`Couldn't create ${FILE_DOWNLOADER} file`)
+  }
+}
 
 const serialPromiseExecution = promises =>
   promises.reduce((acc, func) => acc.then(() => func()), Promise.resolve([]))
