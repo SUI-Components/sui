@@ -42,7 +42,7 @@ const webpackConfig = {
       babelRules,
       {
         // ignore css/scss/svg require/imports files in the server
-        test: [/\.s?css$/, /\.svg$/],
+        test: /(\.svg|\.s?css)$/,
         type: 'asset/inline',
         generator: {
           dataUrl: () => ''
