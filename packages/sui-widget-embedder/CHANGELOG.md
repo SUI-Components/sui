@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 5.3.0 (2022-02-09)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** Problems with production widgets ([913a41a](https://github.com/SUI-Components/sui/commit/913a41a3d93a9d06ba759645af88c929ad1fd666))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Force new release ([686a9b6](https://github.com/SUI-Components/sui/commit/686a9b6619084bec1389f1c997da86e60c5ce841))
+* **packages/sui-widget-embedder:** Format correctly content ([6f1fe8f](https://github.com/SUI-Components/sui/commit/6f1fe8ffbd145657f16332b1a48ecb4cba41387c))
+* **packages/sui-widget-embedder:** Remove not needed dependency ([71d8c2c](https://github.com/SUI-Components/sui/commit/71d8c2ce245109dfc5b381aeb3c75d7a645b4563))
+* **packages/sui-widget-embedder:** Remove rimraf dependency ([aee6404](https://github.com/SUI-Components/sui/commit/aee6404553e85dccf995fb62b3d7769ede378b43))
+* **packages/sui-widget-embedder:** Remove some not needed dependencies and simplify code ([6ddd572](https://github.com/SUI-Components/sui/commit/6ddd57228a91f18beb08c11f0027ff381eaa891c))
+
+
+
 # 5.2.0 (2022-02-02)
 
 
