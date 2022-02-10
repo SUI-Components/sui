@@ -34,8 +34,8 @@ We use:
     - [`access`](#access)
     - [`workspaces`](#workspaces)
       - [Examples](#examples)
-          - [Project Example](#project-example)
-          - [Case `sui-studio`](#case-sui-studio)
+        - [Project Example](#project-example)
+        - [Case `sui-studio`](#case-sui-studio)
       - [Manual scopes](#manual-scopes)
   - [Migration from v1](#migration-from-v1)
     - [`packagesFolder` and `deepLevel` are not longer used](#packagesfolder-and-deeplevel-are-not-longer-used)
@@ -198,7 +198,18 @@ If you specify that your package is private (`"private": true,`), it will be ign
 
 ### `access`
 
-By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `"access": "public"`.
+By default packages will be published as `restricted` in npm. If you want them to be public you will need to set `"access": "public"`. It is possible to set the access property by package, for example:
+
+```
+Root
+├── Package A - Access set to "public"
+├── Package B - Access set to "restricted"
+└── Package C - No access prop set
+```
+
+- Package A will always be released as "public" no matter Root's value
+- Package B will always be released as "restricted" no matter Root's value
+- Package C will be released as "public" or "restricted" depending on the Root's value, if not set there either, it will be released as "restricted"
 
 ### `workspaces`
 
