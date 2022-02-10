@@ -48,7 +48,7 @@ const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
 
 if (program.clean) {
   console.log('Removing previous build...')
-  rmdirSync(PUBLIC_PATH, {recursive: true})
+  rmdirSync(PUBLIC_PATH, {force: true, recursive: true})
 }
 
 const build = ({page, remoteCdn}) => {
