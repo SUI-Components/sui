@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.5.0 (2022-02-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix rm fn to delete public folder ([8443cfd](https://github.com/SUI-Components/sui/commit/8443cfd7aea50563c50588d86c83a7129b4b3fbf))
+
+
+
 # 5.4.0 (2022-02-10)
 
 
