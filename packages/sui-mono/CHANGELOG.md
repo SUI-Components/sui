@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.20.0 (2022-02-10)
+
+
+### Features
+
+* **packages/sui-mono:** enable access flag by package ([2fda746](https://github.com/SUI-Components/sui/commit/2fda746a0df79ce049925e309a240b60ea9178ac))
+* **packages/sui-mono:** initialize params for backward compatibility ([63c0163](https://github.com/SUI-Components/sui/commit/63c0163e7fbf5b13c9180e28fb84fef928c94309))
+
+
+
 # 2.19.0 (2022-02-01)
 
 
