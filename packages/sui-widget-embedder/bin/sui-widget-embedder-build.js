@@ -4,7 +4,7 @@ const program = require('commander')
 
 const path = require('path')
 const {resolve} = path
-const {readdirSync, statSync, rmdirSync} = require('fs')
+const {existsSync, readdirSync, statSync, rmdirSync} = require('fs')
 const {readFile, writeFile} = require('fs/promises')
 const {showError} = require('@s-ui/helpers/cli')
 const compilerFactory = require('../compiler/production.js')
@@ -46,7 +46,7 @@ program
 
 const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
 
-if (program.clean) {
+if (program.clean && existsSync(PUBLIC_PATH)) {
   console.log('Removing previous build...')
   rmdirSync(PUBLIC_PATH, {recursive: true})
 }
