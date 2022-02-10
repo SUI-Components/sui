@@ -23,8 +23,8 @@ const getWorkspaces = workspaces => {
 
 const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
   const publishAccess =
-    localPackageConfig['sui-mono']?.access ||
-    packageConfig['sui-mono']?.access ||
+    (localPackageConfig['sui-mono'] && localPackageConfig['sui-mono'].access) ||
+    (packageConfig['sui-mono'] && packageConfig['sui-mono'].access) ||
     'restricted'
 
   return publishAccess
