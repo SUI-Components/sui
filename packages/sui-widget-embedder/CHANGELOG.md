@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 5.4.0 (2022-02-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** prevent clean option try to remove non existant folder, because i ([a68e30a](https://github.com/SUI-Components/sui/commit/a68e30a6a7143811b722c3fc030a05079e1cac24))
+* **packages/sui-widget-embedder:** use force true instead existsSync ([ee2065d](https://github.com/SUI-Components/sui/commit/ee2065d9aaa75437e8882a8340edac46c18585ea))
+
+
+
 # 5.3.0 (2022-02-09)
 
 
