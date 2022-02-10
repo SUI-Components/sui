@@ -21,6 +21,15 @@ const getWorkspaces = workspaces => {
   return paths.map(path => path.replace('/package.json', ''))
 }
 
+const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
+  const publishAccess =
+    localPackageConfig['sui-mono']?.access ||
+    packageConfig['sui-mono']?.access ||
+    'restricted'
+
+  return publishAccess
+}
+
 function factoryConfigMethods(packageFile) {
   const {
     config: packageConfig = {},
@@ -28,13 +37,13 @@ function factoryConfigMethods(packageFile) {
     workspaces = []
   } = packageFile
 
-  const {access: publishAccess = 'restricted'} = packageConfig['sui-mono'] || {}
-
   return {
     checkIsMonoPackage: () => workspaces.length === 0,
     getChangelogFilename: () => CHANGELOG_FILENAME,
     getProjectName: () => packageName,
-    getPublishAccess: () => publishAccess,
+    getPublishAccess: ({localPackageConfig = {}}) => {
+      return getPublishAccess({localPackageConfig, packageConfig})
+    },
     getWorkspaces: () => getWorkspaces(workspaces)
   }
 }

@@ -46,7 +46,6 @@ program
 
 const BASE_DIR = process.cwd()
 
-const publishAccess = getPublishAccess()
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
 const changelogFilename = getChangelogFilename()
 
@@ -75,7 +74,10 @@ const releasePackage = async ({pkg, code, skipCI} = {}) => {
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  const {private: isPrivatePackage} = getPackageJson(cwd, true)
+  const {
+    private: isPrivatePackage,
+    config: localPackageConfig
+  } = getPackageJson(cwd, true)
 
   await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
@@ -96,8 +98,11 @@ const releasePackage = async ({pkg, code, skipCI} = {}) => {
 
   await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
 
-  !isPrivatePackage &&
-    (await exec(`npm publish --access=${publishAccess}`, {cwd}))
+  if (!isPrivatePackage) {
+    const publishAccess = getPublishAccess({localPackageConfig})
+    await exec(`npm publish --access=${publishAccess}`, {cwd})
+  }
+
   await exec('git push -f --tags origin HEAD')
 }
 
