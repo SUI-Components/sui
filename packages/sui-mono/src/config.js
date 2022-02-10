@@ -41,7 +41,7 @@ function factoryConfigMethods(packageFile) {
     checkIsMonoPackage: () => workspaces.length === 0,
     getChangelogFilename: () => CHANGELOG_FILENAME,
     getProjectName: () => packageName,
-    getPublishAccess: ({localPackageConfig = {}}) => {
+    getPublishAccess: ({localPackageConfig} = {}) => {
       return getPublishAccess({localPackageConfig, packageConfig})
     },
     getWorkspaces: () => getWorkspaces(workspaces)
