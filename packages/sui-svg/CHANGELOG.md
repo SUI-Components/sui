@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.9.0 (2022-02-10)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version with less dependencies ([00fb3f9](https://github.com/SUI-Components/sui/commit/00fb3f97248279bf0228f47a9375f508b0b46d9c))
+
+
+
 # 3.8.0 (2022-02-07)
 
 
