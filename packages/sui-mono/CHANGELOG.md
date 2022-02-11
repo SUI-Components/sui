@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.21.0 (2022-02-11)
+
+
+### Features
+
+* **packages/sui-mono:** fix optional chainning in nodejs ([f009cf4](https://github.com/SUI-Components/sui/commit/f009cf4eac8e8a649cbe764e2f54237704ec47f9))
+
+
+
 # 2.20.0 (2022-02-10)
 
 
