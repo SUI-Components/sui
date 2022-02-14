@@ -41,6 +41,7 @@ const cssFileName = config.onlyHash
 const webpackConfig = {
   devtool: sourceMap,
   mode: 'production',
+  target: ['web', 'es5'],
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {...aliasFromConfig},
