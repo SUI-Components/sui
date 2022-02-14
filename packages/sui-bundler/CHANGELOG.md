@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.4.0 (2022-02-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Use as target es5 for now ([1b5612b](https://github.com/SUI-Components/sui/commit/1b5612bccdf0a6eeb89977f54a1315e123e171ba))
+
+
+
 # 9.3.0 (2022-02-09)
 
 
