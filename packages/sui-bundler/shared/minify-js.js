@@ -4,7 +4,7 @@ module.exports = ({extractComments, sourceMap}) =>
   new TerserPlugin({
     minify: TerserPlugin.esbuildMinify,
     terserOptions: {
-      target: 'es6',
+      target: 'es5',
       sourcemap: sourceMap !== 'none' && sourceMap !== false
     }
   })
