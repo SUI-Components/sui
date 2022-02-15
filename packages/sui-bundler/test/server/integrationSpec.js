@@ -14,8 +14,8 @@ const EXTERNAL_MANIFEST_APP_PATH = path.join(
   'external-manifest-app'
 )
 
-describe.skip('[Integration] sui-bundler', () => {
-  it('Regresion test for features', async function() {
+describe('[Integration] sui-bundler', () => {
+  it('Regresion test for features', async function () {
     this.timeout(0)
     const CDN = 'https://my-cdn.com/'
     const {stdout} = await exec(
@@ -24,14 +24,13 @@ describe.skip('[Integration] sui-bundler', () => {
         cwd: FEATURES_APP_PATH,
         env: {
           ...process.env,
-          CDN,
-          APP_NAME: 'test_app'
+          CDN
         }
       }
     )
 
     const {stdout: lsStdout} = await exec(
-      `ls "${FEATURES_APP_PATH}/public" | grep -E "br|gz" || true`,
+      `ls "${FEATURES_APP_PATH}/public" | grep -E ".js$" || true`,
       {
         cwd: FEATURES_APP_PATH
       }
@@ -64,15 +63,9 @@ describe.skip('[Integration] sui-bundler', () => {
         .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
         .includes('test_app')
     ).to.be.true
-
-    expect(
-      fs
-        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
-        .includes('DEFAULT_VALUE')
-    ).to.be.true
   })
 
-  it('Offline Page', async function() {
+  it.skip('Offline Page', async function () {
     this.timeout(0)
     const {stdout} = await exec(
       `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
@@ -110,7 +103,7 @@ describe.skip('[Integration] sui-bundler', () => {
     ).to.be.true
   })
 
-  it('External Manifest', async function() {
+  it.skip('External Manifest', async function () {
     this.timeout(0)
     let server
     try {
