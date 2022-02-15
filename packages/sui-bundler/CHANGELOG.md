@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.5.0 (2022-02-15)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Compile to es5 instead es6 to support IE11 and legacy browsers ([e3b4cc4](https://github.com/SUI-Components/sui/commit/e3b4cc493d16c4a256404edb2c350bbfb3938901))
+
+
+
 # 9.4.0 (2022-02-14)
 
 
