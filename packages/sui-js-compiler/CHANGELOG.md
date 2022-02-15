@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.14.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-js-compiler:** update fast-glob ([3902ce1](https://github.com/SUI-Components/sui/commit/3902ce1c2d3a66d95028f28985e654022b42ac32))
+
+
+
 # 1.13.0 (2022-02-02)
 
 

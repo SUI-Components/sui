@@ -1,5 +1,42 @@
 # CHANGELOG
 
+# 5.5.0 (2022-02-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix rm fn to delete public folder ([8443cfd](https://github.com/SUI-Components/sui/commit/8443cfd7aea50563c50588d86c83a7129b4b3fbf))
+
+
+
+# 5.4.0 (2022-02-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** prevent clean option try to remove non existant folder, because i ([a68e30a](https://github.com/SUI-Components/sui/commit/a68e30a6a7143811b722c3fc030a05079e1cac24))
+* **packages/sui-widget-embedder:** use force true instead existsSync ([ee2065d](https://github.com/SUI-Components/sui/commit/ee2065d9aaa75437e8882a8340edac46c18585ea))
+
+
+
+# 5.3.0 (2022-02-09)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** Problems with production widgets ([913a41a](https://github.com/SUI-Components/sui/commit/913a41a3d93a9d06ba759645af88c929ad1fd666))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Force new release ([686a9b6](https://github.com/SUI-Components/sui/commit/686a9b6619084bec1389f1c997da86e60c5ce841))
+* **packages/sui-widget-embedder:** Format correctly content ([6f1fe8f](https://github.com/SUI-Components/sui/commit/6f1fe8ffbd145657f16332b1a48ecb4cba41387c))
+* **packages/sui-widget-embedder:** Remove not needed dependency ([71d8c2c](https://github.com/SUI-Components/sui/commit/71d8c2ce245109dfc5b381aeb3c75d7a645b4563))
+* **packages/sui-widget-embedder:** Remove rimraf dependency ([aee6404](https://github.com/SUI-Components/sui/commit/aee6404553e85dccf995fb62b3d7769ede378b43))
+* **packages/sui-widget-embedder:** Remove some not needed dependencies and simplify code ([6ddd572](https://github.com/SUI-Components/sui/commit/6ddd57228a91f18beb08c11f0027ff381eaa891c))
+
+
+
 # 5.2.0 (2022-02-02)
 
 

@@ -5,8 +5,8 @@ import {useCallback} from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
-import invariant from './internal/invariant'
-import {useRouter} from './hooks'
+import invariant from './internal/invariant.js'
+import {useRouter} from './hooks.js'
 
 /**
  * Check if the event is created with some key being held to know it could be for a some contextual stuff

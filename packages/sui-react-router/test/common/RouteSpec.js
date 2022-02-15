@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
-import {IndexRoute, Router, Route, match} from '../../src/index'
+import {IndexRoute, Router, Route, match} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
@@ -163,9 +163,7 @@ describe('<Route>', () => {
         location: '/search/works',
         withRoutes
       })
-      expect(renderedString)
-        .to.contain('Search Results')
-        .to.contain('works')
+      expect(renderedString).to.contain('Search Results').to.contain('works')
     })
 
     it('works with static paths', async () => {
@@ -198,9 +196,7 @@ describe('<Route>', () => {
       withRoutes
     })
 
-    expect(renderedString)
-      .to.contain('Search Results')
-      .to.contain('money')
+    expect(renderedString).to.contain('Search Results').to.contain('money')
   })
 
   describe('with nested routes', () => {
@@ -288,9 +284,7 @@ describe('<Route>', () => {
         withRoutes
       })
 
-      expect(renderedString)
-        .to.include('App')
-        .to.include('404')
+      expect(renderedString).to.include('App').to.include('404')
     })
 
     it('match fallback route if previous dont working', async () => {
@@ -307,9 +301,7 @@ describe('<Route>', () => {
         withRoutes
       })
 
-      expect(renderedString)
-        .to.include('App')
-        .to.include('404')
+      expect(renderedString).to.include('App').to.include('404')
     })
   })
 

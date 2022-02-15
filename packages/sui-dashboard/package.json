@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/dashboard",
-  "version": "1.30.0",
+  "version": "1.31.0",
   "description": "",
   "bin": {
     "sui-dashboard": "./bin/sui-dashboard.js"
@@ -13,6 +13,6 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "6.2.1",
-    "fast-glob": "3.2.10"
+    "fast-glob": "3.2.11"
   }
 }

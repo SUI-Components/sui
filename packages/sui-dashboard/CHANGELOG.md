@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.31.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-dashboard:** update fast-glob ([d980323](https://github.com/SUI-Components/sui/commit/d980323b2457f662b22e3ba4d57dc63fe4472d86))
+
+
+
 # 1.30.0 (2022-01-27)
 
 

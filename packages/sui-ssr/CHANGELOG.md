@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.1.0 (2022-02-15)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** prevent errors if project does not have 500 and 404 html files ([c4f4539](https://github.com/SUI-Components/sui/commit/c4f453968ab0362875692adf73b859727aae819f))
+
+
+
 # 8.0.0 (2022-01-27)
 
 

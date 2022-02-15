@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
-import invariant from './internal/invariant'
-import {falsy} from './internal/PropTypes'
+import invariant from './internal/invariant.js'
+import {falsy} from './internal/PropTypes.js'
 
 const Redirect = () =>
   invariant(

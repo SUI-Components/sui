@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 9.4.0 (2022-02-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Use as target es5 for now ([1b5612b](https://github.com/SUI-Components/sui/commit/1b5612bccdf0a6eeb89977f54a1315e123e171ba))
+
+
+
+# 9.3.0 (2022-02-09)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** prevent error for array type test property ([ec94032](https://github.com/SUI-Components/sui/commit/ec9403230a61f61d118fa3e140828fec0d384a3e))
+* **packages/sui-bundler:** prevent error for rules that does not have use in linkloader ([8a236c5](https://github.com/SUI-Components/sui/commit/8a236c58aa1c09c27f571641ecbba9631d2b57a7))
+
+
+
 # 9.2.0 (2022-01-31)
 
 

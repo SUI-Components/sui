@@ -1,22 +1,24 @@
 /* eslint-disable no-console, no-var */
 
-;(function() {
+;(function () {
   'use strict'
-  var manifests = require('static-manifests')()
-  var pageConfigs = require('static-pageConfigs')()
+
+  var manifests = require('static-manifests')
+  var pageConfigs = require('static-pageConfigs')
+
   // https://davidwalsh.name/javascript-loader
-  var load = (function() {
+  var load = (function () {
     function loaderFor(tag) {
-      return function(url) {
-        return new Promise(function(resolve, reject) {
+      return function (url) {
+        return new Promise(function (resolve, reject) {
           var element = document.createElement(tag)
           var parent = 'body'
           var attr = 'src'
 
-          element.onload = function() {
+          element.onload = function () {
             resolve(url)
           }
-          element.onerror = function() {
+          element.onerror = function () {
             reject(url)
           }
 
@@ -46,11 +48,11 @@
   // https://github.com/CacheControl/promise-series/blob/master/index.js
   function promiseInSerie(array, haltCallback) {
     if (!(haltCallback instanceof Function)) {
-      haltCallback = function() {
+      haltCallback = function () {
         return true
       }
     }
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var i = 0
       var len = array.length
       var results = []
@@ -86,10 +88,12 @@
 
   function loadAssetsFor(page) {
     var manifest = manifests[page]
-    var loadStyle = function() {
+
+    var loadStyle = function () {
       var css = manifest['app.css'] || manifest['main.css']
       return css ? load.css(css) : Promise.resolve()
     }
+
     var loadScripts = [
       manifest['runtime~app.js'],
       manifest['main.js'],
@@ -97,13 +101,13 @@
       manifest['app.js']
     ]
       .filter(Boolean)
-      .map(function(script) {
-        return function() {
+      .map(function (script) {
+        return function () {
           return load.js(script)
         }
       })
 
-    return promiseInSerie([loadStyle].concat(loadScripts)).then(function() {
+    return promiseInSerie([loadStyle].concat(loadScripts)).then(function () {
       console.log('All ' + page + ' widgets loaded') // eslint-disable-line
     })
   }
@@ -113,7 +117,7 @@
       return false
     }
     if (Array.isArray(regExp)) {
-      return regExp.some(function(re) {
+      return regExp.some(function (re) {
         return name.match(new RegExp(re))
       })
     }
@@ -148,8 +152,8 @@
 
   pages.length !== 0 &&
     promiseInSerie(
-      pages.map(function(page) {
-        return function() {
+      pages.map(function (page) {
+        return function () {
           return loadAssetsFor(page)
         }
       })
