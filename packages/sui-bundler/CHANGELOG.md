@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.6.0 (2022-02-15)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Force release with fix ([c1c0aca](https://github.com/SUI-Components/sui/commit/c1c0aca056596bc06904bb1b83e8293571693fe4))
+* **packages/sui-bundler:** Rollback to es6 ([90fb3d7](https://github.com/SUI-Components/sui/commit/90fb3d7efee99d55fde46f32516898de73fc3ad6))
+
+
+
 # 9.5.0 (2022-02-15)
 
 
