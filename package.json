@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7",
-    "@s-ui/lint": "3",
+    "@s-ui/lint": "4",
     "@s-ui/mono": "2",
     "@s-ui/precommit": "3",
     "@s-ui/react-context": "1",
