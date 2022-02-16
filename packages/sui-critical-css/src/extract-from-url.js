@@ -1,10 +1,8 @@
 import {chromium} from 'playwright-chromium'
-import CleanCSS from 'clean-css'
+import css from '@parcel/css'
 import {blockedResourceTypes, skippedResources} from './config.js'
 
 let browser
-
-const css = new CleanCSS({level: 2})
 
 // Setup a browser instance or return the one already created
 const getBrowser = async () => {
@@ -33,6 +31,7 @@ export async function extractCSSFromUrl({
   userAgent,
   width
 }) {
+  console.time(`[css] Extract for ${url}`)
   let page
   try {
     // Get a browser instance
@@ -91,12 +90,22 @@ export async function extractCSSFromUrl({
     // Close the browser to close the connection and free up resources
     await closeAll()
 
+    console.timeEnd(`[css] Extract for ${url}`)
+    console.time('[css] Minified')
     // return minified css
-    const {styles, stats} = css.minify(coveredCSS)
-    console.log(
-      `[css] Minified from ${stats.originalSize} to ${stats.minifiedSize} bytes`
-    )
-    return styles
+    const {code} = css.transform({
+      minify: true,
+      code: Buffer.from(coveredCSS),
+      sourceMap: false,
+      targets: 'ie11'
+    })
+
+    const from = Buffer.byteLength(coveredCSS, 'utf-8')
+    const to = Buffer.byteLength(code, 'utf-8')
+
+    console.log(`[css] Minified from ${from} to ${to} bytes`)
+    console.timeEnd('[css] Minified')
+    return code
   } catch (e) {
     console.log(e)
     browser && browser.close && (await browser.close())
