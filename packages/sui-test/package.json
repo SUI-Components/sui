@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "7.16.12",
+    "@babel/core": "7.17.2",
     "@babel/plugin-transform-modules-commonjs": "7.16.8",
-    "@babel/register": "7.16.9",
+    "@babel/register": "7.17.0",
     "@s-ui/helpers": "1",
     "babel-loader": "8.2.3",
     "babel-plugin-dynamic-import-node": "2.3.3",
@@ -35,6 +35,6 @@
     "process": "0.11.10",
     "stream-browserify": "3.0.0",
     "util": "0.12.4",
-    "webpack": "5.67.0"
+    "webpack": "5.69.0"
   }
 }
