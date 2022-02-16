@@ -36,7 +36,7 @@ const getMainFileContent = ({cwd, CDN = '/'} = {}) => {
 }
 
 describe('[Integration] sui-bundler', () => {
-  it('builds correctly with default options', async () => {
+  it('builds correctly with default options', async function () {
     this.timeout(0)
 
     const CDN = 'https://my-cdn.com/'
