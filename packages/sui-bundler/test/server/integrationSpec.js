@@ -37,6 +37,8 @@ const getMainFileContent = ({cwd, CDN = '/'} = {}) => {
 
 describe('[Integration] sui-bundler', () => {
   it('builds correctly with default options', async () => {
+    this.timeout(0)
+
     const CDN = 'https://my-cdn.com/'
     const cwd = getCWD('features-app')
 
@@ -65,6 +67,8 @@ describe('[Integration] sui-bundler', () => {
   })
 
   it('builds without modern features when using supportLegacyBrowsers flag', async function () {
+    this.timeout(0)
+
     const cwd = getCWD('legacy-browsers-app')
     const stdout = await executeBundler({cwd})
     expect(stdout.includes('Error')).to.be.false
