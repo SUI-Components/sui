@@ -2,13 +2,9 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const createCssMinimizerPlugin = () =>
   new CssMinimizerPlugin({
+    minify: CssMinimizerPlugin.parcelCssMinify,
     minimizerOptions: {
-      preset: [
-        'default',
-        {
-          discardComments: {removeAll: true}
-        }
-      ]
+      targets: {ie: 11}
     }
   })
 

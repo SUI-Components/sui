@@ -106,18 +106,6 @@ const webpackConfig = {
             }
           })),
           require.resolve('css-loader'),
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              postcssOptions: {
-                plugins: [
-                  require('autoprefixer')({
-                    overrideBrowserslist: config.targets
-                  })
-                ]
-              }
-            }
-          },
           require.resolve('@s-ui/sass-loader')
         ])
       },
