@@ -1,10 +1,15 @@
 # CHANGELOG
 
+# 9.8.0 (2022-02-16)
+
+
+
 # 9.7.0 (2022-02-16)
 
 
 ### Features
 
+* **packages/sui-bundler:** Add new flag to support legacy browsers ([7f6a45a](https://github.com/SUI-Components/sui/commit/7f6a45ac79fd7cc6d4337596c7ca389efb962bee))
 * **packages/sui-bundler:** Upgrade dependencies ([4118489](https://github.com/SUI-Components/sui/commit/41184898259218b49b9ecf57734415aeba236cb0))
 
 
