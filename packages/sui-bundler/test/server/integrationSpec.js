@@ -64,7 +64,7 @@ describe('[Integration] sui-bundler', () => {
     expect(mainJSContent.includes('test_app')).to.be.true
   })
 
-  it.only('builds without modern features when using supportLegacyBrowsers flag', async function () {
+  it('builds without modern features when using supportLegacyBrowsers flag', async function () {
     const cwd = getCWD('legacy-browsers-app')
     const stdout = await executeBundler({cwd})
     expect(stdout.includes('Error')).to.be.false
