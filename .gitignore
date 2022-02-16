@@ -10,14 +10,6 @@ jsconfig.json
 packages/sui-codemod/COMMANDS
 sui-components-dashboard-9350df448fcd.json
 .idea/
-packages/sui-bundler/test/server/integration/features-app/public/
-packages/sui-bundler/test/server/integration/features-app/node_modules/
-packages/sui-bundler/test/server/integration/offline-app/node_modules/
-packages/sui-bundler/test/server/integration/offline-app/public/
-packages/sui-bundler/test/server/integration/external-manifest/node_modules/
-packages/sui-bundler/test/server/integration/external-manifest/public/
-packages/sui-bundler/test/server/integration/external-manifest-app/node_modules/
-packages/sui-bundler/test/server/integration/external-manifest-app/public/
 packages/sui-studio/test/server/integration/empty-studio/components/fake/**
 packages/sui-studio/test/server/integration/empty-studio/demo/fake/**
 packages/sui-studio/test/server/integration/empty-studio/test/fake/**

@@ -1,6 +1,8 @@
 const TerserPlugin = require('terser-webpack-plugin')
 
-module.exports = ({extractComments, sourceMap}) =>
+const {supportLegacyBrowsers} = require('./config.js')
+
+const esbuildMinifier = ({sourceMap}) =>
   new TerserPlugin({
     minify: TerserPlugin.esbuildMinify,
     terserOptions: {
@@ -8,3 +10,18 @@ module.exports = ({extractComments, sourceMap}) =>
       sourcemap: sourceMap !== 'none' && sourceMap !== false
     }
   })
+
+const terserMinifier = ({extractComments, sourceMap}) =>
+  new TerserPlugin({
+    minify: TerserPlugin.esbuildMinify,
+    extractComments,
+    terserOptions: {
+      ecma: 5,
+      sourcemap: sourceMap !== 'none' && sourceMap !== false
+    }
+  })
+
+module.exports = ({extractComments, sourceMap}) =>
+  supportLegacyBrowsers
+    ? terserMinifier({extractComments, sourceMap})
+    : esbuildMinifier({sourceMap})

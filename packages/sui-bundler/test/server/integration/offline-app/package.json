@@ -1,10 +1,13 @@
 {
   "name": "@s-ui/studio-offline-app",
-  "sui-bundler": {
-    "offline": {
-      "importScripts": [
-        "https://external_url.com"
-      ]
+  "private": true,
+  "config": {
+    "sui-bundler": {
+      "offline": {
+        "importScripts": [
+          "https://external_url.com"
+        ]
+      }
     }
   }
 }
