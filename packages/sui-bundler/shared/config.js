@@ -4,8 +4,13 @@ const {
 } = require(`${process.cwd()}/package.json`)
 
 const {'sui-bundler': config = {}} = packageJsonConfig
-const {extractComments, sourcemaps} = config
+const {
+  extractComments = false,
+  sourcemaps,
+  supportLegacyBrowsers = false
+} = config
 
 exports.config = config
-exports.extractComments = extractComments || false
+exports.supportLegacyBrowsers = supportLegacyBrowsers
+exports.extractComments = extractComments
 exports.sourceMap = (sourcemaps && sourcemaps.prod) || false
