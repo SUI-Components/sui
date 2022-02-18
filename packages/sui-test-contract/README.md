@@ -86,6 +86,8 @@ describe('Consumer contract for: Foo API', () => {
 })
 ```
 
+ℹ️ More info: https://github.com/pact-foundation/pact-js#consumer-side-testing
+
 ## Publishing the contracts
 
 When you have your contract documents generated (e.g.: `contract/documents/foo-web-foo-api.json`), you'll need to publish them to the "broker", the place where providers (API Backend) will validate their own tests against the contracts.
