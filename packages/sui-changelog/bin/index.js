@@ -185,8 +185,9 @@ exec(`git diff ${strategy.file}`, {maxBuffer: MAX_BUFFER}, (err, stdout) => {
     })
 
   changelogData.push({
-    h2: `${newPackageVersion} (${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()})`
+    h2: `${newPackageVersion} (${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()})`
   })
 
   log('MODIFIED PACKAGES:')
