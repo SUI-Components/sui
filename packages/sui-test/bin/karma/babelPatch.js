@@ -3,10 +3,10 @@
   Call statement and adds a final parameter which includes a Component Key based on the path.
   The Component Key will be used to get from `window.__STUDIO_CONTEXTS__` the correct Component and, then, using the `contextToUse`property to grab the correct context for the specific component.
 */
-module.exports = function({types: t}) {
+module.exports = function ({types: t}) {
   return {
     visitor: {
-      CallExpression: function(path, state) {
+      CallExpression: function (path, state) {
         const {
           node: {arguments: args, callee}
         } = path
