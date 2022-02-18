@@ -387,7 +387,7 @@ function* mergeSources(
   return yield replaceAsync(content, MATCH_IMPORTS, co.wrap(importReplacer))
 }
 
-module.exports = function(content) {
+module.exports = function (content) {
   const entry = this.resourcePath
   const callback = this.async()
   const cache = new Cache(entry)
@@ -403,7 +403,7 @@ module.exports = function(content) {
 
   const appendUses = (content, uses) => uses.join('') + content
 
-  return co(function*() {
+  return co(function* () {
     const dependencies = []
     const uses = []
 

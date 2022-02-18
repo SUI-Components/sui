@@ -50,7 +50,7 @@ function runSimpleTest(done, fixtureName, compiledFileName = 'index') {
   })
 }
 
-describe('test sass-loader', function() {
+describe('test sass-loader', function () {
   /**
    * First test needs a lot of time to boot up. We still don't know exactly why, but a high timeout is needed to avoid breaking tests on CI.
    */
@@ -62,67 +62,67 @@ describe('test sass-loader', function() {
     rmdir(runtimeDir, done)
   })
 
-  it('should load normal sass file', function(done) {
+  it('should load normal sass file', function (done) {
     runSimpleTest(done, 'normal')
   })
 
-  it('should load sass file with data option', function(done) {
+  it('should load sass file with data option', function (done) {
     runSimpleTest(done, 'with-data')
   })
 
-  it('should compile without options', function(done) {
+  it('should compile without options', function (done) {
     runSimpleTest(done, 'simple')
   })
 
-  it('should auto remove BOM header', function(done) {
+  it('should auto remove BOM header', function (done) {
     runSimpleTest(done, 'bom-issue')
   })
 
-  it('should resolve files with double extensions', function(done) {
+  it('should resolve files with double extensions', function (done) {
     runSimpleTest(done, 'double-extensions')
   })
 
-  it('should be able to skip import in comment', function(done) {
+  it('should be able to skip import in comment', function (done) {
     runSimpleTest(done, 'comment-import')
   })
 
-  it('should be able to resolve @import paths (#39)', function(done) {
+  it('should be able to resolve @import paths (#39)', function (done) {
     runSimpleTest(done, 'data-import-issue')
   })
 
-  it('should pass options to sass.render (#53)', function(done) {
+  it('should pass options to sass.render (#53)', function (done) {
     runSimpleTest(done, 'pass-output-style')
   })
 
-  it('should support base64 fonts', function(done) {
+  it('should support base64 fonts', function (done) {
     runSimpleTest(done, 'base-64-fonts')
   })
 
-  it('should support alias from Webpack', function(done) {
+  it('should support alias from Webpack', function (done) {
     runSimpleTest(done, 'with-alias')
   })
 
-  it('should support modified resolve modules from Webpack', function(done) {
+  it('should support modified resolve modules from Webpack', function (done) {
     runSimpleTest(done, 'with-resolve-modules')
   })
 
-  it('should accept a different sass implementation', function(done) {
+  it('should accept a different sass implementation', function (done) {
     runSimpleTest(done, 'with-sass')
   })
 
-  it('should compile files loaded async', function(done) {
+  it('should compile files loaded async', function (done) {
     runSimpleTest(done, 'async', 'async')
   })
 
-  it('should handle files with @use', function(done) {
+  it('should handle files with @use', function (done) {
     runSimpleTest(done, 'with-use')
   })
 
-  it('should handle themes and default values', function(done) {
+  it('should handle themes and default values', function (done) {
     runSimpleTest(done, 'using-variables-with-default')
   })
 
-  it('should load normal sass file without url resolving', function(done) {
+  it('should load normal sass file without url resolving', function (done) {
     const config = require('./fixtures/normal-no-url-resolve/webpack.config.js')
     const compiler = webpack(config)
 
