@@ -20,7 +20,7 @@ class DescribeContext {
   }
 
   get(target /* describe.context */, contextToUse /* context name */) {
-    return function(title, cb, componentKey) {
+    return function (title, cb, componentKey) {
       const originalFn = global[FUNCTION_TO_PATCH]
 
       const Component =
