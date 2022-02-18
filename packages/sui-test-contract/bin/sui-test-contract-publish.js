@@ -4,11 +4,11 @@
 
 // See: https://github.com/pact-foundation/pact-js/blob/51d2ae2e41c8c40e373f264ac7ba633d258604c2/examples/e2e/test/publish.js
 
-import program from 'commander'
-import path from 'path'
-import {exec} from '../utils/index.js'
-import {Publisher} from '@pact-foundation/pact'
-import {versionFromGitTag} from '@pact-foundation/absolute-version'
+const program = require('commander')
+const path = require('path')
+const {exec} = require('../utils/index.js')
+const {Publisher} = require('@pact-foundation/pact')
+const {versionFromGitTag} = require('@pact-foundation/absolute-version')
 
 program
   .option(

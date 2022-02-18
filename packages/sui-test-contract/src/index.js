@@ -1,1 +1,3 @@
-export * as getProvider from './provider.js'
+const getProvider = require('./provider.js')
+
+module.exports = {getProvider}

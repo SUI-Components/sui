@@ -1,10 +1,13 @@
 {
   "name": "@s-ui/test-contract",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "Useful tooling for executing contract tests",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "main": "src/index.js",
   "bin": {
-    "sui-test-contract": "./bin/index.js"
+    "sui-test-contract": "bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,8 +18,5 @@
     "@pact-foundation/absolute-version": "0.0.4",
     "@pact-foundation/pact": "9.16.4",
     "commander": "6.2.1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

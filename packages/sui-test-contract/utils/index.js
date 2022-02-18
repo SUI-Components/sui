@@ -1,7 +1,9 @@
-import childProcess from 'child_process'
+const childProcess = require('child_process')
 
-export const exec = command =>
+const exec = command =>
   childProcess
     .execSync(command)
     .toString()
     .trim()
+
+module.exports = {exec}

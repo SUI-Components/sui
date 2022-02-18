@@ -1,8 +1,9 @@
-import path from 'path'
-import {Pact} from '@pact-foundation/pact'
+const path = require('path')
+const {Pact} = require('@pact-foundation/pact')
 
-const DEFAULT_PORT = '8080'
+const DEFAULT_PORT = 8080
 const DEFAULT_LOG_LEVEL = 'INFO'
+
 const pactDir = path.resolve(process.cwd(), 'contract/documents')
 const pactLog = path.resolve(process.cwd(), 'contract/logs', 'pact.log')
 const defaults = {
@@ -10,7 +11,7 @@ const defaults = {
   port: Number(process.env.PACT_SERVER_PORT || DEFAULT_PORT)
 }
 
-export default ({
+module.exports = ({
   consumer,
   provider,
   logLevel = defaults.logLevel,
