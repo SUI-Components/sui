@@ -1,3 +1,3 @@
-const getProvider = require('./provider.js')
+const {getProvider} = require('./provider.js')
 
 module.exports = {getProvider}

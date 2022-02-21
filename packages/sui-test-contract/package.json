@@ -10,13 +10,18 @@
     "sui-test-contract": "bin/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lib": "babel --out-dir ./lib  ./src",
-    "prepare": "npm run lib"
+    "prepare": "npm run lib",
+    "test": "npm run test:server",
+    "test:server": "NODE_ENV=test sui-test server",
+    "test:server:watch": "npm run test:server -- --watch"
   },
   "dependencies": {
     "@pact-foundation/absolute-version": "0.0.4",
     "@pact-foundation/pact": "9.16.4",
-    "commander": "6.2.1"
+    "commander": "8.3.0"
+  },
+  "devDependencies": {
+    "@s-ui/domain": "2"
   }
 }

@@ -11,7 +11,7 @@ const defaults = {
   port: Number(process.env.PACT_SERVER_PORT || DEFAULT_PORT)
 }
 
-module.exports = ({
+const getProvider = ({
   consumer,
   provider,
   logLevel = defaults.logLevel,
@@ -26,3 +26,5 @@ module.exports = ({
     port
   })
 }
+
+module.exports = {getProvider}
