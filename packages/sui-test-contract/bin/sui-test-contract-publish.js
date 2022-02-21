@@ -17,7 +17,11 @@ program
   )
   .parse(process.argv)
 
-const {brokerUrl} = program
+const {brokerUrl} = program.opts()
+if (!brokerUrl)
+  throw new Error(
+    'You need to specify the broker URL where the contracts will be published.'
+  )
 const contractsDir = path.resolve(process.cwd(), 'contract/documents')
 const {TRAVIS_BRANCH, GITHUB_REF} = process.env
 const branch =
