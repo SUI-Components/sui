@@ -13,11 +13,11 @@ const esbuildMinifier = ({sourceMap}) =>
 
 const terserMinifier = ({extractComments, sourceMap}) =>
   new TerserPlugin({
-    minify: TerserPlugin.esbuildMinify,
+    minify: TerserPlugin.terserMinify,
     extractComments,
     terserOptions: {
       ecma: 5,
-      sourcemap: sourceMap !== 'none' && sourceMap !== false
+      sourceMap: sourceMap !== 'none' && sourceMap !== false
     }
   })
 
