@@ -66,7 +66,7 @@ describe('[Integration] sui-bundler', () => {
     expect(mainJSContent.includes('test_app')).to.be.true
   })
 
-  it.only('builds without modern features when using supportLegacyBrowsers flag', async function () {
+  it('builds without modern features when using supportLegacyBrowsers flag', async function () {
     this.timeout(0)
 
     const cwd = getCWD('legacy-browsers-app')
@@ -75,7 +75,6 @@ describe('[Integration] sui-bundler', () => {
 
     const mainJSContent = getMainFileContent({cwd})
 
-    console.log(mainJSContent.toString())
     expect(mainJSContent.includes('=>')).to.be.false
     expect(mainJSContent.includes('`')).to.be.false
     expect(mainJSContent.includes('catch{')).to.be.false
