@@ -1,5 +1,6 @@
 node_modules/
 lib/
+contract/
 coverage/
 .DS_Store
 npm-debug.log
