@@ -21,6 +21,8 @@ describe('getProvider', () => {
       port
     })
 
+    await provider.setup()
+
     // Then
     const options = provider.opts
 
@@ -37,7 +39,7 @@ describe('getProvider', () => {
   })
 
   after(async () => {
-    await provider.server.delete()
+    await provider.finalize()
   })
 })
 
@@ -80,6 +82,6 @@ describe('Consumer test', () => {
   })
 
   after(async () => {
-    await provider.server.delete()
+    await provider.finalize()
   })
 })
