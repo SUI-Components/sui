@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.9.0 (2022-02-22)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Use correct minifier for Terser version to support legacy browsers ([801bae4](https://github.com/SUI-Components/sui/commit/801bae4bab55538dbf1ebf2eed9ba53da2dc8d5d))
+
+
+
 # 9.8.0 (2022-02-16)
 
 
