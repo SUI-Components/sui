@@ -41,7 +41,7 @@ function canConstructResponseFromBodyStream() {
  * @param {Object} response
  * @returns {Promise<Response>}
  */
-const copyResponse = async function(response) {
+const copyResponse = async function (response) {
   const clonedResponse = response.clone()
 
   const responseInit = {

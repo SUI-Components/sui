@@ -83,10 +83,6 @@ Inside each page you must create a package.json file.
   "blacklistedRegExps": [
     "about.html",
     "contact.html"
-  ],
-  "vendor": [
-    "react",
-    "react-dom"
   ]
 }
 ```
@@ -94,7 +90,6 @@ Inside each page you must create a package.json file.
 - `pathnameRegExp` [*REQUIRED]: RegExp or array of RegExp as strings to identify the pathname of the page where this list of widgets must work. In case of array of RegExp, the widget will load if at least one RegExp matches with the current location.
 - `hrefRegExp` [*REQUIRED]: RegExp or array of RegExp as strings to identify the href of the page where this list of widgets must work. In case of array of RegExp, the widget will load if at least one RegExp matches with the current location.
 - `blacklistedRegExps` [OPTIONAL]: List of RegExps to identify the pathname of the pages where the widgets don't have to work at.
-- `vendor` [OPTIONAL]: In case you want to have a vendor file for this page only.
 (*) It's required just one of these two fields: pathnameRegExp or hrefRegExp
 
 ## Working with React

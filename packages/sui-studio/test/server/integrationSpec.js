@@ -16,7 +16,7 @@ const safeRemoveDir = uri => {
 }
 
 describe.skip('[Integration] sui-studio', () => {
-  it('Should compile and build a static version with one component', async function() {
+  it('Should compile and build a static version with one component', async function () {
     this.timeout(0)
 
     const {stdout: stdoutStudioBuild} = await exec(
@@ -33,7 +33,7 @@ describe.skip('[Integration] sui-studio', () => {
     expect(stdoutStudioBuild.includes('Error')).to.be.false
   })
 
-  it('Should start a studio in mode dev', function(done) {
+  it('Should start a studio in mode dev', function (done) {
     this.timeout(0)
     let server
     try {
@@ -76,7 +76,7 @@ describe.skip('[Integration] sui-studio', () => {
     })
     afterEach(() => {})
 
-    it('Should generate a new component with the proper prefix', async function() {
+    it('Should generate a new component with the proper prefix', async function () {
       this.timeout(0)
 
       const {

@@ -1,7 +1,7 @@
 import inherits from './inherits'
 import AnemicModel from './AnemicModel'
 
-const ValueObject = (function(_AnemicModel) {
+const ValueObject = (function (_AnemicModel) {
   inherits(ValueObject, _AnemicModel)
 
   function ValueObject() {

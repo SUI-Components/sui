@@ -8,7 +8,7 @@ const babelConfig = {
 
 const babel = source => transform(source, babelConfig)
 
-describe('babel-preset-sui', function() {
+describe('babel-preset-sui', function () {
   // first time babel is called is pretty slow
   // and could be worse than 2s
   this.timeout(25000)

@@ -1,10 +1,33 @@
 # CHANGELOG
 
+# 9.10.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([aa0d08e](https://github.com/SUI-Components/sui/commit/aa0d08e92ec907c16f20a1f4b2313c0a9227cbcc))
+
+
+
+# 9.9.0 (2022-02-22)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Use correct minifier for Terser version to support legacy browsers ([801bae4](https://github.com/SUI-Components/sui/commit/801bae4bab55538dbf1ebf2eed9ba53da2dc8d5d))
+
+
+
+# 9.8.0 (2022-02-16)
+
+
+
 # 9.7.0 (2022-02-16)
 
 
 ### Features
 
+* **packages/sui-bundler:** Add new flag to support legacy browsers ([7f6a45a](https://github.com/SUI-Components/sui/commit/7f6a45ac79fd7cc6d4337596c7ca389efb962bee))
 * **packages/sui-bundler:** Upgrade dependencies ([4118489](https://github.com/SUI-Components/sui/commit/41184898259218b49b9ecf57734415aeba236cb0))
 
 

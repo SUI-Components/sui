@@ -123,10 +123,7 @@ function getSpawnPromise(bin, args, options = {}) {
  */
 function getCommandCallMessage(bin, args, options = {}) {
   const folder = options.cwd
-    ? options.cwd
-        .split(path.sep)
-        .slice(-2)
-        .join(path.sep)
+    ? options.cwd.split(path.sep).slice(-2).join(path.sep)
     : ''
 
   const command = bin.split(path.sep).pop() + ' ' + args.join(' ')

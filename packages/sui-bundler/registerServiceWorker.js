@@ -2,23 +2,23 @@
 
 'use strict'
 
-var noop = function() {}
+var noop = function () {}
 var SW_URL = '/service-worker.js'
 
 /* eslint-disable no-console */
-exports.register = function(options) {
+exports.register = function (options) {
   options = options || {}
   var first = options.first || noop
   var renovate = options.renovate || noop
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       navigator.serviceWorker
         .register(SW_URL)
-        .then(function(registration) {
-          registration.onupdatefound = function() {
+        .then(function (registration) {
+          registration.onupdatefound = function () {
             var installingWorker = registration.installing
-            installingWorker.onstatechange = function() {
+            installingWorker.onstatechange = function () {
               if (installingWorker.state === 'installed') {
                 if (navigator.serviceWorker.controller) {
                   // At this point, the old content will have been purged and
@@ -36,16 +36,16 @@ exports.register = function(options) {
             }
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.error('Error during service worker registration:', error)
         })
     })
   }
 }
 
-exports.unregister = function() {
+exports.unregister = function () {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(function(registration) {
+    navigator.serviceWorker.ready.then(function (registration) {
       registration.unregister()
     })
   }

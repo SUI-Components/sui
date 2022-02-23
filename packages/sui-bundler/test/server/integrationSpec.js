@@ -77,6 +77,7 @@ describe('[Integration] sui-bundler', () => {
 
     expect(mainJSContent.includes('=>')).to.be.false
     expect(mainJSContent.includes('`')).to.be.false
+    expect(mainJSContent.includes('catch{')).to.be.false
   })
 
   it.skip('Offline Page', async function () {

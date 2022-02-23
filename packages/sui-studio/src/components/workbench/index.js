@@ -31,7 +31,7 @@ export default function Workbench({children, params}) {
   }
 
   useEffect(
-    function() {
+    function () {
       // check if ux definition files exist to show the button
       fetchMarkdownFile({
         category,

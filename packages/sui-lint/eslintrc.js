@@ -112,7 +112,8 @@ module.exports = {
       },
       rules: {
         'no-return-await': RULES.OFF,
-        'prettier/prettier': RULES.OFF
+        'prettier/prettier': RULES.OFF,
+        'react/react-in-jsx-scope': RULES.OFF
       }
     }
   ]

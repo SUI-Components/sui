@@ -2,10 +2,10 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
 
-import Rosetta from '../src'
-import Polyglot from '../src/adapters/polyglot'
-import {ALL_TRANSLATIONS} from './fixtures/all_translations'
-import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages'
+import Rosetta from '../src/index.js'
+import Polyglot from '../src/adapters/polyglot.js'
+import {ALL_TRANSLATIONS} from './fixtures/all_translations.js'
+import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages.js'
 
 describe('I18N', () => {
   let i18n
@@ -64,6 +64,11 @@ describe('I18N', () => {
 
       it('translates "literalOne" properly', () => {
         expect(i18n.t('literalOne')).to.eql('TranslateOneEnGB')
+      })
+
+      it('properly supports plural', () => {
+        expect(i18n.t('withPlural', 1)).to.eql('one')
+        expect(i18n.t('withPlural', 2)).to.eql('many')
       })
 
       it('formats number 10000 properly', () => {
@@ -131,6 +136,11 @@ describe('I18N', () => {
 
       it('translates "literalOne" properly', () => {
         expect(i18n.t('literalOne')).to.eql('TranslateOneEsES')
+      })
+
+      it('properly supports plural', () => {
+        expect(i18n.t('withPlural', 1)).to.eql('uno')
+        expect(i18n.t('withPlural', 2)).to.eql('varios')
       })
 
       it('modify translations "literalOne" properly', () => {

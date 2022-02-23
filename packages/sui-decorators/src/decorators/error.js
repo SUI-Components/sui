@@ -1,7 +1,7 @@
 import isPromise from '../helpers/isPromise'
 
 const _runner = ({instance, original} = {}) => {
-  return function(...args) {
+  return function (...args) {
     const response = []
     Object.defineProperty(response, '__INLINE_ERROR__', {
       enumerable: false,

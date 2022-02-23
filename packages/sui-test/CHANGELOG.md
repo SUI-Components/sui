@@ -1,5 +1,29 @@
 # CHANGELOG
 
+# 8.4.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([ba72bf4](https://github.com/SUI-Components/sui/commit/ba72bf47ad8c7ced3e195ca5b08bfe743edee07e))
+
+
+
+# 8.3.0 (2022-02-17)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** fix extension ([0bf5334](https://github.com/SUI-Components/sui/commit/0bf53346ce549be38681a153274b2aef01a8ad2f))
+* **packages/sui-test:** fix some lint warnings ([1b16de8](https://github.com/SUI-Components/sui/commit/1b16de8cbc3653fd70c0f61196d5cdf7bea4f8f3))
+
+
+### Features
+
+* **packages/sui-test:** add describe on local ([64ef8ab](https://github.com/SUI-Components/sui/commit/64ef8ab91c71fe8fabba8e714b5330338d4c8d3d))
+
+
+
 # 8.2.0 (2022-02-16)
 
 
