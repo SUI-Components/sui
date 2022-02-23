@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.2.0 (2022-02-23)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix test ([e76c77b](https://github.com/SUI-Components/sui/commit/e76c77b17212d0be4ff133cc0023bb1640719b3e))
+
+
+
 # 1.1.0 (2022-02-22)
 
 
