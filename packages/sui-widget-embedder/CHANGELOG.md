@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.6.0 (2022-02-23)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Remove vendor from widget embedder page config ([c57420f](https://github.com/SUI-Components/sui/commit/c57420f596d5f001ffc61009c58eb0a936889cff))
+
+
+
 # 5.5.0 (2022-02-10)
 
 
