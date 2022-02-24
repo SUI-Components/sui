@@ -1,16 +1,11 @@
-const fg = require('fast-glob')
-const fs = require('fs')
+import fg from 'fast-glob'
+import {readFileSync} from 'fs'
 
 const flat = arr => [].concat(...arr)
 
-const getPackageContent = filepath => JSON.parse(fs.readFileSync(filepath))
+const getPackageContent = filepath => JSON.parse(readFileSync(filepath))
 
-module.exports.stats = async ({
-  repositories,
-  root,
-  dry,
-  getVersions = false
-}) => {
+export async function stats({repositories, root, getVersions = false}) {
   const suiComponents = fg
     .sync([
       `${root}/sui-components/components/**/package.json`,
