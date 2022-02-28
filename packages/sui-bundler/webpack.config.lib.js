@@ -18,6 +18,13 @@ module.exports = {
     alias: {
       ...aliasFromConfig
     },
+    fallback: {
+      assert: false,
+      fs: false,
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      path: false
+    },
     extensions: ['.js', '.json'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
