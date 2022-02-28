@@ -54,29 +54,21 @@ export async function stats({repositories, root, getVersions = false}) {
     return acc
   }, {})
 
-  const partialStats = {
-    statsSUIComponentUsedInProjects,
-    statsSUIComponentUsedByProjects,
-    suiStats: {
-      totalSUIComponents: Object.keys(statsSUIComponentUsedInProjects).length,
-      totalReusedSUIComponents: Object.values(
-        statsSUIComponentUsedInProjects
-      ).reduce((acc, list) => (acc += list.length), 0),
-      maxPossible:
-        Object.keys(statsSUIComponentUsedInProjects).length *
-        repositories.length
-    }
-  }
+  const totalSUIComponents = Object.keys(statsSUIComponentUsedInProjects).length
+  const totalReusedSUIComponents = Object.values(
+    statsSUIComponentUsedInProjects
+  ).reduce((acc, list) => (acc += list.length), 0)
+  const maxPossible = totalSUIComponents * repositories.length
 
   return {
-    ...partialStats,
+    statsSUIComponentUsedByProjects,
+    statsSUIComponentUsedInProjects,
     suiStats: {
-      ...partialStats.suiStats,
       percentage:
-        Math.ceil(
-          (partialStats.suiStats.totalReusedSUIComponents * 100) /
-            partialStats.suiStats.maxPossible
-        ) + '%'
+        Math.ceil((totalReusedSUIComponents * 100) / maxPossible) + '%',
+      totalSUIComponents,
+      totalReusedSUIComponents,
+      maxPossible
     }
   }
 }
