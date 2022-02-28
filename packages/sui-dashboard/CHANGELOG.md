@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.33.0 (2022-02-28)
+
+
+### Bug Fixes
+
+* **packages/sui-dashboard:** Simplify sui-dashboard code ([3585742](https://github.com/SUI-Components/sui/commit/35857428ac2f6984668b04817e03706736ad2a92))
+
+
+
 # 1.32.0 (2022-02-24)
 
 
