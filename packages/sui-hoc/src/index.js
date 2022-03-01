@@ -1,17 +1,7 @@
-import avoidSSRRender from './avoidSSRRender'
-import withContext from './withContext'
-import withStateValue from './withStateValue'
-import withSwitchValue from './withSwitchValue'
-import withStateValueTags from './withStateValueTags'
-import withOpenToggle from './withOpenToggle'
-import withIntersectionObserver from './withIntersectionObserver'
-
-export {
-  avoidSSRRender,
-  withContext,
-  withStateValue,
-  withSwitchValue,
-  withStateValueTags,
-  withOpenToggle,
-  withIntersectionObserver
-}
+export {default as avoidSSRRender} from './avoidSSRRender.js'
+export {default as withContext} from './withContext.js'
+export {default as withStateValue} from './withStateValue.js'
+export {default as withSwitchValue} from './withSwitchValue.js'
+export {default as withStateValueTags} from './withStateValueTags.js'
+export {default as withOpenToggle} from './withOpenToggle.js'
+export {default as withIntersectionObserver} from './withIntersectionObserver.js'
