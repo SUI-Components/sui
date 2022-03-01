@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/html-tagger",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Tool to tag HTML elements",
   "type": "module",
   "main": "lib/index.js",
