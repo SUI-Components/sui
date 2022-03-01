@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
 
-import {slugify} from '../src/slugify'
+import {slugify} from '../src/slugify.js'
 
 describe('I18N', () => {
   describe('Given a string with leters and numbers', () => {
