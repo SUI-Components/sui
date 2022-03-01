@@ -3,13 +3,11 @@
   "version": "1.34.0",
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
+  "type": "module",
   "scripts": {
     "lib": "babel --out-dir ./lib  ./src",
     "prepare": "npm run lib"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "peerDependencies": {
     "@s-ui/react-context": "1",
     "prop-types": "15",
