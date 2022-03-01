@@ -2,6 +2,7 @@
   "name": "@s-ui/js",
   "version": "2.24.0",
   "description": "Set of JS utilities",
+  "type": "module",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
