@@ -2,9 +2,7 @@
   "name": "@s-ui/i18n",
   "version": "1.28.0",
   "type": "module",
-  "exports": {
-    ".": "./lib/index.js"
-  },
+  "main": "/lib",
   "description": "> Isomorphic i18n service for browser and node.",
   "scripts": {
     "lib": "npm run lib:js",
