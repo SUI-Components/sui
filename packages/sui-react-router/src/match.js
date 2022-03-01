@@ -1,7 +1,7 @@
 // @ts-check
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/match.js
 
-import {REPLACE} from 'history/lib/Actions'
+import {REPLACE} from 'history/lib/Actions.js'
 import {fromReactTreeToJSON} from './internal/ReactUtils.js'
 import {createTransitionManager} from './internal/createTransitionManager.js'
 import {
