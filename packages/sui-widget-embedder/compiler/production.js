@@ -18,7 +18,10 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
     context: path.resolve(process.cwd(), 'pages', page),
     resolve: {
       ...prodConfig.resolve,
-      alias: globalConfig.alias
+      alias: {
+        ...prodConfig.resolve.alias,
+        ...globalConfig.alias
+      }
     },
     entry,
     optimization: {
