@@ -1,4 +1,4 @@
-import {parseQueryString} from '@s-ui/js/lib/string'
+import {parseQueryString} from '@s-ui/js/lib/string/index.js'
 import {trackedEventsLocalCache} from './trackedEventsLocalCache.js'
 
 const getServerStrategy = () => ({
