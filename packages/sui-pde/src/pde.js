@@ -1,4 +1,4 @@
-import DefaultAdapter from './adapters/default'
+import DefaultAdapter from './adapters/default.js'
 
 export default class PDE {
   /**
