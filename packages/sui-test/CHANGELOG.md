@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.5.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** Force alias for sui-test ([91bd068](https://github.com/SUI-Components/sui/commit/91bd0681569ae4aacbfa33011dae9f59b0416c57))
+
+
+
 # 8.4.0 (2022-02-22)
 
 
