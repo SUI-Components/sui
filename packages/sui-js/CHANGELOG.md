@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.25.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-js:** add file extensions to imports ([8462289](https://github.com/SUI-Components/sui/commit/8462289414731ca5162bc6289b1a23609b1f66b5))
+
+
+### Features
+
+* **packages/sui-js:** set package as module ([d10d6c7](https://github.com/SUI-Components/sui/commit/d10d6c799c7357f53d1cc892a94594c0413a9160))
+
+
+
 # 2.24.0 (2022-02-18)
 
 
