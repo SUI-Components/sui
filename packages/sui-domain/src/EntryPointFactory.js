@@ -1,4 +1,4 @@
-import createNotImplementedUseCase from './createNotImplementedUseCase'
+import createNotImplementedUseCase from './createNotImplementedUseCase.js'
 
 export default ({useCases, config}) =>
   class EntryPoint {

@@ -1,5 +1,5 @@
-import inherits from './inherits'
-import AnemicModel from './AnemicModel'
+import inherits from './inherits.js'
+import AnemicModel from './AnemicModel.js'
 
 const Entity = (function (_AnemicModel) {
   inherits(Entity, _AnemicModel)
