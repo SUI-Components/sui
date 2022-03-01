@@ -3,9 +3,7 @@
   "version": "2.16.0",
   "description": "",
   "type": "module",
-  "exports": {
-    ".": "./lib/index.js"
-  },
+  "main": "lib/index.js",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
