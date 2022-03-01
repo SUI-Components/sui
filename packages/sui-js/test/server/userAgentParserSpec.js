@@ -1,2 +1,2 @@
-import test from '../userAgentParserTest'
+import test from '../userAgentParserTest/index.js'
 test()

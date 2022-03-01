@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
-import {asyncPipe} from '../src/pipe/index'
+import {asyncPipe} from '../src/pipe/index.js'
 
 describe('@s-ui/js', () => {
   const textToUpperCase = async text => text.toUpperCase()
