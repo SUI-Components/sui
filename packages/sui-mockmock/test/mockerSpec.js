@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import axios from 'axios'
-import Mocker from '../src/http'
+import Mocker from '../src/http/index.js'
 
 describe('#ClientMocker', () => {
   describe('when we mock the get method', () => {

@@ -1,3 +1,3 @@
-import HttpMocker from './http'
+import HttpMocker from './http/index.js'
 
 export {HttpMocker}

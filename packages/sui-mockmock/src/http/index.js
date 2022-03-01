@@ -1,5 +1,5 @@
-import ServerMocker from './serverMocker'
-import ClientMocker from './clientMocker'
+import ServerMocker from './serverMocker.js'
+import ClientMocker from './clientMocker.js'
 
 const isNode =
   Object.prototype.toString.call(

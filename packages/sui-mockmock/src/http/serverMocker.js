@@ -1,4 +1,4 @@
-import {Mocker, Mock} from './mockerInterface'
+import {Mocker, Mock} from './mockerInterface.js'
 import nock from 'nock'
 
 class ServerMocker extends Mocker {
