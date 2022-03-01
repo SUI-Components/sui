@@ -18,10 +18,7 @@ describe('#ClientMocker', () => {
 
     describe('when mocking without status code', () => {
       beforeEach(() => {
-        mocker
-          .httpMock(fakeUrl)
-          .get(fakePath)
-          .reply({})
+        mocker.httpMock(fakeUrl).get(fakePath).reply({})
       })
 
       it('should resolve statusCode 200', done => {
@@ -34,10 +31,7 @@ describe('#ClientMocker', () => {
 
     describe('when mocking statusCode 500', () => {
       beforeEach(() => {
-        mocker
-          .httpMock(fakeUrl)
-          .get(fakePath)
-          .reply({}, 500)
+        mocker.httpMock(fakeUrl).get(fakePath).reply({}, 500)
       })
 
       it('should reject statusCode 500', done => {
@@ -50,10 +44,7 @@ describe('#ClientMocker', () => {
 
     describe('when mocking with PATCH method', () => {
       beforeEach(() => {
-        mocker
-          .httpMock(fakeUrl)
-          .patch(fakePath)
-          .reply({})
+        mocker.httpMock(fakeUrl).patch(fakePath).reply({})
       })
 
       it('should resolve statusCode 200', done => {

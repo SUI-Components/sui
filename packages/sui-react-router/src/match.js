@@ -2,9 +2,12 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/match.js
 
 import {REPLACE} from 'history/lib/Actions'
-import {fromReactTreeToJSON} from './internal/ReactUtils'
-import {createTransitionManager} from './internal/createTransitionManager'
-import {createRouterHistory, createRouterObject} from './internal/RouterUtils'
+import {fromReactTreeToJSON} from './internal/ReactUtils.js'
+import {createTransitionManager} from './internal/createTransitionManager.js'
+import {
+  createRouterHistory,
+  createRouterObject
+} from './internal/RouterUtils.js'
 
 /**
  * A high-level API to be used for server-side rendering.

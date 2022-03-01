@@ -1,12 +1,15 @@
 export const LANGUAGES = {
   'es-ES': {
-    literalOne: 'TranslateOneEsES'
+    literalOne: 'TranslateOneEsES',
+    withPlural: 'uno  |||| varios'
   },
   'en-GB': {
-    literalOne: 'TranslateOneEnGB'
+    literalOne: 'TranslateOneEnGB',
+    withPlural: 'one  |||| many'
   },
   'ca-ES': {
-    literalOne: 'TranslateOneCaES'
+    literalOne: 'TranslateOneCaES',
+    withPlural: 'un  |||| varis'
   }
 }
 

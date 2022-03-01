@@ -1,0 +1,35 @@
+header {
+  color: #111;
+  background-image: url("../test.png");
+}
+
+footer {
+  background-image: url("./logo.png");
+}
+
+section {
+  color: #222;
+}
+
+body {
+  color: #000;
+}
+
+article {
+  color: #fff;
+}
+
+/*
+  @import "~not-exists-module2/index.scss";  // this should be skiped
+*/
+.foobar {
+  color: #fff;
+}
+
+.include-test {
+  color: #fff;
+}
+
+.web_foobaz {
+  content: "web_foobaz";
+}

@@ -45,12 +45,7 @@ const resolveFilePath = (filePath, {flatten, up}) => {
     )
   }
 
-  return path.join(
-    ...path
-      .normalize(filePath)
-      .split(path.sep)
-      .slice(up)
-  )
+  return path.join(...path.normalize(filePath).split(path.sep).slice(up))
 }
 
 module.exports = async function copyFiles(args, config = {}) {

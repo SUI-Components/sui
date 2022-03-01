@@ -66,6 +66,11 @@ describe.only('I18N', () => {
         expect(i18n.t('literalOne')).to.eql('TranslateOneEnGB')
       })
 
+      it('properly supports plural', () => {
+        expect(i18n.t('withPlural', 1)).to.eql('one')
+        expect(i18n.t('withPlural', 2)).to.eql('many')
+      })
+
       it('formats number 10000 properly', () => {
         expect(i18n.n(10000)).to.eql('10,000')
       })
@@ -131,6 +136,11 @@ describe.only('I18N', () => {
 
       it('translates "literalOne" properly', () => {
         expect(i18n.t('literalOne')).to.eql('TranslateOneEsES')
+      })
+
+      it('properly supports plural', () => {
+        expect(i18n.t('withPlural', 1)).to.eql('uno')
+        expect(i18n.t('withPlural', 2)).to.eql('varios')
       })
 
       it('modify translations "literalOne" properly', () => {

@@ -79,7 +79,4 @@ const watch = () => {
   })
 }
 
-build()
-  .then(createLink)
-  .then(watch)
-  .then(console.log.bind(console))
+build().then(createLink).then(watch).then(console.log.bind(console))

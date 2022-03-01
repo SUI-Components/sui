@@ -2,7 +2,7 @@
 
 > Effortless SUI precommit rules integration in your project
 
-Installs commit hook to ensure quality rules are executed before any commit (test, linting, consistent commit, etc).
+Installs git hooks to ensure quality rules are executed before any commit (test, linting, consistent commit, etc).
 
 It provides:
 
@@ -17,44 +17,26 @@ $ npm install @s-ui/precommit --save-dev
 
 ## CLI
 
-### `$ sui-precommit run`
+### `$ sui-precommit`
 
-Executes all rules:
+Installs git hooks. This command is executed automatically when you install `@s-ui/precommit` as dependency thanks to a `postinstall` npm hook.
 
-* `sui-lint` for both js and sass
-* Your own `test` command from package.json
-  and your own "test" command.
+Executes **3** actions:
 
-> :warning: **Caution!**
->
-> **Only staged files will be linted, for performance purpose.**
-
-### `$ sui-precommit install`
-
-Installs `sui-precommit` as git pre-commit hook.
-
-Executes **4** actions:
-
-1.  Install [husky](https://www.npmjs.com/package/husky) (if not installed yet) to your project.
-2.  If you already have a husky deprecated config, migrate it to the new one.
-3.  Add `sui-precommit run` as husky's precommit script.
-4.  Add `sui-lint` as npm lint script command so you can execute linting separately.
-**Note:** *If `lint` script is already present, it doesn't overwrite it (as some packages might not need executing `sui-lint sass` or `sui-lint js`).*
+1. Add `commit-msg`, `pre-commit`, and `pre-push` hooks to the `.git/hooks` folder.
+2. Add `pre-commit` and `pre-push` npm scripts to the `package.json`.
+3. Add `lint` and `test` npm scripts in case they're not present.
+**Note:** *If scripts are already present, it doesn't overwrite them (as some packages might not need executing `sui-lint sass` or `sui-lint js` or you could have a specific config).*
 
 Your package.json might be altered like that:
 
 ```json
 {
   "scripts": {
-    "lint": "sui-lint js && sui-lint sass"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "sui-precommit run"
-    }
-  },
-  "devDependencies": {
-    "husky": "4.3.0"
+    "lint": "sui-lint js && sui-lint sass",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run test"
   }
 }
 ```

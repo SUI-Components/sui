@@ -70,7 +70,7 @@ describe('config', () => {
       expect(getPublishAccess()).to.equal('restricted')
     })
 
-    it('returns the access of the project if private', () => {
+    it('return the access set by the local config over the global config', () => {
       const {getPublishAccess} = factoryConfigMethods({
         config: {
           'sui-mono': {
@@ -79,7 +79,12 @@ describe('config', () => {
         },
         workspaces: ['components/**']
       })
-      expect(getPublishAccess()).to.equal('restricted')
+      const localPackageConfig = {
+        'sui-mono': {
+          access: 'public'
+        }
+      }
+      expect(getPublishAccess({localPackageConfig})).to.equal('public')
     })
   })
 

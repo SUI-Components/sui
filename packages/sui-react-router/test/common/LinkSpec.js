@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
-import {Router, Route, Link, match} from '../../src/index'
+import {Router, Route, Link, match} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {

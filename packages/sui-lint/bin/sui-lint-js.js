@@ -6,7 +6,7 @@ const {
   getGitIgnoredFiles,
   isOptionSet,
   stageFilesIfRequired
-} = require('../src/helpers')
+} = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')
@@ -14,16 +14,23 @@ const config = require('../eslintrc.js')
 const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
-
+const DEFAULT_PATTERN = './'
+const LINT_FORMATTER = 'stylish'
 const baseConfig = {
   ...config,
   ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
 }
-const formatterName = CI ? 'stylish' : 'codeframe'
 
 ;(async function main() {
-  const files = await getFilesToLint(EXTENSIONS)
-  if (!checkFilesToLint({files, language: 'JavaScript'})) return
+  const files = await getFilesToLint(EXTENSIONS, DEFAULT_PATTERN)
+  if (
+    !checkFilesToLint({
+      files,
+      language: 'JavaScript',
+      defaultPattern: DEFAULT_PATTERN
+    })
+  )
+    return
 
   const fix = isOptionSet('fix')
   const eslint = new ESLint({
@@ -40,7 +47,7 @@ const formatterName = CI ? 'stylish' : 'codeframe'
     stageFilesIfRequired(EXTENSIONS)
   }
 
-  const formatter = await eslint.loadFormatter(formatterName)
+  const formatter = await eslint.loadFormatter(LINT_FORMATTER)
   const errors = ESLint.getErrorResults(results)
 
   const resultsToShow = CI ? errors : results

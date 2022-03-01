@@ -1,8 +1,8 @@
 import {expect} from 'chai'
-import {Router, Route, Link} from '../../src/index'
+import {Router, Route, Link} from '../../src/index.js'
 import {render, fireEvent, screen} from '@testing-library/react'
 import sinon from 'sinon'
-import createMemoryHistory from '../../src/createMemoryHistory'
+import createMemoryHistory from '../../src/createMemoryHistory.js'
 
 describe('<Link />', () => {
   describe('when clicked', () => {

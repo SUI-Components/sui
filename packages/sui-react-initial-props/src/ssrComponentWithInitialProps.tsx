@@ -29,7 +29,7 @@ export default async function ssrComponentWithInitialProps ({
   const [renderAction, renderResponseKey] = useStream
     ? [renderToNodeStream, 'reactStream']
     : [renderToString, 'reactString']
-    // start to calculate renderToString
+  // start to calculate renderToString
   const startRenderToString = process.hrtime()
   // render with the needed action
   const renderResponse = { [renderResponseKey]: renderAction(AppWithContext) }

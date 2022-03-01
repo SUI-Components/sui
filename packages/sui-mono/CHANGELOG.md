@@ -1,5 +1,33 @@
 # CHANGELOG
 
+# 2.21.0 (2022-02-11)
+
+
+### Features
+
+* **packages/sui-mono:** fix optional chainning in nodejs ([f009cf4](https://github.com/SUI-Components/sui/commit/f009cf4eac8e8a649cbe764e2f54237704ec47f9))
+
+
+
+# 2.20.0 (2022-02-10)
+
+
+### Features
+
+* **packages/sui-mono:** enable access flag by package ([2fda746](https://github.com/SUI-Components/sui/commit/2fda746a0df79ce049925e309a240b60ea9178ac))
+* **packages/sui-mono:** initialize params for backward compatibility ([63c0163](https://github.com/SUI-Components/sui/commit/63c0163e7fbf5b13c9180e28fb84fef928c94309))
+
+
+
+# 2.19.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-mono:** Check private field to avoid release private packages ([80a1ab3](https://github.com/SUI-Components/sui/commit/80a1ab3128cda568844f362cad2dcc9cd2265128))
+
+
+
 # 2.18.0 (2021-09-08)
 
 

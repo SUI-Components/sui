@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {Redirect, Route, match} from '../../src/index'
+import {Redirect, Route, match} from '../../src/index.js'
 
 const matchPromise = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {

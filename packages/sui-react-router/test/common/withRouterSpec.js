@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
-import {withRouter, Router, Route, match} from '../../src/index'
+import {withRouter, Router, Route, match} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
@@ -10,7 +10,7 @@ const getRenderedString = ({location = '/', withRoutes}) => {
   })
 }
 
-describe('withRouter', function() {
+describe('withRouter', function () {
   const EmptyComponent = () => null
   EmptyComponent.displayName = 'EmptyComponent'
 

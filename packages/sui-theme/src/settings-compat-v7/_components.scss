@@ -122,13 +122,14 @@ $c-button-flat-icon-stroke: transparent !default;
 $bgc-button-flat-active: $c-gray !default;
 
 // Card
+$bdc-article-featured: $c-featured !default;
+$bd-article-featured: $bdw-l solid $bdc-article-featured !default;
 $bdrs-card: 0 !default;
 $bxsh-card: $bxsh-base !default;
 $bxsh-card-hover: 0 1px 6px 2px rgba($c-black, 0.15) !default;
-$c-card-title-hover: inherit !default;
-$bdc-article-featured: $c-featured !default;
-$bd-article-featured: $bdw-l solid $bdc-article-featured !default;
+$c-card-article-description: inherit !default;
 $c-card-article-icon-fill: $c-white !default;
+$c-card-title-hover: inherit !default;
 $z-card-article-icon: 1 !default;
 
 // Card composable
@@ -181,20 +182,23 @@ $size-dropdown-icon: 18px !default;
 $z-dropdown-menu: 1 !default;
 
 // Dropdown basic
+$bdrs-dropdown-basic-menu: 0 !default;
 $c-dropdown-basic-button-hover: $c-accent !default;
 $c-dropdown-basic-button-icon: $c-accent !default;
 $c-dropdown-basic-list-link: $c-accent !default;
+$fw-dropdown-basic-button: inherit !default;
 
 // Dropdown user
 $bd-dropdown-user-last-item: 1px solid $c-gray-light !default;
+$bdrs-dropdown-user-menu: 0 !default;
 $bg-dropdown-user-button: $c-gray !default;
 $bgc-dropdown-user: $c-white !default;
-$w-dropdown-user-avatar: 48px !default;
-$w-dropdown-user-text: 100px !default;
-$c-dropdown-user-text-large: $c-text-base !default;
 $c-dropdown-user-icon-highlight: $c-accent !default;
 $c-dropdown-user-icon-hover: $c-accent !default;
 $c-dropdown-user-link-highlight: $c-accent !default;
+$c-dropdown-user-text-large: $c-text-base !default;
+$w-dropdown-user-avatar: 48px !default;
+$w-dropdown-user-text: 100px !default;
 
 // Form Autocompleted
 $bd-form-autocompleted: $bdw-s solid $c-gray !default;

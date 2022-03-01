@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 
-const linkLoader = require('../../loaders/LinkLoader')
+const linkLoader = require('../../loaders/LinkLoader.js')
 
 describe('LinkLoader', () => {
   it('Should rewrite the source code for JS files in the root', async () => {

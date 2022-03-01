@@ -16,7 +16,7 @@ const MUTATION_OBSERVER_CONFIG = {
 function onIdle(cb) {
   let timerId
   if (hasIdle) {
-    timerId = window.requestIdleCallback(function(idleDeadline) {
+    timerId = window.requestIdleCallback(function (idleDeadline) {
       // reschedule if there's less than 1ms remaining on the tick
       // and a timer did not expire
       return idleDeadline.timeRemaining() <= 1 && !idleDeadline.didTimeout
@@ -56,7 +56,7 @@ export function tagHTML({tags}) {
 
   function useMutationObserverTracking() {
     // create an observer instance
-    const observer = new window.MutationObserver(function(mutations) {
+    const observer = new window.MutationObserver(function (mutations) {
       const numberOfMutations = mutations.length
       for (let i = 0; i < numberOfMutations; i++) {
         const mutation = mutations[i]

@@ -2,7 +2,6 @@ import path from 'path'
 import fs from 'fs'
 
 const DEFAULT_VALUES = {
-  serverContentType: 'html',
   useLegacyContext: true
 }
 
@@ -20,21 +19,8 @@ try {
   ssrConfig = {}
 }
 
-let assetsManifest
-try {
-  assetsManifest = JSON.parse(
-    fs.readFileSync(
-      path.join(process.cwd(), '/public/asset-manifest.json'),
-      'utf8'
-    )
-  )
-} catch (error) {
-  assetsManifest = null
-}
-
 export default {
   ASYNC_CSS_ATTRS,
   ...DEFAULT_VALUES,
-  ...ssrConfig,
-  assetsManifest
+  ...ssrConfig
 }

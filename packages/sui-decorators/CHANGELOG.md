@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.23.0 (2022-02-18)
+
+
+### Features
+
+* **packages/sui-decorators:** update hot-shots ([889356f](https://github.com/SUI-Components/sui/commit/889356fcd15e2947e626a6ebf1d2404a4e18667f))
+
+
+
 # 3.22.0 (2021-10-07)
 
 
