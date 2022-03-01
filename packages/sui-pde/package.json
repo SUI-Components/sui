@@ -2,7 +2,10 @@
   "name": "@s-ui/pde",
   "version": "2.16.0",
   "description": "",
-  "main": "lib/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.js"
+  },
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
