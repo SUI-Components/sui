@@ -7,7 +7,7 @@ import Polyglot from '../src/adapters/polyglot.js'
 import {ALL_TRANSLATIONS} from './fixtures/all_translations.js'
 import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages.js'
 
-describe.only('I18N', () => {
+describe('I18N', () => {
   let i18n
 
   beforeEach(() => {
