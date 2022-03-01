@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.11.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** breaking because of no fallback set ([3dd62ee](https://github.com/SUI-Components/sui/commit/3dd62eec76854186da7aae16c4a74a02afaeb9fd))
+
+
+
 # 9.10.0 (2022-02-22)
 
 
