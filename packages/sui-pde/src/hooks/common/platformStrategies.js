@@ -1,5 +1,5 @@
 import {parseQueryString} from '@s-ui/js/lib/string'
-import {trackedEventsLocalCache} from './trackedEventsLocalCache'
+import {trackedEventsLocalCache} from './trackedEventsLocalCache.js'
 
 const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes}) => {
