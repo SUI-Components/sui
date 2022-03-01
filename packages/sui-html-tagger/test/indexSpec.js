@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
-import {tagHTML} from '../src/index'
+import {tagHTML} from '../src/index.js'
 
 describe('Tagger', () => {
   before(() => {
