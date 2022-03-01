@@ -2,6 +2,7 @@
   "name": "@s-ui/mockmock",
   "version": "2.1.0",
   "description": "Mocking utilities for testing.",
+  "type": "module",
   "main": "lib/index.js",
   "scripts": {
     "lib": "babel ./src -d lib --presets sui",
