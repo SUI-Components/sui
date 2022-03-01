@@ -2,19 +2,13 @@
   "name": "@s-ui/html-tagger",
   "version": "1.7.0",
   "description": "Tool to tag HTML elements",
-  "main": "lib/",
+  "type": "module",
+  "main": "lib/index.js",
   "scripts": {
     "lib": "npm run lib:js",
     "lib:js": "babel ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
-  "keywords": [
-    "data-rel",
-    "tags",
-    "service"
-  ],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "just-debounce-it": "1.1.0"
   }
