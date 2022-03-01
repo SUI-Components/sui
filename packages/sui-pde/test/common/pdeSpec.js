@@ -23,7 +23,7 @@ describe('@s-ui pde', () => {
         featuresMap: {
           featureUsedInTest: {
             experimentsMap: {
-              '1234': {}
+              1234: {}
             }
           },
           featureNotUsedInTest: {

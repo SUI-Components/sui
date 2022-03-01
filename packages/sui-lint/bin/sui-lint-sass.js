@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+// @ts-check
+
 const program = require('commander')
 const stylelint = require('stylelint')
 const config = require('../stylelint.config.js')
@@ -7,10 +9,11 @@ const {
   checkFilesToLint,
   getGitIgnoredFiles,
   getFilesToLint
-} = require('../src/helpers')
+} = require('../src/helpers.js')
 
 const EXTENSIONS = ['scss']
 const IGNORE_PATTERNS = ['**/node_modules/**', '**/lib/**', '**/dist/**']
+const DEFAULT_PATTERN = '**/*.scss'
 
 program
   .option('--add-fixes')
@@ -19,18 +22,24 @@ program
   .option(
     '--pattern <pattern>',
     'root path to locate the sass files',
-    '**/*.scss'
+    DEFAULT_PATTERN
   )
   .parse(process.argv)
 
 getFilesToLint(EXTENSIONS, program.pattern).then(files => {
-  if (!checkFilesToLint({files, language: 'SCSS'})) return
+  if (
+    !checkFilesToLint({
+      files,
+      language: 'SCSS',
+      defaultPattern: DEFAULT_PATTERN
+    })
+  )
+    return
 
   return stylelint
     .lint({
       files,
       formatter: 'string',
-      syntax: 'scss',
       config: {
         ...config,
         ignoreFiles: IGNORE_PATTERNS.concat(getGitIgnoredFiles())

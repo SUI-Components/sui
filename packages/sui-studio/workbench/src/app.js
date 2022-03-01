@@ -2,10 +2,10 @@
 import ReactDOM from 'react-dom'
 
 import './styles.scss'
-import Root from './components/Root'
-import Raw from './components/Raw'
-import {isFunction} from '../../src/components/demo/utilities'
-import {importGlobals} from '../../src/components/globals'
+import Root from './components/Root/index.js'
+import Raw from './components/Raw/index.js'
+import {isFunction} from '../../src/components/demo/utilities.js'
+import {importGlobals} from '../../src/components/globals.js'
 
 const queryStringToJSON = queryString => {
   if (queryString.indexOf('?') > -1) {
@@ -13,7 +13,7 @@ const queryStringToJSON = queryString => {
   }
   const pairs = queryString.split('&')
   const result = {}
-  pairs.forEach(function(pair) {
+  pairs.forEach(function (pair) {
     pair = pair.split('=')
     result[pair[0]] = decodeURIComponent(pair[1] || '')
   })
@@ -26,14 +26,24 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
 ;(async () => {
   const {default: defaultStyle} = await import(
-    '!css-loader!sass-loader!component/index.scss'
+    '!css-loader!@s-ui/sass-loader!component/index.scss'
   )
 
   let styles = []
   let requireContextThemesKeys = []
+
   try {
+    /**
+     * TODO: In this case, it seems that we're getting twice the same theme
+     * Example:
+     * [
+     *  "./adevinta.scss",
+     *  "components/atom/button/demo/themes/adevinta.scss"
+     * ]
+     * We might want to filter those to avoid importAll to import twice the same
+     */
     const requireContextThemes = require.context(
-      '!css-loader!sass-loader!demo/themes',
+      '!css-loader!@s-ui/sass-loader!demo/themes',
       false,
       /\.scss$/
     )
@@ -53,13 +63,16 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
 
   let demoStyles = ''
   try {
-    demoStyles = require('!css-loader!sass-loader!demo/index.scss') // eslint-disable-line
+    demoStyles = require('!css-loader!@s-ui/sass-loader!demo/index.scss') // eslint-disable-line
   } catch {}
 
   const contexts = isFunction(ctxt) ? await ctxt() : ctxt
   const themes = requireContextThemesKeys.reduce((acc, path, index) => {
+    const filename = path.indexOf('/') ? path.split('/').reverse()[0] : path
+
+    const themeName = filename.replace('./', '').replace('.scss', '')
+
     const style = styles[index]
-    const themeName = path.replace('./', '').replace('.scss', '')
     acc[themeName] = style.default || style
     return acc
   }, {})

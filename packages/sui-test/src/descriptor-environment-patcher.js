@@ -25,7 +25,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     const isOnlyClientButRunningAsServer =
       isNode && env === environments.CLIENT && firstLevelFnName
     if (shouldReturnDescriber) {
-      return function() {
+      return function () {
         firstLevelFnName
           ? global[descriptorName][firstLevelFnName](...arguments)
           : global[descriptorName](...arguments)

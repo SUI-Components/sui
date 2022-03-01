@@ -1,3 +1,5 @@
+// @ts-check
+
 /* eslint-disable no-console */
 const webpack = require('webpack')
 const path = require('path')
@@ -5,28 +7,27 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
+
 const {
   when,
   cleanList,
   envVars,
   MAIN_ENTRY_POINT,
   config
-} = require('./shared/index')
-const minifyJs = require('./shared/minify-js')
-const minifyCss = require('./shared/minify-css')
-const definePlugin = require('./shared/define')
-const babelRules = require('./shared/module-rules-babel')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {splitChunks} = require('./shared/optimization-split-chunks')
+} = require('./shared/index.js')
+const {aliasFromConfig} = require('./shared/resolve-alias.js')
 const {
   extractComments,
-  useExperimentalMinifier,
-  sourceMap
-} = require('./shared/config')
-const {aliasFromConfig} = require('./shared/resolve-alias')
-const {resolveLoader} = require('./shared/resolve-loader')
+  sourceMap,
+  supportLegacyBrowsers
+} = require('./shared/config.js')
+const {resolveLoader} = require('./shared/resolve-loader.js')
+const babelRules = require('./shared/module-rules-babel.js')
+const definePlugin = require('./shared/define.js')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const minifyCss = require('./shared/minify-css.js')
+const minifyJs = require('./shared/minify-js.js')
 
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 
@@ -38,24 +39,29 @@ const cssFileName = config.onlyHash
   ? '[contenthash:8].css'
   : '[name].[contenthash:8].css'
 
-const smp = new SpeedMeasurePlugin()
+const target = supportLegacyBrowsers ? ['web', 'es5'] : 'web'
 
+/** @typedef {import('webpack').Configuration} WebpackConfig */
+
+/** @type {WebpackConfig} */
 const webpackConfig = {
   devtool: sourceMap,
   mode: 'production',
+  target,
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json'],
-    modules: ['node_modules', path.resolve(process.cwd())]
+    modules: ['node_modules', path.resolve(process.cwd())],
+    fallback: {
+      assert: false,
+      fs: false,
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      path: false
+    }
   },
-  entry: config.vendor
-    ? {
-        app: MAIN_ENTRY_POINT,
-        vendor: config.vendor
-      }
-    : MAIN_ENTRY_POINT,
-  target: 'web',
+  entry: MAIN_ENTRY_POINT,
   output: {
     chunkFilename: filename,
     filename,
@@ -63,18 +69,21 @@ const webpackConfig = {
     publicPath: PUBLIC_PATH
   },
   optimization: {
-    // avoid looping over all the modules after the compilation
     checkWasmTypes: false,
     minimize: true,
-    minimizer: [
-      minifyJs({useExperimentalMinifier, extractComments, sourceMap}),
-      minifyCss()
-    ].filter(Boolean),
+    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(
+      Boolean
+    ),
     runtimeChunk: true,
-    splitChunks
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   plugins: cleanList([
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    }),
+    new webpack.ids.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin(),
     new MiniCssExtractPlugin({
@@ -126,7 +135,7 @@ const webpackConfig = {
               }
             }
           },
-          require.resolve('sass-loader')
+          require.resolve('@s-ui/sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
@@ -134,12 +143,7 @@ const webpackConfig = {
       )
     ])
   },
-  resolveLoader,
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  }
+  resolveLoader
 }
 
-module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
+module.exports = webpackConfig

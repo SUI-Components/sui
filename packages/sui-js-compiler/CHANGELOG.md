@@ -1,5 +1,42 @@
 # CHANGELOG
 
+# 1.14.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-js-compiler:** update fast-glob ([3902ce1](https://github.com/SUI-Components/sui/commit/3902ce1c2d3a66d95028f28985e654022b42ac32))
+
+
+
+# 1.13.0 (2022-02-02)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc dependency ([4c5ba69](https://github.com/SUI-Components/sui/commit/4c5ba697079112d8504986d72a2a4850a7902c18))
+
+
+
+# 1.12.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependencies ([185dfba](https://github.com/SUI-Components/sui/commit/185dfba31e665c27df8ec478562e680097f79309))
+
+
+
+# 1.11.0 (2021-12-21)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** revert version change ([d41cc28](https://github.com/SUI-Components/sui/commit/d41cc28f8d5e4cd76280ed7a39713e7fc6e4fd8f))
+* **packages/sui-js-compiler:** use last version of swc core and helpers ([c3cee84](https://github.com/SUI-Components/sui/commit/c3cee8459c0f2eace6d5e32eecb5945f11b15d6f))
+
+
+
 # 1.10.0 (2021-11-30)
 
 

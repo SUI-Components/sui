@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.8.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Pin colors version on package.json ([5ad173b](https://github.com/SUI-Components/sui/commit/5ad173b0f2d8af4e6451554a5770b26ebb61248e))
+
+
+
 # 1.7.0 (2021-11-26)
 
 

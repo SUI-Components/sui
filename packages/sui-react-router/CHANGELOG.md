@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.14.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-react-router:** Add file extensions ([c37dae9](https://github.com/SUI-Components/sui/commit/c37dae9119af98e40a7dac8bd688769b06a0c577))
+
+
+
 # 1.13.0 (2021-11-24)
 
 

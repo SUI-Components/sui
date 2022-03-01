@@ -3,7 +3,7 @@
 
 const program = require('commander')
 const colors = require('@s-ui/helpers/colors')
-const runner = require('./karma')
+const runner = require('./karma/index.js')
 
 program
   .option('-W, --watch', 'Run in watch mode')

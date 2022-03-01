@@ -1,13 +1,9 @@
 const fg = require('fast-glob')
 const path = require('path')
 
-const {config} = require('../shared')
-const log = require('../shared/log')
-const {defaultAlias} = require('../shared/resolve-alias')
+const log = require('../shared/log.js')
+const {defaultAlias} = require('../shared/resolve-alias.js')
 const createSassLinkImporter = require('./sassLinkImporter.js')
-
-const useExperimentalSCSSLoader =
-  config.optimizations && config.optimizations.useExperimentalSCSSLoader
 
 const diccFromAbsolutePaths = (paths, init = {}) =>
   paths.reduce((acc, pkg) => {
@@ -64,14 +60,12 @@ module.exports = ({config, packagesToLink, linkAll}) => {
   }
 
   /**
-   * Create a sass-loader config for scss files that
+   * Create a @s-ui/sass-loader config for scss files that
    * are handled by Sass. These are nested modules imported
    * and thus is sass binary which needs a special config for them.
    */
   const sassLoaderWithLinkImporter = {
-    loader: useExperimentalSCSSLoader
-      ? require.resolve('super-sass-loader')
-      : require.resolve('sass-loader'),
+    loader: require.resolve('@s-ui/sass-loader'),
     options: {
       sassOptions: {
         importer: createSassLinkImporter(entryPoints)
@@ -86,7 +80,10 @@ module.exports = ({config, packagesToLink, linkAll}) => {
   const {rules} = config.module
   const rulesWithLink = rules.map(rule => {
     const {use, test: regex} = rule
-    if (!regex.test('.css') || use === 'null-loader') return rule
+
+    if (!use) return rule
+
+    if (!regex.test('.css')) return rule
 
     return {
       ...rule,

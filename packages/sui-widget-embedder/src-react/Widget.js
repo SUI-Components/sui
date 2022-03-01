@@ -19,7 +19,7 @@ export default function Widget({
   selector,
   renderMultiple = false
 }) {
-  useMount(function() {
+  useMount(function () {
     if (!selector) {
       return console.warn(
         `[Widget] You must define a selector to use the Widget`

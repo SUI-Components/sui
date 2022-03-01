@@ -28,7 +28,7 @@ const run = async () => {
       [
         suiTestClientPath,
         [
-          '--src-pattern',
+          '--pattern',
           path.join(
             'node_modules',
             '@s-ui',

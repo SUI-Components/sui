@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 
 module.exports = ({address, page, config}) => {
-  const compiler = require('../compiler/development')({
+  const compiler = require('../compiler/development.js')({
     address,
     page,
     port: config.port
@@ -13,10 +13,12 @@ module.exports = ({address, page, config}) => {
   app.use(
     webpackMiddleware(compiler, {
       serverSideRender: true,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      noInfo: true
+      headers: [
+        {
+          key: 'Access-Control-Allow-Origin',
+          value: '*'
+        }
+      ]
     })
   )
 

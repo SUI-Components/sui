@@ -1,5 +1,5 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/isActive.js
-import {matchPattern} from '../PatternUtils'
+import {matchPattern} from '../PatternUtils.js'
 
 /**
  * Check if two objects are deep equal

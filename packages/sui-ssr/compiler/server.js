@@ -14,10 +14,12 @@ module.exports = ({outputPath}) => ({
   externals: undefined,
   plugins: [
     ...(serverConfig.plugins || []),
-    new CopyWebpackPlugin([
-      {from: '404.html', to: '../public'},
-      {from: '500.html', to: '../public'}
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: '404.html', to: '../public', noErrorOnMissing: true},
+        {from: '500.html', to: '../public', noErrorOnMissing: true}
+      ]
+    })
   ],
   resolve: {
     ...serverConfig.resolve,

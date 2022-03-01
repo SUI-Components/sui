@@ -59,9 +59,7 @@ export async function extractCSSFromApp({routes, config = {}}) {
   for await (const [pathKey, pathOptions] of Object.entries(routes)) {
     const url = createUrlFrom({hostname, pathOptions})
 
-    const hash = createHash('md5')
-      .update(pathKey)
-      .digest('hex')
+    const hash = createHash('md5').update(pathKey).digest('hex')
 
     const cssFileName = `${hash}.css`
 

@@ -1,5 +1,81 @@
 # CHANGELOG
 
+# 11.5.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies ([ce29ee0](https://github.com/SUI-Components/sui/commit/ce29ee0d702dee8c5bbc037518da931cd492e6cd))
+
+
+
+# 11.4.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-studio:** update fast-glob ([8a4bac3](https://github.com/SUI-Components/sui/commit/8a4bac36b2983f74976451f726bbb329e50450e7))
+
+
+
+# 11.3.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix studio import components ([754f790](https://github.com/SUI-Components/sui/commit/754f7901059a55506031b7061da024155b6b630d))
+
+
+
+# 11.2.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** import only selected test files ([f1b34bf](https://github.com/SUI-Components/sui/commit/f1b34bfb85f6ea64da9631bebdbbc13601caf707))
+* **packages/sui-studio:** use pattern to avoid multiple patterns (srcPattern + pattern) ([6ad0a36](https://github.com/SUI-Components/sui/commit/6ad0a36a6866fffdf21dc8b79a992a462c4ab4f0))
+
+
+
+# 11.1.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-studio:** Use latest bundler and test dependencies ([73b078d](https://github.com/SUI-Components/sui/commit/73b078dde18b7804fd17e9569bf12bacdc0fcaac))
+
+
+
+# 11.0.0 (2022-01-27)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** studio component test runner by category ([98bbb37](https://github.com/SUI-Components/sui/commit/98bbb372fa376dfca65984ab99bf0d8e9f1e0b04))
+
+
+### Features
+
+* **packages/sui-bundler:** Remove deprecation notices and add extensions for files ([e151093](https://github.com/SUI-Components/sui/commit/e15109386f70644ade58b8f5dd0b9fff20c70ba8))
+* **packages/sui-studio:** Avoid showing duplicated themes ([cf9349c](https://github.com/SUI-Components/sui/commit/cf9349cacfaece7d663fe72fbd7cdec0ef88a35f))
+* **packages/sui-studio:** Generate props definitions for components at build time ([dfcb144](https://github.com/SUI-Components/sui/commit/dfcb1448ab72bb484bccbcf173608ba2e586862d))
+* **packages/sui-studio:** Improve API generation info problems for studio on build time ([ccf6114](https://github.com/SUI-Components/sui/commit/ccf611401d1b78ab6d376bee2dd313dea8cfc346))
+* **packages/sui-studio:** Log timing for some ops ([72d1540](https://github.com/SUI-Components/sui/commit/72d15405dcec349fc4cd1eb89b43033c24be778a))
+* **packages/sui-studio:** Release new major version of sui-studio based on Webpack@5 ([4b41c74](https://github.com/SUI-Components/sui/commit/4b41c742c6d69b7e8afd3fbec74f52e55004fdbd))
+* **packages/sui-studio:** Unify version of fast-glob ([0479b54](https://github.com/SUI-Components/sui/commit/0479b5428fdc4ba894992c1b13fd2120a7866cdb))
+* **packages/sui-studio:** Use @s-ui/sass-loader instead old sass-loader ([94d5bef](https://github.com/SUI-Components/sui/commit/94d5bef28c0fdf83877a445c77c51c5dfe0eb783))
+
+
+
+# 10.43.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** fix lint error ([f8d80dd](https://github.com/SUI-Components/sui/commit/f8d80dd491a6293264c5e30e5366457323c664e9))
+
+
+
 # 10.42.0 (2021-11-29)
 
 
@@ -37,6 +113,11 @@
 * **packages/sui-studio:** fix prepare script to copy styles ([5e9c0fd](https://github.com/SUI-Components/sui/commit/5e9c0fd784c1aba7b452e3e3635fb0ca6ba54d63))
 
 
+### Features
+
+* **packages/sui-studio:** Stop using sass-loader and migrate to [@s-ui](https://github.com/s-ui) package ([2622d4f](https://github.com/SUI-Components/sui/commit/2622d4f2758b602fb3916633c2435608769e8d0d))
+
+
 
 # 10.38.0 (2021-11-18)
 
@@ -48,6 +129,11 @@
 
 
 # 10.37.0 (2021-11-17)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Dont use return outside a function ([0a51c9b](https://github.com/SUI-Components/sui/commit/0a51c9b2356245f97ed3833088371dcc9d73055a))
 
 
 ### Features
@@ -62,6 +148,7 @@
 ### Features
 
 * **packages/sui-studio:** add categories env variable ([9280ff2](https://github.com/SUI-Components/sui/commit/9280ff2b5a3aefc11310daabc05c6c7b9d381c87))
+* **packages/sui-studio:** Upgrade dependencies ([dd05b59](https://github.com/SUI-Components/sui/commit/dd05b59fa5ab4b2052112135397bdcb2fa4a52da))
 
 
 
@@ -487,7 +574,6 @@
 ### Features
 
 * **sui-studio:** add ref to mocha setup environment ([557d14b](https://github.com/SUI-Components/sui/commit/557d14bef1d2902a74618d9f922545f4918122f1))
-* **sui-studio:** pull master ([e4456e0](https://github.com/SUI-Components/sui/commit/e4456e0bad2fec9b1f025e270d0115f020582106))
 * **sui-studio:** studio contextify component without loosing its reference ([44f39b8](https://github.com/SUI-Components/sui/commit/44f39b85175553751766dd186a3976ee100691df))
 
 

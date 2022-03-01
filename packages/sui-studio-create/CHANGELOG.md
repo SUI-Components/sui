@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.21.0 (2022-02-15)
+
+
+### Features
+
+* **packages/sui-studio-create:** Adapt sui-studio-create to use latest deps ([f52dfdd](https://github.com/SUI-Components/sui/commit/f52dfddaa3b2e41589af199814d4873d53ac00dc))
+
+
+
 # 4.20.0 (2021-07-07)
 
 

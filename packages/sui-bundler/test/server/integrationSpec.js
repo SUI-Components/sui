@@ -6,74 +6,85 @@ const childProcess = require('child_process')
 const exec = util.promisify(childProcess.exec)
 
 const SUI_BUNDLER_BINARY_DIR = path.join(__dirname, '..', '..', 'bin')
-const FEATURES_APP_PATH = path.join(__dirname, 'integration', 'features-app')
-const OFFLINE_APP_PATH = path.join(__dirname, 'integration', 'offline-app')
-const EXTERNAL_MANIFEST_APP_PATH = path.join(
-  __dirname,
-  'integration',
-  'external-manifest-app'
-)
 
-describe.skip('[Integration] sui-bundler', () => {
-  it('Regresion test for features', async function() {
+const getCWD = app => path.join(__dirname, 'integration', app)
+
+const executeBundler = async ({cwd, env = {}}) => {
+  const {stdout} = await exec(
+    `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
+    {
+      cwd,
+      env: {
+        ...process.env,
+        ...env
+      }
+    }
+  )
+
+  if (stdout.includes('Error')) {
+    console.error(stdout)
+  }
+
+  return stdout
+}
+
+const getMainFileContent = ({cwd, CDN = '/'} = {}) => {
+  const manifest = require(path.join(`${cwd}/public/asset-manifest.json`))
+  const mainJS = manifest['main.js'].replace(CDN, '')
+
+  return fs.readFileSync(path.join(`${cwd}/public/${mainJS}`))
+}
+
+describe('[Integration] sui-bundler', () => {
+  it('builds correctly with default options', async function () {
     this.timeout(0)
+
     const CDN = 'https://my-cdn.com/'
-    const {stdout} = await exec(
-      `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
-      {
-        cwd: FEATURES_APP_PATH,
-        env: {
-          ...process.env,
-          CDN,
-          APP_NAME: 'test_app'
-        }
-      }
-    )
+    const cwd = getCWD('features-app')
 
-    const {stdout: lsStdout} = await exec(
-      `ls "${FEATURES_APP_PATH}/public" | grep -E "br|gz" || true`,
-      {
-        cwd: FEATURES_APP_PATH
-      }
-    )
-
-    const manifest = require(path.join(
-      `${FEATURES_APP_PATH}/public/asset-manifest.json`
-    ))
-
-    const mainJS = manifest['main.js'].replace(CDN, '')
+    const stdout = await executeBundler({cwd, env: {CDN}})
 
     expect(stdout.includes('Error')).to.be.false
 
+    const {stdout: lsStdout} = await exec(
+      `ls "${cwd}/public" | grep -E ".js$" || true`,
+      {
+        cwd
+      }
+    )
+
+    const mainJSContent = getMainFileContent({cwd, CDN})
+
     expect(lsStdout).to.be.not.eql('')
 
-    expect(
-      fs.existsSync(
-        path.join(`${FEATURES_APP_PATH}/public/asset-manifest.json`)
-      )
-    ).to.be.true
+    expect(fs.existsSync(path.join(`${cwd}/public/asset-manifest.json`))).to.be
+      .true
 
-    expect(
-      fs
-        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/index.html`))
-        .includes(CDN)
-    ).to.be.true
+    expect(fs.readFileSync(path.join(`${cwd}/public/index.html`)).includes(CDN))
+      .to.be.true
 
-    expect(
-      fs
-        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
-        .includes('test_app')
-    ).to.be.true
-
-    expect(
-      fs
-        .readFileSync(path.join(`${FEATURES_APP_PATH}/public/${mainJS}`))
-        .includes('DEFAULT_VALUE')
-    ).to.be.true
+    expect(mainJSContent.includes('test_app')).to.be.true
   })
 
-  it('Offline Page', async function() {
+  it('builds without modern features when using supportLegacyBrowsers flag', async function () {
     this.timeout(0)
+
+    const cwd = getCWD('legacy-browsers-app')
+    const stdout = await executeBundler({cwd})
+    expect(stdout.includes('Error')).to.be.false
+
+    const mainJSContent = getMainFileContent({cwd})
+
+    expect(mainJSContent.includes('=>')).to.be.false
+    expect(mainJSContent.includes('`')).to.be.false
+    expect(mainJSContent.includes('catch{')).to.be.false
+  })
+
+  it.skip('Offline Page', async function () {
+    this.timeout(0)
+    // tofix
+    const OFFLINE_APP_PATH = ''
+
     const {stdout} = await exec(
       `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
       {
@@ -110,8 +121,10 @@ describe.skip('[Integration] sui-bundler', () => {
     ).to.be.true
   })
 
-  it('External Manifest', async function() {
+  it.skip('External Manifest', async function () {
     this.timeout(0)
+    // tofix
+    const EXTERNAL_MANIFEST_APP_PATH = 'tofix'
     let server
     try {
       server = childProcess.spawn(

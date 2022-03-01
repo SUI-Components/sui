@@ -1,5 +1,5 @@
 /* eslint-disable no-var */
-export var buildDeviceFrom = function(params) {
+export var buildDeviceFrom = function (params) {
   var win = params.window
   var request = params.request
   request = request === undefined ? {} : request

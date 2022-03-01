@@ -1,15 +1,18 @@
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
-const babelRules = require('./shared/module-rules-babel')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {aliasFromConfig} = require('./shared/resolve-alias')
 
-const {config, when, cleanList} = require('./shared')
-const {resolveLoader} = require('./shared/resolve-loader')
+const {config, when, cleanList} = require('./shared/index.js')
+const babelRules = require('./shared/module-rules-babel.js')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const {aliasFromConfig} = require('./shared/resolve-alias.js')
+const {resolveLoader} = require('./shared/resolve-loader.js')
 
 const filename = '[name].[chunkhash:8].js'
 
+/** @typedef {import('webpack').Configuration} WebpackConfig */
+
+/** @type {WebpackConfig} */
 const webpackConfig = {
   context: path.resolve(process.cwd(), 'src'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -28,6 +31,7 @@ const webpackConfig = {
   },
   optimization: {
     checkWasmTypes: false,
+    minimize: true,
     nodeEnv: false
   },
   externals: [webpackNodeExternals()],
@@ -37,9 +41,12 @@ const webpackConfig = {
     rules: cleanList([
       babelRules,
       {
-        // ignore css/scss require/imports files in the server
-        test: /\.s?css$/,
-        use: 'null-loader'
+        // ignore css/scss/svg require/imports files in the server
+        test: /(\.svg|\.s?css)$/,
+        type: 'asset/inline',
+        generator: {
+          dataUrl: () => ''
+        }
       },
       when(config['externals-manifest'], () =>
         manifestLoaderRules(config['externals-manifest'])

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.24.0 (2022-02-18)
+
+
+### Features
+
+* **packages/sui-js:** update nanoid dependency ([d53b9f0](https://github.com/SUI-Components/sui/commit/d53b9f08423edb8f96f82cd506243272438182e7))
+
+
+
 # 2.23.0 (2021-06-07)
 
 

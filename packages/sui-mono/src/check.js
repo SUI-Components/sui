@@ -1,7 +1,14 @@
 /* eslint no-console:0 */
 
 const conventionalChangelog = require('conventional-changelog')
-const {checkIsMonoPackage, getProjectName, getWorkspaces} = require('./config')
+const {readJsonSync} = require('fs-extra')
+
+const {
+  checkIsMonoPackage,
+  getProjectName,
+  getWorkspaces
+} = require('./config.js')
+
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
 const PACKAGE_VERSION_INCREMENT = {
@@ -38,7 +45,14 @@ const flatten = status =>
 
 const check = () =>
   new Promise(resolve => {
-    const packagesWithChangelog = getWorkspaces()
+    /**
+     * Remove packages with private field with true value
+     * so we avoid them to be listed as releaseable
+     */
+    const packagesWithChangelog = getWorkspaces().filter(pkg => {
+      const {private: privateField} = readJsonSync(`${pkg}/package.json`)
+      return privateField !== true
+    })
 
     const status = {}
     packagesWithChangelog.forEach(pkg => {

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.15.0 (2022-01-28)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use same node-fetch version other ([0a48500](https://github.com/SUI-Components/sui/commit/0a485000d350b637d2969cac0bb9a70e4525f194))
+
+
+
 # 1.14.0 (2021-10-05)
 
 

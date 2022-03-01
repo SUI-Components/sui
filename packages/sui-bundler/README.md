@@ -163,6 +163,7 @@ This tool works with zero configuration out the box but you could use some confi
 {
   "config": {
     "sui-bundler": {
+      "supportLegacyBrowsers": false, // default
       "onlyHash": "true",
       "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
       "vendor": ["react", "react-dom"],
@@ -171,23 +172,10 @@ This tool works with zero configuration out the box but you could use some confi
       "alias": {
         "react": "preact"
       },
-      "measure": true,
       "offline": true,
-      "targets": {
-        "chrome": "41",
-        "ie": "11",
-        "safari": "8",
-        "firefox": "60",
-        "ios": "8"
-      },
       "sourcemaps": {
         "dev": "cheap-module-eval-source-map",
         "prod": "hidden-source-map"
-      },
-      "optimizations": {
-        "splitFrameworkOnChunk": true,
-        "useExperimentalMinifier": true,
-        "useExperimentalSCSSLoader": true
       }
     }
   }
@@ -217,10 +205,6 @@ register({
 You should pass a handler in order to handle when content gets cached for the first time the content and another when you get new content and want to handle how to show a notification to the user in order to let him decide if he wants to refresh the page.
 
 If you want to remove your ServiceWorker, you need to use the method `unregister`, the same way you used the `register` method before.
-
-### Build time measurement
-
-Set `measure` to `true` if you want to check step by step build times.
 
 ### Only Caching
 
@@ -315,17 +299,11 @@ Different values can be configured for development (`dev`) and production (`prod
 
 Check all possible values accepted by webpack in the [devtool webpack docs](https://webpack.js.org/configuration/devtool/#devtool)
 
-## Optimizations
-
-You could tweak the performance of your bundle generation by using some flags provided in this config.
-
-`splitFrameworkOnChunk` (default: `false`): Separate in a chunk all the packages related to React. This gives you a separated static hashed file, as the version of React doesn't get often upgraded, and a benefit over HTTP2 connections are you're serving smaller files.
-
-`useExperimentalMinifier` (default: `false`): Use `esbuild-loader` to minify JavaScript and CSS instead using `terser` and `css-minimizer-webpack-plugin` in order to boost build time and memory usage.
-
-`useExperimentalSCSSLoader` (default: `false`): Use [fast-sass-loader](https://github.com/yibn2008/fast-sass-loader) (currently a fork of it [super-sass-loader](https://github.com/andresz1/super-sass-loader)) instead of `sass-loader` (available in development only)
-
 ## Migrations
+
+### Migrate from v7 to v8
+
+`useExperimentalSCSSLoader` is not used anymore and it will be ignored.
 
 ### Migrate from v6 to v7
 

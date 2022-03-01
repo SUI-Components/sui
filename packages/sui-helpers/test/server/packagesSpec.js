@@ -50,7 +50,7 @@ describe('[sui-helpers] packages.js utils', () => {
   })
 
   describe.skip('resolveLazyNPMBin', () => {
-    it('install a lazy dependency for the binary and return', async function() {
+    it('install a lazy dependency for the binary and return', async function () {
       this.timeout(30000) // allow npm install to have plenty of time
       const bin = await resolveLazyNPMBin(
         '.bin/premove',

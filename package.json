@@ -12,26 +12,28 @@
     "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx -p ./packages/sui-mono sui-mono run 'rm -rf ./node_modules' && rm -rf package-lock.json node_modules && npm install --legacy-peer-deps",
+    "phoenix": "npx @s-ui/mono run 'rm -rf ./node_modules' && rm -rf package-lock.json node_modules && npm install --legacy-peer-deps",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
     "test:ci": "npm run test:server",
-    "test:client": "NODE_ENV=test sui-test browser -P \"packages/*/test/**/*Spec.js\" -I 'packages/*/test/server/*Spec.js'",
+    "test:client": "sui-test browser -P 'packages/**/!(server)/*Spec.js'",
     "test:client:watch": "npm run test:client -- --watch",
-    "test:server": "NODE_ENV=test & sui-test server -P \"./packages/*/\\!\\(browser\\)/server/*.js\"",
+    "test:server": "sui-test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
     "test:server:watch": "npm run test:server -- --watch",
-    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234"
+    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234",
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run test",
+    "commit-msg": "validate-commit-msg"
   },
   "devDependencies": {
     "@babel/cli": "7",
-    "@s-ui/lint": "3",
+    "@s-ui/lint": "4",
     "@s-ui/mono": "2",
-    "@s-ui/precommit": "2",
+    "@s-ui/precommit": "3",
     "@s-ui/react-context": "1",
-    "@s-ui/test": "6",
-    "chai": "4.3.4",
-    "husky": "4.3.0",
+    "@s-ui/test": "8",
+    "chai": "4.3.6",
     "react": "17",
     "rimraf": "3.0.2",
     "sinon": "10.0.0",
@@ -78,11 +80,5 @@
   "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "sui-precommit run",
-      "commit-msg": "validate-commit-msg"
-    }
   }
 }
