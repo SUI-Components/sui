@@ -1,4 +1,4 @@
-import Cache from './Cache'
+import Cache from './Cache.js'
 import lru from 'tiny-lru/lib/tiny-lru.es5'
 
 export default class LRU extends Cache {

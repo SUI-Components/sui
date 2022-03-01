@@ -1,5 +1,5 @@
 import {createHash} from '@s-ui/js/lib/hash'
-import isPromise from '../../../helpers/isPromise'
+import isPromise from '../../../helpers/isPromise.js'
 
 export const inMemory = (target, cache, original, fnName, instance, ttl) => (
   ...args

@@ -3,6 +3,7 @@
   "version": "3.23.0",
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
+  "type": "module",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"

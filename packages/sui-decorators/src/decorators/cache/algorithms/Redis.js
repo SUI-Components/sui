@@ -1,5 +1,5 @@
-import Cache from './Cache'
-import RedisClient from './RedisClient'
+import Cache from './Cache.js'
+import RedisClient from './RedisClient.js'
 import lru from 'redis-lru'
 
 export default class Redis extends Cache {

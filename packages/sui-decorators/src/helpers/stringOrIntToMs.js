@@ -1,13 +1,9 @@
 const stringOrIntToMs = ({ttl}) => {
-  const RADIX = 10
-
-  if (typeof ttl === 'number') {
-    return ttl
-  }
+  if (typeof ttl === 'number') return ttl
 
   let [unit, amount] = ttl.split(' ')
   try {
-    unit = parseInt(unit, RADIX)
+    unit = parseInt(unit)
   } catch (e) {
     return false
   }
