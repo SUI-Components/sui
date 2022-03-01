@@ -3,6 +3,7 @@
   "version": "1.14.0",
   "description": "JavaScript Compiler",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "sui-js-compiler": "./index.js"
   },
@@ -13,8 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@swc/core": "1.2.135",
-    "@swc/helpers": "0.3.2",
+    "@swc/core": "1.2.146",
+    "@swc/helpers": "0.3.6",
     "fast-glob": "3.2.11",
     "fs-extra": "10.0.0"
   }

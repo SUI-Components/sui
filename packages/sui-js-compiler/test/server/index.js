@@ -1,8 +1,10 @@
-const promisify = require('util').promisify
-const exec = promisify(require('child_process').exec)
-const fs = require('fs-extra')
-const {expect} = require('chai')
-const path = require('path')
+import {promisify} from 'node:util'
+import {exec as execCallback} from 'node:child_process'
+import path from 'node:path'
+import fs from 'fs-extra'
+import {expect} from 'chai'
+
+const exec = promisify(execCallback)
 
 const libPath = path.join(__dirname, 'lib')
 const libFilePath = path.join(libPath, 'example.js')
