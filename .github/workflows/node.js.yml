@@ -24,10 +24,11 @@ jobs:
         node-version: 16
         registry-url: 'https://registry.npmjs.org'
     - uses: browser-actions/setup-firefox@latest
+    - run: sudo apt-get install xvfb
     - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
     - run: npm run lint
-    - run: sudo apt-get install xvfb
-    - run: xvfb-run --auto-servernum npm run test:ci
+    - run: npm run test:server:ci
+    - run: xvfb-run --auto-servernum npm run test:client:ci
     - run: npx -p ./packages/sui-ci sui-ci release
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
