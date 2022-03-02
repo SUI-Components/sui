@@ -1,3 +1,3 @@
-import './pdeSpec'
-import './useExperimentSpec'
-import './useFeatureSpec'
+import './pdeSpec.js'
+import './useExperimentSpec.js'
+import './useFeatureSpec.js'
