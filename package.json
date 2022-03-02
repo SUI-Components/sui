@@ -16,7 +16,7 @@
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
-    "test:ci": "npm run test:server",
+    "test:ci": "npm run test:server && npm run test:client -- --ci",
     "test:client": "sui-test browser -P 'packages/**/!(server)/*Spec.js'",
     "test:client:watch": "npm run test:client -- --watch",
     "test:server": "sui-test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
