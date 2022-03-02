@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: 16
         registry-url: 'https://registry.npmjs.org'
-    - uses: browser-actions/setup-firefox@latest
+    - uses: browser-actions/setup-chrome@latest
     - run: sudo apt-get install xvfb
     - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
     - run: npm run lint
