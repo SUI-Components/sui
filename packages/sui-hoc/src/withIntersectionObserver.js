@@ -1,5 +1,5 @@
 /* global IntersectionObserver */
-import React, {Component} from 'react'
+import {Component} from 'react'
 
 const shouldLoadIntersectionObserver = () =>
   !('IntersectionObserver' in window) ||

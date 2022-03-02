@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.7.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** Add missing alias from config ([514017d](https://github.com/SUI-Components/sui/commit/514017d3b7b8334356ff9a08653b9b2422a8b6ac))
+
+
+
 # 5.6.0 (2022-02-23)
 
 

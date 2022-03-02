@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.12.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Add suport jsx-runtime and jsx-runtime-dev to resolve file ([9010274](https://github.com/SUI-Components/sui/commit/90102743b208fe25b6e5c379fa49556f0d0514c2))
+
+
+
 # 9.11.0 (2022-03-01)
 
 
