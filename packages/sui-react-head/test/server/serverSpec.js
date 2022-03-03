@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions:0 */
 /* eslint-env mocha */
 
-import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
+import descriptorsByEnvironmentPatcher from '@s-ui/test/lib/descriptor-environment-patcher.js'
 import React from 'react'
 import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
@@ -53,11 +53,8 @@ describe.server('react-head on server', () => {
         </Head>
       )
 
-      const {
-        headString,
-        bodyAttributes,
-        htmlAttributes
-      } = renderHeadTagsToString(headTags)
+      const {headString, bodyAttributes, htmlAttributes} =
+        renderHeadTagsToString(headTags)
 
       expect(headString).to.equal(
         '<title data-rh="" data-reactroot="">My awesome title</title><meta data-rh="" name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-reactroot=""/><meta data-rh="" name="theme-color" content="#303ab2" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'
@@ -83,11 +80,8 @@ describe.server('react-head on server', () => {
         />
       )
 
-      const {
-        headString,
-        bodyAttributes,
-        htmlAttributes
-      } = renderHeadTagsToString(headTags)
+      const {headString, bodyAttributes, htmlAttributes} =
+        renderHeadTagsToString(headTags)
 
       expect(headString).to.equal(
         '<title data-rh="" data-reactroot="">My awesome title</title><meta data-rh="" name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-reactroot=""/><meta data-rh="" name="theme-color" content="#303ab2" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'
@@ -121,11 +115,8 @@ describe.server('react-head on server', () => {
         </Head>
       )
 
-      const {
-        headString,
-        bodyAttributes,
-        htmlAttributes
-      } = renderHeadTagsToString(headTags)
+      const {headString, bodyAttributes, htmlAttributes} =
+        renderHeadTagsToString(headTags)
 
       expect(headString).to.equal(
         '<title data-rh="" data-reactroot="">My awesome title</title><meta data-rh="" name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-reactroot=""/><meta data-rh="" name="theme-color" content="#303ab2" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'

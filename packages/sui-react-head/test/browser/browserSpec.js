@@ -1,4 +1,4 @@
-import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
+import descriptorsByEnvironmentPatcher from '@s-ui/test/lib/descriptor-environment-patcher.js'
 import React from 'react'
 import {expect} from 'chai'
 import {
