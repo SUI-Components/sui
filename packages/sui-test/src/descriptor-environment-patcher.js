@@ -101,5 +101,4 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
   functionsToPatch.forEach(fnName => patchFunction(fnName))
 }
 
-// for support with CommonJS
 export default descriptorsByEnvironmentPatcher
