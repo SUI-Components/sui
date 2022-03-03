@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.15.0 (2022-03-03)
+
+
+### Features
+
+* **packages/sui-js-compiler:** add ignore option ([d4cdff4](https://github.com/SUI-Components/sui/commit/d4cdff467db581bcbd08ec3a9a2543e6b76265d3))
+
+
+
 # 1.14.0 (2022-02-07)
 
 
