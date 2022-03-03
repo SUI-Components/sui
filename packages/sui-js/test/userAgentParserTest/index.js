@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {stats} from '../../src/ua-parser'
+import {stats} from '../../src/ua-parser/index.js'
 import db from './data/uaDB.json'
 
 const test = () => {

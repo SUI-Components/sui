@@ -1,13 +1,14 @@
 import {expect} from 'chai'
-import {PDE as SuiPDE} from '../../src'
-import OptimizelyAdapter from '../../src/adapters/optimizely'
-import DefaultAdapter from '../../src/adapters/default'
+import {PDE as SuiPDE} from '../../src/index.js'
+import OptimizelyAdapter from '../../src/adapters/optimizely/index.js'
+import DefaultAdapter from '../../src/adapters/default.js'
 import sinon from 'sinon'
-import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
 
-import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher.js'
 
 descriptorsByEnvironmentPatcher()
+
 describe('@s-ui pde', () => {
   let optimizelyInstanceStub
   let optimizelyAdapter

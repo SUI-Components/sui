@@ -1,3 +1,3 @@
-import EmptyUseCase from './EmptyUseCase'
+import EmptyUseCase from './EmptyUseCase.js'
 
 export default ({config}) => new EmptyUseCase({config})

@@ -24,6 +24,7 @@
     "react": "16 || 17"
   },
   "devDependencies": {
+    "@s-ui/test": "8",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",
