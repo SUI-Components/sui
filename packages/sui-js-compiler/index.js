@@ -1,23 +1,14 @@
 #!/usr/bin/env node
 
-'use strict'
+import {transform, transformFile} from '@swc/core'
+import fs from 'fs-extra'
+import defaultConfig from './swc-config.js'
 
-const {transformFile} = require('@swc/core')
-const fg = require('fast-glob')
-const fs = require('fs-extra')
-const defaultConfig = require('./swc-config.js')
+export const compileFile = file => transformFile(file, defaultConfig)
+export const compileSource = source => transform(source, defaultConfig)
 
-const compileFile = async file => {
-  const {code} = await transformFile(file, defaultConfig)
+export const compileAndOutputFile = async file => {
+  const {code} = await compileFile(file)
   const outputPath = file.replace('./src', './lib')
   fs.outputFile(outputPath, code)
 }
-
-;(async () => {
-  console.time('[sui-js-compiler]')
-
-  const files = await fg('./src/**/*.{js,jsx}')
-  files.forEach(compileFile)
-
-  console.timeEnd('[sui-js-compiler]')
-})()
