@@ -37,7 +37,13 @@ serialSpawn([
       watch && '--watch',
       timeout && `--timeout ${timeout}`,
       ci && `--reporter min`
-    ].filter(Boolean)
+    ].filter(Boolean),
+    {
+      env: {
+        ...process.env,
+        NODE_OPTIONS: `--loader=${path.join(__dirname, 'mocha', 'loader.mjs')}`
+      }
+    }
   ]
 ]).catch(err => {
   if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
