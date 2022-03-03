@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.3.0 (2022-03-03)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** remove servers when process SIGINT to avoid port occuppied ([f3ddade](https://github.com/SUI-Components/sui/commit/f3ddadef421e38eef6c9c92e12831cc6469f1203))
+
+
+
 # 1.2.0 (2022-02-23)
 
 
