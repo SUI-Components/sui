@@ -16,8 +16,6 @@ const compileFile = async file => {
 
 const commaSeparatedList = value => value.split(',')
 
-const DEFAULT_SRC = './src/**/*.{js,jsx}'
-
 program
   .option(
     '--ignore [glob]',
@@ -35,12 +33,11 @@ program
   .parse(process.argv)
 
 const {ignore = []} = program.opts()
-const pattern = program.args[0] || DEFAULT_SRC
 
 ;(async () => {
   console.time('[sui-js-compiler]')
 
-  const files = await fg(pattern, {ignore})
+  const files = await fg('./src/**/*.{js,jsx}', {ignore})
   files.forEach(compileFile)
 
   console.timeEnd('[sui-js-compiler]')
