@@ -1,2 +1,2 @@
-import '../common/AnemicModelSpec' // This file has no extension due to sui-test server problem
+import '../common/AnemicModelSpec.js'
 import '../common/EntryPointSpec.js'
