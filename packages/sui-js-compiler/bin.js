@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import program from 'commander'
 import fg from 'fast-glob'
 import {compileAndOutputFile} from './index.js'

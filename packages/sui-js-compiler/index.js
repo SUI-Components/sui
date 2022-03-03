@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import {transform, transformFile} from '@swc/core'
 import fs from 'fs-extra'
 import defaultConfig from './swc-config.js'
