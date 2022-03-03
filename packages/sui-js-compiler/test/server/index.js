@@ -1,28 +1,36 @@
-const promisify = require('util').promisify
-const exec = promisify(require('child_process').exec)
-const fs = require('fs-extra')
-const {expect} = require('chai')
-const path = require('path')
+import {promisify} from 'util'
+import {exec as execCallback} from 'child_process'
 
-const libPath = path.join(__dirname, 'lib')
-const libFilePath = path.join(libPath, 'example.js')
+import fsExtra from 'fs-extra'
+import {expect} from 'chai'
+import {join, dirname} from 'path'
+
+import {fileURLToPath} from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const {remove, readdir, readFile} = fsExtra
+
+const exec = promisify(execCallback)
+
+const libPath = join(__dirname, 'lib')
+const libFilePath = join(libPath, 'example.js')
 
 describe('@s-ui/js-compiler', () => {
-  afterEach(() => fs.remove(libPath))
-  beforeEach(() => fs.remove(libPath))
+  afterEach(() => remove(libPath))
+  beforeEach(() => remove(libPath))
 
   it('compiles a /src folder with a JavaScript with JSX file and output to /lib', async () => {
     const {stdout} = await exec('npx sui-js-compiler', {
       cwd: __dirname
     })
 
-    const compiledFilenames = await fs.readdir(libPath)
+    const compiledFilenames = await readdir(libPath)
 
     expect(compiledFilenames).to.eql(['example.js', 'example.test.js'])
 
     expect(stdout).to.contain('[sui-js-compiler]')
 
-    const compiledFile = await fs.readFile(libFilePath, 'utf-8')
+    const compiledFile = await readFile(libFilePath, 'utf-8')
 
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
@@ -40,13 +48,13 @@ describe('@s-ui/js-compiler', () => {
       }
     )
 
-    const compiledFilenames = await fs.readdir(libPath)
+    const compiledFilenames = await readdir(libPath)
 
     expect(compiledFilenames).to.eql(['example.js'])
 
     expect(stdout).to.contain('[sui-js-compiler]')
 
-    const compiledFile = await fs.readFile(libFilePath, 'utf-8')
+    const compiledFile = await readFile(libFilePath, 'utf-8')
 
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
