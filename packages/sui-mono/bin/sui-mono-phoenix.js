@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const program = require('commander')
-const {getSpawnPromise, parallelSpawn, showError} = require('@s-ui/helpers/cli')
-
-const {checkIsMonoPackage, getWorkspaces} = require('../src/config')
+import program from 'commander'
+import {getSpawnPromise, parallelSpawn, showError} from '@s-ui/helpers/cli.js'
+import {checkIsMonoPackage, getWorkspaces} from '../src/config.js'
 
 const DEFAULT_CHUNK = 5
 

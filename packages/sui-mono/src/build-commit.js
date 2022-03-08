@@ -1,4 +1,4 @@
-const wrap = require('word-wrap')
+import wrap from 'word-wrap'
 
 const MAX_LINE_WIDTH = 100
 const WRAP_OPTIONS = {
@@ -11,7 +11,7 @@ const WRAP_OPTIONS = {
 const addScope = scope => `(${scope.trim()}): `
 const addSubject = subject => subject.trim()
 
-module.exports = function buildCommit(answers) {
+export default function buildCommit(answers) {
   const {breaking, body, scope, subject, footer, type} = answers
   const commitMsg = `${type}${addScope(scope)}${addSubject(subject)}`
   let result = commitMsg.slice(0, MAX_LINE_WIDTH)

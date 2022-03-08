@@ -1,13 +1,20 @@
 /* eslint-disable no-console */
 
-const colors = require('@s-ui/helpers/colors')
-const {promisify} = require('util')
-const exec = promisify(require('child_process').exec)
-const {prompt} = require('enquirer')
+import {createRequire} from 'node:module'
+import {promisify} from 'node:util'
+import {exec as execCallback} from 'node:child_process'
 
-const buildCommit = require('./build-commit')
-const config = require('./config')
-const {types: commitTypes} = require('./commit-types')
+import colors from '@s-ui/helpers/colors.js'
+import enquirer from 'enquirer'
+
+import buildCommit from './build-commit.js'
+import config from './config.js'
+
+const require = createRequire(import.meta.url)
+const {types: commitTypes} = require('./commit-types.json')
+
+const exec = promisify(execCallback)
+const {prompt} = enquirer
 
 const scopes = config.getWorkspaces().map(name => ({name}))
 
@@ -85,7 +92,7 @@ const checkIfHasChangedFiles = async path => {
   return stdout.trim() !== ''
 }
 
-module.exports = async function startMainCommitFlow() {
+export default async function startMainCommitFlow() {
   const scopesWithChanges = await Promise.all(
     scopes.map(pkg =>
       checkIfHasChangedFiles(pkg.name).then(hasFiles => hasFiles && pkg)

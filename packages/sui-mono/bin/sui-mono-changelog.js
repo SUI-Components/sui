@@ -1,13 +1,13 @@
 /* eslint no-console:0 */
-const program = require('commander')
-const fs = require('fs')
-const path = require('path')
-const conventionalChangelog = require('conventional-changelog')
-const {
+import program from 'commander'
+import fs from 'fs'
+import path from 'path'
+import conventionalChangelog from 'conventional-changelog'
+import {
   checkIsMonoPackage,
   getWorkspaces,
   getChangelogFilename
-} = require('../src/config')
+} from '../src/config.js'
 
 program
   .usage('<folder1> <folder2> <etc>')

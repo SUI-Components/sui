@@ -1,7 +1,9 @@
 /* eslint no-console:0 */
-const {promisify} = require('util')
-const startMainCommitFlow = require('../src/prompter-manager')
-const exec = promisify(require('child_process').exec)
+import {promisify} from 'node:util'
+import {exec as execCallback} from 'node:child_process'
+import startMainCommitFlow from '../src/prompter-manager.js'
+
+const exec = promisify(execCallback)
 
 /**
  * Get the list of modified files by the user

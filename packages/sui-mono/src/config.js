@@ -1,5 +1,5 @@
-const {getPackageJson} = require('@s-ui/helpers/packages')
-const glob = require('glob')
+import {getPackageJson} from '@s-ui/helpers/packages.js'
+import glob from 'glob'
 
 const CHANGELOG_FILENAME = 'CHANGELOG.md'
 const CWD = process.cwd()
@@ -48,7 +48,7 @@ function factoryConfigMethods(packageFile) {
   }
 }
 
-module.exports = {
+export default {
   factoryConfigMethods,
   ...factoryConfigMethods(packageFile)
 }

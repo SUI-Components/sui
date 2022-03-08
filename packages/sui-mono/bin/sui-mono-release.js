@@ -1,18 +1,23 @@
 /* eslint no-console:0 */
+import {promisify} from 'node:util'
+import {exec as execCallback} from 'node:child_process'
+import {createRequire} from 'node:module'
 
-const {promisify} = require('util')
-const program = require('commander')
-const path = require('path')
-const {showError} = require('@s-ui/helpers/cli')
-const {getPackageJson} = require('@s-ui/helpers/packages')
-const exec = promisify(require('child_process').exec)
-const gitUrlParse = require('git-url-parse')
-const {
+import program from 'commander'
+import path from 'path'
+import {showError} from '@s-ui/helpers/cli.js'
+import {getPackageJson} from '@s-ui/helpers/packages.js'
+import gitUrlParse from 'git-url-parse'
+import {
   checkIsMonoPackage,
   getChangelogFilename,
   getPublishAccess
-} = require('../src/config.js')
-const checker = require('../src/check.js')
+} from '../src/config.js'
+import checker from '../src/check.js'
+
+const require = createRequire(import.meta.url)
+
+const exec = promisify(execCallback)
 
 program
   .option('-S, --scope <scope>', 'release a single scope')

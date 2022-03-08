@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const program = require('commander')
+import program from 'commander'
+import {createRequire} from 'node:module'
+
+const require = createRequire(import.meta.url)
 const {version} = require('../package.json')
 
 program.version(version, '    --version')

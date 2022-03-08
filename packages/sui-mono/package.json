@@ -3,6 +3,7 @@
   "version": "2.21.0",
   "description": "Commit and release manager",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "sui-mono": "./bin/sui-mono.js"
   },
@@ -14,7 +15,6 @@
     "enquirer": "2.3.6",
     "git-url-parse": "11.4.4",
     "glob": "7.1.7",
-    "rimraf": "3.0.2",
     "word-wrap": "1.2.3"
   },
   "repository": {

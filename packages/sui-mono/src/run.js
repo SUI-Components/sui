@@ -1,14 +1,5 @@
-const program = require('commander')
-const config = require('../src/config')
-
-/**
- * Get array of commands to execute on all folders
- * @return {Array<Array>}
- */
-function getAllTaskArrays() {
-  const cwds = config.getWorkspaces()
-  return cwds.map(getTaskArray)
-}
+import program from 'commander'
+import config from '../src/config.js'
 
 /**
  * Get array of command for given folder
@@ -21,4 +12,11 @@ function getTaskArray(folder) {
   return [command, args, {cwd: folder}]
 }
 
-module.exports = {getAllTaskArrays}
+/**
+ * Get array of commands to execute on all folders
+ * @return {Array<Array>}
+ */
+export function getAllTaskArrays() {
+  const cwds = config.getWorkspaces()
+  return cwds.map(getTaskArray)
+}

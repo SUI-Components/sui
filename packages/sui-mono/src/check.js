@@ -1,13 +1,8 @@
 /* eslint no-console:0 */
 
-const conventionalChangelog = require('conventional-changelog')
-const {readJsonSync} = require('fs-extra')
-
-const {
-  checkIsMonoPackage,
-  getProjectName,
-  getWorkspaces
-} = require('./config.js')
+import conventionalChangelog from 'conventional-changelog'
+import {readJsonSync} from 'fs-extra'
+import {checkIsMonoPackage, getProjectName, getWorkspaces} from './config.js'
 
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
@@ -106,7 +101,7 @@ const check = () =>
       .resume()
   })
 
-module.exports = {
+export default {
   check,
   isCommitBreakingChange
 }
