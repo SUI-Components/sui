@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "clean-css": "5.2.3",
+    "clean-css": "5.2.4",
     "node-fetch": "2.6.1",
     "path-to-regexp": "0.1.7",
     "playwright-chromium": "1.14.1"
