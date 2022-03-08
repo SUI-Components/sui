@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.6.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-studio:** Ugrade fs-extra dependency and use same in all packages ([9e13d32](https://github.com/SUI-Components/sui/commit/9e13d323e6e47aa4cf9974fe6a0824d424f934f2))
+
+
+
 # 11.5.0 (2022-02-22)
 
 
