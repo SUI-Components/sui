@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.17.0 (2022-03-08)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** Avoid problems with React class components ([5a5db73](https://github.com/SUI-Components/sui/commit/5a5db732260e116707b29519f087ea7148907f92))
+
+
+
 # 1.16.0 (2022-03-08)
 
 
