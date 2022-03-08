@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.12.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-svg:** Ugrade fs-extra dependency and use same in all packages ([eb9f8d7](https://github.com/SUI-Components/sui/commit/eb9f8d72ff444b0fd97e682c0cc543f157334e75))
+
+
+
 # 3.11.0 (2022-02-22)
 
 
