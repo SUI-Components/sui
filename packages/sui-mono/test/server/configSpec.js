@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {factoryConfigMethods} from '../../src/config'
+import {factoryConfigMethods} from '../../src/config.js'
 
 describe('config', () => {
   describe('checkIsMonoPackage', () => {

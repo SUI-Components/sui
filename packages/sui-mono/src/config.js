@@ -30,7 +30,7 @@ const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
   return publishAccess
 }
 
-function factoryConfigMethods(packageFile) {
+export function factoryConfigMethods(packageFile) {
   const {
     config: packageConfig = {},
     name: packageName,

@@ -15,7 +15,7 @@ const PACKAGE_VERSION_INCREMENT = {
 
 const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf']
 
-const isCommitBreakingChange = commit => {
+export const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
   return [body, footer].some(
