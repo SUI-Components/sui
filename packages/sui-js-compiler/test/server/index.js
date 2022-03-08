@@ -7,7 +7,7 @@ const path = require('path')
 const libPath = path.join(__dirname, 'lib')
 const libFilePath = path.join(libPath, 'example.js')
 
-describe.only('@s-ui/js-compiler', () => {
+describe('@s-ui/js-compiler', () => {
   afterEach(() => fs.remove(libPath))
   beforeEach(() => fs.remove(libPath))
 
