@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import {cleanup, renderHook} from '@testing-library/react-hooks'
 import {expect} from 'chai'
-import PdeContext from '../../src/contexts/PdeContext'
-import useFeature from '../../src/hooks/useFeature'
-import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
+import PdeContext from '../../src/contexts/PdeContext.js'
+import useFeature from '../../src/hooks/useFeature.js'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
 import sinon from 'sinon'
 
 describe('when pde context is set', () => {
