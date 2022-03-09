@@ -66,7 +66,8 @@ const checkStageFuncs = getWorkspaces().map(pkg => {
   return () =>
     hasChangedFiles(pkg).then(hasChanges => {
       if (hasChanges) {
-        const args = ['commit', `-m "${type}(${pkg}): ${message}"`]
+        const packageName = pkg === '.' ? 'Root' : pkg
+        const args = ['commit', `-m "${type}(${packageName}): ${message}"`]
         commitsCount++ && args.push('--no-verify') // precommit only once
         return getSpawnPromise('git', args)
       }
