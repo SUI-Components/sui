@@ -1,5 +1,39 @@
 # CHANGELOG
 
+# 1.33.0 (2022-02-28)
+
+
+### Bug Fixes
+
+* **packages/sui-dashboard:** Simplify sui-dashboard code ([3585742](https://github.com/SUI-Components/sui/commit/35857428ac2f6984668b04817e03706736ad2a92))
+
+
+
+# 1.32.0 (2022-02-24)
+
+
+
+# 1.31.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-dashboard:** update fast-glob ([d980323](https://github.com/SUI-Components/sui/commit/d980323b2457f662b22e3ba4d57dc63fe4472d86))
+
+
+
+# 1.30.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-dashboard:** Better esmodules support ([fd06a4f](https://github.com/SUI-Components/sui/commit/fd06a4f005b1333f59eb3ab7d541db9ed23c4482))
+* **packages/sui-dashboard:** Migrate to esm ([18b065d](https://github.com/SUI-Components/sui/commit/18b065da8ce8fdadd53d38a75b4aa5b5a6f0a0fd))
+* **packages/sui-dashboard:** Remove not needed dependency and improve docs ([3cb25cb](https://github.com/SUI-Components/sui/commit/3cb25cb6ed4d7bd6ee8a32c302b30d2b0eaa4751))
+* **packages/sui-dashboard:** Unify version of fast-glob ([51fdcc1](https://github.com/SUI-Components/sui/commit/51fdcc182618243c27f6dd74272ccf8687b96164))
+
+
+
 # 1.29.0 (2021-10-04)
 
 

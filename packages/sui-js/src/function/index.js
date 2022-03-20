@@ -1,2 +1,2 @@
-export {debounce} from './debounce'
-export {throttle} from './throttle'
+export {debounce} from './debounce.js'
+export {throttle} from './throttle.js'

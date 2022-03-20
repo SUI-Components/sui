@@ -70,10 +70,8 @@ const build = () =>
         jsonStats.warnings.map(warning => console.log(warning))
       }
 
-      const SERVER_ENTRY_POINT = path.join(
-        BUILD_SERVER_PATH,
-        jsonStats.assetsByChunkName.main
-      )
+      const serverEntryPoint = jsonStats.assetsByChunkName.main[0]
+      const SERVER_ENTRY_POINT = path.join(BUILD_SERVER_PATH, serverEntryPoint)
 
       const html = fs.readFileSync(
         path.join(PUBLIC_PATH, 'index.html'),

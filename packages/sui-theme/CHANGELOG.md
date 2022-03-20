@@ -1,11 +1,39 @@
 # CHANGELOG
 
+# 8.122.0 (2022-02-08)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** set proper emmet naming to border radius ([7aa54b1](https://github.com/SUI-Components/sui/commit/7aa54b1a527acc2652226102395e8fc7aa9865de))
+
+
+### Features
+
+* **packages/sui-theme:** add new variables to dropdown basic and user ([a19c94c](https://github.com/SUI-Components/sui/commit/a19c94c4e850665728ceb38f1ca916d5f00a1f0b))
+
+
+
+# 8.121.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-theme:** Add new box shadow size variable ([a26c335](https://github.com/SUI-Components/sui/commit/a26c335e3faa9a8ab8867e6289b5df1853170d28))
+
+
+
+# 8.120.0 (2022-01-24)
+
+
+
 # 8.119.0 (2022-01-18)
 
 
 ### Features
 
 * **packages/sui-theme:** add new link font weight variable ([fcb4e3f](https://github.com/SUI-Components/sui/commit/fcb4e3f30029d82ebff967ffa5bc660c779573cf))
+* **packages/sui-theme:** add new variable ([a22335a](https://github.com/SUI-Components/sui/commit/a22335afd6a280af55a5182b5049f4171a03b7d6))
 
 
 

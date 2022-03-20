@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+// @ts-check
+
 const program = require('commander')
 const stylelint = require('stylelint')
 const config = require('../stylelint.config.js')
@@ -38,7 +40,6 @@ getFilesToLint(EXTENSIONS, program.pattern).then(files => {
     .lint({
       files,
       formatter: 'string',
-      syntax: 'scss',
       config: {
         ...config,
         ignoreFiles: IGNORE_PATTERNS.concat(getGitIgnoredFiles())

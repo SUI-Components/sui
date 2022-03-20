@@ -1,9 +1,9 @@
 /* global __magic__ */
 // extracted from: https://mathiasbynens.be/notes/globalthis
 
-;(function() {
+;(function () {
   if (typeof globalThis === 'object') return
-  Object.prototype.__defineGetter__('__magic__', function() {
+  Object.prototype.__defineGetter__('__magic__', function () {
     return this
   })
   __magic__.globalThis = __magic__

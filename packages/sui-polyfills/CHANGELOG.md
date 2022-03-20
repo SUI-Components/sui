@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.16.0 (2022-02-17)
+
+
+### Bug Fixes
+
+* **packages/sui-polyfills:** Add new polyfill for Object.fromEntires ([28af4a8](https://github.com/SUI-Components/sui/commit/28af4a83d031182dbb3ecd345f3199162385ab9a))
+
+
+
 # 1.15.0 (2021-10-28)
 
 

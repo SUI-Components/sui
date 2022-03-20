@@ -31,7 +31,9 @@ const getCommitSteps = ({scopesWithChanges}) => [
     type: 'select',
     name: 'scope',
     message: '\nDenote the SCOPE of this change:',
-    choices: scopesWithChanges.concat(defaultScopes)
+    choices: scopesWithChanges
+      .concat(defaultScopes)
+      .filter(scopes => scopes.name !== '.')
   },
   {
     type: 'input',

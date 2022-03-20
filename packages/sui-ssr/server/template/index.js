@@ -1,5 +1,5 @@
 import jsesc from 'jsesc'
-import {INITIAL_CONTEXT_VALUE} from '../initialContextValue'
+import {INITIAL_CONTEXT_VALUE} from '../initialContextValue/index.js'
 
 const APP_PLACEHOLDER = '<!-- APP -->'
 const HEAD_CLOSING_TAG = '</head>'

@@ -1,5 +1,51 @@
 # CHANGELOG
 
+# 1.17.0 (2022-03-08)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** Avoid problems with React class components ([5a5db73](https://github.com/SUI-Components/sui/commit/5a5db732260e116707b29519f087ea7148907f92))
+
+
+
+# 1.16.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Adapt tests ([7bf7124](https://github.com/SUI-Components/sui/commit/7bf71241aac305b5e22fb62b4eff50963a2955e6))
+* **packages/sui-js-compiler:** Ugrade fs-extra dependency and use same in all packages ([db7a4c7](https://github.com/SUI-Components/sui/commit/db7a4c73fe17570273307849081bc89e7d12ed4d))
+
+
+
+# 1.15.0 (2022-03-03)
+
+
+### Features
+
+* **packages/sui-js-compiler:** add ignore option ([d4cdff4](https://github.com/SUI-Components/sui/commit/d4cdff467db581bcbd08ec3a9a2543e6b76265d3))
+
+
+
+# 1.14.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-js-compiler:** update fast-glob ([3902ce1](https://github.com/SUI-Components/sui/commit/3902ce1c2d3a66d95028f28985e654022b42ac32))
+
+
+
+# 1.13.0 (2022-02-02)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade swc dependency ([4c5ba69](https://github.com/SUI-Components/sui/commit/4c5ba697079112d8504986d72a2a4850a7902c18))
+
+
+
 # 1.12.0 (2022-01-10)
 
 

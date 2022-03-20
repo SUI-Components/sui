@@ -1,3 +1,3 @@
-export * from './decorators'
-export * from './class'
-export * from './spread-destructuring'
+export * from './decorators.js'
+export * from './class.js'
+export * from './spread-destructuring.js'

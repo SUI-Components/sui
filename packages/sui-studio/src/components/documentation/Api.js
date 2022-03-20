@@ -1,20 +1,18 @@
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useState} from 'react'
-import {fetchComponentSrcRawFile} from '../tryRequire'
+import {fetchComponentsDefinitions} from '../tryRequire.js'
 
 export default function Api({params}) {
   const [docs, setDocs] = useState(null)
 
   useEffect(() => {
     async function getDocs() {
-      const reactDocs = await import('react-docgen')
       const {category, component} = params
-      const rawSource = await fetchComponentSrcRawFile({category, component})
-      const docs = reactDocs.parse(
-        rawSource,
-        reactDocs.resolver.findAllComponentDefinitions
-      )
-      setDocs(docs)
+      const definitions = await fetchComponentsDefinitions({
+        category,
+        component
+      })
+      setDocs(definitions)
     }
     getDocs()
   }, [params])

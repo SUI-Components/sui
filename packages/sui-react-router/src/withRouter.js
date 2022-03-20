@@ -1,7 +1,7 @@
 // @ts-check
 
-import {useRouter} from './hooks'
 import hoistNonReactStatics from 'hoist-non-react-statics'
+import {useRouter} from './hooks.js'
 
 /**
  * HoC to enhance a component to inject the router context

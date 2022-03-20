@@ -1,7 +1,8 @@
 {
   "name": "@s-ui/pde",
-  "version": "2.16.0",
+  "version": "2.17.0",
   "description": "",
+  "type": "module",
   "main": "lib/index.js",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
@@ -23,6 +24,7 @@
     "react": "16 || 17"
   },
   "devDependencies": {
+    "@s-ui/test": "8",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",

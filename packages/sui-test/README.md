@@ -95,6 +95,23 @@ npm install @s-ui/test --save-dev
 
 # Tools
 
+## Describers
+
+**describeOnLocal**: It will only run wrapped tests on local environment and won't be executed in CI.
+
+```javascript
+import { describeOnLocal } from '@s-ui/test/lib/describers'
+
+describeOnLocal(() => {
+  describe('Some test', () => {
+    it('should do something', () => {
+      expect(true).toBe(true)
+    })
+  })
+})
+```
+
+
 ## Descriptor by environment patcher
 The descriptor by environment is a patch with the purpose of add some extra functionality to our mocha describe and it methods.
 

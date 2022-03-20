@@ -19,11 +19,7 @@ const OPTIONS = {
  * @returns {Array<String>}
  */
 const getFileLinesAsArray = path =>
-  existsSync(path)
-    ? readFileSync(path, 'utf8')
-        .split('\n')
-        .filter(Boolean)
-    : []
+  existsSync(path) ? readFileSync(path, 'utf8').split('\n').filter(Boolean) : []
 
 /**
  * Get as array .gitignore files and filter lines that are comments

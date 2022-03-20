@@ -11,7 +11,7 @@ const createLinkElement = () => {
 
 export default function Style({children, id}) {
   useEffect(
-    function() {
+    function () {
       const linkElement = createLinkElement()
 
       const blob = new window.Blob([children], {type: 'text/css'})

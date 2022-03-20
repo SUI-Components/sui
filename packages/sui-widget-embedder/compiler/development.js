@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
-const {pipe, removePlugin} = require('./utils')
+const {pipe, removePlugin} = require('./utils.js')
 
 module.exports = ({address, page, port}) =>
   webpack({
@@ -16,7 +16,7 @@ module.exports = ({address, page, port}) =>
       path: '/',
       publicPath: `http://${address}:${port}/`,
       filename: 'bundle.js',
-      jsonpFunction: `webpackJsonp-${page}-dev`
+      chunkLoadingGlobal: `webpackJsonp-${page}-dev`
     },
     plugins: pipe(removePlugin('HtmlWebpackPlugin'))(devConfig.plugins)
   })

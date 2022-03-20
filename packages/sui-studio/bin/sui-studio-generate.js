@@ -296,7 +296,7 @@ export default () => <${componentInPascal} />
   ),
 
   context &&
-    (function() {
+    (function () {
       const isBooleanContext = typeof context === 'boolean'
 
       writeFile(

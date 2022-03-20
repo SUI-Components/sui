@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.16.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-critical-css:** Ugrade fs-extra dependency and use same in all packages ([c951d2b](https://github.com/SUI-Components/sui/commit/c951d2b3f67478993c62053e51ab2d1f2e4991d5))
+
+
+
+# 1.15.0 (2022-01-28)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use same node-fetch version other ([0a48500](https://github.com/SUI-Components/sui/commit/0a485000d350b637d2969cac0bb9a70e4525f194))
+
+
+
 # 1.14.0 (2021-10-05)
 
 

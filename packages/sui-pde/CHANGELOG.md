@@ -1,5 +1,21 @@
 # CHANGELOG
 
+# 2.17.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** add file extensions to imports ([e021045](https://github.com/SUI-Components/sui/commit/e021045cb19156327dee0ad7b203b2d4a6b96a03))
+* **packages/sui-pde:** sui-js import from sui-pde ([9c78ccc](https://github.com/SUI-Components/sui/commit/9c78ccc01acbb43eb25c9b68d70e30d19037bab3))
+* **packages/sui-pde:** use main instead exports in package.json ([f5d15b1](https://github.com/SUI-Components/sui/commit/f5d15b14d31d997e0205ace164d89c88a103f847))
+
+
+### Features
+
+* **packages/sui-pde:** migrate to esm ([581f26a](https://github.com/SUI-Components/sui/commit/581f26ac6f197ec89489de70bb786f80edda97ff))
+
+
+
 # 2.16.0 (2021-11-11)
 
 

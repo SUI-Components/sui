@@ -1,8 +1,23 @@
+// @ts-check
+
 const webpack = require('webpack')
 const path = require('path')
-const {clientConfig} = require('../../src/config')
-const {sep} = require('path')
+const {envVars} = require('@s-ui/bundler/shared/index.js')
+const {bundlerConfig, clientConfig} = require('../../src/config.js')
+
 const {captureConsole = true} = clientConfig
+const {sep} = path
+
+const mustPackagesToAlias = {
+  'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
+  'react/jsx-runtime': 'react/jsx-runtime.js'
+}
+
+/**
+ *  Transform the env config (Array) to an object.
+ *  Where the value is always an empty string.
+ */
+const environmentVariables = envVars(bundlerConfig.env)
 
 const config = {
   singleRun: true,
@@ -10,6 +25,15 @@ const config = {
   basePath: '',
 
   frameworks: ['mocha', 'webpack'],
+
+  plugins: [
+    require.resolve('karma-webpack'),
+    require.resolve('karma-chrome-launcher'),
+    require.resolve('karma-firefox-launcher'),
+    require.resolve('karma-mocha'),
+    require.resolve('karma-coverage'),
+    require.resolve('karma-spec-reporter')
+  ],
 
   reporters: ['spec'],
 
@@ -22,33 +46,60 @@ const config = {
   },
 
   webpack: {
+    devtool: 'eval',
     stats: 'errors-only',
     resolve: {
       alias: {
+        ...mustPackagesToAlias,
         '@s-ui/react-context': path.resolve(
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
-      extensions: ['.mjs', '.js', '.jsx', '.json']
-    },
-    node: {
-      fs: 'empty',
-      child_process: 'empty',
-      module: 'empty',
-      readline: 'empty'
+      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      fallback: {
+        assert: false,
+        child_process: false,
+        constants: false,
+        crypto: false,
+        fs: false,
+        http: false,
+        https: false,
+        module: false,
+        os: false,
+        path: false,
+        readline: false,
+        stream: require.resolve('stream-browserify'),
+        timers: false,
+        tty: false,
+        util: require.resolve('util/'),
+        vm: false,
+        worker_threads: false,
+        zlib: false
+      }
     },
     plugins: [
-      new webpack.EnvironmentPlugin({
-        NODE_ENV: 'test', // use 'test' unless process.env.NODE_ENV is defined,
-        CATEGORIES: process.env.CATEGORIES
-      }),
       new webpack.DefinePlugin({
-        __BASE_DIR__: JSON.stringify(process.env.PWD)
+        __BASE_DIR__: JSON.stringify(process.env.PWD),
+        CATEGORIES: JSON.stringify(process.env.CATEGORIES)
+      }),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'development',
+        ...environmentVariables
+      }),
+      new webpack.ProvidePlugin({
+        process: require.resolve('process/browser')
       })
     ],
     module: {
       rules: [
+        {
+          test: [/\.s?css$/, /\.svg$/],
+          type: 'asset/inline',
+          generator: {
+            dataUrl: () => ''
+          }
+        },
         {
           test: /\.jsx?$/,
           exclude: new RegExp(
@@ -81,11 +132,6 @@ const config = {
               }
             }
           ]
-        },
-        {
-          // ignore css/scss require/imports files in the server
-          test: [/\.s?css$/, /\.svg$/],
-          use: ['null-loader']
         }
       ]
     }

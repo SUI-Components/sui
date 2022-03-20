@@ -54,6 +54,7 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
     "build": "sui-studio build",
     "check:release": "sui-mono check-release",
     "co": "sui-mono commit",
+    "commit-msg": "validate-commit-msg",
     "dev": "sui-studio dev",
     "generate": "sui-studio generate --prefix sui --scope ${PROJECT_NAME}",
     "lint:js": "sui-lint js",
@@ -61,6 +62,7 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
     "lint": "npm run lint:js && npm run lint:sass",
     "phoenix": "npx @s-ui/mono@2 run 'rm -rf ./node_modules' && rm -rf ./node_modules && npm install --legacy-peer-deps",
     "phoenix:ci": "npm run phoenix -- --no-optional --no-fund --no-audit",
+    "pre-commit": "npm run lint"
     "release": "sui-mono release",
     "start": "sui-studio start"
   },
@@ -68,9 +70,9 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/precommit": "2",
-    "@s-ui/studio": "10",
-    "husky": "4.3.0",
+    "@s-ui/precommit": "3",
+    "@s-ui/lint": "4",
+    "@s-ui/studio": "11",
     "validate-commit-msg": "2.14.0"
   },
   "dependencies": {
@@ -86,12 +88,6 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "validate-commit-msg",
-      "pre-commit": "sui-precommit run"
-    }
   }
 }
 `

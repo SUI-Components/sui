@@ -29,7 +29,7 @@ describe.server('react-head on server', () => {
   })
 
   describe('<Html> Component ', () => {
-    it('renders a meta', function() {
+    it('renders a meta', function () {
       const headTags = render(<Head htmlAttributes={{lang: 'es'}} />)
       expect(headTags.length).to.equal(1)
 

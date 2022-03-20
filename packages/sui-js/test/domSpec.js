@@ -1,6 +1,9 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
-import {getFocusedItemIndex, getCurrentElementFocused} from '../src/dom/index'
+import {
+  getFocusedItemIndex,
+  getCurrentElementFocused
+} from '../src/dom/index.js'
 
 const ID_FIXTURE_ELEMENT = 'fixture-getCurrentElementFocused'
 const ID_FIXTURE_LIST = 'fixture-getFocusedItemIndex'

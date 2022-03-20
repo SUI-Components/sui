@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {isCommitBreakingChange} from '../../src/check'
+import {isCommitBreakingChange} from '../../src/check.js'
 
 describe('check', () => {
   describe('isCommitBreakingChange', () => {

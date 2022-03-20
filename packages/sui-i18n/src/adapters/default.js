@@ -1,5 +1,5 @@
 /* eslint no-unused-expressions:0 */
-import {warn} from '../console'
+import {warn} from '../console.js'
 
 export default class DefaultAdapter {
   get instance() {
