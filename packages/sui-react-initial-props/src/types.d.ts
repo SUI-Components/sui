@@ -1,7 +1,7 @@
 import { RouteInfo } from '@s-ui/react-router/src/types'
 export * as ReactRouterTypes from '@s-ui/react-router/src/types'
 
-export type InitialProps = {
+export interface InitialProps {
   [key: string]: any
 }
 export interface PageComponentOptions {
