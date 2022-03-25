@@ -71,19 +71,19 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
           setState({ initialProps, isLoading: true })
         }
 
-        Page.getInitialProps({context, routeInfo})
+        Page.getInitialProps({ context, routeInfo })
           .then((initialProps: InitialProps) => {
-            const {__HTTP__: http} = initialProps
+            const { __HTTP__: http } = initialProps
 
-            if (http?.redirectTo) {
+            if (http?.redirectTo !== undefined) {
               window.location = http.redirectTo
               return
             }
 
-            setState({initialProps, isLoading: false})
+            setState({ initialProps, isLoading: false })
           })
           .catch((error: Error) => {
-            setState({initialProps: {error}, isLoading: false})
+            setState({ initialProps: { error }, isLoading: false })
           })
           .finally(() => {
             if (requestedInitialPropsOnceRef.current) return

@@ -1,6 +1,6 @@
 import { renderToNodeStream, renderToString } from 'react-dom/server'
 import InitialPropsContext from './initialPropsContext'
-import {SsrComponentWithInitialPropsParams, InitialProps} from './types'
+import { SsrComponentWithInitialPropsParams, InitialProps } from './types'
 
 const hrTimeToMs = (diff: [number, number]): number => diff[0] * 1e3 + diff[1] * 1e-6
 
@@ -19,9 +19,9 @@ export default async function ssrComponentWithInitialProps ({
 
   const initialProps: InitialProps = await getInitialProps(context, req, res)
   const diffGetInitialProps = process.hrtime(startGetInitialProps)
-  const {__HTTP__: http} = initialProps
+  const { __HTTP__: http } = initialProps
 
-  if (http?.redirectTo) {
+  if (http?.redirectTo !== undefined) {
     return {
       initialProps,
       performance: {
