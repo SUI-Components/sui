@@ -37,8 +37,8 @@ program
 const {
   ci,
   coverage,
-  ignorePattern,
   headless,
+  ignorePattern,
   pattern,
   srcPattern,
   timeout,
