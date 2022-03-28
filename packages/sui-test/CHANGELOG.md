@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.6.0 (2022-03-28)
+
+
+### Features
+
+* **packages/sui-test:** Add new headless flag ([1f6fa24](https://github.com/SUI-Components/sui/commit/1f6fa24a11a6c08e47c30f1382178eb3b5a644bd))
+
+
+
 # 8.5.0 (2022-03-01)
 
 
