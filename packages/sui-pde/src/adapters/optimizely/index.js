@@ -212,7 +212,7 @@ export default class OptimizelyAdapter {
   getSdkKey() {
     let sdkKey = ''
     try {
-      sdkKey = this.getOptimizelyConfig().getDatafile().sdkKey
+      sdkKey = JSON.parse(this.getOptimizelyConfig().getDatafile()).sdkKey
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)

@@ -53,7 +53,14 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [trackExperimentViewed, experimentName, queryString, pde, attributes])
+  }, [
+    trackExperimentViewed,
+    experimentName,
+    queryString,
+    pde,
+    attributes,
+    adapterId
+  ])
 
   return {variation}
 }

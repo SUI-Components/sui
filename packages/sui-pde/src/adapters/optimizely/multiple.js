@@ -3,8 +3,9 @@
 // we should try to abstract all the methods as there all do the same
 // for backwards compability we'll need to set a fixed name to the first adapter in order
 // to use it as default identifier when nothing is passed by
+// ask galderic about optimizely.activate, will it execute the real optimizely call?
 
-import OptimizelyAdapter from './optimizely.js'
+import OptimizelyAdapter from './index.js'
 
 class MultipleOptimizelyAdapter {
   static createMultipleOptimizelyInstances(...optionsByInstance) {
