@@ -250,3 +250,8 @@ const MyComponent = () => {
 #### Force feature flag to be on/off
 
 It's slighty different to force a feature flag to be activated or deactivated. Lets assume we have our feature flag `ff_skills_field` running under `http://myweb.com`. In order to force the flag to be on or off you'll have to add a query param using the flag's name but adding `suipde_` as prefix same way we force an experiment, but the only valid values are on or off. For example, in this case, the url to open in order to force would be `http://myweb.com?suipde_ff_skills_field=on`. This would force the feature flag to be on. `http://myweb.com?suipde_ff_skills_field=off` would set the feature flag as off. If forced, optimizely impression will not be triggered.
+
+### Multiple Optimizely Adapters
+
+Meant to exist if you need more than one decision taking optimizely sdk.
+Integration with segment will only work for the first one so it will be necesary to configure segment so it forwards the events to the other optimizely destinations

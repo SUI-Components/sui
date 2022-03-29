@@ -28,13 +28,15 @@ export default class OptimizelyAdapter {
    * @param {string=} param.userId
    * @param {object} param.activeIntegrations segment activated by default
    * @param {boolean} param.hasUserConsents
+   * @param {string=} param.identifier Optimizely instance identifier, only needed when setting multiple adapters
    */
   constructor({
     optimizely,
     userId,
     activeIntegrations = {segment: true},
     hasUserConsents,
-    applicationAttributes = {}
+    applicationAttributes = {},
+    identifier
   }) {
     if (!optimizely) {
       throw new Error(
@@ -46,6 +48,7 @@ export default class OptimizelyAdapter {
     this._userId = userId?.toString()
     this._activeIntegrations = activeIntegrations
     this._applicationAttributes = applicationAttributes
+    this._identifier = identifier
     this.updateConsents({hasUserConsents})
   }
 
@@ -200,5 +203,20 @@ export default class OptimizelyAdapter {
       activeIntegrations: this._activeIntegrations,
       optimizelyInstance: this._optimizely
     })
+  }
+
+  getId() {
+    return this._identifier
+  }
+
+  getSdkKey() {
+    let sdkKey = ''
+    try {
+      sdkKey = this.getOptimizelyConfig().getDatafile().sdkKey
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+    }
+    return sdkKey
   }
 }
