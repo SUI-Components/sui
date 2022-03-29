@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.7.0 (2022-03-28)
+
+
+### Features
+
+* **packages/sui-studio:** Add support to headless on sui-studio test ([8f51ca3](https://github.com/SUI-Components/sui/commit/8f51ca33acfdefcdb6c996c08c0116585b85834a))
+
+
+
 # 11.6.0 (2022-03-08)
 
 
