@@ -19,7 +19,7 @@
     "test:client:ci": "npm run test:client",
     "test:server:ci": "npm run test:server",
     "test:client": "sui-test browser -P 'packages/**/!(server)/*Spec.js'",
-    "test:client:watch": "npm run test:client -- --watch",
+    "test:client:watch": "npm run test:client -- --watch --headless",
     "test:server": "sui-test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
     "test:server:watch": "npm run test:server -- --watch",
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234",
