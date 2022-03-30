@@ -6,7 +6,7 @@
     "sui-test": "bin/sui-test.js"
   },
   "scripts": {
-    "lib:js": "babel --presets sui ./src --out-dir ./lib",
+    "lib:js": "babel --presets sui ./src --out-dir ./lib && cp ./lib/descriptor-environment-patcher.js ./lib/descriptor-environment-patcher.mjs",
     "lib": "npm run lib:js",
     "prepare": "npm run lib"
   },
