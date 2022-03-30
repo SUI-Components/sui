@@ -41,7 +41,11 @@ serialSpawn([
     {
       env: {
         ...process.env,
-        NODE_OPTIONS: `--loader=${path.join(__dirname, 'mocha', 'loader.mjs')}`
+        NODE_OPTIONS: `--no-warnings --loader=${path.join(
+          __dirname,
+          'mocha',
+          'loader.mjs'
+        )}`
       }
     }
   ]
