@@ -3,7 +3,7 @@
 const program = require('commander')
 const ncp = require('copy-paste')
 
-const appFactory = require('../development.js')
+const appFactory = require('../development/index.js')
 const config =
   require(`${process.cwd()}/package.json`).config['sui-widget-embedder'] || {}
 
