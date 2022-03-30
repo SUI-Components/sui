@@ -5,8 +5,7 @@ import DefaultAdapter from '../../src/adapters/default.js'
 import sinon from 'sinon'
 import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
 
-import testLib from '@s-ui/test/lib/descriptor-environment-patcher.js'
-const {descriptorsByEnvironmentPatcher} = testLib
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher.mjs'
 
 descriptorsByEnvironmentPatcher()
 
