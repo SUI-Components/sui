@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js-compiler",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "description": "JavaScript Compiler",
   "main": "index.js",
   "type": "module",
@@ -14,8 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@swc/core": "1.2.147",
-    "@swc/helpers": "0.3.6",
+    "@swc/core": "1.2.161",
+    "@swc/helpers": "0.3.8",
     "commander": "8.3.0",
     "fast-glob": "3.2.11",
     "fs-extra": "10.0.1"

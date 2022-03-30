@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.18.0 (2022-03-30)
+
+
+### Features
+
+* **packages/sui-js-compiler:** update swc to latest versions ([738ece5](https://github.com/SUI-Components/sui/commit/738ece5596707d9cc23e775680261a02a1af01da))
+
+
+
 # 1.17.0 (2022-03-08)
 
 

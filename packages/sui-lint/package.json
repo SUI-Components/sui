@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "4.9.0",
+  "version": "4.10.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -15,13 +15,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.17.5",
+    "@babel/core": "7.17.8",
     "@babel/eslint-parser": "7.17.0",
-    "@babel/eslint-plugin": "7.16.5",
+    "@babel/eslint-plugin": "7.17.7",
     "@s-ui/helpers": "1",
-    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/eslint-plugin": "5.16.0",
     "commander": "6.2.1",
-    "eslint-config-prettier": "8.3.0",
+    "eslint-config-prettier": "8.5.0",
     "eslint-config-standard-react": "11.0.1",
     "eslint-config-standard-with-typescript": "21.0.1",
     "eslint-config-standard": "16.0.3",
@@ -33,13 +33,13 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react-hooks": "4.3.0",
-    "eslint-plugin-react": "7.28.0",
-    "eslint": "8.9.0",
+    "eslint-plugin-react": "7.29.4",
+    "eslint": "8.11.0",
     "postcss-scss": "4.0.3",
     "prettier": "2.1.2",
     "stylelint-config-prettier": "9.0.3",
-    "stylelint-config-recommended-scss": "5.0.2",
+    "stylelint-config-recommended-scss": "6.0.0",
     "stylelint-prettier": "2.0.0",
-    "stylelint": "14.5.1"
+    "stylelint": "14.6.0"
   }
 }
