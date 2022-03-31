@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.23.0 (2022-03-31)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove beta package version ([d605303](https://github.com/SUI-Components/sui/commit/d605303b9412cac9e2123fbbe41c97fd49fa48d6))
+* **packages/sui-mono:** url construction before check changes to release ([fe73104](https://github.com/SUI-Components/sui/commit/fe731043a9c0af65c4690c3f0ab4e8e3af4d0934))
+
+
+
 # 2.22.0 (2022-03-09)
 
 
