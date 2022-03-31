@@ -4,6 +4,4 @@ export default interface FetcherInterface {
   patch: (url: string, body: string, options: object) => Promise<any>
   post: (url: string, body: string, options: object) => Promise<any>
   put: (url: string, body: string, options: object) => Promise<any>
-  setErrorInterceptor: (callback: Function) => void
-  setResponseInterceptor: (callback: Function) => void
 }

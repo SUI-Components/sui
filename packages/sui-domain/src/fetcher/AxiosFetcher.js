@@ -9,57 +9,6 @@ export default class AxiosFetcher {
    */
   constructor({config}) {
     this._axios = axios.create(config)
-    this._initInterceptors()
-  }
-
-  /**
-   * Initializes interceptors
-   */
-  _initInterceptors() {
-    this._axios.interceptors.response.use(
-      this._interceptResponse,
-      this._interceptError
-    )
-  }
-
-  /**
-   * Intercepts all responses and, in case an interceptor has been defined, calls it
-   * @param {Object} response
-   * @returns {Object}
-   */
-  _interceptResponse(response) {
-    if (AxiosFetcher.responseInterceptor !== undefined)
-      AxiosFetcher.responseInterceptor(response)
-
-    return response
-  }
-
-  /**
-   * Intercepts all errors and, in case an interceptor has been defined, calls it
-   * @param {Error} error
-   * @returns {Error}
-   */
-  _interceptError(error) {
-    if (AxiosFetcher.errorInterceptor !== undefined)
-      AxiosFetcher.errorInterceptor(error)
-
-    return error
-  }
-
-  /**
-   * Defines which function will be called when an error occurs
-   * @param {Function} interceptor
-   */
-  setErrorInterceptor(interceptor) {
-    AxiosFetcher.errorInterceptor = interceptor
-  }
-
-  /**
-   * Defines which function will be called when a response is received
-   * @param {Function} interceptor
-   */
-  setResponseInterceptor(interceptor) {
-    AxiosFetcher.responseInterceptor = interceptor
   }
 
   /**
