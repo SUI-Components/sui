@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@s-ui/helpers": "1",
-    "commander": "6.2.1",
+    "commander": "8.3.0",
     "fast-glob": "3.2.11"
   }
 }
