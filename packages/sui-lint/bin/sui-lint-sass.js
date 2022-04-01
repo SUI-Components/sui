@@ -58,7 +58,7 @@ getFilesToLint({extensions: EXTENSIONS, defaultPattern: pattern, staged}).then(
         }
 
         if (errored) {
-          throw new Error('You must fix linting errores before continuing...')
+          throw new Error('You must fix linting errors before continuing...')
         }
       })
       .catch(error => {
