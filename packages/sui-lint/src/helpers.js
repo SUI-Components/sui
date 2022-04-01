@@ -100,7 +100,7 @@ const getCommitRange = () => {
  * @param {boolean} params.staged get only staged files
  * @returns {Promise<string[]>} Array of file patterns
  */
-const getFilesToLint = async ({extensions, defaultPattern, staged}) => {
+const getFilesToLint = async ({extensions, defaultPattern, staged = false}) => {
   const range = getCommitRange()
   const getFromDiff = range || staged
 
