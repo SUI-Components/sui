@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 4.11.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix default value for staged files when get files to lint ([0ebe47a](https://github.com/SUI-Components/sui/commit/0ebe47a114e0cebfea569260fc7782d7a78ffd48))
+* **packages/sui-lint:** fix options for lint scss ([1003672](https://github.com/SUI-Components/sui/commit/1003672668ab3d8c2a8d42790949ad947041823c))
+
+
+### Features
+
+* **packages/sui-lint:** update dependencies ([43ecae4](https://github.com/SUI-Components/sui/commit/43ecae492421eebfdaeb7441766dbb534e311e63))
+
+
+
 # 4.10.0 (2022-03-30)
 
 
