@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.12.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix sass format error in prettier ([826c419](https://github.com/SUI-Components/sui/commit/826c419fc9c34d66b64250bb4e61097e1a69c9f6))
+
+
+
 # 4.11.0 (2022-04-04)
 
 
