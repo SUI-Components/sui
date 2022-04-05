@@ -25,7 +25,8 @@ const monoRepoRegExp = /(sui|components).git/
 const versionRegExp = /"version": "(.*)",/
 const oldVersionRegExp = /-\s+"version": "(.*)",/
 const oldPackageVersionRegExp = /-\s\s"version": "(.*)",/
-const forbiddenExpressionsInCommitRegExp = /^Merge pull request|^Merge branch 'master'|^(feat\(META\): )?(R|r)elease|^Bumping to version/
+const forbiddenExpressionsInCommitRegExp =
+  /^Merge pull request|^Merge branch 'master'|^(feat\(META\): )?(R|r)elease|^Bumping to version/
 
 export default {
   DEFAULT_SCOPES,
