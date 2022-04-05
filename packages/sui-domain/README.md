@@ -84,17 +84,17 @@ Aditionally, it's possible to require a special version of the http fetcher with
 
 This feature allows to handle generic http errors in a central and unique function of the web application. 
 
-For example, this could be useful if it's needed to perform any specific action every time a `401` status code is retrieved as a result of an http request. (i.e. to redirect the user back to the login page)
+For example, this could be useful if it's needed to perform a specific action every time a `401` status code is retrieved as a result of an http request. (i.e. to redirect the user back to the login page)
 
 ### How to require the interceptable fetcher
 
 To be able to use this feature, instead of initializing the fetcher normally, it is needed to invoke the following method of the `FetcherFactory` class:
 
 ```javascript
-FetcherFactory.interceptableHttpFetcher()
+const fetcher = FetcherFactory.interceptableHttpFetcher()
 ```
 
-The `interceptableHttpFetcher` is fully retrocompatible with the standard `httpFetcher` class, so there is no need to adapt anything before doing this change.
+The `interceptableHttpFetcher` is fully retrocompatible with the standard `httpFetcher` class, so there is no need to adapt any code before doing this change.
 
 ### Setting a function to intercept errors
 
