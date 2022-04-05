@@ -23,6 +23,8 @@ program
   })
   .parse(process.argv)
 
+const {coverage, watch, ci, headless, timeout} = program.opts()
+
 const run = async () => {
   try {
     const result = await serialSpawn([
@@ -38,11 +40,11 @@ const run = async () => {
             'runtime-mocha',
             'index.js'
           ),
-          program.coverage && '--coverage',
-          program.watch && '--watch',
-          program.ci && '--ci',
-          program.headless && '--headless',
-          program.timeout && `-T ${program.timeout}`
+          coverage && '--coverage',
+          watch && '--watch',
+          ci && '--ci',
+          headless && '--headless',
+          timeout && `-T ${timeout}`
         ].filter(Boolean),
         {
           shell: false,
