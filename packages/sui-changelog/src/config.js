@@ -1,7 +1,10 @@
-const path = require('path')
+import {createRequire} from 'module'
+
 const basePath = process.cwd()
-const packageJson = require(path.join(basePath, 'package.json'))
-const version = packageJson.version
+const require = createRequire(basePath)
+const packageJson = require('package.json')
+
+const {version} = packageJson
 const {scopes} =
   (packageJson.config && packageJson.config['sui-changelog']) || {}
 
@@ -24,7 +27,7 @@ const oldVersionRegExp = /-\s+"version": "(.*)",/
 const oldPackageVersionRegExp = /-\s\s"version": "(.*)",/
 const forbiddenExpressionsInCommitRegExp = /^Merge pull request|^Merge branch 'master'|^(feat\(META\): )?(R|r)elease|^Bumping to version/
 
-module.exports = {
+export default {
   DEFAULT_SCOPES,
   MAX_GITHUB_API_RESULTS,
   PUBLIC_GITHUB_HOST,
