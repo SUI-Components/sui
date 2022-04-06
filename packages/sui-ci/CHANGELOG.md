@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.25.0 (2022-04-06)
+
+
+### Bug Fixes
+
+* **packages/sui-ci:** Rollback node-fetch version because some problems on CI ([dafc633](https://github.com/SUI-Components/sui/commit/dafc6335d7a383a59174a23ae519e49b8b3b092f))
+
+
+
 # 1.24.0 (2022-04-06)
 
 
