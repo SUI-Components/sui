@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.24.0 (2022-04-06)
+
+
+### Bug Fixes
+
+* **packages/sui-ci:** get program options correctly ([be99785](https://github.com/SUI-Components/sui/commit/be99785ec341ecc59088e1f50faa322d7d77de76))
+
+
+### Features
+
+* **packages/sui-ci:** update dependencies ([79cdf57](https://github.com/SUI-Components/sui/commit/79cdf579236f4f5209dbd46a75e50e2c2096133b))
+
+
+
 # 1.23.0 (2021-11-30)
 
 
