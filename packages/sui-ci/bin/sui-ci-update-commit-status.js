@@ -41,7 +41,7 @@ program
   )
   .parse(process.argv)
 
-const {state: stateKey, topic, url: targetUrl} = program
+const {state: stateKey, topic, url: targetUrl} = program.opts()
 
 getCommitSha().then(commit => {
   return updateCommitStatus({
