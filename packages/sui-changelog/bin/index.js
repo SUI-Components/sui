@@ -149,7 +149,7 @@ program
   .option('-m, --maintain-version')
   .parse(process.argv)
 
-const {phoenix, packageLock, maintainVersion} = program
+const {phoenix, packageLock, maintainVersion} = program.opts()
 
 const strategy = strategyFactory(packageLock)
 
