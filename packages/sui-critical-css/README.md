@@ -27,7 +27,7 @@ You can combine both of them.
 Additionally there are two optional config parameters:
 
 - `requiredClassNames`: A list of required css class names. If they aren't present in the generated Critical CSS, it would be discarded. By default there would be 2 retries to try to get the correct Critical CSS
-- `retries`: Number of retries if the requiredClassNames aren't present in the Cfritical CSS. By default it's 2.
+- `retries`: Number of retries if the requiredClassNames aren't present in the Critical CSS. By default it's 2.
 
 ### Using `path-to-regex`:
 
