@@ -61,12 +61,13 @@ const extratCriticalCSSFromUrlRetrier = async (
     css?.includes(className)
   )
   if (!hasRequiredClasses) {
-    extratCriticalCSSFromUrlRetrier({
-      requiredClassNames,
-      retries: retries - 1,
-      url,
-      configForMobileDevice
-    })
+    extratCriticalCSSFromUrlRetrier(
+      {
+        requiredClassNames,
+        retries: retries - 1
+      },
+      {url, configForMobileDevice}
+    )
   }
   return css
 }
