@@ -63,7 +63,7 @@ const extratCriticalCSS = async ({
     css?.includes(className)
   )
   if (!hasRequiredClasses) {
-    extratCriticalCSS({
+    return extratCriticalCSS({
       requiredClassNames,
       retries: retries - 1,
 
