@@ -37,7 +37,7 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
   })
 }
 
-const extratCriticalCSS = async ({
+const extractCriticalCSS = async ({
   requiredClassNames,
   retries = 2,
   url,
@@ -63,7 +63,7 @@ const extratCriticalCSS = async ({
     css?.includes(className)
   )
   if (!hasRequiredClasses) {
-    return extratCriticalCSS({
+    return extractCriticalCSS({
       requiredClassNames,
       retries: retries - 1,
       url,
@@ -102,7 +102,7 @@ export async function extractCSSFromApp({routes, config = {}}) {
     manifest[pathKey] = cssFileName
 
     const {requiredClassNames, retries} = pathOptions
-    const css = await extratCriticalCSS({
+    const css = await extractCriticalCSS({
       requiredClassNames,
       retries,
       url,
