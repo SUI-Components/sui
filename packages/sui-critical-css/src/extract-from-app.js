@@ -66,7 +66,6 @@ const extratCriticalCSS = async ({
     return extratCriticalCSS({
       requiredClassNames,
       retries: retries - 1,
-
       url,
       configForMobileDevice
     })
