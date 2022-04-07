@@ -37,10 +37,12 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
   })
 }
 
-const extratCriticalCSSFromUrlRetrier = async (
-  {requiredClassNames, retries = 2} = {},
-  {url, configForMobileDevice} = {}
-) => {
+const extratCriticalCSS = async ({
+  requiredClassNames,
+  retries = 2,
+  url,
+  configForMobileDevice
+} = {}) => {
   if (retries === 0) {
     return ''
   }
@@ -61,13 +63,13 @@ const extratCriticalCSSFromUrlRetrier = async (
     css?.includes(className)
   )
   if (!hasRequiredClasses) {
-    extratCriticalCSSFromUrlRetrier(
-      {
-        requiredClassNames,
-        retries: retries - 1
-      },
-      {url, configForMobileDevice}
-    )
+    extratCriticalCSS({
+      requiredClassNames,
+      retries: retries - 1,
+
+      url,
+      configForMobileDevice
+    })
   }
   return css
 }
@@ -100,7 +102,10 @@ export async function extractCSSFromApp({routes, config = {}}) {
 
     manifest[pathKey] = cssFileName
 
-    const css = await extratCriticalCSSFromUrlRetrier(pathOptions, {
+    const {requiredClassNames, retries} = pathOptions
+    const css = await extratCriticalCSS({
+      requiredClassNames,
+      retries,
       url,
       configForMobileDevice
     })
