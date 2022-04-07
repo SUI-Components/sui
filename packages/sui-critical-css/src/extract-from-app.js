@@ -37,6 +37,40 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
   })
 }
 
+const extratCriticalCSSFromUrlRetrier = async (
+  {requiredClassNames, retries = 2} = {},
+  {url, configForMobileDevice} = {}
+) => {
+  if (retries === 0) {
+    return ''
+  }
+
+  const css = await extractCSSFromUrl({
+    url,
+    ...configForMobileDevice
+  }).catch(() => {
+    console.error(`Error extracting Critical CSS from ${url}`)
+    return ''
+  })
+
+  if (!requiredClassNames) {
+    return css
+  }
+
+  const hasRequiredClasses = requiredClassNames.every(className =>
+    css?.includes(className)
+  )
+  if (!hasRequiredClasses) {
+    extratCriticalCSSFromUrlRetrier({
+      requiredClassNames,
+      retries: retries - 1,
+      url,
+      configForMobileDevice
+    })
+  }
+  return css
+}
+
 export async function extractCSSFromApp({routes, config = {}}) {
   const manifest = {}
   const {healthCheckPath, hostname, outputDir = '/critical-css'} = config
@@ -65,12 +99,9 @@ export async function extractCSSFromApp({routes, config = {}}) {
 
     manifest[pathKey] = cssFileName
 
-    const css = await extractCSSFromUrl({
+    const css = await extratCriticalCSSFromUrlRetrier(pathOptions, {
       url,
-      ...configForMobileDevice
-    }).catch(() => {
-      console.error(`Error extracting Critical CSS from ${url}`)
-      return ''
+      configForMobileDevice
     })
 
     const cssPathFile = join(process.cwd(), outputDir, cssFileName)
