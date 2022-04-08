@@ -43,7 +43,7 @@ program
   })
   .parse(process.argv)
 
-const {clean, entryPoint, dockerRegistry} = program.opts()
+const {clean, entryPoint, dockerRegistry, outputFileName} = program.opts()
 
 if (clean) {
   // console.log(' -> Removing ALL previous zip files 🗑 ...'.yellow.bold)
@@ -54,7 +54,6 @@ if (clean) {
 const archiveEntryPoint = entryPoint && path.resolve(entryPoint)
 const registry = dockerRegistry && `${dockerRegistry}/`
 
-const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
   process.cwd(),
   `${outputFileName}-sui-ssr.zip`
