@@ -36,7 +36,7 @@ const {
   skipCi = false,
   commit,
   npm7 = false
-} = program
+} = program.opts()
 
 const execute = async (cmd, full) => {
   try {

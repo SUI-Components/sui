@@ -43,17 +43,16 @@ program
   })
   .parse(process.argv)
 
-if (program.clean) {
+const {clean, entryPoint, dockerRegistry} = program.opts()
+
+if (clean) {
   // console.log(' -> Removing ALL previous zip files 🗑 ...'.yellow.bold)
   rimraf.sync(REMOVE_ZIP_PATH)
   // console.log(' -> Removed! ✅'.green.bold)
 }
 
-let entryPoint
-let dockerRegistry = ''
-
-if (program.entryPoint) entryPoint = path.resolve(program.entryPoint)
-if (program.dockerRegistry) dockerRegistry = `${program.dockerRegistry}/`
+const archiveEntryPoint = entryPoint && path.resolve(entryPoint)
+const registry = dockerRegistry && `${dockerRegistry}/`
 
 const outputFileName = program.outputFileName
 const OUTPUT_ZIP_PATH = path.join(
@@ -65,7 +64,7 @@ const OUTPUT_ZIP_PATH = path.join(
   await archive({
     outputZipPath: OUTPUT_ZIP_PATH,
     pkg,
-    entryPoint,
-    dockerRegistry
+    entryPoint: archiveEntryPoint,
+    dockerRegistry: registry
   })
 })()

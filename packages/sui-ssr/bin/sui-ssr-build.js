@@ -38,7 +38,9 @@ program
   })
   .parse(process.argv)
 
-if (program.clean) {
+const {clean, linkPackage, verbose} = program.opts()
+
+if (clean) {
   console.log('Removing previous build...')
   rimraf.sync(BUILD_SERVER_PATH)
 }
@@ -46,7 +48,7 @@ if (program.clean) {
 const build = () =>
   new Promise((resolve, reject) => {
     const config = serverConfigFactory({outputPath: BUILD_SERVER_PATH})
-    const packagesToLink = program.linkPackage || []
+    const packagesToLink = linkPackage || []
 
     const nextConfig = packagesToLink.length
       ? linkLoaderConfigBuilder({
@@ -65,7 +67,7 @@ const build = () =>
         return jsonStats.errors.map(error => console.log(error))
       }
 
-      if (program.verbose && stats.hasWarnings()) {
+      if (verbose && stats.hasWarnings()) {
         console.log('Webpack generated the following warnings: ')
         jsonStats.warnings.map(warning => console.log(warning))
       }
@@ -84,7 +86,7 @@ const build = () =>
         'utf-8'
       )
 
-      program.verbose && console.log(`Webpack stats: ${stats}`)
+      verbose && console.log(`Webpack stats: ${stats}`)
       console.log(`Server entry point copy to clipboard ${SERVER_ENTRY_POINT}`)
       ncp.copy(SERVER_ENTRY_POINT)
 
