@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const program = require('commander')
-const parseDiff = require('what-the-diff').parse
-const exec = require('child_process').exec
-const execSync = require('child_process').execSync
-const json2md = require('json2md')
-const strategyFactory = require('../src/strategies/factory')
-const fs = require('fs')
+import {existsSync, readFileSync, writeFile} from 'node:fs'
+import {exec, execSync} from 'node:child_process'
+
+import program from 'commander'
+import {parse as parseDiff} from 'what-the-diff'
+import json2md from 'json2md'
+
+import strategyFactory from '../src/strategies/factory.js'
+import config from '../src/config.js'
+import helpers from '../src/helpers.js'
+
 const log = console.log
 const error = console.error
 const exit = process.exit
 const date = new Date()
+
 const {
   DEFAULT_SCOPES,
   PACKAGE_FILES,
@@ -21,14 +26,14 @@ const {
   oldVersionRegExp,
   oldPackageVersionRegExp,
   forbiddenExpressionsInCommitRegExp
-} = require('../src/config')
+} = config
 const {
   updateAndGetFileVersion,
   getModifiedRepository,
   getRepositoryUrl,
   isMonoRepo,
   hasApiError
-} = require('../src/helpers')
+} = helpers
 
 let newPackageVersion = version
 const modifiedPackages = []
@@ -122,9 +127,9 @@ const writeChangelogFile = repositories => {
   // Write changelog file.
   const changelogFile = './CHANGELOG.md'
   let changelogTemplate = json2md(changelogData)
-  if (fs.existsSync(changelogFile)) {
+  if (existsSync(changelogFile)) {
     execSync(`git checkout -- ${changelogFile}`)
-    const currentChangelogData = fs.readFileSync(changelogFile, 'utf-8')
+    const currentChangelogData = readFileSync(changelogFile, 'utf-8')
     if (currentChangelogData.includes(changelogTemplate.trim())) {
       log('Your CHANGELOG.md is already updated.')
       exit()
@@ -132,7 +137,7 @@ const writeChangelogFile = repositories => {
     changelogTemplate = `${json2md(changelogData)}\n${currentChangelogData}`
   }
 
-  fs.writeFile(changelogFile, changelogTemplate.trim(), 'utf-8', err => {
+  writeFile(changelogFile, changelogTemplate.trim(), 'utf-8', err => {
     if (err) error(err)
     log('Wrote CHANGELOG.md sucessfully.')
   })
@@ -149,7 +154,7 @@ program
   .option('-m, --maintain-version')
   .parse(process.argv)
 
-const {phoenix, packageLock, maintainVersion} = program
+const {phoenix, packageLock, maintainVersion} = program.opts()
 
 const strategy = strategyFactory(packageLock)
 
