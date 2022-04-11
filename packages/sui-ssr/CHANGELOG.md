@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 8.2.0 (2022-04-11)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** get outputFileName from program opts ([986ae4a](https://github.com/SUI-Components/sui/commit/986ae4ab7d89b9a1b8e0a54a1e71695dabad96b5))
+
+
+### Features
+
+* **packages/sui-ssr:** update commander to 8.3.0 ([ceb7f7d](https://github.com/SUI-Components/sui/commit/ceb7f7d4624bd805cb6be5ae0e971dc7cba98612))
+
+
+
 # 8.1.0 (2022-02-15)
 
 
