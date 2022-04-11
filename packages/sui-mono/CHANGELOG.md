@@ -1,5 +1,25 @@
 # CHANGELOG
 
+# 2.23.0 (2022-03-31)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove beta package version ([d605303](https://github.com/SUI-Components/sui/commit/d605303b9412cac9e2123fbbe41c97fd49fa48d6))
+* **packages/sui-mono:** url construction before check changes to release ([fe73104](https://github.com/SUI-Components/sui/commit/fe731043a9c0af65c4690c3f0ab4e8e3af4d0934))
+
+
+
+# 2.22.0 (2022-03-09)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** fix release for monopackage ([1e9be78](https://github.com/SUI-Components/sui/commit/1e9be783004cbc71d18653c89aa28f8b3bba9433))
+* **packages/sui-mono:** fix some side effects of change getWorkspaces ([88d4ebd](https://github.com/SUI-Components/sui/commit/88d4ebdc0741eba7a1faa0d55d0270f5d3858ddb))
+
+
+
 # 2.21.0 (2022-02-11)
 
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const fs = require('fs')
-const os = require('os')
-const path = require('path')
-const program = require('commander')
-const {parallelSpawn, serialSpawn} = require('@s-ui/helpers/cli')
-const {stats} = require('../src')
+import {writeFileSync} from 'fs'
+import {tmpdir} from 'os'
+import {join} from 'path'
+import commander from 'commander'
+import {parallelSpawn, serialSpawn} from '@s-ui/helpers/cli.js'
+import {stats} from '../src/index.js'
 
-program
+commander
   .option('-v, --versions', 'output versions used')
   .option('-o, --output <filename>', 'save result on filename')
   .on('--help', () => {
@@ -19,24 +19,24 @@ program
   })
   .parse(process.argv)
 
-const programOptions = program.opts()
+const {versions, output} = commander.opts()
 
-const WORK_DIRECTORY = path.join(os.tmpdir(), Date.now().toString())
+const WORK_DIRECTORY = join(tmpdir(), Date.now().toString())
 const FLAGS_INSTALL = [
   // Setting cache is required for concurrent `npm install`s to work
-  `cache=${path.join(WORK_DIRECTORY, 'cache')}`,
+  'ignore-scripts',
+  'json',
+  'legacy-peer-deps',
+  'loglevel error',
+  'no-bin-links',
+  'no-optional',
   'no-package-lock',
   'no-shrinkwrap',
-  'no-optional',
-  'no-bin-links',
-  'legacy-peer-deps',
   'prefer-offline',
-  'progress false',
-  'loglevel error',
-  'ignore-scripts',
-  'save-exact',
   'production',
-  'json'
+  'progress false',
+  'save-exact',
+  `cache=${join(WORK_DIRECTORY, 'cache')}`
 ]
 
 const repositories = [
@@ -75,7 +75,7 @@ const cloneSUIComponentsCommand = [
     [
       'clone',
       'https://github.com/SUI-Components/sui-components',
-      path.join(WORK_DIRECTORY, 'sui-components')
+      join(WORK_DIRECTORY, 'sui-components')
     ]
   ]
 ]
@@ -85,32 +85,26 @@ const cloneCommands = repositories.map(repo => [
   [
     'clone',
     `git@github.mpi-internal.com:scmspain/${repo}.git`,
-    path.join(WORK_DIRECTORY, repo)
+    join(WORK_DIRECTORY, repo)
   ]
 ])
 
 const installCommands = repositories.map(repo => [
   'npm',
   ['install', ...FLAGS_INSTALL.map(f => `--${f}`)],
-  {cwd: path.join(WORK_DIRECTORY, repo)}
+  {cwd: join(WORK_DIRECTORY, repo)}
 ])
 
-;(async () => {
-  await parallelSpawn(cloneSUIComponentsCommand)
-  await parallelSpawn(cloneCommands)
-  await serialSpawn(installCommands)
-  const statsComponents = await stats({
-    repositories,
-    root: WORK_DIRECTORY,
-    getVersions: programOptions.versions
-  })
+await parallelSpawn(cloneSUIComponentsCommand)
+await parallelSpawn(cloneCommands)
+await serialSpawn(installCommands)
+const statsComponents = await stats({
+  repositories,
+  root: WORK_DIRECTORY,
+  getVersions: versions
+})
 
-  console.log(statsComponents)
-  if (programOptions.output) {
-    fs.writeFileSync(
-      program.output,
-      JSON.stringify(statsComponents, null, 2),
-      'utf8'
-    )
-  }
-})()
+console.log(statsComponents)
+if (output) {
+  writeFileSync(output, JSON.stringify(statsComponents, null, 2), 'utf8')
+}

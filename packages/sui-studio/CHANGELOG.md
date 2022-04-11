@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 11.7.0 (2022-03-28)
+
+
+### Features
+
+* **packages/sui-studio:** Add support to headless on sui-studio test ([8f51ca3](https://github.com/SUI-Components/sui/commit/8f51ca33acfdefcdb6c996c08c0116585b85834a))
+
+
+
+# 11.6.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-studio:** Ugrade fs-extra dependency and use same in all packages ([9e13d32](https://github.com/SUI-Components/sui/commit/9e13d323e6e47aa4cf9974fe6a0824d424f934f2))
+
+
+
+# 11.5.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies ([ce29ee0](https://github.com/SUI-Components/sui/commit/ce29ee0d702dee8c5bbc037518da931cd492e6cd))
+
+
+
 # 11.4.0 (2022-02-07)
 
 

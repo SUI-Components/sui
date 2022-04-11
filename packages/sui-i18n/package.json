@@ -1,8 +1,9 @@
 {
   "name": "@s-ui/i18n",
-  "version": "1.28.0",
+  "version": "1.29.0",
+  "type": "module",
+  "main": "lib/index.js",
   "description": "> Isomorphic i18n service for browser and node.",
-  "main": "lib/",
   "scripts": {
     "lib": "npm run lib:js",
     "lib:js": "babel ./src --out-dir ./lib",

@@ -17,7 +17,11 @@ const {
   config
 } = require('./shared/index.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
-const {extractComments, sourceMap} = require('./shared/config.js')
+const {
+  extractComments,
+  sourceMap,
+  supportLegacyBrowsers
+} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const babelRules = require('./shared/module-rules-babel.js')
 const definePlugin = require('./shared/define.js')
@@ -35,13 +39,15 @@ const cssFileName = config.onlyHash
   ? '[contenthash:8].css'
   : '[name].[contenthash:8].css'
 
+const target = supportLegacyBrowsers ? ['web', 'es5'] : 'web'
+
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
 /** @type {WebpackConfig} */
 const webpackConfig = {
   devtool: sourceMap,
   mode: 'production',
-  target: ['web', 'es5'],
+  target,
   context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {...aliasFromConfig},

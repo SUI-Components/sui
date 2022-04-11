@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.2.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-sass-loader:** Ugrade fs-extra dependency and use same in all packages ([37eeaf1](https://github.com/SUI-Components/sui/commit/37eeaf1536ed8cf3210fdc19a7bc22c346c3cffa))
+
+
+
 # 1.1.0 (2022-01-27)
 
 

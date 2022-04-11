@@ -1,6 +1,6 @@
 import {useContext} from 'react'
-import PdeContext from '../contexts/PdeContext'
-import {getPlatformStrategy} from './common/platformStrategies'
+import PdeContext from '../contexts/PdeContext.js'
+import {getPlatformStrategy} from './common/platformStrategies.js'
 
 const VARIATION_NAME_ON = 'On State'
 const VARIATION_NAME_OFF = 'Off State'

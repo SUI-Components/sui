@@ -1,5 +1,37 @@
 # CHANGELOG
 
+# 5.8.0 (2022-03-30)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix file import ([13b3432](https://github.com/SUI-Components/sui/commit/13b3432fa37b00e4455db561985a53eef2295325))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** update commander to v8.3.0 ([edb1f4b](https://github.com/SUI-Components/sui/commit/edb1f4b39d34868260d4ce7b4a5c70ab24b365b1))
+
+
+
+# 5.7.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** Add missing alias from config ([514017d](https://github.com/SUI-Components/sui/commit/514017d3b7b8334356ff9a08653b9b2422a8b6ac))
+
+
+
+# 5.6.0 (2022-02-23)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Remove vendor from widget embedder page config ([c57420f](https://github.com/SUI-Components/sui/commit/c57420f596d5f001ffc61009c58eb0a936889cff))
+
+
+
 # 5.5.0 (2022-02-10)
 
 

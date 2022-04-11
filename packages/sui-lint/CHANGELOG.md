@@ -1,5 +1,65 @@
 # CHANGELOG
 
+# 4.12.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix sass format error in prettier ([826c419](https://github.com/SUI-Components/sui/commit/826c419fc9c34d66b64250bb4e61097e1a69c9f6))
+
+
+
+# 4.11.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix default value for staged files when get files to lint ([0ebe47a](https://github.com/SUI-Components/sui/commit/0ebe47a114e0cebfea569260fc7782d7a78ffd48))
+* **packages/sui-lint:** fix options for lint scss ([1003672](https://github.com/SUI-Components/sui/commit/1003672668ab3d8c2a8d42790949ad947041823c))
+
+
+### Features
+
+* **packages/sui-lint:** update dependencies ([43ecae4](https://github.com/SUI-Components/sui/commit/43ecae492421eebfdaeb7441766dbb534e311e63))
+
+
+
+# 4.10.0 (2022-03-30)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([dd71fba](https://github.com/SUI-Components/sui/commit/dd71fbaa121fe5342dc0b1122079f8ce9fc52f35))
+
+
+
+# 4.9.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([3b3d87f](https://github.com/SUI-Components/sui/commit/3b3d87f6ae52a750ed1db38717b3fd69cf3856f0))
+
+
+
+# 4.8.0 (2022-02-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Fix wrong lint error about missing React ([de42903](https://github.com/SUI-Components/sui/commit/de429033e7a72dcdb446aed2c746363407de1f2a))
+
+
+
+# 4.7.0 (2022-02-16)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([5bc1685](https://github.com/SUI-Components/sui/commit/5bc16850184bc85734c03f9525203bf5522d132a))
+
+
+
 # 4.6.0 (2022-02-01)
 
 

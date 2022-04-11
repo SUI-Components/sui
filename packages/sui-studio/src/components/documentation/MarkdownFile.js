@@ -7,7 +7,7 @@ export default function MarkdownFile({file, params}) {
   const [content, setContent] = useState(null)
 
   useEffect(
-    function() {
+    function () {
       const {category, component} = params
       fetchMarkdownFile({category, component, file}).then(setContent)
       import('./markdown.css') // eslint-disable-line

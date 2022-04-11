@@ -1,5 +1,101 @@
 # CHANGELOG
 
+# 9.15.0 (2022-04-05)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade deps ([e50df76](https://github.com/SUI-Components/sui/commit/e50df765a5b80f50dbb911d877ce4f683b28d00e))
+
+
+
+# 9.14.0 (2022-03-30)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([3b4a14e](https://github.com/SUI-Components/sui/commit/3b4a14eee8343e4b96bb4a84f799dfd6d31f47b6))
+
+
+
+# 9.13.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([01ff1d6](https://github.com/SUI-Components/sui/commit/01ff1d61ed1ca6b1329526eb2684e4e533ff0c33))
+
+
+
+# 9.12.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Add suport jsx-runtime and jsx-runtime-dev to resolve file ([9010274](https://github.com/SUI-Components/sui/commit/90102743b208fe25b6e5c379fa49556f0d0514c2))
+
+
+
+# 9.11.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** breaking because of no fallback set ([3dd62ee](https://github.com/SUI-Components/sui/commit/3dd62eec76854186da7aae16c4a74a02afaeb9fd))
+
+
+
+# 9.10.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([aa0d08e](https://github.com/SUI-Components/sui/commit/aa0d08e92ec907c16f20a1f4b2313c0a9227cbcc))
+
+
+
+# 9.9.0 (2022-02-22)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Use correct minifier for Terser version to support legacy browsers ([801bae4](https://github.com/SUI-Components/sui/commit/801bae4bab55538dbf1ebf2eed9ba53da2dc8d5d))
+
+
+
+# 9.8.0 (2022-02-16)
+
+
+
+# 9.7.0 (2022-02-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Add new flag to support legacy browsers ([7f6a45a](https://github.com/SUI-Components/sui/commit/7f6a45ac79fd7cc6d4337596c7ca389efb962bee))
+* **packages/sui-bundler:** Upgrade dependencies ([4118489](https://github.com/SUI-Components/sui/commit/41184898259218b49b9ecf57734415aeba236cb0))
+
+
+
+# 9.6.0 (2022-02-15)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Force release with fix ([c1c0aca](https://github.com/SUI-Components/sui/commit/c1c0aca056596bc06904bb1b83e8293571693fe4))
+* **packages/sui-bundler:** Rollback to es6 ([90fb3d7](https://github.com/SUI-Components/sui/commit/90fb3d7efee99d55fde46f32516898de73fc3ad6))
+
+
+
+# 9.5.0 (2022-02-15)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Compile to es5 instead es6 to support IE11 and legacy browsers ([e3b4cc4](https://github.com/SUI-Components/sui/commit/e3b4cc493d16c4a256404edb2c350bbfb3938901))
+
+
+
 # 9.4.0 (2022-02-14)
 
 

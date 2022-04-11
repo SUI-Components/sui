@@ -21,7 +21,7 @@ function CodeEditor({isOpen, onChange, playground}) {
     }, DEBOUNCE_TIME)
   }
 
-  useEffect(function() {
+  useEffect(function () {
     const onChangeDebounced = createOnChangeDebounced()
     const codeMirror = window.CodeMirror.fromTextArea(
       textAreaRef.current,

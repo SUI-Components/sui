@@ -1,4 +1,4 @@
-import createNotImplementedUseCase from './createNotImplementedUseCase'
+import createNotImplementedUseCase from './createNotImplementedUseCase.js'
 
 export default ({useCases, config}) =>
   class EntryPoint {
@@ -83,7 +83,7 @@ export default ({useCases, config}) =>
               execute: {
                 subscribe: (onNext, onError) => {
                   // creating an object here that will have a dispose method
-                  const ret = {dispose: function() {}}
+                  const ret = {dispose: function () {}}
                   loader().then(factory => {
                     // black magic: mutate the object, very small memory leak but that
                     // makes dispose working async and we need it

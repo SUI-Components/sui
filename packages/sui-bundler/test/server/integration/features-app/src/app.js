@@ -1,4 +1,4 @@
 import './styles/index.scss'
-import './features'
+import './features/index.js'
 
-console.log(process.env.APP_NAME, process.env.USER_NAME)
+console.log('test_app')

@@ -13,7 +13,7 @@ const queryStringToJSON = queryString => {
   }
   const pairs = queryString.split('&')
   const result = {}
-  pairs.forEach(function(pair) {
+  pairs.forEach(function (pair) {
     pair = pair.split('=')
     result[pair[0]] = decodeURIComponent(pair[1] || '')
   })

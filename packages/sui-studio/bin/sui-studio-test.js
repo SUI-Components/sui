@@ -8,7 +8,8 @@ const path = require('path')
 const suiTestClientPath = require.resolve('@s-ui/test/bin/sui-test-browser')
 
 program
-  .option('-C, --ci', 'Run components tests in CLI, headless mode')
+  .option('-C, --ci', 'Run components tests in CLI, headless mode [deprecated]')
+  .option('-H, --headless', 'Run components tests in CLI, headless mode')
   .option('-W, --watch', 'Watch mode')
   .option('-T, --timeout <timeout>', 'Timeout')
   .option('--coverage', 'Create coverage', false)
@@ -21,6 +22,8 @@ program
     console.log('')
   })
   .parse(process.argv)
+
+const {coverage, watch, ci, headless, timeout} = program.opts()
 
 const run = async () => {
   try {
@@ -37,10 +40,11 @@ const run = async () => {
             'runtime-mocha',
             'index.js'
           ),
-          program.coverage && '--coverage',
-          program.watch && '--watch',
-          program.ci && '--ci',
-          program.timeout && `-T ${program.timeout}`
+          coverage && '--coverage',
+          watch && '--watch',
+          ci && '--ci',
+          headless && '--headless',
+          timeout && `-T ${timeout}`
         ].filter(Boolean),
         {
           shell: false,

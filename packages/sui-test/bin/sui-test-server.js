@@ -23,7 +23,7 @@ program
   })
   .parse(process.argv)
 
-const {pattern, watch, inspect, timeout} = program
+const {pattern, watch, inspect, timeout} = program.opts()
 const ci = Boolean(process.env.CI)
 
 serialSpawn([

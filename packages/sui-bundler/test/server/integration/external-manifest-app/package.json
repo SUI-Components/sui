@@ -1,6 +1,9 @@
 {
   "name": "@s-ui/studio-external-manifest-app",
-  "sui-bundler": {
-    "externals-manifest": "http://localhost:1234/manifest.json"
+  "private": true,
+  "config": {
+    "sui-bundler": {
+      "externals-manifest": "http://localhost:1234/manifest.json"
+    }
   }
 }

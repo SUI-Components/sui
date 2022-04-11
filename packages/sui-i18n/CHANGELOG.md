@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.29.0 (2022-03-01)
+
+
+### Features
+
+* **packages/sui-i18n:** Migrate to ESM ([0df234c](https://github.com/SUI-Components/sui/commit/0df234c66059a21915c5758ebdc7051d61922f54))
+* **packages/sui-i18n:** Use main instead exports for now ([3e54117](https://github.com/SUI-Components/sui/commit/3e5411745a6d7abd720df095cbc832112a1f4856))
+* **packages/sui-i18n:** Use specific lib ([b94694b](https://github.com/SUI-Components/sui/commit/b94694b606ab1c306c3480524da25df5ae4e783d))
+
+
+
 # 1.28.0 (2021-10-28)
 
 

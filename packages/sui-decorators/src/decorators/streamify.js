@@ -30,7 +30,7 @@ const createSubscription = (proto, method, originalMethod) => {
   let onNextListeners = []
   let onErrorListeners = []
 
-  proto[method] = function(...args) {
+  proto[method] = function (...args) {
     const params = args
     try {
       const result = originalMethod.apply(this, args)

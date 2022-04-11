@@ -1,4 +1,5 @@
 // @ts-check
+/** @typedef {import('webpack').Configuration} WebpackConfig */
 
 const path = require('path')
 const webpack = require('webpack')
@@ -8,25 +9,8 @@ const {pipe, removePlugin} = require('./utils.js')
 
 const MAIN_ENTRY_POINT = './index.js'
 
-const requireOrDefault = path => {
-  try {
-    return require(path)
-  } catch (e) {
-    return {}
-  }
-}
-
 module.exports = ({page, remoteCdn, globalConfig = {}}) => {
-  const config = requireOrDefault(
-    path.resolve(process.cwd(), 'pages', page, 'package')
-  )
-
   const entry = {app: MAIN_ENTRY_POINT}
-  if (config.vendor) {
-    entry.vendor = config.vendor
-  }
-
-  /** @typedef {import('webpack').Configuration} WebpackConfig */
 
   /** @type {WebpackConfig} */
   const webpackConfig = {
@@ -34,7 +18,10 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
     context: path.resolve(process.cwd(), 'pages', page),
     resolve: {
       ...prodConfig.resolve,
-      alias: globalConfig.alias
+      alias: {
+        ...prodConfig.resolve.alias,
+        ...globalConfig.alias
+      }
     },
     entry,
     optimization: {

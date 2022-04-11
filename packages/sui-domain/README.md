@@ -78,6 +78,39 @@ export default class UserRepositoriesFactory {
 }
 ```
 
+## Fetcher exceptions interception
+
+Aditionally, it's possible to require a special version of the http fetcher with which is possible to intercept all errors in one single point of the application. 
+
+This feature allows to handle generic http errors in a central and unique function of the web application. 
+
+For example, this could be useful if it's needed to perform a specific action every time a `401` status code is retrieved as a result of an http request. (i.e. to redirect the user back to the login page)
+
+### How to require the interceptable fetcher
+
+To be able to use this feature, instead of initializing the fetcher normally, it is needed to invoke the following method of the `FetcherFactory` class:
+
+```javascript
+const fetcher = FetcherFactory.interceptableHttpFetcher()
+```
+
+The `interceptableHttpFetcher` is fully retrocompatible with the standard `httpFetcher` class, so there is no need to adapt any code before doing this change.
+
+### Setting a function to intercept errors
+
+Once the `interceptableHttpFetcher` has been required and is being used to perform http requests, it's possible to set a function that will be invoked every time an error occurs when performing an http request.
+
+This is the way the callback function can be defined:
+
+```javascript
+fetcher.setErrorInterceptor({callback: (error) => {
+  if (result.isAxiosError === true) {
+      const statusCode = result.response.status
+      // Do something...
+  }
+}})
+```
+
 ## Using a domain object
 
 ```javascript

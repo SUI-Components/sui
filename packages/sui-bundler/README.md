@@ -163,6 +163,7 @@ This tool works with zero configuration out the box but you could use some confi
 {
   "config": {
     "sui-bundler": {
+      "supportLegacyBrowsers": false, // default
       "onlyHash": "true",
       "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
       "vendor": ["react", "react-dom"],
@@ -172,13 +173,6 @@ This tool works with zero configuration out the box but you could use some confi
         "react": "preact"
       },
       "offline": true,
-      "targets": {
-        "chrome": "41",
-        "ie": "11",
-        "safari": "8",
-        "firefox": "60",
-        "ios": "8"
-      },
       "sourcemaps": {
         "dev": "cheap-module-eval-source-map",
         "prod": "hidden-source-map"
