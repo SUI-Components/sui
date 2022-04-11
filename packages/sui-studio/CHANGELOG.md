@@ -1,11 +1,21 @@
 # CHANGELOG
 
+# 11.8.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-studio:** Use new commander version ([7e536a6](https://github.com/SUI-Components/sui/commit/7e536a6bd2aa44cf9e505e309c74a1cffbc7f80e))
+
+
+
 # 11.7.0 (2022-03-28)
 
 
 ### Features
 
 * **packages/sui-studio:** Add support to headless on sui-studio test ([8f51ca3](https://github.com/SUI-Components/sui/commit/8f51ca33acfdefcdb6c996c08c0116585b85834a))
+* **packages/sui-studio:** Support more files besides the index ([6d44722](https://github.com/SUI-Components/sui/commit/6d447229c2c15e9db633ee897bac62db43b1459e))
 
 
 
