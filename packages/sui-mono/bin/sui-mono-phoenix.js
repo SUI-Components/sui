@@ -3,7 +3,7 @@
 const program = require('commander')
 const {getSpawnPromise, parallelSpawn, showError} = require('@s-ui/helpers/cli')
 
-const {checkIsMonoPackage, getWorkspaces} = require('../src/config')
+const {checkIsMonoPackage, getWorkspaces} = require('../src/config.js')
 
 const DEFAULT_CHUNK = 5
 
@@ -63,7 +63,7 @@ const {
   production = false,
   root = true,
   scope: scopeArgument
-} = program
+} = program.opts()
 
 const NPM_BIN = 'npm'
 const NPM_CMD = [
@@ -115,11 +115,8 @@ const installRootPackages = async () => {
   await getSpawnPromise(removeBin, removeArgs, {cwd: process.cwd()})
 
   console.log(`[sui-mono] Installing root packages...`)
-  const [
-    installBin,
-    installArgs,
-    installExecutionParams
-  ] = createInstallPackagesCommand()
+  const [installBin, installArgs, installExecutionParams] =
+    createInstallPackagesCommand()
   await getSpawnPromise(installBin, installArgs, installExecutionParams)
 
   console.log('[sui-mono] Installed root packages')
