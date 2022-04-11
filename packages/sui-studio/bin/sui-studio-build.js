@@ -23,7 +23,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 console.log(`Environment: ${process.env.NODE_ENV}`)
 
 const bundlerBuildPath = require.resolve('@s-ui/bundler/bin/sui-bundler-build')
-const {onlyChanges, beforeBuild} = program
+const {onlyChanges, beforeBuild} = program.opts()
 let needsBuild = true
 let beforeBuildCommand
 

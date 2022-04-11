@@ -23,7 +23,7 @@
     "chai": "4.3.6",
     "chai-dom": "1.11.0",
     "classnames": "2.2.5",
-    "commander": "6.2.1",
+    "commander": "8.3.0",
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.11",
     "fs-extra": "10.0.1",
