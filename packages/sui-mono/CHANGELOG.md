@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.24.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-mono:** Upgrade to same commander version as rest of sui ([581de6d](https://github.com/SUI-Components/sui/commit/581de6d926d9076caddaac847f167c7ca72cba72))
+
+
+
 # 2.23.0 (2022-03-31)
 
 
