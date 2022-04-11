@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.13.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version ([82b639f](https://github.com/SUI-Components/sui/commit/82b639f87aed45d2a16841dea6de178ffd654db1))
+
+
+
 # 3.12.0 (2022-03-08)
 
 
