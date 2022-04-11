@@ -3,8 +3,8 @@
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const program = require('commander')
-const {getWorkspaces} = require('../src/config')
 const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
+const {getWorkspaces} = require('../src/config.js')
 
 program
   .usage('-m "My commit message"')
@@ -29,7 +29,8 @@ program
   .parse(process.argv)
 
 // Check mandatory parameters
-const {message, type} = program
+const {message, type} = program.opts()
+
 !message && showError('Commit message is mandatory')
 !type && showError('Commit type is mandatory')
 
