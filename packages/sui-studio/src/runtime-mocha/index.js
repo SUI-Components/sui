@@ -30,7 +30,7 @@ window.__karma__.loaded = () => {}
 const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/index.test.(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/(\w+).test.(js|jsx)/
 )
 
 const selectedTestFiles = testsFiles.keys().filter(filterAll)
