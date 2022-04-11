@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 9.16.0 (2022-04-11)
+
+
+
 # 9.15.0 (2022-04-05)
 
 
@@ -112,6 +116,12 @@
 
 * **packages/sui-bundler:** prevent error for array type test property ([ec94032](https://github.com/SUI-Components/sui/commit/ec9403230a61f61d118fa3e140828fec0d384a3e))
 * **packages/sui-bundler:** prevent error for rules that does not have use in linkloader ([8a236c5](https://github.com/SUI-Components/sui/commit/8a236c58aa1c09c27f571641ecbba9631d2b57a7))
+
+
+### Features
+
+* **packages/sui-bundler:** Remove rimraf dependency from bundler ([8490b6a](https://github.com/SUI-Components/sui/commit/8490b6ab5de8ca056e400b819ff0f165ce9d6f70))
+* **packages/sui-bundler:** Remove rimraf usage from test ([6d1d35c](https://github.com/SUI-Components/sui/commit/6d1d35c364715079ae1faabff0801da42fa7db9d))
 
 
 
