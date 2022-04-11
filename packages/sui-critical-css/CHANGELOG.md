@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.17.0 (2022-04-11)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** method parameters ([daa81a1](https://github.com/SUI-Components/sui/commit/daa81a11b60638b96af7f0362092652f1e1eb3c8))
+
+
+### Features
+
+* **packages/sui-critical-css:** add required class names and extract critical css retrier logic ([8354980](https://github.com/SUI-Components/sui/commit/8354980f484e1970650a6087a57ceacbe1818e33))
+
+
+
 # 1.16.0 (2022-03-08)
 
 
