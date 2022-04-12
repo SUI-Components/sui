@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.26.0 (2022-04-12)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** fix skip ci option on release ([d29f7c3](https://github.com/SUI-Components/sui/commit/d29f7c34e6025cfc5147a3eb277c30b1d123a6e5))
+
+
+
 # 2.25.0 (2022-04-12)
 
 
