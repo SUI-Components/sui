@@ -81,10 +81,8 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  const {
-    private: isPrivatePackage,
-    config: localPackageConfig
-  } = getPackageJson(cwd, true)
+  const {private: isPrivatePackage, config: localPackageConfig} =
+    getPackageJson(cwd, true)
 
   await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
