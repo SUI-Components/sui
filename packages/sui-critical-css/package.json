@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/critical-css",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "description": "",
   "type": "module",
   "main": "src/index.js",

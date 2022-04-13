@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.18.0 (2022-04-13)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade playwright dependency ([b595b15](https://github.com/SUI-Components/sui/commit/b595b1519174b739d15f5115defce9d145842ad5))
+
+
+
 # 1.17.0 (2022-04-11)
 
 
