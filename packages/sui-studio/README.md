@@ -294,7 +294,27 @@ Add this scripts on your own components project
 }
 ```
 
-If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
+```sh
+Usage: sui-studio-test [options]
+
+Options:
+  -H, --headless           Run components tests in CLI, headless mode
+  -W, --watch              Watch mode
+  -T, --timeout <timeout>  Timeout
+  --coverage               Create coverage (default: false)
+  -h, --help               display help for command
+  
+  Examples:
+    $ sui-studio test --headless
+    $ sui-studio test --headless --watch
+    $ sui-studio test --help
+```
+
+You could execute some specific tests with the `sui-studio-test` command using ENV variables.
+
+- If you want to execute the tests **for some specific categories** only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
+
+- If you want to execute **an specific component** only use `COMPONENT` environment variable. It takes a component path (e.g. `COMPONENT="card/ad" sui-studio test`)
 
 ## File structure
 
