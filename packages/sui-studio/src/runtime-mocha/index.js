@@ -1,4 +1,4 @@
-/* global __BASE_DIR__, CATEGORIES */
+/* global __BASE_DIR__, CATEGORIES, COMPONENT */
 
 /**
  * This file is being executed in browser opened to run tests
@@ -12,16 +12,27 @@ addSetupEnvironment(window)
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
+const componentPath = COMPONENT
 const pattern = CATEGORIES
 const categories = pattern ? pattern.split(',') : null
 
-const filterAll = key => {
+const filterCategories = key => {
   const [, category] = key.split('/')
   return !categories || categories.includes(category)
 }
 
+const filterComponent = key => {
+  const [, category, component] = key.split('/')
+  return !componentPath || componentPath === `${category}/${component}`
+}
+
 // Require all the files from a context
-const importAll = request => request.keys().filter(filterAll).forEach(request)
+const importAll = request =>
+  request
+    .keys()
+    .filter(filterCategories)
+    .filter(filterComponent)
+    .forEach(request)
 
 // Avoid running Karma until all components tests are loaded
 const originalKarmaLoader = window.__karma__.loaded
@@ -33,7 +44,10 @@ const testsFiles = require.context(
   /\.\/(\w+)\/(\w+)\/test\/(\w+).test.(js|jsx)/
 )
 
-const selectedTestFiles = testsFiles.keys().filter(filterAll)
+const selectedTestFiles = testsFiles
+  .keys()
+  .filter(filterCategories)
+  .filter(filterComponent)
 
 Promise.all(
   selectedTestFiles.map(async key => {
