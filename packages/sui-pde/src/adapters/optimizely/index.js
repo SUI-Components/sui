@@ -204,19 +204,4 @@ export default class OptimizelyAdapter {
       optimizelyInstance: this._optimizely
     })
   }
-
-  getId() {
-    return this._identifier
-  }
-
-  getSdkKey() {
-    let sdkKey = ''
-    try {
-      sdkKey = JSON.parse(this.getOptimizelyConfig().getDatafile()).sdkKey
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
-    }
-    return sdkKey
-  }
 }
