@@ -13,9 +13,7 @@ const DEFAULT_EVENTS_OPTIONS = {
 
 const DEFAULT_TIMEOUT = 500
 
-const {
-  enums: {LOG_LEVEL}
-} = optimizelySDK
+const {enums: LOG_LEVEL} = optimizelySDK
 
 const LOGGER_LEVEL =
   process.env.NODE_ENV === 'production' ? LOG_LEVEL.error : LOG_LEVEL.info
@@ -63,7 +61,8 @@ export default class OptimizelyAdapter {
     options: optionParameter,
     sdkKey,
     datafile,
-    optimizely = optimizelySDK
+    optimizely = optimizelySDK,
+    eventDispatcher
   }) {
     const options = {...DEFAULT_DATAFILE_OPTIONS, ...optionParameter}
     optimizely.setLogLevel(LOGGER_LEVEL)
@@ -81,6 +80,7 @@ export default class OptimizelyAdapter {
       sdkKey,
       datafileOptions: options,
       datafile,
+      eventDispatcher,
       ...DEFAULT_EVENTS_OPTIONS
     })
 
