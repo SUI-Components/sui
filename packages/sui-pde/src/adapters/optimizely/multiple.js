@@ -1,81 +1,82 @@
 import OptimizelyAdapter from './index.js'
 
+let defaultAdapterId
+
 class MultipleOptimizelyAdapter {
   static createMultipleOptimizelyInstances(...optionsByInstance) {
-    return optionsByInstance.map(({datafile, sdkKey, ...restOptions}) => {
+    return Object.keys(optionsByInstance).reduce((acc, adapterId) => {
+      let {datafile, sdkKey, ...restOptions} = optionsByInstance[adapterId]
+
       if (
         !datafile &&
         typeof window !== 'undefined' &&
-        window.__INITIAL_CONTEXT_VALUE__?.pde[sdkKey]
+        window.__INITIAL_CONTEXT_VALUE__?.pde[adapterId]
       ) {
-        datafile = window.__INITIAL_CONTEXT_VALUE__.pde[sdkKey]
+        datafile = window.__INITIAL_CONTEXT_VALUE__.pde[adapterId]
         sdkKey = undefined
       }
-      return OptimizelyAdapter.createOptimizelyInstance({
+
+      acc[adapterId] = OptimizelyAdapter.createOptimizelyInstance({
         datafile,
         sdkKey,
         ...restOptions
       })
-    })
+
+      return acc
+    }, {})
   }
 
-  #adapters = []
+  #adapters = {}
 
-  #getAdapterById({adapterId}) {
-    return this.#adapters.find(adapter => adapter.getId() === adapterId)
-  }
+  constructor(optimizelyAdapters) {
+    defaultAdapterId = Object.keys(optimizelyAdapters)[0] // first adapter will be the defaultAdapter
 
-  constructor(...optimizelyAdapters) {
     this.#adapters = optimizelyAdapters
   }
 
   getInitialData() {
     const initialData = {}
 
-    this.#adapters.forEach(adapter => {
-      initialData[adapter.getSdkKey()] = adapter.getInitialData()
+    Object.keys(this.#adapters).forEach(adapterId => {
+      const adapter = this.#adapters[adapterId]
+      initialData[adapterId] = adapter.getInitialData()
     })
 
     return initialData
   }
 
   onReady() {
-    return Promise.all(this.#adapters.map(adapter => adapter.onReady()))
+    return Promise.all(
+      Object.values(this.#adapters).map(adapter => adapter.onReady())
+    )
   }
 
-  getEnabledFeatures({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.getEnabledFeatures({...props})
+  getEnabledFeatures({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].getEnabledFeatures({...props})
   }
 
-  getOptimizelyConfig({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.getOptimizelyConfig({...props})
+  getOptimizelyConfig({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].getOptimizelyConfig({...props})
   }
 
-  activateExperiment({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.activateExperiment({...props})
+  activateExperiment({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].activateExperiment({...props})
   }
 
-  getVariation({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.getVariation({...props})
+  getVariation({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].getVariation({...props})
   }
 
-  isFeatureEnabled({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.isFeatureEnabled({...props})
+  isFeatureEnabled({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].isFeatureEnabled({...props})
   }
 
-  getAllFeatureVariables({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.getAllFeatureVariables({...props})
+  getAllFeatureVariables({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].getAllFeatureVariables({...props})
   }
 
-  updateConsents({adapterId = 'default', ...props}) {
-    const adapter = this.#getAdapterById({adapterId})
-    return adapter.updateConsents({...props})
+  updateConsents({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].updateConsents({...props})
   }
 }
 
