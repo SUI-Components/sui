@@ -26,15 +26,13 @@ export default class OptimizelyAdapter {
    * @param {string=} param.userId
    * @param {object} param.activeIntegrations segment activated by default
    * @param {boolean} param.hasUserConsents
-   * @param {string=} param.identifier Optimizely instance identifier, only needed when setting multiple adapters
    */
   constructor({
     optimizely,
     userId,
     activeIntegrations = {segment: true},
     hasUserConsents,
-    applicationAttributes = {},
-    identifier
+    applicationAttributes = {}
   }) {
     if (!optimizely) {
       throw new Error(
@@ -46,7 +44,6 @@ export default class OptimizelyAdapter {
     this._userId = userId?.toString()
     this._activeIntegrations = activeIntegrations
     this._applicationAttributes = applicationAttributes
-    this._identifier = identifier
     this.updateConsents({hasUserConsents})
   }
 
@@ -54,8 +51,9 @@ export default class OptimizelyAdapter {
    * @param {object} param
    * @param {string} param.sdkKey
    * @param {object=} param.datafile
-   * @param {object} param.options https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
-   * @param {object} optimizely test purposes only, optimizely sdk
+   * @param {object} param.options datafile options https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+   * @param {object} param.optimizely test purposes only, optimizely sdk
+   * @param {function} param.eventDispatcher https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
    */
   static createOptimizelyInstance({
     options: optionParameter,
