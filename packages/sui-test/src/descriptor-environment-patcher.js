@@ -27,8 +27,8 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     if (shouldReturnDescriber) {
       return function () {
         firstLevelFnName
-          ? globalThis[descriptorName][firstLevelFnName](...arguments)
-          : globalThis[descriptorName](...arguments)
+          ? global[descriptorName][firstLevelFnName](...arguments)
+          : global[descriptorName](...arguments)
       }
     } else if (
       isOnlyClientButRunningAsServer ||
@@ -56,7 +56,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
    * @param {Array} An array of two elements composed for the baseFnName (usually describe, it....) and a first depth level method (usually .only)
    */
   function patchChainedFunction([descriptorName, firstLevelFnName]) {
-    const baseFn = globalThis[descriptorName]
+    const baseFn = global[descriptorName]
     const environmentsKeys = Object.keys(environments)
 
     environmentsKeys.forEach(key => {
@@ -78,7 +78,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
     environmentsKeys.forEach(key => {
       const env = environments[key]
-      globalThis[descriptorName][`${env}`] = buildFunctionForEnv({
+      global[descriptorName][`${env}`] = buildFunctionForEnv({
         descriptorName,
         env
       })
@@ -100,5 +100,3 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
   // Init of our patcher.
   functionsToPatch.forEach(fnName => patchFunction(fnName))
 }
-
-export default descriptorsByEnvironmentPatcher

@@ -39,6 +39,7 @@ program
   .parse(process.argv)
 
 const [page] = program.args
+const {pageRegExpIdentifier} = program.opts()
 
 if (!page) {
   showError('page name must be defined')
@@ -57,7 +58,6 @@ const PAGE_ENTRY_JS_POINT_FILE = `${PAGE_PATH}index.js`
 const PAGE_PACKAGE_JSON_FILE = `${PAGE_PATH}package.json`
 const PAGE_ENTRY_SCSS_POINT_FILE = `${PAGE_PATH}index.scss`
 const PAGE_BASE_PROJECT_JSON_FILE = path.join(process.cwd(), 'package.json')
-const {pageRegExpIdentifier} = program
 const packageInfo = require(PAGE_BASE_PROJECT_JSON_FILE)
 packageInfo.scripts[`start:${page}`] = `sui-widget-embedder dev -p ${page}`
 

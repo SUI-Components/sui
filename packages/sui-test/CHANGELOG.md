@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.9.0 (2022-04-07)
+
+
+### Features
+
+* **packages/sui-test:** update commander dependency ([1667366](https://github.com/SUI-Components/sui/commit/166736675be1158b2d2857ce28a432fafe205bdb))
+
+
+
 # 8.7.0 (2022-03-30)
 
 

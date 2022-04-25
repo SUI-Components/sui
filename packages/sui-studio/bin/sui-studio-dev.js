@@ -8,7 +8,7 @@ const webpack = require('webpack')
 const config = require('@s-ui/bundler/webpack.config.dev')
 const startDevServer = require('@s-ui/bundler/bin/sui-bundler-dev')
 
-const {componentsFullPath} = require('./helpers/walker')
+const {componentsFullPath} = require('./helpers/walker.js')
 
 const {PWD} = process.env
 
@@ -32,7 +32,9 @@ program
   })
   .parse(process.argv)
 
-const entryPointsComponents = program.linkAll ? componentsFullPath(PWD) : []
+const {linkAll, linkPackage} = program.opts()
+
+const entryPointsComponents = linkAll ? componentsFullPath(PWD) : []
 
 const [componentID] = program.args
 const [category, component] = componentID.split('/')
@@ -69,5 +71,5 @@ const studioDevConfig = {
 
 startDevServer({
   config: studioDevConfig,
-  packagesToLink: [...entryPointsComponents, ...program.linkPackage]
+  packagesToLink: [...entryPointsComponents, ...linkPackage]
 })

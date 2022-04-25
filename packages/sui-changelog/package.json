@@ -1,8 +1,9 @@
 {
   "name": "@s-ui/changelog",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "description": "CLI to retrieve a changelog from a set of dependencies",
   "main": "./bin/index.js",
+  "type": "module",
   "bin": {
     "sui-changelog": "./bin/index.js"
   },
@@ -22,11 +23,11 @@
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-changelog#readme",
   "dependencies": {
     "@s-ui/helpers": "1",
-    "commander": "6.2.1",
-    "edit-json-file": "1.4.1",
+    "commander": "8.3.0",
+    "edit-json-file": "1.7.0",
     "git-url-parse": "11.4.4",
-    "json2md": "1.8.0",
-    "node-fetch": "2.6.1",
+    "json2md": "1.12.0",
+    "node-fetch": "3.2.3",
     "rimraf": "3.0.2",
     "what-the-diff": "0.6.0"
   }

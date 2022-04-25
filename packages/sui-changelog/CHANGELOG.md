@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.13.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-changelog:** Migrate to ESM and upgrade commander ([85bde94](https://github.com/SUI-Components/sui/commit/85bde94132e96bf670beaeec508ca6f40da582d8))
+
+
+
 # 1.12.0 (2022-01-27)
 
 

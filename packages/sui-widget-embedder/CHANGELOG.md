@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 5.8.0 (2022-03-30)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix file import ([13b3432](https://github.com/SUI-Components/sui/commit/13b3432fa37b00e4455db561985a53eef2295325))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** update commander to v8.3.0 ([edb1f4b](https://github.com/SUI-Components/sui/commit/edb1f4b39d34868260d4ce7b4a5c70ab24b365b1))
+
+
+
 # 5.7.0 (2022-03-01)
 
 

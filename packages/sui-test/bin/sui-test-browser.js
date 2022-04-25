@@ -43,7 +43,7 @@ const {
   srcPattern,
   timeout,
   watch
-} = program
+} = program.opts()
 
 runner({
   ci,
