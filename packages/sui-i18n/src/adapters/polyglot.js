@@ -1,6 +1,5 @@
 import {warn} from '../console.js'
 
-// #### Pluralization methods
 // The string that separates the different phrase possibilities
 const DELIMETER = '||||'
 const DEFAULT_LANGUAGE = 'es'
