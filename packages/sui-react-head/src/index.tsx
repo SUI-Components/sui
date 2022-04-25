@@ -8,6 +8,7 @@ import { extractTitleFrom, extractTagsFrom, renderTags } from './utils'
 
 interface HeadProps {
   bodyAttributes?: object
+  children: React.ReactNode
   htmlAttributes?: object
   title?: string
   meta?: Array<{

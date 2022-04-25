@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "description": "Monorepo for SUI (Simple User Interface) packages.",
+  "engines": {
+    "node": "18"
+  },
   "keywords": [
     "adevinta",
     "monorepo",
