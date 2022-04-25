@@ -3,8 +3,8 @@
 
 import {expect} from 'chai'
 
-import Rosetta from '../src/index.js'
-import Polyglot from '../src/adapters/polyglot.js'
+import Rosetta from '../../src/index.js'
+import Polyglot from '../../src/adapters/polyglot.js'
 
 // Borrowed from https://github.com/airbnb/polyglot.js/blob/master/test/main.coffee
 

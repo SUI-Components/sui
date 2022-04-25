@@ -1,8 +1,10 @@
 import {slugify} from '@s-ui/js/lib/string/slugify.js'
-import DefaultAdapter from './adapters/default.js'
+import PolyglotAdapter from './adapters/polyglot.js'
+
+const adapter = new PolyglotAdapter()
 
 export default class Rosetta {
-  constructor({adapter = new DefaultAdapter()} = {}) {
+  constructor() {
     this._culture = null
     this._currency = null
     this._languages = null

@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-polyglot": "0.4.3",
     "@s-ui/js": "2"
   }
 }
