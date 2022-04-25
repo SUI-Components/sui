@@ -2,7 +2,8 @@ import {warn} from '../console.js'
 
 // #### Pluralization methods
 // The string that separates the different phrase possibilities
-const delimeter = '||||'
+const DELIMETER = '||||'
+const DEFAULT_LANGUAGE = 'es'
 
 // Mapping from pluralization group plural logic
 const pluralTypes = {
@@ -16,38 +17,38 @@ const pluralTypeToLanguages = {
   french: ['fr', 'tl', 'pt-br']
 }
 
-function langToTypeMap(mapping) {
-  let type
-  let langs
-  let l
-  const ret = {}
-  for (type in mapping) {
-    if (mapping.hasOwnProperty(type)) {
-      langs = mapping[type]
-      for (l in langs) {
-        ret[langs[l]] = type
-      }
-    }
-  }
-  return ret
-}
-
-function pluralTypeName(locale) {
-  const langToPluralType = langToTypeMap(pluralTypeToLanguages)
-  return langToPluralType[locale] || langToPluralType.en
-}
-
 export default class PolyglotAdapter {
   constructor(options = {}) {
     this.phrases = {}
     this.extend(options.phrases || {})
-    this.currentLocale = options.locale || 'en'
+    this.currentLocale = options.locale || DEFAULT_LANGUAGE
     this.allowMissing = !!options.allowMissing
     this.warn = options.warn || warn
   }
 
+  #langToTypeMap(mapping) {
+    let type
+    let langs
+    let l
+    const ret = {}
+    for (type in mapping) {
+      if (mapping.hasOwnProperty(type)) {
+        langs = mapping[type]
+        for (l in langs) {
+          ret[langs[l]] = type
+        }
+      }
+    }
+    return ret
+  }
+
+  #pluralTypeName(locale) {
+    const langToPluralType = this.#langToTypeMap(pluralTypeToLanguages)
+    return langToPluralType[locale] || langToPluralType[DEFAULT_LANGUAGE]
+  }
+
   #pluralTypeIndex(locale, count) {
-    return pluralTypes[pluralTypeName(locale)](count)
+    return pluralTypes[this.#pluralTypeName(locale)](count)
   }
 
   // ### interpolate
@@ -75,7 +76,7 @@ export default class PolyglotAdapter {
   #choosePluralForm(text, locale, count) {
     let ret, texts, chosenText
     if (count != null && text) {
-      texts = text.split(delimeter)
+      texts = text.split(DELIMETER)
       chosenText = texts[this.#pluralTypeIndex(locale, count)] || texts[0]
       ret = chosenText.trim()
     } else {
