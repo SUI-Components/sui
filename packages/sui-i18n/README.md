@@ -13,7 +13,7 @@ I18N is not a ReactJS problem, thus, one should not add another component solely
 i18n.t(`This is a literal to be translated`)
 ```
 
-The output of this call will depend both on the adapter and on the dictionary that you had previously loaded on the library. So you will internationalize your components without worrying which I18N library your client is using.
+The output of this call will depend both on the dictionary that you had previously loaded on the library. So you will internationalize your components without worrying which I18N library your client is using.
 
 
 ## Installation
@@ -27,9 +27,9 @@ $ npm install @s-ui/i18n
 
 ## Usage
 
-@s-ui/i18n would also work perfectly with AngularJS or Backbone. All you need to do is set your I18N library adapter to @s-ui/i18n and then load the literals dictionary. Currently there is only one adapter for Airbnb’s I18N library, [Polyglot] (https://github.com/airbnb/polyglot.js). It’d be great to see new pull requests with new adapters. You may think about it as a sort of [consolidate](https://github.com/tj/consolidate.js/) for I18N libraries.
+@s-ui/i18n would also work perfectly with AngularJS or Backbone. All you need to do is set your I18N library and load the literals dictionary.
 
-#### Loading the library and the adapter
+#### Loading the library and the translations
 
 ```javascript
 import I18n from '@s-ui/i18n';
@@ -61,8 +61,6 @@ i18n.n(1000000) //=> 1.000.000
 i18n.f('phone', '123123123') //=> '123 123 123'
 
 ```
-
-From now on, the library will use Polyglot to translate your literals anywhere in your app.
 
 ### Changing the dictionary
 
@@ -281,12 +279,3 @@ React.render(
     document.getElementById('app')
 );
 ```
-
-### Creating your own adapters
-
-An adapter is just a Javascript object with two obligatory attributes:
-
-* **translations** will be in charge of managing the necessary logic to load a new dictionary on your I18N library.
-* **translate** is a function that gets, as a first parameter, a string with the key/literal; and, as a second parameter, an object with the values of the variables that you may need to insert.
-
-Check out Polyglot’s [sample adapter](https://github.com/SUI-Components/sui/blob/master/packages/sui-i18n/src/adapters/default.js).
