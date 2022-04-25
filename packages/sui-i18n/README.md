@@ -33,9 +33,9 @@ $ npm install @s-ui/i18n
 
 ```javascript
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
+
 i18n.languages = {
     'es-ES': {
         'HELLO_WORLD': '¡Hola mundo!',
@@ -70,9 +70,8 @@ Changing a dictionary is triggered whenever we change the application culture.
 
 ```javascript
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
 i18n.languages = {
     'es-ES': {
         'HELLO_WORLD': '¡Hola mundo!',
@@ -106,9 +105,8 @@ i18n.n(1000000) //=> 1,000,000
 You can use the method `addTranslations` to add new literals or modify existing ones given a key.
 ```javascript
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
 i18n.languages = {
     'es-ES': {
         'HELLO_WORLD': '¡Hola mundo!',
@@ -147,9 +145,8 @@ i18n.t('DYNAMIC_GREETINGS.HELLO_SUI') //=> ¡Hola desde sui!
 You can use the method `getAllTranslations` to get all the translations from a given key.
 ```javascript
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
 i18n.languages = {
     'es-ES': {
         'HELLO_WORLD': '¡Hola mundo!',
@@ -201,9 +198,8 @@ We can format price numbers by setting a currency in our app. Number will be for
 
 ```javascript
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
 
 i18n.culture = 'es-ES';
 i18n.currency = 'EUR';
@@ -222,9 +218,8 @@ Get the currency symbol.
 
 ```javascript
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
 
 i18n.culture = 'es-ES';
 i18n.currency = 'EUR';
@@ -248,7 +243,7 @@ i18n.f('phone', '123123123', {separator: '-'}) //=> '123-123-123'
 
 ### URLs
 
-`i18n.url` provides some funcionality for creating urls
+`i18n.url` provides some functionality for creating urls
 
 ```js
 i18n.languages = {
@@ -276,11 +271,10 @@ i18n.url('/HOME/REDIRECT_TRUE', false) //=> 'www.example.com/home/redirecttrue'
 // index.js
 
 import I18n from '@s-ui/i18n';
-import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 import withContext from '@s-ui/hoc/lib/withContext'
 import App from '../app';
 
-const i18n = new I18n({adapter: new Polyglot()});
+const i18n = new I18n();
 const AppWithContext = withContext({i18n})(App)
 React.render(
     <AppWithContext />,

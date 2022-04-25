@@ -32,47 +32,9 @@ function langToTypeMap(mapping) {
   return ret
 }
 
-// Based on a phrase text that contains `n` plural forms separated
-// by `delimeter`, a `locale`, and a `count`, choose the correct
-// plural form, or none if `count` is `null`.
-function choosePluralForm(text, locale, count) {
-  let ret, texts, chosenText
-  if (count != null && text) {
-    texts = text.split(delimeter)
-    chosenText = texts[pluralTypeIndex(locale, count)] || texts[0]
-    ret = chosenText.trim()
-  } else {
-    ret = text
-  }
-  return ret
-}
-
 function pluralTypeName(locale) {
   const langToPluralType = langToTypeMap(pluralTypeToLanguages)
   return langToPluralType[locale] || langToPluralType.en
-}
-
-function pluralTypeIndex(locale, count) {
-  return pluralTypes[pluralTypeName(locale)](count)
-}
-
-// ### interpolate
-//
-// Does the dirty work. Creates a `RegExp` object for each
-// interpolation placeholder.
-function interpolate(phrase, options) {
-  for (const arg in options) {
-    if (arg !== '_' && options.hasOwnProperty(arg)) {
-      // We create a new `RegExp` each time instead of using a more-efficient
-      // string replace so that the same argument can be replaced multiple times
-      // in the same phrase.
-      phrase = phrase.replace(
-        new RegExp('%\\{' + arg + '\\}', 'g'),
-        options[arg]
-      )
-    }
-  }
-  return phrase
 }
 
 export default class PolyglotAdapter {
@@ -82,6 +44,44 @@ export default class PolyglotAdapter {
     this.currentLocale = options.locale || 'en'
     this.allowMissing = !!options.allowMissing
     this.warn = options.warn || warn
+  }
+
+  #pluralTypeIndex(locale, count) {
+    return pluralTypes[pluralTypeName(locale)](count)
+  }
+
+  // ### interpolate
+  //
+  // Does the dirty work. Creates a `RegExp` object for each
+  // interpolation placeholder.
+  #interpolate(phrase, options) {
+    for (const arg in options) {
+      if (arg !== '_' && options.hasOwnProperty(arg)) {
+        // We create a new `RegExp` each time instead of using a more-efficient
+        // string replace so that the same argument can be replaced multiple times
+        // in the same phrase.
+        phrase = phrase.replace(
+          new RegExp('%\\{' + arg + '\\}', 'g'),
+          options[arg]
+        )
+      }
+    }
+    return phrase
+  }
+
+  // Based on a phrase text that contains `n` plural forms separated
+  // by `delimeter`, a `locale`, and a `count`, choose the correct
+  // plural form, or none if `count` is `null`.
+  #choosePluralForm(text, locale, count) {
+    let ret, texts, chosenText
+    if (count != null && text) {
+      texts = text.split(delimeter)
+      chosenText = texts[this.#pluralTypeIndex(locale, count)] || texts[0]
+      ret = chosenText.trim()
+    } else {
+      ret = text
+    }
+    return ret
   }
 
   // ### polyglot.locale([locale])
@@ -250,8 +250,12 @@ export default class PolyglotAdapter {
     }
     if (typeof phrase === 'string') {
       options = {...options}
-      result = choosePluralForm(phrase, this.currentLocale, options.smart_count)
-      result = interpolate(result, options)
+      result = this.#choosePluralForm(
+        phrase,
+        this.currentLocale,
+        options.smart_count
+      )
+      result = this.#interpolate(result, options)
     }
     return result
   }
