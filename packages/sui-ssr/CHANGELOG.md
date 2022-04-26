@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.3.0 (2022-04-26)
+
+
+### Features
+
+* **packages/sui-ssr:** fix typo on listen app ([5d5c51f](https://github.com/SUI-Components/sui/commit/5d5c51f41470c55d2f904f0dc305f048d0ccc48f))
+
+
+
 # 8.2.0 (2022-04-11)
 
 
