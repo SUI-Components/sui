@@ -1,11 +1,20 @@
 # CHANGELOG
 
+# 9.18.0 (2022-04-27)
+
+
+
 # 9.17.0 (2022-04-26)
 
 
 ### Bug Fixes
 
 * **packages/sui-bundler:** fix linkloader to link packages correctly using quotation marks ([cef2663](https://github.com/SUI-Components/sui/commit/cef2663d4751fa09412221fdb514e03f055e3e42))
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([2be1298](https://github.com/SUI-Components/sui/commit/2be1298794076a06af1e2fc2e1d0fa681da15324))
 
 
 
