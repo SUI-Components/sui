@@ -52,31 +52,31 @@ class MultipleOptimizelyAdapter {
   }
 
   getEnabledFeatures({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].getEnabledFeatures({...props})
+    return this.#adapters[adapterId].getEnabledFeatures(props)
   }
 
   getOptimizelyConfig({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].getOptimizelyConfig({...props})
+    return this.#adapters[adapterId].getOptimizelyConfig(props)
   }
 
   activateExperiment({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].activateExperiment({...props})
+    return this.#adapters[adapterId].activateExperiment(props)
   }
 
   getVariation({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].getVariation({...props})
+    return this.#adapters[adapterId].getVariation(props)
   }
 
   isFeatureEnabled({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].isFeatureEnabled({...props})
+    return this.#adapters[adapterId].isFeatureEnabled(props)
   }
 
   getAllFeatureVariables({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].getAllFeatureVariables({...props})
+    return this.#adapters[adapterId].getAllFeatureVariables(props)
   }
 
   updateConsents({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].updateConsents({...props})
+    return this.#adapters[adapterId].updateConsents(props)
   }
 }
 
