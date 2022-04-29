@@ -39,6 +39,7 @@ export default function useExperiment({
       if (forcedVariation) {
         return forcedVariation
       }
+
       variationName = strategy.getVariation({
         pde,
         experimentName,

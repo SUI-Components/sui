@@ -3,7 +3,7 @@ import OptimizelyAdapter from './index.js'
 let defaultAdapterId
 
 class MultipleOptimizelyAdapter {
-  static createMultipleOptimizelyInstances(...optionsByInstance) {
+  static createMultipleOptimizelyInstances(optionsByInstance) {
     return Object.keys(optionsByInstance).reduce((acc, adapterId) => {
       let {datafile, sdkKey, ...restOptions} = optionsByInstance[adapterId]
 
@@ -31,7 +31,13 @@ class MultipleOptimizelyAdapter {
   constructor(optimizelyAdapters) {
     defaultAdapterId = Object.keys(optimizelyAdapters)[0] // first adapter will be the defaultAdapter
 
-    this.#adapters = optimizelyAdapters
+    this.#adapters = Object.keys(optimizelyAdapters).reduce(
+      (acc, adapterId) => {
+        acc[adapterId] = new OptimizelyAdapter(optimizelyAdapters[adapterId])
+        return acc
+      },
+      {}
+    )
   }
 
   getInitialData() {
@@ -75,8 +81,11 @@ class MultipleOptimizelyAdapter {
     return this.#adapters[adapterId].getAllFeatureVariables(props)
   }
 
-  updateConsents({adapterId = defaultAdapterId, ...props}) {
-    return this.#adapters[adapterId].updateConsents(props)
+  updateConsents(props) {
+    Object.keys(this.#adapters).forEach(adapterId => {
+      const adapter = this.#adapters[adapterId]
+      adapter.updateConsents(props)
+    })
   }
 }
 
