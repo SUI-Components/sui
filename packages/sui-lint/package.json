@@ -19,7 +19,7 @@
     "@babel/eslint-parser": "7.17.0",
     "@babel/eslint-plugin": "7.17.7",
     "@s-ui/helpers": "1",
-    "@typescript-eslint/eslint-plugin": "5.20.0",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
     "commander": "8.3.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard-react": "11.0.1",
@@ -32,7 +32,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "6.0.0",
-    "eslint-plugin-react-hooks": "4.4.0",
+    "eslint-plugin-react-hooks": "4.5.0",
     "eslint-plugin-react": "7.29.4",
     "eslint": "8.14.0",
     "postcss-scss": "4.0.4",
@@ -40,6 +40,6 @@
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-recommended-scss": "6.0.0",
     "stylelint-prettier": "2.0.0",
-    "stylelint": "14.7.1"
+    "stylelint": "14.8.1"
   }
 }
