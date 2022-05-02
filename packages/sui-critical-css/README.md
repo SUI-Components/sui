@@ -15,7 +15,7 @@ Install package to your project:
 npm install @s-ui/critical-css -D
 ```
 
-## Programatical usage:
+## Programmatic usage:
 
 In order to extract critical css and match extracted files with your page or route you can use two approaches:
 
