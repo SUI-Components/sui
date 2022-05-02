@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.16.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Disable weird rule for sass ([7360f92](https://github.com/SUI-Components/sui/commit/7360f92dbfc9dbfa1fb81e75c5450d6e939207fe))
+* **packages/sui-lint:** Force new release ([4124679](https://github.com/SUI-Components/sui/commit/41246799c676cfdb0099696e7f4d78db9190ac96))
+
+
+
 # 4.15.0 (2022-05-02)
 
 
