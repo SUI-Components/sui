@@ -20,15 +20,18 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     const shouldReturnDescriber =
       (isNode && env === environments.SERVER) ||
       (!isNode && env === environments.CLIENT)
+
     const isOnlyServerButRunningAsClient =
       !isNode && env === environments.SERVER && firstLevelFnName
+
     const isOnlyClientButRunningAsServer =
       isNode && env === environments.CLIENT && firstLevelFnName
+
     if (shouldReturnDescriber) {
       return function () {
         firstLevelFnName
-          ? global[descriptorName][firstLevelFnName](...arguments)
-          : global[descriptorName](...arguments)
+          ? globalThis[descriptorName][firstLevelFnName](...arguments)
+          : globalThis[descriptorName](...arguments)
       }
     } else if (
       isOnlyClientButRunningAsServer ||
@@ -56,7 +59,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
    * @param {Array} An array of two elements composed for the baseFnName (usually describe, it....) and a first depth level method (usually .only)
    */
   function patchChainedFunction([descriptorName, firstLevelFnName]) {
-    const baseFn = global[descriptorName]
+    const baseFn = globalThis[descriptorName]
     const environmentsKeys = Object.keys(environments)
 
     environmentsKeys.forEach(key => {
@@ -78,7 +81,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
 
     environmentsKeys.forEach(key => {
       const env = environments[key]
-      global[descriptorName][`${env}`] = buildFunctionForEnv({
+      globalThis[descriptorName][`${env}`] = buildFunctionForEnv({
         descriptorName,
         env
       })
