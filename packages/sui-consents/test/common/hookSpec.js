@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types, react/react-in-jsx-scope */
 import SUIContext from '@s-ui/react-context'
-import descriptorsByEnvironmentPatcher from '@s-ui/test/lib/descriptor-environment-patcher.js'
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher.js'
 import {expect} from 'chai'
 import {render} from '@testing-library/react'
 import {renderToString} from 'react-dom/server'
-import {TCF_WINDOW_API} from '../../lib/config'
-import {useUserConsents} from '../../lib/index'
-import {tcfApiMock, triggerTcfEvent} from './mocks'
+import {TCF_WINDOW_API} from '../../lib/config.js'
+import {useUserConsents} from '../../lib/index.js'
+import {tcfApiMock, triggerTcfEvent} from './mocks.js'
 
 descriptorsByEnvironmentPatcher()
 
