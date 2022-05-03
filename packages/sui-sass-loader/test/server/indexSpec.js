@@ -58,6 +58,10 @@ describe('test sass-loader', function () {
 
   const runtimeDir = path.join(__dirname, 'runtime')
 
+  after(done => {
+    rmdir(runtimeDir, done)
+  })
+
   before(done => {
     rmdir(runtimeDir, done)
   })
