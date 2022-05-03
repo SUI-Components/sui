@@ -1,4 +1,4 @@
-import descriptorsByEnvironmentPatcher from '@s-ui/test/lib/descriptor-environment-patcher.js'
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher.js'
 import React from 'react'
 import {expect} from 'chai'
 import {
@@ -6,7 +6,8 @@ import {
   waitForDomChange
 } from '@testing-library/react'
 
-import Head, {HeadProvider} from '../../lib/index'
+import Head, {HeadProvider} from '../../lib/index.js'
+
 descriptorsByEnvironmentPatcher()
 
 const getMetaByName = name =>
