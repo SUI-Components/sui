@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.17.0 (2022-05-03)
+
+
+### Features
+
+* **packages/sui-lint:** Disable correctly feature of stylelint ([d0011f3](https://github.com/SUI-Components/sui/commit/d0011f36877a23dc2e69973777db95fe69bd36b6))
+
+
+
 # 4.16.0 (2022-05-02)
 
 
