@@ -1,5 +1,51 @@
 # CHANGELOG
 
+# 4.17.0 (2022-05-03)
+
+
+### Features
+
+* **packages/sui-lint:** Disable correctly feature of stylelint ([d0011f3](https://github.com/SUI-Components/sui/commit/d0011f36877a23dc2e69973777db95fe69bd36b6))
+
+
+
+# 4.16.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Disable weird rule for sass ([7360f92](https://github.com/SUI-Components/sui/commit/7360f92dbfc9dbfa1fb81e75c5450d6e939207fe))
+* **packages/sui-lint:** Force new release ([4124679](https://github.com/SUI-Components/sui/commit/41246799c676cfdb0099696e7f4d78db9190ac96))
+
+
+
+# 4.15.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([0e6a336](https://github.com/SUI-Components/sui/commit/0e6a336e6abefbbc2b1ca4e4d25bf05fe9aca0d2))
+
+
+
+# 4.14.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([817ed63](https://github.com/SUI-Components/sui/commit/817ed63a8c75d64e9ea5ab1cf7b3e8e112f04468))
+
+
+
+# 4.13.0 (2022-04-27)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([18f0f4a](https://github.com/SUI-Components/sui/commit/18f0f4a1924935ea37d951f019381e2786bb2a8a))
+
+
+
 # 4.12.0 (2022-04-04)
 
 

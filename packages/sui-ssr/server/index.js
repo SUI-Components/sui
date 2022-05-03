@@ -105,6 +105,6 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
   app.listen(PORT, () =>
-    console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)
+    console.log(`Server up & running 🌍 http://localhost:${PORT}`)
   ) // eslint-disable-line
 })()
