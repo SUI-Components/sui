@@ -44,7 +44,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     } else {
       return title =>
         console.warn(
-          `skiping on the ${
+          `skipping on the ${
             isNode ? environments.SERVER : environments.CLIENT
           } '${descriptorName}('${title}')\n`
         )
