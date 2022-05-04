@@ -310,11 +310,25 @@ Options:
     $ sui-studio test --help
 ```
 
-You could execute some specific tests with the `sui-studio-test` command using ENV variables.
+You could execute some specific tests with the `sui-studio-test` command using `PATTERN` ENV variables.
+
+`PATTERN` should be a glob pattern and:
+
+- It will be checked against the test file component path, for example `'./ad/card/test/index.test.js'`.
+
+- It match any part of the test component path.
+
+- It uses a micromatch as a library for pattern matching (same as fast-glob).
+
+Some examples:
+
+- For speciffic component: `PATTERN='./ad/card/test/index.test.js' sui-studio test` or `PATTERN='ad/card/test' sui-studio test`
+
+- For categories: `PATTERN='{ad,shipping}/*/test' sui-studio test`
+
+Also, there is a way to only execute component categories but this is **deprecated**:
 
 - If you want to execute the tests **for some specific categories** only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
-
-- If you want to execute **an specific component** only use `COMPONENT` environment variable. It takes a component path (e.g. `COMPONENT="card/ad" sui-studio test`)
 
 ## File structure
 
