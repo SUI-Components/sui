@@ -1,4 +1,4 @@
-/* global __BASE_DIR__, CATEGORIES, COMPONENT */
+/* global __BASE_DIR__, CATEGORIES, PATTERN */
 
 /**
  * This file is being executed in browser opened to run tests
@@ -6,33 +6,26 @@
 import {importContexts, importReactComponent} from '../components/tryRequire.js'
 import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
 import {addReactContextToComponent} from '../components/utils.js'
-
+import micromatch from 'micromatch'
 addSetupEnvironment(window)
 
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
-const componentPath = COMPONENT
-const pattern = CATEGORIES
-const categories = pattern ? pattern.split(',') : null
+const defaultPattern = '**/*.test.{js,jsx}'
+const globPattern = PATTERN || defaultPattern
+const categories = CATEGORIES ? CATEGORIES.split(',') : null
 
-const filterCategories = key => {
+const filterAll = key => {
   const [, category] = key.split('/')
-  return !categories || categories.includes(category)
-}
 
-const filterComponent = key => {
-  const [, category, component] = key.split('/')
-  return !componentPath || componentPath === `${category}/${component}`
+  return categories
+    ? categories.includes(category)
+    : micromatch.isMatch(key, globPattern, {contains: true})
 }
 
 // Require all the files from a context
-const importAll = request =>
-  request
-    .keys()
-    .filter(filterCategories)
-    .filter(filterComponent)
-    .forEach(request)
+const importAll = request => request.keys().filter(filterAll).forEach(request)
 
 // Avoid running Karma until all components tests are loaded
 const originalKarmaLoader = window.__karma__.loaded
@@ -44,10 +37,7 @@ const testsFiles = require.context(
   /\.\/(\w+)\/(\w+)\/test\/(\w+).test.(js|jsx)/
 )
 
-const selectedTestFiles = testsFiles
-  .keys()
-  .filter(filterCategories)
-  .filter(filterComponent)
+const selectedTestFiles = testsFiles.keys().filter(filterAll)
 
 Promise.all(
   selectedTestFiles.map(async key => {
