@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.19.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade dependencies ([05fe49d](https://github.com/SUI-Components/sui/commit/05fe49dd392d59d950e02fe928f35101461d7cd6))
+
+
+
 # 1.18.0 (2022-04-13)
 
 
