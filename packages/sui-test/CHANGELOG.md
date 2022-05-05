@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.12.0 (2022-05-05)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** use pattern env instead component ([f60bbcd](https://github.com/SUI-Components/sui/commit/f60bbcdd98ac3c2bf72e39ba88706c748f659ace))
+
+
+
 # 8.11.0 (2022-05-02)
 
 
@@ -10,6 +19,11 @@
 
 
 # 8.10.0 (2022-04-27)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** enable component env variable ([b21758b](https://github.com/SUI-Components/sui/commit/b21758b2c06eaf97646490938c2ae0e646fe2047))
 
 
 ### Features
