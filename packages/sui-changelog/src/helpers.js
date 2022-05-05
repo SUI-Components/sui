@@ -1,18 +1,21 @@
 /* eslint no-console:0 */
-const fetch = require('node-fetch')
-const editJsonFile = require('edit-json-file')
-const gitUrlParse = require('git-url-parse')
+import fetch from 'node-fetch'
+import editJsonFile from 'edit-json-file'
+import gitUrlParse from 'git-url-parse'
+import config from './config.js'
+
 const warn = console.warn
+
 const {
-  MAX_GITHUB_API_RESULTS,
-  PUBLIC_GITHUB_HOST,
-  PUBLIC_GITHUB_API_URL_PATTERN,
-  PRIVATE_GITHUB_API_URL_PATTERN,
+  BAD_CREDENTIALS,
   INVALID_GITHUB_REPOSITORY_MESSAGE,
   LIMIT_EXCEEDED_GITHUB_REPOSITORY_MESSAGE,
-  BAD_CREDENTIALS,
-  monoRepoRegExp
-} = require('./config')
+  MAX_GITHUB_API_RESULTS,
+  monoRepoRegExp,
+  PRIVATE_GITHUB_API_URL_PATTERN,
+  PUBLIC_GITHUB_API_URL_PATTERN,
+  PUBLIC_GITHUB_HOST
+} = config
 
 const buildPublicGithubApiUrl = gitUrl => {
   const {organization, name} = gitUrlParse(gitUrl)
@@ -91,7 +94,7 @@ const hasApiError = ({message} = {}) =>
       ].find(errorMessage => message.includes(errorMessage))
   )
 
-module.exports = {
+export default {
   getRepositoryUrl,
   getModifiedRepository,
   isMonoRepo,

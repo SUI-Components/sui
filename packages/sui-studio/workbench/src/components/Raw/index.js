@@ -49,9 +49,8 @@ export default function Raw({
             scope={{
               context,
               React,
-              [cleanDisplayName(
-                ComponentToRender.displayName
-              )]: ComponentToRender,
+              [cleanDisplayName(ComponentToRender.displayName)]:
+                ComponentToRender,
               ...nonDefault
             }}
             code={playground}

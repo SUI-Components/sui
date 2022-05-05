@@ -3,7 +3,7 @@
 const program = require('commander')
 const ncp = require('copy-paste')
 
-const appFactory = require('../development')
+const appFactory = require('../development/index.js')
 const config =
   require(`${process.cwd()}/package.json`).config['sui-widget-embedder'] || {}
 
@@ -33,7 +33,7 @@ program
   })
   .parse(process.argv)
 
-const {address, page} = program
+const {address, page} = program.opts()
 
 appFactory({address, page, config}).listen(PORT, () => {
   const scriptToExecute = `(function(s,o,g,r,a,m){a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(document,'script','http://${address}:${PORT}/bundle.js');`

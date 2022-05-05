@@ -191,9 +191,8 @@ export default class Demo extends Component {
               scope={{
                 context,
                 React,
-                [cleanDisplayName(
-                  ComponentToRender.displayName
-                )]: ComponentToRender,
+                [cleanDisplayName(ComponentToRender.displayName)]:
+                  ComponentToRender,
                 domain,
                 ...nonDefaultExports
               }}

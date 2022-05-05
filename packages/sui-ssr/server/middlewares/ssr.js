@@ -179,9 +179,8 @@ export default async (req, res, next) => {
     }
 
     if (redirectTo) {
-      const isValidRedirectStatusCode = redirectStatusCodes.includes(
-        redirectStatusCode
-      )
+      const isValidRedirectStatusCode =
+        redirectStatusCodes.includes(redirectStatusCode)
       const validRedirectStatusCode = isValidRedirectStatusCode
         ? redirectStatusCode
         : DEFAULT_REDIRECT_STATUS_CODE
@@ -198,9 +197,8 @@ export default async (req, res, next) => {
 
   // The first html content has the be set after any possible call to next().
   // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
-  const {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(
-    headTags
-  )
+  const {bodyAttributes, headString, htmlAttributes} =
+    renderHeadTagsToString(headTags)
 
   res.set({
     'Server-Timing': formatServerTimingHeader({

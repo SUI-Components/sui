@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 3.14.0 (2022-05-03)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** Add missing return to map function ([4323090](https://github.com/SUI-Components/sui/commit/4323090f017c500b8bb8de93653d83c783dc6d9a))
+
+
+
+# 3.13.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version ([82b639f](https://github.com/SUI-Components/sui/commit/82b639f87aed45d2a16841dea6de178ffd654db1))
+
+
+
 # 3.12.0 (2022-03-08)
 
 

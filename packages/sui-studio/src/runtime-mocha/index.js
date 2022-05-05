@@ -1,23 +1,27 @@
-/* global __BASE_DIR__, CATEGORIES */
+/* global __BASE_DIR__, CATEGORIES, PATTERN */
 
 /**
  * This file is being executed in browser opened to run tests
  */
+import micromatch from 'micromatch'
 import {importContexts, importReactComponent} from '../components/tryRequire.js'
 import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
 import {addReactContextToComponent} from '../components/utils.js'
-
 addSetupEnvironment(window)
 
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
-const pattern = CATEGORIES
-const categories = pattern ? pattern.split(',') : null
+const defaultPattern = '**/*.test.{js,jsx}'
+const globPattern = PATTERN || defaultPattern
+const categories = CATEGORIES ? CATEGORIES.split(',') : null
 
 const filterAll = key => {
   const [, category] = key.split('/')
-  return !categories || categories.includes(category)
+
+  return categories
+    ? categories.includes(category)
+    : micromatch.isMatch(key, globPattern, {contains: true})
 }
 
 // Require all the files from a context
@@ -30,7 +34,7 @@ window.__karma__.loaded = () => {}
 const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/index.test.(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/(\w+).test.(js|jsx)/
 )
 
 const selectedTestFiles = testsFiles.keys().filter(filterAll)

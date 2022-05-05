@@ -1,10 +1,10 @@
-const packageLockStrategy = require('./packageLock')
-const shrinkwrapStrategy = require('./shrinkwrap')
+import packageLockStrategy from './packageLock.js'
+import shrinkwrapStrategy from './shrinkwrap.js'
 /**
  * @param {boolean} packageLockParam flag that indicates that packageLockStrategy should be used
  * @returns {Object}
  */
 
-module.exports = packageLockParam => {
+export default packageLockParam => {
   return packageLockParam ? packageLockStrategy : shrinkwrapStrategy
 }

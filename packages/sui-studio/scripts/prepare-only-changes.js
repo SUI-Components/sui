@@ -35,7 +35,8 @@ function getComponentsFromDemoImports(componentPath) {
     if (!file) return
 
     const data = fs.readFileSync(file, ENCODING)
-    const importRegExp = /import (?<componentName>.*) from 'components\/(?<componentPath>.*)\/src'/g
+    const importRegExp =
+      /import (?<componentName>.*) from 'components\/(?<componentPath>.*)\/src'/g
     const matchedImports = [...data.matchAll(importRegExp)]
 
     componentsFromDemoImports = matchedImports.map(
@@ -49,7 +50,8 @@ function getComponentsFromDemoImports(componentPath) {
 }
 
 function getComponentsList(commits) {
-  const COMMIT_MESSAGE_PATTERN = /\(components\/(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
+  const COMMIT_MESSAGE_PATTERN =
+    /\(components\/(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
   let list = []
 
   commits.forEach(commit => {
@@ -57,9 +59,8 @@ function getComponentsList(commits) {
     if (!data) return
     const {context, component} = data.groups
     const componentPath = `${context}/${component}`
-    const componentsFromDemoImports = getComponentsFromDemoImports(
-      componentPath
-    )
+    const componentsFromDemoImports =
+      getComponentsFromDemoImports(componentPath)
 
     list = [...list, componentPath, ...componentsFromDemoImports]
   })

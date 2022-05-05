@@ -294,7 +294,41 @@ Add this scripts on your own components project
 }
 ```
 
-If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
+```sh
+Usage: sui-studio-test [options]
+
+Options:
+  -H, --headless           Run components tests in CLI, headless mode
+  -W, --watch              Watch mode
+  -T, --timeout <timeout>  Timeout
+  --coverage               Create coverage (default: false)
+  -h, --help               display help for command
+  
+  Examples:
+    $ sui-studio test --headless
+    $ sui-studio test --headless --watch
+    $ sui-studio test --help
+```
+
+You could execute some specific tests with the `sui-studio-test` command using `PATTERN` ENV variables.
+
+`PATTERN` should be a glob pattern and:
+
+- It will be checked against the test file component path, for example `'./ad/card/test/index.test.js'`.
+
+- It match any part of the test component path.
+
+- It uses a micromatch as a library for pattern matching (same as fast-glob).
+
+Some examples:
+
+- For speciffic component: `PATTERN='./ad/card/test/index.test.js' sui-studio test` or `PATTERN='ad/card/test' sui-studio test`
+
+- For categories: `PATTERN='{ad,shipping}/*/test' sui-studio test`
+
+Also, there is a way to only execute component categories but this is **deprecated**:
+
+- If you want to execute the tests **for some specific categories** only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
 
 ## File structure
 
