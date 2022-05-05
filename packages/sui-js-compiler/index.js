@@ -17,21 +17,27 @@ const compileFile = async file => {
   const tmp = file.replace('./src', './lib')
   const outputPath = tmp.substr(0, tmp.lastIndexOf('.')) + '.js'
 
-  fs.outputFile(outputPath, code)
+  return fs.outputFile(outputPath, code)
 }
 
-const compileTypes = (fileNames, options) => {
+const compileFiles = files => {
+  return Promise.all(files.map(compileFile))
+}
+
+const compileTypes = (files, options) => {
   const createdFiles = {}
   const host = ts.createCompilerHost(options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
 
-  const program = ts.createProgram(fileNames, options, host)
+  const program = ts.createProgram(files, options, host)
   program.emit()
 
-  Object.keys(createdFiles).forEach(outputPath => {
-    const code = createdFiles[outputPath]
-    fs.outputFile(outputPath, code)
-  })
+  return Promise.all([
+    Object.keys(createdFiles).map(outputPath => {
+      const code = createdFiles[outputPath]
+      return fs.outputFile(outputPath, code)
+    })
+  ])
 }
 
 const commaSeparatedList = value => value.split(',')
@@ -42,6 +48,7 @@ program
     'List of patterns to ignore during the compilation',
     commaSeparatedList
   )
+  .option('--ts', 'Enable TypeScript Compiler')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -52,30 +59,33 @@ program
   })
   .parse(process.argv)
 
-const {ignore = []} = program.opts()
+const {ignore = [], ts: isTypeScriptEnabled = false} = program.opts()
 
 ;(async () => {
   console.time('[sui-js-compiler]')
 
   const files = await fg('./src/**/*.{js,jsx,ts,tsx}', {ignore})
 
-  await Promise.all(files.map(file => compileFile(file)))
-
-  compileTypes(files, {
-    declaration: true,
-    emitDeclarationOnly: true,
-    incremental: true,
-    jsx: 'react-jsx',
-    module: 'es6',
-    esModuleInterop: true,
-    noImplicitAny: false,
-    baseUrl: '.',
-    outDir: './lib',
-    skipLibCheck: true,
-    strict: true,
-    target: 'es5',
-    types: ['react', 'node']
-  })
+  await Promise.all([
+    compileFiles(files),
+    isTypeScriptEnabled
+      ? compileTypes(files, {
+          declaration: true,
+          emitDeclarationOnly: true,
+          incremental: true,
+          jsx: 'react-jsx',
+          module: 'es6',
+          esModuleInterop: true,
+          noImplicitAny: false,
+          baseUrl: '.',
+          outDir: './lib',
+          skipLibCheck: true,
+          strict: true,
+          target: 'es5',
+          types: ['react', 'node']
+        })
+      : Promise.resolve()
+  ])
 
   console.timeEnd('[sui-js-compiler]')
 })()
