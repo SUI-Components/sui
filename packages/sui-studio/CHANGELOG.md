@@ -1,5 +1,22 @@
 # CHANGELOG
 
+# 11.9.0 (2022-05-05)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** recorder import, first i put 3rd party ([765d9bc](https://github.com/SUI-Components/sui/commit/765d9bc36449364fd3a8e600f86702e166c2bb27))
+* **packages/sui-studio:** update studio text program help ([0d87fa4](https://github.com/SUI-Components/sui/commit/0d87fa49cd243a6b335c3bfefc89efba315349d4))
+
+
+### Features
+
+* **packages/sui-studio:** define micromatch dep ([20dbbb4](https://github.com/SUI-Components/sui/commit/20dbbb41d1663ec54d22a23fedbcfbd67b454e7e))
+* **packages/sui-studio:** filter test files by component path ([bbdfd9b](https://github.com/SUI-Components/sui/commit/bbdfd9b07a3cdc62d75ded8d4396faf31ee04a6e))
+* **packages/sui-studio:** use glob pattern matching instead simple categories or components matchin ([f8131a4](https://github.com/SUI-Components/sui/commit/f8131a4ed2ef71e60988ebc485f87138917f6193))
+
+
+
 # 11.8.0 (2022-04-11)
 
 
