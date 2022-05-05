@@ -32,12 +32,12 @@ const compileTypes = (files, options) => {
   const program = ts.createProgram(files, options, host)
   program.emit()
 
-  return Promise.all([
+  return Promise.all(
     Object.keys(createdFiles).map(outputPath => {
       const code = createdFiles[outputPath]
       return fs.outputFile(outputPath, code)
     })
-  ])
+  )
 }
 
 const commaSeparatedList = value => value.split(',')
