@@ -16,8 +16,8 @@ program
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
-    console.log('    $ sui-studio test --ci')
-    console.log('    $ sui-studio test --ci -W')
+    console.log('    $ sui-studio test --headless')
+    console.log('    $ sui-studio test --headless --watch')
     console.log('    $ sui-studio test --help')
     console.log('')
   })
