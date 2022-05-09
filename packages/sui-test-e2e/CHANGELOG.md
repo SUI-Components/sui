@@ -1,5 +1,63 @@
 # CHANGELOG
 
+# 1.9.0 (2022-03-29)
+
+
+### Features
+
+* **packages/sui-test-e2e:** update dependencies ([95ae508](https://github.com/SUI-Components/sui/commit/95ae508add8995e6112a79ceae3d7bb6219bb362))
+
+
+
+# 1.8.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Pin colors version on package.json ([5ad173b](https://github.com/SUI-Components/sui/commit/5ad173b0f2d8af4e6451554a5770b26ebb61248e))
+
+
+
+# 1.7.0 (2021-11-26)
+
+
+
+# 1.6.0 (2021-11-15)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Avoid watching files on CI ([9558de4](https://github.com/SUI-Components/sui/commit/9558de45f2791e2d1a9090a8a8c92a6c2d1e18d4))
+
+
+
+# 1.5.0 (2021-10-25)
+
+
+### Features
+
+* **packages/sui-test-e2e:** expose add-commands from testing-library ([7f31723](https://github.com/SUI-Components/sui/commit/7f31723311174108cb2654e40e1d6f3894162067))
+
+
+
+# 1.4.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Use latest Cypress version ([338c2ca](https://github.com/SUI-Components/sui/commit/338c2ca4163f93616a7c0c79a69c28b3198756c9))
+
+
+
+# 1.3.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Upgrade dependencies ([ed4783b](https://github.com/SUI-Components/sui/commit/ed4783bbab1696ff400f53a5240428304dd71374))
+
+
+
 # 1.2.0 (2021-08-04)
 
 

@@ -1,5 +1,124 @@
 # CHANGELOG
 
+# 5.8.0 (2022-03-30)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix file import ([13b3432](https://github.com/SUI-Components/sui/commit/13b3432fa37b00e4455db561985a53eef2295325))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** update commander to v8.3.0 ([edb1f4b](https://github.com/SUI-Components/sui/commit/edb1f4b39d34868260d4ce7b4a5c70ab24b365b1))
+
+
+
+# 5.7.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** Add missing alias from config ([514017d](https://github.com/SUI-Components/sui/commit/514017d3b7b8334356ff9a08653b9b2422a8b6ac))
+
+
+
+# 5.6.0 (2022-02-23)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Remove vendor from widget embedder page config ([c57420f](https://github.com/SUI-Components/sui/commit/c57420f596d5f001ffc61009c58eb0a936889cff))
+
+
+
+# 5.5.0 (2022-02-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix rm fn to delete public folder ([8443cfd](https://github.com/SUI-Components/sui/commit/8443cfd7aea50563c50588d86c83a7129b4b3fbf))
+
+
+
+# 5.4.0 (2022-02-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** prevent clean option try to remove non existant folder, because i ([a68e30a](https://github.com/SUI-Components/sui/commit/a68e30a6a7143811b722c3fc030a05079e1cac24))
+* **packages/sui-widget-embedder:** use force true instead existsSync ([ee2065d](https://github.com/SUI-Components/sui/commit/ee2065d9aaa75437e8882a8340edac46c18585ea))
+
+
+
+# 5.3.0 (2022-02-09)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** Problems with production widgets ([913a41a](https://github.com/SUI-Components/sui/commit/913a41a3d93a9d06ba759645af88c929ad1fd666))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Force new release ([686a9b6](https://github.com/SUI-Components/sui/commit/686a9b6619084bec1389f1c997da86e60c5ce841))
+* **packages/sui-widget-embedder:** Format correctly content ([6f1fe8f](https://github.com/SUI-Components/sui/commit/6f1fe8ffbd145657f16332b1a48ecb4cba41387c))
+* **packages/sui-widget-embedder:** Remove not needed dependency ([71d8c2c](https://github.com/SUI-Components/sui/commit/71d8c2ce245109dfc5b381aeb3c75d7a645b4563))
+* **packages/sui-widget-embedder:** Remove rimraf dependency ([aee6404](https://github.com/SUI-Components/sui/commit/aee6404553e85dccf995fb62b3d7769ede378b43))
+* **packages/sui-widget-embedder:** Remove some not needed dependencies and simplify code ([6ddd572](https://github.com/SUI-Components/sui/commit/6ddd57228a91f18beb08c11f0027ff381eaa891c))
+
+
+
+# 5.2.0 (2022-02-02)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Upgrade webpack-dev-middleware dependency ([c896f26](https://github.com/SUI-Components/sui/commit/c896f26f2124f31cfdba1634fa3becb5c82671e9))
+
+
+
+# 5.1.0 (2022-01-27)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Use latest bundler and test dependencies ([acf7a54](https://github.com/SUI-Components/sui/commit/acf7a54257b1d86b125e9d06337c027cabd1cb48))
+
+
+
+# 5.0.0 (2022-01-27)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** template ([d24e296](https://github.com/SUI-Components/sui/commit/d24e29619d0831841bdfa619b694b6fae8b97e83))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Release a new major version of widget embedder ([65f0e02](https://github.com/SUI-Components/sui/commit/65f0e0265ff6c23fa053e82ee9a82b73b6c355a1))
+* **packages/sui-widget-embedder:** Remove Service Worker option ([e4d176b](https://github.com/SUI-Components/sui/commit/e4d176b5956a220cd48d5669da141d77999657e8))
+
+
+
+# 4.4.0 (2022-01-10)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** update webpack-dev-middleware and use bundler beta. Publish also ([161bc78](https://github.com/SUI-Components/sui/commit/161bc78fe84528682a5ca4accdac0b269c9bdde1))
+* **packages/sui-widget-embedder:** webpack config for v5 ([4746791](https://github.com/SUI-Components/sui/commit/474679147444581c2683f6b28e625ade282b9ee6))
+* **packages/sui-widget-embedder:** widget embedder template should use correct Widget prop ([30ba5b5](https://github.com/SUI-Components/sui/commit/30ba5b5bbf0e82c8bfc625e053ae92788dcfb1ca))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Bump dependencies ([2def8b5](https://github.com/SUI-Components/sui/commit/2def8b56284d263a0e628bf870577fca276806a6))
+* **packages/sui-widget-embedder:** Stop using colors package and use our own helper ([7d04dc8](https://github.com/SUI-Components/sui/commit/7d04dc8b21e4d7dff2397311eeb1daf9a984c106))
+
+
+
 # 4.3.0 (2021-04-19)
 
 

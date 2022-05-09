@@ -1,5 +1,58 @@
 # CHANGELOG
 
+# 2.17.0 (2022-03-01)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** add file extensions to imports ([e021045](https://github.com/SUI-Components/sui/commit/e021045cb19156327dee0ad7b203b2d4a6b96a03))
+* **packages/sui-pde:** sui-js import from sui-pde ([9c78ccc](https://github.com/SUI-Components/sui/commit/9c78ccc01acbb43eb25c9b68d70e30d19037bab3))
+* **packages/sui-pde:** use main instead exports in package.json ([f5d15b1](https://github.com/SUI-Components/sui/commit/f5d15b14d31d997e0205ace164d89c88a103f847))
+
+
+### Features
+
+* **packages/sui-pde:** migrate to esm ([581f26a](https://github.com/SUI-Components/sui/commit/581f26ac6f197ec89489de70bb786f80edda97ff))
+
+
+
+# 2.16.0 (2021-11-11)
+
+
+### Features
+
+* **packages/sui-pde:** add first iteration of experiment and feature components ([391d655](https://github.com/SUI-Components/sui/commit/391d655459dcb96a61f5b4b7c295ad3c22bd8df2))
+* **packages/sui-pde:** apply destructoring review ([da66fc3](https://github.com/SUI-Components/sui/commit/da66fc3a0e086167ad47da427d9aca07450aec0f))
+* **packages/sui-pde:** fix given reviews ([b074190](https://github.com/SUI-Components/sui/commit/b0741905f37ef0699c2efbfc238dbc1a3556d295))
+
+
+
+# 2.15.0 (2021-10-08)
+
+
+### Features
+
+* **packages/sui-pde:** add cache for tracking events so its only send on update ([0cf6c26](https://github.com/SUI-Components/sui/commit/0cf6c26fdc926784c3d8f7fe984bc9ba0887b645))
+* **packages/sui-pde:** migrate cache to functions ([3d8a9d4](https://github.com/SUI-Components/sui/commit/3d8a9d4e79a1aec33f4a2283105102e28d926d86))
+* **packages/sui-pde:** reuse cache name string in tests ([7c4cabc](https://github.com/SUI-Components/sui/commit/7c4cabc853de9b55aa86653b360ed4263a383aba))
+* **packages/sui-pde:** use session storage + file renaming ([4d77a5a](https://github.com/SUI-Components/sui/commit/4d77a5a8f6e2f56f24af9c261f08ca5a958de9e7))
+
+
+
+# 2.14.0 (2021-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** isFeatureEnabled pass by application attributes ([4bfc251](https://github.com/SUI-Components/sui/commit/4bfc251f86dabb4d37c0feadae6bdf3263551fc7))
+
+
+### Features
+
+* **packages/sui-pde:** removing not needed clean step ([d180026](https://github.com/SUI-Components/sui/commit/d18002668105e44baccab6e23413bc5bf115a442))
+
+
+
 # 2.13.0 (2021-08-17)
 
 

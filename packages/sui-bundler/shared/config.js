@@ -2,12 +2,15 @@
 const {
   config: packageJsonConfig = {}
 } = require(`${process.cwd()}/package.json`)
-const {'sui-bundler': config = {}} = packageJsonConfig
 
-const {extractComments, sourcemaps} = config
+const {'sui-bundler': config = {}} = packageJsonConfig
+const {
+  extractComments = false,
+  sourcemaps,
+  supportLegacyBrowsers = false
+} = config
 
 exports.config = config
-exports.useExperimentalMinifier =
-  config.optimizations && config.optimizations.useExperimentalMinifier
-exports.extractComments = extractComments || false
-exports.sourceMap = (sourcemaps && sourcemaps.prod) || 'none'
+exports.supportLegacyBrowsers = supportLegacyBrowsers
+exports.extractComments = extractComments
+exports.sourceMap = (sourcemaps && sourcemaps.prod) || false

@@ -1,21 +1,34 @@
+// @ts-check
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
-const definePlugin = require('./shared/define')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader')
-const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias')
-const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared')
-const {resolveLoader} = require('./shared/resolve-loader')
+
+const {
+  envVars,
+  MAIN_ENTRY_POINT,
+  config,
+  cleanList,
+  when
+} = require('./shared/index.js')
+const definePlugin = require('./shared/define.js')
+const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
+
+const {resolveLoader} = require('./shared/resolve-loader.js')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}svg|${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
+  `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
-const useExperimentalSCSSLoader =
-  config.optimizations && config.optimizations.useExperimentalSCSSLoader
+const outputPath = path.join(process.cwd(), 'dist')
 
-const smp = new SpeedMeasurePlugin()
+const {CI = false} = process.env
 
+process.env.NODE_ENV = 'development'
+
+/** @typedef {import('webpack').Configuration} WebpackConfig */
+
+/** @type {WebpackConfig} */
 const webpackConfig = {
   mode: 'development',
   context: path.resolve(process.env.PWD, 'src'),
@@ -24,27 +37,39 @@ const webpackConfig = {
       ...defaultAlias,
       ...aliasFromConfig
     },
-    extensions: ['.js', '.json'],
-    modules: ['node_modules', path.resolve(process.cwd())]
+    fallback: {
+      fs: false,
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      buffer: require.resolve('buffer/'),
+      url: require.resolve('url/')
+    },
+    modules: ['node_modules', path.resolve(process.cwd())],
+    extensions: ['.js', '.json']
   },
+  stats: 'errors-only',
   entry: cleanList([
-    require.resolve('react-dev-utils/webpackHotDevClient'),
+    require.resolve('./utils/webpackHotDevClient.js'),
     MAIN_ENTRY_POINT
   ]),
   target: 'web',
-  node: {fs: 'empty'},
   optimization: {
-    noEmitOnErrors: true,
+    checkWasmTypes: false,
+    emitOnErrors: false,
     removeAvailableModules: false,
     removeEmptyChunks: false,
     runtimeChunk: true,
     splitChunks: false
   },
   output: {
+    path: outputPath,
     pathinfo: false,
     publicPath: '/'
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser.js'
+    }),
     new webpack.EnvironmentPlugin(envVars(config.env)),
     definePlugin({__DEV__: true}),
     new HtmlWebpackPlugin({
@@ -93,9 +118,7 @@ const webpackConfig = {
               }
             }
           },
-          useExperimentalSCSSLoader
-            ? require.resolve('super-sass-loader')
-            : require.resolve('sass-loader')
+          require.resolve('@s-ui/sass-loader')
         ])
       },
       when(config['externals-manifest'], () =>
@@ -103,8 +126,9 @@ const webpackConfig = {
       )
     ])
   },
+  watch: !CI,
   devtool:
-    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : 'none'
+    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
 
-module.exports = config.measure ? smp.wrap(webpackConfig) : webpackConfig
+module.exports = webpackConfig

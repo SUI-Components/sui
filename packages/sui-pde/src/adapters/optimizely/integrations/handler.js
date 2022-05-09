@@ -1,4 +1,4 @@
-import {segment as segmentIntegration} from './segment'
+import {segment as segmentIntegration} from './segment.js'
 
 /**
  * Add to this array any integration between optimizely and a third party

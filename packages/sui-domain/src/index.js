@@ -1,19 +1,8 @@
-import Entity from './Entity'
-import EntryPointFactory from './EntryPointFactory'
-import FetcherFactory from './fetcher/factory'
-import Mapper from './Mapper'
-import Repository from './Repository'
-import Service from './Service'
-import UseCase from './UseCase'
-import ValueObject from './ValueObject'
-
-export {
-  Entity,
-  EntryPointFactory,
-  FetcherFactory,
-  Mapper,
-  Repository,
-  Service,
-  UseCase,
-  ValueObject
-}
+export {default as Entity} from './Entity.js'
+export {default as EntryPointFactory} from './EntryPointFactory.js'
+export {default as FetcherFactory} from './fetcher/factory.js'
+export {default as Mapper} from './Mapper.js'
+export {default as Repository} from './Repository.js'
+export {default as Service} from './Service.js'
+export {default as UseCase} from './UseCase.js'
+export {default as ValueObject} from './ValueObject.js'

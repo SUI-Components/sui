@@ -7,7 +7,7 @@ const {
   checkIsMonoPackage,
   getWorkspaces,
   getChangelogFilename
-} = require('../src/config')
+} = require('../src/config.js')
 
 program
   .usage('<folder1> <folder2> <etc>')

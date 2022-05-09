@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import {EntryPointFactory} from '../../src'
+import {EntryPointFactory} from '../../src/index.js'
 import {expect} from 'chai'
 
 const config = {}
@@ -8,7 +8,7 @@ describe('EntryPointFactory', () => {
   it('should be able to import the whole UseCase factory', async () => {
     const useCases = {
       use_case_from_factory_with_multiple_use_cases: [
-        () => import('./fixtures/factoryWithMultipleUseCases'),
+        () => import('./fixtures/factoryWithMultipleUseCases.js'),
         'useCaseOne'
       ]
     }
@@ -26,7 +26,7 @@ describe('EntryPointFactory', () => {
   it('should be able to import a single UseCase factory', async () => {
     const useCases = {
       use_case_from_single_factory_use_case: () =>
-        import('./fixtures/factoryWithSingleUseCase')
+        import('./fixtures/factoryWithSingleUseCase.js')
     }
     const EntryPoint = EntryPointFactory({config, useCases})
     const domain = new EntryPoint()
@@ -42,7 +42,7 @@ describe('EntryPointFactory', () => {
   it('should be able to subscribe to useCase execution', done => {
     const useCases = {
       use_case_from_single_factory_use_case: () =>
-        import('./fixtures/factoryWithSingleUseCase')
+        import('./fixtures/factoryWithSingleUseCase.js')
     }
     const EntryPoint = EntryPointFactory({config, useCases})
     const domain = new EntryPoint()
@@ -63,7 +63,7 @@ describe('EntryPointFactory', () => {
     let callCount = 0
     const useCases = {
       use_case_from_single_factory_use_case: () =>
-        import('./fixtures/factoryWithSingleUseCase')
+        import('./fixtures/factoryWithSingleUseCase.js')
     }
     const EntryPoint = EntryPointFactory({config, useCases})
     const domain = new EntryPoint()

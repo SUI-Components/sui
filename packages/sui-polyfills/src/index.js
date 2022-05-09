@@ -9,6 +9,7 @@ require('core-js/features/array/of')
 
 require('core-js/features/object/assign')
 require('core-js/features/object/entries')
+require('core-js/features/object/from-entries')
 require('core-js/features/object/keys')
 require('core-js/features/object/values')
 
@@ -28,6 +29,7 @@ require('core-js/features/map/map-keys')
 
 require('core-js/features/symbol')
 
-require('./element-closest')
+require('./element-closest.js')
+require('./globalThis.js')
 
 module.exports = {}

@@ -20,14 +20,14 @@ const render = children => {
 
 describe.client('react-head on client', () => {
   describe('<Head> component', () => {
-    describe('using bodyAttributes', function() {
+    describe('using bodyAttributes', function () {
       it('put attributes to document.body element', () => {
         render(<Head bodyAttributes={{class: 'is-test'}} />)
         expect(document.body.getAttribute('class')).to.equal('is-test')
       })
     })
 
-    describe('title', function() {
+    describe('title', function () {
       beforeEach(() => {
         const $title = document.querySelector('title')
         $title && $title.parentNode.removeChild($title)

@@ -1,10 +1,10 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
-const colors = require('colors')
 const fs = require('fs')
 const path = require('path')
 const {showError} = require('@s-ui/helpers/cli')
+const colors = require('@s-ui/helpers/colors')
 const {writeFile} = require('@s-ui/helpers/file')
 
 const indexJS = require('../file-templates/_index.js.js')
@@ -30,7 +30,7 @@ program
     console.log('    $ custom-help -h')
     console.log('')
     console.log(
-      colors.magenta(
+      colors.cyan(
         '    IMPORTANT - Regexp (-E) must be with commas ALWAYS to avoid terminal escape or interpretation'
       )
     )
@@ -39,6 +39,7 @@ program
   .parse(process.argv)
 
 const [page] = program.args
+const {pageRegExpIdentifier} = program.opts()
 
 if (!page) {
   showError('page name must be defined')
@@ -57,7 +58,6 @@ const PAGE_ENTRY_JS_POINT_FILE = `${PAGE_PATH}index.js`
 const PAGE_PACKAGE_JSON_FILE = `${PAGE_PATH}package.json`
 const PAGE_ENTRY_SCSS_POINT_FILE = `${PAGE_PATH}index.scss`
 const PAGE_BASE_PROJECT_JSON_FILE = path.join(process.cwd(), 'package.json')
-const {pageRegExpIdentifier} = program
 const packageInfo = require(PAGE_BASE_PROJECT_JSON_FILE)
 packageInfo.scripts[`start:${page}`] = `sui-widget-embedder dev -p ${page}`
 

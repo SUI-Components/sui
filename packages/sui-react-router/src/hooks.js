@@ -1,5 +1,7 @@
+// @ts-check
+
 import {useContext} from 'react'
-import Context from './internal/Context'
+import Context from './internal/Context.js'
 
 /**
  * @returns {{router: import('./types').Router}}

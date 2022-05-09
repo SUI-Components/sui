@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 4.22.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-studio-create:** Ugrade fs-extra dependency and use same in all packages ([44bfd45](https://github.com/SUI-Components/sui/commit/44bfd455c61baf32fd0f89b0aa778716ad5e72a9))
+
+
+
+# 4.21.0 (2022-02-15)
+
+
+### Features
+
+* **packages/sui-studio-create:** Adapt sui-studio-create to use latest deps ([f52dfdd](https://github.com/SUI-Components/sui/commit/f52dfddaa3b2e41589af199814d4873d53ac00dc))
+
+
+
 # 4.20.0 (2021-07-07)
 
 

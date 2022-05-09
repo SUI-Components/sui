@@ -1,7 +1,7 @@
-import {formatPattern, matchPattern} from '../PatternUtils'
-import internalIsActive from './isActive'
-import {Tree} from './Tree'
-import warning from './warning'
+import {formatPattern, matchPattern} from '../PatternUtils.js'
+import internalIsActive from './isActive.js'
+import {Tree} from './Tree.js'
+import warning from './warning.js'
 
 const INITIAL_MATCH_OBJECT = {
   isFinished: false,
@@ -225,10 +225,9 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
         listener(null, {params: state.params, components: state.components})
       } else {
         try {
-          const {
-            redirectLocation,
-            components
-          } = await matchRouteAndUpdateState({jsonRoutes, location})
+          const {redirectLocation, components} = await matchRouteAndUpdateState(
+            {jsonRoutes, location}
+          )
 
           if (redirectLocation) {
             return history.replace(redirectLocation)

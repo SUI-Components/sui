@@ -4,15 +4,13 @@
 const fs = require('fs')
 const path = require('path')
 const program = require('commander')
-const rimraf = require('rimraf')
 const webpack = require('webpack')
-const {minify} = require('terser')
 const {writeFile} = require('@s-ui/helpers/file')
 
-const config = require('../webpack.config.prod')
-const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder')
-const log = require('../shared/log')
-const {config: projectConfig} = require('../shared')
+const config = require('../webpack.config.prod.js')
+const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder.js')
+const log = require('../shared/log.js')
+const {config: projectConfig} = require('../shared/index.js')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
@@ -39,9 +37,13 @@ program
   })
   .parse(process.argv)
 
-const {clean = false, context} = program
+const {
+  clean = false,
+  context,
+  linkPackage: packagesToLink = []
+} = program.opts()
+
 config.context = context || config.context
-const packagesToLink = program.linkPackage || []
 
 const nextConfig = packagesToLink.length
   ? linkLoaderConfigBuilder({
@@ -53,10 +55,13 @@ const nextConfig = packagesToLink.length
 
 if (clean) {
   log.processing('Removing previous build...')
-  rimraf.sync(path.resolve(process.env.PWD, 'public'))
+  fs.rmSync(path.resolve(process.env.PWD, 'public'), {
+    force: true,
+    recursive: true
+  })
 }
 
-log.processing('Generating minified bundle. This will take a moment...')
+log.processing('Generating minified bundle...')
 
 webpack(nextConfig).run(async (error, stats) => {
   if (error) {
@@ -66,13 +71,13 @@ webpack(nextConfig).run(async (error, stats) => {
 
   if (stats.hasErrors()) {
     const jsonStats = stats.toJson('errors-only')
-    return jsonStats.errors.map(log.error)
+    return jsonStats.errors.map(({message}) => log.error(message))
   }
 
   if (stats.hasWarnings()) {
     const jsonStats = stats.toJson('errors-warnings')
     log.warn('Webpack generated the following warnings: ')
-    jsonStats.warnings.map(log.warn)
+    jsonStats.warnings.map(({message}) => log.warn(message))
   }
 
   console.log(`Webpack stats: ${stats}`)
@@ -132,10 +137,9 @@ webpack(nextConfig).run(async (error, stats) => {
         JSON.stringify(staticsCacheOnly)
       )
 
-    const {code: minifiedSw} = await minify(swCode, {sourceMap: false})
     const swFilePath = resolvePublicFile('service-worker.js')
 
-    await writeFile(swFilePath, minifiedSw)
+    await writeFile(swFilePath, swCode)
     console.log('\nService worker generated succesfully!\n')
   }
 

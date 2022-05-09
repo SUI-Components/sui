@@ -10,13 +10,13 @@ export default class RedisClient {
           port: redisConnection.port,
           host: redisConnection.host,
           enable_offline_queue: false,
-          retry_strategy: function(options) {
+          retry_strategy: function (options) {
             return Math.min(options.attempt * 100, 3000)
           }
         })
       : redisMock.createClient()
 
-    this._redisClient.on('error', function() {
+    this._redisClient.on('error', function () {
       console.error(
         `[sui-decorators/cache]:RedisClient Error creating Redis client`
       )

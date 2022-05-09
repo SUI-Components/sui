@@ -38,18 +38,28 @@ import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
 const i18n = new I18n({adapter: new Polyglot()});
 i18n.languages = {
     'es-ES': {
-        'HELLO_WORLD': '¡Hola mundo!'
+        'HELLO_WORLD': '¡Hola mundo!',
+        'PLURAL': 'uno |||| varios',
+        'PLURAL_WITH_VARIABLE': '%{houses} casa |||| %{houses} casas',
     },
     'ca-ES': {
-        'HELLO_WORLD': 'Hola món!'
+        'HELLO_WORLD': 'Hola món!',
+        'PLURAL': 'un |||| diversos',
+        'PLURAL_WITH_VARIABLE': '%{houses} casa |||| %{houses} cases',
     }
 };
 
 i18n.culture = 'es-ES';
 i18n.t('HELLO_WORLD') //=> ¡Hola mundo!
+i18n.t('PLURAL', 1) //=> uno
+i18n.t('PLURAL', 2) //=> varios
+i18n.t('PLURAL_WITH_VARIABLE', {houses: 1}) //=> 1 casa
+i18n.t('PLURAL_WITH_VARIABLE', {houses: 2}) //=> 2 casas
+
 i18n.n(1000) //=> 1.000
 i18n.n(1000000) //=> 1.000.000
 i18n.f('phone', '123123123') //=> '123 123 123'
+
 ```
 
 From now on, the library will use Polyglot to translate your literals anywhere in your app.
@@ -130,6 +140,31 @@ i18n.culture = 'es-ES';
 i18n.addTranslations({key: 'DYNAMIC_GREETINGS', translations})
 i18n.t('HELLO_WORLD') //=> ¡Hola mundo!
 i18n.t('DYNAMIC_GREETINGS.HELLO_SUI') //=> ¡Hola desde sui!
+```
+
+### Get all translations from a given key
+
+You can use the method `getAllTranslations` to get all the translations from a given key.
+```javascript
+import I18n from '@s-ui/i18n';
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot';
+
+const i18n = new I18n({adapter: new Polyglot()});
+i18n.languages = {
+    'es-ES': {
+        'HELLO_WORLD': '¡Hola mundo!',
+    },
+    'ca-ES': {
+        'HELLO_WORLD': 'Hola món!'
+    },
+    'en-GB': {
+        'HELLO_WORLD': 'Hello world!'
+    }
+};
+
+i18n.culture = 'es-ES';
+
+i18n.getAllTranslations('HELLO_WORLD') //=> {'es-ES':'¡Hola mundo!', 'ca-ES': 'Hola món!', 'en-GB': 'Hello world!'}
 ```
 
 ### Using number formatting in the server side

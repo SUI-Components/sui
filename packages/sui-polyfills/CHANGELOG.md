@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 1.16.0 (2022-02-17)
+
+
+### Bug Fixes
+
+* **packages/sui-polyfills:** Add new polyfill for Object.fromEntires ([28af4a8](https://github.com/SUI-Components/sui/commit/28af4a83d031182dbb3ecd345f3199162385ab9a))
+
+
+
+# 1.15.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-polyfills:** Add from where we extracted the code ([1db21eb](https://github.com/SUI-Components/sui/commit/1db21ebc5629fdf3da314c27620066da8f63141f))
+* **packages/sui-polyfills:** Add globalThis polyfill ([3f74450](https://github.com/SUI-Components/sui/commit/3f74450573d4fa0634f0aaadb6e43a7993fa80bd))
+
+
+
 # 1.14.0 (2021-06-15)
 
 

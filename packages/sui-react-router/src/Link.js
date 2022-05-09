@@ -1,11 +1,12 @@
+// @ts-check
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/Link.js
 
 import {useCallback} from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
-import invariant from './internal/invariant'
-import {useRouter} from './hooks'
+import invariant from './internal/invariant.js'
+import {useRouter} from './hooks.js'
 
 /**
  * Check if the event is created with some key being held to know it could be for a some contextual stuff
@@ -44,6 +45,7 @@ const Link = ({
   innerRef,
   onClick,
   onlyActiveOnIndex = false,
+  state,
   target,
   to,
   ...restOfProps
@@ -60,10 +62,13 @@ const Link = ({
         !isModifiedEvent(event) // Ignore clicks with modifier keys
       ) {
         event.preventDefault()
-        router.push(resolveToLocation(to, router))
+        const pathname = resolveToLocation(to, router)
+        const pushLocation = state ? {pathname, state} : pathname
+
+        router.push(pushLocation)
       }
     },
-    [onClick, router, target, to]
+    [onClick, router, target, to, state]
   )
 
   // Ignore if rendered outside the context of router
@@ -127,6 +132,10 @@ Link.propTypes = {
    * Only check if the destination is the actual route if you're in the index
    */
   onlyActiveOnIndex: PropTypes.bool,
+  /**
+   * The route state to pass to router push
+   */
+  state: PropTypes.object,
   /**
    * Inline style for the element
    */

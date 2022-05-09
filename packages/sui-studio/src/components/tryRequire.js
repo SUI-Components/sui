@@ -14,6 +14,14 @@ const fetchStaticFile = path =>
 export const fetchComponentSrcRawFile = ({category, component}) =>
   fetchStaticFile(`/components/${category}/${component}/src/index.js`)
 
+export const fetchComponentsDefinitions = ({category, component}) =>
+  window
+    .fetch(`/components/${category}/${component}/src/definitions.json`)
+    .then(res => res.json())
+
+export const fetchComponentsReadme = () =>
+  fetchStaticFile(`/components/README.md`)
+
 export const fetchMarkdownFile = ({category, component, file}) =>
   fetchStaticFile(`/components/${category}/${component}/${file}.md`)
 

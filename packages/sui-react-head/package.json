@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.8.0",
+  "version": "1.10.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,6 +21,6 @@
   },
   "peerDependencies": {
     "react": "16 || 17",
-    "react-dom": "16 || 17"
+    "react-dom": "16 || 17"
   }
 }

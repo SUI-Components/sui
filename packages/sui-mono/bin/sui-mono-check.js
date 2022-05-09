@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 const program = require('commander')
 const colors = require('@s-ui/helpers/colors')
-const checker = require('../src/check')
+const checker = require('../src/check.js')
 
 program
   .on('--help', () => {

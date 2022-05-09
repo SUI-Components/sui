@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
-const {pipe, removePlugin} = require('./utils')
+const {pipe, removePlugin} = require('./utils.js')
 
 module.exports = ({address, browser = false, page, port}) => {
   const config = {

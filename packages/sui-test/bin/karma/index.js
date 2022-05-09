@@ -3,12 +3,13 @@ const {
   config: {parseConfig},
   Server
 } = require('karma')
-const config = require('./config')
+const config = require('./config.js')
 const CWD = process.cwd()
 
 module.exports = async ({
   ci,
   coverage,
+  headless,
   ignorePattern,
   pattern,
   srcPattern,
@@ -18,8 +19,20 @@ module.exports = async ({
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 
+  /**
+   * @deprecated - Use --headless instead
+   */
   if (ci) {
     config.browsers = ['Firefox']
+  }
+
+  /**
+   * We check the headless flag after the CI flag
+   * so we use the Headless browser if it's present
+   * instead Firefox
+   */
+  if (headless) {
+    config.browsers = ['ChromeHeadless']
   }
 
   if (coverage || ci) {
@@ -41,7 +54,6 @@ module.exports = async ({
 
   if (watch) {
     config.singleRun = false
-    config.reporters = ['clear-screen'].concat(config.reporters)
   }
 
   config.files = [

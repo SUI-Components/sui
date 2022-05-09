@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const program = require('commander')
-const chalk = require('chalk')
 const path = require('path')
+const program = require('commander')
+const colors = require('@s-ui/helpers/colors')
 const {serialSpawn} = require('@s-ui/helpers/cli')
 
 program
@@ -23,7 +23,7 @@ program
   })
   .parse(process.argv)
 
-const {pattern, watch, inspect, timeout} = program
+const {pattern, watch, inspect, timeout} = program.opts()
 const ci = Boolean(process.env.CI)
 
 serialSpawn([
@@ -41,7 +41,7 @@ serialSpawn([
   ]
 ]).catch(err => {
   if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
-    process.stderr.write(chalk.red((err && (err.stack || err.message)) || err))
+    process.stderr.write(colors.red((err && (err.stack || err.message)) || err))
   }
   process.exit(err.code || 1)
 })

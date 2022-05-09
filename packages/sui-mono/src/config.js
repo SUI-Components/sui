@@ -6,7 +6,8 @@ const CWD = process.cwd()
 const packageFile = getPackageJson(CWD)
 
 const getWorkspaces = workspaces => {
-  if (workspaces.length === 0) return ['Root']
+  // If it is a monopackage, we return the current directory
+  if (workspaces.length === 0) return ['.']
   // If we have more than one workspace, we join
   // folders with the pattern {components/**,demo/**,tests/**}/package.json
   const pattern =
@@ -21,6 +22,15 @@ const getWorkspaces = workspaces => {
   return paths.map(path => path.replace('/package.json', ''))
 }
 
+const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
+  const publishAccess =
+    (localPackageConfig['sui-mono'] && localPackageConfig['sui-mono'].access) ||
+    (packageConfig['sui-mono'] && packageConfig['sui-mono'].access) ||
+    'restricted'
+
+  return publishAccess
+}
+
 function factoryConfigMethods(packageFile) {
   const {
     config: packageConfig = {},
@@ -28,13 +38,13 @@ function factoryConfigMethods(packageFile) {
     workspaces = []
   } = packageFile
 
-  const {access: publishAccess = 'restricted'} = packageConfig['sui-mono'] || {}
-
   return {
     checkIsMonoPackage: () => workspaces.length === 0,
     getChangelogFilename: () => CHANGELOG_FILENAME,
     getProjectName: () => packageName,
-    getPublishAccess: () => publishAccess,
+    getPublishAccess: ({localPackageConfig} = {}) => {
+      return getPublishAccess({localPackageConfig, packageConfig})
+    },
     getWorkspaces: () => getWorkspaces(workspaces)
   }
 }

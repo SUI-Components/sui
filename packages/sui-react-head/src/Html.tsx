@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { Meta } from 'react-head'
 
 export const HTML_ATTRIBUTES_KEY = 'htmlattributes'

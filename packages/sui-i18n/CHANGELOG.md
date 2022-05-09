@@ -1,5 +1,43 @@
 # CHANGELOG
 
+# 1.29.0 (2022-03-01)
+
+
+### Features
+
+* **packages/sui-i18n:** Migrate to ESM ([0df234c](https://github.com/SUI-Components/sui/commit/0df234c66059a21915c5758ebdc7051d61922f54))
+* **packages/sui-i18n:** Use main instead exports for now ([3e54117](https://github.com/SUI-Components/sui/commit/3e5411745a6d7abd720df095cbc832112a1f4856))
+* **packages/sui-i18n:** Use specific lib ([b94694b](https://github.com/SUI-Components/sui/commit/b94694b606ab1c306c3480524da25df5ae4e783d))
+
+
+
+# 1.28.0 (2021-10-28)
+
+
+### Features
+
+* **packages/sui-i18n:** enable get all translations when scoped in contexts ([b331290](https://github.com/SUI-Components/sui/commit/b331290fefca3bffc0058b48992819d272dc0319))
+
+
+
+# 1.27.0 (2021-10-26)
+
+
+### Features
+
+* **packages/sui-i18n:** add new method to get all translations given a key ([82346d5](https://github.com/SUI-Components/sui/commit/82346d5978688328e4715d0685fb586cc65bbe0d))
+
+
+
+# 1.26.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-i18n:** support custom culture in n and c ([38eda29](https://github.com/SUI-Components/sui/commit/38eda29fa9c2adab9be90d5cf2936f4091d43a83))
+
+
+
 # 1.25.0 (2021-08-24)
 
 

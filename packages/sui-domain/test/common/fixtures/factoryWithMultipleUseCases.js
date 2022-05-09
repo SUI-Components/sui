@@ -1,4 +1,4 @@
-import EmptyUseCase from './EmptyUseCase'
+import EmptyUseCase from './EmptyUseCase.js'
 
 export default class FactoryWithMultipleUseCases {
   static useCaseOne({config}) {

@@ -2,13 +2,13 @@
 /* eslint no-console:0 */
 
 const program = require('commander')
-const chalk = require('chalk')
-const runner = require('./karma')
-const {cleanStack} = require('./karma/util')
+const colors = require('@s-ui/helpers/colors')
+const runner = require('./karma/index.js')
 
 program
   .option('-W, --watch', 'Run in watch mode')
   .option('-C, --ci', 'Run a Firefox headless for CI testing')
+  .option('-H, --headless', 'Run a headless browser for testing')
   .option(
     '-P, --pattern <pattern>',
     'Path pattern to include',
@@ -37,14 +37,24 @@ program
 const {
   ci,
   coverage,
+  headless,
   ignorePattern,
   pattern,
   srcPattern,
   timeout,
   watch
-} = program
+} = program.opts()
 
-runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
+runner({
+  ci,
+  coverage,
+  headless,
+  ignorePattern,
+  pattern,
+  srcPattern,
+  timeout,
+  watch
+})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)
@@ -52,7 +62,7 @@ runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
   .catch(err => {
     if (!(typeof err.code === 'number' && err.code >= 0 && err.code < 10)) {
       process.stderr.write(
-        chalk.red(cleanStack((err && (err.stack || err.message)) || err)) + '\n'
+        colors.red((err && (err.stack || err.message)) || err) + '\n'
       )
     }
     process.exit(err.code || 1)

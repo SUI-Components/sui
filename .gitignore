@@ -1,5 +1,7 @@
 node_modules/
 lib/
+contract/
+coverage/
 .DS_Store
 npm-debug.log
 .tern-port
@@ -9,14 +11,6 @@ jsconfig.json
 packages/sui-codemod/COMMANDS
 sui-components-dashboard-9350df448fcd.json
 .idea/
-packages/sui-bundler/test/server/integration/features-app/public/
-packages/sui-bundler/test/server/integration/features-app/node_modules/
-packages/sui-bundler/test/server/integration/offline-app/node_modules/
-packages/sui-bundler/test/server/integration/offline-app/public/
-packages/sui-bundler/test/server/integration/external-manifest/node_modules/
-packages/sui-bundler/test/server/integration/external-manifest/public/
-packages/sui-bundler/test/server/integration/external-manifest-app/node_modules/
-packages/sui-bundler/test/server/integration/external-manifest-app/public/
 packages/sui-studio/test/server/integration/empty-studio/components/fake/**
 packages/sui-studio/test/server/integration/empty-studio/demo/fake/**
 packages/sui-studio/test/server/integration/empty-studio/test/fake/**
@@ -24,3 +18,6 @@ packages/sui-studio/test/server/integration/sample-studio/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/components/atom/button/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/public
 packages/sui-studio/test/server/integration/empty-studio/components/fake/componentnvim
+packages/sui-test-contract/contract
+
+!packages/sui-sass-loader/test/server/fixtures/**/node_modules

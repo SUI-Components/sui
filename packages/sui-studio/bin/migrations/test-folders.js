@@ -2,7 +2,7 @@
 
 const glob = require('fast-glob')
 const fs = require('fs-extra')
-const {checkAndClean} = require('./utils')
+const {checkAndClean} = require('./utils.js')
 
 const log = console.log
 

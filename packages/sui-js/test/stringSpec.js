@@ -6,7 +6,7 @@ import {
   fromArrayToCommaQueryString,
   getRandomString,
   highlightText
-} from '../src/string/index'
+} from '../src/string/index.js'
 
 describe('@s-ui/js', () => {
   describe('string:toQueryString', () => {

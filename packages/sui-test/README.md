@@ -4,7 +4,7 @@
 
 ## Motivation
 
-(1) Setup properly a testing env in JS is hard. There is a lot deps and is easy for us install differents setups in differents project. To avoid that now to run a test suit over your code you need install only one tool.
+(1) Setup properly a testing environment in JavaScript is hard. There is a lot deps and it would be easy to install different setups in different projects. To avoid that, you could run this test suit over your code to install only one tool.
 
 ## Folder Structure
 
@@ -56,15 +56,16 @@ npm install @s-ui/test --save-dev
 
   Options:
 
-    -W, --watch  Run in watch mode
-    -C, --ci     Run a Firefox headless for CI testing
+    -H, --headless Run in headless mode
+    -W, --watch    Run in watch mode
+    -C, --ci       Run a Firefox headless for CI testing (deprecated, use --headless instead)
     -P, --pattern <pattern>               Path pattern to include (default: test/**/*Spec.js)
     -I, --ignore-pattern <ignorePattern>  Path pattern to ignore for testing (default: false)
     --src-pattern <srcPattern>  Define the source directory (default: src/**/*.js)
     -h, --help   output usage information
   Description:
 
-  Run tests in Chorme
+  Run tests in a browser
 
   Examples:
 
@@ -94,6 +95,23 @@ npm install @s-ui/test --save-dev
 ```
 
 # Tools
+
+## Describers
+
+**describeOnLocal**: It will only run wrapped tests on local environment and won't be executed in CI.
+
+```javascript
+import { describeOnLocal } from '@s-ui/test/lib/describers'
+
+describeOnLocal(() => {
+  describe('Some test', () => {
+    it('should do something', () => {
+      expect(true).toBe(true)
+    })
+  })
+})
+```
+
 
 ## Descriptor by environment patcher
 The descriptor by environment is a patch with the purpose of add some extra functionality to our mocha describe and it methods.

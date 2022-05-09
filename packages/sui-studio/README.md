@@ -32,7 +32,25 @@ Once you're in a new project, execute `sui-studio start` to start the developmen
 $ npx sui-studio generate house window
 ```
 
-### To develop the new component,
+#### Context
+
+Use `-C` or `--context` parameter to generate the component with a default context
+
+```sh
+$ npx sui-studio generate house window -C
+```
+
+Use `-C path` or `--context path` parameter to generate the component with a given default context
+
+```sh
+$ npx sui-studio generate house window -C ./myCustomContext.js
+```
+
+### Use new compiler
+
+We're migrating to `swc` so you could generate the new component with the expected `prepare` field by using the flag `--swc` or `-W`.
+
+### To develop the new component
 
 #### 1) Launch the development environment
 
@@ -113,7 +131,18 @@ Launch a development environment where you can work in total isolation on your c
 
 ### `$ sui-studio test`
 
-Launch all project tests in a karma browser.
+Launch all project tests in a Karma browser.
+
+### `$ cpx`
+
+This command allow you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.  
+
+#### Examples
+
+```sh
+# copy all files with scss extension from src to lib
+$ cpx './src/**/*.scss' ./lib
+```
 
 ## Testing
 
@@ -258,16 +287,48 @@ Add this scripts on your own components project
 ```
 // package.json
 {
-  ...
   scripts: {
-    ...
-	test: "sui-studio test"
-	test:watch: "sui-studio test --watch"
-    ...
+	  "test": "sui-studio test",
+	  "test:watch": "sui-studio test --watch"
   }
-  ...
 }
 ```
+
+```sh
+Usage: sui-studio-test [options]
+
+Options:
+  -H, --headless           Run components tests in CLI, headless mode
+  -W, --watch              Watch mode
+  -T, --timeout <timeout>  Timeout
+  --coverage               Create coverage (default: false)
+  -h, --help               display help for command
+  
+  Examples:
+    $ sui-studio test --headless
+    $ sui-studio test --headless --watch
+    $ sui-studio test --help
+```
+
+You could execute some specific tests with the `sui-studio-test` command using `PATTERN` ENV variables.
+
+`PATTERN` should be a glob pattern and:
+
+- It will be checked against the test file component path, for example `'./ad/card/test/index.test.js'`.
+
+- It match any part of the test component path.
+
+- It uses a micromatch as a library for pattern matching (same as fast-glob).
+
+Some examples:
+
+- For speciffic component: `PATTERN='./ad/card/test/index.test.js' sui-studio test` or `PATTERN='ad/card/test' sui-studio test`
+
+- For categories: `PATTERN='{ad,shipping}/*/test' sui-studio test`
+
+Also, there is a way to only execute component categories but this is **deprecated**:
+
+- If you want to execute the tests **for some specific categories** only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
 
 ## File structure
 

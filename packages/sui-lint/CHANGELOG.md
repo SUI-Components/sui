@@ -1,5 +1,320 @@
 # CHANGELOG
 
+# 4.17.0 (2022-05-03)
+
+
+### Features
+
+* **packages/sui-lint:** Disable correctly feature of stylelint ([d0011f3](https://github.com/SUI-Components/sui/commit/d0011f36877a23dc2e69973777db95fe69bd36b6))
+
+
+
+# 4.16.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Disable weird rule for sass ([7360f92](https://github.com/SUI-Components/sui/commit/7360f92dbfc9dbfa1fb81e75c5450d6e939207fe))
+* **packages/sui-lint:** Force new release ([4124679](https://github.com/SUI-Components/sui/commit/41246799c676cfdb0099696e7f4d78db9190ac96))
+
+
+
+# 4.15.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([0e6a336](https://github.com/SUI-Components/sui/commit/0e6a336e6abefbbc2b1ca4e4d25bf05fe9aca0d2))
+
+
+
+# 4.14.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([817ed63](https://github.com/SUI-Components/sui/commit/817ed63a8c75d64e9ea5ab1cf7b3e8e112f04468))
+
+
+
+# 4.13.0 (2022-04-27)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([18f0f4a](https://github.com/SUI-Components/sui/commit/18f0f4a1924935ea37d951f019381e2786bb2a8a))
+
+
+
+# 4.12.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix sass format error in prettier ([826c419](https://github.com/SUI-Components/sui/commit/826c419fc9c34d66b64250bb4e61097e1a69c9f6))
+
+
+
+# 4.11.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix default value for staged files when get files to lint ([0ebe47a](https://github.com/SUI-Components/sui/commit/0ebe47a114e0cebfea569260fc7782d7a78ffd48))
+* **packages/sui-lint:** fix options for lint scss ([1003672](https://github.com/SUI-Components/sui/commit/1003672668ab3d8c2a8d42790949ad947041823c))
+
+
+### Features
+
+* **packages/sui-lint:** update dependencies ([43ecae4](https://github.com/SUI-Components/sui/commit/43ecae492421eebfdaeb7441766dbb534e311e63))
+
+
+
+# 4.10.0 (2022-03-30)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([dd71fba](https://github.com/SUI-Components/sui/commit/dd71fbaa121fe5342dc0b1122079f8ce9fc52f35))
+
+
+
+# 4.9.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([3b3d87f](https://github.com/SUI-Components/sui/commit/3b3d87f6ae52a750ed1db38717b3fd69cf3856f0))
+
+
+
+# 4.8.0 (2022-02-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Fix wrong lint error about missing React ([de42903](https://github.com/SUI-Components/sui/commit/de429033e7a72dcdb446aed2c746363407de1f2a))
+
+
+
+# 4.7.0 (2022-02-16)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([5bc1685](https://github.com/SUI-Components/sui/commit/5bc16850184bc85734c03f9525203bf5522d132a))
+
+
+
+# 4.6.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-lint:** Disable more rules because the new version ([487ac04](https://github.com/SUI-Components/sui/commit/487ac0495d597d643fa912f7b10d3a2f665b6c35))
+
+
+
+# 4.5.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-lint:** Disable rule ([75d7e2b](https://github.com/SUI-Components/sui/commit/75d7e2bd9dfdbfc065e06eb4c6e0777a82b835a2))
+* **packages/sui-lint:** Use correct value for disable rule ([35758c9](https://github.com/SUI-Components/sui/commit/35758c97a8f5a30e23877309bda129b023f5ef83))
+
+
+
+# 4.4.0 (2022-02-01)
+
+
+
+# 4.3.0 (2022-02-01)
+
+
+### Features
+
+* **packages/sui-lint:** Use correct value to turn rules off ([9623a58](https://github.com/SUI-Components/sui/commit/9623a58433668bb0222c4f351624bf729b4a0a96))
+
+
+
+# 4.2.0 (2022-01-31)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Use correct way to handle warnings on stylelint ([351d8c2](https://github.com/SUI-Components/sui/commit/351d8c2f4dfd621475f11994ae5a13524ecfcae5))
+* **packages/sui-lint:** Use false for some rules ([4af4bdf](https://github.com/SUI-Components/sui/commit/4af4bdf5456a84fb029a75a8b1fa20494eddec0f))
+
+
+
+# 4.1.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Move some errors to warnings ([f6a5a3b](https://github.com/SUI-Components/sui/commit/f6a5a3bb591fffa623f6cfd797824b81e911e5cb))
+
+
+
+# 4.0.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Avoid duplicated key ([6e78a07](https://github.com/SUI-Components/sui/commit/6e78a07559a1255df9bd2ea4fda146fabeeb877f))
+* **packages/sui-lint:** Remove not needed plugin ([63feab6](https://github.com/SUI-Components/sui/commit/63feab6e1856ef7de60506ca7ee940f0908f8d36))
+* **packages/sui-lint:** Use new major for eslint and prettier ([423c040](https://github.com/SUI-Components/sui/commit/423c0403849a6f29012a34f1b8393d1ae670febe))
+
+
+
+# 3.47.0 (2022-01-31)
+
+
+### Features
+
+* **packages/sui-lint:** Sync babel/core dependency ([3b6cc91](https://github.com/SUI-Components/sui/commit/3b6cc914f5065adf8daa118ed4dbe0508e5ffba7))
+* **packages/sui-lint:** Upgrade dependencies ([3a85608](https://github.com/SUI-Components/sui/commit/3a85608b597b67d3bb6a6027097a00e7c435eb6b))
+
+
+
+# 3.46.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Use correct conditional for PRs on Actions ([7c11422](https://github.com/SUI-Components/sui/commit/7c1142263ab11ea46acd0af9f32bf0fef63d5bc6))
+
+
+
+# 3.45.0 (2022-01-11)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Show correct number of linted files ([1e2509f](https://github.com/SUI-Components/sui/commit/1e2509f7f0aafe4d325843e631acf575bd0940ad))
+
+
+### Features
+
+* **packages/sui-lint:** Use better logging for sui-lint on Actions ([2e73a6c](https://github.com/SUI-Components/sui/commit/2e73a6c64a9138481542c5a0e1c124832d010705))
+
+
+
+# 3.44.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade babel dependencies ([6e83503](https://github.com/SUI-Components/sui/commit/6e83503e79504299df37e8be024d4d2e79405ee3))
+
+
+
+# 3.43.0 (2021-12-15)
+
+
+### Features
+
+* **packages/sui-lint:** Add rule to check extensions on files ([00689b9](https://github.com/SUI-Components/sui/commit/00689b944502edb6978a58861b018d6b67009d5a))
+
+
+
+# 3.42.0 (2021-12-02)
+
+
+### Features
+
+* **packages/sui-lint:** Get range of commits only for CI ([36f68bb](https://github.com/SUI-Components/sui/commit/36f68bb9f1cf18e18a462c5277003158ae727e73))
+
+
+
+# 3.41.0 (2021-11-29)
+
+
+### Features
+
+* **packages/sui-lint:** Simplify logging logic to show all files always ([6cb5012](https://github.com/SUI-Components/sui/commit/6cb5012d12a82ac1ab1bd6020facbbb9c385b749))
+* **packages/sui-lint:** Use correct commit range for PRs ([f124aa5](https://github.com/SUI-Components/sui/commit/f124aa54b6b2ca6ea20d5c0493e445e01b8d6281))
+
+
+
+# 3.40.0 (2021-11-26)
+
+
+### Features
+
+* **packages/sui-lint:** Better control over undefined values for after and before ([0b19792](https://github.com/SUI-Components/sui/commit/0b197927c1afa5ea2b2b30bfd2ea031d10005395))
+* **packages/sui-lint:** Get commit range on GitHub Actions on linter ([4fe7503](https://github.com/SUI-Components/sui/commit/4fe7503822caf95a4228486de90828ad8ac7e4a2))
+
+
+
+# 3.39.0 (2021-11-05)
+
+
+### Features
+
+* **packages/sui-lint:** Add dependency ([ba67604](https://github.com/SUI-Components/sui/commit/ba676048946eb6139113a634a5b4e279d020e57d))
+* **packages/sui-lint:** Remove customSyntax ([990fc1f](https://github.com/SUI-Components/sui/commit/990fc1ffe2e6b5615c36b10b2a764606b350c980))
+* **packages/sui-lint:** Remove customSyntax ([ce0a72d](https://github.com/SUI-Components/sui/commit/ce0a72d61ccd5fdf9ddef47c6867ca9b6f13c675))
+* **packages/sui-lint:** Resolve correctly needed dependency ([2b9ce10](https://github.com/SUI-Components/sui/commit/2b9ce10cc5181a46babf294aab09790c95e70e78))
+* **packages/sui-lint:** Upgrade dependencies ([2719b6c](https://github.com/SUI-Components/sui/commit/2719b6cbebc15872f107661ee45775a7a69dac04))
+* **packages/sui-lint:** Upgrade to latest stylelint dependency ([fe7c0f9](https://github.com/SUI-Components/sui/commit/fe7c0f9adf6b06855286d40e2cf7bd9df72774e9))
+* **packages/sui-lint:** Use customSyntax ([8bbb480](https://github.com/SUI-Components/sui/commit/8bbb480e05cf2e01c5546a38469c2542faf7363d))
+
+
+
+# 3.38.0 (2021-10-22)
+
+
+### Features
+
+* **packages/sui-lint:** Move react/jsx-no-bind to warning for now ([ddc8e02](https://github.com/SUI-Components/sui/commit/ddc8e02963f12ee0956244eb8ce7b5b55bd0c48d))
+
+
+
+# 3.37.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Lint when it's all files ([6038217](https://github.com/SUI-Components/sui/commit/6038217b2c2840dd84df787fbbce9eddd2bcd853))
+
+
+### Features
+
+* **packages/sui-lint:** Better detection for SCSS files ([6292c8c](https://github.com/SUI-Components/sui/commit/6292c8cf78ab198ade2094157527b8da0c043654))
+* **packages/sui-lint:** Reuse code and use better jsdoc ([344e74d](https://github.com/SUI-Components/sui/commit/344e74dddd808fddfc88f3509802bc1e285a842a))
+
+
+
+# 3.36.0 (2021-10-21)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** Fix problems with staged files ([e5bbbf2](https://github.com/SUI-Components/sui/commit/e5bbbf2f1314c2f5e10ac95bc0faccea079b32d1))
+
+
+### Features
+
+* **packages/sui-lint:** Exit code 1 if sui-lint js fails ([aba85bd](https://github.com/SUI-Components/sui/commit/aba85bdbf17a6016a0600cc9eaab967552540989))
+* **packages/sui-lint:** Exit with error if problem detected ([b4406ae](https://github.com/SUI-Components/sui/commit/b4406ae125db1bc3893e6d73311a042875e83dbe))
+* **packages/sui-lint:** Improve log messages ([4788c1c](https://github.com/SUI-Components/sui/commit/4788c1caecd9f281c55a1f9db39d62ec9f78e4c1))
+* **packages/sui-lint:** Less noisy linter on CI ([181e74e](https://github.com/SUI-Components/sui/commit/181e74ed8e7e79a24d18660aaa4fe6cb955d8c51))
+* **packages/sui-lint:** Migrate to programmatic Node ([2f929e3](https://github.com/SUI-Components/sui/commit/2f929e34b159d0af27fb6da68d1016cd1ecf3daa))
+* **packages/sui-lint:** Upgrade minor versions for dependencies ([fa0d522](https://github.com/SUI-Components/sui/commit/fa0d52247af4c45e0c477046b6d7fa6e1fb416ee))
+
+
+
+# 3.35.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-lint:** Unify @babel/core version across packages ([916eac7](https://github.com/SUI-Components/sui/commit/916eac70f006cef3acc6800fccc30cd957cfc066))
+
+
+
 # 3.34.0 (2021-08-16)
 
 

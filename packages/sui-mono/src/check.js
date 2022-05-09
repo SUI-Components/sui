@@ -1,7 +1,14 @@
 /* eslint no-console:0 */
 
 const conventionalChangelog = require('conventional-changelog')
-const {checkIsMonoPackage, getProjectName, getWorkspaces} = require('./config')
+const {readJsonSync} = require('fs-extra')
+
+const {
+  checkIsMonoPackage,
+  getProjectName,
+  getWorkspaces
+} = require('./config.js')
+
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
 const PACKAGE_VERSION_INCREMENT = {
@@ -36,9 +43,18 @@ const flatten = status =>
     {increment: PACKAGE_VERSION_INCREMENT.NOTHING, commits: []}
   )
 
+const getPkgFromScope = scope => (scope === 'Root' ? '.' : scope)
+
 const check = () =>
   new Promise(resolve => {
-    const packagesWithChangelog = getWorkspaces()
+    /**
+     * Remove packages with private field with true value
+     * so we avoid them to be listed as releaseable
+     */
+    const packagesWithChangelog = getWorkspaces().filter(pkg => {
+      const {private: privateField} = readJsonSync(`${pkg}/package.json`)
+      return privateField !== true
+    })
 
     const status = {}
     packagesWithChangelog.forEach(pkg => {
@@ -53,9 +69,10 @@ const check = () =>
         preset: 'angular',
         append: true,
         transform: (commit, cb) => {
-          if (!packagesWithChangelog.includes(commit.scope)) return cb()
+          const pkg = getPkgFromScope(commit.scope)
 
-          const pkg = commit.scope
+          if (!packagesWithChangelog.includes(pkg)) return cb()
+
           let toPush = null
 
           if (COMMIT_TYPES_WITH_RELEASE.includes(commit.type)) {

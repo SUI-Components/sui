@@ -1,5 +1,64 @@
 # CHANGELOG
 
+# 1.19.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade dependencies ([05fe49d](https://github.com/SUI-Components/sui/commit/05fe49dd392d59d950e02fe928f35101461d7cd6))
+
+
+
+# 1.18.0 (2022-04-13)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade playwright dependency ([b595b15](https://github.com/SUI-Components/sui/commit/b595b1519174b739d15f5115defce9d145842ad5))
+
+
+
+# 1.17.0 (2022-04-11)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** method parameters ([daa81a1](https://github.com/SUI-Components/sui/commit/daa81a11b60638b96af7f0362092652f1e1eb3c8))
+
+
+### Features
+
+* **packages/sui-critical-css:** add required class names and extract critical css retrier logic ([8354980](https://github.com/SUI-Components/sui/commit/8354980f484e1970650a6087a57ceacbe1818e33))
+
+
+
+# 1.16.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-critical-css:** Ugrade fs-extra dependency and use same in all packages ([c951d2b](https://github.com/SUI-Components/sui/commit/c951d2b3f67478993c62053e51ab2d1f2e4991d5))
+
+
+
+# 1.15.0 (2022-01-28)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use same node-fetch version other ([0a48500](https://github.com/SUI-Components/sui/commit/0a485000d350b637d2969cac0bb9a70e4525f194))
+
+
+
+# 1.14.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrad clean-css dependency ([cb2ba9d](https://github.com/SUI-Components/sui/commit/cb2ba9d0e5771b296884517a64e0deb81da76508))
+
+
+
 # 1.13.0 (2021-09-03)
 
 

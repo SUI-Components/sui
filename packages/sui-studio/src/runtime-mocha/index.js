@@ -1,15 +1,31 @@
-/* global __BASE_DIR__ */
-import {importContexts, importReactComponent} from '../components/tryRequire'
-import {addSetupEnvironment} from '../environment-mocha/setupEnvironment'
-import {addReactContextToComponent} from '../components/utils'
+/* global __BASE_DIR__, CATEGORIES, PATTERN */
 
+/**
+ * This file is being executed in browser opened to run tests
+ */
+import micromatch from 'micromatch'
+import {importContexts, importReactComponent} from '../components/tryRequire.js'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
+import {addReactContextToComponent} from '../components/utils.js'
 addSetupEnvironment(window)
 
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
+const defaultPattern = '**/*.test.{js,jsx}'
+const globPattern = PATTERN || defaultPattern
+const categories = CATEGORIES ? CATEGORIES.split(',') : null
+
+const filterAll = key => {
+  const [, category] = key.split('/')
+
+  return categories
+    ? categories.includes(category)
+    : micromatch.isMatch(key, globPattern, {contains: true})
+}
+
 // Require all the files from a context
-const importAll = request => request.keys().forEach(request)
+const importAll = request => request.keys().filter(filterAll).forEach(request)
 
 // Avoid running Karma until all components tests are loaded
 const originalKarmaLoader = window.__karma__.loaded
@@ -18,12 +34,13 @@ window.__karma__.loaded = () => {}
 const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/index.test.(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/(\w+).test.(js|jsx)/
 )
 
-// get all the needed components from the available tests
+const selectedTestFiles = testsFiles.keys().filter(filterAll)
+
 Promise.all(
-  testsFiles.keys().map(async key => {
+  selectedTestFiles.map(async key => {
     // get the category component from the segments of the path
     // ex: ./card/property/index.js -> card property
     const [, category, component] = key.split('/')
@@ -41,7 +58,12 @@ Promise.all(
 
     const Component =
       componentModule && (componentModule.type || componentModule)
+
     if (!componentModule) {
+      console.error(
+        `Could not find component ${categoryComponentKey} in ${key}`
+      )
+      console.error(`Available keys: `, selectedTestFiles.keys())
       throw new Error(`Missing export default from ${categoryComponentKey}`)
     }
 

@@ -1,15 +1,39 @@
+// @ts-check
+
 const webpack = require('webpack')
 const path = require('path')
-const {clientConfig} = require('../../src/config')
+const {envVars} = require('@s-ui/bundler/shared/index.js')
+const {bundlerConfig, clientConfig} = require('../../src/config.js')
 
 const {captureConsole = true} = clientConfig
+const {sep} = path
+
+const mustPackagesToAlias = {
+  'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
+  'react/jsx-runtime': 'react/jsx-runtime.js'
+}
+
+/**
+ *  Transform the env config (Array) to an object.
+ *  Where the value is always an empty string.
+ */
+const environmentVariables = envVars(bundlerConfig.env)
 
 const config = {
   singleRun: true,
 
   basePath: '',
 
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'webpack'],
+
+  plugins: [
+    require.resolve('karma-webpack'),
+    require.resolve('karma-chrome-launcher'),
+    require.resolve('karma-firefox-launcher'),
+    require.resolve('karma-mocha'),
+    require.resolve('karma-coverage'),
+    require.resolve('karma-spec-reporter')
+  ],
 
   reporters: ['spec'],
 
@@ -18,50 +42,70 @@ const config = {
   browserDisconnectTolerance: 1,
 
   webpackMiddleware: {
-    stats: {
-      all: false,
-      errors: true,
-      timings: true
-    }
+    stats: 'errors-only'
   },
 
   webpack: {
     devtool: 'eval',
-    mode: 'development',
-    stats: 'minimal',
+    stats: 'errors-only',
     resolve: {
       alias: {
+        ...mustPackagesToAlias,
         '@s-ui/react-context': path.resolve(
           path.join(process.env.PWD, './node_modules/@s-ui/react-context')
         )
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
-      extensions: ['.mjs', '.js', '.jsx', '.json']
-    },
-    node: {
-      fs: 'empty'
-    },
-    // webpack has the ability to generate path info in the output bundle.
-    // However, this puts garbage collection pressure on projects that bundle thousands of modules.
-    output: {
-      pathinfo: false
+      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      fallback: {
+        assert: false,
+        child_process: false,
+        constants: false,
+        crypto: false,
+        fs: false,
+        http: false,
+        https: false,
+        module: false,
+        os: false,
+        path: false,
+        readline: false,
+        stream: require.resolve('stream-browserify'),
+        timers: false,
+        tty: false,
+        util: require.resolve('util/'),
+        vm: false,
+        worker_threads: false,
+        zlib: false
+      }
     },
     plugins: [
-      new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.DefinePlugin({
-        __BASE_DIR__: JSON.stringify(process.env.PWD)
+        __BASE_DIR__: JSON.stringify(process.env.PWD),
+        PATTERN: JSON.stringify(process.env.PATTERN),
+        CATEGORIES: JSON.stringify(process.env.CATEGORIES)
+      }),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'development',
+        ...environmentVariables
+      }),
+      new webpack.ProvidePlugin({
+        process: require.resolve('process/browser')
       })
     ],
-    // avoid unneded optimizations for running our tests in order to get fatest bundling time
-    optimization: {
-      removeAvailableModules: false,
-      removeEmptyChunks: false,
-      splitChunks: false
-    },
     module: {
       rules: [
         {
+          test: [/\.s?css$/, /\.svg$/],
+          type: 'asset/inline',
+          generator: {
+            dataUrl: () => ''
+          }
+        },
+        {
           test: /\.jsx?$/,
+          exclude: new RegExp(
+            `node_modules(?!${sep}@s-ui${sep}studio${sep}src)`
+          ),
           use: [
             {
               loader: require.resolve('babel-loader'),
@@ -89,11 +133,6 @@ const config = {
               }
             }
           ]
-        },
-        {
-          // ignore css/scss require/imports files in the server
-          test: [/\.s?css$/, /\.svg$/],
-          use: ['null-loader']
         }
       ]
     }

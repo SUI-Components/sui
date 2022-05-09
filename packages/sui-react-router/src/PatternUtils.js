@@ -1,11 +1,21 @@
+// @ts-check
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/PatternUtils.js
 
-import invariant from './internal/invariant'
+import invariant from './internal/invariant.js'
 
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
+const matcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|\*\*|\*|\(|\)|\\\(|\\\)/g
 
+/**
+ * Escape the provided string
+ * @param {string} string - String to escape
+ * @returns {string} - Escaped string
+ */
+const escapeRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+/**
+ * Compile a string to a matcher function
+ * @param {string} pattern
+ */
 function _compilePattern(pattern) {
   let regexpSource = ''
   const paramNames = []
@@ -13,7 +23,7 @@ function _compilePattern(pattern) {
 
   let match
   let lastIndex = 0
-  const matcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|\*\*|\*|\(|\)|\\\(|\\\)/g
+
   while ((match = matcher.exec(pattern))) {
     if (match.index !== lastIndex) {
       tokens.push(pattern.slice(lastIndex, match.index))

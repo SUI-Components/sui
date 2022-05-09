@@ -10,3 +10,4 @@ client/public
 .scss-lint.yml
 assets/sui-studio-demo.gif
 test/
+CHANGELOG.md

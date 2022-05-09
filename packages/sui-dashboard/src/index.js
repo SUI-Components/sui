@@ -1,16 +1,11 @@
-const fg = require('fast-glob')
-const fs = require('fs')
+import fg from 'fast-glob'
+import {readFileSync} from 'fs'
 
 const flat = arr => [].concat(...arr)
 
-const getPackageContent = filepath => JSON.parse(fs.readFileSync(filepath))
+const getPackageContent = filepath => JSON.parse(readFileSync(filepath))
 
-module.exports.stats = async ({
-  repositories,
-  root,
-  dry,
-  getVersions = false
-}) => {
+export async function stats({repositories, root, getVersions = false}) {
   const suiComponents = fg
     .sync([
       `${root}/sui-components/components/**/package.json`,
@@ -59,29 +54,21 @@ module.exports.stats = async ({
     return acc
   }, {})
 
-  const partialStats = {
-    statsSUIComponentUsedInProjects,
-    statsSUIComponentUsedByProjects,
-    suiStats: {
-      totalSUIComponents: Object.keys(statsSUIComponentUsedInProjects).length,
-      totalReusedSUIComponents: Object.values(
-        statsSUIComponentUsedInProjects
-      ).reduce((acc, list) => (acc += list.length), 0),
-      maxPossible:
-        Object.keys(statsSUIComponentUsedInProjects).length *
-        repositories.length
-    }
-  }
+  const totalSUIComponents = Object.keys(statsSUIComponentUsedInProjects).length
+  const totalReusedSUIComponents = Object.values(
+    statsSUIComponentUsedInProjects
+  ).reduce((acc, list) => (acc += list.length), 0)
+  const maxPossible = totalSUIComponents * repositories.length
 
   return {
-    ...partialStats,
+    statsSUIComponentUsedByProjects,
+    statsSUIComponentUsedInProjects,
     suiStats: {
-      ...partialStats.suiStats,
       percentage:
-        Math.ceil(
-          (partialStats.suiStats.totalReusedSUIComponents * 100) /
-            partialStats.suiStats.maxPossible
-        ) + '%'
+        Math.ceil((totalReusedSUIComponents * 100) / maxPossible) + '%',
+      totalSUIComponents,
+      totalReusedSUIComponents,
+      maxPossible
     }
   }
 }

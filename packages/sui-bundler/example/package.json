@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "sui-bundler build -C",
-    "start": "sui-bundler dev",
-    "phoenix": "rimraf node_modules && npm i --cache-min=999999"
+    "start": "sui-bundler dev"
   },
   "dependencies": {
     "react": "17",
     "react-dom": "17"
   },
   "devDependencies": {
-    "@s-ui/bundler": "7"
+    "@s-ui/bundler": "9"
   },
   "keywords": [],
   "author": "",

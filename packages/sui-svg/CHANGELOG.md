@@ -1,5 +1,119 @@
 # CHANGELOG
 
+# 3.14.0 (2022-05-03)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** Add missing return to map function ([4323090](https://github.com/SUI-Components/sui/commit/4323090f017c500b8bb8de93653d83c783dc6d9a))
+
+
+
+# 3.13.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version ([82b639f](https://github.com/SUI-Components/sui/commit/82b639f87aed45d2a16841dea6de178ffd654db1))
+
+
+
+# 3.12.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-svg:** Ugrade fs-extra dependency and use same in all packages ([eb9f8d7](https://github.com/SUI-Components/sui/commit/eb9f8d72ff444b0fd97e682c0cc543f157334e75))
+
+
+
+# 3.11.0 (2022-02-22)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies ([d86999a](https://github.com/SUI-Components/sui/commit/d86999a989d612de372a55a99b77aa36f73ac23a))
+
+
+
+# 3.10.0 (2022-02-16)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies ([fc189bf](https://github.com/SUI-Components/sui/commit/fc189bfc5ef2474fa8504164dbd515658971f773))
+
+
+
+# 3.9.0 (2022-02-10)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version with less dependencies ([00fb3f9](https://github.com/SUI-Components/sui/commit/00fb3f97248279bf0228f47a9375f508b0b46d9c))
+
+
+
+# 3.8.0 (2022-02-07)
+
+
+### Features
+
+* **packages/sui-svg:** update fast-glob and vite ([0b088c1](https://github.com/SUI-Components/sui/commit/0b088c1a19c499d97fb70609951348183cf84bcc))
+
+
+
+# 3.7.0 (2022-01-31)
+
+
+
+# 3.6.0 (2022-01-10)
+
+
+### Features
+
+* **packages/sui-svg:** Bump dependencies ([c53c827](https://github.com/SUI-Components/sui/commit/c53c827ebedcca56e7b07cd42499887f130ebc08))
+* **packages/sui-svg:** Upgrade dependencies ([3aa5e48](https://github.com/SUI-Components/sui/commit/3aa5e48c9d45136949e5626401d1d2cfb0cb765b))
+
+
+
+# 3.5.0 (2021-11-30)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies to use same as bundler ([8453f31](https://github.com/SUI-Components/sui/commit/8453f31d2e1229df055eda843b1dec8c7d25b1a3))
+* **packages/sui-svg:** Upgrade sui-svg dependencies ([c176aca](https://github.com/SUI-Components/sui/commit/c176acab5f9179f2c6b7cc17dcf1d4a376e26590))
+
+
+
+# 3.4.0 (2021-10-18)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite dependency ([de94119](https://github.com/SUI-Components/sui/commit/de941194b8c17197011d5a3473e52b0851db0356))
+
+
+
+# 3.3.0 (2021-10-05)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies ([00f463a](https://github.com/SUI-Components/sui/commit/00f463a0231807c8dee17ac0daed25ffd43f0beb))
+
+
+
+# 3.2.0 (2021-09-22)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies for sui-svg ([b15c94f](https://github.com/SUI-Components/sui/commit/b15c94f190cc50fb9d306c1e681476fd46da2103))
+
+
+
 # 3.1.0 (2021-07-12)
 
 

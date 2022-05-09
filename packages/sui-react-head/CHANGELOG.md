@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.10.0 (2022-04-11)
+
+
+### Bug Fixes
+
+* **packages/sui-react-head:** fix HeadProps type validation ([97c8cc7](https://github.com/SUI-Components/sui/commit/97c8cc725aced9975cabb16a9110a376e6145450))
+
+
+
+# 1.9.0 (2021-09-22)
+
+
+### Bug Fixes
+
+* **packages/sui-react-head:** Fix wrong symbol inside package.json ([ed840e1](https://github.com/SUI-Components/sui/commit/ed840e156dd4d92996031056326d8372a06f91aa))
+
+
+
 # 1.8.0 (2021-09-20)
 
 

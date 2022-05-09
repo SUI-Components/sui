@@ -1,10 +1,18 @@
-const prettierOptions = require('./.prettierrc')
+const prettierOptions = require('./.prettierrc.js')
 
 module.exports = {
-  plugins: ['stylelint-scss', 'stylelint-prettier'],
+  extends: ['stylelint-config-recommended-scss'],
+  plugins: ['stylelint-prettier'],
   rules: {
     'prettier/prettier': [true, prettierOptions],
     'scss/at-rule-no-unknown': true,
+    'scss/at-import-partial-extension': null, // we should consider this? extensions yes or no?
+    'scss/at-import-no-partial-leading-underscore': null, // we should consider this?
+    'scss/comment-no-empty': null, // we must activate this sometime
+    'scss/dollar-variable-no-missing-interpolation': null, // we must activate this sometime
+    'scss/no-global-function-names': null, // we must activate this sometime
+    'scss/operator-no-newline-after': null,
+    'scss/operator-no-unspaced': null,
     'at-rule-no-unknown': null,
     'block-no-empty': true,
     'color-no-invalid-hex': true,
@@ -19,7 +27,7 @@ module.exports = {
     'font-family-no-duplicate-names': true,
     'font-family-no-missing-generic-family-keyword': true,
     // 'function-calc-no-invalid': true,
-    'function-calc-no-unspaced-operator': true,
+    'function-calc-no-unspaced-operator': null, // we must activate this sometime
     'function-linear-gradient-no-nonstandard-direction': true,
     'keyframe-declaration-no-important': true,
     'media-feature-name-no-unknown': true,
@@ -27,6 +35,7 @@ module.exports = {
     'no-duplicate-at-import-rules': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
+    'no-invalid-position-at-import-rule': null, // we must activate this sometime!!
     'no-invalid-double-slash-comments': true,
     'number-leading-zero': 'always',
     'property-no-unknown': true,

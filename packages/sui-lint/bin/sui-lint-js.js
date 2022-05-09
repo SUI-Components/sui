@@ -1,31 +1,77 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+// @ts-check
+
+const program = require('commander')
 const {
-  executeLintingCommand,
-  getArrayArgs,
+  checkFilesToLint,
   getFilesToLint,
   getGitIgnoredFiles,
-  isOptionSet,
   stageFilesIfRequired
-} = require('../src/helpers')
+} = require('../src/helpers.js')
 
-const BIN_PATH = require.resolve('eslint/bin/eslint')
-const CONFIG_PATH = require.resolve('../eslintrc.js')
+const {ESLint} = require('eslint')
+const config = require('../eslintrc.js')
+
+program
+  .option('--add-fixes')
+  .option('--staged')
+  .option('--fix', 'fix automatically problems with js files')
+  .parse(process.argv)
+
+const {addFixes, fix, staged} = program.opts()
+
+const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const IGNORE_PATTERNS = ['lib', 'dist', 'public', 'node_modules']
+const DEFAULT_PATTERN = './'
+const LINT_FORMATTER = 'stylish'
+const baseConfig = {
+  ...config,
+  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+}
 
-const patterns = IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+;(async function main() {
+  const files = await getFilesToLint({
+    extensions: EXTENSIONS,
+    defaultPattern: DEFAULT_PATTERN,
+    staged
+  })
+  if (
+    !checkFilesToLint({
+      files,
+      language: 'JavaScript',
+      defaultPattern: DEFAULT_PATTERN
+    })
+  )
+    return
 
-getFilesToLint(EXTENSIONS).then(
-  files =>
-    (files.length &&
-      executeLintingCommand(BIN_PATH, [
-        `-c ${CONFIG_PATH}`,
-        ...getArrayArgs('--ext', EXTENSIONS),
-        ...getArrayArgs('--ignore-pattern', patterns),
-        ...files
-      ]).then(
-        () => isOptionSet('--fix') && stageFilesIfRequired(EXTENSIONS)
-      )) ||
-    console.log('[sui-lint js] No javascript files to lint.')
-)
+  const eslint = new ESLint({
+    baseConfig,
+    fix,
+    extensions: EXTENSIONS,
+    useEslintrc: false
+  })
+
+  const results = await eslint.lintFiles(files)
+
+  if (fix) {
+    await ESLint.outputFixes(results)
+    stageFilesIfRequired({extensions: EXTENSIONS, staged, addFixes})
+  }
+
+  const formatter = await eslint.loadFormatter(LINT_FORMATTER)
+  const errors = ESLint.getErrorResults(results)
+
+  const resultsToShow = CI ? errors : results
+  const resultText = formatter.format(resultsToShow)
+
+  console.log(resultText)
+
+  if (errors.length > 0) {
+    throw new Error('You must fix linting errores before continuing...')
+  }
+})().catch(error => {
+  process.exitCode = 1
+  console.error('[sui-lint]', error)
+})

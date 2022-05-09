@@ -1,6 +1,6 @@
 import {useContext, useMemo} from 'react'
-import PdeContext from '../contexts/PdeContext'
-import {getPlatformStrategy} from './platformStrategies'
+import PdeContext from '../contexts/PdeContext.js'
+import {getPlatformStrategy} from './common/platformStrategies.js'
 
 /**
  * Hook to use a experiment

@@ -2,13 +2,13 @@
 /* eslint-disable no-console */
 // https://github.com/coryhouse/react-slingshot/blob/master/tools/build.js
 const program = require('commander')
-const rimraf = require('rimraf')
 const webpack = require('webpack')
 const path = require('path')
+const fs = require('fs')
 const {showError, showWarning} = require('@s-ui/helpers/cli')
 const {getPackageJson} = require('@s-ui/helpers/packages')
-const config = require('../webpack.config.lib')
-const log = require('../shared/log')
+const config = require('../webpack.config.lib.js')
+const log = require('../shared/log.js')
 
 program
   .usage('[options] <entry>')
@@ -28,14 +28,10 @@ program
   )
   .parse(process.argv)
 
-const {
-  clean = false,
-  output,
-  umd = false,
-  path: publicPath,
-  args: [entry],
-  root = false
-} = program
+const [entry] = program.args
+const options = program.opts()
+const {clean = false, output, umd = false, root = false} = options
+const publicPath = options.path
 
 if (!output) {
   showError(new Error('--output is mandatory.'), program)
@@ -69,10 +65,10 @@ if (umd) {
 
 if (clean) {
   log.processing(`Removing previous build in ${output}...`)
-  rimraf.sync(outputFolder)
+  fs.rmSync(outputFolder, {force: true, recursive: true})
 }
 
-log.processing('Generating minified bundle. This will take a moment...')
+log.processing('Generating minified bundle...')
 
 webpack(webpackConfig).run((error, stats) => {
   if (error) {

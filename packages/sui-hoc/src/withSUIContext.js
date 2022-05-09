@@ -1,8 +1,8 @@
-import React from 'react'
 import SUIContext from '@s-ui/react-context'
 
-export default context => Target => props => (
-  <SUIContext.Provider value={context}>
-    <Target {...props} />
-  </SUIContext.Provider>
-)
+export default context => Target => props =>
+  (
+    <SUIContext.Provider value={context}>
+      <Target {...props} />
+    </SUIContext.Provider>
+  )
