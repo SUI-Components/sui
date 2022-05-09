@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {stats} from '../../src/ua-parser/index.js'
-import db from './data/uaDB.json'
+import db from './data/uaDB.js'
 
 const test = () => {
   describe('#ua-parser.stats', () => {
