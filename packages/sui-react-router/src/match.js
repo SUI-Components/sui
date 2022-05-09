@@ -28,11 +28,8 @@ export default async (
     const history = externalHistory || createRouterHistory(location)
     const jsonRoutes = fromReactTreeToJSON(routes)
     const transitionManager = createTransitionManager({history, jsonRoutes})
-    const {
-      components,
-      redirectLocation,
-      routeInfo
-    } = await transitionManager.match(location)
+    const {components, redirectLocation, routeInfo} =
+      await transitionManager.match(location)
 
     // if it's not a redirection and we don't have components
     // then we should response with nothing

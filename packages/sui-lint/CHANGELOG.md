@@ -1,5 +1,84 @@
 # CHANGELOG
 
+# 4.17.0 (2022-05-03)
+
+
+### Features
+
+* **packages/sui-lint:** Disable correctly feature of stylelint ([d0011f3](https://github.com/SUI-Components/sui/commit/d0011f36877a23dc2e69973777db95fe69bd36b6))
+
+
+
+# 4.16.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Disable weird rule for sass ([7360f92](https://github.com/SUI-Components/sui/commit/7360f92dbfc9dbfa1fb81e75c5450d6e939207fe))
+* **packages/sui-lint:** Force new release ([4124679](https://github.com/SUI-Components/sui/commit/41246799c676cfdb0099696e7f4d78db9190ac96))
+
+
+
+# 4.15.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([0e6a336](https://github.com/SUI-Components/sui/commit/0e6a336e6abefbbc2b1ca4e4d25bf05fe9aca0d2))
+
+
+
+# 4.14.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([817ed63](https://github.com/SUI-Components/sui/commit/817ed63a8c75d64e9ea5ab1cf7b3e8e112f04468))
+
+
+
+# 4.13.0 (2022-04-27)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([18f0f4a](https://github.com/SUI-Components/sui/commit/18f0f4a1924935ea37d951f019381e2786bb2a8a))
+
+
+
+# 4.12.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix sass format error in prettier ([826c419](https://github.com/SUI-Components/sui/commit/826c419fc9c34d66b64250bb4e61097e1a69c9f6))
+
+
+
+# 4.11.0 (2022-04-04)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** fix default value for staged files when get files to lint ([0ebe47a](https://github.com/SUI-Components/sui/commit/0ebe47a114e0cebfea569260fc7782d7a78ffd48))
+* **packages/sui-lint:** fix options for lint scss ([1003672](https://github.com/SUI-Components/sui/commit/1003672668ab3d8c2a8d42790949ad947041823c))
+
+
+### Features
+
+* **packages/sui-lint:** update dependencies ([43ecae4](https://github.com/SUI-Components/sui/commit/43ecae492421eebfdaeb7441766dbb534e311e63))
+
+
+
+# 4.10.0 (2022-03-30)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([dd71fba](https://github.com/SUI-Components/sui/commit/dd71fbaa121fe5342dc0b1122079f8ce9fc52f35))
+
+
+
 # 4.9.0 (2022-02-22)
 
 

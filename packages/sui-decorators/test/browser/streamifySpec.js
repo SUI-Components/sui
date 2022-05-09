@@ -177,9 +177,8 @@ describe('Streamify', () => {
     describe('dispose', () => {
       it('unsubscribe to calls and results for Async method', done => {
         const onNext = sinon.spy()
-        const subscription = dummyDecorate.$.dummyMethodPromise.subscribe(
-          onNext
-        )
+        const subscription =
+          dummyDecorate.$.dummyMethodPromise.subscribe(onNext)
         // unsubscribe immediately to check onNext is not called
         subscription.dispose()
 

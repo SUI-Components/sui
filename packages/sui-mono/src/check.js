@@ -43,6 +43,8 @@ const flatten = status =>
     {increment: PACKAGE_VERSION_INCREMENT.NOTHING, commits: []}
   )
 
+const getPkgFromScope = scope => (scope === 'Root' ? '.' : scope)
+
 const check = () =>
   new Promise(resolve => {
     /**
@@ -67,9 +69,10 @@ const check = () =>
         preset: 'angular',
         append: true,
         transform: (commit, cb) => {
-          if (!packagesWithChangelog.includes(commit.scope)) return cb()
+          const pkg = getPkgFromScope(commit.scope)
 
-          const pkg = commit.scope
+          if (!packagesWithChangelog.includes(pkg)) return cb()
+
           let toPush = null
 
           if (COMMIT_TYPES_WITH_RELEASE.includes(commit.type)) {

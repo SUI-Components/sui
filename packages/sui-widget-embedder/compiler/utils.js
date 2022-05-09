@@ -5,7 +5,9 @@ const removePlugin = name => plugins => {
   return [...plugins.slice(0, pos), ...plugins.slice(pos + 1)]
 }
 
-const pipe = (...funcs) => arg =>
-  funcs.reduce((value, func) => func(value), arg)
+const pipe =
+  (...funcs) =>
+  arg =>
+    funcs.reduce((value, func) => func(value), arg)
 
 module.exports = {removePlugin, pipe}

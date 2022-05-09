@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.6.0",
+  "version": "11.9.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -23,7 +23,7 @@
     "chai": "4.3.6",
     "chai-dom": "1.11.0",
     "classnames": "2.2.5",
-    "commander": "6.2.1",
+    "commander": "8.3.0",
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.11",
     "fs-extra": "10.0.1",
@@ -32,6 +32,7 @@
     "just-debounce-it": "1.5.0",
     "just-kebab-case": "1.1.0",
     "just-pascal-case": "1.1.0",
+    "micromatch": "4.0.5",
     "node-fetch": "2.6.1",
     "normalize.css": "8.0.1",
     "react": "17",

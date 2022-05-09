@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.5.0 (2022-04-05)
+
+
+### Features
+
+* **packages/sui-domain:** Add a way to globally intercept errors on all axios instances ([18069b2](https://github.com/SUI-Components/sui/commit/18069b258b840a1d441fcb1e018bd44a43418cef))
+* **packages/sui-domain:** Stop using axios interceptors and use a wrapper class approach ([34c9bc2](https://github.com/SUI-Components/sui/commit/34c9bc2eeeef57386b6633789654b025583b8d72))
+
+
+
 # 2.4.0 (2022-03-01)
 
 

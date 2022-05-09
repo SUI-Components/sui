@@ -7,60 +7,60 @@ const shouldLoadIntersectionObserver = () =>
   !('intersectionRatio' in window.IntersectionObserverEntry.prototype) ||
   !('isIntersecting' in window.IntersectionObserverEntry.prototype)
 
-export const hocIntersectionObserverWithOptions = (
-  options = {}
-) => BaseComponent => {
-  const displayName = BaseComponent.displayName
+export const hocIntersectionObserverWithOptions =
+  (options = {}) =>
+  BaseComponent => {
+    const displayName = BaseComponent.displayName
 
-  return class WithIntersectionObserver extends Component {
-    static displayName = `withIntersectionObserver(${displayName})`
-    static contextTypes = BaseComponent.contextTypes
+    return class WithIntersectionObserver extends Component {
+      static displayName = `withIntersectionObserver(${displayName})`
+      static contextTypes = BaseComponent.contextTypes
 
-    state = {
-      isIntersecting: true,
-      intersectionObserver: null
-    }
+      state = {
+        isIntersecting: true,
+        intersectionObserver: null
+      }
 
-    handleChange = ([{isIntersecting}]) => {
-      this.setState({isIntersecting})
-    }
+      handleChange = ([{isIntersecting}]) => {
+        this.setState({isIntersecting})
+      }
 
-    innerRef = elem => {
-      this.refTarget = elem
-    }
+      innerRef = elem => {
+        this.refTarget = elem
+      }
 
-    async componentDidMount() {
-      const target = this.refTarget
-      if (shouldLoadIntersectionObserver()) {
-        await import(
-          /* webpackChunkName: "intersection-observer" */ 'intersection-observer'
+      async componentDidMount() {
+        const target = this.refTarget
+        if (shouldLoadIntersectionObserver()) {
+          await import(
+            /* webpackChunkName: "intersection-observer" */ 'intersection-observer'
+          )
+        }
+        this.setState(
+          {
+            intersectionObserver: new IntersectionObserver(this.handleChange)
+          },
+          () => this.state.intersectionObserver.observe(target, options)
         )
       }
-      this.setState(
-        {
-          intersectionObserver: new IntersectionObserver(this.handleChange)
-        },
-        () => this.state.intersectionObserver.observe(target, options)
-      )
-    }
 
-    componentWillUnmount() {
-      if (this.state.intersectionObserver) {
-        this.state.intersectionObserver.disconnect()
+      componentWillUnmount() {
+        if (this.state.intersectionObserver) {
+          this.state.intersectionObserver.disconnect()
+        }
+      }
+
+      render() {
+        const {isIntersecting: isVisible} = this.state
+        return (
+          <BaseComponent
+            {...this.props}
+            isVisible={isVisible}
+            innerRef={this.innerRef}
+          />
+        )
       }
     }
-
-    render() {
-      const {isIntersecting: isVisible} = this.state
-      return (
-        <BaseComponent
-          {...this.props}
-          isVisible={isVisible}
-          innerRef={this.innerRef}
-        />
-      )
-    }
   }
-}
 
 export default hocIntersectionObserverWithOptions()

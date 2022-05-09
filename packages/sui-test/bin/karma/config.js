@@ -81,6 +81,7 @@ const config = {
     plugins: [
       new webpack.DefinePlugin({
         __BASE_DIR__: JSON.stringify(process.env.PWD),
+        PATTERN: JSON.stringify(process.env.PATTERN),
         CATEGORIES: JSON.stringify(process.env.CATEGORIES)
       }),
       new webpack.EnvironmentPlugin({

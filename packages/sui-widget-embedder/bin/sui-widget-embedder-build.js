@@ -44,9 +44,11 @@ program
   })
   .parse(process.argv)
 
-const remoteCdn = program.remoteCdn || suiWidgetEmbedderConfig.remoteCdn
+const {clean, remoteCdn: remoteCdnOption} = program.opts()
 
-if (program.clean) {
+const remoteCdn = remoteCdnOption || suiWidgetEmbedderConfig.remoteCdn
+
+if (clean) {
   console.log('Removing previous build...')
   rmSync(PUBLIC_PATH, {force: true, recursive: true})
 }

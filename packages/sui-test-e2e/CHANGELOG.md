@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.9.0 (2022-03-29)
+
+
+### Features
+
+* **packages/sui-test-e2e:** update dependencies ([95ae508](https://github.com/SUI-Components/sui/commit/95ae508add8995e6112a79ceae3d7bb6219bb362))
+
+
+
 # 1.8.0 (2022-01-10)
 
 

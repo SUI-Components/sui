@@ -75,7 +75,7 @@ emptyDir(LIB_FOLDER)
   .then(getAllSrcSvgFiles)
   .then(entries =>
     Promise.all([
-      entries.map(file => {
+      entries.map(file =>
         readFile(file, 'utf8')
           .then(transformSvgToReactComponent)
           .then(transformCodeWithBabel)
@@ -84,7 +84,7 @@ emptyDir(LIB_FOLDER)
             console.error(error)
             process.exit(1)
           })
-      })
+      )
     ])
   )
   .then(createIndexFile)
