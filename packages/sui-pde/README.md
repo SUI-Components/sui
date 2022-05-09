@@ -256,8 +256,10 @@ It's slighty different to force a feature flag to be activated or deactivated. L
 Meant to exist if you need more than one decision taking optimizely sdk.
 Integration with segment will only work for the first one so it will be necesary to configure segment so it forwards the events to the other optimizely destinations.
 
-When initializing PDE instead use `MultipleOptimizelyAdapter` of `OptimizelyAdapter`
+When initializing PDE use `MultipleOptimizelyAdapter` instead of `OptimizelyAdapter`
 ```js
+    import MultipleOptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely/multiple'
+...
     const optimizelyInstances = MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
       default: {
         sdkKey: DEFAULT_INSTANCE_SDK_KEY,
