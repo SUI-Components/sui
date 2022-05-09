@@ -33,14 +33,14 @@ import OptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely'
 // all options here https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node, but for now only 3 of them are available
 const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
   sdkKey: MY_API_KEY,  // optimizely sdk api key
-  options // optional, datafileOptions
+  options, // optional, datafileOptions
   datafile // optional
 })
 
 const optimizelyAdapter = new OptimizelyAdapter({
   optimizely: optimizelyInstance,
   userId: // mandatory,
-  hasUserConsents  // if false, the user won't be part of the A/B test,
+  hasUserConsents,  // if false, the user won't be part of the A/B test,
   applicationAttributes: {   // optional, global application attributes that must be send on every experiment activation
     site: 'coches.net',
     environment: 'development'
@@ -254,4 +254,34 @@ It's slighty different to force a feature flag to be activated or deactivated. L
 ### Multiple Optimizely Adapters
 
 Meant to exist if you need more than one decision taking optimizely sdk.
-Integration with segment will only work for the first one so it will be necesary to configure segment so it forwards the events to the other optimizely destinations
+Integration with segment will only work for the first one so it will be necesary to configure segment so it forwards the events to the other optimizely destinations.
+
+When initializing PDE instead use `MultipleOptimizelyAdapter` of `OptimizelyAdapter`
+```js
+    const optimizelyInstances = MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
+      default: {
+        sdkKey: DEFAULT_INSTANCE_SDK_KEY,
+        options: {} // options for default instance
+      },
+      alternative: {
+        sdkKey: ALTERNATIVE_INSTANCE_SDK_KEY,
+        options: {} // options for alternative instance
+      }
+    })
+    
+    const optimizelyAdapter = new MultipleOptimizelyAdapter({
+      default: {
+        optimizely: optimizelyInstances.default,
+        ...adapterOptions // like creating single adapter
+      },
+      alternative: {
+        optimizely: optimizelyInstances.alternative,
+        ...adapterOptions // like creating single adapter
+      }
+    })
+    
+    const pde = new PDE({
+      adapter: optimizelyAdapter,
+      ...
+    })
+```
