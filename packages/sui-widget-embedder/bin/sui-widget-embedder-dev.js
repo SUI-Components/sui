@@ -43,7 +43,7 @@ appFactory({address, browser, page, config}).listen(PORT, () => {
     `
 ✅  Widget compiled in development mode ⚙️!
 
-Steps to use it:
+Steps to use it in your project:
 
 1️⃣  Open the url where you want to inject the widget
 2️⃣  Paste the next javascript code in your console and press Enter (it's already in your clipboard 📋):
@@ -51,7 +51,13 @@ Steps to use it:
 ${scriptToExecute}
 
 💡 You could save the snippet as a bookmark in case you want to improve your development cycle. Just be sure you're always using the same PORT with the widget-embedder.
-
 `
   )
+
+  browser &&
+    console.log(`
+Use widgets demo:
+
+🌎  Open the url in your browser: http://${address}:${PORT}
+`)
 })
