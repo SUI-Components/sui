@@ -53,7 +53,7 @@ export default class OptimizelyAdapter {
    * @param {object=} param.datafile
    * @param {object} param.options datafile options https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
    * @param {object} param.optimizely test purposes only, optimizely sdk
-   * @param {function} param.eventDispatcher https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
+   * @param {function} param.eventDispatcher https://docs.developers.optimizely.com/full-stack/docs/configure-event-dispatcher-javascript-node
    */
   static createOptimizelyInstance({
     options: optionParameter,
