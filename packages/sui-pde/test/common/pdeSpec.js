@@ -22,6 +22,7 @@ describe('@s-ui pde', () => {
   } = {}) => {
     const stub = {
       onReadyStub: sinon.stub().returns(true),
+      getDatafileStub: sinon.stub().returns({}),
       activate: sinon.stub().returns(activate),
       onReady: async () => stub.onReadyStub(),
       getEnabledFeatures: () => getEnabledFeatures,
@@ -37,7 +38,8 @@ describe('@s-ui pde', () => {
           featureNotUsedInTest: {
             experimentsMap: {}
           }
-        }
+        },
+        getDatafile: () => stub.getDatafileStub()
       }),
       setLogLevel: () => null,
       setLogger: () => null,
@@ -375,6 +377,39 @@ describe('@s-ui pde', () => {
       await multipleAdapter.onReady()
       expect(defaultInstance.onReadyStub.called).to.be.true
       expect(alternateInstance.onReadyStub.called).to.be.true
+    })
+
+    it('should get initial data', () => {
+      const initialData = multipleAdapter.getInitialData()
+      expect(defaultInstance.getDatafileStub.called).to.be.true
+      expect(alternateInstance.getDatafileStub.called).to.be.true
+      expect(initialData).to.deep.equal({
+        [defaultAdapterId]: {},
+        [alternateAdapterId]: {}
+      })
+    })
+
+    it.client('should initialize with initial data', () => {
+      window.__INITIAL_CONTEXT_VALUE__ = {
+        pde: {
+          [defaultAdapterId]: {initialDatafile: defaultAdapterId},
+          [alternateAdapterId]: {initialDatafile: alternateAdapterId}
+        }
+      }
+      const optimizelySDK1 = createOptimizelyInstanceStub()
+      const optimizelySDK2 = createOptimizelyInstanceStub()
+
+      MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
+        [defaultAdapterId]: {optimizely: optimizelySDK1},
+        [alternateAdapterId]: {optimizely: optimizelySDK2}
+      })
+
+      expect(
+        optimizelySDK1.createInstance.firstCall.args[0].datafile
+      ).to.deep.equal({initialDatafile: defaultAdapterId})
+      expect(
+        optimizelySDK2.createInstance.firstCall.args[0].datafile
+      ).to.deep.equal({initialDatafile: alternateAdapterId})
     })
 
     it('should accept a single adapter', () => {
