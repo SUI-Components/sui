@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.10.0 (2022-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-test-e2e:** get viewport options as number instead as boolean ([3f4b736](https://github.com/SUI-Components/sui/commit/3f4b7364addcbc549430e53e9e0873addc88f1eb))
+
+
+
 # 1.9.0 (2022-03-29)
 
 
