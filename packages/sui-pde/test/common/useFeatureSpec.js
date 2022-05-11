@@ -44,7 +44,8 @@ describe('when pde context is set', () => {
       expect(isFeatureEnabled.called).to.equal(true)
       expect(isFeatureEnabled.args[0][0]).to.deep.equal({
         featureKey: 'featureKey1',
-        attributes: {attribute1: 'value'}
+        attributes: {attribute1: 'value'},
+        adapterId: undefined
       })
     })
 
@@ -58,7 +59,8 @@ describe('when pde context is set', () => {
       expect(isFeatureEnabled.called).to.equal(true)
       expect(isFeatureEnabled.args[0][0]).to.deep.equal({
         featureKey: 'featureKey2',
-        attributes: {attribute1: 'value'}
+        attributes: {attribute1: 'value'},
+        adapterId: undefined
       })
     })
 

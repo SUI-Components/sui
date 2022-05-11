@@ -51,9 +51,15 @@ const trackLinkedExperimentsViewed = ({
  * @param {string} featureKey
  * @param {object} attributes
  * @param {string} [queryString] test purposes only
+ * @param {string} adapterId
  * @return {{isActive: boolean}}
  */
-export default function useFeature(featureKey, attributes, queryString) {
+export default function useFeature(
+  featureKey,
+  attributes,
+  queryString,
+  adapterId
+) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
     throw new Error('[useFeature] sui-pde provider is required to work')
@@ -72,12 +78,14 @@ export default function useFeature(featureKey, attributes, queryString) {
 
     const {isActive, linkedExperiments} = pde.isFeatureEnabled({
       featureKey,
-      attributes
+      attributes,
+      adapterId
     })
 
     const variables = pde.getAllFeatureVariables({
       featureKey,
-      attributes
+      attributes,
+      adapterId
     })
 
     trackFeatureFlagViewed({
