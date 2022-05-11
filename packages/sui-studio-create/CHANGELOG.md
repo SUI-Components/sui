@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.23.0 (2022-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio-create:** Add missing comma in the JSON creator ([72ed9ab](https://github.com/SUI-Components/sui/commit/72ed9abc5d9c08545fad771e86d02a4ea82795cf))
+
+
+
 # 4.22.0 (2022-03-08)
 
 

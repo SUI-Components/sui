@@ -11,7 +11,8 @@ const PORT = process.env.PORT || config.devPort || 3000
 config.port = PORT
 
 program
-  .usage('-p detail -a address')
+  .usage('-p detail -a address -b')
+  .option('-b, --browser', 'Enable the dev mode inside a html file')
   .option('-p, --page <name>', 'Name of the page')
   .option(
     '-a, --address <ip-address>',
@@ -33,16 +34,16 @@ program
   })
   .parse(process.argv)
 
-const {address, page} = program.opts()
+const {address, browser, page} = program.opts()
 
-appFactory({address, page, config}).listen(PORT, () => {
+appFactory({address, browser, page, config}).listen(PORT, () => {
   const scriptToExecute = `(function(s,o,g,r,a,m){a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(document,'script','http://${address}:${PORT}/bundle.js');`
   ncp.copy(scriptToExecute)
   console.log(
     `
 ✅  Widget compiled in development mode ⚙️!
 
-Steps to use it:
+Steps to use it in your project:
 
 1️⃣  Open the url where you want to inject the widget
 2️⃣  Paste the next javascript code in your console and press Enter (it's already in your clipboard 📋):
@@ -50,7 +51,13 @@ Steps to use it:
 ${scriptToExecute}
 
 💡 You could save the snippet as a bookmark in case you want to improve your development cycle. Just be sure you're always using the same PORT with the widget-embedder.
-
 `
   )
+
+  browser &&
+    console.log(`
+Use widgets demo:
+
+🌎  Open the url in your browser: http://${address}:${PORT}
+`)
 })

@@ -45,6 +45,9 @@ module.exports = {
     minimizer: [minifyJs({extractComments, sourceMap})]
   },
   plugins: cleanList([
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    }),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     }),
