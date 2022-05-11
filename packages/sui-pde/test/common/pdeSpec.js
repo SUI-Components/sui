@@ -46,8 +46,9 @@ describe('@s-ui pde', () => {
       logging: {
         createLogger: () => null
       },
-      createInstance: () => stub
+      createInstance: sinon.stub()
     }
+    stub.createInstance.returns(stub)
     return stub
   }
 
