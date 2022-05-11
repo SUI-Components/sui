@@ -286,3 +286,9 @@ When initializing PDE use `MultipleOptimizelyAdapter` instead of `OptimizelyAdap
       ...
     })
 ```
+
+#### :warning: Using segment integration
+
+Regarding to [Segment documentation](https://segment.com/docs/connections/destinations/catalog/optimizely-web/#optimizely-full-stack-javascript-sdk)
+
+Segment expects a single `window.optimizelyClientInstance` to exist in the browser, so when using multiple optimizely instances, events from multiple instances will be sent to a single Segment source, so the Segment destinations should be properly configured having this in consideration. 
