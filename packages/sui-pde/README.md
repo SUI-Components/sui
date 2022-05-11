@@ -264,18 +264,19 @@ When initializing PDE use `MultipleOptimizelyAdapter` instead of `OptimizelyAdap
         sdkKey: DEFAULT_INSTANCE_SDK_KEY,
         options: {} // options for default instance
       },
-      alternative: {
+      alternate: {
         sdkKey: ALTERNATIVE_INSTANCE_SDK_KEY,
         options: {} // options for alternative instance
       }
     })
-    
+
+    // first id will be used as default adapterId, in this case 'default' but is open to any id
     const optimizelyAdapter = new MultipleOptimizelyAdapter({
       default: {
         optimizely: optimizelyInstances.default,
         ...adapterOptions // like creating single adapter
       },
-      alternative: {
+      alternate: {
         optimizely: optimizelyInstances.alternative,
         ...adapterOptions // like creating single adapter
       }
@@ -285,6 +286,21 @@ When initializing PDE use `MultipleOptimizelyAdapter` instead of `OptimizelyAdap
       adapter: optimizelyAdapter,
       ...
     })
+```
+
+Using the hooks
+
+```js
+const MyComponent = () => {
+  const defaultFeature = useFeature('myFeatureKey') // will return the {isActive, variables} object from the default optimizely instance
+  const alsoDefaultFeature = useFeature('myFeatureKey', null, null, 'default') // will return the {isActive, variables} object from the default optimizely instance
+  const alternateFeature = useFeature('myFeatureKey', null, null, 'alternative') // will return the {isActive, variables} object from the alternate optimizely instance
+  
+  const defaultExperiment = useExperiment({experimentName: 'myExperimentName'}) // will return the experiment object from the default optimizely instance
+  const alsoDefaultExperiment = useExperiment({experimentName: 'myExperimentName', adapterId: 'default'}) // will return the experiment object from the default optimizely instance
+  const alternateExperiment = useExperiment({experimentName: 'myExperimentName', adapterId: 'alternate'}) // will return the experiment object from the alternate optimizely instance
+  ...
+}
 ```
 
 #### :warning: Using segment integration
