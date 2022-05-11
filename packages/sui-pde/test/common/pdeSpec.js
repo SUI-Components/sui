@@ -21,8 +21,9 @@ describe('@s-ui pde', () => {
     getVariation = 'variationB'
   } = {}) => {
     const stub = {
+      onReadyStub: sinon.stub().returns(true),
       activate: sinon.stub().returns(activate),
-      onReady: async () => true,
+      onReady: async () => stub.onReadyStub(),
       getEnabledFeatures: () => getEnabledFeatures,
       isFeatureEnabled: sinon.stub().returns(isFeatureEnabled),
       getVariation: sinon.stub().returns(getVariation),
@@ -317,6 +318,7 @@ describe('@s-ui pde', () => {
 
     let defaultInstance
     let alternateInstance
+    let multipleAdapterInstances
     let multipleAdapter
     let pde
 
@@ -327,7 +329,7 @@ describe('@s-ui pde', () => {
       alternateInstance = createOptimizelyInstanceStub({
         activate: alternateInstanceActiveVariation
       })
-      const multipleAdapterInstances =
+      multipleAdapterInstances =
         MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
           [defaultAdapterId]: {optimizely: defaultInstance},
           [alternateAdapterId]: {optimizely: alternateInstance}
@@ -357,6 +359,40 @@ describe('@s-ui pde', () => {
       expect(variationOnDefaultWithAdapterId).to.equal(
         defaultInstanceActiveVariation
       )
+    })
+
+    it('should use alternate adapter id', () => {
+      const variationOnAlternateWithAdapterId = pde.activateExperiment({
+        name: 'default-test',
+        adapterId: alternateAdapterId
+      })
+      expect(variationOnAlternateWithAdapterId).to.equal(
+        alternateInstanceActiveVariation
+      )
+    })
+
+    it('should be ready on multiple instances', async () => {
+      await multipleAdapter.onReady()
+      expect(defaultInstance.onReadyStub.called).to.be.true
+      expect(alternateInstance.onReadyStub.called).to.be.true
+    })
+
+    it('should accept a single adapter', () => {
+      multipleAdapter = new MultipleOptimizelyAdapter({
+        [alternateAdapterId]: {
+          optimizely: multipleAdapterInstances[alternateAdapterId]
+        }
+      })
+      pde = new SuiPDE({adapter: multipleAdapter, hasUserConsents: true})
+      const variationWithoutAdapterId = pde.activateExperiment({
+        name: 'default-test'
+      })
+      const variationWithAdapterId = pde.activateExperiment({
+        name: 'default-test',
+        adapterId: alternateAdapterId
+      })
+      expect(variationWithoutAdapterId).to.equal(variationWithAdapterId)
+      expect(variationWithAdapterId).to.equal(alternateInstanceActiveVariation)
     })
   })
 })
