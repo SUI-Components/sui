@@ -154,6 +154,37 @@ Also, it will copy to your clipboard a Javascript code snippet. Open the page in
 
 💡 You could create a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) with the snippet. For that, just add `javascript:` before the snippet provided in order to improve your DX. Be aware as the PORT provided could change.
 
+### The `-b --browser` option
+
+In some cases, a developer working on a widget may want to load the widget into a sandboxed environment, a isolated HTML template containing the root node where the widget will be mount.
+
+This could happens for example when the page that will host the widget has not yet the root node, or when the APIs called by the widget in production are not ready.
+
+To mount the widget into a different page, two steps are required:
+ 
+ 1. Create an `index.html` template file inside the target widget page folder, adding the root node to the template. E.g. `pages/my_first_page/index.html`
+
+ ```html 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My First Widget</title>
+</head>
+<body>
+  <div id="my-first-widget"></div>
+</body>
+</html>
+ ```
+
+ 2. Launch the development command adding the -b option to build and inject the widget code into the html template.
+
+Doing so, you'll be able to visit the root page on the port used for development and see the widget mounting correctly.
+
+E.g. visit http://localhost:8077/
+
 ## How to build
 
 If you want to get the remoteCdn from package config you just need to do that:

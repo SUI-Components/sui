@@ -62,7 +62,7 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
     "lint": "npm run lint:js && npm run lint:sass",
     "phoenix": "npx @s-ui/mono@2 run 'rm -rf ./node_modules' && rm -rf ./node_modules && npm install --legacy-peer-deps",
     "phoenix:ci": "npm run phoenix -- --no-optional --no-fund --no-audit",
-    "pre-commit": "npm run lint"
+    "pre-commit": "npm run lint",
     "release": "sui-mono release",
     "start": "sui-studio start"
   },

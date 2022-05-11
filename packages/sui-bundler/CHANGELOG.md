@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.20.0 (2022-05-10)
+
+
+### Features
+
+* **packages/sui-bundler:** Add support to process env variable ([0679243](https://github.com/SUI-Components/sui/commit/0679243b01f34ec5eef5472ead78f5fca2d6e5db))
+
+
+
 # 9.19.0 (2022-05-02)
 
 
