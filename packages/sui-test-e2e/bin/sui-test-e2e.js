@@ -77,8 +77,11 @@ program
     false
   )
   .option('-C, --ci', 'Continuous integration mode, reduces memory consumption')
-  .option('-VH, --viewportHeight', 'Sets custom viewport height')
-  .option('-VW, --viewportWidth', 'Sets custom viewport width')
+  .option(
+    '-VH, --viewportHeight <viewportHeight>',
+    'Sets custom viewport height'
+  )
+  .option('-VW, --viewportWidth <viewportWidth>', 'Sets custom viewport width')
   .option(
     '-K, --key <key>',
     'It is used to authenticate the project into the Dashboard Service'
@@ -135,11 +138,11 @@ if (userAgent) {
 }
 
 if (viewportHeight) {
-  cypressConfig.viewportHeight = viewportHeight
+  cypressConfig.viewportHeight = Number(viewportHeight)
 }
 
 if (viewportWidth) {
-  cypressConfig.viewportWidth = viewportWidth
+  cypressConfig.viewportWidth = Number(viewportWidth)
 }
 
 if (screenshotsOnError) {
