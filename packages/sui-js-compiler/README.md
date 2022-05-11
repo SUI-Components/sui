@@ -34,7 +34,7 @@ $ ./node_modules/.bin/sui-js-compiler
 | Option   | Type           | Default | Description                                                               |
 | -------- | -------------- | ------- | ------------------------------------------------------------------------- |
 | --ignore | string \| glob | -       | Takes all the pattern comma separated and ignore them during compilation. |
-| --ts     | bool \| glob   | -       | Enable TypeScript type declarations generation.                           |
+| --ts     | bool \| glob   | false   | Enable TypeScript type declarations generation.                           |
 
 ```sh
 $ ./node_modules/.bin/sui-js-compiler --ignore=./src/**/*.test.js
