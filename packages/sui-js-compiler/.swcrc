@@ -1,12 +1,20 @@
 [
   {
     "test": ".tsx?$",
+    "minify": true,
     "jsc": {
       "parser": {
         "syntax": "typescript",
         "tsx": true,
-        "decorators": false,
-        "dynamicImport": true
+        "dynamicImport": true,
+        "privateMethod": true,
+        "functionBind": true,
+        "exportDefaultFrom": true,
+        "exportNamespaceFrom": true,
+        "decorators": true,
+        "decoratorsBeforeExport": true,
+        "topLevelAwait": true,
+        "importMeta": true
       },
       "transform": {
         "legacyDecorator": true,
@@ -31,12 +39,20 @@
   },
   {
     "test": ".jsx?$",
+    "minify": true,
     "jsc": {
       "parser": {
         "syntax": "ecmascript",
         "jsx": true,
-        "decorators": false,
-        "dynamicImport": true
+        "dynamicImport": true,
+        "privateMethod": true,
+        "functionBind": true,
+        "exportDefaultFrom": true,
+        "exportNamespaceFrom": true,
+        "decorators": true,
+        "decoratorsBeforeExport": true,
+        "topLevelAwait": true,
+        "importMeta": true
       },
       "transform": {
         "legacyDecorator": true,
