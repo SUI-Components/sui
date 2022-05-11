@@ -3,8 +3,9 @@
 > Compile your JavaScript and JSX files to be compatible with the browsers
 
 It provides:
-* Unified code transformation.
-* Usage of SWC to compile files faster.
+
+- Unified code transformation.
+- Usage of SWC to compile files faster.
 
 ## Installation
 
@@ -30,9 +31,10 @@ $ ./node_modules/.bin/sui-js-compiler
 
 ### Options
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| --ignore | string \| glob | - | Takes all the pattern comma separated and ignore them during compilation. |
+| Option   | Type           | Default | Description                                                               |
+| -------- | -------------- | ------- | ------------------------------------------------------------------------- |
+| --ignore | string \| glob | -       | Takes all the pattern comma separated and ignore them during compilation. |
+| --ts     | bool \| glob   | -       | Enable TypeScript type declarations generation.                           |
 
 ```sh
 $ ./node_modules/.bin/sui-js-compiler --ignore=./src/**/*.test.js
