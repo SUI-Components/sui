@@ -6,8 +6,6 @@ const {rmSync} = require('fs')
 
 const {checkIsMonoPackage, getWorkspaces} = require('../src/config.js')
 
-const DEFAULT_CHUNK = 5
-
 const CI_FLAGS = [
   'loglevel=error',
   'no-audit',
@@ -21,10 +19,6 @@ const CI_FLAGS = [
 ].map(flag => `--${flag}`)
 
 program
-  .option(
-    '-c, --chunk <number>',
-    `Execute by chunks of N packages (defaults to ${DEFAULT_CHUNK})`
-  )
   .option(
     '--ci',
     'Optimized mode for CI. Avoid removing folders, showing progress, auditing, write package-lock files and more'
@@ -55,7 +49,6 @@ program
 
 const {
   audit = true,
-  chunk = DEFAULT_CHUNK,
   ci = Boolean(process.env.CI),
   progress = true,
   production = false,
