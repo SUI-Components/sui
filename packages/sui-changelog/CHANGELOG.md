@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.14.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-changelog:** Ugrade dependencies ([7d4ea86](https://github.com/SUI-Components/sui/commit/7d4ea86aa22ba74179dd9679a8078b28e117836e))
+
+
+
 # 1.13.0 (2022-04-11)
 
 
