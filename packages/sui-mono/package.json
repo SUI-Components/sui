@@ -13,8 +13,7 @@
     "conventional-changelog": "3.1.25",
     "enquirer": "2.3.6",
     "git-url-parse": "11.4.4",
-    "glob": "7.2.0",
-    "rimraf": "3.0.2",
+    "glob": "8.0.3",
     "word-wrap": "1.2.3"
   },
   "repository": {
