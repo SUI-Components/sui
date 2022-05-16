@@ -27,7 +27,7 @@
     "edit-json-file": "1.7.0",
     "git-url-parse": "11.4.4",
     "json2md": "1.12.0",
-    "node-fetch": "3.2.3",
+    "node-fetch": "3.2.4",
     "rimraf": "3.0.2",
     "what-the-diff": "0.6.0"
   }
