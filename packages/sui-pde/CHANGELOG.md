@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.19.0 (2022-05-16)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix event dispatcher on creating instance ([5ce449c](https://github.com/SUI-Components/sui/commit/5ce449c5e0459f26f0870ba70aafa130ebae6842))
+
+
+
 # 2.18.0 (2022-05-11)
 
 
