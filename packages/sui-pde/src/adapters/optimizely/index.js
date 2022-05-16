@@ -60,7 +60,7 @@ export default class OptimizelyAdapter {
     sdkKey,
     datafile,
     optimizely = optimizelySDK,
-    eventDispatcher
+    eventDispatcher = optimizelySDK.eventDispatcher
   }) {
     const options = {...DEFAULT_DATAFILE_OPTIONS, ...optionParameter}
     optimizely.setLogLevel(LOGGER_LEVEL)
