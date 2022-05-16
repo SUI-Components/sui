@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.21.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Ugrade dependencies ([ffaf224](https://github.com/SUI-Components/sui/commit/ffaf224dc6bce56470e9e1d126b2f89460c9683d))
+
+
+
 # 9.20.0 (2022-05-10)
 
 
