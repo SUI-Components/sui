@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 const program = require('commander')
-const {getSpawnPromise, parallelSpawn, showError} = require('@s-ui/helpers/cli')
+const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
+const {rmSync} = require('fs')
 
 const {checkIsMonoPackage, getWorkspaces} = require('../src/config.js')
 
@@ -28,6 +29,10 @@ program
     '--ci',
     'Optimized mode for CI. Avoid removing folders, showing progress, auditing, write package-lock files and more'
   )
+  .option(
+    '--strict-peer-deps',
+    'Install peer dependencies using the modern strict peer dependency install'
+  )
   .option('--no-audit', 'Avoid auditing packages for better performance')
   .option(
     '--no-root',
@@ -38,17 +43,10 @@ program
     'Force to not show progress of tasks (perfect for CI environments)'
   )
   .option('--production', 'Install only production packages')
-  .option(
-    '-s, --scope <string>',
-    'Runs phoenix on a given scope, for example: -s atom/button'
-  )
   .on('--help', () => {
     console.log(`
   Description:
-    Removes node_modules folder and reinstalls dependencies
-    in all packages.
-    Equivalent to 'npx rimraf node_modules && npm i' but works on any environment and
-    executes it concurrently on each package (and/or on your project root folder).
+    Removes node_modules folder and package-lock.json files from all packages.
 
   Examples:
     $ sui-mono phoenix`)
@@ -62,7 +60,7 @@ const {
   progress = true,
   production = false,
   root = true,
-  scope: scopeArgument
+  strictPeerDeps = false
 } = program.opts()
 
 const NPM_BIN = 'npm'
@@ -74,16 +72,23 @@ const NPM_CMD = [
     '--no-fund',
     audit ? '' : '--no-audit',
     production ? '--production' : '',
-    progress ? '' : '--no-progress'
+    progress ? '' : '--no-progress',
+    strictPeerDeps ? '' : '--legacy-peer-deps'
   ]
 ]
-const RIMRAF_CMD = [
-  require.resolve('rimraf/bin'),
-  ['package-lock.json', 'node_modules']
-]
 
-console.log(`[sui-mono] Clean install ${scopeArgument || 'all'} packages`)
+console.log(`[sui-mono] Clean installing packages`)
 console.info(`[sui-mono] CI mode enabled: ${ci}`)
+
+/** Remove dependencies and package-lock
+ *  @param {string} cwd - current working directory
+ */
+const removeDependencies = cmd => {
+  try {
+    rmSync(`${cmd}/node_modules`, {force: true, recursive: true})
+    rmSync(`${cmd}/package-lock.json`, {force: true, recursive: true})
+  } catch {}
+}
 
 /**
  * Create needed commands to install packages
@@ -104,51 +109,38 @@ const createInstallPackagesCommand = (cwd = process.cwd()) => {
 }
 
 /**
- * Install root packages
+ * Install packages
  * @return {Promise}
  */
-const installRootPackages = async () => {
+const installPackages = async () => {
   if (!root) return Promise.resolve()
 
-  console.log(`[sui-mono] Removing previous root packages...`)
-  const [removeBin, removeArgs] = RIMRAF_CMD
-  await getSpawnPromise(removeBin, removeArgs, {cwd: process.cwd()})
-
-  console.log(`[sui-mono] Installing root packages...`)
+  console.log(`[sui-mono] Installing packages...`)
   const [installBin, installArgs, installExecutionParams] =
     createInstallPackagesCommand()
   await getSpawnPromise(installBin, installArgs, installExecutionParams)
 
-  console.log('[sui-mono] Installed root packages')
+  console.log('[sui-mono] Installed packages')
 }
 
-const executePhoenixOnPackages = () => {
+const removeDependenciesForPackages = () => {
+  if (!root) return Promise.resolve()
+
+  console.log(`[sui-mono] Removing previous root packages...`)
+  removeDependencies(process.cwd())
+
   if (checkIsMonoPackage()) return
 
-  // get scopes only where a `npm install` is possible
-  const scopes = getWorkspaces()
-
-  const removePackagesCommands = scopes.map(cwd => [...RIMRAF_CMD, {cwd}])
-  const installPackagesCommands = scopes.map(createInstallPackagesCommand)
-
+  console.log(`[sui-mono] Removing previous packages...`)
   // if we're on CI, we don't need to remove folders
   const removeFoldersPromise = ci
     ? Promise.resolve()
-    : parallelSpawn(removePackagesCommands, {
-        chunks: chunk,
-        title: 'rimraf'
-      })
+    : Promise.all(getWorkspaces().map(removeDependencies))
 
-  // after cleaning node_modules folders, we install packages
-  return removeFoldersPromise.then(() =>
-    parallelSpawn(installPackagesCommands, {
-      chunks: chunk,
-      title: 'npm install'
-    })
-  )
+  return removeFoldersPromise
 }
 
-installRootPackages()
-  .then(executePhoenixOnPackages)
+removeDependenciesForPackages()
+  .then(installPackages)
   .then(() => process.exit(0))
   .catch(showError)
