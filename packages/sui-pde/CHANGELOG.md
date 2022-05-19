@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.20.0 (2022-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix feature tests ([1a04d6a](https://github.com/SUI-Components/sui/commit/1a04d6a4b0cb85c9c300162809acb69b87ccdfe6))
+
+
+
 # 2.19.0 (2022-05-16)
 
 
