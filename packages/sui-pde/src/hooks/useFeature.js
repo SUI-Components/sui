@@ -28,19 +28,21 @@ const trackFeatureFlagViewed = ({
  * @param {function} trackExperimentViewed
  * @param {object} attributes user attributes to take into account for its segmentation
  * @param {object} pde
+ * @param {string} adapterId
  */
 const trackLinkedExperimentsViewed = ({
   linkedExperiments,
   trackExperimentViewed,
   attributes,
-  pde
+  pde,
+  adapterId
 }) => {
   if (!linkedExperiments) return
   linkedExperiments.forEach(experimentName => {
     const variationName = pde.getVariation({
-      experimentName,
-      pde,
-      attributes
+      name: experimentName,
+      attributes,
+      adapterId
     })
     trackExperimentViewed({variationName, experimentName})
   })
@@ -97,7 +99,8 @@ export default function useFeature(
       linkedExperiments,
       trackExperimentViewed: strategy.trackExperiment,
       pde,
-      attributes
+      attributes,
+      adapterId
     })
     return {isActive, variables}
   } catch (error) {
