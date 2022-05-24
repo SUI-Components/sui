@@ -45,7 +45,7 @@ const webpackConfig = {
       url: require.resolve('url/')
     },
     modules: ['node_modules', path.resolve(process.cwd())],
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.tsx', '.ts', '.json']
   },
   stats: 'errors-only',
   entry: cleanList([
@@ -83,18 +83,18 @@ const webpackConfig = {
     rules: cleanList([
       isTypeScript
         ? {
-            test: /\.(js|ts)x?$/,
+            test: /\.(ts|js)x?$/,
             exclude: EXCLUDED_FOLDERS_REGEXP,
             use: [
               {
                 loader: require.resolve('swc-loader'),
                 options: {
-                  test: '.jsx?$',
-                  minify: true,
+                  // test: '.(ts|js)x?$',
+                  // minify: true,
                   jsc: {
                     parser: {
-                      syntax: 'ecmascript',
-                      jsx: true,
+                      syntax: "typescript",
+                      tsx: true,
                       dynamicImport: true,
                       privateMethod: true,
                       functionBind: true,
