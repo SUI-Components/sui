@@ -99,7 +99,7 @@ module.exports = {
     'no-only-tests',
     'prettier',
     'react-hooks',
-    "simple-import-sort"
+    'simple-import-sort'
   ],
   rules: {
     ...REACT_RULES,
