@@ -43,20 +43,26 @@ const TESTING_RULES = {
 const IMPORT_SORT_GROUPS = [
   // Side effect and polyfill imports.
   ['^\\u0000'],
+  // Built-in node dependencies
+  [
+    '^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)'
+  ],
   // Packages. `react` related packages come first.
   ['^react'],
   // Standalone packages.
   ['^\\w'],
   // Generic organization packages.
   ['^@'],
-  // S-UI organization packages.
-  ['^@s-ui'],
-  // ADV-UI organization packages.
-  ['^@adv-ui'],
-  // Parent imports. Put `..` last.
-  ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-  // Other relative imports. Put same-folder imports and `.` last.
-  ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+  // S-UI & ADV-UI organization packages.
+  ['^@s-ui', '^@adv-ui'],
+  // Relative imports. Put `./` last.
+  [
+    '^\\.\\.(?!/?$)',
+    '^\\.\\./?$',
+    '^\\./(?=.*/)(?!/?$)',
+    '^\\.(?!/?$)',
+    '^\\./?$'
+  ],
   // Style imports.
   ['^.+\\.s?css$']
 ]
