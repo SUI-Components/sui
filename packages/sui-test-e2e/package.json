@@ -13,6 +13,9 @@
     "lib": "babel --out-dir ./lib  ./src",
     "prepare": "npm run lib"
   },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
+  },
   "dependencies": {
     "@testing-library/cypress": "8.0.2",
     "colors": "1.4.0",
