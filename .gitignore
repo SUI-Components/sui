@@ -21,3 +21,5 @@ packages/sui-studio/test/server/integration/empty-studio/components/fake/compone
 packages/sui-test-contract/contract
 
 !packages/sui-sass-loader/test/server/fixtures/**/node_modules
+
+pnpm-lock.yaml

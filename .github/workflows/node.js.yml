@@ -19,13 +19,18 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
         node-version: 16
         registry-url: 'https://registry.npmjs.org'
     - uses: browser-actions/setup-chrome@latest
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      with:
+        version: 7
+        run_install: |
+          - args: [--strict-peer-dependencies=false]
     - run: sudo apt-get install xvfb
-    - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
     - run: npm run lint
     - run: npm run test:server:ci
     - run: xvfb-run --auto-servernum npm run test:client:ci
