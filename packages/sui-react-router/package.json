@@ -25,6 +25,7 @@
     "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
+    "babel-preset-sui": "workspace:*",
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17",
