@@ -18,5 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "0.21.1"
+  },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
   }
 }
