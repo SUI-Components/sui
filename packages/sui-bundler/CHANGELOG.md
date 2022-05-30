@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.22.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies across packages ([1c20bdc](https://github.com/SUI-Components/sui/commit/1c20bdc929c57ff086f08023db52d701127993eb))
+
+
+
 # 9.21.0 (2022-05-16)
 
 
