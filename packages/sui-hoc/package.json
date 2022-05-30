@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "intersection-observer": "0.10.0"
+  },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
   }
 }
