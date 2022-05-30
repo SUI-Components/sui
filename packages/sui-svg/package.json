@@ -15,7 +15,7 @@
     "babel-preset-sui": "3",
     "commander": "8.3.0",
     "fast-glob": "3.2.11",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "just-camel-case": "4.0.2",
     "prop-types": "15",
     "react": "17",
