@@ -12,7 +12,7 @@
     "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx @s-ui/mono run 'rm -rf ./node_modules' && rm -rf package-lock.json node_modules && npm install --legacy-peer-deps",
+    "phoenix": "npx @s-ui/mono phoenix",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",

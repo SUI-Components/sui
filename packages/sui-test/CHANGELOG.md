@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.13.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-test:** Ugrade dependencies ([b5d5218](https://github.com/SUI-Components/sui/commit/b5d5218c67303d2ae52ec29664274ed3e3b1abc6))
+
+
+
 # 8.12.0 (2022-05-05)
 
 
