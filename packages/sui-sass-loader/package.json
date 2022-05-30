@@ -13,7 +13,7 @@
   "dependencies": {
     "cli-source-preview": "1.1.0",
     "co": "4.6.0",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "loader-utils": "3.2.0"
   },
   "peerDependencies": {
