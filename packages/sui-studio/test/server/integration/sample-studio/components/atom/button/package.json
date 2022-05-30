@@ -11,6 +11,9 @@
   "dependencies": {
     "@s-ui/component-dependencies": "1"
   },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT"
