@@ -11,5 +11,8 @@
   },
   "dependencies": {
     "just-debounce-it": "1.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
   }
 }
