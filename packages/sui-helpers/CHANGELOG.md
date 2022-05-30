@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.38.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-helpers:** Upgrade dependencies across packages ([f4f7be1](https://github.com/SUI-Components/sui/commit/f4f7be197389cb86c9e221b4e1d98598a2eb9074))
+
+
+
 # 1.37.0 (2022-03-08)
 
 
