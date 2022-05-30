@@ -5,7 +5,7 @@
   "author": "",
   "dependencies": {
     "execa": "5.1.1",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "p-queue": "6.6.2"
   },
   "license": "MIT",
