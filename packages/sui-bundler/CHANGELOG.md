@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.23.0 (2022-06-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies for bundler dropping support to Node 14 ([63c9d9f](https://github.com/SUI-Components/sui/commit/63c9d9f8e44d2591efdc4db67d05fb676b2a0935))
+
+
+
 # 9.22.0 (2022-05-30)
 
 
