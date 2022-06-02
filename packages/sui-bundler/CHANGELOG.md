@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.24.0 (2022-06-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Simplify analyzer of sui-bundler ([f95279b](https://github.com/SUI-Components/sui/commit/f95279b98a6fbc4a392fb73ff671efb427f3e324))
+
+
+
 # 9.23.0 (2022-06-02)
 
 
