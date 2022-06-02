@@ -17,10 +17,11 @@
     "react": "16 || 17"
   },
   "devDependencies": {
-    "@testing-library/react": "11.1.0",
+    "@testing-library/react": "11",
     "@types/node": "16",
     "react": "17",
     "react-dom": "17",
-    "@s-ui/react-router": "1"
+    "@s-ui/react-router": "1",
+    "typescript": "4"
   }
 }
