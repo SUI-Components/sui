@@ -6,7 +6,7 @@
   "description": "> Isomorphic i18n service for browser and node.",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "babel ./src --out-dir ./lib",
+    "lib:js": "babel  --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "keywords": [],
@@ -15,5 +15,8 @@
   "dependencies": {
     "node-polyglot": "0.4.3",
     "@s-ui/js": "2"
+  },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
   }
 }
