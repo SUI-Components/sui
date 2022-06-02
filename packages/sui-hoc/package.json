@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "lib": "babel --out-dir ./lib  ./src",
+    "lib": "babel --presets sui --out-dir ./lib  ./src",
     "prepare": "npm run lib"
   },
   "peerDependencies": {
