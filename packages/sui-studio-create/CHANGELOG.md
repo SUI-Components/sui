@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.24.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-studio-create:** Upgrade dependencies across packages ([ecaff40](https://github.com/SUI-Components/sui/commit/ecaff402140ceac0910495c88f8b3a4f429c2812))
+
+
+
 # 4.23.0 (2022-05-11)
 
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.10.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies across packages ([6a6ee12](https://github.com/SUI-Components/sui/commit/6a6ee12a3b0c73fc7ba0c33b8b60b3bc44f674f7))
+
+
+
 # 11.9.0 (2022-05-05)
 
 

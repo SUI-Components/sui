@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.14.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies across packages ([24a1c4c](https://github.com/SUI-Components/sui/commit/24a1c4c6cda9c4eaecfad2ebc8931b21383cc80d))
+
+
+
 # 8.13.0 (2022-05-16)
 
 
