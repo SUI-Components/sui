@@ -21,7 +21,7 @@ require('@babel/register')({
   only: useLibDir ? paths : paths.filter(path => path !== libDir),
   presets: [
     [
-      'babel-preset-sui',
+      require.resolve('babel-preset-sui'),
       {
         useESModules: false
       }

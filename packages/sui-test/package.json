@@ -13,9 +13,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "babel-preset-sui": "workspace:*"
-  },
   "dependencies": {
     "@babel/core": "7.18.2",
     "@babel/plugin-transform-modules-commonjs": "7.18.2",
