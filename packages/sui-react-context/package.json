@@ -13,5 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "hoist-non-react-statics": "3.3.2"
+  },
+  "devDependencies": {
+    "typescript": "4"
   }
 }
