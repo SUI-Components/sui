@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "babel-preset-sui": "workspace:*",
-    "@testing-library/react": "11.1.0",
+    "@testing-library/react": "11",
     "react": "17",
     "react-dom": "17",
     "sinon": "10.0.0"
