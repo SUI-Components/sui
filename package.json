@@ -34,6 +34,8 @@
     "@s-ui/precommit": "workspace:*",
     "@s-ui/react-context": "workspace:*",
     "@s-ui/test": "workspace:*",
+    "@types/node": "17.0.38",
+    "@types/react": "18.0.10",
     "chai": "4.3.6",
     "react": "17",
     "rimraf": "3.0.2",
