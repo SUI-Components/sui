@@ -12,5 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@s-ui/i18n": "1"
+  },
+  "devDependencies": {
+    "babel-preset-sui": "workspace:*"
   }
 }
