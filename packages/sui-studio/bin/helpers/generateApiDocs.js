@@ -4,19 +4,25 @@ const {promisify} = require('node:util')
 const fg = require('fast-glob')
 const exec = promisify(require('child_process').exec)
 
+const cwd = process.env.INIT_CWD ?? process.cwd()
+
 module.exports = function generateApiDocs() {
   console.log('[sui-studio] Generating API documentation for components...')
   console.time('[sui-studio] API generation took')
 
-  const components = fg.sync('components/*/*/src/index.js', {deep: 4})
+  const components = fg.sync('components/*/*/src/index.js', {cwd, deep: 4})
 
   const promises = components.map(file => {
     const outputFile = file.replace('index.js', 'definitions.json')
-    const fullOutputFile = path.resolve(process.cwd(), `public/${outputFile}`)
+    const fullOutputFile = path.resolve(cwd, `public/${outputFile}`)
 
     return exec(
-      `npx --yes react-docgen@5 ${file} --resolver findAllComponentDefinitions -o ${fullOutputFile}`
-    ).catch(() => {
+      `npx --yes react-docgen@5 ${file} --resolver findAllComponentDefinitions -o ${fullOutputFile}`,
+      {
+        cwd
+      }
+    ).catch(e => {
+      console.error(e)
       console.warn(
         `[sui-studio] Error generating API documentation for ${file}`
       )
