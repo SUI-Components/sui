@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.11.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-studio:** Install huge dependency only on-demand ([4c6a2c8](https://github.com/SUI-Components/sui/commit/4c6a2c87d1c4679dfc1e8a3250d61c7e68e78b96))
+
+
+
 # 11.10.0 (2022-05-30)
 
 
