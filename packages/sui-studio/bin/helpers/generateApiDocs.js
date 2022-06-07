@@ -1,41 +1,33 @@
 const path = require('node:path')
-const {promisify} = require('node:util')
-
 const fg = require('fast-glob')
-const exec = promisify(require('child_process').exec)
+const fs = require('fs-extra')
+const reactDocs = require('react-docgen')
 
-const cwd = process.env.INIT_CWD ?? process.cwd()
-
-module.exports = async function generateApiDocs() {
+module.exports = function generateApiDocs() {
   console.log('[sui-studio] Generating API documentation for components...')
   console.time('[sui-studio] API generation took')
 
-  const components = fg.sync('components/*/*/src/index.js', {cwd, deep: 4})
+  const components = fg.sync('components/*/*/src/index.js', {deep: 4})
 
-  await exec(`npm install -g react-docgen@5`)
+  components.forEach(file => {
+    const source = fs.readFileSync(file, 'utf-8')
+    let docs = {}
 
-  const promises = components.map(file => {
-    const outputFile = file.replace('index.js', 'definitions.json')
-    const fullOutputFile = path.resolve(cwd, `public/${outputFile}`)
-
-    return exec(
-      `npx --yes react-docgen@5 ${file} --resolver findAllComponentDefinitions -o ${fullOutputFile}`,
-      {
-        cwd
-      }
-    ).catch(e => {
-      console.error(e)
-      console.warn(
-        `[sui-studio] Error generating API documentation for ${file}`
+    try {
+      docs = reactDocs.parse(
+        source,
+        reactDocs.resolver.findAllComponentDefinitions
       )
-    })
+    } catch (e) {
+      console.warn(`[sui-studio] Couldn't generate API docs for ${file}`)
+    }
+
+    const outputFile = file.replace('index.js', 'definitions.json')
+    fs.writeFileSync(
+      path.resolve(process.cwd(), `public/${outputFile}`),
+      JSON.stringify(docs, null, 2)
+    )
   })
 
-  console.log(
-    `[sui-studio] Generated API documentation for ${components.length} components`
-  )
-
-  return Promise.all(promises).then(() => {
-    console.timeEnd('[sui-studio] API generation took')
-  })
+  console.timeEnd('[sui-studio] API generation took')
 }
