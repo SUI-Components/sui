@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 9.25.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-bundler:** Bump dependencies ([1aa99f5](https://github.com/SUI-Components/sui/commit/1aa99f50b34e8fb3f503d977dfbdc095082dcfb8))
+
+
+### Performance Improvements
+
+* **packages/sui-bundler:** Improve perf by concatening dependencies to main, preload it and reuse f ([091258e](https://github.com/SUI-Components/sui/commit/091258e77e11a62b169b048c75c916a84d94b5d8))
+
+
+
 # 9.24.0 (2022-06-02)
 
 
