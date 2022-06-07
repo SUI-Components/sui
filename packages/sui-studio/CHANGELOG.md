@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 11.12.0 (2022-06-07)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct cwd on executing binary ([a263c80](https://github.com/SUI-Components/sui/commit/a263c807f5a7dfcf8d61a4ed7c0e710bec2863fe))
+
+
+### Features
+
+* **packages/sui-studio:** Improve execution times and fix npx usage ([786d3fd](https://github.com/SUI-Components/sui/commit/786d3fd8c79c46fab130a4ae4294236879178d62))
+
+
+
 # 11.11.0 (2022-06-07)
 
 
