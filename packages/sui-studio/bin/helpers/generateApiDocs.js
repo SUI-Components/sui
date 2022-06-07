@@ -6,11 +6,13 @@ const exec = promisify(require('child_process').exec)
 
 const cwd = process.env.INIT_CWD ?? process.cwd()
 
-module.exports = function generateApiDocs() {
+module.exports = async function generateApiDocs() {
   console.log('[sui-studio] Generating API documentation for components...')
   console.time('[sui-studio] API generation took')
 
   const components = fg.sync('components/*/*/src/index.js', {cwd, deep: 4})
+
+  await exec(`npm install -g react-docgen@5`)
 
   const promises = components.map(file => {
     const outputFile = file.replace('index.js', 'definitions.json')
