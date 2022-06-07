@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.16.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-svg:** Bump dependencies ([1f98617](https://github.com/SUI-Components/sui/commit/1f986178d79c1d4af0c5016df61fbfbdfcb6f4af))
+
+
+
 # 3.15.0 (2022-05-30)
 
 
