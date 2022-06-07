@@ -4,7 +4,7 @@ const {promisify} = require('node:util')
 const fg = require('fast-glob')
 const exec = promisify(require('child_process').exec)
 
-module.exports = async function generateApiDocs() {
+module.exports = function generateApiDocs() {
   console.log('[sui-studio] Generating API documentation for components...')
   console.time('[sui-studio] API generation took')
 
