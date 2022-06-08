@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "4.18.0",
+  "version": "4.19.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -21,10 +21,11 @@
     "@s-ui/helpers": "1",
     "@typescript-eslint/eslint-plugin": "5.21.0",
     "commander": "8.3.0",
+    "eslint": "8.16.0",
     "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard": "17.0.0",
     "eslint-config-standard-react": "11.0.1",
     "eslint-config-standard-with-typescript": "21.0.1",
-    "eslint-config-standard": "17.0.0",
     "eslint-plugin-chai-friendly": "0.7.2",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.26.0",
@@ -35,12 +36,12 @@
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react-hooks": "4.5.0",
     "eslint-plugin-react": "7.30.0",
-    "eslint": "8.16.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
     "postcss-scss": "4.0.4",
     "prettier": "2.6.2",
+    "stylelint": "14.8.5",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-recommended-scss": "6.0.0",
-    "stylelint-prettier": "2.0.0",
-    "stylelint": "14.8.5"
+    "stylelint-prettier": "2.0.0"
   }
 }
