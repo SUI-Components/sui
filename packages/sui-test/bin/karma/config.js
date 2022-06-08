@@ -71,7 +71,7 @@ const config = {
         readline: false,
         stream: require.resolve('stream-browserify'),
         timers: false,
-        tty: false,
+        tty: require.resolve('tty-browserify'),
         util: require.resolve('util/'),
         vm: false,
         worker_threads: false,
