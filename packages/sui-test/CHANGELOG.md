@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.16.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-test:** Add suport to msw ([5d1f5a3](https://github.com/SUI-Components/sui/commit/5d1f5a35a03ac87abdffdd7f76e000f87428efe1))
+
+
+
 # 8.15.0 (2022-06-08)
 
 
