@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 11.13.0 (2022-06-09)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Rollback installing on demand dependency ([2f11c94](https://github.com/SUI-Components/sui/commit/2f11c949b4afd3d50f42eac02b6bb0dea27cb121))
+
+
+### Features
+
+* **packages/sui-studio:** Rollback change for now ([4f05bb6](https://github.com/SUI-Components/sui/commit/4f05bb63d04eed7697cd17f88bf63b5b802ce2b4))
+
+
+
 # 11.12.0 (2022-06-07)
 
 
