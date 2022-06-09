@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.27.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([af5f152](https://github.com/SUI-Components/sui/commit/af5f152b95a9c6ec1be81888e62253f10ba12ae3))
+
+
+
 # 9.26.0 (2022-06-09)
 
 
