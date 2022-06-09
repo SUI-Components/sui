@@ -4,58 +4,25 @@
 const webpack = require('webpack')
 const log = require('../shared/log.js')
 const config = require('../webpack.config.prod.js')
-const {getSpawnPromise} = require('@s-ui/helpers/cli')
-const logUpdate = require('@s-ui/helpers/log-update')
-
-const installNeededDependencies = async () => {
-  try {
-    require('webpack-bundle-analyzer')
-    return true
-  } catch (e) {
-    logUpdate('Installing needed dependencies...')
-    return getSpawnPromise('npm', [
-      'install',
-      '--no-save',
-      '--no-audit',
-      '--no-fund',
-      'webpack-bundle-analyzer@4.5.0 duplicate-package-checker-webpack-plugin@3.0.0'
-    ]).then(() => {
-      logUpdate.done('Installed needed dependencies')
-      getSpawnPromise('./node_modules/.bin/sui-bundler', ['analyzer']).then(
-        () => false
-      )
-    })
-  }
-}
+const fs = require('fs')
+const {getSpawnPromise} = require('@s-ui/helpers/cli.js')
 
 ;(async () => {
-  const keepExecution = await installNeededDependencies()
-  if (!keepExecution) return
-
-  const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
-  const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-
-  config.plugins.push(new BundleAnalyzerPlugin())
-  config.plugins.push(
-    new DuplicatePackageCheckerPlugin({
-      verbose: true, // Show module that is requiring each duplicate package
-      emitError: false // Avoid emit errors, just a warning
-    })
-  )
-
   log.processing('🔎 Analyzing Bundle...\n')
-  webpack(config).run((error, stats) => {
+  webpack({...config, profile: true, stats: true}).run((error, stats) => {
     if (error) {
       log.error('Error analyzing the build')
       throw new Error(error)
     }
 
-    log.success('Bundle analyzed successfully')
+    log.success('Compilation done!')
 
-    if (stats.hasErrors() || stats.hasWarnings()) {
-      const jsonStats = stats.toJson('errors-warnings')
-      jsonStats.warnings.map(log.warn)
-      jsonStats.errors.map(log.error)
-    }
+    const filePath = `${process.cwd()}/public/stats.json`
+
+    fs.writeFileSync(filePath, JSON.stringify(stats.toJson()), {
+      encoding: 'utf8'
+    })
+
+    getSpawnPromise('npx --yes webpack-bundle-analyzer', [filePath])
   })
 })()

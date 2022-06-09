@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 4.19.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-lint:** add import sort plugin ([8cc1c76](https://github.com/SUI-Components/sui/commit/8cc1c76e17b250fdc87b7e729765144a4307b1af))
+
+
+
+# 4.18.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-lint:** Add missing package ([7a82d76](https://github.com/SUI-Components/sui/commit/7a82d764bb4272a6ac436a5b40d4f1849a3dfcd3))
+* **packages/sui-lint:** Upgrade dependencies across packages ([9fc40a7](https://github.com/SUI-Components/sui/commit/9fc40a704128e287340efcbbb88f2c0b94d32fc9))
+
+
+
 # 4.17.0 (2022-05-03)
 
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.19.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-js-compiler:** Upgrade dependencies across packages ([d6c8230](https://github.com/SUI-Components/sui/commit/d6c82302242aee0ab86eef2a43c7eb59ff55ba3b))
+
+
+
 # 1.18.0 (2022-03-30)
 
 

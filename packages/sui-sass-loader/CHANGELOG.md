@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.3.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-sass-loader:** Upgrade dependencies across packages ([61fe3fb](https://github.com/SUI-Components/sui/commit/61fe3fb27fad3fd9cc3a07a74d506390dbd4c6c5))
+
+
+
 # 1.2.0 (2022-03-08)
 
 

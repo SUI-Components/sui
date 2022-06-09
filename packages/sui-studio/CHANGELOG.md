@@ -1,5 +1,51 @@
 # CHANGELOG
 
+# 11.13.0 (2022-06-09)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Rollback installing on demand dependency ([2f11c94](https://github.com/SUI-Components/sui/commit/2f11c949b4afd3d50f42eac02b6bb0dea27cb121))
+
+
+### Features
+
+* **packages/sui-studio:** Rollback change for now ([4f05bb6](https://github.com/SUI-Components/sui/commit/4f05bb63d04eed7697cd17f88bf63b5b802ce2b4))
+
+
+
+# 11.12.0 (2022-06-07)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct cwd on executing binary ([a263c80](https://github.com/SUI-Components/sui/commit/a263c807f5a7dfcf8d61a4ed7c0e710bec2863fe))
+
+
+### Features
+
+* **packages/sui-studio:** Improve execution times and fix npx usage ([786d3fd](https://github.com/SUI-Components/sui/commit/786d3fd8c79c46fab130a4ae4294236879178d62))
+
+
+
+# 11.11.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-studio:** Install huge dependency only on-demand ([4c6a2c8](https://github.com/SUI-Components/sui/commit/4c6a2c87d1c4679dfc1e8a3250d61c7e68e78b96))
+
+
+
+# 11.10.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies across packages ([6a6ee12](https://github.com/SUI-Components/sui/commit/6a6ee12a3b0c73fc7ba0c33b8b60b3bc44f674f7))
+
+
+
 # 11.9.0 (2022-05-05)
 
 

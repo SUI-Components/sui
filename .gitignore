@@ -11,6 +11,7 @@ jsconfig.json
 packages/sui-codemod/COMMANDS
 sui-components-dashboard-9350df448fcd.json
 .idea/
+.vscode/
 packages/sui-studio/test/server/integration/empty-studio/components/fake/**
 packages/sui-studio/test/server/integration/empty-studio/demo/fake/**
 packages/sui-studio/test/server/integration/empty-studio/test/fake/**

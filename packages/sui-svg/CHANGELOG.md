@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 3.16.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-svg:** Bump dependencies ([1f98617](https://github.com/SUI-Components/sui/commit/1f986178d79c1d4af0c5016df61fbfbdfcb6f4af))
+
+
+
+# 3.15.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies across packages ([d6c262f](https://github.com/SUI-Components/sui/commit/d6c262f54de249d1cbe777f09febd294cbc6bc98))
+* **packages/sui-svg:** Upgrade Vite dependency ([dd57641](https://github.com/SUI-Components/sui/commit/dd5764191c79d8a2ce68ff513d7926d4e7cf9849))
+
+
+
 # 3.14.0 (2022-05-03)
 
 

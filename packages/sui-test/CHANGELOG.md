@@ -1,5 +1,33 @@
 # CHANGELOG
 
+# 8.15.0 (2022-06-08)
+
+
+### Features
+
+* **packages/sui-test:** Add support to msw and avoid problems with tty ([9716986](https://github.com/SUI-Components/sui/commit/9716986d73d4823f9879ed6ce1cd9aa0d17692b5))
+* **packages/sui-test:** Unify Webpack version accross packages ([f68c3c8](https://github.com/SUI-Components/sui/commit/f68c3c819632ca3145ba1507e357ca21ddaa8497))
+
+
+
+# 8.14.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies across packages ([24a1c4c](https://github.com/SUI-Components/sui/commit/24a1c4c6cda9c4eaecfad2ebc8931b21383cc80d))
+
+
+
+# 8.13.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-test:** Ugrade dependencies ([b5d5218](https://github.com/SUI-Components/sui/commit/b5d5218c67303d2ae52ec29664274ed3e3b1abc6))
+
+
+
 # 8.12.0 (2022-05-05)
 
 
