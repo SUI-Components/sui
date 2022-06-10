@@ -5,7 +5,7 @@
   "description": "SDK for creating domains",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "babel ./src --out-dir ./lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib",
     "test": "npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
