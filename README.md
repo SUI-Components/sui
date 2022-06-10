@@ -14,13 +14,12 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | -- | -- |
 | [babel-preset-sui](./packages/babel-preset-sui) | A babel preset for SUI components common syntax |
 | [sui-bundler](./packages/sui-bundler) | Config-free bundler for ES6 React apps |
-| [sui-changelog](./packages/sui-changelog) | CLI to retrieve a changelog from a set of dependencies |
 | [sui-ci](./packages/sui-ci) | CLI and library with tools for Continuos Integration |
 | [sui-component-dependencies](./packages/sui-component-dependencies) | A set of common dependencies for all SUI components |
 | [sui-critical-css](./packages/sui-critical-css) | Extract Critical CSS from an app
 | [sui-cz](./packages/sui-cz) | A commitizen adapter for semantic commits |
 | [sui-decorators](./packages/sui-decorators) | Set of ES6 decorators to improve your apps. |
-| [sui-domain](./packages/sui-domain) | Backbone for creating a domain that complains with the guidelines of Schibsted Spain. |
+| [sui-domain](./packages/sui-domain) | Backbone for creating a domain that complains with the guidelines of Adevinta Spain. |
 | [sui-helpers](./packages/sui-helpers) | A set of internal helpers used by sui-related packages. |
 | [sui-hoc](./packages/sui-hoc) | React utility belt for function components and higher-order components |
 | [sui-i18n](./packages/sui-i18n) | Isomorphic i18n service for browser and node |
