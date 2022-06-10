@@ -16,8 +16,8 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-bundler](./packages/sui-bundler) | Config-free bundler for ES6 React apps |
 | [sui-ci](./packages/sui-ci) | CLI and library with tools for Continuos Integration |
 | [sui-component-dependencies](./packages/sui-component-dependencies) | A set of common dependencies for all SUI components |
+| [sui-consents](./packages/sui-consents) | User consents handler |
 | [sui-critical-css](./packages/sui-critical-css) | Extract Critical CSS from an app
-| [sui-cz](./packages/sui-cz) | A commitizen adapter for semantic commits |
 | [sui-decorators](./packages/sui-decorators) | Set of ES6 decorators to improve your apps. |
 | [sui-domain](./packages/sui-domain) | Backbone for creating a domain that complains with the guidelines of Adevinta Spain. |
 | [sui-helpers](./packages/sui-helpers) | A set of internal helpers used by sui-related packages. |
@@ -27,6 +27,7 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-lint](./packages/sui-lint) | CLI to lint your code and make it compliant to SUI official rules |
 | [sui-mockmock](./packages/sui-mockmock) | Mocking utilities for testing. |
 | [sui-mono](./packages/sui-mono) | Simple CLI for monorepo/multipackage commits, releases, etc. |
+| [sui-pde](./packages/sui-pde) | An adapter based tool to handle feature toggles, progressive rollouts and A/B Testing services in our products |
 | [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
 | [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
 | [sui-react-head](./packages/sui-react-head) | Populate the head element of your React app without hassle |
@@ -37,4 +38,6 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-studio](./packages/sui-studio) | Develop, maintain and publish your SUI components catalog. |
 | [sui-svg](./packages/sui-svg) | Converts your SVG files into React Components |
 | [sui-test](./packages/sui-test) | Zero config testing tool. |
+| [sui-test-contract](./packages/sui-test-contract) | Useful tooling for executing contract tests |
+| [sui-test-e2e](./packages/sui-test-e2e) | Zero config e2e testing tool. |
 | [sui-widget-embedder](./packages/sui-widget-embedder) | Widget development server and build for production |
