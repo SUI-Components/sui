@@ -2,11 +2,11 @@
 
 SUI is a set of packages which goal to ease development of SUI-based components and web apps, providing:
 
-* Unified stack (and workflow) easily updateable accross all sui based projects.
+* Unified stack (and workflow) easily updatable across all sui based projects.
 * Minification of boilerplate. Boilerplate is tedious and copied code. Hardest to update...
-* Differents tools and services that solve only one problem each.
+* Different tools and services that solve only one problem each.
 * Transparency for developer (changes and improvements have no impact on DX)
-* Facilitates tooling development as asumptions can be made on the stack of each package.
+* Facilitates tooling development as assumptions can be made on the stack of each package.
 
 ## Available packages
 
