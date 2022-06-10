@@ -30,5 +30,6 @@ export default function Style({children, id}) {
 }
 
 Style.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  id: PropTypes.string
 }

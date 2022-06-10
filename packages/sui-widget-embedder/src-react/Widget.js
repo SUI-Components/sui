@@ -49,5 +49,6 @@ Widget.propTypes = {
   children: PropTypes.element.isRequired,
   context: PropTypes.object,
   isVisible: PropTypes.bool,
-  selector: PropTypes.string.isRequired
+  selector: PropTypes.string.isRequired,
+  renderMultiple: PropTypes.bool
 }
