@@ -10,7 +10,7 @@
   "scripts": {
     "postpublish": "make build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lib": "babel --out-dir ./lib  ./src",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepare": "npm run lib"
   },
   "dependencies": {
