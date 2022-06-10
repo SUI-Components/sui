@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+
 import {getInitialContextValue} from '../../server/initialContextValue'
 
 describe('#getInitialContextValue', () => {

@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+
 import {HtmlBuilder} from '../../server/template'
 
 describe('template builder', () => {
