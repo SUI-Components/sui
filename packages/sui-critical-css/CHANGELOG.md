@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.20.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-critical-css:** Better logging for Critical CSS ([40d4749](https://github.com/SUI-Components/sui/commit/40d4749310477089ff1f0abb04accc00123d31a6))
+
+
+
 # 1.19.0 (2022-05-02)
 
 

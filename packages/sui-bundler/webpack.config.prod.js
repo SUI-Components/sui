@@ -74,10 +74,7 @@ const webpackConfig = {
     minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(
       Boolean
     ),
-    runtimeChunk: true,
-    splitChunks: {
-      chunks: 'all'
-    }
+    runtimeChunk: true
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({

@@ -15,22 +15,23 @@ export const createUrlFrom = ({hostname, pathOptions}) => {
   return `${hostname}${path}`
 }
 
-const waitForHealthCheck = async ({healthCheckUrl}) => {
+const waitForHealthCheck = ({healthCheckUrl}) => {
   return new Promise(resolve => {
     async function retry(retries) {
+      console.log(
+        `Waiting for health check. Checking ${healthCheckUrl}, remaining ${retries} retries...`
+      )
       if (retries === 0) return resolve(false)
 
       let isResponseOK = false
       try {
         const response = await fetch(healthCheckUrl)
         isResponseOK = response.ok
-      } catch (e) {
-        isResponseOK = false
-      }
+      } catch (e) {}
 
       return isResponseOK
         ? resolve(true)
-        : global.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
+        : globalThis.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
     }
 
     retry(TIMES_TO_RETRY)
@@ -39,13 +40,11 @@ const waitForHealthCheck = async ({healthCheckUrl}) => {
 
 const extractCriticalCSS = async ({
   requiredClassNames,
-  retries = 2,
+  retries = 3,
   url,
   configForMobileDevice
 } = {}) => {
-  if (retries === 0) {
-    return ''
-  }
+  if (retries === 0) return ''
 
   const css = await extractCSSFromUrl({
     url,
@@ -55,13 +54,12 @@ const extractCriticalCSS = async ({
     return ''
   })
 
-  if (!requiredClassNames) {
-    return css
-  }
+  if (!requiredClassNames) return css
 
   const hasRequiredClasses = requiredClassNames.every(className =>
     css?.includes(className)
   )
+
   if (!hasRequiredClasses) {
     return extractCriticalCSS({
       requiredClassNames,
@@ -83,7 +81,9 @@ export async function extractCSSFromApp({routes, config = {}}) {
       hostname,
       pathOptions: healthCheckPath
     })
+
     const isHealthCheckEnabled = await waitForHealthCheck({healthCheckUrl})
+
     if (!isHealthCheckEnabled) {
       console.error(`Error reaching healthCheck ${healthCheckUrl}`)
       process.exit(1)

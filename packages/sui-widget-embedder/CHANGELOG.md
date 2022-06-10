@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.1.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Bump dependencies ([4ffa0ef](https://github.com/SUI-Components/sui/commit/4ffa0ef917348ca4f317bcfa8c50ea6e1df248bf))
+
+
+
 # 6.0.0 (2022-05-11)
 
 

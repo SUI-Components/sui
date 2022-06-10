@@ -1,5 +1,73 @@
 # CHANGELOG
 
+# 9.27.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([af5f152](https://github.com/SUI-Components/sui/commit/af5f152b95a9c6ec1be81888e62253f10ba12ae3))
+
+
+
+# 9.26.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([c5bb81e](https://github.com/SUI-Components/sui/commit/c5bb81eadac4ed92211784dd957979d112300590))
+
+
+
+# 9.25.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-bundler:** Bump dependencies ([1aa99f5](https://github.com/SUI-Components/sui/commit/1aa99f50b34e8fb3f503d977dfbdc095082dcfb8))
+
+
+### Performance Improvements
+
+* **packages/sui-bundler:** Improve perf by concatening dependencies to main, preload it and reuse f ([091258e](https://github.com/SUI-Components/sui/commit/091258e77e11a62b169b048c75c916a84d94b5d8))
+
+
+
+# 9.24.0 (2022-06-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Simplify analyzer of sui-bundler ([f95279b](https://github.com/SUI-Components/sui/commit/f95279b98a6fbc4a392fb73ff671efb427f3e324))
+
+
+
+# 9.23.0 (2022-06-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies for bundler dropping support to Node 14 ([63c9d9f](https://github.com/SUI-Components/sui/commit/63c9d9f8e44d2591efdc4db67d05fb676b2a0935))
+
+
+
+# 9.22.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies across packages ([1c20bdc](https://github.com/SUI-Components/sui/commit/1c20bdc929c57ff086f08023db52d701127993eb))
+
+
+
+# 9.21.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Ugrade dependencies ([ffaf224](https://github.com/SUI-Components/sui/commit/ffaf224dc6bce56470e9e1d126b2f89460c9683d))
+
+
+
 # 9.20.0 (2022-05-10)
 
 

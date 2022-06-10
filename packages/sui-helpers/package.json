@@ -1,11 +1,11 @@
 {
   "name": "@s-ui/helpers",
-  "version": "1.37.0",
+  "version": "1.38.0",
   "description": "A set of internal helpers used by sui-related packages.",
   "author": "",
   "dependencies": {
     "execa": "5.1.1",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "p-queue": "6.6.2"
   },
   "license": "MIT",

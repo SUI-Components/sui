@@ -58,7 +58,8 @@ module.exports = async ({
 
   config.files = [
     srcPattern ? `${CWD}/${srcPattern}` : '',
-    `${CWD}/${pattern}`
+    `${CWD}/${pattern}`,
+    `${CWD}/public/mockServiceWorker.js`
   ].filter(Boolean)
 
   config.preprocessors = {

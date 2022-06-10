@@ -26,6 +26,10 @@ const config = {
 
   frameworks: ['mocha', 'webpack'],
 
+  proxies: {
+    '/mockServiceWorker.js': `/base/public/mockServiceWorker.js`
+  },
+
   plugins: [
     require.resolve('karma-webpack'),
     require.resolve('karma-chrome-launcher'),

@@ -11,6 +11,7 @@ const REACT_RULES = {
   'react-hooks/rules-of-hooks': RULES.ERROR, // Checks rules of Hooks
   'react/default-props-match-prop-types': RULES.WARNING,
   'react/jsx-handler-names': RULES.WARNING,
+  'react/jsx-no-bind': RULES.WARNING,
   'react/jsx-no-duplicate-props': [RULES.WARNING, {ignoreCase: true}],
   'react/jsx-no-undef': RULES.WARNING,
   'react/jsx-pascal-case': [
@@ -38,6 +39,33 @@ const TESTING_RULES = {
   ],
   'no-only-tests/no-only-tests': RULES.ERROR
 }
+
+const IMPORT_SORT_GROUPS = [
+  // Side effect and polyfill imports.
+  ['^\\u0000'],
+  // Built-in node dependencies
+  [
+    '^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)'
+  ],
+  // Packages. `react` related packages come first.
+  ['^react'],
+  // Standalone packages.
+  ['^\\w'],
+  // Generic organization packages.
+  ['^@'],
+  // S-UI & ADV-UI organization packages.
+  ['^@s-ui', '^@adv-ui'],
+  // Relative imports. Put `./` last.
+  [
+    '^\\.\\.(?!/?$)',
+    '^\\.\\./?$',
+    '^\\./(?=.*/)(?!/?$)',
+    '^\\.(?!/?$)',
+    '^\\./?$'
+  ],
+  // Style imports.
+  ['^.+\\.s?css$']
+]
 
 let resolvedBabelPresetSui
 try {
@@ -76,7 +104,8 @@ module.exports = {
     'chai-friendly',
     'no-only-tests',
     'prettier',
-    'react-hooks'
+    'react-hooks',
+    'simple-import-sort'
   ],
   rules: {
     ...REACT_RULES,
@@ -85,8 +114,8 @@ module.exports = {
     'accessor-pairs': RULES.OFF,
     'array-callback-return': RULES.WARNING,
     'import/no-webpack-loader-syntax': RULES.WARNING,
-    'node/no-path-concat': RULES.WARNING,
     'import/extensions': [RULES.WARNING, 'always', {ignorePackages: true}],
+    'node/no-path-concat': RULES.WARNING,
     'no-console': RULES.WARNING,
     'no-debugger': RULES.ERROR,
     'no-nested-ternary': RULES.WARNING,
@@ -101,7 +130,7 @@ module.exports = {
     strict: RULES.OFF,
     'prefer-regex-literals': RULES.WARNING,
     'prettier/prettier': [RULES.ERROR, prettierOptions],
-    'react/jsx-no-bind': RULES.WARNING
+    'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}]
   },
   overrides: [
     {

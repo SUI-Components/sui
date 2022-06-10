@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.27.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-mono:** Adjust prepare commando to be used with workspaces ([451bca5](https://github.com/SUI-Components/sui/commit/451bca5f56e936a8e295f348b37a35ff0c9ae031))
+* **packages/sui-mono:** Remove not needed chunk option anymore ([96fbb35](https://github.com/SUI-Components/sui/commit/96fbb35383a2ac9de89493eef2ade29202a90b52))
+
+
+
 # 2.26.0 (2022-04-12)
 
 
