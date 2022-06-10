@@ -7,7 +7,7 @@ console.time('[copyfiles] :')
 
 copyfiles([from, to], {up: 1})
   .then(() => {
-    console.time('[copyfiles] :')
+    console.timeEnd('[copyfiles] :')
   })
   .catch(err => {
     console.error(err)
