@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.17.0",
+  "version": "8.17.3",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -10,6 +10,11 @@
     "lib": "npm run lib:js",
     "prepare": "npm run lib"
   },
+  "files": [
+    "/bin",
+    "/src",
+    "/lib"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
