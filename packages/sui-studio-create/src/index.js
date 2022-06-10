@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-import fse from 'fs-extra'
 import childProcess from 'child_process'
+
+import fse from 'fs-extra'
 
 const {spawn} = childProcess
 

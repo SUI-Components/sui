@@ -1,11 +1,11 @@
-import {Route, Redirect} from '@s-ui/react-router'
-import Layout from './components/layout'
-import Workbench from './components/workbench'
+import {Redirect, Route} from '@s-ui/react-router'
+
 import Demo from './components/demo'
 import Documentation from './components/documentation'
 import Api from './components/documentation/Api'
 import MarkdownFile from './components/documentation/MarkdownFile'
-
+import Layout from './components/layout'
+import Workbench from './components/workbench'
 import {FILES} from './constants'
 
 export default (

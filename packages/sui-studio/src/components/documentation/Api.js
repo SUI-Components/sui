@@ -1,5 +1,7 @@
+import {Fragment, useEffect, useState} from 'react'
+
 import PropTypes from 'prop-types'
-import React, {Fragment, useEffect, useState} from 'react'
+
 import {fetchComponentsDefinitions} from '../tryRequire.js'
 
 export default function Api({params}) {

@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
 /* eslint no-console:0 */
-import {optimize} from 'svgo'
+import {exec as execWithCallback} from 'child_process'
+import {createRequire} from 'module'
+import {join} from 'path'
+import {promisify} from 'util'
+
 import fg from 'fast-glob'
 import fs from 'fs-extra'
-import {promisify} from 'util'
-import {join} from 'path'
 import toCamelCase from 'just-camel-case'
+import {optimize} from 'svgo'
+
 import {transformAsync} from '@babel/core'
-import {createRequire} from 'module'
-import {exec as execWithCallback} from 'child_process'
 
 import template from '../templates/icon-component.js'
 

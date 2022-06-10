@@ -1,6 +1,8 @@
 /* eslint no-console: 0 */
 import React, {Component} from 'react'
+
 import PropTypes from 'prop-types'
+
 import SUIContext from '@s-ui/react-context'
 
 const TRANSFORM_PRESETS = {

@@ -1,4 +1,6 @@
 import {expect} from 'chai'
+import sinon from 'sinon'
+
 import {
   getSpawnPromise,
   parallelSpawn,
@@ -6,7 +8,6 @@ import {
   showError,
   showWarning
 } from '../../cli.js'
-import sinon from 'sinon'
 
 describe('[sui-helpers] cli.js utils', () => {
   describe('getSpawnPromise', () => {

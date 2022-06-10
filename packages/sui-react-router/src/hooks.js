@@ -1,6 +1,7 @@
 // @ts-check
 
 import {useContext} from 'react'
+
 import Context from './internal/Context.js'
 
 /**

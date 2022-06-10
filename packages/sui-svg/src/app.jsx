@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import ReactDOM from 'react-dom'
+
 import {ATOM_ICON_COLORS, ATOM_ICON_SIZES} from '@s-ui/react-atom-icon'
-import './index.scss'
 import {icons as iconFiles} from '@s-ui/svg-icons'
+
+import './index.scss'
 
 // eslint-disable-next-line react/prop-types
 const Select = ({onChange, name, options, value}) => {

@@ -1,6 +1,7 @@
-import {expect} from 'chai'
-import {getProvider} from '../../src/index.js'
 import axios from 'axios'
+import {expect} from 'chai'
+
+import {getProvider} from '../../src/index.js'
 
 const logLevel = 'DEBUG'
 const port = 8123

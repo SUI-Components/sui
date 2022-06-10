@@ -5,7 +5,6 @@ import './IndexRouteSpec.js'
 import './LinkSpec.js'
 import './RedirectSpec.js'
 import './RouteSpec.js'
-
 /* utils */
 import './getParamsSpec.js'
 import './isActiveSpec.js'

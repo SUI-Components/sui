@@ -1,25 +1,27 @@
 // __MAGIC IMPORTS__
 // They came from {SPA}/node_modules or {SPA}/src
-import React from 'react'
-import {Router} from '@s-ui/react-router'
+// END __MAGIC IMPORTS__
+import qs from 'querystring'
+
+import {createElement} from 'react'
+
+import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
+import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {HeadProvider} from '@s-ui/react-head'
 import {renderHeadTagsToString} from '@s-ui/react-head/lib/server'
 import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
-// END __MAGIC IMPORTS__
+import {Router} from '@s-ui/react-router'
 
-import qs from 'querystring'
-import {getTplParts, HtmlBuilder} from '../template/index.js'
-import replaceWithLoadCSSPolyfill from '../template/cssrelpreload.js'
-import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
-import withSUIContext from '@s-ui/hoc/lib/withSUIContext'
 import {buildDeviceFrom} from '../../build-device.js'
-import ssrConfig from '../config.js'
-import {createStylesFor} from '../utils/index.js'
-import {getInitialContextValue} from '../initialContextValue/index.js'
 import {
-  redirectStatusCodes,
-  DEFAULT_REDIRECT_STATUS_CODE
+  DEFAULT_REDIRECT_STATUS_CODE,
+  redirectStatusCodes
 } from '../../status-codes.js'
+import ssrConfig from '../config.js'
+import {getInitialContextValue} from '../initialContextValue/index.js'
+import replaceWithLoadCSSPolyfill from '../template/cssrelpreload.js'
+import {getTplParts, HtmlBuilder} from '../template/index.js'
+import {createStylesFor} from '../utils/index.js'
 
 // __MAGIC IMPORTS__
 let contextProviders
@@ -139,7 +141,7 @@ export default async (req, res, next) => {
         ? contextProviders({context})
         : contextProviders)
     ].reduce(
-      (acc, {provider, props}) => React.createElement(provider, props, acc),
+      (acc, {provider, props}) => createElement(provider, props, acc),
       null
     )
 

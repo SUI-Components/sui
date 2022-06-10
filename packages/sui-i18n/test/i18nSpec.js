@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
 
-import Rosetta from '../src/index.js'
 import Polyglot from '../src/adapters/polyglot.js'
+import Rosetta from '../src/index.js'
 import {ALL_TRANSLATIONS} from './fixtures/all_translations.js'
 import {LANGUAGES, LANGUAGES_WITH_SCOPES} from './fixtures/languages.js'
 

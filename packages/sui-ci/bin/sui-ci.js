@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import program from 'commander'
 import {createRequire} from 'module'
+
+import program from 'commander'
 
 const require = createRequire(import.meta.url)
 const {version} = require('../package.json')

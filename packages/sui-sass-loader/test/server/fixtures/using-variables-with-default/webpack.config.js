@@ -25,7 +25,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           cssLoader,
           {
-            loader: loader,
+            loader,
             options: {
               implementation: require('sass')
             }
