@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 11.14.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-studio:** Add more info about time used for copying files ([33b93aa](https://github.com/SUI-Components/sui/commit/33b93aab2de7ebc1528a38f1067bae44e556e2d2))
+* **packages/sui-studio:** Use correct label ([4c6d35c](https://github.com/SUI-Components/sui/commit/4c6d35c20990d749594f63c2182b33119e666f7b))
+* **packages/sui-studio:** Use correct timeEnd ([6ca93e5](https://github.com/SUI-Components/sui/commit/6ca93e5a4933b88203428d40de2cb2cd5dafa643))
+
+
+
 # 11.13.0 (2022-06-09)
 
 
