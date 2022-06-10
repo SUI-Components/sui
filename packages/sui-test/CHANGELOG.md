@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.18.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** Add files to be published ([043f954](https://github.com/SUI-Components/sui/commit/043f9549bb7e819e575bfe9003b587660aaf0b96))
+
+
+
 # 8.17.0 (2022-06-10)
 
 
