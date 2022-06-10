@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "prepare": "babel ./src-react --out-dir ./react"
+    "prepare": "babel --presets sui ./src --out-dir ./lib"
   },
   "keywords": [],
   "author": "",
