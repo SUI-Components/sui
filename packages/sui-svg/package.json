@@ -22,7 +22,7 @@
     "react-dom": "17",
     "sass": "1",
     "svgo": "2.8.0",
-    "vite": "2.9.10"
+    "vite": "2.9.11"
   },
   "license": "ISC"
 }
