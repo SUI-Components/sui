@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.17.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** force new release ([3c48b75](https://github.com/SUI-Components/sui/commit/3c48b75764c3c75d38d97908ee74a3e6f3f5d188))
+
+
+
 # 8.16.0 (2022-06-09)
 
 
