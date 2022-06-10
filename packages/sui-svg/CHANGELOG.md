@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.17.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-svg:** Better logging for Vite ([6edeb4d](https://github.com/SUI-Components/sui/commit/6edeb4d54ad73d103dba3999fa972dd607246ab4))
+
+
+
 # 3.16.0 (2022-06-07)
 
 
