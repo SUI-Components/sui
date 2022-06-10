@@ -1,5 +1,41 @@
 # CHANGELOG
 
+# 2.20.0 (2022-05-19)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix feature tests ([1a04d6a](https://github.com/SUI-Components/sui/commit/1a04d6a4b0cb85c9c300162809acb69b87ccdfe6))
+
+
+
+# 2.19.0 (2022-05-16)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix event dispatcher on creating instance ([5ce449c](https://github.com/SUI-Components/sui/commit/5ce449c5e0459f26f0870ba70aafa130ebae6842))
+
+
+
+# 2.18.0 (2022-05-11)
+
+
+### Features
+
+* **packages/sui-pde:** accept useFeature with adapterId ([d423766](https://github.com/SUI-Components/sui/commit/d4237666c707ecc0b0bc56a033005e081adcfd40))
+* **packages/sui-pde:** add eventDispatcher option ([5e41586](https://github.com/SUI-Components/sui/commit/5e41586b0b543a67bc77880437e72e0e6211f63b))
+* **packages/sui-pde:** add multiple adapter ([babf0d1](https://github.com/SUI-Components/sui/commit/babf0d1429cb78096b04d53b277bc18ac9204812))
+* **packages/sui-pde:** change multiple adapter api ([2ac6415](https://github.com/SUI-Components/sui/commit/2ac6415beb03bad279ad9c16eaf6423018384a88))
+* **packages/sui-pde:** create right context data ([9ce4361](https://github.com/SUI-Components/sui/commit/9ce436188110768e13c73e4e0be8f7ee4f0649b0))
+* **packages/sui-pde:** multiple instances ([e9dae04](https://github.com/SUI-Components/sui/commit/e9dae049f11fd56b6c50fd8d266f1c9582505eb2))
+* **packages/sui-pde:** proxy the adapterId, consents apply to all instances, generate adapters on i ([ff4ec74](https://github.com/SUI-Components/sui/commit/ff4ec742c0319a2a26c6d79b004635e33fb50667))
+* **packages/sui-pde:** remove not needed methods ([3b21274](https://github.com/SUI-Components/sui/commit/3b21274c06c21dcb2470be672d1b9a6684ef1b3c))
+* **packages/sui-pde:** remove not needed param ([5a1f313](https://github.com/SUI-Components/sui/commit/5a1f31368a9cdb066f9a44fd3a7b93677a1a0d65))
+* **packages/sui-pde:** remove not needed spread operator ([4ea2d67](https://github.com/SUI-Components/sui/commit/4ea2d67246110c1a314a61ae3ce76cfb66cc180b))
+
+
+
 # 2.17.0 (2022-03-01)
 
 

@@ -28,7 +28,7 @@ describe('@s-ui/js-compiler', () => {
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
 
-    expect(compiledFile).to.contain('applyDecoratedDescriptor')
+    expect(compiledFile).to.contain('_ts_decorate')
     expect(compiledFile).to.contain('regeneratorRuntime')
   })
 
@@ -51,7 +51,7 @@ describe('@s-ui/js-compiler', () => {
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
 
-    expect(compiledFile).to.contain('applyDecoratedDescriptor')
+    expect(compiledFile).to.contain('_ts_decorate')
     expect(compiledFile).to.contain('regeneratorRuntime')
   })
 })

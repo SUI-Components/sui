@@ -8,14 +8,16 @@ import {getPlatformStrategy} from './common/platformStrategies.js'
  * @param {string} param.experimentName
  * @param {object} param.attributes
  * @param {function} param.trackExperimentViewed
- * @param {string} [param.queryString] Test purposes only
+ * @param {string} param.queryString
+ * @param {string} param.adapterId Adapter id to be executed
  * @return {{variation: string}}
  */
 export default function useExperiment({
   experimentName,
   attributes,
   trackExperimentViewed,
-  queryString // for test purposes only
+  queryString,
+  adapterId
 } = {}) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
@@ -37,7 +39,13 @@ export default function useExperiment({
       if (forcedVariation) {
         return forcedVariation
       }
-      variationName = strategy.getVariation({pde, experimentName, attributes})
+
+      variationName = strategy.getVariation({
+        pde,
+        experimentName,
+        attributes,
+        adapterId
+      })
       strategy.trackExperiment({variationName, experimentName})
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -46,7 +54,14 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [trackExperimentViewed, experimentName, queryString, pde, attributes])
+  }, [
+    trackExperimentViewed,
+    experimentName,
+    queryString,
+    pde,
+    attributes,
+    adapterId
+  ])
 
   return {variation}
 }
