@@ -32,6 +32,11 @@ const server = await createServer({
         replacement: val => val.replace(/^~/, '')
       }
     ]
+  },
+  server: {
+    fs: {
+      strict: false
+    }
   }
 })
 await server.listen()

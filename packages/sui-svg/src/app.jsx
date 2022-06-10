@@ -1,4 +1,7 @@
-import {useState} from 'react'
+/* DO NOT REMOTE React import */
+/* We're not using vite-react to avoid the need to install a dependency */
+/* And then we need the import React to get the whole package */
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 
 import {ATOM_ICON_COLORS, ATOM_ICON_SIZES} from '@s-ui/react-atom-icon'
