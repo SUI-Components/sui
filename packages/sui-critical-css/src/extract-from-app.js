@@ -1,9 +1,11 @@
 import {createHash} from 'crypto'
 import {mkdir, writeFile} from 'fs/promises'
 import {join} from 'path'
-import {extractCSSFromUrl} from './extract-from-url.js'
-import {devices} from './config.js'
+
 import fetch from 'node-fetch'
+
+import {devices} from './config.js'
+import {extractCSSFromUrl} from './extract-from-url.js'
 
 const TIME_BETWEEN_RETRIES = 1000
 const TIMES_TO_RETRY = 15

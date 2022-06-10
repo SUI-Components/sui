@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
+
 import SUIContext from '@s-ui/react-context'
 
-import { TCF_WINDOW_API, TCF_VERSION } from './config'
+import { TCF_VERSION, TCF_WINDOW_API } from './config'
 import hasUserConsents from './hasUserConsents'
 import { EventStatus, Purpose } from './types'
 

@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 
-import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+
+import PropTypes from 'prop-types'
+
 import Context from '@s-ui/react-context'
 import {useMount} from '@s-ui/react-hooks'
 

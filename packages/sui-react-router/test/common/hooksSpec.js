@@ -1,9 +1,11 @@
-import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
+
+import {expect} from 'chai'
+
 import {
+  match,
   Route,
   Router,
-  match,
   useLocation,
   useParams,
   useRouter

@@ -1,7 +1,9 @@
+import {useEffect, useState} from 'react'
+
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from 'react'
-import Markdown from './Markdown'
-import {fetchMarkdownFile} from '../tryRequire'
+
+import {fetchMarkdownFile} from '../tryRequire.js'
+import Markdown from './Markdown.js'
 
 export default function MarkdownFile({file, params}) {
   const [content, setContent] = useState(null)

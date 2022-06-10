@@ -1,5 +1,6 @@
-import {Mocker, Mock} from './mockerInterface'
 import nock from 'nock'
+
+import {Mock, Mocker} from './mockerInterface'
 
 class ServerMocker extends Mocker {
   restore() {

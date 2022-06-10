@@ -1,15 +1,17 @@
-import TYPES from '../../hooks-types.js'
 import {readFile} from 'fs'
-import {promisify} from 'util'
 import {resolve} from 'path'
-import {publicFolder, hrTimeToMs, siteByHost} from '../utils/index.js'
-import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
+import {promisify} from 'util'
 
 // __MAGIC IMPORTS__
 // They came from {SPA}/src
 // import userHooks from 'hooks'
 import routes from 'routes'
+
+import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
 import {match} from '@s-ui/react-router'
+
+import TYPES from '../../hooks-types.js'
+import {hrTimeToMs, publicFolder, siteByHost} from '../utils/index.js'
 let userHooks
 let contextFactory
 try {

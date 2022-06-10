@@ -1,6 +1,7 @@
 import { renderToNodeStream, renderToString } from 'react-dom/server'
+
 import InitialPropsContext from './initialPropsContext'
-import { SsrComponentWithInitialPropsParams, InitialProps } from './types'
+import { InitialProps, SsrComponentWithInitialPropsParams } from './types'
 
 const hrTimeToMs = (diff: [number, number]): number => diff[0] * 1e3 + diff[1] * 1e-6
 

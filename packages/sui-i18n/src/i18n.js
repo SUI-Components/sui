@@ -1,4 +1,5 @@
 import {slugify} from '@s-ui/js/lib/string/slugify.js'
+
 import DefaultAdapter from './adapters/default.js'
 
 export default class Rosetta {

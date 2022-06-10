@@ -1,8 +1,10 @@
 /* eslint react/prop-types:0 */
 import {createContext, useContext} from 'react'
+
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
-import setupEnvironment from '../src/environment-mocha/setupEnvironment'
+
+import setupEnvironment from '../src/environment-mocha/setupEnvironment.js'
 
 chai.use(chaiDOM)
 

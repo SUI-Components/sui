@@ -1,10 +1,11 @@
 /* eslint no-unused-expressions:0 */
 /* eslint-env mocha */
 
-import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
-import React from 'react'
-import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
+
+import {expect} from 'chai'
+
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 
 import Head, {HeadProvider} from '../../lib/index'
 import {renderHeadTagsToString} from '../../lib/server'

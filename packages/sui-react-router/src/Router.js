@@ -1,17 +1,17 @@
 // @ts-check
 
-import {createElement as h, useState, useEffect} from 'react'
+import {createElement as h, useEffect, useState} from 'react'
+
 import PropTypes from 'prop-types'
 
-import {routes, components} from './internal/PropTypes.js'
+import RouterContext from './internal/Context.js'
+import {createTransitionManager} from './internal/createTransitionManager.js'
+import {components, routes} from './internal/PropTypes.js'
 import {fromReactTreeToJSON} from './internal/ReactUtils.js'
 import {
   createRouterHistory,
   createRouterObject
 } from './internal/RouterUtils.js'
-import {createTransitionManager} from './internal/createTransitionManager.js'
-import RouterContext from './internal/Context.js'
-
 import Route from './Route.js'
 
 const renderRouterContent = ({components, params, router}) => {

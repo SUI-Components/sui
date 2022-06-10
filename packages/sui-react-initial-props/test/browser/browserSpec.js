@@ -2,9 +2,10 @@
 /* eslint no-unused-expressions:0 */
 /* eslint-env mocha */
 
-import React from 'react'
 import {expect} from 'chai'
+
 import {render, screen} from '@testing-library/react'
+
 import withInitialProps from '../../lib/withInitialProps.js'
 
 describe('react-initial-props', () => {

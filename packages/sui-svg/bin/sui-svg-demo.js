@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import {createServer} from 'vite'
 import {resolve} from 'path'
+
+import {createServer} from 'vite'
 
 const {pathname: root} = new URL('../src', import.meta.url)
 

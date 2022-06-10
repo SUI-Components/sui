@@ -1,6 +1,8 @@
-import {expect} from 'chai'
-import {writeFile, removeFile} from '../../file.js'
 import filesystem from 'fs'
+
+import {expect} from 'chai'
+
+import {removeFile, writeFile} from '../../file.js'
 
 const fs = filesystem.promises
 const pathOfFile = `${__dirname}/a.txt`

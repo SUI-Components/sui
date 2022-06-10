@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types'
 import {useEffect} from 'react'
+
+import PropTypes from 'prop-types'
 
 const createLinkElement = () => {
   const linkElement = document.createElement('link')

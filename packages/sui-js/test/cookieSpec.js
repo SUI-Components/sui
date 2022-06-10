@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
+
 import cookie, {cookieWithoutEncoding} from '../src/cookie/index.js'
 
 const TEST_URL = 'https://tools.ietf.org/#%'

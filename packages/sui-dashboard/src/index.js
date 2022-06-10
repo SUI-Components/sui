@@ -1,5 +1,6 @@
-import fg from 'fast-glob'
 import {readFileSync} from 'fs'
+
+import fg from 'fast-glob'
 
 const flat = arr => [].concat(...arr)
 

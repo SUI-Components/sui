@@ -1,4 +1,5 @@
 import { renderToString } from 'react-dom/server'
+
 import { BODY_ATTRIBUTES_KEY } from './Body'
 import { HTML_ATTRIBUTES_KEY } from './Html'
 import { ComponentTag } from './types'

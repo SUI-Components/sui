@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
-import cx from 'classnames'
 
-import {iconClose, iconMenu} from '../icons'
+import cx from 'classnames'
+import PropTypes from 'prop-types'
+
 import Markdown from '../documentation/Markdown'
+import {iconClose, iconMenu} from '../icons'
 import Navigation from '../navigation'
 import {fetchComponentsReadme} from '../tryRequire.js'
 

@@ -1,4 +1,5 @@
 import optimizelySDK from '@optimizely/optimizely-sdk'
+
 import {updateIntegrations} from './integrations/handler.js'
 
 const DEFAULT_DATAFILE_OPTIONS = {
