@@ -26,10 +26,6 @@ const config = {
 
   frameworks: ['mocha', 'webpack'],
 
-  proxies: {
-    '/mockServiceWorker.js': `/base/public/mockServiceWorker.js`
-  },
-
   plugins: [
     require.resolve('karma-webpack'),
     require.resolve('karma-chrome-launcher'),
@@ -75,7 +71,7 @@ const config = {
         readline: false,
         stream: require.resolve('stream-browserify'),
         timers: false,
-        tty: false,
+        tty: require.resolve('tty-browserify'),
         util: require.resolve('util/'),
         vm: false,
         worker_threads: false,
