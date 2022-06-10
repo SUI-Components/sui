@@ -1,1 +1,16 @@
+@use 'sass:math';
+@import './theme.scss';
+
+/*
+ * Variables
+ */
+$home-categories-base-path: '/home-categories/coches/';
+
 $red: red;
+
+$m-base: 8px !default;
+$m-v: ceil($m-base); // 8px
+$m-h: $m-base * 2; // 16px
+$m-v-xsmall: ceil(math.div($m-v, 3)); // 3px
+$m-h-xsmall: ceil(math.div($m-h, 3)); // 8px
+$m-v-small: ceil($m-v * 0.5); // 4px
