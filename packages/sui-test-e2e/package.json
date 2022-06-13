@@ -11,7 +11,7 @@
     "postpublish": "make build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "dependencies": {
     "@testing-library/cypress": "8.0.2",

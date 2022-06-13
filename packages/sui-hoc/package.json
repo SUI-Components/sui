@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "peerDependencies": {
     "@s-ui/react-context": "1",

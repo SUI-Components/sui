@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib",
+    "prepublishOnly": "npm run lib",
     "test": "npm run test:server",
     "test:server": "NODE_ENV=test sui-test server",
     "test:server:watch": "npm run test:server -- --watch"
