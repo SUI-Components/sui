@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-import {existsSync} from 'fs'
+import {existsSync, writeFileSync} from 'fs'
 import {createRequire} from 'module'
 import {join} from 'path'
 
@@ -12,8 +12,8 @@ const require = createRequire(import.meta.url)
 const {version} = require('../package.json')
 
 const CWD = process.cwd()
-const TESTS_FOLDER = `${CWD}/cypress`
-const SCREENSHOTS_FOLDER = `${CWD}/.tmp/cypress/screenshots`
+const TESTS_FOLDER = `${CWD}/test-e2e`
+const SCREENSHOTS_FOLDER = `${CWD}/.tmp/test-e2e/screenshots`
 const DEFAULT_USER_AGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 Chrome/65.0.3325.146 Safari/537.36'
 const DEFAULT_CYPRESS_CONFIG = {
@@ -24,6 +24,10 @@ const DEFAULT_CYPRESS_CONFIG = {
   viewportWidth: 1240,
   viewportHeight: 960
 }
+
+const DEFAULT_CYPRESS_CONFIG_FILE_CONTENT = `module.exports = {
+  e2e: {} 
+};`
 
 const HELP_MESSAGE = `
   Description:
@@ -112,9 +116,12 @@ const {
   viewportWidth
 } = program.opts()
 
+// Since Cypress 10, integrationFolder param becomes a file pattern
+const scopePattern = `${scope}/**/*.js`
+
 const cypressConfig = {
   ...DEFAULT_CYPRESS_CONFIG,
-  specPattern: join(TESTS_FOLDER, scope || ''),
+  specPattern: join(TESTS_FOLDER, scopePattern || ''),
   baseUrl,
   fixturesFolder: join(TESTS_FOLDER, 'fixtures')
 }
@@ -157,8 +164,15 @@ if (ci) {
 
 if (noWebSecurity) cypressConfig.chromeWebSecurity = false
 
+const configFilePath = join(TESTS_FOLDER, 'cypress.config.js')
+
+if (!existsSync(configFilePath)) {
+  writeFileSync(configFilePath, DEFAULT_CYPRESS_CONFIG_FILE_CONTENT)
+}
+
 const cypressExecutableConfig = {
   config: cypressConfig,
+  configFile: configFilePath,
   key,
   group,
   browser,
