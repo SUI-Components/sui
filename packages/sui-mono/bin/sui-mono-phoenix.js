@@ -10,7 +10,6 @@ const CI_FLAGS = [
   'loglevel=error',
   'no-audit',
   'no-fund',
-  'no-optional',
   'no-package-lock',
   'no-progress',
   'no-save',
