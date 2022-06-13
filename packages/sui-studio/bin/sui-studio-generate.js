@@ -88,7 +88,7 @@ import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
-${context ? '' : "import Component from '../src/index'"}
+${context ? '' : "import Component from '../src/index.js'"}
 
 ${context ? "import '@s-ui/studio/src/patcher-mocha'" : ''}
 
