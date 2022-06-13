@@ -12,14 +12,13 @@ const require = createRequire(import.meta.url)
 const {version} = require('../package.json')
 
 const CWD = process.cwd()
-const TESTS_FOLDER = `${CWD}/test-e2e`
-const SCREENSHOTS_FOLDER = `${CWD}/.tmp/test-e2e/screenshots`
+const TESTS_FOLDER = `${CWD}/cypress`
+const SCREENSHOTS_FOLDER = `${CWD}/.tmp/cypress/screenshots`
 const DEFAULT_USER_AGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 Chrome/65.0.3325.146 Safari/537.36'
 const DEFAULT_CYPRESS_CONFIG = {
   fixturesFolder: false,
-  pluginsFile: false,
-  supportFile: false,
+  e2e: {},
   trashAssetsBeforeRuns: true,
   videoUploadOnPasses: false,
   viewportWidth: 1240,
@@ -115,7 +114,7 @@ const {
 
 const cypressConfig = {
   ...DEFAULT_CYPRESS_CONFIG,
-  integrationFolder: join(TESTS_FOLDER, scope || ''),
+  specPattern: join(TESTS_FOLDER, scope || ''),
   baseUrl,
   fixturesFolder: join(TESTS_FOLDER, 'fixtures')
 }
@@ -125,11 +124,11 @@ if (defaultCommandTimeout) {
 }
 
 if (existsSync(supportFilesFolderPath)) {
-  cypressConfig.supportFile = supportFilesFolderPath
+  cypressConfig.e2e.supportFile = supportFilesFolderPath
 }
 
 if (existsSync(pluginsFilesFolderPath)) {
-  cypressConfig.pluginsFile = pluginsFilesFolderPath
+  cypressConfig.e2e.pluginsFile = pluginsFilesFolderPath
 }
 
 if (userAgent) {
@@ -160,7 +159,6 @@ if (noWebSecurity) cypressConfig.chromeWebSecurity = false
 
 const cypressExecutableConfig = {
   config: cypressConfig,
-  configFile: false,
   key,
   group,
   browser,
