@@ -197,7 +197,7 @@ test
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npm run build:js && npm run build:styles",
+    "prepublishOnly": "npm run build:js && npm run build:styles",
     "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },

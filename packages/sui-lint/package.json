@@ -7,7 +7,6 @@
     "sui-lint": "bin/sui-lint.js"
   },
   "scripts": {
-    "lint": "sui-lint js",
     "postinstall": "node ./scripts/add-package-json-fields.js",
     "eslint:print-rules": "eslint --config=./eslintrc.js --print-config ./eslintrc.js"
   },

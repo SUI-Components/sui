@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",

@@ -8,7 +8,7 @@
   "scripts": {
     "lib:js": "babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "files": [
     "/bin",
