@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.15.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-studio:** add .js extension to Component import on test code ([5ac9d65](https://github.com/SUI-Components/sui/commit/5ac9d65cd37b3ec11e6e0c35a0bd24c4fa99ac45))
+
+
+
 # 11.14.0 (2022-06-10)
 
 
