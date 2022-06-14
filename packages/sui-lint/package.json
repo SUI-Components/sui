@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@babel/eslint-parser": "7.18.2",
     "@babel/eslint-plugin": "7.17.7",
     "@s-ui/helpers": "1",
@@ -37,8 +37,8 @@
     "eslint-plugin-react": "7.30.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "postcss-scss": "4.0.4",
-    "prettier": "2.6.2",
-    "stylelint": "14.9.0",
+    "prettier": "2.7.0",
+    "stylelint": "14.9.1",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-recommended-scss": "6.0.0",
     "stylelint-prettier": "2.0.0"
