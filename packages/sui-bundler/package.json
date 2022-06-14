@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@s-ui/helpers": "1",
     "@s-ui/sass-loader": "1",
     "address": "1.2.0",
