@@ -46,12 +46,13 @@ describe('getProvider', () => {
 
 describe('Consumer test', () => {
   let provider
+  let consumerPort = port + 1
 
   before(async () => {
     provider = getProvider({
       consumer: 'test-app',
       provider: 'test-api',
-      port,
+      port: consumerPort,
       logLevel
     })
 
@@ -77,7 +78,7 @@ describe('Consumer test', () => {
     })
 
     it('should respond to interaction', async () => {
-      const response = await axios.get('http://localhost:8123/test')
+      const response = await axios.get(`http://localhost:${consumerPort}/test`)
       expect(response.data).to.eql(interactionResponse)
     })
   })
