@@ -17,8 +17,8 @@
     "test:server:watch": "npm run test:server -- --watch"
   },
   "dependencies": {
-    "@pact-foundation/absolute-version": "0.0.4",
-    "@pact-foundation/pact": "9.16.4",
+    "absolute-version": "1.0.1",
+    "@pact-foundation/pact": "9.17.3",
     "commander": "8.3.0"
   },
   "devDependencies": {
