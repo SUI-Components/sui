@@ -6,12 +6,13 @@
   "author": "",
   "license": "ISC",
   "main": "src/index.js",
+  "type": "module",
   "bin": {
     "sui-test-contract": "bin/index.js"
   },
   "scripts": {
     "lib": "babel --out-dir ./lib  ./src",
-    "prepare": "npm run lib",
+    "prepublishOnly": "npm run lib",
     "test": "npm run test:server",
     "test:server": "NODE_ENV=test sui-test server",
     "test:server:watch": "npm run test:server -- --watch"
@@ -19,9 +20,14 @@
   "dependencies": {
     "@pact-foundation/absolute-version": "0.0.4",
     "@pact-foundation/pact": "9.16.4",
+    "@pactflow/pact-msw-adapter": "1.2.0",
     "commander": "8.3.0"
   },
   "devDependencies": {
-    "@s-ui/domain": "2"
+    "@s-ui/domain": "2",
+    "msw": "0.36.8"
+  },
+  "peerDependencies": {
+    "msw": "0.36.8"
   }
 }

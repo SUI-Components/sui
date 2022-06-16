@@ -6,7 +6,7 @@
 
 const program = require('commander')
 const path = require('path')
-const {exec} = require('../utils/index.js')
+const {exec} = require('./utils/index.js')
 const {Publisher} = require('@pact-foundation/pact')
 const {versionFromGitTag} = require('@pact-foundation/absolute-version')
 
