@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander'
+
 import {getCommitSha} from '../src/git.js'
 import {updateCommitStatus} from '../src/index.js'
 

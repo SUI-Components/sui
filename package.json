@@ -12,7 +12,7 @@
     "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx @s-ui/mono phoenix",
+    "phoenix": "npx @s-ui/mono phoenix && npx -y ultra-runner --raw --recursive prepublishOnly &>/dev/null",
     "co": "sui-mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",

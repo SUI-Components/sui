@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.17.0",
+  "version": "8.19.0",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -8,13 +8,18 @@
   "scripts": {
     "lib:js": "babel --presets sui ./src --out-dir ./lib",
     "lib": "npm run lib:js",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
+  "files": [
+    "/bin",
+    "/src",
+    "/lib"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@babel/plugin-transform-modules-commonjs": "7.18.2",
     "@babel/register": "7.17.7",
     "@s-ui/helpers": "1",

@@ -94,7 +94,7 @@ function handleWarnings(warnings) {
   function printWarnings() {
     // Print warnings to the console.
     const formatted = formatWebpackMessages({
-      warnings: warnings,
+      warnings,
       errors: []
     })
 
@@ -129,7 +129,7 @@ function handleErrors(errors) {
 
   // "Massage" webpack messages.
   const formatted = formatWebpackMessages({
-    errors: errors,
+    errors,
     warnings: []
   })
 

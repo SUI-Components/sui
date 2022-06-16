@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import PropTypes from 'prop-types'
+import {useEffect, useState} from 'react'
 
 import cx from 'classnames'
+import PropTypes from 'prop-types'
 
-import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment'
 import {
   addReactContextToComponent,
   extractDisplayName
-} from '../../../../src/components/utils'
+} from '../../../../src/components/utils.js'
+import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment.js'
 
 addSetupEnvironment(window)
 

@@ -1,7 +1,8 @@
-import path from 'path'
 import fs from 'fs'
-import {ssrMultiSiteConfig} from './index.js'
+import path from 'path'
+
 import utilsFactory from '../../../server/utils/factory.js'
+import {ssrMultiSiteConfig} from './index.js'
 
 const {publicFolder: publicFolderWithMultiSiteConfig} = utilsFactory({
   path,

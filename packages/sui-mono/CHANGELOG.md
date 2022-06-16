@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.29.0 (2022-06-15)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Fix missing promise ([8bbfce4](https://github.com/SUI-Components/sui/commit/8bbfce485c2a5fc0602410bac25c06f1e8168def))
+
+
+
+# 2.28.0 (2022-06-13)
+
+
+### Features
+
+* **packages/sui-mono:** Remove not optional from ci install for swc compatibility ([9e214aa](https://github.com/SUI-Components/sui/commit/9e214aa54c323139cd1ee5709289850e33e164dc))
+
+
+
 # 2.27.0 (2022-05-16)
 
 

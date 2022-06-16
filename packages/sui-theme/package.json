@@ -6,8 +6,7 @@
   "scripts": {
     "clean:lib": "npx rimraf lib",
     "lib": "cp -R src lib",
-    "lint": "sui-lint sass",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "license": "ISC",
   "homepage": "https://github.com/SUI-Components/sui"

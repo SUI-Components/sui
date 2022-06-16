@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "lib": "babel --out-dir ./lib  ./src",
-    "prepare": "npm run lib"
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib"
   },
   "peerDependencies": {
     "@s-ui/react-context": "1",

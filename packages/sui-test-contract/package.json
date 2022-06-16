@@ -11,7 +11,7 @@
     "sui-test-contract": "bin/index.js"
   },
   "scripts": {
-    "lib": "babel --out-dir ./lib  ./src",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepublishOnly": "npm run lib",
     "test": "npm run test:server",
     "test:server": "NODE_ENV=test sui-test server",

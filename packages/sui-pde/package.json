@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib",
+    "prepublishOnly": "npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:browser": "NODE_ENV=test sui-test browser",
     "test:server:watch": "npm run test:server -- --watch",

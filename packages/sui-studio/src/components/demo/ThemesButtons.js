@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
-import Tabs from './Tabs'
+
 import Tab from './Tab'
+import Tabs from './Tabs'
 
 const ThemesButtons = ({themes, onThemeChange, selected}) => {
   if (!themes.length) return null

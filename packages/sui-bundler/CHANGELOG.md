@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 9.29.0 (2022-06-16)
+
+
+### Features
+
+* **packages/sui-bundler:** add sass module rules to lib script ([de9698e](https://github.com/SUI-Components/sui/commit/de9698ef38b28eede7dd0b57ea67aa8c221a3cca))
+
+
+
+# 9.28.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([1faf808](https://github.com/SUI-Components/sui/commit/1faf808221dd5b289c0aa006d561ef23723e1b95))
+
+
+
 # 9.27.0 (2022-06-09)
 
 

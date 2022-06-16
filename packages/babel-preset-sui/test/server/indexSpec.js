@@ -1,5 +1,7 @@
-import {transformAsync as transform} from '@babel/core'
 import {expect} from 'chai'
+
+import {transformAsync as transform} from '@babel/core'
+
 import babelPresetSui from '../../src/index.js'
 
 const babelConfig = {
@@ -31,8 +33,6 @@ describe('babel-preset-sui', function () {
       `
 
       const {code} = await babel(jsx)
-
-      console.log(code)
 
       expect(code).to.not.include('App.propTypes')
     })

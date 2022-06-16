@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 8.19.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([d51c9fd](https://github.com/SUI-Components/sui/commit/d51c9fdb2b833954aa3495f396d070c67fe99907))
+
+
+
+# 8.18.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** Add files to be published ([043f954](https://github.com/SUI-Components/sui/commit/043f9549bb7e819e575bfe9003b587660aaf0b96))
+
+
+
 # 8.17.0 (2022-06-10)
 
 

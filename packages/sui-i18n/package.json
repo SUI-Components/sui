@@ -6,8 +6,8 @@
   "description": "> Isomorphic i18n service for browser and node.",
   "scripts": {
     "lib": "npm run lib:js",
-    "lib:js": "babel ./src --out-dir ./lib",
-    "prepare": "npm run lib"
+    "lib:js": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",

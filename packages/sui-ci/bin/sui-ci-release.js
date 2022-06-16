@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import {release} from '../src/index.js'
 import {checkIsPullRequest} from '../src/git.js'
+import {release} from '../src/index.js'
 
 const {
   GH_TOKEN, // deprecated

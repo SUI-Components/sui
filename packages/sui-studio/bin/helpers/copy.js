@@ -65,6 +65,7 @@ module.exports = async function copyFiles(args, config = {}) {
 
   if (files.length === 0) {
     console.log('No files found.')
+    return
   }
 
   debug(`Copying ${files.length} files from ${input} to ${outDir}`)

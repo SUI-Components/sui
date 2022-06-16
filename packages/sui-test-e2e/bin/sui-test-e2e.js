@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-import {join} from 'path'
-import program from 'commander'
 import {existsSync} from 'fs'
 import {createRequire} from 'module'
+import {join} from 'path'
+
+import program from 'commander'
 import cypress from 'cypress'
 
 const require = createRequire(import.meta.url)

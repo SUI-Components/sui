@@ -4,9 +4,10 @@
  * This file is being executed in browser opened to run tests
  */
 import micromatch from 'micromatch'
+
 import {importContexts, importReactComponent} from '../components/tryRequire.js'
-import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
 import {addReactContextToComponent} from '../components/utils.js'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
 addSetupEnvironment(window)
 
 window.__STUDIO_CONTEXTS__ = {}
