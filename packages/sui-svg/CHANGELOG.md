@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.18.0 (2022-06-17)
+
+
+### Features
+
+* **packages/sui-svg:** Avoid warnings and add comment to avoid removing import ([13b07e3](https://github.com/SUI-Components/sui/commit/13b07e36fe6413e8c7ba24c41061ff5d0a90ecd7))
+* **packages/sui-svg:** Upgrade Vite patch version ([1858a86](https://github.com/SUI-Components/sui/commit/1858a86362db731cfa5eab1be14cd152bfeb23bf))
+
+
+
 # 3.17.0 (2022-06-10)
 
 
