@@ -1,11 +1,13 @@
 import {expect} from 'chai'
 import {setupServer} from 'msw/node/lib/index.js'
+
 import {setupPactMswAdapter} from '@pactflow/pact-msw-adapter'
+
 import {
-  writerFactory,
-  mapProviders,
   getContractTests,
-  toQueryString
+  mapProviders,
+  toQueryString,
+  writerFactory
 } from './utils.js'
 
 export default ({
