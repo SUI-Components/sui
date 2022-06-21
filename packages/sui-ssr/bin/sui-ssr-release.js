@@ -7,8 +7,8 @@ const path = require('path')
 
 program
   .option('-B, --branch <branch>', 'Release branch. Will be master by default')
-  .option('-E, --email <email>', 'Releaser´s email')
-  .option('-N, --name <name>', 'Releaser´s name')
+  .option('-E, --email <email>', "Releaser's email")
+  .option('-N, --name <name>', "Releaser's name")
   .option('-C, --commit <commit>', 'Commit to tag')
   .option('-sci, --skip-ci', 'Skip CI')
   .option('--npm7', 'Is npm 7 project')

@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const archiver = require('archiver')
 const program = require('commander')
-const authDefinitionBuilder = require('./authDefinitionBuilder')
+const authDefinitionBuilder = require('./authDefinitionBuilder.js')
 
 const {auth, outputFileName} = program.opts()
 
