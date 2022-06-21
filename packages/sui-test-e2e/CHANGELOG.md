@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.11.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Disable video if not needed ([d2ee56c](https://github.com/SUI-Components/sui/commit/d2ee56cdb48da47cb36ba3cd56c6780bd79809d5))
+
+
+
 # 1.10.0 (2022-05-11)
 
 
