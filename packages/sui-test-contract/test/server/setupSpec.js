@@ -7,9 +7,7 @@ import {setupContractTests} from '../../src/index.js'
 import {getContractFileData, removeContractFiles} from '../utils.js'
 
 const fetcher = FetcherFactory.httpFetcher({config: {}})
-
 const consumer = 'test-consumer'
-
 const fujiAppleResponse = {color: 'red', type: 'Fuji'}
 const fujiRottenAppleResponse = {...fujiAppleResponse, isRotten: true}
 const applesResponse = [
@@ -17,7 +15,6 @@ const applesResponse = [
   {color: 'green', type: 'Granny Smith'}
 ]
 const galaAppleBody = {color: 'red', type: 'Gala'}
-
 const getAppleHandler = rest.get(
   'http://localhost:8181/apples/:slug',
   (req, res, ctx) => {
