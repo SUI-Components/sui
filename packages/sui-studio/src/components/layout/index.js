@@ -3,9 +3,9 @@ import React, {useEffect, useState} from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
-import Markdown from '../documentation/Markdown'
-import {iconClose, iconMenu} from '../icons'
-import Navigation from '../navigation'
+import Markdown from '../documentation/Markdown.js'
+import {iconClose, iconMenu} from '../icons/index.js'
+import Navigation from '../navigation/index.js'
 import {fetchComponentsReadme} from '../tryRequire.js'
 
 export default function Layout({children}) {

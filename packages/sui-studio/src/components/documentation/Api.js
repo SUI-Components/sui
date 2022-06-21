@@ -35,7 +35,7 @@ export default function Api({params}) {
           // eslint-disable-line
           'It seem that you might have a prop with a defaultValue but it does not exist as propType'
         )
-        return
+        return null
       }
 
       return (
