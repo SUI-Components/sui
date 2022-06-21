@@ -117,7 +117,12 @@ const cypressConfig = {
   ...DEFAULT_CYPRESS_CONFIG,
   integrationFolder: join(TESTS_FOLDER, scope || ''),
   baseUrl,
-  fixturesFolder: join(TESTS_FOLDER, 'fixtures')
+  fixturesFolder: join(TESTS_FOLDER, 'fixtures'),
+  video,
+  retries: {
+    runMode: 1,
+    openMode: 1
+  }
 }
 
 if (defaultCommandTimeout) {
