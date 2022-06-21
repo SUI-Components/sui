@@ -38,7 +38,6 @@ export const applesRequestHandler = rest.get(
 ```
 
 ```js
-// This file should be placed in a path like:
 // `contract/test/apples/consumerSpec.js`
 import {expect} from 'chai'
 import {FetcherFactory} from '@s-ui/domain'
