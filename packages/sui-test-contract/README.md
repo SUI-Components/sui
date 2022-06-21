@@ -82,7 +82,7 @@ setupContractTests({
 ### Provider interaction options
 
 | Parameter     | Required | Type                                                                                                                | Default                                         | Description                                   |
-| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------- | --- |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
 | `description` | Yes      | `string`                                                                                                            |                                                 | Description for the interaction               |
 | `state`       | Yes      | `string`                                                                                                            |                                                 | State to be matched by the provider           |
 | `endpoint`    | Yes      | `string`                                                                                                            |                                                 | Endpoint to be added in the contract document |
@@ -91,7 +91,7 @@ setupContractTests({
 | `method`      | No       | `string`                                                                                                            | `get`                                           | Request method                                |
 | `handler`     | Yes      | [Request handler](https://mswjs.io/docs/basics/request-handler)                                                     |                                                 | Request handler used in the contract test     |
 | `options`     | No       | `object`                                                                                                            | `defaultOptions` (from the setup configuration) | Request options                               |
-| `response`    | Yes      | `any`                                                                                                               |                                                 | Response to be validated in the contract test |     |
+| `response`    | Yes      | `any`                                                                                                               |                                                 | Response to be validated in the contract test |
 
 ## Publishing the contracts
 
