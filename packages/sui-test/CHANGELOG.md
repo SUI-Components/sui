@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.21.0 (2022-06-23)
+
+
+### Features
+
+* **packages/sui-test:** Prepare for release ([a940170](https://github.com/SUI-Components/sui/commit/a94017022fcf9b4ff05effd2dc44657eaaf4441f))
+* **packages/sui-test:** Use mocha@10 ([39b2f88](https://github.com/SUI-Components/sui/commit/39b2f881bec9eacbacbb02b1de269746f6adeb29))
+
+
+
 # 8.20.0 (2022-06-21)
 
 
