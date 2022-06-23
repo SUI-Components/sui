@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2022-06-23)
+
+
+### Features
+
+* **packages/sui-test-e2e:** supportFile and pluginsFile config should have an absolute path ([90e0556](https://github.com/SUI-Components/sui/commit/90e055606d7c86efdb2a066d6f9745425356eaf0))
+
+
+
 # 1.11.0 (2022-06-21)
 
 
