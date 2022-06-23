@@ -143,7 +143,7 @@ if (defaultCommandTimeout) {
 }
 
 if (existsSync(supportFilesFolderPath)) {
-  cypressConfig.e2e.supportFile = supportFilesFolderPath
+  cypressConfig.e2e.supportFile = `${supportFilesFolderPath}/index.js`
 }
 
 if (userAgent) {
