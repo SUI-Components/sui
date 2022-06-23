@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-import {existsSync} from 'fs'
+import {existsSync, writeFileSync} from 'fs'
 import {createRequire} from 'module'
 import {join} from 'path'
 
@@ -18,13 +18,16 @@ const DEFAULT_USER_AGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 Chrome/65.0.3325.146 Safari/537.36'
 const DEFAULT_CYPRESS_CONFIG = {
   fixturesFolder: false,
-  pluginsFile: false,
-  supportFile: false,
+  e2e: {},
   trashAssetsBeforeRuns: true,
   videoUploadOnPasses: false,
   viewportWidth: 1240,
   viewportHeight: 960
 }
+
+const DEFAULT_CYPRESS_CONFIG_FILE_CONTENT = `module.exports = {
+  e2e: {} 
+};`
 
 const HELP_MESSAGE = `
   Description:
@@ -113,9 +116,12 @@ const {
   viewportWidth
 } = program.opts()
 
+// Since Cypress 10, integrationFolder param becomes a file pattern
+const scopePattern = `${scope}/**/*.js`
+
 const cypressConfig = {
   ...DEFAULT_CYPRESS_CONFIG,
-  integrationFolder: join(TESTS_FOLDER, scope || ''),
+  specPattern: join(TESTS_FOLDER, scopePattern || ''),
   baseUrl,
   fixturesFolder: join(TESTS_FOLDER, 'fixtures'),
   video,
@@ -130,11 +136,11 @@ if (defaultCommandTimeout) {
 }
 
 if (existsSync(supportFilesFolderPath)) {
-  cypressConfig.supportFile = supportFilesFolderPath
+  cypressConfig.e2e.supportFile = `${supportFilesFolderPath}/index.js`
 }
 
 if (existsSync(pluginsFilesFolderPath)) {
-  cypressConfig.pluginsFile = pluginsFilesFolderPath
+  cypressConfig.e2e.pluginsFile = `${pluginsFilesFolderPath}/index.js`
 }
 
 if (userAgent) {
@@ -163,9 +169,15 @@ if (ci) {
 
 if (noWebSecurity) cypressConfig.chromeWebSecurity = false
 
+const configFilePath = join(TESTS_FOLDER, 'cypress.config.js')
+
+if (!existsSync(configFilePath)) {
+  writeFileSync(configFilePath, DEFAULT_CYPRESS_CONFIG_FILE_CONTENT)
+}
+
 const cypressExecutableConfig = {
   config: cypressConfig,
-  configFile: false,
+  configFile: configFilePath,
   key,
   group,
   browser,
