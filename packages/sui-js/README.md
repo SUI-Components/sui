@@ -207,3 +207,16 @@ const childrenComponent = baseComponent({children: 'childrenComponent'})
 
 const className = childrenComponent({element: 'element', modifier: 'modifier'}) // outputs: baseComponent-childrenComponent-element--modifier
 ```
+
+## array
+
+Utilities to manipulate arrays
+
+```js
+import {shuffleArray} from '@s-ui/js/lib/array'
+
+const list = [1,2,3,4,5]
+
+shuffleArray(list)
+console.log(list) // outputs: [3,1,4,5,2]
+```
