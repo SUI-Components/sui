@@ -213,10 +213,10 @@ const className = childrenComponent({element: 'element', modifier: 'modifier'}) 
 Utilities to manipulate arrays
 
 ```js
-import {shuffleArray} from '@s-ui/js/lib/array'
+import {shuffle} from '@s-ui/js/lib/array'
 
 const list = [1,2,3,4,5]
 
-shuffleArray(list)
+shuffle(list)
 console.log(list) // outputs: [3,1,4,5,2]
 ```
