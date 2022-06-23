@@ -10,7 +10,6 @@ const CI_FLAGS = [
   'loglevel=error',
   'no-audit',
   'no-fund',
-  'no-optional',
   'no-package-lock',
   'no-progress',
   'no-save',
@@ -122,7 +121,7 @@ const removeDependenciesForPackages = () => {
   console.log(`[sui-mono] Removing previous root packages...`)
   removeDependencies(process.cwd())
 
-  if (checkIsMonoPackage()) return
+  if (checkIsMonoPackage()) return Promise.resolve()
 
   console.log(`[sui-mono] Removing previous packages...`)
   // if we're on CI, we don't need to remove folders

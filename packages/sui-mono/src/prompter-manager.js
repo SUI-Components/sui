@@ -5,9 +5,9 @@ const {promisify} = require('util')
 const exec = promisify(require('child_process').exec)
 const {prompt} = require('enquirer')
 
-const buildCommit = require('./build-commit')
-const config = require('./config')
-const {types: commitTypes} = require('./commit-types')
+const buildCommit = require('./build-commit.js')
+const config = require('./config.js')
+const {types: commitTypes} = require('./commit-types.json')
 
 const scopes = config.getWorkspaces().map(name => ({name}))
 

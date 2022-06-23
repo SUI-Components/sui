@@ -123,7 +123,12 @@ const cypressConfig = {
   ...DEFAULT_CYPRESS_CONFIG,
   specPattern: join(TESTS_FOLDER, scopePattern || ''),
   baseUrl,
-  fixturesFolder: join(TESTS_FOLDER, 'fixtures')
+  fixturesFolder: join(TESTS_FOLDER, 'fixtures'),
+  video,
+  retries: {
+    runMode: 1,
+    openMode: 1
+  }
 }
 
 if (defaultCommandTimeout) {

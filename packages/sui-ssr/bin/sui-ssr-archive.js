@@ -3,7 +3,8 @@
 const program = require('commander')
 const rimraf = require('rimraf')
 const path = require('path')
-const archive = require('../archive')
+const archive = require('../archive/index.js')
+
 require('colors')
 
 const pkg = require(path.join(process.cwd(), 'package.json'))

@@ -1,1 +1,1 @@
-export {default as addCommands} from './add-commands'
+export {default as addCommands} from './add-commands.js'

@@ -1,4 +1,4 @@
-const {DEFAULT_BROWSER_TARGETS} = require('./defaults')
+const {DEFAULT_BROWSER_TARGETS} = require('./defaults.js')
 
 const getTargets = ({targets = {}}) => {
   const {browser = DEFAULT_BROWSER_TARGETS} = targets

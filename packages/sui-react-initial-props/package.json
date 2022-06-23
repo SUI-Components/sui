@@ -6,7 +6,7 @@
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
     "lib": "rm -rf ./lib && tsc",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",

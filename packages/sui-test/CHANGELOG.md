@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 8.20.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-test:** Patch mocks folder for msw contract new tool ([7a6d36f](https://github.com/SUI-Components/sui/commit/7a6d36fd048e806eb251782b3e6dbb1245dd7c7d))
+
+
+
+# 8.19.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([d51c9fd](https://github.com/SUI-Components/sui/commit/d51c9fdb2b833954aa3495f396d070c67fe99907))
+
+
+
 # 8.18.0 (2022-06-10)
 
 

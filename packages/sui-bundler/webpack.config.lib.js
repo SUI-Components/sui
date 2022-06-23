@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const {
   cleanList,
   envVars,
@@ -9,8 +10,11 @@ const path = require('path')
 const minifyJs = require('./shared/minify-js.js')
 const definePlugin = require('./shared/define.js')
 const babelRules = require('./shared/module-rules-babel.js')
+const sassRules = require('./shared/module-rules-sass.js')
 const {extractComments, sourceMap} = require('./shared/config.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
+
+const cssFileName = 'styles.css'
 
 module.exports = {
   mode: 'production',
@@ -48,6 +52,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: 'process/browser'
     }),
+    new MiniCssExtractPlugin({
+      filename: cssFileName,
+      chunkFilename: cssFileName
+    }),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     }),
@@ -55,6 +63,6 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [babelRules]
+    rules: [babelRules, sassRules]
   }
 }

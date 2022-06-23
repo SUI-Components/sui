@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 3.45.0 (2022-06-21)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade ios and safari versions ([3ce7760](https://github.com/SUI-Components/sui/commit/3ce7760913ca94a163cb1702ab26f6613491ebb9))
+
+
+
+# 3.44.0 (2022-06-14)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade dependencies ([786dbaf](https://github.com/SUI-Components/sui/commit/786dbafc0f892fb89366c446da583453a249227a))
+
+
+
 # 3.43.0 (2022-06-10)
 
 

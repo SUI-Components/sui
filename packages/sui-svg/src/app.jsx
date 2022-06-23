@@ -1,4 +1,4 @@
-/* DO NOT REMOTE React import */
+/* DO NOT REMOVE React import */
 /* We're not using vite-react to avoid the need to install a dependency */
 /* And then we need the import React to get the whole package */
 import React, {useState} from 'react'

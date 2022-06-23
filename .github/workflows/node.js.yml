@@ -26,6 +26,7 @@ jobs:
     - uses: browser-actions/setup-chrome@latest
     - run: sudo apt-get install xvfb
     - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
+    - run: npx -y ultra-runner --raw --recursive prepublishOnly &>/dev/null
     - run: npm run lint
     - run: npm run test:server:ci
     - run: xvfb-run --auto-servernum npm run test:client:ci
