@@ -114,7 +114,7 @@ const {
   noWebSecurity,
   parallel,
   record,
-  scope,
+  scope = '/integration/',
   screenshotsOnError,
   userAgent,
   userAgentAppend,
