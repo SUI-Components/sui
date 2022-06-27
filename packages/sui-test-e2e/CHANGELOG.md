@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.13.0 (2022-06-27)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Adapt to Cypress 10 new config format ([3960683](https://github.com/SUI-Components/sui/commit/39606838433c5ba098151a87c317aa90365c6804))
+* **packages/sui-test-e2e:** Set a default value to the scope parameter with retrocompatibility purp ([9ea9265](https://github.com/SUI-Components/sui/commit/9ea92653f7d8604a065cf75bfc1bfa0dbab20daa))
+
+
+
 # 1.12.0 (2022-06-23)
 
 
