@@ -29,6 +29,13 @@ const DEFAULT_CYPRESS_CONFIG_FILE_CONTENT = `module.exports = {
   e2e: {} 
 };`
 
+const CYPRESS_CONFIG_FILE_WITH_LEGACY_PLUGINS = `const plugins = require('./plugins/index.js')
+module.exports = {
+  e2e: {
+    setupNodeEvents: plugins
+  } 
+};`
+
 const HELP_MESSAGE = `
   Description:
     Run end-to-end tests with Cypress
@@ -107,7 +114,7 @@ const {
   noWebSecurity,
   parallel,
   record,
-  scope,
+  scope = '/integration/',
   screenshotsOnError,
   userAgent,
   userAgentAppend,
@@ -139,10 +146,6 @@ if (existsSync(supportFilesFolderPath)) {
   cypressConfig.e2e.supportFile = `${supportFilesFolderPath}/index.js`
 }
 
-if (existsSync(pluginsFilesFolderPath)) {
-  cypressConfig.e2e.pluginsFile = `${pluginsFilesFolderPath}/index.js`
-}
-
 if (userAgent) {
   cypressConfig.userAgent = `"${userAgent}"`
 } else if (userAgentAppend) {
@@ -172,7 +175,10 @@ if (noWebSecurity) cypressConfig.chromeWebSecurity = false
 const configFilePath = join(TESTS_FOLDER, 'cypress.config.js')
 
 if (!existsSync(configFilePath)) {
-  writeFileSync(configFilePath, DEFAULT_CYPRESS_CONFIG_FILE_CONTENT)
+  const configFileContent = existsSync(pluginsFilesFolderPath)
+    ? CYPRESS_CONFIG_FILE_WITH_LEGACY_PLUGINS
+    : DEFAULT_CYPRESS_CONFIG_FILE_CONTENT
+  writeFileSync(configFilePath, configFileContent)
 }
 
 const cypressExecutableConfig = {
