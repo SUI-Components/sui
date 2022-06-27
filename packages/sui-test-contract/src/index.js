@@ -1,3 +1,3 @@
-const {getProvider} = require('./provider.js')
+import setupContractTests from './setup/index.js'
 
-module.exports = {getProvider}
+export {setupContractTests}
