@@ -31,7 +31,8 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-polyfills](./packages/sui-polyfills) | Polyfills to load on our projects |
 | [sui-precommit](./packages/sui-precommit) | Effortless SUI precommit rules integration in your project |
 | [sui-react-head](./packages/sui-react-head) | Populate the head element of your React app without hassle |
-| [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your react app |
+| [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your React app |
+| [sui-react-router](./packages/sui-react-router) | Set of navigational components that compose declaratively with your application. |
 | [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA |
 | [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |
 | [sui-studio-utils](./packages/sui-studio-utils) | A set of sui-studio usable tools. |
