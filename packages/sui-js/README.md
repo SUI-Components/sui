@@ -217,6 +217,6 @@ import {shuffle} from '@s-ui/js/lib/array'
 
 const list = [1,2,3,4,5]
 
-shuffle(list)
-console.log(list) // outputs: [3,1,4,5,2]
+const shuffledList = shuffle(list)
+console.log(shuffledList) // outputs: [3,1,4,5,2]
 ```
