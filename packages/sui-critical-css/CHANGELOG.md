@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.21.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use new critical-css-middleware package ([d2f25a3](https://github.com/SUI-Components/sui/commit/d2f25a3f0bbcda41a60f4c6c8ce7584d5bdb6009))
+
+
+
 # 1.20.0 (2022-05-30)
 
 

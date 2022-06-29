@@ -1,5 +1,5 @@
 const program = require('commander')
-const config = require('../src/config')
+const config = require('../src/config.js')
 
 /**
  * Get array of commands to execute on all folders

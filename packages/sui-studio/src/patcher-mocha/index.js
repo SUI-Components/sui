@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint no-extend-native:0 */
-import {addReactContextToComponent} from '../components/utils'
+import {addReactContextToComponent} from '../components/utils.js'
 import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
 
 const FUNCTION_TO_PATCH = 'describe'

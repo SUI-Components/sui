@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test-e2e",
-  "version": "1.10.0",
+  "version": "1.13.0",
   "description": "",
   "main": "lib/index.js",
   "type": "module",
@@ -17,7 +17,7 @@
     "@testing-library/cypress": "8.0.2",
     "colors": "1.4.0",
     "commander": "8.3.0",
-    "cypress": "8.7.0",
+    "cypress": "10.2.0",
     "cypress-file-upload": "5.0.8"
   },
   "keywords": [],

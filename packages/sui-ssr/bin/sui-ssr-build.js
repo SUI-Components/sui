@@ -8,8 +8,8 @@ const ncp = require('copy-paste')
 const webpack = require('webpack')
 
 const linkLoaderConfigBuilder = require('@s-ui/bundler/loaders/linkLoaderConfigBuilder')
-const serverConfigFactory = require('../compiler/server')
-const {removeMarkedTags} = require('../scripts/remove-tags')
+const serverConfigFactory = require('../compiler/server.js')
+const {removeMarkedTags} = require('../scripts/remove-tags.js')
 
 const BUILD_SERVER_PATH = path.join(process.cwd(), 'server')
 const PUBLIC_PATH = path.join(process.cwd(), 'public')

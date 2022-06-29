@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 2.0.0 (2022-06-27)
+
+
+### Features
+
+* **packages/sui-test-contract:** add new test contract tool ([08b2fed](https://github.com/SUI-Components/sui/commit/08b2fed5f755459e53b0311db7d31c1bdc94534f))
+* **packages/sui-test-contract:** modify package description ([3603672](https://github.com/SUI-Components/sui/commit/36036722b2070be1567c42ec32107ff29cab3afa))
+* **packages/sui-test-contract:** move publish bin to esm ([1efc828](https://github.com/SUI-Components/sui/commit/1efc8287f768fb5d76da161bba67dc308e388025))
+
+
+
 # 1.3.0 (2022-03-03)
 
 

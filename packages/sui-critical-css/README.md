@@ -7,6 +7,7 @@
 2. For each route, it opens a browser, navigate and extract the Critical CSS.
 3. Create a css file in the `critical-css` folder.
 4. After doing this for each route, then creates a `critical.json` file that could be read for every path to extract the critical-css.
+5. Use then `@s-ui/critical-css-middleware` to extract to use in your Express app the CSS.
 
 ## How to use to extract 
 
@@ -85,12 +86,4 @@ const routes = {
 }
 
 extractCSSFromApp({config, routes})
-```
-
-## Use in your server
-
-You should execute this script on your CI before deploying/dockerizing your app.
-
-```
-node scripts/get-critical-css-for-routes.js
 ```

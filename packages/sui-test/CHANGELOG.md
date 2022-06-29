@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 8.21.0 (2022-06-23)
+
+
+### Features
+
+* **packages/sui-test:** Prepare for release ([a940170](https://github.com/SUI-Components/sui/commit/a94017022fcf9b4ff05effd2dc44657eaaf4441f))
+* **packages/sui-test:** Use mocha@10 ([39b2f88](https://github.com/SUI-Components/sui/commit/39b2f881bec9eacbacbb02b1de269746f6adeb29))
+
+
+
+# 8.20.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-test:** Patch mocks folder for msw contract new tool ([7a6d36f](https://github.com/SUI-Components/sui/commit/7a6d36fd048e806eb251782b3e6dbb1245dd7c7d))
+
+
+
 # 8.19.0 (2022-06-14)
 
 

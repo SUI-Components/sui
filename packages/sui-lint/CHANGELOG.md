@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.22.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies for sui-lint with bugfixes ([ac40620](https://github.com/SUI-Components/sui/commit/ac40620f5ada96f7338df442fd65cd320af910b8))
+
+
+
 # 4.21.0 (2022-06-14)
 
 

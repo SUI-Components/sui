@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.30.0 (2022-06-22)
+
+
+### Features
+
+* **packages/sui-mono:** Remove linter warnings ([de481b4](https://github.com/SUI-Components/sui/commit/de481b4a8ccad68ac621e224101620b0b4e4d680))
+
+
+
+# 2.29.0 (2022-06-15)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Fix missing promise ([8bbfce4](https://github.com/SUI-Components/sui/commit/8bbfce485c2a5fc0602410bac25c06f1e8168def))
+
+
+
 # 2.28.0 (2022-06-13)
 
 

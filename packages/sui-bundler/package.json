@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "9.28.0",
+  "version": "9.30.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -32,13 +32,13 @@
     "commander": "8.3.0",
     "css-loader": "6.7.1",
     "css-minimizer-webpack-plugin": "4.0.0",
-    "esbuild": "0.14.43",
+    "esbuild": "0.14.46",
     "escape-string-regexp": "4.0.0",
     "fast-glob": "3.2.11",
     "find-free-ports": "3.0.0",
     "html-webpack-plugin": "5.5.0",
     "https-browserify": "1.0.0",
-    "mini-css-extract-plugin": "2.6.0",
+    "mini-css-extract-plugin": "2.6.1",
     "postcss": "8.4.14",
     "postcss-loader": "7.0.0",
     "process": "0.11.10",
