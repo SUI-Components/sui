@@ -16,16 +16,13 @@
     "test:server:watch": "npm run test:server -- --watch"
   },
   "dependencies": {
-    "@pact-foundation/absolute-version": "0.0.4",
-    "@pact-foundation/pact": "9.16.4",
+    "absolute-version": "1.0.1",
+    "@pact-foundation/pact": "9.18.1",
     "@pactflow/pact-msw-adapter": "1.2.0",
-    "commander": "8.3.0"
+    "commander": "8.3.0",
+    "msw": "0.42.3"
   },
   "devDependencies": {
-    "@s-ui/domain": "2",
-    "msw": "0.36.8"
-  },
-  "peerDependencies": {
-    "msw": "0.36.8"
+    "@s-ui/domain": "2"
   }
 }
