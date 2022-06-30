@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.1.0 (2022-06-30)
+
+
+### Features
+
+* **packages/sui-test-contract:** Upgrade msw and pact versions and adapt import ([5a5e2e1](https://github.com/SUI-Components/sui/commit/5a5e2e1e0de4c2a38cd1a4c6812707229165dd0d))
+
+
+
 # 2.0.0 (2022-06-27)
 
 
