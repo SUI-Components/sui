@@ -20,3 +20,5 @@ packages/sui-studio/test/server/integration/sample-studio/public
 packages/sui-studio/test/server/integration/empty-studio/components/fake/componentnvim
 
 !packages/sui-sass-loader/test/server/fixtures/**/node_modules
+
+contract/logs/pact.log
