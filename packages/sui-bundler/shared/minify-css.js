@@ -1,15 +1,5 @@
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const {ParcelCssMinifyPlugin} = require('parcel-css-loader')
 
-const createCssMinimizerPlugin = () =>
-  new CssMinimizerPlugin({
-    minimizerOptions: {
-      preset: [
-        'default',
-        {
-          discardComments: {removeAll: true}
-        }
-      ]
-    }
-  })
+const createCssMinimizerPlugin = () => new ParcelCssMinifyPlugin()
 
 module.exports = () => createCssMinimizerPlugin()

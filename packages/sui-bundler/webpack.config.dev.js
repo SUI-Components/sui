@@ -3,6 +3,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const parcelCSS = require('@parcel/css')
 
 const {
   envVars,
@@ -22,7 +23,7 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
 )
 const outputPath = path.join(process.cwd(), 'dist')
 
-const {CI = false} = process.env
+const {CI = false, PWD = ''} = process.env
 
 process.env.NODE_ENV = 'development'
 
@@ -31,7 +32,7 @@ process.env.NODE_ENV = 'development'
 /** @type {WebpackConfig} */
 const webpackConfig = {
   mode: 'development',
-  context: path.resolve(process.env.PWD, 'src'),
+  context: path.resolve(PWD, 'src'),
   resolve: {
     alias: {
       ...defaultAlias,
@@ -106,18 +107,7 @@ const webpackConfig = {
             }
           })),
           require.resolve('css-loader'),
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              postcssOptions: {
-                plugins: [
-                  require('autoprefixer')({
-                    overrideBrowserslist: config.targets
-                  })
-                ]
-              }
-            }
-          },
+          [require.resolve('parcel-css-loader'), {implementation: parcelCSS}],
           require.resolve('@s-ui/sass-loader')
         ])
       },

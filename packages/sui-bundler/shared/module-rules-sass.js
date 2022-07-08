@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const parcelCSS = require('@parcel/css')
 
-const {cleanList, config, when} = require('./index')
+const {cleanList, config, when} = require('./index.js')
 
 module.exports = {
   test: /(\.css|\.scss)$/,
@@ -13,18 +14,7 @@ module.exports = {
         manifestURL: config['externals-manifest']
       }
     })),
-    {
-      loader: require.resolve('postcss-loader'),
-      options: {
-        postcssOptions: {
-          plugins: [
-            require('autoprefixer')({
-              overrideBrowserslist: config.targets
-            })
-          ]
-        }
-      }
-    },
+    [require.resolve('parcel-css-loader'), {implementation: parcelCSS}],
     require.resolve('@s-ui/sass-loader')
   ])
 }
