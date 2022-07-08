@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.2.0 (2022-07-08)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix bin import ([d0e3a77](https://github.com/SUI-Components/sui/commit/d0e3a77247c0f6df0106c426d5562157a05c89dc))
+
+
+
 # 2.1.0 (2022-06-30)
 
 
