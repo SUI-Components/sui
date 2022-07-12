@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.3.0 (2022-07-12)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix imports ([090a7db](https://github.com/SUI-Components/sui/commit/090a7dbc644ac0d651c090205cbbbbf8098c1a77))
+* **packages/sui-test-contract:** start using new forked version of pact msw adapter ([b24ce99](https://github.com/SUI-Components/sui/commit/b24ce99279247bbfd2be6237b209b25a0cc43da0))
+
+
+
 # 2.2.0 (2022-07-08)
 
 
