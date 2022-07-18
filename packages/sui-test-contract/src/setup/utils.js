@@ -1,4 +1,4 @@
-import {writeData2File} from 'pact-msw-adapter/dist/utils/utils.js'
+import {writeData2File} from '@pactflow/pact-msw-adapter/dist/utils/utils.js'
 import {stringify} from 'qs'
 
 export const writerFactory = providers => (path, data) => {
