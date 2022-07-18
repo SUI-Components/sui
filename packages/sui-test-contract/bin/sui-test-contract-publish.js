@@ -4,10 +4,10 @@
 
 // See: https://github.com/pact-foundation/pact-js/blob/51d2ae2e41c8c40e373f264ac7ba633d258604c2/examples/e2e/test/publish.js
 
+import {versionFromGitTag} from 'absolute-version'
 import program from 'commander'
 import path from 'node:path'
 
-import {versionFromGitTag} from '@pact-foundation/absolute-version'
 import {Publisher} from '@pact-foundation/pact'
 
 import {exec} from './utils/index.js'

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.23.0 (2022-07-08)
+
+
+### Features
+
+* **packages/sui-lint:** Remove not needed linter packages ([7b292b6](https://github.com/SUI-Components/sui/commit/7b292b65eb7cbc0e04ed97a3255b71c64c920d0a))
+
+
+
 # 4.22.0 (2022-06-21)
 
 
