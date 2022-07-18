@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 3.19.0 (2022-07-18)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** Fix typo on the name ([5fcf5b0](https://github.com/SUI-Components/sui/commit/5fcf5b04507e953ce217b37fa69eefc40bce7791))
+
+
+### Features
+
+* **packages/sui-svg:** Use Vite 3 ([636845e](https://github.com/SUI-Components/sui/commit/636845ea3e6791bff33ae3ebec63a61f79d70c39))
+
+
+
 # 3.18.0 (2022-06-17)
 
 
