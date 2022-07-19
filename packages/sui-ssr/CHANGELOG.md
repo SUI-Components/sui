@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.6.0 (2022-07-19)
+
+
+### Features
+
+* **packages/sui-ssr:** Check independently if files were copied ([77fe13a](https://github.com/SUI-Components/sui/commit/77fe13ad4ee71e797555bd9bae6ab08c8c68f47d))
+* **packages/sui-ssr:** Release new version with log on copy files ([d2aca8c](https://github.com/SUI-Components/sui/commit/d2aca8c459a65904c625fba5f5dbe4aa2caad47b))
+
+
+
 # 8.5.0 (2022-07-19)
 
 
