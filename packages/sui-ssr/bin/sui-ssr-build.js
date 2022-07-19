@@ -86,7 +86,7 @@ const build = () =>
       )
 
       // copy 404.html and 500.html from public
-      await Promise.all([
+      const [copy404, copy500] = await Promise.allSettled([
         copyFile(
           path.join(SRC_PATH, '404.html'),
           path.join(PUBLIC_PATH, '404.html')
@@ -95,9 +95,10 @@ const build = () =>
           path.join(SRC_PATH, '500.html'),
           path.join(PUBLIC_PATH, '500.html')
         )
-      ]).catch(() => {
-        console.log('404.html and 500.html files not found')
-      })
+      ])
+
+      copy404.status === 'fulfilled' && console.log('404.html copied!')
+      copy500.status === 'fulfilled' && console.log('500.html copied!')
 
       verbose && console.log(`Webpack stats: ${stats}`)
       console.log(`Server entry point copy to clipboard ${SERVER_ENTRY_POINT}`)
