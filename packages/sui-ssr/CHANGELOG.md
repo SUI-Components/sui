@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.5.0 (2022-07-19)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** Catch non important error ([643d652](https://github.com/SUI-Components/sui/commit/643d652e0ba5af0334f6abea6fafb175e69272a0))
+
+
+
 # 8.4.0 (2022-07-19)
 
 
