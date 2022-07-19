@@ -95,7 +95,9 @@ const build = () =>
           path.join(SRC_PATH, '500.html'),
           path.join(PUBLIC_PATH, '500.html')
         )
-      ])
+      ]).catch(() => {
+        console.log('404.html and 500.html files not found')
+      })
 
       verbose && console.log(`Webpack stats: ${stats}`)
       console.log(`Server entry point copy to clipboard ${SERVER_ENTRY_POINT}`)
