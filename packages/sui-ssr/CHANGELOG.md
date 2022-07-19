@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.4.0 (2022-07-19)
+
+
+### Features
+
+* **packages/sui-ssr:** Remove copy-webpack-plugin and rimraf as they're not needed ([cfa5fc7](https://github.com/SUI-Components/sui/commit/cfa5fc74d26225e8c9827485ed6442cd76a1ac42))
+* **packages/sui-ssr:** Return reject to avoid keep executing code ([bb45d92](https://github.com/SUI-Components/sui/commit/bb45d92c95693ec4c39f9042872369d73a0542d9))
+
+
+
 # 8.3.0 (2022-04-26)
 
 
