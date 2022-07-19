@@ -23,7 +23,7 @@ const {
   supportLegacyBrowsers
 } = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
-const babelRules = require('./shared/module-rules-babel.js')
+const createBabelRules() = require('./shared/module-rules-babel.js')
 const sassRules = require('./shared/module-rules-sass.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
@@ -109,7 +109,7 @@ const webpackConfig = {
   ]),
   module: {
     rules: cleanList([
-      babelRules,
+      createBabelRules(),
       sassRules,
       when(config['externals-manifest'], () =>
         manifestLoaderRules(config['externals-manifest'])

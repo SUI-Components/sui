@@ -1,9 +1,21 @@
-const {sep} = require('path')
+const path = require('path')
 const {config} = require('./index.js')
 
-module.exports = {
+const DEFAULT_SERVER_TARGETS = {node: '16'}
+const EXCLUDED_FOLDERS_REGEXP = new RegExp(
+  `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
+)
+
+const getTargets = ({isServer}) => {
+  const targets = config.targets
+  if (isServer && targets == null) return DEFAULT_SERVER_TARGETS
+
+  return targets
+}
+
+module.exports = ({isServer = false} = {}) => ({
   test: /\.jsx?$/,
-  exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
+  exclude: EXCLUDED_FOLDERS_REGEXP,
   use: [
     {
       loader: require.resolve('babel-loader'),
@@ -16,11 +28,11 @@ module.exports = {
           [
             require.resolve('babel-preset-sui'),
             {
-              targets: config.targets
+              targets: getTargets({isServer})
             }
           ]
         ]
       }
     }
   ]
-}
+})

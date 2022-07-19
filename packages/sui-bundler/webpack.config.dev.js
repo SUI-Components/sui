@@ -16,10 +16,8 @@ const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
 
 const {resolveLoader} = require('./shared/resolve-loader.js')
+const createBabelRules = require('./shared/module-rules-babel.js')
 
-const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
-)
 const outputPath = path.join(process.cwd(), 'dist')
 
 const {CI = false} = process.env
@@ -81,20 +79,7 @@ const webpackConfig = {
   resolveLoader,
   module: {
     rules: cleanList([
-      {
-        test: /\.jsx?$/,
-        exclude: EXCLUDED_FOLDERS_REGEXP,
-        use: [
-          {
-            loader: require.resolve('babel-loader'),
-            options: {
-              babelrc: false,
-              cacheDirectory: true,
-              presets: [require.resolve('babel-preset-sui')]
-            }
-          }
-        ]
-      },
+      createBabelRules(),
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([
