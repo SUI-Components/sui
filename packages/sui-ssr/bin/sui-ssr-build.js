@@ -66,7 +66,7 @@ const build = () =>
 
       if (stats.hasErrors()) {
         jsonStats.errors.map(error => console.log(error))
-        reject(new Error('Webpack build failed'))
+        return reject(new Error('Webpack build failed'))
       }
 
       if (verbose && stats.hasWarnings()) {
