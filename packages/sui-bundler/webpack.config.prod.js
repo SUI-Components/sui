@@ -23,14 +23,16 @@ const {
   supportLegacyBrowsers
 } = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
-const createBabelRules() = require('./shared/module-rules-babel.js')
+const createBabelRules = require('./shared/module-rules-babel.js')
 const sassRules = require('./shared/module-rules-sass.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const minifyCss = require('./shared/minify-css.js')
 const minifyJs = require('./shared/minify-js.js')
 
+const CWD = process.cwd()
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
+const PWD = process.env.PWD ?? ''
 
 const filename = config.onlyHash
   ? '[contenthash:8].js'
@@ -49,11 +51,11 @@ const webpackConfig = {
   devtool: sourceMap,
   mode: 'production',
   target,
-  context: path.resolve(process.cwd(), 'src'),
+  context: path.resolve(CWD, 'src'),
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json'],
-    modules: ['node_modules', path.resolve(process.cwd())],
+    modules: ['node_modules', path.resolve(CWD)],
     fallback: {
       assert: false,
       fs: false,
@@ -66,7 +68,7 @@ const webpackConfig = {
   output: {
     chunkFilename: filename,
     filename,
-    path: path.resolve(process.env.PWD, 'public'),
+    path: path.resolve(PWD, 'public'),
     publicPath: PUBLIC_PATH
   },
   optimization: {

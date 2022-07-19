@@ -20,7 +20,7 @@ const createBabelRules = require('./shared/module-rules-babel.js')
 
 const outputPath = path.join(process.cwd(), 'dist')
 
-const {CI = false} = process.env
+const {CI = false, PWD = ''} = process.env
 
 process.env.NODE_ENV = 'development'
 
@@ -29,7 +29,7 @@ process.env.NODE_ENV = 'development'
 /** @type {WebpackConfig} */
 const webpackConfig = {
   mode: 'development',
-  context: path.resolve(process.env.PWD, 'src'),
+  context: path.resolve(PWD, 'src'),
   resolve: {
     alias: {
       ...defaultAlias,
