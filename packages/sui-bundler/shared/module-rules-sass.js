@@ -14,7 +14,12 @@ module.exports = {
         manifestURL: config['externals-manifest']
       }
     })),
-    [require.resolve('parcel-css-loader'), {implementation: parcelCSS}],
+    {
+      loader: require.resolve('parcel-css-loader'),
+      options: {
+        implementation: parcelCSS
+      }
+    },
     require.resolve('@s-ui/sass-loader')
   ])
 }
