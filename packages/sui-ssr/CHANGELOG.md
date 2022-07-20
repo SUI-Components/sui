@@ -1,5 +1,34 @@
 # CHANGELOG
 
+# 8.6.0 (2022-07-19)
+
+
+### Features
+
+* **packages/sui-ssr:** Check independently if files were copied ([77fe13a](https://github.com/SUI-Components/sui/commit/77fe13ad4ee71e797555bd9bae6ab08c8c68f47d))
+* **packages/sui-ssr:** Release new version with log on copy files ([d2aca8c](https://github.com/SUI-Components/sui/commit/d2aca8c459a65904c625fba5f5dbe4aa2caad47b))
+
+
+
+# 8.5.0 (2022-07-19)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** Catch non important error ([643d652](https://github.com/SUI-Components/sui/commit/643d652e0ba5af0334f6abea6fafb175e69272a0))
+
+
+
+# 8.4.0 (2022-07-19)
+
+
+### Features
+
+* **packages/sui-ssr:** Remove copy-webpack-plugin and rimraf as they're not needed ([cfa5fc7](https://github.com/SUI-Components/sui/commit/cfa5fc74d26225e8c9827485ed6442cd76a1ac42))
+* **packages/sui-ssr:** Return reject to avoid keep executing code ([bb45d92](https://github.com/SUI-Components/sui/commit/bb45d92c95693ec4c39f9042872369d73a0542d9))
+
+
+
 # 8.3.0 (2022-04-26)
 
 
