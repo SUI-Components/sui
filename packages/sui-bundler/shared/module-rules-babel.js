@@ -1,5 +1,5 @@
 const {sep} = require('path')
-const {config} = require('./')
+const {config} = require('./index.js')
 
 module.exports = {
   test: /\.jsx?$/,
