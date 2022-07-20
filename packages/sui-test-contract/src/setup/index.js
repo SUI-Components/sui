@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {setupServer} from 'msw/node'
-import {setupPactMswAdapter} from 'pact-msw-adapter'
+import {setupPactMswAdapter} from '@pactflow/pact-msw-adapter'
 
 import {
   getContractTests,
