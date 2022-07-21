@@ -13,13 +13,15 @@ const {DEBUG} = process.env
  * @param {...any} args - arguments to log
  * @returns {void}
  */
-const debug = (...args) => (DEBUG ? console.log('[copyfiles] ', ...args) : null)
+const debug = (...args) => {
+  DEBUG && console.log('[copyfiles] ', ...args)
+}
 
 /**
  * Check depth
  * @param {string} filePath - path of the file
  * @param {number} up - number of directories to go up
- * @returns
+ * @returns {boolean}
  */
 const checkDepth = (filePath, up) => {
   // components/atom/button
