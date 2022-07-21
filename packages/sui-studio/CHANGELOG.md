@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 11.16.0 (2022-07-21)
+
+
+### Features
+
+* **packages/sui-studio:** Remove not needed code ([80dbb62](https://github.com/SUI-Components/sui/commit/80dbb627c439d8f2029bb2523570ce735c282ace))
+* **packages/sui-studio:** Use for now prepare script on generating components ([fcf42ba](https://github.com/SUI-Components/sui/commit/fcf42bae2db773a75449eed508587198a80a05a5))
+* **packages/sui-test-e2e:** Disable video if not needed ([d2ee56c](https://github.com/SUI-Components/sui/commit/d2ee56cdb48da47cb36ba3cd56c6780bd79809d5))
+
+
+
 # 11.15.0 (2022-06-14)
 
 
