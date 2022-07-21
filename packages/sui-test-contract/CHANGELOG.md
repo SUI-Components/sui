@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.4.0 (2022-07-20)
+
+
+### Features
+
+* **packages/sui-test-contract:** use latest of msw adapter ([3524f14](https://github.com/SUI-Components/sui/commit/3524f149f4a334ab75dc0de4611c3d9439f98c11))
+
+
+
 # 2.3.0 (2022-07-12)
 
 
