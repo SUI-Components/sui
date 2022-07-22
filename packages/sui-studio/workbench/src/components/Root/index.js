@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import Header from '../Header/index.js'
 import Select from '../Select/index.js'
-import Test from '../Test/index.js'
+import Test from '../Suite/index.js'
 
 const importComponent = () => import('component/index.js')
 const importTest = () => import('test/index.test.js')
