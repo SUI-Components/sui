@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.17.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-studio:** Change name to be sure it is published ([2b79954](https://github.com/SUI-Components/sui/commit/2b799546b607a5d06e23de54059eaabe280442ec))
+
+
+
 # 11.16.0 (2022-07-21)
 
 
