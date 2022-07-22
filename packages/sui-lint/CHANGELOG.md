@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.24.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([75cb90b](https://github.com/SUI-Components/sui/commit/75cb90b3845bf5d1e218c379162cd389dd365343))
+* **packages/sui-lint:** Upgrade eslint plugin no only test ([15c14e4](https://github.com/SUI-Components/sui/commit/15c14e46b0563cd983f0d0ddc2e55f0d4a898ef7))
+
+
+
 # 4.23.0 (2022-07-08)
 
 
