@@ -106,12 +106,7 @@ module.exports = {
     }
   },
 
-  extends: [
-    'standard',
-    'standard-react',
-    'plugin:cypress/recommended',
-    'prettier'
-  ],
+  extends: ['standard', 'plugin:cypress/recommended', 'prettier'],
 
   plugins: [
     '@babel',
