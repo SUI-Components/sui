@@ -1,4 +1,4 @@
-const prettierOptions = require('./.prettierrc')
+const prettierOptions = require('./.prettierrc.js')
 
 const RULES = {
   OFF: 0,
@@ -24,10 +24,13 @@ const REACT_RULES = {
   'react/jsx-uses-react': RULES.OFF,
   'react/jsx-uses-vars': RULES.WARNING,
   'react/no-deprecated': RULES.WARNING,
+  'react/no-did-update-set-state': RULES.ERROR,
   'react/no-direct-mutation-state': RULES.ERROR,
   'react/no-is-mounted': RULES.WARNING,
   'react/no-multi-comp': [RULES.WARNING, {ignoreStateless: true}],
   'react/no-unused-prop-types': RULES.WARNING,
+  'react/no-unknown-property': RULES.ERROR,
+  'react/prop-types': RULES.ERROR,
   'react/react-in-jsx-scope': RULES.OFF,
   'react/require-render-return': RULES.WARNING
 }
@@ -75,15 +78,18 @@ try {
 const parser = resolvedBabelPresetSui ? '@babel/eslint-parser' : undefined
 
 module.exports = {
+  parser,
+
   env: {
     es6: true,
     mocha: true
   },
+
   globals: {
     'cypress/globals': true,
     preval: 'readonly'
   },
-  parser,
+
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -93,17 +99,26 @@ module.exports = {
       configFile: resolvedBabelPresetSui
     }
   },
+
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
+
   extends: [
     'standard',
     'standard-react',
     'plugin:cypress/recommended',
     'prettier'
   ],
+
   plugins: [
     '@babel',
     'chai-friendly',
     'no-only-tests',
     'prettier',
+    'react',
     'react-hooks',
     'simple-import-sort'
   ],
