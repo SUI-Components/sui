@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 4.25.0 (2022-07-26)
+
+
+### Features
+
+* **packages/sui-lint:** Integrate deprecated config standard react package ([489ef97](https://github.com/SUI-Components/sui/commit/489ef97cea031c90765f100e2deadfe0fc180c28))
+* **packages/sui-lint:** Stop extending from standard-react ([9543cc7](https://github.com/SUI-Components/sui/commit/9543cc778a66a2bd810a3b91e8427a06e870a1f8))
+* **packages/sui-lint:** Stop extending react config as it is not needed anymore ([7af8767](https://github.com/SUI-Components/sui/commit/7af876733882cca767ec22f77c8cc35394c41bb5))
+
+
+
 # 4.24.0 (2022-07-22)
 
 
