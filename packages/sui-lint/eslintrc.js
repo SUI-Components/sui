@@ -145,7 +145,7 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.+(ts|tsx)'],
-      extends: ['standard-with-typescript', 'standard-react'],
+      extends: ['standard-with-typescript'],
       parserOptions: {
         project: './tsconfig.json'
       },
