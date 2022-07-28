@@ -71,7 +71,9 @@ const getNpmInstall = ({
     '--package-lock',
     '--progress false',
     '--no-bin-links',
-    '--ignore-scripts'
+    '--ignore-scripts',
+    '--no-audit',
+    '--no-fund'
   ]
 
   return installCommand.filter(Boolean).join(' ')
