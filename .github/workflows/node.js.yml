@@ -25,7 +25,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - uses: browser-actions/setup-chrome@latest
     - run: |
-        ../../bin/devhose-cli_2.17.0_amd64 deployment \
+        echo "DATE=$(date +%FT%TZ)" >> $GITHUB_ENV
+        ./bin/devhose-cli_2.17.0_amd64 deployment \
           -test \
           -devhose-tenant "adevinta-spain-fe-github-sui" \
           -devhose-secret "${{ secrets.DEVHOSE_SECRET }}" \
@@ -33,9 +34,9 @@ jobs:
           -application "sui-components" \
           -environment "pro" \
           -facility "sdrn:adevinta:service:adevinta-spain-sui-github" \
-          -id "${{ env.GITHUB_RUN_ID }}" \
+          -id "${{ github.run_id }}" \
           -source "github" \
-          -started-at "2019-01-01T01:01:01Z" \
+          -started-at "${{ env.DATE }}" \
           -status "succeeded" \
           -target-infrastructure "npm" \
           -target-provider "npm" \
@@ -44,8 +45,8 @@ jobs:
           -resource-type "github" \
           -resource-service "sdrn:adevinta:service:github" \
           -accelerate-metrics \
-          -resource-scm-commit "${{ env.GITHUB_SHA }}" \
-          -resource-repository "sdrn:adevinta:repo:${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}"
+          -resource-scm-commit "${{ github.sha }}" \
+          -resource-repository "sdrn:adevinta:repo:${{ github.server_url }}/${{ github.repository }}"
     - run: sudo apt-get install xvfb
     - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
     - run: npx -y ultra-runner --raw --recursive prepublishOnly &>/dev/null
