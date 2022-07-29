@@ -38,7 +38,7 @@ jobs:
     - run: |
         echo "${{ steps.release.outputs.info }}"
         ./bin/devhose-cli_2.17.0_amd64 deployment \
-          -test
+          -test \
           -devhose-tenant "adevinta-spain-fe-github-sui" \
           -devhose-secret "${{ secrets.DEVHOSE_SECRET }}" \
           -devhose-dest "mpi" \
