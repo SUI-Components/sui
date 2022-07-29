@@ -35,7 +35,7 @@ jobs:
           -facility "sdrn:adevinta:service:adevinta-spain-sui-github" \
           -id "${{ env.GITHUB_RUN_ID }}" \
           -source "github" \
-          -started-at "${{ date +%FT%TZ }}" \
+          -started-at "${{ $(echo date +%FT%TZ) }}" \
           -status "succeeded" \
           -target-infrastructure "npm" \
           -target-provider "npm" \
