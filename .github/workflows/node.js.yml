@@ -48,7 +48,7 @@ jobs:
           -resource-service "sdrn:adevinta:service:github" \
           -accelerate-metrics \
           -resource-scm-commit "${{ github.sha }}" \
-          -resource-repository "sdrn:adevinta:repo:${{ github.server_url }}/${{ github.repository }}"
+          -resource-repository "sdrn:adevinta:repo:github.com/${{ github.repository }}"
     - run: sudo apt-get install xvfb
     - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
     - run: npx -y ultra-runner --raw --recursive prepublishOnly &>/dev/null
