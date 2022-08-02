@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.33.0 (2022-08-02)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Support legacy browsers for now ([ea052d2](https://github.com/SUI-Components/sui/commit/ea052d2b74a63afd91dd5de96ab654ffcc543cc8))
+
+
+
 # 9.32.0 (2022-08-02)
 
 
