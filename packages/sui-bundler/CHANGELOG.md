@@ -1,10 +1,21 @@
 # CHANGELOG
 
+# 9.32.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([18a93b9](https://github.com/SUI-Components/sui/commit/18a93b9c755720519a25742309ac4c11a95f4a55))
+
+
+
 # 9.31.0 (2022-07-22)
 
 
 ### Features
 
+* **packages/sui-bundler:** Compile for Node 16 target on SSR ([c78c746](https://github.com/SUI-Components/sui/commit/c78c746da0d1326c88bde9d3672c0e5ad7a2f971))
+* **packages/sui-bundler:** Pass more info to babel preset sui from bundler ([2719b87](https://github.com/SUI-Components/sui/commit/2719b872d3e43918a8bef78fc65e1a535d4ed1e3))
 * **packages/sui-bundler:** Upgrade dependencies ([5afa4ab](https://github.com/SUI-Components/sui/commit/5afa4aba24d9c962acecf6e531667d62b87881bd))
 
 
