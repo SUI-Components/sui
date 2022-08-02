@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.6.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-domain:** Use normal code instead transpiled again ([6b0c7d4](https://github.com/SUI-Components/sui/commit/6b0c7d4816ba8d9cb52cb77ea4e2ec323e2cbdbc))
+
+
+
 # 2.5.0 (2022-04-05)
 
 
