@@ -15,6 +15,6 @@ module.exports = {
     ios: '14'
   },
   DEFAULT_SERVER_TARGETS: {
-    node: '16'
+    node: '14'
   }
 }
