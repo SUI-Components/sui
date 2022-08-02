@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.7.0 (2022-07-28)
+
+
+### Features
+
+* **packages/sui-ssr:** Remove noisy messages and stop wasting time ([35a6c36](https://github.com/SUI-Components/sui/commit/35a6c362979e1d5f370fde8e1ca17db5e242e537))
+
+
+
 # 8.6.0 (2022-07-19)
 
 

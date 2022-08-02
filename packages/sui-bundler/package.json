@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "9.30.0",
+  "version": "9.31.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-bundler#readme",
   "dependencies": {
-    "@babel/core": "7.18.5",
+    "@babel/core": "7.18.9",
     "@s-ui/helpers": "1",
     "@s-ui/sass-loader": "1",
     "address": "1.2.0",
@@ -32,7 +32,7 @@
     "commander": "8.3.0",
     "css-loader": "6.7.1",
     "css-minimizer-webpack-plugin": "4.0.0",
-    "esbuild": "0.14.46",
+    "esbuild": "0.14.49",
     "escape-string-regexp": "4.0.0",
     "fast-glob": "3.2.11",
     "find-free-ports": "3.0.0",
@@ -40,7 +40,7 @@
     "https-browserify": "1.0.0",
     "mini-css-extract-plugin": "2.6.1",
     "postcss": "8.4.14",
-    "postcss-loader": "7.0.0",
+    "postcss-loader": "7.0.1",
     "process": "0.11.10",
     "sass": "1.52.3",
     "stream-http": "3.2.0",
@@ -48,7 +48,7 @@
     "style-loader": "3.3.1",
     "url": "0.11.0",
     "webpack": "5.73.0",
-    "webpack-dev-server": "4.9.2",
+    "webpack-dev-server": "4.9.3",
     "webpack-manifest-plugin": "5.0.0",
     "webpack-node-externals": "3.0.0"
   }

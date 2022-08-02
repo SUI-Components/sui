@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.20.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-svg:** Use Vite latest version with fixes ([aec738d](https://github.com/SUI-Components/sui/commit/aec738d53a180538a84f7473638e46cd61744046))
+
+
+
 # 3.19.0 (2022-07-18)
 
 
