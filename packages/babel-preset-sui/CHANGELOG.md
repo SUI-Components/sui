@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.48.0 (2022-08-02)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Rollback babel-preset-sui ([8b5ada9](https://github.com/SUI-Components/sui/commit/8b5ada94c63b92b8ade0bf9ade81b1536b876d4c))
+* **packages/babel-preset-sui:** Rollback default target ([b872c3f](https://github.com/SUI-Components/sui/commit/b872c3f92c183541f190303b402bb45349285598))
+
+
+
 # 3.47.0 (2022-08-02)
 
 
