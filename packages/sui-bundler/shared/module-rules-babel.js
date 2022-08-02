@@ -5,7 +5,7 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
 
-module.exports = ({isServer = false, supportLegacyBrowsers = false} = {}) => ({
+module.exports = ({isServer = false} = {}) => ({
   test: /\.jsx?$/,
   exclude: EXCLUDED_FOLDERS_REGEXP,
   use: [
@@ -21,7 +21,7 @@ module.exports = ({isServer = false, supportLegacyBrowsers = false} = {}) => ({
             require.resolve('babel-preset-sui'),
             {
               isServer,
-              supportLegacyBrowsers,
+              supportLegacyBrowsers: true,
               targets: config.targets
             }
           ]
