@@ -10,7 +10,8 @@ const getTargets = ({targets = {}, supportLegacyBrowsers, isServer}) => {
   //     ? DEFAULT_LEGACY_BROWSER_TARGETS
   //     : DEFAULT_BROWSER_TARGETS)
   // )
-  return DEFAULT_LEGACY_BROWSER_TARGETS
+  const {browser = DEFAULT_LEGACY_BROWSER_TARGETS} = targets
+  return browser
 }
 
 const plugins = (api, {useESModules = true} = {}) => [
