@@ -1,9 +1,13 @@
-const {sep} = require('path')
+const path = require('path')
 const {config} = require('./index.js')
 
-module.exports = {
+const EXCLUDED_FOLDERS_REGEXP = new RegExp(
+  `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
+)
+
+module.exports = ({isServer = false, supportLegacyBrowsers = false} = {}) => ({
   test: /\.jsx?$/,
-  exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
+  exclude: EXCLUDED_FOLDERS_REGEXP,
   use: [
     {
       loader: require.resolve('babel-loader'),
@@ -16,6 +20,8 @@ module.exports = {
           [
             require.resolve('babel-preset-sui'),
             {
+              isServer,
+              supportLegacyBrowsers,
               targets: config.targets
             }
           ]
@@ -23,4 +29,4 @@ module.exports = {
       }
     }
   ]
-}
+})
