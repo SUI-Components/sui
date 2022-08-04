@@ -148,8 +148,5 @@ const compiler = webpack(nextConfig).run(async (error, stats) => {
     `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
   )
 
-  compiler.close(closeErr => {
-    const exitCode = closeErr ? 1 : 0
-    process.exit(exitCode)
-  })
+  process.exit(0)
 })
