@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 9.34.0 (2022-08-04)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Handle correctly build errors ([aff362a](https://github.com/SUI-Components/sui/commit/aff362a9b2dc1aa5e8859aa933f6e79f1f1e797c))
+* **packages/sui-bundler:** Remove compiler close funcitonality ([5f90020](https://github.com/SUI-Components/sui/commit/5f90020152b2fb86da7b8fe692ee06cb099eff0c))
+* **packages/sui-bundler:** Use correctly compiler ([42d7cb0](https://github.com/SUI-Components/sui/commit/42d7cb00fec2aeb4fe581cc36fa0db4719079d79))
+
+
+
 # 9.33.0 (2022-08-02)
 
 
