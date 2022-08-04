@@ -3,6 +3,9 @@ import {slugify} from '@s-ui/js/lib/string/slugify.js'
 import DefaultAdapter from './adapters/default.js'
 
 export default class Rosetta {
+  static #interpolateRegExp =
+    /%\[(?<key>[\w\-.]*)\b\](?<children>[\S\s]*)\[\1\]%/gi
+
   constructor({adapter = new DefaultAdapter()} = {}) {
     this._culture = null
     this._currency = null
@@ -185,5 +188,38 @@ export default class Rosetta {
       .split('/')
       .map(token => slugify(this.t(token), allowQueryParams))
       .join('/')
+  }
+
+  // Interpolate each text chunk, returning an array of all the transformed chunks.
+  chuncks(key, values = {}) {
+    // Perform basic replace for static values
+    const str = this.t(key, values)
+
+    // Identify all the occurrences which are like: %[key]children[key]%, save {key, children} for every match
+    const matches = str.matchAll(Rosetta.#interpolateRegExp)
+
+    let remaining = str
+
+    const result = Array.from(matches).flatMap(match => {
+      const occurrence = match[0]
+      const {key, children} = match.groups
+      const option = values[key]
+
+      // Check if there is an available replacement for each match
+      const replacement =
+        typeof option === 'function' ? option({children}) : option
+
+      // Split the remaining string piece by the occurence and keep the edges
+      const [beforeMatch, afterMatch] = remaining.split(occurrence)
+      remaining = afterMatch
+
+      return [beforeMatch, replacement]
+    })
+
+    // Add potential last chunck of text.
+    if (remaining.length > 0) result.push(remaining)
+
+    // Clean falsy value and return the array of items
+    return result.filter(Boolean)
   }
 }
