@@ -3,9 +3,6 @@ import {slugify} from '@s-ui/js/lib/string/slugify.js'
 import DefaultAdapter from './adapters/default.js'
 
 export default class Rosetta {
-  static #interpolateRegExp =
-    /%\[(?<key>[\w\-.]*)\b\](?<children>[\S\s]*)\[\1\]%/gi
-
   constructor({adapter = new DefaultAdapter()} = {}) {
     this._culture = null
     this._currency = null
@@ -191,27 +188,37 @@ export default class Rosetta {
   }
 
   // Interpolate each text chunk, returning an array of all the transformed chunks.
-  chuncks(key, values = {}) {
+  interpolate(key, values = {}) {
+    // Redeclare the RegExp on each call to make it stateless
+    const interpolateRegExp =
+      /%\[(?<key>[\S\s]*?)\b\](?<children>[\S\s]*?)\[\1\]%/gi
+
     // Perform basic replace for static values
     const str = this.t(key, values)
 
-    // Identify all the occurrences which are like: %[key]children[key]%, save {key, children} for every match
-    const matches = str.matchAll(Rosetta.#interpolateRegExp)
+    // Identify all the occurrences which are like: %[key]children[key]%, save {key, children} in a group for every match
+    const matches = str.matchAll(interpolateRegExp)
 
     let remaining = str
 
     const result = Array.from(matches).flatMap(match => {
       const occurrence = match[0]
-      const {key, children} = match.groups
+      let {key, children} = match.groups
+
+      // Handle nested matches
+      if (interpolateRegExp.test(children)) {
+        children = this.interpolate(children, values)
+      }
+
       const option = values[key]
 
       // Check if there is an available replacement for each match
       const replacement =
         typeof option === 'function' ? option({children}) : option
 
-      // Split the remaining string piece by the occurence and keep the edges
-      const [beforeMatch, afterMatch] = remaining.split(occurrence)
-      remaining = afterMatch
+      // Split the remaining string piece by the first occurence and keep the edges
+      const [beforeMatch, ...afterMatch] = remaining.split(occurrence)
+      remaining = afterMatch.join(occurrence)
 
       return [beforeMatch, replacement]
     })
