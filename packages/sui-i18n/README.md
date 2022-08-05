@@ -84,6 +84,12 @@ A typical use case is when a literal contains special styles or transformation i
 
 It **DOES NOT** return a string anymore, instead it'll give back an array of chunks.
 
+The placeholder for interpolating boundaries is different from the one for static values, you'll need to wrap your content between `%[key]children[key]%`, for example:
+
+```text
+SIMPLE_BOUNDARY: 'Your name is %[upper]Spike[upper]%, the best superhero!'
+```
+
 The parser supports:
 
 - Multiple sequential groups.
