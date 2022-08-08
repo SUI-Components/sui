@@ -13,6 +13,12 @@ const phrases = {
     hello: 'Hello',
     hi_name_welcome_to_place: 'Hi, %{name}, welcome to %{place}!',
     name_your_name_is_name: '%{name}, your name is %{name}!',
+    name_your_name_is_bold_name_bold:
+      '%{name}, your name is %[bold]%{name}[bold]%!',
+    multiple_name_your_name_is_bold_name_bold:
+      '%[bold]%{name}[bold]%, your name is %[bold]%{name}[bold]%!',
+    nested_placeholders:
+      'Hello, this is an %[bold]important %[link]resource[link]%[bold]% for this page!',
     empty_string: ''
   }
 }
@@ -180,6 +186,77 @@ describe('I18N with polyglot adapter', () => {
           expect(i18n.url(urlPattern)).to.eql(expectedUrl)
         })
       })
+    })
+  })
+
+  describe('interpolate', () => {
+    beforeEach(() => {
+      i18n.languages = phrases
+      i18n.culture = 'en-GB'
+    })
+
+    it('should translate a simple string into an array', () =>
+      expect(i18n.interpolate('hello')).to.eql(['Hello']))
+
+    it('should return the key into an array if translation not found', () =>
+      expect(i18n.interpolate('bogus_key')).to.eql(['bogus_key']))
+
+    it('should interpolate simple values', () => {
+      expect(
+        i18n.interpolate('hi_name_welcome_to_place', {
+          name: 'Spike',
+          place: 'the webz'
+        })
+      ).to.eql(['Hi, Spike, welcome to the webz!'])
+    })
+
+    it('should interpolate the boundary matcher with the passed function return value', () => {
+      expect(
+        i18n.interpolate('name_your_name_is_bold_name_bold', {
+          name: 'Spike',
+          bold: ({children}) => ({content: children})
+        })
+      ).to.eql(['Spike, your name is ', {content: 'Spike'}, '!'])
+    })
+
+    it('should interpolate the same placeholder multiple times', () => {
+      expect(
+        i18n.interpolate('name_your_name_is_name', {name: 'Spike'})
+      ).to.eql(['Spike, your name is Spike!'])
+      expect(
+        i18n.interpolate('multiple_name_your_name_is_bold_name_bold', {
+          name: 'Spike',
+          bold: ({children}) => ({content: children})
+        })
+      ).to.eql([{content: 'Spike'}, ', your name is ', {content: 'Spike'}, '!'])
+    })
+
+    it('should interpolate nested placeholders', () => {
+      expect(
+        i18n.interpolate('nested_placeholders', {
+          bold: ({children}) => ({content: children}),
+          link: ({children}) => ({content: children})
+        })
+      ).to.eql([
+        'Hello, this is an ',
+        {content: ['important ', {content: 'resource'}]},
+        ' for this page!'
+      ])
+    })
+
+    it('should allow you to supply default values', () => {
+      expect(
+        i18n.interpolate('can_i_call_you_name', {
+          _: 'Can I call you %{name}?',
+          name: 'Robert'
+        })
+      ).to.eql(['Can I call you Robert?'])
+    })
+
+    it('should return the non-interpolated key into an array if not initialized with allowMissing and translation not found', () => {
+      expect(i18n.interpolate('Welcome %{name}', {name: 'Robert'})).to.eql([
+        'Welcome %{name}'
+      ])
     })
   })
 })
