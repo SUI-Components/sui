@@ -116,7 +116,7 @@ i18n.culture = 'es-ES'
 i18n.interpolate('SIMPLE_BOUNDARY', {
   name: 'Spike',
   upper: ({children}) => children.toUpperCase()
-}) //=> ['Spike, your name is ', 'SPIKE', '!']
+}) //=> ['Spike, your name is ', 'SPIKE', ', the best superhero!']
 i18n.interpolate('SIMPLE_BOUNDARY_PLACEHOLDER', {
   name: 'Spike',
   upper: ({children}) => children.toUpperCase()
@@ -127,7 +127,7 @@ i18n.interpolate('MULTIPLE_BOUNDARY', {
 }) //=> ['SPIKE', ', your name is ', 'SPIKE', '!']
 i18n.interpolate('NESTED_PLACEHOLDERS', {
   bold: ({children}) => <strong>{children}</strong>,
-  link: ({children}) => <a>{children}</a>,
+  link: ({children}) => <a>{children}</a>
 }) //=> ['Hello, this is an ', <strong>['important ', <a>resource</a>]</strong>,' for this page!']
 ```
 
@@ -142,19 +142,19 @@ import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
 const i18n = new I18n({adapter: new Polyglot()})
 i18n.languages = {
   'en-GB': {
-    DISCLAIMER: 'Complete cvs have %[gray]twice the change to be picked.[gray]%. Start now completing it!'
+    DISCLAIMER:
+      'Complete cvs have %[gray]twice the change to be picked.[gray]%. Start now completing it!'
   }
 }
 
-function Component () {
+function Component() {
   const label = i18n.interpolate(`DISCLAIMER`, {
     gray: props => <Text as="span" color={COLORS['gray-D1']} {...props} />
   })
-  
+
   return <Text>{label}</Text>
 }
 ```
-
 
 ### Changing the dictionary
 
@@ -376,6 +376,193 @@ import App from '../app'
 const i18n = new I18n({adapter: new Polyglot()})
 const AppWithContext = withContext({i18n})(App)
 React.render(<AppWithContext />, document.getElementById('app'))
+```
+
+### Usage Best practices
+
+While translating and interpolating text, we could face different scenarios where using a method is a better choice compared to others.
+
+As a golden rule, you'd prefer to always use the **i18n.t** method for translation, unless you have styles or transformations nested inside the text that requires a custom interpolation to avoid creating multiple separated strings.
+
+Here a list of the most common use cases and the related best practice:
+
+#### Simple text: **i18n.t** 🏆
+
+```jsx
+import I18n from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
+
+const i18n = new I18n({adapter: new Polyglot()})
+i18n.languages = {
+  'en-GB': {
+    TEXT_KEY: 'Complete your data!'
+  }
+}
+
+// ✅ Do
+function Component() {
+  const label = i18n.t(`TEXT_KEY`)
+
+  return <Text>{label}</Text>
+}
+
+// ❌ Don't
+function Component() {
+  const label = i18n.interpolate(`TEXT_KEY`)
+
+  return <Text>{label}</Text>
+}
+```
+
+#### Text with placeholders: **i18n.t** 🏆
+
+```jsx
+import I18n from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
+
+const i18n = new I18n({adapter: new Polyglot()})
+i18n.languages = {
+  'en-GB': {
+    TEXT_KEY: 'Hi %{name}, complete your data!'
+  }
+}
+
+// ✅ Do
+function Component() {
+  const label = i18n.t(`TEXT_KEY`, {name: 'Spike'})
+
+  return <Text>{label}</Text>
+}
+
+// ❌ Don't
+function Component() {
+  const label = i18n.interpolate(`TEXT_KEY`, {name: 'Spike'})
+
+  return <Text>{label}</Text>
+}
+```
+
+#### Text with edge boundaries: **i18n.t** 🏆
+
+```jsx
+import I18n from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
+
+const i18n = new I18n({adapter: new Polyglot()})
+
+// ✅ Do
+i18n.languages = {
+  'en-GB': {
+    TEXT_KEY: 'Hi Spike, complete your data!'
+  }
+}
+
+function Component() {
+  const label = i18n.t(`TEXT_KEY`)
+
+  return <Text strong>{label}</Text>
+}
+
+// ❌ Don't
+i18n.languages = {
+  'en-GB': {
+    TEXT_KEY: '%[bold]Hi Spike, complete your data![bold]%'
+  }
+}
+
+function Component() {
+  const label = i18n.interpolate(`TEXT_KEY`, {
+    bold: props => <Text strong {...props} />
+  })
+
+  return label
+}
+```
+
+#### Text with inner boundaries: **i18n.interpolate** 🏆
+
+```jsx
+import I18n from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
+
+const i18n = new I18n({adapter: new Polyglot()})
+
+// ✅ Do
+i18n.languages = {
+  'en-GB': {
+    TEXT_KEY: 'Hi %[bold]Spike[bold]%, complete your data!'
+  }
+}
+function Component () {
+  const label = i18n.interpolate(`TEXT_KEY`, {bold: props => <Text strong {...props} />})
+
+  return <Text>{label}</Text>
+}
+
+// ❌ Don't
+i18n.languages = {
+  'en-GB': {
+    START_TEXT_KEY: 'Hi '
+    BOLD_TEXT_KEY: 'Spike'
+    END_TEXT_KEY: ', complete your data!'
+  }
+}
+function Component () {
+  const startlabel = i18n.t(`TEXT_KEY`)
+  const boldlabel = i18n.t(`TEXT_KEY`)
+  const endlabel = i18n.t(`TEXT_KEY`)
+
+  return (
+    <>
+      <Text>{startlabel}</Text>
+      <Text strong>{boldlabel}</Text>
+      <Text>{endlabel}</Text>
+    </>
+  )
+}
+```
+
+#### Text with inner boundaries and placeholders: **i18n.interpolate** 🏆
+
+```jsx
+import I18n from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
+
+const i18n = new I18n({adapter: new Polyglot()})
+
+// ✅ Do
+i18n.languages = {
+  'en-GB': {
+    TEXT_KEY: 'Hi %[bold]%{name}[bold]%, complete your data!'
+  }
+}
+function Component () {
+  const label = i18n.interpolate(`TEXT_KEY`, {name: 'Spike', bold: props => <Text strong {...props} />})
+
+  return <Text>{label}</Text>
+}
+
+// ❌ Don't
+i18n.languages = {
+  'en-GB': {
+    START_TEXT_KEY: 'Hi '
+    BOLD_TEXT_KEY: '%{name}'
+    END_TEXT_KEY: ', complete your data!'
+  }
+}
+function Component () {
+  const startlabel = i18n.t(`TEXT_KEY`)
+  const boldlabel = i18n.t(`TEXT_KEY`, {name: 'Spike'})
+  const endlabel = i18n.t(`TEXT_KEY`)
+
+  return (
+    <>
+      <Text>{startlabel}</Text>
+      <Text strong>{boldlabel}</Text>
+      <Text>{endlabel}</Text>
+    </>
+  )
+}
 ```
 
 ### Creating your own adapters
