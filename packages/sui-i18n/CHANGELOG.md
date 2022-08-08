@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.30.0 (2022-08-08)
+
+
+### Features
+
+* **packages/sui-i18n:** add interpolate method ([4ee4304](https://github.com/SUI-Components/sui/commit/4ee4304d84a06dc1a042889566b5a0ea9dcbcdf2))
+* **packages/sui-i18n:** mvp chunks interpolation method ([ca5a2ae](https://github.com/SUI-Components/sui/commit/ca5a2ae7684c16324b2b37c3ab134f64e59ea190))
+
+
+
 # 1.29.0 (2022-03-01)
 
 
