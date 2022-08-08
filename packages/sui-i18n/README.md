@@ -401,14 +401,14 @@ i18n.languages = {
 
 // ✅ Do
 function Component() {
-  const label = i18n.t(`TEXT_KEY`)
+  const label = i18n.t('TEXT_KEY')
 
   return <Text>{label}</Text>
 }
 
 // ❌ Don't
 function Component() {
-  const label = i18n.interpolate(`TEXT_KEY`)
+  const label = i18n.interpolate('TEXT_KEY')
 
   return <Text>{label}</Text>
 }
@@ -429,14 +429,14 @@ i18n.languages = {
 
 // ✅ Do
 function Component() {
-  const label = i18n.t(`TEXT_KEY`, {name: 'Spike'})
+  const label = i18n.t('TEXT_KEY', {name: 'Spike'})
 
   return <Text>{label}</Text>
 }
 
 // ❌ Don't
 function Component() {
-  const label = i18n.interpolate(`TEXT_KEY`, {name: 'Spike'})
+  const label = i18n.interpolate('TEXT_KEY', {name: 'Spike'})
 
   return <Text>{label}</Text>
 }
@@ -458,7 +458,7 @@ i18n.languages = {
 }
 
 function Component() {
-  const label = i18n.t(`TEXT_KEY`)
+  const label = i18n.t('TEXT_KEY')
 
   return <Text strong>{label}</Text>
 }
@@ -471,7 +471,7 @@ i18n.languages = {
 }
 
 function Component() {
-  const label = i18n.interpolate(`TEXT_KEY`, {
+  const label = i18n.interpolate('TEXT_KEY', {
     bold: props => <Text strong {...props} />
   })
 
@@ -494,7 +494,7 @@ i18n.languages = {
   }
 }
 function Component () {
-  const label = i18n.interpolate(`TEXT_KEY`, {bold: props => <Text strong {...props} />})
+  const label = i18n.interpolate('TEXT_KEY', {bold: props => <Text strong {...props} />})
 
   return <Text>{label}</Text>
 }
@@ -508,9 +508,9 @@ i18n.languages = {
   }
 }
 function Component () {
-  const startlabel = i18n.t(`TEXT_KEY`)
-  const boldlabel = i18n.t(`TEXT_KEY`)
-  const endlabel = i18n.t(`TEXT_KEY`)
+  const startlabel = i18n.t('TEXT_KEY')
+  const boldlabel = i18n.t('TEXT_KEY')
+  const endlabel = i18n.t('TEXT_KEY')
 
   return (
     <>
@@ -537,7 +537,7 @@ i18n.languages = {
   }
 }
 function Component () {
-  const label = i18n.interpolate(`TEXT_KEY`, {name: 'Spike', bold: props => <Text strong {...props} />})
+  const label = i18n.interpolate('TEXT_KEY', {name: 'Spike', bold: props => <Text strong {...props} />})
 
   return <Text>{label}</Text>
 }
@@ -551,9 +551,9 @@ i18n.languages = {
   }
 }
 function Component () {
-  const startlabel = i18n.t(`TEXT_KEY`)
-  const boldlabel = i18n.t(`TEXT_KEY`, {name: 'Spike'})
-  const endlabel = i18n.t(`TEXT_KEY`)
+  const startlabel = i18n.t('TEXT_KEY')
+  const boldlabel = i18n.t('TEXT_KEY', {name: 'Spike'})
+  const endlabel = i18n.t('TEXT_KEY')
 
   return (
     <>
