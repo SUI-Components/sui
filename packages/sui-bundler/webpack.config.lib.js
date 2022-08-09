@@ -9,7 +9,7 @@ const {
 const path = require('path')
 const minifyJs = require('./shared/minify-js.js')
 const definePlugin = require('./shared/define.js')
-const babelRules = require('./shared/module-rules-babel.js')
+const createBabelRules = require('./shared/module-rules-babel.js')
 const sassRules = require('./shared/module-rules-sass.js')
 const {extractComments, sourceMap} = require('./shared/config.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
@@ -63,6 +63,6 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [babelRules, sassRules]
+    rules: [createBabelRules(), sassRules]
   }
 }

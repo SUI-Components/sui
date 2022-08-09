@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.18.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-studio:** Update template ([d9907e2](https://github.com/SUI-Components/sui/commit/d9907e257cac50936ce1afa81c70b30a67a6cb84))
+
+
+
 # 11.17.0 (2022-07-22)
 
 

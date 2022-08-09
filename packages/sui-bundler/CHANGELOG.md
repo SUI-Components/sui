@@ -1,10 +1,41 @@
 # CHANGELOG
 
+# 9.34.0 (2022-08-04)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Handle correctly build errors ([aff362a](https://github.com/SUI-Components/sui/commit/aff362a9b2dc1aa5e8859aa933f6e79f1f1e797c))
+* **packages/sui-bundler:** Remove compiler close funcitonality ([5f90020](https://github.com/SUI-Components/sui/commit/5f90020152b2fb86da7b8fe692ee06cb099eff0c))
+* **packages/sui-bundler:** Use correctly compiler ([42d7cb0](https://github.com/SUI-Components/sui/commit/42d7cb00fec2aeb4fe581cc36fa0db4719079d79))
+
+
+
+# 9.33.0 (2022-08-02)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Support legacy browsers for now ([ea052d2](https://github.com/SUI-Components/sui/commit/ea052d2b74a63afd91dd5de96ab654ffcc543cc8))
+
+
+
+# 9.32.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([18a93b9](https://github.com/SUI-Components/sui/commit/18a93b9c755720519a25742309ac4c11a95f4a55))
+
+
+
 # 9.31.0 (2022-07-22)
 
 
 ### Features
 
+* **packages/sui-bundler:** Compile for Node 16 target on SSR ([c78c746](https://github.com/SUI-Components/sui/commit/c78c746da0d1326c88bde9d3672c0e5ad7a2f971))
+* **packages/sui-bundler:** Pass more info to babel preset sui from bundler ([2719b87](https://github.com/SUI-Components/sui/commit/2719b872d3e43918a8bef78fc65e1a535d4ed1e3))
 * **packages/sui-bundler:** Upgrade dependencies ([5afa4ab](https://github.com/SUI-Components/sui/commit/5afa4aba24d9c962acecf6e531667d62b87881bd))
 
 

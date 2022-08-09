@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+// @ts-check
+
 /* eslint-disable no-console */
 
 const fs = require('fs')
@@ -63,21 +66,24 @@ if (clean) {
 
 log.processing('Generating minified bundle...')
 
-webpack(nextConfig).run(async (error, stats) => {
+const compiler = webpack(nextConfig)
+
+compiler.run(async (error, stats) => {
   if (error) {
     log.error(error)
-    return 1
+    return process.exit(1)
   }
 
-  if (stats.hasErrors()) {
+  if (stats?.hasErrors()) {
     const jsonStats = stats.toJson('errors-only')
-    return jsonStats.errors.map(({message}) => log.error(message))
+    jsonStats?.errors?.map(({message}) => log.error(message))
+    return process.exit(1)
   }
 
-  if (stats.hasWarnings()) {
+  if (stats?.hasWarnings()) {
     const jsonStats = stats.toJson('errors-warnings')
     log.warn('Webpack generated the following warnings: ')
-    jsonStats.warnings.map(({message}) => log.warn(message))
+    jsonStats?.warnings?.map(({message}) => log.warn(message))
   }
 
   console.log(`Webpack stats: ${stats}`)
@@ -147,5 +153,9 @@ webpack(nextConfig).run(async (error, stats) => {
     `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
   )
 
-  return 0
+  compiler.close(closeErr => {
+    const exitCode = closeErr ? 1 : 0
+    if (closeErr) return process.exit(exitCode)
+    return process.exit(0)
+  })
 })
