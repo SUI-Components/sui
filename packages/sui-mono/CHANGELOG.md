@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.31.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-mono:** Use latest git-url-parse ([bc7327c](https://github.com/SUI-Components/sui/commit/bc7327c642f53e314ad22856b10b3d3206d8670e))
+
+
+
 # 2.30.0 (2022-06-22)
 
 
