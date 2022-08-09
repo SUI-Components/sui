@@ -2,7 +2,7 @@
 /* eslint no-console:0 no-unused-vars:0 */
 const program = require('commander')
 const {shell} = require('@tunnckocore/execa')
-const GitUrlParse = require('git-url-parse')
+const gitUrlParse = require('git-url-parse')
 const path = require('path')
 
 program
@@ -98,7 +98,7 @@ const getNpmInstall = ({
     }
 
     const repoURL = await execute('git config --get remote.origin.url')
-    const gitURL = GitUrlParse(repoURL).toString('https')
+    const gitURL = gitUrlParse(repoURL).toString('https')
     const authURL = new URL(gitURL)
     authURL.username = gitHubToken
 
