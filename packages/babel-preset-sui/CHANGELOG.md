@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.49.0 (2022-08-09)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Sync versions of packages across sui ([2888a49](https://github.com/SUI-Components/sui/commit/2888a499b7cdc68bdd474a021d21b3783a551068))
+
+
+
 # 3.48.0 (2022-08-02)
 
 
