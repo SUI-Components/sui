@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.23.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test:** Bump and align dependencies ([f8779a3](https://github.com/SUI-Components/sui/commit/f8779a3b960108f274bdaec4bff0d94b4ba51a8d))
+
+
+
 # 8.22.0 (2022-07-22)
 
 

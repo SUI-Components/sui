@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.35.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Bump and align dependencies ([977069d](https://github.com/SUI-Components/sui/commit/977069d078bea4603c307c804aa8158e2d0c9031))
+
+
+
 # 9.34.0 (2022-08-04)
 
 

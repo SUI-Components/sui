@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.14.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Bump and align dependencies ([a35bcb7](https://github.com/SUI-Components/sui/commit/a35bcb7f12a1303781f09b0fcfcde369c125db30))
+
+
+
 # 1.13.0 (2022-06-27)
 
 

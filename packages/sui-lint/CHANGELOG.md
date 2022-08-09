@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.27.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-lint:** Bump and align dependencies ([ce70f2d](https://github.com/SUI-Components/sui/commit/ce70f2df708cb13ce8338d0f34285f7e3502ad70))
+
+
+
 # 4.26.0 (2022-08-09)
 
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.8.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-ssr:** Use latest git-url-parse ([2f7684f](https://github.com/SUI-Components/sui/commit/2f7684f9b75d238236898644e21bec2c9f62a26f))
+
+
+
 # 8.7.0 (2022-07-28)
 
 
