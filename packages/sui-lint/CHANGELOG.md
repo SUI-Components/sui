@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.26.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-lint:** Disable noisy lint jsx no bind functions for React ([a6d8840](https://github.com/SUI-Components/sui/commit/a6d884053408e85eda9eea1197e4da3764904033))
+
+
+
 # 4.25.0 (2022-07-26)
 
 
