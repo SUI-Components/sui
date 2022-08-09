@@ -140,7 +140,8 @@ module.exports = {
     strict: RULES.OFF,
     'prefer-regex-literals': RULES.WARNING,
     'prettier/prettier': [RULES.ERROR, prettierOptions],
-    'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}]
+    'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}],
+    'react/jsx-no-bind': RULES.OFF
   },
   overrides: [
     {
