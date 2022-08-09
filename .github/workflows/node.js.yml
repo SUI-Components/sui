@@ -48,6 +48,10 @@ jobs:
     needs: [ build ]
     if: github.ref == 'refs/heads/master'
     steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        persist-credentials: false
     - run: |
         ./bin/devhose-cli_2.17.0_amd64 deployment \
           -devhose-tenant "adevinta-spain-fe-github-sui" \
