@@ -4,7 +4,6 @@
 
 // See: https://github.com/pact-foundation/pact-js/blob/51d2ae2e41c8c40e373f264ac7ba633d258604c2/examples/e2e/test/publish.js
 
-import {versionFromGitTag} from 'absolute-version'
 import program from 'commander'
 import path from 'node:path'
 
@@ -25,12 +24,18 @@ if (!brokerUrl)
     'You need to specify the broker URL where the contracts will be published.'
   )
 const contractsDir = path.resolve(process.cwd(), 'contract/documents')
-const {TRAVIS_BRANCH, GITHUB_REF} = process.env
+const {
+  GITHUB_REF,
+  GITHUB_SHA,
+  TRAVIS_BRANCH,
+  TRAVIS_COMMIT,
+  TRAVIS_PULL_REQUEST_SHA
+} = process.env
+
 const branch =
   TRAVIS_BRANCH || GITHUB_REF || exec('git rev-parse --abbrev-ref HEAD')
-const consumerVersion = versionFromGitTag({
-  tagGlob: ''
-})
+const consumerVersion = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT || GITHUB_SHA
+
 const options = {
   pactFilesOrDirs: [contractsDir],
   pactBroker: brokerUrl,
