@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.19.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-studio:** Use latest git-url-parse ([48211d9](https://github.com/SUI-Components/sui/commit/48211d9a2bd8c8068ef0acc611d225a3224762c9))
+
+
+
 # 11.18.0 (2022-08-09)
 
 
