@@ -33,16 +33,27 @@ jobs:
     - run: npm run lint
     - run: npm run test:server:ci
     - run: xvfb-run --auto-servernum npm run test:client:ci
-    - id: release
-      run: echo "::set-output name=info::$(npx -p ./packages/sui-ci sui-ci release)"
+    - run: npx -p ./packages/sui-ci sui-ci release
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        GITHUB_EMAIL: cloud-accounts@scmspain.com
+        GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
+        GITHUB_USER: sui-bot
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  metrics:
+    name: 'Send Metrics to Devhose'
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    if: github.ref == 'refs/heads/master'
+    steps:
     - run: |
-        echo "${{ steps.release.outputs.info }}"
         ./bin/devhose-cli_2.17.0_amd64 deployment \
-          -test \
           -devhose-tenant "adevinta-spain-fe-github-sui" \
           -devhose-secret "${{ secrets.DEVHOSE_SECRET }}" \
           -devhose-dest "mpi" \
-          -application "sui-components" \
+          -application "sui" \
           -environment "pro" \
           -facility "sdrn:adevinta:service:adevinta-spain-sui-github" \
           -id "${{ github.run_id }}" \
@@ -58,10 +69,3 @@ jobs:
           -accelerate-metrics \
           -resource-scm-commit "${{ github.sha }}" \
           -resource-repository "sdrn:adevinta:repo:github.com/${{ github.repository }}"
-      env:
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        GITHUB_EMAIL: cloud-accounts@scmspain.com
-        GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
-        GITHUB_USER: sui-bot
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
