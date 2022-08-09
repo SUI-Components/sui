@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.5.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test-contract:** Use SHA as consumer version for pact contracts ([a3836d8](https://github.com/SUI-Components/sui/commit/a3836d8923075bb81b3fe8c906439f1fc166634a))
+
+
+
 # 2.4.0 (2022-07-20)
 
 
