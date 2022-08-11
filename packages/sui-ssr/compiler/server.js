@@ -13,13 +13,8 @@ module.exports = ({outputPath}) => ({
   externals: undefined,
   resolve: {
     ...serverConfig.resolve,
-    modules: [
-      path.join(__dirname, '..', 'server'),
-      path.join(__dirname, '..', 'node_modules'),
-      path.join(process.cwd(), 'src'),
-      path.join(process.cwd(), 'node_modules'),
-      'node_modules'
-    ]
+    mainFields: ['main'],
+    modules: [path.join(process.cwd(), 'src'), 'node_modules']
   },
   node: {
     __filename: true,
