@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.22.0 (2022-08-11)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade vite version for sui-svg ([24910e7](https://github.com/SUI-Components/sui/commit/24910e7f36b2c87f258320d4751f543960f80c16))
+
+
+
 # 1.21.0 (2022-06-21)
 
 
