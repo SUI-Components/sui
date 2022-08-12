@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.8.0 (2022-08-12)
+
+
+### Features
+
+* **packages/sui-react-context:** export useSuiContext hook ([47fb034](https://github.com/SUI-Components/sui/commit/47fb0347a10cc6ca822e075a37d4ae28756b177e))
+
+
+
 # 1.7.0 (2021-07-01)
 
 
