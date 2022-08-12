@@ -23,4 +23,8 @@ SUIContext.wrapper = (Component, displayName): React.ComponentType<any> => {
   return hoistNonReactStatics(WrappedComponent, Component)
 }
 
+export function useSuiContext (): React.Context<any> {
+  return React.useContext(SUIContext)
+}
+
 export default SUIContext
