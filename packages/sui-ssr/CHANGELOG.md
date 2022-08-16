@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.9.0 (2022-08-16)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix module resolution and avoid get all dependencies from node_modules root ([9b29b1a](https://github.com/SUI-Components/sui/commit/9b29b1ad0e27a129491d44e00b0cd8d90648c9e9))
+
+
+
 # 8.8.0 (2022-08-09)
 
 
