@@ -5,6 +5,7 @@ import {promisify} from 'util'
 // __MAGIC IMPORTS__
 // They came from {SPA}/src
 // import userHooks from 'hooks'
+// this is not a dependency, it will import from project src/routes
 import routes from 'routes'
 
 import {createServerContextFactoryParams} from '@s-ui/react-initial-props'
@@ -15,6 +16,7 @@ import {hrTimeToMs, publicFolder, siteByHost} from '../utils/index.js'
 let userHooks
 let contextFactory
 try {
+  // these are not dependencies, it will import from project src/hooks and src/routes
   userHooks = require('hooks')
   contextFactory = require('contextFactory').default
 } catch (e) {
