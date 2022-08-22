@@ -28,7 +28,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-no-only-tests": "3.0.0",
-    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-n": "15.2.5",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react-hooks": "4.6.0",
@@ -36,7 +36,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "postcss-scss": "4.0.4",
     "prettier": "2.7.1",
-    "stylelint": "14.9.1",
+    "stylelint": "14.11.0",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-recommended-scss": "7.0.0",
     "stylelint-prettier": "2.0.0"
