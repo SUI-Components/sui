@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.20.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-studio:** Remove sui-mono dependency ([c61d0d9](https://github.com/SUI-Components/sui/commit/c61d0d97908ed668c1f256b89f29e8a13182913e))
+
+
+
 # 11.19.0 (2022-08-09)
 
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.25.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-studio-create:** Remove version when using npx ([9225647](https://github.com/SUI-Components/sui/commit/9225647bb26c838c1c892a06fa9c06f4ccbde14a))
+
+
+
 # 4.24.0 (2022-05-30)
 
 
