@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.36.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade deps ([0343819](https://github.com/SUI-Components/sui/commit/03438192ce654e00d67bc32ff683b54a98580ae5))
+
+
+
 # 9.35.0 (2022-08-09)
 
 
