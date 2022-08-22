@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.28.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade deps ([2a7ff99](https://github.com/SUI-Components/sui/commit/2a7ff9901d08f99640aad87d69dd625c427cec05))
+
+
+
 # 4.27.0 (2022-08-09)
 
 
