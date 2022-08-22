@@ -35,7 +35,7 @@ window.__karma__.loaded = () => {}
 const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/(\w+).test.(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/(components\.)?(\w+).test.(js|jsx)/
 )
 
 const selectedTestFiles = testsFiles.keys().filter(filterAll)
@@ -45,7 +45,18 @@ Promise.all(
     // get the category component from the segments of the path
     // ex: ./card/property/index.js -> card property
     const [, category, component] = key.split('/')
-    const categoryComponentKey = `${category}/${component}`
+
+    let categoryComponentKey = `${category}/${component}`
+    let subComponentName = null
+
+    const subComponentRegex =
+      /components\.(?<nestedComponentName>\w+)\.test\.(js|jsx)/
+    const matchesSubComponent = key.match(subComponentRegex)
+
+    if (matchesSubComponent !== null) {
+      subComponentName = matchesSubComponent?.groups?.nestedComponentName
+      categoryComponentKey = `${category}/${component}/src/${subComponentName}`
+    }
 
     const getContexts = await importContexts({category, component})
     const contexts =
@@ -54,6 +65,7 @@ Promise.all(
     const componentModule = await importReactComponent({
       category,
       component,
+      subComponentName,
       extractDefault: true
     })
 
@@ -70,6 +82,7 @@ Promise.all(
 
     const {displayName} = Component
     // store on the window the contexts and components using the ${category/component} key
+    // or the ${category/component/src/subComponentName} key if using a nested component
     window.__STUDIO_CONTEXTS__[categoryComponentKey] = contexts
     window.__STUDIO_COMPONENT__[categoryComponentKey] = Component
 
