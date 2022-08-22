@@ -61,7 +61,7 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
     "lint:js": "sui-lint js",
     "lint:sass": "sui-lint sass",
     "lint": "npm run lint:js && npm run lint:sass",
-    "phoenix": "npx @s-ui/mono@2 run 'rm -rf ./node_modules' && rm -rf ./node_modules && npm install --legacy-peer-deps",
+    "phoenix": "npx @s-ui/mono run 'rm -rf ./node_modules' && rm -rf ./node_modules && npm install --legacy-peer-deps",
     "phoenix:ci": "npm run phoenix -- --no-optional --no-fund --no-audit",
     "pre-commit": "npm run lint",
     "release": "sui-mono release",
@@ -72,6 +72,7 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
   "license": "MIT",
   "devDependencies": {
     "@s-ui/precommit": "3",
+    "@s-ui/mono": "2",
     "@s-ui/lint": "4",
     "@s-ui/studio": "11",
     "validate-commit-msg": "2.14.0"
