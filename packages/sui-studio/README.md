@@ -60,7 +60,7 @@ $ npx sui-studio dev house/window
 
 #### 2) Go to `http://localhost:3000`
 
-#### 3) Commit changes using the appropiate command
+#### 3) Commit changes using the appropriate command
 
 First of all, stage you changes for commit with `git add` or whatever you use.
 
@@ -106,7 +106,7 @@ Launch a development environment where you can see all your components at once. 
 
 ### `$ sui-studio build`
 
-Build a static version of a web app aimed to be deployed, where you will be able to interact with all components. The interface will be the same you use for the start command, only this one is optimized for production.
+Build a static version of a web app aimed to be deployed, where you will be able to interact with all the components. The interface will be the same you use for the start command, only this one is optimized for production.
 
 #### Options
 
@@ -135,7 +135,7 @@ Launch all project tests in a Karma browser.
 
 ### `$ cpx`
 
-This command allow you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.  
+This command allows you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.
 
 #### Examples
 
@@ -170,7 +170,7 @@ describe('AtomButton', () => {
 
 The component will be a global object when running tests, so it is PARAMOUNT NOT to import it. In order to avoid problems with the linter, add relevant comments, as in the example above.
 
-### How works with different SUI contexts
+### How it works with different SUI contexts
 
 If there is a `demo/context.js` file where you define several SUI contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
 
@@ -180,9 +180,9 @@ First, you have to import the patcher to create the `context` object, inside the
 import '@s-ui/studio/src/patcher-mocha'
 ```
 
-After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.
+After that, you can use the `describe.context` object to have a key for every context definition in your `demo/context.js` file.
 
-For example, if your context.js file looks like:
+For example, if your `context.js` file looks like:
 
 ```js
 export default () => {
@@ -303,7 +303,7 @@ Options:
   -T, --timeout <timeout>  Timeout
   --coverage               Create coverage (default: false)
   -h, --help               display help for command
-  
+
   Examples:
     $ sui-studio test --headless
     $ sui-studio test --headless --watch
@@ -322,7 +322,7 @@ You could execute some specific tests with the `sui-studio-test` command using `
 
 Some examples:
 
-- For speciffic component: `PATTERN='./ad/card/test/index.test.js' sui-studio test` or `PATTERN='ad/card/test' sui-studio test`
+- For a specific component: `PATTERN='./ad/card/test/index.test.js' sui-studio test` or `PATTERN='ad/card/test' sui-studio test`
 
 - For categories: `PATTERN='{ad,shipping}/*/test' sui-studio test`
 
