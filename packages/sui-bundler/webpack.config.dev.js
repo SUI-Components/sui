@@ -22,7 +22,7 @@ const EXCLUDED_FOLDERS_REGEXP = new RegExp(
 )
 const outputPath = path.join(process.cwd(), 'dist')
 
-const {CI = false, TS: isTypeScript = false} = process.env
+const {CI = false} = process.env
 
 process.env.NODE_ENV = 'development'
 
@@ -81,68 +81,52 @@ const webpackConfig = {
   resolveLoader,
   module: {
     rules: cleanList([
-      isTypeScript
-        ? {
-            test: /\.(ts|js)x?$/,
-            exclude: EXCLUDED_FOLDERS_REGEXP,
-            use: [
-              {
-                loader: require.resolve('swc-loader'),
-                options: {
-                  // test: '.(ts|js)x?$',
-                  // minify: true,
-                  jsc: {
-                    parser: {
-                      syntax: "typescript",
-                      tsx: true,
-                      dynamicImport: true,
-                      privateMethod: true,
-                      functionBind: true,
-                      exportDefaultFrom: true,
-                      exportNamespaceFrom: true,
-                      decorators: true,
-                      decoratorsBeforeExport: true,
-                      topLevelAwait: true,
-                      importMeta: true
-                    },
-                    transform: {
-                      legacyDecorator: true,
-                      react: {
-                        useBuiltins: true,
-                        runtime: 'automatic'
-                      }
-                    },
-                    target: 'es5',
-                    loose: true,
-                    externalHelpers: true
-                  },
-                  env: {
-                    targets: {
-                      ie: '11'
-                    },
-                    dynamicImport: true,
-                    loose: true,
-                    mode: 'entry',
-                    coreJs: 3
+      {
+        test: /\.(ts|js)x?$/,
+        exclude: EXCLUDED_FOLDERS_REGEXP,
+        use: [
+          {
+            loader: require.resolve('swc-loader'),
+            options: {
+              minify: true,
+              jsc: {
+                parser: {
+                  syntax: 'typescript',
+                  tsx: true,
+                  dynamicImport: true,
+                  privateMethod: true,
+                  functionBind: true,
+                  exportDefaultFrom: true,
+                  exportNamespaceFrom: true,
+                  decorators: true,
+                  decoratorsBeforeExport: true,
+                  topLevelAwait: true,
+                  importMeta: true
+                },
+                transform: {
+                  legacyDecorator: true,
+                  react: {
+                    useBuiltins: true,
+                    runtime: 'automatic'
                   }
-                }
+                },
+                target: 'es5',
+                loose: true,
+                externalHelpers: true
+              },
+              env: {
+                targets: {
+                  ie: '11'
+                },
+                dynamicImport: true,
+                loose: true,
+                mode: 'entry',
+                coreJs: 3
               }
-            ]
+            }
           }
-        : {
-            test: /\.jsx?$/,
-            exclude: EXCLUDED_FOLDERS_REGEXP,
-            use: [
-              {
-                loader: require.resolve('babel-loader'),
-                options: {
-                  babelrc: false,
-                  cacheDirectory: true,
-                  presets: [require.resolve('babel-preset-sui')]
-                }
-              }
-            ]
-          },
+        ]
+      },
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([
