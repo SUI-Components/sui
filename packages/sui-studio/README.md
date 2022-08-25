@@ -221,7 +221,102 @@ describe.context.other('atom/button', AtomButton => {
 })
 ```
 
-### How works with other context (Not SUI Context)
+### How to test more than one component in the same studio component
+
+**TLDR: Apply the context exported from the `/demo/context.js` file for React components other than just the ones in `/test/index.test.js`.**
+
+Since you can use the `PATTERN=appraisal/report npm run test:studio` (see #cli-integration-testing) command to test a single studio component and you can have more than one `*.test.js` file inside the `/test` folder, you can use the following to test more than one component and apply to it the React Context exported from the `/demo/context.js` file.
+
+#### Example `/test` folder tree structure
+
+**Naming convention:** `components.{componentName}.test.js`.
+
+We use this naming convention so that we can have test files other than `index.test.js` than can test regular functions that are not React Components.
+
+For example, a test for a `sum(a, b)` function that checks if the addition is working fine.
+
+With this approach we have a way to define subcomponent tests that don't conflict with other test files that don't test React components.
+
+```sh
+test
+├── components.AgencyEvaluationForm.test.js
+├── components.AgencyEvaluationInfo.test.js
+└── index.test.js
+```
+
+Inside your `/demo/context.js` you export the React context that you want to apply to your component inside the Demo or test (sui domain, i18n, sui pde, etc).
+
+```js
+import {domain, i18nFactory} from 'utils'
+
+export default () => {
+  return i18nFactory().then(i18n => ({
+    default: {
+      domain: domain.build(),
+      i18n: {
+        culture: i18n.culture,
+        locale: i18n.locale,
+        t: i18n.t.bind(i18n),
+        c: i18n.c.bind(i18n),
+        n: i18n.n.bind(i18n),
+        f: i18n.f.bind(i18n)
+      }
+    }
+  }))
+}
+```
+
+Then, you will need to use the `'@s-ui/studio/src/patcher-mocha'` package that can use a `componentKey` to load a specific studio component.
+
+If we provide a component key that matches the naming system, we can set the context for subcomponents.
+
+```js
+// /test/components.AgencyEvaluationInfo.test.js
+
+/* global setupEnvironment */
+import '@s-ui/studio/src/patcher-mocha'
+
+import chai, {expect} from 'chai'
+import chaiDOM from 'chai-dom'
+import {ProvidersWrapper} from 'utils'
+
+chai.use(chaiDOM)
+
+const COMPONENT_KEY = 'appraisal/report/src/AgencyEvaluationInfo'
+
+describe.context.default(
+  'AgencyEvaluationInfo',
+  describeCallback,
+  COMPONENT_KEY
+)
+
+function describeCallback(AgencyEvaluationInfo) {
+  const WrappedComponent = props => (
+    <ProvidersWrapper>
+      <AgencyEvaluationInfo {...props} />
+    </ProvidersWrapper>
+  )
+
+  const setup = setupEnvironment(WrappedComponent)
+
+  const baseProps = {}
+
+  it('should render the pdf link', async () => {
+    // Given
+    const props = {...baseProps}
+    const linkText = 'Informe de ejemplo'
+
+    // When
+    const {findByRole} = setup(props)
+    const pdfLink = await findByRole('link', {name: linkText})
+
+    // Then
+    expect(pdfLink).to.have.text('Ver informe de ejemplo')
+  })
+}
+```
+
+### How it works with other context (Not SUI Context)
 
 Each test has a `setupEnvironment` function in global scope. This function works equal to React Testing Library (RTL) `render` method but has two wrapped features:
 
