@@ -5,8 +5,8 @@ const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
 
-const config = require('@s-ui/bundler/webpack.config.dev')
-const startDevServer = require('@s-ui/bundler/bin/sui-bundler-dev')
+const config = require('../../sui-bundler/webpack.config.dev.js')
+const startDevServer = require('../../sui-bundler/bin/sui-bundler-dev.js')
 
 const {componentsFullPath} = require('./helpers/walker.js')
 

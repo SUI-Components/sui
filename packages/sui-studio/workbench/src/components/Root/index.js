@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
+
 import PropTypes from 'prop-types'
 
 import Header from '../Header'
 import Select from '../Select'
 import Test from '../Test'
 
-const importComponent = () => import('component/index.js')
+const importComponent = () => import('component/index.tsx')
 const importTest = () => import('test/index.test.js')
 
 const getFromStorage = (key, defaultValue) =>
