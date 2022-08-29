@@ -46,7 +46,12 @@ const extractCriticalCSS = async ({
   url,
   configForMobileDevice
 } = {}) => {
-  if (retries === 0) return ''
+  if (retries === 0) {
+    console.log(
+      `Attempt limit reached. requiredClassNames has not been found in ${url}`
+    )
+    return ''
+  }
 
   const css = await extractCSSFromUrl({
     url,
@@ -63,9 +68,15 @@ const extractCriticalCSS = async ({
   )
 
   if (!hasRequiredClasses) {
+    const nextTryNumber = retries - 1
+
+    console.log(
+      `requiredClassNames has not been found. Retries remaining: ${nextTryNumber}`
+    )
+
     return extractCriticalCSS({
       requiredClassNames,
-      retries: retries - 1,
+      retries: nextTryNumber,
       url,
       configForMobileDevice
     })
@@ -113,6 +124,8 @@ export async function extractCSSFromApp({routes, config = {}}) {
 
     const cssPathFile = join(process.cwd(), outputDir, cssFileName)
     writeFilesPromises.push(writeFile(cssPathFile, css))
+
+    console.log(`Critical CSS for ${url} extracted`)
   }
 
   const results = await Promise.allSettled(writeFilesPromises)
