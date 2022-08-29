@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.6.0 (2022-08-29)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix branch name with travis env ([111fc31](https://github.com/SUI-Components/sui/commit/111fc31e92420ba7fcd0c0dcf48257e3fd441236))
+
+
+
 # 2.5.0 (2022-08-09)
 
 
