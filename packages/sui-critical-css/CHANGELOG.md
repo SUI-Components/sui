@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.23.0 (2022-08-29)
+
+
+### Features
+
+* **packages/sui-critical-css:** add some logging about critical css extraction ([e68dd66](https://github.com/SUI-Components/sui/commit/e68dd66a799c4b93be47e602b2fdb332bc03324e))
+
+
+
 # 1.22.0 (2022-08-11)
 
 
