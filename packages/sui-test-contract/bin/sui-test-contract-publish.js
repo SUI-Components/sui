@@ -27,13 +27,17 @@ const contractsDir = path.resolve(process.cwd(), 'contract/documents')
 const {
   GITHUB_REF,
   GITHUB_SHA,
+  TRAVIS_PULL_REQUEST_BRANCH,
   TRAVIS_BRANCH,
   TRAVIS_COMMIT,
   TRAVIS_PULL_REQUEST_SHA
 } = process.env
 
 const branch =
-  TRAVIS_BRANCH || GITHUB_REF || exec('git rev-parse --abbrev-ref HEAD')
+  TRAVIS_PULL_REQUEST_BRANCH ||
+  TRAVIS_BRANCH ||
+  GITHUB_REF ||
+  exec('git rev-parse --abbrev-ref HEAD')
 const consumerVersion = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT || GITHUB_SHA
 
 const options = {
