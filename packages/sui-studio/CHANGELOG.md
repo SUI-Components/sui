@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.21.0 (2022-08-31)
+
+
+### Features
+
+* **packages/sui-studio:** add support for subcomponents context mapping ([8d4e005](https://github.com/SUI-Components/sui/commit/8d4e00590c3502aae7f6e3954f3e91568da91f87))
+
+
+
 # 11.20.0 (2022-08-22)
 
 
