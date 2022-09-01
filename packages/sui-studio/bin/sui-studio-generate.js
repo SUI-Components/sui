@@ -17,6 +17,7 @@ program
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
   .option('-W, --swc', 'Use the new SWC compiler', false)
+  .option('-E, --explicit', 'Use explicit import', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -52,6 +53,7 @@ const componentInPascal = toPascalCase(
 const COMPONENT_DIR = `/components/${category}/${component}/`
 const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
 const COMPONENT_ENTRY_JS_POINT_FILE = `${COMPONENT_PATH}src/index.js`
+const COMPONENT_JS_POINT_FILE = `${COMPONENT_PATH}src/${componentInPascal}.js`
 const COMPONENT_PACKAGE_JSON_FILE = `${COMPONENT_PATH}package.json`
 const COMPONENT_PACKAGE_GITIGNORE_FILE = `${COMPONENT_PATH}.gitignore`
 const COMPONENT_PACKAGE_NPMIGNORE_FILE = `${COMPONENT_PATH}.npmignore`
@@ -66,7 +68,7 @@ const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 const TEST_DIR = `${COMPONENT_PATH}/test/`
 const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, scope, prefix = 'sui', swc} = program.opts()
+const {context, scope, prefix = 'sui', swc, explicit} = program.opts()
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
@@ -137,6 +139,25 @@ describe${context ? '.context.default' : ''}('${componentInPascal}', ${
     expect(findClassName(container.innerHTML)).to.be.null
   })
 })
+`
+
+const componentTemplate = `// import PropTypes from 'prop-types'
+
+export default function ${componentInPascal}() {
+  return (
+    <div className="${prefix}-${componentInPascal}">
+      <h1>${componentInPascal}</h1>
+    </div>
+  )
+}
+
+${componentInPascal}.displayName = '${componentInPascal}'
+${componentInPascal}.propTypes = {}
+`
+
+const explicitImportTemplate = `import ${componentInPascal} from './${componentInPascal}.js'
+
+export default ${componentInPascal}
 `
 
 const defaultContext = `module.exports = {
@@ -225,20 +246,10 @@ test
 
   writeFile(
     COMPONENT_ENTRY_JS_POINT_FILE,
-    `// import PropTypes from 'prop-types'
-
-export default function ${componentInPascal}() {
-  return (
-    <div className="${prefix}-${componentInPascal}">
-      <h1>${componentInPascal}</h1>
-    </div>
-  )
-}
-
-${componentInPascal}.displayName = '${componentInPascal}'
-${componentInPascal}.propTypes = {}
-`
+    explicit ? explicitImportTemplate : componentTemplate
   ),
+
+  explicit && writeFile(COMPONENT_JS_POINT_FILE, componentTemplate),
 
   writeFile(
     COMPONENT_ENTRY_SCSS_POINT_FILE,
