@@ -1,0 +1,74 @@
+// DESCRIPTION:
+//
+// Provides a basic spacing classes library in emmet convection
+//
+// USAGE:
+//
+// In your vertical theme...
+//
+// @each $side in $m-sides {
+//   @include create-space('margin', $side, $p-sizes);
+// }
+//
+// GENERATE:
+//
+// .m-m {
+//   margin: 8px;
+// }
+// .m-s {
+//   margin: 4px;
+// }
+//
+//....
+//
+// .mt-m {
+//   margin-top: 8px;
+// }
+// .mt-s {
+//   margin-top: 4px;
+// }
+//
+//....
+
+$sides: ('', 'top', 'right', 'bottom', 'left'); // '': all sides
+$p-sides: $sides !default;
+$m-sides: $sides !default;
+
+$p-sizes: (
+  giant: $p-giant,
+  xxxl: $p-xxxl,
+  xxl: $p-xxl,
+  xl: $p-xl,
+  l: $p-l,
+  m: $p-m,
+  s: $p-s,
+  xs: $p-xs
+) !default;
+
+$m-sizes: (
+  giant: $m-giant,
+  xxxl: $m-xxxl,
+  xxl: $m-xxl,
+  xl: $m-xl,
+  l: $m-l,
+  m: $m-m,
+  s: $m-s,
+  xs: $m-xs
+) !default;
+
+@mixin create-space($space, $side, $sizes) {
+  $sd: str-slice($side, 1, 1);
+  $sp: str-slice($space, 1, 1);
+  $symbol: '-';
+
+  @if ($side == '') {
+    $sd: '';
+    $symbol: '';
+  }
+
+  @each $size, $value in $sizes {
+    .#{$sp}#{$sd}-#{$size} {
+      #{$space}#{$symbol}#{$side}: $value;
+    }
+  }
+}
