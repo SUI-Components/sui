@@ -225,7 +225,7 @@ describe.context.other('atom/button', AtomButton => {
 
 **TLDR: Apply the context exported from the `/demo/context.js` file for React components other than just the ones in `/test/index.test.js`.**
 
-Since you can use the `PATTERN=appraisal/report npm run test:studio` (see [the section on cli testing](#cli-integration-testing)) command to test a single studio component and you can have more than one `*.test.js` file inside the `/test` folder, you can use the following to test more than one component and apply to it the React Context exported from the `/demo/context.js` file.
+Since you can use the `PATTERN=appraisal/report npm run test:studio` (see [the section on cli testing](#cli-testing-integration)) command to test a single studio component and you can have more than one `*.test.js` file inside the `/test` folder, you can use the following to test more than one component and apply to it the React Context exported from the `/demo/context.js` file.
 
 #### Example `/test` folder tree structure
 
