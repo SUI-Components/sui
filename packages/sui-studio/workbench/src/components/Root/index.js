@@ -6,8 +6,8 @@ import Header from '../Header'
 import Select from '../Select'
 import Test from '../Test'
 
-const importComponent = () => import('component/index.tsx')
-const importTest = () => import('test/index.test.js')
+const importComponent = () => import('component/index')
+const importTest = () => import('test/index.test')
 
 const getFromStorage = (key, defaultValue) =>
   window.sessionStorage[key] || defaultValue
