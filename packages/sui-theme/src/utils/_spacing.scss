@@ -6,9 +6,7 @@
 //
 // In your vertical theme...
 //
-// @each $side in $m-sides {
-//   @include create-space('margin', $side, $p-sizes);
-// }
+// @import ~/@s-ui/theme/lib/utils/_spacing.scss
 //
 // GENERATE:
 //
@@ -71,4 +69,12 @@ $m-sizes: (
       #{$space}#{$symbol}#{$side}: $value;
     }
   }
+}
+
+@each $side in $m-sides {
+  @include create-space('margin', $side, $m-sizes);
+}
+
+@each $side in $p-sides {
+  @include create-space('padding', $side, $p-sizes);
 }
