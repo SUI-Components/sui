@@ -42,7 +42,7 @@ For instance:
 @import '~@s-ui/theme/lib/index';
 ```
 
-Find below de compat varible groups available:
+Find below the compat varible groups available:
 
 * [settings-compat-v7/color](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_color.scss)
 * [settings-compat-v7/font](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_font.scss)
