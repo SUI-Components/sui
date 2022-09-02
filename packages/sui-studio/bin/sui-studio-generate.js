@@ -53,7 +53,7 @@ const componentInPascal = toPascalCase(
 const COMPONENT_DIR = `/components/${category}/${component}/`
 const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
 const COMPONENT_ENTRY_JS_POINT_FILE = `${COMPONENT_PATH}src/index.js`
-const COMPONENT_JS_POINT_FILE = `${COMPONENT_PATH}src/${componentInPascal}.js`
+const EXPLICIT_COMPONENT_JS_POINT_FILE = `${COMPONENT_PATH}src/${componentInPascal}.js`
 const COMPONENT_PACKAGE_JSON_FILE = `${COMPONENT_PATH}package.json`
 const COMPONENT_PACKAGE_GITIGNORE_FILE = `${COMPONENT_PATH}.gitignore`
 const COMPONENT_PACKAGE_NPMIGNORE_FILE = `${COMPONENT_PATH}.npmignore`
@@ -249,7 +249,7 @@ test
     explicit ? explicitImportTemplate : componentTemplate
   ),
 
-  explicit && writeFile(COMPONENT_JS_POINT_FILE, componentTemplate),
+  explicit && writeFile(EXPLICIT_COMPONENT_JS_POINT_FILE, componentTemplate),
 
   writeFile(
     COMPONENT_ENTRY_SCSS_POINT_FILE,
