@@ -75,7 +75,7 @@ Provides a basic spacing classes library based in emmet convection.
 In your vertical theme import the library:
 
 ```scss
-@import ~/@s-ui/theme/lib/utils/_spacing.scss
+@import '~/@s-ui/theme/lib/classes'
 ```
 
 This generates margin and padding spacing classes with basic SUI spacing variables
