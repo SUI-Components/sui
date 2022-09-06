@@ -68,6 +68,8 @@ If you need to update any of these variables please pull request.
 
 ## Utility classes
 
+> ⚠️ This is a PoC. May change in the future without notice
+
 **Spacing classes**
 
 Provides a basic spacing classes library based in emmet convection.
