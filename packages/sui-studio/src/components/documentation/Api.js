@@ -1,5 +1,7 @@
+import {Fragment, useEffect, useState} from 'react'
+
 import PropTypes from 'prop-types'
-import React, {Fragment, useEffect, useState} from 'react'
+
 import {fetchComponentsDefinitions} from '../tryRequire.js'
 
 export default function Api({params}) {
@@ -33,7 +35,7 @@ export default function Api({params}) {
           // eslint-disable-line
           'It seem that you might have a prop with a defaultValue but it does not exist as propType'
         )
-        return
+        return null
       }
 
       return (

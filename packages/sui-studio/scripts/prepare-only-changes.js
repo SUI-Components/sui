@@ -3,7 +3,7 @@
 
 const COMPONENTS_PATH = './components'
 const NEW_COMPONENTS_PATH = './tmpComponents'
-const {NO_COMPONENTS_MESSAGE} = require('../config')
+const {NO_COMPONENTS_MESSAGE} = require('../config/index.js')
 
 const log = console.log
 const error = console.error

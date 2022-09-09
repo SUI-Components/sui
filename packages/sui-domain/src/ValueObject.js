@@ -1,5 +1,5 @@
-import inherits from './inherits.js'
 import AnemicModel from './AnemicModel.js'
+import inherits from './inherits.js'
 
 const ValueObject = (function (_AnemicModel) {
   inherits(ValueObject, _AnemicModel)

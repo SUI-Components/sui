@@ -51,6 +51,8 @@ export default /* stylesFor */ async ({
     } else if (`./${componentPath}/src/index.scss` === fileName) {
       return fileName
     }
+
+    return false
   })
   try {
     // extract the `default` property from the ESModule from lazy required styles

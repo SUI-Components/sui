@@ -41,17 +41,33 @@ export const importContexts = ({category, component}) =>
 export const importReactComponent = ({
   category,
   component,
+  subComponentName = null,
   extractDefault = false
-}) =>
-  safeImport({
+}) => {
+  if (typeof subComponentName === 'string') {
+    return safeImport({
+      extractDefault,
+      importFile: () => {
+        return import(
+          /* webpackChunkName: "src-component-[request]" */
+          /* webpackExclude: /\/node_modules\/(.*)\/src\/(.*)\/index.js$/ */
+          `${__BASE_DIR__}/components/${category}/${component}/src/${subComponentName}/index.js`
+        )
+      }
+    })
+  }
+
+  return safeImport({
     extractDefault,
-    importFile: () =>
-      import(
+    importFile: () => {
+      return import(
         /* webpackChunkName: "src-[request]" */
         /* webpackExclude: /\/node_modules\/(.*)\/src\/index$/ */
         `${__BASE_DIR__}/components/${category}/${component}/src/index`
       )
+    }
   })
+}
 
 const importDemo = ({category, component}) =>
   safeImport({

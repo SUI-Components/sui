@@ -1,6 +1,6 @@
 /* global __BASE_DIR__ */
 
-import {safeImport} from './utils'
+import {safeImport} from './utils.js'
 
 export const importGlobals = () => {
   // we use a variable for the file so Webpack

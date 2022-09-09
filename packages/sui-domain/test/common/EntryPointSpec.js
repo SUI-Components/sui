@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import {EntryPointFactory} from '../../src/index.js'
 import {expect} from 'chai'
+
+import {EntryPointFactory} from '../../src/index.js'
 
 const config = {}
 

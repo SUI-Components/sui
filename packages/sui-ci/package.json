@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ci",
-  "version": "1.25.0",
+  "version": "1.26.0",
   "description": "",
   "type": "module",
   "exports": "./src/index.js",
@@ -8,6 +8,7 @@
     "sui-ci": "./bin/sui-ci.js"
   },
   "dependencies": {
+    "@s-ui/mono": "2",
     "node-fetch": "2.6.1",
     "commander": "8.3.0"
   },

@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 1.23.0 (2022-08-29)
+
+
+### Features
+
+* **packages/sui-critical-css:** add some logging about critical css extraction ([e68dd66](https://github.com/SUI-Components/sui/commit/e68dd66a799c4b93be47e602b2fdb332bc03324e))
+
+
+
+# 1.22.0 (2022-08-11)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade vite version for sui-svg ([24910e7](https://github.com/SUI-Components/sui/commit/24910e7f36b2c87f258320d4751f543960f80c16))
+
+
+
+# 1.21.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use new critical-css-middleware package ([d2f25a3](https://github.com/SUI-Components/sui/commit/d2f25a3f0bbcda41a60f4c6c8ce7584d5bdb6009))
+
+
+
 # 1.20.0 (2022-05-30)
 
 

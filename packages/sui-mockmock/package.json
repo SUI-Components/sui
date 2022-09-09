@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lib": "babel ./src -d lib --presets sui",
-    "prepare": "npm run lib",
+    "prepublishOnly": "npm run lib",
     "test": "npm run test:client && npm run test:server",
     "test:client": "sui-test browser",
     "test:client:watch": "npm run test:client -- --watch",

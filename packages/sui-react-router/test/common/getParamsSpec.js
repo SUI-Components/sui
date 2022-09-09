@@ -1,6 +1,7 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/__tests__/getParams-test.js
 
 import {expect} from 'chai'
+
 import {getParams} from '../../src/PatternUtils.js'
 
 describe('getParams', () => {

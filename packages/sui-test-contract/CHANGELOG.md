@@ -1,5 +1,71 @@
 # CHANGELOG
 
+# 2.6.0 (2022-08-29)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix branch name with travis env ([111fc31](https://github.com/SUI-Components/sui/commit/111fc31e92420ba7fcd0c0dcf48257e3fd441236))
+
+
+
+# 2.5.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test-contract:** Use SHA as consumer version for pact contracts ([a3836d8](https://github.com/SUI-Components/sui/commit/a3836d8923075bb81b3fe8c906439f1fc166634a))
+
+
+
+# 2.4.0 (2022-07-20)
+
+
+### Features
+
+* **packages/sui-test-contract:** use latest of msw adapter ([3524f14](https://github.com/SUI-Components/sui/commit/3524f149f4a334ab75dc0de4611c3d9439f98c11))
+
+
+
+# 2.3.0 (2022-07-12)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix imports ([090a7db](https://github.com/SUI-Components/sui/commit/090a7dbc644ac0d651c090205cbbbbf8098c1a77))
+* **packages/sui-test-contract:** start using new forked version of pact msw adapter ([b24ce99](https://github.com/SUI-Components/sui/commit/b24ce99279247bbfd2be6237b209b25a0cc43da0))
+
+
+
+# 2.2.0 (2022-07-08)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix bin import ([d0e3a77](https://github.com/SUI-Components/sui/commit/d0e3a77247c0f6df0106c426d5562157a05c89dc))
+
+
+
+# 2.1.0 (2022-06-30)
+
+
+### Features
+
+* **packages/sui-test-contract:** Upgrade msw and pact versions and adapt import ([5a5e2e1](https://github.com/SUI-Components/sui/commit/5a5e2e1e0de4c2a38cd1a4c6812707229165dd0d))
+
+
+
+# 2.0.0 (2022-06-27)
+
+
+### Features
+
+* **packages/sui-test-contract:** add new test contract tool ([08b2fed](https://github.com/SUI-Components/sui/commit/08b2fed5f755459e53b0311db7d31c1bdc94534f))
+* **packages/sui-test-contract:** modify package description ([3603672](https://github.com/SUI-Components/sui/commit/36036722b2070be1567c42ec32107ff29cab3afa))
+* **packages/sui-test-contract:** move publish bin to esm ([1efc828](https://github.com/SUI-Components/sui/commit/1efc8287f768fb5d76da161bba67dc308e388025))
+
+
+
 # 1.3.0 (2022-03-03)
 
 

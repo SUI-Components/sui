@@ -1,5 +1,7 @@
 import {Component} from 'react'
+
 import PropTypes from 'prop-types'
+
 import SUIContext from '@s-ui/react-context'
 
 export default context => Target =>

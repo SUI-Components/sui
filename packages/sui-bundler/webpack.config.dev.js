@@ -16,13 +16,11 @@ const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
 
 const {resolveLoader} = require('./shared/resolve-loader.js')
+const createBabelRules = require('./shared/module-rules-babel.js')
 
-const EXCLUDED_FOLDERS_REGEXP = new RegExp(
-  `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
-)
 const outputPath = path.join(process.cwd(), 'dist')
 
-const {CI = false} = process.env
+const {CI = false, PWD = ''} = process.env
 
 process.env.NODE_ENV = 'development'
 
@@ -31,7 +29,7 @@ process.env.NODE_ENV = 'development'
 /** @type {WebpackConfig} */
 const webpackConfig = {
   mode: 'development',
-  context: path.resolve(process.env.PWD, 'src'),
+  context: path.resolve(PWD, 'src'),
   resolve: {
     alias: {
       ...defaultAlias,
@@ -81,52 +79,7 @@ const webpackConfig = {
   resolveLoader,
   module: {
     rules: cleanList([
-      {
-        test: /\.(ts|js)x?$/,
-        exclude: EXCLUDED_FOLDERS_REGEXP,
-        use: [
-          {
-            loader: require.resolve('swc-loader'),
-            options: {
-              minify: true,
-              jsc: {
-                parser: {
-                  syntax: 'typescript',
-                  tsx: true,
-                  dynamicImport: true,
-                  privateMethod: true,
-                  functionBind: true,
-                  exportDefaultFrom: true,
-                  exportNamespaceFrom: true,
-                  decorators: true,
-                  decoratorsBeforeExport: true,
-                  topLevelAwait: true,
-                  importMeta: true
-                },
-                transform: {
-                  legacyDecorator: true,
-                  react: {
-                    useBuiltins: true,
-                    runtime: 'automatic'
-                  }
-                },
-                target: 'es5',
-                loose: true,
-                externalHelpers: true
-              },
-              env: {
-                targets: {
-                  ie: '11'
-                },
-                dynamicImport: true,
-                loose: true,
-                mode: 'entry',
-                coreJs: 3
-              }
-            }
-          }
-        ]
-      },
+      createBabelRules(),
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([

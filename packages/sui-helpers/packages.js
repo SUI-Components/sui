@@ -58,14 +58,7 @@ const resolveLazyNPMBin = async (binPath, pkg, cwd = process.cwd()) => {
     )
     return getSpawnPromise(
       'npm',
-      [
-        'install',
-        `${pkg}`,
-        '--no-save',
-        '--no-optional',
-        '--no-fund',
-        '--no-audit'
-      ],
+      ['install', `${pkg}`, '--no-save', '--no-fund', '--no-audit'],
       {
         cwd
       }

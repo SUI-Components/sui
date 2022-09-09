@@ -2,13 +2,13 @@
 /* eslint no-console:0 no-unused-vars:0 */
 const program = require('commander')
 const {shell} = require('@tunnckocore/execa')
-const GitUrlParse = require('git-url-parse')
+const gitUrlParse = require('git-url-parse')
 const path = require('path')
 
 program
   .option('-B, --branch <branch>', 'Release branch. Will be master by default')
-  .option('-E, --email <email>', 'Releaser´s email')
-  .option('-N, --name <name>', 'Releaser´s name')
+  .option('-E, --email <email>', "Releaser's email")
+  .option('-N, --name <name>', "Releaser's name")
   .option('-C, --commit <commit>', 'Commit to tag')
   .option('-sci, --skip-ci', 'Skip CI')
   .option('--npm7', 'Is npm 7 project')
@@ -71,7 +71,9 @@ const getNpmInstall = ({
     '--package-lock',
     '--progress false',
     '--no-bin-links',
-    '--ignore-scripts'
+    '--ignore-scripts',
+    '--no-audit',
+    '--no-fund'
   ]
 
   return installCommand.filter(Boolean).join(' ')
@@ -96,7 +98,7 @@ const getNpmInstall = ({
     }
 
     const repoURL = await execute('git config --get remote.origin.url')
-    const gitURL = GitUrlParse(repoURL).toString('https')
+    const gitURL = gitUrlParse(repoURL).toString('https')
     const authURL = new URL(gitURL)
     authURL.username = gitHubToken
 

@@ -1,10 +1,11 @@
-import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
-import React from 'react'
 import {expect} from 'chai'
+
 import {
   render as testingLibraryRender,
   waitForDomChange
 } from '@testing-library/react'
+
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 
 import Head, {HeadProvider} from '../../lib/index'
 descriptorsByEnvironmentPatcher()

@@ -1,5 +1,70 @@
 # CHANGELOG
 
+# 3.49.0 (2022-08-09)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Sync versions of packages across sui ([2888a49](https://github.com/SUI-Components/sui/commit/2888a499b7cdc68bdd474a021d21b3783a551068))
+
+
+
+# 3.48.0 (2022-08-02)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Rollback babel-preset-sui ([8b5ada9](https://github.com/SUI-Components/sui/commit/8b5ada94c63b92b8ade0bf9ade81b1536b876d4c))
+* **packages/babel-preset-sui:** Rollback default target ([b872c3f](https://github.com/SUI-Components/sui/commit/b872c3f92c183541f190303b402bb45349285598))
+
+
+
+# 3.47.0 (2022-08-02)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Use 14 for now as Infojobs didnt upgraded yet ([cf10517](https://github.com/SUI-Components/sui/commit/cf1051719e34f0f8f938aed5717d154eef03d681))
+
+
+
+# 3.46.0 (2022-07-22)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Compile for target node 16 ([a0d6d99](https://github.com/SUI-Components/sui/commit/a0d6d990ab3736fa2d5959d20fea3b2d0b551534))
+* **packages/babel-preset-sui:** Upgrade dependencies ([f9fde3b](https://github.com/SUI-Components/sui/commit/f9fde3be608a12a235f9237cc4a48fe92b3025d4))
+
+
+
+# 3.45.0 (2022-06-21)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade ios and safari versions ([3ce7760](https://github.com/SUI-Components/sui/commit/3ce7760913ca94a163cb1702ab26f6613491ebb9))
+
+
+
+# 3.44.0 (2022-06-14)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Upgrade dependencies ([786dbaf](https://github.com/SUI-Components/sui/commit/786dbafc0f892fb89366c446da583453a249227a))
+
+
+
+# 3.43.0 (2022-06-10)
+
+
+### Features
+
+* **packages/babel-preset-sui:** Avoid publishing tests for babel-preset-sui ([20b842c](https://github.com/SUI-Components/sui/commit/20b842cbf4ae67a8963eccee1d1245f212a95c8f))
+
+
+
 # 3.42.0 (2022-05-30)
 
 

@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
+
 import PropTypes from 'prop-types'
+
 import {Link} from '@s-ui/react-router'
-import {fetchMarkdownFile} from '../tryRequire'
-import {FILES} from '../../constants'
+
+import {FILES} from '../../constants.js'
+import {fetchMarkdownFile} from '../tryRequire.js'
 
 const TAB_CLASS = 'sui-StudioTabs-tab'
 const LINK_CLASS = 'sui-StudioTabs-link'

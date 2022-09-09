@@ -1,5 +1,56 @@
 # CHANGELOG
 
+# 3.21.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version for sui-svg ([f1fc286](https://github.com/SUI-Components/sui/commit/f1fc286133d6e8baa725ae390629720c22cc5c04))
+
+
+
+# 3.20.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-svg:** Use Vite latest version with fixes ([aec738d](https://github.com/SUI-Components/sui/commit/aec738d53a180538a84f7473638e46cd61744046))
+
+
+
+# 3.19.0 (2022-07-18)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** Fix typo on the name ([5fcf5b0](https://github.com/SUI-Components/sui/commit/5fcf5b04507e953ce217b37fa69eefc40bce7791))
+
+
+### Features
+
+* **packages/sui-svg:** Use Vite 3 ([636845e](https://github.com/SUI-Components/sui/commit/636845ea3e6791bff33ae3ebec63a61f79d70c39))
+
+
+
+# 3.18.0 (2022-06-17)
+
+
+### Features
+
+* **packages/sui-svg:** Avoid warnings and add comment to avoid removing import ([13b07e3](https://github.com/SUI-Components/sui/commit/13b07e36fe6413e8c7ba24c41061ff5d0a90ecd7))
+* **packages/sui-svg:** Upgrade Vite patch version ([1858a86](https://github.com/SUI-Components/sui/commit/1858a86362db731cfa5eab1be14cd152bfeb23bf))
+
+
+
+# 3.17.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-svg:** Better logging for Vite ([6edeb4d](https://github.com/SUI-Components/sui/commit/6edeb4d54ad73d103dba3999fa972dd607246ab4))
+
+
+
 # 3.16.0 (2022-06-07)
 
 

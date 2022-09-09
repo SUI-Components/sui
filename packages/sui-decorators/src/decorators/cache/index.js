@@ -1,11 +1,9 @@
-import isNode from '../../helpers/isNode'
-import stringOrIntToMs from '../../helpers/stringOrIntToMs'
-
-import {inMemory} from './handlers/inMemory'
-import {inRedis} from './handlers/inRedis'
-
-import LRU from './algorithms/LRU'
-import RedisLRU from './algorithms/Redis'
+import isNode from '../../helpers/isNode.js'
+import stringOrIntToMs from '../../helpers/stringOrIntToMs.js'
+import LRU from './algorithms/LRU.js'
+import RedisLRU from './algorithms/Redis.js'
+import {inMemory} from './handlers/inMemory.js'
+import {inRedis} from './handlers/inRedis.js'
 
 const ALGORITHMS = {LRU: 'lru'}
 const DEFAULT_TTL = 500

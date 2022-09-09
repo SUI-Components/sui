@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useContext } from 'react'
+
 import InitialPropsContext from './initialPropsContext'
+import { ClientPageComponent, DoneImportingPageCallback, ReactRouterTypes, WithInitialPropsComponent } from './types'
 import withInitialProps from './withInitialProps'
-import { ClientPageComponent, ReactRouterTypes, DoneImportingPageCallback, WithInitialPropsComponent } from './types'
 
 const EMPTY_GET_INITIAL_PROPS = async (): Promise<object> => ({})
 

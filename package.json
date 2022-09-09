@@ -12,17 +12,17 @@
     "packages/*"
   ],
   "scripts": {
-    "phoenix": "npx @s-ui/mono phoenix",
-    "co": "sui-mono commit",
+    "phoenix": "npx @s-ui/mono phoenix && npx -y ultra-runner --raw --recursive prepublishOnly &>/dev/null",
+    "co": "npx @s-ui/mono commit",
     "lint": "sui-lint js && sui-lint sass",
     "test": "npm run test:client && npm run test:server",
     "test:client:ci": "npm run test:client",
     "test:server:ci": "npm run test:server",
-    "test:client": "sui-test browser -P 'packages/**/!(server)/*Spec.js'",
+    "test:client": "npx @s-ui/test browser -P 'packages/**/!(server)/*Spec.js'",
     "test:client:watch": "npm run test:client -- --watch",
-    "test:server": "sui-test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
+    "test:server": "npx @s-ui/test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
     "test:server:watch": "npm run test:server -- --watch",
-    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx sui-test e2e --baseUrl=http://localhost:1234",
+    "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx @s-ui/test-e2e --baseUrl=http://localhost:1234",
     "pre-commit": "sui-lint js --staged && sui-lint sass --staged",
     "pre-push": "npm run test",
     "commit-msg": "validate-commit-msg"
@@ -30,10 +30,8 @@
   "devDependencies": {
     "@babel/cli": "7",
     "@s-ui/lint": "4",
-    "@s-ui/mono": "2",
     "@s-ui/precommit": "3",
     "@s-ui/react-context": "1",
-    "@s-ui/test": "8",
     "chai": "4.3.6",
     "react": "17",
     "rimraf": "3.0.2",

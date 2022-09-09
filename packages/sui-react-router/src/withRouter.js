@@ -1,6 +1,7 @@
 // @ts-check
 
 import hoistNonReactStatics from 'hoist-non-react-statics'
+
 import {useRouter} from './hooks.js'
 
 /**

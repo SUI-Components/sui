@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 const program = require('commander')
-const rimraf = require('rimraf')
+const {rmSync} = require('fs')
 const path = require('path')
-const archive = require('../archive')
+const archive = require('../archive/index.js')
+
 require('colors')
 
 const pkg = require(path.join(process.cwd(), 'package.json'))
@@ -47,7 +48,7 @@ const {clean, entryPoint, dockerRegistry, outputFileName} = program.opts()
 
 if (clean) {
   // console.log(' -> Removing ALL previous zip files 🗑 ...'.yellow.bold)
-  rimraf.sync(REMOVE_ZIP_PATH)
+  rmSync(REMOVE_ZIP_PATH, {force: true, recursive: true})
   // console.log(' -> Removed! ✅'.green.bold)
 }
 

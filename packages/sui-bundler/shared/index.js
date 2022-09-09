@@ -1,4 +1,4 @@
-const {config} = require('./config')
+const {config} = require('./config.js')
 
 exports.MAIN_ENTRY_POINT = './app.js'
 exports.config = config

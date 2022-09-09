@@ -21,7 +21,7 @@ Add bundling scripts to your **package.json**
   "name": "my-awesome-package",
   "version": "1.0.0",
   "scripts": {
-    "prepare": "sui-svg build",
+    "prepublishOnly": "sui-svg build",
     "start": "npm run prepare && sui-svg demo"
   }
 }

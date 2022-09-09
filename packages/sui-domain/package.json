@@ -1,12 +1,12 @@
 {
   "name": "@s-ui/domain",
   "type": "module",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "description": "SDK for creating domains",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "babel ./src --out-dir ./lib",
-    "prepare": "npm run lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib",
     "test": "npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",

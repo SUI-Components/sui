@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.26.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-ci:** Add missing dependency ([c43f9bd](https://github.com/SUI-Components/sui/commit/c43f9bd3a97f1aaf6b57a4a1aacb242dace09ae7))
+
+
+
 # 1.25.0 (2022-04-06)
 
 

@@ -1,5 +1,61 @@
 # CHANGELOG
 
+# 8.9.0 (2022-08-16)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix module resolution and avoid get all dependencies from node_modules root ([9b29b1a](https://github.com/SUI-Components/sui/commit/9b29b1ad0e27a129491d44e00b0cd8d90648c9e9))
+
+
+
+# 8.8.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-ssr:** Use latest git-url-parse ([2f7684f](https://github.com/SUI-Components/sui/commit/2f7684f9b75d238236898644e21bec2c9f62a26f))
+
+
+
+# 8.7.0 (2022-07-28)
+
+
+### Features
+
+* **packages/sui-ssr:** Remove noisy messages and stop wasting time ([35a6c36](https://github.com/SUI-Components/sui/commit/35a6c362979e1d5f370fde8e1ca17db5e242e537))
+
+
+
+# 8.6.0 (2022-07-19)
+
+
+### Features
+
+* **packages/sui-ssr:** Check independently if files were copied ([77fe13a](https://github.com/SUI-Components/sui/commit/77fe13ad4ee71e797555bd9bae6ab08c8c68f47d))
+* **packages/sui-ssr:** Release new version with log on copy files ([d2aca8c](https://github.com/SUI-Components/sui/commit/d2aca8c459a65904c625fba5f5dbe4aa2caad47b))
+
+
+
+# 8.5.0 (2022-07-19)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** Catch non important error ([643d652](https://github.com/SUI-Components/sui/commit/643d652e0ba5af0334f6abea6fafb175e69272a0))
+
+
+
+# 8.4.0 (2022-07-19)
+
+
+### Features
+
+* **packages/sui-ssr:** Remove copy-webpack-plugin and rimraf as they're not needed ([cfa5fc7](https://github.com/SUI-Components/sui/commit/cfa5fc74d26225e8c9827485ed6442cd76a1ac42))
+* **packages/sui-ssr:** Return reject to avoid keep executing code ([bb45d92](https://github.com/SUI-Components/sui/commit/bb45d92c95693ec4c39f9042872369d73a0542d9))
+
+
+
 # 8.3.0 (2022-04-26)
 
 

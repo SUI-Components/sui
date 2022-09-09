@@ -1,10 +1,12 @@
 import { useContext, useEffect, useRef, useState } from 'react'
+
 import SUIContext from '@s-ui/react-context'
 import { RouteInfo } from '@s-ui/react-router/src/types'
+
 import {
   ClientPageComponent,
-  WithInitialPropsComponent,
-  InitialProps
+  InitialProps,
+  WithInitialPropsComponent
 } from './types'
 
 const INITIAL_PROPS_KEY = '__INITIAL_PROPS__'

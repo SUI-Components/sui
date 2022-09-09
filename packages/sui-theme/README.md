@@ -42,7 +42,7 @@ For instance:
 @import '~@s-ui/theme/lib/index';
 ```
 
-Find below de compat varible groups available:
+Find below the compat varible groups available:
 
 * [settings-compat-v7/color](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_color.scss)
 * [settings-compat-v7/font](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_font.scss)
@@ -63,3 +63,41 @@ Find below de compat varible groups available:
 ## Update
 
 If you need to update any of these variables please pull request.
+
+
+
+## Utility classes
+
+> ⚠️ This is a PoC. May change in the future without notice
+
+**Spacing classes**
+
+Provides a basic spacing classes library based in emmet convection.
+
+In your vertical theme import the library:
+
+```scss
+@import '~/@s-ui/theme/lib/classes'
+```
+
+This generates margin and padding spacing classes with basic SUI spacing variables
+
+```scss
+  .m-m {
+    margin: 8px;
+  }
+  .m-s {
+    margin: 4px;
+  }
+
+...
+
+  .mt-m {
+    margin-top: 8px;
+  }
+  .mt-s {
+    margin-top: 4px;
+  }
+
+...
+```

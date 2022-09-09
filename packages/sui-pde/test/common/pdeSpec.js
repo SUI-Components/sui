@@ -1,12 +1,13 @@
 import {expect} from 'chai'
-import {PDE as SuiPDE} from '../../src/index.js'
-import OptimizelyAdapter from '../../src/adapters/optimizely/index.js'
-import MultipleOptimizelyAdapter from '../../src/adapters/optimizely/multiple.js'
-import DefaultAdapter from '../../src/adapters/default.js'
 import sinon from 'sinon'
-import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
 
 import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher.js'
+
+import DefaultAdapter from '../../src/adapters/default.js'
+import OptimizelyAdapter from '../../src/adapters/optimizely/index.js'
+import MultipleOptimizelyAdapter from '../../src/adapters/optimizely/multiple.js'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
+import {PDE as SuiPDE} from '../../src/index.js'
 
 descriptorsByEnvironmentPatcher()
 

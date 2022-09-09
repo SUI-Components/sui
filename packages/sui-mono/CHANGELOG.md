@@ -1,5 +1,41 @@
 # CHANGELOG
 
+# 2.31.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-mono:** Use latest git-url-parse ([bc7327c](https://github.com/SUI-Components/sui/commit/bc7327c642f53e314ad22856b10b3d3206d8670e))
+
+
+
+# 2.30.0 (2022-06-22)
+
+
+### Features
+
+* **packages/sui-mono:** Remove linter warnings ([de481b4](https://github.com/SUI-Components/sui/commit/de481b4a8ccad68ac621e224101620b0b4e4d680))
+
+
+
+# 2.29.0 (2022-06-15)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Fix missing promise ([8bbfce4](https://github.com/SUI-Components/sui/commit/8bbfce485c2a5fc0602410bac25c06f1e8168def))
+
+
+
+# 2.28.0 (2022-06-13)
+
+
+### Features
+
+* **packages/sui-mono:** Remove not optional from ci install for swc compatibility ([9e214aa](https://github.com/SUI-Components/sui/commit/9e214aa54c323139cd1ee5709289850e33e164dc))
+
+
+
 # 2.27.0 (2022-05-16)
 
 
