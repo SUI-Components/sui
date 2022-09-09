@@ -1,6 +1,6 @@
 const {config} = require('./config.js')
 
-exports.MAIN_ENTRY_POINT = './app.js'
+exports.MAIN_ENTRY_POINT = './app'
 exports.config = config
 
 exports.cleanList = list => list.filter(Boolean)
