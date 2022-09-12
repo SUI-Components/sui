@@ -1,5 +1,89 @@
 # CHANGELOG
 
+# 4.28.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade deps ([2a7ff99](https://github.com/SUI-Components/sui/commit/2a7ff9901d08f99640aad87d69dd625c427cec05))
+
+
+
+# 4.27.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-lint:** Bump and align dependencies ([ce70f2d](https://github.com/SUI-Components/sui/commit/ce70f2df708cb13ce8338d0f34285f7e3502ad70))
+
+
+
+# 4.26.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-lint:** Disable noisy lint jsx no bind functions for React ([a6d8840](https://github.com/SUI-Components/sui/commit/a6d884053408e85eda9eea1197e4da3764904033))
+
+
+
+# 4.25.0 (2022-07-26)
+
+
+### Features
+
+* **packages/sui-lint:** Integrate deprecated config standard react package ([489ef97](https://github.com/SUI-Components/sui/commit/489ef97cea031c90765f100e2deadfe0fc180c28))
+* **packages/sui-lint:** Stop extending from standard-react ([9543cc7](https://github.com/SUI-Components/sui/commit/9543cc778a66a2bd810a3b91e8427a06e870a1f8))
+* **packages/sui-lint:** Stop extending react config as it is not needed anymore ([7af8767](https://github.com/SUI-Components/sui/commit/7af876733882cca767ec22f77c8cc35394c41bb5))
+
+
+
+# 4.24.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([75cb90b](https://github.com/SUI-Components/sui/commit/75cb90b3845bf5d1e218c379162cd389dd365343))
+* **packages/sui-lint:** Upgrade eslint plugin no only test ([15c14e4](https://github.com/SUI-Components/sui/commit/15c14e46b0563cd983f0d0ddc2e55f0d4a898ef7))
+
+
+
+# 4.23.0 (2022-07-08)
+
+
+### Features
+
+* **packages/sui-lint:** Remove not needed linter packages ([7b292b6](https://github.com/SUI-Components/sui/commit/7b292b65eb7cbc0e04ed97a3255b71c64c920d0a))
+
+
+
+# 4.22.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies for sui-lint with bugfixes ([ac40620](https://github.com/SUI-Components/sui/commit/ac40620f5ada96f7338df442fd65cd320af910b8))
+
+
+
+# 4.21.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([6ecbb27](https://github.com/SUI-Components/sui/commit/6ecbb27a3cc17c2c99b34d67f4355c25d10d9d21))
+
+
+
+# 4.20.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-lint:** Upgrade dependencies ([bb7cf5e](https://github.com/SUI-Components/sui/commit/bb7cf5ed14d7b2142a7259daa6210dc6e49123fb))
+
+
+
 # 4.19.0 (2022-06-07)
 
 

@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 type SUIContextType = React.Context<any>
@@ -20,6 +21,10 @@ SUIContext.wrapper = (Component, displayName): React.ComponentType<any> => {
     : displayName
 
   return hoistNonReactStatics(WrappedComponent, Component)
+}
+
+export function useSuiContext (): React.Context<any> {
+  return React.useContext(SUIContext)
 }
 
 export default SUIContext

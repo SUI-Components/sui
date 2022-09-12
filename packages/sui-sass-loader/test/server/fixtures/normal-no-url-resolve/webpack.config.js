@@ -31,7 +31,7 @@ module.exports = {
             }
           },
           {
-            loader: loader,
+            loader,
             options: {
               includePaths: [path.join(__dirname, 'extra'), 'sass_modules'],
               resolveURLs: false

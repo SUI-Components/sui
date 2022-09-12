@@ -1,6 +1,5 @@
 node_modules/
 lib/
-contract/
 coverage/
 .DS_Store
 npm-debug.log
@@ -19,6 +18,7 @@ packages/sui-studio/test/server/integration/sample-studio/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/components/atom/button/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/public
 packages/sui-studio/test/server/integration/empty-studio/components/fake/componentnvim
-packages/sui-test-contract/contract
 
 !packages/sui-sass-loader/test/server/fixtures/**/node_modules
+
+contract/logs/pact.log

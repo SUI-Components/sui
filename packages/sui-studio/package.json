@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.13.0",
+  "version": "11.21.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -13,7 +13,6 @@
     "@babel/cli": "7",
     "@s-ui/bundler": "9",
     "@s-ui/helpers": "1",
-    "@s-ui/mono": "2",
     "@s-ui/react-context": "1",
     "@s-ui/react-router": "1",
     "@s-ui/test": "8",
@@ -27,7 +26,7 @@
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.11",
     "fs-extra": "10.1.0",
-    "git-url-parse": "11.4.4",
+    "git-url-parse": "12.0.0",
     "hoist-non-react-statics": "3.3.2",
     "just-debounce-it": "1.5.0",
     "just-kebab-case": "1.1.0",

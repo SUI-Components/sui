@@ -1,5 +1,90 @@
 # CHANGELOG
 
+# 9.36.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade deps ([0343819](https://github.com/SUI-Components/sui/commit/03438192ce654e00d67bc32ff683b54a98580ae5))
+
+
+
+# 9.35.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Bump and align dependencies ([977069d](https://github.com/SUI-Components/sui/commit/977069d078bea4603c307c804aa8158e2d0c9031))
+
+
+
+# 9.34.0 (2022-08-04)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Handle correctly build errors ([aff362a](https://github.com/SUI-Components/sui/commit/aff362a9b2dc1aa5e8859aa933f6e79f1f1e797c))
+* **packages/sui-bundler:** Remove compiler close funcitonality ([5f90020](https://github.com/SUI-Components/sui/commit/5f90020152b2fb86da7b8fe692ee06cb099eff0c))
+* **packages/sui-bundler:** Use correctly compiler ([42d7cb0](https://github.com/SUI-Components/sui/commit/42d7cb00fec2aeb4fe581cc36fa0db4719079d79))
+
+
+
+# 9.33.0 (2022-08-02)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Support legacy browsers for now ([ea052d2](https://github.com/SUI-Components/sui/commit/ea052d2b74a63afd91dd5de96ab654ffcc543cc8))
+
+
+
+# 9.32.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([18a93b9](https://github.com/SUI-Components/sui/commit/18a93b9c755720519a25742309ac4c11a95f4a55))
+
+
+
+# 9.31.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Compile for Node 16 target on SSR ([c78c746](https://github.com/SUI-Components/sui/commit/c78c746da0d1326c88bde9d3672c0e5ad7a2f971))
+* **packages/sui-bundler:** Pass more info to babel preset sui from bundler ([2719b87](https://github.com/SUI-Components/sui/commit/2719b872d3e43918a8bef78fc65e1a535d4ed1e3))
+* **packages/sui-bundler:** Upgrade dependencies ([5afa4ab](https://github.com/SUI-Components/sui/commit/5afa4aba24d9c962acecf6e531667d62b87881bd))
+
+
+
+# 9.30.0 (2022-06-20)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([ad68e6e](https://github.com/SUI-Components/sui/commit/ad68e6e8b05e2b9f0efe05f5ed20cc9f0ec5d6e8))
+
+
+
+# 9.29.0 (2022-06-16)
+
+
+### Features
+
+* **packages/sui-bundler:** add sass module rules to lib script ([de9698e](https://github.com/SUI-Components/sui/commit/de9698ef38b28eede7dd0b57ea67aa8c221a3cca))
+
+
+
+# 9.28.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([1faf808](https://github.com/SUI-Components/sui/commit/1faf808221dd5b289c0aa006d561ef23723e1b95))
+
+
+
 # 9.27.0 (2022-06-09)
 
 

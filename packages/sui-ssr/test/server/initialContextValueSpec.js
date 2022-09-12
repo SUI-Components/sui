@@ -1,5 +1,6 @@
 import {expect} from 'chai'
-import {getInitialContextValue} from '../../server/initialContextValue'
+
+import {getInitialContextValue} from '../../server/initialContextValue/index.js'
 
 describe('#getInitialContextValue', () => {
   it('should return an object with the output of the initialValue fn for every context', () => {

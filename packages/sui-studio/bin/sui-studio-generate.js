@@ -88,7 +88,7 @@ import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
-${context ? '' : "import Component from '../src/index'"}
+${context ? '' : "import Component from '../src/index.js'"}
 
 ${context ? "import '@s-ui/studio/src/patcher-mocha'" : ''}
 
@@ -197,7 +197,7 @@ test
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npm run build:js && npm run build:styles",
+    "prepublishOnly": "rimraf lib && npm run build:js && npm run build:styles",
     "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },

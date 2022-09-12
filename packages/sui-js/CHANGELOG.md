@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 2.26.0 (2022-06-28)
+
+
+### Features
+
+* **packages/sui-js:** Added util to shuffle an array ([74171ac](https://github.com/SUI-Components/sui/commit/74171acc05cbc339fc9a0c19bc0ba5bd2c23416f))
+* **packages/sui-js:** change implementation to avoid lint errors and added test ([ab8f758](https://github.com/SUI-Components/sui/commit/ab8f758dedcd219e0abc980195943bf4f2fae0e8))
+* **packages/sui-js:** inmutable shuffle array ([35aeb73](https://github.com/SUI-Components/sui/commit/35aeb73bfc06d97c40224aed91c2e9222de3656b))
+* **packages/sui-js:** restore sinon stubs ([4f6bf7c](https://github.com/SUI-Components/sui/commit/4f6bf7c9aca3eadb37d40d2fb1a3e7f32f53007b))
+
+
+
 # 2.25.0 (2022-03-01)
 
 

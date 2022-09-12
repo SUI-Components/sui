@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test-e2e",
-  "version": "1.10.0",
+  "version": "1.14.0",
   "description": "",
   "main": "lib/index.js",
   "type": "module",
@@ -10,14 +10,14 @@
   "scripts": {
     "postpublish": "make build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lib": "babel --out-dir ./lib  ./src",
-    "prepare": "npm run lib"
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib"
   },
   "dependencies": {
-    "@testing-library/cypress": "8.0.2",
+    "@testing-library/cypress": "8.0.3",
     "colors": "1.4.0",
     "commander": "8.3.0",
-    "cypress": "8.7.0",
+    "cypress": "10.4.0",
     "cypress-file-upload": "5.0.8"
   },
   "keywords": [],

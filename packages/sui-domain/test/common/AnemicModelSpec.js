@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import {Entity, ValueObject} from '../../src/index.js'
 import {expect} from 'chai'
+
+import {Entity, ValueObject} from '../../src/index.js'
 
 class TestValueObject extends ValueObject {
   testMethodVO() {

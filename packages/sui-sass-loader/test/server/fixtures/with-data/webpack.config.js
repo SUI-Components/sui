@@ -24,7 +24,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           cssLoader,
           {
-            loader: loader,
+            loader,
             options: {
               includePaths: [path.join(__dirname, 'extra'), 'sass_modules'],
               data: '@import "_variables.scss";'

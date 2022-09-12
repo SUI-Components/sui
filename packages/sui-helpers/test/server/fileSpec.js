@@ -1,9 +1,11 @@
-import {expect} from 'chai'
-import {writeFile, removeFile} from '../../file.js'
-import filesystem from 'fs'
+import fs from 'fs/promises'
+import path from 'path'
 
-const fs = filesystem.promises
-const pathOfFile = `${__dirname}/a.txt`
+import {expect} from 'chai'
+
+import {removeFile, writeFile} from '../../file.js'
+
+const pathOfFile = path.join(__dirname, 'a.txt')
 
 describe('[sui-helpers] file.js utils', () => {
   describe('writeFile', () => {

@@ -1,5 +1,81 @@
 # CHANGELOG
 
+# 11.21.0 (2022-08-31)
+
+
+### Features
+
+* **packages/sui-studio:** add support for subcomponents context mapping ([8d4e005](https://github.com/SUI-Components/sui/commit/8d4e00590c3502aae7f6e3954f3e91568da91f87))
+
+
+
+# 11.20.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-studio:** Remove sui-mono dependency ([c61d0d9](https://github.com/SUI-Components/sui/commit/c61d0d97908ed668c1f256b89f29e8a13182913e))
+
+
+
+# 11.19.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-studio:** Use latest git-url-parse ([48211d9](https://github.com/SUI-Components/sui/commit/48211d9a2bd8c8068ef0acc611d225a3224762c9))
+
+
+
+# 11.18.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-studio:** Update template ([d9907e2](https://github.com/SUI-Components/sui/commit/d9907e257cac50936ce1afa81c70b30a67a6cb84))
+
+
+
+# 11.17.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-studio:** Change name to be sure it is published ([2b79954](https://github.com/SUI-Components/sui/commit/2b799546b607a5d06e23de54059eaabe280442ec))
+
+
+
+# 11.16.0 (2022-07-21)
+
+
+### Features
+
+* **packages/sui-studio:** Remove not needed code ([80dbb62](https://github.com/SUI-Components/sui/commit/80dbb627c439d8f2029bb2523570ce735c282ace))
+* **packages/sui-studio:** Use for now prepare script on generating components ([fcf42ba](https://github.com/SUI-Components/sui/commit/fcf42bae2db773a75449eed508587198a80a05a5))
+* **packages/sui-test-e2e:** Disable video if not needed ([d2ee56c](https://github.com/SUI-Components/sui/commit/d2ee56cdb48da47cb36ba3cd56c6780bd79809d5))
+
+
+
+# 11.15.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-studio:** add .js extension to Component import on test code ([5ac9d65](https://github.com/SUI-Components/sui/commit/5ac9d65cd37b3ec11e6e0c35a0bd24c4fa99ac45))
+
+
+
+# 11.14.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-studio:** Add more info about time used for copying files ([33b93aa](https://github.com/SUI-Components/sui/commit/33b93aab2de7ebc1528a38f1067bae44e556e2d2))
+* **packages/sui-studio:** Use correct label ([4c6d35c](https://github.com/SUI-Components/sui/commit/4c6d35c20990d749594f63c2182b33119e666f7b))
+* **packages/sui-studio:** Use correct timeEnd ([6ca93e5](https://github.com/SUI-Components/sui/commit/6ca93e5a4933b88203428d40de2cb2cd5dafa643))
+
+
+
 # 11.13.0 (2022-06-09)
 
 

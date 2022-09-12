@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types'
 import {useEffect} from 'react'
+
+import PropTypes from 'prop-types'
 
 const createLinkElement = () => {
   const linkElement = document.createElement('link')
@@ -29,5 +30,6 @@ export default function Style({children, id}) {
 }
 
 Style.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  id: PropTypes.string
 }

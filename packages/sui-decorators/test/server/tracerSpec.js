@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import {expect} from 'chai'
 import sinon from 'sinon'
-import {inlineError, tracer} from '../../src'
-import {ConsoleReporter} from '../../src/decorators/tracer/reporters/ConsoleReporter'
+
+import {ConsoleReporter} from '../../src/decorators/tracer/reporters/ConsoleReporter.js'
+import {inlineError, tracer} from '../../src/index.js'
 
 let fnSpy
 

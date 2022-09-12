@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 2.7.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-domain:** Force new version ([8d127fc](https://github.com/SUI-Components/sui/commit/8d127fc2682d1f0f9afd00e37bb1e3f5e5e79012))
+* **packages/sui-domain:** Rollback sui-domain ([f38baf6](https://github.com/SUI-Components/sui/commit/f38baf66346561b83f4ca42c0a3f8f28cccd8734))
+
+
+
+# 2.6.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-domain:** Use normal code instead transpiled again ([6b0c7d4](https://github.com/SUI-Components/sui/commit/6b0c7d4816ba8d9cb52cb77ea4e2ec323e2cbdbc))
+
+
+
 # 2.5.0 (2022-04-05)
 
 

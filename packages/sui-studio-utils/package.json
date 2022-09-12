@@ -4,8 +4,8 @@
   "description": "Set of utils made to be used on the desired studios",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "babel ./src --out-dir ./lib",
-    "prepare": "npm run lib"
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",

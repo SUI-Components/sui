@@ -1,7 +1,8 @@
-import React, {useEffect, useRef} from 'react'
-import PropTypes from 'prop-types'
+import {memo, useEffect, useRef} from 'react'
+
 import cx from 'classnames'
 import debounce from 'just-debounce-it'
+import PropTypes from 'prop-types'
 
 const CODE_MIRROR_OPTIONS = {
   lineNumbers: true,
@@ -50,4 +51,4 @@ CodeEditor.propTypes = {
   playground: PropTypes.string
 }
 
-export default React.memo(CodeEditor)
+export default memo(CodeEditor)

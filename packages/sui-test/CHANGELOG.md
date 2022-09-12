@@ -1,5 +1,69 @@
 # CHANGELOG
 
+# 8.23.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test:** Bump and align dependencies ([f8779a3](https://github.com/SUI-Components/sui/commit/f8779a3b960108f274bdaec4bff0d94b4ba51a8d))
+
+
+
+# 8.22.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([4dc2112](https://github.com/SUI-Components/sui/commit/4dc211291292d18a79ea7fc178d646f743d2caa8))
+
+
+
+# 8.21.0 (2022-06-23)
+
+
+### Features
+
+* **packages/sui-test:** Prepare for release ([a940170](https://github.com/SUI-Components/sui/commit/a94017022fcf9b4ff05effd2dc44657eaaf4441f))
+* **packages/sui-test:** Use mocha@10 ([39b2f88](https://github.com/SUI-Components/sui/commit/39b2f881bec9eacbacbb02b1de269746f6adeb29))
+
+
+
+# 8.20.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-test:** Patch mocks folder for msw contract new tool ([7a6d36f](https://github.com/SUI-Components/sui/commit/7a6d36fd048e806eb251782b3e6dbb1245dd7c7d))
+
+
+
+# 8.19.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([d51c9fd](https://github.com/SUI-Components/sui/commit/d51c9fdb2b833954aa3495f396d070c67fe99907))
+
+
+
+# 8.18.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** Add files to be published ([043f954](https://github.com/SUI-Components/sui/commit/043f9549bb7e819e575bfe9003b587660aaf0b96))
+
+
+
+# 8.17.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** force new release ([3c48b75](https://github.com/SUI-Components/sui/commit/3c48b75764c3c75d38d97908ee74a3e6f3f5d188))
+
+
+
 # 8.16.0 (2022-06-09)
 
 

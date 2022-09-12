@@ -1,9 +1,9 @@
 /* eslint-disable no-return-assign, no-unused-expressions */
-import sinon from 'sinon'
 import {expect} from 'chai'
+import sinon from 'sinon'
 
-import cache from '../../src/decorators/cache'
-import inlineError from '../../src/decorators/error'
+import cache from '../../src/decorators/cache/index.js'
+import inlineError from '../../src/decorators/error.js'
 
 describe('Cache in browser', () => {
   it('Should exist', () => {
@@ -11,7 +11,7 @@ describe('Cache in browser', () => {
   })
 
   describe('should be able use others method in this instance', () => {
-    it('return the response of other instance´s method', () => {
+    it('return the response of other instances method', () => {
       class Buz {
         constructor() {
           this.rnd = () => Math.random()

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
-import Tabs from './Tabs'
+
 import Tab from './Tab'
+import Tabs from './Tabs'
 
 const ContextButtons = ({ctxt, onContextChange, selected = 0}) => {
   const contextKeys = Object.keys(ctxt)

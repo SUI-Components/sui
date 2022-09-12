@@ -19,7 +19,7 @@ $ npm install @s-ui/js-compiler --save-dev
 
 ```json
 "scripts": {
-  "prepare": "sui-js-compiler"
+  "prepublishOnly": "sui-js-compiler"
 }
 ```
 
