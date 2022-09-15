@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.7.0 (2022-09-15)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** prevent build error on server given a sub dep upgrade ([e5cab96](https://github.com/SUI-Components/sui/commit/e5cab96f514fcb2ed00d2c1a5a16e9ca5a696039))
+
+
+
 # 2.6.0 (2022-08-29)
 
 
