@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "8.9.0",
+  "version": "8.10.0-beta.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "@s-ui/critical-css": "1",
+    "@s-ui/critical-css-middleware": "1",
     "@s-ui/hoc": "1",
     "@tunnckocore/execa": "5.2.7",
     "archiver": "5.3.0",
