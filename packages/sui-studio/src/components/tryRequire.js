@@ -50,7 +50,7 @@ export const importReactComponent = ({
       importFile: () => {
         return import(
           /* webpackChunkName: "src-component-[request]" */
-          /* webpackExclude: /\/node_modules\/(.*)\/src\/(.*)\/index.js$/ */
+          /* webpackExclude: /\/node_modules\/(.*)\/src\/(.*)$/ */
           `${__BASE_DIR__}/components/${category}/${component}/src/${subComponentName}/index.js`
         )
       }
