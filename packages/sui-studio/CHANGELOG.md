@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.22.0 (2022-09-15)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** exclude all node_modules src files ([d1c4ae0](https://github.com/SUI-Components/sui/commit/d1c4ae00e3c495ada4989cb85ee8d95455a69f16))
+
+
+
 # 11.21.0 (2022-08-31)
 
 
