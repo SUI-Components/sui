@@ -81,8 +81,10 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  const {private: isPrivatePackage, config: localPackageConfig} =
-    getPackageJson(cwd, true)
+  const {
+    private: isPrivatePackage,
+    config: localPackageConfig
+  } = getPackageJson(cwd, true)
 
   await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
@@ -91,9 +93,8 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
 
   // Add [skip ci] to the commit message to avoid CI build
   // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
-  const commitMsg = `release(${packageScope}): v${version}${
-    skipCi ? ' [skip ci]' : ''
-  }`
+  const skipCiPrefix = skipCi ? '[skip ci] ' : ''
+  const commitMsg = `${skipCiPrefix}release(${packageScope}): v${version}`
 
   await exec(`git commit -m "${commitMsg}"`, {cwd})
 
