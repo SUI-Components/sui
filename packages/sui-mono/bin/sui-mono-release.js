@@ -91,8 +91,8 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
 
   // Add [skip ci] to the commit message to avoid CI build
   // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
-  const skipCiPrefix = skipCi ? '[skip ci] ' : ''
-  const commitMsg = `${skipCiPrefix}release(${packageScope}): v${version}`
+  const skipCiSuffix = skipCi ? ' [skip ci]' : ''
+  const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
 
   await exec(`git commit -m "${commitMsg}"`, {cwd})
 
