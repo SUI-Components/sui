@@ -22,7 +22,6 @@
   "devDependencies": {
     "css-loader": "6",
     "mini-css-extract-plugin": "2",
-    "rimraf": "3",
     "sass": "1",
     "sass-loader": "12",
     "webpack": "5"
