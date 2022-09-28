@@ -1,11 +1,10 @@
 const assert = require('assert')
-const fs = require('fs')
+const {readFileSync, rm} = require('fs')
 const path = require('path')
 const webpack = require('webpack')
-const rmdir = require('rimraf')
 
 const clearCRLF = raw => raw.replace(/\r/g, '').trim()
-const readFile = file => fs.readFileSync(path.join(__dirname, file), 'utf8')
+const readFile = file => readFileSync(path.join(__dirname, file), 'utf8')
 
 function handleError(err, stats, done) {
   if (err) {
@@ -59,7 +58,7 @@ describe('test sass-loader', function () {
   const runtimeDir = path.join(__dirname, 'runtime')
 
   before(done => {
-    rmdir(runtimeDir, done)
+    rm(runtimeDir, {force: true, recursive: true}, done)
   })
 
   it('should load normal sass file', function (done) {
