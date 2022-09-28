@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.4.0 (2022-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-sass-loader:** remove not used scripts ([a070d74](https://github.com/SUI-Components/sui/commit/a070d744cc9cb6a6a7dc0b471e5d0bb4695dedda))
+
+
+
 # 1.3.0 (2022-05-30)
 
 
