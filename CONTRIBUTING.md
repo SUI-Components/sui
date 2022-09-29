@@ -4,6 +4,10 @@ The following is a set of guidelines for contributing to SUI's packages.
 
 ## What should I know before I get started?
 
+### Commits
+
+Use `npm run co` for commits in order to follow our naming convention
+
 ### Environment
 
 To develop new packages, you only need to install `node` and `npm`. Find below the default versions this repo was built with:
