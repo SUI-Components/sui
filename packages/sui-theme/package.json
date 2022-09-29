@@ -4,8 +4,7 @@
   "description": "Generic theme to add styles to all SUI components",
   "main": "lib/index.scss",
   "scripts": {
-    "clean:lib": "npx rimraf lib",
-    "lib": "cp -R src lib",
+    "lib": "rm -rf ./lib && cp -R src lib",
     "prepublishOnly": "npm run lib"
   },
   "license": "ISC",
