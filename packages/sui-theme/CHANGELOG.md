@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.124.0 (2022-09-29)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** remove not required rimraf dependency ([d648db5](https://github.com/SUI-Components/sui/commit/d648db5bda012c3af40dde387ef678b9ba12bd2d))
+
+
+
 # 8.123.0 (2022-09-05)
 
 
