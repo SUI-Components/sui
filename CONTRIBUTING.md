@@ -7,8 +7,8 @@ The following is a set of guidelines for contributing to SUI's packages.
 ### Environment
 
 To develop new packages, you only need to install `node` and `npm`. Find below the default versions this repo was built with:
-* node: `10`
-* npm: `6`
+* node: `18`
+* npm: `8`
 
 ### Monorepo
 
