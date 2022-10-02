@@ -36,9 +36,9 @@ Packages must be properly named. 3 name are
 * Folder: `./packages/sui-my-example-package`
 * NPM name: `@s-ui/my-example-package`
 
-### Versionning
+### Versioning
 
-We follow the [comver](https://github.com/staltz/comver) versionning this system (X.y.0).
+We follow the [comver](https://github.com/staltz/comver) versioning this system (X.y.0).
 
 Packages first version must be `1.0.0` (not 0.0.0)
 
