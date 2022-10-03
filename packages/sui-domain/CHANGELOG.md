@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.9.0 (2022-10-03)
+
+
+### Bug Fixes
+
+* **packages/sui-domain:** rollback axios version ([b87a030](https://github.com/SUI-Components/sui/commit/b87a030005df1bcac34fd7a5b43bd0248e0b7d34))
+
+
+
 # 2.8.0 (2022-10-03)
 
 
