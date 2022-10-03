@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.23.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-studio:** Update node-fetch to latest v2 version ([c2fa9e5](https://github.com/SUI-Components/sui/commit/c2fa9e55ad55240027b12c4e0b8adda3c408ec77))
+
+
+
 # 11.22.0 (2022-09-15)
 
 
