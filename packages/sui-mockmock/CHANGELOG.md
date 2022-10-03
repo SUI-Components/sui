@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.2.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-mockmock:** Update axios to latest version ([4635dca](https://github.com/SUI-Components/sui/commit/4635dca20ec94b5fce834fba0c8932384b5c1997))
+
+
+
 # 2.1.0 (2021-11-30)
 
 
