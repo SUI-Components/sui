@@ -7,7 +7,7 @@ import {chmod, writeFile} from 'fs/promises'
 import {join} from 'path'
 
 import get from 'dlv'
-import set from 'dset'
+import {dset as set} from 'dset'
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd
