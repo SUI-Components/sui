@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.24.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-decorators:** update redis-mock and redis dependencies ([dd6bdcf](https://github.com/SUI-Components/sui/commit/dd6bdcf2abad4f9b4594a11fc8ffb0aa3377da6a))
+
+
+
 # 3.23.0 (2022-02-18)
 
 
