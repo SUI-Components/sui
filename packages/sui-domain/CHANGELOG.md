@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.8.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-domain:** Update axios to latest version ([9ab942f](https://github.com/SUI-Components/sui/commit/9ab942fb3569ba57a2dace518298ead47823d60c))
+
+
+
 # 2.7.0 (2022-08-02)
 
 
