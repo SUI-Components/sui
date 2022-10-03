@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.24.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** Update node-fetch to latest v2 version ([d47dfdb](https://github.com/SUI-Components/sui/commit/d47dfdb9cfeb2263888f64d79a9231461306ccae))
+
+
+
 # 1.23.0 (2022-08-29)
 
 
