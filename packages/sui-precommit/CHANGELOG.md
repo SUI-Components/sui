@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.2.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-precommit:** update dset to latest version ([c83da15](https://github.com/SUI-Components/sui/commit/c83da1561e6cce090aa85fc0b3b2f96d6b5aa998))
+
+
+
 # 3.1.0 (2022-02-01)
 
 
