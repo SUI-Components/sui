@@ -18,7 +18,7 @@ const PACKAGE_VERSION_INCREMENT = {
   MAJOR: 3
 }
 
-const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf']
+const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
 
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
