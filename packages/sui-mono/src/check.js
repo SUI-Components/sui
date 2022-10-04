@@ -18,14 +18,18 @@ const PACKAGE_VERSION_INCREMENT = {
   MAJOR: 3
 }
 
-const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
-
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
   return [body, footer].some(
     msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE')
   )
+}
+
+const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
+
+const isCommitReleaseTrigger = commit => {
+  return COMMIT_TYPES_WITH_RELEASE.includes(commit.type)
 }
 
 const flattenForMonopackage = status =>
@@ -75,7 +79,7 @@ const check = () =>
 
           let toPush = null
 
-          if (COMMIT_TYPES_WITH_RELEASE.includes(commit.type)) {
+          if (isCommitReleaseTrigger(commit)) {
             status[pkg].increment = Math.max(
               status[pkg].increment,
               PACKAGE_VERSION_INCREMENT.MINOR
@@ -111,5 +115,6 @@ const check = () =>
 
 module.exports = {
   check,
-  isCommitBreakingChange
+  isCommitBreakingChange,
+  isCommitReleaseTrigger
 }
