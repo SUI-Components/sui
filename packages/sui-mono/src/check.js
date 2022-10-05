@@ -26,9 +26,8 @@ const isCommitBreakingChange = commit => {
   )
 }
 
-const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
-
 const isCommitReleaseTrigger = commit => {
+  const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
   return COMMIT_TYPES_WITH_RELEASE.includes(commit.type)
 }
 
