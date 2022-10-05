@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.34.0 (2022-10-05)
+
+
+### Features
+
+* **packages/sui-mono:** add refactor as commit type that triggers new release ([1e335eb](https://github.com/SUI-Components/sui/commit/1e335ebbb3a4a04766a59744f72f75d01a16a092))
+
+
+
 # 2.33.0 (2022-09-28)
 
 
