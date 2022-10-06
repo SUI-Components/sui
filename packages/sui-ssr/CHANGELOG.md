@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.11.0 (2022-10-06)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix security issue from ua-parser-js ([95e8792](https://github.com/SUI-Components/sui/commit/95e8792df4268f29ef60db850d00622767bd9bfe))
+
+
+
 # 8.10.0 (2022-09-15)
 
 
