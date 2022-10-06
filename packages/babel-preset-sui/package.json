@@ -15,7 +15,7 @@
     "@babel/preset-env": "7.18.10",
     "@babel/preset-react": "7.18.6",
     "@babel/runtime": "7.18.9",
-    "babel-plugin-preval": "5.0.0",
+    "babel-plugin-preval": "5.1.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24"
   },
   "repository": {
