@@ -1,4 +1,4 @@
-import {getStudioLogo} from '../utils'
+import {getStudioLogo} from '@s-ui/studio/src/components/utils'
 
 export default () => (
   <picture
