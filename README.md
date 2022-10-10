@@ -48,3 +48,17 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-test-e2e](./packages/sui-test-e2e) | Zero config e2e testing tool. |
 | [sui-theme](./packages/sui-theme) | Theme system for SUI |
 | [sui-widget-embedder](./packages/sui-widget-embedder) | Widget development server and build for production |
+
+## Available scripts
+
+- `phoenix` - Clean and install all workspace packages and root dependencies.
+- `co` - Do the commits with a prompt that enforces commit message format.
+- `lint` - Checks the format of JS & SASS files
+- `test` - Run components client and server tests
+- `test:client:ci` - Run client tests for CI
+- `test:server:ci` - Run server tests for CI
+- `test:client` - Run client tests
+- `test:client:watch` - Run client tests and watch for changes
+- `test:server` - Run server tests
+- `test:server:watch` - Run server tests and watch for changes
+- `test:e2e` - Run E2E tests
