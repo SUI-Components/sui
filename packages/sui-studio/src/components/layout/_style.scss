@@ -1,6 +1,5 @@
 .sui-Studio {
   display: flex;
-
   &-logo {
     & > svg {
       height: auto;
@@ -11,9 +10,9 @@
   &-sidebar {
     @include breakpoint-from(s) {
       flex: 0 0 $w-sidebar;
-      transform: translate3d(0, 0, 0);
+      width: $w-sidebar;
     }
-
+    top: $t-sidebar-and-main;
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
@@ -21,10 +20,9 @@
     overflow-x: hidden;
     overflow-y: scroll;
     position: fixed;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, 0, 0);
     transition: transform 0.5s ease-in-out;
-    z-index: 9998;
-    width: $w-sidebar;
+    z-index: 50;
 
     &Body {
       width: $w-sidebar;
@@ -32,21 +30,27 @@
     }
 
     &--open {
-      display: block;
-      transform: translate3d(0, 0, 0);
+      transform: translate3d(-100%, 0, 0);
     }
   }
 
   &-main {
     background-color: $bgc-main;
+    position: relative;
+    top: $t-sidebar-and-main;
     width: 100%;
     margin-left: 0;
     min-height: 100vh;
     transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+    z-index: 30;
     @include breakpoint-from(s) {
       width: calc(100% - #{$w-sidebar});
       margin-left: $w-sidebar;
       transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+    }
+    &--open {
+      width: 100%;
+      margin-left: 0;
     }
   }
 
@@ -67,7 +71,7 @@
   background: $c-white;
   display: flex;
   flex-direction: row;
-  padding: 0 16px;
+  padding: 0;
 }
 
 .sui-StudioPreview,
@@ -97,11 +101,37 @@
     margin-top: 8px;
   }
 }
-
-.sui-Studio-navMenu {
-  @include floating-button($c-primary, 56px, 8px);
-  @include breakpoint-from(s) {
-    display: none;
+.sui-Studio-navHeader {
+  width: 100%;
+  padding: 0 8px;
+  display: flex;
+  height: $h-navHeader;
+  position: fixed;
+  top: 0;
+  background: $c-white;
+  align-items: center;
+  border-bottom: solid 1px $c-gray-lightest;
+  z-index: 40;
+  gap: 8px;
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #000;
   }
-  z-index: 9999;
+  h1 {
+    font-size: 16px;
+    margin: 0;
+    display: flex;
+  }
+}
+.sui-Studio-navMenu {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 0;
+  align-items: center;
+  justify-content: center;
 }
