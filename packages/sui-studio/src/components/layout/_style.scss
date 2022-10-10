@@ -10,10 +10,9 @@
   &-sidebar {
     @include breakpoint-from(s) {
       flex: 0 0 $w-sidebar;
-      // transform: translate3d(0, 0, 0);
       width: $w-sidebar;
     }
-    top: $h-navHeader + 4;
+    top: $t-sidebar-and-main;
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
@@ -38,7 +37,7 @@
   &-main {
     background-color: $bgc-main;
     position: relative;
-    top: $h-navHeader + 4;
+    top: $t-sidebar-and-main;
     width: 100%;
     margin-left: 0;
     min-height: 100vh;
