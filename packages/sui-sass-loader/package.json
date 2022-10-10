@@ -21,7 +21,7 @@
     "css-loader": "6",
     "mini-css-extract-plugin": "2",
     "sass": "1",
-    "sass-loader": "12",
+    "sass-loader": "13",
     "webpack": "5"
   }
 }
