@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.25.0 (2022-10-11)
+
+
+### Features
+
+* **packages/sui-studio:** delete excess code ([8f7f5ff](https://github.com/SUI-Components/sui/commit/8f7f5ff34c9756badc0231668553a889b5f2b5a3))
+
+
+
 # 11.24.0 (2022-10-10)
 
 
