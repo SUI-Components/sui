@@ -302,55 +302,6 @@
   cursor: pointer;
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.markdown-body h1 {
-  font-size: 32px;
-}
-
-.markdown-body h1,
-.markdown-body h2 {
-  font-weight: 600;
-}
-
-.markdown-body h2 {
-  font-size: 24px;
-}
-
-.markdown-body h3 {
-  font-size: 20px;
-}
-
-.markdown-body h3,
-.markdown-body h4 {
-  font-weight: 600;
-}
-
-.markdown-body h4 {
-  font-size: 16px;
-}
-
-.markdown-body h5 {
-  font-size: 14px;
-}
-
-.markdown-body h5,
-.markdown-body h6 {
-  font-weight: 600;
-}
-
-.markdown-body h6 {
-  font-size: 12px;
-}
-
 .markdown-body p {
   margin-bottom: 10px;
   margin-top: 0;
@@ -571,41 +522,31 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  font-weight: 600;
+  font-weight: normal;
   line-height: 1.25;
-  margin-bottom: 16px;
-  margin-top: 24px;
+  padding-bottom: 0.4em;
 }
 
 .markdown-body h1 {
-  font-size: 2em;
-}
-
-.markdown-body h1,
-.markdown-body h2 {
+  font-size: 2.25em;
   border-bottom: 1px solid #eaecef;
-  padding-bottom: 0.3em;
 }
 
 .markdown-body h2 {
-  font-size: 1.5em;
+  font-size: 0.875em;
+  font-weight: bold;
+  margin-top: 56px;
+  text-transform: uppercase;
 }
 
 .markdown-body h3 {
-  font-size: 1.25em;
-}
-
-.markdown-body h4 {
   font-size: 1em;
 }
 
-.markdown-body h5 {
-  font-size: 0.875em;
-}
-
+.markdown-body h4,
+.markdown-body h5,
 .markdown-body h6 {
-  color: #6a737d;
-  font-size: 0.85em;
+  font-size: 0.875em;
 }
 
 .markdown-body ol,
@@ -690,11 +631,12 @@
 }
 
 .markdown-body code {
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
-  font-size: 85%;
+  background-color: #f6f8fa;
+  border-radius: 2px;
+  font-size: 0.875em;
   margin: 0;
   padding: 0.2em 0.4em;
+  color: #ff2688;
 }
 
 .markdown-body pre {
