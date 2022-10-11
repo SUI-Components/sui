@@ -460,6 +460,13 @@
   margin-top: 0 !important;
 }
 
+.markdown-body h1:not(:first-child) {
+  font-size: 0.875em;
+  font-weight: bold;
+  margin-top: 56px;
+  text-transform: uppercase; 
+}
+
 .markdown-body > :last-child {
   margin-bottom: 0 !important;
 }
