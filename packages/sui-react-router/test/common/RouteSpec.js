@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 
-import {expect} from 'chai'
 import {renderToString} from 'react-dom/server'
-import {IndexRoute, Router, Route, match} from '../../src/index.js'
+
+import {expect} from 'chai'
+
+import {IndexRoute, match, Route, Router} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {

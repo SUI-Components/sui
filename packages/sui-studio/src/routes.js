@@ -1,12 +1,12 @@
-import {Route, Redirect} from '@s-ui/react-router'
-import Layout from './components/layout'
-import Workbench from './components/workbench'
-import Demo from './components/demo'
-import Documentation from './components/documentation'
-import Api from './components/documentation/Api'
-import MarkdownFile from './components/documentation/MarkdownFile'
+import {Redirect, Route} from '@s-ui/react-router'
 
-import {FILES} from './constants'
+import Demo from './components/demo/index.js'
+import Api from './components/documentation/Api.js'
+import Documentation from './components/documentation/index.js'
+import MarkdownFile from './components/documentation/MarkdownFile.js'
+import Layout from './components/layout/index.js'
+import Workbench from './components/workbench/index.js'
+import {FILES} from './constants.js'
 
 export default (
   <Route>
@@ -27,12 +27,6 @@ export default (
             path="changelog"
             component={props => (
               <MarkdownFile {...props} file={FILES.CHANGELOG} />
-            )}
-          />
-          <Route
-            path="uxdef"
-            component={props => (
-              <MarkdownFile {...props} file={FILES.UX_DEFINITION} />
             )}
           />
         </Route>

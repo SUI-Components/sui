@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+
 import useFeature from '../hooks/useFeature.js'
 
 export default function Feature({

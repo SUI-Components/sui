@@ -1,5 +1,6 @@
 import {expect} from 'chai'
-import {factoryConfigMethods} from '../../src/config'
+
+import {factoryConfigMethods} from '../../src/config.js'
 
 describe('config', () => {
   describe('checkIsMonoPackage', () => {
@@ -105,10 +106,10 @@ describe('config', () => {
       expect(workspaces.length === 0).to.equal(true)
     })
 
-    it('returns Root workspace if config not provided', () => {
+    it('returns "." workspace if config not provided, it is a monopackage', () => {
       const {getWorkspaces} = factoryConfigMethods({})
       const workspaces = getWorkspaces()
-      expect(workspaces).to.deep.equal(['Root'])
+      expect(workspaces).to.deep.equal(['.'])
     })
   })
 })

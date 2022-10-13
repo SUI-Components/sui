@@ -9,6 +9,7 @@ const CWD = process.cwd()
 module.exports = async ({
   ci,
   coverage,
+  headless,
   ignorePattern,
   pattern,
   srcPattern,
@@ -18,8 +19,20 @@ module.exports = async ({
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 
+  /**
+   * @deprecated - Use --headless instead
+   */
   if (ci) {
     config.browsers = ['Firefox']
+  }
+
+  /**
+   * We check the headless flag after the CI flag
+   * so we use the Headless browser if it's present
+   * instead Firefox
+   */
+  if (headless) {
+    config.browsers = ['ChromeHeadless']
   }
 
   if (coverage || ci) {
@@ -45,7 +58,8 @@ module.exports = async ({
 
   config.files = [
     srcPattern ? `${CWD}/${srcPattern}` : '',
-    `${CWD}/${pattern}`
+    `${CWD}/${pattern}`,
+    `${CWD}/public/mockServiceWorker.js`
   ].filter(Boolean)
 
   config.preprocessors = {

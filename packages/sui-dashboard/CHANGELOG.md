@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.34.0 (2022-04-01)
+
+
+### Features
+
+* **packages/sui-dashboard:** update commander version ([d1c0af9](https://github.com/SUI-Components/sui/commit/d1c0af96f521c7a7dac0710b85adbb5dde56c06d))
+
+
+
 # 1.33.0 (2022-02-28)
 
 

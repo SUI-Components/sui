@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  DATE: $(date +%FT%TZ)
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,11 +24,12 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-node@v2
       with:
-        node-version: 16
+        node-version: 18
         registry-url: 'https://registry.npmjs.org'
     - uses: browser-actions/setup-chrome@latest
     - run: sudo apt-get install xvfb
     - run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
+    - run: npx -y ultra-runner --raw --recursive prepublishOnly &>/dev/null
     - run: npm run lint
     - run: npm run test:server:ci
     - run: xvfb-run --auto-servernum npm run test:client:ci
@@ -37,3 +41,35 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
         GITHUB_USER: sui-bot
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  metrics:
+    name: 'Send Metrics to Devhose'
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+    - run: |
+        ./bin/devhose-cli_2.17.0_amd64 deployment \
+          -devhose-tenant "adevinta-spain-fe-github-sui" \
+          -devhose-secret "${{ secrets.DEVHOSE_SECRET }}" \
+          -devhose-dest "mpi" \
+          -application "sui" \
+          -environment "pro" \
+          -facility "sdrn:adevinta:service:adevinta-spain-sui-github" \
+          -id "${{ github.run_id }}" \
+          -source "github" \
+          -started-at "${{ env.DATE }}" \
+          -status "succeeded" \
+          -target-infrastructure "npm" \
+          -target-provider "npm" \
+          -trigger-type "build" \
+          -trigger-source "github" \
+          -resource-type "github" \
+          -resource-service "sdrn:adevinta:service:github" \
+          -accelerate-metrics \
+          -resource-scm-commit "${{ github.sha }}" \
+          -resource-repository "sdrn:adevinta:repo:github.com/${{ github.repository }}"

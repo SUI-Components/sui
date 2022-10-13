@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
 /* eslint no-console:0 */
-import {optimize} from 'svgo'
+import {exec as execWithCallback} from 'child_process'
+import {createRequire} from 'module'
+import {join} from 'path'
+import {promisify} from 'util'
+
 import fg from 'fast-glob'
 import fs from 'fs-extra'
-import {promisify} from 'util'
-import {join} from 'path'
 import toCamelCase from 'just-camel-case'
+import {optimize} from 'svgo'
+
 import {transformAsync} from '@babel/core'
-import {createRequire} from 'module'
-import {exec as execWithCallback} from 'child_process'
 
 import template from '../templates/icon-component.js'
 
@@ -75,7 +77,7 @@ emptyDir(LIB_FOLDER)
   .then(getAllSrcSvgFiles)
   .then(entries =>
     Promise.all([
-      entries.map(file => {
+      entries.map(file =>
         readFile(file, 'utf8')
           .then(transformSvgToReactComponent)
           .then(transformCodeWithBabel)
@@ -84,7 +86,7 @@ emptyDir(LIB_FOLDER)
             console.error(error)
             process.exit(1)
           })
-      })
+      )
     ])
   )
   .then(createIndexFile)

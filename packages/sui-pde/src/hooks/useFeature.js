@@ -1,4 +1,5 @@
 import {useContext} from 'react'
+
 import PdeContext from '../contexts/PdeContext.js'
 import {getPlatformStrategy} from './common/platformStrategies.js'
 
@@ -28,19 +29,21 @@ const trackFeatureFlagViewed = ({
  * @param {function} trackExperimentViewed
  * @param {object} attributes user attributes to take into account for its segmentation
  * @param {object} pde
+ * @param {string} adapterId
  */
 const trackLinkedExperimentsViewed = ({
   linkedExperiments,
   trackExperimentViewed,
   attributes,
-  pde
+  pde,
+  adapterId
 }) => {
   if (!linkedExperiments) return
   linkedExperiments.forEach(experimentName => {
     const variationName = pde.getVariation({
-      experimentName,
-      pde,
-      attributes
+      name: experimentName,
+      attributes,
+      adapterId
     })
     trackExperimentViewed({variationName, experimentName})
   })
@@ -51,9 +54,15 @@ const trackLinkedExperimentsViewed = ({
  * @param {string} featureKey
  * @param {object} attributes
  * @param {string} [queryString] test purposes only
+ * @param {string} adapterId
  * @return {{isActive: boolean}}
  */
-export default function useFeature(featureKey, attributes, queryString) {
+export default function useFeature(
+  featureKey,
+  attributes,
+  queryString,
+  adapterId
+) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
     throw new Error('[useFeature] sui-pde provider is required to work')
@@ -72,12 +81,14 @@ export default function useFeature(featureKey, attributes, queryString) {
 
     const {isActive, linkedExperiments} = pde.isFeatureEnabled({
       featureKey,
-      attributes
+      attributes,
+      adapterId
     })
 
     const variables = pde.getAllFeatureVariables({
       featureKey,
-      attributes
+      attributes,
+      adapterId
     })
 
     trackFeatureFlagViewed({
@@ -89,7 +100,8 @@ export default function useFeature(featureKey, attributes, queryString) {
       linkedExperiments,
       trackExperimentViewed: strategy.trackExperiment,
       pde,
-      attributes
+      attributes,
+      adapterId
     })
     return {isActive, variables}
   } catch (error) {

@@ -1,5 +1,203 @@
 # CHANGELOG
 
+# 11.25.0 (2022-10-11)
+
+
+### Features
+
+* **packages/sui-studio:** delete excess code ([8f7f5ff](https://github.com/SUI-Components/sui/commit/8f7f5ff34c9756badc0231668553a889b5f2b5a3))
+
+
+
+# 11.24.0 (2022-10-10)
+
+
+
+# 11.23.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-studio:** Update node-fetch to latest v2 version ([c2fa9e5](https://github.com/SUI-Components/sui/commit/c2fa9e55ad55240027b12c4e0b8adda3c408ec77))
+
+
+
+# 11.22.0 (2022-09-15)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** exclude all node_modules src files ([d1c4ae0](https://github.com/SUI-Components/sui/commit/d1c4ae00e3c495ada4989cb85ee8d95455a69f16))
+
+
+
+# 11.21.0 (2022-08-31)
+
+
+### Features
+
+* **packages/sui-studio:** add support for subcomponents context mapping ([8d4e005](https://github.com/SUI-Components/sui/commit/8d4e00590c3502aae7f6e3954f3e91568da91f87))
+
+
+
+# 11.20.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-studio:** Remove sui-mono dependency ([c61d0d9](https://github.com/SUI-Components/sui/commit/c61d0d97908ed668c1f256b89f29e8a13182913e))
+
+
+
+# 11.19.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-studio:** Use latest git-url-parse ([48211d9](https://github.com/SUI-Components/sui/commit/48211d9a2bd8c8068ef0acc611d225a3224762c9))
+
+
+
+# 11.18.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-studio:** Update template ([d9907e2](https://github.com/SUI-Components/sui/commit/d9907e257cac50936ce1afa81c70b30a67a6cb84))
+
+
+
+# 11.17.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-studio:** Change name to be sure it is published ([2b79954](https://github.com/SUI-Components/sui/commit/2b799546b607a5d06e23de54059eaabe280442ec))
+
+
+
+# 11.16.0 (2022-07-21)
+
+
+### Features
+
+* **packages/sui-studio:** Remove not needed code ([80dbb62](https://github.com/SUI-Components/sui/commit/80dbb627c439d8f2029bb2523570ce735c282ace))
+* **packages/sui-studio:** Use for now prepare script on generating components ([fcf42ba](https://github.com/SUI-Components/sui/commit/fcf42bae2db773a75449eed508587198a80a05a5))
+* **packages/sui-test-e2e:** Disable video if not needed ([d2ee56c](https://github.com/SUI-Components/sui/commit/d2ee56cdb48da47cb36ba3cd56c6780bd79809d5))
+
+
+
+# 11.15.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-studio:** add .js extension to Component import on test code ([5ac9d65](https://github.com/SUI-Components/sui/commit/5ac9d65cd37b3ec11e6e0c35a0bd24c4fa99ac45))
+
+
+
+# 11.14.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-studio:** Add more info about time used for copying files ([33b93aa](https://github.com/SUI-Components/sui/commit/33b93aab2de7ebc1528a38f1067bae44e556e2d2))
+* **packages/sui-studio:** Use correct label ([4c6d35c](https://github.com/SUI-Components/sui/commit/4c6d35c20990d749594f63c2182b33119e666f7b))
+* **packages/sui-studio:** Use correct timeEnd ([6ca93e5](https://github.com/SUI-Components/sui/commit/6ca93e5a4933b88203428d40de2cb2cd5dafa643))
+
+
+
+# 11.13.0 (2022-06-09)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Rollback installing on demand dependency ([2f11c94](https://github.com/SUI-Components/sui/commit/2f11c949b4afd3d50f42eac02b6bb0dea27cb121))
+
+
+### Features
+
+* **packages/sui-studio:** Rollback change for now ([4f05bb6](https://github.com/SUI-Components/sui/commit/4f05bb63d04eed7697cd17f88bf63b5b802ce2b4))
+
+
+
+# 11.12.0 (2022-06-07)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Use correct cwd on executing binary ([a263c80](https://github.com/SUI-Components/sui/commit/a263c807f5a7dfcf8d61a4ed7c0e710bec2863fe))
+
+
+### Features
+
+* **packages/sui-studio:** Improve execution times and fix npx usage ([786d3fd](https://github.com/SUI-Components/sui/commit/786d3fd8c79c46fab130a4ae4294236879178d62))
+
+
+
+# 11.11.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-studio:** Install huge dependency only on-demand ([4c6a2c8](https://github.com/SUI-Components/sui/commit/4c6a2c87d1c4679dfc1e8a3250d61c7e68e78b96))
+
+
+
+# 11.10.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-studio:** Upgrade dependencies across packages ([6a6ee12](https://github.com/SUI-Components/sui/commit/6a6ee12a3b0c73fc7ba0c33b8b60b3bc44f674f7))
+
+
+
+# 11.9.0 (2022-05-05)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** recorder import, first i put 3rd party ([765d9bc](https://github.com/SUI-Components/sui/commit/765d9bc36449364fd3a8e600f86702e166c2bb27))
+* **packages/sui-studio:** update studio text program help ([0d87fa4](https://github.com/SUI-Components/sui/commit/0d87fa49cd243a6b335c3bfefc89efba315349d4))
+
+
+### Features
+
+* **packages/sui-studio:** define micromatch dep ([20dbbb4](https://github.com/SUI-Components/sui/commit/20dbbb41d1663ec54d22a23fedbcfbd67b454e7e))
+* **packages/sui-studio:** filter test files by component path ([bbdfd9b](https://github.com/SUI-Components/sui/commit/bbdfd9b07a3cdc62d75ded8d4396faf31ee04a6e))
+* **packages/sui-studio:** use glob pattern matching instead simple categories or components matchin ([f8131a4](https://github.com/SUI-Components/sui/commit/f8131a4ed2ef71e60988ebc485f87138917f6193))
+
+
+
+# 11.8.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-studio:** Use new commander version ([7e536a6](https://github.com/SUI-Components/sui/commit/7e536a6bd2aa44cf9e505e309c74a1cffbc7f80e))
+
+
+
+# 11.7.0 (2022-03-28)
+
+
+### Features
+
+* **packages/sui-studio:** Add support to headless on sui-studio test ([8f51ca3](https://github.com/SUI-Components/sui/commit/8f51ca33acfdefcdb6c996c08c0116585b85834a))
+* **packages/sui-studio:** Support more files besides the index ([6d44722](https://github.com/SUI-Components/sui/commit/6d447229c2c15e9db633ee897bac62db43b1459e))
+
+
+
+# 11.6.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-studio:** Ugrade fs-extra dependency and use same in all packages ([9e13d32](https://github.com/SUI-Components/sui/commit/9e13d323e6e47aa4cf9974fe6a0824d424f934f2))
+
+
+
 # 11.5.0 (2022-02-22)
 
 

@@ -1,5 +1,52 @@
 # CHANGELOG
 
+# 2.9.0 (2022-10-03)
+
+
+### Bug Fixes
+
+* **packages/sui-domain:** rollback axios version ([b87a030](https://github.com/SUI-Components/sui/commit/b87a030005df1bcac34fd7a5b43bd0248e0b7d34))
+
+
+
+# 2.8.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-domain:** Update axios to latest version ([9ab942f](https://github.com/SUI-Components/sui/commit/9ab942fb3569ba57a2dace518298ead47823d60c))
+
+
+
+# 2.7.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-domain:** Force new version ([8d127fc](https://github.com/SUI-Components/sui/commit/8d127fc2682d1f0f9afd00e37bb1e3f5e5e79012))
+* **packages/sui-domain:** Rollback sui-domain ([f38baf6](https://github.com/SUI-Components/sui/commit/f38baf66346561b83f4ca42c0a3f8f28cccd8734))
+
+
+
+# 2.6.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-domain:** Use normal code instead transpiled again ([6b0c7d4](https://github.com/SUI-Components/sui/commit/6b0c7d4816ba8d9cb52cb77ea4e2ec323e2cbdbc))
+
+
+
+# 2.5.0 (2022-04-05)
+
+
+### Features
+
+* **packages/sui-domain:** Add a way to globally intercept errors on all axios instances ([18069b2](https://github.com/SUI-Components/sui/commit/18069b258b840a1d441fcb1e018bd44a43418cef))
+* **packages/sui-domain:** Stop using axios interceptors and use a wrapper class approach ([34c9bc2](https://github.com/SUI-Components/sui/commit/34c9bc2eeeef57386b6633789654b025583b8d72))
+
+
+
 # 2.4.0 (2022-03-01)
 
 

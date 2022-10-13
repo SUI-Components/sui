@@ -1,5 +1,37 @@
 # CHANGELOG
 
+# 6.1.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-widget-embedder:** Bump dependencies ([4ffa0ef](https://github.com/SUI-Components/sui/commit/4ffa0ef917348ca4f317bcfa8c50ea6e1df248bf))
+
+
+
+# 6.0.0 (2022-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix webpack config for webpack 5 ([463c4ec](https://github.com/SUI-Components/sui/commit/463c4ece48e1c15249b837b603d4a9b29d24849c))
+
+
+
+# 5.8.0 (2022-03-30)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** fix file import ([13b3432](https://github.com/SUI-Components/sui/commit/13b3432fa37b00e4455db561985a53eef2295325))
+
+
+### Features
+
+* **packages/sui-widget-embedder:** update commander to v8.3.0 ([edb1f4b](https://github.com/SUI-Components/sui/commit/edb1f4b39d34868260d4ce7b4a5c70ab24b365b1))
+
+
+
 # 5.7.0 (2022-03-01)
 
 
@@ -83,6 +115,7 @@
 
 ### Features
 
+* **packages/sui-widget-embedder:** add browser option ot enable dev on browser ([5d3a80d](https://github.com/SUI-Components/sui/commit/5d3a80db3e7b67717560dec2f4dbf088d3f08909))
 * **packages/sui-widget-embedder:** Release a new major version of widget embedder ([65f0e02](https://github.com/SUI-Components/sui/commit/65f0e0265ff6c23fa053e82ee9a82b73b6c355a1))
 * **packages/sui-widget-embedder:** Remove Service Worker option ([e4d176b](https://github.com/SUI-Components/sui/commit/e4d176b5956a220cd48d5669da141d77999657e8))
 

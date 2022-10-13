@@ -2,11 +2,12 @@
 
 // @ts-check
 
-import {join} from 'path'
-import {readFileSync, writeFileSync, existsSync} from 'fs'
+import {existsSync, readFileSync, writeFileSync} from 'fs'
 import {chmod, writeFile} from 'fs/promises'
-import set from 'dset'
+import {join} from 'path'
+
 import get from 'dlv'
+import {dset as set} from 'dset'
 
 /** In order to ensure this could work on postinstall script and also manually
  * we neet to check if INIT_CWD is available and use it instead cwd

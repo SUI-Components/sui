@@ -1,4 +1,4 @@
-import {object, arrayOf, oneOfType, element, elementType} from 'prop-types'
+import {arrayOf, element, elementType, object, oneOfType} from 'prop-types'
 
 /**
  * Detect easily we're using a falsy value as a prop type

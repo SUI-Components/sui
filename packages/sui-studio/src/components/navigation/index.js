@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
-import PropTypes from 'prop-types'
-import {Link} from '@s-ui/react-router'
-import Logo from './Logo'
+import {useState} from 'react'
 
-import {getComponentsList} from '../utils'
+import PropTypes from 'prop-types'
+
+import {Link} from '@s-ui/react-router'
+
+import {getComponentsList} from '../utils.js'
 
 const componentsList = getComponentsList()
 
@@ -64,15 +65,11 @@ export default function Navigation({handleClick}) {
 
   return (
     <nav className="sui-StudioNav">
-      <Link className="sui-StudioNav-header" onClick={handleClick} to="/">
-        <Logo />
-      </Link>
-
       <input
         className="sui-StudioNav-searchInput"
         onChange={handleChange}
         onFocus={handleFocus}
-        placeholder="🔎 Search component..."
+        placeholder="Search"
         type="search"
         value={search}
       />

@@ -1,20 +1,20 @@
 /* eslint no-console:0 */
-import express from 'express'
-import ssr from './middlewares/ssr.js'
-import staticCriticalCss from './middlewares/criticalCss.js'
-import {hooksFactory} from './hooksFactory/index.js'
-import TYPES from '../hooks-types.js'
-import basicAuth from 'express-basic-auth'
 import compression from 'compression'
-import ssrConf from './config.js'
-import {
-  isMultiSite,
-  hostFromReq,
-  useStaticsByHost,
-  readHtmlTemplate
-} from './utils/index.js'
-
+import express from 'express'
+import basicAuth from 'express-basic-auth'
 import noOPConsole from 'noop-console'
+
+import TYPES from '../hooks-types.js'
+import {hooksFactory} from './hooksFactory/index.js'
+import staticCriticalCss from './middlewares/criticalCss.js'
+import ssr from './middlewares/ssr.js'
+import {
+  hostFromReq,
+  isMultiSite,
+  readHtmlTemplate,
+  useStaticsByHost
+} from './utils/index.js'
+import ssrConf from './config.js'
 noOPConsole(console)
 
 if (process.env.CONSOLE) {
@@ -105,6 +105,6 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
   app.listen(PORT, () =>
-    console.log(`Server up & runnig 🌍 http://localhost:${PORT}`)
+    console.log(`Server up & running 🌍 http://localhost:${PORT}`)
   ) // eslint-disable-line
 })()

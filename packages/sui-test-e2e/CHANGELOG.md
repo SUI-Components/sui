@@ -1,5 +1,60 @@
 # CHANGELOG
 
+# 1.14.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Bump and align dependencies ([a35bcb7](https://github.com/SUI-Components/sui/commit/a35bcb7f12a1303781f09b0fcfcde369c125db30))
+
+
+
+# 1.13.0 (2022-06-27)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Adapt to Cypress 10 new config format ([3960683](https://github.com/SUI-Components/sui/commit/39606838433c5ba098151a87c317aa90365c6804))
+* **packages/sui-test-e2e:** Set a default value to the scope parameter with retrocompatibility purp ([9ea9265](https://github.com/SUI-Components/sui/commit/9ea92653f7d8604a065cf75bfc1bfa0dbab20daa))
+
+
+
+# 1.12.0 (2022-06-23)
+
+
+### Features
+
+* **packages/sui-test-e2e:** supportFile and pluginsFile config should have an absolute path ([90e0556](https://github.com/SUI-Components/sui/commit/90e055606d7c86efdb2a066d6f9745425356eaf0))
+
+
+
+# 1.11.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-test-e2e:** Disable video if not needed ([d2ee56c](https://github.com/SUI-Components/sui/commit/d2ee56cdb48da47cb36ba3cd56c6780bd79809d5))
+
+
+
+# 1.10.0 (2022-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-test-e2e:** get viewport options as number instead as boolean ([3f4b736](https://github.com/SUI-Components/sui/commit/3f4b7364addcbc549430e53e9e0873addc88f1eb))
+
+
+
+# 1.9.0 (2022-03-29)
+
+
+### Features
+
+* **packages/sui-test-e2e:** update dependencies ([95ae508](https://github.com/SUI-Components/sui/commit/95ae508add8995e6112a79ceae3d7bb6219bb362))
+
+
+
 # 1.8.0 (2022-01-10)
 
 

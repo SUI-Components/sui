@@ -1,5 +1,116 @@
 # CHANGELOG
 
+# 2.34.0 (2022-10-05)
+
+
+### Features
+
+* **packages/sui-mono:** add refactor as commit type that triggers new release ([1e335eb](https://github.com/SUI-Components/sui/commit/1e335ebbb3a4a04766a59744f72f75d01a16a092))
+
+
+
+# 2.33.0 (2022-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** add skip-ci as suffix ([2d2209d](https://github.com/SUI-Components/sui/commit/2d2209d90e6e3440fb620e57daccdaee374f425f))
+
+
+### Features
+
+* **packages/sui-mono:** move skip flag before commit msg ([40cd277](https://github.com/SUI-Components/sui/commit/40cd2776e546f163c427db9809874d293ccc4592))
+
+
+
+# 2.31.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-mono:** Use latest git-url-parse ([bc7327c](https://github.com/SUI-Components/sui/commit/bc7327c642f53e314ad22856b10b3d3206d8670e))
+
+
+
+# 2.30.0 (2022-06-22)
+
+
+### Features
+
+* **packages/sui-mono:** Remove linter warnings ([de481b4](https://github.com/SUI-Components/sui/commit/de481b4a8ccad68ac621e224101620b0b4e4d680))
+
+
+
+# 2.29.0 (2022-06-15)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** Fix missing promise ([8bbfce4](https://github.com/SUI-Components/sui/commit/8bbfce485c2a5fc0602410bac25c06f1e8168def))
+
+
+
+# 2.28.0 (2022-06-13)
+
+
+### Features
+
+* **packages/sui-mono:** Remove not optional from ci install for swc compatibility ([9e214aa](https://github.com/SUI-Components/sui/commit/9e214aa54c323139cd1ee5709289850e33e164dc))
+
+
+
+# 2.27.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-mono:** Adjust prepare commando to be used with workspaces ([451bca5](https://github.com/SUI-Components/sui/commit/451bca5f56e936a8e295f348b37a35ff0c9ae031))
+* **packages/sui-mono:** Remove not needed chunk option anymore ([96fbb35](https://github.com/SUI-Components/sui/commit/96fbb35383a2ac9de89493eef2ade29202a90b52))
+
+
+
+# 2.26.0 (2022-04-12)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** fix skip ci option on release ([d29f7c3](https://github.com/SUI-Components/sui/commit/d29f7c34e6025cfc5147a3eb277c30b1d123a6e5))
+
+
+
+# 2.25.0 (2022-04-12)
+
+
+
+# 2.24.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-mono:** Upgrade to same commander version as rest of sui ([581de6d](https://github.com/SUI-Components/sui/commit/581de6d926d9076caddaac847f167c7ca72cba72))
+
+
+
+# 2.23.0 (2022-03-31)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove beta package version ([d605303](https://github.com/SUI-Components/sui/commit/d605303b9412cac9e2123fbbe41c97fd49fa48d6))
+* **packages/sui-mono:** url construction before check changes to release ([fe73104](https://github.com/SUI-Components/sui/commit/fe731043a9c0af65c4690c3f0ab4e8e3af4d0934))
+
+
+
+# 2.22.0 (2022-03-09)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** fix release for monopackage ([1e9be78](https://github.com/SUI-Components/sui/commit/1e9be783004cbc71d18653c89aa28f8b3bba9433))
+* **packages/sui-mono:** fix some side effects of change getWorkspaces ([88d4ebd](https://github.com/SUI-Components/sui/commit/88d4ebdc0741eba7a1faa0d55d0270f5d3858ddb))
+
+
+
 # 2.21.0 (2022-02-11)
 
 

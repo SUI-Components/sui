@@ -1,12 +1,12 @@
 {
   "name": "@s-ui/hoc",
-  "version": "1.35.0",
+  "version": "1.36.0",
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "lib": "babel --out-dir ./lib  ./src",
-    "prepare": "npm run lib"
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib"
   },
   "peerDependencies": {
     "@s-ui/react-context": "1",

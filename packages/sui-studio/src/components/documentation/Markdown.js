@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import snarkdown from '../../snarkdown'
+
+import snarkdown from '../../snarkdown.js'
 
 export default function Markdown({content}) {
   return (

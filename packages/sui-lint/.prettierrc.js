@@ -4,7 +4,7 @@ module.exports = {
   /* Print spaces between brackets in object literals. */
   bracketSpacing: false,
   /* Put the > of a multi-line JSX element at the end of the last line instead of being alone on the next line */
-  jsxBracketSameLine: false,
+  bracketSameLine: false,
   /* Support optional chaining new ES feature -> ? */
   optionalChaining: true,
   /* Specify the line length that the printer will wrap on. */

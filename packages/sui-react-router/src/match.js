@@ -2,8 +2,9 @@
 // from: https://github.com/ReactTraining/react-router/blob/v3/modules/match.js
 
 import {REPLACE} from 'history/lib/Actions'
-import {fromReactTreeToJSON} from './internal/ReactUtils.js'
+
 import {createTransitionManager} from './internal/createTransitionManager.js'
+import {fromReactTreeToJSON} from './internal/ReactUtils.js'
 import {
   createRouterHistory,
   createRouterObject
@@ -28,11 +29,8 @@ export default async (
     const history = externalHistory || createRouterHistory(location)
     const jsonRoutes = fromReactTreeToJSON(routes)
     const transitionManager = createTransitionManager({history, jsonRoutes})
-    const {
-      components,
-      redirectLocation,
-      routeInfo
-    } = await transitionManager.match(location)
+    const {components, redirectLocation, routeInfo} =
+      await transitionManager.match(location)
 
     // if it's not a redirection and we don't have components
     // then we should response with nothing

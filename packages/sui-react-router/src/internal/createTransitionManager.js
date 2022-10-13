@@ -225,10 +225,9 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
         listener(null, {params: state.params, components: state.components})
       } else {
         try {
-          const {
-            redirectLocation,
-            components
-          } = await matchRouteAndUpdateState({jsonRoutes, location})
+          const {redirectLocation, components} = await matchRouteAndUpdateState(
+            {jsonRoutes, location}
+          )
 
           if (redirectLocation) {
             return history.replace(redirectLocation)

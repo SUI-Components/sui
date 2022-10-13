@@ -24,7 +24,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           cssLoader,
           {
-            loader: loader,
+            loader,
             options: {
               sassOptions: {
                 outputStyle: 'compressed'

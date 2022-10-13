@@ -9,14 +9,14 @@ const program = require('commander')
 const path = require('path')
 const WebpackDevServer = require('webpack-dev-server')
 
-const clearConsole = require('../utils/clearConsole')
-const checkRequiredFiles = require('../utils/checkRequiredFiles')
+const clearConsole = require('../utils/clearConsole.js')
+const checkRequiredFiles = require('../utils/checkRequiredFiles.js')
 const {choosePort, prepareUrls} = require('../utils/WebpackDevServerUtils.js')
 
-const webpackConfig = require('../webpack.config.dev')
+const webpackConfig = require('../webpack.config.dev.js')
 
-const createDevServerConfig = require('../factories/createDevServerConfig')
-const createCompiler = require('../factories/createCompiler')
+const createDevServerConfig = require('../factories/createDevServerConfig.js')
+const createCompiler = require('../factories/createCompiler.js')
 
 const linkLoaderConfigBuilder = require('../loaders/linkLoaderConfigBuilder.js')
 const log = require('../shared/log.js')

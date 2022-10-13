@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander'
+
 import {getCommitSha} from '../src/git.js'
 import {updateCommitStatus} from '../src/index.js'
 
@@ -41,7 +42,7 @@ program
   )
   .parse(process.argv)
 
-const {state: stateKey, topic, url: targetUrl} = program
+const {state: stateKey, topic, url: targetUrl} = program.opts()
 
 getCommitSha().then(commit => {
   return updateCommitStatus({

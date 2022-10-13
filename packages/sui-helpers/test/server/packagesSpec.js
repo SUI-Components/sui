@@ -1,10 +1,11 @@
-import {expect} from 'chai'
 import fs from 'fs'
 import path from 'path'
 
+import {expect} from 'chai'
+
 import {
-  getPackagesPaths,
   getPackageJson,
+  getPackagesPaths,
   resolveLazyNPMBin
 } from '../../packages.js'
 

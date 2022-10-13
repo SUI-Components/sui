@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+
 import {render} from '@testing-library/react'
 
 const DefaultWrapper = ({children}) => <>{children}</>
@@ -34,22 +35,21 @@ const getWrapper = ({contexts = [], wrapper: Wrapper = DefaultWrapper}) => {
  * Keep RTL api
  * https://testing-library.com/docs/react-testing-library/api/#render-options
  */
-const setupEnvironment = (
-  Component,
-  {contexts = [], hydrate, queries, wrapper} = {}
-) => props => {
-  const container = document.createElement('div')
-  const wrapperWithContexts = getWrapper({contexts, wrapper})
+const setupEnvironment =
+  (Component, {contexts = [], hydrate, queries, wrapper} = {}) =>
+  props => {
+    const container = document.createElement('div')
+    const wrapperWithContexts = getWrapper({contexts, wrapper})
 
-  container.setAttribute('id', 'test-container')
+    container.setAttribute('id', 'test-container')
 
-  return render(<Component {...props} />, {
-    container: document.body.appendChild(container),
-    hydrate,
-    queries,
-    wrapper: wrapperWithContexts
-  })
-}
+    return render(<Component {...props} />, {
+      container: document.body.appendChild(container),
+      hydrate,
+      queries,
+      wrapper: wrapperWithContexts
+    })
+  }
 
 export const addSetupEnvironment = target => {
   if (!target.setupEnvironment) {

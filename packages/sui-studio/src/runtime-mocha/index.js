@@ -1,23 +1,28 @@
-/* global __BASE_DIR__, CATEGORIES */
+/* global __BASE_DIR__, CATEGORIES, PATTERN */
 
 /**
  * This file is being executed in browser opened to run tests
  */
-import {importContexts, importReactComponent} from '../components/tryRequire.js'
-import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
-import {addReactContextToComponent} from '../components/utils.js'
+import micromatch from 'micromatch'
 
+import {importContexts, importReactComponent} from '../components/tryRequire.js'
+import {addReactContextToComponent} from '../components/utils.js'
+import {addSetupEnvironment} from '../environment-mocha/setupEnvironment.js'
 addSetupEnvironment(window)
 
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
-const pattern = CATEGORIES
-const categories = pattern ? pattern.split(',') : null
+const defaultPattern = '**/*.test.{js,jsx}'
+const globPattern = PATTERN || defaultPattern
+const categories = CATEGORIES ? CATEGORIES.split(',') : null
 
 const filterAll = key => {
   const [, category] = key.split('/')
-  return !categories || categories.includes(category)
+
+  return categories
+    ? categories.includes(category)
+    : micromatch.isMatch(key, globPattern, {contains: true})
 }
 
 // Require all the files from a context
@@ -30,7 +35,7 @@ window.__karma__.loaded = () => {}
 const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/index.test.(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/(components\.)?(\w+).test.(js|jsx)/
 )
 
 const selectedTestFiles = testsFiles.keys().filter(filterAll)
@@ -40,7 +45,18 @@ Promise.all(
     // get the category component from the segments of the path
     // ex: ./card/property/index.js -> card property
     const [, category, component] = key.split('/')
-    const categoryComponentKey = `${category}/${component}`
+
+    let categoryComponentKey = `${category}/${component}`
+    let subComponentName = null
+
+    const subComponentRegex =
+      /components\.(?<nestedComponentName>\w+)\.test\.(js|jsx)/
+    const matchesSubComponent = key.match(subComponentRegex)
+
+    if (matchesSubComponent !== null) {
+      subComponentName = matchesSubComponent?.groups?.nestedComponentName
+      categoryComponentKey = `${category}/${component}/src/${subComponentName}`
+    }
 
     const getContexts = await importContexts({category, component})
     const contexts =
@@ -49,6 +65,7 @@ Promise.all(
     const componentModule = await importReactComponent({
       category,
       component,
+      subComponentName,
       extractDefault: true
     })
 
@@ -65,6 +82,7 @@ Promise.all(
 
     const {displayName} = Component
     // store on the window the contexts and components using the ${category/component} key
+    // or the ${category/component/src/subComponentName} key if using a nested component
     window.__STUDIO_CONTEXTS__[categoryComponentKey] = contexts
     window.__STUDIO_COMPONENT__[categoryComponentKey] = Component
 

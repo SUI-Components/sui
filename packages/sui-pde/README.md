@@ -33,14 +33,14 @@ import OptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely'
 // all options here https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node, but for now only 3 of them are available
 const optimizelyInstance = OptimizelyAdapter.createOptimizelyInstance({
   sdkKey: MY_API_KEY,  // optimizely sdk api key
-  options // optional, datafileOptions
+  options, // optional, datafileOptions
   datafile // optional
 })
 
 const optimizelyAdapter = new OptimizelyAdapter({
   optimizely: optimizelyInstance,
   userId: // mandatory,
-  hasUserConsents  // if false, the user won't be part of the A/B test,
+  hasUserConsents,  // if false, the user won't be part of the A/B test,
   applicationAttributes: {   // optional, global application attributes that must be send on every experiment activation
     site: 'coches.net',
     environment: 'development'
@@ -250,3 +250,61 @@ const MyComponent = () => {
 #### Force feature flag to be on/off
 
 It's slighty different to force a feature flag to be activated or deactivated. Lets assume we have our feature flag `ff_skills_field` running under `http://myweb.com`. In order to force the flag to be on or off you'll have to add a query param using the flag's name but adding `suipde_` as prefix same way we force an experiment, but the only valid values are on or off. For example, in this case, the url to open in order to force would be `http://myweb.com?suipde_ff_skills_field=on`. This would force the feature flag to be on. `http://myweb.com?suipde_ff_skills_field=off` would set the feature flag as off. If forced, optimizely impression will not be triggered.
+
+### Multiple Optimizely Adapters
+
+Meant to exist if you need more than one decision taking optimizely sdk.
+
+When initializing PDE use `MultipleOptimizelyAdapter` instead of `OptimizelyAdapter`
+```js
+    import MultipleOptimizelyAdapter from '@s-ui/pde/lib/adapters/optimizely/multiple'
+...
+    const optimizelyInstances = MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
+      default: {
+        sdkKey: DEFAULT_INSTANCE_SDK_KEY,
+        options: {} // options for default instance
+      },
+      alternate: {
+        sdkKey: ALTERNATIVE_INSTANCE_SDK_KEY,
+        options: {} // options for alternative instance
+      }
+    })
+
+    // first id will be used as default adapterId, in this case 'default' but is open to any id
+    const optimizelyAdapter = new MultipleOptimizelyAdapter({
+      default: {
+        optimizely: optimizelyInstances.default,
+        ...adapterOptions // like creating single adapter
+      },
+      alternate: {
+        optimizely: optimizelyInstances.alternative,
+        ...adapterOptions // like creating single adapter
+      }
+    })
+    
+    const pde = new PDE({
+      adapter: optimizelyAdapter,
+      ...
+    })
+```
+
+Using the hooks
+
+```js
+const MyComponent = () => {
+  const defaultFeature = useFeature('myFeatureKey') // will return the {isActive, variables} object from the default optimizely instance
+  const alsoDefaultFeature = useFeature('myFeatureKey', null, null, 'default') // will return the {isActive, variables} object from the default optimizely instance
+  const alternateFeature = useFeature('myFeatureKey', null, null, 'alternative') // will return the {isActive, variables} object from the alternate optimizely instance
+  
+  const defaultExperiment = useExperiment({experimentName: 'myExperimentName'}) // will return the experiment object from the default optimizely instance
+  const alsoDefaultExperiment = useExperiment({experimentName: 'myExperimentName', adapterId: 'default'}) // will return the experiment object from the default optimizely instance
+  const alternateExperiment = useExperiment({experimentName: 'myExperimentName', adapterId: 'alternate'}) // will return the experiment object from the alternate optimizely instance
+  ...
+}
+```
+
+#### :warning: Using segment integration
+
+Regarding to [Segment documentation](https://segment.com/docs/connections/destinations/catalog/optimizely-web/#optimizely-full-stack-javascript-sdk)
+
+Segment expects a single `window.optimizelyClientInstance` to exist in the browser, so when using multiple optimizely instances, events from multiple instances will be sent to a single Segment source, so the Segment destinations should be properly configured having this in consideration. 

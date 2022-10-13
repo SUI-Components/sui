@@ -3,9 +3,10 @@
 const program = require('commander')
 const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
+
 const {version} = require('../package.json')
-const copyStaticFiles = require('./helpers/copyStaticFiles')
-const copyGlobals = require('./helpers/copyGlobals')
+const copyStaticFiles = require('./helpers/copyStaticFiles.js')
+const copyGlobals = require('./helpers/copyGlobals.js')
 
 program.version(version, '    --version')
 

@@ -1,5 +1,161 @@
 # CHANGELOG
 
+# 8.23.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-test:** Bump and align dependencies ([f8779a3](https://github.com/SUI-Components/sui/commit/f8779a3b960108f274bdaec4bff0d94b4ba51a8d))
+
+
+
+# 8.22.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([4dc2112](https://github.com/SUI-Components/sui/commit/4dc211291292d18a79ea7fc178d646f743d2caa8))
+
+
+
+# 8.21.0 (2022-06-23)
+
+
+### Features
+
+* **packages/sui-test:** Prepare for release ([a940170](https://github.com/SUI-Components/sui/commit/a94017022fcf9b4ff05effd2dc44657eaaf4441f))
+* **packages/sui-test:** Use mocha@10 ([39b2f88](https://github.com/SUI-Components/sui/commit/39b2f881bec9eacbacbb02b1de269746f6adeb29))
+
+
+
+# 8.20.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-test:** Patch mocks folder for msw contract new tool ([7a6d36f](https://github.com/SUI-Components/sui/commit/7a6d36fd048e806eb251782b3e6dbb1245dd7c7d))
+
+
+
+# 8.19.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([d51c9fd](https://github.com/SUI-Components/sui/commit/d51c9fdb2b833954aa3495f396d070c67fe99907))
+
+
+
+# 8.18.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** Add files to be published ([043f954](https://github.com/SUI-Components/sui/commit/043f9549bb7e819e575bfe9003b587660aaf0b96))
+
+
+
+# 8.17.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-test:** force new release ([3c48b75](https://github.com/SUI-Components/sui/commit/3c48b75764c3c75d38d97908ee74a3e6f3f5d188))
+
+
+
+# 8.16.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-test:** Add suport to msw ([5d1f5a3](https://github.com/SUI-Components/sui/commit/5d1f5a35a03ac87abdffdd7f76e000f87428efe1))
+
+
+
+# 8.15.0 (2022-06-08)
+
+
+### Features
+
+* **packages/sui-test:** Add support to msw and avoid problems with tty ([9716986](https://github.com/SUI-Components/sui/commit/9716986d73d4823f9879ed6ce1cd9aa0d17692b5))
+* **packages/sui-test:** Unify Webpack version accross packages ([f68c3c8](https://github.com/SUI-Components/sui/commit/f68c3c819632ca3145ba1507e357ca21ddaa8497))
+
+
+
+# 8.14.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies across packages ([24a1c4c](https://github.com/SUI-Components/sui/commit/24a1c4c6cda9c4eaecfad2ebc8931b21383cc80d))
+
+
+
+# 8.13.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-test:** Ugrade dependencies ([b5d5218](https://github.com/SUI-Components/sui/commit/b5d5218c67303d2ae52ec29664274ed3e3b1abc6))
+
+
+
+# 8.12.0 (2022-05-05)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** use pattern env instead component ([f60bbcd](https://github.com/SUI-Components/sui/commit/f60bbcdd98ac3c2bf72e39ba88706c748f659ace))
+
+
+
+# 8.11.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([841f482](https://github.com/SUI-Components/sui/commit/841f4829e661600e1c510a6a4523b02563b7b000))
+
+
+
+# 8.10.0 (2022-04-27)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** enable component env variable ([b21758b](https://github.com/SUI-Components/sui/commit/b21758b2c06eaf97646490938c2ae0e646fe2047))
+
+
+### Features
+
+* **packages/sui-test:** Upgrade dependencies ([3fff0e2](https://github.com/SUI-Components/sui/commit/3fff0e2da0039e3d8ace790d4ad3c18532352adb))
+
+
+
+# 8.9.0 (2022-04-07)
+
+
+### Features
+
+* **packages/sui-test:** update commander dependency ([1667366](https://github.com/SUI-Components/sui/commit/166736675be1158b2d2857ce28a432fafe205bdb))
+
+
+
+# 8.7.0 (2022-03-30)
+
+
+
+# 8.6.0 (2022-03-28)
+
+
+### Features
+
+* **packages/sui-test:** Add new headless flag ([1f6fa24](https://github.com/SUI-Components/sui/commit/1f6fa24a11a6c08e47c30f1382178eb3b5a644bd))
+* **packages/sui-test:** Upgrade dependencies ([110e5eb](https://github.com/SUI-Components/sui/commit/110e5eb7f154454102701661932e55a05800532f))
+
+
+
 # 8.5.0 (2022-03-01)
 
 

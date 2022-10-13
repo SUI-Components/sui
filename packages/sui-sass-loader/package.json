@@ -1,19 +1,16 @@
 {
   "name": "@s-ui/sass-loader",
   "description": "Sass Loader for Webpack",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "main": "src/index.js",
   "scripts": {
-    "lint": "sui-lint js",
-    "test": "npm run lint && npm run test:server",
-    "perf": "node perf/index.js",
-    "test:server": "sui-test server",
-    "ci": "npm run lint && npm run test"
+    "test": "npm run test:server",
+    "test:server": "sui-test server"
   },
   "dependencies": {
     "cli-source-preview": "1.1.0",
     "co": "4.6.0",
-    "fs-extra": "10.0.0",
+    "fs-extra": "10.1.0",
     "loader-utils": "3.2.0"
   },
   "peerDependencies": {
@@ -23,7 +20,6 @@
   "devDependencies": {
     "css-loader": "6",
     "mini-css-extract-plugin": "2",
-    "rimraf": "3",
     "sass": "1",
     "sass-loader": "12",
     "webpack": "5"

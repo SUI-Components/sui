@@ -1,5 +1,41 @@
 # CHANGELOG
 
+# 4.25.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-studio-create:** Remove version when using npx ([9225647](https://github.com/SUI-Components/sui/commit/9225647bb26c838c1c892a06fa9c06f4ccbde14a))
+
+
+
+# 4.24.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-studio-create:** Upgrade dependencies across packages ([ecaff40](https://github.com/SUI-Components/sui/commit/ecaff402140ceac0910495c88f8b3a4f429c2812))
+
+
+
+# 4.23.0 (2022-05-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio-create:** Add missing comma in the JSON creator ([72ed9ab](https://github.com/SUI-Components/sui/commit/72ed9abc5d9c08545fad771e86d02a4ea82795cf))
+
+
+
+# 4.22.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-studio-create:** Ugrade fs-extra dependency and use same in all packages ([44bfd45](https://github.com/SUI-Components/sui/commit/44bfd455c61baf32fd0f89b0aa778716ad5e72a9))
+
+
+
 # 4.21.0 (2022-02-15)
 
 

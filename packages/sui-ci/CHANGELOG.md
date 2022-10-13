@@ -1,5 +1,46 @@
 # CHANGELOG
 
+# 1.27.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-ci:** Update node-fetch to latest v2 version ([65e9d40](https://github.com/SUI-Components/sui/commit/65e9d405a4df151a6fea7f0a4fc3efccca528769))
+
+
+
+# 1.26.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-ci:** Add missing dependency ([c43f9bd](https://github.com/SUI-Components/sui/commit/c43f9bd3a97f1aaf6b57a4a1aacb242dace09ae7))
+
+
+
+# 1.25.0 (2022-04-06)
+
+
+### Bug Fixes
+
+* **packages/sui-ci:** Rollback node-fetch version because some problems on CI ([dafc633](https://github.com/SUI-Components/sui/commit/dafc6335d7a383a59174a23ae519e49b8b3b092f))
+
+
+
+# 1.24.0 (2022-04-06)
+
+
+### Bug Fixes
+
+* **packages/sui-ci:** get program options correctly ([be99785](https://github.com/SUI-Components/sui/commit/be99785ec341ecc59088e1f50faa322d7d77de76))
+
+
+### Features
+
+* **packages/sui-ci:** update dependencies ([79cdf57](https://github.com/SUI-Components/sui/commit/79cdf579236f4f5209dbd46a75e50e2c2096133b))
+
+
+
 # 1.23.0 (2021-11-30)
 
 

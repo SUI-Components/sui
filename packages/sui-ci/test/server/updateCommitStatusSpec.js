@@ -1,7 +1,7 @@
 import chai from 'chai'
 
-import {mockGitHubRequest} from './utils.js'
 import {updateCommitStatus} from '../../src/index.js'
+import {mockGitHubRequest} from './utils.js'
 
 const {expect} = chai
 

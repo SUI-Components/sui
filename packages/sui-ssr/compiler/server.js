@@ -1,5 +1,4 @@
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const serverConfig = require('@s-ui/bundler/webpack.config.server')
 
 module.exports = ({outputPath}) => ({
@@ -12,24 +11,10 @@ module.exports = ({outputPath}) => ({
     filename: 'index.js'
   },
   externals: undefined,
-  plugins: [
-    ...(serverConfig.plugins || []),
-    new CopyWebpackPlugin({
-      patterns: [
-        {from: '404.html', to: '../public', noErrorOnMissing: true},
-        {from: '500.html', to: '../public', noErrorOnMissing: true}
-      ]
-    })
-  ],
   resolve: {
     ...serverConfig.resolve,
-    modules: [
-      path.join(__dirname, '..', 'server'),
-      path.join(__dirname, '..', 'node_modules'),
-      path.join(process.cwd(), 'src'),
-      path.join(process.cwd(), 'node_modules'),
-      'node_modules'
-    ]
+    mainFields: ['main'],
+    modules: [path.join(process.cwd(), 'src'), 'node_modules']
   },
   node: {
     __filename: true,

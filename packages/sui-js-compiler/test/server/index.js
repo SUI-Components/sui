@@ -12,7 +12,7 @@ describe('@s-ui/js-compiler', () => {
   beforeEach(() => fs.remove(libPath))
 
   it('compiles a /src folder with a JavaScript with JSX file and output to /lib', async () => {
-    const {stdout} = await exec('npx sui-js-compiler', {
+    const {stdout} = await exec('node ../../index.js', {
       cwd: __dirname
     })
 
@@ -24,17 +24,17 @@ describe('@s-ui/js-compiler', () => {
 
     const compiledFile = await fs.readFile(libFilePath, 'utf-8')
 
+    console.log(compiledFile)
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
 
-    expect(compiledFile).to.contain('applyDecoratedDescriptor')
-    expect(compiledFile).to.contain('createClass')
+    expect(compiledFile).to.contain('_ts_decorate')
     expect(compiledFile).to.contain('regeneratorRuntime')
   })
 
   it('when the "ignore" option exists, it exclude all the file matching the passed patterns', async () => {
     const {stdout} = await exec(
-      'npx sui-js-compiler --ignore="./src/**.test.js"',
+      'node ../../index.js --ignore="./src/**.test.js"',
       {
         cwd: __dirname
       }
@@ -51,8 +51,7 @@ describe('@s-ui/js-compiler', () => {
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
 
-    expect(compiledFile).to.contain('applyDecoratedDescriptor')
-    expect(compiledFile).to.contain('createClass')
+    expect(compiledFile).to.contain('_ts_decorate')
     expect(compiledFile).to.contain('regeneratorRuntime')
   })
 })

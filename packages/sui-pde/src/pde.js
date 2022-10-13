@@ -15,8 +15,8 @@ export default class PDE {
     this._adapter.updateConsents({hasUserConsents})
   }
 
-  getEnabledFeatures({attributes} = {}) {
-    return this._adapter.getEnabledFeatures({attributes})
+  getEnabledFeatures({attributes, adapterId} = {}) {
+    return this._adapter.getEnabledFeatures({attributes, adapterId})
   }
 
   /**
@@ -24,8 +24,8 @@ export default class PDE {
    * @param {string} param.name
    * @param {object} param.attributes
    */
-  activateExperiment({name, attributes}) {
-    return this._adapter.activateExperiment({name, attributes})
+  activateExperiment({name, attributes, adapterId}) {
+    return this._adapter.activateExperiment({name, attributes, adapterId})
   }
 
   getInitialData() {
@@ -37,8 +37,8 @@ export default class PDE {
    * @param {string} param.name
    * @param {object} param.attributes
    */
-  getVariation({name, attributes}) {
-    return this._adapter.getVariation({name, attributes})
+  getVariation({name, attributes, adapterId}) {
+    return this._adapter.getVariation({name, attributes, adapterId})
   }
 
   /**
@@ -48,10 +48,11 @@ export default class PDE {
    * @parma {object=} param.attributes
    * @returns {boolean}
    */
-  isFeatureEnabled({featureKey, attributes}) {
+  isFeatureEnabled({featureKey, attributes, adapterId}) {
     return this._adapter.isFeatureEnabled({
       featureKey,
-      attributes
+      attributes,
+      adapterId
     })
   }
 
@@ -62,10 +63,11 @@ export default class PDE {
    * @parma {object=} param.attributes
    * @returns {object}
    */
-  getAllFeatureVariables({featureKey, attributes}) {
+  getAllFeatureVariables({featureKey, attributes, adapterId}) {
     return this._adapter.getAllFeatureVariables({
       featureKey,
-      attributes
+      attributes,
+      adapterId
     })
   }
 }

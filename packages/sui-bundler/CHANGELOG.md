@@ -1,5 +1,225 @@
 # CHANGELOG
 
+# 9.36.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade deps ([0343819](https://github.com/SUI-Components/sui/commit/03438192ce654e00d67bc32ff683b54a98580ae5))
+
+
+
+# 9.35.0 (2022-08-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Bump and align dependencies ([977069d](https://github.com/SUI-Components/sui/commit/977069d078bea4603c307c804aa8158e2d0c9031))
+
+
+
+# 9.34.0 (2022-08-04)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Handle correctly build errors ([aff362a](https://github.com/SUI-Components/sui/commit/aff362a9b2dc1aa5e8859aa933f6e79f1f1e797c))
+* **packages/sui-bundler:** Remove compiler close funcitonality ([5f90020](https://github.com/SUI-Components/sui/commit/5f90020152b2fb86da7b8fe692ee06cb099eff0c))
+* **packages/sui-bundler:** Use correctly compiler ([42d7cb0](https://github.com/SUI-Components/sui/commit/42d7cb00fec2aeb4fe581cc36fa0db4719079d79))
+
+
+
+# 9.33.0 (2022-08-02)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Support legacy browsers for now ([ea052d2](https://github.com/SUI-Components/sui/commit/ea052d2b74a63afd91dd5de96ab654ffcc543cc8))
+
+
+
+# 9.32.0 (2022-08-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([18a93b9](https://github.com/SUI-Components/sui/commit/18a93b9c755720519a25742309ac4c11a95f4a55))
+
+
+
+# 9.31.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Compile for Node 16 target on SSR ([c78c746](https://github.com/SUI-Components/sui/commit/c78c746da0d1326c88bde9d3672c0e5ad7a2f971))
+* **packages/sui-bundler:** Pass more info to babel preset sui from bundler ([2719b87](https://github.com/SUI-Components/sui/commit/2719b872d3e43918a8bef78fc65e1a535d4ed1e3))
+* **packages/sui-bundler:** Upgrade dependencies ([5afa4ab](https://github.com/SUI-Components/sui/commit/5afa4aba24d9c962acecf6e531667d62b87881bd))
+
+
+
+# 9.30.0 (2022-06-20)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([ad68e6e](https://github.com/SUI-Components/sui/commit/ad68e6e8b05e2b9f0efe05f5ed20cc9f0ec5d6e8))
+
+
+
+# 9.29.0 (2022-06-16)
+
+
+### Features
+
+* **packages/sui-bundler:** add sass module rules to lib script ([de9698e](https://github.com/SUI-Components/sui/commit/de9698ef38b28eede7dd0b57ea67aa8c221a3cca))
+
+
+
+# 9.28.0 (2022-06-14)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([1faf808](https://github.com/SUI-Components/sui/commit/1faf808221dd5b289c0aa006d561ef23723e1b95))
+
+
+
+# 9.27.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Force new release ([af5f152](https://github.com/SUI-Components/sui/commit/af5f152b95a9c6ec1be81888e62253f10ba12ae3))
+
+
+
+# 9.26.0 (2022-06-09)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([c5bb81e](https://github.com/SUI-Components/sui/commit/c5bb81eadac4ed92211784dd957979d112300590))
+
+
+
+# 9.25.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-bundler:** Bump dependencies ([1aa99f5](https://github.com/SUI-Components/sui/commit/1aa99f50b34e8fb3f503d977dfbdc095082dcfb8))
+
+
+### Performance Improvements
+
+* **packages/sui-bundler:** Improve perf by concatening dependencies to main, preload it and reuse f ([091258e](https://github.com/SUI-Components/sui/commit/091258e77e11a62b169b048c75c916a84d94b5d8))
+
+
+
+# 9.24.0 (2022-06-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Simplify analyzer of sui-bundler ([f95279b](https://github.com/SUI-Components/sui/commit/f95279b98a6fbc4a392fb73ff671efb427f3e324))
+
+
+
+# 9.23.0 (2022-06-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies for bundler dropping support to Node 14 ([63c9d9f](https://github.com/SUI-Components/sui/commit/63c9d9f8e44d2591efdc4db67d05fb676b2a0935))
+
+
+
+# 9.22.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies across packages ([1c20bdc](https://github.com/SUI-Components/sui/commit/1c20bdc929c57ff086f08023db52d701127993eb))
+
+
+
+# 9.21.0 (2022-05-16)
+
+
+### Features
+
+* **packages/sui-bundler:** Ugrade dependencies ([ffaf224](https://github.com/SUI-Components/sui/commit/ffaf224dc6bce56470e9e1d126b2f89460c9683d))
+
+
+
+# 9.20.0 (2022-05-10)
+
+
+### Features
+
+* **packages/sui-bundler:** Add support to process env variable ([0679243](https://github.com/SUI-Components/sui/commit/0679243b01f34ec5eef5472ead78f5fca2d6e5db))
+
+
+
+# 9.19.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([9ad8547](https://github.com/SUI-Components/sui/commit/9ad8547eecbd73cdedbbd03872a7c0d3d44f1675))
+
+
+
+# 9.18.0 (2022-04-27)
+
+
+
+# 9.17.0 (2022-04-26)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** fix linkloader to link packages correctly using quotation marks ([cef2663](https://github.com/SUI-Components/sui/commit/cef2663d4751fa09412221fdb514e03f055e3e42))
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([2be1298](https://github.com/SUI-Components/sui/commit/2be1298794076a06af1e2fc2e1d0fa681da15324))
+
+
+
+# 9.16.0 (2022-04-11)
+
+
+
+# 9.15.0 (2022-04-05)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade deps ([e50df76](https://github.com/SUI-Components/sui/commit/e50df765a5b80f50dbb911d877ce4f683b28d00e))
+
+
+
+# 9.14.0 (2022-03-30)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([3b4a14e](https://github.com/SUI-Components/sui/commit/3b4a14eee8343e4b96bb4a84f799dfd6d31f47b6))
+
+
+
+# 9.13.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-bundler:** Upgrade dependencies ([01ff1d6](https://github.com/SUI-Components/sui/commit/01ff1d61ed1ca6b1329526eb2684e4e533ff0c33))
+
+
+
 # 9.12.0 (2022-03-01)
 
 
@@ -85,6 +305,12 @@
 
 * **packages/sui-bundler:** prevent error for array type test property ([ec94032](https://github.com/SUI-Components/sui/commit/ec9403230a61f61d118fa3e140828fec0d384a3e))
 * **packages/sui-bundler:** prevent error for rules that does not have use in linkloader ([8a236c5](https://github.com/SUI-Components/sui/commit/8a236c58aa1c09c27f571641ecbba9631d2b57a7))
+
+
+### Features
+
+* **packages/sui-bundler:** Remove rimraf dependency from bundler ([8490b6a](https://github.com/SUI-Components/sui/commit/8490b6ab5de8ca056e400b819ff0f165ce9d6f70))
+* **packages/sui-bundler:** Remove rimraf usage from test ([6d1d35c](https://github.com/SUI-Components/sui/commit/6d1d35c364715079ae1faabff0801da42fa7db9d))
 
 
 

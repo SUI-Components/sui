@@ -1,5 +1,102 @@
 # CHANGELOG
 
+# 3.21.0 (2022-08-22)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version for sui-svg ([f1fc286](https://github.com/SUI-Components/sui/commit/f1fc286133d6e8baa725ae390629720c22cc5c04))
+
+
+
+# 3.20.0 (2022-07-22)
+
+
+### Features
+
+* **packages/sui-svg:** Use Vite latest version with fixes ([aec738d](https://github.com/SUI-Components/sui/commit/aec738d53a180538a84f7473638e46cd61744046))
+
+
+
+# 3.19.0 (2022-07-18)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** Fix typo on the name ([5fcf5b0](https://github.com/SUI-Components/sui/commit/5fcf5b04507e953ce217b37fa69eefc40bce7791))
+
+
+### Features
+
+* **packages/sui-svg:** Use Vite 3 ([636845e](https://github.com/SUI-Components/sui/commit/636845ea3e6791bff33ae3ebec63a61f79d70c39))
+
+
+
+# 3.18.0 (2022-06-17)
+
+
+### Features
+
+* **packages/sui-svg:** Avoid warnings and add comment to avoid removing import ([13b07e3](https://github.com/SUI-Components/sui/commit/13b07e36fe6413e8c7ba24c41061ff5d0a90ecd7))
+* **packages/sui-svg:** Upgrade Vite patch version ([1858a86](https://github.com/SUI-Components/sui/commit/1858a86362db731cfa5eab1be14cd152bfeb23bf))
+
+
+
+# 3.17.0 (2022-06-10)
+
+
+### Features
+
+* **packages/sui-svg:** Better logging for Vite ([6edeb4d](https://github.com/SUI-Components/sui/commit/6edeb4d54ad73d103dba3999fa972dd607246ab4))
+
+
+
+# 3.16.0 (2022-06-07)
+
+
+### Features
+
+* **packages/sui-svg:** Bump dependencies ([1f98617](https://github.com/SUI-Components/sui/commit/1f986178d79c1d4af0c5016df61fbfbdfcb6f4af))
+
+
+
+# 3.15.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade dependencies across packages ([d6c262f](https://github.com/SUI-Components/sui/commit/d6c262f54de249d1cbe777f09febd294cbc6bc98))
+* **packages/sui-svg:** Upgrade Vite dependency ([dd57641](https://github.com/SUI-Components/sui/commit/dd5764191c79d8a2ce68ff513d7926d4e7cf9849))
+
+
+
+# 3.14.0 (2022-05-03)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** Add missing return to map function ([4323090](https://github.com/SUI-Components/sui/commit/4323090f017c500b8bb8de93653d83c783dc6d9a))
+
+
+
+# 3.13.0 (2022-04-11)
+
+
+### Features
+
+* **packages/sui-svg:** Upgrade vite version ([82b639f](https://github.com/SUI-Components/sui/commit/82b639f87aed45d2a16841dea6de178ffd654db1))
+
+
+
+# 3.12.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-svg:** Ugrade fs-extra dependency and use same in all packages ([eb9f8d7](https://github.com/SUI-Components/sui/commit/eb9f8d72ff444b0fd97e682c0cc543f157334e75))
+
+
+
 # 3.11.0 (2022-02-22)
 
 
