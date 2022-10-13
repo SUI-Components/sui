@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.10.0 (2022-10-13)
+
+
+### Features
+
+* **packages/sui-domain:** allow inject logger from outside ([dbf198d](https://github.com/SUI-Components/sui/commit/dbf198d519c13069c42909716fe4a637bda33932))
+
+
+
 # 2.9.0 (2022-10-03)
 
 
