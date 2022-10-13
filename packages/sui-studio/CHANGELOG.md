@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 11.26.0 (2022-10-13)
+
+
+### Features
+
+* **packages/sui-studio:** Remove THEMES redundant tab ([87fbeae](https://github.com/SUI-Components/sui/commit/87fbeae020925df2b69546fa71c62967386ead4b))
+* **packages/sui-studio:** remove themes tabs ([64474db](https://github.com/SUI-Components/sui/commit/64474dbc2403ee1a2ea18518ce71e36f2a7cd68c))
+* **packages/sui-studio:** Remove title of the Themes tabs ([2c39a4a](https://github.com/SUI-Components/sui/commit/2c39a4add4addf74b5c4ede8fca889b2b8783a89))
+
+
+
 # 11.25.0 (2022-10-11)
 
 
