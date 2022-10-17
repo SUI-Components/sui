@@ -17,7 +17,7 @@
   ],
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "7.18.10",
     "@babel/plugin-transform-modules-commonjs": "7.18.6",
