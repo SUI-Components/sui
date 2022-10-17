@@ -13,10 +13,10 @@ import Logo from './Logo.js'
 
 export default function Layout({children}) {
   const [readme, setReadme] = useState(null)
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const [menuIsHidden, setMenuIsHidden] = useState(false)
 
   const handleClickMenu = () => {
-    setMenuIsOpen(!menuIsOpen)
+    setMenuIsHidden(!menuIsHidden)
   }
 
   useEffect(() => {
@@ -30,11 +30,11 @@ export default function Layout({children}) {
   )
 
   const sidebarClassName = cx('sui-Studio-sidebar', {
-    'sui-Studio-sidebar--open': menuIsOpen
+    'sui-Studio-sidebar--hidden': menuIsHidden
   })
 
   const mainClassName = cx('sui-Studio-main', {
-    'sui-Studio-main--open': menuIsOpen
+    'sui-Studio-main--sidebar_hidden': menuIsHidden
   })
 
   return (
@@ -50,11 +50,14 @@ export default function Layout({children}) {
       </div>
       <aside className={sidebarClassName}>
         <div className="sui-Studio-sidebarBody">
-          <Navigation handleClick={() => setMenuIsOpen(false)} />
+          <Navigation />
         </div>
       </aside>
 
       <div className={mainClassName}>
+        <div className="overlay" onClick={() => setMenuIsHidden(true)}>
+          {' '}
+        </div>
         {children !== null ? children : renderReadme()}
       </div>
     </section>
