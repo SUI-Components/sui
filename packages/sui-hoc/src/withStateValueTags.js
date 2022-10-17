@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
+
 import PropTypes from 'prop-types'
 
-import withStateValue from './withStateValue'
+import withStateValue from './withStateValue.js'
 
 const withStateValueTags = BaseComponent => {
   const displayName = BaseComponent.displayName

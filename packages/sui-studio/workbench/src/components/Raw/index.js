@@ -1,20 +1,21 @@
 /* eslint import/no-webpack-loader-syntax:0 */
 import React, {useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
-import SUIContext from '@s-ui/react-context'
-
-import Preview from '../../../../src/components/preview'
-import Style from '../../../../src/components/style'
-import {
-  createContextByType,
-  cleanDisplayName,
-  removeDefaultContext
-} from '../../../../src/components/demo/utilities'
 
 import Component, * as named from 'component'
+import PropTypes from 'prop-types'
+
+import SUIContext from '@s-ui/react-context'
+
+import {
+  cleanDisplayName,
+  createContextByType,
+  removeDefaultContext
+} from '../../../../src/components/demo/utilities.js'
+import Preview from '../../../../src/components/preview/index.js'
+import Style from '../../../../src/components/style/index.js'
+import {fetchPlayground} from '../../../../src/components/tryRequire.js'
 
 import './index.scss'
-import {fetchPlayground} from '../../../../src/components/tryRequire.js'
 
 const nonDefault = removeDefaultContext(named)
 
@@ -49,9 +50,8 @@ export default function Raw({
             scope={{
               context,
               React,
-              [cleanDisplayName(
-                ComponentToRender.displayName
-              )]: ComponentToRender,
+              [cleanDisplayName(ComponentToRender.displayName)]:
+                ComponentToRender,
               ...nonDefault
             }}
             code={playground}

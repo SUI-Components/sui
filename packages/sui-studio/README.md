@@ -60,7 +60,7 @@ $ npx sui-studio dev house/window
 
 #### 2) Go to `http://localhost:3000`
 
-#### 3) Commit changes using the appropiate command
+#### 3) Commit changes using the appropriate command
 
 First of all, stage you changes for commit with `git add` or whatever you use.
 
@@ -106,7 +106,7 @@ Launch a development environment where you can see all your components at once. 
 
 ### `$ sui-studio build`
 
-Build a static version of a web app aimed to be deployed, where you will be able to interact with all components. The interface will be the same you use for the start command, only this one is optimized for production.
+Build a static version of a web app aimed to be deployed, where you will be able to interact with all the components. The interface will be the same you use for the start command, only this one is optimized for production.
 
 #### Options
 
@@ -135,7 +135,7 @@ Launch all project tests in a Karma browser.
 
 ### `$ cpx`
 
-This command allow you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.  
+This command allows you to copy files from a source to a destination using glob patterns. It's useful to copy files from the source to the build folder.
 
 #### Examples
 
@@ -170,7 +170,7 @@ describe('AtomButton', () => {
 
 The component will be a global object when running tests, so it is PARAMOUNT NOT to import it. In order to avoid problems with the linter, add relevant comments, as in the example above.
 
-### How works with different SUI contexts
+### How it works with different SUI contexts
 
 If there is a `demo/context.js` file where you define several SUI contexts for your components. You have to apply a patch to Mocha to allow setup describe by context. This allows you to have a "contextify" version of your component, for the context selected.
 
@@ -180,9 +180,9 @@ First, you have to import the patcher to create the `context` object, inside the
 import '@s-ui/studio/src/patcher-mocha'
 ```
 
-After that, you can use the `describe.context` object to has a key by every context definition in your `demo/context.js` file.
+After that, you can use the `describe.context` object to have a key for every context definition in your `demo/context.js` file.
 
-For example, if your context.js file looks like:
+For example, if your `context.js` file looks like:
 
 ```js
 export default () => {
@@ -221,7 +221,102 @@ describe.context.other('atom/button', AtomButton => {
 })
 ```
 
-### How works with other context (Not SUI Context)
+### How to test more than one component in the same studio component
+
+**TLDR: Apply the context exported from the `/demo/context.js` file for React components other than just the ones in `/test/index.test.js`.**
+
+Since you can use the `PATTERN=appraisal/report npm run test:studio` (see [the section on cli testing](#cli-testing-integration)) command to test a single studio component and you can have more than one `*.test.js` file inside the `/test` folder, you can use the following to test more than one component and apply to it the React Context exported from the `/demo/context.js` file.
+
+#### Example `/test` folder tree structure
+
+**Naming convention:** `components.{componentName}.test.js`.
+
+We use this naming convention so that we can have test files other than `index.test.js` than can test regular functions that are not React Components.
+
+For example, a test for a `sum(a, b)` function that checks if the addition is working fine.
+
+With this approach we have a way to define subcomponent tests that don't conflict with other test files that don't test React components.
+
+```sh
+test
+├── components.AgencyEvaluationForm.test.js
+├── components.AgencyEvaluationInfo.test.js
+└── index.test.js
+```
+
+Inside your `/demo/context.js` you export the React context that you want to apply to your component inside the Demo or test (sui domain, i18n, sui pde, etc).
+
+```js
+import {domain, i18nFactory} from 'utils'
+
+export default () => {
+  return i18nFactory().then(i18n => ({
+    default: {
+      domain: domain.build(),
+      i18n: {
+        culture: i18n.culture,
+        locale: i18n.locale,
+        t: i18n.t.bind(i18n),
+        c: i18n.c.bind(i18n),
+        n: i18n.n.bind(i18n),
+        f: i18n.f.bind(i18n)
+      }
+    }
+  }))
+}
+```
+
+Then, you will need to use the `'@s-ui/studio/src/patcher-mocha'` package that can use a `componentKey` to load a specific studio component.
+
+If we provide a component key that matches the naming system, we can set the context for subcomponents.
+
+```js
+// /test/components.AgencyEvaluationInfo.test.js
+
+/* global setupEnvironment */
+import '@s-ui/studio/src/patcher-mocha'
+
+import chai, {expect} from 'chai'
+import chaiDOM from 'chai-dom'
+import {ProvidersWrapper} from 'utils'
+
+chai.use(chaiDOM)
+
+const COMPONENT_KEY = 'appraisal/report/src/AgencyEvaluationInfo'
+
+describe.context.default(
+  'AgencyEvaluationInfo',
+  describeCallback,
+  COMPONENT_KEY
+)
+
+function describeCallback(AgencyEvaluationInfo) {
+  const WrappedComponent = props => (
+    <ProvidersWrapper>
+      <AgencyEvaluationInfo {...props} />
+    </ProvidersWrapper>
+  )
+
+  const setup = setupEnvironment(WrappedComponent)
+
+  const baseProps = {}
+
+  it('should render the pdf link', async () => {
+    // Given
+    const props = {...baseProps}
+    const linkText = 'Informe de ejemplo'
+
+    // When
+    const {findByRole} = setup(props)
+    const pdfLink = await findByRole('link', {name: linkText})
+
+    // Then
+    expect(pdfLink).to.have.text('Ver informe de ejemplo')
+  })
+}
+```
+
+### How it works with other context (Not SUI Context)
 
 Each test has a `setupEnvironment` function in global scope. This function works equal to React Testing Library (RTL) `render` method but has two wrapped features:
 
@@ -294,7 +389,41 @@ Add this scripts on your own components project
 }
 ```
 
-If you want to execute the tests for some specific categories only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
+```sh
+Usage: sui-studio-test [options]
+
+Options:
+  -H, --headless           Run components tests in CLI, headless mode
+  -W, --watch              Watch mode
+  -T, --timeout <timeout>  Timeout
+  --coverage               Create coverage (default: false)
+  -h, --help               display help for command
+
+  Examples:
+    $ sui-studio test --headless
+    $ sui-studio test --headless --watch
+    $ sui-studio test --help
+```
+
+You could execute some specific tests with the `sui-studio-test` command using `PATTERN` ENV variables.
+
+`PATTERN` should be a glob pattern and:
+
+- It will be checked against the test file component path, for example `'./ad/card/test/index.test.js'`.
+
+- It match any part of the test component path.
+
+- It uses a micromatch as a library for pattern matching (same as fast-glob).
+
+Some examples:
+
+- For a specific component: `PATTERN='./ad/card/test/index.test.js' sui-studio test` or `PATTERN='ad/card/test' sui-studio test`
+
+- For categories: `PATTERN='{ad,shipping}/*/test' sui-studio test`
+
+Also, there is a way to only execute component categories but this is **deprecated**:
+
+- If you want to execute the tests **for some specific categories** only use `CATEGORIES` environment variable. It takes a comma separated set of category names (e.g. `CATEGORIES="user,shipping" sui-studio test`)
 
 ## File structure
 

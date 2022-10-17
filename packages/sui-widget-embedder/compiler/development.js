@@ -1,10 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const devConfig = require('@s-ui/bundler/webpack.config.dev')
-const {pipe, removePlugin} = require('./utils')
+const {pipe, removePlugin} = require('./utils.js')
 
-module.exports = ({address, page, port}) =>
-  webpack({
+module.exports = ({address, browser = false, page, port}) => {
+  const config = {
     ...devConfig,
     context: path.resolve(process.cwd(), 'pages', page),
     entry: [`./index.js`],
@@ -17,6 +17,12 @@ module.exports = ({address, page, port}) =>
       publicPath: `http://${address}:${port}/`,
       filename: 'bundle.js',
       chunkLoadingGlobal: `webpackJsonp-${page}-dev`
-    },
-    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(devConfig.plugins)
-  })
+    }
+  }
+
+  if (!browser) {
+    config.plugins = pipe(removePlugin('HtmlWebpackPlugin'))(devConfig.plugins)
+  }
+
+  return webpack(config)
+}

@@ -1,9 +1,11 @@
 import {createHash} from 'crypto'
 import {mkdir, writeFile} from 'fs/promises'
 import {join} from 'path'
-import {extractCSSFromUrl} from './extract-from-url.js'
-import {devices} from './config.js'
+
 import fetch from 'node-fetch'
+
+import {devices} from './config.js'
+import {extractCSSFromUrl} from './extract-from-url.js'
 
 const TIME_BETWEEN_RETRIES = 1000
 const TIMES_TO_RETRY = 15
@@ -15,26 +17,71 @@ export const createUrlFrom = ({hostname, pathOptions}) => {
   return `${hostname}${path}`
 }
 
-const waitForHealthCheck = async ({healthCheckUrl}) => {
+const waitForHealthCheck = ({healthCheckUrl}) => {
   return new Promise(resolve => {
     async function retry(retries) {
+      console.log(
+        `Waiting for health check. Checking ${healthCheckUrl}, remaining ${retries} retries...`
+      )
       if (retries === 0) return resolve(false)
 
       let isResponseOK = false
       try {
         const response = await fetch(healthCheckUrl)
         isResponseOK = response.ok
-      } catch (e) {
-        isResponseOK = false
-      }
+      } catch (e) {}
 
       return isResponseOK
         ? resolve(true)
-        : global.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
+        : globalThis.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
     }
 
     retry(TIMES_TO_RETRY)
   })
+}
+
+const extractCriticalCSS = async ({
+  requiredClassNames,
+  retries = 3,
+  url,
+  configForMobileDevice
+} = {}) => {
+  if (retries === 0) {
+    console.log(
+      `Attempt limit reached. requiredClassNames has not been found in ${url}`
+    )
+    return ''
+  }
+
+  const css = await extractCSSFromUrl({
+    url,
+    ...configForMobileDevice
+  }).catch(() => {
+    console.error(`Error extracting Critical CSS from ${url}`)
+    return ''
+  })
+
+  if (!requiredClassNames) return css
+
+  const hasRequiredClasses = requiredClassNames.every(className =>
+    css?.includes(className)
+  )
+
+  if (!hasRequiredClasses) {
+    const nextTryNumber = retries - 1
+
+    console.log(
+      `requiredClassNames has not been found. Retries remaining: ${nextTryNumber}`
+    )
+
+    return extractCriticalCSS({
+      requiredClassNames,
+      retries: nextTryNumber,
+      url,
+      configForMobileDevice
+    })
+  }
+  return css
 }
 
 export async function extractCSSFromApp({routes, config = {}}) {
@@ -47,7 +94,9 @@ export async function extractCSSFromApp({routes, config = {}}) {
       hostname,
       pathOptions: healthCheckPath
     })
+
     const isHealthCheckEnabled = await waitForHealthCheck({healthCheckUrl})
+
     if (!isHealthCheckEnabled) {
       console.error(`Error reaching healthCheck ${healthCheckUrl}`)
       process.exit(1)
@@ -65,16 +114,18 @@ export async function extractCSSFromApp({routes, config = {}}) {
 
     manifest[pathKey] = cssFileName
 
-    const css = await extractCSSFromUrl({
+    const {requiredClassNames, retries} = pathOptions
+    const css = await extractCriticalCSS({
+      requiredClassNames,
+      retries,
       url,
-      ...configForMobileDevice
-    }).catch(() => {
-      console.error(`Error extracting Critical CSS from ${url}`)
-      return ''
+      configForMobileDevice
     })
 
     const cssPathFile = join(process.cwd(), outputDir, cssFileName)
     writeFilesPromises.push(writeFile(cssPathFile, css))
+
+    console.log(`Critical CSS for ${url} extracted`)
   }
 
   const results = await Promise.allSettled(writeFilesPromises)

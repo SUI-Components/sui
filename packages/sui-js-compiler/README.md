@@ -18,7 +18,7 @@ $ npm install @s-ui/js-compiler --save-dev
 
 ```json
 "scripts": {
-  "prepare": "sui-js-compiler"
+  "prepublishOnly": "sui-js-compiler"
 }
 ```
 
@@ -26,6 +26,16 @@ $ npm install @s-ui/js-compiler --save-dev
 
 ```sh
 $ ./node_modules/.bin/sui-js-compiler
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| --ignore | string \| glob | - | Takes all the pattern comma separated and ignore them during compilation. |
+
+```sh
+$ ./node_modules/.bin/sui-js-compiler --ignore=./src/**/*.test.js
 ```
 
 ## Requirements

@@ -1,12 +1,12 @@
 {
   "name": "@s-ui/pde",
-  "version": "2.17.0",
+  "version": "2.20.0",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepare": "npm run lib",
+    "prepublishOnly": "npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:browser": "NODE_ENV=test sui-test browser",
     "test:server:watch": "npm run test:server -- --watch",
@@ -24,6 +24,7 @@
     "react": "16 || 17"
   },
   "devDependencies": {
+    "@s-ui/test": "8",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",

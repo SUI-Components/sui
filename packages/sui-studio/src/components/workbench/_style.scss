@@ -2,5 +2,39 @@
   &-navigation {
     background: $c-white;
     padding: 16px;
+    border-bottom: solid 1px $c-gray-lightest;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+    line-height: 1.25;
+    padding-bottom: 0.4em;
+  }
+
+  h1 {
+    font-size: 2.25em;
+    border-bottom: 1px solid #eaecef;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 0.875em;
+    font-weight: bold;
+    margin-top: 56px;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: 1em;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 0.875em;
   }
 }

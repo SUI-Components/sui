@@ -18,14 +18,17 @@ const PACKAGE_VERSION_INCREMENT = {
   MAJOR: 3
 }
 
-const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf']
-
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
   return [body, footer].some(
     msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE')
   )
+}
+
+const isCommitReleaseTrigger = commit => {
+  const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
+  return COMMIT_TYPES_WITH_RELEASE.includes(commit.type)
 }
 
 const flattenForMonopackage = status =>
@@ -42,6 +45,8 @@ const flatten = status =>
     },
     {increment: PACKAGE_VERSION_INCREMENT.NOTHING, commits: []}
   )
+
+const getPkgFromScope = scope => (scope === 'Root' ? '.' : scope)
 
 const check = () =>
   new Promise(resolve => {
@@ -67,12 +72,13 @@ const check = () =>
         preset: 'angular',
         append: true,
         transform: (commit, cb) => {
-          if (!packagesWithChangelog.includes(commit.scope)) return cb()
+          const pkg = getPkgFromScope(commit.scope)
 
-          const pkg = commit.scope
+          if (!packagesWithChangelog.includes(pkg)) return cb()
+
           let toPush = null
 
-          if (COMMIT_TYPES_WITH_RELEASE.includes(commit.type)) {
+          if (isCommitReleaseTrigger(commit)) {
             status[pkg].increment = Math.max(
               status[pkg].increment,
               PACKAGE_VERSION_INCREMENT.MINOR
@@ -108,5 +114,6 @@ const check = () =>
 
 module.exports = {
   check,
-  isCommitBreakingChange
+  isCommitBreakingChange,
+  isCommitReleaseTrigger
 }

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.38.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-helpers:** Upgrade dependencies across packages ([f4f7be1](https://github.com/SUI-Components/sui/commit/f4f7be197389cb86c9e221b4e1d98598a2eb9074))
+
+
+
+# 1.37.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-helpers:** Ugrade fs-extra dependency and use same in all packages ([49a2102](https://github.com/SUI-Components/sui/commit/49a2102516b80780e3613162e5ce6c46221bfc89))
+
+
+
 # 1.36.0 (2021-11-29)
 
 

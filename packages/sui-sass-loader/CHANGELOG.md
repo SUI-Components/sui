@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 1.4.0 (2022-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-sass-loader:** remove not used scripts ([a070d74](https://github.com/SUI-Components/sui/commit/a070d744cc9cb6a6a7dc0b471e5d0bb4695dedda))
+
+
+
+# 1.3.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-sass-loader:** Upgrade dependencies across packages ([61fe3fb](https://github.com/SUI-Components/sui/commit/61fe3fb27fad3fd9cc3a07a74d506390dbd4c6c5))
+
+
+
+# 1.2.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-sass-loader:** Ugrade fs-extra dependency and use same in all packages ([37eeaf1](https://github.com/SUI-Components/sui/commit/37eeaf1536ed8cf3210fdc19a7bc22c346c3cffa))
+
+
+
 # 1.1.0 (2022-01-27)
 
 

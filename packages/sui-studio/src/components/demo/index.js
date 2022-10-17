@@ -1,25 +1,29 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 import React, {Component} from 'react'
+
 import PropTypes from 'prop-types'
-
-import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons'
-import Preview from '../preview'
-import Style from '../style'
-
-import {importMainModules, fetchPlayground} from '../tryRequire'
-import stylesFor, {themesFor} from './fetch-styles'
-import CodeEditor from './CodeEditor'
-import ContextButtons from './ContextButtons'
-import ThemesButtons from './ThemesButtons'
 
 import SUIContext from '@s-ui/react-context'
 
 import {
+  iconClose,
+  iconCode,
+  iconFullScreen,
+  iconFullScreenExit
+} from '../icons/index.js'
+import Preview from '../preview/index.js'
+import Style from '../style/index.js'
+import {fetchPlayground, importMainModules} from '../tryRequire.js'
+import CodeEditor from './CodeEditor.js'
+import ContextButtons from './ContextButtons.js'
+import stylesFor, {themesFor} from './fetch-styles.js'
+import ThemesButtons from './ThemesButtons.js'
+import {
+  cleanDisplayName,
   createContextByType,
   isFunction,
-  cleanDisplayName,
   removeDefaultContext
-} from './utilities'
+} from './utilities.js'
 
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const CONTAINER_CLASS = 'sui-Studio'
@@ -191,9 +195,8 @@ export default class Demo extends Component {
               scope={{
                 context,
                 React,
-                [cleanDisplayName(
-                  ComponentToRender.displayName
-                )]: ComponentToRender,
+                [cleanDisplayName(ComponentToRender.displayName)]:
+                  ComponentToRender,
                 domain,
                 ...nonDefaultExports
               }}

@@ -1,4 +1,8 @@
 @import './vars.scss';
+@import './theme.scss';
+
 body {
   color: $red;
+  width: 25px / 2px;
+  margin: $m-v-small;
 }

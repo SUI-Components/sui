@@ -44,6 +44,14 @@ program
   })
   .parse(process.argv)
 
+const {
+  scope: packageScope,
+  githubEmail,
+  githubToken,
+  githubUser,
+  skipCi
+} = program.opts()
+
 const BASE_DIR = process.cwd()
 
 const suiMonoBinPath = require.resolve('@s-ui/mono/bin/sui-mono')
@@ -62,22 +70,19 @@ const scopeMapper = ({scope, status}) => ({
 })
 
 const releasesByPackages = ({status}) => {
-  const {scope: packageScope} = program
   return Object.keys(status)
     .filter(scope => (packageScope ? scope === packageScope : true))
     .map(scope => scopeMapper({scope, status}))
 }
 
-const releasePackage = async ({pkg, code, skipCI} = {}) => {
+const releasePackage = async ({pkg, code, skipCi} = {}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  const {
-    private: isPrivatePackage,
-    config: localPackageConfig
-  } = getPackageJson(cwd, true)
+  const {private: isPrivatePackage, config: localPackageConfig} =
+    getPackageJson(cwd, true)
 
   await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
@@ -86,9 +91,8 @@ const releasePackage = async ({pkg, code, skipCI} = {}) => {
 
   // Add [skip ci] to the commit message to avoid CI build
   // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
-  const commitMsg = `release(${packageScope}): v${version}${
-    skipCI ? ' [skip ci]' : ''
-  }`
+  const skipCiSuffix = skipCi ? ' [skip ci]' : ''
+  const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
 
   await exec(`git commit -m "${commitMsg}"`, {cwd})
 
@@ -142,7 +146,6 @@ const checkIsAutomaticRelease = ({githubToken, githubUser, githubEmail}) =>
 
 const checkShouldRelease = async () => {
   await exec('git pull origin master')
-  const {githubEmail, githubToken, githubUser} = program
 
   const [isAutomaticRelease, isMasterBranchActive] = await Promise.all([
     checkIsAutomaticRelease({githubEmail, githubToken, githubUser}),
@@ -162,8 +165,6 @@ checkShouldRelease()
     }
 
     return checker.check().then(async status => {
-      const {githubEmail, githubToken, githubUser} = program
-
       if (isAutomaticRelease) {
         await prepareAutomaticRelease({
           githubEmail,
@@ -177,7 +178,7 @@ checkShouldRelease()
       )
 
       for (const pkg of packagesToRelease) {
-        await releasePackage({...pkg, skipCI: program.skipCi})
+        await releasePackage({...pkg, skipCi})
       }
 
       console.log(

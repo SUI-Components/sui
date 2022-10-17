@@ -1,9 +1,10 @@
 import {parseQueryString} from '@s-ui/js/lib/string/index.js'
+
 import {trackedEventsLocalCache} from './trackedEventsLocalCache.js'
 
 const getServerStrategy = () => ({
-  getVariation: ({pde, experimentName, attributes}) => {
-    return pde.getVariation({pde, name: experimentName, attributes})
+  getVariation: ({pde, experimentName, attributes, adapterId}) => {
+    return pde.getVariation({pde, name: experimentName, attributes, adapterId})
   },
   trackExperiment: () => {},
   getForcedValue: ({key, queryString}) => {
@@ -17,10 +18,11 @@ const getServerStrategy = () => ({
 })
 
 const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
-  getVariation: ({pde, experimentName, attributes}) => {
+  getVariation: ({pde, experimentName, attributes, adapterId}) => {
     const variationName = pde.activateExperiment({
       name: experimentName,
-      attributes
+      attributes,
+      adapterId
     })
 
     return variationName

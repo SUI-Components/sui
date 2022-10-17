@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
-import {suitClass} from '../src/classes/index'
+
+import {suitClass} from '../src/classes/index.js'
 
 describe('@s-ui/js', () => {
   describe('classes:suitClass', () => {

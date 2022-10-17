@@ -1,2 +1,2 @@
-import '../common/AnemicModelSpec'
-import '../common/EntryPointSpec'
+import '../common/AnemicModelSpec.js'
+import '../common/EntryPointSpec.js'

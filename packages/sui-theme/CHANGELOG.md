@@ -1,5 +1,26 @@
 # CHANGELOG
 
+# 8.124.0 (2022-09-29)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** remove not required rimraf dependency ([d648db5](https://github.com/SUI-Components/sui/commit/d648db5bda012c3af40dde387ef678b9ba12bd2d))
+
+
+
+# 8.123.0 (2022-09-05)
+
+
+### Features
+
+* **packages/sui-theme:** add new classes folder ([016d381](https://github.com/SUI-Components/sui/commit/016d3814c27933d428c38bf7fab6e96bf20c085c))
+* **packages/sui-theme:** add spacing utils ([5568faa](https://github.com/SUI-Components/sui/commit/5568faa4fc173086b89a73044c837a001d3b4c4d))
+* **packages/sui-theme:** create in same file spacing classes ([0f3bd24](https://github.com/SUI-Components/sui/commit/0f3bd2486247f29688149db05343e79e577437de))
+* **packages/sui-theme:** update classes tree directory ([f8de229](https://github.com/SUI-Components/sui/commit/f8de229f70f96d611bdd36c035c638a4debfdc87))
+
+
+
 # 8.122.0 (2022-02-08)
 
 

@@ -8,7 +8,8 @@ const config = require('../stylelint.config.js')
 const {
   checkFilesToLint,
   getGitIgnoredFiles,
-  getFilesToLint
+  getFilesToLint,
+  stageFilesIfRequired
 } = require('../src/helpers.js')
 
 const EXTENSIONS = ['scss']
@@ -26,34 +27,43 @@ program
   )
   .parse(process.argv)
 
-getFilesToLint(EXTENSIONS, program.pattern).then(files => {
-  if (
-    !checkFilesToLint({
-      files,
-      language: 'SCSS',
-      defaultPattern: DEFAULT_PATTERN
-    })
-  )
-    return
+const {addFixes, fix, pattern, staged} = program.opts()
 
-  return stylelint
-    .lint({
-      files,
-      formatter: 'string',
-      config: {
-        ...config,
-        ignoreFiles: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
-      }
-    })
-    .then(({output, errored}) => {
-      console.log(output)
+getFilesToLint({extensions: EXTENSIONS, defaultPattern: pattern, staged}).then(
+  files => {
+    if (
+      !checkFilesToLint({
+        files,
+        language: 'SCSS',
+        defaultPattern: DEFAULT_PATTERN
+      })
+    )
+      return
 
-      if (errored) {
-        throw new Error('You must fix linting errores before continuing...')
-      }
-    })
-    .catch(error => {
-      process.exitCode = 1
-      console.error('[sui-lint]', error)
-    })
-})
+    return stylelint
+      .lint({
+        files,
+        formatter: 'string',
+        config: {
+          ...config,
+          ignoreFiles: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+        },
+        fix
+      })
+      .then(({output, errored}) => {
+        console.log(output)
+
+        if (fix) {
+          stageFilesIfRequired({extensions: EXTENSIONS, staged, addFixes})
+        }
+
+        if (errored) {
+          throw new Error('You must fix linting errors before continuing...')
+        }
+      })
+      .catch(error => {
+        process.exitCode = 1
+        console.error('[sui-lint]', error)
+      })
+  }
+)

@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 
 import * as React from 'react'
-import { Title, HeadProvider, Link, Meta } from 'react-head'
+import { HeadProvider, Link, Meta, Title } from 'react-head'
+
 import Body from './Body'
 import Html from './Html'
-import { extractTitleFrom, extractTagsFrom, renderTags } from './utils'
+import { extractTagsFrom, extractTitleFrom, renderTags } from './utils'
 
 interface HeadProps {
   bodyAttributes?: object
+  children?: React.ReactNode
   htmlAttributes?: object
   title?: string
   meta?: Array<{

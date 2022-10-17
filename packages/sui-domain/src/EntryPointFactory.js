@@ -1,14 +1,15 @@
 import createNotImplementedUseCase from './createNotImplementedUseCase.js'
 
-export default ({useCases, config}) =>
+export default ({useCases, config, logger}) =>
   class EntryPoint {
     subscribers = {}
 
-    constructor(params = {config: {}}) {
+    constructor(params = {config: {}, logger: {}}) {
       // decide to use a static config from the factory
       // or use a config passed to the constructor that could be mutated
       this._config = config || params.config
       this._useCases = useCases
+      this._logger = logger || params.logger
     }
 
     /**
@@ -50,7 +51,10 @@ export default ({useCases, config}) =>
               // load async the factory, execute use case and return the promise
               return loader()
                 .then(factory =>
-                  getMethod(factory)({config: this._config}).execute(params)
+                  getMethod(factory)({
+                    config: this._config,
+                    logger: this._logger
+                  }).execute(params)
                 )
                 .then(result => {
                   subscriptionsForUseCase.forEach(fn =>
@@ -88,7 +92,8 @@ export default ({useCases, config}) =>
                     // black magic: mutate the object, very small memory leak but that
                     // makes dispose working async and we need it
                     ret.dispose = getMethod(factory)({
-                      config: this._config
+                      config: this._config,
+                      logger: this._logger
                     }).$.execute.subscribe(onNext, onError).dispose
                   })
                   // return the object that will be mutated async

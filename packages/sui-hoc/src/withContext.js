@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
+
 import PropTypes from 'prop-types'
 
 export default context => Target =>

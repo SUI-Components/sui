@@ -1,15 +1,25 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+// @ts-check
+
+const program = require('commander')
 const {
   checkFilesToLint,
   getFilesToLint,
   getGitIgnoredFiles,
-  isOptionSet,
   stageFilesIfRequired
 } = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')
+
+program
+  .option('--add-fixes')
+  .option('--staged')
+  .option('--fix', 'fix automatically problems with js files')
+  .parse(process.argv)
+
+const {addFixes, fix, staged} = program.opts()
 
 const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -22,7 +32,11 @@ const baseConfig = {
 }
 
 ;(async function main() {
-  const files = await getFilesToLint(EXTENSIONS, DEFAULT_PATTERN)
+  const files = await getFilesToLint({
+    extensions: EXTENSIONS,
+    defaultPattern: DEFAULT_PATTERN,
+    staged
+  })
   if (
     !checkFilesToLint({
       files,
@@ -32,7 +46,6 @@ const baseConfig = {
   )
     return
 
-  const fix = isOptionSet('fix')
   const eslint = new ESLint({
     baseConfig,
     fix,
@@ -44,7 +57,7 @@ const baseConfig = {
 
   if (fix) {
     await ESLint.outputFixes(results)
-    stageFilesIfRequired(EXTENSIONS)
+    stageFilesIfRequired({extensions: EXTENSIONS, staged, addFixes})
   }
 
   const formatter = await eslint.loadFormatter(LINT_FORMATTER)

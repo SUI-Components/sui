@@ -1,12 +1,12 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.9.0",
+  "version": "1.11.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "lib": "rm -rf ./lib && tsc",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",

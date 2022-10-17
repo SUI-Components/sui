@@ -1,5 +1,6 @@
 import {expect} from 'chai'
-import {HtmlBuilder} from '../../server/template'
+
+import {HtmlBuilder} from '../../server/template/index.js'
 
 describe('template builder', () => {
   it('should hydrate config and initial props', () => {

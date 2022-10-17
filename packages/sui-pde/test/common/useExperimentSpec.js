@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
-import {cleanup, renderHook} from '@testing-library/react-hooks'
 import {expect} from 'chai'
-import PdeContext from '../../src/contexts/PdeContext'
-import useExperiment from '../../src/hooks/useExperiment'
-import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache'
 import sinon from 'sinon'
+
+import {cleanup, renderHook} from '@testing-library/react-hooks'
+
+import PdeContext from '../../src/contexts/PdeContext.js'
+import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
+import useExperiment from '../../src/hooks/useExperiment.js'
 
 describe('useExperiment hook', () => {
   afterEach(() => {

@@ -1,5 +1,91 @@
 # CHANGELOG
 
+# 1.24.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** Update node-fetch to latest v2 version ([d47dfdb](https://github.com/SUI-Components/sui/commit/d47dfdb9cfeb2263888f64d79a9231461306ccae))
+
+
+
+# 1.23.0 (2022-08-29)
+
+
+### Features
+
+* **packages/sui-critical-css:** add some logging about critical css extraction ([e68dd66](https://github.com/SUI-Components/sui/commit/e68dd66a799c4b93be47e602b2fdb332bc03324e))
+
+
+
+# 1.22.0 (2022-08-11)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade vite version for sui-svg ([24910e7](https://github.com/SUI-Components/sui/commit/24910e7f36b2c87f258320d4751f543960f80c16))
+
+
+
+# 1.21.0 (2022-06-21)
+
+
+### Features
+
+* **packages/sui-critical-css:** Use new critical-css-middleware package ([d2f25a3](https://github.com/SUI-Components/sui/commit/d2f25a3f0bbcda41a60f4c6c8ce7584d5bdb6009))
+
+
+
+# 1.20.0 (2022-05-30)
+
+
+### Features
+
+* **packages/sui-critical-css:** Better logging for Critical CSS ([40d4749](https://github.com/SUI-Components/sui/commit/40d4749310477089ff1f0abb04accc00123d31a6))
+
+
+
+# 1.19.0 (2022-05-02)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade dependencies ([05fe49d](https://github.com/SUI-Components/sui/commit/05fe49dd392d59d950e02fe928f35101461d7cd6))
+
+
+
+# 1.18.0 (2022-04-13)
+
+
+### Features
+
+* **packages/sui-critical-css:** Upgrade playwright dependency ([b595b15](https://github.com/SUI-Components/sui/commit/b595b1519174b739d15f5115defce9d145842ad5))
+
+
+
+# 1.17.0 (2022-04-11)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** method parameters ([daa81a1](https://github.com/SUI-Components/sui/commit/daa81a11b60638b96af7f0362092652f1e1eb3c8))
+
+
+### Features
+
+* **packages/sui-critical-css:** add required class names and extract critical css retrier logic ([8354980](https://github.com/SUI-Components/sui/commit/8354980f484e1970650a6087a57ceacbe1818e33))
+
+
+
+# 1.16.0 (2022-03-08)
+
+
+### Features
+
+* **packages/sui-critical-css:** Ugrade fs-extra dependency and use same in all packages ([c951d2b](https://github.com/SUI-Components/sui/commit/c951d2b3f67478993c62053e51ab2d1f2e4991d5))
+
+
+
 # 1.15.0 (2022-01-28)
 
 

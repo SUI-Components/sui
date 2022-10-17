@@ -1,7 +1,13 @@
 import { useContext, useEffect, useRef, useState } from 'react'
+
 import SUIContext from '@s-ui/react-context'
 import { RouteInfo } from '@s-ui/react-router/src/types'
-import { ClientPageComponent, WithInitialPropsComponent } from './types'
+
+import {
+  ClientPageComponent,
+  InitialProps,
+  WithInitialPropsComponent
+} from './types'
 
 const INITIAL_PROPS_KEY = '__INITIAL_PROPS__'
 
@@ -68,7 +74,14 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
         }
 
         Page.getInitialProps({ context, routeInfo })
-          .then((initialProps: object) => {
+          .then((initialProps: InitialProps) => {
+            const { __HTTP__: http } = initialProps
+
+            if (http?.redirectTo !== undefined) {
+              window.location = http.redirectTo
+              return
+            }
+
             setState({ initialProps, isLoading: false })
           })
           .catch((error: Error) => {

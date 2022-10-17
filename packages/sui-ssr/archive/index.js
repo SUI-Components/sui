@@ -2,19 +2,21 @@ const path = require('path')
 const fs = require('fs')
 const archiver = require('archiver')
 const program = require('commander')
-const authDefinitionBuilder = require('./authDefinitionBuilder')
+const authDefinitionBuilder = require('./authDefinitionBuilder.js')
+
+const {auth, outputFileName} = program.opts()
 
 module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
   new Promise((resolve, reject) => {
-    const authVariableDefinition = program.auth
-      ? authDefinitionBuilder(program.auth.split(':'))
+    const authVariableDefinition = auth
+      ? authDefinitionBuilder(auth.split(':'))
       : ''
     const entryPointPreWork = !entryPoint
       ? ''
       : 'COPY ./entry-point ./entry-point\nRUN chmod +x ./entry-point'
 
     const entryPointLine = !entryPoint ? '' : 'ENTRYPOINT ["./entry-point"]'
-    const output = program.outputFileName
+    const output = outputFileName
       ? fs.createWriteStream(outputZipPath)
       : process.stdout
     const archive = archiver('zip', {
@@ -25,7 +27,7 @@ module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
       // eslint-disable-next-line no-console
       console.log(
         '-> File',
-        program.outputFileName.magenta.bold + '.zip'.magenta.bold,
+        outputFileName.magenta.bold + '.zip'.magenta.bold,
         ' was created - size ',
         Math.round(archive.pointer() / 1024).toString().blue.bold +
           ' kb'.blue.bold

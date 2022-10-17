@@ -5,12 +5,12 @@ const path = require('path')
 const {spawn} = require('child_process')
 
 const program = require('commander')
-const colors = require('@s-ui/helpers/colors')
 const toKebabCase = require('just-kebab-case')
 const toPascalCase = require('just-pascal-case')
 
-const {showError} = require('@s-ui/helpers/cli')
-const {writeFile} = require('@s-ui/helpers/file')
+const colors = require('@s-ui/helpers/colors.js')
+const {showError} = require('@s-ui/helpers/cli.js')
+const {writeFile} = require('@s-ui/helpers/file.js')
 
 program
   .option('-C, --context [customContextPath]', 'add context for this component')
@@ -66,7 +66,7 @@ const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 const TEST_DIR = `${COMPONENT_PATH}/test/`
 const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, scope, prefix = 'sui', swc} = program
+const {context, scope, prefix = 'sui', swc} = program.opts()
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
@@ -88,7 +88,7 @@ import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
-${context ? '' : "import Component from '../src/index'"}
+${context ? '' : "import Component from '../src/index.js'"}
 
 ${context ? "import '@s-ui/studio/src/patcher-mocha'" : ''}
 
@@ -197,7 +197,7 @@ test
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npm run build:js && npm run build:styles",
+    "prepublishOnly": "rimraf lib && npm run build:js && npm run build:styles",
     "build:js": "${buildJs}",
     "build:styles": "cpx './src/**/*.scss' ./lib"
   },

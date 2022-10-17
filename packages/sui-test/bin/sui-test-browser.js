@@ -8,6 +8,7 @@ const runner = require('./karma/index.js')
 program
   .option('-W, --watch', 'Run in watch mode')
   .option('-C, --ci', 'Run a Firefox headless for CI testing')
+  .option('-H, --headless', 'Run a headless browser for testing')
   .option(
     '-P, --pattern <pattern>',
     'Path pattern to include',
@@ -36,14 +37,24 @@ program
 const {
   ci,
   coverage,
+  headless,
   ignorePattern,
   pattern,
   srcPattern,
   timeout,
   watch
-} = program
+} = program.opts()
 
-runner({coverage, watch, ci, pattern, ignorePattern, srcPattern, timeout})
+runner({
+  ci,
+  coverage,
+  headless,
+  ignorePattern,
+  pattern,
+  srcPattern,
+  timeout,
+  watch
+})
   .then(output => {
     if (output != null) process.stdout.write(output + '\n')
     if (!watch) process.exit(0)

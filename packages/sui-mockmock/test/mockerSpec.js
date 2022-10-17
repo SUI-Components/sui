@@ -1,5 +1,6 @@
-import {expect} from 'chai'
 import axios from 'axios'
+import {expect} from 'chai'
+
 import Mocker from '../src/http'
 
 describe('#ClientMocker', () => {

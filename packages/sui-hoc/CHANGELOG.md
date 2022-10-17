@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.36.0 (2022-10-05)
+
+
+### Features
+
+* **packages/sui-mono:** Remove linter warnings ([de481b4](https://github.com/SUI-Components/sui/commit/de481b4a8ccad68ac621e224101620b0b4e4d680))
+
+
+
+# 1.35.0 (2022-03-01)
+
+
+### Features
+
+* **packages/sui-hoc:** Migrate to ESM ([8b37873](https://github.com/SUI-Components/sui/commit/8b3787359c11b309a68029e003a88538b95d8546))
+
+
+
 # 1.34.0 (2021-04-19)
 
 

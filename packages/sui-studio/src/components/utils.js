@@ -1,5 +1,7 @@
 import {forwardRef} from 'react'
+
 import hoistNonReactStatics from 'hoist-non-react-statics'
+
 import SUIContext from '@s-ui/react-context'
 
 const DEFAULT_LOGO =

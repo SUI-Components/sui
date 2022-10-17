@@ -1,8 +1,10 @@
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
+
 import {expect} from 'chai'
-import {publicFolder} from '../../server/utils/index.js'
+
 import utilsFactory from '../../server/utils/factory.js'
+import {publicFolder} from '../../server/utils/index.js'
 import {getMockedRequest} from './fixtures/index.js'
 import {publicFolderWithMultiSiteConfig} from './fixtures/utils.js'
 

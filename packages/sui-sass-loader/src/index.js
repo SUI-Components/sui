@@ -14,8 +14,10 @@ const utils = require('./utils.js')
 const BOM_HEADER = '\uFEFF'
 const EXT_PRECEDENCE = ['.scss', '.css']
 const MATCH_URL_ALL = /url\(\s*(['"]?)([^ '"()]+)(\1)\s*\)/g
-const MATCH_IMPORTS = /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
-const MATCH_USES = /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
+const MATCH_IMPORTS =
+  /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
+const MATCH_USES =
+  /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_FILES = /(['"])([^,;'"]+)(\1)/g
 
 /**

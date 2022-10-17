@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 2.21.0 (2022-03-28)
+
+
+### Features
+
+* **packages/sui-react-initial-props:** fix lint issues ([820e6a6](https://github.com/SUI-Components/sui/commit/820e6a6eab602812578e8b409add90c0c7ab4e4a))
+* **packages/sui-react-initial-props:** fix lint issues ([9840560](https://github.com/SUI-Components/sui/commit/9840560d93213693e7b02e0bdefd4d64fc1062bc))
+* **packages/sui-react-initial-props:** redirect support ([031930c](https://github.com/SUI-Components/sui/commit/031930c23ba88ca867b610b2ae0a2567aa7c125b))
+
+
+
 # 2.20.0 (2021-10-29)
 
 

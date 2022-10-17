@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.3.0 (2022-10-03)
+
+
+### Bug Fixes
+
+* **packages/sui-mockmock:** rollback axios version ([4a1e5ed](https://github.com/SUI-Components/sui/commit/4a1e5eda534075b0eacba473cc90d08cf894c451))
+
+
+
+# 2.2.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-mockmock:** Update axios to latest version ([4635dca](https://github.com/SUI-Components/sui/commit/4635dca20ec94b5fce834fba0c8932384b5c1997))
+
+
+
 # 2.1.0 (2021-11-30)
 
 

@@ -1,12 +1,12 @@
 {
   "name": "@s-ui/react-context",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "",
   "main": "lib/index",
   "types": "src/index.tsx",
   "scripts": {
     "lib": "rm -rf ./lib && tsc",
-    "prepare": "npm run lib"
+    "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",

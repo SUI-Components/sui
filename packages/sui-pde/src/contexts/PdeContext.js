@@ -1,3 +1,3 @@
-import React from 'react'
+import {createContext} from 'react'
 
-export default React.createContext({pde: null})
+export default createContext({pde: null})

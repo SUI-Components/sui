@@ -1,25 +1,26 @@
 {
   "name": "@s-ui/test-contract",
-  "version": "1.2.0",
-  "description": "Useful tooling for executing contract tests",
-  "keywords": [],
-  "author": "",
+  "version": "2.7.0",
+  "description": "Useful tooling for defining contract tests (based on Pact) that will generate contract documents.",
   "license": "ISC",
   "main": "src/index.js",
+  "type": "module",
   "bin": {
     "sui-test-contract": "bin/index.js"
   },
   "scripts": {
-    "lib": "babel --out-dir ./lib  ./src",
-    "prepare": "npm run lib",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib",
     "test": "npm run test:server",
     "test:server": "NODE_ENV=test sui-test server",
     "test:server:watch": "npm run test:server -- --watch"
   },
   "dependencies": {
-    "@pact-foundation/absolute-version": "0.0.4",
-    "@pact-foundation/pact": "9.16.4",
-    "commander": "8.3.0"
+    "@pact-foundation/pact": "9.18.1",
+    "@pactflow/pact-msw-adapter": "1.2.1",
+    "commander": "8.3.0",
+    "headers-polyfill": "3.0.10",
+    "msw": "0.42.3"
   },
   "devDependencies": {
     "@s-ui/domain": "2"

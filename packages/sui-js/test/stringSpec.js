@@ -1,12 +1,13 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
+
 import {
-  parseQueryString,
-  toQueryString,
   fromArrayToCommaQueryString,
   getRandomString,
-  highlightText
-} from '../src/string/index'
+  highlightText,
+  parseQueryString,
+  toQueryString
+} from '../src/string/index.js'
 
 describe('@s-ui/js', () => {
   describe('string:toQueryString', () => {
