@@ -146,14 +146,20 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.+(ts|tsx)'],
-      extends: ['standard-with-typescript'],
+      extends: ['standard-with-typescript', 'standard-react', 'prettier'],
       parserOptions: {
         project: './tsconfig.json'
       },
       rules: {
         'no-return-await': RULES.OFF,
         'prettier/prettier': RULES.OFF,
-        'react/react-in-jsx-scope': RULES.OFF
+        'react/react-in-jsx-scope': RULES.OFF,
+        'react/no-unused-prop-types': RULES.OFF,
+        '@typescript-eslint/explicit-function-return-type': [
+          RULES.OFF,
+          {allowTypedFunctionExpressions: false}
+        ],
+        'no-unused-expression-chai': true
       }
     }
   ]
