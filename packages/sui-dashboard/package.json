@@ -9,7 +9,7 @@
   "scripts": {},
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "8.3.0",

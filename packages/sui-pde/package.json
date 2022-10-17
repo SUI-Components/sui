@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@optimizely/optimizely-sdk": "4.5.1",
     "@s-ui/js": "2"

@@ -7,6 +7,6 @@
     "lib": "rm -rf ./lib && cp -R src lib",
     "prepublishOnly": "npm run lib"
   },
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/SUI-Components/sui"
 }

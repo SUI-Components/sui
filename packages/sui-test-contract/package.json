@@ -2,7 +2,7 @@
   "name": "@s-ui/test-contract",
   "version": "2.7.0",
   "description": "Useful tooling for defining contract tests (based on Pact) that will generate contract documents.",
-  "license": "ISC",
+  "license": "MIT",
   "main": "src/index.js",
   "type": "module",
   "bin": {

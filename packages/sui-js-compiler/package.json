@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@swc/core": "1.2.194",
     "@swc/helpers": "0.3.16",
