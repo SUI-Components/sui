@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 11.27.0 (2022-10-17)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add a fill to the buttons icon ([c553b73](https://github.com/SUI-Components/sui/commit/c553b73534aaae10f31344e836413ebd189a712b)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+* **packages/sui-studio:** adjust icon size ([e726305](https://github.com/SUI-Components/sui/commit/e7263059aa492da08c89a06c8d2a4ee055592f88)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+* **packages/sui-studio:** change display from flex to block ([8495fe7](https://github.com/SUI-Components/sui/commit/8495fe7ec576162f9b7dceeeffb8e2c4150596f3)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+
+
+
 # 11.26.0 (2022-10-13)
 
 
