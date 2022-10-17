@@ -1,11 +1,11 @@
 {
   "name": "@s-ui/mock-provider",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.5",
   "main": "lib/index.js",
   "description": "mock provider",
   "types": "lib/index",
   "scripts": {
-    "lib": "rm -rf ./lib && tsc",
+    "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],

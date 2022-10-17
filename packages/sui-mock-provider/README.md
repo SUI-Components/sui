@@ -34,23 +34,116 @@ import {getUserHandler} from './mocks/exampleGateway/user/handlers.js'
 export default [getUserHandler]
 ```
 
-#### 2. Create mocker init factory
+#### 2. Expose mocker from mocks folder
 
-In order to use all defined or imported handlers, we need to create a mocker init factory.
-This factory will use getMocker function to create a mocker instance.
+We should use browser or server getMocker to create a mocker instance ready to use in our app. See how it will looks like:
 
 ```js
-// ./mocks/initMocker.js
-import {getMocker} from '@s-ui/mock-provider'
+// ./mocks/server.js
+import {getServerMocker} from '@s-ui/mock-provider/lib/server'
+import handlers from './index.js'
+
+export {rest} from '@s-ui/mock-provider/lib/browser'
+export const mocker = getServerMocker(...handlers)
+```
+
+```js
+// ./mocks/browser.js
+import {getBrowserMocker} from '@s-ui/mock-provider/lib/browser'
+import handlers from './index.js'
+
+export {rest} from '@s-ui/mock-provider/lib/browser'
+export const mocker = getBrowserMocker(...handlers)
+```
+
+Given we have isomorphic tests in our project, we should create a `./mocks/isomorphicMocker.js` file that exports the mocker instance depending on the environment (browser / server).
+
+```js
+// ./mocks/isomorphicMocker.js
+import initMocker from '@s-ui/mock-provider'
 import applicationHandlers from './index.js'
 
-export const initMocker = (handlers = applicationHandlers) => getMocker(handlers)
+export {rest} from '@s-ui/mock-provider/lib/browser'
+export const getMocker = (handlers = applicationHandlers) =>
+  initMocker(handlers)
 ```
 
 #### 3. Use it everywhere
-Use this `initMocker` to init your mocks everywhere in your application, it means integration tests, e2e tests, component tests, etc. but also in your application code.
+Use those mockers to init your mocks everywhere in your application, it means integration tests, e2e tests, component tests, etc. but also in your application code.
 
+Browser example:
 
-### `getMocker`
+```js
+// src/app.js
+if (process.env.STAGE === 'development') {
+  const worker = await import('../mocks/browser.js').then(
+    pkg => pkg.worker
+  )
+  worker.start({onUnhandledRequest: 'bypass'})
+}
+```
 
-`getMocker` is isomorphic and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/).
+Server example:
+
+```js
+// src/hooks/preSSRHandler/index.js
+if (process.env.STAGE === 'development') {
+  const worker = await import('../../../mocks/server.js').then(
+    pkg => pkg.worker
+  )
+
+  worker.listen()
+}
+```
+
+Text example
+
+```js
+// domain/test/example/exampleSpec.js
+import axios from 'axios'
+import {getMocker} from '../../../mocks/isomorphicMocker.js'
+
+describe('Example', () => {
+  let mocker
+
+  before(async () => {
+    mocker = await getMocker()
+    await mocker.start()
+  })
+
+  after(() => {
+    mocker.stop()
+  })
+
+  it('should do something', async () => {
+    const result = await axios.get('/user?id=1')
+    expect(result).to.be.deep.equal({name: 'John Doe'})
+  })
+})
+```
+
+E2E example:
+
+```js
+// test-e2e/support/setup.js
+import {mocker, rest} from '../../mocks/browser.js'
+
+Cypress.on('test:before:run:async', async () => {
+  if (window.msw) return
+
+  await mocker.start({onUnhandledRequest: 'bypass'})
+
+  window.msw = {
+    worker: mocker,
+    rest
+  }
+})
+```
+
+### Mockers
+
+- `initMocker` is isomorphic and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/).
+
+- `getServerMocker` is server only and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/setup-server). 
+
+- `setupBrowserMocker` is browser only and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/setup-worker).

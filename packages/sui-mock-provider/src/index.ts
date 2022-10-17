@@ -1,1 +1,0 @@
-export { getMocker } from './isomorphicMocker'
