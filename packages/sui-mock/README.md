@@ -1,8 +1,19 @@
-# sui-mock-provider
-
-## Getting Started
+# sui-mock
 
 ### Installation
+
+```sh
+npm install @s-ui/mock --save-dev
+```
+
+### Mockers
+
+#### **Request mocking with `setupMocker`**
+
+It returns all methods included in `setupWorker` and `setupServer`. It will work in browser and server sides.
+
+👉 Check `setupWorker` and `setupServer` in [MSW docs](https://mswjs.io/docs/api/).
+
 
 ### Usage
 
@@ -122,11 +133,3 @@ Cypress.on('test:before:run:async', async () => {
   }
 })
 ```
-
-### Mockers
-
-- `initMocker` is isomorphic and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/).
-
-- `getServerMocker` is server only and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/setup-server). 
-
-- `setupBrowserMocker` is browser only and returns all methods included in `setupWorker` and `setupServer`. Check it out [here](https://mswjs.io/docs/api/setup-worker).
