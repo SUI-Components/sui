@@ -1,3 +1,5 @@
+import {rest} from 'msw'
+
 import {getBrowserMocker} from './browser.js'
 import {getServerMocker} from './server.js'
 
@@ -6,7 +8,6 @@ const isNode =
     typeof process !== 'undefined' ? process : 0
   ) === '[object process]'
 
-const initMocker = isNode ? getServerMocker : getBrowserMocker
+const getMocker = isNode ? getServerMocker : getBrowserMocker
 
-export {rest} from 'msw'
-export default initMocker
+export {getMocker, rest}
