@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 11.28.0 (2022-10-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** hide menu clicking on an overlay in mobile ([b4f2631](https://github.com/SUI-Components/sui/commit/b4f2631dbcdce8c6e7a7142251412a5e34d6592e)), closes [#1503](https://github.com/SUI-Components/sui/issues/1503)
+* **packages/sui-studio:** replace [#000](https://github.com/SUI-Components/sui/issues/000) for a variable -black ([cfef364](https://github.com/SUI-Components/sui/commit/cfef364e09adf1ba2135d4d759118faf418cb088))
+
+
+
 # 11.27.0 (2022-10-17)
 
 
