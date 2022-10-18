@@ -4,7 +4,7 @@ import {rest} from 'msw'
 
 import {getMocker} from '../../lib/index.js'
 
-describe('sui-mock-provider | getMocker', () => {
+describe.skip('sui-mock-provider | getMocker', () => {
   it('should init mocker without handlers', () => {
     const worker = getMocker()
     expect(worker).to.not.throw
