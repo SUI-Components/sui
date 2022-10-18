@@ -2,12 +2,12 @@
 import {expect} from 'chai'
 import {rest} from 'msw'
 
-import {getMocker} from '../../src/index.js'
+import {setupMocker} from '../../src/index.js'
 
-describe('sui-mock-provider | getMocker', () => {
+describe('sui-mock | setupMocker', () => {
   it('should init mocker without handlers', async () => {
     // Given
-    const mocker = await getMocker()
+    const mocker = await setupMocker()
 
     // Then
     expect(mocker).to.not.throw
@@ -25,7 +25,7 @@ describe('sui-mock-provider | getMocker', () => {
     })
 
     // When
-    const mocker = getMocker([handler])
+    const mocker = setupMocker([handler])
 
     // Then
     expect(mocker).to.not.throw
@@ -33,7 +33,7 @@ describe('sui-mock-provider | getMocker', () => {
 
   it('should has isomorphic msw api', async () => {
     // Given
-    const mocker = await getMocker()
+    const mocker = await setupMocker()
 
     // Then
     expect(mocker).to.have.property('start')

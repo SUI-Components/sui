@@ -8,6 +8,6 @@ const isNode =
     typeof process !== 'undefined' ? process : 0
   ) === '[object process]'
 
-const getMocker = isNode ? getServerMocker : getBrowserMocker
+const setupMocker = isNode ? getServerMocker : getBrowserMocker
 
-export {getMocker, rest}
+export {setupMocker, rest}
