@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import {rest} from 'msw'
 
 import {FetcherFactory} from '@s-ui/domain'
+import {rest} from '@s-ui/mock'
 
 import {setupContractTests} from '../../src/index.js'
 import {getContractFileData, removeContractFiles} from '../utils.js'
