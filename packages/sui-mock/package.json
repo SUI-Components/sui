@@ -1,5 +1,5 @@
 {
-  "name": "@s-ui/mock-provider",
+  "name": "@s-ui/mock",
   "version": "1.0.0-beta.5",
   "main": "lib/index.js",
   "description": "mock provider",
