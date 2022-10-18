@@ -28,7 +28,7 @@ export const getUserHandler = rest.get(`${apiUrl}/user`, responseResolver)
 Then, we export a list of handlers
 
 ```js
-// ./mocks/index.js
+// ./mocks/handlers.js
 import {getUserHandler} from './mocks/exampleGateway/user/handlers.js'
 
 export default [getUserHandler]
@@ -38,34 +38,15 @@ export default [getUserHandler]
 
 We should use browser or server getMocker to create a mocker instance ready to use in our app. See how it will looks like:
 
-```js
-// ./mocks/server.js
-import {getServerMocker} from '@s-ui/mock-provider/lib/server'
-import handlers from './index.js'
-
-export {rest} from '@s-ui/mock-provider/lib/browser'
-export const mocker = getServerMocker(...handlers)
-```
 
 ```js
-// ./mocks/browser.js
-import {getBrowserMocker} from '@s-ui/mock-provider/lib/browser'
-import handlers from './index.js'
+// ./mocks/index.js
+import {setupMocker, rest} from '@s-ui/mock'
+import applicationHandlers from './handlers.js'
 
-export {rest} from '@s-ui/mock-provider/lib/browser'
-export const mocker = getBrowserMocker(...handlers)
-```
+const getMocker = (handlers = applicationHandlers) => setupMocker(handlers)
 
-Given we have isomorphic tests in our project, we should create a `./mocks/isomorphicMocker.js` file that exports the mocker instance depending on the environment (browser / server).
-
-```js
-// ./mocks/isomorphicMocker.js
-import initMocker from '@s-ui/mock-provider'
-import applicationHandlers from './index.js'
-
-export {rest} from '@s-ui/mock-provider/lib/browser'
-export const getMocker = (handlers = applicationHandlers) =>
-  initMocker(handlers)
+export {getMocker, rest}
 ```
 
 #### 3. Use it everywhere
@@ -76,10 +57,10 @@ Browser example:
 ```js
 // src/app.js
 if (process.env.STAGE === 'development') {
-  const worker = await import('../mocks/browser.js').then(
-    pkg => pkg.worker
+  const mocker = await import('../mocks/index.js').then(pkg =>
+    pkg.getMocker()
   )
-  worker.start({onUnhandledRequest: 'bypass'})
+  mocker.start({onUnhandledRequest: 'bypass'})
 }
 ```
 
@@ -88,11 +69,11 @@ Server example:
 ```js
 // src/hooks/preSSRHandler/index.js
 if (process.env.STAGE === 'development') {
-  const worker = await import('../../../mocks/server.js').then(
-    pkg => pkg.worker
+  const mocker = await import('../../../mocks/index.js').then(pkg =>
+    pkg.getMocker()
   )
 
-  worker.listen()
+  mocker.start({onUnhandledRequest: 'bypass'})
 }
 ```
 
@@ -101,7 +82,7 @@ Text example
 ```js
 // domain/test/example/exampleSpec.js
 import axios from 'axios'
-import {getMocker} from '../../../mocks/isomorphicMocker.js'
+import {getMocker} from '../../../mocks/index.js'
 
 describe('Example', () => {
   let mocker
@@ -126,11 +107,13 @@ E2E example:
 
 ```js
 // test-e2e/support/setup.js
-import {mocker, rest} from '../../mocks/browser.js'
+import {getMocker, rest} from '../../mocks/index.js'
 
+// cypress/supports/index.js
 Cypress.on('test:before:run:async', async () => {
   if (window.msw) return
 
+  const mocker = await getMocker()
   await mocker.start({onUnhandledRequest: 'bypass'})
 
   window.msw = {
