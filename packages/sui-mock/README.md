@@ -1,30 +1,36 @@
 # sui-mock
 
-### Installation
+It is mainly a wrapper around [Mock Service Worker (MSW)](https://mswjs.io/).
+It allows mocking by intercepting requests on the network level. Seamlessly reuse the same mock definition for testing, development, and debugging.
+
+## Installation
 
 ```sh
 npm install @s-ui/mock --save-dev
 ```
 
-### Mockers
+## Mockers
 
-#### **Request mocking with `setupMocker`**
+### **Request mocking with `setupMocker`**
 
 It returns all methods included in `setupWorker` and `setupServer`. It will work in browser and server sides.
 
 👉 Check `setupWorker` and `setupServer` in [MSW docs](https://mswjs.io/docs/api/).
 
 
-### Usage
+## Usage
 
-#### 1. Create Request handlers
-Create a `./mocks` folder in your project root and create a `index.js` file inside it.
+### 1. Create Request handlers
 
-This index.js should export an array of [Request handlers](https://mswjs.io/docs/basics/request-handler).
+First of all we need to define the application request handlers. Request handler is a function that determines whether an outgoing request should be mocked, and specifies its mocked response.
 
-**Example:**
+Create a `./mocks` folder in your project root and create a `handlers.js` file inside it.
 
-Given, a provider endpoint handler
+This `handlers.js` should export an array of [Request handlers](https://mswjs.io/docs/basics/request-handler).
+
+**Example: How to create a handler**
+
+In this case, given the request handler ([GET] `/user`) it specifies a response resolver mocked response (status 200 with body `{name: 'John Doe'}`).
 
 ```js
 // ./mocks/exampleGateway/user/handlers.js
@@ -45,10 +51,9 @@ import {getUserHandler} from './mocks/exampleGateway/user/handlers.js'
 export default [getUserHandler]
 ```
 
-#### 2. Expose mocker from mocks folder
+### 2. Expose mocker from mocks folder
 
-We should use browser or server getMocker to create a mocker instance ready to use in our app. See how it will looks like:
-
+Once we have the handlers created, we will need to create a mocker with the handlers already defined.
 
 ```js
 // ./mocks/index.js
@@ -60,10 +65,11 @@ const getMocker = (handlers = applicationHandlers) => setupMocker(handlers)
 export {getMocker, rest}
 ```
 
-#### 3. Use it everywhere
-Use those mockers to init your mocks everywhere in your application, it means integration tests, e2e tests, component tests, etc. but also in your application code.
+### 3. Use it everywhere
 
-Browser example:
+Use this mocker everywhere in your application, it means integration tests, e2e tests, component tests, etc. but also in your application code.
+
+Example of mocking in browser:
 
 ```js
 // src/app.js
@@ -75,7 +81,7 @@ if (process.env.STAGE === 'development') {
 }
 ```
 
-Server example:
+Example of mocking in server:
 
 ```js
 // src/hooks/preSSRHandler/index.js
@@ -88,7 +94,7 @@ if (process.env.STAGE === 'development') {
 }
 ```
 
-Text example
+Example of mocking in unit tests:
 
 ```js
 // domain/test/example/exampleSpec.js
@@ -111,10 +117,61 @@ describe('Example', () => {
     const result = await axios.get('/user?id=1')
     expect(result).to.be.deep.equal({name: 'John Doe'})
   })
+
+  it('should throw an error', async () => {
+    const getUserGenericErrorHandler = rest.get('/user', () => {
+      const error = {
+        errorMessage: `User '${username}' not found`,
+      }
+
+      return res(ctx.status(404), ctx.json(error))
+    })
+
+    mocker.use(getUserGenericErrorHandler)
+
+    try {
+      const result = await axios.get('/user?id=1')
+    } catch(error) {
+      expect(error).to.be.an.instanceof(Error)
+    }
+
+  })
 })
 ```
 
-E2E example:
+Example of mocking in E2E tests:
+
+
+```js
+it("should get todo data - MSW will be overridden", () => {
+  cy.window().then(window => {
+    const { worker, rest } = window.msw;
+
+    worker.use(
+      rest.get(`${API_URL}todos/1`, (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            id: 1,
+            title: "Mocked by not MSW but Cypress",
+            completed: true
+          })
+        );
+      })
+    );
+  });
+  // Assert that the title is not "Mocked by MSW"
+  cy.contains("Mocked by not MSW but Cypress");
+});
+```
+
+#### Troubleshooting
+
+When we run E2E test, if we start our mocker in application code it could cause a race condition and the mocker could be started before the E2E test.
+
+To fix that, it is recommended to avoid starting the mocker in application code and start it in E2E environment.
+
+Example of starting mocker in Cypress environment
 
 ```js
 // test-e2e/support/setup.js
