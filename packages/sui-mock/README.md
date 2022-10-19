@@ -53,7 +53,7 @@ export default [getUserHandler]
 
 ### 2. Expose mocker from mocks folder
 
-Once we have the handlers created, we will need to create a mocker with the handlers already defined.
+Once we have the handlers created, we will need to create a mocker with **all the handlers already defined**.
 
 ```js
 // ./mocks/index.js
@@ -61,8 +61,9 @@ import {setupMocker, rest} from '@s-ui/mock'
 import applicationHandlers from './handlers.js'
 
 const getMocker = (handlers = applicationHandlers) => setupMocker(handlers)
+const getEmptyMocker = setupMocker
 
-export {getMocker, rest}
+export {getEmptyMocker, getMocker, rest}
 ```
 
 ### 3. Use it everywhere
@@ -94,7 +95,7 @@ if (process.env.STAGE === 'development') {
 }
 ```
 
-Example of mocking in unit tests:
+Example of mocking in unit tests **with all handlers**:
 
 ```js
 // domain/test/example/exampleSpec.js
@@ -119,6 +120,7 @@ describe('Example', () => {
   })
 
   it('should throw an error', async () => {
+    // We also could define a handler for this case
     const getUserGenericErrorHandler = rest.get('/user', () => {
       const error = {
         errorMessage: `User '${username}' not found`,
@@ -135,6 +137,41 @@ describe('Example', () => {
       expect(error).to.be.an.instanceof(Error)
     }
 
+  })
+})
+```
+
+Example of mocking in unit tests **without default handlers**:
+
+```js
+// domain/test/example/exampleSpec.js
+import axios from 'axios'
+import {getEmptyMocker} from '../../../mocks/index.js'
+import {getUserHandler} from '../../../mocks/userGateway/user/handlers.js'
+
+describe('Example', () => {
+  let mocker
+
+  before(async () => {
+    mocker = await getEmptyMocker()
+    await mocker.start()
+  })
+
+  after(() => {
+    mocker.stop()
+  })
+
+  // This is important to restore handlers after each test
+  afterEach(() => {
+    mocker.resetHandlers()
+  })
+
+  it('should do something', async () => {
+    // IMPORTANT: Explicit define handlers for this test
+    mocker.use(getUserHandler)
+
+    const result = await axios.get('/user?id=1')
+    expect(result).to.be.deep.equal({name: 'John Doe'})
   })
 })
 ```
@@ -165,7 +202,7 @@ it("should get todo data - MSW will be overridden", () => {
 });
 ```
 
-#### Troubleshooting
+### 4. Make Cypress integration stable
 
 When we run E2E test, if we start our mocker in application code it could cause a race condition and the mocker could be started before the E2E test.
 
