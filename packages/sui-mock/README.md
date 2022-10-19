@@ -48,8 +48,6 @@ export default [getUserHandler]
 #### 2. Expose mocker from mocks folder
 
 We should use browser or server getMocker to create a mocker instance ready to use in our app. See how it will looks like:
-
-
 ```js
 // ./mocks/index.js
 import {setupMocker, rest} from '@s-ui/mock'
