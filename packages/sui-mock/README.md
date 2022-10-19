@@ -8,7 +8,7 @@ npm install @s-ui/mock --save-dev
 
 ### Mockers
 
-#### **Request mocking with `setupMocker`**
+#### Request mocking with `setupMocker`
 
 It returns all methods included in `setupWorker` and `setupServer`. It will work in browser and server sides.
 
