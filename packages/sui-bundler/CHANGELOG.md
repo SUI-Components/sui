@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 9.37.0 (2022-10-19)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** fix config prod fallback resolvers ([5d9a334](https://github.com/SUI-Components/sui/commit/5d9a334ea7e11859b9b3097433560be28035c274))
+* **packages/sui-bundler:** required fallback resolvers to avoid browser errors ([f473c10](https://github.com/SUI-Components/sui/commit/f473c10bfb278295cbe6db675213964198d3b11f))
+* **Root:** remove beta version from package jsons and avoid auto release problems ([8ebb43d](https://github.com/SUI-Components/sui/commit/8ebb43d641099e4ea182dfba0bc997e66af3cac9))
+
+
+
 # 9.36.0 (2022-08-22)
 
 
