@@ -2,6 +2,8 @@
 
 > Mocking utilities for testing.
 
+## ⚠️ It is highly recommended to use [sui-mock](https://github.com/SUI-Components/sui/tree/master/packages/sui-mock) instead of this package. It could be deprecated in the future.
+
 ## Motivation
 
 Centralize common solutions for common mocking concerns in JavaScript.
