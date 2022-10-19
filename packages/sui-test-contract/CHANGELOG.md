@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.8.0 (2022-10-19)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** use same version of msw ([0ae5861](https://github.com/SUI-Components/sui/commit/0ae5861d9b9aab8e7685180497490f133f34e7aa))
+
+
+
 # 2.7.0 (2022-09-15)
 
 
