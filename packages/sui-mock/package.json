@@ -1,0 +1,30 @@
+{
+  "name": "@s-ui/mock",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "description": "mock provider",
+  "types": "lib/index",
+  "scripts": {
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib",
+    "test": "npm run test:client && npm run test:server",
+    "test:browser": "npx @s-ui/test browser -P './test/browser/**/*Spec.js'",
+    "test:browser:watch": "npm run test:client -- --watch",
+    "test:server": "npx @s-ui/test server -P './test/server/**/*Spec.js'",
+    "test:server:watch": "npm run test:server -- --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "msw": "0.47.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mock-provider#readme"
+}

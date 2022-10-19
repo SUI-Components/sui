@@ -18,9 +18,9 @@
   "dependencies": {
     "@pact-foundation/pact": "9.18.1",
     "@pactflow/pact-msw-adapter": "1.2.1",
+    "@s-ui/mock": "1",
     "commander": "8.3.0",
-    "headers-polyfill": "3.0.10",
-    "msw": "0.42.3"
+    "headers-polyfill": "3.0.10"
   },
   "devDependencies": {
     "@s-ui/domain": "2"
