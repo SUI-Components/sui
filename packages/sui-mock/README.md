@@ -42,7 +42,7 @@ const responseResolver = () => res(ctx.status(200), ctx.json({name: 'John Doe'})
 export const getUserHandler = rest.get(`${apiUrl}/user`, responseResolver)
 ```
 
-Then, we export a list of handlers
+Then, we export the list of handlers
 
 ```js
 // ./mocks/handlers.js
