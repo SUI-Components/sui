@@ -1,12 +1,15 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 'use strict'
 
-const {transformFile} = require('@swc/core')
-const program = require('commander')
-const fg = require('fast-glob')
-const fs = require('fs-extra')
-const defaultConfig = require('./swc-config.js')
+import program from 'commander'
+import fg from 'fast-glob'
+import fs from 'fs-extra'
+
+import {transformFile} from '@swc/core'
+
+import defaultConfig from './swc-config.js'
 
 const compileFile = async file => {
   const {code} = await transformFile(file, defaultConfig)

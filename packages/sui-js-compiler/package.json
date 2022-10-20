@@ -5,13 +5,11 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "sui-js-compiler": "./index.js"
+    "sui-js-compiler": "./index.cjs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:server": "npx @s-ui/test server -P './test/server/*.js'"
   },
-  "keywords": [],
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@swc/core": "1.2.194",
