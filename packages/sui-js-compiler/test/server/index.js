@@ -1,11 +1,16 @@
-const promisify = require('util').promisify
-const exec = promisify(require('child_process').exec)
-const fs = require('fs-extra')
-const {expect} = require('chai')
-const path = require('path')
+import {fileURLToPath} from 'url'
 
-const libPath = path.join(__dirname, 'lib')
-const libFilePath = path.join(libPath, 'example.js')
+import {expect} from 'chai'
+import fs from 'fs-extra'
+import {exec as execCallback} from 'node:child_process'
+import {join} from 'node:path'
+import {promisify} from 'node:util'
+
+const exec = promisify(execCallback)
+
+const cwd = fileURLToPath(new URL('.', import.meta.url))
+const libPath = fileURLToPath(new URL('lib', import.meta.url))
+const libFilePath = join(libPath, 'example.js')
 
 describe('@s-ui/js-compiler', () => {
   afterEach(() => fs.remove(libPath))
@@ -13,7 +18,7 @@ describe('@s-ui/js-compiler', () => {
 
   it('compiles a /src folder with a JavaScript with JSX file and output to /lib', async () => {
     const {stdout} = await exec('node ../../index.js', {
-      cwd: __dirname
+      cwd
     })
 
     const compiledFilenames = await fs.readdir(libPath)
@@ -36,7 +41,7 @@ describe('@s-ui/js-compiler', () => {
     const {stdout} = await exec(
       'node ../../index.js --ignore="./src/**.test.js"',
       {
-        cwd: __dirname
+        cwd
       }
     )
 
