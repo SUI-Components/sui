@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.20.0 (2022-10-20)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** add exports to package.json ([c8759a9](https://github.com/SUI-Components/sui/commit/c8759a976c866a35d37e9454a67676ea15e35dc9))
+* **packages/sui-js-compiler:** fix __dirname and migrate to esm ([f0949aa](https://github.com/SUI-Components/sui/commit/f0949aa81647701b8b1c6faeac499065a1630c6d))
+* **packages/sui-js-compiler:** use correct bin file extension ([f4f685b](https://github.com/SUI-Components/sui/commit/f4f685bb4c39b80b51a6ef1b5f8b25a3fc6ef575))
+
+
+
 # 1.19.0 (2022-05-30)
 
 
@@ -43,6 +54,7 @@
 ### Features
 
 * **packages/sui-js-compiler:** add ignore option ([d4cdff4](https://github.com/SUI-Components/sui/commit/d4cdff467db581bcbd08ec3a9a2543e6b76265d3))
+* **packages/sui-js-compiler:** Migrate to ESM ([32127a0](https://github.com/SUI-Components/sui/commit/32127a00ed3803fffb37ce19219774dad7391a23))
 
 
 
