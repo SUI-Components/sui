@@ -16,7 +16,7 @@
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
-    height: 100vh;
+    height: calc(100vh - $h-navHeader);
     overflow-x: hidden;
     overflow-y: scroll;
     position: fixed;
