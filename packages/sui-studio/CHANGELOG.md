@@ -1,5 +1,26 @@
 # CHANGELOG
 
+# 11.28.0 (2022-10-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** hide menu clicking on an overlay in mobile ([b4f2631](https://github.com/SUI-Components/sui/commit/b4f2631dbcdce8c6e7a7142251412a5e34d6592e)), closes [#1503](https://github.com/SUI-Components/sui/issues/1503)
+* **packages/sui-studio:** replace [#000](https://github.com/SUI-Components/sui/issues/000) for a variable -black ([cfef364](https://github.com/SUI-Components/sui/commit/cfef364e09adf1ba2135d4d759118faf418cb088))
+
+
+
+# 11.27.0 (2022-10-17)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add a fill to the buttons icon ([c553b73](https://github.com/SUI-Components/sui/commit/c553b73534aaae10f31344e836413ebd189a712b)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+* **packages/sui-studio:** adjust icon size ([e726305](https://github.com/SUI-Components/sui/commit/e7263059aa492da08c89a06c8d2a4ee055592f88)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+* **packages/sui-studio:** change display from flex to block ([8495fe7](https://github.com/SUI-Components/sui/commit/8495fe7ec576162f9b7dceeeffb8e2c4150596f3)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+
+
+
 # 11.26.0 (2022-10-13)
 
 

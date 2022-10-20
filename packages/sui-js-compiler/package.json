@@ -7,6 +7,12 @@
   "bin": {
     "sui-js-compiler": "./index.js"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "@swc/core": "1.2.194",
     "@swc/helpers": "0.3.16",

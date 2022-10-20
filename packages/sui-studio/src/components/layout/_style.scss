@@ -8,10 +8,6 @@
   }
 
   &-sidebar {
-    @include breakpoint-from(s) {
-      flex: 0 0 $w-sidebar;
-      width: $w-sidebar;
-    }
     top: $h-navHeader;
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
@@ -22,14 +18,14 @@
     position: fixed;
     transform: translate3d(0, 0, 0);
     transition: transform 0.5s ease-in-out;
-    z-index: 1;
+    z-index: 2;
 
     &Body {
       width: $w-sidebar;
       transition: width 0.25s ease-out;
     }
 
-    &--open {
+    &--hidden {
       transform: translate3d(-100%, 0, 0);
     }
   }
@@ -47,9 +43,24 @@
       margin-left: $w-sidebar;
       transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
     }
-    &--open {
+    .overlay {
+      position: fixed;
+      top: 0%;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      background-color: rgba($c-black, 0.2);
+      @include breakpoint-from(s) {
+        display: none;
+      }
+    }
+    &--sidebar_hidden {
       width: 100%;
       margin-left: 0;
+      & .overlay {
+        display: none;
+      }
     }
   }
 
@@ -127,11 +138,15 @@
   }
 }
 .sui-Studio-navMenu {
-  display: flex;
+  display: block;
   width: 32px;
   height: 32px;
   background: transparent;
   border: 0;
-  align-items: center;
-  justify-content: center;
+  padding: 0;
+  svg {
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+  }
 }
