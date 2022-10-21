@@ -1,4 +1,4 @@
-import {createHash} from '@s-ui/js/lib/hash'
+import {createHash} from '@s-ui/js/lib/hash/index.js'
 
 import isPromise from '../../../helpers/isPromise.js'
 

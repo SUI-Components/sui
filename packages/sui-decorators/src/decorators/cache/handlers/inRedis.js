@@ -1,4 +1,4 @@
-import {createHash} from '@s-ui/js/lib/hash'
+import {createHash} from '@s-ui/js/lib/hash/index.js'
 
 const VERSION_NAMESPACE_TAG =
   global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE

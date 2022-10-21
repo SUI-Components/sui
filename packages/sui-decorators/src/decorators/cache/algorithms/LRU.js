@@ -1,4 +1,4 @@
-import lru from 'tiny-lru/lib/tiny-lru.es5'
+import lru from 'tiny-lru/lib/tiny-lru.es5.js'
 
 import Cache from './Cache.js'
 
