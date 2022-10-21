@@ -2,7 +2,15 @@
   "name": "@s-ui/decorators",
   "version": "3.25.0",
   "description": "> Set of ES6 decorators to improve your apps",
-  "main": "lib/",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tracer": "./lib/decorators/tracer",
+    "./isNode": "./lib/helpers/isNode.js",
+    "./lib": "./lib/index.js",
+    "./lib/helpers/isNode": "./lib/helpers/isNode.js",
+    "./lib/decorators/tracer": "./lib/decorators/tracer"
+  },
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepublishOnly": "npm run lib"
