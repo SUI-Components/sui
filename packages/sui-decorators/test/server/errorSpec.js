@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import {expect} from 'chai'
 
-import {inlineError} from '../../src'
+import {inlineError} from '../../src/index.js'
 
 describe('Error', () => {
   it('Should return an array [null, resp] when the promise is resolved', async () => {
