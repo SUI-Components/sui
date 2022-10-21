@@ -1,13 +1,13 @@
 import {createHash} from '@s-ui/js/lib/hash/index.js'
 
-const VERSION_NAMESPACE_TAG =
-  global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE
-    ? `${global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE}::`
-    : ''
-
 export const inRedis =
   (target, cache, original, fnName, instance, ttl, cacheKey) =>
   async (...args) => {
+    const VERSION_NAMESPACE_TAG =
+      global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE
+        ? `${global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE}::`
+        : ''
+
     const key = `${VERSION_NAMESPACE_TAG}${createHash(JSON.stringify(args))}`
     const cacheItem = await cache.get(key)
     let response

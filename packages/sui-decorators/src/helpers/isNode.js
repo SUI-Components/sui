@@ -1,6 +1,11 @@
-const isNode =
-  Object.prototype.toString.call(
-    typeof process !== 'undefined' ? process : 0
-  ) === '[object process]'
+const checkIsNode = () => {
+  try {
+    return Object.prototype.toString.call(global.process) === '[object process]'
+  } catch (e) {
+    return false
+  }
+}
+
+const isNode = checkIsNode()
 
 export default isNode
