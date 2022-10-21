@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.29.0 (2022-10-21)
+
+
+### Features
+
+* **packages/sui-studio:** update bottom padding in NavBar menu to 80px and reduce the sidebar heigh ([3971e52](https://github.com/SUI-Components/sui/commit/3971e527d644ec324ace3d03e07db6c04afb4892)), closes [#1501](https://github.com/SUI-Components/sui/issues/1501)
+
+
+
 # 11.28.0 (2022-10-18)
 
 
