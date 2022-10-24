@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.9.0 (2022-10-24)
+
+
+### Features
+
+* **packages/sui-test-contract:** add custom api url for each endpoint ([1b81908](https://github.com/SUI-Components/sui/commit/1b819088fe270dfb17bc86d5014177f65e92af8d))
+
+
+
 # 2.8.0 (2022-10-19)
 
 
