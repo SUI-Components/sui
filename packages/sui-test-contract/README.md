@@ -55,7 +55,7 @@ setupContractTests({
   providers: {
     'test-provider': [
       {
-        apirUrl: 'https://mydomain.com',
+        apiUrl: 'https://mydomain.com',
         endpoint: '/apples',
         description: 'A request for getting some apples',
         state: 'I have some apples',
