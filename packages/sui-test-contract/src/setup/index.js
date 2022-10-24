@@ -10,8 +10,8 @@ import {
   writerFactory
 } from './utils.js'
 
-export default ({
-  apiUrl,
+const setupContractTests = ({
+  apiUrl: defaultApiUrl,
   consumer,
   providers,
   fetcher,
@@ -29,7 +29,7 @@ export default ({
       excludeHeaders
     }
   })
-  const tests = getContractTests({apiUrl, providers})
+  const tests = getContractTests({apiUrl: defaultApiUrl, providers})
 
   describe('Consumer test contracts', () => {
     before(async () => {
@@ -58,6 +58,7 @@ export default ({
     tests.forEach(
       ({
         description,
+        apiUrl: endpointApiUrl,
         endpoint,
         query,
         body,
@@ -69,7 +70,9 @@ export default ({
         it(`makes ${description.toLowerCase()}`, async () => {
           server.use(handler)
 
+          const apiUrl = endpointApiUrl || defaultApiUrl
           let url = `${apiUrl}${endpoint}`
+
           if (query) url = `${url}?${toQueryString(query)}`
 
           const {data} = body
@@ -82,3 +85,5 @@ export default ({
     )
   })
 }
+
+export default setupContractTests
