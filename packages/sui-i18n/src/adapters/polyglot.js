@@ -15,16 +15,13 @@
 // your client- or server-side JavaScript application.
 //
 
-// the string that separates the different phrase possibilities
 const delimeter = '||||'
 
-// trims a string
 const trim = str => {
   const trimRe = /^\s+|\s+$/g
   return str.replace(trimRe, '')
 }
 
-// mapping from pluralization group plural logic
 const pluralTypes = {
   chinese: function (n) {
     return 0
@@ -98,63 +95,11 @@ class Polyglot {
     this.VERSION = '0.4.3'
   }
 
-  // ### polyglot.locale([locale])
-  //
-  // Get or set locale. Internally, Polyglot only uses locale for pluralization.
   locale(newLocale) {
     if (newLocale) this.currentLocale = newLocale
     return this.currentLocale
   }
 
-  // ### polyglot.extend(phrases)
-  //
-  // Use `extend` to tell Polyglot how to translate a given key.
-  //
-  //     polyglot.extend({
-  //       "hello": "Hello",
-  //       "hello_name": "Hello, %{name}"
-  //     });
-  //
-  // The key can be any string.  Feel free to call `extend` multiple times;
-  // it will override any phrases with the same key, but leave existing phrases
-  // untouched.
-  //
-  // It is also possible to pass nested phrase objects, which get flattened
-  // into an object with the nested keys concatenated using dot notation.
-  //
-  //     polyglot.extend({
-  //       "nav": {
-  //         "hello": "Hello",
-  //         "hello_name": "Hello, %{name}",
-  //         "sidebar": {
-  //           "welcome": "Welcome"
-  //         }
-  //       }
-  //     });
-  //
-  //     console.log(polyglot.phrases);
-  //     // {
-  //     //   'nav.hello': 'Hello',
-  //     //   'nav.hello_name': 'Hello, %{name}',
-  //     //   'nav.sidebar.welcome': 'Welcome'
-  //     // }
-  //
-  // `extend` accepts an optional second argument, `prefix`, which can be used
-  // to prefix every key in the phrases object with some string, using dot
-  // notation.
-  //
-  //     polyglot.extend({
-  //       "hello": "Hello",
-  //       "hello_name": "Hello, %{name}"
-  //     }, "nav");
-  //
-  //     console.log(polyglot.phrases);
-  //     // {
-  //     //   'nav.hello': 'Hello',
-  //     //   'nav.hello_name': 'Hello, %{name}'
-  //     // }
-  //
-  // This feature is used internally to support nested phrase objects.
   extend(morePhrases, prefix) {
     let phrase
 
@@ -171,50 +116,15 @@ class Polyglot {
     }
   }
 
-  // ### polyglot.clear()
-  //
-  // Clears all phrases. Useful for special cases, such as freeing
-  // up memory if you have lots of phrases but no longer need to
-  // perform any translation. Also used internally by `replace`.
   clear() {
     this.phrases = {}
   }
 
-  // ### polyglot.replace(phrases)
-  //
-  // Completely replace the existing phrases with a new set of phrases.
-  // Normally, just use `extend` to add more phrases, but under certain
-  // circumstances, you may want to make sure no old phrases are lying around.
   replace(newPhrases) {
     this.clear()
     this.extend(newPhrases)
   }
 
-  // ### polyglot.t(key, options)
-  //
-  // The most-used method. Provide a key, and `t` will return the
-  // phrase.
-  //
-  //     polyglot.t("hello");
-  //     => "Hello"
-  //
-  // The phrase value is provided first by a call to `polyglot.extend()` or
-  // `polyglot.replace()`.
-  //
-  // Pass in an object as the second argument to perform interpolation.
-  //
-  //     polyglot.t("hello_name", {name: "Spike"});
-  //     => "Hello, Spike"
-  //
-  // If you like, you can provide a default value in case the phrase is missing.
-  // Use the special option key "_" to specify a default.
-  //
-  //     polyglot.t("i_like_to_write_in_language", {
-  //       _: "I like to write in %{language}.",
-  //       language: "JavaScript"
-  //     });
-  //     => "I like to write in JavaScript."
-  //
   t(key, options) {
     let phrase, result
     options = options == null ? {} : options
@@ -245,7 +155,6 @@ class Polyglot {
     return result
   }
 
-  // check if polyglot has a translation for given key
   has(key) {
     return key in this.phrases
   }
@@ -266,9 +175,6 @@ class Polyglot {
     return ret
   }
 
-  // based on a phrase text that contains `n` plural forms separated
-  // by `delimeter`, a `locale`, and a `count`, choose the correct
-  // plural form, or none if `count` is `null`.
   choosePluralForm(text, locale, count) {
     let ret, texts, chosenText
     if (count != null && text) {
@@ -290,16 +196,9 @@ class Polyglot {
     return pluralTypes[this.pluralTypeName(locale)](count)
   }
 
-  // ### interpolate
-  //
-  // Does the dirty work. Creates a `RegExp` object for each
-  // interpolation placeholder.
   interpolate(phrase, options) {
     for (const arg in options) {
       if (arg !== '_' && options.hasOwnProperty(arg)) {
-        // We create a new `RegExp` each time instead of using a more-efficient
-        // string replace so that the same argument can be replaced multiple times
-        // in the same phrase.
         phrase = phrase.replace(
           new RegExp('%\\{' + arg + '\\}', 'g'),
           options[arg]
