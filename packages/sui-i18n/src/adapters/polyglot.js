@@ -23,28 +23,28 @@ const trim = str => {
 }
 
 const pluralTypes = {
-  chinese: function (n) {
+  chinese: n => {
     return 0
   },
-  german: function (n) {
+  german: n => {
     return n !== 1 ? 1 : 0
   },
-  french: function (n) {
+  french: n => {
     return n > 1 ? 1 : 0
   },
-  russian: function (n) {
+  russian: n => {
     if (n % 10 === 1 && n % 100 !== 11) return 0
     return n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2
   },
-  czech: function (n) {
+  czech: n => {
     if (n === 1) return 0
     return n >= 2 && n <= 4 ? 1 : 2
   },
-  polish: function (n) {
+  polish: n => {
     if (n === 1) return 0
     return n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2
   },
-  icelandic: function (n) {
+  icelandic: n => {
     return n % 10 !== 1 || n % 100 === 11 ? 1 : 0
   }
 }
