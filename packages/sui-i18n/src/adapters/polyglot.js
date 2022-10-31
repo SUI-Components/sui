@@ -101,7 +101,6 @@ class Polyglot {
     this.extend(options.phrases || {})
     this.currentLocale = options.locale || 'en'
     this.allowMissing = !!options.allowMissing
-    this.VERSION = '0.4.3'
   }
 
   locale(newLocale) {
