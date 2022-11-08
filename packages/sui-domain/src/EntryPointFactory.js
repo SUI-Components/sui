@@ -1,15 +1,16 @@
 import createNotImplementedUseCase from './createNotImplementedUseCase.js'
 
-export default ({useCases, config, logger}) =>
+export default ({useCases, config, logger, pde}) =>
   class EntryPoint {
     subscribers = {}
 
-    constructor(params = {config: {}, logger: {}}) {
-      // decide to use a static config from the factory
+    constructor(params = {config: {}, logger: {}, pde: {}}) {
+      // decide to use a static config from the factor
       // or use a config passed to the constructor that could be mutated
       this._config = config || params.config
       this._useCases = useCases
       this._logger = logger || params.logger
+      this._pde = pde || params.pde
     }
 
     /**
@@ -53,7 +54,8 @@ export default ({useCases, config, logger}) =>
                 .then(factory =>
                   getMethod(factory)({
                     config: this._config,
-                    logger: this._logger
+                    logger: this._logger,
+                    pde: this._pde
                   }).execute(params)
                 )
                 .then(result => {
@@ -93,7 +95,8 @@ export default ({useCases, config, logger}) =>
                     // makes dispose working async and we need it
                     ret.dispose = getMethod(factory)({
                       config: this._config,
-                      logger: this._logger
+                      logger: this._logger,
+                      pde: this._pde
                     }).$.execute.subscribe(onNext, onError).dispose
                   })
                   // return the object that will be mutated async
