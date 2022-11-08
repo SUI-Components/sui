@@ -5,7 +5,7 @@ export default ({useCases, config, logger, pde}) =>
     subscribers = {}
 
     constructor(params = {config: {}, logger: {}, pde: {}}) {
-      // decide to use a static config from the factor
+      // decide to use a static config from the factory
       // or use a config passed to the constructor that could be mutated
       this._config = config || params.config
       this._useCases = useCases
