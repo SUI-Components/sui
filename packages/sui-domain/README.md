@@ -55,9 +55,9 @@ const EntryPoint = EntryPointFactory({useCases})
 const domain = new EntryPoint({config})
 ```
 
-### Injecting a logger to our domain
+### Injecting a logger or pde to our domain
 
-In order to increase the observability of your domain, you can pass a custom logger to your domain instance and it will be injected on each UseCase factory. Following the example of previous section:
+In order to increase the observability of your domain, you can pass a custom logger/pde to your domain instance and it will be injected on each UseCase factory. Following the example of previous section:
 
 #### How to inject the logger to your domain?
 
@@ -71,7 +71,7 @@ const EntryPoint = EntryPointFactory({config, useCases, logger})
 const domain = new EntryPoint()
 ```
 
-#### How use it on your domain?
+#### How use the logger on your domain?
 
 ```javascript
 // Your factory file
@@ -89,6 +89,41 @@ export default class UseCase {
   execute() {
     this._logger.log() // Logger ready to rock! 🎸
     return Promise.resolve(true)
+  }
+}
+```
+
+#### How to inject the pde to your domain?
+
+```javascript
+// PDE mock example
+const pde = {
+  isFeatureEnabled: ({featureKey}) => true,
+  getVariation: ({name}) => 'experimentVariation'
+}
+
+const EntryPoint = EntryPointFactory({config, useCases, pde})
+const domain = new EntryPoint()
+```
+
+#### How use the pde on your domain?
+
+```javascript
+// Your factory file
+import EmptyUseCase from './EmptyUseCase.js'
+
+export default ({config, pde}) => new EmptyUseCase({config, pde})
+
+// Your UseCase implementation
+export default class UseCase {
+  constructor({config, pde}) {
+    this._config = config
+    this._pde = pde
+  }
+
+  execute() {
+    const {isActive} = this._pde.isFeatureEnabled({featureKey: 'FeatureFlagKey'})
+    return isActive ? true : false
   }
 }
 ```
