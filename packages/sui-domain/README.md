@@ -55,9 +55,9 @@ const EntryPoint = EntryPointFactory({useCases})
 const domain = new EntryPoint({config})
 ```
 
-### Injecting a logger or pde to our domain
+### Injecting a logger to our domain
 
-In order to increase the observability of your domain, you can pass a custom logger/pde to your domain instance and it will be injected on each UseCase factory. Following the example of previous section:
+In order to increase the observability of your domain, you can pass a custom logger to your domain instance and it will be injected on each UseCase factory. Following the example of previous section:
 
 #### How to inject the logger to your domain?
 
@@ -71,7 +71,7 @@ const EntryPoint = EntryPointFactory({config, useCases, logger})
 const domain = new EntryPoint()
 ```
 
-#### How use the logger on your domain?
+#### How use it on your domain?
 
 ```javascript
 // Your factory file
@@ -93,6 +93,10 @@ export default class UseCase {
 }
 ```
 
+### Injecting a pde to our domain
+
+In order to allow your domain to work with experiments and feature flags, you can pass a custom pde to your domain instance and it will be injected on each UseCase factory.
+
 #### How to inject the pde to your domain?
 
 ```javascript
@@ -106,7 +110,7 @@ const EntryPoint = EntryPointFactory({config, useCases, pde})
 const domain = new EntryPoint()
 ```
 
-#### How use the pde on your domain?
+#### How use it on your domain?
 
 ```javascript
 // Your factory file
