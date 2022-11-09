@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useContext } from 'react'
 
+import hoistNonReactStatic from 'hoist-non-react-statics'
+
 import InitialPropsContext from './initialPropsContext'
 import { ClientPageComponent, DoneImportingPageCallback, ReactRouterTypes, WithInitialPropsComponent } from './types'
 import withInitialProps from './withInitialProps'
@@ -26,6 +28,8 @@ const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({ defaul
     const { initialProps } = useContext(InitialPropsContext)
     return <Page {...props} {...initialProps} />
   }
+
+  hoistNonReactStatic(ServerPage, Page)
   // recover the displayName from the original page
   ServerPage.displayName = Page.displayName
   // detect if the page has getInitialProps and wrap it with the routeInfo

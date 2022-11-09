@@ -17,10 +17,13 @@
     "react": "16 || 17"
   },
   "devDependencies": {
+    "@s-ui/react-router": "1",
     "@testing-library/react": "11.1.0",
     "@types/node": "16",
     "react": "17",
-    "react-dom": "17",
-    "@s-ui/react-router": "1"
+    "react-dom": "17"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "3.3.2"
   }
 }
