@@ -13,8 +13,8 @@ const libPath = fileURLToPath(new URL('lib', import.meta.url))
 const libFilePath = join(libPath, 'example.js')
 
 describe('@s-ui/js-compiler', () => {
-  afterEach(() => fs.remove(libPath))
   beforeEach(() => fs.remove(libPath))
+  afterEach(() => fs.remove(libPath))
 
   it('compiles a /src folder with a JavaScript with JSX file and output to /lib', async () => {
     const {stdout} = await exec('node ../../index.js', {
@@ -29,12 +29,12 @@ describe('@s-ui/js-compiler', () => {
 
     const compiledFile = await fs.readFile(libFilePath, 'utf-8')
 
-    console.log(compiledFile)
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
 
+    expect(compiledFile).to.contain('_async_to_generator')
     expect(compiledFile).to.contain('_ts_decorate')
-    expect(compiledFile).to.contain('regeneratorRuntime')
+    expect(compiledFile).to.contain('_ts_generator')
   })
 
   it('when the "ignore" option exists, it exclude all the file matching the passed patterns', async () => {
@@ -56,7 +56,8 @@ describe('@s-ui/js-compiler', () => {
     expect(compiledFile).to.contain('react/jsx-runtime')
     expect(compiledFile).to.contain('_jsx')
 
+    expect(compiledFile).to.contain('_async_to_generator')
     expect(compiledFile).to.contain('_ts_decorate')
-    expect(compiledFile).to.contain('regeneratorRuntime')
+    expect(compiledFile).to.contain('_ts_generator')
   })
 })
