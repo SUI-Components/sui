@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.21.0 (2022-11-10)
+
+
+### Features
+
+* **packages/sui-js-compiler:** update swc deps ([efe6870](https://github.com/SUI-Components/sui/commit/efe6870fd21bb02251c53e281475d665fdfae32c))
+
+
+
 # 1.20.0 (2022-10-20)
 
 
