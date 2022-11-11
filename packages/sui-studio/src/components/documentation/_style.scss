@@ -1,4 +1,26 @@
 .sui-StudioProps {
+  &-h1,
+  &-h2 {
+    font-weight: 400;
+    line-height: 1.25;
+    padding-bottom: 0.4em;
+  }
+  &-h1 {
+    font-size: 2.25em;
+    border-bottom: 1px solid #eaecef;
+  }
+  &-h2 {
+    font-size: 0.875em;
+    font-weight: 700;
+    margin-top: 56px;
+    text-transform: uppercase;
+  }
+  &-blockquote {
+    border-left: 0.25em solid #dfe2e5;
+    color: #6a737d;
+    padding: 0 1em;
+    margin: 0;
+  }
   &-prop {
     padding: 0 16px 24px 0;
   }
