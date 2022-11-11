@@ -14,6 +14,15 @@ import Logo from './Logo.js'
 export default function Layout({children}) {
   const [readme, setReadme] = useState(null)
   const [menuIsHidden, setMenuIsHidden] = useState(false)
+  const [search, setSearch] = useState('')
+
+  const handleChange = e => {
+    setSearch(e.target.value)
+  }
+
+  const handleFocus = e => {
+    e.target.select()
+  }
 
   const handleClickMenu = () => {
     setMenuIsHidden(!menuIsHidden)
@@ -49,8 +58,16 @@ export default function Layout({children}) {
         </Link>
       </div>
       <aside className={sidebarClassName}>
+        <input
+          className="sui-Studio-sidebar-searchInput"
+          onChange={handleChange}
+          onFocus={handleFocus}
+          placeholder="Search"
+          type="search"
+          value={search}
+        />
         <div className="sui-Studio-sidebarBody">
-          <Navigation />
+          <Navigation search={search} />
         </div>
       </aside>
 
