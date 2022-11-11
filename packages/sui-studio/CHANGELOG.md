@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 11.30.0 (2022-11-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** remove box shadow ([0808a94](https://github.com/SUI-Components/sui/commit/0808a94a2521f693576f4682d52ba109452079de))
+
+
+### Features
+
+* **packages/sui-studio:** fix styles ([3f28e2b](https://github.com/SUI-Components/sui/commit/3f28e2b06789f610e04ae62d6e7a432294a783cc))
+
+
+
 # 11.29.0 (2022-10-21)
 
 
