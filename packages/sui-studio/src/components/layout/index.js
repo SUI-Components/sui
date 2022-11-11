@@ -54,7 +54,6 @@ export default function Layout({children}) {
         </button>
         <Link to="/">
           <Logo />
-          <h1>SUI Components</h1>
         </Link>
       </div>
       <aside className={sidebarClassName}>
