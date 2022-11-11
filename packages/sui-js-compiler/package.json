@@ -1,20 +1,19 @@
 {
   "name": "@s-ui/js-compiler",
-  "version": "1.19.0",
+  "version": "1.21.0",
   "description": "JavaScript Compiler",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./src/index.js",
   "bin": {
     "sui-js-compiler": "./index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:server": "npx @s-ui/test server -P './test/server/*.js'"
   },
-  "keywords": [],
-  "author": "",
   "license": "MIT",
   "dependencies": {
-    "@swc/core": "1.2.194",
-    "@swc/helpers": "0.3.16",
+    "@swc/core": "1.3.14",
+    "@swc/helpers": "0.4.12",
     "commander": "8.3.0",
     "fast-glob": "3.2.11",
     "fs-extra": "10.1.0"

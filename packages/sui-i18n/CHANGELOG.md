@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.31.0 (2022-11-03)
+
+
+### Features
+
+* **packages/sui-i18n:** import node-polyglot 0.43 to our package ([26d7fe1](https://github.com/SUI-Components/sui/commit/26d7fe1b008dbe3527c133ed195ad23b6f00a850))
+* **packages/sui-i18n:** remove node-polyglot dependency ([662ef8a](https://github.com/SUI-Components/sui/commit/662ef8a47e9a9506ca273b81f1a91ed3a97a9e35))
+
+
+
 # 1.30.0 (2022-08-08)
 
 
