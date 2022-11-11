@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 import {expect} from 'chai'
 
-import cache from '../../src/decorators/cache'
-import inlineError from '../../src/decorators/error'
+import cache from '../../src/decorators/cache/index.js'
+import inlineError from '../../src/decorators/error.js'
 
 describe('Cache in the server', () => {
   describe('decorating a sync method', () => {

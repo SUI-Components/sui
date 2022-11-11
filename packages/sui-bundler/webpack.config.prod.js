@@ -84,7 +84,7 @@ const webpackConfig = {
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     }),
     new webpack.ids.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),

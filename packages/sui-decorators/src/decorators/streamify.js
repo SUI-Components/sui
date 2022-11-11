@@ -1,4 +1,4 @@
-import isPromise from '../helpers/isPromise'
+import isPromise from '../helpers/isPromise.js'
 
 const defaultErrorHandler = err => {
   console.error(err)

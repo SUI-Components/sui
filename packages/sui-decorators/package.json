@@ -2,13 +2,21 @@
   "name": "@s-ui/decorators",
   "version": "3.25.0",
   "description": "> Set of ES6 decorators to improve your apps",
-  "main": "lib/",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tracer": "./lib/decorators/tracer",
+    "./isNode": "./lib/helpers/isNode.js",
+    "./lib": "./lib/index.js",
+    "./lib/helpers/isNode": "./lib/helpers/isNode.js",
+    "./lib/decorators/tracer": "./lib/decorators/tracer"
+  },
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib"
+    "prepublishOnly": "npm run lib",
+    "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
+    "test:server": "NODE_ENV=test sui-test server -P 'test/server/*Spec.js'"
   },
-  "keywords": [],
-  "author": "",
   "license": "MIT",
   "devDependencies": {
     "sinon": "10.0.0"
@@ -27,5 +35,13 @@
     "tiny-lru": "6.0.1",
     "hot-shots": "7.7.1",
     "redis-mock": "0.49.0"
+  },
+  "config": {
+    "sui-test": {
+      "server": {
+        "esmOverride": true,
+        "useLibDir": true
+      }
+    }
   }
 }

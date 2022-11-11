@@ -1,4 +1,4 @@
-import {ReporterInterface} from './ReporterInterface'
+import {ReporterInterface} from './ReporterInterface.js'
 
 export class DataDogReporter extends ReporterInterface {
   constructor({client, siteName}) {

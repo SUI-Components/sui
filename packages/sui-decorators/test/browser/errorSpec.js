@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import {expect} from 'chai'
 
-import {inlineError, streamify} from '../../src'
+import {inlineError, streamify} from '../../src/index.js'
 
 describe('Error', () => {
   it('Should play fine with streamify when is OK the response', done => {

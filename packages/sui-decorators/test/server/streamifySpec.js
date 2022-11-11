@@ -3,7 +3,7 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {streamify} from '../../src'
+import {streamify} from '../../src/index.js'
 
 class Dummy {
   constructor(name) {
