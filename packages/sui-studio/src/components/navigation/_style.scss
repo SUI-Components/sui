@@ -1,26 +1,24 @@
 .sui-StudioNav {
-  padding: 16px 16px 80px;
+  border-radius: 4px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #e4e4e4;
+    border-radius: 8px;
+  }
   &-header {
     align-items: center;
     display: flex;
     height: 64px;
     text-decoration: none;
     box-sizing: border-box;
-  }
-
-  &-searchInput {
-    border: 1px solid $c-gray-light;
-    border-radius: 4px;
-    color: #666;
-    font-size: 12px;
-    outline: none;
-    padding: 8px;
-    width: 100%;
-
-    &:focus {
-      background-color: $c-white;
-      border: 1px solid $c-primary;
-    }
   }
 
   &-menu {
@@ -32,7 +30,7 @@
       border-left: 1px solid #e4e4e4;
       color: $c-gray-dark;
       display: block;
-      padding: 8px 16px;
+      padding: 8px 24px;
       font-size: 14px;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -54,12 +52,13 @@
     }
 
     &Title {
+      border-left: 1px solid #e4e4e4;
+      padding-left: 8px;
       color: $c-black;
       padding-bottom: 10px;
       padding-top: 20px;
-      &:nth-child(1) {
-        padding-top: 20px;
-      }
+      text-transform: uppercase;
+      font-weight: bold;
     }
   }
 }

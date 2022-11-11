@@ -1,5 +1,6 @@
 .sui-Studio {
   display: flex;
+  flex-direction: column;
   &-logo {
     & > svg {
       height: auto;
@@ -8,21 +9,40 @@
   }
 
   &-sidebar {
+    padding: 16px;
     top: $h-navHeader;
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
-    height: calc(100vh - $h-navHeader);
-    overflow-x: hidden;
-    overflow-y: scroll;
     position: fixed;
     transform: translate3d(0, 0, 0);
     transition: transform 0.5s ease-in-out;
     z-index: 2;
+    width: $w-sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: calc(100vh - $h-navHeader);
+
+    &-searchInput {
+      border: 1px solid $c-gray-light;
+      border-radius: 4px;
+      color: #666;
+      font-size: 12px;
+      outline: none;
+      padding: 8px;
+      width: 100%;
+      height: $h-search-input;
+      &:focus {
+        background-color: $c-white;
+        border: 1px solid $c-primary;
+      }
+    }
 
     &Body {
-      width: $w-sidebar;
       transition: width 0.25s ease-out;
+      flex-grow: 1;
+      overflow: hidden;
     }
 
     &--hidden {
@@ -113,7 +133,7 @@
   }
 }
 .sui-Studio-navHeader {
-  width: 100%;
+  width: 100vw;
   padding: 0 8px;
   display: flex;
   height: $h-navHeader;
