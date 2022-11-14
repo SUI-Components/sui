@@ -1,5 +1,21 @@
 # CHANGELOG
 
+# 11.31.0 (2022-11-14)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Recover correct h1 h2 styles for API Tab ([5048951](https://github.com/SUI-Components/sui/commit/5048951140ca574fcad03f93ef0403ace36315c5)), closes [#1537](https://github.com/SUI-Components/sui/issues/1537)
+* **packages/sui-studio:** Remove h1 from SUI Studios ([d80cd14](https://github.com/SUI-Components/sui/commit/d80cd1432edfcd83045c291d44173d584a2dfc05)), closes [#1524](https://github.com/SUI-Components/sui/issues/1524)
+
+
+### Features
+
+* **packages/sui-studio:** add studio name if necessary ([bf47407](https://github.com/SUI-Components/sui/commit/bf47407b026c84ca2de1c895b4379e4a36f20022))
+* **packages/sui-studio:** add studio name title ([0f0ec72](https://github.com/SUI-Components/sui/commit/0f0ec72647cf5135a8f6a862e18eb634e2ad718d))
+
+
+
 # 11.30.0 (2022-11-11)
 
 
