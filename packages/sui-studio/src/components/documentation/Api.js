@@ -40,7 +40,7 @@ export default function Api({params}) {
 
       return (
         <div className="sui-StudioProps-prop" key={propName}>
-          <h3>{propName}</h3>
+          <h2 className="sui-StudioProps-h2">{propName}</h2>
           <div>
             <div className="sui-StudioProps-tag sui-StudioProps-required">
               <span>required</span>
@@ -69,8 +69,8 @@ export default function Api({params}) {
     const {props} = componentDoc
     return (
       <Fragment key={index}>
-        <h1>{componentDoc.displayName}</h1>
-        <h2>Props</h2>
+        <h1 className="sui-StudioProps-h1">{componentDoc.displayName}</h1>
+        <blockquote className="sui-StudioProps-blockquote">Props</blockquote>
         {renderPropsApi({props})}
       </Fragment>
     )
