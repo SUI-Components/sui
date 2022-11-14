@@ -56,7 +56,7 @@ export default function Layout({children}) {
         </button>
         <Link to="/">
           <Logo />
-          {}
+          {studioName && <h1>{studioName}</h1>}
         </Link>
       </div>
       <aside className={sidebarClassName}>
@@ -74,9 +74,7 @@ export default function Layout({children}) {
       </aside>
 
       <div className={mainClassName}>
-        <div className="overlay" onClick={() => setMenuIsHidden(true)}>
-          {name && <h1>{studioName}</h1>}
-        </div>
+        <div className="overlay" onClick={() => setMenuIsHidden(true)} />
         {children !== null ? children : renderReadme()}
       </div>
     </section>
