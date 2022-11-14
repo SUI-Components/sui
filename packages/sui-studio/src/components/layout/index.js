@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 
 import cx from 'classnames'
 import PropTypes from 'prop-types'
@@ -9,12 +9,14 @@ import Markdown from '../documentation/Markdown.js'
 import {iconMenu} from '../icons/index.js'
 import Navigation from '../navigation/index.js'
 import {fetchComponentsReadme} from '../tryRequire.js'
+import {getStudioName} from '../utils.js'
 import Logo from './Logo.js'
 
 export default function Layout({children}) {
   const [readme, setReadme] = useState(null)
   const [menuIsHidden, setMenuIsHidden] = useState(false)
   const [search, setSearch] = useState('')
+  const {current: studioName} = useRef(getStudioName())
 
   const handleChange = e => {
     setSearch(e.target.value)
@@ -54,6 +56,7 @@ export default function Layout({children}) {
         </button>
         <Link to="/">
           <Logo />
+          {}
         </Link>
       </div>
       <aside className={sidebarClassName}>
@@ -72,7 +75,7 @@ export default function Layout({children}) {
 
       <div className={mainClassName}>
         <div className="overlay" onClick={() => setMenuIsHidden(true)}>
-          {' '}
+          {name && <h1>{studioName}</h1>}
         </div>
         {children !== null ? children : renderReadme()}
       </div>
