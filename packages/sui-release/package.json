@@ -1,0 +1,11 @@
+{
+  "name": "@s-ui/release",
+  "version": "1.0.0",
+  "description": "CLI release tooling for CI",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "MIT"
+}
