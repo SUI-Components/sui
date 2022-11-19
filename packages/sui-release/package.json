@@ -7,5 +7,22 @@
     "test": "test"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@s-ui/helpers": "1",
+    "commander": "8.3.0",
+    "conventional-changelog": "3.1.25",
+    "enquirer": "2.3.6",
+    "git-url-parse": "12.0.0",
+    "glob": "8.0.3",
+    "word-wrap": "1.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-release#readme"
 }
