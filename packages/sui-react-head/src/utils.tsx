@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Children as ReactChildren } from 'react'
 
-import { Tag } from './types'
+import { Style, Tag } from './types'
 
 const checkRelNeedsHref = (rel: string): boolean =>
   ['alternate', 'preload', 'prefetch'].includes(rel)
@@ -40,28 +40,9 @@ export const extract = ({ children, byTag }: { children: React.ReactNode, byTag:
   })
 }
 
-/**
- * Use the correct component to render the tag
- */
-interface renderTagsParams {
-  tagsArray: any[]
-  Component: React.ComponentType<any>
-}
-export const renderTags = ({ tagsArray = [], Component }: renderTagsParams): JSX.Element[] =>
-  tagsArray.map((tag: Tag) => {
-    const { hreflang: hrefLang, ...restOfTagInfo } = tag
-    return (
-      <Component
-        key={extractKeyFromTag(tag)}
-        hrefLang={hrefLang}
-        {...restOfTagInfo}
-      />
-    )
-  })
-
 interface extractTagsFromParams {
   children: React.ReactNode
-  tag: 'meta' | 'link' | 'title'
+  tag: 'meta' | 'link' | 'title' | 'style'
   fallback: any[]
 }
 
@@ -84,3 +65,35 @@ export const extractTitleFrom = ({ children, fallback = '' }: extractTitleFromPa
   }
   return fallback
 }
+
+/**
+ * Use the correct component to render the tag
+ */
+interface renderTagsParams {
+  tagsArray: any[]
+  Component: React.ComponentType<any>
+}
+export const renderTags = ({ tagsArray = [], Component }: renderTagsParams): JSX.Element[] =>
+  tagsArray.map((tag: Tag) => {
+    const { hreflang: hrefLang, ...restOfTagInfo } = tag
+    return (
+      <Component
+        key={extractKeyFromTag(tag)}
+        hrefLang={hrefLang}
+        {...restOfTagInfo}
+      />
+    )
+  })
+
+/**
+ * Use the correct component to render the tag
+ */
+interface renderStylesParams {
+  stylesArray: any[]
+  Component: React.ComponentType<any>
+}
+export const renderStyles = ({ stylesArray = [], Component }: renderStylesParams): JSX.Element[] =>
+  stylesArray.map((style: Style, index: number) => {
+    const { children, ...styleAttr } = style
+    return <Component key={index} {...styleAttr}>{children}</Component>
+  })
