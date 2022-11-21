@@ -53,7 +53,6 @@ const Head: React.FC<HeadProps> = ({
     fallback: title
   })
 
-  console.log(stylesTagsToRender)
   return (
     <>
       {titleToRender !== '' && <Title>{titleToRender}</Title>}
