@@ -11,7 +11,7 @@ program
   .command('lib', 'Compile a library to a bundle with chunks.')
   .command(
     'analyzer',
-    'Compile all assets and create a HTML inpector for your bundle'
+    'Compile all assets and create a HTML inspector for your bundle'
   )
 
 program.parse(process.argv)
