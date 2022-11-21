@@ -43,9 +43,9 @@ const Head: React.FC<HeadProps> = ({
   })
   const stylesTagsToRender = extractTagsFrom({
     children,
-    tag: 'style',
-    fallback: link
+    tag: 'style'
   })
+
   // title is a special case, so we have the extract from the array
   // and simplify the fallback as used by the method
   const titleToRender = extractTitleFrom({
@@ -53,6 +53,7 @@ const Head: React.FC<HeadProps> = ({
     fallback: title
   })
 
+  console.log(stylesTagsToRender)
   return (
     <>
       {titleToRender !== '' && <Title>{titleToRender}</Title>}

@@ -43,14 +43,15 @@ export const extract = ({ children, byTag }: { children: React.ReactNode, byTag:
 interface extractTagsFromParams {
   children: React.ReactNode
   tag: 'meta' | 'link' | 'title' | 'style'
-  fallback: any[]
+  fallback?: any[]
 }
 
 export const extractTagsFrom = ({ children, tag, fallback }: extractTagsFromParams): any[] => {
   if (children != null) {
     return extract({ children, byTag: tag })
   }
-  return fallback
+
+  return (fallback != null) ? fallback : []
 }
 
 interface extractTitleFromParams { children: React.ReactNode, fallback?: string}
