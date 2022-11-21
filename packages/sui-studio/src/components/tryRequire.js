@@ -1,6 +1,6 @@
 /* global __BASE_DIR__ */
 
-import {safeImport} from './utils'
+import {safeImport} from './utils.js'
 
 const fetchStaticFile = path =>
   window
@@ -16,7 +16,7 @@ export const fetchComponentSrcRawFile = ({category, component}) =>
 
 export const fetchComponentsDefinitions = ({category, component}) =>
   window
-    .fetch(`/components/${category}/${component}/src/definitions.json`)
+    .fetch(`/components/${category}/${component}/definitions.json`)
     .then(res => res.json())
 
 export const fetchComponentsReadme = () =>

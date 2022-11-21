@@ -9,6 +9,7 @@ const program = require('commander')
 const {NO_COMPONENTS_MESSAGE} = require('../config/index.js')
 const generateApiDocs = require('./helpers/generateApiDocs.js')
 const copyStaticFiles = require('./helpers/copyStaticFiles.js')
+const removeStaticFiles = require('./helpers/removeStaticFiles.js')
 const copyGlobals = require('./helpers/copyGlobals.js')
 
 program
@@ -59,6 +60,7 @@ if (needsBuild) {
     .then(copyStaticFiles)
     .then(copyGlobals)
     .then(generateApiDocs)
+    .then(removeStaticFiles)
     .then(() => process.exit(0))
     .catch(() => process.exit(1))
 }
