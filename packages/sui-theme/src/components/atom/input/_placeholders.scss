@@ -19,13 +19,15 @@
 @mixin sui-atom-input-select-focus() {
   border: $bd-atom-select-focus;
   box-shadow: $bxsh-atom-select-focus;
-  outline: 0 none;
+  outline: $ol-atom-select-focus;
+  outline-offset: $olo-atom-select-focus;
 }
 
 @mixin sui-molecule-autosuggest-focus() {
   border: $bd-molecule-autosuggest-focus;
   box-shadow: $bxsh-molecule-autosuggest-focus;
-  outline: 0 none;
+  outline: $ol-molecule-autosuggest-focus;
+  outline-offset: $olo-molecule-autosuggest-focus;
 }
 
 %sui-atom-input-input {
