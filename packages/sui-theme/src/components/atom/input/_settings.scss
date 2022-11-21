@@ -12,9 +12,13 @@ $bd-atom-input-base: $bdw-s solid $c-gray-light !default;
 
 $bd-molecule-autosuggest-focus: $bd-atom-input !default;
 $bxsh-molecule-autosuggest-focus: $bxsh-atom-input !default;
+$ol-molecule-autosuggest-focus: 0 none !default;
+$olo-molecule-autosuggest-focus: 0 !default;
 
 $bd-atom-select-focus: $bd-atom-input !default;
 $bxsh-atom-select-focus: $bxsh-atom-input !default;
+$ol-atom-select-focus: 0 none !default;
+$olo-atom-select-focus: 0 !default;
 
 $h-atom-input--xl: 7 * $sz-base !default; // 56px
 $h-atom-input--l: 6 * $sz-base !default; // 48px
