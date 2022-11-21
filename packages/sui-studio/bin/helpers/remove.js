@@ -9,7 +9,7 @@ const glob = require('fast-glob')
 const debug = require('./debug.js')
 const resolveFilePath = require('./resolveFilePath.js')
 
-module.exports = async function copyFiles(args, config = {}) {
+module.exports = async function removeFiles(args, config = {}) {
   const input = args.slice()
   const outDir = input.pop()
   const globOpts = {}
@@ -29,13 +29,13 @@ module.exports = async function copyFiles(args, config = {}) {
     return
   }
 
-  debug(`Copying ${files.length} files from ${input} to ${outDir}`)
+  debug(`Removing ${files.length} files from ${input} `)
 
   return Promise.all(
     files.map(file => {
       const outName = path.join(outDir, resolveFilePath(file, {flatten, up}))
-      debug(`Copying ${file} to ${outName}`)
-      return fs.copy(file, outName)
+      debug(`Removing ${outName}`)
+      return fs.unlinkSync(outName)
     })
   )
 }

@@ -10,7 +10,7 @@ module.exports = function copyStaticFiles() {
       'components/README.md',
       'components/*/*/README.md',
       'components/*/*/CHANGELOG.md',
-      'components/*/*/src/index.js',
+      'components/*/*/src/**/*.js',
       'components/*/*/demo/playground',
       DESTINATION_FOLDER
     ],
