@@ -1,6 +1,6 @@
 # @s-ui/react-web-vitals
 
-> Track the performance of pages using Core Web Vitals
+> Track the performance of pages using Core Web Vitals in real-time for all the visits
 
 ## Installation
 
