@@ -46,8 +46,6 @@ export default function WebVitalsReporter({onReport, pathnames, children}) {
         return
       }
 
-      console.log(name, value, pathname)
-
       logger.timing({
         name,
         amount: value,
