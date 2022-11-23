@@ -40,7 +40,7 @@ ReactDOM.render(<Root />, document.getElementById('root'))
 
 #### Logger
 
-By default the metrics will be sent using the `timing` metric of the `logger`. The logger should be provided by the SUI Context.
+By default the metrics will be sent using the `timing` method of the `logger`. The logger should be provided by the SUI Context.
 
 ```js
 import withAllContexts from '@s-ui/hoc/lib/withAllContexts'
