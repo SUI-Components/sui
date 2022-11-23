@@ -42,7 +42,7 @@ export default function WebVitalsReporter({onReport, pathnames, children}) {
         return
       }
 
-      if (!logger) {
+      if (!logger?.timing) {
         return
       }
 
