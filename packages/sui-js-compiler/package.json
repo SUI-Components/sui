@@ -4,7 +4,7 @@
   "description": "JavaScript Compiler",
   "type": "module",
   "exports": {
-    ".": "./src/index.js",
+    ".": "./index.js",
     "./swc-config.js": "./swc-config.js"
   },
   "bin": {
