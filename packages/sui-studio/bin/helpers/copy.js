@@ -25,7 +25,7 @@ module.exports = async function copyFiles(args, config = {}) {
   const files = await glob(input, globOpts)
 
   if (files.length === 0) {
-    debug('No files found.')
+    console.log('No files found.')
     return
   }
 
