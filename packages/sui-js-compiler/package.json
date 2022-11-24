@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.js",
-    "./swc-config.js": "./src/swc-config.js"
+    "./swc-config.js": "./swc-config.js"
   },
   "bin": {
     "sui-js-compiler": "./index.js"
