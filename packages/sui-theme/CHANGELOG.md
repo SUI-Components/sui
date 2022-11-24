@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.125.0 (2022-11-22)
+
+
+### Features
+
+* **packages/sui-theme:** add new molecule select and autosuggest tokens to theme ([72a630a](https://github.com/SUI-Components/sui/commit/72a630a6e967d21ad2dbd59191eef022847cc1c0))
+
+
+
 # 8.124.0 (2022-09-29)
 
 
