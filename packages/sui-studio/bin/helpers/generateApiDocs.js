@@ -4,16 +4,18 @@ const fs = require('fs-extra')
 const reactDocs = require('react-docgen')
 const findExportedExpressions = require('./findExportedExpressions.js')
 
-module.exports = function generateApiDocs() {
+module.exports = async function generateApiDocs() {
   console.log('[sui-studio] Generating API documentation for components...')
   console.time('[sui-studio] API generation took')
+
+  const {default: swcConfig} = await import('@s-ui/js-compiler/swc-config.js')
 
   const components = fg.sync('components/*/*/src/index.js', {deep: 4})
 
   components.forEach(file => {
     let docFilePath = file
     const {dir} = path.parse(file)
-    const gen = findExportedExpressions(file)
+    const gen = findExportedExpressions(file, {swc: swcConfig})
     const {route, found} = gen
     if (found) {
       docFilePath = route.split().join('')

@@ -1,8 +1,10 @@
-const swcSettings = require('@s-ui/js-compiler/swc-config.js')
 const {parseSync, transformFileSync} = require('@swc/core')
 const path = require('node:path')
 
-function findExportedExpressions(file, {isDefault = true, variableName} = {}) {
+function findExportedExpressions(
+  file,
+  {isDefault = true, variableName, swc: swcSettings} = {}
+) {
   const {dir, base = 'index.js'} = path.parse(`${file}`)
 
   const {code: transformedCode} = transformFileSync(`${file}`, swcSettings)
