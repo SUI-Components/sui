@@ -45,6 +45,16 @@ domain.get('current_user_use_case').execute().then((products) => {
 ```
 
 
+### Mocking the configuration
+
+```js
+DomainBuilder.extend(
+  {
+    domain,
+    config: 'moked-config'
+  })
+```
+
 ### Forcing an error throw
 
 ```js
