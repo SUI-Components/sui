@@ -20,11 +20,11 @@ describe('DomainBuilder', () => {
   describe('when config is mocked', () => {
     const domainBuilder = DomainBuilder.extend({
       domain: {get: () => {}},
-      config: 'moked-config'
+      config: 'mocked-config'
     })
     it('should return the mocked response', async () => {
       const domain = domainBuilder.build()
-      expect(await domain.get('config')).to.equal('moked-config')
+      expect(await domain.get('config')).to.equal('mocked-config')
     })
   })
 })

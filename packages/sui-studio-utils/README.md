@@ -51,7 +51,7 @@ domain.get('current_user_use_case').execute().then((products) => {
 DomainBuilder.extend(
   {
     domain,
-    config: 'moked-config'
+    config: 'mocked-config'
   })
 ```
 
