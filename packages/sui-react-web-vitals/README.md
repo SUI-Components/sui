@@ -13,13 +13,13 @@ npm install @s-ui/react-web-vitals
 Wrap your app component with the exported one
 
 ```jsx
-import WebVitalsTracker from '@s-ui/react-web-vitals'
+import WebVitalsReporter from '@s-ui/react-web-vitals'
 
 export default function App() {
   return (
-    <CoreWebVitals>
+    <WebVitalsReporter>
       <main />
-    </CoreWebVitals>
+    </WebVitalsReporter>
   )
 }
 ```
@@ -63,6 +63,10 @@ The `timing` method from the `logger` will be called with an object that follows
     {
       "key": "pathname",
       "value": "/products/:id"
+    },
+    {
+      "key": "type",
+      "value": "desktop"
     }
   ]
 }
@@ -73,7 +77,7 @@ The `timing` method from the `logger` will be called with an object that follows
 If `onReport` callback prop is set instead of reporting the metrics to the `logger` the callback will be used.
 
 ```jsx
-import WebVitalsTracker from '@s-ui/react-web-vitals'
+import WebVitalsReporter from '@s-ui/react-web-vitals'
 
 export default function App() {
   const handleReport = metric => {
@@ -81,9 +85,9 @@ export default function App() {
   }
 
   return (
-    <CoreWebVitals onReport={handleReport}>
+    <WebVitalsReporter onReport={handleReport}>
       <main />
-    </CoreWebVitals>
+    </WebVitalsReporter>
   )
 }
 ```
@@ -94,7 +98,40 @@ The callback will be called with an object that follows the next schema
 {
   "name": "LCP",
   "amount": 10,
-  "pathname": "/products/:id"
+  "pathname": "/products/:id",
+  "type": "desktop"
+}
+```
+
+#### Metrics
+
+Use `metrics` prop to set the core web vitals that you want to track. Choose between: `TTFB`, `LCP`, `FID`, `CLS` and `INP`. If not set all core web vitals will be tracked
+
+```jsx
+import WebVitalsReporter from '@s-ui/react-web-vitals'
+
+export default function App() {
+  return (
+    <WebVitalsReporter metrics={['LCP', 'CLS']}>
+      <main />
+    </WebVitalsReporter>
+  )
+}
+```
+
+#### Device type
+
+Use `deviceType` prop to set the device type that will be send when a metric is reported. Choose between: `desktop`, `tablet` and `mobile`. If not set the `browser` property from the SUI Context will be used
+
+```jsx
+import WebVitalsReporter from '@s-ui/react-web-vitals'
+
+export default function App() {
+  return (
+    <WebVitalsReporter deviceType="desktop">
+      <main />
+    </WebVitalsReporter>
+  )
 }
 ```
 
@@ -103,13 +140,13 @@ The callback will be called with an object that follows the next schema
 Use `pathnames` prop if you only want to track a set of pathnames
 
 ```jsx
-import WebVitalsTracker from '@s-ui/react-web-vitals'
+import WebVitalsReporter from '@s-ui/react-web-vitals'
 
 export default function App() {
   return (
-    <CoreWebVitals pathnames={['/products/:id']}>
+    <WebVitalsReporter pathnames={['/products/:id']}>
       <main />
-    </CoreWebVitals>
+    </WebVitalsReporter>
   )
 }
 ```
