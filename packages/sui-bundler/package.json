@@ -32,7 +32,7 @@
     "commander": "8.3.0",
     "css-loader": "6.7.1",
     "css-minimizer-webpack-plugin": "4.0.0",
-    "esbuild": "0.15.5",
+    "esbuild": "0.16.3",
     "escape-string-regexp": "4.0.0",
     "fast-glob": "3.2.11",
     "find-free-ports": "3.0.0",
