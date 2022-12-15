@@ -63,8 +63,6 @@ const migrateComponentFiles = async () => {
         .join('\n') + '\n'
 
     await writeFile(absolutePath, indexTemplate)
-
-    break
   }
 }
 
