@@ -17,7 +17,7 @@ const extractComponeName = content => {
 const hasMultipleExports = content => {
   const match = content.match(/^export /gm)
 
-  if (!match) return null
+  if (!match) return false
 
   return match.length > 1
 }
@@ -48,7 +48,7 @@ const migrateComponentFiles = async () => {
       console.log(`file exists: ${newPath}`)
       continue
     } else {
-      console.log('Does not exists')
+      console.log('Does not exist')
     }
 
     await rename(absolutePath, newPath)
