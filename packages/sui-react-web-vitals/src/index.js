@@ -103,7 +103,7 @@ export default function WebVitalsReporter({
 
 WebVitalsReporter.propTypes = {
   /**
-   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP
+   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to all.
    */
   metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
