@@ -12,7 +12,8 @@ export const METRICS = {
   LCP: 'LCP',
   CLS: 'CLS',
   FID: 'FID',
-  INP: 'INP'
+  INP: 'INP',
+  FCP: 'FCP'
 }
 
 export const DEVICE_TYPES = {
