@@ -159,7 +159,7 @@ module.exports = {
           RULES.OFF,
           {allowTypedFunctionExpressions: false}
         ],
-        'no-unused-expression-chai': true
+        'no-unused-expression-chai': RULES.ERROR
       }
     }
   ]
