@@ -2,9 +2,9 @@ import {useState} from 'react'
 
 import PropTypes from 'prop-types'
 
-import Header from '../Header/index.js'
-import Select from '../Select/index.js'
-import Test from '../Suite/index.js'
+import Header from '../Header/index'
+import Select from '../Select/index'
+import Test from '../Suite/index'
 
 const importComponent = () => import('component/index')
 const importTest = () => import('test/index.test')
