@@ -110,7 +110,7 @@ const EntryPoint = EntryPointFactory({config, useCases, pde})
 const domain = new EntryPoint()
 ```
 
-#### How use it on your domain?
+#### How to use it on your domain?
 
 ```javascript
 // Your factory file
