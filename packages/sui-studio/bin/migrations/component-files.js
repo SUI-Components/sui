@@ -5,7 +5,7 @@ const {resolve, dirname, join} = require('node:path')
 const {readFile, stat, rename, writeFile} = require('node:fs/promises')
 const pattern = /export default(?: function)? ([$A-Z_][0-9A-Z_$]*)/i
 
-const extractComponeName = content => {
+const extractComponentName = content => {
   const match = content.match(pattern)
   if (!match) return null
 
@@ -37,7 +37,7 @@ const migrateComponentFiles = async () => {
     // File path is relative to CWD
     const absolutePath = resolve(process.cwd(), file)
     const content = (await readFile(absolutePath)).toString('utf8')
-    const componentName = extractComponeName(content)
+    const componentName = extractComponentName(content)
 
     if (!componentName) continue
 
