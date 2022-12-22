@@ -1,0 +1,33 @@
+{
+  "name": "@s-ui/react-web-vitals",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib",
+    "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
+    "test:browser": "NODE_ENV=test sui-test browser",
+    "test:server:watch": "npm run test:server -- --watch",
+    "test:server": "NODE_ENV=test sui-test server",
+    "test": "npm run test:server && npm run test:browser"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "web-vitals": "3.1.0",
+    "@s-ui/react-hooks": "1"
+  },
+  "peerDependencies": {
+    "react": "16 || 17",
+    "@s-ui/react-context": "1",
+    "@s-ui/react-router": "1"
+  },
+  "devDependencies": {
+    "@s-ui/test": "8",
+    "@testing-library/react": "11.2.3",
+    "react": "17"
+  }
+}
