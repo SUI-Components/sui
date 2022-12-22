@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.11.0 (2022-12-21)
+
+
+### Features
+
+* **packages/sui-domain:** Inject PDE in domain EntryPoint function ([2fe549a](https://github.com/SUI-Components/sui/commit/2fe549a8bc06a6221b2959dd6b5ce5b0c21c118a))
+
+
+
 # 2.10.0 (2022-10-13)
 
 
