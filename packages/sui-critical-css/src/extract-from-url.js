@@ -87,9 +87,10 @@ export async function extractCSSFromUrl({
       response => !response.ok() && response.status() !== 304
     )
 
-    console.log('xd', current)
-
-    if (current) await closeAll(`Response status code ${current.status()}`)
+    if (current)
+      await closeAll(
+        `Response status code ${current.status()} for url ${current.url()}`
+      )
 
     console.log('[ok] Got response')
 
