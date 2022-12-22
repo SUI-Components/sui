@@ -38,13 +38,17 @@ export const writerFactory = providers => (path, data) => {
       }
     )
 
-    const {description, state: providerState, addMatchers} = definedInteraction
+    const {
+      description,
+      state: providerState,
+      addMatchingRules
+    } = definedInteraction
 
     return {
       ...interaction,
       response: {
         ...interaction.response,
-        ...(addMatchers && {
+        ...(addMatchingRules && {
           matchingRules: getMatchingRules(interaction.response.body)
         })
       },

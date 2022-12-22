@@ -83,7 +83,7 @@ setupContractTests({
           (req, res, ctx) => res(ctx.status(200), ctx.json(gardenResponse))
         ),
         response: gardenResponse,
-        addMatchers: true
+        addMatchingRules: true
       }
     ]
   }
