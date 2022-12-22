@@ -2,6 +2,23 @@ import {stringify} from 'qs'
 
 import {writeData2File} from '@pactflow/pact-msw-adapter/dist/utils/utils.js'
 
+const flatEntries = (input, prefix = '') =>
+  Object.entries(input).flatMap(([key, value]) => {
+    const isObject = typeof value === 'object'
+    return isObject
+      ? flatEntries(value, `${prefix}${key}.`)
+      : {[`${prefix}${key}`]: {match: 'type'}}
+  })
+
+const reduceArrayToObject = items =>
+  items.reduce((objAcc, item) => ({...objAcc, ...item}), {})
+
+const getMatchingRules = body => {
+  const matchingRulesArray = flatEntries(body, '$.body.')
+  const matchingRules = reduceArrayToObject(matchingRulesArray)
+  return matchingRules
+}
+
 export const writerFactory = providers => (path, data) => {
   const {interactions, provider} = data
   const {name} = provider
@@ -9,6 +26,7 @@ export const writerFactory = providers => (path, data) => {
   data.interactions = interactions.map(interaction => {
     const {request} = interaction
     const {path, query} = request
+
     const definedInteraction = providers[name].find(
       ({endpoint, query: definedQuery}) => {
         const matchedEndpoint = endpoint === path
@@ -19,10 +37,17 @@ export const writerFactory = providers => (path, data) => {
         return matchedEndpoint
       }
     )
-    const {description, state: providerState} = definedInteraction
+
+    const {description, state: providerState, addMatchers} = definedInteraction
 
     return {
       ...interaction,
+      response: {
+        ...interaction.response,
+        ...(addMatchers && {
+          matchingRules: getMatchingRules(interaction.response.body)
+        })
+      },
       description,
       providerState
     }
