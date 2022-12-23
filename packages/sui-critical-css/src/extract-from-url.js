@@ -62,7 +62,7 @@ export async function extractCSSFromUrl({
     const urls = Array.isArray(url) ? url : [url]
     const responses = []
 
-    for (url in urls) {
+    for (url of urls) {
       const response = await page
         .goto(url, {waitUntil: 'networkidle'})
         .catch(error => ({error}))
