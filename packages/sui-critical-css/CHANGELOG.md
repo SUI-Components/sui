@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.26.0 (2022-12-23)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** fix typo ([c8ca7f5](https://github.com/SUI-Components/sui/commit/c8ca7f5a4f4a73ac1a922152ebfdcffad2b53b81))
+
+
+
 # 1.25.0 (2022-12-23)
 
 
