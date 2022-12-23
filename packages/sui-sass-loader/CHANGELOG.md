@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.5.0 (2022-12-23)
+
+
+### Features
+
+* **packages/sui-sass-loader:** fix dev deps versions ([63953b0](https://github.com/SUI-Components/sui/commit/63953b0254976c5fc0af52ea0d0760ba6cc5b500))
+
+
+
 # 1.4.0 (2022-09-28)
 
 

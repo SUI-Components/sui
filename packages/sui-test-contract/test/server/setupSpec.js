@@ -14,6 +14,14 @@ const applesResponse = [
   fujiAppleResponse,
   {color: 'green', type: 'Granny Smith'}
 ]
+const gardenResponse = {
+  grassColor: '#34eb4f',
+  size: {
+    height: 86,
+    width: 96
+  },
+  trees: [fujiAppleResponse, {color: 'green', type: 'Granny Smith'}]
+}
 const galaAppleBody = {color: 'red', type: 'Gala'}
 const getAppleHandler = rest.get(
   'http://localhost:8181/apples/:slug',
@@ -65,6 +73,17 @@ setupContractTests({
           (req, res, ctx) => res(ctx.status(200))
         ),
         body: galaAppleBody
+      },
+      {
+        endpoint: '/apples/garden',
+        description: 'A request for getting a garden',
+        state: 'I have a garden',
+        handler: rest.get(
+          'http://localhost:8181/apples/garden',
+          (req, res, ctx) => res(ctx.status(200), ctx.json(gardenResponse))
+        ),
+        response: gardenResponse,
+        addMatchingRules: true
       }
     ]
   }
@@ -94,6 +113,7 @@ describe('Contract files generated', () => {
     expect(providerState).to.eql('I have some apples')
     expect(response.status).to.eql(200)
     expect(response.body).to.eql(applesResponse)
+    expect(response.matchingRules).to.not.exist
   })
 
   it('should generate the contract when doing a request for getting a Fuji apple', () => {
@@ -106,6 +126,7 @@ describe('Contract files generated', () => {
     expect(providerState).to.eql('I have a Fuji apple')
     expect(response.status).to.eql(200)
     expect(response.body).to.eql(fujiAppleResponse)
+    expect(response.matchingRules).to.not.exist
   })
 
   it('should generate the contract when doing a request for getting a Fuji rotten apple', () => {
@@ -118,6 +139,7 @@ describe('Contract files generated', () => {
     expect(providerState).to.eql('I have a Fuji rotten apple')
     expect(response.status).to.eql(200)
     expect(response.body).to.eql(fujiRottenAppleResponse)
+    expect(response.matchingRules).to.not.exist
   })
 
   it('should generate the contract when doing a request for adding a Gala apple', () => {
@@ -131,5 +153,27 @@ describe('Contract files generated', () => {
     expect(request.method).to.eql('POST')
     expect(request.body).to.eql(galaAppleBody)
     expect(response.status).to.eql(200)
+    expect(response.matchingRules).to.not.exist
+  })
+
+  it('should generate the contract with Pact matchers when doing a request for getting a garden', () => {
+    const data = getContractFileData({
+      consumer,
+      description: 'A request for getting a garden'
+    })
+    const {providerState, response} = data
+
+    expect(providerState).to.eql('I have a garden')
+    expect(response.status).to.eql(200)
+    expect(response.body).to.eql(gardenResponse)
+    expect(response.matchingRules).to.deep.equal({
+      '$.body.grassColor': {match: 'type'},
+      '$.body.size.height': {match: 'type'},
+      '$.body.size.width': {match: 'type'},
+      '$.body.trees.0.color': {match: 'type'},
+      '$.body.trees.0.type': {match: 'type'},
+      '$.body.trees.1.color': {match: 'type'},
+      '$.body.trees.1.type': {match: 'type'}
+    })
   })
 })

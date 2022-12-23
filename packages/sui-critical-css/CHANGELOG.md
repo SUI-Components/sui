@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.25.0 (2022-12-23)
+
+
+### Features
+
+* **packages/sui-critical-css:** add doc and small update ([18e9ea9](https://github.com/SUI-Components/sui/commit/18e9ea924ff0aab588b9df8bf179b613d924b425))
+* **packages/sui-critical-css:** allow url to be an array ([4eb48b1](https://github.com/SUI-Components/sui/commit/4eb48b132102b6fca159b82de0fb8bd987c60fcc))
+* **packages/sui-critical-css:** update file ([936f712](https://github.com/SUI-Components/sui/commit/936f71277d07a75c6d4cf8cc527c8cad3e6a6a8c))
+
+
+
 # 1.24.0 (2022-10-03)
 
 
