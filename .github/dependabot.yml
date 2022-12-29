@@ -1,12 +1,15 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "daily"
+      interval: 'weekly'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
     commit-message:
-      prefix: "feat"
-      include: "scope"
+      prefix: 'feat'
+      include: 'scope'
+    labels:
+      - 'npm'
+      - 'dependabot'
