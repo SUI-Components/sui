@@ -14,7 +14,7 @@
     "prepublishOnly": "npm run lib"
   },
   "dependencies": {
-    "@testing-library/cypress": "8.0.3",
+    "@testing-library/cypress": "8.0.7",
     "colors": "1.4.0",
     "commander": "8.3.0",
     "cypress": "10.4.0",
