@@ -30,7 +30,7 @@
     "babel-preset-sui": "3",
     "buffer": "6.0.3",
     "commander": "8.3.0",
-    "css-loader": "6.7.1",
+    "css-loader": "6.7.3",
     "css-minimizer-webpack-plugin": "4.0.0",
     "esbuild": "0.15.5",
     "escape-string-regexp": "4.0.0",
