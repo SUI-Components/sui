@@ -25,7 +25,7 @@
     "@s-ui/helpers": "1",
     "babel-loader": "8.2.5",
     "babel-plugin-dynamic-import-node": "2.3.3",
-    "babel-plugin-istanbul": "6.0.0",
+    "babel-plugin-istanbul": "6.1.1",
     "babel-preset-sui": "3",
     "commander": "8.3.0",
     "karma": "6.4.0",
