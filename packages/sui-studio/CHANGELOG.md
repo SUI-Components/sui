@@ -1,5 +1,21 @@
 # CHANGELOG
 
+# 11.33.0 (2022-12-23)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Fix typo ([9fc7585](https://github.com/SUI-Components/sui/commit/9fc7585f459072b0db4b638361b8be469d0af332))
+
+
+### Features
+
+* **packages/sui-studio:** Add script to migrate component files to new structure ([4dd2d57](https://github.com/SUI-Components/sui/commit/4dd2d57bfb76e65175e211e553a592b21462bc6f))
+* **packages/sui-studio:** Fix typo and change return value to make it more verbose ([c6d3584](https://github.com/SUI-Components/sui/commit/c6d3584d43ea45106df4f573e856889ad488a801))
+* **packages/sui-studio:** Remove unneeded break statement ([38c759c](https://github.com/SUI-Components/sui/commit/38c759c942c2e957c610df9aca79df4ecb5d504f))
+
+
+
 # 11.32.0 (2022-11-21)
 
 

@@ -93,6 +93,45 @@ export default class UseCase {
 }
 ```
 
+### Injecting a pde to our domain
+
+In order to allow your domain to work with experiments and feature flags, you can pass a custom pde to your domain instance and it will be injected on each UseCase factory.
+
+#### How to inject the pde to your domain?
+
+```javascript
+// PDE mock example
+const pde = {
+  isFeatureEnabled: ({featureKey}) => true,
+  getVariation: ({name}) => 'experimentVariation'
+}
+
+const EntryPoint = EntryPointFactory({config, useCases, pde})
+const domain = new EntryPoint()
+```
+
+#### How to use it on your domain?
+
+```javascript
+// Your factory file
+import EmptyUseCase from './EmptyUseCase.js'
+
+export default ({config, pde}) => new EmptyUseCase({config, pde})
+
+// Your UseCase implementation
+export default class UseCase {
+  constructor({config, pde}) {
+    this._config = config
+    this._pde = pde
+  }
+
+  execute() {
+    const {isActive} = this._pde.isFeatureEnabled({featureKey: 'FeatureFlagKey'})
+    return isActive ? true : false
+  }
+}
+```
+
 ## Using Fetcher
 
 ```javascript

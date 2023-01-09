@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 2.10.0 (2022-12-23)
+
+
+### Features
+
+* **packages/sui-test-contract:** add matchers to contracts ([0255e71](https://github.com/SUI-Components/sui/commit/0255e71a341648944280985c6e4824a097f2e570))
+* **packages/sui-test-contract:** rename flag ([bb60516](https://github.com/SUI-Components/sui/commit/bb60516623f6c204438a5a16541424e9f608a9fb))
+* **packages/sui-test-contract:** update readme ([b85ae9e](https://github.com/SUI-Components/sui/commit/b85ae9e30e50477a554d8eeddc45298bed30b432))
+
+
+
 # 2.9.0 (2022-10-24)
 
 

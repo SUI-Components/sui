@@ -59,9 +59,16 @@ export async function extractCSSFromUrl({
 
     await page.coverage.startCSSCoverage()
 
-    const response = await page
-      .goto(url, {waitUntil: 'networkidle'})
-      .catch(error => ({error}))
+    const urls = Array.isArray(url) ? url : [url]
+    const responses = []
+
+    for (url of urls) {
+      const response = await page
+        .goto(url, {waitUntil: 'networkidle'})
+        .catch(error => ({error}))
+
+      responses.push(response)
+    }
 
     const closeAll = async error => {
       await page.close()
@@ -70,12 +77,20 @@ export async function extractCSSFromUrl({
       if (error) throw new Error(`[ko] ${error}`)
     }
 
-    if (!response) await closeAll('Response is not present')
+    if (!responses.length) await closeAll('Response is not present')
 
-    if (response.error) await closeAll(response.error)
+    const error = responses.find(response => response.error)
 
-    if (!response.ok() && response.status() !== 304)
-      await closeAll(`Response status code ${response.status()} for url ${url}`)
+    if (error) await closeAll(error)
+
+    const current = responses.find(
+      response => !response.ok() && response.status() !== 304
+    )
+
+    if (current)
+      await closeAll(
+        `Response status code ${current.status()} for url ${current.url()}`
+      )
 
     console.log('[ok] Got response')
 

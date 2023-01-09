@@ -93,6 +93,7 @@ setupContractTests({
 | `handler`     | Yes      | [Request handler](https://mswjs.io/docs/basics/request-handler)                                                     |                                                 | Request handler used in the contract test     |
 | `options`     | No       | `object`                                                                                                            | `defaultOptions` (from the setup configuration) | Request options                               |
 | `response`    | Yes      | `any`                                                                                                               |                                                 | Response to be validated in the contract test |
+| `addMatchingRules`    | No      | `boolean`                                                                                                               |                                                 | Flag to add Pact matching rules to check contracts by value type |
 
 ## Publishing the contracts
 
