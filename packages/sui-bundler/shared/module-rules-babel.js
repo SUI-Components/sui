@@ -1,7 +1,7 @@
 const path = require('path')
 const {config} = require('./index.js')
 
-const {TS: isTypeScript = false} = process.env
+const isTypeScript = config?.parser?.syntax === 'typescript'
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
