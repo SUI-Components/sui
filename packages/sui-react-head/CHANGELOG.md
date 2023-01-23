@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 1.12.0 (2023-01-23)
+
+
+### Bug Fixes
+
+* **packages/sui-react-head:** fix server side style tags ([3dce422](https://github.com/SUI-Components/sui/commit/3dce422c441c52efb07f26a22aea8ab060075c8f))
+* **packages/sui-react-head:** remove console ([eead7d6](https://github.com/SUI-Components/sui/commit/eead7d653865ddbcdf1d9e6b104158db04d6ef2b))
+
+
+### Features
+
+* **packages/sui-react-head:** use style tag in head ([ebd9767](https://github.com/SUI-Components/sui/commit/ebd97670fc571d2b28524acb2f9d0b617f000121))
+
+
+
 # 1.11.0 (2022-10-05)
 
 
