@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Children as ReactChildren } from 'react'
 
-import { Tag } from './types'
+import { Style, Tag } from './types'
 
 const checkRelNeedsHref = (rel: string): boolean =>
   ['alternate', 'preload', 'prefetch'].includes(rel)
@@ -40,6 +40,33 @@ export const extract = ({ children, byTag }: { children: React.ReactNode, byTag:
   })
 }
 
+interface extractTagsFromParams {
+  children: React.ReactNode
+  tag: 'meta' | 'link' | 'title' | 'style'
+  fallback?: any[]
+}
+
+export const extractTagsFrom = ({ children, tag, fallback }: extractTagsFromParams): any[] => {
+  if (children != null) {
+    return extract({ children, byTag: tag })
+  }
+
+  return (fallback != null) ? fallback : []
+}
+
+interface extractTitleFromParams { children: React.ReactNode, fallback?: string}
+
+export const extractTitleFrom = ({ children, fallback = '' }: extractTitleFromParams): string => {
+  if (typeof children === 'undefined') return fallback
+
+  const listOfTitles = extract({ children, byTag: 'title' })
+  if (listOfTitles.length > 0) {
+    const [title] = listOfTitles
+    return title.children !== undefined ? title.children : fallback
+  }
+  return fallback
+}
+
 /**
  * Use the correct component to render the tag
  */
@@ -59,28 +86,15 @@ export const renderTags = ({ tagsArray = [], Component }: renderTagsParams): JSX
     )
   })
 
-interface extractTagsFromParams {
-  children: React.ReactNode
-  tag: 'meta' | 'link' | 'title'
-  fallback: any[]
+/**
+ * Use the correct component to render the tag
+ */
+interface renderStylesParams {
+  stylesArray: any[]
+  Component: React.ComponentType<any>
 }
-
-export const extractTagsFrom = ({ children, tag, fallback }: extractTagsFromParams): any[] => {
-  if (children != null) {
-    return extract({ children, byTag: tag })
-  }
-  return fallback
-}
-
-interface extractTitleFromParams { children: React.ReactNode, fallback?: string}
-
-export const extractTitleFrom = ({ children, fallback = '' }: extractTitleFromParams): string => {
-  if (typeof children === 'undefined') return fallback
-
-  const listOfTitles = extract({ children, byTag: 'title' })
-  if (listOfTitles.length > 0) {
-    const [title] = listOfTitles
-    return title.children !== undefined ? title.children : fallback
-  }
-  return fallback
-}
+export const renderStyles = ({ stylesArray = [], Component }: renderStylesParams): JSX.Element[] =>
+  stylesArray.map((style: Style, index: number) => {
+    const { children, ...styleAttr } = style
+    return <Component key={index} {...styleAttr}>{children}</Component>
+  })
