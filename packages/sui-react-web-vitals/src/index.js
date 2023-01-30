@@ -69,14 +69,20 @@ export default function WebVitalsReporter({
         return
       }
 
-      if (!logger?.timing) {
+      if (!logger?.distribution) {
         return
       }
 
-      logger.timing({
-        name,
-        amount: value,
+      const amount = name === METRICS.CLS ? value * 1000 : value
+
+      logger.distribution({
+        name: 'cwv',
+        amount,
         tags: [
+          {
+            key: 'name',
+            value: name.toLowerCase()
+          },
           {
             key: 'pathname',
             value: pathname
