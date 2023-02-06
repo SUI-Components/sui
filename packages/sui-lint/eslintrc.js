@@ -159,8 +159,9 @@ module.exports = {
           RULES.OFF,
           {allowTypedFunctionExpressions: false}
         ],
+        'chai-friendly/no-unused-expressions': RULES.ERROR,
         '@typescript-eslint/no-unused-expressions': RULES.OFF,
-        'chai-friendly/no-unused-expressions': RULES.ERROR
+        '@typescript-eslint/return-await': RULES.OFF
       }
     }
   ]
