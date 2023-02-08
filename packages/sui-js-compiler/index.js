@@ -35,7 +35,7 @@ program
   })
   .parse(process.argv)
 
-const {ignoreOpts = []} = program.opts()
+const {ignore: ignoreOpts = []} = program.opts()
 const ignore = [...ignoreOpts, '**/__tests__']
 
 ;(async () => {
