@@ -35,7 +35,8 @@ program
   })
   .parse(process.argv)
 
-const {ignore = []} = program.opts()
+const {ignoreOpts = []} = program.opts()
+const ignore = [...ignoreOpts, '**/__tests__']
 
 ;(async () => {
   console.time('[sui-js-compiler]')
