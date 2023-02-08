@@ -83,7 +83,8 @@ module.exports = {
 
   env: {
     es6: true,
-    mocha: true
+    mocha: true,
+    'jest/globals': true
   },
 
   globals: {
@@ -116,7 +117,8 @@ module.exports = {
     'prettier',
     'react',
     'react-hooks',
-    'simple-import-sort'
+    'simple-import-sort',
+    'jest'
   ],
   rules: {
     ...REACT_RULES,
