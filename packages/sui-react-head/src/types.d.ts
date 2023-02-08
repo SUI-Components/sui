@@ -10,3 +10,9 @@ export interface Tag {
 interface ComponentTag {
   props: Tag
 }
+
+export interface Style {
+  children: string
+  media?: string
+  type?: string
+}

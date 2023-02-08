@@ -53,13 +53,17 @@ const Root = withAllContexts(context)(Router)
 ReactDOM.render(<Root />, document.getElementById('root'))
 ```
 
-The `timing` method from the `logger` will be called with an object that follows the next schema
+The `distribution` method from the `logger` will be called with an object that follows the next schema
 
 ```json
 {
-  "name": "LCP",
+  "name": "cwv",
   "amount": 10,
   "tags": [
+    {
+      "key": "name",
+      "value": "CLS"
+    }
     {
       "key": "pathname",
       "value": "/products/:id"

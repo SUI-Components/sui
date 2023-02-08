@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.2.0 (2023-01-30)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add distribution metric support ([aa741e6](https://github.com/SUI-Components/sui/commit/aa741e6d2e7899f9eba083b4d144fad1918baeae))
+
+
+
 # 1.1.0 (2022-12-22)
 
 
