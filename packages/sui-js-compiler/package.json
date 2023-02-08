@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js-compiler",
-  "version": "1.22.0-jest.0",
+  "version": "1.22.0-jest.1",
   "description": "JavaScript Compiler",
   "type": "module",
   "exports": "./src/index.js",
