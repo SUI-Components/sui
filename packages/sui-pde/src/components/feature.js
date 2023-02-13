@@ -8,7 +8,11 @@ export default function Feature({
   attributes,
   queryString
 }) {
-  const {isActive, variables} = useFeature(featureKey, attributes, queryString)
+  const {isActive, variables} = useFeature({
+    featureKey,
+    attributes,
+    queryString
+  })
   return children({isActive, variables})
 }
 

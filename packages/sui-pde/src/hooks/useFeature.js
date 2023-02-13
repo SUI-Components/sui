@@ -51,18 +51,19 @@ const trackLinkedExperimentsViewed = ({
 
 /**
  * Hook to use a feature toggle
- * @param {string} featureKey
- * @param {object} attributes
- * @param {string} [queryString] test purposes only
- * @param {string} adapterId
+ * @param {object} param
+ * @param {string} param.featureKey
+ * @param {object} param.attributes
+ * @param {string} param.[queryString] test purposes only
+ * @param {string} param.adapterId
  * @return {{isActive: boolean}}
  */
-export default function useFeature(
+export default function useFeature({
   featureKey,
   attributes,
   queryString,
   adapterId
-) {
+} = {}) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
     throw new Error('[useFeature] sui-pde provider is required to work')

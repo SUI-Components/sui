@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/pde",
-  "version": "2.20.0",
+  "version": "3.0.0",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
@@ -29,5 +29,14 @@
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",
     "react-test-renderer": "17"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   }
 }

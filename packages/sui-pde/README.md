@@ -172,7 +172,7 @@ It's possible to force a variation for our experiment in the browser. For exampl
 import {useFeature} from '@s-ui/pde'
 
 const MyComponent = () => {
-  const {isActive} = useFeature('myFeatureKey') // isActive = true when the feature flag is activated
+  const {isActive} = useFeature({featureKey: 'myFeatureKey'}) // isActive = true when the feature flag is activated
 
   return <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
 }
@@ -206,7 +206,7 @@ Returns all feature variables for the specified feature flag
 import {useFeature} from '@s-ui/pde'
 
 const MyComponent = () => {
-  const {isActive, variables} = useFeature('myFeatureKey') // variables = an object with all the feature variables
+  const {isActive, variables} = useFeature({featureKey: 'myFeatureKey'}) // variables = an object with all the feature variables
 
   return (
     <p>
@@ -237,8 +237,11 @@ In order to pass by attributes, you'll able to do so by adding the second argume
 import {useFeature} from '@s-ui/pde'
 
 const MyComponent = () => {
-  const {isActive} = useFeature('myFeatureKey', {
-    isLoggedIn: true // this second parameter are the attributes
+  const {isActive} = useFeature({
+    featureKey: 'myFeatureKey', 
+    attributes: {
+      isLoggedIn: true // this second parameter are the attributes
+    }
   })
 
   return <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
@@ -292,9 +295,9 @@ Using the hooks
 
 ```js
 const MyComponent = () => {
-  const defaultFeature = useFeature('myFeatureKey') // will return the {isActive, variables} object from the default optimizely instance
-  const alsoDefaultFeature = useFeature('myFeatureKey', null, null, 'default') // will return the {isActive, variables} object from the default optimizely instance
-  const alternateFeature = useFeature('myFeatureKey', null, null, 'alternative') // will return the {isActive, variables} object from the alternate optimizely instance
+  const defaultFeature = useFeature({featureKey: 'myFeatureKey'}) // will return the {isActive, variables} object from the default optimizely instance
+  const alsoDefaultFeature = useFeature({featureKey: 'myFeatureKey', adapterId: 'default'}) // will return the {isActive, variables} object from the default optimizely instance
+  const alternateFeature = useFeature({featureKey: 'myFeatureKey', adapterId: 'alternative'}) // will return the {isActive, variables} object from the alternate optimizely instance
   
   const defaultExperiment = useExperiment({experimentName: 'myExperimentName'}) // will return the experiment object from the default optimizely instance
   const alsoDefaultExperiment = useExperiment({experimentName: 'myExperimentName', adapterId: 'default'}) // will return the experiment object from the default optimizely instance
