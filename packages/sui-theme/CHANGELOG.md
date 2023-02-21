@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.126.0 (2023-02-21)
+
+
+### Features
+
+* **packages/sui-theme:** add mixin to hide scrollbars when required ([218c16d](https://github.com/SUI-Components/sui/commit/218c16d7658de48c5c390175efcfe3cf4dfb8469))
+
+
+
 # 8.125.0 (2022-11-22)
 
 
