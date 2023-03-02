@@ -310,7 +310,7 @@ i18n.c(1000) //=> £1,000
 i18n.c(1000000) //=> £1,000,000
 ```
 
-We can format numbers with a extended Intl.FormatNumber options
+We can format numbers with a extended Intl.NumberFormat options
 ```javascript
 import I18n from '@s-ui/i18n'
 import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
