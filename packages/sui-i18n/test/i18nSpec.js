@@ -156,6 +156,21 @@ describe('I18N', () => {
         expect(i18n.t(`${key}.literalOne`)).to.eql('TranslateDynamicEsES')
       })
 
+      describe('properly number format with extended options', () => {
+        beforeEach(() => {
+          i18n.culture = 'es-ES'
+          i18n.extendedIntlNumberOptions = {useGrouping: true}
+        })
+        afterEach(() => {
+          i18n.culture = ''
+          i18n.extendedIntlNumberOptions = null
+        })
+
+        it('should display grouping separators even if the locale prefers otherwise', () => {
+          expect(i18n.n(1000)).to.eql('1.000')
+        })
+      })
+
       describe('properly formats minor types like', () => {
         describe('percentage', () => {
           it('from a non-decimal amount when ', () => {

@@ -310,6 +310,29 @@ i18n.c(1000) //=> £1,000
 i18n.c(1000000) //=> £1,000,000
 ```
 
+We can format numbers with a extended Intl.FormatNumber options
+```javascript
+import I18n from '@s-ui/i18n'
+import Polyglot from '@s-ui/i18n/lib/adapters/polyglot'
+
+const i18n = new I18n({adapter: new Polyglot()})
+
+i18n.culture = 'es-ES'
+
+// With default es-ES options
+i18n.n(1000) //=> 1000
+i18n.n(10000) //=> 10.000
+
+// With forced useGrouping option
+const extendedOptions = {
+  useGrouping: true // should display grouping separators even if the locale prefers otherwise
+}
+
+i18n.extendedIntlNumberOptions = {...extendedOptions} 
+i18n.n(1000) //=> 1.000
+i18n.n(10000) //=> 10.000
+```
+
 #### Currency symbol
 
 Get the currency symbol.
