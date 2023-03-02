@@ -7,7 +7,7 @@ export default class Rosetta {
     this._culture = null
     this._currency = null
     this._languages = null
-    this._extendedIntlNumberOptions = null
+    this._defaultNumberFormatOptions = null
 
     this.translator = adapter
   }
@@ -31,8 +31,8 @@ export default class Rosetta {
 
   // According to Intl.NumberFormat options
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
-  set extendedIntlNumberOptions(options) {
-    this._extendedIntlNumberOptions = options
+  set defaultNumberFormatOptions(options) {
+    this._defaultNumberFormatOptions = options
   }
 
   get culture() {
@@ -128,8 +128,8 @@ export default class Rosetta {
 
     return typeof Intl !== 'undefined'
       ? new Intl.NumberFormat(culture || this._culture, {
-          ...options,
-          ...this._extendedIntlNumberOptions
+          ...this._defaultNumberFormatOptions,
+          ...options
         }).format(number)
       : number
   }

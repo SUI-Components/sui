@@ -156,14 +156,14 @@ describe('I18N', () => {
         expect(i18n.t(`${key}.literalOne`)).to.eql('TranslateDynamicEsES')
       })
 
-      describe('properly number format with extended options', () => {
+      describe('properly number format with default options', () => {
         beforeEach(() => {
           i18n.culture = 'es-ES'
-          i18n.extendedIntlNumberOptions = {useGrouping: true}
+          i18n.defaultNumberFormatOptions = {useGrouping: true}
         })
         afterEach(() => {
           i18n.culture = ''
-          i18n.extendedIntlNumberOptions = null
+          i18n.defaultNumberFormatOptions = null
         })
 
         it('should display grouping separators even if the locale prefers otherwise', () => {
