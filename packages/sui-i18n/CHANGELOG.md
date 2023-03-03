@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 1.32.0 (2023-03-03)
+
+
+### Features
+
+* **packages/sui-i18n:** improve name ([a1d29c3](https://github.com/SUI-Components/sui/commit/a1d29c3203ecaa338d90221def8b3fae9918e2aa))
+* **packages/sui-i18n:** improve tests and docs ([efcbd47](https://github.com/SUI-Components/sui/commit/efcbd479f88d4f9349d3c80be6775d210e81aa21))
+* **packages/sui-i18n:** improve typo ([215b0cf](https://github.com/SUI-Components/sui/commit/215b0cf9eafc2ffc794e8ad024816894198e99ea))
+* **packages/sui-i18n:** Intl.FormatNumber extended options ([c83b675](https://github.com/SUI-Components/sui/commit/c83b6757ddfbef1f81b8926f45e7711953897630))
+* **packages/sui-i18n:** pr suggestions ([db29b65](https://github.com/SUI-Components/sui/commit/db29b653dc29ee9e79b8b490df6cb8df9e81da13))
+
+
+
 # 1.31.0 (2022-11-03)
 
 
