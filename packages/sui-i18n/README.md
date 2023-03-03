@@ -328,7 +328,7 @@ const defaultOptions = {
   useGrouping: true // should display grouping separators even if the locale prefers otherwise
 }
 
-i18n.defaultNumberFormatOptions = {...defaultOptions} 
+i18n.defaultNumberFormatOptions = defaultOptions
 i18n.n(1000) //=> 1.000
 i18n.n(10000) //=> 10.000
 ```
