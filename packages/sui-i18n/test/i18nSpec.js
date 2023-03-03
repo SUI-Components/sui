@@ -156,6 +156,40 @@ describe('I18N', () => {
         expect(i18n.t(`${key}.literalOne`)).to.eql('TranslateDynamicEsES')
       })
 
+      describe('properly number format with default options', () => {
+        beforeEach(() => {
+          i18n.culture = 'es-ES'
+          i18n.defaultNumberFormatOptions = {useGrouping: true}
+        })
+        afterEach(() => {
+          i18n.culture = ''
+          i18n.defaultNumberFormatOptions = null
+        })
+
+        it('should display grouping separators even if the locale prefers otherwise', () => {
+          expect(i18n.n(1000)).to.eql('1.000')
+        })
+
+        it('The default value can be overwritten from the execution of the i18n.n method', () => {
+          expect(i18n.n(1000, {useGrouping: false})).to.eql('1000')
+        })
+      })
+
+      describe('default options backward compatibility', () => {
+        beforeEach(() => {
+          i18n.culture = 'es-ES'
+          i18n.defaultNumberFormatOptions = null
+        })
+        afterEach(() => {
+          i18n.culture = ''
+        })
+
+        it('it preserves backward compatibility if defaultNumberFormatOptions has no value and options are no setted inside i18n.n', () => {
+          expect(i18n.n(1000)).to.eql('1000')
+          expect(i18n.n(10000)).to.eql('10.000')
+        })
+      })
+
       describe('properly formats minor types like', () => {
         describe('percentage', () => {
           it('from a non-decimal amount when ', () => {
