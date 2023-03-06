@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 8.11.0 (2022-10-06)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** fix security issue from ua-parser-js ([95e8792](https://github.com/SUI-Components/sui/commit/95e8792df4268f29ef60db850d00622767bd9bfe))
+
+
+
+# 8.10.0 (2022-09-15)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** undo beta modification in package json ([902c98f](https://github.com/SUI-Components/sui/commit/902c98f3bcc19d484c060749af301ed7ee10a8a3))
+
+
+### Features
+
+* **packages/sui-ssr:** import middleware from sui-critical-css-middleware and make sui-ssr do not i ([46d602c](https://github.com/SUI-Components/sui/commit/46d602c9b83d2db0dc6364996c5e618ac3970497))
+
+
+
 # 8.9.0 (2022-08-16)
 
 

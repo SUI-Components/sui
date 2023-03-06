@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.27.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-ci:** Update node-fetch to latest v2 version ([65e9d40](https://github.com/SUI-Components/sui/commit/65e9d405a4df151a6fea7f0a4fc3efccca528769))
+
+
+
 # 1.26.0 (2022-08-22)
 
 

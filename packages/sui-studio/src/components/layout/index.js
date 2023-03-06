@@ -1,19 +1,33 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
+import {Link} from '@s-ui/react-router'
+
 import Markdown from '../documentation/Markdown.js'
-import {iconClose, iconMenu} from '../icons/index.js'
+import {iconMenu} from '../icons/index.js'
 import Navigation from '../navigation/index.js'
 import {fetchComponentsReadme} from '../tryRequire.js'
+import {getStudioName} from '../utils.js'
+import Logo from './Logo.js'
 
 export default function Layout({children}) {
   const [readme, setReadme] = useState(null)
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const [menuIsHidden, setMenuIsHidden] = useState(false)
+  const [search, setSearch] = useState('')
+  const {current: studioName} = useRef(getStudioName())
+
+  const handleChange = e => {
+    setSearch(e.target.value)
+  }
+
+  const handleFocus = e => {
+    e.target.select()
+  }
 
   const handleClickMenu = () => {
-    setMenuIsOpen(!menuIsOpen)
+    setMenuIsHidden(!menuIsHidden)
   }
 
   useEffect(() => {
@@ -27,22 +41,40 @@ export default function Layout({children}) {
   )
 
   const sidebarClassName = cx('sui-Studio-sidebar', {
-    'sui-Studio-sidebar--open': menuIsOpen
+    'sui-Studio-sidebar--hidden': menuIsHidden
+  })
+
+  const mainClassName = cx('sui-Studio-main', {
+    'sui-Studio-main--sidebar_hidden': menuIsHidden
   })
 
   return (
     <section className="sui-Studio">
-      <button className="sui-Studio-navMenu" onClick={handleClickMenu}>
-        {menuIsOpen ? iconClose : iconMenu}
-      </button>
-
+      <div className="sui-Studio-navHeader">
+        <button className="sui-Studio-navMenu" onClick={handleClickMenu}>
+          {iconMenu}
+        </button>
+        <Link to="/">
+          <Logo />
+          {studioName && <h1>{studioName}</h1>}
+        </Link>
+      </div>
       <aside className={sidebarClassName}>
+        <input
+          className="sui-Studio-sidebar-searchInput"
+          onChange={handleChange}
+          onFocus={handleFocus}
+          placeholder="Search"
+          type="search"
+          value={search}
+        />
         <div className="sui-Studio-sidebarBody">
-          <Navigation handleClick={() => setMenuIsOpen(false)} />
+          <Navigation search={search} />
         </div>
       </aside>
 
-      <div className="sui-Studio-main">
+      <div className={mainClassName}>
+        <div className="overlay" onClick={() => setMenuIsHidden(true)} />
         {children !== null ? children : renderReadme()}
       </div>
     </section>

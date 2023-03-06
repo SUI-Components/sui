@@ -14,7 +14,9 @@ const configForMobileDevice = devices.m
 
 export const createUrlFrom = ({hostname, pathOptions}) => {
   const path = typeof pathOptions === 'string' ? pathOptions : pathOptions.url
-  return `${hostname}${path}`
+  return Array.isArray(path)
+    ? path.map(current => `${hostname}${current}`)
+    : `${hostname}${path}`
 }
 
 const waitForHealthCheck = ({healthCheckUrl}) => {

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.21.0 (2023-02-14)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix error on access to experiments map ([29768b3](https://github.com/SUI-Components/sui/commit/29768b367554157f92636a5136fa52f51f6e70a0))
+
+
+
 # 2.20.0 (2022-05-19)
 
 

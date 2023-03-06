@@ -21,24 +21,21 @@ $ npm install @s-ui/domain --save
 ## Using EntryPoint
 
 ```javascript
-import { EntryPointFactory } from '@s-ui/domain'
+import {EntryPointFactory} from '@s-ui/domain'
 
 // useCases is an object with a key with the name of the use case
 // and an array with a function to import the factory and the
 // useCase name as string
 const useCases = {
-  'current_user': [
-    () => import('./user/UseCases/factory'),
-    'currentUserUseCase'
-    ],
-  'products_search': [
+  current_user: [() => import('./user/UseCases/factory'), 'currentUserUseCase'],
+  products_search: [
     () => import('./search/UseCases/factory'),
     'productsSearchUseCase'
-    ],
-  'real_estate_detail': [
+  ],
+  real_estate_detail: [
     () => import('./detail/UseCases/factory'),
     'realEstateDetailUseCase'
-    ]
+  ]
 }
 
 // config could be a simple object or a more complicated
@@ -48,14 +45,91 @@ const config = {
 }
 
 // that returns you an instantiable EntryPoint class
-const EntryPoint = EntryPointFactory({ config, useCases })
+const EntryPoint = EntryPointFactory({config, useCases})
 const domain = new EntryPoint()
 
 // if you don't want to share the config between instances
 // you could pass the config directly to the constructor
 // useful if you're mutating the config for storing values
-const EntryPoint = EntryPointFactory({ useCases })
-const domain = new EntryPoint({ config })
+const EntryPoint = EntryPointFactory({useCases})
+const domain = new EntryPoint({config})
+```
+
+### Injecting a logger to our domain
+
+In order to increase the observability of your domain, you can pass a custom logger to your domain instance and it will be injected on each UseCase factory. Following the example of previous section:
+
+#### How to inject the logger to your domain?
+
+```javascript
+// Logger mock example
+const logger = {
+  log: () => console.log('⚠️')
+}
+
+const EntryPoint = EntryPointFactory({config, useCases, logger})
+const domain = new EntryPoint()
+```
+
+#### How use it on your domain?
+
+```javascript
+// Your factory file
+import EmptyUseCase from './EmptyUseCase.js'
+
+export default ({config, logger}) => new EmptyUseCase({config, logger})
+
+// Your UseCase implementation
+export default class UseCase {
+  constructor({config, logger}) {
+    this._config = config
+    this._logger = logger
+  }
+
+  execute() {
+    this._logger.log() // Logger ready to rock! 🎸
+    return Promise.resolve(true)
+  }
+}
+```
+
+### Injecting a pde to our domain
+
+In order to allow your domain to work with experiments and feature flags, you can pass a custom pde to your domain instance and it will be injected on each UseCase factory.
+
+#### How to inject the pde to your domain?
+
+```javascript
+// PDE mock example
+const pde = {
+  isFeatureEnabled: ({featureKey}) => true,
+  getVariation: ({name}) => 'experimentVariation'
+}
+
+const EntryPoint = EntryPointFactory({config, useCases, pde})
+const domain = new EntryPoint()
+```
+
+#### How to use it on your domain?
+
+```javascript
+// Your factory file
+import EmptyUseCase from './EmptyUseCase.js'
+
+export default ({config, pde}) => new EmptyUseCase({config, pde})
+
+// Your UseCase implementation
+export default class UseCase {
+  constructor({config, pde}) {
+    this._config = config
+    this._pde = pde
+  }
+
+  execute() {
+    const {isActive} = this._pde.isFeatureEnabled({featureKey: 'FeatureFlagKey'})
+    return isActive ? true : false
+  }
+}
 ```
 
 ## Using Fetcher
@@ -80,9 +154,9 @@ export default class UserRepositoriesFactory {
 
 ## Fetcher exceptions interception
 
-Aditionally, it's possible to require a special version of the http fetcher with which is possible to intercept all errors in one single point of the application. 
+Aditionally, it's possible to require a special version of the http fetcher with which is possible to intercept all errors in one single point of the application.
 
-This feature allows to handle generic http errors in a central and unique function of the web application. 
+This feature allows to handle generic http errors in a central and unique function of the web application.
 
 For example, this could be useful if it's needed to perform a specific action every time a `401` status code is retrieved as a result of an http request. (i.e. to redirect the user back to the login page)
 
@@ -103,12 +177,14 @@ Once the `interceptableHttpFetcher` has been required and is being used to perfo
 This is the way the callback function can be defined:
 
 ```javascript
-fetcher.setErrorInterceptor({callback: (error) => {
-  if (result.isAxiosError === true) {
+fetcher.setErrorInterceptor({
+  callback: error => {
+    if (result.isAxiosError === true) {
       const statusCode = result.response.status
       // Do something...
+    }
   }
-}})
+})
 ```
 
 ## Using a domain object

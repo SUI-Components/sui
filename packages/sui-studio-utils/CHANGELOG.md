@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.11.0 (2022-11-25)
+
+
+### Features
+
+* **packages/sui-studio-utils:** Be able to mock a domain config ([64be508](https://github.com/SUI-Components/sui/commit/64be5082244910455ee8d17e7f073527a1d262b9))
+* **packages/sui-studio-utils:** grammar error and package script improvement ([0dcfb22](https://github.com/SUI-Components/sui/commit/0dcfb22d039ac2e5db7f08350d41258a54a2816d))
+* **packages/sui-studio-utils:** How to mock the config in the readme ([457ef0f](https://github.com/SUI-Components/sui/commit/457ef0f5b8541823b4749d496ebe528ad57d7d7e))
+
+
+
 # 1.10.0 (2021-08-11)
 
 

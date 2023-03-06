@@ -1,12 +1,12 @@
 export default class DomainBuilder {
-  static extend({domain = {}}) {
-    return new DomainBuilder({domain})
+  static extend({domain, config} = {domain: {}}) {
+    return new DomainBuilder({domain, config})
   }
 
-  constructor({domain} = {}) {
+  constructor({domain, config} = {}) {
     this._domain = domain
     this._useCase = false
-    this._config = domain.get('config')
+    this._config = config || domain.get('config')
     this._useCases = {}
   }
 

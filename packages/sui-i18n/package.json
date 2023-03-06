@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/i18n",
-  "version": "1.30.0",
+  "version": "1.32.0",
   "type": "module",
   "main": "lib/index.js",
   "description": "> Isomorphic i18n service for browser and node.",
@@ -11,9 +11,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "node-polyglot": "0.4.3",
     "@s-ui/js": "2"
   }
 }

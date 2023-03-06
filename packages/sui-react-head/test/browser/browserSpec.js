@@ -160,3 +160,15 @@ describe.client('react-head on client', () => {
     })
   })
 })
+
+describe('<Style> component', () => {
+  it('create <style> elements inside <head>', () => {
+    render(
+      <Head>
+        <style>{'body:{background-color: red;}'}</style>
+      </Head>
+    )
+
+    expect(document.head.querySelector(`style`)).to.exist
+  })
+})

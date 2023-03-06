@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 1.32.0 (2023-03-03)
+
+
+### Features
+
+* **packages/sui-i18n:** improve name ([a1d29c3](https://github.com/SUI-Components/sui/commit/a1d29c3203ecaa338d90221def8b3fae9918e2aa))
+* **packages/sui-i18n:** improve tests and docs ([efcbd47](https://github.com/SUI-Components/sui/commit/efcbd479f88d4f9349d3c80be6775d210e81aa21))
+* **packages/sui-i18n:** improve typo ([215b0cf](https://github.com/SUI-Components/sui/commit/215b0cf9eafc2ffc794e8ad024816894198e99ea))
+* **packages/sui-i18n:** Intl.FormatNumber extended options ([c83b675](https://github.com/SUI-Components/sui/commit/c83b6757ddfbef1f81b8926f45e7711953897630))
+* **packages/sui-i18n:** pr suggestions ([db29b65](https://github.com/SUI-Components/sui/commit/db29b653dc29ee9e79b8b490df6cb8df9e81da13))
+
+
+
+# 1.31.0 (2022-11-03)
+
+
+### Features
+
+* **packages/sui-i18n:** import node-polyglot 0.43 to our package ([26d7fe1](https://github.com/SUI-Components/sui/commit/26d7fe1b008dbe3527c133ed195ad23b6f00a850))
+* **packages/sui-i18n:** remove node-polyglot dependency ([662ef8a](https://github.com/SUI-Components/sui/commit/662ef8a47e9a9506ca273b81f1a91ed3a97a9e35))
+
+
+
 # 1.30.0 (2022-08-08)
 
 

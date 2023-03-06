@@ -32,7 +32,8 @@ const REACT_RULES = {
   'react/no-unknown-property': RULES.ERROR,
   'react/prop-types': RULES.ERROR,
   'react/react-in-jsx-scope': RULES.OFF,
-  'react/require-render-return': RULES.WARNING
+  'react/require-render-return': RULES.WARNING,
+  'react/no-unstable-nested-components': RULES.WARNING
 }
 
 const TESTING_RULES = {

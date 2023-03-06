@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "8.9.0",
+  "version": "8.11.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -13,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "config": {
     "sui-test": {
       "server": {
@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "@s-ui/critical-css": "1",
+    "@s-ui/critical-css-middleware": "1",
     "@s-ui/hoc": "1",
     "@tunnckocore/execa": "5.2.7",
     "archiver": "5.3.0",
@@ -38,6 +38,6 @@
     "mime": "1.6.0",
     "noop-console": "0.8.0",
     "parse5": "6.0.1",
-    "ua-parser-js": "0.7.20"
+    "ua-parser-js": "0.7.31"
   }
 }

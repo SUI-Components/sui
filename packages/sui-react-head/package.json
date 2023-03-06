@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.10.0",
+  "version": "1.12.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react-head": "3.4.0"
   },

@@ -1,6 +1,6 @@
 .sui-Studio {
   display: flex;
-
+  flex-direction: column;
   &-logo {
     & > svg {
       height: auto;
@@ -9,36 +9,51 @@
   }
 
   &-sidebar {
-    @include breakpoint-from(s) {
-      flex: 0 0 $w-sidebar;
-      transform: translate3d(0, 0, 0);
-    }
-
+    padding: 16px;
+    top: $h-navHeader;
     background-color: $c-white;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
     position: fixed;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, 0, 0);
     transition: transform 0.5s ease-in-out;
-    z-index: 9998;
+    z-index: 2;
     width: $w-sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: calc(100vh - $h-navHeader);
 
-    &Body {
-      width: $w-sidebar;
-      transition: width 0.25s ease-out;
+    &-searchInput {
+      border: 1px solid $c-gray-light;
+      border-radius: 4px;
+      color: #666;
+      font-size: 12px;
+      outline: none;
+      padding: 8px;
+      width: 100%;
+      height: $h-search-input;
+      &:focus {
+        background-color: $c-white;
+        border: 1px solid $c-primary;
+      }
     }
 
-    &--open {
-      display: block;
-      transform: translate3d(0, 0, 0);
+    &Body {
+      transition: width 0.25s ease-out;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    &--hidden {
+      transform: translate3d(-100%, 0, 0);
     }
   }
 
   &-main {
     background-color: $bgc-main;
+    position: relative;
+    top: $h-navHeader;
     width: 100%;
     margin-left: 0;
     min-height: 100vh;
@@ -47,6 +62,25 @@
       width: calc(100% - #{$w-sidebar});
       margin-left: $w-sidebar;
       transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+    }
+    .overlay {
+      position: fixed;
+      top: 0%;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      background-color: rgba($c-black, 0.2);
+      @include breakpoint-from(s) {
+        display: none;
+      }
+    }
+    &--sidebar_hidden {
+      width: 100%;
+      margin-left: 0;
+      & .overlay {
+        display: none;
+      }
     }
   }
 
@@ -67,12 +101,13 @@
   background: $c-white;
   display: flex;
   flex-direction: row;
-  padding: 0 16px;
+  padding: 0;
+  margin-bottom: 16px;
 }
 
-.sui-StudioPreview,
 .sui-StudioDocumentation {
   padding: 16px;
+  font-size: 16px;
 }
 
 .sui-Studio-readme {
@@ -97,11 +132,41 @@
     margin-top: 8px;
   }
 }
-
-.sui-Studio-navMenu {
-  @include floating-button($c-primary, 56px, 8px);
-  @include breakpoint-from(s) {
-    display: none;
+.sui-Studio-navHeader {
+  width: 100vw;
+  padding: 0 8px;
+  display: flex;
+  height: $h-navHeader;
+  position: fixed;
+  top: 0;
+  background: $c-white;
+  align-items: center;
+  border-bottom: solid 1px $c-gray-lightest;
+  z-index: 40;
+  gap: 8px;
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #000;
   }
-  z-index: 9999;
+  h1 {
+    font-size: 16px;
+    margin: 0;
+    display: flex;
+  }
+}
+.sui-Studio-navMenu {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  svg {
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+  }
 }

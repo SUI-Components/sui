@@ -61,7 +61,10 @@ const webpackConfig = {
       fs: false,
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
-      path: false
+      path: false,
+      stream: false,
+      zlib: false,
+      timers: false
     }
   },
   entry: MAIN_ENTRY_POINT,

@@ -1,25 +1,12 @@
-import {useState} from 'react'
-
 import PropTypes from 'prop-types'
 
 import {Link} from '@s-ui/react-router'
 
 import {getComponentsList} from '../utils.js'
-import Logo from './Logo.js'
 
 const componentsList = getComponentsList()
 
-export default function Navigation({handleClick}) {
-  const [search, setSearch] = useState('')
-
-  const handleChange = e => {
-    setSearch(e.target.value)
-  }
-
-  const handleFocus = e => {
-    e.target.select()
-  }
-
+export default function Navigation({handleClick, search}) {
   const filterComponentsFromSearch = ({search}) => {
     return componentsList.filter(({category, component}) => {
       const lowerCasedSearch = search.toLowerCase()
@@ -66,19 +53,6 @@ export default function Navigation({handleClick}) {
 
   return (
     <nav className="sui-StudioNav">
-      <Link className="sui-StudioNav-header" onClick={handleClick} to="/">
-        <Logo />
-      </Link>
-
-      <input
-        className="sui-StudioNav-searchInput"
-        onChange={handleChange}
-        onFocus={handleFocus}
-        placeholder="🔎 Search component..."
-        type="search"
-        value={search}
-      />
-
       <ul className="sui-StudioNav-menu">
         {renderListFilteredBySearch({handleClick, search})}
       </ul>
@@ -87,5 +61,6 @@ export default function Navigation({handleClick}) {
 }
 
 Navigation.propTypes = {
+  search: PropTypes.string,
   handleClick: PropTypes.func
 }

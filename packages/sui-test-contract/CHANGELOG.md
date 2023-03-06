@@ -1,5 +1,43 @@
 # CHANGELOG
 
+# 2.10.0 (2022-12-23)
+
+
+### Features
+
+* **packages/sui-test-contract:** add matchers to contracts ([0255e71](https://github.com/SUI-Components/sui/commit/0255e71a341648944280985c6e4824a097f2e570))
+* **packages/sui-test-contract:** rename flag ([bb60516](https://github.com/SUI-Components/sui/commit/bb60516623f6c204438a5a16541424e9f608a9fb))
+* **packages/sui-test-contract:** update readme ([b85ae9e](https://github.com/SUI-Components/sui/commit/b85ae9e30e50477a554d8eeddc45298bed30b432))
+
+
+
+# 2.9.0 (2022-10-24)
+
+
+### Features
+
+* **packages/sui-test-contract:** add custom api url for each endpoint ([1b81908](https://github.com/SUI-Components/sui/commit/1b819088fe270dfb17bc86d5014177f65e92af8d))
+
+
+
+# 2.8.0 (2022-10-19)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** use same version of msw ([0ae5861](https://github.com/SUI-Components/sui/commit/0ae5861d9b9aab8e7685180497490f133f34e7aa))
+
+
+
+# 2.7.0 (2022-09-15)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** prevent build error on server given a sub dep upgrade ([e5cab96](https://github.com/SUI-Components/sui/commit/e5cab96f514fcb2ed00d2c1a5a16e9ca5a696039))
+
+
+
 # 2.6.0 (2022-08-29)
 
 

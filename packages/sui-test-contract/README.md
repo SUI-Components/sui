@@ -55,6 +55,7 @@ setupContractTests({
   providers: {
     'test-provider': [
       {
+        apiUrl: 'https://mydomain.com',
         endpoint: '/apples',
         description: 'A request for getting some apples',
         state: 'I have some apples',
@@ -70,7 +71,7 @@ setupContractTests({
 
 | Parameter        | Required | Type      | Default                                              | Description                                                                                                                 |
 | ---------------- | -------- | --------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `apiUrl`         | Yes      | `string`  |                                                      | Complete URL where the requests should be done                                                                              |
+| `apiUrl`         | Yes      | `string`  |                                                      | Complete URL where ALL the requests should be done                                                                              |
 | `consumer`       | Yes      | `string`  |                                                      | Name of the API consumer                                                                                                    |
 | `providers`      | Yes      | `object`  |                                                      | Object of providers containing an array of interactions (see [Provider interaction options](#provider-interaction-options)) |
 | `fetcher`        | Yes      | `Fetcher` |                                                      | Instance of a fetcher class (e.g. Axios)                                                                                    |
@@ -84,6 +85,7 @@ setupContractTests({
 | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
 | `description` | Yes      | `string`                                                                                                            |                                                 | Description for the interaction               |
 | `state`       | Yes      | `string`                                                                                                            |                                                 | State to be matched by the provider           |
+| `apiUrl`    | No      | `string`                                                                                                            |                                                 | Api url for current endpoint request |
 | `endpoint`    | Yes      | `string`                                                                                                            |                                                 | Endpoint to be added in the contract document |
 | `query`       | No       | `object`                                                                                                            |                                                 | Query params if needed in the request         |
 | `body`        | No       | See possibilities for [Fetch API Body](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#body) |                                                 | Body to be sent in the request                |
@@ -91,6 +93,7 @@ setupContractTests({
 | `handler`     | Yes      | [Request handler](https://mswjs.io/docs/basics/request-handler)                                                     |                                                 | Request handler used in the contract test     |
 | `options`     | No       | `object`                                                                                                            | `defaultOptions` (from the setup configuration) | Request options                               |
 | `response`    | Yes      | `any`                                                                                                               |                                                 | Response to be validated in the contract test |
+| `addMatchingRules`    | No      | `boolean`                                                                                                               |                                                 | Flag to add Pact matching rules to check contracts by value type |
 
 ## Publishing the contracts
 

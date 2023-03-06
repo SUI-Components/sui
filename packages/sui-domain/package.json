@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/domain",
   "type": "module",
-  "version": "2.7.0",
+  "version": "2.11.0",
   "description": "SDK for creating domains",
   "main": "lib/index.js",
   "scripts": {
@@ -15,8 +15,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "axios": "0.21.1"
+    "axios": "0.21.2"
   }
 }
