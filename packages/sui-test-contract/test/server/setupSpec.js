@@ -32,6 +32,7 @@ const getAppleHandler = rest.get(
     return res(ctx.status(200), ctx.json(response))
   }
 )
+const notFoundResponse = {code: 'not-found'}
 
 setupContractTests({
   apiUrl: 'http://localhost:8181',
@@ -84,6 +85,16 @@ setupContractTests({
         ),
         response: gardenResponse,
         addMatchingRules: true
+      },
+      {
+        endpoint: '/apples/search/garden',
+        description: 'A request for getting a garden that fails',
+        state: 'I have not garden',
+        handler: rest.get(
+          'http://localhost:8181/apples/search/garden',
+          (req, res, ctx) => res(ctx.status(404), ctx.json(notFoundResponse))
+        ),
+        response: notFoundResponse
       }
     ]
   }
