@@ -167,6 +167,20 @@ describe('Contract files generated', () => {
     expect(response.matchingRules).to.not.exist
   })
 
+  it('should generate the contract when doing a not found request', () => {
+    const data = getContractFileData({
+      consumer,
+      description: 'A request for getting a garden that fails'
+    })
+    const {providerState, response, request} = data
+
+    expect(providerState).to.eql('I have not garden')
+    expect(request.method).to.eql('GET')
+    expect(response.body).to.eql(notFoundResponse)
+    expect(response.status).to.eql(404)
+    expect(response.matchingRules).to.not.exist
+  })
+
   it('should generate the contract with Pact matchers when doing a request for getting a garden', () => {
     const data = getContractFileData({
       consumer,
