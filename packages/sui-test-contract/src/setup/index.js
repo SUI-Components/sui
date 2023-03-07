@@ -74,12 +74,15 @@ const setupContractTests = ({
           let url = `${apiUrl}${endpoint}`
 
           if (query) url = `${url}?${toQueryString(query)}`
-
-          const {data} = body
-            ? await fetcher[method](url, body, options)
-            : await fetcher[method](url, options)
-
-          if (data) expect(data).to.deep.equal(response)
+          try {
+            const {data} = body
+              ? await fetcher[method](url, body, options)
+              : await fetcher[method](url, options)
+            if (data) expect(data).to.deep.equal(response)
+          } catch (error) {
+            const data = error.response.data
+            if (data) expect(data).to.deep.equal(response)
+          }
         })
       }
     )
