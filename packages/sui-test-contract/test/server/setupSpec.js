@@ -92,6 +92,16 @@ setupContractTests({
         state: 'I don't have a garden',
         handler: rest.get(
           'http://localhost:8181/apples/search/garden',
+          (req, res, ctx) => res(ctx.status(404))
+        )
+      },
+      {
+        endpoint: '/apples/search/garden',
+        description:
+          'A request for getting a garden that fails with response body',
+        state: 'I have not garden',
+        handler: rest.get(
+          'http://localhost:8181/apples/search/garden',
           (req, res, ctx) => res(ctx.status(404), ctx.json(notFoundResponse))
         ),
         response: notFoundResponse
