@@ -3,6 +3,8 @@
 
 'use strict'
 
+import * as url from 'url'
+
 import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
@@ -10,6 +12,8 @@ import path from 'node:path'
 import ts from 'typescript'
 
 import {transformFile} from '@swc/core'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const compileFile = async file => {
   const {code} = await transformFile(file, {
