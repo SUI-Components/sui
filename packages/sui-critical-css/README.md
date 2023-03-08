@@ -1,4 +1,5 @@
 # sui-critical-css
+
 > Extract Critical CSS from a set of URLs for an app
 
 ## How it works
@@ -9,9 +10,10 @@
 4. After doing this for each route, then creates a `critical.json` file that could be read for every path to extract the critical-css.
 5. Use then `@s-ui/critical-css-middleware` to extract to use in your Express app the CSS.
 
-## How to use to extract 
+## How to use to extract
 
 Install package to your project:
+
 ```
 npm install @s-ui/critical-css -D
 ```
@@ -49,7 +51,7 @@ const routes = {
     url: '/es'
   },
   '/:lang/catalogo-productos': {
-    url: '/es/catalogo-productos'
+    url: ['/es/catalogo-productos', '/en/catalogo-productos']
   }
 }
 

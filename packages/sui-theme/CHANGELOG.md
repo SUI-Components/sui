@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 8.126.0 (2023-02-21)
+
+
+### Features
+
+* **packages/sui-theme:** add mixin to hide scrollbars when required ([218c16d](https://github.com/SUI-Components/sui/commit/218c16d7658de48c5c390175efcfe3cf4dfb8469))
+
+
+
+# 8.125.0 (2022-11-22)
+
+
+### Features
+
+* **packages/sui-theme:** add new molecule select and autosuggest tokens to theme ([72a630a](https://github.com/SUI-Components/sui/commit/72a630a6e967d21ad2dbd59191eef022847cc1c0))
+
+
+
+# 8.124.0 (2022-09-29)
+
+
+### Bug Fixes
+
+* **packages/sui-theme:** remove not required rimraf dependency ([d648db5](https://github.com/SUI-Components/sui/commit/d648db5bda012c3af40dde387ef678b9ba12bd2d))
+
+
+
 # 8.123.0 (2022-09-05)
 
 

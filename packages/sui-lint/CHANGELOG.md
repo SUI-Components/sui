@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.29.0 (2022-12-29)
+
+
+### Features
+
+* **packages/sui-lint:** add no-unstable-nested-components rule ([87a6331](https://github.com/SUI-Components/sui/commit/87a6331fcbe9c8bc4b96bc251c1358a109c3b2e4))
+
+
+
 # 4.28.0 (2022-08-22)
 
 

@@ -1,5 +1,127 @@
 # CHANGELOG
 
+# 11.33.0 (2022-12-23)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Fix typo ([9fc7585](https://github.com/SUI-Components/sui/commit/9fc7585f459072b0db4b638361b8be469d0af332))
+
+
+### Features
+
+* **packages/sui-studio:** Add script to migrate component files to new structure ([4dd2d57](https://github.com/SUI-Components/sui/commit/4dd2d57bfb76e65175e211e553a592b21462bc6f))
+* **packages/sui-studio:** Fix typo and change return value to make it more verbose ([c6d3584](https://github.com/SUI-Components/sui/commit/c6d3584d43ea45106df4f573e856889ad488a801))
+* **packages/sui-studio:** Remove unneeded break statement ([38c759c](https://github.com/SUI-Components/sui/commit/38c759c942c2e957c610df9aca79df4ecb5d504f))
+
+
+
+# 11.32.0 (2022-11-21)
+
+
+
+# 11.31.0 (2022-11-14)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Recover correct h1 h2 styles for API Tab ([5048951](https://github.com/SUI-Components/sui/commit/5048951140ca574fcad03f93ef0403ace36315c5)), closes [#1537](https://github.com/SUI-Components/sui/issues/1537)
+* **packages/sui-studio:** Remove h1 from SUI Studios ([d80cd14](https://github.com/SUI-Components/sui/commit/d80cd1432edfcd83045c291d44173d584a2dfc05)), closes [#1524](https://github.com/SUI-Components/sui/issues/1524)
+
+
+### Features
+
+* **packages/sui-studio:** add studio name if necessary ([bf47407](https://github.com/SUI-Components/sui/commit/bf47407b026c84ca2de1c895b4379e4a36f20022))
+* **packages/sui-studio:** add studio name title ([0f0ec72](https://github.com/SUI-Components/sui/commit/0f0ec72647cf5135a8f6a862e18eb634e2ad718d))
+
+
+
+# 11.30.0 (2022-11-11)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** remove box shadow ([0808a94](https://github.com/SUI-Components/sui/commit/0808a94a2521f693576f4682d52ba109452079de))
+
+
+### Features
+
+* **packages/sui-studio:** fix styles ([3f28e2b](https://github.com/SUI-Components/sui/commit/3f28e2b06789f610e04ae62d6e7a432294a783cc))
+
+
+
+# 11.29.0 (2022-10-21)
+
+
+### Features
+
+* **packages/sui-studio:** update bottom padding in NavBar menu to 80px and reduce the sidebar heigh ([3971e52](https://github.com/SUI-Components/sui/commit/3971e527d644ec324ace3d03e07db6c04afb4892)), closes [#1501](https://github.com/SUI-Components/sui/issues/1501)
+
+
+
+# 11.28.0 (2022-10-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** hide menu clicking on an overlay in mobile ([b4f2631](https://github.com/SUI-Components/sui/commit/b4f2631dbcdce8c6e7a7142251412a5e34d6592e)), closes [#1503](https://github.com/SUI-Components/sui/issues/1503)
+* **packages/sui-studio:** replace [#000](https://github.com/SUI-Components/sui/issues/000) for a variable -black ([cfef364](https://github.com/SUI-Components/sui/commit/cfef364e09adf1ba2135d4d759118faf418cb088))
+
+
+
+# 11.27.0 (2022-10-17)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** Add a fill to the buttons icon ([c553b73](https://github.com/SUI-Components/sui/commit/c553b73534aaae10f31344e836413ebd189a712b)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+* **packages/sui-studio:** adjust icon size ([e726305](https://github.com/SUI-Components/sui/commit/e7263059aa492da08c89a06c8d2a4ee055592f88)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+* **packages/sui-studio:** change display from flex to block ([8495fe7](https://github.com/SUI-Components/sui/commit/8495fe7ec576162f9b7dceeeffb8e2c4150596f3)), closes [#1500](https://github.com/SUI-Components/sui/issues/1500)
+
+
+
+# 11.26.0 (2022-10-13)
+
+
+### Features
+
+* **packages/sui-studio:** Remove THEMES redundant tab ([87fbeae](https://github.com/SUI-Components/sui/commit/87fbeae020925df2b69546fa71c62967386ead4b))
+* **packages/sui-studio:** remove themes tabs ([64474db](https://github.com/SUI-Components/sui/commit/64474dbc2403ee1a2ea18518ce71e36f2a7cd68c))
+* **packages/sui-studio:** Remove title of the Themes tabs ([2c39a4a](https://github.com/SUI-Components/sui/commit/2c39a4add4addf74b5c4ede8fca889b2b8783a89))
+
+
+
+# 11.25.0 (2022-10-11)
+
+
+### Features
+
+* **packages/sui-studio:** delete excess code ([8f7f5ff](https://github.com/SUI-Components/sui/commit/8f7f5ff34c9756badc0231668553a889b5f2b5a3))
+
+
+
+# 11.24.0 (2022-10-10)
+
+
+
+# 11.23.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-studio:** Update node-fetch to latest v2 version ([c2fa9e5](https://github.com/SUI-Components/sui/commit/c2fa9e55ad55240027b12c4e0b8adda3c408ec77))
+
+
+
+# 11.22.0 (2022-09-15)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** exclude all node_modules src files ([d1c4ae0](https://github.com/SUI-Components/sui/commit/d1c4ae00e3c495ada4989cb85ee8d95455a69f16))
+
+
+
 # 11.21.0 (2022-08-31)
 
 

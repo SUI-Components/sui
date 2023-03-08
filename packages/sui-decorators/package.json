@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/decorators",
-  "version": "3.23.0",
+  "version": "3.25.0",
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "sinon": "10.0.0"
   },
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@s-ui/js": "2",
-    "redis": "3.0.2",
+    "redis": "3.1.2",
     "redis-lru": "0.6.0",
     "tiny-lru": "6.0.1",
     "hot-shots": "7.7.1",

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ci",
-  "version": "1.26.0",
+  "version": "1.27.0",
   "description": "",
   "type": "module",
   "exports": "./src/index.js",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@s-ui/mono": "2",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "commander": "8.3.0"
   },
   "devDependencies": {
@@ -17,5 +17,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

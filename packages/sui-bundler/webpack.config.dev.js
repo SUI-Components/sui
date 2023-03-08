@@ -40,7 +40,10 @@ const webpackConfig = {
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
       buffer: require.resolve('buffer/'),
-      url: require.resolve('url/')
+      url: require.resolve('url/'),
+      stream: false,
+      zlib: false,
+      timers: false
     },
     modules: ['node_modules', path.resolve(process.cwd())],
     extensions: ['.js', '.tsx', '.ts', '.json']

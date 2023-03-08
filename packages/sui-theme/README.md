@@ -2,9 +2,9 @@
 
 This repository contains:
 
-* Generic variables to initialize default values and component styles.
-* A set of placeholders ready to style your component (buttons, tabs, forms, grid system...).
-* Functions and mixins helpers.
+- Generic variables to initialize default values and component styles.
+- A set of placeholders ready to style your component (buttons, tabs, forms, grid system...).
+- Functions and mixins helpers.
 
 ## Usage
 
@@ -20,7 +20,7 @@ Import `sui-theme` into your sui-component including the path in `index.scss`:
 @import '~@s-ui/theme/lib/index';
 ```
 
-If you want to customize your components, create your own theme and add it to your component just __before__ the sui-theme import.
+If you want to customize your components, create your own theme and add it to your component just **before** the sui-theme import.
 
 ```scss
 @import '../custom-settings';
@@ -44,14 +44,13 @@ For instance:
 
 Find below the compat varible groups available:
 
-* [settings-compat-v7/color](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_color.scss)
-* [settings-compat-v7/font](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_font.scss)
-* [settings-compat-v7/spacing](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_spacing.scss)
-* [settings-compat-v7/box-style](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_box-style.scss)
-* [settings-compat-v7/animation](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_animation.scss)
-* [settings-compat-v7/layout](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_layout.scss)
-* [settings-compat-v7/components](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_components.scss)
-
+- [settings-compat-v7/color](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_color.scss)
+- [settings-compat-v7/font](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_font.scss)
+- [settings-compat-v7/spacing](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_spacing.scss)
+- [settings-compat-v7/box-style](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_box-style.scss)
+- [settings-compat-v7/animation](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_animation.scss)
+- [settings-compat-v7/layout](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_layout.scss)
+- [settings-compat-v7/components](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_components.scss)
 
 **Also, if you need it all for older components, you can do**
 
@@ -60,44 +59,23 @@ Find below the compat varible groups available:
 @import '~@s-ui/theme/lib/index';
 ```
 
-## Update
+## Media queries and breakpoints
 
-If you need to update any of these variables please pull request.
+### Rules & Definitions
 
+- Breakpoints must be exactly `xxs`, `xs`, `s`, `m`, `l`, `xl`, `xxl`
+- For new implementations, the only allowed media query is `media-breakpoint-up`
+- `media-breakpoint-down`, `media-breakpoint-only` and `media-breakpoint-between` are deprecated and only kept for legacy reasons.
 
+### Reason
 
-## Utility classes
+- We want to create all our components `mobile first`
 
-> ⚠️ This is a PoC. May change in the future without notice
+### Legacy components
 
-**Spacing classes**
+- Keep in mind that refactoring legacy components in order to make it rules compliant would suppose a breaking change, so a new major must be released.
 
-Provides a basic spacing classes library based in emmet convection.
+### Links
 
-In your vertical theme import the library:
-
-```scss
-@import '~/@s-ui/theme/lib/classes'
-```
-
-This generates margin and padding spacing classes with basic SUI spacing variables
-
-```scss
-  .m-m {
-    margin: 8px;
-  }
-  .m-s {
-    margin: 4px;
-  }
-
-...
-
-  .mt-m {
-    margin-top: 8px;
-  }
-  .mt-s {
-    margin-top: 4px;
-  }
-
-...
-```
+- [SUI Breakpoints](https://github.com/SUI-Components/sui-theme/blob/master/src/layout/_breakpoints.scss) implementation
+- [SUI Media Query](https://github.com/SUI-Components/sui-theme/blob/master/src/utils/_breakpoints.scss) implementation

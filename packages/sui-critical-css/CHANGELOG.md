@@ -1,5 +1,34 @@
 # CHANGELOG
 
+# 1.26.0 (2022-12-23)
+
+
+### Bug Fixes
+
+* **packages/sui-critical-css:** fix typo ([c8ca7f5](https://github.com/SUI-Components/sui/commit/c8ca7f5a4f4a73ac1a922152ebfdcffad2b53b81))
+
+
+
+# 1.25.0 (2022-12-23)
+
+
+### Features
+
+* **packages/sui-critical-css:** add doc and small update ([18e9ea9](https://github.com/SUI-Components/sui/commit/18e9ea924ff0aab588b9df8bf179b613d924b425))
+* **packages/sui-critical-css:** allow url to be an array ([4eb48b1](https://github.com/SUI-Components/sui/commit/4eb48b132102b6fca159b82de0fb8bd987c60fcc))
+* **packages/sui-critical-css:** update file ([936f712](https://github.com/SUI-Components/sui/commit/936f71277d07a75c6d4cf8cc527c8cad3e6a6a8c))
+
+
+
+# 1.24.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-critical-css:** Update node-fetch to latest v2 version ([d47dfdb](https://github.com/SUI-Components/sui/commit/d47dfdb9cfeb2263888f64d79a9231461306ccae))
+
+
+
 # 1.23.0 (2022-08-29)
 
 

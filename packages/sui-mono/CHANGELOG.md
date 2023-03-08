@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 2.34.0 (2022-10-05)
+
+
+### Features
+
+* **packages/sui-mono:** add refactor as commit type that triggers new release ([1e335eb](https://github.com/SUI-Components/sui/commit/1e335ebbb3a4a04766a59744f72f75d01a16a092))
+
+
+
+# 2.33.0 (2022-09-28)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** add skip-ci as suffix ([2d2209d](https://github.com/SUI-Components/sui/commit/2d2209d90e6e3440fb620e57daccdaee374f425f))
+
+
+### Features
+
+* **packages/sui-mono:** move skip flag before commit msg ([40cd277](https://github.com/SUI-Components/sui/commit/40cd2776e546f163c427db9809874d293ccc4592))
+
+
+
 # 2.31.0 (2022-08-09)
 
 

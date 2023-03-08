@@ -74,13 +74,17 @@ $breakpoints: (
   xl: 1200px
 ) !default;
 
-$bgc-main: #f5f5f5;
-
+$bgc-main: $c-white;
 $fgc-navbar: #999;
 $fgc-navbar--active: $c-white;
 
 $w-sidebar: 220px;
 $w-sidebar-collapsed: 48px;
+
+$h-search-input: 40px;
+
+$h-navHeader: 48px;
+$t-sidebar-and-main: 52px;
 
 @mixin breakpoint-from($floor) {
   $breakpoint: map-get($breakpoints, $floor);

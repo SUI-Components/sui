@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 3.25.0 (2022-10-03)
+
+
+### Bug Fixes
+
+* **packages/sui-decorators:** rollback redis-mock version ([9938b88](https://github.com/SUI-Components/sui/commit/9938b88e367b31b940015d6a360e7ac4f1a2e7e4))
+
+
+
+# 3.24.0 (2022-10-03)
+
+
+### Features
+
+* **packages/sui-decorators:** update redis-mock and redis dependencies ([dd6bdcf](https://github.com/SUI-Components/sui/commit/dd6bdcf2abad4f9b4594a11fc8ffb0aa3377da6a))
+
+
+
 # 3.23.0 (2022-02-18)
 
 
