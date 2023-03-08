@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "4.29.0-typescript.1",
+  "version": "4.29.0-typescript.2",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
