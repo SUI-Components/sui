@@ -89,7 +89,7 @@ setupContractTests({
       {
         endpoint: '/apples/search/garden',
         description: 'A request for getting a garden that fails',
-        state: 'I have not garden',
+        state: 'I don't have a garden',
         handler: rest.get(
           'http://localhost:8181/apples/search/garden',
           (req, res, ctx) => res(ctx.status(404), ctx.json(notFoundResponse))
