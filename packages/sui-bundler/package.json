@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "9.37.0-typescript.1",
+  "version": "9.37.0-typescript.2",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
