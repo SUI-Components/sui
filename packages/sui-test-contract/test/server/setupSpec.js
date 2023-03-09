@@ -32,6 +32,7 @@ const getAppleHandler = rest.get(
     return res(ctx.status(200), ctx.json(response))
   }
 )
+const notFoundResponse = {code: 'not-found'}
 
 setupContractTests({
   apiUrl: 'http://localhost:8181',
@@ -84,6 +85,16 @@ setupContractTests({
         ),
         response: gardenResponse,
         addMatchingRules: true
+      },
+      {
+        endpoint: '/apples/search/garden',
+        description: 'A request for getting a garden that fails',
+        state: 'I have not garden',
+        handler: rest.get(
+          'http://localhost:8181/apples/search/garden',
+          (req, res, ctx) => res(ctx.status(404), ctx.json(notFoundResponse))
+        ),
+        response: notFoundResponse
       }
     ]
   }
@@ -153,6 +164,20 @@ describe('Contract files generated', () => {
     expect(request.method).to.eql('POST')
     expect(request.body).to.eql(galaAppleBody)
     expect(response.status).to.eql(200)
+    expect(response.matchingRules).to.not.exist
+  })
+
+  it('should generate the contract when doing a not found request', () => {
+    const data = getContractFileData({
+      consumer,
+      description: 'A request for getting a garden that fails'
+    })
+    const {providerState, response, request} = data
+
+    expect(providerState).to.eql('I have not garden')
+    expect(request.method).to.eql('GET')
+    expect(response.body).to.eql(notFoundResponse)
+    expect(response.status).to.eql(404)
     expect(response.matchingRules).to.not.exist
   })
 
