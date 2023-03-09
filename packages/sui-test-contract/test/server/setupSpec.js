@@ -191,6 +191,7 @@ describe('Contract files generated', () => {
     expect(request.method).to.eql('POST')
     expect(request.body).to.eql({color: 'yellow', type: 'Gala'})
     expect(response.status).to.eql(200)
+  })
 
   it('should generate the contract when doing a not found request', () => {
     const data = getContractFileData({
