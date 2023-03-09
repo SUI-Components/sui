@@ -75,6 +75,17 @@ setupContractTests({
         body: galaAppleBody
       },
       {
+        endpoint: '/apples/add/gala',
+        description: 'A request for adding a Gala apple with a different color',
+        state: "I've added a Gala apple with a different color",
+        method: 'post',
+        handler: rest.post(
+          'http://localhost:8181/apples/add/:slug',
+          (req, res, ctx) => res(ctx.status(200))
+        ),
+        body: {color: 'yellow', type: 'Gala'}
+      },
+      {
         endpoint: '/apples/garden',
         description: 'A request for getting a garden',
         state: 'I have a garden',
@@ -152,6 +163,22 @@ describe('Contract files generated', () => {
     expect(providerState).to.eql("I've added a Gala apple")
     expect(request.method).to.eql('POST')
     expect(request.body).to.eql(galaAppleBody)
+    expect(response.status).to.eql(200)
+    expect(response.matchingRules).to.not.exist
+  })
+
+  it('should generate the contract when doing a request for adding a Gala apple with a different color', () => {
+    const data = getContractFileData({
+      consumer,
+      description: 'A request for adding a Gala apple with a different color'
+    })
+    const {providerState, response, request} = data
+
+    expect(providerState).to.eql(
+      "I've added a Gala apple with a different color"
+    )
+    expect(request.method).to.eql('POST')
+    expect(request.body).to.eql({color: 'yellow', type: 'Gala'})
     expect(response.status).to.eql(200)
     expect(response.matchingRules).to.not.exist
   })
