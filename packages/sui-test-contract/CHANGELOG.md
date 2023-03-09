@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.11.0 (2023-03-09)
+
+
+### Features
+
+* **packages/sui-test-contract:** do not break if request is not 2xx ([e8ac50c](https://github.com/SUI-Components/sui/commit/e8ac50ccbfb2aac14bcc61c7b2d95e4ab02d0092))
+
+
+
 # 2.10.0 (2022-12-23)
 
 
