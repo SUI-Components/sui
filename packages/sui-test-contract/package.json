@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test-contract",
-  "version": "2.11.0",
+  "version": "2.12.0",
   "description": "Useful tooling for defining contract tests (based on Pact) that will generate contract documents.",
   "license": "MIT",
   "main": "src/index.js",
