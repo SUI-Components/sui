@@ -100,9 +100,7 @@ const webpackConfig = {
             options: {
               postcssOptions: {
                 plugins: [
-                  ...(isTailwindEnabled()
-                    ? [require('tailwindcss').default()]
-                    : []),
+                  ...(isTailwindEnabled() ? [require('tailwindcss')()] : []),
                   require('autoprefixer')({
                     overrideBrowserslist: config.targets
                   })
