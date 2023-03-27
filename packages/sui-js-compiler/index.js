@@ -13,6 +13,19 @@ import ts from 'typescript'
 
 import {transformFile} from '@swc/core'
 
+const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
+let tsConfigData
+let isTypeScriptEnabled = false
+
+try {
+  if (fs.existsSync(tsConfigPath)) {
+    tsConfigData = JSON.parse(fs.readFileSync(tsConfigPath, {encoding: 'utf8'}))
+    isTypeScriptEnabled = true
+  }
+} catch (err) {
+  console.error(err)
+}
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const compileFile = async file => {
@@ -53,7 +66,6 @@ program
     'List of patterns to ignore during the compilation',
     commaSeparatedList
   )
-  .option('--ts', 'Enable TypeScript Compiler')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -64,7 +76,7 @@ program
   })
   .parse(process.argv)
 
-const {ignore = [], ts: isTypeScriptEnabled = false} = program.opts()
+const {ignore = []} = program.opts()
 
 ;(async () => {
   console.time('[sui-js-compiler]')
@@ -75,19 +87,22 @@ const {ignore = [], ts: isTypeScriptEnabled = false} = program.opts()
     compileFiles(files),
     isTypeScriptEnabled
       ? compileTypes(files, {
-          declaration: true,
-          emitDeclarationOnly: true,
-          incremental: true,
-          jsx: 'react-jsx',
-          module: 'es6',
-          esModuleInterop: true,
-          noImplicitAny: false,
-          baseUrl: '.',
-          outDir: './lib',
-          skipLibCheck: true,
-          strict: true,
-          target: 'es5',
-          types: ['react', 'node']
+          ...{
+            declaration: true,
+            emitDeclarationOnly: true,
+            incremental: true,
+            jsx: 'react-jsx',
+            module: 'es6',
+            esModuleInterop: true,
+            noImplicitAny: false,
+            baseUrl: '.',
+            outDir: './lib',
+            skipLibCheck: true,
+            strict: true,
+            target: 'es5',
+            types: ['react', 'node']
+          },
+          ...(tsConfigData?.compilerOptions ?? {})
         })
       : Promise.resolve()
   ])
