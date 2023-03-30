@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "4.29.0-typescript.2",
+  "version": "4.29.0-typescript.3",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -18,7 +18,7 @@
     "@babel/eslint-parser": "7.18.9",
     "@babel/eslint-plugin": "7.18.10",
     "@s-ui/helpers": "1",
-    "@typescript-eslint/eslint-plugin": "5.33.0",
+    "@typescript-eslint/eslint-plugin": "5.57.0",
     "commander": "8.3.0",
     "eslint": "8.20.0",
     "eslint-config-prettier": "8.5.0",
