@@ -22,6 +22,10 @@ export const DEVICE_TYPES = {
   MOBILE: 'mobile'
 }
 
+const getNormalizedPathname = pathname => {
+  return pathname.replaceAll('*', '_')
+}
+
 export default function WebVitalsReporter({
   metrics = Object.values(METRICS),
   pathnames,
@@ -85,7 +89,7 @@ export default function WebVitalsReporter({
           },
           {
             key: 'pathname',
-            value: pathname
+            value: getNormalizedPathname(pathname)
           },
           ...(type
             ? [
