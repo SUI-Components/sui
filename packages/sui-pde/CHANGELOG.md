@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.22.0 (2023-04-03)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** Prevent error when accessing to getOptimizelyConfig method ([4bd6d6a](https://github.com/SUI-Components/sui/commit/4bd6d6a2d7e174b12ace86ee7e867b17abbab9cc))
+
+
+
 # 2.21.0 (2023-02-14)
 
 

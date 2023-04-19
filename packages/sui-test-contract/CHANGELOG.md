@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 2.12.0 (2023-03-10)
+
+
+### Bug Fixes
+
+* **packages/sui-test-contract:** fix interaction data when setting same request path and different b ([9c50f2a](https://github.com/SUI-Components/sui/commit/9c50f2ae83d43415574965eee630817bdfb0e08a))
+* **packages/sui-test-contract:** fix linting issue ([f16f0af](https://github.com/SUI-Components/sui/commit/f16f0afe03d8d6f12d15b0b5f58d09797f4902f0))
+
+
+
+# 2.11.0 (2023-03-09)
+
+
+### Features
+
+* **packages/sui-test-contract:** do not break if request is not 2xx ([e8ac50c](https://github.com/SUI-Components/sui/commit/e8ac50ccbfb2aac14bcc61c7b2d95e4ab02d0092))
+
+
+
 # 2.10.0 (2022-12-23)
 
 

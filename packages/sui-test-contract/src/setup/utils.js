@@ -25,14 +25,17 @@ export const writerFactory = providers => (path, data) => {
 
   data.interactions = interactions.map(interaction => {
     const {request} = interaction
-    const {path, query} = request
+    const {path, query, body} = request
 
     const definedInteraction = providers[name].find(
-      ({endpoint, query: definedQuery}) => {
+      ({endpoint, query: definedQuery, body: definedBody}) => {
         const matchedEndpoint = endpoint === path
 
         if (query) {
           return matchedEndpoint && query === toQueryString(definedQuery)
+        }
+        if (body) {
+          return matchedEndpoint && stringify(body) === stringify(definedBody)
         }
         return matchedEndpoint
       }
