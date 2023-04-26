@@ -1,17 +1,19 @@
-const {DEFAULT_LEGACY_BROWSER_TARGETS} = require('./defaults.js')
+const {
+  DEFAULT_LEGACY_BROWSER_TARGETS,
+  DEFAULT_BROWSER_TARGETS,
+  DEFAULT_SERVER_TARGETS
+} = require('./defaults.js')
 
 const getTargets = ({targets = {}, supportLegacyBrowsers, isServer}) => {
-  // const {browser, server} = targets
-  // if (isServer) return server ?? DEFAULT_SERVER_TARGETS
+  const {server, browser} = targets
+  if (isServer) return server ?? DEFAULT_SERVER_TARGETS
 
-  // return (
-  //   browser ??
-  //   (supportLegacyBrowsers
-  //     ? DEFAULT_LEGACY_BROWSER_TARGETS
-  //     : DEFAULT_BROWSER_TARGETS)
-  // )
-  const {browser = DEFAULT_LEGACY_BROWSER_TARGETS} = targets
-  return browser
+  return (
+    browser ??
+    (supportLegacyBrowsers
+      ? DEFAULT_LEGACY_BROWSER_TARGETS
+      : DEFAULT_BROWSER_TARGETS)
+  )
 }
 
 const plugins = (api, {useESModules = true} = {}) => [
