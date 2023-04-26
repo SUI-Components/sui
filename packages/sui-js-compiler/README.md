@@ -3,8 +3,9 @@
 > Compile your JavaScript and JSX files to be compatible with the browsers
 
 It provides:
-* Unified code transformation.
-* Usage of SWC to compile files faster.
+
+- Unified code transformation.
+- Usage of SWC to compile files faster.
 
 ## Installation
 
@@ -30,9 +31,10 @@ $ ./node_modules/.bin/sui-js-compiler
 
 ### Options
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| --ignore | string \| glob | - | Takes all the pattern comma separated and ignore them during compilation. |
+| Option   | Type           | Default | Description                                                               |
+| -------- | -------------- | ------- | ------------------------------------------------------------------------- |
+| --ignore | string \| glob | -       | Takes all the pattern comma separated and ignore them during compilation. |
+| --modern | boolean        | -       | Transpile using modern browser targets.                                   |
 
 ```sh
 $ ./node_modules/.bin/sui-js-compiler --ignore=./src/**/*.test.js
@@ -44,4 +46,4 @@ Automatically, `@s-ui/js-compiler` searches for `/src` folder and outputs the co
 
 ## Contributing
 
-Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).a
+Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).

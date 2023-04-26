@@ -3,19 +3,17 @@ const DEFAULT_LEGACY_BROWSER_TARGETS = {
 }
 
 const DEFAULT_BROWSER_TARGETS = {
-  chrome: '72',
-  edge: '79',
-  safari: '14',
-  firefox: '80',
-  opera: '60',
-  ios: '14'
+  chrome: '98',
+  edge: '107',
+  safari: '14.1',
+  firefox: '108',
+  ios: '14.5'
 }
 
-export const getSWCConfig = ({supportLegacyBrowsers}) => {
-  const targets = supportLegacyBrowsers
-    ? DEFAULT_LEGACY_BROWSER_TARGETS
-    : DEFAULT_BROWSER_TARGETS
-  const target = supportLegacyBrowsers ? 'es5' : 'es2018'
+export const getSWCConfig = ({isModern}) => {
+  const targets = isModern
+    ? DEFAULT_BROWSER_TARGETS
+    : DEFAULT_LEGACY_BROWSER_TARGETS
 
   return {
     minify: true,
@@ -40,7 +38,6 @@ export const getSWCConfig = ({supportLegacyBrowsers}) => {
           runtime: 'automatic'
         }
       },
-      target,
       loose: true,
       externalHelpers: true
     },

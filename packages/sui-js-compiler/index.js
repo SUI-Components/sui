@@ -25,25 +25,25 @@ program
     'List of patterns to ignore during the compilation',
     commaSeparatedList
   )
-  .option('--legacy', 'Transpile using legacy browser targets')
+  .option('--modern', 'Transpile using modern browser targets')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-js-compiler')
     console.log('    $ sui-js-compiler ./custom-folder')
     console.log('    $ sui-js-compiler --ignore="./src/**/*Spec.js"')
-    console.log('    $ sui-js-compiler --legacy"')
+    console.log('    $ sui-js-compiler --modern"')
     console.log('')
   })
   .parse(process.argv)
 
-const {ignore = [], legacy: supportLegacyBrowsers} = program.opts()
+const {ignore = [], modern: isModern} = program.opts()
 
 ;(async () => {
   console.time('[sui-js-compiler]')
 
   const files = await fg('./src/**/*.{js,jsx}', {ignore})
-  files.forEach(file => compileFile(file, {supportLegacyBrowsers}))
+  files.forEach(file => compileFile(file, {isModern}))
 
   console.timeEnd('[sui-js-compiler]')
 })()
