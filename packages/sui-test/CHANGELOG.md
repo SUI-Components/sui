@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.24.0 (2023-05-03)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** fix NaN when use timeout param in client test ([d368f2c](https://github.com/SUI-Components/sui/commit/d368f2c674fdd1a23e161c2d27bac5062f5345a1))
+
+
+
 # 8.23.0 (2022-08-09)
 
 
