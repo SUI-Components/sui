@@ -52,7 +52,7 @@ runner({
   ignorePattern,
   pattern,
   srcPattern,
-  timeout,
+  ...(timeout && {timeout: Number(timeout)}),
   watch
 })
   .then(output => {
