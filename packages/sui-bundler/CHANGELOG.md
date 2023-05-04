@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.38.0 (2023-05-04)
+
+
+### Features
+
+* **packages/sui-bundler:** set legacy support by default ([5d13d3b](https://github.com/SUI-Components/sui/commit/5d13d3bc06e90ad853d11feb1aa94e38fa9d2a8e))
+
+
+
 # 9.37.0 (2022-10-19)
 
 
