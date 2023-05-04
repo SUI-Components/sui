@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.18.0 (2023-05-04)
+
+
+### Features
+
+* **packages/sui-polyfills:** Added polyfill for matchAll ([5e67230](https://github.com/SUI-Components/sui/commit/5e67230afd90179ce60e0ba3eca473dd96f716e2))
+
+
+
 # 1.17.0 (2022-10-05)
 
 
