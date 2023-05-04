@@ -6,7 +6,7 @@ const {
 
 const getTargets = ({targets = {}, isModern, isServer}) => {
   const {server, browser} = targets
-  if (isServer) return server ?? DEFAULT_SERVER_TARGETS
+  if (isModern && isServer) return server ?? DEFAULT_SERVER_TARGETS
 
   return (
     browser ??
