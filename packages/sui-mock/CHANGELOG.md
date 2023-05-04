@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.2.0 (2023-05-04)
+
+
+### Bug Fixes
+
+* **packages/sui-mock:** update default handlers ([10db9f5](https://github.com/SUI-Components/sui/commit/10db9f585326a1d2622233ec6811735285fb8448))
+
+
+
 # 1.1.0 (2022-10-19)
 
 
