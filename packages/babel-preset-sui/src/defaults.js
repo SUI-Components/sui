@@ -7,12 +7,11 @@ module.exports = {
     safari: '10'
   },
   DEFAULT_BROWSER_TARGETS: {
-    chrome: '72',
-    edge: '79',
-    safari: '14',
-    firefox: '80',
-    opera: '60',
-    ios: '14'
+    chrome: '98',
+    edge: '107',
+    safari: '14.1',
+    firefox: '108',
+    ios: '14.5'
   },
   DEFAULT_SERVER_TARGETS: {
     node: '14'

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.22.0 (2023-05-04)
+
+
+### Features
+
+* **packages/sui-js-compiler:** add legacy option ([b4d234e](https://github.com/SUI-Components/sui/commit/b4d234e980492de24d6bb30450c7586ab64a9cc0))
+* **packages/sui-js-compiler:** change to modern option ([86101a6](https://github.com/SUI-Components/sui/commit/86101a63560f3f818f9f64f8821ad48933360db4))
+
+
+
 # 1.21.0 (2022-11-10)
 
 

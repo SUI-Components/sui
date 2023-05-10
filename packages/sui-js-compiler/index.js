@@ -3,8 +3,6 @@
 
 'use strict'
 
-import * as url from 'url'
-
 import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
@@ -12,6 +10,8 @@ import path from 'node:path'
 import ts from 'typescript'
 
 import {transformFile} from '@swc/core'
+
+import {getSWCConfig} from './swc-config.js'
 
 const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
 let tsConfigData
@@ -26,20 +26,15 @@ try {
   console.error(err)
 }
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+const compileFile = async (file, options) => {
+  const {code} = await transformFile(file, getSWCConfig(options))
+  const outputPath = file.replace('./src', './lib')
 
-const compileFile = async file => {
-  const {code} = await transformFile(file, {
-    configFile: path.resolve(__dirname, '.swcrc')
-  })
-  const tmp = file.replace('./src', './lib')
-  const outputPath = tmp.substr(0, tmp.lastIndexOf('.')) + '.js'
-
-  return fs.outputFile(outputPath, code)
+  fs.outputFile(outputPath, code)
 }
 
 const compileFiles = files => {
-  return Promise.all(files.map(compileFile))
+  return Promise.all(file => compileFile(file, {isModern}))
 }
 
 const compileTypes = (files, options) => {
@@ -66,17 +61,19 @@ program
     'List of patterns to ignore during the compilation',
     commaSeparatedList
   )
+  .option('--modern', 'Transpile using modern browser targets')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-js-compiler')
     console.log('    $ sui-js-compiler ./custom-folder')
     console.log('    $ sui-js-compiler --ignore="./src/**/*Spec.js"')
+    console.log('    $ sui-js-compiler --modern"')
     console.log('')
   })
   .parse(process.argv)
 
-const {ignore = []} = program.opts()
+const {ignore = [], modern: isModern} = program.opts()
 
 ;(async () => {
   console.time('[sui-js-compiler]')

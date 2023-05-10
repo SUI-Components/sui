@@ -31,10 +31,11 @@ $ ./node_modules/.bin/sui-js-compiler
 
 ### Options
 
-| Option   | Type           | Default | Description                                                               |
-| -------- | -------------- | ------- | ------------------------------------------------------------------------- |
-| --ignore | string \| glob | -       | Takes all the pattern comma separated and ignore them during compilation. |
-| --ts     | bool \| glob   | false   | Enable TypeScript type declarations generation.                           |
+| Option     | Type           | Default | Description                                                               |
+| ---------- | -------------- | ------- | ------------------------------------------------------------------------- |
+| `--ignore` | string \| glob | -       | Takes all the pattern comma separated and ignore them during compilation. |
+| `--ts`     | bool \| glob   | false   | Enable TypeScript type declarations generation.                           |
+| `--modern` | boolean        | -       | Transpile using modern browser targets.                                   |
 
 ```sh
 $ ./node_modules/.bin/sui-js-compiler --ignore=./src/**/*.test.js
@@ -46,4 +47,4 @@ Automatically, `@s-ui/js-compiler` searches for `/src` folder and outputs the co
 
 ## Contributing
 
-Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).a
+Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).

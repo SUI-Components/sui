@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 3.51.0 (2023-05-04)
+
+
+### Bug Fixes
+
+* **packages/babel-preset-sui:** add is moder check for server transpilation ([8b0e91d](https://github.com/SUI-Components/sui/commit/8b0e91daf75bfbd5c64543477eb99a94577c6631))
+
+
+
+# 3.50.0 (2023-05-04)
+
+
+### Features
+
+* **packages/babel-preset-sui:** add modern and legacy target support ([27f08c5](https://github.com/SUI-Components/sui/commit/27f08c5af220e59b9f76393ebd7747269e35347a))
+* **packages/babel-preset-sui:** change to modern option ([e6357af](https://github.com/SUI-Components/sui/commit/e6357af69ff944089b6b8674567fb1ea80a18dfe))
+
+
+
 # 3.49.0 (2022-08-09)
 
 
