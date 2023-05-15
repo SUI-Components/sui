@@ -14,6 +14,7 @@ const {
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
+const {supportLegacyBrowsers} = require('./shared/config.js')
 
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
@@ -82,7 +83,7 @@ const webpackConfig = {
   resolveLoader,
   module: {
     rules: cleanList([
-      createBabelRules(),
+      createBabelRules({supportLegacyBrowsers}),
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([

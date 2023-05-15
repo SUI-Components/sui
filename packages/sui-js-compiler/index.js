@@ -3,8 +3,6 @@
 
 'use strict'
 
-import * as url from 'url'
-
 import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
@@ -13,20 +11,30 @@ import ts from 'typescript'
 
 import {transformFile} from '@swc/core'
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+import {getSWCConfig} from './swc-config.js'
 
-const compileFile = async file => {
-  const {code} = await transformFile(file, {
-    configFile: path.resolve(__dirname, '.swcrc')
-  })
-  const tmp = file.replace('./src', './lib')
-  const outputPath = tmp.substr(0, tmp.lastIndexOf('.')) + '.js'
+const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
+let tsConfigData
+let isTypeScriptEnabled = false
 
-  return fs.outputFile(outputPath, code)
+try {
+  if (fs.existsSync(tsConfigPath)) {
+    tsConfigData = JSON.parse(fs.readFileSync(tsConfigPath, {encoding: 'utf8'}))
+    isTypeScriptEnabled = true
+  }
+} catch (err) {
+  console.error(err)
+}
+
+const compileFile = async (file, options) => {
+  const {code} = await transformFile(file, getSWCConfig(options))
+  const outputPath = file.replace('./src', './lib')
+
+  fs.outputFile(outputPath, code)
 }
 
 const compileFiles = files => {
-  return Promise.all(files.map(compileFile))
+  return Promise.all(file => compileFile(file, {isModern}))
 }
 
 const compileTypes = (files, options) => {
@@ -53,18 +61,19 @@ program
     'List of patterns to ignore during the compilation',
     commaSeparatedList
   )
-  .option('--ts', 'Enable TypeScript Compiler')
+  .option('--modern', 'Transpile using modern browser targets')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-js-compiler')
     console.log('    $ sui-js-compiler ./custom-folder')
     console.log('    $ sui-js-compiler --ignore="./src/**/*Spec.js"')
+    console.log('    $ sui-js-compiler --modern"')
     console.log('')
   })
   .parse(process.argv)
 
-const {ignore = [], ts: isTypeScriptEnabled = false} = program.opts()
+const {ignore = [], modern: isModern} = program.opts()
 
 ;(async () => {
   console.time('[sui-js-compiler]')
@@ -75,19 +84,22 @@ const {ignore = [], ts: isTypeScriptEnabled = false} = program.opts()
     compileFiles(files),
     isTypeScriptEnabled
       ? compileTypes(files, {
-          declaration: true,
-          emitDeclarationOnly: true,
-          incremental: true,
-          jsx: 'react-jsx',
-          module: 'es6',
-          esModuleInterop: true,
-          noImplicitAny: false,
-          baseUrl: '.',
-          outDir: './lib',
-          skipLibCheck: true,
-          strict: true,
-          target: 'es5',
-          types: ['react', 'node']
+          ...{
+            declaration: true,
+            emitDeclarationOnly: true,
+            incremental: true,
+            jsx: 'react-jsx',
+            module: 'es6',
+            esModuleInterop: true,
+            noImplicitAny: false,
+            baseUrl: '.',
+            outDir: './lib',
+            skipLibCheck: true,
+            strict: true,
+            target: 'es5',
+            types: ['react', 'node']
+          },
+          ...(tsConfigData?.compilerOptions ?? {})
         })
       : Promise.resolve()
   ])

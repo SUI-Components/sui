@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.12.0 (2023-05-04)
+
+
+### Features
+
+* **packages/sui-domain:** update classes definition ([726bd99](https://github.com/SUI-Components/sui/commit/726bd990862bd64c25a879d60eeda3523ec19eb0))
+
+
+
 # 2.11.0 (2022-12-21)
 
 

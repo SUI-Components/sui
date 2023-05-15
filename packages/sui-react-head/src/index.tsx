@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import * as React from 'react'
-import { HeadProvider, Link, Meta, Style, Title } from 'react-head'
+import {
+  HeadProvider, Link, Meta as MetaPrimitive, Style, Title
+} from 'react-head'
 
 import Body from './Body'
 import Html from './Html'
@@ -21,6 +23,21 @@ interface HeadProps {
     name: string
     content: string
   }>
+}
+
+interface MetaProps extends React.ComponentProps<typeof MetaPrimitive> {}
+
+interface MetaTagInverterProps extends React.MetaHTMLAttributes<HTMLMetaElement> {
+  'data-rh': string
+}
+
+const MetaTagInverter: React.FC<MetaTagInverterProps> = ({ 'data-rh': rh, ...others }) => {
+  return <meta {...others} data-rh={rh} />
+}
+
+const Meta: React.FC<MetaProps> = (props) => {
+  // @ts-expect-error
+  return <MetaPrimitive {...props} tag={MetaTagInverter} />
 }
 
 const Head: React.FC<HeadProps> = ({
@@ -59,8 +76,8 @@ const Head: React.FC<HeadProps> = ({
       {renderTags({ tagsArray: metaTagsToRender, Component: Meta })}
       {renderTags({ tagsArray: linkTagsToRender, Component: Link })}
       {renderStyles({ stylesArray: stylesTagsToRender, Component: Style })}
-      {(bodyAttributes != null) && <Body attributes={bodyAttributes} />}
-      {(htmlAttributes != null) && <Html attributes={htmlAttributes} />}
+      {bodyAttributes != null && <Body attributes={bodyAttributes} />}
+      {htmlAttributes != null && <Html attributes={htmlAttributes} />}
     </>
   )
 }
