@@ -13,6 +13,25 @@ import {transformFile} from '@swc/core'
 
 import {getSWCConfig} from './swc-config.js'
 
+const TS_EXTENSION_REGEX = /(ts)x?/
+const DEFAULT_TS_CONFIG = {
+  declaration: true,
+  emitDeclarationOnly: true,
+  incremental: true,
+  jsx: 'react-jsx',
+  module: 'es6',
+  esModuleInterop: true,
+  noImplicitAny: false,
+  baseUrl: '.',
+  outDir: './lib',
+  skipLibCheck: true,
+  strict: true,
+  target: 'es5',
+  types: ['react', 'node']
+}
+
+// Get TS config from the package dir.
+// If present, set TypeScript as enabled.
 const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
 let tsConfigData
 let isTypeScriptEnabled = false
@@ -28,13 +47,11 @@ try {
 
 const compileFile = async (file, options) => {
   const {code} = await transformFile(file, getSWCConfig(options))
-  const outputPath = file.replace('./src', './lib')
+  const outputPath = file
+    .replace('./src', './lib')
+    .replace(TS_EXTENSION_REGEX, 'js')
 
   fs.outputFile(outputPath, code)
-}
-
-const compileFiles = files => {
-  return Promise.all(file => compileFile(file, {isModern}))
 }
 
 const compileTypes = (files, options) => {
@@ -48,6 +65,7 @@ const compileTypes = (files, options) => {
   return Promise.all(
     Object.keys(createdFiles).map(outputPath => {
       const code = createdFiles[outputPath]
+
       return fs.outputFile(outputPath, code)
     })
   )
@@ -73,36 +91,27 @@ program
   })
   .parse(process.argv)
 
-const {ignore = [], modern: isModern} = program.opts()
+const {ignore = [], modern: isModern = false} = program.opts()
 
 ;(async () => {
   console.time('[sui-js-compiler]')
 
   const files = await fg('./src/**/*.{js,jsx,ts,tsx}', {ignore})
+  const filesToCompile = Promise.all(
+    files.map(async file => {
+      const isTypeScript = Boolean(file.match(TS_EXTENSION_REGEX))
 
-  await Promise.all([
-    compileFiles(files),
-    isTypeScriptEnabled
-      ? compileTypes(files, {
-          ...{
-            declaration: true,
-            emitDeclarationOnly: true,
-            incremental: true,
-            jsx: 'react-jsx',
-            module: 'es6',
-            esModuleInterop: true,
-            noImplicitAny: false,
-            baseUrl: '.',
-            outDir: './lib',
-            skipLibCheck: true,
-            strict: true,
-            target: 'es5',
-            types: ['react', 'node']
-          },
-          ...(tsConfigData?.compilerOptions ?? {})
-        })
-      : Promise.resolve()
-  ])
+      return compileFile(file, {isModern, isTypeScript})
+    })
+  )
+  const typesToCompile = isTypeScriptEnabled
+    ? compileTypes(files, {
+        ...DEFAULT_TS_CONFIG,
+        ...(tsConfigData?.compilerOptions ?? {})
+      })
+    : Promise.resolve()
+
+  await Promise.all([filesToCompile, typesToCompile])
 
   console.timeEnd('[sui-js-compiler]')
 })()
