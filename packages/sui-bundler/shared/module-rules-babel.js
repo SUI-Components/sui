@@ -1,14 +1,25 @@
+/* eslint-disable no-console */
+const fs = require('fs-extra')
 const path = require('path')
 const {config} = require('./index.js')
 
-const isTypeScript = config?.parser?.syntax === 'typescript'
+const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
+let isTypeScriptEnabled = false
+
+try {
+  if (fs.existsSync(tsConfigPath)) {
+    isTypeScriptEnabled = true
+  }
+} catch (err) {
+  console.error(err)
+}
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
 )
 
 module.exports = ({isServer = false, supportLegacyBrowsers = true} = {}) =>
-  isTypeScript
+  isTypeScriptEnabled
     ? {
         test: /\.(js|ts)x?$/,
         exclude: EXCLUDED_FOLDERS_REGEXP,
