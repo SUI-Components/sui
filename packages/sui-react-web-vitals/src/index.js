@@ -51,7 +51,7 @@ export default function WebVitalsReporter({
     const getRoutename = () => {
       const {routes} = router
       const route = routes[routes.length - 1]
-      return route?.id || null
+      return route?.id
     }
 
     const getDeviceType = () => {
