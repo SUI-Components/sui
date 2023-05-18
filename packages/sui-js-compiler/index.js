@@ -7,6 +7,7 @@ import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
+import {createCompilerHost, createProgram} from 'typescript'
 
 import {transformFile} from '@swc/core'
 
@@ -32,19 +33,20 @@ const DEFAULT_TS_CONFIG = {
   types: ['react', 'node']
 }
 
-// Get TS config from the package dir.
-// If present, set TypeScript as enabled.
-const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
-let tsConfigData
-let isTypeScriptEnabled = false
+const getTSConfig = () => {
+  // Get TS config from the package dir.
+  const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
+  let tsConfig
 
-try {
-  if (fs.existsSync(tsConfigPath)) {
-    tsConfigData = JSON.parse(fs.readFileSync(tsConfigPath, {encoding: 'utf8'}))
-    isTypeScriptEnabled = true
+  try {
+    if (fs.existsSync(tsConfigPath)) {
+      tsConfig = JSON.parse(fs.readFileSync(tsConfigPath, {encoding: 'utf8'}))
+    }
+  } catch (err) {
+    console.error(err)
   }
-} catch (err) {
-  console.error(err)
+
+  return tsConfig
 }
 
 const compileFile = async (file, options) => {
@@ -56,15 +58,10 @@ const compileFile = async (file, options) => {
   fs.outputFile(outputPath, code)
 }
 
-const compileTypes = async (files, options) => {
-  const {createCompilerHost, createProgram} = await import('typescript').then(
-    module => module.default
-  )
+const compileTypes = (files, options) => {
   const createdFiles = {}
-
   const host = createCompilerHost(options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
-
   const program = createProgram(files, options, host)
   program.emit()
 
@@ -110,10 +107,13 @@ const {ignore = [], modern: isModern = false} = program.opts()
       return compileFile(file, {isModern, isTypeScript})
     })
   )
+  const tsConfig = getTSConfig()
+  // If TS config exists, set TypeScript as enabled.
+  const isTypeScriptEnabled = Boolean(tsConfig)
   const typesToCompile = isTypeScriptEnabled
-    ? await compileTypes(files, {
+    ? compileTypes(files, {
         ...DEFAULT_TS_CONFIG,
-        ...(tsConfigData?.compilerOptions ?? {})
+        ...(tsConfig?.compilerOptions ?? {})
       })
     : Promise.resolve()
 

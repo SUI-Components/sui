@@ -46,7 +46,7 @@ $ ./node_modules/.bin/sui-js-compiler --modern
 
 #### Compiling TypeScript files and generating type declarations
 
-This tools lets you compile **TS files** and generate their **type declarations** in your packages out of the box. It will do it if the package itslef has a `tsconfig.json` placed in its root folder.
+This tools lets you compile **TS files** and generate their **type declarations** in your packages out of the box. It will do it if the package itself has a `tsconfig.json` placed in its root folder.
 
 ## Requirements
 
