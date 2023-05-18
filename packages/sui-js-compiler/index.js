@@ -7,7 +7,6 @@ import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
-import ts from 'typescript'
 
 import {transformFile} from '@swc/core'
 
@@ -54,12 +53,16 @@ const compileFile = async (file, options) => {
   fs.outputFile(outputPath, code)
 }
 
-const compileTypes = (files, options) => {
+const compileTypes = async (files, options) => {
+  const {createCompilerHost, createProgram} = await import('typescript').then(
+    module => module.default
+  )
   const createdFiles = {}
-  const host = ts.createCompilerHost(options)
+
+  const host = createCompilerHost(options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
 
-  const program = ts.createProgram(files, options, host)
+  const program = createProgram(files, options, host)
   program.emit()
 
   return Promise.all(
@@ -105,7 +108,7 @@ const {ignore = [], modern: isModern = false} = program.opts()
     })
   )
   const typesToCompile = isTypeScriptEnabled
-    ? compileTypes(files, {
+    ? await compileTypes(files, {
         ...DEFAULT_TS_CONFIG,
         ...(tsConfigData?.compilerOptions ?? {})
       })
