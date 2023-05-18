@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/js-compiler",
-  "version": "1.23.0-typescript.9",
-  "description": "JavaScript Compiler",
+  "version": "1.23.0-typescript.10",
+  "description": "JavaScript & TypeScript Compiler",
   "type": "module",
   "exports": "./src/index.js",
   "bin": {
