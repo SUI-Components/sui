@@ -12,7 +12,10 @@ import {transformFile} from '@swc/core'
 
 import {getSWCConfig} from './swc-config.js'
 
-const TS_EXTENSION_REGEX = /(ts)x?/
+const SOURCE_DIR = './src'
+const OUTPUT_DIR = './lib'
+const TS_EXTENSION_REGEX = /(\.ts)x?/
+const COMPILED_EXTENSION = '.js'
 const DEFAULT_TS_CONFIG = {
   declaration: true,
   emitDeclarationOnly: true,
@@ -22,7 +25,7 @@ const DEFAULT_TS_CONFIG = {
   esModuleInterop: true,
   noImplicitAny: false,
   baseUrl: '.',
-  outDir: './lib',
+  outDir: OUTPUT_DIR,
   skipLibCheck: true,
   strict: true,
   target: 'es5',
@@ -47,8 +50,8 @@ try {
 const compileFile = async (file, options) => {
   const {code} = await transformFile(file, getSWCConfig(options))
   const outputPath = file
-    .replace('./src', './lib')
-    .replace(TS_EXTENSION_REGEX, 'js')
+    .replace(SOURCE_DIR, OUTPUT_DIR)
+    .replace(TS_EXTENSION_REGEX, COMPILED_EXTENSION)
 
   fs.outputFile(outputPath, code)
 }
