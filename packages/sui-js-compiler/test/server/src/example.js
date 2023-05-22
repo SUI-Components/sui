@@ -2,7 +2,7 @@
 export class Whatever {
   @decorator
   async execute() {
-    return await Promise.resolve('hello')
+    return Promise.resolve('hello')
   }
 }
 
