@@ -58,7 +58,8 @@ export default ({metric = null} = {}) => {
                     reporter.send({
                       metricName,
                       status: error ? statusCodes.FAIL : statusCodes.SUCCESS,
-                      value: endTime - startTime
+                      value: endTime - startTime,
+                      error
                     })
                   } else {
                     reporter.send({
