@@ -62,7 +62,7 @@ const config = {
         '@s-ui/react-context': path.resolve(
           path.join(
             process.env.PWD,
-            isWorkspace ? '../' : './',
+            isWorkspace() ? '../' : './',
             'node_modules/@s-ui/react-context'
           )
         )
