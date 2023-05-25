@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.25.0 (2023-05-24)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** fix conditional ([f1406b7](https://github.com/SUI-Components/sui/commit/f1406b75dc10354475685d45cf13b62826db4bce))
+* **packages/sui-test:** fix react context alias when executing tests inside a workspace ([7db2398](https://github.com/SUI-Components/sui/commit/7db2398bce5550eeb0684648e0b75897b92568af))
+
+
+
 # 8.24.0 (2023-05-03)
 
 

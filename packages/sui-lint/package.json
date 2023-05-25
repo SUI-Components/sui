@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "4.29.0-typescript.3",
+  "version": "4.30.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -39,7 +39,7 @@
     "prettier": "2.7.1",
     "stylelint": "14.11.0",
     "stylelint-config-prettier": "9.0.3",
-    "stylelint-config-recommended-scss": "7.0.0",
+    "stylelint-config-recommended-scss": "8.0.0",
     "stylelint-prettier": "2.0.0"
   }
 }
