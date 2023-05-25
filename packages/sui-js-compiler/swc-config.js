@@ -10,17 +10,19 @@ const DEFAULT_BROWSER_TARGETS = {
   ios: '14.5'
 }
 
-export const getSWCConfig = ({isModern}) => {
+export const getSWCConfig = ({isModern, isTypeScript}) => {
   const targets = isModern
     ? DEFAULT_BROWSER_TARGETS
     : DEFAULT_LEGACY_BROWSER_TARGETS
+  const syntaxOptions = isTypeScript
+    ? {syntax: 'typescript', tsx: true}
+    : {syntax: 'ecmascript', jsx: true}
 
   return {
     minify: true,
     jsc: {
       parser: {
-        syntax: 'ecmascript',
-        jsx: true,
+        ...syntaxOptions,
         dynamicImport: true,
         privateMethod: true,
         functionBind: true,
