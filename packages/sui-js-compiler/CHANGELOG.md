@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 1.23.0 (2023-05-25)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** fix replacement ([4f03f08](https://github.com/SUI-Components/sui/commit/4f03f08ca10980f6333a085a1e7970d5972b865d))
+* **packages/sui-js-compiler:** fix version ([6f0e5ca](https://github.com/SUI-Components/sui/commit/6f0e5caf141848b7779cc565e4df6bd48e1bcd0c))
+* **packages/sui-js-compiler:** reset swc deps versions ([40b687c](https://github.com/SUI-Components/sui/commit/40b687c4d275f26e32cca19c07c8d3e152af3e23))
+* **packages/sui-js-compiler:** use no named exports ([bf96087](https://github.com/SUI-Components/sui/commit/bf96087924aad2bca372e3fc3fb91674f43d8661))
+
+
+### Features
+
+* **packages/sui-js-compiler:** adapt new changes ([f6e9ee1](https://github.com/SUI-Components/sui/commit/f6e9ee1206c6c977221152109d2b4b7edd9bf8bb))
+* **packages/sui-js-compiler:** add code suggestions and some fixes ([79673bf](https://github.com/SUI-Components/sui/commit/79673bf26350ec86e3e947f39163b75847288146))
+* **packages/sui-js-compiler:** import ts dynamically ([25f216f](https://github.com/SUI-Components/sui/commit/25f216f351180f1ab1cfd3488e172df90c79fa5d))
+
+
+
 # 1.22.0 (2023-05-04)
 
 
@@ -7,6 +26,7 @@
 
 * **packages/sui-js-compiler:** add legacy option ([b4d234e](https://github.com/SUI-Components/sui/commit/b4d234e980492de24d6bb30450c7586ab64a9cc0))
 * **packages/sui-js-compiler:** change to modern option ([86101a6](https://github.com/SUI-Components/sui/commit/86101a63560f3f818f9f64f8821ad48933360db4))
+* **packages/sui-js-compiler:** set typescript support from tsconfig ([78a155c](https://github.com/SUI-Components/sui/commit/78a155cdde96f52b5bec9c1ebb1c11469a7f2923))
 
 
 
@@ -35,6 +55,11 @@
 
 ### Features
 
+* **packages/sui-js-compiler:** update js compiler ([8fb9968](https://github.com/SUI-Components/sui/commit/8fb9968dca1f39ad06d2cf6d5625b879dc6c5137))
+* **packages/sui-js-compiler:** update readme ([69730d5](https://github.com/SUI-Components/sui/commit/69730d5516e9d7d9aa741c3e93a84913de58c452))
+* **packages/sui-js-compiler:** update readme ([e7887d2](https://github.com/SUI-Components/sui/commit/e7887d2a0c2fbcda7de948a09ad499e69a3132a4))
+* **packages/sui-js-compiler:** update small issues ([016a610](https://github.com/SUI-Components/sui/commit/016a610e089699a3bcb63af2aaf8532594f97704))
+* **packages/sui-js-compiler:** update swc config ([3c3f027](https://github.com/SUI-Components/sui/commit/3c3f027773ad6686b0341f4ce2e4b7f1cfdaf5b0))
 * **packages/sui-js-compiler:** Upgrade dependencies across packages ([d6c8230](https://github.com/SUI-Components/sui/commit/d6c82302242aee0ab86eef2a43c7eb59ff55ba3b))
 
 
@@ -44,6 +69,7 @@
 
 ### Features
 
+* **packages/sui-js-compiler:** typescript poc ([6964668](https://github.com/SUI-Components/sui/commit/69646680b9ea7b441796b5180e5298ef96fc1bf4))
 * **packages/sui-js-compiler:** update swc to latest versions ([738ece5](https://github.com/SUI-Components/sui/commit/738ece5596707d9cc23e775680261a02a1af01da))
 
 
