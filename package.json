@@ -20,7 +20,7 @@
     "test:server:ci": "npm run test:server",
     "test:client": "npx @s-ui/test browser -P 'packages/**/!(server)/*Spec.js'",
     "test:client:watch": "npm run test:client -- --watch",
-    "test:server": "npx @s-ui/test server -P './packages/*/\\!\\(browser\\)/server/*.js'",
+    "test:server": "npx @s-ui/test server -P './packages/sui-test-contract/test/server/setupSpec.js'",
     "test:server:watch": "npm run test:server -- --watch",
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx @s-ui/test-e2e --baseUrl=http://localhost:1234",
     "pre-commit": "sui-lint js --staged && sui-lint sass --staged",

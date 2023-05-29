@@ -22,6 +22,10 @@ export const DEVICE_TYPES = {
   MOBILE: 'mobile'
 }
 
+const getNormalizedPathname = pathname => {
+  return pathname.replaceAll('*', '_')
+}
+
 export default function WebVitalsReporter({
   metrics = Object.values(METRICS),
   pathnames,
@@ -44,6 +48,12 @@ export default function WebVitalsReporter({
       return route?.path || route?.regexp?.toString()
     }
 
+    const getRouteid = () => {
+      const {routes} = router
+      const route = routes[routes.length - 1]
+      return route?.id
+    }
+
     const getDeviceType = () => {
       return deviceType || browser?.deviceType
     }
@@ -51,6 +61,7 @@ export default function WebVitalsReporter({
     const handleReport = ({name, value}) => {
       const onReport = onReportRef.current
       const pathname = getPathname()
+      const routeid = getRouteid()
       const type = getDeviceType()
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
@@ -64,6 +75,7 @@ export default function WebVitalsReporter({
           name,
           amount: value,
           pathname,
+          routeid,
           type
         })
         return
@@ -85,8 +97,16 @@ export default function WebVitalsReporter({
           },
           {
             key: 'pathname',
-            value: pathname
+            value: getNormalizedPathname(pathname)
           },
+          ...(routeid
+            ? [
+                {
+                  key: 'routeid',
+                  value: routeid
+                }
+              ]
+            : []),
           ...(type
             ? [
                 {

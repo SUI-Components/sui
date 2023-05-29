@@ -159,9 +159,9 @@ export default class OptimizelyAdapter {
    * @returns {isActive: boolean, linkedExperiments: number[]}
    */
   isFeatureEnabled({featureKey, attributes}) {
-    const linkedExperimentNames = Object.keys(
-      this.getOptimizelyConfig().featuresMap[featureKey].experimentsMap
-    )
+    const experimentsMap =
+      this.getOptimizelyConfig()?.featuresMap[featureKey]?.experimentsMap || {}
+    const linkedExperimentNames = Object.keys(experimentsMap)
 
     // check for user consents only if featureKey is a feature that belongs to a feature test or if a userId is available
     if (

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.4.0 (2023-05-18)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add routename to reporter as coming from route id prop ([5c31343](https://github.com/SUI-Components/sui/commit/5c31343834149cd3ca0183e0d66668c92fc55131))
+
+
+
+# 1.3.0 (2023-04-06)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** replace wildcard on pathname tag value so that it works with DD ([894ce02](https://github.com/SUI-Components/sui/commit/894ce026e7089e962f9e5ab16c94d5a5e82a4ef7))
+
+
+
 # 1.2.0 (2023-01-30)
 
 

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.22.0 (2023-04-03)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** Prevent error when accessing to getOptimizelyConfig method ([4bd6d6a](https://github.com/SUI-Components/sui/commit/4bd6d6a2d7e174b12ace86ee7e867b17abbab9cc))
+
+
+
+# 2.21.0 (2023-02-14)
+
+
+### Bug Fixes
+
+* **packages/sui-pde:** fix error on access to experiments map ([29768b3](https://github.com/SUI-Components/sui/commit/29768b367554157f92636a5136fa52f51f6e70a0))
+
+
+
 # 2.20.0 (2022-05-19)
 
 

@@ -163,7 +163,7 @@ This tool works with zero configuration out the box but you could use some confi
 {
   "config": {
     "sui-bundler": {
-      "supportLegacyBrowsers": false, // default
+      "supportLegacyBrowsers": true, // default
       "onlyHash": "true",
       "env": ["APP_NAME", ["USER", "DEFAULT_VALUE"]],
       "vendor": ["react", "react-dom"],

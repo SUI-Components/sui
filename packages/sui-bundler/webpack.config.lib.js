@@ -11,7 +11,11 @@ const minifyJs = require('./shared/minify-js.js')
 const definePlugin = require('./shared/define.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
 const sassRules = require('./shared/module-rules-sass.js')
-const {extractComments, sourceMap} = require('./shared/config.js')
+const {
+  extractComments,
+  sourceMap,
+  supportLegacyBrowsers
+} = require('./shared/config.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 
 const cssFileName = 'styles.css'
@@ -63,6 +67,6 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [createBabelRules(), sassRules]
+    rules: [createBabelRules({supportLegacyBrowsers}), sassRules]
   }
 }

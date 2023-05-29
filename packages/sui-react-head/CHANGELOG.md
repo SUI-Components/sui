@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.13.0 (2023-05-08)
+
+
+### Features
+
+* **packages/sui-react-head:** Wrap the Meta component to invert the parameters received in the orig ([2d7acb7](https://github.com/SUI-Components/sui/commit/2d7acb77816c27482f98ddb92aa7e6ba7a824363))
+
+
+
 # 1.12.0 (2023-01-23)
 
 

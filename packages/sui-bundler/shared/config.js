@@ -7,7 +7,7 @@ const {'sui-bundler': config = {}} = packageJsonConfig
 const {
   extractComments = false,
   sourcemaps,
-  supportLegacyBrowsers = false
+  supportLegacyBrowsers = true
 } = config
 
 exports.config = config
