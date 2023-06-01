@@ -3,7 +3,10 @@
   "version": "1.23.0",
   "description": "JavaScript & TypeScript Compiler",
   "type": "module",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": "./index.js",
+    "./swc-config.js": "./swc-config.js"
+  },
   "bin": {
     "sui-js-compiler": "./index.js"
   },

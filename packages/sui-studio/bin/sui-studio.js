@@ -5,6 +5,7 @@ const path = require('path')
 const {getSpawnPromise} = require('@s-ui/helpers/cli')
 
 const {version} = require('../package.json')
+const generateApiDocs = require('./helpers/generateApiDocs.js')
 const copyStaticFiles = require('./helpers/copyStaticFiles.js')
 const copyGlobals = require('./helpers/copyGlobals.js')
 
@@ -18,6 +19,7 @@ program
 
     await copyGlobals()
     await copyStaticFiles()
+    await generateApiDocs()
 
     const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
     const args = ['-c', path.join(__dirname, '..', 'src')]

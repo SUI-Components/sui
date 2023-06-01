@@ -2,15 +2,27 @@ const path = require('node:path')
 const fg = require('fast-glob')
 const fs = require('fs-extra')
 const reactDocs = require('react-docgen')
+const findExportedExpressions = require('./findExportedExpressions.js')
 
-module.exports = function generateApiDocs() {
+module.exports = async function generateApiDocs() {
   console.log('[sui-studio] Generating API documentation for components...')
   console.time('[sui-studio] API generation took')
+
+  const {default: swcConfig} = await import('@s-ui/js-compiler/swc-config.js')
 
   const components = fg.sync('components/*/*/src/index.js', {deep: 4})
 
   components.forEach(file => {
-    const source = fs.readFileSync(file, 'utf-8')
+    let docFilePath = file
+    const {dir} = path.parse(file)
+    const gen = findExportedExpressions(file, {swc: swcConfig})
+    const {route, found} = gen
+    if (found) {
+      docFilePath = route.split().join('')
+    }
+
+    const source = fs.readFileSync(docFilePath, 'utf-8')
+
     let docs = {}
 
     try {
@@ -22,7 +34,7 @@ module.exports = function generateApiDocs() {
       console.warn(`[sui-studio] Couldn't generate API docs for ${file}`)
     }
 
-    const outputFile = file.replace('index.js', 'definitions.json')
+    const outputFile = dir.replace('src', '') + 'definitions.json'
     fs.writeFileSync(
       path.resolve(process.cwd(), `public/${outputFile}`),
       JSON.stringify(docs, null, 2)
