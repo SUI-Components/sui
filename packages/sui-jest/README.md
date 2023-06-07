@@ -34,14 +34,14 @@ npm run test:jest -- [Jest CLI Options]
 
 ### Overriding Config
 
-`sui-jest` allows you to specify your own configuration. There are various ways that it works, but basically if you want to have your own config for something, just add the configuration and `sui-jest` will use that instead of it's own internal config.
+`sui-jest` allows you to specify your own configuration. There are various ways that it works, but basically if you want to have your own config for something, just add the configuration and `sui-jest` will use it instead of its own internal config.
 
 **Specific**
 
-Add the `config` flag with the specific jest config file path.
+From CLI using the `--config` flag with the path of the specific jest config file.
 
 ```sh
-node ./node_modules/.bin/sui-jest --config .jest.config.[*]
+node ./node_modules/.bin/sui-jest --config jest.config.[*]
 ```
 
 **Automatic**
