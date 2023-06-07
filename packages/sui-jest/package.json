@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/jest",
   "version": "1.0.0",
-  "description": "jest wrapper",
+  "description": "CLI that abstracts from jest",
   "bin": {
     "sui-jest": "bin/sui-jest.js"
   },
