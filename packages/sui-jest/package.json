@@ -25,5 +25,5 @@
   "bugs": {
     "url": "https://github.com/SUI-Components/sui/issues"
   },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mock-provider#readme"
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-jest#readme"
 }
