@@ -224,7 +224,7 @@ module.exports = {
     {
       files: ['**/__tests__/**/*.js'],
       rules: {
-        'react/display-name': RULES.OFF // we don't need a display name in test files
+        'react/display-name': RULES.OFF
       }
     }
   ]
