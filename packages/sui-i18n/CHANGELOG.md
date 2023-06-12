@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.33.0 (2023-06-12)
+
+
+### Bug Fixes
+
+* **packages/sui-i18n:** fix missed key warning when i18n.url ([a851c59](https://github.com/SUI-Components/sui/commit/a851c59bc0ef53e466a79a45c250b46ee1a3deb6))
+
+
+
 # 1.32.0 (2023-03-03)
 
 
