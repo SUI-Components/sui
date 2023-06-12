@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 4.31.0 (2023-06-12)
+
+
+
 # 4.30.0 (2023-05-18)
 
 
@@ -7,6 +11,11 @@
 
 * **packages/sui-lint:** Fix Unknown rule error when checking scss files ([270dc57](https://github.com/SUI-Components/sui/commit/270dc57caf9528159f6dfa126afb22b2054f5b7d))
 * **packages/sui-lint:** use version 8 for stylelint-config-recommended-scss ([60a1179](https://github.com/SUI-Components/sui/commit/60a1179effcc998e9a5c7fb1ca5b88b1e97fd7bb))
+
+
+### Features
+
+* **packages/sui-lint:** add jest rules ([3e3dcaa](https://github.com/SUI-Components/sui/commit/3e3dcaa24a926be7c462dcb9fcdb00de84c43dce))
 
 
 
