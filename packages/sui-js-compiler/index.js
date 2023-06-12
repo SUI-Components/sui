@@ -94,7 +94,8 @@ program
   })
   .parse(process.argv)
 
-const {ignore = [], modern: isModern = false} = program.opts()
+const {ignore: ignoreOpts = [], modern: isModern = false} = program.opts()
+const ignore = [...ignoreOpts, '**/__tests__']
 
 ;(async () => {
   console.time('[sui-js-compiler]')
