@@ -193,8 +193,7 @@ export default class Rosetta {
   url(urlPattern, allowQueryParams) {
     return urlPattern
       .split('/')
-      .filter(Boolean)
-      .map(token => slugify(this.t(token), allowQueryParams))
+      .map(token => token && slugify(this.t(token), allowQueryParams))
       .join('/')
   }
 
