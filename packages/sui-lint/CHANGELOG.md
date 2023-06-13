@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.33.0 (2023-06-13)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** update jest rules ([eb9cc8d](https://github.com/SUI-Components/sui/commit/eb9cc8d17b350b6fed55f81fc989309988d78551))
+
+
+
 # 4.32.0 (2023-06-13)
 
 
