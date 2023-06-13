@@ -1,6 +1,16 @@
 # CHANGELOG
 
+# 4.32.0 (2023-06-13)
+
+
+
 # 4.31.0 (2023-06-12)
+
+
+### Features
+
+* **packages/sui-lint:** add jest rules ([0e2f2a2](https://github.com/SUI-Components/sui/commit/0e2f2a2e9274c7bb7d5e875c5ee029dc0460743f))
+* **packages/sui-lint:** remove comment ([df148e5](https://github.com/SUI-Components/sui/commit/df148e5f86429baa424d5a082937b2e53fe0e5b9))
 
 
 
