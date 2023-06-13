@@ -41,7 +41,11 @@ const TESTING_RULES = {
     RULES.ERROR,
     {allowShortCircuit: true, allowTernary: true}
   ],
-  'no-only-tests/no-only-tests': RULES.ERROR,
+  'no-only-tests/no-only-tests': RULES.ERROR
+}
+
+const JEST_TESTING_RULES = {
+  'react/display-name': RULES.OFF,
   'jest/consistent-test-it': RULES.OFF,
   'jest/expect-expect': RULES.OFF,
   'jest/max-expects': RULES.OFF,
@@ -223,9 +227,7 @@ module.exports = {
     },
     {
       files: ['**/__tests__/**/*.js'],
-      rules: {
-        'react/display-name': RULES.OFF
-      }
+      rules: JEST_TESTING_RULES
     }
   ]
 }
