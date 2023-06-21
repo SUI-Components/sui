@@ -1,9 +1,9 @@
 {
   "name": "@s-ui/react-context",
-  "version": "1.8.0",
+  "version": "1.8.1-typescript.0",
   "description": "",
   "main": "lib/index",
-  "types": "src/index.tsx",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lib": "rm -rf ./lib && tsc",
     "prepublishOnly": "npm run lib"

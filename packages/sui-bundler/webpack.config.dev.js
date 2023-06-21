@@ -47,7 +47,7 @@ const webpackConfig = {
       timers: false
     },
     modules: ['node_modules', path.resolve(process.cwd())],
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.tsx', '.ts', '.json']
   },
   stats: 'errors-only',
   entry: cleanList([

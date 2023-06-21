@@ -62,8 +62,8 @@ export const importReactComponent = ({
     importFile: () => {
       return import(
         /* webpackChunkName: "src-[request]" */
-        /* webpackExclude: /\/node_modules\/(.*)\/src\/index.js$/ */
-        `${__BASE_DIR__}/components/${category}/${component}/src/index.js`
+        /* webpackExclude: /\/node_modules\/(.*)\/src\/index$/ */
+        `${__BASE_DIR__}/components/${category}/${component}/src/index`
       )
     }
   })
@@ -74,8 +74,8 @@ const importDemo = ({category, component}) =>
     importFile: () =>
       import(
         /* webpackChunkName: "demo-[request]" */
-        /* webpackExclude: /\/node_modules\/(.*)\/demo\/index.js$/ */
-        `${__BASE_DIR__}/components/${category}/${component}/demo/index.js`
+        /* webpackExclude: /\/node_modules\/(.*)\/demo\/index$/ */
+        `${__BASE_DIR__}/components/${category}/${component}/demo/index`
       )
   })
 
