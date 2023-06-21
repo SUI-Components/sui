@@ -5,8 +5,13 @@ export const getBrowserMocker = async (handlers = []) => {
   const worker = setup(...handlers)
 
   return {
-    ...worker,
+    start: worker.start,
+    stop: worker.stop,
     listen: worker.start,
-    close: worker.stop
+    close: worker.stop,
+    use: worker.use,
+    resetHandlers: worker.resetHandlers,
+    restoreHandlers: worker.restoreHandlers,
+    printHandlers: worker.printHandlers
   }
 }

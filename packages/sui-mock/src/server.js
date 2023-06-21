@@ -5,8 +5,13 @@ export const getServerMocker = async (handlers = []) => {
   const worker = setupServer(...handlers)
 
   return {
-    ...worker,
-    start: worker.listen,
-    stop: worker.close
+    start: worker.start,
+    stop: worker.stop,
+    listen: worker.start,
+    close: worker.stop,
+    use: worker.use,
+    resetHandlers: worker.resetHandlers,
+    restoreHandlers: worker.restoreHandlers,
+    printHandlers: worker.printHandlers
   }
 }
