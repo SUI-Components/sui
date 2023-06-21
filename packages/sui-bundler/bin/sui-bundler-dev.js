@@ -67,12 +67,7 @@ const start = async ({
 } = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
-  if (
-    !checkRequiredFiles([
-      path.join(config.context, 'index.html'),
-      path.join(config.context, 'app.js')
-    ])
-  ) {
+  if (!checkRequiredFiles([path.join(config.context, 'index.html')])) {
     log.error(
       `✖ Required files are missing, create and index.html and app.js inside your src folder.`
     )
