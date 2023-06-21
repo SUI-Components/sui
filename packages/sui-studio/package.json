@@ -11,9 +11,9 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7",
-    "@s-ui/bundler": "9",
+    "@s-ui/bundler": "typescript",
     "@s-ui/helpers": "1",
-    "@s-ui/react-context": "1",
+    "@s-ui/react-context": "typescript",
     "@s-ui/react-router": "1",
     "@s-ui/test": "8",
     "@testing-library/react": "10.4.9",
