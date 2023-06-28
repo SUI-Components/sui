@@ -7,6 +7,7 @@ import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
+import {getSpawnPromise} from '@s-ui/helpers/cli.js'
 
 import {transformFile} from '@swc/core'
 
@@ -32,7 +33,21 @@ const DEFAULT_TS_CONFIG = {
   types: ['react', 'node']
 }
 
-const getTSConfig = () => {
+const dynamicPackage = async (name, {version} = {}) => {
+  const packageName = version ? `${name}@${version}` : name
+
+  try {
+    await getSpawnPromise('npm', ['explain', packageName])
+  } catch (error) {
+    if (error.exitCode === 1) {
+      await getSpawnPromise('npm', ['install', packageName, '--no-save'])
+    }
+  }
+
+  return import(packageName).then(module => module.default)
+}
+
+const getTsConfig = () => {
   // Get TS config from the package dir.
   const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
   let tsConfig
@@ -54,13 +69,11 @@ const compileFile = async (file, options) => {
     .replace(SOURCE_DIR, OUTPUT_DIR)
     .replace(TS_EXTENSION_REGEX, COMPILED_EXTENSION)
 
-  fs.outputFile(outputPath, code)
+  await fs.outputFile(outputPath, code)
 }
 
 const compileTypes = async (files, options) => {
-  const {createCompilerHost, createProgram} = await import('typescript').then(
-    module => module.default
-  )
+  const {createCompilerHost, createProgram} = await dynamicPackage('typescript')
   const createdFiles = {}
   const host = createCompilerHost(options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
@@ -68,10 +81,10 @@ const compileTypes = async (files, options) => {
   program.emit()
 
   return Promise.all(
-    Object.keys(createdFiles).map(outputPath => {
+    Object.keys(createdFiles).map(async outputPath => {
       const code = createdFiles[outputPath]
 
-      return fs.outputFile(outputPath, code)
+      await fs.outputFile(outputPath, code)
     })
   )
 }
@@ -107,10 +120,10 @@ const ignore = [...ignoreOpts, '**/__tests__']
     files.map(async file => {
       const isTypeScript = Boolean(file.match(TS_EXTENSION_REGEX))
 
-      return compileFile(file, {isModern, isTypeScript})
+      await compileFile(file, {isModern, isTypeScript})
     })
   )
-  const tsConfig = getTSConfig()
+  const tsConfig = getTsConfig()
   // If TS config exists, set TypeScript as enabled.
   const isTypeScriptEnabled = Boolean(tsConfig)
   const typesToCompile = isTypeScriptEnabled

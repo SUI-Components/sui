@@ -6,17 +6,27 @@ import {exec as execCallback} from 'node:child_process'
 import {join} from 'node:path'
 import {promisify} from 'node:util'
 
+const DEFAULT_TIMEOUT = 9000
+
 const exec = promisify(execCallback)
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))
 const libPath = fileURLToPath(new URL('lib', import.meta.url))
+const tsConfigPath = fileURLToPath(new URL('tsconfig.json', import.meta.url))
 const libFilePath = join(libPath, 'example.js')
 
 describe('@s-ui/js-compiler', () => {
-  beforeEach(() => fs.remove(libPath))
-  afterEach(() => fs.remove(libPath))
+  beforeEach(async () => {
+    await fs.remove(libPath)
+    await fs.remove(tsConfigPath)
+  })
 
-  it('compiles a /src folder with a JavaScript with JSX file and output to /lib', async () => {
+  afterEach(async () => {
+    await fs.remove(libPath)
+    await fs.remove(tsConfigPath)
+  })
+
+  it('should compile a "src" folder with a JavaScript file and output it to "lib"', async () => {
     const {stdout} = await exec('node ../../index.js', {
       cwd
     })
@@ -35,9 +45,9 @@ describe('@s-ui/js-compiler', () => {
     expect(compiledFile).to.contain('_async_to_generator')
     expect(compiledFile).to.contain('_ts_decorate')
     expect(compiledFile).to.contain('_ts_generator')
-  })
+  }).timeout(DEFAULT_TIMEOUT)
 
-  it('when the "ignore" option exists, it exclude all the file matching the passed patterns', async () => {
+  it('should exclude all the files matching the passed patterns when the "ignore" option exists', async () => {
     const {stdout} = await exec(
       'node ../../index.js --ignore="./src/**.test.js"',
       {
@@ -59,5 +69,32 @@ describe('@s-ui/js-compiler', () => {
     expect(compiledFile).to.contain('_async_to_generator')
     expect(compiledFile).to.contain('_ts_decorate')
     expect(compiledFile).to.contain('_ts_generator')
-  })
+  }).timeout(DEFAULT_TIMEOUT)
+
+  it('should compile a "src" folder with a JSX file written in TypeScript and output it to "lib"', async () => {
+    // GIVEN a "tsconfig.json" definition in the package root directory
+    const tsConfig = {
+      extends: '../../../../tsconfig.json',
+      compilerOptions: {
+        outDir: './lib',
+        rootDir: './src'
+      },
+      exclude: ['node_modules', 'lib']
+    }
+
+    await fs.outputFile(tsConfigPath, JSON.stringify(tsConfig))
+
+    // WHEN execute the compiler command
+    const {stdout} = await exec('node ../../index.js', {
+      cwd
+    })
+    const compiledFilenames = await fs.readdir(libPath)
+
+    // THEN package files and types are properly compiled
+    expect(compiledFilenames).to.eql([
+      'example.d.ts',
+      'example.js',
+      'example.test.js'
+    ])
+  }).timeout(DEFAULT_TIMEOUT)
 })
