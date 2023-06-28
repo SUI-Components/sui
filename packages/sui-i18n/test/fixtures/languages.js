@@ -1,15 +1,21 @@
 export const LANGUAGES = {
   'es-ES': {
     literalOne: 'TranslateOneEsES',
-    withPlural: 'uno  |||| varios'
+    withPlural: 'uno  |||| varios',
+    profilePathSegment: 'mi-perfil',
+    privacyPathSegment: 'privacidad'
   },
   'en-GB': {
     literalOne: 'TranslateOneEnGB',
-    withPlural: 'one  |||| many'
+    withPlural: 'one  |||| many',
+    profilePathSegment: 'my-profile',
+    privacyPathSegment: 'privacy'
   },
   'ca-ES': {
     literalOne: 'TranslateOneCaES',
-    withPlural: 'un  |||| varis'
+    withPlural: 'un  |||| varis',
+    profilePathSegment: 'meu-perfil',
+    privacyPathSegment: 'privacitat'
   }
 }
 

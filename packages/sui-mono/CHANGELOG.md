@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.35.0 (2023-06-09)
+
+
+### Features
+
+* **packages/sui-mono:** upgrade git-url-parse dependency to major 13 ([bf53091](https://github.com/SUI-Components/sui/commit/bf530911331d5f17c573cd9a24e195191176f3eb))
+
+
+
 # 2.34.0 (2022-10-05)
 
 

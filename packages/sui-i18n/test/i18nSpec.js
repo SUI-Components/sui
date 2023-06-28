@@ -79,6 +79,12 @@ describe('I18N', () => {
         expect(i18n.n(1000000)).to.eql('1,000,000')
       })
 
+      it('generate url properly', () => {
+        expect(i18n.url('/profilePathSegment/privacyPathSegment')).to.eql(
+          '/my-profile/privacy'
+        )
+      })
+
       describe('with pound sterling (GBP) as currency type', () => {
         beforeEach(() => {
           i18n.currency = 'GBP'

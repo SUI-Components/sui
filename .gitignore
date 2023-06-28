@@ -22,3 +22,4 @@ packages/sui-studio/test/server/integration/empty-studio/components/fake/compone
 !packages/sui-sass-loader/test/server/fixtures/**/node_modules
 
 contract/logs/pact.log
+.npmrc

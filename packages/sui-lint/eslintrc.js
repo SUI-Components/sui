@@ -44,6 +44,71 @@ const TESTING_RULES = {
   'no-only-tests/no-only-tests': RULES.ERROR
 }
 
+const JEST_TESTING_RULES = {
+  'react/display-name': RULES.OFF,
+  'jest/consistent-test-it': RULES.OFF,
+  'jest/expect-expect': RULES.OFF,
+  'jest/max-expects': RULES.OFF,
+  'jest/max-nested-describe': RULES.ERROR,
+  'jest/no-alias-methods': RULES.OFF,
+  'jest/no-commented-out-tests': RULES.WARNING,
+  'jest/no-conditional-expect': RULES.ERROR,
+  'jest/no-conditional-in-test': RULES.ERROR,
+  'jest/no-deprecated-functions': RULES.ERROR,
+  'jest/no-disabled-tests': RULES.WARNING,
+  'jest/no-done-callback': RULES.ERROR,
+  'jest/no-duplicate-hooks': RULES.OFF,
+  'jest/no-export': RULES.ERROR,
+  'jest/no-focused-tests': RULES.ERROR,
+  'jest/no-hooks': RULES.OFF,
+  'jest/no-identical-title': RULES.ERROR,
+  'jest/no-if': RULES.ERROR,
+  'jest/no-interpolation-in-snapshots': RULES.ERROR,
+  'jest/no-jasmine-globals': RULES.OFF,
+  'jest/no-large-snapshots': [RULES.WARNING, {maxSize: 300}],
+  'jest/no-mocks-import': RULES.ERROR,
+  'jest/no-restricted-matchers': RULES.OFF,
+  'jest/no-standalone-expect': RULES.OFF,
+  'jest/no-test-prefixes': RULES.ERROR,
+  'jest/no-test-return-statement': RULES.OFF,
+  'jest/prefer-called-with': RULES.ERROR,
+  'jest/prefer-comparison-matcher': RULES.ERROR,
+  'jest/prefer-each': RULES.ERROR,
+  'jest/prefer-equality-matcher': RULES.ERROR,
+  'jest/prefer-expect-assertions': RULES.OFF,
+  'jest/prefer-expect-resolves': RULES.OFF,
+  'jest/prefer-hooks-in-order': RULES.ERROR,
+  'jest/prefer-hooks-on-top': RULES.ERROR,
+  'jest/prefer-lowercase-title': RULES.OFF,
+  'jest/prefer-mock-promise-shorthand': RULES.ERROR,
+  'jest/prefer-snapshot-hint': RULES.ERROR,
+  'jest/prefer-spy-on': RULES.OFF,
+  'jest/prefer-strict-equal': RULES.OFF,
+  'jest/prefer-to-be': RULES.OFF,
+  'jest/prefer-to-contain': RULES.WARNING,
+  'jest/prefer-to-have-length': RULES.WARNING,
+  'jest/prefer-todo': RULES.WARNING,
+  'jest/require-hook': RULES.OFF,
+  'jest/require-to-throw-message': RULES.OFF,
+  'jest/require-top-level-describe': RULES.OFF,
+  'jest/unbound-method': RULES.OFF,
+  'jest/valid-describe-callback': RULES.ERROR,
+  'jest/valid-expect': RULES.ERROR,
+  'jest/valid-expect-in-promise': RULES.ERROR,
+  'jest/valid-title': RULES.WARNING,
+  'jest-dom/prefer-checked': RULES.ERROR,
+  'jest-dom/prefer-empty': RULES.ERROR,
+  'jest-dom/prefer-enabled-disabled': RULES.ERROR,
+  'jest-dom/prefer-focus': RULES.ERROR,
+  'jest-dom/prefer-in-document': RULES.ERROR,
+  'jest-dom/prefer-required': RULES.ERROR,
+  'jest-dom/prefer-to-have-attribute': RULES.ERROR,
+  'jest-dom/prefer-to-have-class': RULES.ERROR,
+  'jest-dom/prefer-to-have-style': RULES.ERROR,
+  'jest-dom/prefer-to-have-text-content': RULES.ERROR,
+  'jest-dom/prefer-to-have-value': RULES.ERROR
+}
+
 const IMPORT_SORT_GROUPS = [
   // Side effect and polyfill imports.
   ['^\\u0000'],
@@ -83,7 +148,8 @@ module.exports = {
 
   env: {
     es6: true,
-    mocha: true
+    mocha: true,
+    'jest/globals': true
   },
 
   globals: {
@@ -116,7 +182,9 @@ module.exports = {
     'prettier',
     'react',
     'react-hooks',
-    'simple-import-sort'
+    'simple-import-sort',
+    'jest',
+    'jest-dom'
   ],
   rules: {
     ...REACT_RULES,
@@ -156,6 +224,10 @@ module.exports = {
         'prettier/prettier': RULES.OFF,
         'react/react-in-jsx-scope': RULES.OFF
       }
+    },
+    {
+      files: ['**/__tests__/**/*.js'],
+      rules: JEST_TESTING_RULES
     }
   ]
 }

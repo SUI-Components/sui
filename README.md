@@ -25,6 +25,7 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-helpers](./packages/sui-helpers) | A set of internal helpers used by sui-related packages. |
 | [sui-hoc](./packages/sui-hoc) | React utility belt for function components and higher-order components |
 | [sui-i18n](./packages/sui-i18n) | Isomorphic i18n service for browser and node |
+| [sui-jest](./packages/sui-jest) | CLI to work with Jest |
 | [sui-js](./packages/sui-js) | Javascript utilities |
 | [sui-js-compiler](./packages/sui-js-compiler) | Javascript compiler |
 | [sui-lint](./packages/sui-lint) | CLI to lint your code and make it compliant to SUI official rules |
