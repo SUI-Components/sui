@@ -91,6 +91,7 @@ describe('@s-ui/js-compiler', () => {
     const compiledFilenames = await fs.readdir(libPath)
 
     // THEN package files and types are properly compiled
+    expect(stdout).to.contain('[sui-js-compiler]')
     expect(compiledFilenames).to.eql([
       'example.d.ts',
       'example.js',

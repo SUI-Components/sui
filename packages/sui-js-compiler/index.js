@@ -7,9 +7,10 @@ import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
-import {getSpawnPromise} from '@s-ui/helpers/cli.js'
 
 import {transformFile} from '@swc/core'
+
+import {getSpawnPromise} from '@s-ui/helpers/cli.js'
 
 import {getSWCConfig} from './swc-config.js'
 
