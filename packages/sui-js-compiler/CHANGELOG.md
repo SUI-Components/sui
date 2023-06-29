@@ -1,6 +1,25 @@
 # CHANGELOG
 
+# 1.25.0 (2023-06-28)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** fix linting issues ([9ae715c](https://github.com/SUI-Components/sui/commit/9ae715cbdbb1ae5f55f727cdf5f01a8250ba6b91))
+
+
+### Features
+
+* **packages/sui-js-compiler:** install typescript on demand ([432ffc3](https://github.com/SUI-Components/sui/commit/432ffc3ce08423da1b0e924fad5d1bbe72c8b6c7))
+
+
+
 # 1.24.0 (2023-06-12)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** hide ts import on non ts compilations ([5c28421](https://github.com/SUI-Components/sui/commit/5c284210db121ba195b56f85e80736b14b196b54))
 
 
 
