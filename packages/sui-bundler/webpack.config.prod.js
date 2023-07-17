@@ -54,7 +54,7 @@ const webpackConfig = {
   context: path.resolve(CWD, 'src'),
   resolve: {
     alias: {...aliasFromConfig},
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.json', '.ts', '.tsx'],
     modules: ['node_modules', path.resolve(CWD)],
     fallback: {
       assert: false,

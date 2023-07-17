@@ -2,6 +2,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 const {config} = require('./index.js')
+const {getSWCConfig} = require('@s-ui/typescript-config')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
@@ -35,43 +36,7 @@ module.exports = ({isServer = false, supportLegacyBrowsers = true} = {}) => {
         use: [
           {
             loader: require.resolve('swc-loader'),
-            options: {
-              minify: true,
-              jsc: {
-                parser: {
-                  syntax: 'typescript',
-                  tsx: true,
-                  dynamicImport: true,
-                  privateMethod: true,
-                  functionBind: true,
-                  exportDefaultFrom: true,
-                  exportNamespaceFrom: true,
-                  decorators: true,
-                  decoratorsBeforeExport: true,
-                  topLevelAwait: true,
-                  importMeta: true
-                },
-                transform: {
-                  legacyDecorator: true,
-                  react: {
-                    useBuiltins: true,
-                    runtime: 'automatic'
-                  }
-                },
-                target: 'es5',
-                loose: true,
-                externalHelpers: true
-              },
-              env: {
-                targets: {
-                  ie: '11'
-                },
-                dynamicImport: true,
-                loose: true,
-                mode: 'entry',
-                coreJs: 3
-              }
-            }
+            options: getSWCConfig({isModern: false, isTypeScript: true})
           }
         ]
       }

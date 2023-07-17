@@ -6,9 +6,24 @@ if (process.platform === 'win32') {
   process.env.PWD = process.cwd()
 }
 
-module.exports = (vars = {}) =>
-  new webpack.DefinePlugin({
+const {MAGIC_STRINGS = '{}'} = process.env
+
+let magic
+try {
+  magic = JSON.parse(MAGIC_STRINGS)
+} catch (err) {
+  magic = {}
+}
+
+module.exports = (vars = {}) => {
+  const definitions = {
     __DEV__: false,
     __BASE_DIR__: JSON.stringify(process.env.PWD),
-    ...vars
-  })
+    ...vars,
+    ...Object.fromEntries(
+      Object.entries(magic).map(([key, value]) => [key, JSON.stringify(value)])
+    )
+  }
+
+  return new webpack.DefinePlugin(definitions)
+}
