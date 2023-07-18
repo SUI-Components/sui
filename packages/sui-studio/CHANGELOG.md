@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.34.0 (2023-07-18)
+
+
+### Features
+
+* **packages/sui-studio:** update studio generate install to avoid installing peer deps ([815dba9](https://github.com/SUI-Components/sui/commit/815dba96b2dae34f159f43ab85fd926a3a2a74e3))
+
+
+
 # 11.33.0 (2022-12-23)
 
 
