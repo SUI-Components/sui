@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.35.0 (2023-07-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** update studio postinstall ([7f78df7](https://github.com/SUI-Components/sui/commit/7f78df7023299e60be30cb1c5256748e5ac1d609))
+
+
+
 # 11.34.0 (2023-07-18)
 
 
