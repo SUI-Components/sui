@@ -309,7 +309,13 @@ export default () => <${componentInPascal} />
   writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(testTemplate))
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
-  const install = spawn('npm', ['install'], {cwd: COMPONENT_PATH})
+  const install = spawn('npm', [
+    'install',
+    '--legacy-peer-deps',
+    '--no-audit',
+    '--no-fund',
+    '--production=false'
+  ])
 
   install.stdout.on('data', data =>
     console.log(colors.gray(`[${packageName}]: ${data.toString()}`))

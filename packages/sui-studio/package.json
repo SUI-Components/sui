@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.34.0-typescript.2",
+  "version": "11.35.0-typescript.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {

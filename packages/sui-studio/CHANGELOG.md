@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 11.35.0 (2023-07-18)
+
+
+### Bug Fixes
+
+* **packages/sui-studio:** update studio postinstall ([7f78df7](https://github.com/SUI-Components/sui/commit/7f78df7023299e60be30cb1c5256748e5ac1d609))
+
+
+
+# 11.34.0 (2023-07-18)
+
+
+### Features
+
+* **packages/sui-studio:** update studio generate install to avoid installing peer deps ([815dba9](https://github.com/SUI-Components/sui/commit/815dba96b2dae34f159f43ab85fd926a3a2a74e3))
+
+
+
 # 11.33.0 (2022-12-23)
 
 
