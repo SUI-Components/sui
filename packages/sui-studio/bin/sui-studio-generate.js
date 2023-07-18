@@ -310,7 +310,11 @@ export default () => <${componentInPascal} />
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
   const install = spawn('npm', [
-    'install --legacy-peer-deps --no-audit --no-fund --production=false'
+    'install',
+    '--legacy-peer-deps',
+    '--no-audit',
+    '--no-fund',
+    '--production=false'
   ])
 
   install.stdout.on('data', data =>
