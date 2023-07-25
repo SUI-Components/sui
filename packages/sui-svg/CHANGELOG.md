@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.22.0 (2023-07-24)
+
+
+### Features
+
+* **packages/sui-svg:** add sui svg dist ([374edc4](https://github.com/SUI-Components/sui/commit/374edc4f66e72f0ec04ca25bbeabb26ad8c5cbfa))
+
+
+
 # 3.21.0 (2022-08-22)
 
 
