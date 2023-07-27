@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
-import * as reporter from 'web-vitals'
+import * as reporter from 'web-vitals/attribution'
 
 import SUIContext from '@s-ui/react-context'
 import useMount from '@s-ui/react-hooks/lib/useMount/index.js'
@@ -58,7 +58,7 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleReport = ({name, value}) => {
+    const handleReport = ({name, value, attribution}) => {
       const onReport = onReportRef.current
       const pathname = getPathname()
       const routeid = getRouteid()
@@ -76,7 +76,8 @@ export default function WebVitalsReporter({
           amount: value,
           pathname,
           routeid,
-          type
+          type,
+          attribution
         })
         return
       }
@@ -117,6 +118,13 @@ export default function WebVitalsReporter({
             : [])
         ]
       })
+
+      // This code is for testing INP logging to Mushroom
+      if (!logger?.log) {
+        return
+      }
+
+      logger.log(`${name.toLowerCase()}-${amount}-${attribution.eventTarget}`)
     }
 
     metrics.forEach(metric => {
