@@ -119,12 +119,19 @@ export default function WebVitalsReporter({
         ]
       })
 
-      // This code is for testing INP logging to Mushroom
-      if (!logger?.log) {
+      if (!logger?.error) {
         return
       }
 
-      logger.log(`${name.toLowerCase()}-${amount}-${attribution.eventTarget}`)
+      if (name === 'INP') {
+        const trackObj = {
+          message: amount,
+          name: attribution.eventTarget,
+          stack: 'CWV-INP'
+        }
+
+        logger.error(trackObj)
+      }
     }
 
     metrics.forEach(metric => {
