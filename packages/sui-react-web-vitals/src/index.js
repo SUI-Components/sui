@@ -60,7 +60,60 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleChange = ({attribution, name, value}) => {
+    const handleAllChanges = ({attribution, name, value}) => {
+      const pathname = getPathname()
+      const routeid = getRouteid()
+      const type = getDeviceType()
+      const isExcluded =
+        !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
+
+      if (isExcluded) {
+        return
+      }
+
+      const amount = name === METRICS.CLS ? value * 1000 : value
+
+      logger.log({
+        name: 'cwv',
+        amount,
+        tags: [
+          {
+            key: 'name',
+            value: name.toLowerCase()
+          },
+          {
+            key: 'pathname',
+            value: getNormalizedPathname(pathname)
+          },
+          ...(routeid
+            ? [
+                {
+                  key: 'routeid',
+                  value: routeid
+                }
+              ]
+            : []),
+          ...(type
+            ? [
+                {
+                  key: 'type',
+                  value: type
+                }
+              ]
+            : []),
+          ...(attribution
+            ? [
+                {
+                  key: 'attribution',
+                  value: attribution
+                }
+              ]
+            : [])
+        ]
+      })
+    }
+
+    const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
       const pathname = getPathname()
       const routeid = getRouteid()
@@ -122,8 +175,9 @@ export default function WebVitalsReporter({
     }
 
     metrics.forEach(metric => {
-      const reportAllChanges = METRICS_REPORTING_ALL_CHANGES.includes(metric)
-      reporter[`on${metric}`](handleChange, {...reportAllChanges})
+      reporter[`on${metric}`](handleChange)
+      if (METRICS_REPORTING_ALL_CHANGES.includes(metric))
+        reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
 
