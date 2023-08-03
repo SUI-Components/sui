@@ -60,7 +60,7 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleChange = ({name, value}) => {
+    const handleChange = ({attribution, name, value}) => {
       const onReport = onReportRef.current
       const pathname = getPathname()
       const routeid = getRouteid()
