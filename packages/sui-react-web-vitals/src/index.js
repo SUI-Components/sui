@@ -60,57 +60,6 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleAllChanges = ({name, value, attribution}) => {
-      const pathname = getPathname()
-      const routeid = getRouteid()
-      const type = getDeviceType()
-      const isExcluded =
-        !pathname ||
-        (Array.isArray(pathnames) && !pathnames.includes(pathname)) ||
-        !METRICS_REPORTING_ALL_CHANGES.includes(name)
-
-      if (isExcluded) {
-        return
-      }
-
-      if (!logger?.distribution) {
-        return
-      }
-
-      const amount = name === METRICS.CLS ? value * 1000 : value
-
-      logger.distribution({
-        name: 'cwv',
-        amount,
-        tags: [
-          {
-            key: 'name',
-            value: name.toLowerCase()
-          },
-          {
-            key: 'pathname',
-            value: getNormalizedPathname(pathname)
-          },
-          ...(routeid
-            ? [
-                {
-                  key: 'routeid',
-                  value: routeid
-                }
-              ]
-            : []),
-          ...(type
-            ? [
-                {
-                  key: 'type',
-                  value: type
-                }
-              ]
-            : [])
-        ]
-      })
-    }
-
     const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
       const pathname = getPathname()
@@ -173,11 +122,8 @@ export default function WebVitalsReporter({
     }
 
     metrics.forEach(metric => {
-      reporter[`on${metric}`](handleChange)
-    })
-
-    metrics.forEach(metric => {
-      reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+      const reportAllChanges = METRICS_REPORTING_ALL_CHANGES.includes(metric)
+      reporter[`on${metric}`](handleChange, {...reportAllChanges})
     })
   })
 
