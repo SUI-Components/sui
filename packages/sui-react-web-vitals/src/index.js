@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
-import * as reporter from 'web-vitals'
+import * as reporter from 'web-vitals/attribution'
 
 import SUIContext from '@s-ui/react-context'
 import useMount from '@s-ui/react-hooks/lib/useMount/index.js'
@@ -15,6 +15,8 @@ export const METRICS = {
   INP: 'INP',
   FCP: 'FCP'
 }
+
+const METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
 
 export const DEVICE_TYPES = {
   DESKTOP: 'desktop',
@@ -58,7 +60,58 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleReport = ({name, value}) => {
+    const handleAllChanges = ({name, value, attribution}) => {
+      const pathname = getPathname()
+      const routeid = getRouteid()
+      const type = getDeviceType()
+      const isExcluded =
+        !pathname ||
+        (Array.isArray(pathnames) && !pathnames.includes(pathname)) ||
+        !METRICS_REPORTING_ALL_CHANGES.includes(name)
+
+      if (isExcluded) {
+        return
+      }
+
+      if (!logger?.distribution) {
+        return
+      }
+
+      const amount = name === METRICS.CLS ? value * 1000 : value
+
+      logger.distribution({
+        name: 'cwv',
+        amount,
+        tags: [
+          {
+            key: 'name',
+            value: name.toLowerCase()
+          },
+          {
+            key: 'pathname',
+            value: getNormalizedPathname(pathname)
+          },
+          ...(routeid
+            ? [
+                {
+                  key: 'routeid',
+                  value: routeid
+                }
+              ]
+            : []),
+          ...(type
+            ? [
+                {
+                  key: 'type',
+                  value: type
+                }
+              ]
+            : [])
+        ]
+      })
+    }
+
+    const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
       const pathname = getPathname()
       const routeid = getRouteid()
@@ -120,7 +173,11 @@ export default function WebVitalsReporter({
     }
 
     metrics.forEach(metric => {
-      reporter[`on${metric}`](handleReport)
+      reporter[`on${metric}`](handleChange)
+    })
+
+    metrics.forEach(metric => {
+      reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
 
