@@ -38,13 +38,13 @@ const getNormalizedPathname = pathname => {
 }
 
 export default function WebVitalsReporter({
-  cwvThresholds = DEFAULT_CWV_THRESHOLDS,
+  children,
   deviceType,
   metrics = Object.values(METRICS),
   metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
   onReport,
   pathnames,
-  children
+  thresholds = DEFAULT_CWV_THRESHOLDS
 }) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
@@ -81,7 +81,7 @@ export default function WebVitalsReporter({
 
       const amount = name === METRICS.CLS ? value * 1000 : value
 
-      if (amount < cwvThresholds[name]) return
+      if (amount < thresholds[name]) return
 
       logger.metric({
         label: `cwv|${name.toLowerCase()}`,
@@ -160,11 +160,9 @@ export default function WebVitalsReporter({
 
 WebVitalsReporter.propTypes = {
   /**
-   * An object with METRICS as keys and thresholds as values
-   * Thresholds by default are those above which Google considers the page as "needs improvement"
-   * Lower thresholds could be set for fine-tuning, higher thresholds could be set for less noise when reporting all changes
+   * An optional children node
    */
-  cwvThresholds: PropTypes.object,
+  children: PropTypes.node,
   /**
    * An optional string to identify the device type. Choose between: desktop, tablet and mobile
    */
@@ -178,15 +176,17 @@ WebVitalsReporter.propTypes = {
    */
   metricsAllChanges: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
-   * An optional array of pathnames that you want to track
-   */
-  pathnames: PropTypes.arrayOf(PropTypes.string),
-  /**
    * An optional callback to be used to track core web vitals
    */
   onReport: PropTypes.func,
   /**
-   * An optional children node
+   * An optional array of pathnames that you want to track
    */
-  children: PropTypes.node
+  pathnames: PropTypes.arrayOf(PropTypes.string),
+  /**
+   * An object with METRICS as keys and thresholds as values
+   * Thresholds by default are those above which Google considers the page as "needs improvement"
+   * Lower thresholds could be set for fine-tuning, higher thresholds could be set for less noise when reporting all changes
+   */
+  thresholds: PropTypes.object
 }
