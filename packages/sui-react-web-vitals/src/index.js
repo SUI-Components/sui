@@ -174,7 +174,7 @@ WebVitalsReporter.propTypes = {
    */
   metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
-   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to LCP and INP.
+   * An optional array of core web vitals that will report on all changes. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to LCP and INP.
    */
   metricsAllChanges: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
