@@ -64,6 +64,7 @@ export default function WebVitalsReporter({
       const pathname = getPathname()
       const routeid = getRouteid()
       const type = getDeviceType()
+      const {eventTarget} = attribution || {}
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
@@ -73,43 +74,9 @@ export default function WebVitalsReporter({
 
       const amount = name === METRICS.CLS ? value * 1000 : value
 
-      logger.log({
-        name: 'cwv',
-        amount,
-        tags: [
-          {
-            key: 'name',
-            value: name.toLowerCase()
-          },
-          {
-            key: 'pathname',
-            value: getNormalizedPathname(pathname)
-          },
-          ...(routeid
-            ? [
-                {
-                  key: 'routeid',
-                  value: routeid
-                }
-              ]
-            : []),
-          ...(type
-            ? [
-                {
-                  key: 'type',
-                  value: type
-                }
-              ]
-            : []),
-          ...(attribution
-            ? [
-                {
-                  key: 'attribution',
-                  value: attribution
-                }
-              ]
-            : [])
-        ]
+      logger.metric({
+        label: `cwv|${name.toLowerCase()}|${routeid}|${type}`,
+        message: `${amount}|${eventTarget}`
       })
     }
 
