@@ -8,19 +8,23 @@ import useMount from '@s-ui/react-hooks/lib/useMount/index.js'
 import {useRouter} from '@s-ui/react-router'
 
 export const METRICS = {
-  TTFB: 'TTFB',
-  LCP: 'LCP',
   CLS: 'CLS',
+  FCP: 'FCP',
   FID: 'FID',
   INP: 'INP',
-  FCP: 'FCP'
+  LCP: 'LCP',
+  TTFB: 'TTFB'
 }
 
 const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
 
 const DEFAULT_CWV_THRESHOLDS = {
+  [METRICS.CLS]: 100,
+  [METRICS.FCP]: 1800,
+  [METRICS.FID]: 100,
+  [METRICS.INP]: 200,
   [METRICS.LCP]: 2500,
-  [METRICS.INP]: 200
+  [METRICS.TTFB]: 800
 }
 
 export const DEVICE_TYPES = {
