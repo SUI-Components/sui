@@ -69,8 +69,6 @@ export default function WebVitalsReporter({
 
     const handleAllChanges = ({attribution, name, value}) => {
       const pathname = getPathname()
-      const routeid = getRouteid()
-      const type = getDeviceType()
       const {eventTarget} = attribution || {}
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
@@ -82,7 +80,7 @@ export default function WebVitalsReporter({
       if (amount < cwvThresholds[name]) return
 
       logger.metric({
-        label: `cwv|${name.toLowerCase()}|${routeid}|${type}`,
+        label: `cwv|${name.toLowerCase()}`,
         message: `${amount}|${eventTarget}`
       })
     }
