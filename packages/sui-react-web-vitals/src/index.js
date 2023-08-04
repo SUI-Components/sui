@@ -16,7 +16,12 @@ export const METRICS = {
   FCP: 'FCP'
 }
 
-const METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
+
+const DEFAULT_CWV_THRESHOLDS = {
+  [METRICS.LCP]: 2500,
+  [METRICS.INP]: 200
+}
 
 export const DEVICE_TYPES = {
   DESKTOP: 'desktop',
@@ -29,10 +34,12 @@ const getNormalizedPathname = pathname => {
 }
 
 export default function WebVitalsReporter({
-  metrics = Object.values(METRICS),
-  pathnames,
+  cwvThresholds = DEFAULT_CWV_THRESHOLDS,
   deviceType,
+  metrics = Object.values(METRICS),
+  metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
   onReport,
+  pathnames,
   children
 }) {
   const {logger, browser} = useContext(SUIContext)
@@ -68,11 +75,11 @@ export default function WebVitalsReporter({
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded) {
-        return
-      }
+      if (isExcluded) return
 
       const amount = name === METRICS.CLS ? value * 1000 : value
+
+      if (amount < cwvThresholds[name]) return
 
       logger.metric({
         label: `cwv|${name.toLowerCase()}|${routeid}|${type}`,
@@ -88,9 +95,7 @@ export default function WebVitalsReporter({
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded) {
-        return
-      }
+      if (isExcluded) return
 
       if (onReport) {
         onReport({
@@ -143,7 +148,7 @@ export default function WebVitalsReporter({
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (METRICS_REPORTING_ALL_CHANGES.includes(metric))
+      if (DEFAULT_METRICS_REPORTING_ALL_CHANGES.includes(metric))
         reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
@@ -153,13 +158,23 @@ export default function WebVitalsReporter({
 
 WebVitalsReporter.propTypes = {
   /**
-   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to all.
+   * An object with METRICS as keys and thresholds as values
+   * Thresholds by default are those above which Google considers the page as "needs improvement"
+   * Lower thresholds could be set for fine-tuning, higher thresholds could be set for less noise when reporting all changes
    */
-  metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
+  cwvThresholds: PropTypes.object,
   /**
    * An optional string to identify the device type. Choose between: desktop, tablet and mobile
    */
   deviceType: PropTypes.oneOf(Object.values(DEVICE_TYPES)),
+  /**
+   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to all.
+   */
+  metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
+  /**
+   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to LCP and INP.
+   */
+  metricsAllChanges: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
    * An optional array of pathnames that you want to track
    */
