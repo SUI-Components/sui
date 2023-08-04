@@ -73,7 +73,6 @@ export default function WebVitalsReporter({
 
     const handleAllChanges = ({attribution, name, value}) => {
       const pathname = getPathname()
-      const {eventTarget} = attribution || {}
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
@@ -84,8 +83,8 @@ export default function WebVitalsReporter({
       if (amount < thresholds[name]) return
 
       logger.metric({
-        label: `cwv|${name.toLowerCase()}`,
-        message: `${amount}|${eventTarget}`
+        name: `cwv|${name.toLowerCase()}`,
+        tags: {amount, ...attribution}
       })
     }
 
