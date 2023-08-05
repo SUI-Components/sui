@@ -72,15 +72,12 @@ export default function WebVitalsReporter({
     }
 
     const handleAllChanges = ({attribution, name, value}) => {
+      const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname()
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded) return
-
-      const amount = name === METRICS.CLS ? value * 1000 : value
-
-      if (amount < thresholds[name]) return
+      if (isExcluded || !logger?.metric || amount < thresholds[name]) return
 
       logger.metric({
         name: `cwv|${name.toLowerCase()}`,
@@ -109,9 +106,7 @@ export default function WebVitalsReporter({
         return
       }
 
-      if (!logger?.distribution) {
-        return
-      }
+      if (!logger?.distribution) return
 
       const amount = name === METRICS.CLS ? value * 1000 : value
 
