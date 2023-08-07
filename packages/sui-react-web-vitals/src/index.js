@@ -77,12 +77,14 @@ export default function WebVitalsReporter({
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded || !logger?.metric || amount < thresholds[name]) return
+      if (isExcluded || !logger?.log || amount < thresholds[name]) return
 
-      logger.metric({
-        name: `cwv|${name.toLowerCase()}`,
-        tags: {amount, ...attribution}
-      })
+      logger.log(
+        JSON.stringify({
+          name: `cwv|${name.toLowerCase()}`,
+          tags: {amount, ...attribution}
+        })
+      )
     }
 
     const handleChange = ({name, value}) => {
