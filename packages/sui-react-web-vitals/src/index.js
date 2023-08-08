@@ -81,8 +81,9 @@ export default function WebVitalsReporter({
 
       logger.log(
         JSON.stringify({
-          name: `cwv|${name.toLowerCase()}`,
-          tags: {amount, ...attribution}
+          name: `cwv.${name.toLowerCase()}`,
+          amount,
+          ...attribution
         })
       )
     }
