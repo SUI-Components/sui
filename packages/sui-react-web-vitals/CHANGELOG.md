@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.5.0 (2023-08-08)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add attribution param ([6da1b1b](https://github.com/SUI-Components/sui/commit/6da1b1b541f31247a2d45f19060477c53d25b294))
+* **packages/sui-react-web-vitals:** add proper thresholds for all metrics ([24fbcda](https://github.com/SUI-Components/sui/commit/24fbcda3c6817cf45dcfb64526f0db9ff1dadfe5))
+* **packages/sui-react-web-vitals:** add reporting all changes for defined metrics ([cdabf48](https://github.com/SUI-Components/sui/commit/cdabf48f42ddf12c017d5970900e928f1ae9579c))
+* **packages/sui-react-web-vitals:** adding attribution as tags on metric ([1d7c76f](https://github.com/SUI-Components/sui/commit/1d7c76ff7c9a2d775eef49f8802ffaf1b6f8e000))
+* **packages/sui-react-web-vitals:** better way of managing reportAllChanges ([7058675](https://github.com/SUI-Components/sui/commit/70586755f10c7c2955b4d7811c23a8a16b7468c1))
+* **packages/sui-react-web-vitals:** use logger.log instead of logger.metric ([3e4726e](https://github.com/SUI-Components/sui/commit/3e4726e6516cb30c644847e8cc941b58734642e6))
+
+
+
 # 1.4.0 (2023-05-18)
 
 
