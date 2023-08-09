@@ -59,7 +59,7 @@ describe.server('react-head on server', () => {
         renderHeadTagsToString(headTags)
 
       expect(headString).to.equal(
-        '<title data-rh="" data-reactroot="">My awesome title</title><meta data-rh="" name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-reactroot=""/><meta data-rh="" name="theme-color" content="#303ab2" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/><style data-rh="" data-reactroot="">body:{background-color: red;}</style>'
+        '<title data-rh="" data-reactroot="">My awesome title</title><meta name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-rh="" data-reactroot=""/><meta name="theme-color" content="#303ab2" data-rh="" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/><style data-rh="" data-reactroot="">body:{background-color: red;}</style>'
       )
       expect(htmlAttributes).to.equal('data-rh="" lang="es"')
       expect(bodyAttributes).to.equal('data-rh="" class="is-test"')
@@ -86,7 +86,7 @@ describe.server('react-head on server', () => {
         renderHeadTagsToString(headTags)
 
       expect(headString).to.equal(
-        '<title data-rh="" data-reactroot="">My awesome title</title><meta data-rh="" name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-reactroot=""/><meta data-rh="" name="theme-color" content="#303ab2" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'
+        '<title data-rh="" data-reactroot="">My awesome title</title><meta name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-rh="" data-reactroot=""/><meta name="theme-color" content="#303ab2" data-rh="" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'
       )
       expect(htmlAttributes).to.equal('data-rh="" lang="es"')
       expect(bodyAttributes).to.equal('data-rh="" class="is-test"')
@@ -121,7 +121,7 @@ describe.server('react-head on server', () => {
         renderHeadTagsToString(headTags)
 
       expect(headString).to.equal(
-        '<title data-rh="" data-reactroot="">My awesome title</title><meta data-rh="" name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-reactroot=""/><meta data-rh="" name="theme-color" content="#303ab2" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'
+        '<title data-rh="" data-reactroot="">My awesome title</title><meta name="description" content="18.014 anuncios de Viviendas en Fotocasa" data-rh="" data-reactroot=""/><meta name="theme-color" content="#303ab2" data-rh="" data-reactroot=""/><link data-rh="" rel="canonical" href="https://www.fotocasa.es/es" data-reactroot=""/>'
       )
       expect(htmlAttributes).to.equal('data-rh="" lang="es"')
       expect(bodyAttributes).to.equal('data-rh="" class="is-test"')
