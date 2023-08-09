@@ -68,7 +68,7 @@ const config = {
         )
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
-      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
       fallback: {
         assert: false,
         child_process: false,

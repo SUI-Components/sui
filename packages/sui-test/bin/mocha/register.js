@@ -1,10 +1,11 @@
 const {serverConfig} = require('../../src/config.js')
+const {getSWCConfig} = require('@s-ui/typescript-config')
+
 const {
   forceTranspilation = [],
   esmOverride = false,
   useLibDir = false
 } = serverConfig
-
 const regexToAdd = forceTranspilation.map(
   regexString => new RegExp(regexString)
 )
@@ -23,10 +24,20 @@ const paths = [
   libDir,
   ...regexToAdd
 ]
+const only = useLibDir ? paths : paths.filter(path => path !== libDir)
+const swcConfig = getSWCConfig({isTypeScript: true, compileToCJS: true})
 
+// Register TS source files
+require('@swc/register')({
+  ignore: [/(.*)\.(js|cjs|mjs)/],
+  only,
+  ...swcConfig
+})
+
+// Register JS source files
 require('@babel/register')({
-  ignore: [],
-  only: useLibDir ? paths : paths.filter(path => path !== libDir),
+  ignore: [/(.*)\.ts/],
+  only,
   presets: [
     [
       'babel-preset-sui',
