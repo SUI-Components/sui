@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/typescript-config",
-  "version": "1.0.0-typescript.1",
+  "version": "1.0.0-typescript.2",
   "description": "Typescript config for SUI projects",
   "main": "src/index.js",
   "scripts": {},
@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-typescript-config#readme",
   "dependencies": {
-    "@tsconfig/esm": "^1.0.4",
-    "@tsconfig/vite-react": "^2.0.0"
+    "@tsconfig/esm": "1.0.4",
+    "@tsconfig/vite-react": "2.0.0"
   }
 }
