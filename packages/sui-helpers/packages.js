@@ -65,6 +65,14 @@ const resolveLazyNPMBin = async (binPath, pkg, cwd = process.cwd()) => {
     ).then(resolvePkgBin)
   }
 }
+
+/**
+ * Installs and imports packages dynamically.
+ * @param {string} name Name of the NPM package.
+ * @param {object} options Available options.
+ * @param {string} options.version Specific version of the package.
+ * @return {Promise<any>} Returns the default module.
+ */
 const dynamicPackage = async (name, {version} = {}) => {
   const packageName = version ? `${name}@${version}` : name
 
@@ -72,7 +80,12 @@ const dynamicPackage = async (name, {version} = {}) => {
     await getSpawnPromise('npm', ['explain', packageName])
   } catch (error) {
     if (error.exitCode === 1) {
-      await getSpawnPromise('npm', ['install', packageName, '--no-save'])
+      await getSpawnPromise('npm', [
+        'install',
+        packageName,
+        '--no-save',
+        '--legacy-peer-deps'
+      ])
     }
   }
 
