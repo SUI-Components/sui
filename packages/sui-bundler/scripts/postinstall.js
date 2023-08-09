@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 const crypto = require('crypto')
 const fs = require('fs-extra')
@@ -11,9 +12,9 @@ const tsConfigTemplate = `\
 {
   "extends": "@s-ui/bundler/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src"
+    "rootDir": "./"
   },
-  "include": ["src/**/*"]
+  "include": ["src", "domain", "components"]
 }`
 
 const md5 = str => crypto.createHash('md5').update(str).digest('hex')
