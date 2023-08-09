@@ -10,9 +10,8 @@ import path from 'node:path'
 
 import {transformFile} from '@swc/core'
 
-import {getSpawnPromise} from '@s-ui/helpers/cli.js'
-
-import {getSWCConfig} from './swc-config.js'
+import {dynamicPackage} from '@s-ui/helpers/packages.js'
+import {getSWCConfig} from '@s-ui/typescript-config'
 
 const SOURCE_DIR = './src'
 const OUTPUT_DIR = './lib'
@@ -32,20 +31,6 @@ const DEFAULT_TS_CONFIG = {
   strict: true,
   target: 'es5',
   types: ['react', 'node']
-}
-
-const dynamicPackage = async (name, {version} = {}) => {
-  const packageName = version ? `${name}@${version}` : name
-
-  try {
-    await getSpawnPromise('npm', ['explain', packageName])
-  } catch (error) {
-    if (error.exitCode === 1) {
-      await getSpawnPromise('npm', ['install', packageName, '--no-save'])
-    }
-  }
-
-  return import(packageName).then(module => module.default)
 }
 
 const getTsConfig = () => {
