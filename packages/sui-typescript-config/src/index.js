@@ -26,7 +26,6 @@ const getSWCConfig = ({
   return {
     minify: true,
     jsc: {
-      ...moduleOptions,
       parser: {
         ...syntaxOptions,
         dynamicImport: true,
@@ -49,6 +48,7 @@ const getSWCConfig = ({
       loose: true,
       externalHelpers: true
     },
+    ...moduleOptions,
     env: {
       targets,
       dynamicImport: true,
