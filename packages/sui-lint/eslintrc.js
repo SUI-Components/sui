@@ -221,6 +221,7 @@ module.exports = {
         project: './tsconfig.json'
       },
       rules: {
+        'import/extensions': RULES.OFF,
         'no-return-await': RULES.OFF,
         'prettier/prettier': [RULES.ERROR, prettierOptions],
         'react/react-in-jsx-scope': RULES.OFF,
