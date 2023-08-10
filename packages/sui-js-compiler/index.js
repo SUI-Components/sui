@@ -10,7 +10,7 @@ import path from 'node:path'
 
 import {transformFile} from '@swc/core'
 
-import {dynamicPackage} from '@s-ui/helpers/packages.js'
+import helpers from '@s-ui/helpers/packages.js'
 import {getSWCConfig} from '@s-ui/typescript-config'
 
 const SOURCE_DIR = './src'
@@ -59,6 +59,7 @@ const compileFile = async (file, options) => {
 }
 
 const compileTypes = async (files, options) => {
+  const {dynamicPackage} = helpers
   const {createCompilerHost, createProgram} = await dynamicPackage('typescript')
   const createdFiles = {}
   const host = createCompilerHost(options)
