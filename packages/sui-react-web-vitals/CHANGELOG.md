@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.6.0 (2023-08-10)
+
+
+### Bug Fixes
+
+* **packages/sui-react-web-vitals:** fix path normalizer to avoid DD not collecting some tag values ([2acaa96](https://github.com/SUI-Components/sui/commit/2acaa96b46df2fa3ed83036424c08324a280de77))
+
+
+
 # 1.5.0 (2023-08-08)
 
 
