@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.35.0-typescript.5",
+  "version": "11.35.0-typescript.7",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,7 @@
   "dependencies": {
     "@babel/cli": "7",
     "@s-ui/bundler": "typescript",
-    "@s-ui/helpers": "1",
+    "@s-ui/helpers": "typescript",
     "@s-ui/react-context": "typescript",
     "@s-ui/react-router": "1",
     "@s-ui/test": "typescript",

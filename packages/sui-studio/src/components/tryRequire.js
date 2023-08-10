@@ -1,6 +1,6 @@
 /* global __BASE_DIR__ */
 
-import {safeImport} from './utils'
+import {safeImport} from './utils.js'
 
 const fetchStaticFile = path =>
   window
@@ -87,7 +87,7 @@ export const importGlobals = () => {
     importFile: () =>
       import(
         /* webpackInclude: /\/components\/globals.js$/ */
-        /* webpackExclude: /*.md$/ */
+        /* webpackExclude: /(.*)\.md$/ */
         `${__BASE_DIR__}/components/globals.js`
       )
   })
