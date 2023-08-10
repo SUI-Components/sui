@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.35.0-typescript.7",
+  "version": "11.35.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -11,11 +11,11 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7",
-    "@s-ui/bundler": "typescript",
-    "@s-ui/helpers": "typescript",
-    "@s-ui/react-context": "typescript",
+    "@s-ui/bundler": "9",
+    "@s-ui/helpers": "1",
+    "@s-ui/react-context": "1",
     "@s-ui/react-router": "1",
-    "@s-ui/test": "typescript",
+    "@s-ui/test": "8",
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "4.0.1",
     "@testing-library/user-event": "13.5.0",
