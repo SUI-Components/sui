@@ -10,8 +10,8 @@ import path from 'node:path'
 
 import {transformFile} from '@swc/core'
 
+import {getSWCConfig} from '@s-ui/compiler-config'
 import helpers from '@s-ui/helpers/packages.js'
-import {getSWCConfig} from '@s-ui/typescript-config'
 
 const SOURCE_DIR = './src'
 const OUTPUT_DIR = './lib'
