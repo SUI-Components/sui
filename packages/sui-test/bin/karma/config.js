@@ -3,7 +3,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const {envVars} = require('@s-ui/bundler/shared/index.js')
-const {getSWCConfig} = require('@s-ui/typescript-config')
+const {getSWCConfig} = require('@s-ui/compiler-config')
 const {
   bundlerConfig,
   clientConfig,

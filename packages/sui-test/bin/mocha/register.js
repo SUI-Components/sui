@@ -1,5 +1,5 @@
 const {serverConfig} = require('../../src/config.js')
-const {getSWCConfig} = require('@s-ui/typescript-config')
+const {getSWCConfig} = require('@s-ui/compiler-config')
 
 const {
   forceTranspilation = [],

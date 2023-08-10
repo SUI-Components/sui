@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.27.0-typescript.4",
+  "version": "8.27.0-typescript.5",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -23,7 +23,7 @@
     "@babel/plugin-transform-modules-commonjs": "7.18.6",
     "@babel/register": "7.18.9",
     "@s-ui/helpers": "1",
-    "@s-ui/typescript-config": "typescript",
+    "@s-ui/compiler-config": "typescript",
     "@swc/core": "1.3.75",
     "@swc/register": "0.1.10",
     "babel-loader": "8.2.5",
