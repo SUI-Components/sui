@@ -18,7 +18,7 @@ const webpackConfig = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
     alias: {...aliasFromConfig},
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.json', '.ts', '.tsx'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: './server.js',
