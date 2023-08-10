@@ -34,7 +34,7 @@ export const DEVICE_TYPES = {
 }
 
 const getNormalizedPathname = pathname => {
-  return pathname.replaceAll('*', '_')
+  return pathname.replaceAll('*', '_').replace(/\\/g, '')
 }
 
 export default function WebVitalsReporter({
