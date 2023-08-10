@@ -2,7 +2,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 const {config} = require('./index.js')
-const {getSWCConfig} = require('@s-ui/typescript-config')
+const {getSWCConfig} = require('@s-ui/compiler-config')
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
