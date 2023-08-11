@@ -3,6 +3,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const {
   envVars,
@@ -27,7 +28,6 @@ process.env.NODE_ENV = 'development'
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
-/** @type {WebpackConfig} */
 const webpackConfig = {
   mode: 'development',
   context: path.resolve(PWD, 'src'),
@@ -50,10 +50,13 @@ const webpackConfig = {
     extensions: ['.js', '.json']
   },
   stats: 'errors-only',
-  entry: cleanList([
-    require.resolve('./utils/webpackHotDevClient.js'),
-    MAIN_ENTRY_POINT
-  ]),
+  entry: {
+    app: MAIN_ENTRY_POINT
+  },
+  devServer: {
+    static: outputPath,
+    hot: true
+  },
   target: 'web',
   optimization: {
     checkWasmTypes: false,
@@ -78,12 +81,13 @@ const webpackConfig = {
       template: './index.html',
       inject: true,
       env: process.env
-    })
+    }),
+    new ReactRefreshWebpackPlugin()
   ],
   resolveLoader,
   module: {
     rules: cleanList([
-      createBabelRules({supportLegacyBrowsers}),
+      createBabelRules({supportLegacyBrowsers, isDevelopment: true}),
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([
