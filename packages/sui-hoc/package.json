@@ -3,7 +3,6 @@
   "version": "1.36.0",
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
-  "type": "module",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepublishOnly": "npm run lib"
