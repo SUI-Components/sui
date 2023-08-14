@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.6.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-sass-loader:** upgrade versions for security ([0a4f9c4](https://github.com/SUI-Components/sui/commit/0a4f9c4defb7c9d6c2ec52b174f051320702f640))
+
+
+
 # 1.5.0 (2022-12-23)
 
 
