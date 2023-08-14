@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.36.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** upgrade versions for security ([5ce05a6](https://github.com/SUI-Components/sui/commit/5ce05a6f233b2ad97a164ade36e8702aed9fd8b7))
+
+
+
 # 2.35.0 (2023-06-09)
 
 
