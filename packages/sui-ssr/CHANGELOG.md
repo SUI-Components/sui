@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.12.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** upgrade versions for security ([9566aac](https://github.com/SUI-Components/sui/commit/9566aacb02bf080ddb17fe519ec5ec94d8e418bd))
+
+
+
 # 8.11.0 (2022-10-06)
 
 
