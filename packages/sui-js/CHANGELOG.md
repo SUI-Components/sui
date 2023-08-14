@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.27.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-js:** upgrade versions for security ([f6877b6](https://github.com/SUI-Components/sui/commit/f6877b6c7cc4db3ca84f69f15f4bef8a3517d957))
+
+
+
 # 2.26.0 (2022-06-28)
 
 
