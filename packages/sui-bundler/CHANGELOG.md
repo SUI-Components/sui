@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.39.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** upgrade versions for security ([1b5d3aa](https://github.com/SUI-Components/sui/commit/1b5d3aa3659bc8f363b6ea9cf34305a04e2457c5))
+
+
+
 # 9.38.0 (2023-05-04)
 
 
