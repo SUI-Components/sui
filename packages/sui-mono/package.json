@@ -14,7 +14,7 @@
     "enquirer": "2.3.6",
     "git-url-parse": "13.0.0",
     "glob": "8.0.3",
-    "word-wrap": "1.2.3"
+    "word-wrap": "1.2.4"
   },
   "repository": {
     "type": "git",
