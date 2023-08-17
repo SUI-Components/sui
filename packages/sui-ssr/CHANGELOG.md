@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.13.0 (2023-08-17)
+
+
+### Features
+
+* **packages/sui-ssr:** update gir-url-parse version ([437c183](https://github.com/SUI-Components/sui/commit/437c1837a8fa089be126d5c7bf2b6e977805cb02))
+
+
+
 # 8.12.0 (2023-08-14)
 
 
