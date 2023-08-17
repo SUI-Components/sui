@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.23.0 (2023-08-17)
+
+
+### Features
+
+* **packages/sui-pde:** update version optimizely ([e0ab95e](https://github.com/SUI-Components/sui/commit/e0ab95e5697698116c018c7d34b34c1dcc2176b8))
+
+
+
 # 2.22.0 (2023-04-03)
 
 
