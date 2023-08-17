@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.37.0 (2023-08-17)
+
+
+### Features
+
+* **packages/sui-mono:** update gir-url-parse version ([dd0c681](https://github.com/SUI-Components/sui/commit/dd0c681f5935354b1eaba6317f591dffa15dfec6))
+
+
+
 # 2.36.0 (2023-08-14)
 
 
