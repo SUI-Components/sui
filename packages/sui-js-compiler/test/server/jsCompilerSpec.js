@@ -85,10 +85,12 @@ describe('@s-ui/js-compiler', () => {
     await fs.outputFile(tsConfigPath, JSON.stringify(tsConfig))
 
     // WHEN execute the compiler command
-    const {stdout} = await exec('node ../../index.js', {
+    const {stdout, stderr} = await exec('node ../../index.js', {
       cwd
     })
+    console.log({stdout, stderr})
     const compiledFilenames = await fs.readdir(libPath)
+    console.log({compiledFilenames})
 
     // THEN package files and types are properly compiled
     expect(stdout).to.contain('[sui-js-compiler]')
