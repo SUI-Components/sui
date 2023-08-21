@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.14.0 (2023-08-21)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** update dep for security issue ([34706c9](https://github.com/SUI-Components/sui/commit/34706c95ca06e55422ad333961781f00305a456e))
+
+
+
 # 8.13.0 (2023-08-17)
 
 
