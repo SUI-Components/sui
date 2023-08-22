@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.15.0 (2023-08-22)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** remove copy-paste dependency to fix security issue ([2ac2885](https://github.com/SUI-Components/sui/commit/2ac28855ff5890dd72d034368c572503c9022046))
+
+
+
 # 8.14.0 (2023-08-21)
 
 
