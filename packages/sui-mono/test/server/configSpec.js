@@ -112,4 +112,31 @@ describe('config', () => {
       expect(workspaces).to.deep.equal(['.'])
     })
   })
+
+  describe('getOverrides', () => {
+    it('returns an empty object where there are no overrides', () => {
+      const {getOverrides} = factoryConfigMethods({})
+      const overrides = getOverrides()
+      expect(overrides).to.be.deep.equal({})
+    })
+
+    it('returns overrides', () => {
+      const overrides = {
+        literals: [
+          {
+            regex: 'Lokalise:'
+          }
+        ]
+      }
+      const {getOverrides} = factoryConfigMethods({
+        config: {
+          'sui-mono': {
+            overrides
+          }
+        }
+      })
+
+      expect(getOverrides()).to.be.deep.equal(overrides)
+    })
+  })
 })

@@ -6,7 +6,8 @@ const {readJsonSync} = require('fs-extra')
 const {
   checkIsMonoPackage,
   getProjectName,
-  getWorkspaces
+  getWorkspaces,
+  getOverrides
 } = require('./config.js')
 
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
@@ -48,6 +49,58 @@ const flatten = status =>
 
 const getPkgFromScope = scope => (scope === 'Root' ? '.' : scope)
 
+const getOverride = ({overrides, header}) => {
+  return Object.entries(overrides).find(([, configs]) => {
+    return configs.find(({regex}) => header.match(new RegExp(regex)))
+  })
+}
+
+const getTransform =
+  ({status, packages, overrides = getOverrides()} = {}) =>
+  (commit, cb) => {
+    const {scope, header} = commit
+    const [pkgToOverride] = getOverride({overrides, header}) ?? []
+    const pkg = pkgToOverride ?? getPkgFromScope(scope)
+
+    let toPush = null
+
+    if (!packages.includes(pkg)) return cb()
+
+    if (pkgToOverride) {
+      status[pkgToOverride].increment = Math.max(
+        status[pkgToOverride].increment,
+        PACKAGE_VERSION_INCREMENT.MINOR
+      )
+      toPush = commit
+    }
+
+    if (isCommitReleaseTrigger(commit)) {
+      status[pkg].increment = Math.max(
+        status[pkg].increment,
+        PACKAGE_VERSION_INCREMENT.MINOR
+      )
+      toPush = commit
+    }
+
+    if (isCommitBreakingChange(commit)) {
+      status[pkg].increment = Math.max(
+        status[pkg].increment,
+        PACKAGE_VERSION_INCREMENT.MAJOR
+      )
+      toPush = commit
+    }
+
+    if (toPush) {
+      status[pkg].commits.push(commit)
+    }
+
+    if (commit.type === 'release') {
+      status[pkg].increment = PACKAGE_VERSION_INCREMENT.NOTHING
+      status[pkg].commits = []
+    }
+    cb()
+  }
+
 const check = () =>
   new Promise(resolve => {
     /**
@@ -71,37 +124,7 @@ const check = () =>
       {
         preset: 'angular',
         append: true,
-        transform: (commit, cb) => {
-          const pkg = getPkgFromScope(commit.scope)
-
-          if (!packagesWithChangelog.includes(pkg)) return cb()
-
-          let toPush = null
-
-          if (isCommitReleaseTrigger(commit)) {
-            status[pkg].increment = Math.max(
-              status[pkg].increment,
-              PACKAGE_VERSION_INCREMENT.MINOR
-            )
-            toPush = commit
-          }
-
-          if (isCommitBreakingChange(commit)) {
-            status[pkg].increment = Math.max(
-              status[pkg].increment,
-              PACKAGE_VERSION_INCREMENT.MAJOR
-            )
-            toPush = commit
-          }
-          if (toPush) {
-            status[pkg].commits.push(commit)
-          }
-          if (commit.type === 'release') {
-            status[pkg].increment = PACKAGE_VERSION_INCREMENT.NOTHING
-            status[pkg].commits = []
-          }
-          cb()
-        }
+        transform: getTransform({status, packages: packagesWithChangelog})
       },
       {},
       gitRawCommitsOpts
@@ -114,6 +137,7 @@ const check = () =>
 
 module.exports = {
   check,
+  getTransform,
   isCommitBreakingChange,
   isCommitReleaseTrigger
 }
