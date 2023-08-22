@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.16.0 (2023-08-22)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** update express dep to fix security issue ([10f4b05](https://github.com/SUI-Components/sui/commit/10f4b0514b573c9e201ab5942c3fb259cc45ef01))
+
+
+
 # 8.15.0 (2023-08-22)
 
 
