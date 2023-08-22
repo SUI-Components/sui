@@ -4,7 +4,6 @@ const program = require('commander')
 const path = require('path')
 const {readFileSync, rmSync, writeFileSync} = require('fs')
 const {copyFile} = require('fs/promises')
-const ncp = require('copy-paste')
 const webpack = require('webpack')
 
 const linkLoaderConfigBuilder = require('@s-ui/bundler/loaders/linkLoaderConfigBuilder')
@@ -74,9 +73,6 @@ const build = () =>
         jsonStats.warnings.map(warning => console.log(warning))
       }
 
-      const [serverEntryPoint] = jsonStats.assetsByChunkName.main
-      const SERVER_ENTRY_POINT = path.join(BUILD_SERVER_PATH, serverEntryPoint)
-
       const html = readFileSync(path.join(PUBLIC_PATH, 'index.html'), 'utf-8')
       const htmlWithoutThirdParties = removeMarkedTags(html)
       writeFileSync(
@@ -101,8 +97,6 @@ const build = () =>
       copy500.status === 'fulfilled' && console.log('500.html copied!')
 
       verbose && console.log(`Webpack stats: ${stats}`)
-      console.log(`Server entry point copy to clipboard ${SERVER_ENTRY_POINT}`)
-      ncp.copy(SERVER_ENTRY_POINT)
 
       resolve()
     })
