@@ -82,7 +82,7 @@ const webpackConfig = {
       inject: true,
       env: process.env
     }),
-    new ReactRefreshWebpackPlugin()
+    new ReactRefreshWebpackPlugin({overlay: false})
   ],
   resolveLoader,
   module: {
