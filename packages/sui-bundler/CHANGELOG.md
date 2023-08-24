@@ -1,11 +1,25 @@
 # CHANGELOG
 
+# 9.40.0 (2023-08-24)
+
+
+### Features
+
+* **packages/sui-bundler:** disable error overlay ([2da7c44](https://github.com/SUI-Components/sui/commit/2da7c44cb79b15ab466dfef7cad34cb46bbdf2d6))
+
+
+
 # 9.39.0 (2023-08-14)
 
 
 ### Bug Fixes
 
 * **packages/sui-bundler:** upgrade versions for security ([1b5d3aa](https://github.com/SUI-Components/sui/commit/1b5d3aa3659bc8f363b6ea9cf34305a04e2457c5))
+
+
+### Features
+
+* **packages/sui-bundler:** add fast refresh support ([b47bc8c](https://github.com/SUI-Components/sui/commit/b47bc8cdc2ae6c4862508b3b6c6cb39082865b08))
 
 
 
