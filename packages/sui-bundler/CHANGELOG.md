@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.41.0 (2023-08-28)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Fix bundler error display ([31a1499](https://github.com/SUI-Components/sui/commit/31a1499c740709196ac08ed0cab93885f09fa711))
+
+
+
 # 9.40.0 (2023-08-24)
 
 
