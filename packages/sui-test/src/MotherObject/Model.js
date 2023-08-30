@@ -38,6 +38,10 @@ export const ModelMotherObjectFactory = Model =>
       return this._model
     }
 
+    get faker() {
+      return this._faker
+    }
+
     set model(nextModel) {
       this._model = nextModel
     }

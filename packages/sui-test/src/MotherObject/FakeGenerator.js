@@ -43,6 +43,10 @@ export class FakeGenerator {
     return this._faker.location.city()
   }
 
+  email() {
+    return this._faker.internet.email()
+  }
+
   uuid() {
     return this._faker.datatype.uuid()
   }
