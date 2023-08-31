@@ -18,10 +18,18 @@ export const RequestMotherObjectFactory = (FetchFetcher, {InlineError}) =>
       this._faker = FakeGenerator.create()
     }
 
+    generate() {
+      throw new Error('[RequestMotherObject#generate] Should be implemented')
+    }
+
     request({url, method = 'get'}) {
       this._url = url
       this._method = method
       return this
+    }
+
+    get faker() {
+      return this._faker
     }
 
     success() {

@@ -48,7 +48,7 @@ export class FakeGenerator {
   }
 
   uuid() {
-    return this._faker.datatype.uuid()
+    return this._faker.string.uuid()
   }
 
   words({count, replacer = IDENTITY_FN}) {
@@ -60,7 +60,7 @@ export class FakeGenerator {
   }
 
   date({from, to} = {}) {
-    return this._faker.date.between(from, to)
+    return this._faker.date.between({from, to})
   }
 
   pick(list) {
