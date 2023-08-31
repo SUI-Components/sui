@@ -89,16 +89,6 @@ export class MockFetcherManager {
       }
 
       return this._originalsFetcher[method].apply(this, args)
-
-      // switch (method) {
-      //   case 'get':
-      //   case 'delete':
-      //     return this._axios[method](url, body)
-      //   case 'post':
-      //   case 'put':
-      //   case 'patch':
-      //     return this._axios[method](url, body, options)
-      // }
     }
   }
 }
