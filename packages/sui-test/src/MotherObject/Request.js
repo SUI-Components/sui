@@ -68,6 +68,10 @@ export const RequestMotherObjectFactory = (FetchFetcher, {InlineError}) =>
       return this._mock
     }
 
+    get faker() {
+      return this._faker
+    }
+
     set mock(nextMock) {
       this._mock = nextMock
       this.updateMock()
@@ -89,9 +93,5 @@ export const RequestMotherObjectFactory = (FetchFetcher, {InlineError}) =>
         url: this._url,
         method: this._method
       })
-    }
-
-    restore() {
-      this._mockFetcherManager.restore()
     }
   }
