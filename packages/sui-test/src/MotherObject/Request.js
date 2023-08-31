@@ -17,6 +17,7 @@ export class MockFetcherManager {
     if (!_instance)
       return console.warn('Unabled restore a not init MockFetcherManager')
     _instance.restore()
+    _instance = undefined
   }
 
   constructor(FetchFetcher, {InlineError}) {
