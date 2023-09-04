@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.36.0 (2023-08-17)
+
+
+### Features
+
+* **packages/sui-studio:** update gir-url-parse version ([d4c9ef4](https://github.com/SUI-Components/sui/commit/d4c9ef466b1cff99b0f4714949dcb790f5f5b27e))
+
+
+
 # 11.35.0 (2023-07-18)
 
 

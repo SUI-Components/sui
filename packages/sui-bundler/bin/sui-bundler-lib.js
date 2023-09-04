@@ -73,7 +73,18 @@ log.processing('Generating minified bundle...')
 webpack(webpackConfig).run((error, stats) => {
   if (error) {
     showError(error, program)
-    return 1
+    process.exit(1)
+  }
+
+  if (stats.hasErrors()) {
+    const jsonStats = stats.toJson('errors-warnings')
+    jsonStats.errors?.forEach(error => log.error(error.message))
+    process.exit(1)
+  }
+
+  if (stats.hasWarnings()) {
+    const jsonStats = stats.toJson('errors-warnings')
+    jsonStats.warnings?.forEach(warning => log.warn(warning.message))
   }
 
   if (stats.hasErrors() || stats.hasWarnings()) {
@@ -86,6 +97,4 @@ webpack(webpackConfig).run((error, stats) => {
   log.success(
     `Your library is compiled in production mode in: \n${outputFolder}`
   )
-
-  return 0
 })

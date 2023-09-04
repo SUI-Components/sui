@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "9.38.0",
+  "version": "9.41.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -47,9 +47,11 @@
     "strip-ansi": "6.0.1",
     "style-loader": "3.3.1",
     "url": "0.11.0",
-    "webpack": "5.74.0",
+    "webpack": "5.82.1",
     "webpack-dev-server": "4.10.0",
     "webpack-manifest-plugin": "5.0.0",
-    "webpack-node-externals": "3.0.0"
+    "webpack-node-externals": "3.0.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
+    "react-refresh": "0.14.0"
   }
 }

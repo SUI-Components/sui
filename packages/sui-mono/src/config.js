@@ -45,6 +45,9 @@ function factoryConfigMethods(packageFile) {
     getPublishAccess: ({localPackageConfig} = {}) => {
       return getPublishAccess({localPackageConfig, packageConfig})
     },
+    getOverrides: () => {
+      return packageConfig['sui-mono']?.overrides ?? {}
+    },
     getWorkspaces: () => getWorkspaces(workspaces)
   }
 }
