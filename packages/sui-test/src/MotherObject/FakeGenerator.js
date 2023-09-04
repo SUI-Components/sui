@@ -2,20 +2,20 @@ import {faker} from '@faker-js/faker'
 
 const IDENTITY_FN = i => i
 
-let instacenRndID
+let instanceRndID
 export class RandomID {
   static create() {
-    if (instacenRndID) return instacenRndID
+    if (instanceRndID) return instanceRndID
     const seed =
       process.env.SEED || Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER)
-    instacenRndID = new RandomID(seed)
+    instanceRndID = new RandomID(seed)
 
     console.log(`[RandomID.create] Faker created with seed: ${seed}`)
-    return instacenRndID
+    return instanceRndID
   }
 
   static restore() {
-    instacenRndID = undefined
+    instanceRndID = undefined
   }
 
   constructor(id) {
