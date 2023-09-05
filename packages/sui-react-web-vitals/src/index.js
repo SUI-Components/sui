@@ -71,21 +71,34 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
+    const getTarget = ({name, attribution}) => {
+      switch (name) {
+        case 'CLS':
+          return attribution.largestShiftTarget
+        case 'LCP':
+          return attribution.element
+        default:
+          return attribution.eventTarget
+      }
+    }
+
     const handleAllChanges = ({attribution, name, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname()
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded || !logger?.log || amount < thresholds[name]) return
+      if (isExcluded || !logger?.cwv || amount < thresholds[name]) return
 
-      logger.log(
-        JSON.stringify({
-          name: `cwv.${name.toLowerCase()}`,
-          amount,
-          ...attribution
-        })
-      )
+      const target = getTarget({name, attribution})
+
+      logger.cwv({
+        name: `cwv.${name.toLowerCase()}`,
+        amount,
+        path: pathname,
+        target,
+        loadState: attribution.loadState
+      })
     }
 
     const handleChange = ({name, value}) => {
