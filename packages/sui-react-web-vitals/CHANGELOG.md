@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.7.0 (2023-09-05)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** use cwv instead of log ([e5be9ec](https://github.com/SUI-Components/sui/commit/e5be9ecc49d33db9b5201efe88b510632d5fa413))
+
+
+
 # 1.6.0 (2023-08-10)
 
 
