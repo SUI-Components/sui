@@ -100,7 +100,7 @@ export default function WebVitalsReporter({
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded || !logger?.cwv || rating !== RATING.good) return
+      if (isExcluded || !logger?.cwv || rating === RATING.good) return
 
       const target = getTarget({name, attribution})
 
