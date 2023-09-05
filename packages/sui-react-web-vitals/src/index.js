@@ -16,7 +16,19 @@ export const METRICS = {
   TTFB: 'TTFB'
 }
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
+// https://github.com/GoogleChrome/web-vitals#metric
+const RATING = {
+  good: 'good',
+  needsImprovement: 'needs-improvement',
+  poor: 'poor'
+}
+
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [
+  METRICS.CLS,
+  METRICS.FID,
+  METRICS.INP,
+  METRICS.LCP
+]
 
 const DEFAULT_CWV_THRESHOLDS = {
   [METRICS.CLS]: 100,
@@ -82,13 +94,13 @@ export default function WebVitalsReporter({
       }
     }
 
-    const handleAllChanges = ({attribution, name, value}) => {
+    const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname()
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded || !logger?.cwv || amount < thresholds[name]) return
+      if (isExcluded || !logger?.cwv || rating === RATING.good) return
 
       const target = getTarget({name, attribution})
 
@@ -160,7 +172,7 @@ export default function WebVitalsReporter({
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (DEFAULT_METRICS_REPORTING_ALL_CHANGES.includes(metric))
+      if (metricsAllChanges.includes(metric))
         reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
