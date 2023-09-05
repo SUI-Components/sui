@@ -16,7 +16,12 @@ export const METRICS = {
   TTFB: 'TTFB'
 }
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [
+  METRICS.CLS,
+  METRICS.FID,
+  METRICS.INP,
+  METRICS.LCP
+]
 
 const DEFAULT_CWV_THRESHOLDS = {
   [METRICS.CLS]: 100,
@@ -160,7 +165,7 @@ export default function WebVitalsReporter({
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (DEFAULT_METRICS_REPORTING_ALL_CHANGES.includes(metric))
+      if (metricsAllChanges.includes(metric))
         reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
