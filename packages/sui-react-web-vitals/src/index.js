@@ -85,9 +85,9 @@ export default function WebVitalsReporter({
 
     const getTarget = ({name, attribution}) => {
       switch (name) {
-        case 'CLS':
+        case METRICS.CLS:
           return attribution.largestShiftTarget
-        case 'LCP':
+        case METRICS.LCP:
           return attribution.element
         default:
           return attribution.eventTarget
