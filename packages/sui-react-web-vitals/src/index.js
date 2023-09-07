@@ -18,9 +18,9 @@ export const METRICS = {
 
 // https://github.com/GoogleChrome/web-vitals#metric
 const RATING = {
-  good: 'good',
-  needsImprovement: 'needs-improvement',
-  poor: 'poor'
+  GOOD: 'good',
+  NEEDS_IMPROVEMENT: 'needs-improvement',
+  POOR: 'poor'
 }
 
 const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [
@@ -103,7 +103,7 @@ export default function WebVitalsReporter({
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded || !logger?.cwv || rating === RATING.good) return
+      if (isExcluded || !logger?.cwv || rating === RATING.GOOD) return
 
       const target = getTarget({name, attribution})
 
