@@ -46,7 +46,15 @@ export const DEVICE_TYPES = {
 }
 
 const getNormalizedPathname = pathname => {
-  return pathname.replaceAll('*', '_').replace(/\\/g, '')
+  return pathname.replace(/[^a-z0-9]/gi, '')
+}
+
+const getPathname = route => {
+  return route?.path || route?.regexp?.toString()
+}
+
+const getPathIsRegexp = route => {
+  return Boolean(route?.path)
 }
 
 export default function WebVitalsReporter({
@@ -60,6 +68,8 @@ export default function WebVitalsReporter({
 }) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
+  const {routes} = router
+  const route = routes[routes.length - 1]
   const onReportRef = useRef(onReport)
 
   useEffect(() => {
@@ -67,15 +77,7 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
-    const getPathname = () => {
-      const {routes} = router
-      const route = routes[routes.length - 1]
-      return route?.path || route?.regexp?.toString()
-    }
-
     const getRouteid = () => {
-      const {routes} = router
-      const route = routes[routes.length - 1]
       return route?.id
     }
 
@@ -96,7 +98,8 @@ export default function WebVitalsReporter({
 
     const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
-      const pathname = getPathname()
+      const pathname = getPathname(route)
+      const pathIsRegexp = getPathIsRegexp(route)
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
@@ -107,7 +110,7 @@ export default function WebVitalsReporter({
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
         amount,
-        path: pathname,
+        path: pathIsRegexp ? getNormalizedPathname(pathname) : pathname,
         target,
         loadState: attribution.loadState
       })
@@ -115,7 +118,8 @@ export default function WebVitalsReporter({
 
     const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
-      const pathname = getPathname()
+      const pathname = getPathname(route)
+      const pathIsRegexp = getPathIsRegexp(route)
       const routeid = getRouteid()
       const type = getDeviceType()
       const isExcluded =
@@ -127,7 +131,7 @@ export default function WebVitalsReporter({
         onReport({
           name,
           amount: value,
-          pathname,
+          pathname: pathIsRegexp ? getNormalizedPathname(pathname) : pathname,
           routeid,
           type
         })
@@ -148,7 +152,7 @@ export default function WebVitalsReporter({
           },
           {
             key: 'pathname',
-            value: getNormalizedPathname(pathname)
+            value: pathIsRegexp ? getNormalizedPathname(pathname) : pathname
           },
           ...(routeid
             ? [
