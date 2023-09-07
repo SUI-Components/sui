@@ -54,7 +54,7 @@ const getPathname = route => {
 }
 
 const getPathIsRegexp = route => {
-  return Boolean(route?.path)
+  return !route?.path
 }
 
 export default function WebVitalsReporter({
