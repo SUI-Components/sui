@@ -94,7 +94,7 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
   const skipCiSuffix = skipCi ? ' [skip ci]' : ''
   const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
 
-  await exec(`git commit -m --no-verify "${commitMsg}"`, {cwd})
+  await exec(`git commit -m "${commitMsg}"`, {cwd})
 
   await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
   await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
@@ -107,7 +107,7 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
     await exec(`npm publish --access=${publishAccess}`, {cwd})
   }
 
-  await exec('git push -f --tags --no-verify origin HEAD')
+  await exec('git push -f --tags origin HEAD')
 }
 
 const checkIsMasterBranchActive = async () => {
