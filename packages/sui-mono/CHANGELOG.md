@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.39.0 (2023-09-07)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove --no-verify flag ([9ca7299](https://github.com/SUI-Components/sui/commit/9ca72990c8c476a326e6b64fa9206c3e24880ec9))
+
+
+### Features
+
+* **packages/sui-mono:** add no-verify flag to publish npm packages ([12ae25f](https://github.com/SUI-Components/sui/commit/12ae25f804146653b55ebfad645502d5e2806be4))
+
+
+
 # 2.38.0 (2023-08-22)
 
 
