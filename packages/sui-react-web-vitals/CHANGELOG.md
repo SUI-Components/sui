@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.9.0 (2023-09-08)
+
+
+### Bug Fixes
+
+* **packages/sui-react-web-vitals:** fix path is regexp logic ([f2427bc](https://github.com/SUI-Components/sui/commit/f2427bc686f81464e869adc4dabc2b006ed5b006))
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** improve logic for pathname normalisation ([e214243](https://github.com/SUI-Components/sui/commit/e214243bdcd3f23dacdb1e91e2abd1fdc55aa8ee))
+
+
+
 # 1.8.0 (2023-09-05)
 
 
