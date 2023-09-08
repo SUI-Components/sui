@@ -53,8 +53,8 @@ const getPathname = route => {
   return route?.path || route?.regexp?.toString()
 }
 
-const getPathIsRegexp = route => {
-  return !route?.path
+const getHasPathOnRoute = route => {
+  return route?.path
 }
 
 export default function WebVitalsReporter({
@@ -99,7 +99,7 @@ export default function WebVitalsReporter({
     const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
-      const pathIsRegexp = getPathIsRegexp(route)
+      const hasPathOnRoute = getHasPathOnRoute(route)
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
@@ -110,7 +110,7 @@ export default function WebVitalsReporter({
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
         amount,
-        path: pathIsRegexp ? getNormalizedPathname(pathname) : pathname,
+        path: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
         target,
         loadState: attribution.loadState
       })
@@ -119,7 +119,7 @@ export default function WebVitalsReporter({
     const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
       const pathname = getPathname(route)
-      const pathIsRegexp = getPathIsRegexp(route)
+      const hasPathOnRoute = getHasPathOnRoute(route)
       const routeid = getRouteid()
       const type = getDeviceType()
       const isExcluded =
@@ -131,7 +131,7 @@ export default function WebVitalsReporter({
         onReport({
           name,
           amount: value,
-          pathname: pathIsRegexp ? getNormalizedPathname(pathname) : pathname,
+          pathname: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
           routeid,
           type
         })
@@ -152,7 +152,7 @@ export default function WebVitalsReporter({
           },
           {
             key: 'pathname',
-            value: pathIsRegexp ? getNormalizedPathname(pathname) : pathname
+            value: hasPathOnRoute ? pathname : getNormalizedPathname(pathname)
           },
           ...(routeid
             ? [
