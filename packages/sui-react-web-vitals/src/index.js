@@ -54,7 +54,7 @@ const getPathname = route => {
 }
 
 const getHasPathOnRoute = route => {
-  return route?.path
+  return Boolean(route?.path)
 }
 
 export default function WebVitalsReporter({
