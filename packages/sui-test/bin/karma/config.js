@@ -102,6 +102,7 @@ const config = {
         __MOCKS_API_PATH__: JSON.stringify(
           process.env.MOCKS_API_PATH || process.env.PWD + '/mocks/routes'
         ),
+        'process.env.SEED': JSON.stringify(process.env.SEED),
         __BASE_DIR__: JSON.stringify(process.env.PWD),
         PATTERN: JSON.stringify(process.env.PATTERN),
         CATEGORIES: JSON.stringify(process.env.CATEGORIES)
