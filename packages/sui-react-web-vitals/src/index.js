@@ -16,7 +16,19 @@ export const METRICS = {
   TTFB: 'TTFB'
 }
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.LCP, METRICS.INP]
+// https://github.com/GoogleChrome/web-vitals#metric
+const RATING = {
+  GOOD: 'good',
+  NEEDS_IMPROVEMENT: 'needs-improvement',
+  POOR: 'poor'
+}
+
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [
+  METRICS.CLS,
+  METRICS.FID,
+  METRICS.INP,
+  METRICS.LCP
+]
 
 const DEFAULT_CWV_THRESHOLDS = {
   [METRICS.CLS]: 100,
@@ -34,7 +46,15 @@ export const DEVICE_TYPES = {
 }
 
 const getNormalizedPathname = pathname => {
-  return pathname.replaceAll('*', '_').replace(/\\/g, '')
+  return pathname.replace(/[^a-z0-9]/gi, '')
+}
+
+const getPathname = route => {
+  return route?.path || route?.regexp?.toString()
+}
+
+const getHasPathOnRoute = route => {
+  return Boolean(route?.path)
 }
 
 export default function WebVitalsReporter({
@@ -48,6 +68,8 @@ export default function WebVitalsReporter({
 }) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
+  const {routes} = router
+  const route = routes[routes.length - 1]
   const onReportRef = useRef(onReport)
 
   useEffect(() => {
@@ -55,15 +77,7 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
-    const getPathname = () => {
-      const {routes} = router
-      const route = routes[routes.length - 1]
-      return route?.path || route?.regexp?.toString()
-    }
-
     const getRouteid = () => {
-      const {routes} = router
-      const route = routes[routes.length - 1]
       return route?.id
     }
 
@@ -71,26 +85,41 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleAllChanges = ({attribution, name, value}) => {
+    const getTarget = ({name, attribution}) => {
+      switch (name) {
+        case METRICS.CLS:
+          return attribution.largestShiftTarget
+        case METRICS.LCP:
+          return attribution.element
+        default:
+          return attribution.eventTarget
+      }
+    }
+
+    const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
-      const pathname = getPathname()
+      const pathname = getPathname(route)
+      const hasPathOnRoute = getHasPathOnRoute(route)
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded || !logger?.log || amount < thresholds[name]) return
+      if (isExcluded || !logger?.cwv || rating === RATING.GOOD) return
 
-      logger.log(
-        JSON.stringify({
-          name: `cwv.${name.toLowerCase()}`,
-          amount,
-          ...attribution
-        })
-      )
+      const target = getTarget({name, attribution})
+
+      logger.cwv({
+        name: `cwv.${name.toLowerCase()}`,
+        amount,
+        path: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
+        target,
+        loadState: attribution.loadState
+      })
     }
 
     const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
-      const pathname = getPathname()
+      const pathname = getPathname(route)
+      const hasPathOnRoute = getHasPathOnRoute(route)
       const routeid = getRouteid()
       const type = getDeviceType()
       const isExcluded =
@@ -102,7 +131,7 @@ export default function WebVitalsReporter({
         onReport({
           name,
           amount: value,
-          pathname,
+          pathname: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
           routeid,
           type
         })
@@ -123,7 +152,7 @@ export default function WebVitalsReporter({
           },
           {
             key: 'pathname',
-            value: getNormalizedPathname(pathname)
+            value: hasPathOnRoute ? pathname : getNormalizedPathname(pathname)
           },
           ...(routeid
             ? [
@@ -147,7 +176,7 @@ export default function WebVitalsReporter({
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (DEFAULT_METRICS_REPORTING_ALL_CHANGES.includes(metric))
+      if (metricsAllChanges.includes(metric))
         reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })

@@ -1,5 +1,38 @@
 # CHANGELOG
 
+# 1.9.0 (2023-09-08)
+
+
+### Bug Fixes
+
+* **packages/sui-react-web-vitals:** fix path is regexp logic ([f2427bc](https://github.com/SUI-Components/sui/commit/f2427bc686f81464e869adc4dabc2b006ed5b006))
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** improve logic for pathname normalisation ([e214243](https://github.com/SUI-Components/sui/commit/e214243bdcd3f23dacdb1e91e2abd1fdc55aa8ee))
+
+
+
+# 1.8.0 (2023-09-05)
+
+
+### Bug Fixes
+
+* **packages/sui-react-web-vitals:** use metricsAllChanges and add more default metrics ([056247f](https://github.com/SUI-Components/sui/commit/056247fda7af44e0ce19ddce7fe1dc281160ef27))
+* **packages/sui-react-web-vitals:** validate if the rating is EQUAL to 'good' ([2655250](https://github.com/SUI-Components/sui/commit/265525050f7bbcf906ede1acf2efb22fc4febf23))
+
+
+
+# 1.7.0 (2023-09-05)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** use cwv instead of log ([e5be9ec](https://github.com/SUI-Components/sui/commit/e5be9ecc49d33db9b5201efe88b510632d5fa413))
+
+
+
 # 1.6.0 (2023-08-10)
 
 
