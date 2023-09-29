@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.42.0 (2023-09-29)
+
+
+### Features
+
+* **packages/sui-bundler:** Add option to save stats.json in build ([a46a346](https://github.com/SUI-Components/sui/commit/a46a346124da17fa2852d05a85a98afabf79094d))
+
+
+
 # 9.41.0 (2023-08-28)
 
 
