@@ -20,7 +20,7 @@
     "@pactflow/pact-msw-adapter": "1.2.1",
     "@s-ui/mock": "1",
     "commander": "8.3.0",
-    "headers-polyfill": "3.0.10"
+    "headers-polyfill": "3.1.2"
   },
   "devDependencies": {
     "@s-ui/domain": "2"
