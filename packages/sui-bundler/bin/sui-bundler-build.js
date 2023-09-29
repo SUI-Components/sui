@@ -92,7 +92,7 @@ compiler.run(async (error, stats) => {
 
   if (saveStats) {
     const filePath = `${process.cwd()}/public/stats.json`
-    fs.writeFileSync(filePath, JSON.stringify(stats.toJson()), {
+    fs.writeFileSync(filePath, JSON.stringify(stats.toJson(), null, 2), {
       encoding: 'utf8'
     })
   }
