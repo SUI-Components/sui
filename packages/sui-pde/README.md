@@ -229,6 +229,18 @@ const optimizelyAdapter = new OptimizelyAdapter({
 })
 ```
 
+#### Track Experiment Viewed
+
+In order to reduce unnecessary calls to Segment, the `Experiment Viewed` event is disabled by default.
+
+If you need to track how many times your experiment has been viewed, you should set the `shouldTrackExperimentViewed` argument to true.
+
+```js
+const {isActive, variables} = useFeature('myFeatureKey',  undefined, undefined, undefined, true)
+```
+
+A refactoring task is pending to transition the hook's positional parameters to named parameters.
+
 #### Attributes
 
 In order to pass by attributes, you'll able to do so by adding the second argument as `attributes` when using the useFeature hook. Something like this:

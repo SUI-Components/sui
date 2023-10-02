@@ -128,9 +128,19 @@ describe('when pde context is set', () => {
         })
 
         it('should send the on state experiment viewed', () => {
-          renderHook(() => useFeature('activeFeatureFlagKey'), {
-            wrapper
-          })
+          renderHook(
+            () =>
+              useFeature(
+                'activeFeatureFlagKey',
+                undefined,
+                undefined,
+                undefined,
+                true
+              ),
+            {
+              wrapper
+            }
+          )
           expect(window.analytics.track.args[0][0]).to.equal(
             'Experiment Viewed'
           )
@@ -142,12 +152,32 @@ describe('when pde context is set', () => {
 
         describe.client('when a feature is seen twice', () => {
           it('should only track one experiment viewed event', () => {
-            renderHook(() => useFeature('repeatedFeatureFlagKey'), {
-              wrapper
-            })
-            renderHook(() => useFeature('repeatedFeatureFlagKey'), {
-              wrapper
-            })
+            renderHook(
+              () =>
+                useFeature(
+                  'repeatedFeatureFlagKey',
+                  undefined,
+                  undefined,
+                  undefined,
+                  true
+                ),
+              {
+                wrapper
+              }
+            )
+            renderHook(
+              () =>
+                useFeature(
+                  'repeatedFeatureFlagKey',
+                  undefined,
+                  undefined,
+                  undefined,
+                  true
+                ),
+              {
+                wrapper
+              }
+            )
             expect(window.analytics.track.args.length).to.equal(1)
           })
         })
@@ -184,9 +214,19 @@ describe('when pde context is set', () => {
         })
 
         it('should send the off state experiment viewed', () => {
-          renderHook(() => useFeature('notActiveFeatureFlagKey'), {
-            wrapper
-          })
+          renderHook(
+            () =>
+              useFeature(
+                'notActiveFeatureFlagKey',
+                undefined,
+                undefined,
+                undefined,
+                true
+              ),
+            {
+              wrapper
+            }
+          )
           expect(window.analytics.track.args[0][0]).to.equal(
             'Experiment Viewed'
           )
@@ -238,9 +278,19 @@ describe('when pde context is set', () => {
     })
 
     it('should send experiment viewed event for every test asociated and the experiment viewed associated to the feature flag itself', () => {
-      renderHook(() => useFeature('featureKey4', {attribute1: 'value'}), {
-        wrapper
-      })
+      renderHook(
+        () =>
+          useFeature(
+            'featureKey4',
+            {attribute1: 'value'},
+            undefined,
+            undefined,
+            true
+          ),
+        {
+          wrapper
+        }
+      )
 
       // feature being called
       expect(window.analytics.track.args[0][0]).to.equal('Experiment Viewed')
@@ -315,12 +365,32 @@ describe('when pde context is set', () => {
           stubFactory(isFeatureEnabled)
         })
         it('should send only one experiment viewed event', () => {
-          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
-            wrapper
-          })
-          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
-            wrapper
-          })
+          renderHook(
+            () =>
+              useFeature(
+                'repeatedFeatureFlagKey',
+                undefined,
+                undefined,
+                undefined,
+                true
+              ),
+            {
+              wrapper
+            }
+          )
+          renderHook(
+            () =>
+              useFeature(
+                'repeatedFeatureFlagKey',
+                undefined,
+                undefined,
+                undefined,
+                true
+              ),
+            {
+              wrapper
+            }
+          )
           expect(window.analytics.track.args.length).to.equal(1)
         })
       })
@@ -338,12 +408,32 @@ describe('when pde context is set', () => {
           stubFactory(isFeatureEnabled)
         })
         it('should send two experiment viewed events', () => {
-          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
-            wrapper
-          })
-          renderHook(() => useFeature('repeatedFeatureFlagKey'), {
-            wrapper
-          })
+          renderHook(
+            () =>
+              useFeature(
+                'repeatedFeatureFlagKey',
+                undefined,
+                undefined,
+                undefined,
+                true
+              ),
+            {
+              wrapper
+            }
+          )
+          renderHook(
+            () =>
+              useFeature(
+                'repeatedFeatureFlagKey',
+                undefined,
+                undefined,
+                undefined,
+                true
+              ),
+            {
+              wrapper
+            }
+          )
           expect(window.analytics.track.args.length).to.equal(2)
         })
       })
