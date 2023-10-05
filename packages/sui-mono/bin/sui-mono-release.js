@@ -106,8 +106,6 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
     const publishAccess = getPublishAccess({localPackageConfig})
     await exec(`npm publish --access=${publishAccess}`, {cwd})
   }
-
-  await exec('git push -f --tags origin HEAD')
 }
 
 const checkIsMasterBranchActive = async () => {
@@ -181,6 +179,9 @@ checkShouldRelease()
         await releasePackage({...pkg, skipCi})
       }
 
+      await exec('npm install --package-lock-only --legacy-peer-deps --no-audit --no-fund --ignore-scripts --production=false')
+      await exec('git push -f --tags origin HEAD')
+      
       console.log(
         `[sui-mono release] ${packagesToRelease.length} packages released`
       )
