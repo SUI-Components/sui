@@ -182,6 +182,8 @@ checkShouldRelease()
       await exec(
         'npm install --package-lock-only --legacy-peer-deps --no-audit --no-fund --ignore-scripts --production=false'
       )
+      await exec('git add package-lock.json')
+      await exec('git commit -m "chore(Root): update package-lock.json')
       await exec('git push -f --tags origin HEAD')
 
       console.log(
