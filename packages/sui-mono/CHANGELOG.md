@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 2.40.0 (2023-10-06)
+
+
+### Features
+
+* **packages/sui-mono:** add lockfile support ([51405ef](https://github.com/SUI-Components/sui/commit/51405ef74149d06b974bbb1283497d7b1f9dd78a))
+* **packages/sui-mono:** commit lockfile ([e7e93be](https://github.com/SUI-Components/sui/commit/e7e93be91982952d746d6510f98d4e681c6134a3))
+* **packages/sui-mono:** update lint issues ([0ee3dc7](https://github.com/SUI-Components/sui/commit/0ee3dc7c1bb95fc1611c55bd05849ab6f8505906))
+* **packages/sui-mono:** update lockfile conditionally ([d34c8c7](https://github.com/SUI-Components/sui/commit/d34c8c7cf10f825450f96f02d83267daf72cb17a))
+
+
+
 # 2.39.0 (2023-09-07)
 
 
