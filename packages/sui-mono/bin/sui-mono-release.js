@@ -19,6 +19,7 @@ program
   .option('-T, --github-token <token>', 'github token')
   .option('-U, --github-user <user>', 'github user')
   .option('-E, --github-email <email>', 'github email')
+  .option('-L, --lock', 'Commit lock file', false)
   .option('--skip-ci', 'Add [skip ci] to release commit message', false)
   .on('--help', () => {
     console.log('  Description:')
@@ -49,6 +50,7 @@ const {
   githubEmail,
   githubToken,
   githubUser,
+  lock,
   skipCi
 } = program.opts()
 
@@ -93,7 +95,6 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
   // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
   const skipCiSuffix = skipCi ? ' [skip ci]' : ''
   const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
-
   await exec(`git commit -m "${commitMsg}"`, {cwd})
 
   await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
@@ -179,11 +180,15 @@ checkShouldRelease()
         await releasePackage({...pkg, skipCi})
       }
 
-      await exec(
-        'npm install --package-lock-only --legacy-peer-deps --no-audit --no-fund --ignore-scripts --production=false'
-      )
-      await exec('git add package-lock.json')
-      await exec('git commit -m "chore(Root): update package-lock.json')
+      if (lock) {
+        await exec(
+          'npm install --package-lock-only --legacy-peer-deps --no-audit --no-fund --ignore-scripts --production=false'
+        )
+        await exec('git add package-lock.json')
+        await exec(
+          'git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify'
+        )
+      }
       await exec('git push -f --tags origin HEAD')
 
       console.log(
