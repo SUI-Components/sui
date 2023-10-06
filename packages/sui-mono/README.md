@@ -166,7 +166,7 @@ In case you want to release via CI the `--github-user` `--github-email` and `--g
 sui-mono release --github-user [username] --github-email [user email] --github-token [TOKEN]
 ```
 
-If you want the `package-lock.json` to be commited once the packages are released use the `--lock` flag.
+If you want the `package-lock.json` to be committed once the packages are released, use the --lock flag.
 
 ```sh
 sui-mono release --lock
