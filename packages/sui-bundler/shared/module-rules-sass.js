@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const {cleanList, config, when} = require('./index')
+const {cleanList, config, when, isTailwindEnabled} = require('./index')
 
 module.exports = {
   test: /(\.css|\.scss)$/,
@@ -18,6 +18,7 @@ module.exports = {
       options: {
         postcssOptions: {
           plugins: [
+            ...(isTailwindEnabled() ? [require('tailwindcss')()] : []),
             require('autoprefixer')({
               overrideBrowserslist: config.targets
             })

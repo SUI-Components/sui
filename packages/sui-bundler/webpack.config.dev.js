@@ -10,7 +10,8 @@ const {
   MAIN_ENTRY_POINT,
   config,
   cleanList,
-  when
+  when,
+  isTailwindEnabled
 } = require('./shared/index.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
@@ -104,6 +105,7 @@ const webpackConfig = {
             options: {
               postcssOptions: {
                 plugins: [
+                  ...(isTailwindEnabled() ? [require('tailwindcss')()] : []),
                   require('autoprefixer')({
                     overrideBrowserslist: config.targets
                   })
