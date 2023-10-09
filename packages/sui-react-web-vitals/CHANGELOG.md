@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.10.0 (2023-10-09)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** update Wev Vitals lib to 3.5.0 ([15a4775](https://github.com/SUI-Components/sui/commit/15a47759b5580af5af748940859415f7e1aba334))
+
+
+
 # 1.9.0 (2023-09-08)
 
 
