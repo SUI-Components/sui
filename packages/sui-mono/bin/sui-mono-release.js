@@ -180,16 +180,19 @@ checkShouldRelease()
         await releasePackage({...pkg, skipCi})
       }
 
-      if (lock) {
-        await exec(
-          'npm install --package-lock-only --legacy-peer-deps --no-audit --no-fund --ignore-scripts --production=false'
-        )
-        await exec('git add package-lock.json')
-        await exec(
-          'git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify'
-        )
+      if (packagesToRelease.length > 0) {
+        if (lock) {
+          await exec(
+            'npm install --package-lock-only --legacy-peer-deps --no-audit --no-fund --ignore-scripts --production=false'
+          )
+          await exec('git add package-lock.json')
+          await exec(
+            'git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify'
+          )
+        }
+
+        await exec('git push -f --tags origin HEAD')
       }
-      await exec('git push -f --tags origin HEAD')
 
       console.log(
         `[sui-mono release] ${packagesToRelease.length} packages released`
