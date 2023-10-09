@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.41.0 (2023-10-09)
+
+
+### Features
+
+* **packages/sui-mono:** avoid update lock file if no package is updated ([daab85a](https://github.com/SUI-Components/sui/commit/daab85a857b82fd0ae6b468910f1f93248372b5f))
+
+
+
 # 2.40.0 (2023-10-06)
 
 
