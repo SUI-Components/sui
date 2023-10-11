@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.2.0 (2023-08-21)
+
+
+### Bug Fixes
+
+* **packages/sui-widget-embedder:** update dep for security issue ([882de3a](https://github.com/SUI-Components/sui/commit/882de3af722ac2940c203a0e9a3db95c653c8d2d))
+
+
+
 # 6.1.0 (2022-06-07)
 
 

@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 1.25.0 (2023-06-28)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** fix linting issues ([9ae715c](https://github.com/SUI-Components/sui/commit/9ae715cbdbb1ae5f55f727cdf5f01a8250ba6b91))
+
+
+### Features
+
+* **packages/sui-js-compiler:** install typescript on demand ([432ffc3](https://github.com/SUI-Components/sui/commit/432ffc3ce08423da1b0e924fad5d1bbe72c8b6c7))
+
+
+
+# 1.24.0 (2023-06-12)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** hide ts import on non ts compilations ([5c28421](https://github.com/SUI-Components/sui/commit/5c284210db121ba195b56f85e80736b14b196b54))
+
+
+
 # 1.23.0 (2023-05-25)
 
 
@@ -25,8 +48,10 @@
 ### Features
 
 * **packages/sui-js-compiler:** add legacy option ([b4d234e](https://github.com/SUI-Components/sui/commit/b4d234e980492de24d6bb30450c7586ab64a9cc0))
+* **packages/sui-js-compiler:** add new test folder to ignore ([113e481](https://github.com/SUI-Components/sui/commit/113e4810e32f6e8a32869489dce966907e932fa8))
 * **packages/sui-js-compiler:** change to modern option ([86101a6](https://github.com/SUI-Components/sui/commit/86101a63560f3f818f9f64f8821ad48933360db4))
 * **packages/sui-js-compiler:** set typescript support from tsconfig ([78a155c](https://github.com/SUI-Components/sui/commit/78a155cdde96f52b5bec9c1ebb1c11469a7f2923))
+* **packages/sui-js-compiler:** use ignore name for destructuring and new test folder ([8e4769e](https://github.com/SUI-Components/sui/commit/8e4769ef056e64c651b14aca35aa4682d04064cd))
 
 
 

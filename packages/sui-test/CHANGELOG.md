@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 8.27.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-test:** upgrade versions for security ([9b1c7d1](https://github.com/SUI-Components/sui/commit/9b1c7d1c3148f3adc7ee35e5970e8ae866e1e5e8))
+
+
+
+# 8.26.0 (2023-06-12)
+
+
+
 # 8.25.0 (2023-05-24)
 
 

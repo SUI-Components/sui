@@ -19,6 +19,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
+  .option('-S, --save-stats', 'Save stats.json in public folder')
   .option(
     '-l, --link-package [package]',
     'Replace each occurrence of this package with an absolute path to this folder',
@@ -43,6 +44,7 @@ program
 const {
   clean = false,
   context,
+  saveStats,
   linkPackage: packagesToLink = []
 } = program.opts()
 
@@ -87,6 +89,13 @@ compiler.run(async (error, stats) => {
   }
 
   console.log(`Webpack stats: ${stats}`)
+
+  if (saveStats) {
+    const filePath = `${process.cwd()}/public/stats.json`
+    fs.writeFileSync(filePath, JSON.stringify(stats.toJson(), null, 2), {
+      encoding: 'utf8'
+    })
+  }
 
   const offlinePath = path.join(process.cwd(), 'src', 'offline.html')
   const offlinePageExists = fs.existsSync(offlinePath)

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 3.23.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-svg:** upgrade versions for security ([18bc1fe](https://github.com/SUI-Components/sui/commit/18bc1fe0609617865591759a4887f50aa09efac3))
+
+
+
+# 3.22.0 (2023-07-24)
+
+
+### Features
+
+* **packages/sui-svg:** add sui svg dist ([374edc4](https://github.com/SUI-Components/sui/commit/374edc4f66e72f0ec04ca25bbeabb26ad8c5cbfa))
+
+
+
 # 3.21.0 (2022-08-22)
 
 

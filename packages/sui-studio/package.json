@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.33.0",
+  "version": "11.36.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -26,7 +26,7 @@
     "deepmerge": "4.2.2",
     "fast-glob": "3.2.11",
     "fs-extra": "10.1.0",
-    "git-url-parse": "12.0.0",
+    "git-url-parse": "13.1.0",
     "hoist-non-react-statics": "3.3.2",
     "just-debounce-it": "1.5.0",
     "just-kebab-case": "1.1.0",

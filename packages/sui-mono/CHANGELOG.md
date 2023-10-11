@@ -1,5 +1,76 @@
 # CHANGELOG
 
+# 2.41.0 (2023-10-09)
+
+
+### Features
+
+* **packages/sui-mono:** avoid update lock file if no package is updated ([daab85a](https://github.com/SUI-Components/sui/commit/daab85a857b82fd0ae6b468910f1f93248372b5f))
+
+
+
+# 2.40.0 (2023-10-06)
+
+
+### Features
+
+* **packages/sui-mono:** add lockfile support ([51405ef](https://github.com/SUI-Components/sui/commit/51405ef74149d06b974bbb1283497d7b1f9dd78a))
+* **packages/sui-mono:** commit lockfile ([e7e93be](https://github.com/SUI-Components/sui/commit/e7e93be91982952d746d6510f98d4e681c6134a3))
+* **packages/sui-mono:** update lint issues ([0ee3dc7](https://github.com/SUI-Components/sui/commit/0ee3dc7c1bb95fc1611c55bd05849ab6f8505906))
+* **packages/sui-mono:** update lockfile conditionally ([d34c8c7](https://github.com/SUI-Components/sui/commit/d34c8c7cf10f825450f96f02d83267daf72cb17a))
+
+
+
+# 2.39.0 (2023-09-07)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** remove --no-verify flag ([9ca7299](https://github.com/SUI-Components/sui/commit/9ca72990c8c476a326e6b64fa9206c3e24880ec9))
+
+
+### Features
+
+* **packages/sui-mono:** add no-verify flag to publish npm packages ([12ae25f](https://github.com/SUI-Components/sui/commit/12ae25f804146653b55ebfad645502d5e2806be4))
+
+
+
+# 2.38.0 (2023-08-22)
+
+
+### Features
+
+* **packages/sui-mono:** add overrides config support ([8c774ef](https://github.com/SUI-Components/sui/commit/8c774ef35550c6a501be666bc1a0f216bc9deb74))
+
+
+
+# 2.37.0 (2023-08-17)
+
+
+### Features
+
+* **packages/sui-mono:** update gir-url-parse version ([dd0c681](https://github.com/SUI-Components/sui/commit/dd0c681f5935354b1eaba6317f591dffa15dfec6))
+
+
+
+# 2.36.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** upgrade versions for security ([5ce05a6](https://github.com/SUI-Components/sui/commit/5ce05a6f233b2ad97a164ade36e8702aed9fd8b7))
+
+
+
+# 2.35.0 (2023-06-09)
+
+
+### Features
+
+* **packages/sui-mono:** upgrade git-url-parse dependency to major 13 ([bf53091](https://github.com/SUI-Components/sui/commit/bf530911331d5f17c573cd9a24e195191176f3eb))
+
+
+
 # 2.34.0 (2022-10-05)
 
 

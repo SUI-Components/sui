@@ -1,5 +1,50 @@
 # CHANGELOG
 
+# 8.16.0 (2023-08-22)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** update express dep to fix security issue ([10f4b05](https://github.com/SUI-Components/sui/commit/10f4b0514b573c9e201ab5942c3fb259cc45ef01))
+
+
+
+# 8.15.0 (2023-08-22)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** remove copy-paste dependency to fix security issue ([2ac2885](https://github.com/SUI-Components/sui/commit/2ac28855ff5890dd72d034368c572503c9022046))
+
+
+
+# 8.14.0 (2023-08-21)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** update dep for security issue ([34706c9](https://github.com/SUI-Components/sui/commit/34706c95ca06e55422ad333961781f00305a456e))
+
+
+
+# 8.13.0 (2023-08-17)
+
+
+### Features
+
+* **packages/sui-ssr:** update gir-url-parse version ([437c183](https://github.com/SUI-Components/sui/commit/437c1837a8fa089be126d5c7bf2b6e977805cb02))
+
+
+
+# 8.12.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** upgrade versions for security ([9566aac](https://github.com/SUI-Components/sui/commit/9566aacb02bf080ddb17fe519ec5ec94d8e418bd))
+
+
+
 # 8.11.0 (2022-10-06)
 
 

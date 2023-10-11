@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 4.33.0 (2023-06-13)
+
+
+### Bug Fixes
+
+* **packages/sui-lint:** update jest rules ([eb9cc8d](https://github.com/SUI-Components/sui/commit/eb9cc8d17b350b6fed55f81fc989309988d78551))
+
+
+
+# 4.32.0 (2023-06-13)
+
+
+
+# 4.31.0 (2023-06-12)
+
+
+### Features
+
+* **packages/sui-lint:** add jest rules ([0e2f2a2](https://github.com/SUI-Components/sui/commit/0e2f2a2e9274c7bb7d5e875c5ee029dc0460743f))
+* **packages/sui-lint:** remove comment ([df148e5](https://github.com/SUI-Components/sui/commit/df148e5f86429baa424d5a082937b2e53fe0e5b9))
+
+
+
 # 4.30.0 (2023-05-18)
 
 
@@ -7,6 +30,11 @@
 
 * **packages/sui-lint:** Fix Unknown rule error when checking scss files ([270dc57](https://github.com/SUI-Components/sui/commit/270dc57caf9528159f6dfa126afb22b2054f5b7d))
 * **packages/sui-lint:** use version 8 for stylelint-config-recommended-scss ([60a1179](https://github.com/SUI-Components/sui/commit/60a1179effcc998e9a5c7fb1ca5b88b1e97fd7bb))
+
+
+### Features
+
+* **packages/sui-lint:** add jest rules ([3e3dcaa](https://github.com/SUI-Components/sui/commit/3e3dcaa24a926be7c462dcb9fcdb00de84c43dce))
 
 
 

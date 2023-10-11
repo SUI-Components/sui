@@ -1,0 +1,29 @@
+{
+  "name": "@s-ui/jest",
+  "version": "1.1.0",
+  "description": "CLI that abstracts away all configuration for Jest",
+  "bin": {
+    "sui-jest": "bin/sui-jest.js"
+  },
+  "files": [
+    "/bin"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@swc/jest": "0.2.24",
+    "@types/jest": "29.2.4",
+    "jest": "29.3.1",
+    "jest-environment-jsdom": "29.3.1",
+    "read-pkg-up": "7.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-jest#readme"
+}

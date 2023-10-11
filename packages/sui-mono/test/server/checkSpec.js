@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 
 import {
+  getTransform,
   isCommitBreakingChange,
   isCommitReleaseTrigger
 } from '../../src/check.js'
@@ -42,5 +43,92 @@ describe('check', () => {
     })
   })
 
-  describe('getAllTaskArrays', () => {})
+  describe('getTransform', () => {
+    it('should not increment status when commit is not valid', async () => {
+      const status = {
+        literals: {
+          increment: 0,
+          commits: []
+        }
+      }
+      const packages = ['literals']
+      const overrides = {}
+
+      const transform = getTransform({status, packages, overrides})
+      const commit = {
+        type: 'Lokalise',
+        scope: null,
+        header: 'Lokalise: updates'
+      }
+
+      await new Promise(resolve => transform(commit, resolve))
+
+      expect(status).to.be.deep.equal({
+        literals: {
+          increment: 0,
+          commits: []
+        }
+      })
+    })
+
+    it('should increment status when commit is valid', async () => {
+      const status = {
+        literals: {
+          increment: 0,
+          commits: []
+        }
+      }
+      const packages = ['literals']
+      const overrides = {}
+
+      const transform = getTransform({status, packages, overrides})
+      const commit = {
+        type: 'feat',
+        scope: 'literals',
+        header: 'updates'
+      }
+
+      await new Promise(resolve => transform(commit, resolve))
+
+      expect(status).to.be.deep.equal({
+        literals: {
+          increment: 2,
+          commits: [commit]
+        }
+      })
+    })
+
+    it('should increment status when commit is not valid but is overrided', async () => {
+      const status = {
+        literals: {
+          increment: 0,
+          commits: []
+        }
+      }
+      const packages = ['literals']
+      const overrides = {
+        literals: [
+          {
+            regex: 'Lokalise:'
+          }
+        ]
+      }
+
+      const transform = getTransform({status, packages, overrides})
+      const commit = {
+        type: 'Lokalise',
+        scope: null,
+        header: 'Lokalise: updates'
+      }
+
+      await new Promise(resolve => transform(commit, resolve))
+
+      expect(status).to.be.deep.equal({
+        literals: {
+          increment: 2,
+          commits: [commit]
+        }
+      })
+    })
+  })
 })
