@@ -10,7 +10,11 @@ const {
   getOverrides
 } = require('./config.js')
 
-const gitRawCommitsOpts = {reverse: true, topoOrder: true}
+const gitRawCommitsOpts = {
+  reverse: true,
+  to: process.env.GITHUB_SHA,
+  topoOrder: true
+}
 
 const PACKAGE_VERSION_INCREMENT = {
   NOTHING: 0,
