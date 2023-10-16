@@ -1,12 +1,10 @@
 import {expect} from 'chai'
 
 import {FetcherFactory} from '@s-ui/domain'
-import mock from '@s-ui/mock'
+import {rest} from '@s-ui/mock'
 
 import {setupContractTests} from '../../src/index.js'
 import {getContractFileData, removeContractFiles} from '../utils.js'
-
-const {rest} = mock
 
 const fetcher = FetcherFactory.httpFetcher({config: {}})
 const consumer = 'test-consumer'
