@@ -2,12 +2,11 @@
   "name": "@s-ui/mock",
   "version": "1.2.0",
   "main": "lib/index.js",
-  "description": "mock provider",
-  "types": "lib/index",
+  "description": "Mock provider",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepublishOnly": "npm run lib",
-    "test": "npm run test:client && npm run test:server",
+    "test": "npm run test:browser && npm run test:server",
     "test:browser": "npx @s-ui/test browser -P './test/browser/**/*Spec.js'",
     "test:browser:watch": "npm run test:client -- --watch",
     "test:server": "npx @s-ui/test server -P './test/server/**/*Spec.js'",
@@ -17,7 +16,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "msw": "0.47.4"
+    "msw": "1.2.1"
   },
   "repository": {
     "type": "git",
