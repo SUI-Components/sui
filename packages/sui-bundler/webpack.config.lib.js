@@ -54,7 +54,7 @@ module.exports = {
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     }),
     new MiniCssExtractPlugin({
       filename: cssFileName,
