@@ -1,5 +1,6 @@
 const path = require('path')
 const {config} = require('./config.js')
+const fs = require('fs')
 
 const {PWD} = process.env
 
@@ -11,22 +12,33 @@ const {PWD} = process.env
  */
 const defaultPackagesToAlias = [
   'react',
+  'react-dom',
   'react-router-dom',
+  'react/jsx-dev-runtime',
+  'react/jsx-runtime',
   '@s-ui/pde',
   '@s-ui/react-context',
   '@s-ui/react-router'
 ]
 
-const createAliasPath = pkgName =>
-  path.resolve(path.join(PWD, `./node_modules/${pkgName}`))
+const createAliasPath = pkgName => {
+  const PWDNodeModules = path.join(PWD, './node_modules')
+  if (fs.existsSync(PWDNodeModules))
+    return path.resolve(path.join(PWDNodeModules, pkgName))
 
-const mustPackagesToAlias = {
-  'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
-  'react/jsx-runtime': 'react/jsx-runtime.js'
+  try {
+    return require.resolve(pkgName).replace(/\/index\.js$/, '')
+  } catch (e) {
+    return ''
+  }
 }
 
+const mustPackagesToAlias = {}
+
 exports.defaultAlias = Object.fromEntries(
-  defaultPackagesToAlias.map(pkgName => [pkgName, createAliasPath(pkgName)])
+  defaultPackagesToAlias
+    .map(pkgName => [pkgName, createAliasPath(pkgName)])
+    .filter(([, path]) => path)
 )
 
 const aliasFromConfig = config.alias

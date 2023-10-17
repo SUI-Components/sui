@@ -9,7 +9,7 @@ const {
 const path = require('path')
 const minifyJs = require('./shared/minify-js.js')
 const definePlugin = require('./shared/define.js')
-const createBabelRules = require('./shared/module-rules-babel.js')
+const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
 const {
   extractComments,
@@ -67,6 +67,6 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [createBabelRules({supportLegacyBrowsers}), sassRules]
+    rules: [createCompilerRules({supportLegacyBrowsers}), sassRules]
   }
 }

@@ -10,13 +10,18 @@ const DEFAULT_BROWSER_TARGETS = {
   ios: '14.5'
 }
 
-export const getSWCConfig = ({isModern, isTypeScript}) => {
+const getSWCConfig = ({
+  isModern = false,
+  isTypeScript = false,
+  compileToCJS = false
+}) => {
   const targets = isModern
     ? DEFAULT_BROWSER_TARGETS
     : DEFAULT_LEGACY_BROWSER_TARGETS
   const syntaxOptions = isTypeScript
     ? {syntax: 'typescript', tsx: true}
     : {syntax: 'ecmascript', jsx: true}
+  const moduleOptions = compileToCJS ? {module: {type: 'commonjs'}} : {}
 
   return {
     minify: true,
@@ -43,6 +48,7 @@ export const getSWCConfig = ({isModern, isTypeScript}) => {
       loose: true,
       externalHelpers: true
     },
+    ...moduleOptions,
     env: {
       targets,
       dynamicImport: true,
@@ -52,3 +58,5 @@ export const getSWCConfig = ({isModern, isTypeScript}) => {
     }
   }
 }
+
+module.exports.getSWCConfig = getSWCConfig

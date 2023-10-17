@@ -31,8 +31,9 @@ serialSpawn([
     require.resolve('mocha/bin/mocha.js'),
     [
       path.join(process.cwd(), path.sep, pattern),
-      `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
       '--recursive',
+      '--extension js,ts,cjs,mjs',
+      `--require ${path.join(__dirname, 'mocha', 'register.js')}`,
       inspect && '--inspect-brk',
       watch && '--watch',
       timeout && `--timeout ${timeout}`,

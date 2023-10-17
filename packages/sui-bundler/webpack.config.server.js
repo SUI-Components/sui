@@ -3,7 +3,7 @@ const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 const {config, when, cleanList} = require('./shared/index.js')
-const createBabelRules = require('./shared/module-rules-babel.js')
+const createCompilerRules = require('./shared/module-rules-compiler.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
@@ -18,7 +18,7 @@ const webpackConfig = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
     alias: {...aliasFromConfig},
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.json', '.ts', '.tsx'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: './server.js',
@@ -39,7 +39,7 @@ const webpackConfig = {
   resolveLoader,
   module: {
     rules: cleanList([
-      createBabelRules({isServer: true}),
+      createCompilerRules({isServer: true}),
       {
         // ignore css/scss/svg require/imports files in the server
         test: /(\.svg|\.s?css)$/,

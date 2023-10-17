@@ -12,7 +12,7 @@ program
   .option(
     '-P, --pattern <pattern>',
     'Path pattern to include',
-    'test/**/*Spec.js'
+    'test/**/*Spec.+(js|jsx|ts|tsx)'
   )
   .option(
     '-I, --ignore-pattern <ignorePattern>',
