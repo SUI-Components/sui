@@ -1,5 +1,46 @@
 # CHANGELOG
 
+# 9.42.0 (2023-09-29)
+
+
+### Features
+
+* **packages/sui-bundler:** Add option to save stats.json in build ([a46a346](https://github.com/SUI-Components/sui/commit/a46a346124da17fa2852d05a85a98afabf79094d))
+
+
+
+# 9.41.0 (2023-08-28)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** Fix bundler error display ([31a1499](https://github.com/SUI-Components/sui/commit/31a1499c740709196ac08ed0cab93885f09fa711))
+
+
+
+# 9.40.0 (2023-08-24)
+
+
+### Features
+
+* **packages/sui-bundler:** disable error overlay ([2da7c44](https://github.com/SUI-Components/sui/commit/2da7c44cb79b15ab466dfef7cad34cb46bbdf2d6))
+
+
+
+# 9.39.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** upgrade versions for security ([1b5d3aa](https://github.com/SUI-Components/sui/commit/1b5d3aa3659bc8f363b6ea9cf34305a04e2457c5))
+
+
+### Features
+
+* **packages/sui-bundler:** add fast refresh support ([b47bc8c](https://github.com/SUI-Components/sui/commit/b47bc8cdc2ae6c4862508b3b6c6cb39082865b08))
+
+
+
 # 9.38.0 (2023-05-04)
 
 

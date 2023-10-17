@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.28.0 (2023-08-16)
+
+
+### Bug Fixes
+
+* **packages/sui-js:** upgrade qs version for security ([3eb8343](https://github.com/SUI-Components/sui/commit/3eb8343db512d053b0fa7066a36dd591505d2767))
+
+
+
+# 2.27.0 (2023-08-14)
+
+
+### Bug Fixes
+
+* **packages/sui-js:** upgrade versions for security ([f6877b6](https://github.com/SUI-Components/sui/commit/f6877b6c7cc4db3ca84f69f15f4bef8a3517d957))
+
+
+
 # 2.26.0 (2022-06-28)
 
 

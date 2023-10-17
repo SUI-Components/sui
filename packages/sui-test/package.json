@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.26.0",
+  "version": "8.27.0",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -44,6 +44,6 @@
     "swc-loader": "0.2.3",
     "tty-browserify": "0.0.1",
     "util": "0.12.4",
-    "webpack": "5.74.0"
+    "webpack": "5.82.1"
   }
 }

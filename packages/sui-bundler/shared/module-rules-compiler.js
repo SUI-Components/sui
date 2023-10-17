@@ -24,7 +24,11 @@ const getTSConfig = () => {
   return tsConfig
 }
 
-module.exports = ({isServer = false, supportLegacyBrowsers = true} = {}) => {
+module.exports = ({
+  isServer = false,
+  isDevelopment = false,
+  supportLegacyBrowsers = true
+} = {}) => {
   const tsConfig = getTSConfig()
   // If TS config exists in root dir, set TypeScript as enabled.
   const isTypeScriptEnabled = Boolean(tsConfig)
@@ -51,6 +55,9 @@ module.exports = ({isServer = false, supportLegacyBrowsers = true} = {}) => {
               cacheCompression: false,
               babelrc: false,
               compact: true,
+              plugins: [
+                isDevelopment && require.resolve('react-refresh/babel')
+              ].filter(Boolean),
               presets: [
                 [
                   require.resolve('babel-preset-sui'),

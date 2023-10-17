@@ -1,19 +1,42 @@
 import {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
-import * as reporter from 'web-vitals'
+import * as reporter from 'web-vitals/attribution'
 
 import SUIContext from '@s-ui/react-context'
 import useMount from '@s-ui/react-hooks/lib/useMount/index.js'
 import {useRouter} from '@s-ui/react-router'
 
 export const METRICS = {
-  TTFB: 'TTFB',
-  LCP: 'LCP',
   CLS: 'CLS',
+  FCP: 'FCP',
   FID: 'FID',
   INP: 'INP',
-  FCP: 'FCP'
+  LCP: 'LCP',
+  TTFB: 'TTFB'
+}
+
+// https://github.com/GoogleChrome/web-vitals#metric
+const RATING = {
+  GOOD: 'good',
+  NEEDS_IMPROVEMENT: 'needs-improvement',
+  POOR: 'poor'
+}
+
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [
+  METRICS.CLS,
+  METRICS.FID,
+  METRICS.INP,
+  METRICS.LCP
+]
+
+const DEFAULT_CWV_THRESHOLDS = {
+  [METRICS.CLS]: 100,
+  [METRICS.FCP]: 1800,
+  [METRICS.FID]: 100,
+  [METRICS.INP]: 200,
+  [METRICS.LCP]: 2500,
+  [METRICS.TTFB]: 800
 }
 
 export const DEVICE_TYPES = {
@@ -23,18 +46,30 @@ export const DEVICE_TYPES = {
 }
 
 const getNormalizedPathname = pathname => {
-  return pathname.replaceAll('*', '_')
+  return pathname.replace(/[^a-z0-9]/gi, '')
+}
+
+const getPathname = route => {
+  return route?.path || route?.regexp?.toString()
+}
+
+const getHasPathOnRoute = route => {
+  return Boolean(route?.path)
 }
 
 export default function WebVitalsReporter({
-  metrics = Object.values(METRICS),
-  pathnames,
+  children,
   deviceType,
+  metrics = Object.values(METRICS),
+  metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
   onReport,
-  children
+  pathnames,
+  thresholds = DEFAULT_CWV_THRESHOLDS
 }) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
+  const {routes} = router
+  const route = routes[routes.length - 1]
   const onReportRef = useRef(onReport)
 
   useEffect(() => {
@@ -42,15 +77,7 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
-    const getPathname = () => {
-      const {routes} = router
-      const route = routes[routes.length - 1]
-      return route?.path || route?.regexp?.toString()
-    }
-
     const getRouteid = () => {
-      const {routes} = router
-      const route = routes[routes.length - 1]
       return route?.id
     }
 
@@ -58,32 +85,60 @@ export default function WebVitalsReporter({
       return deviceType || browser?.deviceType
     }
 
-    const handleReport = ({name, value}) => {
+    const getTarget = ({name, attribution}) => {
+      switch (name) {
+        case METRICS.CLS:
+          return attribution.largestShiftTarget
+        case METRICS.LCP:
+          return attribution.element
+        default:
+          return attribution.eventTarget
+      }
+    }
+
+    const handleAllChanges = ({attribution, name, rating, value}) => {
+      const amount = name === METRICS.CLS ? value * 1000 : value
+      const pathname = getPathname(route)
+      const hasPathOnRoute = getHasPathOnRoute(route)
+      const isExcluded =
+        !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
+
+      if (isExcluded || !logger?.cwv || rating === RATING.GOOD) return
+
+      const target = getTarget({name, attribution})
+
+      logger.cwv({
+        name: `cwv.${name.toLowerCase()}`,
+        amount,
+        path: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
+        target,
+        loadState: attribution.loadState
+      })
+    }
+
+    const handleChange = ({name, value}) => {
       const onReport = onReportRef.current
-      const pathname = getPathname()
+      const pathname = getPathname(route)
+      const hasPathOnRoute = getHasPathOnRoute(route)
       const routeid = getRouteid()
       const type = getDeviceType()
       const isExcluded =
         !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
-      if (isExcluded) {
-        return
-      }
+      if (isExcluded) return
 
       if (onReport) {
         onReport({
           name,
           amount: value,
-          pathname,
+          pathname: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
           routeid,
           type
         })
         return
       }
 
-      if (!logger?.distribution) {
-        return
-      }
+      if (!logger?.distribution) return
 
       const amount = name === METRICS.CLS ? value * 1000 : value
 
@@ -97,7 +152,7 @@ export default function WebVitalsReporter({
           },
           {
             key: 'pathname',
-            value: getNormalizedPathname(pathname)
+            value: hasPathOnRoute ? pathname : getNormalizedPathname(pathname)
           },
           ...(routeid
             ? [
@@ -120,7 +175,9 @@ export default function WebVitalsReporter({
     }
 
     metrics.forEach(metric => {
-      reporter[`on${metric}`](handleReport)
+      reporter[`on${metric}`](handleChange)
+      if (metricsAllChanges.includes(metric))
+        reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
 
@@ -129,23 +186,33 @@ export default function WebVitalsReporter({
 
 WebVitalsReporter.propTypes = {
   /**
-   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to all.
+   * An optional children node
    */
-  metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
+  children: PropTypes.node,
   /**
    * An optional string to identify the device type. Choose between: desktop, tablet and mobile
    */
   deviceType: PropTypes.oneOf(Object.values(DEVICE_TYPES)),
   /**
-   * An optional array of pathnames that you want to track
+   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to all.
    */
-  pathnames: PropTypes.arrayOf(PropTypes.string),
+  metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
+  /**
+   * An optional array of core web vitals that will report on all changes. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to LCP and INP.
+   */
+  metricsAllChanges: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
    * An optional callback to be used to track core web vitals
    */
   onReport: PropTypes.func,
   /**
-   * An optional children node
+   * An optional array of pathnames that you want to track
    */
-  children: PropTypes.node
+  pathnames: PropTypes.arrayOf(PropTypes.string),
+  /**
+   * An object with METRICS as keys and thresholds as values
+   * Thresholds by default are those above which Google considers the page as "needs improvement"
+   * Lower thresholds could be set for fine-tuning, higher thresholds could be set for less noise when reporting all changes
+   */
+  thresholds: PropTypes.object
 }

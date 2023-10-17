@@ -61,7 +61,8 @@ export default function useFeature(
   featureKey,
   attributes,
   queryString,
-  adapterId
+  adapterId,
+  shouldTrackExperimentViewed
 ) {
   const {pde} = useContext(PdeContext)
   if (pde === null)
@@ -91,18 +92,20 @@ export default function useFeature(
       adapterId
     })
 
-    trackFeatureFlagViewed({
-      isActive,
-      trackExperimentViewed: strategy.trackExperiment,
-      featureKey
-    })
-    trackLinkedExperimentsViewed({
-      linkedExperiments,
-      trackExperimentViewed: strategy.trackExperiment,
-      pde,
-      attributes,
-      adapterId
-    })
+    if (shouldTrackExperimentViewed) {
+      trackFeatureFlagViewed({
+        isActive,
+        trackExperimentViewed: strategy.trackExperiment,
+        featureKey
+      })
+      trackLinkedExperimentsViewed({
+        linkedExperiments,
+        trackExperimentViewed: strategy.trackExperiment,
+        pde,
+        attributes,
+        adapterId
+      })
+    }
     return {isActive, variables}
   } catch (error) {
     // eslint-disable-next-line no-console
