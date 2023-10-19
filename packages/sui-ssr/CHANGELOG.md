@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.18.0 (2023-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** revert csp report ([0c024ba](https://github.com/SUI-Components/sui/commit/0c024ba68a9a438e7453f548c0ccc85bfa7bb67d))
+
+
+
 # 8.17.0 (2023-10-19)
 
 
