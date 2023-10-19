@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.17.0 (2023-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** add csp report header and create new hook to each site be able to handle the ([2024dad](https://github.com/SUI-Components/sui/commit/2024dadbc1e8b3f27befb0e8c900fca9611a9cc7))
+* **packages/sui-ssr:** improvements ([18c7deb](https://github.com/SUI-Components/sui/commit/18c7deb7c223ee0d6b9fec5dbc78109597c085be))
+
+
+
 # 8.16.0 (2023-08-22)
 
 
