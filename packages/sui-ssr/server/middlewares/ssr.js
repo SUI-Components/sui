@@ -208,8 +208,8 @@ export default async (req, res, next) => {
     'Server-Timing': formatServerTimingHeader({
       ...performance,
       ...ssrPerformance
-    }),
-    'Content-Security-Policy-Report-Only': `default-src 'self'; report-uri ${CSP_REPORT_PATH}`
+    })
+    // 'Content-Security-Policy-Report-Only': `default-src 'self'; report-uri ${CSP_REPORT_PATH}`
   })
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()
