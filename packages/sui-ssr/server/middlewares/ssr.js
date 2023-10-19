@@ -37,7 +37,7 @@ try {
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
-const CSP_REPORT_PATH = '/csp-report'
+// const CSP_REPORT_PATH = '/csp-report'
 
 const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
