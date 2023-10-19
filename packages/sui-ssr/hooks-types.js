@@ -7,6 +7,7 @@ export default {
   PRE_HEALTH: 'pre_health',
   SETUP_CONTEXT: 'setup_context',
   PRE_SSR_HANDLER: 'pre_ssr_handler',
+  CSP_REPORT: 'csp-report',
   PRE_STATIC_PUBLIC: 'pre_static_public',
   ROUTE_MATCHING: 'route_matching'
 }

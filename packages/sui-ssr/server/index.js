@@ -1,4 +1,5 @@
 /* eslint no-console:0 */
+import bodyParser from 'body-parser'
 import compression from 'compression'
 import express from 'express'
 import basicAuth from 'express-basic-auth'
@@ -17,9 +18,9 @@ import {
 import ssrConf from './config.js'
 noOPConsole(console)
 
-if (process.env.CONSOLE) {
-  console._restore()
-}
+// if (process.env.CONSOLE) {
+console._restore()
+// }
 
 const app = express()
 
@@ -56,6 +57,13 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
+
+  app.post(
+    `/${TYPES.CSP_REPORT}`,
+    bodyParser.json({type: 'application/csp-report'}),
+    hooks[TYPES.CSP_REPORT]
+  )
+
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
 

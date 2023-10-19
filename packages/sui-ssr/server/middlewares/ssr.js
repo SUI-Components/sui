@@ -37,6 +37,8 @@ try {
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
+const CSP_REPORT_PATH = '/csp-report'
+
 const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
@@ -201,6 +203,10 @@ export default async (req, res, next) => {
   // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
   const {bodyAttributes, headString, htmlAttributes} =
     renderHeadTagsToString(headTags)
+
+  res.set({
+    'Content-Security-Policy-Report-Only': `default-src 'self'; report-uri ${CSP_REPORT_PATH}`
+  })
 
   res.set({
     'Server-Timing': formatServerTimingHeader({
