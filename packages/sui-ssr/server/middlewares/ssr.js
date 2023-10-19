@@ -37,6 +37,8 @@ try {
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
+const CSP_REPORT_PATH = '/csp-report'
+
 const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
@@ -206,7 +208,8 @@ export default async (req, res, next) => {
     'Server-Timing': formatServerTimingHeader({
       ...performance,
       ...ssrPerformance
-    })
+    }),
+    'Content-Security-Policy-Report-Only': `default-src 'self'; report-uri ${CSP_REPORT_PATH}`
   })
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()

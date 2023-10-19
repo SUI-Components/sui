@@ -114,6 +114,8 @@ export const hooksFactory = async () => {
       return next()
     },
     [TYPES.LOGGING]: NULL_MDWL,
+    [TYPES.CSP_REPORT]: (req, res) =>
+      res.status(200).json({message: 'Tracking disabled'}),
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
     [TYPES.SETUP_CONTEXT]: async (req, res, next) => {
       const startContextCreationTime = process.hrtime()
