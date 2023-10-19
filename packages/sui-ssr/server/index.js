@@ -18,9 +18,9 @@ import {
 import ssrConf from './config.js'
 noOPConsole(console)
 
-// if (process.env.CONSOLE) {
-console._restore()
-// }
+if (process.env.CONSOLE) {
+  console._restore()
+}
 
 const app = express()
 
