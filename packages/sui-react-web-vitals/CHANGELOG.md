@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.11.0 (2023-10-23)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add INP eventType attribution ([3b0b664](https://github.com/SUI-Components/sui/commit/3b0b6645c7637b93dc318f61dd44faa863e81d1c))
+
+
+
 # 1.10.0 (2023-10-09)
 
 

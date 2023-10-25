@@ -112,7 +112,8 @@ export default function WebVitalsReporter({
         amount,
         path: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
         target,
-        loadState: attribution.loadState
+        loadState: attribution.loadState,
+        ...(attribution.eventType && {eventType: attribution.eventType})
       })
     }
 

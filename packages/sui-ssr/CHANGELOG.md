@@ -1,5 +1,33 @@
 # CHANGELOG
 
+# 8.19.0 (2023-10-25)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** safe check of type ([84175aa](https://github.com/SUI-Components/sui/commit/84175aa4c1e97138f140083ff0fe29dfeecc9a33))
+
+
+
+# 8.18.0 (2023-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** revert csp report ([0c024ba](https://github.com/SUI-Components/sui/commit/0c024ba68a9a438e7453f548c0ccc85bfa7bb67d))
+
+
+
+# 8.17.0 (2023-10-19)
+
+
+### Features
+
+* **packages/sui-ssr:** add csp report header and create new hook to each site be able to handle the ([2024dad](https://github.com/SUI-Components/sui/commit/2024dadbc1e8b3f27befb0e8c900fca9611a9cc7))
+* **packages/sui-ssr:** improvements ([18c7deb](https://github.com/SUI-Components/sui/commit/18c7deb7c223ee0d6b9fec5dbc78109597c085be))
+
+
+
 # 8.16.0 (2023-08-22)
 
 

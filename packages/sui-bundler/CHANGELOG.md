@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.43.0 (2023-10-18)
+
+
+### Features
+
+* **packages/sui-bundler:** update postcss version ([cd9c245](https://github.com/SUI-Components/sui/commit/cd9c245ef43dd2a45652aa8621e28a5a4e9031a7))
+
+
+
 # 9.42.0 (2023-09-29)
 
 
