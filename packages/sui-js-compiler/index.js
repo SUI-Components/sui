@@ -7,11 +7,11 @@ import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
+import typescript from 'typescript'
 
 import {transformFile} from '@swc/core'
 
 import {getSWCConfig} from '@s-ui/compiler-config'
-import helpers from '@s-ui/helpers/packages.js'
 
 const SOURCE_DIR = './src'
 const OUTPUT_DIR = './lib'
@@ -59,8 +59,9 @@ const compileFile = async (file, options) => {
 }
 
 const compileTypes = async (files, options) => {
-  const {dynamicPackage} = helpers
-  const {createCompilerHost, createProgram} = await dynamicPackage('typescript')
+  const {createCompilerHost, createProgram} = await import(typescript).then(
+    module => module.default
+  )
   const createdFiles = {}
   const host = createCompilerHost(options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
