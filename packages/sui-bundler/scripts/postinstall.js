@@ -5,7 +5,6 @@ const crypto = require('crypto')
 const fs = require('fs-extra')
 const path = require('path')
 const {writeFile} = require('@s-ui/helpers/file.js')
-const {dynamicPackage} = require('@s-ui/helpers/packages')
 
 const {INIT_CWD} = process.env
 const tsConfigTemplate = `\
@@ -45,9 +44,9 @@ async function main() {
     process.exit(0)
   }
   await writeFile(TS_CONFIG_PATH, tsConfigTemplate)
-  await dynamicPackage('typescript')
   console.log(
     '❌ [sui-bundler postinstall] tsconfig.json was not up to date, so we updated it'
   )
 }
+
 main()
