@@ -7,7 +7,6 @@ import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
-import typescript from 'typescript'
 
 import {transformFile} from '@swc/core'
 
@@ -59,7 +58,7 @@ const compileFile = async (file, options) => {
 }
 
 const compileTypes = async (files, options) => {
-  const {createCompilerHost, createProgram} = await import(typescript).then(
+  const {createCompilerHost, createProgram} = await import('typescript').then(
     module => module.default
   )
   const createdFiles = {}
