@@ -26,42 +26,39 @@ describe('@s-ui/js-compiler', () => {
     await fs.remove(tsConfigPath)
   })
 
-  it.only(
-    'should compile a "src" folder with a JavaScript file and output it to "lib"',
-    async () => {
-      const {stdout: stdout1} = await exec('npm ls @swc/core', {
-        cwd
-      })
-      console.log({stdout1})
-      const {stdout: stdout2} = await exec('npm ls @swc/helpers', {
-        cwd
-      })
-      console.log({stdout2})
-      const {stdout: stdout3} = await exec('npm ls typescript', {
-        cwd
-      })
-      console.log({stdout3})
-      const {stdout} = await exec('node ../../index.js', {
-        cwd
-      })
+  it('should compile a "src" folder with a JavaScript file and output it to "lib"', async () => {
+    const {stdout: stdout1} = await exec('npm ls @swc/core', {
+      cwd
+    })
+    console.log({stdout1})
+    const {stdout: stdout2} = await exec('npm ls @swc/helpers', {
+      cwd
+    })
+    console.log({stdout2})
+    const {stdout: stdout3} = await exec('npm ls typescript', {
+      cwd
+    })
+    console.log({stdout3})
+    const {stdout} = await exec('node ../../index.js', {
+      cwd
+    })
 
-      const compiledFilenames = await fs.readdir(libPath)
+    const compiledFilenames = await fs.readdir(libPath)
 
-      expect(compiledFilenames).to.eql(['example.js', 'example.test.js'])
+    expect(compiledFilenames).to.eql(['example.js', 'example.test.js'])
 
-      expect(stdout).to.contain('[sui-js-compiler]')
+    expect(stdout).to.contain('[sui-js-compiler]')
 
-      const compiledFile = await fs.readFile(libFilePath, 'utf-8')
-      console.log({compiledFilenames, compiledFile})
+    const compiledFile = await fs.readFile(libFilePath, 'utf-8')
+    console.log({compiledFilenames, compiledFile})
 
-      expect(compiledFile).to.contain('react/jsx-runtime')
-      expect(compiledFile).to.contain('_jsx')
+    expect(compiledFile).to.contain('react/jsx-runtime')
+    expect(compiledFile).to.contain('_jsx')
 
-      expect(compiledFile).to.contain('_async_to_generator')
-      expect(compiledFile).to.contain('_ts_decorate')
-      expect(compiledFile).to.contain('_ts_generator')
-    }
-  ).timeout(DEFAULT_TIMEOUT)
+    expect(compiledFile).to.contain('_async_to_generator')
+    expect(compiledFile).to.contain('_ts_decorate')
+    expect(compiledFile).to.contain('_ts_generator')
+  }).timeout(DEFAULT_TIMEOUT)
 
   it('should exclude all the files matching the passed patterns when the "ignore" option exists', async () => {
     const {stdout} = await exec(
