@@ -65,7 +65,9 @@ const Router = ({
   const [state, setState] = useState({router, params, components})
 
   useEffect(() => {
-    let prevState = null
+    let prevState = {}
+    let isSkipped = !!matchContext
+
     const handleTransition = (err, nextState) => {
       if (err) {
         if (onError) return onError(err)
@@ -75,8 +77,8 @@ const Router = ({
       // avoid not needed re-renders of the state if the prevState and the nextState
       // are the same reference or if the first render
 
-      if (!prevState) {
-        prevState = nextState
+      if (isSkipped) {
+        isSkipped = false
         return
       }
 
