@@ -79,6 +79,7 @@ const Router = ({
 
       if (isSkipped) {
         isSkipped = false
+        prevState = nextState
         return
       }
 
