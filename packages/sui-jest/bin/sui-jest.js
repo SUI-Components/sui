@@ -1,14 +1,17 @@
 #!/usr/bin/env node
-const {hasFile} = require('./utils.js')
+const program = require('commander')
 
+// Setup default env vars
 process.env.BABEL_ENV = 'test'
 process.env.NODE_ENV = 'test'
 
-const args = process.argv.slice(2)
+const pkg = require('../package.json')
+const version = pkg.version
 
-const config =
-  !args.includes('--config') && !hasFile('jest.config.js')
-    ? ['--config', JSON.stringify(require('./config.js'))]
-    : []
+program.version(version, '    --version')
 
-require('jest').run([...config, ...args])
+program.command('browser', 'Run tests in the browser').alias('b')
+
+program.command('server', 'Run tests in node').alias('s')
+
+program.parse(process.argv)
