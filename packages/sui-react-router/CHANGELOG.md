@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.16.0 (2023-11-06)
+
+
+### Features
+
+* **packages/sui-react-router:** avoid extra rerender during first load ([78a6aef](https://github.com/SUI-Components/sui/commit/78a6aef7ffcb95a392a87fe601c4ec308e6532b0))
+* **packages/sui-react-router:** small improvement ([14705d8](https://github.com/SUI-Components/sui/commit/14705d87479e59b74c57c3d64ad87e377ad746ab))
+* **packages/sui-react-router:** update skip strategy ([fdce67f](https://github.com/SUI-Components/sui/commit/fdce67ff577986bfae3ac9810d022228630eeed5))
+
+
+
 # 1.15.0 (2022-10-05)
 
 
