@@ -6,7 +6,7 @@ import {exec as execCallback} from 'node:child_process'
 import {join} from 'node:path'
 import {promisify} from 'node:util'
 
-const DEFAULT_TIMEOUT = 15000
+const DEFAULT_TIMEOUT = 9000
 
 const exec = promisify(execCallback)
 const cwd = fileURLToPath(new URL('.', import.meta.url))
