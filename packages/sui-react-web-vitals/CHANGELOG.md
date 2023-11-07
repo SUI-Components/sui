@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2023-11-07)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add visibilityState property ([ee5c0e1](https://github.com/SUI-Components/sui/commit/ee5c0e1f6052f0b006dd825654ef8f3bf79abd1d))
+
+
+
 # 1.11.0 (2023-10-23)
 
 
