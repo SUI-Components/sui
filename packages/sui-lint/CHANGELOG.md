@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.34.0 (2023-11-15)
+
+
+### Features
+
+* **packages/sui-lint:** update line length to 120 characters ([6b6de8f](https://github.com/SUI-Components/sui/commit/6b6de8f6200a3114fe675d71d91958db8012b67c))
+
+
+
 # 4.33.0 (2023-06-13)
 
 
