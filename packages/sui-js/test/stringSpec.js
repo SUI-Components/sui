@@ -92,9 +92,7 @@ describe('@s-ui/js', () => {
         endTag: '</strong>'
       })
       expect(highlightedText).to.be.an('string')
-      expect(highlightedText).to.be.equal(
-        `<strong>Cá</strong>la<strong>ca</strong>`
-      )
+      expect(highlightedText).to.be.equal(`<strong>Cá</strong>la<strong>ca</strong>`)
     })
   })
 })
