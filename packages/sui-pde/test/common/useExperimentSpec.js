@@ -32,9 +32,7 @@ describe('useExperiment hook', () => {
       getVariation = sinon.stub().returns('getVariationA')
       // eslint-disable-next-line react/prop-types
       wrapper = ({children}) => (
-        <PdeContext.Provider
-          value={{features: [], pde: {activateExperiment, getVariation}}}
-        >
+        <PdeContext.Provider value={{features: [], pde: {activateExperiment, getVariation}}}>
           {children}
         </PdeContext.Provider>
       )
@@ -56,18 +54,13 @@ describe('useExperiment hook', () => {
         })
 
         it('should return the right variationName and launch the Experiment Viewed event', () => {
-          const {result} = renderHook(
-            () => useExperiment({experimentName: 'test_experiment_id_1'}),
-            {
-              wrapper
-            }
-          )
+          const {result} = renderHook(() => useExperiment({experimentName: 'test_experiment_id_1'}), {
+            wrapper
+          })
           expect(result.current.variation).to.equal('activateExperimentA')
           sinon.assert.callCount(console.error, 0)
           sinon.assert.callCount(window.analytics.track, 1)
-          expect(window.analytics.track.args[0][0]).to.equal(
-            'Experiment Viewed'
-          )
+          expect(window.analytics.track.args[0][0]).to.equal('Experiment Viewed')
           expect(window.analytics.track.args[0][1]).to.deep.equal({
             variationName: 'activateExperimentA',
             experimentName: 'test_experiment_id_1'
@@ -90,18 +83,12 @@ describe('useExperiment hook', () => {
 
         describe('when the same experiment is loaded more than once', () => {
           it('should only track once', () => {
-            renderHook(
-              () => useExperiment({experimentName: 'test_experiment_id'}),
-              {
-                wrapper
-              }
-            )
-            renderHook(
-              () => useExperiment({experimentName: 'test_experiment_id'}),
-              {
-                wrapper
-              }
-            )
+            renderHook(() => useExperiment({experimentName: 'test_experiment_id'}), {
+              wrapper
+            })
+            renderHook(() => useExperiment({experimentName: 'test_experiment_id'}), {
+              wrapper
+            })
             expect(window.analytics.track.args.length).to.equal(1)
           })
         })
@@ -118,17 +105,12 @@ describe('useExperiment hook', () => {
 
         it('should return the right variationName and log an error', () => {
           delete window.analytics
-          const {result} = renderHook(
-            () => useExperiment({experimentName: 'test_experiment_id_2'}),
-            {
-              wrapper
-            }
-          )
+          const {result} = renderHook(() => useExperiment({experimentName: 'test_experiment_id_2'}), {
+            wrapper
+          })
           expect(result.current.variation).to.equal('activateExperimentA')
           sinon.assert.callCount(console.error, 1)
-          expect(console.error.args[0][0]).to.include(
-            'window.analytics.track expected'
-          )
+          expect(console.error.args[0][0]).to.include('window.analytics.track expected')
         })
       })
 
@@ -173,12 +155,9 @@ describe('useExperiment hook', () => {
       })
 
       it('should return the right variationName and launch the Experiment Viewed event', () => {
-        const {result} = renderHook(
-          () => useExperiment({experimentName: 'test_experiment_id'}),
-          {
-            wrapper
-          }
-        )
+        const {result} = renderHook(() => useExperiment({experimentName: 'test_experiment_id'}), {
+          wrapper
+        })
         expect(result.current.variation).to.equal('getVariationA')
         sinon.assert.callCount(console.error, 0)
       })
@@ -189,14 +168,10 @@ describe('useExperiment hook', () => {
     let activateExperiment
     let wrapper
     beforeEach(() => {
-      activateExperiment = sinon
-        .stub()
-        .throws(new Error('fake activation error'))
+      activateExperiment = sinon.stub().throws(new Error('fake activation error'))
       // eslint-disable-next-line react/prop-types
       wrapper = ({children}) => (
-        <PdeContext.Provider value={{features: [], pde: {activateExperiment}}}>
-          {children}
-        </PdeContext.Provider>
+        <PdeContext.Provider value={{features: [], pde: {activateExperiment}}}>{children}</PdeContext.Provider>
       )
     })
 
@@ -206,85 +181,68 @@ describe('useExperiment hook', () => {
     })
   })
 
-  describe.client(
-    'when calling twice the useExperiment hook with the same feature key',
-    () => {
-      let wrapper
-      let getVariation
-      let stubFactory
+  describe.client('when calling twice the useExperiment hook with the same feature key', () => {
+    let wrapper
+    let getVariation
+    let stubFactory
 
+    beforeEach(() => {
+      window.analytics = {
+        ready: cb => cb(),
+        track: sinon.spy()
+      }
+
+      stubFactory = activateExperiment => {
+        getVariation = sinon.stub().returns('getVariationA')
+        // eslint-disable-next-line react/prop-types
+        wrapper = ({children}) => (
+          <PdeContext.Provider value={{features: [], pde: {activateExperiment, getVariation}}}>
+            {children}
+          </PdeContext.Provider>
+        )
+      }
+    })
+
+    afterEach(() => {
+      delete window.analytics
+    })
+
+    describe('when the second time returns the same value as the first time', () => {
       beforeEach(() => {
-        window.analytics = {
-          ready: cb => cb(),
-          track: sinon.spy()
-        }
+        const activateExperiment = sinon.stub()
+        activateExperiment.onCall(0).returns('A')
+        activateExperiment.onCall(1).returns('A')
 
-        stubFactory = activateExperiment => {
-          getVariation = sinon.stub().returns('getVariationA')
-          // eslint-disable-next-line react/prop-types
-          wrapper = ({children}) => (
-            <PdeContext.Provider
-              value={{features: [], pde: {activateExperiment, getVariation}}}
-            >
-              {children}
-            </PdeContext.Provider>
-          )
-        }
+        stubFactory(activateExperiment)
       })
-
-      afterEach(() => {
-        delete window.analytics
+      it('should send only one experiment viewed event', () => {
+        renderHook(() => useExperiment({experimentName: 'repeatedFeatureFlagKey'}), {
+          wrapper
+        })
+        renderHook(() => useExperiment({experimentName: 'repeatedFeatureFlagKey'}), {
+          wrapper
+        })
+        expect(window.analytics.track.args.length).to.equal(1)
       })
+    })
 
-      describe('when the second time returns the same value as the first time', () => {
-        beforeEach(() => {
-          const activateExperiment = sinon.stub()
-          activateExperiment.onCall(0).returns('A')
-          activateExperiment.onCall(1).returns('A')
+    describe('when the second time returns a different value as the first time', () => {
+      beforeEach(() => {
+        const activateExperiment = sinon.stub()
+        activateExperiment.onCall(0).returns('A')
+        activateExperiment.onCall(1).returns('B')
 
-          stubFactory(activateExperiment)
-        })
-        it('should send only one experiment viewed event', () => {
-          renderHook(
-            () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
-            {
-              wrapper
-            }
-          )
-          renderHook(
-            () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args.length).to.equal(1)
-        })
+        stubFactory(activateExperiment)
       })
-
-      describe('when the second time returns a different value as the first time', () => {
-        beforeEach(() => {
-          const activateExperiment = sinon.stub()
-          activateExperiment.onCall(0).returns('A')
-          activateExperiment.onCall(1).returns('B')
-
-          stubFactory(activateExperiment)
+      it('should send two experiment viewed events', () => {
+        renderHook(() => useExperiment({experimentName: 'repeatedFeatureFlagKey'}), {
+          wrapper
         })
-        it('should send two experiment viewed events', () => {
-          renderHook(
-            () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
-            {
-              wrapper
-            }
-          )
-          renderHook(
-            () => useExperiment({experimentName: 'repeatedFeatureFlagKey'}),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args.length).to.equal(2)
+        renderHook(() => useExperiment({experimentName: 'repeatedFeatureFlagKey'}), {
+          wrapper
         })
+        expect(window.analytics.track.args.length).to.equal(2)
       })
-    }
-  )
+    })
+  })
 })
