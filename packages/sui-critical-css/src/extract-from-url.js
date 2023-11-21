@@ -27,13 +27,7 @@ const getBrowser = async () => {
   return browser
 }
 
-export async function extractCSSFromUrl({
-  customHeaders,
-  height,
-  url,
-  userAgent,
-  width
-}) {
+export async function extractCSSFromUrl({customHeaders, height, url, userAgent, width}) {
   let page
   try {
     // Get a browser instance
@@ -45,14 +39,12 @@ export async function extractCSSFromUrl({
     await page.setViewportSize({width, height})
     page.setDefaultNavigationTimeout(15000)
 
-    const hasCustomHeaders =
-      typeof customHeaders === 'object' && Object.keys(customHeaders).length
+    const hasCustomHeaders = typeof customHeaders === 'object' && Object.keys(customHeaders).length
     hasCustomHeaders && (await page.setExtraHTTPHeaders(customHeaders))
 
     await page.route('**/*', route => {
       const request = route.request()
-      return blockedResourceTypes.includes(request.resourceType()) ||
-        skippedResources.includes(request.url())
+      return blockedResourceTypes.includes(request.resourceType()) || skippedResources.includes(request.url())
         ? route.abort().catch(() => {})
         : route.continue().catch(() => {})
     })
@@ -63,9 +55,7 @@ export async function extractCSSFromUrl({
     const responses = []
 
     for (url of urls) {
-      const response = await page
-        .goto(url, {waitUntil: 'networkidle'})
-        .catch(error => ({error}))
+      const response = await page.goto(url, {waitUntil: 'networkidle'}).catch(error => ({error}))
 
       responses.push(response)
     }
@@ -83,14 +73,9 @@ export async function extractCSSFromUrl({
 
     if (error) await closeAll(error)
 
-    const current = responses.find(
-      response => !response.ok() && response.status() !== 304
-    )
+    const current = responses.find(response => !response.ok() && response.status() !== 304)
 
-    if (current)
-      await closeAll(
-        `Response status code ${current.status()} for url ${current.url()}`
-      )
+    if (current) await closeAll(`Response status code ${current.status()} for url ${current.url()}`)
 
     console.log('[ok] Got response')
 
@@ -109,9 +94,7 @@ export async function extractCSSFromUrl({
 
     // return minified css
     const {styles, stats} = css.minify(coveredCSS)
-    console.log(
-      `[css] Minified from ${stats.originalSize} to ${stats.minifiedSize} bytes`
-    )
+    console.log(`[css] Minified from ${stats.originalSize} to ${stats.minifiedSize} bytes`)
     return styles
   } catch (e) {
     console.log(e)
