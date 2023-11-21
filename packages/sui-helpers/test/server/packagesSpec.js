@@ -3,11 +3,7 @@ import path from 'path'
 
 import {expect} from 'chai'
 
-import {
-  getPackageJson,
-  getPackagesPaths,
-  resolveLazyNPMBin
-} from '../../packages.js'
+import {getPackageJson, getPackagesPaths, resolveLazyNPMBin} from '../../packages.js'
 
 const PACKAGE_JSON_CONTENT = {
   name: 'package-name',
@@ -53,11 +49,7 @@ describe('[sui-helpers] packages.js utils', () => {
   describe.skip('resolveLazyNPMBin', () => {
     it('install a lazy dependency for the binary and return', async function () {
       this.timeout(30000) // allow npm install to have plenty of time
-      const bin = await resolveLazyNPMBin(
-        '.bin/premove',
-        'premove@3.0.1',
-        __dirname
-      )
+      const bin = await resolveLazyNPMBin('.bin/premove', 'premove@3.0.1', __dirname)
       expect(bin).to.include('premove/bin.js')
     })
   })
