@@ -9,9 +9,7 @@ export {DataDogReporter} from './reporters/DataDogReporter.js'
 const getPerformanceMeter = () => (isNode ? performance : window.performance)
 
 const getReporter = () => {
-  const customReporter = isNode
-    ? global.__SUI_DECORATOR_TRACER_REPORTER__
-    : window.__SUI_DECORATOR_TRACER_REPORTER__
+  const customReporter = isNode ? global.__SUI_DECORATOR_TRACER_REPORTER__ : window.__SUI_DECORATOR_TRACER_REPORTER__
 
   return customReporter || new ConsoleReporter()
 }

@@ -17,9 +17,7 @@ export default class RedisClient {
       : redisMock.createClient()
 
     this._redisClient.on('error', function () {
-      console.error(
-        `[sui-decorators/cache]:RedisClient Error creating Redis client`
-      )
+      console.error(`[sui-decorators/cache]:RedisClient Error creating Redis client`)
     })
   }
 
