@@ -96,9 +96,7 @@ Promise.all([createDir(`${PROJECT_PATH}/components`)])
     )
   )
   .then(() => {
-    console.log(
-      '[sui-studio-create] Created folder structure. Installing dependencies...'
-    )
+    console.log('[sui-studio-create] Created folder structure. Installing dependencies...')
     spawn('npm', ['install', '--no-fund', '--no-audit'], {
       cwd: PROJECT_PATH,
       stdio: 'inherit'
