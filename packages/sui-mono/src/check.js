@@ -3,6 +3,8 @@
 const conventionalChangelog = require('conventional-changelog')
 const {readJsonSync} = require('fs-extra')
 
+const {promisify} = require('util')
+
 const {
   checkIsMonoPackage,
   getProjectName,
@@ -10,6 +12,7 @@ const {
   getOverrides
 } = require('./config.js')
 
+const exec = promisify(require('child_process').exec)
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
 const PACKAGE_VERSION_INCREMENT = {
@@ -18,6 +21,10 @@ const PACKAGE_VERSION_INCREMENT = {
   MINOR: 2,
   MAJOR: 3
 }
+const DEPS_UPGRADE_COMMIT_TYPE = 'upgrade'
+const DEPS_UPGRADE_PACKAGES = ['deps', 'deps-dev']
+const DEPS_UPGRADE_BRANCH_PREFIX = 'dependabot/npm_and_yan/'
+const SCOPE_REGEX = /packages\/[a-z]+-[a-z]+/
 
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
@@ -57,12 +64,39 @@ const getOverride = ({overrides, header}) => {
 
 const getTransform =
   ({status, packages, overrides = getOverrides()} = {}) =>
-  (commit, cb) => {
-    const {scope, header} = commit
+  async (commit, cb) => {
+    const {scope, header, type} = commit
     const [pkgToOverride] = getOverride({overrides, header}) ?? []
     const pkg = pkgToOverride ?? getPkgFromScope(scope)
+    const isDepsUpdate =
+      type === DEPS_UPGRADE_COMMIT_TYPE && DEPS_UPGRADE_PACKAGES.includes(pkg)
 
     let toPush = null
+
+    if (isDepsUpdate) {
+      const {stdout: rawUpdateHash} = await exec(
+        `git log --oneline --grep=${DEPS_UPGRADE_BRANCH_PREFIX} | awk '{print $1}' | head -n 1`
+      )
+      const updateHash = rawUpdateHash.trim()
+
+      if (!updateHash) return cb()
+
+      const {stdout: rawChangedFiles} = await exec(
+        `git diff --name-only ${updateHash} master`
+      )
+      const changedFiles = rawChangedFiles.split('\n').filter(Boolean)
+      const pkgToUpdate = changedFiles
+        .find(file => file.match(SCOPE_REGEX))
+        ?.match(SCOPE_REGEX)[0]
+
+      if (!pkgToUpdate) return cb()
+
+      status[pkgToUpdate].increment = Math.max(
+        status[pkgToUpdate].increment,
+        PACKAGE_VERSION_INCREMENT.MINOR
+      )
+      toPush = commit
+    }
 
     if (!packages.includes(pkg)) return cb()
 
@@ -109,6 +143,7 @@ const check = () =>
      */
     const packagesWithChangelog = getWorkspaces().filter(pkg => {
       const {private: privateField} = readJsonSync(`${pkg}/package.json`)
+
       return privateField !== true
     })
 
