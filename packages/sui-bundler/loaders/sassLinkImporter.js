@@ -8,10 +8,7 @@ const createSassLinkImporter = entryPoints => url => {
     const [org, name] = url.split(/\//)
     const pkg = [org.replace('~', ''), name].join('/')
 
-    const absoluteUrl = url.replace(
-      new RegExp(`~?${pkg}(\\/lib)?`, 'g'),
-      entryPoints[pkg]
-    )
+    const absoluteUrl = url.replace(new RegExp(`~?${pkg}(\\/lib)?`, 'g'), entryPoints[pkg])
     return {file: absoluteUrl}
   }
   return null
