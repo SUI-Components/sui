@@ -5,9 +5,7 @@ if (typeof window !== 'undefined') {
   // Polyfill for Element.closest()
   // from https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
   if (!Element.prototype.matches) {
-    Element.prototype.matches =
-      Element.prototype.msMatchesSelector ||
-      Element.prototype.webkitMatchesSelector
+    Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector
   }
 
   if (!Element.prototype.closest) {
