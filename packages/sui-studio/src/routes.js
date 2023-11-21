@@ -10,25 +10,14 @@ import {FILES} from './constants.js'
 
 export default (
   <Route>
-    <Redirect
-      from="workbench/:category/:component"
-      to="/workbench/:category/:component/demo"
-    />
+    <Redirect from="workbench/:category/:component" to="/workbench/:category/:component/demo" />
     <Route path="/" component={Layout}>
       <Route path="workbench/:category/:component" component={Workbench}>
         <Route path="demo" component={Demo} />
         <Route path="documentation" component={Documentation}>
           <Route path="api" component={Api} />
-          <Route
-            path="readme"
-            component={props => <MarkdownFile {...props} file={FILES.README} />}
-          />
-          <Route
-            path="changelog"
-            component={props => (
-              <MarkdownFile {...props} file={FILES.CHANGELOG} />
-            )}
-          />
+          <Route path="readme" component={props => <MarkdownFile {...props} file={FILES.README} />} />
+          <Route path="changelog" component={props => <MarkdownFile {...props} file={FILES.CHANGELOG} />} />
         </Route>
       </Route>
     </Route>

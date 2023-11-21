@@ -5,12 +5,7 @@ import PropTypes from 'prop-types'
 
 import SUIContext from '@s-ui/react-context'
 
-import {
-  iconClose,
-  iconCode,
-  iconFullScreen,
-  iconFullScreenExit
-} from '../icons/index.js'
+import {iconClose, iconCode, iconFullScreen, iconFullScreenExit} from '../icons/index.js'
 import Preview from '../preview/index.js'
 import Style from '../style/index.js'
 import {fetchPlayground, importMainModules} from '../tryRequire.js'
@@ -18,12 +13,7 @@ import CodeEditor from './CodeEditor.js'
 import ContextButtons from './ContextButtons.js'
 import stylesFor, {themesFor} from './fetch-styles.js'
 import ThemesButtons from './ThemesButtons.js'
-import {
-  cleanDisplayName,
-  createContextByType,
-  isFunction,
-  removeDefaultContext
-} from './utilities.js'
+import {cleanDisplayName, createContextByType, isFunction, removeDefaultContext} from './utilities.js'
 
 const EVIL_HACK_TO_RERENDER_AFTER_CHANGE = ' '
 const CONTAINER_CLASS = 'sui-Studio'
@@ -89,13 +79,9 @@ export default class Demo extends Component {
   handleFullScreen = () => {
     this.setState({isFullScreen: !this.state.isFullScreen}, () => {
       const {isFullScreen} = this.state
-      this.containerClassList =
-        this.containerClassList ||
-        document.getElementsByClassName(CONTAINER_CLASS)[0].classList
+      this.containerClassList = this.containerClassList || document.getElementsByClassName(CONTAINER_CLASS)[0].classList
 
-      isFullScreen
-        ? this.containerClassList.add(FULLSCREEN_CLASS)
-        : this.containerClassList.remove(FULLSCREEN_CLASS)
+      isFullScreen ? this.containerClassList.add(FULLSCREEN_CLASS) : this.containerClassList.remove(FULLSCREEN_CLASS)
     })
   }
 
@@ -141,42 +127,26 @@ export default class Demo extends Component {
     const ComponentToRender = Base.type ? Base.type : Base
 
     const nonDefaultExports = removeDefaultContext(exports)
-    const context =
-      Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
+    const context = Object.keys(ctxt).length && createContextByType(ctxt, ctxtType)
     const {domain} = context || {}
 
-    !ComponentToRender.displayName &&
-      console.error(new Error('Component.displayName must be defined.'))
+    !ComponentToRender.displayName && console.error(new Error('Component.displayName must be defined.'))
 
     return (
       <div className="sui-StudioDemo">
         <Style id="sui-studio-demo-style">{style}</Style>
         <div className="sui-StudioNavBar-secondary">
-          <ContextButtons
-            ctxt={ctxt || {}}
-            selected={ctxtSelectedIndex}
-            onContextChange={this.handleContextChange}
-          />
-          <ThemesButtons
-            themes={themes}
-            selected={themeSelectedIndex}
-            onThemeChange={this.handleThemeChange}
-          />
+          <ContextButtons ctxt={ctxt || {}} selected={ctxtSelectedIndex} onContextChange={this.handleContextChange} />
+          <ThemesButtons themes={themes} selected={themeSelectedIndex} onThemeChange={this.handleThemeChange} />
         </div>
 
-        <button
-          className="sui-StudioDemo-fullScreenButton"
-          onClick={this.handleFullScreen}
-        >
+        <button className="sui-StudioDemo-fullScreenButton" onClick={this.handleFullScreen}>
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 
         {!DemoComponent && playground && (
           <>
-            <button
-              className="sui-StudioDemo-codeButton"
-              onClick={this.handleCode}
-            >
+            <button className="sui-StudioDemo-codeButton" onClick={this.handleCode}>
               {isCodeOpen ? iconClose : iconCode}
             </button>
 
@@ -195,8 +165,7 @@ export default class Demo extends Component {
               scope={{
                 context,
                 React,
-                [cleanDisplayName(ComponentToRender.displayName)]:
-                  ComponentToRender,
+                [cleanDisplayName(ComponentToRender.displayName)]: ComponentToRender,
                 domain,
                 ...nonDefaultExports
               }}

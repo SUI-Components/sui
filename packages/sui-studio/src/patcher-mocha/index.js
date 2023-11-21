@@ -23,20 +23,14 @@ class DescribeContext {
     return function (title, cb, componentKey) {
       const originalFn = global[FUNCTION_TO_PATCH]
 
-      const Component =
-        global.__STUDIO_COMPONENT__[componentKey] || global.__STUDIO_COMPONENT__
+      const Component = global.__STUDIO_COMPONENT__[componentKey] || global.__STUDIO_COMPONENT__
 
       const {displayName} = Component
 
-      const contextsForComponent =
-        global.__STUDIO_CONTEXTS__[componentKey] ||
-        global.__STUDIO_CONTEXTS__ ||
-        {}
+      const contextsForComponent = global.__STUDIO_CONTEXTS__[componentKey] || global.__STUDIO_CONTEXTS__ || {}
 
       if (!contextsForComponent) {
-        console.error(
-          `[${displayName}] Using context ${contextToUse} but no contexts defined in context.js file.`
-        )
+        console.error(`[${displayName}] Using context ${contextToUse} but no contexts defined in context.js file.`)
         return originalFn(title, cb)
       }
 
@@ -54,9 +48,7 @@ class DescribeContext {
 
       const NextComponent = addReactContextToComponent(Component, {context})
 
-      return originalFn(`[${contextToUse}] ${title}`, () =>
-        cb(NextComponent, {context})
-      )
+      return originalFn(`[${contextToUse}] ${title}`, () => cb(NextComponent, {context}))
     }
   }
 }

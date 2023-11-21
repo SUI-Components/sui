@@ -13,10 +13,7 @@ function replaceImportedPaths(file) {
 
     const replacedData = data
       .replace(new RegExp('../../../utils', 'g'), 'utils')
-      .replace(
-        new RegExp('../../../(../)?components/(.*)/src', 'g'),
-        'components/$2/src'
-      )
+      .replace(new RegExp('../../../(../)?components/(.*)/src', 'g'), 'components/$2/src')
 
     // Skip writing the file if there's nothing new.
     if (replacedData === data) return
@@ -57,10 +54,7 @@ function migrateDemoFolders() {
   const components = glob.sync(['components/*/*/src/index.js'])
 
   components.forEach(file => {
-    const [category, component] = file
-      .replace('/index.js', '')
-      .replace('components/', '')
-      .split('/')
+    const [category, component] = file.replace('/index.js', '').replace('components/', '').split('/')
     const demoPath = `./demo/${category}/${component}`
     const newDemoPath = `./components/${category}/${component}/demo`
 
