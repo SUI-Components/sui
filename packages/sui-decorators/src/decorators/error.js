@@ -9,10 +9,7 @@ const _runner = ({instance, original} = {}) => {
       value: true
     })
     try {
-      const returns = original.apply(
-        instance.__STREAMIFY__ ? this : instance,
-        args
-      )
+      const returns = original.apply(instance.__STREAMIFY__ ? this : instance, args)
       if (isPromise(returns)) {
         return returns
           .then(r => {
