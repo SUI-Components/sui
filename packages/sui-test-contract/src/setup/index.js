@@ -3,12 +3,7 @@ import {setupServer} from 'msw/node'
 
 import {setupPactMswAdapter} from '@pactflow/pact-msw-adapter'
 
-import {
-  getContractTests,
-  mapProviders,
-  toQueryString,
-  writerFactory
-} from './utils.js'
+import {getContractTests, mapProviders, toQueryString, writerFactory} from './utils.js'
 
 const setupContractTests = ({
   apiUrl: defaultApiUrl,
@@ -75,9 +70,7 @@ const setupContractTests = ({
 
           if (query) url = `${url}?${toQueryString(query)}`
           try {
-            const {data} = body
-              ? await fetcher[method](url, body, options)
-              : await fetcher[method](url, options)
+            const {data} = body ? await fetcher[method](url, body, options) : await fetcher[method](url, options)
             if (data) expect(data).to.deep.equal(response)
           } catch (error) {
             const data = error.response.data

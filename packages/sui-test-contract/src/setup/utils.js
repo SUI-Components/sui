@@ -5,13 +5,10 @@ import {writeData2File} from '@pactflow/pact-msw-adapter/dist/utils/utils.js'
 const flatEntries = (input, prefix = '') =>
   Object.entries(input).flatMap(([key, value]) => {
     const isObject = typeof value === 'object'
-    return isObject
-      ? flatEntries(value, `${prefix}${key}.`)
-      : {[`${prefix}${key}`]: {match: 'type'}}
+    return isObject ? flatEntries(value, `${prefix}${key}.`) : {[`${prefix}${key}`]: {match: 'type'}}
   })
 
-const reduceArrayToObject = items =>
-  items.reduce((objAcc, item) => ({...objAcc, ...item}), {})
+const reduceArrayToObject = items => items.reduce((objAcc, item) => ({...objAcc, ...item}), {})
 
 const getMatchingRules = body => {
   const matchingRulesArray = flatEntries(body, '$.body.')
@@ -27,25 +24,19 @@ export const writerFactory = providers => (path, data) => {
     const {request} = interaction
     const {path, query, body} = request
 
-    const definedInteraction = providers[name].find(
-      ({endpoint, query: definedQuery, body: definedBody}) => {
-        const matchedEndpoint = endpoint === path
+    const definedInteraction = providers[name].find(({endpoint, query: definedQuery, body: definedBody}) => {
+      const matchedEndpoint = endpoint === path
 
-        if (query) {
-          return matchedEndpoint && query === toQueryString(definedQuery)
-        }
-        if (body) {
-          return matchedEndpoint && stringify(body) === stringify(definedBody)
-        }
-        return matchedEndpoint
+      if (query) {
+        return matchedEndpoint && query === toQueryString(definedQuery)
       }
-    )
+      if (body) {
+        return matchedEndpoint && stringify(body) === stringify(definedBody)
+      }
+      return matchedEndpoint
+    })
 
-    const {
-      description,
-      state: providerState,
-      addMatchingRules
-    } = definedInteraction
+    const {description, state: providerState, addMatchingRules} = definedInteraction
 
     return {
       ...interaction,
@@ -77,10 +68,7 @@ export const mapProviders = providers =>
   }, {})
 
 export const getContractTests = ({apiUrl, providers}) =>
-  Object.keys(providers).reduce(
-    (tests, key) => [...tests, ...providers[key]],
-    []
-  )
+  Object.keys(providers).reduce((tests, key) => [...tests, ...providers[key]], [])
 
 export const toQueryString = (queryParams, options = {}) => {
   const {arrayFormat, delimiter, encode = true} = options
