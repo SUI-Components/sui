@@ -19,9 +19,7 @@ program
     console.log('')
     console.log('  Examples:')
     console.log('')
-    console.log(
-      '    $ sui-mono commit-all --type=fix -m "bump dependency to major version"'
-    )
+    console.log('    $ sui-mono commit-all --type=fix -m "bump dependency to major version"')
     console.log('    $ sui-mono --help')
     console.log('    $ sui-mono -h')
     console.log('')
@@ -76,10 +74,5 @@ const checkStageFuncs = getWorkspaces().map(pkg => {
 })
 
 getSpawnPromise('git', ['reset']) // Unstage all prossible staged files
-  .then(() =>
-    checkStageFuncs.reduce(
-      (promise, func) => promise.then(func),
-      Promise.resolve()
-    )
-  )
+  .then(() => checkStageFuncs.reduce((promise, func) => promise.then(func), Promise.resolve()))
   .catch(showError)
