@@ -22,6 +22,4 @@ const terserMinifier = ({extractComments, sourceMap}) =>
   })
 
 module.exports = ({extractComments, sourceMap}) =>
-  supportLegacyBrowsers
-    ? terserMinifier({extractComments, sourceMap})
-    : esbuildMinifier({sourceMap})
+  supportLegacyBrowsers ? terserMinifier({extractComments, sourceMap}) : esbuildMinifier({sourceMap})

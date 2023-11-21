@@ -41,12 +41,7 @@ program
   })
   .parse(process.argv)
 
-const {
-  clean = false,
-  context,
-  saveStats,
-  linkPackage: packagesToLink = []
-} = program.opts()
+const {clean = false, context, saveStats, linkPackage: packagesToLink = []} = program.opts()
 
 config.context = context || config.context
 
@@ -106,10 +101,7 @@ compiler.run(async (error, stats) => {
   const resolvePublicFile = file => path.resolve(process.cwd(), 'public', file)
 
   if (offlinePageExists) {
-    fs.copyFileSync(
-      path.resolve(offlinePath),
-      resolvePublicFile('offline.html')
-    )
+    fs.copyFileSync(path.resolve(offlinePath), resolvePublicFile('offline.html'))
   }
 
   if (offlinePageExists || staticsCacheOnly) {
@@ -126,31 +118,19 @@ compiler.run(async (error, stats) => {
 
     const importScripts = offlineConfig.importScripts || []
 
-    const stringImportScripts = importScripts
-      .map(url => `importScripts("${url}")`)
-      .join('\n')
+    const stringImportScripts = importScripts.map(url => `importScripts("${url}")`).join('\n')
 
-    Boolean(importScripts.length) &&
-      console.log('\nExternal Scripts Added to the SW:\n', stringImportScripts)
+    Boolean(importScripts.length) && console.log('\nExternal Scripts Added to the SW:\n', stringImportScripts)
 
     // read the service worker template
-    const swTemplate = fs.readFileSync(
-      path.resolve(__dirname, '..', 'service-worker.js'),
-      'utf-8'
-    )
+    const swTemplate = fs.readFileSync(path.resolve(__dirname, '..', 'service-worker.js'), 'utf-8')
 
     // replace all the variables from the template with the actual values
     const swCode = swTemplate
       .replace('// IMPORT_SCRIPTS_HERE', stringImportScripts)
       .replace("require('static-manifest')", JSON.stringify(manifestStatics))
-      .replace(
-        "require('static-cache-name')",
-        JSON.stringify(Date.now().toString())
-      )
-      .replace(
-        "require('static-statics-cache-only')",
-        JSON.stringify(staticsCacheOnly)
-      )
+      .replace("require('static-cache-name')", JSON.stringify(Date.now().toString()))
+      .replace("require('static-statics-cache-only')", JSON.stringify(staticsCacheOnly))
 
     const swFilePath = resolvePublicFile('service-worker.js')
 
@@ -158,9 +138,7 @@ compiler.run(async (error, stats) => {
     console.log('\nService worker generated succesfully!\n')
   }
 
-  log.success(
-    `Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`
-  )
+  log.success(`Your app is compiled in ${process.env.NODE_ENV} mode in /public. It's ready to roll!`)
 
   compiler.close(closeErr => {
     const exitCode = closeErr ? 1 : 0
