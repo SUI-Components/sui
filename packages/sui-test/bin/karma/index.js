@@ -6,16 +6,7 @@ const {
 const config = require('./config.js')
 const CWD = process.cwd()
 
-module.exports = async ({
-  ci,
-  coverage,
-  headless,
-  ignorePattern,
-  pattern,
-  srcPattern,
-  timeout,
-  watch
-}) => {
+module.exports = async ({ci, coverage, headless, ignorePattern, pattern, srcPattern, timeout, watch}) => {
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 
