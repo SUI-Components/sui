@@ -70,8 +70,7 @@ function _compilePattern(pattern) {
 const CompiledPatternsCache = Object.create(null)
 
 export function compilePattern(pattern) {
-  if (!CompiledPatternsCache[pattern])
-    CompiledPatternsCache[pattern] = _compilePattern(pattern)
+  if (!CompiledPatternsCache[pattern]) CompiledPatternsCache[pattern] = _compilePattern(pattern)
 
   return CompiledPatternsCache[pattern]
 }
@@ -175,14 +174,9 @@ export function formatPattern(pattern, params = {}) {
     token = tokens[i]
 
     if (token === '*' || token === '**') {
-      paramValue = Array.isArray(params.splat)
-        ? params.splat[splatIndex++]
-        : params.splat
+      paramValue = Array.isArray(params.splat) ? params.splat[splatIndex++] : params.splat
 
-      invariant(
-        paramValue != null || parenCount > 0,
-        `Missing splat #${splatIndex} for path "${pattern}"`
-      )
+      invariant(paramValue != null || parenCount > 0, `Missing splat #${splatIndex} for path "${pattern}"`)
 
       if (paramValue != null) pathname += encodeURI(paramValue)
     } else if (token === '(') {
@@ -202,10 +196,7 @@ export function formatPattern(pattern, params = {}) {
       paramName = token.substring(1)
       paramValue = params[paramName]
 
-      invariant(
-        paramValue != null || parenCount > 0,
-        `Missing "${paramName}" parameter for path "${pattern}"`
-      )
+      invariant(paramValue != null || parenCount > 0, `Missing "${paramName}" parameter for path "${pattern}"`)
 
       if (paramValue == null) {
         if (parenCount) {
@@ -222,18 +213,12 @@ export function formatPattern(pattern, params = {}) {
             }
           }
 
-          invariant(
-            nextParenIdx > 0,
-            `Path "${pattern}" is missing end paren at segment "${tokensSubset.join(
-              ''
-            )}"`
-          )
+          invariant(nextParenIdx > 0, `Path "${pattern}" is missing end paren at segment "${tokensSubset.join('')}"`)
 
           // jump to ending paren
           i = curTokenIdx + nextParenIdx - 1
         }
-      } else if (parenCount)
-        parenHistory[parenCount - 1] += encodeURIComponent(paramValue)
+      } else if (parenCount) parenHistory[parenCount - 1] += encodeURIComponent(paramValue)
       else pathname += encodeURIComponent(paramValue)
     } else {
       if (parenCount) parenHistory[parenCount - 1] += token
