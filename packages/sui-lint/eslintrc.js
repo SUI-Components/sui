@@ -37,10 +37,7 @@ const REACT_RULES = {
 }
 
 const TESTING_RULES = {
-  'chai-friendly/no-unused-expressions': [
-    RULES.ERROR,
-    {allowShortCircuit: true, allowTernary: true}
-  ],
+  'chai-friendly/no-unused-expressions': [RULES.ERROR, {allowShortCircuit: true, allowTernary: true}],
   'no-only-tests/no-only-tests': RULES.ERROR
 }
 
@@ -125,13 +122,7 @@ const IMPORT_SORT_GROUPS = [
   // S-UI & ADV-UI organization packages.
   ['^@s-ui', '^@adv-ui'],
   // Relative imports. Put `./` last.
-  [
-    '^\\.\\.(?!/?$)',
-    '^\\.\\./?$',
-    '^\\./(?=.*/)(?!/?$)',
-    '^\\.(?!/?$)',
-    '^\\./?$'
-  ],
+  ['^\\.\\.(?!/?$)', '^\\.\\./?$', '^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
   // Style imports.
   ['^.+\\.s?css$']
 ]
@@ -201,10 +192,7 @@ module.exports = {
     'no-prototype-builtins': RULES.OFF,
     'no-return-await': RULES.WARNING,
     'no-unused-expressions': RULES.OFF,
-    'no-unused-vars': [
-      RULES.ERROR,
-      {args: 'none', ignoreRestSiblings: true, varsIgnorePattern: 'React'}
-    ],
+    'no-unused-vars': [RULES.ERROR, {args: 'none', ignoreRestSiblings: true, varsIgnorePattern: 'React'}],
     'no-var': RULES.WARNING,
     strict: RULES.OFF,
     'prefer-regex-literals': RULES.WARNING,

@@ -34,9 +34,7 @@ try {
   }
 
   // check if actual package has different lint config
-  const areDifferentLintConfig =
-    JSON.stringify({eslintConfig, prettier, stylelint}) !==
-    JSON.stringify(LINT_CONFIGS)
+  const areDifferentLintConfig = JSON.stringify({eslintConfig, prettier, stylelint}) !== JSON.stringify(LINT_CONFIGS)
 
   // if they're different, we're going to rewrite the package.json
   if (areDifferentLintConfig) {
@@ -49,10 +47,9 @@ try {
       ...LINT_CONFIGS
     }
     // write the new package.json with the linter conifg
-    writeFile(
-      ACTUAL_PACKAGE_PATH,
-      JSON.stringify(newPackageJSON, null, 2)
-    ).then(() => console.log('Added @s-ui/lint config successfully'))
+    writeFile(ACTUAL_PACKAGE_PATH, JSON.stringify(newPackageJSON, null, 2)).then(() =>
+      console.log('Added @s-ui/lint config successfully')
+    )
   } else {
     console.log('@s-ui/lint config already in your package.json. Great!')
   }
