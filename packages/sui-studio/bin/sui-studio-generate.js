@@ -45,9 +45,7 @@ if (!wordsOnlyRegex.test(category)) {
   showError('category name must contain letters or underscore only')
 }
 
-const componentInPascal = toPascalCase(
-  `${category.replace(/s$/, '')} ${component}`
-)
+const componentInPascal = toPascalCase(`${category.replace(/s$/, '')} ${component}`)
 
 const COMPONENT_DIR = `/components/${category}/${component}/`
 const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
@@ -69,9 +67,7 @@ const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 const {context, scope, prefix = 'sui', swc} = program.opts()
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
-const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(
-  component
-)}`
+const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(component)}`
 const packageInfo = require(path.join(process.cwd(), 'package.json'))
 const {repository = {}, homepage} = packageInfo
 
@@ -94,9 +90,7 @@ ${context ? "import '@s-ui/studio/src/patcher-mocha'" : ''}
 
 chai.use(chaiDOM)
 
-describe${context ? '.context.default' : ''}('${componentInPascal}', ${
-  context ? 'Component' : '()'
-} => {
+describe${context ? '.context.default' : ''}('${componentInPascal}', ${context ? 'Component' : '()'} => {
   const setup = setupEnvironment(Component)
 
   it('should render without crashing', () => {
@@ -153,9 +147,7 @@ const defaultContext = `module.exports = {
 }
 `
 
-const buildJs = swc
-  ? 'sui-js-compiler'
-  : 'babel --presets sui ./src --out-dir ./lib'
+const buildJs = swc ? 'sui-js-compiler' : 'babel --presets sui ./src --out-dir ./lib'
 
 // Check if the component already exist before continuing
 if (fs.existsSync(COMPONENT_PATH)) {
@@ -301,26 +293,14 @@ export default () => <${componentInPascal} />
 
       writeFile(
         COMPONENT_CONTEXT_FILE,
-        isBooleanContext
-          ? defaultContext
-          : fs.readFileSync(`${BASE_DIR}${context}`).toString()
+        isBooleanContext ? defaultContext : fs.readFileSync(`${BASE_DIR}${context}`).toString()
       )
     })(),
   writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(testTemplate))
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
-  const install = spawn('npm', [
-    'install',
-    '--legacy-peer-deps',
-    '--no-audit',
-    '--no-fund',
-    '--production=false'
-  ])
+  const install = spawn('npm', ['install', '--legacy-peer-deps', '--no-audit', '--no-fund', '--production=false'])
 
-  install.stdout.on('data', data =>
-    console.log(colors.gray(`[${packageName}]: ${data.toString()}`))
-  )
-  install.stderr.on('data', data =>
-    console.log(colors.red(`[${packageName}]: ${data.toString()}`))
-  )
+  install.stdout.on('data', data => console.log(colors.gray(`[${packageName}]: ${data.toString()}`)))
+  install.stderr.on('data', data => console.log(colors.red(`[${packageName}]: ${data.toString()}`)))
 })

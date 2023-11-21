@@ -11,7 +11,5 @@ module.exports = function copyGlobals() {
   }
 
   fs.writeFileSync(GLOBALS_FILE_PATH, '// globals file', 'utf8')
-  copy([GLOBALS_FILE_PATH, DESTINATION_FOLDER]).then(() =>
-    console.log('[sui-studio] Copied globals file correctly')
-  )
+  copy([GLOBALS_FILE_PATH, DESTINATION_FOLDER]).then(() => console.log('[sui-studio] Copied globals file correctly'))
 }
