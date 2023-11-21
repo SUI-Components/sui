@@ -28,11 +28,11 @@ class ClientMocker extends Mocker {
 }
 
 class ClientMock extends Mock {
-  _responseResolver = (
-    response,
+  _responseResolver = (response, statusCode, headers = {'Content-Type': 'application/json'}) => [
     statusCode,
-    headers = {'Content-Type': 'application/json'}
-  ) => [statusCode, headers, JSON.stringify(response)]
+    headers,
+    JSON.stringify(response)
+  ]
 
   constructor(server, baseUrl) {
     super()
