@@ -19,9 +19,7 @@ describe('sui-ci', () => {
     it('calls GitHub Api to update status of a commit with the correct message for install topic', done => {
       mockGitHubRequest(({method, href, body}) => {
         expect(method).to.equal('POST')
-        expect(href).to.equal(
-          'https://api.github.com/repos/SUI-Components/sui-components/statuses/commit-sha'
-        )
+        expect(href).to.equal('https://api.github.com/repos/SUI-Components/sui-components/statuses/commit-sha')
 
         expect(body).to.eql({
           context: '@s-ui/ci (install)',
@@ -39,9 +37,7 @@ describe('sui-ci', () => {
     it('calls GitHub Api to update status of a commit with a default message for unknown topic', done => {
       mockGitHubRequest(({method, href, body}) => {
         expect(method).to.equal('POST')
-        expect(href).to.equal(
-          'https://api.github.com/repos/SUI-Components/sui-components/statuses/commit-sha'
-        )
+        expect(href).to.equal('https://api.github.com/repos/SUI-Components/sui-components/statuses/commit-sha')
 
         expect(body).to.eql({
           context: '@s-ui/ci (whatever)',
