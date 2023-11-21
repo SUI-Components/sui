@@ -40,9 +40,7 @@ const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
 
     if (!window.analytics?.track) {
       // eslint-disable-next-line no-console
-      console.error(
-        "[sui-pde: useExperiment] window.analytics.track expected to exists but doesn't"
-      )
+      console.error("[sui-pde: useExperiment] window.analytics.track expected to exists but doesn't")
       return
     }
 

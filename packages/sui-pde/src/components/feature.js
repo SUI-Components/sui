@@ -2,12 +2,7 @@ import PropTypes from 'prop-types'
 
 import useFeature from '../hooks/useFeature.js'
 
-export default function Feature({
-  children,
-  featureKey,
-  attributes,
-  queryString
-}) {
+export default function Feature({children, featureKey, attributes, queryString}) {
   const {isActive, variables} = useFeature(featureKey, attributes, queryString)
   return children({isActive, variables})
 }

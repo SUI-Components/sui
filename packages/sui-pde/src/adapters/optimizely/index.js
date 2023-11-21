@@ -16,8 +16,7 @@ const DEFAULT_TIMEOUT = 500
 
 const {enums: LOG_LEVEL} = optimizelySDK
 
-const LOGGER_LEVEL =
-  process.env.NODE_ENV === 'production' ? LOG_LEVEL.error : LOG_LEVEL.info
+const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? LOG_LEVEL.error : LOG_LEVEL.info
 
 export default class OptimizelyAdapter {
   /**
@@ -28,17 +27,9 @@ export default class OptimizelyAdapter {
    * @param {object} param.activeIntegrations segment activated by default
    * @param {boolean} param.hasUserConsents
    */
-  constructor({
-    optimizely,
-    userId,
-    activeIntegrations = {segment: true},
-    hasUserConsents,
-    applicationAttributes = {}
-  }) {
+  constructor({optimizely, userId, activeIntegrations = {segment: true}, hasUserConsents, applicationAttributes = {}}) {
     if (!optimizely) {
-      throw new Error(
-        'optimizely instance is mandatory to use OptimizelyAdapter'
-      )
+      throw new Error('optimizely instance is mandatory to use OptimizelyAdapter')
     }
 
     this._optimizely = optimizely
@@ -66,11 +57,7 @@ export default class OptimizelyAdapter {
     const options = {...DEFAULT_DATAFILE_OPTIONS, ...optionParameter}
     optimizely.setLogLevel(LOGGER_LEVEL)
     optimizely.setLogger(optimizely.logging.createLogger())
-    if (
-      !datafile &&
-      typeof window !== 'undefined' &&
-      window.__INITIAL_CONTEXT_VALUE__?.pde
-    ) {
+    if (!datafile && typeof window !== 'undefined' && window.__INITIAL_CONTEXT_VALUE__?.pde) {
       datafile = window.__INITIAL_CONTEXT_VALUE__.pde
       sdkKey = undefined
     }
@@ -146,9 +133,7 @@ export default class OptimizelyAdapter {
   }
 
   onReady() {
-    return this._optimizely
-      .onReady({timeout: DEFAULT_TIMEOUT})
-      .then(() => this._optimizely)
+    return this._optimizely.onReady({timeout: DEFAULT_TIMEOUT}).then(() => this._optimizely)
   }
 
   /**
@@ -159,15 +144,11 @@ export default class OptimizelyAdapter {
    * @returns {isActive: boolean, linkedExperiments: number[]}
    */
   isFeatureEnabled({featureKey, attributes}) {
-    const experimentsMap =
-      this.getOptimizelyConfig()?.featuresMap[featureKey]?.experimentsMap || {}
+    const experimentsMap = this.getOptimizelyConfig()?.featuresMap[featureKey]?.experimentsMap || {}
     const linkedExperimentNames = Object.keys(experimentsMap)
 
     // check for user consents only if featureKey is a feature that belongs to a feature test or if a userId is available
-    if (
-      (linkedExperimentNames.length > 0 && !this._hasUserConsents) ||
-      !this._userId
-    ) {
+    if ((linkedExperimentNames.length > 0 && !this._hasUserConsents) || !this._userId) {
       return {isActive: false, linkedExperiments: []}
     }
 
@@ -188,11 +169,7 @@ export default class OptimizelyAdapter {
    * @returns {object}
    */
   getAllFeatureVariables({featureKey, attributes}) {
-    return this._optimizely.getAllFeatureVariables(
-      featureKey,
-      this._userId,
-      attributes
-    )
+    return this._optimizely.getAllFeatureVariables(featureKey, this._userId, attributes)
   }
 
   updateConsents({hasUserConsents}) {
