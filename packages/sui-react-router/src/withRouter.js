@@ -18,7 +18,6 @@ export default (Component, {displayName} = {displayName: ''}) => {
     return <Component {...props} />
   }
 
-  WrappedComponent.displayName =
-    displayName || `withRouter(${Component.displayName || Component.name})`
+  WrappedComponent.displayName = displayName || `withRouter(${Component.displayName || Component.name})`
   return hoistNonReactStatics(WrappedComponent, Component)
 }

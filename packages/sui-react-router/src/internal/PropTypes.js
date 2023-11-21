@@ -8,8 +8,7 @@ import {arrayOf, element, elementType, object, oneOfType} from 'prop-types'
  * @return {Error | undefined} Return an Error if the prop value is not falsy
  */
 export function falsy(props, propName, componentName) {
-  if (props[propName])
-    return new Error(`<${componentName}> should not have a "${propName}" prop`)
+  if (props[propName]) return new Error(`<${componentName}> should not have a "${propName}" prop`)
 }
 
 const route = oneOfType([object, element])

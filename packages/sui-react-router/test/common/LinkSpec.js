@@ -6,9 +6,7 @@ import {Link, match, Route, Router} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
-    match({routes: withRoutes, location}, (_, __, renderProps) =>
-      resolve(renderToString(<Router {...renderProps} />))
-    )
+    match({routes: withRoutes, location}, (_, __, renderProps) => resolve(renderToString(<Router {...renderProps} />)))
   })
 }
 

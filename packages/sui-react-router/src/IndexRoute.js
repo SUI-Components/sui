@@ -11,10 +11,7 @@ import {falsy} from './internal/PropTypes.js'
  * a JSX route config.
  */
 const IndexRoute = () =>
-  invariant(
-    false,
-    '<IndexRoute> elements are for router configuration only and should not be rendered'
-  )
+  invariant(false, '<IndexRoute> elements are for router configuration only and should not be rendered')
 
 IndexRoute.displayName = 'IndexRoute'
 IndexRoute.propTypes = {

@@ -13,11 +13,7 @@ function deepEqual(a, b) {
   if (a == null || b == null) return false
 
   if (Array.isArray(a)) {
-    return (
-      Array.isArray(b) &&
-      a.length === b.length &&
-      a.every((item, index) => deepEqual(item, b[index]))
-    )
+    return Array.isArray(b) && a.length === b.length && a.every((item, index) => deepEqual(item, b[index]))
   }
 
   if (typeof a === 'object') {
@@ -106,10 +102,7 @@ function routeIsActive(pathname, routes, params) {
         // We have an exact match on the route. Just check that all the params
         // match.
         // FIXME: This doesn't work on repeated params.
-        return paramNames.every(
-          (paramName, index) =>
-            String(paramValues[index]) === String(params[paramName])
-        )
+        return paramNames.every((paramName, index) => String(paramValues[index]) === String(params[paramName]))
       }
     }
   }
@@ -131,13 +124,7 @@ function queryIsActive(query, activeQuery) {
  * Check if <Link> with a given pathname/query combination is currently active.
  * @returns {Boolean} Returns true if it matches
  */
-export default function isActive(
-  {pathname, query},
-  indexOnly,
-  currentLocation,
-  routes,
-  params
-) {
+export default function isActive({pathname, query}, indexOnly, currentLocation, routes, params) {
   if (currentLocation == null) return false
 
   // TODO: This is a bit ugly. It keeps around support for treating pathnames
