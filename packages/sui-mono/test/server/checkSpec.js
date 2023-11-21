@@ -1,10 +1,6 @@
 import {expect} from 'chai'
 
-import {
-  getTransform,
-  isCommitBreakingChange,
-  isCommitReleaseTrigger
-} from '../../src/check.js'
+import {getTransform, isCommitBreakingChange, isCommitReleaseTrigger} from '../../src/check.js'
 
 describe('check', () => {
   describe('isCommitBreakingChange', () => {
