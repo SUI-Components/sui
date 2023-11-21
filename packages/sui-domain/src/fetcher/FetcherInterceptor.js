@@ -31,9 +31,7 @@ export default class FetcherInterceptor {
     let result = originalResult
 
     if (this._isPromiseType(result)) {
-      result = new Promise((resolve, reject) =>
-        this._catchExceptions({resolve, reject, originalResult})
-      )
+      result = new Promise((resolve, reject) => this._catchExceptions({resolve, reject, originalResult}))
     }
 
     return result
@@ -51,10 +49,7 @@ export default class FetcherInterceptor {
       const response = await originalResult
       resolve(response)
     } catch (error) {
-      if (
-        FetcherInterceptor.errorInterceptor !== null &&
-        typeof FetcherInterceptor.errorInterceptor === 'function'
-      ) {
+      if (FetcherInterceptor.errorInterceptor !== null && typeof FetcherInterceptor.errorInterceptor === 'function') {
         FetcherInterceptor.errorInterceptor(error)
       }
 
