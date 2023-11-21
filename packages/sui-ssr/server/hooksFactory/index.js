@@ -35,10 +35,9 @@ const getStaticErrorPageContent = async (status, req) => {
   if (__PAGES__[status]) {
     return __PAGES__[status]
   }
-  const html = await promisify(readFile)(
-    resolve(process.cwd(), publicFolder(req), `${status}.html`),
-    'utf8'
-  ).catch(() => `Generic Error Page: ${status}`)
+  const html = await promisify(readFile)(resolve(process.cwd(), publicFolder(req), `${status}.html`), 'utf8').catch(
+    () => `Generic Error Page: ${status}`
+  )
   __PAGES__[status] = html
   return html
 }
@@ -53,9 +52,7 @@ const builAppConfig = (req, res, next) => {
 
 export const hooksFactory = async () => {
   const _userHooksInterOP = userHooks.default || userHooks
-  const _userHooks = isFunction(_userHooksInterOP)
-    ? await _userHooksInterOP()
-    : _userHooksInterOP
+  const _userHooks = isFunction(_userHooksInterOP) ? await _userHooksInterOP() : _userHooksInterOP
 
   return {
     [TYPES.PRE_HEALTH]: NULL_MDWL,
@@ -114,8 +111,7 @@ export const hooksFactory = async () => {
       return next()
     },
     [TYPES.LOGGING]: NULL_MDWL,
-    [TYPES.CSP_REPORT]: (req, res) =>
-      res.status(200).json({message: 'Tracking disabled'}),
+    [TYPES.CSP_REPORT]: (req, res) => res.status(200).json({message: 'Tracking disabled'}),
     [TYPES.PRE_STATIC_PUBLIC]: NULL_MDWL,
     [TYPES.SETUP_CONTEXT]: async (req, res, next) => {
       const startContextCreationTime = process.hrtime()
@@ -135,17 +131,13 @@ export const hooksFactory = async () => {
     [TYPES.PRE_SSR_HANDLER]: NULL_MDWL,
     [TYPES.APP_CONFIG_SETUP]: builAppConfig,
     [TYPES.NOT_FOUND]: async (req, res) => {
-      res
-        .status(NOT_FOUND_CODE)
-        .send(await getStaticErrorPageContent(NOT_FOUND_CODE, req))
+      res.status(NOT_FOUND_CODE).send(await getStaticErrorPageContent(NOT_FOUND_CODE, req))
     },
     [TYPES.INTERNAL_ERROR]: async (err, req, res) => {
       // getInitialProps could throw a 404 error or any other error
       req.log && req.log.error && req.log.error((' ' + err.message).slice(1))
       const status =
-        err.message && err.message.includes(NOT_FOUND_CODE)
-          ? NOT_FOUND_CODE
-          : err.status || INTERNAL_ERROR_CODE
+        err.message && err.message.includes(NOT_FOUND_CODE) ? NOT_FOUND_CODE : err.status || INTERNAL_ERROR_CODE
 
       // Prevents from trying to send headers twice (fatal error) when earlyFlush is enabled
       if (!res.headersSent) {
