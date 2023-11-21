@@ -5,11 +5,7 @@ import PropTypes from 'prop-types'
 const withSwitchValue = BaseComponent => {
   const displayName = BaseComponent.displayName
 
-  const BaseComponentWithState = ({
-    value: valueFromProps = false,
-    onChange: onChangeFromProps,
-    ...props
-  }) => {
+  const BaseComponentWithState = ({value: valueFromProps = false, onChange: onChangeFromProps, ...props}) => {
     const [value, setValue] = useState(Boolean(valueFromProps))
 
     const onChange = ev => {
