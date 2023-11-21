@@ -14,9 +14,7 @@ export const INITIAL_CONTEXT_VALUE = '__INITIAL_CONTEXT_VALUE__'
  */
 export const getInitialContextValue = context =>
   Object.keys(context)
-    .filter(
-      contextKey => typeof context[contextKey]?.getInitialData === 'function'
-    )
+    .filter(contextKey => typeof context[contextKey]?.getInitialData === 'function')
     .reduce((acc, contextKey) => {
       acc[contextKey] = context[contextKey].getInitialData()
       return acc

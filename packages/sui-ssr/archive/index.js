@@ -8,17 +8,11 @@ const {auth, outputFileName} = program.opts()
 
 module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
   new Promise((resolve, reject) => {
-    const authVariableDefinition = auth
-      ? authDefinitionBuilder(auth.split(':'))
-      : ''
-    const entryPointPreWork = !entryPoint
-      ? ''
-      : 'COPY ./entry-point ./entry-point\nRUN chmod +x ./entry-point'
+    const authVariableDefinition = auth ? authDefinitionBuilder(auth.split(':')) : ''
+    const entryPointPreWork = !entryPoint ? '' : 'COPY ./entry-point ./entry-point\nRUN chmod +x ./entry-point'
 
     const entryPointLine = !entryPoint ? '' : 'ENTRYPOINT ["./entry-point"]'
-    const output = outputFileName
-      ? fs.createWriteStream(outputZipPath)
-      : process.stdout
+    const output = outputFileName ? fs.createWriteStream(outputZipPath) : process.stdout
     const archive = archiver('zip', {
       zlib: {level: 9}
     })
@@ -29,8 +23,7 @@ module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
         '-> File',
         outputFileName.magenta.bold + '.zip'.magenta.bold,
         ' was created - size ',
-        Math.round(archive.pointer() / 1024).toString().blue.bold +
-          ' kb'.blue.bold
+        Math.round(archive.pointer() / 1024).toString().blue.bold + ' kb'.blue.bold
       )
       // eslint-disable-next-line no-console
       console.log(' -> Success ✅'.green)
@@ -39,24 +32,18 @@ module.exports = ({outputZipPath, pkg, entryPoint, dockerRegistry}) =>
     })
     archive.on('error', reject)
     archive.pipe(output)
-    archive.append(
-      fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'),
-      {
-        name: 'package.json'
-      }
-    )
+    archive.append(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'), {
+      name: 'package.json'
+    })
 
     entryPoint &&
       archive.append(fs.readFileSync(entryPoint, 'utf8'), {
         name: 'entry-point'
       })
 
-    archive.append(
-      fs
-        .readFileSync(path.join(__dirname, 'pm2.tpl'), 'utf8')
-        .replace('{{name}}', pkg.name),
-      {name: 'pm2.json'}
-    )
+    archive.append(fs.readFileSync(path.join(__dirname, 'pm2.tpl'), 'utf8').replace('{{name}}', pkg.name), {
+      name: 'pm2.json'
+    })
 
     archive.append(
       fs

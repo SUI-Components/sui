@@ -2,10 +2,7 @@ const parse5 = require('parse5')
 
 function hasChildren(node) {
   return (
-    typeof node === 'object' &&
-    node.childNodes &&
-    typeof node.childNodes !== 'undefined' &&
-    node.childNodes.length > 0
+    typeof node === 'object' && node.childNodes && typeof node.childNodes !== 'undefined' && node.childNodes.length > 0
   )
 }
 
@@ -21,10 +18,7 @@ const _removeMarkedTags = document => {
 
     const prevNode = document.childNodes[index - 1]
 
-    if (
-      prevNode.nodeName === '#comment' &&
-      (prevNode.data || '').indexOf('THIRD_PARTY') > -1
-    ) {
+    if (prevNode.nodeName === '#comment' && (prevNode.data || '').indexOf('THIRD_PARTY') > -1) {
       return false
     }
 

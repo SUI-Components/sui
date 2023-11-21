@@ -7,8 +7,6 @@ export var buildDeviceFrom = function (params) {
 
   return {
     // https://tc39.github.io/proposal-optional-chaining/
-    userAgent:
-      (request.headers && request.headers['user-agent']) ||
-      (win.navigator && win.navigator.userAgent)
+    userAgent: (request.headers && request.headers['user-agent']) || (win.navigator && win.navigator.userAgent)
   }
 }
