@@ -23,16 +23,12 @@ program
     console.log('')
     console.log('    $ sui-widget-embedder generate <page>')
     console.log('    $ sui-widget-embedder generate detailPage')
-    console.log(
-      "    $ sui-widget-embedder generate detailPage -E '/d\\\\w+\\\\.html'"
-    )
+    console.log("    $ sui-widget-embedder generate detailPage -E '/d\\\\w+\\\\.html'")
     console.log('    $ custom-help --help')
     console.log('    $ custom-help -h')
     console.log('')
     console.log(
-      colors.cyan(
-        '    IMPORTANT - Regexp (-E) must be with commas ALWAYS to avoid terminal escape or interpretation'
-      )
+      colors.cyan('    IMPORTANT - Regexp (-E) must be with commas ALWAYS to avoid terminal escape or interpretation')
     )
     console.log('')
   })
@@ -74,14 +70,7 @@ Promise.all([
   writeFile(PAGE_PACKAGE_JSON_FILE, packageJSON(pageRegExpIdentifier)),
   writeFile(PAGE_ENTRY_JS_POINT_FILE, indexJS()),
   writeFile(PAGE_ENTRY_SCSS_POINT_FILE, indexSCSS(sitePrefix)),
-  writeFile(
-    PAGE_BASE_PROJECT_JSON_FILE,
-    JSON.stringify(packageInfo, null, '  ')
-  )
+  writeFile(PAGE_BASE_PROJECT_JSON_FILE, JSON.stringify(packageInfo, null, '  '))
 ]).then(() => {
-  console.log(
-    colors.green(
-      `➜ [${page}]: Your page files have been generated successfully.`
-    )
-  )
+  console.log(colors.green(`➜ [${page}]: Your page files have been generated successfully.`))
 })
