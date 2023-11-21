@@ -12,8 +12,7 @@ const COMMENTS_RULE_MAPS = {
  * @param {any} item - The item to check
  * @returns {boolean}
  */
-const isObject = item =>
-  item && typeof item === 'object' && !Array.isArray(item)
+const isObject = item => item && typeof item === 'object' && !Array.isArray(item)
 
 function mergeDeep(target, ...sources) {
   if (!sources.length) return target
