@@ -11,12 +11,8 @@ const DEFAULT_BROWSER_TARGETS = {
 }
 
 export const getSWCConfig = ({isModern, isTypeScript}) => {
-  const targets = isModern
-    ? DEFAULT_BROWSER_TARGETS
-    : DEFAULT_LEGACY_BROWSER_TARGETS
-  const syntaxOptions = isTypeScript
-    ? {syntax: 'typescript', tsx: true}
-    : {syntax: 'ecmascript', jsx: true}
+  const targets = isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS
+  const syntaxOptions = isTypeScript ? {syntax: 'typescript', tsx: true} : {syntax: 'ecmascript', jsx: true}
 
   return {
     minify: true,
