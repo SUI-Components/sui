@@ -10,10 +10,7 @@ const getWorkspaces = workspaces => {
   if (workspaces.length === 0) return ['.']
   // If we have more than one workspace, we join
   // folders with the pattern {components/**,demo/**,tests/**}/package.json
-  const pattern =
-    workspaces.length > 1
-      ? `{${workspaces.join()}}/package.json`
-      : `${workspaces[0]}/package.json`
+  const pattern = workspaces.length > 1 ? `{${workspaces.join()}}/package.json` : `${workspaces[0]}/package.json`
 
   const paths = glob.sync(pattern, {
     ignore: ['**/node_modules/**', './node_modules/**']
@@ -32,11 +29,7 @@ const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
 }
 
 function factoryConfigMethods(packageFile) {
-  const {
-    config: packageConfig = {},
-    name: packageName,
-    workspaces = []
-  } = packageFile
+  const {config: packageConfig = {}, name: packageName, workspaces = []} = packageFile
 
   return {
     checkIsMonoPackage: () => workspaces.length === 0,

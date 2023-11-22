@@ -4,12 +4,7 @@ import Cache from './Cache.js'
 import RedisClient from './RedisClient.js'
 
 export default class Redis extends Cache {
-  constructor({
-    redisConnection = {host: '127.0.0.1', port: 6379},
-    size = 100,
-    namespace,
-    ttl = 500
-  } = {}) {
+  constructor({redisConnection = {host: '127.0.0.1', port: 6379}, size = 100, namespace, ttl = 500} = {}) {
     super()
     this._ttl = ttl
     this._redisClient = RedisClient.getInstance({redisConnection}).client
@@ -27,16 +22,10 @@ export default class Redis extends Cache {
 
   async get(key) {
     try {
-      const resp = await Promise.race([
-        this._lruRedis.get(key),
-        this._delay(100)
-      ])
+      const resp = await Promise.race([this._lruRedis.get(key), this._delay(100)])
       return resp
     } catch (err) {
-      console.error(
-        `[sui-decorators/cache]:Redis Error Getting cache item for key: ${key}.`,
-        err.message
-      )
+      console.error(`[sui-decorators/cache]:Redis Error Getting cache item for key: ${key}.`, err.message)
       return null
     }
   }
@@ -50,10 +39,7 @@ export default class Redis extends Cache {
   set(key, value, maxAge = this._ttl) {
     const ret = this._lruRedis.set(key, value, maxAge)
     Promise.race([ret, this._delay(100)]).catch(err => {
-      console.error(
-        `[sui-decorators/cache]:Redis Error Setting cache item for key: ${key}.`,
-        err.message
-      )
+      console.error(`[sui-decorators/cache]:Redis Error Setting cache item for key: ${key}.`, err.message)
     })
   }
 
@@ -61,10 +47,7 @@ export default class Redis extends Cache {
     try {
       this._lruRedis.del(key)
     } catch (err) {
-      console.error(
-        `[sui-decorators/cache]:Redis Error deleting cache item for key: ${key}.`,
-        err.message
-      )
+      console.error(`[sui-decorators/cache]:Redis Error deleting cache item for key: ${key}.`, err.message)
     }
   }
 

@@ -29,33 +29,19 @@ describe('isActive', () => {
 
     describe('with a query that also matches', () => {
       it('is active', () => {
-        expect(
-          isActive(LOCATIONS.HOME_WITH_QUERY, false, LOCATIONS.HOME_WITH_QUERY)
-        ).to.be.true
+        expect(isActive(LOCATIONS.HOME_WITH_QUERY, false, LOCATIONS.HOME_WITH_QUERY)).to.be.true
       })
     })
 
     describe('with a query that also matches by value, but not by type', () => {
       it('is active', () => {
-        expect(
-          isActive(
-            LOCATIONS.HOME_WITH_QUERY,
-            false,
-            LOCATIONS.HOME_WITH_QUERY_STRING
-          )
-        ).to.be.true
+        expect(isActive(LOCATIONS.HOME_WITH_QUERY, false, LOCATIONS.HOME_WITH_QUERY_STRING)).to.be.true
       })
     })
 
     describe('with a query that does not match', () => {
       it('is not active', () => {
-        expect(
-          isActive(
-            LOCATIONS.HOME_WITH_QUERY,
-            false,
-            LOCATIONS.HOME_WITH_OTHER_QUERY
-          )
-        ).to.be.false
+        expect(isActive(LOCATIONS.HOME_WITH_QUERY, false, LOCATIONS.HOME_WITH_OTHER_QUERY)).to.be.false
       })
     })
   })

@@ -93,12 +93,10 @@ describe('Cache in the server', () => {
         }
       }
       const dummy = new Dummy()
-      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(
-        ([firstCall, secondCall]) => {
-          expect(firstCall).to.be.eql(secondCall)
-          done()
-        }
-      )
+      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(([firstCall, secondCall]) => {
+        expect(firstCall).to.be.eql(secondCall)
+        done()
+      })
     })
 
     it('should not apply cache for inlineError decorated error response and cache ok response', async () => {
@@ -146,12 +144,10 @@ describe('Cache in the server', () => {
         }
       }
       const dummy = new Dummy2()
-      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(
-        ([firstCall, secondCall]) => {
-          expect(firstCall).to.be.eql(secondCall)
-          done()
-        }
-      )
+      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(([firstCall, secondCall]) => {
+        expect(firstCall).to.be.eql(secondCall)
+        done()
+      })
     })
   })
 

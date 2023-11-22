@@ -6,11 +6,7 @@
  * @returns {Boolean}
  */
 function hasChildren(node) {
-  return (
-    typeof node === 'object' &&
-    typeof node.children !== 'undefined' &&
-    node.children.length > 0
-  )
+  return typeof node === 'object' && typeof node.children !== 'undefined' && node.children.length > 0
 }
 
 export const Tree = {
@@ -20,9 +16,6 @@ export const Tree = {
     // Stop processing tree structure if no further children
     if (!hasChildren(node)) return acc
     // Recursive transverse tree structure
-    return node.children.reduce(
-      (acc, currentValue) => Tree.reduce(reducerFn, acc, currentValue),
-      acc
-    )
+    return node.children.reduce((acc, currentValue) => Tree.reduce(reducerFn, acc, currentValue), acc)
   }
 }

@@ -53,15 +53,7 @@ const withStateValueTags = BaseComponent => {
       const {value} = this.props
       const {onChangeTags, onChange, props} = this
 
-      return (
-        <BaseComponent
-          {...props}
-          tags={tags}
-          value={value}
-          onChangeTags={onChangeTags}
-          onChange={onChange}
-        />
-      )
+      return <BaseComponent {...props} tags={tags} value={value} onChangeTags={onChangeTags} onChange={onChange} />
     }
   }
 

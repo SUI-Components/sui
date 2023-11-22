@@ -32,14 +32,7 @@ const run = async () => {
         suiTestClientPath,
         [
           '--pattern',
-          path.join(
-            'node_modules',
-            '@s-ui',
-            'studio',
-            'src',
-            'runtime-mocha',
-            'index.js'
-          ),
+          path.join('node_modules', '@s-ui', 'studio', 'src', 'runtime-mocha', 'index.js'),
           coverage && '--coverage',
           watch && '--watch',
           ci && '--ci',

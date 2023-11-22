@@ -8,10 +8,5 @@
  *
  * */
 export default key => ({
-  execute: () =>
-    Promise.resolve(
-      console.warn(
-        `Service ${key} is not implemented in the current version of the domain`
-      )
-    )
+  execute: () => Promise.resolve(console.warn(`Service ${key} is not implemented in the current version of the domain`))
 })

@@ -13,9 +13,7 @@ const findDOMElements = target => {
     let selection = document.querySelectorAll(target)
     if (!selection.length) selection = document.querySelectorAll(`#${target}`)
     if (!selection.length) {
-      throw new Error(
-        `The target '${target}' could not be identified in the dom, tip: check spelling`
-      )
+      throw new Error(`The target '${target}' could not be identified in the dom, tip: check spelling`)
     }
     return selection
   }

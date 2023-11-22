@@ -55,10 +55,7 @@ if (clean) {
 const archiveEntryPoint = entryPoint && path.resolve(entryPoint)
 const registry = dockerRegistry && `${dockerRegistry}/`
 
-const OUTPUT_ZIP_PATH = path.join(
-  process.cwd(),
-  `${outputFileName}-sui-ssr.zip`
-)
+const OUTPUT_ZIP_PATH = path.join(process.cwd(), `${outputFileName}-sui-ssr.zip`)
 ;(async () => {
   // console.log(' -> Compressing files... 🗄'.yellow)
   await archive({

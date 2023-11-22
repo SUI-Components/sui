@@ -15,12 +15,9 @@ export const fetchComponentSrcRawFile = ({category, component}) =>
   fetchStaticFile(`/components/${category}/${component}/src/index.js`)
 
 export const fetchComponentsDefinitions = ({category, component}) =>
-  window
-    .fetch(`/components/${category}/${component}/src/definitions.json`)
-    .then(res => res.json())
+  window.fetch(`/components/${category}/${component}/src/definitions.json`).then(res => res.json())
 
-export const fetchComponentsReadme = () =>
-  fetchStaticFile(`/components/README.md`)
+export const fetchComponentsReadme = () => fetchStaticFile(`/components/README.md`)
 
 export const fetchMarkdownFile = ({category, component, file}) =>
   fetchStaticFile(`/components/${category}/${component}/${file}.md`)
@@ -38,12 +35,7 @@ export const importContexts = ({category, component}) =>
       )
   })
 
-export const importReactComponent = ({
-  category,
-  component,
-  subComponentName = null,
-  extractDefault = false
-}) => {
+export const importReactComponent = ({category, component, subComponentName = null, extractDefault = false}) => {
   if (typeof subComponentName === 'string') {
     return safeImport({
       extractDefault,
@@ -93,8 +85,4 @@ export const importGlobals = () => {
 }
 
 export const importMainModules = params =>
-  Promise.all([
-    importReactComponent(params),
-    importContexts(params),
-    importDemo(params)
-  ])
+  Promise.all([importReactComponent(params), importContexts(params), importDemo(params)])

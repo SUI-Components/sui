@@ -75,22 +75,12 @@ const build = () =>
 
       const html = readFileSync(path.join(PUBLIC_PATH, 'index.html'), 'utf-8')
       const htmlWithoutThirdParties = removeMarkedTags(html)
-      writeFileSync(
-        path.join(PUBLIC_PATH, 'index_without_third_parties.html'),
-        htmlWithoutThirdParties,
-        'utf-8'
-      )
+      writeFileSync(path.join(PUBLIC_PATH, 'index_without_third_parties.html'), htmlWithoutThirdParties, 'utf-8')
 
       // copy 404.html and 500.html from public
       const [copy404, copy500] = await Promise.allSettled([
-        copyFile(
-          path.join(SRC_PATH, '404.html'),
-          path.join(PUBLIC_PATH, '404.html')
-        ),
-        copyFile(
-          path.join(SRC_PATH, '500.html'),
-          path.join(PUBLIC_PATH, '500.html')
-        )
+        copyFile(path.join(SRC_PATH, '404.html'), path.join(PUBLIC_PATH, '404.html')),
+        copyFile(path.join(SRC_PATH, '500.html'), path.join(PUBLIC_PATH, '500.html'))
       ])
 
       copy404.status === 'fulfilled' && console.log('404.html copied!')

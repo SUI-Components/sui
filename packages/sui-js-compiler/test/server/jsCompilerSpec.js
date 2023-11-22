@@ -48,12 +48,9 @@ describe('@s-ui/js-compiler', () => {
   }).timeout(DEFAULT_TIMEOUT)
 
   it('should exclude all the files matching the passed patterns when the "ignore" option exists', async () => {
-    const {stdout} = await exec(
-      'node ../../index.js --ignore="./src/**.test.js"',
-      {
-        cwd
-      }
-    )
+    const {stdout} = await exec('node ../../index.js --ignore="./src/**.test.js"', {
+      cwd
+    })
 
     const compiledFilenames = await fs.readdir(libPath)
 
@@ -92,10 +89,6 @@ describe('@s-ui/js-compiler', () => {
 
     // THEN package files and types are properly compiled
     expect(stdout).to.contain('[sui-js-compiler]')
-    expect(compiledFilenames).to.eql([
-      'example.d.ts',
-      'example.js',
-      'example.test.js'
-    ])
+    expect(compiledFilenames).to.eql(['example.d.ts', 'example.js', 'example.test.js'])
   }).timeout(DEFAULT_TIMEOUT)
 })

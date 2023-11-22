@@ -32,9 +32,7 @@ export const hocIntersectionObserverWithOptions =
       async componentDidMount() {
         const target = this.refTarget
         if (shouldLoadIntersectionObserver()) {
-          await import(
-            /* webpackChunkName: "intersection-observer" */ 'intersection-observer'
-          )
+          await import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer')
         }
         this.setState(
           {
@@ -52,13 +50,7 @@ export const hocIntersectionObserverWithOptions =
 
       render() {
         const {isIntersecting: isVisible} = this.state
-        return (
-          <BaseComponent
-            {...this.props}
-            isVisible={isVisible}
-            innerRef={this.innerRef}
-          />
-        )
+        return <BaseComponent {...this.props} isVisible={isVisible} innerRef={this.innerRef} />
       }
     }
   }

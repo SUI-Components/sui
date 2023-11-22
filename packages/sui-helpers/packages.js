@@ -53,16 +53,10 @@ const resolveLazyNPMBin = async (binPath, pkg, cwd = process.cwd()) => {
   try {
     return resolvePkgBin()
   } catch (e) {
-    console.info(
-      `It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`
-    )
-    return getSpawnPromise(
-      'npm',
-      ['install', `${pkg}`, '--no-save', '--no-fund', '--no-audit'],
-      {
-        cwd
-      }
-    ).then(resolvePkgBin)
+    console.info(`It looks like the lazy installed dep '${pkg}' is missing. It will be installed now.`)
+    return getSpawnPromise('npm', ['install', `${pkg}`, '--no-save', '--no-fund', '--no-audit'], {
+      cwd
+    }).then(resolvePkgBin)
   }
 }
 

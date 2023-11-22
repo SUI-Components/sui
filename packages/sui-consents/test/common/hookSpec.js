@@ -25,10 +25,7 @@ const triggerTcfEventFromConsents = consents =>
   triggerTcfEvent({
     eventStatus: 'useractioncomplete',
     purpose: {
-      consents: consents.reduce(
-        (acc, consentId) => ({...acc, [consentId]: true}),
-        {}
-      )
+      consents: consents.reduce((acc, consentId) => ({...acc, [consentId]: true}), {})
     }
   })
 

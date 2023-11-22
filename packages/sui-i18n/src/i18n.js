@@ -108,9 +108,7 @@ export default class Rosetta {
     return Object.fromEntries(
       Object.keys(this._languages).map(language => [
         language,
-        key
-          .split('.')
-          .reduce((level, newKey) => level[newKey], this._languages[language])
+        key.split('.').reduce((level, newKey) => level[newKey], this._languages[language])
       ])
     )
   }
@@ -156,10 +154,8 @@ export default class Rosetta {
    * @param {Object} options Specific options for the specified type
    */
   f(type, value, options = {}) {
-    if (typeof type !== 'string')
-      throw new Error('i18n.f should receive a string as a first argument')
-    if (typeof value === 'undefined')
-      throw new Error('i18n.f should receive any value as a second argument')
+    if (typeof type !== 'string') throw new Error('i18n.f should receive a string as a first argument')
+    if (typeof value === 'undefined') throw new Error('i18n.f should receive any value as a second argument')
 
     switch (type) {
       case 'percentage': {
@@ -200,8 +196,7 @@ export default class Rosetta {
   // Interpolate each text chunk, returning an array of all the transformed chunks.
   interpolate(key, values = {}) {
     // Redeclare the RegExp on each call to make it stateless
-    const interpolateRegExp =
-      /%\[(?<key>[\S\s]*?)\b\](?<children>[\S\s]*?)\[\1\]%/gi
+    const interpolateRegExp = /%\[(?<key>[\S\s]*?)\b\](?<children>[\S\s]*?)\[\1\]%/gi
 
     // Perform basic replace for static values
     const str = this.t(key, values)
@@ -223,8 +218,7 @@ export default class Rosetta {
       const option = values[key]
 
       // Check if there is an available replacement for each match
-      const replacement =
-        typeof option === 'function' ? option({children}) : option
+      const replacement = typeof option === 'function' ? option({children}) : option
 
       // Split the remaining string piece by the first occurence and keep the edges
       const [beforeMatch, ...afterMatch] = remaining.split(occurrence)

@@ -13,15 +13,13 @@ const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
  * @param {String} path
  * @returns {Array<String>}
  */
-const getFileLinesAsArray = path =>
-  existsSync(path) ? readFileSync(path, 'utf8').split('\n').filter(Boolean) : []
+const getFileLinesAsArray = path => (existsSync(path) ? readFileSync(path, 'utf8').split('\n').filter(Boolean) : [])
 
 /**
  * Get as array .gitignore files and filter lines that are comments
  * @returns {Array<String>}
  */
-const getGitIgnoredFiles = () =>
-  getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
+const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
 
 /**
  * Get from git status name of staged files
@@ -32,17 +30,11 @@ const getGitIgnoredFiles = () =>
  * @returns {Promise<string[]>} Array of file paths
  */
 const getGitDiffFiles = async ({extensions, range = null, staged = true}) => {
-  const command = [
-    'git diff --name-only --diff-filter=d',
-    range && `${range}`,
-    staged && '--cached'
-  ]
+  const command = ['git diff --name-only --diff-filter=d', range && `${range}`, staged && '--cached']
     .filter(Boolean)
     .join(' ')
 
-  return exec(command).then(({stdout: summary = ''}) =>
-    getFilesFromDiff({summary, extensions})
-  )
+  return exec(command).then(({stdout: summary = ''}) => getFilesFromDiff({summary, extensions}))
 }
 
 /**
@@ -53,9 +45,7 @@ const getGitDiffFiles = async ({extensions, range = null, staged = true}) => {
  * @returns {string[]} Array of file paths
  */
 const getFilesFromDiff = ({extensions, summary}) =>
-  summary
-    .split('\n')
-    .filter(file => extensions.includes(extname(file).substring(1)))
+  summary.split('\n').filter(file => extensions.includes(extname(file).substring(1)))
 
 /**
  * Get the commit range depending on the CI used (Travis or GitHub Actions)
@@ -84,9 +74,7 @@ const getCommitRange = () => {
       return commitRange
     }
 
-    console.log(
-      '[sui-lint] No commit range found using GitHub Event from Actions'
-    )
+    console.log('[sui-lint] No commit range found using GitHub Event from Actions')
   }
 
   return null
@@ -104,9 +92,7 @@ const getFilesToLint = async ({extensions, defaultPattern, staged = false}) => {
   const range = getCommitRange()
   const getFromDiff = range || staged
 
-  return getFromDiff
-    ? getGitDiffFiles({extensions, range, staged})
-    : [defaultPattern]
+  return getFromDiff ? getGitDiffFiles({extensions, range, staged}) : [defaultPattern]
 }
 
 /**

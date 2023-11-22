@@ -139,20 +139,12 @@ describe('<Link />', () => {
             </Link>
           )}
         />
-        <Route
-          path="*"
-          component={() => <Link to="/hello/michael">Link</Link>}
-        />
+        <Route path="*" component={() => <Link to="/hello/michael">Link</Link>} />
       </Route>
     )
 
     it('is active when its params match', async () => {
-      render(
-        <Router
-          history={createMemoryHistory()}
-          routes={createRoutes({to: '/hello/michael'})}
-        />
-      )
+      render(<Router history={createMemoryHistory()} routes={createRoutes({to: '/hello/michael'})} />)
       fireEvent.click(await screen.findByText('Link'))
       const link = await screen.findByText('Link to Michael')
       expect(link.getAttribute('class')).to.equal('active')
@@ -160,12 +152,7 @@ describe('<Link />', () => {
     })
 
     it('is not active when its params dont match', async () => {
-      render(
-        <Router
-          history={createMemoryHistory()}
-          routes={createRoutes({to: '/hello/sui'})}
-        />
-      )
+      render(<Router history={createMemoryHistory()} routes={createRoutes({to: '/hello/sui'})} />)
       fireEvent.click(await screen.findByText('Link'))
       const link = await screen.findByText('Link to Michael')
       expect(link.getAttribute('class')).to.equal(null)

@@ -19,9 +19,7 @@ function onIdle(cb) {
     timerId = window.requestIdleCallback(function (idleDeadline) {
       // reschedule if there's less than 1ms remaining on the tick
       // and a timer did not expire
-      return idleDeadline.timeRemaining() <= 1 && !idleDeadline.didTimeout
-        ? onIdle(cb)
-        : cb(idleDeadline)
+      return idleDeadline.timeRemaining() <= 1 && !idleDeadline.didTimeout ? onIdle(cb) : cb(idleDeadline)
     })
     return window.cancelIdleCallback.bind(window, timerId)
   } else if (hasRAF) {
@@ -33,11 +31,7 @@ function onIdle(cb) {
 }
 
 export function tagHTML({tags}) {
-  const fireTagging = debounce(
-    () => onIdle(searchTagsToTrackOnDocument),
-    500,
-    true
-  )
+  const fireTagging = debounce(() => onIdle(searchTagsToTrackOnDocument), 500, true)
 
   // check if the DOMContentLoaded has been already fired
   if (/comp|inter|loaded/.test(document.readyState)) {
@@ -102,9 +96,7 @@ export function tagHTML({tags}) {
 
   function searchTagsToTrackOnDocument() {
     for (const key in tags) {
-      const arrayDOMElements = Array.prototype.slice.call(
-        document.querySelectorAll(key)
-      )
+      const arrayDOMElements = Array.prototype.slice.call(document.querySelectorAll(key))
       for (let i = 0; i < arrayDOMElements.length; i++) {
         addTrackingTagsToElement(arrayDOMElements[i], tags[key])
       }

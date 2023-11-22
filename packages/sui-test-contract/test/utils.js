@@ -3,8 +3,7 @@ import path from 'node:path'
 
 const contractDir = path.join(process.cwd(), 'contract/documents')
 
-const getFiles = consumer =>
-  fs.readdirSync(contractDir).filter(file => file.includes(consumer))
+const getFiles = consumer => fs.readdirSync(contractDir).filter(file => file.includes(consumer))
 
 export const getContractFileData = ({consumer, description}) => {
   const files = getFiles(consumer)
@@ -16,9 +15,7 @@ export const getContractFileData = ({consumer, description}) => {
   if (!data) return
   const {interactions} = JSON.parse(data)
 
-  return interactions.find(
-    ({description: currentDescription}) => currentDescription === description
-  )
+  return interactions.find(({description: currentDescription}) => currentDescription === description)
 }
 
 export const removeContractFiles = ({consumer}) => {

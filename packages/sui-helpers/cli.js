@@ -15,10 +15,7 @@ const CODE_OK = 0
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
 function serialSpawn(commands, options = {}) {
-  return commands.reduce(
-    (promise, args) => promise.then(() => getSpawnPromise(...args, options)),
-    Promise.resolve()
-  )
+  return commands.reduce((promise, args) => promise.then(() => getSpawnPromise(...args, options)), Promise.resolve())
 }
 
 /**
@@ -30,23 +27,15 @@ function serialSpawn(commands, options = {}) {
 function parallelSpawn(commands, options = {}) {
   const {chunks = 15, title} = options
 
-  commands = commands.map(([bin, args, opts]) => [
-    bin,
-    args,
-    {...opts, ...options}
-  ])
+  commands = commands.map(([bin, args, opts]) => [bin, args, {...opts, ...options}])
 
   const commandsTitle = title || 'commands'
 
-  console.log(
-    colors.cyan(`›› Running ${commands.length} ${commandsTitle} in parallel.`)
-  )
+  console.log(colors.cyan(`›› Running ${commands.length} ${commandsTitle} in parallel.`))
 
   return spawnList(commands, {chunks, title})
     .then(() => {
-      logUpdate.done(
-        colors.green(`✔ ${commands.length} ${commandsTitle} run successfully.`)
-      )
+      logUpdate.done(colors.green(`✔ ${commands.length} ${commandsTitle} run successfully.`))
       return CODE_OK
     })
     .catch(showError)
@@ -63,9 +52,7 @@ function spawnList(commands, {chunks = 15, title = ''} = {}) {
   const concurrency = Number(chunks)
   const queue = new Queue({concurrency})
   const logUpdateProgress = (title, pending) => {
-    const pendingMessage = colors.cyan(
-      `${pending} of ${commands.length} pending`
-    )
+    const pendingMessage = colors.cyan(`${pending} of ${commands.length} pending`)
     logUpdate(`› ${title} ─ ${pendingMessage}`)
   }
 
@@ -80,8 +67,7 @@ function spawnList(commands, {chunks = 15, title = ''} = {}) {
         })
       )
       .then(() => {
-        const titleToUse =
-          title || titleFromCommand || getCommandCallMessage(bin, args, opts)
+        const titleToUse = title || titleFromCommand || getCommandCallMessage(bin, args, opts)
         const {size, pending} = queue
         const totalPending = size + pending
         logUpdateProgress(titleToUse, totalPending)
@@ -122,9 +108,7 @@ function getSpawnPromise(bin, args, options = {}) {
  * @return {String}
  */
 function getCommandCallMessage(bin, args, options = {}) {
-  const folder = options.cwd
-    ? options.cwd.split(path.sep).slice(-2).join(path.sep)
-    : ''
+  const folder = options.cwd ? options.cwd.split(path.sep).slice(-2).join(path.sep) : ''
 
   const command = bin.split(path.sep).pop() + ' ' + args.join(' ')
   return `${colors.bold(command)} ${colors.cyan(folder)}`

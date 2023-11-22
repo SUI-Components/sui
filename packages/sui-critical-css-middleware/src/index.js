@@ -6,8 +6,7 @@ const pathToRegexp = require('path-to-regexp')
 const CRITICAL_CSS_DIR = 'critical-css'
 const CACHE_CRITICAL_CSS = {}
 
-const getFilePath = ({file, criticalDir}) =>
-  path.join(process.cwd(), criticalDir, file)
+const getFilePath = ({file, criticalDir}) => path.join(process.cwd(), criticalDir, file)
 
 const getDisplayNameFrom = (matchResult = {}) => {
   const {renderProps = {}} = matchResult
@@ -30,9 +29,7 @@ module.exports =
     const {matchResult, path: pathFromRequest} = req
     const displayName = getDisplayNameFrom(matchResult)
 
-    const criticalKey =
-      (manifest[displayName] && displayName) ||
-      findCriticalKeyFrom({manifest, pathFromRequest})
+    const criticalKey = (manifest[displayName] && displayName) || findCriticalKeyFrom({manifest, pathFromRequest})
 
     if (!criticalKey) return next()
 

@@ -10,10 +10,7 @@ export default function Navigation({handleClick, search}) {
   const filterComponentsFromSearch = ({search}) => {
     return componentsList.filter(({category, component}) => {
       const lowerCasedSearch = search.toLowerCase()
-      return (
-        category.toLowerCase().includes(lowerCasedSearch) ||
-        component.toLowerCase().includes(lowerCasedSearch)
-      )
+      return category.toLowerCase().includes(lowerCasedSearch) || component.toLowerCase().includes(lowerCasedSearch)
     })
   }
 
@@ -53,9 +50,7 @@ export default function Navigation({handleClick, search}) {
 
   return (
     <nav className="sui-StudioNav">
-      <ul className="sui-StudioNav-menu">
-        {renderListFilteredBySearch({handleClick, search})}
-      </ul>
+      <ul className="sui-StudioNav-menu">{renderListFilteredBySearch({handleClick, search})}</ul>
     </nav>
   )
 }

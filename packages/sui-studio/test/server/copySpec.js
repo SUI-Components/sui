@@ -32,10 +32,7 @@ describe('copyfiles', () => {
     const to = 'runtime'
 
     return copyfiles([from, to], {up: 1}).then(async () => {
-      const out = path.join(
-        __dirname,
-        'runtime/components/atom/button/index.js'
-      )
+      const out = path.join(__dirname, 'runtime/components/atom/button/index.js')
       const stat = await fs.stat(out)
       expect(stat.isFile()).to.be.true
     })

@@ -25,15 +25,13 @@ const getDomain = (url = '') => {
  * @return {Promise<string>} API base url
  */
 async function getApiBaseUrl() {
-  const {stdout: gitRemoteOriginUrl} = await exec(
-    `git config --get remote.origin.url`
-  ).catch(() => 'git@github.com:sui/remote-url.git')
+  const {stdout: gitRemoteOriginUrl} = await exec(`git config --get remote.origin.url`).catch(
+    () => 'git@github.com:sui/remote-url.git'
+  )
 
   const domain = getDomain(gitRemoteOriginUrl)
 
-  return domain === 'github.com'
-    ? 'https://api.github.com'
-    : `https://${domain}/api/v3`
+  return domain === 'github.com' ? 'https://api.github.com' : `https://${domain}/api/v3`
 }
 
 /**
@@ -60,21 +58,13 @@ function createDefaultDescriptionDictionary(topic) {
  * @param {string} params.repoSlug Slug with the format ${owner}/${repositoryName}
  * @returns {Promise}
  */
-export default async function updateCommitStatus({
-  commit,
-  gitHubToken,
-  repoSlug,
-  stateKey,
-  targetUrl,
-  topic
-}) {
+export default async function updateCommitStatus({commit, gitHubToken, repoSlug, stateKey, targetUrl, topic}) {
   const [owner, repo] = repoSlug.split('/')
   const state = STATUS_STATES[stateKey]
 
   const baseUrl = await getApiBaseUrl()
 
-  const descriptionDictionaryForTopic =
-    STATUS_DESCRIPTION[topic] || createDefaultDescriptionDictionary(topic)
+  const descriptionDictionaryForTopic = STATUS_DESCRIPTION[topic] || createDefaultDescriptionDictionary(topic)
 
   const body = JSON.stringify({
     context: `${STATUS_CONTEXT} (${topic})`,

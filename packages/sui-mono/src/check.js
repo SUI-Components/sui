@@ -3,12 +3,7 @@
 const conventionalChangelog = require('conventional-changelog')
 const {readJsonSync} = require('fs-extra')
 
-const {
-  checkIsMonoPackage,
-  getProjectName,
-  getWorkspaces,
-  getOverrides
-} = require('./config.js')
+const {checkIsMonoPackage, getProjectName, getWorkspaces, getOverrides} = require('./config.js')
 
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
@@ -22,9 +17,7 @@ const PACKAGE_VERSION_INCREMENT = {
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
-  return [body, footer].some(
-    msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE')
-  )
+  return [body, footer].some(msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE'))
 }
 
 const isCommitReleaseTrigger = commit => {
@@ -32,8 +25,7 @@ const isCommitReleaseTrigger = commit => {
   return COMMIT_TYPES_WITH_RELEASE.includes(commit.type)
 }
 
-const flattenForMonopackage = status =>
-  checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status
+const flattenForMonopackage = status => (checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status)
 
 const flatten = status =>
   Object.keys(status).reduce(
@@ -67,26 +59,17 @@ const getTransform =
     if (!packages.includes(pkg)) return cb()
 
     if (pkgToOverride) {
-      status[pkgToOverride].increment = Math.max(
-        status[pkgToOverride].increment,
-        PACKAGE_VERSION_INCREMENT.MINOR
-      )
+      status[pkgToOverride].increment = Math.max(status[pkgToOverride].increment, PACKAGE_VERSION_INCREMENT.MINOR)
       toPush = commit
     }
 
     if (isCommitReleaseTrigger(commit)) {
-      status[pkg].increment = Math.max(
-        status[pkg].increment,
-        PACKAGE_VERSION_INCREMENT.MINOR
-      )
+      status[pkg].increment = Math.max(status[pkg].increment, PACKAGE_VERSION_INCREMENT.MINOR)
       toPush = commit
     }
 
     if (isCommitBreakingChange(commit)) {
-      status[pkg].increment = Math.max(
-        status[pkg].increment,
-        PACKAGE_VERSION_INCREMENT.MAJOR
-      )
+      status[pkg].increment = Math.max(status[pkg].increment, PACKAGE_VERSION_INCREMENT.MAJOR)
       toPush = commit
     }
 
