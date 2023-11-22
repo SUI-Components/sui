@@ -60,17 +60,10 @@ const installNeededDependencies = () => {
     : exec(`npm install ${ATOM_ICON_PACKAGE}@${ATOM_ICON_VERSION} --save-exact`)
 }
 
-const copyStylesFile = () =>
-  copy(
-    require.resolve('../templates/icon-styles.scss'),
-    `${LIB_FOLDER}/index.scss`
-  )
+const copyStylesFile = () => copy(require.resolve('../templates/icon-styles.scss'), `${LIB_FOLDER}/index.scss`)
 
 const createIndexFile = () =>
-  outputFile(
-    `${LIB_FOLDER}/_demo.js`,
-    `export const icons = import.meta.globEager('./**/*.js')`
-  )
+  outputFile(`${LIB_FOLDER}/_demo.js`, `export const icons = import.meta.globEager('./**/*.js')`)
 
 emptyDir(LIB_FOLDER)
   .then(installNeededDependencies)

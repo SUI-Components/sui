@@ -1,13 +1,7 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {
-  getSpawnPromise,
-  parallelSpawn,
-  serialSpawn,
-  showError,
-  showWarning
-} from '../../cli.js'
+import {getSpawnPromise, parallelSpawn, serialSpawn, showError, showWarning} from '../../cli.js'
 
 describe('[sui-helpers] cli.js utils', () => {
   describe('getSpawnPromise', () => {
@@ -49,12 +43,8 @@ describe('[sui-helpers] cli.js utils', () => {
         ['echo', ['secondCall']]
       ]).then(() => {
         const calls = console.log.getCalls()
-        const firstEcho = calls.findIndex(call =>
-          call.firstArg.includes('firstCall')
-        )
-        const secondEcho = calls.findIndex(call =>
-          call.firstArg.includes('secondCall')
-        )
+        const firstEcho = calls.findIndex(call => call.firstArg.includes('firstCall'))
+        const secondEcho = calls.findIndex(call => call.firstArg.includes('secondCall'))
         expect(firstEcho < secondEcho).to.be.true
         done()
       })

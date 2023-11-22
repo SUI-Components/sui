@@ -4,9 +4,7 @@ import {match, Redirect, Route} from '../../src/index.js'
 
 const getRedirectLocationFor = ({path = '/', withRoutes}) => {
   return new Promise(resolve => {
-    match({routes: withRoutes, location: path}, (_, redirectLocation) =>
-      resolve(redirectLocation)
-    )
+    match({routes: withRoutes, location: path}, (_, redirectLocation) => resolve(redirectLocation))
   })
 }
 

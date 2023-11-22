@@ -50,9 +50,7 @@ const copyResponse = async function (response) {
     statusText: clonedResponse.statusText
   }
 
-  const body = canConstructResponseFromBodyStream()
-    ? clonedResponse.body
-    : await clonedResponse.blob()
+  const body = canConstructResponseFromBodyStream() ? clonedResponse.body : await clonedResponse.blob()
 
   return new Response(body, responseInit)
 }

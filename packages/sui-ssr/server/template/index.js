@@ -30,10 +30,7 @@ HtmlBuilder.buildHead = ({headTplPart, headString = ''}) => {
   let headElement = copyHeadTplPart.substr(copyHeadTplPart.indexOf('<head'))
   let headOpenningTag = headElement.substr(0, headElement.indexOf('>') + 1)
 
-  const nextHead = copyHeadTplPart.replace(
-    headOpenningTag,
-    `${headOpenningTag}${copyHeadString}`
-  )
+  const nextHead = copyHeadTplPart.replace(headOpenningTag, `${headOpenningTag}${copyHeadString}`)
   copyHeadTplPart = null
   copyHeadString = null
   headElement = null

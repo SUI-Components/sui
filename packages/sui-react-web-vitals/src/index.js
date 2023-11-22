@@ -23,12 +23,7 @@ const RATING = {
   POOR: 'poor'
 }
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [
-  METRICS.CLS,
-  METRICS.FID,
-  METRICS.INP,
-  METRICS.LCP
-]
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP]
 
 const DEFAULT_CWV_THRESHOLDS = {
   [METRICS.CLS]: 100,
@@ -100,8 +95,7 @@ export default function WebVitalsReporter({
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
       const hasPathOnRoute = getHasPathOnRoute(route)
-      const isExcluded =
-        !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
+      const isExcluded = !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
       if (isExcluded || !logger?.cwv || rating === RATING.GOOD) return
 
@@ -124,8 +118,7 @@ export default function WebVitalsReporter({
       const hasPathOnRoute = getHasPathOnRoute(route)
       const routeid = getRouteid()
       const type = getDeviceType()
-      const isExcluded =
-        !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
+      const isExcluded = !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
 
       if (isExcluded) return
 
@@ -178,8 +171,7 @@ export default function WebVitalsReporter({
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (metricsAllChanges.includes(metric))
-        reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+      if (metricsAllChanges.includes(metric)) reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
     })
   })
 

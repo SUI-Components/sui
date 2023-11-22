@@ -21,10 +21,7 @@ const suiWidgetEmbedderConfig = config['sui-widget-embedder'] || {}
 
 program
   .option('-C, --clean', 'Remove public folder before create a new one')
-  .option(
-    '-R --remoteCdn <url>',
-    'Remote url where the downloader will be placed'
-  )
+  .option('-R --remoteCdn <url>', 'Remote url where the downloader will be placed')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -34,12 +31,8 @@ program
     console.log('')
     console.log('    $ sui-widget-embedder build')
     console.log('')
-    console.log(
-      ' You can even choose where should the downloader going to get the files:'
-    )
-    console.log(
-      '    $ sui-widget-embedder build -remoteCdn http://mysourcedomain.com'
-    )
+    console.log(' You can even choose where should the downloader going to get the files:')
+    console.log('    $ sui-widget-embedder build -remoteCdn http://mysourcedomain.com')
     console.log('')
   })
   .parse(process.argv)
@@ -71,17 +64,11 @@ const build = ({page, remoteCdn}) => {
   })
 }
 
-const pagesFor = ({path}) =>
-  readdirSync(path).filter(file => statSync(resolve(path, file)).isDirectory())
+const pagesFor = ({path}) => readdirSync(path).filter(file => statSync(resolve(path, file)).isDirectory())
 
 const manifests = () =>
   pagesFor({path: PUBLIC_PATH}).reduce((acc, page) => {
-    acc[page] = require(resolve(
-      process.cwd(),
-      'public',
-      page,
-      'asset-manifest.json'
-    ))
+    acc[page] = require(resolve(process.cwd(), 'public', page, 'asset-manifest.json'))
     return acc
   }, {})
 
@@ -89,12 +76,7 @@ const pageConfigs = () =>
   pagesFor({path: PAGES_PATH}).reduce(
     (acc, page) => ({
       ...acc,
-      [page]: require(resolve(
-        process.cwd(),
-        PAGES_FOLDER,
-        page,
-        'package.json'
-      ))
+      [page]: require(resolve(process.cwd(), PAGES_FOLDER, page, 'package.json'))
     }),
     {}
   )
@@ -113,10 +95,7 @@ const createDownloader = async () => {
       output,
       downloader
         .replace("require('static-manifests')", JSON.stringify(staticManifests))
-        .replace(
-          "require('static-pageConfigs')",
-          JSON.stringify(staticPageConfigs)
-        )
+        .replace("require('static-pageConfigs')", JSON.stringify(staticPageConfigs))
     )
 
     console.log(`Created a new ${FILE_DOWNLOADER} file`)
@@ -126,11 +105,8 @@ const createDownloader = async () => {
   }
 }
 
-const serialPromiseExecution = promises =>
-  promises.reduce((acc, func) => acc.then(() => func()), Promise.resolve([]))
+const serialPromiseExecution = promises => promises.reduce((acc, func) => acc.then(() => func()), Promise.resolve([]))
 
-serialPromiseExecution(
-  pagesFor({path: PAGES_FOLDER}).map(page => () => build({page, remoteCdn}))
-)
+serialPromiseExecution(pagesFor({path: PAGES_FOLDER}).map(page => () => build({page, remoteCdn})))
   .then(createDownloader)
   .catch(showError)

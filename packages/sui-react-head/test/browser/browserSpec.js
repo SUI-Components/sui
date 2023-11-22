@@ -1,17 +1,13 @@
 import {expect} from 'chai'
 
-import {
-  render as testingLibraryRender,
-  waitForDomChange
-} from '@testing-library/react'
+import {render as testingLibraryRender, waitForDomChange} from '@testing-library/react'
 
 import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 
 import Head, {HeadProvider} from '../../lib/index'
 descriptorsByEnvironmentPatcher()
 
-const getMetaByName = name =>
-  document.head.querySelector(`meta[name="${name}"]`)
+const getMetaByName = name => document.head.querySelector(`meta[name="${name}"]`)
 
 const getLinkByRel = rel => document.head.querySelector(`link[rel="${rel}"]`)
 
@@ -90,12 +86,8 @@ describe.client('react-head on client', () => {
         </Head>
       )
 
-      expect(getMetaByName('meta-1').getAttribute('content')).to.equal(
-        'Awesome description'
-      )
-      expect(getMetaByName('meta-2').getAttribute('content')).to.equal(
-        'viewport value'
-      )
+      expect(getMetaByName('meta-1').getAttribute('content')).to.equal('Awesome description')
+      expect(getMetaByName('meta-2').getAttribute('content')).to.equal('viewport value')
     })
   })
 
@@ -108,12 +100,8 @@ describe.client('react-head on client', () => {
         </Head>
       )
 
-      expect(getLinkByRel('link-1').getAttribute('href')).to.equal(
-        'awesome-link'
-      )
-      expect(getLinkByRel('link-2').getAttribute('href')).to.equal(
-        'awesome-value'
-      )
+      expect(getLinkByRel('link-1').getAttribute('href')).to.equal('awesome-link')
+      expect(getLinkByRel('link-2').getAttribute('href')).to.equal('awesome-value')
     })
   })
 
@@ -144,19 +132,11 @@ describe.client('react-head on client', () => {
         />
       )
 
-      expect(getMetaByName('meta-1').getAttribute('content')).to.equal(
-        'Awesome description'
-      )
-      expect(getMetaByName('meta-2').getAttribute('content')).to.equal(
-        'viewport value'
-      )
+      expect(getMetaByName('meta-1').getAttribute('content')).to.equal('Awesome description')
+      expect(getMetaByName('meta-2').getAttribute('content')).to.equal('viewport value')
 
-      expect(getLinkByRel('link-1').getAttribute('href')).to.equal(
-        'awesome-link'
-      )
-      expect(getLinkByRel('link-2').getAttribute('href')).to.equal(
-        'awesome-value'
-      )
+      expect(getLinkByRel('link-1').getAttribute('href')).to.equal('awesome-link')
+      expect(getLinkByRel('link-2').getAttribute('href')).to.equal('awesome-value')
     })
   })
 })

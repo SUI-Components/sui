@@ -44,9 +44,7 @@ export const fromReactTreeToJSON = (root, parent = {}, level = 1) => {
   if (getComponent) node.getComponent = getComponent
   if (path) node.path = path
   if (children)
-    node.children = ReactChildren.toArray(children).map(child =>
-      fromReactTreeToJSON(child, node, level + 1)
-    )
+    node.children = ReactChildren.toArray(children).map(child => fromReactTreeToJSON(child, node, level + 1))
 
   return node
 }

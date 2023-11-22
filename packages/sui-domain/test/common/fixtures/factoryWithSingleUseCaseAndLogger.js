@@ -1,4 +1,3 @@
 import EmptyUseCaseWithLogger from './EmptyUseCaseWithLogger.js'
 
-export default ({config, logger}) =>
-  new EmptyUseCaseWithLogger({config, logger})
+export default ({config, logger}) => new EmptyUseCaseWithLogger({config, logger})

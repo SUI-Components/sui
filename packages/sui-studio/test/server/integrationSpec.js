@@ -19,16 +19,13 @@ describe.skip('[Integration] sui-studio', () => {
   it('Should compile and build a static version with one component', async function () {
     this.timeout(0)
 
-    const {stdout: stdoutStudioBuild} = await exec(
-      `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-build" -C`,
-      {
-        cwd: SAMPLE_STUDIO_PATH,
-        env: {
-          ...process.env,
-          PWD: SAMPLE_STUDIO_PATH
-        }
+    const {stdout: stdoutStudioBuild} = await exec(`node "${SUI_STUDIO_BINARY_DIR}/sui-studio-build" -C`, {
+      cwd: SAMPLE_STUDIO_PATH,
+      env: {
+        ...process.env,
+        PWD: SAMPLE_STUDIO_PATH
       }
-    )
+    })
 
     expect(stdoutStudioBuild.includes('Error')).to.be.false
   })
@@ -37,17 +34,13 @@ describe.skip('[Integration] sui-studio', () => {
     this.timeout(0)
     let server
     try {
-      server = childProcess.spawn(
-        'node',
-        [`${SUI_STUDIO_BINARY_DIR}/sui-studio-dev`, 'atom/button'],
-        {
-          detached: false,
-          env: {
-            ...process.env,
-            PWD: SAMPLE_STUDIO_PATH
-          }
+      server = childProcess.spawn('node', [`${SUI_STUDIO_BINARY_DIR}/sui-studio-dev`, 'atom/button'], {
+        detached: false,
+        env: {
+          ...process.env,
+          PWD: SAMPLE_STUDIO_PATH
         }
-      )
+      })
       // server.stdout.pipe(process.stdout)
       // server.stderr.pipe(process.stdout)
 
@@ -82,12 +75,9 @@ describe.skip('[Integration] sui-studio', () => {
       const {
         stdout: stdoutStudioGenerate,
         stderr: stderrStudioGenerate // eslint-disable-line
-      } = await exec(
-        `node "${SUI_STUDIO_BINARY_DIR}/sui-studio-generate.js" -P tst -S t-est fake component`,
-        {
-          cwd: EMPTY_STUDIO_PATH
-        }
-      )
+      } = await exec(`node "${SUI_STUDIO_BINARY_DIR}/sui-studio-generate.js" -P tst -S t-est fake component`, {
+        cwd: EMPTY_STUDIO_PATH
+      })
 
       // console.log(stdoutStudioGenerate, stderrStudioGenerate)
 
@@ -102,17 +92,7 @@ describe.skip('[Integration] sui-studio', () => {
       expect(stdoutStudioGenerate.includes('Error')).to.be.false
       expect(componentManifest.name).to.be.eql('@t-est/tst-fake-component')
       expect(
-        fs.readFileSync(
-          path.join(
-            `${EMPTY_STUDIO_PATH}`,
-            'components',
-            'fake',
-            'component',
-            'src',
-            'index.js'
-          ),
-          'utf8'
-        )
+        fs.readFileSync(path.join(`${EMPTY_STUDIO_PATH}`, 'components', 'fake', 'component', 'src', 'index.js'), 'utf8')
       ).to.be.eql(`// import PropTypes from 'prop-types'
 
 export default function FakeComponent() {
@@ -128,14 +108,7 @@ FakeComponent.propTypes = {}
 `)
       expect(
         fs.readFileSync(
-          path.join(
-            `${EMPTY_STUDIO_PATH}`,
-            'components',
-            'fake',
-            'component',
-            'src',
-            'index.scss'
-          ),
+          path.join(`${EMPTY_STUDIO_PATH}`, 'components', 'fake', 'component', 'src', 'index.scss'),
           'utf8'
         )
       ).to.be.eql(`@import '~@s-ui/theme/lib/index';
@@ -146,30 +119,11 @@ FakeComponent.propTypes = {}
 `)
 
       expect(
-        fs.readFileSync(
-          path.join(
-            `${EMPTY_STUDIO_PATH}`,
-            'demo',
-            'fake',
-            'component',
-            'playground'
-          ),
-          'utf8'
-        )
+        fs.readFileSync(path.join(`${EMPTY_STUDIO_PATH}`, 'demo', 'fake', 'component', 'playground'), 'utf8')
       ).to.be.eql('return (<FakeComponent />)')
 
-      expect(
-        fs.readFileSync(
-          path.join(
-            `${EMPTY_STUDIO_PATH}`,
-            'test',
-            'fake',
-            'component',
-            'index.js'
-          ),
-          'utf8'
-        )
-      ).to.be.eql(`/*
+      expect(fs.readFileSync(path.join(`${EMPTY_STUDIO_PATH}`, 'test', 'fake', 'component', 'index.js'), 'utf8')).to.be
+        .eql(`/*
  * Remember: YOUR COMPONENT IS DEFINED GLOBALLY
  * */
 

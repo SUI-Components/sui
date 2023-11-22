@@ -26,9 +26,7 @@ export default BaseComponent => {
     render() {
       const {handleToggle, props} = this
       const {isOpen} = this.state
-      return (
-        <BaseComponent {...props} isOpen={isOpen} onToggle={handleToggle} />
-      )
+      return <BaseComponent {...props} isOpen={isOpen} onToggle={handleToggle} />
     }
   }
 }

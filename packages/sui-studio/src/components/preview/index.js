@@ -57,19 +57,13 @@ export default function Preview({code, scope = {React}}) {
     const compiledCode = getCompiledCode({code, scope})
     const Component = eval(compiledCode)(...Object.values(scope)) // eslint-disable-line
 
-    return (
-      <SUIContext.Provider value={scope.context}>
-        {Component}
-      </SUIContext.Provider>
-    )
+    return <SUIContext.Provider value={scope.context}>{Component}</SUIContext.Provider>
   }
 
   return (
     <div className="sui-StudioPreview">
       <ErrorRenderBoundary>
-        <div className="sui-StudioPreview-content sui-StudioDemo-preview">
-          {renderCode()}
-        </div>
+        <div className="sui-StudioPreview-content sui-StudioDemo-preview">{renderCode()}</div>
       </ErrorRenderBoundary>
     </div>
   )

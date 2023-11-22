@@ -15,7 +15,5 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(port, hostname, () => {
-  console.log(
-    `Static manifest serve from http://${hostname}:${port}/manifest.json`
-  )
+  console.log(`Static manifest serve from http://${hostname}:${port}/manifest.json`)
 })

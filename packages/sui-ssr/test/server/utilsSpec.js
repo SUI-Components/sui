@@ -8,16 +8,13 @@ import {publicFolder} from '../../server/utils/index.js'
 import {getMockedRequest} from './fixtures/index.js'
 import {publicFolderWithMultiSiteConfig} from './fixtures/utils.js'
 
-const ASYNC_CSS_ATTRS =
-  'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';'
+const ASYNC_CSS_ATTRS = 'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';'
 
 describe('[sui-ssr] Utils', () => {
   describe('Public folder', () => {
     describe('In a multi site project', () => {
       it('Should build the public folder name properly', () => {
-        const folderName = publicFolderWithMultiSiteConfig(
-          getMockedRequest('www.bikes.com')
-        )
+        const folderName = publicFolderWithMultiSiteConfig(getMockedRequest('www.bikes.com'))
         expect(folderName).to.equal('public-bikes')
       })
     })
@@ -88,9 +85,7 @@ describe('[sui-ssr] Utils', () => {
       })
 
       const styles = createStylesFor({async: true})
-      expect(styles).to.equal(
-        `<link rel="stylesheet" href="file.css" ${ASYNC_CSS_ATTRS}>`
-      )
+      expect(styles).to.equal(`<link rel="stylesheet" href="file.css" ${ASYNC_CSS_ATTRS}>`)
     })
 
     it('Should create page styles', () => {
@@ -127,9 +122,7 @@ describe('[sui-ssr] Utils', () => {
       })
 
       const styles = createStylesFor({pageName: 'Home', async: true})
-      expect(styles).to.equal(
-        `<link rel="stylesheet" href="home.css" ${ASYNC_CSS_ATTRS}>`
-      )
+      expect(styles).to.equal(`<link rel="stylesheet" href="home.css" ${ASYNC_CSS_ATTRS}>`)
     })
 
     it('Should create an async page styles and app styles', () => {

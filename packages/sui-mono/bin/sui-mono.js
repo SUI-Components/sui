@@ -14,10 +14,7 @@ program.command('check', 'Gives information if something should be updated')
 
 program.command('changelog', 'Generate CHANGELOG.md files')
 
-program.command(
-  'phoenix',
-  'Reset project and packages reinstalling all dependencies'
-)
+program.command('phoenix', 'Reset project and packages reinstalling all dependencies')
 
 program.command('release', 'Release whatever need to be release')
 

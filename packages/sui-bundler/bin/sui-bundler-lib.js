@@ -16,10 +16,7 @@ program
   .option('-o, --output [output]', 'Bundle folder path')
   .option('-u, --umd [libraryName]', 'Whether to output library as umb')
   .option('-r, --root', 'Create build in root dir instead of version subdir')
-  .option(
-    '-p, --path [path]',
-    'Absolute public path where files will be located.'
-  )
+  .option('-p, --path [path]', 'Absolute public path where files will be located.')
   .on('--help', () =>
     console.log(`Examples:
       $ sui-bundler lib src/index.js -o umd/my-lib -p http://my-cdn.com/my-lib -C'
@@ -48,12 +45,7 @@ if (!publicPath) {
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const version = getPackageJson(process.cwd()).version
-const outputFolder = path.join(
-  process.cwd(),
-  output,
-  path.sep,
-  root ? '' : version
-)
+const outputFolder = path.join(process.cwd(), output, path.sep, root ? '' : version)
 const webpackConfig = {...config, entry: path.resolve(process.cwd(), entry)}
 webpackConfig.output.publicPath = publicPath + (root ? '' : version + '/')
 webpackConfig.output.path = outputFolder
@@ -94,7 +86,5 @@ webpack(webpackConfig).run((error, stats) => {
   }
 
   console.log(`Webpack stats: ${stats}`)
-  log.success(
-    `Your library is compiled in production mode in: \n${outputFolder}`
-  )
+  log.success(`Your library is compiled in production mode in: \n${outputFolder}`)
 })

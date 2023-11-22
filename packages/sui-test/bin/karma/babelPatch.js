@@ -37,10 +37,7 @@ module.exports = function ({types: t}) {
           path.replaceWith(
             t.callExpression(
               t.memberExpression(
-                t.memberExpression(
-                  t.identifier('describe'),
-                  t.identifier('context')
-                ),
+                t.memberExpression(t.identifier('describe'), t.identifier('context')),
                 t.identifier(contextToUse)
               ),
               [...args, t.stringLiteral(componentKey)]

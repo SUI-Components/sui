@@ -51,11 +51,7 @@ function prepareUrls(protocol, host, port, pathname = '/') {
       if (lanUrlForConfig) {
         // Check if the address is a private ip
         // https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
-        if (
-          /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(
-            lanUrlForConfig
-          )
-        ) {
+        if (/^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(lanUrlForConfig)) {
           // Address is private, format it for later use
           lanUrlForTerminal = prettyPrintUrl(lanUrlForConfig)
         } else {
@@ -94,21 +90,11 @@ function printInstructions(appName, urls, useYarn) {
 
   console.log()
   console.log('Note that the development build is not optimized.')
-  console.log(
-    `To create a production build, use ` +
-      `${cyan(`${useYarn ? 'yarn' : 'npm run'} build`)}.`
-  )
+  console.log(`To create a production build, use ` + `${cyan(`${useYarn ? 'yarn' : 'npm run'} build`)}.`)
   console.log()
 }
 
-function createCompiler({
-  appName,
-  config,
-  urls,
-  useYarn,
-  useTypeScript,
-  webpack
-}) {
+function createCompiler({appName, config, urls, useYarn, useTypeScript, webpack}) {
   // "Compiler" is a low-level interface to webpack.
   // It lets us listen to some events and provide our own custom messages.
   let compiler
@@ -181,11 +167,7 @@ function createCompiler({
       console.log(messages.warnings.join('\n\n'))
 
       // Teach some ESLint tricks.
-      console.log(
-        `\nSearch for the ${yellow(
-          'keywords'
-        )} to learn more about each warning.`
-      )
+      console.log(`\nSearch for the ${yellow('keywords')} to learn more about each warning.`)
     }
   })
 
@@ -221,13 +203,9 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
   if (!proxy) return undefined
 
   if (typeof proxy !== 'string') {
-    console.log(
-      red('When specified, "proxy" in package.json must be a string.')
-    )
+    console.log(red('When specified, "proxy" in package.json must be a string.'))
     console.log(red('Instead, the type of "proxy" was "' + typeof proxy + '".'))
-    console.log(
-      red('Either remove "proxy" from package.json, or make it a string.')
-    )
+    console.log(red('Either remove "proxy" from package.json, or make it a string.'))
     process.exit(1)
   }
 
@@ -237,23 +215,15 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
   const sockPath = process.env.WDS_SOCKET_PATH || '/ws'
   const isDefaultSockHost = !process.env.WDS_SOCKET_HOST
   function mayProxy(pathname) {
-    const maybePublicPath = path.resolve(
-      appPublicFolder,
-      pathname.replace(new RegExp('^' + servedPathname), '')
-    )
+    const maybePublicPath = path.resolve(appPublicFolder, pathname.replace(new RegExp('^' + servedPathname), ''))
     const isPublicFileRequest = fs.existsSync(maybePublicPath)
     // used by webpackHotDevClient
-    const isWdsEndpointRequest =
-      isDefaultSockHost && pathname.startsWith(sockPath)
+    const isWdsEndpointRequest = isDefaultSockHost && pathname.startsWith(sockPath)
     return !(isPublicFileRequest || isWdsEndpointRequest)
   }
 
   if (!/^http(s)?:\/\//.test(proxy)) {
-    console.log(
-      red(
-        'When "proxy" is specified in package.json it must start with either http:// or https://'
-      )
-    )
+    console.log(red('When "proxy" is specified in package.json it must start with either http:// or https://'))
     process.exit(1)
   }
 
@@ -276,9 +246,7 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
       context: function (pathname, req) {
         return (
           req.method !== 'GET' ||
-          (mayProxy(pathname) &&
-            req.headers.accept &&
-            req.headers.accept.indexOf('text/html') === -1)
+          (mayProxy(pathname) && req.headers.accept && req.headers.accept.indexOf('text/html') === -1)
         )
       },
       onProxyReq: proxyReq => {

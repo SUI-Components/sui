@@ -20,9 +20,7 @@ program
 const [topic] = program.args
 
 if (!topic) {
-  console.log(
-    'An argument is required. Please, try using "test" or "demo" topic'
-  )
+  console.log('An argument is required. Please, try using "test" or "demo" topic')
   process.exit(1)
 }
 

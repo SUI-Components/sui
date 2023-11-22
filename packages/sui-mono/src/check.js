@@ -5,12 +5,7 @@ const {readJsonSync} = require('fs-extra')
 
 const {promisify} = require('util')
 
-const {
-  checkIsMonoPackage,
-  getProjectName,
-  getWorkspaces,
-  getOverrides
-} = require('./config.js')
+const {checkIsMonoPackage, getProjectName, getWorkspaces, getOverrides} = require('./config.js')
 
 const exec = promisify(require('child_process').exec)
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
@@ -29,9 +24,7 @@ const SCOPE_REGEX = /packages\/[a-z]+-[a-z]+/
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
-  return [body, footer].some(
-    msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE')
-  )
+  return [body, footer].some(msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE'))
 }
 
 const isCommitReleaseTrigger = commit => {
@@ -39,8 +32,7 @@ const isCommitReleaseTrigger = commit => {
   return COMMIT_TYPES_WITH_RELEASE.includes(commit.type)
 }
 
-const flattenForMonopackage = status =>
-  checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status
+const flattenForMonopackage = status => (checkIsMonoPackage() ? {[getProjectName()]: flatten(status)} : status)
 
 const flatten = status =>
   Object.keys(status).reduce(
@@ -68,8 +60,7 @@ const getTransform =
     const {scope, header, type} = commit
     const [pkgToOverride] = getOverride({overrides, header}) ?? []
     const pkg = pkgToOverride ?? getPkgFromScope(scope)
-    const isDepsUpdate =
-      type === DEPS_UPGRADE_COMMIT_TYPE && DEPS_UPGRADE_PACKAGES.includes(pkg)
+    const isDepsUpdate = type === DEPS_UPGRADE_COMMIT_TYPE && DEPS_UPGRADE_PACKAGES.includes(pkg)
 
     let toPush = null
 
@@ -81,46 +72,30 @@ const getTransform =
 
       if (!updateHash) return cb()
 
-      const {stdout: rawChangedFiles} = await exec(
-        `git diff --name-only ${updateHash} master`
-      )
+      const {stdout: rawChangedFiles} = await exec(`git diff --name-only ${updateHash} master`)
       const changedFiles = rawChangedFiles.split('\n').filter(Boolean)
-      const pkgToUpdate = changedFiles
-        .find(file => file.match(SCOPE_REGEX))
-        ?.match(SCOPE_REGEX)[0]
+      const pkgToUpdate = changedFiles.find(file => file.match(SCOPE_REGEX))?.match(SCOPE_REGEX)[0]
 
       if (!pkgToUpdate) return cb()
 
-      status[pkgToUpdate].increment = Math.max(
-        status[pkgToUpdate].increment,
-        PACKAGE_VERSION_INCREMENT.MINOR
-      )
+      status[pkgToUpdate].increment = Math.max(status[pkgToUpdate].increment, PACKAGE_VERSION_INCREMENT.MINOR)
       toPush = commit
     }
 
     if (!packages.includes(pkg)) return cb()
 
     if (pkgToOverride) {
-      status[pkgToOverride].increment = Math.max(
-        status[pkgToOverride].increment,
-        PACKAGE_VERSION_INCREMENT.MINOR
-      )
+      status[pkgToOverride].increment = Math.max(status[pkgToOverride].increment, PACKAGE_VERSION_INCREMENT.MINOR)
       toPush = commit
     }
 
     if (isCommitReleaseTrigger(commit)) {
-      status[pkg].increment = Math.max(
-        status[pkg].increment,
-        PACKAGE_VERSION_INCREMENT.MINOR
-      )
+      status[pkg].increment = Math.max(status[pkg].increment, PACKAGE_VERSION_INCREMENT.MINOR)
       toPush = commit
     }
 
     if (isCommitBreakingChange(commit)) {
-      status[pkg].increment = Math.max(
-        status[pkg].increment,
-        PACKAGE_VERSION_INCREMENT.MAJOR
-      )
+      status[pkg].increment = Math.max(status[pkg].increment, PACKAGE_VERSION_INCREMENT.MAJOR)
       toPush = commit
     }
 

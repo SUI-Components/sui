@@ -14,10 +14,8 @@ const utils = require('./utils.js')
 const BOM_HEADER = '\uFEFF'
 const EXT_PRECEDENCE = ['.scss', '.css']
 const MATCH_URL_ALL = /url\(\s*(['"]?)([^ '"()]+)(\1)\s*\)/g
-const MATCH_IMPORTS =
-  /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
-const MATCH_USES =
-  /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
+const MATCH_IMPORTS = /@import\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
+const MATCH_USES = /@use\s+(['"])([^,;'"]+)(\1)(\s*,\s*(['"])([^,;'"]+)(\1))*\s*;/g
 const MATCH_FILES = /(['"])([^,;'"]+)(\1)/g
 
 /**
@@ -79,11 +77,7 @@ function getImportsToResolve(original, includePaths, transformers) {
     })
   })
 
-  return [
-    ...imports,
-    path.join(dirname, `${basename}/index.scss`),
-    path.join(dirname, `${basename}/_index.scss`)
-  ]
+  return [...imports, path.join(dirname, `${basename}/index.scss`), path.join(dirname, `${basename}/_index.scss`)]
 }
 
 function createTransformersMap(transformers) {
@@ -106,9 +100,7 @@ function createTransformersMap(transformers) {
  * @return {Array<string>} List of transformed path
  */
 const transformRelativeToAbsolutePaths = ({baseUrl, paths}) => {
-  return paths.map(currentPath =>
-    path.isAbsolute(currentPath) ? currentPath : path.join(baseUrl, currentPath)
-  )
+  return paths.map(currentPath => (path.isAbsolute(currentPath) ? currentPath : path.join(baseUrl, currentPath)))
 }
 
 /**
@@ -133,18 +125,9 @@ function getLoaderConfig(ctx) {
   }
 
   const options = utils.mergeDeep(defaults, ctx.getOptions() || {})
-  const {
-    data,
-    includePaths,
-    implementation = require('sass'),
-    resolveURLs,
-    root,
-    sassOptions,
-    transformers
-  } = options
+  const {data, includePaths, implementation = require('sass'), resolveURLs, root, sassOptions, transformers} = options
 
-  const basedir =
-    ctx.rootContext || options.context || ctx.options.context || process.cwd()
+  const basedir = ctx.rootContext || options.context || ctx.options.context || process.cwd()
 
   // get webpack config from context ctx
   const {alias, modules} = getWebpackConfig(ctx)
@@ -167,14 +150,7 @@ function getLoaderConfig(ctx) {
   }
 }
 
-function* mergeSources(
-  opts,
-  entry,
-  resolve,
-  dependencies = [],
-  level = 0,
-  uses
-) {
+function* mergeSources(opts, entry, resolve, dependencies = [], level = 0, uses) {
   const {alias, includePaths, modules, transformers, sassOptions = {}} = opts
   const {importer} = sassOptions
   let content
@@ -215,9 +191,7 @@ function* mergeSources(
         // test again
         if (loaderUtils.isUrlRequest(file)) {
           const absoluteFile = path.normalize(path.resolve(entryDir, file))
-          let relativeFile = path
-            .relative(opts.baseEntryDir, absoluteFile)
-            .replace(/\\/g, '/') // fix for windows path
+          let relativeFile = path.relative(opts.baseEntryDir, absoluteFile).replace(/\\/g, '/') // fix for windows path
 
           if (relativeFile[0] !== '.') {
             relativeFile = './' + relativeFile
@@ -282,20 +256,14 @@ function* mergeSources(
       // eslint-disable-line
       const originalImport = matched[2].trim()
       if (!originalImport) {
-        const err = new Error(
-          `import file cannot be empty: "${total}" @${entry}`
-        )
+        const err = new Error(`import file cannot be empty: "${total}" @${entry}`)
 
         err.file = entry
 
         throw err
       }
 
-      const imports = getImportsToResolve(
-        originalImport,
-        includePaths,
-        transformers
-      )
+      const imports = getImportsToResolve(originalImport, includePaths, transformers)
 
       let resolvedImport
 
@@ -356,9 +324,7 @@ function* mergeSources(
       }
 
       if (!resolvedImport) {
-        const err = new Error(
-          `import file cannot be resolved: "${total}" @${entry}`
-        )
+        const err = new Error(`import file cannot be resolved: "${total}" @${entry}`)
 
         err.file = entry
 
@@ -370,16 +336,7 @@ function* mergeSources(
       if (!dependencies.includes(resolvedImport)) {
         dependencies.push(resolvedImport)
 
-        contents.push(
-          yield mergeSources(
-            opts,
-            resolvedImport,
-            resolve,
-            dependencies,
-            level + 1,
-            uses
-          )
-        )
+        contents.push(yield mergeSources(opts, resolvedImport, resolve, dependencies, level + 1, uses))
       }
     }
 

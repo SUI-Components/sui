@@ -42,9 +42,7 @@ const resolveFilePath = (filePath, {flatten, up}) => {
   if (up === 0) return filePath
 
   if (!checkDepth(filePath, up)) {
-    throw new Error(
-      "The number of folders you're trying to go up are not correct. Check the path or the up config"
-    )
+    throw new Error("The number of folders you're trying to go up are not correct. Check the path or the up config")
   }
 
   return path.join(...path.normalize(filePath).split(path.sep).slice(up))

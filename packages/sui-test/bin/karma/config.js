@@ -3,11 +3,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const {envVars} = require('@s-ui/bundler/shared/index.js')
-const {
-  bundlerConfig,
-  clientConfig,
-  isWorkspace
-} = require('../../src/config.js')
+const {bundlerConfig, clientConfig, isWorkspace} = require('../../src/config.js')
 
 const {captureConsole = true} = clientConfig
 const {sep} = path
@@ -60,11 +56,7 @@ const config = {
       alias: {
         ...mustPackagesToAlias,
         '@s-ui/react-context': path.resolve(
-          path.join(
-            process.env.PWD,
-            isWorkspace() ? '../' : './',
-            'node_modules/@s-ui/react-context'
-          )
+          path.join(process.env.PWD, isWorkspace() ? '../' : './', 'node_modules/@s-ui/react-context')
         )
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
@@ -115,9 +107,7 @@ const config = {
         },
         {
           test: /\.jsx?$/,
-          exclude: new RegExp(
-            `node_modules(?!${sep}@s-ui${sep}studio${sep}src)`
-          ),
+          exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
           use: [
             {
               loader: require.resolve('babel-loader'),

@@ -27,7 +27,5 @@ export const inMemory =
       cache.del(key)
     }
 
-    return cache.get(key) !== undefined
-      ? cache.get(key).returns
-      : original.apply(instance, args)
+    return cache.get(key) !== undefined ? cache.get(key).returns : original.apply(instance, args)
   }

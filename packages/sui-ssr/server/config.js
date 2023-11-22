@@ -5,14 +5,11 @@ const DEFAULT_VALUES = {
   useLegacyContext: true
 }
 
-const ASYNC_CSS_ATTRS =
-  'rel="stylesheet" media="print" as="style" onload="this.media=\'all\'"'
+const ASYNC_CSS_ATTRS = 'rel="stylesheet" media="print" as="style" onload="this.media=\'all\'"'
 
 let ssrConfig
 try {
-  const spaConfig = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
-  )
+  const spaConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'))
   const {config = {}} = spaConfig
   ssrConfig = config['sui-ssr'] || {}
 } catch (e) {

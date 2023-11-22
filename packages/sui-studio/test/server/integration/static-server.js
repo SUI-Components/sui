@@ -14,10 +14,7 @@ const server = http.createServer((req, res) => {
 
   const ext = path.extname(req.url)
 
-  const resource = fs.readFileSync(
-    path.join(BASE_PATH, ext === '' ? 'index.html' : req.url),
-    {encoding: 'utf8'}
-  )
+  const resource = fs.readFileSync(path.join(BASE_PATH, ext === '' ? 'index.html' : req.url), {encoding: 'utf8'})
 
   res.statusCode = 200
   res.setHeader(
@@ -28,7 +25,5 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(port, hostname, () => {
-  console.log(
-    `Stactically serving content from ${BASE_PATH} in http://${hostname}:${port}`
-  )
+  console.log(`Stactically serving content from ${BASE_PATH} in http://${hostname}:${port}`)
 })

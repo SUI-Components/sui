@@ -20,22 +20,10 @@ describe('@s-ui/js', () => {
       expect(pipe(textToUpperCase, textToArray)(title)).to.be.an('array')
     })
     xit('should be the same length as the title ', () => {
-      expect(pipe(textToUpperCase, textToArray)(title)).to.have.lengthOf(
-        title.length
-      )
+      expect(pipe(textToUpperCase, textToArray)(title)).to.have.lengthOf(title.length)
     })
     xit('should return the title in camelcase and array form ', () => {
-      expect(pipe(textToUpperCase, textToArray)(title)).to.deep.equal([
-        'S',
-        'C',
-        'H',
-        'I',
-        'B',
-        'S',
-        'T',
-        'E',
-        'D'
-      ])
+      expect(pipe(textToUpperCase, textToArray)(title)).to.deep.equal(['S', 'C', 'H', 'I', 'B', 'S', 'T', 'E', 'D'])
     })
   })
 })

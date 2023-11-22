@@ -1,17 +1,10 @@
-const {
-  DEFAULT_LEGACY_BROWSER_TARGETS,
-  DEFAULT_BROWSER_TARGETS,
-  DEFAULT_SERVER_TARGETS
-} = require('./defaults.js')
+const {DEFAULT_LEGACY_BROWSER_TARGETS, DEFAULT_BROWSER_TARGETS, DEFAULT_SERVER_TARGETS} = require('./defaults.js')
 
 const getTargets = ({targets = {}, isModern, isServer}) => {
   const {server, browser} = targets
   if (isModern && isServer) return server ?? DEFAULT_SERVER_TARGETS
 
-  return (
-    browser ??
-    (isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS)
-  )
+  return browser ?? (isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS)
 }
 
 const plugins = (api, {useESModules = true} = {}) => [
@@ -47,10 +40,7 @@ const presets = (api, opts = {}) => {
         useBuiltIns: false
       }
     ],
-    [
-      require('@babel/preset-react').default,
-      {runtime: 'automatic', useBuiltIns: true}
-    ]
+    [require('@babel/preset-react').default, {runtime: 'automatic', useBuiltIns: true}]
   ]
 }
 

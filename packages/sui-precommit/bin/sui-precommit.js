@@ -45,25 +45,11 @@ if (CI === false && name !== '@s-ui/precommit') {
     writeFile(commitMsgPath, '#!/bin/sh\nnpm run commit-msg --if-present'),
     writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
     writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
-  ]).then(() =>
-    Promise.all([
-      chmod(commitMsgPath, '755'),
-      chmod(preCommitPath, '755'),
-      chmod(prePushPath, '755')
-    ])
-  )
+  ]).then(() => Promise.all([chmod(commitMsgPath, '755'), chmod(preCommitPath, '755'), chmod(prePushPath, '755')]))
 
   try {
-    addToPackageJson(
-      'sui-lint js --staged && sui-lint sass --staged',
-      'scripts.lint',
-      false
-    )
-    addToPackageJson(
-      'echo "Skipping tests as they are not present"',
-      'scripts.test',
-      false
-    )
+    addToPackageJson('sui-lint js --staged && sui-lint sass --staged', 'scripts.lint', false)
+    addToPackageJson('echo "Skipping tests as they are not present"', 'scripts.test', false)
     addToPackageJson('npm run lint', 'scripts.pre-commit', false)
     addToPackageJson('npm run test', 'scripts.pre-push', false)
     removeFromPackageJson('husky')

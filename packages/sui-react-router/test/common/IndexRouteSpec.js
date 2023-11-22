@@ -8,9 +8,7 @@ import {IndexRoute, match, Route, Router} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
-    match({routes: withRoutes, location}, (_, __, renderProps) =>
-      resolve(renderToString(<Router {...renderProps} />))
-    )
+    match({routes: withRoutes, location}, (_, __, renderProps) => resolve(renderToString(<Router {...renderProps} />)))
   })
 }
 
@@ -45,9 +43,7 @@ describe('<IndexRoute>', () => {
         location: '/test'
       })
 
-      expect(renderedString).to.equal(
-        '<div>parent: <div>parent: <i>child</i></div></div>'
-      )
+      expect(renderedString).to.equal('<div>parent: <div>parent: <i>child</i></div></div>')
     })
 
     it('renders when its parents combined pathes match', async () => {
@@ -65,9 +61,7 @@ describe('<IndexRoute>', () => {
         location: '/path/test'
       })
 
-      expect(renderedString).to.equal(
-        '<div>parent: <div>parent: <i>child</i></div></div>'
-      )
+      expect(renderedString).to.equal('<div>parent: <div>parent: <i>child</i></div></div>')
     })
 
     it('renders when its parents combined pathes match, and its direct parent is path less', async () => {
@@ -87,9 +81,7 @@ describe('<IndexRoute>', () => {
         location: '/'
       })
 
-      expect(renderedString).to.equal(
-        '<div>parent: <div>parent: <div>parent: <i>child</i></div></div></div>'
-      )
+      expect(renderedString).to.equal('<div>parent: <div>parent: <div>parent: <i>child</i></div></div></div>')
     })
   })
 })

@@ -115,9 +115,7 @@ describe('@s-ui pde', () => {
     expect(isActive).to.equal(true)
     expect(linkedExperiments).to.deep.equal(['1234'])
     expect(optimizelyInstanceStub.isFeatureEnabled.called).to.equal(true)
-    expect(optimizelyInstanceStub.isFeatureEnabled.args[0][0]).to.equal(
-      'featureUsedInTest'
-    )
+    expect(optimizelyInstanceStub.isFeatureEnabled.args[0][0]).to.equal('featureUsedInTest')
   })
 
   it('should call optimizelys sdk activate fn', () => {
@@ -163,9 +161,7 @@ describe('@s-ui pde', () => {
       optimizely: optimizelyInstanceStub
     })
 
-    expect(optimizelyAdapter.activateExperiment({name: 'fakeTest'})).to.equal(
-      null
-    )
+    expect(optimizelyAdapter.activateExperiment({name: 'fakeTest'})).to.equal(null)
     expect(optimizelyInstanceStub.activate.notCalled).to.equal(true)
   })
 
@@ -223,28 +219,24 @@ describe('@s-ui pde', () => {
     })
   })
 
-  it.client(
-    'uses the optimizely adapter by default as global object to integrate with segment',
-    () => {
-      delete window.optimizelyClientInstance
-      // own copy to ensure to be able to test if it's the same object as added to the window
-      const optimizelyInstanceStub = {
-        activate: sinon.stub().returns('variationA'),
-        onReady: async () => true,
-        getEnabledFeatures: () => ['a', 'b']
-      }
-      // only executed to create window.optimizelyClientInstance
-      // eslint-disable-next-line no-new
-      new OptimizelyAdapter({
-        optimizely: optimizelyInstanceStub,
-        userId: '123',
-        hasUserConsents: true
-      })
-      // eslint-disable-next-line eqeqeq
-      expect(window.optimizelyClientInstance == optimizelyInstanceStub).to.be
-        .true
+  it.client('uses the optimizely adapter by default as global object to integrate with segment', () => {
+    delete window.optimizelyClientInstance
+    // own copy to ensure to be able to test if it's the same object as added to the window
+    const optimizelyInstanceStub = {
+      activate: sinon.stub().returns('variationA'),
+      onReady: async () => true,
+      getEnabledFeatures: () => ['a', 'b']
     }
-  )
+    // only executed to create window.optimizelyClientInstance
+    // eslint-disable-next-line no-new
+    new OptimizelyAdapter({
+      optimizely: optimizelyInstanceStub,
+      userId: '123',
+      hasUserConsents: true
+    })
+    // eslint-disable-next-line eqeqeq
+    expect(window.optimizelyClientInstance == optimizelyInstanceStub).to.be.true
+  })
 
   it.client('does not create segment integration if passed by as off', () => {
     delete window.optimizelyClientInstance
@@ -333,11 +325,10 @@ describe('@s-ui pde', () => {
       alternateInstance = createOptimizelyInstanceStub({
         activate: alternateInstanceActiveVariation
       })
-      multipleAdapterInstances =
-        MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
-          [defaultAdapterId]: {optimizely: defaultInstance},
-          [alternateAdapterId]: {optimizely: alternateInstance}
-        })
+      multipleAdapterInstances = MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
+        [defaultAdapterId]: {optimizely: defaultInstance},
+        [alternateAdapterId]: {optimizely: alternateInstance}
+      })
       multipleAdapter = new MultipleOptimizelyAdapter({
         [defaultAdapterId]: {
           optimizely: multipleAdapterInstances[defaultAdapterId]
@@ -357,12 +348,8 @@ describe('@s-ui pde', () => {
         name: 'default-test',
         adapterId: defaultAdapterId
       })
-      expect(variationOnDefaultWithAdapterId).to.equal(
-        variationOnDefaultWithoutAdapterId
-      )
-      expect(variationOnDefaultWithAdapterId).to.equal(
-        defaultInstanceActiveVariation
-      )
+      expect(variationOnDefaultWithAdapterId).to.equal(variationOnDefaultWithoutAdapterId)
+      expect(variationOnDefaultWithAdapterId).to.equal(defaultInstanceActiveVariation)
     })
 
     it('should use alternate adapter id', () => {
@@ -370,9 +357,7 @@ describe('@s-ui pde', () => {
         name: 'default-test',
         adapterId: alternateAdapterId
       })
-      expect(variationOnAlternateWithAdapterId).to.equal(
-        alternateInstanceActiveVariation
-      )
+      expect(variationOnAlternateWithAdapterId).to.equal(alternateInstanceActiveVariation)
     })
 
     it('should be ready on multiple instances', async () => {
@@ -406,12 +391,12 @@ describe('@s-ui pde', () => {
         [alternateAdapterId]: {optimizely: optimizelySDK2}
       })
 
-      expect(
-        optimizelySDK1.createInstance.firstCall.args[0].datafile
-      ).to.deep.equal({initialDatafile: defaultAdapterId})
-      expect(
-        optimizelySDK2.createInstance.firstCall.args[0].datafile
-      ).to.deep.equal({initialDatafile: alternateAdapterId})
+      expect(optimizelySDK1.createInstance.firstCall.args[0].datafile).to.deep.equal({
+        initialDatafile: defaultAdapterId
+      })
+      expect(optimizelySDK2.createInstance.firstCall.args[0].datafile).to.deep.equal({
+        initialDatafile: alternateAdapterId
+      })
     })
 
     it('should accept a single adapter', () => {

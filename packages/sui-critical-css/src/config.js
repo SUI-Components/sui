@@ -9,8 +9,7 @@ export const blockedResourceTypes = [
   'texttrack'
 ]
 
-const GOOGLE_BOT_UA =
-  '(compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+const GOOGLE_BOT_UA = '(compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 const CRITICAL_UA = `CriticalCSS`
 
 export const devices = {
