@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
-import * as reporter from 'web-vitals/attribution'
+import * as cwv from 'web-vitals/attribution'
 
 import SUIContext from '@s-ui/react-context'
 import useMount from '@s-ui/react-hooks/lib/useMount/index.js'
@@ -38,7 +38,8 @@ export const DEVICE_TYPES = {
 }
 
 export default function WebVitalsReporter({
-  children,
+  reporter = cwv,
+  children = null,
   deviceType,
   metrics = Object.values(METRICS),
   metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
@@ -123,7 +124,8 @@ export default function WebVitalsReporter({
           amount: value,
           pathname,
           routeid,
-          type
+          type,
+          entries
         })
         return
       }
@@ -190,7 +192,10 @@ export default function WebVitalsReporter({
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (metricsAllChanges.includes(metric)) reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+
+      if (metricsAllChanges.includes(metric)) {
+        reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+      }
     })
   })
 
@@ -221,11 +226,5 @@ WebVitalsReporter.propTypes = {
   /**
    * An optional array of pathnames or route ids that you want to track
    */
-  allowed: PropTypes.arrayOf(PropTypes.string),
-  /**
-   * An object with METRICS as keys and thresholds as values
-   * Thresholds by default are those above which Google considers the page as "needs improvement"
-   * Lower thresholds could be set for fine-tuning, higher thresholds could be set for less noise when reporting all changes
-   */
-  thresholds: PropTypes.object
+  allowed: PropTypes.arrayOf(PropTypes.string)
 }
