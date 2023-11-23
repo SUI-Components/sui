@@ -13,10 +13,7 @@ const copyGlobals = require('./helpers/copyGlobals.js')
 
 program
   .option('-O, --only-changes', 'only build changed components or demos')
-  .option(
-    '-B, --before-build <command>',
-    'command to be executed before the build'
-  )
+  .option('-B, --before-build <command>', 'command to be executed before the build')
   .parse(process.argv)
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
@@ -28,10 +25,7 @@ let needsBuild = true
 let beforeBuildCommand
 
 if (onlyChanges) {
-  const stdout = execSync(
-    `node ${join(__dirname, '..', 'scripts', 'prepare-only-changes.js')}`,
-    {encoding: 'utf8'}
-  )
+  const stdout = execSync(`node ${join(__dirname, '..', 'scripts', 'prepare-only-changes.js')}`, {encoding: 'utf8'})
   needsBuild = !stdout.includes(NO_COMPONENTS_MESSAGE)
 }
 

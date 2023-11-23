@@ -80,9 +80,7 @@ describe('I18N', () => {
       })
 
       it('generate url properly', () => {
-        expect(i18n.url('/profilePathSegment/privacyPathSegment')).to.eql(
-          '/my-profile/privacy'
-        )
+        expect(i18n.url('/profilePathSegment/privacyPathSegment')).to.eql('/my-profile/privacy')
       })
 
       describe('with pound sterling (GBP) as currency type', () => {
@@ -224,9 +222,7 @@ describe('I18N', () => {
           })
 
           it('with custom separator', () => {
-            expect(i18n.f('phone', '123123123', {separator: '-'})).to.eql(
-              '123-123-123'
-            )
+            expect(i18n.f('phone', '123123123', {separator: '-'})).to.eql('123-123-123')
           })
 
           it('from agglomerated digits, using the formatPhone method', () => {
@@ -238,9 +234,7 @@ describe('I18N', () => {
           })
 
           it('with custom separator, using the formatPhone method', () => {
-            expect(i18n.formatPhone('123123123', {separator: '-'})).to.eql(
-              '123-123-123'
-            )
+            expect(i18n.formatPhone('123123123', {separator: '-'})).to.eql('123-123-123')
           })
         })
       })
@@ -259,9 +253,7 @@ describe('I18N', () => {
     })
 
     it('returns object with translations of "literalOne" properly', () => {
-      expect(i18n.getAllTranslations('SCOPE.LITERAL_ONE')).to.eql(
-        ALL_TRANSLATIONS
-      )
+      expect(i18n.getAllTranslations('SCOPE.LITERAL_ONE')).to.eql(ALL_TRANSLATIONS)
     })
   })
 })

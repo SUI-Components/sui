@@ -3,12 +3,7 @@
 // @ts-check
 
 const program = require('commander')
-const {
-  checkFilesToLint,
-  getFilesToLint,
-  getGitIgnoredFiles,
-  stageFilesIfRequired
-} = require('../src/helpers.js')
+const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')

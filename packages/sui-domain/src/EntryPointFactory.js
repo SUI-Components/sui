@@ -30,8 +30,7 @@ export default ({useCases, config, logger, pde}) =>
       // get the useCase using the key passed by the user
       const useCase = this._useCases[key]
       // if the useCase doesn't exist, then let developer know that the useCase is not implemented
-      if (typeof useCase === 'undefined')
-        return createNotImplementedUseCase(key)
+      if (typeof useCase === 'undefined') return createNotImplementedUseCase(key)
 
       const isDynamicImportWholeFactory = useCase instanceof Array
 
@@ -39,9 +38,7 @@ export default ({useCases, config, logger, pde}) =>
         ? useCase // for the whole factory we extract the single method from the array
         : [useCase] // for the single factory, the method is undefined as is default
 
-      const getMethod = isDynamicImportWholeFactory
-        ? factory => factory.default[method]
-        : factory => factory.default
+      const getMethod = isDynamicImportWholeFactory ? factory => factory.default[method] : factory => factory.default
 
       // if loader is undefined then is not implemented, otherwhise load async the useCase
       return loader === undefined
@@ -59,15 +56,11 @@ export default ({useCases, config, logger, pde}) =>
                   }).execute(params)
                 )
                 .then(result => {
-                  subscriptionsForUseCase.forEach(fn =>
-                    fn({error: null, params, result})
-                  )
+                  subscriptionsForUseCase.forEach(fn => fn({error: null, params, result}))
                   return result
                 })
                 .catch(e => {
-                  subscriptionsForUseCase.forEach(fn =>
-                    fn({error: e, params, result: null})
-                  )
+                  subscriptionsForUseCase.forEach(fn => fn({error: e, params, result: null}))
                   return Promise.reject(e)
                 })
             },
@@ -78,9 +71,7 @@ export default ({useCases, config, logger, pde}) =>
               // return a way to remove the listener
               return {
                 unsubscribe: () => {
-                  this.subscribers[key] = this.subscribers[key].filter(
-                    l => l !== callback
-                  )
+                  this.subscribers[key] = this.subscribers[key].filter(l => l !== callback)
                 }
               }
             },

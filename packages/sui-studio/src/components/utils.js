@@ -47,9 +47,7 @@ export const getStudioLogo = () => {
  * @return {string}
  */
 export const extractDisplayName = Component =>
-  Component.displayName ||
-  (Component.type && Component.type.displayName) ||
-  Component.name
+  Component.displayName || (Component.type && Component.type.displayName) || Component.name
 
 /**
  * Add React Context
@@ -86,11 +84,7 @@ export const addReactContextToComponent = (Component, {context}) => {
  * @param {() => Promise<any>} params.importFile function to import dynamically a module
  * @return {Promise<any>}
  */
-export const safeImport = async ({
-  defaultValue = false,
-  extractDefault = true,
-  importFile
-}) => {
+export const safeImport = async ({defaultValue = false, extractDefault = true, importFile}) => {
   const file = await importFile().catch(() => defaultValue)
   if (typeof file === 'undefined') {
     return Promise.reject(new Error('Error requiring file'))

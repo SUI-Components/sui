@@ -94,12 +94,7 @@
       return css ? load.css(css) : Promise.resolve()
     }
 
-    var loadScripts = [
-      manifest['runtime~app.js'],
-      manifest['main.js'],
-      manifest['vendor.js'],
-      manifest['app.js']
-    ]
+    var loadScripts = [manifest['runtime~app.js'], manifest['main.js'], manifest['vendor.js'], manifest['app.js']]
       .filter(Boolean)
       .map(function (script) {
         return function () {
@@ -133,9 +128,7 @@
   }
 
   function match(pathnameRegExp, hrefRegExp) {
-    return (
-      matchPathnameWithRegExp(pathnameRegExp) || matchhRefWithRegExp(hrefRegExp)
-    )
+    return matchPathnameWithRegExp(pathnameRegExp) || matchhRefWithRegExp(hrefRegExp)
   }
 
   var pages = []

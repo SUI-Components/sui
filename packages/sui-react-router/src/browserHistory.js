@@ -10,8 +10,6 @@ import canUseDOM from './internal/canUseDOM.js'
 import createMemoryHistory from './createMemoryHistory.js'
 
 /** If we're on the server, we must be sure importing this file doesn't break anything */
-const browserHistory = canUseDOM
-  ? useQueries(useBasename(createBrowserHistory))()
-  : createMemoryHistory()
+const browserHistory = canUseDOM ? useQueries(useBasename(createBrowserHistory))() : createMemoryHistory()
 
 export default browserHistory

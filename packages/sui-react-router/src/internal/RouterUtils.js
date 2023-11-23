@@ -7,8 +7,7 @@ import canUseDOM from './canUseDOM.js'
 /**
  * Create the history that the router will use depending on the environment
  */
-export const createRouterHistory = options =>
-  canUseDOM ? browserHistory : createMemoryHistory(options)
+export const createRouterHistory = options => (canUseDOM ? browserHistory : createMemoryHistory(options))
 
 /**
  * Create the router object that will be availble in the context with all the needed info
@@ -17,11 +16,7 @@ export const createRouterHistory = options =>
  * @param {{ location: string, params: object, routes: array }=} state
  * @returns { import('../types').Router }
  */
-export const createRouterObject = (
-  history,
-  isActive,
-  state = {location: null, params: null, routes: null}
-) => {
+export const createRouterObject = (history, isActive, state = {location: null, params: null, routes: null}) => {
   const {location, params, routes} = state
 
   return {

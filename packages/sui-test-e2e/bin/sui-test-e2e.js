@@ -49,54 +49,25 @@ const pluginsFilesFolderPath = join(TESTS_FOLDER, 'plugins')
 
 program
   .version(version, '    --version')
-  .option(
-    '-B, --baseUrl <baseUrl>',
-    'URL of the site to execute tests (in ./test-e2e/) on.'
-  )
+  .option('-B, --baseUrl <baseUrl>', 'URL of the site to execute tests (in ./test-e2e/) on.')
   .option(
     '-T, --defaultCommandTimeout <ms>',
     'Time, in milliseconds, to wait until most DOM based commands are considered timed out.'
   )
-  .option(
-    '-S, --screenshotsOnError',
-    'Take screenshots of page on any failure.',
-    false
-  )
-  .option(
-    '-U, --userAgentAppend <userAgentAppend>',
-    'Append string to UserAgent header.'
-  )
-  .option(
-    '-UA, --userAgent <userAgent>',
-    'Overwrite string to UserAgent header.'
-  )
+  .option('-S, --screenshotsOnError', 'Take screenshots of page on any failure.', false)
+  .option('-U, --userAgentAppend <userAgentAppend>', 'Append string to UserAgent header.')
+  .option('-UA, --userAgent <userAgent>', 'Overwrite string to UserAgent header.')
   .option('-s, --scope <spec>', 'Run tests specifying a subfolder of specs')
-  .option(
-    '-b, --browser <browser>',
-    'Select a different browser (chrome|edge|firefox)'
-  )
-  .option(
-    '-H, --headless',
-    'Hide the browser instead of running headed (default for Electron)'
-  )
+  .option('-b, --browser <browser>', 'Select a different browser (chrome|edge|firefox)')
+  .option('-H, --headless', 'Hide the browser instead of running headed (default for Electron)')
   .option('-N, --noWebSecurity', 'Disable all web securities')
   .option('-G, --gui', 'Run the tests in GUI mode.')
   .option('-P, --parallel', 'Run tests on parallelRun tests on parallel')
-  .option(
-    '-R, --record',
-    'Record tests and send result to Dashboard Service',
-    false
-  )
+  .option('-R, --record', 'Record tests and send result to Dashboard Service', false)
   .option('-C, --ci', 'Continuous integration mode, reduces memory consumption')
-  .option(
-    '-VH, --viewportHeight <viewportHeight>',
-    'Sets custom viewport height'
-  )
+  .option('-VH, --viewportHeight <viewportHeight>', 'Sets custom viewport height')
   .option('-VW, --viewportWidth <viewportWidth>', 'Sets custom viewport width')
-  .option(
-    '-K, --key <key>',
-    'It is used to authenticate the project into the Dashboard Service'
-  )
+  .option('-K, --key <key>', 'It is used to authenticate the project into the Dashboard Service')
   .option('-V, --video', 'Enable video recording', false)
   .option('--group', 'Combines tests in different groups')
   .on('--help', () => console.log(HELP_MESSAGE))
@@ -193,10 +164,7 @@ const cypressExecutableConfig = {
   video
 }
 
-;(gui
-  ? cypress.open(cypressExecutableConfig)
-  : cypress.run(cypressExecutableConfig)
-)
+;(gui ? cypress.open(cypressExecutableConfig) : cypress.run(cypressExecutableConfig))
   .then(result => {
     if (result.failures) {
       console.error('Could not execute tests:')

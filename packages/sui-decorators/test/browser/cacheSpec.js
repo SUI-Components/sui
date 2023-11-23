@@ -72,12 +72,10 @@ describe('Cache in browser', () => {
         }
       }
       const dummy = new Dummy()
-      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(
-        ([firstCall, secondCall]) => {
-          expect(firstCall).to.be.eql(secondCall)
-          done()
-        }
-      )
+      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(([firstCall, secondCall]) => {
+        expect(firstCall).to.be.eql(secondCall)
+        done()
+      })
     })
 
     it('with cacheKeyString param defined should return twice the same random number without params', done => {
@@ -89,12 +87,10 @@ describe('Cache in browser', () => {
         }
       }
       const dummy = new Dummy2()
-      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(
-        ([firstCall, secondCall]) => {
-          expect(firstCall).to.be.eql(secondCall)
-          done()
-        }
-      )
+      Promise.all([dummy.asyncRndNumber(), dummy.asyncRndNumber()]).then(([firstCall, secondCall]) => {
+        expect(firstCall).to.be.eql(secondCall)
+        done()
+      })
     })
 
     it('return different numbers if the promise fails', done => {
@@ -104,12 +100,8 @@ describe('Cache in browser', () => {
         @inlineError
         asyncRndNumber(num) {
           const prms = !fail
-            ? new Promise((resolve, reject) =>
-                setTimeout(resolve, 100, Math.random())
-              )
-            : new Promise((resolve, reject) =>
-                setTimeout(reject, 100, Math.random())
-              )
+            ? new Promise((resolve, reject) => setTimeout(resolve, 100, Math.random()))
+            : new Promise((resolve, reject) => setTimeout(reject, 100, Math.random()))
           fail = !fail
           return prms
         }
@@ -156,9 +148,7 @@ describe('Cache in browser', () => {
       }
       const dummy = new Dummy()
       expect(dummy.syncRndNumber(1, 2)).to.be.eql(dummy.syncRndNumber(1, 2))
-      expect(dummy.syncRndNumber({a: 'b'})).to.be.eql(
-        dummy.syncRndNumber({a: 'b'})
-      )
+      expect(dummy.syncRndNumber({a: 'b'})).to.be.eql(dummy.syncRndNumber({a: 'b'}))
     })
 
     describe('have a TTL for each key', () => {

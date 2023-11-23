@@ -14,13 +14,7 @@ console.log('[sui-svg] Preparing build with icons...')
 await build({
   root,
   optimizeDeps: {
-    include: [
-      'classnames',
-      'prop-types',
-      'react',
-      'react/jsx-runtime',
-      'react-dom'
-    ]
+    include: ['classnames', 'prop-types', 'react', 'react/jsx-runtime', 'react-dom']
   },
   resolve: {
     alias: [

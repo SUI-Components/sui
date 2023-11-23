@@ -22,26 +22,17 @@ describe('when pde context is set', () => {
     let isFeatureEnabled
     let getAllFeatureVariables
     beforeEach(() => {
-      isFeatureEnabled = sinon
-        .stub()
-        .returns({isActive: true, linkedExperiments: []})
+      isFeatureEnabled = sinon.stub().returns({isActive: true, linkedExperiments: []})
       getAllFeatureVariables = sinon.stub().returns(variables)
 
       // eslint-disable-next-line react/prop-types
       wrapper = ({children}) => (
-        <PdeContext.Provider
-          value={{pde: {isFeatureEnabled, getAllFeatureVariables}}}
-        >
-          {children}
-        </PdeContext.Provider>
+        <PdeContext.Provider value={{pde: {isFeatureEnabled, getAllFeatureVariables}}}>{children}</PdeContext.Provider>
       )
     })
 
     it('should check if a feature is enabled', () => {
-      const {result} = renderHook(
-        () => useFeature('featureKey1', {attribute1: 'value'}),
-        {wrapper}
-      )
+      const {result} = renderHook(() => useFeature('featureKey1', {attribute1: 'value'}), {wrapper})
       expect(result.current.isActive).to.equal(true)
       expect(isFeatureEnabled.called).to.equal(true)
       expect(isFeatureEnabled.args[0][0]).to.deep.equal({
@@ -52,10 +43,7 @@ describe('when pde context is set', () => {
     })
 
     it('should return feature variables', () => {
-      const {result} = renderHook(
-        () => useFeature('featureKey2', {attribute1: 'value'}),
-        {wrapper}
-      )
+      const {result} = renderHook(() => useFeature('featureKey2', {attribute1: 'value'}), {wrapper})
 
       expect(result.current.variables).to.be.deep.equal(variables)
       expect(isFeatureEnabled.called).to.equal(true)
@@ -68,176 +56,120 @@ describe('when pde context is set', () => {
 
     describe.client('and the hook is executed by the browser', () => {
       it('should check that a feature has been forced to be active', () => {
-        const {result} = renderHook(
-          () => useFeature('featureKey3', {}, '?suipde_feature1=on'),
-          {wrapper}
-        )
+        const {result} = renderHook(() => useFeature('featureKey3', {}, '?suipde_feature1=on'), {wrapper})
         expect(result.current.isActive).to.equal(true)
       })
 
       it('should check that a feature has been forced to be not active', () => {
-        const {result} = renderHook(
-          () =>
-            useFeature(
-              'featureKey3',
-              {},
-              '?suipde_featureKey3=off&suipde_feature1=on'
-            ),
-          {wrapper}
-        )
+        const {result} = renderHook(() => useFeature('featureKey3', {}, '?suipde_featureKey3=off&suipde_feature1=on'), {
+          wrapper
+        })
         expect(result.current.isActive).to.equal(false)
       })
     })
   })
 
-  describe.client(
-    'when checking if a feature flag is active or not in browser',
-    () => {
-      let isFeatureEnabled
-      let getAllFeatureVariables
-      let getVariation
+  describe.client('when checking if a feature flag is active or not in browser', () => {
+    let isFeatureEnabled
+    let getAllFeatureVariables
+    let getVariation
 
-      describe.client('when a feature flag is active', () => {
-        beforeEach(() => {
-          isFeatureEnabled = sinon.stub().returns({
-            isActive: true,
-            linkedExperiments: []
-          })
-          getAllFeatureVariables = sinon.stub().returns(variables)
-          getVariation = sinon.stub().returns('variation1')
-
-          window.analytics = {
-            ready: cb => cb(),
-            track: sinon.spy()
-          }
-
-          // eslint-disable-next-line react/prop-types
-          wrapper = ({children}) => (
-            <PdeContext.Provider
-              value={{
-                pde: {isFeatureEnabled, getAllFeatureVariables, getVariation}
-              }}
-            >
-              {children}
-            </PdeContext.Provider>
-          )
+    describe.client('when a feature flag is active', () => {
+      beforeEach(() => {
+        isFeatureEnabled = sinon.stub().returns({
+          isActive: true,
+          linkedExperiments: []
         })
+        getAllFeatureVariables = sinon.stub().returns(variables)
+        getVariation = sinon.stub().returns('variation1')
 
-        afterEach(() => {
-          delete window.analytics
+        window.analytics = {
+          ready: cb => cb(),
+          track: sinon.spy()
+        }
+
+        // eslint-disable-next-line react/prop-types
+        wrapper = ({children}) => (
+          <PdeContext.Provider
+            value={{
+              pde: {isFeatureEnabled, getAllFeatureVariables, getVariation}
+            }}
+          >
+            {children}
+          </PdeContext.Provider>
+        )
+      })
+
+      afterEach(() => {
+        delete window.analytics
+      })
+
+      it('should send the on state experiment viewed', () => {
+        renderHook(() => useFeature('activeFeatureFlagKey', undefined, undefined, undefined, true), {
+          wrapper
         })
-
-        it('should send the on state experiment viewed', () => {
-          renderHook(
-            () =>
-              useFeature(
-                'activeFeatureFlagKey',
-                undefined,
-                undefined,
-                undefined,
-                true
-              ),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args[0][0]).to.equal(
-            'Experiment Viewed'
-          )
-          expect(window.analytics.track.args[0][1]).to.deep.equal({
-            experimentName: 'activeFeatureFlagKey',
-            variationName: 'On State'
-          })
-        })
-
-        describe.client('when a feature is seen twice', () => {
-          it('should only track one experiment viewed event', () => {
-            renderHook(
-              () =>
-                useFeature(
-                  'repeatedFeatureFlagKey',
-                  undefined,
-                  undefined,
-                  undefined,
-                  true
-                ),
-              {
-                wrapper
-              }
-            )
-            renderHook(
-              () =>
-                useFeature(
-                  'repeatedFeatureFlagKey',
-                  undefined,
-                  undefined,
-                  undefined,
-                  true
-                ),
-              {
-                wrapper
-              }
-            )
-            expect(window.analytics.track.args.length).to.equal(1)
-          })
+        expect(window.analytics.track.args[0][0]).to.equal('Experiment Viewed')
+        expect(window.analytics.track.args[0][1]).to.deep.equal({
+          experimentName: 'activeFeatureFlagKey',
+          variationName: 'On State'
         })
       })
 
-      describe.client('when a feature flag is deactivated', () => {
-        beforeEach(() => {
-          isFeatureEnabled = sinon.stub().returns({
-            isActive: false,
-            linkedExperiments: []
+      describe.client('when a feature is seen twice', () => {
+        it('should only track one experiment viewed event', () => {
+          renderHook(() => useFeature('repeatedFeatureFlagKey', undefined, undefined, undefined, true), {
+            wrapper
           })
-          getAllFeatureVariables = sinon.stub().returns(variables)
-          getVariation = sinon.stub().returns('variation1')
-
-          window.analytics = {
-            ready: cb => cb(),
-            track: sinon.spy()
-          }
-
-          // eslint-disable-next-line react/prop-types
-          wrapper = ({children}) => (
-            <PdeContext.Provider
-              value={{
-                pde: {isFeatureEnabled, getAllFeatureVariables, getVariation}
-              }}
-            >
-              {children}
-            </PdeContext.Provider>
-          )
-        })
-
-        afterEach(() => {
-          delete window.analytics
-        })
-
-        it('should send the off state experiment viewed', () => {
-          renderHook(
-            () =>
-              useFeature(
-                'notActiveFeatureFlagKey',
-                undefined,
-                undefined,
-                undefined,
-                true
-              ),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args[0][0]).to.equal(
-            'Experiment Viewed'
-          )
-          expect(window.analytics.track.args[0][1]).to.deep.equal({
-            experimentName: 'notActiveFeatureFlagKey',
-            variationName: 'Off State'
+          renderHook(() => useFeature('repeatedFeatureFlagKey', undefined, undefined, undefined, true), {
+            wrapper
           })
+          expect(window.analytics.track.args.length).to.equal(1)
         })
       })
-    }
-  )
+    })
+
+    describe.client('when a feature flag is deactivated', () => {
+      beforeEach(() => {
+        isFeatureEnabled = sinon.stub().returns({
+          isActive: false,
+          linkedExperiments: []
+        })
+        getAllFeatureVariables = sinon.stub().returns(variables)
+        getVariation = sinon.stub().returns('variation1')
+
+        window.analytics = {
+          ready: cb => cb(),
+          track: sinon.spy()
+        }
+
+        // eslint-disable-next-line react/prop-types
+        wrapper = ({children}) => (
+          <PdeContext.Provider
+            value={{
+              pde: {isFeatureEnabled, getAllFeatureVariables, getVariation}
+            }}
+          >
+            {children}
+          </PdeContext.Provider>
+        )
+      })
+
+      afterEach(() => {
+        delete window.analytics
+      })
+
+      it('should send the off state experiment viewed', () => {
+        renderHook(() => useFeature('notActiveFeatureFlagKey', undefined, undefined, undefined, true), {
+          wrapper
+        })
+        expect(window.analytics.track.args[0][0]).to.equal('Experiment Viewed')
+        expect(window.analytics.track.args[0][1]).to.deep.equal({
+          experimentName: 'notActiveFeatureFlagKey',
+          variationName: 'Off State'
+        })
+      })
+    })
+  })
 
   describe.client('when its a feature test, so an experiment is linked', () => {
     let isFeatureEnabled
@@ -278,19 +210,9 @@ describe('when pde context is set', () => {
     })
 
     it('should send experiment viewed event for every test asociated and the experiment viewed associated to the feature flag itself', () => {
-      renderHook(
-        () =>
-          useFeature(
-            'featureKey4',
-            {attribute1: 'value'},
-            undefined,
-            undefined,
-            true
-          ),
-        {
-          wrapper
-        }
-      )
+      renderHook(() => useFeature('featureKey4', {attribute1: 'value'}, undefined, undefined, true), {
+        wrapper
+      })
 
       // feature being called
       expect(window.analytics.track.args[0][0]).to.equal('Experiment Viewed')
@@ -315,128 +237,85 @@ describe('when pde context is set', () => {
     })
   })
 
-  describe.client(
-    'when calling twice the useFeature hook with the same feature key',
-    () => {
-      let getAllFeatureVariables
-      let getVariation
-      let stubFactory
+  describe.client('when calling twice the useFeature hook with the same feature key', () => {
+    let getAllFeatureVariables
+    let getVariation
+    let stubFactory
 
+    beforeEach(() => {
+      window.analytics = {
+        ready: cb => cb(),
+        track: sinon.spy()
+      }
+
+      stubFactory = isFeatureEnabled => {
+        getAllFeatureVariables = sinon.stub().returns(variables)
+
+        // eslint-disable-next-line react/prop-types
+        wrapper = ({children}) => (
+          <PdeContext.Provider
+            value={{
+              pde: {
+                isFeatureEnabled,
+                getAllFeatureVariables,
+                getVariation
+              }
+            }}
+          >
+            {children}
+          </PdeContext.Provider>
+        )
+      }
+    })
+
+    afterEach(() => {
+      delete window.analytics
+    })
+
+    describe('when the second time returns the same value as the first time', () => {
       beforeEach(() => {
-        window.analytics = {
-          ready: cb => cb(),
-          track: sinon.spy()
-        }
-
-        stubFactory = isFeatureEnabled => {
-          getAllFeatureVariables = sinon.stub().returns(variables)
-
-          // eslint-disable-next-line react/prop-types
-          wrapper = ({children}) => (
-            <PdeContext.Provider
-              value={{
-                pde: {
-                  isFeatureEnabled,
-                  getAllFeatureVariables,
-                  getVariation
-                }
-              }}
-            >
-              {children}
-            </PdeContext.Provider>
-          )
-        }
-      })
-
-      afterEach(() => {
-        delete window.analytics
-      })
-
-      describe('when the second time returns the same value as the first time', () => {
-        beforeEach(() => {
-          const isFeatureEnabled = sinon.stub()
-          isFeatureEnabled.onCall(0).returns({
-            isActive: true
-          })
-          isFeatureEnabled.onCall(1).returns({
-            isActive: true
-          })
-
-          stubFactory(isFeatureEnabled)
+        const isFeatureEnabled = sinon.stub()
+        isFeatureEnabled.onCall(0).returns({
+          isActive: true
         })
-        it('should send only one experiment viewed event', () => {
-          renderHook(
-            () =>
-              useFeature(
-                'repeatedFeatureFlagKey',
-                undefined,
-                undefined,
-                undefined,
-                true
-              ),
-            {
-              wrapper
-            }
-          )
-          renderHook(
-            () =>
-              useFeature(
-                'repeatedFeatureFlagKey',
-                undefined,
-                undefined,
-                undefined,
-                true
-              ),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args.length).to.equal(1)
+        isFeatureEnabled.onCall(1).returns({
+          isActive: true
         })
-      })
 
-      describe('when the second time returns a different value as the first time', () => {
-        beforeEach(() => {
-          const isFeatureEnabled = sinon.stub()
-          isFeatureEnabled.onCall(0).returns({
-            isActive: true
-          })
-          isFeatureEnabled.onCall(1).returns({
-            isActive: false
-          })
-
-          stubFactory(isFeatureEnabled)
-        })
-        it('should send two experiment viewed events', () => {
-          renderHook(
-            () =>
-              useFeature(
-                'repeatedFeatureFlagKey',
-                undefined,
-                undefined,
-                undefined,
-                true
-              ),
-            {
-              wrapper
-            }
-          )
-          renderHook(
-            () =>
-              useFeature(
-                'repeatedFeatureFlagKey',
-                undefined,
-                undefined,
-                undefined,
-                true
-              ),
-            {
-              wrapper
-            }
-          )
-          expect(window.analytics.track.args.length).to.equal(2)
-        })
+        stubFactory(isFeatureEnabled)
       })
-    }
-  )
+      it('should send only one experiment viewed event', () => {
+        renderHook(() => useFeature('repeatedFeatureFlagKey', undefined, undefined, undefined, true), {
+          wrapper
+        })
+        renderHook(() => useFeature('repeatedFeatureFlagKey', undefined, undefined, undefined, true), {
+          wrapper
+        })
+        expect(window.analytics.track.args.length).to.equal(1)
+      })
+    })
+
+    describe('when the second time returns a different value as the first time', () => {
+      beforeEach(() => {
+        const isFeatureEnabled = sinon.stub()
+        isFeatureEnabled.onCall(0).returns({
+          isActive: true
+        })
+        isFeatureEnabled.onCall(1).returns({
+          isActive: false
+        })
+
+        stubFactory(isFeatureEnabled)
+      })
+      it('should send two experiment viewed events', () => {
+        renderHook(() => useFeature('repeatedFeatureFlagKey', undefined, undefined, undefined, true), {
+          wrapper
+        })
+        renderHook(() => useFeature('repeatedFeatureFlagKey', undefined, undefined, undefined, true), {
+          wrapper
+        })
+        expect(window.analytics.track.args.length).to.equal(2)
+      })
+    })
+  })
 })

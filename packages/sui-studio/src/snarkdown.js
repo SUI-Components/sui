@@ -22,10 +22,7 @@ function outdent(str) {
  *	@private
  */
 function encodeAttr(str) {
-  return (str + '')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+  return (str + '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
 /** Parse Markdown into an HTML String. */
@@ -96,16 +93,11 @@ export default function parse(md, prevLinks) {
     }
     // Images:
     else if (token[8]) {
-      chunk = `<img src="${encodeAttr(token[8])}" alt="${encodeAttr(
-        token[7]
-      )}">`
+      chunk = `<img src="${encodeAttr(token[8])}" alt="${encodeAttr(token[7])}">`
     }
     // Links:
     else if (token[10]) {
-      out = out.replace(
-        '<a>',
-        `<a href="${encodeAttr(token[11] || links[prev.toLowerCase()])}">`
-      )
+      out = out.replace('<a>', `<a href="${encodeAttr(token[11] || links[prev.toLowerCase()])}">`)
       chunk = flush() + '</a>'
     } else if (token[9]) {
       chunk = '<a>'
@@ -113,8 +105,7 @@ export default function parse(md, prevLinks) {
     // Headings:
     else if (token[12] || token[14]) {
       t = 'h' + (token[14] ? token[14].length : token[13][0] === '=' ? 1 : 2)
-      chunk =
-        '<' + t + '>' + parse(token[12] || token[15], links) + '</' + t + '>'
+      chunk = '<' + t + '>' + parse(token[12] || token[15], links) + '</' + t + '>'
     }
     // `code`:
     else if (token[16]) {

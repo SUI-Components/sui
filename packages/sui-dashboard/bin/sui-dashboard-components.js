@@ -73,23 +73,12 @@ const repositories = [
 ]
 
 const cloneSUIComponentsCommand = [
-  [
-    'git',
-    [
-      'clone',
-      'https://github.com/SUI-Components/sui-components',
-      join(WORK_DIRECTORY, 'sui-components')
-    ]
-  ]
+  ['git', ['clone', 'https://github.com/SUI-Components/sui-components', join(WORK_DIRECTORY, 'sui-components')]]
 ]
 
 const cloneCommands = repositories.map(repo => [
   'git',
-  [
-    'clone',
-    `git@github.mpi-internal.com:scmspain/${repo}.git`,
-    join(WORK_DIRECTORY, repo)
-  ]
+  ['clone', `git@github.mpi-internal.com:scmspain/${repo}.git`, join(WORK_DIRECTORY, repo)]
 ])
 
 const installCommands = repositories.map(repo => [
