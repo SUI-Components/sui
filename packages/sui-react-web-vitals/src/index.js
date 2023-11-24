@@ -81,6 +81,9 @@ export default function WebVitalsReporter({
     }
 
     const computeINPMetrics = entry => {
+      // RenderTime is an estimate because duration is rounded and may get rounded down.
+      // In rare cases, it can be less than processingEnd and that breaks performance.measure().
+      // Let's ensure it's at least 4ms in those cases so you can barely see it.
       const presentationTime = Math.max(entry.processingEnd + 4, entry.startTime + entry.duration)
 
       return {
