@@ -105,6 +105,7 @@ export default function WebVitalsReporter({
         path: pathname,
         target,
         loadState: attribution.loadState,
+        visibilityState: document.visibilityState,
         ...(attribution.eventType && {eventType: attribution.eventType})
       })
     }

@@ -36,7 +36,7 @@ describe('WebVitalsReporter', () => {
     await screen.findByRole('heading', {name: 'Title'})
   })
 
-  it('should track cwv using logger callback', async () => {
+  it('should track cwv using callback', async () => {
     const reporter = {
       onINP: fn => {
         fn({name: 'TTFB', value: 10})
@@ -49,7 +49,7 @@ describe('WebVitalsReporter', () => {
     await waitFor(() => [expect(onReport.calledWithMatch({name: 'TTFB', amount: 10, pathname: '/'})).to.be.true])
   })
 
-  it('should track cwv using logger callback with route id', async () => {
+  it('should track cwv using callback with route id', async () => {
     const reporter = {
       onINP: fn => {
         fn({name: 'TTFB', value: 10})
@@ -67,7 +67,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it('should track cwv using logger with browser', async () => {
+  it('should track cwv using callback with browser', async () => {
     const reporter = {
       onINP: fn => {
         fn({name: 'TTFB', value: 10})
@@ -91,7 +91,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it('should track cwv using logger with browser in context', async () => {
+  it('should track cwv using callback with browser in context', async () => {
     const reporter = {
       onINP: fn => {
         fn({name: 'TTFB', value: 10})
