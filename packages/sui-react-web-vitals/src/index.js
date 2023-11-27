@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
-import * as reporter from 'web-vitals/attribution'
+import * as cwv from 'web-vitals/attribution'
 
 import SUIContext from '@s-ui/react-context'
 import useMount from '@s-ui/react-hooks/lib/useMount/index.js'
@@ -16,6 +16,12 @@ export const METRICS = {
   TTFB: 'TTFB'
 }
 
+const INP_METRICS = {
+  ID: 'ID',
+  PT: 'PT',
+  PD: 'PD'
+}
+
 // https://github.com/GoogleChrome/web-vitals#metric
 const RATING = {
   GOOD: 'good',
@@ -25,41 +31,20 @@ const RATING = {
 
 const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP]
 
-const DEFAULT_CWV_THRESHOLDS = {
-  [METRICS.CLS]: 100,
-  [METRICS.FCP]: 1800,
-  [METRICS.FID]: 100,
-  [METRICS.INP]: 200,
-  [METRICS.LCP]: 2500,
-  [METRICS.TTFB]: 800
-}
-
 export const DEVICE_TYPES = {
   DESKTOP: 'desktop',
   TABLET: 'tablet',
   MOBILE: 'mobile'
 }
 
-const getNormalizedPathname = pathname => {
-  return pathname.replace(/[^a-z0-9]/gi, '')
-}
-
-const getPathname = route => {
-  return route?.path || route?.regexp?.toString()
-}
-
-const getHasPathOnRoute = route => {
-  return Boolean(route?.path)
-}
-
 export default function WebVitalsReporter({
-  children,
+  reporter = cwv,
+  children = null,
   deviceType,
   metrics = Object.values(METRICS),
   metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
   onReport,
-  pathnames,
-  thresholds = DEFAULT_CWV_THRESHOLDS
+  allowed = []
 }) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
@@ -74,6 +59,10 @@ export default function WebVitalsReporter({
   useMount(() => {
     const getRouteid = () => {
       return route?.id
+    }
+
+    const getPathname = route => {
+      return route?.path || route?.regexp?.toString().replace(/[^a-z0-9]/gi, '')
     }
 
     const getDeviceType = () => {
@@ -91,44 +80,56 @@ export default function WebVitalsReporter({
       }
     }
 
+    const computeINPMetrics = entry => {
+      // RenderTime is an estimate because duration is rounded and may get rounded down.
+      // In rare cases, it can be less than processingEnd and that breaks performance.measure().
+      // Let's ensure it's at least 4ms in those cases so you can barely see it.
+      const presentationTime = Math.max(entry.processingEnd + 4, entry.startTime + entry.duration)
+
+      return {
+        [INP_METRICS.ID]: Math.round(entry.processingStart - entry.startTime, 0),
+        [INP_METRICS.PT]: Math.round(entry.processingEnd - entry.processingStart, 0),
+        [INP_METRICS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
+      }
+    }
+
     const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
-      const hasPathOnRoute = getHasPathOnRoute(route)
-      const isExcluded = !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
+      const isAllowed = allowed.includes(pathname)
 
-      if (isExcluded || !logger?.cwv || rating === RATING.GOOD) return
+      if (!isAllowed || !logger?.cwv || rating === RATING.GOOD) return
 
       const target = getTarget({name, attribution})
 
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
         amount,
-        path: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
+        path: pathname,
         target,
         loadState: attribution.loadState,
-        ...(attribution.eventType && {eventType: attribution.eventType}),
-        visibilityState: document.visibilityState
+        visibilityState: document.visibilityState,
+        ...(attribution.eventType && {eventType: attribution.eventType})
       })
     }
 
-    const handleChange = ({name, value}) => {
+    const handleChange = ({name, value, entries}) => {
       const onReport = onReportRef.current
       const pathname = getPathname(route)
-      const hasPathOnRoute = getHasPathOnRoute(route)
       const routeid = getRouteid()
       const type = getDeviceType()
-      const isExcluded = !pathname || (Array.isArray(pathnames) && !pathnames.includes(pathname))
+      const isAllowed = allowed.includes(pathname) || allowed.includes(routeid)
 
-      if (isExcluded) return
+      if (!isAllowed) return
 
       if (onReport) {
         onReport({
           name,
           amount: value,
-          pathname: hasPathOnRoute ? pathname : getNormalizedPathname(pathname),
+          pathname,
           routeid,
-          type
+          type,
+          entries
         })
         return
       }
@@ -136,6 +137,29 @@ export default function WebVitalsReporter({
       if (!logger?.distribution) return
 
       const amount = name === METRICS.CLS ? value * 1000 : value
+      const tags = [
+        ...(routeid
+          ? [
+              {
+                key: 'routeid',
+                value: routeid
+              }
+            ]
+          : [
+              {
+                key: 'pathname',
+                value: pathname
+              }
+            ]),
+        ...(type
+          ? [
+              {
+                key: 'type',
+                value: type
+              }
+            ]
+          : [])
+      ]
 
       logger.distribution({
         name: 'cwv',
@@ -145,33 +169,37 @@ export default function WebVitalsReporter({
             key: 'name',
             value: name.toLowerCase()
           },
-          {
-            key: 'pathname',
-            value: hasPathOnRoute ? pathname : getNormalizedPathname(pathname)
-          },
-          ...(routeid
-            ? [
-                {
-                  key: 'routeid',
-                  value: routeid
-                }
-              ]
-            : []),
-          ...(type
-            ? [
-                {
-                  key: 'type',
-                  value: type
-                }
-              ]
-            : [])
+          ...tags
         ]
       })
+
+      if (name === METRICS.INP) {
+        entries.forEach(entry => {
+          const metrics = computeINPMetrics(entry)
+
+          Object.keys(metrics).forEach(name => {
+            logger.distribution({
+              name: 'cwv',
+              amount: metrics[name],
+              tags: [
+                {
+                  key: 'name',
+                  value: name.toLowerCase()
+                },
+                ...tags
+              ]
+            })
+          })
+        })
+      }
     }
 
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
-      if (metricsAllChanges.includes(metric)) reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+
+      if (metricsAllChanges.includes(metric)) {
+        reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+      }
     })
   })
 
@@ -200,13 +228,7 @@ WebVitalsReporter.propTypes = {
    */
   onReport: PropTypes.func,
   /**
-   * An optional array of pathnames that you want to track
+   * An optional array of pathnames or route ids that you want to track
    */
-  pathnames: PropTypes.arrayOf(PropTypes.string),
-  /**
-   * An object with METRICS as keys and thresholds as values
-   * Thresholds by default are those above which Google considers the page as "needs improvement"
-   * Lower thresholds could be set for fine-tuning, higher thresholds could be set for less noise when reporting all changes
-   */
-  thresholds: PropTypes.object
+  allowed: PropTypes.arrayOf(PropTypes.string)
 }
