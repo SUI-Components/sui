@@ -6,7 +6,8 @@
   "scripts": {},
   "keywords": [],
   "dependencies": {
-    "core-js": "3"
+    "core-js": "3",
+    "element-polyfill": "1"
   },
   "license": "MIT",
   "repository": {
