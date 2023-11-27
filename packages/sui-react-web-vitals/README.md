@@ -139,16 +139,16 @@ export default function App() {
 }
 ```
 
-#### Allowed pathnames
+#### Allowed routes
 
-Use `pathnames` prop if you only want to track a set of pathnames
+Use `allowed` prop if you only want to track a set of pathnames or route ids
 
 ```jsx
 import WebVitalsReporter from '@s-ui/react-web-vitals'
 
 export default function App() {
   return (
-    <WebVitalsReporter pathnames={['/products/:id']}>
+    <WebVitalsReporter allowed={['/products/:id', 'search']}>
       <main />
     </WebVitalsReporter>
   )
