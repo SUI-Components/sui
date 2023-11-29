@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.20.0 (2023-11-29)
+
+
+### Features
+
+* **packages/sui-polyfills:** add append polyfill ([255639e](https://github.com/SUI-Components/sui/commit/255639ea48be85b8e7af6417cbb619b5d351f7ff))
+
+
+
 # 1.19.0 (2023-11-23)
 
 

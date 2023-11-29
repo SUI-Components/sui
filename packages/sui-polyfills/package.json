@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/polyfills",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "Common polyfills for your project",
   "main": "src/index.js",
   "scripts": {},
