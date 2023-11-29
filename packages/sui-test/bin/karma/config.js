@@ -22,6 +22,11 @@ const mustPackagesToAlias = {
 const environmentVariables = envVars(bundlerConfig.env)
 const swcConfig = getSWCConfig({isTypeScript: true})
 
+const relPath = path.relative(
+  process.cwd(),
+  require.resolve('@s-ui/react-context').replace(/\/node_modules.*/, ''),
+)
+
 const config = {
   singleRun: true,
   basePath: '',
@@ -52,7 +57,7 @@ const config = {
         '@s-ui/react-context': path.resolve(
           path.join(
             process.env.PWD,
-            isWorkspace() ? '../' : './',
+            isWorkspace() ? relPath : './',
             'node_modules/@s-ui/react-context'
           )
         )

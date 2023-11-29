@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.27.0",
+  "version": "8.27.0-typescript.7",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
