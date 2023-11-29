@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.19.0 (2023-11-23)
+
+
+### Features
+
+* **packages/sui-polyfills:** add FlatMap polyfill ([fe6c9db](https://github.com/SUI-Components/sui/commit/fe6c9db2cd1883d34c070db288fce4a5533efe65))
+
+
+
 # 1.18.0 (2023-05-04)
 
 
