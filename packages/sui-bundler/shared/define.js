@@ -19,6 +19,9 @@ module.exports = (vars = {}) => {
   const definitions = {
     __DEV__: false,
     __BASE_DIR__: JSON.stringify(process.env.PWD),
+    __MOCKS_API_PATH__: JSON.stringify(
+      process.env.MOCKS_API_PATH || process.env.PWD + '/mocks/routes'
+    ),
     ...vars,
     ...Object.fromEntries(
       Object.entries(magic).map(([key, value]) => [key, JSON.stringify(value)])
