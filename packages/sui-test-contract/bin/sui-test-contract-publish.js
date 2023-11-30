@@ -37,6 +37,6 @@ new Publisher(options)
     console.log(`Pact contract for consumer version ${options.consumerVersion} published!`)
     console.log(`Head over to ${brokerUrl} and login with to see your published contracts.`)
   })
-  .catch(e => {
-    console.log('Pact contract publishing failed: ', e)
+  .catch(error => {
+    throw new Error(`Pact contract publishing failed: ${error}`)
   })
