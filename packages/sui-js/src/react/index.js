@@ -1,12 +1,13 @@
 import htmr from 'htmr'
 
-export const htmlStringToReactElement = (string, options) => htmr(string, {
-  ...options,
-  transform: {
-    script: () => null,
-    ...options?.transform
-  }
-})
+export const htmlStringToReactElement = (string, options) =>
+  htmr(string, {
+    ...options,
+    transform: {
+      script: () => null,
+      ...options?.transform
+    }
+  })
 
 const isReactRefObj = target => {
   if (target && typeof target === 'object') {
