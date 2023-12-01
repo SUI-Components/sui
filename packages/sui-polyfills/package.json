@@ -1,12 +1,13 @@
 {
   "name": "@s-ui/polyfills",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "Common polyfills for your project",
   "main": "src/index.js",
   "scripts": {},
   "keywords": [],
   "dependencies": {
-    "core-js": "3"
+    "core-js": "3",
+    "element-polyfill": "1"
   },
   "license": "MIT",
   "repository": {

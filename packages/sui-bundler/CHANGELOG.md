@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.44.0 (2023-12-01)
+
+
+### Features
+
+* **packages/sui-bundler:** add server dev config ([593b902](https://github.com/SUI-Components/sui/commit/593b9028706b58070a2614fbcd04d28131a0d890))
+
+
+
 # 9.43.0 (2023-10-18)
 
 
