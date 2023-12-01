@@ -1,4 +1,12 @@
-export {default as htmlStringToReactElement} from 'htmr'
+import htmr from 'htmr'
+
+export const htmlStringToReactElement = (string, options) => htmr(string, {
+  ...options,
+  transform: {
+    script: () => null,
+    ...options?.transform
+  }
+})
 
 const isReactRefObj = target => {
   if (target && typeof target === 'object') {
