@@ -12,9 +12,10 @@ program
   .option('--add-fixes')
   .option('--staged')
   .option('--fix', 'fix automatically problems with js files')
+  .option('--ignore-pattern <ignorePattern...>', 'Path pattern to ignore for linting')
   .parse(process.argv)
 
-const {addFixes, fix, staged} = program.opts()
+const {addFixes, fix, ignorePattern = [], staged} = program.opts()
 
 const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -23,7 +24,7 @@ const DEFAULT_PATTERN = './'
 const LINT_FORMATTER = 'stylish'
 const baseConfig = {
   ...config,
-  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles()).concat(ignorePattern)
 }
 
 ;(async function main() {
