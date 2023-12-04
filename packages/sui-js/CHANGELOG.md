@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.29.0 (2023-12-04)
+
+
+### Features
+
+* **packages/sui-js:** exclude all dangerous html elements ([b2fd013](https://github.com/SUI-Components/sui/commit/b2fd0139e3549eb2d06e95c53347d5242375fe49))
+* **packages/sui-js:** exclude script tags in html sanitization ([92d8ff9](https://github.com/SUI-Components/sui/commit/92d8ff989a695dc18172f6447cec0b5649f75aea))
+
+
+
 # 2.28.0 (2023-08-16)
 
 
