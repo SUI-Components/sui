@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.35.0 (2023-12-04)
+
+
+### Features
+
+* **packages/sui-lint:** add ignore-pattern option ([9f7d10d](https://github.com/SUI-Components/sui/commit/9f7d10d905d8f7f49390b09a2b43fc54a7a2e668))
+
+
+
 # 4.34.0 (2023-11-15)
 
 
