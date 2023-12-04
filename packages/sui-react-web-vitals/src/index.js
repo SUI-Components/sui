@@ -96,7 +96,8 @@ export default function WebVitalsReporter({
     const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
-      const isAllowed = allowed.includes(pathname)
+      const routeid = getRouteid()
+      const isAllowed = allowed.includes(pathname) || allowed.includes(routeid)
 
       if (!isAllowed || !logger?.cwv || rating === RATING.GOOD) return
 
@@ -106,6 +107,7 @@ export default function WebVitalsReporter({
         name: `cwv.${name.toLowerCase()}`,
         amount,
         path: pathname,
+        routeId: routeid,
         target,
         loadState: attribution.loadState,
         visibilityState: document.visibilityState,
