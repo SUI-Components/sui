@@ -39,6 +39,7 @@ const showReportHeaderNegative = () => {
 
 const showReport = status => {
   let headerShown = false
+
   for (const pkg in status) {
     if (status.hasOwnProperty(pkg) && status[pkg].increment > 0) {
       if (!headerShown) {
@@ -52,9 +53,9 @@ const showReport = status => {
 
       status[pkg].commits.forEach(commit => {
         const messagePrefix = checker.isCommitBreakingChange(commit) ? `› ${colors.red('BREAKING CHANGE')} -` : '›'
-        console.log(`  ${messagePrefix} ${commit.header}`)
+
+        console.log(`  ${messagePrefix} ${commit.header}\n`)
       })
-      console.log('')
     }
   }
   if (!headerShown) showReportHeaderNegative()
