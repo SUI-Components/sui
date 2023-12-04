@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.1.0 (2023-12-04)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add routeId field to logger ([524a2ce](https://github.com/SUI-Components/sui/commit/524a2ced234c8e24f3d636bc1c7a69ffef4f57ad))
+
+
+
 # 2.0.0 (2023-11-27)
 
 
