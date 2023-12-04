@@ -107,7 +107,7 @@ export default function WebVitalsReporter({
         name: `cwv.${name.toLowerCase()}`,
         amount,
         path: pathname,
-        routeId: routeid,
+        ...(routeid && {routeId: routeid}),
         target,
         loadState: attribution.loadState,
         visibilityState: document.visibilityState,
