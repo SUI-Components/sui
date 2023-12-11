@@ -24,7 +24,7 @@
     "@babel/core": "7.18.10",
     "@s-ui/helpers": "1",
     "@s-ui/sass-loader": "1",
-    "address": "1.2.0",
+    "address": "1.2.2",
     "autoprefixer": "10.4.8",
     "babel-loader": "8.2.5",
     "babel-preset-sui": "3",
