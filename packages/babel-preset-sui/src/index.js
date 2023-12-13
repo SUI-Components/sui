@@ -7,13 +7,22 @@ const getTargets = ({targets = {}, isModern, isServer}) => {
   return browser ?? (isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS)
 }
 
+console.log(`
+
+
+
+ENABLE_NEW_SUI_DECORATORS_API :::: ${process.env.ENABLE_NEW_SUI_DECORATORS_API === 'ENABLED' ? '2023-05' : 'legacy'}
+
+
+
+`)
 const plugins = (api, {useESModules = true} = {}) => [
   require('babel-plugin-preval'),
   require('@babel/plugin-syntax-export-default-from').default,
   require('@babel/plugin-syntax-export-namespace-from').default,
   [
     require('@babel/plugin-proposal-decorators').default,
-    {legacy: process.env.ENABLE_NEW_SUI_DECORATORS_API !== 'true'}
+    {version: process.env.ENABLE_NEW_SUI_DECORATORS_API === 'ENABLED' ? '2023-05' : 'legacy'}
   ],
   [require('@babel/plugin-proposal-class-properties').default, {loose: true}],
   require('babel-plugin-transform-react-remove-prop-types').default,
