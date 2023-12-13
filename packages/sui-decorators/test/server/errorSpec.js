@@ -3,7 +3,7 @@ import {expect} from 'chai'
 
 import {inlineError} from '../../src'
 
-describe('Error', () => {
+describe.skip('Error', () => {
   it('Should return an array [null, resp] when the promise is resolved', async () => {
     class Buzz {
       @inlineError

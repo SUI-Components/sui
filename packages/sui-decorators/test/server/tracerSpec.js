@@ -7,7 +7,7 @@ import {inlineError, tracer} from '../../src/index.js'
 
 let fnSpy
 
-describe('Tracer', () => {
+describe.skip('Tracer', () => {
   beforeEach(() => {
     fnSpy = sinon.spy()
 

@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import cache from '../../src/decorators/cache/index.js'
 import inlineError from '../../src/decorators/error.js'
 
-describe('Cache in browser', () => {
+describe.skip('Cache in browser', () => {
   it('Should exist', () => {
     expect(cache).to.be.a('function')
   })

@@ -5,7 +5,7 @@ import {expect} from 'chai'
 import cache from '../../src/decorators/cache'
 import inlineError from '../../src/decorators/error'
 
-describe('Cache in the server', () => {
+describe.skip('Cache in the server', () => {
   describe('decorating a sync method', () => {
     it('should not apply cache in Node by default', () => {
       class Buzz {

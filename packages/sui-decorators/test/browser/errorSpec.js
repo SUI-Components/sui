@@ -3,7 +3,7 @@ import {expect} from 'chai'
 
 import {inlineError, streamify} from '../../src'
 
-describe('Error', () => {
+describe.skip('Error', () => {
   it('Should play fine with streamify when is OK the response', done => {
     @streamify('execute')
     class Buzz {

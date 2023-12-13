@@ -35,7 +35,7 @@ const _runner = ({instance, original} = {}) => {
   }
 }
 
-export default (_, {name, addInitializer}) => {
+export default (_, {name, addInitializer} = {}) => {
   addInitializer(function () {
     const fn = this[name]
     this[name] = _runner({instance: this, original: fn})
