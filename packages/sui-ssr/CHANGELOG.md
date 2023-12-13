@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 8.21.0 (2023-12-13)
+
+
+### Features
+
+* **packages/sui-ssr:** add ssr dev mode ([bb2db70](https://github.com/SUI-Components/sui/commit/bb2db7029da50e4e3a9d6151ad6fbf4598f217f5))
+* **packages/sui-ssr:** add ssr dev support ([219685c](https://github.com/SUI-Components/sui/commit/219685c7526c99165f191cca29b857036a5a0206))
+* **packages/sui-ssr:** create ssr tmp folder ([f2f6fd9](https://github.com/SUI-Components/sui/commit/f2f6fd9b37b377a83a60948db7a522852eca0c66))
+
+
+
 # 8.20.0 (2023-12-05)
 
 
