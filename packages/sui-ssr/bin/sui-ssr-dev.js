@@ -18,9 +18,10 @@ const linkLoaderConfigBuilder = require('@s-ui/bundler/loaders/linkLoaderConfigB
 
 const serverConfigFactory = require('../compiler/server.js')
 
-const SERVER_OUTPUT_PATH = path.join(process.cwd(), '.sui/server')
-const STATICS_OUTPUT_PATH = path.join(process.cwd(), '.sui/statics')
+const TMP_PATH = '.sui'
+const SERVER_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/server`)
 const STATICS_PATH = path.join(process.cwd(), './statics')
+const STATICS_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/statics`)
 
 program
   .option('-L, --link-all [monorepo]', 'Link all packages inside of monorepo multipackage')
@@ -123,6 +124,10 @@ const start = ({packagesToLink, linkAll}) => {
       console.log(errors)
     }
   })
+
+  if (!fs.existsSync(TMP_PATH)) {
+    fs.mkdirSync(TMP_PATH)
+  }
 
   Promise.all([linkStatics(), initMSW(), compile('client', clientCompiler), compile('server', serverCompiler)])
     .then(() => {
