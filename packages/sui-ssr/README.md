@@ -13,25 +13,40 @@ SSR can be tought to configure and maintain. SSR handles that for you providing:
 npm install @s-ui/ssr --save
 ```
 
+## Development
+
+Starts a development server.
+
+```
+Usage: sui-ssr-dev [options]
+
+Options:
+  -L, --link-all [monorepo]     Link all packages inside of monorepo multipackage
+  -l, --link-package [package]  Replace each occurrence of this package with an absolute path to this folder (default: [])
+  -h, --help                    display help for command
+
+Examples:
+
+  $ sui-ssr dev
+  $ sui-ssr dev --link-package ./domain --link-all ./components
+```
+
 ## Build
 
 Generate a static version of the server w/out dependencies in the server folder.
 
 ```
-  Usage: sui-ssr-build [options]
+Usage: sui-ssr-build [options]
 
-  Options:
+Options:
 
-    -C, --clean    Remove build folder before create a new one
-    -V, --verbose  Verbose output
-    -h, --help     output usage information
-  Description:
+  -C, --clean    Remove build folder before create a new one
+  -V, --verbose  Verbose output
+  -h, --help     output usage information
 
-  Build a production ready ssr server
+Examples:
 
-  Examples:
-
-    $ sui-ssr build
+  $ sui-ssr build
 ```
 
 ## Archive
@@ -41,21 +56,21 @@ Create a zip file with all assets needed to run the server in any infra.
 It will, over parameter, make that the express server run over a username and password in a htpasswd way.
 
 ```
-  Usage: sui-ssr-archive [options]
+Usage: sui-ssr-archive [options]
 
-  Options:
+Options:
 
-    -C, --clean                             Remove previous zip
-    -R, --docker-registry <dockerRegistry>  Custom registry to be used as a proxy or instead of the Docker Hub registry
-    -E, --entry-point                       Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C
-    -h, --help                              Output usage information
-    -A, --auth <username:password>          Will build the express definition under authentication htpassword like.
-    -O, --outputFileName <outputFileName>   A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
+  -C, --clean                             Remove previous zip
+  -R, --docker-registry <dockerRegistry>  Custom registry to be used as a proxy or instead of the Docker Hub registry
+  -E, --entry-point                       Relative path to an entry point script to replace the current one -> https://bit.ly/3e4wT8C
+  -h, --help                              Output usage information
+  -A, --auth <username:password>          Will build the express definition under authentication htpassword like.
+  -O, --outputFileName <outputFileName>   A string that will be used to set the name of the output filename. Keep in mind that the outputFilename will have the next suffix <outputFileName>-sui-ssr.zip
 
-  Examples:
+Examples:
 
-    $ sui-ssr archive
-    $ sui-ssr archive --outputFileName=myFile // output: myFile-sui-ssr.zip
+  $ sui-ssr archive
+  $ sui-ssr archive --outputFileName=myFile // output: myFile-sui-ssr.zip
 ```
 
 ### IMPORTANT!!
