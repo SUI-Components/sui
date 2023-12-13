@@ -1,6 +1,6 @@
-const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
-const DEFAULT_PUBLIC_FOLDER = IS_PRODUCTION ? 'public' : '.sui/public'
+const DEFAULT_PUBLIC_FOLDER = 'public'
+const DEFAULT_DEV_PUBLIC_FOLDER = '.sui/public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
@@ -29,8 +29,15 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   }
 
   const publicFolder = req => {
+    if (process.env.NODE_ENV !== 'production') {
+      return DEFAULT_DEV_PUBLIC_FOLDER
+    }
+
     const site = siteByHost(req)
-    if (!site || !IS_PRODUCTION) return DEFAULT_PUBLIC_FOLDER
+
+    if (!site) {
+      return DEFAULT_PUBLIC_FOLDER
+    }
 
     return multiSitePublicFolder(site)
   }
