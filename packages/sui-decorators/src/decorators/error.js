@@ -1,7 +1,7 @@
 import isPromise from '../helpers/isPromise'
 
 const _runner = ({instance, original} = {}) => {
-  return function (...args) {
+  return function inlineErrorHandler(...args) {
     const response = []
     Object.defineProperty(response, '__INLINE_ERROR__', {
       enumerable: false,
@@ -35,43 +35,9 @@ const _runner = ({instance, original} = {}) => {
   }
 }
 
-export default (target, fnName, descriptor) => {
-  const {value: fn, configurable, enumerable} = descriptor
-
-  // https://github.com/jayphelps/core-decorators.js/blob/master/src/autobind.js
-  return Object.assign(
-    {},
-    {
-      configurable,
-      enumerable,
-      get() {
-        const _fnRunner = _runner({
-          instance: this,
-          original: fn
-        })
-
-        if (this === target && !target.__STREAMIFY__) {
-          return fn
-        }
-
-        Object.defineProperty(this, fnName, {
-          configurable: true,
-          writable: true,
-          enumerable: false,
-          value: _fnRunner
-        })
-        return _fnRunner
-      },
-      set(newValue) {
-        Object.defineProperty(this, fnName, {
-          configurable: true,
-          writable: true,
-          enumerable: true,
-          value: newValue
-        })
-
-        return newValue
-      }
-    }
-  )
+export default (_, {name, addInitializer}) => {
+  addInitializer(function () {
+    const fn = this[name]
+    this[name] = _runner({instance: this, original: fn})
+  })
 }
