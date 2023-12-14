@@ -3,6 +3,7 @@
 
 const {WEBPACK_PORT = 8080} = process.env
 process.env.CDN = `http://localhost:${WEBPACK_PORT}/`
+process.env.DEV_SERVER = 'true'
 
 const program = require('commander')
 const {exec} = require('child_process')

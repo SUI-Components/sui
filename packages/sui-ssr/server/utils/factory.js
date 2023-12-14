@@ -29,7 +29,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   }
 
   const publicFolder = req => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.DEV_SERVER === 'true') {
       return DEFAULT_DEV_PUBLIC_FOLDER
     }
 
