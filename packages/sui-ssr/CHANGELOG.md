@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.22.0 (2023-12-14)
+
+
+### Bug Fixes
+
+* **packages/sui-ssr:** use custom env variable instead of NODE_ENV to use tmp build folder ([ff41967](https://github.com/SUI-Components/sui/commit/ff41967dbf8a40f0cb49c9a8668c91b27b272811))
+
+
+
 # 8.21.0 (2023-12-13)
 
 
