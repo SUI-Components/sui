@@ -1,16 +1,16 @@
 export interface Purpose {
   consents: {
     /**
-       * true - Consent
-       * false - No Consent.
-       */
+     * true - Consent
+     * false - No Consent.
+     */
     [purposeId: number]: boolean | undefined
   }
   legitimateInterests: {
     /**
-       * true - Legitimate Interest Established,
-       * false - No Legitimate Interest Established
-       */
+     * true - Legitimate Interest Established,
+     * false - No Legitimate Interest Established
+     */
     [purposeId: number]: boolean
   }
 }
@@ -50,5 +50,5 @@ export enum EventStatus {
    * in accordance with TCF Policy and a CMP is prepared to respond to any
    * calling scripts with the corresponding TC String.
    */
-  USER_ACTION_COMPLETE = 'useractioncomplete',
+  USER_ACTION_COMPLETE = 'useractioncomplete'
 }

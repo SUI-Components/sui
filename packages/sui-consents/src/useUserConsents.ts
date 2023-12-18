@@ -13,9 +13,7 @@ export default function useUserConsents(requiredConsents: number[]): boolean {
    * in SSR.
    */
   const {cookies} = useContext(SUIContext)
-  const [areConsentsAccepted, setAreConsentsAccepted] = useState(() =>
-    hasUserConsents({requiredConsents, cookies})
-  )
+  const [areConsentsAccepted, setAreConsentsAccepted] = useState(() => hasUserConsents({requiredConsents, cookies}))
 
   /**
    * From then on, we listen for TCF events so consents changes
@@ -25,20 +23,10 @@ export default function useUserConsents(requiredConsents: number[]): boolean {
   useEffect(() => {
     const tcfApi = window[TCF_WINDOW_API]
     if (tcfApi !== undefined) {
-      const consentsListener = ({
-        eventStatus,
-        purpose
-      }: {
-        eventStatus: EventStatus
-        purpose: Purpose
-      }): void => {
+      const consentsListener = ({eventStatus, purpose}: {eventStatus: EventStatus; purpose: Purpose}): void => {
         if (eventStatus !== EventStatus.USER_ACTION_COMPLETE) return
 
-        setAreConsentsAccepted(
-          requiredConsents.every(purposeId =>
-            Boolean(purpose.consents[purposeId])
-          )
-        )
+        setAreConsentsAccepted(requiredConsents.every(purposeId => Boolean(purpose.consents[purposeId])))
       }
       tcfApi('addEventListener', TCF_VERSION, consentsListener)
       return () => {
