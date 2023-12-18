@@ -31,6 +31,8 @@ require('core-js/features/map/map-keys')
 
 require('core-js/features/symbol')
 
+require('core-js/proposals/well-formed-unicode-strings')
+
 require('element-polyfill/polyfills/element.parent-node.append.js')
 
 require('./element-closest.js')
