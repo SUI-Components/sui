@@ -11,11 +11,10 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
-    "types": [
-      "react",
-      "node"
-    ]
+    "types": ["react", "node"]
   },
   "exclude": ["node_modules", "lib"],
-  "typeAcquisition": { "enable": true }
+  "typeAcquisition": {
+    "enable": true
+  }
 }
