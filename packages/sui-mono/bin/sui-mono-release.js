@@ -163,9 +163,7 @@ checkShouldRelease()
 
       const packagesToRelease = releasesByPackages({status}).filter(({code}) => code !== 0)
 
-      for (const pkg of packagesToRelease) {
-        await releasePackage({...pkg, skipCi})
-      }
+      await Promise.all(packagesToRelease.map(pkg => releasePackage({...pkg, skipCi})))
 
       if (packagesToRelease.length > 0) {
         if (lock) {
@@ -176,7 +174,7 @@ checkShouldRelease()
           await exec('git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify')
         }
 
-        await exec('git push -f --tags origin HEAD')
+        await exec('git push -f --tags origin HEAD --no-verify')
       }
 
       console.log(`[sui-mono release] ${packagesToRelease.length} packages released`)
