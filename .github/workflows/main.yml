@@ -26,7 +26,6 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
           node-version-file: '.nvmrc'
-          cache: 'npm'
 
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@latest
