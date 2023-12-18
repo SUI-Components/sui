@@ -64,19 +64,20 @@ const releasesByPackages = ({status}) => {
     .map(scope => scopeMapper({scope, status}))
 }
 
-const releasePackage = async ({pkg, code, skipCi} = {}) => {
+const bump = async ({pkg, code} = {}) => {
+  const isMonoPackage = checkIsMonoPackage()
+  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+  await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
+}
+
+const commit = async ({pkg, skipCi} = {}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  const {private: isPrivatePackage, config: localPackageConfig} = getPackageJson(cwd, true)
 
-  console.time('performance')
-  await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
-  console.timeLog('performance')
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
-  console.timeLog('performance')
 
   const {version} = getPackageJson(cwd, true)
 
@@ -85,24 +86,24 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
   const skipCiSuffix = skipCi ? ' [skip ci]' : ''
   const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
   await exec(`git commit -m "${commitMsg}"`, {cwd})
-  console.timeLog('performance')
 
   await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
-  console.timeLog('performance')
   await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
-  console.timeLog('performance')
   await exec(`git commit --amend --no-verify --no-edit`, {cwd})
-  console.timeLog('performance')
 
   await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
-  console.timeLog('performance')
+}
+
+const publish = async ({pkg} = {}) => {
+  const isMonoPackage = checkIsMonoPackage()
+
+  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+  const {private: isPrivatePackage, config: localPackageConfig} = getPackageJson(cwd, true)
 
   if (!isPrivatePackage) {
     const publishAccess = getPublishAccess({localPackageConfig})
     await exec(`npm publish --access=${publishAccess}`, {cwd})
   }
-
-  console.timeEnd('performance')
 }
 
 const checkIsMasterBranchActive = async () => {
@@ -163,7 +164,13 @@ checkShouldRelease()
 
       const packagesToRelease = releasesByPackages({status}).filter(({code}) => code !== 0)
 
-      await Promise.all(packagesToRelease.map(pkg => releasePackage({...pkg, skipCi})))
+      await Promise.all(packagesToRelease.map(pkg => bump({...pkg, skipCi})))
+
+      for (const pkg of packagesToRelease) {
+        await commit({...pkg, skipCi})
+      }
+
+      await Promise.all(packagesToRelease.map(pkg => publish({...pkg, skipCi})))
 
       if (packagesToRelease.length > 0) {
         if (lock) {
