@@ -26,11 +26,7 @@ $breakpoint-names: map-keys($breakpoints) !default;
 //    md
 @function breakpoint-next($name) {
   $n: index($breakpoint-names, $name);
-  @return if(
-    $n < length($breakpoint-names),
-    nth($breakpoint-names, $n + 1),
-    null
-  );
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
 }
 
 // Maximum breakpoint width. Null for the largest (last) breakpoint.

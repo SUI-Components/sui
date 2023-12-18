@@ -18,12 +18,7 @@ $color-variation-light: white !default;
 $color-lighten-steps: 25, 50, 75, 90, 95 !default;
 $color-darken-steps: 20, 35, 55, 75 !default;
 
-@function color-variation(
-  $color,
-  $step: 0,
-  $dark: $color-variation-dark,
-  $light: $color-variation-light
-) {
+@function color-variation($color, $step: 0, $dark: $color-variation-dark, $light: $color-variation-light) {
   $positive-steps: length($color-lighten-steps);
   $negative-steps: length($color-darken-steps);
 

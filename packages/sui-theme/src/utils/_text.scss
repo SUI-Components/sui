@@ -51,22 +51,12 @@
     @include calc-font-size($fz-caption, $fw-caption, $ls-caption, $lh-caption);
   }
   @if $type == 'overline' {
-    @include calc-font-size(
-      $fz-overline,
-      $fw-overline,
-      $ls-overline,
-      $lh-overline
-    );
+    @include calc-font-size($fz-overline, $fw-overline, $ls-overline, $lh-overline);
   }
 }
 
 @mixin font-size-large {
-  @include calc-font-size(
-    $fz-large-title,
-    $fw-large-title,
-    $ls-large-title,
-    $lh-large-title
-  );
+  @include calc-font-size($fz-large-title, $fw-large-title, $ls-large-title, $lh-large-title);
 }
 @mixin font-size-title1 {
   @include calc-font-size($fz-title1, $fw-title1, $ls-title1, $lh-title1);
@@ -78,20 +68,10 @@
   @include calc-font-size($fz-title3, $fw-title3, $ls-title3, $lh-title3);
 }
 @mixin font-size-headline1 {
-  @include calc-font-size(
-    $fz-headline1,
-    $fw-headline1,
-    $ls-headline1,
-    $lh-headline1
-  );
+  @include calc-font-size($fz-headline1, $fw-headline1, $ls-headline1, $lh-headline1);
 }
 @mixin font-size-headline2 {
-  @include calc-font-size(
-    $fz-headline2,
-    $fw-headline2,
-    $ls-headline2,
-    $lh-headline2
-  );
+  @include calc-font-size($fz-headline2, $fw-headline2, $ls-headline2, $lh-headline2);
 }
 
 // CSS image replacement
