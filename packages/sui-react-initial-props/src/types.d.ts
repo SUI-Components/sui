@@ -1,4 +1,4 @@
-import { RouteInfo } from '@s-ui/react-router/src/types'
+import {RouteInfo} from '@s-ui/react-router/src/types'
 export * as ReactRouterTypes from '@s-ui/react-router/src/types'
 
 export interface InitialProps {
@@ -19,15 +19,14 @@ export interface ContextFactoryParams {
   req?: object
 }
 
-export type ClientPageComponent = React.ComponentType<any>
-& PageComponentOptions
-& { getInitialProps: GetInitialPropsFunction }
+export type ClientPageComponent = React.ComponentType<any> &
+  PageComponentOptions & {getInitialProps: GetInitialPropsFunction}
 
-export type ServerPageComponent = React.ComponentType
-& PageComponentOptions
-& { getInitialProps: GetInitialPropsServerFunction }
+export type ServerPageComponent = React.ComponentType &
+  PageComponentOptions & {getInitialProps: GetInitialPropsServerFunction}
 
-export type GetInitialPropsServerFunction = (context: object,
+export type GetInitialPropsServerFunction = (
+  context: object,
   req: IncomingMessage.ServerRequest,
   res: IncomingMessage.ClientResponse
 ) => Promise<object>
@@ -39,11 +38,9 @@ export interface GetInitialPropsClientFunctionParams {
   res?: IncomingMessage.ClientResponse
 }
 
-export type GetInitialPropsFunction =
-  (params: GetInitialPropsClientFunctionParams) => Promise<object>
+export type GetInitialPropsFunction = (params: GetInitialPropsClientFunctionParams) => Promise<object>
 
-export type DoneImportingPageCallback =
-  (err: null, Page: WithInitialPropsComponent) => Promise<void>
+export type DoneImportingPageCallback = (err: null, Page: WithInitialPropsComponent) => Promise<void>
 
 export interface RenderProps {
   components: ServerPageComponent[]
