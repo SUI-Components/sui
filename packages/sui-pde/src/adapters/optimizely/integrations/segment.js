@@ -8,11 +8,7 @@
  *                                           Example {segment: true, braze: true}
  * @param {object} param.optimizelyInstance
  */
-export const segment = ({
-  activeIntegrations,
-  optimizelyInstance,
-  hasUserConsents
-}) => {
+export const segment = ({activeIntegrations, optimizelyInstance, hasUserConsents}) => {
   if (!activeIntegrations.segment || typeof window === 'undefined') return
   if (!hasUserConsents) {
     delete window.optimizelyClientInstance

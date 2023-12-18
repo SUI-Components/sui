@@ -36,17 +36,13 @@ const shouldGenerateTSConfig = () => {
 }
 
 async function main() {
-  console.log(
-    '🔍 [sui-bundler postinstall] Checking if tsconfig.json is up to date...'
-  )
+  console.log('🔍 [sui-bundler postinstall] Checking if tsconfig.json is up to date...')
   if (!shouldGenerateTSConfig()) {
     console.log('✅ [sui-bundler postinstall] tsconfig.json is up to date')
     process.exit(0)
   }
   await writeFile(TS_CONFIG_PATH, tsConfigTemplate)
-  console.log(
-    '❌ [sui-bundler postinstall] tsconfig.json was not up to date, so we updated it'
-  )
+  console.log('❌ [sui-bundler postinstall] tsconfig.json was not up to date, so we updated it')
 }
 
 main()

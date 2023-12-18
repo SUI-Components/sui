@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.13.0 (2023-11-30)
+
+
+### Features
+
+* **packages/sui-test-contract:** make jobs execution halt on contract publish errors ([d26803b](https://github.com/SUI-Components/sui/commit/d26803b7abac5f86a5b16275f86d940122b40ce3))
+
+
+
 # 2.12.0 (2023-03-10)
 
 

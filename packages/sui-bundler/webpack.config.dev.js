@@ -5,13 +5,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
-const {
-  envVars,
-  MAIN_ENTRY_POINT,
-  config,
-  cleanList,
-  when
-} = require('./shared/index.js')
+const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared/index.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
@@ -114,14 +108,11 @@ const webpackConfig = {
           require.resolve('@s-ui/sass-loader')
         ])
       },
-      when(config['externals-manifest'], () =>
-        manifestLoaderRules(config['externals-manifest'])
-      )
+      when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   },
   watch: !CI,
-  devtool:
-    config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
+  devtool: config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
 
 module.exports = webpackConfig

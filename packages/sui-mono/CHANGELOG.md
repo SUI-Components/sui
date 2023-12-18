@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.42.0 (2023-12-05)
+
+
+### Features
+
+* **packages/sui-mono:** allow to release dependabot upgrades ([f30fa92](https://github.com/SUI-Components/sui/commit/f30fa92fbf35f91be474c88d98a0c556a7e42625))
+* **packages/sui-mono:** make check function print the new commit push to be released ([420ef73](https://github.com/SUI-Components/sui/commit/420ef73c5417c691c72d6065bdd550900f8b9e55))
+
+
+
 # 2.41.0 (2023-10-09)
 
 

@@ -30,9 +30,7 @@ export default class DomainBuilder {
     }
 
     if (success === undefined && fail === undefined) {
-      throw new Error(
-        '[DomainBuilder#respondWith] Neither success nor fail are set'
-      )
+      throw new Error('[DomainBuilder#respondWith] Neither success nor fail are set')
     }
 
     if (!this._useCase) {
@@ -56,13 +54,10 @@ export default class DomainBuilder {
 
       const data = typeof success === 'function' ? success(params) : success
 
-      const responseParams =
-        data !== undefined ? {err: null, data} : {err: fail, data: null}
+      const responseParams = data !== undefined ? {err: null, data} : {err: fail, data: null}
 
       const createResponse = ({err, data}) => {
-        subscriptions.forEach(fn =>
-          fn({error: err, params, result: [err, data]})
-        )
+        subscriptions.forEach(fn => fn({error: err, params, result: [err, data]}))
         if (inlineError) return Promise.resolve([err, data])
         return err ? Promise.reject(err) : Promise.resolve(data)
       }

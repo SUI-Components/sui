@@ -4,8 +4,7 @@ const program = require('commander')
 const ncp = require('copy-paste')
 
 const appFactory = require('../development/index.js')
-const config =
-  require(`${process.cwd()}/package.json`).config['sui-widget-embedder'] || {}
+const config = require(`${process.cwd()}/package.json`).config['sui-widget-embedder'] || {}
 
 const PORT = process.env.PORT || config.devPort || 3000
 config.port = PORT
@@ -14,11 +13,7 @@ program
   .usage('-p detail -a address -b')
   .option('-b, --browser', 'Enable the dev mode inside a html file')
   .option('-p, --page <name>', 'Name of the page')
-  .option(
-    '-a, --address <ip-address>',
-    'Local ip address to lookup statics, useful for virtual machines',
-    'localhost'
-  )
+  .option('-a, --address <ip-address>', 'Local ip address to lookup statics, useful for virtual machines', 'localhost')
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -27,9 +22,7 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-widget-embedder development --page detail')
-    console.log(
-      '    $ sui-widget-embedder development --page detail --address 10.0.2.2'
-    )
+    console.log('    $ sui-widget-embedder development --page detail --address 10.0.2.2')
     console.log('')
   })
   .parse(process.argv)

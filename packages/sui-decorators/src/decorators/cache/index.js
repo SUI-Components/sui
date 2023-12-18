@@ -10,17 +10,7 @@ const DEFAULT_TTL = 500
 
 const caches = {}
 
-const _cache = ({
-  algorithm,
-  fnName,
-  instance,
-  original,
-  size,
-  target,
-  ttl,
-  redis,
-  cacheKeyString
-} = {}) => {
+const _cache = ({algorithm, fnName, instance, original, size, target, ttl, redis, cacheKeyString} = {}) => {
   const shouldUseRedisCache = redis && isNode
   const shouldUseMemoryCache = !isNode || !redis
   const cacheKey = cacheKeyString || `${target.constructor.name}::${fnName}`

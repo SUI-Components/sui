@@ -28,10 +28,7 @@ const DEFAULT_WATCH = !CI
 if (!module.parent) {
   program
     .option('-c, --context [folder]', 'Context folder (cwd by default)')
-    .option(
-      '-L, --link-all [monorepo]',
-      'Link all packages inside of monorepo multipackage'
-    )
+    .option('-L, --link-all [monorepo]', 'Link all packages inside of monorepo multipackage')
     .option(
       '-l, --link-package [package]',
       'Replace each occurrence of this package with an absolute path to this folder',
@@ -41,11 +38,7 @@ if (!module.parent) {
       },
       []
     )
-    .option(
-      '-w, --watch',
-      'Watch files and restart the server on change',
-      DEFAULT_WATCH
-    )
+    .option('-w, --watch', 'Watch files and restart the server on change', DEFAULT_WATCH)
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
@@ -61,16 +54,11 @@ if (!module.parent) {
   webpackConfig.context = context || webpackConfig.context
 }
 
-const start = async ({
-  config = webpackConfig,
-  packagesToLink = program.opts().linkPackage || []
-} = {}) => {
+const start = async ({config = webpackConfig, packagesToLink = program.opts().linkPackage || []} = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
   if (!checkRequiredFiles([path.join(config.context, 'index.html')])) {
-    log.error(
-      `✖ Required files are missing, create and index.html and app.js inside your src folder.`
-    )
+    log.error(`✖ Required files are missing, create and index.html and app.js inside your src folder.`)
     process.exit(1)
   }
 

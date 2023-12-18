@@ -10,17 +10,9 @@ const DEFAULT_BROWSER_TARGETS = {
   ios: '14.5'
 }
 
-const getSWCConfig = ({
-  isModern = false,
-  isTypeScript = false,
-  compileToCJS = false
-}) => {
-  const targets = isModern
-    ? DEFAULT_BROWSER_TARGETS
-    : DEFAULT_LEGACY_BROWSER_TARGETS
-  const syntaxOptions = isTypeScript
-    ? {syntax: 'typescript', tsx: true}
-    : {syntax: 'ecmascript', jsx: true}
+const getSWCConfig = ({isModern = false, isTypeScript = false, compileToCJS = false}) => {
+  const targets = isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS
+  const syntaxOptions = isTypeScript ? {syntax: 'typescript', tsx: true} : {syntax: 'ecmascript', jsx: true}
   const moduleOptions = compileToCJS ? {module: {type: 'commonjs'}} : {}
 
   return {

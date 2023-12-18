@@ -12,10 +12,7 @@ export const highlightText = ({value, query, startTag, endTag}) => {
   const highlighterReducer = (valueHighlightedAccumulator, match, i) => {
     const start = match.start + i * tagsLength
     const end = match.end + i * tagsLength
-    return `${valueHighlightedAccumulator.slice(
-      0,
-      start
-    )}${startTag}${valueHighlightedAccumulator.slice(
+    return `${valueHighlightedAccumulator.slice(0, start)}${startTag}${valueHighlightedAccumulator.slice(
       start,
       end
     )}${endTag}${value.slice(match.end)}`

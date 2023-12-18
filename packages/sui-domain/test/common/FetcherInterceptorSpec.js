@@ -7,8 +7,7 @@ describe('FetcherInterceptor', () => {
   const interceptableMockedFetcher = statusCode => {
     return {
       get: async () => {
-        if (statusCode !== 200)
-          throw new Error(`HTTP simulated error: ${statusCode}`)
+        if (statusCode !== 200) throw new Error(`HTTP simulated error: ${statusCode}`)
 
         return 'It works!'
       }

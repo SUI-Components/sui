@@ -3,10 +3,7 @@ import {useEffect, useState} from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 
-import {
-  addReactContextToComponent,
-  extractDisplayName
-} from '../../../../src/components/utils.js'
+import {addReactContextToComponent, extractDisplayName} from '../../../../src/components/utils.js'
 import {addSetupEnvironment} from '../../../../src/environment-mocha/setupEnvironment.js'
 
 addSetupEnvironment(window)
@@ -27,8 +24,7 @@ const Test = ({open, importTest, importComponent, contexts}) => {
       const Component = module.default || module
       const displayName = extractDisplayName(Component)
 
-      const nextContexts =
-        typeof contexts !== 'function' ? contexts : await contexts()
+      const nextContexts = typeof contexts !== 'function' ? contexts : await contexts()
 
       window.__STUDIO_CONTEXTS__ = nextContexts
       window.__STUDIO_COMPONENT__ = Component

@@ -10,10 +10,7 @@ function migrateTestFolders() {
   const files = glob.sync(['test/*/*/index.js'])
 
   files.forEach(file => {
-    const [category, component] = file
-      .replace('/index.js', '')
-      .replace('test/', '')
-      .split('/')
+    const [category, component] = file.replace('/index.js', '').replace('test/', '').split('/')
 
     const testPath = `./test/${category}/${component}`
     const newTestPath = `./components/${category}/${component}/test`

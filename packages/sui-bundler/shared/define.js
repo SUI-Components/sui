@@ -20,9 +20,7 @@ module.exports = (vars = {}) => {
     __DEV__: false,
     __BASE_DIR__: JSON.stringify(process.env.PWD),
     ...vars,
-    ...Object.fromEntries(
-      Object.entries(magic).map(([key, value]) => [key, JSON.stringify(value)])
-    )
+    ...Object.fromEntries(Object.entries(magic).map(([key, value]) => [key, JSON.stringify(value)]))
   }
 
   return new webpack.DefinePlugin(definitions)

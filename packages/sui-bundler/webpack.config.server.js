@@ -48,9 +48,7 @@ const webpackConfig = {
           dataUrl: () => ''
         }
       },
-      when(config['externals-manifest'], () =>
-        manifestLoaderRules(config['externals-manifest'])
-      )
+      when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   }
 }

@@ -10,8 +10,7 @@ const INITIAL_MATCH_OBJECT = {
   paramValues: []
 }
 
-const checkIntegrity = nodes =>
-  !nodes.some((node, index) => node.level !== index + 1)
+const checkIntegrity = nodes => !nodes.some((node, index) => node.level !== index + 1)
 
 const createParams = ({paramValues, paramNames}) =>
   paramNames.reduce((acc, name, index) => {
@@ -37,9 +36,7 @@ const findRedirect = nodes => {
  */
 const makePromise = (getComponent, routeInfo) =>
   new Promise((resolve, reject) => {
-    getComponent(routeInfo, (err, component) =>
-      err ? reject(err) : resolve(component)
-    )
+    getComponent(routeInfo, (err, component) => (err ? reject(err) : resolve(component)))
   })
 
 const createComponents = ({nodes, routeInfo}) => {
@@ -52,9 +49,7 @@ const createComponents = ({nodes, routeInfo}) => {
   const componentsPromises = nodes
     .filter(node => node.component || node.getComponent)
     .map(({component, getComponent}) => {
-      return component
-        ? Promise.resolve(component)
-        : makePromise(getComponent, routeInfo)
+      return component ? Promise.resolve(component) : makePromise(getComponent, routeInfo)
     })
   // return a promise that will resolve when all components are available
   return Promise.all(componentsPromises)
@@ -156,11 +151,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
     remainingPathname
   }
 
-  const match = Tree.reduce(
-    createReducerRoutesTree(location),
-    initialObject,
-    tree
-  )
+  const match = Tree.reduce(createReducerRoutesTree(location), initialObject, tree)
 
   const {nodes: nodesFromMatch, paramValues, paramNames} = match
   const params = createParams({paramNames, paramValues})
@@ -172,9 +163,7 @@ const matchRoutes = async (tree, location, remainingPathname) => {
   }
 
   // if it's not a redirect and still there's remainingPathname then is not a match
-  const nodes = match.remainingPathname
-    ? INITIAL_MATCH_OBJECT.nodes
-    : nodesFromMatch
+  const nodes = match.remainingPathname ? INITIAL_MATCH_OBJECT.nodes : nodesFromMatch
 
   const routeInfo = {location, params, routes: nodes}
   const components = await createComponents({nodes, routeInfo})
@@ -187,10 +176,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
   let state = {}
 
   const matchRouteAndUpdateState = async ({location, jsonRoutes}) => {
-    const {redirectLocation, routeInfo, components} = await matchRoutes(
-      jsonRoutes,
-      location
-    )
+    const {redirectLocation, routeInfo, components} = await matchRoutes(jsonRoutes, location)
 
     state = {
       ...state,
@@ -207,9 +193,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
    * @param {import('../types').Location} location Current location object
    */
   const match = location => {
-    location = location
-      ? history.createLocation(location)
-      : history.getCurrentLocation()
+    location = location ? history.createLocation(location) : history.getCurrentLocation()
 
     return matchRouteAndUpdateState({jsonRoutes, location})
   }
@@ -225,9 +209,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
         listener(null, {params: state.params, components: state.components})
       } else {
         try {
-          const {redirectLocation, components} = await matchRouteAndUpdateState(
-            {jsonRoutes, location}
-          )
+          const {redirectLocation, components} = await matchRouteAndUpdateState({jsonRoutes, location})
 
           if (redirectLocation) {
             return history.replace(redirectLocation)
@@ -270,13 +252,7 @@ export const createTransitionManager = ({history, jsonRoutes}) => {
   const isActive = (location, indexOnly) => {
     location = history.createLocation(location)
 
-    return internalIsActive(
-      location,
-      indexOnly,
-      state.location,
-      state.routes,
-      state.params
-    )
+    return internalIsActive(location, indexOnly, state.location, state.routes, state.params)
   }
 
   return {

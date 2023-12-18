@@ -21,9 +21,7 @@ const categories = CATEGORIES ? CATEGORIES.split(',') : null
 const filterAll = key => {
   const [, category] = key.split('/')
 
-  return categories
-    ? categories.includes(category)
-    : micromatch.isMatch(key, globPattern, {contains: true})
+  return categories ? categories.includes(category) : micromatch.isMatch(key, globPattern, {contains: true})
 }
 
 // Require all the files from a context
@@ -50,8 +48,7 @@ Promise.all(
     let categoryComponentKey = `${category}/${component}`
     let subComponentName = null
 
-    const subComponentRegex =
-      /components\.(?<nestedComponentName>\w+)\.test\.(js|jsx)/
+    const subComponentRegex = /components\.(?<nestedComponentName>\w+)\.test\.(js|jsx)/
     const matchesSubComponent = key.match(subComponentRegex)
 
     if (matchesSubComponent !== null) {
@@ -60,8 +57,7 @@ Promise.all(
     }
 
     const getContexts = await importContexts({category, component})
-    const contexts =
-      typeof getContexts === 'function' ? await getContexts() : getContexts
+    const contexts = typeof getContexts === 'function' ? await getContexts() : getContexts
 
     const componentModule = await importReactComponent({
       category,
@@ -70,13 +66,10 @@ Promise.all(
       extractDefault: true
     })
 
-    const Component =
-      componentModule && (componentModule.type || componentModule)
+    const Component = componentModule && (componentModule.type || componentModule)
 
     if (!componentModule) {
-      console.error(
-        `Could not find component ${categoryComponentKey} in ${key}`
-      )
+      console.error(`Could not find component ${categoryComponentKey} in ${key}`)
       console.error(`Available keys: `, selectedTestFiles.keys())
       throw new Error(`Missing export default from ${categoryComponentKey}`)
     }

@@ -1,5 +1,27 @@
 # CHANGELOG
 
+# 2.1.0 (2023-12-04)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add routeId field to logger ([524a2ce](https://github.com/SUI-Components/sui/commit/524a2ced234c8e24f3d636bc1c7a69ffef4f57ad))
+
+
+
+# 2.0.0 (2023-11-27)
+
+
+### Features
+
+* **packages/sui-react-web-vitals:** add presentationTime comment ([3aaee12](https://github.com/SUI-Components/sui/commit/3aaee12327952c0fa6919a424fb36c4ac2d344c8))
+* **packages/sui-react-web-vitals:** add sub inp metrics to cwv ([3ddbd34](https://github.com/SUI-Components/sui/commit/3ddbd34428e23b7b384780c21d6a84e58ef44fb3))
+* **packages/sui-react-web-vitals:** minor updates ([55f1eaf](https://github.com/SUI-Components/sui/commit/55f1eaf0c2779522fef4e1421c02197aa32909d4))
+* **packages/sui-react-web-vitals:** update doc ([52bd64d](https://github.com/SUI-Components/sui/commit/52bd64d4aea798efe2ed8b46d645ef96258c2063))
+* **packages/sui-react-web-vitals:** update test and props ([1bd4347](https://github.com/SUI-Components/sui/commit/1bd4347296bfebb1e7b48e6ee3c59d7a88e2c58d))
+
+
+
 # 1.12.0 (2023-11-07)
 
 

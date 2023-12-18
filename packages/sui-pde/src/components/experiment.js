@@ -2,13 +2,7 @@ import PropTypes from 'prop-types'
 
 import useExperiment from '../hooks/useExperiment.js'
 
-export default function Experiment({
-  experimentName,
-  attributes,
-  trackExperimentViewed,
-  queryString,
-  children
-}) {
+export default function Experiment({experimentName, attributes, trackExperimentViewed, queryString, children}) {
   const {variation} = useExperiment({
     experimentName,
     attributes,

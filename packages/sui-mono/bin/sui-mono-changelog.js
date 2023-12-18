@@ -3,11 +3,7 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const conventionalChangelog = require('conventional-changelog')
-const {
-  checkIsMonoPackage,
-  getWorkspaces,
-  getChangelogFilename
-} = require('../src/config.js')
+const {checkIsMonoPackage, getWorkspaces, getChangelogFilename} = require('../src/config.js')
 
 program
   .usage('<folder1> <folder2> <etc>')
@@ -15,9 +11,7 @@ program
     console.log('  Description:')
     console.log('')
     console.log('    Generates a CHANGELOG.md of the given folders.')
-    console.log(
-      '    If no folder is specified, CHANGELOG.md will be generated for all packages.'
-    )
+    console.log('    If no folder is specified, CHANGELOG.md will be generated for all packages.')
     console.log('')
     console.log('  Examples:')
     console.log('')

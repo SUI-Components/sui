@@ -61,21 +61,7 @@ const pluralTypes = {
 // Mapping from pluralization group to individual locales.
 const pluralTypeToLanguages = {
   chinese: ['fa', 'id', 'ja', 'ko', 'lo', 'ms', 'th', 'tr', 'zh'],
-  german: [
-    'da',
-    'de',
-    'en',
-    'es',
-    'fi',
-    'el',
-    'he',
-    'hu',
-    'it',
-    'nl',
-    'no',
-    'pt',
-    'sv'
-  ],
+  german: ['da', 'de', 'en', 'es', 'fi', 'el', 'he', 'hu', 'it', 'nl', 'no', 'pt', 'sv'],
   french: ['fr', 'tl', 'pt-br'],
   russian: ['hr', 'ru'],
   czech: ['cs'],
@@ -153,11 +139,7 @@ class Polyglot {
     }
     if (typeof phrase === 'string') {
       options = clone(options)
-      result = this.choosePluralForm(
-        phrase,
-        this.currentLocale,
-        options.smart_count
-      )
+      result = this.choosePluralForm(phrase, this.currentLocale, options.smart_count)
       result = this.interpolate(result, options)
     }
     return result
@@ -207,10 +189,7 @@ class Polyglot {
   interpolate(phrase, options) {
     for (const arg in options) {
       if (arg !== '_' && options.hasOwnProperty(arg)) {
-        phrase = phrase.replace(
-          new RegExp('%\\{' + arg + '\\}', 'g'),
-          options[arg]
-        )
+        phrase = phrase.replace(new RegExp('%\\{' + arg + '\\}', 'g'), options[arg])
       }
     }
     return phrase

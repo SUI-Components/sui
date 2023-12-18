@@ -14,17 +14,13 @@ const configForMobileDevice = devices.m
 
 export const createUrlFrom = ({hostname, pathOptions}) => {
   const path = typeof pathOptions === 'string' ? pathOptions : pathOptions.url
-  return Array.isArray(path)
-    ? path.map(current => `${hostname}${current}`)
-    : `${hostname}${path}`
+  return Array.isArray(path) ? path.map(current => `${hostname}${current}`) : `${hostname}${path}`
 }
 
 const waitForHealthCheck = ({healthCheckUrl}) => {
   return new Promise(resolve => {
     async function retry(retries) {
-      console.log(
-        `Waiting for health check. Checking ${healthCheckUrl}, remaining ${retries} retries...`
-      )
+      console.log(`Waiting for health check. Checking ${healthCheckUrl}, remaining ${retries} retries...`)
       if (retries === 0) return resolve(false)
 
       let isResponseOK = false
@@ -33,25 +29,16 @@ const waitForHealthCheck = ({healthCheckUrl}) => {
         isResponseOK = response.ok
       } catch (e) {}
 
-      return isResponseOK
-        ? resolve(true)
-        : globalThis.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
+      return isResponseOK ? resolve(true) : globalThis.setTimeout(() => retry(--retries), TIME_BETWEEN_RETRIES)
     }
 
     retry(TIMES_TO_RETRY)
   })
 }
 
-const extractCriticalCSS = async ({
-  requiredClassNames,
-  retries = 3,
-  url,
-  configForMobileDevice
-} = {}) => {
+const extractCriticalCSS = async ({requiredClassNames, retries = 3, url, configForMobileDevice} = {}) => {
   if (retries === 0) {
-    console.log(
-      `Attempt limit reached. requiredClassNames has not been found in ${url}`
-    )
+    console.log(`Attempt limit reached. requiredClassNames has not been found in ${url}`)
     return ''
   }
 
@@ -65,16 +52,12 @@ const extractCriticalCSS = async ({
 
   if (!requiredClassNames) return css
 
-  const hasRequiredClasses = requiredClassNames.every(className =>
-    css?.includes(className)
-  )
+  const hasRequiredClasses = requiredClassNames.every(className => css?.includes(className))
 
   if (!hasRequiredClasses) {
     const nextTryNumber = retries - 1
 
-    console.log(
-      `requiredClassNames has not been found. Retries remaining: ${nextTryNumber}`
-    )
+    console.log(`requiredClassNames has not been found. Retries remaining: ${nextTryNumber}`)
 
     return extractCriticalCSS({
       requiredClassNames,

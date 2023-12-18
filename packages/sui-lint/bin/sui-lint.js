@@ -4,8 +4,6 @@ const {version} = require('../package.json')
 
 program.version(version, '    --version')
 
-program
-  .command('js', 'lint javascript files')
-  .command('sass', 'lint sass files')
+program.command('js', 'lint javascript files').command('sass', 'lint sass files')
 
 program.parse(process.argv)

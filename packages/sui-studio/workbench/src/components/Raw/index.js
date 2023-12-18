@@ -6,11 +6,7 @@ import PropTypes from 'prop-types'
 
 import SUIContext from '@s-ui/react-context'
 
-import {
-  cleanDisplayName,
-  createContextByType,
-  removeDefaultContext
-} from '../../../../src/components/demo/utilities.js'
+import {cleanDisplayName, createContextByType, removeDefaultContext} from '../../../../src/components/demo/utilities.js'
 import Preview from '../../../../src/components/preview/index.js'
 import Style from '../../../../src/components/style/index.js'
 import {fetchPlayground} from '../../../../src/components/tryRequire.js'
@@ -29,8 +25,7 @@ export default function Raw({
 }) {
   const [playground, setPlayground] = useState(null)
 
-  const context =
-    Object.keys(contexts).length && createContextByType(contexts, actualContext)
+  const context = Object.keys(contexts).length && createContextByType(contexts, actualContext)
 
   // check if is a normal component or it's wrapped with a React.memo method
   const ComponentToRender = Component.type ? Component.type : Component
@@ -50,8 +45,7 @@ export default function Raw({
             scope={{
               context,
               React,
-              [cleanDisplayName(ComponentToRender.displayName)]:
-                ComponentToRender,
+              [cleanDisplayName(ComponentToRender.displayName)]: ComponentToRender,
               ...nonDefault
             }}
             code={playground}

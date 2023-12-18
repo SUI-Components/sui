@@ -22,19 +22,10 @@ program
     '--ci',
     'Optimized mode for CI. Avoid removing folders, showing progress, auditing, write package-lock files and more'
   )
-  .option(
-    '--strict-peer-deps',
-    'Install peer dependencies using the modern strict peer dependency install'
-  )
+  .option('--strict-peer-deps', 'Install peer dependencies using the modern strict peer dependency install')
   .option('--no-audit', 'Avoid auditing packages for better performance')
-  .option(
-    '--no-root',
-    'Avoid executing the script on root folder in case you already did it'
-  )
-  .option(
-    '--no-progress',
-    'Force to not show progress of tasks (perfect for CI environments)'
-  )
+  .option('--no-root', 'Avoid executing the script on root folder in case you already did it')
+  .option('--no-progress', 'Force to not show progress of tasks (perfect for CI environments)')
   .option('--production', 'Install only production packages')
   .on('--help', () => {
     console.log(`
@@ -89,11 +80,7 @@ const removeDependencies = cmd => {
 const createInstallPackagesCommand = (cwd = process.cwd()) => {
   const executionParams = {cwd}
   if (ci) {
-    const commandArgs = [
-      'install',
-      ...CI_FLAGS,
-      production ? '--production' : ''
-    ]
+    const commandArgs = ['install', ...CI_FLAGS, production ? '--production' : '']
     return [NPM_BIN, commandArgs, executionParams]
   }
 
@@ -108,8 +95,7 @@ const installPackages = async () => {
   if (!root) return Promise.resolve()
 
   console.log(`[sui-mono] Installing packages...`)
-  const [installBin, installArgs, installExecutionParams] =
-    createInstallPackagesCommand()
+  const [installBin, installArgs, installExecutionParams] = createInstallPackagesCommand()
   await getSpawnPromise(installBin, installArgs, installExecutionParams)
 
   console.log('[sui-mono] Installed packages')
@@ -125,9 +111,7 @@ const removeDependenciesForPackages = () => {
 
   console.log(`[sui-mono] Removing previous packages...`)
   // if we're on CI, we don't need to remove folders
-  const removeFoldersPromise = ci
-    ? Promise.resolve()
-    : Promise.all(getWorkspaces().map(removeDependencies))
+  const removeFoldersPromise = ci ? Promise.resolve() : Promise.all(getWorkspaces().map(removeDependencies))
 
   return removeFoldersPromise
 }

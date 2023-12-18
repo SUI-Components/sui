@@ -26,9 +26,7 @@ const params = queryStringToJSON(window.location.href)
 const importAll = requireContext => requireContext.keys().map(requireContext)
 
 ;(async () => {
-  const {default: defaultStyle} = await import(
-    '!css-loader!@s-ui/sass-loader!component/index.scss'
-  )
+  const {default: defaultStyle} = await import('!css-loader!@s-ui/sass-loader!component/index.scss')
 
   let styles = []
   let requireContextThemesKeys = []
@@ -43,11 +41,7 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
      * ]
      * We might want to filter those to avoid importAll to import twice the same
      */
-    const requireContextThemes = require.context(
-      '!css-loader!@s-ui/sass-loader!demo/themes',
-      false,
-      /\.scss$/
-    )
+    const requireContextThemes = require.context('!css-loader!@s-ui/sass-loader!demo/themes', false, /\.scss$/)
     requireContextThemesKeys = requireContextThemes.keys()
     styles = importAll(requireContextThemes)
   } catch {}

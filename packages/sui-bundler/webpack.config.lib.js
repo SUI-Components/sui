@@ -1,21 +1,12 @@
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const {
-  cleanList,
-  envVars,
-  MAIN_ENTRY_POINT,
-  config
-} = require('./shared/index.js')
+const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.js')
 const path = require('path')
 const minifyJs = require('./shared/minify-js.js')
 const definePlugin = require('./shared/define.js')
 const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
-const {
-  extractComments,
-  sourceMap,
-  supportLegacyBrowsers
-} = require('./shared/config.js')
+const {extractComments, sourceMap, supportLegacyBrowsers} = require('./shared/config.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 
 const cssFileName = 'styles.css'

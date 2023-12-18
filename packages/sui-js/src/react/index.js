@@ -1,4 +1,46 @@
-export {default as htmlStringToReactElement} from 'htmr'
+import htmr from 'htmr'
+
+// This is a list of all the elements that should not be allowed to be rendered as they pose a security risk.
+// See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+// If you want to allow one of these elements, you can add it to the `transform` object in the `options`.
+export const DANGEROUS_TRANSFORMS = {
+  area: () => null,
+  audio: () => null,
+  base: () => null,
+  canvas: () => null,
+  embed: () => null,
+  form: () => null,
+  frame: () => null,
+  frameset: () => null,
+  head: () => null,
+  html: () => null,
+  iframe: () => null,
+  img: () => null,
+  link: () => null,
+  map: () => null,
+  meta: () => null,
+  noscript: () => null,
+  object: () => null,
+  picture: () => null,
+  portal: () => null,
+  script: () => null,
+  slot: () => null,
+  source: () => null,
+  style: () => null,
+  template: () => null,
+  title: () => null,
+  track: () => null,
+  video: () => null
+}
+
+export const htmlStringToReactElement = (string, options) =>
+  htmr(string, {
+    ...options,
+    transform: {
+      ...DANGEROUS_TRANSFORMS,
+      ...options?.transform
+    }
+  })
 
 const isReactRefObj = target => {
   if (target && typeof target === 'object') {
@@ -13,9 +55,7 @@ const findDOMElements = target => {
     let selection = document.querySelectorAll(target)
     if (!selection.length) selection = document.querySelectorAll(`#${target}`)
     if (!selection.length) {
-      throw new Error(
-        `The target '${target}' could not be identified in the dom, tip: check spelling`
-      )
+      throw new Error(`The target '${target}' could not be identified in the dom, tip: check spelling`)
     }
     return selection
   }

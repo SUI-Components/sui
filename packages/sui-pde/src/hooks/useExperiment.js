@@ -21,10 +21,7 @@ export default function useExperiment({
   adapterId
 } = {}) {
   const {pde} = useContext(PdeContext)
-  if (pde === null)
-    throw new Error(
-      '[sui-pde: useExperiment] sui-pde provider is required to work'
-    )
+  if (pde === null) throw new Error('[sui-pde: useExperiment] sui-pde provider is required to work')
 
   const variation = useMemo(() => {
     let variationName
@@ -55,14 +52,7 @@ export default function useExperiment({
     }
 
     return variationName
-  }, [
-    trackExperimentViewed,
-    experimentName,
-    queryString,
-    pde,
-    attributes,
-    adapterId
-  ])
+  }, [trackExperimentViewed, experimentName, queryString, pde, attributes, adapterId])
 
   return {variation}
 }

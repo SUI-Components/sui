@@ -21,11 +21,7 @@ const execOptions = {
  * @returns {string} The process id
  */
 function getProcessIdOnPort(port) {
-  return execFileSync(
-    'lsof',
-    [`-i:${port}`, '-P', '-t', '-sTCP:LISTEN'],
-    execOptions
-  )
+  return execFileSync('lsof', [`-i:${port}`, '-P', '-t', '-sTCP:LISTEN'], execOptions)
     .split('\n')[0]
     .trim()
 }
@@ -36,10 +32,7 @@ function getProcessIdOnPort(port) {
  * @returns {string} - The process name
  */
 function getProcessCommand(processId) {
-  const command = execSync(
-    'ps -o command -p ' + processId + ' | sed -n 2p',
-    execOptions
-  )
+  const command = execSync('ps -o command -p ' + processId + ' | sed -n 2p', execOptions)
 
   return command.replace(/\n$/, '')
 }
@@ -50,10 +43,7 @@ function getProcessCommand(processId) {
  * @returns {string} - The process directory
  */
 function getDirectoryOfProcessById(processId) {
-  return execSync(
-    `lsof -p ${processId} | awk '$4=="cwd" {for (i=9; i<=NF; i++) printf "%s ", $i}'`,
-    execOptions
-  ).trim()
+  return execSync(`lsof -p ${processId} | awk '$4=="cwd" {for (i=9; i<=NF; i++) printf "%s ", $i}'`, execOptions).trim()
 }
 
 /**
@@ -67,12 +57,7 @@ function getProcessForPort(port) {
     const directory = getDirectoryOfProcessById(processId)
     const command = getProcessCommand(processId)
 
-    return (
-      bold(command) +
-      gray(' (pid ' + processId + ')\n') +
-      gray('  in ') +
-      cyan(directory)
-    )
+    return bold(command) + gray(' (pid ' + processId + ')\n') + gray('  in ') + cyan(directory)
   } catch (e) {
     return null
   }

@@ -9,9 +9,7 @@ program
     console.log('')
     console.log('    Reports if any package should be released based on ComVer')
     console.log('')
-    console.log(
-      '    It will create a MAJOR only if there are BREAKING CHANGES in the commit description'
-    )
+    console.log('    It will create a MAJOR only if there are BREAKING CHANGES in the commit description')
     console.log('    The types fix, perf and feat will generate a MINOR')
     console.log('    All other commit types will not generate a version change')
     console.log('')
@@ -36,13 +34,12 @@ const showReportHeaderPositive = () => {
 }
 
 const showReportHeaderNegative = () => {
-  console.log(
-    colors.yellow('Nothing to release according to your recent commits.')
-  )
+  console.log(colors.yellow('Nothing to release according to your recent commits.'))
 }
 
 const showReport = status => {
   let headerShown = false
+
   for (const pkg in status) {
     if (status.hasOwnProperty(pkg) && status[pkg].increment > 0) {
       if (!headerShown) {
@@ -55,12 +52,10 @@ const showReport = status => {
       console.log(` ${pkgName} ─ new ${versionString} version: `)
 
       status[pkg].commits.forEach(commit => {
-        const messagePrefix = checker.isCommitBreakingChange(commit)
-          ? `› ${colors.red('BREAKING CHANGE')} -`
-          : '›'
-        console.log(`  ${messagePrefix} ${commit.header}`)
+        const messagePrefix = checker.isCommitBreakingChange(commit) ? `› ${colors.red('BREAKING CHANGE')} -` : '›'
+
+        console.log(`  ${messagePrefix} ${commit.header}\n`)
       })
-      console.log('')
     }
   }
   if (!headerShown) showReportHeaderNegative()

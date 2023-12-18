@@ -23,8 +23,7 @@ const defaultPackagesToAlias = [
 
 const createAliasPath = pkgName => {
   const PWDNodeModules = path.join(PWD, './node_modules')
-  if (fs.existsSync(PWDNodeModules))
-    return path.resolve(path.join(PWDNodeModules, pkgName))
+  if (fs.existsSync(PWDNodeModules)) return path.resolve(path.join(PWDNodeModules, pkgName))
 
   try {
     return require.resolve(pkgName).replace(/\/index\.js$/, '')
@@ -36,18 +35,14 @@ const createAliasPath = pkgName => {
 const mustPackagesToAlias = {}
 
 exports.defaultAlias = Object.fromEntries(
-  defaultPackagesToAlias
-    .map(pkgName => [pkgName, createAliasPath(pkgName)])
-    .filter(([, path]) => path)
+  defaultPackagesToAlias.map(pkgName => [pkgName, createAliasPath(pkgName)]).filter(([, path]) => path)
 )
 
 const aliasFromConfig = config.alias
   ? Object.entries(config.alias).reduce(
       (obj, [aliasName, aliasPath]) => ({
         ...obj,
-        [aliasName]: aliasPath.startsWith('./')
-          ? path.join(PWD, aliasPath)
-          : aliasPath
+        [aliasName]: aliasPath.startsWith('./') ? path.join(PWD, aliasPath) : aliasPath
       }),
       {}
     )

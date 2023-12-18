@@ -9,8 +9,7 @@ import Test from '../Suite/index'
 const importComponent = () => import('component/index')
 const importTest = () => import('test/index.test')
 
-const getFromStorage = (key, defaultValue) =>
-  window.sessionStorage[key] || defaultValue
+const getFromStorage = (key, defaultValue) => window.sessionStorage[key] || defaultValue
 
 const updateOnChange = (setState, sessionKey) => nextValue => {
   window.sessionStorage.setItem(sessionKey, nextValue)
@@ -18,15 +17,9 @@ const updateOnChange = (setState, sessionKey) => nextValue => {
 }
 
 export default function Root({componentID, contexts = {}, themes}) {
-  const [actualContext, setActualContext] = useState(() =>
-    getFromStorage('actualContext', 'default')
-  )
-  const [actualStyle, setActualStyle] = useState(() =>
-    getFromStorage('actualStyle', 'default')
-  )
-  const [showTests, setShowTests] = useState(() =>
-    getFromStorage('showTests', 'show')
-  )
+  const [actualContext, setActualContext] = useState(() => getFromStorage('actualContext', 'default'))
+  const [actualStyle, setActualStyle] = useState(() => getFromStorage('actualStyle', 'default'))
+  const [showTests, setShowTests] = useState(() => getFromStorage('showTests', 'show'))
 
   const iframeSrc = `/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`
 
@@ -48,10 +41,7 @@ export default function Root({componentID, contexts = {}, themes}) {
         <button
           className="Root-testSwitch"
           onClick={() => {
-            updateOnChange(
-              setShowTests,
-              'showTests'
-            )(showTests === 'show' ? 'hide' : 'show')
+            updateOnChange(setShowTests, 'showTests')(showTests === 'show' ? 'hide' : 'show')
           }}
         >
           {showTests === 'show' ? 'Close Tests' : 'Open Tests'}
@@ -60,12 +50,7 @@ export default function Root({componentID, contexts = {}, themes}) {
 
       <iframe src={iframeSrc} scrolling="yes" title="Demo" />
       <div className="Root-test" hidden={showTests === 'hide'}>
-        <Test
-          open
-          contexts={contexts}
-          importComponent={importComponent}
-          importTest={importTest}
-        />
+        <Test open contexts={contexts} importComponent={importComponent} importTest={importTest} />
       </div>
     </div>
   )

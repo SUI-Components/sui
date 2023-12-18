@@ -65,18 +65,8 @@ const App = () => {
           />
         </div>
         <div>
-          <Select
-            name="size"
-            onChange={setSize}
-            options={ATOM_ICON_SIZES}
-            value={size}
-          />
-          <Select
-            name="color"
-            onChange={setColor}
-            options={ATOM_ICON_COLORS}
-            value={color}
-          />
+          <Select name="size" onChange={setSize} options={ATOM_ICON_SIZES} value={size} />
+          <Select name="color" onChange={setColor} options={ATOM_ICON_COLORS} value={color} />
         </div>
       </header>
       <section>

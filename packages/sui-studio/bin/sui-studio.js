@@ -56,25 +56,14 @@ program
 
 program.command('dev <component>', 'Develop an isolate component').alias('d')
 
-program
-  .command(
-    'generate <category> <component>',
-    'Create a component and her demo files'
-  )
-  .alias('g')
+program.command('generate <category> <component>', 'Create a component and her demo files').alias('g')
 
-program
-  .command('build', 'Generate a static version ready to be deployed')
-  .alias('b')
+program.command('build', 'Generate a static version ready to be deployed').alias('b')
 
-program
-  .command('link <origin> <destination>', 'Link components between them')
-  .alias('l')
+program.command('link <origin> <destination>', 'Link components between them').alias('l')
 
 program.command('test', 'Run studio tests').alias('t')
 
-program
-  .command('migrate <topic>', 'Migrate any legacy topic to the new structure')
-  .alias('m')
+program.command('migrate <topic>', 'Migrate any legacy topic to the new structure').alias('m')
 
 program.parse(process.argv)

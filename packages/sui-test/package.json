@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.27.0",
+  "version": "8.28.0",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -32,7 +32,7 @@
     "babel-preset-sui": "3",
     "commander": "8.3.0",
     "karma": "6.4.0",
-    "karma-chrome-launcher": "3.1.1",
+    "karma-chrome-launcher": "3.2.0",
     "karma-coverage": "2.2.0",
     "karma-firefox-launcher": "2.1.2",
     "karma-mocha": "2.0.1",

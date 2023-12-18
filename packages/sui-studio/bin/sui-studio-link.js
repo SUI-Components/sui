@@ -7,73 +7,43 @@ const fs = require('fs-extra')
 const program = require('commander')
 const BASE_DIR = process.cwd()
 
-console.log(
-  colors.cyan(
-    'If you\'re linking internal components, "sui-studio link-all" might be a better option.'
-  )
-)
+console.log(colors.cyan('If you\'re linking internal components, "sui-studio link-all" might be a better option.'))
 
 program.parse(process.argv)
 
-const [origin, destination] = Array.prototype.map.call(
-  program.args,
-  url => `${BASE_DIR}/components/${url}`
-)
+const [origin, destination] = Array.prototype.map.call(program.args, url => `${BASE_DIR}/components/${url}`)
 
 const originPackageName = require(`${origin}/package.json`).name
 
 const build = () => {
   return new Promise((resolve, reject) => {
     fs.removeSync(`${destination}/node_modules/${originPackageName}`)
-    const build = spawn('npm', ['run', 'build'], {cwd: origin})
-      .on('error', reject)
-      .on('close', resolve)
-    build.stdout.on('data', data =>
-      console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`))
-    )
-    build.stderr.on('data', data =>
-      console.log(colors.red(`[${originPackageName}]: ${data.toString()}`))
-    )
+    const build = spawn('npm', ['run', 'build'], {cwd: origin}).on('error', reject).on('close', resolve)
+    build.stdout.on('data', data => console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`)))
+    build.stderr.on('data', data => console.log(colors.red(`[${originPackageName}]: ${data.toString()}`)))
   })
 }
 
 const createLink = () => {
   return new Promise((resolve, reject) => {
-    const link = spawn('ln', [
-      '-s',
-      `${origin}`,
-      `${destination}/node_modules/${originPackageName}`
-    ])
+    const link = spawn('ln', ['-s', `${origin}`, `${destination}/node_modules/${originPackageName}`])
       .on('error', reject)
       .on('close', resolve)
-    link.stdout.on('data', data =>
-      console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`))
-    )
-    link.stderr.on('data', data =>
-      console.log(colors.red(`[${originPackageName}]: ${data.toString()}`))
-    )
+    link.stdout.on('data', data => console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`)))
+    link.stderr.on('data', data => console.log(colors.red(`[${originPackageName}]: ${data.toString()}`)))
   })
 }
 
 const watch = () => {
   return new Promise(() => {
     const babel = spawn('npm', ['run', 'babel', '--', '--watch'], {cwd: origin})
-    babel.stdout.on('data', data =>
-      console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`))
-    )
-    babel.stderr.on('data', data =>
-      console.log(colors.red(`[${originPackageName}]: ${data.toString()}`))
-    )
+    babel.stdout.on('data', data => console.log(colors.gray(`[${originPackageName}]: ${data.toString()}`)))
+    babel.stderr.on('data', data => console.log(colors.red(`[${originPackageName}]: ${data.toString()}`)))
 
     fs.watch(origin, {recursive: true}, (event, filename) => {
       if (event === 'change' && filename.indexOf('.scss') !== -1) {
-        console.log(
-          colors.gray(`[${originPackageName}]: ${filename} -> lib/${filename}`)
-        )
-        fs.copySync(
-          `${origin}/${filename}`,
-          `${origin}/${filename.replace('src', 'lib')}`
-        )
+        console.log(colors.gray(`[${originPackageName}]: ${filename} -> lib/${filename}`))
+        fs.copySync(`${origin}/${filename}`, `${origin}/${filename.replace('src', 'lib')}`)
       }
     })
   })

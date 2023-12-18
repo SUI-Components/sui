@@ -147,9 +147,7 @@ describe('getParams', () => {
         expect(getParams('/files/*.jpg', '/files/my/photo.jpg')).to.deep.equal({
           splat: 'my/photo'
         })
-        expect(
-          getParams('/files/*.jpg', '/files/my/new%0Aline.jpg')
-        ).to.deep.equal({
+        expect(getParams('/files/*.jpg', '/files/my/new%0Aline.jpg')).to.deep.equal({
           splat: 'my/new\nline'
         })
       })

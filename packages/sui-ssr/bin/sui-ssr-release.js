@@ -15,12 +15,8 @@ program
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
-    console.log(
-      ' Release a server version. Create a git tag and update a minor version in the package.json'
-    )
-    console.log(
-      ' It is mandatory setup a $GITHUB_TOKEN envVar to execute this command'
-    )
+    console.log(' Release a server version. Create a git tag and update a minor version in the package.json')
+    console.log(' It is mandatory setup a $GITHUB_TOKEN envVar to execute this command')
     console.log('')
     console.log('  Examples:')
     console.log('')
@@ -29,14 +25,7 @@ program
   })
   .parse(process.argv)
 
-const {
-  branch = 'master',
-  email,
-  name,
-  skipCi = false,
-  commit,
-  npm7 = false
-} = program.opts()
+const {branch = 'master', email, name, skipCi = false, commit, npm7 = false} = program.opts()
 
 const execute = async (cmd, full) => {
   try {
@@ -57,11 +46,7 @@ const getCommitToTag = async () => {
 
   return execute('git rev-parse HEAD')
 }
-const getNpmInstall = ({
-  legacyPeerDeps: hasLegacyPeerDeps,
-  packageLockOnly,
-  only: onlyScope
-} = {}) => {
+const getNpmInstall = ({legacyPeerDeps: hasLegacyPeerDeps, packageLockOnly, only: onlyScope} = {}) => {
   const installCommand = [
     'npm install',
     hasLegacyPeerDeps && '--legacy-peer-deps',
@@ -123,18 +108,11 @@ const getNpmInstall = ({
 
     await execute('npm version minor --no-git-tag-version')
     const nextVersion = require(path.join(cwd, 'package.json')).version
-    await execute(
-      `git add ${path.join(cwd, 'package.json')} ${path.join(
-        cwd,
-        'package-lock.json'
-      )}`
-    )
+    await execute(`git add ${path.join(cwd, 'package.json')} ${path.join(cwd, 'package-lock.json')}`)
 
     const skipCiMessage = skipCi ? '[skip ci]' : ''
 
-    await execute(
-      `git commit -m "release(META): ${nextVersion} ${skipCiMessage}"`
-    )
+    await execute(`git commit -m "release(META): ${nextVersion} ${skipCiMessage}"`)
     await execute(`git tag -a "v${nextVersion}" -m "v${nextVersion}"`)
     await execute('git status')
     await execute(`git push --set-upstream --tags origin ${branch}`)

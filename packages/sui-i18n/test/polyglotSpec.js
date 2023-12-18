@@ -13,12 +13,9 @@ const phrases = {
     hello: 'Hello',
     hi_name_welcome_to_place: 'Hi, %{name}, welcome to %{place}!',
     name_your_name_is_name: '%{name}, your name is %{name}!',
-    name_your_name_is_bold_name_bold:
-      '%{name}, your name is %[bold]%{name}[bold]%!',
-    multiple_name_your_name_is_bold_name_bold:
-      '%[bold]%{name}[bold]%, your name is %[bold]%{name}[bold]%!',
-    nested_placeholders:
-      'Hello, this is an %[bold]important %[link]resource[link]%[bold]% for this page!',
+    name_your_name_is_bold_name_bold: '%{name}, your name is %[bold]%{name}[bold]%!',
+    multiple_name_your_name_is_bold_name_bold: '%[bold]%{name}[bold]%, your name is %[bold]%{name}[bold]%!',
+    nested_placeholders: 'Hello, this is an %[bold]important %[link]resource[link]%[bold]% for this page!',
     empty_string: ''
   }
 }
@@ -65,22 +62,18 @@ describe('I18N with polyglot adapter', () => {
       i18n.culture = 'en-GB'
     })
 
-    it('should translate a simple string', () =>
-      expect(i18n.t('hello')).to.eql('Hello'))
+    it('should translate a simple string', () => expect(i18n.t('hello')).to.eql('Hello'))
 
-    it('should return the key if translation not found', () =>
-      expect(i18n.t('bogus_key')).to.eql('bogus_key'))
+    it('should return the key if translation not found', () => expect(i18n.t('bogus_key')).to.eql('bogus_key'))
 
     it('should interpolate', () => {
-      expect(
-        i18n.t('hi_name_welcome_to_place', {name: 'Spike', place: 'the webz'})
-      ).to.eql('Hi, Spike, welcome to the webz!')
+      expect(i18n.t('hi_name_welcome_to_place', {name: 'Spike', place: 'the webz'})).to.eql(
+        'Hi, Spike, welcome to the webz!'
+      )
     })
 
     it('should interpolate the same placeholder multiple times', () => {
-      expect(i18n.t('name_your_name_is_name', {name: 'Spike'})).to.eql(
-        'Spike, your name is Spike!'
-      )
+      expect(i18n.t('name_your_name_is_name', {name: 'Spike'})).to.eql('Spike, your name is Spike!')
     })
 
     it('should allow you to supply default values', () => {
@@ -93,9 +86,7 @@ describe('I18N with polyglot adapter', () => {
     })
 
     it('should return the non-interpolated key if not initialized with allowMissing and translation not found', () => {
-      expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql(
-        'Welcome %{name}'
-      )
+      expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql('Welcome %{name}')
     })
 
     describe('setting allowMissing', () => {
@@ -106,9 +97,7 @@ describe('I18N with polyglot adapter', () => {
         i18n.adapter.instance.allowMissing = false
       })
       it('should return an interpolated key if initialized with allowMissing and translation not found', () => {
-        expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql(
-          'Welcome Robert'
-        )
+        expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql('Welcome Robert')
       })
     })
 
@@ -195,8 +184,7 @@ describe('I18N with polyglot adapter', () => {
       i18n.culture = 'en-GB'
     })
 
-    it('should translate a simple string into an array', () =>
-      expect(i18n.interpolate('hello')).to.eql(['Hello']))
+    it('should translate a simple string into an array', () => expect(i18n.interpolate('hello')).to.eql(['Hello']))
 
     it('should return the key into an array if translation not found', () =>
       expect(i18n.interpolate('bogus_key')).to.eql(['bogus_key']))
@@ -220,9 +208,7 @@ describe('I18N with polyglot adapter', () => {
     })
 
     it('should interpolate the same placeholder multiple times', () => {
-      expect(
-        i18n.interpolate('name_your_name_is_name', {name: 'Spike'})
-      ).to.eql(['Spike, your name is Spike!'])
+      expect(i18n.interpolate('name_your_name_is_name', {name: 'Spike'})).to.eql(['Spike, your name is Spike!'])
       expect(
         i18n.interpolate('multiple_name_your_name_is_bold_name_bold', {
           name: 'Spike',
@@ -237,11 +223,7 @@ describe('I18N with polyglot adapter', () => {
           bold: ({children}) => ({content: children}),
           link: ({children}) => ({content: children})
         })
-      ).to.eql([
-        'Hello, this is an ',
-        {content: ['important ', {content: 'resource'}]},
-        ' for this page!'
-      ])
+      ).to.eql(['Hello, this is an ', {content: ['important ', {content: 'resource'}]}, ' for this page!'])
     })
 
     it('should allow you to supply default values', () => {
@@ -254,9 +236,7 @@ describe('I18N with polyglot adapter', () => {
     })
 
     it('should return the non-interpolated key into an array if not initialized with allowMissing and translation not found', () => {
-      expect(i18n.interpolate('Welcome %{name}', {name: 'Robert'})).to.eql([
-        'Welcome %{name}'
-      ])
+      expect(i18n.interpolate('Welcome %{name}', {name: 'Robert'})).to.eql(['Welcome %{name}'])
     })
   })
 })

@@ -14,9 +14,7 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
       log.success(`✔ ${pkg.name} from path "${packagePath}"`)
       return acc
     } catch (e) {
-      log.warn(
-        `⚠ Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`
-      )
+      log.warn(`⚠ Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`)
       return acc
     }
   }, init)
@@ -24,11 +22,7 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
 const absolutePathForMonoRepo = base => {
   if (!base) return []
   return fg
-    .sync([
-      `${path.resolve(base)}/**/package.json`,
-      '!**/node_modules/**',
-      '!**/lib/**'
-    ])
+    .sync([`${path.resolve(base)}/**/package.json`, '!**/node_modules/**', '!**/lib/**'])
     .map(p => path.dirname(p))
 }
 

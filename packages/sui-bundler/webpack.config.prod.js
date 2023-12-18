@@ -9,19 +9,9 @@ const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 
-const {
-  when,
-  cleanList,
-  envVars,
-  MAIN_ENTRY_POINT,
-  config
-} = require('./shared/index.js')
+const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
-const {
-  extractComments,
-  sourceMap,
-  supportLegacyBrowsers
-} = require('./shared/config.js')
+const {extractComments, sourceMap, supportLegacyBrowsers} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
@@ -34,13 +24,9 @@ const CWD = process.cwd()
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
 const PWD = process.env.PWD ?? ''
 
-const filename = config.onlyHash
-  ? '[contenthash:8].js'
-  : '[name].[contenthash:8].js'
+const filename = config.onlyHash ? '[contenthash:8].js' : '[name].[contenthash:8].js'
 
-const cssFileName = config.onlyHash
-  ? '[contenthash:8].css'
-  : '[name].[contenthash:8].css'
+const cssFileName = config.onlyHash ? '[contenthash:8].css' : '[name].[contenthash:8].css'
 
 const target = supportLegacyBrowsers ? ['web', 'es5'] : 'web'
 
@@ -77,9 +63,7 @@ const webpackConfig = {
   optimization: {
     checkWasmTypes: false,
     minimize: true,
-    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(
-      Boolean
-    ),
+    minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(Boolean),
     runtimeChunk: true
   },
   plugins: cleanList([
@@ -116,9 +100,7 @@ const webpackConfig = {
     rules: cleanList([
       createCompilerRules({supportLegacyBrowsers}),
       sassRules,
-      when(config['externals-manifest'], () =>
-        manifestLoaderRules(config['externals-manifest'])
-      )
+      when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   },
   resolveLoader

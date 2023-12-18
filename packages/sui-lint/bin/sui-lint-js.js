@@ -3,12 +3,7 @@
 // @ts-check
 
 const program = require('commander')
-const {
-  checkFilesToLint,
-  getFilesToLint,
-  getGitIgnoredFiles,
-  stageFilesIfRequired
-} = require('../src/helpers.js')
+const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')
@@ -17,9 +12,10 @@ program
   .option('--add-fixes')
   .option('--staged')
   .option('--fix', 'fix automatically problems with js files')
+  .option('--ignore-patterns <ignorePatterns...>', 'Path patterns to ignore for linting')
   .parse(process.argv)
 
-const {addFixes, fix, staged} = program.opts()
+const {addFixes, fix, ignorePatterns = [], staged} = program.opts()
 
 const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -28,7 +24,7 @@ const DEFAULT_PATTERN = './'
 const LINT_FORMATTER = 'stylish'
 const baseConfig = {
   ...config,
-  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles())
+  ignorePatterns: IGNORE_PATTERNS.concat(getGitIgnoredFiles()).concat(ignorePatterns)
 }
 
 ;(async function main() {

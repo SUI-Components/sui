@@ -5,7 +5,4 @@ export const statusCodes = {
 
 export const DEFAULT_REDIRECT_STATUS_CODE = statusCodes.MOVED_PERMANENTLY
 
-export const redirectStatusCodes = [
-  statusCodes.MOVED_PERMANENTLY,
-  statusCodes.FOUND
-]
+export const redirectStatusCodes = [statusCodes.MOVED_PERMANENTLY, statusCodes.FOUND]

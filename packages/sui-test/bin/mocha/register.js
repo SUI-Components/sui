@@ -1,29 +1,15 @@
 const {serverConfig} = require('../../src/config.js')
 const {getSWCConfig} = require('@s-ui/compiler-config')
 
-const {
-  forceTranspilation = [],
-  esmOverride = false,
-  useLibDir = false
-} = serverConfig
-const regexToAdd = forceTranspilation.map(
-  regexString => new RegExp(regexString)
-)
+const {forceTranspilation = [], esmOverride = false, useLibDir = false} = serverConfig
+const regexToAdd = forceTranspilation.map(regexString => new RegExp(regexString))
 
 if (esmOverride) {
   require('./applyEsmOverride.js')
 }
 
 const libDir = /lib/
-const paths = [
-  /@babel\/runtime/,
-  /@s-ui/,
-  /mocks/,
-  /src/,
-  /test/,
-  libDir,
-  ...regexToAdd
-]
+const paths = [/@babel\/runtime/, /@s-ui/, /mocks/, /src/, /test/, libDir, ...regexToAdd]
 const only = useLibDir ? paths : paths.filter(path => path !== libDir)
 const swcConfig = getSWCConfig({isTypeScript: true, compileToCJS: true})
 
@@ -46,8 +32,5 @@ require('@babel/register')({
       }
     ]
   ],
-  plugins: [
-    'babel-plugin-dynamic-import-node',
-    '@babel/plugin-transform-modules-commonjs'
-  ]
+  plugins: ['babel-plugin-dynamic-import-node', '@babel/plugin-transform-modules-commonjs']
 })
