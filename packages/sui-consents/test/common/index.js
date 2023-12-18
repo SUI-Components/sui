@@ -1,2 +1,2 @@
-import './functionSpec'
-import './hookSpec'
+import './functionSpec.js'
+import './hookSpec.js'

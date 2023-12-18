@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
 
-import {hasUserConsents} from '../../lib/index'
+import {hasUserConsents} from '../../lib/index.js'
 
 describe('hasUserConsents', () => {
   describe('when the user accepts all consents', () => {
