@@ -25,6 +25,11 @@ program
 
 const {coverage, watch, ci, headless, timeout} = program.opts()
 
+const relPath = path.relative(
+  process.cwd(),
+  require.resolve('@s-ui/studio/src/runtime-mocha/index.js').replace(/\/node_modules.*/, '')
+)
+
 const run = async () => {
   try {
     const result = await serialSpawn([
@@ -32,7 +37,7 @@ const run = async () => {
         suiTestClientPath,
         [
           '--pattern',
-          path.join('node_modules', '@s-ui', 'studio', 'src', 'runtime-mocha', 'index.js'),
+          path.join(relPath, 'node_modules', '@s-ui', 'studio', 'src', 'runtime-mocha', 'index.js'),
           coverage && '--coverage',
           watch && '--watch',
           ci && '--ci',
