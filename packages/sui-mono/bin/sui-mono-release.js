@@ -64,18 +64,22 @@ const releasesByPackages = ({status}) => {
     .map(scope => scopeMapper({scope, status}))
 }
 
-const bump = async ({pkg, code} = {}) => {
+const getCwd = ({pkg}) => {
   const isMonoPackage = checkIsMonoPackage()
-  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
+  return isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
 }
 
-const commit = async ({pkg, skipCi} = {}) => {
+const bump = ({pkg, code}) => {
+  const cwd = getCwd({pkg})
+  return exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
+}
+
+const commit = async ({pkg, skipCi}) => {
   const isMonoPackage = checkIsMonoPackage()
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
-  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+  const cwd = getCwd({pkg})
 
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
 
@@ -94,10 +98,8 @@ const commit = async ({pkg, skipCi} = {}) => {
   await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
 }
 
-const publish = async ({pkg} = {}) => {
-  const isMonoPackage = checkIsMonoPackage()
-
-  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+const publish = async ({pkg}) => {
+  const cwd = getCwd({pkg})
   const {private: isPrivatePackage, config: localPackageConfig} = getPackageJson(cwd, true)
 
   if (!isPrivatePackage) {
@@ -164,13 +166,13 @@ checkShouldRelease()
 
       const packagesToRelease = releasesByPackages({status}).filter(({code}) => code !== 0)
 
-      await Promise.all(packagesToRelease.map(pkg => bump({...pkg, skipCi})))
+      await Promise.all(packagesToRelease.map(pkg => bump(pkg)))
 
       for (const pkg of packagesToRelease) {
         await commit({...pkg, skipCi})
       }
 
-      await Promise.all(packagesToRelease.map(pkg => publish({...pkg, skipCi})))
+      await Promise.all(packagesToRelease.map(pkg => publish(pkg)))
 
       if (packagesToRelease.length > 0) {
         if (lock) {
