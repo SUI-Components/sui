@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.21.0 (2023-12-19)
+
+
+### Features
+
+* **packages/sui-polyfills:** add polyfill for string is|to wellFormed ([705404e](https://github.com/SUI-Components/sui/commit/705404ea5332157227ecfb924562d525e5956d80))
+
+
+
 # 1.20.0 (2023-11-29)
 
 
