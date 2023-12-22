@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.46.0 (2023-12-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Allow statics folder for Statics in Dev ([c3af51b](https://github.com/SUI-Components/sui/commit/c3af51bb454e757a224c47f95f1ab32aed079f88))
+
+
+
 # 9.45.0 (2023-12-13)
 
 
