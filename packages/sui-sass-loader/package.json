@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "css-loader": "6.7.1",
-    "mini-css-extract-plugin": "2.6.1",
+    "mini-css-extract-plugin": "2.7.6",
     "sass": "1.54.5",
     "sass-loader": "12",
     "webpack": "5.82.1"
