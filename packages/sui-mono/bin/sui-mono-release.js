@@ -69,21 +69,18 @@ const getCwd = ({pkg}) => {
   return isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
 }
 
-const bump = ({pkg, code}) => {
-  const cwd = getCwd({pkg})
-  return exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
-}
-
-const commit = async ({pkg, skipCi}) => {
+const commit = async ({pkg, code, skipCi}) => {
   const isMonoPackage = checkIsMonoPackage()
-  const tagPrefix = isMonoPackage ? '' : `${pkg}-`
+  const cwd = getCwd({pkg})
+
+  const {version, name} = getPackageJson(cwd, true)
+
+  const tagPrefix = isMonoPackage ? '' : `${name}@`
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
-  const cwd = getCwd({pkg})
+  await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
 
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
-
-  const {version} = getPackageJson(cwd, true)
 
   // Add [skip ci] to the commit message to avoid CI build
   // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
@@ -91,8 +88,10 @@ const commit = async ({pkg, skipCi}) => {
   const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
   await exec(`git commit -m "${commitMsg}"`, {cwd})
 
-  await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
+  await exec(`${suiMonoBinPath} changelog ${cwd}`)
+
   await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
+
   await exec(`git commit --amend --no-verify --no-edit`, {cwd})
 
   await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
@@ -165,8 +164,6 @@ checkShouldRelease()
       }
 
       const packagesToRelease = releasesByPackages({status}).filter(({code}) => code !== 0)
-
-      await Promise.all(packagesToRelease.map(pkg => bump(pkg)))
 
       for (const pkg of packagesToRelease) {
         await commit({...pkg, skipCi})
