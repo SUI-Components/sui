@@ -62,7 +62,7 @@ function generateChangelog(folder) {
     const content = fs.readFileSync(outputFile, 'utf8')
     const output = fs.createWriteStream(outputFile)
 
-    const name = getWorkspaces().find(path => folder.includes(path))
+    const name = getWorkspaces().find(path => folder.endsWith(path))
     const promise = name ? fetchTags(name) : Promise.resolve()
 
     let chunkCount = 0
