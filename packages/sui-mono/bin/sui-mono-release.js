@@ -73,9 +73,9 @@ const commit = async ({pkg, code, skipCi}) => {
   const isMonoPackage = checkIsMonoPackage()
   const cwd = getCwd({pkg})
 
-  const {version, name} = getPackageJson(cwd, true)
+  const {version} = getPackageJson(cwd, true)
 
-  const tagPrefix = isMonoPackage ? '' : `${name}@`
+  const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
 
   await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
