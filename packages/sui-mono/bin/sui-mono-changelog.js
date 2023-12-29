@@ -59,7 +59,7 @@ function generateChangelog(folder) {
     const gitRawCommitsOpts = {path: folder}
     const outputFile = path.join(folder, CHANGELOG_NAME)
     const title = '# CHANGELOG'
-    const content = fs.readFileSync(outputFile, 'utf8')
+    const content = fs.existsSync(outputFile) ? fs.readFileSync(outputFile, 'utf8') : ''
     const output = fs.createWriteStream(outputFile)
 
     const name = getWorkspaces().find(path => folder.endsWith(path))
@@ -74,7 +74,7 @@ function generateChangelog(folder) {
           output.write(chunk)
         })
         .on('end', () => {
-          output.write(chunkCount > 0 ? content.replace(title, '').trim() : content)
+          output.write(chunkCount > 0 && content ? content.replace(title, '').trim() : content)
           output.end(() => resolve(outputFile))
         })
         .on('error', error => {
