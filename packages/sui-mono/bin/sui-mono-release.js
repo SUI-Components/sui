@@ -166,8 +166,6 @@ checkShouldRelease()
         await commit({...pkg, skipCi})
       }
 
-      await Promise.all(packagesToRelease.map(pkg => publish(pkg)))
-
       if (packagesToRelease.length > 0) {
         if (lock) {
           await exec(
@@ -177,8 +175,10 @@ checkShouldRelease()
           await exec('git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify')
         }
 
-        await exec('git push -f --tags origin HEAD --no-verify')
+        await exec('git push --force-with-lease --tags origin HEAD --no-verify')
       }
+
+      await Promise.all(packagesToRelease.map(pkg => publish(pkg)))
 
       console.log(`[sui-mono release] ${packagesToRelease.length} packages released`)
     })
