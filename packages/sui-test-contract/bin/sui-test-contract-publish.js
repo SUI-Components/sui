@@ -18,11 +18,11 @@ program
 const {brokerUrl} = program.opts()
 if (!brokerUrl) throw new Error('You need to specify the broker URL where the contracts will be published.')
 const contractsDir = path.resolve(process.cwd(), 'contract/documents')
-const {GITHUB_REF, GITHUB_SHA, TRAVIS_PULL_REQUEST_BRANCH, TRAVIS_BRANCH, TRAVIS_COMMIT, TRAVIS_PULL_REQUEST_SHA} =
+const {GHA_REF, GITHUB_REF, GITHUB_SHA, TRAVIS_PULL_REQUEST_BRANCH, TRAVIS_BRANCH, TRAVIS_COMMIT, TRAVIS_PULL_REQUEST_SHA} =
   process.env
 
-const branch = TRAVIS_PULL_REQUEST_BRANCH || TRAVIS_BRANCH || GITHUB_REF || exec('git rev-parse --abbrev-ref HEAD')
-const consumerVersion = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT || GITHUB_SHA
+const branch = TRAVIS_PULL_REQUEST_BRANCH || TRAVIS_BRANCH || GHA_REF || GITHUB_REF || exec('git rev-parse --abbrev-ref HEAD')
+const consumerVersion = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT || GHA_SHA || GITHUB_SHA
 
 const options = {
   pactFilesOrDirs: [contractsDir],
