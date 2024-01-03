@@ -8,7 +8,7 @@ if (esmOverride) {
 }
 
 const libDir = /lib/
-const paths = [/@babel\/runtime/, /@s-ui/, /mocks/, /src/, /test/, libDir, ...regexToAdd]
+const paths = [/@babel\/runtime/, /@s-ui/, /@adv-ui/, /mocks/, /src/, /test/, libDir, ...regexToAdd]
 
 require('@babel/register')({
   ignore: [],
