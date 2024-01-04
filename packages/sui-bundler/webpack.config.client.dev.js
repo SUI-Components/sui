@@ -7,14 +7,14 @@ const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared/index.js')
-const definePlugin = require('./shared/define.js')
-const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
-const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
-const {supportLegacyBrowsers} = require('./shared/config.js')
+const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('@s-ui/bundler/shared/index.js')
+const definePlugin = require('@s-ui/bundler/shared/define.js')
+const manifestLoaderRules = require('@s-ui/bundler/shared/module-rules-manifest-loader.js')
+const {aliasFromConfig, defaultAlias} = require('@s-ui/bundler/shared/resolve-alias.js')
+const {supportLegacyBrowsers} = require('@s-ui/bundler/shared/config.js')
 
-const {resolveLoader} = require('./shared/resolve-loader.js')
-const createBabelRules = require('./shared/module-rules-babel.js')
+const {resolveLoader} = require('@s-ui/bundler/shared/resolve-loader.js')
+const createBabelRules = require('@s-ui/bundler/shared/module-rules-babel.js')
 
 const outputPath = path.join(process.cwd(), '.sui/public')
 
@@ -25,6 +25,7 @@ process.env.NODE_ENV = 'development'
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
 const webpackConfig = {
+  name: 'client',
   mode: 'development',
   context: path.resolve(PWD, 'src'),
   resolve: {
@@ -48,6 +49,11 @@ const webpackConfig = {
   stats: 'errors-only',
   entry: {
     app: [`webpack-hot-middleware/client?path=${CDN}__webpack_hmr`, MAIN_ENTRY_POINT]
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    compression: 'gzip'
   },
   target: 'web',
   optimization: {

@@ -35,6 +35,7 @@ const target = supportLegacyBrowsers ? ['web', 'es5'] : 'web'
 /** @type {WebpackConfig} */
 const webpackConfig = {
   devtool: sourceMap,
+  name: 'client',
   mode: 'production',
   target,
   context: path.resolve(CWD, 'src'),
@@ -65,6 +66,11 @@ const webpackConfig = {
     minimize: true,
     minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(Boolean),
     runtimeChunk: true
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    compression: false
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({

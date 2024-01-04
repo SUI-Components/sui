@@ -23,6 +23,7 @@ process.env.NODE_ENV = 'development'
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
 const webpackConfig = {
+  name: 'client-local',
   mode: 'development',
   context: path.resolve(PWD, 'src'),
   resolve: {
@@ -50,6 +51,11 @@ const webpackConfig = {
   devServer: {
     static: outputPath,
     hot: true
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    compression: 'gzip'
   },
   target: 'web',
   optimization: {

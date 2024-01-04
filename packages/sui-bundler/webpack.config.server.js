@@ -12,10 +12,13 @@ const filename = '[name].[chunkhash:8].js'
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 /** @type {WebpackConfig} */
 const webpackConfig = {
+  name: 'server',
   context: path.resolve(process.cwd(), 'src'),
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  mode: isProduction ? 'production' : 'development',
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json'],
@@ -33,6 +36,11 @@ const webpackConfig = {
     checkWasmTypes: false,
     minimize: true,
     nodeEnv: false
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    compression: !isProduction ? 'gzip' : false
   },
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
