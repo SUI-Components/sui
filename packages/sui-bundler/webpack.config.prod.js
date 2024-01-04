@@ -11,7 +11,7 @@ const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
-const {extractComments, sourceMap, supportLegacyBrowsers} = require('./shared/config.js')
+const {extractComments, sourceMap, supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
 const sassRules = require('./shared/module-rules-sass.js')
@@ -69,7 +69,7 @@ const webpackConfig = {
   },
   cache: {
     type: 'filesystem',
-    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    cacheDirectory,
     compression: false
   },
   plugins: cleanList([

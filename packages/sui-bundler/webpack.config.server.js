@@ -3,6 +3,7 @@ const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 const {config, when, cleanList} = require('./shared/index.js')
+const {cacheDirectory} = require('./shared/config.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
@@ -39,7 +40,7 @@ const webpackConfig = {
   },
   cache: {
     type: 'filesystem',
-    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    cacheDirectory,
     compression: !isProduction ? 'gzip' : false
   },
   externals: [webpackNodeExternals()],

@@ -11,7 +11,7 @@ const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared/i
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
-const {supportLegacyBrowsers} = require('./shared/config.js')
+const {supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
@@ -52,7 +52,7 @@ const webpackConfig = {
   },
   cache: {
     type: 'filesystem',
-    cacheDirectory: path.resolve(process.cwd(), '.sui/cache'),
+    cacheDirectory,
     compression: 'gzip'
   },
   target: 'web',
