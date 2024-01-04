@@ -11,7 +11,7 @@ const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared/i
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
-const {supportLegacyBrowsers} = require('./shared/config.js')
+const {supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
@@ -25,6 +25,7 @@ process.env.NODE_ENV = 'development'
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
 const webpackConfig = {
+  name: 'client',
   mode: 'development',
   context: path.resolve(PWD, 'src'),
   resolve: {
@@ -48,6 +49,11 @@ const webpackConfig = {
   stats: 'errors-only',
   entry: {
     app: [`webpack-hot-middleware/client?path=${CDN}__webpack_hmr`, MAIN_ENTRY_POINT]
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory,
+    compression: 'brotli'
   },
   target: 'web',
   optimization: {
