@@ -14,7 +14,7 @@ const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const nodemon = require('nodemon')
-const clientConfig = require('@s-ui/bundler/webpack.config.server.dev.js')
+const clientConfig = require('@s-ui/bundler/webpack.config.client.dev.js')
 const linkLoaderConfigBuilder = require('@s-ui/bundler/loaders/linkLoaderConfigBuilder.js')
 
 const serverConfigFactory = require('../compiler/server.js')
@@ -76,7 +76,7 @@ const start = ({packagesToLink, linkAll}) => {
   const app = express()
   const clientCompiler = webpack(
     linkLoaderConfigBuilder({
-      config: require('@s-ui/bundler/webpack.config.server.dev.js'),
+      config: clientConfig,
       linkAll,
       packagesToLink
     })
@@ -135,6 +135,7 @@ const start = ({packagesToLink, linkAll}) => {
       const script = nodemon({
         script: `${SERVER_OUTPUT_PATH}/index.js`,
         watch: [SERVER_OUTPUT_PATH],
+        nodeArgs: '--inspect',
         delay: 200
       })
 
