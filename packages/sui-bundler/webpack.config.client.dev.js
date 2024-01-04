@@ -53,7 +53,7 @@ const webpackConfig = {
   cache: {
     type: 'filesystem',
     cacheDirectory,
-    compression: 'gzip'
+    compression: 'brotli'
   },
   target: 'web',
   optimization: {

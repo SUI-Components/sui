@@ -41,7 +41,7 @@ const webpackConfig = {
   cache: {
     type: 'filesystem',
     cacheDirectory,
-    compression: !isProduction ? 'gzip' : false
+    compression: !isProduction ? 'brotli' : false
   },
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
