@@ -1,15 +1,10 @@
 const webpack = require('webpack')
 const formatWebpackMessages = require('../utils/formatWebpackMessages.js')
+const {printInstructions} = require('../utils/WebpackDevServerUtils.js')
 const clearConsole = require('../utils/clearConsole.js')
 const log = require('../shared/log.js')
 
 const isInteractive = process.stdout.isTTY
-
-const printInstructions = ({urls}) =>
-  log.info(`
-  Local:    ${urls.localUrlForTerminal}
-  Network:  ${urls.lanUrlForTerminal}
-`)
 
 module.exports = (config, urls) => {
   let compiler
