@@ -16,10 +16,9 @@ const url = require('url')
 const {findFreePorts, isFreePort} = require('find-free-ports')
 
 const clearConsole = require('./clearConsole.js')
-const formatWebpackMessages = require('./formatWebpackMessages.js')
 const getProcessForPort = require('./getProcessForPort.js')
 
-const {bold, cyan, green, yellow, red} = require('@s-ui/helpers/colors')
+const {bold, cyan, green, red} = require('@s-ui/helpers/colors')
 
 const isInteractive = process.stdout.isTTY
 
@@ -76,9 +75,8 @@ function prepareUrls(protocol, host, port, pathname = '/') {
   }
 }
 
-function printInstructions(appName, urls, useYarn) {
-  console.log()
-  console.log(`You can now view ${bold(appName)} in the browser.`)
+function printInstructions({urls}) {
+  console.log(`You can now view the app in the browser.`)
   console.log()
 
   if (urls.lanUrlForTerminal) {
@@ -90,88 +88,8 @@ function printInstructions(appName, urls, useYarn) {
 
   console.log()
   console.log('Note that the development build is not optimized.')
-  console.log(`To create a production build, use ` + `${cyan(`${useYarn ? 'yarn' : 'npm run'} build`)}.`)
+  console.log('To create a production build, use npm run build')
   console.log()
-}
-
-function createCompiler({appName, config, urls, useYarn, useTypeScript, webpack}) {
-  // "Compiler" is a low-level interface to webpack.
-  // It lets us listen to some events and provide our own custom messages.
-  let compiler
-  try {
-    compiler = webpack(config)
-  } catch (err) {
-    console.log(red('Failed to compile.'))
-    console.log()
-    console.log(err.message || err)
-    console.log()
-    process.exit(1)
-  }
-
-  // "invalid" event fires when you have changed a file, and webpack is
-  // recompiling a bundle. WebpackDevServer takes care to pause serving the
-  // bundle, so if you refresh, it'll wait instead of serving the old one.
-  // "invalid" is short for "bundle invalidated", it doesn't imply any errors.
-  compiler.hooks.invalid.tap('invalid', () => {
-    if (isInteractive) {
-      clearConsole()
-    }
-    console.log('Compiling...')
-  })
-
-  let isFirstCompile = true
-
-  // "done" event fires when webpack has finished recompiling the bundle.
-  // Whether or not you have warnings or errors, you will get this event.
-  compiler.hooks.done.tap('done', async stats => {
-    if (isInteractive) clearConsole()
-
-    // We have switched off the default webpack output in WebpackDevServer
-    // options so we are going to "massage" the warnings and errors and present
-    // them in a readable focused way.
-    // We only construct the warnings and errors for speed:
-    // https://github.com/facebook/create-react-app/issues/4492#issuecomment-421959548
-    const statsData = stats.toJson({
-      all: false,
-      warnings: true,
-      errors: true
-    })
-
-    const messages = formatWebpackMessages(statsData)
-    const isSuccessful = !messages.errors.length && !messages.warnings.length
-    if (isSuccessful) {
-      console.log(green('Compiled successfully!'))
-    }
-
-    if (isSuccessful && (isInteractive || isFirstCompile)) {
-      printInstructions(appName, urls, useYarn)
-    }
-
-    isFirstCompile = false
-
-    // If errors exist, only show errors.
-    if (messages.errors.length) {
-      // Only keep the first error. Others are often indicative
-      // of the same problem, but confuse the reader with noise.
-      if (messages.errors.length > 1) {
-        messages.errors.length = 1
-      }
-      console.log(red('Failed to compile.\n'))
-      console.log(messages.errors.join('\n\n'))
-      return
-    }
-
-    // Show warnings if no errors were found.
-    if (messages.warnings.length) {
-      console.log(yellow('Compiled with warnings.\n'))
-      console.log(messages.warnings.join('\n\n'))
-
-      // Teach some ESLint tricks.
-      console.log(`\nSearch for the ${yellow('keywords')} to learn more about each warning.`)
-    }
-  })
-
-  return compiler
 }
 
 // We need to provide a custom onError function for httpProxyMiddleware.
@@ -287,7 +205,7 @@ async function choosePort(defaultPort) {
 
 module.exports = {
   choosePort,
-  createCompiler,
+  printInstructions,
   prepareProxy,
   prepareUrls
 }

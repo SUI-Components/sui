@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-const {WEBPACK_PORT = 8080} = process.env
-process.env.CDN = `http://localhost:${WEBPACK_PORT}/`
-process.env.DEV_SERVER = 'true'
-
 const program = require('commander')
 const {exec} = require('child_process')
 const path = require('path')
@@ -14,8 +10,11 @@ const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const nodemon = require('nodemon')
-const clientConfig = require('@s-ui/bundler/webpack.config.client.dev.js')
+const {performance} = require('perf_hooks')
 const linkLoaderConfigBuilder = require('@s-ui/bundler/loaders/linkLoaderConfigBuilder.js')
+const clearConsole = require('@s-ui/bundler/utils/clearConsole.js')
+const {choosePort, prepareUrls, printInstructions} = require('@s-ui/bundler/utils/WebpackDevServerUtils.js')
+const log = require('@s-ui/bundler/shared/log.js')
 
 const serverConfigFactory = require('../compiler/server.js')
 
@@ -39,11 +38,7 @@ program
 
 const compile = (name, compiler) => {
   return new Promise((resolve, reject) => {
-    compiler.hooks.compile.tap(name, () => {
-      console.time(`[${name}] Compiling`)
-    })
     compiler.hooks.done.tap(name, stats => {
-      console.timeEnd(`[${name}] Compiling`)
       if (!stats.hasErrors()) {
         return resolve()
       }
@@ -72,8 +67,22 @@ const initMSW = () => {
   return exec(`npx msw init ${STATICS_PATH}`)
 }
 
-const start = ({packagesToLink, linkAll}) => {
-  const app = express()
+const start = async ({packagesToLink, linkAll}) => {
+  clearConsole()
+
+  const start = performance.now()
+  const {WEBPACK_PORT = 8080, PORT = 3000, HOST = '0.0.0.0'} = process.env
+  const port = await choosePort(PORT)
+  const webpackPort = await choosePort(WEBPACK_PORT)
+  const urls = prepareUrls('http', HOST, port)
+  const cdn = `http://localhost:${webpackPort}/`
+
+  process.env.PORT = port
+  process.env.CDN = cdn
+  process.env.DEV_SERVER = 'true'
+
+  const clientConfig = require('@s-ui/bundler/webpack.config.client.dev.js')
+
   const clientCompiler = webpack(
     linkLoaderConfigBuilder({
       config: clientConfig,
@@ -81,6 +90,7 @@ const start = ({packagesToLink, linkAll}) => {
       packagesToLink
     })
   )
+
   const serverCompiler = webpack(
     linkLoaderConfigBuilder({
       config: serverConfigFactory({outputPath: SERVER_OUTPUT_PATH}),
@@ -88,10 +98,10 @@ const start = ({packagesToLink, linkAll}) => {
       packagesToLink
     })
   )
-  const watchOptions = {
-    ignored: /node_modules/,
-    stats: clientConfig.stats
-  }
+
+  log.processing('❯ Starting the development server...\n')
+
+  const app = express()
 
   app.use((_req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -107,24 +117,30 @@ const start = ({packagesToLink, linkAll}) => {
   )
   app.use(webpackHotMiddleware(clientCompiler))
 
-  app.listen(WEBPACK_PORT)
+  app.listen(webpackPort)
 
-  serverCompiler.watch(watchOptions, (error, stats) => {
-    if (!error && !stats.hasErrors()) {
-      return
+  serverCompiler.watch(
+    {
+      ignored: /node_modules/,
+      stats: clientConfig.stats
+    },
+    (error, stats) => {
+      if (!error && !stats.hasErrors()) {
+        return
+      }
+
+      if (error) {
+        console.error(error)
+      }
+
+      if (stats.hasErrors()) {
+        const info = stats.toJson()
+        const errors = info.errors
+
+        console.log(errors)
+      }
     }
-
-    if (error) {
-      console.log(error, 'error')
-    }
-
-    if (stats.hasErrors()) {
-      const info = stats.toJson()
-      const errors = info.errors
-
-      console.log(errors)
-    }
-  })
+  )
 
   if (!fs.existsSync(TMP_PATH)) {
     fs.mkdirSync(TMP_PATH)
@@ -134,27 +150,40 @@ const start = ({packagesToLink, linkAll}) => {
     .then(() => {
       const script = nodemon({
         script: `${SERVER_OUTPUT_PATH}/index.js`,
+        args: [HOST],
         watch: [SERVER_OUTPUT_PATH],
         nodeArgs: '--inspect',
         delay: 200
       })
+      let isFirstStart = true
 
-      script.on('restart', () => {
-        console.log('Server side app has been restarted.', 'warning')
+      script.on('start', () => {
+        if (!isFirstStart) {
+          return
+        }
+
+        isFirstStart = false
+
+        const end = performance.now()
+
+        const time = end - start
+        const msg = time > 2000 ? `${Math.round(time / 100) / 10}s` : `${time}ms`
+
+        clearConsole()
+        log.success(`✓ Compiled successfully in ${msg}\n`)
+        printInstructions({urls})
       })
 
       script.on('quit', () => {
-        console.log('Process ended')
         process.exit()
       })
 
       script.on('error', () => {
-        console.log('An error occured. Exiting', 'error')
         process.exit(1)
       })
     })
     .catch(error => {
-      console.log('error', error)
+      console.error(error)
     })
 }
 const opts = program.opts()
