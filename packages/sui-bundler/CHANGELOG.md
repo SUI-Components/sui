@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.48.0 (2024-01-05)
+
+
+### Features
+
+* **packages/sui-bundler:** update utils and remove not needed ones ([9d856b6](https://github.com/SUI-Components/sui/commit/9d856b66581e25258f4b6e8fd3b566530c30a225))
+
+
+
 # 9.47.0 (2024-01-04)
 
 
