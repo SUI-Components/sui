@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.4.0 (2023-12-19)
+
+
+### Features
+
+* **packages/sui-mockmock:** upgrade Axios to 1.6.2 in sui-mockmock ([3a2678f](https://github.com/SUI-Components/sui/commit/3a2678fd37945653699c46bdef8732c4fdce9274))
+
+
+
 # 2.3.0 (2022-10-03)
 
 

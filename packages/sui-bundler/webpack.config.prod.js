@@ -11,7 +11,7 @@ const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
-const {extractComments, sourceMap, supportLegacyBrowsers} = require('./shared/config.js')
+const {extractComments, sourceMap, supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
@@ -35,6 +35,7 @@ const target = supportLegacyBrowsers ? ['web', 'es5'] : 'web'
 /** @type {WebpackConfig} */
 const webpackConfig = {
   devtool: sourceMap,
+  name: 'client',
   mode: 'production',
   target,
   context: path.resolve(CWD, 'src'),
@@ -65,6 +66,11 @@ const webpackConfig = {
     minimize: true,
     minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(Boolean),
     runtimeChunk: true
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory,
+    compression: false
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({

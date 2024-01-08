@@ -1,5 +1,35 @@
 # CHANGELOG
 
+# 9.48.0 (2024-01-05)
+
+
+### Features
+
+* **packages/sui-bundler:** update utils and remove not needed ones ([9d856b6](https://github.com/SUI-Components/sui/commit/9d856b66581e25258f4b6e8fd3b566530c30a225))
+
+
+
+# 9.47.0 (2024-01-04)
+
+
+### Features
+
+* **packages/sui-bundler:** add cacheDir in config ([fd24c71](https://github.com/SUI-Components/sui/commit/fd24c7116a25fd7d39239b964b29b774ace989f6))
+* **packages/sui-bundler:** add webpack cache ([ffc6beb](https://github.com/SUI-Components/sui/commit/ffc6bebb8d383f5492bc8ca21d35f94e26a252cf))
+* **packages/sui-bundler:** update imports ([5a6cae0](https://github.com/SUI-Components/sui/commit/5a6cae09241167a2b4b861056f687d8ff8fb81cc))
+* **packages/sui-bundler:** use brotli compression ([fc596c2](https://github.com/SUI-Components/sui/commit/fc596c267d4c361463336065a9c4e4562c8f0468))
+
+
+
+# 9.46.0 (2023-12-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Allow statics folder for Statics in Dev ([c3af51b](https://github.com/SUI-Components/sui/commit/c3af51bb454e757a224c47f95f1ab32aed079f88))
+
+
+
 # 9.45.0 (2023-12-13)
 
 

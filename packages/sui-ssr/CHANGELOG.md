@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 8.24.0 (2024-01-05)
+
+
+### Features
+
+* **packages/sui-ssr:** provide better console feedback ([eb2f329](https://github.com/SUI-Components/sui/commit/eb2f329bb65abbb61cf1b691be2d7c0398f21f96))
+
+
+
+# 8.23.0 (2024-01-04)
+
+
+### Features
+
+* **packages/sui-ssr:** update sui bundler client config and add inspect for nodemon ([6b5e59f](https://github.com/SUI-Components/sui/commit/6b5e59fadfa0d21d9b4ecc900e1501d3f0e3bd46))
+
+
+
 # 8.22.0 (2023-12-14)
 
 

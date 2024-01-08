@@ -30,10 +30,16 @@ module.exports = config => ({
     'Access-Control-Allow-Methods': '*',
     'Access-Control-Allow-Headers': '*'
   },
-  static: {
-    directory: 'public',
-    watch: getWatchOptions(config)
-  },
+  static: [
+    {
+      directory: 'statics',
+      watch: getWatchOptions(config)
+    },
+    {
+      directory: 'public',
+      watch: getWatchOptions(config)
+    }
+  ],
   hot: true,
   host,
   historyApiFallback: {

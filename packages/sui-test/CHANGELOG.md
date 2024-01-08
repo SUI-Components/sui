@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.29.0 (2024-01-03)
+
+
+### Features
+
+* **packages/sui-test:** add adv-ui package to mocha ([bb139d6](https://github.com/SUI-Components/sui/commit/bb139d6a21362ba49bca4dc08eefd582b2ea91cc))
+
+
+
 # 8.28.0 (2023-12-13)
 
 
