@@ -175,7 +175,7 @@ checkShouldRelease()
           await exec('git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify')
         }
 
-        await exec('git push --force-with-lease --tags origin HEAD --no-verify')
+        await exec('git push --atomic --tags origin HEAD --no-verify')
       }
 
       await Promise.all(packagesToRelease.map(pkg => publish(pkg)))
