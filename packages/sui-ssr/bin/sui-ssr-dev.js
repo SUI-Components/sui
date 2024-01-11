@@ -81,7 +81,14 @@ const start = async ({packagesToLink, linkAll}) => {
   process.env.CDN = cdn
   process.env.DEV_SERVER = 'true'
 
+  const configVars = JSON.stringify({packagesToLink, linkAll})
   const clientConfig = require('@s-ui/bundler/webpack.config.client.dev.js')
+  const serverConfig = serverConfigFactory({outputPath: SERVER_OUTPUT_PATH})
+
+  const version = `${__dirname}|${configVars}`
+
+  clientConfig.cache.version = version
+  serverConfig.cache.version = version
 
   const clientCompiler = webpack(
     linkLoaderConfigBuilder({
@@ -93,7 +100,7 @@ const start = async ({packagesToLink, linkAll}) => {
 
   const serverCompiler = webpack(
     linkLoaderConfigBuilder({
-      config: serverConfigFactory({outputPath: SERVER_OUTPUT_PATH}),
+      config: serverConfig,
       linkAll,
       packagesToLink
     })
@@ -170,7 +177,7 @@ const start = async ({packagesToLink, linkAll}) => {
         const msg = time > 2000 ? `${Math.round(time / 100) / 10}s` : `${time}ms`
 
         clearConsole()
-        log.success(`✓ Compiled successfully in ${msg}\n`)
+        log.success(`✓ Started successfully in ${msg}\n`)
         printInstructions({urls})
       })
 
