@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.50.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-bundler:** add webpack cache version to fix linking issue ([1d21c96](https://github.com/SUI-Components/sui/commit/1d21c96a2863616d04524140e09f8e87a8642134))
+
+
+
 # 9.49.0 (2024-01-11)
 
 
