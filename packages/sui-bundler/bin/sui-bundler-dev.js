@@ -75,7 +75,10 @@ const start = async ({config = webpackConfig, packagesToLink = program.opts().li
     linkAll,
     packagesToLink
   })
-  nextConfig.cache.version = version
+
+  if (nextConfig.cache) {
+    nextConfig.cache.version = version
+  }
 
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
