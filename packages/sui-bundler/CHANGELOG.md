@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.49.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-bundler:** use gzip compression ([4e1579f](https://github.com/SUI-Components/sui/commit/4e1579f70a57e5660a03bee27e2b86edbeb4ce7d))
+
+
+
 # 9.48.0 (2024-01-05)
 
 
