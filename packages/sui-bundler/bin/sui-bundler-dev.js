@@ -65,11 +65,17 @@ const start = async ({config = webpackConfig, packagesToLink = program.opts().li
   const protocol = HTTPS === 'true' ? 'https' : 'http'
   const port = await choosePort(DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
+
+  const {linkAll} = program.opts()
+
+  const configVars = JSON.stringify({packagesToLink, linkAll})
+  const version = `${__dirname}|${configVars}`
   const nextConfig = linkLoaderConfigBuilder({
     config,
-    linkAll: program.opts().linkAll,
+    linkAll,
     packagesToLink
   })
+  nextConfig.cache.version = version
 
   const compiler = createCompiler(nextConfig, urls)
   const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
