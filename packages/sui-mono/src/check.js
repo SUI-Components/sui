@@ -20,7 +20,7 @@ const DEPS_UPGRADE_COMMIT_TYPE = 'upgrade'
 const DEPS_UPGRADE_COMMIT_TYPE_TO_PUSH = 'feat'
 const DEPS_UPGRADE_PACKAGES = ['deps', 'deps-dev']
 const DEPS_UPGRADE_BRANCH_PREFIX = 'dependabot/npm_and_yarn/'
-const SCOPE_REGEX = /packages\/[a-z]+-[a-z]+/
+const SCOPE_REGEX = /packages\/(([a-z]+)-?)+/ // matches "packages/sui-any-package-name"
 
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
