@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.51.0 (2024-01-12)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** avoid setting key when there is no cache ([aa9e03d](https://github.com/SUI-Components/sui/commit/aa9e03d1f585db6333fa1c2aed9056bf12fa74bd))
+
+
+
 # 9.50.0 (2024-01-11)
 
 
