@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.27.0 (2024-01-15)
+
+
+### Bug Fixes
+
+* **packages/sui-js-compiler:** restore @swc/chore previous version ([1fccbea](https://github.com/SUI-Components/sui/commit/1fccbea18cfac133593bb122236846cc88038bb6))
+
+
+
 # 1.26.0 (2024-01-15)
 
 
