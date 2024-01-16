@@ -46,8 +46,9 @@ jobs:
           xvfb-run --auto-servernum npm run test:client:ci
 
       - name: Release
+        if: github.ref != 'refs/heads/master'
         run: |
-          npx -p ./packages/sui-mono sui-mono check
+          node ./packages/sui-mono/bin/sui-mono-check.js
           npx -p ./packages/sui-ci sui-ci release
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
