@@ -52,12 +52,13 @@ const showReport = status => {
       console.log(` ${pkgName} ─ new ${versionString} version: `)
 
       status[pkg].commits.forEach(commit => {
-        const messagePrefix = checker.isCommitBreakingChange(commit) ? `› ${colors.red('BREAKING CHANGE')} -` : '›'
+        const messagePrefix = checker.isCommitBreakingChange(commit) ? `> ${colors.red('BREAKING CHANGE')} -` : '>'
 
         console.log(`  ${messagePrefix} ${commit.header}\n`)
       })
     }
   }
+
   if (!headerShown) showReportHeaderNegative()
 }
 
