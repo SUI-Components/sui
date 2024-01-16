@@ -7,9 +7,9 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  checks-and-release:
+    name: Checks & Release
     runs-on: ubuntu-latest
-
     steps:
       - name: Cancel Previous Redundant Builds
         uses: styfle/cancel-workflow-action@0.6.0
@@ -46,9 +46,9 @@ jobs:
           xvfb-run --auto-servernum npm run test:client:ci
 
       - name: Release
-        if: github.ref != 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: |
-          node ./packages/sui-mono/bin/sui-mono-check.js
+          npx -p ./packages/sui-mono sui-mono check
           npx -p ./packages/sui-ci sui-ci release
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
