@@ -7,7 +7,8 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  checks-and-release:
+    name: Checks & Release
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Redundant Builds
@@ -48,7 +49,10 @@ jobs:
           xvfb-run --auto-servernum npm run test:client:ci
 
       - name: Release Packages
-        run: npx -p ./packages/sui-ci sui-ci release
+        if: github.ref == 'refs/heads/master'
+        run: |
+          npx -p ./packages/sui-mono sui-mono check
+          npx -p ./packages/sui-ci sui-ci release
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

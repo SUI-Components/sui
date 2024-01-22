@@ -1,5 +1,40 @@
 # CHANGELOG
 
+# 9.53.0 (2024-01-17)
+
+
+
+# 9.52.0 (2024-01-16)
+
+
+
+# 9.51.0 (2024-01-12)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** avoid setting key when there is no cache ([aa9e03d](https://github.com/SUI-Components/sui/commit/aa9e03d1f585db6333fa1c2aed9056bf12fa74bd))
+
+
+
+# 9.50.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-bundler:** add webpack cache version to fix linking issue ([1d21c96](https://github.com/SUI-Components/sui/commit/1d21c96a2863616d04524140e09f8e87a8642134))
+
+
+
+# 9.49.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-bundler:** use gzip compression ([4e1579f](https://github.com/SUI-Components/sui/commit/4e1579f70a57e5660a03bee27e2b86edbeb4ce7d))
+
+
+
 # 9.48.0 (2024-01-05)
 
 

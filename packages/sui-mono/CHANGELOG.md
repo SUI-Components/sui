@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.44.0 (2024-01-16)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** support multiple releases per commit ([cd7abbb](https://github.com/SUI-Components/sui/commit/cd7abbbe0bd21f4eca15feac8f2eb2ce828cae6b))
+
+
+
+# 2.43.0 (2024-01-12)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** fix package name regex ([e8e935f](https://github.com/SUI-Components/sui/commit/e8e935fb1c7d2d0fd571c8425f74530ccf34723b))
+
+
+
 # 2.42.0 (2023-12-05)
 
 

@@ -20,7 +20,7 @@ const DEPS_UPGRADE_COMMIT_TYPE = 'upgrade'
 const DEPS_UPGRADE_COMMIT_TYPE_TO_PUSH = 'feat'
 const DEPS_UPGRADE_PACKAGES = ['deps', 'deps-dev']
 const DEPS_UPGRADE_BRANCH_PREFIX = 'dependabot/npm_and_yarn/'
-const SCOPE_REGEX = /packages\/[a-z]+-[a-z]+/
+const SCOPE_REGEX = /packages\/(([a-z]+)-?)+/ // matches "packages/sui-any-package-name"
 
 const isCommitBreakingChange = commit => {
   const {body, footer} = commit
@@ -62,7 +62,7 @@ const getTransform =
   async (commit, cb) => {
     const {scope, header, type, subject} = commit
     const [pkgToOverride] = getOverride({overrides, header}) ?? []
-    let pkg = pkgToOverride ?? getPkgFromScope(scope)
+    const pkg = pkgToOverride ?? getPkgFromScope(scope)
     const isDepsUpgrade = type === DEPS_UPGRADE_COMMIT_TYPE && DEPS_UPGRADE_PACKAGES.includes(pkg)
 
     let toPush = null
@@ -81,20 +81,24 @@ const getTransform =
         `git --no-pager diff --name-only ${upgradeHash} $(git merge-base ${parentHash} master)`
       )
       const changedFiles = rawChangedFiles.split('\n').filter(Boolean)
-      const pkgToUpdate = changedFiles.find(file => file.match(SCOPE_REGEX))?.match(SCOPE_REGEX)[0]
+      const pkgsToUpdate = changedFiles.filter(file => file.match(SCOPE_REGEX)).map(file => file.match(SCOPE_REGEX)[0])
 
-      pkg = pkgToUpdate
+      if (!pkgsToUpdate?.length) return cb()
 
-      if (!pkgToUpdate) return cb()
-
-      status[pkgToUpdate].increment = Math.max(status[pkgToUpdate].increment, PACKAGE_VERSION_INCREMENT.MINOR)
-      toPush = {
-        ...commit,
-        header: `${DEPS_UPGRADE_COMMIT_TYPE_TO_PUSH}(${pkgToUpdate}): ${subject}`
-      }
+      pkgsToUpdate.forEach(pkg => {
+        status[pkg].increment = Math.max(status[pkg].increment, PACKAGE_VERSION_INCREMENT.MINOR)
+        status[pkg].commits = [
+          {
+            ...commit,
+            header: `${DEPS_UPGRADE_COMMIT_TYPE_TO_PUSH}(${pkg}): ${subject}`
+          }
+        ]
+      })
     }
 
-    if (!packages.includes(pkg)) return cb()
+    if (!packages.includes(pkg) && !isDepsUpgrade) {
+      return cb()
+    }
 
     if (pkgToOverride) {
       status[pkgToOverride].increment = Math.max(status[pkgToOverride].increment, PACKAGE_VERSION_INCREMENT.MINOR)

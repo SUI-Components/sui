@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.25.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-ssr:** add webpack cache version to fix linking issue ([d4d499b](https://github.com/SUI-Components/sui/commit/d4d499b36e7bed06d06948cae5c94884419cbdaa))
+
+
+
 # 8.24.0 (2024-01-05)
 
 
