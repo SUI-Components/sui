@@ -20,11 +20,6 @@ describe('@s-ui/js-compiler', () => {
     await fs.remove(tsConfigPath)
   })
 
-  afterEach(async () => {
-    await fs.remove(libPath)
-    await fs.remove(tsConfigPath)
-  })
-
   it('should compile a "src" folder with a JavaScript file and output it to "lib"', async () => {
     const {stdout} = await exec('node ../../index.js', {
       cwd
