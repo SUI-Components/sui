@@ -13,7 +13,7 @@ program
     console.log('  Examples:')
     console.log('')
     console.log(
-      '    $ node ./scripts/publish-tagged-packages.js --tag ongoing-branch --files \'["packages/sui-mono/foo.js", "packages/sui-bundler/bar.js"]\''
+      '    $ node ./scripts/publish-tagged-packages.js --tag ongoing-branch --files ["packages/sui-mono/foo.js", "packages/sui-bundler/bar.js"]'
     )
     console.log('')
   })
@@ -23,4 +23,4 @@ const {tag, files} = program.opts()
 
 console.log({tag, files: JSON.parse(files)})
 
-program.parse()
+program.parse(process.argv)
