@@ -74,4 +74,4 @@ jobs:
 
       - name: Publish Packages
         working-directory: ${{ github.workspace }}
-        run: publish-tagged-packages '${{ steps.files.outputs.added_modified }}'
+        run: node ./scripts/publish-tagged-packages.mjs --tag '${{ github.ref }}' --files '${{ steps.files.outputs.added_modified }}'
