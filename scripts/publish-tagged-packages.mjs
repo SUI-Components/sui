@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-import program from 'commander'
+import {program} from 'commander'
 
 program
   .name('publish-tagged-packages')
