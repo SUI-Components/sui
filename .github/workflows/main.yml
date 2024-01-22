@@ -60,3 +60,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
           GITHUB_USER: sui-bot
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-tagged-packages:
+    name: Publish Tagged Packages to NPM
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+        with:
+          format: 'json'
+
+      - name: Publish Packages
+        working-directory: ${{ github.workspace }}
+        run: publish-tagged-packages '${{ steps.files.outputs.added_modified }}'
