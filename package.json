@@ -35,7 +35,6 @@
     "@s-ui/precommit": "3",
     "@s-ui/react-context": "1",
     "chai": "4.3.6",
-    "commander": "11.1.0",
     "react": "17",
     "sinon": "10.0.0",
     "typescript": "5.0.4",

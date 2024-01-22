@@ -72,6 +72,16 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          node-version-file: '.nvmrc'
+
+      - name: Install
+        run: |
+          npm install -D commander
+
       - name: Get Files
         id: files
         uses: jitterbit/get-changed-files@v1
