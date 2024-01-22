@@ -11,9 +11,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "bin": {
-    "publish-tagged-packages": "./scripts/publish-tagged-packages.mjs"
-  },
   "scripts": {
     "phoenix": "npx @s-ui/mono phoenix && npx -y ultra-runner --raw --recursive prepublishOnly --build &>/dev/null",
     "co": "npx @s-ui/mono commit",
@@ -28,6 +25,7 @@
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx @s-ui/test-e2e --baseUrl=http://localhost:1234",
     "pre-commit": "sui-lint js --staged && sui-lint sass --staged",
     "pre-push": "npm run test && npm run types:check",
+    "publish-tagged-packages": "node ./scripts/publish-tagged-packages.js",
     "commit-msg": "validate-commit-msg",
     "types:check": "tsc"
   },
