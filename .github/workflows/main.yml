@@ -89,4 +89,4 @@ jobs:
           format: 'json'
 
       - name: Publish Packages
-        run: npm run publish-tagged-packages -- --tag ${{ github.event.pull_request.base.ref }} --files ${{ steps.files.outputs.added_modified }}
+        run: npm run publish-tagged-packages -- --tag ${{ github.event.pull_request.head.ref }} --files ${{ steps.files.outputs.added_modified }}

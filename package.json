@@ -25,7 +25,7 @@
     "test:e2e": "node ./packages/sui-studio/test/server/integration/static-server.js ./packages/sui-studio/test/server/integration/sample-studio/public && npx @s-ui/test-e2e --baseUrl=http://localhost:1234",
     "pre-commit": "sui-lint js --staged && sui-lint sass --staged",
     "pre-push": "npm run test && npm run types:check",
-    "publish-tagged-packages": "node ./scripts/publish-tagged-packages.js",
+    "publish-tagged-packages": "node ./scripts/publish-tagged-packages.mjs",
     "commit-msg": "validate-commit-msg",
     "types:check": "tsc"
   },
