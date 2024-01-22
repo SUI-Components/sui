@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-const program = require('commander')
+/* eslint-disable no-console */
+
+import program from 'commander'
 
 program
   .name('publish-tagged-packages')
@@ -13,7 +15,7 @@ program
     console.log('  Examples:')
     console.log('')
     console.log(
-      '    $ node ./scripts/publish-tagged-packages.js --tag ongoing-branch --files ["packages/sui-mono/foo.js", "packages/sui-bundler/bar.js"]'
+      '    $ node ./scripts/publish-tagged-packages.mjs --tag \'ongoing-branch\' --files \'["packages/sui-mono/foo.js", "packages/sui-bundler/bar.js"]\''
     )
     console.log('')
   })
