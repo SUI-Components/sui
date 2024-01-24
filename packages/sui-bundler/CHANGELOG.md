@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.54.0 (2024-01-24)
+
+
+### Features
+
+* **packages/sui-bundler:** add resources as static folder ([76046c6](https://github.com/SUI-Components/sui/commit/76046c644b9622812c77282cf498ecaaf7bf908f))
+
+
+
 # 9.53.0 (2024-01-17)
 
 
