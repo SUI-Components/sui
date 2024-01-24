@@ -3,8 +3,8 @@ import {expect} from 'chai'
 
 import {inlineError, streamify} from '../../src'
 
-describe.skip('Error', () => {
-  it('Should play fine with streamify when is OK the response', done => {
+describe('Error', () => {
+  it.skip('Should play fine with streamify when is OK the response', done => {
     @streamify('execute')
     class Buzz {
       @inlineError
@@ -24,7 +24,7 @@ describe.skip('Error', () => {
       done()
     })
   })
-  it('Should play fine with streamify when is KO the response', done => {
+  it.skip('Should play fine with streamify when is KO the response', done => {
     @streamify('execute')
     class Buzz {
       @inlineError
