@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "description": "Mock provider",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib",
     "test": "npm run test:browser && npm run test:server",
     "test:browser": "npx @s-ui/test browser -P './test/browser/**/*Spec.js'",
@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "devDependencies": {
+    "@s-ui/js-compiler": "typescript-support"
+  },
   "dependencies": {
     "msw": "1.2.1"
   },
