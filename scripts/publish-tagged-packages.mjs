@@ -94,9 +94,9 @@ async function publishPackages() {
 
     console.log(`\n📦 Publishing new tagged version: ${name}@${version}\n`)
 
-    // fs.writeFileSync(packageJsonPath, packageJson)
+    fs.writeFileSync(packageJsonPath, packageJson)
 
-    // await $$`npm publish --tag ${tag}`
+    await $$`npm publish --tag ${tag}`
   })
 }
 
