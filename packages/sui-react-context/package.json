@@ -5,12 +5,15 @@
   "main": "lib/index",
   "types": "lib/index.d.ts",
   "scripts": {
-    "lib": "rm -rf ./lib && tsc",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "devDependencies": {
+    "@s-ui/js-compiler": "typescript-support"
+  },
   "dependencies": {
     "hoist-non-react-statics": "3.3.2"
   }
