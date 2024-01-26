@@ -7,8 +7,8 @@ on:
     branches: [master]
 
 jobs:
-  checks-and-release:
-    name: Checks & Release
+  checks:
+    name: Checks
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Redundant Builds
@@ -48,7 +48,24 @@ jobs:
           npm run test:server:ci
           xvfb-run --auto-servernum npm run test:client:ci
 
-      - name: Release Packages
+  publish:
+    name: Publish
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          node-version-file: '.nvmrc'
+
+      - name: Publish Packages
         if: github.ref == 'refs/heads/master'
         run: |
           npx -p ./packages/sui-mono sui-mono check
@@ -63,6 +80,7 @@ jobs:
 
   publish-tagged-packages:
     name: Publish Tagged Packages to NPM
+    needs: checks
     if: github.ref != 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -79,8 +97,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install
-        run: |
-          npm install -D commander
+        run: npm install -D commander execa prettier
 
       - name: Get Files
         id: files
@@ -90,3 +107,5 @@ jobs:
 
       - name: Publish Packages
         run: npm run publish-tagged-packages -- --tag '${{ github.event.pull_request.head.ref }}' --files '${{ steps.files.outputs.added_modified }}'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
