@@ -5,20 +5,21 @@
   "description": "iab consents handler",
   "types": "lib/index",
   "scripts": {
-    "lib": "rm -rf ./lib && tsc",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/react-context": "typescript",
+    "@s-ui/js-compiler": "typescript-support",
+    "@s-ui/react-context": "typescript-support",
     "@testing-library/react": "11.2.5",
     "react": "17",
     "react-dom": "17"
   },
   "peerDependencies": {
-    "@s-ui/react-context": "typescript",
+    "@s-ui/react-context": "typescript-support",
     "react": "16 || 17"
   }
 }
