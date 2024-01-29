@@ -26,7 +26,7 @@
     "@s-ui/sass-loader": "1",
     "address": "1.2.2",
     "autoprefixer": "10.4.8",
-    "babel-loader": "8.2.5",
+    "babel-loader": "8.3.0",
     "babel-preset-sui": "3",
     "buffer": "6.0.3",
     "commander": "8.3.0",
