@@ -20,7 +20,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "classnames": "2.2.5",
+    "classnames": "2.5.1",
     "history": "3.3.0",
     "hoist-non-react-statics": "3.3.2"
   },
