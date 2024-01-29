@@ -38,6 +38,10 @@ module.exports = config => ({
     {
       directory: 'public',
       watch: getWatchOptions(config)
+    },
+    {
+      directory: 'resources',
+      watch: getWatchOptions(config)
     }
   ],
   hot: true,

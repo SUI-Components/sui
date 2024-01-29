@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/bundler",
-  "version": "9.53.0",
+  "version": "9.55.0",
   "description": "Config-free bundler for ES6 React apps.",
   "bin": {
     "sui-bundler": "./bin/sui-bundler.js"
@@ -30,7 +30,7 @@
     "@swc/helpers": "0.5.3",
     "address": "1.2.2",
     "autoprefixer": "10.4.8",
-    "babel-loader": "8.2.5",
+    "babel-loader": "8.3.0",
     "babel-preset-sui": "3",
     "buffer": "6.0.3",
     "commander": "8.3.0",
