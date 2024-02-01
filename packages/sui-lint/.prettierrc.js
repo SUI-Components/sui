@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import("prettier").Config} */
+const config = {
   /* Include parentheses around a sole arrow function parameter. */
   arrowParens: 'avoid',
   /* Print spaces between brackets in object literals. */
@@ -20,3 +21,5 @@ module.exports = {
   /* Indent lines with tabs instead of spaces. */
   useTabs: false
 }
+
+export default config

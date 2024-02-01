@@ -2,10 +2,11 @@
 /* eslint-disable no-console */
 // @ts-check
 
-const program = require('commander')
-const stylelint = require('stylelint')
-const config = require('../stylelint.config.js')
-const {checkFilesToLint, getGitIgnoredFiles, getFilesToLint, stageFilesIfRequired} = require('../src/helpers.js')
+import program from 'commander'
+import stylelint from 'stylelint'
+
+import {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} from '../src/helpers.js'
+import config from '../stylelint.config.js'
 
 const EXTENSIONS = ['scss']
 const IGNORE_PATTERNS = ['**/node_modules/**', '**/lib/**', '**/dist/**']
@@ -40,8 +41,8 @@ getFilesToLint({extensions: EXTENSIONS, defaultPattern: pattern, staged}).then(f
       },
       fix
     })
-    .then(({output, errored}) => {
-      console.log(output)
+    .then(({report, errored}) => {
+      console.log(report)
 
       if (fix) {
         stageFilesIfRequired({extensions: EXTENSIONS, staged, addFixes})

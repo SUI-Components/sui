@@ -1,6 +1,6 @@
-const prettierOptions = require('./.prettierrc.js')
+import prettierOptions from './.prettierrc.js'
 
-module.exports = {
+const config = {
   extends: ['stylelint-config-recommended-scss'],
   plugins: ['stylelint-prettier'],
   rules: {
@@ -24,12 +24,15 @@ module.exports = {
       }
     ],
     'declaration-block-no-shorthand-property-overrides': true,
+    'font-family-name-quotes': 'always-where-recommended',
     'font-family-no-duplicate-names': true,
     'font-family-no-missing-generic-family-keyword': true,
     // 'function-calc-no-invalid': true,
     'function-calc-no-unspaced-operator': null, // we must activate this sometime
     'function-linear-gradient-no-nonstandard-direction': true,
+    'function-url-quotes': 'always',
     'keyframe-declaration-no-important': true,
+    'length-zero-no-unit': true,
     'media-feature-name-no-unknown': true,
     'no-descending-specificity': null, // we must activate this sometime
     'no-duplicate-at-import-rules': true,
@@ -37,13 +40,13 @@ module.exports = {
     'no-empty-source': true,
     'no-invalid-position-at-import-rule': null, // we must activate this sometime!!
     'no-invalid-double-slash-comments': true,
-    'number-leading-zero': 'always',
     'property-no-unknown': true,
     'selector-pseudo-class-no-unknown': true,
     'selector-pseudo-element-no-unknown': true,
     'selector-type-no-unknown': true,
-    'string-quotes': 'single',
     'string-no-newline': true,
     'unit-no-unknown': true
   }
 }
+
+export default config
