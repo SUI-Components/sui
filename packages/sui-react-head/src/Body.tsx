@@ -20,7 +20,9 @@ const Body: React.FC<BodyProps> = ({attributes = {}}) => {
     }
 
     toggleBodyAttributes()
-    return () => toggleBodyAttributes({action: 'remove'})
+    return () => {
+      toggleBodyAttributes({action: 'remove'})
+    }
   }, [attributes])
 
   if (isClient) return null
