@@ -1,13 +1,14 @@
 /* eslint no-console:0 */
 
-const conventionalChangelog = require('conventional-changelog')
-const {readJsonSync} = require('fs-extra')
+import {exec as childProcessExec} from 'child_process'
+import {promisify} from 'util'
 
-const {promisify} = require('util')
+import conventionalChangelog from 'conventional-changelog'
+import {readJsonSync} from 'fs-extra'
 
-const {checkIsMonoPackage, getProjectName, getWorkspaces, getOverrides} = require('./config.js')
+import {checkIsMonoPackage, getOverrides, getProjectName, getWorkspaces} from './config.js'
 
-const exec = promisify(require('child_process').exec)
+const exec = promisify(childProcessExec)
 const gitRawCommitsOpts = {reverse: true, topoOrder: true}
 
 const PACKAGE_VERSION_INCREMENT = {
@@ -22,13 +23,13 @@ const DEPS_UPGRADE_PACKAGES = ['deps', 'deps-dev']
 const DEPS_UPGRADE_BRANCH_PREFIX = 'dependabot/npm_and_yarn/'
 const SCOPE_REGEX = /packages\/(([a-z]+)-?)+/ // matches "packages/sui-any-package-name"
 
-const isCommitBreakingChange = commit => {
+export const isCommitBreakingChange = commit => {
   const {body, footer} = commit
 
   return [body, footer].some(msg => typeof msg === 'string' && msg.includes('BREAKING CHANGE'))
 }
 
-const isCommitReleaseTrigger = commit => {
+export const isCommitReleaseTrigger = commit => {
   const COMMIT_TYPES_WITH_RELEASE = ['fix', 'feat', 'perf', 'refactor']
 
   return COMMIT_TYPES_WITH_RELEASE.includes(commit.type)
@@ -57,7 +58,7 @@ const getOverride = ({overrides, header}) => {
   })
 }
 
-const getTransform =
+export const getTransform =
   ({status, packages, overrides = getOverrides()} = {}) =>
   async (commit, cb) => {
     const {scope, header, type, subject} = commit
@@ -127,7 +128,7 @@ const getTransform =
     cb()
   }
 
-const check = () =>
+export const check = () =>
   new Promise(resolve => {
     /**
      * Remove packages with private field with true value
@@ -161,10 +162,3 @@ const check = () =>
       })
       .resume()
   })
-
-module.exports = {
-  check,
-  getTransform,
-  isCommitBreakingChange,
-  isCommitReleaseTrigger
-}

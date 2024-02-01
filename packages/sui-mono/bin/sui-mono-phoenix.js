@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const program = require('commander')
-const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
-const {rmSync} = require('fs')
+import {rmSync} from 'fs'
 
-const {checkIsMonoPackage, getWorkspaces} = require('../src/config.js')
+import program from 'commander'
+
+import {getSpawnPromise, showError} from '@s-ui/helpers/cli'
+
+import {checkIsMonoPackage, getWorkspaces} from '../src/config.js'
 
 const CI_FLAGS = [
   'loglevel=error',

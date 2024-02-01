@@ -1,11 +1,12 @@
-const {getPackageJson} = require('@s-ui/helpers/packages')
-const glob = require('glob')
+import glob from 'glob'
+
+import {getPackageJson} from '@s-ui/helpers/packages'
 
 const CHANGELOG_FILENAME = 'CHANGELOG.md'
 const CWD = process.cwd()
 const packageFile = getPackageJson(CWD)
 
-const getWorkspaces = workspaces => {
+const _getWorkspaces = workspaces => {
   // If it is a monopackage, we return the current directory
   if (workspaces.length === 0) return ['.']
   // If we have more than one workspace, we join
@@ -19,7 +20,7 @@ const getWorkspaces = workspaces => {
   return paths.map(path => path.replace('/package.json', ''))
 }
 
-const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
+const _getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
   const publishAccess =
     (localPackageConfig['sui-mono'] && localPackageConfig['sui-mono'].access) ||
     (packageConfig['sui-mono'] && packageConfig['sui-mono'].access) ||
@@ -28,24 +29,18 @@ const getPublishAccess = ({localPackageConfig = {}, packageConfig = {}}) => {
   return publishAccess
 }
 
-function factoryConfigMethods(packageFile) {
+export function factoryConfigMethods(packageFile) {
   const {config: packageConfig = {}, name: packageName, workspaces = []} = packageFile
 
   return {
     checkIsMonoPackage: () => workspaces.length === 0,
     getChangelogFilename: () => CHANGELOG_FILENAME,
     getProjectName: () => packageName,
-    getPublishAccess: ({localPackageConfig} = {}) => {
-      return getPublishAccess({localPackageConfig, packageConfig})
-    },
-    getOverrides: () => {
-      return packageConfig['sui-mono']?.overrides ?? {}
-    },
-    getWorkspaces: () => getWorkspaces(workspaces)
+    getPublishAccess: ({localPackageConfig} = {}) => _getPublishAccess({localPackageConfig, packageConfig}),
+    getOverrides: () => packageConfig['sui-mono']?.overrides ?? {},
+    getWorkspaces: () => _getWorkspaces(workspaces)
   }
 }
 
-module.exports = {
-  factoryConfigMethods,
-  ...factoryConfigMethods(packageFile)
-}
+export const {checkIsMonoPackage, getChangelogFilename, getProjectName, getPublishAccess, getOverrides, getWorkspaces} =
+  factoryConfigMethods(packageFile)

@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const util = require('util')
-const exec = util.promisify(require('child_process').exec)
-const program = require('commander')
-const {getSpawnPromise, showError} = require('@s-ui/helpers/cli')
-const {getWorkspaces} = require('../src/config.js')
+import {exec as childProcessExec} from 'child_process'
+import {promisify} from 'util'
+
+import program from 'commander'
+
+import {getSpawnPromise, showError} from '@s-ui/helpers/cli'
+
+import {getWorkspaces} from '../src/config.js'
+
+const exec = promisify(childProcessExec)
 
 program
   .usage('-m "My commit message"')

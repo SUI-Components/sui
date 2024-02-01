@@ -2,7 +2,7 @@
   "name": "@s-ui/mono",
   "version": "2.44.0",
   "description": "Commit and release manager",
-  "main": "index.js",
+  "type": "module",
   "bin": {
     "sui-mono": "./bin/sui-mono.js"
   },
