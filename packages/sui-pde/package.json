@@ -3,10 +3,10 @@
   "version": "2.24.0",
   "description": "",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib",
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf && npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:browser": "NODE_ENV=test sui-test browser",
     "test:server:watch": "npm run test:server -- --watch",
@@ -16,18 +16,65 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@optimizely/optimizely-sdk": "4.9.4",
-    "@s-ui/js": "2"
-  },
-  "peerDependencies": {
-    "react": "16 || 17"
-  },
+  "dependencies": { "@optimizely/optimizely-sdk": "4.9.4", "@s-ui/js": "2" },
+  "peerDependencies": { "react": "16 || 17" },
   "devDependencies": {
-    "@s-ui/test": "8",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.1",
     "react": "17",
     "react-test-renderer": "17"
+  },
+  "module": "./lib/index.js",
+  "exports": {
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/pde": { "require": "./lib/pde.cjs", "import": "./lib/pde.js" },
+    "./lib/components/experiment": {
+      "require": "./lib/components/experiment.cjs",
+      "import": "./lib/components/experiment.js"
+    },
+    "./lib/components/feature": {
+      "require": "./lib/components/feature.cjs",
+      "import": "./lib/components/feature.js"
+    },
+    "./lib/adapters/default": {
+      "require": "./lib/adapters/default.cjs",
+      "import": "./lib/adapters/default.js"
+    },
+    "./lib/hooks/useExperiment": {
+      "require": "./lib/hooks/useExperiment.cjs",
+      "import": "./lib/hooks/useExperiment.js"
+    },
+    "./lib/hooks/useFeature": {
+      "require": "./lib/hooks/useFeature.cjs",
+      "import": "./lib/hooks/useFeature.js"
+    },
+    "./lib/contexts/PdeContext": {
+      "require": "./lib/contexts/PdeContext.cjs",
+      "import": "./lib/contexts/PdeContext.js"
+    },
+    "./lib/adapters/optimizely": {
+      "require": "./lib/adapters/optimizely/index.cjs",
+      "import": "./lib/adapters/optimizely/index.js"
+    },
+    "./lib/adapters/optimizely/multiple": {
+      "require": "./lib/adapters/optimizely/multiple.cjs",
+      "import": "./lib/adapters/optimizely/multiple.js"
+    },
+    "./lib/hooks/common/platformStrategies": {
+      "require": "./lib/hooks/common/platformStrategies.cjs",
+      "import": "./lib/hooks/common/platformStrategies.js"
+    },
+    "./lib/hooks/common/trackedEventsLocalCache": {
+      "require": "./lib/hooks/common/trackedEventsLocalCache.cjs",
+      "import": "./lib/hooks/common/trackedEventsLocalCache.js"
+    },
+    "./lib/adapters/optimizely/integrations/handler": {
+      "require": "./lib/adapters/optimizely/integrations/handler.cjs",
+      "import": "./lib/adapters/optimizely/integrations/handler.js"
+    },
+    "./lib/adapters/optimizely/integrations/segment": {
+      "require": "./lib/adapters/optimizely/integrations/segment.cjs",
+      "import": "./lib/adapters/optimizely/integrations/segment.js"
+    }
   }
 }
