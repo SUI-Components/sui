@@ -2,10 +2,10 @@
   "name": "@s-ui/mockmock",
   "version": "2.4.0",
   "description": "Mocking utilities for testing.",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
-    "lib": "babel ./src -d lib --presets sui",
-    "prepublishOnly": "npm run lib",
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf && npm run lib",
     "test": "npm run test:client && npm run test:server",
     "test:client": "sui-test browser",
     "test:client:watch": "npm run test:client -- --watch",
@@ -14,23 +14,34 @@
   },
   "keywords": [],
   "author": "",
-  "browser": {
-    "./lib/http/serverMocker.js": false
-  },
-  "dependencies": {
-    "nock": "13.2.1",
-    "sinon": "10.0.0"
-  },
-  "devDependencies": {
-    "axios": "1.6.2"
-  },
+  "browser": { "./lib/http/serverMocker.js": false },
+  "dependencies": { "nock": "13.2.1", "sinon": "10.0.0" },
+  "devDependencies": { "axios": "1.6.2" },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SUI-Components/sui.git"
   },
-  "bugs": {
-    "url": "https://github.com/SUI-Components/sui/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mockmock#readme"
+  "bugs": { "url": "https://github.com/SUI-Components/sui/issues" },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mockmock#readme",
+  "module": "./lib/index.js",
+  "exports": {
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/http/clientMocker": {
+      "require": "./lib/http/clientMocker.cjs",
+      "import": "./lib/http/clientMocker.js"
+    },
+    "./lib/http": {
+      "require": "./lib/http/index.cjs",
+      "import": "./lib/http/index.js"
+    },
+    "./lib/http/mockerInterface": {
+      "require": "./lib/http/mockerInterface.cjs",
+      "import": "./lib/http/mockerInterface.js"
+    },
+    "./lib/http/serverMocker": {
+      "require": "./lib/http/serverMocker.cjs",
+      "import": "./lib/http/serverMocker.js"
+    }
+  }
 }
