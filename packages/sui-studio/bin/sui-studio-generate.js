@@ -204,11 +204,11 @@ test
   },`
       : ''
   }${
-      homepage
-        ? `
+    homepage
+      ? `
     "homepage": "${homepage.replace('/master', `/master${COMPONENT_DIR}`)}",`
-        : ''
-    }
+      : ''
+  }
   "keywords": [],
   "author": "",
   "license": "MIT"
