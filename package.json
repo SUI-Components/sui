@@ -46,7 +46,7 @@
       "access": "public"
     },
     "validate-commit-msg": {
-      "types": "@s-ui/mono/src/types"
+      "types": "@s-ui/mono/src/types.json"
     },
     "sui-test": {
       "server": {
