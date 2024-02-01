@@ -1,19 +1,18 @@
 {
   "name": "@s-ui/consents",
   "version": "1.5.0",
-  "main": "lib/index",
+  "main": "./lib/index.cjs",
   "description": "iab consents handler",
-  "types": "lib/index",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "lib": "sui-js-compiler",
-    "prepublishOnly": "npm run lib"
+    "prepublishOnly": "rm -rf && npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": { "@s-ui/react-context": "typescript-support" },
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support",
-    "@s-ui/react-context": "typescript-support",
     "@testing-library/react": "11.2.5",
     "react": "17",
     "react-dom": "17"
@@ -21,5 +20,38 @@
   "peerDependencies": {
     "@s-ui/react-context": "typescript-support",
     "react": "16 || 17"
+  },
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/atob": {
+      "require": "./lib/atob.cjs",
+      "import": "./lib/atob.js",
+      "types": "./lib/atob.d.ts"
+    },
+    "./lib/config": {
+      "require": "./lib/config.cjs",
+      "import": "./lib/config.js",
+      "types": "./lib/config.d.ts"
+    },
+    "./lib/hasUserConsents": {
+      "require": "./lib/hasUserConsents.cjs",
+      "import": "./lib/hasUserConsents.js",
+      "types": "./lib/hasUserConsents.d.ts"
+    },
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/types": {
+      "require": "./lib/types.cjs",
+      "import": "./lib/types.js",
+      "types": "./lib/types.d.ts"
+    },
+    "./lib/useUserConsents": {
+      "require": "./lib/useUserConsents.cjs",
+      "import": "./lib/useUserConsents.js",
+      "types": "./lib/useUserConsents.d.ts"
+    }
   }
 }

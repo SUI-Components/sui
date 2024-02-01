@@ -4,7 +4,7 @@ import SUIContext from '@s-ui/react-context'
 
 import {TCF_VERSION, TCF_WINDOW_API} from './config'
 import hasUserConsents from './hasUserConsents'
-import {EventStatus, Purpose} from './types'
+import {EventStatus, type Purpose} from './types'
 
 export default function useUserConsents(requiredConsents: number[]): boolean {
   /**
