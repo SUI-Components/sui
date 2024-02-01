@@ -2,20 +2,55 @@
   "name": "@s-ui/hoc",
   "version": "1.36.0",
   "description": "Set of HoC useful for react",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
     "lib": "sui-js-compiler",
-    "prepublishOnly": "npm run lib"
+    "prepublishOnly": "rm -rf && npm run lib"
   },
   "peerDependencies": {
     "@s-ui/react-context": "1",
     "prop-types": "15",
     "react": "16 || 17"
   },
-  "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support"
-  },
-  "dependencies": {
-    "intersection-observer": "0.10.0"
+  "dependencies": { "intersection-observer": "0.10.0" },
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/avoidSSRRender": {
+      "require": "./lib/avoidSSRRender.cjs",
+      "import": "./lib/avoidSSRRender.js"
+    },
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/withAllContexts": {
+      "require": "./lib/withAllContexts.cjs",
+      "import": "./lib/withAllContexts.js"
+    },
+    "./lib/withContext": {
+      "require": "./lib/withContext.cjs",
+      "import": "./lib/withContext.js"
+    },
+    "./lib/withIntersectionObserver": {
+      "require": "./lib/withIntersectionObserver.cjs",
+      "import": "./lib/withIntersectionObserver.js"
+    },
+    "./lib/withOpenToggle": {
+      "require": "./lib/withOpenToggle.cjs",
+      "import": "./lib/withOpenToggle.js"
+    },
+    "./lib/withSUIContext": {
+      "require": "./lib/withSUIContext.cjs",
+      "import": "./lib/withSUIContext.js"
+    },
+    "./lib/withStateValue": {
+      "require": "./lib/withStateValue.cjs",
+      "import": "./lib/withStateValue.js"
+    },
+    "./lib/withStateValueTags": {
+      "require": "./lib/withStateValueTags.cjs",
+      "import": "./lib/withStateValueTags.js"
+    },
+    "./lib/withSwitchValue": {
+      "require": "./lib/withSwitchValue.cjs",
+      "import": "./lib/withSwitchValue.js"
+    }
   }
 }
