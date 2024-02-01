@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const program = require('commander')
-const colors = require('@s-ui/helpers/colors')
-const runner = require('./karma/index.js')
+import program from 'commander'
+
+import colors from '@s-ui/helpers/colors'
+
+import runner from './karma/index.js'
 
 program
   .option('-W, --watch', 'Run in watch mode')

@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
 
-const path = require('path')
-const program = require('commander')
-const colors = require('@s-ui/helpers/colors')
-const {serialSpawn} = require('@s-ui/helpers/cli')
+import {createRequire} from 'module'
+import path from 'path'
+
+import program from 'commander'
+
+import {serialSpawn} from '@s-ui/helpers/cli'
+import colors from '@s-ui/helpers/colors'
+
+const require = createRequire(import.meta.url)
 
 program
   .option('-I, --inspect', 'Inspect node process')

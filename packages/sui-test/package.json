@@ -2,34 +2,21 @@
   "name": "@s-ui/test",
   "version": "8.32.0",
   "description": "",
-  "bin": {
-    "sui-test": "bin/sui-test.js"
-  },
+  "type": "module",
+  "bin": { "sui-test": "bin/sui-test.js" },
   "scripts": {
-    "lib:js": "babel --presets sui ./src --out-dir ./lib",
-    "lib": "npm run lib:js",
-    "prepublishOnly": "npm run lib"
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf lib && npm run lib"
   },
-  "files": [
-    "/bin",
-    "/src",
-    "/lib"
-  ],
+  "files": ["/bin", "/lib"],
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.18.10",
-    "@babel/plugin-transform-modules-commonjs": "7.18.6",
-    "@babel/register": "7.18.9",
     "@s-ui/compiler-config": "1",
     "@s-ui/helpers": "1",
     "@swc/core": "1.3.106",
     "@swc/register": "0.1.10",
-    "babel-loader": "8.3.0",
-    "babel-plugin-dynamic-import-node": "2.3.3",
-    "babel-plugin-istanbul": "6.0.0",
-    "babel-preset-sui": "3",
     "commander": "8.3.0",
     "karma": "6.4.2",
     "karma-chrome-launcher": "3.2.0",
@@ -45,5 +32,19 @@
     "tty-browserify": "0.0.1",
     "util": "0.12.4",
     "webpack": "5.82.1"
+  },
+  "exports": {
+    "./lib/config": {
+      "require": "./lib/config.cjs",
+      "import": "./lib/config.js"
+    },
+    "./lib/describers": {
+      "require": "./lib/describers.cjs",
+      "import": "./lib/describers.js"
+    },
+    "./lib/descriptor-environment-patcher": {
+      "require": "./lib/descriptor-environment-patcher.cjs",
+      "import": "./lib/descriptor-environment-patcher.js"
+    }
   }
 }

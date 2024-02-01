@@ -1,10 +1,15 @@
 // @ts-check
+import {createRequire} from 'module'
+import path from 'path'
 
-const webpack = require('webpack')
-const path = require('path')
-const {envVars} = require('@s-ui/bundler/shared/index.js')
-const {getSWCConfig} = require('@s-ui/compiler-config')
-const {bundlerConfig, clientConfig, isWorkspace} = require('../../src/config.js')
+import webpack from 'webpack'
+
+import {envVars} from '@s-ui/bundler/shared/index.js'
+import {getSWCConfig} from '@s-ui/compiler-config'
+
+import {bundlerConfig, clientConfig, isWorkspace} from '../../src/config.js'
+
+const require = createRequire(import.meta.url)
 
 const {captureConsole = true} = clientConfig
 const {sep} = path
@@ -16,8 +21,6 @@ const mustPackagesToAlias = {
 // Transform the env config (Array) to an object
 // where the value is always an empty string.
 const environmentVariables = envVars(bundlerConfig.env)
-const swcConfig = getSWCConfig({isTypeScript: true})
-
 const relPath = path.relative(process.cwd(), require.resolve('@s-ui/react-context').replace(/\/node_modules.*/, ''))
 
 const config = {
@@ -104,40 +107,20 @@ const config = {
             loader: 'swc-loader',
             options: {
               sync: true,
-              ...swcConfig
+              ...getSWCConfig({isModern: true, isTypeScript: true})
             }
           }
         },
         {
           test: /\.jsx?$/,
           exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
-          use: [
-            {
-              loader: require.resolve('babel-loader'),
-              options: {
-                babelrc: false,
-                cacheDirectory: true,
-                sourceType: 'unambiguous',
-                presets: [
-                  [
-                    require.resolve('babel-preset-sui'),
-                    {
-                      isDevelopment: true
-                    }
-                  ]
-                ],
-                plugins: [
-                  [
-                    require.resolve('babel-plugin-istanbul'),
-                    {
-                      exclude: ['**/lib/**/*.js', '**/test/**/*.js']
-                    }
-                  ],
-                  require.resolve('./babelPatch.js')
-                ]
-              }
+          use: {
+            loader: 'swc-loader',
+            options: {
+              sync: true,
+              ...getSWCConfig({isModern: true})
             }
-          ]
+          }
         }
       ]
     }
@@ -150,4 +133,4 @@ const config = {
   }
 }
 
-module.exports = config
+export default config

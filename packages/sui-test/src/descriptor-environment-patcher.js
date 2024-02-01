@@ -1,3 +1,5 @@
+window.global = window
+
 // List of test describers to be patched.
 const functionsToPatch = ['describe', 'describe.only', 'it', 'it.only']
 // List of environments, the environment define the function name. describe.client, describe.server
@@ -20,8 +22,8 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
     const isOnlyServerButRunningAsClient = !isNode && env === environments.SERVER && firstLevelFnName
     const isOnlyClientButRunningAsServer = isNode && env === environments.CLIENT && firstLevelFnName
     if (shouldReturnDescriber) {
-      return function () {
-        firstLevelFnName ? global[descriptorName][firstLevelFnName](...arguments) : global[descriptorName](...arguments)
+      return function (title, fn) {
+        firstLevelFnName ? global[descriptorName][firstLevelFnName](title, fn) : global[descriptorName](title, fn)
       }
     } else if (isOnlyClientButRunningAsServer || isOnlyServerButRunningAsClient) {
       return () => {
@@ -33,6 +35,7 @@ export const descriptorsByEnvironmentPatcher = function descriptorsByEnvironment
       }
     } else {
       return title =>
+        // eslint-disable-next-line
         console.warn(
           `skiping on the ${isNode ? environments.SERVER : environments.CLIENT} '${descriptorName}('${title}')\n`
         )
