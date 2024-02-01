@@ -1,8 +1,12 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+import {createRequire} from 'module'
 
-const {cleanList, config, when} = require('./index')
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-module.exports = {
+import {cleanList, config, when} from './index.js'
+
+const require = createRequire(import.meta.url)
+
+export default {
   test: /(\.css|\.scss)$/,
   use: cleanList([
     MiniCssExtractPlugin.loader,

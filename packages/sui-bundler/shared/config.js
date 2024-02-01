@@ -1,12 +1,12 @@
 /* Extract sui-bundler from package.json -> "config": {"sui-bundler": { ... }} */
-const path = require('path')
+import {createRequire} from 'module'
+import path from 'path'
+
+const require = createRequire(import.meta.url)
 const {config: packageJsonConfig = {}} = require(`${process.cwd()}/package.json`)
 
-const {'sui-bundler': config = {}} = packageJsonConfig
-const {extractComments = false, sourcemaps, supportLegacyBrowsers = true} = config
+export const {'sui-bundler': config = {}} = packageJsonConfig
+export const {extractComments = false, supportLegacyBrowsers = true} = config
 
-exports.config = config
-exports.supportLegacyBrowsers = supportLegacyBrowsers
-exports.extractComments = extractComments
-exports.sourceMap = (sourcemaps && sourcemaps.prod) || false
-exports.cacheDirectory = path.resolve(process.cwd(), '.sui/cache')
+export const sourceMap = (config.sourcemaps && config.sourcemaps.prod) || false
+export const cacheDirectory = path.resolve(process.cwd(), '.sui/cache')

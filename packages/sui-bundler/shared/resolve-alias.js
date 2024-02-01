@@ -1,6 +1,10 @@
-const path = require('path')
-const {config} = require('./config.js')
-const fs = require('fs')
+import fs from 'fs'
+import {createRequire} from 'module'
+import path from 'path'
+
+import {config} from './config.js'
+
+const require = createRequire(import.meta.url)
 
 const {PWD} = process.env
 
@@ -34,11 +38,11 @@ const createAliasPath = pkgName => {
 
 const mustPackagesToAlias = {}
 
-exports.defaultAlias = Object.fromEntries(
+export const defaultAlias = Object.fromEntries(
   defaultPackagesToAlias.map(pkgName => [pkgName, createAliasPath(pkgName)]).filter(([, path]) => path)
 )
 
-const aliasFromConfig = config.alias
+const _aliasFromConfig = config.alias
   ? Object.entries(config.alias).reduce(
       (obj, [aliasName, aliasPath]) => ({
         ...obj,
@@ -48,7 +52,7 @@ const aliasFromConfig = config.alias
     )
   : {}
 
-exports.aliasFromConfig = {
+export const aliasFromConfig = {
   ...mustPackagesToAlias,
-  ...aliasFromConfig
+  ..._aliasFromConfig
 }

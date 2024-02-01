@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+import webpack from 'webpack'
 
 // hack for Windows, as process.env.PWD is undefined in that environment
 // https://github.com/mrblueblue/gettext-loader/issues/18
@@ -15,7 +15,7 @@ try {
   magic = {}
 }
 
-module.exports = (vars = {}) => {
+export default (vars = {}) => {
   const definitions = {
     __DEV__: false,
     __BASE_DIR__: JSON.stringify(process.env.PWD),

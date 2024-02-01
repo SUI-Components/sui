@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-const crypto = require('crypto')
-const fs = require('fs-extra')
-const path = require('path')
-const {writeFile} = require('@s-ui/helpers/file.js')
+import crypto from 'crypto'
+import path from 'path'
+
+import fs from 'fs-extra'
+
+import {writeFile} from '@s-ui/helpers/file'
+import {getPackageJson} from '@s-ui/helpers/packages'
 
 const {INIT_CWD} = process.env
 const tsConfigTemplate = `\
@@ -18,9 +21,8 @@ const tsConfigTemplate = `\
 
 const md5 = str => crypto.createHash('md5').update(str).digest('hex')
 const TS_CONFIG_PATH = path.join(INIT_CWD, 'tsconfig.json')
-const PACKAGE_JSON_CONFIG_PATH = path.join(INIT_CWD, 'package.json')
-
-const config = require(PACKAGE_JSON_CONFIG_PATH)?.config?.['sui-bundler'] || {}
+const packageJson = getPackageJson(INIT_CWD)
+const config = packageJson?.config?.['sui-bundler'] || {}
 
 const shouldGenerateTSConfig = () => {
   try {
@@ -29,6 +31,7 @@ const shouldGenerateTSConfig = () => {
     if (!fs.existsSync(TS_CONFIG_PATH)) return true
 
     const tsConfigLocal = fs.readFileSync(TS_CONFIG_PATH, {encoding: 'utf8'})
+
     return md5(tsConfigLocal) !== md5(tsConfigTemplate)
   } catch (err) {
     return true

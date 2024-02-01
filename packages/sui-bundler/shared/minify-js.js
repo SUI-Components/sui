@@ -1,6 +1,6 @@
-const TerserPlugin = require('terser-webpack-plugin')
+import TerserPlugin from 'terser-webpack-plugin'
 
-const {supportLegacyBrowsers} = require('./config.js')
+import {supportLegacyBrowsers} from './config.js'
 
 const esbuildMinifier = ({sourceMap}) =>
   new TerserPlugin({
@@ -21,5 +21,5 @@ const terserMinifier = ({extractComments, sourceMap}) =>
     }
   })
 
-module.exports = ({extractComments, sourceMap}) =>
+export default ({extractComments, sourceMap}) =>
   supportLegacyBrowsers ? terserMinifier({extractComments, sourceMap}) : esbuildMinifier({sourceMap})

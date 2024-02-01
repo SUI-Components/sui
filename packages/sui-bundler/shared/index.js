@@ -1,13 +1,12 @@
-const {config} = require('./config.js')
+export {config} from './config.js'
 
-exports.MAIN_ENTRY_POINT = './app'
-exports.config = config
+export const MAIN_ENTRY_POINT = './app'
 
-exports.cleanList = list => list.filter(Boolean)
+export const cleanList = list => list.filter(Boolean)
 
-exports.when = (check, getValue) => (check ? getValue() : false)
+export const when = (check, getValue) => (check ? getValue() : false)
 
-exports.envVars = (env = []) =>
+export const envVars = (env = []) =>
   env.reduce(
     (acc, variable) => {
       if (Array.isArray(variable)) {

@@ -1,8 +1,12 @@
 /* eslint-disable no-console */
-const fs = require('fs-extra')
-const path = require('path')
-const {config} = require('./index.js')
-const {getSWCConfig} = require('@s-ui/compiler-config')
+import {createRequire} from 'module'
+import path from 'path'
+
+import fs from 'fs-extra'
+
+import {getSWCConfig} from '@s-ui/compiler-config'
+
+const require = createRequire(import.meta.url)
 
 const EXCLUDED_FOLDERS_REGEXP = new RegExp(
   `node_modules(?!${path.sep}@s-ui(${path.sep}studio)(${path.sep}workbench)?${path.sep}src)`
@@ -24,46 +28,19 @@ const getTSConfig = () => {
   return tsConfig
 }
 
-module.exports = ({isServer = false, isDevelopment = false, supportLegacyBrowsers = true} = {}) => {
+export default ({isServer = false, isDevelopment = false, supportLegacyBrowsers = true} = {}) => {
   const tsConfig = getTSConfig()
   // If TS config exists in root dir, set TypeScript as enabled.
   const isTypeScriptEnabled = Boolean(tsConfig)
 
-  return isTypeScriptEnabled
-    ? {
-        test: /\.(js|ts)x?$/,
-        exclude: EXCLUDED_FOLDERS_REGEXP,
-        use: [
-          {
-            loader: require.resolve('swc-loader'),
-            options: getSWCConfig({isModern: false, isTypeScript: true})
-          }
-        ]
+  return {
+    test: /\.(js|ts)x?$/,
+    exclude: EXCLUDED_FOLDERS_REGEXP,
+    use: [
+      {
+        loader: require.resolve('swc-loader'),
+        options: getSWCConfig({isTypeScript: isTypeScriptEnabled})
       }
-    : {
-        test: /\.jsx?$/,
-        exclude: EXCLUDED_FOLDERS_REGEXP,
-        use: [
-          {
-            loader: require.resolve('babel-loader'),
-            options: {
-              cacheDirectory: true,
-              cacheCompression: false,
-              babelrc: false,
-              compact: true,
-              plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
-              presets: [
-                [
-                  require.resolve('babel-preset-sui'),
-                  {
-                    isServer,
-                    isModern: !supportLegacyBrowsers,
-                    targets: config.targets
-                  }
-                ]
-              ]
-            }
-          }
-        ]
-      }
+    ]
+  }
 }
