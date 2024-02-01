@@ -2,7 +2,8 @@
   "name": "@s-ui/compiler-config",
   "version": "1.0.0",
   "description": "Compilers config (SWC, TS...) for SUI projects.",
-  "main": "src/index.js",
+  "type": "module",
+  "module": "src/index.js",
   "scripts": {},
   "keywords": [],
   "author": "",
@@ -18,5 +19,10 @@
   "dependencies": {
     "@tsconfig/esm": "1.0.4",
     "@tsconfig/vite-react": "2.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.js"
+    }
   }
 }

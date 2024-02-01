@@ -1,7 +1,6 @@
 const DEFAULT_LEGACY_BROWSER_TARGETS = {
   ie: '11'
 }
-
 const DEFAULT_BROWSER_TARGETS = {
   chrome: '98',
   edge: '107',
@@ -9,14 +8,15 @@ const DEFAULT_BROWSER_TARGETS = {
   firefox: '108',
   ios: '14.5'
 }
+const DEFAULT_MODULE_TYPE = 'es6'
 
-const getSWCConfig = ({isModern = false, isTypeScript = false, compileToCJS = false}) => {
+export const getSWCConfig = ({isModern = false, isTypeScript = false, type = DEFAULT_MODULE_TYPE} = {}) => {
   const targets = isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS
   const syntaxOptions = isTypeScript ? {syntax: 'typescript', tsx: true} : {syntax: 'ecmascript', jsx: true}
-  const moduleOptions = compileToCJS ? {module: {type: 'commonjs'}} : {}
 
   return {
     minify: true,
+    module: {type},
     jsc: {
       parser: {
         ...syntaxOptions,
@@ -40,15 +40,13 @@ const getSWCConfig = ({isModern = false, isTypeScript = false, compileToCJS = fa
       loose: true,
       externalHelpers: true
     },
-    ...moduleOptions,
     env: {
       targets,
       dynamicImport: true,
       loose: true,
       mode: 'entry',
-      coreJs: 3
+      coreJs: '3.35.1',
+      shippedProposals: true
     }
   }
 }
-
-module.exports.getSWCConfig = getSWCConfig
