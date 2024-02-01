@@ -3,10 +3,13 @@
 
 'use strict'
 
+import {readFile} from 'fs/promises'
+
 import program from 'commander'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
+import prettier from 'prettier'
 
 import {transformFile} from '@swc/core'
 
@@ -14,8 +17,8 @@ import {getSWCConfig} from '@s-ui/compiler-config'
 
 const SOURCE_DIR = './src'
 const OUTPUT_DIR = './lib'
+const FILE_EXTENSION_REGEX = /(\.(j|t)s)x?/
 const TS_EXTENSION_REGEX = /(\.ts)x?/
-const COMPILED_EXTENSION = '.js'
 const DEFAULT_TS_CONFIG = {
   declaration: true,
   emitDeclarationOnly: true,
@@ -31,6 +34,9 @@ const DEFAULT_TS_CONFIG = {
   target: 'es5',
   types: ['react', 'node']
 }
+const MODULE_TYPES_MAP = {commonjs: {extension: '.cjs', type: 'require'}, es6: {extension: '.js', type: 'import'}}
+const INDEX_KEY = 'index'
+const INDEX_EXPORT_KEY = '.'
 
 const getTsConfig = () => {
   // Get TS config from the package dir.
@@ -48,19 +54,48 @@ const getTsConfig = () => {
   return tsConfig
 }
 
+/**
+ * Compile files and returns the exports object for each file.
+ */
 const compileFile = async (file, options) => {
-  const {code} = await transformFile(file, getSWCConfig(options))
-  const outputPath = file.replace(SOURCE_DIR, OUTPUT_DIR).replace(TS_EXTENSION_REGEX, COMPILED_EXTENSION)
+  const modulesTypesMap = options.isTypeScript
+    ? {...MODULE_TYPES_MAP, typescript: {extension: '.d.ts', type: 'types'}}
+    : MODULE_TYPES_MAP
 
-  await fs.outputFile(outputPath, code)
+  return Object.keys(modulesTypesMap).reduce(async (fileExports, moduleType) => {
+    const {extension, type} = modulesTypesMap[moduleType]
+    const outputPath = file.replace(SOURCE_DIR, OUTPUT_DIR).replace(FILE_EXTENSION_REGEX, extension)
+
+    if (moduleType !== 'typescript') {
+      const {code} = await transformFile(file, getSWCConfig({...options, type: moduleType}))
+
+      await fs.outputFile(outputPath, code)
+    }
+
+    const fileParts = outputPath.match(new RegExp(`${OUTPUT_DIR}/(.*)${extension}`))
+
+    let [, exportEntry] = fileParts
+
+    if (exportEntry.includes(INDEX_KEY)) exportEntry = exportEntry.replace(INDEX_KEY, INDEX_EXPORT_KEY)
+    if (exportEntry.endsWith?.('/.')) exportEntry = exportEntry.replace('/.', '')
+    if (exportEntry !== '.') exportEntry = `${OUTPUT_DIR}/${exportEntry}`
+
+    return {...(await fileExports), [exportEntry]: {...(await fileExports)[exportEntry], [type]: outputPath}}
+  }, Promise.resolve({}))
 }
 
+/**
+ * Compile types.
+ */
 const compileTypes = async (files, options) => {
   const {createCompilerHost, createProgram} = await import('typescript').then(module => module.default)
   const createdFiles = {}
   const host = createCompilerHost(options)
+
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
+
   const program = createProgram(files, options, host)
+
   program.emit()
 
   return Promise.all(
@@ -70,6 +105,24 @@ const compileTypes = async (files, options) => {
       await fs.outputFile(outputPath, code)
     })
   )
+}
+
+const packageJsonPath = path.join(process.cwd(), 'package.json')
+
+const getConfig = async fileName => JSON.parse(await readFile(new URL(packageJsonPath, import.meta.url)))
+
+const writeExports = async exports => {
+  const packageConfig = await getConfig()
+  const indexExport = exports[INDEX_EXPORT_KEY]
+  if (indexExport) {
+    packageConfig.main = indexExport.require
+    packageConfig.module = indexExport.import
+    packageConfig.types = indexExport.types
+  }
+  packageConfig.exports = exports
+  const packageJson = await prettier.format(JSON.stringify(packageConfig), {parser: 'json'})
+
+  fs.writeFileSync(packageJsonPath, packageJson)
 }
 
 const commaSeparatedList = value => value.split(',')
@@ -94,14 +147,17 @@ const ignore = [...ignoreOpts, '**/__tests__']
 ;(async () => {
   console.time('[sui-js-compiler]')
 
-  const files = await fg('./src/**/*.{js,jsx,ts,tsx}', {ignore})
-  const filesToCompile = Promise.all(
-    files.map(async file => {
+  const files = await fg('./src/**/*.{js,jsx,ts,tsx,json}', {ignore})
+  const filesToCompile = files
+    // Skip DTS files.
+    .filter(file => !file.endsWith('.d.ts'))
+    .reduce(async (staticExports, file) => {
       const isTypeScript = Boolean(file.match(TS_EXTENSION_REGEX))
+      const fileExports = await compileFile(file, {isModern, isTypeScript})
 
-      await compileFile(file, {isModern, isTypeScript})
-    })
-  )
+      return {...(await staticExports), ...fileExports}
+    }, Promise.resolve({}))
+
   const tsConfig = getTsConfig()
   // If TS config exists, set TypeScript as enabled.
   const isTypeScriptEnabled = Boolean(tsConfig)
@@ -112,7 +168,8 @@ const ignore = [...ignoreOpts, '**/__tests__']
       })
     : Promise.resolve()
 
-  await Promise.all([filesToCompile, typesToCompile])
+  const [staticExports] = await Promise.all([filesToCompile, typesToCompile])
+  await writeExports(staticExports)
 
   console.timeEnd('[sui-js-compiler]')
 })()
