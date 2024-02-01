@@ -8,11 +8,6 @@ const {bundlerConfig, clientConfig, isWorkspace} = require('../../src/config.js'
 const {captureConsole = true} = clientConfig
 const {sep} = path
 
-const mustPackagesToAlias = {
-  'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
-  'react/jsx-runtime': 'react/jsx-runtime.js'
-}
-
 /**
  *  Transform the env config (Array) to an object.
  *  Where the value is always an empty string.
@@ -54,7 +49,8 @@ const config = {
     stats: 'errors-only',
     resolve: {
       alias: {
-        ...mustPackagesToAlias,
+        'react/jsx-dev-runtime': path.resolve('./node_modules/react/jsx-dev-runtime.js'),
+        'react/jsx-runtime': path.resolve('./node_modules/react/jsx-runtime.js'),
         '@s-ui/react-context': path.resolve(
           path.join(process.env.PWD, isWorkspace() ? '../' : './', 'node_modules/@s-ui/react-context')
         )
