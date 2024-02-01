@@ -5,7 +5,7 @@ import {render as wrap, screen, waitFor} from '@testing-library/react'
 
 import SUIContext from '@s-ui/react-context'
 import {Route, Router} from '@s-ui/react-router'
-import createMemoryHistory from '@s-ui/react-router/lib/createMemoryHistory.js'
+import createMemoryHistory from '@s-ui/react-router/lib/createMemoryHistory'
 
 import WebVitalsReporter, {METRICS} from '../../src/index.js'
 

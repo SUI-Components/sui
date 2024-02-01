@@ -3,10 +3,10 @@
   "version": "2.1.0",
   "description": "",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib",
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf && npm run lib",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:browser": "NODE_ENV=test sui-test browser",
     "test:server:watch": "npm run test:server -- --watch",
@@ -16,10 +16,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "web-vitals": "3.5.0",
-    "@s-ui/react-hooks": "1"
-  },
+  "dependencies": { "web-vitals": "3.5.0", "@s-ui/react-hooks": "1" },
   "peerDependencies": {
     "react": "16 || 17",
     "@s-ui/react-context": "1",
@@ -29,5 +26,9 @@
     "@s-ui/test": "8",
     "@testing-library/react": "11.2.3",
     "react": "17"
+  },
+  "module": "./lib/index.js",
+  "exports": {
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" }
   }
 }
