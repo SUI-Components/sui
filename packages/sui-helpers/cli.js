@@ -1,10 +1,11 @@
 /* eslint no-console:0 */
-const execa = require('execa')
-const {default: Queue} = require('p-queue')
-const path = require('path')
+import path from 'path'
 
-const logUpdate = require('./log-update.js')
-const colors = require('./colors.js')
+import execa from 'execa'
+import Queue from 'p-queue'
+
+import colors from './colors.js'
+import logUpdate from './log-update.js'
 
 const CODE_OK = 0
 
@@ -14,7 +15,7 @@ const CODE_OK = 0
  * @param  {Object} options Default options for given commands
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
-function serialSpawn(commands, options = {}) {
+export function serialSpawn(commands, options = {}) {
   return commands.reduce((promise, args) => promise.then(() => getSpawnPromise(...args, options)), Promise.resolve())
 }
 
@@ -24,7 +25,7 @@ function serialSpawn(commands, options = {}) {
  * @param  {Object} options Default options for given commands
  * @return {Promise<Number>} Resolved with exit code, when all commands where executed on one failed.
  */
-function parallelSpawn(commands, options = {}) {
+export function parallelSpawn(commands, options = {}) {
   const {chunks = 15, title} = options
 
   commands = commands.map(([bin, args, opts]) => [bin, args, {...opts, ...options}])
@@ -84,7 +85,7 @@ function spawnList(commands, {chunks = 15, title = ''} = {}) {
  * @param  {Object} options Options to pass to child_process.spawn call
  * @return {Promise<any>} Process exit code
  */
-function getSpawnPromise(bin, args, options = {}) {
+export function getSpawnPromise(bin, args, options = {}) {
   if (options.stdio !== 'ignore') {
     console.log('')
     console.log(getCommandCallMessage(bin, args, options))
@@ -121,7 +122,7 @@ function getCommandCallMessage(bin, args, options = {}) {
  * @param  {String} msg
  * @param  {Object} foreignProgram
  */
-const showError = (msg, foreignProgram) => {
+export const showError = (msg, foreignProgram) => {
   console.error(colors.red(`✖ Error: ${msg}\n`))
   foreignProgram && foreignProgram.outputHelp(txt => txt)
   process.exit(1)
@@ -131,14 +132,6 @@ const showError = (msg, foreignProgram) => {
  * Shows a visible warning message the command line.
  * @param {String} msg
  */
-const showWarning = msg => {
+export const showWarning = msg => {
   console.warn(colors.yellow(`⚠ ${msg}\n`))
-}
-
-module.exports = {
-  getSpawnPromise,
-  parallelSpawn,
-  serialSpawn,
-  showError,
-  showWarning
 }

@@ -2,6 +2,7 @@
   "name": "@s-ui/helpers",
   "version": "1.38.0",
   "description": "A set of internal helpers used by sui-related packages.",
+  "type": "module",
   "author": "",
   "dependencies": {
     "execa": "5.1.1",
@@ -17,5 +18,21 @@
     "url": "https://github.com/SUI-Components/sui/issues"
   },
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-helpers#readme",
-  "devDependencies": {}
+  "exports": {
+    "./cli": {
+      "import": "./cli.js"
+    },
+    "./colors": {
+      "import": "./colors.js"
+    },
+    "./file": {
+      "import": "./file.js"
+    },
+    "./log-update": {
+      "import": "./log-update.js"
+    },
+    "./packages": {
+      "import": "./packages.js"
+    }
+  }
 }
