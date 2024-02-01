@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.13.0",
   "description": "SDK for creating domains",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
     "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib",
@@ -16,10 +16,57 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support"
+  "dependencies": { "axios": "1.6.2" },
+  "exports": {
+    "./lib/AnemicModel": {
+      "require": "./lib/AnemicModel.cjs",
+      "import": "./lib/AnemicModel.js"
+    },
+    "./lib/Entity": {
+      "require": "./lib/Entity.cjs",
+      "import": "./lib/Entity.js"
+    },
+    "./lib/EntryPointFactory": {
+      "require": "./lib/EntryPointFactory.cjs",
+      "import": "./lib/EntryPointFactory.js"
+    },
+    "./lib/Mapper": {
+      "require": "./lib/Mapper.cjs",
+      "import": "./lib/Mapper.js"
+    },
+    "./lib/Repository": {
+      "require": "./lib/Repository.cjs",
+      "import": "./lib/Repository.js"
+    },
+    "./lib/Service": {
+      "require": "./lib/Service.cjs",
+      "import": "./lib/Service.js"
+    },
+    "./lib/UseCase": {
+      "require": "./lib/UseCase.cjs",
+      "import": "./lib/UseCase.js"
+    },
+    "./lib/ValueObject": {
+      "require": "./lib/ValueObject.cjs",
+      "import": "./lib/ValueObject.js"
+    },
+    "./lib/createNotImplementedUseCase": {
+      "require": "./lib/createNotImplementedUseCase.cjs",
+      "import": "./lib/createNotImplementedUseCase.js"
+    },
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/fetcher/AxiosFetcher": {
+      "require": "./lib/fetcher/AxiosFetcher.cjs",
+      "import": "./lib/fetcher/AxiosFetcher.js"
+    },
+    "./lib/fetcher/FetcherInterceptor": {
+      "require": "./lib/fetcher/FetcherInterceptor.cjs",
+      "import": "./lib/fetcher/FetcherInterceptor.js"
+    },
+    "./lib/fetcher/factory": {
+      "require": "./lib/fetcher/factory.cjs",
+      "import": "./lib/fetcher/factory.js"
+    }
   },
-  "dependencies": {
-    "axios": "1.6.2"
-  }
+  "module": "./lib/index.js"
 }
