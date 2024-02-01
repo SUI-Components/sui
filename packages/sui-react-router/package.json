@@ -2,20 +2,17 @@
   "name": "@s-ui/react-router",
   "version": "1.16.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib",
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf && npm run lib",
     "test": "npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
     "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
     "test:server": "NODE_ENV=test sui-test server -P 'test/server/*Spec.js'",
     "test:server:watch": "npm run test:server -- --watch"
   },
-  "peerDependencies": {
-    "prop-types": "15",
-    "react": "16 || 17"
-  },
+  "peerDependencies": { "prop-types": "15", "react": "16 || 17" },
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -29,5 +26,81 @@
     "react": "17",
     "react-dom": "17",
     "sinon": "10.0.0"
+  },
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/IndexRoute": {
+      "require": "./lib/IndexRoute.cjs",
+      "import": "./lib/IndexRoute.js"
+    },
+    "./lib/Link": { "require": "./lib/Link.cjs", "import": "./lib/Link.js" },
+    "./lib/PatternUtils": {
+      "require": "./lib/PatternUtils.cjs",
+      "import": "./lib/PatternUtils.js"
+    },
+    "./lib/Redirect": {
+      "require": "./lib/Redirect.cjs",
+      "import": "./lib/Redirect.js"
+    },
+    "./lib/Route": { "require": "./lib/Route.cjs", "import": "./lib/Route.js" },
+    "./lib/Router": {
+      "require": "./lib/Router.cjs",
+      "import": "./lib/Router.js"
+    },
+    "./lib/browserHistory": {
+      "require": "./lib/browserHistory.cjs",
+      "import": "./lib/browserHistory.js"
+    },
+    "./lib/createMemoryHistory": {
+      "require": "./lib/createMemoryHistory.cjs",
+      "import": "./lib/createMemoryHistory.js"
+    },
+    "./lib/hooks": { "require": "./lib/hooks.cjs", "import": "./lib/hooks.js" },
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/match": { "require": "./lib/match.cjs", "import": "./lib/match.js" },
+    "./lib/withRouter": {
+      "require": "./lib/withRouter.cjs",
+      "import": "./lib/withRouter.js"
+    },
+    "./lib/internal/Context": {
+      "require": "./lib/internal/Context.cjs",
+      "import": "./lib/internal/Context.js"
+    },
+    "./lib/internal/PropTypes": {
+      "require": "./lib/internal/PropTypes.cjs",
+      "import": "./lib/internal/PropTypes.js"
+    },
+    "./lib/internal/ReactUtils": {
+      "require": "./lib/internal/ReactUtils.cjs",
+      "import": "./lib/internal/ReactUtils.js"
+    },
+    "./lib/internal/RouterUtils": {
+      "require": "./lib/internal/RouterUtils.cjs",
+      "import": "./lib/internal/RouterUtils.js"
+    },
+    "./lib/internal/Tree": {
+      "require": "./lib/internal/Tree.cjs",
+      "import": "./lib/internal/Tree.js"
+    },
+    "./lib/internal/canUseDOM": {
+      "require": "./lib/internal/canUseDOM.cjs",
+      "import": "./lib/internal/canUseDOM.js"
+    },
+    "./lib/internal/createTransitionManager": {
+      "require": "./lib/internal/createTransitionManager.cjs",
+      "import": "./lib/internal/createTransitionManager.js"
+    },
+    "./lib/internal/invariant": {
+      "require": "./lib/internal/invariant.cjs",
+      "import": "./lib/internal/invariant.js"
+    },
+    "./lib/internal/isActive": {
+      "require": "./lib/internal/isActive.cjs",
+      "import": "./lib/internal/isActive.js"
+    },
+    "./lib/internal/warning": {
+      "require": "./lib/internal/warning.cjs",
+      "import": "./lib/internal/warning.js"
+    }
   }
 }
