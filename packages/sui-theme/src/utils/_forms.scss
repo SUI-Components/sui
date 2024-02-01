@@ -77,9 +77,13 @@
 @mixin field-size($field) {
   $size: null !default;
   @if ($field == 'input') {
-    $size: medium 40px, small 30px;
+    $size:
+      medium 40px,
+      small 30px;
   } @else if($field == 'textarea') {
-    $size: medium 400px, small 200px;
+    $size:
+      medium 400px,
+      small 200px;
   }
 
   @each $type, $h in $size {
