@@ -34,7 +34,7 @@
     "@s-ui/lint": "4",
     "@s-ui/precommit": "3",
     "@s-ui/react-context": "1",
-    "chai": "4.3.6",
+    "chai": "5.0.3",
     "pino-pretty": "10.3.1",
     "react": "17",
     "sinon": "10.0.0",
