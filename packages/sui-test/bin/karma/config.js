@@ -8,18 +8,15 @@ const {bundlerConfig, clientConfig, isWorkspace} = require('../../src/config.js'
 
 const {captureConsole = true} = clientConfig
 const {sep} = path
-const mustPackagesToAlias = {
-  'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
-  'react/jsx-runtime': 'react/jsx-runtime.js'
-}
 
-// Transform the env config (Array) to an object
-// where the value is always an empty string.
+/**
+ *  Transform the env config (Array) to an object.
+ *  Where the value is always an empty string.
+ */
 const environmentVariables = envVars(bundlerConfig.env)
+const prefix = isWorkspace() ? '../' : './'
+const pwd = process.env.PWD
 const swcConfig = getSWCConfig({isTypeScript: true})
-
-const relPath = path.relative(process.cwd(), require.resolve('@s-ui/react-context').replace(/\/node_modules.*/, ''))
-
 const config = {
   singleRun: true,
   basePath: '',
@@ -46,10 +43,9 @@ const config = {
     stats: 'errors-only',
     resolve: {
       alias: {
-        ...mustPackagesToAlias,
-        '@s-ui/react-context': path.resolve(
-          path.join(process.env.PWD, isWorkspace() ? relPath : './', 'node_modules/@s-ui/react-context')
-        )
+        'react/jsx-dev-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-dev-runtime.js'),
+        'react/jsx-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-runtime.js'),
+        '@s-ui/react-context': path.resolve(path.join(pwd, prefix, 'node_modules/@s-ui/react-context'))
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
       extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
