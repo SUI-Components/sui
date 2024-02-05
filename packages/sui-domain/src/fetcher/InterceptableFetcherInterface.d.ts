@@ -1,6 +1,6 @@
 /** @typedef {import('./FetcherInterface').default} FetcherInterface */
 /** @extends {FetcherInterface} */
 export default interface InterceptableFetcherInterface {
-  setErrorInterceptor: (callback: Function) => void
+  setErrorInterceptor: (callback: () => void) => void
   unsetErrorInterceptor: () => void
 }
