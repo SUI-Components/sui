@@ -1,9 +1,7 @@
-import {RouteInfo} from '@s-ui/react-router/src/types'
+import {type RouteInfo} from '@s-ui/react-router/src/types'
 export * as ReactRouterTypes from '@s-ui/react-router/src/types'
 
-export interface InitialProps {
-  [key: string]: any
-}
+export type InitialProps = Record<string, any>
 export interface PageComponentOptions {
   keepMounted?: boolean
   renderLoading?: (params: GetInitialPropsClientFunctionParams) => React.ElementType

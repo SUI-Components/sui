@@ -2,7 +2,12 @@
 import {useContext} from 'react'
 
 import InitialPropsContext from './initialPropsContext'
-import {ClientPageComponent, DoneImportingPageCallback, ReactRouterTypes, WithInitialPropsComponent} from './types'
+import {
+  type ClientPageComponent,
+  type DoneImportingPageCallback,
+  type ReactRouterTypes,
+  type WithInitialPropsComponent
+} from './types'
 import withInitialProps from './withInitialProps'
 
 const EMPTY_GET_INITIAL_PROPS = async (): Promise<object> => ({})
