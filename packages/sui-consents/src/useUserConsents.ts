@@ -4,7 +4,7 @@ import SUIContext from '@s-ui/react-context'
 
 import {TCF_VERSION, TCF_WINDOW_API} from './config'
 import hasUserConsents from './hasUserConsents'
-import {EventStatus, Purpose} from './types'
+import {type Purpose, EventStatus} from './types'
 
 export default function useUserConsents(requiredConsents: number[]): boolean {
   /**
@@ -12,7 +12,7 @@ export default function useUserConsents(requiredConsents: number[]): boolean {
    * context, so we know the state of consents from the beginning, even
    * in SSR.
    */
-  const {cookies} = useContext(SUIContext)
+  const {cookies}: {cookies: string} = useContext(SUIContext)
   const [areConsentsAccepted, setAreConsentsAccepted] = useState(() => hasUserConsents({requiredConsents, cookies}))
 
   /**

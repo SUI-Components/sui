@@ -1,18 +1,6 @@
 export interface Purpose {
-  consents: {
-    /**
-     * true - Consent
-     * false - No Consent.
-     */
-    [purposeId: number]: boolean | undefined
-  }
-  legitimateInterests: {
-    /**
-     * true - Legitimate Interest Established,
-     * false - No Legitimate Interest Established
-     */
-    [purposeId: number]: boolean
-  }
+  consents: Record<number, boolean | undefined>
+  legitimateInterests: Record<number, boolean>
 }
 
 export enum EventStatus {
