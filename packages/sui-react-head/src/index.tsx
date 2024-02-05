@@ -34,7 +34,7 @@ const MetaTagInverter: React.FC<MetaTagInverterProps> = ({'data-rh': rh, ...othe
 }
 
 const Meta: React.FC<MetaProps> = props => {
-  // @ts-expect-error
+  // @ts-expect-error: We should expect any error
   return <MetaPrimitive {...props} tag={MetaTagInverter} />
 }
 

@@ -1,8 +1,9 @@
+import {type ReactElement} from 'react'
 import {renderToString} from 'react-dom/server'
 
 import {BODY_ATTRIBUTES_KEY} from './Body'
 import {HTML_ATTRIBUTES_KEY} from './Html'
-import {ComponentTag} from './types'
+import {type ComponentTag} from './types'
 
 interface ExtractPropsFromConfig {
   withKey: string
@@ -12,7 +13,7 @@ interface ExtractPropsFromConfig {
  * Extract props from a list of tags a specific tag by using a key
  * and then discard this key before returning the key
  */
-const extractPropsFrom = (tags: ComponentTag[], {withKey}: ExtractPropsFromConfig): undefined | {[x: string]: any} => {
+const extractPropsFrom = (tags: ComponentTag[], {withKey}: ExtractPropsFromConfig): undefined | Record<string, any> => {
   // search the tag using the key and default to an empty object for simplicity
   const tag: ComponentTag | undefined = tags.find(({props}) => props.name === withKey)
 
@@ -27,7 +28,7 @@ const extractPropsFrom = (tags: ComponentTag[], {withKey}: ExtractPropsFromConfi
 /**
  * Transform the object from the head to a string to be used in the server
  */
-const transformToString = (headObject: {[key: string]: string} = {}): string =>
+const transformToString = (headObject: Record<string, string> = {}): string =>
   Object.entries(headObject)
     .map(([key, value]) => `${key}="${value}"`)
     .join(' ')
@@ -35,7 +36,7 @@ const transformToString = (headObject: {[key: string]: string} = {}): string =>
 /**
  * Render the tags for the head
  */
-export function renderHeadTagsToString(headTags: any[]): {
+export function renderHeadTagsToString(headTags: Array<ReactElement<unknown>>): {
   headString: string
   bodyAttributes: string
   htmlAttributes: string

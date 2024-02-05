@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Children as ReactChildren} from 'react'
 
-import {Style, Tag} from './types'
+import {type Style, type Tag} from './types'
 
 const checkRelNeedsHref = (rel: string): boolean => ['alternate', 'preload', 'prefetch'].includes(rel)
 
@@ -50,7 +50,7 @@ export const extractTagsFrom = ({children, tag, fallback}: extractTagsFromParams
     return extract({children, byTag: tag})
   }
 
-  return fallback != null ? fallback : []
+  return fallback ?? []
 }
 
 interface extractTitleFromParams {
@@ -64,7 +64,8 @@ export const extractTitleFrom = ({children, fallback = ''}: extractTitleFromPara
   const listOfTitles = extract({children, byTag: 'title'})
   if (listOfTitles.length > 0) {
     const [title] = listOfTitles
-    return title.children !== undefined ? title.children : fallback
+
+    return title.children ?? fallback
   }
   return fallback
 }
