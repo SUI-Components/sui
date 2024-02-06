@@ -64,13 +64,17 @@ const releasesByPackages = ({status}) => {
     .map(scope => scopeMapper({scope, status}))
 }
 
-const releasePackage = async ({pkg, code, skipCi} = {}) => {
+const getCwd = ({pkg}) => {
   const isMonoPackage = checkIsMonoPackage()
+  return isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
+}
+
+const commit = async ({pkg, code, skipCi}) => {
+  const isMonoPackage = checkIsMonoPackage()
+  const cwd = getCwd({pkg})
+
   const tagPrefix = isMonoPackage ? '' : `${pkg}-`
   const packageScope = isMonoPackage ? 'Root' : pkg.replace(path.sep, '/')
-
-  const cwd = isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
-  const {private: isPrivatePackage, config: localPackageConfig} = getPackageJson(cwd, true)
 
   await exec(`npm --no-git-tag-version version ${RELEASE_CODES[code]}`, {cwd})
   await exec(`git add ${path.join(cwd, 'package.json')}`, {cwd})
@@ -83,11 +87,16 @@ const releasePackage = async ({pkg, code, skipCi} = {}) => {
   const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
   await exec(`git commit -m "${commitMsg}"`, {cwd})
 
-  await exec(`${suiMonoBinPath} changelog ${cwd}`, {cwd})
+  await exec(`${suiMonoBinPath} changelog ${cwd}`)
   await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
   await exec(`git commit --amend --no-verify --no-edit`, {cwd})
 
   await exec(`git tag -a ${tagPrefix}${version} -m "v${version}"`, {cwd})
+}
+
+const publish = async ({pkg}) => {
+  const cwd = getCwd({pkg})
+  const {private: isPrivatePackage, config: localPackageConfig} = getPackageJson(cwd, true)
 
   if (!isPrivatePackage) {
     const publishAccess = getPublishAccess({localPackageConfig})
@@ -154,7 +163,7 @@ checkShouldRelease()
       const packagesToRelease = releasesByPackages({status}).filter(({code}) => code !== 0)
 
       for (const pkg of packagesToRelease) {
-        await releasePackage({...pkg, skipCi})
+        await commit({...pkg, skipCi})
       }
 
       if (packagesToRelease.length > 0) {
@@ -166,8 +175,10 @@ checkShouldRelease()
           await exec('git commit -m "chore(Root): update package-lock.json [skip ci]" --no-verify')
         }
 
-        await exec('git push -f --tags origin HEAD')
+        await exec('git push --atomic --tags origin HEAD --no-verify')
       }
+
+      await Promise.all(packagesToRelease.map(pkg => publish(pkg)))
 
       console.log(`[sui-mono release] ${packagesToRelease.length} packages released`)
     })
