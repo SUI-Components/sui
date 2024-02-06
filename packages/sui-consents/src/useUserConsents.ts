@@ -12,7 +12,7 @@ export default function useUserConsents(requiredConsents: number[]): boolean {
    * context, so we know the state of consents from the beginning, even
    * in SSR.
    */
-  const {cookies} = useContext(SUIContext)
+  const {cookies}: {cookies: string} = useContext(SUIContext)
   const [areConsentsAccepted, setAreConsentsAccepted] = useState(() => hasUserConsents({requiredConsents, cookies}))
 
   /**

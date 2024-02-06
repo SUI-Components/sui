@@ -1,9 +1,12 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
-import fs from 'node:fs'
-import path from 'node:path'
+import {createRequire} from 'module'
+
 import {program} from 'commander'
 import {$} from 'execa'
+import fs from 'node:fs'
+import path from 'node:path'
 import prettier from 'prettier'
 
 const PACKAGE_REGEX = /packages\/((([a-z]+)-?)+)/ // matches "packages/sui-any-package-name"
@@ -26,10 +29,10 @@ program
   })
   .parse(process.argv)
 
-async function getConfig(fileName) {
-  return import(`../${fileName}/package.json`, {
-    assert: {type: 'json'}
-  }).then(module => module.default)
+function getConfig(fileName) {
+  const require = createRequire(import.meta.url)
+
+  return require(`../${fileName}/package.json`)
 }
 
 async function getPackageVersion({name, tag}) {
@@ -78,7 +81,7 @@ async function publishPackages() {
   }
 
   packagesToPublish.forEach(async packageName => {
-    const packageConfig = await getConfig(packageName)
+    const packageConfig = getConfig(packageName)
     const {name} = packageConfig
     const version = await getPackageVersion({name, tag})
 

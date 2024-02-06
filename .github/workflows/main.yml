@@ -5,6 +5,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+    types: [labeled]
 
 jobs:
   checks:
@@ -81,7 +82,7 @@ jobs:
   publish-tagged-packages:
     name: Publish Tagged Packages to NPM
     needs: checks
-    if: github.ref != 'refs/heads/master'
+    if: github.ref != 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'feature')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
