@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.5.0 (2024-02-07)
+
+
+### Bug Fixes
+
+* revert ([4caa226](https://github.com/SUI-Components/sui/commit/4caa226fccc1dbfaf0a0d18f23281435eab6e1b6))
+
+
+
 # 1.4.0 (2024-02-07)
 
 
