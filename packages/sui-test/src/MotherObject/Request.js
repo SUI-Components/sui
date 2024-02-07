@@ -34,9 +34,7 @@ export const RequestMotherObjectFactory = (FetchFetcher, {InlineError}) =>
 
     success() {
       if (this._error !== undefined)
-        throw new Error(
-          '[RequestMotherObject#success] Dont call to .success after call to .error method'
-        )
+        throw new Error('[RequestMotherObject#success] Dont call to .success after call to .error method')
 
       this._mock = this.generate(this._faker)
 
@@ -55,9 +53,7 @@ export const RequestMotherObjectFactory = (FetchFetcher, {InlineError}) =>
         )
 
       if (this._mock !== undefined)
-        throw new Error(
-          '[RequestMotherObject#error] Dont call to .error after call to .success method'
-        )
+        throw new Error('[RequestMotherObject#error] Dont call to .error after call to .success method')
 
       this._error = error
       this._mockFetcherManager.addMock({

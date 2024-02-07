@@ -58,10 +58,7 @@ export const ModelMotherObjectFactory = Model =>
           `[ModelMotherObject#validateToJSON] has failed! ${Model.constructor?.name} doesnt follow the rule: Model.create(instance.toJSON())`
         )
         diff.forEach(part => {
-          console.log(
-            `%c ${part.value}`,
-            `color: ${part.added ? 'green' : part.removed ? 'red' : 'grey'}`
-          )
+          console.log(`%c ${part.value}`, `color: ${part.added ? 'green' : part.removed ? 'red' : 'grey'}`)
         })
         throw err
       }
@@ -72,15 +69,10 @@ export const ModelMotherObjectFactory = Model =>
       try {
         expect(expected).to.be.eql(json)
       } catch (err) {
-        console.error(
-          'There are differences between the mother object model and your model'
-        )
+        console.error('There are differences between the mother object model and your model')
         const diff = diffJson(expected, json)
         diff.forEach(part => {
-          console.log(
-            `%c ${part.value}`,
-            `color: ${part.added ? 'green' : part.removed ? 'red' : 'grey'}`
-          )
+          console.log(`%c ${part.value}`, `color: ${part.added ? 'green' : part.removed ? 'red' : 'grey'}`)
         })
         throw err
       }
@@ -88,10 +80,7 @@ export const ModelMotherObjectFactory = Model =>
     }
 
     jsonModel() {
-      if (!this._model)
-        throw new Error(
-          `[ModelMotherObject#jsonModel] model is undefined model(${this._model})`
-        )
+      if (!this._model) throw new Error(`[ModelMotherObject#jsonModel] model is undefined model(${this._model})`)
       return this._model.toLiterals?.() ?? this._model.toJSON()
     }
   }
