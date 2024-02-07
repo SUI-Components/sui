@@ -13,7 +13,7 @@ const dedent = require('string-dedent')
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
   meta: {
-    type: 'problem',
+    type: 'warning',
     docs: {
       description: 'ensure to define at least one factory function',
       recommended: true,
@@ -54,7 +54,7 @@ module.exports = {
         )
 
         if (!hasStaticFactoryMethod) {
-          return context.report({
+          context.report({
             node,
             messageId: 'notFoundFactoryFunction'
           })
