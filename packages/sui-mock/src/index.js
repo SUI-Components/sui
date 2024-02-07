@@ -48,16 +48,11 @@ const setupMocker = legacyHandlers => {
   try {
     apiContextRequest = require.context(__MOCKS_API_PATH__, true, /index\.js$/)
   } catch (err) {
-    console.error(
-      `[sui-mock] Not found route folder in ${__MOCKS_API_PATH__} autoload of msw handlers disabled`
-    )
+    console.error(`[sui-mock] Not found route folder in ${__MOCKS_API_PATH__} autoload of msw handlers disabled`)
     apiContextRequest = false
   }
 
-  return mocker([
-    ...legacyHandlers,
-    ...(apiContextRequest && generateHandlerFromContext(apiContextRequest))
-  ])
+  return mocker([...legacyHandlers, ...(apiContextRequest && generateHandlerFromContext(apiContextRequest))])
 }
 
 export {setupMocker, rest}
