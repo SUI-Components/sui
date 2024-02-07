@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.4.0 (2024-02-07)
+
+
+### Bug Fixes
+
+* Fix error in Pipeline ([f87b73b](https://github.com/SUI-Components/sui/commit/f87b73b21284c3c470143912fc85f181b66e9038))
+
+
+
 # 1.3.0 (2024-02-07)
 
 
