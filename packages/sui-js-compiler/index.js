@@ -108,8 +108,6 @@ const {ignore: ignoreOpts = [], modern: isModern = false} = program.opts()
 const ignore = [...ignoreOpts, '**/__tests__']
 
 ;(async () => {
-  console.time('[sui-js-compiler]')
-
   const files = await fg('./src/**/*.{js,jsx,ts,tsx}', {ignore})
   const filesToCompile = Promise.all(
     files.map(async file => {
@@ -129,6 +127,4 @@ const ignore = [...ignoreOpts, '**/__tests__']
     : Promise.resolve()
 
   await Promise.all([filesToCompile, typesToCompile])
-
-  console.timeEnd('[sui-js-compiler]')
 })()
