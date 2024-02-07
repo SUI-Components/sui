@@ -11,7 +11,7 @@ export class MockFetcherManager {
 
   static restore() {
     if (!_instance)
-      return console.warn('Unabled restore a not init MockFetcherManager')
+      return console.warn('Unable to restore a non-initialized MockFetcherManager')
     _instance.restore()
     _instance = undefined
   }
