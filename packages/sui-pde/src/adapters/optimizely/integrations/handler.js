@@ -12,11 +12,7 @@ const integrations = [segmentIntegration]
  * @param {object} param.activeIntegrations
  * @param {object} param.optimizelyInstance
  */
-export const updateIntegrations = ({
-  hasUserConsents,
-  activeIntegrations,
-  optimizelyInstance
-}) => {
+export const updateIntegrations = ({hasUserConsents, activeIntegrations, optimizelyInstance}) => {
   integrations.forEach(integration =>
     integration({
       activeIntegrations,

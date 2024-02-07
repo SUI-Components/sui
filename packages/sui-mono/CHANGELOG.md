@@ -1,5 +1,77 @@
 # CHANGELOG
 
+# 2.45.0 (2024-02-05)
+
+
+### Features
+
+* add atomic git push ([b6e14d7](https://github.com/SUI-Components/sui/commit/b6e14d7fa971ae01617e6e67923a5a3d3ab22e22))
+* improve performance ([6330c3a](https://github.com/SUI-Components/sui/commit/6330c3acd0b68702737e9718179d33351aa69fed))
+* minor fixes ([d5a872b](https://github.com/SUI-Components/sui/commit/d5a872b2262c3a03164c510dc86d37e1c39c102e))
+* publish parallelization ([f14e2c7](https://github.com/SUI-Components/sui/commit/f14e2c75c981f0843887364bde64cfdb45d06d4f))
+* update broken import ([380a520](https://github.com/SUI-Components/sui/commit/380a52068c590a3800ff4f1fc7629cf0e8594287))
+* update changelog creation ([8b8afe3](https://github.com/SUI-Components/sui/commit/8b8afe387f3e8f9268e9c0b7038217cbefd27d1a))
+* update cwd ([fabea43](https://github.com/SUI-Components/sui/commit/fabea432ce041ca83e527f1b549b57786773752c))
+* update deps ([adfcd76](https://github.com/SUI-Components/sui/commit/adfcd76b84fe14a9f4aaaca3b5e97924b259ee94))
+* update folder matching ([f631ea4](https://github.com/SUI-Components/sui/commit/f631ea406a53114b7e00fd6ba5d910f7c575cfbc))
+* update mono tag prefix ([d31d061](https://github.com/SUI-Components/sui/commit/d31d0611927e47fcedda8c12044203ba90e6561e))
+* update parallel mono ([df6d0ba](https://github.com/SUI-Components/sui/commit/df6d0ba674613ef1be3948554a7ebf7c336ed771))
+* update read file sync ([c184056](https://github.com/SUI-Components/sui/commit/c18405675f36ee1e53b39dabe6e7543c70a8f01a))
+* update version ([55702cc](https://github.com/SUI-Components/sui/commit/55702cc92db4b83aea2be876cd690e9b64185620))
+* update version place ([fc67f20](https://github.com/SUI-Components/sui/commit/fc67f206c68c489703737cef789214a6cde1c1a0))
+* use preset ([5485065](https://github.com/SUI-Components/sui/commit/5485065cdf06f61cb95c1a133461662a4fa9b126))
+
+
+
+# 2.44.0 (2024-01-16)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** support multiple releases per commit ([cd7abbb](https://github.com/SUI-Components/sui/commit/cd7abbbe0bd21f4eca15feac8f2eb2ce828cae6b))
+
+
+
+# 2.43.0 (2024-01-12)
+
+
+### Bug Fixes
+
+* **packages/sui-mono:** fix package name regex ([e8e935f](https://github.com/SUI-Components/sui/commit/e8e935fb1c7d2d0fd571c8425f74530ccf34723b))
+
+
+
+# 2.42.0 (2023-12-05)
+
+
+### Features
+
+* **packages/sui-mono:** allow to release dependabot upgrades ([f30fa92](https://github.com/SUI-Components/sui/commit/f30fa92fbf35f91be474c88d98a0c556a7e42625))
+* **packages/sui-mono:** make check function print the new commit push to be released ([420ef73](https://github.com/SUI-Components/sui/commit/420ef73c5417c691c72d6065bdd550900f8b9e55))
+
+
+
+# 2.41.0 (2023-10-09)
+
+
+### Features
+
+* **packages/sui-mono:** avoid update lock file if no package is updated ([daab85a](https://github.com/SUI-Components/sui/commit/daab85a857b82fd0ae6b468910f1f93248372b5f))
+
+
+
+# 2.40.0 (2023-10-06)
+
+
+### Features
+
+* **packages/sui-mono:** add lockfile support ([51405ef](https://github.com/SUI-Components/sui/commit/51405ef74149d06b974bbb1283497d7b1f9dd78a))
+* **packages/sui-mono:** commit lockfile ([e7e93be](https://github.com/SUI-Components/sui/commit/e7e93be91982952d746d6510f98d4e681c6134a3))
+* **packages/sui-mono:** update lint issues ([0ee3dc7](https://github.com/SUI-Components/sui/commit/0ee3dc7c1bb95fc1611c55bd05849ab6f8505906))
+* **packages/sui-mono:** update lockfile conditionally ([d34c8c7](https://github.com/SUI-Components/sui/commit/d34c8c7cf10f825450f96f02d83267daf72cb17a))
+
+
+
 # 2.39.0 (2023-09-07)
 
 
@@ -1144,6 +1216,3 @@ Check README for migration guide.
 ### Features
 
 * **sui-mono:** set package name to @schibstedspain/sui-mono ([98255d4](https://github.com/SUI-Components/sui/commit/98255d47359bb932240b01b5d7bdded83654c6ba))
-
-
-

@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/sass-loader",
   "description": "Sass Loader for Webpack",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "main": "src/index.js",
   "scripts": {
     "test": "npm run test:server",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "css-loader": "6.7.1",
-    "mini-css-extract-plugin": "2.6.1",
+    "mini-css-extract-plugin": "2.7.7",
     "sass": "1.54.5",
     "sass-loader": "12",
     "webpack": "5.82.1"

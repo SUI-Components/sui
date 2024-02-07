@@ -1,2 +1,1 @@
-export default obj =>
-  typeof obj !== 'undefined' && typeof obj.then === 'function'
+export default obj => typeof obj !== 'undefined' && typeof obj.then === 'function'

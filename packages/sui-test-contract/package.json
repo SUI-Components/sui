@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test-contract",
-  "version": "2.12.0",
+  "version": "2.14.0",
   "description": "Useful tooling for defining contract tests (based on Pact) that will generate contract documents.",
   "license": "MIT",
   "main": "src/index.js",
@@ -20,7 +20,7 @@
     "@pactflow/pact-msw-adapter": "1.2.1",
     "@s-ui/mock": "1",
     "commander": "8.3.0",
-    "headers-polyfill": "3.0.10"
+    "headers-polyfill": "3.1.2"
   },
   "devDependencies": {
     "@s-ui/domain": "2"

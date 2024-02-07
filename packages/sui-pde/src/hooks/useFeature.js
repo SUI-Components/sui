@@ -13,11 +13,7 @@ const VARIATION_NAME_OFF = 'Off State'
  * @param {function} param.trackExperimentViewed
  * @param {string} param.featureKey
  */
-const trackFeatureFlagViewed = ({
-  isActive,
-  trackExperimentViewed,
-  featureKey
-}) => {
+const trackFeatureFlagViewed = ({isActive, trackExperimentViewed, featureKey}) => {
   const variationName = isActive ? VARIATION_NAME_ON : VARIATION_NAME_OFF
   trackExperimentViewed({experimentName: featureKey, variationName})
 }
@@ -31,13 +27,7 @@ const trackFeatureFlagViewed = ({
  * @param {object} pde
  * @param {string} adapterId
  */
-const trackLinkedExperimentsViewed = ({
-  linkedExperiments,
-  trackExperimentViewed,
-  attributes,
-  pde,
-  adapterId
-}) => {
+const trackLinkedExperimentsViewed = ({linkedExperiments, trackExperimentViewed, attributes, pde, adapterId}) => {
   if (!linkedExperiments) return
   linkedExperiments.forEach(experimentName => {
     const variationName = pde.getVariation({
@@ -57,15 +47,9 @@ const trackLinkedExperimentsViewed = ({
  * @param {string} adapterId
  * @return {{isActive: boolean}}
  */
-export default function useFeature(
-  featureKey,
-  attributes,
-  queryString,
-  adapterId
-) {
+export default function useFeature(featureKey, attributes, queryString, adapterId, shouldTrackExperimentViewed) {
   const {pde} = useContext(PdeContext)
-  if (pde === null)
-    throw new Error('[useFeature] sui-pde provider is required to work')
+  if (pde === null) throw new Error('[useFeature] sui-pde provider is required to work')
 
   const strategy = getPlatformStrategy()
 
@@ -91,18 +75,20 @@ export default function useFeature(
       adapterId
     })
 
-    trackFeatureFlagViewed({
-      isActive,
-      trackExperimentViewed: strategy.trackExperiment,
-      featureKey
-    })
-    trackLinkedExperimentsViewed({
-      linkedExperiments,
-      trackExperimentViewed: strategy.trackExperiment,
-      pde,
-      attributes,
-      adapterId
-    })
+    if (shouldTrackExperimentViewed) {
+      trackFeatureFlagViewed({
+        isActive,
+        trackExperimentViewed: strategy.trackExperiment,
+        featureKey
+      })
+      trackLinkedExperimentsViewed({
+        linkedExperiments,
+        trackExperimentViewed: strategy.trackExperiment,
+        pde,
+        attributes,
+        adapterId
+      })
+    }
     return {isActive, variables}
   } catch (error) {
     // eslint-disable-next-line no-console

@@ -8,10 +8,7 @@ import RouterContext from './internal/Context.js'
 import {createTransitionManager} from './internal/createTransitionManager.js'
 import {components, routes} from './internal/PropTypes.js'
 import {fromReactTreeToJSON} from './internal/ReactUtils.js'
-import {
-  createRouterHistory,
-  createRouterObject
-} from './internal/RouterUtils.js'
+import {createRouterHistory, createRouterObject} from './internal/RouterUtils.js'
 import Route from './Route.js'
 
 const renderRouterContent = ({components, params, router}) => {
@@ -28,10 +25,7 @@ const renderRouterContent = ({components, params, router}) => {
     routes
   }
 
-  return components.reduceRight(
-    (children, component) => h(component, routerInfo, children),
-    null
-  )
+  return components.reduceRight((children, component) => h(component, routerInfo, children), null)
 }
 
 const createRoutes = ({children, routes}) => {
@@ -59,13 +53,14 @@ const Router = ({
       jsonRoutes: createRoutes({children, routes})
     })
 
-  const router =
-    routerFromProps ?? createRouterObject(history, transitionManager.isActive)
+  const router = routerFromProps ?? createRouterObject(history, transitionManager.isActive)
 
   const [state, setState] = useState({router, params, components})
 
   useEffect(() => {
     let prevState = {}
+    let isSkipped = !!matchContext
+
     const handleTransition = (err, nextState) => {
       if (err) {
         if (onError) return onError(err)
@@ -73,8 +68,18 @@ const Router = ({
       }
 
       // avoid not needed re-renders of the state if the prevState and the nextState
-      // are the same reference
-      if (prevState === nextState) return
+      // are the same reference or if the first render
+
+      if (isSkipped) {
+        isSkipped = false
+        prevState = nextState
+        return
+      }
+
+      if (prevState === nextState) {
+        return
+      }
+
       prevState = nextState
 
       const {components, params, location, routes} = nextState
@@ -86,11 +91,7 @@ const Router = ({
     return () => unlisten()
   }, []) // eslint-disable-line
 
-  return (
-    <RouterContext.Provider value={state}>
-      {renderRouterContent(state)}
-    </RouterContext.Provider>
-  )
+  return <RouterContext.Provider value={state}>{renderRouterContent(state)}</RouterContext.Provider>
 }
 
 Router.displayName = 'Router'

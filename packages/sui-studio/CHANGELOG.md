@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 11.39.0 (2024-01-15)
+
+
+
+# 11.38.0 (2024-01-05)
+
+
+### Features
+
+* **packages/sui-studio:** disable filesystem cache in dev mode ([200c5f6](https://github.com/SUI-Components/sui/commit/200c5f610c919bd60f6493eb57182ff2791feaa6))
+* **packages/sui-studio:** upgrade Chai to fix vulnerability ([d3363aa](https://github.com/SUI-Components/sui/commit/d3363aaf31a911a80f69b2322487cde322fce57b))
+
+
+
+# 11.37.0 (2023-12-19)
+
+
+
 # 11.36.0 (2023-08-17)
 
 

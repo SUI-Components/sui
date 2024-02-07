@@ -1,5 +1,114 @@
 # CHANGELOG
 
+# 9.55.0 (2024-01-29)
+
+
+
+# 9.54.0 (2024-01-24)
+
+
+### Features
+
+* **packages/sui-bundler:** add resources as static folder ([76046c6](https://github.com/SUI-Components/sui/commit/76046c644b9622812c77282cf498ecaaf7bf908f))
+
+
+
+# 9.53.0 (2024-01-17)
+
+
+
+# 9.52.0 (2024-01-16)
+
+
+
+# 9.51.0 (2024-01-12)
+
+
+### Bug Fixes
+
+* **packages/sui-bundler:** avoid setting key when there is no cache ([aa9e03d](https://github.com/SUI-Components/sui/commit/aa9e03d1f585db6333fa1c2aed9056bf12fa74bd))
+
+
+
+# 9.50.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-bundler:** add webpack cache version to fix linking issue ([1d21c96](https://github.com/SUI-Components/sui/commit/1d21c96a2863616d04524140e09f8e87a8642134))
+
+
+
+# 9.49.0 (2024-01-11)
+
+
+### Features
+
+* **packages/sui-bundler:** use gzip compression ([4e1579f](https://github.com/SUI-Components/sui/commit/4e1579f70a57e5660a03bee27e2b86edbeb4ce7d))
+
+
+
+# 9.48.0 (2024-01-05)
+
+
+### Features
+
+* **packages/sui-bundler:** update utils and remove not needed ones ([9d856b6](https://github.com/SUI-Components/sui/commit/9d856b66581e25258f4b6e8fd3b566530c30a225))
+
+
+
+# 9.47.0 (2024-01-04)
+
+
+### Features
+
+* **packages/sui-bundler:** add cacheDir in config ([fd24c71](https://github.com/SUI-Components/sui/commit/fd24c7116a25fd7d39239b964b29b774ace989f6))
+* **packages/sui-bundler:** add webpack cache ([ffc6beb](https://github.com/SUI-Components/sui/commit/ffc6bebb8d383f5492bc8ca21d35f94e26a252cf))
+* **packages/sui-bundler:** update imports ([5a6cae0](https://github.com/SUI-Components/sui/commit/5a6cae09241167a2b4b861056f687d8ff8fb81cc))
+* **packages/sui-bundler:** use brotli compression ([fc596c2](https://github.com/SUI-Components/sui/commit/fc596c267d4c361463336065a9c4e4562c8f0468))
+
+
+
+# 9.46.0 (2023-12-22)
+
+
+### Features
+
+* **packages/sui-bundler:** Allow statics folder for Statics in Dev ([c3af51b](https://github.com/SUI-Components/sui/commit/c3af51bb454e757a224c47f95f1ab32aed079f88))
+
+
+
+# 9.45.0 (2023-12-13)
+
+
+
+# 9.44.0 (2023-12-01)
+
+
+### Features
+
+* **packages/sui-bundler:** add server dev config ([593b902](https://github.com/SUI-Components/sui/commit/593b9028706b58070a2614fbcd04d28131a0d890))
+
+
+
+# 9.43.0 (2023-10-18)
+
+
+### Features
+
+* **packages/sui-bundler:** update postcss version ([cd9c245](https://github.com/SUI-Components/sui/commit/cd9c245ef43dd2a45652aa8621e28a5a4e9031a7))
+
+
+
+# 9.42.0 (2023-09-29)
+
+
+### Features
+
+* **packages/sui-bundler:** Add option to save stats.json in build ([a46a346](https://github.com/SUI-Components/sui/commit/a46a346124da17fa2852d05a85a98afabf79094d))
+
+
+
 # 9.41.0 (2023-08-28)
 
 

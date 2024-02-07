@@ -2,20 +2,11 @@ import {renderToString} from 'react-dom/server'
 
 import {expect} from 'chai'
 
-import {
-  match,
-  Route,
-  Router,
-  useLocation,
-  useParams,
-  useRouter
-} from '../../src/index.js'
+import {match, Route, Router, useLocation, useParams, useRouter} from '../../src/index.js'
 
 const getRenderedString = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
-    match({routes: withRoutes, location}, (_, __, renderProps) =>
-      resolve(renderToString(<Router {...renderProps} />))
-    )
+    match({routes: withRoutes, location}, (_, __, renderProps) => resolve(renderToString(<Router {...renderProps} />)))
   })
 }
 
@@ -44,9 +35,7 @@ describe('Hooks', () => {
         params = useParams()
         return null
       }
-      const withRoutes = (
-        <Route path="/post/:category/:slug" component={BlogPage} />
-      )
+      const withRoutes = <Route path="/post/:category/:slug" component={BlogPage} />
       await getRenderedString({
         location: '/post/technology/new-product',
         withRoutes

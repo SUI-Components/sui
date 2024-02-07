@@ -1,9 +1,8 @@
 import {createHash} from '@s-ui/js/lib/hash'
 
-const VERSION_NAMESPACE_TAG =
-  global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE
-    ? `${global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE}::`
-    : ''
+const VERSION_NAMESPACE_TAG = global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE
+  ? `${global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE}::`
+  : ''
 
 export const inRedis =
   (target, cache, original, fnName, instance, ttl, cacheKey) =>
@@ -24,12 +23,8 @@ export const inRedis =
       }
 
       const isInlineErrorResponseWithoutError =
-        Array.isArray(response) &&
-        response.__INLINE_ERROR__ &&
-        response[0] === null &&
-        response[1]
-      const isNormalResponseWithoutError =
-        response && !response.__INLINE_ERROR__
+        Array.isArray(response) && response.__INLINE_ERROR__ && response[0] === null && response[1]
+      const isNormalResponseWithoutError = response && !response.__INLINE_ERROR__
 
       if (isInlineErrorResponseWithoutError || isNormalResponseWithoutError) {
         cache.set(key, response, ttl)

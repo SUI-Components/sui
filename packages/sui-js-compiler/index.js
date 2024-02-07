@@ -66,9 +66,7 @@ const getTsConfig = () => {
 
 const compileFile = async (file, options) => {
   const {code} = await transformFile(file, getSWCConfig(options))
-  const outputPath = file
-    .replace(SOURCE_DIR, OUTPUT_DIR)
-    .replace(TS_EXTENSION_REGEX, COMPILED_EXTENSION)
+  const outputPath = file.replace(SOURCE_DIR, OUTPUT_DIR).replace(TS_EXTENSION_REGEX, COMPILED_EXTENSION)
 
   await fs.outputFile(outputPath, code)
 }
@@ -93,11 +91,7 @@ const compileTypes = async (files, options) => {
 const commaSeparatedList = value => value.split(',')
 
 program
-  .option(
-    '--ignore [glob]',
-    'List of patterns to ignore during the compilation',
-    commaSeparatedList
-  )
+  .option('--ignore [glob]', 'List of patterns to ignore during the compilation', commaSeparatedList)
   .option('--modern', 'Transpile using modern browser targets')
   .on('--help', () => {
     console.log('  Examples:')
@@ -114,8 +108,6 @@ const {ignore: ignoreOpts = [], modern: isModern = false} = program.opts()
 const ignore = [...ignoreOpts, '**/__tests__']
 
 ;(async () => {
-  console.time('[sui-js-compiler]')
-
   const files = await fg('./src/**/*.{js,jsx,ts,tsx}', {ignore})
   const filesToCompile = Promise.all(
     files.map(async file => {
@@ -135,6 +127,4 @@ const ignore = [...ignoreOpts, '**/__tests__']
     : Promise.resolve()
 
   await Promise.all([filesToCompile, typesToCompile])
-
-  console.timeEnd('[sui-js-compiler]')
 })()

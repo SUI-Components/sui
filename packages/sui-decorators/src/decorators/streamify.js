@@ -10,9 +10,7 @@ const dispatchToListeners = ({onError, onNext, params, result}) => {
       .then(value => {
         if (value.__INLINE_ERROR__) {
           const [error, val] = value
-          return !error
-            ? onNext({params, result: val})
-            : onError({params, error})
+          return !error ? onNext({params, result: val}) : onError({params, error})
         }
         onNext({params, result: value})
       })
@@ -77,9 +75,7 @@ export default (...methods) => {
     Target.prototype.__STREAMIFY__ = true
     Object.assign(
       Target.prototype,
-      methods
-        .filter(method => !!Target.prototype[method])
-        .reduce(reducer.bind(null, Target), {})
+      methods.filter(method => !!Target.prototype[method]).reduce(reducer.bind(null, Target), {})
     )
     return Target
   }

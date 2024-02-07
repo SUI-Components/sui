@@ -13,13 +13,7 @@ console.log('[sui-svg] Preparing server with icons...')
 const server = await createServer({
   root,
   optimizeDeps: {
-    include: [
-      'classnames',
-      'prop-types',
-      'react',
-      'react/jsx-runtime',
-      'react-dom'
-    ]
+    include: ['classnames', 'prop-types', 'react', 'react/jsx-runtime', 'react-dom']
   },
   resolve: {
     alias: [

@@ -1,5 +1,6 @@
 const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
+const DEFAULT_DEV_PUBLIC_FOLDER = '.sui/public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
@@ -10,42 +11,38 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
   const multiSiteMapping = ssrConf.multiSite
   const multiSiteKeys = multiSiteMapping && Object.keys(multiSiteMapping)
 
-  const isMultiSite =
-    multiSiteKeys &&
-    multiSiteKeys.length > 0 &&
-    multiSiteKeys.includes(DEFAULT_MULTI_SITE_KEY)
+  const isMultiSite = multiSiteKeys && multiSiteKeys.length > 0 && multiSiteKeys.includes(DEFAULT_MULTI_SITE_KEY)
 
-  const hostFromReq = (req, header = DEFAULT_SITE_HEADER) =>
-    req.get(header) || req.hostname
+  const hostFromReq = (req, header = DEFAULT_SITE_HEADER) => req.get(header) || req.hostname
 
   const hostPattern = req => {
     const host = hostFromReq(req)
 
-    return (
-      (multiSiteKeys &&
-        multiSiteKeys.find(hostPattern => host.match(hostPattern))) ||
-      DEFAULT_MULTI_SITE_KEY
-    )
+    return (multiSiteKeys && multiSiteKeys.find(hostPattern => host.match(hostPattern))) || DEFAULT_MULTI_SITE_KEY
   }
 
   const multiSitePublicFolder = site => {
     const publicFolderPrefix = `${DEFAULT_PUBLIC_FOLDER}-`
     // Keep compatibility with those multi site configurations
     // that already define the public folder.
-    return site.includes(publicFolderPrefix)
-      ? site
-      : `${publicFolderPrefix}${site}`
+    return site.includes(publicFolderPrefix) ? site : `${publicFolderPrefix}${site}`
   }
 
   const publicFolder = req => {
+    if (process.env.DEV_SERVER === 'true') {
+      return DEFAULT_DEV_PUBLIC_FOLDER
+    }
+
     const site = siteByHost(req)
-    if (!site) return DEFAULT_PUBLIC_FOLDER
+
+    if (!site) {
+      return DEFAULT_PUBLIC_FOLDER
+    }
 
     return multiSitePublicFolder(site)
   }
 
-  const siteByHostPattern = hostPattern =>
-    isMultiSite && multiSiteMapping[hostPattern]
+  const siteByHostPattern = hostPattern => isMultiSite && multiSiteMapping[hostPattern]
 
   const siteByHost = req => siteByHostPattern(hostPattern(req))
 
@@ -58,19 +55,14 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
         return {
           ...acc,
-          [site]: expressStatic(
-            multiSitePublicFolder(site),
-            EXPRESS_STATIC_CONFIG
-          )
+          [site]: expressStatic(multiSitePublicFolder(site), EXPRESS_STATIC_CONFIG)
         }
       }, {})
     }
 
     return function serveStaticByHost(req, res, next) {
       const site = siteByHost(req)
-      const middleware = isMultiSite
-        ? middlewares[site]
-        : expressStatic(DEFAULT_PUBLIC_FOLDER, EXPRESS_STATIC_CONFIG)
+      const middleware = isMultiSite ? middlewares[site] : expressStatic(DEFAULT_PUBLIC_FOLDER, EXPRESS_STATIC_CONFIG)
 
       middleware(req, res, next)
     }
@@ -97,10 +89,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
     try {
       assetsManifest = JSON.parse(
-        fs.readFileSync(
-          path.join(process.cwd(), publicFolder(req), 'asset-manifest.json'),
-          'utf8'
-        )
+        fs.readFileSync(path.join(process.cwd(), publicFolder(req), 'asset-manifest.json'), 'utf8')
       )
       if (site) {
         cachedAssetsManifest = {
@@ -133,9 +122,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
       shouldCreatePageStyles && getStyleHrefBy({pageName, req})
     ].filter(Boolean)
     const attributes = async ? ssrConf.ASYNC_CSS_ATTRS : ''
-    const stylesHTML = stylesheets
-      .map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`)
-      .join('')
+    const stylesHTML = stylesheets.map(style => `<link rel="stylesheet" href="${style}" ${attributes}>`).join('')
 
     return stylesHTML
   }
@@ -153,10 +140,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
     try {
       criticalManifest = JSON.parse(
-        fs.readFileSync(
-          path.join(process.cwd(), criticalDir({req}), 'critical.json'),
-          'utf8'
-        )
+        fs.readFileSync(path.join(process.cwd(), criticalDir({req}), 'critical.json'), 'utf8')
       )
       cachedCriticalManifest = criticalManifest
     } catch (error) {

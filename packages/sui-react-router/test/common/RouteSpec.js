@@ -45,9 +45,7 @@ describe('<Route>', () => {
     it('Path over Regexp', async () => {
       const Component = () => <div>Hello word</div>
       const regexp = /^\/de$/
-      const withRoutes = (
-        <Route path="/es" regexp={regexp} component={Component} />
-      )
+      const withRoutes = <Route path="/es" regexp={regexp} component={Component} />
       const renderedString = await getRenderedString({
         location: '/es',
         withRoutes
@@ -59,10 +57,7 @@ describe('<Route>', () => {
       const Component = () => <div>Hello word</div>
       const regexp = /^\/deeplevel$/
       const withRoutes = (
-        <Route
-          path="/es"
-          component={({children}) => <h1>Layout: {children}</h1>}
-        >
+        <Route path="/es" component={({children}) => <h1>Layout: {children}</h1>}>
           <Route regexp={regexp} component={Component} />
         </Route>
       )
@@ -81,10 +76,7 @@ describe('<Route>', () => {
       )
       const regexp = /^\/user\/(?<userID>\d+)/
       const withRoutes = (
-        <Route
-          path="/es"
-          component={({children}) => <h1>Layout: {children}</h1>}
-        >
+        <Route path="/es" component={({children}) => <h1>Layout: {children}</h1>}>
           <Route regexp={regexp} component={Component}>
             <Route
               path="comment/:commentID"
@@ -102,9 +94,7 @@ describe('<Route>', () => {
         location: '/es/user/123/comment/456',
         withRoutes
       })
-      expect(renderedString).to.equal(
-        '<h1>Layout: <div>Hello word<div><h2><p>123</p><p>456</p></h2></div></div></h1>'
-      )
+      expect(renderedString).to.equal('<h1>Layout: <div>Hello word<div><h2><p>123</p><p>456</p></h2></div></div></h1>')
     })
 
     it("doesn't render unmatched regexp", async () => {
@@ -214,9 +204,7 @@ describe('<Route>', () => {
         withRoutes
       })
 
-      expect(renderedString).to.equal(
-        '<div>App<section><h1>The HomePage</h1></section></div>'
-      )
+      expect(renderedString).to.equal('<div>App<section><h1>The HomePage</h1></section></div>')
     })
 
     it('works with dynamic paths', async () => {
@@ -231,9 +219,7 @@ describe('<Route>', () => {
         withRoutes
       })
 
-      expect(renderedString).to.equal(
-        '<div>App<section><h1>Search Results: <em>money</em></h1></section></div>'
-      )
+      expect(renderedString).to.equal('<div>App<section><h1>Search Results: <em>money</em></h1></section></div>')
     })
 
     it('do not match when only part of the nested route is matched', async () => {
@@ -255,10 +241,7 @@ describe('<Route>', () => {
       const withRoutes = (
         <Route path="/es" component={App}>
           <Route path="search/a" component={Search} />
-          <Route
-            path="search/:keyword"
-            component={() => new Error('do not match ')}
-          />
+          <Route path="search/:keyword" component={() => new Error('do not match ')} />
         </Route>
       )
 
@@ -267,9 +250,7 @@ describe('<Route>', () => {
         withRoutes
       })
 
-      expect(renderedString).to.equal(
-        '<div>App<section><h1>Search Results: <em></em></h1></section></div>'
-      )
+      expect(renderedString).to.equal('<div>App<section><h1>Search Results: <em></em></h1></section></div>')
     })
 
     it('match the last route if previous dont working', async () => {

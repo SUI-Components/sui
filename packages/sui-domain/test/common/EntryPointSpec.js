@@ -23,9 +23,7 @@ describe('EntryPointFactory', () => {
       const EntryPoint = EntryPointFactory({config, useCases})
       const domain = new EntryPoint()
 
-      const useCase = domain.get(
-        'use_case_from_factory_with_multiple_use_cases'
-      )
+      const useCase = domain.get('use_case_from_factory_with_multiple_use_cases')
       const response = await useCase.execute()
 
       expect(useCase.execute).to.be.a('function')
@@ -35,8 +33,7 @@ describe('EntryPointFactory', () => {
 
     it('should be able to import a single UseCase factory', async () => {
       const useCases = {
-        use_case_from_single_factory_use_case: () =>
-          import('./fixtures/factoryWithSingleUseCase.js')
+        use_case_from_single_factory_use_case: () => import('./fixtures/factoryWithSingleUseCase.js')
       }
       const EntryPoint = EntryPointFactory({config, useCases})
       const domain = new EntryPoint()
@@ -51,20 +48,17 @@ describe('EntryPointFactory', () => {
 
     it('should be able to subscribe to useCase execution', done => {
       const useCases = {
-        use_case_from_single_factory_use_case: () =>
-          import('./fixtures/factoryWithSingleUseCase.js')
+        use_case_from_single_factory_use_case: () => import('./fixtures/factoryWithSingleUseCase.js')
       }
       const EntryPoint = EntryPointFactory({config, useCases})
       const domain = new EntryPoint()
 
-      domain
-        .get('use_case_from_single_factory_use_case')
-        .subscribe(({error, result, params}) => {
-          expect(error).to.be.null
-          expect(params).to.deep.equal({foo: 'bar'})
-          expect(result).to.be.true
-          done()
-        })
+      domain.get('use_case_from_single_factory_use_case').subscribe(({error, result, params}) => {
+        expect(error).to.be.null
+        expect(params).to.deep.equal({foo: 'bar'})
+        expect(result).to.be.true
+        done()
+      })
 
       domain.get('use_case_from_single_factory_use_case').execute({foo: 'bar'})
     })
@@ -72,20 +66,17 @@ describe('EntryPointFactory', () => {
     it('should be able to unsubscribe to useCase subscription', done => {
       let callCount = 0
       const useCases = {
-        use_case_from_single_factory_use_case: () =>
-          import('./fixtures/factoryWithSingleUseCase.js')
+        use_case_from_single_factory_use_case: () => import('./fixtures/factoryWithSingleUseCase.js')
       }
       const EntryPoint = EntryPointFactory({config, useCases})
       const domain = new EntryPoint()
 
-      const {unsubscribe} = domain
-        .get('use_case_from_single_factory_use_case')
-        .subscribe(({error, result, params}) => {
-          expect(error).to.be.null
-          expect(params).to.deep.equal({foo: 'bar'})
-          expect(result).to.be.true
-          callCount++
-        })
+      const {unsubscribe} = domain.get('use_case_from_single_factory_use_case').subscribe(({error, result, params}) => {
+        expect(error).to.be.null
+        expect(params).to.deep.equal({foo: 'bar'})
+        expect(result).to.be.true
+        callCount++
+      })
 
       domain
         .get('use_case_from_single_factory_use_case')
@@ -116,9 +107,7 @@ describe('EntryPointFactory', () => {
       const EntryPoint = EntryPointFactory({config, useCases, logger})
       const domain = new EntryPoint()
 
-      const useCase = domain.get(
-        'use_case_from_factory_with_multiple_use_cases_and_logger'
-      )
+      const useCase = domain.get('use_case_from_factory_with_multiple_use_cases_and_logger')
       const response = await useCase.execute()
 
       expect(useCase.execute).to.be.a('function')
@@ -137,9 +126,7 @@ describe('EntryPointFactory', () => {
       const EntryPoint = EntryPointFactory({config, useCases, logger})
       const domain = new EntryPoint()
 
-      const useCase = domain.get(
-        'use_case_from_single_factory_use_case_and_logger'
-      )
+      const useCase = domain.get('use_case_from_single_factory_use_case_and_logger')
       const response = await useCase.execute()
 
       expect(useCase.execute).to.be.a('function')
@@ -158,21 +145,17 @@ describe('EntryPointFactory', () => {
       const EntryPoint = EntryPointFactory({config, useCases, logger})
       const domain = new EntryPoint()
 
-      domain
-        .get('use_case_from_single_factory_use_case_and_logger')
-        .subscribe(({error, result, params}) => {
-          expect(error).to.be.null
-          expect(params).to.deep.equal({foo: 'bar'})
-          expect(result).to.be.true
-          expect(logger.log.called).to.eql(true)
-          expect(logger.error.called).to.eql(true)
-          expect(logger.metric.called).to.eql(true)
-          done()
-        })
+      domain.get('use_case_from_single_factory_use_case_and_logger').subscribe(({error, result, params}) => {
+        expect(error).to.be.null
+        expect(params).to.deep.equal({foo: 'bar'})
+        expect(result).to.be.true
+        expect(logger.log.called).to.eql(true)
+        expect(logger.error.called).to.eql(true)
+        expect(logger.metric.called).to.eql(true)
+        done()
+      })
 
-      domain
-        .get('use_case_from_single_factory_use_case_and_logger')
-        .execute({foo: 'bar'})
+      domain.get('use_case_from_single_factory_use_case_and_logger').execute({foo: 'bar'})
     })
 
     it('should be able to unsubscribe to useCase subscription', done => {

@@ -5,13 +5,7 @@ import {expect} from 'chai'
 import {matchPattern} from '../../src/PatternUtils.js'
 
 describe('matchPattern', () => {
-  function assertMatch(
-    pattern,
-    pathname,
-    remainingPathname,
-    paramNames,
-    paramValues
-  ) {
+  function assertMatch(pattern, pathname, remainingPathname, paramNames, paramValues) {
     expect(matchPattern(pattern, pathname)).to.deep.equal({
       remainingPathname,
       paramNames,
@@ -34,13 +28,7 @@ describe('matchPattern', () => {
   })
 
   it('works with splat params', () => {
-    assertMatch(
-      '/files/*.*',
-      '/files/path.jpg',
-      '',
-      ['splat', 'splat'],
-      ['path', 'jpg']
-    )
+    assertMatch('/files/*.*', '/files/path.jpg', '', ['splat', 'splat'], ['path', 'jpg'])
   })
 
   it('ignores trailing slashes', () => {
@@ -52,13 +40,7 @@ describe('matchPattern', () => {
   })
 
   it('works with greedy and non-greedy splat', () => {
-    assertMatch(
-      '/**/*.jpg',
-      '/files/path/to/file.jpg',
-      '',
-      ['splat', 'splat'],
-      ['files/path/to', 'file']
-    )
+    assertMatch('/**/*.jpg', '/files/path/to/file.jpg', '', ['splat', 'splat'], ['files/path/to', 'file'])
   })
 
   it('works with patterns that match built-in names', () => {

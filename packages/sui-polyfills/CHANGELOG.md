@@ -1,5 +1,32 @@
 # CHANGELOG
 
+# 1.21.0 (2023-12-19)
+
+
+### Features
+
+* **packages/sui-polyfills:** add polyfill for string is|to wellFormed ([705404e](https://github.com/SUI-Components/sui/commit/705404ea5332157227ecfb924562d525e5956d80))
+
+
+
+# 1.20.0 (2023-11-29)
+
+
+### Features
+
+* **packages/sui-polyfills:** add append polyfill ([255639e](https://github.com/SUI-Components/sui/commit/255639ea48be85b8e7af6417cbb619b5d351f7ff))
+
+
+
+# 1.19.0 (2023-11-23)
+
+
+### Features
+
+* **packages/sui-polyfills:** add FlatMap polyfill ([fe6c9db](https://github.com/SUI-Components/sui/commit/fe6c9db2cd1883d34c070db288fce4a5533efe65))
+
+
+
 # 1.18.0 (2023-05-04)
 
 

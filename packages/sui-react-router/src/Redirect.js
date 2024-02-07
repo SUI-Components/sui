@@ -4,10 +4,7 @@ import invariant from './internal/invariant.js'
 import {falsy} from './internal/PropTypes.js'
 
 const Redirect = () =>
-  invariant(
-    false,
-    '<Redirect> elements are for router configuration only and should not be rendered'
-  )
+  invariant(false, '<Redirect> elements are for router configuration only and should not be rendered')
 
 Redirect.displayName = 'Redirect'
 Redirect.propTypes = {

@@ -15,8 +15,7 @@ const DEFINED_COLORS = {
 const colors = {}
 
 Object.entries(DEFINED_COLORS).forEach(([colorKey, colorPrefix]) => {
-  colors[colorKey] = msg =>
-    `${colorify(colorPrefix)}${msg}${colorify(RESET_COLOR)}`
+  colors[colorKey] = msg => `${colorify(colorPrefix)}${msg}${colorify(RESET_COLOR)}`
 })
 
 module.exports = colors

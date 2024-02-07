@@ -15,11 +15,7 @@ async function replaceAsync(text, rule, replacer) {
   rule.lastIndex = 0
 
   while ((matches = rule.exec(text))) {
-    ranges.push([
-      rule.lastIndex - matches[0].length,
-      rule.lastIndex,
-      matches.slice()
-    ])
+    ranges.push([rule.lastIndex - matches[0].length, rule.lastIndex, matches.slice()])
   }
 
   const results = []

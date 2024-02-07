@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.24.0 (2023-10-02)
+
+
+### Features
+
+* **packages/sui-pde:** remove  event by default make it optional. ([a716bc9](https://github.com/SUI-Components/sui/commit/a716bc984ffda306f5342693cc618e8ef43da3cb))
+
+
+
 # 2.23.0 (2023-08-17)
 
 

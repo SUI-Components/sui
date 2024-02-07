@@ -10,16 +10,13 @@ const SUI_BUNDLER_BINARY_DIR = path.join(__dirname, '..', '..', 'bin')
 const getCWD = app => path.join(__dirname, 'integration', app)
 
 const executeBundler = async ({cwd, env = {}}) => {
-  const {stdout} = await exec(
-    `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
-    {
-      cwd,
-      env: {
-        ...process.env,
-        ...env
-      }
+  const {stdout} = await exec(`node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`, {
+    cwd,
+    env: {
+      ...process.env,
+      ...env
     }
-  )
+  })
 
   if (stdout.includes('Error')) {
     console.error(stdout)
@@ -46,22 +43,17 @@ describe('[Integration] sui-bundler', () => {
 
     expect(stdout.includes('Error')).to.be.false
 
-    const {stdout: lsStdout} = await exec(
-      `ls "${cwd}/public" | grep -E ".js$" || true`,
-      {
-        cwd
-      }
-    )
+    const {stdout: lsStdout} = await exec(`ls "${cwd}/public" | grep -E ".js$" || true`, {
+      cwd
+    })
 
     const mainJSContent = getMainFileContent({cwd, CDN})
 
     expect(lsStdout).to.be.not.eql('')
 
-    expect(fs.existsSync(path.join(`${cwd}/public/asset-manifest.json`))).to.be
-      .true
+    expect(fs.existsSync(path.join(`${cwd}/public/asset-manifest.json`))).to.be.true
 
-    expect(fs.readFileSync(path.join(`${cwd}/public/index.html`)).includes(CDN))
-      .to.be.true
+    expect(fs.readFileSync(path.join(`${cwd}/public/index.html`)).includes(CDN)).to.be.true
 
     expect(mainJSContent.includes('test_app')).to.be.true
   })
@@ -85,20 +77,13 @@ describe('[Integration] sui-bundler', () => {
     // tofix
     const OFFLINE_APP_PATH = ''
 
-    const {stdout} = await exec(
-      `node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`,
-      {
-        cwd: OFFLINE_APP_PATH
-      }
-    )
+    const {stdout} = await exec(`node "${SUI_BUNDLER_BINARY_DIR}/sui-bundler-build" -C`, {
+      cwd: OFFLINE_APP_PATH
+    })
 
-    const manifest = require(path.join(
-      `${OFFLINE_APP_PATH}/public/asset-manifest.json`
-    ))
+    const manifest = require(path.join(`${OFFLINE_APP_PATH}/public/asset-manifest.json`))
 
-    const sw = fs.readFileSync(
-      path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`)
-    )
+    const sw = fs.readFileSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))
 
     Object.entries(manifest).forEach(([original, hashed]) => {
       const isRuntime = original.match('runtime')
@@ -107,12 +92,9 @@ describe('[Integration] sui-bundler', () => {
 
     expect(stdout.includes('Error')).to.be.false
 
-    expect(fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/offline.html`)))
-      .to.be.true
+    expect(fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/offline.html`))).to.be.true
 
-    expect(
-      fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))
-    ).to.be.true
+    expect(fs.existsSync(path.join(`${OFFLINE_APP_PATH}/public/service-worker.js`))).to.be.true
 
     expect(
       fs
@@ -127,13 +109,9 @@ describe('[Integration] sui-bundler', () => {
     const EXTERNAL_MANIFEST_APP_PATH = 'tofix'
     let server
     try {
-      server = childProcess.spawn(
-        'node',
-        [path.join(__dirname, 'integration', 'static-server.js')],
-        {
-          detached: false
-        }
-      )
+      server = childProcess.spawn('node', [path.join(__dirname, 'integration', 'static-server.js')], {
+        detached: false
+      })
       // server.stdout.pipe(process.stdout)
       // server.stderr.pipe(process.stdout)
 
@@ -141,26 +119,20 @@ describe('[Integration] sui-bundler', () => {
         cwd: EXTERNAL_MANIFEST_APP_PATH
       })
 
-      const manifest = require(path.join(
-        `${EXTERNAL_MANIFEST_APP_PATH}/public/asset-manifest.json`
-      ))
+      const manifest = require(path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/asset-manifest.json`))
 
       const mainJS = manifest['main.js'].replace('/', '')
       const mainCSS = manifest['main.css'].replace('/', '')
 
       expect(
         fs
-          .readFileSync(
-            path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainJS}`)
-          )
+          .readFileSync(path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainJS}`))
           .includes('http://localhost:1234/image.123abc.jpeg')
       ).to.be.true
 
       expect(
         fs
-          .readFileSync(
-            path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainCSS}`)
-          )
+          .readFileSync(path.join(`${EXTERNAL_MANIFEST_APP_PATH}/public/${mainCSS}`))
           .includes('http://localhost:1234/css-image.456def.jpeg')
       ).to.be.true
     } finally {

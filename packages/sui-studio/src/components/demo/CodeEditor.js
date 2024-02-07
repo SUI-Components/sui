@@ -24,10 +24,7 @@ function CodeEditor({isOpen, onChange, playground}) {
 
   useEffect(function () {
     const onChangeDebounced = createOnChangeDebounced()
-    const codeMirror = window.CodeMirror.fromTextArea(
-      textAreaRef.current,
-      CODE_MIRROR_OPTIONS
-    )
+    const codeMirror = window.CodeMirror.fromTextArea(textAreaRef.current, CODE_MIRROR_OPTIONS)
     codeMirror.setValue(playground)
     codeMirror.on('change', onChangeDebounced)
 

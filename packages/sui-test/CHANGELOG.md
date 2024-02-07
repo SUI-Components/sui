@@ -1,5 +1,40 @@
 # CHANGELOG
 
+# 8.33.0 (2024-02-01)
+
+
+### Features
+
+* **packages/sui-test:** update alias path resolve ([d7ccb29](https://github.com/SUI-Components/sui/commit/d7ccb2957dff5ee9b18a23fac298d85261cda9d7))
+* **packages/sui-test:** update react aliases ([d051349](https://github.com/SUI-Components/sui/commit/d051349bf2be49064c881073de2def20c8f7d132))
+
+
+
+# 8.32.0 (2024-01-29)
+
+
+
+# 8.31.0 (2024-01-25)
+
+
+
+# 8.30.0 (2024-01-25)
+
+
+
+# 8.29.0 (2024-01-03)
+
+
+### Features
+
+* **packages/sui-test:** add adv-ui package to mocha ([bb139d6](https://github.com/SUI-Components/sui/commit/bb139d6a21362ba49bca4dc08eefd582b2ea91cc))
+
+
+
+# 8.28.0 (2023-12-13)
+
+
+
 # 8.27.0 (2023-08-14)
 
 

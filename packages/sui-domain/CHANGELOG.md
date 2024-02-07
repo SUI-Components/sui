@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.13.0 (2023-12-19)
+
+
+### Features
+
+* **packages/sui-domain:** upgrade Axios to 1.6.2 in sui-domain ([7f1f2fc](https://github.com/SUI-Components/sui/commit/7f1f2fcbc818394cbb02ea04183faeaa5656edfb))
+
+
+
 # 2.12.0 (2023-05-04)
 
 

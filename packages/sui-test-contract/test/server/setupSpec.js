@@ -10,10 +10,7 @@ const fetcher = FetcherFactory.httpFetcher({config: {}})
 const consumer = 'test-consumer'
 const fujiAppleResponse = {color: 'red', type: 'Fuji'}
 const fujiRottenAppleResponse = {...fujiAppleResponse, isRotten: true}
-const applesResponse = [
-  fujiAppleResponse,
-  {color: 'green', type: 'Granny Smith'}
-]
+const applesResponse = [fujiAppleResponse, {color: 'green', type: 'Granny Smith'}]
 const gardenResponse = {
   grassColor: '#34eb4f',
   size: {
@@ -23,15 +20,12 @@ const gardenResponse = {
   trees: [fujiAppleResponse, {color: 'green', type: 'Granny Smith'}]
 }
 const galaAppleBody = {color: 'red', type: 'Gala'}
-const getAppleHandler = rest.get(
-  'http://localhost:8181/apples/:slug',
-  (req, res, ctx) => {
-    const rotten = req.url.searchParams.get('rotten')
-    const response = rotten ? fujiRottenAppleResponse : fujiAppleResponse
+const getAppleHandler = rest.get('http://localhost:8181/apples/:slug', (req, res, ctx) => {
+  const rotten = req.url.searchParams.get('rotten')
+  const response = rotten ? fujiRottenAppleResponse : fujiAppleResponse
 
-    return res(ctx.status(200), ctx.json(response))
-  }
-)
+  return res(ctx.status(200), ctx.json(response))
+})
 const notFoundResponse = {code: 'not-found'}
 
 setupContractTests({
@@ -69,10 +63,7 @@ setupContractTests({
         description: 'A request for adding a Gala apple',
         state: "I've added a Gala apple",
         method: 'post',
-        handler: rest.post(
-          'http://localhost:8181/apples/add/:slug',
-          (req, res, ctx) => res(ctx.status(200))
-        ),
+        handler: rest.post('http://localhost:8181/apples/add/:slug', (req, res, ctx) => res(ctx.status(200))),
         body: galaAppleBody
       },
       {
@@ -80,19 +71,15 @@ setupContractTests({
         description: 'A request for adding a Gala apple with a different color',
         state: "I've added a Gala apple with a different color",
         method: 'post',
-        handler: rest.post(
-          'http://localhost:8181/apples/add/:slug',
-          (req, res, ctx) => res(ctx.status(200))
-        ),
+        handler: rest.post('http://localhost:8181/apples/add/:slug', (req, res, ctx) => res(ctx.status(200))),
         body: {color: 'yellow', type: 'Gala'}
       },
       {
         endpoint: '/apples/garden',
         description: 'A request for getting a garden',
         state: 'I have a garden',
-        handler: rest.get(
-          'http://localhost:8181/apples/garden',
-          (req, res, ctx) => res(ctx.status(200), ctx.json(gardenResponse))
+        handler: rest.get('http://localhost:8181/apples/garden', (req, res, ctx) =>
+          res(ctx.status(200), ctx.json(gardenResponse))
         ),
         response: gardenResponse,
         addMatchingRules: true
@@ -101,9 +88,8 @@ setupContractTests({
         endpoint: '/apples/search/garden',
         description: 'A request for getting a garden that fails',
         state: 'I have not garden',
-        handler: rest.get(
-          'http://localhost:8181/apples/search/garden',
-          (req, res, ctx) => res(ctx.status(404), ctx.json(notFoundResponse))
+        handler: rest.get('http://localhost:8181/apples/search/garden', (req, res, ctx) =>
+          res(ctx.status(404), ctx.json(notFoundResponse))
         ),
         response: notFoundResponse
       }
@@ -185,9 +171,7 @@ describe('Contract files generated', () => {
     })
     const {providerState, response, request} = data
 
-    expect(providerState).to.eql(
-      "I've added a Gala apple with a different color"
-    )
+    expect(providerState).to.eql("I've added a Gala apple with a different color")
     expect(request.method).to.eql('POST')
     expect(request.body).to.eql({color: 'yellow', type: 'Gala'})
     expect(response.status).to.eql(200)

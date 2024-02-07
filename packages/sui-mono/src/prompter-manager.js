@@ -31,9 +31,7 @@ const getCommitSteps = ({scopesWithChanges}) => [
     type: 'select',
     name: 'scope',
     message: '\nDenote the SCOPE of this change:',
-    choices: scopesWithChanges
-      .concat(defaultScopes)
-      .filter(scopes => scopes.name !== '.')
+    choices: scopesWithChanges.concat(defaultScopes).filter(scopes => scopes.name !== '.')
   },
   {
     type: 'input',
@@ -45,8 +43,7 @@ const getCommitSteps = ({scopesWithChanges}) => [
   {
     type: 'input',
     name: 'body',
-    message:
-      'Provide a LONGER description of the change (optional). Use "|" to break new line:\n'
+    message: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n'
   },
   {
     type: 'input',
@@ -60,8 +57,7 @@ const getCommitSteps = ({scopesWithChanges}) => [
   {
     type: 'input',
     name: 'footer',
-    message:
-      'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n'
+    message: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n'
   },
   {
     type: 'confirm',
@@ -89,16 +85,12 @@ const checkIfHasChangedFiles = async path => {
 
 module.exports = async function startMainCommitFlow() {
   const scopesWithChanges = await Promise.all(
-    scopes.map(pkg =>
-      checkIfHasChangedFiles(pkg.name).then(hasFiles => hasFiles && pkg)
-    )
+    scopes.map(pkg => checkIfHasChangedFiles(pkg.name).then(hasFiles => hasFiles && pkg))
   ).then(result => result.filter(Boolean))
 
-  const answers = await prompt(getCommitSteps({scopesWithChanges})).catch(
-    err => {
-      console.error(err)
-    }
-  )
+  const answers = await prompt(getCommitSteps({scopesWithChanges})).catch(err => {
+    console.error(err)
+  })
 
   if (answers && answers.confirmCommit === true) {
     const commitMsg = buildCommit(answers)

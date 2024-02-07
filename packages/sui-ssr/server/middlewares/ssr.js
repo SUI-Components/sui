@@ -13,10 +13,7 @@ import {ssrComponentWithInitialProps} from '@s-ui/react-initial-props'
 import {Router} from '@s-ui/react-router'
 
 import {buildDeviceFrom} from '../../build-device.js'
-import {
-  DEFAULT_REDIRECT_STATUS_CODE,
-  redirectStatusCodes
-} from '../../status-codes.js'
+import {DEFAULT_REDIRECT_STATUS_CODE, redirectStatusCodes} from '../../status-codes.js'
 import ssrConfig from '../config.js'
 import {getInitialContextValue} from '../initialContextValue/index.js'
 import replaceWithLoadCSSPolyfill from '../template/cssrelpreload.js'
@@ -37,6 +34,8 @@ try {
 const HEAD_OPENING_TAG = '<head>'
 const HEAD_CLOSING_TAG = '</head>'
 
+// const CSP_REPORT_PATH = '/csp-report'
+
 const formatServerTimingHeader = metrics =>
   Object.entries(metrics)
     .reduce((acc, [name, value]) => `${acc}${name};dur=${value},`, '')
@@ -51,14 +50,7 @@ const convertToAsyncLinks = (allMatch, startingAttrs, endingAttrs) => {
 }
 
 export default async (req, res, next) => {
-  const {
-    context,
-    criticalCSS,
-    matchResult = {},
-    performance,
-    query,
-    skipSSR
-  } = req
+  const {context, criticalCSS, matchResult = {}, performance, query, skipSSR} = req
   const {error, redirectLocation, renderProps} = matchResult
 
   let [headTplPart, bodyTplPart] = getTplParts(req)
@@ -72,9 +64,7 @@ export default async (req, res, next) => {
   }
 
   if (redirectLocation) {
-    const queryString = Object.keys(query).length
-      ? `?${qs.stringify(query)}`
-      : ''
+    const queryString = Object.keys(query).length ? `?${qs.stringify(query)}` : ''
     const destination = `${redirectLocation.pathname}${queryString}`
     return res.redirect(DEFAULT_REDIRECT_STATUS_CODE, destination)
   }
@@ -87,31 +77,21 @@ export default async (req, res, next) => {
   const hasCriticalCSS = criticalCSS && criticalCSS !== ''
 
   // get the pageComponent and its displayName to retrieve its styles
-  const pageComponent =
-    renderProps.components[renderProps.components.length - 1]
+  const pageComponent = renderProps.components[renderProps.components.length - 1]
   const pageName = pageComponent.displayName
 
   if (ssrConfig.createStylesFor && pageName) {
     const pageStyles = createStylesFor({pageName, async: hasCriticalCSS, req})
-    let nextHeadTplPart = headTplPart.replace(
-      HEAD_OPENING_TAG,
-      `${HEAD_OPENING_TAG}${pageStyles}`
-    )
+    let nextHeadTplPart = headTplPart.replace(HEAD_OPENING_TAG, `${HEAD_OPENING_TAG}${pageStyles}`)
     headTplPart = (' ' + nextHeadTplPart).slice(1)
     nextHeadTplPart = null
   }
 
   if (hasCriticalCSS) {
     let nextHeadTplPart = headTplPart
-      .replace(
-        HEAD_OPENING_TAG,
-        `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`
-      )
+      .replace(HEAD_OPENING_TAG, `${HEAD_OPENING_TAG}<style id="critical">${criticalCSS}</style>`)
       .replace(cssLinksRegExp, convertToAsyncLinks)
-      .replace(
-        HEAD_CLOSING_TAG,
-        `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`
-      )
+      .replace(HEAD_CLOSING_TAG, `${replaceWithLoadCSSPolyfill(HEAD_CLOSING_TAG)}`)
     headTplPart = (' ' + nextHeadTplPart).slice(1)
     nextHeadTplPart = null
   }
@@ -137,13 +117,8 @@ export default async (req, res, next) => {
         provider: HeadProvider,
         props: {headTags}
       },
-      ...(typeof contextProviders === 'function'
-        ? contextProviders({context})
-        : contextProviders)
-    ].reduce(
-      (acc, {provider, props}) => createElement(provider, props, acc),
-      null
-    )
+      ...(typeof contextProviders === 'function' ? contextProviders({context}) : contextProviders)
+    ].reduce((acc, {provider, props}) => createElement(provider, props, acc), null)
 
   try {
     initialData = await ssrComponentWithInitialProps({
@@ -181,11 +156,8 @@ export default async (req, res, next) => {
     }
 
     if (redirectTo) {
-      const isValidRedirectStatusCode =
-        redirectStatusCodes.includes(redirectStatusCode)
-      const validRedirectStatusCode = isValidRedirectStatusCode
-        ? redirectStatusCode
-        : DEFAULT_REDIRECT_STATUS_CODE
+      const isValidRedirectStatusCode = redirectStatusCodes.includes(redirectStatusCode)
+      const validRedirectStatusCode = isValidRedirectStatusCode ? redirectStatusCode : DEFAULT_REDIRECT_STATUS_CODE
 
       return res.redirect(validRedirectStatusCode, redirectTo)
     }
@@ -199,14 +171,14 @@ export default async (req, res, next) => {
 
   // The first html content has the be set after any possible call to next().
   // Otherwise some undesired/duplicated html could be attached to the error pages if an error occurs
-  const {bodyAttributes, headString, htmlAttributes} =
-    renderHeadTagsToString(headTags)
+  const {bodyAttributes, headString, htmlAttributes} = renderHeadTagsToString(headTags)
 
   res.set({
     'Server-Timing': formatServerTimingHeader({
       ...performance,
       ...ssrPerformance
     })
+    // 'Content-Security-Policy-Report-Only': `default-src 'self'; report-uri ${CSP_REPORT_PATH}`
   })
   res.write(HtmlBuilder.buildHead({headTplPart, headString, htmlAttributes}))
   res.flush()

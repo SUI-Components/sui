@@ -7,11 +7,7 @@ class MultipleOptimizelyAdapter {
     return Object.keys(optionsByInstance).reduce((acc, adapterId) => {
       let {datafile, sdkKey, ...restOptions} = optionsByInstance[adapterId]
 
-      if (
-        !datafile &&
-        typeof window !== 'undefined' &&
-        window.__INITIAL_CONTEXT_VALUE__?.pde[adapterId]
-      ) {
+      if (!datafile && typeof window !== 'undefined' && window.__INITIAL_CONTEXT_VALUE__?.pde[adapterId]) {
         datafile = window.__INITIAL_CONTEXT_VALUE__.pde[adapterId]
         sdkKey = undefined
       }
@@ -31,13 +27,10 @@ class MultipleOptimizelyAdapter {
   constructor(optimizelyAdapters) {
     defaultAdapterId = Object.keys(optimizelyAdapters)[0] // first adapter will be the defaultAdapter
 
-    this.#adapters = Object.keys(optimizelyAdapters).reduce(
-      (acc, adapterId) => {
-        acc[adapterId] = new OptimizelyAdapter(optimizelyAdapters[adapterId])
-        return acc
-      },
-      {}
-    )
+    this.#adapters = Object.keys(optimizelyAdapters).reduce((acc, adapterId) => {
+      acc[adapterId] = new OptimizelyAdapter(optimizelyAdapters[adapterId])
+      return acc
+    }, {})
   }
 
   getInitialData() {
@@ -52,9 +45,7 @@ class MultipleOptimizelyAdapter {
   }
 
   onReady() {
-    return Promise.all(
-      Object.values(this.#adapters).map(adapter => adapter.onReady())
-    )
+    return Promise.all(Object.values(this.#adapters).map(adapter => adapter.onReady()))
   }
 
   getEnabledFeatures({adapterId = defaultAdapterId, ...props}) {

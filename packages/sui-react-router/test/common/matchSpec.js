@@ -4,10 +4,8 @@ import {match, Redirect, Route} from '../../src/index.js'
 
 const matchPromise = ({location = '/', withRoutes}) => {
   return new Promise(resolve => {
-    match(
-      {routes: withRoutes, location},
-      (err, redirectLocation, renderProps) =>
-        resolve({err, redirectLocation, renderProps})
+    match({routes: withRoutes, location}, (err, redirectLocation, renderProps) =>
+      resolve({err, redirectLocation, renderProps})
     )
   })
 }

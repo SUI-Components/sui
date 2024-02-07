@@ -24,24 +24,15 @@ function getComponentsFromDemoImports(componentPath) {
   let componentsFromDemoImports = []
 
   try {
-    const file = path.join(
-      process.cwd(),
-      'components',
-      componentPath,
-      'demo',
-      'index.js'
-    )
+    const file = path.join(process.cwd(), 'components', componentPath, 'demo', 'index.js')
 
     if (!file) return
 
     const data = fs.readFileSync(file, ENCODING)
-    const importRegExp =
-      /import (?<componentName>.*) from 'components\/(?<componentPath>.*)\/src'/g
+    const importRegExp = /import (?<componentName>.*) from 'components\/(?<componentPath>.*)\/src'/g
     const matchedImports = [...data.matchAll(importRegExp)]
 
-    componentsFromDemoImports = matchedImports.map(
-      ({groups: {componentPath} = {}}) => componentPath
-    )
+    componentsFromDemoImports = matchedImports.map(({groups: {componentPath} = {}}) => componentPath)
   } catch (err) {
     error(err)
   }
@@ -50,8 +41,7 @@ function getComponentsFromDemoImports(componentPath) {
 }
 
 function getComponentsList(commits) {
-  const COMMIT_MESSAGE_PATTERN =
-    /\(components\/(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
+  const COMMIT_MESSAGE_PATTERN = /\(components\/(?<context>[a-zA-Z]+)\/(?<component>[a-zA-Z(-?)]+)\)/
   let list = []
 
   commits.forEach(commit => {
@@ -59,8 +49,7 @@ function getComponentsList(commits) {
     if (!data) return
     const {context, component} = data.groups
     const componentPath = `${context}/${component}`
-    const componentsFromDemoImports =
-      getComponentsFromDemoImports(componentPath)
+    const componentsFromDemoImports = getComponentsFromDemoImports(componentPath)
 
     list = [...list, componentPath, ...componentsFromDemoImports]
   })
@@ -82,14 +71,8 @@ async function cleanComponents(list) {
   })
 
   try {
-    await fs.move(
-      `${COMPONENTS_PATH}/README.md`,
-      `${NEW_COMPONENTS_PATH}/README.md`
-    )
-    await fs.move(
-      `${COMPONENTS_PATH}/globals.js`,
-      `${NEW_COMPONENTS_PATH}/globals.js`
-    )
+    await fs.move(`${COMPONENTS_PATH}/README.md`, `${NEW_COMPONENTS_PATH}/README.md`)
+    await fs.move(`${COMPONENTS_PATH}/globals.js`, `${NEW_COMPONENTS_PATH}/globals.js`)
     await fs.rm(COMPONENTS_PATH, {recursive: true, force: true})
     await fs.rename(NEW_COMPONENTS_PATH, COMPONENTS_PATH)
   } catch (err) {
@@ -105,9 +88,7 @@ function getRepositoryUrl() {
 
 function check(requiredVarName, requiredVar) {
   if (!requiredVar) {
-    log(
-      `You need to set the ${requiredVarName} variable in order to fetch the pull request commits.`
-    )
+    log(`You need to set the ${requiredVarName} variable in order to fetch the pull request commits.`)
     process.exit(1)
   }
 }
@@ -119,9 +100,7 @@ function buildPullCommitsResource() {
   const gitUrl = getRepositoryUrl()
   check('gitUrl', gitUrl)
   const isPublic = gitUrl.includes(PUBLIC_GITHUB_HOST)
-  const apiUrlPattern = isPublic
-    ? PUBLIC_GITHUB_API_URL_PATTERN
-    : PRIVATE_GITHUB_API_URL_PATTERN
+  const apiUrlPattern = isPublic ? PUBLIC_GITHUB_API_URL_PATTERN : PRIVATE_GITHUB_API_URL_PATTERN
   const {resource, organization, name} = gitUrlParse(gitUrl)
 
   return apiUrlPattern

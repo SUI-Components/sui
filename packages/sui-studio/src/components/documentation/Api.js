@@ -44,9 +44,7 @@ export default function Api({params}) {
           <div>
             <div className="sui-StudioProps-tag sui-StudioProps-required">
               <span>required</span>
-              <span className={required ? 'is-required' : ''}>
-                {required ? 'yes' : 'no'}
-              </span>
+              <span className={required ? 'is-required' : ''}>{required ? 'yes' : 'no'}</span>
             </div>
             <div className="sui-StudioProps-tag sui-StudioProps-type">
               <span>type</span>
@@ -77,9 +75,7 @@ export default function Api({params}) {
   }
 
   if (docs) {
-    return Array.isArray(docs)
-      ? docs.map(renderComponentDoc)
-      : renderComponentDoc(docs)
+    return Array.isArray(docs) ? docs.map(renderComponentDoc) : renderComponentDoc(docs)
   }
 
   return null

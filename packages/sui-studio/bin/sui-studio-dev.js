@@ -46,17 +46,14 @@ if (!category || !component) {
 const componentPath = path.join(PWD, 'components', category, component)
 const legacyTestPath = path.join(PWD, 'test', category, component)
 
-const testPath = fs.existsSync(legacyTestPath)
-  ? legacyTestPath
-  : path.join(componentPath, 'test')
+const testPath = fs.existsSync(legacyTestPath) ? legacyTestPath : path.join(componentPath, 'test')
+
+const {cache, ...others} = config
 
 const studioDevConfig = {
-  ...config,
+  ...others,
   context: path.join(__dirname, '..', 'workbench', 'src'),
-  plugins: [
-    ...config.plugins,
-    new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID)})
-  ],
+  plugins: [...config.plugins, new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID)})],
   resolve: {
     ...config.resolve,
     alias: {

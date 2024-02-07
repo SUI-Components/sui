@@ -1,5 +1,26 @@
 # CHANGELOG
 
+# 2.14.0 (2024-01-15)
+
+
+### Features
+
+* **packages/sui-test-contract:** add missing env variable ([4a6e485](https://github.com/SUI-Components/sui/commit/4a6e485563c20aa375afd0baf6dcd5fef37e7bbb))
+* **packages/sui-test-contract:** add Tags info on console logging ([5d2ac66](https://github.com/SUI-Components/sui/commit/5d2ac6642cedc65f88b08f2c9885a83530cf502c))
+* **packages/sui-test-contract:** use GITHUB_HEAD_REF || GITHUB_REF_NAME ([d907a8b](https://github.com/SUI-Components/sui/commit/d907a8ba5a7a26f0cee07868166e60eef7b8d51e))
+* **packages/sui-test-contract:** use new env vars ([eaf89c6](https://github.com/SUI-Components/sui/commit/eaf89c62ee4774215c2a045e8f6f42ade0673c6d))
+
+
+
+# 2.13.0 (2023-11-30)
+
+
+### Features
+
+* **packages/sui-test-contract:** make jobs execution halt on contract publish errors ([d26803b](https://github.com/SUI-Components/sui/commit/d26803b7abac5f86a5b16275f86d940122b40ce3))
+
+
+
 # 2.12.0 (2023-03-10)
 
 

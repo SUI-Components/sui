@@ -3,6 +3,7 @@ const webpackNodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 const {config, when, cleanList} = require('./shared/index.js')
+const {cacheDirectory} = require('./shared/config.js')
 const createBabelRules = require('./shared/module-rules-babel.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
@@ -12,10 +13,13 @@ const filename = '[name].[chunkhash:8].js'
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 /** @type {WebpackConfig} */
 const webpackConfig = {
+  name: 'server',
   context: path.resolve(process.cwd(), 'src'),
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  mode: isProduction ? 'production' : 'development',
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json'],
@@ -34,6 +38,11 @@ const webpackConfig = {
     minimize: true,
     nodeEnv: false
   },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory,
+    compression: !isProduction ? 'gzip' : false
+  },
   externals: [webpackNodeExternals()],
   plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
   resolveLoader,
@@ -48,9 +57,7 @@ const webpackConfig = {
           dataUrl: () => ''
         }
       },
-      when(config['externals-manifest'], () =>
-        manifestLoaderRules(config['externals-manifest'])
-      )
+      when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   }
 }

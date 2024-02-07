@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/test",
-  "version": "8.27.0",
+  "version": "8.33.0",
   "description": "",
   "bin": {
     "sui-test": "bin/sui-test.js"
@@ -24,16 +24,16 @@
     "@babel/register": "7.18.9",
     "@faker-js/faker": "8.0.2",
     "@s-ui/helpers": "1",
-    "babel-loader": "8.2.5",
+    "babel-loader": "8.3.0",
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-istanbul": "6.0.0",
     "babel-preset-sui": "3",
     "chai": "3.5.0",
     "commander": "8.3.0",
     "diff": "5.1.0",
-    "karma": "6.4.0",
-    "karma-chrome-launcher": "3.1.1",
-    "karma-coverage": "2.2.0",
+    "karma": "6.4.2",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-coverage": "2.2.1",
     "karma-firefox-launcher": "2.1.2",
     "karma-mocha": "2.0.1",
     "karma-spec-reporter": "0.0.34",

@@ -1,4 +1,5 @@
 /* eslint no-console:0 */
+import bodyParser from 'body-parser'
 import compression from 'compression'
 import express from 'express'
 import basicAuth from 'express-basic-auth'
@@ -8,12 +9,7 @@ import TYPES from '../hooks-types.js'
 import {hooksFactory} from './hooksFactory/index.js'
 import staticCriticalCss from './middlewares/criticalCss.js'
 import ssr from './middlewares/ssr.js'
-import {
-  hostFromReq,
-  isMultiSite,
-  readHtmlTemplate,
-  useStaticsByHost
-} from './utils/index.js'
+import {hostFromReq, isMultiSite, readHtmlTemplate, useStaticsByHost} from './utils/index.js'
 import ssrConf from './config.js'
 noOPConsole(console)
 
@@ -29,10 +25,7 @@ app.set('x-powered-by', false)
 // true: will flush before getInitialProps() was called favoring TTFB
 // false: will flush after getInitialProps() was called
 const EARLY_FLUSH_DEFAULT = true
-app.locals.earlyFlush =
-  typeof ssrConf.earlyFlush !== 'undefined'
-    ? ssrConf.earlyFlush
-    : EARLY_FLUSH_DEFAULT
+app.locals.earlyFlush = typeof ssrConf.earlyFlush !== 'undefined' ? ssrConf.earlyFlush : EARLY_FLUSH_DEFAULT
 
 const {PORT = 3000, AUTH_USERNAME, AUTH_PASSWORD} = process.env
 const runningUnderAuth = AUTH_USERNAME && AUTH_PASSWORD
@@ -48,14 +41,15 @@ const _memoizedHtmlTemplatesMapping = {}
 
   app.use(hooks[TYPES.BOOTSTRAP])
   app.use(hooks[TYPES.PRE_HEALTH])
-  app.get('/_health', (req, res) =>
-    res.status(200).json({uptime: process.uptime()})
-  )
+  app.get('/_health', (req, res) => res.status(200).json({uptime: process.uptime()}))
 
   app.use(compression())
 
   app.use(hooks[TYPES.ROUTE_MATCHING])
   app.use(hooks[TYPES.LOGGING])
+
+  app.post(`/${TYPES.CSP_REPORT}`, bodyParser.json({type: 'application/csp-report'}), hooks[TYPES.CSP_REPORT])
+
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
   app.use(express.static('statics'))
 
@@ -68,8 +62,7 @@ const _memoizedHtmlTemplatesMapping = {}
     app.use((req, res, next) => {
       const {hostname, subdomains} = req
 
-      const isLocalhost =
-        hostname.includes('localhost') || hostname.includes('.local')
+      const isLocalhost = hostname.includes('localhost') || hostname.includes('.local')
 
       if (isLocalhost || subdomains.length) return next()
 
@@ -81,8 +74,7 @@ const _memoizedHtmlTemplatesMapping = {}
     // we need to define a key for each multi site and one default
     // for single sites too.
     const site = isMultiSite ? hostFromReq(req) : 'default'
-    const memoizedHtmlTemplate =
-      _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
+    const memoizedHtmlTemplate = _memoizedHtmlTemplatesMapping && _memoizedHtmlTemplatesMapping[site]
 
     if (memoizedHtmlTemplate) {
       req.htmlTemplate = memoizedHtmlTemplate
@@ -104,7 +96,5 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-  app.listen(PORT, () =>
-    console.log(`Server up & running 🌍 http://localhost:${PORT}`)
-  ) // eslint-disable-line
+  app.listen(PORT, () => console.log(`Server up & running 🌍 http://localhost:${PORT}`)) // eslint-disable-line
 })()

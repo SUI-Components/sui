@@ -1,15 +1,10 @@
 const webpack = require('webpack')
 const formatWebpackMessages = require('../utils/formatWebpackMessages.js')
+const {printInstructions} = require('../utils/WebpackDevServerUtils.js')
 const clearConsole = require('../utils/clearConsole.js')
 const log = require('../shared/log.js')
 
 const isInteractive = process.stdout.isTTY
-
-const printInstructions = ({urls}) =>
-  log.info(`
-  Local:    ${urls.localUrlForTerminal}
-  Network:  ${urls.lanUrlForTerminal}
-`)
 
 module.exports = (config, urls) => {
   let compiler
@@ -32,9 +27,7 @@ module.exports = (config, urls) => {
 
     // Log the correct message of compilation depending if we have warnings
     if (isSuccessful) {
-      stats.hasWarnings()
-        ? log.warn('⚠ Compiled with warnings')
-        : log.success('✔ Compiled successfully')
+      stats.hasWarnings() ? log.warn('⚠ Compiled with warnings') : log.success('✔ Compiled successfully')
     }
 
     // Even with warnings, we show instructions to access localhost if we have a compilation
@@ -52,9 +45,7 @@ module.exports = (config, urls) => {
 
     // With warnings, even after showing the instructions we must list the warnings we have
     if (stats.hasWarnings()) {
-      const messages = formatWebpackMessages(
-        stats.toJson('errors-warnings', true)
-      )
+      const messages = formatWebpackMessages(stats.toJson('errors-warnings', true))
       log.warn(messages.warnings.join('\n\n'))
     }
   })

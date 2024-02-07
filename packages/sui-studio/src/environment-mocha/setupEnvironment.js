@@ -10,12 +10,7 @@ DefaultWrapper.propTypes = {
 
 const getWrapper = ({contexts = [], wrapper: Wrapper = DefaultWrapper}) => {
   const ContextsWrapper = ({children}) =>
-    contexts.reduce(
-      (children, {provider: Provider, value}) => (
-        <Provider value={value}>{children}</Provider>
-      ),
-      children
-    )
+    contexts.reduce((children, {provider: Provider, value}) => <Provider value={value}>{children}</Provider>, children)
 
   const CustomWrapper = ({children}) => (
     <ContextsWrapper>

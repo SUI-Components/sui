@@ -8,7 +8,7 @@ module.exports = {
   /* Support optional chaining new ES feature -> ? */
   optionalChaining: true,
   /* Specify the line length that the printer will wrap on. */
-  printWidth: 80,
+  printWidth: 120,
   /* Print semicolons at the ends of statements. */
   semi: false,
   /* Use single quotes instead of double quotes. */

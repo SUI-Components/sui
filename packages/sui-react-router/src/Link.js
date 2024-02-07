@@ -14,8 +14,7 @@ import {useRouter} from './hooks.js'
  * @param {MouseEvent} event Event fired by a mouse on clicking
  * @returns {Boolean} Returns if the event has been modified
  */
-const isModifiedEvent = event =>
-  Boolean(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
+const isModifiedEvent = event => Boolean(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
 
 /**
  * Check if the click is the main one, to avoid the contextual ones
@@ -37,8 +36,7 @@ const isManageableTarget = target => !target || target === '_self'
  * @param {import('./types').Router} router
  * @returns {String} Location
  */
-const resolveToLocation = (to, router) =>
-  typeof to === 'function' ? to(router.location) : to
+const resolveToLocation = (to, router) => (typeof to === 'function' ? to(router.location) : to)
 
 const Link = ({
   activeClassName,
@@ -74,10 +72,7 @@ const Link = ({
 
   // Ignore if rendered outside the context of router
   if (!router) {
-    return invariant(
-      router,
-      '<Link>s rendered outside of a router context cannot navigate.'
-    )
+    return invariant(router, '<Link>s rendered outside of a router context cannot navigate.')
   }
 
   // If user does not specify a `to` prop, return an empty anchor tag
@@ -91,8 +86,7 @@ const Link = ({
   const isActiveRoute = router.isActive(toLocation, onlyActiveOnIndex)
   // create className and inline styles depending if the route is active
   // if empty string, we default to `undefined` to avoid empty class attribute
-  const className =
-    cx(restOfProps.className, isActiveRoute && activeClassName) || undefined
+  const className = cx(restOfProps.className, isActiveRoute && activeClassName) || undefined
   const style = {...restOfProps.style, ...(isActiveRoute && activeStyle)}
 
   const anchorProps = {
@@ -122,9 +116,7 @@ Link.propTypes = {
   /**
    * Get the underlying ref of the component using React.createRef.
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.shape({current: PropTypes.elementType})
-  ]),
+  innerRef: PropTypes.oneOfType([PropTypes.shape({current: PropTypes.elementType})]),
   /**
    * Function to execute when the element is clicked
    */

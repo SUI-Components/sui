@@ -1,28 +1,14 @@
 const {serverConfig} = require('../../src/config.js')
-const {
-  forceTranspilation = [],
-  esmOverride = false,
-  useLibDir = false
-} = serverConfig
+const {forceTranspilation = [], esmOverride = false, useLibDir = false} = serverConfig
 
-const regexToAdd = forceTranspilation.map(
-  regexString => new RegExp(regexString)
-)
+const regexToAdd = forceTranspilation.map(regexString => new RegExp(regexString))
 
 if (esmOverride) {
   require('./applyEsmOverride.js')
 }
 
 const libDir = /lib/
-const paths = [
-  /@babel\/runtime/,
-  /@s-ui/,
-  /mocks/,
-  /src/,
-  /test/,
-  libDir,
-  ...regexToAdd
-]
+const paths = [/@babel\/runtime/, /@s-ui/, /@adv-ui/, /mocks/, /src/, /test/, libDir, ...regexToAdd]
 
 require('@babel/register')({
   ignore: [],
@@ -35,8 +21,5 @@ require('@babel/register')({
       }
     ]
   ],
-  plugins: [
-    'babel-plugin-dynamic-import-node',
-    '@babel/plugin-transform-modules-commonjs'
-  ]
+  plugins: ['babel-plugin-dynamic-import-node', '@babel/plugin-transform-modules-commonjs']
 })

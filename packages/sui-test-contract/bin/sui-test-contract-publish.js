@@ -12,20 +12,16 @@ import {Publisher} from '@pact-foundation/pact'
 import {exec} from './utils/index.js'
 
 program
-  .option(
-    '-b, --broker-url <brokerUrl>',
-    'Pact broker URL where the contracts will be published.'
-  )
+  .option('-b, --broker-url <brokerUrl>', 'Pact broker URL where the contracts will be published.')
   .parse(process.argv)
 
 const {brokerUrl} = program.opts()
-if (!brokerUrl)
-  throw new Error(
-    'You need to specify the broker URL where the contracts will be published.'
-  )
+if (!brokerUrl) throw new Error('You need to specify the broker URL where the contracts will be published.')
 const contractsDir = path.resolve(process.cwd(), 'contract/documents')
 const {
+  GITHUB_HEAD_REF,
   GITHUB_REF,
+  GITHUB_REF_NAME,
   GITHUB_SHA,
   TRAVIS_PULL_REQUEST_BRANCH,
   TRAVIS_BRANCH,
@@ -36,6 +32,8 @@ const {
 const branch =
   TRAVIS_PULL_REQUEST_BRANCH ||
   TRAVIS_BRANCH ||
+  GITHUB_HEAD_REF ||
+  GITHUB_REF_NAME ||
   GITHUB_REF ||
   exec('git rev-parse --abbrev-ref HEAD')
 const consumerVersion = TRAVIS_PULL_REQUEST_SHA || TRAVIS_COMMIT || GITHUB_SHA
@@ -50,13 +48,10 @@ const options = {
 new Publisher(options)
   .publishPacts()
   .then(() => {
-    console.log(
-      `Pact contract for consumer version ${options.consumerVersion} published!`
-    )
-    console.log(
-      `Head over to ${brokerUrl} and login with to see your published contracts.`
-    )
+    console.log(`Pact contract for consumer version ${options.consumerVersion} published!`)
+    console.log(`Head over to ${brokerUrl} and login to see your published contracts.`)
+    console.log(`Tags: ${branch}`)
   })
-  .catch(e => {
-    console.log('Pact contract publishing failed: ', e)
+  .catch(error => {
+    throw new Error(`Pact contract publishing failed: ${error}`)
   })
