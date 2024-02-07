@@ -79,17 +79,19 @@ const config = {
       }
     },
     plugins: [
-      new webpack.DefinePlugin({
-        __BASE_DIR__: JSON.stringify(process.env.PWD),
-        PATTERN: JSON.stringify(process.env.PATTERN),
-        CATEGORIES: JSON.stringify(process.env.CATEGORIES)
+      new webpack.ProvidePlugin({
+        process: require.resolve('process/browser')
       }),
       new webpack.EnvironmentPlugin({
         NODE_ENV: 'development',
         ...environmentVariables
       }),
-      new webpack.ProvidePlugin({
-        process: require.resolve('process/browser')
+      new webpack.DefinePlugin({
+        __MOCKS_API_PATH__: JSON.stringify(process.env.MOCKS_API_PATH || process.env.PWD + '/mocks/routes'),
+        'process.env.SEED': JSON.stringify(process.env.SEED),
+        __BASE_DIR__: JSON.stringify(process.env.PWD),
+        PATTERN: JSON.stringify(process.env.PATTERN),
+        CATEGORIES: JSON.stringify(process.env.CATEGORIES)
       })
     ],
     module: {
