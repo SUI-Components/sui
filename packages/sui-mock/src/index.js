@@ -1,4 +1,4 @@
-/* global __MOCKS_API_PATH__ */
+// /* global __MOCKS_API_PATH__ */
 import {rest} from 'msw'
 
 import {getBrowserMocker} from './browser.js'
@@ -44,13 +44,14 @@ const generateHandlerFromContext = requester => {
 
 const setupMocker = legacyHandlers => {
   const mocker = isNode ? getServerMocker : getBrowserMocker
-  let apiContextRequest
-  try {
-    apiContextRequest = require.context(__MOCKS_API_PATH__, true, /index\.js$/)
-  } catch (err) {
-    console.error(`[sui-mock] Not found route folder in ${__MOCKS_API_PATH__} autoload of msw handlers disabled`)
-    apiContextRequest = false
-  }
+  // TODO: Review error in Pipeline https://github.mpi-internal.com/scmspain/frontend-cf--web-app/actions/runs/3804318/job/12053812#step:5:238
+  const apiContextRequest = false
+  // try {
+  //   apiContextRequest = require.context(__MOCKS_API_PATH__, true, /index\.js$/)
+  // } catch (err) {
+  //   console.error(`[sui-mock] Not found route folder in ${__MOCKS_API_PATH__} autoload of msw handlers disabled`)
+  //   apiContextRequest = false
+  // }
 
   return mocker([...legacyHandlers, ...(apiContextRequest && generateHandlerFromContext(apiContextRequest))])
 }
