@@ -301,7 +301,7 @@ describe('WebVitalsReporter', () => {
     render(<WebVitalsReporter metrics={[METRICS.INP]} allowed={['/']} reporter={reporter} />, {logger})
     await waitFor(() => [
       expect(
-        logger.cwv.calledWith({
+        logger.cwv.calledOnceWithMatch({
           name: 'cwv.inp',
           amount: 304,
           path: '/',
