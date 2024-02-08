@@ -302,15 +302,15 @@ describe('WebVitalsReporter', () => {
     await waitFor(() => [
       expect(
         logger.cwv.calledWith({
-          name: 'cwv.inp',
-          amount: 104,
-          path: '/',
-          target: undefined,
-          visibilityState: 'hidden',
-          eventType: 'body',
+          amount: 304,
           deviceMemory: 8,
           effectiveType: '4g',
-          hardwareConcurrency: 10
+          eventType: 'body',
+          hardwareConcurrency: 10,
+          name: 'cwv.inp',
+          path: '/',
+          target: undefined,
+          visibilityState: 'hidden'
         })
       ).to.be.true
     ])
