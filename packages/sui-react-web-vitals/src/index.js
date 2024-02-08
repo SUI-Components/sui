@@ -103,6 +103,8 @@ export default function WebVitalsReporter({
 
       const target = getTarget({name, attribution})
 
+      const {effectiveConnection, deviceMemory, hardwareConcurrency} = browser || {}
+
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
         amount,
@@ -111,7 +113,10 @@ export default function WebVitalsReporter({
         target,
         loadState: attribution.loadState,
         visibilityState: document.visibilityState,
-        ...(attribution.eventType && {eventType: attribution.eventType})
+        ...(attribution.eventType && {eventType: attribution.eventType}),
+        effectiveConnection,
+        deviceMemory,
+        hardwareConcurrency
       })
     }
 
