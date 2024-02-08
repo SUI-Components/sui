@@ -57,11 +57,7 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
-    const {
-      deviceMemory,
-      connection: {effectiveType},
-      hardwareConcurrency
-    } = window.navigator
+    const {deviceMemory, connection: {effectiveType} = {}, hardwareConcurrency} = window.navigator || {}
 
     const getRouteid = () => {
       return route?.id
