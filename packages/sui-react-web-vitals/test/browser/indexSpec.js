@@ -293,7 +293,7 @@ describe('WebVitalsReporter', () => {
           hardwareConcurrency: 10,
           name: 'INP',
           rating: 'poor',
-          value: 104
+          value: 304
         })
       }
     }
