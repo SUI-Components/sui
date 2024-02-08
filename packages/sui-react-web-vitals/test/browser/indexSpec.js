@@ -279,7 +279,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it.skip('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+  it('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
     const logger = {
       cwv: sinon.spy()
     }
@@ -306,7 +306,7 @@ describe('WebVitalsReporter', () => {
           amount: 304,
           path: '/',
           target: undefined,
-          visibilityState: document.visibilityState,
+          visibilityState: 'hidden',
           eventType: 'body',
           deviceMemory: 8,
           effectiveType: '4g',
