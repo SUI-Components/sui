@@ -3,6 +3,7 @@
 /* eslint-disable no-console */
 const webpack = require('webpack')
 const path = require('path')
+const million = require('million/compiler')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
@@ -100,7 +101,8 @@ const webpackConfig = {
       template: './index.html'
     }),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/]),
-    new WebpackManifestPlugin({fileName: 'asset-manifest.json'})
+    new WebpackManifestPlugin({fileName: 'asset-manifest.json'}),
+    million.webpack({auto: true})
   ]),
   module: {
     rules: cleanList([

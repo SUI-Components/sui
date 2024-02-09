@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
+const million = require('million/compiler')
 const path = require('path')
 
 const {config, when, cleanList} = require('./shared/index.js')
@@ -44,7 +45,7 @@ const webpackConfig = {
     compression: !isProduction ? 'gzip' : false
   },
   externals: [webpackNodeExternals()],
-  plugins: [new webpack.DefinePlugin({'global.GENTLY': false})],
+  plugins: [new webpack.DefinePlugin({'global.GENTLY': false}), million.webpack({auto: true})],
   resolveLoader,
   module: {
     rules: cleanList([
