@@ -279,7 +279,10 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it.skip('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+  it('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+    // Mocking the visibilityState
+    Object.defineProperty(window.document, 'visibilityState', {value: 'hidden', writable: false})
+
     const logger = {
       cwv: sinon.spy()
     }

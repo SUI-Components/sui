@@ -106,9 +106,6 @@ export default function WebVitalsReporter({
       const target = getTarget({name, attribution})
       const {loadState, eventType} = attribution
 
-      console.log('⛯ Core Web Vitals Logger')
-      console.log('⛯ visibilityState:', document.visibilityState)
-
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
         amount,
