@@ -100,10 +100,10 @@ export default function WebVitalsReporter({
       const pathname = getPathname(route)
       const routeid = getRouteid()
       const isAllowed = allowed.includes(pathname) || allowed.includes(routeid)
-
-      if (!isAllowed || !logger?.cwv || rating === RATING.GOOD) return
-
       const target = getTarget({name, attribution})
+
+      if (!isAllowed || !logger?.cwv || rating === RATING.GOOD || target !== '') return
+
       const {loadState, eventType} = attribution
 
       logger.cwv({
