@@ -14,15 +14,6 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "config": {
-    "sui-test": {
-      "server": {
-        "forceTranspilation": [
-          "./server"
-        ]
-      }
-    }
-  },
   "dependencies": {
     "@s-ui/critical-css-middleware": "1",
     "@s-ui/hoc": "1",
