@@ -1,16 +1,13 @@
 import {createRequire} from 'module'
 
 import {getSWCConfig} from '@s-ui/compiler-config'
-
-import {serverConfig} from '../../src/config.js'
+import {serverConfig} from '@s-ui/test/lib/config'
 
 const require = createRequire(import.meta.url)
-const {forceTranspilation = [], useLibDir = false} = serverConfig
-const regexToAdd = forceTranspilation.map(regexString => new RegExp(regexString))
+const {useLibDir = false} = serverConfig
 const libDir = /lib/
-const paths = [/@babel\/runtime/, /@s-ui/, /@adv-ui/, /mocks/, /src/, /test/, libDir, ...regexToAdd]
+const paths = [/@babel\/runtime/, /@s-ui/, /@adv-ui/, /mocks/, /src/, /test/, libDir]
 const only = useLibDir ? paths : paths.filter(path => path !== libDir)
-
 const isTypeScript = false
 
 // Register all source files.
