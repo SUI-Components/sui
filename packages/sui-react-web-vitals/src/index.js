@@ -57,6 +57,8 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
+    const {deviceMemory, connection: {effectiveType} = {}, hardwareConcurrency} = window.navigator || {}
+
     const getRouteid = () => {
       return route?.id
     }
@@ -98,20 +100,24 @@ export default function WebVitalsReporter({
       const pathname = getPathname(route)
       const routeid = getRouteid()
       const isAllowed = allowed.includes(pathname) || allowed.includes(routeid)
-
-      if (!isAllowed || !logger?.cwv || rating === RATING.GOOD) return
-
       const target = getTarget({name, attribution})
+
+      if (!isAllowed || !logger?.cwv || rating === RATING.GOOD || !target) return
+
+      const {loadState, eventType} = attribution
 
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
         amount,
         path: pathname,
-        ...(routeid && {routeId: routeid}),
         target,
-        loadState: attribution.loadState,
         visibilityState: document.visibilityState,
-        ...(attribution.eventType && {eventType: attribution.eventType})
+        ...(routeid && {routeId: routeid}),
+        ...(loadState && {loadState}),
+        ...(eventType && {eventType}),
+        ...(deviceMemory && {deviceMemory}),
+        ...(effectiveType && {effectiveType}),
+        ...(hardwareConcurrency && {hardwareConcurrency})
       })
     }
 

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.56.0 (2024-02-07)
+
+
+### Features
+
+* Define __MOCKS_API_PATH__ var ([37c48c4](https://github.com/SUI-Components/sui/commit/37c48c424cf21ae91c508e47ee6e821c5a7fb107))
+
+
+
 # 9.55.0 (2024-01-29)
 
 
@@ -2394,6 +2403,3 @@ with the old one
 ### Features
 
 * **sui-bundler:** migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081774048ab5c6be1f68d564d219294265bd))
-
-
-

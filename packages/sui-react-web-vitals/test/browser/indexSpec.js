@@ -278,4 +278,44 @@ describe('WebVitalsReporter', () => {
       ).to.be.true
     ])
   })
+
+  it.skip('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+    // Mocking the visibilityState
+    Object.defineProperty(window.document, 'visibilityState', {value: 'hidden', writable: false})
+
+    const logger = {
+      cwv: sinon.spy()
+    }
+
+    const reporter = {
+      onINP: fn => {
+        fn({
+          attribution: {eventType: 'body'},
+          deviceMemory: 8,
+          effectiveType: '4g',
+          hardwareConcurrency: 10,
+          name: 'INP',
+          rating: 'poor',
+          value: 304
+        })
+      }
+    }
+
+    render(<WebVitalsReporter metrics={[METRICS.INP]} allowed={['/']} reporter={reporter} />, {logger})
+    await waitFor(() => [
+      expect(
+        logger.cwv.calledOnceWithMatch({
+          name: 'cwv.inp',
+          amount: 304,
+          path: '/',
+          target: undefined,
+          visibilityState: 'hidden',
+          eventType: 'body',
+          deviceMemory: 8,
+          effectiveType: '4g',
+          hardwareConcurrency: 10
+        })
+      ).to.be.true
+    ])
+  })
 })

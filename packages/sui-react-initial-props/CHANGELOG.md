@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 2.22.0 (2024-02-07)
+
+
+
 # 2.21.0 (2022-03-28)
 
 
@@ -283,6 +287,3 @@
 * **sui-react-initial-props:** add some useful params and improve readability ([1e0d658](https://github.com/SUI-Components/sui/commit/1e0d65802084337a04c426435914aca99b9378a6))
 * **sui-react-initial-props:** create sui-react-initial-props first version ([1201321](https://github.com/SUI-Components/sui/commit/1201321e4a1969ef32a7dfa3bbd71dbcfc657123))
 * **sui-react-initial-props:** redefine the HoC and add missing dependency ([8ec10d7](https://github.com/SUI-Components/sui/commit/8ec10d701dede89bc89af86559141ddca6f0053b))
-
-
-
