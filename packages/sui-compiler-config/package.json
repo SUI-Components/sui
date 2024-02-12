@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Compilers config (SWC, TS...) for SUI projects.",
   "type": "module",
-  "module": "src/index.js",
-  "scripts": {},
+  "module": "./lib/index.js",
+  "main": "./lib/index.cjs",
+  "scripts": {
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf lib && npm run lib"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -22,7 +26,8 @@
   },
   "exports": {
     ".": {
-      "import": "./src/index.js"
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.js"
     }
   }
 }
