@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.3.0 (2024-02-12)
+
+
+### Features
+
+* skip empty targets ([39a0ac4](https://github.com/SUI-Components/sui/commit/39a0ac45cd59f091521345269f4e7323a582b303))
+* validate if the target is null ([f671e93](https://github.com/SUI-Components/sui/commit/f671e9378797525386dfcfe9399f33e6cac6fd87))
+
+
+
 # 2.2.0 (2024-02-09)
 
 
