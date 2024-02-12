@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Monorepo for SUI (Simple User Interface) packages.",
+  "type": "module",
   "keywords": [
     "adevinta",
     "monorepo",
@@ -50,10 +51,6 @@
     },
     "sui-test": {
       "server": {
-        "forceTranspilation": [
-          "./packages/sui-ssr/server"
-        ],
-        "esmOverride": true,
         "useLibDir": true
       }
     }
