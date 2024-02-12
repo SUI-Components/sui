@@ -82,13 +82,13 @@ const testTemplate = `/*
 
 import ReactDOM from 'react-dom'
 
-import chai, {expect} from 'chai'
+import {use, expect} from 'chai'
 import chaiDOM from 'chai-dom'
 ${context ? '' : "import Component from '../src/index.js'"}
 
 ${context ? "import '@s-ui/studio/src/patcher-mocha'" : ''}
 
-chai.use(chaiDOM)
+use(chaiDOM)
 
 describe${context ? '.context.default' : ''}('${componentInPascal}', ${context ? 'Component' : '()'} => {
   const setup = setupEnvironment(Component)
