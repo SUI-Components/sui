@@ -7,10 +7,10 @@
 
 import ReactDOM from 'react-dom'
 
-import chai, {expect} from 'chai'
+import {use, expect} from 'chai'
 import chaiDOM from 'chai-dom'
 
-chai.use(chaiDOM)
+use(chaiDOM)
 
 describe('AtomButton', () => {
   const Component = AtomButton

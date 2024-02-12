@@ -2,11 +2,11 @@
 /* eslint-disable no-console */
 // @ts-check
 
-const program = require('commander')
-const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} = require('../src/helpers.js')
+import program from 'commander'
+import {ESLint} from 'eslint'
 
-const {ESLint} = require('eslint')
-const config = require('../eslintrc.js')
+import config from '../eslintrc.js'
+import {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} from '../src/helpers.js'
 
 program
   .option('--add-fixes')

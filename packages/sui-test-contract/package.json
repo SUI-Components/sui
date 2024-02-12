@@ -3,14 +3,12 @@
   "version": "2.14.0",
   "description": "Useful tooling for defining contract tests (based on Pact) that will generate contract documents.",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "./lib/index.cjs",
   "type": "module",
-  "bin": {
-    "sui-test-contract": "bin/index.js"
-  },
+  "bin": { "sui-test-contract": "bin/index.js" },
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib",
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf lib && npm run lib",
     "test": "npm run test:server",
     "test:server": "NODE_ENV=test sui-test server",
     "test:server:watch": "npm run test:server -- --watch"
@@ -22,7 +20,17 @@
     "commander": "8.3.0",
     "headers-polyfill": "3.1.2"
   },
-  "devDependencies": {
-    "@s-ui/domain": "2"
+  "devDependencies": { "@s-ui/domain": "2" },
+  "module": "./lib/index.js",
+  "exports": {
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/setup": {
+      "require": "./lib/setup/index.cjs",
+      "import": "./lib/setup/index.js"
+    },
+    "./lib/setup/utils": {
+      "require": "./lib/setup/utils.cjs",
+      "import": "./lib/setup/utils.js"
+    }
   }
 }

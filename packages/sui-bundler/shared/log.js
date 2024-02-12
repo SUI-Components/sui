@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-const colors = require('@s-ui/helpers/colors')
+import colors from '@s-ui/helpers/colors'
 
-module.exports = {
+export default {
   info: msg => console.log(colors.gray(msg)),
   error: msg => console.log(colors.red(msg)),
   success: msg => console.log(colors.green(msg)),

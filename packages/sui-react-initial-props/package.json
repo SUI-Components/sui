@@ -1,12 +1,12 @@
 {
   "name": "@s-ui/react-initial-props",
   "version": "2.21.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/index.cjs",
+  "types": "./lib/index.d.ts",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
     "lib": "sui-js-compiler",
-    "prepublishOnly": "npm run lib"
+    "prepublishOnly": "rm -rf && npm run lib"
   },
   "keywords": [],
   "author": "",
@@ -17,11 +17,48 @@
     "react": "16 || 17"
   },
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support",
     "@s-ui/react-router": "1",
     "@testing-library/react": "11.1.0",
     "@types/node": "16",
     "react": "17",
     "react-dom": "17"
+  },
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/createClientContextFactoryParams": {
+      "require": "./lib/createClientContextFactoryParams.cjs",
+      "import": "./lib/createClientContextFactoryParams.js",
+      "types": "./lib/createClientContextFactoryParams.d.ts"
+    },
+    "./lib/createServerContextFactoryParams": {
+      "require": "./lib/createServerContextFactoryParams.cjs",
+      "import": "./lib/createServerContextFactoryParams.js",
+      "types": "./lib/createServerContextFactoryParams.d.ts"
+    },
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/initialPropsContext": {
+      "require": "./lib/initialPropsContext.cjs",
+      "import": "./lib/initialPropsContext.js",
+      "types": "./lib/initialPropsContext.d.ts"
+    },
+    "./lib/loadPage": {
+      "require": "./lib/loadPage.cjs",
+      "import": "./lib/loadPage.js",
+      "types": "./lib/loadPage.d.ts"
+    },
+    "./lib/ssrComponentWithInitialProps": {
+      "require": "./lib/ssrComponentWithInitialProps.cjs",
+      "import": "./lib/ssrComponentWithInitialProps.js",
+      "types": "./lib/ssrComponentWithInitialProps.d.ts"
+    },
+    "./lib/withInitialProps": {
+      "require": "./lib/withInitialProps.cjs",
+      "import": "./lib/withInitialProps.js",
+      "types": "./lib/withInitialProps.d.ts"
+    }
   }
 }

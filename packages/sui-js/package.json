@@ -4,8 +4,8 @@
   "description": "Set of JS utilities",
   "type": "module",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib"
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf && npm run lib"
   },
   "keywords": [],
   "author": "",
@@ -28,8 +28,96 @@
     "type": "git",
     "url": "git+https://github.com/SUI-Components/sui.git"
   },
-  "bugs": {
-    "url": "https://github.com/SUI-Components/sui/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme"
+  "bugs": { "url": "https://github.com/SUI-Components/sui/issues" },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-js#readme",
+  "exports": {
+    "./lib/array": {
+      "require": "./lib/array/index.cjs",
+      "import": "./lib/array/index.js"
+    },
+    "./lib/classes": {
+      "require": "./lib/classes/index.cjs",
+      "import": "./lib/classes/index.js"
+    },
+    "./lib/cookie": {
+      "require": "./lib/cookie/index.cjs",
+      "import": "./lib/cookie/index.js"
+    },
+    "./lib/dom": {
+      "require": "./lib/dom/index.cjs",
+      "import": "./lib/dom/index.js"
+    },
+    "./lib/events": {
+      "require": "./lib/events/index.cjs",
+      "import": "./lib/events/index.js"
+    },
+    "./lib/function/debounce": {
+      "require": "./lib/function/debounce.cjs",
+      "import": "./lib/function/debounce.js"
+    },
+    "./lib/function": {
+      "require": "./lib/function/index.cjs",
+      "import": "./lib/function/index.js"
+    },
+    "./lib/function/throttle": {
+      "require": "./lib/function/throttle.cjs",
+      "import": "./lib/function/throttle.js"
+    },
+    "./lib/hash": {
+      "require": "./lib/hash/index.cjs",
+      "import": "./lib/hash/index.js"
+    },
+    "./lib/nanoid": {
+      "require": "./lib/nanoid/index.cjs",
+      "import": "./lib/nanoid/index.js"
+    },
+    "./lib/number": {
+      "require": "./lib/number/index.cjs",
+      "import": "./lib/number/index.js"
+    },
+    "./lib/react": {
+      "require": "./lib/react/index.cjs",
+      "import": "./lib/react/index.js"
+    },
+    "./lib/pipe": {
+      "require": "./lib/pipe/index.cjs",
+      "import": "./lib/pipe/index.js"
+    },
+    "./lib/regex": {
+      "require": "./lib/regex/index.cjs",
+      "import": "./lib/regex/index.js"
+    },
+    "./lib/string/highlighter": {
+      "require": "./lib/string/highlighter.cjs",
+      "import": "./lib/string/highlighter.js"
+    },
+    "./lib/string": {
+      "require": "./lib/string/index.cjs",
+      "import": "./lib/string/index.js"
+    },
+    "./lib/string/parse-query-string": {
+      "require": "./lib/string/parse-query-string.cjs",
+      "import": "./lib/string/parse-query-string.js"
+    },
+    "./lib/string/random-string": {
+      "require": "./lib/string/random-string.cjs",
+      "import": "./lib/string/random-string.js"
+    },
+    "./lib/string/slugify": {
+      "require": "./lib/string/slugify.cjs",
+      "import": "./lib/string/slugify.js"
+    },
+    "./lib/string/snake-case": {
+      "require": "./lib/string/snake-case.cjs",
+      "import": "./lib/string/snake-case.js"
+    },
+    "./lib/string/to-query-string": {
+      "require": "./lib/string/to-query-string.cjs",
+      "import": "./lib/string/to-query-string.js"
+    },
+    "./lib/ua-parser": {
+      "require": "./lib/ua-parser/index.cjs",
+      "import": "./lib/ua-parser/index.js"
+    }
+  }
 }

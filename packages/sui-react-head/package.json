@@ -2,26 +2,48 @@
   "name": "@s-ui/react-head",
   "version": "1.13.0",
   "description": "",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/index.cjs",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "lib": "sui-js-compiler",
-    "prepublishOnly": "npm run lib"
+    "prepublishOnly": "rm -rf lib && npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "react-head": "3.4.0"
-  },
+  "dependencies": { "react-head": "3.4.0" },
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support",
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17"
   },
-  "peerDependencies": {
-    "react": "16 || 17",
-    "react-dom": "16 || 17"
+  "peerDependencies": { "react": "16 || 17", "react-dom": "16 || 17" },
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/Body": {
+      "require": "./lib/Body.cjs",
+      "import": "./lib/Body.js",
+      "types": "./lib/Body.d.ts"
+    },
+    "./lib/Html": {
+      "require": "./lib/Html.cjs",
+      "import": "./lib/Html.js",
+      "types": "./lib/Html.d.ts"
+    },
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/server": {
+      "require": "./lib/server.cjs",
+      "import": "./lib/server.js",
+      "types": "./lib/server.d.ts"
+    },
+    "./lib/utils": {
+      "require": "./lib/utils.cjs",
+      "import": "./lib/utils.js",
+      "types": "./lib/utils.d.ts"
+    }
   }
 }

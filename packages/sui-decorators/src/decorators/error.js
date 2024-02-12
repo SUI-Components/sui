@@ -1,4 +1,4 @@
-import isPromise from '../helpers/isPromise'
+import isPromise from '../helpers/isPromise.js'
 
 const _runner = ({instance, original} = {}) => {
   return function (...args) {

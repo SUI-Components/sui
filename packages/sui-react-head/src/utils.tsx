@@ -46,7 +46,7 @@ interface extractTagsFromParams {
 }
 
 export const extractTagsFrom = ({children, tag, fallback}: extractTagsFromParams): any[] => {
-  if (children != null) {
+  if (children !== null) {
     return extract({children, byTag: tag})
   }
 

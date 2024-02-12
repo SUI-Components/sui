@@ -1,4 +1,8 @@
-const prettierOptions = require('./.prettierrc.js')
+import {createRequire} from 'module'
+
+import prettierOptions from './.prettierrc.js'
+
+const require = createRequire(import.meta.url)
 
 const RULES = {
   OFF: 0,
@@ -133,8 +137,7 @@ try {
 } catch {}
 
 const parser = resolvedBabelPresetSui ? '@babel/eslint-parser' : undefined
-
-module.exports = {
+const config = {
   parser,
 
   env: {
@@ -226,3 +229,5 @@ module.exports = {
     }
   ]
 }
+
+export default config

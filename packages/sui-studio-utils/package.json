@@ -2,20 +2,30 @@
   "name": "@s-ui/studio-utils",
   "version": "1.11.0",
   "description": "Set of utils made to be used on the desired studios",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "scripts": {
     "test": "npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
     "test:browser:watch": "npm run test:browser -- --watch",
     "test:server": "NODE_ENV=test sui-test server -P 'test/server/*Spec.js'",
     "test:server:watch": "npm run test:server -- --watch",
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib"
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf lib && npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@s-ui/i18n": "1"
+  "dependencies": { "@s-ui/i18n": "1" },
+  "module": "./lib/index.js",
+  "exports": {
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/domain-builder": {
+      "require": "./lib/domain-builder/index.cjs",
+      "import": "./lib/domain-builder/index.js"
+    },
+    "./lib/i18n": {
+      "require": "./lib/i18n/index.cjs",
+      "import": "./lib/i18n/index.js"
+    }
   }
 }

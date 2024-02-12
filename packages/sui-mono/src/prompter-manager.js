@@ -1,16 +1,21 @@
 /* eslint-disable no-console */
 
-const colors = require('@s-ui/helpers/colors')
-const {promisify} = require('util')
-const exec = promisify(require('child_process').exec)
-const {prompt} = require('enquirer')
+import {exec as childProcessExec} from 'child_process'
+import {promisify} from 'util'
 
-const buildCommit = require('./build-commit.js')
-const config = require('./config.js')
-const {types: commitTypes} = require('./commit-types.json')
+import enquirer from 'enquirer'
 
-const scopes = config.getWorkspaces().map(name => ({name}))
+import colors from '@s-ui/helpers/colors'
 
+import buildCommit from './build-commit.js'
+import {getWorkspaces} from './config.js'
+import types from './types.js'
+
+const {types: commitTypes} = types
+
+const {prompt} = enquirer
+const exec = promisify(childProcessExec)
+const scopes = getWorkspaces().map(name => ({name}))
 const allowedBreakingChanges = ['feat', 'fix']
 const defaultScopes = [{name: 'Root'}]
 
@@ -83,7 +88,7 @@ const checkIfHasChangedFiles = async path => {
   return stdout.trim() !== ''
 }
 
-module.exports = async function startMainCommitFlow() {
+export default async function startMainCommitFlow() {
   const scopesWithChanges = await Promise.all(
     scopes.map(pkg => checkIfHasChangedFiles(pkg.name).then(hasFiles => hasFiles && pkg))
   ).then(result => result.filter(Boolean))

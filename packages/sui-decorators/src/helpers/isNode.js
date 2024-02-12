@@ -1,7 +1,2 @@
-// https://github.com/iliakan/detect-node
-module.exports = false
-
 // Only Node.JS has a process variable that is of [[Class]] process
-try {
-  module.exports = Object.prototype.toString.call(global.process) === '[object process]'
-} catch (e) {}
+export default Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]'

@@ -2,8 +2,13 @@
   "name": "@s-ui/compiler-config",
   "version": "1.0.0",
   "description": "Compilers config (SWC, TS...) for SUI projects.",
-  "main": "src/index.js",
-  "scripts": {},
+  "type": "module",
+  "module": "./lib/index.js",
+  "main": "./lib/index.cjs",
+  "scripts": {
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf lib && npm run lib"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -18,5 +23,11 @@
   "dependencies": {
     "@tsconfig/esm": "1.0.4",
     "@tsconfig/vite-react": "2.0.0"
+  },
+  "exports": {
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.js"
+    }
   }
 }

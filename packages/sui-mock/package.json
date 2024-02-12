@@ -1,11 +1,11 @@
 {
   "name": "@s-ui/mock",
   "version": "1.2.0",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "description": "Mock provider",
   "scripts": {
     "lib": "sui-js-compiler",
-    "prepublishOnly": "npm run lib",
+    "prepublishOnly": "rm -rf && npm run lib",
     "test": "npm run test:browser && npm run test:server",
     "test:browser": "npx @s-ui/test browser -P './test/browser/**/*Spec.js'",
     "test:browser:watch": "npm run test:client -- --watch",
@@ -15,18 +15,23 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support"
-  },
-  "dependencies": {
-    "msw": "1.2.1"
-  },
+  "dependencies": { "msw": "1.2.1" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SUI-Components/sui.git"
   },
-  "bugs": {
-    "url": "https://github.com/SUI-Components/sui/issues"
-  },
-  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mock-provider#readme"
+  "bugs": { "url": "https://github.com/SUI-Components/sui/issues" },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-mock-provider#readme",
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/browser": {
+      "require": "./lib/browser.cjs",
+      "import": "./lib/browser.js"
+    },
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/server": {
+      "require": "./lib/server.cjs",
+      "import": "./lib/server.js"
+    }
+  }
 }

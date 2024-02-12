@@ -58,4 +58,4 @@ class InlineChunkHtmlPlugin {
   }
 }
 
-module.exports = InlineChunkHtmlPlugin
+export default InlineChunkHtmlPlugin

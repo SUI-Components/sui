@@ -1,10 +1,13 @@
 // @ts-check
 /* eslint-disable no-console */
-const {existsSync, readFileSync} = require('fs')
-const {extname} = require('path')
-const {getSpawnPromise} = require('@s-ui/helpers/cli')
-const {promisify} = require('util')
-const exec = promisify(require('child_process').exec)
+import {exec as childProcessExec} from 'child_process'
+import {existsSync, readFileSync} from 'fs'
+import {extname} from 'path'
+import {promisify} from 'util'
+
+import {getSpawnPromise} from '@s-ui/helpers/cli'
+
+const exec = promisify(childProcessExec)
 
 const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
 
@@ -13,13 +16,14 @@ const GIT_IGNORE_PATH = `${process.cwd()}/.gitignore`
  * @param {String} path
  * @returns {Array<String>}
  */
-const getFileLinesAsArray = path => (existsSync(path) ? readFileSync(path, 'utf8').split('\n').filter(Boolean) : [])
+export const getFileLinesAsArray = path =>
+  existsSync(path) ? readFileSync(path, 'utf8').split('\n').filter(Boolean) : []
 
 /**
  * Get as array .gitignore files and filter lines that are comments
  * @returns {Array<String>}
  */
-const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
+export const getGitIgnoredFiles = () => getFileLinesAsArray(GIT_IGNORE_PATH).filter(line => !line.startsWith('#'))
 
 /**
  * Get from git status name of staged files
@@ -88,7 +92,7 @@ const getCommitRange = () => {
  * @param {boolean} params.staged get only staged files
  * @returns {Promise<string[]>} Array of file patterns
  */
-const getFilesToLint = async ({extensions, defaultPattern, staged = false}) => {
+export const getFilesToLint = async ({extensions, defaultPattern, staged = false}) => {
   const range = getCommitRange()
   const getFromDiff = range || staged
 
@@ -103,7 +107,7 @@ const getFilesToLint = async ({extensions, defaultPattern, staged = false}) => {
  * @param {boolean} params.addFixes add modified files to stage
  * @returns {Promise}
  */
-const stageFilesIfRequired = async ({extensions, staged, addFixes}) => {
+export const stageFilesIfRequired = async ({extensions, staged, addFixes}) => {
   if (staged && addFixes) {
     const files = await getGitDiffFiles({extensions, staged})
     return getSpawnPromise('git', ['add', ...files])
@@ -118,7 +122,7 @@ const stageFilesIfRequired = async ({extensions, staged, addFixes}) => {
  * @param {String}                params.defaultPattern Default pattern to lint
  * @returns {boolean} If there's files to lint
  */
-const checkFilesToLint = ({files, language, defaultPattern}) => {
+export const checkFilesToLint = ({files, language, defaultPattern}) => {
   if (!files.length) {
     console.log(`[sui-lint] No ${language} files to lint`)
     return false
@@ -131,12 +135,4 @@ const checkFilesToLint = ({files, language, defaultPattern}) => {
 
   console.log(`[sui-lint] Linting ${files.length} ${language} files...`)
   return true
-}
-
-module.exports = {
-  checkFilesToLint,
-  getFileLinesAsArray,
-  getFilesToLint,
-  getGitIgnoredFiles,
-  stageFilesIfRequired
 }

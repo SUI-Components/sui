@@ -1,4 +1,4 @@
-module.exports = manifestURL => ({
+export default manifestURL => ({
   test: /(\.js)$/,
   use: [
     {

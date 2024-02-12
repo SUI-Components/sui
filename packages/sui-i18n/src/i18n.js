@@ -1,4 +1,4 @@
-import {slugify} from '@s-ui/js/lib/string/slugify.js'
+import {slugify} from '@s-ui/js/lib/string/slugify'
 
 import DefaultAdapter from './adapters/default.js'
 

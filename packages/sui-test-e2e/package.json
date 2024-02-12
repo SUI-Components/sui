@@ -2,16 +2,14 @@
   "name": "@s-ui/test-e2e",
   "version": "1.14.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "./lib/index.cjs",
   "type": "module",
-  "bin": {
-    "sui-test-e2e": "bin/sui-test-e2e.js"
-  },
+  "bin": { "sui-test-e2e": "bin/sui-test-e2e.js" },
   "scripts": {
     "postpublish": "make build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lib": "babel --presets sui ./src --out-dir ./lib",
-    "prepublishOnly": "npm run lib"
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "rm -rf lib && npm run lib"
   },
   "dependencies": {
     "@testing-library/cypress": "8.0.3",
@@ -22,5 +20,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "module": "./lib/index.js",
+  "exports": {
+    "./lib/add-commands": {
+      "require": "./lib/add-commands.cjs",
+      "import": "./lib/add-commands.js"
+    },
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" }
+  }
 }

@@ -1,4 +1,4 @@
-import {ReporterInterface} from './ReporterInterface'
+import {ReporterInterface} from './ReporterInterface.js'
 
 export class ConsoleReporter extends ReporterInterface {
   send({metricName = 'NO_METRIC_NAME_SET', status, value}) {

@@ -1,11 +1,12 @@
 /* eslint no-console:0 */
-const program = require('commander')
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
-const conventionalChangelog = require('../src/conventional-changelog.js')
-const {checkIsMonoPackage, getWorkspaces, getChangelogFilename} = require('../src/config.js')
-const {fetchTags} = require('../src/tags.js')
+import program from 'commander'
+import conventionalChangelog from 'conventional-changelog'
+
+import {checkIsMonoPackage, getChangelogFilename, getWorkspaces} from '../src/config.js'
+import {fetchTags} from '../src/tags.js'
 
 program
   .usage('<folder1> <folder2> <etc>')

@@ -7,7 +7,7 @@ import {join} from 'path'
 
 import commander from 'commander'
 
-import {parallelSpawn, serialSpawn} from '@s-ui/helpers/cli.js'
+import {parallelSpawn, serialSpawn} from '@s-ui/helpers/cli'
 
 import {stats} from '../src/index.js'
 

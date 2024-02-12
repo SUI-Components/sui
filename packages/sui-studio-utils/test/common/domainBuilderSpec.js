@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
 
-import {DomainBuilder} from '../../index.js'
+import {DomainBuilder} from '../../src/index.js'
 
 describe('DomainBuilder', () => {
   describe('when a useCase is mocked', () => {

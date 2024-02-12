@@ -1,12 +1,13 @@
 // https://github.com/developit/karmatic/blob/master/src/index.js
-const {
-  config: {parseConfig},
-  Server
-} = require('karma')
-const config = require('./config.js')
+import karma from 'karma'
+
+import config from './config.js'
+
+const {config: karmaConfig, Server} = karma
+const {parseConfig} = karmaConfig
 const CWD = process.cwd()
 
-module.exports = async ({ci, coverage, headless, ignorePattern, pattern, srcPattern, timeout, watch}) => {
+export default async ({ci, coverage, headless, ignorePattern, pattern, srcPattern, timeout, watch}) => {
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 

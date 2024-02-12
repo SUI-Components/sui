@@ -10,7 +10,6 @@ jsconfig.json
 lib/
 node_modules/
 npm-debug.log
-package-lock.json
 
 !packages/sui-sass-loader/test/server/fixtures/**/node_modules
 packages/sui-codemod/COMMANDS

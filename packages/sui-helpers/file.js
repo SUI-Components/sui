@@ -1,6 +1,7 @@
-const fse = require('fs-extra')
-const colors = require('./colors.js')
-const {showError} = require('./cli.js')
+import fse from 'fs-extra'
+
+import {showError} from './cli.js'
+import colors from './colors.js'
 
 const log = msg => console.log(colors.gray(msg)) // eslint-disable-line no-console
 
@@ -10,7 +11,7 @@ const log = msg => console.log(colors.gray(msg)) // eslint-disable-line no-conso
  * @param  {String} content Content to write
  * @return {Promise}
  */
-const writeFile = (path, content) =>
+export const writeFile = (path, content) =>
   fse
     .outputFile(path, content)
     .then(() => log(`Created ${path}`))
@@ -21,10 +22,8 @@ const writeFile = (path, content) =>
  * @param  {String} path Path of file to remove
  * @return {Promise}
  */
-const removeFile = path =>
+export const removeFile = path =>
   fse
     .remove(path)
     .then(() => log(`Removed ${path}`))
     .catch(() => showError(`Failed removing ${path}`))
-
-module.exports = {writeFile, removeFile}

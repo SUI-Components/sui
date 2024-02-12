@@ -9,8 +9,8 @@ const global = // get the correct global object
   typeof globalThis !== 'undefined'
     ? globalThis // eslint-disable-line
     : typeof window !== 'undefined'
-    ? window
-    : undefined
+      ? window
+      : undefined
 
 addSetupEnvironment(global)
 

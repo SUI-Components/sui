@@ -1,4 +1,4 @@
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
 const createCssMinimizerPlugin = () =>
   new CssMinimizerPlugin({
@@ -12,4 +12,4 @@ const createCssMinimizerPlugin = () =>
     }
   })
 
-module.exports = () => createCssMinimizerPlugin()
+export default () => createCssMinimizerPlugin()

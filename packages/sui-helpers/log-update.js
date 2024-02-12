@@ -1,4 +1,6 @@
-const readline = require('readline')
+/* eslint-disable no-console */
+import readline from 'readline'
+
 const {CI = false} = process.env
 
 const logUpdate = msg => {
@@ -18,4 +20,4 @@ logUpdate.done = msg => {
   console.log()
 }
 
-module.exports = logUpdate
+export default logUpdate

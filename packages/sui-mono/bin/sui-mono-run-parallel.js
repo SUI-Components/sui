@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /* eslint no-console:0 */
-const program = require('commander')
-const {parallelSpawn} = require('@s-ui/helpers/cli')
-const {getAllTaskArrays} = require('../src/run.js')
+import program from 'commander'
+
+import {parallelSpawn} from '@s-ui/helpers/cli'
+
+import {getAllTaskArrays} from '../src/run.js'
 
 program
   .on('--help', () => {

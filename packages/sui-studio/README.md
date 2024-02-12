@@ -158,7 +158,7 @@ import chai, {expect} from 'chai'
 import chaiDOM from 'chai-dom'
 import {render} from '@testing-library/react'
 
-chai.use(chaiDOM)
+use(chaiDOM)
 
 describe('AtomButton', () => {
   it('Render', () => {
@@ -204,7 +204,7 @@ The test file should be like:
 ```js
 import '@s-ui/studio/src/patcher-mocha'
 
-chai.use(chaiDOM)
+use(chaiDOM)
 
 describe.context.default('atom/button', AtomButton => {
   it('Render', () => {
@@ -276,19 +276,15 @@ If we provide a component key that matches the naming system, we can set the con
 /* global setupEnvironment */
 import '@s-ui/studio/src/patcher-mocha'
 
-import chai, {expect} from 'chai'
+import {use, expect} from 'chai'
 import chaiDOM from 'chai-dom'
 import {ProvidersWrapper} from 'utils'
 
-chai.use(chaiDOM)
+use(chaiDOM)
 
 const COMPONENT_KEY = 'appraisal/report/src/AgencyEvaluationInfo'
 
-describe.context.default(
-  'AgencyEvaluationInfo',
-  describeCallback,
-  COMPONENT_KEY
-)
+describe.context.default('AgencyEvaluationInfo', describeCallback, COMPONENT_KEY)
 
 function describeCallback(AgencyEvaluationInfo) {
   const WrappedComponent = props => (

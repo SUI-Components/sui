@@ -2,18 +2,15 @@
   "name": "@s-ui/decorators",
   "version": "3.25.0",
   "description": "> Set of ES6 decorators to improve your apps",
-  "main": "lib/",
+  "main": "./lib/index.cjs",
   "scripts": {
     "lib": "sui-js-compiler",
-    "prepublishOnly": "npm run lib"
+    "prepublishOnly": "rm -rf lib && npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support",
-    "sinon": "10.0.0"
-  },
+  "devDependencies": { "sinon": "10.0.0" },
   "browser": {
     "perf_hooks": false,
     "hot-shots": false,
@@ -28,5 +25,77 @@
     "tiny-lru": "6.0.1",
     "hot-shots": "7.7.1",
     "redis-mock": "0.49.0"
+  },
+  "module": "./lib/index.js",
+  "exports": {
+    ".": { "require": "./lib/index.cjs", "import": "./lib/index.js" },
+    "./lib/decorators/error": {
+      "require": "./lib/decorators/error.cjs",
+      "import": "./lib/decorators/error.js"
+    },
+    "./lib/decorators/streamify": {
+      "require": "./lib/decorators/streamify.cjs",
+      "import": "./lib/decorators/streamify.js"
+    },
+    "./lib/helpers/isNode": {
+      "require": "./lib/helpers/isNode.cjs",
+      "import": "./lib/helpers/isNode.js"
+    },
+    "./lib/helpers/isPromise": {
+      "require": "./lib/helpers/isPromise.cjs",
+      "import": "./lib/helpers/isPromise.js"
+    },
+    "./lib/helpers/stringOrIntToMs": {
+      "require": "./lib/helpers/stringOrIntToMs.cjs",
+      "import": "./lib/helpers/stringOrIntToMs.js"
+    },
+    "./lib/decorators/tracer": {
+      "require": "./lib/decorators/tracer/index.cjs",
+      "import": "./lib/decorators/tracer/index.js"
+    },
+    "./lib/decorators/tracer/statusCodes": {
+      "require": "./lib/decorators/tracer/statusCodes.cjs",
+      "import": "./lib/decorators/tracer/statusCodes.js"
+    },
+    "./lib/decorators/cache": {
+      "require": "./lib/decorators/cache/index.cjs",
+      "import": "./lib/decorators/cache/index.js"
+    },
+    "./lib/decorators/tracer/reporters/ConsoleReporter": {
+      "require": "./lib/decorators/tracer/reporters/ConsoleReporter.cjs",
+      "import": "./lib/decorators/tracer/reporters/ConsoleReporter.js"
+    },
+    "./lib/decorators/tracer/reporters/DataDogReporter": {
+      "require": "./lib/decorators/tracer/reporters/DataDogReporter.cjs",
+      "import": "./lib/decorators/tracer/reporters/DataDogReporter.js"
+    },
+    "./lib/decorators/tracer/reporters/ReporterInterface": {
+      "require": "./lib/decorators/tracer/reporters/ReporterInterface.cjs",
+      "import": "./lib/decorators/tracer/reporters/ReporterInterface.js"
+    },
+    "./lib/decorators/cache/algorithms/Cache": {
+      "require": "./lib/decorators/cache/algorithms/Cache.cjs",
+      "import": "./lib/decorators/cache/algorithms/Cache.js"
+    },
+    "./lib/decorators/cache/algorithms/LRU": {
+      "require": "./lib/decorators/cache/algorithms/LRU.cjs",
+      "import": "./lib/decorators/cache/algorithms/LRU.js"
+    },
+    "./lib/decorators/cache/algorithms/Redis": {
+      "require": "./lib/decorators/cache/algorithms/Redis.cjs",
+      "import": "./lib/decorators/cache/algorithms/Redis.js"
+    },
+    "./lib/decorators/cache/algorithms/RedisClient": {
+      "require": "./lib/decorators/cache/algorithms/RedisClient.cjs",
+      "import": "./lib/decorators/cache/algorithms/RedisClient.js"
+    },
+    "./lib/decorators/cache/handlers/inMemory": {
+      "require": "./lib/decorators/cache/handlers/inMemory.cjs",
+      "import": "./lib/decorators/cache/handlers/inMemory.js"
+    },
+    "./lib/decorators/cache/handlers/inRedis": {
+      "require": "./lib/decorators/cache/handlers/inRedis.cjs",
+      "import": "./lib/decorators/cache/handlers/inRedis.js"
+    }
   }
 }

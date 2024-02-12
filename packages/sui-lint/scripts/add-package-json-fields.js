@@ -1,7 +1,13 @@
-try {
-  const {writeFile} = require('@s-ui/helpers/file')
-  const {name: suiLintPackageName} = require('../package.json')
+/* eslint-disable no-console */
+import {createRequire} from 'module'
 
+import {writeFile} from '@s-ui/helpers/file'
+import {getPackageJson} from '@s-ui/helpers/packages'
+
+const require = createRequire(import.meta.url)
+const {name: suiLintPackageName} = require('../package.json')
+
+try {
   const {CI, INIT_CWD} = process.env
 
   if (CI) {
@@ -22,7 +28,7 @@ try {
   }
 
   // get the actual package.json file
-  const packageJSON = require(ACTUAL_PACKAGE_PATH)
+  const packageJSON = getPackageJson(INIT_CWD)
 
   // extract the fields we want to compare
   const {eslintConfig, name, prettier, stylelint} = packageJSON

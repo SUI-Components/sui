@@ -81,13 +81,9 @@ describe.skip('[Integration] sui-studio', () => {
 
       // console.log(stdoutStudioGenerate, stderrStudioGenerate)
 
-      const componentManifest = require(path.join(
-        `${EMPTY_STUDIO_PATH}`,
-        'components',
-        'fake',
-        'component',
-        'package.json'
-      ))
+      const componentManifest = require(
+        path.join(`${EMPTY_STUDIO_PATH}`, 'components', 'fake', 'component', 'package.json')
+      )
 
       expect(stdoutStudioGenerate.includes('Error')).to.be.false
       expect(componentManifest.name).to.be.eql('@t-est/tst-fake-component')
@@ -132,10 +128,10 @@ FakeComponent.propTypes = {}
 
 import ReactDOM from 'react-dom'
 
-import chai, {expect} from 'chai'
+import {use, expect} from 'chai'
 import chaiDOM from 'chai-dom'
 
-chai.use(chaiDOM)
+use(chaiDOM)
 
 describe('FakeComponent', () => {
   const Component = FakeComponent
