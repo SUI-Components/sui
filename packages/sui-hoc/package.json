@@ -13,7 +13,7 @@
     "react": "16 || 17"
   },
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support"
+    "@s-ui/js-compiler": "1"
   },
   "dependencies": {
     "intersection-observer": "0.10.0"
