@@ -1,4 +1,3 @@
-import {type ReactElement} from 'react'
 import {renderToString} from 'react-dom/server'
 
 import {BODY_ATTRIBUTES_KEY} from './Body'
@@ -36,7 +35,7 @@ const transformToString = (headObject: Record<string, string> = {}): string =>
 /**
  * Render the tags for the head
  */
-export function renderHeadTagsToString(headTags: Array<ReactElement<unknown>>): {
+export function renderHeadTagsToString(headTags: ComponentTag[]): {
   headString: string
   bodyAttributes: string
   htmlAttributes: string
