@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support",
+    "@s-ui/js-compiler": "1",
     "sinon": "10.0.0"
   },
   "browser": {
