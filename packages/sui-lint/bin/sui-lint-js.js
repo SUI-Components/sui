@@ -57,7 +57,7 @@ const baseConfig = {
   if (report) {
     debugger
     console.log('[sui-lint] Generating report and send it to DD')
-    Reporter.create().map(results)
+    await Reporter.create().map(results).send()
   }
 
   if (fix) {

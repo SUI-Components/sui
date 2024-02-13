@@ -21,7 +21,13 @@ class Reporter {
       totalFiles: results.length,
       ...stats
     }
-    debugger
+  }
+
+  send() {
+    if(this.#data === undefined){
+      throw new Error('[sui-lint] No data to send. Maybe you must call to map before')
+    }
+
   }
 
   toJSON() {
