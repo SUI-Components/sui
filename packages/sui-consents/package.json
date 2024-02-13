@@ -12,14 +12,14 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support",
-    "@s-ui/react-context": "typescript-support",
+    "@s-ui/js-compiler": "1",
+    "@s-ui/react-context": "1",
     "@testing-library/react": "11.2.5",
     "react": "17",
     "react-dom": "17"
   },
   "peerDependencies": {
-    "@s-ui/react-context": "typescript-support",
+    "@s-ui/react-context": "1",
     "react": "16 || 17"
   }
 }
