@@ -12,7 +12,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support"
+    "@s-ui/js-compiler": "1"
   },
   "dependencies": {
     "hoist-non-react-statics": "3.3.2"
