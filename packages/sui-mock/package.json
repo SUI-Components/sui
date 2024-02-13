@@ -16,7 +16,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/js-compiler": "typescript-support"
+    "@s-ui/js-compiler": "1"
   },
   "dependencies": {
     "msw": "1.2.1"
