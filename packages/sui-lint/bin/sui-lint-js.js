@@ -55,7 +55,6 @@ const baseConfig = {
   const results = await eslint.lintFiles(files)
 
   if (report) {
-    debugger
     console.log('[sui-lint] Generating report and send it to DD')
     await Reporter.create().map(results).send()
   }
