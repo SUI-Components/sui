@@ -22,8 +22,15 @@ const defaultPackagesToAlias = [
 ]
 
 const createAliasPath = pkgName => {
-  const PWDNodeModules = path.join(PWD, './node_modules')
-  if (fs.existsSync(PWDNodeModules)) return path.resolve(path.join(PWDNodeModules, pkgName))
+  const nodeModulesPath = path.join(PWD, './node_modules')
+  const parentNodeModulesPath = path.join(PWD, '../node_modules')
+  const pkgPath = nodeModulesPath && path.join(nodeModulesPath, pkgName)
+
+  if (pkgPath && fs.existsSync(pkgPath)) {
+    return path.resolve(pkgPath)
+  } else if (fs.existsSync(parentNodeModulesPath)) {
+    return path.resolve(path.join(parentNodeModulesPath, pkgName))
+  }
 
   try {
     return require.resolve(pkgName).replace(/\/index\.js$/, '')
