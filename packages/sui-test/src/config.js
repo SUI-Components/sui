@@ -7,9 +7,14 @@ function isWorkspace() {
   return !workspaces && !isPrivate
 }
 
+function isInnerPackage() {
+  return isWorkspace() && Boolean(process.cwd().match(/(.*)\/packages\/(.*)/))
+}
+
 module.exports = {
   bundlerConfig,
   clientConfig,
   serverConfig,
-  isWorkspace
+  isWorkspace,
+  isInnerPackage
 }

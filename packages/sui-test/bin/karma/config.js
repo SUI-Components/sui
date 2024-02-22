@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const path = require('path')
 const {envVars} = require('@s-ui/bundler/shared/index.js')
 const {getSWCConfig} = require('@s-ui/compiler-config')
-const {bundlerConfig, clientConfig, isWorkspace} = require('../../src/config.js')
+const {bundlerConfig, clientConfig, isWorkspace, isInnerPackage} = require('../../src/config.js')
 
 const {captureConsole = true} = clientConfig
 const {sep} = path
@@ -14,7 +14,8 @@ const {sep} = path
  *  Where the value is always an empty string.
  */
 const environmentVariables = envVars(bundlerConfig.env)
-const prefix = isWorkspace() ? '../' : './'
+const standardPrefix = isWorkspace() ? '../' : './'
+const prefix = isInnerPackage() ? '../../' : standardPrefix
 const pwd = process.env.PWD
 const swcConfig = getSWCConfig({isTypeScript: true})
 const config = {
@@ -45,7 +46,8 @@ const config = {
       alias: {
         'react/jsx-dev-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-dev-runtime.js'),
         'react/jsx-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-runtime.js'),
-        '@s-ui/react-context': path.resolve(path.join(pwd, prefix, 'node_modules/@s-ui/react-context'))
+        '@s-ui/react-context': path.resolve(path.join(pwd, prefix, 'node_modules/@s-ui/react-context')),
+        'studio-utils': path.resolve(path.join(pwd, prefix, 'packages/ui/studio-utils'))
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
       extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
