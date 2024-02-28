@@ -55,8 +55,8 @@ const baseConfig = {
 
   if (reporter) {
     console.log('[sui-lint] Sending stats using the reporter ', reporter)
-    const {Reporter} = await import(reporter)
-    const reportered = await Reporter.create()
+    const {JSReporter} = await import(reporter)
+    const reportered = await JSReporter.create()
     await reportered.map(results).send()
   }
 
