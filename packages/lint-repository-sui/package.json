@@ -1,0 +1,17 @@
+{
+  "name": "lint-repository-sui",
+  "version": "0.0.0",
+  "description": "Set of sui lint rules to lint a repository",
+  "keywords": [
+  ],
+  "author": "Sui",
+  "main": "./src/index.js",
+  "exports": "./src/index.js",
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
+
