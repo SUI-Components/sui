@@ -75,9 +75,7 @@ module.exports = {
         const createProps = createProperties.map(i => i.key.name)
         const toJSONProps = toJSONProperties.map(i => i.key.name)
 
-        const missingToJSONProps = createProps.filter(
-          p => !toJSONProps.find(e => e === p)
-        )
+        const missingToJSONProps = createProps.filter(p => !toJSONProps.find(e => e === p))
         if (missingToJSONProps.length) {
           context.report({
             node: toJSON,
