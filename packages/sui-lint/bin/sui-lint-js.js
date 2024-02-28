@@ -7,18 +7,17 @@ const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequire
 
 const {ESLint} = require('eslint')
 const config = require('../eslintrc.js')
-const {Reporter} = require('../src/reporter.js')
 
 program
   .option('--add-fixes')
   .option('--staged')
   .option('--fix', 'fix automatically problems with js files')
   .option('--ignore-patterns <ignorePatterns...>', 'Path patterns to ignore for linting')
-  .option('--report', 'Send results to DD using sui-logger')
-  .option('--pattern <pattern>', 'Send results to DD using sui-logger')
+  .option('--reporter <reporter>', 'Send results to DD using sui-logger')
+  .option('--pattern <pattern>', 'Patter of files to lint')
   .parse(process.argv)
 
-const {addFixes, fix, ignorePatterns = [], staged, pattern, report} = program.opts()
+const {addFixes, fix, ignorePatterns = [], staged, pattern, reporter} = program.opts()
 
 const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -54,9 +53,11 @@ const baseConfig = {
 
   const results = await eslint.lintFiles(files)
 
-  if (report) {
-    console.log('[sui-lint] Generating report and send it to DD')
-    await Reporter.create().map(results).send()
+  if (reporter) {
+    console.log('[sui-lint] Sending stats using the reporter ', reporter)
+    const {Reporter} = await import(reporter)
+    const reportered = await Reporter.create()
+    await reportered.map(results).send()
   }
 
   if (fix) {
