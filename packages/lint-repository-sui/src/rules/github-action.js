@@ -32,7 +32,7 @@ module.exports = {
   },
   create: function (context) {
     return {
-      '.github/_workflows': matches => {
+      '.github/workflows': matches => {
         context.monitoring(true)
       },
 
@@ -45,7 +45,7 @@ module.exports = {
       },
 
       missmatch: key => {
-        if (key === '.github/_workflows') {
+        if (key === '.github/workflows') {
           context.report({
             messageId: 'missingGithubFolder'
           })
