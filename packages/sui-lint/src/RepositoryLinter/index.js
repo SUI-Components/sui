@@ -5,8 +5,8 @@ const {Results} = require('./Results')
 module.exports.RepositoryLinter = class RepositoryLinter {
   #cofig
 
-  static create() {
-    return new RepositoryLinter(Config.create())
+  static create(config) {
+    return new RepositoryLinter(config ?? Config.create())
   }
 
   constructor(config) {

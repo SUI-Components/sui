@@ -4,10 +4,10 @@ module.exports.Config = class Config {
   }
 
   async load() {
-    const repositoryConfig = require('../../repository.config.js')
+    const repositoryConfig = this.requireConfig()
 
     const rules = repositoryConfig.plugins.reduce((acc, pkg) => {
-      const pkgConfig = require(`lint-repository-${pkg}`)
+      const pkgConfig = this.requirePkg(pkg)
       const rulesEntries = Object.entries(pkgConfig.rules)
         .map(([rule, handler]) => {
           const key = `${pkg}/${rule}`
@@ -19,5 +19,13 @@ module.exports.Config = class Config {
     }, {})
 
     return rules
+  }
+
+  requireConfig() {
+    return require('../../repository.config.js')
+  }
+
+  requirePkg(pkg) {
+    return require(`lint-repository-${pkg}`)
   }
 }

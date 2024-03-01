@@ -2,10 +2,19 @@ const {extname} = require('path')
 const yaml = require('js-yaml')
 const fs = require('fs')
 
-module.exports.Match = class Match {
+class CustomFileReader {
+  static create() { return new CustomFileReader() } // eslint-disable-line
+
+  isDirectory(path) { return fs.statSync(process.cwd() + '/' + path).isDirectory() } // eslint-disable-line
+  parseYML(path) { return yaml.load(fs.readFileSync(process.cwd() + '/' + path, 'utf8')) } // eslint-disable-line
+  parseJSON(path) { return require(process.cwd() + '/' + path) } // eslint-disable-line
+  raw(path) { return fs.readFileSync(process.cwd() + '/' + path, 'utf8') } // eslint-disable-line
+}
+
+class Match {
   static create(path) {
     const ext = extname(path)
-    if (!ext && fs.statSync(process.cwd() + '/' + path).isDirectory()) {
+    if (!ext && CustomFileReader.create().isDirectory(path)) {
       return new Match(path, undefined, undefined, true)
     }
 
@@ -13,14 +22,14 @@ module.exports.Match = class Match {
     let raw
     switch (ext) {
       case '.json':
-        parsed = require(process.cwd() + '/' + path)
+        parsed = CustomFileReader.create().parseJSON(path)
         break
       case '.yml':
       case '.yaml':
-        parsed = yaml.load(fs.readFileSync(process.cwd() + '/' + path, 'utf8'))
+        parsed = CustomFileReader.create().parseYML(path)
         break
       default:
-        raw = fs.readFileSync(process.cwd() + '/' + path, 'utf8')
+        raw = CustomFileReader.create().raw(path)
     }
 
     return new Match(path, parsed, raw, false)
@@ -34,3 +43,6 @@ module.exports.Match = class Match {
     this.fullPath = process.cwd() + '/' + path
   }
 }
+
+module.exports.CustomFileReader = CustomFileReader
+module.exports.Match = Match

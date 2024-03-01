@@ -1,13 +1,17 @@
 const {Match} = require('./Match')
-const fg = require('fast-glob')
+const fastGlob = require('fast-glob')
 
 module.exports.Runner = class Runner {
-  static create() {
-    return new Runner()
+  static create(fg) {
+    return new Runner(fg ?? fastGlob)
+  }
+
+  constructor(fg) {
+    this.fg = fg
   }
 
   assertion(key) {
-    const files = fg.sync(key, {ignore: ['node_modules'], onlyFiles: false}) ?? []
+    const files = this.fg.sync(key, {ignore: ['node_modules'], onlyFiles: false}) ?? []
     return files.map(Match.create)
   }
 }

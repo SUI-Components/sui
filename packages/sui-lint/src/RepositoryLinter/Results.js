@@ -8,6 +8,12 @@ module.exports.Results = class Results {
   #messages
   #monitorings
 
+  static HAPPY_MESSAGE = dedent`
+      🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
+      🥳 Your repository follow all our internal conventions  🥳
+      🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
+    `
+
   static create(executions) {
     return new Results(executions)
   }
@@ -22,13 +28,10 @@ module.exports.Results = class Results {
     return this.#monitorings
   }
 
+  log(msg) { console.log(msg) } // eslint-disable-line
+
   logTable() {
-    if (this.#messages.length === 0)
-      return console.log(dedent`
-      🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
-      🥳 Your repository follow all our internal conventions  🥳
-      🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
-    `)
+    if (this.#messages.length === 0) return this.log(Results.HAPPY_MESSAGE)
 
     const p = new Table({
       title: dedent`
@@ -42,12 +45,12 @@ module.exports.Results = class Results {
   }
 
   logJSON() {
-    return console.log(JSON.stringify(this.#messages, null, 2))
+    return this.log(JSON.stringify(this.#messages, null, 2))
   }
 
   logMonitorings() {
     if (this.#monitorings.length === 0)
-      return console.log(dedent`
+      return this.log(dedent`
 
       There is not signal to be send to DD. Use 'context.monitoring' to add signals at your execution
 
