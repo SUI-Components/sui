@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
 
-import {Match} from '../../src/RepositoryLinter/Match'
-import {Runner} from '../../src/RepositoryLinter/Runner.js'
+import {Match} from '../../../src/RepositoryLinter/Match.js'
+import {Runner} from '../../../src/RepositoryLinter/Runner.js'
 
 describe('Runner', function () {
   beforeEach(function () {

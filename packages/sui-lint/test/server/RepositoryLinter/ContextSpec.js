@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import {spy, stub} from 'sinon'
 
-import {Context} from '../../src/RepositoryLinter/Context.js'
-import {Match} from '../../src/RepositoryLinter/Match.js'
+import {Context} from '../../../src/RepositoryLinter/Context.js'
+import {Match} from '../../../src/RepositoryLinter/Match.js'
 
 const LEVELS = {
   OFF: 0,

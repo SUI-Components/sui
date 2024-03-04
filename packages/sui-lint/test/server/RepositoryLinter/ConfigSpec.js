@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
 
-import {Config} from '../../src/RepositoryLinter/Config.js'
+import {Config} from '../../../src/RepositoryLinter/Config.js'
 
 describe('Config', function () {
   beforeEach(function () {

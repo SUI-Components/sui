@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {Table} from 'console-table-printer'
 import {stub} from 'sinon'
 
-import {Results} from '../../src/RepositoryLinter/Results.js'
+import {Results} from '../../../src/RepositoryLinter/Results.js'
 
 describe('Results', function () {
   beforeEach(function () {

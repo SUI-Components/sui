@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
 
-import {CustomFileReader, Match} from '../../src/RepositoryLinter/Match.js'
+import {CustomFileReader, Match} from '../../../src/RepositoryLinter/Match.js'
 
 describe('Match', function () {
   beforeEach(function () {
