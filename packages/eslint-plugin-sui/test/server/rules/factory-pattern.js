@@ -1,7 +1,7 @@
 import dedent from 'dedent'
 import {RuleTester} from 'eslint'
 
-import rule from '../../../src/rules/factory-pattern'
+import rule from '../../../src/rules/factory-pattern.js'
 
 // ------------------------------------------------------------------------------
 // Tests
