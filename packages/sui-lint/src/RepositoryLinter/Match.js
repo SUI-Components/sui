@@ -12,6 +12,10 @@ class CustomFileReader {
 }
 
 class Match {
+  static empty() {
+    return new Match(undefined, undefined, undefined, false)
+  }
+
   static create(path) {
     const ext = extname(path)
     if (!ext && CustomFileReader.create().isDirectory(path)) {

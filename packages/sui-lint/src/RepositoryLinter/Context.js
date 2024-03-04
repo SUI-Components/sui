@@ -8,8 +8,13 @@ module.exports.Context = class Context {
   #handler
   #runner
 
-  static create(level, handler, rule) {
-    return new Context(level, handler, rule, Runner.create())
+  static MISSING_REDUCER_MONITORING_MSG = `
+      [RepositoryLinter Context#signal] If your has call to 'context.monitoring' more than one time in your rule.
+      You have to create a function 'reduceMonitoring' to be able reduce all of them to 1 value.
+  `
+
+  static create(level, handler, rule, runner) {
+    return new Context(level, handler, rule, runner ?? Runner.create())
   }
 
   constructor(level, handler, rule, runner) {
@@ -49,11 +54,7 @@ module.exports.Context = class Context {
     if (this.#monitorings.length === 0) return _signal
     if (this.#monitorings.length === 1) return {..._signal, value: this.#monitorings[0].value}
 
-    if (this.#handler.reduceMonitoring === undefined)
-      throw new Error(`
-      [RepositoryLinter Context#signal] If your has call to 'context.monitoring' more than one time in your rule.
-      You have to create a function 'reduceMonitoring' to be able reduce all of them to 1 value.
-    `)
+    if (this.#handler.reduceMonitoring === undefined) throw new Error(Context.MISSING_REDUCER_MONITORING_MSG)
 
     return {rule: this.rule, level: this.level, value: this.#handler?.reduceMonitoring(this.#monitorings)}
   }
