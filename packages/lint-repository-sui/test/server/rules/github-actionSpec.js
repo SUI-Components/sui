@@ -1,7 +1,7 @@
 import dedent from 'dedent'
 
 import handler from '../../src/rules/github-action.js'
-import {RuleTester} from '../TestHelpers'
+import {RuleTester} from '../../TestHelpers.js'
 
 RuleTester.create('github-action', handler).run({
   valid: [
