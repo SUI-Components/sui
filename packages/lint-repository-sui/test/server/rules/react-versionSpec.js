@@ -1,6 +1,6 @@
 import dedent from 'dedent'
 
-import handler from '../../src/rules/react-version.js'
+import handler from '../../../src/rules/react-version.js'
 import {MatchStub, RuleTester} from '../../TestHelpers.js'
 
 RuleTester.create('react-version', handler).run({

@@ -1,6 +1,6 @@
 import dedent from 'dedent'
 
-import handler from '../../src/rules/package-lock.js'
+import handler from '../../../src/rules/package-lock.js'
 import {RuleTester} from '../../TestHelpers.js'
 
 RuleTester.create('package-lock', handler).run({
