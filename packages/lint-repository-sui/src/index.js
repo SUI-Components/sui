@@ -2,6 +2,7 @@ const NodeVersion = require('./rules/node-version.js')
 const ReactVersion = require('./rules/react-version.js')
 const PackageLock = require('./rules/package-lock.js')
 const GithubAction = require('./rules/github-action.js')
+const TypeScript = require('./rules/typescript.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -13,6 +14,7 @@ module.exports = {
     'node-version': NodeVersion,
     'react-version': ReactVersion,
     'package-lock': PackageLock,
-    'github-action': GithubAction
+    'github-action': GithubAction,
+    typescript: TypeScript
   }
 }
