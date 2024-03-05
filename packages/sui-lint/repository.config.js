@@ -10,6 +10,7 @@ module.exports = {
     'sui/node-version': RULES.WARNING,
     'sui/react-version': RULES.WARNING,
     'sui/package-lock': RULES.WARNING,
-    'sui/github-action': RULES.WARNING
+    'sui/github-action': RULES.WARNING,
+    'sui/typescript': RULES.WARNING
   }
 }
