@@ -16,7 +16,7 @@ module.exports = {
     docs: {
       description: 'ensure entity create - toJSON',
       recommended: false,
-      url: null
+      url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements'
     },
     fixable: null,
     schema: [],

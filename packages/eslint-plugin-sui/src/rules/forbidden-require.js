@@ -17,7 +17,7 @@ module.exports = {
     docs: {
       description: 'ensure to use only ESM (import) style',
       recommended: true,
-      url: null
+      url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements'
     },
     fixable: null,
     schema: [],

@@ -17,7 +17,7 @@ module.exports = {
     docs: {
       description: 'ensure to define at least one factory function',
       recommended: true,
-      url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements/02-project-structure.md'
+      url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements'
     },
     fixable: null,
     schema: [],
