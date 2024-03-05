@@ -14,7 +14,7 @@ program
   .option('--fix', 'fix automatically problems with js files')
   .option('--ignore-patterns <ignorePatterns...>', 'Path patterns to ignore for linting')
   .option('--reporter <reporter>', 'Send results to DD using sui-logger')
-  .option('--pattern <pattern>', 'Patter of files to lint')
+  .option('--pattern <pattern>', 'Pattern of files to lint')
   .parse(process.argv)
 
 const {addFixes, fix, ignorePatterns = [], staged, pattern, reporter} = program.opts()
