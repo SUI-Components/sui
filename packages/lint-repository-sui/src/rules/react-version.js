@@ -1,5 +1,7 @@
 const dedent = require('string-dedent')
 
+const REACT_VERSION = '18'
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -12,13 +14,13 @@ module.exports = {
     schema: [],
     messages: {
       badReactVersion: dedent`
-        Please be sure that your repository use the latest React Version 18.
+        Please be sure that your repository use the latest React Version ${REACT_VERSION}.
         Your current version is {{version}}.
         If you are not sure about how do it, please contact with Platform Web.
       `,
       missingReactDependencie: dedent`
         Your project doesnt have installed React.
-        Please install at least the version 18.
+        Please install at least the version ${REACT_VERSION}.
         If you are not sure about how do it, please contact with Platform Web.
       `,
       missingPackageLock: dedent`
@@ -42,7 +44,7 @@ module.exports = {
 
         version = version.split('.')[0]
 
-        if (version !== '18') {
+        if (version !== REACT_VERSION) {
           context.report({
             messageId: 'badReactVersion',
             data: {version}

@@ -1,5 +1,7 @@
 const dedent = require('string-dedent')
 
+const REACT_VERSION = '20'
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -18,7 +20,7 @@ module.exports = {
       `,
       badNodeVersion: dedent`
         Your current Node version is {{version}}.
-        Please be sure that your repository use the latest Node Version 20.
+        Please be sure that your repository use the latest Node Version ${REACT_VERSION}.
         If you are not sure about how do it, please contact with Platform Web.
       `,
       noNMVRCFile: dedent`
@@ -39,7 +41,7 @@ module.exports = {
 
         const [nvmrcMatch] = matches
         const version = nvmrcMatch.raw.trim()
-        if (version !== '20') {
+        if (version !== REACT_VERSION) {
           context.report({
             messageId: 'badNodeVersion',
             data: {version}

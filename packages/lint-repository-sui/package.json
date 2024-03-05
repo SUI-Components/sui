@@ -10,6 +10,6 @@
     "test": "npx sui-test server"
   },
   "devDependencies": {
-    "@s-ui/test": "^8.33.0"
+    "@s-ui/test": "8"
   }
 }
