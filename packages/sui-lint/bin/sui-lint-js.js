@@ -13,7 +13,7 @@ program
   .option('--staged')
   .option('--fix', 'fix automatically problems with js files')
   .option('--ignore-patterns <ignorePatterns...>', 'Path patterns to ignore for linting')
-  .option('--reporter <reporter>', 'Send results to DD using sui-logger')
+  .option('--reporter <reporter>', 'Send results using a custom reporter')
   .option('--pattern <pattern>', 'Pattern of files to lint')
   .parse(process.argv)
 
@@ -58,6 +58,7 @@ const baseConfig = {
     const {JSReporter} = await import(reporter)
     const reportered = await JSReporter.create()
     await reportered.map(results).send()
+    console.log('[sui-lint] All your stats has been sent', reporter)
   }
 
   if (fix) {

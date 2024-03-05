@@ -52,7 +52,7 @@ module.exports.Results = class Results {
     if (this.#monitorings.length === 0)
       return this.log(dedent`
 
-      There is not signal to be send to DD. Use 'context.monitoring' to add signals at your execution
+      There is not signal to be send. Use 'context.monitoring' to add signals at your execution
 
     `)
 
