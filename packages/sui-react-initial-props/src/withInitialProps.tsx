@@ -1,13 +1,9 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import {useContext, useEffect, useRef, useState} from 'react'
 
 import SUIContext from '@s-ui/react-context'
-import { RouteInfo } from '@s-ui/react-router/src/types'
+import {type RouteInfo} from '@s-ui/react-router/src/types'
 
-import {
-  ClientPageComponent,
-  InitialProps,
-  WithInitialPropsComponent
-} from './types'
+import {type ClientPageComponent, type InitialProps, type WithInitialPropsComponent} from './types'
 
 const INITIAL_PROPS_KEY = '__INITIAL_PROPS__'
 
@@ -22,7 +18,7 @@ const getInitialPropsFromWindow = (): object | undefined => {
 }
 
 // extract needed info from props for routeInfo object
-const createRouteInfoFromProps = ({ location, params, routes }: RouteInfo): RouteInfo => ({
+const createRouteInfoFromProps = ({location, params, routes}: RouteInfo): RouteInfo => ({
   location,
   params,
   routes
@@ -39,7 +35,7 @@ const createRouteInfoFromProps = ({ location, params, routes }: RouteInfo): Rout
 // gets props updated. Also, since PageComponent keeps mounted it will receive
 // an `isLoading` prop while getInitialProps is in progress.
 export default (Page: ClientPageComponent): WithInitialPropsComponent => {
-  const { keepMounted = false } = Page
+  const {keepMounted = false} = Page
   // gather window initial props for this Page, if present
   const windowInitialProps = getInitialPropsFromWindow()
   // remove the variable of the window
@@ -55,9 +51,9 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
     // consume sui context from the context provider
     const suiContext: object = useContext(SUIContext)
     // pathName from context is outdated, so we update it from routeInfo
-    const context = { ...suiContext, pathName: routeInfo.location.pathname }
+    const context = {...suiContext, pathName: routeInfo.location.pathname}
 
-    const [{ initialProps, isLoading }, setState] = useState(() => ({
+    const [{initialProps, isLoading}, setState] = useState(() => ({
       initialProps: initialPropsFromWindowRef.current ?? {},
       isLoading: initialPropsFromWindowRef.current == null
     }))
@@ -70,22 +66,22 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
       } else {
         // only update state if already request initial props
         if (requestedInitialPropsOnceRef.current) {
-          setState({ initialProps, isLoading: true })
+          setState({initialProps, isLoading: true})
         }
 
-        Page.getInitialProps({ context, routeInfo })
+        Page.getInitialProps({context, routeInfo})
           .then((initialProps: InitialProps) => {
-            const { __HTTP__: http } = initialProps
+            const {__HTTP__: http} = initialProps
 
             if (http?.redirectTo !== undefined) {
               window.location = http.redirectTo
               return
             }
 
-            setState({ initialProps, isLoading: false })
+            setState({initialProps, isLoading: false})
           })
           .catch((error: Error) => {
-            setState({ initialProps: { error }, isLoading: false })
+            setState({initialProps: {error}, isLoading: false})
           })
           .finally(() => {
             if (requestedInitialPropsOnceRef.current) return
@@ -94,9 +90,7 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
       }
     }, [routeInfo.location]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const renderPage = (): any => (
-      <Page {...initialProps} {...props} isLoading={isLoading} />
-    )
+    const renderPage = (): any => <Page {...initialProps} {...props} isLoading={isLoading} />
 
     // if the page has a `keepMounted` property and already requested
     // initialProps once, just keep rendering the page
@@ -106,9 +100,7 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
 
     const renderLoading = (): React.ElementType<any> | null => {
       // check if the page has a `renderLoading` method, if not, just render nothing
-      return (Page.renderLoading != null)
-        ? Page.renderLoading({ context, routeInfo })
-        : null
+      return Page.renderLoading != null ? Page.renderLoading({context, routeInfo}) : null
     }
 
     return isLoading ? renderLoading() : renderPage()
@@ -116,10 +108,7 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
 
   // if `keepMounted` property is found and the component is the same one,
   // we just reuse it instead of returning a new one
-  if (
-    keepMounted &&
-    Page.displayName === latestClientPage?.Page?.displayName
-  ) {
+  if (keepMounted && Page.displayName === latestClientPage?.Page?.displayName) {
     return latestClientPage
   }
 

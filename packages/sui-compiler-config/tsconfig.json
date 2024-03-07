@@ -1,0 +1,8 @@
+{
+  "extends": ["@tsconfig/esm/tsconfig.json", "@tsconfig/vite-react/tsconfig.json"],
+   "compilerOptions": {
+      "allowJs": true,
+      "target": "ES2022"
+   }
+}
+

@@ -1,4 +1,4 @@
-import { ContextFactoryParams } from './types'
+import {type ContextFactoryParams} from './types'
 
 export default (): ContextFactoryParams => ({
   appConfig: window.__APP_CONFIG__,

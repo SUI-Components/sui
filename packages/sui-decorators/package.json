@@ -4,13 +4,14 @@
   "description": "> Set of ES6 decorators to improve your apps",
   "main": "lib/",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@s-ui/js-compiler": "1",
     "sinon": "10.0.0"
   },
   "browser": {

@@ -68,8 +68,7 @@
         }
         &:focus {
           outline: none;
-          box-shadow: inset 0 0 0 1px $c-primary,
-            0 0 0 4px rgba($c-primary, 0.2);
+          box-shadow: inset 0 0 0 1px $c-primary, 0 0 0 4px rgba($c-primary, 0.2);
         }
       }
       & + button {
@@ -134,8 +133,7 @@
               }
               &:focus {
                 outline: none;
-                box-shadow: inset 0 0 0 1px $c-primary,
-                  0 0 0 4px rgba($c-primary, 0.2);
+                box-shadow: inset 0 0 0 1px $c-primary, 0 0 0 4px rgba($c-primary, 0.2);
               }
             }
           }

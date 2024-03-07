@@ -13,7 +13,7 @@ const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/i
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 const {extractComments, sourceMap, supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
-const createBabelRules = require('./shared/module-rules-babel.js')
+const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
@@ -41,7 +41,7 @@ const webpackConfig = {
   context: path.resolve(CWD, 'src'),
   resolve: {
     alias: {...aliasFromConfig},
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.json', '.ts', '.tsx'],
     modules: ['node_modules', path.resolve(CWD)],
     fallback: {
       assert: false,
@@ -74,7 +74,7 @@ const webpackConfig = {
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     }),
     new webpack.ids.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(envVars(config.env)),
@@ -104,7 +104,7 @@ const webpackConfig = {
   ]),
   module: {
     rules: cleanList([
-      createBabelRules({supportLegacyBrowsers}),
+      createCompilerRules({supportLegacyBrowsers}),
       sassRules,
       when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])

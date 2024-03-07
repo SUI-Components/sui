@@ -10,6 +10,33 @@ const copyGlobals = require('./helpers/copyGlobals.js')
 
 program.version(version, '    --version')
 
+const listOfComponents = () => {
+  const fg = require('fast-glob')
+  const path = require('path')
+
+  const folders = fg.sync('components/*/*', {
+    deep: 3,
+    onlyDirectories: true
+  })
+  const components = folders.map(folder => {
+    const [, category, component] = folder.split(path.sep)
+    return {category, component}
+  })
+  return components
+}
+
+const config = () => {
+  const path = require('path')
+  const {config = {}} = require(path.join(process.cwd(), 'package.json'))
+  console.log(path.join(process.cwd(), 'package.json'))
+  return config['sui-studio'] || {}
+}
+
+process.env.MAGIC_STRINGS = JSON.stringify({
+  __SUI_STUDIO_COMPONENTS_LIST__: listOfComponents(),
+  __SUI_STUDIO_CONFIG__: config()
+})
+
 program
   .command('start')
   .alias('s')
@@ -22,7 +49,8 @@ program
     const devServerExec = require.resolve('@s-ui/bundler/bin/sui-bundler-dev')
     const args = ['-c', path.join(__dirname, '..', 'src')]
     getSpawnPromise(devServerExec, args, {
-      shell: false
+      shell: false,
+      env: process.env
     }).then(process.exit, process.exit)
   })
 

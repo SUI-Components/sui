@@ -1,4 +1,5 @@
 /* global __BASE_DIR__, CATEGORIES, PATTERN */
+/* eslint-disable no-console */
 
 /**
  * This file is being executed in browser opened to run tests
@@ -13,7 +14,7 @@ addSetupEnvironment(window)
 window.__STUDIO_CONTEXTS__ = {}
 window.__STUDIO_COMPONENT__ = {}
 
-const defaultPattern = '**/*.test.{js,jsx}'
+const defaultPattern = '**/*.test.{js,jsx,ts,tsx}'
 const globPattern = PATTERN || defaultPattern
 const categories = CATEGORIES ? CATEGORIES.split(',') : null
 
@@ -33,7 +34,7 @@ window.__karma__.loaded = () => {}
 const testsFiles = require.context(
   `${__BASE_DIR__}/components/`,
   true,
-  /\.\/(\w+)\/(\w+)\/test\/(components\.)?(\w+).test.(js|jsx)/
+  /\.\/(\w+)\/(\w+)\/test\/(components\.)?(\w+).test.(js|jsx|ts|tsx)/
 )
 
 const selectedTestFiles = testsFiles.keys().filter(filterAll)

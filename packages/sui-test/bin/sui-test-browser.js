@@ -9,7 +9,7 @@ program
   .option('-W, --watch', 'Run in watch mode')
   .option('-C, --ci', 'Run a Firefox headless for CI testing')
   .option('-H, --headless', 'Run a headless browser for testing')
-  .option('-P, --pattern <pattern>', 'Path pattern to include', 'test/**/*Spec.js')
+  .option('-P, --pattern <pattern>', 'Path pattern to include', 'test/**/*Spec.+(js|jsx|ts|tsx)')
   .option('-I, --ignore-pattern <ignorePattern>', 'Path pattern to ignore for testing', false)
   .option('--src-pattern <srcPattern>', 'Define the source directory', false)
   .option('-T, --timeout <ms>', 'Timeout', 2000)

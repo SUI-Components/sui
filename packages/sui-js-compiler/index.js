@@ -10,9 +10,7 @@ import path from 'node:path'
 
 import {transformFile} from '@swc/core'
 
-import {getSpawnPromise} from '@s-ui/helpers/cli.js'
-
-import {getSWCConfig} from './swc-config.js'
+import {getSWCConfig} from '@s-ui/compiler-config'
 
 const SOURCE_DIR = './src'
 const OUTPUT_DIR = './lib'
@@ -32,20 +30,6 @@ const DEFAULT_TS_CONFIG = {
   strict: true,
   target: 'es5',
   types: ['react', 'node']
-}
-
-const dynamicPackage = async (name, {version} = {}) => {
-  const packageName = version ? `${name}@${version}` : name
-
-  try {
-    await getSpawnPromise('npm', ['explain', packageName])
-  } catch (error) {
-    if (error.exitCode === 1) {
-      await getSpawnPromise('npm', ['install', packageName, '--no-save'])
-    }
-  }
-
-  return import(packageName).then(module => module.default)
 }
 
 const getTsConfig = () => {
@@ -72,7 +56,7 @@ const compileFile = async (file, options) => {
 }
 
 const compileTypes = async (files, options) => {
-  const {createCompilerHost, createProgram} = await dynamicPackage('typescript')
+  const {createCompilerHost, createProgram} = await import('typescript').then(module => module.default)
   const createdFiles = {}
   const host = createCompilerHost(options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
@@ -108,6 +92,8 @@ const {ignore: ignoreOpts = [], modern: isModern = false} = program.opts()
 const ignore = [...ignoreOpts, '**/__tests__']
 
 ;(async () => {
+  console.time('[sui-js-compiler]')
+
   const files = await fg('./src/**/*.{js,jsx,ts,tsx}', {ignore})
   const filesToCompile = Promise.all(
     files.map(async file => {
@@ -127,4 +113,6 @@ const ignore = [...ignoreOpts, '**/__tests__']
     : Promise.resolve()
 
   await Promise.all([filesToCompile, typesToCompile])
+
+  console.timeEnd('[sui-js-compiler]')
 })()

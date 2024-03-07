@@ -1,5 +1,6 @@
 const path = require('path')
 const {config} = require('./config.js')
+const fs = require('fs')
 
 const {PWD} = process.env
 
@@ -9,16 +10,40 @@ const {PWD} = process.env
  * So you should use the exact same imported file from node_modules, and the linked package
  * would try to use another different from its own node_modules. This will prevent that.
  */
-const defaultPackagesToAlias = ['react', 'react-router-dom', '@s-ui/pde', '@s-ui/react-context', '@s-ui/react-router']
+const defaultPackagesToAlias = [
+  'react',
+  'react-dom',
+  'react-router-dom',
+  'react/jsx-dev-runtime',
+  'react/jsx-runtime',
+  '@s-ui/pde',
+  '@s-ui/react-context',
+  '@s-ui/react-router'
+]
 
-const createAliasPath = pkgName => path.resolve(path.join(PWD, `./node_modules/${pkgName}`))
+const createAliasPath = pkgName => {
+  const nodeModulesPath = path.join(PWD, './node_modules')
+  const parentNodeModulesPath = path.join(PWD, '../node_modules')
+  const pkgPath = nodeModulesPath && path.join(nodeModulesPath, pkgName)
 
-const mustPackagesToAlias = {
-  'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
-  'react/jsx-runtime': 'react/jsx-runtime.js'
+  if (pkgPath && fs.existsSync(pkgPath)) {
+    return path.resolve(pkgPath)
+  } else if (fs.existsSync(parentNodeModulesPath)) {
+    return path.resolve(path.join(parentNodeModulesPath, pkgName))
+  }
+
+  try {
+    return require.resolve(pkgName).replace(/\/index\.js$/, '')
+  } catch (e) {
+    return ''
+  }
 }
 
-exports.defaultAlias = Object.fromEntries(defaultPackagesToAlias.map(pkgName => [pkgName, createAliasPath(pkgName)]))
+const mustPackagesToAlias = {}
+
+exports.defaultAlias = Object.fromEntries(
+  defaultPackagesToAlias.map(pkgName => [pkgName, createAliasPath(pkgName)]).filter(([, path]) => path)
+)
 
 const aliasFromConfig = config.alias
   ? Object.entries(config.alias).reduce(

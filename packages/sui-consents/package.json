@@ -5,13 +5,14 @@
   "description": "iab consents handler",
   "types": "lib/index",
   "scripts": {
-    "lib": "rm -rf ./lib && tsc",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@s-ui/js-compiler": "1",
     "@s-ui/react-context": "1",
     "@testing-library/react": "11.2.5",
     "react": "17",
