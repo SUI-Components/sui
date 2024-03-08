@@ -2,11 +2,13 @@
 /* eslint-disable no-console */
 // @ts-check
 
+const path = require('path')
+const fs = require("fs")
 const program = require('commander')
 const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
-const config = require('../eslintrc.js')
+const config = fs.existsSync(process.cwd() + '/tsconfig.json') ? require('../eslintrc.ts') : require('../eslintrc.js')
 
 program
   .option('--add-fixes')
@@ -55,7 +57,9 @@ const baseConfig = {
 
   if (reporter) {
     console.log('[sui-lint] Sending stats using the reporter ', reporter)
-    const {JSReporter} = await import(reporter)
+    const reporterPath = path.isAbsolute(reporter) ? reporter : path.join(process.cwd() + '/' + reporter)
+    console.log({reporter, isAbsolute: path.isAbsolute(reporter), reporterPath})
+    const {JSReporter} = await import(reporterPath)
     const reportered = await JSReporter.create()
     await reportered.map(results).send()
     console.log('[sui-lint] All your stats has been sent', reporter)

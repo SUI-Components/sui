@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+const path = require('path')
 
 const program = require('commander')
 const {RepositoryLinter} = require('../src/RepositoryLinter')
@@ -25,7 +26,10 @@ const {reporter, outputJson} = program.opts()
 
   if (reporter) {
     console.log('\n[sui-lint] Sending stats using the reporter\n\n', reporter)
-    const {RepositoryReporter} = await import(reporter)
+    const reporterPath = path.isAbsolute(reporter) ? reporter : path.join(process.cwd() + '/' + reporter)
+    console.log({reporter, isAbsolute: path.isAbsolute(reporter), reporterPath})
+    const {RepositoryReporter} = await import(reporterPath)
+
     const reportered = RepositoryReporter.create()
     await reportered.map(results).send()
     results.logMonitorings()
