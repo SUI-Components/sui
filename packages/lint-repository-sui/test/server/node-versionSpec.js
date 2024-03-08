@@ -3,6 +3,8 @@ import dedent from 'dedent'
 import handler from '../../src/rules/node-version.js'
 import {MatchStub, RuleTester} from '../TestHelpers.js'
 
+
+
 RuleTester.create('node-version', handler).run({
   valid: [
     {
@@ -23,7 +25,7 @@ RuleTester.create('node-version', handler).run({
       monitoring: 0
     },
     {
-      '.nvmrc': [MatchStub.create({raw: '16'})],
+      '.nvmrc': [MatchStub.create({raw: '16.1.3'})],
       name: 'Exits more than one nvmrc file',
       report: dedent`
         Your current Node version is 16.
