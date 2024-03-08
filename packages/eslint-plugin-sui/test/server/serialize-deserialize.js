@@ -8,7 +8,7 @@ import rule from '../../src/rules/serialize-deserialize.js'
 // more info: https://eslint.org/docs/latest/integrate/nodejs-api#ruletester
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions: {ecmaVersion: 6}})
+const ruleTester = new RuleTester({parserOptions: {ecmaVersion: 2018}})
 ruleTester.run('serialize-deserialize', rule, {
   valid: [
     {
@@ -91,6 +91,27 @@ ruleTester.run('serialize-deserialize', rule, {
         }
       `,
       errors: [{message: 'Missing toJSON properties (id, name)'}]
+    },
+    {
+      code: dedent`
+        class User {
+          static create({id, name}) { return new User(id, name) }
+          constructor(id, name) {
+            this.id = id
+            this.name = name
+          }
+          toJSON() {
+            return {
+              Noid: this.id,
+              ...this.user.toJSON()
+            }
+          }
+        }
+      `,
+      errors: [{message: dedent`
+      Spread operation are not allowed as part of the toJSON function.
+      The output of the 'toJSON' should be the same as the input of your 'static create' method
+      `}]
     }
   ]
 })

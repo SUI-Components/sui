@@ -14,7 +14,7 @@
     "lint": "npm-run-all \"lint:*\"",
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
     "lint:js": "eslint .",
-    "test": "npx sui-test server -P ./tests/**/*.js",
+    "test": "npx sui-test server",
     "update:eslint-docs": "eslint-doc-generator"
   },
   "dependencies": {
@@ -23,10 +23,10 @@
   },
   "devDependencies": {
     "@s-ui/test": "8",
-    "eslint": "^8.19.0",
-    "eslint-doc-generator": "^1.0.0",
-    "eslint-plugin-eslint-plugin": "^5.0.0",
-    "eslint-plugin-node": "^11.1.0"
+    "eslint": "8.19.0",
+    "eslint-doc-generator": "1.0.0",
+    "eslint-plugin-eslint-plugin": "5.0.0",
+    "eslint-plugin-node": "11.1.0"
   },
   "engines": {
     "node": "^14.17.0 || ^16.0.0 || >= 18.0.0"

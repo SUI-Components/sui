@@ -48,14 +48,14 @@ module.exports = {
           node.body?.body?.find(methodDefinition => {
             return (
               methodDefinition.static &&
-              methodDefinition.value?.body?.body?.find(body => body.type === 'ReturnStatement')?.argument?.callee.name === node.id.name // eslint-disable-line
+              methodDefinition.value?.body?.body?.find?.(body => body.type === 'ReturnStatement')?.argument?.callee?.name === node?.id?.name // eslint-disable-line
             )
           })
         )
 
         if (!hasStaticFactoryMethod) {
           context.report({
-            node,
+            node: node?.id ?? node.superClass ?? node,
             messageId: 'notFoundFactoryFunction'
           })
         }

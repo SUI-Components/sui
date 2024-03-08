@@ -30,6 +30,10 @@ module.exports = {
       missingCreateMethod: dedent`
       If your class has a 'toJSON' method. You have to define a 'static create' method too.
       The output of the 'toJSON' should be the same as the input of your 'static create' method
+      `,
+      forbiddenSpreadElements: dedent`
+      Spread operation are not allowed as part of the toJSON function.
+      The output of the 'toJSON' should be the same as the input of your 'static create' method
       `
     }
   },
@@ -39,7 +43,7 @@ module.exports = {
       ClassDeclaration(node) {
         const create = node.body.body.find(i => i.key.name === 'create')
         const toJSON = node.body.body.find(i => i.key.name === 'toJSON')
-        const className = node.id.name
+        const className = node?.id?.name ?? ''
 
         if (['UseCase', 'Service', 'Repository'].some(allowWord => className.includes(allowWord))) return // eslint-disable-line
 
@@ -47,13 +51,13 @@ module.exports = {
 
         if (create && !toJSON)
           return context.report({
-            node: create,
+            node: create.key,
             messageId: 'missingToJSONMethod'
           })
 
         if (toJSON && !create)
           return context.report({
-            node: toJSON,
+            node: toJSON.key,
             messageId: 'missingCreateMethod'
           })
 
@@ -65,9 +69,17 @@ module.exports = {
         const createProperties = createParams.properties
         const toJSONProperties = toJSON.value.body.body[0].argument.properties
 
+        const spreadElement = toJSONProperties?.find(node => node.type === 'SpreadElement')
+        if(spreadElement) {
+          return context.report({
+            node: spreadElement,
+            messageId: 'forbiddenSpreadElements'
+          })
+        }
+
         if (!toJSONProperties) {
           return context.report({
-            node: toJSON,
+            node: toJSON.key,
             messageId: 'invalidTOJSONProperties'
           })
         }
@@ -78,7 +90,7 @@ module.exports = {
         const missingToJSONProps = createProps.filter(p => !toJSONProps.find(e => e === p))
         if (missingToJSONProps.length) {
           context.report({
-            node: toJSON,
+            node: toJSON.key,
             messageId: 'toJSONProperties',
             data: {
               props: missingToJSONProps.join(', ')
