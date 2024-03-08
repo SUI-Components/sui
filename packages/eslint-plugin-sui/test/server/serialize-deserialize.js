@@ -27,6 +27,26 @@ ruleTester.run('serialize-deserialize', rule, {
           }
         }
       `
+    },
+    {
+      code: dedent`
+        class User {
+          static create({id, name}) { return new User(id, name) }
+          constructor(id, name) {
+            this.id = id
+            this.name = name
+          }
+          toJSON() {
+            const name="John"
+            const surname="Doe"
+
+            return {
+              id: this.id,
+              name: this.name
+            }
+          }
+        }
+      `
     }
   ],
 
@@ -108,10 +128,14 @@ ruleTester.run('serialize-deserialize', rule, {
           }
         }
       `,
-      errors: [{message: dedent`
+      errors: [
+        {
+          message: dedent`
       Spread operation are not allowed as part of the toJSON function.
       The output of the 'toJSON' should be the same as the input of your 'static create' method
-      `}]
+      `
+        }
+      ]
     }
   ]
 })

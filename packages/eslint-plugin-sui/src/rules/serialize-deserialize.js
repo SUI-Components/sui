@@ -67,7 +67,8 @@ module.exports = {
         }
 
         const createProperties = createParams.properties
-        const toJSONProperties = toJSON.value.body.body[0].argument.properties
+        const toJSONProperties = toJSON.value.body.body?.find(node => node.type === 'ReturnStatement')?.argument
+          ?.properties
 
         const spreadElement = toJSONProperties?.find(node => node.type === 'SpreadElement')
         if(spreadElement) {
