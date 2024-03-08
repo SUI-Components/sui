@@ -13,13 +13,14 @@ const config = fs.existsSync(process.cwd() + '/tsconfig.json') ? require('../esl
 program
   .option('--add-fixes')
   .option('--staged')
+  .option('--force-full-lint', 'force to lint all the JS files')
   .option('--fix', 'fix automatically problems with js files')
   .option('--ignore-patterns <ignorePatterns...>', 'Path patterns to ignore for linting')
   .option('--reporter <reporter>', 'Send results using a custom reporter')
   .option('--pattern <pattern>', 'Pattern of files to lint')
   .parse(process.argv)
 
-const {addFixes, fix, ignorePatterns = [], staged, pattern, reporter} = program.opts()
+const {addFixes, fix, ignorePatterns = [], staged, pattern, reporter, forceFullLint} = program.opts()
 
 const {CI} = process.env
 const EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -53,7 +54,11 @@ const baseConfig = {
     useEslintrc: false
   })
 
-  const results = await eslint.lintFiles(files)
+  if (forceFullLint) {
+    console.log('[sui-lint] force to lint all our JS files')
+  }
+
+  const results = await eslint.lintFiles(!forceFullLint ? files : DEFAULT_PATTERN)
 
   if (reporter) {
     console.log('[sui-lint] Sending stats using the reporter ', reporter)
