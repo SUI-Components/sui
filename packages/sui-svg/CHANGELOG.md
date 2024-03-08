@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.24.0 (2024-03-07)
+
+
+### Bug Fixes
+
+* upgrade vite version in sui svg for security reasons ([5fc7bda](https://github.com/SUI-Components/sui/commit/5fc7bdaa1f57d16cb305a52c0c7923577f97a4d5))
+
+
+
 # 3.23.0 (2023-08-14)
 
 
@@ -469,6 +478,3 @@ from the SuiAtomIcon component
 * **sui-svg:** first commit ([142511c](https://github.com/SUI-Components/sui/commit/142511cab32b2680ff58628d6473383cb8686f97))
 * **sui-svg:** remove not needed dependencies ([2639e7e](https://github.com/SUI-Components/sui/commit/2639e7e09c0d20961a3478eeff0916904fa118bb))
 * **sui-svg:** update dependencies + new dev server approach ([d8e7440](https://github.com/SUI-Components/sui/commit/d8e7440efdefb584cedf6b03784d984a56adbab0))
-
-
-

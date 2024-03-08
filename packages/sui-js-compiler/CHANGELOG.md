@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.28.0 (2024-02-07)
+
+
+### Features
+
+* remove not needed console log ([c8ea161](https://github.com/SUI-Components/sui/commit/c8ea16111a43c91e0071d4f0caef7a4c7676af1b))
+
+
+
 # 1.27.0 (2024-01-15)
 
 
@@ -265,6 +274,3 @@
 * **packages/sui-js-compiler:** Remove console.log and avoid publishing test folder ([33bbae9](https://github.com/SUI-Components/sui/commit/33bbae9616cc28b19a701f0c5371375ba1e821b4))
 * **packages/sui-js-compiler:** Remove not needed dependency ([36f7bab](https://github.com/SUI-Components/sui/commit/36f7babc3be84f6ee0da623b847d501bf3db2ae9))
 * **packages/sui-js-compiler:** Upgrade swc/core dependencies ([b36de0d](https://github.com/SUI-Components/sui/commit/b36de0d8fafb67a7628afb19042f9d61d1710cb4))
-
-
-

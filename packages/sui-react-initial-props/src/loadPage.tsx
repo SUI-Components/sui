@@ -7,7 +7,7 @@ import withInitialProps from './withInitialProps'
 
 const EMPTY_GET_INITIAL_PROPS = async (): Promise<object> => ({})
 
-const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({ default: Page }: {default: ClientPageComponent}) => {
+const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => async ({ default: Page }: {default: ClientPageComponent}) => {
   // check if the Page page has a getInitialProps, if not put a resolve with an empty object
   Page.getInitialProps =
     typeof Page.getInitialProps === 'function'
@@ -17,7 +17,7 @@ const createUniversalPage = (routeInfo: ReactRouterTypes.RouteInfo) => ({ defaul
   // CLIENT
   if (typeof window !== 'undefined') {
     // let withInitialProps HOC handle client getInitialProps logic
-    return Promise.resolve(withInitialProps(Page))
+    return await Promise.resolve(withInitialProps(Page))
   }
   // SERVER
   // Create a component that gets the initialProps from context

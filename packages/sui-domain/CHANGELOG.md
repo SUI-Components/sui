@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.14.0 (2024-02-07)
+
+
+### Features
+
+* update axios version ([3a218b9](https://github.com/SUI-Components/sui/commit/3a218b9f53b32c92ef259dc1f1da48af79a70a1c))
+
+
+
 # 2.13.0 (2023-12-19)
 
 
@@ -339,6 +348,3 @@ just in case, we must use a major for this and be sure we're able to use this on
 
 * **sui-domain:** create sui-domain package ([15e1124](https://github.com/SUI-Components/sui/commit/15e1124b150ce123e9ecab081e9981e683705a40))
 * **sui-domain:** handle all feedback ([a4fba8a](https://github.com/SUI-Components/sui/commit/a4fba8ac64b1d1799cd5a084d7a8d1baf591b2ec))
-
-
-

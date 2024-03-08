@@ -8,6 +8,7 @@ if (process.platform === 'win32') {
 
 module.exports = (vars = {}) =>
   new webpack.DefinePlugin({
+    __MOCKS_API_PATH__: JSON.stringify(process.env.MOCKS_API_PATH || process.env.PWD + '/mocks/routes'),
     __DEV__: false,
     __BASE_DIR__: JSON.stringify(process.env.PWD),
     ...vars
