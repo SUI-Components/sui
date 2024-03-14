@@ -17,6 +17,7 @@ program
   .option('-u, --umd [libraryName]', 'Whether to output library as umb')
   .option('-r, --root', 'Create build in root dir instead of version subdir')
   .option('-p, --path [path]', 'Absolute public path where files will be located.')
+  .option('--chunk-css', 'Bundle css in chunks')
   .on('--help', () =>
     console.log(`Examples:
       $ sui-bundler lib src/index.js -o umd/my-lib -p http://my-cdn.com/my-lib -C'
@@ -27,7 +28,7 @@ program
 
 const [entry] = program.args
 const options = program.opts()
-const {clean = false, output, umd = false, root = false} = options
+const {clean = false, output, umd = false, root = false, chunkCss = false} = options
 const publicPath = options.path
 
 if (!output) {
@@ -46,7 +47,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const version = getPackageJson(process.cwd()).version
 const outputFolder = path.join(process.cwd(), output, path.sep, root ? '' : version)
-const webpackConfig = {...config, entry: path.resolve(process.cwd(), entry)}
+const webpackConfig = {...config({chunkCss}), entry: path.resolve(process.cwd(), entry)}
 webpackConfig.output.publicPath = publicPath + (root ? '' : version + '/')
 webpackConfig.output.path = outputFolder
 
