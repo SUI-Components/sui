@@ -8,7 +8,7 @@ const program = require('commander')
 const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} = require('../src/helpers.js')
 
 const {ESLint} = require('eslint')
-const config = fs.existsSync(process.cwd() + '/tsconfig.json') ? require('../eslintrc.ts') : require('../eslintrc.js')
+const config = fs.existsSync(process.cwd() + '/tsconfig.json') ? require('../eslintrc.ts.js') : require('../eslintrc.js')
 
 program
   .option('--add-fixes')
