@@ -3,7 +3,7 @@
 // @ts-check
 
 const path = require('path')
-const fs = require("fs")
+const fs = require('fs')
 const program = require('commander')
 const {checkFilesToLint, getFilesToLint, getGitIgnoredFiles, stageFilesIfRequired} = require('../src/helpers.js')
 
