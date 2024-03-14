@@ -9,14 +9,11 @@ const sassRules = require('./shared/module-rules-sass.js')
 const {extractComments, sourceMap, supportLegacyBrowsers} = require('./shared/config.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 
-const CWD = process.cwd()
-
 module.exports = ({chunkCss} = {}) => {
   const chunkCssName = config.onlyHash ? '[contenthash:8].css' : '[name].[contenthash:8].css'
   const cssFileName = chunkCss ? chunkCssName : 'styles.css'
   return {
     mode: 'production',
-    context: path.resolve(CWD, 'src'),
     resolve: {
       alias: {
         ...aliasFromConfig
