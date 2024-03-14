@@ -1,6 +1,4 @@
-import { ContextFactoryParams } from './types'
-
-export default (req: IncomingMessage.ServerRequest): ContextFactoryParams => ({
+export default req => ({
   appConfig: req.appConfig,
   req,
   cookies: req.headers.cookie,
