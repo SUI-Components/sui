@@ -32,7 +32,7 @@ ruleTester.run('factory-pattern', rule, {
             You have to define at least one static function that return an instance of your class.
             Avoid to use the 'new' keyword directly in your code.
             Use always a factory function
-        `,
+        `
         }
       ]
     },
@@ -50,7 +50,7 @@ ruleTester.run('factory-pattern', rule, {
             You have to define at least one static function that return an instance of your class.
             Avoid to use the 'new' keyword directly in your code.
             Use always a factory function
-        `,
+        `
         }
       ]
     },
@@ -68,7 +68,7 @@ ruleTester.run('factory-pattern', rule, {
             You have to define at least one static function that return an instance of your class.
             Avoid to use the 'new' keyword directly in your code.
             Use always a factory function
-        `,
+        `
         }
       ]
     },
@@ -82,7 +82,7 @@ ruleTester.run('factory-pattern', rule, {
             You have to define at least one static function that return an instance of your class.
             Avoid to use the 'new' keyword directly in your code.
             Use always a factory function
-        `,
+        `
         }
       ]
     }

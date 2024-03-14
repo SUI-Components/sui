@@ -71,7 +71,7 @@ module.exports = {
           ?.properties
 
         const spreadElement = toJSONProperties?.find(node => node.type === 'SpreadElement')
-        if(spreadElement) {
+        if (spreadElement) {
           return context.report({
             node: spreadElement,
             messageId: 'forbiddenSpreadElements'
