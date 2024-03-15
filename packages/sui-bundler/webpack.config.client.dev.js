@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const {withHydrationOverlayWebpack} = require('@builder.io/react-hydration-overlay/webpack')
 
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared/index.js')
 const definePlugin = require('./shared/define.js')
@@ -122,4 +123,7 @@ const webpackConfig = {
   devtool: config.sourcemaps && config.sourcemaps.dev ? config.sourcemaps.dev : false
 }
 
-module.exports = webpackConfig
+module.exports = withHydrationOverlayWebpack({
+  appRootSelector: '#root',
+  isMainAppEntryPoint: entryPointName => entryPointName === 'app'
+})(webpackConfig)
