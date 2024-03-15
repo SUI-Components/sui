@@ -91,10 +91,10 @@ describe('I18N with polyglot adapter', () => {
 
     describe('setting allowMissing', () => {
       beforeEach(() => {
-        i18n.adapter.instance.allowMissing = true
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: true})})
       })
       afterEach(() => {
-        i18n.adapter.instance.allowMissing = false
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: false})})
       })
       it('should return an interpolated key if initialized with allowMissing and translation not found', () => {
         expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql('Welcome Robert')
