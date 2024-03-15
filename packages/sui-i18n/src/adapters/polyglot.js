@@ -298,6 +298,7 @@ class Polyglot {
     this.currentLocale = opts.locale || 'en'
     const allowMissing = opts.allowMissing ? transformPhrase : null
     this.onMissingKey = typeof opts.onMissingKey === 'function' ? opts.onMissingKey : allowMissing
+    this.logMissingKey = typeof opts.logMissingKey === 'boolean' ? opts.logMissingKey : true
     this.warn = opts.warn || warn
     this.replaceImplementation = opts.replace || defaultReplace
     this.tokenRegex = constructTokenRegex(opts.interpolation)
@@ -456,7 +457,6 @@ class Polyglot {
   t(key, options) {
     let phrase, result
     const opts = options == null ? {} : options
-    console.log('Polyglot - t: ', key, this.phrases)
     if (typeof this.phrases[key] === 'string') {
       phrase = this.phrases[key]
     } else if (typeof opts._ === 'string') {
@@ -471,8 +471,9 @@ class Polyglot {
         this.pluralRules,
         this.replaceImplementation
       )
+      this.logMissingKey && this.warn('Missing translation for key: "' + key + '"')
     } else {
-      this.warn('Missing translation for key: "' + key + '"')
+      this.logMissingKey && this.warn('Missing translation for key: "' + key + '"')
       result = key
     }
     if (typeof phrase === 'string') {
