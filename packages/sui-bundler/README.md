@@ -151,7 +151,7 @@ $ sui-bundler lib src/index.js -o umd/fancy -p http://my-cdn.com/fancy --umd="My
 
 Then you can find your library directly in the provided namespace variable: `window.MyFancyLibraryNamespace` or `window.MyFancyLibraryNamespace.default` for ES6 exports.
 
-#### Split css files with 
+#### Use css chunks
 
 You can use `--chunk-css` option for creating different chunks for each css file
 
