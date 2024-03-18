@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.57.0 (2024-03-18)
+
+
+### Features
+
+* add crossorigin=anonymous attribute to script tags on client dev ([bfc2037](https://github.com/SUI-Components/sui/commit/bfc20371dec312708222e22b7a44830a736a0732))
+* add hydration overlay on webpack.config.client.dev.js ([f69fb9f](https://github.com/SUI-Components/sui/commit/f69fb9f60f45efc7fde32e9a46c6f172b5b6cbb2))
+
+
+
 # 9.56.0 (2024-02-07)
 
 
