@@ -46,6 +46,14 @@ Use `-C path` or `--context path` parameter to generate the component with a giv
 $ npx sui-studio generate house window -C ./myCustomContext.js
 ```
 
+#### Explicit import
+
+Use `-E` or `--explicit` parameter to generate a component in a file with its same name and an index re-export.
+
+```sh
+$ npx sui-studio generate house window -E
+```
+
 ### Use new compiler
 
 We're migrating to `swc` so you could generate the new component with the expected `prepare` field by using the flag `--swc` or `-W`.
