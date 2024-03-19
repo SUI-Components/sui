@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import {expect} from 'chai'
-import {rest} from 'msw'
+import {http} from 'msw'
 
 import {setupMocker} from '../../src/index.js'
 
@@ -15,14 +15,21 @@ describe('sui-mock | setupMocker', () => {
 
   it('should init mocker with one handler', () => {
     // Given
-    const handler = rest.get('/user/:userId', (req, res, ctx) => {
-      return res(
-        ctx.json({
-          firstName: 'John',
-          lastName: 'Maverick'
-        })
-      )
-    })
+    const handler = http.get(
+      '/user/:userId',
+      () =>
+        new Response(
+          JSON.stringify({
+            firstName: 'John',
+            lastName: 'Maverick'
+          }),
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+    )
 
     // When
     const mocker = setupMocker([handler])
