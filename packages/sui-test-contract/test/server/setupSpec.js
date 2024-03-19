@@ -20,11 +20,16 @@ const gardenResponse = {
   trees: [fujiAppleResponse, {color: 'green', type: 'Granny Smith'}]
 }
 const galaAppleBody = {color: 'red', type: 'Gala'}
-const getAppleHandler = rest.get('http://localhost:8181/apples/:slug', (req, res, ctx) => {
-  const rotten = req.url.searchParams.get('rotten')
-  const response = rotten ? fujiRottenAppleResponse : fujiAppleResponse
+const getAppleHandler = rest.get('http://localhost:8181/apples/:slug', ({request}) => {
+  const url = new URL(request.url)
+  const rotten = url.searchParams.get('rotten')
+  const json = rotten ? fujiRottenAppleResponse : fujiAppleResponse
 
-  return res(ctx.status(200), ctx.json(response))
+  return new Response(JSON.stringify(json), {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
 })
 const notFoundResponse = {code: 'not-found'}
 
@@ -38,8 +43,14 @@ setupContractTests({
         endpoint: '/apples',
         description: 'A request for getting some apples',
         state: 'I have some apples',
-        handler: rest.get('http://localhost:8181/apples', (req, res, ctx) =>
-          res(ctx.status(200), ctx.json(applesResponse))
+        handler: rest.get(
+          'http://localhost:8181/apples',
+          () =>
+            new Response(JSON.stringify(applesResponse), {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
         ),
         response: applesResponse
       },
@@ -63,7 +74,7 @@ setupContractTests({
         description: 'A request for adding a Gala apple',
         state: "I've added a Gala apple",
         method: 'post',
-        handler: rest.post('http://localhost:8181/apples/add/:slug', (req, res, ctx) => res(ctx.status(200))),
+        handler: rest.post('http://localhost:8181/apples/add/:slug', () => new Response()),
         body: galaAppleBody
       },
       {
@@ -71,15 +82,21 @@ setupContractTests({
         description: 'A request for adding a Gala apple with a different color',
         state: "I've added a Gala apple with a different color",
         method: 'post',
-        handler: rest.post('http://localhost:8181/apples/add/:slug', (req, res, ctx) => res(ctx.status(200))),
+        handler: rest.post('http://localhost:8181/apples/add/:slug', () => new Response()),
         body: {color: 'yellow', type: 'Gala'}
       },
       {
         endpoint: '/apples/garden',
         description: 'A request for getting a garden',
         state: 'I have a garden',
-        handler: rest.get('http://localhost:8181/apples/garden', (req, res, ctx) =>
-          res(ctx.status(200), ctx.json(gardenResponse))
+        handler: rest.get(
+          'http://localhost:8181/apples/garden',
+          () =>
+            new Response(JSON.stringify(gardenResponse), {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
         ),
         response: gardenResponse,
         addMatchingRules: true
@@ -88,8 +105,15 @@ setupContractTests({
         endpoint: '/apples/search/garden',
         description: 'A request for getting a garden that fails',
         state: 'I have not garden',
-        handler: rest.get('http://localhost:8181/apples/search/garden', (req, res, ctx) =>
-          res(ctx.status(404), ctx.json(notFoundResponse))
+        handler: rest.get(
+          'http://localhost:8181/apples/search/garden',
+          () =>
+            new Response(JSON.stringify(notFoundResponse), {
+              status: 404,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
         ),
         response: notFoundResponse
       }

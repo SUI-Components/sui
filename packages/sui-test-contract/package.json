@@ -24,5 +24,16 @@
   },
   "devDependencies": {
     "@s-ui/domain": "2"
+  },
+  "config": {
+    "sui-test": {
+      "server": {
+        "esmOverride": true,
+        "useLibDir": false
+      }
+    }
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

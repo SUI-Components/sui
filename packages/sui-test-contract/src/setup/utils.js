@@ -1,6 +1,6 @@
 import {stringify} from 'qs'
 
-import {writeData2File} from '@pactflow/pact-msw-adapter/dist/utils/utils.js'
+import {createWriter} from '@pactflow/pact-msw-adapter/dist/utils/utils.js'
 
 const flatEntries = (input, prefix = '') =>
   Object.entries(input).flatMap(([key, value]) => {
@@ -52,7 +52,7 @@ export const writerFactory = providers => (path, data) => {
   })
 
   console.log(`Writing the Pact file "${path}"`) // eslint-disable-line
-  writeData2File(path, data)
+  createWriter()(path, data)
 }
 
 export const mapProviders = providers =>
