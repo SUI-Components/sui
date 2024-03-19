@@ -1,4 +1,4 @@
-export {rest} from 'msw'
+export {http as rest} from 'msw'
 
 export const getBrowserMocker = async (handlers = []) => {
   const setup = await import('msw').then(pkg => pkg.setupWorker)

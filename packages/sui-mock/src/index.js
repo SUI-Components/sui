@@ -1,5 +1,5 @@
 // /* global __MOCKS_API_PATH__ */
-import {rest} from 'msw'
+import {http} from 'msw'
 
 import {getBrowserMocker} from './browser.js'
 import {getServerMocker} from './server.js'
@@ -58,4 +58,4 @@ const setupMocker = isNode ? getServerMocker : getBrowserMocker
 //   return mocker([...legacyHandlers, ...(apiContextRequest && generateHandlerFromContext(apiContextRequest))])
 // }
 
-export {setupMocker, rest}
+export {setupMocker, http as rest}

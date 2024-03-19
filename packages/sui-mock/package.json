@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "description": "mock provider",
   "types": "lib/index",
+  "type": "module",
   "scripts": {
     "lib": "babel --presets sui ./src --out-dir ./lib",
     "prepublishOnly": "npm run lib",
@@ -17,7 +18,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "msw": "0.47.4"
+    "msw": "2.2.8"
   },
   "repository": {
     "type": "git",

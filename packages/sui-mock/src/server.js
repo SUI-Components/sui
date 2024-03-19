@@ -1,4 +1,4 @@
-export {rest} from 'msw'
+export {http as rest} from 'msw'
 
 export const getServerMocker = async (handlers = []) => {
   const {setupServer} = require('msw/node')
