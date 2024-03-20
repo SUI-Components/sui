@@ -2,6 +2,7 @@
 /* eslint-env mocha */
 
 import {expect} from 'chai'
+import sinon from 'sinon'
 
 import Polyglot from '../src/adapters/polyglot.js'
 import Rosetta from '../src/index.js'
@@ -90,14 +91,60 @@ describe('I18N with polyglot adapter', () => {
     })
 
     describe('setting allowMissing', () => {
-      beforeEach(() => {
-        i18n.adapter.instance.allowMissing = true
-      })
+      const fixtureKey = 'Welcome %{name}'
+      const obj = {onMissingKey: () => fixtureKey}
+      const onMissingKeySpy = sinon.spy(obj, 'onMissingKey')
+      const warnSpy = sinon.spy()
+
       afterEach(() => {
-        i18n.adapter.instance.allowMissing = false
+        onMissingKeySpy.resetHistory()
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: false})})
       })
+
       it('should return an interpolated key if initialized with allowMissing and translation not found', () => {
-        expect(i18n.t('Welcome %{name}', {name: 'Robert'})).to.eql('Welcome Robert')
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: true})})
+        expect(i18n.t(fixtureKey, {name: 'Robert'})).to.eql('Welcome Robert')
+        expect(onMissingKeySpy.notCalled).to.be.true
+      })
+
+      it('should return the key and write console.warn when allowMissing is false and translation not found', () => {
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: false, warn: warnSpy})})
+        expect(i18n.t(fixtureKey, {name: 'Robert'})).to.eql(fixtureKey)
+        expect(warnSpy.calledOnce).to.be.true
+      })
+
+      it('should call onMissingKey when allowMissing is false and translation not found', () => {
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: false, onMissingKey: onMissingKeySpy})})
+        expect(i18n.t(fixtureKey, {name: 'Robert'})).to.eql(fixtureKey)
+        expect(onMissingKeySpy.calledOnce).to.be.true
+      })
+    })
+
+    describe('setting warn', () => {
+      const fixtureKey = 'Welcome %{name}'
+      const warnSpy = sinon.spy()
+
+      afterEach(() => {
+        warnSpy.resetHistory()
+        i18n = new Rosetta({adapter: new Polyglot({warn: console.warn})})
+      })
+
+      it('should write console.warn when allowMissing is false and translation not found', () => {
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: false, warn: warnSpy})})
+        expect(i18n.t(fixtureKey, {name: 'Robert'})).to.eql(fixtureKey)
+        expect(warnSpy.calledOnce).to.be.true
+      })
+
+      it('should write console.warn when allowMissing is true and translation not found', () => {
+        i18n = new Rosetta({adapter: new Polyglot({allowMissing: true, warn: warnSpy})})
+        expect(i18n.t(fixtureKey, {name: 'Robert'})).to.eql('Welcome Robert')
+        expect(warnSpy.calledOnce).to.be.true
+      })
+
+      it('should not write console.warn when logMissingKey is false', () => {
+        i18n = new Rosetta({adapter: new Polyglot({logMissingKey: false, warn: warnSpy})})
+        expect(i18n.t(fixtureKey, {name: 'Robert'})).to.eql(fixtureKey)
+        expect(warnSpy.notCalled).to.be.true
       })
     })
 
