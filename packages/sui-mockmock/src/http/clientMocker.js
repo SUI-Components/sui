@@ -1,6 +1,5 @@
+import {Mocker, Mock} from './mockerInterface.js'
 import sinon from 'sinon'
-
-import {Mock, Mocker} from './mockerInterface'
 
 class ClientMocker extends Mocker {
   _server = null
