@@ -1,6 +1,7 @@
 {
   "name": "eslint-plugin-sui",
   "version": "1.2.0",
+  "access": "public",
   "description": "Set of sui lint rules",
   "keywords": [
     "eslint",
