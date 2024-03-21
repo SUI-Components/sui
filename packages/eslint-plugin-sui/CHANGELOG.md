@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.3.0 (2024-03-21)
+
+
+### Features
+
+* make public ([a43f568](https://github.com/SUI-Components/sui/commit/a43f5687fbe42ac970b18a1d1ecd918605a17234))
+
+
+
 # 1.2.0 (2024-03-21)
 
 
