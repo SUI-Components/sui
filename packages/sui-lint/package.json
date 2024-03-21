@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/lint",
-  "version": "4.37.0",
+  "version": "4.39.0",
   "description": "Linting CLI for sui packages",
   "main": "./bin/sui-lint.js",
   "bin": {
@@ -38,10 +38,10 @@
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "eslint-plugin-sui": "beta",
+    "eslint-plugin-sui": "1",
     "fast-glob": "3.3.2",
     "js-yaml": "4.1.0",
-    "lint-repository-sui": "beta",
+    "lint-repository-sui": "1",
     "postcss-scss": "4.0.4",
     "prettier": "2.7.1",
     "stylelint": "14.11.0",
