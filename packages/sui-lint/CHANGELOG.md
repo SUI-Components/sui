@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.40.0 (2024-03-21)
+
+
+### Features
+
+* bump version ([eaa25a2](https://github.com/SUI-Components/sui/commit/eaa25a26ac0337b6739c9b058d11942af895ae09))
+
+
+
 # 4.37.0 (2024-03-21)
 
 
