@@ -1,4 +1,4 @@
-import Sha256 from "./sha256.js";
+import Sha256 from './sha256.js';
 
 // extracted from https://github.com/jbt/tiny-hashes/blob/master/md5/md5.js
 const m = [
@@ -10,6 +10,7 @@ const m = [
   1126891415, -1416354905, -57434055, 1700485571, -1894986606, -1051523, -2054922799, 1873313359, -30611744,
   -1560198380, 1309151649, -145523070, -1120210379, 718787259, -343485551
 ] // eslint-disable-line
+
 const md5 = function (c) {
   let e
   let g
@@ -41,7 +42,7 @@ const md5 = function (c) {
   return c
 } // eslint-disable-line
 
-// extracted from https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#converting_a_digest_to_a_hex_string
+// extracted from https://www.movable-type.co.uk/scripts/sha256.html
 const sha256 = async value => {
   return Sha256.hash(value)
 }
