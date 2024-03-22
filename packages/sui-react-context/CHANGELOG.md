@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.9.0 (2024-03-22)
+
+
+### Bug Fixes
+
+* fix compilation ([04a9988](https://github.com/SUI-Components/sui/commit/04a9988ad5daa55bccf4c925d986bc46b348cb53))
+* fix json wrong character ([c1b6584](https://github.com/SUI-Components/sui/commit/c1b65847a7adb466c24f20c922fdd17cd55b521e))
+* fix linting problems ([b76fb6c](https://github.com/SUI-Components/sui/commit/b76fb6ca4f9eeab69a7f3cc7d19175bc1a03430b))
+
+
+
 # 1.8.0 (2022-08-12)
 
 
@@ -68,6 +79,3 @@
 * **sui-react-context:** create wrapper HoC ([b11bde9](https://github.com/SUI-Components/sui/commit/b11bde911a7726d6e5c929010ea92d229f96190e))
 * **sui-react-context:** first commit ([c4524ef](https://github.com/SUI-Components/sui/commit/c4524ef0274e92ca97ad5637ded76bee7d0f282d))
 * **sui-react-context:** update deps ([2fa9a28](https://github.com/SUI-Components/sui/commit/2fa9a285225117117b81847e88513ec96d9ecc60))
-
-
-

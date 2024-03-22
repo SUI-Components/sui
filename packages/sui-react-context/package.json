@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-context",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "",
   "main": "lib/index",
   "types": "lib/index.d.ts",
