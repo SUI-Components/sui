@@ -1,0 +1,39 @@
+{
+  "name": "eslint-plugin-sui",
+  "version": "1.3.0",
+  "access": "public",
+  "description": "Set of sui lint rules",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "Sui",
+  "main": "./src/index.js",
+  "exports": "./src/index.js",
+  "scripts": {
+    "lint": "npx npm-run-all \"lint:*\"",
+    "lint:eslint-docs": "npx npm-run-all \"update:eslint-docs -- --check\"",
+    "lint:js": "npx eslint .",
+    "test": "npx sui-test server",
+    "update:eslint-docs": "npx eslint-doc-generator"
+  },
+  "dependencies": {
+    "requireindex": "1.2.0",
+    "string-dedent": "3.0.1"
+  },
+  "devDependencies": {
+    "@s-ui/test": "8",
+    "eslint": "8.19.0",
+    "eslint-doc-generator": "1.0.0",
+    "eslint-plugin-eslint-plugin": "5.0.0",
+    "eslint-plugin-node": "11.1.0"
+  },
+  "engines": {
+    "node": "^14.17.0 || ^16.0.0 || >= 18.0.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=7"
+  },
+  "license": "ISC"
+}

@@ -1,5 +1,42 @@
 # CHANGELOG
 
+# 4.40.0 (2024-03-21)
+
+
+### Features
+
+* bump version ([eaa25a2](https://github.com/SUI-Components/sui/commit/eaa25a26ac0337b6739c9b058d11942af895ae09))
+
+
+
+# 4.37.0 (2024-03-21)
+
+
+### Bug Fixes
+
+* Fix JSReporter import and plugins version ([07293da](https://github.com/SUI-Components/sui/commit/07293da8db0823911b3a6f7518d5de4fc1cbf24d))
+* Fix lint ([0836810](https://github.com/SUI-Components/sui/commit/0836810202a370e600fd1cb25250a18595aa7e81))
+* Fix lint ([e0fd013](https://github.com/SUI-Components/sui/commit/e0fd01378a1f3c381d99802d1feb827d55f0eae3))
+* Fix version ([02cd409](https://github.com/SUI-Components/sui/commit/02cd409e73ac28dc21bda52c1229adcde74fc28d))
+
+
+### Features
+
+* Add flag to force lint all files ([48b4ef6](https://github.com/SUI-Components/sui/commit/48b4ef65b0d7d24adf934f9ca5ec54357f170047))
+* add new dependency ([0324821](https://github.com/SUI-Components/sui/commit/0324821fc9dc0d57dbdc78db86d587439650f85e))
+* add new dependency ([75d31c6](https://github.com/SUI-Components/sui/commit/75d31c62190d715a9281f3be7e461251e877a440))
+* Add send method to the reporter ([7d34092](https://github.com/SUI-Components/sui/commit/7d34092f0c083bdb8daefb3c254603196839b7b2))
+* Add send method to the reporter ([1ce2585](https://github.com/SUI-Components/sui/commit/1ce2585af0a11d9dd11a21fc9cd9e7366a3122c3))
+* add typescript lint repository rule ([508fd84](https://github.com/SUI-Components/sui/commit/508fd8493180bbd6bab63e710e47fd2a6396f166))
+* Allow relative path in reporter flag and select TS or JS eslint config ([c42244c](https://github.com/SUI-Components/sui/commit/c42244c87d7e38392458751c1bfea9dbfa5e2809))
+* Create reporter flag ([0a2563e](https://github.com/SUI-Components/sui/commit/0a2563ee0809c2e348684fdf72134cdc085e6060))
+* Create RepositoryLinter and desactivate eslint-preset-sui rules ([ed4035f](https://github.com/SUI-Components/sui/commit/ed4035f8b503c9c7eea41e762115fe4e6339ee51))
+* disable sui checks ([57e55cf](https://github.com/SUI-Components/sui/commit/57e55cfeba74087b2da535cadbe85e07190cdf8d))
+* disable sui checks ([b66fd7d](https://github.com/SUI-Components/sui/commit/b66fd7dfae0c3eeeecd6f1d034259defddd24090))
+* fix lint ([958cfc6](https://github.com/SUI-Components/sui/commit/958cfc6b858eae5cfea94bc51f32fb6806531675))
+
+
+
 # 4.36.0 (2024-01-12)
 
 
@@ -1090,6 +1127,3 @@
 ### BREAKING CHANGES
 
 * **sui-lint:** CLI has changed and not compatible to previous version
-
-
-

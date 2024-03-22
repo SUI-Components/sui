@@ -176,6 +176,7 @@ module.exports = {
     'simple-import-sort',
     'jest',
     'jest-dom'
+    // 'sui'
   ],
   rules: {
     ...REACT_RULES,
@@ -199,26 +200,27 @@ module.exports = {
     'prettier/prettier': [RULES.ERROR, prettierOptions],
     'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}],
     'react/jsx-no-bind': RULES.OFF
+    // 'sui/factory-pattern': RULES.WARNING,
+    // 'sui/serialize-deserialize': RULES.WARNING
   },
   overrides: [
-    // {
-    //   files: ['**/domain/src/**'],
-    //   plugins: ['sui'],
-    //   rules: {
-    //     'sui/factory-pattern': RULES.WARNING,
-    //     'sui/serialize-deserialize': RULES.WARNING
-    //   }
-    // },
     {
       files: ['**/*.+(ts|tsx)'],
-      extends: ['standard-with-typescript'],
+      extends: ['standard-with-typescript', 'standard-react', 'prettier'],
+      parser: '@typescript-eslint/parser',
       parserOptions: {
         project: './tsconfig.json'
       },
       rules: {
+        'import/extensions': RULES.OFF,
         'no-return-await': RULES.OFF,
-        'prettier/prettier': RULES.OFF,
-        'react/react-in-jsx-scope': RULES.OFF
+        'prettier/prettier': [RULES.ERROR, prettierOptions],
+        'react/react-in-jsx-scope': RULES.OFF,
+        'react/no-unused-prop-types': RULES.OFF,
+        '@typescript-eslint/explicit-function-return-type': [RULES.OFF, {allowTypedFunctionExpressions: false}],
+        'chai-friendly/no-unused-expressions': RULES.ERROR,
+        '@typescript-eslint/no-unused-expressions': RULES.OFF,
+        '@typescript-eslint/return-await': RULES.OFF
       }
     },
     {
