@@ -1,4 +1,4 @@
-import Sha256 from './sha256.js';
+import Sha256 from './sha256.js'
 
 // extracted from https://github.com/jbt/tiny-hashes/blob/master/md5/md5.js
 const m = [
@@ -18,6 +18,7 @@ const md5 = function (c) {
   let a
   const h = []
   c = unescape(encodeURI(c))
+  // eslint-disable-next-line no-var
   for (var b = c.length, k = [(e = 1732584193), (g = -271733879), ~e, ~g], d = 0; d <= b; )
     h[d >> 2] |= (c.charCodeAt(d) || 128) << (8 * (d++ % 4))
   h[(c = 16 * ((b + 8) >> 6) + 14)] = 8 * b
