@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.31.0 (2024-03-23)
+
+
+### Features
+
+* use a more solid hashing function ([760b854](https://github.com/SUI-Components/sui/commit/760b85427c5240c56dbd140b3cf42f46051143fd))
+* using a pure js function to make this utility hashing function isomorphic ([dd18e41](https://github.com/SUI-Components/sui/commit/dd18e41fc448a27d09cfe7e7c255efa7297880ac))
+
+
+
 # 2.30.0 (2024-03-07)
 
 
