@@ -151,6 +151,14 @@ $ sui-bundler lib src/index.js -o umd/fancy -p http://my-cdn.com/fancy --umd="My
 
 Then you can find your library directly in the provided namespace variable: `window.MyFancyLibraryNamespace` or `window.MyFancyLibraryNamespace.default` for ES6 exports.
 
+#### Use css chunks
+
+You can use `--chunk-css` option for creating different chunks for each css file
+
+```
+$ sui-bundler lib src/index.js -o umd/fancy -p http://my-cdn.com/fancy --chunk-css
+```
+
 ## Configuration
 
 This tool works with zero configuration out the box but you could use some configuration in order to optimize or adapt the output to your needs. For that, you need to add a property `sui-bundler` inside a `config` property in the package.json of your project.
