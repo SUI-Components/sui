@@ -17,7 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "web-vitals": "3.5.0",
+    "web-vitals": "3.5.2",
     "@s-ui/react-hooks": "1"
   },
   "peerDependencies": {
