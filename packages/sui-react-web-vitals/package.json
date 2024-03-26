@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-web-vitals",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
