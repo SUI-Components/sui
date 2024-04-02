@@ -12,6 +12,7 @@ module.exports = {
     'sui/package-lock': RULES.WARNING,
     'sui/github-action': RULES.WARNING,
     'sui/typescript': RULES.WARNING,
-    'sui/structure': RULES.WARNING
+    'sui/structure': RULES.WARNING,
+    'sui/sui-tools-version': RULES.WARNING
   }
 }
