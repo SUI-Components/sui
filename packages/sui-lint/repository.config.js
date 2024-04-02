@@ -11,6 +11,7 @@ module.exports = {
     'sui/react-version': RULES.WARNING,
     'sui/package-lock': RULES.WARNING,
     'sui/github-action': RULES.WARNING,
-    'sui/typescript': RULES.WARNING
+    'sui/typescript': RULES.WARNING,
+    'sui/structure': RULES.WARNING
   }
 }
