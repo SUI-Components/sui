@@ -4,6 +4,7 @@ const PackageLock = require('./rules/package-lock.js')
 const GithubAction = require('./rules/github-action.js')
 const TypeScript = require('./rules/typescript.js')
 const Structure = require('./rules/structure.js')
+const SuiToolsVersion = require('./rules/sui-tools-version.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -17,6 +18,7 @@ module.exports = {
     'package-lock': PackageLock,
     'github-action': GithubAction,
     typescript: TypeScript,
-    structure: Structure
+    structure: Structure,
+    'sui-tools-version': SuiToolsVersion
   }
 }
