@@ -3,6 +3,7 @@ const ReactVersion = require('./rules/react-version.js')
 const PackageLock = require('./rules/package-lock.js')
 const GithubAction = require('./rules/github-action.js')
 const TypeScript = require('./rules/typescript.js')
+const Structure = require('./rules/structure.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -15,6 +16,7 @@ module.exports = {
     'react-version': ReactVersion,
     'package-lock': PackageLock,
     'github-action': GithubAction,
-    typescript: TypeScript
+    typescript: TypeScript,
+    structure: Structure
   }
 }

@@ -24,7 +24,7 @@ RuleTester.create('node-version', handler).run({
     },
     {
       '.nvmrc': [MatchStub.create({raw: '16.1.3'})],
-      name: 'Exits more than one nvmrc file',
+      name: 'nvmrc exists, but has an invalid Node version 🫠',
       report: dedent`
         Your current Node version is 16.
         Please be sure that your repository use the latest Node Version 20.
