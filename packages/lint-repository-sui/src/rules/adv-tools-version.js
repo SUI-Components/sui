@@ -2,7 +2,8 @@ const dedent = require('string-dedent')
 
 const ADV_TOOLS_VERSIONS = {
   logger: '2',
-  'lint-reporters': '1'
+  'lint-reporters': '1',
+  'vendor-by-consents-loader': '1'
 }
 
 module.exports = {

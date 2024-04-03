@@ -1,5 +1,6 @@
 const NodeVersion = require('./rules/node-version.js')
 const ReactVersion = require('./rules/react-version.js')
+const CypressVersion = require('./rules/cypress-version.js')
 const PackageLock = require('./rules/package-lock.js')
 const GithubAction = require('./rules/github-action.js')
 const TypeScript = require('./rules/typescript.js')
@@ -16,6 +17,7 @@ module.exports = {
   rules: {
     'node-version': NodeVersion,
     'react-version': ReactVersion,
+    'cypress-version': CypressVersion,
     'package-lock': PackageLock,
     'github-action': GithubAction,
     typescript: TypeScript,

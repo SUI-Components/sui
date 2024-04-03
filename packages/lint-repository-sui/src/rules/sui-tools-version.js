@@ -10,7 +10,9 @@ const SUI_TOOLS_VERSIONS = {
   pde: '2',
   test: '8',
   theme: '8',
-  domain: '2'
+  domain: '2',
+  'react-web-vitals': '2',
+  'segment-wrapper': '3'
 }
 
 module.exports = {
