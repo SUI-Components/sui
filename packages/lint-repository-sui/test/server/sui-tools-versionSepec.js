@@ -5,7 +5,6 @@ import {MatchStub, RuleTester} from '../TestHelpers.js'
 
 const SUI_TOOLS_ENTRIES = Object.entries(handler.SUI_TOOLS_VERSIONS)
 
-// MatchStub.create({parsed: {packages: {[`node_modules/@s-ui/${name}`]: {version: spectedVersion}}}})
 RuleTester.create('sui-tools-version', handler).run({
   valid: [
     {

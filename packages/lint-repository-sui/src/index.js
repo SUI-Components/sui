@@ -5,6 +5,7 @@ const GithubAction = require('./rules/github-action.js')
 const TypeScript = require('./rules/typescript.js')
 const Structure = require('./rules/structure.js')
 const SuiToolsVersion = require('./rules/sui-tools-version.js')
+const ADVToolsVersion = require('./rules/adv-tools-version.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -19,6 +20,7 @@ module.exports = {
     'github-action': GithubAction,
     typescript: TypeScript,
     structure: Structure,
-    'sui-tools-version': SuiToolsVersion
+    'sui-tools-version': SuiToolsVersion,
+    'adv-tools-version': ADVToolsVersion
   }
 }
