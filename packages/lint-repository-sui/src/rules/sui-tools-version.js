@@ -33,7 +33,7 @@ module.exports = {
         If you are not sure about how do it, please contact with Platform Web.
       `,
       missingDependency: dedent`
-        Your project doesnt have installed {{name}}.
+        Your project does not have installed {{name}}.
         Please install at least the version {{spectedVersion}}.
         If you are not sure about how do it, please contact with Platform Web.
       `,
