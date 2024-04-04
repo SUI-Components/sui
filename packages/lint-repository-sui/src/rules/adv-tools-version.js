@@ -23,7 +23,7 @@ module.exports = {
         Your current version is {{version}}.
         If you are not sure about how do it, please contact with Platform Web.
       `,
-      missingDependencie: dedent`
+      missingDependency: dedent`
         Your project doesnt have installed {{name}}.
         Please install at least the version {{spectedVersion}}.
         If you are not sure about how do it, please contact with Platform Web.
@@ -44,7 +44,7 @@ module.exports = {
 
           if (!version) {
             context.report({
-              messageId: 'missingDependencie',
+              messageId: 'missingDependency',
               data: {name, spectedVersion}
             })
             return context.monitoring(false)

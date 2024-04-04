@@ -26,12 +26,12 @@ const FILES_AND_FOLDERS = [
   'app/src/index.html',
   'app/src/index.(s)?css',
   'app/src/routes.(t|j)s(x)?',
-  'pacakges/**/src',
-  'pacakges/**/test',
-  'pacakges/**/Makefile',
-  'pacakges/**/package.json',
-  'pacakges/**/tsconfig.json',
-  'pacakges/**/CHANGELOG.md',
+  'packages/**/src',
+  'packages/**/test',
+  'packages/**/Makefile',
+  'packages/**/package.json',
+  'packages/**/tsconfig.json',
+  'packages/**/CHANGELOG.md',
 
   'deploy/config-(pre|pro).yml',
   'deploy/*-(pre|pro)-paas.yml',
@@ -56,12 +56,32 @@ module.exports = {
         The file or folder {{pattern}} is missing.
         This repository should follow the Golden Path file Structure.
         If you are not sure about how do it, please contact with Platform Web.
+      `,
+      automergeDisabled: dedent`
+        The dependabot automerge feature is disabled.
       `
     }
   },
   create: function (context) {
     return {
       ...Object.fromEntries(FILES_AND_FOLDERS.map(pattern => [pattern, () => context.monitoring(true)])),
+
+      '.github/dependabot.yml': matches => {
+        const [match] = matches
+        const json = match.parsed
+        const labels = json?.updates[0]?.labels || []
+        const isAutomergeEnabled = labels.find(key => key === 'skynet:merge')
+
+        if (!isAutomergeEnabled) {
+          context.monitoring(false)
+          context.report({
+            messageId: 'automergeDisabled'
+          })
+          return
+        }
+
+        context.monitoring(true)
+      },
 
       missmatch: key => {
         context.monitoring(false)

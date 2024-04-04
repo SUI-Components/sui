@@ -53,7 +53,7 @@ module.exports = {
 
           if (!version) {
             context.report({
-              messageId: 'missingDependencie',
+              messageId: 'missingDependency',
               data: {name, spectedVersion}
             })
             return context.monitoring(false)
