@@ -3,7 +3,7 @@
 
 const program = require('commander')
 const {exec} = require('child_process')
-const {copyFile} = require('fs/promises')
+const {cp} = require('fs/promises')
 const path = require('path')
 const fs = require('fs')
 const express = require('express')
@@ -21,7 +21,7 @@ const serverConfigFactory = require('../compiler/server.js')
 
 const TMP_PATH = '.sui'
 const SRC_PATH = path.join(process.cwd(), 'src')
-const PUBLIC_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/server`)
+const PUBLIC_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/public`)
 const SERVER_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/server`)
 const STATICS_PATH = path.join(process.cwd(), './statics')
 const STATICS_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/statics`)
@@ -68,8 +68,8 @@ const linkStatics = () => {
 
 const copyStatics = () => {
   return Promise.allSettled([
-    copyFile(path.join(SRC_PATH, '404.html'), path.join(PUBLIC_OUTPUT_PATH, '404.html')),
-    copyFile(path.join(SRC_PATH, '500.html'), path.join(PUBLIC_OUTPUT_PATH, '500.html'))
+    cp(path.join(SRC_PATH, '404.html'), path.join(PUBLIC_OUTPUT_PATH, '404.html'), {recursive: true}),
+    cp(path.join(SRC_PATH, '500.html'), path.join(PUBLIC_OUTPUT_PATH, '500.html'), {recursive: true})
   ])
 }
 
