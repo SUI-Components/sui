@@ -133,7 +133,7 @@ export const hooksFactory = async () => {
     [TYPES.NOT_FOUND]: async (req, res) => {
       res.status(NOT_FOUND_CODE).send(await getStaticErrorPageContent(NOT_FOUND_CODE, req))
     },
-    [TYPES.INTERNAL_ERROR]: async (err, req, res) => {
+    [TYPES.INTERNAL_ERROR]: async (err, req, res, next) => {
       // getInitialProps could throw a 404 error or any other error
       req.log && req.log.error && req.log.error((' ' + err.message).slice(1))
       const status =
@@ -144,7 +144,7 @@ export const hooksFactory = async () => {
         res.status(status)
       }
 
-      res.end(await getStaticErrorPageContent(status, req))
+      res.send(await getStaticErrorPageContent(status, req))
     },
     ..._userHooks
   }
