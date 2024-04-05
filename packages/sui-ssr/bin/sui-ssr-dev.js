@@ -3,6 +3,7 @@
 
 const program = require('commander')
 const {exec} = require('child_process')
+const {copyFile} = require('fs/promises')
 const path = require('path')
 const fs = require('fs')
 const express = require('express')
@@ -19,6 +20,8 @@ const log = require('@s-ui/bundler/shared/log.js')
 const serverConfigFactory = require('../compiler/server.js')
 
 const TMP_PATH = '.sui'
+const SRC_PATH = path.join(process.cwd(), 'src')
+const PUBLIC_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/server`)
 const SERVER_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/server`)
 const STATICS_PATH = path.join(process.cwd(), './statics')
 const STATICS_OUTPUT_PATH = path.join(process.cwd(), `${TMP_PATH}/statics`)
@@ -61,6 +64,13 @@ const linkStatics = () => {
       resolve()
     })
   )
+}
+
+const copyStatics = () => {
+  return Promise.allSettled([
+    copyFile(path.join(SRC_PATH, '404.html'), path.join(PUBLIC_OUTPUT_PATH, '404.html')),
+    copyFile(path.join(SRC_PATH, '500.html'), path.join(PUBLIC_OUTPUT_PATH, '500.html'))
+  ])
 }
 
 const initMSW = () => {
@@ -153,7 +163,13 @@ const start = async ({packagesToLink, linkAll}) => {
     fs.mkdirSync(TMP_PATH)
   }
 
-  Promise.all([linkStatics(), initMSW(), compile('client', clientCompiler), compile('server', serverCompiler)])
+  Promise.all([
+    linkStatics(),
+    initMSW(),
+    copyStatics(),
+    compile('client', clientCompiler),
+    compile('server', serverCompiler)
+  ])
     .then(() => {
       const script = nodemon({
         script: `${SERVER_OUTPUT_PATH}/index.js`,
