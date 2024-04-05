@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 4.41.0 (2024-04-05)
+
+
+### Features
+
+* add sui-tools-version rule ([1932c1d](https://github.com/SUI-Components/sui/commit/1932c1dc795a450b88573ff381aa04a8d9fc5262))
+* enable check for cypress version ([a4bbed9](https://github.com/SUI-Components/sui/commit/a4bbed90ded5d414ce52e02b677e2a79fb0fc4f8))
+* enable repository structure rule ([8dd7c14](https://github.com/SUI-Components/sui/commit/8dd7c14e4a63d36403e6c4c775a39d424d1c3b33))
+* enable test for ADV packages version ([6394545](https://github.com/SUI-Components/sui/commit/6394545857204b80f8e6f80d5abaa77899f63400))
+
+
+
 # 4.40.0 (2024-03-21)
 
 
