@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.27.0 (2024-04-05)
+
+
+### Bug Fixes
+
+* copy files ([b692c3e](https://github.com/SUI-Components/sui/commit/b692c3ead33bb81198e15bd69ff01b3a6a5a4fcb))
+* copy ssr dev 404 and 500 html ([27ae05b](https://github.com/SUI-Components/sui/commit/27ae05b0a335f2ca146bc5d46d2f39a394d54234))
+
+
+
 # 8.26.0 (2024-04-05)
 
 
