@@ -9,8 +9,12 @@ module.exports = {
   rules: {
     'sui/node-version': RULES.WARNING,
     'sui/react-version': RULES.WARNING,
+    'sui/cypress-version': RULES.WARNING,
     'sui/package-lock': RULES.WARNING,
     'sui/github-action': RULES.WARNING,
-    'sui/typescript': RULES.WARNING
+    'sui/typescript': RULES.WARNING,
+    'sui/structure': RULES.WARNING,
+    'sui/sui-tools-version': RULES.WARNING,
+    'sui/adv-tools-version': RULES.WARNING
   }
 }
