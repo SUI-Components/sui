@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.26.0 (2024-04-05)
+
+
+### Bug Fixes
+
+* internal error ([c7e2524](https://github.com/SUI-Components/sui/commit/c7e252499ada037c4c2d887863378cde192e1c24))
+
+
+
 # 8.25.0 (2024-01-11)
 
 
@@ -1535,6 +1544,3 @@
 ### Features
 
 * **sui-ssr:** add package.json ([d1495ce](https://github.com/SUI-Components/sui/commit/d1495ce76b02d906ca512f59518737411a67acc1)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
-
-
-

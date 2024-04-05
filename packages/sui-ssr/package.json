@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "8.25.0",
+  "version": "8.26.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
