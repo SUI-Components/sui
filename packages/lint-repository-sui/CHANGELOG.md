@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 1.4.0 (2024-04-05)
+
+
+### Features
+
+* Add check for ADV tools version ([4893715](https://github.com/SUI-Components/sui/commit/48937153d2a043df94d362eb49b06bfa2bcd3448))
+* add dependabot rules ([bec81a7](https://github.com/SUI-Components/sui/commit/bec81a76ee1438c521687c84ec1ed75ba0c5d807))
+* add sui-tools-version rule ([7f6f0bf](https://github.com/SUI-Components/sui/commit/7f6f0bf0a7d8ce70e0b936fd1afe524f15ba84a6))
+* Create Repository Structure rule ([f1776ac](https://github.com/SUI-Components/sui/commit/f1776ac105a423d3dc774ffcd869b3bae41d8fbb))
+* Create rule to check the Cypress version ([852df2e](https://github.com/SUI-Components/sui/commit/852df2e4c83039a1acae7a39433f1f8b90afa206))
+
+
+
 # 1.3.0 (2024-03-21)
 
 
