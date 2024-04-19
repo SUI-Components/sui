@@ -168,6 +168,7 @@ node_modules`
 demo
 src
 test
+__tests__
 `
   ),
 
