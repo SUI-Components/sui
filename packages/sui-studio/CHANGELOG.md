@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.40.0 (2024-04-19)
+
+
+### Features
+
+* add __tests__ to npmignore ([566fea3](https://github.com/SUI-Components/sui/commit/566fea3824726a3ce1ec0db9d5a612ea9da7d6e8))
+
+
+
 # 11.39.0 (2024-01-15)
 
 
@@ -2629,6 +2638,3 @@
 ### BREAKING CHANGES
 
 * **sui-studio:** API is now named sui-studio instead of suistudio
-
-
-
