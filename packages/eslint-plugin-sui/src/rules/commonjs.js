@@ -51,7 +51,15 @@ module.exports = {
         const isResolve = node.callee?.object?.name === 'require' && node.callee?.property?.name === 'resolve'
         const isModule = node.callee?.object?.name === 'module' && node.callee?.property?.name === 'require'
 
+        const isRequireFormCreateRequire = node.parent?.parent?.body
+          ?.filter(node => node.type === 'ImportDeclaration')
+          ?.some(
+            node =>
+              node.source?.value === 'module' && node.specifiers?.some(spec => spec.imported?.name === 'createRequire')
+          )
+
         isRequire &&
+          !isRequireFormCreateRequire &&
           context.report({
             node,
             messageId: 'forbiddenRequires'

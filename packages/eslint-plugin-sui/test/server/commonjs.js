@@ -3,16 +3,31 @@ import {RuleTester} from 'eslint'
 
 import rule from '../../src/rules/commonjs.js'
 
+const resolvedBabelPresetSui = require.resolve('babel-preset-sui')
+const parser = require.resolve('@babel/eslint-parser')
+
 // ------------------------------------------------------------------------------
 // Tests
 // more info: https://eslint.org/docs/latest/integrate/nodejs-api#ruletester
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions: {ecmaVersion: 2018, sourceType: 'module'}})
+const ruleTester = new RuleTester({parser, parserOptions: {babelOptions: {configFile: resolvedBabelPresetSui}}})
 ruleTester.run('esm', rule, {
   valid: [
     {
       code: dedent`
+        class User {
+          static create() { return new User() }
+        }
+      `
+    },
+    {
+      code: dedent`
+        import { createRequire } from "module"
+        const require = createRequire(import.meta.url)
+
+        require('whatever')
+
         class User {
           static create() { return new User() }
         }
