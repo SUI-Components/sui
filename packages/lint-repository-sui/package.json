@@ -1,0 +1,16 @@
+{
+  "name": "lint-repository-sui",
+  "access": "public",
+  "version": "1.4.0",
+  "description": "Set of sui lint rules to lint a repository",
+  "keywords": [],
+  "author": "Sui",
+  "main": "./src/index.js",
+  "exports": "./src/index.js",
+  "scripts": {
+    "test": "npx sui-test server"
+  },
+  "devDependencies": {
+    "@s-ui/test": "8"
+  }
+}

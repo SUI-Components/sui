@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 2.31.0 (2024-03-23)
+
+
+### Features
+
+* use a more solid hashing function ([760b854](https://github.com/SUI-Components/sui/commit/760b85427c5240c56dbd140b3cf42f46051143fd))
+* using a pure js function to make this utility hashing function isomorphic ([dd18e41](https://github.com/SUI-Components/sui/commit/dd18e41fc448a27d09cfe7e7c255efa7297880ac))
+
+
+
+# 2.30.0 (2024-03-07)
+
+
+### Features
+
+* Add sha256 hash method ([70d37f8](https://github.com/SUI-Components/sui/commit/70d37f8afc84aa93daea20cd55d1c75f50c79e69))
+
+
+
 # 2.29.0 (2023-12-04)
 
 
@@ -556,6 +575,3 @@
 * **sui-js:** insert a façade ([8380efb](https://github.com/SUI-Components/sui/commit/8380efbe44bb94e5d4a17ee2849524adc12d22e7))
 * **sui-js:** remove unused dependencies ([4bc24c2](https://github.com/SUI-Components/sui/commit/4bc24c2eff61603cf59aa1fdc80d46aac1000df8))
 * **sui-js:** rename browser in to ua-parser ([dda6032](https://github.com/SUI-Components/sui/commit/dda6032235ef53a29f48fed9625a5a268fadfa0c))
-
-
-

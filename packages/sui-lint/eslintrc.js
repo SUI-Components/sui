@@ -201,6 +201,14 @@ module.exports = {
     'react/jsx-no-bind': RULES.OFF
   },
   overrides: [
+    // {
+    //   files: ['**/domain/src/**'],
+    //   plugins: ['sui'],
+    //   rules: {
+    //     'sui/factory-pattern': RULES.WARNING,
+    //     'sui/serialize-deserialize': RULES.WARNING
+    //   }
+    // },
     {
       files: ['**/*.+(ts|tsx)'],
       extends: ['standard-with-typescript', 'standard-react', 'prettier'],

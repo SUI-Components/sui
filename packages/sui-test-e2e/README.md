@@ -4,8 +4,7 @@
 
 ## Folder Structure
 
-Your e2e tests must be in a `test-e2e` folder in your project root.
-Each test file should follow the pattern: `*Spec.js`.
+All your e2e tests must be in a folder in your project, expecting by default to be in the root as `./test-e2e` but it can be renamed with the process env variable `E2E_FOLDER`. Each test file should follow the pattern: `*Spec.js`.
 
 ```
 .
@@ -16,7 +15,7 @@ Each test file should follow the pattern: `*Spec.js`.
 └── test-e2e
     ├── fixtures
     │   └── literals.js
-    ├-─ 
+    ├-─
     └── user
         └── userSpec.js
 ```
@@ -32,6 +31,7 @@ npx @s-ui/test-e2e
 ```
 
 Options:
+
 ```
 Usage: sui-test-e2e [options]
 
@@ -62,6 +62,7 @@ Options:
   Examples:
     $ sui-test-e2e --baseUrl=http://www.github.com
     $ sui-test-e2e --baseUrl=http://www.github.com --gui
+    $ E2E_FOLDER="my-custom-folder" sui-test-e2e --baseUrl=http://www.github.com
 ```
 
 ### Support files
@@ -100,7 +101,6 @@ cy.findByText()
 ```
 
 [More info here](https://testing-library.com/docs/cypress-testing-library/intro/)
-
 
 ### Plugin files
 
