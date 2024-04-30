@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.4.0 (2024-04-30)
+
+
+### Features
+
+* add basic decorators rules for UseCases ([86ef4a2](https://github.com/SUI-Components/sui/commit/86ef4a25ee642b6a1fe2cdb134958a342f13edcf))
+* Add rule to mark any uso off commonjs syntax in our code ([f210c46](https://github.com/SUI-Components/sui/commit/f210c46717117b4132a3586a2e2fe2548a4a51d2))
+* Allow require from ESM module ([ea666e0](https://github.com/SUI-Components/sui/commit/ea666e0495246e15d209aac2a8ad1acc477430a1))
+
+
+
 # 1.3.0 (2024-03-21)
 
 
