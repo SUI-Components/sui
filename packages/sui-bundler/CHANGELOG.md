@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.58.0 (2024-05-02)
+
+
+### Features
+
+* move webpack dev server to patched version 4.15.2 ([5a291c0](https://github.com/SUI-Components/sui/commit/5a291c0ba1ee4f737f2a0b1578d66a2d9306cb36))
+* update to patched version to avoid vulnerabilities ([4144598](https://github.com/SUI-Components/sui/commit/41445982968d7908d5cb63148e603801b343e2ed))
+
+
+
 # 9.57.0 (2024-03-18)
 
 
