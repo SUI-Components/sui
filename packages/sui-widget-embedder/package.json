@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/widget-embedder",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "Embed React components to your app as widgets",
   "bin": {
     "sui-widget-embedder": "./bin/sui-widget-embedder.js"

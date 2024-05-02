@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 6.3.0 (2024-05-02)
+
+
+### Features
+
+* update to patched version to avoid vulnerabilities ([5af5a0b](https://github.com/SUI-Components/sui/commit/5af5a0b69dcd33a9f5e9c55654c92eec68f4a7b5))
+
+
+
 # 6.2.0 (2023-08-21)
 
 
@@ -704,6 +713,3 @@ export sintaxis is not used anymore. If you're using it, check it in order to ge
 * **sui-widget-embedder:** create donwloader.js with the manifests of the assets ([856eae3](https://github.com/SUI-Components/sui/commit/856eae37ee6fedc0869f1fe51e4b64c3aab6cf8c))
 * **sui-widget-embedder:** created Widgets components ([2a929fd](https://github.com/SUI-Components/sui/commit/2a929fd63c2e9ae81ae2bfcbfeef4fc7506501c2))
 * **sui-widget-embedder:** first commit ([447917f](https://github.com/SUI-Components/sui/commit/447917fc8579152571a479a62b27453e6802ad85))
-
-
-
