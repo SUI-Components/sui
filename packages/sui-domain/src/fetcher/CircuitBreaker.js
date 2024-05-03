@@ -38,27 +38,27 @@ export class CircuitBreaker {
     }
     try {
       const response = await this.request
-      if (response.status === 200) return this.success(response.data)
-      return this.failure(response.data)
+      if (response.status === 200) return this.success(response)
+      return this.failure(response)
     } catch (err) {
       return this.failure(err.message)
     }
   }
 
-  success(data) {
+  success(response) {
     this.failureCount = 0
     if (this.state === CircuitBreakerStates.HALF) {
       this.state = CircuitBreakerStates.CLOSED
     }
-    return data
+    return response
   }
 
-  failure(data) {
+  failure(response) {
     this.failureCount += 1
     if (this.state === CircuitBreakerStates.HALF || this.failureCount >= this.failureThreshold) {
       this.state = CircuitBreakerStates.OPENED
       this.resetAfter = Date.now() + this.timeout
     }
-    return data
+    return response
   }
 }
