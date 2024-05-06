@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.28.0 (2024-05-02)
+
+
+### Features
+
+* update to patched version to avoid vulnerabilities ([6873ee4](https://github.com/SUI-Components/sui/commit/6873ee468b9b26810feb63e6d7aca99ed469def7))
+
+
+
 # 8.27.0 (2024-04-05)
 
 
