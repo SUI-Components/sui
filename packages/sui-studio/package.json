@@ -7,7 +7,6 @@
     "cpx": "./bin/cpx.js",
     "sui-studio": "./bin/sui-studio.js"
   },
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7",
