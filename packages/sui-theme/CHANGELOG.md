@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.127.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* fix linting issues ([37213c0](https://github.com/SUI-Components/sui/commit/37213c085abc6ba99e1d784c88e4b026ec161134))
+
+
+
 # 8.126.0 (2023-02-21)
 
 
@@ -278,6 +287,3 @@
 
 * **packages/sui-theme:** moved the sui-theme repo here ([654b877](https://github.com/SUI-Components/sui/commit/654b8777a5e2754e1c41e2c1d907630d1c4266df))
 * **packages/sui-theme:** update latest changes ([877866f](https://github.com/SUI-Components/sui/commit/877866f24fe2053f1985b7a558d1527bcbca1e88))
-
-
-
