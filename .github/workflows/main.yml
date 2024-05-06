@@ -65,6 +65,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           node-version-file: '.nvmrc'
 
+      - name: Install
+        run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
+
       - name: Publish Packages
         if: github.ref == 'refs/heads/master'
         run: |
