@@ -29,6 +29,26 @@ Your tests must be in a `test` folder in your project root. Each test file shoul
 npm install @s-ui/test --save-dev
 ```
 
+# Config Options
+
+## Client (Karma) options
+
+- `alias` You can define the custom aliases you need to resolve in your client-side tests executions, see the following example:
+
+```json
+{
+  "config": {
+    "sui-test": {
+      "client": {
+        "alias": {
+          "my-package": "path/to/my-package"
+        }
+      }
+    }
+  }
+}
+```
+
 # CLI Options
 
 ```sh
@@ -101,7 +121,7 @@ npm install @s-ui/test --save-dev
 **describeOnLocal**: It will only run wrapped tests on local environment and won't be executed in CI.
 
 ```javascript
-import { describeOnLocal } from '@s-ui/test/lib/describers'
+import {describeOnLocal} from '@s-ui/test/lib/describers'
 
 describeOnLocal(() => {
   describe('Some test', () => {
@@ -112,8 +132,8 @@ describeOnLocal(() => {
 })
 ```
 
-
 ## Descriptor by environment patcher
+
 The descriptor by environment is a patch with the purpose of add some extra functionality to our mocha describe and it methods.
 
 ### How to import it?
@@ -121,10 +141,12 @@ The descriptor by environment is a patch with the purpose of add some extra func
 First of all, the patcher MUST BE APPLIED on each test that we want to have the extra methods so at the top of `ourExampleSpec.js` we will add the next code:
 
 ```javascript
-import { descriptorsByEnvironmentPatcher } from '@s-ui/test/lib/descriptor-environment-patcher'
+import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environment-patcher'
 descriptorsByEnvironmentPatcher()
 ```
+
 And that's it, from that line you will have the next methods added to the base of the mocha lib:
+
 - describe.client
 - describe.server
 - describe.client.only
@@ -133,7 +155,9 @@ And that's it, from that line you will have the next methods added to the base o
 - it.server
 - it.client.only
 - it.server.only
+
 ### How can I use it?
+
 Just in the same way as you have been using the describe or it functions earlier:
 
 ```javascript
@@ -173,6 +197,7 @@ describe.client.only('Another use case', () => {
   })
 })
 ```
+
 ## Contributing
 
 Please refer to the [main repo contributing info](https://github.com/SUI-Components/sui/blob/master/CONTRIBUTING.md).
