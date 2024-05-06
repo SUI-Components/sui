@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 1.37.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* update deps ([a9d5998](https://github.com/SUI-Components/sui/commit/a9d5998c4d9fd6e7031ac9b3bef5ea18e80be0e6))
+
+
+### Features
+
+* remove type module ([eb68ce2](https://github.com/SUI-Components/sui/commit/eb68ce2570b6c6d11acc7d55362d4d5dd3c36d2b))
+* use latest version of swc ([820adf5](https://github.com/SUI-Components/sui/commit/820adf5c0cf1f460a00979e7f6627d12d394e502))
+
+
+
 # 1.36.0 (2022-10-05)
 
 
@@ -341,6 +356,3 @@
 ### Features
 
 * **sui-hoc:** 🌈 First Commit ([b09a168](https://github.com/SUI-Components/sui/commit/b09a168101aaaa4e8d2878b430ecf6490f9673eb)), closes [#71](https://github.com/SUI-Components/sui/issues/71)
-
-
-

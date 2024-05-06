@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 2.15.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* fix linting issues ([6b639a8](https://github.com/SUI-Components/sui/commit/6b639a8b8250ac7702bcac29e4ee9b19e9b88673))
+* update deps ([f57199f](https://github.com/SUI-Components/sui/commit/f57199fbdac2b3cc69d8403a0f109db44f69d312))
+
+
+### Features
+
+* use latest version of swc ([e574610](https://github.com/SUI-Components/sui/commit/e5746101f509d1a516d1cee814318a3e2cbbea33))
+
+
+
 # 2.14.0 (2024-02-07)
 
 

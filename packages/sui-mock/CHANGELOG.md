@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 1.6.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* update deps ([d9e7f35](https://github.com/SUI-Components/sui/commit/d9e7f35d6fd0058912113b89bed042f3019ea645))
+
+
+### Features
+
+* sync typescript versions ([561bca9](https://github.com/SUI-Components/sui/commit/561bca9df69c96d5a8f6ac3e0b46c73acc5149f7))
+* use latest version of swc ([4b7de4b](https://github.com/SUI-Components/sui/commit/4b7de4b8197644181994db0c3e84f59d1956fbcb))
+
+
+
 # 1.5.0 (2024-02-07)
 
 

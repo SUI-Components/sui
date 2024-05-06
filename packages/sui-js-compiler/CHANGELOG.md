@@ -1,5 +1,26 @@
 # CHANGELOG
 
+# 1.29.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* add some fixes ([7001874](https://github.com/SUI-Components/sui/commit/7001874a03c800984e0116cbc98ddcf242f44baa))
+* downgrade swc versions ([20ed77b](https://github.com/SUI-Components/sui/commit/20ed77bea8cea6a6433657e4a6847f5218a5a858))
+* fix types ([c28e283](https://github.com/SUI-Components/sui/commit/c28e283c65cb8f1e3e3541b09bf166caccf53b44))
+* update deps ([b670cc2](https://github.com/SUI-Components/sui/commit/b670cc2513de7dc25c9356556ca1a29e87570001))
+
+
+### Features
+
+* add more changes ([c80bcf3](https://github.com/SUI-Components/sui/commit/c80bcf3c1b4daf88970db698b11341d02aadadfa))
+* add more support to typescript ([bbc4336](https://github.com/SUI-Components/sui/commit/bbc43363fe1843c4499b6f792f68af06e692844d))
+* install ts by default ([b2d8f66](https://github.com/SUI-Components/sui/commit/b2d8f6678e270d7b4f88c03f6fa1892e36c600d1))
+* restore original versions ([8dd8cd1](https://github.com/SUI-Components/sui/commit/8dd8cd1cc7e86ba73ba03636b7608a0c070e09fd))
+* use latest version of swc ([b1a0c16](https://github.com/SUI-Components/sui/commit/b1a0c16df6a23ecdba3f837aafdc3e71f966d2d0))
+
+
+
 # 1.28.0 (2024-02-07)
 
 

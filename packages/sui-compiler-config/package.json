@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/compiler-config",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Compilers config (SWC, TS...) for SUI projects.",
   "main": "src/index.js",
   "scripts": {},
