@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.36.0 (2024-05-06)
+
+
+### Features
+
+* add docs ([1a2f67c](https://github.com/SUI-Components/sui/commit/1a2f67c1678c861668d9d86a60e08e76b73a51dc))
+
+
+
 # 8.35.0 (2024-05-06)
 
 
