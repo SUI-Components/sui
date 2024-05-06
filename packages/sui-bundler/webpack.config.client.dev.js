@@ -16,7 +16,7 @@ const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
 const {supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 
 const {resolveLoader} = require('./shared/resolve-loader.js')
-const createBabelRules = require('./shared/module-rules-babel.js')
+const createCompilerRules = require('./shared/module-rules-compiler.js')
 
 const outputPath = path.join(process.cwd(), '.sui/public')
 
@@ -93,7 +93,7 @@ const webpackConfig = {
   resolveLoader,
   module: {
     rules: cleanList([
-      createBabelRules({supportLegacyBrowsers, isDevelopment: true}),
+      createCompilerRules({supportLegacyBrowsers, isDevelopment: true}),
       {
         test: /(\.css|\.scss)$/,
         use: cleanList([
