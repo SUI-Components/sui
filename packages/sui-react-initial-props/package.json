@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "Provide a way to get initial props for async pages",
   "scripts": {
-    "lib": "rm -rf ./lib && tsc",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],
@@ -17,10 +17,11 @@
     "react": "16 || 17"
   },
   "devDependencies": {
+    "@s-ui/js-compiler": "1",
+    "@s-ui/react-router": "1",
     "@testing-library/react": "11.1.0",
     "@types/node": "16",
     "react": "17",
-    "react-dom": "17",
-    "@s-ui/react-router": "1"
+    "react-dom": "17"
   }
 }

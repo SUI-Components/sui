@@ -43,7 +43,7 @@ module.exports = ({config, packagesToLink, linkAll}) => {
    * if neccesary
    */
   const linkLoader = {
-    test: /\.(jsx?|scss)$/,
+    test: /\.(jsx?|tsx?|scss)$/,
     enforce: 'pre', // this will ensure is execute before transformations
     use: {
       loader: require.resolve('./LinkLoader'),
