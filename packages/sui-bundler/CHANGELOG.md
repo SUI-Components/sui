@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.60.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* ssr dev ([ef141de](https://github.com/SUI-Components/sui/commit/ef141deddcbecf84edb3601750041a6a99aabb75))
+
+
+
 # 9.59.0 (2024-05-06)
 
 
