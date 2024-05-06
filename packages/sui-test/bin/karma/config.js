@@ -6,7 +6,7 @@ const {envVars} = require('@s-ui/bundler/shared/index.js')
 const {getSWCConfig} = require('@s-ui/compiler-config')
 const {bundlerConfig, clientConfig, isWorkspace, isInnerPackage} = require('../../src/config.js')
 
-const {captureConsole = true} = clientConfig
+const {captureConsole = true, alias: webpackAlias = {}} = clientConfig
 const {sep} = path
 
 /**
@@ -18,6 +18,13 @@ const standardPrefix = isWorkspace() ? '../' : './'
 const prefix = isInnerPackage() ? '../../' : standardPrefix
 const pwd = process.env.PWD
 const swcConfig = getSWCConfig({isTypeScript: true})
+const customAlias = Object.keys(webpackAlias).reduce(
+  (aliases, aliasKey) => ({
+    ...aliases,
+    [aliasKey]: path.resolve(path.join(pwd, prefix, webpackAlias[aliasKey]))
+  }),
+  {}
+)
 const config = {
   singleRun: true,
   basePath: '',
@@ -47,7 +54,7 @@ const config = {
         'react/jsx-dev-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-dev-runtime.js'),
         'react/jsx-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-runtime.js'),
         '@s-ui/react-context': path.resolve(path.join(pwd, prefix, 'node_modules/@s-ui/react-context')),
-        'studio-utils': path.resolve(path.join(pwd, prefix, 'packages/ui/studio-utils'))
+        ...customAlias
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
       extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
