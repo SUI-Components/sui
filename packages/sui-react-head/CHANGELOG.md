@@ -1,5 +1,22 @@
 # CHANGELOG
 
+# 1.14.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* fix linting issues ([7f84666](https://github.com/SUI-Components/sui/commit/7f846664dbf6ff73ba9b1456f8819ee03e6a9a0b))
+* fix linting issues ([99d0af8](https://github.com/SUI-Components/sui/commit/99d0af8d741c7243d4a0582665ad4ebb61301402))
+* fix type ([2e05a91](https://github.com/SUI-Components/sui/commit/2e05a91bf74dacc3abed49f506336c00bf71f5ca))
+* update deps ([cf7992d](https://github.com/SUI-Components/sui/commit/cf7992d7ad2173c3c3ce5a8c219b31bb80ca5a21))
+
+
+### Features
+
+* use latest version of swc ([c56495d](https://github.com/SUI-Components/sui/commit/c56495ddeb80b1bb2c17bd002e39ec6c95671e71))
+
+
+
 # 1.13.0 (2023-05-08)
 
 
@@ -127,6 +144,3 @@
 * **sui-react-head:** add new react-head ([384b705](https://github.com/SUI-Components/sui/commit/384b705639f61f43a344973f1574b65abe8c1f4c))
 * **sui-react-head:** create new sui-react-head ([aef11cb](https://github.com/SUI-Components/sui/commit/aef11cb29ffce59d3d0c71def943d5a0a6ef485b))
 * **sui-react-head:** docs and better exports ([0ac8bef](https://github.com/SUI-Components/sui/commit/0ac8befbd36bb585c2b650a47652453b26c712b5))
-
-
-

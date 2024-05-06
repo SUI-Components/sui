@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
