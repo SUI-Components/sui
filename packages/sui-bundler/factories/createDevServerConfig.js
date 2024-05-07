@@ -17,10 +17,7 @@ module.exports = config => ({
   allowedHosts: 'all',
   client: {
     logging: 'none',
-    overlay: {
-      errors: true,
-      warnings: false
-    },
+    overlay: false,
     progress: false
   },
   // Enable gzip compression of generated files
