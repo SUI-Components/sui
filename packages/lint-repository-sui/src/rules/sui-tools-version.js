@@ -30,16 +30,13 @@ module.exports = {
       badVersion: dedent`
         Please be sure that your repository use the latest {{name}}. Version {{spectedVersion}}.
         Your current version is {{version}}.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingDependency: dedent`
         Your project does not have installed {{name}}.
         Please install at least the version {{spectedVersion}}.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingPackageLock: dedent`
         To calculate the SUI Tool version first we need to have a package-lock.json in the root
-        If you are not sure about how do it, please contact with Platform Web.
       `
     }
   },

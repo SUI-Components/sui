@@ -13,7 +13,6 @@ module.exports = {
     messages: {
       missingPackageLock: dedent`
         Every project needs to have a package-lock.json file to be used in CI/CD.
-        If you are not sure about how do it, please contact with Platform Web.
       `
     }
   },

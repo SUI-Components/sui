@@ -16,16 +16,13 @@ module.exports = {
       badCypressVersion: dedent`
         Please be sure that your repository use the latest Cypress Version ${CYPRESS_VERSION}.
         Your current version is {{version}}.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingCypressDependencie: dedent`
         Your project doesnt have installed Cypress.
         Please install at least the version ${CYPRESS_VERSION}.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingPackageLock: dedent`
         To calculate the cypress version first we need to have a package-lock.json in the root
-        If you are not sure about how do it, please contact with Platform Web.
       `
     }
   },

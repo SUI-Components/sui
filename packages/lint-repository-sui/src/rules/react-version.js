@@ -16,16 +16,13 @@ module.exports = {
       badReactVersion: dedent`
         Please be sure that your repository use the latest React Version ${REACT_VERSION}.
         Your current version is {{version}}.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingReactDependencie: dedent`
         Your project doesnt have installed React.
         Please install at least the version ${REACT_VERSION}.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingPackageLock: dedent`
         To calculate the react version first we need to have a package-lock.json in the root
-        If you are not sure about how do it, please contact with Platform Web.
       `
     }
   },

@@ -27,7 +27,6 @@ RuleTester.create('github-action', handler).run({
       name: 'The porject has NOT define a worflows folder',
       report: dedent`
         Every project needs to have a .github/worflows folder to be able to run CI/CD in GHA.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: false
     },
@@ -36,7 +35,6 @@ RuleTester.create('github-action', handler).run({
       name: 'The porject has NOT define a worflow for the main branch',
       report: dedent`
         Every project needs to have a workflow to run on master.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: false
     },
@@ -45,7 +43,6 @@ RuleTester.create('github-action', handler).run({
       name: 'The porject has NOT define a worflow for PRs',
       report: dedent`
         Every project needs to have a workflow to run on every PR.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: false
     }

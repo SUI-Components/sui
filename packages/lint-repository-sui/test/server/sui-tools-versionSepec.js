@@ -22,7 +22,6 @@ RuleTester.create('sui-tools-version', handler).run({
       report: dedent`
             Your project does not have installed bundler.
             Please install at least the version ${SUI_TOOLS_ENTRIES[0][1]}.
-            If you are not sure about how do it, please contact with Platform Web.
          `,
       monitoring: false
     },
@@ -34,7 +33,6 @@ RuleTester.create('sui-tools-version', handler).run({
       report: dedent`
             Please be sure that your repository use the latest bundler. Version ${SUI_TOOLS_ENTRIES[0][1]}.
             Your current version is 100.
-            If you are not sure about how do it, please contact with Platform Web.
           `,
       monitoring: false
     },
@@ -42,7 +40,6 @@ RuleTester.create('sui-tools-version', handler).run({
       missmatch: '',
       report: dedent`
         To calculate the SUI Tool version first we need to have a package-lock.json in the root
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: 0
     }

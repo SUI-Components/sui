@@ -13,15 +13,12 @@ module.exports = {
     messages: {
       missingGithubFolder: dedent`
         Every project needs to have a .github/worflows folder to be able to run CI/CD in GHA.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingMainWorkflow: dedent`
         Every project needs to have a workflow to run on master.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       missingPRWorkflow: dedent`
         Every project needs to have a workflow to run on every PR.
-        If you are not sure about how do it, please contact with Platform Web.
       `
     }
   },
