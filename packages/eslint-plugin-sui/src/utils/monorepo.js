@@ -7,7 +7,8 @@ class MonoRepo {
   static create(root) {
     if (instance) return instance
 
-    return new MonoRepo(root)
+    instance = new MonoRepo(root)
+    return instance
   }
 
   constructor(root) {
@@ -25,8 +26,20 @@ class MonoRepo {
     return this._root
   }
 
+  belongSamePackage(filePath, relativeImport) {
+    return (
+      path.normalize(filePath)?.replace(this.root, '')?.split('/')?.at(1) ===
+      path
+        .normalize(path.dirname(filePath) + '/' + relativeImport)
+        ?.replace(this.root, '')
+        ?.split('/')
+        ?.at(1)
+    )
+  }
+
   isPackage(filePath, relativeImport) {
     if (!relativeImport.startsWith('../')) return false
+    if (this.belongSamePackage(filePath, relativeImport)) return false
 
     const pkgName = path
       .normalize(path.dirname(filePath) + '/' + relativeImport)
