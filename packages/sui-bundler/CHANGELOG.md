@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.61.0 (2024-05-07)
+
+
+### Features
+
+* add overlay option to sui bundler dev ([1eef5ba](https://github.com/SUI-Components/sui/commit/1eef5baf415d7e384f93439cf3528fe180197900))
+* set dev server overlay to false ([8f19ba1](https://github.com/SUI-Components/sui/commit/8f19ba1839f4df3f1be5c046d1206ef50ede1d1f))
+
+
+
 # 9.60.0 (2024-05-06)
 
 
