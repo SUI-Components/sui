@@ -35,7 +35,7 @@ jobs:
       - name: Install
         run: |
           sudo apt-get install xvfb
-          npm ci --no-save --no-fund --no-audit --legacy-peer-deps
+          npm ci
           npx -y ultra-runner --raw --recursive prepublishOnly
 
       - name: Lint
@@ -69,7 +69,7 @@ jobs:
           cache: 'npm'
 
       - name: Install
-        run: npm ci --no-save --no-fund --no-audit --legacy-peer-deps
+        run: npm ci
 
       - name: Publish Packages
         run: |
