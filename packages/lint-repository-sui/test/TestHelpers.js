@@ -53,12 +53,13 @@ export class RuleTester {
 }
 
 export class MatchStub {
-  static create({parsed, raw}) {
-    return new MatchStub(parsed, raw)
+  static create({parsed, raw, fullPath}) {
+    return new MatchStub(parsed, raw, fullPath)
   }
 
-  constructor(parsed, raw) {
+  constructor(parsed, raw, fullPath) {
     this.parsed = parsed
     this.raw = raw
+    this.fullPath = fullPath
   }
 }
