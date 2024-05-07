@@ -6,18 +6,17 @@ on:
   pull_request:
     branches: [master]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
 jobs:
   checks:
     name: Checks
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel Previous Redundant Builds
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -27,6 +26,7 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
           node-version-file: '.nvmrc'
+          cache: 'npm'
 
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@latest
@@ -34,7 +34,7 @@ jobs:
       - name: Install
         run: |
           sudo apt-get install xvfb
-          npm install --no-save --no-fund --no-audit --legacy-peer-deps
+          npm ci
           npx -y ultra-runner --raw --recursive prepublishOnly
 
       - name: Lint
@@ -51,10 +51,11 @@ jobs:
   publish:
     name: Publish
     needs: checks
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -64,12 +65,12 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
           node-version-file: '.nvmrc'
+          cache: 'npm'
 
       - name: Install
-        run: npm install --no-save --no-fund --no-audit --legacy-peer-deps
+        run: npm ci
 
       - name: Publish Packages
-        if: github.ref == 'refs/heads/master'
         run: |
           npx -p ./packages/sui-mono sui-mono check
           npx -p ./packages/sui-ci sui-ci release
@@ -88,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -98,6 +99,7 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
           node-version-file: '.nvmrc'
+          cache: 'npm'
 
       - name: Install
         run: npm install -D commander execa prettier
