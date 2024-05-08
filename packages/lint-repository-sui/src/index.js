@@ -8,6 +8,8 @@ const Structure = require('./rules/structure.js')
 const SuiToolsVersion = require('./rules/sui-tools-version.js')
 const ADVToolsVersion = require('./rules/adv-tools-version.js')
 const TSvsJS = require('./rules/ts-vs-js-files.js')
+const Sass = require('./rules/sass-files.js')
+const Spark = require('./rules/spark-adoption.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -25,6 +27,8 @@ module.exports = {
     structure: Structure,
     'sui-tools-version': SuiToolsVersion,
     'adv-tools-version': ADVToolsVersion,
-    'ts-vs-js-files': TSvsJS
+    'ts-vs-js-files': TSvsJS,
+    'sass-files': Sass,
+    'spark-adoption': Spark
   }
 }
