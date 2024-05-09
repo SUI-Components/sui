@@ -6,7 +6,6 @@ const handler = (context, matches) => {
     .filter(match => !match.path.match(/src\/pages\/\w+\/index\.(j|t)s(x)?/))
     .filter(match => match.raw.match(/(?<tag><\w+\s*.*>)|(?<fragment><>)|(?<react>react)/)).length
 
-  debugger
   context.report({
     messageId: 'number',
     data: {number: badComponents}
