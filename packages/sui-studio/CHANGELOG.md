@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.42.0 (2024-05-09)
+
+
+### Features
+
+* Add jest command and template to sui-studio generate script ([f392aa8](https://github.com/SUI-Components/sui/commit/f392aa8e4520ac49224d3d6fc86325654e27160a))
+
+
+
 # 11.41.0 (2024-05-06)
 
 
