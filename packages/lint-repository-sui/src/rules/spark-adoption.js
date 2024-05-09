@@ -25,15 +25,6 @@ module.exports = {
     }
   },
 
-  // import * from '@s-ui/react-*' (A)
-  // import * from '@spark-ui/*' (B)
-  // @s-ui/react-context
-  // @s-ui/react-form-builder
-  // @s-ui/react-hooks
-  // @s-ui/react-router
-  // @s-ui/react-head
-
-  // percentage => B*100 / (A+B)
   create: function (context) {
     return {
       '**/*.(j|t)s(x)?': matches => {

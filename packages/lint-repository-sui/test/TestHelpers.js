@@ -30,9 +30,13 @@ export class RuleTester {
         })
 
         tests.forEach(assertion => {
-          const {monitoring, report, name, ...rest} = assertion
+          const {monitoring, report, name, only, skip, ...rest} = assertion
           Object.entries(rest).forEach(([FSPattern, matches]) => {
-            it(name ?? FSPattern, function () {
+            const itFN = only ? it.only : // eslint-disable-line
+                         skip ? it.skip : // eslint-disable-line
+                         it               // eslint-disable-line
+
+            itFN(name ?? FSPattern, function () {
               instance.handler.create(this.ctxt)[FSPattern](matches)
               monitoring && expect(this.ctxt.monitoring.calledWith(monitoring)).to.be.eql(true)
               report && expect(instance._formatMessages(this.ctxt.report)).to.be.eqls(report)
@@ -53,13 +57,14 @@ export class RuleTester {
 }
 
 export class MatchStub {
-  static create({parsed, raw, fullPath}) {
-    return new MatchStub(parsed, raw, fullPath)
+  static create({parsed, raw, fullPath, path}) {
+    return new MatchStub(parsed, raw, fullPath, path)
   }
 
-  constructor(parsed, raw, fullPath) {
+  constructor(parsed, raw, fullPath, path) {
     this.parsed = parsed
     this.raw = raw
     this.fullPath = fullPath
+    this.path = path
   }
 }

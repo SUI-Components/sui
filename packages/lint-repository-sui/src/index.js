@@ -10,6 +10,7 @@ const ADVToolsVersion = require('./rules/adv-tools-version.js')
 const TSvsJS = require('./rules/ts-vs-js-files.js')
 const Sass = require('./rules/sass-files.js')
 const Spark = require('./rules/spark-adoption.js')
+const ComponentsLocation = require('./rules/components-location.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -29,6 +30,7 @@ module.exports = {
     'adv-tools-version': ADVToolsVersion,
     'ts-vs-js-files': TSvsJS,
     'sass-files': Sass,
-    'spark-adoption': Spark
+    'spark-adoption': Spark,
+    'components-location': ComponentsLocation
   }
 }
