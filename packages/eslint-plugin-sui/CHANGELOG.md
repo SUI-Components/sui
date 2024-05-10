@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.5.0 (2024-05-10)
+
+
+### Features
+
+* Add rule to check relative imports ([07cd08b](https://github.com/SUI-Components/sui/commit/07cd08b2aad3edc0f72a6cd1d081360d02a6e501))
+* several fixes ([5906840](https://github.com/SUI-Components/sui/commit/5906840c1072afea5ceda3dc21f106fd6a8fcc80))
+
+
+
 # 1.4.0 (2024-04-30)
 
 
