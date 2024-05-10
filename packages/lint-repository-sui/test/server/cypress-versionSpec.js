@@ -18,7 +18,6 @@ RuleTester.create('cypress-version', handler).run({
       report: dedent`
         Your project doesnt have installed Cypress.
         Please install at least the version 10.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: 0
     },
@@ -28,7 +27,6 @@ RuleTester.create('cypress-version', handler).run({
       report: dedent`
         Please be sure that your repository use the latest Cypress Version 10.
         Your current version is 17.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: '17'
     },
@@ -36,7 +34,6 @@ RuleTester.create('cypress-version', handler).run({
       missmatch: '',
       report: dedent`
         To calculate the cypress version first we need to have a package-lock.json in the root
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: 0
     }

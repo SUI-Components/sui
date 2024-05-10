@@ -7,6 +7,10 @@ const TypeScript = require('./rules/typescript.js')
 const Structure = require('./rules/structure.js')
 const SuiToolsVersion = require('./rules/sui-tools-version.js')
 const ADVToolsVersion = require('./rules/adv-tools-version.js')
+const TSvsJS = require('./rules/ts-vs-js-files.js')
+const Sass = require('./rules/sass-files.js')
+const Spark = require('./rules/spark-adoption.js')
+const ComponentsLocation = require('./rules/components-location.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -23,6 +27,10 @@ module.exports = {
     typescript: TypeScript,
     structure: Structure,
     'sui-tools-version': SuiToolsVersion,
-    'adv-tools-version': ADVToolsVersion
+    'adv-tools-version': ADVToolsVersion,
+    'ts-vs-js-files': TSvsJS,
+    'sass-files': Sass,
+    'spark-adoption': Spark,
+    'components-location': ComponentsLocation
   }
 }

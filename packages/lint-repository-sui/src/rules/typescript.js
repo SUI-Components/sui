@@ -16,16 +16,13 @@ module.exports = {
       missingTypescriptDependency: dedent`
         Your project doesn't have installed TypeScript.
         Please install at least the version ${MIN_TYPESCRIPT_VERSION}.
-        If you are not sure about it, please contact Web Platform.
       `,
       badTypescriptVersion: dedent`
         Please be sure that your repository use the latest TypeScript version ${MIN_TYPESCRIPT_VERSION}.
         Your current version is {{version}}.
-        If you are not sure about it, please contact Web Platform.
       `,
       noTSConfigFile: dedent`
         Every project must have a \`tsconfig.json\` file to setup TypeScript in the project.
-        If you are not sure about how do it, please contact with Web Platform team.
       `
     }
   },

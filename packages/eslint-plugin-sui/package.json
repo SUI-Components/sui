@@ -19,6 +19,7 @@
     "update:eslint-docs": "npx eslint-doc-generator"
   },
   "dependencies": {
+    "fast-glob": "3.3.2",
     "requireindex": "1.2.0",
     "string-dedent": "3.0.1"
   },
