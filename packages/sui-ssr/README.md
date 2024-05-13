@@ -261,7 +261,7 @@ Configs accepted:
 
 > ⚠️ `createStylesFor` does not works as expected when sui-bundler configuration has `onlyHash` defined to `true`.
 
-- **`SSL`** (`undefined`): This is only for local development. It should be usefull to test locally pointing to production endpoints. Certificate should help to avoid CORS issues. This prop should receive and object with the following structure:
+- **`SSL`** (`undefined`): This configuration is intended solely for local development. It's useful for conducting local tests that target production endpoints. The inclusion of a certificate can help circumvent CORS issues. The property in question should be assigned an object that adheres to the following structure::
 
   ```json
   {
