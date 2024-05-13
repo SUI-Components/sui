@@ -27,6 +27,12 @@ app.set('x-powered-by', false)
 const EARLY_FLUSH_DEFAULT = true
 app.locals.earlyFlush = typeof ssrConf.earlyFlush !== 'undefined' ? ssrConf.earlyFlush : EARLY_FLUSH_DEFAULT
 
+const useSSL =
+  process?.env?.NODE_ENV === 'development' &&
+  Boolean(ssrConf?.SSL?.development) &&
+  Boolean(ssrConf?.SSL?.development?.key) &&
+  Boolean(ssrConf?.SSL?.development?.crt)
+
 const {PORT = 3000, AUTH_USERNAME, AUTH_PASSWORD} = process.env
 const runningUnderAuth = AUTH_USERNAME && AUTH_PASSWORD
 const AUTH_DEFINITION = {
@@ -96,5 +102,18 @@ const _memoizedHtmlTemplatesMapping = {}
   app.use(hooks[TYPES.NOT_FOUND])
   app.use(hooks[TYPES.INTERNAL_ERROR])
 
-  app.listen(PORT, () => console.log(`Server up & running 🌍 http://localhost:${PORT}`)) // eslint-disable-line
+  if (!useSSL) app.listen(PORT, () => console.log(`Server up & running 🌍 http://localhost:${PORT}`)) // eslint-disable-line
+
+  if (useSSL) {
+    const path = require('path')
+    const https = require('https')
+    const fs = require('fs')
+
+    const options = {
+      key: fs.readFileSync(path.join(process.env.PWD, ssrConf.SSL.development.key)),
+      cert: fs.readFileSync(path.join(process.env.PWD, ssrConf.SSL.development.crt))
+    }
+
+    https.createServer(options, app).listen(PORT, () => console.log(`Server up & running 🌍 https://localhost:${PORT}`)) // eslint-disable-line
+  }
 })()
