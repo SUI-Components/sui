@@ -31,7 +31,7 @@ const useSSL =
   process?.env?.NODE_ENV === 'development' &&
   Boolean(ssrConf?.SSL?.development) &&
   Boolean(ssrConf?.SSL?.development?.key) &&
-  Boolean(ssrConf?.SSL?.development?.cert)
+  Boolean(ssrConf?.SSL?.development?.crt)
 
 const {PORT = 3000, AUTH_USERNAME, AUTH_PASSWORD} = process.env
 const runningUnderAuth = AUTH_USERNAME && AUTH_PASSWORD
@@ -111,7 +111,7 @@ const _memoizedHtmlTemplatesMapping = {}
 
     const options = {
       key: fs.readFileSync(path.join(process.env.PWD, ssrConf.SSL.development.key)),
-      cert: fs.readFileSync(path.join(process.env.PWD, ssrConf.SSL.development.cert))
+      cert: fs.readFileSync(path.join(process.env.PWD, ssrConf.SSL.development.crt))
     }
 
     https.createServer(options, app).listen(PORT, () => console.log(`Server up & running 🌍 https://localhost:${PORT}`)) // eslint-disable-line

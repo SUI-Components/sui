@@ -177,7 +177,6 @@ jobs:
 
 > If you want that release commit does not trigger a Travis build you could use the flag `--skip-ci` and commit message will have `[skip ci]` string. See more information about [Travis skipping build docs](https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build)
 
-
 ## Use the ssr output as stream
 
 It uses the stdout stream so you can do things like:
@@ -262,6 +261,19 @@ Configs accepted:
 
 > ⚠️ `createStylesFor` does not works as expected when sui-bundler configuration has `onlyHash` defined to `true`.
 
+- **`SSL`** (`undefined`): This is only for local development. It should be usefull to test locally pointing to production endpoints. Certificate should help to avoid CORS issues. This prop should receive and object with the following structure:
+
+  ```json
+  {
+    "SSL": {
+      "development": {
+        "key": "./.ssl/key.pem", // replace this with the path to the certificate key file
+        "crt": "./.ssl/crt.pem" // replace this with the path to the certificate crt file
+      }
+    }
+  }
+  ```
+
 ## Critical CSS
 
 For development you will need start the server with env vars `CRITICAL_CSS_HOST` and `CRITICAL_CSS_PROTOCOL` to allow to the external service request your current page.
@@ -294,7 +306,6 @@ export default [
 ### Shared context data between server and client
 
 In case you need to share initial client data needed by a context provider, add an `getInitialData` to your context provider. It will be injected into the html as `window.__INITIAL_CONTEXT_VALUE__[you context key]`
-
 
 ## Link Packages
 
