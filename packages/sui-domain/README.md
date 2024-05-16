@@ -1,6 +1,6 @@
 # sui-domain
 
-> Backbone for creating a domain that complains with the guidelines of Schibsted Spain
+> Backbone for creating a domain that complains with the guidelines of Adevinta Spain
 
 ## Motivation
 
