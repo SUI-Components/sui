@@ -1,6 +1,6 @@
 import {CircuitBreaker} from './CircuitBreaker.js'
 
-export class CircuitBreakerManager {
+export default class CircuitBreakerManager {
   activeRequests = {}
 
   constructor({options}) {
