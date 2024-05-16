@@ -18,7 +18,6 @@ RuleTester.create('node-version', handler).run({
       report: dedent`
         Your project has more than one .nvmrc file. That can be dangerous.
         Please, use onle ONE in the root of your project.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: 0
     },
@@ -28,7 +27,6 @@ RuleTester.create('node-version', handler).run({
       report: dedent`
         Your current Node version is 16.
         Please be sure that your repository use the latest Node Version 20.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: 0
     },
@@ -36,7 +34,6 @@ RuleTester.create('node-version', handler).run({
       missmatch: '',
       report: dedent`
         Every project have to have a .npmrc file to define the node versión.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: 0
     }

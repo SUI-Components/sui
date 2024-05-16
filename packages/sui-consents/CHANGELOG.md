@@ -1,5 +1,22 @@
 # CHANGELOG
 
+# 1.6.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* fix linting issues ([e7eabfd](https://github.com/SUI-Components/sui/commit/e7eabfd5a610357c258234bc0ea16afb3e63bcd0))
+* fix linting issues ([1b4541b](https://github.com/SUI-Components/sui/commit/1b4541bbbc6211bdd8f636b540f6655556cacc01))
+* update deps ([02b592c](https://github.com/SUI-Components/sui/commit/02b592c407dbb5c6ce9ad8e5665e61b7557877aa))
+
+
+### Features
+
+* use latest version of swc ([018c890](https://github.com/SUI-Components/sui/commit/018c890ac15b3b6e79a235174c3b895677783eda))
+* Use single @s-ui/test across packages ([1d8b926](https://github.com/SUI-Components/sui/commit/1d8b926e727cab44d599767ee13076bc451663bc))
+
+
+
 # 1.5.0 (2021-07-01)
 
 
@@ -43,6 +60,3 @@
 
 * **sui-consents:** first commit ([573419a](https://github.com/SUI-Components/sui/commit/573419af9eb62330c783a5a7a806dce1c30bf8db))
 * **sui-consents:** return empty object on error ([8c54590](https://github.com/SUI-Components/sui/commit/8c54590ed7de61bd892dbaa7f4cf443e38a6b057))
-
-
-

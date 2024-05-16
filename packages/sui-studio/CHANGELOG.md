@@ -1,5 +1,36 @@
 # CHANGELOG
 
+# 11.42.0 (2024-05-09)
+
+
+### Features
+
+* Add jest command and template to sui-studio generate script ([f392aa8](https://github.com/SUI-Components/sui/commit/f392aa8e4520ac49224d3d6fc86325654e27160a))
+
+
+
+# 11.41.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* add some fixes ([09a6949](https://github.com/SUI-Components/sui/commit/09a6949ad393339af331aa13ad5ab6c7783ac29b))
+* fix linting issues ([1904ca2](https://github.com/SUI-Components/sui/commit/1904ca297650c5a7a3f3d6b187ecd9359e9a3d2a))
+* fix require globals.js ([b4cd94c](https://github.com/SUI-Components/sui/commit/b4cd94c8234c4be7d3584c6a784da5ca194f8963))
+
+
+### Features
+
+* add more support to typescript ([c75a1f2](https://github.com/SUI-Components/sui/commit/c75a1f280b93c86052b1e6c9e38b27b5ff56681f))
+* add support to typescript ([486ff09](https://github.com/SUI-Components/sui/commit/486ff09111405f3b021b91bda6c11ed7e8823075))
+* bump ts versions ([a5a0be2](https://github.com/SUI-Components/sui/commit/a5a0be26003d6c58c1b4b370c5f2452aa37d92fa))
+* restore original versions ([60e1b77](https://github.com/SUI-Components/sui/commit/60e1b778be153f3a1f8b5135a43a1842d32cdc8f))
+* restore package version ([e022570](https://github.com/SUI-Components/sui/commit/e022570ea7223e4f907222ff271f4faf72d96599))
+* Use MAGIC_STRING to support sui-bundler with TS ([75d6882](https://github.com/SUI-Components/sui/commit/75d688244571731d1ccf9d7eeb128bf30ee09b0b))
+* Use relative paths for monorepos ([dcac529](https://github.com/SUI-Components/sui/commit/dcac5295d2576838541f9879905b4122e8acde9c))
+
+
+
 # 11.40.0 (2024-04-19)
 
 

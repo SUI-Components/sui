@@ -55,7 +55,6 @@ module.exports = {
       missingFileOrFolder: dedent`
         The file or folder {{pattern}} is missing.
         This repository should follow the Golden Path file Structure.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       automergeDisabled: dedent`
         The dependabot automerge feature is disabled.

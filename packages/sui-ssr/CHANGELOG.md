@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.29.0 (2024-05-13)
+
+
+### Features
+
+* Add SSL option for local development ([f9a0201](https://github.com/SUI-Components/sui/commit/f9a0201bca19e4b5005ad4668ee5b23cfa5d1393))
+* Add SSL to README ([32bb1eb](https://github.com/SUI-Components/sui/commit/32bb1ebf9546b026bf6e4a1de2123cf1a524809d))
+
+
+
 # 8.28.0 (2024-05-02)
 
 

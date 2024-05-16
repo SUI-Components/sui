@@ -28,7 +28,6 @@ RuleTester.create('structure', handler).run({
         report: dedent`
         The file or folder ${pattern} is missing.
         This repository should follow the Golden Path file Structure.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
         monitoring: false
       }
@@ -39,7 +38,6 @@ RuleTester.create('structure', handler).run({
       report: dedent`
         The file or folder .github/dependabot.yml is missing.
         This repository should follow the Golden Path file Structure.
-        If you are not sure about how do it, please contact with Platform Web.
       `,
       monitoring: false
     },

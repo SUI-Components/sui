@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 1.5.0 (2024-05-10)
+
+
+### Features
+
+* Add rule to detect how many component here is in the app ([be93c08](https://github.com/SUI-Components/sui/commit/be93c08efee5fb45a56209fbc0d8b2bfbf7667af))
+* Add rules to check sass and spark adoption ([1b21293](https://github.com/SUI-Components/sui/commit/1b212939a290d9453d7548d25ca007fec4b25327))
+* Create a metric about how many tsx? has the repository migrated ([7a7df02](https://github.com/SUI-Components/sui/commit/7a7df02d5bece3d03cdcfc83e8e478560056e79b))
+* remove noise ([a0d017f](https://github.com/SUI-Components/sui/commit/a0d017fe4d11b27a2de8e15a2a5d11af151f3556))
+
+
+
 # 1.4.0 (2024-04-05)
 
 

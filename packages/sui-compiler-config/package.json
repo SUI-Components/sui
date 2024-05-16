@@ -1,0 +1,22 @@
+{
+  "name": "@s-ui/compiler-config",
+  "version": "1.1.0",
+  "description": "Compilers config (SWC, TS...) for SUI projects.",
+  "main": "src/index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUI-Components/sui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SUI-Components/sui/issues"
+  },
+  "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-compiler-config#readme",
+  "dependencies": {
+    "@tsconfig/esm": "1.0.4",
+    "@tsconfig/vite-react": "2.0.0"
+  }
+}

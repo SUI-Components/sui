@@ -23,7 +23,6 @@ RuleTester.create('typescript', handler).run({
       report: dedent`
       Please be sure that your repository use the latest TypeScript version 5.
       Your current version is 4.
-      If you are not sure about it, please contact Web Platform.
     `,
       monitoring: false
     },
@@ -33,7 +32,6 @@ RuleTester.create('typescript', handler).run({
       report: dedent`
         Your project doesn't have installed TypeScript.
         Please install at least the version 5.
-        If you are not sure about it, please contact Web Platform.
     `,
       monitoring: false
     },
@@ -41,7 +39,6 @@ RuleTester.create('typescript', handler).run({
       missmatch: '',
       report: dedent`
         Every project must have a \`tsconfig.json\` file to setup TypeScript in the project.
-        If you are not sure about how do it, please contact with Web Platform team.
       `,
       monitoring: false
     }

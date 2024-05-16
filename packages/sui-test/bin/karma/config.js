@@ -3,9 +3,10 @@
 const webpack = require('webpack')
 const path = require('path')
 const {envVars} = require('@s-ui/bundler/shared/index.js')
-const {bundlerConfig, clientConfig, isWorkspace} = require('../../src/config.js')
+const {getSWCConfig} = require('@s-ui/compiler-config')
+const {bundlerConfig, clientConfig, isWorkspace, isInnerPackage} = require('../../src/config.js')
 
-const {captureConsole = true} = clientConfig
+const {captureConsole = true, alias: webpackAlias = {}} = clientConfig
 const {sep} = path
 
 /**
@@ -13,20 +14,24 @@ const {sep} = path
  *  Where the value is always an empty string.
  */
 const environmentVariables = envVars(bundlerConfig.env)
-const prefix = isWorkspace() ? '../' : './'
+const standardPrefix = isWorkspace() ? '../' : './'
+const prefix = isInnerPackage() ? '../../' : standardPrefix
 const pwd = process.env.PWD
-
+const swcConfig = getSWCConfig({isTypeScript: true})
+const customAlias = Object.keys(webpackAlias).reduce(
+  (aliases, aliasKey) => ({
+    ...aliases,
+    [aliasKey]: path.resolve(path.join(pwd, prefix, webpackAlias[aliasKey]))
+  }),
+  {}
+)
 const config = {
   singleRun: true,
-
   basePath: '',
-
   frameworks: ['mocha', 'webpack'],
-
   proxies: {
     '/mockServiceWorker.js': `/base/public/mockServiceWorker.js`
   },
-
   plugins: [
     require.resolve('karma-webpack'),
     require.resolve('karma-chrome-launcher'),
@@ -35,17 +40,12 @@ const config = {
     require.resolve('karma-coverage'),
     require.resolve('karma-spec-reporter')
   ],
-
   reporters: ['spec'],
-
   browsers: ['Chrome'],
-
   browserDisconnectTolerance: 1,
-
   webpackMiddleware: {
     stats: 'errors-only'
   },
-
   webpack: {
     devtool: 'eval',
     stats: 'errors-only',
@@ -53,10 +53,11 @@ const config = {
       alias: {
         'react/jsx-dev-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-dev-runtime.js'),
         'react/jsx-runtime': path.resolve(pwd, prefix, 'node_modules/react/jsx-runtime.js'),
-        '@s-ui/react-context': path.resolve(path.join(pwd, prefix, 'node_modules/@s-ui/react-context'))
+        '@s-ui/react-context': path.resolve(path.join(pwd, prefix, 'node_modules/@s-ui/react-context')),
+        ...customAlias
       },
       modules: [path.resolve(process.cwd()), 'node_modules'],
-      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
       fallback: {
         assert: false,
         child_process: false,
@@ -104,6 +105,17 @@ const config = {
           }
         },
         {
+          test: /\.tsx?$/,
+          exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
+          use: {
+            loader: 'swc-loader',
+            options: {
+              sync: true,
+              ...swcConfig
+            }
+          }
+        },
+        {
           test: /\.jsx?$/,
           exclude: new RegExp(`node_modules(?!${sep}@s-ui${sep}studio${sep}src)`),
           use: [
@@ -137,7 +149,6 @@ const config = {
       ]
     }
   },
-
   client: {
     captureConsole,
     mocha: {

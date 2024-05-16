@@ -1,5 +1,22 @@
 # CHANGELOG
 
+# 2.23.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* fix linting issues ([d580498](https://github.com/SUI-Components/sui/commit/d580498ec84b7339e87901df30fc989aefe94e7f))
+* fix linting issues ([19c9633](https://github.com/SUI-Components/sui/commit/19c9633f57e3ad4bc9324973cecd959307b42cf1))
+* fix ts config ([b185cc8](https://github.com/SUI-Components/sui/commit/b185cc8ac0f5ae3028d2c85a9234b4d15d25fb3f))
+* update deps ([d55aabc](https://github.com/SUI-Components/sui/commit/d55aabc694c3a8fd70ff0cee49c6e26541406fa8))
+
+
+### Features
+
+* use latest version of swc ([3e1a7df](https://github.com/SUI-Components/sui/commit/3e1a7dff8aa073ad3ae13707c150f37562c0614b))
+
+
+
 # 2.22.0 (2024-02-07)
 
 

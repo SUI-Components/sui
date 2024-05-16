@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 2.15.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* update deps ([abb824b](https://github.com/SUI-Components/sui/commit/abb824ba7bc913759abe5d102f4e3eeb6133a1a5))
+
+
+### Features
+
+* sync typescript versions ([5c75ada](https://github.com/SUI-Components/sui/commit/5c75ada6b2c6a00f230f84b9d659c10f2b03277c))
+* use latest version of swc ([a133bd7](https://github.com/SUI-Components/sui/commit/a133bd7bf9d598fd2fd7f71010d0af3a59cede34))
+
+
+
 # 2.14.0 (2024-01-15)
 
 
@@ -179,6 +194,3 @@
 * **packages/sui-test-contract:** bump ([0555f95](https://github.com/SUI-Components/sui/commit/0555f95cf4ba4176231d2d55a5679c49c25ecdab))
 * **packages/sui-test-contract:** ignore contract folder from git and test folder from npm ([78732c7](https://github.com/SUI-Components/sui/commit/78732c7e53ad4eea729ad7b3779d565fefb552cb))
 * **packages/sui-test-contract:** publish beta ([ef65af7](https://github.com/SUI-Components/sui/commit/ef65af7d3c4fcc6f89e130ac18de40a1566629d5))
-
-
-

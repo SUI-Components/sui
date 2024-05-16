@@ -13,12 +13,12 @@ SUIContext.wrapper = (Component, displayName): React.ComponentType<any> => {
     <SUIContext.Consumer>{context => <Component {...context} {...props} />}</SUIContext.Consumer>
   )
 
-  WrappedComponent.displayName = Component.displayName !== undefined ? Component.displayName : displayName
+  WrappedComponent.displayName = Component.displayName ?? displayName
 
   return hoistNonReactStatics(WrappedComponent, Component)
 }
 
-export const useSuiContext = (): React.Context<any> => {
+export function useSuiContext(): React.Context<any> {
   return React.useContext(SUIContext)
 }
 
