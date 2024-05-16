@@ -12,8 +12,7 @@ export class CircuitBreaker {
   resetAfter = 50000
   timeout = 5000 // declare request failure if the function takes more than 5 seconds
 
-  constructor(request, options) {
-    this.request = request
+  constructor({options}) {
     this.state = CircuitBreakerStates.CLOSED // allowing requests to go through by default
     this.failureCount = 0
     // allow request to go through after the circuit has been opened for resetAfter seconds
@@ -28,7 +27,9 @@ export class CircuitBreaker {
     }
   }
 
-  async fire() {
+  async fire(requester, url, options) {
+    this.request = requester.call(requester, url, options)
+
     if (this.state === CircuitBreakerStates.OPENED) {
       if (this.resetAfter <= Date.now()) {
         this.state = CircuitBreakerStates.HALF
