@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-import {CircuitBreaker} from './CircuitBreaker.js'
-
 /** @typedef {import('./FetcherInterface').default} FetcherInterface */
 /** @implements {FetcherInterface} */
 export default class AxiosFetcher {
@@ -13,6 +11,16 @@ export default class AxiosFetcher {
     this._axios = axios.create(config)
   }
 
+  get CircuitBreaker() {
+    return this._config.get('circuitBreaker')
+      ? this._config.get('circuitBreaker')
+      : {
+          fire: (requester, url, options, body) => {
+            requester.call(requester, url, body ?? options, options)
+          }
+        }
+  }
+
   /**
    * Get method
    * @param {String} url
@@ -20,7 +28,7 @@ export default class AxiosFetcher {
    * @return {Promise<any>}
    */
   get(url, options) {
-    return new CircuitBreaker(this._axios.get(url, options)).fire()
+    return this.CircuitBreaker.fire(this._axios.get, url, options)
   }
 
   /**
@@ -32,7 +40,7 @@ export default class AxiosFetcher {
    * @return {Promise}
    */
   post(url, body, options) {
-    return new CircuitBreaker(this._axios.post(url, body, options)).fire()
+    return this.CircuitBreaker.fire(this._axios.post, url, options, body)
   }
 
   /**
@@ -44,7 +52,7 @@ export default class AxiosFetcher {
    * @return {Object}
    */
   put(url, body, options) {
-    return new CircuitBreaker(this._axios.put(url, body, options)).fire()
+    return this.CircuitBreaker.fire(this._axios.put, url, options, body)
   }
 
   /**
@@ -56,7 +64,7 @@ export default class AxiosFetcher {
    * @return {Object}
    */
   patch(url, body, options) {
-    return new CircuitBreaker(this._axios.patch(url, body, options)).fire()
+    return this.CircuitBreaker.fire(this._axios.patch, url, options, body)
   }
 
   /**
@@ -67,6 +75,6 @@ export default class AxiosFetcher {
    * @return {Object}
    */
   delete(url, options) {
-    return new CircuitBreaker(this._axios.delete(url, options)).fire()
+    return this.CircuitBreaker.fire(this._axios.delete, url, options)
   }
 }
