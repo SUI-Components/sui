@@ -16,7 +16,7 @@ export default class AxiosFetcher {
       ? this._config.get('circuitBreaker')
       : {
           fire: (requester, url, options, body) => {
-            requester.call(requester, url, body ?? options, options)
+            return requester.call(requester, url, body ?? options, options)
           }
         }
   }
