@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.16.0 (2024-05-22)
+
+
+### Features
+
+* adapt entry point factory to be able to work with named exports ([67d6c99](https://github.com/SUI-Components/sui/commit/67d6c993ae42671384eb12c7a034fbdb6d7fa838))
+
+
+
 # 2.15.0 (2024-05-06)
 
 
