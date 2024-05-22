@@ -1,5 +1,14 @@
 import createNotImplementedUseCase from './createNotImplementedUseCase.js'
 
+const METHODS_BY_FACTORY_TYPES = {
+  // Return a method from a whole default exported factory
+  WHOLE_FACTORY: (factory, method) => factory.default[method],
+  // Return a single default exported factory
+  DEFAULT_SINGLE_FACTORY: factory => factory.default,
+  // Return a single named exported factory
+  NAMED_SINGLE_FACTORY: ({factory}) => factory
+}
+
 export default ({useCases, config, logger, pde}) =>
   class EntryPoint {
     subscribers = {}
@@ -38,7 +47,18 @@ export default ({useCases, config, logger, pde}) =>
         ? useCase // for the whole factory we extract the single method from the array
         : [useCase] // for the single factory, the method is undefined as is default
 
-      const getMethod = isDynamicImportWholeFactory ? factory => factory.default[method] : factory => factory.default
+      const getMethodByFactoryType = receivedFactory => {
+        if (isDynamicImportWholeFactory) return METHODS_BY_FACTORY_TYPES.WHOLE_FACTORY
+
+        // according with the creational pattern entryPoint agreement
+        const hasNamedExportedMethod = Boolean(receivedFactory.factory)
+
+        return hasNamedExportedMethod
+          ? METHODS_BY_FACTORY_TYPES.NAMED_SINGLE_FACTORY
+          : METHODS_BY_FACTORY_TYPES.DEFAULT_SINGLE_FACTORY
+      }
+
+      const getMethod = factory => getMethodByFactoryType(factory)(factory, method)
 
       // if loader is undefined then is not implemented, otherwhise load async the useCase
       return loader === undefined

@@ -13,6 +13,21 @@ const logger = {
 
 describe('EntryPointFactory', () => {
   describe('without logger', () => {
+    it('should be able to import a named exported UseCase', async () => {
+      const useCases = {
+        named_exported_single_use_case: () => import('./fixtures/NamedExportedSingleUseCase.js')
+      }
+      const EntryPoint = EntryPointFactory({config, useCases})
+      const domain = new EntryPoint()
+
+      const useCase = domain.get('named_exported_single_use_case')
+      const response = await useCase.execute()
+
+      expect(useCase.execute).to.be.a('function')
+      expect(useCase.$).to.be.an('object')
+      expect(response).to.eql(true)
+    })
+
     it('should be able to import the whole UseCase factory', async () => {
       const useCases = {
         use_case_from_factory_with_multiple_use_cases: [
