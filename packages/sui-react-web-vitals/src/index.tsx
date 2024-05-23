@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef} from 'react'
+import React, {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
 import * as cwv from 'web-vitals/attribution'
@@ -14,7 +14,7 @@ export const METRICS = {
   INP: 'INP',
   LCP: 'LCP',
   TTFB: 'TTFB'
-}
+} as const
 
 const INP_METRICS = {
   ID: 'ID',
@@ -29,12 +29,28 @@ const RATING = {
   POOR: 'poor'
 }
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP]
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP] as const
 
 export const DEVICE_TYPES = {
   DESKTOP: 'desktop',
   TABLET: 'tablet',
   MOBILE: 'mobile'
+}
+
+interface WebVitalsReporterProps extends React.PropsWithChildren {
+  reporter: typeof cwv
+  deviceType: number
+  metrics: Array<typeof METRICS[keyof typeof METRICS]>
+  metricsAllChanges: typeof DEFAULT_METRICS_REPORTING_ALL_CHANGES
+  onReport: (args: {
+    name: string
+    amount: number
+    pathname: string
+    routeid: string
+    type: string
+    entries: unknown
+  }) => void
+  allowed: unknown[]
 }
 
 export default function WebVitalsReporter({
@@ -45,7 +61,7 @@ export default function WebVitalsReporter({
   metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
   onReport,
   allowed = []
-}) {
+}: WebVitalsReporterProps) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
   const {routes} = router
@@ -57,7 +73,11 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
-    const {deviceMemory, connection: {effectiveType} = {}, hardwareConcurrency} = window.navigator || {}
+    const {
+      deviceMemory,
+      connection: {effectiveType} = {effectiveType: ''},
+      hardwareConcurrency
+    } = window.navigator ?? {}
 
     const getRouteid = () => {
       return route?.id

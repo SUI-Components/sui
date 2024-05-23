@@ -1,20 +1,7 @@
 {
+  "extends": "@s-ui/bundler/tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "jsx": "react-jsx",
-    "module": "es6",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "baseUrl": ".",
-    "outDir": "./lib",
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "es5",
-    "types": ["react", "node"]
+    "rootDir": "."
   },
-  "exclude": ["node_modules", "lib"],
-  "typeAcquisition": {
-    "enable": true
-  }
+  "exclude": ["node_modules", "build", "lib", "contract", "test-e2e"]
 }

@@ -2,7 +2,8 @@
   "extends": ["@tsconfig/esm/tsconfig.json", "@tsconfig/vite-react/tsconfig.json"],
    "compilerOptions": {
       "allowJs": true,
-      "target": "ES2022"
+      "target": "ES2022",
+      "types": ["new-javascript"],
    }
 }
 
