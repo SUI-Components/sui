@@ -22,7 +22,10 @@ module.exports = {
     schema: [],
     messages: {
       notFoundAsyncInlineErrorDecorator: dedent`
-        You have to use the @AsyncInlineError decorator in your UseCase execute method
+        You have to use the @AsyncInlineError() decorator in your UseCase execute method
+        `,
+      asyncInlineErrorDecoratorIsNotFirst: dedent`
+        The @AsyncInlineError() decorator should be the first one
         `
     }
   },
@@ -36,7 +39,9 @@ module.exports = {
         )
 
         if (executeFn) {
-          const hasDecorator = executeFn?.decorators?.find(
+          const decorators = executeFn?.decorators
+          const isAsyncInlineErrorFirstDecorator = decorators?.[0]?.expression?.callee?.name === 'AsyncInlineError'
+          const hasAsyncInlineError = decorators?.find(
             decorator => decorator.expression.callee.name === 'AsyncInlineError'
           )
 
@@ -44,11 +49,19 @@ module.exports = {
           // TODO validar en services
           // TODO validar en repositories
           // TODO quickFix implementar
-          if (!hasDecorator)
+          if (!hasAsyncInlineError) {
             context.report({
               node: executeFn.key,
               messageId: 'notFoundAsyncInlineErrorDecorator'
             })
+          }
+
+          if (hasAsyncInlineError && !isAsyncInlineErrorFirstDecorator) {
+            context.report({
+              node: decorators[0],
+              messageId: 'asyncInlineErrorDecoratorIsNotFirst'
+            })
+          }
         }
       }
     }
