@@ -45,14 +45,16 @@ module.exports = {
             decorator => decorator.expression.callee.name === 'AsyncInlineError'
           )
 
-          // TODO comprobar orden de decoradores, inlineError el primero
           // TODO validar en services
           // TODO validar en repositories
           // TODO quickFix implementar
           if (!hasAsyncInlineError) {
             context.report({
               node: executeFn.key,
-              messageId: 'notFoundAsyncInlineErrorDecorator'
+              messageId: 'notFoundAsyncInlineErrorDecorator',
+              fix: fixer => {
+                return fixer.insertTextBefore(executeFn, '@AsyncInlineError()\n')
+              }
             })
           }
 
