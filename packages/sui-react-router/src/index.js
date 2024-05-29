@@ -18,5 +18,8 @@ export {default as match} from './match.js'
 /* histories */
 export {default as browserHistory} from './browserHistory.js'
 
+/* context */
+export {default as RouterContext} from './internal/Context.js'
+
 /* hooks */
 export {useLocation, useParams, useRouter} from './hooks.js'

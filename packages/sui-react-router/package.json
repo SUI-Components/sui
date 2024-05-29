@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "lib": "js-compiler",
     "prepublishOnly": "npm run lib",
     "test": "npm run test:server && npm run test:browser",
     "test:browser": "NODE_ENV=test sui-test browser -P 'test/browser/*Spec.js'",
@@ -25,6 +25,7 @@
     "hoist-non-react-statics": "3.3.2"
   },
   "devDependencies": {
+    "@s-ui/js-compiler": "1",
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17",
