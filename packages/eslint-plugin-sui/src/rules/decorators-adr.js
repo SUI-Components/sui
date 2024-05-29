@@ -38,17 +38,21 @@ module.exports = {
           methodDefinition => methodDefinition.type === 'MethodDefinition' && methodDefinition.key.name === 'execute'
         )
 
+        // Pepe
+        // AsyncInlineErrror
+        // function()
+
         if (executeFn) {
           const decorators = executeFn?.decorators
-          const isAsyncInlineErrorFirstDecorator = decorators?.[0]?.expression?.callee?.name === 'AsyncInlineError'
-          const hasAsyncInlineError = decorators?.find(
+          const isAsyncInlineErrorLastDecorator = decorators?.at(-1)?.expression?.callee?.name === 'AsyncInlineError'
+          const asyncInlineErrorDecoratorNode = decorators?.find(
             decorator => decorator.expression.callee.name === 'AsyncInlineError'
           )
 
           // TODO validar en services
           // TODO validar en repositories
           // TODO quickFix implementar
-          if (!hasAsyncInlineError) {
+          if (!asyncInlineErrorDecoratorNode) {
             context.report({
               node: executeFn.key,
               messageId: 'notFoundAsyncInlineErrorDecorator',
@@ -58,10 +62,14 @@ module.exports = {
             })
           }
 
-          if (hasAsyncInlineError && !isAsyncInlineErrorFirstDecorator) {
+          if (asyncInlineErrorDecoratorNode && !isAsyncInlineErrorLastDecorator) {
             context.report({
-              node: decorators[0],
-              messageId: 'asyncInlineErrorDecoratorIsNotFirst'
+              node: asyncInlineErrorDecoratorNode,
+              messageId: 'asyncInlineErrorDecoratorIsNotFirst',
+              *fix(fixer) {
+                yield fixer.remove(asyncInlineErrorDecoratorNode)
+                yield fixer.insertTextAfter(decorators.at(-1), '\n@AsyncInlineError()')
+              }
             })
           }
         }
