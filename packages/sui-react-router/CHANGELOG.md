@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.17.0 (2024-05-29)
+
+
+### Bug Fixes
+
+* fix command ([51972e7](https://github.com/SUI-Components/sui/commit/51972e78ca10c9236e8a0f6853bc34ad4b0af14e))
+
+
+### Features
+
+* export context ([976998d](https://github.com/SUI-Components/sui/commit/976998d8a631e36eea1bf3e54011279b1a0f2770))
+
+
+
 # 1.16.0 (2023-11-06)
 
 
@@ -207,6 +221,3 @@
 
 * **sui-react-router:** avoid re-renderer of consumers because creating new object on every render o ([4a67f35](https://github.com/SUI-Components/sui/commit/4a67f35a31c50262d7006c0a55af5043c3d9b592))
 * **sui-react-router:** load from history only what is needed ([6f0e12c](https://github.com/SUI-Components/sui/commit/6f0e12c6f654892a980f449b777dd4fed92cc959))
-
-
-
