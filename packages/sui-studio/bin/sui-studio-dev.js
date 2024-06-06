@@ -45,8 +45,10 @@ if (!category || !component) {
 
 const componentPath = path.join(PWD, 'components', category, component)
 const legacyTestPath = path.join(PWD, 'test', category, component)
+const jestPath = path.join(componentPath, '__tests__')
 
 const testPath = fs.existsSync(legacyTestPath) ? legacyTestPath : path.join(componentPath, 'test')
+const isJestTest = fs.existsSync(jestPath)
 
 const {cache, ...others} = config
 
@@ -59,7 +61,7 @@ const studioDevConfig = {
     alias: {
       ...config.resolve.alias,
       component: path.join(componentPath, 'src'),
-      test: testPath,
+      test: isJestTest ? jestPath : testPath,
       package: path.join(componentPath, 'package.json'),
       demo: path.join(componentPath, 'demo')
     }
