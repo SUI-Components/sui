@@ -1,4 +1,6 @@
-import {useContext, useEffect, useRef} from 'react'
+/* eslint @typescript-eslint/strict-boolean-expressions:0 */
+/* eslint @typescript-eslint/no-non-null-assertion:0 */
+import React, {useContext, useEffect, useRef} from 'react'
 
 import PropTypes from 'prop-types'
 import * as cwv from 'web-vitals/attribution'
@@ -14,7 +16,7 @@ export const METRICS = {
   INP: 'INP',
   LCP: 'LCP',
   TTFB: 'TTFB'
-}
+} as const
 
 const INP_METRICS = {
   ID: 'ID',
@@ -27,14 +29,53 @@ const RATING = {
   GOOD: 'good',
   NEEDS_IMPROVEMENT: 'needs-improvement',
   POOR: 'poor'
-}
+} as const
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP]
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP] as const
 
 export const DEVICE_TYPES = {
   DESKTOP: 'desktop',
   TABLET: 'tablet',
   MOBILE: 'mobile'
+} as const
+
+type DeviceType = typeof DEVICE_TYPES[keyof typeof DEVICE_TYPES]
+type Metric = typeof METRICS[keyof typeof METRICS]
+interface Route {
+  id?: string
+  path?: string
+  regexp?: RegExp
+}
+
+interface Attribution {
+  largestShiftTarget?: Element
+  element?: Element
+  eventTarget?: Element
+  loadState?: string
+  eventType?: string
+}
+
+interface MetricReport {
+  name: string
+  value: number
+  attribution: Attribution
+  rating: typeof RATING[keyof typeof RATING]
+}
+
+interface WebVitalsReporterProps extends React.PropsWithChildren {
+  reporter: typeof cwv
+  deviceType: DeviceType
+  metrics: Metric[]
+  metricsAllChanges: typeof DEFAULT_METRICS_REPORTING_ALL_CHANGES
+  onReport: (args: {
+    name: string
+    amount: number
+    pathname: string
+    routeid: string
+    type: string
+    entries: PerformanceEntry[]
+  }) => void
+  allowed: string[]
 }
 
 export default function WebVitalsReporter({
@@ -45,7 +86,7 @@ export default function WebVitalsReporter({
   metricsAllChanges = DEFAULT_METRICS_REPORTING_ALL_CHANGES,
   onReport,
   allowed = []
-}) {
+}: WebVitalsReporterProps) {
   const {logger, browser} = useContext(SUIContext)
   const router = useRouter()
   const {routes} = router
@@ -57,21 +98,25 @@ export default function WebVitalsReporter({
   }, [onReport])
 
   useMount(() => {
-    const {deviceMemory, connection: {effectiveType} = {}, hardwareConcurrency} = window.navigator || {}
+    const {
+      deviceMemory,
+      connection: {effectiveType} = {effectiveType: ''},
+      hardwareConcurrency
+    } = window.navigator ?? {}
 
     const getRouteid = () => {
       return route?.id
     }
 
-    const getPathname = route => {
-      return route?.path || route?.regexp?.toString().replace(/[^a-z0-9]/gi, '')
+    const getPathname = (route: Route | undefined) => {
+      return route?.path ?? route?.regexp?.toString().replace(/[^a-z0-9]/gi, '')
     }
 
     const getDeviceType = () => {
       return deviceType || browser?.deviceType
     }
 
-    const getTarget = ({name, attribution}) => {
+    const getTarget = ({name, attribution}: {name: string; attribution: Attribution}) => {
       switch (name) {
         case METRICS.CLS:
           return attribution.largestShiftTarget
@@ -82,24 +127,24 @@ export default function WebVitalsReporter({
       }
     }
 
-    const computeINPMetrics = entry => {
+    const computeINPMetrics = (entry: PerformanceEntry & {processingStart: number; processingEnd: number}) => {
       // RenderTime is an estimate because duration is rounded and may get rounded down.
       // In rare cases, it can be less than processingEnd and that breaks performance.measure().
       // Let's ensure it's at least 4ms in those cases so you can barely see it.
       const presentationTime = Math.max(entry.processingEnd + 4, entry.startTime + entry.duration)
 
       return {
-        [INP_METRICS.ID]: Math.round(entry.processingStart - entry.startTime, 0),
-        [INP_METRICS.PT]: Math.round(entry.processingEnd - entry.processingStart, 0),
-        [INP_METRICS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
+        [INP_METRICS.ID]: Math.round(entry.processingStart - entry.startTime),
+        [INP_METRICS.PT]: Math.round(entry.processingEnd - entry.processingStart),
+        [INP_METRICS.PD]: Math.round(presentationTime - entry.processingEnd)
       }
     }
 
-    const handleAllChanges = ({attribution, name, rating, value}) => {
+    const handleAllChanges = ({attribution, name, rating, value}: MetricReport) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
       const routeid = getRouteid()
-      const isAllowed = allowed.includes(pathname) || allowed.includes(routeid)
+      const isAllowed = allowed.includes(pathname!) || allowed.includes(routeid)
       const target = getTarget({name, attribution})
 
       if (!isAllowed || !logger?.cwv || rating === RATING.GOOD || !target) return
@@ -121,12 +166,12 @@ export default function WebVitalsReporter({
       })
     }
 
-    const handleChange = ({name, value, entries}) => {
+    const handleChange = ({name, value, entries}: {name: Metric; value: number; entries: PerformanceEntry[]}) => {
       const onReport = onReportRef.current
       const pathname = getPathname(route)
       const routeid = getRouteid()
       const type = getDeviceType()
-      const isAllowed = allowed.includes(pathname) || allowed.includes(routeid)
+      const isAllowed = allowed.includes(pathname!) || allowed.includes(routeid)
 
       if (!isAllowed) return
 
@@ -134,7 +179,7 @@ export default function WebVitalsReporter({
         onReport({
           name,
           amount: value,
-          pathname,
+          pathname: pathname!,
           routeid,
           type,
           entries
@@ -183,7 +228,9 @@ export default function WebVitalsReporter({
 
       if (name === METRICS.INP) {
         entries.forEach(entry => {
-          const metrics = computeINPMetrics(entry)
+          const metrics = computeINPMetrics(
+            entry as PerformanceEntry & {processingStart: number; processingEnd: number}
+          )
 
           Object.keys(metrics).forEach(name => {
             logger.distribution({

@@ -17,6 +17,7 @@
   "homepage": "https://github.com/SUI-Components/sui/tree/master/packages/sui-compiler-config#readme",
   "dependencies": {
     "@tsconfig/esm": "1.0.4",
-    "@tsconfig/vite-react": "2.0.0"
+    "@tsconfig/vite-react": "2.0.0",
+    "new-javascript": "^0.4.3"
   }
 }
