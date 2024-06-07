@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.6.0 (2024-06-07)
+
+
+### Bug Fixes
+
+* fix structure rule ([da2a9cd](https://github.com/SUI-Components/sui/commit/da2a9cdd8a2b2eee534c99dd33f53c801ae4f70e))
+
+
+
 # 1.5.0 (2024-05-10)
 
 
