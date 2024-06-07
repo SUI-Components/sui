@@ -55,7 +55,10 @@ const {cache, ...others} = config
 const studioDevConfig = {
   ...others,
   context: path.join(__dirname, '..', 'workbench', 'src'),
-  plugins: [...config.plugins, new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID)})],
+  plugins: [
+    ...config.plugins,
+    new webpack.DefinePlugin({__COMPONENT_ID__: JSON.stringify(componentID), __DISABLE_TESTS__: isJestTest})
+  ],
   resolve: {
     ...config.resolve,
     alias: {
