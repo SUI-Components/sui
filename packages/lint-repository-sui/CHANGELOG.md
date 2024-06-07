@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.10.0 (2024-06-07)
+
+
+### Features
+
+* force deploy ([93d19d3](https://github.com/SUI-Components/sui/commit/93d19d3753c6fc4348fbc30903aad783328fd2f4))
+
+
+
 # 1.6.0 (2024-06-07)
 
 
