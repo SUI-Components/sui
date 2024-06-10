@@ -201,7 +201,7 @@ module.exports = {
     'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}],
     'react/jsx-no-bind': RULES.OFF,
     'sui/commonjs': RULES.WARNING,
-    'sui/layersArch': RULES.WARNING
+    'sui/layers-arch': RULES.WARNING
   },
   overrides: [
     {
