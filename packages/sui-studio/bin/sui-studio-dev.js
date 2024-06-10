@@ -64,7 +64,7 @@ const studioDevConfig = {
     alias: {
       ...config.resolve.alias,
       component: path.join(componentPath, 'src'),
-      test: isJestTest ? jestPath : testPath,
+      test: testPath,
       package: path.join(componentPath, 'package.json'),
       demo: path.join(componentPath, 'demo')
     }
