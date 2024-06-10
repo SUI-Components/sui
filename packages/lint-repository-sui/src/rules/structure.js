@@ -21,11 +21,9 @@ const FILES_AND_FOLDERS = [
   'app/src/index.html',
   'app/src/index.(s)?css',
   'app/src/routes.(t|j)s(x)?',
-  ...MANDATORY_PACKAGES.map(pkg => [
-    `packages/${pkg}/src`,
-    `packages/${pkg}/Makefile`,
-    `packages/${pkg}/package.json`
-  ]).flat(Infinity),
+  ...MANDATORY_PACKAGES.map(pkg =>
+    [pkg !== 'ui' && `packages/${pkg}/src`, `packages/${pkg}/Makefile`, `packages/${pkg}/package.json`].filter(Boolean)
+  ).flat(Infinity),
   'packages/domain/test',
   'deploy/config-pro.yml',
   'deploy/*-pro-paas.yml',
