@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {useState} from 'react'
 
 import PropTypes from 'prop-types'
@@ -7,7 +8,10 @@ import Select from '../Select/index'
 import Test from '../Suite/index'
 
 const importComponent = () => import('component/index')
-const importTest = () => import('test/index.test')
+let importTest = null
+if (!__DISABLE_TESTS__) {
+  importTest = () => import('test/index.test')
+}
 
 const getFromStorage = (key, defaultValue) => window.sessionStorage[key] || defaultValue
 
@@ -38,19 +42,23 @@ export default function Root({componentID, contexts = {}, themes}) {
           initValue={actualStyle}
           onChange={updateOnChange(setActualStyle, 'actualStyle')}
         />
-        <button
-          className="Root-testSwitch"
-          onClick={() => {
-            updateOnChange(setShowTests, 'showTests')(showTests === 'show' ? 'hide' : 'show')
-          }}
-        >
-          {showTests === 'show' ? 'Close Tests' : 'Open Tests'}
-        </button>
+        {importTest ? (
+          <button
+            className="Root-testSwitch"
+            onClick={() => {
+              updateOnChange(setShowTests, 'showTests')(showTests === 'show' ? 'hide' : 'show')
+            }}
+          >
+            {showTests === 'show' ? 'Close Tests' : 'Open Tests'}
+          </button>
+        ) : null}
       </Header>
 
       <iframe src={iframeSrc} scrolling="yes" title="Demo" />
       <div className="Root-test" hidden={showTests === 'hide'}>
-        <Test open contexts={contexts} importComponent={importComponent} importTest={importTest} />
+        {importTest ? (
+          <Test open contexts={contexts} importComponent={importComponent} importTest={importTest} />
+        ) : null}
       </div>
     </div>
   )
