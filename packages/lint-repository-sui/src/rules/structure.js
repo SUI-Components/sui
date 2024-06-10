@@ -24,7 +24,7 @@ const FILES_AND_FOLDERS = [
   ...MANDATORY_PACKAGES.map(pkg => [
     `packages/${pkg}/src`,
     `packages/${pkg}/Makefile`,
-    `packages/${pkg}/package.json`,
+    `packages/${pkg}/package.json`
   ]).flat(Infinity),
   'packages/domain/test',
   'deploy/config-pro.yml',
