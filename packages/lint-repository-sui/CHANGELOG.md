@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2024-06-10)
+
+
+### Features
+
+* ui doenst have a src folder ([580ece7](https://github.com/SUI-Components/sui/commit/580ece7ecb45aff9fb8b3686765e39ec88992b8a))
+
+
+
 # 1.11.0 (2024-06-10)
 
 
