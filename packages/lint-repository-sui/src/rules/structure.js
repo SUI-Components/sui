@@ -1,5 +1,6 @@
 const dedent = require('string-dedent')
 
+const MANDATORY_PACKAGES = ['domain', 'literals', 'theme', 'ui']
 const FILES_AND_FOLDERS = [
   '.docker',
   '.github',
@@ -13,7 +14,6 @@ const FILES_AND_FOLDERS = [
   'app/src',
   'app/Makefile',
   'app/package.json',
-  // 'app/tsconfig.json',
   'app/src/pages',
   'app/src/app.(t|j)s(x)?',
   'app/src/contextFactory{.js,.ts,/index.js,/index.ts}',
@@ -21,15 +21,14 @@ const FILES_AND_FOLDERS = [
   'app/src/index.html',
   'app/src/index.(s)?css',
   'app/src/routes.(t|j)s(x)?',
+  ...MANDATORY_PACKAGES.map(package => [
+    `packages/${package}/src`,
+    `packages/${package}/Makefile`,
+    `packages/${package}/package.json`,
+  ]).flat(Infinity),
   'packages/domain/test',
-  'packages/ui/components/**/test',
-  'packages/**/src',
-  'packages/**/Makefile',
-  'packages/**/package.json',
-  // 'packages/**/tsconfig.json',
-  // 'packages/**/CHANGELOG.md',
-  'deploy/config-(pre|pro).yml',
-  'deploy/*-(pre|pro)-paas.yml',
+  'deploy/config-pro.yml',
+  'deploy/*-pro-paas.yml',
   'deploy/tags.yml',
   'qa/e2e'
 ]
