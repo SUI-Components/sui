@@ -21,10 +21,10 @@ const FILES_AND_FOLDERS = [
   'app/src/index.html',
   'app/src/index.(s)?css',
   'app/src/routes.(t|j)s(x)?',
-  ...MANDATORY_PACKAGES.map(package => [
-    `packages/${package}/src`,
-    `packages/${package}/Makefile`,
-    `packages/${package}/package.json`,
+  ...MANDATORY_PACKAGES.map(pkg => [
+    `packages/${pkg}/src`,
+    `packages/${pkg}/Makefile`,
+    `packages/${pkg}/package.json`,
   ]).flat(Infinity),
   'packages/domain/test',
   'deploy/config-pro.yml',
