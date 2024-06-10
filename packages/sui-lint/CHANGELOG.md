@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 4.42.0 (2024-06-10)
+
+
+### Features
+
+* add more support to typescript ([b3616de](https://github.com/SUI-Components/sui/commit/b3616dedc3a780abd1380b8d35726601fa9b0354))
+* Add support to parse TS files ([a5c8730](https://github.com/SUI-Components/sui/commit/a5c8730a271c9271c6882d81fe64349b3af778e2))
+* add support to typescript ([2e43455](https://github.com/SUI-Components/sui/commit/2e4345526fe601518657921cceb0a50e6eda9af6))
+* Enabled all eslint rules ([2866abf](https://github.com/SUI-Components/sui/commit/2866abfef72c1fb33f65e2f7e0b65a909d0cadb7))
+* rename rule ([f4f04b5](https://github.com/SUI-Components/sui/commit/f4f04b5ed9875691d99b5d90d3d4ce746f50926e))
+* restore original versions ([015daf5](https://github.com/SUI-Components/sui/commit/015daf5fcf24cee4edb001bcd8c98359f538931d))
+
+
+
 # 4.41.0 (2024-04-05)
 
 
