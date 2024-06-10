@@ -15,6 +15,6 @@ module.exports = {
     'serialize-deserialize': SerializeDeserialize,
     commonjs: CommonJS,
     decorators: Decorators,
-    layersArch: LayersArch
+    'layers-arch': LayersArch
   }
 }
