@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.17.0 (2024-06-10)
+
+
+### Features
+
+* Add DomainError class ([f89d4fb](https://github.com/SUI-Components/sui/commit/f89d4fb9b0980af58d1e24c9d8d2117113fe50b5))
+
+
+
 # 2.16.0 (2024-05-22)
 
 
