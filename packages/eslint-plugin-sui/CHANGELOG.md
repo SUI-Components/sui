@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.6.0 (2024-06-10)
+
+
+### Features
+
+* rename rule ([caa0f89](https://github.com/SUI-Components/sui/commit/caa0f89372b79f5045afe5baa93812d787c4a844))
+
+
+
 # 1.5.0 (2024-05-10)
 
 
