@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.11.0 (2024-06-10)
+
+
+### Features
+
+* fix linting error ([a009f1a](https://github.com/SUI-Components/sui/commit/a009f1a85ed3b14ef9f4cb58b333bc161a551dc8))
+* fix mandatory path checks ([55d4e6d](https://github.com/SUI-Components/sui/commit/55d4e6dfc3db9f8815adecfbe4aa75fd748b6200))
+* remove reserved word ([89aedcf](https://github.com/SUI-Components/sui/commit/89aedcf8c7fd958130353adfe98ffc116d19e136))
+
+
+
 # 1.10.0 (2024-06-07)
 
 
