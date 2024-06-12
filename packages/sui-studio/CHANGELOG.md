@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 11.43.0 (2024-06-10)
+
+
+### Features
+
+* Add jest compatibility with test path on studio-dev ([7f98fa7](https://github.com/SUI-Components/sui/commit/7f98fa7cb7ebe8492d1901fc43c3ad3027bc41ec))
+* Delete unnecesary conditional with isJestTest ([e0f232b](https://github.com/SUI-Components/sui/commit/e0f232b681435f43bddab4f156234ce69333052b))
+* Disable Test component if detect jest folder ([04ba88f](https://github.com/SUI-Components/sui/commit/04ba88f6b2fb44eda407f6db6ee39314bbb15a2c))
+
+
+
 # 11.42.0 (2024-05-09)
 
 

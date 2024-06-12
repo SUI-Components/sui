@@ -175,8 +175,8 @@ module.exports = {
     'react-hooks',
     'simple-import-sort',
     'jest',
-    'jest-dom'
-    // 'sui'
+    'jest-dom',
+    'sui'
   ],
   rules: {
     ...REACT_RULES,
@@ -199,11 +199,20 @@ module.exports = {
     'prefer-regex-literals': RULES.WARNING,
     'prettier/prettier': [RULES.ERROR, prettierOptions],
     'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}],
-    'react/jsx-no-bind': RULES.OFF
-    // 'sui/factory-pattern': RULES.WARNING,
-    // 'sui/serialize-deserialize': RULES.WARNING
+    'react/jsx-no-bind': RULES.OFF,
+    'sui/commonjs': RULES.WARNING,
+    'sui/layers-arch': RULES.WARNING
   },
   overrides: [
+    {
+      files: ['**/domain/src/**', 'domain/src/**'],
+      plugins: ['sui'],
+      rules: {
+        'sui/factory-pattern': RULES.WARNING,
+        'sui/serialize-deserialize': RULES.WARNING,
+        'sui/decorators': RULES.WARNING
+      }
+    },
     {
       files: ['**/*.+(ts|tsx)'],
       extends: ['standard-with-typescript', 'standard-react', 'prettier'],

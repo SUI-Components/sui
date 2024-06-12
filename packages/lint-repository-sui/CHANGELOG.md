@@ -1,5 +1,43 @@
 # CHANGELOG
 
+# 1.12.0 (2024-06-10)
+
+
+### Features
+
+* ui doenst have a src folder ([580ece7](https://github.com/SUI-Components/sui/commit/580ece7ecb45aff9fb8b3686765e39ec88992b8a))
+
+
+
+# 1.11.0 (2024-06-10)
+
+
+### Features
+
+* fix linting error ([a009f1a](https://github.com/SUI-Components/sui/commit/a009f1a85ed3b14ef9f4cb58b333bc161a551dc8))
+* fix mandatory path checks ([55d4e6d](https://github.com/SUI-Components/sui/commit/55d4e6dfc3db9f8815adecfbe4aa75fd748b6200))
+* remove reserved word ([89aedcf](https://github.com/SUI-Components/sui/commit/89aedcf8c7fd958130353adfe98ffc116d19e136))
+
+
+
+# 1.10.0 (2024-06-07)
+
+
+### Features
+
+* force deploy ([93d19d3](https://github.com/SUI-Components/sui/commit/93d19d3753c6fc4348fbc30903aad783328fd2f4))
+
+
+
+# 1.6.0 (2024-06-07)
+
+
+### Bug Fixes
+
+* fix structure rule ([da2a9cd](https://github.com/SUI-Components/sui/commit/da2a9cdd8a2b2eee534c99dd33f53c801ae4f70e))
+
+
+
 # 1.5.0 (2024-05-10)
 
 

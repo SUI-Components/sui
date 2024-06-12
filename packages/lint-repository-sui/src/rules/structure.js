@@ -1,5 +1,6 @@
 const dedent = require('string-dedent')
 
+const MANDATORY_PACKAGES = ['domain', 'literals', 'theme', 'ui']
 const FILES_AND_FOLDERS = [
   '.docker',
   '.github',
@@ -9,34 +10,24 @@ const FILES_AND_FOLDERS = [
   '.nvmrc',
   '.dockerignore',
   '.gitignore',
-  'tsconfig.json',
   'README.md',
-
   'app/src',
-  'app/test',
   'app/Makefile',
   'app/package.json',
-  'app/tsconfig.json',
-  'app/CHANGELOG.md',
-
   'app/src/pages',
   'app/src/app.(t|j)s(x)?',
-  'app/src/contextFactory.(t|j)s(x)?',
-  'app/src/hooks.(t|j)s(x)?',
+  'app/src/contextFactory{.js,.ts,/index.js,/index.ts}',
+  'app/src/hooks{.js,.ts,/index.js,/index.ts}',
   'app/src/index.html',
   'app/src/index.(s)?css',
   'app/src/routes.(t|j)s(x)?',
-  'packages/**/src',
-  'packages/**/test',
-  'packages/**/Makefile',
-  'packages/**/package.json',
-  'packages/**/tsconfig.json',
-  'packages/**/CHANGELOG.md',
-
-  'deploy/config-(pre|pro).yml',
-  'deploy/*-(pre|pro)-paas.yml',
+  ...MANDATORY_PACKAGES.map(pkg =>
+    [pkg !== 'ui' && `packages/${pkg}/src`, `packages/${pkg}/Makefile`, `packages/${pkg}/package.json`].filter(Boolean)
+  ).flat(Infinity),
+  'packages/domain/test',
+  'deploy/config-pro.yml',
+  'deploy/*-pro-paas.yml',
   'deploy/tags.yml',
-
   'qa/e2e'
 ]
 
@@ -64,24 +55,6 @@ module.exports = {
   create: function (context) {
     return {
       ...Object.fromEntries(FILES_AND_FOLDERS.map(pattern => [pattern, () => context.monitoring(true)])),
-
-      '.github/dependabot.yml': matches => {
-        const [match] = matches
-        const json = match.parsed
-        const labels = json?.updates[0]?.labels || []
-        const isAutomergeEnabled = labels.find(key => key === 'skynet:merge')
-
-        if (!isAutomergeEnabled) {
-          context.monitoring(false)
-          context.report({
-            messageId: 'automergeDisabled'
-          })
-          return
-        }
-
-        context.monitoring(true)
-      },
-
       missmatch: key => {
         context.monitoring(false)
         context.report({

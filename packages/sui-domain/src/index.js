@@ -1,3 +1,4 @@
+export {default as DomainError} from './DomainError.js'
 export {default as Entity} from './Entity.js'
 export {default as EntryPointFactory} from './EntryPointFactory.js'
 export {default as CircuitBreakerManager} from './circuitBreaker/CircuitBreakerManager.js'
