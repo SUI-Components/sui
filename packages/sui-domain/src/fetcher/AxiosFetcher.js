@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 /** @typedef {import('./FetcherInterface').default} FetcherInterface */
+
 /** @implements {FetcherInterface} */
 export default class AxiosFetcher {
   /**
