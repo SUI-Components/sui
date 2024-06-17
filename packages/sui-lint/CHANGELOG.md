@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.43.0 (2024-06-17)
+
+
+### Features
+
+* enabled spark adoption ([2ab08cf](https://github.com/SUI-Components/sui/commit/2ab08cfecc1c7d4332187d884e74c8558394c2ca))
+
+
+
 # 4.42.0 (2024-06-10)
 
 
