@@ -13,7 +13,7 @@ export default class AxiosFetcher {
   }
 
   getCircuitBreaker() {
-    return this._config?.get && this._config?.get('circuitBreaker')
+    return this._config?.get?.('circuitBreaker')
       ? this._config?.get('circuitBreaker')
       : {
           fire: (requester, verb, url, options, body) => {
