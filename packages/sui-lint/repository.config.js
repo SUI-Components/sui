@@ -15,6 +15,9 @@ module.exports = {
     'sui/typescript': RULES.WARNING,
     'sui/structure': RULES.WARNING,
     'sui/sui-tools-version': RULES.WARNING,
-    'sui/adv-tools-version': RULES.WARNING
+    'sui/adv-tools-version': RULES.WARNING,
+    'ts-vs-js-files': RULES.WARNING,
+    'sass-files': RULES.WARNING,
+    'spark-adoption': RULES.WARNING
   }
 }
