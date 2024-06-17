@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.44.0 (2024-06-17)
+
+
+### Bug Fixes
+
+* fix rules name ([f00b56d](https://github.com/SUI-Components/sui/commit/f00b56dc5c6083cf6f8905b9a7a5103560db414d))
+
+
+
 # 4.43.0 (2024-06-17)
 
 
