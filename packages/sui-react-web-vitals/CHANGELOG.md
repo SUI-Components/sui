@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.5.0 (2024-06-19)
+
+
+### Features
+
+* upgrade web vitals package ([575f8f8](https://github.com/SUI-Components/sui/commit/575f8f8c89669472ea05e0bec6f52d5fcc69920b))
+
+
+
 # 2.4.0 (2024-03-26)
 
 
