@@ -9,6 +9,17 @@ export default class AxiosFetcher {
    */
   constructor({config}) {
     this._axios = axios.create(config)
+    this._config = config
+  }
+
+  getCircuitBreaker() {
+    return this._config?.get?.('circuitBreaker')
+      ? this._config?.get('circuitBreaker')
+      : {
+          fire: (requester, verb, url, options, body) => {
+            return requester[verb].call(this, url, body ?? options, options)
+          }
+        }
   }
 
   /**
@@ -18,7 +29,7 @@ export default class AxiosFetcher {
    * @return {Promise<any>}
    */
   get(url, options) {
-    return this._axios.get(url, options)
+    return this.getCircuitBreaker().fire(this._axios, 'get', url, options)
   }
 
   /**
@@ -30,7 +41,7 @@ export default class AxiosFetcher {
    * @return {Promise}
    */
   post(url, body, options) {
-    return this._axios.post(url, body, options)
+    return this.getCircuitBreaker().fire(this._axios, 'post', url, options, body)
   }
 
   /**
@@ -42,7 +53,7 @@ export default class AxiosFetcher {
    * @return {Object}
    */
   put(url, body, options) {
-    return this._axios.put(url, body, options)
+    return this.getCircuitBreaker().fire(this._axios, 'put', url, options, body)
   }
 
   /**
@@ -54,7 +65,7 @@ export default class AxiosFetcher {
    * @return {Object}
    */
   patch(url, body, options) {
-    return this._axios.patch(url, body, options)
+    return this.getCircuitBreaker().fire(this._axios, 'patch', url, options, body)
   }
 
   /**
@@ -65,6 +76,6 @@ export default class AxiosFetcher {
    * @return {Object}
    */
   delete(url, options) {
-    return this._axios.delete(url, options)
+    return this.getCircuitBreaker().fire(this._axios, 'delete', url, options)
   }
 }
