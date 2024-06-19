@@ -1,4 +1,4 @@
-const BOTS_USER_AGENTS = [
+const LEGITIMATE_BOTS_USER_AGENTS = [
   'googlebot',
   'google-structured-data-testing-tool',
   'bingbot',
@@ -10,9 +10,9 @@ const BOTS_USER_AGENTS = [
 const checkUserAgentIsBot = (userAgent, botsUserAgents) => {
   const lowerCaseUserAgent = userAgent.toLowerCase()
 
-  const botsUserAgentsList = botsUserAgents || BOTS_USER_AGENTS
+  const botsUserAgentsList = botsUserAgents || LEGITIMATE_BOTS_USER_AGENTS
 
   return botsUserAgentsList.some(ua => lowerCaseUserAgent.includes(ua))
 }
 
-export {checkUserAgentIsBot, BOTS_USER_AGENTS}
+export {checkUserAgentIsBot, LEGITIMATE_BOTS_USER_AGENTS}
