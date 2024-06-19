@@ -15,4 +15,4 @@ const checkUserAgentIsBot = (userAgent, botsUserAgents) => {
   return botsUserAgentsList.some(ua => lowerCaseUserAgent.includes(ua))
 }
 
-export { checkUserAgentIsBot, BOTS_USER_AGENTS }
+export {checkUserAgentIsBot, BOTS_USER_AGENTS}
