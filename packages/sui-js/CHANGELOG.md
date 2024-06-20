@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 2.32.0 (2024-06-20)
+
+
+### Features
+
+* add final line ([abad6e5](https://github.com/SUI-Components/sui/commit/abad6e5a3cd5c750ca2bcf8cf8cb27094a384296))
+* add method to check if user agent is a bot ([a8e60f7](https://github.com/SUI-Components/sui/commit/a8e60f798dc2a1fabf3c4d3f6b67f696149dd1de))
+* adding legitimate in bots wording ([7160267](https://github.com/SUI-Components/sui/commit/71602672dc37849364bbaf640c83a6cce293b9ea))
+* change naming and context ([c048f25](https://github.com/SUI-Components/sui/commit/c048f258492e73213f7d738776e424c5c23ce296))
+* lint export ([9f43526](https://github.com/SUI-Components/sui/commit/9f43526a8981ec9368b089f4de01b77016e10075))
+* typo ([331619c](https://github.com/SUI-Components/sui/commit/331619cbc28749df138cb48f884e7c912f159b09))
+
+
+
 # 2.31.0 (2024-03-23)
 
 
