@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.6.0 (2024-06-20)
+
+
+### Bug Fixes
+
+* add expected attribution for inp ([acc4a16](https://github.com/SUI-Components/sui/commit/acc4a1658635181b64562774cac7174e4ff3f337))
+
+
+
 # 2.5.0 (2024-06-19)
 
 
