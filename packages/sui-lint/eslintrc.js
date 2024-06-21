@@ -106,6 +106,35 @@ const JEST_TESTING_RULES = {
   'jest-dom/prefer-to-have-value': RULES.ERROR
 }
 
+const TESTING_LIBRARY_RULES = {
+  'testing-library/await-async-events': RULES.WARNING,
+  'testing-library/await-async-queries': RULES.WARNING,
+  'testing-library/await-async-utils': RULES.WARNING,
+  'testing-library/consistent-data-testid': RULES.OFF,
+  'testing-library/no-await-sync-events': RULES.WARNING,
+  'testing-library/no-await-sync-queries': RULES.WARNING,
+  'testing-library/no-container': RULES.WARNING,
+  'testing-library/no-debugging-utils': RULES.WARNING,
+  'testing-library/no-dom-import': RULES.WARNING,
+  'testing-library/no-global-regexp-flag-in-query': RULES.WARNING,
+  'testing-library/no-manual-cleanup': RULES.WARNING,
+  'testing-library/no-node-access': RULES.WARNING,
+  'testing-library/no-promise-in-fire-event': RULES.WARNING,
+  'testing-library/no-render-in-lifecycle': RULES.WARNING,
+  'testing-library/no-unnecessary-act': RULES.WARNING,
+  'testing-library/no-wait-for-multiple-assertions': RULES.WARNING,
+  'testing-library/no-wait-for-side-effects': RULES.WARNING,
+  'testing-library/no-wait-for-snapshot': RULES.WARNING,
+  'testing-library/prefer-explicit-assert': RULES.WARNING,
+  'testing-library/prefer-find-by': RULES.WARNING,
+  'testing-library/prefer-implicit-assert': RULES.WARNING,
+  'testing-library/prefer-presence-queries': RULES.WARNING,
+  'testing-library/prefer-query-matchers': RULES.WARNING,
+  'testing-library/prefer-screen-queries': RULES.WARNING,
+  'testing-library/prefer-user-event': RULES.WARNING,
+  'testing-library/render-result-naming-convention': RULES.WARNING
+}
+
 const IMPORT_SORT_GROUPS = [
   // Side effect and polyfill imports.
   ['^\\u0000'],
@@ -235,6 +264,13 @@ module.exports = {
     {
       files: ['**/__tests__/**/*.js'],
       rules: JEST_TESTING_RULES
+    },
+    {
+      files: ['**/components/**/__tests__/*.test.js', 'components/**/__tests__/*.test.js'],
+      plugins: ['testing-library'],
+      rules: {
+        ...TESTING_LIBRARY_RULES
+      }
     }
   ]
 }
