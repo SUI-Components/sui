@@ -43,8 +43,29 @@ domain.get('current_user_use_case').execute().then((products) => {
   console.log(products) // ['pineapple', 'apple', 'strawberry', 'coffee']
 })
 ```
+### Spying use cases
 
+> You can spy a use case with the 'for' and 'respondWith' functions. This will allow you to check if the use case has been called and with which arguments. This feature is very useful in tests.
 
+```js
+import { DomainBuilder } from '@s-ui/studio-tools'
+import myDomain from 'domain'
+import sinon from 'sinon'
+
+describe('when the use case is called', () => {
+  it('should be able to spy on the use case', async () => {
+    const spy = sinon.spy(() => {
+      return ['avocado', 'banana', 'peaches', 'pisto']
+    })
+    const domain = DomainBuilder.extend({ myDomain })
+      .for({useCase: 'get_products'})
+      .respondWith({ success: spy }).build()
+    const response = await domain.get('get_products').execute()
+    expect(response).toEqual(['avocado', 'banana', 'peaches', 'pisto'])
+    expect(spy.called).toBe(true)
+  })
+})
+```
 ### Mocking the configuration
 
 ```js
