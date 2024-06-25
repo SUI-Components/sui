@@ -98,7 +98,7 @@ module.exports = {
 
         if (isUseCase) {
           const hasExportedFactoryVariable = Boolean(
-            node.parent.body.find(
+            node?.parent?.body?.find(
               body =>
                 body?.type === 'ExportNamedDeclaration' &&
                 body?.declaration?.type === 'VariableDeclaration' &&
