@@ -14,8 +14,20 @@ ruleTester.run('factory-pattern', rule, {
     {
       code: dedent`
         class User {
-          static create() { return new User() }
+          static create() {
+            return new User()
+          }
         }
+      `
+    },
+    {
+      code: dedent`
+        class User extends UseCase {
+          static create() {
+            return new User()
+          }
+        }
+        export const factory = User.create
       `
     }
   ],
@@ -24,15 +36,18 @@ ruleTester.run('factory-pattern', rule, {
     {
       code: dedent`
         class Model {
-          constructor() { this.name = 'John Doe' }
-        }`,
+          constructor() {
+            this.name = 'John Doe'
+          }
+        }
+      `,
       errors: [
         {
           message: dedent`
-            You have to define at least one static function that return an instance of your class.
-            Avoid to use the 'new' keyword directly in your code.
-            Use always a factory function
-        `
+      You have to define at least one static method that returns an instance of your class.
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
+      `
         }
       ]
     },
@@ -47,10 +62,10 @@ ruleTester.run('factory-pattern', rule, {
       errors: [
         {
           message: dedent`
-            You have to define at least one static function that return an instance of your class.
-            Avoid to use the 'new' keyword directly in your code.
-            Use always a factory function
-        `
+      You have to define at least one static method that returns an instance of your class.
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
+      `
         }
       ]
     },
@@ -65,10 +80,26 @@ ruleTester.run('factory-pattern', rule, {
       errors: [
         {
           message: dedent`
-            You have to define at least one static function that return an instance of your class.
-            Avoid to use the 'new' keyword directly in your code.
-            Use always a factory function
-        `
+      You have to define at least one static method that returns an instance of your class.
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
+      `
+        }
+      ]
+    },
+    {
+      code: dedent`
+        class Config extends UseCase {
+          static create() {
+            return new Config()
+          }
+        }
+      `,
+      errors: [
+        {
+          message: dedent`
+      You have to define a constant named 'factory' that returns the create method.
+      `
         }
       ]
     },
@@ -79,10 +110,10 @@ ruleTester.run('factory-pattern', rule, {
       errors: [
         {
           message: dedent`
-            You have to define at least one static function that return an instance of your class.
-            Avoid to use the 'new' keyword directly in your code.
-            Use always a factory function
-        `
+      You have to define at least one static method that returns an instance of your class.
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
+      `
         }
       ]
     }

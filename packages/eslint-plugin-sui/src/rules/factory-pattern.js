@@ -22,15 +22,37 @@ module.exports = {
     fixable: null,
     schema: [],
     messages: {
+      notFoundExportedFactoryNamedDeclaration: dedent`
+      You have to define a constant named 'factory' that returns the create method.
+      `,
       notFoundFactoryFunction: dedent`
-      You have to define at least one static function that return an instance of your class.
-      Avoid to use the 'new' keyword directly in your code.
-      Use always a factory function
+      You have to define at least one static method that returns an instance of your class.
+      Avoid using the 'new' keyword directly in your code. 
+      Always use a factory function
       `
     }
   },
   create: function (context) {
     // variables should be defined here
+    const ENTITY_SUPER_CLASS = 'Entity'
+    const ERROR_SUPER_CLASS = 'Error'
+    const MAPPER_SUPER_CLASS = 'Mapper'
+    const REPOSITORY_SUPER_CLASS = 'Repository'
+    const SERVICE_SUPER_CLASS = 'Service'
+    const USE_CASE_SUPER_CLASS = 'UseCase'
+    const VALUE_OBJECT_SUPER_CLASS = 'ValueObject'
+
+    const SUPER_CLASS_TYPES = {
+      ENTITY: ENTITY_SUPER_CLASS,
+      ERROR: ERROR_SUPER_CLASS,
+      MAPPER: MAPPER_SUPER_CLASS,
+      REPOSITORY: REPOSITORY_SUPER_CLASS,
+      SERVICE: SERVICE_SUPER_CLASS,
+      USE_CASE: USE_CASE_SUPER_CLASS,
+      VALUE_OBJECT: VALUE_OBJECT_SUPER_CLASS
+    }
+
+    const SUPER_CLASS_TYPES_WITH_CUSTOM_CREATE_METHOD = [SUPER_CLASS_TYPES.ENTITY, SUPER_CLASS_TYPES.VALUE_OBJECT]
 
     // ----------------------------------------------------------------------
     // Helpers
@@ -44,20 +66,52 @@ module.exports = {
 
     return {
       ClassDeclaration(node) {
-        const hasStaticFactoryMethod = Boolean(
-          node.body?.body?.find(methodDefinition => {
-            return (
-              methodDefinition.static &&
-              methodDefinition.value?.body?.body?.find?.(body => body.type === 'ReturnStatement')?.argument?.callee?.name === node?.id?.name // eslint-disable-line
-            )
-          })
-        )
+        if (!SUPER_CLASS_TYPES_WITH_CUSTOM_CREATE_METHOD.includes(node?.superClass?.name)) {
+          const createMethod = node?.body?.body?.find(
+            body => body?.type === 'MethodDefinition' && body?.static && body?.key?.name === 'create'
+          )
 
-        if (!hasStaticFactoryMethod) {
-          context.report({
-            node: node?.id ?? node.superClass ?? node,
-            messageId: 'notFoundFactoryFunction'
-          })
+          if (!createMethod) {
+            context.report({
+              node: node?.id ?? node?.superClass ?? node,
+              messageId: 'notFoundFactoryFunction'
+            })
+          }
+
+          if (createMethod) {
+            const hasReturnStatement = Boolean(
+              createMethod?.value?.body?.body?.find(
+                body => body?.type === 'ReturnStatement' && body?.argument?.type === 'NewExpression'
+              )
+            )
+
+            if (!hasReturnStatement) {
+              context.report({
+                node: node?.id ?? node?.superClass ?? node,
+                messageId: 'notFoundFactoryFunction'
+              })
+            }
+          }
+        }
+
+        const isUseCase = node?.superClass?.name === USE_CASE_SUPER_CLASS
+
+        if (isUseCase) {
+          const hasExportedFactoryVariable = Boolean(
+            node.parent.body.find(
+              body =>
+                body?.type === 'ExportNamedDeclaration' &&
+                body?.declaration?.type === 'VariableDeclaration' &&
+                body?.declaration?.declarations?.[0]?.id?.name === 'factory'
+            )
+          )
+
+          if (!hasExportedFactoryVariable) {
+            context.report({
+              node: node?.id ?? node?.superClass ?? node,
+              messageId: 'notFoundExportedFactoryNamedDeclaration'
+            })
+          }
         }
       }
     }
