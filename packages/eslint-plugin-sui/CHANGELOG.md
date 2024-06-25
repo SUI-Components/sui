@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.8.0 (2024-06-25)
+
+
+### Features
+
+* prevent optimistic access ([e6a8b2d](https://github.com/SUI-Components/sui/commit/e6a8b2d8510fe79156cf4725e757d8c342de3625))
+
+
+
 # 1.7.0 (2024-06-25)
 
 
