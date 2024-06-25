@@ -45,8 +45,8 @@ ruleTester.run('factory-pattern', rule, {
         {
           message: dedent`
       You have to define at least one static method that returns an instance of your class.
-      Avoid to use the 'new' keyword directly in your code. 
-      Use always a factory function
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
       `
         }
       ]
@@ -63,8 +63,8 @@ ruleTester.run('factory-pattern', rule, {
         {
           message: dedent`
       You have to define at least one static method that returns an instance of your class.
-      Avoid to use the 'new' keyword directly in your code. 
-      Use always a factory function
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
       `
         }
       ]
@@ -81,8 +81,8 @@ ruleTester.run('factory-pattern', rule, {
         {
           message: dedent`
       You have to define at least one static method that returns an instance of your class.
-      Avoid to use the 'new' keyword directly in your code. 
-      Use always a factory function
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
       `
         }
       ]
@@ -111,8 +111,8 @@ ruleTester.run('factory-pattern', rule, {
         {
           message: dedent`
       You have to define at least one static method that returns an instance of your class.
-      Avoid to use the 'new' keyword directly in your code. 
-      Use always a factory function
+      Avoid using the 'new' keyword directly in your code.
+      Always use a factory function
       `
         }
       ]
