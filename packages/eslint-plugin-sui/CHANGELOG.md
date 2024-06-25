@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.7.0 (2024-06-25)
+
+
+### Features
+
+* factory pattern rules update ([a36e579](https://github.com/SUI-Components/sui/commit/a36e5796147bde8e946295a9cd8285aeb9b11181))
+* update description error text ([cde14c2](https://github.com/SUI-Components/sui/commit/cde14c28ec905b23c82aca984cb0dd6ca030da9f))
+
+
+
 # 1.6.0 (2024-06-10)
 
 
