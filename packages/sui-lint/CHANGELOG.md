@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.45.0 (2024-06-26)
+
+
+### Features
+
+* Add TESTING_LIBRARY_RULES on sui-lint for Jest folders ([4bd2fa8](https://github.com/SUI-Components/sui/commit/4bd2fa89e37bfc4f01eaa77717fe6a7dbd20854b))
+
+
+
 # 4.44.0 (2024-06-17)
 
 
