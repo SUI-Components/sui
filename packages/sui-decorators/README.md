@@ -26,18 +26,25 @@ npm install @s-ui/decorators
 
 ### @inlineError
 
-Wrapper any function and handle the errors for you:
+Wrapper any function and handle the errors for you.
 
-If the function return a promise:
-
-- When is resolved return [null, resp]
-- When is rejected return [err, null]
-- When throw an exception return [err, null]
+#### Workflows
 
 If the function is a sync function:
 
 - When is execute return [null, resp]
 - When throw an exception return [err, null]
+
+If the function return a promise: (You should use the `@AsyncInlineError()`)
+
+- When is resolved return [null, resp]
+- When is rejected return [err, null]
+- When throw an exception return [err, null]
+
+> [!WARNING]  
+> If you use the @inlineError on async functions, you should migrate it and use the new @AsyncInlineError() instead. You will see a console warning on your browser and an ESlint warning in your linting health.
+
+#### Example
 
 ```javascript
 import {inlineError} from '@s-ui/decorators'
