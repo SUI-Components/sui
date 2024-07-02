@@ -3,6 +3,7 @@ const SerializeDeserialize = require('./rules/serialize-deserialize.js')
 const CommonJS = require('./rules/commonjs.js')
 const Decorators = require('./rules/decorators.js')
 const DecoratorAsyncInlineError = require('./rules/decorator-async-inline-error.js')
+const DecoratorInlineError = require('./rules/decorator-inline-error.js')
 const LayersArch = require('./rules/layers-architecture.js')
 
 // ------------------------------------------------------------------------------
@@ -17,6 +18,7 @@ module.exports = {
     commonjs: CommonJS,
     decorators: Decorators,
     'decorator-async-inline-error': DecoratorAsyncInlineError,
+    'decorator-inline-error': DecoratorInlineError,
     'layers-arch': LayersArch
   }
 }
