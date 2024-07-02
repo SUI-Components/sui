@@ -4,6 +4,7 @@
 'use strict'
 
 const dedent = require('string-dedent')
+const path = require('path')
 
 // ------------------------------------------------------------------------------
 // Rule Definition
@@ -14,15 +15,22 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
-      description: 'Ensure that at least all your UseCases are using @AsyncInlineError decorator from sui',
+      description:
+        'Ensure that at least all your UseCases, Services and Repositories are using @AsyncInlineError decorator from sui',
       recommended: true,
       url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements'
     },
     fixable: 'code',
     schema: [],
     messages: {
-      notFoundAsyncInlineErrorDecorator: dedent`
-        The execute method of a UseCase or Service and the public Repository methods should use the @AsyncInlineError() decorator in order to follow the Adevinta domain code guidelines.
+      notFoundAsyncInlineErrorDecoratorOnUseCase: dedent`
+        The execute method of a UseCase should use the @AsyncInlineError() decorator in order to follow the Adevinta domain code guidelines.
+        `,
+      notFoundAsyncInlineErrorDecoratorOnService: dedent`
+        The execute method of a Service should use the @AsyncInlineError() decorator in order to follow the Adevinta domain code guidelines.
+        `,
+      notFoundAsyncInlineErrorDecoratorOnRepository: dedent`
+        The public Repository methods should use the @AsyncInlineError() decorator in order to follow the Adevinta domain code guidelines.
         `,
       asyncInlineErrorDecoratorIsNotFirst: dedent`
         The @AsyncInlineError() decorator must be the first one assigned into the method to avoid inconsistence with other decorators.
@@ -30,6 +38,19 @@ module.exports = {
     }
   },
   create: function (context) {
+    const filePath = context.getFilename()
+    const relativePath = path.relative(context.getCwd(), filePath)
+
+    // Check if the file is inside requierd folders (useCases, services, repositories, ...)
+    const useCasePattern = /useCases|usecases/i
+    const isUseCasePath = useCasePattern.test(relativePath)
+
+    const servicePattern = /services/i
+    const isServicePath = servicePattern.test(relativePath)
+
+    const repositoryPattern = /repositories/i
+    const isRepositoryPath = repositoryPattern.test(relativePath)
+
     return {
       MethodDefinition(node) {
         // Method
@@ -45,17 +66,17 @@ module.exports = {
         // UseCase
         const containUseCase = className?.endsWith('UseCase')
         const extendsUseCase = superClassName === 'UseCase'
-        const isUsecase = containUseCase || extendsUseCase
+        const isUsecase = containUseCase || extendsUseCase || isUseCasePath
 
         // Service
         const containService = className?.endsWith('Service')
         const extendsService = superClassName === 'Service'
-        const isService = containService || extendsService
+        const isService = containService || extendsService || isServicePath
 
         // Repository
         const containRepository = className?.endsWith('Repository')
         const extendsRepository = superClassName === 'Repository'
-        const isRepository = containRepository || extendsRepository
+        const isRepository = containRepository || extendsRepository || isRepositoryPath
 
         // Skip if it's not a UseCase, Service or Repository
         if (!isUsecase && !isService && !isRepository && !isExecuteMethod) return
@@ -64,6 +85,7 @@ module.exports = {
         if (methodName === 'constructor') return
         if (methodName.startsWith('_')) return
         if (methodName.startsWith('#')) return
+        if ((isUsecase || isService) && !isExecuteMethod) return
 
         // Method decorators
         const methodDecorators = method.decorators
@@ -79,10 +101,22 @@ module.exports = {
           hasDecorators && methodDecorators?.at(-1)?.expression?.callee?.name === 'AsyncInlineError'
 
         // RULE: The method should have the @AsyncInlineError decorator
-        if (!asyncInlineErrorDecoratorNode) {
+        if (!asyncInlineErrorDecoratorNode && isUsecase) {
           context.report({
             node: method.key,
-            messageId: 'notFoundAsyncInlineErrorDecorator'
+            messageId: 'notFoundAsyncInlineErrorDecoratorOnUseCase'
+          })
+        }
+        if (!asyncInlineErrorDecoratorNode && isService) {
+          context.report({
+            node: method.key,
+            messageId: 'notFoundAsyncInlineErrorDecoratorOnService'
+          })
+        }
+        if (!asyncInlineErrorDecoratorNode && isRepository) {
+          context.report({
+            node: method.key,
+            messageId: 'notFoundAsyncInlineErrorDecoratorOnRepository'
           })
         }
 
