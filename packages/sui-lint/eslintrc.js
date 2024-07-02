@@ -239,7 +239,8 @@ module.exports = {
       rules: {
         'sui/factory-pattern': RULES.WARNING,
         'sui/serialize-deserialize': RULES.WARNING,
-        'sui/decorators': RULES.WARNING
+        'sui/decorators': RULES.WARNING,
+        'sui/decorator-async-inline-error': RULES.WARNING
       }
     },
     {
