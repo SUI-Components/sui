@@ -27,6 +27,9 @@ module.exports = {
         `,
       useInlineErrorOnNonAsyncFunctions: dedent`
         The @inlineError decorator should be used on non async functions.
+        `,
+      inlineErrorDecoratorIsNotFirst: dedent`
+        The @inlineError decorator must always be closest to the execute method to avoid inconsistence with other decorators.
         `
     }
   },
@@ -91,7 +94,11 @@ module.exports = {
         const inlineErrorDecoratorNode =
           hasDecorators && methodDecorators?.find(decorator => decorator?.expression?.name === 'inlineError')
 
+        // Check if the @inlineError decorator is the last one
+        const isInlineErrorLastDecorator = hasDecorators && methodDecorators?.at(-1)?.expression?.name === 'inlineError'
+
         // TODO: Pending to check if a function is returning a promise (not using async/await syntax)
+        // RULE: An async function MUST use the @AsyncInlineError() decorator
         if (inlineErrorDecoratorNode && isAsync) {
           context.report({
             node: inlineErrorDecoratorNode,
@@ -104,11 +111,27 @@ module.exports = {
           })
         }
 
-        if (!isAsync && !inlineErrorDecoratorNode) {
-          context.report({
-            node: method.key,
-            messageId: 'useInlineErrorOnNonAsyncFunctions'
-          })
+        // @inlineError decorator should be used on non async functions
+        if (!isAsync) {
+          // RULE: A non-async function should use the @inlineError decorator should be the first one
+          if (!inlineErrorDecoratorNode) {
+            context.report({
+              node: method.key,
+              messageId: 'useInlineErrorOnNonAsyncFunctions'
+            })
+          }
+
+          // RULE: The @inlineError decorator should be the first one, to avoid inconsistencies with other decorators.
+          if (inlineErrorDecoratorNode && !isInlineErrorLastDecorator) {
+            context.report({
+              node: inlineErrorDecoratorNode,
+              messageId: 'inlineErrorDecoratorIsNotFirst',
+              *fix(fixer) {
+                yield fixer.remove(inlineErrorDecoratorNode)
+                yield fixer.insertTextAfter(methodDecorators.at(-1), '\n@inlineError')
+              }
+            })
+          }
         }
       }
     }

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Ensure that at least all your UseCases are using @inlineError and @tracer decorator from sui
+ * @fileoverview Ensure that at least all your UseCases are using the @tracer decorator from sui
  */
 'use strict'
 
@@ -14,24 +14,18 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
-      description: 'Ensure that at least all your UseCases are using @inlineError and @tracer decorator from sui',
+      description: 'Ensure that at least all your UseCases are using the @tracer decorator from sui',
       recommended: true,
       url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements'
     },
     fixable: 'code',
     schema: [],
     messages: {
-      missingInlineError: dedent`
-        All our UseCases must have an @inlineError decorator.
-      `,
       missingTracer: dedent`
         All our UseCases must have a @tracer() decorator.
       `,
       tracerMissCall: dedent`
         Your tracer decorator should be call always with the name of your class
-      `,
-      inlineErrorMissplace: dedent`
-        the inlineError decorator should be always the first
       `
     }
   },
@@ -41,28 +35,11 @@ module.exports = {
         const className = node.parent?.parent?.id?.name
         const shouldExtendFromUseCase = node.parent?.parent?.superClass?.name === 'UseCase'
         const isExecute = node.key?.name === 'execute' && shouldExtendFromUseCase
-        const hasInlineError = node.decorators?.some(node => node.expression?.name === 'inlineError')
         const tracerNode = node.decorators?.find(node => node.expression?.callee?.name === 'tracer')
         const isTracerCalledWithClassName =
           tracerNode?.expression?.callee?.name === 'tracer' &&
           className + '#' + node.key?.name === tracerNode?.expression?.arguments[0]?.properties[0]?.value?.value &&
           tracerNode?.expression?.arguments[0]?.properties[0]?.key?.name === 'metric'
-        const isInlineErrorTheFirst = node.decorators?.at(-1)?.expression?.name === 'inlineError'
-
-        isExecute &&
-          !hasInlineError &&
-          context.report({
-            node: node.key,
-            messageId: 'missingInlineError'
-          })
-
-        isExecute &&
-          hasInlineError &&
-          !isInlineErrorTheFirst &&
-          context.report({
-            node: node.key,
-            messageId: 'inlineErrorMissplace'
-          })
 
         isExecute &&
           !tracerNode &&
