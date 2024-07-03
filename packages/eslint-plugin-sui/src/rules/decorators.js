@@ -31,7 +31,7 @@ module.exports = {
         Your tracer decorator should be call always with the name of your class
       `,
       inlineErrorMissplace: dedent`
-        the inlineError decorator should be always the first
+        The inlineError decorator should always be closest to the execute method
       `
     }
   },
