@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.9.0 (2024-07-03)
+
+
+### Features
+
+* rephrase message for inlineErrorMisplace rule ([c0d8b2e](https://github.com/SUI-Components/sui/commit/c0d8b2e9b52213edef9ce1753dcdc87807d00fc3))
+
+
+
 # 1.8.0 (2024-06-25)
 
 
