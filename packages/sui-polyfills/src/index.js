@@ -35,6 +35,10 @@ require('core-js/proposals/well-formed-unicode-strings')
 
 require('element-polyfill/polyfills/element.parent-node.append.js')
 
+require('core-js/features/array/at.js')
+require('core-js/features/promise/all-settled.js')
+require('core-js/proposals/promise-with-resolvers.js')
+
 require('./element-closest.js')
 require('./globalThis.js')
 
