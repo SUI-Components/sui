@@ -3,6 +3,7 @@ const SerializeDeserialize = require('./rules/serialize-deserialize.js')
 const CommonJS = require('./rules/commonjs.js')
 const Decorators = require('./rules/decorators.js')
 const LayersArch = require('./rules/layers-architecture.js')
+const CreationalPatternModel = require('./rules/creational-pattern-model.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -15,6 +16,7 @@ module.exports = {
     'serialize-deserialize': SerializeDeserialize,
     commonjs: CommonJS,
     decorators: Decorators,
-    'layers-arch': LayersArch
+    'layers-arch': LayersArch,
+    'creational-pattern-model': CreationalPatternModel
   }
 }
