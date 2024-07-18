@@ -49,9 +49,9 @@ module.exports = {
             messageId: 'missingCreateFromPrimitivesMethod'
           })
 
-          const hasStaticModifier = createFromPrimitives.static
+        const hasStaticModifier = createFromPrimitives.static
 
-        if(!hasStaticModifier)
+        if (!hasStaticModifier)
           return context.report({
             node: createFromPrimitives,
             messageId: 'missingCreateFromPrimitivesMethodStatic'
