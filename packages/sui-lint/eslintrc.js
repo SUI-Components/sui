@@ -210,7 +210,8 @@ module.exports = {
       rules: {
         'sui/factory-pattern': RULES.WARNING,
         'sui/serialize-deserialize': RULES.WARNING,
-        'sui/decorators': RULES.WARNING
+        'sui/decorators': RULES.WARNING,
+        'sui/creational-pattern-model': RULES.WARNING
       }
     },
     {
