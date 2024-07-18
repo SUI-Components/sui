@@ -21,17 +21,20 @@ module.exports = {
     fixable: null,
     schema: [],
     messages: {
-      missingCreateFromPrimitivesMethod: dedent`If your class is a domain model (Value Object or Entity), you have to define a 'static createFromPrimitives' method.`,
-      missingCreateFromPrimitivesMethodStatic: dedent`The createFromPrimitives method should be static`
+      missingCreateFromPrimitivesMethod: dedent`
+        If your class is a domain model (Value Object or Entity), you have to define a 'static createFromPrimitives' method.
+      `,
+      missingCreateFromPrimitivesMethodStatic: dedent`
+        The createFromPrimitives method should be static
+      `
     }
   },
 
   create(context) {
     return {
       ClassDeclaration(node) {
-
         const createFromPrimitives = node.body.body.find(i => i.key.name === 'createFromPrimitives')
-        
+
         const className = node?.id?.name ?? ''
 
         const allowedWords = ['VO', 'ValueObject', 'Entity']
@@ -46,7 +49,7 @@ module.exports = {
             messageId: 'missingCreateFromPrimitivesMethod'
           })
 
-        const hasStaticModifier = createFromPrimitives.static
+          const hasStaticModifier = createFromPrimitives.static
 
         if(!hasStaticModifier)
           return context.report({
