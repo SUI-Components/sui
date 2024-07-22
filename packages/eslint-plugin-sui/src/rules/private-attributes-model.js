@@ -68,7 +68,7 @@ module.exports = {
             const existNativeGetterWithAttributeKey = method.key.name === attribute.key.name && method.kind === 'get'
             const existCustomGetterWithAttributeKey = method.key.name === customGetterName
 
-            if (existNativeGetterWithAttributeKey | existCustomGetterWithAttributeKey) {
+            if (existNativeGetterWithAttributeKey || existCustomGetterWithAttributeKey) {
               hasGetter = true
             }
           })
