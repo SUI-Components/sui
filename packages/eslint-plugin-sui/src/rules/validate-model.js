@@ -4,6 +4,7 @@
 'use strict'
 
 const dedent = require('string-dedent')
+const path = require('path')
 
 // ------------------------------------------------------------------------------
 // Rule Definition
@@ -31,6 +32,16 @@ module.exports = {
   },
 
   create(context) {
+    const filePath = context.getFilename()
+    const relativePath = path.relative(context.getCwd(), filePath)
+
+    // Check if the file is inside requierd folders (useCases, services, repositories, ...)
+    const valueObjectPattern = /valueObjects|valueobjects|ValueObjects|Valueobjects/i
+    const isValueObjectPath = valueObjectPattern.test(relativePath)
+
+    const entityPattern = /entity|Entity/i
+    const isEntityPath = entityPattern.test(relativePath)
+
     return {
       ClassDeclaration(node) {
         const validateMethod = node.body.body.find(i => i.key.name === 'validate')
@@ -41,7 +52,8 @@ module.exports = {
 
         const isDomainModel = allowedWords.some(allowWord => className.includes(allowWord))
 
-        if (!isDomainModel) return // eslint-disable-line
+        if (!isDomainModelName && !isValueObjectPath) return
+        if (!isDomainModelName && !isEntityPath) return
 
         if (!validateMethod)
           return context.report({
