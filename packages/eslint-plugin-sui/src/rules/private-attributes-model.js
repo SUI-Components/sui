@@ -22,7 +22,7 @@ module.exports = {
     schema: [],
     messages: {
       attributeHasToBePrivate: dedent`
-        If your class is a domain model (Value Object or Entity), you have to define all attributes as private.
+        If your class is a domain model (Value Object or Entity), you have to define all attributes as private with #.
       `,
       privateAttributeHasToHaveGetter: dedent`
         If your class is a domain model (Value Object or Entity), you have to define a getter for the attribute #{{attributeName}}.
