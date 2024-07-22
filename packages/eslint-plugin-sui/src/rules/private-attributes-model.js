@@ -49,11 +49,12 @@ module.exports = {
         const allowedWords = ['VO', 'ValueObject', 'Entity']
         const isDomainModelName = allowedWords.some(allowWord => className.includes(allowWord))
 
-        if (!isDomainModelName || !isValueObjectPath || !isEntityPath) return // eslint-disable-line
+        if (!isDomainModelName && !isValueObjectPath) return
+        if (!isDomainModelName && !isEntityPath) return
 
         // Check if all attributes are public
         const publicAttributes = node.body.body.filter(node => {
-          return node.type === 'PropertyDefinition' && node.key.type === 'Identifier'
+          return node.type === 'PropertyDefinition' && node.key.type === 'Identifier' && node.value?.type !== 'ArrowFunctionExpression'
         })
 
         publicAttributes.forEach(attribute => {
@@ -67,7 +68,9 @@ module.exports = {
         const privateAttributes = node.body.body.filter(node => {
           return node.type === 'PropertyDefinition' && node.key.type === 'PrivateIdentifier'
         })
-        const classMethods = node.body.body.filter(node => node.type === 'MethodDefinition')
+        const classMethods = node.body.body.filter(node => {
+          return node.type === 'MethodDefinition' || node.value?.type === 'ArrowFunctionExpression'
+        })
 
         privateAttributes.forEach(attribute => {
           let hasGetter = false
