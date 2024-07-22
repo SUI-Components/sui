@@ -50,7 +50,7 @@ module.exports = {
 
         const allowedWords = ['VO', 'ValueObject', 'Entity']
 
-        const isDomainModel = allowedWords.some(allowWord => className.includes(allowWord))
+        const isDomainModelName = allowedWords.some(allowWord => className.includes(allowWord))
 
         if (!isDomainModelName && !isValueObjectPath) return
         if (!isDomainModelName && !isEntityPath) return
