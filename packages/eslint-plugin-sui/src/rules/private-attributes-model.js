@@ -54,7 +54,11 @@ module.exports = {
 
         // Check if all attributes are public
         const publicAttributes = node.body.body.filter(node => {
-          return node.type === 'PropertyDefinition' && node.key.type === 'Identifier' && node.value?.type !== 'ArrowFunctionExpression'
+          return (
+            node.type === 'PropertyDefinition' &&
+            node.key.type === 'Identifier' &&
+            node.value?.type !== 'ArrowFunctionExpression'
+          )
         })
 
         publicAttributes.forEach(attribute => {
