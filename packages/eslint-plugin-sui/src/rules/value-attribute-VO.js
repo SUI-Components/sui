@@ -98,9 +98,8 @@ module.exports = {
         `
 
         classMethods.forEach(method => {
-          const existNativeGetterWithAttributeKey = 
-            method?.key?.name === valueAttribute?.key?.name &&
-            method?.kind === 'get'
+          const existNativeGetterWithAttributeKey =
+            method?.key?.name === valueAttribute?.key?.name && method?.kind === 'get'
           const existCustomGetterWithAttributeKey = method?.key?.name === customGetterName
 
           if (existNativeGetterWithAttributeKey || existCustomGetterWithAttributeKey) {
