@@ -81,7 +81,8 @@ module.exports = {
           const customGetterName = `get${attribute.key.name.charAt(0).toUpperCase()}${attribute.key.name.slice(1)}`
 
           classMethods.forEach(method => {
-            const existNativeGetterWithAttributeKey = method?.key?.name === attribute?.key?.name && method?.kind === 'get'
+            const existNativeGetterWithAttributeKey =
+              method?.key?.name === attribute?.key?.name && method?.kind === 'get'
             const existCustomGetterWithAttributeKey = method?.key?.name === customGetterName
 
             if (existNativeGetterWithAttributeKey || existCustomGetterWithAttributeKey) {
