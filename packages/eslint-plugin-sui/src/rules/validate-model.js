@@ -44,9 +44,9 @@ module.exports = {
 
     return {
       ClassDeclaration(node) {
-        const validateMethod = node.body.body.find(i => i.key.name === 'validate')
+        const validateMethod = node.body?.body?.find(i => i.key?.name === 'validate')
 
-        const className = node?.id?.name ?? ''
+        const className = node.id?.name ?? ''
 
         const allowedWords = ['VO', 'ValueObject', 'Entity']
 
