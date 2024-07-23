@@ -45,7 +45,7 @@ module.exports = {
 
     return {
       ClassDeclaration(node) {
-        const className = node?.id?.name ?? ''
+        const className = node.id?.name ?? ''
         const allowedWords = ['VO', 'ValueObject', 'Entity']
         const isDomainModelName = allowedWords.some(allowWord => className.includes(allowWord))
 
@@ -53,10 +53,10 @@ module.exports = {
         if (!isDomainModelName && !isEntityPath) return
 
         // Check if all attributes are public
-        const publicAttributes = node.body.body.filter(node => {
+        const publicAttributes = node?.body?.body?.filter(node => {
           return (
             node.type === 'PropertyDefinition' &&
-            node.key.type === 'Identifier' &&
+            node.key?.type === 'Identifier' &&
             node.value?.type !== 'ArrowFunctionExpression'
           )
         })
@@ -70,7 +70,7 @@ module.exports = {
 
         // Check if a private attribute has a public accessor
         const privateAttributes = node.body.body.filter(node => {
-          return node.type === 'PropertyDefinition' && node.key.type === 'PrivateIdentifier'
+          return node.type === 'PropertyDefinition' && node.key?.type === 'PrivateIdentifier'
         })
         const classMethods = node.body.body.filter(node => {
           return node.type === 'MethodDefinition' || node.value?.type === 'ArrowFunctionExpression'
@@ -81,8 +81,8 @@ module.exports = {
           const customGetterName = `get${attribute.key.name.charAt(0).toUpperCase()}${attribute.key.name.slice(1)}`
 
           classMethods.forEach(method => {
-            const existNativeGetterWithAttributeKey = method.key.name === attribute.key.name && method.kind === 'get'
-            const existCustomGetterWithAttributeKey = method.key.name === customGetterName
+            const existNativeGetterWithAttributeKey = method?.key?.name === attribute?.key?.name && method?.kind === 'get'
+            const existCustomGetterWithAttributeKey = method?.key?.name === customGetterName
 
             if (existNativeGetterWithAttributeKey || existCustomGetterWithAttributeKey) {
               hasGetter = true
@@ -94,7 +94,7 @@ module.exports = {
               node: attribute,
               messageId: 'privateAttributeHasToHaveGetter',
               data: {
-                attributeName: attribute.key.name,
+                attributeName: attribute?.key?.name,
                 customGetterName
               }
             })
