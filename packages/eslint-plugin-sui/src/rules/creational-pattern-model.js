@@ -44,9 +44,9 @@ module.exports = {
 
     return {
       ClassDeclaration(node) {
-        const createFromPrimitives = node.body.body.find(i => i.key.name === 'createFromPrimitives')
+        const createFromPrimitives = node.body?.body?.find(i => i.key.name === 'createFromPrimitives')
 
-        const className = node?.id?.name ?? ''
+        const className = node.id?.name ?? ''
 
         const allowedWords = ['VO', 'ValueObject', 'Entity']
 
