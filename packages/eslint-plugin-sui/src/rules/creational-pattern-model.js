@@ -1,5 +1,5 @@
 /**
- * @fileoverview ensure entity createFromPrimitive mMethod
+ * @fileoverview ensure entity createFromPrimitive method
  */
 'use strict'
 
