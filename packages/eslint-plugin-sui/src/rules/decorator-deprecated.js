@@ -4,6 +4,7 @@
 'use strict'
 
 const dedent = require('string-dedent')
+const {getDecoratorsByNode, getElementName, getElementMessageName} = require('../utils/decorators')
 
 // ------------------------------------------------------------------------------
 // Rule Definition
@@ -33,83 +34,86 @@ module.exports = {
     }
   },
   create: function (context) {
-    // TODO: Check using decorator in a Class.
-    return {
-      MethodDefinition(node) {
-        // Method
-        const method = node
-        const methodName = method.key?.name
+    function ruleRunner(node) {
+      const isAClass = node.type === 'ClassDeclaration'
+      const isArrowFunction = node.type === 'ArrowFunctionExpression'
+      const isAMethod = node.type === 'MethodDefinition'
 
-        // Method decorators
-        const methodDecorators = method.decorators
-        const hasDecorators = methodDecorators?.length > 0
+      const nodeName = getElementName(node, {isAClass, isAMethod, isArrowFunction})
+      const decorators = getDecoratorsByNode(node, {isAClass, isAMethod, isArrowFunction})
+      const hasDecorators = decorators?.length > 0
 
-        if (!hasDecorators) return
+      // Get the @Deprecated() decorator from node decorators
+      const deprecatedDecoratorNode =
+        hasDecorators && decorators?.find(decorator => decorator?.expression?.callee?.name === 'Deprecated')
 
-        // Get the @Deprecated() decorator from method
-        const deprecatedDecoratorNode =
-          hasDecorators && methodDecorators?.find(decorator => decorator?.expression?.callee?.name === 'Deprecated')
+      if (!deprecatedDecoratorNode) return
 
-        if (!deprecatedDecoratorNode) return
+      const deprecatedDecoratorArguments = deprecatedDecoratorNode.expression?.arguments
+      // The decorator must have 1 argument and it should be an object
+      const hasArgument = deprecatedDecoratorArguments.length === 1
+      const argumentDecorator = hasArgument && deprecatedDecoratorArguments[0]
+      const isObjectExpression = hasArgument && argumentDecorator.type === 'ObjectExpression'
+      const argumentsAreInvalid = !hasArgument || !isObjectExpression
 
-        const methodArguments = deprecatedDecoratorNode?.expression?.arguments
-        const hasArgument = methodArguments.length === 1
-        const argumentDecorator = hasArgument && methodArguments[0]
-        const isObjectExpression = hasArgument && argumentDecorator.type === 'ObjectExpression'
-        const argumentsAreInvalid = !hasArgument || !isObjectExpression
+      // Get decorator arguments: key and message
+      const keyProperty = !argumentsAreInvalid && argumentDecorator.properties?.find(prop => prop?.key?.name === 'key')
+      const messageProperty =
+        !argumentsAreInvalid && argumentDecorator.properties?.find(prop => prop?.key?.name === 'message')
 
-        // Get decorator arguments: key and message
-        const keyProperty =
-          !argumentsAreInvalid && argumentDecorator.properties?.find(prop => prop?.key?.name === 'key')
-        const messageProperty =
-          !argumentsAreInvalid && argumentDecorator.properties?.find(prop => prop?.key?.name === 'message')
+      const elementMessageName = getElementMessageName(nodeName, {isAClass, isAMethod, isArrowFunction})
 
-        // RULE: Decorator must have 1 argument as an object with Key and Message properties
-        if (argumentsAreInvalid || (!keyProperty && !messageProperty)) {
-          context.report({
-            node: deprecatedDecoratorNode,
-            messageId: 'notFoundDecoratorArgumentError',
-            *fix(fixer) {
-              yield fixer.insertTextBefore(
-                deprecatedDecoratorNode,
-                `\n  @Deprecated({key: '${methodName}', message: 'The ${methodName} function is deprecated.'})`
-              )
-              yield fixer.remove(deprecatedDecoratorNode)
-            }
-          })
-          return
-        }
-
-        // RULE: Decorator must have a key property and generates it if it doesn't exist
-        if (!keyProperty && messageProperty) {
-          context.report({
-            node: deprecatedDecoratorNode,
-            messageId: 'notFoundKeyDecoratorArgumentError',
-            *fix(fixer) {
-              yield fixer.insertTextBefore(
-                deprecatedDecoratorNode,
-                `\n  @Deprecated({key: '${methodName}', message: '${messageProperty.value.value}'})`
-              )
-              yield fixer.remove(deprecatedDecoratorNode)
-            }
-          })
-        }
-
-        // RULE: Decorator must have a message property and generates it if it doesn't exist
-        if (keyProperty && !messageProperty) {
-          context.report({
-            node: deprecatedDecoratorNode,
-            messageId: 'notFoundMessageDecoratorArgumentError',
-            *fix(fixer) {
-              yield fixer.insertTextBefore(
-                deprecatedDecoratorNode,
-                `\n  @Deprecated({key: '${keyProperty.value.value}', message: 'The ${methodName} function is deprecated.'})`
-              )
-              yield fixer.remove(deprecatedDecoratorNode)
-            }
-          })
-        }
+      // RULE: Decorator must have 1 argument as an object with Key and Message properties
+      if (argumentsAreInvalid || (!keyProperty && !messageProperty)) {
+        context.report({
+          node: deprecatedDecoratorNode,
+          messageId: 'notFoundDecoratorArgumentError',
+          *fix(fixer) {
+            yield fixer.insertTextBefore(
+              deprecatedDecoratorNode,
+              `\n  @Deprecated({key: '${nodeName}', message: 'The ${elementMessageName} is deprecated.'})`
+            )
+            yield fixer.remove(deprecatedDecoratorNode)
+          }
+        })
+        return
       }
+
+      // RULE: Decorator must have a key property and generates it if it doesn't exist
+      if (!keyProperty && messageProperty) {
+        context.report({
+          node: deprecatedDecoratorNode,
+          messageId: 'notFoundKeyDecoratorArgumentError',
+          *fix(fixer) {
+            yield fixer.insertTextBefore(
+              deprecatedDecoratorNode,
+              `\n  @Deprecated({key: '${nodeName}', message: '${messageProperty.value.value}'})`
+            )
+            yield fixer.remove(deprecatedDecoratorNode)
+          }
+        })
+      }
+
+      // RULE: Decorator must have a message property and generates it if it doesn't exist
+      if (keyProperty && !messageProperty) {
+        context.report({
+          node: deprecatedDecoratorNode,
+          messageId: 'notFoundMessageDecoratorArgumentError',
+          *fix(fixer) {
+            yield fixer.insertTextBefore(
+              deprecatedDecoratorNode,
+              `\n  @Deprecated({key: '${keyProperty.value.value}', message: 'The ${elementMessageName} function is deprecated.'})`
+            )
+            yield fixer.remove(deprecatedDecoratorNode)
+          }
+        })
+      }
+    }
+
+    return {
+      ClassDeclaration: ruleRunner,
+      MethodDefinition: ruleRunner,
+      ArrowFunctionExpression: ruleRunner
     }
   }
 }

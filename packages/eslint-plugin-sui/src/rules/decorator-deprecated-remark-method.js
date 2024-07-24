@@ -4,70 +4,11 @@
 'use strict'
 
 const dedent = require('string-dedent')
+const {getDecoratorsByNode, getElementMessageName, getElementName, remarkElement} = require('../utils/decorators.js')
 
 // ------------------------------------------------------------------------------
 // Rule Definition
 // ------------------------------------------------------------------------------
-
-function getElementName(node, {isAClass, isAMethod, isArrowFunction}) {
-  if (isAClass) {
-    const className = node.id?.name ?? 'UnknownClass'
-    return `class ${className}`
-  }
-
-  if (isArrowFunction) {
-    const methodNode = node.parent
-    const classNode = methodNode?.parent?.parent
-    const className = classNode.id?.name ?? 'UnknownClass'
-    const methodName = methodNode.key?.name ?? 'UnknownMethod'
-
-    return `method ${className}.${methodName}`
-  }
-
-  if (isAMethod) {
-    const classNode = node.parent?.parent
-    const className = classNode.id?.name ?? 'UnknownClass'
-    const methodName = node.key?.name ?? 'UnknownMethod'
-
-    return `method ${className}.${methodName}`
-  }
-
-  return 'unknown'
-}
-
-function getDecoratorsNode(node, {isAClass, isAMethod, isArrowFunction}) {
-  if (isAClass) {
-    return node.decorators
-  }
-
-  if (isArrowFunction) {
-    const methodNode = node.parent
-    return methodNode.decorators ?? []
-  }
-
-  if (isAMethod) {
-    return node.decorators ?? []
-  }
-
-  return []
-}
-
-function remarkElement(node, {isAClass, isAMethod, isArrowFunction}) {
-  if (isAClass) {
-    return node.id
-  }
-
-  if (isArrowFunction) {
-    const methodNode = node.parent
-    return methodNode.key
-  }
-
-  if (isAMethod) {
-    return node.key
-  }
-
-  return node
-}
 
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
@@ -93,7 +34,7 @@ module.exports = {
       const isAMethod = node.type === 'MethodDefinition'
 
       const nodeName = getElementName(node, {isAClass, isAMethod, isArrowFunction})
-      const decorators = getDecoratorsNode(node, {isAClass, isAMethod, isArrowFunction})
+      const decorators = getDecoratorsByNode(node, {isAClass, isAMethod, isArrowFunction})
       const hasDecorators = decorators?.length > 0
 
       // Get the @Deprecated() decorator from node decorators
@@ -101,8 +42,8 @@ module.exports = {
         hasDecorators && decorators?.find(decorator => decorator?.expression?.callee?.name === 'Deprecated')
 
       if (!deprecatedDecoratorNode) return
-      console.log(nodeName, deprecatedDecoratorNode)
 
+      const elementMessageName = getElementMessageName(nodeName, {isAClass, isAMethod, isArrowFunction})
       const nodeToRemark = remarkElement(node, {isAClass, isAMethod, isArrowFunction})
 
       // RULE: Mark method with a warning
@@ -110,7 +51,7 @@ module.exports = {
         node: nodeToRemark,
         messageId: 'remarkWarningMessage',
         data: {
-          methodName: nodeName
+          methodName: elementMessageName
         }
       })
     }
