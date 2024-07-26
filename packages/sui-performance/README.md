@@ -36,6 +36,8 @@ export default function Example() {
 
 Use this function to delay the execution of an expensive operation while the main thread is idle, using [requestIdleCallback](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback), and to prioritize user actions. This method ensures the execution is completed before the user leaves the page. It is especially useful for delaying tracking execution.
 
+The `delayTaskUntilUrgent` function optionally receives an options object. The documentation can be found [here](https://github.com/redbus-labs/idlefy/tree/main?tab=readme-ov-file#methods) ([idlefy](https://github.com/redbus-labs/idlefy/tree/main) is used under the hood).
+
 ```jsx
 import {delayTaskUntilUrgent} from '@s-ui/performance';
 
