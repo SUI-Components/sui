@@ -1,6 +1,6 @@
 # @s-ui/performance
 
-> Track the performance of pages using Core Web Vitals in real-time for all the visits
+> Performance utilities to make your web application go fast ⚡️
 
 ## Installation
 
@@ -8,4 +8,48 @@
 npm install @s-ui/performance
 ```
 
-## 
+## Usage
+
+### Delay code execution
+
+Use this function to delay the execution of an expensive operation and prioritize user actions. Keep in mind that it only delays the response by a maximum of 1 frame, an average of 8ms, which is too little for a human to notice for the types of major actions where you’d use this function.
+
+```jsx
+import {delayTask} from '@s-ui/performance';
+
+export default function Example() {
+  const [counter, setCounter] = useState(0)
+
+  const handleClick = async () => {
+    setCounter(counter => counter + 1)
+
+    await delayTask()
+
+    work() // expensive work
+  }
+
+  return <button onClick={handleClick}>{counter}</button>
+}
+```
+
+### Delay code execution until urgent
+
+Use this function to delay the execution of an expensive operation while the main thread is idle, using [requestIdleCallback](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback), and to prioritize user actions. This method ensures the execution is completed before the user leaves the page. It is especially useful for delaying tracking execution.
+
+```jsx
+import {delayTaskUntilUrgent} from '@s-ui/performance';
+
+export default function Example() {
+  const [counter, setCounter] = useState(0)
+
+  const handleClick = async () => {
+    setCounter(counter => counter + 1)
+
+    await delayTaskUntilUrgent()
+
+    track() // expensive work
+  }
+
+  return <button onClick={handleClick}>{counter}</button>
+}
+```
