@@ -72,3 +72,8 @@ export default function Example() {
 
 > The INP value is 43ms: Input delay 1ms, Processing time 7ms and Presentation delay 35ms.
 
+### Performance Profiles (via [trace.cafe](https://trace.cafe/))
+
+- [Non-optimized](https://trace.cafe/t/bNv6tcpIpv)
+- [Use the delayTask method](https://trace.cafe/t/ShXAOWyFT4)
+- [Use the delayTaskUntilUrgent method](https://trace.cafe/t/bBuq2l0cxQ)
