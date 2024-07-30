@@ -1,7 +1,5 @@
 import {IdleQueue} from 'idlefy'
 
-const queue = new IdleQueue({ensureTasksRun: true})
-
 export function delayTask() {
   return new Promise(resolve => {
     setTimeout(resolve, 100)
@@ -12,6 +10,8 @@ export function delayTask() {
 }
 
 export function delayTaskUntilUrgent(options) {
+  const queue = new IdleQueue({ensureTasksRun: true})
+
   return new Promise(resolve => {
     queue.pushTask(resolve, options)
   })
