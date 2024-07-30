@@ -15,7 +15,7 @@ npm install @s-ui/performance
 Use this function to delay the execution of an expensive operation and prioritize user actions. Keep in mind that it only delays the response by a maximum of 1 frame, an average of 8ms, which is too little for a human to notice for the types of major actions where you’d use this function.
 
 ```jsx
-import {delayTask} from '@s-ui/performance';
+import {delayTask} from '@s-ui/performance'
 
 export default function Example() {
   const [counter, setCounter] = useState(0)
@@ -39,7 +39,7 @@ Use this function to delay the execution of an expensive operation while the mai
 The `delayTaskUntilUrgent` function optionally receives an options object. The documentation can be found [here](https://github.com/redbus-labs/idlefy/tree/main?tab=readme-ov-file#methods) ([idlefy](https://github.com/redbus-labs/idlefy/tree/main) is used under the hood).
 
 ```jsx
-import {delayTaskUntilUrgent} from '@s-ui/performance';
+import {delayTaskUntilUrgent} from '@s-ui/performance'
 
 export default function Example() {
   const [counter, setCounter] = useState(0)
@@ -55,3 +55,20 @@ export default function Example() {
   return <button onClick={handleClick}>{counter}</button>
 }
 ```
+
+## Demo
+
+[Here](https://stackblitz.com/edit/vitejs-vite-nnuycs?file=src%2FApp.jsx) you have a demo on stackblitz.
+
+### Non-optimized version
+
+![Non-optimized version](./assets/Non-optimized.webp)
+
+> The INP value is 312ms: Input delay 2ms, Processing time 273ms and Presentation delay 36ms.
+
+### Optimize version
+
+![Optimized version](./assets/Optimized.webp)
+
+> The INP value is 43ms: Input delay 1ms, Processing time 7ms and Presentation delay 35ms.
+
