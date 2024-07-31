@@ -63,3 +63,7 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 - `test:server` - Run server tests
 - `test:server:watch` - Run server tests and watch for changes
 - `test:e2e` - Run E2E tests
+
+## Project Stats
+
+![Project Stats](https://repobeats.axiom.co/api/embed/0f3c2ce931553c4d7dc2338a83e4d8f7caf87160.svg "Repobeats analytics image")
