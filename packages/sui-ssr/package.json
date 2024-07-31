@@ -40,6 +40,6 @@
     "ua-parser-js": "0.7.33",
     "webpack-dev-middleware": "6.1.2",
     "webpack-hot-middleware": "2.25.4",
-    "nodemon": "3.0.1"
+    "nodemon": "3.1.4"
   }
 }
