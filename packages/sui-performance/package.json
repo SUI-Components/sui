@@ -1,0 +1,26 @@
+{
+  "name": "@s-ui/performance",
+  "version": "1.2.0",
+  "description": "",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "prepublishOnly": "npm run lib",
+    "test:browser:watch": "NODE_ENV=test npm run test:browser -- --watch",
+    "test:browser": "NODE_ENV=test sui-test browser",
+    "test:server:watch": "npm run test:server -- --watch",
+    "test:server": "NODE_ENV=test sui-test server",
+    "test": "npm run test:server && npm run test:browser"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "idlefy": "1.1.1"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@s-ui/test": "8"
+  }
+}
