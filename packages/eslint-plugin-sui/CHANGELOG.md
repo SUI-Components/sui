@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.10.0 (2024-07-31)
+
+
+### Features
+
+* Create rules for @Deprecated() decorator ([aa22a8d](https://github.com/SUI-Components/sui/commit/aa22a8dfec796998c4f3d52c7154a3dd643c458a))
+* Make decorator-deprecated-remark-method runs on classes ([5b9ee47](https://github.com/SUI-Components/sui/commit/5b9ee47f596cd516d6204adeac0e03a8bf9cb8b1))
+* Make deprecated-decorator rules running on Classes, Methods and Ar ([ec08bf4](https://github.com/SUI-Components/sui/commit/ec08bf4bd5af6f4466f0d2291d0e8f4efcb6971a))
+
+
+
 # 1.9.0 (2024-07-03)
 
 
