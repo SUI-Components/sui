@@ -14,13 +14,14 @@ npm install @s-ui/decorators
 
 ## Available decorators
 
-| Name                  | Description                                                                         | Link                               |
-| --------------------- | ----------------------------------------------------------------------------------- | ---------------------------------- |
-| `@inlineError`        | Wrap a function to handle the errors for you.                                       | [Take me there](#inlineerror)      |
-| `@AsyncInlineError()` | Wrap an async function to handle errors for you and return a tuple [error, result]. | [Take me there](#asyncinlineerror) |
-| `@streamify()`        | Creates a stream of calls to any method of a class.                                 | [Take me there](#streamify)        |
-| `@cache()`            | Creates a Memory or LRU cache.                                                      | [Take me there](#cache)            |
-| `@tracer()`           | Sends a performance timing metric to the configured reporter.                       | [Take me there](#tracer)           |
+| Name                  | Description                                                                                      | Link                               |
+| --------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------- |
+| `@inlineError`        | Wrap a function to handle the errors for you.                                                    | [Take me there](#inlineerror)      |
+| `@AsyncInlineError()` | Wrap an async function to handle errors for you and return a tuple [error, result].              | [Take me there](#asyncinlineerror) |
+| `@streamify()`        | Creates a stream of calls to any method of a class.                                              | [Take me there](#streamify)        |
+| `@cache()`            | Creates a Memory or LRU cache.                                                                   | [Take me there](#cache)            |
+| `@tracer()`           | Sends a performance timing metric to the configured reporter.                                    | [Take me there](#tracer)           |
+| `@Deprecated()`       | Dispatch a warning message on browser cli and enables you the possibility of monitor those logs. | [Take me there](#deprecated)       |
 
 ## Reference
 
@@ -337,4 +338,54 @@ The `@tracer` decorator works fine with the `@inlineError` decorator, but it sho
   @inlineError
   async execute({path}) {
   ...
+```
+
+### @Deprecated()
+
+Used in a Class or Method, it will help you to mark code as deprecated and follow logs and add monitoring to check if someone is using the code before to be removed. It can be usefull for refactors.
+
+To enable the possibility of monitor those logs, you should add a reporter to the global scope. This reporter will be called each time the method with the decorator is called. See the example below to see how to do it.
+
+#### Decorator Arguments
+
+This decorator needs 2 parameters:
+
+- `message`: A message to be shown in the console when the method is called.
+- `key`: Used to identify the log when you add monitoring.
+
+> [!NOTE]
+> We suggest you to put some unique Keys and explicit messages to make your life easier on detect which methos is being used and avoid duplicated warning messages on your CLI.
+
+#### Example of usage
+
+```javascript
+import {Deprecated} from '@s-ui/decorators'
+
+// Using the decorator in a method
+class Buzz {
+  @Deprecated({key: 'method', message: 'method is deprecated, use newMethod instead'})
+  method() {
+    return Promise.reject(new Error('KO'))
+  }
+}
+
+// Using the decorator in a class
+@Deprecated({key: 'class', message: 'Buzz class is deprecated, use X class instead'})
+class Buzz {
+  method() {
+    return Promise.reject(new Error('KO'))
+  }
+}
+```
+
+#### Example adding monitoring
+
+```javascript
+const deprecatedLogsMiddleware = ({key, message}) => {
+  console.warn(`Deprecated ==> key: ${key} - message: ${message}`)
+  // Here you send this data to your monitoring tool
+}
+
+global.__SUI_DECORATOR_DEPRECATED_REPORTER__ = deprecatedLogsMiddleware
+window.__SUI_DECORATOR_DEPRECATED_REPORTER__ = deprecatedLogsMiddleware
 ```
