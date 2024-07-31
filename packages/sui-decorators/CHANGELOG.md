@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.27.0 (2024-07-31)
+
+
+### Features
+
+* Create new @Deprecated() decorator ([9ebc5af](https://github.com/SUI-Components/sui/commit/9ebc5aff5688330918be1db48a98b745031f3514))
+
+
+
 # 3.26.0 (2024-05-06)
 
 
