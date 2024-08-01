@@ -24,7 +24,7 @@ module.exports = {
       https: require.resolve('https-browserify'),
       path: false
     },
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.tsx', '.ts', '.json'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: config.vendor
