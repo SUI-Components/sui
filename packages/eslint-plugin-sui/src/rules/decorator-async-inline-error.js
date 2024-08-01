@@ -4,7 +4,8 @@
 'use strict'
 
 const dedent = require('string-dedent')
-const path = require('path')
+const {getDecoratorsByNode} = require('../utils/decorators.js')
+const {isAUseCase, isAService, isARepository} = require('../utils/domain.js')
 
 // ------------------------------------------------------------------------------
 // Rule Definition
@@ -38,19 +39,6 @@ module.exports = {
     }
   },
   create: function (context) {
-    const filePath = context.getFilename()
-    const relativePath = path.relative(context.getCwd(), filePath)
-
-    // Check if the file is inside requierd folders (useCases, services, repositories, ...)
-    const useCasePattern = /useCases|usecases/i
-    const isUseCasePath = useCasePattern.test(relativePath)
-
-    const servicePattern = /services/i
-    const isServicePath = servicePattern.test(relativePath)
-
-    const repositoryPattern = /repositories/i
-    const isRepositoryPath = repositoryPattern.test(relativePath)
-
     return {
       MethodDefinition(node) {
         // Method
@@ -60,23 +48,9 @@ module.exports = {
 
         // Class
         const classObject = node.parent?.parent
-        const className = classObject?.id?.name
-        const superClassName = classObject?.superClass?.name
-
-        // UseCase
-        const containUseCase = className?.endsWith('UseCase')
-        const extendsUseCase = superClassName === 'UseCase'
-        const isUsecase = containUseCase || extendsUseCase || isUseCasePath
-
-        // Service
-        const containService = className?.endsWith('Service')
-        const extendsService = superClassName === 'Service'
-        const isService = containService || extendsService || isServicePath
-
-        // Repository
-        const containRepository = className?.endsWith('Repository')
-        const extendsRepository = superClassName === 'Repository'
-        const isRepository = containRepository || extendsRepository || isRepositoryPath
+        const isUsecase = isAUseCase({context, classObject})
+        const isService = isAService({context, classObject})
+        const isRepository = isARepository({context, classObject})
 
         // Skip if it's not a UseCase, Service or Repository
         if (!isUsecase && !isService && !isRepository && !isExecuteMethod) return
@@ -88,7 +62,7 @@ module.exports = {
         if ((isUsecase || isService) && !isExecuteMethod) return
 
         // Method decorators
-        const methodDecorators = method.decorators
+        const methodDecorators = getDecoratorsByNode(node, {isAMethod: true})
         const hasDecorators = methodDecorators?.length > 0
 
         // Get the @AsyncInlineError decorator from method
@@ -107,12 +81,14 @@ module.exports = {
             messageId: 'notFoundAsyncInlineErrorDecoratorOnUseCase'
           })
         }
+
         if (!asyncInlineErrorDecoratorNode && isService) {
           context.report({
             node: method.key,
             messageId: 'notFoundAsyncInlineErrorDecoratorOnService'
           })
         }
+
         if (!asyncInlineErrorDecoratorNode && isRepository) {
           context.report({
             node: method.key,
