@@ -37,6 +37,15 @@ describe('@s-ui/js', () => {
 
     it('should convert object params to query string with arrayFormat repeat and delimiter :', () => {
       const queryParams = {a: 1, b: 'test', m: [1, 2]}
+      const options = {arrayFormat: 'repeat', delimiter: ':'}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = 'a=1:b=test:m=1:m=2'
+      expect(expected).to.be.equal(queryString)
+    })
+
+    it('should convert object params to query string with question mark query prefix', () => {
+      const queryParams = {a: 1}
       const options = {addQueryPrefix: true}
       const queryString = toQueryString(queryParams, options)
 
@@ -45,20 +54,11 @@ describe('@s-ui/js', () => {
     })
 
     it('should convert object params to query string without null values', () => {
-      const queryParams = {a: [1, null, 2]}
+      const queryParams = {a: [1, null, 3]}
       const options = {skipNulls: true}
       const queryString = toQueryString(queryParams, options)
 
-      const expected = 'a[0]=1&a[2]=2'
-      expect(expected).to.be.equal(queryString)
-    })
-
-    it('should convert object params to query string with question mark query prefix', () => {
-      const queryParams = {a: 1}
-      const options = {arrayFormat: 'repeat', delimiter: ':'}
-      const queryString = toQueryString(queryParams, options)
-
-      const expected = 'a=1:b=test:m=1:m=2'
+      const expected = 'a[0]=1&a[2]=3'
       expect(expected).to.be.equal(queryString)
     })
   })
