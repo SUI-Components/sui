@@ -43,6 +43,24 @@ describe('@s-ui/js', () => {
       const expected = 'a=1:b=test:m=1:m=2'
       expect(expected).to.be.equal(queryString)
     })
+
+    it('should convert object params to query string with question mark query prefix', () => {
+      const queryParams = {a: 1}
+      const options = {addQueryPrefix: true}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = '?a=1'
+      expect(expected).to.be.equal(queryString)
+    })
+
+    it('should convert object params to query string without null values', () => {
+      const queryParams = {a: [1, null, 3]}
+      const options = {encode: false, skipNulls: true}
+      const queryString = toQueryString(queryParams, options)
+
+      const expected = 'a[0]=1&a[2]=3'
+      expect(expected).to.be.equal(queryString)
+    })
   })
   describe('string:parseQueryString', () => {
     it('should convert query string to object params', () => {
