@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.62.0 (2024-08-01)
+
+
+### Features
+
+* add ts support for all the bundling modes ([1daa177](https://github.com/SUI-Components/sui/commit/1daa177411143518269bbe562add536a7ea69f62))
+
+
+
 # 9.61.0 (2024-05-07)
 
 
