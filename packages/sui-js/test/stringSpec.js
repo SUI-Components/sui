@@ -55,7 +55,7 @@ describe('@s-ui/js', () => {
 
     it('should convert object params to query string without null values', () => {
       const queryParams = {a: [1, null, 3]}
-      const options = {skipNulls: true}
+      const options = {encode: false, skipNulls: true}
       const queryString = toQueryString(queryParams, options)
 
       const expected = 'a[0]=1&a[2]=3'
