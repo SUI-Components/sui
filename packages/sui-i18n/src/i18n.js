@@ -211,7 +211,8 @@ export default class Rosetta {
       let {key, children} = match.groups
 
       // Handle nested matches
-      if (interpolateRegExp.test(children)) {
+      const nestedRegExp = /%\[(?<key>[\S\s]*?)\b\](?<children>[\S\s]*?)\[\1\]%/gi
+      if (nestedRegExp.test(children)) {
         children = this.interpolate(children, values)
       }
 
