@@ -12,7 +12,7 @@ import {stringify} from 'qs'
  * @param {boolean} [options.skipNulls=false] - skip null values
  */
 function toQueryString(queryParams, options = {}) {
-  const {addQueryPrefix = false, arrayFormat, delimiter, encode = true, skipNulls = false } = options
+  const {addQueryPrefix = false, arrayFormat, delimiter, encode = true, skipNulls = false} = options
 
   const mergedOptions = {
     addQueryPrefix,
