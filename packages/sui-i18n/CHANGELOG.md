@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.35.0 (2024-08-02)
+
+
+### Bug Fixes
+
+* Do not reuse regex when checking nested interpolations ([de91053](https://github.com/SUI-Components/sui/commit/de91053dc3dacae09767aa14e8a71638cfd607b2))
+
+
+### Features
+
+* Reuse the interpolate regex and handle its statefull by reseting the lastIn ([e8ed174](https://github.com/SUI-Components/sui/commit/e8ed1744bea62a33e885e67543e213beab21d88a))
+
+
+
 # 1.34.0 (2023-06-13)
 
 
@@ -285,6 +299,3 @@
 ### Features
 
 * **sui-i18n:** add package.json ([b5b25a7](https://github.com/SUI-Components/sui/commit/b5b25a72faf1cf82c3e5805af97800cbf073ae96)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
-
-
-
