@@ -2,6 +2,8 @@ import {slugify} from '@s-ui/js/lib/string/slugify.js'
 
 import DefaultAdapter from './adapters/default.js'
 
+const INTERPOLATE_REGEX = /%\[(?<key>[\S\s]*?)\b\](?<children>[\S\s]*?)\[\1\]%/gi
+
 export default class Rosetta {
   constructor({adapter = new DefaultAdapter()} = {}) {
     this._culture = null
@@ -195,14 +197,13 @@ export default class Rosetta {
 
   // Interpolate each text chunk, returning an array of all the transformed chunks.
   interpolate(key, values = {}) {
-    // Redeclare the RegExp on each call to make it stateless
-    const interpolateRegExp = /%\[(?<key>[\S\s]*?)\b\](?<children>[\S\s]*?)\[\1\]%/gi
-
     // Perform basic replace for static values
     const str = this.t(key, values)
 
     // Identify all the occurrences which are like: %[key]children[key]%, save {key, children} in a group for every match
-    const matches = str.matchAll(interpolateRegExp)
+    // Reset the state of the regex to start from the beginning
+    INTERPOLATE_REGEX.lastIndex = 0
+    const matches = str.matchAll(INTERPOLATE_REGEX)
 
     let remaining = str
 
@@ -211,7 +212,9 @@ export default class Rosetta {
       let {key, children} = match.groups
 
       // Handle nested matches
-      if (interpolateRegExp.test(children)) {
+      // We need to reset the lastIndex to 0 to start the search from the beginning
+      INTERPOLATE_REGEX.lastIndex = 0
+      if (INTERPOLATE_REGEX.test(children)) {
         children = this.interpolate(children, values)
       }
 
