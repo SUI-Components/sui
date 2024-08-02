@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@s-ui/theme": "8",
-    "classnames": "2.2.5"
+    "classnames": "2.5.1"
   },
   "repository": {
     "type": "git",
