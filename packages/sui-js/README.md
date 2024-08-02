@@ -123,6 +123,13 @@ console.log(hasAccents('Árbol')) // true
 import {parseQueryString} from '@s-ui/js/lib/string'
 
 console.log(parseQueryString('?targetPage=pta')) // {targetPage: "pta"}
+console.log(parseQueryString('?makeIds[0]=123&makeIds[2]=456')) // {makeIds: ["123", "456"]}
+
+// example with allowSparse option
+const query = '?makeIds[0]=123&makeIds[2]=456'
+const options = {allowSparse: true}
+const parsedQueryString = parseQueryString(query, options)
+console.log(parsedQueryString) // {makeIds: ["123", undefined, "456"]}
 ```
 
 ```js
@@ -162,6 +169,18 @@ const queryParams = {a: 1, b: 'lorem/ipsum', m: [1, 2]}
 const options = {encode: false}
 const queryString = toQueryString(queryParams, options)
 console.log(queryString) // 'a=1&b=lorem/ipsum&m=1,2'
+
+// example with addQueryPrefix option
+const queryParams = {a: 1, b: 2}
+const options = {addQueryPrefix: true}
+const queryString = toQueryString(queryParams, options)
+console.log(queryString) // '?a=1&b=2'
+
+// example with skipNulls option
+const queryParams = {a: 1, b: null}
+const options = {skipNulls: true}
+const queryString = toQueryString(queryParams, options)
+console.log(queryString) // 'a=1'
 ```
 
 ```js
