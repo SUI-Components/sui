@@ -1,4 +1,4 @@
-import isPromise from '../helpers/isPromise'
+import isPromise from '../helpers/isPromise.js'
 
 const _runner = ({instance, original} = {}) => {
   return function (...args) {
@@ -11,6 +11,7 @@ const _runner = ({instance, original} = {}) => {
     try {
       const returns = original.apply(instance.__STREAMIFY__ ? this : instance, args)
       if (isPromise(returns)) {
+        console.warn('You should use the @AsyncInlineError() decorator in async functions.')
         return returns
           .then(r => {
             response[0] = null

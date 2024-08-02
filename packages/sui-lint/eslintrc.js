@@ -240,8 +240,10 @@ module.exports = {
         'sui/factory-pattern': RULES.WARNING,
         'sui/serialize-deserialize': RULES.WARNING,
         'sui/decorators': RULES.WARNING,
+        'sui/decorator-async-inline-error': RULES.WARNING,
         'sui/decorator-deprecated': RULES.ERROR,
-        'sui/decorator-deprecated-remark-method': RULES.WARNING
+        'sui/decorator-deprecated-remark-method': RULES.WARNING,
+        'sui/decorator-inline-error': RULES.WARNING
       }
     },
     {
