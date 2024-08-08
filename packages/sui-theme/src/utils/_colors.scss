@@ -25,14 +25,18 @@ $color-darken-steps: 20, 35, 55, 75 !default;
   $variation: $color;
 
   @if ($step > $positive-steps) {
-    $variation: mix($light, $color, nth($color-lighten-steps, $positive-steps));
+    $variation: color-mix(in srgb, $color-variation-light #{'#{nth($color-lighten-steps, $positive-steps)}%'}, $color);
   } @else if ($step < -$negative-steps) {
-    $variation: mix($dark, $color, nth($color-darken-steps, $negative-steps));
+    $variation: color-mix(in srgb, $color-variation-dark #{'#{nth($color-darken-steps, $negative-steps)}%'}, $color);
   } @else if ($step < 0) {
-    $variation: mix($dark, $color, nth($color-darken-steps, -$step));
+    $variation: color-mix(in srgb, $color-variation-dark #{'#{nth($color-darken-steps, -$step)}%'}, $color);
   } @else if ($step > 0) {
-    $variation: mix($light, $color, nth($color-lighten-steps, $step));
+    $variation: color-mix(in srgb, $color-variation-light #{'#{nth($color-lighten-steps, $step)}%'}, $color);
   }
 
   @return $variation;
+}
+
+@function transparentize($color, $amount) {
+  @return color-mix(in srgb, $color #{'#{(1 - $amount) * 100}%'}, transparent);
 }
