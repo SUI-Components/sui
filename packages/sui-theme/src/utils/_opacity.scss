@@ -4,7 +4,7 @@
 // @include bgcolor-opacity($c-black);
 
 @mixin bgcolor-opacity($color) {
-  background-color: rgba($color, 1);
+  background-color: color-mix(in srgb, $color 100%, transparent);
 
   @each $value in $c-opacity {
     &-#{$value} {
