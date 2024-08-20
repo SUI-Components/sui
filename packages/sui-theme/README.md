@@ -27,37 +27,11 @@ If you want to customize your components, create your own theme and add it to yo
 @import '~@s-ui/theme/lib/index';
 ```
 
-## Upgrade from theme-basic@7
+## Upgrade from theme-basic@8 to theme@9
 
-Compatibility variables are still available to import manually.
+rgba
 
-**Import only what you need, in inheritance order**
-
-For instance:
-
-```scss
-@import '../custom-settings';
-@import '~@s-ui/theme/lib/settings-compat-v7/color';
-@import '~@s-ui/theme/lib/settings-compat-v7/spacing';
-@import '~@s-ui/theme/lib/index';
-```
-
-Find below the compat varible groups available:
-
-- [settings-compat-v7/color](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_color.scss)
-- [settings-compat-v7/font](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_font.scss)
-- [settings-compat-v7/spacing](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_spacing.scss)
-- [settings-compat-v7/box-style](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_box-style.scss)
-- [settings-compat-v7/animation](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_animation.scss)
-- [settings-compat-v7/layout](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_layout.scss)
-- [settings-compat-v7/components](https://github.com/SUI-Components/sui-theme/blob/master/src/settings-compat-v7/_components.scss)
-
-**Also, if you need it all for older components, you can do**
-
-```scss
-@import '~@s-ui/theme/lib/settings-compat-v7/index';
-@import '~@s-ui/theme/lib/index';
-```
+Compatibility v7 variables are no longer available to import manually.
 
 ## Media queries and breakpoints
 
@@ -65,7 +39,7 @@ Find below the compat varible groups available:
 
 - Breakpoints must be exactly `xxs`, `xs`, `s`, `m`, `l`, `xl`, `xxl`
 - For new implementations, the only allowed media query is `media-breakpoint-up`
-- `media-breakpoint-down`, `media-breakpoint-only` and `media-breakpoint-between` are deprecated and only kept for legacy reasons.
+- `media-breakpoint-down`, `media-breakpoint-only` and `media-breakpoint-between` are removed.
 
 ### Reason
 
