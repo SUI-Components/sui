@@ -16,10 +16,10 @@ export default ({useCases, config, logger, pde}) =>
     constructor(params = {config: {}, logger: {}, pde: {}}) {
       // decide to use a static config from the factory
       // or use a config passed to the constructor that could be mutated
-      this._config = config || params.config
+      this._config = params.config || config
       this._useCases = useCases
-      this._logger = logger || params.logger
-      this._pde = pde || params.pde
+      this._logger = params.logger || logger
+      this._pde = params.pde || pde
     }
 
     /**
