@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/domain",
   "type": "module",
-  "version": "2.17.0",
+  "version": "2.18.0",
   "description": "SDK for creating domains",
   "main": "lib/index.js",
   "scripts": {
