@@ -1,5 +1,43 @@
 # CHANGELOG
 
+# 8.29.0 (2024-05-13)
+
+
+### Features
+
+* Add SSL option for local development ([f9a0201](https://github.com/SUI-Components/sui/commit/f9a0201bca19e4b5005ad4668ee5b23cfa5d1393))
+* Add SSL to README ([32bb1eb](https://github.com/SUI-Components/sui/commit/32bb1ebf9546b026bf6e4a1de2123cf1a524809d))
+
+
+
+# 8.28.0 (2024-05-02)
+
+
+### Features
+
+* update to patched version to avoid vulnerabilities ([6873ee4](https://github.com/SUI-Components/sui/commit/6873ee468b9b26810feb63e6d7aca99ed469def7))
+
+
+
+# 8.27.0 (2024-04-05)
+
+
+### Bug Fixes
+
+* copy files ([b692c3e](https://github.com/SUI-Components/sui/commit/b692c3ead33bb81198e15bd69ff01b3a6a5a4fcb))
+* copy ssr dev 404 and 500 html ([27ae05b](https://github.com/SUI-Components/sui/commit/27ae05b0a335f2ca146bc5d46d2f39a394d54234))
+
+
+
+# 8.26.0 (2024-04-05)
+
+
+### Bug Fixes
+
+* internal error ([c7e2524](https://github.com/SUI-Components/sui/commit/c7e252499ada037c4c2d887863378cde192e1c24))
+
+
+
 # 8.25.0 (2024-01-11)
 
 
@@ -1535,6 +1573,3 @@
 ### Features
 
 * **sui-ssr:** add package.json ([d1495ce](https://github.com/SUI-Components/sui/commit/d1495ce76b02d906ca512f59518737411a67acc1)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
-
-
-

@@ -17,6 +17,7 @@ program
   .option('-P, --prefix <prefix>', 'add prefix for this component')
   .option('-S, --scope <scope>', 'add scope for this component')
   .option('-W, --swc', 'Use the new SWC compiler', false)
+  .option('-J, --jest', 'Generate jest tests', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -32,6 +33,7 @@ program
 
 const BASE_DIR = process.cwd()
 const [category, component] = program.args
+const {context, scope, prefix = 'sui', swc, jest} = program.opts()
 
 if (!component) showError('component must be defined')
 if (!category) showError('category must be defined')
@@ -61,10 +63,9 @@ const DEMO_PACKAGE_JSON_FILE = `${DEMO_DIR}package.json`
 const COMPONENT_PLAYGROUND_FILE = `${DEMO_DIR}index.js`
 const COMPONENT_CONTEXT_FILE = `${DEMO_DIR}context.js`
 
-const TEST_DIR = `${COMPONENT_PATH}/test/`
+const TEST_DIR = jest ? `${COMPONENT_PATH}/__tests__/` : `${COMPONENT_PATH}/test/`
 const COMPONENT_TEST_FILE = `${TEST_DIR}index.test.js`
 
-const {context, scope, prefix = 'sui', swc} = program.opts()
 const packageScope = scope ? `@${scope}/` : ''
 const packageCategory = category ? `${toKebabCase(category)}-` : ''
 const packageName = `${packageScope}${prefix}-${packageCategory}${toKebabCase(component)}`
@@ -133,6 +134,22 @@ describe${context ? '.context.default' : ''}('${componentInPascal}', ${context ?
 })
 `
 
+const testJestTemplate = `
+import {render, screen} from 'test/utils/render/index.js'
+import Component from '../src/index.js'
+
+describe('${componentInPascal}', () => {
+  it('should render a h1', async () => {
+    const props = {}
+
+    render(<Component {...props} />)
+
+    const title = await screen.findByRole('heading', {name: '${componentInPascal}', level: 1})
+    expect(title).toBeInTheDocument()
+  })
+})
+`
+
 const defaultContext = `module.exports = {
   default: {
     i18n: {
@@ -168,6 +185,7 @@ node_modules`
 demo
 src
 test
+__tests__
 `
   ),
 
@@ -296,7 +314,7 @@ export default () => <${componentInPascal} />
         isBooleanContext ? defaultContext : fs.readFileSync(`${BASE_DIR}${context}`).toString()
       )
     })(),
-  writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(testTemplate))
+  writeFile(COMPONENT_TEST_FILE, removeRepeatedNewLines(jest ? testJestTemplate : testTemplate))
 ]).then(() => {
   console.log(colors.gray(`[${packageName}]: Installing the dependencies`))
   const install = spawn('npm', ['install', '--legacy-peer-deps', '--no-audit', '--no-fund', '--production=false'])

@@ -1,6 +1,6 @@
 /* eslint no-console:0 */
 
-const conventionalChangelog = require('conventional-changelog')
+const conventionalChangelog = require('./conventional-changelog.js')
 const {readJsonSync} = require('fs-extra')
 
 const {promisify} = require('util')

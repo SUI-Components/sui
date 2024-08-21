@@ -1,5 +1,57 @@
 # CHANGELOG
 
+# 2.18.0 (2024-08-20)
+
+
+### Bug Fixes
+
+* change default constructor ([21eea77](https://github.com/SUI-Components/sui/commit/21eea778ce3dafdd4c398ea74e6d8212c8e6f583))
+* sort params ([d73d516](https://github.com/SUI-Components/sui/commit/d73d5161d5bd1ba14d586d68cb60176d1c1d3a10))
+
+
+
+# 2.17.0 (2024-06-10)
+
+
+### Features
+
+* Add DomainError class ([f89d4fb](https://github.com/SUI-Components/sui/commit/f89d4fb9b0980af58d1e24c9d8d2117113fe50b5))
+
+
+
+# 2.16.0 (2024-05-22)
+
+
+### Features
+
+* adapt entry point factory to be able to work with named exports ([67d6c99](https://github.com/SUI-Components/sui/commit/67d6c993ae42671384eb12c7a034fbdb6d7fa838))
+
+
+
+# 2.15.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* fix linting issues ([6b639a8](https://github.com/SUI-Components/sui/commit/6b639a8b8250ac7702bcac29e4ee9b19e9b88673))
+* update deps ([f57199f](https://github.com/SUI-Components/sui/commit/f57199fbdac2b3cc69d8403a0f109db44f69d312))
+
+
+### Features
+
+* use latest version of swc ([e574610](https://github.com/SUI-Components/sui/commit/e5746101f509d1a516d1cee814318a3e2cbbea33))
+
+
+
+# 2.14.0 (2024-02-07)
+
+
+### Features
+
+* update axios version ([3a218b9](https://github.com/SUI-Components/sui/commit/3a218b9f53b32c92ef259dc1f1da48af79a70a1c))
+
+
+
 # 2.13.0 (2023-12-19)
 
 
@@ -339,6 +391,3 @@ just in case, we must use a major for this and be sure we're able to use this on
 
 * **sui-domain:** create sui-domain package ([15e1124](https://github.com/SUI-Components/sui/commit/15e1124b150ce123e9ecab081e9981e683705a40))
 * **sui-domain:** handle all feedback ([a4fba8a](https://github.com/SUI-Components/sui/commit/a4fba8ac64b1d1799cd5a084d7a8d1baf591b2ec))
-
-
-

@@ -1,6 +1,6 @@
 /* eslint no-console:0 */
 const path = require('path')
-const {getSpawnPromise} = require('./cli')
+const {getSpawnPromise} = require('./cli.js')
 
 /**
  * Get absolute paths of packages

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.15.0 (2024-02-26)
+
+
+### Features
+
+* make e2e folder optional ([2fc202a](https://github.com/SUI-Components/sui/commit/2fc202a47f9eefe58bd4e8c68fa9f2101c01dad5))
+
+
+
 # 1.14.0 (2022-08-09)
 
 
@@ -128,6 +137,3 @@
 * **packages/sui-test-e2e:** Upgrade beta version ([47b38e3](https://github.com/SUI-Components/sui/commit/47b38e3b36cae7261bd392fc832c8a67189172d6))
 * **packages/sui-test-e2e:** Upgrade Cypress version ([d1cb2fc](https://github.com/SUI-Components/sui/commit/d1cb2fcb9d1cfbfda73b83db6e447b9558f2da73))
 * **packages/sui-test-e2e:** Use new config ([7e3a037](https://github.com/SUI-Components/sui/commit/7e3a0379dd767cfdccb8ed898ba317db68e5e06c))
-
-
-

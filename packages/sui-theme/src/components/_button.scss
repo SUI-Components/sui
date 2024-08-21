@@ -44,12 +44,7 @@
     @include sui-button--flat;
   }
   @if $type == 'custom' {
-    @include sui-button--custom(
-      $background-color,
-      $color,
-      $icon-fill,
-      $icon-stroke
-    );
+    @include sui-button--custom($background-color, $color, $icon-fill, $icon-stroke);
   }
 
   @if $size == 'small' {

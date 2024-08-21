@@ -7,20 +7,26 @@ const {HOST, HTTPS} = process.env
 const protocol = HTTPS === 'true' ? 'https' : 'http'
 const host = HOST || '0.0.0.0'
 
+const getOverlayValue = overlay => {
+  return overlay
+    ? {
+        errors: true,
+        warnings: false
+      }
+    : false
+}
+
 const getWatchOptions = ({context, watch}) => {
   if (!watch) return false
   return {ignored: ignoredFiles(context)}
 }
 
 /** @returns {import('webpack-dev-server').Configuration} */
-module.exports = config => ({
+module.exports = ({config, overlay}) => ({
   allowedHosts: 'all',
   client: {
     logging: 'none',
-    overlay: {
-      errors: true,
-      warnings: false
-    },
+    overlay: getOverlayValue(overlay),
     progress: false
   },
   // Enable gzip compression of generated files

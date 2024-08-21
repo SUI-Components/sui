@@ -11,7 +11,7 @@ Features:
 ## Installation
 
 ```sh
-$ npm install @s-ui/bundler --save-dev
+npm install @s-ui/bundler --save-dev --legacy-peer-deps
 ```
 
 ## Usage for web app bundling

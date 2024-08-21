@@ -1,5 +1,95 @@
 # CHANGELOG
 
+# 4.45.0 (2024-06-26)
+
+
+### Features
+
+* Add TESTING_LIBRARY_RULES on sui-lint for Jest folders ([4bd2fa8](https://github.com/SUI-Components/sui/commit/4bd2fa89e37bfc4f01eaa77717fe6a7dbd20854b))
+
+
+
+# 4.44.0 (2024-06-17)
+
+
+### Bug Fixes
+
+* fix rules name ([f00b56d](https://github.com/SUI-Components/sui/commit/f00b56dc5c6083cf6f8905b9a7a5103560db414d))
+
+
+
+# 4.43.0 (2024-06-17)
+
+
+### Features
+
+* enabled spark adoption ([2ab08cf](https://github.com/SUI-Components/sui/commit/2ab08cfecc1c7d4332187d884e74c8558394c2ca))
+
+
+
+# 4.42.0 (2024-06-10)
+
+
+### Features
+
+* add more support to typescript ([b3616de](https://github.com/SUI-Components/sui/commit/b3616dedc3a780abd1380b8d35726601fa9b0354))
+* Add support to parse TS files ([a5c8730](https://github.com/SUI-Components/sui/commit/a5c8730a271c9271c6882d81fe64349b3af778e2))
+* add support to typescript ([2e43455](https://github.com/SUI-Components/sui/commit/2e4345526fe601518657921cceb0a50e6eda9af6))
+* Enabled all eslint rules ([2866abf](https://github.com/SUI-Components/sui/commit/2866abfef72c1fb33f65e2f7e0b65a909d0cadb7))
+* rename rule ([f4f04b5](https://github.com/SUI-Components/sui/commit/f4f04b5ed9875691d99b5d90d3d4ce746f50926e))
+* restore original versions ([015daf5](https://github.com/SUI-Components/sui/commit/015daf5fcf24cee4edb001bcd8c98359f538931d))
+
+
+
+# 4.41.0 (2024-04-05)
+
+
+### Features
+
+* add sui-tools-version rule ([1932c1d](https://github.com/SUI-Components/sui/commit/1932c1dc795a450b88573ff381aa04a8d9fc5262))
+* enable check for cypress version ([a4bbed9](https://github.com/SUI-Components/sui/commit/a4bbed90ded5d414ce52e02b677e2a79fb0fc4f8))
+* enable repository structure rule ([8dd7c14](https://github.com/SUI-Components/sui/commit/8dd7c14e4a63d36403e6c4c775a39d424d1c3b33))
+* enable test for ADV packages version ([6394545](https://github.com/SUI-Components/sui/commit/6394545857204b80f8e6f80d5abaa77899f63400))
+
+
+
+# 4.40.0 (2024-03-21)
+
+
+### Features
+
+* bump version ([eaa25a2](https://github.com/SUI-Components/sui/commit/eaa25a26ac0337b6739c9b058d11942af895ae09))
+
+
+
+# 4.37.0 (2024-03-21)
+
+
+### Bug Fixes
+
+* Fix JSReporter import and plugins version ([07293da](https://github.com/SUI-Components/sui/commit/07293da8db0823911b3a6f7518d5de4fc1cbf24d))
+* Fix lint ([0836810](https://github.com/SUI-Components/sui/commit/0836810202a370e600fd1cb25250a18595aa7e81))
+* Fix lint ([e0fd013](https://github.com/SUI-Components/sui/commit/e0fd01378a1f3c381d99802d1feb827d55f0eae3))
+* Fix version ([02cd409](https://github.com/SUI-Components/sui/commit/02cd409e73ac28dc21bda52c1229adcde74fc28d))
+
+
+### Features
+
+* Add flag to force lint all files ([48b4ef6](https://github.com/SUI-Components/sui/commit/48b4ef65b0d7d24adf934f9ca5ec54357f170047))
+* add new dependency ([0324821](https://github.com/SUI-Components/sui/commit/0324821fc9dc0d57dbdc78db86d587439650f85e))
+* add new dependency ([75d31c6](https://github.com/SUI-Components/sui/commit/75d31c62190d715a9281f3be7e461251e877a440))
+* Add send method to the reporter ([7d34092](https://github.com/SUI-Components/sui/commit/7d34092f0c083bdb8daefb3c254603196839b7b2))
+* Add send method to the reporter ([1ce2585](https://github.com/SUI-Components/sui/commit/1ce2585af0a11d9dd11a21fc9cd9e7366a3122c3))
+* add typescript lint repository rule ([508fd84](https://github.com/SUI-Components/sui/commit/508fd8493180bbd6bab63e710e47fd2a6396f166))
+* Allow relative path in reporter flag and select TS or JS eslint config ([c42244c](https://github.com/SUI-Components/sui/commit/c42244c87d7e38392458751c1bfea9dbfa5e2809))
+* Create reporter flag ([0a2563e](https://github.com/SUI-Components/sui/commit/0a2563ee0809c2e348684fdf72134cdc085e6060))
+* Create RepositoryLinter and desactivate eslint-preset-sui rules ([ed4035f](https://github.com/SUI-Components/sui/commit/ed4035f8b503c9c7eea41e762115fe4e6339ee51))
+* disable sui checks ([57e55cf](https://github.com/SUI-Components/sui/commit/57e55cfeba74087b2da535cadbe85e07190cdf8d))
+* disable sui checks ([b66fd7d](https://github.com/SUI-Components/sui/commit/b66fd7dfae0c3eeeecd6f1d034259defddd24090))
+* fix lint ([958cfc6](https://github.com/SUI-Components/sui/commit/958cfc6b858eae5cfea94bc51f32fb6806531675))
+
+
+
 # 4.36.0 (2024-01-12)
 
 
@@ -1090,6 +1180,3 @@
 ### BREAKING CHANGES
 
 * **sui-lint:** CLI has changed and not compatible to previous version
-
-
-

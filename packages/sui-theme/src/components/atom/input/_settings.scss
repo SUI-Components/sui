@@ -30,7 +30,6 @@ $c-atom-input--success: $c-success !default;
 $c-atom-input--error: $c-error !default;
 $c-atom-input--alert: $c-alert !default;
 
-$sizes-atom-input: xl $h-atom-input--xl, l $h-atom-input--l, m $h-atom-input--m,
-  xs $h-atom-input--xs, s $h-atom-input--s !default;
-$states-atom-input: success $c-atom-input--success, error $c-atom-input--error,
-  alert $c-atom-input--alert !default;
+$sizes-atom-input: xl $h-atom-input--xl, l $h-atom-input--l, m $h-atom-input--m, xs $h-atom-input--xs,
+  s $h-atom-input--s !default;
+$states-atom-input: success $c-atom-input--success, error $c-atom-input--error, alert $c-atom-input--alert !default;

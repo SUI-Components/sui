@@ -2,8 +2,10 @@
 const program = require('commander')
 const fs = require('fs')
 const path = require('path')
-const conventionalChangelog = require('conventional-changelog')
+
+const conventionalChangelog = require('../src/conventional-changelog.js')
 const {checkIsMonoPackage, getWorkspaces, getChangelogFilename} = require('../src/config.js')
+const {fetchTags} = require('../src/tags.js')
 
 program
   .usage('<folder1> <folder2> <etc>')
@@ -28,7 +30,7 @@ const folders = program.args.length ? program.args : getWorkspaces()
 const changelogOptions = {
   preset: 'angular',
   append: false,
-  releaseCount: 0,
+  releaseCount: 1,
   outputUnreleased: false,
   transform: (commit, cb) => {
     if (commit.type === 'release') {
@@ -56,20 +58,30 @@ function generateChangelog(folder) {
   return new Promise((resolve, reject) => {
     const gitRawCommitsOpts = {path: folder}
     const outputFile = path.join(folder, CHANGELOG_NAME)
-    const output = fs.createWriteStream(path.join(outputFile))
+    const title = '# CHANGELOG'
+    const content = fs.existsSync(outputFile) ? fs.readFileSync(outputFile, 'utf8') : ''
+    const output = fs.createWriteStream(outputFile)
+
+    const name = getWorkspaces().find(path => folder.endsWith(path))
+    const promise = name ? fetchTags(name) : Promise.resolve()
+
     let chunkCount = 0
 
-    return conventionalChangelog(changelogOptions, {}, gitRawCommitsOpts)
-      .on('data', chunk => {
-        // First chunk is always an empty release
-        if (!chunkCount++) output.write('# CHANGELOG\n\n')
-        output.write(chunk)
-      })
-      .on('end', () => output.end(() => resolve(outputFile)))
-      .on('error', error => {
-        output.destroy(error)
-        reject(error)
-      })
+    return promise.then(tags => {
+      return conventionalChangelog({...changelogOptions, gitSemverTags: tags}, {}, gitRawCommitsOpts)
+        .on('data', chunk => {
+          if (!chunkCount++) output.write(`${title}\n\n`)
+          output.write(chunk)
+        })
+        .on('end', () => {
+          output.write(chunkCount > 0 && content ? content.replace(title, '').trim() : content)
+          output.end(() => resolve(outputFile))
+        })
+        .on('error', error => {
+          output.destroy(error)
+          reject(error)
+        })
+    })
   })
 }
 

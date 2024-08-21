@@ -1,5 +1,28 @@
 # CHANGELOG
 
+# 3.27.0 (2024-07-31)
+
+
+### Features
+
+* Create new @Deprecated() decorator ([9ebc5af](https://github.com/SUI-Components/sui/commit/9ebc5aff5688330918be1db48a98b745031f3514))
+
+
+
+# 3.26.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* update deps ([038cfef](https://github.com/SUI-Components/sui/commit/038cfefd6e71cd2d42ca3e1ed6fef636c2172793))
+
+
+### Features
+
+* use latest version of swc ([9986b23](https://github.com/SUI-Components/sui/commit/9986b236f3b8251b77ae8d6c7e2adef2c55d64d6))
+
+
+
 # 3.25.0 (2022-10-03)
 
 
@@ -382,6 +405,3 @@
 ### Features
 
 * **sui-decorators:** add package.json ([63e3529](https://github.com/SUI-Components/sui/commit/63e35294cd033324ef4e1aa18b22f0857211c90f)), closes [#67](https://github.com/SUI-Components/sui/issues/67)
-
-
-

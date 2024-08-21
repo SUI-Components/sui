@@ -1,5 +1,88 @@
 # CHANGELOG
 
+# 9.62.0 (2024-08-01)
+
+
+### Features
+
+* add ts support for all the bundling modes ([1daa177](https://github.com/SUI-Components/sui/commit/1daa177411143518269bbe562add536a7ea69f62))
+
+
+
+# 9.61.0 (2024-05-07)
+
+
+### Features
+
+* add overlay option to sui bundler dev ([1eef5ba](https://github.com/SUI-Components/sui/commit/1eef5baf415d7e384f93439cf3528fe180197900))
+* set dev server overlay to false ([8f19ba1](https://github.com/SUI-Components/sui/commit/8f19ba1839f4df3f1be5c046d1206ef50ede1d1f))
+
+
+
+# 9.60.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* ssr dev ([ef141de](https://github.com/SUI-Components/sui/commit/ef141deddcbecf84edb3601750041a6a99aabb75))
+
+
+
+# 9.59.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* add some fixes ([b53ee39](https://github.com/SUI-Components/sui/commit/b53ee39213edd2dca80366336d41ea122046fff3))
+* downgrade swc versions ([72ba122](https://github.com/SUI-Components/sui/commit/72ba1229bdc023b35e1d0bb4bc92a751891e84a3))
+* fix plugin extension ([b2487ab](https://github.com/SUI-Components/sui/commit/b2487abed6a1e5a007bf21fc0cd7d3ea3579eb24))
+* fix resolve alias ([173221d](https://github.com/SUI-Components/sui/commit/173221d314accb50288931740eeca16c3cc5509d))
+
+
+### Features
+
+* add autoload support for MSW ([aa7d38b](https://github.com/SUI-Components/sui/commit/aa7d38b577aa7a1d45d79cd5499478a6fea774bb))
+* add more changes ([d407c02](https://github.com/SUI-Components/sui/commit/d407c0231bdff12032fbc0f5098404259fbdad76))
+* add more support to typescript ([0bc9fd5](https://github.com/SUI-Components/sui/commit/0bc9fd50006771d5e8c84203854b71b4432b5bfa))
+* add support to typescript ([ca3f4b3](https://github.com/SUI-Components/sui/commit/ca3f4b3b6add3d0464aad407d9100f7ea5992667))
+* Add TS support for dev and build ([12224a5](https://github.com/SUI-Components/sui/commit/12224a58b94649bcbb7c87a519e9a5339d73b42b))
+* bump ts versions ([699a1de](https://github.com/SUI-Components/sui/commit/699a1ded5f9e7e5d65f47caf7f0e8c3c53b3910e))
+* remove dynamic import ([6cab6ff](https://github.com/SUI-Components/sui/commit/6cab6ffdb4161e9904509d561d485a77b528f6f4))
+* rename module rules ([f6c4f96](https://github.com/SUI-Components/sui/commit/f6c4f9607d7054bc5e044b849fe1741473007dfa))
+* restore original versions ([0b2e9b6](https://github.com/SUI-Components/sui/commit/0b2e9b64574214a1cdf442449cd07f70aed40311))
+* use latest version of swc ([698c932](https://github.com/SUI-Components/sui/commit/698c932ef2c5bb2ed0ebbe1b11afd165a3a3f9d9))
+
+
+
+# 9.58.0 (2024-05-02)
+
+
+### Features
+
+* move webpack dev server to patched version 4.15.2 ([5a291c0](https://github.com/SUI-Components/sui/commit/5a291c0ba1ee4f737f2a0b1578d66a2d9306cb36))
+* update to patched version to avoid vulnerabilities ([4144598](https://github.com/SUI-Components/sui/commit/41445982968d7908d5cb63148e603801b343e2ed))
+
+
+
+# 9.57.0 (2024-03-18)
+
+
+### Features
+
+* add crossorigin=anonymous attribute to script tags on client dev ([bfc2037](https://github.com/SUI-Components/sui/commit/bfc20371dec312708222e22b7a44830a736a0732))
+* add hydration overlay on webpack.config.client.dev.js ([f69fb9f](https://github.com/SUI-Components/sui/commit/f69fb9f60f45efc7fde32e9a46c6f172b5b6cbb2))
+
+
+
+# 9.56.0 (2024-02-07)
+
+
+### Features
+
+* Define __MOCKS_API_PATH__ var ([37c48c4](https://github.com/SUI-Components/sui/commit/37c48c424cf21ae91c508e47ee6e821c5a7fb107))
+
+
+
 # 9.55.0 (2024-01-29)
 
 
@@ -2394,6 +2477,3 @@ with the old one
 ### Features
 
 * **sui-bundler:** migrate from sui-studio-webpack ([1b58081](https://github.com/SUI-Components/sui/commit/1b58081774048ab5c6be1f68d564d219294265bd))
-
-
-

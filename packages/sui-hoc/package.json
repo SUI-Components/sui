@@ -1,17 +1,19 @@
 {
   "name": "@s-ui/hoc",
-  "version": "1.36.0",
+  "version": "1.37.0",
   "description": "Set of HoC useful for react",
   "main": "lib/index.js",
-  "type": "module",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "peerDependencies": {
     "@s-ui/react-context": "1",
     "prop-types": "15",
     "react": "16 || 17"
+  },
+  "devDependencies": {
+    "@s-ui/js-compiler": "1"
   },
   "dependencies": {
     "intersection-observer": "0.10.0"

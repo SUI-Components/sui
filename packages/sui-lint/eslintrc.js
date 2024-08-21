@@ -106,6 +106,35 @@ const JEST_TESTING_RULES = {
   'jest-dom/prefer-to-have-value': RULES.ERROR
 }
 
+const TESTING_LIBRARY_RULES = {
+  'testing-library/await-async-events': RULES.WARNING,
+  'testing-library/await-async-queries': RULES.WARNING,
+  'testing-library/await-async-utils': RULES.WARNING,
+  'testing-library/consistent-data-testid': RULES.OFF,
+  'testing-library/no-await-sync-events': RULES.WARNING,
+  'testing-library/no-await-sync-queries': RULES.WARNING,
+  'testing-library/no-container': RULES.WARNING,
+  'testing-library/no-debugging-utils': RULES.WARNING,
+  'testing-library/no-dom-import': RULES.WARNING,
+  'testing-library/no-global-regexp-flag-in-query': RULES.WARNING,
+  'testing-library/no-manual-cleanup': RULES.WARNING,
+  'testing-library/no-node-access': RULES.WARNING,
+  'testing-library/no-promise-in-fire-event': RULES.WARNING,
+  'testing-library/no-render-in-lifecycle': RULES.WARNING,
+  'testing-library/no-unnecessary-act': RULES.WARNING,
+  'testing-library/no-wait-for-multiple-assertions': RULES.WARNING,
+  'testing-library/no-wait-for-side-effects': RULES.WARNING,
+  'testing-library/no-wait-for-snapshot': RULES.WARNING,
+  'testing-library/prefer-explicit-assert': RULES.WARNING,
+  'testing-library/prefer-find-by': RULES.WARNING,
+  'testing-library/prefer-implicit-assert': RULES.WARNING,
+  'testing-library/prefer-presence-queries': RULES.WARNING,
+  'testing-library/prefer-query-matchers': RULES.WARNING,
+  'testing-library/prefer-screen-queries': RULES.WARNING,
+  'testing-library/prefer-user-event': RULES.WARNING,
+  'testing-library/render-result-naming-convention': RULES.WARNING
+}
+
 const IMPORT_SORT_GROUPS = [
   // Side effect and polyfill imports.
   ['^\\u0000'],
@@ -175,7 +204,8 @@ module.exports = {
     'react-hooks',
     'simple-import-sort',
     'jest',
-    'jest-dom'
+    'jest-dom',
+    'sui'
   ],
   rules: {
     ...REACT_RULES,
@@ -198,24 +228,51 @@ module.exports = {
     'prefer-regex-literals': RULES.WARNING,
     'prettier/prettier': [RULES.ERROR, prettierOptions],
     'simple-import-sort/imports': [RULES.WARNING, {groups: IMPORT_SORT_GROUPS}],
-    'react/jsx-no-bind': RULES.OFF
+    'react/jsx-no-bind': RULES.OFF,
+    'sui/commonjs': RULES.WARNING,
+    'sui/layers-arch': RULES.WARNING
   },
   overrides: [
     {
+      files: ['**/domain/src/**', 'domain/src/**'],
+      plugins: ['sui'],
+      rules: {
+        'sui/factory-pattern': RULES.WARNING,
+        'sui/serialize-deserialize': RULES.WARNING,
+        'sui/decorators': RULES.WARNING,
+        'sui/decorator-deprecated': RULES.ERROR,
+        'sui/decorator-deprecated-remark-method': RULES.WARNING
+      }
+    },
+    {
       files: ['**/*.+(ts|tsx)'],
-      extends: ['standard-with-typescript'],
+      extends: ['standard-with-typescript', 'standard-react', 'prettier'],
+      parser: '@typescript-eslint/parser',
       parserOptions: {
         project: './tsconfig.json'
       },
       rules: {
+        'import/extensions': RULES.OFF,
         'no-return-await': RULES.OFF,
-        'prettier/prettier': RULES.OFF,
-        'react/react-in-jsx-scope': RULES.OFF
+        'prettier/prettier': [RULES.ERROR, prettierOptions],
+        'react/react-in-jsx-scope': RULES.OFF,
+        'react/no-unused-prop-types': RULES.OFF,
+        '@typescript-eslint/explicit-function-return-type': [RULES.OFF, {allowTypedFunctionExpressions: false}],
+        'chai-friendly/no-unused-expressions': RULES.ERROR,
+        '@typescript-eslint/no-unused-expressions': RULES.OFF,
+        '@typescript-eslint/return-await': RULES.OFF
       }
     },
     {
       files: ['**/__tests__/**/*.js'],
       rules: JEST_TESTING_RULES
+    },
+    {
+      files: ['**/components/**/__tests__/*.test.js', 'components/**/__tests__/*.test.js'],
+      plugins: ['testing-library'],
+      rules: {
+        ...TESTING_LIBRARY_RULES
+      }
     }
   ]
 }

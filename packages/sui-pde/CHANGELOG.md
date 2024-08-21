@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.25.0 (2024-06-25)
+
+
+### Features
+
+* Add adapterId and shouldTrackExperimentViewed to Feature and Experiment comp ([8cc3be2](https://github.com/SUI-Components/sui/commit/8cc3be20e9f605ae8873e69476fe3643e27e55ae))
+
+
+
 # 2.24.0 (2023-10-02)
 
 
@@ -350,6 +359,3 @@
 * **sui-pde:** use hasUser fn instead of isActivated ([ef9ac85](https://github.com/SUI-Components/sui/commit/ef9ac858acd1e825a49a9e23792b56c69fc7e527))
 * **sui-pde:** use pdeContext instead only feature ([55f2926](https://github.com/SUI-Components/sui/commit/55f29263b78b6aed78922684e166b6ce6fef30cb))
 * **sui-pde:** variation default on optimizely error ([6382e8a](https://github.com/SUI-Components/sui/commit/6382e8a9390b4ff1db1f5e0c22bf3ac9aca87e63))
-
-
-

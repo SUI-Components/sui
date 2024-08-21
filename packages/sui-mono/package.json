@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/mono",
-  "version": "2.44.0",
+  "version": "2.45.0",
   "description": "Commit and release manager",
   "main": "index.js",
   "bin": {
@@ -10,11 +10,26 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "8.3.0",
-    "conventional-changelog": "3.1.25",
     "enquirer": "2.3.6",
     "git-url-parse": "13.1.0",
     "glob": "8.0.3",
-    "word-wrap": "1.2.4"
+    "word-wrap": "1.2.4",
+    "add-stream": "^1.0.0",
+    "conventional-changelog-writer": "^5.0.0",
+    "conventional-commits-parser": "^3.2.0",
+    "conventional-changelog-preset-loader": "^2.3.4",
+    "conventional-changelog-angular": "^5.0.12",
+    "dateformat": "^3.0.0",
+    "get-pkg-repo": "^4.0.0",
+    "git-raw-commits": "^2.0.8",
+    "git-remote-origin-url": "^2.0.0",
+    "git-semver-tags": "^4.1.1",
+    "lodash": "^4.17.15",
+    "normalize-package-data": "^3.0.0",
+    "q": "^1.5.1",
+    "read-pkg": "^3.0.0",
+    "read-pkg-up": "^3.0.0",
+    "through2": "^4.0.0"
   },
   "repository": {
     "type": "git",

@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url)
 const {version} = require('../package.json')
 
 const CWD = process.cwd()
-const TESTS_FOLDER = `${CWD}/test-e2e`
+const TESTS_FOLDER = `${CWD}/${process.env.E2E_FOLDER ?? 'test-e2e'}`
 const SCREENSHOTS_FOLDER = `${CWD}/.tmp/test-e2e/screenshots`
 const DEFAULT_USER_AGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 Chrome/65.0.3325.146 Safari/537.36'
@@ -26,14 +26,14 @@ const DEFAULT_CYPRESS_CONFIG = {
 }
 
 const DEFAULT_CYPRESS_CONFIG_FILE_CONTENT = `module.exports = {
-  e2e: {} 
+  e2e: {}
 };`
 
 const CYPRESS_CONFIG_FILE_WITH_LEGACY_PLUGINS = `const plugins = require('./plugins/index.js')
 module.exports = {
   e2e: {
     setupNodeEvents: plugins
-  } 
+  }
 };`
 
 const HELP_MESSAGE = `

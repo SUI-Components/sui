@@ -1,5 +1,49 @@
 # CHANGELOG
 
+# 8.36.0 (2024-05-06)
+
+
+### Features
+
+* add docs ([1a2f67c](https://github.com/SUI-Components/sui/commit/1a2f67c1678c861668d9d86a60e08e76b73a51dc))
+
+
+
+# 8.35.0 (2024-05-06)
+
+
+
+# 8.34.0 (2024-02-07)
+
+
+### Bug Fixes
+
+* Destroy singleton ([c25af57](https://github.com/SUI-Components/sui/commit/c25af5765f14ea892dd0dc80c427e8b4a09d8809))
+
+
+### Features
+
+* Add __MOCKS_API_PATH__ to config ([0f4f1f9](https://github.com/SUI-Components/sui/commit/0f4f1f937bde10174dcf405c0a1206ada200d273))
+* Add more faker methods ([ef39c1d](https://github.com/SUI-Components/sui/commit/ef39c1d9521394a41a28adbe573bb8aa2cd60658))
+* Create MotherObject classes ([2a1730c](https://github.com/SUI-Components/sui/commit/2a1730c5f3b26decb33e01e24acab99ce54c664a))
+* enabled SEED for client tests ([537484d](https://github.com/SUI-Components/sui/commit/537484dbad7ea66f8f11534bf02fd75c2c40d4b9))
+* Move Fetcher to his own faile ([dc05b58](https://github.com/SUI-Components/sui/commit/dc05b58f8bb10e9b07348279544f6a560f333413))
+* Move MockFetcherManager ([b90252e](https://github.com/SUI-Components/sui/commit/b90252ee531704f28ef61d41143d56e95a0bb861))
+* remove duplicate ([cfbd935](https://github.com/SUI-Components/sui/commit/cfbd93585478d45ac8c12825286fc51e4be9fbd7))
+* Remove warnings ([fd78514](https://github.com/SUI-Components/sui/commit/fd78514cb62ea1e5096c6b6a1ca656a51cd40d86))
+
+
+
+# 8.33.0 (2024-02-01)
+
+
+### Features
+
+* **packages/sui-test:** update alias path resolve ([d7ccb29](https://github.com/SUI-Components/sui/commit/d7ccb2957dff5ee9b18a23fac298d85261cda9d7))
+* **packages/sui-test:** update react aliases ([d051349](https://github.com/SUI-Components/sui/commit/d051349bf2be49064c881073de2def20c8f7d132))
+
+
+
 # 8.32.0 (2024-01-29)
 
 
@@ -1238,6 +1282,3 @@
 
 * **sui-test:** bump beta version ([9dc81af](https://github.com/SUI-Components/sui/commit/9dc81afbde098e6e03d586d6cf20e19076355e17))
 * **sui-test:** first full functional version ([93f786e](https://github.com/SUI-Components/sui/commit/93f786ed955d2c70aee1d8f8dacde46760696c2e))
-
-
-

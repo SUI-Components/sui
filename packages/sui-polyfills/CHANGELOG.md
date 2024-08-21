@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.22.0 (2024-07-04)
+
+
+### Features
+
+* Added polyfills for Array.prototype.at, Promise.allSettled and Promise ([4529691](https://github.com/SUI-Components/sui/commit/45296917522078792e08692a4faf25b537357374))
+
+
+
 # 1.21.0 (2023-12-19)
 
 
@@ -193,6 +202,3 @@
 ### Features
 
 * **sui-polyfills:** create sui-polyfills to be reused on all our projects ([df2086e](https://github.com/SUI-Components/sui/commit/df2086e254faeef7bc08ef1005da047cefe8c609))
-
-
-

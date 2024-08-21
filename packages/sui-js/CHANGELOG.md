@@ -1,5 +1,57 @@
 # CHANGELOG
 
+# 2.34.0 (2024-08-02)
+
+
+### Features
+
+* parse query string allow sparse config ([2486e0a](https://github.com/SUI-Components/sui/commit/2486e0a7001716e035b8778c2687ad68acd61d16))
+
+
+
+# 2.33.0 (2024-08-01)
+
+
+### Features
+
+* fix lint ([6e297e3](https://github.com/SUI-Components/sui/commit/6e297e3fe9642f9b45630da4d16ba19180282d62))
+* to query string config upgrade ([e476274](https://github.com/SUI-Components/sui/commit/e4762746f6200dfa305a401d593739eb5458bae0))
+
+
+
+# 2.32.0 (2024-06-20)
+
+
+### Features
+
+* add final line ([abad6e5](https://github.com/SUI-Components/sui/commit/abad6e5a3cd5c750ca2bcf8cf8cb27094a384296))
+* add method to check if user agent is a bot ([a8e60f7](https://github.com/SUI-Components/sui/commit/a8e60f798dc2a1fabf3c4d3f6b67f696149dd1de))
+* adding legitimate in bots wording ([7160267](https://github.com/SUI-Components/sui/commit/71602672dc37849364bbaf640c83a6cce293b9ea))
+* change naming and context ([c048f25](https://github.com/SUI-Components/sui/commit/c048f258492e73213f7d738776e424c5c23ce296))
+* lint export ([9f43526](https://github.com/SUI-Components/sui/commit/9f43526a8981ec9368b089f4de01b77016e10075))
+* typo ([331619c](https://github.com/SUI-Components/sui/commit/331619cbc28749df138cb48f884e7c912f159b09))
+
+
+
+# 2.31.0 (2024-03-23)
+
+
+### Features
+
+* use a more solid hashing function ([760b854](https://github.com/SUI-Components/sui/commit/760b85427c5240c56dbd140b3cf42f46051143fd))
+* using a pure js function to make this utility hashing function isomorphic ([dd18e41](https://github.com/SUI-Components/sui/commit/dd18e41fc448a27d09cfe7e7c255efa7297880ac))
+
+
+
+# 2.30.0 (2024-03-07)
+
+
+### Features
+
+* Add sha256 hash method ([70d37f8](https://github.com/SUI-Components/sui/commit/70d37f8afc84aa93daea20cd55d1c75f50c79e69))
+
+
+
 # 2.29.0 (2023-12-04)
 
 
@@ -556,6 +608,3 @@
 * **sui-js:** insert a façade ([8380efb](https://github.com/SUI-Components/sui/commit/8380efbe44bb94e5d4a17ee2849524adc12d22e7))
 * **sui-js:** remove unused dependencies ([4bc24c2](https://github.com/SUI-Components/sui/commit/4bc24c2eff61603cf59aa1fdc80d46aac1000df8))
 * **sui-js:** rename browser in to ua-parser ([dda6032](https://github.com/SUI-Components/sui/commit/dda6032235ef53a29f48fed9625a5a268fadfa0c))
-
-
-

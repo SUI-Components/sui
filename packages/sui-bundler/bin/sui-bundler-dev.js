@@ -39,6 +39,7 @@ if (!module.parent) {
       []
     )
     .option('-w, --watch', 'Watch files and restart the server on change', DEFAULT_WATCH)
+    .option('-y, --overlay', 'Show error overlay')
     .on('--help', () => {
       console.log('  Examples:')
       console.log('')
@@ -57,7 +58,7 @@ if (!module.parent) {
 const start = async ({config = webpackConfig, packagesToLink = program.opts().linkPackage || []} = {}) => {
   clearConsole()
   // Warn and crash if required files are missing
-  if (!checkRequiredFiles([path.join(config.context, 'index.html'), path.join(config.context, 'app.js')])) {
+  if (!checkRequiredFiles([path.join(config.context, 'index.html')])) {
     log.error(`✖ Required files are missing, create and index.html and app.js inside your src folder.`)
     process.exit(1)
   }
@@ -66,7 +67,7 @@ const start = async ({config = webpackConfig, packagesToLink = program.opts().li
   const port = await choosePort(DEFAULT_PORT)
   const urls = prepareUrls(protocol, HOST, port)
 
-  const {linkAll} = program.opts()
+  const {linkAll, overlay = false} = program.opts()
 
   const configVars = JSON.stringify({packagesToLink, linkAll})
   const version = `${__dirname}|${configVars}`
@@ -81,7 +82,7 @@ const start = async ({config = webpackConfig, packagesToLink = program.opts().li
   }
 
   const compiler = createCompiler(nextConfig, urls)
-  const serverConfig = createDevServerConfig(nextConfig, urls.lanUrlForConfig)
+  const serverConfig = createDevServerConfig({config: nextConfig, overlay})
   const devServer = new WebpackDevServer(
     {
       ...serverConfig,

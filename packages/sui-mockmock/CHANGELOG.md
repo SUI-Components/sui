@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.5.0 (2024-02-07)
+
+
+### Features
+
+* update axios ([23b1ebe](https://github.com/SUI-Components/sui/commit/23b1ebe6570935aeedfbfbc54e30c0c168d947e1))
+
+
+
 # 2.4.0 (2023-12-19)
 
 
@@ -153,6 +162,3 @@
 ### Performance Improvements
 
 * **sui-mockmock:** detect node and ensure no node code is loaded on browser mode ([a40c2f4](https://github.com/SUI-Components/sui/commit/a40c2f49394fad8631f8e23e09f4a74dcb7bbb40))
-
-
-

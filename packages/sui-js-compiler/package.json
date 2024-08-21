@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/js-compiler",
-  "version": "1.27.0",
+  "version": "1.29.0",
   "description": "JavaScript & TypeScript Compiler",
   "type": "module",
   "exports": "./src/index.js",
@@ -12,11 +12,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@s-ui/helpers": "1",
+    "@s-ui/compiler-config": "1",
     "@swc/core": "1.3.14",
     "@swc/helpers": "0.4.12",
     "commander": "8.3.0",
     "fast-glob": "3.2.12",
-    "fs-extra": "10.1.0"
+    "fs-extra": "10.1.0",
+    "typescript": "5.0.4"
   }
 }

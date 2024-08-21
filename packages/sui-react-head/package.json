@@ -1,11 +1,11 @@
 {
   "name": "@s-ui/react-head",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "lib": "rm -rf ./lib && tsc",
+    "lib": "sui-js-compiler",
     "prepublishOnly": "npm run lib"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
     "react-head": "3.4.0"
   },
   "devDependencies": {
+    "@s-ui/js-compiler": "1",
     "@testing-library/react": "11.1.0",
     "react": "17",
     "react-dom": "17"

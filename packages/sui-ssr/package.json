@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/ssr",
-  "version": "8.25.0",
+  "version": "8.29.0",
   "description": "> Plug SSR to you SUI SPA.",
   "main": "index.js",
   "bin": {
@@ -38,7 +38,7 @@
     "noop-console": "0.8.0",
     "parse5": "6.0.1",
     "ua-parser-js": "0.7.33",
-    "webpack-dev-middleware": "6.1.1",
+    "webpack-dev-middleware": "6.1.2",
     "webpack-hot-middleware": "2.25.4",
     "nodemon": "3.0.1"
   }

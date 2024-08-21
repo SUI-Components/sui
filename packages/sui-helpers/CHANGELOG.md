@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.39.0 (2024-05-06)
+
+
+### Bug Fixes
+
+* add some fixes ([f4fa3af](https://github.com/SUI-Components/sui/commit/f4fa3af2366897ee0aa72b469f9a6667d8c21822))
+
+
+### Features
+
+* Add dynamicPackage ([dbfded8](https://github.com/SUI-Components/sui/commit/dbfded8342e96add990b323337e54b1d34cd6a2b))
+* add more support to typescript ([e8780da](https://github.com/SUI-Components/sui/commit/e8780da793f2c882c5da73bfe19d945c1a87f461))
+* remove not needed function ([6db9f33](https://github.com/SUI-Components/sui/commit/6db9f33e0d6f9bcad657f9eda251946a91684995))
+* Remove not optional from ci install for swc compatibility ([9e214aa](https://github.com/SUI-Components/sui/commit/9e214aa54c323139cd1ee5709289850e33e164dc))
+* restore original versions ([0961a23](https://github.com/SUI-Components/sui/commit/0961a23642b3a5d34c5b5ff332f848e5dd40ccf4))
+
+
+
 # 1.38.0 (2022-05-30)
 
 
@@ -358,6 +376,3 @@
 
 * **sui-helpers:** add helpers to manage packages of file system ([b8ced10](https://github.com/SUI-Components/sui/commit/b8ced100e66254c14a70cbaeee5efd44888efc95))
 * **sui-helpers:** new package with cli helpers ([e270fa0](https://github.com/SUI-Components/sui/commit/e270fa05e48d5b3b97f5408914989a978585f733))
-
-
-

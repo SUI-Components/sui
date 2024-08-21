@@ -51,6 +51,49 @@ import {getUserHandler} from './mocks/exampleGateway/user/handlers.js'
 export default [getUserHandler]
 ```
 
+### 1.1 Autoload mocks folder.
+
+Any file, under the folder `routes` will be autoloaded and you dont have to do anything to see your handler capturing request.
+
+When you use the autoload feature, you have to create a folder structure following the same structure than your API request.
+
+For example, to capture the request `https://api.site.com/api/v1/user/123/settings`, your folder structure in your project will be:
+
+```
+[root mono-repo]
+ |
+ - mocks
+    |
+    - routes
+        |
+        - api
+            |
+            - v1
+                |
+                - user
+                    |
+                    - :id
+                        |
+                        - settings
+                            |
+                            - index.js
+```
+
+Your `index.js` file has to expose a function for each http method that you want to capture:
+
+```js
+export async function get({headers, body, params, query, cookies}) {
+  return [200, {name: 'nombre'}]
+}
+export async function post({headers, body, params, query, cookies}) {
+  return [200, {params}]
+}
+export async function put() {}
+export async function del() {}
+```
+
+Every function have to return the status code of the request and the body.
+
 ### 2. Expose mocker from mocks folder
 
 Once we have the handlers created, we will need to create a mocker with **all the handlers already defined**.

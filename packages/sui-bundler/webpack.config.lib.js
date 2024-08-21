@@ -4,7 +4,7 @@ const {cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.j
 const path = require('path')
 const minifyJs = require('./shared/minify-js.js')
 const definePlugin = require('./shared/define.js')
-const createBabelRules = require('./shared/module-rules-babel.js')
+const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
 const {extractComments, sourceMap, supportLegacyBrowsers} = require('./shared/config.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
@@ -24,7 +24,7 @@ module.exports = {
       https: require.resolve('https-browserify'),
       path: false
     },
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.tsx', '.ts', '.json'],
     modules: ['node_modules', path.resolve(process.cwd())]
   },
   entry: config.vendor
@@ -45,7 +45,7 @@ module.exports = {
   },
   plugins: cleanList([
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     }),
     new MiniCssExtractPlugin({
       filename: cssFileName,
@@ -58,6 +58,6 @@ module.exports = {
     definePlugin()
   ]),
   module: {
-    rules: [createBabelRules({supportLegacyBrowsers}), sassRules]
+    rules: [createCompilerRules({supportLegacyBrowsers}), sassRules]
   }
 }

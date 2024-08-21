@@ -1,5 +1,60 @@
 # CHANGELOG
 
+# 2.6.0 (2024-06-20)
+
+
+### Bug Fixes
+
+* add expected attribution for inp ([acc4a16](https://github.com/SUI-Components/sui/commit/acc4a1658635181b64562774cac7174e4ff3f337))
+
+
+
+# 2.5.0 (2024-06-19)
+
+
+### Features
+
+* upgrade web vitals package ([575f8f8](https://github.com/SUI-Components/sui/commit/575f8f8c89669472ea05e0bec6f52d5fcc69920b))
+
+
+
+# 2.4.0 (2024-03-26)
+
+
+### Features
+
+* upgrade web vitals package ([06c29f5](https://github.com/SUI-Components/sui/commit/06c29f5b27a2a9bb240f558b602b471b77e24eb6))
+
+
+
+# 2.3.0 (2024-02-12)
+
+
+### Features
+
+* skip empty targets ([39a0ac4](https://github.com/SUI-Components/sui/commit/39a0ac45cd59f091521345269f4e7323a582b303))
+* validate if the target is null ([f671e93](https://github.com/SUI-Components/sui/commit/f671e9378797525386dfcfe9399f33e6cac6fd87))
+
+
+
+# 2.2.0 (2024-02-09)
+
+
+### Features
+
+* add some device data to sent to Open Search ([50ed352](https://github.com/SUI-Components/sui/commit/50ed352bc4d6b14ba40e95d11c857021ae0cd0c0))
+* log visibilityState ([cf46a94](https://github.com/SUI-Components/sui/commit/cf46a9403ed070a669b9893697539ca7f49175f9))
+* Mocking the visibilityState ([9bd98d1](https://github.com/SUI-Components/sui/commit/9bd98d113227474f05a247998186309c1af75fe3))
+* skip logger.cwv test 🙈 ([bef9b26](https://github.com/SUI-Components/sui/commit/bef9b2648404c7b7bf3e02a42fdedd0f2c46aec8))
+* skip logger.cwv test 🙈 ([b0452c6](https://github.com/SUI-Components/sui/commit/b0452c6fc93bb8c893607f7224bcfb0158409c3d))
+* skip logger.cwv test 🙈 ([30bc4da](https://github.com/SUI-Components/sui/commit/30bc4da64fe905b1af7699419576b3869a4a0568))
+* skip logger.cwv test 🙈 ([636e79a](https://github.com/SUI-Components/sui/commit/636e79a58bc9f1a12ef081be6fafcc26a642bc9c))
+* skip logger.cwv test 🙈 ([6c1f1a2](https://github.com/SUI-Components/sui/commit/6c1f1a28b7f0cec00e6b9e4fea7c3b5042eb8d19))
+* unskip test ([676fac6](https://github.com/SUI-Components/sui/commit/676fac613935500b8976aa4cb39dbe4736a0f471))
+* unskip the test and log the method called ([15575a2](https://github.com/SUI-Components/sui/commit/15575a2b1337fcbcf9ad6eb0785b89fb11832b96))
+
+
+
 # 2.1.0 (2023-12-04)
 
 
@@ -144,6 +199,3 @@
 * **packages/sui-react-web-vitals:** remove not needed console log ([549c96a](https://github.com/SUI-Components/sui/commit/549c96ae507445d46702573c154acb7c2cb8c8d0))
 * **packages/sui-react-web-vitals:** update feedback ([52f64a8](https://github.com/SUI-Components/sui/commit/52f64a8ea7587a94a821e88cc72bcd8d629abdf1))
 * **packages/sui-react-web-vitals:** update logger check ([2ccaac0](https://github.com/SUI-Components/sui/commit/2ccaac0fa1d09dc24177e80d743ee65b3c83e184))
-
-
-
