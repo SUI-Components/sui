@@ -11,7 +11,7 @@
     "sui-svg": "./bin/sui-svg.js"
   },
   "dependencies": {
-    "@s-ui/react-atom-icon": "1",
+    "@s-ui/react-atom-icon": "beta",
     "babel-preset-sui": "3",
     "commander": "8.3.0",
     "fast-glob": "3.2.11",

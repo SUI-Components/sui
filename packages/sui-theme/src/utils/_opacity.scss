@@ -4,11 +4,11 @@
 // @include bgcolor-opacity($c-black);
 
 @mixin bgcolor-opacity($color) {
-  background-color: rgba($color, 1);
+  background-color: color-mix(in srgb, $color 100%, transparent);
 
   @each $value in $c-opacity {
     &-#{$value} {
-      background-color: rgba($color, $value * 0.01);
+      background-color: color-mix(in srgb, $color #{'#{$value}%'}, transparent);
     }
   }
 }
@@ -19,7 +19,7 @@
       position: relative;
 
       &::before {
-        background-color: rgba($color, $value * 0.01);
+        background-color: color-mix(in srgb, $color #{'#{$value}%'}, transparent);
         content: '';
         display: block;
         height: 100%;
