@@ -66,7 +66,7 @@ export default function Example() {
 
 > The INP value is 312ms: Input delay 2ms, Processing time 273ms and Presentation delay 36ms.
 
-### Optimize version
+### Optimized version
 
 ![Optimized version](./assets/Optimized.webp)
 

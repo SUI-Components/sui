@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.8.0 (2024-08-21)
+
+
+
 # 1.7.0 (2021-05-27)
 
 
@@ -71,6 +75,3 @@
 
 * **sui-component-dependencies:** first release 1.0 ([54e5ff6](https://github.com/SUI-Components/sui/commit/54e5ff670aaa8825590964f019ba41a20a97fed2))
 * **sui-component-dependencies:** migrate from @schibstedspain/suistudio-fatigue-deps ([b0474f8](https://github.com/SUI-Components/sui/commit/b0474f8c6eca7a5948988d4756045d10fda1cc20))
-
-
-

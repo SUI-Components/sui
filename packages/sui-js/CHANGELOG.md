@@ -1,5 +1,24 @@
 # CHANGELOG
 
+# 2.34.0 (2024-08-02)
+
+
+### Features
+
+* parse query string allow sparse config ([2486e0a](https://github.com/SUI-Components/sui/commit/2486e0a7001716e035b8778c2687ad68acd61d16))
+
+
+
+# 2.33.0 (2024-08-01)
+
+
+### Features
+
+* fix lint ([6e297e3](https://github.com/SUI-Components/sui/commit/6e297e3fe9642f9b45630da4d16ba19180282d62))
+* to query string config upgrade ([e476274](https://github.com/SUI-Components/sui/commit/e4762746f6200dfa305a401d593739eb5458bae0))
+
+
+
 # 2.32.0 (2024-06-20)
 
 

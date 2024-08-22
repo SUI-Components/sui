@@ -10,6 +10,7 @@ import path from 'node:path'
 import prettier from 'prettier'
 
 const PACKAGE_REGEX = /packages\/((([a-z]+)-?)+)/ // matches "packages/sui-any-package-name"
+const DEPENDABOT_TAG = 'dependabot'
 
 program
   .name('publish-tagged-packages')
@@ -83,6 +84,7 @@ async function publishPackages() {
   packagesToPublish.forEach(async packageName => {
     const packageConfig = getConfig(packageName)
     const {name} = packageConfig
+    tag = tag.startsWith(DEPENDABOT_TAG) ? DEPENDABOT_TAG : tag
     const version = await getPackageVersion({name, tag})
 
     // Set the new tagged version.

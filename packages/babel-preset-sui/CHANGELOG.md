@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.54.0 (2024-08-21)
+
+
+### Features
+
+* update default Node version to 18 ([2a0c0ea](https://github.com/SUI-Components/sui/commit/2a0c0ea4473824545cff780932f18e126a1785de))
+
+
+
 # 3.53.0 (2024-01-17)
 
 
@@ -722,6 +731,3 @@ relying on this preset to transform dynamic import to require.ensure
 ### Features
 
 * **babel-preset-sui:** migration from babel-preset-schibsted-spain ([ef602e6](https://github.com/SUI-Components/sui/commit/ef602e666abbd090b47071edfed0f6adbb6e03e2))
-
-
-
