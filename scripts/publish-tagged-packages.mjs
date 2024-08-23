@@ -84,8 +84,8 @@ async function publishPackages() {
   packagesToPublish.forEach(async packageName => {
     const packageConfig = getConfig(packageName)
     const {name} = packageConfig
-    tag = tag.startsWith(DEPENDABOT_TAG) ? DEPENDABOT_TAG : tag
-    const version = await getPackageVersion({name, tag})
+    const packageTag = tag.startsWith(DEPENDABOT_TAG) ? DEPENDABOT_TAG : tag
+    const version = await getPackageVersion({name, tag: packageTag})
 
     // Set the new tagged version.
     packageConfig.version = version
@@ -101,7 +101,7 @@ async function publishPackages() {
 
     fs.writeFileSync(packageJsonPath, packageJson)
 
-    await $$`npm publish --tag ${tag}`
+    await $$`npm publish --tag ${packageTag}`
   })
 }
 
