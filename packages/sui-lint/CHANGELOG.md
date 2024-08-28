@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 4.46.0 (2024-08-28)
+
+
+### Features
+
+* Add new decorator-inline-error to domain packages ([3d7d977](https://github.com/SUI-Components/sui/commit/3d7d9771529f6c98e023263ad6e9128355e57ffe))
+* Add sui/decorator-async-inline-error rule to domain package ([6294dd8](https://github.com/SUI-Components/sui/commit/6294dd868478d0c4d86dffaeb6e4f6e4895b4711))
+* Make decorator-deprecated-remark-method runs on classes ([5b9ee47](https://github.com/SUI-Components/sui/commit/5b9ee47f596cd516d6204adeac0e03a8bf9cb8b1))
+
+
+
 # 4.45.0 (2024-06-26)
 
 
