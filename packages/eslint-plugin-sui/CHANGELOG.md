@@ -1,5 +1,22 @@
 # CHANGELOG
 
+# 1.11.0 (2024-08-28)
+
+
+### Features
+
+* [@inline](https://github.com/inline)Error must be on non-async functions and closest to the met ([163a959](https://github.com/SUI-Components/sui/commit/163a9594119a3fb9e93d5a0b6382e35f3be0844c))
+* [ADR] Decorators: Use @AsyncInlineError() on services and reposito ([f3a2001](https://github.com/SUI-Components/sui/commit/f3a2001ecfbc654e979a592b59b84a0d14fc6bc8))
+* ADR Decorators: use MethodDefinition instead of ClassDefinition ([d830f2b](https://github.com/SUI-Components/sui/commit/d830f2bfe73e1773d289912c9e7732a47061c9c0))
+* Create new rule for decorator-inline-error ([6124f6b](https://github.com/SUI-Components/sui/commit/6124f6b896fe5fbbf2436089d722f6716cf81263))
+* Decorators ADR: @AsyncInlineError must exist fix suggestion ([2a184b6](https://github.com/SUI-Components/sui/commit/2a184b604f4384a8fbef5bc21d48f6c276fa4d47))
+* Decorators ADR: AsyncInlineError must be the first ([5ea3a37](https://github.com/SUI-Components/sui/commit/5ea3a37cf874f722adfa43ecafb6a6bca4c1dfc5))
+* Decorators ADR: check decorators order with fix suggestion ([9a44253](https://github.com/SUI-Components/sui/commit/9a442539ffb743071c9346fa5a786f36d251bcbb))
+* Decorators ADR: validate AsyncInlineError and mark method warning ([2b89c71](https://github.com/SUI-Components/sui/commit/2b89c71fa8701345fde3c40e4c9c6b2e8aaffbf7))
+* Rename rule to decorator-async-inline-error and manage rule by pat ([4bab675](https://github.com/SUI-Components/sui/commit/4bab67534567a5801e6f8eda125369f21bcc3387))
+
+
+
 # 1.10.0 (2024-07-31)
 
 

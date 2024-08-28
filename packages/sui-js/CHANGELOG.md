@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.34.0 (2024-08-02)
+
+
+### Features
+
+* parse query string allow sparse config ([2486e0a](https://github.com/SUI-Components/sui/commit/2486e0a7001716e035b8778c2687ad68acd61d16))
+
+
+
 # 2.33.0 (2024-08-01)
 
 

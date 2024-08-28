@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.18.0 (2024-08-20)
+
+
+### Bug Fixes
+
+* change default constructor ([21eea77](https://github.com/SUI-Components/sui/commit/21eea778ce3dafdd4c398ea74e6d8212c8e6f583))
+* sort params ([d73d516](https://github.com/SUI-Components/sui/commit/d73d5161d5bd1ba14d586d68cb60176d1c1d3a10))
+
+
+
 # 2.17.0 (2024-06-10)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/studio",
-  "version": "11.43.0",
+  "version": "11.44.0",
   "description": "Develop, maintain and publish your SUI components.",
   "main": "index.js",
   "bin": {
@@ -20,7 +20,7 @@
     "@testing-library/user-event": "13.5.0",
     "chai": "4.3.10",
     "chai-dom": "1.11.0",
-    "classnames": "2.2.5",
+    "classnames": "2.5.1",
     "commander": "8.3.0",
     "deepmerge": "4.3.1",
     "fast-glob": "3.2.11",

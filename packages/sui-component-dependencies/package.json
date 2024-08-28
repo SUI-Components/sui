@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/component-dependencies",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "A set of dependencies of all SUI components.",
   "keywords": [
     "fatigue",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@s-ui/theme": "8",
-    "classnames": "2.2.5"
+    "classnames": "2.5.1"
   },
   "repository": {
     "type": "git",

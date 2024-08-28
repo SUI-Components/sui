@@ -86,6 +86,15 @@ describe('@s-ui/js', () => {
       const expected = {a: 'b', c: 'd'}
       expect(parsedQueryParams).to.deep.equal(expected)
     })
+
+    it('should convert query string to object params compacting a sparse array to only the existing values preserving their order', () => {
+      const query = '?a[0]=b&a[2]=c'
+      const options = {allowSparse: true}
+      const parsedQueryParams = parseQueryString(query, options)
+
+      const expected = {a: ['b', undefined, 'c']}
+      expect(parsedQueryParams).to.deep.equal(expected)
+    })
   })
   describe('string:fromArrayToCommaQueryString', () => {
     it('should convert params array to comma separated object params', () => {

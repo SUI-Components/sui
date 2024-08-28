@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.28.0 (2024-08-28)
+
+
+### Features
+
+* [@inline](https://github.com/inline)Error - Add warning to avoid usage on async functions ([d997ff7](https://github.com/SUI-Components/sui/commit/d997ff7533ee9c4cc4e70281a5c6388ac24aa593))
+* Create AsyncInlineError decorator ([bc73cff](https://github.com/SUI-Components/sui/commit/bc73cffd64b871aa42372c4e34d30d1fa5aaff22))
+
+
+
 # 3.27.0 (2024-07-31)
 
 
