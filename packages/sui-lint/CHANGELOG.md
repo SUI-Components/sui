@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.48.0 (2024-08-29)
+
+
+### Bug Fixes
+
+* disable correct decorator rule to avoid lint error ([8e90d4f](https://github.com/SUI-Components/sui/commit/8e90d4fcdbae2f8bb4d4e0f39acf8157635b5517))
+
+
+
 # 4.47.0 (2024-08-29)
 
 
