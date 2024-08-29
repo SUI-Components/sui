@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.47.0 (2024-08-29)
+
+
+### Bug Fixes
+
+* disable decorator rule temporarily ([8627021](https://github.com/SUI-Components/sui/commit/8627021e57589378937d8a9885b18eb93b1f66b1))
+
+
+
 # 4.46.0 (2024-08-28)
 
 
