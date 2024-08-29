@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.63.0 (2024-08-29)
+
+
+### Features
+
+* update dep ([794c850](https://github.com/SUI-Components/sui/commit/794c85026f479a25ad9637550ece92f45e50c5a0))
+
+
+
 # 9.62.0 (2024-08-01)
 
 
