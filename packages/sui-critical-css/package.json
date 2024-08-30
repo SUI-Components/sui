@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "clean-css": "5.3.3",
-    "node-fetch": "2.6.7",
+    "node-fetch": "2.7.0",
     "path-to-regexp": "0.1.7",
     "playwright-chromium": "1.25.0",
     "@s-ui/critical-css-middleware": "1"
