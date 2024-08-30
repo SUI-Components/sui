@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.12.0 (2024-08-30)
+
+
+### Bug Fixes
+
+* Fix null check ([4822d16](https://github.com/SUI-Components/sui/commit/4822d16a9b470e0c1bac687c955030be5476f5fa))
+
+
+
 # 1.11.0 (2024-08-28)
 
 
