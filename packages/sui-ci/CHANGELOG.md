@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.28.0 (2024-08-30)
+
+
+
 # 1.27.0 (2022-10-03)
 
 
@@ -278,6 +282,3 @@
 * **sui-ci:** create sui-ci pkg ([28766d7](https://github.com/SUI-Components/sui/commit/28766d79454fcdb451ed5b286b26a3d7097a78e3))
 * **sui-ci:** move from index the command ([ed1331d](https://github.com/SUI-Components/sui/commit/ed1331dde1c200d25220ce45e76c6f14f2a89fcb))
 * **sui-ci:** use from named export ([a528079](https://github.com/SUI-Components/sui/commit/a528079cc0b2713289aa3acc407ac051286bb19d))
-
-
-
