@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.19.0 (2024-08-30)
+
+
+### Features
+
+* Update axios dependency due to high security vulnerability https://github ([ad02053](https://github.com/SUI-Components/sui/commit/ad02053885e8897a5303ae69813a17241aff4388))
+
+
+
 # 2.18.0 (2024-08-20)
 
 
