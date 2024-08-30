@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@s-ui/mono": "2",
-    "node-fetch": "2.6.7",
+    "node-fetch": "2.7.0",
     "commander": "8.3.0"
   },
   "devDependencies": {
