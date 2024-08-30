@@ -17,14 +17,14 @@ function getDecoratorsByNode(node, {isAClass, isAMethod, isArrowFunction}) {
 
 function getElementName(node, {isAClass, isAMethod, isArrowFunction}) {
   if (isAClass) {
-    const className = node.id?.name ?? 'UnknownClass'
+    const className = node?.id?.name ?? 'UnknownClass'
     return `${className}`
   }
 
   if (isArrowFunction) {
     const methodNode = node.parent
     const classNode = methodNode?.parent?.parent
-    const className = classNode.id?.name ?? 'UnknownClass'
+    const className = classNode?.id?.name ?? 'UnknownClass'
     const methodName = methodNode.key?.name ?? 'UnknownMethod'
 
     return `${className}.${methodName}`
@@ -32,7 +32,7 @@ function getElementName(node, {isAClass, isAMethod, isArrowFunction}) {
 
   if (isAMethod) {
     const classNode = node.parent?.parent
-    const className = classNode.id?.name ?? 'UnknownClass'
+    const className = classNode?.id?.name ?? 'UnknownClass'
     const methodName = node.key?.name ?? 'UnknownMethod'
 
     return `${className}.${methodName}`
@@ -55,7 +55,7 @@ function getElementMessageName(elementName, {isAClass, isAMethod, isArrowFunctio
 
 function remarkElement(node, {isAClass, isAMethod, isArrowFunction}) {
   if (isAClass) {
-    return node.id
+    return node?.id
   }
 
   if (isArrowFunction) {
