@@ -1,7 +1,7 @@
 {
   "name": "@s-ui/test",
   "version": "8.37.0",
-  "description": "",
+  "description": "Zero config testing tool",
   "bin": {
     "sui-test": "bin/sui-test.js"
   },
