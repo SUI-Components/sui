@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 8.38.0 (2024-08-30)
+
+
+### Features
+
+* force new release ([3bcf525](https://github.com/SUI-Components/sui/commit/3bcf5257adf3bbaa8e89b76079d828740728fd5d))
+* update dep ([8224f90](https://github.com/SUI-Components/sui/commit/8224f901ed13b4beb9e227bf9ef0f1e4fb3aadc1))
+
+
+
 # 8.37.0 (2024-08-23)
 
 
