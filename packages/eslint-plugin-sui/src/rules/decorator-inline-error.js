@@ -1,10 +1,9 @@
 /**
- * @fileoverview Ensure the right usage of @inlineError decorator from sui in sui-domain
+ * @fileoverview Ensure the right usage of @AsyncInlineError decorator from sui in sui-domain
  */
 'use strict'
 
 const dedent = require('string-dedent')
-const path = require('path')
 
 // ------------------------------------------------------------------------------
 // Rule Definition
@@ -15,123 +14,79 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
-      description: 'Ensure the right usage of @inlineError decorator from sui in sui-domain',
+      description: 'Ensure the right usage of @AsyncInlineError decorator from sui in sui-domain',
       recommended: true,
       url: 'https://github.mpi-internal.com/scmspain/es-td-agreements/blob/master/30-Frontend/00-agreements'
     },
     fixable: 'code',
     schema: [],
     messages: {
-      avoidUseInlineErrorOnAsyncFunctions: dedent`
-        The @inlineError decorator is deprecated on async functions. Use the @AsyncInlineError() decorator instead.
+      replaceInlineErrorWithAsyncInlineError: dedent`
+        The @inlineError decorator is deprecated. Use the @AsyncInlineError() decorator instead.
         `,
-      useInlineErrorOnNonAsyncFunctions: dedent`
-        The @inlineError decorator should be used on non async functions.
-        `,
-      inlineErrorDecoratorIsNotFirst: dedent`
-        The @inlineError decorator must always be closest to the execute method to avoid inconsistence with other decorators.
+      asyncInlineErrorDecoratorIsNotLast: dedent`
+        The @AsyncInlineError() decorator must always be closest to the method to avoid inconsistencies with other decorators.
         `
     }
   },
   create: function (context) {
-    const asyncInlineErrorImportStatement = "import {AsyncInlineError} from '@s-ui/decorators';\n"
+    const sourceCode = context.getSourceCode()
+    let hasAddedImport = false
 
-    const filePath = context.getFilename()
-    const relativePath = path.relative(context.getCwd(), filePath)
+    function addAsyncInlineErrorImport(fixer) {
+      if (
+        !hasAddedImport &&
+        !sourceCode.ast.body.some(
+          node =>
+            node.type === 'ImportDeclaration' &&
+            node.source.value === '@s-ui/decorators' &&
+            node.specifiers.some(spec => spec.imported.name === 'AsyncInlineError')
+        )
+      ) {
+        hasAddedImport = true
+        return fixer.insertTextBefore(sourceCode.ast.body[0], "import { AsyncInlineError } from '@s-ui/decorators';\n")
+      }
+      return null
+    }
 
-    // Check if the file is inside requierd folders (useCases, services, repositories, ...)
-    const useCasePattern = /useCases|usecases/i
-    const isUseCasePath = useCasePattern.test(relativePath)
-
-    const servicePattern = /services/i
-    const isServicePath = servicePattern.test(relativePath)
-
-    const repositoryPattern = /repositories/i
-    const isRepositoryPath = repositoryPattern.test(relativePath)
+    function getNodeIndent(node) {
+      const token = sourceCode.getFirstToken(node)
+      const lineStartIndex = sourceCode.getIndexFromLoc({line: token.loc.start.line, column: 0})
+      const textBeforeToken = sourceCode.text.slice(lineStartIndex, token.range[0])
+      return textBeforeToken.match(/^\s*/)[0]
+    }
 
     return {
-      MethodDefinition(node) {
-        // Method
-        const method = node
-        const isAsync = method?.value?.async || false
-        const methodName = method.key?.name
-        const isExecuteMethod = methodName === 'execute'
+      Program() {
+        hasAddedImport = false
+      },
+      Decorator(node) {
+        const methodDefinition = node.parent
+        const decorators = methodDefinition.decorators || []
+        const indent = getNodeIndent(methodDefinition)
 
-        // Class
-        const classObject = node.parent?.parent
-        const className = classObject?.id?.name
-        const superClassName = classObject?.superClass?.name
-
-        // UseCase
-        const containUseCase = className?.endsWith('UseCase')
-        const extendsUseCase = superClassName === 'UseCase'
-        const isUsecase = containUseCase || extendsUseCase || isUseCasePath
-
-        // Service
-        const containService = className?.endsWith('Service')
-        const extendsService = superClassName === 'Service'
-        const isService = containService || extendsService || isServicePath
-
-        // Repository
-        const containRepository = className?.endsWith('Repository')
-        const extendsRepository = superClassName === 'Repository'
-        const isRepository = containRepository || extendsRepository || isRepositoryPath
-
-        // Skip if it's not a UseCase, Service or Repository
-        if (!isUsecase && !isService && !isRepository && !isExecuteMethod) return
-
-        // Skip if a constructor or a not public method (starts by _ or #)
-        if (methodName === 'constructor') return
-        if (methodName.startsWith('_')) return
-        if (methodName.startsWith('#')) return
-        if ((isUsecase || isService) && !isExecuteMethod) return
-
-        // Method decorators
-        const methodDecorators = method.decorators
-        const hasDecorators = methodDecorators?.length > 0
-
-        // Get the @inlineError decorator from method
-        const inlineErrorDecoratorNode =
-          hasDecorators && methodDecorators?.find(decorator => decorator?.expression?.name === 'inlineError')
-
-        // Check if the @inlineError decorator is the last one
-        const isInlineErrorLastDecorator = hasDecorators && methodDecorators?.at(-1)?.expression?.name === 'inlineError'
-
-        // TODO: Pending to check if a function is returning a promise (not using async/await syntax)
-        // RULE: An async function MUST use the @AsyncInlineError() decorator
-        if (inlineErrorDecoratorNode && isAsync) {
+        if (node.expression.type === 'Identifier' && node.expression.name === 'inlineError') {
           context.report({
-            node: inlineErrorDecoratorNode,
-            messageId: 'avoidUseInlineErrorOnAsyncFunctions',
-            *fix(fixer) {
-              yield fixer.remove(inlineErrorDecoratorNode)
-              yield fixer.insertTextAfter(methodDecorators.at(-1), '\n@AsyncInlineError()')
-              yield fixer.insertTextBeforeRange([0, 0], asyncInlineErrorImportStatement)
+            node,
+            messageId: 'replaceInlineErrorWithAsyncInlineError',
+            fix(fixer) {
+              const fixes = [fixer.replaceText(node, '@AsyncInlineError()'), addAsyncInlineErrorImport(fixer)]
+              return fixes.filter(Boolean)
             }
           })
-        }
-
-        // @inlineError decorator should be used on non async functions
-        if (!isAsync) {
-          // RULE: A non-async function should use the @inlineError decorator should be the first one
-          if (!inlineErrorDecoratorNode) {
-            context.report({
-              node: method.key,
-              messageId: 'useInlineErrorOnNonAsyncFunctions'
-            })
-          }
-
-          // RULE: The @inlineError decorator should be the first one, to avoid inconsistencies with other decorators.
-          if (inlineErrorDecoratorNode && !isInlineErrorLastDecorator) {
-            context.report({
-              node: inlineErrorDecoratorNode,
-              messageId: 'inlineErrorDecoratorIsNotFirst',
-              *fix(fixer) {
-                yield fixer.remove(inlineErrorDecoratorNode)
-                yield fixer.insertTextAfter(methodDecorators.at(-1), '\n@inlineError')
-              }
-            })
-          }
+        } else if (
+          node.expression.type === 'CallExpression' &&
+          node.expression.callee.name === 'AsyncInlineError' &&
+          decorators.indexOf(node) !== decorators.length - 1
+        ) {
+          context.report({
+            node,
+            messageId: 'asyncInlineErrorDecoratorIsNotLast',
+            fix(fixer) {
+              const lastDecorator = decorators[decorators.length - 1]
+              return [fixer.remove(node), fixer.insertTextAfter(lastDecorator, `\n${indent}@AsyncInlineError()`)]
+            }
+          })
         }
       }
     }
