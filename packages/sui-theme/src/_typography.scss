@@ -6,7 +6,12 @@ $c-link-negative-hover: $c-white !default;
 
 $ff-link: $ff-sans-serif !default;
 $fw-link: normal !default;
+$fz-text-link: $fz-base !default;
+
 $lh-link: $lh-l !default;
+
+$td-text-link: underline !default;
+$td-hover-text-link: none !default;
 
 @mixin link($negative: false) {
   color: if($negative, $c-link-negative, $c-link);
@@ -28,31 +33,31 @@ $lh-link: $lh-l !default;
 @mixin h1 {
   font-size: $fz-h1;
   font-weight: $fw-bold;
-  margin: 0 0 $m-v;
+  margin: 0 0 $m-m;
 }
 
 @mixin h2 {
   font-size: $fz-h2;
   font-weight: $fw-bold;
-  margin: 0 0 $m-v;
+  margin: 0 0 $m-m;
 }
 
 @mixin h3 {
   font-size: $fz-h3;
   font-weight: $fw-bold;
-  margin: 0 0 $m-v-small;
+  margin: 0 0 $m-s;
 }
 
 @mixin h4 {
   font-size: $fz-h4;
   font-weight: $fw-bold;
-  margin: 0 0 $m-v-small;
+  margin: 0 0 $m-s;
 }
 
 @mixin h5 {
   font-size: $fz-h5;
   font-weight: $fw-bold;
-  margin: 0 0 $m-v-small;
+  margin: 0 0 $m-s;
 }
 
 @mixin text-link {
@@ -66,7 +71,7 @@ $lh-link: $lh-l !default;
 }
 
 @mixin text-highlighted {
-  background-color: $c-highlighted;
+  background-color: $c-highlight;
 }
 
 @mixin font-rendering {

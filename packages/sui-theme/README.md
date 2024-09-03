@@ -45,6 +45,8 @@ Compatibility v7 variables are no longer available to import manually.
 
 - We want to create all our components `mobile first`
 
+> Read more at [settings-compat-v7.md](src/settings-compat-v7.md)
+
 ### Legacy components
 
 - Keep in mind that refactoring legacy components in order to make it rules compliant would suppose a breaking change, so a new major must be released.
