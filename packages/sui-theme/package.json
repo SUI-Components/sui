@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/theme",
-  "version": "9.0.0-beta.3",
+  "version": "9.0.0-beta.4",
   "description": "Generic theme to add styles to all SUI components",
   "main": "lib/index.scss",
   "scripts": {
