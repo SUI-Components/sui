@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.13.0 (2024-09-04)
+
+
+### Bug Fixes
+
+* fix decorator-inline-error ([0f6e490](https://github.com/SUI-Components/sui/commit/0f6e490e0fbb7bf27563e2b451b6a18d3c8bba40))
+
+
+
 # 1.12.0 (2024-08-30)
 
 
