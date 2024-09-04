@@ -1,25 +1,24 @@
+import {RuleTester} from 'eslint'
 import dedent from 'string-dedent'
-import { RuleTester } from 'eslint'
+
 import rule from '../../src/rules/decorator-inline-error.js'
 
-describe.only('decorator-inline-error', () => {
-
-
-const ruleTester = new RuleTester({
-  parser: require.resolve('@babel/eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
-    babelOptions: {
-      configFile: require.resolve('babel-preset-sui')
+describe('decorator-inline-error', () => {
+  const ruleTester = new RuleTester({
+    parser: require.resolve('@babel/eslint-parser'),
+    parserOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module',
+      babelOptions: {
+        configFile: require.resolve('babel-preset-sui')
+      }
     }
-  }
-})
+  })
 
-ruleTester.run('decorator-inline-error', rule, {
-  valid: [
-    {
-      code: dedent`
+  ruleTester.run('decorator-inline-error', rule, {
+    valid: [
+      {
+        code: dedent`
         import { AsyncInlineError } from '@s-ui/decorators';
         class MyClass {
           @SomeOtherDecorator()
@@ -27,18 +26,18 @@ ruleTester.run('decorator-inline-error', rule, {
           async myMethod() {}
         }
       `
-    },
-    {
-      code: dedent`
+      },
+      {
+        code: dedent`
         class MyClass {
           myMethod() {}
         }
       `
-    }
-  ],
-  invalid: [
-    {
-      code: dedent`
+      }
+    ],
+    invalid: [
+      {
+        code: dedent`
         import { AsyncInlineError } from '@s-ui/decorators';
         class MyClass {
           @SomeOtherDecorator()
@@ -46,7 +45,7 @@ ruleTester.run('decorator-inline-error', rule, {
           async myMethod() {}
         }
       `,
-      output: dedent`
+        output: dedent`
         import { AsyncInlineError } from '@s-ui/decorators';
         class MyClass {
           @SomeOtherDecorator()
@@ -54,47 +53,47 @@ ruleTester.run('decorator-inline-error', rule, {
           async myMethod() {}
         }
       `,
-      errors: [
-        {
-          messageId: 'replaceInlineErrorWithAsyncInlineError',
-          type: 'Decorator'
-        }
-      ]
-    },
-    // {
-    //   skip: true,
-    //   code: dedent`
-    //     import { AsyncInlineError } from '@s-ui/decorators';
-    //     class MyClass {
-    //       @AsyncInlineError()
-    //       @SomeOtherDecorator()
-    //       async myMethod() {}
-    //     }
-    //   `,
-    //   output: dedent`
-    //     import { AsyncInlineError } from '@s-ui/decorators';
-    //     class MyClass {
-    //       @SomeOtherDecorator()
-    //       @AsyncInlineError()
-    //       async myMethod() {}
-    //     }
-    //   `,
-    //   errors: [
-    //     {
-    //       messageId: 'asyncInlineErrorDecoratorIsNotLast',
-    //       type: 'Decorator'
-    //     }
-    //   ]
-    // },
-    {
-      code: dedent`
+        errors: [
+          {
+            messageId: 'replaceInlineErrorWithAsyncInlineError',
+            type: 'Decorator'
+          }
+        ]
+      },
+      // {
+      //   skip: true,
+      //   code: dedent`
+      //     import { AsyncInlineError } from '@s-ui/decorators';
+      //     class MyClass {
+      //       @AsyncInlineError()
+      //       @SomeOtherDecorator()
+      //       async myMethod() {}
+      //     }
+      //   `,
+      //   output: dedent`
+      //     import { AsyncInlineError } from '@s-ui/decorators';
+      //     class MyClass {
+      //       @SomeOtherDecorator()
+      //       @AsyncInlineError()
+      //       async myMethod() {}
+      //     }
+      //   `,
+      //   errors: [
+      //     {
+      //       messageId: 'asyncInlineErrorDecoratorIsNotLast',
+      //       type: 'Decorator'
+      //     }
+      //   ]
+      // },
+      {
+        code: dedent`
         class MyClass {
           @inlineError
           @SomeOtherDecorator()
           async myMethod() {}
         }
       `,
-      output: dedent`
+        output: dedent`
         import { AsyncInlineError } from '@s-ui/decorators';
         class MyClass {
           @AsyncInlineError()
@@ -102,15 +101,15 @@ ruleTester.run('decorator-inline-error', rule, {
           async myMethod() {}
         }
       `,
-      errors: [
-        {
-          messageId: 'replaceInlineErrorWithAsyncInlineError',
-          type: 'Decorator'
-        }
-      ]
-    },
-    {
-      code: dedent`
+        errors: [
+          {
+            messageId: 'replaceInlineErrorWithAsyncInlineError',
+            type: 'Decorator'
+          }
+        ]
+      },
+      {
+        code: dedent`
         class MyClass {
           @inlineError
           async method1() {}
@@ -119,7 +118,7 @@ ruleTester.run('decorator-inline-error', rule, {
           async method2() {}
         }
       `,
-      output: dedent`
+        output: dedent`
         import { AsyncInlineError } from '@s-ui/decorators';
         class MyClass {
           @AsyncInlineError()
@@ -129,19 +128,17 @@ ruleTester.run('decorator-inline-error', rule, {
           async method2() {}
         }
       `,
-      errors: [
-        {
-          messageId: 'replaceInlineErrorWithAsyncInlineError',
-          type: 'Decorator'
-        },
-        {
-          messageId: 'replaceInlineErrorWithAsyncInlineError',
-          type: 'Decorator'
-        }
-      ]
-    }
-  ]
-})
-
-
+        errors: [
+          {
+            messageId: 'replaceInlineErrorWithAsyncInlineError',
+            type: 'Decorator'
+          },
+          {
+            messageId: 'replaceInlineErrorWithAsyncInlineError',
+            type: 'Decorator'
+          }
+        ]
+      }
+    ]
+  })
 })
