@@ -50,7 +50,7 @@ const webpackConfig = {
   },
   stats: 'errors-only',
   entry: {
-    app: [`webpack-hot-middleware/client?path=${CDN}__webpack_hmr`, MAIN_ENTRY_POINT]
+    main: [`webpack-hot-middleware/client?path=${CDN}__webpack_hmr`, MAIN_ENTRY_POINT]
   },
   cache: {
     type: 'filesystem',
