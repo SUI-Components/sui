@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.64.0 (2024-09-09)
+
+
+### Features
+
+* change bundler entry point name ([99e2b38](https://github.com/SUI-Components/sui/commit/99e2b388abe8624a2532d42e5e5c95985a40e402))
+
+
+
 # 9.63.0 (2024-08-29)
 
 
