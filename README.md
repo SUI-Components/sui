@@ -39,6 +39,7 @@ SUI is a set of packages which goal to ease development of SUI-based components 
 | [sui-react-initial-props](./packages/sui-react-initial-props) | Initial data fetching for your React app |
 | [sui-react-router](./packages/sui-react-router) | Set of navigational components that compose declaratively with your application. |
 | [sui-sass-loader](./packages/sui-sass-loader) | Sass loader for SUI |
+| [sui-segment-wrapper](./packages/sui-segment-wrapper) | Abstraction layer on top of the Segment library. |
 | [sui-ssr](./packages/sui-ssr) | Plug SSR to you SUI SPA |
 | [sui-studio-create](./packages/sui-studio-create) | CLI to create a new catalog of components |
 | [sui-studio-utils](./packages/sui-studio-utils) | A set of sui-studio usable tools. |
