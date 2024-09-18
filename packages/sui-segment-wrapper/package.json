@@ -1,0 +1,26 @@
+{
+  "name": "@s-ui/segment-wrapper",
+  "version": "4.0.0",
+  "description": "Abstraction layer on top of the Segment library.",
+  "main": "lib/index.js",
+  "scripts": {
+    "lib": "sui-js-compiler",
+    "prepublishOnly": "npm run umd && npm run lib",
+    "test:client:watch": "npm run test:client -- --watch",
+    "test:client": "sui-test browser --src-pattern=src/index.js -H",
+    "test": "npm run test:client",
+    "test:umd": "npm run umd && npx servor ./umd",
+    "umd": "sui-bundler lib src-umd/index.js -o umd/ -p --root"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@s-ui/js": "2",
+    "tiny-hashes": "1.0.1"
+  },
+  "devDependencies": {
+    "@s-ui/bundler": "9",
+    "@s-ui/js-compiler": "1",
+    "@s-ui/test": "8"
+  }
+}
