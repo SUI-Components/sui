@@ -10,7 +10,7 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 
 **Adobe Marketing Cloud Visitor Id ☁️**
 
-- [x] Load *Adobe Visitor API* when needed (if flag `importAdobeVisitorId` is set to `true`, otherwise you should load `Visitor API` by your own to get the `mcvid`).
+- [x] Load _Adobe Visitor API_ when needed (if flag `importAdobeVisitorId` is set to `true`, otherwise you should load `Visitor API` by your own to get the `mcvid`).
 - [x] Fetch `marketingCloudVisitorId` and put in integrations object for every track.
 - [x] Monkey patch `track` native Segment method to send `marketingCloudVisitorId` inside `context.integrations`.
 
@@ -42,10 +42,61 @@ After adding your Segment snippet into your html, you'll need to include this pa
 
 ```html
 <script>
-  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="YOUR_WRITE_KEY";analytics.SNIPPET_VERSION="4.13.2";
+  !(function () {
+    var analytics = (window.analytics = window.analytics || [])
+    if (!analytics.initialize)
+      if (analytics.invoked) window.console && console.error && console.error('Segment snippet included twice.')
+      else {
+        analytics.invoked = !0
+        analytics.methods = [
+          'trackSubmit',
+          'trackClick',
+          'trackLink',
+          'trackForm',
+          'pageview',
+          'identify',
+          'reset',
+          'group',
+          'track',
+          'ready',
+          'alias',
+          'debug',
+          'page',
+          'once',
+          'off',
+          'on',
+          'addSourceMiddleware',
+          'addIntegrationMiddleware',
+          'setAnonymousId',
+          'addDestinationMiddleware'
+        ]
+        analytics.factory = function (e) {
+          return function () {
+            var t = Array.prototype.slice.call(arguments)
+            t.unshift(e)
+            analytics.push(t)
+            return analytics
+          }
+        }
+        for (var e = 0; e < analytics.methods.length; e++) {
+          var key = analytics.methods[e]
+          analytics[key] = analytics.factory(key)
+        }
+        analytics.load = function (key, e) {
+          var t = document.createElement('script')
+          t.type = 'text/javascript'
+          t.async = !0
+          t.src = 'https://cdn.segment.com/analytics.js/v1/' + key + '/analytics.min.js'
+          var n = document.getElementsByTagName('script')[0]
+          n.parentNode.insertBefore(t, n)
+          analytics._loadOptions = e
+        }
+        analytics._writeKey = 'YOUR_WRITE_KEY'
+        analytics.SNIPPET_VERSION = '4.13.2'
 
-  analytics.load("YOUR_WRITE_KEY");  // your write key must be set here
-  }}();
+        analytics.load('YOUR_WRITE_KEY') // your write key must be set here
+      }
+  })()
 </script>
 ```
 
@@ -74,16 +125,17 @@ import analytics from '@s-ui/segment-wrapper'
 ### Step 3: Configure mandatory Segment Wrapper attributes:
 
 The following configuration parameters are required and must be set for the system to function correctly:
-  -	`ADOBE_ORG_ID`: This parameter is the Adobe Organization ID, required for integration with Adobe services. Please make sure that you replace the example value with your actual Adobe Org ID.
-  -	`TRACKING_SERVER`: This specifies the tracking server URL that will be used for sending data and handling tracking requests.
 
-	These parameters need to be defined in the `window._SEGMENT_WRAPPER` object as follows:
+- `ADOBE_ORG_ID`: This parameter is the Adobe Organization ID, required for integration with Adobe services. Please make sure that you replace the example value with your actual Adobe Org ID.
+- `TRACKING_SERVER`: This specifies the tracking server URL that will be used for sending data and handling tracking requests.
+
+  These parameters need to be defined in the `window._SEGMENT_WRAPPER` object as follows:
 
 ```js
-  window.__SEGMENT_WRAPPER = {
-    ADOBE_ORG_ID: '012345678@AdobeOrg', // Mandatory!
-    TRACKING_SERVER: 'mycompany.test.net', // Mandatory!
-  }
+window.__SEGMENT_WRAPPER = {
+  ADOBE_ORG_ID: '012345678@AdobeOrg', // Mandatory!
+  TRACKING_SERVER: 'mycompany.test.net' // Mandatory!
+}
 ```
 
 Configure both values correctly before running the application to ensure proper tracking and data integration.
@@ -125,7 +177,7 @@ Example:
 
 ### It also provides additional information such as:
 
-- window.__mpi.isFirstVisit: boolean - true if the user hasn't interacted with the tcf modal yet
+- window.\_\_mpi.isFirstVisit: boolean - true if the user hasn't interacted with the tcf modal yet
 
 ## Events
 
@@ -180,7 +232,7 @@ analytics.reset()
 
 ## UniversalID
 
-*Segment Wrapper* is handling all about the UniversalID, an ID to identify the user across different sites by using a hashed email. If you want, you could subscribe yourself to an event in order to retrieve this info:
+_Segment Wrapper_ is handling all about the UniversalID, an ID to identify the user across different sites by using a hashed email. If you want, you could subscribe yourself to an event in order to retrieve this info:
 
 ```js
 document.addEventListener(USER_DATA_READY_EVENT, e => {
@@ -211,10 +263,9 @@ console.log(universalId)
 
 ### Send xandrId as externalIds
 
-To not send the ```xandrId``` put this flag as configuration:  ```window.__mpi.segmentWrapper.sendXandrId = false```
+To not send the `xandrId` put this flag as configuration: `window.__mpi.segmentWrapper.sendXandrId = false`
 
 By default, all xandrId will be sent.
-
 
 ## Middlewares
 
@@ -244,8 +295,6 @@ Will add the site property as optimizely attribute
 import {optimizelySiteAttributeMiddleware} from '@s-ui/segment-wrapper/lib/middlewares/destination/optimizelySiteAttribute'
 
 window.analytics.ready(() => {
-  window.analytics.addDestinationMiddleware('Optimizely', [
-    optimizelySiteAttributeMiddleware
-  ])
+  window.analytics.addDestinationMiddleware('Optimizely', [optimizelySiteAttributeMiddleware])
 })
 ```
