@@ -8,7 +8,6 @@ contract/logs/pact.log
 coverage/
 jsconfig.json
 lib/
-umd/
 node_modules/
 npm-debug.log
 
@@ -22,7 +21,8 @@ packages/sui-studio/test/server/integration/sample-studio/components/atom/button
 packages/sui-studio/test/server/integration/sample-studio/node_modules/
 packages/sui-studio/test/server/integration/sample-studio/public
 
-sui-components-dashboard-9350df448fcd.json
 repopack-output.txt
 repopack.config.json
 .repopackignore
+
+**/umd/index.js
