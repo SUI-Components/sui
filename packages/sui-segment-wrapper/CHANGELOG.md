@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.3.0 (2024-09-19)
+
+
+### Features
+
+* force new release ([5a0ee5b](https://github.com/SUI-Components/sui/commit/5a0ee5bd56eca33f6b7cfdd7ae9e9f9e2ddd079c))
+
+
+
 # 4.2.0 (2024-09-19)
 
 
