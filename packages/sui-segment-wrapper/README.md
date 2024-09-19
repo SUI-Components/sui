@@ -1,6 +1,6 @@
 # Segment Wrapper
 
-This package adds an abstraction layer on top of [segment.com](https://segment.com/)'s [javascript library](https://segment.com/docs/sources/website/analytics.js/) with some useful integrations and fixes:
+This package adds an abstraction layer on top of [segment.com](https://segment.com/)'s [JavaScript library](https://segment.com/docs/sources/website/analytics.js/) with some useful integrations and fixes:
 
 **Data Quality 📈**
 
