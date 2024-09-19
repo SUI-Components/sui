@@ -18,7 +18,7 @@
     "test": "npm run test:client && npm run test:server",
     "test:client:ci": "npm run test:client",
     "test:server:ci": "npm run test:server",
-    "test:client": "npx @s-ui/test browser -P 'packages/**/!(server)/*Spec.js'",
+    "test:client": "npx @s-ui/test browser -P 'packages/**/!(server)/*Spec.js' -H",
     "test:client:watch": "npm run test:client -- --watch",
     "test:server": "npx @s-ui/test server -P 'packages/{sui-test-contract,sui-js-compiler}/**/server/*Spec.js'",
     "test:server:watch": "npm run test:server -- --watch",
@@ -60,7 +60,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
+      "./node_modules/@s-ui/lint/eslintrc.ts.js"
     ]
   },
   "babel": {
