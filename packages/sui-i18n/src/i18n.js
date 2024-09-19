@@ -151,6 +151,7 @@ export default class Rosetta {
    * Format minor types.
    *
    * @param {String} type The kind of value to be formatted:
+   *                        - percentage
    *                        - phone
    * @param {} value The value to be formatted
    * @param {Object} options Specific options for the specified type
