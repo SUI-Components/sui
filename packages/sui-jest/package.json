@@ -15,7 +15,7 @@
     "@swc/jest": "0.2.24",
     "@types/jest": "29.2.4",
     "jest": "29.3.1",
-    "jest-environment-jsdom": "29.3.1",
+    "jest-environment-jsdom": "29.7.0",
     "read-pkg-up": "7.0.1"
   },
   "repository": {
