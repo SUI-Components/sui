@@ -34,9 +34,9 @@ export function removeCookie(
 /**
  * Reduces the domain to main domain name
  * Examples:
- *   - www.fotocasa.es -> .fotocasa.es
- *   - www.motos.coches.net -> .coches.net
- *   - www.jobisjob.co.uk -> .jobisjob.co.uk
+ *   - www.mywebpage.es -> .mywebpage.es
+ *   - www.my.newwebpage.net -> .newwebpage.net
+ *   - www.mywebpage.co.uk -> .mywebpage.co.uk
  *
  * @param {String} domain
  * @returns {String} dot + main domain

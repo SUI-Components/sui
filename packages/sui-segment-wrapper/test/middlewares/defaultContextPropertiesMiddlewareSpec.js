@@ -19,7 +19,7 @@ describe('defaultContextPropertiesMiddleware', () => {
   it('should add the context default properties if defined', () => {
     const payload = fakePayloadFactory()
     setConfig('defaultContext', {
-      site: 'fotocasa'
+      site: 'comprocasa'
     })
 
     const spy = sinon.spy()
@@ -28,7 +28,7 @@ describe('defaultContextPropertiesMiddleware', () => {
 
     expect(obj.context).to.deep.equal({
       platform: 'web',
-      site: 'fotocasa'
+      site: 'comprocasa'
     })
   })
 
