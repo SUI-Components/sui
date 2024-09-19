@@ -30,13 +30,13 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 
 **Segment Middlewares 🖖**
 
-- [x] Optimizely Full Stack middleware to use Segment's anonymousId as Optimizely's userId, more info [here](#optimizelys-userid)
+- [x] Optimizely Full Stack middleware to use Segment's anonymousId as Optimizely's userId, more info [here](#optimizelys-userid).
 
 ## Usage
 
 After adding your Segment snippet into your html, you'll need to include this package in order to be able to fire events.
 
-`analytics` will be an object with the methods described [here](#events)
+`analytics` will be an object with the methods described [here](#events).
 
 ### Step 1: Copy the Snippet in your HTML
 
