@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/jest",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "CLI that abstracts away all configuration for Jest",
   "bin": {
     "sui-jest": "bin/sui-jest.js"
