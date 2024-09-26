@@ -23,11 +23,12 @@ node ./node_modules/.bin/sui-jest [Jest CLI Options]
 ```json
 // package.json
 {
-    scripts: {
-        "test:jest": "sui-jest",
-    }
+  "scripts": {
+    "test:jest": "sui-jest"
+  }
 }
 ```
+
 ```sh
 npm run test:jest -- [Jest CLI Options]
 ```
@@ -53,18 +54,15 @@ Create a `jest.config.[*]` config file in your root project or within the `packa
 
 module.exports = {
   testEnvironment: 'jsdom',
-  testMatch: ['**/__tests__/**/*.test.js'],
+  testMatch: ['**/__tests__/**/*.test.js']
   // ...
 }
 ```
 
-*In construction*
+_In construction_
 
 In addition, `sui-jest` will expose its basic configuration so you can use it and override only the parts of the config you need to.
-
 
 ## Inspiration
 
 This is inspired by [kcd-scripts](https://github.com/kentcdodds/kcd-scripts).
-
-
