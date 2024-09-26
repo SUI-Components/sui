@@ -28,6 +28,15 @@ export default class PDE {
     return this._adapter.activateExperiment({name, attributes, adapterId})
   }
 
+  /**
+   * @param {object} param
+   * @param {string} param.name
+   * @param {object} param.attributes
+   */
+  decide({name, attributes, adapterId}) {
+    return this._adapter.decide({name, attributes, adapterId})
+  }
+
   getInitialData() {
     return this._adapter.getInitialData()
   }

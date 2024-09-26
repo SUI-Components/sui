@@ -6,6 +6,9 @@ const getServerStrategy = () => ({
   getVariation: ({pde, experimentName, attributes, adapterId}) => {
     return pde.getVariation({pde, name: experimentName, attributes, adapterId})
   },
+  decide: ({pde, name, attributes, adapterId}) => {
+    return pde.decide({pde, name, attributes, adapterId})
+  },
   trackExperiment: () => {},
   getForcedValue: ({key, queryString}) => {
     if (!queryString) {
@@ -26,6 +29,9 @@ const getBrowserStrategy = ({customTrackExperimentViewed, cache}) => ({
     })
 
     return variationName
+  },
+  decide: ({pde, name, attributes, adapterId}) => {
+    return pde.decide({pde, name, attributes, adapterId})
   },
   trackExperiment: ({variationName, experimentName}) => {
     if (customTrackExperimentViewed) {

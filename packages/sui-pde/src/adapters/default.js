@@ -15,6 +15,10 @@ export default class DefaultAdapter {
     return null
   }
 
+  decide() {
+    return null
+  }
+
   updateConsents() {
     return null
   }

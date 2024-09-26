@@ -62,12 +62,14 @@ export default class OptimizelyAdapter {
       sdkKey = undefined
     }
 
+    const isServer = typeof window === 'undefined'
     const optimizelyInstance = optimizely.createInstance({
       sdkKey,
       datafileOptions: options,
       datafile,
       eventDispatcher,
-      ...DEFAULT_EVENTS_OPTIONS
+      ...DEFAULT_EVENTS_OPTIONS,
+      defaultDecideOptions: isServer ? [optimizely.OptimizelyDecideOption.DISABLE_DECISION_EVENT] : []
     })
 
     return optimizelyInstance
@@ -115,6 +117,23 @@ export default class OptimizelyAdapter {
       ...this._applicationAttributes,
       ...attributes
     })
+  }
+
+  /**
+   * @param {Object} params
+   * @param {string} params.name
+   * @param {object} [params.attributes]
+   * @returns {string=} variation name
+   */
+  decide({name, attributes}) {
+    if (!this._hasUserConsents) return null
+
+    const user = this._optimizely.createUserContext(this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
+
+    return user.decide(name)
   }
 
   /**

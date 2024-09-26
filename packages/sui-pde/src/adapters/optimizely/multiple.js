@@ -60,6 +60,10 @@ class MultipleOptimizelyAdapter {
     return this.#adapters[adapterId].activateExperiment(props)
   }
 
+  decide({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].decide(props)
+  }
+
   getVariation({adapterId = defaultAdapterId, ...props}) {
     return this.#adapters[adapterId].getVariation(props)
   }
