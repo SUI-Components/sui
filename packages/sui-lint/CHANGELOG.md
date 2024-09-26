@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.50.0 (2024-09-26)
+
+
+### Features
+
+* force release ([fbabcc3](https://github.com/SUI-Components/sui/commit/fbabcc32ea97d72123f8807eb0b342f2401f7cb4))
+
+
+
 # 4.49.0 (2024-08-30)
 
 
