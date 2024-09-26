@@ -4,9 +4,9 @@
 
 It provides:
 
-* Same js and sass style of code across all company.
-* Linting rules a reference package, not duplicated linting config in every project.
-* Implemented as a reusable CLI.
+- Same js and sass style of code across all company.
+- Linting rules a reference package, not duplicated linting config in every project.
+- Implemented as a reusable CLI.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Same options available in [eslint](https://eslint.org/docs/user-guide/command-li
 $ sui-lint js --fix [options]
 ```
 
-### Lint SASS files
+### Lint Sass files
 
 ```
 $ sui-lint sass [options]
@@ -51,7 +51,6 @@ $ sui-lint sass --pattern ./widgets/**/*.scss
 ```
 
 > **`.gitignore` file patterns are also excluded but interpretation may differ as only glob patterns are understood**
-
 
 ### Scope commands to staged files
 
@@ -83,18 +82,17 @@ It's usefull to make your code autoformat before any commit.
 Steps to integrate sui-lint with an IDE:
 
 1.  Install (if needed) eslint/stylelint/prettier plugins in your IDE. For example, for Visual Studio Code, the recommended ones are:
+
     - [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
     - [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
     - [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
-  
+
 2.  After install the package, it will add automatically the needed configuration to your `package.json` file. If not, make sure you add these lines:
 
 ```json
 {
   "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
+    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
@@ -118,9 +116,7 @@ Steps to integrate sui-lint with an IDE:
     "@s-ui/lint": "3"
   },
   "eslintConfig": {
-    "extends": [
-      "./node_modules/@s-ui/lint/eslintrc.js"
-    ]
+    "extends": ["./node_modules/@s-ui/lint/eslintrc.js"]
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
@@ -156,7 +152,6 @@ Add the next config to your preferences:
 ```
 
 It will format and fix the problems of linter on saving. If you prefer to do this manually, you could avoid adding the `eslint.autoFixOnSave` and `editor.formatOnSave` configs.
-
 
 ## Linting rules in detail
 
@@ -225,10 +220,7 @@ import Drawer from '@s-ui/react-molecule-drawer'
 
 import {Box} from '@adv-ui/ij-layout'
 import {List, ListItem} from '@adv-ui/ij-list'
-import {
-  useCv,
-  useSuiContext
-} from '@adv-ui/ij-react-hooks'
+import {useCv, useSuiContext} from '@adv-ui/ij-react-hooks'
 import {Heading} from '@adv-ui/ij-typography'
 
 import controller from '../controller'
