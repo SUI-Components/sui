@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.16.0 (2024-09-27)
+
+
+### Features
+
+* switch to an upgraded package ([6e4f2d5](https://github.com/SUI-Components/sui/commit/6e4f2d5fc3cd49c3f070c6c6c72d194ee6f19a57))
+
+
+
 # 2.15.0 (2024-05-06)
 
 
