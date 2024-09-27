@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.6.0 (2024-09-27)
+
+
+### Features
+
+* upgrade axios version ([bc15e5c](https://github.com/SUI-Components/sui/commit/bc15e5c661036bdabdb78b028acefe362b8eebc9))
+
+
+
 # 2.5.0 (2024-02-07)
 
 
