@@ -7,7 +7,7 @@
 import program from 'commander'
 import path from 'node:path'
 
-import {Publisher} from '@pact-foundation/pact'
+import pact from '@pact-foundation/pact-node'
 
 import {exec} from './utils/index.js'
 
@@ -45,8 +45,8 @@ const options = {
   consumerVersion
 }
 
-new Publisher(options)
-  .publishPacts()
+pact
+  .publishPacts(options)
   .then(() => {
     console.log(`Pact contract for consumer version ${options.consumerVersion} published!`)
     console.log(`Head over to ${brokerUrl} and login to see your published contracts.`)

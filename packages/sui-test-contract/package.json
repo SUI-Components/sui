@@ -16,7 +16,7 @@
     "test:server:watch": "npm run test:server -- --watch"
   },
   "dependencies": {
-    "@pact-foundation/pact": "9.18.1",
+    "@pact-foundation/pact-node": "10.18.0",
     "@pactflow/pact-msw-adapter": "2.0.1",
     "@s-ui/mock": "1",
     "commander": "8.3.0",
