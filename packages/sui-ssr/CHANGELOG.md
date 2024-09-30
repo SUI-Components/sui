@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.32.0 (2024-09-30)
+
+
+### Bug Fixes
+
+* update express dep and lock file ([f94cc22](https://github.com/SUI-Components/sui/commit/f94cc2213e560632d8fee2de5c396763c2a916f5))
+
+
+
 # 8.31.0 (2024-08-30)
 
 
