@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.3.0 (2024-09-30)
+
+
+### Bug Fixes
+
+* update dset dependency to avoid vulnerability ([1586fc7](https://github.com/SUI-Components/sui/commit/1586fc70d4153fd5ab5e295f9d75aeabf2bdb197))
+
+
+
 # 3.2.0 (2022-10-03)
 
 
@@ -197,6 +206,3 @@
 
 * **sui-precommit:** first commit of frontend-commit-rules migration to sui-precommit ([6f77134](https://github.com/SUI-Components/sui/commit/6f77134096a3f8f8bf501a5aafa0c296f5ef1cb9))
 * **sui-precommit:** rename package to @schibstedspain/sui-precommit ([b9a0a1d](https://github.com/SUI-Components/sui/commit/b9a0a1dd85f408caf74e1d4cace02ed134c7d2e1))
-
-
-
