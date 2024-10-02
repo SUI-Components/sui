@@ -1,6 +1,6 @@
-import {readCookie, removeCookie, saveCookie} from './utils/cookies.js'
-import {isClient, setConfig} from './config.js'
-import {USER_GDPR} from './tcf.js'
+import {readCookie, removeCookie, saveCookie} from '../utils/cookies.js'
+import {isClient, setConfig} from '../config.js'
+import {USER_GDPR} from '../tcf.js'
 
 const XANDR_ID_SERVER_URL = 'https://secure.adnxs.com/getuidj'
 const XANDR_ID_COOKIE = 'adit-xandr-id'

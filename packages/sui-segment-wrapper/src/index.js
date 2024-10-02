@@ -1,10 +1,10 @@
-import './patchAnalytics.js'
+import './utils/patchAnalytics.js'
 
 import {defaultContextProperties} from './middlewares/source/defaultContextProperties.js'
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
-import {checkAnonymousId} from './checkAnonymousId.js'
+import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {isClient} from './config.js'
 import analytics from './segmentWrapper.js'
 import initTcfTracking from './tcf.js'
@@ -35,5 +35,5 @@ if (isClient && window.analytics) {
 }
 
 export default analytics
-export {getAdobeVisitorData, getAdobeMCVisitorID} from './adobeRepository.js'
+export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 export {getUniversalId} from './universalId.js'

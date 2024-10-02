@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {checkAnonymousId} from '../src/checkAnonymousId.js'
+import {checkAnonymousId} from '../src/utils/checkAnonymousId.js'
 
 describe('checkAnonymousId', () => {
   let anonymousId

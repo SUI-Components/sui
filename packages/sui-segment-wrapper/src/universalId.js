@@ -2,6 +2,7 @@ import {dispatchEvent} from '@s-ui/js/lib/events'
 
 import {createUniversalId} from './utils/hashEmail.js'
 import {getConfig, isClient, setConfig} from './config.js'
+
 const USER_DATA_READY_EVENT = 'USER_DATA_READY'
 
 export const getUniversalIdFromConfig = () => getConfig('universalId')

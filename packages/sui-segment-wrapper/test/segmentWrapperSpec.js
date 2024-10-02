@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {getAdobeVisitorData} from '../src/adobeRepository.js'
+import {getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
 import {setConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
 import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
@@ -15,6 +15,7 @@ import {
   resetReferrerState,
   stubActualLocation,
   stubDocumentCookie,
+  stubGoogleAnalytics,
   stubReferrer,
   stubTcfApi,
   stubWindowObjects
@@ -37,6 +38,7 @@ describe('Segment Wrapper', function () {
 
   beforeEach(() => {
     stubWindowObjects()
+    stubGoogleAnalytics()
 
     window.__SEGMENT_WRAPPER = window.__SEGMENT_WRAPPER || {}
     window.__SEGMENT_WRAPPER.ADOBE_ORG_ID = '012345678@AdobeOrg'
@@ -214,6 +216,53 @@ describe('Segment Wrapper', function () {
       })
     })
 
+    describe('and gtag has been configured properly', () => {
+      it('should send Google Analytics integration with true if user declined consents', async () => {
+        // Add the needed config to enable Google Analytics
+        setConfig('googleAnalyticsMeasurementId', 123)
+        await simulateUserDeclinedConsents()
+
+        await suiAnalytics.track(
+          'fakeEvent',
+          {},
+          {
+            integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
+          }
+        )
+
+        const {context} = getDataFromLastTrack()
+
+        expect(context.integrations).to.deep.includes({
+          fakeIntegrationKey: 'fakeIntegrationValue',
+          'Google Analytics 4': true
+        })
+      })
+
+      it('should send ClientId on Google Analytics integration if user accepted consents', async () => {
+        // add needed config to enable Google Analytics
+        setConfig('googleAnalyticsMeasurementId', 123)
+
+        await simulateUserAcceptConsents()
+
+        await suiAnalytics.track(
+          'fakeEvent',
+          {},
+          {
+            integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
+          }
+        )
+
+        const {context} = getDataFromLastTrack()
+
+        expect(context.integrations).to.deep.includes({
+          fakeIntegrationKey: 'fakeIntegrationValue',
+          'Google Analytics 4': {
+            clientId: 'fakeClientId'
+          }
+        })
+      })
+    })
+
     it('should add always the platform as web and the language', async () => {
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
       const {properties} = getDataFromLastTrack()
@@ -225,20 +274,20 @@ describe('Segment Wrapper', function () {
     })
 
     it('should send defaultProperties if provided', async () => {
-      setConfig('defaultProperties', {site: 'midudev', vertical: 'blog'})
+      setConfig('defaultProperties', {site: 'mysite', vertical: 'myvertical'})
 
       await suiAnalytics.track('fakeEvent')
 
       const {properties} = getDataFromLastTrack()
 
       expect(properties).to.deep.equal({
-        site: 'midudev',
-        vertical: 'blog',
+        site: 'mysite',
+        vertical: 'myvertical',
         platform: 'web'
       })
     })
 
-    describe('TCF is handled', () => {
+    describe('and the TCF is handled', () => {
       it('should reset the anonymousId when the user first declines and then accepts', async () => {
         await simulateUserDeclinedConsents()
 
@@ -530,16 +579,12 @@ describe('Segment Wrapper', function () {
       const spy = sinon.stub()
 
       await simulateUserDeclinedConsents()
-
       await suiAnalytics.track(
         'fakeEvent',
         {fakePropKey: 'fakePropValue'},
         {
           anonymousId: '1a3bfbfc-9a89-437a-8f1c-87d786f2b6a',
           userId: 'fakeId',
-          integrations: {
-            'Midu Analytics': true
-          },
           protocols: {
             event_version: 3
           }
@@ -549,14 +594,13 @@ describe('Segment Wrapper', function () {
 
       const {context} = getDataFromLastTrack()
       const integrations = {
-        'Midu Analytics': true,
         All: false,
         'Adobe Analytics': true,
+        'Google Analytics 4': true,
         Personas: false,
         Webhooks: true,
         Webhook: true
       }
-
       const expectation = {
         anonymousId: '1a3bfbfc-9a89-437a-8f1c-87d786f2b6a',
         integrations,
@@ -569,9 +613,9 @@ describe('Segment Wrapper', function () {
           integrations
         }
       }
-
       const {traits} = spy.getCall(0).firstArg.obj.context
 
+      console.log(context, expectation)
       expect(context).to.deep.equal(expectation)
       expect(traits).to.deep.equal({
         anonymousId: 'fakeAnonymousId',

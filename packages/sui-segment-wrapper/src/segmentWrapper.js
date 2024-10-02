@@ -1,9 +1,10 @@
 // @ts-check
 
-import {getAdobeMCVisitorID} from './adobeRepository.js'
+import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
+import {getGoogleClientID} from './repositories/googleRepository.js'
 import {getConfig} from './config.js'
 import {checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
-import {getXandrId} from './xandrRepository.js'
+import {getXandrId} from './repositories/xandrRepository.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -34,18 +35,24 @@ export const getDefaultProperties = () => ({
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
   let marketingCloudVisitorId
+  let googleClientId
 
   if (isGdprAccepted) {
     marketingCloudVisitorId = await getAdobeMCVisitorID()
+    googleClientId = await getGoogleClientID()
   }
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
-  const adobeAnalyticsIntegration = marketingCloudVisitorId ? {marketingCloudVisitorId} : true
 
-  // if we don't have the user consents we remove all the integrations but Adobe Analytics
+  // If we don't have the user consents we remove all the integrations but Adobe Analytics nor GA4
   return {
     ...restOfIntegrations,
-    'Adobe Analytics': adobeAnalyticsIntegration
+    'Adobe Analytics': marketingCloudVisitorId ? {marketingCloudVisitorId} : true,
+    'Google Analytics 4': googleClientId
+      ? {
+          clientId: googleClientId
+        }
+      : true
   }
 }
 

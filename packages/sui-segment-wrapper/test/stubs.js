@@ -10,6 +10,7 @@ export const cleanWindowStubs = () => {
   delete window.__borosTcf
   delete window.__mpi
   delete window.__tcfapi
+  delete window.gtag
 }
 
 export const stubTcfApi = ({success = true, eventStatus = 'cmpuishown', consents = {}} = {}) => {
@@ -39,6 +40,19 @@ export const stubFetch = ({responses = [{urlRe: /^http/, fetchResponse: {}}]} = 
     const responseMatch = responses.find(({urlRe}) => urlRe.test(url))
     return responseMatch ? createSuccessResponse(responseMatch.fetchResponse) : createFailResponse()
   })
+}
+
+export const stubGoogleAnalytics = () => {
+  const mockClientId = 'fakeClientId'
+  const mockSessionId = 'fakeSessionId'
+
+  window.gtag = (key, id, fieldName, done) => {
+    if (key === 'get') {
+      const value = fieldName === 'client_id' ? mockClientId : mockSessionId
+
+      return done(value)
+    }
+  }
 }
 
 export const stubWindowObjects = ({borosMock = true, borosSuccess = true, isDmpAccepted = true} = {}) => {

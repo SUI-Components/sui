@@ -8,6 +8,11 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 - [x] Send `user.id` and `anonymousId` on every track.
 - [x] Send anonymous data to AWS to be able to check data integrity with Adobe.
 
+**Google Analytics 🔍**
+
+- [x] Load GA4 if `googleAnalyticsMeasurementId` is provided and the `gtag` object is not available in the global scope.
+- [x] Retrieve `clientId` automatically from GA4 and put in Segment tracks.
+
 **Adobe Marketing Cloud Visitor Id ☁️**
 
 - [x] Load _Adobe Visitor API_ when needed (if flag `importAdobeVisitorId` is set to `true`, otherwise you should load `Visitor API` by your own to get the `mcvid`).
@@ -159,6 +164,7 @@ Example:
 ```js
   window.__mpi = {
     segmentWrapper: {
+      googleAnalyticsMeasurementId: 'GA-123456789',
       universalId: '7ab9ddf3281d5d5458a29e8b3ae2864',
       defaultContext: {
         site: 'comprocasa',
