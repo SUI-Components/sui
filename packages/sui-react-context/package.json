@@ -12,7 +12,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@s-ui/js-compiler": "1"
+    "@s-ui/js-compiler": "1",
+    "@types/hoist-non-react-statics": "3.3.5"
   },
   "dependencies": {
     "hoist-non-react-statics": "3.3.2"
