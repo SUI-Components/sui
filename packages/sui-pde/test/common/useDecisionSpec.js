@@ -92,13 +92,8 @@ describe('useDecision hook', () => {
               {wrapper}
             )
             expect(result.current).to.be.deep.equal({
-              variationKey: 'variation',
               enabled: false,
-              variables: {},
-              ruleKey: 'rule',
-              flagKey: 'flag',
-              userContext: {},
-              reasons: []
+              flagKey: 'flag'
             })
           })
         })
@@ -115,11 +110,7 @@ describe('useDecision hook', () => {
             expect(result.current).to.be.deep.equal({
               variationKey: 'variation_a',
               enabled: true,
-              variables: {},
-              ruleKey: 'rule',
-              flagKey: 'flag',
-              userContext: {},
-              reasons: []
+              flagKey: 'rule'
             })
           })
         })

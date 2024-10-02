@@ -31,6 +31,14 @@ export default function useDecision(name, {attributes, trackExperimentViewed, qu
         queryString
       })
 
+      if (forced) {
+        if (['on', 'off'].includes(forced)) {
+          return {enabled: forced === 'on', flagKey: name}
+        }
+
+        return {enabled: true, flagKey: name, variationKey: forced}
+      }
+
       const data = strategy.decide({
         pde,
         name,
@@ -41,14 +49,6 @@ export default function useDecision(name, {attributes, trackExperimentViewed, qu
       const {ruleKey, variationKey} = data || {}
 
       const isExperiment = !!ruleKey
-
-      if (forced) {
-        if (!isExperiment || ['on', 'off'].includes(forced)) {
-          return {...data, enabled: forced === 'on'}
-        }
-
-        return {...data, enabled: true, variationKey: forced}
-      }
 
       if (isExperiment) {
         strategy.trackExperiment({variationName: variationKey, experimentName: ruleKey})
