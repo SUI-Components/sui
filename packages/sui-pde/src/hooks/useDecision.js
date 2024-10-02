@@ -20,39 +20,45 @@ export default function useDecision(name, {attributes, trackExperimentViewed, qu
     throw new Error('[sui-pde: useDecision] sui-pde provider is required to work')
   }
 
-  const variation = useMemo(() => {
-    const strategy = getPlatformStrategy({
-      customTrackExperimentViewed: trackExperimentViewed
-    })
+  const data = useMemo(() => {
+    try {
+      const strategy = getPlatformStrategy({
+        customTrackExperimentViewed: trackExperimentViewed
+      })
 
-    const forced = strategy.getForcedValue({
-      key: name,
-      queryString
-    })
+      const forced = strategy.getForcedValue({
+        key: name,
+        queryString
+      })
 
-    const data = strategy.decide({
-      pde,
-      name,
-      attributes,
-      adapterId
-    })
+      const data = strategy.decide({
+        pde,
+        name,
+        attributes,
+        adapterId
+      })
 
-    const {ruleKey, variationKey} = data || {}
+      const {ruleKey, variationKey} = data || {}
 
-    if (forced) {
-      if (!ruleKey) {
-        return {...data, enabled: forced === 'on'}
+      const isExperiment = !!ruleKey
+
+      if (forced) {
+        if (!isExperiment) {
+          return {...data, enabled: forced === 'on'}
+        }
+
+        return {...data, enabled: true, variationKey: forced}
       }
 
-      return {...data, enabled: true, variationKey: forced}
-    }
+      if (isExperiment) {
+        strategy.trackExperiment({variationName: variationKey, experimentName: ruleKey})
+      }
 
-    if (ruleKey) {
-      strategy.trackExperiment({variationName: variationKey, experimentName: name})
+      return data
+    } catch (error) {
+      return {enabled: false, flagKey: name}
     }
-
-    return data
   }, [trackExperimentViewed, name, queryString, pde, attributes, adapterId])
 
-  return {variation}
+  return data
 }
