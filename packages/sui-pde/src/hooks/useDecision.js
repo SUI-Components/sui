@@ -43,7 +43,7 @@ export default function useDecision(name, {attributes, trackExperimentViewed, qu
       const isExperiment = !!ruleKey
 
       if (forced) {
-        if (!isExperiment) {
+        if (!isExperiment || ['on', 'off'].includes(forced)) {
           return {...data, enabled: forced === 'on'}
         }
 

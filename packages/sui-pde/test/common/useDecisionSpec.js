@@ -82,12 +82,33 @@ describe('useDecision hook', () => {
           })
         })
 
-        describe('when the variation is forced by query param', () => {
-          it('should return the forced variation of an experiment', () => {
+        describe('when the flag is forced by query param', () => {
+          it('should return the forced flag of a feature test', () => {
             const {result} = renderHook(
               () =>
-                useDecision('experiment1', {
-                  queryString: '?suipde_experiment1=variation_a'
+                useDecision('flag', {
+                  queryString: '?suipde_flag=off'
+                }),
+              {wrapper}
+            )
+            expect(result.current).to.be.deep.equal({
+              variationKey: 'variation',
+              enabled: false,
+              variables: {},
+              ruleKey: 'rule',
+              flagKey: 'flag',
+              userContext: {},
+              reasons: []
+            })
+          })
+        })
+
+        describe('when the variation is forced by query param', () => {
+          it('should return the forced variation of a feature test', () => {
+            const {result} = renderHook(
+              () =>
+                useDecision('rule', {
+                  queryString: '?suipde_rule=variation_a'
                 }),
               {wrapper}
             )
