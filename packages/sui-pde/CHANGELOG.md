@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 2.26.0 (2024-10-03)
+
+
+### Features
+
+* add decision component ([2b86724](https://github.com/SUI-Components/sui/commit/2b86724647690d7657eb93df8c8ac6974270edce))
+* update doc ([e00f881](https://github.com/SUI-Components/sui/commit/e00f881376cd45488b3edc28458a74ecb165275c))
+* update use decision hook ([ac678bd](https://github.com/SUI-Components/sui/commit/ac678bda1274e9f2463f28b40f86016e069dc00f))
+* update usedecision hook ([ecbb326](https://github.com/SUI-Components/sui/commit/ecbb326688b44aacea900f655454a6856cb7bb1b))
+* upgrade optimizely version and add use-decision hook ([1634c34](https://github.com/SUI-Components/sui/commit/1634c343341c4a1c6534bee1f341a163685a9397))
+
+
+
 # 2.25.0 (2024-06-25)
 
 
