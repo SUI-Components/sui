@@ -615,7 +615,6 @@ describe('Segment Wrapper', function () {
       }
       const {traits} = spy.getCall(0).firstArg.obj.context
 
-      console.log(context, expectation)
       expect(context).to.deep.equal(expectation)
       expect(traits).to.deep.equal({
         anonymousId: 'fakeAnonymousId',

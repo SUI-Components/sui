@@ -10,7 +10,7 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 
 **Google Analytics 🔍**
 
-- [x] Load GA4 if `googleAnalyticsMeasurementId` is provided and the `gtag` object is not available in the global scope.
+- [x] Load GA4 if `googleAnalyticsMeasurementId` is provided.
 - [x] Retrieve `clientId` automatically from GA4 and put in Segment tracks.
 
 **Adobe Marketing Cloud Visitor Id ☁️**

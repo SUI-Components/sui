@@ -10,17 +10,19 @@ const cachedData = {
   [FIELDS.sessionId]: null
 }
 
-const loadScript = src =>
+const loadScript = async src =>
   new Promise(function (resolve, reject) {
-    const s = document.createElement('script')
-    s.src = src
-    s.onload = resolve
-    s.onerror = reject
-    document.head.appendChild(s)
+    const script = document.createElement('script')
+
+    script.src = src
+    script.onload = resolve
+    script.onerror = reject
+    document.head.appendChild(script)
   })
 
-export const loadGoogleAnalytics = () => {
+export const loadGoogleAnalytics = async () => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+
   // Check we have the needed config to load the script
   if (!googleAnalyticsMeasurementId) return Promise.resolve(false)
   // Create the `gtag` script
@@ -29,7 +31,7 @@ export const loadGoogleAnalytics = () => {
   return loadScript(gtagScript)
 }
 
-const getGoogleField = field => {
+const getGoogleField = async field => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
 
   // If `googleAnalyticsMeasurementId` is not present, don't load anything
