@@ -1,0 +1,41 @@
+{
+  "name": "@s-ui/lint-reporters",
+  "version": "1.0.0-beta.0",
+  "description": "Send lint errors and golden path metrics to DataDog",
+  "author": "Web Platform <enablers-frontend@adevinta.com> (https://github.mpi-internal.com/scmspain/es-td-agreements/tree/master/30-Frontend)",
+  "license": "MIT",
+  "keywords": [
+    "DataDog",
+    "lint",
+    "eslint"
+  ],
+  "files": [
+    "umd",
+    "lib"
+  ],
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "lib": "make lib",
+    "umd": "make umd",
+    "prepublishOnly": "make prepublishOnly",
+    "lint": "make lint",
+    "test": "make test"
+  },
+  "devDependencies": {
+    "@s-ui/js-compiler": "1",
+    "@s-ui/test": "8",
+    "@types/chai": "4.3.6",
+    "@types/chai-dom": "1.11.3",
+    "@types/globrex": "0.1.4",
+    "@types/mocha": "10.0.2",
+    "@types/sinon": "17.0.3",
+    "chai": "4.3.10",
+    "sinon": "18.0.0"
+  },
+  "dependencies": {
+    "@s-ui/lint": "4",
+    "globrex": "0.1.2",
+    "ts-pattern": "5.1.1"
+  }
+}
