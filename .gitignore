@@ -25,4 +25,4 @@ repopack-output.txt
 repopack.config.json
 .repopackignore
 
-**/umd/index.js
+**/umd/*.js
