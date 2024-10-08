@@ -1,6 +1,7 @@
 {
   "extends": "@s-ui/bundler/tsconfig.json",
   "compilerOptions": {
+    "module": "es2020",
     "types": ["node", "mocha", "chai", "chai-dom"],
     "outDir": "./lib",
     "rootDir": "."
