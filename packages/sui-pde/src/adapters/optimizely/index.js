@@ -14,9 +14,9 @@ const DEFAULT_EVENTS_OPTIONS = {
 
 const DEFAULT_TIMEOUT = 500
 
-const {enums: LOG_LEVEL} = optimizelySDK
+const {enums} = optimizelySDK
 
-const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? LOG_LEVEL.error : LOG_LEVEL.info
+const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? enums.error : enums.info
 
 export default class OptimizelyAdapter {
   /**
@@ -123,10 +123,12 @@ export default class OptimizelyAdapter {
    * @param {Object} params
    * @param {string} params.name
    * @param {object} [params.attributes]
-   * @returns {string=} variation name
+   * @returns {object} decision
    */
   decide({name, attributes}) {
-    if (!this._hasUserConsents) return null
+    if (!this._hasUserConsents) {
+      return {enabled: false, flagKey: name}
+    }
 
     const user = this._optimizely.createUserContext(this._userId, {
       ...this._applicationAttributes,
@@ -134,6 +136,23 @@ export default class OptimizelyAdapter {
     })
 
     return user.decide(name)
+  }
+
+  /**
+   * @param {Object} params
+   * @param {function} params.onDecide
+   * @returns {number} notificationId
+   */
+  addDecideListener({onDecide}) {
+    return this._optimizely.notificationCenter.addNotificationListener(enums.NOTIFICATION_TYPES.DECISION, onDecide)
+  }
+
+  /**
+   * @param {Object} params
+   * @param {number} params.notificationId
+   */
+  removeNotificationListener({notificationId}) {
+    this._optimizely.notificationCenter.removeNotificationListener(notificationId)
   }
 
   /**

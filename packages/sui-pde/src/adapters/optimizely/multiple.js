@@ -64,6 +64,14 @@ class MultipleOptimizelyAdapter {
     return this.#adapters[adapterId].decide(props)
   }
 
+  addDecideListener({adapterId = defaultAdapterId, ...props}) {
+    return this.#adapters[adapterId].addDecideListener(props)
+  }
+
+  removeNotificationListener({adapterId = defaultAdapterId, ...props}) {
+    this.#adapters[adapterId].removeNotificationListener(props)
+  }
+
   getVariation({adapterId = defaultAdapterId, ...props}) {
     return this.#adapters[adapterId].getVariation(props)
   }

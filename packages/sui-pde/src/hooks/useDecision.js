@@ -39,6 +39,16 @@ export default function useDecision(name, {attributes, trackExperimentViewed, qu
         return {enabled: true, flagKey: name, variationKey: forced}
       }
 
+      const notificationId = pde.addDecideListener({
+        onDecide: ({type, decisionInfo: decision}) => {
+          const {ruleKey, variationKey, decisionEventDispatched} = decision
+
+          if (type === 'flag' && decisionEventDispatched) {
+            strategy.trackExperiment({variationName: variationKey, experimentName: ruleKey})
+          }
+        }
+      })
+
       const data = strategy.decide({
         pde,
         name,
@@ -46,13 +56,7 @@ export default function useDecision(name, {attributes, trackExperimentViewed, qu
         adapterId
       })
 
-      const {ruleKey, variationKey} = data || {}
-
-      const isExperiment = !!ruleKey
-
-      if (isExperiment) {
-        strategy.trackExperiment({variationName: variationKey, experimentName: ruleKey})
-      }
+      pde.removeNotificationListener({notificationId})
 
       return data
     } catch (error) {

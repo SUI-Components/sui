@@ -15,6 +15,14 @@ export default class DefaultAdapter {
     return null
   }
 
+  addDecideListener() {
+    return null
+  }
+
+  removeNotificationListener() {
+    return null
+  }
+
   decide() {
     return null
   }
