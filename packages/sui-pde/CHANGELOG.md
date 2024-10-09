@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.27.0 (2024-10-09)
+
+
+### Features
+
+* add decide listener ([d770f2e](https://github.com/SUI-Components/sui/commit/d770f2e91e92e442e115593a8f4938f76670d3e1))
+* update pde ([4bf566f](https://github.com/SUI-Components/sui/commit/4bf566f247b00dff7709379a9420ce36fa8b12a8))
+
+
+
 # 2.26.0 (2024-10-03)
 
 
