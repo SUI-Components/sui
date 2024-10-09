@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 4.4.0 (2024-10-09)
+
+
+### Bug Fixes
+
+* fix google analytics script load ([3eb7f2c](https://github.com/SUI-Components/sui/commit/3eb7f2cb97b6c50100d319bf9b9802ce2725bf3e))
+
+
+### Features
+
+* add ga4 client id to segment events ([e669b28](https://github.com/SUI-Components/sui/commit/e669b28a983d0d992bd646b94670931711405402))
+
+
+
 # 4.3.0 (2024-09-19)
 
 
