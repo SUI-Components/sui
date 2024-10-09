@@ -30,7 +30,7 @@ describe('useDecision hook', () => {
     let decide
 
     before(() => {
-      decide = sinon.stub().returns({
+      const decision = {
         variationKey: 'variation',
         enabled: true,
         variables: {},
@@ -38,10 +38,18 @@ describe('useDecision hook', () => {
         flagKey: 'flag',
         userContext: {},
         reasons: []
-      })
+      }
+      decide = sinon.stub().returns(decision)
+
+      const addDecideListener = ({onDecide}) =>
+        onDecide({type: 'flag', decisionInfo: {...decision, decisionEventDispatched: true}})
+      const removeNotificationListener = sinon.stub()
+
       // eslint-disable-next-line react/prop-types
       wrapper = ({children}) => (
-        <PdeContext.Provider value={{features: [], pde: {decide}}}>{children}</PdeContext.Provider>
+        <PdeContext.Provider value={{features: [], pde: {decide, addDecideListener, removeNotificationListener}}}>
+          {children}
+        </PdeContext.Provider>
       )
     })
 
@@ -226,9 +234,14 @@ describe('useDecision hook', () => {
     let wrapper
     beforeEach(() => {
       decide = sinon.stub().throws(new Error('fake activation error'))
+      const addDecideListener = sinon.stub()
+      const removeNotificationListener = sinon.stub()
+
       // eslint-disable-next-line react/prop-types
       wrapper = ({children}) => (
-        <PdeContext.Provider value={{features: [], pde: {decide}}}>{children}</PdeContext.Provider>
+        <PdeContext.Provider value={{features: [], pde: {decide, addDecideListener, removeNotificationListener}}}>
+          {children}
+        </PdeContext.Provider>
       )
     })
 
@@ -248,10 +261,15 @@ describe('useDecision hook', () => {
         track: sinon.spy()
       }
 
+      const addDecideListener = sinon.stub()
+      const removeNotificationListener = sinon.stub()
+
       stubFactory = decide => {
         // eslint-disable-next-line react/prop-types
         wrapper = ({children}) => (
-          <PdeContext.Provider value={{features: [], pde: {decide}}}>{children}</PdeContext.Provider>
+          <PdeContext.Provider value={{features: [], pde: {decide, addDecideListener, removeNotificationListener}}}>
+            {children}
+          </PdeContext.Provider>
         )
       }
     })
