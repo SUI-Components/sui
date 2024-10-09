@@ -4,8 +4,8 @@ import {getConfig, setConfig} from '../src/config.js'
 import {getUniversalId, getUserDataAndNotify} from '../src/universalId.js'
 import {cleanWindowStubs} from './stubs.js'
 
-const UNIVERSAL_ID_EXAMPLE = '7ab9ddf3281d5d5458a29e8b3ae2864335087f1272d41ba440bee23d6acb911b'
-const USER_EMAIL_EXAMPLE = 'miduga@gmail.com'
+const UNIVERSAL_ID_EXAMPLE = '043d36c36dad0741bdebce605d0ee4e6c1dea6e2eb6399864dec7a59432a20c4'
+const USER_EMAIL_EXAMPLE = 'test@sui.com'
 const USER_DATA_READY_EVENT = 'USER_DATA_READY'
 
 describe('Universal Id', () => {

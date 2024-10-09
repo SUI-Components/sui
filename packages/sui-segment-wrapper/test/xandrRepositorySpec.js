@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 
 import {USER_GDPR} from '../src/tcf.js'
-import {getXandrId} from '../src/xandrRepository.js'
+import {getXandrId} from '../src/repositories/xandrRepository.js'
 import {stubDocumentCookie, stubFetch} from './stubs.js'
 import {waitUntil} from './utils.js'
 

@@ -1,5 +1,5 @@
-import {isClient} from './config.js'
-import {decorateContextWithNeededData, getDefaultProperties} from './segmentWrapper.js'
+import {isClient} from '../config.js'
+import {decorateContextWithNeededData, getDefaultProperties} from '../segmentWrapper.js'
 
 const MPI_PATCH_FIELD = '__mpi_patch'
 

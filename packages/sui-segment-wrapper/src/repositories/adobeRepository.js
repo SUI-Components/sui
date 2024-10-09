@@ -1,4 +1,4 @@
-import {getConfig} from './config.js'
+import {getConfig} from '../config.js'
 
 let mcvid
 
@@ -53,7 +53,7 @@ export const getAdobeMarketingCloudVisitorIdFromWindow = () => {
 }
 
 const importVisitorApiAndGetAdobeMCVisitorID = () =>
-  import('./adobeVisitorApi.js').then(() => {
+  import('../scripts/adobeVisitorApi.js').then(() => {
     mcvid = getAdobeMarketingCloudVisitorIdFromWindow()
     return mcvid
   })

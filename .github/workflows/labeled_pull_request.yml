@@ -28,7 +28,10 @@ jobs:
           cache: 'npm'
 
       - name: Install
-        run: npm install -D commander execa prettier
+        run: |
+          npm ci
+          npm install -D commander execa prettier
+          npx -y ultra-runner --raw --recursive prepublishOnly
 
       - name: Get Files
         id: files
