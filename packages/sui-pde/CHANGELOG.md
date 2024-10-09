@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.28.0 (2024-10-09)
+
+
+### Features
+
+* update default adapter ([22f0f14](https://github.com/SUI-Components/sui/commit/22f0f14fe6069baa396dcbb9bf52263b5db742ee))
+
+
+
 # 2.27.0 (2024-10-09)
 
 
