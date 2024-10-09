@@ -23,8 +23,8 @@ export default class DefaultAdapter {
     return null
   }
 
-  decide() {
-    return null
+  decide({name}) {
+    return {enabled: false, flagKey: name}
   }
 
   updateConsents() {
