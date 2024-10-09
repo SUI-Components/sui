@@ -37,6 +37,23 @@ export default class PDE {
     return this._adapter.decide({name, attributes, adapterId})
   }
 
+  /**
+   * @param {Object} params
+   * @param {function} params.onDecide
+   * @returns {string} notificationId
+   */
+  addDecideListener({onDecide}) {
+    return this._adapter.addDecideListener({onDecide})
+  }
+
+  /**
+   * @param {Object} params
+   * @param {number} params.notificationId
+   */
+  removeNotificationListener({notificationId}) {
+    this._adapter.removeNotificationListener({notificationId})
+  }
+
   getInitialData() {
     return this._adapter.getInitialData()
   }
