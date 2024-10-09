@@ -1,0 +1,1 @@
+export {getExpressMiddleware} from './expressMiddleware'
