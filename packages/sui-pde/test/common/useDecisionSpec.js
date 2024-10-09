@@ -260,11 +260,9 @@ describe('useDecision hook', () => {
         ready: cb => cb(),
         track: sinon.spy()
       }
-
-      const addDecideListener = sinon.stub()
       const removeNotificationListener = sinon.stub()
 
-      stubFactory = decide => {
+      stubFactory = ({decide, addDecideListener}) => {
         // eslint-disable-next-line react/prop-types
         wrapper = ({children}) => (
           <PdeContext.Provider value={{features: [], pde: {decide, addDecideListener, removeNotificationListener}}}>
@@ -281,8 +279,8 @@ describe('useDecision hook', () => {
     describe('when the second time returns the same value as the first time', () => {
       beforeEach(() => {
         const decide = sinon.stub()
-
-        decide.onCall(0).returns({
+        const addDecideListener = sinon.stub()
+        const decision = {
           variationKey: 'variation',
           enabled: true,
           variables: {},
@@ -290,7 +288,19 @@ describe('useDecision hook', () => {
           flagKey: 'flag',
           userContext: {},
           reasons: []
-        })
+        }
+
+        decide.onCall(0).returns(decision)
+        addDecideListener.onCall(0).callsFake(({onDecide}) =>
+          onDecide({
+            type: 'flag',
+            decisionInfo: {
+              ...decision,
+              decisionEventDispatched: true
+            }
+          })
+        )
+
         decide.onCall(1).returns({
           variationKey: 'variation',
           enabled: true,
@@ -300,8 +310,17 @@ describe('useDecision hook', () => {
           userContext: {},
           reasons: []
         })
+        addDecideListener.onCall(1).callsFake(({onDecide}) =>
+          onDecide({
+            type: 'flag',
+            decisionInfo: {
+              ...decision,
+              decisionEventDispatched: true
+            }
+          })
+        )
 
-        stubFactory(decide)
+        stubFactory({decide, addDecideListener})
       })
 
       it('should send only one experiment viewed event', () => {
@@ -318,8 +337,8 @@ describe('useDecision hook', () => {
     describe('when the second time returns a different value as the first time', () => {
       beforeEach(() => {
         const decide = sinon.stub()
-
-        decide.onCall(0).returns({
+        const addDecideListener = sinon.stub()
+        const decision = {
           variationKey: 'variation_a',
           enabled: true,
           variables: {},
@@ -327,18 +346,35 @@ describe('useDecision hook', () => {
           flagKey: 'flag',
           userContext: {},
           reasons: []
-        })
-        decide.onCall(1).returns({
-          variationKey: 'variation_b',
-          enabled: true,
-          variables: {},
-          ruleKey: 'rule',
-          flagKey: 'flag',
-          userContext: {},
-          reasons: []
-        })
+        }
 
-        stubFactory(decide)
+        decide.onCall(0).returns(decision)
+        addDecideListener.onCall(0).callsFake(({onDecide}) =>
+          onDecide({
+            type: 'flag',
+            decisionInfo: {
+              ...decision,
+              decisionEventDispatched: true
+            }
+          })
+        )
+
+        decide.onCall(1).returns({
+          ...decision,
+          variationKey: 'variation_b'
+        })
+        addDecideListener.onCall(1).callsFake(({onDecide}) =>
+          onDecide({
+            type: 'flag',
+            decisionInfo: {
+              ...decision,
+              variationKey: 'variation_b',
+              decisionEventDispatched: true
+            }
+          })
+        )
+
+        stubFactory({decide, addDecideListener})
       })
 
       it('should send two experiment viewed events', () => {
