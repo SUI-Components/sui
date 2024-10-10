@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/logger",
-  "version": "1.0.0-beta0",
+  "version": "1.0.0",
   "description": "Web app logger for both client and server side",
   "main": "lib/index.js",
   "scripts": {
