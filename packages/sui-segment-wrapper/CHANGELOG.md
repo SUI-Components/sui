@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.5.0 (2024-10-10)
+
+
+### Features
+
+* send init event and retrieve the session id ([fa9fd16](https://github.com/SUI-Components/sui/commit/fa9fd16dbf9ce34d9c2e66c4a77c2792b08345ab))
+
+
+
 # 4.4.0 (2024-10-09)
 
 
