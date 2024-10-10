@@ -11,6 +11,8 @@ import initTcfTracking from './tcf.js'
 import {getUserDataAndNotify} from './universalId.js'
 import {loadGoogleAnalytics} from './repositories/googleRepository.js'
 
+const DEFAULT_GA_INIT_EVENT = 'sui'
+
 // Initialize TCF Tracking with Segment
 initTcfTracking()
 
@@ -32,6 +34,7 @@ const addMiddlewares = () => {
 if (isClient && window.analytics) {
   // Initialize Google Analtyics if needed
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+  const googleAnalyticsInitEvent = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
 
   if (googleAnalyticsMeasurementId) {
     window.dataLayer = window.dataLayer || []
@@ -40,6 +43,12 @@ if (isClient && window.analytics) {
       function gtag() {
         window.dataLayer.push(arguments)
       }
+
+    window.gtag('js', new Date())
+    window.gtag('config', googleAnalyticsMeasurementId, {
+      send_page_view: false
+    })
+    window.gtag('event', googleAnalyticsInitEvent)
 
     loadGoogleAnalytics()
   }
