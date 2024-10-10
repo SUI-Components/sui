@@ -1,10 +1,10 @@
-# @adv-ui/logger [![Build Status](https://travis.mpi-internal.com/scmspain/frontend-all--logger.svg?token=stHfbjTCpyE93DqnbVTS&branch=master)](https://travis.mpi-internal.com/scmspain/frontend-all--logger)
+# @s-ui/logger
 
 > Web app logging tools for both, client and server side.
 
 ## Table of contents
 
-- [@adv-ui/logger ](#adv-uilogger-)
+- [@s-ui/logger ](#s-uilogger-)
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Application logging](#application-logging)
@@ -24,7 +24,7 @@
 
 ## Installation
 
-`npm install @adv-ui/logger`
+`npm install @s-ui/logger`
 
 ## Application logging
 
@@ -34,22 +34,24 @@ To start logging client-side logs in our application, we should initialize our t
 
 ```js
 // app.js
-import {initTracker} from '@adv-ui/logger'
+import {Mushroom} from '@adv-ui/mushroom' // Service Logger
+import {initTracker} from '@s-ui/logger'
 
-initTracker({appName: 'milanuncios', environment: 'production', devMode: false})
+initTracker({Mushroom, appName: 'milanuncios', environment: 'production', devMode: false})
 ```
 
 Options:
 
+- **`Mushroom` {Function}** - Application Logger
 - **`appName` {String}** - Application name
 - **`devMode` {String}** - Allows sending events to the development endpoint, Production endpoint is used by default.
 - **`environment` {String}** - Optionally set the environment property to be used as part of the context (e.g. `preproduction` or `production`). If not set `NODE_ENV` will be used as default value
-- **`...rest`** - See Mushroom js client configuration [documentation](https://github.mpi-internal.com/scmspain/frontend-adit--mushroom-js-client/#mushroom)
+- **`...rest`** - See your Service Logger client configuration
 
 After initializing our tracker, we could create our logger
 
 ```js
-import {createClientLogger} from '@adv-ui/logger'
+import {createClientLogger} from '@s-ui/logger'
 
 export const getLogger = ({isClient, userId}) => {
   const logger = isClient ? createClientLogger({userId}) : {} // see next section
@@ -61,8 +63,8 @@ export const getLogger = ({isClient, userId}) => {
 Options:
 
 - **`userId` {String}** - User id to add to all logs
-- **`trackerName` {String}** [optional] - Tracker name that will be used by the microservice [ms-adit--mushroom](https://github.mpi-internal.com/scmspain/ms-adit--mushroom) to process logs/metrics. It defaults to `adv.logger` if no value is provided
-  > 💡 Please note that, if you decide to use a custom trackerName, you'd need to create a custom provider inside the ms-adit--mushroom microservice. See [this example for reference](https://github.mpi-internal.com/scmspain/ms-adit--mushroom/pull/164)
+- **`trackerName` {String}** [optional] - Tracker name that will be used by the microservice
+  > 💡 Please note that, if you decide to use a custom trackerName, you'd need to create a custom provider inside the ms-adit--mushroom microservice.
 
 ### Server side logging
 
@@ -80,7 +82,7 @@ This server side logging keeps you log whatever with native console methods. Als
 Also, it will capture unhandled errors and send them as `console.error` with appropriated format.
 
 ```js
-import {createServerLogger} from '@adv-ui/logger/lib/server/logger'
+import {createServerLogger} from '@s-ui/logger/lib/server/logger'
 
 export const getLogger = ({req}) => {
   return createServerLogger({req, team: 'frontend-ma'})
@@ -104,21 +106,23 @@ To start logging server-side logs in our application, we should initialize our t
 
 ```js
 // app.js
-import {initTracker} from '@adv-ui/logger'
+import {Mushroom} from '@adv-ui/mushroom' // Service Logger
+import {initTracker} from '@s-ui/logger'
 
-initTracker({appName: 'milanuncios', devMode: false})
+initTracker({Mushroom, appName: 'milanuncios', devMode: false})
 ```
 
 Options:
 
+- **`Mushroom` {Function}** - Service Logger
 - **`appName` {String}** - Application name
 - **`devMode` {String}** - Allows sending events to the development endpoint, Production endpoint is used by default.
-- **`...rest`** - See Mushroom js client configuration [documentation](https://github.mpi-internal.com/scmspain/frontend-adit--mushroom-js-client/#mushroom)
+- **`...rest`** - See your Service Logger client configuration
 
 After initializing our tracker, we could create our logger
 
 ```js
-import {createServerLogger} from '@adv-ui/logger'
+import {createServerLogger} from '@s-ui/logger'
 
 export const getLogger = ({isClient, userId}) => {
   const logger = isClient
@@ -211,7 +215,7 @@ It accepts a `Metric` object containing a `name` and `tags`
 
 [Metric type definition](./src/logger.js#73)
 
-> 💡 Please note that in order for metrics to work, you'd need to create a custom provider inside the ms-adit--mushroom microservice. See [this example for reference](https://github.mpi-internal.com/scmspain/ms-adit--mushroom/pull/164). You'd also need to initialize the tracker with a **trackerName** that maps to your custom provider. See [Client side logging](#client-side-logging-with-mushroom)
+> 💡 Please note that in order for metrics to work, you'd need to create a custom provider inside the ms-adit--mushroom microservice.
 
 ```js
 logger.metric({
@@ -344,7 +348,7 @@ Example file: `./src/hooks/index.js`
 
 ```js
 import TYPES from '@s-ui/ssr/hooks-types'
-import {getExpressMiddleware} from '@adv-ui/logger/lib/server/expressMiddleware'
+import {getExpressMiddleware} from '@s-ui/logger/lib/server/expressMiddleware'
 import routes from '../routes'
 
 const getTenantService = req => {
@@ -359,7 +363,7 @@ const loggingMiddleware = getExpressMiddleware({
   dataDogOptions: {globalTags: {node_ssr: 'motor'}, routes},
   stdoutOptions: {
     getTenantService,
-    team: 'frontend-ma'
+    team: 'frontend-mt'
   }
 })
 
@@ -380,7 +384,7 @@ Then, use can configure this hook following [`@s-ui/ssr` instructions](https://g
 
 ##### StdoutLogger
 
-Those logs will be sent to [ELK](http://elastic.spain.mpi-internal.com/_plugin/kibana/app/discover)
+Those logs will be sent to our ELK Service.
 
 Options:
 
@@ -402,7 +406,7 @@ Options:
 
 ```js
 import TYPES from '@s-ui/ssr/hooks-types'
-import {logErrorsMiddleware} from '@adv-ui/logger'
+import {logErrorsMiddleware} from '@s-ui/logger'
 
 export default () => {
   try {
@@ -422,7 +426,7 @@ export default () => {
 Use `traceInitialProps` to keep track of a page fetching function using the timing method from the `logger`. If the `logger` is not defined inside the `context` of the application it will do nothing.
 
 ```js
-import {traceInitialProps} from '@adv-ui/logger'
+import {traceInitialProps} from '@s-ui/logger'
 
 function HomePage() {}
 
@@ -438,10 +442,7 @@ export default HomePage
 
 ## Consume Stdout logs
 
-📖 You can read all of those logs in ELK:
-
-- [ELK for preproduction logs](http://elastic.global-pre.spain.mpi-internal.com/_plugin/kibana/app/discover)
-- [ELK for production logs](http://elastic.spain.mpi-internal.com/_plugin/kibana/app/discover)
+📖 Check your Logger Service
 
 Available fields:
 
@@ -449,26 +450,3 @@ Available fields:
 - `message`: for logged strings or errors
 - `error ({message, stack})`: for caught exceptions or logged errors
 - Also, accept custom fields. Just make a `console[method]` with one object parameter. For example: `console.log({message: 'my custom log', data: {value: 'sth I want to read'}})`. Be careful using large objects, we recomend `{message, data}` format.
-
-## Consume Mushroom logs
-
-📖 You can read all of those logs in ELK:
-
-[Client side Mushroom logs](<http://elastic.spain.mpi-internal.com/_plugin/kibana/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(_source),filters:!(),index:a691e710-c604-11ea-9840-4dba440e33d1,interval:auto,query:(language:lucene,query:'mushroom.tracker:adv.logger%20AND%20mushroom.application:milanuncios'),sort:!('@timestamp',desc))>)
-
-Required filter:
-
-- mushroom.tracker:adv.logger AND mushroom.application:milanuncios
-
-Relevant fields to read or filtering:
-
-- mushroom.message
-- mushroom.application
-- mushroom.browser
-- mushroom.browserVersion
-- mushroom.isMobile
-- mushroom.isServer
-- mushroom.tracker
-- mushroom.userAgent
-
-[loadstate]: https://github.com/GoogleChrome/web-vitals#loadstate 'LoadState'
