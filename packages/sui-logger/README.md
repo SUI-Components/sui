@@ -102,7 +102,7 @@ Enabled by default, there is a ENV var to disable it `DISABLE_SERVER_LOGGER_PATC
 
 #### With Reporter
 
-> The Reporter needs a `star` method to inicialize the reporter.
+> The Reporter needs a `start` method to inicialize the reporter.
 
 ```js
 export const initTracker = ({Reporter, appName, environment, version, tenant, ...config}) => {
