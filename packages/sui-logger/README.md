@@ -102,6 +102,19 @@ Enabled by default, there is a ENV var to disable it `DISABLE_SERVER_LOGGER_PATC
 
 #### With Reporter
 
+> The Reporter needs a `star` method to inicialize the reporter.
+
+```js
+export const initTracker = ({Reporter, appName, environment, version, tenant, ...config}) => {
+  const context = {environment: environment || NODE_ENV, isServer, version, tenant}
+
+  Reporter.start(appName, {
+    ...config,
+    context
+  })
+}
+```
+
 To start logging server-side logs in our application, we should initialize our tracker in one server file
 
 ```js
@@ -119,7 +132,7 @@ Options:
 - **`devMode` {String}** - Allows sending events to the development endpoint, Production endpoint is used by default.
 - **`...rest`** - See your Service Logger client configuration
 
-After initializing our tracker, we could create our logger
+After initializing our tracker, we could create our logger.
 
 ```js
 import {createServerLogger} from '@s-ui/logger'
