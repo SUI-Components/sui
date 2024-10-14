@@ -3,51 +3,51 @@ import sinon from 'sinon'
 
 import {initTracker} from '../../src/index.js'
 
-const Mushroom = {
+const Reporter = {
   start: () => {}
 }
 
 describe('initTracker', () => {
-  let mushroomStub
+  let reporterStub
 
   beforeEach(() => {
-    mushroomStub = sinon.stub(Mushroom, 'start')
+    reporterStub = sinon.stub(Reporter, 'start')
   })
 
   afterEach(() => {
-    mushroomStub.restore()
+    reporterStub.restore()
   })
 
   it('initialize tracker with the expected config', () => {
-    initTracker({Mushroom, appName: 'test', version: '1.0.0', config: {foo: 'bar'}})
+    initTracker({Reporter, appName: 'test', version: '1.0.0', config: {foo: 'bar'}})
 
-    expect(mushroomStub.calledOnce).to.equal(true)
-    mushroomStub.calledWith('test', {
+    expect(reporterStub.calledOnce).to.equal(true)
+    reporterStub.calledWith('test', {
       config: {foo: 'bar'},
       context: {environment: undefined, isServer: 'false', version: '1.0.0'}
     })
   })
   it('initialize tracker with tenant', () => {
-    initTracker({Mushroom, appName: 'test', version: '1.0.0', tenant: 'infojobs', config: {foo: 'bar'}})
+    initTracker({Reporter, appName: 'test', version: '1.0.0', tenant: 'infojobs', config: {foo: 'bar'}})
 
-    expect(mushroomStub.calledOnce).to.equal(true)
-    mushroomStub.calledWith('test', {
+    expect(reporterStub.calledOnce).to.equal(true)
+    reporterStub.calledWith('test', {
       config: {foo: 'bar'},
       context: {environment: undefined, isServer: 'false', version: '1.0.0', tenant: 'infojobs'}
     })
   })
   it('initialize tracker with a defined environment', () => {
     initTracker({
-      Mushroom,
+      Reporter,
       appName: 'test',
       environment: 'production',
       version: '1.0.0',
       config: {}
     })
 
-    expect(mushroomStub.calledOnce).to.equal(true)
+    expect(reporterStub.calledOnce).to.equal(true)
     expect(
-      mushroomStub.calledWith('test', {
+      reporterStub.calledWith('test', {
         config: {},
         context: {
           environment: 'production',

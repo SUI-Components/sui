@@ -8,19 +8,19 @@
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Application logging](#application-logging)
-    - [Client side logging with mushroom](#client-side-logging-with-mushroom)
+    - [Client side logging with reporter](#client-side-logging-with-reporter)
     - [Server side logging](#server-side-logging)
       - [With Stdout](#with-stdout)
-      - [With Mushroom](#with-mushroom)
-      - [How to consume Mushroom logs](#how-to-consume-mushroom-logs)
+      - [With Reporter](#with-reporter)
+      - [How to consume Reporter logs](#how-to-consume-reporter-logs)
     - [Server logging](#server-logging)
       - [Express middleware for sui-ssr logging hook](#express-middleware-for-sui-ssr-logging-hook)
         - [StdoutLogger](#stdoutlogger)
         - [DataDogLogger](#datadoglogger)
-      - [Express middleware for sui-ssr logging hook using Mushroom](#express-middleware-for-sui-ssr-logging-hook-using-mushroom)
+      - [Express middleware for sui-ssr logging hook using Reporter](#express-middleware-for-sui-ssr-logging-hook-using-reporter)
       - [Tracking page fetching](#tracking-page-fetching)
   - [Consume Stdout logs](#consume-stdout-logs)
-  - [Consume Mushroom logs](#consume-mushroom-logs)
+  - [Consume Reporter logs](#consume-reporter-logs)
 
 ## Installation
 
@@ -28,21 +28,21 @@
 
 ## Application logging
 
-### Client side logging with mushroom
+### Client side logging with reporter
 
 To start logging client-side logs in our application, we should initialize our tracker.
 
 ```js
 // app.js
-import {Mushroom} from '@adv-ui/mushroom' // Service Logger
+import {Reporter} from '@adv-ui/reporter' // Service Logger
 import {initTracker} from '@s-ui/logger'
 
-initTracker({Mushroom, appName: 'milanuncios', environment: 'production', devMode: false})
+initTracker({Reporter, appName: 'milanuncios', environment: 'production', devMode: false})
 ```
 
 Options:
 
-- **`Mushroom` {Function}** - Application Logger
+- **`Reporter` {Function}** - Application Logger
 - **`appName` {String}** - Application name
 - **`devMode` {String}** - Allows sending events to the development endpoint, Production endpoint is used by default.
 - **`environment` {String}** - Optionally set the environment property to be used as part of the context (e.g. `preproduction` or `production`). If not set `NODE_ENV` will be used as default value
@@ -64,7 +64,7 @@ Options:
 
 - **`userId` {String}** - User id to add to all logs
 - **`trackerName` {String}** [optional] - Tracker name that will be used by the microservice
-  > 💡 Please note that, if you decide to use a custom trackerName, you'd need to create a custom provider inside the ms-adit--mushroom microservice.
+  > 💡 Please note that, if you decide to use a custom trackerName, you'd need to create a custom provider inside the ms-adit--reporter microservice.
 
 ### Server side logging
 
@@ -100,21 +100,21 @@ export const getLogger = ({req}) => {
 
 Enabled by default, there is a ENV var to disable it `DISABLE_SERVER_LOGGER_PATCH=true`. This help us to disable without compile app again.
 
-#### With Mushroom
+#### With Reporter
 
 To start logging server-side logs in our application, we should initialize our tracker in one server file
 
 ```js
 // app.js
-import {Mushroom} from '@adv-ui/mushroom' // Service Logger
+import {Reporter} from '@adv-ui/reporter' // Service Logger
 import {initTracker} from '@s-ui/logger'
 
-initTracker({Mushroom, appName: 'milanuncios', devMode: false})
+initTracker({Reporter, appName: 'milanuncios', devMode: false})
 ```
 
 Options:
 
-- **`Mushroom` {Function}** - Service Logger
+- **`Reporter` {Function}** - Service Logger
 - **`appName` {String}** - Application name
 - **`devMode` {String}** - Allows sending events to the development endpoint, Production endpoint is used by default.
 - **`...rest`** - See your Service Logger client configuration
@@ -137,9 +137,9 @@ Options:
 
 - **`userId` {String}** - User id to add to all logs
 
-#### How to consume Mushroom logs
+#### How to consume Reporter logs
 
-When we create a mushroom logger function, we get a logger with three methods: `error`, `log` and `metric`.
+When we create a reporter logger function, we get a logger with three methods: `error`, `log` and `metric`.
 
 **Error method**
 
@@ -151,9 +151,9 @@ logger.error(new Error('Something went wrong'))
 
 We could consume in **ELK**:
 
-- `mushroom.errorMessage`: {string}
-- `mushroom.errorName`: {string}
-- `mushroom.errorStack`: {string}
+- `reporter.errorMessage`: {string}
+- `reporter.errorName`: {string}
+- `reporter.errorStack`: {string}
 
 **Patch native console.error**
 
@@ -165,9 +165,9 @@ console.error(new Error('Something went wrong'))
 
 We could consume in **ELK**:
 
-- `mushroom.errorMessage`: {string}
-- `mushroom.errorName`: {string}
-- `mushroom.errorStack`: {string}
+- `reporter.errorMessage`: {string}
+- `reporter.errorName`: {string}
+- `reporter.errorStack`: {string}
 
 **Log method**
 
@@ -215,7 +215,7 @@ It accepts a `Metric` object containing a `name` and `tags`
 
 [Metric type definition](./src/logger.js#73)
 
-> 💡 Please note that in order for metrics to work, you'd need to create a custom provider inside the ms-adit--mushroom microservice.
+> 💡 Please note that in order for metrics to work, you'd need to create a custom provider inside the ms-adit--reporter microservice.
 
 ```js
 logger.metric({
@@ -236,7 +236,7 @@ It accepts a `Timing` object containing a `name`, `amount` and `tags`
 
 [Metric type definition](./src/logger.js#94)
 
-> 💡 Please note that similarly to previous method in order to make it work, you'd need to create a custom provider inside the ms-adit--mushroom microservice.
+> 💡 Please note that similarly to previous method in order to make it work, you'd need to create a custom provider inside the ms-adit--reporter microservice.
 
 ```js
 logger.timing({
@@ -400,7 +400,7 @@ Options:
 - **`globalTags` {Object}** - This properties will be used in `globalTags` param on `hot-shots` client creation. It should have at least this attribute `{node_ssr: 'app_name'}`
 - **`routes` {import('react').ComponentType}** - React routes
 
-#### Express middleware for sui-ssr logging hook using Mushroom
+#### Express middleware for sui-ssr logging hook using Reporter
 
 `@s-ui/ssr` accepts hooks (express middlewares), one of them is for logging and we could add here our logging hook.
 
