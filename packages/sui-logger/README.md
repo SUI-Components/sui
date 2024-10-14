@@ -64,7 +64,7 @@ Options:
 
 - **`userId` {String}** - User id to add to all logs
 - **`trackerName` {String}** [optional] - Tracker name that will be used by the microservice
-  > 💡 Please note that, if you decide to use a custom trackerName, you'd need to create a custom provider inside the ms-adit--reporter microservice.
+  > 💡 Please note that, if you decide to use a custom trackerName, you'd need to create a custom provider inside your service.
 
 ### Server side logging
 
