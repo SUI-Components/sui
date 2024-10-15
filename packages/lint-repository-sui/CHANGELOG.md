@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.13.0 (2024-10-15)
+
+
+### Features
+
+* Add jest adoption rule to lint ([b631c23](https://github.com/SUI-Components/sui/commit/b631c2359091628a816098d2a3cc7f838cc47563))
+
+
+
 # 1.12.0 (2024-06-10)
 
 
