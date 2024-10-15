@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.29.0 (2024-10-15)
+
+
+### Features
+
+* avoid sending impression when consents are not accepted ([4dd520d](https://github.com/SUI-Components/sui/commit/4dd520de1010fd21e6946f84a4d053798be0799e))
+
+
+
 # 2.28.0 (2024-10-09)
 
 
