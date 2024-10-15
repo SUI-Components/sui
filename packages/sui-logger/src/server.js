@@ -31,8 +31,9 @@ const extractFrom = req => {
   }
 }
 
-export const logErrorsMiddleware = (error, req, res, next) => {
+export const logErrorsMiddleware = (Trackers, error, req, res, next) => {
   const logger = createLogger({
+    Trackers,
     ...extractFrom(req),
     forwardConsoleErrors: false
   })

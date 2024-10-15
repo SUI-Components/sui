@@ -68,14 +68,19 @@ describe('initTracker', () => {
 describe('logsErrorsMiddleware', () => {
   let logger
   let loggerPkgStub
+  let trackerStub
+  let TrackersCreateStub
 
   before(() => {
     logger = {error: sinon.stub()}
     loggerPkgStub = sinon.stub(loggerPkg, 'default').returns(logger)
+    trackerStub = {emit: sinon.stub()}
+    TrackersCreateStub = sinon.stub(Trackers, 'create').returns(trackerStub)
   })
 
   after(() => {
     loggerPkgStub.restore()
+    TrackersCreateStub.restore()
   })
 
   it('log the error and pass execution to next middleware', () => {
@@ -83,7 +88,7 @@ describe('logsErrorsMiddleware', () => {
     const req = {headers: {}, url: '/'}
     const res = null
     const next = sinon.stub()
-    server.logErrorsMiddleware(error, req, res, next)
+    server.logErrorsMiddleware(trackerStub, error, req, res, next)
 
     expect(logger.error.calledWith(error)).to.equal(true)
     expect(next.calledWith(error)).to.equal(true)
