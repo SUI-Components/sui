@@ -11,6 +11,7 @@ const TSvsJS = require('./rules/ts-vs-js-files.js')
 const Sass = require('./rules/sass-files.js')
 const Spark = require('./rules/spark-adoption.js')
 const ComponentsLocation = require('./rules/components-location.js')
+const JestAdoption = require('./rules/jest-adoption.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -31,6 +32,7 @@ module.exports = {
     'ts-vs-js-files': TSvsJS,
     'sass-files': Sass,
     'spark-adoption': Spark,
-    'components-location': ComponentsLocation
+    'components-location': ComponentsLocation,
+    'jest-adoption': JestAdoption
   }
 }
