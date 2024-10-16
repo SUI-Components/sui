@@ -1,7 +1,8 @@
 import createLogger from './logger'
 
-export const createClientLogger = ({userId, trackerName} = {}) =>
+export const createClientLogger = ({Trackers, userId, trackerName} = {}) =>
   createLogger({
+    Trackers,
     listenUnhandled: logError => {
       const handleWindowError = e => {
         const error = e.reason || e.error

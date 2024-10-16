@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.29.0 (2024-10-16)
+
+
+### Features
+
+* remove console.log ([206dd74](https://github.com/SUI-Components/sui/commit/206dd747c6fcec150e7e8bd748eae27c297b8b7f))
+
+
+
 # 3.28.0 (2024-08-28)
 
 

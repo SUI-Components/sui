@@ -5,10 +5,10 @@ export {createClientLogger} from './client.js'
 export {createServerLogger, logErrorsMiddleware} from './server.js'
 export {traceInitialProps} from './traceInitialProps.js'
 
-export const initTracker = ({Mushroom, appName, environment, version, tenant, ...config}) => {
+export const initTracker = ({Reporter, appName, environment, version, tenant, ...config}) => {
   const context = {environment: environment || NODE_ENV, isServer, version, tenant}
 
-  Mushroom.start(appName, {
+  Reporter.start(appName, {
     ...config,
     context
   })

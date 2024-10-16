@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.51.0 (2024-10-15)
+
+
+### Features
+
+* Add jest adoption rule to @s-ui/lint ([4f023a9](https://github.com/SUI-Components/sui/commit/4f023a9efb6c1d622194d78268ffb4055d57b314))
+
+
+
 # 4.50.0 (2024-09-26)
 
 

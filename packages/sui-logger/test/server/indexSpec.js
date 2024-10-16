@@ -5,7 +5,7 @@ import {initTracker} from '../../src/index.js'
 import * as loggerPkg from '../../src/logger.js'
 import * as server from '../../src/server.js'
 
-const Mushroom = {
+const Reporter = {
   start: () => {}
 }
 
@@ -14,33 +14,33 @@ const Trackers = {
 }
 
 describe('initTracker', () => {
-  let mushroomStub
+  let reporterStub
 
   beforeEach(() => {
-    mushroomStub = sinon.stub(Mushroom, 'start')
+    reporterStub = sinon.stub(Reporter, 'start')
   })
 
   afterEach(() => {
-    mushroomStub.restore()
+    reporterStub.restore()
   })
 
   it('initialize tracker with the expected config', () => {
-    initTracker({Mushroom, appName: 'test', version: '1.0.0', config: {foo: 'bar'}})
+    initTracker({Reporter, appName: 'test', version: '1.0.0', config: {foo: 'bar'}})
 
-    expect(mushroomStub.calledOnce).to.equal(true)
+    expect(reporterStub.calledOnce).to.equal(true)
     expect(
-      mushroomStub.calledWith('test', {
+      reporterStub.calledWith('test', {
         config: {foo: 'bar'},
         context: {environment: 'test', isServer: 'true', version: '1.0.0', tenant: undefined}
       })
     ).to.equal(true)
   })
   it('initialize tracker with tenant', () => {
-    initTracker({Mushroom, appName: 'test', version: '1.0.0', tenant: 'infojobs', config: {foo: 'bar'}})
+    initTracker({Reporter, appName: 'test', version: '1.0.0', tenant: 'infojobs', config: {foo: 'bar'}})
 
-    expect(mushroomStub.calledOnce).to.equal(true)
+    expect(reporterStub.calledOnce).to.equal(true)
     expect(
-      mushroomStub.calledWith('test', {
+      reporterStub.calledWith('test', {
         config: {foo: 'bar'},
         context: {environment: 'test', isServer: 'true', version: '1.0.0', tenant: 'infojobs'}
       })
@@ -48,16 +48,16 @@ describe('initTracker', () => {
   })
   it('initialize tracker with a defined environment', () => {
     initTracker({
-      Mushroom,
+      Reporter,
       appName: 'test',
       environment: 'production',
       version: '1.0.0',
       config: {}
     })
 
-    expect(mushroomStub.calledOnce).to.equal(true)
+    expect(reporterStub.calledOnce).to.equal(true)
     expect(
-      mushroomStub.calledWith('test', {
+      reporterStub.calledWith('test', {
         config: {},
         context: {environment: 'production', isServer: 'true', version: '1.0.0', tenant: undefined}
       })
@@ -68,14 +68,19 @@ describe('initTracker', () => {
 describe('logsErrorsMiddleware', () => {
   let logger
   let loggerPkgStub
+  let trackerStub
+  let TrackersCreateStub
 
   before(() => {
     logger = {error: sinon.stub()}
     loggerPkgStub = sinon.stub(loggerPkg, 'default').returns(logger)
+    trackerStub = {emit: sinon.stub()}
+    TrackersCreateStub = sinon.stub(Trackers, 'create').returns(trackerStub)
   })
 
   after(() => {
     loggerPkgStub.restore()
+    TrackersCreateStub.restore()
   })
 
   it('log the error and pass execution to next middleware', () => {
@@ -83,7 +88,7 @@ describe('logsErrorsMiddleware', () => {
     const req = {headers: {}, url: '/'}
     const res = null
     const next = sinon.stub()
-    server.logErrorsMiddleware(error, req, res, next)
+    server.logErrorsMiddleware(trackerStub, error, req, res, next)
 
     expect(logger.error.calledWith(error)).to.equal(true)
     expect(next.calledWith(error)).to.equal(true)

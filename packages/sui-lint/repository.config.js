@@ -18,6 +18,7 @@ module.exports = {
     'sui/adv-tools-version': RULES.WARNING,
     'sui/ts-vs-js-files': RULES.WARNING,
     'sui/sass-files': RULES.WARNING,
-    'sui/spark-adoption': RULES.WARNING
+    'sui/spark-adoption': RULES.WARNING,
+    'sui/jest-adoption': RULES.WARNING
   }
 }

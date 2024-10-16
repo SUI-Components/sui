@@ -1,10 +1,10 @@
 {
   "name": "@s-ui/logger",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "Web app logger for both client and server side",
   "main": "lib/index.js",
   "scripts": {
-    "lib": "babel --presets sui ./src --out-dir ./lib",
+    "lib": "sui-js-compiler",
     "lint": "sui-lint js",
     "prepublishOnly": "rm -rf ./lib && npm run lib",
     "test": "npm run test:server && npm run test:browser",
@@ -22,12 +22,11 @@
     "hot-shots": "7.7.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.15.7",
     "@s-ui/bundler": "9",
+    "@s-ui/js-compiler": "1",
     "@s-ui/lint": "4",
     "@s-ui/mono": "2",
     "@s-ui/test": "8",
-    "babel-preset-sui": "3",
     "chai": "4.3.4",
     "react": "17",
     "sinon": "11.1.2"
