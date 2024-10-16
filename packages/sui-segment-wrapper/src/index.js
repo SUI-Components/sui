@@ -1,5 +1,6 @@
 import './utils/patchAnalytics.js'
 
+import {campaignContext} from './middlewares/source/campaignContext.js'
 import {defaultContextProperties} from './middlewares/source/defaultContextProperties.js'
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
@@ -9,7 +10,7 @@ import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
 import initTcfTracking from './tcf.js'
 import {getUserDataAndNotify} from './universalId.js'
-import {loadGoogleAnalytics} from './repositories/googleRepository.js'
+import {loadGoogleAnalytics, getCampaignDetails} from './repositories/googleRepository.js'
 
 const DEFAULT_GA_INIT_EVENT = 'sui'
 
@@ -27,6 +28,7 @@ try {
 const addMiddlewares = () => {
   window.analytics.addSourceMiddleware(userTraits)
   window.analytics.addSourceMiddleware(defaultContextProperties)
+  window.analytics.addSourceMiddleware(campaignContext)
   window.analytics.addSourceMiddleware(userScreenInfo)
   window.analytics.addSourceMiddleware(pageReferrer)
 }
@@ -37,6 +39,8 @@ if (isClient && window.analytics) {
   const googleAnalyticsInitEvent = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
 
   if (googleAnalyticsMeasurementId) {
+    const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
+
     window.dataLayer = window.dataLayer || []
     window.gtag =
       window.gtag ||
@@ -46,11 +50,16 @@ if (isClient && window.analytics) {
 
     window.gtag('js', new Date())
     window.gtag('config', googleAnalyticsMeasurementId, {
-      send_page_view: false
+      cookie_prefix: 'segment',
+      send_page_view: false,
+      ...googleAnalyticsConfig,
+      ...getCampaignDetails()
     })
     window.gtag('event', googleAnalyticsInitEvent)
 
-    loadGoogleAnalytics()
+    loadGoogleAnalytics().catch(error => {
+      console.log(error)
+    })
   }
 
   window.analytics.ready(checkAnonymousId)

@@ -5,11 +5,13 @@ import {getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
 import {setConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
 import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
+import {campaignContext} from '../src/middlewares/source/campaignContext.js'
 import {pageReferrer} from '../src/middlewares/source/pageReferrer.js'
 import {userScreenInfo} from '../src/middlewares/source/userScreenInfo.js'
 import {userTraits} from '../src/middlewares/source/userTraits.js'
 import {INTEGRATIONS_WHEN_NO_CONSENTS} from '../src/segmentWrapper.js'
 import initTcfTracking, {getGdprPrivacyValue, USER_GDPR} from '../src/tcf.js'
+import {assertCampaignDetails} from './assertions.js'
 import {
   cleanWindowStubs,
   resetReferrerState,
@@ -46,6 +48,7 @@ describe('Segment Wrapper', function () {
 
     window.analytics.addSourceMiddleware(userTraits)
     window.analytics.addSourceMiddleware(defaultContextProperties)
+    window.analytics.addSourceMiddleware(campaignContext)
     window.analytics.addSourceMiddleware(userScreenInfo)
     window.analytics.addSourceMiddleware(pageReferrer)
   })
@@ -259,6 +262,34 @@ describe('Segment Wrapper', function () {
           'Google Analytics 4': {
             clientId: 'fakeClientId',
             sessionId: 'fakeSessionId'
+          }
+        })
+      })
+
+      it('should send mapped campaign details', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=em-mail-winter%20promo-honda',
+          expectation: {
+            campaign: {
+              medium: 'email',
+              name: 'winter promo',
+              source: 'mail',
+              term: 'honda'
+            }
+          }
+        })
+
+        await assertCampaignDetails({
+          queryString: '?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink',
+          expectation: {
+            campaign: {
+              medium: 'social-media',
+              id: '1234',
+              name: 'spring sale',
+              source: 'google',
+              term: 'aprilia',
+              content: 'logolink'
+            }
           }
         })
       })
