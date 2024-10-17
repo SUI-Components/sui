@@ -8,8 +8,7 @@ exports.cleanList = list => list.filter(Boolean)
 
 exports.when = (check, getValue) => (check ? getValue() : false)
 
-exports.isTailwindEnabled = () =>
-  fs.existsSync(`${process.cwd()}/tailwind.config.js`)
+exports.isTailwindEnabled = () => fs.existsSync(`${process.cwd()}/tailwind.config.js`)
 
 exports.envVars = (env = []) =>
   env.reduce(
