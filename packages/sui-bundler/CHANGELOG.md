@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 9.67.0 (2024-10-18)
+
+
+### Features
+
+* add tailwind support ([46949d8](https://github.com/SUI-Components/sui/commit/46949d8e0294108e786d7f5216161efd318d0f79))
+* add tailwindcss to client dev ([ce7c945](https://github.com/SUI-Components/sui/commit/ce7c9459f17577a6213a07cb6513d6d96144258d))
+* lint issue ([a92c1cc](https://github.com/SUI-Components/sui/commit/a92c1cc3327e4e6b40016eb83b19b7ef64013e20))
+* update tailwindcss call ([e0dd668](https://github.com/SUI-Components/sui/commit/e0dd668a89d124893dc7dbed2b28390d8fb3d3ab))
+
+
+
 # 9.66.0 (2024-09-27)
 
 
