@@ -107,7 +107,7 @@ You can pass additional attributes to refine your decision logic:
 import {useDecision} from '@s-ui/pde'
 
 const MyComponent = () => {
-  const {variation} = useDecision('feature_test', {
+  const {enabled, variationKey} = useDecision('feature_test', {
     attributes: {
       isLoggedIn: true
     }
