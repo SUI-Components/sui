@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 9.68.0 (2024-10-18)
+
+
+### Features
+
+* add experimental spritemaps ([b2c8feb](https://github.com/SUI-Components/sui/commit/b2c8feb65610dce943202f5ff016b51c94675c30))
+* update api ([e25b96e](https://github.com/SUI-Components/sui/commit/e25b96e90dab9f6b7dbefb0a556703faff8ce3e4))
+* update documentation ([5da6feb](https://github.com/SUI-Components/sui/commit/5da6feb489e84bc961046bba86744b94b9322daf))
+
+
+
 # 9.67.0 (2024-10-18)
 
 
