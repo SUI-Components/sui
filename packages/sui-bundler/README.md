@@ -236,12 +236,36 @@ Generate SVG spritemaps by using [svg-spritemap-webpack-plugin](https://github.c
   "sui-bundler": {
     "spritemaps": [
       {
-        "path": "icons/src/fotocasa/**/*.svg",
-        "name": "fotocasa"
+        "path": ["icons/src/fotocasa/**/*.svg"],
+        "options": {
+          "output": {
+            "filename": "fotocasa.[contenthash].svg",
+            "chunk": {
+              "name": "fotocasa"
+            }
+          },
+          "sprite": {
+            "generate": {
+              "title": false
+            }
+          }
+        }
       },
       {
-        "path": "icons/src/habitaclia/**/*.svg",
-        "name": "habitaclia"
+        "path": ["icons/src/habitaclia/**/*.svg"],
+        "options": {
+          "output": {
+            "filename": "habitaclia.[contenthash].svg",
+            "chunk": {
+              "name": "habitaclia"
+            }
+          },
+          "sprite": {
+            "generate": {
+              "title": false
+            }
+          }
+        }
       }
     ]
   }
