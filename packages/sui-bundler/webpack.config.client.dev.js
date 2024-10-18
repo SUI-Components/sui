@@ -12,6 +12,7 @@ const {withHydrationOverlayWebpack} = require('@builder.io/react-hydration-overl
 const {envVars, MAIN_ENTRY_POINT, config, cleanList, when, isTailwindEnabled} = require('./shared/index.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const createSVGSpritemapPlugin = require('./shared/svg-spritemap')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
 const {supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 
@@ -88,7 +89,8 @@ const webpackConfig = {
     new ReactRefreshWebpackPlugin({overlay: false}),
     new HtmlWebpackInjectAttributesPlugin({
       crossorigin: 'anonymous'
-    })
+    }),
+    ...createSVGSpritemapPlugin()
   ],
   resolveLoader,
   module: {
