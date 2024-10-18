@@ -39,7 +39,7 @@
     "css-minimizer-webpack-plugin": "4.0.0",
     "esbuild": "0.15.5",
     "escape-string-regexp": "4.0.0",
-    "fast-glob": "3.2.12",
+    "fast-glob": "3.3.2",
     "find-free-ports": "3.0.0",
     "html-webpack-inject-attributes-plugin": "1.0.6",
     "html-webpack-plugin": "5.5.0",
