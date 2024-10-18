@@ -227,6 +227,27 @@ There are two ways to activate the statics cache option:
 
 > Statics will be cached but no offline page will be activated
 
+### SVG Spritemaps
+
+Generate SVG spritemaps by using [svg-spritemap-webpack-plugin](https://github.com/cascornelissen/svg-spritemap-webpack-plugin) as follows:
+
+```json
+{
+  "sui-bundler": {
+    "spritemaps": [
+      {
+        "path": "icons/src/fotocasa/**/*.svg",
+        "name": "fotocasa"
+      },
+      {
+        "path": "icons/src/habitaclia/**/*.svg",
+        "name": "habitaclia"
+      }
+    ]
+  }
+}
+```
+
 ## Externals Manifest
 
 If your are using an external CDN to store statics assets that are now managed by Webpack, like SVG or IMGs, you can create a manifest.json file in the root of your CDN (likehttps://spa-mock-statics.surge.sh/manifest.json`).
