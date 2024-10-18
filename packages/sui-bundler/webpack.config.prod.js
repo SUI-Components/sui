@@ -15,6 +15,7 @@ const {extractComments, sourceMap, supportLegacyBrowsers, cacheDirectory} = requ
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createCompilerRules = require('./shared/module-rules-compiler.js')
 const sassRules = require('./shared/module-rules-sass.js')
+const createSVGSpritemapPlugin = require('./shared/svg-spritemap')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
 const minifyCss = require('./shared/minify-css.js')
@@ -100,7 +101,8 @@ const webpackConfig = {
       template: './index.html'
     }),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/]),
-    new WebpackManifestPlugin({fileName: 'asset-manifest.json'})
+    new WebpackManifestPlugin({fileName: 'asset-manifest.json'}),
+    ...createSVGSpritemapPlugin()
   ]),
   module: {
     rules: cleanList([
