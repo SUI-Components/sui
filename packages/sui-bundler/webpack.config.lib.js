@@ -53,7 +53,7 @@ module.exports = ({chunkCss} = {}) => {
         chunkFilename: cssFileName
       }),
       !chunkCss &&
-        webpack.optimize.LimitChunkCountPlugin({
+        new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1
         }),
       new webpack.EnvironmentPlugin(envVars(config.env)),
