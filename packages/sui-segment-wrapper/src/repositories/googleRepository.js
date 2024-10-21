@@ -53,12 +53,10 @@ const getGoogleField = async field => {
 export const getGoogleClientID = () => getGoogleField(FIELDS.clientId)
 export const getGoogleSessionID = () => getGoogleField(FIELDS.sessionId)
 
-export const sendGoogleUserId = userId => {
+export const setGoogleUserId = userId => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
 
   if (!googleAnalyticsMeasurementId || !userId) return
 
-  window.gtag?.('set', googleAnalyticsMeasurementId, {
-    user_id: userId
-  })
+  window.gtag?.('set', 'user_id', userId)
 }

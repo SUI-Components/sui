@@ -48,15 +48,13 @@ export const stubGoogleAnalytics = () => {
     session_id: 'fakeSessionId'
   }
 
-  window.gtag = (key, id, fieldName, done) => {
+  window.gtag = (key, id, field, done) => {
     if (key === 'get') {
-      return done(savedFields?.[fieldName])
+      return done(savedFields?.[field])
     }
 
-    if (key === 'set' && typeof fieldName === 'object') {
-      Object.keys(fieldName).forEach(field => {
-        savedFields[field] = fieldName[field]
-      })
+    if (key === 'set') {
+      savedFields[id] = field
     }
   }
 }

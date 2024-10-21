@@ -1,7 +1,7 @@
 // @ts-check
 
 import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
-import {getGoogleClientID, getGoogleSessionID, sendGoogleUserId} from './repositories/googleRepository.js'
+import {getGoogleClientID, getGoogleSessionID, setGoogleUserId} from './repositories/googleRepository.js'
 import {getConfig} from './config.js'
 import {checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
 import {getXandrId} from './repositories/xandrRepository.js'
@@ -208,7 +208,7 @@ const track = (event, properties, context = {}, callback) =>
 const identify = async (userId, traits, options, callback) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
 
-  sendGoogleUserId(userId)
+  setGoogleUserId(userId)
 
   return window.analytics.identify(
     userId,
