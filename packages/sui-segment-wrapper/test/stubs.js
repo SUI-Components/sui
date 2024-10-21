@@ -43,14 +43,20 @@ export const stubFetch = ({responses = [{urlRe: /^http/, fetchResponse: {}}]} = 
 }
 
 export const stubGoogleAnalytics = () => {
-  const mockClientId = 'fakeClientId'
-  const mockSessionId = 'fakeSessionId'
+  const savedFields = {
+    client_id: 'fakeClientId',
+    session_id: 'fakeSessionId'
+  }
 
   window.gtag = (key, id, fieldName, done) => {
     if (key === 'get') {
-      const value = fieldName === 'client_id' ? mockClientId : mockSessionId
+      return done(savedFields?.[fieldName])
+    }
 
-      return done(value)
+    if (key === 'set' && typeof fieldName === 'object') {
+      Object.keys(fieldName).forEach(field => {
+        savedFields[field] = fieldName[field]
+      })
     }
   }
 }
