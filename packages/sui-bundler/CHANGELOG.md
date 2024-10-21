@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.69.0 (2024-10-21)
+
+
+### Features
+
+* create --chunks-css flag ([0a4ed25](https://github.com/SUI-Components/sui/commit/0a4ed25505c01923eb9daa9ac45ac10218b23452))
+* fix class new ([bd3af7f](https://github.com/SUI-Components/sui/commit/bd3af7fd1e0df0d6e2cff760f8532ba453425eb1))
+
+
+
 # 9.68.0 (2024-10-18)
 
 
