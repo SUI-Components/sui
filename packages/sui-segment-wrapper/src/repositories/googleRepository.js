@@ -94,3 +94,11 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
 
 export const getGoogleClientID = () => getGoogleField(FIELDS.clientId)
 export const getGoogleSessionID = () => getGoogleField(FIELDS.sessionId)
+
+export const setGoogleUserId = userId => {
+  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+
+  if (!googleAnalyticsMeasurementId || !userId) return
+
+  window.gtag?.('set', 'user_id', userId)
+}

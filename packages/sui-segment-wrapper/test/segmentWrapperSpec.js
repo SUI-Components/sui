@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import sinon from 'sinon'
 
 import {getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
-import {setConfig} from '../src/config.js'
+import {setConfig, getConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
 import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
 import {campaignContext} from '../src/middlewares/source/campaignContext.js'
@@ -223,6 +223,7 @@ describe('Segment Wrapper', function () {
       it('should send Google Analytics integration with true if user declined consents', async () => {
         // Add the needed config to enable Google Analytics
         setConfig('googleAnalyticsMeasurementId', 123)
+
         await simulateUserDeclinedConsents()
 
         await suiAnalytics.track(
@@ -341,6 +342,7 @@ describe('Segment Wrapper', function () {
 
   describe('when the identify event is called', () => {
     const DEFAULT_SEGMENT_CALLBACK_TIMEOUT = 350
+
     it('should call sdk identify of users that accepts consents', async function () {
       await simulateUserAcceptConsents()
 
@@ -350,6 +352,7 @@ describe('Segment Wrapper', function () {
       await waitUntil(() => spy.callCount, {
         timeout: DEFAULT_SEGMENT_CALLBACK_TIMEOUT
       })
+
       expect(spy.callCount).to.equal(1)
     })
 
@@ -362,7 +365,32 @@ describe('Segment Wrapper', function () {
       await waitUntil(() => spy.callCount, {
         timeout: DEFAULT_SEGMENT_CALLBACK_TIMEOUT
       }).catch(() => null)
+
       expect(spy.callCount).to.equal(1)
+    })
+
+    describe('and GA Measurment ID is set', () => {
+      beforeEach(() => {
+        setConfig('googleAnalyticsMeasurementId', 123)
+      })
+
+      it('should set the user id into `gtag` properly', async function () {
+        await simulateUserAcceptConsents()
+        await suiAnalytics.identify('myTestUserId')
+
+        const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+
+        const getGaUserId = async () =>
+          new Promise(resolve => {
+            window.gtag('get', googleAnalyticsMeasurementId, 'user_id', userId => {
+              resolve(userId)
+            })
+          })
+
+        const gaUserId = await getGaUserId()
+
+        expect(gaUserId).to.equal('myTestUserId')
+      })
     })
   })
 
