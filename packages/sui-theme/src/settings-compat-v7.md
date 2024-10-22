@@ -810,19 +810,19 @@
 
 ## components/atom/input/_settings.scss
 
-> `$pl-atom-input`: removed
+> `$pl-atom-input`: moved to `@s-ui/react-atom-input`
 > 
-> `$pr-atom-input`: removed
+> `$pr-atom-input`: moved to `@s-ui/react-atom-input`
     
-> `$bxsh-atom-input-size`: removed. Set `$bxsh-focus-size`
+> `$bxsh-atom-input-size`: moved to `@s-ui/react-atom-input`
 >
-> `$bxsh-atom-input`: removed
+> `$bxsh-atom-input`: moved to `@s-ui/react-atom-input`
 > 
-> `$bd-atom-input`: removed
+> `$bd-atom-input`: moved to `@s-ui/react-atom-input`
 > 
-> `$bd-atom-input-focus`: removed
+> `$bd-atom-input-focus`: moved to `@s-ui/react-atom-input`
 > 
-> `$fz-atom-input`: removed
+> `$fz-atom-input`: moved to `@s-ui/react-atom-input`
 > 
 > `$bgc-atom-input`: moved to `@s-ui/react-atom-input`
 > 
@@ -830,23 +830,23 @@
 > 
 > `$bd-atom-input-base`: moved to `@s-ui/react-atom-input`
 
-> `$bd-molecule-autosuggest-focus`: removed
+> `$bd-molecule-autosuggest-focus`: moved to `@s-ui/react-molecule-autosuggest`
 > 
-> `$bxsh-molecule-autosuggest-focus`: removed
+> `$bxsh-molecule-autosuggest-focus`: moved to `@s-ui/react-molecule-autosuggest`
 > 
-> `$ol-molecule-autosuggest-focus`: removed
+> `$ol-molecule-autosuggest-focus`: moved to `@s-ui/react-molecule-autosuggest`
 > 
-> `$olo-molecule-autosuggest-focus`: removed
+> `$olo-molecule-autosuggest-focus`: moved to `@s-ui/react-molecule-autosuggest`
 
-> `$bd-atom-select-focus`: removed
+> `$bd-atom-select-focus`: moved to `@s-ui/react-molecule-select`
 > 
-> `$bxsh-atom-select-focus`: removed
+> `$bxsh-atom-select-focus`: moved to `@s-ui/react-molecule-select`
 > 
-> `$ol-atom-select-focus`: removed
+> `$ol-atom-select-focus`: moved to `@s-ui/react-molecule-select`
 > 
-> `$olo-atom-select-focus`: removed
+> `$olo-atom-select-focus`: moved to `@s-ui/react-molecule-select`
 
-> `$h-atom-input--xl`: located in moved to `@s-ui/react-atom-input`
+> `$h-atom-input--xl`: moved to `@s-ui/react-atom-input`
 > 
 > `$h-atom-input--l`: moved to `@s-ui/react-atom-input`
 > 
@@ -874,13 +874,13 @@
 
 # Mixins:
 
-> `@mixin sui-atom-input-input`: removed
+> `@mixin sui-atom-input-input`: moved to `@s-ui/react-atom-input`
 > 
-> `@mixin sui-atom-input-input-focus`: removed
+> `@mixin sui-atom-input-input-focus`: moved to `@s-ui/react-atom-input`
 > 
-> `@mixin sui-atom-input-select-focus`: removed
+> `@mixin sui-atom-input-select-focus`: moved to `@s-ui/react-molecule-select`
 > 
-> `@mixin sui-molecule-autosuggest-focus`: removed
+> `@mixin sui-molecule-autosuggest-focus`: moved to `@s-ui/react-molecule-autosuggest`
 
 > `@mixin sui-badge-notification-element`: removed
 > 
@@ -910,13 +910,13 @@
 > 
 > `@mixin sui-card--small`: removed
 
-> `@mixin sui-icon--small`: removed
+> `@mixin sui-icon--small`: moved to `@s-ui/react-atom-icon`
 > 
-> `@mixin sui-icon--medium`: removed
+> `@mixin sui-icon--medium`: moved to `@s-ui/react-atom-icon`
 > 
-> `@mixin sui-icon--large`: removed
+> `@mixin sui-icon--large`: moved to `@s-ui/react-atom-icon`
 > 
-> `@mixin sui-icon--xlarge`: removed
+> `@mixin sui-icon--xlarge`: moved to `@s-ui/react-atom-icon`
 
 > `@mixin sui-input`: removed
 
@@ -946,13 +946,13 @@
 
 ## Placeholder Selectors
 
-> `%sui-atom-input-input`
+> `%sui-atom-input-input`: moved to `@s-ui/react-atom-input`
 > 
-> `%sui-atom-input-input-focus`
+> `%sui-atom-input-input-focus`: moved to `@s-ui/react-atom-input`
 > 
-> `%sui-atom-input-select-focus`
+> `%sui-atom-input-select-focus`: moved to `@s-ui/react-molecule-select`
 > 
-> `%sui-molecule-autosuggest-focus`
+> `%sui-molecule-autosuggest-focus`: moved to `@s-ui/react-molecule-autosuggest`
  
 
 ## Functions
