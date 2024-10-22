@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.7.0 (2024-10-22)
+
+
+### Features
+
+* modify set method ([cf37a8e](https://github.com/SUI-Components/sui/commit/cf37a8e761f73bb7ba6fcb1ed7a765d41cc5b630))
+* set ga user id on identify ([1184d81](https://github.com/SUI-Components/sui/commit/1184d8143f18ab7cb6d5245f43ee589299215e49))
+
+
+
 # 4.6.0 (2024-10-22)
 
 
