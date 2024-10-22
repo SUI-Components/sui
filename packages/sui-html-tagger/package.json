@@ -10,6 +10,6 @@
     "prepublishOnly": "npm run lib"
   },
   "dependencies": {
-    "just-debounce-it": "1.1.0"
+    "just-debounce-it": "1.5.0"
   }
 }
