@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.6.0 (2024-10-22)
+
+
+### Features
+
+* map campaign data ([48d8b9e](https://github.com/SUI-Components/sui/commit/48d8b9e707a74586cec93544ec0a2136bb1892ae))
+
+
+
 # 4.5.0 (2024-10-10)
 
 
