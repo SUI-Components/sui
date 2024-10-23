@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.25.0 (2024-10-23)
+
+
+### Features
+
+* allow setting custom base path for svg icons build (vite) ([b00b1f7](https://github.com/SUI-Components/sui/commit/b00b1f7dd784c5afa7f734ea29385eebf8a5118f))
+
+
+
 # 3.24.0 (2024-03-07)
 
 
