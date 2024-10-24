@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.8.0 (2024-10-24)
+
+
+### Bug Fixes
+
+* fix stc mapping ([57462bd](https://github.com/SUI-Components/sui/commit/57462bd97720993ffd36f1da05f2d7b4bbfdbcc2))
+
+
+
 # 4.7.0 (2024-10-22)
 
 
