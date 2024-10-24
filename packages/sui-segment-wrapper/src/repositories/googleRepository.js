@@ -9,7 +9,7 @@ const FIELDS = {
 const STC = {
   QUERY: 'stc',
   SPLIT_SYMBOL: '-',
-  NAME_SPLIT_SYMBOL: ':'
+  CAMPAIGN_SPLIT_SYMBOL: ':'
 }
 
 const STC_MEDIUM_TRANSFORMATIONS = {
@@ -24,6 +24,8 @@ const STC_MEDIUM_TRANSFORMATIONS = {
   pn: 'push-notification',
   cs: 'cross-sites'
 }
+
+const STC_INVALID_CONTENT = 'na'
 
 const cachedData = {
   [FIELDS.clientId]: null,
@@ -77,8 +79,9 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
   if (!searchParams.has(STC.QUERY)) return null
 
   const stc = searchParams.get(STC.QUERY)
-  const [medium, source, originalName, term, content] = stc.split(STC.SPLIT_SYMBOL)
-  const [id, name] = originalName.split(STC.NAME_SPLIT_SYMBOL)
+  const [medium, source, campaign, content, term] = stc.split(STC.SPLIT_SYMBOL)
+  const [id, name] = campaign.split(STC.CAMPAIGN_SPLIT_SYMBOL)
+  const needsContent = typeof content !== 'undefined' && content !== STC_INVALID_CONTENT
 
   return {
     campaign: {
@@ -86,8 +89,8 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
       ...(typeof name !== 'undefined' && {id}),
       name: name ?? id,
       source,
-      term,
-      ...(typeof content !== 'undefined' && {content})
+      ...(needsContent && {content}),
+      ...(typeof term !== 'undefined' && {term})
     }
   }
 }

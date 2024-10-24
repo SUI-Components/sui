@@ -267,7 +267,7 @@ describe('Segment Wrapper', function () {
         })
       })
 
-      it('should send mapped campaign details', async () => {
+      it('should send mapped campaign details when the url query string is `?stc=em-mail-winter%20promo-honda`', async () => {
         await assertCampaignDetails({
           queryString: '?stc=em-mail-winter%20promo-honda',
           expectation: {
@@ -275,11 +275,13 @@ describe('Segment Wrapper', function () {
               medium: 'email',
               name: 'winter promo',
               source: 'mail',
-              term: 'honda'
+              content: 'honda'
             }
           }
         })
+      })
 
+      it('should send mapped campaign details when the url query string is `?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink`', async () => {
         await assertCampaignDetails({
           queryString: '?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink',
           expectation: {
@@ -288,8 +290,90 @@ describe('Segment Wrapper', function () {
               id: '1234',
               name: 'spring sale',
               source: 'google',
-              term: 'aprilia',
-              content: 'logolink'
+              content: 'aprilia',
+              term: 'logolink'
+            }
+          }
+        })
+      })
+
+      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn%20sale`', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=sem-google-autumn%20sale',
+          expectation: {
+            campaign: {
+              medium: 'paid-search',
+              name: 'autumn sale',
+              source: 'google'
+            }
+          }
+        })
+      })
+
+      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale`', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=sem-google-autumn sale',
+          expectation: {
+            campaign: {
+              medium: 'paid-search',
+              name: 'autumn sale',
+              source: 'google'
+            }
+          }
+        })
+      })
+
+      it('should send mapped campaign details when the url query string is `?stc=sem-google-1234%3Aautumn%20sale`', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=sem-google-1234%3Aautumn%20sale',
+          expectation: {
+            campaign: {
+              medium: 'paid-search',
+              id: '1234',
+              name: 'autumn sale',
+              source: 'google'
+            }
+          }
+        })
+      })
+
+      it('should send mapped campaign details when the url query string is `?stc=sem-google-1234:autumn sale`', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=sem-google-1234:autumn sale',
+          expectation: {
+            campaign: {
+              medium: 'paid-search',
+              id: '1234',
+              name: 'autumn sale',
+              source: 'google'
+            }
+          }
+        })
+      })
+
+      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-aprilia`', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=sem-google-autumn sale-aprilia',
+          expectation: {
+            campaign: {
+              medium: 'paid-search',
+              name: 'autumn sale',
+              source: 'google',
+              content: 'aprilia'
+            }
+          }
+        })
+      })
+
+      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-na-logolink`', async () => {
+        await assertCampaignDetails({
+          queryString: '?stc=sem-google-autumn sale-na-logolink',
+          expectation: {
+            campaign: {
+              medium: 'paid-search',
+              name: 'autumn sale',
+              source: 'google',
+              term: 'logolink'
             }
           }
         })
