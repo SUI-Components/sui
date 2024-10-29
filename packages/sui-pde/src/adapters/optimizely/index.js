@@ -125,7 +125,7 @@ export default class OptimizelyAdapter {
    * @param {object} [params.attributes]
    * @returns {object} decision
    */
-  decide({name, attributes}) {
+  decide({name, attributes, isEventDisabled}) {
     const user = this._optimizely.createUserContext(this._userId, {
       ...this._applicationAttributes,
       ...attributes
@@ -133,7 +133,9 @@ export default class OptimizelyAdapter {
 
     return user.decide(
       name,
-      !this._hasUserConsents ? [optimizelySDK.OptimizelyDecideOption.DISABLE_DECISION_EVENT] : undefined
+      !this._hasUserConsents || isEventDisabled
+        ? [optimizelySDK.OptimizelyDecideOption.DISABLE_DECISION_EVENT]
+        : undefined
     )
   }
 
