@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 2.30.0 (2024-10-30)
+
+
+### Features
+
+* add decide callback ([8e32e67](https://github.com/SUI-Components/sui/commit/8e32e674e187c7c2a8e379565dc0845b57c801bd))
+* minor pde fix ([1a25de0](https://github.com/SUI-Components/sui/commit/1a25de0bebb9dfedca06780d6bbe2ae3979547ce))
+* minor updates ([fa5e904](https://github.com/SUI-Components/sui/commit/fa5e904342f761aebd1420a16ad0402b1b1fea59))
+
+
+
 # 2.29.0 (2024-10-15)
 
 
