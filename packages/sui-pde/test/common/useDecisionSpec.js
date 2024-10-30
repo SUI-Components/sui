@@ -28,19 +28,17 @@ describe('useDecision hook', () => {
   describe('when pde context is set', () => {
     let wrapper
     let decide
+    const decision = {
+      variationKey: 'variation',
+      enabled: true,
+      variables: {},
+      ruleKey: 'rule',
+      flagKey: 'flag',
+      userContext: {},
+      reasons: []
+    }
 
     before(() => {
-      const decision = {
-        variationKey: 'variation',
-        enabled: true,
-        variables: {},
-        ruleKey: 'rule',
-        flagKey: 'flag',
-        userContext: {},
-        reasons: []
-      }
-      decide = sinon.stub().returns(decision)
-
       const addDecideListener = ({onDecide}) =>
         onDecide({type: 'flag', decisionInfo: {...decision, decisionEventDispatched: true}})
       const removeNotificationListener = sinon.stub()
@@ -51,6 +49,10 @@ describe('useDecision hook', () => {
           {children}
         </PdeContext.Provider>
       )
+    })
+
+    beforeEach(() => {
+      decide = sinon.stub().returns(decision)
     })
 
     describe.client('and the hook is executed by the browser', () => {
@@ -198,6 +200,35 @@ describe('useDecision hook', () => {
           })
           sinon.assert.callCount(console.error, 0)
           sinon.assert.callCount(customTrack, 1)
+        })
+      })
+
+      describe('and event is disabled', () => {
+        before(() => {
+          window.analytics = {
+            ready: cb => cb(),
+            track: sinon.spy()
+          }
+          sinon.spy(console, 'error')
+        })
+
+        after(() => {
+          console.error.restore()
+        })
+
+        it('should not send event', () => {
+          renderHook(
+            () =>
+              useDecision('test_experiment_id', {
+                isEventDisabled: true
+              }),
+            {
+              wrapper
+            }
+          )
+
+          sinon.assert.callCount(decide, 1)
+          sinon.assert.calledWith(decide, sinon.match.has('isEventDisabled', true))
         })
       })
     })

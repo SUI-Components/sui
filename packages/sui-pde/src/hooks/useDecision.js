@@ -19,7 +19,7 @@ export default function useDecision(
   const {decide} = useDecisionCallback()
 
   const data = useMemo(() => {
-    return decide(name, attributes, trackExperimentViewed, isEventDisabled, queryString, adapterId)
+    return decide(name, {attributes, trackExperimentViewed, isEventDisabled, queryString, adapterId})
   }, [name, attributes, trackExperimentViewed, isEventDisabled, queryString, adapterId])
 
   return data
