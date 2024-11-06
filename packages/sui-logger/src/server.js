@@ -41,9 +41,10 @@ export const logErrorsMiddleware = (Trackers, error, req, res, next) => {
   next(error)
 }
 
-export const createServerLogger = ({req, userId, trackerName} = {}) => {
+export const createServerLogger = ({Trackers, req, userId, trackerName} = {}) => {
   return createLogger({
     ...extractFrom(req),
+    Trackers,
     listenUnhandled: createListenUnhandled(),
     userId,
     trackerName
