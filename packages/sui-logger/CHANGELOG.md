@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.5.0 (2024-11-06)
+
+
+### Bug Fixes
+
+* add missing trackers param ([ebcae34](https://github.com/SUI-Components/sui/commit/ebcae34116f8067d8bce16e8083c4cbd4081af13))
+
+
+
 # 1.4.0 (2024-10-15)
 
 
