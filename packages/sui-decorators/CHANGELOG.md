@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.30.0 (2024-11-07)
+
+
+### Features
+
+* add error reporter to tracer decorator ([200da4e](https://github.com/SUI-Components/sui/commit/200da4ee83e1cfbf830eb326a47e0a0c641443ed))
+
+
+
 # 3.29.0 (2024-10-16)
 
 
