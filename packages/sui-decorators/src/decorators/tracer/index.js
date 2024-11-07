@@ -14,6 +14,15 @@ const getReporter = () => {
   return customReporter || new ConsoleReporter()
 }
 
+const getErrorReporter = () => {
+  const defaultErrorReporter = () => undefined
+  const customErrorReporter = isNode
+    ? global.__SUI_DECORATOR_TRACER_ERROR_REPORTER__
+    : window.__SUI_DECORATOR_TRACER_ERROR_REPORTER__
+
+  return customErrorReporter || defaultErrorReporter
+}
+
 export default ({metric = null} = {}) => {
   return (target, fnName, descriptor) => {
     const {configurable, enumerable, writable} = descriptor
@@ -58,6 +67,9 @@ export default ({metric = null} = {}) => {
                       status: error ? statusCodes.FAIL : statusCodes.SUCCESS,
                       value: endTime - startTime
                     })
+                    if (error) {
+                      getErrorReporter()(error, metricName)
+                    }
                   } else {
                     reporter.send({
                       metricName,
@@ -76,6 +88,7 @@ export default ({metric = null} = {}) => {
                     status: statusCodes.FAIL,
                     value: endTime - startTime
                   })
+                  getErrorReporter()(error, metricName)
 
                   return Promise.reject(error)
                 })
