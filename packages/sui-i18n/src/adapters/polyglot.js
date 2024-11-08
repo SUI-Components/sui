@@ -197,8 +197,8 @@ class Polyglot {
 }
 
 export default class PolyglotAdapter {
-  constructor() {
-    this.polyglot = new Polyglot()
+  constructor(options) {
+    this.polyglot = new Polyglot(options)
   }
 
   get instance() {
