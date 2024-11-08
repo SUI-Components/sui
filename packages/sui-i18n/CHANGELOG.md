@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.36.0 (2024-11-08)
+
+
+### Features
+
+* add options ([a8a8106](https://github.com/SUI-Components/sui/commit/a8a8106802fc7c6707c5a5f3956aacd38e8b41aa))
+
+
+
 # 1.35.0 (2024-08-02)
 
 
