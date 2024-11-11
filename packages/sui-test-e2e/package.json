@@ -17,7 +17,7 @@
     "@testing-library/cypress": "8.0.3",
     "colors": "1.4.0",
     "commander": "8.3.0",
-    "cypress": "10.4.0",
+    "cypress": "10.11.0",
     "cypress-file-upload": "5.0.8"
   },
   "keywords": [],

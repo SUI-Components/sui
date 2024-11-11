@@ -30,7 +30,7 @@
     "just-debounce-it": "1.5.0",
     "just-kebab-case": "1.1.0",
     "just-pascal-case": "1.1.0",
-    "micromatch": "4.0.5",
+    "micromatch": "4.0.8",
     "node-fetch": "2.7.0",
     "normalize.css": "8.0.1",
     "react": "17",
