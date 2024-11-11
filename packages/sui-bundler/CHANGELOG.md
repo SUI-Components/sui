@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.70.0 (2024-11-11)
+
+
+### Bug Fixes
+
+* bump deps update for security ([79f3c2c](https://github.com/SUI-Components/sui/commit/79f3c2c8007b353a6da3459ea417946a350b8b5a))
+
+
+
 # 9.69.0 (2024-10-21)
 
 
