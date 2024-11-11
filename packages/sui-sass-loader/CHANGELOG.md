@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.8.0 (2024-11-11)
+
+
+### Bug Fixes
+
+* bump deps update for security ([2c7c450](https://github.com/SUI-Components/sui/commit/2c7c45062c35f1f6afb7bdc1b43b10403402be85))
+
+
+
 # 1.7.0 (2024-01-16)
 
 
@@ -71,6 +80,3 @@
 * **packages/sui-sass-loader:** Support resolve.alias config ([1c79198](https://github.com/SUI-Components/sui/commit/1c79198c11bc7dc425a4f99e1279478671c88492))
 * **packages/sui-sass-loader:** Support resolve.modules webpack config and extract some methods ([c05bbf5](https://github.com/SUI-Components/sui/commit/c05bbf564e0603fd705706c2c50928f964e015ea))
 * **packages/sui-sass-loader:** Use major for devDependencies ([e89dacf](https://github.com/SUI-Components/sui/commit/e89dacfe4a8c4c3e39b9b37bda630b6d483cf792))
-
-
-
