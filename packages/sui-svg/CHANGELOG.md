@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.26.0 (2024-11-11)
+
+
+### Bug Fixes
+
+* bump deps update for security ([5aa918b](https://github.com/SUI-Components/sui/commit/5aa918b1682ec57698d15dcfb34298cc9afe0822))
+
+
+
 # 3.25.0 (2024-10-23)
 
 
