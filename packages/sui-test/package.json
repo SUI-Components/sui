@@ -47,6 +47,6 @@
     "swc-loader": "0.2.6",
     "tty-browserify": "0.0.1",
     "util": "0.12.4",
-    "webpack": "5.82.1"
+    "webpack": "5.94.0"
   }
 }
