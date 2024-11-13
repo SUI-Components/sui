@@ -6,7 +6,17 @@ const {
 const config = require('./config.js')
 const CWD = process.cwd()
 
-module.exports = async ({ci, coverage, headless, ignorePattern, pattern, srcPattern, timeout, watch}) => {
+module.exports = async ({
+  ci,
+  coverage,
+  coverageInline,
+  headless,
+  ignorePattern,
+  pattern,
+  srcPattern,
+  timeout,
+  watch
+}) => {
   if (timeout) config.browserDisconnectTimeout = timeout
   if (ignorePattern) config.exclude = [ignorePattern]
 
@@ -38,7 +48,13 @@ module.exports = async ({ci, coverage, headless, ignorePattern, pattern, srcPatt
         {type: 'cobertura', subdir: '.', file: 'coverage.xml'},
         {type: 'html', subdir: 'report-html'},
         {type: 'json-summary', subdir: '.', file: 'coverage.json'},
-        {type: 'text-summary'}
+        {
+          type: 'text-summary',
+          ...(!coverageInline && {
+            subdir: '.',
+            file: 'coverage.txt'
+          })
+        }
       ]
     }
   }
