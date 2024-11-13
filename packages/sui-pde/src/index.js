@@ -1,4 +1,5 @@
 export {default as PDE} from './pde.js'
+export {default as getDecision} from './getDecision.js'
 export {default as useFeature} from './hooks/useFeature.js'
 export {default as PdeContext} from './contexts/PdeContext.js'
 export {default as useExperiment} from './hooks/useExperiment.js'
