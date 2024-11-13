@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.31.0 (2024-11-13)
+
+
+### Features
+
+* add getDecision function ([889145f](https://github.com/SUI-Components/sui/commit/889145f294710032ae2a95f6e4bd87683c7df12a))
+* move function location and add tests ([f2fef06](https://github.com/SUI-Components/sui/commit/f2fef06816d922997dccc5812c3015c2f8d38ea7))
+
+
+
 # 2.30.0 (2024-10-30)
 
 
