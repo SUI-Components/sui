@@ -99,6 +99,17 @@ const MyComponent = () => {
 }
 ```
 
+And the function to call elsewhere, like getInitialProps:
+
+```js
+import {getDecision} from '@s-ui/pde'
+
+Page.getInitialProps = async ({context}) => {
+  const {decide} = getDecision(pde)
+  const {enabled} = decide('ff_web_my_flag')
+}
+```
+
 #### Attributes
 
 You can pass additional attributes to refine your decision logic:
