@@ -1,4 +1,4 @@
-import {getPlatformStrategy} from './platformStrategies.js'
+import {getPlatformStrategy} from './hooks/common/platformStrategies.js'
 
 /**
  * Function to call decide
@@ -6,7 +6,7 @@ import {getPlatformStrategy} from './platformStrategies.js'
  * @return {function}
  */
 export default function getDecision(pde) {
-  if (pde === null) {
+  if (!pde) {
     throw new Error('[sui-pde: useDecision] sui-pde provider is required to work')
   }
 

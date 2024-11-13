@@ -1,7 +1,7 @@
 import {useCallback, useContext} from 'react'
 
 import PdeContext from '../contexts/PdeContext.js'
-import getDecision from './common/getDecision.js'
+import getDecision from '../getDecision.js'
 
 /**
  * Hook to call decide
