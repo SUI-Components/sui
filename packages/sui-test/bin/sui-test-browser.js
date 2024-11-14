@@ -14,6 +14,7 @@ program
   .option('--src-pattern <srcPattern>', 'Define the source directory', false)
   .option('-T, --timeout <ms>', 'Timeout', 2000)
   .option('--coverage', 'Run the coverage preprocessor', false)
+  .option('--no-coverage-inline', 'Save the coverage summary in a text file', false)
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -22,15 +23,19 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-test browser')
+    console.log('    $ sui-test browser --headless')
+    console.log('    $ sui-test browser --coverage')
+    console.log('    $ sui-test browser --coverage --no-coverage-inline')
     console.log('')
   })
   .parse(process.argv)
 
-const {ci, coverage, headless, ignorePattern, pattern, srcPattern, timeout, watch} = program.opts()
+const {ci, coverage, coverageInline, headless, ignorePattern, pattern, srcPattern, timeout, watch} = program.opts()
 
 runner({
   ci,
   coverage,
+  coverageInline,
   headless,
   ignorePattern,
   pattern,

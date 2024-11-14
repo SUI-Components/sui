@@ -13,6 +13,7 @@ program
   .option('-W, --watch', 'Watch mode')
   .option('-T, --timeout <timeout>', 'Timeout')
   .option('--coverage', 'Create coverage', false)
+  .option('--no-coverage-inline', 'Save the coverage summary in a text file', false)
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -23,7 +24,7 @@ program
   })
   .parse(process.argv)
 
-const {coverage, watch, ci, headless, timeout} = program.opts()
+const {coverage, coverageInline, watch, ci, headless, timeout} = program.opts()
 
 const relPath = path.relative(
   process.cwd(),
@@ -39,6 +40,7 @@ const run = async () => {
           '--pattern',
           path.join(relPath, 'node_modules', '@s-ui', 'studio', 'src', 'runtime-mocha', 'index.js'),
           coverage && '--coverage',
+          !coverageInline && '--no-coverage-inline',
           watch && '--watch',
           ci && '--ci',
           headless && '--headless',
