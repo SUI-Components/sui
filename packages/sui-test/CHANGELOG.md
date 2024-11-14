@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.41.0 (2024-11-14)
+
+
+### Features
+
+* add option to save the coverage summary in a txt file ([d7fee33](https://github.com/SUI-Components/sui/commit/d7fee33372a9615b0e6143685340f4c412725917))
+
+
+
 # 8.40.0 (2024-11-11)
 
 
