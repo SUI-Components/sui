@@ -58,7 +58,7 @@ if (isClient && window.analytics) {
     window.gtag('event', googleAnalyticsInitEvent)
 
     loadGoogleAnalytics().catch(error => {
-      console.log(error)
+      console.error(error)
     })
   }
 

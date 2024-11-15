@@ -27,11 +27,6 @@ const STC_MEDIUM_TRANSFORMATIONS = {
 
 const STC_INVALID_CONTENT = 'na'
 
-const cachedData = {
-  [FIELDS.clientId]: null,
-  [FIELDS.sessionId]: null
-}
-
 const loadScript = async src =>
   new Promise(function (resolve, reject) {
     const script = document.createElement('script')
@@ -60,15 +55,8 @@ const getGoogleField = async field => {
   if (!googleAnalyticsMeasurementId) return Promise.resolve()
 
   return new Promise(resolve => {
-    // Try to get the field from the stored info
-    if (cachedData[field]) return resolve(cachedData[field])
     // if not, get it from the `GoogleAnalytics` tag
-    window.gtag?.('get', googleAnalyticsMeasurementId, field, id => {
-      // Cache locally the field value
-      cachedData[field] = id
-      // Resolve the promise with the field
-      resolve(id)
-    })
+    window.gtag?.('get', googleAnalyticsMeasurementId, field, resolve)
   })
 }
 
