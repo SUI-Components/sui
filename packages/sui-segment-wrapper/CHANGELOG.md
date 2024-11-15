@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.9.0 (2024-11-15)
+
+
+### Features
+
+* stop caching ga fields and catch errors ([cf4a4b9](https://github.com/SUI-Components/sui/commit/cf4a4b927cbbfaa973ca6cae12eb09f04f58c4f7))
+
+
+
 # 4.8.0 (2024-10-24)
 
 
