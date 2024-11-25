@@ -5,7 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "lib": "sui-js-compiler",
+    "postlib": "npm run set:version",
     "prepublishOnly": "npm run umd && npm run lib",
+    "set:version": "sed -i.bak \"s/process\\.env\\.VERSION/\\\"$npm_package_version\\\"/g\" lib/segmentWrapper.js && rm lib/segmentWrapper.js.bak",
     "test:client:watch": "npm run test:client -- --watch",
     "test:client": "sui-test browser --src-pattern=src/index.js -H",
     "test": "npm run test:client",
