@@ -127,7 +127,6 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
-  const version = process.env.VERSION
 
   if (!isGdprAccepted) {
     context.integrations = {
@@ -148,7 +147,7 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
       ...context.integrations,
       ...integrations
     },
-    clientVersion: `segment-wrapper${version ? `@${version}` : ''}`
+    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`
   }
 }
 

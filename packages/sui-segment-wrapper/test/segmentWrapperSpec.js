@@ -755,7 +755,8 @@ describe('Segment Wrapper', function () {
         gdpr_privacy_advertising: 'declined',
         context: {
           integrations
-        }
+        },
+        clientVersion: 'segment-wrapper@0.0.0'
       }
       const {traits} = spy.getCall(0).firstArg.obj.context
 
