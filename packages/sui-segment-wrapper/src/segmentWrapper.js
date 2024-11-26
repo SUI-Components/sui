@@ -146,7 +146,8 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     integrations: {
       ...context.integrations,
       ...integrations
-    }
+    },
+    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`
   }
 }
 
