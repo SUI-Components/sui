@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 4.10.0 (2024-11-26)
+
+
+### Features
+
+* send client version as context property ([12fff81](https://github.com/SUI-Components/sui/commit/12fff8171522a770485d6e5e9e75309046371c62))
+* send version always ([8caf104](https://github.com/SUI-Components/sui/commit/8caf104d91fdebfd83df18effe95c3eee18ab907))
+* set version on lib compilation ([f522f3a](https://github.com/SUI-Components/sui/commit/f522f3aaa8bf4d0e161f3ccb4ce3e487fb635542))
+
+
+
 # 4.9.0 (2024-11-15)
 
 
