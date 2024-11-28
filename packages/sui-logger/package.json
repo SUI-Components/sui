@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@s-ui/react-router": "1",
-    "bunyan": "1.8.12",
+    "bunyan": "1.8.15",
     "bunyan-middleware": "1.0.0",
     "hot-shots": "7.7.1"
   },
