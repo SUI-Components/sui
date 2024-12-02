@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.56.0 (2024-12-02)
+
+
+### Features
+
+* add new rule ([5eeb116](https://github.com/SUI-Components/sui/commit/5eeb1169cb407fcb4d658dccc373d929fc302407))
+* add new rules ([2058d04](https://github.com/SUI-Components/sui/commit/2058d04f6d39a83701b050f4b4d81dc2cf62854f))
+
+
+
 # 4.55.0 (2024-11-28)
 
 
