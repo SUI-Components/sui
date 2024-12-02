@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.14.0 (2024-12-02)
+
+
+### Features
+
+* add new rule default component test ([d136419](https://github.com/SUI-Components/sui/commit/d1364193fd916bae0a749edb8b12adfc9b185676))
+
+
+
 # 1.13.0 (2024-09-04)
 
 
