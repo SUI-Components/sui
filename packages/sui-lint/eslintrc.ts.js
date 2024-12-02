@@ -38,7 +38,8 @@ const REACT_RULES = {
 
 const TESTING_RULES = {
   'chai-friendly/no-unused-expressions': [RULES.ERROR, {allowShortCircuit: true, allowTernary: true}],
-  'no-only-tests/no-only-tests': RULES.ERROR
+  'no-only-tests/no-only-tests': RULES.ERROR,
+  'sui/default-component-test': RULES.WARNING
 }
 
 const JEST_TESTING_RULES = {

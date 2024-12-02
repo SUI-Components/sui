@@ -7,6 +7,7 @@ const DecoratorDeprecated = require('./rules/decorator-deprecated.js')
 const DecoratorDeprecatedRemarkMethod = require('./rules/decorator-deprecated-remark-method.js')
 const DecoratorInlineError = require('./rules/decorator-inline-error.js')
 const LayersArch = require('./rules/layers-architecture.js')
+const DefaultComponentTest = require('./rules/default-component-test.js')
 
 // ------------------------------------------------------------------------------
 // Plugin Definition
@@ -23,6 +24,7 @@ module.exports = {
     'decorator-deprecated': DecoratorDeprecated,
     'decorator-deprecated-remark-method': DecoratorDeprecatedRemarkMethod,
     'decorator-inline-error': DecoratorInlineError,
-    'layers-arch': LayersArch
+    'layers-arch': LayersArch,
+    'default-component-test': DefaultComponentTest
   }
 }
