@@ -33,7 +33,7 @@
     "babel-preset-sui": "3",
     "chai": "3.5.0",
     "commander": "8.3.0",
-    "diff": "5.1.0",
+    "diff": "5.2.0",
     "karma": "6.4.3",
     "karma-chrome-launcher": "3.2.0",
     "karma-coverage": "2.2.1",
