@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.11.0 (2024-12-17)
+
+
+### Features
+
+* send init event once per session ([2e04118](https://github.com/SUI-Components/sui/commit/2e0411855cb1dd5a321820e36242ea6d222f8d87))
+
+
+
 # 4.10.0 (2024-11-26)
 
 
