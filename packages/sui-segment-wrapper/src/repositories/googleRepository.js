@@ -5,13 +5,11 @@ const FIELDS = {
   clientId: 'client_id',
   sessionId: 'session_id'
 }
-
 const STC = {
   QUERY: 'stc',
   SPLIT_SYMBOL: '-',
   CAMPAIGN_SPLIT_SYMBOL: ':'
 }
-
 const STC_MEDIUM_TRANSFORMATIONS = {
   aff: 'affiliate',
   dis: 'display',
@@ -24,8 +22,8 @@ const STC_MEDIUM_TRANSFORMATIONS = {
   pn: 'push-notification',
   cs: 'cross-sites'
 }
-
 const STC_INVALID_CONTENT = 'na'
+const DEFAULT_GA_INIT_EVENT = 'sui'
 
 const loadScript = async src =>
   new Promise(function (resolve, reject) {
@@ -48,14 +46,36 @@ export const loadGoogleAnalytics = async () => {
   return loadScript(gtagScript)
 }
 
+// Trigger GA init event just once per session.
+const triggerGoogleAnalyticsInitEvent = sessionId => {
+  const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
+  const eventPrefix = `ga_event_${eventName}_`
+  const eventKey = `${eventPrefix}${sessionId}`
+
+  if (!localStorage.getItem(eventKey)) {
+    window.gtag('event', eventName)
+    console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
+
+    // Save new GA session hit.
+    localStorage.setItem(eventKey, 'true')
+  }
+
+  // Clean old GA sessions hits.
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith(eventPrefix) && key !== eventKey) {
+      localStorage.removeItem(key)
+    }
+  })
+}
+
 const getGoogleField = async field => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
 
-  // If `googleAnalyticsMeasurementId` is not present, don't load anything
+  // If `googleAnalyticsMeasurementId` is not present, don't load anything.
   if (!googleAnalyticsMeasurementId) return Promise.resolve()
 
   return new Promise(resolve => {
-    // if not, get it from the `GoogleAnalytics` tag
+    // If it is, get it from `gtag`.
     window.gtag?.('get', googleAnalyticsMeasurementId, field, resolve)
   })
 }
@@ -83,8 +103,14 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
   }
 }
 
-export const getGoogleClientID = () => getGoogleField(FIELDS.clientId)
-export const getGoogleSessionID = () => getGoogleField(FIELDS.sessionId)
+export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
+export const getGoogleSessionId = async () => {
+  const sessionId = await getGoogleField(FIELDS.sessionId)
+
+  triggerGoogleAnalyticsInitEvent(sessionId)
+
+  return sessionId
+}
 
 export const setGoogleUserId = userId => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
