@@ -1,7 +1,7 @@
 // @ts-check
 
 import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
-import {getGoogleClientID, getGoogleSessionID, setGoogleUserId} from './repositories/googleRepository.js'
+import {getGoogleClientId, getGoogleSessionId, setGoogleUserId} from './repositories/googleRepository.js'
 import {getConfig} from './config.js'
 import {checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
 import {getXandrId} from './repositories/xandrRepository.js'
@@ -42,8 +42,8 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
     try {
       ;[marketingCloudVisitorId, clientId, sessionId] = await Promise.all([
         getAdobeMCVisitorID(),
-        getGoogleClientID(),
-        getGoogleSessionID()
+        getGoogleClientId(),
+        getGoogleSessionId()
       ])
     } catch (error) {
       console.error(error)
