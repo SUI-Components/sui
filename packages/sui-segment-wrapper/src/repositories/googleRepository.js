@@ -52,15 +52,17 @@ const triggerGoogleAnalyticsInitEvent = sessionId => {
   const eventPrefix = `ga_event_${eventName}_`
   const eventKey = `${eventPrefix}${sessionId}`
 
+  // Check if the event has already been sent in this session.
   if (!localStorage.getItem(eventKey)) {
+    // If not, send it.
     window.gtag('event', eventName)
     console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
 
-    // Save new GA session hit.
+    // And then save a new GA session hit in local storage.
     localStorage.setItem(eventKey, 'true')
   }
 
-  // Clean old GA sessions hits.
+  // Clean old GA sessions hits from the storage.
   Object.keys(localStorage).forEach(key => {
     if (key.startsWith(eventPrefix) && key !== eventKey) {
       localStorage.removeItem(key)
