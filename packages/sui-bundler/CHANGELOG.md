@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.71.0 (2024-12-18)
+
+
+### Features
+
+* modify the postinstall tsconfig template for trackingutils directory ([82a340e](https://github.com/SUI-Components/sui/commit/82a340ee79f3b8a9e53f1bbdfc2a854d5909d64b))
+
+
+
 # 9.70.0 (2024-11-11)
 
 
