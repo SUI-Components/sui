@@ -2,7 +2,6 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 16px;
 
   &-codeButton,
   &-fullScreenButton {
@@ -20,7 +19,7 @@
   &-fullScreenButton {
     @include breakpoint-from(s) {
       bottom: auto;
-      top: 65px;
+      top: 5px;
     }
   }
 

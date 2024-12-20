@@ -51,7 +51,7 @@ export default function Layout({children}) {
   return (
     <section className="sui-Studio">
       <div className="sui-Studio-navHeader">
-        <button className="sui-Studio-navMenu" onClick={handleClickMenu}>
+        <button className="sui-Studio-navMenu" onClick={handleClickMenu} aria-label="Menu">
           {iconMenu}
         </button>
         <Link to="/">

@@ -140,7 +140,11 @@ export default class Demo extends Component {
           <ThemesButtons themes={themes} selected={themeSelectedIndex} onThemeChange={this.handleThemeChange} />
         </div>
 
-        <button className="sui-StudioDemo-fullScreenButton" onClick={this.handleFullScreen}>
+        <button
+          className="sui-StudioDemo-fullScreenButton"
+          onClick={this.handleFullScreen}
+          aria-label={isFullScreen ? 'see in full screen' : 'close full screen mode'}
+        >
           {isFullScreen ? iconFullScreenExit : iconFullScreen}
         </button>
 

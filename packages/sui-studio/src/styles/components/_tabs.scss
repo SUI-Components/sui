@@ -3,10 +3,12 @@
 
   margin: 0;
   padding: 0;
+  display: inline-flex;
 
   &--small {
     font-size: 80%;
     margin-right: 16px;
+    min-height: 30px;
   }
 
   &-tab {
@@ -14,6 +16,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    height: 100%;
   }
 
   &-button {
