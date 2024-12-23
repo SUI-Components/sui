@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.49.0 (2024-12-23)
+
+
+### Bug Fixes
+
+* improve sui-studio accessibility lighthouse metrics ([374d9b0](https://github.com/SUI-Components/sui/commit/374d9b09b25a21e398e3b4df619d2d64d6c7c31c))
+
+
+
 # 11.48.0 (2024-11-14)
 
 
