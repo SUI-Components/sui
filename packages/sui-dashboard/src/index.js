@@ -1,6 +1,9 @@
 import {readFileSync} from 'fs'
+import {createRequire} from 'module'
 
 import fg from 'fast-glob'
+
+const require = createRequire(import.meta.url)
 
 const flat = arr => [].concat(...arr)
 
