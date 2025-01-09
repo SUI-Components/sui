@@ -27,22 +27,22 @@
     margin: 0;
 
     &Link {
-      border-left: 1px solid #e4e4e4;
-      color: $c-gray-dark;
+      border-left: 1px solid color-mix(in srgb, var(--studio-c-on-surface, #000) 40%, transparent);
+      color: color-mix(in srgb, var(--studio-c-on-surface, #000) 70%, transparent);
       display: block;
       padding: 8px 24px;
       font-size: 14px;
       text-decoration: none;
       transition: all 0.3s ease;
       &:hover {
-        background-color: rgba($c-primary, 0.05);
+        background-color: color-mix(in srgb, $c-primary 5%, transparent);
         border-left-color: $c-primary;
         color: $c-primary;
       }
       &--active {
-        background-color: rgba($c-primary, 0.1);
-        border-left-color: darken($c-primary, 10%);
-        color: darken($c-primary, 10%);
+        background-color: color-mix(in srgb, $c-primary 10%, transparent);
+        border-left-color: color-mix(in srgb, $c-primary, $c-on-surface 10%);
+        color: color-mix(in srgb, $c-primary, $c-on-surface 10%);
         pointer-events: none;
       }
 
@@ -52,9 +52,9 @@
     }
 
     &Title {
-      border-left: 1px solid #e4e4e4;
+      border-left: 1px solid color-mix(in srgb, var(--studio-c-on-surface, #000) 40%, transparent);
       padding-left: 8px;
-      color: $c-black;
+      color: $c-on-surface;
       padding-bottom: 10px;
       padding-top: 20px;
       text-transform: uppercase;

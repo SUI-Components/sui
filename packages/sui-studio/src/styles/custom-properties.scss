@@ -1,0 +1,19 @@
+:root {
+  @media (prefers-color-scheme: light) {
+    --studio-c-surface: #ffffff;
+    --studio-c-on-surface: #000000;
+
+    --studio-c-primary: #005c99;
+
+    --studio-c-accent: #b30024;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    --studio-c-surface: #000;
+    --studio-c-on-surface: #fff;
+
+    --studio-c-primary: #09f;
+
+    --studio-c-accent: #ff5c7c;
+  }
+}

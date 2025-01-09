@@ -1,7 +1,8 @@
 .sui-StudioWorkbench {
   &-navigation {
-    background: $c-white;
+    background: $c-surface;
+    color: $c-on-surface;
     padding: 0;
-    border-bottom: solid 1px $c-gray-lightest;
+    border-bottom: solid 1px color-mix(in srgb, $c-on-surface 15%, transparent);
   }
 }

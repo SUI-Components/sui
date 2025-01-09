@@ -12,7 +12,7 @@
   }
 
   &-tab {
-    display: inline-block;
+    display: inline-flex;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -22,18 +22,22 @@
   &-button {
     background: transparent;
     border: 0;
-    border-bottom: 1px solid $c-gray-lightest;
-    color: $c-gray-dark;
+    border-bottom: 1px solid color-mix(in srgb, var(--studio-c-on-surface, #000) 40%, transparent);
+    color: color-mix(in srgb, var(--studio-c-on-surface, #000) 70%, transparent);
     cursor: pointer;
     display: inline-block;
     outline: 0;
 
     &:hover {
+      background-color: color-mix(in srgb, $c-primary 5%, transparent);
       border-bottom-color: $c-primary;
+      color: $c-primary;
     }
 
     &--active {
-      border-bottom-color: darken($c-primary, 10%);
+      border-bottom-color: color-mix(in srgb, $c-primary, $c-on-surface 10%);
+      background-color: rgba($c-primary, 0.1);
+      color: color-mix(in srgb, $c-primary, $c-on-surface 10%);
       pointer-events: none;
     }
 
@@ -45,8 +49,8 @@
   }
 
   &-link {
-    border-bottom: 1px solid $c-gray-light;
-    color: $c-gray-dark;
+    border-bottom: 1px solid color-mix(in srgb, var(--studio-c-on-surface, #000) 40%, transparent);
+    color: color-mix(in srgb, var(--studio-c-on-surface, #000) 70%, transparent);
     cursor: pointer;
     display: inline-block;
     outline: none;
@@ -57,15 +61,15 @@
     white-space: nowrap;
 
     &:hover {
-      background-color: rgba($c-primary, 0.05);
+      background-color: color-mix(in srgb, $c-primary 5%, transparent);
       border-bottom-color: $c-primary;
       color: $c-primary;
     }
 
     &--active {
       background-color: rgba($c-primary, 0.1);
-      border-bottom-color: darken($c-primary, 10%);
-      color: darken($c-primary, 10%);
+      border-bottom-color: color-mix(in srgb, $c-primary, $c-on-surface 10%);
+      color: color-mix(in srgb, $c-primary, $c-on-surface 10%);
       pointer-events: none;
     }
   }
