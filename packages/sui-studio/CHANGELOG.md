@@ -1,5 +1,21 @@
 # CHANGELOG
 
+# 11.50.0 (2025-01-13)
+
+
+### Bug Fixes
+
+* wrong padding placement ([2e25ba3](https://github.com/SUI-Components/sui/commit/2e25ba3963e5519e30258d469c8cf604bfd4a78f))
+* wrong spacing ([2ad5ff7](https://github.com/SUI-Components/sui/commit/2ad5ff74f70eed0573222f900a670ddd3ccbed02))
+
+
+### Features
+
+* add dark mode ([4a05b5c](https://github.com/SUI-Components/sui/commit/4a05b5cc5b7c9e9bcd57bf92b18b93db80bbfe55))
+* add light-dark mode ([c584d99](https://github.com/SUI-Components/sui/commit/c584d993845bfeb268d24bb9a9cba9cf12f04946))
+
+
+
 # 11.49.0 (2024-12-23)
 
 
