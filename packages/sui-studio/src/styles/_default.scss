@@ -1,6 +1,17 @@
+:root {
+  color-scheme: light dark;
+  @media (prefers-color-scheme: light) {
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
 body {
   font-family: $ff-sans-serif;
   font-size: $fz-body;
+  color-scheme: light dark;
   background-color: $c-surface;
   color: $c-on-surface;
 }

@@ -1,0 +1,32 @@
+.studio-switch {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 1.25rem;
+  width: 2.25rem;
+  background-color: color-mix(in srgb, $c-on-surface 20%, transparent);
+  cursor: pointer;
+  border-width: 2px;
+  border-color: transparent;
+  padding: 0;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  &-thumb {
+    width: 1rem;
+    height: 1rem;
+    background-color: $c-surface;
+    border-radius: 9999px;
+    display: block;
+    transform: translate(var(--tw-translate-x), 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
+    pointer-events: none;
+    &[data-state='checked'] {
+      --tw-translate-x: 1rem;
+    }
+    &[data-state='unchecked'] {
+      --tw-translate-x: 0rem;
+    }
+  }
+}
