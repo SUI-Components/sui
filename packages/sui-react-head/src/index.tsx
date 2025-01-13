@@ -23,7 +23,7 @@ interface HeadProps {
   }>
 }
 
-interface MetaProps extends React.ComponentProps<typeof MetaPrimitive> {}
+type MetaProps = React.ComponentProps<typeof MetaPrimitive> & {}
 
 interface MetaTagInverterProps extends React.MetaHTMLAttributes<HTMLMetaElement> {
   'data-rh': string
