@@ -14,5 +14,8 @@
     "@s-ui/helpers": "1",
     "commander": "8.3.0",
     "fast-glob": "3.2.11"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
