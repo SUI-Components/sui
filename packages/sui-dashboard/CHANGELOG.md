@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.35.0 (2025-01-13)
+
+
+### Features
+
+* compatible with node 20 require fn way ([a0adaca](https://github.com/SUI-Components/sui/commit/a0adacae594e4f89059b3ec81c441827c262a8da))
+
+
+
 # 1.34.0 (2022-04-01)
 
 
@@ -239,6 +248,3 @@
 * **sui-dashboard:** first commit ([ed34f18](https://github.com/SUI-Components/sui/commit/ed34f1898277d6b1c96ac9dc5e209c4a9fd0bf2e))
 * **sui-dashboard:** remove excel feature and show better stats ([9138467](https://github.com/SUI-Components/sui/commit/91384679493832314d5c598c7592e41afbcda180))
 * **sui-dashboard:** save report stats to google drive ([89ba52f](https://github.com/SUI-Components/sui/commit/89ba52f43ecece50260fbd8ee357faf131332ef9))
-
-
-
