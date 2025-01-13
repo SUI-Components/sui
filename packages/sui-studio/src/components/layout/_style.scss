@@ -34,7 +34,7 @@
       font-size: 12px;
       outline: none;
       padding: 8px;
-      width: calc(100% #{-2 * 8px});
+      width: calc(100% - #{2 * 8px});
       height: $h-search-input;
       &:focus {
         background-color: $c-surface;
