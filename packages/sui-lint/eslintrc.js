@@ -149,7 +149,7 @@ const IMPORT_SORT_GROUPS = [
   ['^\\w'],
   // Generic organization packages.
   ['^@'],
-  // S-UI & ADV-UI organization packages.
+  // SUI & ADV organization packages.
   ['^@s-ui', '^@adv-'],
   // Relative imports. Put `./` last.
   ['^\\.\\.(?!/?$)', '^\\.\\./?$', '^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
