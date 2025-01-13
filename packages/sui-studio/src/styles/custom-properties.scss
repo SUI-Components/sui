@@ -1,0 +1,23 @@
+:root {
+  [data-theme-mode='light'] {
+    --studio-c-surface: #ffffff;
+    --studio-c-on-surface: #000000;
+
+    --studio-c-primary: #005c99;
+
+    --studio-c-accent: #b30024;
+
+    --studio-c-support: #693cbe;
+  }
+
+  [data-theme-mode='dark'] {
+    --studio-c-surface: #000;
+    --studio-c-on-surface: #fff;
+
+    --studio-c-primary: #09f;
+
+    --studio-c-accent: #ff5c7c;
+
+    --studio-c-support: #a487d9;
+  }
+}

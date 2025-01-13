@@ -1,10 +1,13 @@
 @use 'sass:math';
 
 // --- Colors --- //
-$c-primary: #09f !default;
-$c-accent: #ff3860 !default;
-$c-white: #ffffff !default;
+$c-primary: var(--studio-c-primitive, #09f) !default;
+$c-accent: var(--studio-c-accent, #ff3860) !default;
 
+$c-surface: var(--studio-c-surface, #fff) !default;
+$c-on-surface: var(--studio-c-on-surface, #000) !default;
+
+$c-white: #ffffff !default;
 $c-black: #000000 !default;
 
 $c-gray: #777777 !default;
@@ -74,7 +77,7 @@ $breakpoints: (
   xl: 1200px
 ) !default;
 
-$bgc-main: $c-white;
+$bgc-main: $c-surface;
 $fgc-navbar: #999;
 $fgc-navbar--active: $c-white;
 

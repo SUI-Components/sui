@@ -11,7 +11,8 @@
   &-sidebar {
     padding: 16px;
     top: $h-navHeader;
-    background-color: $c-white;
+    background-color: $c-surface;
+    color: $c-on-surface;
     border-right: 1px solid $c-gray-lightest;
     box-sizing: border-box;
     position: fixed;
@@ -25,16 +26,19 @@
     height: calc(100vh - $h-navHeader);
 
     &-searchInput {
-      border: 1px solid $c-gray-light;
+      box-sizing: border-box;
+      background-color: $c-surface;
+      border: 1px solid color-mix(in srgb, $c-on-surface 30%, transparent);
       border-radius: 4px;
-      color: #666;
+      color: color-mix(in srgb, $c-on-surface 30%, transparent);
       font-size: 12px;
       outline: none;
       padding: 8px;
-      width: 100%;
+      width: calc(100% - #{2 * 8px});
       height: $h-search-input;
       &:focus {
-        background-color: $c-white;
+        background-color: $c-surface;
+        color: color-mix(in srgb, $c-on-surface 70%, transparent);
         border: 1px solid $c-primary;
       }
     }
@@ -51,7 +55,8 @@
   }
 
   &-main {
-    background-color: $bgc-main;
+    background-color: $c-surface;
+    color: $c-on-surface;
     position: relative;
     top: $h-navHeader;
     width: 100%;
@@ -98,7 +103,8 @@
 }
 
 .sui-StudioNavBar-secondary {
-  background: $c-white;
+  background: $c-surface;
+  color: $c-on-surface;
   display: flex;
   flex-direction: row;
   padding: 0;
@@ -133,23 +139,30 @@
   }
 }
 .sui-Studio-navHeader {
-  width: 100vw;
-  padding: 0 8px;
+  width: calc(100vw - 32px);
+  padding: 0 16px;
   display: flex;
+  justify-content: space-between;
   height: $h-navHeader;
   position: fixed;
   top: 0;
-  background: $c-white;
+  background: $c-surface;
+  color: $c-on-surface;
   align-items: center;
-  border-bottom: solid 1px $c-gray-lightest;
+  border-bottom: solid 1px color-mix(in srgb, $c-on-surface 15%, transparent);
   z-index: 40;
   gap: 8px;
+  &Left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   a {
     display: flex;
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #000;
+    color: $c-on-surface;
   }
   h1 {
     font-size: 16px;
@@ -162,6 +175,7 @@
   width: 32px;
   height: 32px;
   background: transparent;
+  color: inherit;
   border: 0;
   padding: 0;
   svg {
