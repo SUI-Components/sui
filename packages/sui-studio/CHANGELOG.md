@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.53.0 (2025-01-20)
+
+
+### Bug Fixes
+
+* a11y color-contrast improvements ([21a2746](https://github.com/SUI-Components/sui/commit/21a274699fda1f7bea1cc70cb97a8c660ebaf5fe))
+
+
+
 # 11.52.0 (2025-01-20)
 
 
