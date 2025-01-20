@@ -28,18 +28,21 @@
     &-searchInput {
       box-sizing: border-box;
       background-color: $c-surface;
-      border: 1px solid color-mix(in srgb, $c-on-surface 30%, transparent);
+      border: 1px solid color-mix(in srgb, $c-on-surface 70%, transparent);
       border-radius: 4px;
-      color: color-mix(in srgb, $c-on-surface 30%, transparent);
+      color: color-mix(in srgb, $c-on-surface 70%, transparent);
       font-size: 12px;
       outline: none;
       padding: 8px;
-      width: calc(100% - #{2 * 8px});
-      height: $h-search-input;
+      width: 100%;
+      max-height: $h-search-input;
       &:focus {
         background-color: $c-surface;
         color: color-mix(in srgb, $c-on-surface 70%, transparent);
         border: 1px solid $c-primary;
+      }
+      &::placeholder {
+        color: color-mix(in srgb, $c-on-surface 50%, transparent);
       }
     }
 
