@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7",
-    "@radix-ui/react-switch": "1",
     "@s-ui/bundler": "9",
     "@s-ui/helpers": "1",
     "@s-ui/react-context": "1",
