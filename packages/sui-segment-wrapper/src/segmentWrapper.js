@@ -40,11 +40,9 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
 
   if (isGdprAccepted) {
     try {
-      ;[marketingCloudVisitorId, clientId, sessionId] = await Promise.all([
-        getAdobeMCVisitorID(),
-        getGoogleClientId(),
-        getGoogleSessionId()
-      ])
+      ;[marketingCloudVisitorId, sessionId] = await Promise.all([getAdobeMCVisitorID(), getGoogleSessionId()])
+
+      clientId = await getGoogleClientId()
     } catch (error) {
       console.error(error)
     }
@@ -128,6 +126,8 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getXandrId({gdprPrivacyValueAdvertising})
   ])
 
+  console.log({integrations})
+
   if (!isGdprAccepted) {
     context.integrations = {
       ...(context.integrations ?? {}),
@@ -163,6 +163,7 @@ const track = (event, properties, context = {}, callback) =>
   new Promise(resolve => {
     const initTrack = async () => {
       const newContext = await decorateContextWithNeededData({context, event})
+      console.log({newContext})
 
       /**
        * @deprecated Now we use `defaultContextProperties` middleware
