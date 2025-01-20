@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.52.0 (2025-01-20)
+
+
+### Bug Fixes
+
+* remove unnecesary sui-studio dependency ([f0153b8](https://github.com/SUI-Components/sui/commit/f0153b8a6e43e64f09c07d0203d32b827ecbcadc))
+
+
+
 # 11.51.0 (2025-01-20)
 
 
