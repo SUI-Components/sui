@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.51.0 (2025-01-20)
+
+
+### Bug Fixes
+
+* wrong color name token ([f7b1110](https://github.com/SUI-Components/sui/commit/f7b111097a1642c438ef9bb053d8734d127b3ff7))
+
+
+
 # 11.50.0 (2025-01-13)
 
 
