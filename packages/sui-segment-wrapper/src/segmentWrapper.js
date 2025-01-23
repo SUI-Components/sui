@@ -35,16 +35,14 @@ export const getDefaultProperties = () => ({
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
   let marketingCloudVisitorId
-  let clientId
   let sessionId
+  let clientId
 
   if (isGdprAccepted) {
     try {
-      ;[marketingCloudVisitorId, clientId, sessionId] = await Promise.all([
-        getAdobeMCVisitorID(),
-        getGoogleClientId(),
-        getGoogleSessionId()
-      ])
+      marketingCloudVisitorId = await getAdobeMCVisitorID()
+      sessionId = await getGoogleSessionId({marketingCloudVisitorId})
+      clientId = await getGoogleClientId()
     } catch (error) {
       console.error(error)
     }
