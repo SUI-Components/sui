@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 4.13.0 (2025-01-24)
+
+
+### Features
+
+* force bump ([1bd2ebe](https://github.com/SUI-Components/sui/commit/1bd2ebe7bb118e8bdc69d1854bd1d969377e3d98))
+* promise all allowed methods ([ebc0329](https://github.com/SUI-Components/sui/commit/ebc0329bfe9eb9172031ab6fe80ac958512d8f5c))
+* send adobe mvcid along the ga event ([8938f67](https://github.com/SUI-Components/sui/commit/8938f67a1f6b38810fc2c2b004ce4fc776a38e8d))
+* send it along all ga events ([e5d118a](https://github.com/SUI-Components/sui/commit/e5d118aee7c655d12673f41a09582078a253ded4))
+
+
+
 # 4.12.0 (2025-01-24)
 
 
