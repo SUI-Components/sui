@@ -47,7 +47,7 @@ export const loadGoogleAnalytics = async () => {
 }
 
 // Trigger GA init event just once per session.
-const triggerGoogleAnalyticsInitEvent = ({sessionId, marketingCloudVisitorId}) => {
+const triggerGoogleAnalyticsInitEvent = sessionId => {
   const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
   const eventPrefix = `ga_event_${eventName}_`
   const eventKey = `${eventPrefix}${sessionId}`
@@ -55,7 +55,7 @@ const triggerGoogleAnalyticsInitEvent = ({sessionId, marketingCloudVisitorId}) =
   // Check if the event has already been sent in this session.
   if (!localStorage.getItem(eventKey)) {
     // If not, send it.
-    window.gtag('event', eventName, {mcvid: marketingCloudVisitorId})
+    window.gtag('event', eventName)
     console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
 
     // And then save a new GA session hit in local storage.
@@ -106,10 +106,10 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
 }
 
 export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
-export const getGoogleSessionId = async ({marketingCloudVisitorId}) => {
+export const getGoogleSessionId = async () => {
   const sessionId = await getGoogleField(FIELDS.sessionId)
 
-  triggerGoogleAnalyticsInitEvent({sessionId, marketingCloudVisitorId})
+  triggerGoogleAnalyticsInitEvent(sessionId)
 
   return sessionId
 }
