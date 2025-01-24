@@ -11,6 +11,7 @@ import analytics from './segmentWrapper.js'
 import initTcfTracking from './tcf.js'
 import {getUserDataAndNotify} from './universalId.js'
 import {loadGoogleAnalytics, getCampaignDetails} from './repositories/googleRepository.js'
+import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 
 // Initialize TCF Tracking with Segment
 initTcfTracking()
@@ -46,13 +47,16 @@ if (isClient && window.analytics) {
       }
 
     window.gtag('js', new Date())
-    window.gtag('config', googleAnalyticsMeasurementId, {
-      cookie_prefix: 'segment',
-      send_page_view: false,
-      ...googleAnalyticsConfig,
-      ...getCampaignDetails()
-    })
 
+    getAdobeMCVisitorID().then(marketingCloudVisitorId => {
+      window.gtag('config', googleAnalyticsMeasurementId, {
+        cookie_prefix: 'segment',
+        send_page_view: false,
+        ...googleAnalyticsConfig,
+        ...getCampaignDetails(),
+        mcvid: marketingCloudVisitorId
+      })
+    })
     loadGoogleAnalytics().catch(error => {
       console.error(error)
     })

@@ -35,8 +35,8 @@ export const getDefaultProperties = () => ({
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
   let marketingCloudVisitorId
-  let clientId
   let sessionId
+  let clientId
 
   if (isGdprAccepted) {
     try {
