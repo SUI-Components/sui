@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.12.0 (2025-01-24)
+
+
+### Features
+
+* get client id synchronously ([37f2651](https://github.com/SUI-Components/sui/commit/37f2651be223dcf208852c8fd44b7f9b20c084e0))
+
+
+
 # 4.11.0 (2024-12-17)
 
 
