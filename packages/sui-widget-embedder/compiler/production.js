@@ -37,5 +37,10 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
     plugins: pipe(removePlugin('HtmlWebpackPlugin'))(prodConfig.plugins)
   }
 
+  console.log('sui-widget-embedder -', prodConfig)
+  console.log('sui-widget-embedder -', webpackConfig.context)
+  console.log('sui-widget-embedder -', webpackConfig.resolve)
+  console.log('sui-widget-embedder -', webpackConfig.output)
+
   return webpack(webpackConfig)
 }
