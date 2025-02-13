@@ -5,13 +5,12 @@ import {defaultContextProperties} from './middlewares/source/defaultContextPrope
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
+import {getCampaignDetails, loadGoogleAnalytics} from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
 import initTcfTracking from './tcf.js'
 import {getUserDataAndNotify} from './universalId.js'
-import {loadGoogleAnalytics, getCampaignDetails} from './repositories/googleRepository.js'
-import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 
 // Initialize TCF Tracking with Segment
 initTcfTracking()
@@ -47,15 +46,11 @@ if (isClient && window.analytics) {
       }
 
     window.gtag('js', new Date())
-
-    getAdobeMCVisitorID().then(marketingCloudVisitorId => {
-      window.gtag('config', googleAnalyticsMeasurementId, {
-        cookie_prefix: 'segment',
-        send_page_view: false,
-        ...googleAnalyticsConfig,
-        ...getCampaignDetails(),
-        mcvid: marketingCloudVisitorId
-      })
+    window.gtag('config', googleAnalyticsMeasurementId, {
+      cookie_prefix: 'segment',
+      send_page_view: false,
+      ...googleAnalyticsConfig,
+      ...getCampaignDetails()
     })
     loadGoogleAnalytics().catch(error => {
       console.error(error)
@@ -69,3 +64,4 @@ if (isClient && window.analytics) {
 export default analytics
 export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 export {getUniversalId} from './universalId.js'
+export {EVENTS} from './events.js'
