@@ -2,6 +2,7 @@ const DEFAULT_SITE_HEADER = 'X-Serve-Site'
 const DEFAULT_PUBLIC_FOLDER = 'public'
 const DEFAULT_DEV_PUBLIC_FOLDER = '.sui/public'
 const DEFAULT_MULTI_SITE_KEY = 'default'
+const DEFAULT_STATICS_FOLDER = 'statics'
 const EXPRESS_STATIC_CONFIG = {index: false}
 
 let cachedCriticalManifest
@@ -26,6 +27,13 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
     // Keep compatibility with those multi site configurations
     // that already define the public folder.
     return site.includes(publicFolderPrefix) ? site : `${publicFolderPrefix}${site}`
+  }
+
+  const multiSiteStaticsFolder = site => {
+    const staticsFolderPrefix = `${DEFAULT_STATICS_FOLDER}-`
+    // Keep compatibility with those multi site configurations
+    // that already define the statics folder.
+    return site.includes(staticsFolderPrefix) ? site : `${staticsFolderPrefix}${site}`
   }
 
   const publicFolder = req => {
@@ -63,6 +71,28 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
     return function serveStaticByHost(req, res, next) {
       const site = siteByHost(req)
       const middleware = isMultiSite ? middlewares[site] : expressStatic(DEFAULT_PUBLIC_FOLDER, EXPRESS_STATIC_CONFIG)
+
+      middleware(req, res, next)
+    }
+  }
+
+  const useStaticsFolderByHost = expressStatic => {
+    let middlewares
+    if (isMultiSite) {
+      middlewares = multiSiteKeys.reduce((acc, hostPattern) => {
+        const site = siteByHostPattern(hostPattern)
+        if (acc[site]) return acc
+
+        return {
+          ...acc,
+          [site]: expressStatic(multiSiteStaticsFolder(site), EXPRESS_STATIC_CONFIG)
+        }
+      }, {})
+    }
+
+    return function serveStaticByHost(req, res, next) {
+      const site = siteByHost(req)
+      const middleware = isMultiSite ? middlewares[site] : expressStatic(DEFAULT_STATICS_FOLDER, EXPRESS_STATIC_CONFIG)
 
       middleware(req, res, next)
     }
@@ -160,6 +190,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
     readHtmlTemplate,
     siteByHost,
     usePublicFolderByHost,
+    useStaticsFolderByHost,
     criticalDir,
     criticalManifest
   }
