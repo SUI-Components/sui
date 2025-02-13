@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.14.0 (2025-02-13)
+
+
+### Bug Fixes
+
+* Remove adobeCloudVisitorId from GA4 and send event when session s ([2f65d7f](https://github.com/SUI-Components/sui/commit/2f65d7f4764ff00f1ea286aeed711b1383374936))
+
+
+
 # 4.13.0 (2025-01-24)
 
 
