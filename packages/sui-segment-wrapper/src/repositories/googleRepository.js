@@ -1,5 +1,8 @@
-import {utils} from '../middlewares/source/pageReferrer.js'
+import {dispatchEvent} from '@s-ui/js/lib/events'
+
 import {getConfig} from '../config.js'
+import {EVENTS} from '../events.js'
+import {utils} from '../middlewares/source/pageReferrer.js'
 
 const FIELDS = {
   clientId: 'client_id',
@@ -60,6 +63,7 @@ const triggerGoogleAnalyticsInitEvent = sessionId => {
 
     // And then save a new GA session hit in local storage.
     localStorage.setItem(eventKey, 'true')
+    dispatchEvent({eventName: EVENTS.GA4_INIT_EVENT_SENT, detail: {eventName, sessionId}})
   }
 
   // Clean old GA sessions hits from the storage.
