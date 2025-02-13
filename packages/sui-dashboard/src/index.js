@@ -1,5 +1,6 @@
 import {readFileSync} from 'fs'
 import {createRequire} from 'module'
+import {satisfies} from 'semver'
 
 import fg from 'fast-glob'
 
@@ -9,7 +10,7 @@ const flat = arr => [].concat(...arr)
 
 const getPackageContent = filepath => JSON.parse(readFileSync(filepath))
 
-export async function stats({repositories, root, getVersions = false}) {
+export async function stats({repositories, root, getVersions = false, semver, outdated = false}) {
   const suiComponents = fg
     .sync([`${root}/sui-components/components/**/package.json`, '!**/node_modules/**'])
     .map(path => require(path).name)
@@ -32,13 +33,34 @@ export async function stats({repositories, root, getVersions = false}) {
     return acc
   }, {})
 
+  const getSemver = (version, semver) => {
+    const [M, m, p] = version.split('.')
+    switch (semver) {
+      case 'major':
+        return `${M}`
+      case 'minor':
+        return `${M}.${m}`
+      case 'patch':
+        return `${M}.${m}.${p}`
+    }
+  }
+
   const statsSUIComponentUsedByProjects = repositories.reduce((acc, repo) => {
     acc[repo] = dirs
       .filter(dir => dir.includes(repo))
       .filter(dir => suiComponents.some(sui => dir.includes(sui)))
       .map(dir => {
         const pkg = getVersions && getPackageContent(`${dir}/package.json`)
-        return dir.replace(/^.+(?<comp>@[a-z|-]+\/[a-z|-]+$)/, '$<comp>' + (getVersions ? `@${pkg.version}` : ''))
+        const packageName = suiComponents.find(sui => dir.includes(sui))
+        const componentPackage = getPackageContent(`${root}/sui-components/node_modules/${packageName}/package.json`)
+        const isOutdated = !satisfies(getSemver(componentPackage.version, semver), getSemver(pkg.version, semver))
+
+        return (
+          dir.replace(
+            /^.+(?<comp>@[a-z|-]+\/[a-z|-]+$)/,
+            '$<comp>' + (getVersions ? `@${getSemver(pkg.version, semver)}` : '')
+          ) + (outdated && isOutdated ? ' – outdated' : '')
+        )
       })
     return acc
   }, {})

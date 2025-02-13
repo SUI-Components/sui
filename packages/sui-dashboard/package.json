@@ -13,7 +13,8 @@
   "dependencies": {
     "@s-ui/helpers": "1",
     "commander": "8.3.0",
-    "fast-glob": "3.2.11"
+    "fast-glob": "3.2.11",
+    "semver": "7.7.1"
   },
   "engines": {
     "node": ">=20.0.0"
