@@ -13,7 +13,7 @@ const {
   publicFolder,
   readHtmlTemplate,
   siteByHost,
-  useStaticsByHost,
+  usePublicFolderByHost,
   criticalDir,
   criticalManifest
 } = utilsFactory({path, fs, config})
@@ -27,7 +27,7 @@ export {
   publicFolder,
   readHtmlTemplate,
   siteByHost,
-  useStaticsByHost,
+  usePublicFolderByHost,
   criticalDir,
   criticalManifest
 }

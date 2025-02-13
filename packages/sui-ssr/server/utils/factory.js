@@ -46,7 +46,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
   const siteByHost = req => siteByHostPattern(hostPattern(req))
 
-  const useStaticsByHost = expressStatic => {
+  const usePublicFolderByHost = expressStatic => {
     let middlewares
     if (isMultiSite) {
       middlewares = multiSiteKeys.reduce((acc, hostPattern) => {
@@ -159,7 +159,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
     publicFolder,
     readHtmlTemplate,
     siteByHost,
-    useStaticsByHost,
+    usePublicFolderByHost,
     criticalDir,
     criticalManifest
   }
