@@ -17,7 +17,7 @@ commander
   .addOption(
     new Option('--semver <type>', 'define the semver output versions report')
       .choices(['major', 'minor', 'patch'])
-      .default('patch', 'X.X.X')
+      .default('patch', 'patch (M.m.p)')
   )
   .option('--outdated', 'add an outdated flag in the output')
   .on('--help', () => {

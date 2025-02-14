@@ -53,7 +53,7 @@ export async function stats({repositories, root, getVersions = false, semver, ou
         const pkg = getVersions && getPackageContent(`${dir}/package.json`)
         const packageName = suiComponents.find(sui => dir.includes(sui))
         const componentPackage = getPackageContent(`${root}/sui-components/node_modules/${packageName}/package.json`)
-        const isOutdated = !satisfies(getSemver(componentPackage.version, semver), getSemver(pkg.version, semver))
+        const isOutdated = !satisfies(pkg.version, getSemver(componentPackage.version, semver))
 
         return (
           dir.replace(
