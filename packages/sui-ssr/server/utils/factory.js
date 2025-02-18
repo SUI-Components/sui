@@ -92,7 +92,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
     return function serveStaticByHost(req, res, next) {
       const site = siteByHost(req)
-      const middleware = isMultiSite ? middlewares[site] : expressStatic(DEFAULT_STATICS_FOLDER, EXPRESS_STATIC_CONFIG)
+      const middleware = isMultiSite ? middlewares[site] : expressStatic(DEFAULT_STATICS_FOLDER)
 
       middleware(req, res, next)
     }
