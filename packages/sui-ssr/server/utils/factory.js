@@ -29,11 +29,12 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
     return site.includes(publicFolderPrefix) ? site : `${publicFolderPrefix}${site}`
   }
 
-  const multiSiteStaticsFolder = site => {
-    const staticsFolderPrefix = `${DEFAULT_STATICS_FOLDER}-`
+  const multiSiteStaticsFolder = siteValue => {
+    const publicFolderPrefix = `${DEFAULT_PUBLIC_FOLDER}-`
     // Keep compatibility with those multi site configurations
-    // that already define the statics folder.
-    return site.includes(staticsFolderPrefix) ? site : `${staticsFolderPrefix}${site}`
+    // that already define the public folder.
+    const site = siteValue.replace(publicFolderPrefix, '')
+    return `${DEFAULT_STATICS_FOLDER}-${site}`
   }
 
   const publicFolder = req => {
