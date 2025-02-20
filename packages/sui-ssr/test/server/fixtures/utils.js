@@ -4,10 +4,11 @@ import path from 'path'
 import utilsFactory from '../../../server/utils/factory.js'
 import {ssrMultiSiteConfig} from './index.js'
 
-const {publicFolder: publicFolderWithMultiSiteConfig} = utilsFactory({
-  path,
-  fs,
-  config: ssrMultiSiteConfig
-})
+const {publicFolder: publicFolderWithMultiSiteConfig, useStaticsFolderByHost: staticsFolderByHostWithMultiSiteConfig} =
+  utilsFactory({
+    path,
+    fs,
+    config: ssrMultiSiteConfig
+  })
 
-export {publicFolderWithMultiSiteConfig}
+export {publicFolderWithMultiSiteConfig, staticsFolderByHostWithMultiSiteConfig}
