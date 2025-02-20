@@ -2,11 +2,12 @@ import fs from 'fs'
 import path from 'path'
 
 import {expect} from 'chai'
+import sinon from 'sinon'
 
 import utilsFactory from '../../server/utils/factory.js'
 import {publicFolder} from '../../server/utils/index.js'
 import {getMockedRequest} from './fixtures/index.js'
-import {publicFolderWithMultiSiteConfig} from './fixtures/utils.js'
+import {publicFolderWithMultiSiteConfig, staticsFolderByHostWithMultiSiteConfig} from './fixtures/utils.js'
 
 const ASYNC_CSS_ATTRS = 'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';'
 
