@@ -86,7 +86,7 @@ export default ({path, fs, config: ssrConf = {}, assetsManifest}) => {
 
         return {
           ...acc,
-          [site]: expressStatic(multiSiteStaticsFolder(site), EXPRESS_STATIC_CONFIG)
+          [site]: expressStatic(multiSiteStaticsFolder(site))
         }
       }, {})
     }
