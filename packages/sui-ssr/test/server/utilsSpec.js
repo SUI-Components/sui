@@ -27,6 +27,31 @@ describe('[sui-ssr] Utils', () => {
     })
   })
 
+  describe('Statics folder', () => {
+    describe('In a multi site project', () => {
+      it('Should serve the statics folder properly', () => {
+        const middlewareList = {}
+        const expressStaticSpy = (...args) => {
+          const [folderName] = args
+          const [, site] = folderName.split('-')
+          middlewareList[site] = sinon.spy()
+
+          return (...rest) => {
+            return middlewareList[site](...rest)
+          }
+        }
+        const middleware = staticsFolderByHostWithMultiSiteConfig(expressStaticSpy)
+        const fakeReq = getMockedRequest('www.trucks.com')
+        const fakeRes = {}
+        const fakeNext = () => {}
+
+        middleware(fakeReq, fakeRes, fakeNext)
+
+        expect(middlewareList.trucks.calledWith(fakeReq, fakeRes, fakeNext)).to.be.true
+      })
+    })
+  })
+
   describe('Create styles for', () => {
     it('Should do nothing if has no config', () => {
       const {createStylesFor} = utilsFactory({fs, path})
