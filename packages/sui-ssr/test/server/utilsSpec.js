@@ -7,7 +7,11 @@ import sinon from 'sinon'
 import utilsFactory from '../../server/utils/factory.js'
 import {publicFolder} from '../../server/utils/index.js'
 import {getMockedRequest} from './fixtures/index.js'
-import {publicFolderWithMultiSiteConfig, staticsFolderByHostWithMultiSiteConfig} from './fixtures/utils.js'
+import {
+  publicFolderWithMultiSiteConfig,
+  staticsFolderByHostWithMultiSiteConfig,
+  staticsFolderByHostWithSingleSiteConfig
+} from './fixtures/utils.js'
 
 const ASYNC_CSS_ATTRS = 'rel="stylesheet" media="only x" as="style" onload="this.media=\'all\';'
 
@@ -30,15 +34,17 @@ describe('[sui-ssr] Utils', () => {
 
   describe('Statics folder', () => {
     describe('In a multi site project', () => {
-      it('Should serve the statics folder properly', () => {
+      it('Should serve the "statics-site" folder properly', () => {
+        const FOLDER_SITE_PLACEHOLDER = '$site'
+        const FOLDER_PATTERN = `statics-${FOLDER_SITE_PLACEHOLDER}`
+
         const middlewareList = {}
         const expressStaticSpy = (...args) => {
           const [folderName] = args
-          const [, site] = folderName.split('-')
-          middlewareList[site] = sinon.spy()
+          middlewareList[folderName] = sinon.spy()
 
           return (...rest) => {
-            return middlewareList[site](...rest)
+            return middlewareList[folderName](...rest)
           }
         }
         const middleware = staticsFolderByHostWithMultiSiteConfig(expressStaticSpy)
@@ -48,7 +54,35 @@ describe('[sui-ssr] Utils', () => {
 
         middleware(fakeReq, fakeRes, fakeNext)
 
-        expect(middlewareList.trucks.calledWith(fakeReq, fakeRes, fakeNext)).to.be.true
+        const expectedSite = 'trucks'
+        const expectedMultisiteStaticFolder = FOLDER_PATTERN.replace(FOLDER_SITE_PLACEHOLDER, expectedSite)
+
+        expect(middlewareList[expectedMultisiteStaticFolder].calledWith(fakeReq, fakeRes, fakeNext)).to.be.true
+      })
+    })
+
+    describe('In a single site project', () => {
+      it('Should serve the "statics" folder properly', () => {
+        const FOLDER_NAME = `statics`
+
+        const middlewareList = {}
+        const expressStaticSpy = (...args) => {
+          const [folderName] = args
+          middlewareList[folderName] = sinon.spy()
+
+          return (...rest) => {
+            return middlewareList[folderName](...rest)
+          }
+        }
+
+        const middleware = staticsFolderByHostWithSingleSiteConfig(expressStaticSpy)
+        const fakeReq = getMockedRequest('www.bikes.com')
+        const fakeRes = {}
+        const fakeNext = () => {}
+
+        middleware(fakeReq, fakeRes, fakeNext)
+
+        expect(middlewareList[FOLDER_NAME].calledWith(fakeReq, fakeRes, fakeNext)).to.be.true
       })
     })
   })
