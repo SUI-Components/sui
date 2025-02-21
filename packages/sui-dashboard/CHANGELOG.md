@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 1.36.0 (2025-02-21)
+
+
+### Bug Fixes
+
+* wrong satisfies arguments order ([fdd7bcf](https://github.com/SUI-Components/sui/commit/fdd7bcf07dae1203571633e46e13b67b0fc5f5e0))
+
+
+### Features
+
+* add several extra commands ([d19d9c6](https://github.com/SUI-Components/sui/commit/d19d9c69f9b168624d1fbba52a4cd918d0c21545))
+
+
+
 # 1.35.0 (2025-01-13)
 
 
