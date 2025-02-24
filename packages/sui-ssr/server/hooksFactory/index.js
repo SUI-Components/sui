@@ -117,7 +117,7 @@ export const hooksFactory = async () => {
       const startContextCreationTime = process.hrtime()
       const {performance = {}} = req
 
-      req.context = await contextFactory(createServerContextFactoryParams(req))
+      req.context = await contextFactory(createServerContextFactoryParams(req, res))
 
       const diffContextCreationTime = process.hrtime(startContextCreationTime)
 
