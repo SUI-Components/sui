@@ -1,5 +1,18 @@
 # CHANGELOG
 
+# 8.33.0 (2025-02-24)
+
+
+### Features
+
+* adapt multiSiteStaticsFolder method ([b9f01c3](https://github.com/SUI-Components/sui/commit/b9f01c3dc63ee77fffbca2accd555cecd6f85898))
+* lint ([0ca0418](https://github.com/SUI-Components/sui/commit/0ca0418a8f66cd17d1b6dc207a711201b704f60c))
+* maintain compatibility with statics method ([dd50630](https://github.com/SUI-Components/sui/commit/dd50630b9ac191e54738788f30d14a55e3569b66))
+* remove statics config param ([73a7786](https://github.com/SUI-Components/sui/commit/73a7786e192b499b821449dd916f4dca7e71575b))
+* rename useStaticsByHost method ([19d85fd](https://github.com/SUI-Components/sui/commit/19d85fdc8c38956c20a5caafffa3dc201cb63b93))
+
+
+
 # 8.32.0 (2024-09-30)
 
 
