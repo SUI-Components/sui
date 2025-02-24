@@ -9,7 +9,13 @@ import TYPES from '../hooks-types.js'
 import {hooksFactory} from './hooksFactory/index.js'
 import staticCriticalCss from './middlewares/criticalCss.js'
 import ssr from './middlewares/ssr.js'
-import {hostFromReq, isMultiSite, readHtmlTemplate, useStaticsByHost} from './utils/index.js'
+import {
+  hostFromReq,
+  isMultiSite,
+  readHtmlTemplate,
+  usePublicFolderByHost,
+  useStaticsFolderByHost
+} from './utils/index.js'
 import ssrConf from './config.js'
 noOPConsole(console)
 
@@ -57,10 +63,10 @@ const _memoizedHtmlTemplatesMapping = {}
   app.post(`/${TYPES.CSP_REPORT}`, bodyParser.json({type: 'application/csp-report'}), hooks[TYPES.CSP_REPORT])
 
   runningUnderAuth && app.use(basicAuth(AUTH_DEFINITION))
-  app.use(express.static('statics'))
+  app.use(useStaticsFolderByHost(express.static))
 
   app.use(hooks[TYPES.PRE_STATIC_PUBLIC])
-  app.use(useStaticsByHost(express.static))
+  app.use(usePublicFolderByHost(express.static))
 
   app.use(hooks[TYPES.APP_CONFIG_SETUP])
 
