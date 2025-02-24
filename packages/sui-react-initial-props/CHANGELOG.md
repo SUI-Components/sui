@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.24.0 (2025-02-24)
+
+
+### Features
+
+* Propagate server response ([c9307eb](https://github.com/SUI-Components/sui/commit/c9307ebc058553267d6eeece54ad56474feb0558))
+
+
+
 # 2.23.0 (2024-05-06)
 
 
