@@ -15,6 +15,7 @@ export interface ContextFactoryParams {
   pathName: string
   userAgent: string
   req?: object
+  res?: object
 }
 
 export type ClientPageComponent = React.ComponentType<any> &
