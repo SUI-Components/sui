@@ -23,6 +23,7 @@ require('core-js/features/string/trim')
 require('core-js/features/string/pad-end')
 require('core-js/features/string/pad-start')
 require('core-js/features/string/match-all')
+require('core-js/features/string/replace-all.js')
 
 require('core-js/features/url')
 require('core-js/features/url-search-params')
