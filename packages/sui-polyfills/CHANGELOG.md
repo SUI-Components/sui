@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.23.0 (2025-02-26)
+
+
+### Features
+
+* Added replaceAll polyfills to support chrome version >= 49 ([63d6026](https://github.com/SUI-Components/sui/commit/63d60263be433b2437528c8b6c4c28ad04df402a))
+
+
+
 # 1.22.0 (2024-07-04)
 
 
