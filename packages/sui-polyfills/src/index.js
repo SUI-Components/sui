@@ -11,6 +11,7 @@ require('core-js/features/array/of')
 require('core-js/features/object/assign')
 require('core-js/features/object/entries')
 require('core-js/features/object/from-entries')
+require('core-js/features/object/group-by')
 require('core-js/features/object/keys')
 require('core-js/features/object/values')
 
