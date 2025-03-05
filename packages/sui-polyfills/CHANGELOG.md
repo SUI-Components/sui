@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.24.0 (2025-03-05)
+
+
+### Features
+
+* add object group by polyfill ([a2a40d5](https://github.com/SUI-Components/sui/commit/a2a40d51b67054be5388fd9b55db1aae8bf566f0))
+
+
+
 # 1.23.0 (2025-02-26)
 
 
