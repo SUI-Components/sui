@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.15.0 (2025-03-12)
+
+
+### Bug Fixes
+
+* Not send campaing details if stc is invalid ([18fd59e](https://github.com/SUI-Components/sui/commit/18fd59e698eef06897c343c0b653c7f2488dde46))
+
+
+
 # 4.14.0 (2025-02-13)
 
 
