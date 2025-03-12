@@ -1,14 +1,14 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
-import {setConfig, getConfig} from '../src/config.js'
+import {getConfig, setConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
-import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
 import {campaignContext} from '../src/middlewares/source/campaignContext.js'
+import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
 import {pageReferrer} from '../src/middlewares/source/pageReferrer.js'
 import {userScreenInfo} from '../src/middlewares/source/userScreenInfo.js'
 import {userTraits} from '../src/middlewares/source/userTraits.js'
+import {getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
 import {INTEGRATIONS_WHEN_NO_CONSENTS} from '../src/segmentWrapper.js'
 import initTcfTracking, {getGdprPrivacyValue, USER_GDPR} from '../src/tcf.js'
 import {assertCampaignDetails} from './assertions.js'
@@ -278,6 +278,14 @@ describe('Segment Wrapper', function () {
               content: 'honda'
             }
           }
+        })
+      })
+
+      it('should not send mapped campaing details when stc param is invalid', async () => {
+        await assertCampaignDetails({
+          queryString:
+            '?stc=IJ_PUSH%7Celement~50220488692%7Cversion~pushmssearch_jobtitle_normalized&id_push=50220488692 ',
+          expectation: null
         })
       })
 
@@ -759,7 +767,6 @@ describe('Segment Wrapper', function () {
         clientVersion: 'segment-wrapper@0.0.0'
       }
       const {traits} = spy.getCall(0).firstArg.obj.context
-
       expect(context).to.deep.equal(expectation)
       expect(traits).to.deep.equal({
         anonymousId: 'fakeAnonymousId',
