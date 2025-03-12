@@ -94,7 +94,13 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
 
   const stc = searchParams.get(STC.QUERY)
   const [medium, source, campaign, content, term] = stc.split(STC.SPLIT_SYMBOL)
+
+  if (!campaign) return null
+
   const [id, name] = campaign.split(STC.CAMPAIGN_SPLIT_SYMBOL)
+
+  if (!id && !name) return null
+
   const needsContent = typeof content !== 'undefined' && content !== STC_INVALID_CONTENT
 
   return {
