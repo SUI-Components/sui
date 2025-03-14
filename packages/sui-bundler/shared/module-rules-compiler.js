@@ -26,8 +26,8 @@ const getTSConfig = () => {
 
 module.exports = ({isServer = false, isDevelopment = false, supportLegacyBrowsers = true} = {}) => {
   const tsConfig = getTSConfig()
-  // If TS config exists in root dir, set TypeScript as enabled.
-  const isTypeScriptEnabled = Boolean(tsConfig)
+  // If config.disableTSLoader is not true and TS config exists in root dir, set TypeScript as enabled.
+  const isTypeScriptEnabled = !config.disableTSLoader && Boolean(tsConfig)
 
   return isTypeScriptEnabled
     ? {
