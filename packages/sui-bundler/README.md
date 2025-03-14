@@ -167,6 +167,8 @@ This tool works with zero configuration out the box but you could use some confi
 
 `targets`: Object with information about the browser and version supported. (default: `see the next example`)
 
+`disableTypeScriptLoader`: Flag to determine if typescript loader should be used. (default: `false`)
+
 ```json
 {
   "config": {
@@ -184,7 +186,8 @@ This tool works with zero configuration out the box but you could use some confi
       "sourcemaps": {
         "dev": "cheap-module-eval-source-map",
         "prod": "hidden-source-map"
-      }
+      },
+      "disableTypeScriptLoader": true // Only if you want to disable typescript loader
     }
   }
 }
@@ -291,8 +294,7 @@ If in your CSS you have:
 ```css
 #app {
   color: blue;
-  background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png')
-    no-repeat scroll;
+  background: url('https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.png') no-repeat scroll;
 }
 ```
 
@@ -301,17 +303,15 @@ After compile you will get:
 ```css
 #app {
   color: #00f;
-  background: url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png)
-    no-repeat scroll;
+  background: url(https://spa-mock-statics.surge.sh/images/common/sprite-sheet/sprite-ma.72d1edb214.png) no-repeat
+    scroll;
 }
 ```
 
 Or if in your JS you have:
 
 ```jsx
-<img
-  src={'https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.gif'}
-/>
+<img src={'https://spa-mock-statics.surge.sh/images/common/mis-anuncios2.gif'} />
 ```
 
 After compile will be:
