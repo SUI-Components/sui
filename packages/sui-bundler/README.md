@@ -167,7 +167,7 @@ This tool works with zero configuration out the box but you could use some confi
 
 `targets`: Object with information about the browser and version supported. (default: `see the next example`)
 
-`disableTSLoader`: Flag to determine if typescript loader should be used. (default: `false`)
+`disableTypeScriptLoader`: Flag to determine if typescript loader should be used. (default: `false`)
 
 ```json
 {
@@ -187,7 +187,7 @@ This tool works with zero configuration out the box but you could use some confi
         "dev": "cheap-module-eval-source-map",
         "prod": "hidden-source-map"
       },
-      "disableTSLoader": true // Only if you want to disable typescript loader
+      "disableTypeScriptLoader": true // Only if you want to disable typescript loader
     }
   }
 }
