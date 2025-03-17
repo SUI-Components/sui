@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.72.0 (2025-03-17)
+
+
+### Features
+
+* add disableTSLoader flag to control TypeScript loader usage ([26d212a](https://github.com/SUI-Components/sui/commit/26d212acd620fff3612279c27c910adcb8a3e1e8))
+* update config option name ([9dc4332](https://github.com/SUI-Components/sui/commit/9dc43325b8720e399b13bc23df74274561d3ac15))
+
+
+
 # 9.71.0 (2024-12-18)
 
 
