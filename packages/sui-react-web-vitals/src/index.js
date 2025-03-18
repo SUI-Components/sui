@@ -31,10 +31,10 @@ Largest Contentful Paint (LCP) image subparts
 - ERDE: Element Render Delay
 */
 const LCP_SUBPARTS = {
-  TTFB: 'TTFB',
-  RLDE: 'RLDE',
-  RLDU: 'RLDU',
-  ERDE: 'ERDE'
+  TTFB: 'LCP_TTFB',
+  RLDE: 'LCP_RLDE',
+  RLDU: 'LCP_RLDU',
+  ERDE: 'LCP_ERDE'
 }
 
 // https://github.com/GoogleChrome/web-vitals#metric

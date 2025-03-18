@@ -263,7 +263,7 @@ describe('WebVitalsReporter', () => {
           name: 'cwv',
           amount: 300,
           tags: [
-            {key: 'name', value: 'ttfb'},
+            {key: 'name', value: 'lcp_ttfb'},
             {key: 'pathname', value: '/'},
             {key: 'type', value: deviceType}
           ]
@@ -274,7 +274,7 @@ describe('WebVitalsReporter', () => {
           name: 'cwv',
           amount: 240,
           tags: [
-            {key: 'name', value: 'rlde'},
+            {key: 'name', value: 'lcp_rlde'},
             {key: 'pathname', value: '/'},
             {key: 'type', value: deviceType}
           ]
@@ -285,7 +285,7 @@ describe('WebVitalsReporter', () => {
           name: 'cwv',
           amount: 480,
           tags: [
-            {key: 'name', value: 'rldu'},
+            {key: 'name', value: 'lcp_rldu'},
             {key: 'pathname', value: '/'},
             {key: 'type', value: deviceType}
           ]
@@ -296,7 +296,7 @@ describe('WebVitalsReporter', () => {
           name: 'cwv',
           amount: 180,
           tags: [
-            {key: 'name', value: 'erde'},
+            {key: 'name', value: 'lcp_erde'},
             {key: 'pathname', value: '/'},
             {key: 'type', value: deviceType}
           ]
@@ -361,7 +361,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it.skip('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+  it('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
     // Mocking the visibilityState
     Object.defineProperty(window.document, 'visibilityState', {value: 'hidden', writable: false})
 
