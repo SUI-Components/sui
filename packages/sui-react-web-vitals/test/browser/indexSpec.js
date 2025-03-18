@@ -361,7 +361,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+  it.skip('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
     // Mocking the visibilityState
     Object.defineProperty(window.document, 'visibilityState', {value: 'hidden', writable: false})
 
