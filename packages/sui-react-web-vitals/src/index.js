@@ -16,10 +16,25 @@ export const METRICS = {
   TTFB: 'TTFB'
 }
 
-const INP_METRICS = {
+const INP_SUBPARTS = {
   ID: 'ID',
   PT: 'PT',
   PD: 'PD'
+}
+
+/**
+https://web.dev/articles/optimize-lcp#optimal_sub-part_times
+Largest Contentful Paint (LCP) image subparts
+- TTFB: Time to First Byte
+- RLDE: Resource Load Delay
+- RLDU: Resource Load Duration
+- ERDE: Element Render Delay
+*/
+const LCP_SUBPARTS = {
+  TTFB: 'TTFB',
+  RLDE: 'RLDE',
+  RLDU: 'RLDU',
+  ERDE: 'ERDE'
 }
 
 // https://github.com/GoogleChrome/web-vitals#metric
@@ -82,16 +97,25 @@ export default function WebVitalsReporter({
       }
     }
 
-    const computeINPMetrics = entry => {
+    const computeINPSubparts = entry => {
       // RenderTime is an estimate because duration is rounded and may get rounded down.
       // In rare cases, it can be less than processingEnd and that breaks performance.measure().
       // Let's ensure it's at least 4ms in those cases so you can barely see it.
       const presentationTime = Math.max(entry.processingEnd + 4, entry.startTime + entry.duration)
 
       return {
-        [INP_METRICS.ID]: Math.round(entry.processingStart - entry.startTime, 0),
-        [INP_METRICS.PT]: Math.round(entry.processingEnd - entry.processingStart, 0),
-        [INP_METRICS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
+        [INP_SUBPARTS.ID]: Math.round(entry.processingStart - entry.startTime, 0),
+        [INP_SUBPARTS.PT]: Math.round(entry.processingEnd - entry.processingStart, 0),
+        [INP_SUBPARTS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
+      }
+    }
+
+    const computeLCPSubparts = entry => {
+      return {
+        [LCP_SUBPARTS.TTFB]: Math.round(entry.timeToFirstByte, 0),
+        [LCP_SUBPARTS.RLDE]: Math.round(entry.resourceLoadDelay, 0),
+        [LCP_SUBPARTS.RLDU]: Math.round(entry.resourceLoadDuration, 0),
+        [LCP_SUBPARTS.ERDE]: Math.round(entry.elementRenderDelay, 0)
       }
     }
 
@@ -183,7 +207,27 @@ export default function WebVitalsReporter({
 
       if (name === METRICS.INP) {
         entries.forEach(entry => {
-          const metrics = computeINPMetrics(entry)
+          const metrics = computeINPSubparts(entry)
+
+          Object.keys(metrics).forEach(name => {
+            logger.distribution({
+              name: 'cwv',
+              amount: metrics[name],
+              tags: [
+                {
+                  key: 'name',
+                  value: name.toLowerCase()
+                },
+                ...tags
+              ]
+            })
+          })
+        })
+      }
+
+      if (name === METRICS.LCP) {
+        entries.forEach(entry => {
+          const metrics = computeLCPSubparts(entry)
 
           Object.keys(metrics).forEach(name => {
             logger.distribution({

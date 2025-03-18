@@ -193,7 +193,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it('should track cwv using logger distribution with browser in context', async () => {
+  it('should track TTFB using logger distribution with browser in context', async () => {
     const logger = {
       distribution: sinon.spy()
     }
@@ -221,7 +221,89 @@ describe('WebVitalsReporter', () => {
       ).to.be.true
     ])
   })
+  it('should track LCP using logger distribution with browser in context', async () => {
+    const logger = {
+      distribution: sinon.spy()
+    }
+    const reporter = {
+      onLCP: fn => {
+        fn({
+          name: 'LCP',
+          value: 1200,
+          entries: [
+            {
+              timeToFirstByte: 300,
+              resourceLoadDelay: 240,
+              resourceLoadDuration: 480,
+              elementRenderDelay: 180
+            }
+          ]
+        })
+      }
+    }
+    const deviceType = 'mobile'
+    const browser = {deviceType}
 
+    render(<WebVitalsReporter metrics={[METRICS.LCP]} allowed={['/']} reporter={reporter} />, {logger, browser})
+
+    await waitFor(() => [
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 1200,
+          tags: [
+            {key: 'name', value: 'lcp'},
+            {key: 'pathname', value: '/'},
+            {key: 'type', value: deviceType}
+          ]
+        })
+      ).to.be.true,
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 300,
+          tags: [
+            {key: 'name', value: 'ttfb'},
+            {key: 'pathname', value: '/'},
+            {key: 'type', value: deviceType}
+          ]
+        })
+      ).to.be.true,
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 240,
+          tags: [
+            {key: 'name', value: 'rlde'},
+            {key: 'pathname', value: '/'},
+            {key: 'type', value: deviceType}
+          ]
+        })
+      ).to.be.true,
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 480,
+          tags: [
+            {key: 'name', value: 'rldu'},
+            {key: 'pathname', value: '/'},
+            {key: 'type', value: deviceType}
+          ]
+        })
+      ).to.be.true,
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 180,
+          tags: [
+            {key: 'name', value: 'erde'},
+            {key: 'pathname', value: '/'},
+            {key: 'type', value: deviceType}
+          ]
+        })
+      ).to.be.true
+    ])
+  })
   it('should track inp using logger distribution', async () => {
     const logger = {
       distribution: sinon.spy()
@@ -279,7 +361,7 @@ describe('WebVitalsReporter', () => {
     ])
   })
 
-  it.skip('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
+  it('should track inp with deviceMemory, networkConnection, and hardwareConcurrency using logger cwv', async () => {
     // Mocking the visibilityState
     Object.defineProperty(window.document, 'visibilityState', {value: 'hidden', writable: false})
 
