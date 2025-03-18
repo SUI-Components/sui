@@ -123,6 +123,28 @@ export default function App() {
 }
 ```
 
+### New LCP Subpart Metrics
+
+The system now tracks and logs the following LCP subpart metrics as recommended by [web.dev](https://web.dev/articles/optimize-lcp#optimal_sub-part_times):
+
+| Metric                 | Code       | Description                                                    |
+| ---------------------- | ---------- | -------------------------------------------------------------- |
+| Time to First Byte     | `LCP_TTFB` | Time until the browser receives the first byte of HTML         |
+| Resource Load Delay    | `LCP_RLDE` | Time between first HTML byte and start of LCP resource loading |
+| Resource Load Duration | `LCP_RLDU` | Time taken to load the LCP resource                            |
+| Element Render Delay   | `LCP_ERDE` | Time from resource load completion to actual rendering         |
+
+Each of these metrics is automatically distributed through the logger system with appropriate tags, allowing for detailed performance analysis and targeted optimization efforts.
+
+### Benefits
+
+This granular approach to LCP tracking enables:
+
+- More precise identification of loading bottlenecks
+- Better targeted optimization strategies
+- Improved Core Web Vitals scores
+- Clearer correlation between performance issues and specific page elements
+
 #### Device type
 
 Use `deviceType` prop to set the device type that will be send when a metric is reported. Choose between: `desktop`, `tablet` and `mobile`. If not set the `browser` property from the SUI Context will be used
