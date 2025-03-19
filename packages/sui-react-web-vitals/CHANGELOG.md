@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.8.0 (2025-03-19)
+
+
+### Features
+
+* add LCP Subpart metrics to send to logger ([7ac0949](https://github.com/SUI-Components/sui/commit/7ac094932410223e7f796d195d2ecaa968c427b0))
+
+
+
 # 2.7.0 (2024-11-14)
 
 
