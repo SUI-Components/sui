@@ -1,10 +1,15 @@
 // @ts-check
 
 import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
-import {getGoogleClientId, getGoogleSessionId, setGoogleUserId} from './repositories/googleRepository.js'
+import {
+  getConsentState,
+  getGoogleClientId,
+  getGoogleSessionId,
+  setGoogleUserId
+} from './repositories/googleRepository.js'
+import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
 import {checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
-import {getXandrId} from './repositories/xandrRepository.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -141,6 +146,7 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     ...getExternalIds({context, xandrId}),
     gdpr_privacy: gdprPrivacyValueAnalytics,
     gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
+    analytics_storage: getConsentState(),
     integrations: {
       ...context.integrations,
       ...integrations

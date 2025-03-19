@@ -8,6 +8,12 @@ const FIELDS = {
   clientId: 'client_id',
   sessionId: 'session_id'
 }
+
+const CONSENT_STATES = {
+  granted: 'GRANTED',
+  denied: 'DENIED'
+}
+
 const STC = {
   QUERY: 'stc',
   SPLIT_SYMBOL: '-',
@@ -122,6 +128,11 @@ export const getGoogleSessionId = async () => {
   triggerGoogleAnalyticsInitEvent(sessionId)
 
   return sessionId
+}
+export const getConsentState = () => {
+  return window.google_tag_data?.ics?.getConsentState?.('analytics_storage') === CONSENT_STATES.granted
+    ? CONSENT_STATES.granted
+    : CONSENT_STATES.denied
 }
 
 export const setGoogleUserId = userId => {

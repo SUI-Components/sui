@@ -729,6 +729,11 @@ describe('Segment Wrapper', function () {
 
     it('sends an event with the actual context and traits when the consents are declined', async () => {
       const spy = sinon.stub()
+      window.google_tag_data = {
+        ics: {
+          getConsentState: () => 2
+        }
+      }
 
       await simulateUserDeclinedConsents()
       await suiAnalytics.track(
@@ -761,6 +766,7 @@ describe('Segment Wrapper', function () {
         protocols: {event_version: 3},
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined',
+        analytics_storage: 'DENIED',
         context: {
           integrations
         },
