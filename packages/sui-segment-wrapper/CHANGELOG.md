@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.16.0 (2025-03-19)
+
+
+### Features
+
+* Added analytics_storage privacy state for segment ([a7111a5](https://github.com/SUI-Components/sui/commit/a7111a5ddb170cf919c2cb6ea6500cb3ffe5a588))
+
+
+
 # 4.15.0 (2025-03-12)
 
 
