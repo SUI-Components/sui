@@ -10,17 +10,21 @@ export const getUniversalIdFromConfig = () => getConfig('universalId')
 export const getUniversalId = () => {
   // 1. Try to get universalId from config
   let universalId = getUniversalIdFromConfig()
+
   if (universalId) {
     setUniversalIdInitialized()
+
     return universalId
   }
 
   // 2. If not available, then we use the email and hash it
   const userEmail = getConfig('userEmail')
+
   if (userEmail) {
     universalId = createUniversalId(userEmail)
     setUniversalId(universalId)
     setUniversalIdInitialized()
+
     return universalId
   }
 
@@ -30,9 +34,13 @@ export const getUniversalId = () => {
 }
 
 export const getUserDataAndNotify = () => {
+  if (!isClient) return
+
   const universalId = getUniversalId()
   const userEmail = getConfig('userEmail')
-  isClient && dispatchEvent({eventName: USER_DATA_READY_EVENT, detail: {universalId, userEmail}})
+
+  dispatchEvent({eventName: USER_DATA_READY_EVENT, detail: {universalId, userEmail}})
+
   return {universalId, userEmail}
 }
 
