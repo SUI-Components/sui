@@ -237,7 +237,6 @@ describe('WebVitalsReporter', () => {
             resourceLoadDelay: 240,
             resourceLoadDuration: 480,
             elementRenderDelay: 180,
-            // Other attribution properties...
             element: document.body // Example of another attribution property
           }
         })

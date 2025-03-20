@@ -109,15 +109,7 @@ export default function WebVitalsReporter({
         [INP_SUBPARTS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
       }
     }
-    const computeLCPSubparts = entry => {
-      // Extract LCP subparts from entry
-      return {
-        [LCP_SUBPARTS.TTFB]: Math.round(entry.timeToFirstByte || 0, 0),
-        [LCP_SUBPARTS.RLDE]: Math.round(entry.resourceLoadDelay || 0, 0),
-        [LCP_SUBPARTS.RLDU]: Math.round(entry.resourceLoadDuration || 0, 0),
-        [LCP_SUBPARTS.ERDE]: Math.round(entry.elementRenderDelay || 0, 0)
-      }
-    }
+
     const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
@@ -144,7 +136,7 @@ export default function WebVitalsReporter({
       })
     }
 
-    const handleChange = ({name, value, entries}) => {
+    const handleChange = ({name, value, entries, attribution}) => {
       const onReport = onReportRef.current
       const pathname = getPathname(route)
       const routeid = getRouteid()
@@ -192,6 +184,7 @@ export default function WebVitalsReporter({
           : [])
       ]
 
+      // Log the main metric
       logger.distribution({
         name: 'cwv',
         amount,
@@ -204,7 +197,8 @@ export default function WebVitalsReporter({
         ]
       })
 
-      if (name === METRICS.INP) {
+      // Handle INP subparts
+      if (name === METRICS.INP && entries) {
         entries.forEach(entry => {
           const metrics = computeINPSubparts(entry)
 
@@ -224,11 +218,53 @@ export default function WebVitalsReporter({
         })
       }
 
+      // Handle LCP subparts
       if (name === METRICS.LCP) {
-        // For LCP, the subparts might be in the entries directly
+        // Helper function to create LCP subpart metrics from an object
+        const extractLCPSubparts = source => {
+          return {
+            [LCP_SUBPARTS.TTFB]: Math.round(source.timeToFirstByte || 0, 0),
+            [LCP_SUBPARTS.RLDE]: Math.round(source.resourceLoadDelay || 0, 0),
+            [LCP_SUBPARTS.RLDU]: Math.round(source.resourceLoadDuration || 0, 0),
+            [LCP_SUBPARTS.ERDE]: Math.round(source.elementRenderDelay || 0, 0)
+          }
+        }
+
+        // Process and log LCP subparts from a metrics object
+        const processLCPSubparts = metrics => {
+          Object.keys(metrics).forEach(name => {
+            // Only log if we have a non-zero value
+            if (metrics[name] > 0) {
+              logger.distribution({
+                name: 'cwv',
+                amount: metrics[name],
+                tags: [
+                  {
+                    key: 'name',
+                    value: name.toLowerCase()
+                  },
+                  ...tags
+                ]
+              })
+            }
+          })
+        }
+
+        // First check if LCP subparts are in the attribution object
+        if (
+          attribution &&
+          (attribution.timeToFirstByte ||
+            attribution.resourceLoadDelay ||
+            attribution.resourceLoadDuration ||
+            attribution.elementRenderDelay)
+        ) {
+          const metrics = extractLCPSubparts(attribution)
+          processLCPSubparts(metrics)
+        }
+
+        // Then check entries as before
         if (entries && entries.length > 0) {
           entries.forEach(entry => {
-            // Only process if the entry has the expected properties
             if (
               entry &&
               (entry.timeToFirstByte ||
@@ -236,30 +272,13 @@ export default function WebVitalsReporter({
                 entry.resourceLoadDuration ||
                 entry.elementRenderDelay)
             ) {
-              const metrics = computeLCPSubparts(entry)
-
-              Object.keys(metrics).forEach(name => {
-                // Only log if we have a non-zero value
-                if (metrics[name] > 0) {
-                  logger.distribution({
-                    name: 'cwv',
-                    amount: metrics[name],
-                    tags: [
-                      {
-                        key: 'name',
-                        value: name.toLowerCase()
-                      },
-                      ...tags
-                    ]
-                  })
-                }
-              })
+              const metrics = extractLCPSubparts(entry)
+              processLCPSubparts(metrics)
             }
           })
         }
       }
     }
-
     metrics.forEach(metric => {
       reporter[`on${metric}`](handleChange)
 
