@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.18.0 (2025-03-20)
+
+
+### Features
+
+* DENIE consent if it fails to retrieve it ([cffeee7](https://github.com/SUI-Components/sui/commit/cffeee70ec29750752c2e86ee57c35a8032176f4))
+
+
+
 # 4.17.0 (2025-03-20)
 
 
