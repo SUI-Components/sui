@@ -15,6 +15,7 @@ const CONSENT_STATES = {
 }
 
 const CONSENT_STATE_GRANTED_VALUE = 1
+const CONSENT_STATE_DENIED_VALUE = 2
 
 const STC = {
   QUERY: 'stc',
@@ -132,9 +133,19 @@ export const getGoogleSessionId = async () => {
   return sessionId
 }
 export const getConsentState = () => {
-  return window.google_tag_data?.ics?.getConsentState?.('analytics_storage') === CONSENT_STATE_GRANTED_VALUE
-    ? CONSENT_STATES.granted
-    : CONSENT_STATES.denied
+  let consentValue = CONSENT_STATE_DENIED_VALUE
+
+  try {
+    consentValue = window.google_tag_data?.ics?.getConsentState?.('analytics_storage')
+  } catch (error) {
+    // Detected an issue getting the consent state when user rejects the consent
+    // due to a bug in Google Tag Manager
+    // After that first rejection the code works as expected
+    console.error('Error getting consent state', error)
+    consentValue = CONSENT_STATE_DENIED_VALUE
+  }
+
+  return consentValue === CONSENT_STATE_GRANTED_VALUE ? CONSENT_STATES.granted : CONSENT_STATES.denied
 }
 
 export const setGoogleUserId = userId => {
