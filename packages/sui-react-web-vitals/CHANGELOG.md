@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 2.9.0 (2025-03-20)
+
+
+### Bug Fixes
+
+* fix LCP subparts attribution ([5f055b2](https://github.com/SUI-Components/sui/commit/5f055b20436d81ab4c8e01419430858b4e104c10))
+* fix LCP subparts attribution ([a509672](https://github.com/SUI-Components/sui/commit/a5096723c0acce91867c3e6a16b2a26576245446))
+
+
+
 # 2.8.0 (2025-03-19)
 
 
