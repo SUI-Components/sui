@@ -230,14 +230,16 @@ describe('WebVitalsReporter', () => {
         fn({
           name: 'LCP',
           value: 1200,
-          entries: [
-            {
-              timeToFirstByte: 300,
-              resourceLoadDelay: 240,
-              resourceLoadDuration: 480,
-              elementRenderDelay: 180
-            }
-          ]
+          entries: [], // Empty or could be some other entries
+          attribution: {
+            // Move the sub-parts here
+            timeToFirstByte: 300,
+            resourceLoadDelay: 240,
+            resourceLoadDuration: 480,
+            elementRenderDelay: 180,
+            // Other attribution properties...
+            element: document.body // Example of another attribution property
+          }
         })
       }
     }

@@ -109,16 +109,15 @@ export default function WebVitalsReporter({
         [INP_SUBPARTS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
       }
     }
-
     const computeLCPSubparts = entry => {
+      // Extract LCP subparts from entry
       return {
-        [LCP_SUBPARTS.TTFB]: Math.round(entry.timeToFirstByte, 0),
-        [LCP_SUBPARTS.RLDE]: Math.round(entry.resourceLoadDelay, 0),
-        [LCP_SUBPARTS.RLDU]: Math.round(entry.resourceLoadDuration, 0),
-        [LCP_SUBPARTS.ERDE]: Math.round(entry.elementRenderDelay, 0)
+        [LCP_SUBPARTS.TTFB]: Math.round(entry.timeToFirstByte || 0, 0),
+        [LCP_SUBPARTS.RLDE]: Math.round(entry.resourceLoadDelay || 0, 0),
+        [LCP_SUBPARTS.RLDU]: Math.round(entry.resourceLoadDuration || 0, 0),
+        [LCP_SUBPARTS.ERDE]: Math.round(entry.elementRenderDelay || 0, 0)
       }
     }
-
     const handleAllChanges = ({attribution, name, rating, value}) => {
       const amount = name === METRICS.CLS ? value * 1000 : value
       const pathname = getPathname(route)
@@ -226,23 +225,38 @@ export default function WebVitalsReporter({
       }
 
       if (name === METRICS.LCP) {
-        entries.forEach(entry => {
-          const metrics = computeLCPSubparts(entry)
+        // For LCP, the subparts might be in the entries directly
+        if (entries && entries.length > 0) {
+          entries.forEach(entry => {
+            // Only process if the entry has the expected properties
+            if (
+              entry &&
+              (entry.timeToFirstByte ||
+                entry.resourceLoadDelay ||
+                entry.resourceLoadDuration ||
+                entry.elementRenderDelay)
+            ) {
+              const metrics = computeLCPSubparts(entry)
 
-          Object.keys(metrics).forEach(name => {
-            logger.distribution({
-              name: 'cwv',
-              amount: metrics[name],
-              tags: [
-                {
-                  key: 'name',
-                  value: name.toLowerCase()
-                },
-                ...tags
-              ]
-            })
+              Object.keys(metrics).forEach(name => {
+                // Only log if we have a non-zero value
+                if (metrics[name] > 0) {
+                  logger.distribution({
+                    name: 'cwv',
+                    amount: metrics[name],
+                    tags: [
+                      {
+                        key: 'name',
+                        value: name.toLowerCase()
+                      },
+                      ...tags
+                    ]
+                  })
+                }
+              })
+            }
           })
-        })
+        }
       }
     }
 
