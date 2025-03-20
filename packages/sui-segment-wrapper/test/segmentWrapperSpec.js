@@ -890,6 +890,21 @@ describe('Segment Wrapper', function () {
       stubDocumentCookie(`${XANDR_ID_COOKIE}=${givenXandrId}`)
     })
 
+    it('should send analytics storage GRANTED if userr has accepted consent', async () => {
+      await simulateUserAcceptConsents()
+      window.google_tag_data = {
+        ics: {
+          getConsentState: () => 1
+        }
+      }
+
+      await suiAnalytics.track('fakeEvent')
+
+      const {context} = getDataFromLastTrack()
+
+      expect(context.analytics_storage).to.equal('GRANTED')
+    })
+
     it('should send the xandrId as externalId, that where stored in a cookie', async () => {
       await simulateUserAcceptConsents()
 

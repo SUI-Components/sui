@@ -14,6 +14,8 @@ const CONSENT_STATES = {
   denied: 'DENIED'
 }
 
+const CONSENT_STATE_GRANTED_VALUE = 1
+
 const STC = {
   QUERY: 'stc',
   SPLIT_SYMBOL: '-',
@@ -130,7 +132,7 @@ export const getGoogleSessionId = async () => {
   return sessionId
 }
 export const getConsentState = () => {
-  return window.google_tag_data?.ics?.getConsentState?.('analytics_storage') === CONSENT_STATES.granted
+  return window.google_tag_data?.ics?.getConsentState?.('analytics_storage') === CONSENT_STATE_GRANTED_VALUE
     ? CONSENT_STATES.granted
     : CONSENT_STATES.denied
 }
