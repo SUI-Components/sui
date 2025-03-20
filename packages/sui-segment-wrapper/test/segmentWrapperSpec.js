@@ -890,7 +890,7 @@ describe('Segment Wrapper', function () {
       stubDocumentCookie(`${XANDR_ID_COOKIE}=${givenXandrId}`)
     })
 
-    it('should send analytics storage GRANTED if userr has accepted consent', async () => {
+    it('should send analytics storage GRANTED if user has accepted consent', async () => {
       await simulateUserAcceptConsents()
       window.google_tag_data = {
         ics: {
@@ -903,6 +903,23 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
 
       expect(context.analytics_storage).to.equal('GRANTED')
+    })
+
+    it('should send analytics storage DENIED if fail to read it', async () => {
+      await simulateUserAcceptConsents()
+      window.google_tag_data = {
+        ics: {
+          getConsentState: () => {
+            throw new Error("ERROR: Couldn't read the consent state")
+          }
+        }
+      }
+
+      await suiAnalytics.track('fakeEvent')
+
+      const {context} = getDataFromLastTrack()
+
+      expect(context.analytics_storage).to.equal('DENIED')
     })
 
     it('should send the xandrId as externalId, that where stored in a cookie', async () => {
