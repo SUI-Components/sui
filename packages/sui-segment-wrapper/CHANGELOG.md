@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.17.0 (2025-03-20)
+
+
+### Bug Fixes
+
+* map analytics_storage to correct value ([6122f59](https://github.com/SUI-Components/sui/commit/6122f59fcd71a0a3d30769ffe61453fc01adc082))
+
+
+
 # 4.16.0 (2025-03-19)
 
 
