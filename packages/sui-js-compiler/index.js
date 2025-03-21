@@ -56,17 +56,20 @@ const compileFile = async (file, options) => {
 }
 
 const compileTypes = async (files, options) => {
-  const {createCompilerHost, createProgram} = await import('typescript').then(module => module.default)
+  const ts = await import('typescript').then(module => module.default)
   const createdFiles = {}
-  const host = createCompilerHost(options)
+
+  const parsedCommandLine = ts.parseJsonConfigFileContent({compilerOptions: options}, ts.sys, process.cwd())
+
+  const host = ts.createCompilerHost(parsedCommandLine.options)
   host.writeFile = (fileName, contents) => (createdFiles[fileName] = contents)
-  const program = createProgram(files, options, host)
+
+  const program = ts.createProgram(files, parsedCommandLine.options, host)
   program.emit()
 
   return Promise.all(
     Object.keys(createdFiles).map(async outputPath => {
       const code = createdFiles[outputPath]
-
       await fs.outputFile(outputPath, code)
     })
   )
