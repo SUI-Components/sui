@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.19.0 (2025-03-26)
+
+
+### Features
+
+* skip universal id retrieval on server ([3637030](https://github.com/SUI-Components/sui/commit/3637030a0520eabfd7871cfb4737005845c43815))
+
+
+
 # 4.18.0 (2025-03-20)
 
 
