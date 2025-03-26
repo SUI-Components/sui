@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.31.0 (2025-03-26)
+
+
+### Bug Fixes
+
+* restore import ([16045e7](https://github.com/SUI-Components/sui/commit/16045e7fccc834cadeaa5bc7a65861c33e12c263))
+* rewrite node detection code from cjs to esm ([7d55837](https://github.com/SUI-Components/sui/commit/7d558379689ac6cbea7ce2f1f1441e4a61f5a435))
+
+
+
 # 3.30.0 (2024-11-07)
 
 
