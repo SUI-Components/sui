@@ -1,4 +1,4 @@
-import {performance} from 'perf_hooks'
+import {performance} from 'node:perf_hooks'
 
 import isNode from '../../helpers/isNode.js'
 import isPromise from '../../helpers/isPromise.js'
