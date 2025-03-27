@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 1.30.0 (2025-03-27)
+
+
+### Features
+
+* refactor TypeScript compilation to use parseJsonConfigFileContent ([f021e0a](https://github.com/SUI-Components/sui/commit/f021e0a32694ad4b1a72388124a836867696eb3e))
+* upgrade typescript package ([d0a3a44](https://github.com/SUI-Components/sui/commit/d0a3a446ed413f9e744be1d00629afbae6ae5654))
+
+
+
 # 1.29.0 (2024-05-06)
 
 
