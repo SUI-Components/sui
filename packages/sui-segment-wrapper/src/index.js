@@ -52,6 +52,7 @@ if (isClient && window.analytics) {
       ...googleAnalyticsConfig,
       ...getCampaignDetails()
     })
+
     loadGoogleAnalytics().catch(error => {
       console.error(error)
     })
