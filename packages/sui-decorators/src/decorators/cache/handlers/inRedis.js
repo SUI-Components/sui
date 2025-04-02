@@ -1,8 +1,10 @@
 import {createHash} from '@s-ui/js/lib/hash'
+import isNode from '../../../helpers/isNode'
 
-const VERSION_NAMESPACE_TAG = global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE
-  ? `${global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE}::`
-  : ''
+const VERSION_NAMESPACE_TAG =
+  isNode && global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE
+    ? `${global.USE_VERSION_NAMESPACE_FOR_REDIS_SUI_DECORATORS_CACHE}::`
+    : ''
 
 export const inRedis =
   (target, cache, original, fnName, instance, ttl, cacheKey) =>
