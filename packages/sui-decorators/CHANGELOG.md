@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.32.0 (2025-04-03)
+
+
+### Bug Fixes
+
+* check if is node before using global ([659f71a](https://github.com/SUI-Components/sui/commit/659f71a84c83ac02f9f009e95b49d3857f8c54db))
+
+
+
 # 3.31.0 (2025-03-26)
 
 
