@@ -14,7 +14,7 @@ describe('template builder', () => {
     })
 
     expect(html).to.equal(
-      '<body><script>window.__APP_CONFIG__ = JSON.parse("{\\"appConfig\\":\\"appConfig\\"}");</script><script>window.__INITIAL_PROPS__ = JSON.parse("{\\"initialProps\\":\\"initialProps\\"}");</script><script>window.__INITIAL_CONTEXT_VALUE__ = JSON.parse("{}");</script></body>'
+      '<body><script>window.__APP_CONFIG__ = JSON.parse(JSON.parse(decodeURI("%22%7B%5C%22appConfig%5C%22:%5C%22appConfig%5C%22%7D%22")));</script><script>window.__INITIAL_PROPS__ = JSON.parse(JSON.parse(decodeURI("%22%7B%5C%22initialProps%5C%22:%5C%22initialProps%5C%22%7D%22")));</script><script>window.__INITIAL_CONTEXT_VALUE__ = JSON.parse(JSON.parse(decodeURI("%22%7B%7D%22")));</script></body>'
     )
   })
 
@@ -30,7 +30,7 @@ describe('template builder', () => {
     })
 
     expect(html).to.equal(
-      '<body><script>window.__APP_CONFIG__ = JSON.parse("{\\"appConfig\\":\\"appConfig\\"}");</script><script>window.__INITIAL_PROPS__ = JSON.parse("{\\"initialProps\\":\\"initialProps\\"}");</script><script>window.__INITIAL_CONTEXT_VALUE__ = JSON.parse("{\\"initialContextValue\\":\\"initialContextValue\\"}");</script></body>'
+      '<body><script>window.__APP_CONFIG__ = JSON.parse(JSON.parse(decodeURI("%22%7B%5C%22appConfig%5C%22:%5C%22appConfig%5C%22%7D%22")));</script><script>window.__INITIAL_PROPS__ = JSON.parse(JSON.parse(decodeURI("%22%7B%5C%22initialProps%5C%22:%5C%22initialProps%5C%22%7D%22")));</script><script>window.__INITIAL_CONTEXT_VALUE__ = JSON.parse(JSON.parse(decodeURI("%22%7B%5C%22initialContextValue%5C%22:%5C%22initialContextValue%5C%22%7D%22")));</script></body>'
     )
   })
 })

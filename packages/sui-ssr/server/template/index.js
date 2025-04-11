@@ -99,11 +99,14 @@ HtmlBuilder.buildBody = ({
 }
 
 HtmlBuilder.injectDataHydration = ({windowPropertyName, data = {}}) => {
-  const jsonSource = jsesc(JSON.stringify(data), {
-    json: true,
-    isScriptContext: true
-  })
+  const jsonSource = encodeURI(
+    jsesc(JSON.stringify(data), {
+      json: true,
+      isScriptContext: true
+    })
+  )
 
-  const jsonExpr = `JSON.parse(${jsonSource})`
+  const jsonExpr = `JSON.parse(JSON.parse(decodeURI("${jsonSource}")))`
+
   return `<script>window.${windowPropertyName} = ${jsonExpr};</script>`
 }
