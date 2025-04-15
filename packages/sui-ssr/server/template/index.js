@@ -51,10 +51,10 @@ HtmlBuilder.buildBody = ({
   let html = (' ' + bodyTplPart).slice(1)
 
   if (bodyAttributes) {
-    html = html.replace('<body>', `<body ${bodyAttributes.toString()}>`)
+    html = html.replace('<body>', () => `<body ${bodyAttributes.toString()}>`)
   }
   if (reactString) {
-    html = html.replace(APP_PLACEHOLDER, reactString)
+    html = html.replace(APP_PLACEHOLDER, () => reactString)
   }
 
   if (performance) {
@@ -62,10 +62,11 @@ HtmlBuilder.buildBody = ({
 
     html = html.replace(
       BODY_CLOSING_TAG,
-      `${HtmlBuilder.injectDataHydration({
-        windowPropertyName: '__PERFORMANCE_METRICS__',
-        data: {server, render}
-      })}${BODY_CLOSING_TAG}`
+      () =>
+        `${HtmlBuilder.injectDataHydration({
+          windowPropertyName: '__PERFORMANCE_METRICS__',
+          data: {server, render}
+        })}${BODY_CLOSING_TAG}`
     )
   }
 
@@ -93,7 +94,7 @@ HtmlBuilder.buildBody = ({
     ''
   )
 
-  html = html.replace(BODY_CLOSING_TAG, `${hydrationHtml}${BODY_CLOSING_TAG}`)
+  html = html.replace(BODY_CLOSING_TAG, () => `${hydrationHtml}${BODY_CLOSING_TAG}`)
 
   return html
 }
