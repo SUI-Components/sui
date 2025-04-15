@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.35.0 (2025-04-15)
+
+
+### Bug Fixes
+
+* avoid XSS on SRR ([48995af](https://github.com/SUI-Components/sui/commit/48995af7145ecbe3297d1c46c4664ec34feb045c))
+
+
+
 # 8.34.0 (2025-02-24)
 
 
