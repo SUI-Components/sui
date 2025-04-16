@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.30.0 (2025-04-16)
+
+
+### Bug Fixes
+
+* display close all error ([496473c](https://github.com/SUI-Components/sui/commit/496473cf49602c117f427990a6d5ff7158878cf7))
+
+
+
 # 1.29.0 (2024-11-11)
 
 
