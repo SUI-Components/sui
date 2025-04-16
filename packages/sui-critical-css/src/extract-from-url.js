@@ -37,7 +37,7 @@ export async function extractCSSFromUrl({customHeaders, height, url, userAgent, 
     page = await context.newPage()
     // Set viewport and user agent depending on the device
     await page.setViewportSize({width, height})
-    page.setDefaultNavigationTimeout(15000)
+    page.setDefaultNavigationTimeout(30000)
 
     const hasCustomHeaders = typeof customHeaders === 'object' && Object.keys(customHeaders).length
     hasCustomHeaders && (await page.setExtraHTTPHeaders(customHeaders))
