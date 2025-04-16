@@ -64,7 +64,7 @@ export async function extractCSSFromUrl({customHeaders, height, url, userAgent, 
       await page.close()
       await browser.close()
       browser = null
-      if (error) throw new Error(`[ko] ${error}`)
+      if (error) throw new Error(`[ko] ${JSON.stringify(error)}`)
     }
 
     if (!responses.length) await closeAll('Response is not present')
