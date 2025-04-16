@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.31.0 (2025-04-16)
+
+
+### Features
+
+* increase critical timeout ([9b20d7e](https://github.com/SUI-Components/sui/commit/9b20d7eae627a43c35b99493538ce92e118fd059))
+
+
+
 # 1.30.0 (2025-04-16)
 
 
