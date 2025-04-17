@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.32.0 (2025-04-17)
+
+
+### Features
+
+* add timeout to networkidle ([f422753](https://github.com/SUI-Components/sui/commit/f42275334b2454bdb22daf63f975c117616731b9))
+
+
+
 # 1.31.0 (2025-04-16)
 
 
