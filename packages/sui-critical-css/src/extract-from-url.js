@@ -37,7 +37,7 @@ export async function extractCSSFromUrl({customHeaders, height, url, userAgent, 
     page = await context.newPage()
     // Set viewport and user agent depending on the device
     await page.setViewportSize({width, height})
-    page.setDefaultNavigationTimeout(30000)
+    page.setDefaultNavigationTimeout(15000)
 
     const hasCustomHeaders = typeof customHeaders === 'object' && Object.keys(customHeaders).length
     hasCustomHeaders && (await page.setExtraHTTPHeaders(customHeaders))
@@ -55,7 +55,7 @@ export async function extractCSSFromUrl({customHeaders, height, url, userAgent, 
     const responses = []
 
     for (url of urls) {
-      const response = await page.goto(url, {waitUntil: 'networkidle'}).catch(error => ({error}))
+      const response = await page.goto(url, {waitUntil: 'networkidle', timeout: 10000}).catch(error => ({error}))
 
       responses.push(response)
     }
