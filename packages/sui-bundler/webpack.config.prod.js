@@ -39,7 +39,7 @@ const webpackConfig = {
   name: 'client',
   mode: 'production',
   target,
-  context: path.resolve(CWD, 'src'),
+  context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {...aliasFromConfig},
     extensions: ['.js', '.json', '.ts', '.tsx'],
