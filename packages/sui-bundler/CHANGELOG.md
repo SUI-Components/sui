@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.73.0 (2025-04-23)
+
+
+### Features
+
+* add proper context to bundler ([0ff836b](https://github.com/SUI-Components/sui/commit/0ff836b06731093fb3235e50ea999fc11cba0f86))
+* use cwd ([36fc4d5](https://github.com/SUI-Components/sui/commit/36fc4d5281d7197ab39573a1c69a2a4885f6dbe7))
+
+
+
 # 9.72.0 (2025-03-17)
 
 
