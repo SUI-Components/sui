@@ -16,7 +16,7 @@ const createCompilerRules = require('./shared/module-rules-compiler.js')
 
 const outputPath = path.join(process.cwd(), 'dist')
 
-const {CI = false, PWD = ''} = process.env
+const {CI = false} = process.env
 
 process.env.NODE_ENV = 'development'
 
@@ -25,7 +25,7 @@ process.env.NODE_ENV = 'development'
 const webpackConfig = {
   name: 'client-local',
   mode: 'development',
-  context: path.resolve(PWD, 'src'),
+  context: path.resolve(process.cwd(), 'src'),
   resolve: {
     alias: {
       ...defaultAlias,
