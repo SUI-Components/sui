@@ -34,8 +34,11 @@ module.exports = ({page, remoteCdn, globalConfig = {}}) => {
       publicPath: remoteCdn ? `${remoteCdn}/${page}/` : prodConfig.output.publicPath,
       chunkLoadingGlobal: `webpackJsonp-${page}`
     },
-    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(prodConfig.plugins)
+    plugins: pipe(removePlugin('HtmlWebpackPlugin'))(prodConfig.plugins),
+    cache: false
   }
+
+  console.log('sui-widget-embedder -', webpackConfig)
 
   return webpack(webpackConfig)
 }
