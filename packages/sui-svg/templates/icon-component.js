@@ -8,7 +8,7 @@ const MemoAtomIcon = memo(({id, title, ...props}) => {
 
     return svg.replace(
       /<svg([^>]*)>/,
-      \`<svg$1 role="img" aria-labelledby="\${titleId}"><title id="\${titleId}">\${title}</title>\`
+      \`<svg$1 role="img" aria-labelledby="\${id}"><title id="\${id}">\${title}</title>\`
     )
   }
 
