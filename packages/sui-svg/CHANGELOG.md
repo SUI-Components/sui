@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 3.27.0 (2025-05-20)
+
+
+### Features
+
+* correct aria-labelledby attribute in AtomIcon component ([dc9d204](https://github.com/SUI-Components/sui/commit/dc9d204edca90ae828941cb39ad9f72a8379edb3))
+* enhance accessibility for AtomIcon component ([b0d69ab](https://github.com/SUI-Components/sui/commit/b0d69ab557cf73edd23a2c2cd6cfbcbb6ea44430))
+* refactor accessibility injection in AtomIcon component ([ac0fff6](https://github.com/SUI-Components/sui/commit/ac0fff6d31bdff1bf052aa923ae7186c70791bd0))
+
+
+
 # 3.26.0 (2024-11-11)
 
 
