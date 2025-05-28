@@ -2,7 +2,7 @@ import {readCookie, removeCookie, saveCookie} from '../utils/cookies.js'
 import {isClient, setConfig} from '../config.js'
 import {USER_GDPR} from '../tcf.js'
 
-const XANDR_ID_SERVER_URL = 'https://secure.adnxs.com/getuidj'
+const XANDR_ID_SERVER_URL = 'https://secure.adnxs.com/getuidj?consent=1'
 const XANDR_ID_COOKIE = 'adit-xandr-id'
 
 const USER_OPTED_OUT_XANDR_ID_VALUE = 0
@@ -36,7 +36,7 @@ export function getXandrId({gdprPrivacyValueAdvertising}) {
   return isValidXandrId ? storedXandrId : null
 }
 
-export function getRemoteXandrId() {
+function getRemoteXandrId() {
   if (!isClient) return Promise.resolve(null)
 
   return window
