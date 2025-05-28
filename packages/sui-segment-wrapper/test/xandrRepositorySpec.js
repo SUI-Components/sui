@@ -6,7 +6,7 @@ import {stubDocumentCookie, stubFetch} from './stubs.js'
 import {waitUntil} from './utils.js'
 
 describe('xandrRepository', () => {
-  const XANDR_ID_SERVER_URL = 'https://secure.adnxs.com/getuidj'
+  const XANDR_ID_SERVER_URL = 'https://secure.adnxs.com/getuidj?consent=1'
   const XANDR_ID_COOKIE = 'adit-xandr-id'
 
   const givenXandrId = 'someXandrId'
