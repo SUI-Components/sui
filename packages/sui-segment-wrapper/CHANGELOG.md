@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.20.0 (2025-05-28)
+
+
+### Bug Fixes
+
+* update xandr url query param for consent ([c502541](https://github.com/SUI-Components/sui/commit/c502541196d4c635465aaa11e52d0bb958dda967))
+
+
+
 # 4.19.0 (2025-03-26)
 
 
