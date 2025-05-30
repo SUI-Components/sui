@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.42.0 (2025-05-30)
+
+
+### Features
+
+* add flag to use chrome headless w/o sandbox ([5b9969e](https://github.com/SUI-Components/sui/commit/5b9969eccff31e7235eeafc7e55a4e8976e84094))
+
+
+
 # 8.41.0 (2024-11-14)
 
 
