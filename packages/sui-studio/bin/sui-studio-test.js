@@ -8,8 +8,9 @@ const path = require('path')
 const suiTestClientPath = require.resolve('@s-ui/test/bin/sui-test-browser')
 
 program
-  .option('-C, --ci', 'Run components tests in CLI, headless mode [deprecated]')
-  .option('-H, --headless', 'Run components tests in CLI, headless mode')
+  .option('-C, --ci', 'Run components tests in CI, headless mode [deprecated]')
+  .option('-H, --headless', 'Run components tests in CI, headless mode')
+  .option('--headless-no-sandbox', 'Run components tests in CI, headless mode without sandbox')
   .option('-W, --watch', 'Watch mode')
   .option('-T, --timeout <timeout>', 'Timeout')
   .option('--coverage', 'Create coverage', false)
@@ -18,13 +19,14 @@ program
     console.log('  Examples:')
     console.log('')
     console.log('    $ sui-studio test --headless')
+    console.log('    $ sui-studio test --headless-no-sandbox')
     console.log('    $ sui-studio test --headless --watch')
     console.log('    $ sui-studio test --help')
     console.log('')
   })
   .parse(process.argv)
 
-const {coverage, coverageInline, watch, ci, headless, timeout} = program.opts()
+const {coverage, coverageInline, watch, ci, headless, headlessNoSandbox, timeout} = program.opts()
 
 const relPath = path.relative(
   process.cwd(),
@@ -44,6 +46,7 @@ const run = async () => {
           watch && '--watch',
           ci && '--ci',
           headless && '--headless',
+          headlessNoSandbox && '--headless-no-sandbox',
           timeout && `-T ${timeout}`
         ].filter(Boolean),
         {
