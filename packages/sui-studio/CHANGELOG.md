@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.54.0 (2025-05-30)
+
+
+### Features
+
+* add headless no sandbox option ([a7f2274](https://github.com/SUI-Components/sui/commit/a7f227487b84f6901bb143b0b22aabe570e69a19))
+
+
+
 # 11.53.0 (2025-01-20)
 
 
