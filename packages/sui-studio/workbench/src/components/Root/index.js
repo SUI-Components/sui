@@ -20,16 +20,16 @@ const updateOnChange = (setState, sessionKey) => nextValue => {
   setState(nextValue)
 }
 
-export default function Root({componentID, contexts = {}, themes}) {
+export default function Root({componentID, contexts = {}, themes, themeMode, setThemeMode}) {
   const [actualContext, setActualContext] = useState(() => getFromStorage('actualContext', 'default'))
   const [actualStyle, setActualStyle] = useState(() => getFromStorage('actualStyle', 'default'))
   const [showTests, setShowTests] = useState(() => getFromStorage('showTests', 'show'))
 
-  const iframeSrc = `/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}`
+  const iframeSrc = `/?raw=true&actualStyle=${actualStyle}&actualContext=${actualContext}&mode=${themeMode}`
 
   return (
-    <div className="Root">
-      <Header componentID={componentID} iframeSrc={iframeSrc}>
+    <div className="Root" data-theme-mode={themeMode}>
+      <Header componentID={componentID} iframeSrc={iframeSrc} themeMode={themeMode} setThemeMode={setThemeMode}>
         <Select
           label="contexts"
           options={contexts}
@@ -67,5 +67,7 @@ export default function Root({componentID, contexts = {}, themes}) {
 Root.propTypes = {
   componentID: PropTypes.string,
   contexts: PropTypes.object,
-  themes: PropTypes.object
+  themes: PropTypes.object,
+  themeMode: PropTypes.string,
+  setThemeMode: PropTypes.func
 }

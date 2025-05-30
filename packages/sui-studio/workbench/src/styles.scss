@@ -1,9 +1,9 @@
+@import '../../src/styles/custom-properties';
 @import '../../src/styles/settings';
 @import '../../src/styles/default';
+@import '../../src/components/theme-mode/style';
 
 @import './components/Header/index';
 @import './components/Root/index';
 @import './components/Select/index';
 @import './components/Suite/index';
-
-@import '../../src/components/preview/style';

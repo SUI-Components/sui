@@ -16,12 +16,23 @@
   }
 
   &-test {
-    background: #fafafa;
+    background: var(--studio-c-on-surface);
+    color: var(--studio-c-surface);
     height: 100vh;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 1;
+    #mocha,
+    #mocha-stats {
+      color: inherit;
+      a {
+        color: color-mix(in srgb, var(--studio-c-surface) 70%, var(--studio-c-primary));
+      }
+      em {
+        color: inherit;
+      }
+    }
   }
 
   &-testSwitch {

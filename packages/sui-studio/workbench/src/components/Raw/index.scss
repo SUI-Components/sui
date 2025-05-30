@@ -1,9 +1,7 @@
 @import '../../../../src/styles/settings';
 
-body {
-  background-color: $bgc-main;
-}
-
 .Raw {
-  padding: 16px;
+  background-color: var(--studio-c-surface);
+  color: var(--studio-c-on-surface);
+  padding: 0;
 }

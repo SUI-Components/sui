@@ -1,27 +1,12 @@
 /* eslint-disable no-console, no-undef, import/no-webpack-loader-syntax */
-import ReactDOM from 'react-dom'
+import {render, browserHistory} from 'react-dom'
+import {Router, Route, Redirect} from '@s-ui/react-router'
 
 import {isFunction} from '../../src/components/demo/utilities.js'
 import {importGlobals} from '../../src/components/globals.js'
-import Raw from './components/Raw/index.js'
-import Root from './components/Root/index.js'
+import Workbench from './components/Workbench/index.js'
 
 import './styles.scss'
-
-const queryStringToJSON = queryString => {
-  if (queryString.indexOf('?') > -1) {
-    queryString = queryString.split('?')[1]
-  }
-  const pairs = queryString.split('&')
-  const result = {}
-  pairs.forEach(function (pair) {
-    pair = pair.split('=')
-    result[pair[0]] = decodeURIComponent(pair[1] || '')
-  })
-  return result
-}
-
-const params = queryStringToJSON(window.location.href)
 
 const importAll = requireContext => requireContext.keys().map(requireContext)
 
@@ -72,18 +57,28 @@ const importAll = requireContext => requireContext.keys().map(requireContext)
     return acc
   }, {})
 
-  const {raw} = params
-  const ComponentToRender = raw ? Raw : Root
-
   await importGlobals()
 
-  ReactDOM.render(
-    <ComponentToRender
-      componentID={__COMPONENT_ID__}
-      contexts={contexts}
-      demo={DemoComponent}
-      themes={{...themes, default: demoStyles?.default || defaultStyle}}
-      {...params}
+  render(
+    <Router
+      history={browserHistory}
+      routes={
+        <Route>
+          <Route
+            path="/"
+            component={(...props) => (
+              <Workbench
+                componentID={__COMPONENT_ID__}
+                contexts={contexts}
+                demo={DemoComponent}
+                themes={{...themes, default: demoStyles?.default || defaultStyle}}
+                {...props}
+              />
+            )}
+          />
+          <Redirect from="**" to="/" />
+        </Route>
+      }
     />,
     document.getElementById('app')
   )
