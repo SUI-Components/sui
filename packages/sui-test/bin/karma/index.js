@@ -11,6 +11,7 @@ module.exports = async ({
   coverage,
   coverageInline,
   headless,
+  headlessNoSandbox,
   ignorePattern,
   pattern,
   srcPattern,
@@ -34,6 +35,21 @@ module.exports = async ({
    */
   if (headless) {
     config.browsers = ['ChromeHeadless']
+  }
+
+  /**
+   * We check the headlessNoSandbox flag after the headless flag
+   * so we use the HeadlessNoSandbox browser if it's present
+   * instead ChromeHeadless
+   */
+  if (headlessNoSandbox) {
+    config.browsers = ['ChromeHeadlessNoSandbox']
+    config.customLaunchers = {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+      }
+    }
   }
 
   if (coverage || ci) {
