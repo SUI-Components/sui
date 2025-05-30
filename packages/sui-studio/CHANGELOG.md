@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 11.55.0 (2025-05-30)
+
+
+### Features
+
+* add theme mode to dev runner ([2fadd2e](https://github.com/SUI-Components/sui/commit/2fadd2eefe2a33ad6edf4e54e1cfe0c7d412ad4c))
+
+
+
 # 11.54.0 (2025-05-30)
 
 
