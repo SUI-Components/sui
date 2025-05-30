@@ -9,6 +9,7 @@ program
   .option('-W, --watch', 'Run in watch mode')
   .option('-C, --ci', 'Run a Firefox headless for CI testing')
   .option('-H, --headless', 'Run a headless browser for testing')
+  .option('--headless-no-sandbox', 'Run a headless browser with no sandbox for testing')
   .option('-P, --pattern <pattern>', 'Path pattern to include', 'test/**/*Spec.+(js|jsx|ts|tsx)')
   .option('-I, --ignore-pattern <ignorePattern>', 'Path pattern to ignore for testing', false)
   .option('--src-pattern <srcPattern>', 'Define the source directory', false)
@@ -24,19 +25,22 @@ program
     console.log('')
     console.log('    $ sui-test browser')
     console.log('    $ sui-test browser --headless')
+    console.log('    $ sui-test browser --headless-no-sandbox')
     console.log('    $ sui-test browser --coverage')
     console.log('    $ sui-test browser --coverage --no-coverage-inline')
     console.log('')
   })
   .parse(process.argv)
 
-const {ci, coverage, coverageInline, headless, ignorePattern, pattern, srcPattern, timeout, watch} = program.opts()
+const {ci, coverage, coverageInline, headless, headlessNoSandbox, ignorePattern, pattern, srcPattern, timeout, watch} =
+  program.opts()
 
 runner({
   ci,
   coverage,
   coverageInline,
   headless,
+  headlessNoSandbox,
   ignorePattern,
   pattern,
   srcPattern,
