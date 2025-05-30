@@ -1,10 +1,11 @@
 /* eslint import/no-webpack-loader-syntax:0 */
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import Component, * as named from 'component'
 import PropTypes from 'prop-types'
 
 import SUIContext from '@s-ui/react-context'
+import {useRouter} from '@s-ui/react-router'
 
 import {cleanDisplayName, createContextByType, removeDefaultContext} from '../../../../src/components/demo/utilities.js'
 import Preview from '../../../../src/components/preview/index.js'
@@ -23,11 +24,17 @@ export default function Raw({
   demo: DemoComponent,
   themes
 }) {
+  const {
+    location: {
+      query: {mode: themeMode = 'light'}
+    }
+  } = useRouter()
+  const rawRef = useRef()
   const [playground, setPlayground] = useState(null)
 
   const context = Object.keys(contexts).length && createContextByType(contexts, actualContext)
 
-  // check if is a normal component or it's wrapped with a React.memo method
+  // check if is a normal component, or it's wrapped with a React.memo method
   const ComponentToRender = Component.type ? Component.type : Component
 
   useEffect(() => {
@@ -36,7 +43,7 @@ export default function Raw({
   }, [componentID])
 
   return (
-    <div className="Raw">
+    <div className="Raw" ref={rawRef} data-theme-mode={themeMode}>
       <Style id="sui-studio-raw-theme">{themes[actualStyle]}</Style>
 
       <div className="Raw-center">

@@ -1,9 +1,15 @@
+@import '../../../../src/components/preview/style';
+
 .Header {
   align-items: center;
-  background: rgba(0, 132, 255, 0.8);
+  background: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--studio-c-on-surface) 60%, var(--studio-c-primary)),
+    transparent 10%
+  );
   border-radius: 8px;
   bottom: 16px;
-  color: #fff;
+  color: var(--studio-c-surface, #000);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,10 +26,11 @@
     display: flex;
     justify-content: center;
     padding: 8px 0 0 0;
+    color: var(--studio-c-surface, #000);
   }
 
   &-link {
-    color: #fff;
+    color: inherit;
     font-size: 12px;
     padding-left: 8px;
     text-decoration: none;
