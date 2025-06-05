@@ -3,7 +3,7 @@ const template = content => {
 import AtomIcon from '@s-ui/react-atom-icon'
 
 const injectAccessibility = ({id, svg, title}) => {
-  if (!title || !id) return svg.replace(/<svg([^>]*)>/, '<svg$1 aria-hidden="true">')
+  if (!title || !id) return svg.replace(/<svg([^>]*)>/, '<svg$1 aria-hidden="true" role="presentation">')
 
   return svg.replace(
     /<svg([^>]*)>/,
