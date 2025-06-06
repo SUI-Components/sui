@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.28.0 (2025-06-06)
+
+
+### Features
+
+* add role presentation to decorative svgs ([c711910](https://github.com/SUI-Components/sui/commit/c711910055707b08f3d5623906f109f30df38bb5))
+
+
+
 # 3.27.0 (2025-05-20)
 
 
