@@ -1,6 +1,6 @@
 import ClientMocker from './clientMocker'
 import ServerMocker from './serverMocker'
 
-const isNode = Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]'
+const isServer = typeof process !== 'undefined' && process.env.VITEST_MODE === 'server'
 
-export default isNode ? ServerMocker : ClientMocker
+export default isServer ? ServerMocker : ClientMocker
