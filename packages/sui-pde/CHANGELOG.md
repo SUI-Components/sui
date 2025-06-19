@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.32.0 (2025-06-19)
+
+
+### Bug Fixes
+
+* add missing event disabled flag ([b400f67](https://github.com/SUI-Components/sui/commit/b400f674693917842e0411a510f791b8a5b0b65d))
+
+
+
 # 2.31.0 (2024-11-13)
 
 
