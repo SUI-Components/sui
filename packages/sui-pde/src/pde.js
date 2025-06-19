@@ -32,9 +32,10 @@ export default class PDE {
    * @param {object} param
    * @param {string} param.name
    * @param {object} param.attributes
+   * @param {boolean} param.isEventDisabled
    */
-  decide({name, attributes, adapterId}) {
-    return this._adapter.decide({name, attributes, adapterId})
+  decide({name, attributes, isEventDisabled, adapterId}) {
+    return this._adapter.decide({name, attributes, isEventDisabled, adapterId})
   }
 
   /**
