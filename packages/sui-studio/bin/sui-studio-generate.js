@@ -49,7 +49,7 @@ if (!wordsOnlyRegex.test(category)) {
 
 const componentInPascal = toPascalCase(`${category.replace(/s$/, '')} ${component}`)
 
-const COMPONENT_DIR = `/components/${category}/${component}/`
+const COMPONENT_DIR = `/packages/components/${category}/${component}/`
 const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
 const COMPONENT_ENTRY_JS_POINT_FILE = `${COMPONENT_PATH}src/index.js`
 const COMPONENT_PACKAGE_JSON_FILE = `${COMPONENT_PATH}package.json`
