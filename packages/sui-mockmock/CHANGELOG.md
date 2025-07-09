@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.7.0 (2025-07-09)
+
+
+### Features
+
+* allow to force server mocker usage ([0ad6a78](https://github.com/SUI-Components/sui/commit/0ad6a78dfbfb650d69acae283a9161296403fc7f))
+
+
+
 # 2.6.0 (2024-09-27)
 
 
