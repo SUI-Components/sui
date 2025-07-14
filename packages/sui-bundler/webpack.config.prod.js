@@ -23,7 +23,6 @@ const minifyJs = require('./shared/minify-js.js')
 
 const CWD = process.cwd()
 const PUBLIC_PATH = process.env.CDN || config.cdn || '/'
-const PWD = process.env.PWD ?? ''
 
 const filename = config.onlyHash ? '[contenthash:8].js' : '[name].[contenthash:8].js'
 
@@ -59,7 +58,7 @@ const webpackConfig = {
   output: {
     chunkFilename: filename,
     filename,
-    path: path.resolve(PWD, 'public'),
+    path: path.resolve(CWD, 'build'),
     publicPath: PUBLIC_PATH
   },
   optimization: {
