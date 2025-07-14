@@ -58,7 +58,7 @@ const webpackConfig = {
   output: {
     chunkFilename: filename,
     filename,
-    path: path.resolve(CWD, 'build'),
+    path: path.resolve(CWD, 'public'),
     publicPath: PUBLIC_PATH
   },
   optimization: {
