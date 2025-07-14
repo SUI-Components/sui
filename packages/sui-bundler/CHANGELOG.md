@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.74.0 (2025-07-14)
+
+
+### Features
+
+* fix typo ([f6e0ac7](https://github.com/SUI-Components/sui/commit/f6e0ac72e90ead5cf65ee23e753c3e91ed65d5bc))
+* use cwd instead of pwd to proper monorepo support ([cb05103](https://github.com/SUI-Components/sui/commit/cb05103fd0596ca39d90d5fa23dade9b9018839a))
+
+
+
 # 9.73.0 (2025-04-23)
 
 
