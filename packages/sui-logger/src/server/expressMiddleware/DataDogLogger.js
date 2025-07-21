@@ -69,8 +69,10 @@ export class DataDogLogger extends Writable {
   }
 }
 
-export const getDataDogStream = ({globalTags = {}, routes} = {}) => {
+export const getDataDogStream = ({host, port, globalTags = {}, routes} = {}) => {
   const client = new StatsD({
+    host,
+    port,
     errorHandler: error => {
       console.log('Socket errors caught here: ', error) // eslint-disable-line no-console
     },
