@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.7.0 (2025-07-21)
+
+
+### Features
+
+* add host and port for datadog ([7a254f1](https://github.com/SUI-Components/sui/commit/7a254f1db39846c77686e2f8285ad156880f8e0c))
+
+
+
 # 1.6.0 (2024-12-16)
 
 
