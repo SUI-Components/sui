@@ -18,6 +18,7 @@ program
   .option('-S, --scope <scope>', 'add scope for this component')
   .option('-W, --swc', 'Use the new SWC compiler', false)
   .option('-J, --jest', 'Generate jest tests', false)
+  .option('-D, --component-dir', 'Path where the component will be generated')
   .on('--help', () => {
     console.log('  Examples:')
     console.log('')
@@ -33,7 +34,7 @@ program
 
 const BASE_DIR = process.cwd()
 const [category, component] = program.args
-const {context, scope, prefix = 'sui', swc, jest} = program.opts()
+const {context, componentDir, scope, prefix = 'sui', swc, jest} = program.opts()
 
 if (!component) showError('component must be defined')
 if (!category) showError('category must be defined')
@@ -49,7 +50,7 @@ if (!wordsOnlyRegex.test(category)) {
 
 const componentInPascal = toPascalCase(`${category.replace(/s$/, '')} ${component}`)
 
-const COMPONENT_DIR = `/components/${category}/${component}/`
+const COMPONENT_DIR = `${componentDir}/${category}/${component}/`
 const COMPONENT_PATH = `${BASE_DIR}${COMPONENT_DIR}`
 const COMPONENT_ENTRY_JS_POINT_FILE = `${COMPONENT_PATH}src/index.js`
 const COMPONENT_PACKAGE_JSON_FILE = `${COMPONENT_PATH}package.json`
@@ -300,7 +301,7 @@ return (<${componentInPascal} />)
 
   writeFile(
     COMPONENT_PLAYGROUND_FILE,
-    `import ${componentInPascal} from 'components/${category}/${component}/src'
+    `import ${componentInPascal} from 'packages/components/${category}/${component}/src'
 export default () => <${componentInPascal} />
 `
   ),
