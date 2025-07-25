@@ -609,6 +609,34 @@ describe('Segment Wrapper', function () {
       expect(context.integrations).to.deep.include(INTEGRATIONS_WHEN_NO_CONSENTS)
     })
 
+    it('should grant Google consents properties if user consents are accepted', async () => {
+      await simulateUserAcceptConsents()
+      await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
+
+      const {context} = getDataFromLastTrack()
+
+      expect(context.google_consents).to.include({
+        analytics_storage: 'GRANTED',
+        ad_user_data: 'GRANTED',
+        ad_personalization: 'GRANTED',
+        ad_storage: 'GRANTED'
+      })
+    })
+
+    it('should deny Google consents properties if user consents are declined', async () => {
+      await simulateUserDeclinedConsents()
+      await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
+
+      const {context} = getDataFromLastTrack()
+
+      expect(context.google_consents).to.include({
+        analytics_storage: 'DENIED',
+        ad_user_data: 'DENIED',
+        ad_personalization: 'DENIED',
+        ad_storage: 'DENIED'
+      })
+    })
+
     describe('for recurrent users', () => {
       let cookiesStub
 
@@ -767,6 +795,12 @@ describe('Segment Wrapper', function () {
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined',
         analytics_storage: 'DENIED',
+        google_consents: {
+          analytics_storage: 'DENIED',
+          ad_user_data: 'DENIED',
+          ad_personalization: 'DENIED',
+          ad_storage: 'DENIED'
+        },
         context: {
           integrations
         },

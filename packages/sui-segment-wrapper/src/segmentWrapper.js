@@ -130,6 +130,7 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
+  const googleConsentValue = isGdprAccepted ? 'GRANTED' : 'DENIED'
 
   if (!isGdprAccepted) {
     context.integrations = {
@@ -144,14 +145,20 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     ...context,
     ...(!isGdprAccepted && {ip: '0.0.0.0'}),
     ...getExternalIds({context, xandrId}),
+    analytics_storage: getConsentState(),
+    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
     gdpr_privacy: gdprPrivacyValueAnalytics,
     gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
-    analytics_storage: getConsentState(),
+    google_consents: {
+      analytics_storage: googleConsentValue,
+      ad_user_data: googleConsentValue,
+      ad_personalization: googleConsentValue,
+      ad_storage: googleConsentValue
+    },
     integrations: {
       ...context.integrations,
       ...integrations
-    },
-    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`
+    }
   }
 }
 
