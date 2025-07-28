@@ -214,10 +214,16 @@ const track = (event, properties, context = {}, callback) =>
  * @param {function} [callback] A function executed after a short timeout, giving the browser time to make outbound requests first.
  * @returns {Promise}
  */
-const identify = async (userId, traits, options, callback) => {
+const identify = async (userIdParam, traits, options, callback) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
 
+  const prefix = getConfig('userIdPrefix') || ''
+  const userId =
+    typeof userIdParam !== 'string' || !userIdParam.startsWith(prefix) ? `${prefix}${userIdParam}` : userIdParam
+
   setGoogleUserId(userId)
+
+  console.log(userId, checkAnalyticsGdprIsAccepted(gdprPrivacyValue) ? traits : {}, options, callback)
 
   return window.analytics.identify(
     userId,

@@ -435,6 +435,42 @@ describe('Segment Wrapper', function () {
   describe('when the identify event is called', () => {
     const DEFAULT_SEGMENT_CALLBACK_TIMEOUT = 350
 
+    afterEach(() => {
+      window.__mpi.segmentWrapper.userIdPrefix = undefined
+    })
+
+    it('should use prefix', async function () {
+      await simulateUserAcceptConsents()
+
+      window.__mpi.segmentWrapper.userIdPrefix = 'sdrn:'
+
+      const spy = sinon.stub()
+
+      await suiAnalytics.identify('10', {}, {}, spy)
+
+      await waitUntil(() => spy.callCount, {
+        timeout: DEFAULT_SEGMENT_CALLBACK_TIMEOUT
+      })
+
+      expect(window.analytics.identify.firstCall.firstArg).to.equal('sdrn:10')
+    })
+
+    it('should not use prefix if it is the same', async function () {
+      await simulateUserAcceptConsents()
+
+      window.__mpi.segmentWrapper.userIdPrefix = 'sdrn:'
+
+      const spy = sinon.stub()
+
+      await suiAnalytics.identify('sdrn:10', {}, {}, spy)
+
+      await waitUntil(() => spy.callCount, {
+        timeout: DEFAULT_SEGMENT_CALLBACK_TIMEOUT
+      })
+
+      expect(window.analytics.identify.firstCall.firstArg).to.equal('sdrn:10')
+    })
+
     it('should call sdk identify of users that accepts consents', async function () {
       await simulateUserAcceptConsents()
 
