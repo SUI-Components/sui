@@ -223,8 +223,6 @@ const identify = async (userIdParam, traits, options, callback) => {
 
   setGoogleUserId(userId)
 
-  console.log(userId, checkAnalyticsGdprIsAccepted(gdprPrivacyValue) ? traits : {}, options, callback)
-
   return window.analytics.identify(
     userId,
     checkAnalyticsGdprIsAccepted(gdprPrivacyValue) ? traits : {},
