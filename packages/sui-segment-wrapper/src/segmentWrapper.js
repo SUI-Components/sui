@@ -218,8 +218,9 @@ const identify = async (userIdParam, traits, options, callback) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
 
   const prefix = getConfig('userIdPrefix') || ''
-  const userId =
-    typeof userIdParam !== 'string' || !userIdParam.startsWith(prefix) ? `${prefix}${userIdParam}` : userIdParam
+  const isPrefixNeeded = !!prefix && (typeof userIdParam !== 'string' || !userIdParam.startsWith(prefix))
+
+  const userId = isPrefixNeeded ? `${prefix}${userIdParam}` : userIdParam
 
   setGoogleUserId(userId)
 

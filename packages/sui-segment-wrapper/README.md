@@ -161,6 +161,7 @@ You could put a special config in a the `window.__mpi` to change some behaviour 
 - `hashedUserEmail`: _(optional)_ If set and not `universalId` is set this value will be used for the Visitor API and other services.
 - `userEmail`: _(optional)_ If set and not `universalId` is available, this value will be hashed with SHA-256 and used for the Visitor API and other services.
 - `isUserTraitsEnabled`: _(optional)_ If set context traits will be populated with all user traits.
+- `userIdPrefix`: _(optional)_ If set, the user id will be prefixed with this string for identify events.
 
 Example:
 
