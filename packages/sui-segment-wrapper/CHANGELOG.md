@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 4.21.0 (2025-07-29)
+
+
+### Features
+
+* add prefix check ([bf53997](https://github.com/SUI-Components/sui/commit/bf539975c374983506d9cf8162ab934eda817641))
+* add userIdPrefix prop ([a9f3d8d](https://github.com/SUI-Components/sui/commit/a9f3d8d84d0ca8fd4bd4083bcde0accebbcffc9d))
+* remove log ([c532ef4](https://github.com/SUI-Components/sui/commit/c532ef442c0c64009ca7d72f719de65a8159dfe9))
+
+
+
 # 4.20.0 (2025-05-28)
 
 
