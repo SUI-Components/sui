@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.22.0 (2025-07-29)
+
+
+### Features
+
+* fix typo ([2c8207a](https://github.com/SUI-Components/sui/commit/2c8207ad41b3aa0fcd9148ebdde52b0f1e8d7917))
+* update userid parsing ([b965201](https://github.com/SUI-Components/sui/commit/b9652012372b24f9cfaa89dbedd6a4ac5cd8fc00))
+
+
+
 # 4.21.0 (2025-07-29)
 
 
