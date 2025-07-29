@@ -23,6 +23,20 @@ export const INTEGRATIONS_WHEN_NO_CONSENTS_CMP_SUBMITTED = {
   All: true
 }
 
+const getUserId = userId => {
+  const prefix = getConfig('userIdPrefix')
+
+  if (!prefix) {
+    return userId
+  }
+
+  if (typeof userId === 'number' || (typeof userId === 'string' && !userId.startsWith(prefix))) {
+    return `${prefix}${userId}`
+  }
+
+  return userId
+}
+
 /**
  * Get default properties using the constant and the window.__mpi object if available
  * @returns {{[key:string]: any}} Default properties to attach to track
@@ -208,7 +222,7 @@ const track = (event, properties, context = {}, callback) =>
 
 /**
  * Associate your users and their actions to a recognizable userId and traits.
- * @param {string} userId Id to identify the user.
+ * @param {string} userIdParam Id to identify the user.
  * @param {object} traits A dictionary of traits you know about the user, like their email or name.
  * @param {object} [options] A dictionary of options.
  * @param {function} [callback] A function executed after a short timeout, giving the browser time to make outbound requests first.
@@ -217,10 +231,7 @@ const track = (event, properties, context = {}, callback) =>
 const identify = async (userIdParam, traits, options, callback) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
 
-  const prefix = getConfig('userIdPrefix') || ''
-  const isPrefixNeeded = !!prefix && (typeof userIdParam !== 'string' || !userIdParam.startsWith(prefix))
-
-  const userId = isPrefixNeeded ? `${prefix}${userIdParam}` : userIdParam
+  const userId = getUserId(userIdParam)
 
   setGoogleUserId(userId)
 

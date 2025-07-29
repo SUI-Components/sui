@@ -455,6 +455,22 @@ describe('Segment Wrapper', function () {
       expect(window.analytics.identify.firstCall.firstArg).to.equal('sdrn:10')
     })
 
+    it('should not use prefix if id is not defined', async function () {
+      await simulateUserAcceptConsents()
+
+      window.__mpi.segmentWrapper.userIdPrefix = 'sdrn:'
+
+      const spy = sinon.stub()
+
+      await suiAnalytics.identify(undefined, {}, {}, spy)
+
+      await waitUntil(() => spy.callCount, {
+        timeout: DEFAULT_SEGMENT_CALLBACK_TIMEOUT
+      })
+
+      expect(window.analytics.identify.firstCall.firstArg).to.equal(undefined)
+    })
+
     it('should not use prefix if it is the same', async function () {
       await simulateUserAcceptConsents()
 
