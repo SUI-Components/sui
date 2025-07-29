@@ -451,7 +451,7 @@ describe('Segment Wrapper', function () {
       await waitUntil(() => spy.callCount, {
         timeout: DEFAULT_SEGMENT_CALLBACK_TIMEOUT
       })
-      º
+
       expect(window.analytics.identify.firstCall.firstArg).to.equal('sdrn:10')
     })
 
