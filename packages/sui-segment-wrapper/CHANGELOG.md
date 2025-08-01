@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.23.0 (2025-08-01)
+
+
+### Features
+
+* adapt logic to specific user consents ([7eb6439](https://github.com/SUI-Components/sui/commit/7eb64391b9139ca8cd9cdf29d120e85e6c70f5c4))
+* send google consents on each event ([f70ef00](https://github.com/SUI-Components/sui/commit/f70ef005b80ef7ca515b15076d22ba1e697abab1))
+
+
+
 # 4.22.0 (2025-07-29)
 
 
