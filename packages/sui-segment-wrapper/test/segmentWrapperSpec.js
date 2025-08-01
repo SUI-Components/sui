@@ -610,7 +610,7 @@ describe('Segment Wrapper', function () {
       expect(context.integrations).to.deep.include(INTEGRATIONS_WHEN_NO_CONSENTS)
     })
 
-    it.only('should grant Google Analytics consents properties if user analytics consents are accepted', async () => {
+    it('should grant Google Analytics consents properties if user analytics consents are accepted', async () => {
       await simulateUserAcceptAnalyticsConsents()
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
 
@@ -624,7 +624,7 @@ describe('Segment Wrapper', function () {
       })
     })
 
-    it.only('should deny Google Analytics consents properties if user analytics consents are declined', async () => {
+    it('should deny Google Analytics consents properties if user analytics consents are declined', async () => {
       await simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents()
 
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
