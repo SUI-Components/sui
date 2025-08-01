@@ -26,6 +26,7 @@ import {
   simulateUserAcceptAdvertisingConsents,
   simulateUserAcceptAnalyticsConsents,
   simulateUserAcceptConsents,
+  simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents,
   simulateUserDeclinedConsents
 } from './tcf.js'
 import {getDataFromLastTrack, waitUntil} from './utils.js'
@@ -609,31 +610,32 @@ describe('Segment Wrapper', function () {
       expect(context.integrations).to.deep.include(INTEGRATIONS_WHEN_NO_CONSENTS)
     })
 
-    it('should grant Google consents properties if user consents are accepted', async () => {
-      await simulateUserAcceptConsents()
+    it.only('should grant Google Analytics consents properties if user analytics consents are accepted', async () => {
+      await simulateUserAcceptAnalyticsConsents()
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
 
       const {context} = getDataFromLastTrack()
 
       expect(context.google_consents).to.include({
         analytics_storage: 'GRANTED',
-        ad_user_data: 'GRANTED',
-        ad_personalization: 'GRANTED',
-        ad_storage: 'GRANTED'
+        ad_user_data: 'DENIED',
+        ad_personalization: 'DENIED',
+        ad_storage: 'DENIED'
       })
     })
 
-    it('should deny Google consents properties if user consents are declined', async () => {
-      await simulateUserDeclinedConsents()
+    it.only('should deny Google Analytics consents properties if user analytics consents are declined', async () => {
+      await simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents()
+
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
 
       const {context} = getDataFromLastTrack()
 
       expect(context.google_consents).to.include({
         analytics_storage: 'DENIED',
-        ad_user_data: 'DENIED',
-        ad_personalization: 'DENIED',
-        ad_storage: 'DENIED'
+        ad_user_data: 'GRANTED',
+        ad_personalization: 'GRANTED',
+        ad_storage: 'GRANTED'
       })
     })
 
