@@ -9,7 +9,7 @@ import {
 } from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
-import {checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
+import {USER_GDPR, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -144,6 +144,8 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
+  const analyticsConsentValue = gdprPrivacyValueAnalytics === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED'
+  const advertisingConsentValue = gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED'
 
   if (!isGdprAccepted) {
     context.integrations = {
@@ -158,14 +160,20 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     ...context,
     ...(!isGdprAccepted && {ip: '0.0.0.0'}),
     ...getExternalIds({context, xandrId}),
+    analytics_storage: getConsentState(),
+    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
     gdpr_privacy: gdprPrivacyValueAnalytics,
     gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
-    analytics_storage: getConsentState(),
+    google_consents: {
+      analytics_storage: analyticsConsentValue,
+      ad_user_data: advertisingConsentValue,
+      ad_personalization: advertisingConsentValue,
+      ad_storage: advertisingConsentValue
+    },
     integrations: {
       ...context.integrations,
       ...integrations
-    },
-    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`
+    }
   }
 }
 
