@@ -1,6 +1,7 @@
 import './utils/patchAnalytics.js'
 
 import {campaignContext} from './middlewares/source/campaignContext.js'
+import {pageData} from './middlewares/source/pageData.js'
 import {defaultContextProperties} from './middlewares/source/defaultContextProperties.js'
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
@@ -24,11 +25,17 @@ try {
 
 // Initialize middlewares
 const addMiddlewares = () => {
+  const experimentalPageDataMiddleware = getConfig('experimentalPageDataMiddleware')
+
   window.analytics.addSourceMiddleware(userTraits)
   window.analytics.addSourceMiddleware(defaultContextProperties)
   window.analytics.addSourceMiddleware(campaignContext)
   window.analytics.addSourceMiddleware(userScreenInfo)
   window.analytics.addSourceMiddleware(pageReferrer)
+
+  if (experimentalPageDataMiddleware) {
+    window.analytics.addSourceMiddleware(pageData)
+  }
 }
 
 if (isClient && window.analytics) {
