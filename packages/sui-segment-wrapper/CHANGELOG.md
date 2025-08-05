@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.24.0 (2025-08-05)
+
+
+### Features
+
+* add pageData middleware ([dd3a6c3](https://github.com/SUI-Components/sui/commit/dd3a6c319c0560c5ae6d2d4b44e17e920850a80d))
+
+
+
 # 4.23.0 (2025-08-01)
 
 
