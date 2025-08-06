@@ -9,6 +9,8 @@ const FIELDS = {
   sessionId: 'session_id'
 }
 
+export const DEFAULT_DATA_LAYER_NAME = 'dataLayer'
+
 const CONSENT_STATES = {
   granted: 'GRANTED',
   denied: 'DENIED'
@@ -49,11 +51,12 @@ const loadScript = async src =>
 
 export const loadGoogleAnalytics = async () => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+  const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
 
   // Check we have the needed config to load the script
   if (!googleAnalyticsMeasurementId) return Promise.resolve(false)
   // Create the `gtag` script
-  const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`
+  const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}&l=${dataLayerName}`
   // Load it and retrieve the `clientId` from Google
   return loadScript(gtagScript)
 }

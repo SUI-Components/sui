@@ -6,7 +6,7 @@ import {defaultContextProperties} from './middlewares/source/defaultContextPrope
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
-import {getCampaignDetails, loadGoogleAnalytics} from './repositories/googleRepository.js'
+import {getCampaignDetails, loadGoogleAnalytics, DEFAULT_DATA_LAYER_NAME} from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
@@ -41,15 +41,16 @@ const addMiddlewares = () => {
 if (isClient && window.analytics) {
   // Initialize Google Analtyics if needed
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+  const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
 
   if (googleAnalyticsMeasurementId) {
     const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
 
-    window.dataLayer = window.dataLayer || []
+    window[dataLayerName] = window[dataLayerName] || []
     window.gtag =
       window.gtag ||
       function gtag() {
-        window.dataLayer.push(arguments)
+        window[dataLayerName].push(arguments)
       }
 
     window.gtag('js', new Date())
