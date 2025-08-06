@@ -105,6 +105,38 @@ describe('pageDataMiddleware', () => {
       })
     })
 
+    it('should add page_name_origin and not override page_type when previous "Viewed" event occurred and custom page_type is sent', () => {
+      const viewedPayload = fakePayloadFactory({
+        event: 'Page Viewed',
+        properties: {
+          page_name: 'search-results',
+          page_type: 'search'
+        }
+      })
+
+      pageData({payload: viewedPayload, next: spy})
+
+      const clickPayload = fakePayloadFactory({
+        event: 'Button Clicked',
+        properties: {
+          button_name: 'filter',
+          page_type: 'detail'
+        }
+      })
+
+      pageData({payload: clickPayload, next: spy})
+
+      expect(spy.calledTwice).to.be.true
+
+      const modifiedPayload = spy.secondCall.firstArg
+      expect(modifiedPayload.obj.event).to.equal('Button Clicked')
+      expect(modifiedPayload.obj.properties).to.deep.equal({
+        button_name: 'filter',
+        page_name_origin: 'search-results',
+        page_type: 'detail'
+      })
+    })
+
     it('should preserve existing properties when adding page origin data', () => {
       const viewedPayload = fakePayloadFactory({
         event: 'Product Viewed',

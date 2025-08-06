@@ -25,7 +25,7 @@ export const createPageDataMiddleware = () => {
         properties: {
           ...obj.properties,
           page_name_origin: last.name,
-          page_type: last.type
+          page_type: obj.properties?.page_type || last.type
         }
       }
     })
