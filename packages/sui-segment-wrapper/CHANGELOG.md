@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.25.0 (2025-08-06)
+
+
+### Features
+
+* minor update in page data middleware to allow override of page t ([ff11ef5](https://github.com/SUI-Components/sui/commit/ff11ef59dfa82e0443863d30e6ff2af3f98ff661))
+
+
+
 # 4.24.0 (2025-08-05)
 
 
