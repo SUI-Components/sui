@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.26.0 (2025-08-13)
+
+
+### Features
+
+* add data layer name configuration ([735b93e](https://github.com/SUI-Components/sui/commit/735b93e2ff713d67e5ee339180b2c4a4f5b0d350))
+
+
+
 # 4.25.0 (2025-08-06)
 
 
