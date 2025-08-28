@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.27.0 (2025-08-28)
+
+
+### Features
+
+* remove expected error ([a30e361](https://github.com/SUI-Components/sui/commit/a30e3611c187c237a12c0ca98632db72ea03b2c3))
+
+
+
 # 4.26.0 (2025-08-13)
 
 
