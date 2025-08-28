@@ -144,7 +144,6 @@ export const getConsentState = () => {
     // Detected an issue getting the consent state when user rejects the consent
     // due to a bug in Google Tag Manager
     // After that first rejection the code works as expected
-    console.error('Error getting consent state', error)
     consentValue = CONSENT_STATE_DENIED_VALUE
   }
 
