@@ -2,7 +2,7 @@ import {expect} from 'chai'
 
 import {getCampaignDetails} from '../../src/repositories/googleRepository.js'
 describe('GoogleRepository', () => {
-  let initialUseUtm = null
+  let initialUseUtm
 
   function setupLocation(queryParams) {
     const url = `/?${queryParams}`
@@ -10,11 +10,11 @@ describe('GoogleRepository', () => {
   }
 
   function setupUseUtm(value) {
-    window.__mpi.segmentWrapper.useUtm = value
+    window.__mpi.segmentWrapper.trackingTagsType = value
   }
 
   beforeEach(() => {
-    initialUseUtm = window.__mpi?.segmentWrapper?.useUtm ?? false
+    initialUseUtm = window.__mpi?.segmentWrapper?.trackingTagsType
   })
 
   afterEach(() => {
@@ -83,7 +83,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should get campaign details with all details from UTM', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation(
       'utm_medium=em&utm_source=source_type&utm_campaign=campaign_name&utm_content=content_type&utm_term=term_type'
     )
@@ -98,7 +98,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should get medium without transformation from UTM', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation(
       'utm_medium=custom_medium&utm_source=source_type&utm_campaign=campaign_name&utm_content=content_type&utm_term=term_type'
     )
@@ -109,7 +109,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should get campaign id from UTM', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation(
       'utm_medium=em&utm_source=source_type&utm_campaign=campaign_name&utm_id=campaign_id&utm_content=content_type&utm_term=term_type'
     )
@@ -120,7 +120,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should return null when no UTM mandatory params are present', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation('')
 
     const details = await getCampaignDetails()
@@ -129,7 +129,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should fallback to stc if utm_medium is empty', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation('stc=stc_medium-stc_source-stc_campaign&utm_source=utm_source&utm_campaign=utm_campaign')
 
     const details = await getCampaignDetails({needsTransformation: false})
@@ -140,7 +140,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should fallback to stc if utm_source is empty', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation('stc=stc_medium-stc_source-stc_campaign&utm_medium=utm_medium&utm_campaign=utm_campaign')
 
     const details = await getCampaignDetails({needsTransformation: false})
@@ -151,7 +151,7 @@ describe('GoogleRepository', () => {
   })
 
   it('should fallback to stc if utm_campaign is empty', async () => {
-    setupUseUtm(true)
+    setupUseUtm('utm')
     setupLocation('stc=stc_medium-stc_source-stc_campaign&utm_medium=utm_medium&utm_source=utm_source')
 
     const details = await getCampaignDetails({needsTransformation: false})

@@ -110,6 +110,11 @@ const getGoogleField = async field => {
   })
 }
 
+export const trackingTagsTypes = {
+  STC: 'stc',
+  UTM: 'utm'
+}
+
 export const getCampaignDetails = ({needsTransformation = true} = {}) => {
   const {medium, source, campaign, content, term} = readQueryParams()
 
@@ -137,7 +142,7 @@ function readQueryParams() {
   const search = utils.getActualQueryString()
   const searchParams = new URLSearchParams(search)
 
-  return getConfig('useUtm') ? readFromUtm(searchParams) : readFromStc(searchParams)
+  return getConfig('trackingTagsType') === trackingTagsTypes.UTM ? readFromUtm(searchParams) : readFromStc(searchParams)
 }
 
 function readFromStc(searchParams) {
