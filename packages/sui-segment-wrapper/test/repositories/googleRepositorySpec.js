@@ -2,7 +2,7 @@ import {expect} from 'chai'
 
 import {getCampaignDetails} from '../../src/repositories/googleRepository.js'
 describe('GoogleRepository', () => {
-  let initialUseUtm
+  let initialTrackingTagsType
 
   function setupLocation(queryParams) {
     const url = `/?${queryParams}`
@@ -14,11 +14,11 @@ describe('GoogleRepository', () => {
   }
 
   beforeEach(() => {
-    initialUseUtm = window.__mpi?.segmentWrapper?.trackingTagsType
+    initialTrackingTagsType = window.__mpi?.segmentWrapper?.trackingTagsType
   })
 
   afterEach(() => {
-    setupUseUtm(initialUseUtm)
+    setupUseUtm(initialTrackingTagsType)
   })
 
   it('should get campaign details with all details from STC', async () => {
