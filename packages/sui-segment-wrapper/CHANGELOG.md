@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 4.28.0 (2025-09-01)
+
+
+### Features
+
+* Refactor segment-wrapper to allow UTM tags ([351a90f](https://github.com/SUI-Components/sui/commit/351a90f856d27e72d348a46d7ee1bf462b1aa5c7))
+* Refactor tracking types ([657860b](https://github.com/SUI-Components/sui/commit/657860b29460fc0c6c7c72346e884de482ae7745))
+* rename variable ([aa8e053](https://github.com/SUI-Components/sui/commit/aa8e05342643dc46b930d5987444ac631ccac008))
+
+
+
 # 4.27.0 (2025-08-28)
 
 
