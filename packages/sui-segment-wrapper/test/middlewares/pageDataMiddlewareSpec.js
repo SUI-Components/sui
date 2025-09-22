@@ -4,8 +4,9 @@ import sinon from 'sinon'
 import {createPageDataMiddleware} from '../../src/middlewares/source/pageData.js'
 
 describe('pageDataMiddleware', () => {
-  const fakePayloadFactory = ({event, properties = {}}) => ({
+  const fakePayloadFactory = ({type = 'track', event, properties = {}}) => ({
     obj: {
+      type,
       event,
       properties
     }
