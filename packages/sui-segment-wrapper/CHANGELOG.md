@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.29.0 (2025-09-22)
+
+
+### Bug Fixes
+
+* page data ([a18c0a6](https://github.com/SUI-Components/sui/commit/a18c0a683160e4319e88b4c9a4120b87546f765f))
+
+
+
 # 4.28.0 (2025-09-01)
 
 
