@@ -185,7 +185,9 @@ export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
 export const getGoogleSessionId = async () => {
   const sessionId = await getGoogleField(FIELDS.sessionId)
 
-  triggerGoogleAnalyticsInitEvent(sessionId)
+  if (sessionId) {
+    triggerGoogleAnalyticsInitEvent(sessionId)
+  }
 
   return sessionId
 }
