@@ -77,6 +77,8 @@ const triggerGoogleAnalyticsInitEvent = sessionId => {
   const eventPrefix = `ga_event_${eventName}_`
   const eventKey = `${eventPrefix}${sessionId}`
 
+  if (typeof window.gtag === 'undefined') return
+
   // Check if the event has already been sent in this session.
   if (!localStorage.getItem(eventKey)) {
     // If not, send it.
