@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.30.0 (2025-09-26)
+
+
+### Bug Fixes
+
+* return undefined if there is no gtag ([c395b03](https://github.com/SUI-Components/sui/commit/c395b0348dca446cd5a5bf41b0b1893be2ecaff5))
+
+
+
 # 4.29.0 (2025-09-22)
 
 
