@@ -5,6 +5,7 @@ const program = require('commander')
 const {exec} = require('child_process')
 const {cp} = require('fs/promises')
 const path = require('path')
+const https = require('https')
 const fs = require('fs')
 const express = require('express')
 const webpack = require('webpack')
@@ -38,6 +39,17 @@ program
     []
   )
   .parse(process.argv)
+
+const loadConfig = () => {
+  try {
+    const current = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'))
+    const {config = {}} = current
+
+    return config['sui-ssr'] || {}
+  } catch (e) {
+    return {}
+  }
+}
 
 const compile = (name, compiler) => {
   return new Promise((resolve, reject) => {
@@ -81,11 +93,13 @@ const start = async ({packagesToLink, linkAll}) => {
   clearConsole()
 
   const start = performance.now()
+  const ssr = loadConfig()
   const {WEBPACK_PORT = 8080, PORT = 3000, HOST = '0.0.0.0', CDN = 'http://localhost'} = process.env
   const port = await choosePort(PORT)
   const webpackPort = await choosePort(WEBPACK_PORT)
   const urls = prepareUrls('http', HOST, port)
   const cdn = `${CDN}:${webpackPort}/`
+  const isSSLEnabled = Boolean(ssr.SSL?.development?.key) && Boolean(ssr.SSL?.development?.crt)
 
   process.env.PORT = port
   process.env.CDN = cdn
@@ -134,7 +148,16 @@ const start = async ({packagesToLink, linkAll}) => {
   )
   app.use(webpackHotMiddleware(clientCompiler))
 
-  app.listen(webpackPort)
+  if (isSSLEnabled) {
+    const options = {
+      key: fs.readFileSync(path.join(process.cwd(), ssr.SSL.development.key)),
+      cert: fs.readFileSync(path.join(process.cwd(), ssr.SSL.development.crt))
+    }
+
+    https.createServer(options, app).listen(webpackPort)
+  } else {
+    app.listen(webpackPort)
+  }
 
   serverCompiler.watch(
     {
