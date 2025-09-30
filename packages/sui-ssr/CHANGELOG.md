@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.36.0 (2025-09-30)
+
+
+### Features
+
+* allow setting up cdn for ssr dev ([8e4c318](https://github.com/SUI-Components/sui/commit/8e4c3180de0a65c7ef1b14db98e5b7ee148813da))
+
+
+
 # 8.35.0 (2025-04-15)
 
 
