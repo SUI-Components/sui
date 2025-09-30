@@ -81,11 +81,11 @@ const start = async ({packagesToLink, linkAll}) => {
   clearConsole()
 
   const start = performance.now()
-  const {WEBPACK_PORT = 8080, PORT = 3000, HOST = '0.0.0.0'} = process.env
+  const {WEBPACK_PORT = 8080, PORT = 3000, HOST = '0.0.0.0', CDN = 'http://localhost'} = process.env
   const port = await choosePort(PORT)
   const webpackPort = await choosePort(WEBPACK_PORT)
   const urls = prepareUrls('http', HOST, port)
-  const cdn = `http://localhost:${webpackPort}/`
+  const cdn = `${CDN}:${webpackPort}/`
 
   process.env.PORT = port
   process.env.CDN = cdn
