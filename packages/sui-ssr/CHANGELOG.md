@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.37.0 (2025-09-30)
+
+
+### Features
+
+* add webpack ssl support ([7daa8f0](https://github.com/SUI-Components/sui/commit/7daa8f0f84404c7512a7128c751400b0eccc9b41))
+
+
+
 # 8.36.0 (2025-09-30)
 
 
