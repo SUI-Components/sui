@@ -9,7 +9,7 @@ const METHODS_BY_FACTORY_TYPES = {
   NAMED_SINGLE_FACTORY: ({factory}) => factory
 }
 
-export default ({useCases, config, logger, pde}) =>
+export default ({useCases, config, logger, pde, cookieHeader}) =>
   class EntryPoint {
     subscribers = {}
 
@@ -20,6 +20,7 @@ export default ({useCases, config, logger, pde}) =>
       this._useCases = useCases
       this._logger = params.logger || logger || {}
       this._pde = params.pde || pde || {}
+      this._cookieHeader = params.cookieHeader || cookieHeader || null
     }
 
     /**
@@ -72,7 +73,8 @@ export default ({useCases, config, logger, pde}) =>
                   getMethod(factory)({
                     config: this._config,
                     logger: this._logger,
-                    pde: this._pde
+                    pde: this._pde,
+                    cookieHeader: this._cookieHeader
                   }).execute(params)
                 )
                 .then(result => {
