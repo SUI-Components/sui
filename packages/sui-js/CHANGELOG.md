@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.38.0 (2025-10-01)
+
+
+### Features
+
+* add options to remove ([4e56766](https://github.com/SUI-Components/sui/commit/4e5676657f0bf75ed07f43550b2bce58f42fca76))
+
+
+
 # 2.37.0 (2024-11-14)
 
 
