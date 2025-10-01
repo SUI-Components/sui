@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.20.0 (2025-10-01)
+
+
+### Features
+
+* add cookieHeader property ([ad6a13d](https://github.com/SUI-Components/sui/commit/ad6a13d534b292f77c0d1714fa77636552c72531))
+
+
+
 # 2.19.0 (2024-08-30)
 
 
