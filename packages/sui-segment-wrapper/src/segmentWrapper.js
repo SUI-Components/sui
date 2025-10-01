@@ -57,14 +57,14 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   let sessionId
   let clientId
 
-  if (isGdprAccepted) {
-    try {
-      ;[marketingCloudVisitorId, sessionId] = await Promise.all([getAdobeMCVisitorID(), getGoogleSessionId()])
-
-      clientId = await getGoogleClientId()
-    } catch (error) {
-      console.error(error)
+  try {
+    if (isGdprAccepted) {
+      marketingCloudVisitorId = await getAdobeMCVisitorID()
     }
+    sessionId = await getGoogleSessionId()
+    clientId = await getGoogleClientId()
+  } catch (error) {
+    console.error(error)
   }
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
