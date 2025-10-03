@@ -20,6 +20,6 @@
     "@s-ui/js-compiler": "1"
   },
   "dependencies": {
-    "axios": "1.7.5"
+    "axios": "1.12.2"
   }
 }
