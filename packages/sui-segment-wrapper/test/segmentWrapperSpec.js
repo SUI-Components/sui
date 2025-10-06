@@ -239,7 +239,7 @@ describe('Segment Wrapper', function () {
 
         expect(context.integrations).to.deep.includes({
           fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': true
+          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
         })
       })
 
