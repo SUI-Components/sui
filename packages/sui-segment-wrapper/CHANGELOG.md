@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.31.0 (2025-10-06)
+
+
+### Features
+
+* send always the ga4 init event ([ceb8685](https://github.com/SUI-Components/sui/commit/ceb8685593721d9c259413bfcad736f7bcfb357a))
+
+
+
 # 4.30.0 (2025-09-26)
 
 
