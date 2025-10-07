@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.21.0 (2025-10-07)
+
+
+### Bug Fixes
+
+* Upgrade axios to solve security issue ([20045f7](https://github.com/SUI-Components/sui/commit/20045f75d092217f1b786cef9b8f6b9dd5956697))
+
+
+
 # 2.20.0 (2025-10-01)
 
 
