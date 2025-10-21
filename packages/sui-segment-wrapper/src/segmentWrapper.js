@@ -3,6 +3,7 @@
 import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 import {
   getConsentState,
+  getGoogleConsentValue,
   getGoogleClientId,
   getGoogleSessionId,
   setGoogleUserId
@@ -144,8 +145,16 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
-  const analyticsConsentValue = gdprPrivacyValueAnalytics === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED'
-  const advertisingConsentValue = gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED'
+  const analyticsConsentValue =
+    getGoogleConsentValue('analytics_storage') ??
+    (gdprPrivacyValueAnalytics === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+  const adUserDataConsentValue =
+    getGoogleConsentValue('ad_user_data') ?? (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+  const adPersonalizationConsentValue =
+    getGoogleConsentValue('ad_personalization') ??
+    (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+  const adStorageConsentValue =
+    getGoogleConsentValue('ad_storage') ?? (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
 
   if (!isGdprAccepted) {
     context.integrations = {
@@ -166,9 +175,9 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
     google_consents: {
       analytics_storage: analyticsConsentValue,
-      ad_user_data: advertisingConsentValue,
-      ad_personalization: advertisingConsentValue,
-      ad_storage: advertisingConsentValue
+      ad_user_data: adUserDataConsentValue,
+      ad_personalization: adPersonalizationConsentValue,
+      ad_storage: adStorageConsentValue
     },
     integrations: {
       ...context.integrations,

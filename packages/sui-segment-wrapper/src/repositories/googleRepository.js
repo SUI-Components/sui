@@ -191,20 +191,25 @@ export const getGoogleSessionId = async () => {
 
   return sessionId
 }
-export const getConsentState = () => {
-  let consentValue = CONSENT_STATE_DENIED_VALUE
 
+// Unified consent state getter.
+// Returns GRANTED, DENIED or undefined (default / unknown / unavailable).
+export function getGoogleConsentValue(consentType = 'analytics_storage') {
   try {
-    consentValue = window.google_tag_data?.ics?.getConsentState?.('analytics_storage')
-  } catch (error) {
-    // Detected an issue getting the consent state when user rejects the consent
-    // due to a bug in Google Tag Manager
-    // After that first rejection the code works as expected
-    consentValue = CONSENT_STATE_DENIED_VALUE
-  }
+    const value = window.google_tag_data?.ics?.getConsentState?.(consentType)
 
-  return consentValue === CONSENT_STATE_GRANTED_VALUE ? CONSENT_STATES.granted : CONSENT_STATES.denied
+    if (value === CONSENT_STATE_GRANTED_VALUE) return CONSENT_STATES.granted
+    if (value === CONSENT_STATE_DENIED_VALUE) return CONSENT_STATES.denied
+
+    return undefined
+  } catch (error) {
+    // GTM bug when first rejection happens: keep default undefined instead of forcing DENIED
+    return undefined
+  }
 }
+
+// Backwards compatibility alias (previous getConsentState behavior now unified but default is undefined)
+export const getConsentState = () => getGoogleConsentValue() ?? CONSENT_STATES.denied
 
 export const setGoogleUserId = userId => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
