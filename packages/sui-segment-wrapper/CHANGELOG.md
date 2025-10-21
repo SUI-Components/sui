@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.32.0 (2025-10-21)
+
+
+### Bug Fixes
+
+* prioritize google consents from gtm object ([fd95a04](https://github.com/SUI-Components/sui/commit/fd95a043df7c8a283143731e3a5879228db1b6bd))
+
+
+
 # 4.31.0 (2025-10-06)
 
 
