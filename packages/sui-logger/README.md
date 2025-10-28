@@ -338,7 +338,7 @@ logger.trace('name', () => {}, {
 })
 ```
 
-- A `filter` callback that can be used to avoid sending metrics when the use case fails.
+- A `filter` callback that can be used to send the metric as success when it fails
   - When `true` is returned the metrics and logs are not sent
   - When `false` is returned the metrics and logs are sent
 
