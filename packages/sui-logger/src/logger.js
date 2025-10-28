@@ -239,20 +239,18 @@ export default ({
               const customTags = error ? onSuccess(response) : onError(error)
               const isIgnored = error ? filter(error) : false
 
-              if (!isIgnored) {
-                timing({
-                  name,
-                  amount,
-                  tags: [
-                    {
-                      key: 'status',
-                      value: error ? EVENT_STATUSES.FAIL : EVENT_STATUSES.SUCCESS
-                    },
-                    ...tags,
-                    ...customTags
-                  ]
-                })
-              }
+              timing({
+                name,
+                amount,
+                tags: [
+                  {
+                    key: 'status',
+                    value: error && !isIgnored ? EVENT_STATUSES.FAIL : EVENT_STATUSES.SUCCESS
+                  },
+                  ...tags,
+                  ...customTags
+                ]
+              })
             } else {
               const successTags = onSuccess(...args)
 
@@ -276,11 +274,12 @@ export default ({
             const endTime = perf.now()
             const errorTags = onError(error)
             const isIgnored = filter(error)
+            const amount = endTime - startTime
 
             if (!isIgnored) {
               timing({
                 name,
-                amount: endTime - startTime,
+                amount,
                 tags: [
                   {
                     key: 'status',
@@ -294,6 +293,19 @@ export default ({
               if (logErrors) {
                 logError(error)
               }
+            } else {
+              timing({
+                name,
+                amount,
+                tags: [
+                  {
+                    key: 'status',
+                    value: EVENT_STATUSES.SUCCESS
+                  },
+                  ...tags,
+                  ...errorTags
+                ]
+              })
             }
 
             return Promise.reject(error)
