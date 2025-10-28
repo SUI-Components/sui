@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.8.0 (2025-10-28)
+
+
+### Features
+
+* change filter ([4292f11](https://github.com/SUI-Components/sui/commit/4292f110e8b3ad55f311816828fe1b42b422e3d3))
+
+
+
 # 1.7.0 (2025-07-21)
 
 
