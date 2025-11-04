@@ -23,9 +23,13 @@ export const getTplParts = req => {
 
 export class HtmlBuilder {}
 
-HtmlBuilder.buildHead = ({headTplPart, headString = ''}) => {
+HtmlBuilder.buildHead = ({headTplPart, headString = '', htmlAttributes = ''}) => {
   let copyHeadTplPart = (' ' + headTplPart).slice(1)
   let copyHeadString = (' ' + headString).slice(1)
+
+  if (htmlAttributes) {
+    copyHeadTplPart = copyHeadTplPart.replace('<html>', `<html ${htmlAttributes}>`)
+  }
 
   let headElement = copyHeadTplPart.substr(copyHeadTplPart.indexOf('<head'))
   let headOpenningTag = headElement.substr(0, headElement.indexOf('>') + 1)
