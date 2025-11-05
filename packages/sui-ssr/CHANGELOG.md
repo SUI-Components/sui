@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 8.38.0 (2025-11-05)
+
+
+### Features
+
+* add i18n support in html ([d2d4c96](https://github.com/SUI-Components/sui/commit/d2d4c964ef8a33f4b2ea55e50a74fcd5946b0ba6))
+
+
+
 # 8.37.0 (2025-09-30)
 
 
