@@ -2,6 +2,7 @@
 
 import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 import {
+  CONSENT_STATES,
   getConsentState,
   getGoogleConsentValue,
   getGoogleClientId,
@@ -145,16 +146,13 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
+  const userGdprValue = USER_GDPR.ACCEPTED ? CONSENT_STATES.granted : CONSENT_STATES.denied
   const analyticsConsentValue =
-    getGoogleConsentValue('analytics_storage') ??
-    (gdprPrivacyValueAnalytics === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
-  const adUserDataConsentValue =
-    getGoogleConsentValue('ad_user_data') ?? (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+    getGoogleConsentValue('analytics_storage') ?? gdprPrivacyValueAnalytics === userGdprValue
+  const adUserDataConsentValue = getGoogleConsentValue('ad_user_data') ?? gdprPrivacyValueAdvertising === userGdprValue
   const adPersonalizationConsentValue =
-    getGoogleConsentValue('ad_personalization') ??
-    (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
-  const adStorageConsentValue =
-    getGoogleConsentValue('ad_storage') ?? (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+    getGoogleConsentValue('ad_personalization') ?? gdprPrivacyValueAdvertising === userGdprValue
+  const adStorageConsentValue = getGoogleConsentValue('ad_storage') ?? gdprPrivacyValueAdvertising === userGdprValue
 
   if (!isGdprAccepted) {
     context.integrations = {
