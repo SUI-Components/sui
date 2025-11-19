@@ -669,10 +669,10 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
 
       expect(context.google_consents).to.include({
-        analytics_storage: 'GRANTED',
-        ad_user_data: 'DENIED',
-        ad_personalization: 'DENIED',
-        ad_storage: 'DENIED'
+        analytics_storage: 'granted',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied'
       })
     })
 
@@ -684,10 +684,10 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
 
       expect(context.google_consents).to.include({
-        analytics_storage: 'DENIED',
-        ad_user_data: 'GRANTED',
-        ad_personalization: 'GRANTED',
-        ad_storage: 'GRANTED'
+        analytics_storage: 'denied',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        ad_storage: 'granted'
       })
     })
 
@@ -848,12 +848,12 @@ describe('Segment Wrapper', function () {
         protocols: {event_version: 3},
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined',
-        analytics_storage: 'DENIED',
+        analytics_storage: 'denied',
         google_consents: {
-          analytics_storage: 'DENIED',
-          ad_user_data: 'DENIED',
-          ad_personalization: 'DENIED',
-          ad_storage: 'DENIED'
+          analytics_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          ad_storage: 'denied'
         },
         context: {
           integrations
@@ -990,10 +990,10 @@ describe('Segment Wrapper', function () {
 
       const {context} = getDataFromLastTrack()
 
-      expect(context.analytics_storage).to.equal('GRANTED')
+      expect(context.analytics_storage).to.equal('granted')
     })
 
-    it('should send analytics storage DENIED if fail to read it', async () => {
+    it('should send analytics storage `denied` if fail to read it', async () => {
       await simulateUserAcceptConsents()
       window.google_tag_data = {
         ics: {
@@ -1007,7 +1007,7 @@ describe('Segment Wrapper', function () {
 
       const {context} = getDataFromLastTrack()
 
-      expect(context.analytics_storage).to.equal('DENIED')
+      expect(context.analytics_storage).to.equal('denied')
     })
 
     it('should send the xandrId as externalId, that where stored in a cookie', async () => {

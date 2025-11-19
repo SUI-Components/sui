@@ -2,6 +2,7 @@
 
 import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 import {
+  CONSENT_STATES,
   getConsentState,
   getGoogleConsentValue,
   getGoogleClientId,
@@ -133,6 +134,13 @@ const getExternalIds = ({context, xandrId}) => {
 }
 
 /**
+ * Get consent value for Google Consent Mode
+ * @param {string} gdprValue
+ * @returns {string} consent value
+ */
+const getConsentValue = gdprValue => (gdprValue === USER_GDPR.ACCEPTED ? CONSENT_STATES.granted : CONSENT_STATES.denied)
+
+/**
  * Get data like traits and integrations to be added to the context object
  * @param {object} context Context object with all the actual info
  * @returns {Promise<object>} New context with all the previous info and the new one
@@ -145,16 +153,11 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
-  const analyticsConsentValue =
-    getGoogleConsentValue('analytics_storage') ??
-    (gdprPrivacyValueAnalytics === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
-  const adUserDataConsentValue =
-    getGoogleConsentValue('ad_user_data') ?? (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+  const analyticsConsentValue = getGoogleConsentValue('analytics_storage') ?? getConsentValue(gdprPrivacyValueAnalytics)
+  const adUserDataConsentValue = getGoogleConsentValue('ad_user_data') ?? getConsentValue(gdprPrivacyValueAdvertising)
   const adPersonalizationConsentValue =
-    getGoogleConsentValue('ad_personalization') ??
-    (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
-  const adStorageConsentValue =
-    getGoogleConsentValue('ad_storage') ?? (gdprPrivacyValueAdvertising === USER_GDPR.ACCEPTED ? 'GRANTED' : 'DENIED')
+    getGoogleConsentValue('ad_personalization') ?? getConsentValue(gdprPrivacyValueAdvertising)
+  const adStorageConsentValue = getGoogleConsentValue('ad_storage') ?? getConsentValue(gdprPrivacyValueAdvertising)
 
   if (!isGdprAccepted) {
     context.integrations = {

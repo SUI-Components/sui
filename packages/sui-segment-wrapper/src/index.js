@@ -6,7 +6,12 @@ import {defaultContextProperties} from './middlewares/source/defaultContextPrope
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
-import {getCampaignDetails, loadGoogleAnalytics, DEFAULT_DATA_LAYER_NAME} from './repositories/googleRepository.js'
+import {
+  getCampaignDetails,
+  loadGoogleAnalytics,
+  CONSENT_STATES,
+  DEFAULT_DATA_LAYER_NAME
+} from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
@@ -54,6 +59,12 @@ if (isClient && window.analytics) {
       }
 
     window.gtag('js', new Date())
+    window.gtag('consent', 'default', {
+      analytics_storage: CONSENT_STATES.denied,
+      ad_user_data: CONSENT_STATES.denied,
+      ad_personalization: CONSENT_STATES.denied,
+      ad_storage: CONSENT_STATES.denied
+    })
     window.gtag('config', googleAnalyticsMeasurementId, {
       cookie_prefix: 'segment',
       send_page_view: false,

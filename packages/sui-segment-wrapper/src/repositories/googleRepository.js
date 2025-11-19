@@ -11,9 +11,9 @@ const FIELDS = {
 
 export const DEFAULT_DATA_LAYER_NAME = 'dataLayer'
 
-const CONSENT_STATES = {
-  granted: 'GRANTED',
-  denied: 'DENIED'
+export const CONSENT_STATES = {
+  granted: 'granted',
+  denied: 'denied'
 }
 
 const CONSENT_STATE_GRANTED_VALUE = 1
