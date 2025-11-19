@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.33.0 (2025-11-19)
+
+
+### Features
+
+* add google consents defaults ([954c149](https://github.com/SUI-Components/sui/commit/954c1492354b8304c45bd81415f2af2fdb2a44ea))
+
+
+
 # 4.32.0 (2025-10-21)
 
 
