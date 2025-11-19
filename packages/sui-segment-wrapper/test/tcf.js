@@ -4,8 +4,11 @@ import {stubTcfApi} from './stubs.js'
 
 const simulateConsents = tcfEventObject => {
   setConfig('initialized', false)
+
   const simulateTcfApi = stubTcfApi(tcfEventObject)
+
   initTcfTracking()
+
   return simulateTcfApi
 }
 
