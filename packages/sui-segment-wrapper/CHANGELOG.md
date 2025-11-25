@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.34.0 (2025-11-25)
+
+
+### Features
+
+* stop sending default consents for now ([0b86daf](https://github.com/SUI-Components/sui/commit/0b86dafba6fb9d319cc90e5f24b8472b57908348))
+
+
+
 # 4.33.0 (2025-11-19)
 
 
