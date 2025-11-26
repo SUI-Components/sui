@@ -2,18 +2,17 @@
 import {useContext} from 'react'
 
 import InitialPropsContext from './initialPropsContext'
-import {
-  type ClientPageComponent,
-  type DoneImportingPageCallback,
-  type ReactRouterTypes,
-  type WithInitialPropsComponent
-} from './types'
+import {type ClientPageComponent, type ReactRouterTypes, type WithInitialPropsComponent} from './types'
 import withInitialProps from './withInitialProps'
 
 const EMPTY_GET_INITIAL_PROPS = async (): Promise<object> => ({})
 
+interface Logger {
+  error: (message: string, error: Error) => void
+}
+
 const createUniversalPage =
-  (routeInfo: ReactRouterTypes.RouteInfo) =>
+  (routeInfo: ReactRouterTypes.RouteInfo, logger?: Logger) =>
   async ({default: Page}: {default: ClientPageComponent}) => {
     // check if the Page page has a getInitialProps, if not put a resolve with an empty object
     Page.getInitialProps = typeof Page.getInitialProps === 'function' ? Page.getInitialProps : EMPTY_GET_INITIAL_PROPS
@@ -38,18 +37,22 @@ const createUniversalPage =
       context: object,
       req: IncomingMessage.ServerRequest,
       res: IncomingMessage.ClientResponse
-    ) => await Page.getInitialProps({context, routeInfo, req, res})
+    ) => {
+      try {
+        return await Page.getInitialProps({context, routeInfo, req, res})
+      } catch (error) {
+        logger?.error?.('Error executing getInitialProps on server', error as Error)
+
+        return {}
+      }
+    }
+
     // return the component to be used on the server
     return ServerPage
   }
 
-// TODO: Remove this method on next major as it's using unnecessary contextFactory param
-// and unnecesary calling done method instead relying on promises
-export default (_: any, importPage: () => Promise<any>) =>
-  async (routeInfo: ReactRouterTypes.RouteInfo, done: DoneImportingPageCallback) => {
-    importPage()
-      .then(createUniversalPage(routeInfo))
-      .then(Page => {
-        done(null, Page)
-      })
-  }
+export default (importPage: () => Promise<any>, logger?: Logger) => async (routeInfo: ReactRouterTypes.RouteInfo) => {
+  await importPage()
+
+  return createUniversalPage(routeInfo, logger)
+}
