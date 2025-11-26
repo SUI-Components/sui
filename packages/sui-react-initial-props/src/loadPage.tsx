@@ -22,6 +22,7 @@ const createUniversalPage =
       // let withInitialProps HOC handle client getInitialProps logic
       return Promise.resolve(withInitialProps(Page))
     }
+
     // SERVER
     // Create a component that gets the initialProps from context
     // this context has been created on the `ssrWithComponentWithInitialProps`
@@ -29,6 +30,7 @@ const createUniversalPage =
       const {initialProps} = useContext(InitialPropsContext)
       return <Page {...props} {...initialProps} />
     }
+
     // recover the displayName from the original page
     ServerPage.displayName = Page.displayName
     // detect if the page has getInitialProps and wrap it with the routeInfo
@@ -41,9 +43,11 @@ const createUniversalPage =
       try {
         return await Page.getInitialProps({context, routeInfo, req, res})
       } catch (error) {
-        logger?.error?.('Error executing getInitialProps on server', error as Error)
+        const message = 'Error executing getInitialProps on server'
 
-        return {}
+        logger?.error?.(message, error as Error)
+
+        return {error: error instanceof Error ? error.message : message}
       }
     }
 
