@@ -1,12 +1,14 @@
 # sui-react-initial-props
+
 > Make your React pages to get initial props asynchronously both client and server
 
 ## Motivation
 
 **sui-react-initial-props** offers a way to make your easily your app isomorphic.
-* Offers same parameters for your getInitialProps in the client in the server to make your app 100% universal.
-* Avoid re-renders as other options like React-Transmit causing a longer time to respond, specially in the server.
-* Minimal footprint by focusing on the really need stuf.
+
+- Offers same parameters for your getInitialProps in the client in the server to make your app 100% universal.
+- Avoid re-renders as other options like React-Transmit causing a longer time to respond, specially in the server.
+- Minimal footprint by focusing on the really need stuf.
 
 ![example]
 
@@ -14,12 +16,19 @@
 
 ```js
 import loadPage from '@s-ui/react-initial-props/lib/loadPage'
-// contextFactory is not used anymore but the param is needed to be present for compatibility reasons
-const contextFactory = null
+
+// Optional logger for error handling
+const logger = {
+  error: (message, error) => {
+    console.error(message, error)
+    // Send to your logging service
+  }
+}
 
 // use the loadPage from the sui-react-initial-props
-const loadHomePage = loadPage(contextFactory,
-  () => import(/* webpackChunkName: "HomePage" */ './pages/Home')
+const loadHomePage = loadPage(
+  () => import(/* webpackChunkName: "HomePage" */ './pages/Home'),
+  logger // optional: for server-side error logging
 )
 
 export default (
@@ -101,7 +110,6 @@ Page.keepMounted = true
 Page.renderLoading = () => <h1>Loading...</h1>
 ```
 
-
 ## Installation
 
 ```sh
@@ -116,12 +124,12 @@ Create the params for the contextFactory on the client
 
 ##### Response
 
-Field | Type | Description
---- | --- | ---
-cookies | `string` | All the cookies of the user
-isClient | `boolean` | Useful to know in your contextFactory if you're in the client
-pathName | `string` | Current path of the url requested
-userAgent | `string` | Information of the browser, device and version in raw
+| Field     | Type      | Description                                                   |
+| --------- | --------- | ------------------------------------------------------------- |
+| cookies   | `string`  | All the cookies of the user                                   |
+| isClient  | `boolean` | Useful to know in your contextFactory if you're in the client |
+| pathName  | `string`  | Current path of the url requested                             |
+| userAgent | `string`  | Information of the browser, device and version in raw         |
 
 #### createServerContextFactoryParams({ req })
 
@@ -129,19 +137,19 @@ Create the params for the contextFactory on the server
 
 ##### Params
 
-Field | Type | Description
---- | --- | ---
-req | `object` | [Native Node Incoming Message](https://nodejs.org/api/http.html#http_class_http_incomingmessage) with any customized property added on your middleware
+| Field | Type     | Description                                                                                                                                            |
+| ----- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| req   | `object` | [Native Node Incoming Message](https://nodejs.org/api/http.html#http_class_http_incomingmessage) with any customized property added on your middleware |
 
 ##### Response
 
-Field | Type | Description
---- | --- | ---
-cookies | `string` | All the cookies of the user
-isClient | `boolean` | Useful to know in your contextFactory if you're in the client
-pathName | `string` | Current path of the url requested
-req | `object` | [Native Node Incoming Message](https://nodejs.org/api/http.html#http_class_http_incomingmessage) with any customized property added on your middleware
-userAgent | `string` | Information of the browser, device and version in raw
+| Field     | Type      | Description                                                                                                                                            |
+| --------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cookies   | `string`  | All the cookies of the user                                                                                                                            |
+| isClient  | `boolean` | Useful to know in your contextFactory if you're in the client                                                                                          |
+| pathName  | `string`  | Current path of the url requested                                                                                                                      |
+| req       | `object`  | [Native Node Incoming Message](https://nodejs.org/api/http.html#http_class_http_incomingmessage) with any customized property added on your middleware |
+| userAgent | `string`  | Information of the browser, device and version in raw                                                                                                  |
 
 #### ssrComponentWithInitialProps({ Target, context, renderProps })
 
@@ -149,32 +157,51 @@ This method, retrieves the component page with the `getInitialProps` method, exe
 
 ##### Params
 
-Field | Type | Description
---- | --- | ---
-Target | `React Element` | React Element to be used for passing the context and render the app on it.
-context | `object` | Context to be passed to the Target component and to the `getInitialProps`
-renderProps | `object` | Props used by React Router with some useful info. We're extracting the pageComponent from it
+| Field       | Type            | Description                                                                                  |
+| ----------- | --------------- | -------------------------------------------------------------------------------------------- |
+| Target      | `React Element` | React Element to be used for passing the context and render the app on it.                   |
+| context     |  `object`       | Context to be passed to the Target component and to the `getInitialProps`                    |
+| renderProps | `object`        | Props used by React Router with some useful info. We're extracting the pageComponent from it |
 
 ##### Response
 
 The response is a promise resolved with two parameters. In addition, you can define an optional `__HTTP__` object in `initialProps` to allow server side redirects using SUI-SSR:
 
-Field | Type | Description
---- | --- | ---
-initialProps | `object` | Result of executing the `getInitialProps` of the pageComponent.
-initialprops.__HTTP__ | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 3XX server side redirects using [sui-ssr]. By default, redirect status code is 301, but you may set a valid `redirectStatusCode` option set in the file `@s-ui/ssr/status-codes`, an optional `httpCookie` key where you will define an object with the key/value of the `Http-Cookie` to be set from server and an optional `headers` key array of objects where you will define a custom response headers (see https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr)
-reactString | `string` | String with the renderized app ready to be sent.
+| Field                 | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| initialProps          | `object` | Result of executing the `getInitialProps` of the pageComponent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| initialprops.**HTTP** | `object` | An optional object containing a `redirectTo` key where an url might be included to allow 3XX server side redirects using [sui-ssr]. By default, redirect status code is 301, but you may set a valid `redirectStatusCode` option set in the file `@s-ui/ssr/status-codes`, an optional `httpCookie` key where you will define an object with the key/value of the `Http-Cookie` to be set from server and an optional `headers` key array of objects where you will define a custom response headers (see https://github.com/SUI-Components/sui/tree/master/packages/sui-ssr) |
+| reactString           | `string` | String with the renderized app ready to be sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-#### loadPage(contextFactory, importPage)
+#### loadPage(importPage, logger?)
 
-Load the page asynchronously by using React Router and resolving the getInitialProps. On the client it prepare the component to show the `renderLoading` (if specified) of the component.
+Load the page asynchronously by using React Router and resolving the getInitialProps. On the client it prepare the component to show the `renderLoading` (if specified) of the component. On the server, it wraps `getInitialProps` execution in a try-catch block to prevent crashes.
 
 ##### Params
 
-Field | Type | Description
---- | --- | ---
-contextFactory | `function` | Context factory method to create the context that will be used on the app.
-importPage | `function` | Import the chunk of the page
+| Field      | Type                | Description                                                                                                |
+| ---------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| importPage | `function`          | Import the chunk of the page                                                                               |
+| logger     | `object` (optional) | Optional logger object with an `error(message: string, error: Error)` method for server-side error logging |
+
+##### Error Handling
+
+When `getInitialProps` throws an error on the server:
+
+- The error is caught and logged using the provided `logger` (if available)
+- An empty object `{}` is returned instead of propagating the error
+- This prevents the SSR process from crashing
+
+Example logger implementation:
+
+```js
+const logger = {
+  error: (message, error) => {
+    console.error(message, error)
+    // Send to Sentry, DataDog, etc.
+  }
+}
+```
 
 ## Contributing
 
