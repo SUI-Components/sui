@@ -1,6 +1,7 @@
 import {expect} from 'chai'
+import sinon from 'sinon'
 
-import {getCampaignDetails} from '../../src/repositories/googleRepository.js'
+import {getCampaignDetails, getGoogleConsentValue} from '../../src/repositories/googleRepository.js'
 describe('GoogleRepository', () => {
   let initialTrackingTagsType
 
@@ -159,5 +160,77 @@ describe('GoogleRepository', () => {
     expect(details.campaign).to.have.property('medium', 'stc_medium')
     expect(details.campaign).to.have.property('source', 'stc_source')
     expect(details.campaign).to.have.property('name', 'stc_campaign')
+  })
+
+  describe('getGoogleConsentValue', () => {
+    let getConsentStateStub
+
+    beforeEach(() => {
+      // Ensure the nested structure exists before stubbing
+      if (!window.google_tag_data) {
+        window.google_tag_data = {ics: {}}
+      } else if (!window.google_tag_data.ics) {
+        window.google_tag_data.ics = {}
+      }
+      // Ensure the property exists so sinon.stub doesn't throw
+      window.google_tag_data.ics.getConsentState = function () {}
+      getConsentStateStub = sinon.stub(window.google_tag_data.ics, 'getConsentState')
+    })
+
+    afterEach(() => {
+      if (getConsentStateStub && typeof getConsentStateStub.restore === 'function') {
+        getConsentStateStub.restore()
+      }
+      delete window.google_tag_data
+    })
+
+    it("should return 'granted' when GTM consent state is 1", () => {
+      // Given
+      getConsentStateStub.returns(1)
+      // When
+      const consentValue = getGoogleConsentValue('analytics_storage')
+      // Then
+      expect(consentValue).to.equal('granted')
+      expect(getConsentStateStub.calledOnceWith('analytics_storage')).to.be.true
+    })
+
+    it("should return 'denied' when GTM consent state is 2", () => {
+      // Given
+      getConsentStateStub.returns(2)
+      // When
+      const consentValue = getGoogleConsentValue('ad_storage')
+      // Then
+      expect(consentValue).to.equal('denied')
+      expect(getConsentStateStub.calledOnceWith('ad_storage')).to.be.true
+    })
+
+    it('should return undefined if the GTM API returns a value other than 1 or 2', () => {
+      // Given
+      getConsentStateStub.returns(0) // An unexpected value
+      // When
+      const consentValue = getGoogleConsentValue('ad_user_data')
+      // Then
+      expect(consentValue).to.be.undefined
+    })
+
+    it('should return undefined if the GTM API is not available', () => {
+      // Given
+      getConsentStateStub.restore() // Remove the stub to simulate the API not being there
+      delete window.google_tag_data
+      // When
+      const consentValue = getGoogleConsentValue('ad_personalization')
+      // Then
+      expect(consentValue).to.be.undefined
+    })
+
+    it('should return undefined if getConsentState is not a function', () => {
+      // Given
+      getConsentStateStub.restore() // Remove the stub
+      window.google_tag_data.ics = {} // getConsentState is missing
+      // When
+      const consentValue = getGoogleConsentValue('analytics_storage')
+      // Then
+      expect(consentValue).to.be.undefined
+    })
   })
 })

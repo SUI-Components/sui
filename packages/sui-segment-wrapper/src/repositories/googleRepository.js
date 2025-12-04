@@ -218,3 +218,29 @@ export const setGoogleUserId = userId => {
 
   window.gtag?.('set', 'user_id', userId)
 }
+
+/**
+ * Send consents to Google Consent Mode.
+ *
+ * @param {'default' | 'update'} mode Mode for the consent update
+ * @param {object} consents Consents object to be sent to Google Consent Mode.
+ * Defaults used when not provided:
+ * {
+ *   analytics_storage: 'denied',
+ *   ad_user_data: 'denied',
+ *   ad_personalization: 'denied',
+ *   ad_storage: 'denied'
+ * }
+ */
+export const sendGoogleConsents = ({mode = 'default', consents}) => {
+  window.gtag?.(
+    'consent',
+    mode,
+    consents || {
+      analytics_storage: CONSENT_STATES.denied,
+      ad_user_data: CONSENT_STATES.denied,
+      ad_personalization: CONSENT_STATES.denied,
+      ad_storage: CONSENT_STATES.denied
+    }
+  )
+}

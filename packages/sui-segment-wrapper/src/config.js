@@ -9,6 +9,7 @@ export const isClient = typeof window !== 'undefined'
  */
 export const getConfig = key => {
   const config = window?.[MPI_CONFIG_KEY]?.segmentWrapper || {}
+
   return key ? config[key] : config
 }
 

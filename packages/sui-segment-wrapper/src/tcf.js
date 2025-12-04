@@ -38,6 +38,8 @@ const TCF_EVENTS = {
   USER_ACTION_COMPLETE: 'useractioncomplete'
 }
 
+export const CMP_TRACK_EVENT = 'CMP Submitted'
+
 /**
  * State of user according to GDPR regarding tracking
  */
@@ -112,7 +114,7 @@ const checkHasUserConsentedAdvertising = userConsents =>
  */
 const trackTcf = ({eventId, gdprPrivacy}) =>
   analytics.track(
-    'CMP Submitted',
+    CMP_TRACK_EVENT,
     {
       ...TCF_TRACK_PROPERTIES,
       ...getConfig('tcfTrackDefaultProperties')
