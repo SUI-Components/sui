@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 4.35.0 (2025-12-04)
+
+
+### Bug Fixes
+
+* fix google conents function params ([4f6b1fb](https://github.com/SUI-Components/sui/commit/4f6b1fbf15f2dfe0cc4c366d92671d9328d14b47))
+
+
+### Features
+
+* send default and updated google consents based on a config flag ([d35353c](https://github.com/SUI-Components/sui/commit/d35353ce5e1701d8023bb9b3ed4223d05a7409fb))
+
+
+
 # 4.34.0 (2025-11-25)
 
 
