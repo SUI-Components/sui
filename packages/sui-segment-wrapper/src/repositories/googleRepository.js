@@ -232,7 +232,7 @@ export const setGoogleUserId = userId => {
  *   ad_storage: 'denied'
  * }
  */
-export const sendGoogleConsents = ({mode = 'default', consents}) => {
+export const sendGoogleConsents = (mode = 'default', consents) => {
   window.gtag?.(
     'consent',
     mode,
