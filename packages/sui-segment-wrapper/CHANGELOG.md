@@ -2,337 +2,232 @@
 
 # 4.35.0 (2025-12-04)
 
-
 ### Bug Fixes
 
-* fix google conents function params ([4f6b1fb](https://github.com/SUI-Components/sui/commit/4f6b1fbf15f2dfe0cc4c366d92671d9328d14b47))
-
+- fix google conents function params ([4f6b1fb](https://github.com/SUI-Components/sui/commit/4f6b1fbf15f2dfe0cc4c366d92671d9328d14b47))
 
 ### Features
 
-* send default and updated google consents based on a config flag ([d35353c](https://github.com/SUI-Components/sui/commit/d35353ce5e1701d8023bb9b3ed4223d05a7409fb))
-
-
+- send default and updated google consents based on a config flag ([d35353c](https://github.com/SUI-Components/sui/commit/d35353ce5e1701d8023bb9b3ed4223d05a7409fb))
 
 # 4.34.0 (2025-11-25)
 
-
 ### Features
 
-* stop sending default consents for now ([0b86daf](https://github.com/SUI-Components/sui/commit/0b86dafba6fb9d319cc90e5f24b8472b57908348))
-
-
+- stop sending default consents for now ([0b86daf](https://github.com/SUI-Components/sui/commit/0b86dafba6fb9d319cc90e5f24b8472b57908348))
 
 # 4.33.0 (2025-11-19)
 
-
 ### Features
 
-* add google consents defaults ([954c149](https://github.com/SUI-Components/sui/commit/954c1492354b8304c45bd81415f2af2fdb2a44ea))
-
-
+- add google consents defaults ([954c149](https://github.com/SUI-Components/sui/commit/954c1492354b8304c45bd81415f2af2fdb2a44ea))
 
 # 4.32.0 (2025-10-21)
 
-
 ### Bug Fixes
 
-* prioritize google consents from gtm object ([fd95a04](https://github.com/SUI-Components/sui/commit/fd95a043df7c8a283143731e3a5879228db1b6bd))
-
-
+- prioritize google consents from gtm object ([fd95a04](https://github.com/SUI-Components/sui/commit/fd95a043df7c8a283143731e3a5879228db1b6bd))
 
 # 4.31.0 (2025-10-06)
 
-
 ### Features
 
-* send always the ga4 init event ([ceb8685](https://github.com/SUI-Components/sui/commit/ceb8685593721d9c259413bfcad736f7bcfb357a))
-
-
+- send always the ga4 init event ([ceb8685](https://github.com/SUI-Components/sui/commit/ceb8685593721d9c259413bfcad736f7bcfb357a))
 
 # 4.30.0 (2025-09-26)
 
-
 ### Bug Fixes
 
-* return undefined if there is no gtag ([c395b03](https://github.com/SUI-Components/sui/commit/c395b0348dca446cd5a5bf41b0b1893be2ecaff5))
-
-
+- return undefined if there is no gtag ([c395b03](https://github.com/SUI-Components/sui/commit/c395b0348dca446cd5a5bf41b0b1893be2ecaff5))
 
 # 4.29.0 (2025-09-22)
 
-
 ### Bug Fixes
 
-* page data ([a18c0a6](https://github.com/SUI-Components/sui/commit/a18c0a683160e4319e88b4c9a4120b87546f765f))
-
-
+- page data ([a18c0a6](https://github.com/SUI-Components/sui/commit/a18c0a683160e4319e88b4c9a4120b87546f765f))
 
 # 4.28.0 (2025-09-01)
 
-
 ### Features
 
-* Refactor segment-wrapper to allow UTM tags ([351a90f](https://github.com/SUI-Components/sui/commit/351a90f856d27e72d348a46d7ee1bf462b1aa5c7))
-* Refactor tracking types ([657860b](https://github.com/SUI-Components/sui/commit/657860b29460fc0c6c7c72346e884de482ae7745))
-* rename variable ([aa8e053](https://github.com/SUI-Components/sui/commit/aa8e05342643dc46b930d5987444ac631ccac008))
-
-
+- Refactor segment-wrapper to allow UTM tags ([351a90f](https://github.com/SUI-Components/sui/commit/351a90f856d27e72d348a46d7ee1bf462b1aa5c7))
+- Refactor tracking types ([657860b](https://github.com/SUI-Components/sui/commit/657860b29460fc0c6c7c72346e884de482ae7745))
+- rename variable ([aa8e053](https://github.com/SUI-Components/sui/commit/aa8e05342643dc46b930d5987444ac631ccac008))
 
 # 4.27.0 (2025-08-28)
 
-
 ### Features
 
-* remove expected error ([a30e361](https://github.com/SUI-Components/sui/commit/a30e3611c187c237a12c0ca98632db72ea03b2c3))
-
-
+- remove expected error ([a30e361](https://github.com/SUI-Components/sui/commit/a30e3611c187c237a12c0ca98632db72ea03b2c3))
 
 # 4.26.0 (2025-08-13)
 
-
 ### Features
 
-* add data layer name configuration ([735b93e](https://github.com/SUI-Components/sui/commit/735b93e2ff713d67e5ee339180b2c4a4f5b0d350))
-
-
+- add data layer name configuration ([735b93e](https://github.com/SUI-Components/sui/commit/735b93e2ff713d67e5ee339180b2c4a4f5b0d350))
 
 # 4.25.0 (2025-08-06)
 
-
 ### Features
 
-* minor update in page data middleware to allow override of page t ([ff11ef5](https://github.com/SUI-Components/sui/commit/ff11ef59dfa82e0443863d30e6ff2af3f98ff661))
-
-
+- minor update in page data middleware to allow override of page t ([ff11ef5](https://github.com/SUI-Components/sui/commit/ff11ef59dfa82e0443863d30e6ff2af3f98ff661))
 
 # 4.24.0 (2025-08-05)
 
-
 ### Features
 
-* add pageData middleware ([dd3a6c3](https://github.com/SUI-Components/sui/commit/dd3a6c319c0560c5ae6d2d4b44e17e920850a80d))
-
-
+- add pageData middleware ([dd3a6c3](https://github.com/SUI-Components/sui/commit/dd3a6c319c0560c5ae6d2d4b44e17e920850a80d))
 
 # 4.23.0 (2025-08-01)
 
-
 ### Features
 
-* adapt logic to specific user consents ([7eb6439](https://github.com/SUI-Components/sui/commit/7eb64391b9139ca8cd9cdf29d120e85e6c70f5c4))
-* send google consents on each event ([f70ef00](https://github.com/SUI-Components/sui/commit/f70ef005b80ef7ca515b15076d22ba1e697abab1))
-
-
+- adapt logic to specific user consents ([7eb6439](https://github.com/SUI-Components/sui/commit/7eb64391b9139ca8cd9cdf29d120e85e6c70f5c4))
+- send google consents on each event ([f70ef00](https://github.com/SUI-Components/sui/commit/f70ef005b80ef7ca515b15076d22ba1e697abab1))
 
 # 4.22.0 (2025-07-29)
 
-
 ### Features
 
-* fix typo ([2c8207a](https://github.com/SUI-Components/sui/commit/2c8207ad41b3aa0fcd9148ebdde52b0f1e8d7917))
-* update userid parsing ([b965201](https://github.com/SUI-Components/sui/commit/b9652012372b24f9cfaa89dbedd6a4ac5cd8fc00))
-
-
+- fix typo ([2c8207a](https://github.com/SUI-Components/sui/commit/2c8207ad41b3aa0fcd9148ebdde52b0f1e8d7917))
+- update userid parsing ([b965201](https://github.com/SUI-Components/sui/commit/b9652012372b24f9cfaa89dbedd6a4ac5cd8fc00))
 
 # 4.21.0 (2025-07-29)
 
-
 ### Features
 
-* add prefix check ([bf53997](https://github.com/SUI-Components/sui/commit/bf539975c374983506d9cf8162ab934eda817641))
-* add userIdPrefix prop ([a9f3d8d](https://github.com/SUI-Components/sui/commit/a9f3d8d84d0ca8fd4bd4083bcde0accebbcffc9d))
-* remove log ([c532ef4](https://github.com/SUI-Components/sui/commit/c532ef442c0c64009ca7d72f719de65a8159dfe9))
-
-
+- add prefix check ([bf53997](https://github.com/SUI-Components/sui/commit/bf539975c374983506d9cf8162ab934eda817641))
+- add userIdPrefix prop ([a9f3d8d](https://github.com/SUI-Components/sui/commit/a9f3d8d84d0ca8fd4bd4083bcde0accebbcffc9d))
+- remove log ([c532ef4](https://github.com/SUI-Components/sui/commit/c532ef442c0c64009ca7d72f719de65a8159dfe9))
 
 # 4.20.0 (2025-05-28)
 
-
 ### Bug Fixes
 
-* update xandr url query param for consent ([c502541](https://github.com/SUI-Components/sui/commit/c502541196d4c635465aaa11e52d0bb958dda967))
-
-
+- update xandr url query param for consent ([c502541](https://github.com/SUI-Components/sui/commit/c502541196d4c635465aaa11e52d0bb958dda967))
 
 # 4.19.0 (2025-03-26)
 
-
 ### Features
 
-* skip universal id retrieval on server ([3637030](https://github.com/SUI-Components/sui/commit/3637030a0520eabfd7871cfb4737005845c43815))
-
-
+- skip universal id retrieval on server ([3637030](https://github.com/SUI-Components/sui/commit/3637030a0520eabfd7871cfb4737005845c43815))
 
 # 4.18.0 (2025-03-20)
 
-
 ### Features
 
-* DENIE consent if it fails to retrieve it ([cffeee7](https://github.com/SUI-Components/sui/commit/cffeee70ec29750752c2e86ee57c35a8032176f4))
-
-
+- DENIE consent if it fails to retrieve it ([cffeee7](https://github.com/SUI-Components/sui/commit/cffeee70ec29750752c2e86ee57c35a8032176f4))
 
 # 4.17.0 (2025-03-20)
 
-
 ### Bug Fixes
 
-* map analytics_storage to correct value ([6122f59](https://github.com/SUI-Components/sui/commit/6122f59fcd71a0a3d30769ffe61453fc01adc082))
-
-
+- map analytics_storage to correct value ([6122f59](https://github.com/SUI-Components/sui/commit/6122f59fcd71a0a3d30769ffe61453fc01adc082))
 
 # 4.16.0 (2025-03-19)
 
-
 ### Features
 
-* Added analytics_storage privacy state for segment ([a7111a5](https://github.com/SUI-Components/sui/commit/a7111a5ddb170cf919c2cb6ea6500cb3ffe5a588))
-
-
+- Added analytics_storage privacy state for segment ([a7111a5](https://github.com/SUI-Components/sui/commit/a7111a5ddb170cf919c2cb6ea6500cb3ffe5a588))
 
 # 4.15.0 (2025-03-12)
 
-
 ### Bug Fixes
 
-* Not send campaing details if stc is invalid ([18fd59e](https://github.com/SUI-Components/sui/commit/18fd59e698eef06897c343c0b653c7f2488dde46))
-
-
+- Not send campaing details if stc is invalid ([18fd59e](https://github.com/SUI-Components/sui/commit/18fd59e698eef06897c343c0b653c7f2488dde46))
 
 # 4.14.0 (2025-02-13)
 
-
 ### Bug Fixes
 
-* Remove adobeCloudVisitorId from GA4 and send event when session s ([2f65d7f](https://github.com/SUI-Components/sui/commit/2f65d7f4764ff00f1ea286aeed711b1383374936))
-
-
+- Remove adobeCloudVisitorId from GA4 and send event when session s ([2f65d7f](https://github.com/SUI-Components/sui/commit/2f65d7f4764ff00f1ea286aeed711b1383374936))
 
 # 4.13.0 (2025-01-24)
 
-
 ### Features
 
-* force bump ([1bd2ebe](https://github.com/SUI-Components/sui/commit/1bd2ebe7bb118e8bdc69d1854bd1d969377e3d98))
-* promise all allowed methods ([ebc0329](https://github.com/SUI-Components/sui/commit/ebc0329bfe9eb9172031ab6fe80ac958512d8f5c))
-* send adobe mvcid along the ga event ([8938f67](https://github.com/SUI-Components/sui/commit/8938f67a1f6b38810fc2c2b004ce4fc776a38e8d))
-* send it along all ga events ([e5d118a](https://github.com/SUI-Components/sui/commit/e5d118aee7c655d12673f41a09582078a253ded4))
-
-
+- force bump ([1bd2ebe](https://github.com/SUI-Components/sui/commit/1bd2ebe7bb118e8bdc69d1854bd1d969377e3d98))
+- promise all allowed methods ([ebc0329](https://github.com/SUI-Components/sui/commit/ebc0329bfe9eb9172031ab6fe80ac958512d8f5c))
+- send adobe mvcid along the ga event ([8938f67](https://github.com/SUI-Components/sui/commit/8938f67a1f6b38810fc2c2b004ce4fc776a38e8d))
+- send it along all ga events ([e5d118a](https://github.com/SUI-Components/sui/commit/e5d118aee7c655d12673f41a09582078a253ded4))
 
 # 4.12.0 (2025-01-24)
 
-
 ### Features
 
-* get client id synchronously ([37f2651](https://github.com/SUI-Components/sui/commit/37f2651be223dcf208852c8fd44b7f9b20c084e0))
-
-
+- get client id synchronously ([37f2651](https://github.com/SUI-Components/sui/commit/37f2651be223dcf208852c8fd44b7f9b20c084e0))
 
 # 4.11.0 (2024-12-17)
 
-
 ### Features
 
-* send init event once per session ([2e04118](https://github.com/SUI-Components/sui/commit/2e0411855cb1dd5a321820e36242ea6d222f8d87))
-
-
+- send init event once per session ([2e04118](https://github.com/SUI-Components/sui/commit/2e0411855cb1dd5a321820e36242ea6d222f8d87))
 
 # 4.10.0 (2024-11-26)
 
-
 ### Features
 
-* send client version as context property ([12fff81](https://github.com/SUI-Components/sui/commit/12fff8171522a770485d6e5e9e75309046371c62))
-* send version always ([8caf104](https://github.com/SUI-Components/sui/commit/8caf104d91fdebfd83df18effe95c3eee18ab907))
-* set version on lib compilation ([f522f3a](https://github.com/SUI-Components/sui/commit/f522f3aaa8bf4d0e161f3ccb4ce3e487fb635542))
-
-
+- send client version as context property ([12fff81](https://github.com/SUI-Components/sui/commit/12fff8171522a770485d6e5e9e75309046371c62))
+- send version always ([8caf104](https://github.com/SUI-Components/sui/commit/8caf104d91fdebfd83df18effe95c3eee18ab907))
+- set version on lib compilation ([f522f3a](https://github.com/SUI-Components/sui/commit/f522f3aaa8bf4d0e161f3ccb4ce3e487fb635542))
 
 # 4.9.0 (2024-11-15)
 
-
 ### Features
 
-* stop caching ga fields and catch errors ([cf4a4b9](https://github.com/SUI-Components/sui/commit/cf4a4b927cbbfaa973ca6cae12eb09f04f58c4f7))
-
-
+- stop caching ga fields and catch errors ([cf4a4b9](https://github.com/SUI-Components/sui/commit/cf4a4b927cbbfaa973ca6cae12eb09f04f58c4f7))
 
 # 4.8.0 (2024-10-24)
 
-
 ### Bug Fixes
 
-* fix stc mapping ([57462bd](https://github.com/SUI-Components/sui/commit/57462bd97720993ffd36f1da05f2d7b4bbfdbcc2))
-
-
+- fix stc mapping ([57462bd](https://github.com/SUI-Components/sui/commit/57462bd97720993ffd36f1da05f2d7b4bbfdbcc2))
 
 # 4.7.0 (2024-10-22)
 
-
 ### Features
 
-* modify set method ([cf37a8e](https://github.com/SUI-Components/sui/commit/cf37a8e761f73bb7ba6fcb1ed7a765d41cc5b630))
-* set ga user id on identify ([1184d81](https://github.com/SUI-Components/sui/commit/1184d8143f18ab7cb6d5245f43ee589299215e49))
-
-
+- modify set method ([cf37a8e](https://github.com/SUI-Components/sui/commit/cf37a8e761f73bb7ba6fcb1ed7a765d41cc5b630))
+- set ga user id on identify ([1184d81](https://github.com/SUI-Components/sui/commit/1184d8143f18ab7cb6d5245f43ee589299215e49))
 
 # 4.6.0 (2024-10-22)
 
-
 ### Features
 
-* map campaign data ([48d8b9e](https://github.com/SUI-Components/sui/commit/48d8b9e707a74586cec93544ec0a2136bb1892ae))
-
-
+- map campaign data ([48d8b9e](https://github.com/SUI-Components/sui/commit/48d8b9e707a74586cec93544ec0a2136bb1892ae))
 
 # 4.5.0 (2024-10-10)
 
-
 ### Features
 
-* send init event and retrieve the session id ([fa9fd16](https://github.com/SUI-Components/sui/commit/fa9fd16dbf9ce34d9c2e66c4a77c2792b08345ab))
-
-
+- send init event and retrieve the session id ([fa9fd16](https://github.com/SUI-Components/sui/commit/fa9fd16dbf9ce34d9c2e66c4a77c2792b08345ab))
 
 # 4.4.0 (2024-10-09)
 
-
 ### Bug Fixes
 
-* fix google analytics script load ([3eb7f2c](https://github.com/SUI-Components/sui/commit/3eb7f2cb97b6c50100d319bf9b9802ce2725bf3e))
-
+- fix google analytics script load ([3eb7f2c](https://github.com/SUI-Components/sui/commit/3eb7f2cb97b6c50100d319bf9b9802ce2725bf3e))
 
 ### Features
 
-* add ga4 client id to segment events ([e669b28](https://github.com/SUI-Components/sui/commit/e669b28a983d0d992bd646b94670931711405402))
-
-
+- add ga4 client id to segment events ([e669b28](https://github.com/SUI-Components/sui/commit/e669b28a983d0d992bd646b94670931711405402))
 
 # 4.3.0 (2024-09-19)
 
-
 ### Features
 
-* force new release ([5a0ee5b](https://github.com/SUI-Components/sui/commit/5a0ee5bd56eca33f6b7cfdd7ae9e9f9e2ddd079c))
-
-
+- force new release ([5a0ee5b](https://github.com/SUI-Components/sui/commit/5a0ee5bd56eca33f6b7cfdd7ae9e9f9e2ddd079c))
 
 # 4.2.0 (2024-09-19)
 
-
 ### Features
 
-* force new release ([70fe6ca](https://github.com/SUI-Components/sui/commit/70fe6caa88270e3134d1cf9cde9efa76226f3ae1))
-
-
+- force new release ([70fe6ca](https://github.com/SUI-Components/sui/commit/70fe6caa88270e3134d1cf9cde9efa76226f3ae1))
 
 # 4.1.0 (2024-09-19)
 
-
 ### Features
 
-* add segment wrapper package ([caca7a7](https://github.com/SUI-Components/sui/commit/caca7a75de391a8a78a420226ccb363f67ae02af))
-* change some names ([8123b8e](https://github.com/SUI-Components/sui/commit/8123b8ed6238bf52c84194945e5e4d87001a9f6f))
-* remove umd folder ([267990d](https://github.com/SUI-Components/sui/commit/267990d9f39b654002b20c7d8b328e6a447eeebf))
+- add segment wrapper package ([caca7a7](https://github.com/SUI-Components/sui/commit/caca7a75de391a8a78a420226ccb363f67ae02af))
+- change some names ([8123b8e](https://github.com/SUI-Components/sui/commit/8123b8ed6238bf52c84194945e5e4d87001a9f6f))
+- remove umd folder ([267990d](https://github.com/SUI-Components/sui/commit/267990d9f39b654002b20c7d8b328e6a447eeebf))
