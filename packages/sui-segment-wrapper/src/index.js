@@ -7,10 +7,10 @@ import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
 import {
+  DEFAULT_DATA_LAYER_NAME,
   getCampaignDetails,
   loadGoogleAnalytics,
-  // CONSENT_STATES,
-  DEFAULT_DATA_LAYER_NAME
+  sendGoogleConsents
 } from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {getConfig, isClient} from './config.js'
@@ -47,6 +47,7 @@ if (isClient && window.analytics) {
   // Initialize Google Analtyics if needed
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
   const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
+  const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
 
   if (googleAnalyticsMeasurementId) {
     const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
@@ -59,12 +60,7 @@ if (isClient && window.analytics) {
       }
 
     window.gtag('js', new Date())
-    // window.gtag('consent', 'default', {
-    //   analytics_storage: CONSENT_STATES.denied,
-    //   ad_user_data: CONSENT_STATES.denied,
-    //   ad_personalization: CONSENT_STATES.denied,
-    //   ad_storage: CONSENT_STATES.denied
-    // })
+    if (needsConsentManagement) sendGoogleConsents()
     window.gtag('config', googleAnalyticsMeasurementId, {
       cookie_prefix: 'segment',
       send_page_view: false,
