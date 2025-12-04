@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.36.0 (2025-12-04)
+
+
+### Features
+
+* force new release ([5ba9d0d](https://github.com/SUI-Components/sui/commit/5ba9d0d1b75f9918dab985e49ab7e019fa23ce44))
+
+
+
 # 4.35.0 (2025-12-04)
 
 ### Bug Fixes
