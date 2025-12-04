@@ -1050,4 +1050,55 @@ describe('Segment Wrapper', function () {
       expect(externalIds).to.be.undefined
     })
   })
+
+  describe('google_consents', () => {
+    it('should be populated with GTM API values when available', async () => {
+      // Given
+      await simulateUserAcceptConsents()
+      const getConsentState = sinon.stub()
+      getConsentState.withArgs('analytics_storage').returns(1) // GRANTED
+      getConsentState.withArgs('ad_storage').returns(2) // DENIED
+      getConsentState.withArgs('ad_user_data').returns(1) // GRANTED
+      getConsentState.withArgs('ad_personalization').returns(2) // DENIED
+
+      window.google_tag_data = {
+        ics: {
+          getConsentState
+        }
+      }
+
+      // When
+      await suiAnalytics.track('fakeEvent')
+      const {context} = getDataFromLastTrack()
+
+      // Then
+      expect(context.google_consents).to.deep.equal({
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'granted',
+        ad_personalization: 'denied'
+      })
+
+      delete window.google_tag_data
+    })
+
+    it('should fallback to CMP values when GTM API is not available', async () => {
+      // Given
+      await simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents()
+      // window.google_tag_data is undefined
+
+      // When
+      await suiAnalytics.track('fakeEvent')
+      const {context} = getDataFromLastTrack()
+
+      // Then
+      // Fallback logic derives from CMP consent, which is what we simulated
+      expect(context.google_consents).to.deep.equal({
+        analytics_storage: 'denied',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      })
+    })
+  })
 })
