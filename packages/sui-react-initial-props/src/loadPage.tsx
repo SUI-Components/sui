@@ -47,7 +47,7 @@ const createUniversalPage =
 
         logger?.error?.(message, error as Error)
 
-        return {error: error instanceof Error ? error.message : message}
+        throw error
       }
     }
 

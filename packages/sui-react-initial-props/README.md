@@ -188,9 +188,8 @@ Load the page asynchronously by using React Router and resolving the getInitialP
 
 When `getInitialProps` throws an error on the server:
 
-- The error is caught and logged using the provided `logger` (if available)
-- An object `{error: 'Error loading the page'}` with the error message is returned instead of propagating the error
-- This prevents the SSR process from crashing
+- The error is caught, logged using the provided `logger` (if available), and then **re-thrown**.
+- This allows the server's global error handling middleware to catch the exception and manage the response accordingly (e.g., render a 500 page), preventing the SSR process from crashing silently.
 
 Example logger implementation:
 
