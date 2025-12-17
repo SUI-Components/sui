@@ -48,4 +48,3 @@ if (isClient && window.analytics) {
 export default analytics
 export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 export {getUniversalId} from './universalId.js'
-export {EVENTS} from './events.js'
