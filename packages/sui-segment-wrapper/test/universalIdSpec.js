@@ -2,7 +2,7 @@ import {expect} from 'chai'
 
 import {getConfig, setConfig} from '../src/config.js'
 import {getUniversalId, getUserDataAndNotify} from '../src/universalId.js'
-import {cleanWindowStubs} from './stubs.js'
+import {cleanStubs} from './stubs.js'
 
 const UNIVERSAL_ID_EXAMPLE = '043d36c36dad0741bdebce605d0ee4e6c1dea6e2eb6399864dec7a59432a20c4'
 const USER_EMAIL_EXAMPLE = 'test@sui.com'
@@ -15,7 +15,7 @@ describe('Universal Id', () => {
     })
 
     afterEach(() => {
-      cleanWindowStubs()
+      cleanStubs()
     })
 
     it('could be retrieved as expected from getUniversalId', () => {
@@ -30,7 +30,7 @@ describe('Universal Id', () => {
     })
 
     afterEach(() => {
-      cleanWindowStubs()
+      cleanStubs()
     })
 
     it('could be retrieved as expected from method getUniversalId and set to window', () => {
@@ -60,7 +60,7 @@ describe('Universal Id', () => {
     })
 
     afterEach(() => {
-      cleanWindowStubs()
+      cleanStubs()
     })
 
     it('should set universalIdInitialized config accordingly', () => {

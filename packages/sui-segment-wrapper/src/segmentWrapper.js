@@ -7,12 +7,11 @@ import {
   getGoogleConsentValue,
   getGoogleClientId,
   getGoogleSessionId,
-  setGoogleUserId,
-  sendGoogleConsents
+  setGoogleUserId
 } from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
-import {USER_GDPR, CMP_TRACK_EVENT, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
+import {USER_GDPR, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -221,12 +220,6 @@ const track = (event, properties, context = {}, callback) =>
         } else {
           resolve()
         }
-      }
-
-      const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
-
-      if (needsConsentManagement && event === CMP_TRACK_EVENT) {
-        sendGoogleConsents('update', newContext.google_consents)
       }
 
       window.analytics.track(

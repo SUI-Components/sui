@@ -4,13 +4,22 @@ import {referrerState, updatePageReferrer, utils as referrerUtils} from '../src/
 
 const IDENTIFY_TIMEOUT = 300 // from https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/#identify
 
-export const cleanWindowStubs = () => {
+const cleanWindowStubs = () => {
   delete window.analytics
   delete window.Visitor
   delete window.__borosTcf
   delete window.__mpi
   delete window.__tcfapi
+}
+const cleanGAStubs = () => {
+  window.localStorage.removeItem('ga_ids')
+
   delete window.gtag
+}
+
+export const cleanStubs = () => {
+  cleanWindowStubs()
+  cleanGAStubs()
 }
 
 export const stubTcfApi = ({success = true, eventStatus = 'cmpuishown', consents = {}} = {}) => {
@@ -43,10 +52,7 @@ export const stubFetch = ({responses = [{urlRe: /^http/, fetchResponse: {}}]} = 
 }
 
 export const stubGoogleAnalytics = () => {
-  const fakeFields = {
-    client_id: 'fakeClientId',
-    session_id: 'fakeSessionId'
-  }
+  const fakeFields = {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
 
   window.gtag = (key, id, field, done) => {
     if (key === 'get') {
@@ -57,6 +63,9 @@ export const stubGoogleAnalytics = () => {
       fakeFields[id] = field
     }
   }
+
+  // Prepopulate localStorage with fake GA ids
+  window.localStorage.setItem('ga_ids', JSON.stringify(fakeFields))
 }
 
 export const stubWindowObjects = ({borosMock = true, borosSuccess = true, isDmpAccepted = true} = {}) => {
