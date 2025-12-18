@@ -835,7 +835,10 @@ describe('Segment Wrapper', function () {
       const integrations = {
         All: false,
         'Adobe Analytics': true,
-        'Google Analytics 4': true,
+        'Google Analytics 4': {
+          clientId: 'fakeClientId',
+          sessionId: 'fakeSessionId'
+        },
         Personas: false,
         Webhooks: true,
         Webhook: true

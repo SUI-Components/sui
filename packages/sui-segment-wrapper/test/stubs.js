@@ -44,8 +44,8 @@ export const stubFetch = ({responses = [{urlRe: /^http/, fetchResponse: {}}]} = 
 
 export const stubGoogleAnalytics = () => {
   const fakeFields = {
-    client_id: 'fakeClientId',
-    session_id: 'fakeSessionId'
+    clientId: 'fakeClientId',
+    sessionId: 'fakeSessionId'
   }
 
   window.gtag = (key, id, field, done) => {
@@ -57,6 +57,13 @@ export const stubGoogleAnalytics = () => {
       fakeFields[id] = field
     }
   }
+
+  window.__mpi = window.__mpi || {}
+  window.__mpi.segmentWrapper = window.__mpi.segmentWrapper || {}
+  window.__mpi.segmentWrapper.gaDataPromise = Promise.resolve({
+    clientId: fakeFields.clientId,
+    sessionId: fakeFields.sessionId
+  })
 }
 
 export const stubWindowObjects = ({borosMock = true, borosSuccess = true, isDmpAccepted = true} = {}) => {

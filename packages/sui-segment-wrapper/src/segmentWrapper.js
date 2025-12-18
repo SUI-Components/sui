@@ -8,7 +8,8 @@ import {
   getGoogleClientId,
   getGoogleSessionId,
   setGoogleUserId,
-  sendGoogleConsents
+  sendGoogleConsents,
+  triggerGoogleAnalyticsInitEvent
 } from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
@@ -69,6 +70,8 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   } catch (error) {
     console.error(error)
   }
+
+  triggerGoogleAnalyticsInitEvent()
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
 

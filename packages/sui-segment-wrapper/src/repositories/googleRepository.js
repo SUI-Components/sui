@@ -5,8 +5,8 @@ import {EVENTS} from '../events.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
 
 const FIELDS = {
-  clientId: 'client_id',
-  sessionId: 'session_id'
+  clientId: 'clientId',
+  sessionId: 'sessionId'
 }
 
 export const DEFAULT_DATA_LAYER_NAME = 'dataLayer'
@@ -72,45 +72,32 @@ export const loadGoogleAnalytics = async () => {
 }
 
 // Trigger GA init event just once per session.
-const triggerGoogleAnalyticsInitEvent = sessionId => {
+export const triggerGoogleAnalyticsInitEvent = async () => {
   const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
-  const eventPrefix = `ga_event_${eventName}_`
-  const eventKey = `${eventPrefix}${sessionId}`
+  let sessionId, isNewSession
 
   if (typeof window.gtag === 'undefined') return
 
-  // Check if the event has already been sent in this session.
-  if (!localStorage.getItem(eventKey)) {
-    // If not, send it.
-    window.gtag('event', eventName)
-
+  try {
+    ;({sessionId, isNewSession} = (await window.__mpi.segmentWrapper.gaDataPromise) || {})
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
+    console.log('Error retrieving GA session data:', error)
 
-    // And then save a new GA session hit in local storage.
-    localStorage.setItem(eventKey, 'true')
-    dispatchEvent({eventName: EVENTS.GA4_INIT_EVENT_SENT, detail: {eventName, sessionId}})
+    return
   }
 
-  // Clean old GA sessions hits from the storage.
-  Object.keys(localStorage).forEach(key => {
-    if (key.startsWith(eventPrefix) && key !== eventKey) {
-      localStorage.removeItem(key)
-    }
-  })
+  // Check if the event has already been sent in this session.
+  if (isNewSession && sessionId) {
+    // If not, send it.
+    window.gtag('event', eventName)
+    // eslint-disable-next-line no-console
+    console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
+    dispatchEvent({eventName: EVENTS.GA4_INIT_EVENT_SENT, detail: {eventName, sessionId}})
+  }
 }
 
-const getGoogleField = async field => {
-  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-
-  // If `googleAnalyticsMeasurementId` is not present, don't load anything.
-  if (!googleAnalyticsMeasurementId) return Promise.resolve()
-
-  return new Promise(resolve => {
-    // If it is, get it from `gtag`.
-    window.gtag?.('get', googleAnalyticsMeasurementId, field, resolve)
-  })
-}
+const getGoogleField = async field => window.__mpi.segmentWrapper.gaDataPromise?.then(gaData => gaData[field])
 
 export const trackingTagsTypes = {
   STC: 'stc',
@@ -184,13 +171,7 @@ function readFromUtm(searchParams) {
 }
 
 export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
-export const getGoogleSessionId = async () => {
-  const sessionId = await getGoogleField(FIELDS.sessionId)
-
-  triggerGoogleAnalyticsInitEvent(sessionId)
-
-  return sessionId
-}
+export const getGoogleSessionId = async () => getGoogleField(FIELDS.sessionId)
 
 // Unified consent state getter.
 // Returns GRANTED, DENIED or undefined (default / unknown / unavailable).
