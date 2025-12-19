@@ -6,12 +6,7 @@ import {defaultContextProperties} from './middlewares/source/defaultContextPrope
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
-import {
-  DEFAULT_DATA_LAYER_NAME,
-  getCampaignDetails,
-  loadGoogleAnalytics,
-  sendGoogleConsents
-} from './repositories/googleRepository.js'
+import {initDataLayer} from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
@@ -44,33 +39,7 @@ const addMiddlewares = () => {
 }
 
 if (isClient && window.analytics) {
-  // Initialize Google Analtyics if needed
-  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-  const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
-  const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
-
-  if (googleAnalyticsMeasurementId) {
-    const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
-
-    window[dataLayerName] = window[dataLayerName] || []
-    window.gtag =
-      window.gtag ||
-      function gtag() {
-        window[dataLayerName].push(arguments)
-      }
-
-    window.gtag('js', new Date())
-    if (needsConsentManagement) sendGoogleConsents()
-    window.gtag('config', googleAnalyticsMeasurementId, {
-      cookie_prefix: 'segment',
-      send_page_view: false,
-      ...googleAnalyticsConfig,
-      ...getCampaignDetails()
-    })
-    loadGoogleAnalytics().catch(error => {
-      console.error(error)
-    })
-  }
+  initDataLayer()
 
   window.analytics.ready(checkAnonymousId)
   window.analytics.addSourceMiddleware ? addMiddlewares() : window.analytics.ready(addMiddlewares)
@@ -79,4 +48,3 @@ if (isClient && window.analytics) {
 export default analytics
 export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 export {getUniversalId} from './universalId.js'
-export {EVENTS} from './events.js'

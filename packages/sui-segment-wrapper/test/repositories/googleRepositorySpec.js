@@ -28,11 +28,11 @@ describe('GoogleRepository', () => {
     const details = await getCampaignDetails()
 
     expect(details).to.not.be.null
-    expect(details.campaign).to.have.property('medium', 'email')
-    expect(details.campaign).to.have.property('name', 'campaign_name')
-    expect(details.campaign).to.have.property('source', 'source_type')
-    expect(details.campaign).to.have.property('content', 'content_type')
-    expect(details.campaign).to.have.property('term', 'term_type')
+    expect(details).to.have.property('campaign_medium', 'email')
+    expect(details).to.have.property('campaign_name', 'campaign_name')
+    expect(details).to.have.property('campaign_source', 'source_type')
+    expect(details).to.have.property('campaign_content', 'content_type')
+    expect(details).to.have.property('campaign_term', 'term_type')
   })
 
   it('should get medium without transformation from STC', async () => {
@@ -40,7 +40,7 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails({needsTransformation: false})
 
-    expect(details.campaign).to.have.property('medium', 'custom_medium')
+    expect(details).to.have.property('campaign_medium', 'custom_medium')
   })
 
   it('should get campaign id from STC', async () => {
@@ -48,7 +48,7 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails()
 
-    expect(details.campaign).to.have.property('name', 'campaing_name')
+    expect(details).to.have.property('campaign_name', 'campaing_name')
   })
 
   it('should not return content with invalid content type', async () => {
@@ -56,7 +56,7 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails()
 
-    expect(details.campaign).to.not.have.property('content')
+    expect(details).to.not.have.property('content')
   })
 
   it('should return null when no STC param present', async () => {
@@ -91,11 +91,11 @@ describe('GoogleRepository', () => {
     const details = await getCampaignDetails()
 
     expect(details).to.not.be.null
-    expect(details.campaign).to.have.property('medium', 'email')
-    expect(details.campaign).to.have.property('name', 'campaign_name')
-    expect(details.campaign).to.have.property('source', 'source_type')
-    expect(details.campaign).to.have.property('content', 'content_type')
-    expect(details.campaign).to.have.property('term', 'term_type')
+    expect(details).to.have.property('campaign_medium', 'email')
+    expect(details).to.have.property('campaign_name', 'campaign_name')
+    expect(details).to.have.property('campaign_source', 'source_type')
+    expect(details).to.have.property('campaign_content', 'content_type')
+    expect(details).to.have.property('campaign_term', 'term_type')
   })
 
   it('should get medium without transformation from UTM', async () => {
@@ -106,7 +106,7 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails({needsTransformation: false})
 
-    expect(details.campaign).to.have.property('medium', 'custom_medium')
+    expect(details).to.have.property('campaign_medium', 'custom_medium')
   })
 
   it('should get campaign id from UTM', async () => {
@@ -117,7 +117,7 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails()
 
-    expect(details.campaign).to.have.property('name', 'campaign_name')
+    expect(details).to.have.property('campaign_name', 'campaign_name')
   })
 
   it('should return null when no UTM mandatory params are present', async () => {
@@ -135,9 +135,9 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails({needsTransformation: false})
 
-    expect(details.campaign).to.have.property('medium', 'stc_medium')
-    expect(details.campaign).to.have.property('source', 'stc_source')
-    expect(details.campaign).to.have.property('name', 'stc_campaign')
+    expect(details).to.have.property('campaign_medium', 'stc_medium')
+    expect(details).to.have.property('campaign_source', 'stc_source')
+    expect(details).to.have.property('campaign_name', 'stc_campaign')
   })
 
   it('should fallback to stc if utm_source is empty', async () => {
@@ -146,9 +146,9 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails({needsTransformation: false})
 
-    expect(details.campaign).to.have.property('medium', 'stc_medium')
-    expect(details.campaign).to.have.property('source', 'stc_source')
-    expect(details.campaign).to.have.property('name', 'stc_campaign')
+    expect(details).to.have.property('campaign_medium', 'stc_medium')
+    expect(details).to.have.property('campaign_source', 'stc_source')
+    expect(details).to.have.property('campaign_name', 'stc_campaign')
   })
 
   it('should fallback to stc if utm_campaign is empty', async () => {
@@ -157,9 +157,9 @@ describe('GoogleRepository', () => {
 
     const details = await getCampaignDetails({needsTransformation: false})
 
-    expect(details.campaign).to.have.property('medium', 'stc_medium')
-    expect(details.campaign).to.have.property('source', 'stc_source')
-    expect(details.campaign).to.have.property('name', 'stc_campaign')
+    expect(details).to.have.property('campaign_medium', 'stc_medium')
+    expect(details).to.have.property('campaign_source', 'stc_source')
+    expect(details).to.have.property('campaign_name', 'stc_campaign')
   })
 
   describe('getGoogleConsentValue', () => {

@@ -1,15 +1,5 @@
-import {dispatchEvent} from '@s-ui/js/lib/events'
-
 import {getConfig} from '../config.js'
-import {EVENTS} from '../events.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
-
-const FIELDS = {
-  clientId: 'client_id',
-  sessionId: 'session_id'
-}
-
-export const DEFAULT_DATA_LAYER_NAME = 'dataLayer'
 
 export const CONSENT_STATES = {
   granted: 'granted',
@@ -45,70 +35,26 @@ const STC_MEDIUM_TRANSFORMATIONS = {
   cs: 'cross-sites'
 }
 const STC_INVALID_CONTENT = 'na'
-const DEFAULT_GA_INIT_EVENT = 'sui'
-
 const EMPTY_STC = {medium: null, source: null, campaign: null}
 
-const loadScript = async src =>
-  new Promise(function (resolve, reject) {
-    const script = document.createElement('script')
-
-    script.src = src
-    script.onload = resolve
-    script.onerror = reject
-    document.head.appendChild(script)
-  })
-
-export const loadGoogleAnalytics = async () => {
-  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-  const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
-
-  // Check we have the needed config to load the script
-  if (!googleAnalyticsMeasurementId) return Promise.resolve(false)
-  // Create the `gtag` script
-  const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}&l=${dataLayerName}`
-  // Load it and retrieve the `clientId` from Google
-  return loadScript(gtagScript)
-}
-
-// Trigger GA init event just once per session.
-const triggerGoogleAnalyticsInitEvent = sessionId => {
-  const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
-  const eventPrefix = `ga_event_${eventName}_`
-  const eventKey = `${eventPrefix}${sessionId}`
-
-  if (typeof window.gtag === 'undefined') return
-
-  // Check if the event has already been sent in this session.
-  if (!localStorage.getItem(eventKey)) {
-    // If not, send it.
-    window.gtag('event', eventName)
-
-    // eslint-disable-next-line no-console
-    console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
-
-    // And then save a new GA session hit in local storage.
-    localStorage.setItem(eventKey, 'true')
-    dispatchEvent({eventName: EVENTS.GA4_INIT_EVENT_SENT, detail: {eventName, sessionId}})
-  }
-
-  // Clean old GA sessions hits from the storage.
-  Object.keys(localStorage).forEach(key => {
-    if (key.startsWith(eventPrefix) && key !== eventKey) {
-      localStorage.removeItem(key)
-    }
-  })
-}
-
-const getGoogleField = async field => {
-  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-
-  // If `googleAnalyticsMeasurementId` is not present, don't load anything.
-  if (!googleAnalyticsMeasurementId) return Promise.resolve()
-
+export const waitForGAData = () => {
   return new Promise(resolve => {
-    // If it is, get it from `gtag`.
-    window.gtag?.('get', googleAnalyticsMeasurementId, field, resolve)
+    if (window.__GA4_DATA) {
+      console.log('[segment-wrapper] GA4 data already available!')
+      resolve(window.__GA4_DATA)
+
+      return
+    }
+
+    console.log('[segment-wrapper] Waiting for GTM...')
+
+    /**
+     * @param {{clientId: any, sessionId: any}} data
+     */
+    window.resolveGAData = data => {
+      console.log('[segment-wrapper] GTM has delivered the data.')
+      resolve(data)
+    }
   })
 }
 
@@ -129,14 +75,12 @@ export const getCampaignDetails = ({needsTransformation = true} = {}) => {
   const needsContent = typeof content !== 'undefined' && content !== STC_INVALID_CONTENT
 
   return {
-    campaign: {
-      medium: (needsTransformation && STC_MEDIUM_TRANSFORMATIONS[medium]) || medium,
-      ...(typeof name !== 'undefined' && {id}),
-      name: name ?? id,
-      source,
-      ...(needsContent && {content}),
-      ...(typeof term !== 'undefined' && {term})
-    }
+    campaign_medium: (needsTransformation && STC_MEDIUM_TRANSFORMATIONS[medium]) || medium,
+    ...(typeof name !== 'undefined' && {campaign_id: id}),
+    campaign_name: name ?? id,
+    campaign_source: source,
+    ...(needsContent && {campaign_content: content}),
+    ...(typeof term !== 'undefined' && {campaign_term: term})
   }
 }
 
@@ -183,15 +127,6 @@ function readFromUtm(searchParams) {
   }
 }
 
-export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
-export const getGoogleSessionId = async () => {
-  const sessionId = await getGoogleField(FIELDS.sessionId)
-
-  triggerGoogleAnalyticsInitEvent(sessionId)
-
-  return sessionId
-}
-
 // Unified consent state getter.
 // Returns GRANTED, DENIED or undefined (default / unknown / unavailable).
 export function getGoogleConsentValue(consentType = 'analytics_storage') {
@@ -212,35 +147,13 @@ export function getGoogleConsentValue(consentType = 'analytics_storage') {
 export const getConsentState = () => getGoogleConsentValue() ?? CONSENT_STATES.denied
 
 export const setGoogleUserId = userId => {
-  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-
-  if (!googleAnalyticsMeasurementId || !userId) return
+  if (!userId) return
 
   window.gtag?.('set', 'user_id', userId)
 }
 
-/**
- * Send consents to Google Consent Mode.
- *
- * @param {'default' | 'update'} mode Mode for the consent update
- * @param {object} consents Consents object to be sent to Google Consent Mode.
- * Defaults used when not provided:
- * {
- *   analytics_storage: 'denied',
- *   ad_user_data: 'denied',
- *   ad_personalization: 'denied',
- *   ad_storage: 'denied'
- * }
- */
-export const sendGoogleConsents = (mode = 'default', consents) => {
-  window.gtag?.(
-    'consent',
-    mode,
-    consents || {
-      analytics_storage: CONSENT_STATES.denied,
-      ad_user_data: CONSENT_STATES.denied,
-      ad_personalization: CONSENT_STATES.denied,
-      ad_storage: CONSENT_STATES.denied
-    }
-  )
+export function initDataLayer() {
+  window.dataLayer = window.dataLayer || []
+
+  window.dataLayer.push({...getCampaignDetails()})
 }
