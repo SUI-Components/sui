@@ -11,10 +11,10 @@ const cleanWindowStubs = () => {
   delete window.__mpi
   delete window.__tcfapi
 }
-const cleanGAStubs = () => {
-  window.localStorage.removeItem('ga_ids')
 
+const cleanGAStubs = () => {
   delete window.gtag
+  delete window.__GA4_DATA
 }
 
 export const cleanStubs = () => {
@@ -64,8 +64,8 @@ export const stubGoogleAnalytics = () => {
     }
   }
 
-  // Prepopulate localStorage with fake GA ids
-  window.localStorage.setItem('ga_ids', JSON.stringify(fakeFields))
+  // Set initial fake data
+  window.__GA4_DATA = fakeFields
 }
 
 export const stubWindowObjects = ({borosMock = true, borosSuccess = true, isDmpAccepted = true} = {}) => {

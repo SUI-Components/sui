@@ -1,11 +1,6 @@
 import {getConfig} from '../config.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
 
-const FIELDS = {
-  clientId: 'clientId',
-  sessionId: 'sessionId'
-}
-
 export const CONSENT_STATES = {
   granted: 'granted',
   denied: 'denied'
@@ -42,16 +37,25 @@ const STC_MEDIUM_TRANSFORMATIONS = {
 const STC_INVALID_CONTENT = 'na'
 const EMPTY_STC = {medium: null, source: null, campaign: null}
 
-const getGoogleField = async field => {
-  let id
+export const waitForGAData = () => {
+  return new Promise(resolve => {
+    if (window.__GA4_DATA) {
+      console.log('[segment-wrapper] GA4 data already available!')
+      resolve(window.__GA4_DATA)
 
-  try {
-    // Google Tag Manager stores `clientId` and `sessionId` in local storage
-    // under `ga_ids` key as a JSON string.
-    id = JSON.parse(window.localStorage.getItem('ga_ids'))?.[field]
-  } catch (e) {}
+      return
+    }
 
-  return id
+    console.log('[segment-wrapper] Waiting for GTM...')
+
+    /**
+     * @param {{clientId: any, sessionId: any}} data
+     */
+    window.resolveGAData = data => {
+      console.log('[segment-wrapper] GTM has delivered the data.')
+      resolve(data)
+    }
+  })
 }
 
 export const trackingTagsTypes = {
@@ -122,9 +126,6 @@ function readFromUtm(searchParams) {
     term
   }
 }
-
-export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
-export const getGoogleSessionId = async () => getGoogleField(FIELDS.sessionId)
 
 // Unified consent state getter.
 // Returns GRANTED, DENIED or undefined (default / unknown / unavailable).

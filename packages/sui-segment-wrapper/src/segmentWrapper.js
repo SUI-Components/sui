@@ -5,9 +5,8 @@ import {
   CONSENT_STATES,
   getConsentState,
   getGoogleConsentValue,
-  getGoogleClientId,
-  getGoogleSessionId,
-  setGoogleUserId
+  setGoogleUserId,
+  waitForGAData
 } from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
@@ -56,15 +55,13 @@ export const getDefaultProperties = () => ({
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
   let marketingCloudVisitorId
-  let sessionId
-  let clientId
+  let sessionId, clientId
 
   try {
     if (isGdprAccepted) {
       marketingCloudVisitorId = await getAdobeMCVisitorID()
     }
-    sessionId = await getGoogleSessionId()
-    clientId = await getGoogleClientId()
+    ;({sessionId, clientId} = await waitForGAData())
   } catch (error) {
     console.error(error)
   }
