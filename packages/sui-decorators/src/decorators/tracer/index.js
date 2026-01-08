@@ -1,12 +1,10 @@
-import {performance} from 'perf_hooks'
+import perfNow from 'performance-now'
 
 import isNode from '../../helpers/isNode.js'
 import isPromise from '../../helpers/isPromise.js'
 import {ConsoleReporter} from './reporters/ConsoleReporter.js'
 import {statusCodes} from './statusCodes.js'
 export {DataDogReporter} from './reporters/DataDogReporter.js'
-
-const getPerformanceMeter = () => (isNode ? performance : window.performance)
 
 const getReporter = () => {
   const customReporter = isNode ? global.__SUI_DECORATOR_TRACER_REPORTER__ : window.__SUI_DECORATOR_TRACER_REPORTER__
@@ -44,20 +42,19 @@ export default ({metric = null} = {}) => {
           }
 
           const reporter = getReporter()
-          const perf = getPerformanceMeter()
           const classMethodName = `${target.constructor.name}::${fnName}`
           const metricName = metric || classMethodName
 
           const _fnTimed = (...args) => {
             // performance metric start
-            const startTime = perf.now()
+            const startTime = perfNow()
 
             //  original function
             const returnValue = fn.apply(this, args)
             if (isPromise(returnValue)) {
               return returnValue
                 .then(res => {
-                  const endTime = perf.now()
+                  const endTime = perfNow()
 
                   if (res.__INLINE_ERROR__) {
                     const [error] = res
@@ -81,7 +78,7 @@ export default ({metric = null} = {}) => {
                   return Promise.resolve(res)
                 })
                 .catch(error => {
-                  const endTime = perf.now()
+                  const endTime = perfNow()
 
                   reporter.send({
                     metricName,
@@ -94,7 +91,7 @@ export default ({metric = null} = {}) => {
                 })
             } else {
               // performance metric ends
-              const endTime = perf.now()
+              const endTime = perfNow()
 
               reporter.send({
                 metricName,
