@@ -38,12 +38,14 @@ program
   .parse(process.argv)
 
 const {clean, remoteCdn: remoteCdnOption} = program.opts()
-
 const remoteCdn = remoteCdnOption || suiWidgetEmbedderConfig.remoteCdn
 
 if (clean) {
-  console.log('Removing previous build...')
+  console.log('sui-widget-embedder - Removing previous build...')
+
   rmSync(PUBLIC_PATH, {force: true, recursive: true})
+
+  console.log('sui-widget-embedder - Build removed')
 }
 
 const build = ({page, remoteCdn}) => {
@@ -52,15 +54,23 @@ const build = ({page, remoteCdn}) => {
     remoteCdn,
     globalConfig: suiWidgetEmbedderConfig
   })
+
+  console.log('sui-widget-embedder -', {page, remoteCdn, suiWidgetEmbedderConfig})
+
   return new Promise((resolve, reject) => {
-    compiler.run((error, stats) => {
-      if (error) return reject(error)
+    try {
+      compiler.run((error, stats) => {
+        if (error) return reject(error)
 
-      console.log(`Webpack stats: ${stats}`)
+        console.log(`Webpack stats: ${stats}`)
 
-      if (stats.hasErrors()) return reject(new Error('Webpack build failed'))
-      resolve()
-    })
+        if (stats.hasErrors()) return reject(new Error('Webpack build failed'))
+
+        resolve()
+      })
+    } catch (err) {
+      console.log(err)
+    }
   })
 }
 
@@ -83,10 +93,13 @@ const pageConfigs = () =>
 
 const createDownloader = async () => {
   const staticManifests = manifests()
+  console.log('sui-widget-embedder -', staticManifests)
   const staticPageConfigs = pageConfigs()
-
+  console.log('sui-widget-embedder -', staticPageConfigs)
   const input = resolve(__dirname, '..', 'downloader', 'index.js')
+  console.log('sui-widget-embedder input -', input)
   const output = resolve(process.cwd(), 'public', FILE_DOWNLOADER)
+  console.log('sui-widget-embedder output -', output)
 
   try {
     const downloader = await readFile(input, 'utf-8')
@@ -106,7 +119,10 @@ const createDownloader = async () => {
 }
 
 const serialPromiseExecution = promises => promises.reduce((acc, func) => acc.then(() => func()), Promise.resolve([]))
+const pages = pagesFor({path: PAGES_FOLDER})
 
-serialPromiseExecution(pagesFor({path: PAGES_FOLDER}).map(page => () => build({page, remoteCdn})))
+console.log('sui-widget-embedder -', pages)
+
+serialPromiseExecution(pages.map(page => () => build({page, remoteCdn})))
   .then(createDownloader)
   .catch(showError)
