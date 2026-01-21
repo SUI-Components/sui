@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 3.0.0 (2026-01-21)
+
+
+### Features
+
+* add error handling and logging to getInitialProps ([9e9ac26](https://github.com/SUI-Components/sui/commit/9e9ac26b5c0f9c17d2404bcca379d095c9b23136))
+* rethrow error on catch ([37cb3c4](https://github.com/SUI-Components/sui/commit/37cb3c4d617ad235e7ce1b21c9e069219a7640fc))
+* send message to the component ([6458c45](https://github.com/SUI-Components/sui/commit/6458c459fa3315df3ccf09114a5c1f12ef923dbe))
+* update docs ([e64dda5](https://github.com/SUI-Components/sui/commit/e64dda5a278fadcce8e80ad6d79f2bb525c40575))
+
+
+
 # 2.24.0 (2025-02-24)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-initial-props",
-  "version": "2.24.0",
+  "version": "3.0.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "description": "Provide a way to get initial props for async pages",
