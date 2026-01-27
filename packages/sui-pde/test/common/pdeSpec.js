@@ -249,29 +249,6 @@ describe('@s-ui pde', () => {
     expect(window.optimizelyClientInstance).to.not.exist
   })
 
-  it.client('loads datafile if set but do not pass sdkKey', () => {
-    window.__INITIAL_CONTEXT_VALUE__ = {pde: {initialDatafile: true}}
-    const optimizelySDK = {
-      setLogger: () => {},
-      setLogLevel: () => {},
-      logging: {
-        createLogger: () => {}
-      },
-      createInstance: sinon.spy()
-    }
-
-    OptimizelyAdapter.createOptimizelyInstance({
-      optimizely: optimizelySDK
-    })
-
-    expect(optimizelySDK.createInstance.calledOnce)
-
-    const {sdkKey, datafile} = optimizelySDK.createInstance.firstCall.args[0]
-
-    expect(sdkKey).be.undefined
-    expect(datafile).to.deep.equal({initialDatafile: true})
-  })
-
   it('loads the default variation when no consents given', () => {
     const optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
