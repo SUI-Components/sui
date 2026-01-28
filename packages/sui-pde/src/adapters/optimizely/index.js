@@ -2,9 +2,12 @@ import {
   createInstance,
   createPollingProjectConfigManager,
   createBatchEventProcessor,
+  createLogger,
   createOdpManager,
   OptimizelyDecideOption,
-  NOTIFICATION_TYPES
+  NOTIFICATION_TYPES,
+  ERROR,
+  INFO
 } from '@optimizely/optimizely-sdk'
 
 import {updateIntegrations} from './integrations/handler.js'
@@ -21,7 +24,7 @@ const DEFAULT_EVENTS_OPTIONS = {
 
 const DEFAULT_TIMEOUT = 500
 
-// const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? ERROR : INFO
+const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? ERROR : INFO
 
 export default class OptimizelyAdapter {
   /**
@@ -51,10 +54,6 @@ export default class OptimizelyAdapter {
    * @param {object} param.options datafile options https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
    */
   static createOptimizelyInstance({options: optionParameter, sdkKey, datafile}) {
-    /*
-    optimizely.setLogLevel(LOGGER_LEVEL)
-    optimizely.setLogger(optimizely.logging.createLogger())
-    */
     if (!datafile && typeof window !== 'undefined' && window.__INITIAL_CONTEXT_VALUE__?.pde) {
       datafile = window.__INITIAL_CONTEXT_VALUE__.pde
       sdkKey = undefined
@@ -76,10 +75,15 @@ export default class OptimizelyAdapter {
 
     const odpManager = createOdpManager()
 
+    const logger = createLogger({
+      level: LOGGER_LEVEL
+    })
+
     return createInstance({
       projectConfigManager,
       eventProcessor,
       odpManager,
+      logger,
       defaultDecideOptions: isServer ? [OptimizelyDecideOption.DISABLE_DECISION_EVENT] : []
     })
   }
