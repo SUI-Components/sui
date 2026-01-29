@@ -1,5 +1,17 @@
 # CHANGELOG
 
+# 3.0.0 (2026-01-29)
+
+
+### Features
+
+* add logger level ([489256d](https://github.com/SUI-Components/sui/commit/489256d2647fc54c31069334ed49ff03bacba5c4))
+* remove multi adapter ([db2861b](https://github.com/SUI-Components/sui/commit/db2861b3591283294308513204d42602cd91b18d))
+* remove not needed tests ([9658e39](https://github.com/SUI-Components/sui/commit/9658e3998aad48068ed938b07142510d3edd1b57))
+* upgrade optimizely version ([4656c80](https://github.com/SUI-Components/sui/commit/4656c80a6575ed61989daead033203669386d498))
+
+
+
 # 2.32.0 (2025-06-19)
 
 

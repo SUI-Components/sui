@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/pde",
-  "version": "2.32.0",
+  "version": "3.0.0",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
