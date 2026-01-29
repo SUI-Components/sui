@@ -5,7 +5,6 @@ import {descriptorsByEnvironmentPatcher} from '@s-ui/test/lib/descriptor-environ
 
 import DefaultAdapter from '../../src/adapters/default.js'
 import OptimizelyAdapter from '../../src/adapters/optimizely/index.js'
-import MultipleOptimizelyAdapter from '../../src/adapters/optimizely/multiple.js'
 import {SESSION_STORAGE_KEY as PDE_CACHE_STORAGE_KEY} from '../../src/hooks/common/trackedEventsLocalCache.js'
 import {PDE as SuiPDE} from '../../src/index.js'
 
@@ -249,29 +248,6 @@ describe('@s-ui pde', () => {
     expect(window.optimizelyClientInstance).to.not.exist
   })
 
-  it.client('loads datafile if set but do not pass sdkKey', () => {
-    window.__INITIAL_CONTEXT_VALUE__ = {pde: {initialDatafile: true}}
-    const optimizelySDK = {
-      setLogger: () => {},
-      setLogLevel: () => {},
-      logging: {
-        createLogger: () => {}
-      },
-      createInstance: sinon.spy()
-    }
-
-    OptimizelyAdapter.createOptimizelyInstance({
-      optimizely: optimizelySDK
-    })
-
-    expect(optimizelySDK.createInstance.calledOnce)
-
-    const {sdkKey, datafile} = optimizelySDK.createInstance.firstCall.args[0]
-
-    expect(sdkKey).be.undefined
-    expect(datafile).to.deep.equal({initialDatafile: true})
-  })
-
   it('loads the default variation when no consents given', () => {
     const optimizelyAdapter = new OptimizelyAdapter({
       optimizely: optimizelyInstanceStub,
@@ -303,118 +279,6 @@ describe('@s-ui pde', () => {
     expect(optimizelyInstanceStub.isFeatureEnabled.args[0][2]).to.deep.equal({
       applicationKey: 'applicationValue',
       featureKey: 'featureValue'
-    })
-  })
-
-  describe('using multiple optimizely instances', () => {
-    const defaultAdapterId = 'defaultOptimizely'
-    const alternateAdapterId = 'alternateOptimizely'
-    const defaultInstanceActiveVariation = 'defaultVariationA'
-    const alternateInstanceActiveVariation = 'alternateVariationA'
-
-    let defaultInstance
-    let alternateInstance
-    let multipleAdapterInstances
-    let multipleAdapter
-    let pde
-
-    beforeEach(() => {
-      defaultInstance = createOptimizelyInstanceStub({
-        activate: defaultInstanceActiveVariation
-      })
-      alternateInstance = createOptimizelyInstanceStub({
-        activate: alternateInstanceActiveVariation
-      })
-      multipleAdapterInstances = MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
-        [defaultAdapterId]: {optimizely: defaultInstance},
-        [alternateAdapterId]: {optimizely: alternateInstance}
-      })
-      multipleAdapter = new MultipleOptimizelyAdapter({
-        [defaultAdapterId]: {
-          optimizely: multipleAdapterInstances[defaultAdapterId]
-        },
-        [alternateAdapterId]: {
-          optimizely: multipleAdapterInstances[alternateAdapterId]
-        }
-      })
-      pde = new SuiPDE({adapter: multipleAdapter, hasUserConsents: true})
-    })
-
-    it('should use first instance adapter id as default', () => {
-      const variationOnDefaultWithoutAdapterId = pde.activateExperiment({
-        name: 'default-test'
-      })
-      const variationOnDefaultWithAdapterId = pde.activateExperiment({
-        name: 'default-test',
-        adapterId: defaultAdapterId
-      })
-      expect(variationOnDefaultWithAdapterId).to.equal(variationOnDefaultWithoutAdapterId)
-      expect(variationOnDefaultWithAdapterId).to.equal(defaultInstanceActiveVariation)
-    })
-
-    it('should use alternate adapter id', () => {
-      const variationOnAlternateWithAdapterId = pde.activateExperiment({
-        name: 'default-test',
-        adapterId: alternateAdapterId
-      })
-      expect(variationOnAlternateWithAdapterId).to.equal(alternateInstanceActiveVariation)
-    })
-
-    it('should be ready on multiple instances', async () => {
-      await multipleAdapter.onReady()
-      expect(defaultInstance.onReadyStub.called).to.be.true
-      expect(alternateInstance.onReadyStub.called).to.be.true
-    })
-
-    it('should get initial data', () => {
-      const initialData = multipleAdapter.getInitialData()
-      expect(defaultInstance.getDatafileStub.called).to.be.true
-      expect(alternateInstance.getDatafileStub.called).to.be.true
-      expect(initialData).to.deep.equal({
-        [defaultAdapterId]: {},
-        [alternateAdapterId]: {}
-      })
-    })
-
-    it.client('should initialize with initial data', () => {
-      window.__INITIAL_CONTEXT_VALUE__ = {
-        pde: {
-          [defaultAdapterId]: {initialDatafile: defaultAdapterId},
-          [alternateAdapterId]: {initialDatafile: alternateAdapterId}
-        }
-      }
-      const optimizelySDK1 = createOptimizelyInstanceStub()
-      const optimizelySDK2 = createOptimizelyInstanceStub()
-
-      MultipleOptimizelyAdapter.createMultipleOptimizelyInstances({
-        [defaultAdapterId]: {optimizely: optimizelySDK1},
-        [alternateAdapterId]: {optimizely: optimizelySDK2}
-      })
-
-      expect(optimizelySDK1.createInstance.firstCall.args[0].datafile).to.deep.equal({
-        initialDatafile: defaultAdapterId
-      })
-      expect(optimizelySDK2.createInstance.firstCall.args[0].datafile).to.deep.equal({
-        initialDatafile: alternateAdapterId
-      })
-    })
-
-    it('should accept a single adapter', () => {
-      multipleAdapter = new MultipleOptimizelyAdapter({
-        [alternateAdapterId]: {
-          optimizely: multipleAdapterInstances[alternateAdapterId]
-        }
-      })
-      pde = new SuiPDE({adapter: multipleAdapter, hasUserConsents: true})
-      const variationWithoutAdapterId = pde.activateExperiment({
-        name: 'default-test'
-      })
-      const variationWithAdapterId = pde.activateExperiment({
-        name: 'default-test',
-        adapterId: alternateAdapterId
-      })
-      expect(variationWithoutAdapterId).to.equal(variationWithAdapterId)
-      expect(variationWithAdapterId).to.equal(alternateInstanceActiveVariation)
     })
   })
 })

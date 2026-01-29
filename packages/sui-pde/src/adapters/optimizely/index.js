@@ -1,4 +1,14 @@
-import optimizelySDK from '@optimizely/optimizely-sdk'
+import {
+  createInstance,
+  createPollingProjectConfigManager,
+  createBatchEventProcessor,
+  createLogger,
+  createOdpManager,
+  OptimizelyDecideOption,
+  NOTIFICATION_TYPES,
+  ERROR,
+  INFO
+} from '@optimizely/optimizely-sdk'
 
 import {updateIntegrations} from './integrations/handler.js'
 
@@ -14,9 +24,7 @@ const DEFAULT_EVENTS_OPTIONS = {
 
 const DEFAULT_TIMEOUT = 500
 
-const {enums} = optimizelySDK
-
-const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? enums.error : enums.info
+const LOGGER_LEVEL = process.env.NODE_ENV === 'production' ? ERROR : INFO
 
 export default class OptimizelyAdapter {
   /**
@@ -44,35 +52,40 @@ export default class OptimizelyAdapter {
    * @param {string} param.sdkKey
    * @param {object=} param.datafile
    * @param {object} param.options datafile options https://docs.developers.optimizely.com/full-stack/docs/initialize-sdk-javascript-node
-   * @param {object} param.optimizely test purposes only, optimizely sdk
-   * @param {function} param.eventDispatcher https://docs.developers.optimizely.com/full-stack/docs/configure-event-dispatcher-javascript-node
    */
-  static createOptimizelyInstance({
-    options: optionParameter,
-    sdkKey,
-    datafile,
-    optimizely = optimizelySDK,
-    eventDispatcher = optimizelySDK.eventDispatcher
-  }) {
-    const options = {...DEFAULT_DATAFILE_OPTIONS, ...optionParameter}
-    optimizely.setLogLevel(LOGGER_LEVEL)
-    optimizely.setLogger(optimizely.logging.createLogger())
+  static createOptimizelyInstance({options: optionParameter, sdkKey, datafile}) {
     if (!datafile && typeof window !== 'undefined' && window.__INITIAL_CONTEXT_VALUE__?.pde) {
       datafile = window.__INITIAL_CONTEXT_VALUE__.pde
       sdkKey = undefined
     }
 
     const isServer = typeof window === 'undefined'
-    const optimizelyInstance = optimizely.createInstance({
+
+    const projectConfigManager = createPollingProjectConfigManager({
       sdkKey,
-      datafileOptions: options,
       datafile,
-      eventDispatcher,
-      ...DEFAULT_EVENTS_OPTIONS,
-      defaultDecideOptions: isServer ? [optimizely.OptimizelyDecideOption.DISABLE_DECISION_EVENT] : []
+      ...DEFAULT_DATAFILE_OPTIONS,
+      ...optionParameter
     })
 
-    return optimizelyInstance
+    const eventProcessor = createBatchEventProcessor({
+      ...DEFAULT_EVENTS_OPTIONS,
+      ...optionParameter
+    })
+
+    const odpManager = createOdpManager()
+
+    const logger = createLogger({
+      level: LOGGER_LEVEL
+    })
+
+    return createInstance({
+      projectConfigManager,
+      eventProcessor,
+      odpManager,
+      logger,
+      defaultDecideOptions: isServer ? [OptimizelyDecideOption.DISABLE_DECISION_EVENT] : []
+    })
   }
 
   /**
@@ -133,9 +146,7 @@ export default class OptimizelyAdapter {
 
     return user.decide(
       name,
-      !this._hasUserConsents || isEventDisabled
-        ? [optimizelySDK.OptimizelyDecideOption.DISABLE_DECISION_EVENT]
-        : undefined
+      !this._hasUserConsents || isEventDisabled ? [OptimizelyDecideOption.DISABLE_DECISION_EVENT] : undefined
     )
   }
 
@@ -145,7 +156,7 @@ export default class OptimizelyAdapter {
    * @returns {number} notificationId
    */
   addDecideListener({onDecide}) {
-    return this._optimizely.notificationCenter.addNotificationListener(enums.NOTIFICATION_TYPES.DECISION, onDecide)
+    return this._optimizely.notificationCenter.addNotificationListener(NOTIFICATION_TYPES.DECISION, onDecide)
   }
 
   /**
