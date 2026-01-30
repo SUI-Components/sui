@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 3.1.0 (2026-01-30)
+
+
+### Features
+
+* minor change ([2a3a747](https://github.com/SUI-Components/sui/commit/2a3a74761a1e3eafa477ee08b42ae2ff452c4a24))
+* update datafile manager ([37a2f65](https://github.com/SUI-Components/sui/commit/37a2f65bc69b6a7bbad1b7b967db199912046aed))
+
+
+
 # 3.0.0 (2026-01-29)
 
 
