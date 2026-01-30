@@ -63,7 +63,7 @@ export default class OptimizelyAdapter {
     const isServer = typeof window === 'undefined'
 
     const projectConfigManager = sdkKey
-      ? createPollingProjectConfigManager({sdkKey, ...DEFAULT_DATAFILE_OPTIONS, ...optionParameter})
+      ? createPollingProjectConfigManager({sdkKey, datafile, ...DEFAULT_DATAFILE_OPTIONS, ...optionParameter})
       : createStaticProjectConfigManager({datafile})
 
     const eventProcessor = createBatchEventProcessor({
