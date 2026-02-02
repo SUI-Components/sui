@@ -19,8 +19,8 @@ const DEFAULT_DATAFILE_OPTIONS = {
 }
 
 const DEFAULT_EVENTS_OPTIONS = {
-  eventBatchSize: 10,
-  eventFlushInterval: 1000
+  batchSize: 10,
+  flushInterval: 1000
 }
 
 const DEFAULT_TIMEOUT = 500
