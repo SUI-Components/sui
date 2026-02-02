@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.2.0 (2026-02-02)
+
+
+### Features
+
+* minor change in variables ([70e5594](https://github.com/SUI-Components/sui/commit/70e5594483839e8fe32d3c1b7fb1511ec64fa780))
+
+
+
 # 3.1.0 (2026-01-30)
 
 
