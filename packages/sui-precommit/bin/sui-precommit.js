@@ -71,42 +71,46 @@ if (CI === false && name !== '@s-ui/precommit') {
     process.exit(0)
   }
 
-  try {
-    // Get the actual git directory (handles both normal repos and worktrees)
-    const gitDirectory = getGitDirectory(gitPath)
-    const hooksPath = join(gitDirectory, 'hooks')
+  Promise.resolve()
+    .then(() => {
+      // Get the actual git directory (handles both normal repos and worktrees)
+      const gitDirectory = getGitDirectory(gitPath)
+      const hooksPath = join(gitDirectory, 'hooks')
 
-    // Ensure hooks directory exists (important for worktrees)
-    if (!existsSync(hooksPath)) {
-      mkdirSync(hooksPath, {recursive: true})
-      log('Created hooks directory...')
-    }
+      // Ensure hooks directory exists (important for worktrees)
+      if (!existsSync(hooksPath)) {
+        mkdirSync(hooksPath, {recursive: true})
+        log('Created hooks directory...')
+      }
 
-    log('Installing precommit hooks...')
+      log('Installing precommit hooks...')
 
-    const commitMsgPath = join(hooksPath, 'commit-msg')
-    const preCommitPath = join(hooksPath, 'pre-commit')
-    const prePushPath = join(hooksPath, 'pre-push')
+      const commitMsgPath = join(hooksPath, 'commit-msg')
+      const preCommitPath = join(hooksPath, 'pre-commit')
+      const prePushPath = join(hooksPath, 'pre-push')
 
-    await Promise.all([
-      writeFile(commitMsgPath, '#!/bin/sh\nnpm run commit-msg --if-present'),
-      writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
-      writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
-    ])
-
-    await Promise.all([chmod(commitMsgPath, '755'), chmod(preCommitPath, '755'), chmod(prePushPath, '755')])
-
-    // Add package.json modifications
-    addToPackageJson('sui-lint js --staged && sui-lint sass --staged', 'scripts.lint', false)
-    addToPackageJson('echo "Skipping tests as they are not present"', 'scripts.test', false)
-    addToPackageJson('npm run lint', 'scripts.pre-commit', false)
-    addToPackageJson('npm run test', 'scripts.pre-push', false)
-    removeFromPackageJson('husky')
-  } catch (err) {
-    log(err.message)
-    log('[@s-ui/precommit] Installation has FAILED.')
-    process.exit(1)
-  }
+      return {commitMsgPath, preCommitPath, prePushPath}
+    })
+    .then(({commitMsgPath, preCommitPath, prePushPath}) =>
+      Promise.all([
+        writeFile(commitMsgPath, '#!/bin/sh\nnpm run commit-msg --if-present'),
+        writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
+        writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
+      ]).then(() => Promise.all([chmod(commitMsgPath, '755'), chmod(preCommitPath, '755'), chmod(prePushPath, '755')]))
+    )
+    .then(() => {
+      // Add package.json modifications
+      addToPackageJson('sui-lint js --staged && sui-lint sass --staged', 'scripts.lint', false)
+      addToPackageJson('echo "Skipping tests as they are not present"', 'scripts.test', false)
+      addToPackageJson('npm run lint', 'scripts.pre-commit', false)
+      addToPackageJson('npm run test', 'scripts.pre-push', false)
+      removeFromPackageJson('husky')
+    })
+    .catch(err => {
+      log(err.message)
+      log('[@s-ui/precommit] Installation has FAILED.')
+      process.exit(1)
+    })
 }
 
 function log(...args) {
