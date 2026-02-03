@@ -2,7 +2,7 @@
 
 // @ts-check
 
-import {existsSync, readFileSync, writeFileSync} from 'fs'
+import {existsSync, mkdirSync, readFileSync, statSync, writeFileSync} from 'fs'
 import {chmod, writeFile} from 'fs/promises'
 import {join} from 'path'
 
@@ -22,32 +22,81 @@ const {name} = readPackageJson()
  **  - for CI and the same precommit package
  **  - for the `@s-ui/precommit` pkg itself */
 
+/**
+ * Get the actual git directory path, handling both normal repos and worktrees.
+ * In a worktree, .git is a file containing a reference to the actual git directory.
+ * @param {string} gitPath - Path to the .git file or directory
+ * @returns {string} Path to the actual git directory
+ */
+function getGitDirectory(gitPath) {
+  const gitStat = statSync(gitPath)
+
+  if (gitStat.isDirectory()) {
+    // Normal git repository
+    return gitPath
+  } else if (gitStat.isFile()) {
+    // Git worktree - read and parse the gitdir reference
+    const gitFileContent = readFileSync(gitPath, {encoding: 'utf8'}).trim()
+
+    // Expected format: "gitdir: /path/to/actual/.git/worktrees/name"
+    const match = gitFileContent.match(/^gitdir:\s*(.+)$/)
+
+    if (!match) {
+      throw new Error(`Invalid .git file format: ${gitFileContent}`)
+    }
+
+    const gitDir = match[1].trim()
+
+    // Validate the referenced directory exists
+    if (!existsSync(gitDir)) {
+      throw new Error(`Git directory referenced in .git file does not exist: ${gitDir}`)
+    }
+
+    return gitDir
+  } else {
+    throw new Error('.git exists but is neither a file nor a directory')
+  }
+}
+
 if (CI === false && name !== '@s-ui/precommit') {
-  const hooksPath = join(cwd, '.git')
+  const gitPath = join(cwd, '.git')
 
   /**
-   * Check if hooks directory exists. If not, it means
+   * Check if .git exists. If not, it means
    * the project is not a Git Repository and it doesn't
    * make sense to install Git hooks for now.
    */
-  if (!existsSync(hooksPath)) {
+  if (!existsSync(gitPath)) {
     log('No .git folder found. Skipping precommit hooks installation...')
     process.exit(0)
   }
 
-  log('Installing precommit hooks...')
-
-  const commitMsgPath = `${hooksPath}/hooks/commit-msg`
-  const preCommitPath = `${hooksPath}/hooks/pre-commit`
-  const prePushPath = `${hooksPath}/hooks/pre-push`
-
-  Promise.all([
-    writeFile(commitMsgPath, '#!/bin/sh\nnpm run commit-msg --if-present'),
-    writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
-    writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
-  ]).then(() => Promise.all([chmod(commitMsgPath, '755'), chmod(preCommitPath, '755'), chmod(prePushPath, '755')]))
-
   try {
+    // Get the actual git directory (handles both normal repos and worktrees)
+    const gitDirectory = getGitDirectory(gitPath)
+    const hooksPath = join(gitDirectory, 'hooks')
+
+    // Ensure hooks directory exists (important for worktrees)
+    if (!existsSync(hooksPath)) {
+      mkdirSync(hooksPath, {recursive: true})
+      log('Created hooks directory...')
+    }
+
+    log('Installing precommit hooks...')
+
+    const commitMsgPath = join(hooksPath, 'commit-msg')
+    const preCommitPath = join(hooksPath, 'pre-commit')
+    const prePushPath = join(hooksPath, 'pre-push')
+
+    await Promise.all([
+      writeFile(commitMsgPath, '#!/bin/sh\nnpm run commit-msg --if-present'),
+      writeFile(preCommitPath, '#!/bin/sh\nnpm run pre-commit --if-present'),
+      writeFile(prePushPath, '#!/bin/sh\nnpm run pre-push --if-present')
+    ])
+
+    await Promise.all([chmod(commitMsgPath, '755'), chmod(preCommitPath, '755'), chmod(prePushPath, '755')])
+
+    // Add package.json modifications
     addToPackageJson('sui-lint js --staged && sui-lint sass --staged', 'scripts.lint', false)
     addToPackageJson('echo "Skipping tests as they are not present"', 'scripts.test', false)
     addToPackageJson('npm run lint', 'scripts.pre-commit', false)
