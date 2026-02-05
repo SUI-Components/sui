@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.4.0 (2026-02-05)
+
+
+### Bug Fixes
+
+* allow npm install on git worktrees ([527fc2f](https://github.com/SUI-Components/sui/commit/527fc2f4b071bf81e4094f22b10808b2df45fd07))
+
+
+
 # 3.3.0 (2024-09-30)
 
 
