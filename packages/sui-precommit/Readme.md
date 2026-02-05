@@ -15,6 +15,12 @@ It provides:
 $ npm install @s-ui/precommit --save-dev
 ```
 
+## Git Worktree Support
+
+`@s-ui/precommit` automatically detects and supports git worktrees. Whether you're working in a normal git repository or a worktree, the hooks will be installed in the correct location automatically.
+
+When used in a worktree, hooks are installed in the main repository's worktree-specific hooks directory, ensuring proper git hook execution.
+
 ## CLI
 
 ### `$ sui-precommit`
