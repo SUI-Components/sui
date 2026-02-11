@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.58.0 (2026-02-11)
+
+
+### Features
+
+* adapt typescript eslint rules ([28023b1](https://github.com/SUI-Components/sui/commit/28023b18aeaa5e4b20ff0f080cf816766a3ddf21))
+
+
+
 # 4.57.0 (2025-01-13)
 
 
