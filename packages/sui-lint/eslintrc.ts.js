@@ -230,7 +230,24 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': [RULES.OFF, {allowTypedFunctionExpressions: false}],
         'chai-friendly/no-unused-expressions': RULES.ERROR,
         '@typescript-eslint/no-unused-expressions': RULES.OFF,
-        '@typescript-eslint/return-await': RULES.OFF
+        '@typescript-eslint/return-await': RULES.OFF,
+        '@typescript-eslint/strict-boolean-expressions': [
+          'error',
+          {
+            allowString: true,
+            allowNumber: true,
+            allowNullableObject: true,
+            allowNullableBoolean: true,
+            allowNullableString: true,
+            allowNullableNumber: true,
+            allowAny: true
+          }
+        ],
+        '@typescript-eslint/prefer-nullish-coalescing': RULES.OFF,
+        '@typescript-eslint/no-non-null-assertion': RULES.WARNING,
+        '@typescript-eslint/no-floating-promises': RULES.ERROR,
+        '@typescript-eslint/no-dynamic-delete': RULES.OFF,
+        '@typescript-eslint/consistent-type-assertions': RULES.OFF
       }
     },
     {
