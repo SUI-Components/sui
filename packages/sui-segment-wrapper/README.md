@@ -10,7 +10,6 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 
 **Google Analytics 🔍**
 
-- [x] Load GA4 if `googleAnalyticsMeasurementId` is provided.
 - [x] Retrieve `clientId` and `sessionId` automatically from GA4 and put in Segment tracks.
 
 **Adobe Marketing Cloud Visitor Id ☁️**
@@ -149,9 +148,6 @@ Configure both values correctly before running the application to ensure proper 
 
 You could put a special config in a the `window.__mpi` to change some behaviour of the wrapper. This config MUST somewhere before using the Segment Wrapper.
 
-- `googleAnalyticsMeasurementId`: _(optional)_ If set, this value will be used for the Google Analytics Measurement API. It will load `gtag` to get the client id.
-- `googleAnalyticsConfig`: _(optional)_ If set, this config will be passed when initializing the Google Analytics Measurement API.
-- `googleAnalyticsInitEvent`: _(optional)_ If set, an event will be sent in order to initialize all the Google Analytics data.
 - `defaultContext`: _(optional)_ If set, properties will be merged and sent with every `track` and `page` in the **context object**. It's the ideal place to put the `site` and `vertical` info to make sure that static info will be sent along with all the tracking.
 - `defaultProperties`: _(optional)_ If set, properties will be merged and sent with every `track` and `page`.
 - `getCustomAdobeVisitorId`: _(optional)_ If set, the output of this function will be used as `marketingCloudVisitorId` in Adobe Analytics' integration. It must return a promise.
@@ -168,7 +164,6 @@ Example:
 ```js
   window.__mpi = {
     segmentWrapper: {
-      googleAnalyticsMeasurementId: 'GA-123456789',
       universalId: '7ab9ddf3281d5d5458a29e8b3ae2864',
       defaultContext: {
         site: 'comprocasa',

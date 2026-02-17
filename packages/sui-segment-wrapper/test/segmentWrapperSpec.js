@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {getConfig, setConfig} from '../src/config.js'
+import {setConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
 import {campaignContext} from '../src/middlewares/source/campaignContext.js'
 import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
@@ -13,7 +13,7 @@ import {INTEGRATIONS_WHEN_NO_CONSENTS} from '../src/segmentWrapper.js'
 import initTcfTracking, {getGdprPrivacyValue, USER_GDPR} from '../src/tcf.js'
 import {assertCampaignDetails} from './assertions.js'
 import {
-  cleanWindowStubs,
+  cleanStubs,
   resetReferrerState,
   stubActualLocation,
   stubDocumentCookie,
@@ -54,7 +54,7 @@ describe('Segment Wrapper', function () {
     window.analytics.addSourceMiddleware(pageReferrer)
   })
 
-  afterEach(() => cleanWindowStubs())
+  afterEach(() => cleanStubs())
 
   describe('should use correct page referrer for tracks', () => {
     let referrerStub, locationStub
@@ -220,172 +220,148 @@ describe('Segment Wrapper', function () {
       })
     })
 
-    describe('and gtag has been configured properly', () => {
-      it('should send Google Analytics integration with true if user declined consents', async () => {
-        // Add the needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 123)
+    it('should send Google Analytics integration with true if user declined consents', async () => {
+      await simulateUserDeclinedConsents()
 
-        await simulateUserDeclinedConsents()
+      await suiAnalytics.track(
+        'fakeEvent',
+        {},
+        {
+          integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
+        }
+      )
 
-        await suiAnalytics.track(
-          'fakeEvent',
-          {},
-          {
-            integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
-          }
-        )
+      const {context} = getDataFromLastTrack()
 
-        const {context} = getDataFromLastTrack()
-
-        expect(context.integrations).to.deep.includes({
-          fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
-        })
+      expect(context.integrations).to.deep.includes({
+        fakeIntegrationKey: 'fakeIntegrationValue',
+        'Google Analytics 4': {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
       })
+    })
 
-      it('should send ClientId on Google Analytics integration if user accepted consents', async () => {
-        // add needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 123)
+    it('should send ClientId on Google Analytics integration if user accepted consents', async () => {
+      await simulateUserAcceptConsents()
 
-        await simulateUserAcceptConsents()
+      await suiAnalytics.track(
+        'fakeEvent',
+        {},
+        {
+          integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
+        }
+      )
 
-        await suiAnalytics.track(
-          'fakeEvent',
-          {},
-          {
-            integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
-          }
-        )
+      const {context} = getDataFromLastTrack()
 
-        const {context} = getDataFromLastTrack()
-
-        expect(context.integrations).to.deep.includes({
-          fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': {
-            clientId: 'fakeClientId',
-            sessionId: 'fakeSessionId'
-          }
-        })
+      expect(context.integrations).to.deep.includes({
+        fakeIntegrationKey: 'fakeIntegrationValue',
+        'Google Analytics 4': {
+          clientId: 'fakeClientId',
+          sessionId: 'fakeSessionId'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=em-mail-winter%20promo-honda`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=em-mail-winter%20promo-honda',
-          expectation: {
-            campaign: {
-              medium: 'email',
-              name: 'winter promo',
-              source: 'mail',
-              content: 'honda'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=em-mail-winter%20promo-honda`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=em-mail-winter%20promo-honda',
+        expectation: {
+          campaign_medium: 'email',
+          campaign_name: 'winter promo',
+          campaign_source: 'mail',
+          campaign_content: 'honda'
+        }
       })
+    })
 
-      it('should not send mapped campaing details when stc param is invalid', async () => {
-        await assertCampaignDetails({
-          queryString:
-            '?stc=IJ_PUSH%7Celement~50220488692%7Cversion~pushmssearch_jobtitle_normalized&id_push=50220488692 ',
-          expectation: null
-        })
+    it('should not send mapped campaing details when stc param is invalid', async () => {
+      await assertCampaignDetails({
+        queryString:
+          '?stc=IJ_PUSH%7Celement~50220488692%7Cversion~pushmssearch_jobtitle_normalized&id_push=50220488692 ',
+        expectation: null
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink',
-          expectation: {
-            campaign: {
-              medium: 'social-media',
-              id: '1234',
-              name: 'spring sale',
-              source: 'google',
-              content: 'aprilia',
-              term: 'logolink'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink',
+        expectation: {
+          campaign_medium: 'social-media',
+          campaign_id: '1234',
+          campaign_name: 'spring sale',
+          campaign_source: 'google',
+          campaign_content: 'aprilia',
+          campaign_term: 'logolink'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn%20sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn%20sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn%20sale`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sem-google-autumn%20sale',
+        expectation: {
+          campaign_medium: 'paid-search',
+          campaign_name: 'autumn sale',
+          campaign_source: 'google'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sem-google-autumn sale',
+        expectation: {
+          campaign_medium: 'paid-search',
+          campaign_name: 'autumn sale',
+          campaign_source: 'google'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-1234%3Aautumn%20sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-1234%3Aautumn%20sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              id: '1234',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sem-google-1234%3Aautumn%20sale`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sem-google-1234%3Aautumn%20sale',
+        expectation: {
+          campaign_medium: 'paid-search',
+          campaign_id: '1234',
+          campaign_name: 'autumn sale',
+          campaign_source: 'google'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-1234:autumn sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-1234:autumn sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              id: '1234',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sem-google-1234:autumn sale`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sem-google-1234:autumn sale',
+        expectation: {
+          campaign_medium: 'paid-search',
+          campaign_id: '1234',
+          campaign_name: 'autumn sale',
+          campaign_source: 'google'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-aprilia`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn sale-aprilia',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google',
-              content: 'aprilia'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-aprilia`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sem-google-autumn sale-aprilia',
+        expectation: {
+          campaign_medium: 'paid-search',
+          campaign_name: 'autumn sale',
+          campaign_source: 'google',
+          campaign_content: 'aprilia'
+        }
       })
+    })
 
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-na-logolink`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn sale-na-logolink',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google',
-              term: 'logolink'
-            }
-          }
-        })
+    it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-na-logolink`', async () => {
+      await assertCampaignDetails({
+        queryString: '?stc=sem-google-autumn sale-na-logolink',
+        expectation: {
+          campaign_medium: 'paid-search',
+          campaign_name: 'autumn sale',
+          campaign_source: 'google',
+          campaign_term: 'logolink'
+        }
       })
     })
 
@@ -515,24 +491,20 @@ describe('Segment Wrapper', function () {
     })
 
     describe('and GA Measurment ID is set', () => {
-      beforeEach(() => {
-        setConfig('googleAnalyticsMeasurementId', 123)
-      })
-
       it('should set the user id into `gtag` properly', async function () {
+        const googleAnalyticsMeasurementId = 123
+
         await simulateUserAcceptConsents()
         await suiAnalytics.identify('myTestUserId')
 
-        const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-
-        const getGaUserId = async () =>
+        const getGaUserId = async googleAnalyticsMeasurementId =>
           new Promise(resolve => {
             window.gtag('get', googleAnalyticsMeasurementId, 'user_id', userId => {
               resolve(userId)
             })
           })
 
-        const gaUserId = await getGaUserId()
+        const gaUserId = await getGaUserId(googleAnalyticsMeasurementId)
 
         expect(gaUserId).to.equal('myTestUserId')
       })
@@ -811,6 +783,7 @@ describe('Segment Wrapper', function () {
 
     it('sends an event with the actual context and traits when the consents are declined', async () => {
       const spy = sinon.stub()
+
       window.google_tag_data = {
         ics: {
           getConsentState: () => 2
@@ -835,7 +808,10 @@ describe('Segment Wrapper', function () {
       const integrations = {
         All: false,
         'Adobe Analytics': true,
-        'Google Analytics 4': true,
+        'Google Analytics 4': {
+          clientId: 'fakeClientId',
+          sessionId: 'fakeSessionId'
+        },
         Personas: false,
         Webhooks: true,
         Webhook: true
@@ -861,6 +837,10 @@ describe('Segment Wrapper', function () {
         clientVersion: 'segment-wrapper@0.0.0'
       }
       const {traits} = spy.getCall(0).firstArg.obj.context
+
+      console.log('[segment-wrapper] context.context.integrations', context.context.integrations)
+      console.log('[segment-wrapper] expectation.context.integrations', expectation.context.integrations)
+
       expect(context).to.deep.equal(expectation)
       expect(traits).to.deep.equal({
         anonymousId: 'fakeAnonymousId',
