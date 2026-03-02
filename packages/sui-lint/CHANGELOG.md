@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.59.0 (2026-03-02)
+
+
+### Features
+
+* update minor and patch dependencies ([cae49dd](https://github.com/SUI-Components/sui/commit/cae49dd31b9076d39300071c71d0aaa969fed707))
+
+
+
 # 4.58.0 (2026-02-11)
 
 
