@@ -85,9 +85,15 @@ compiler.run(async (error, stats) => {
 
   console.log(`Webpack stats: ${stats}`)
 
-  if (saveStats) {
+  if (saveStats && stats) {
     const filePath = `${process.cwd()}/public/stats.json`
-    fs.writeFileSync(filePath, JSON.stringify(stats.toJson(), null, 2), {
+    const statsData = stats.toJson({
+      modules: true,
+      assets: true,
+      chunks: true,
+      all: false
+    })
+    fs.writeFileSync(filePath, JSON.stringify(statsData, null, 2), {
       encoding: 'utf8'
     })
   }
