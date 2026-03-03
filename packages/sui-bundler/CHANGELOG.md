@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.75.0 (2026-03-03)
+
+
+### Features
+
+* Add a new cli flag to pass stats props from outside and make it retrocom ([1621646](https://github.com/SUI-Components/sui/commit/1621646f09cb2ede91c43605f79b78bddc9dd4b0))
+* Improve json stats by only get that it's important ([4a01ba6](https://github.com/SUI-Components/sui/commit/4a01ba685bf7b200e9092b325aa428f729a8bad1))
+
+
+
 # 9.74.0 (2025-07-14)
 
 
