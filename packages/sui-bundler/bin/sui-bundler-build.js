@@ -21,6 +21,10 @@ program
   .option('-C, --clean', 'Remove public folder before create a new one')
   .option('-S, --save-stats', 'Save stats.json in public folder')
   .option(
+    '--stats-options [options]',
+    'Stats options as JSON string (e.g., \'{"modules":true,"assets":true,"chunks":true}\')'
+  )
+  .option(
     '-l, --link-package [package]',
     'Replace each occurrence of this package with an absolute path to this folder',
     (v, m) => {
@@ -35,13 +39,14 @@ program
     console.log('')
     console.log('    $ sui-bundler build -S')
     console.log('    $ sui-bundler build -SC')
+    console.log('    $ sui-bundler build -S --stats-options \'{"modules":true,"assets":true}\'')
     console.log('    $ sui-bundler dev --link-package /my/domain/folder')
     console.log('    $ sui-bundler build --help')
     console.log('')
   })
   .parse(process.argv)
 
-const {clean = false, context, saveStats, linkPackage: packagesToLink = []} = program.opts()
+const {clean = false, context, saveStats, statsOptions, linkPackage: packagesToLink = []} = program.opts()
 
 config.context = context || config.context
 
@@ -85,9 +90,21 @@ compiler.run(async (error, stats) => {
 
   console.log(`Webpack stats: ${stats}`)
 
-  if (saveStats) {
+  if (saveStats && stats) {
     const filePath = `${process.cwd()}/public/stats.json`
-    fs.writeFileSync(filePath, JSON.stringify(stats.toJson(), null, 2), {
+    let statsConfig
+
+    if (statsOptions) {
+      try {
+        statsConfig = JSON.parse(statsOptions)
+      } catch (err) {
+        log.error('Invalid JSON format for --stats-options')
+        return process.exit(1)
+      }
+    }
+
+    const statsData = statsConfig ? stats.toJson(statsConfig) : stats.toJson()
+    fs.writeFileSync(filePath, JSON.stringify(statsData, null, 2), {
       encoding: 'utf8'
     })
   }
