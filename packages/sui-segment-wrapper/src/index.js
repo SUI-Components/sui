@@ -51,6 +51,7 @@ if (isClient && window.analytics) {
 
   if (googleAnalyticsMeasurementId) {
     const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
+    const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
 
     window[dataLayerName] = window[dataLayerName] || []
     window.gtag =
@@ -62,7 +63,7 @@ if (isClient && window.analytics) {
     window.gtag('js', new Date())
     if (needsConsentManagement) sendGoogleConsents()
     window.gtag('config', googleAnalyticsMeasurementId, {
-      cookie_prefix: 'segment',
+      cookie_prefix: cookiePrefix,
       send_page_view: false,
       ...googleAnalyticsConfig,
       ...getCampaignDetails()
@@ -80,3 +81,4 @@ export default analytics
 export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 export {getUniversalId} from './universalId.js'
 export {EVENTS} from './events.js'
+export {getGA4Data, getGoogleClientId, getGoogleSessionId} from './repositories/googleRepository.js'
