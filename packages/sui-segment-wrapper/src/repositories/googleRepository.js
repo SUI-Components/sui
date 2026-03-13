@@ -3,6 +3,7 @@ import {dispatchEvent} from '@s-ui/js/lib/events'
 import {getConfig} from '../config.js'
 import {EVENTS} from '../events.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
+import {getGA4SessionIdFromCookie} from '../utils/cookies.js'
 
 const FIELDS = {
   clientId: 'client_id',
@@ -69,6 +70,38 @@ export const loadGoogleAnalytics = async () => {
   const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}&l=${dataLayerName}`
   // Load it and retrieve the `clientId` from Google
   return loadScript(gtagScript)
+}
+
+/**
+ * Checks if a session is new by comparing with localStorage.
+ * This function is idempotent and safe to call multiple times with the same sessionId.
+ *
+ * @param {string} sessionId - Current session ID
+ * @returns {{isNewSession: boolean, cachedSessionId: string|null}}
+ */
+const checkNewSession = sessionId => {
+  const storageKey = 'ga_session_id'
+  let cachedSessionId = null
+
+  try {
+    cachedSessionId = window.localStorage.getItem(storageKey)
+  } catch (e) {
+    // localStorage might not be available
+    return {isNewSession: false, cachedSessionId: null}
+  }
+
+  const isNewSession = String(cachedSessionId) !== String(sessionId)
+
+  // Only update localStorage if it's actually a new session
+  if (isNewSession && sessionId) {
+    try {
+      window.localStorage.setItem(storageKey, sessionId)
+    } catch (e) {
+      // localStorage might not be available
+    }
+  }
+
+  return {isNewSession, cachedSessionId}
 }
 
 // Trigger GA init event just once per session.
@@ -184,12 +217,86 @@ function readFromUtm(searchParams) {
 }
 
 export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
+
+/**
+ * Exposes GA4 data to window for debugging and compatibility.
+ * Also resolves a global promise if available (window.resolveGAData).
+ *
+ * @param {object} gaData - GA4 data object
+ */
+const exposeGA4Data = gaData => {
+  window.__GA4_DATA = gaData
+
+  if (typeof window.resolveGAData === 'function') {
+    window.resolveGAData(gaData)
+  }
+}
+
+// Cache to track if we've already logged the new session
+let hasLoggedNewSession = false
+
+/**
+ * Gets the Google Analytics session ID, prioritizing the cookie value over the API.
+ * This avoids race conditions where gtag.get('session_id') returns an incorrect value
+ * in the first hits before the cookie is fully written.
+ *
+ * Also detects and stores new sessions in localStorage for tracking purposes.
+ * Safe to call multiple times - will only log once per session.
+ *
+ * @returns {Promise<string>} The session ID
+ */
 export const getGoogleSessionId = async () => {
-  const sessionId = await getGoogleField(FIELDS.sessionId)
+  const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
+
+  // First, get the session ID from gtag API (may be incorrect in first hits)
+  const apiSessionId = await getGoogleField(FIELDS.sessionId)
+
+  // Try to read the session ID directly from the cookie (more reliable)
+  const cookieSessionId = getGA4SessionIdFromCookie(cookiePrefix)
+
+  // Prioritize cookie value if available, fallback to API
+  const sessionId = cookieSessionId || apiSessionId
+
+  // Check if this is a new session and store it
+  const {isNewSession} = checkNewSession(sessionId)
+
+  // Only log once per session to avoid spam in console
+  if (isNewSession && sessionId && !hasLoggedNewSession) {
+    hasLoggedNewSession = true
+    // eslint-disable-next-line no-console
+    console.log(`New GA4 session started: ${sessionId} (Source: ${cookieSessionId ? 'Cookie' : 'API'})`)
+  } else if (!isNewSession) {
+    // Reset flag if we're back to the same session
+    hasLoggedNewSession = false
+  }
 
   triggerGoogleAnalyticsInitEvent(sessionId)
 
   return sessionId
+}
+
+/**
+ * Gets both client ID and session ID from GA4 and exposes them globally.
+ * This is useful for debugging and ensures data consistency.
+ *
+ * @returns {Promise<{clientId: string, sessionId: string, cachedSessionId: string, isNewSession: boolean}>}
+ */
+export const getGA4Data = async () => {
+  const [clientId, sessionId] = await Promise.all([getGoogleClientId(), getGoogleSessionId()])
+
+  // Reuse the session check logic
+  const {isNewSession, cachedSessionId} = checkNewSession(sessionId)
+
+  const gaData = {
+    clientId,
+    sessionId,
+    cachedSessionId,
+    isNewSession
+  }
+
+  exposeGA4Data(gaData)
+
+  return gaData
 }
 
 // Unified consent state getter.
