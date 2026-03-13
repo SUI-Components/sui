@@ -104,33 +104,45 @@ const checkNewSession = sessionId => {
   return {isNewSession, cachedSessionId}
 }
 
-// Trigger GA init event just once per session.
-const triggerGoogleAnalyticsInitEvent = sessionId => {
+/**
+ * Trigger GA init event just once per session.
+ * Uses checkNewSession to detect if it's a new session before sending the event.
+ *
+ * @param {string} sessionId - Current session ID
+ * @param {boolean} isNewSession - Whether this is a new session (from checkNewSession)
+ */
+const triggerGoogleAnalyticsInitEvent = (sessionId, isNewSession) => {
   const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
   const eventPrefix = `ga_event_${eventName}_`
   const eventKey = `${eventPrefix}${sessionId}`
 
   if (typeof window.gtag === 'undefined') return
 
-  // Check if the event has already been sent in this session.
-  if (!localStorage.getItem(eventKey)) {
-    // If not, send it.
-    window.gtag('event', eventName)
+  // Only send event if it's a new session and we haven't sent it yet
+  try {
+    const alreadySent = localStorage.getItem(eventKey)
 
-    // eslint-disable-next-line no-console
-    console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
+    if (isNewSession && !alreadySent && sessionId) {
+      // Send the event
+      window.gtag('event', eventName)
 
-    // And then save a new GA session hit in local storage.
-    localStorage.setItem(eventKey, 'true')
-    dispatchEvent({eventName: EVENTS.GA4_INIT_EVENT_SENT, detail: {eventName, sessionId}})
-  }
+      // eslint-disable-next-line no-console
+      console.log(`Sending GA4 event "${eventName}" for the session "${sessionId}"`)
 
-  // Clean old GA sessions hits from the storage.
-  Object.keys(localStorage).forEach(key => {
-    if (key.startsWith(eventPrefix) && key !== eventKey) {
-      localStorage.removeItem(key)
+      // Mark as sent
+      localStorage.setItem(eventKey, 'true')
+      dispatchEvent({eventName: EVENTS.GA4_INIT_EVENT_SENT, detail: {eventName, sessionId}})
+
+      // Clean old GA sessions hits from the storage
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith(eventPrefix) && key !== eventKey) {
+          localStorage.removeItem(key)
+        }
+      })
     }
-  })
+  } catch (e) {
+    // localStorage might not be available
+  }
 }
 
 const getGoogleField = async field => {
@@ -270,7 +282,8 @@ export const getGoogleSessionId = async () => {
     hasLoggedNewSession = false
   }
 
-  triggerGoogleAnalyticsInitEvent(sessionId)
+  // Trigger GA4 init event if it's a new session
+  triggerGoogleAnalyticsInitEvent(sessionId, isNewSession)
 
   return sessionId
 }
