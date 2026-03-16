@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 4.37.0 (2026-03-16)
+
+
+### Bug Fixes
+
+* improve session id assignment to all destinations ([dc3653c](https://github.com/SUI-Components/sui/commit/dc3653c48a55b6d2dc0652b94bcfae8f514f6115))
+
+
+### Features
+
+* prioritize GA4 cookie over API to fix session ID inconsistencies ([48b2186](https://github.com/SUI-Components/sui/commit/48b2186b1717fa57b7f734799e45634e548612cc))
+
+
+
 # 4.36.0 (2025-12-04)
 
 
