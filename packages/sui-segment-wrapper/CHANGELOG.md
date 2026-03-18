@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.38.0 (2026-03-18)
+
+
+### Features
+
+* force release ([a1f13f2](https://github.com/SUI-Components/sui/commit/a1f13f2d7439fd2453815ffa81036c8d291cd31b))
+
+
+
 # 4.37.0 (2026-03-16)
 
 
