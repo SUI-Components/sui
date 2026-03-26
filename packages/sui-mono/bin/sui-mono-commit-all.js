@@ -37,12 +37,12 @@ const {message, type} = program.opts()
  * @param  {String}  path Folder to check
  * @return {Promise<Boolean>}
  */
-const hasChangedFiles = async path => {
+const hasChangedFiles = async (pkgPath, repoRoot) => {
   let stdout = ''
 
   try {
-    await exec(`git add .`, {cwd: path})
-    const status = await exec(`git status ${path} --porcelain`)
+    await exec(`git add ${pkgPath}`, {cwd: repoRoot})
+    const status = await exec(`git status ${pkgPath} --porcelain`, {cwd: repoRoot})
     stdout = status.stdout || ''
   } catch (error) {
     console.error(error)
@@ -57,22 +57,26 @@ const hasChangedFiles = async path => {
  */
 let commitsCount = 0
 
-/**
- * Functions that executes the commit for each package
- * @type {Array<Function>}
- */
-const checkStageFuncs = getWorkspaces().map(pkg => {
-  return () =>
-    hasChangedFiles(pkg).then(hasChanges => {
-      if (hasChanges) {
-        const packageName = pkg === '.' ? 'Root' : pkg
-        const args = ['commit', `-m "${type}(${packageName}): ${message}"`]
-        commitsCount++ && args.push('--no-verify') // precommit only once
-        return getSpawnPromise('git', args)
-      }
+exec('git rev-parse --show-toplevel')
+  .then(({stdout}) => {
+    const repoRoot = stdout.trim()
+    /**
+     * Functions that executes the commit for each package
+     * @type {Array<Function>}
+     */
+    const checkStageFuncs = getWorkspaces().map(pkg => {
+      return () =>
+        hasChangedFiles(pkg, repoRoot).then(hasChanges => {
+          if (hasChanges) {
+            const packageName = pkg === '.' ? 'Root' : pkg
+            const args = ['commit', `-m "${type}(${packageName}): ${message}"`]
+            commitsCount++ && args.push('--no-verify') // precommit only once
+            return getSpawnPromise('git', args, {cwd: repoRoot})
+          }
+        })
     })
-})
 
-getSpawnPromise('git', ['reset']) // Unstage all prossible staged files
-  .then(() => checkStageFuncs.reduce((promise, func) => promise.then(func), Promise.resolve()))
+    return getSpawnPromise('git', ['reset'], {cwd: repoRoot}) // Unstage all possible staged files
+      .then(() => checkStageFuncs.reduce((promise, func) => promise.then(func), Promise.resolve()))
+  })
   .catch(showError)
