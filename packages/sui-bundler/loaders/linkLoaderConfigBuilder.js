@@ -10,8 +10,12 @@ const diccFromAbsolutePaths = (paths, init = {}) =>
     const packagePath = path.resolve(pkg)
     try {
       const pkg = require(path.join(packagePath, 'package.json'))
-      acc[pkg.name] = path.join(packagePath, 'src')
-      log.success(`✔ ${pkg.name} from path "${packagePath}"`)
+      if (pkg.scripts?.dev) {
+        log.info(`ℹ Package from path "${packagePath}" wouldn't be linked because it has its own watcher.`)
+      } else {
+        acc[pkg.name] = path.join(packagePath, 'src')
+        log.success(`✔ ${pkg.name} from path "${packagePath}"`)
+      }
       return acc
     } catch (e) {
       log.warn(`⚠ Package from path "${packagePath}" can't be linked.\n  Path is wrong or package.json is missing.`)
