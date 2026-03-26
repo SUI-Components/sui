@@ -102,6 +102,21 @@ $ sui-bundler dev -L ../frontend-ma--uilib-components/components
 
 And of course you can combine `link-all` and `link-package` flags
 
+#### Packages with their own watcher (dev script)
+
+When using `--link-package` or `--link-all`, packages that define a `dev` script in their `package.json` are **automatically excluded** from being linked by `sui-bundler`. These packages are expected to handle their own file watching and compilation via their `dev` script, so linking them would be redundant or could cause conflicts.
+
+```json
+// package.json of the linked package
+{
+  "scripts": {
+    "dev": "tsup --watch" // this package will NOT be linked by sui-bundler
+  }
+}
+```
+
+> **Note:** If the package is **not part of the monorepo** (i.e. it lives outside the project remember to use [`npm link`](https://docs.npmjs.com/cli/commands/npm-link) directly instead.
+
 ### Production
 
 ```
