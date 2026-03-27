@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.76.0 (2026-03-27)
+
+
+### Features
+
+* do not link on packages with dev script ([ed44c3c](https://github.com/SUI-Components/sui/commit/ed44c3c3d2384d7295f781cc5ac709e0c8733c96))
+
+
+
 # 9.75.0 (2026-03-03)
 
 
