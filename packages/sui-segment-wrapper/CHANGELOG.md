@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.39.0 (2026-03-30)
+
+
+### Bug Fixes
+
+* fix ga4 session id inconsistencies ([d6664f0](https://github.com/SUI-Components/sui/commit/d6664f079d099e8695199605f873bdd668f57df1))
+
+
+
 # 4.38.0 (2026-03-18)
 
 
