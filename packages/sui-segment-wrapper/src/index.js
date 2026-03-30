@@ -77,6 +77,7 @@ if (isClient && window.analytics) {
 }
 
 export default analytics
-export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 export {getUniversalId} from './universalId.js'
 export {EVENTS} from './events.js'
+export {getGoogleClientId, getGoogleSessionId} from './repositories/googleRepository.js'
+export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
