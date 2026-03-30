@@ -192,7 +192,7 @@ describe('Segment Wrapper', function () {
     describe('and gtag has been configured properly', () => {
       it('should send Google Analytics integration with true if user declined consents', async () => {
         // Add the needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 123)
+        setConfig('googleAnalyticsMeasurementId', 'G-G123456')
 
         await simulateUserDeclinedConsents()
 
@@ -214,7 +214,7 @@ describe('Segment Wrapper', function () {
 
       it('should send ClientId on Google Analytics integration if user accepted consents', async () => {
         // add needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 123)
+        setConfig('googleAnalyticsMeasurementId', 'G-G123456')
 
         await simulateUserAcceptConsents()
 

@@ -77,5 +77,31 @@ describe('Cookies Utils', () => {
       const sessionId = getGA4SessionIdFromCookie('segment')
       expect(sessionId).to.equal('1774864422')
     })
+
+    it('should find specific cookie when measurementId is provided', () => {
+      // Set up multiple GA4 cookies (simulating multiple domains/containers)
+      document.cookie = 'segment_ga_6NE7MBSF9K=GS2.1.s1111111111$o1$g0$t1774864422$j60$l0$h0'
+      document.cookie = 'segment_ga_L1KP423S8T=GS2.1.s2222222222$o1$g0$t1774864422$j60$l0$h0'
+      document.cookie = 'segment_ga_YL86FK3DFK=GS2.1.s3333333333$o1$g0$t1774864422$j60$l0$h0'
+
+      // Should find the specific container's session ID
+      const sessionId = getGA4SessionIdFromCookie('segment', 'G-L1KP423S8T')
+      expect(sessionId).to.equal('2222222222')
+    })
+
+    it('should return null if specific measurementId cookie does not exist', () => {
+      document.cookie = 'segment_ga_6NE7MBSF9K=GS2.1.s1111111111$o1$g0$t1774864422$j60$l0$h0'
+
+      const sessionId = getGA4SessionIdFromCookie('segment', 'G-NONEXISTENT')
+      expect(sessionId).to.be.null
+    })
+
+    it('should handle measurementId without G- prefix', () => {
+      document.cookie = 'segment_ga_6NE7MBSF9K=GS2.1.s1111111111$o1$g0$t1774864422$j60$l0$h0'
+
+      // Should work even if G- prefix is already removed
+      const sessionId = getGA4SessionIdFromCookie('segment', 'G-6NE7MBSF9K')
+      expect(sessionId).to.equal('1111111111')
+    })
   })
 })

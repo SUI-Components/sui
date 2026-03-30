@@ -293,7 +293,7 @@ describe('GoogleRepository', () => {
     it('should return cookie sessionId when available', async () => {
       // Given - set actual cookie instead of stubbing
       const cookieSessionId = '1234567890'
-      document.cookie = `segment_ga_G-TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
+      document.cookie = `segment_ga_TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
 
       // When
       const result = await getGoogleSessionId()
@@ -316,7 +316,7 @@ describe('GoogleRepository', () => {
       // Given
       const cookieSessionId = '5555555555'
       window.__mpi.segmentWrapper.googleAnalyticsCookiePrefix = 'custom'
-      document.cookie = `custom_ga_G-TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
+      document.cookie = `custom_ga_TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
 
       // When
       const result = await getGoogleSessionId()
@@ -328,7 +328,7 @@ describe('GoogleRepository', () => {
     it('should use default prefix when not configured', async () => {
       // Given
       const cookieSessionId = '7777777777'
-      document.cookie = `segment_ga_G-TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
+      document.cookie = `segment_ga_TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
 
       // When
       const result = await getGoogleSessionId()

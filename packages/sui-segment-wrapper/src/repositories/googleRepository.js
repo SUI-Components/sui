@@ -241,12 +241,14 @@ export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
  */
 export const getGoogleSessionId = async () => {
   const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
+  const measurementId = getConfig('googleAnalyticsMeasurementId')
 
   // Wait for GA4 to be ready (only on first call)
   await waitForGA4Ready()
 
   // ONLY use cookie value - this is the source of truth
-  const cookieSessionId = cookiesUtils.getGA4SessionIdFromCookie(cookiePrefix)
+  // Pass measurementId to ensure we read the correct container's cookie
+  const cookieSessionId = cookiesUtils.getGA4SessionIdFromCookie(cookiePrefix, measurementId)
 
   // If cookie is available, trigger "sui" event on new sessions
   if (cookieSessionId) {
