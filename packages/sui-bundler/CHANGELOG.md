@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.77.0 (2026-03-30)
+
+
+### Features
+
+* bump ([e0d0d81](https://github.com/SUI-Components/sui/commit/e0d0d81977285b28e04ca27c22a87aee1792919d))
+
+
+
 # 9.76.0 (2026-03-27)
 
 
