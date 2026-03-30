@@ -6,7 +6,8 @@ export function readCookie(cookieName) {
 
 /**
  * Reads the GA4 session ID directly from the cookie.
- * The cookie format is: _ga_<CONTAINER_ID>=GS1.1.<sessionId>.<timestamp>...
+ * The cookie format is: _ga_<CONTAINER_ID>=GS1.1.s<sessionId>$...
+ * Example: segment_ga_6NE7MBSF9K=GS2.1.s1774864422$o1$g0$t1774864422$j60$l0$h0
  *
  * @param {string} cookiePrefix - Cookie prefix configured in GA4 (e.g., 'segment')
  * @returns {string|null} The session ID or null if not found

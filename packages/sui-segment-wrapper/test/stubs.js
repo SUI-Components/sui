@@ -52,7 +52,8 @@ export const stubGoogleAnalytics = () => {
   }
 
   // Mock GA4 cookie with matching session ID to simulate real scenario
-  // Cookie format: segment_ga_<ID>=GS1.1.s<sessionId>.<timestamp>...
+  // Production cookie format: segment_ga_<ID>=GS2.1.s<sessionId>$o1$g0$t<timestamp>$j60$l0$h0
+  // Test uses simplified format: segment_ga_<ID>=GS1.1.s<sessionId>.<timestamp>...
   // Clear ALL existing GA4 cookies first (from any previous test)
   document.cookie.split(';').forEach(cookie => {
     const name = cookie.split('=')[0].trim()

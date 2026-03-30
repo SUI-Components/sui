@@ -69,5 +69,13 @@ describe('Cookies Utils', () => {
       const sessionId = getGA4SessionIdFromCookie('segment')
       expect(sessionId).to.equal('7777777777')
     })
+
+    it('should work with production cookie format using $ separator', () => {
+      // Real production format: GS2.1.s<sessionId>$o1$g0$t<timestamp>$j60$l0$h0
+      document.cookie = 'segment_ga_6NE7MBSF9K=GS2.1.s1774864422$o1$g0$t1774864422$j60$l0$h0'
+
+      const sessionId = getGA4SessionIdFromCookie('segment')
+      expect(sessionId).to.equal('1774864422')
+    })
   })
 })
