@@ -3,6 +3,7 @@ import {dispatchEvent} from '@s-ui/js/lib/events'
 import {getConfig} from '../config.js'
 import {EVENTS} from '../events.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
+import * as cookiesUtils from '../utils/cookies.js'
 
 const FIELDS = {
   clientId: 'client_id',
@@ -59,6 +60,9 @@ const loadScript = async src =>
     document.head.appendChild(script)
   })
 
+// Promise that resolves when GA4 is ready and cookie is available
+let ga4ReadyPromise = null
+
 export const loadGoogleAnalytics = async () => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
   const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
@@ -67,8 +71,41 @@ export const loadGoogleAnalytics = async () => {
   if (!googleAnalyticsMeasurementId) return Promise.resolve(false)
   // Create the `gtag` script
   const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}&l=${dataLayerName}`
-  // Load it and retrieve the `clientId` from Google
-  return loadScript(gtagScript)
+
+  // Create a promise that resolves when gtag is loaded + cookie is ready
+  ga4ReadyPromise = loadScript(gtagScript).then(() => {
+    // Wait a tick for gtag to process config and create cookie
+    return new Promise(resolve => setTimeout(resolve, 100))
+  })
+
+  return ga4ReadyPromise
+}
+
+/**
+ * Waits for GA4 to be ready (only on first call).
+ * Subsequent calls return immediately.
+ *
+ * @returns {Promise<void>}
+ */
+const waitForGA4Ready = async () => {
+  if (ga4ReadyPromise) {
+    await ga4ReadyPromise
+    ga4ReadyPromise = null // Only wait once
+  }
+}
+
+/**
+ * Check if the given session ID is new (not in localStorage).
+ * @param {string} sessionId - The session ID to check
+ * @returns {{isNewSession: boolean, eventKey: string}} - Whether it's a new session and the storage key
+ */
+const checkNewSession = sessionId => {
+  const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
+  const eventPrefix = `ga_event_${eventName}_`
+  const eventKey = `${eventPrefix}${sessionId}`
+  const isNewSession = !localStorage.getItem(eventKey)
+
+  return {isNewSession, eventKey}
 }
 
 // Trigger GA init event just once per session.
@@ -184,12 +221,51 @@ function readFromUtm(searchParams) {
 }
 
 export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
+
+/**
+ * Gets GA4 session ID from cookie ONLY.
+ *
+ * CRITICAL BEHAVIOR:
+ * - Waits for GA4 to be ready on first call (ensures cookie exists)
+ * - Returns sessionId ONLY if available in cookie (reliable source)
+ * - "sui" event is triggered ONLY when sessionId is available and on new sessions
+ * - Both "sui" event and Segment events use the SAME sessionId from cookie
+ *
+ * This ensures:
+ * 1. No session mismatches between client and server-side tracking
+ * 2. No events sent to Segment without valid sessionId
+ * 3. "sui" event only sent on new sessions with correct sessionId
+ * 4. First track waits ~100ms for GA4, subsequent tracks are instant
+ *
+ * @returns {Promise<string|null>} Session ID from cookie, or null if not ready
+ */
 export const getGoogleSessionId = async () => {
-  const sessionId = await getGoogleField(FIELDS.sessionId)
+  const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
 
-  triggerGoogleAnalyticsInitEvent(sessionId)
+  // Wait for GA4 to be ready (only on first call)
+  await waitForGA4Ready()
 
-  return sessionId
+  // ONLY use cookie value - this is the source of truth
+  const cookieSessionId = cookiesUtils.getGA4SessionIdFromCookie(cookiePrefix)
+
+  // If cookie is available, trigger "sui" event on new sessions
+  if (cookieSessionId) {
+    const {isNewSession} = checkNewSession(cookieSessionId)
+
+    if (isNewSession) {
+      triggerGoogleAnalyticsInitEvent(cookieSessionId, true)
+      // eslint-disable-next-line no-console
+      console.log(`New GA4 session started: ${cookieSessionId} (Source: Cookie)`)
+    }
+  } else {
+    // Cookie still not available even after waiting
+    // eslint-disable-next-line no-console
+    console.warn('GA4 cookie not available after waiting. SessionId will not be sent to Segment.')
+  }
+
+  // Return cookie sessionId (or null if not ready)
+  // When null, Segment events will NOT include sessionId
+  return cookieSessionId
 }
 
 // Unified consent state getter.

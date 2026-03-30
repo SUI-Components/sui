@@ -8,7 +8,6 @@ import {defaultContextProperties} from '../src/middlewares/source/defaultContext
 import {pageReferrer} from '../src/middlewares/source/pageReferrer.js'
 import {userScreenInfo} from '../src/middlewares/source/userScreenInfo.js'
 import {userTraits} from '../src/middlewares/source/userTraits.js'
-import {getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
 import {INTEGRATIONS_WHEN_NO_CONSENTS} from '../src/segmentWrapper.js'
 import initTcfTracking, {getGdprPrivacyValue, USER_GDPR} from '../src/tcf.js'
 import {assertCampaignDetails} from './assertions.js'
@@ -42,10 +41,6 @@ describe('Segment Wrapper', function () {
   beforeEach(() => {
     stubWindowObjects()
     stubGoogleAnalytics()
-
-    window.__SEGMENT_WRAPPER = window.__SEGMENT_WRAPPER || {}
-    window.__SEGMENT_WRAPPER.ADOBE_ORG_ID = '012345678@AdobeOrg'
-    window.__SEGMENT_WRAPPER.TRACKING_SERVER = 'mycompany.test.net'
 
     window.analytics.addSourceMiddleware(userTraits)
     window.analytics.addSourceMiddleware(defaultContextProperties)
@@ -194,32 +189,6 @@ describe('Segment Wrapper', function () {
       expect(context.traits.anonymousId).to.deep.equal('fakeAnonymousId')
     })
 
-    it('should send MarketingCloudId on Adobe Analytics integration', async () => {
-      await simulateUserAcceptAnalyticsConsents()
-
-      window.Visitor = {}
-      window.Visitor.getInstance = sinon.stub().returns({
-        getMarketingCloudVisitorID: sinon.stub().returns('fakeCloudId')
-      })
-
-      await suiAnalytics.track(
-        'fakeEvent',
-        {},
-        {
-          integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
-        }
-      )
-
-      const {context} = getDataFromLastTrack()
-
-      expect(context.integrations).to.deep.includes({
-        fakeIntegrationKey: 'fakeIntegrationValue',
-        'Adobe Analytics': {
-          marketingCloudVisitorId: 'fakeCloudId'
-        }
-      })
-    })
-
     describe('and gtag has been configured properly', () => {
       it('should send Google Analytics integration with true if user declined consents', async () => {
         // Add the needed config to enable Google Analytics
@@ -239,7 +208,7 @@ describe('Segment Wrapper', function () {
 
         expect(context.integrations).to.deep.includes({
           fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
+          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: '1234567890'}
         })
       })
 
@@ -263,7 +232,7 @@ describe('Segment Wrapper', function () {
           fakeIntegrationKey: 'fakeIntegrationValue',
           'Google Analytics 4': {
             clientId: 'fakeClientId',
-            sessionId: 'fakeSessionId'
+            sessionId: '1234567890'
           }
         })
       })
@@ -721,53 +690,6 @@ describe('Segment Wrapper', function () {
     })
   })
 
-  describe('when the MarketingCloudVisitorId is loaded via callback', () => {
-    before(() => {
-      stubWindowObjects()
-
-      window.__mpi = {
-        segmentWrapper: {}
-      }
-      window.__mpi.segmentWrapper.getCustomAdobeVisitorId = () => Promise.resolve('myCustomCloudVisitorId')
-    })
-
-    it('should use the visitor id resolved by the defined async callback function', async () => {
-      await simulateUserAcceptAnalyticsConsents() // simulate already fire an analytics.track
-
-      const {context} = getDataFromLastTrack()
-
-      expect(context.integrations).to.deep.include({
-        'Adobe Analytics': {
-          marketingCloudVisitorId: 'myCustomCloudVisitorId'
-        }
-      })
-    })
-  })
-
-  describe('when the importAdobeVisitorId config is set', () => {
-    before(() => {
-      setConfig('importAdobeVisitorId', true)
-    })
-
-    it('should import local Visitor Api version and create a MarketingCloudVisitorId on consents accepted', async () => {
-      await simulateUserAcceptAnalyticsConsents() // simulate already fire an analytics.track
-
-      const {version} = await getAdobeVisitorData()
-      const {context} = getDataFromLastTrack()
-
-      expect(version).to.equal('4.6.0')
-      expect(context.integrations['Adobe Analytics'].marketingCloudVisitorId).to.be.a('string')
-    })
-
-    it('should define Adobe Analytics as true in integrations', async () => {
-      await simulateUserDeclinedConsents() // simulate already fire an analytics.track
-
-      const {context} = getDataFromLastTrack()
-
-      expect(context.integrations['Adobe Analytics']).to.be.true
-    })
-  })
-
   describe('when tcfTrackDefaultProperties config is set', () => {
     beforeEach(() => {
       stubWindowObjects()
@@ -806,7 +728,6 @@ describe('Segment Wrapper', function () {
       window.__mpi = {
         segmentWrapper: {}
       }
-      window.__mpi.segmentWrapper.getCustomAdobeVisitorId = () => Promise.resolve('myCustomCloudVisitorId')
     })
 
     it('sends an event with the actual context and traits when the consents are declined', async () => {
@@ -834,8 +755,7 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
       const integrations = {
         All: false,
-        'Adobe Analytics': true,
-        'Google Analytics 4': true,
+        'Google Analytics 4': false,
         Personas: false,
         Webhooks: true,
         Webhook: true

@@ -1,7 +1,8 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {getCampaignDetails, getGoogleConsentValue} from '../../src/repositories/googleRepository.js'
+import {getCampaignDetails, getGoogleConsentValue, getGoogleSessionId} from '../../src/repositories/googleRepository.js'
+
 describe('GoogleRepository', () => {
   let initialTrackingTagsType
 
@@ -231,6 +232,109 @@ describe('GoogleRepository', () => {
       const consentValue = getGoogleConsentValue('analytics_storage')
       // Then
       expect(consentValue).to.be.undefined
+    })
+  })
+
+  describe('getGoogleSessionId', () => {
+    let localStorageMock
+
+    beforeEach(() => {
+      // Setup localStorage mock
+      localStorageMock = {
+        store: {},
+        getItem: function (key) {
+          return this.store[key] || null
+        },
+        setItem: function (key, value) {
+          this.store[key] = value.toString()
+        },
+        removeItem: function (key) {
+          delete this.store[key]
+        }
+      }
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+        configurable: true
+      })
+
+      // Setup window.gtag mock
+      window.gtag = sinon.stub()
+      window.__mpi = window.__mpi || {}
+      window.__mpi.segmentWrapper = window.__mpi.segmentWrapper || {}
+      window.__mpi.segmentWrapper.googleAnalyticsMeasurementId = 'G-TEST123'
+
+      // Mock gtag to return session ID
+      window.gtag.callsFake((command, target, field, callback) => {
+        if (command === 'get' && field === 'session_id') {
+          const sessionId = '9999999999'
+          // eslint-disable-next-line n/no-callback-literal
+          callback(sessionId)
+        }
+      })
+
+      // Clear cookies between tests
+      document.cookie.split(';').forEach(cookie => {
+        const name = cookie.split('=')[0].trim()
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+      })
+    })
+
+    afterEach(() => {
+      delete window.gtag
+      delete window.__mpi.segmentWrapper.googleAnalyticsMeasurementId
+      delete window.__mpi.segmentWrapper.googleAnalyticsCookiePrefix
+      // Clear localStorage between tests
+      if (localStorageMock) {
+        localStorageMock.store = {}
+      }
+    })
+
+    it('should return cookie sessionId when available', async () => {
+      // Given - set actual cookie instead of stubbing
+      const cookieSessionId = '1234567890'
+      document.cookie = `segment_ga_G-TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
+
+      // When
+      const result = await getGoogleSessionId()
+
+      // Then
+      expect(result).to.equal(cookieSessionId)
+    })
+
+    it('should return null when cookie not available yet', async () => {
+      // Given - no cookie set
+
+      // When
+      const result = await getGoogleSessionId()
+
+      // Then
+      expect(result).to.be.null
+    })
+
+    it('should call cookie function with configured prefix', async () => {
+      // Given
+      const cookieSessionId = '5555555555'
+      window.__mpi.segmentWrapper.googleAnalyticsCookiePrefix = 'custom'
+      document.cookie = `custom_ga_G-TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
+
+      // When
+      const result = await getGoogleSessionId()
+
+      // Then
+      expect(result).to.equal(cookieSessionId)
+    })
+
+    it('should use default prefix when not configured', async () => {
+      // Given
+      const cookieSessionId = '7777777777'
+      document.cookie = `segment_ga_G-TEST123=GS1.1.s${cookieSessionId}.1.0.${Date.now()}.0.0.0; path=/`
+
+      // When
+      const result = await getGoogleSessionId()
+
+      // Then
+      expect(result).to.equal(cookieSessionId)
     })
   })
 })

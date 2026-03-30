@@ -4,6 +4,31 @@ export function readCookie(cookieName) {
   return value !== null ? unescape(value[1]) : null
 }
 
+/**
+ * Reads the GA4 session ID directly from the cookie.
+ * The cookie format is: _ga_<CONTAINER_ID>=GS1.1.<sessionId>.<timestamp>...
+ *
+ * @param {string} cookiePrefix - Cookie prefix configured in GA4 (e.g., 'segment')
+ * @returns {string|null} The session ID or null if not found
+ */
+export function getGA4SessionIdFromCookie(cookiePrefix = 'segment') {
+  const cookies = document.cookie.split(';')
+  const sessionRegex = /\.s(\d+)/
+  const searchStr = cookiePrefix ? `${cookiePrefix}_ga_` : '_ga_'
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim()
+    if (cookie.indexOf(searchStr) === 0) {
+      const match = cookie.match(sessionRegex)
+      if (match && match[1]) {
+        return match[1]
+      }
+    }
+  }
+
+  return null
+}
+
 const ONE_YEAR = 31_536_000
 const DEFAULT_PATH = '/'
 const DEFAULT_SAME_SITE = 'Lax'
