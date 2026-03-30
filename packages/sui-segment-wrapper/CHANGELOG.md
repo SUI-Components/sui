@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.40.0 (2026-03-30)
+
+
+### Bug Fixes
+
+* retrieve cookie value by measurement id ([ad91525](https://github.com/SUI-Components/sui/commit/ad9152567164f995d0e0d03f7a5a0ec010c65079))
+
+
+
 # 4.39.0 (2026-03-30)
 
 
