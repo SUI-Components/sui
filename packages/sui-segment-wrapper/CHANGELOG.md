@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.41.0 (2026-03-30)
+
+
+### Features
+
+* force bump ([605f536](https://github.com/SUI-Components/sui/commit/605f536a2667aec5230a0369a9a418ee660524a3))
+* wait for GA4 cookie and use correct container when multiple exis ([b46b471](https://github.com/SUI-Components/sui/commit/b46b47153db14c340bd2b6e5f4a517a0a278642f))
+
+
+
 # 4.40.0 (2026-03-30)
 
 
