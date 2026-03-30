@@ -63,6 +63,45 @@ const loadScript = async src =>
 // Promise that resolves when GA4 is ready and cookie is available
 let ga4ReadyPromise = null
 
+/**
+ * Waits for GA4 cookie to be created by polling.
+ * Default max wait time: 5 seconds (configurable via googleAnalyticsCookieTimeout)
+ *
+ * @param {string} cookiePrefix - Cookie prefix (e.g., 'segment')
+ * @param {string} measurementId - Measurement ID (e.g., 'G-6NE7MBSF9K')
+ * @returns {Promise<boolean>} - True if cookie was found, false if timeout
+ */
+const waitForGA4Cookie = (cookiePrefix, measurementId) => {
+  const timeoutMs = getConfig('googleAnalyticsCookieTimeout') || 5000 // Default 5 seconds
+  const pollInterval = 100 // Check every 100ms
+  const maxAttempts = Math.ceil(timeoutMs / pollInterval)
+
+  return new Promise(resolve => {
+    let attempts = 0
+
+    const checkCookie = () => {
+      const cookieExists = cookiesUtils.getGA4SessionIdFromCookie(cookiePrefix, measurementId)
+
+      if (cookieExists) {
+        resolve(true)
+        return
+      }
+
+      attempts++
+      if (attempts >= maxAttempts) {
+        // eslint-disable-next-line no-console
+        console.warn(`GA4 cookie not created after ${timeoutMs}ms. SessionId will not be sent to Segment.`)
+        resolve(false)
+        return
+      }
+
+      setTimeout(checkCookie, pollInterval)
+    }
+
+    checkCookie()
+  })
+}
+
 export const loadGoogleAnalytics = async () => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
   const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
@@ -72,10 +111,11 @@ export const loadGoogleAnalytics = async () => {
   // Create the `gtag` script
   const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}&l=${dataLayerName}`
 
-  // Create a promise that resolves when gtag is loaded + cookie is ready
-  ga4ReadyPromise = loadScript(gtagScript).then(() => {
-    // Wait a tick for gtag to process config and create cookie
-    return new Promise(resolve => setTimeout(resolve, 100))
+  // Create a promise that resolves when gtag is loaded + cookie is created
+  ga4ReadyPromise = loadScript(gtagScript).then(async () => {
+    const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
+    // Wait for the cookie to actually exist (with timeout)
+    await waitForGA4Cookie(cookiePrefix, googleAnalyticsMeasurementId)
   })
 
   return ga4ReadyPromise

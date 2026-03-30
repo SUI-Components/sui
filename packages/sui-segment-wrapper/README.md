@@ -152,6 +152,8 @@ You could put a special config in a the `window.__mpi` to change some behaviour 
 - `googleAnalyticsMeasurementId`: _(optional)_ If set, this value will be used for the Google Analytics Measurement API. It will load `gtag` to get the client id.
 - `googleAnalyticsConfig`: _(optional)_ If set, this config will be passed when initializing the Google Analytics Measurement API.
 - `googleAnalyticsInitEvent`: _(optional)_ If set, an event will be sent in order to initialize all the Google Analytics data.
+- `googleAnalyticsCookiePrefix`: _(optional)_ Cookie prefix for GA4 cookies. Defaults to `'segment'`. Example: if set to `'myprefix'`, will look for `myprefix_ga_<CONTAINER_ID>` cookies.
+- `googleAnalyticsCookieTimeout`: _(optional)_ Maximum time in milliseconds to wait for GA4 cookie creation. Defaults to `5000` (5 seconds). Increase this value for slower networks or devices.
 - `defaultContext`: _(optional)_ If set, properties will be merged and sent with every `track` and `page` in the **context object**. It's the ideal place to put the `site` and `vertical` info to make sure that static info will be sent along with all the tracking.
 - `defaultProperties`: _(optional)_ If set, properties will be merged and sent with every `track` and `page`.
 - `getCustomAdobeVisitorId`: _(optional)_ If set, the output of this function will be used as `marketingCloudVisitorId` in Adobe Analytics' integration. It must return a promise.
@@ -168,7 +170,9 @@ Example:
 ```js
   window.__mpi = {
     segmentWrapper: {
-      googleAnalyticsMeasurementId: 'GA-123456789',
+      googleAnalyticsMeasurementId: 'G-XXXXXXXXXX',
+      googleAnalyticsCookiePrefix: 'segment', // optional, defaults to 'segment'
+      googleAnalyticsCookieTimeout: 5000, // optional, defaults to 5000ms (5 seconds)
       universalId: '7ab9ddf3281d5d5458a29e8b3ae2864',
       defaultContext: {
         site: 'comprocasa',
