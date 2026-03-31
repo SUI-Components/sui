@@ -10,13 +10,13 @@ const DEFAULT_BROWSER_TARGETS = {
   ios: '14.5'
 }
 
-const getSWCConfig = ({isModern = false, isTypeScript = false, compileToCJS = false, minify = false}) => {
+const getSWCConfig = ({isModern = false, isTypeScript = false, compileToCJS = false, preserveComments = false}) => {
   const targets = isModern ? DEFAULT_BROWSER_TARGETS : DEFAULT_LEGACY_BROWSER_TARGETS
   const syntaxOptions = isTypeScript ? {syntax: 'typescript', tsx: true} : {syntax: 'ecmascript', jsx: true}
   const moduleOptions = compileToCJS ? {module: {type: 'commonjs'}} : {}
+  const minifyOptions = preserveComments ? {minify: {format: {comments: 'all'}}} : {}
 
   return {
-    minify,
     jsc: {
       parser: {
         ...syntaxOptions,
@@ -37,6 +37,7 @@ const getSWCConfig = ({isModern = false, isTypeScript = false, compileToCJS = fa
           runtime: 'automatic'
         }
       },
+      ...minifyOptions,
       loose: true,
       externalHelpers: true
     },
