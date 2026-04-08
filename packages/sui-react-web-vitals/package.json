@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/react-web-vitals",
-  "version": "2.9.0",
+  "version": "3.0.0",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
@@ -17,13 +17,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "web-vitals": "4.2.4",
-    "@s-ui/react-hooks": "1"
+    "@s-ui/react-hooks": "1",
+    "web-vitals": "5.2.0"
   },
   "peerDependencies": {
-    "react": "16 || 17",
     "@s-ui/react-context": "1",
-    "@s-ui/react-router": "1"
+    "@s-ui/react-router": "1",
+    "react": "16 || 17"
   },
   "devDependencies": {
     "@s-ui/test": "8",
