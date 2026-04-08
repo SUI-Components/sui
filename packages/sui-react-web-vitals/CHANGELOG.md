@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 4.0.0 (2026-04-08)
+
+
+### Features
+
+* update web-vitals to v5 ([5806ad6](https://github.com/SUI-Components/sui/commit/5806ad66dbd404c6906165218dd19b990eb80317))
+
+
+
 # 2.9.0 (2025-03-20)
 
 
