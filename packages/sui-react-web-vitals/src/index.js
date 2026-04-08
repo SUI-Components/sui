@@ -10,7 +10,6 @@ import {useRouter} from '@s-ui/react-router'
 export const METRICS = {
   CLS: 'CLS',
   FCP: 'FCP',
-  FID: 'FID',
   INP: 'INP',
   LCP: 'LCP',
   TTFB: 'TTFB'
@@ -44,12 +43,40 @@ const RATING = {
   POOR: 'poor'
 }
 
-const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.FID, METRICS.INP, METRICS.LCP]
+const DEFAULT_METRICS_REPORTING_ALL_CHANGES = [METRICS.CLS, METRICS.INP, METRICS.LCP]
 
 export const DEVICE_TYPES = {
   DESKTOP: 'desktop',
   TABLET: 'tablet',
   MOBILE: 'mobile'
+}
+
+const BLINK_BROWSERS = new Set([
+  'Brave',
+  'Chrome',
+  'Chrome Headless',
+  'Chromium',
+  'Facebook',
+  'MIUI Browser',
+  'UCBrowser',
+  'Edge' // Only Chromium-based Edge (v79+) uses Blink, but older versions are EOL
+])
+const WEBKIT_BROWSERS = new Set(['Android Browser', 'GSA', 'khtml', 'Mobile Safari', 'Safari', 'webkit'])
+const GECKO_BROWSERS = new Set(['Firefox', 'Mozilla'])
+
+/**
+ * getBrowserEngine determines the browser engine based on the browser name and version, with special handling for iOS and Edge. The order of checks is important to correctly identify the engine:
+ * - iOS browsers are always classified as WebKit due to Apple's requirements, regardless of their reported name.
+ * - WebKit browsers are identified by checking if their name is in the WEBKIT_BROWSERS set.
+ * - Gecko browsers are identified by checking if their name is in the GECKO_BROWSERS set.
+ * - Blink browsers are identified by checking if their name ends with 'WebView' (common for Android WebViews) or if their name is in the BLINK_BROWSERS set.
+ * - If none of the above conditions are met, the browser engine is classified as 'Other'.
+ */
+const getBrowserEngine = ({name, isIOS}) => {
+  if (isIOS || WEBKIT_BROWSERS.has(name)) return 'WebKit'
+  if (GECKO_BROWSERS.has(name)) return 'Gecko'
+  if (name?.endsWith('WebView') || BLINK_BROWSERS.has(name)) return 'Blink'
+  return 'Other'
 }
 
 export default function WebVitalsReporter({
@@ -73,6 +100,7 @@ export default function WebVitalsReporter({
 
   useMount(() => {
     const {deviceMemory, connection: {effectiveType} = {}, hardwareConcurrency} = window.navigator || {}
+    const browserEngine = getBrowserEngine(browser || {})
 
     const getRouteid = () => {
       return route?.id
@@ -91,22 +119,9 @@ export default function WebVitalsReporter({
         case METRICS.CLS:
           return attribution.largestShiftTarget
         case METRICS.LCP:
-          return attribution.element
+          return attribution.target
         default:
-          return attribution.eventTarget || attribution.interactionTarget
-      }
-    }
-
-    const computeINPSubparts = entry => {
-      // RenderTime is an estimate because duration is rounded and may get rounded down.
-      // In rare cases, it can be less than processingEnd and that breaks performance.measure().
-      // Let's ensure it's at least 4ms in those cases so you can barely see it.
-      const presentationTime = Math.max(entry.processingEnd + 4, entry.startTime + entry.duration)
-
-      return {
-        [INP_SUBPARTS.ID]: Math.round(entry.processingStart - entry.startTime, 0),
-        [INP_SUBPARTS.PT]: Math.round(entry.processingEnd - entry.processingStart, 0),
-        [INP_SUBPARTS.PD]: Math.round(presentationTime - entry.processingEnd, 0)
+          return attribution.interactionTarget
       }
     }
 
@@ -119,7 +134,7 @@ export default function WebVitalsReporter({
 
       if (!isAllowed || !logger?.cwv || rating === RATING.GOOD) return
 
-      const {loadState, eventType} = attribution
+      const {loadState, interactionType} = attribution
 
       logger.cwv({
         name: `cwv.${name.toLowerCase()}`,
@@ -129,7 +144,7 @@ export default function WebVitalsReporter({
         visibilityState: document.visibilityState,
         ...(routeid && {routeId: routeid}),
         ...(loadState && {loadState}),
-        ...(eventType && {eventType}),
+        ...(interactionType && {eventType: interactionType}),
         ...(deviceMemory && {deviceMemory}),
         ...(effectiveType && {effectiveType}),
         ...(hardwareConcurrency && {hardwareConcurrency})
@@ -181,7 +196,11 @@ export default function WebVitalsReporter({
                 value: type
               }
             ]
-          : [])
+          : []),
+        {
+          key: 'browserEngine',
+          value: browserEngine
+        }
       ]
 
       // Log the main metric
@@ -197,12 +216,11 @@ export default function WebVitalsReporter({
         ]
       })
 
-      // Handle INP subparts
-      if (name === METRICS.INP && entries) {
-        entries.forEach(entry => {
-          const metrics = computeINPSubparts(entry)
-
-          Object.keys(metrics).forEach(name => {
+      // Process and log Metric subparts from a metrics object
+      const processMetricSubparts = metrics => {
+        Object.keys(metrics).forEach(name => {
+          // Only log if we have a non-zero value
+          if (metrics[name] > 0) {
             logger.distribution({
               name: 'cwv',
               amount: metrics[name],
@@ -214,8 +232,28 @@ export default function WebVitalsReporter({
                 ...tags
               ]
             })
-          })
+          }
         })
+      }
+
+      // Handle INP subparts
+      if (name === METRICS.INP) {
+        // Helper function to create INP subpart metrics from an object
+        const extractINPSubparts = source => {
+          return {
+            [INP_SUBPARTS.ID]: Math.round(source.inputDelay || 0, 0),
+            [INP_SUBPARTS.PT]: Math.round(source.processingDuration || 0, 0),
+            [INP_SUBPARTS.PD]: Math.round(source.presentationDelay || 0, 0)
+          }
+        }
+
+        if (
+          attribution &&
+          (attribution.inputDelay || attribution.processingDuration || attribution.presentationDelay)
+        ) {
+          const metrics = extractINPSubparts(attribution)
+          processMetricSubparts(metrics)
+        }
       }
 
       // Handle LCP subparts
@@ -230,26 +268,6 @@ export default function WebVitalsReporter({
           }
         }
 
-        // Process and log LCP subparts from a metrics object
-        const processLCPSubparts = metrics => {
-          Object.keys(metrics).forEach(name => {
-            // Only log if we have a non-zero value
-            if (metrics[name] > 0) {
-              logger.distribution({
-                name: 'cwv',
-                amount: metrics[name],
-                tags: [
-                  {
-                    key: 'name',
-                    value: name.toLowerCase()
-                  },
-                  ...tags
-                ]
-              })
-            }
-          })
-        }
-
         // First check if LCP subparts are in the attribution object
         if (
           attribution &&
@@ -259,33 +277,19 @@ export default function WebVitalsReporter({
             attribution.elementRenderDelay)
         ) {
           const metrics = extractLCPSubparts(attribution)
-          processLCPSubparts(metrics)
-        }
-
-        // Then check entries as before
-        if (entries && entries.length > 0) {
-          entries.forEach(entry => {
-            if (
-              entry &&
-              (entry.timeToFirstByte ||
-                entry.resourceLoadDelay ||
-                entry.resourceLoadDuration ||
-                entry.elementRenderDelay)
-            ) {
-              const metrics = extractLCPSubparts(entry)
-              processLCPSubparts(metrics)
-            }
-          })
+          processMetricSubparts(metrics)
         }
       }
     }
-    metrics.forEach(metric => {
-      reporter[`on${metric}`](handleChange)
+    metrics
+      .filter(metric => !!metric && typeof reporter[`on${metric}`] === 'function')
+      .forEach(metric => {
+        reporter[`on${metric}`](handleChange)
 
-      if (metricsAllChanges.includes(metric)) {
-        reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
-      }
-    })
+        if (metricsAllChanges.includes(metric)) {
+          reporter[`on${metric}`](handleAllChanges, {reportAllChanges: true})
+        }
+      })
   })
 
   return children
@@ -301,11 +305,11 @@ WebVitalsReporter.propTypes = {
    */
   deviceType: PropTypes.oneOf(Object.values(DEVICE_TYPES)),
   /**
-   * An optional array of core web vitals. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to all.
+   * An optional array of core web vitals. Choose between: TTFB, LCP, CLS and INP. Defaults to all.
    */
   metrics: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
-   * An optional array of core web vitals that will report on all changes. Choose between: TTFB, LCP, FID, CLS and INP. Defaults to LCP and INP.
+   * An optional array of core web vitals that will report on all changes. Choose between: TTFB, LCP, CLS and INP. Defaults to LCP and INP.
    */
   metricsAllChanges: PropTypes.arrayOf(PropTypes.oneOf(Object.values(METRICS))),
   /**
