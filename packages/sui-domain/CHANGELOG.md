@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.22.0 (2026-04-21)
+
+
+### Bug Fixes
+
+* upgrade axios 1.12.2 → 1.15.1 to fix security vulnerabilities ([e82f8cc](https://github.com/SUI-Components/sui/commit/e82f8ccf3448b10a9dc39bd03b05c77f7b8aca7f))
+
+
+
 # 2.21.0 (2025-10-07)
 
 
