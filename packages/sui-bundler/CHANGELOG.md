@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 9.78.0 (2026-04-21)
+
+
+### Features
+
+* do not minify magic webpack comments when ts is enabled ([b7fb820](https://github.com/SUI-Components/sui/commit/b7fb8206caa56c417210fb05a2a20d8223ea0a3d))
+* not minify only on TS bundles ([8f85288](https://github.com/SUI-Components/sui/commit/8f85288f954fd563425195fcd2b493b579eda4aa))
+
+
+
 # 9.77.0 (2026-03-30)
 
 
