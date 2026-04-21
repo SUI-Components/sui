@@ -36,7 +36,7 @@ module.exports = ({isServer = false, isDevelopment = false, supportLegacyBrowser
         use: [
           {
             loader: require.resolve('swc-loader'),
-            options: getSWCConfig({isModern: false, isTypeScript: true})
+            options: getSWCConfig({isModern: false, isTypeScript: true, preserveComments: true})
           }
         ]
       }
