@@ -13,6 +13,7 @@
   "dependencies": {
     "@s-ui/react-atom-icon": "1",
     "babel-preset-sui": "3",
+    "change-case": "4.1.2",
     "commander": "8.3.0",
     "fast-glob": "3.2.11",
     "fs-extra": "10.1.0",
