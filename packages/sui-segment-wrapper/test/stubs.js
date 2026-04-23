@@ -197,6 +197,9 @@ export const stubActualQueryString = queryString =>
 
 export const stubReferrer = (referrer, stubLocation) => {
   const stubDocumentReferrer = sinon.stub(referrerUtils, 'getDocumentReferrer').returns(referrer)
+  // Manually set referrer state since initialization happens at module load
+  resetReferrerState()
+  referrerState.referrer = referrer
 
   return {
     restore: () => {

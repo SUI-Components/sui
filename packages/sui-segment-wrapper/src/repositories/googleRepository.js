@@ -39,7 +39,7 @@ const STC_MEDIUM_TRANSFORMATIONS = {
   em: 'email',
   met: 'paid-metasearch',
   sem: 'paid-search',
-  rt: 'display',
+  rt: 'retargeting',
   sm: 'social-media',
   sp: 'paid-social',
   pn: 'push-notification',
