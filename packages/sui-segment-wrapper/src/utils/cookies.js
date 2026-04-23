@@ -4,38 +4,6 @@ export function readCookie(cookieName) {
   return value !== null ? unescape(value[1]) : null
 }
 
-/**
- * Reads the GA4 session ID directly from the cookie.
- * The cookie format is: _ga_<CONTAINER_ID>=GS1.1.s<sessionId>$...
- * Example: segment_ga_6NE7MBSF9K=GS2.1.s1774864422$o1$g0$t1774864422$j60$l0$h0
- *
- * @param {string} cookiePrefix - Cookie prefix configured in GA4 (e.g., 'segment')
- * @param {string} measurementId - GA4 Measurement ID (e.g., 'G-6NE7MBSF9K'). If provided, looks for the specific container cookie.
- * @returns {string|null} The session ID or null if not found
- */
-export function getGA4SessionIdFromCookie(cookiePrefix = 'segment', measurementId = null) {
-  const cookies = document.cookie.split(';')
-  const sessionRegex = /\.s(\d+)/
-
-  // Build search string: if measurementId provided, search for specific cookie, otherwise search by prefix
-  const containerId = measurementId ? measurementId.replace(/^G-/, '') : ''
-  const searchStr = containerId
-    ? `${cookiePrefix ? `${cookiePrefix}_ga_${containerId}` : `_ga_${containerId}`}=`
-    : `${cookiePrefix ? `${cookiePrefix}_ga_` : '_ga_'}`
-
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim()
-    if (cookie.indexOf(searchStr) === 0) {
-      const match = cookie.match(sessionRegex)
-      if (match && match[1]) {
-        return match[1]
-      }
-    }
-  }
-
-  return null
-}
-
 const ONE_YEAR = 31_536_000
 const DEFAULT_PATH = '/'
 const DEFAULT_SAME_SITE = 'Lax'

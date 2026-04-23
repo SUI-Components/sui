@@ -1,5 +1,6 @@
 // @ts-check
 
+import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 import {
   CONSENT_STATES,
   getConsentState,
@@ -50,14 +51,19 @@ export const getDefaultProperties = () => ({
 
 /**
  * Get all needed integrations depending on the gdprPrivacy value.
+ * One of them is the AdobeMarketingCloudVisitorId for Adobe Analytics integration.
  * @param {object} param - Object with the gdprPrivacyValue and if it's a CMP Submitted event
  */
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
+  let marketingCloudVisitorId
   let sessionId
   let clientId
 
   try {
+    if (isGdprAccepted) {
+      marketingCloudVisitorId = await getAdobeMCVisitorID()
+    }
     sessionId = await getGoogleSessionId()
     clientId = await getGoogleClientId()
   } catch (error) {
@@ -66,19 +72,17 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
 
-  // If we don't have the user consents we remove all the integrations
-  // CRITICAL: Only enable GA4 destination if we have BOTH clientId AND sessionId from cookie
-  // This prevents session mismatches and "Others" in GA4 reports
-  // When sessionId is not ready (null), we disable GA4 destination entirely
+  // If we don't have the user consents we remove all the integrations but Adobe Analytics nor GA4
   return {
     ...restOfIntegrations,
+    'Adobe Analytics': marketingCloudVisitorId ? {marketingCloudVisitorId} : true,
     'Google Analytics 4':
       clientId && sessionId
         ? {
             clientId,
             sessionId
           }
-        : false // Disable GA4 if no sessionId available
+        : true
   }
 }
 

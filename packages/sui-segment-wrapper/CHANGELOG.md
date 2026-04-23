@@ -1,56 +1,5 @@
 # CHANGELOG
 
-# 4.41.0 (2026-03-30)
-
-
-### Features
-
-* force bump ([605f536](https://github.com/SUI-Components/sui/commit/605f536a2667aec5230a0369a9a418ee660524a3))
-* wait for GA4 cookie and use correct container when multiple exis ([b46b471](https://github.com/SUI-Components/sui/commit/b46b47153db14c340bd2b6e5f4a517a0a278642f))
-
-
-
-# 4.40.0 (2026-03-30)
-
-
-### Bug Fixes
-
-* retrieve cookie value by measurement id ([ad91525](https://github.com/SUI-Components/sui/commit/ad9152567164f995d0e0d03f7a5a0ec010c65079))
-
-
-
-# 4.39.0 (2026-03-30)
-
-
-### Bug Fixes
-
-* fix ga4 session id inconsistencies ([d6664f0](https://github.com/SUI-Components/sui/commit/d6664f079d099e8695199605f873bdd668f57df1))
-
-
-
-# 4.38.0 (2026-03-18)
-
-
-### Features
-
-* force release ([a1f13f2](https://github.com/SUI-Components/sui/commit/a1f13f2d7439fd2453815ffa81036c8d291cd31b))
-
-
-
-# 4.37.0 (2026-03-16)
-
-
-### Bug Fixes
-
-* improve session id assignment to all destinations ([dc3653c](https://github.com/SUI-Components/sui/commit/dc3653c48a55b6d2dc0652b94bcfae8f514f6115))
-
-
-### Features
-
-* prioritize GA4 cookie over API to fix session ID inconsistencies ([48b2186](https://github.com/SUI-Components/sui/commit/48b2186b1717fa57b7f734799e45634e548612cc))
-
-
-
 # 4.36.0 (2025-12-04)
 
 
