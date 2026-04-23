@@ -43,8 +43,6 @@ describe('Segment Wrapper', function () {
     stubGoogleAnalytics()
 
     window.__SEGMENT_WRAPPER = window.__SEGMENT_WRAPPER || {}
-    window.__SEGMENT_WRAPPER.ADOBE_ORG_ID = '012345678@AdobeOrg'
-    window.__SEGMENT_WRAPPER.TRACKING_SERVER = 'mycompany.test.net'
 
     window.analytics.addSourceMiddleware(userTraits)
     window.analytics.addSourceMiddleware(defaultContextProperties)

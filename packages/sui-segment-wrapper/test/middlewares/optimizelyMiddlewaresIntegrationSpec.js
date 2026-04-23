@@ -20,11 +20,7 @@ describe('optimizely middlewares integration', () => {
           context: {
             site: 'fakesite.fake'
           },
-          integrations: {
-            'Adobe Analytics': {
-              mcvid: 'fakeMcvid'
-            }
-          }
+          integrations: {}
         }
       }
 
@@ -39,9 +35,6 @@ describe('optimizely middlewares integration', () => {
               attributes: {
                 site: 'fakesite.fake'
               }
-            },
-            'Adobe Analytics': {
-              mcvid: 'fakeMcvid'
             }
           }
         }
@@ -88,9 +81,6 @@ describe('optimizely middlewares integration', () => {
             site: 'fakesite.fake'
           },
           integrations: {
-            'Adobe Analytics': {
-              mcvid: 'fakeMcvid'
-            },
             Optimizely: {
               attributes: {
                 myAttribute: 'attributeValue'
@@ -106,9 +96,6 @@ describe('optimizely middlewares integration', () => {
             site: 'fakesite.fake'
           },
           integrations: {
-            'Adobe Analytics': {
-              mcvid: 'fakeMcvid'
-            },
             Optimizely: {
               attributes: {
                 site: 'fakesite.fake',
