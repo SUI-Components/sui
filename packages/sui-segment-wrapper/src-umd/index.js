@@ -1,5 +1,4 @@
-import {getAdobeMCVisitorID, getAdobeVisitorData} from '../src/repositories/adobeRepository.js'
-import analytics from '../src/index.js'
+import analytics, {getAdobeMCVisitorID, getAdobeVisitorData} from '../src/index.js'
 
 const w = window
 

@@ -1,6 +1,5 @@
 // @ts-check
 
-import {getAdobeMCVisitorID} from './repositories/adobeRepository.js'
 import {
   CONSENT_STATES,
   getConsentState,
@@ -51,19 +50,14 @@ export const getDefaultProperties = () => ({
 
 /**
  * Get all needed integrations depending on the gdprPrivacy value.
- * One of them is the AdobeMarketingCloudVisitorId for Adobe Analytics integration.
  * @param {object} param - Object with the gdprPrivacyValue and if it's a CMP Submitted event
  */
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
-  let marketingCloudVisitorId
   let sessionId
   let clientId
 
   try {
-    if (isGdprAccepted) {
-      marketingCloudVisitorId = await getAdobeMCVisitorID()
-    }
     sessionId = await getGoogleSessionId()
     clientId = await getGoogleClientId()
   } catch (error) {
@@ -72,10 +66,9 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
 
-  // If we don't have the user consents we remove all the integrations but Adobe Analytics nor GA4
+  // If we don't have the user consents we remove all the integrations but GA4
   return {
     ...restOfIntegrations,
-    'Adobe Analytics': marketingCloudVisitorId ? {marketingCloudVisitorId} : true,
     'Google Analytics 4':
       clientId && sessionId
         ? {
