@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.29.0 (2026-04-24)
+
+
+### Features
+
+* add `change-case` dependency and improve build script customization options ([f2a91e2](https://github.com/SUI-Components/sui/commit/f2a91e2c549f658cfa2c023fc75d2fcccc19a3d5))
+
+
+
 # 3.28.0 (2025-06-06)
 
 
