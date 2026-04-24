@@ -1,4 +1,7 @@
-const template = content => {
+import {pascalCase} from 'change-case'
+
+const template = (content, design = 'filled', name) => {
+  const componentName = `Memo${pascalCase(name)}AtomIcon`
   return `import {memo} from 'react'
 import AtomIcon from '@s-ui/react-atom-icon'
 
@@ -11,19 +14,19 @@ const injectAccessibility = ({id, svg, title}) => {
   )
 }
 
-const MemoAtomIcon = memo(({id, title, ...props}) => {
+const ${componentName} = memo(({id, title, design='${design}', ...props}) => {
   const safeContent = injectAccessibility({id, svg: \`${content}\`, title})
 
   return (
-    <AtomIcon {...props}>
+    <AtomIcon design={design} {...props}>
       <span dangerouslySetInnerHTML={{__html: safeContent}} />
     </AtomIcon>
   )
 })
 
-MemoAtomIcon.displayName = 'AtomIcon'
+${componentName}.displayName = '${componentName}'
 
-export default MemoAtomIcon
+export default ${componentName}
 `
 }
 
