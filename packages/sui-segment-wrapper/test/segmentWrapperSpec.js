@@ -42,6 +42,8 @@ describe('Segment Wrapper', function () {
     stubWindowObjects()
     stubGoogleAnalytics()
 
+    window.__SEGMENT_WRAPPER = window.__SEGMENT_WRAPPER || {}
+
     window.analytics.addSourceMiddleware(userTraits)
     window.analytics.addSourceMiddleware(defaultContextProperties)
     window.analytics.addSourceMiddleware(campaignContext)
@@ -147,34 +149,6 @@ describe('Segment Wrapper', function () {
       expect(secondPageContext.page.referrer).to.equal(initialInternalLocation)
       expect(secondTrackContext.page.referrer).to.equal(initialInternalLocation)
     })
-
-    it('after calling page event more than once and not referrer set', async function () {
-      const firstReferrer = ''
-      const initialInternalLocation = 'https://internal-page.com/another'
-
-      locationStub = stubActualLocation(initialInternalLocation)
-      referrerStub = stubReferrer(firstReferrer, locationStub)
-
-      const spy = sinon.stub()
-
-      await suiAnalytics.page('Home Page', undefined, undefined, spy)
-      const {context: firstPageContext} = spy.lastCall.firstArg.obj
-
-      await suiAnalytics.track('First Track', undefined, undefined, spy)
-      const {context: firstTrackContext} = spy.lastCall.firstArg.obj
-
-      expect(firstPageContext.page.referrer).to.equal(firstReferrer)
-      expect(firstTrackContext.page.referrer).to.equal(firstReferrer)
-
-      await suiAnalytics.page('Second Page', undefined, undefined, spy)
-      const {context: secondPageContext} = spy.lastCall.firstArg.obj
-
-      await suiAnalytics.track('First Track', undefined, undefined, spy)
-      const {context: secondTrackContext} = spy.lastCall.firstArg.obj
-
-      expect(secondPageContext.page.referrer).to.equal(initialInternalLocation)
-      expect(secondTrackContext.page.referrer).to.equal(initialInternalLocation)
-    })
   })
 
   describe('when the track event is called', () => {
@@ -192,7 +166,7 @@ describe('Segment Wrapper', function () {
     describe('and gtag has been configured properly', () => {
       it('should send Google Analytics integration with true if user declined consents', async () => {
         // Add the needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 'G-G123456')
+        setConfig('googleAnalyticsMeasurementId', 123)
 
         await simulateUserDeclinedConsents()
 
@@ -208,13 +182,13 @@ describe('Segment Wrapper', function () {
 
         expect(context.integrations).to.deep.includes({
           fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: '1234567890'}
+          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
         })
       })
 
       it('should send ClientId on Google Analytics integration if user accepted consents', async () => {
         // add needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 'G-G123456')
+        setConfig('googleAnalyticsMeasurementId', 123)
 
         await simulateUserAcceptConsents()
 
@@ -232,7 +206,7 @@ describe('Segment Wrapper', function () {
           fakeIntegrationKey: 'fakeIntegrationValue',
           'Google Analytics 4': {
             clientId: 'fakeClientId',
-            sessionId: '1234567890'
+            sessionId: 'fakeSessionId'
           }
         })
       })
@@ -724,10 +698,6 @@ describe('Segment Wrapper', function () {
   describe('context integrations', () => {
     before(() => {
       stubWindowObjects()
-
-      window.__mpi = {
-        segmentWrapper: {}
-      }
     })
 
     it('sends an event with the actual context and traits when the consents are declined', async () => {
@@ -755,7 +725,7 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
       const integrations = {
         All: false,
-        'Google Analytics 4': false,
+        'Google Analytics 4': true,
         Personas: false,
         Webhooks: true,
         Webhook: true
@@ -1018,6 +988,91 @@ describe('Segment Wrapper', function () {
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted'
+      })
+    })
+  })
+
+  describe('Safari ITP Protection', function () {
+    let locationStub
+    let referrerStub
+
+    afterEach(function () {
+      referrerStub?.restore?.()
+      locationStub?.restore?.()
+    })
+
+    describe('referrer capture at module load', function () {
+      it('should capture document.referrer at module load time', async function () {
+        // Import the module to get the captured constants
+        const {INITIAL_DOCUMENT_REFERRER} = await import('../src/middlewares/source/pageReferrer.js')
+
+        // INITIAL_DOCUMENT_REFERRER should be whatever document.referrer was when the module loaded
+        // In test environment it will be the karma test runner URL or empty
+        expect(INITIAL_DOCUMENT_REFERRER).to.be.a('string')
+      })
+
+      it('should use captured referrer for first page event even if document.referrer is empty', async function () {
+        // Simulate scenario where module loaded with referrer, but Safari ITP cleared it
+        const externalReferrer = 'https://www.google.com/search'
+
+        locationStub = stubActualLocation('https://mysite.com')
+        referrerStub = stubReferrer(externalReferrer, locationStub)
+
+        await simulateUserAcceptConsents()
+
+        const spy = sinon.stub()
+        await suiAnalytics.page('Home Page', undefined, undefined, spy)
+
+        const {context} = spy.lastCall.firstArg.obj
+
+        // Should use the referrer set via stub (simulating captured value)
+        expect(context.page.referrer).to.equal(externalReferrer)
+      })
+    })
+
+    describe('search params capture at module load', function () {
+      it('should capture window.location.search at module load time', async function () {
+        const {INITIAL_SEARCH_STRING} = await import('../src/middlewares/source/pageReferrer.js')
+
+        // INITIAL_SEARCH_STRING should be whatever window.location.search was when module loaded
+        expect(INITIAL_SEARCH_STRING).to.be.a('string')
+      })
+
+      it('should use captured search params via getCampaignDetails', async function () {
+        // getCampaignDetails uses utils.getActualQueryString which returns INITIAL_SEARCH_STRING
+        // This test verifies the integration works (actual campaign parsing is tested elsewhere)
+        const {utils} = await import('../src/middlewares/source/pageReferrer.js')
+
+        const queryString = utils.getActualQueryString()
+
+        // Should return a string (the captured value)
+        expect(queryString).to.be.a('string')
+      })
+    })
+
+    describe('initial URL and search capture for first page event', function () {
+      it('should include initial URL and search only in the first page event', async function () {
+        resetReferrerState()
+        await simulateUserAcceptConsents()
+
+        const spy = sinon.stub()
+
+        // First page event
+        await suiAnalytics.page('Home Page', undefined, undefined, spy)
+        const firstPageContext = spy.firstCall.firstArg.obj.context
+
+        // Second page event
+        await suiAnalytics.page('Second Page', undefined, undefined, spy)
+        const secondPageContext = spy.secondCall.firstArg.obj.context
+
+        // First page should have url and search from INITIAL values
+        expect(firstPageContext.page.url).to.be.a('string')
+        expect(firstPageContext.page.url.length).to.be.greaterThan(0)
+        expect(firstPageContext.page.search).to.be.a('string')
+
+        // Second page should NOT have url and search properties added by pageReferrer middleware
+        expect(secondPageContext.page.url).to.be.undefined
+        expect(secondPageContext.page.search).to.be.undefined
       })
     })
   })

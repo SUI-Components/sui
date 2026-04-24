@@ -6,18 +6,11 @@ This package adds an abstraction layer on top of [segment.com](https://segment.c
 
 - [x] Add `page` method that internally uses `track` but with the correct `referrer` property.
 - [x] Send `user.id` and `anonymousId` on every track.
-- [x] Send anonymous data to AWS to be able to check data integrity with Adobe.
 
 **Google Analytics 🔍**
 
 - [x] Load GA4 if `googleAnalyticsMeasurementId` is provided.
 - [x] Retrieve `clientId` and `sessionId` automatically from GA4 and put in Segment tracks.
-
-**Adobe Marketing Cloud Visitor Id ☁️**
-
-- [x] Load _Adobe Visitor API_ when needed (if flag `importAdobeVisitorId` is set to `true`, otherwise you should load `Visitor API` by your own to get the `mcvid`).
-- [x] Fetch `marketingCloudVisitorId` and put in integrations object for every track.
-- [x] Monkey patch `track` native Segment method to send `marketingCloudVisitorId` inside `context.integrations`.
 
 **Consent Management Platform 🐾**
 
@@ -127,37 +120,15 @@ import analytics from '@s-ui/segment-wrapper'
 </script>
 ```
 
-### Step 3: Configure mandatory Segment Wrapper attributes:
-
-The following configuration parameters are required and must be set for the system to function correctly:
-
-- `ADOBE_ORG_ID`: This parameter is the Adobe Organization ID, required for integration with Adobe services. Please make sure that you replace the example value with your actual Adobe Org ID.
-- `TRACKING_SERVER`: This specifies the tracking server URL that will be used for sending data and handling tracking requests.
-
-  These parameters need to be defined in the `window._SEGMENT_WRAPPER` object as follows:
-
-```js
-window.__SEGMENT_WRAPPER = {
-  ADOBE_ORG_ID: '012345678@AdobeOrg', // Mandatory!
-  TRACKING_SERVER: 'mycompany.test.net' // Mandatory!
-}
-```
-
-Configure both values correctly before running the application to ensure proper tracking and data integration.
-
-### Step 4: Configure Segment Wrapper (optional)
+### Step 3: Configure Segment Wrapper (optional)
 
 You could put a special config in a the `window.__mpi` to change some behaviour of the wrapper. This config MUST somewhere before using the Segment Wrapper.
 
 - `googleAnalyticsMeasurementId`: _(optional)_ If set, this value will be used for the Google Analytics Measurement API. It will load `gtag` to get the client id.
 - `googleAnalyticsConfig`: _(optional)_ If set, this config will be passed when initializing the Google Analytics Measurement API.
 - `googleAnalyticsInitEvent`: _(optional)_ If set, an event will be sent in order to initialize all the Google Analytics data.
-- `googleAnalyticsCookiePrefix`: _(optional)_ Cookie prefix for GA4 cookies. Defaults to `'segment'`. Example: if set to `'myprefix'`, will look for `myprefix_ga_<CONTAINER_ID>` cookies.
-- `googleAnalyticsCookieTimeout`: _(optional)_ Maximum time in milliseconds to wait for GA4 cookie creation. Defaults to `5000` (5 seconds). Increase this value for slower networks or devices.
 - `defaultContext`: _(optional)_ If set, properties will be merged and sent with every `track` and `page` in the **context object**. It's the ideal place to put the `site` and `vertical` info to make sure that static info will be sent along with all the tracking.
 - `defaultProperties`: _(optional)_ If set, properties will be merged and sent with every `track` and `page`.
-- `getCustomAdobeVisitorId`: _(optional)_ If set, the output of this function will be used as `marketingCloudVisitorId` in Adobe Analytics' integration. It must return a promise.
-- `importAdobeVisitorId` _(optional)_ If set and `true`, Adobe Visitor API will be fetched from Segment Wrapper instead of relying on being loaded before from Tealium or other services. Right now, by default, this is `false` but in the next major this configuration will be `true` by default. If `getCustomAdobeVisitorId` is being used this will be ignored.
 - `tcfTrackDefaultProperties` _(optional)_ If set, this property will be merged together with the default properties set to send with every tcf track event
 - `universalId`: _(optional)_ If set this value will be used for the Visitor API and other services.
 - `hashedUserEmail`: _(optional)_ If set and not `universalId` is set this value will be used for the Visitor API and other services.
@@ -168,25 +139,19 @@ You could put a special config in a the `window.__mpi` to change some behaviour 
 Example:
 
 ```js
-  window.__mpi = {
-    segmentWrapper: {
-      googleAnalyticsMeasurementId: 'G-XXXXXXXXXX',
-      googleAnalyticsCookiePrefix: 'segment', // optional, defaults to 'segment'
-      googleAnalyticsCookieTimeout: 5000, // optional, defaults to 5000ms (5 seconds)
-      universalId: '7ab9ddf3281d5d5458a29e8b3ae2864',
-      defaultContext: {
-        site: 'comprocasa',
-        vertical: 'realestate'
-      },
-      getCustomAdobeVisitorId: () => {
-        const visitorId = // get your visitorId
-        return Promise.resolve(visitorId)
-      },
-      tcfTrackDefaultProperties: {
-        tcfSpecialProp: 'anyvalue'
-      }
+window.__mpi = {
+  segmentWrapper: {
+    googleAnalyticsMeasurementId: 'GA-123456789',
+    universalId: '7ab9ddf3281d5d5458a29e8b3ae2864',
+    defaultContext: {
+      site: 'comprocasa',
+      vertical: 'realestate'
+    },
+    tcfTrackDefaultProperties: {
+      tcfSpecialProp: 'anyvalue'
     }
   }
+}
 ```
 
 ### It also provides additional information such as:

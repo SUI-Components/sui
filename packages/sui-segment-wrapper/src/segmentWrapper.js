@@ -61,15 +61,15 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
     sessionId = await getGoogleSessionId()
     clientId = await getGoogleClientId()
   } catch (error) {
-    console.error(error)
+    console.error(
+      '[segment-wrapper] Failed to retrieve GA4 session/client IDs. Events will be sent without session attribution.',
+      error
+    )
   }
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
 
-  // If we don't have the user consents we remove all the integrations
-  // CRITICAL: Only enable GA4 destination if we have BOTH clientId AND sessionId from cookie
-  // This prevents session mismatches and "Others" in GA4 reports
-  // When sessionId is not ready (null), we disable GA4 destination entirely
+  // If we don't have the user consents we remove all the integrations but GA4
   return {
     ...restOfIntegrations,
     'Google Analytics 4':
@@ -78,7 +78,7 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
             clientId,
             sessionId
           }
-        : false // Disable GA4 if no sessionId available
+        : true
   }
 }
 

@@ -3,7 +3,6 @@ import {dispatchEvent} from '@s-ui/js/lib/events'
 import {getConfig} from '../config.js'
 import {EVENTS} from '../events.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
-import * as cookiesUtils from '../utils/cookies.js'
 
 const FIELDS = {
   clientId: 'client_id',
@@ -39,7 +38,7 @@ const STC_MEDIUM_TRANSFORMATIONS = {
   em: 'email',
   met: 'paid-metasearch',
   sem: 'paid-search',
-  rt: 'display',
+  rt: 'retargeting',
   sm: 'social-media',
   sp: 'paid-social',
   pn: 'push-notification',
@@ -60,48 +59,6 @@ const loadScript = async src =>
     document.head.appendChild(script)
   })
 
-// Promise that resolves when GA4 is ready and cookie is available
-let ga4ReadyPromise = null
-
-/**
- * Waits for GA4 cookie to be created by polling.
- * Default max wait time: 5 seconds (configurable via googleAnalyticsCookieTimeout)
- *
- * @param {string} cookiePrefix - Cookie prefix (e.g., 'segment')
- * @param {string} measurementId - Measurement ID (e.g., 'G-6NE7MBSF9K')
- * @returns {Promise<boolean>} - True if cookie was found, false if timeout
- */
-const waitForGA4Cookie = (cookiePrefix, measurementId) => {
-  const timeoutMs = getConfig('googleAnalyticsCookieTimeout') || 5000 // Default 5 seconds
-  const pollInterval = 100 // Check every 100ms
-  const maxAttempts = Math.ceil(timeoutMs / pollInterval)
-
-  return new Promise(resolve => {
-    let attempts = 0
-
-    const checkCookie = () => {
-      const cookieExists = cookiesUtils.getGA4SessionIdFromCookie(cookiePrefix, measurementId)
-
-      if (cookieExists) {
-        resolve(true)
-        return
-      }
-
-      attempts++
-      if (attempts >= maxAttempts) {
-        // eslint-disable-next-line no-console
-        console.warn(`GA4 cookie not created after ${timeoutMs}ms. SessionId will not be sent to Segment.`)
-        resolve(false)
-        return
-      }
-
-      setTimeout(checkCookie, pollInterval)
-    }
-
-    checkCookie()
-  })
-}
-
 export const loadGoogleAnalytics = async () => {
   const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
   const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
@@ -110,42 +67,8 @@ export const loadGoogleAnalytics = async () => {
   if (!googleAnalyticsMeasurementId) return Promise.resolve(false)
   // Create the `gtag` script
   const gtagScript = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}&l=${dataLayerName}`
-
-  // Create a promise that resolves when gtag is loaded + cookie is created
-  ga4ReadyPromise = loadScript(gtagScript).then(async () => {
-    const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
-    // Wait for the cookie to actually exist (with timeout)
-    await waitForGA4Cookie(cookiePrefix, googleAnalyticsMeasurementId)
-  })
-
-  return ga4ReadyPromise
-}
-
-/**
- * Waits for GA4 to be ready (only on first call).
- * Subsequent calls return immediately.
- *
- * @returns {Promise<void>}
- */
-const waitForGA4Ready = async () => {
-  if (ga4ReadyPromise) {
-    await ga4ReadyPromise
-    ga4ReadyPromise = null // Only wait once
-  }
-}
-
-/**
- * Check if the given session ID is new (not in localStorage).
- * @param {string} sessionId - The session ID to check
- * @returns {{isNewSession: boolean, eventKey: string}} - Whether it's a new session and the storage key
- */
-const checkNewSession = sessionId => {
-  const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
-  const eventPrefix = `ga_event_${eventName}_`
-  const eventKey = `${eventPrefix}${sessionId}`
-  const isNewSession = !localStorage.getItem(eventKey)
-
-  return {isNewSession, eventKey}
+  // Load it and retrieve the `clientId` from Google
+  return loadScript(gtagScript)
 }
 
 // Trigger GA init event just once per session.
@@ -261,53 +184,12 @@ function readFromUtm(searchParams) {
 }
 
 export const getGoogleClientId = async () => getGoogleField(FIELDS.clientId)
-
-/**
- * Gets GA4 session ID from cookie ONLY.
- *
- * CRITICAL BEHAVIOR:
- * - Waits for GA4 to be ready on first call (ensures cookie exists)
- * - Returns sessionId ONLY if available in cookie (reliable source)
- * - "sui" event is triggered ONLY when sessionId is available and on new sessions
- * - Both "sui" event and Segment events use the SAME sessionId from cookie
- *
- * This ensures:
- * 1. No session mismatches between client and server-side tracking
- * 2. No events sent to Segment without valid sessionId
- * 3. "sui" event only sent on new sessions with correct sessionId
- * 4. First track waits ~100ms for GA4, subsequent tracks are instant
- *
- * @returns {Promise<string|null>} Session ID from cookie, or null if not ready
- */
 export const getGoogleSessionId = async () => {
-  const cookiePrefix = getConfig('googleAnalyticsCookiePrefix') || 'segment'
-  const measurementId = getConfig('googleAnalyticsMeasurementId')
+  const sessionId = await getGoogleField(FIELDS.sessionId)
 
-  // Wait for GA4 to be ready (only on first call)
-  await waitForGA4Ready()
+  triggerGoogleAnalyticsInitEvent(sessionId)
 
-  // ONLY use cookie value - this is the source of truth
-  // Pass measurementId to ensure we read the correct container's cookie
-  const cookieSessionId = cookiesUtils.getGA4SessionIdFromCookie(cookiePrefix, measurementId)
-
-  // If cookie is available, trigger "sui" event on new sessions
-  if (cookieSessionId) {
-    const {isNewSession} = checkNewSession(cookieSessionId)
-
-    if (isNewSession) {
-      triggerGoogleAnalyticsInitEvent(cookieSessionId, true)
-      // eslint-disable-next-line no-console
-      console.log(`New GA4 session started: ${cookieSessionId} (Source: Cookie)`)
-    }
-  } else {
-    // Cookie still not available even after waiting
-    // eslint-disable-next-line no-console
-    console.warn('GA4 cookie not available after waiting. SessionId will not be sent to Segment.')
-  }
-
-  // Return cookie sessionId (or null if not ready)
-  // When null, Segment events will NOT include sessionId
-  return cookieSessionId
+  return sessionId
 }
 
 // Unified consent state getter.

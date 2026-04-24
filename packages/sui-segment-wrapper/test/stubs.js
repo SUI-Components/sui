@@ -43,28 +43,10 @@ export const stubFetch = ({responses = [{urlRe: /^http/, fetchResponse: {}}]} = 
 }
 
 export const stubGoogleAnalytics = () => {
-  // Use numeric session ID to match real GA4 behavior (timestamps)
-  const fakeSessionId = '1234567890'
-
   const fakeFields = {
     client_id: 'fakeClientId',
-    session_id: fakeSessionId
+    session_id: 'fakeSessionId'
   }
-
-  // Mock GA4 cookie with matching session ID to simulate real scenario
-  // Production cookie format: segment_ga_<ID>=GS2.1.s<sessionId>$o1$g0$t<timestamp>$j60$l0$h0
-  // Test uses simplified format: segment_ga_<ID>=GS1.1.s<sessionId>.<timestamp>...
-  // Clear ALL existing GA4 cookies first (from any previous test)
-  document.cookie.split(';').forEach(cookie => {
-    const name = cookie.split('=')[0].trim()
-    if (name.includes('_ga_')) {
-      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
-    }
-  })
-
-  // Set the test cookie
-  const cookieName = 'segment_ga_G123456'
-  document.cookie = `${cookieName}=GS1.1.s${fakeSessionId}.1.0.${Date.now()}.0.0.0; path=/`
 
   window.gtag = (key, id, field, done) => {
     if (key === 'get') {
@@ -188,6 +170,7 @@ export const stubDocumentCookie = (value = '') => {
 export const resetReferrerState = () => {
   referrerState.spaReferrer = ''
   referrerState.referrer = ''
+  referrerState.isFirstPageViewSent = false
 }
 
 export const stubActualLocation = location => sinon.stub(referrerUtils, 'getActualLocation').returns(location)
@@ -197,6 +180,9 @@ export const stubActualQueryString = queryString =>
 
 export const stubReferrer = (referrer, stubLocation) => {
   const stubDocumentReferrer = sinon.stub(referrerUtils, 'getDocumentReferrer').returns(referrer)
+  // Manually set referrer state since initialization happens at module load
+  resetReferrerState()
+  referrerState.referrer = referrer
 
   return {
     restore: () => {

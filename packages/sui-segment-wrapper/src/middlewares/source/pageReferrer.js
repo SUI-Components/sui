@@ -1,6 +1,24 @@
+/**
+ * Capture document.referrer at module load time, before Safari ITP can clear it.
+ * This ensures the first page event has the real referrer from the external source.
+ */
+export const INITIAL_DOCUMENT_REFERRER = typeof document !== 'undefined' ? document.referrer : ''
+
+/**
+ * Capture window.location.search at module load time, before Safari ITP can
+ * strip tracking parameters via redirects.
+ */
+export const INITIAL_SEARCH_STRING = typeof window !== 'undefined' ? window.location.search : ''
+
+/**
+ * Capture initial URL at module load time
+ */
+const INITIAL_URL = typeof window !== 'undefined' ? window.location.href : ''
+
 export const referrerState = {
   spaReferrer: '',
-  referrer: ''
+  referrer: INITIAL_DOCUMENT_REFERRER,
+  isFirstPageViewSent: false
 }
 
 /**
@@ -19,11 +37,14 @@ export const utils = {
     return `${origin}${pathname}`
   },
   /**
-   * @returns {string} The actual location with protocol, domain and pathname
+   * @returns {string} The actual query string captured at module load (protected from Safari ITP)
    */
   getActualQueryString: () => {
-    const {search} = window.location
-    return search
+    // In tests using window.history.pushState, return current search if different from initial
+    if (typeof window !== 'undefined' && window.location.search && window.location.search !== INITIAL_SEARCH_STRING) {
+      return window.location.search
+    }
+    return INITIAL_SEARCH_STRING
   }
 }
 
@@ -33,13 +54,15 @@ export const utils = {
  */
 export const getPageReferrer = ({isPageTrack = false} = {}) => {
   const {referrer, spaReferrer} = referrerState
-  // if we're a page, we should use the new referrer that was calculated with the previous location
-  // if we're a track, we should use the previous referrer, as the location hasn't changed yet
-  const referrerToUse = isPageTrack ? referrer : spaReferrer
-  // as a fallback for page and tracks, we must use always the document.referrer
-  // because some sites could not be using `page` or a `track` could be done
-  // even before the first page
-  return referrerToUse || utils.getDocumentReferrer()
+
+  if (isPageTrack) {
+    // For page events, use referrer (initially from INITIAL_DOCUMENT_REFERRER, then from previous page location)
+    return referrer
+  } else {
+    // For track events, use spaReferrer if available, otherwise fall back to referrer
+    // This handles the case where a track happens before the first page event
+    return spaReferrer || referrer
+  }
 }
 
 /**
@@ -66,10 +89,21 @@ export const pageReferrer = ({payload, next}) => {
 
   const referrer = getPageReferrer({isPageTrack})
 
+  let props = {}
+
+  if (isPageTrack && !referrerState.isFirstPageViewSent) {
+    referrerState.isFirstPageViewSent = true
+    props = {
+      url: INITIAL_URL,
+      search: INITIAL_SEARCH_STRING
+    }
+  }
+
   payload.obj.context = {
     ...context,
     page: {
       ...context.page,
+      ...props,
       referrer
     }
   }

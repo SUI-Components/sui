@@ -77,7 +77,12 @@ if (isClient && window.analytics) {
 }
 
 export default analytics
+export {getGoogleClientId, getGoogleSessionId} from './repositories/googleRepository.js'
 export {getUniversalId} from './universalId.js'
 export {EVENTS} from './events.js'
-export {getGoogleClientId, getGoogleSessionId} from './repositories/googleRepository.js'
-export {getAdobeVisitorData, getAdobeMCVisitorID} from './repositories/adobeRepository.js'
+
+// Deprecated Adobe Analytics functions - kept for backwards compatibility
+// @deprecated Adobe Analytics integration has been removed
+export const getAdobeVisitorData = () => Promise.resolve({trackingServer: '', version: ''})
+// @deprecated Adobe Analytics integration has been removed
+export const getAdobeMCVisitorID = () => Promise.resolve('')
