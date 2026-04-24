@@ -1051,13 +1051,28 @@ describe('Segment Wrapper', function () {
     })
 
     describe('initial URL and search capture for first page event', function () {
-      it('should include initial URL and search in very first page event globally', async function () {
-        // This test verifies that the FIRST page event sent by the wrapper includes url and search
-        // Note: Due to test isolation, isFirstPageViewSent might already be true from other tests
-        // So we'll just verify the mechanism exists
-        const {INITIAL_SEARCH_STRING} = await import('../src/middlewares/source/pageReferrer.js')
+      it('should include initial URL and search only in the first page event', async function () {
+        resetReferrerState()
+        await simulateUserAcceptConsents()
 
-        expect(INITIAL_SEARCH_STRING).to.be.a('string')
+        const spy = sinon.stub()
+
+        // First page event
+        await suiAnalytics.page('Home Page', undefined, undefined, spy)
+        const firstPageContext = spy.firstCall.firstArg.obj.context
+
+        // Second page event
+        await suiAnalytics.page('Second Page', undefined, undefined, spy)
+        const secondPageContext = spy.secondCall.firstArg.obj.context
+
+        // First page should have url and search from INITIAL values
+        expect(firstPageContext.page.url).to.be.a('string')
+        expect(firstPageContext.page.url.length).to.be.greaterThan(0)
+        expect(firstPageContext.page.search).to.be.a('string')
+
+        // Second page should NOT have url and search properties added by pageReferrer middleware
+        expect(secondPageContext.page.url).to.be.undefined
+        expect(secondPageContext.page.search).to.be.undefined
       })
     })
   })

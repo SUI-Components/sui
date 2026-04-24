@@ -17,10 +17,9 @@ const INITIAL_URL = typeof window !== 'undefined' ? window.location.href : ''
 
 export const referrerState = {
   spaReferrer: '',
-  referrer: INITIAL_DOCUMENT_REFERRER
+  referrer: INITIAL_DOCUMENT_REFERRER,
+  isFirstPageViewSent: false
 }
-
-let isFirstPageViewSent = false
 
 /**
  * Useful wrapper around document and window objects
@@ -92,8 +91,8 @@ export const pageReferrer = ({payload, next}) => {
 
   let props = {}
 
-  if (isPageTrack && !isFirstPageViewSent) {
-    isFirstPageViewSent = true
+  if (isPageTrack && !referrerState.isFirstPageViewSent) {
+    referrerState.isFirstPageViewSent = true
     props = {
       url: INITIAL_URL,
       search: INITIAL_SEARCH_STRING

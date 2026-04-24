@@ -170,6 +170,7 @@ export const stubDocumentCookie = (value = '') => {
 export const resetReferrerState = () => {
   referrerState.spaReferrer = ''
   referrerState.referrer = ''
+  referrerState.isFirstPageViewSent = false
 }
 
 export const stubActualLocation = location => sinon.stub(referrerUtils, 'getActualLocation').returns(location)

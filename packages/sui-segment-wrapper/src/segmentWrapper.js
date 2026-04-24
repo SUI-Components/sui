@@ -61,7 +61,10 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
     sessionId = await getGoogleSessionId()
     clientId = await getGoogleClientId()
   } catch (error) {
-    console.error(error)
+    console.error(
+      '[segment-wrapper] Failed to retrieve GA4 session/client IDs. Events will be sent without session attribution.',
+      error
+    )
   }
 
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})

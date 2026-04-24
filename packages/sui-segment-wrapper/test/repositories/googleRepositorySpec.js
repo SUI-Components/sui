@@ -59,6 +59,17 @@ describe('GoogleRepository', () => {
     expect(details.campaign).to.not.have.property('content')
   })
 
+  it('should transform rt medium to retargeting', async () => {
+    setupLocation('stc=rt-source_type-campaign_name')
+
+    const details = await getCampaignDetails()
+
+    expect(details).to.not.be.null
+    expect(details.campaign).to.have.property('medium', 'retargeting')
+    expect(details.campaign).to.have.property('source', 'source_type')
+    expect(details.campaign).to.have.property('name', 'campaign_name')
+  })
+
   it('should return null when no STC param present', async () => {
     setupLocation('')
 
