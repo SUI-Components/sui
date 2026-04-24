@@ -1,5 +1,21 @@
 # CHANGELOG
 
+# 4.42.0 (2026-04-24)
+
+
+### Bug Fixes
+
+* fix version ([f43bc43](https://github.com/SUI-Components/sui/commit/f43bc438eefa0cca2ba18bd554395650714f9ac7))
+* prevent Safari ITP from clearing referrer and campaign tracking params ([f8bcdc9](https://github.com/SUI-Components/sui/commit/f8bcdc9093efda6ce98d27a505e2dd469ee172ee))
+
+
+### Features
+
+* clean code ([cff6eaf](https://github.com/SUI-Components/sui/commit/cff6eaf431b63fa3c1eeff8335885b4d647db0f5))
+* force update ([0e8a890](https://github.com/SUI-Components/sui/commit/0e8a8909b568cdf50a265da104e3c81ddf7913e4))
+
+
+
 # 4.36.0 (2025-12-04)
 
 
