@@ -132,6 +132,7 @@ const trackTcf = ({eventId, gdprPrivacy}) =>
 export const getGdprPrivacyValue = () => {
   // try to get the actual gdprPrivacyValue and just return it
   const gdprPrivacyValue = gdprState.get()
+
   if (gdprPrivacyValue !== undefined) return Promise.resolve(gdprPrivacyValue)
 
   // // if we don't have a gdprPrivacyValue, then subscribe to it until we have a value
