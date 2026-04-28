@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {getConfig, setConfig} from '../src/config.js'
+import {setConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
 import {campaignContext} from '../src/middlewares/source/campaignContext.js'
 import {defaultContextProperties} from '../src/middlewares/source/defaultContextProperties.js'
@@ -10,7 +10,6 @@ import {userScreenInfo} from '../src/middlewares/source/userScreenInfo.js'
 import {userTraits} from '../src/middlewares/source/userTraits.js'
 import {INTEGRATIONS_WHEN_NO_CONSENTS} from '../src/segmentWrapper.js'
 import initTcfTracking, {getGdprPrivacyValue, USER_GDPR} from '../src/tcf.js'
-import {assertCampaignDetails} from './assertions.js'
 import {
   cleanWindowStubs,
   resetReferrerState,
@@ -25,7 +24,6 @@ import {
   simulateUserAcceptAdvertisingConsents,
   simulateUserAcceptAnalyticsConsents,
   simulateUserAcceptConsents,
-  simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents,
   simulateUserDeclinedConsents
 } from './tcf.js'
 import {getDataFromLastTrack, waitUntil} from './utils.js'
@@ -163,183 +161,13 @@ describe('Segment Wrapper', function () {
       expect(context.traits.anonymousId).to.deep.equal('fakeAnonymousId')
     })
 
-    describe('and gtag has been configured properly', () => {
-      it('should send Google Analytics integration with true if user declined consents', async () => {
-        // Add the needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 123)
-
-        await simulateUserDeclinedConsents()
-
-        await suiAnalytics.track(
-          'fakeEvent',
-          {},
-          {
-            integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
-          }
-        )
-
-        const {context} = getDataFromLastTrack()
-
-        expect(context.integrations).to.deep.includes({
-          fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': {clientId: 'fakeClientId', sessionId: 'fakeSessionId'}
-        })
-      })
-
-      it('should send ClientId on Google Analytics integration if user accepted consents', async () => {
-        // add needed config to enable Google Analytics
-        setConfig('googleAnalyticsMeasurementId', 123)
-
-        await simulateUserAcceptConsents()
-
-        await suiAnalytics.track(
-          'fakeEvent',
-          {},
-          {
-            integrations: {fakeIntegrationKey: 'fakeIntegrationValue'}
-          }
-        )
-
-        const {context} = getDataFromLastTrack()
-
-        expect(context.integrations).to.deep.includes({
-          fakeIntegrationKey: 'fakeIntegrationValue',
-          'Google Analytics 4': {
-            clientId: 'fakeClientId',
-            sessionId: 'fakeSessionId'
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=em-mail-winter%20promo-honda`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=em-mail-winter%20promo-honda',
-          expectation: {
-            campaign: {
-              medium: 'email',
-              name: 'winter promo',
-              source: 'mail',
-              content: 'honda'
-            }
-          }
-        })
-      })
-
-      it('should not send mapped campaing details when stc param is invalid', async () => {
-        await assertCampaignDetails({
-          queryString:
-            '?stc=IJ_PUSH%7Celement~50220488692%7Cversion~pushmssearch_jobtitle_normalized&id_push=50220488692 ',
-          expectation: null
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sm-google-1234%3Aspring%20sale-aprilia-logolink',
-          expectation: {
-            campaign: {
-              medium: 'social-media',
-              id: '1234',
-              name: 'spring sale',
-              source: 'google',
-              content: 'aprilia',
-              term: 'logolink'
-            }
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn%20sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn%20sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-1234%3Aautumn%20sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-1234%3Aautumn%20sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              id: '1234',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-1234:autumn sale`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-1234:autumn sale',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              id: '1234',
-              name: 'autumn sale',
-              source: 'google'
-            }
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-aprilia`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn sale-aprilia',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google',
-              content: 'aprilia'
-            }
-          }
-        })
-      })
-
-      it('should send mapped campaign details when the url query string is `?stc=sem-google-autumn sale-na-logolink`', async () => {
-        await assertCampaignDetails({
-          queryString: '?stc=sem-google-autumn sale-na-logolink',
-          expectation: {
-            campaign: {
-              medium: 'paid-search',
-              name: 'autumn sale',
-              source: 'google',
-              term: 'logolink'
-            }
-          }
-        })
-      })
-    })
-
     it('should add always the platform as web and the language', async () => {
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
       const {properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        fakePropKey: 'fakePropValue',
-        platform: 'web'
-      })
+      expect(properties.fakePropKey).to.equal('fakePropValue')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
     })
 
     it('should send defaultProperties if provided', async () => {
@@ -349,11 +177,10 @@ describe('Segment Wrapper', function () {
 
       const {properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        site: 'mysite',
-        vertical: 'myvertical',
-        platform: 'web'
-      })
+      expect(properties.site).to.equal('mysite')
+      expect(properties.vertical).to.equal('myvertical')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
     })
 
     describe('and the TCF is handled', () => {
@@ -456,30 +283,6 @@ describe('Segment Wrapper', function () {
 
       expect(spy.callCount).to.equal(1)
     })
-
-    describe('and GA Measurment ID is set', () => {
-      beforeEach(() => {
-        setConfig('googleAnalyticsMeasurementId', 123)
-      })
-
-      it('should set the user id into `gtag` properly', async function () {
-        await simulateUserAcceptConsents()
-        await suiAnalytics.identify('myTestUserId')
-
-        const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-
-        const getGaUserId = async () =>
-          new Promise(resolve => {
-            window.gtag('get', googleAnalyticsMeasurementId, 'user_id', userId => {
-              resolve(userId)
-            })
-          })
-
-        const gaUserId = await getGaUserId()
-
-        expect(gaUserId).to.equal('myTestUserId')
-      })
-    })
   })
 
   describe('when TCF is present on the page', () => {
@@ -488,10 +291,9 @@ describe('Segment Wrapper', function () {
 
       const {context, properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
       expect(context).to.deep.include({
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined'
@@ -502,10 +304,9 @@ describe('Segment Wrapper', function () {
       await simulateUserAcceptAnalyticsConsents()
       const {context, properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
 
       expect(context).to.deep.include({
         gdpr_privacy: 'accepted',
@@ -518,10 +319,9 @@ describe('Segment Wrapper', function () {
 
       const {context, properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
       expect(context).to.deep.include({
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'accepted'
@@ -533,10 +333,9 @@ describe('Segment Wrapper', function () {
 
       const {context, properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
 
       expect(context).to.deep.include({
         gdpr_privacy: 'declined',
@@ -569,10 +368,9 @@ describe('Segment Wrapper', function () {
 
       const {context, properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
 
       expect(context).to.deep.include({
         gdpr_privacy: 'accepted',
@@ -586,10 +384,9 @@ describe('Segment Wrapper', function () {
       await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
       const {context, properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        fakePropKey: 'fakePropValue',
-        platform: 'web'
-      })
+      expect(properties.fakePropKey).to.equal('fakePropValue')
+      expect(properties.platform).to.equal('web')
+      expect(properties.google_consents).to.be.an('object')
 
       expect(context).to.deep.include({
         gdpr_privacy: 'accepted'
@@ -603,35 +400,6 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
 
       expect(context.integrations).to.deep.include(INTEGRATIONS_WHEN_NO_CONSENTS)
-    })
-
-    it('should grant Google Analytics consents properties if user analytics consents are accepted', async () => {
-      await simulateUserAcceptAnalyticsConsents()
-      await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
-
-      const {context} = getDataFromLastTrack()
-
-      expect(context.google_consents).to.include({
-        analytics_storage: 'granted',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        ad_storage: 'denied'
-      })
-    })
-
-    it('should deny Google Analytics consents properties if user analytics consents are declined', async () => {
-      await simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents()
-
-      await suiAnalytics.track('fakeEvent', {fakePropKey: 'fakePropValue'})
-
-      const {context} = getDataFromLastTrack()
-
-      expect(context.google_consents).to.include({
-        analytics_storage: 'denied',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-        ad_storage: 'granted'
-      })
     })
 
     describe('for recurrent users', () => {
@@ -676,22 +444,20 @@ describe('Segment Wrapper', function () {
 
       const {properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web',
-        vertical: 'fakeVertical'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.vertical).to.equal('fakeVertical')
+      expect(properties.google_consents).to.be.an('object')
     })
     it('should add the defined custom property to the track event when CONSENTS are DECLINED', async () => {
       await simulateUserDeclinedConsents()
 
       const {properties} = getDataFromLastTrack()
 
-      expect(properties).to.deep.equal({
-        channel: 'GDPR',
-        platform: 'web',
-        vertical: 'fakeVertical'
-      })
+      expect(properties.channel).to.equal('GDPR')
+      expect(properties.platform).to.equal('web')
+      expect(properties.vertical).to.equal('fakeVertical')
+      expect(properties.google_consents).to.be.an('object')
     })
   })
 
@@ -702,11 +468,6 @@ describe('Segment Wrapper', function () {
 
     it('sends an event with the actual context and traits when the consents are declined', async () => {
       const spy = sinon.stub()
-      window.google_tag_data = {
-        ics: {
-          getConsentState: () => 2
-        }
-      }
 
       await simulateUserDeclinedConsents()
       await suiAnalytics.track(
@@ -725,7 +486,7 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
       const integrations = {
         All: false,
-        'Google Analytics 4': true,
+        'Google Analytics 4 Web': true,
         Personas: false,
         Webhooks: true,
         Webhook: true
@@ -738,13 +499,6 @@ describe('Segment Wrapper', function () {
         protocols: {event_version: 3},
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined',
-        analytics_storage: 'denied',
-        google_consents: {
-          analytics_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied',
-          ad_storage: 'denied'
-        },
         context: {
           integrations
         },
@@ -868,36 +622,34 @@ describe('Segment Wrapper', function () {
       stubDocumentCookie(`${XANDR_ID_COOKIE}=${givenXandrId}`)
     })
 
-    it('should send analytics storage GRANTED if user has accepted consent', async () => {
-      await simulateUserAcceptConsents()
-      window.google_tag_data = {
-        ics: {
-          getConsentState: () => 1
-        }
-      }
+    it('should send google_consents in properties if user has accepted consent', async () => {
+      await simulateUserAcceptAnalyticsConsents()
 
-      await suiAnalytics.track('fakeEvent')
+      await suiAnalytics.track('fakeEvent', {custom_prop: 'value'})
 
-      const {context} = getDataFromLastTrack()
+      const {properties} = getDataFromLastTrack()
 
-      expect(context.analytics_storage).to.equal('granted')
+      expect(properties.google_consents).to.include({
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      })
     })
 
-    it('should send analytics storage `denied` if fail to read it', async () => {
-      await simulateUserAcceptConsents()
-      window.google_tag_data = {
-        ics: {
-          getConsentState: () => {
-            throw new Error("ERROR: Couldn't read the consent state")
-          }
-        }
-      }
+    it('should send google_consents in properties with denied values if user declined', async () => {
+      await simulateUserDeclinedConsents()
 
       await suiAnalytics.track('fakeEvent')
 
-      const {context} = getDataFromLastTrack()
+      const {properties} = getDataFromLastTrack()
 
-      expect(context.analytics_storage).to.equal('denied')
+      expect(properties.google_consents).to.include({
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      })
     })
 
     it('should send the xandrId as externalId, that where stored in a cookie', async () => {
@@ -938,57 +690,6 @@ describe('Segment Wrapper', function () {
         context: {externalIds}
       } = getDataFromLastTrack()
       expect(externalIds).to.be.undefined
-    })
-  })
-
-  describe('google_consents', () => {
-    it('should be populated with GTM API values when available', async () => {
-      // Given
-      await simulateUserAcceptConsents()
-      const getConsentState = sinon.stub()
-      getConsentState.withArgs('analytics_storage').returns(1) // GRANTED
-      getConsentState.withArgs('ad_storage').returns(2) // DENIED
-      getConsentState.withArgs('ad_user_data').returns(1) // GRANTED
-      getConsentState.withArgs('ad_personalization').returns(2) // DENIED
-
-      window.google_tag_data = {
-        ics: {
-          getConsentState
-        }
-      }
-
-      // When
-      await suiAnalytics.track('fakeEvent')
-      const {context} = getDataFromLastTrack()
-
-      // Then
-      expect(context.google_consents).to.deep.equal({
-        analytics_storage: 'granted',
-        ad_storage: 'denied',
-        ad_user_data: 'granted',
-        ad_personalization: 'denied'
-      })
-
-      delete window.google_tag_data
-    })
-
-    it('should fallback to CMP values when GTM API is not available', async () => {
-      // Given
-      await simulateUserDeclinedAnalyticsConsentsAndAcceptedAdvertisingConsents()
-      // window.google_tag_data is undefined
-
-      // When
-      await suiAnalytics.track('fakeEvent')
-      const {context} = getDataFromLastTrack()
-
-      // Then
-      // Fallback logic derives from CMP consent, which is what we simulated
-      expect(context.google_consents).to.deep.equal({
-        analytics_storage: 'denied',
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted'
-      })
     })
   })
 

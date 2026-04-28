@@ -1,17 +1,8 @@
 // @ts-check
 
-import {
-  CONSENT_STATES,
-  getConsentState,
-  getGoogleConsentValue,
-  getGoogleClientId,
-  getGoogleSessionId,
-  setGoogleUserId,
-  sendGoogleConsents
-} from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
-import {USER_GDPR, CMP_TRACK_EVENT, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
+import {USER_GDPR, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -54,31 +45,12 @@ export const getDefaultProperties = () => ({
  */
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
-  let sessionId
-  let clientId
-
-  try {
-    sessionId = await getGoogleSessionId()
-    clientId = await getGoogleClientId()
-  } catch (error) {
-    console.error(
-      '[segment-wrapper] Failed to retrieve GA4 session/client IDs. Events will be sent without session attribution.',
-      error
-    )
-  }
-
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
 
   // If we don't have the user consents we remove all the integrations but GA4
   return {
     ...restOfIntegrations,
-    'Google Analytics 4':
-      clientId && sessionId
-        ? {
-            clientId,
-            sessionId
-          }
-        : true
+    'Google Analytics 4 Web': true
   }
 }
 
@@ -135,14 +107,14 @@ const getExternalIds = ({context, xandrId}) => {
  * @param {string} gdprValue
  * @returns {string} consent value
  */
-const getConsentValue = gdprValue => (gdprValue === USER_GDPR.ACCEPTED ? CONSENT_STATES.granted : CONSENT_STATES.denied)
+const getConsentValue = gdprValue => (gdprValue === USER_GDPR.ACCEPTED ? 'granted' : 'denied')
 
 /**
  * Get data like traits and integrations to be added to the context object
  * @param {object} context Context object with all the actual info
  * @returns {Promise<object>} New context with all the previous info and the new one
  */
-export const decorateContextWithNeededData = async ({event = '', context = {}}) => {
+export const decorateContextWithNeededData = async ({event = '', context = {}, properties = {}}) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
   const {analytics: gdprPrivacyValueAnalytics, advertising: gdprPrivacyValueAdvertising} = gdprPrivacyValue || {}
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
@@ -150,11 +122,6 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
-  const analyticsConsentValue = getGoogleConsentValue('analytics_storage') ?? getConsentValue(gdprPrivacyValueAnalytics)
-  const adUserDataConsentValue = getGoogleConsentValue('ad_user_data') ?? getConsentValue(gdprPrivacyValueAdvertising)
-  const adPersonalizationConsentValue =
-    getGoogleConsentValue('ad_personalization') ?? getConsentValue(gdprPrivacyValueAdvertising)
-  const adStorageConsentValue = getGoogleConsentValue('ad_storage') ?? getConsentValue(gdprPrivacyValueAdvertising)
 
   if (!isGdprAccepted) {
     context.integrations = {
@@ -165,23 +132,30 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     }
   }
 
+  // Add Google Consent Mode to properties
+  const googleConsents = {
+    analytics_storage: getConsentValue(gdprPrivacyValueAnalytics),
+    ad_storage: getConsentValue(gdprPrivacyValueAdvertising),
+    ad_user_data: getConsentValue(gdprPrivacyValueAdvertising),
+    ad_personalization: getConsentValue(gdprPrivacyValueAdvertising)
+  }
+
   return {
-    ...context,
-    ...(!isGdprAccepted && {ip: '0.0.0.0'}),
-    ...getExternalIds({context, xandrId}),
-    analytics_storage: getConsentState(),
-    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
-    gdpr_privacy: gdprPrivacyValueAnalytics,
-    gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
-    google_consents: {
-      analytics_storage: analyticsConsentValue,
-      ad_user_data: adUserDataConsentValue,
-      ad_personalization: adPersonalizationConsentValue,
-      ad_storage: adStorageConsentValue
+    context: {
+      ...context,
+      ...(!isGdprAccepted && {ip: '0.0.0.0'}),
+      ...getExternalIds({context, xandrId}),
+      clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
+      gdpr_privacy: gdprPrivacyValueAnalytics,
+      gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
+      integrations: {
+        ...context.integrations,
+        ...integrations
+      }
     },
-    integrations: {
-      ...context.integrations,
-      ...integrations
+    properties: {
+      ...properties,
+      google_consents: googleConsents
     }
   }
 }
@@ -197,16 +171,20 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
 const track = (event, properties, context = {}, callback) =>
   new Promise(resolve => {
     const initTrack = async () => {
-      const newContext = await decorateContextWithNeededData({context, event})
-
       /**
        * @deprecated Now we use `defaultContextProperties` middleware
        * and put the info on the context object
        */
-      const newProperties = {
+      const baseProperties = {
         ...getDefaultProperties(),
         ...properties
       }
+
+      const {context: newContext, properties: decoratedProperties} = await decorateContextWithNeededData({
+        context,
+        event,
+        properties: baseProperties
+      })
 
       const newCallback = async (...args) => {
         if (callback) callback(...args) // eslint-disable-line n/no-callback-literal
@@ -219,15 +197,9 @@ const track = (event, properties, context = {}, callback) =>
         }
       }
 
-      const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
-
-      if (needsConsentManagement && event === CMP_TRACK_EVENT) {
-        sendGoogleConsents('update', newContext.google_consents)
-      }
-
       window.analytics.track(
         event,
-        newProperties,
+        decoratedProperties,
         {
           ...newContext,
           context: {
@@ -255,8 +227,6 @@ const identify = async (userIdParam, traits, options, callback) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
 
   const userId = getUserId(userIdParam)
-
-  setGoogleUserId(userId)
 
   return window.analytics.identify(
     userId,
