@@ -83,6 +83,17 @@ const checkIfHasChangedFiles = async path => {
   return stdout.trim() !== ''
 }
 
+async function executeCommit(answers, extraArgs = '') {
+  const commitMsg = buildCommit(answers)
+  const commitParams = commitMsg
+    .split('\n')
+    .filter(Boolean)
+    .map(msg => `-m "${msg}"`)
+    .join(' ')
+
+  await exec(`git commit ${commitParams} ${extraArgs}`, {cwd: process.cwd()})
+}
+
 module.exports = async function startMainCommitFlow() {
   const scopesWithChanges = await Promise.all(
     scopes.map(pkg => checkIfHasChangedFiles(pkg.name).then(hasFiles => hasFiles && pkg))
@@ -93,17 +104,11 @@ module.exports = async function startMainCommitFlow() {
   })
 
   if (answers && answers.confirmCommit === true) {
-    const commitMsg = buildCommit(answers)
-    const commitParams = commitMsg
-      .split('\n') // separate each new line to
-      .filter(Boolean) // filter empty strings
-      .map(msg => `-m "${msg}"`)
-      .join(' ')
-
     const commitArgs = process.argv.slice(2).join(' ')
-
-    await exec(`git commit ${commitParams} ${commitArgs}`, {cwd: process.cwd()})
+    await executeCommit(answers, commitArgs)
   } else {
     console.log(colors.red('Commit has been canceled.'))
   }
 }
+
+module.exports.executeCommit = executeCommit
