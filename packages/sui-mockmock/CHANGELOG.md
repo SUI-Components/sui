@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.9.0 (2026-05-07)
+
+
+### Features
+
+* Update axios to v1.16.0 ([c918f33](https://github.com/SUI-Components/sui/commit/c918f33e49968504600b2c4b33da69120a22c4ba))
+
+
+
 # 2.8.0 (2025-10-07)
 
 
