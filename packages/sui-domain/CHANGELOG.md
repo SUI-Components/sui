@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.23.0 (2026-05-07)
+
+
+### Features
+
+* Update axios to v1.16.0 ([defacec](https://github.com/SUI-Components/sui/commit/defaceca0626fffecb3deade584d9d50284eb049))
+
+
+
 # 2.22.0 (2026-04-21)
 
 
