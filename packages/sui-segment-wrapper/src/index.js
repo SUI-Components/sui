@@ -6,6 +6,12 @@ import {defaultContextProperties} from './middlewares/source/defaultContextPrope
 import {pageReferrer} from './middlewares/source/pageReferrer.js'
 import {userScreenInfo} from './middlewares/source/userScreenInfo.js'
 import {userTraits} from './middlewares/source/userTraits.js'
+import {
+  DEFAULT_DATA_LAYER_NAME,
+  getCampaignDetails,
+  loadGoogleAnalytics,
+  sendGoogleConsents
+} from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
@@ -37,12 +43,61 @@ const addMiddlewares = () => {
   }
 }
 
+/**
+ * Check if Google Analytics 4 Web destination is enabled in Segment
+ * @returns {boolean}
+ */
+const isGA4DestinationEnabled = () => {
+  try {
+    const destinations = window.analytics?._integrations?.['Google Analytics 4 Web']
+    return !!destinations
+  } catch (error) {
+    return false
+  }
+}
+
 if (isClient && window.analytics) {
+  // Check if we need to manually initialize GA4 (legacy mode)
+  window.analytics.ready(() => {
+    const useSegmentGA4Destination = isGA4DestinationEnabled()
+
+    if (!useSegmentGA4Destination) {
+      // Legacy behavior: Initialize Google Analytics manually
+      const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+      const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
+      const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
+
+      if (googleAnalyticsMeasurementId) {
+        const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
+
+        window[dataLayerName] = window[dataLayerName] || []
+        window.gtag =
+          window.gtag ||
+          function gtag() {
+            window[dataLayerName].push(arguments)
+          }
+
+        window.gtag('js', new Date())
+        if (needsConsentManagement) sendGoogleConsents()
+        window.gtag('config', googleAnalyticsMeasurementId, {
+          cookie_prefix: 'segment',
+          send_page_view: false,
+          ...googleAnalyticsConfig,
+          ...getCampaignDetails()
+        })
+        loadGoogleAnalytics().catch(error => {
+          console.error(error)
+        })
+      }
+    }
+  })
+
   window.analytics.ready(checkAnonymousId)
   window.analytics.addSourceMiddleware ? addMiddlewares() : window.analytics.ready(addMiddlewares)
 }
 
 export default analytics
+export {getGoogleClientId, getGoogleSessionId} from './repositories/googleRepository.js'
 export {getUniversalId} from './universalId.js'
 export {EVENTS} from './events.js'
 

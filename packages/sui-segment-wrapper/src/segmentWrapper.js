@@ -1,8 +1,17 @@
 // @ts-check
 
+import {
+  CONSENT_STATES,
+  getConsentState,
+  getGoogleClientId,
+  getGoogleConsentValue,
+  getGoogleSessionId,
+  sendGoogleConsents,
+  setGoogleUserId
+} from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
-import {USER_GDPR, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
+import {USER_GDPR, CMP_TRACK_EVENT, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -47,10 +56,40 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
   const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
 
-  // If we don't have the user consents we remove all the integrations but GA4
+  // Check if we should use manual GA4 (legacy) or Segment destination (new)
+  const useSegmentGA4Destination = isGA4DestinationEnabled()
+
+  if (useSegmentGA4Destination) {
+    // New behavior: let Segment handle GA4
+    return {
+      ...restOfIntegrations,
+      'Google Analytics 4 Web': true
+    }
+  }
+
+  // Legacy behavior: manual GA4 with clientId/sessionId
+  let sessionId
+  let clientId
+
+  try {
+    sessionId = await getGoogleSessionId()
+    clientId = await getGoogleClientId()
+  } catch (error) {
+    console.error(
+      '[segment-wrapper] Failed to retrieve GA4 session/client IDs. Events will be sent without session attribution.',
+      error
+    )
+  }
+
   return {
     ...restOfIntegrations,
-    'Google Analytics 4 Web': true
+    'Google Analytics 4':
+      clientId && sessionId
+        ? {
+            clientId,
+            sessionId
+          }
+        : true
   }
 }
 
@@ -103,11 +142,25 @@ const getExternalIds = ({context, xandrId}) => {
 }
 
 /**
+ * Check if Google Analytics 4 Web destination is enabled in Segment
+ * @returns {boolean}
+ */
+const isGA4DestinationEnabled = () => {
+  try {
+    // Check if analytics.js has loaded and has the destination
+    const destinations = window.analytics?._integrations?.['Google Analytics 4 Web']
+    return !!destinations
+  } catch (error) {
+    return false
+  }
+}
+
+/**
  * Get consent value for Google Consent Mode
  * @param {string} gdprValue
  * @returns {string} consent value
  */
-const getConsentValue = gdprValue => (gdprValue === USER_GDPR.ACCEPTED ? 'granted' : 'denied')
+const getConsentValue = gdprValue => (gdprValue === USER_GDPR.ACCEPTED ? CONSENT_STATES.granted : CONSENT_STATES.denied)
 
 /**
  * Get data like traits and integrations to be added to the context object
@@ -123,6 +176,8 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
     getXandrId({gdprPrivacyValueAdvertising})
   ])
 
+  const useSegmentGA4Destination = isGA4DestinationEnabled()
+
   if (!isGdprAccepted) {
     context.integrations = {
       ...(context.integrations ?? {}),
@@ -132,29 +187,45 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
     }
   }
 
-  // Add Google Consent Mode to properties
+  // Add Google Consent Mode to properties (new behavior with Segment destination)
   const googleConsents = {
-    analytics_storage: getConsentValue(gdprPrivacyValueAnalytics),
-    ad_storage: getConsentValue(gdprPrivacyValueAdvertising),
-    ad_user_data: getConsentValue(gdprPrivacyValueAdvertising),
-    ad_personalization: getConsentValue(gdprPrivacyValueAdvertising)
+    analytics_storage: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAnalytics)
+      : getGoogleConsentValue('analytics_storage') ?? getConsentValue(gdprPrivacyValueAnalytics),
+    ad_storage: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAdvertising)
+      : getGoogleConsentValue('ad_storage') ?? getConsentValue(gdprPrivacyValueAdvertising),
+    ad_user_data: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAdvertising)
+      : getGoogleConsentValue('ad_user_data') ?? getConsentValue(gdprPrivacyValueAdvertising),
+    ad_personalization: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAdvertising)
+      : getGoogleConsentValue('ad_personalization') ?? getConsentValue(gdprPrivacyValueAdvertising)
+  }
+
+  const baseContext = {
+    ...context,
+    ...(!isGdprAccepted && {ip: '0.0.0.0'}),
+    ...getExternalIds({context, xandrId}),
+    clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
+    gdpr_privacy: gdprPrivacyValueAnalytics,
+    gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
+    integrations: {
+      ...context.integrations,
+      ...integrations
+    }
+  }
+
+  // Legacy behavior: add analytics_storage to context
+  if (!useSegmentGA4Destination) {
+    baseContext.analytics_storage = getConsentState()
   }
 
   return {
-    context: {
-      ...context,
-      ...(!isGdprAccepted && {ip: '0.0.0.0'}),
-      ...getExternalIds({context, xandrId}),
-      clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
-      gdpr_privacy: gdprPrivacyValueAnalytics,
-      gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
-      integrations: {
-        ...context.integrations,
-        ...integrations
-      }
-    },
+    context: baseContext,
     properties: {
       ...properties,
+      // Always add google_consents to properties for consistency
       google_consents: googleConsents
     }
   }
@@ -197,6 +268,14 @@ const track = (event, properties, context = {}, callback) =>
         }
       }
 
+      const useSegmentGA4Destination = isGA4DestinationEnabled()
+      const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
+
+      // Legacy behavior: send consents to GTM
+      if (!useSegmentGA4Destination && needsConsentManagement && event === CMP_TRACK_EVENT) {
+        sendGoogleConsents('update', newContext.google_consents)
+      }
+
       window.analytics.track(
         event,
         decoratedProperties,
@@ -227,6 +306,11 @@ const identify = async (userIdParam, traits, options, callback) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
 
   const userId = getUserId(userIdParam)
+
+  // Legacy behavior: set user ID in gtag
+  if (!isGA4DestinationEnabled()) {
+    setGoogleUserId(userId)
+  }
 
   return window.analytics.identify(
     userId,

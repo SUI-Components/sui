@@ -486,7 +486,7 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
       const integrations = {
         All: false,
-        'Google Analytics 4 Web': true,
+        'Google Analytics 4': true,
         Personas: false,
         Webhooks: true,
         Webhook: true
@@ -499,6 +499,7 @@ describe('Segment Wrapper', function () {
         protocols: {event_version: 3},
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined',
+        analytics_storage: 'denied',
         context: {
           integrations
         },
@@ -509,6 +510,115 @@ describe('Segment Wrapper', function () {
       expect(traits).to.deep.equal({
         anonymousId: 'fakeAnonymousId',
         userId: 'fakeId'
+      })
+    })
+  })
+
+  describe('GA4 integration modes', () => {
+    afterEach(() => cleanWindowStubs())
+
+    describe('Legacy mode (without Segment destination)', () => {
+      beforeEach(() => {
+        stubWindowObjects({ga4DestinationEnabled: false})
+        stubGoogleAnalytics()
+        setConfig('googleAnalyticsMeasurementId', 'G-123456789')
+
+        window.analytics.addSourceMiddleware(userTraits)
+        window.analytics.addSourceMiddleware(defaultContextProperties)
+        window.analytics.addSourceMiddleware(campaignContext)
+        window.analytics.addSourceMiddleware(userScreenInfo)
+        window.analytics.addSourceMiddleware(pageReferrer)
+      })
+
+      it('should use "Google Analytics 4" integration with clientId and sessionId', async () => {
+        await simulateUserAcceptConsents()
+
+        const spy = sinon.stub()
+        await suiAnalytics.track('fakeEvent', {}, {}, spy)
+
+        const {context} = spy.firstCall.firstArg.obj
+
+        expect(context.integrations['Google Analytics 4']).to.deep.equal({
+          clientId: 'fakeClientId',
+          sessionId: 'fakeSessionId'
+        })
+        expect(context.integrations['Google Analytics 4 Web']).to.be.undefined
+      })
+
+      it('should add analytics_storage to context', async () => {
+        await simulateUserAcceptConsents()
+
+        const spy = sinon.stub()
+        await suiAnalytics.track('fakeEvent', {}, {}, spy)
+
+        const {context} = spy.firstCall.firstArg.obj
+
+        // In legacy mode, analytics_storage is added to context
+        // Value is 'denied' because GTM API is not available in tests (no window.google_tag_data)
+        expect(context.analytics_storage).to.be.a('string')
+        expect(['granted', 'denied']).to.include(context.analytics_storage)
+      })
+
+      it('should add google_consents to properties', async () => {
+        await simulateUserAcceptAnalyticsConsents()
+
+        await suiAnalytics.track('fakeEvent', {})
+
+        const {properties} = getDataFromLastTrack()
+
+        expect(properties.google_consents).to.deep.include({
+          analytics_storage: 'granted',
+          ad_storage: 'denied'
+        })
+      })
+    })
+
+    describe('New mode (with Segment destination)', () => {
+      beforeEach(() => {
+        stubWindowObjects({ga4DestinationEnabled: true})
+        stubGoogleAnalytics()
+
+        window.analytics.addSourceMiddleware(userTraits)
+        window.analytics.addSourceMiddleware(defaultContextProperties)
+        window.analytics.addSourceMiddleware(campaignContext)
+        window.analytics.addSourceMiddleware(userScreenInfo)
+        window.analytics.addSourceMiddleware(pageReferrer)
+      })
+
+      it('should use "Google Analytics 4 Web" integration with true', async () => {
+        await simulateUserAcceptConsents()
+
+        const spy = sinon.stub()
+        await suiAnalytics.track('fakeEvent', {}, {}, spy)
+
+        const {context} = spy.firstCall.firstArg.obj
+
+        expect(context.integrations['Google Analytics 4 Web']).to.equal(true)
+        expect(context.integrations['Google Analytics 4']).to.be.undefined
+      })
+
+      it('should NOT add analytics_storage to context', async () => {
+        await simulateUserAcceptConsents()
+
+        const spy = sinon.stub()
+        await suiAnalytics.track('fakeEvent', {}, {}, spy)
+
+        const {context} = spy.firstCall.firstArg.obj
+
+        expect(context.analytics_storage).to.be.undefined
+      })
+
+      it('should add google_consents to properties', async () => {
+        await simulateUserAcceptAnalyticsConsents()
+
+        await suiAnalytics.track('fakeEvent', {})
+
+        const {properties} = getDataFromLastTrack()
+
+        expect(properties.google_consents).to.deep.include({
+          analytics_storage: 'granted',
+          ad_storage: 'denied'
+        })
       })
     })
   })
