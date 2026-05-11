@@ -13,6 +13,7 @@ import {
   sendGoogleConsents
 } from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
+import {isGA4DestinationEnabled} from './utils/ga4Detection.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
 import initTcfTracking from './tcf.js'
@@ -40,19 +41,6 @@ const addMiddlewares = () => {
 
   if (experimentalPageDataMiddleware) {
     window.analytics.addSourceMiddleware(pageData)
-  }
-}
-
-/**
- * Check if Google Analytics 4 Web destination is enabled in Segment
- * @returns {boolean}
- */
-const isGA4DestinationEnabled = () => {
-  try {
-    const destinations = window.analytics?._integrations?.['Google Analytics 4 Web']
-    return !!destinations
-  } catch (error) {
-    return false
   }
 }
 

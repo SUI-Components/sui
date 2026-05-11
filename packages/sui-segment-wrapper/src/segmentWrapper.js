@@ -12,6 +12,7 @@ import {
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
 import {USER_GDPR, CMP_TRACK_EVENT, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
+import {isGA4DestinationEnabled} from './utils/ga4Detection.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -139,20 +140,6 @@ const getExternalIds = ({context, xandrId}) => {
       index === externalIds.findIndex(({id: idFind, type: typeFind}) => idFilter === idFind && typeFilter === typeFind)
   )
   return {externalIds: uniqueExternalIds}
-}
-
-/**
- * Check if Google Analytics 4 Web destination is enabled in Segment
- * @returns {boolean}
- */
-const isGA4DestinationEnabled = () => {
-  try {
-    // Check if analytics.js has loaded and has the destination
-    const destinations = window.analytics?._integrations?.['Google Analytics 4 Web']
-    return !!destinations
-  } catch (error) {
-    return false
-  }
 }
 
 /**
