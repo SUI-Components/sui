@@ -172,6 +172,24 @@ If you want the `package-lock.json` to be committed once the packages are releas
 sui-mono release --lock
 ```
 
+To append `[skip ci]` to release commit messages (skips CI pipeline for the release commits):
+
+```sh
+sui-mono release --skip-ci
+```
+
+To append a `skip-checks: true` trailer to release commit messages (skips GitHub branch protection check runs):
+
+```sh
+sui-mono release --skip-checks
+```
+
+Both flags can be combined:
+
+```sh
+sui-mono release --skip-ci --skip-checks
+```
+
 ## How to configure your project
 
 First you need to install the `@s-ui/mono` package in your project
