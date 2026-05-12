@@ -176,7 +176,7 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
     }
   }
 
-  // Add Google Consent Mode to properties (new behavior with Segment destination)
+  // Build Google Consent Mode object
   const googleConsents = {
     analytics_storage: useSegmentGA4Destination
       ? getConsentValue(gdprPrivacyValueAnalytics)
@@ -205,18 +205,21 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
     }
   }
 
-  // Legacy behavior: add analytics_storage to context
+  // Legacy behavior: add analytics_storage and google_consents to context
   if (!useSegmentGA4Destination) {
     baseContext.analytics_storage = getConsentState()
+    baseContext.google_consents = googleConsents
   }
 
   return {
     context: baseContext,
-    properties: {
-      ...properties,
-      // Always add google_consents to properties for consistency
-      google_consents: googleConsents
-    }
+    properties: useSegmentGA4Destination
+      ? {
+          ...properties,
+          // New mode: add google_consents to properties
+          google_consents: googleConsents
+        }
+      : properties
   }
 }
 
@@ -270,6 +273,7 @@ const track = (event, properties, context = {}, callback) =>
         decoratedProperties,
         {
           ...newContext,
+          integrations: newContext.integrations,
           context: {
             integrations: {
               ...newContext.integrations

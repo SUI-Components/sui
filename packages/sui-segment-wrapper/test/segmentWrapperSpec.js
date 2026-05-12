@@ -503,6 +503,12 @@ describe('Segment Wrapper', function () {
         gdpr_privacy: 'declined',
         gdpr_privacy_advertising: 'declined',
         analytics_storage: 'denied',
+        google_consents: {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        },
         context: {
           integrations
         },
@@ -562,14 +568,15 @@ describe('Segment Wrapper', function () {
         expect(['granted', 'denied']).to.include(context.analytics_storage)
       })
 
-      it('should add google_consents to properties', async () => {
+      it('should add google_consents to context', async () => {
         await simulateUserAcceptAnalyticsConsents()
 
-        await suiAnalytics.track('fakeEvent', {})
+        const spy = sinon.stub()
+        await suiAnalytics.track('fakeEvent', {}, {}, spy)
 
-        const {properties} = getDataFromLastTrack()
+        const {context} = spy.firstCall.firstArg.obj
 
-        expect(properties.google_consents).to.deep.include({
+        expect(context.google_consents).to.deep.include({
           analytics_storage: 'granted',
           ad_storage: 'denied'
         })
