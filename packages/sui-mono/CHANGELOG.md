@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.46.0 (2026-05-12)
+
+
+### Features
+
+* add --skip-checks flag to release command ([5110bb8](https://github.com/SUI-Components/sui/commit/5110bb80aa6007617e8ecc8c4500cd137090af13))
+
+
+
 # 2.45.0 (2024-02-05)
 
 
