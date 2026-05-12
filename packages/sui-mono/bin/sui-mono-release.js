@@ -17,6 +17,7 @@ program
   .option('-E, --github-email <email>', 'github email')
   .option('-L, --lock', 'Commit lock file', false)
   .option('--skip-ci', 'Add [skip ci] to release commit message', false)
+  .option('--skip-checks', 'Add skip-checks: true trailer to release commit message', false)
   .on('--help', () => {
     console.log('  Description:')
     console.log('')
@@ -39,7 +40,7 @@ program
   })
   .parse(process.argv)
 
-const {scope: packageScope, githubEmail, githubToken, githubUser, lock, skipCi} = program.opts()
+const {scope: packageScope, githubEmail, githubToken, githubUser, lock, skipCi, skipChecks} = program.opts()
 
 const BASE_DIR = process.cwd()
 
@@ -69,7 +70,7 @@ const getCwd = ({pkg}) => {
   return isMonoPackage ? BASE_DIR : path.join(process.cwd(), pkg)
 }
 
-const commit = async ({pkg, code, skipCi}) => {
+const commit = async ({pkg, code, skipCi, skipChecks}) => {
   const isMonoPackage = checkIsMonoPackage()
   const cwd = getCwd({pkg})
 
@@ -84,8 +85,10 @@ const commit = async ({pkg, code, skipCi}) => {
   // Add [skip ci] to the commit message to avoid CI build
   // https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
   const skipCiSuffix = skipCi ? ' [skip ci]' : ''
-  const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}`
-  await exec(`git commit -m "${commitMsg}"`, {cwd})
+  const skipChecksSuffix = skipChecks ? '\n\n\nskip-checks: true' : ''
+  const commitMsg = `release(${packageScope}): v${version}${skipCiSuffix}${skipChecksSuffix}`
+  const cleanupFlag = skipChecks ? ' --cleanup=verbatim' : ''
+  await exec(`git commit -m "${commitMsg}"${cleanupFlag}`, {cwd})
 
   await exec(`${suiMonoBinPath} changelog ${cwd}`)
   await exec(`git add ${path.join(cwd, changelogFilename)}`, {cwd})
@@ -163,7 +166,7 @@ checkShouldRelease()
       const packagesToRelease = releasesByPackages({status}).filter(({code}) => code !== 0)
 
       for (const pkg of packagesToRelease) {
-        await commit({...pkg, skipCi})
+        await commit({...pkg, skipCi, skipChecks})
       }
 
       if (packagesToRelease.length > 0) {
