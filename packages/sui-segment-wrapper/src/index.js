@@ -13,6 +13,7 @@ import {
   sendGoogleConsents
 } from './repositories/googleRepository.js'
 import {checkAnonymousId} from './utils/checkAnonymousId.js'
+import {isGA4DestinationEnabled} from './utils/ga4Detection.js'
 import {getConfig, isClient} from './config.js'
 import analytics from './segmentWrapper.js'
 import initTcfTracking from './tcf.js'
@@ -44,33 +45,43 @@ const addMiddlewares = () => {
 }
 
 if (isClient && window.analytics) {
-  // Initialize Google Analtyics if needed
-  const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-  const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
-  const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
+  // Pre-cache GA4 destination detection as early as possible
+  // This ensures the first track has the correct integration mode
+  window.analytics.ready(() => {
+    // Force detection to cache the result
+    const useSegmentGA4Destination = isGA4DestinationEnabled()
 
-  if (googleAnalyticsMeasurementId) {
-    const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
+    // Only initialize manual GA4 if destination is not enabled (legacy mode)
+    if (!useSegmentGA4Destination) {
+      // Legacy behavior: Initialize Google Analytics manually
+      const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+      const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
+      const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
 
-    window[dataLayerName] = window[dataLayerName] || []
-    window.gtag =
-      window.gtag ||
-      function gtag() {
-        window[dataLayerName].push(arguments)
+      if (googleAnalyticsMeasurementId) {
+        const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
+
+        window[dataLayerName] = window[dataLayerName] || []
+        window.gtag =
+          window.gtag ||
+          function gtag() {
+            window[dataLayerName].push(arguments)
+          }
+
+        window.gtag('js', new Date())
+        if (needsConsentManagement) sendGoogleConsents()
+        window.gtag('config', googleAnalyticsMeasurementId, {
+          cookie_prefix: 'segment',
+          send_page_view: false,
+          ...googleAnalyticsConfig,
+          ...getCampaignDetails()
+        })
+        loadGoogleAnalytics().catch(error => {
+          console.error(error)
+        })
       }
-
-    window.gtag('js', new Date())
-    if (needsConsentManagement) sendGoogleConsents()
-    window.gtag('config', googleAnalyticsMeasurementId, {
-      cookie_prefix: 'segment',
-      send_page_view: false,
-      ...googleAnalyticsConfig,
-      ...getCampaignDetails()
-    })
-    loadGoogleAnalytics().catch(error => {
-      console.error(error)
-    })
-  }
+    }
+  })
 
   window.analytics.ready(checkAnonymousId)
   window.analytics.addSourceMiddleware ? addMiddlewares() : window.analytics.ready(addMiddlewares)

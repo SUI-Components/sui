@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-import {setConfig} from '../src/config.js'
 import suiAnalytics from '../src/index.js'
 import {getCampaignDetails} from '../src/repositories/googleRepository.js'
 import {stubActualQueryString} from './stubs.js'
@@ -12,7 +11,6 @@ export const assertCampaignDetails = async ({queryString, expectation}) => {
   try {
     const spy = sinon.stub()
 
-    setConfig('googleAnalyticsMeasurementId', 123)
     await simulateUserAcceptConsents()
     await suiAnalytics.track(
       'fakeEvent',

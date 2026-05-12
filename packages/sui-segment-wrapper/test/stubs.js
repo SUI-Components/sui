@@ -59,7 +59,34 @@ export const stubGoogleAnalytics = () => {
   }
 }
 
-export const stubWindowObjects = ({borosMock = true, borosSuccess = true, isDmpAccepted = true} = {}) => {
+export const stubGA4DestinationEnabled = () => {
+  if (!window.analytics.settings) {
+    window.analytics.settings = {cdnSettings: {integrations: {}}}
+  }
+  if (!window.analytics.settings.cdnSettings) {
+    window.analytics.settings.cdnSettings = {integrations: {}}
+  }
+  if (!window.analytics.settings.cdnSettings.integrations) {
+    window.analytics.settings.cdnSettings.integrations = {}
+  }
+  window.analytics.settings.cdnSettings.integrations['Google Analytics 4 Web'] = {
+    name: 'Google Analytics 4 Web',
+    versionSettings: {}
+  }
+}
+
+export const stubGA4DestinationDisabled = () => {
+  if (window.analytics?.settings?.cdnSettings?.integrations) {
+    delete window.analytics.settings.cdnSettings.integrations['Google Analytics 4 Web']
+  }
+}
+
+export const stubWindowObjects = ({
+  borosMock = true,
+  borosSuccess = true,
+  isDmpAccepted = true,
+  ga4DestinationEnabled = false
+} = {}) => {
   stubTcfApi()
 
   const _middlewares = []
@@ -84,6 +111,13 @@ export const stubWindowObjects = ({borosMock = true, borosSuccess = true, isDmpA
     // saved locally so it mantains updated values when
     // executing test successively which changes the value
     _testAnonymousId: 'fakeAnonymousId',
+    settings: {
+      cdnSettings: {
+        integrations: ga4DestinationEnabled
+          ? {'Google Analytics 4 Web': {name: 'Google Analytics 4 Web', versionSettings: {}}}
+          : {}
+      }
+    },
 
     _stubUser: () => {
       if (window.analytics.user) return

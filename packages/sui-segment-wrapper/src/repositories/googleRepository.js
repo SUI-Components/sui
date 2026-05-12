@@ -3,6 +3,7 @@ import {dispatchEvent} from '@s-ui/js/lib/events'
 import {getConfig} from '../config.js'
 import {EVENTS} from '../events.js'
 import {utils} from '../middlewares/source/pageReferrer.js'
+import {isGA4DestinationEnabled} from '../utils/ga4Detection.js'
 
 const FIELDS = {
   clientId: 'client_id',
@@ -72,7 +73,11 @@ export const loadGoogleAnalytics = async () => {
 }
 
 // Trigger GA init event just once per session.
+// Only in LEGACY mode (manual GA4 initialization)
 const triggerGoogleAnalyticsInitEvent = sessionId => {
+  // Don't trigger if using Segment destination (new mode)
+  if (isGA4DestinationEnabled()) return
+
   const eventName = getConfig('googleAnalyticsInitEvent') ?? DEFAULT_GA_INIT_EVENT
   const eventPrefix = `ga_event_${eventName}_`
   const eventKey = `${eventPrefix}${sessionId}`

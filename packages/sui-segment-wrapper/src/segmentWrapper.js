@@ -3,15 +3,16 @@
 import {
   CONSENT_STATES,
   getConsentState,
-  getGoogleConsentValue,
   getGoogleClientId,
+  getGoogleConsentValue,
   getGoogleSessionId,
-  setGoogleUserId,
-  sendGoogleConsents
+  sendGoogleConsents,
+  setGoogleUserId
 } from './repositories/googleRepository.js'
 import {getXandrId} from './repositories/xandrRepository.js'
 import {getConfig} from './config.js'
 import {USER_GDPR, CMP_TRACK_EVENT, checkAnalyticsGdprIsAccepted, getGdprPrivacyValue} from './tcf.js'
+import {isGA4DestinationEnabled} from './utils/ga4Detection.js'
 
 /* Default properties to be sent on all trackings */
 const DEFAULT_PROPERTIES = {platform: 'web'}
@@ -54,6 +55,20 @@ export const getDefaultProperties = () => ({
  */
 const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
+  const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
+
+  // Check if we should use manual GA4 (legacy) or Segment destination (new)
+  const useSegmentGA4Destination = isGA4DestinationEnabled()
+
+  if (useSegmentGA4Destination) {
+    // New behavior: let Segment handle GA4
+    return {
+      ...restOfIntegrations,
+      'Google Analytics 4 Web': true
+    }
+  }
+
+  // Legacy behavior: manual GA4 with clientId/sessionId
   let sessionId
   let clientId
 
@@ -67,9 +82,6 @@ const getTrackIntegrations = async ({gdprPrivacyValue, event}) => {
     )
   }
 
-  const restOfIntegrations = getRestOfIntegrations({isGdprAccepted, event})
-
-  // If we don't have the user consents we remove all the integrations but GA4
   return {
     ...restOfIntegrations,
     'Google Analytics 4':
@@ -142,19 +154,18 @@ const getConsentValue = gdprValue => (gdprValue === USER_GDPR.ACCEPTED ? CONSENT
  * @param {object} context Context object with all the actual info
  * @returns {Promise<object>} New context with all the previous info and the new one
  */
-export const decorateContextWithNeededData = async ({event = '', context = {}}) => {
+export const decorateContextWithNeededData = async ({event = '', context = {}, properties = {}}) => {
   const gdprPrivacyValue = await getGdprPrivacyValue()
   const {analytics: gdprPrivacyValueAnalytics, advertising: gdprPrivacyValueAdvertising} = gdprPrivacyValue || {}
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
+
+  // Check if we should use Segment destination or legacy mode
+  const useSegmentGA4Destination = isGA4DestinationEnabled()
+
   const [integrations, xandrId] = await Promise.all([
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
-  const analyticsConsentValue = getGoogleConsentValue('analytics_storage') ?? getConsentValue(gdprPrivacyValueAnalytics)
-  const adUserDataConsentValue = getGoogleConsentValue('ad_user_data') ?? getConsentValue(gdprPrivacyValueAdvertising)
-  const adPersonalizationConsentValue =
-    getGoogleConsentValue('ad_personalization') ?? getConsentValue(gdprPrivacyValueAdvertising)
-  const adStorageConsentValue = getGoogleConsentValue('ad_storage') ?? getConsentValue(gdprPrivacyValueAdvertising)
 
   if (!isGdprAccepted) {
     context.integrations = {
@@ -165,24 +176,50 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
     }
   }
 
-  return {
+  // Build Google Consent Mode object
+  const googleConsents = {
+    analytics_storage: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAnalytics)
+      : getGoogleConsentValue('analytics_storage') ?? getConsentValue(gdprPrivacyValueAnalytics),
+    ad_storage: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAdvertising)
+      : getGoogleConsentValue('ad_storage') ?? getConsentValue(gdprPrivacyValueAdvertising),
+    ad_user_data: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAdvertising)
+      : getGoogleConsentValue('ad_user_data') ?? getConsentValue(gdprPrivacyValueAdvertising),
+    ad_personalization: useSegmentGA4Destination
+      ? getConsentValue(gdprPrivacyValueAdvertising)
+      : getGoogleConsentValue('ad_personalization') ?? getConsentValue(gdprPrivacyValueAdvertising)
+  }
+
+  const baseContext = {
     ...context,
     ...(!isGdprAccepted && {ip: '0.0.0.0'}),
     ...getExternalIds({context, xandrId}),
-    analytics_storage: getConsentState(),
     clientVersion: `segment-wrapper@${process.env.VERSION ?? '0.0.0'}`,
     gdpr_privacy: gdprPrivacyValueAnalytics,
     gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
-    google_consents: {
-      analytics_storage: analyticsConsentValue,
-      ad_user_data: adUserDataConsentValue,
-      ad_personalization: adPersonalizationConsentValue,
-      ad_storage: adStorageConsentValue
-    },
     integrations: {
       ...context.integrations,
       ...integrations
     }
+  }
+
+  // Legacy behavior: add analytics_storage and google_consents to context
+  if (!useSegmentGA4Destination) {
+    baseContext.analytics_storage = getConsentState()
+    baseContext.google_consents = googleConsents
+  }
+
+  return {
+    context: baseContext,
+    properties: useSegmentGA4Destination
+      ? {
+          ...properties,
+          // New mode: add google_consents to properties
+          google_consents: googleConsents
+        }
+      : properties
   }
 }
 
@@ -197,16 +234,20 @@ export const decorateContextWithNeededData = async ({event = '', context = {}}) 
 const track = (event, properties, context = {}, callback) =>
   new Promise(resolve => {
     const initTrack = async () => {
-      const newContext = await decorateContextWithNeededData({context, event})
-
       /**
        * @deprecated Now we use `defaultContextProperties` middleware
        * and put the info on the context object
        */
-      const newProperties = {
+      const baseProperties = {
         ...getDefaultProperties(),
         ...properties
       }
+
+      const {context: newContext, properties: decoratedProperties} = await decorateContextWithNeededData({
+        context,
+        event,
+        properties: baseProperties
+      })
 
       const newCallback = async (...args) => {
         if (callback) callback(...args) // eslint-disable-line n/no-callback-literal
@@ -219,17 +260,20 @@ const track = (event, properties, context = {}, callback) =>
         }
       }
 
+      const useSegmentGA4Destination = isGA4DestinationEnabled()
       const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
 
-      if (needsConsentManagement && event === CMP_TRACK_EVENT) {
+      // Legacy behavior: send consents to GTM
+      if (!useSegmentGA4Destination && needsConsentManagement && event === CMP_TRACK_EVENT) {
         sendGoogleConsents('update', newContext.google_consents)
       }
 
       window.analytics.track(
         event,
-        newProperties,
+        decoratedProperties,
         {
           ...newContext,
+          integrations: newContext.integrations,
           context: {
             integrations: {
               ...newContext.integrations
@@ -256,7 +300,10 @@ const identify = async (userIdParam, traits, options, callback) => {
 
   const userId = getUserId(userIdParam)
 
-  setGoogleUserId(userId)
+  // Legacy behavior: set user ID in gtag
+  if (!isGA4DestinationEnabled()) {
+    setGoogleUserId(userId)
+  }
 
   return window.analytics.identify(
     userId,
