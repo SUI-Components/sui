@@ -462,8 +462,8 @@ describe('Segment Wrapper', function () {
   })
 
   describe('context integrations', () => {
-    before(() => {
-      stubWindowObjects()
+    beforeEach(() => {
+      setConfig('googleAnalyticsMeasurementId', 'G-XXXXXXXXXX')
     })
 
     it('sends an event with the actual context and traits when the consents are declined', async () => {
@@ -486,7 +486,10 @@ describe('Segment Wrapper', function () {
       const {context} = getDataFromLastTrack()
       const integrations = {
         All: false,
-        'Google Analytics 4': true,
+        'Google Analytics 4': {
+          clientId: 'fakeClientId',
+          sessionId: 'fakeSessionId'
+        },
         Personas: false,
         Webhooks: true,
         Webhook: true

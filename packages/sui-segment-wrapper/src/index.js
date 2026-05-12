@@ -45,10 +45,13 @@ const addMiddlewares = () => {
 }
 
 if (isClient && window.analytics) {
-  // Check if we need to manually initialize GA4 (legacy mode)
+  // Pre-cache GA4 destination detection as early as possible
+  // This ensures the first track has the correct integration mode
   window.analytics.ready(() => {
+    // Force detection to cache the result
     const useSegmentGA4Destination = isGA4DestinationEnabled()
 
+    // Only initialize manual GA4 if destination is not enabled (legacy mode)
     if (!useSegmentGA4Destination) {
       // Legacy behavior: Initialize Google Analytics manually
       const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')

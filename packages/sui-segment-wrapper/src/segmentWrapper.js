@@ -158,12 +158,14 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
   const gdprPrivacyValue = await getGdprPrivacyValue()
   const {analytics: gdprPrivacyValueAnalytics, advertising: gdprPrivacyValueAdvertising} = gdprPrivacyValue || {}
   const isGdprAccepted = checkAnalyticsGdprIsAccepted(gdprPrivacyValue)
+
+  // Check if we should use Segment destination or legacy mode
+  const useSegmentGA4Destination = isGA4DestinationEnabled()
+
   const [integrations, xandrId] = await Promise.all([
     getTrackIntegrations({gdprPrivacyValue, event}),
     getXandrId({gdprPrivacyValueAdvertising})
   ])
-
-  const useSegmentGA4Destination = isGA4DestinationEnabled()
 
   if (!isGdprAccepted) {
     context.integrations = {
