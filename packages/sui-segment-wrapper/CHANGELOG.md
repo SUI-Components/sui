@@ -1,5 +1,22 @@
 # CHANGELOG
 
+# 5.0.0 (2026-05-12)
+
+
+### Bug Fixes
+
+* fix ga4 web detection ([39caed6](https://github.com/SUI-Components/sui/commit/39caed6997c963f485bfc506663e0ade872eb4c6))
+* fix legacy mode ([9dbb6f3](https://github.com/SUI-Components/sui/commit/9dbb6f30bd54bdba983473dc0d71527d59767349))
+
+
+### Features
+
+* add backwards-compatible GA4 integration with automatic destinat ([b91b925](https://github.com/SUI-Components/sui/commit/b91b925947a58a394d6a42922047856f36a194ef))
+* make ga4 web detection simpler ([c3a56f1](https://github.com/SUI-Components/sui/commit/c3a56f1ae2bf75fb3dd6609070e2b1589275c8c3))
+* remove manual ga4 implementation ([17943a7](https://github.com/SUI-Components/sui/commit/17943a7ad82c3928e477945268eb56fb10dcdb56))
+
+
+
 # 4.42.0 (2026-04-24)
 
 
