@@ -167,14 +167,15 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
     getXandrId({gdprPrivacyValueAdvertising})
   ])
 
-  if (!isGdprAccepted) {
-    context.integrations = {
-      ...(context.integrations ?? {}),
-      Personas: false,
-      Webhooks: true,
-      Webhook: true
-    }
-  }
+  // Build integrations without mutating context
+  const contextIntegrations = !isGdprAccepted
+    ? {
+        ...(context.integrations ?? {}),
+        Personas: false,
+        Webhooks: true,
+        Webhook: true
+      }
+    : context.integrations
 
   // Build Google Consent Mode object
   const googleConsents = {
@@ -200,7 +201,7 @@ export const decorateContextWithNeededData = async ({event = '', context = {}, p
     gdpr_privacy: gdprPrivacyValueAnalytics,
     gdpr_privacy_advertising: gdprPrivacyValueAdvertising,
     integrations: {
-      ...context.integrations,
+      ...contextIntegrations,
       ...integrations
     }
   }
@@ -273,7 +274,6 @@ const track = (event, properties, context = {}, callback) =>
         decoratedProperties,
         {
           ...newContext,
-          integrations: newContext.integrations,
           context: {
             integrations: {
               ...newContext.integrations

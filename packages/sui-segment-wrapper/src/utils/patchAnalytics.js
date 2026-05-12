@@ -13,9 +13,23 @@ function monkeyPatchAnalyticsTrack() {
     }
     decorateContextWithNeededData({
       context: contextFromArgs,
-      event
-    }).then(context => {
-      originalTrack.call(window.analytics, event, newProperties, context, fn)
+      event,
+      properties: newProperties
+    }).then(({context: newContext, properties: decoratedProperties}) => {
+      originalTrack.call(
+        window.analytics,
+        event,
+        decoratedProperties,
+        {
+          ...newContext,
+          context: {
+            integrations: {
+              ...newContext.integrations
+            }
+          }
+        },
+        fn
+      )
     })
     return window.analytics
   }
