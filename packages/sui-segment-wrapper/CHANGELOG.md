@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.1.0 (2026-05-12)
+
+
+### Bug Fixes
+
+* prevent context mutation causing GA4 integrations loss after firs ([5976304](https://github.com/SUI-Components/sui/commit/5976304bd6cb303896a83c36046a356a103d3b0e))
+
+
+
 # 5.0.0 (2026-05-12)
 
 
