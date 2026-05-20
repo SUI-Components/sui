@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.3.0 (2026-05-20)
+
+
+### Features
+
+* force bump ([90be6d4](https://github.com/SUI-Components/sui/commit/90be6d4f099d56e7fc1b1465d16e3e42faad4d29))
+
+
+
 # 5.2.0 (2026-05-20)
 
 
