@@ -135,8 +135,8 @@ window.__mpi = {
   segmentWrapper: {
     universalId: '7ab9ddf3281d5d5458a29e8b3ae2864',
     defaultContext: {
-      site: 'comprocasa',
-      vertical: 'realestate'
+      site: 'patinetes',
+      vertical: 'motor'
     },
     tcfTrackDefaultProperties: {
       tcfSpecialProp: 'anyvalue'
