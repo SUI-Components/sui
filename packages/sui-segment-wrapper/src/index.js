@@ -45,43 +45,40 @@ const addMiddlewares = () => {
 }
 
 if (isClient && window.analytics) {
-  // Pre-cache GA4 destination detection as early as possible
-  // This ensures the first track has the correct integration mode
-  window.analytics.ready(() => {
-    // Force detection to cache the result
-    const useSegmentGA4Destination = isGA4DestinationEnabled()
+  // Check GA4 mode synchronously to avoid delaying initialization
+  const useSegmentGA4Destination = isGA4DestinationEnabled()
 
-    // Only initialize manual GA4 if destination is not enabled (legacy mode)
-    if (!useSegmentGA4Destination) {
-      // Legacy behavior: Initialize Google Analytics manually
-      const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
-      const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
-      const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
+  // Only initialize manual GA4 if destination is not enabled (legacy mode)
+  // This runs synchronously to ensure GA4 is ready for first events
+  if (!useSegmentGA4Destination) {
+    // Legacy behavior: Initialize Google Analytics manually
+    const googleAnalyticsMeasurementId = getConfig('googleAnalyticsMeasurementId')
+    const dataLayerName = getConfig('googleAnalyticsDataLayer') || DEFAULT_DATA_LAYER_NAME
+    const needsConsentManagement = getConfig('googleAnalyticsConsentManagement')
 
-      if (googleAnalyticsMeasurementId) {
-        const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
+    if (googleAnalyticsMeasurementId) {
+      const googleAnalyticsConfig = getConfig('googleAnalyticsConfig')
 
-        window[dataLayerName] = window[dataLayerName] || []
-        window.gtag =
-          window.gtag ||
-          function gtag() {
-            window[dataLayerName].push(arguments)
-          }
+      window[dataLayerName] = window[dataLayerName] || []
+      window.gtag =
+        window.gtag ||
+        function gtag() {
+          window[dataLayerName].push(arguments)
+        }
 
-        window.gtag('js', new Date())
-        if (needsConsentManagement) sendGoogleConsents()
-        window.gtag('config', googleAnalyticsMeasurementId, {
-          cookie_prefix: 'segment',
-          send_page_view: false,
-          ...googleAnalyticsConfig,
-          ...getCampaignDetails()
-        })
-        loadGoogleAnalytics().catch(error => {
-          console.error(error)
-        })
-      }
+      window.gtag('js', new Date())
+      if (needsConsentManagement) sendGoogleConsents()
+      window.gtag('config', googleAnalyticsMeasurementId, {
+        cookie_prefix: 'segment',
+        send_page_view: false,
+        ...googleAnalyticsConfig,
+        ...getCampaignDetails()
+      })
+      loadGoogleAnalytics().catch(error => {
+        console.error(error)
+      })
     }
-  })
+  }
 
   window.analytics.ready(checkAnonymousId)
   window.analytics.addSourceMiddleware ? addMiddlewares() : window.analytics.ready(addMiddlewares)
