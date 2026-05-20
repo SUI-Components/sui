@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.2.0 (2026-05-20)
+
+
+### Bug Fixes
+
+* init GA4 sync to prevent event loss on first page load ([a6165d9](https://github.com/SUI-Components/sui/commit/a6165d9920c0f31a6311ff4d93a27f1374f8002c))
+
+
+
 # 5.1.0 (2026-05-12)
 
 
