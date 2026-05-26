@@ -60,7 +60,7 @@ module.exports = ({chunkCss} = {}) => {
       definePlugin()
     ]),
     module: {
-      rules: [createCompilerRules({supportLegacyBrowsers}), sassRules]
+      rules: [createCompilerRules({supportLegacyBrowsers}), ...(Array.isArray(sassRules) ? sassRules : [sassRules])]
     }
   }
 }

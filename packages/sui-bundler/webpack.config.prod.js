@@ -106,7 +106,7 @@ const webpackConfig = {
   module: {
     rules: cleanList([
       createCompilerRules({supportLegacyBrowsers}),
-      sassRules,
+      ...(Array.isArray(sassRules) ? sassRules : [sassRules]),
       when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   },

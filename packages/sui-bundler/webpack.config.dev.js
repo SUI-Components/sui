@@ -14,6 +14,13 @@ const {supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
 const createCompilerRules = require('./shared/module-rules-compiler.js')
 
+const plainCssPackages = config.plainCssPackages || []
+const plainCssExclude = plainCssPackages.length
+  ? new RegExp(
+      `node_modules[\\\\/](${plainCssPackages.map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})[\\\\/]`
+    )
+  : null
+
 const outputPath = path.join(process.cwd(), 'dist')
 
 const {CI = false} = process.env
@@ -90,6 +97,7 @@ const webpackConfig = {
       createCompilerRules({supportLegacyBrowsers, isDevelopment: true}),
       {
         test: /(\.css|\.scss)$/,
+        ...(plainCssExclude ? {exclude: plainCssExclude} : {}),
         use: cleanList([
           require.resolve('style-loader'),
           when(config['externals-manifest'], () => ({
@@ -115,6 +123,15 @@ const webpackConfig = {
           require.resolve('@s-ui/sass-loader')
         ])
       },
+      ...(plainCssExclude
+        ? [
+            {
+              test: /\.css$/,
+              include: plainCssExclude,
+              use: [require.resolve('style-loader'), require.resolve('css-loader')]
+            }
+          ]
+        : []),
       when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   },
