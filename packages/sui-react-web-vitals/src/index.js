@@ -200,7 +200,7 @@ export default function WebVitalsReporter({
         ...(typeof browser?.isBot === 'boolean'
           ? [
               {
-                key: 'isBot',
+                key: 'is_bot',
                 value: browser.isBot
               }
             ]

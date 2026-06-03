@@ -290,7 +290,7 @@ describe('WebVitalsReporter', () => {
           tags: [
             {key: 'name', value: 'ttfb'},
             {key: 'pathname', value: '/'},
-            {key: 'isBot', value: true},
+            {key: 'is_bot', value: true},
             {key: 'browserEngine', value: 'Other'}
           ]
         })
@@ -315,7 +315,7 @@ describe('WebVitalsReporter', () => {
           tags: [
             {key: 'name', value: 'ttfb'},
             {key: 'pathname', value: '/'},
-            {key: 'isBot', value: false},
+            {key: 'is_bot', value: false},
             {key: 'browserEngine', value: 'Other'}
           ]
         })
