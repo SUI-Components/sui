@@ -250,6 +250,79 @@ describe('WebVitalsReporter', () => {
     })
   })
 
+  it('should not include isBot tag when browser.isBot is not set', async () => {
+    const logger = {distribution: sinon.spy()}
+    const reporter = {
+      onTTFB: fn => {
+        fn({name: 'TTFB', value: 10, entries: [], attribution: {}})
+      }
+    }
+    render(<WebVitalsReporter metrics={[METRICS.TTFB]} allowed={['/']} reporter={reporter} />, {logger})
+    await waitFor(() => [
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 10,
+          tags: [
+            {key: 'name', value: 'ttfb'},
+            {key: 'pathname', value: '/'},
+            {key: 'browserEngine', value: 'Other'}
+          ]
+        })
+      ).to.be.true
+    ])
+  })
+
+  it('should include isBot: true tag when browser.isBot is true', async () => {
+    const logger = {distribution: sinon.spy()}
+    const reporter = {
+      onTTFB: fn => {
+        fn({name: 'TTFB', value: 10, entries: [], attribution: {}})
+      }
+    }
+    const browser = {isBot: true}
+    render(<WebVitalsReporter metrics={[METRICS.TTFB]} allowed={['/']} reporter={reporter} />, {logger, browser})
+    await waitFor(() => [
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 10,
+          tags: [
+            {key: 'name', value: 'ttfb'},
+            {key: 'pathname', value: '/'},
+            {key: 'isBot', value: true},
+            {key: 'browserEngine', value: 'Other'}
+          ]
+        })
+      ).to.be.true
+    ])
+  })
+
+  it('should include isBot: false tag when browser.isBot is false', async () => {
+    const logger = {distribution: sinon.spy()}
+    const reporter = {
+      onTTFB: fn => {
+        fn({name: 'TTFB', value: 10, entries: [], attribution: {}})
+      }
+    }
+    const browser = {isBot: false}
+    render(<WebVitalsReporter metrics={[METRICS.TTFB]} allowed={['/']} reporter={reporter} />, {logger, browser})
+    await waitFor(() => [
+      expect(
+        logger.distribution.calledWith({
+          name: 'cwv',
+          amount: 10,
+          tags: [
+            {key: 'name', value: 'ttfb'},
+            {key: 'pathname', value: '/'},
+            {key: 'isBot', value: false},
+            {key: 'browserEngine', value: 'Other'}
+          ]
+        })
+      ).to.be.true
+    ])
+  })
+
   it('should track TTFB using logger distribution with browser in context', async () => {
     const logger = {
       distribution: sinon.spy()
