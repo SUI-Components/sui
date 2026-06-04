@@ -1,5 +1,15 @@
 # CHANGELOG
 
+# 4.1.0 (2026-06-04)
+
+
+### Features
+
+* add web vitals is bot flag ([23b01f2](https://github.com/SUI-Components/sui/commit/23b01f220cd11ce143d4020e6cf2d74771045320))
+* change is bot name ([bf41700](https://github.com/SUI-Components/sui/commit/bf4170091fe3434e251d023b449ba2a8bdbe1930))
+
+
+
 # 4.0.0 (2026-04-08)
 
 
