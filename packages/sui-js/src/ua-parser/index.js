@@ -6,7 +6,8 @@ export const LEGITIMATE_CRAWLER_USER_AGENTS = [
   'bingbot',
   'linkedinbot',
   'mediapartners-google',
-  'debugbear'
+  'debugbear',
+  'spider'
 ]
 
 export const stats = userAgent => {

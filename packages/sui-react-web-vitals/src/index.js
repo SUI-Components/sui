@@ -197,6 +197,14 @@ export default function WebVitalsReporter({
               }
             ]
           : []),
+        ...(typeof browser?.isBot === 'boolean'
+          ? [
+              {
+                key: 'is_bot',
+                value: browser.isBot
+              }
+            ]
+          : []),
         {
           key: 'browserEngine',
           value: browserEngine
