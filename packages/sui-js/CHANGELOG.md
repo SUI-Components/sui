@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.39.0 (2026-06-04)
+
+
+### Features
+
+* add spider to bots ([10da26d](https://github.com/SUI-Components/sui/commit/10da26df37430ac30010a45edf875e78ab874e0a))
+
+
+
 # 2.38.0 (2025-10-01)
 
 
