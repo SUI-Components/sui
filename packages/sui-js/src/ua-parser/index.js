@@ -7,6 +7,8 @@ export const LEGITIMATE_CRAWLER_USER_AGENTS = [
   'linkedinbot',
   'mediapartners-google',
   'debugbear',
+  'Baiduspider-render',
+  'Bytespider',
   'spider'
 ]
 
