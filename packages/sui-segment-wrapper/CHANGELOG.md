@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 5.4.0 (2026-06-08)
+
+
+### Features
+
+* add page_referrer to properties for safari attribution ([a55e2e5](https://github.com/SUI-Components/sui/commit/a55e2e59c9cd27b93516217308a7c3b71c3e57b4))
+
+
+
 # 5.3.0 (2026-05-20)
 
 

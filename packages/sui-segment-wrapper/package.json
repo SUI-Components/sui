@@ -1,6 +1,6 @@
 {
   "name": "@s-ui/segment-wrapper",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "Abstraction layer on top of the Segment library.",
   "main": "lib/index.js",
   "license": "ISC",
