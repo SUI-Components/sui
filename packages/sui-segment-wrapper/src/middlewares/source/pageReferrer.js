@@ -1,3 +1,5 @@
+import {isGA4DestinationEnabled} from '../../utils/ga4Detection.js'
+
 /**
  * Capture document.referrer at module load time, before Safari ITP can clear it.
  * This ensures the first page event has the real referrer from the external source.
@@ -105,6 +107,15 @@ export const pageReferrer = ({payload, next}) => {
       ...context.page,
       ...props,
       referrer
+    }
+  }
+
+  // In NEW mode (client-side destination), also add referrer to properties
+  // GA4 Web destination uses properties.page_referrer for attribution
+  if (referrer && isGA4DestinationEnabled()) {
+    payload.obj.properties = {
+      ...payload.obj.properties,
+      page_referrer: referrer
     }
   }
 
