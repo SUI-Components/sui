@@ -18,8 +18,8 @@ class Match {
 
   static create(path) {
     const ext = extname(path)
-    if (!ext && CustomFileReader.create().isDirectory(path)) {
-      return new Match(path, undefined, undefined, true)
+    if (CustomFileReader.create().isDirectory(path)) {
+      return new Match(path, undefined, '', true)
     }
 
     let parsed
