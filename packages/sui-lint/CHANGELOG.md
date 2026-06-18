@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 4.60.0 (2026-06-18)
+
+
+### Bug Fixes
+
+* handle directories with file extensions in RepositoryLinter ([9b2188f](https://github.com/SUI-Components/sui/commit/9b2188f046330146c246e0ddbd8470265fd7030a))
+
+
+### Features
+
+* fix RepositoryLinter node_modules ignore for pnpm ([df03a45](https://github.com/SUI-Components/sui/commit/df03a45414292d0bff1018416b2b39cbead77551))
+
+
+
 # 4.59.0 (2026-03-02)
 
 
