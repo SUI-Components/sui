@@ -29,6 +29,20 @@ describe('Match', function () {
 
     // Then
     expect(match.isDir).to.be.eqls(true)
+    expect(match.raw).to.be.eqls('')
+  })
+
+  it('Should detect directories with file-like extensions', function () {
+    // Given
+    this.isDirStub.returns(true)
+
+    // When
+    const match = Match.create('cypress/screenshots/PTA/CategoryPicker.js')
+
+    // Then
+    expect(match.isDir).to.be.eqls(true)
+    expect(match.raw).to.be.eqls('')
+    expect(match.raw.match(/pattern/)).to.be.eqls(null)
   })
 
   it('Should detect files w/out extensions', function () {

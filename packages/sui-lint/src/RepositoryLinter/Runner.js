@@ -11,7 +11,7 @@ module.exports.Runner = class Runner {
   }
 
   assertion(key) {
-    const files = this.fg.sync(key, {ignore: ['node_modules'], onlyFiles: false}) ?? []
+    const files = this.fg.sync(key, {ignore: ['**/node_modules/**'], onlyFiles: false}) ?? []
     return files.map(Match.create)
   }
 }
