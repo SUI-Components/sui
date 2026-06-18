@@ -23,4 +23,20 @@ describe('Runner', function () {
     expect(this.matchCreateStub.firstCall.firstArg).to.be.eql('path/file.json')
     expect(this.syncStub.firstCall.firstArg).to.be.eql('**/*.json')
   })
+
+  it('Should ignore node_modules at any depth', function () {
+    this.syncStub.returns([])
+
+    Runner.create({sync: this.syncStub}).assertion('**/*.js')
+
+    expect(this.syncStub.firstCall.args[1].ignore).to.be.eql(['**/node_modules/**'])
+  })
+
+  it('Should include directories in results', function () {
+    this.syncStub.returns(['app/src'])
+
+    Runner.create({sync: this.syncStub}).assertion('app/src')
+
+    expect(this.syncStub.firstCall.args[1].onlyFiles).to.be.eql(false)
+  })
 })
