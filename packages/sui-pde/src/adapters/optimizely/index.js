@@ -217,7 +217,10 @@ export default class OptimizelyAdapter {
    * @returns {object}
    */
   getAllFeatureVariables({featureKey, attributes}) {
-    return this._optimizely.getAllFeatureVariables(featureKey, this._userId, attributes)
+    return this._optimizely.getAllFeatureVariables(featureKey, this._userId, {
+      ...this._applicationAttributes,
+      ...attributes
+    })
   }
 
   updateConsents({hasUserConsents}) {
