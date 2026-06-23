@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 3.3.0 (2026-06-23)
+
+
+### Bug Fixes
+
+* Pass application attributes when getting feature variables ([3ce910f](https://github.com/SUI-Components/sui/commit/3ce910fd54d415d0fd111579ba4c8f6aee70159f))
+
+
+
 # 3.2.0 (2026-02-02)
 
 
