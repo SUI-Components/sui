@@ -10,6 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.js')
+const {plainCssSplitChunks} = require('./shared/plain-css-split-chunks.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 const {extractComments, sourceMap, supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
@@ -65,7 +66,8 @@ const webpackConfig = {
     checkWasmTypes: false,
     minimize: true,
     minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(Boolean),
-    runtimeChunk: true
+    runtimeChunk: true,
+    ...plainCssSplitChunks()
   },
   cache: {
     type: 'filesystem',
