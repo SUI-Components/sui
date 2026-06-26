@@ -66,8 +66,7 @@ const webpackConfig = {
     checkWasmTypes: false,
     minimize: true,
     minimizer: [minifyJs({extractComments, sourceMap}), minifyCss()].filter(Boolean),
-    runtimeChunk: true,
-    ...plainCssSplitChunks()
+    runtimeChunk: true
   },
   cache: {
     type: 'filesystem',
@@ -75,6 +74,7 @@ const webpackConfig = {
     compression: false
   },
   plugins: cleanList([
+    ...(plainCssSplitChunks().plugins || []),
     new webpack.ProvidePlugin({
       process: 'process/browser.js'
     }),
