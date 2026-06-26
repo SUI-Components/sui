@@ -184,6 +184,10 @@ This tool works with zero configuration out the box but you could use some confi
 
 `disableTypeScriptLoader`: Flag to determine if typescript loader should be used. (default: `false`)
 
+`plainCssPackages`: Array of npm package names whose `.css` files should bypass `@s-ui/sass-loader` and `postcss-loader`. Use this for packages that ship pre-compiled CSS (e.g. Tailwind CSS v4 output) that would cause Sass parse errors. (default: `[]`)
+
+`cssInAppStyles`: Array of npm package names whose CSS modules should be forced into the `AppStyles` chunk. This prevents webpack's `splitChunks` from extracting them into separate async chunks that `@s-ui/ssr` doesn't know about — avoiding Flash of Unstyled Content. (default: `[]`)
+
 ```json
 {
   "config": {
@@ -202,6 +206,8 @@ This tool works with zero configuration out the box but you could use some confi
         "dev": "cheap-module-eval-source-map",
         "prod": "hidden-source-map"
       },
+      "plainCssPackages": ["@adv-mt/ui", "@adv-mt/theme"],
+      "cssInAppStyles": ["@adv-mt/ui", "@adv-mt/theme"],
       "disableTypeScriptLoader": true // Only if you want to disable typescript loader
     }
   }
