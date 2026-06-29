@@ -10,6 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineChunkHtmlPlugin = require('./shared/inline-chunk-html-plugin.js')
 
 const {when, cleanList, envVars, MAIN_ENTRY_POINT, config} = require('./shared/index.js')
+const {plainCssSplitChunks} = require('./shared/plain-css-split-chunks.js')
 const {aliasFromConfig} = require('./shared/resolve-alias.js')
 const {extractComments, sourceMap, supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
 const {resolveLoader} = require('./shared/resolve-loader.js')
@@ -73,6 +74,7 @@ const webpackConfig = {
     compression: false
   },
   plugins: cleanList([
+    ...(plainCssSplitChunks().plugins || []),
     new webpack.ProvidePlugin({
       process: 'process/browser.js'
     }),
@@ -106,7 +108,7 @@ const webpackConfig = {
   module: {
     rules: cleanList([
       createCompilerRules({supportLegacyBrowsers}),
-      sassRules,
+      ...(Array.isArray(sassRules) ? sassRules : [sassRules]),
       when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   },

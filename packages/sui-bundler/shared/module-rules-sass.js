@@ -2,8 +2,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const {cleanList, config, when, isTailwindEnabled} = require('./index')
 
-module.exports = {
+const plainCssPackages = config.plainCssPackages || []
+
+const plainCssExclude = plainCssPackages.length
+  ? new RegExp(
+      `node_modules[\\\\/](${plainCssPackages.map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})[\\\\/]`
+    )
+  : null
+
+const sassRule = {
   test: /(\.css|\.scss)$/,
+  ...(plainCssExclude ? {exclude: plainCssExclude} : {}),
   use: cleanList([
     MiniCssExtractPlugin.loader,
     require.resolve('css-loader'),
@@ -29,3 +38,13 @@ module.exports = {
     require.resolve('@s-ui/sass-loader')
   ])
 }
+
+const plainCssRule = plainCssExclude
+  ? {
+      test: /\.css$/,
+      include: plainCssExclude,
+      use: [MiniCssExtractPlugin.loader, require.resolve('css-loader')]
+    }
+  : null
+
+module.exports = plainCssRule ? [sassRule, plainCssRule] : sassRule

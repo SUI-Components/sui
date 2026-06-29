@@ -9,9 +9,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackInjectAttributesPlugin = require('html-webpack-inject-attributes-plugin')
 const {withHydrationOverlayWebpack} = require('@builder.io/react-hydration-overlay/webpack')
 
-const {envVars, MAIN_ENTRY_POINT, config, cleanList, when, isTailwindEnabled} = require('./shared/index.js')
+const {envVars, MAIN_ENTRY_POINT, config, cleanList, when} = require('./shared/index.js')
 const definePlugin = require('./shared/define.js')
 const manifestLoaderRules = require('./shared/module-rules-manifest-loader.js')
+const sassRules = require('./shared/module-rules-sass.js')
 const createSVGSpritemapPlugin = require('./shared/svg-spritemap')
 const {aliasFromConfig, defaultAlias} = require('./shared/resolve-alias.js')
 const {supportLegacyBrowsers, cacheDirectory} = require('./shared/config.js')
@@ -96,33 +97,7 @@ const webpackConfig = {
   module: {
     rules: cleanList([
       createCompilerRules({supportLegacyBrowsers, isDevelopment: true}),
-      {
-        test: /(\.css|\.scss)$/,
-        use: cleanList([
-          MiniCssExtractPlugin.loader,
-          require.resolve('css-loader'),
-          when(config['externals-manifest'], () => ({
-            loader: 'externals-manifest-loader',
-            options: {
-              manifestURL: config['externals-manifest']
-            }
-          })),
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              postcssOptions: {
-                plugins: [
-                  ...(isTailwindEnabled() ? [require('tailwindcss')()] : []),
-                  require('autoprefixer')({
-                    overrideBrowserslist: config.targets
-                  })
-                ]
-              }
-            }
-          },
-          require.resolve('@s-ui/sass-loader')
-        ])
-      },
+      ...(Array.isArray(sassRules) ? sassRules : [sassRules]),
       when(config['externals-manifest'], () => manifestLoaderRules(config['externals-manifest']))
     ])
   },
