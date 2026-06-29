@@ -1,5 +1,20 @@
 # CHANGELOG
 
+# 9.79.0 (2026-06-29)
+
+
+### Bug Fixes
+
+* use webpack plugin to move CSS into AppStyles chunk ([04ce419](https://github.com/SUI-Components/sui/commit/04ce4194cf6ff971bacfb309c8bf7efa61d9c894))
+
+
+### Features
+
+* add cssInAppStyles config to force CSS into AppStyles chunk ([28e32c5](https://github.com/SUI-Components/sui/commit/28e32c50303eefe93725c3a535322090eb07e535))
+* add plainCssPackages config to bypass sass-loader ([7cbbf8c](https://github.com/SUI-Components/sui/commit/7cbbf8cd8472552e3d373dfd411f2e866752062a))
+
+
+
 # 9.78.0 (2026-04-21)
 
 
