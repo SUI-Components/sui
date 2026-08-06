@@ -83,6 +83,21 @@ module.exports = ({config, packagesToLink, linkAll}) => {
 
     if (!regex.test('.css')) return rule
 
+    // Rules matching .css that don't already run through @s-ui/sass-loader
+    // (e.g. the plainCssPackages passthrough rule, see module-rules-sass.js)
+    // must be left alone — otherwise this force-injects the sass loader
+    // into plain CSS files, breaking packages that ship pre-built CSS
+    // (Tailwind v4 output, etc.) when they're consumed via -l/-L linking.
+    // Compared by resolved path rather than package-name substring so this
+    // also works when @s-ui/sass-loader itself is symlinked/linked (e.g.
+    // inside this monorepo), where its resolved path won't contain the
+    // package name.
+    const sassLoaderPath = require.resolve('@s-ui/sass-loader')
+    const usesSassLoader = use.some(
+      loaderUse => (typeof loaderUse === 'string' ? loaderUse : loaderUse.loader) === sassLoaderPath
+    )
+    if (!usesSassLoader) return rule
+
     return {
       ...rule,
       use: [...use.slice(0, -1), sassLoaderWithLinkImporter]
