@@ -83,6 +83,20 @@ module.exports = ({config, packagesToLink, linkAll}) => {
 
     if (!regex.test('.css')) return rule
 
+    if (!Array.isArray(use)) return rule
+
+    /**
+     * Only rules that already pipe through @s-ui/sass-loader need its importer
+     * replaced. Rules that don't (like the plainCssPackages passthrough) must be
+     * left untouched: injecting the sass loader there makes Sass parse plain CSS
+     * that isn't valid SCSS (e.g. Tailwind v4 output) and the build fails.
+     */
+    const usesSassLoader = use.some(loaderEntry =>
+      (typeof loaderEntry === 'string' ? loaderEntry : loaderEntry?.loader || '').includes('@s-ui/sass-loader')
+    )
+
+    if (!usesSassLoader) return rule
+
     return {
       ...rule,
       use: [...use.slice(0, -1), sassLoaderWithLinkImporter]
