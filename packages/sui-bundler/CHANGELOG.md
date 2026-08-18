@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 9.80.0 (2026-08-18)
+
+
+### Bug Fixes
+
+* keep plainCssPackages rules out of the link sass loader ([6154e55](https://github.com/SUI-Components/sui/commit/6154e557a463013053ec92c97b476fe36cfa125b))
+
+
+
 # 9.79.0 (2026-06-29)
 
 
