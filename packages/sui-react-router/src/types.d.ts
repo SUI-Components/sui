@@ -13,7 +13,8 @@ export type Search = string
 export type Path = string
 
 interface LocationState {
-  from: Location
+  from?: Location
+  shallow?: Boolean
 }
 
 export interface LocationDescriptorObject {
