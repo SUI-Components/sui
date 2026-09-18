@@ -5,13 +5,14 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "sui-test server"
   },
   "dependencies": {
     "clean-css": "5.3.3",
     "node-fetch": "2.7.0",
     "path-to-regexp": "0.1.10",
     "playwright-chromium": "1.25.0",
+    "postcss": "8.4.31",
     "@s-ui/critical-css-middleware": "1"
   },
   "keywords": [],
