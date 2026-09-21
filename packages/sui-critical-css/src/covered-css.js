@@ -24,6 +24,12 @@ const holdsDeclarations = node =>
 const isLayerStatement = node =>
   node.type === 'atrule' && node.nodes === undefined && node.name.toLowerCase() === KEEP_AT_RULE
 
+// One statement per layer name, because clean-css 5.3.3 mis-parses a bodyless `@layer`
+// that names more than one layer: it drops the statement AND every declaration of the
+// rule that follows it (`@layer a,b;.x{color:red}` minifies to nothing at all). A
+// sequence of single-name statements establishes exactly the same order.
+const splitLayerStatement = node => node.params.split(',').map(name => `@${node.name} ${name.trim()};`)
+
 const intersectsCoveredRange = (node, ranges) => {
   const start = node.source?.start?.offset
   const end = node.source?.end?.offset
@@ -53,9 +59,7 @@ export const rebuildCoveredCSS = ({text, ranges}) => {
   }
 
   root.walk(node => {
-    // postcss leaves the terminating `;` of a bodyless at-rule to the parent's
-    // stringifier, so it has to be added back when lifting the node out on its own.
-    if (isLayerStatement(node)) return layerStatements.push(`${node.toString()};`)
+    if (isLayerStatement(node)) return layerStatements.push(...splitLayerStatement(node))
     if (holdsDeclarations(node) && intersectsCoveredRange(node, ranges)) keepWithAncestors(node)
   })
 

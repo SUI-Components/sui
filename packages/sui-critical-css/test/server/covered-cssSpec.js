@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+import CleanCSS from 'clean-css'
 
 import {rebuildCoveredCSS, rebuildCoveredCSSFromEntry} from '../../src/covered-css.js'
 
@@ -56,19 +57,32 @@ describe('@s-ui/critical-css covered-css', () => {
   it('keeps a @layer statement even though coverage never marks it as used', () => {
     const text = '@layer base,utilities;@layer utilities{.used{color:red}}'
 
-    expect(rebuild(text, '.used{color:red}')).to.equal('@layer base,utilities;\n@layer utilities{.used{color:red}}')
+    expect(rebuild(text, '.used{color:red}')).to.equal(
+      '@layer base;\n@layer utilities;\n@layer utilities{.used{color:red}}'
+    )
   })
 
   it('keeps a @layer statement even when nothing else is covered', () => {
     expect(rebuildCoveredCSS({text: '@layer base,utilities;.unused{color:blue}', ranges: []})).to.equal(
-      '@layer base,utilities;'
+      '@layer base;\n@layer utilities;'
     )
   })
 
   it('hoists @layer statements above the rules, whatever their original position', () => {
     const text = '@layer utilities{.used{color:red}}@layer base,utilities;'
 
-    expect(rebuild(text, '.used{color:red}')).to.equal('@layer base,utilities;\n@layer utilities{.used{color:red}}')
+    expect(rebuild(text, '.used{color:red}')).to.equal(
+      '@layer base;\n@layer utilities;\n@layer utilities{.used{color:red}}'
+    )
+  })
+
+  it('splits a multi-name @layer statement so clean-css does not swallow the next rule', () => {
+    const text = '@layer base,utilities;:root{--brand:red}'
+    const rebuilt = rebuildCoveredCSS({text, ranges: [rangeOf(text, ':root{--brand:red}')]})
+
+    // `@layer base,utilities;:root{--brand:red}` minifies to `:root{}` on clean-css
+    // 5.3.3: the statement is dropped and the rule after it loses every declaration.
+    expect(new CleanCSS({level: 2}).minify(rebuilt).styles).to.contain('--brand:red')
   })
 
   it('keeps a covered at-rule that holds declarations directly, such as @font-face', () => {
