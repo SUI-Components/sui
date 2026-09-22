@@ -53,14 +53,31 @@ export const rebuildCoveredCSS = ({text, ranges}) => {
   const root = postcss.parse(text)
   const keep = new Set()
   const layerStatements = []
+  const nestedLayerStatements = []
 
   const keepWithAncestors = node => {
     for (let current = node; current && current.type !== 'root'; current = current.parent) keep.add(current)
   }
 
   root.walk(node => {
-    if (isLayerStatement(node)) return layerStatements.push(...splitLayerStatement(node))
+    if (isLayerStatement(node)) {
+      if (node.parent.type === 'root') return layerStatements.push(...splitLayerStatement(node))
+
+      // A statement inside `@supports` or `@media` only registers its layers while that
+      // condition holds, and one inside another `@layer` names sublayers of it, so it
+      // cannot be hoisted out of its parent the way a top-level one can. Keep it in place.
+      return nestedLayerStatements.push(node)
+    }
     if (holdsDeclarations(node) && intersectsCoveredRange(node, ranges)) keepWithAncestors(node)
+  })
+
+  // Replacing them during the walk above would make postcss visit the statements the split
+  // produces, so they are only rewritten once the walk is over.
+  nestedLayerStatements.forEach(node => {
+    const replacements = splitLayerStatement(node).map(statement => postcss.parse(statement).first)
+
+    node.replaceWith(...replacements)
+    replacements.forEach(keepWithAncestors)
   })
 
   const discarded = []

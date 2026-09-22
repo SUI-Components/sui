@@ -76,6 +76,21 @@ describe('@s-ui/critical-css covered-css', () => {
     )
   })
 
+  it('does not hoist a @layer statement out of the at-rule that guards it', () => {
+    const text = '@supports (color:lab(0 0 0)){@layer a,b;}@layer a{.used{color:red}}'
+
+    // Hoisting it would register the order even where the condition does not hold.
+    expect(rebuild(text, '.used{color:red}')).to.equal(
+      '@supports (color:lab(0 0 0)){@layer a;@layer b;}@layer a{.used{color:red}}'
+    )
+  })
+
+  it('does not hoist a @layer statement out of the layer it names sublayers of', () => {
+    const text = '@layer a{@layer b,c;}@layer a{.used{color:red}}'
+
+    expect(rebuild(text, '.used{color:red}')).to.equal('@layer a{@layer b;@layer c;}@layer a{.used{color:red}}')
+  })
+
   it('splits a multi-name @layer statement so clean-css does not swallow the next rule', () => {
     const text = '@layer base,utilities;:root{--brand:red}'
     const rebuilt = rebuildCoveredCSS({text, ranges: [rangeOf(text, ':root{--brand:red}')]})
