@@ -27,10 +27,30 @@ In order to extract critical css and match extracted files with your page or rou
 
 You can combine both of them.
 
-Additionally there are two optional config parameters:
+Additionally there are two optional parameters:
 
-- `requiredClassNames`: A list of required css class names. If they aren't present in the generated Critical CSS, it would be discarded. By default there would be 2 retries to try to get the correct Critical CSS
-- `retries`: Number of retries if the requiredClassNames aren't present in the Critical CSS. By default it's 2.
+- `requiredClassNames`: A list of required css class names. If they aren't present in the generated Critical CSS, the extraction is retried, and an empty Critical CSS is written once the attempts run out.
+- `retries`: How many times a route is extracted while its `requiredClassNames` aren't present. By default it's 3.
+
+Both can be set on `config`, where they apply to every route, and on a single route, where they
+override the config. Setting them on `config` is the only way to validate a route declared as a
+plain string, since such a route cannot carry options of its own:
+
+```js
+const config = {
+  hostname: 'http://localhost',
+  requiredClassNames: ['.sui-AtomButton'], // checked on every route below
+  retries: 2
+}
+
+const routes = {
+  '/:lang': '/es',
+  '/:lang/catalogo-productos': {
+    url: '/es/catalogo-productos',
+    requiredClassNames: ['.ma-AdCardV2'] // only this list is checked here
+  }
+}
+```
 
 ### Using `path-to-regex`:
 

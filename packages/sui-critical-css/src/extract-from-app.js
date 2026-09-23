@@ -9,12 +9,27 @@ import {extractCSSFromUrl} from './extract-from-url.js'
 
 const TIME_BETWEEN_RETRIES = 1000
 const TIMES_TO_RETRY = 15
+const DEFAULT_RETRIES = 3
 
 const configForMobileDevice = devices.m
 
 export const createUrlFrom = ({hostname, pathOptions}) => {
   const path = typeof pathOptions === 'string' ? pathOptions : pathOptions.url
   return Array.isArray(path) ? path.map(current => `${hostname}${current}`) : `${hostname}${path}`
+}
+
+/**
+ * `requiredClassNames` and `retries` can be set on `config`, where they apply to every route, and
+ * on a route, where they override the config. A route given as a plain string carries neither, so
+ * without the config level there was no way to validate one at all.
+ */
+export const resolveRouteOptions = ({pathOptions, config = {}}) => {
+  const routeOptions = typeof pathOptions === 'string' || !pathOptions ? {} : pathOptions
+
+  return {
+    requiredClassNames: routeOptions.requiredClassNames ?? config.requiredClassNames,
+    retries: routeOptions.retries ?? config.retries ?? DEFAULT_RETRIES
+  }
 }
 
 const waitForHealthCheck = ({healthCheckUrl}) => {
@@ -36,7 +51,7 @@ const waitForHealthCheck = ({healthCheckUrl}) => {
   })
 }
 
-const extractCriticalCSS = async ({requiredClassNames, retries = 3, url, configForMobileDevice} = {}) => {
+const extractCriticalCSS = async ({requiredClassNames, retries = DEFAULT_RETRIES, url, configForMobileDevice} = {}) => {
   if (retries === 0) {
     console.log(`Attempt limit reached. requiredClassNames has not been found in ${url}`)
     return ''
@@ -99,7 +114,7 @@ export async function extractCSSFromApp({routes, config = {}}) {
 
     manifest[pathKey] = cssFileName
 
-    const {requiredClassNames, retries} = pathOptions
+    const {requiredClassNames, retries} = resolveRouteOptions({pathOptions, config})
     const css = await extractCriticalCSS({
       requiredClassNames,
       retries,
