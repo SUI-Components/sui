@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.34.0 (2026-09-23)
+
+
+### Features
+
+* accept requiredClassNames and retries at config level ([64a5220](https://github.com/SUI-Components/sui/commit/64a522017e0f6443f67db0d8840f512d1f989de7))
+
+
+
 # 1.33.0 (2026-09-23)
 
 
