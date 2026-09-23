@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 1.33.0 (2026-09-23)
+
+
+### Bug Fixes
+
+* keep nested [@layer](https://github.com/layer) statements inside the at-rule that guards them ([828af04](https://github.com/SUI-Components/sui/commit/828af04b00d1c1ea3a23604a9f40415b21b6e881))
+* preserve at-rule context when rebuilding covered CSS ([cdb2ee3](https://github.com/SUI-Components/sui/commit/cdb2ee3a74b366499c8095de6d8df95bbe4ae5fa))
+* split multi-name [@layer](https://github.com/layer) statements for clean-css ([2e50da6](https://github.com/SUI-Components/sui/commit/2e50da6c68cfb8339b5af0babe3c44d5f6eb7d36))
+
+
+
 # 1.32.0 (2025-04-17)
 
 
