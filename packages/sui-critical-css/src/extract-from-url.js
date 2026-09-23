@@ -2,6 +2,7 @@ import CleanCSS from 'clean-css'
 import {chromium} from 'playwright-chromium'
 
 import {blockedResourceTypes, skippedResources} from './config.js'
+import {rebuildCoveredCSSFromEntry} from './covered-css.js'
 
 let browser
 
@@ -84,9 +85,7 @@ export async function extractCSSFromUrl({customHeaders, height, url, userAgent, 
 
     let coveredCSS = ''
     for (const entry of coverage) {
-      for (const range of entry.ranges) {
-        coveredCSS += entry.text.slice(range.start, range.end)
-      }
+      coveredCSS += rebuildCoveredCSSFromEntry(entry)
     }
 
     // Close the browser to close the connection and free up resources
