@@ -15,7 +15,6 @@
     "sinon": "10.0.0"
   },
   "browser": {
-    "perf_hooks": false,
     "hot-shots": false,
     "redis": false,
     "redis-lru": false,
@@ -27,6 +26,7 @@
     "redis-lru": "0.6.0",
     "tiny-lru": "6.0.1",
     "hot-shots": "7.7.1",
+    "performance-now": "2.1.0",
     "redis-mock": "0.49.0"
   }
 }
