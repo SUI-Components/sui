@@ -6,6 +6,11 @@
 
 1. Read the config options and routes provided.
 2. For each route, it opens a browser, navigate and extract the Critical CSS.
+   Chrome reports coverage for style rules only, so the extracted CSS is rebuilt with postcss
+   instead of concatenating the raw byte ranges. That keeps the `@media` / `@layer` / `@supports`
+   context of every rule it keeps, the `@layer` statements that fix the layer order, and the
+   at-rules that define rather than style: `@property`, `@font-face`, and the `@keyframes` named by
+   a declaration that survived.
 3. Create a css file in the `critical-css` folder.
 4. After doing this for each route, then creates a `critical.json` file that could be read for every path to extract the critical-css.
 5. Use then `@s-ui/critical-css-middleware` to extract to use in your Express app the CSS.
