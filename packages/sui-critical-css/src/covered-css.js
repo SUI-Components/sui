@@ -14,7 +14,37 @@ import postcss from 'postcss'
 // So instead of slicing bytes, parse the stylesheet and rebuild it: keep every
 // declaration-holding node whose source range intersects a covered range, together
 // with its whole chain of ancestor at-rules.
+//
+// The same "ranges cover style rules only" limitation also means an at-rule that
+// DEFINES something rather than styling something is never attributable to a range,
+// so it can only be carried over by an explicit exception. See `isDefinitionAtRule`
+// and `isKeyframes` below.
 const KEEP_AT_RULE = 'layer'
+
+// `@property` registers a custom property and `@font-face` a font: neither matches an
+// element, so coverage never reports a range for them and both used to be dropped from
+// every rebuild. Measured on a Tailwind v4 app: 0 `@property` and 0 `@font-face` in the
+// rebuilt CSS against 29 and 5 in the source sheet.
+//
+// The `@property` gap changes what the browser paints. `border-style:var(--tw-border-style)`
+// with the registration missing resolves to the empty token, which is invalid at computed-value
+// time, so `border-style` computes to its initial `none` — and with `border-style:none` the
+// computed `border-width` is `0px` even though the utility's `1px` applied and won the cascade.
+// A button styled that way renders with no border at all until the full stylesheet arrives.
+//
+// Both are cheap to keep and safe to keep when unused: a registration only sets an initial
+// value, and a `@font-face` never triggers a download unless a matched rule asks for the family.
+const DEFINITION_AT_RULES = ['property', 'font-face']
+
+// `@keyframes` holds rules, not declarations, and those inner rules
+// (`from{}`, `50%{}`) never match an element either. Unlike the two above it is not
+// bounded in size, so it is only carried over when a declaration that survived the
+// rebuild actually names it.
+const KEYFRAMES_AT_RULE = /^(-\w+-)?keyframes$/
+const ANIMATION_DECLARATIONS = ['animation', 'animation-name']
+const ANIMATION_VALUE_SEPARATOR = /[\s,]+/
+
+const atRuleName = node => node.name.toLowerCase()
 
 const holdsDeclarations = node =>
   node.type === 'rule' || (node.type === 'atrule' && node.nodes?.some(child => child.type === 'decl'))
@@ -23,6 +53,26 @@ const holdsDeclarations = node =>
 // used — yet it is the only thing that fixes the order of the layers. Always keep it.
 const isLayerStatement = node =>
   node.type === 'atrule' && node.nodes === undefined && node.name.toLowerCase() === KEEP_AT_RULE
+
+const isDefinitionAtRule = node => node.type === 'atrule' && DEFINITION_AT_RULES.includes(atRuleName(node))
+
+const isKeyframes = node => node.type === 'atrule' && KEYFRAMES_AT_RULE.test(atRuleName(node))
+
+// Only the direct declarations of a node, so scanning a kept `@media` does not reach the
+// declarations of the children that were discarded from it.
+const animationNamesOf = node => {
+  const names = []
+
+  node.each?.(child => {
+    if (child.type !== 'decl' || !ANIMATION_DECLARATIONS.includes(child.prop.toLowerCase())) return
+
+    // Every token of the shorthand, since the name can sit anywhere in it. A duration or a
+    // timing function that happens to match a `@keyframes` name only keeps one extra rule.
+    names.push(...child.value.split(ANIMATION_VALUE_SEPARATOR))
+  })
+
+  return names
+}
 
 // One statement per layer name, because clean-css 5.3.3 mis-parses a bodyless `@layer`
 // that names more than one layer: it drops the statement AND every declaration of the
@@ -54,9 +104,17 @@ export const rebuildCoveredCSS = ({text, ranges}) => {
   const keep = new Set()
   const layerStatements = []
   const nestedLayerStatements = []
+  const keyframes = []
 
   const keepWithAncestors = node => {
     for (let current = node; current && current.type !== 'root'; current = current.parent) keep.add(current)
+  }
+
+  // An at-rule kept as a whole needs its children kept too, or the pass that removes
+  // everything uncovered would empty it out.
+  const keepWithSubtree = node => {
+    keepWithAncestors(node)
+    node.walk?.(child => keep.add(child))
   }
 
   root.walk(node => {
@@ -68,7 +126,15 @@ export const rebuildCoveredCSS = ({text, ranges}) => {
       // cannot be hoisted out of its parent the way a top-level one can. Keep it in place.
       return nestedLayerStatements.push(node)
     }
+    if (isDefinitionAtRule(node)) return keepWithSubtree(node)
+    if (isKeyframes(node)) return keyframes.push(node)
     if (holdsDeclarations(node) && intersectsCoveredRange(node, ranges)) keepWithAncestors(node)
+  })
+
+  // After the walk, so it sees every node the rebuild is going to keep.
+  const animationNames = new Set([...keep].flatMap(animationNamesOf))
+  keyframes.forEach(node => {
+    if (animationNames.has(node.params.trim())) keepWithSubtree(node)
   })
 
   // Replacing them during the walk above would make postcss visit the statements the split

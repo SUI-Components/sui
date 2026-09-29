@@ -108,6 +108,56 @@ describe('@s-ui/critical-css covered-css', () => {
     )
   })
 
+  describe('definition at-rules', () => {
+    it('keeps a @property registration even though coverage never marks it as used', () => {
+      const text = '@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid}.used{color:red}'
+
+      expect(rebuild(text, '.used{color:red}')).to.equal(text)
+    })
+
+    it('keeps the at-rules a @property registration is nested in', () => {
+      const text = '@layer properties{@property --x{syntax:"*";inherits:false}}.used{color:red}'
+
+      expect(rebuild(text, '.used{color:red}')).to.equal(text)
+    })
+
+    it('keeps a @font-face nobody covered, so the first paint does not swap fonts', () => {
+      const text = '@font-face{font-family:F;src:url(f.woff2)}.used{color:red}'
+
+      expect(rebuild(text, '.used{color:red}')).to.equal(text)
+    })
+
+    it('keeps a @keyframes named by a declaration that survived the rebuild', () => {
+      const text = '@keyframes spin{to{transform:rotate(1turn)}}.used{animation:spin 1s linear infinite}'
+
+      expect(rebuild(text, '.used{animation:spin 1s linear infinite}')).to.equal(text)
+    })
+
+    it('keeps a @keyframes named by animation-name', () => {
+      const text = '@keyframes spin{to{opacity:0}}.used{animation-name:spin}'
+
+      expect(rebuild(text, '.used{animation-name:spin}')).to.equal(text)
+    })
+
+    it('keeps a vendor-prefixed @keyframes', () => {
+      const text = '@-webkit-keyframes spin{to{opacity:0}}.used{animation:spin 1s}'
+
+      expect(rebuild(text, '.used{animation:spin 1s}')).to.equal(text)
+    })
+
+    it('drops a @keyframes no kept declaration names', () => {
+      const text = '@keyframes spin{to{opacity:0}}.used{color:red}'
+
+      expect(rebuild(text, '.used{color:red}')).to.equal('.used{color:red}')
+    })
+
+    it('does not keep a @keyframes named only by a rule that was discarded', () => {
+      const text = '@keyframes spin{to{opacity:0}}.used{color:red}.unused{animation:spin 1s}'
+
+      expect(rebuild(text, '.used{color:red}')).to.equal('.used{color:red}')
+    })
+  })
+
   it('returns an empty string when nothing is covered', () => {
     expect(rebuildCoveredCSS({text: '@media print{.unused{color:blue}}', ranges: []})).to.equal('')
   })
