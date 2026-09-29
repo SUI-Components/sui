@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 1.35.0 (2026-09-29)
+
+
+### Bug Fixes
+
+* carry the definition at-rules into the rebuilt CSS ([d8f7024](https://github.com/SUI-Components/sui/commit/d8f7024b2f21a646bbdb51d20146a0479d36f7f3))
+
+
+
 # 1.34.0 (2026-09-23)
 
 
