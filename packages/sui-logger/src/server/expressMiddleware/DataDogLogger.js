@@ -28,7 +28,7 @@ export class DataDogLogger extends Writable {
       method: req ? req.method : '-' // eslint-disable-line
     }
 
-    if (!req || statusFamily === '4xx' || statusFamily === '3xx') {
+    if (!req) {
       this._client.timing('http.server.requests', duration, globalTags)
       chunk = null
       globalTags = null
