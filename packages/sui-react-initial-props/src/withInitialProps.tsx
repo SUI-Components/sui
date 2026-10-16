@@ -58,35 +58,38 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
       isLoading: initialPropsFromWindowRef.current == null
     }))
 
+    const avoidReRender = Boolean(routeInfo.location.state?.shallow) || false
     useEffect(() => {
       // check if got initial props from window, because then there's no need
       // to request them again from client
       if (initialPropsFromWindowRef.current != null) {
         initialPropsFromWindowRef.current = undefined
       } else {
-        // only update state if already request initial props
-        if (requestedInitialPropsOnceRef.current) {
-          setState({initialProps, isLoading: true})
+        if (!avoidReRender) {
+          // only update state if already request initial props
+          if (requestedInitialPropsOnceRef.current) {
+            setState({initialProps, isLoading: true})
+          }
+
+          Page.getInitialProps({context, routeInfo})
+            .then((initialProps: InitialProps) => {
+              const {__HTTP__: http} = initialProps
+
+              if (http?.redirectTo !== undefined) {
+                window.location = http.redirectTo
+                return
+              }
+
+              setState({initialProps, isLoading: false})
+            })
+            .catch((error: Error) => {
+              setState({initialProps: {error}, isLoading: false})
+            })
+            .finally(() => {
+              if (requestedInitialPropsOnceRef.current) return
+              requestedInitialPropsOnceRef.current = true
+            })
         }
-
-        Page.getInitialProps({context, routeInfo})
-          .then((initialProps: InitialProps) => {
-            const {__HTTP__: http} = initialProps
-
-            if (http?.redirectTo !== undefined) {
-              window.location = http.redirectTo
-              return
-            }
-
-            setState({initialProps, isLoading: false})
-          })
-          .catch((error: Error) => {
-            setState({initialProps: {error}, isLoading: false})
-          })
-          .finally(() => {
-            if (requestedInitialPropsOnceRef.current) return
-            requestedInitialPropsOnceRef.current = true
-          })
       }
     }, [routeInfo.location]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -94,7 +97,7 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
 
     // if the page has a `keepMounted` property and already requested
     // initialProps once, just keep rendering the page
-    if (keepMounted && requestedInitialPropsOnceRef.current) {
+    if (keepMounted && !avoidReRender && requestedInitialPropsOnceRef.current) {
       return renderPage()
     }
 
@@ -108,7 +111,7 @@ export default (Page: ClientPageComponent): WithInitialPropsComponent => {
 
   // if `keepMounted` property is found and the component is the same one,
   // we just reuse it instead of returning a new one
-  if (keepMounted && Page.displayName === latestClientPage?.Page?.displayName) {
+  if (Page.displayName === latestClientPage?.Page?.displayName) {
     return latestClientPage
   }
 
